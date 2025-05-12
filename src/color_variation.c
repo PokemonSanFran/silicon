@@ -1,0 +1,629 @@
+#include "global.h"
+#include "sprite.h"
+#include "main.h"
+#include "util.h"
+#include "sprite.h"
+#include "color_variation.h"
+#include "palette.h"
+#include "constants/rgb.h"
+#include "malloc.h"
+#include "menu.h"
+#include "options_visual.h"
+
+s32 GetValueFromSource(struct BoxPokemon *boxMon);
+
+static const s8 sColorVariationModes[NUM_SPECIES] =
+{
+    [SPECIES_CHARIZARD]     = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_PIKACHU]       = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_RAICHU]        = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_CLEFAIRY]      = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_CLEFABLE]      = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_VULPIX]        = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_NINETALES]     = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_JIGGLYPUFF]    = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_WIGGLYTUFF]    = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_PARAS]         = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_PARASECT]      = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_MEOWTH]        = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_PERSIAN]       = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PSYDUCK]       = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_GOLDUCK]       = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_GROWLITHE]     = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_ARCANINE]      = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_POLIWAG]       = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_POLIWHIRL]     = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_ABRA]          = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_KADABRA]       = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_MACHOP]        = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_MACHOKE]       = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_MACHAMP]       = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_MAGNEMITE]     = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_MAGNETON]      = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_SEEL]          = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_DEWGONG]       = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_GRIMER]        = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MUK]           = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SHELLDER]      = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CLOYSTER]      = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_GASTLY]        = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_HAUNTER]       = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_GENGAR]        = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_ONIX]          = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_RHYHORN]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_RHYDON]        = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCYTHER]       = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_ELECTABUZZ]    = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_MAGIKARP]      = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_LAPRAS]        = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_DITTO]         = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_EEVEE]         = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_FLAREON]       = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_AERODACTYL]    = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SNORLAX]       = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_ZAPDOS]        = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_MEWTWO]        = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_HOOTHOOT]      = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_NOCTOWL]       = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_LEDYBA]        = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_LEDIAN]        = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PICHU]         = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_TOGEPI]        = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_TOGETIC]       = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_SUNKERN]       = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_UMBREON]       = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_MURKROW]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MISDREAVUS]    = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN]         = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_STEELIX]       = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_SHUCKLE]       = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_SNEASEL]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SWINUB]        = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_PILOSWINE]     = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_MANTINE]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_PHANPY]        = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_DONPHAN]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SMEARGLE]      = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_ELEKID]        = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_MILTANK]       = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_LARVITAR]      = NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_PUPITAR]       = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_LUGIA]         = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_POOCHYENA]     = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MIGHTYENA]     = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ZIGZAGOON]     = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_LINOONE]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SABLEYE]       = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_ARON]          = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_LAIRON]        = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_AGGRON]        = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_SPOINK]        = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_GRUMPIG]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TRAPINCH]      = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_CRAWDAUNT]     = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_FEEBAS]        = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_CASTFORM]      = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_SHUPPET]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_BANETTE]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_DUSKULL]       = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_DUSCLOPS]      = NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ABSOL]         = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_REGISTEEL]     = NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION,
+    [SPECIES_LATIAS]        = NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_RAYQUAZA]      = NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION,
+    [SPECIES_TURTWIG]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_PIPLUP]                                 =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_SHELLOS_WEST]                           =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_GASTRODON_WEST]                         =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_CHINGLING]                              =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_HAPPINY]                                =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_GABITE]                                 =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_HIPPOPOTAS]                             =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_HIPPOWDON]                              =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_ELECTIVIRE]                             =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_LILLIPUP]                               =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_SIMISAGE]                               =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_PANSEAR]                                =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_SIMISEAR]                               =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_DRILBUR]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_THROH]                                  =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_MINCCINO]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_GOTHITA]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_DUOSION]                                =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_VANILLUXE]                              =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_JOLTIK]                                 =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_KLINK]                                  =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TYNAMO]                                 =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_DURANT]                                 =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TERRAKION]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_RESHIRAM]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ZEKROM]                                 =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_BUNNELBY]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_DIGGERSBY]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_ICY_SNOW]                    =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_VIVILLON_ICY_SNOW]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_PANCHAM]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_PANGORO]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_FURFROU_NATURAL]                        =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_VIKAVOLT]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SALANDIT]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SANDYGAST]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MIMIKYU_DISGUISED]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_PHEROMOSA]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_NECROZMA]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MAGEARNA]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCORBUNNY]                              =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_CORVISQUIRE]                            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CORVIKNIGHT]                            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ROLYCOLY]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CARKOL]                                 =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_COALOSSAL]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_OBSTAGOON]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CURSOLA]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MILCERY]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_VANILLA_CREAM]      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_FROSMOTH]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_KUBFU]                                  =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_URSHIFU_SINGLE_STRIKE]                  =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CALYREX]                                =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_HOUNDOOM_MEGA]                          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_AGGRON_MEGA]                            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SANDSLASH_ALOLA]                        =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_MEOWTH_ALOLA]                           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_PERSIAN_ALOLA]                          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_GEODUDE_ALOLA]                          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_GRAVELER_ALOLA]                         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_GOLEM_ALOLA]                            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MEOWTH_GALAR]                           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MR_MIME_GALAR]                          =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_CORSOLA_GALAR]                          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ZIGZAGOON_GALAR]                        =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_LINOONE_GALAR]                          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_GROWLITHE_HISUI]                        =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_PIKACHU_COSPLAY]                        =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_ROCK_STAR]                      =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_BELLE]                          =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_POP_STAR]                       =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_PHD]                            =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_LIBRE]                          =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_ORIGINAL]                       =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_HOENN]                          =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_SINNOH]                         =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_UNOVA]                          =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_KALOS]                          =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_ALOLA]                          =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_PARTNER]                        =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_PIKACHU_WORLD]                          =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_UNOWN_B]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_C]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_D]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_E]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_F]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_G]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_H]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_I]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_J]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_K]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_L]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_M]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_N]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_O]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_P]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_Q]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_R]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_S]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_T]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_U]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_V]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_W]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_X]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_Y]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_Z]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_EXCLAMATION]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_UNOWN_QUESTION]                         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_WORMADAM_TRASH]                         =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_VIVILLON_HIGH_PLAINS]                   =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_VIVILLON_RIVER]                         =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_VIVILLON_JUNGLE]                        =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_VIVILLON_FANCY]                         =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_MIMIKYU_BUSTED]                         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_CREAM]         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_MATCHA_CREAM]       =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_MINT_CREAM]         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_LEMON_CREAM]        =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_SALTED_CREAM]       =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_RUBY_SWIRL]         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_CARAMEL_SWIRL]      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STRAWBERRY_RAINBOW_SWIRL]      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_URSHIFU_RAPID_STRIKE]                   =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CALYREX_ICE]                            =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_CALYREX_SHADOW]                         =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_BASCULEGION_F]                          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_VANILLA_CREAM]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_RUBY_CREAM]              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_MATCHA_CREAM]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_MINT_CREAM]              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_LEMON_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_SALTED_CREAM]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_RUBY_SWIRL]              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_CARAMEL_SWIRL]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_BERRY_RAINBOW_SWIRL]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_VANILLA_CREAM]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_RUBY_CREAM]               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_MATCHA_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_MINT_CREAM]               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_LEMON_CREAM]              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_SALTED_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_RUBY_SWIRL]               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_CARAMEL_SWIRL]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_LOVE_RAINBOW_SWIRL]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_VANILLA_CREAM]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_RUBY_CREAM]               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_MATCHA_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_MINT_CREAM]               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_LEMON_CREAM]              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_SALTED_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_RUBY_SWIRL]               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_CARAMEL_SWIRL]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_STAR_RAINBOW_SWIRL]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_VANILLA_CREAM]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_RUBY_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_MATCHA_CREAM]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_MINT_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_LEMON_CREAM]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_SALTED_CREAM]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_RUBY_SWIRL]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_CARAMEL_SWIRL]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_CLOVER_RAINBOW_SWIRL]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_VANILLA_CREAM]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_RUBY_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_MATCHA_CREAM]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_MINT_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_LEMON_CREAM]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_SALTED_CREAM]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_RUBY_SWIRL]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_CARAMEL_SWIRL]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_FLOWER_RAINBOW_SWIRL]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_VANILLA_CREAM]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_RUBY_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_MATCHA_CREAM]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_MINT_CREAM]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_LEMON_CREAM]            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_SALTED_CREAM]           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_RUBY_SWIRL]             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_CARAMEL_SWIRL]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ALCREMIE_RIBBON_RAINBOW_SWIRL]          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TANDEMAUS]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MAUSHOLD_THREE]                         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MAUSHOLD_FOUR]                          =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SQUAWKABILLY_WHITE]                     =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CHARCADET]                              =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_TOEDSCOOL]                              =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_BOMBIRDIER]                             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CETODDLE]                               =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_CETITAN]                                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TATSUGIRI_DROOPY]                       =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_ANNIHILAPE]                             =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_IRON_BUNDLE]                            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_IRON_MOTH]                              =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_BAXCALIBUR]                             =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_GIMMIGHOUL_ROAMING]                     =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_IRON_VALIANT]                           =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TAUROS_PALDEA_COMBAT]                   =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TAUROS_PALDEA_BLAZE]                    =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_TAUROS_PALDEA_AQUA]                     =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_IRON_LEAVES]                            =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SINISTCHA_UNREMARKABLE]                 =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_SINISTCHA_MASTERPIECE]                  =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_OGERPON_TEAL]                           =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_OGERPON_WELLSPRING]                     =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_OGERPON_CORNERSTONE]                    =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_OGERPON_TEAL_TERA]                      =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_OGERPON_WELLSPRING_TERA]                =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_TERAPAGOS_STELLAR]                      =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_SCATTERBUG_POLAR]                       =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_TUNDRA]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_CONTINENTAL]                 =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_GARDEN]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_ELEGANT]                     =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_MEADOW]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_MODERN]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_MARINE]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_ARCHIPELAGO]                 =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_HIGH_PLAINS]                 =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_SANDSTORM]                   =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_RIVER]                       =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_MONSOON]                     =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_SAVANNA]                     =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_SUN]                         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_OCEAN]                       =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_JUNGLE]                      =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_FANCY]                       =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_SCATTERBUG_POKEBALL]                    =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_VIKAVOLT_TOTEM]                         =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_MIMIKYU_TOTEM_DISGUISED]                =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_PIKACHU_STARTER]                        =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_TOXTRICITY_AMPED_GMAX]                  =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_TOXTRICITY_LOW_KEY_GMAX]                =  NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE,
+    [SPECIES_GRIMMSNARL_GMAX]                        =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+    [SPECIES_URSHIFU_SINGLE_STRIKE_GMAX]             =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_URSHIFU_RAPID_STRIKE_GMAX]              =  NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE,
+    [SPECIES_MIMIKYU_BUSTED_TOTEM]                   =  NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS,
+};
+
+u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, struct BoxPokemon *boxMon)
+{
+    u32 index = LoadSpritePalette(palette);
+    UniquePalette(OBJ_PLTT_ID(index), boxMon);
+    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZEOF(16));
+    return index;
+}
+
+s32 GetValueFromSource(struct BoxPokemon *boxMon)
+{
+    u8 otId[4];
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u32 value;
+
+    enum optionsVisualColorVariationValues individualitySource = GetColorVariationOption();
+
+    switch(individualitySource)
+    {
+        default:
+            return -1;
+        case VISUAL_OPTION_COLOR_VARIATION_PERSONALITY:
+            return (GetBoxMonData(boxMon, MON_DATA_PERSONALITY) >> 8) & 0xFFFF;
+        case VISUAL_OPTION_COLOR_VARIATION_INDIVIDUAL_VALUES:
+            return GetBoxMonData(boxMon, MON_DATA_IVS);
+        case VISUAL_OPTION_COLOR_VARIATION_NICKNAME:
+            *(u32*)otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
+            GetBoxMonData(boxMon, MON_DATA_OT_NAME, otName);
+            GetBoxMonData(boxMon, MON_DATA_NICKNAME, nickname);
+            value = 0;
+
+            for (u32 i = 0; i < 4; i++)
+                value += otId[i];
+
+            for (u32 i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
+            {
+                if (otName[i] == 0xFF)
+                    break;
+                value += otName[i];
+            }
+
+            for (u32 i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
+            {
+                if (nickname[i] == 0xFF)
+                    break;
+                value += nickname[i];
+            }
+            return value;
+    }
+    return -1;
+}
+
+void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
+{
+    u32 i;
+    s32 value = GetValueFromSource(boxMon);
+    s32 shift;
+    s32 variationMode = sColorVariationModes[GetBoxMonData(boxMon, MON_DATA_SPECIES)];
+    bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY, NULL);
+    bool32 willHueShift = TRUE;
+
+    if (value == -1)
+        return;
+
+    if (isShiny)
+    {
+        switch (variationMode)
+        {
+            case NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE:
+                shift = value % (HUE_SHIFT_RANGE_SHINY + 1);
+                break;
+            case NORMAL_HUE_BOTH_WAYS_SHINY_HUE_BOTH_WAYS:
+            case NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS:
+            default:
+                shift = (value % (HUE_SHIFT_RANGE_SHINY * 2 + 1)) - HUE_SHIFT_RANGE_SHINY;
+                break;
+            case NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE:
+                shift = (value % (HUE_SHIFT_RANGE_SHINY + 1)) - HUE_SHIFT_RANGE_SHINY;
+                break;
+            case NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION:
+            case NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION:
+                willHueShift = FALSE;
+                break;
+        }
+    }
+    else
+    {
+        switch (variationMode)
+        {
+            case NORMAL_HUE_NEGATIVE_SHINY_HUE_POSITIVE:
+                shift = (value % (HUE_SHIFT_RANGE_NORMAL + 1)) - HUE_SHIFT_RANGE_NORMAL;
+                break;
+            case NORMAL_HUE_BOTH_WAYS_SHINY_HUE_BOTH_WAYS:
+            case NORMAL_HUE_BOTH_WAYS_SHINY_RGB_MODULATION:
+            default:
+                shift = (value % (HUE_SHIFT_RANGE_NORMAL * 2 + 1)) - HUE_SHIFT_RANGE_NORMAL;
+                break;
+            case NORMAL_HUE_POSITIVE_SHINY_HUE_NEGATIVE:
+                shift = value % (HUE_SHIFT_RANGE_NORMAL + 1);
+                break;
+            case NORMAL_RGB_MODULATION_SHINY_HUE_BOTH_WAYS:
+            case NORMAL_RGB_MODULATION_SHINY_RGB_MODULATION:
+                willHueShift = FALSE;
+                break;
+        }
+    }
+
+    if (willHueShift == FALSE)
+    {
+        s8 dr = ((value >> 8) & 0xF) % 5;
+        s8 dg = ((value >> 4) & 0xF) % 5;
+        s8 db = (value & 0xF) % 5;
+
+        for (i = 0; i < 16; i++)
+        {
+            u32 index = i + palOffset;
+            struct PlttData *data1 = (struct PlttData *)&gPlttBufferUnfaded[index];
+            s8 r = data1->r + dr - 2;
+            s8 g = data1->g + dg - 2;
+            s8 b = data1->b + db - 2;
+
+            if (r > 31)
+                r = 31 - dr / 2;
+            if (g > 31)
+                g = 31 - dg / 2;
+            if (b > 31)
+                b = 31 - db / 2;
+            if (r < 0)
+                r = dr / 2;
+            if (g < 0)
+                g = dg / 2;
+            if (b < 0)
+                b = db / 2;
+
+            gPlttBufferFaded[index] = RGB(r, g, b);
+        }
+    }
+    else
+    {
+        for (i = 0; i < 16; i++)
+        {
+            u32 index = i + palOffset;
+            struct PlttData *data1 = (struct PlttData *)&gPlttBufferUnfaded[index];
+            s32 r = (data1->r * 1000) / 31;
+            s32 g = (data1->g * 1000) / 31;
+            s32 b = (data1->b * 1000) / 31;
+            s32 maxv, minv, d, h, s, l, o, p, q;
+
+            if (r > g)
+                maxv = r;
+            else
+                maxv = g;
+            if (b > maxv)
+                maxv = b;
+            if (r < g)
+                minv = r;
+            else
+                minv = g;
+            if (b < minv)
+                minv = b;
+
+            d = maxv - minv;
+            h = 0;
+            s = 0;
+            l = (maxv + minv) / 2;
+
+            if  (maxv != minv)
+            {
+                if (l > 500)
+                    s = 1000 * d / (2000 - maxv - minv);
+                else
+                    s = 1000 * d / (maxv + minv);
+                if (maxv == r)
+                {
+                    if (g < b)
+                        h = 1000 * (g - b) / d + 6000;
+                    else
+                        h = 1000 * (g - b) / d;
+                }
+                else if (maxv == g)
+                {
+                    h = 1000 * (b - r) / d + 2000;
+                }
+                else
+                {
+                    h = 1000 * (r - g) / d + 4000;
+                }
+                h /= 6;
+            }
+
+            h = (h + shift + 1000) % 1000;
+
+            if (s != 0)
+            {
+                o = (h + 333) % 1000;
+
+                if (l < 500)
+                    p = l * (s + 1000) / 1000;
+                else
+                    p = l + s - l * s / 1000;
+
+                q = l * 2 - p;
+
+                if (o < 167)
+                    r = q + (p - q) * o * 6 / 1000;
+                else if (o < 500)
+                    r = p;
+                else if (o < 667)
+                    r = q + (p - q) * (667 - o) * 6 / 1000;
+                else
+                    r = q;
+
+                o = h;
+
+                if (o < 167)
+                    g = q + (p - q) * o * 6 / 1000;
+                else if (o < 500)
+                    g = p;
+                else if (o < 667)
+                    g = q + (p - q) * (667 - o) * 6 / 1000;
+                else
+                    g = q;
+
+                o = (h + 1000 - 333) % 1000;
+
+                if (o < 167)
+                    b = q + (p - q) * o * 6 / 1000;
+                else if (o < 500)
+                    b = p;
+                else if (o < 667)
+                    b = q + (p - q) * (667 - o) * 6 / 1000;
+                else
+                    b = q;
+            }
+            else
+            {
+                r = l;
+                g = l;
+                b = l;
+            }
+
+            gPlttBufferFaded[index] = RGB((u8)(r * 31 / 1000), (u8)(g * 31 / 1000), (u8)(b * 31 / 1000));
+        }
+    }
+}
+
+void SetPaletteBufferSlotUnfadedToFaded(u32 paletteSlot)
+{
+    for (u32 paletteIndex = OBJ_PLTT_ID(paletteSlot); paletteIndex < OBJ_PLTT_ID(paletteSlot) + 16; paletteIndex++)
+        gPlttBufferUnfaded[paletteIndex] = gPlttBufferFaded[paletteIndex];
+}
+
+void LoadCompressedUniqueSpritePalette(const struct CompressedSpritePalette *src, struct BoxPokemon *boxMon)
+{
+    struct SpritePalette dest;
+    void *ptr = AllocZeroed(0x3000);
+
+    LZ77UnCompWram(src->data, ptr);
+    dest.data = (void*) ptr;
+    dest.tag = src->tag;
+    LoadUniqueSpritePalette(&dest, boxMon);
+    Free(ptr);
+}
+
+u32 LoadCompressedUniqueSpritePaletteWithTag(const u32 *pal, u16 tag, struct BoxPokemon *boxMon)
+{
+    u32 index;
+    struct SpritePalette dest;
+    void *buffer = malloc_and_decompress(pal, NULL);
+
+    dest.data = buffer;
+    dest.tag = tag;
+    index = LoadUniqueSpritePalette(&dest, boxMon);
+    Free(buffer);
+    return index;
+}
