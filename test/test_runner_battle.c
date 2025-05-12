@@ -1839,6 +1839,13 @@ void Shadow_(u32 sourceLine, bool32 isShadow)
     SetMonData(DATA.currentMon, MON_DATA_IS_SHADOW, &isShadow);
 }
 
+// Start siliconNewBalls
+void Ball_(u32 sourceLine, enum PokeBall ball)
+{
+    INVALID_IF(!DATA.currentMon, "Ball outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_POKEBALL, &ball);
+}
+// End siliconNewBalls
 static const char *const sBattlerIdentifiersSingles[] =
 {
     "player",
