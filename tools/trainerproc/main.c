@@ -129,6 +129,23 @@ struct Trainer
     struct String starting_status;
     int starting_status_line;
 
+    // Start siliconMerge
+	struct String reveal;
+    int reveal_line;
+
+    bool native;
+    int native_line;
+
+    struct String type;
+    int type_line;
+
+    struct String overworld;
+    int overworld_line;
+
+    struct String map;
+    int map_line;
+	// End siliconMerge
+
     struct String difficulty;
     int difficulty_line;
 
@@ -1215,6 +1232,43 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             trainer->starting_status_line = value.location.line;
             trainer->starting_status = token_string(&value);
         }
+        // Start siliconMerge
+		else if (is_literal_token(&key, "Reveal"))
+        {
+            if (trainer->reveal_line)
+                any_error = !set_show_parse_error(p,key.location, "duplicate 'Reveal'");
+            trainer->reveal_line = value.location.line;
+            trainer->reveal = token_string(&value);
+        }
+        else if (is_literal_token(&key, "Native"))
+        {
+            if (trainer->native_line)
+                any_error = !set_show_parse_error(p, key.location, "duplicate 'Double Battle'");
+            trainer->native_line = value.location.line;
+            if (!token_bool(p, &value, &trainer->native))
+                any_error = !show_parse_error(p);
+        }
+        else if (is_literal_token(&key, "Type"))
+        {
+            if (trainer->type_line)
+                any_error = !set_show_parse_error(p,key.location, "duplicate 'Reveal'");
+            trainer->type_line = value.location.line;
+            trainer->type = token_string(&value);
+        }
+        else if (is_literal_token(&key, "Overworld Sprite"))
+        {
+            if (trainer->overworld_line)
+                any_error = !set_show_parse_error(p,key.location, "duplicate 'Overworld Sprite'");
+            trainer->overworld_line = value.location.line;
+            trainer->overworld = token_string(&value);
+        }
+        else if (is_literal_token(&key, "Map Section"))
+        {
+            if (trainer->map_line)
+                any_error = !set_show_parse_error(p,key.location, "duplicate 'Map Section'");
+            trainer->map_line = value.location.line;
+            trainer->map = token_string(&value);
+        }
         else if (is_literal_token(&key, "Difficulty"))
         {
             if (trainer->difficulty_line)
@@ -1253,7 +1307,7 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
         }
         else
         {
-            any_error = !set_show_parse_error(p, key.location, "expected one of 'Name', 'Class', 'Pic', 'Gender', 'Music', 'Items', 'Double Battle', 'Difficulty', 'Party Size', 'Pool Rules', 'Pool Pick Functions', 'Pool Prune' or 'AI'");
+            any_error = !set_show_parse_error(p, key.location, "expected one of 'Name', 'Class', 'Pic', 'Gender', 'Music', 'Items', 'Double Battle', 'Difficulty', 'Party Size', 'Pool Rules', 'Pool Pick Functions', 'Pool Prune', 'AI', 'Reveal', 'Native', 'Type', 'Overworld', or 'Map Section'.");
         }
     }
     if (!trainer->pic_line)
@@ -1765,6 +1819,15 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
+        if (trainer->native_line)
+        {
+            fprintf(f, "#line %d\n", trainer->native_line);
+            fprintf(f, "        .isNative = ");
+            fprint_bool(f, trainer->native);
+            fprintf(f, ",\n");
+        }
+		// End siliconMerge
+
         if (trainer->ai_flags_n > 0)
         {
             fprintf(f, "#line %d\n", trainer->ai_flags_line);
@@ -1794,6 +1857,39 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
+		// Start siliconMerge
+        if (!is_empty_string(trainer->reveal))
+        {
+            fprintf(f, "#line %d\n", trainer->reveal_line);
+            fprintf(f, "        .characterRevealId = ");
+            fprint_constant(f, "REVEAL", trainer->reveal);
+            fprintf(f, ",\n");
+        }
+
+        if (!is_empty_string(trainer->type))
+        {
+            fprintf(f, "#line %d\n", trainer->type_line);
+            fprintf(f, "        .trainerType = ");
+            fprint_constant(f, "GLASS_TRAINER_TYPE", trainer->type);
+            fprintf(f, ",\n");
+        }
+
+        if (!is_empty_string(trainer->overworld))
+        {
+            fprintf(f, "#line %d\n", trainer->overworld_line);
+            fprintf(f, "        .objectEventGraphicsId = ");
+            fprint_constant(f, "OBJ_EVENT_GFX", trainer->overworld);
+            fprintf(f, ",\n");
+        }
+
+        if (!is_empty_string(trainer->map))
+        {
+            fprintf(f, "#line %d\n", trainer->map_line);
+            fprintf(f, "        .mapSec = ");
+            fprint_constant(f, "MAPSEC", trainer->map);
+            fprintf(f, ",\n");
+        }
+		// End siliconMerge
         if (!is_empty_string(trainer->pool_rules))
         {
             fprintf(f, "#line %d\n", trainer->pool_rules_line);
