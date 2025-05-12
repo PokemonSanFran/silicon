@@ -1,0 +1,70 @@
+## LIST OF LOCATIONS
+
+Halerba City
+Cresalta Vista
+Irisina Town
+Sharprise Stadium
+Route 22
+Route 8
+Leaverra Forest
+Pintillon Hounse
+Route 16
+Arantraz Island
+Pioca Bridge
+Lanjing Tunnel
+Qiu Village
+Route 4
+Route 20
+Anbeh Bend
+Cureno Port
+Route 1
+Wishaast Lake
+Uber HQ
+Naval Base
+Pokemon Amplification Research Center (PARC)
+Route 100
+Wajabi Lake
+Oroland Coliseum
+Route 2
+Route 11
+Halai Island
+Route C
+Route A
+Halerba Wilds
+Zenzu Island
+Caphe City
+Chasilla
+Tora Town
+Popidora Pier
+Route 3
+Route 13
+Ultra Space
+Route 99
+Oroland
+Sharprise Spire
+Cuconu Town
+Route 12
+Route D
+Route 14
+Route 5
+Route 9
+Route E
+Petarosa Borough
+Route 98
+Route 18
+Amazon Barge
+Espulee Outskirts
+Perlacia City
+Twitter Office
+Tirabudin Place
+Nongyu Bridge
+Chapel of Chimes
+Hodou City
+Route 6
+Route 10
+Route 7
+Glavez Hill
+Torgeot Climb
+Route B
+Mermereza City
+Fort Yobu

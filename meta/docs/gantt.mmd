@@ -1,0 +1,56 @@
+gantt
+    title Game Progress
+
+    section features
+        create new features         :g1,2014-01-01,20d
+
+    section storyline
+        write storyline         :a1, 2014-01-01, 5d
+        code storyline          :a2, after a1, 5d
+        finalize storyline      :a3, after a2, 3d
+
+    section characters
+        design character concepts         :b1, after a1, 5d
+        create character concept art         :b2, after b1, 2d
+    section lore
+        write dialogue          :e1,after b1,3d
+        finalize dialogue           :e2,after e1,1d
+
+    section quests
+        design quest concepts           :c1,after a1,3d
+        code quests         :c2,after c1,6d
+        finalize quests         :c3,after c2,1d
+
+    section maps
+        design maps         :d1,2014-01-01,4d
+        code maps           :d2,after d1,8d
+        finalize maps           :d3,after c3,1d
+    section items
+        plan item distribution          :i1,after d1,2d
+        code items          :i2,after i1,1d
+        balance items           :i3,after i2,1d
+
+
+    section pokedex
+        design pokedex          :f1,2014-01-01,3d
+        code pokedex distribution           :f2,after f1,6d
+        balance pokedex         :f3,after h2,1d
+
+
+
+    section battles
+        plan trainer battles            :h1,2014-01-01,5d
+        code trainer battles            :h2,after h1,5d
+        balance trainer battles         :h3,after h2,2d       
+    
+    section overworld graphics
+        plan overworld graphics :k1,after d1,1d
+        create overworld graphics :k2,after k1,2d
+        implement overworld graphics :k3,after k2,1d
+    section music
+        plan music :l1,2014-01-01,1d
+        compose music :l2,after l1,2d
+        implement music  :l3,after l2,1d
+    section UI graphics
+        design UI graphics :m1,after g1,1d
+        implement UI graphics :m2,after m1,2d
