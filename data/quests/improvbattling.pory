@@ -1,0 +1,258 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const IMPROV_1 = 1
+const IMPROV_2 = 2
+const IMPROV_3 = 3
+
+//Quest_Improvbattling_
+//gText_Improvbattling_
+
+//PSF TODO implement mini factory
+
+script Quest_Improvbattling_Event_Script{
+    goto_if_quest_complete(QUEST_IMPROVBATTLING,Quest_Improvbattling_Complete_Script)
+    goto_if_quest_active(QUEST_IMPROVBATTLING,Quest_Improvbattling_Active_Script)
+    goto(Quest_Improvbattling_StartQuest_Script)
+}
+
+script Quest_Improvbattling_StartQuest_Script{
+    lock
+    msgbox(gText_Improvbattling_WelcomeTo,MSGBOX_NPC,SPEAKER_IMPROV_1)
+    msgbox(gText_Improvbattling_WereAllAbout,,SPEAKER_IMPROV_1)
+    msgbox(gText_Improvbattling_YoureATrainer,,SPEAKER_IMPROV_1)
+    msgbox(gText_Improvbattling_ItllMakeYou,,SPEAKER_IMPROV_1)
+
+    msgbox(gText_Improvbattling_WhatDo,MSGBOX_YESNO,SPEAKER_IMPROV_1)
+    call(Quest_Improvbattling_AskStartChallenge_Script)
+    release
+    end
+}
+
+script Quest_Improvbattling_AskStartChallenge_Script{
+    if (var(VAR_RESULT) == YES){
+        call(Quest_Improvbattling_CheckQuestAndStart)
+        goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
+    }else{
+        goto(Quest_Improvbattling_CancelChallenge)
+    }
+    return
+}
+
+script Quest_Improvbattling_CheckQuestAndStart{
+    returnqueststate(QUEST_IMPROVBATTLING)
+
+    if (var(VAR_RESULT)< QUEST_MENU_SET_ACTIVE){
+        startquest(QUEST_IMPROVBATTLING)
+    }
+    return
+}
+
+script Quest_Improvbattling_CancelChallenge{
+    msgbox(gText_Improvbattling_NoProblem,,SPEAKER_IMPROV_1)
+    release
+    end
+}
+
+script Quest_Improvbattling_Active_Script{
+    msgbox(gText_Improvbattling_WelcomeBackReady,MSGBOX_NPC,SPEAKER_IMPROV_1)
+    goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
+}
+
+script Quest_Improvbattling_Complete_Script{
+    msgbox(gText_Improvbattling_OurFavoriteImprov,,MSGBOX_NPC,SPEAKER_IMPROV_1)
+    goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
+}
+
+script Quest_Improvbattling_SaveBeforeChallenge_Script{
+    msgbox(gText_Improvbattling_BeforeWeStartLetsSave,,SPEAKER_IMPROV_1)
+    closemessage
+    startmenu_savescreen
+
+    if (var(VAR_RESULT) == FALSE){
+        goto(Quest_Improvbattling_CancelChallenge)
+    }
+
+    goto(Quest_Improvbattling_StartChallenge)
+}
+
+script Quest_Improvbattling_StartChallenge{
+    special(SavePlayerParty)
+    //special(SwapOutPokemon)
+    //special(LoadEnemyParty)
+    call(Quest_Improvbattling_MovePlayer_Script)
+    applymovement(IMPROV_1,Common_Movement_WalkInPlaceDown)
+    waitmovement(IMPROV_1)
+    msgbox(gText_Improvbattling_OkayYouveGot,,SPEAKER_IMPROV_1)
+    closemessage
+    goto(Quest_Improvbattling_Battle1_Script)
+}
+
+script Quest_Improvbattling_MovePlayer_Script{
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+    if (var(VAR_TEMP_1) != 3){
+        fadescreen(FADE_TO_BLACK)
+        setobjectxy(PLAYER,2,3)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        waitmovement(PLAYER)
+        TeleportCamera(2,3)
+        fadescreen(FADE_FROM_BLACK)
+    }
+    return
+}
+
+script Quest_Improvbattling_Battle1_Script{
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_1,gText_Improvbattling_AndScene)
+
+        if(var(VAR_RESULT) == B_OUTCOME_WON){
+            goto(Quest_Improvbattling_PostBattle1_Script)
+        }
+
+    goto(Quest_Improvbattling_ExitChallenge_Script)
+}
+
+script Quest_Improvbattling_PostBattle1_Script{
+    msgbox(gText_Improvbattling_LetsHeal,,SPEAKER_IMPROV_1)
+    special(HealPlayerParty)
+    msgbox(gText_Improvbattling_BeforeYourNext,MSGBOX_YESNO,SPEAKER_IMPROV_1)
+
+    if (var(VAR_RESULT) == NO){
+        goto(Quest_Improvbattling_Battle2_Script)
+    }
+        msgbox(gText_Improvbattling_OneDayThisWill,,SPEAKER_IMPROV_1)
+        closemessage
+        goto(Quest_Improvbattling_Battle2_Script)
+}
+
+script Quest_Improvbattling_Battle2_Script{
+        msgbox(gText_Improvbattling_OkayLetsKeep,,SPEAKER_IMPROV_2)
+        applymovement(IMPROV_2,Common_Movement_WalkInPlaceDown)
+        waitmovement(IMPROV_2)
+        msgbox(gText_Improvbattling_LetsPerform,,SPEAKER_IMPROV_2)
+        closemessage
+
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_2,gText_Improvbattling_AndScene)
+
+        if(var(VAR_RESULT) == B_OUTCOME_WON){
+            goto(Quest_Improvbattling_PostBattle2_Script)
+        }
+    goto(Quest_Improvbattling_ExitChallenge_Script)
+}
+
+script Quest_Improvbattling_PostBattle2_Script{
+    msgbox(gText_Improvbattling_LetsHeal,,SPEAKER_IMPROV_2)
+        special(HealPlayerParty)
+        msgbox(gText_Improvbattling_BeforeYourNext,MSGBOX_YESNO,SPEAKER_IMPROV_2)
+
+        if (var(VAR_RESULT) == NO){
+            goto(Quest_Improvbattling_Battle3_Script)
+        }
+    msgbox(gText_Improvbattling_OneDayThisWill,,SPEAKER_IMPROV_2)
+        closemessage
+        goto(Quest_Improvbattling_Battle3_Script)
+}
+
+script Quest_Improvbattling_Battle3_Script{
+        msgbox(gText_Improvbattling_OkayLetsKeep,,SPEAKER_IMPROV_3)
+        applymovement(IMPROV_3,Common_Movement_WalkInPlaceDown)
+        waitmovement(IMPROV_3)
+        msgbox(gText_Improvbattling_LetsPerform,,SPEAKER_IMPROV_3)
+        closemessage
+
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_3,gText_Improvbattling_AndScene)
+
+        if(var(VAR_RESULT) == B_OUTCOME_WON){
+            goto(Quest_Improvbattling_PostBattle3_Script)
+        }
+    goto(Quest_Improvbattling_ExitChallenge_Script)
+}
+
+script Quest_Improvbattling_PostBattle3_Script{
+    call(Quest_Improvbattling_RestoreParty_Script)
+    msgbox(gText_Improvbattling_ThankYouAll,,SPEAKER_IMPROV_3)
+    call_if_quest_not_complete(QUEST_IMPROVBATTLING,Quest_Improvbattling_Reward_Dialogue)
+    closemessage
+    release
+    end
+}
+
+script Quest_Improvbattling_Reward_Dialogue{
+    msgbox(gText_Improvbattling_YoureANatural,,SPEAKER_IMPROV_3)
+    giveitem(ITEM_TM49)
+    completequest(QUEST_IMPROVBATTLING)
+    return
+}
+
+script Quest_Improvbattling_RestoreParty_Script{
+    return
+// PSF TODO remove this once actual Battle Frontier part is working
+    fadescreen(FADE_TO_BLACK)
+    special(LoadPlayerPartyBattleFrontier)
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script Quest_Improvbattling_ExitChallenge_Script{
+    call(Quest_Improvbattling_RestoreParty_Script)
+    msgbox(gText_Improvbattling_ThanksForPerforming,,SPEAKER_IMPROV_1)
+    closemessage
+    release
+    end
+}
+
+text gText_Improvbattling_WelcomeTo{
+	format("Welcome to PetarosaBorough Improv!")
+}
+text gText_Improvbattling_WereAllAbout{
+	format("We're all about thinking on our feet and putting on a good show.")
+}
+text gText_Improvbattling_YoureATrainer{
+	format("You're a Trainer right? Come do a performance with us! We have one coming up.")
+}
+text gText_Improvbattling_ItllMakeYou{
+	format("It'll make you a better Trainer, I'm certain.")
+}
+text gText_Improvbattling_WhatDo{
+	format("What do you say? Want to do an improv show with us?")
+}
+text gText_Improvbattling_BeforeWeStartLetsSave{
+	format("Before we start, let's save your game.")
+}
+text gText_Improvbattling_OkayYouveGot{
+	format("Okay! Let's take your Pokémon for a second... you're going to use three of ours instead.Okay, let's do it!")
+}
+text gText_Improvbattling_LetsHeal{
+	format("Let's heal those Pokémon.")
+}
+text gText_Improvbattling_BeforeYourNext{
+	format("Before your next battle, do you want to trade one of the Pokémon you just battled with wit one of the Pokémon I used? Totally up to you.")
+}
+text gText_Improvbattling_OneDayThisWill{
+	format("One day, this will actually load the swap Pokémon screen.")
+}
+text gText_Improvbattling_OkayLetsKeep{
+	format("Okay! Let's keep it going with the next battle.")
+}
+text gText_Improvbattling_LetsPerform{
+	format("Let's perform a great show!")
+}
+text gText_Improvbattling_ThankYouAll{
+	format("Thank you all for coming out tonight!")
+}
+text gText_Improvbattling_YoureANatural{
+	format("You're a natural. Come practice with us anytime. Take this!")
+}
+text gText_Improvbattling_NoProblem{
+	format("No problem, let me know if you change your mind!")
+}
+text gText_Improvbattling_AndScene{
+    format("Anddd scene!")
+}
+text gText_Improvbattling_ThanksForPerforming{
+    format("Thanks for performing with us! Come back sometime.")
+}
+text gText_Improvbattling_WelcomeBackReady{
+    format("Welcome back! Ready to perform?")
+}
+text gText_Improvbattling_OurFavoriteImprov{
+    format("Our favorite improv performer! Let's put on a show.")
+}

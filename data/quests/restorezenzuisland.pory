@@ -1,0 +1,428 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const SPEAKER_PLAYER = SPEAKER_ALICIA
+const DOYLE = 2
+const FLAG_HIDE_DOYLE = FLAG_TEMP_1
+const SPEAKER_MONTY = SPEAKER_BLAINE
+
+const MONTY_CAPHE = 20
+const FLAG_HIDE_MONTY_CAPHE = FLAG_TEMP_6
+
+const DRUGHELMETTESTER_IRISNA = 6
+const FLAG_HIDE_DRUGHELMETTESTER_IRISNA = FLAG_TEMP_3
+
+//Restorezenzugym
+//Restorezenzugym_Text
+
+script Restorezenzugym_HideDoyle_Outside_Script{
+    setvar(VAR_TEMP_0,0)
+
+        if (var(VAR_STORYLINE_STATE) < STORY_KAI_EXPLAIN_RESTORATION){
+            addvar(VAR_TEMP_0,1)
+        }
+
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM)
+        if (var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+    if(flag(FLAG_TIMELINE_FALSE)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if (var(VAR_TEMP_0) > 0){
+        setflag(FLAG_HIDE_DOYLE)
+    }
+    return
+}
+
+script Quest_Restorezenzugym_Interact_Script{
+    lock
+        faceplayer
+        switch(var(VAR_QUEST_RESTOREZENZUGYM)){
+            case RESTOREZENZU_ISLAND_NOT_STARTED: goto(Restorezenzugym_Intro_Dialogue)
+            case SAVE_BEFORE_DOYLE_BATTLE: goto(Restorezenzugym_StartBattle_Script)
+            case DEFEATED_DOYLE: goto(Restorezenzugym_Active_Script)
+        }
+}
+script Restorezenzugym_Intro_Dialogue{
+    lock
+        setvar(VAR_QUEST_RESTOREZENZUGYM,SAVE_BEFORE_DOYLE_BATTLE)
+
+        msgbox(gText_ExpandedPlaceholder_Empty,,SPEAKER_DOYLE)
+        reveal(REVEAL_DOYLE)
+
+        msgbox(gText_ExpandedPlaceholder_Empty,,SPEAKER_ALICIA)
+        closemessage
+
+        startmenu_savescreen
+        goto(Restorezenzugym_StartBattle_Script)
+}
+
+script Restorezenzugym_StartBattle_Script{
+    lock
+        msgbox(gText_ExpandedPlaceholder_Empty,,SPEAKER_DOYLE)
+        trainerbattle_no_intro(TRAINER_DOYLE_ZENZU_ISLAND,gText_ExpandedPlaceholder_Empty)
+        closemessage
+
+        goto(Restorezenzugym_PostBattle_Dialogue)
+}
+
+script Restorezenzugym_PostBattle_Dialogue{
+    setvar(VAR_QUEST_RESTOREZENZUGYM,DEFEATED_DOYLE)
+
+        msgbox(gText_ExpandedPlaceholder_Empty,,SPEAKER_DOYLE)
+
+
+        startquest(QUEST_RESTOREZENZUGYM)
+        call(Quest_Restorezenzugym_Debug_Script)
+}
+
+script Restorezenzugym_ConstructMenu_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
+    if(!var(VAR_RESULT)){
+        bufferitemname(STR_VAR_1,ITEM_FLAME_ORB)
+        dynmultipush("{STR_VAR_1}",0)
+    }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_2)
+    if(!var(VAR_RESULT)){
+        bufferitemname(STR_VAR_1,ITEM_TM27)
+        dynmultipush("{STR_VAR_1}",1)
+    }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_3)
+    if(!var(VAR_RESULT)){
+        bufferabilityname(STR_VAR_1,ABILITY_EFFECT_SPORE)
+        dynmultipush("{STR_VAR_1}",2)
+    }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_4)
+    if(!var(VAR_RESULT)){
+        buffermovename(STR_VAR_1,MOVE_PSYCHO_SHIFT)
+        dynmultipush("{STR_VAR_1}",3)
+    }
+
+    dynmultipush("Nothing yet.",4)
+
+    return
+}
+
+script Restorezenzugym_Active_Script{
+        msgbox(Restorezenzugym_Text_DoYouHave,,SPEAKER_DOYLE)
+
+        call(Restorezenzugym_ConstructMenu_Script)
+        dynmultistack(24,0,TRUE,4,TRUE,0,NULL)
+
+        closemessage
+
+        switch(var(VAR_RESULT)){
+            case 0: goto(Restorezenzugym_Handle_FlameOrb_Script)
+            case 1: goto(Restorezenzugym_Handle_TR27_Script)
+            case 2: goto(Restorezenzugym_Handle_EffectSpore_Script)
+            case 3: goto(Restorezenzugym_Handle_PsychoShift_Script)
+            case 4:
+            case MULTI_B_PRESSED: goto(Restorezenzugym_Cancel_Dialogue)
+        }
+}
+
+script Restorezenzugym_Cancel_Dialogue{
+        msgbox(Restorezenzugym_Text_NothingWellThen,MSGBOX_NPC,SPEAKER_DOYLE)
+
+        end
+}
+
+script Restorezenzugym_ConfirmTake_Dialogue{
+        msgbox(Restorezenzugym_Text_HeyYouSure,MSGBOX_YESNO,SPEAKER_DOYLE)
+
+        if (var(VAR_RESULT) == NO){
+            goto(Restorezenzugym_Cancel_Dialogue)
+        }else{
+            msgbox(Restorezenzugym_Text_Thanks)
+                closemessage
+                return
+        }
+}
+
+script Restorezenzugym_HandleProgress_Dialogue{
+    specialvar(VAR_RESULT,Quest_Restorezenzugym_CheckRemainingSubquests)
+
+        if (var(VAR_RESULT) == 0){
+            goto(Restorezenzugym_Reward_Dialogue)
+        }else{
+            goto(Restorezenzugym_Active_Script)
+        }
+}
+
+script Restorezenzugym_Handle_FlameOrb_Script{
+    bufferitemname(STR_VAR_1,ITEM_FLAME_ORB)
+        bufferstring(STR_VAR_2,"You don't have a ")
+        checkitem(ITEM_FLAME_ORB,1)
+
+        if(var(VAR_RESULT)){
+            call(Restorezenzugym_ConfirmTake_Dialogue)
+                subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
+                removeitem(ITEM_FLAME_ORB,1)
+                goto(Restorezenzugym_HandleProgress_Dialogue)
+        }
+        else {
+                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+
+                goto(Restorezenzugym_Active_Script)
+        }
+}
+
+script Restorezenzugym_Handle_TR27_Script{
+    bufferitemname(STR_VAR_1,ITEM_TM27)
+        bufferstring(STR_VAR_2,"You don't have a")
+        checkitem(ITEM_TM27,1)
+
+        if(var(VAR_RESULT)){
+            call(Restorezenzugym_ConfirmTake_Dialogue)
+                subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_2)
+                removeitem(ITEM_TM27,1)
+                goto(Restorezenzugym_HandleProgress_Dialogue)
+        }
+        else {
+                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+
+                goto(Restorezenzugym_Active_Script)
+        }
+}
+
+script Restorezenzugym_Handle_PsychoShift_Script{
+    special(ChoosePartyMon)
+        waitstate
+
+        if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
+            goto(Restorezenzugym_Cancel_Dialogue)
+        }
+
+        if (!var(VAR_RESULT)){
+            bufferstring(STR_VAR_1,gText_PokemonPsychoShift)
+                bufferstring(STR_VAR_2,"That isn't ")
+                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+                closemessage
+                end
+        }
+
+    special(BufferMonNickname)
+    call(Restorezenzugym_ConfirmTake_Dialogue)
+
+    special(HasEnoughMonsForDoubleBattle)
+    if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS){
+        goto(Restorezenzugym_NotEnoughMons_Dialogue)
+    }
+
+    special(DeleteChosenPartyMon)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_4)
+    goto(Restorezenzugym_HandleProgress_Dialogue)
+}
+
+script Restorezenzugym_Handle_EffectSpore_Script{
+    special(ChoosePartyMon)
+        waitstate
+
+        if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
+            goto(Restorezenzugym_Cancel_Dialogue)
+        }
+
+        if (!var(VAR_RESULT)){
+            bufferstring(STR_VAR_1,gText_PokemonEffectSpore)
+                bufferstring(STR_VAR_2,"That isn't ")
+                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+                closemessage
+                release
+                end
+        }
+
+    special(BufferMonNickname)
+    call(Restorezenzugym_ConfirmTake_Dialogue)
+
+    special(HasEnoughMonsForDoubleBattle)
+    if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS){
+        goto(Restorezenzugym_NotEnoughMons_Dialogue)
+    }
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_3)
+    special(DeleteChosenPartyMon)
+    goto(Restorezenzugym_HandleProgress_Dialogue)
+}
+
+script Restorezenzugym_NotEnoughMons_Dialogue{
+    msgbox(Restorezenzugym_Text_ThatsYourLast,,SPEAKER_DOYLE)
+    closemessage
+    release
+    end
+}
+
+script Restorezenzugym_Reward_Dialogue{
+    lock
+
+        msgbox(gText_ExpandedPlaceholder_Empty,,SPEAKER_DOYLE)
+
+        msgbox(gText_ExpandedPlaceholder_Empty,,SPEAKER_ALICIA)
+
+        closemessage
+
+        opendoor(5,12)
+        waitdooranim
+        applymovement(DOYLE,Common_Movement_WalkUp)
+        waitmovement(DOYLE)
+        removeobject(DOYLE)
+        playse(SE_EXIT)
+        waitse
+        closedoor(5,12)
+        waitdooranim
+
+        completequest(QUEST_RESTOREZENZUGYM)
+        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        release
+        end
+}
+
+script Quest_Restorezenzugym_Debug_Script{
+        questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_RESTOREZENZUGYM)
+
+        if (var(VAR_RESULT)){
+            msgbox(format("you now have everything needed to finish this quest, just talk to me again."))
+                closemessage
+                givemon(SPECIES_AMOONGUSS,100,,,,0,,,,,,,,,,,,,move1=MOVE_PSYCHO_SHIFT)
+                givemon(SPECIES_AMOONGUSS,100,,,,0,,,,,,,,,,,,,move1=MOVE_PSYCHO_SHIFT)
+                additem(ITEM_FLAME_ORB)
+                additem(ITEM_TM27)
+                end
+        }
+        return
+}
+
+script RestoreZenzuIsland_Script_ControlCapheMontyVisibility
+{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
+    if(var(VAR_RESULT))
+    {
+        setflag(FLAG_HIDE_MONTY_CAPHE)
+    }
+}
+
+script RestoreZenzuIsland_Script_ControlIrisinaDrughelmettesterVisibility
+{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_2)
+    if(var(VAR_RESULT))
+    {
+        setflag(FLAG_HIDE_DRUGHELMETTESTER_IRISNA)
+    }
+}
+
+script RestoreZenzuIsland_Dialogue_RecruitDrughelmettester
+{
+    lock
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_2)
+    msgbox(RestoreZenzuIsland_Text_DrughelmettesterYou,,SPEAKER_ALICIA)
+    msgbox(RestoreZenzuIsland_Text_YeahThat,,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(RestoreZenzuIsland_Text_DoyleThe,,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(2)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(RestoreZenzuIsland_Text_WoahA,,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(RestoreZenzuIsland_Text_ButMan,,SPEAKER_DRUG_HELMET_TESTER)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(DRUGHELMETTESTER_IRISNA)
+    fadescreen(FADE_FROM_BLACK)
+    releaseall
+    end
+}
+
+script RestoreZenzuIsland_Dialogue_RecruitMonty
+{
+    lock
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
+    msgbox(RestoreZenzuIsland_Text_HowMuch,,SPEAKER_PLAYER)
+    msgbox(RestoreZenzuIsland_Text_YouKnowIm,,SPEAKER_MONTY)
+    msgbox(RestoreZenzuIsland_Text_NoButIKnow,,SPEAKER_PLAYER,,EMOTE_LAUGH)
+    fadescreen(FADE_TO_BLACK)
+    delay(2)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(RestoreZenzuIsland_Text_FundraisingEh,,SPEAKER_MONTY)
+    msgbox(RestoreZenzuIsland_Text_ICanAtLeastTalk,,SPEAKER_MONTY)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(MONTY_CAPHE)
+    fadescreen(FADE_FROM_BLACK)
+    releaseall
+    end
+}
+
+text RestoreZenzuIsland_Text_HowMuch
+{
+    format("Monty, you said you've made a bunch of money doing this, right?")
+}
+
+text RestoreZenzuIsland_Text_YouKnowIm
+{
+    format("Hueh hue, I'm not gonna brag, but I've made a pretty penny seperating fools from their money!")
+}
+
+text RestoreZenzuIsland_Text_AreYou
+{
+    format("Why? Trying to get into hustling?")
+}
+
+text RestoreZenzuIsland_Text_NoButIKnow
+{
+    format("No, but I know somebody that would want to work with you...")
+}
+
+text RestoreZenzuIsland_Text_FundraisingEh
+{
+    format("Fundraising, huh? And movies? I'm not sure if that's quite my vibe...")
+}
+text RestoreZenzuIsland_Text_ICanAtLeastTalk
+{
+    format("But maybe you can teach an ol' dog new tricks, hueh hue! I can at least talk to Doyle.")
+}
+
+text Restorezenzugym_Text_DoYouHave{
+    format("do you have any of the pieces?")
+}
+text Restorezenzugym_Text_NothingWellThen{
+    format("nothing well then what are you doing here")
+}
+text Restorezenzugym_Text_HeyYouSure{
+    format("hey you sure you wanna give me your {STR_VAR_1}? i'm keeping it forever")
+}
+text Restorezenzugym_Text_YouDontHave{
+    format("{STR_VAR_2}{STR_VAR_1}!")
+}
+text Restorezenzugym_Text_Thanks{
+    format("thanks!")
+}
+text Restorezenzugym_Text_ThatsYourLast{
+    format("That's your last Pokémon!")
+}
+
+text RestoreZenzuIsland_Text_DrughelmettesterYou
+{
+format("Drughelmettester, you said you work in audio visual work, right?")
+}
+
+text RestoreZenzuIsland_Text_YeahThat
+{
+format("Yeah, that's how BD and I first met.")
+}
+
+text RestoreZenzuIsland_Text_DoyleThe
+{
+format("Doyle, the old Gym Leader from Zenzu Island is looking to work with somebody like you.")
+}
+
+text RestoreZenzuIsland_Text_WoahA
+{
+format("Woah, a whole movie production? That's so much bigger than a rave or a Gym...")
+}
+
+text RestoreZenzuIsland_Text_ButMan
+{
+format("But man, my mind is already racing with the possibilities!")
+}

@@ -1,0 +1,460 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const BIKER_A = 3 // Pioca Bridge
+const BIKER_B = 4 // Route 98
+const BIKER_C = 1 // Cureno Port
+const BIKER_D = 2 // Cureno Port
+const FLAG_HIDE_BIKER_A = FLAG_TEMP_5
+const FLAG_HIDE_BIKER_B = FLAG_TEMP_6
+
+//Quest_AngelDelivery
+//AngelDelivery_Text
+
+script AngelDelivery_Script_HideBikers
+{
+    returnqueststate(QUEST_ANGELDELIVERY)
+
+    if (var(VAR_RESULT) >= QUEST_MENU_SET_ACTIVE)
+    {
+        setflag(FLAG_HIDE_BIKER_A)
+    }
+
+    if (var(VAR_RESULT) >= QUEST_MENU_SET_REWARD)
+    {
+        setflag(FLAG_HIDE_BIKER_B)
+    }
+    return
+}
+
+script AngelDelivery_Script_CheckItemSpace
+{
+    lock
+    faceplayer
+    checkitemspace(ITEM_QUEST_ANGELDELIVERY_1,1)
+    if(!var(VAR_RESULT))
+    {
+        goto(AngelDelivery_Dialogue_BagFull)
+    }
+
+    checkitemspace(ITEM_QUEST_ANGELDELIVERY_2,1)
+    if(!var(VAR_RESULT))
+    {
+        goto(AngelDelivery_Dialogue_BagFull)
+    }
+
+    goto(AngelDelivery_Dialogue_StartQuest)
+}
+
+script AngelDelivery_Dialogue_BagFull
+{
+    msgbox(AngelDelivery_Text_YourBagIsTooFull,,SPEAKER_ANGELDELIVERYBIKERA)
+        closemessage
+        release
+        end
+}
+
+script AngelDelivery_Dialogue_StartQuest
+{
+    msgbox(AngelDelivery_Text_HeyCouldYouHelpMeOut,,SPEAKER_ANGELDELIVERYBIKERA)
+        msgbox(AngelDelivery_Text_ImDoingMyInitiation,,SPEAKER_ANGELDELIVERYBIKERA)
+        msgbox(AngelDelivery_Text_IBrokeMyLeg,,SPEAKER_ANGELDELIVERYBIKERA)
+        msgbox(AngelDelivery_Text_IfIDontGetThisPackageInTime,,SPEAKER_ANGELDELIVERYBIKERA)
+        msgbox(AngelDelivery_Text_CanYouMakeTheDeliveryForMe,,SPEAKER_ANGELDELIVERYBIKERA)
+        closemessage
+    cueobjectplayer(BIKER_A)
+        giveitem(ITEM_QUEST_ANGELDELIVERY_1, 1)
+        giveitem(ITEM_QUEST_ANGELDELIVERY_2, 1)
+        msgbox(AngelDelivery_Text_IShouldGoToAHospital,,SPEAKER_ANGELDELIVERYBIKERA)
+        closemessage
+        call(AngelDelivery_Script_BikerALeaves)
+        startquest(QUEST_ANGELDELIVERY)
+        release
+        end
+}
+
+script AngelDelivery_Script_BikerALeaves
+{
+    getobjectfacingdirection(PLAYER, VAR_TEMP_1)
+        switch(var(VAR_TEMP_1))
+        {
+            case DIR_NORTH:
+                applymovement(BIKER_A, Quest_AngelDelivery_Movement_BikerAWalksAway_North_1)
+                turnobject(PLAYER, DIR_EAST)
+                waitmovement(0)
+                applymovement(BIKER_A, Quest_AngelDelivery_Movement_BikerAWalksAway_North_2)
+                turnobject(PLAYER, DIR_SOUTH)
+            case DIR_SOUTH:
+            case DIR_EAST:
+            case DIR_WEST:
+                applymovement(BIKER_A, Quest_AngelDelivery_Movement_BikerAWalksAway)
+                turnobject(PLAYER, DIR_SOUTH)
+        }
+    waitmovement(PLAYER)
+    removeobject(BIKER_A)
+}
+
+script AngelDelivery_Script_GesturePlayerTakeItem
+{
+    getobjectfacingdirection(PLAYER, VAR_TEMP_1)
+    cueobject(PLAYER,VAR_TEMP_1)
+    waitmovement(0)
+    removeitem(ITEM_QUEST_ANGELDELIVERY_2, 1)
+}
+
+script AngelDelivery_Dialogue_Active
+{
+    msgbox(AngelDelivery_Text_AreYouAngeldeliverybikerB,,SPEAKER_ALICIA)
+    msgbox(AngelDelivery_Text_WhoWantsToKnow,,SPEAKER_ANGELDELIVERYBIKERB)
+    closemessage
+    call(AngelDelivery_Script_GesturePlayerTakeItem)
+    msgbox(AngelDelivery_Text_IsntThatAngeldeliverybikerAs,,SPEAKER_ANGELDELIVERYBIKERB)
+    msgbox(AngelDelivery_Text_TheyBrokeTheirFoot)
+    msgbox(AngelDelivery_Text_WoahThatsHardcore,,SPEAKER_ANGELDELIVERYBIKERB)
+    msgbox(AngelDelivery_Text_TheyWereGoingToTheHospital)
+    msgbox(AngelDelivery_Text_Wow,,SPEAKER_ANGELDELIVERYBIKERB)
+    msgbox(AngelDelivery_Text_WellYouHaveABike,,SPEAKER_ANGELDELIVERYBIKERB)
+    msgbox(AngelDelivery_Text_YouEarnedASpotOnGearGrindGang,,SPEAKER_ANGELDELIVERYBIKERB)
+    msgbox(AngelDelivery_Text_ImReallyJustATrainer)
+    buffermapname(STR_VAR_1,MAP_CURENO_PORT)
+    msgbox(AngelDelivery_Text_LetUsUpgradeYourBike,,SPEAKER_ANGELDELIVERYBIKERB)
+    questmenu(QUEST_MENU_SET_REWARD, QUEST_ANGELDELIVERY)
+}
+
+script AngelDelivery_Dialogue_Reward
+{
+    bufferitemname(STR_VAR_1,ITEM_QUEST_ANGELDELIVERY_2)
+    msgbox(AngelDelivery_Text_TheBlueCardIsActually,,SPEAKER_ANGELDELIVERYBIKERB)
+}
+
+script AngelDelivery_Dialogue_Inactive
+{
+    msgbox(AngelDelivery_Text_HesNotGonnaPass,,SPEAKER_ANGELDELIVERYBIKERB, TAIL_WHISPER)
+}
+
+script AngelDelivery_Script_InteractBikerB
+{
+    lock
+    faceplayer
+    returnqueststate(QUEST_ANGELDELIVERY)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_MENU_SET_ACTIVE:
+            call(AngelDelivery_Dialogue_Active)
+        case QUEST_MENU_SET_REWARD:
+            call(AngelDelivery_Dialogue_Reward)
+        default:
+            call(AngelDelivery_Dialogue_Inactive)
+    }
+    release
+    end
+}
+
+script AngelDelivery_Dialogue_PreBattle
+{
+    applymovement(BIKER_C, AngelDelivery_Movement_MoveBikerC)
+    applymovement(BIKER_D, AngelDelivery_Movement_MoveBikerD)
+    waitmovement(0)
+    call(AngelDelivery_Dialogue_FirstTime)
+    msgbox(AngelDelivery_Text_ForTheFinalStageOfYourOnboarding,,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(AngelDelivery_Text_ProveThatYoureTough,,SPEAKER_ANGELDELIVERYBIKERD)
+    goto(AngelDelivery_Script_StartBattle)
+}
+
+script AngelDelivery_Dialogue_FirstTime
+{
+    //PSF TODO fix bug where when on a bike and going inside, player is forced off bike
+    checktrainerdiscovered(TRAINER_ANGELDELIVERY_BIKERC)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        return
+    }
+    msgbox(AngelDelivery_Text_AhAreYouPlayer,,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(AngelDelivery_Text_CongratsInCompletingYourInitiation,,SPEAKER_ANGELDELIVERYBIKERD)
+}
+
+script AngelDelivery_Script_StartBattle
+{
+    closemessage
+    trainerbattle_two_trainers(TRAINER_ANGELDELIVERY_BIKERC, AngelDelivery_Text_OneOfUs,TRAINER_ANGELDELIVERY_BIKERD, AngelDelivery_Text_YoureTheReal)
+    goto(AngelDelivery_Script_PostBattle)
+}
+
+script AngelDelivery_Script_CircleBikers
+{
+    applymovement(BIKER_C, Quest_AngelDelivery_BikersCDWalkToTheCenter)
+    applymovement(BIKER_D, Quest_AngelDelivery_BikersCDWalkToTheCenter)
+    applymovement(PLAYER, Quest_AngelDelivery_PlayerWalksToTheCenter)
+    waitmovement(0)
+    delay(15)
+    applymovement(BIKER_C, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(BIKER_D, AngelDelivery_Movement_BikerDCirclesAroundThePlayer)
+    applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
+    waitmovement(0)
+    msgbox(AngelDelivery_Text_GearRatio,,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+    msgbox(AngelDelivery_Text_SaddleHeight,,SPEAKER_ANGELDELIVERYBIKERD, TAIL_WHISPER)
+    closemessage
+    applymovement(BIKER_C, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(BIKER_D, AngelDelivery_Movement_BikerDCirclesAroundThePlayer)
+    applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
+    waitmovement(0)
+    msgbox(AngelDelivery_Text_Chain,,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+    msgbox(AngelDelivery_Text_Nitro,,SPEAKER_ANGELDELIVERYBIKERD, TAIL_WHISPER)
+    closemessage
+    applymovement(BIKER_C, AngelDelivery_Movement_BikerCCirclesAroundThePlayer_End)
+    applymovement(BIKER_D, AngelDelivery_Movement_BikerDCirclesAroundThePlayer_End)
+    applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
+    waitmovement(0)
+    closemessage
+}
+
+script AngelDelivery_Script_PostBattle
+{
+    setflag(FLAG_SPEED_DEMON)
+    msgbox(AngelDelivery_Text_YouPassedTheLastTest,,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(AngelDelivery_Text_CantBeRidingAroundAtNormieSpeed,,SPEAKER_ANGELDELIVERYBIKERD)
+    closemessage
+    call(AngelDelivery_Script_CircleBikers)
+    msgbox(AngelDelivery_Text_AllDone,,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(AngelDelivery_Text_PedalPower,,SPEAKER_ANGELDELIVERYBIKERD)
+    msgbox(AngelDelivery_Text_YoureOfficiallyOneOfTheGearGrindGang,,SPEAKER_ANGELDELIVERYBIKERD)
+    completequest(QUEST_ANGELDELIVERY)
+    release
+    end
+}
+
+text AngelDelivery_Text_HeyCouldYouHelpMeOut {
+    format("Hey, could you help me out?")
+}
+
+text AngelDelivery_Text_ImDoingMyInitiation {
+    format("I’m doing my initiation into the Gear Grind Gang and I have to deliver something to somebody on Route 98.")
+}
+
+text AngelDelivery_Text_IBrokeMyLeg {
+    format("When I was starting off, I ran over a Pokémon, fell off my bike, and broke my leg.")
+}
+
+text AngelDelivery_Text_IfIDontGetThisPackageInTime {
+    format("And if I don’t get this package there in time, I’m not allowed to join!")
+}
+
+text AngelDelivery_Text_CanYouMakeTheDeliveryForMe {
+    format("Can you make the delivery for me instead? You can even use my top of the line Bike!")
+}
+
+text AngelDelivery_Text_IShouldGoToAHospital {
+    format("I should probably go to a hospital…")
+}
+
+text AngelDelivery_Text_YourBagIsTooFull {
+    format("Hey, could you help me- Oh. Your bag is too full to help me. Maybe I can hop on my one good leg to the nearest town and find somebody else…")
+}
+
+text AngelDelivery_Text_AreYouAngeldeliverybikerB {
+    format("Are you AngeldeliverybikerB?")
+}
+
+text AngelDelivery_Text_WhoWantsToKnow {
+    format("Who wants to know?")
+}
+
+text AngelDelivery_Text_IsntThatAngeldeliverybikerAs {
+    format("Isn’t that AngeldeliverybikerA’s?")
+}
+
+text AngelDelivery_Text_TheyBrokeTheirFoot {
+    format("They broke their foot trying to get here. They wanted to prove that they were serious, so they even gave me their bike to come bring this to you.")
+}
+
+text AngelDelivery_Text_WoahThatsHardcore {
+    format("Woah, that’s hardcore! Are they okay?")
+}
+
+text AngelDelivery_Text_TheyWereGoingToTheHospital {
+    format("They said they were going to the hospital.")
+}
+
+text AngelDelivery_Text_Wow {
+    format("Wow.")
+}
+
+text AngelDelivery_Text_WellYouHaveABike {
+    format("Well, you have a bike… And you’ve completed the initiation by finishing the challenge and giving me the Blue Card…")
+}
+
+text AngelDelivery_Text_YouEarnedASpotOnGearGrindGang {
+    format("Sounds like you’ve earned a spot on Gear Grind Gang!")
+}
+
+text AngelDelivery_Text_ImReallyJustATrainer {
+    format("I’m really just a Trainer…")
+}
+
+text AngelDelivery_Text_LetUsUpgradeYourBike {
+    format("At least let us upgrade your bike! If you head to the HQ in {STR_VAR_1}, we can get that tuned up for you.")
+}
+
+text AngelDelivery_Text_TheBlueCardIsActually {
+    format("The {STR_VAR_1} is actually from the Johto region. Our leader is a big weeb, and it reminds him of one of his favorite animé.")
+}
+
+text AngelDelivery_Text_HesNotGonnaPass {
+    format("Man, he’s not gonna pass at this rate…")
+}
+
+text AngelDelivery_Text_AhAreYouPlayer {
+    format("Ah, are you PLAYER? AngeldeliverybikerB told us you were coming.")
+}
+
+text AngelDelivery_Text_CongratsInCompletingYourInitiation {
+    format("Congrats on completing your initiation! Insane that you were able to just fill in for AngeldeliverybikerA with no training.")
+}
+
+text AngelDelivery_Text_ForTheFinalStageOfYourOnboarding {
+    format("And now for the final stage of your onboarding…")
+}
+
+text AngelDelivery_Text_ProveThatYoureTough {
+    format("Prove that you’re tough enough to hang!")
+}
+
+text AngelDelivery_Text_YouOnlyHave1Pokemon {
+    format("You only have 1 Pokémon?")
+}
+
+text AngelDelivery_Text_NotReadyToJoinUs {
+    format("You're clearly not ready to join us.")
+}
+
+text AngelDelivery_Text_YouPassedTheLastTest {
+    format("You passed the last test!")
+}
+
+text AngelDelivery_Text_CantBeRidingAroundAtNormieSpeed {
+    format("But of course, you can’t be riding around at normie speed!")
+}
+
+text AngelDelivery_Text_GearRatio {
+    format("Gotta get to that 48:16 gear ratio…")
+}
+
+text AngelDelivery_Text_SaddleHeight {
+    format("This saddle height is too low, they’re not aero enough…")
+}
+
+text AngelDelivery_Text_Chain {
+    format("Has this chain ever been lubed?")
+}
+
+text AngelDelivery_Text_Nitro {
+    format("And gotta hook up the nitro…")
+}
+
+text AngelDelivery_Text_AllDone {
+    format("All done. Your bike should be way faster at top speed now!")
+}
+
+text AngelDelivery_Text_PedalPower {
+    format("Pedal power!")
+}
+
+text AngelDelivery_Text_YoureOfficiallyOneOfTheGearGrindGang {
+    format("You’re officially one of the Gear Grind Gang. You’re welcome to come to this clubhouse whenever you like.")
+}
+
+text AngelDelivery_Text_OneOfUs
+{
+    format("One of us, one of us!")
+}
+
+text AngelDelivery_Text_YoureTheReal
+{
+    format("You're the real deal, {PLAYER}.")
+}
+
+movement Quest_AngelDelivery_Movement_BikerAWalksAway_North_1 {
+    walk_slow_right * 2
+    step_end
+}
+
+movement Quest_AngelDelivery_Movement_BikerAWalksAway_North_2 {
+    walk_slow_down * 7
+    step_end
+}
+
+movement Quest_AngelDelivery_Movement_BikerAWalksAway {
+    walk_slow_down * 6
+    step_end
+}
+
+movement AngelDelivery_Movement_MoveBikerC {
+    walk_right
+    face_down
+    step_end
+}
+
+movement AngelDelivery_Movement_MoveBikerD {
+    walk_left
+    face_down
+    step_end
+}
+
+movement Quest_AngelDelivery_BikersCDWalkToTheCenter {
+    walk_up * 3
+    face_down
+    step_end
+}
+
+movement Quest_AngelDelivery_PlayerWalksToTheCenter {
+    walk_up * 3
+    step_end
+}
+
+movement AngelDelivery_Movement_BikerCCirclesAroundThePlayer {
+    walk_left
+    walk_down * 2
+    walk_right * 2
+    walk_up * 2
+    walk_left
+    face_right
+    step_end
+}
+
+movement AngelDelivery_Movement_BikerDCirclesAroundThePlayer {
+    walk_left * 2
+    walk_down * 2
+    walk_right * 2
+    walk_up * 2
+    face_left
+    step_end
+}
+
+movement AngelDelivery_Movement_BikerCCirclesAroundThePlayer_End {
+    walk_left
+    walk_down * 2
+    walk_right * 2
+    walk_up * 2
+    walk_left
+    face_down
+    step_end
+}
+
+movement AngelDelivery_Movement_BikerDCirclesAroundThePlayer_End {
+    walk_left * 2
+    walk_down * 2
+    walk_right * 2
+    walk_up * 2
+    face_down
+    step_end
+}
+
+movement AngelDelivery_Movement_PlayerLooksAtTheBikers {
+    face_left
+    delay_16 * 3
+    face_down
+    delay_16 * 3
+    face_right
+    delay_16 * 2
+    face_up
+    step_end
+}
+

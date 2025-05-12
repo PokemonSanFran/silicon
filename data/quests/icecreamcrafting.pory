@@ -1,0 +1,152 @@
+//PSF TODO Implement actual item effect for ITEM_SHERBET_SURPRISE
+//PSF TODO Modify additem script to check for berries and mark this quest as complete if player has the berries
+
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CASHIER = 1
+const PATRON = 2
+const POKEMON = 3
+
+script Quest_SmoothieCrafting_HidePatron_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SMOOTHIECRAFTING)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_TEMP_1)
+        }
+}
+
+script Quest_SmoothieCrafting_Event_Script{
+    msgbox(gText_Quest_SmoothieCrafting_WelcomeToMarble,MSGBOX_NPC)
+
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SMOOTHIECRAFTING)
+    if (var(VAR_RESULT)){
+        goto(Chasilla_IceCreamShop_Cashier_Event_Script)
+    }
+
+    call(Quest_SmoothieCrafting_CheckBerries_Script)
+    goto_if_quest_reward(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_TakeBerries_Dialogue)
+    goto_if_quest_active(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_GiveRecipe_Dialogue)
+}
+
+script Quest_SmoothieCrafting_Debug_Script{
+    additem(ITEM_PECHA_BERRY,3)
+    additem(ITEM_NANAB_BERRY,2)
+    additem(ITEM_RABUTA_BERRY,1)
+    msgbox(format("now you have all the items you need."))
+//PSF TODO remove when ready
+    return
+}
+
+script Quest_SmoothieCrafting_GiveRecipe_Dialogue{
+        call(Quest_SmoothieCrafting_Debug_Script)
+        msgbox(gText_Quest_SmoothieCrafting_IfYouWant,MSGBOX_NPC)
+        end
+}
+
+script Quest_SmoothieCrafting_TakeBerries_Dialogue{
+        lock
+        msgbox(gText_Quest_SmoothieCrafting_SickYouBrought,MSGBOX_NPC)
+        closemessage
+
+        call(Quest_SmoothieCrafting_TakeBerries_Script)
+        giveitem(ITEM_SHERBET_SURPRISE,6)
+
+        applymovement(PATRON,Quest_SmoothieCrafting_ToCounter_Movement)
+        waitmovement(PATRON)
+        applymovement(CASHIER,Quest_SmoothieCrafting_StepRight_Movement)
+        waitmovement(CASHIER)
+
+        msgbox(gText_Quest_SmoothieCrafting_WhatTheHell)
+        msgbox(gText_Quest_SmoothieCrafting_WhatDoYouMean)
+        msgbox(gText_Quest_SmoothieCrafting_MyPokemonGotWeaker)
+        msgbox(gText_Quest_SmoothieCrafting_YeahWeCleanOut)
+        msgbox(gText_Quest_SmoothieCrafting_ICantBelieveThis)
+        closemessage
+
+        applymovement(PATRON,Quest_SmoothieCrafting_BackToSeat_Movement)
+        waitmovement(PATRON)
+        call(Quest_SmoothieCrafting_RemovePokemon_Script)
+        applymovement(PATRON,Quest_SmoothieCrafting_LeaveShop_Movement)
+        waitmovement(PATRON)
+        playse(SE_EXIT)
+        removeobject(PATRON)
+        applymovement(CASHIER,Quest_SmoothieCrafting_SlideBack_Movement)
+        waitmovement(CASHIER)
+        release
+        completequest(QUEST_SMOOTHIECRAFTING)
+        call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
+        end
+}
+
+script Quest_SmoothieCrafting_RemovePokemon_Script{
+    playse(SE_BALL_OPEN)
+        waitse
+        setflag(FLAG_TEMP_1)
+        removeobject(POKEMON)
+}
+
+script Quest_SmoothieCrafting_TakeBerries_Script{
+    removeitem(ITEM_PECHA_BERRY,3)
+    removeitem(ITEM_NANAB_BERRY,2)
+    removeitem(ITEM_RABUTA_BERRY,1)
+}
+
+script Quest_SmoothieCrafting_CheckBerries_Script{
+    specialvar(VAR_RESULT,Quest_SmoothieCrafting_CheckNeededItems)
+        if (var(VAR_RESULT)){
+            questmenu(QUEST_MENU_SET_REWARD,QUEST_SMOOTHIECRAFTING)
+        }
+    return
+}
+
+
+movement Quest_SmoothieCrafting_ToCounter_Movement{
+    walk_faster_up
+        walk_fast_left * 4
+        face_up
+        step_end
+}
+movement Quest_SmoothieCrafting_StepRight_Movement{
+    lock_facing_direction
+        walk_right
+        step_end
+}
+movement Quest_SmoothieCrafting_BackToSeat_Movement{
+        walk_right * 4
+        walk_down
+        step_end
+}
+movement Quest_SmoothieCrafting_LeaveShop_Movement{
+    walk_down * 3
+    walk_left * 4
+    face_down
+        step_end
+}
+movement Quest_SmoothieCrafting_SlideBack_Movement{
+    lock_facing_direction
+    walk_left
+    step_end
+}
+
+text gText_Quest_SmoothieCrafting_WelcomeToMarble{
+    format("Welcome to the Marble Slab!")
+}
+text gText_Quest_SmoothieCrafting_IfYouWant{
+    format("We're actually not serving customers yet, today is just our soft open! If you want to try our signature Sherbet Surprise, bring in 3 Pecha Berries, 2 Nanab Berries, and 1 Rabuta Berry!")
+}
+text gText_Quest_SmoothieCrafting_SickYouBrought{
+    format("Sick, you brought the berries! Okay, I'll make this.... and here you go!")
+}
+text gText_Quest_SmoothieCrafting_WhatTheHell{
+    format("What the hell are you serving us? What is going on?")
+}
+text gText_Quest_SmoothieCrafting_WhatDoYouMean{
+    format("What do you mean? Did your Pokémon not like their treat?")
+}
+text gText_Quest_SmoothieCrafting_MyPokemonGotWeaker{
+    format("My Pokémon got weaker after eating it! What gives?")
+}
+text gText_Quest_SmoothieCrafting_YeahWeCleanOut{
+    format("Yeah! We clean out your Pokémon bodies so you can toughen them up the way they should be! That's what our ad said, right?")
+}
+text gText_Quest_SmoothieCrafting_ICantBelieveThis{
+    format("...I can't believe this shit! I wanted to toughen my team up! Ugh!")
+}

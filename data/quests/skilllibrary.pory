@@ -1,0 +1,161 @@
+//gText_Skilllibrary_
+//Quest_Skilllibrary_
+
+const PERSON = 1
+
+script Quest_Skilllibrary_Event_Script{
+    lock
+    goto_if_quest_complete(QUEST_SKILLLIBRARY,Quest_Skilllibrary_Completed_Dialogue)
+    goto_if_quest_active(QUEST_SKILLLIBRARY,Quest_Skilllibrary_Active_Dialogue)
+    goto(Quest_Skilllibrary_StartQuest_Dialogue)
+}
+
+script Quest_Skilllibrary_StartQuest_Dialogue{
+    msgbox(gText_Skilllibrary_WereBuilding,MSGBOX_NPC)
+    msgbox(gText_Skilllibrary_TheGoalIs)
+    msgbox(gText_Skilllibrary_OhWowThat,,SPEAKER_ALICIA,,EMOTE_HAPPY)
+    msgbox(gText_Skilllibrary_TheProblemIs)
+    msgbox(gText_Skilllibrary_Theyrenot)
+    msgbox(gText_Skilllibrary_YoureChampion)
+    msgbox(gText_Skilllibrary_IHaveAMachineToCopy)
+    closemessage
+    startquest(QUEST_SKILLLIBRARY)
+    goto(Quest_Skilllibrary_FirstCheck_Dialogue)
+    release
+    end
+}
+
+script Quest_Skilllibrary_FirstCheck_Dialogue{
+    special(Quest_Skilllibrary_StoreAndCompare)
+    msgbox(gText_Skilllibrary_HowManyTM)
+    msgbox(gText_Skilllibrary_OkayXThis)
+    goto(Quest_Skilllibrary_CopyTM_Script)
+}
+
+script Quest_Skilllibrary_Active_Dialogue{
+    if(var(VAR_QUEST_SKILLLIBRARY_TM_COUNT) == 0){
+        goto(Quest_Skilllibrary_FirstCheck_Dialogue)
+    }
+
+    msgbox(gText_Skilllibrary_HowManyMore)
+
+    special(Quest_Skilllibrary_StoreAndCompare)
+    if(var(VAR_RESULT)){
+        msgbox(gText_Skilllibrary_IllCopyThese)
+        goto(Quest_Skilllibrary_CopyTM_Script)
+    }
+    goto(Quest_Skilllibrary_NothingYet_Dialogue)
+}
+
+script Quest_Skilllibrary_NothingYet_Dialogue{
+    msgbox(gText_Skilllibrary_NothingNew)
+    closemessage
+}
+
+script Quest_Skilllibrary_CopyTM_Script{
+    applymovement(PERSON,Quest_Skilllibrary_WalkToMachine_Movement)
+    waitmovement(PERSON)
+    playse(SE_PC_LOGIN)
+    waitse
+    applymovement(PERSON,Quest_Skilllibrary_PresentToPlayer_Movement)
+    waitmovement(PERSON)
+    msgbox(gText_Skilllibrary_OkayDone)
+    applymovement(PERSON,Quest_Skilllibrary_ReturnToPlayer)
+    waitmovement(PERSON)
+    if (var(VAR_QUEST_SKILLLIBRARY_TM_COUNT) == NUM_TECHNICAL_MACHINES){
+        goto(Quest_Skilllibrary_Reward_Dialogue)
+    }
+    msgbox(gText_Skilllibrary_IThinkThere)
+    closemessage
+    release
+    end
+}
+
+script Quest_Skilllibrary_Reward_Dialogue{
+//PSF TODO currently impossible to finish this quest until TMs are expanded to 399 but I swear it works
+// BAG_TMHM_COUNT needs to be increased or the bag won't hold enough
+    msgbox(gText_Skilllibrary_OhWait)
+    msgbox(gText_Skilllibrary_ThatsAllOfThem)
+    msgbox(gText_Skilllibrary_YouveHelpedMe)
+    giveitem(ITEM_STARF_BERRY)
+    completequest(QUEST_SKILLLIBRARY)
+    closemessage
+    release
+    end
+}
+
+script Quest_Skilllibrary_Completed_Dialogue{
+    msgbox(gText_Skilllibrary_ThanksAgain,MSGBOX_NPC)
+    end
+}
+movement Quest_Skilllibrary_WalkToMachine_Movement{
+    walk_right * 2
+    face_up
+    delay_8
+    walk_in_place_up
+	step_end
+}
+movement Quest_Skilllibrary_PresentToPlayer_Movement{
+    walk_in_place_down
+	step_end
+}
+movement Quest_Skilllibrary_ReturnToPlayer{
+    walk_left * 2
+    face_down
+    walk_in_place_down
+	step_end
+}
+text gText_Skilllibrary_WereBuilding{
+	format("We're building a library for Trainers! But without books.There are tons of Trainers that aren't competing in the League Challenge!")
+}
+text gText_Skilllibrary_TheGoalIs{
+	format("But its become impossible get a hold of Technical Machines if you're not in the challenge.")
+}
+text gText_Skilllibrary_OhWowThat{
+	format("Oh wow, that sounds so amazing!")
+}
+text gText_Skilllibrary_TheProblemIs{
+	format("The problem is... the League challenge. There's no Gym here anymore, so Trainers don't come here. Its too out of the way to justify anybody coming here, so we don't get any donations.")
+}
+text gText_Skilllibrary_Theyrenot{
+	format("They're not gonna start coming to ol' ZenzuIsland!")
+}
+text gText_Skilllibrary_YoureChampion{
+	format("I recognize ya, you're Champion {PLAYER}, yeah?")
+}
+text gText_Skilllibrary_IHaveAMachineToCopy{
+	format("I built a machine that lets make record the data of a Technical Machine, so I can redistribute it.Could you stop here as you collect more TMs? I'll make copies of them, and hopefully we can build a library of all the TMs in Resido!")
+}
+text gText_Skilllibrary_HowManyTM{
+	format("How many TMs do you have to start?")
+}
+text gText_Skilllibrary_OkayXThis{
+	format("Okay! {STR_VAR_1} is a good start.")
+}
+text gText_Skilllibrary_HowManyMore{
+	format("How many more TMs did you bring me?")
+}
+text gText_Skilllibrary_NothingNew{
+	format("Nothing new? That's okay. Let me know if that changes!")
+}
+text gText_Skilllibrary_IllCopyThese{
+	format("I'll copy these {STR_VAR_2}!")
+}
+text gText_Skilllibrary_OkayDone{
+	format("Okay, done!")
+}
+text gText_Skilllibrary_IThinkThere{
+	format("I think there are {STR_VAR_3} left. Keep it up!")
+}
+text gText_Skilllibrary_OhWait{
+	format("Oh wait...")
+}
+text gText_Skilllibrary_ThatsAllOfThem{
+	format("That's all of them!")
+}
+text gText_Skilllibrary_YouveHelpedMe{
+	format("Now Trainers have access all of the moves of the region! Thank you so much! Take this.")
+}
+text gText_Skilllibrary_ThanksAgain{
+	format("Thanks again.")
+}

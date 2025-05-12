@@ -1,0 +1,308 @@
+//gText_Recruitlocalartists_
+//Quest_Recruitlocalartists_
+
+const SMEARGLE = 4
+const RAMESH_PRODUCTION = 2
+const RAMESH_MERMEREZA_CITY = 3
+const FLAG_HIDE_RAMESH = FLAG_TEMP_2
+const FLAG_HIDE_SMEARGLE = FLAG_TEMP_1
+
+script Quest_Recruitlocalartists_Ramesh_Visibility_Script{
+    setvar(VAR_TEMP_0,0)
+
+    if (var(VAR_STORYLINE_STATE) < STORY_COMPLETE_ARANTRAZ){
+            addvar(VAR_TEMP_0,1)
+        }
+
+    returnqueststate(QUEST_RECRUITLOCALARTISTS)
+        if (var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+            addvar(VAR_TEMP_0,1)
+        }
+
+    if (var(VAR_STORYLINE_STATE) > STORY_KAI_EXPLAIN_RESTORATION && (var(VAR_STORYLINE_STATE) != STORY_RECIEVED_BAMBOO_STAR)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if(var(VAR_TEMP_0) > 0){
+        setflag(FLAG_HIDE_RAMESH)
+    }
+    return
+}
+
+script Quest_Recruitlocalartists_Smeargle_Visibility_Script{
+    call(Quest_Recruitlocalartists_SetSmearglePosition_Script)
+    setvar(VAR_TEMP_0,0)
+
+    returnqueststate(QUEST_RECRUITLOCALARTISTS)
+    if (var(VAR_RESULT) != QUEST_MENU_SET_ACTIVE){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if (var(VAR_QUEST_RECRUITLOLCAARTISTS) != SMEARGLE_LOCAL_2){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if(var(VAR_TEMP_0) > 0){
+        setflag(FLAG_HIDE_SMEARGLE)
+    }
+
+    return
+}
+
+script Quest_Recruitlocalartists_SetSmearglePosition_Script{
+    random(8)
+
+        switch(var(VAR_RESULT)){
+            case 0:
+                setobjectxy(SMEARGLE,3,8)
+                setobjectxyperm(SMEARGLE,3,8)
+            case 1:
+                setobjectxy(SMEARGLE,2,14)
+                setobjectxyperm(SMEARGLE,2,14)
+            case 2:
+                setobjectxy(SMEARGLE,7,19)
+                setobjectxyperm(SMEARGLE,7,19)
+            case 3:
+                setobjectxy(SMEARGLE,15,19)
+                setobjectxyperm(SMEARGLE,15,19)
+            case 4:
+                setobjectxy(SMEARGLE,36,24)
+                setobjectxyperm(SMEARGLE,36,24)
+            case 5:
+                setobjectxy(SMEARGLE,29,13)
+                setobjectxyperm(SMEARGLE,29,13)
+            case 6:
+                setobjectxy(SMEARGLE,21,13)
+                setobjectxyperm(SMEARGLE,21,13)
+            case 7:
+                setobjectxy(SMEARGLE,25,4)
+                setobjectxyperm(SMEARGLE,25,4)
+            default:
+                setobjectxy(SMEARGLE,12,4)
+                setobjectxyperm(SMEARGLE,12,4)
+        }
+    return
+}
+
+script Quest_Recruitlocalartists_CountSubquest_Script{
+
+    setvar(VAR_TEMP_0,0)
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RECRUITLOCALARTISTS,SUB_QUEST_1)
+        if (var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RECRUITLOCALARTISTS,SUB_QUEST_2)
+        if (var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RECRUITLOCALARTISTS,SUB_QUEST_3)
+        if (var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+    return
+}
+
+script Quest_Recruitlocalartists_ProgressReward_Script{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_RECRUITLOCALARTISTS)
+        if (!var(VAR_RESULT)){
+            release
+                end
+        }
+
+    call(Quest_Recruitlocalartists_CountSubquest_Script)
+        if (var(VAR_TEMP_0) == 3){
+            questmenu(QUEST_MENU_SET_REWARD,QUEST_RECRUITLOCALARTISTS)
+        }
+    return
+        closemessage
+
+}
+
+script Quest_Recruitlocalartists_StartQuest_Dialogue{
+    lock
+    //PSF TODO move player if in ramesh's walking path
+
+    if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
+        faceplayer
+        msgbox(gText_Recruitlocalartists_HelloPlayer)
+        closemessage
+    }
+
+    applymovement(RAMESH_MERMEREZA_CITY,Common_Movement_FaceUp)
+    waitmovement(RAMESH_MERMEREZA_CITY)
+
+    msgbox(gText_Recruitlocalartists_TheseMurals)
+    closemessage
+
+    faceplayer
+    msgbox(gText_Recruitlocalartists_TheLocalsLove)
+    closemessage
+
+    applymovement(RAMESH_MERMEREZA_CITY,Quest_Recruitlocalartists_LeaveMission_Movement)
+    startquest(QUEST_RECRUITLOCALARTISTS)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(RAMESH_MERMEREZA_CITY)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Recruitlocalartists_First_Dialogue{
+    addvar(VAR_QUEST_RECRUITLOLCAARTISTS,1)
+        msgbox(gText_Recruitlocalartists_TheMurals,MSGBOX_NPC)
+        end
+}
+
+script Quest_Recruitlocalartists_Second_Dialogue{
+    addvar(VAR_QUEST_RECRUITLOLCAARTISTS,1)
+        lock
+        faceplayer
+        clearflag(FLAG_HIDE_SMEARGLE)
+        addobject(SMEARGLE)
+        setobjectxy(SMEARGLE,36,2)
+        applymovement(SMEARGLE,Quest_Recruitlocalartists_RunPastScreen_Movement)
+        msgbox(gText_Recruitlocalartists_ISawOne)
+        closemessage
+        waitmovement(SMEARGLE)
+        fadescreen(FADE_TO_BLACK)
+        delay(60)
+        call(Quest_Recruitlocalartists_SetSmearglePosition_Script)
+        fadescreen(FADE_FROM_BLACK)
+        release
+        end
+}
+
+script Quest_Recruitlocalartists_CoreEncounter_Script{
+    lock
+        startmenu_savescreen
+        faceplayer
+        call(Quest_Recruitlocalartists_SetSmeargle_Script)
+        playmoncry(SPECIES_SMEARGLE,CRY_MODE_ENCOUNTER)
+        msgbox(gText_Recruitlocalartists_Smear)
+        delay(40)
+        waitmoncry
+        setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        closemessage
+        dowildbattle
+        clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+
+        specialvar(VAR_RESULT, GetBattleOutcome)
+        switch (var (VAR_RESULT)) {
+            case B_OUTCOME_CAUGHT: call(Quest_Recruitlocalartists_ClearSmeargleSub_Script)
+            case B_OUTCOME_WON: call(Quest_Recruitlocalartists_SmeargleRunAway_Script)
+        }
+}
+
+script Quest_Recruitlocalartists_SetSmeargle_Script{
+    //PSF TODO figure out how to set other attributes of Smeargle
+    //https://pokepast.es/df4fe2c9b4dbcdde
+    call(Quest_Recruitlocalartists_CountSubquest_Script)
+        switch (var(VAR_TEMP_0)){
+            case 0: setwildbattle(SPECIES_SMEARGLE,25,ITEM_NONE)
+            case 1: setwildbattle(SPECIES_SMEARGLE,30,ITEM_NONE)
+            case 2: setwildbattle(SPECIES_SMEARGLE,50,ITEM_NONE)
+        }
+    return
+}
+
+script Quest_Recruitlocalartists_RemoveSmeargle_Script{
+    closemessage
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        removeobject(VAR_LAST_TALKED)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        return
+}
+
+script Quest_Recruitlocalartists_SmeargleRunAway_Script{
+    lock
+        call(Quest_Recruitlocalartists_RemoveSmeargle_Script)
+        msgbox(gText_Recruitlocalartists_TheSmeargleRan,MSGBOX_AUTOCLOSE)
+        release
+        end
+}
+
+script Quest_Recruitlocalartists_ClearSmeargleSub_Script{
+    call(Quest_Recruitlocalartists_RemoveSmeargle_Script)
+        call(Quest_Recruitlocalartists_CountSubquest_Script)
+
+        switch(var(VAR_TEMP_0)){
+            case 0: subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RECRUITLOCALARTISTS,SUB_QUEST_1)
+            case 1: subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RECRUITLOCALARTISTS,SUB_QUEST_2)
+            case 2: subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RECRUITLOCALARTISTS,SUB_QUEST_3)
+        }
+
+    call(Quest_Recruitlocalartists_ProgressReward_Script)
+        return
+}
+
+script Quest_Recruitlocalartists_Active_Dialogue{
+    msgbox(gText_Recruitlocalartists_YouStillHavent,MSGBOX_NPC)
+        end
+}
+
+script Quest_Recruitlocalartists_CompleteQuest_Dialogue{
+    lock
+    playse(SE_PIN)
+    applymovement(RAMESH_PRODUCTION,Common_Movement_ExclamationMark)
+    waitmovement(RAMESH_PRODUCTION)
+    waitse
+    msgbox(gText_Recruitlocalartists_TheyWerePokemon)
+    msgbox(gText_Recruitlocalartists_WellThenIDont)
+    completequest(QUEST_RECRUITLOCALARTISTS)
+    release
+    end
+}
+
+text gText_Recruitlocalartists_Smear{
+    format("Smear!")
+}
+text gText_Recruitlocalartists_TheSmeargleRan{
+    format("The Smeargle ran away!")
+}
+text gText_Recruitlocalartists_TheMurals{
+    format("The murals are painted by this rag tag group! They come in, paint real fast and then proof, they're gone!")
+}
+text gText_Recruitlocalartists_ISawOne{
+    format("I saw one of those mural painters once. I'll tell you a secret... they're Pokémon!")
+}
+text gText_Recruitlocalartists_YouStillHavent{
+    format("You still haven't found those mural artists?")
+}
+
+text gText_Recruitlocalartists_TheyWerePokemon{
+    format("They were Pokémon?! Fascinating. Those murals were incredibly complex and yet... hmm.")
+}
+
+text gText_Recruitlocalartists_WellThenIDont{
+    format("Well then I don't want to hire them, obviously. They're better off with a Trainer. A shame they won't be painting in MermerezaCity anymore, but I'll just have to find somebody else. Thanks for your help.")
+}
+
+text gText_Recruitlocalartists_TheseMurals{
+    format("These murals... they're a cornerstone of the culture of this city. They depict the growth and struggles of not only this community, but the region as a whole.")
+}
+
+text gText_Recruitlocalartists_TheLocalsLove{
+    format("The locals love them too. I want to figure out how SharpriseCapital can work with these artists to create a marketing campaign that really resonates with the people. Can you help me track down the artists? Come to the Production Studio in the SharpriseSpire once you've found them.")
+}
+
+text gText_Recruitlocalartists_HelloPlayer{
+    format("Hello {PLAYER}. We haven't formerly met yet, but I'm Ramesh, VP of Marketing for SharpriseCapital. We've always been very impressed with your work.")
+}
+
+movement Quest_Recruitlocalartists_RunPastScreen_Movement{
+    walk_fast_left * 2
+        walk_fast_down * 3
+        walk_fast_left * 9
+        face_up
+        step_end
+}
+
+movement Quest_Recruitlocalartists_LeaveMission_Movement{
+    walk_right * 2
+    walk_up * 9
+    step_end
+}

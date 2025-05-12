@@ -1,0 +1,476 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KEVIN_HODOU_CITY = 12
+const ZAC_HODOU_CITY =  13
+const FLAG_HIDE_PEWFAT = FLAG_TEMP_6
+
+const KEVIN = 1
+const ZAC = 2
+const PKMN_A = 3
+const PKMN_B = 4
+const JAMES = 12
+const FLAG_HIDE_PKMN = FLAG_TEMP_8
+const FLAG_HIDE_JAMES_HODOU_CITY = FLAG_TEMP_9
+
+const JAMES_CRESALTA_VISTA = 9
+const FLAG_HIDE_JAMES_CRESALTA_VISTA = FLAG_TEMP_5
+
+const BLACKBELT_A_HODOU_CITY = 5
+const BLACKBELT_B_HODOU_CITY = 6
+const BLACKBELT_C_HODOU_CITY = 7
+const BLACKBELT_D_HODOU_CITY = 8
+const BLACKBELT_E_HODOU_CITY = 9
+const BLACKBELT_F_HODOU_CITY = 10
+const BLACKBELT_G_HODOU_CITY = 11
+
+const FLAG_HIDE_BLACKBELT_A_HODOU_CITY = FLAG_TEMP_1
+const FLAG_HIDE_BLACKBELT_B_HODOU_CITY = FLAG_TEMP_2
+const FLAG_HIDE_BLACKBELT_C_HODOU_CITY = FLAG_TEMP_3
+const FLAG_HIDE_BLACKBELT_D_HODOU_CITY = FLAG_TEMP_4
+const FLAG_HIDE_BLACKBELT_E_HODOU_CITY = FLAG_TEMP_5
+const FLAG_HIDE_BLACKBELT_F_HODOU_CITY = FLAG_TEMP_6
+const FLAG_HIDE_BLACKBELT_G_HODOU_CITY = FLAG_TEMP_7
+
+const FLAG_HIDE_BLACKBELT_A_ROUTE = FLAG_TEMP_1
+const FLAG_HIDE_BLACKBELT_B_ROUTE = FLAG_TEMP_2
+const FLAG_HIDE_BLACKBELT_C_ROUTE = FLAG_TEMP_1
+const FLAG_HIDE_BLACKBELT_D_ROUTE = FLAG_TEMP_1
+const FLAG_HIDE_BLACKBELT_E_ROUTE = FLAG_TEMP_1
+const FLAG_HIDE_BLACKBELT_F_ROUTE = FLAG_TEMP_1
+const FLAG_HIDE_BLACKBELT_G_ROUTE = FLAG_TEMP_1
+
+//  player walks up to door, sees two trainers walking in
+//  alicia goes into, trainers attack in double battle
+//  trainers explain why they're  there
+//  alicia explains why they're there
+//  pewfat asks alicia to find james
+//  james made visible by cresaltavista beach
+//  player goes back to gym, james nad pewfat are strategizing
+//  they ask zoery to find the other black belts in the region
+//  alicia talks to trainers after beating them, they go back to hodoucity
+//  tells alicia to come back later, thanks for the help getting trainers:w
+
+// gText_Quest_Restorehodoucity
+// Quest_Restorehodoucity
+
+script Quest_Restorehodoucity_HideJames_CresaltaVista_Script{
+    if (var(VAR_QUEST_RESTOREHODOUGYM) != FIND_HODOU_CITY_LEADER){
+        setflag(FLAG_HIDE_JAMES_CRESALTA_VISTA)
+    }
+    return
+}
+
+script Quest_Restorehodoucity_HideJames_HodouCity_Script{
+    if (var(VAR_QUEST_RESTOREHODOUGYM) < FOUND_HODOU_CITY_LEADER){
+        setflag(FLAG_HIDE_JAMES_HODOU_CITY)
+    }
+    return
+}
+
+script Quest_Restorehodoucity_HidePokemnon_Script{
+    if (var(VAR_QUEST_RESTOREHODOUGYM) != POST_PEWFAT_INTO_GYM){
+        setflag(FLAG_HIDE_PKMN)
+    }
+    return
+}
+
+script Quest_Restorehodoucity_LockGymDoor_Script{
+    setvar(VAR_TEMP_0,0)
+
+    //returnqueststate(QUEST_RESTOREHODOUGYM)
+    //if (var(VAR_RESULT) < QUEST_MENU_SET_ACTIVE){
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_RESTOREHODOUGYM)
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    //if (var(VAR_STORYLINE_STATE) < STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+        //subvar(VAR_TEMP_0,1)
+    //}
+
+    if (flag(FLAG_TIMELINE_FALSE)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if (var(VAR_TEMP_0) > 0){
+        setmetatile(22,3,0x2B7,TRUE)
+        special(DrawWholeMapView)
+    }
+    return
+}
+
+script Quest_Restorehodoucity_CheckQuestCanStart_Script{
+    setvar(VAR_TEMP_0,0)
+
+        questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_RESTOREHODOUGYM)
+        if (var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+    if (!flag(FLAG_TIMELINE_FALSE)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+        addvar(VAR_TEMP_0,1)
+    }
+    return
+}
+
+script Quest_Restorehodoucity_HideTrainers_Inside_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_1)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_A_HODOU_CITY)
+        }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_2)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_B_HODOU_CITY)
+        }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_3)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_C_HODOU_CITY)
+        }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_D_HODOU_CITY)
+        }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_5)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_E_HODOU_CITY)
+        }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_6)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_F_HODOU_CITY)
+        }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_7)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_G_HODOU_CITY)
+        }
+    return
+}
+
+script Quest_Restorehodoucity_HideBlackbelt_RouteB_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_1)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_A_ROUTE)
+        }
+    return
+}
+
+script Quest_Restorehodoucity_HideBlackbelt_Route4_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_2)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_B_ROUTE)
+        }
+    return
+}
+
+script Quest_Restorehodoucity_HideBlackbelt_Route7_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_3)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_C_ROUTE)
+        }
+    return
+}
+
+
+script Quest_Restorehodoucity_HideBlackbelt_Route14_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_D_ROUTE)
+        }
+    return
+}
+
+script Quest_Restorehodoucity_HideBlackbelt_Route6_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_5)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_E_ROUTE)
+        }
+    return
+}
+script Quest_Restorehodoucity_HideBlackbelt_HalerbaWilds_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_6)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_F_ROUTE)
+        }
+    return
+}
+script Quest_Restorehodoucity_HideBlackbelt_Route11_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_7)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_BLACKBELT_G_ROUTE)
+        }
+    return
+}
+
+script Quest_Restorehodoucity_HidePewfatOutside_Script{
+    call(Quest_Restorehodoucity_CheckQuestCanStart_Script)
+
+        if (var(VAR_TEMP_0) != 3){
+            setflag(FLAG_HIDE_PEWFAT)
+        }
+}
+
+script Quest_Restorehodoucity_PewfatWalkInside_Script{
+    lock
+
+        call(Quest_Restorehodoucity_CheckQuestCanStart_Script)
+        if (var(VAR_TEMP_0) != 3){
+            release
+                end
+        }
+
+    setvar(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM)
+
+        delay(30)
+        opendoor(22,3)
+        applymovement(KEVIN_HODOU_CITY,Common_Movement_WalkUp)
+        applymovement(ZAC_HODOU_CITY,Quest_Restorehodoucity_WalkInside_Movement)
+        waitmovement(ZAC_HODOU_CITY)
+        playse(SE_EXIT)
+        waitse
+        removeobject(KEVIN_HODOU_CITY)
+        removeobject(ZAC_HODOU_CITY)
+        closedoor(22,3)
+        waitdooranim
+        startquest(QUEST_RESTOREHODOUGYM)
+        setmetatile(22,3,0x2A1,FALSE;)
+        special(DrawWholeMapView)
+        release
+        end
+}
+
+script Quest_Restorehodoucity_FirstTimeInside_Dialogue{
+    lock
+        playse(SE_EXIT)
+        applymovement(KEVIN,Quest_Restorehodoucity_ExclaimLookDown_Movement)
+        applymovement(ZAC,Quest_Restorehodoucity_ExclaimLookDown_Movement)
+        waitse
+        waitmovement(KEVIN)
+
+        msgbox(gText_ExpandedPlaceholder_Empty)
+        msgbox(gText_ExpandedPlaceholder_Empty)
+
+        applymovement(PKMN_A,Common_Movement_WalkDown)
+        applymovement(PKMN_B,Common_Movement_WalkDown)
+        waitmovement(PKMN_B)
+
+        trainerbattle_no_intro(TRAINER_PEWFAT,gText_ExpandedPlaceholder_Empty)
+        goto(Quest_Restorehodoucity_PostBattle_Script)
+}
+
+script Quest_Restorehodoucity_PostBattle_Script{
+    fadescreen(FADE_TO_BLACK)
+        removeobject(PKMN_A)
+        removeobject(PKMN_B)
+        fadescreen(FADE_FROM_BLACK)
+
+        setvar(VAR_QUEST_RESTOREHODOUGYM,FIND_HODOU_CITY_LEADER)
+        msgbox(gText_ExpandedPlaceholder_Empty)
+
+        release
+        end
+}
+
+script Quest_Restorehodoucity_Kevin_Interact_Script{
+    lock
+    faceplayer
+    switch(var(VAR_QUEST_RESTOREHODOUGYM)){
+        case FIND_HODOU_CITY_LEADER: call(Quest_Restorehodoucity_Kevin_WaitingJames_Dialogue)
+        case (FIND_BLACKBELTS + 1):
+        case (FIND_BLACKBELTS + 2):
+        case (FIND_BLACKBELTS + 3):
+        case (FIND_BLACKBELTS + 4):
+        case (FIND_BLACKBELTS + 5):
+        case (FIND_BLACKBELTS + 6):
+        case FIND_BLACKBELTS: call(Quest_Restorehodoucity_Kevin_WaitingBlackbelt_Dialogue)
+        case RESTOREHODOU_CITY_COMPLETE: call(Quest_Restorehodoucity_Kevin_Complete_Dialogue)
+    }
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+    end
+}
+
+script Quest_Restorehodoucity_FirstJames_Interact_Script{
+    setvar(VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER)
+    msgbox(format("yeah I was the interim leader for hodoucity, guess I can go back."),MSGBOX_NPC)
+    call(Quest_GetTheBand_RemoveBikers_Script)
+    end
+}
+
+script Quest_Restorehodoucity_Zac_Interact_Script{
+    lock
+    faceplayer
+    switch(var(VAR_QUEST_RESTOREHODOUGYM)){
+        case FIND_HODOU_CITY_LEADER: call(Quest_Restorehodoucity_Zac_WaitingJames_Dialogue)
+        case (FIND_BLACKBELTS + 1):
+        case (FIND_BLACKBELTS + 2):
+        case (FIND_BLACKBELTS + 3):
+        case (FIND_BLACKBELTS + 4):
+        case (FIND_BLACKBELTS + 5):
+        case (FIND_BLACKBELTS + 6):
+        case FIND_BLACKBELTS: call(Quest_Restorehodoucity_Zac_WaitingBlackbelt_Dialogue)
+        case RESTOREHODOU_CITY_COMPLETE: call(Quest_Restorehodoucity_Zac_Complete_Dialogue)
+    }
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+    end
+}
+
+script Quest_Restorehodoucity_James_Interact_Script{
+    msgbox(format("Did you find all the black belts? I think they're on Route 8, Route 1, Gldgtewilds, Route 12, Route 72, Route 17, and Route 43."),MSGBOX_AUTOCLOSE)
+}
+
+script Quest_Restorehodoucity_Zac_WaitingJames_Dialogue{
+    msgbox(format("Did you find James? I think he's in CresaltaVista."),MSGBOX_AUTOCLOSE)
+}
+
+script Quest_Restorehodoucity_Kevin_WaitingJames_Dialogue{
+    msgbox(format("Did you find James? I think he's in CresaltaVista."),MSGBOX_AUTOCLOSE)
+}
+
+script Quest_Restorehodoucity_FoundJames_Dialogue{
+    lock
+    setvar(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS)
+    applymovement(PLAYER,Quest_Restorehodoucity_WalkIntoGym_Movement)
+    applymovement(ZAC_HODOU_CITY,Common_Movement_FaceDown)
+    applymovement(KEVIN_HODOU_CITY,Common_Movement_FaceDown)
+    waitmovement(PLAYER)
+    msgbox(format("Did you find all the black belts? I think they're on Route 8, Route 1, Gldgtewilds, Route 12, Route 72, Route 17, and Route 43."),MSGBOX_AUTOCLOSE)
+    release
+    end
+}
+
+script Quest_Restorehodoucity_Zac_WaitingBlackbelt_Dialogue{
+    msgbox(format("Did you find all the black belts? I think they're on Route 8, Route 1, Gldgtewilds, Route 12, Route 72, Route 17, and Route 43."),MSGBOX_AUTOCLOSE)
+}
+
+script Quest_Restorehodoucity_Kevin_WaitingBlackbelt_Dialogue{
+    msgbox(format("Did you find all the black belts? I think they're on Route 8, Route 1, Gldgtewilds, Route 12, Route 72, Route 17, and Route 43."),MSGBOX_AUTOCLOSE)
+}
+
+
+script Quest_Restorehodoucity_Waiting_DialogueA_Script{
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    release
+    end
+}
+
+script Quest_Restorehodoucity_Waiting_DialogueB_Script{
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    release
+    end
+}
+
+script Quest_Restorehodoucity_Recruit_Blackbelt_A_Dialogue{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_1)
+        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        addvar(VAR_QUEST_RESTOREHODOUGYM,1)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        release
+        end
+}
+script Quest_Restorehodoucity_Recruit_Blackbelt_B_Dialogue{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_2)
+        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        addvar(VAR_QUEST_RESTOREHODOUGYM,1)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        release
+        end
+}
+script Quest_Restorehodoucity_Recruit_Blackbelt_C_Dialogue{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_3)
+        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        addvar(VAR_QUEST_RESTOREHODOUGYM,1)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        release
+        end
+}
+script Quest_Restorehodoucity_Recruit_Blackbelt_D_Dialogue{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
+        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        addvar(VAR_QUEST_RESTOREHODOUGYM,1)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        release
+        end
+}
+script Quest_Restorehodoucity_Recruit_Blackbelt_E_Dialogue{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_5)
+        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        addvar(VAR_QUEST_RESTOREHODOUGYM,1)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        release
+        end
+}
+script Quest_Restorehodoucity_Recruit_Blackbelt_F_Dialogue{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_6)
+        addvar(VAR_QUEST_RESTOREHODOUGYM,1)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        release
+        end
+}
+script Quest_Restorehodoucity_Recruit_Blackbelt_G_Dialogue{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_7)
+        addvar(VAR_QUEST_RESTOREHODOUGYM,1)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        call(Quest_Restorehodoucity_CheckProgress_Script)
+        release
+        end
+}
+script Quest_Restorehodoucity_CheckProgress_Script{
+    if (var(VAR_QUEST_RESTOREHODOUGYM) == FOUND_ALL_BLACKBELTS){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_RESTOREHODOUGYM)
+    }
+    return
+}
+script Quest_Restorehodoucity_Reward_Dialogue{
+    setvar(VAR_QUEST_RESTOREHODOUGYM,RESTOREHODOU_CITY_COMPLETE)
+    applymovement(PLAYER,Quest_Restorehodoucity_WalkIntoGym_Movement)
+    applymovement(ZAC_HODOU_CITY,Common_Movement_FaceDown)
+    applymovement(KEVIN_HODOU_CITY,Common_Movement_FaceDown)
+    waitmovement(PLAYER)
+    msgbox(gText_ExpandedPlaceholder_Empty)
+    completequest(QUEST_RESTOREHODOUGYM)
+    call(LetsGrabLunch_CheckRestorationProgress_Script)
+    release
+    end
+}
+script Quest_Restorehodoucity_Zac_Complete_Dialogue{
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+}
+script Quest_Restorehodoucity_Kevin_Complete_Dialogue{
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+}
+script Quest_Restorehodoucity_James_Complete_Dialogue{
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+}
+movement Quest_Restorehodoucity_WalkInside_Movement{
+    walk_right
+        walk_up
+        step_end
+}
+
+movement Quest_Restorehodoucity_ExclaimLookDown_Movement{
+    emote_exclamation_mark
+        face_down
+        step_end
+}
+movement Quest_Restorehodoucity_WalkIntoGym_Movement{
+    walk_up * 2
+    step_end
+}

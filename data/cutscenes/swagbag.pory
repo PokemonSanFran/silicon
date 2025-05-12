@@ -1,0 +1,229 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1 //FLAG_TEMP_1
+const OLIVER = 2 //FLAG_TEMP_2
+
+script Swagbag_ObjectSetUp {
+    turnobject(OLIVER, DIR_WEST)
+    setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_RIGHT)
+    setobjectxy(CHARLOTTE,6,4)
+    setobjectxyperm(CHARLOTTE,6,4)
+}
+script Swagbag_IncrementState_Script{
+    setvar(VAR_PLAYER_HOME_STATE,CHECKED_OUT_BEDROOM)
+    return
+}
+
+script swagbag_ObjectHide_Script {
+    setobjectmovementtype(OLIVER, MOVEMENT_TYPE_FACE_RIGHT)
+    turnobject(OLIVER,DIR_EAST)
+    setobjectxy(OLIVER,8,6)
+    setobjectxyperm(OLIVER,8,6)
+    setflag(FLAG_TEMP_1)
+    setflag(FLAG_TEMP_3)
+}
+
+script Swagbag_WelcomeToResido_Dialogue {
+    lockall
+    startcutscene(JUMPPLAYER_SWAGBAG)
+    setvar(VAR_PLAYER_HOME_STATE,POST_SWAGBAG)
+    playse(SE_PIN)
+    playbgm(MUS_RG_FOLLOW_ME,TRUE)
+    applymovement(OLIVER,Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(OLIVER,swagbag_GreetPlayer)
+    msgbox(gText_Swagbag_WelcomeToRegion,,SPEAKER_OLIVER)
+    reveal(REVEAL_OLIVER)
+    msgbox(gText_Swagbag_GreatThePrivateCar,,SPEAKER_ALICIA)
+    msgbox(gText_Swagbag_ExcellentYouveAlready,,SPEAKER_OLIVER)
+
+        closemessage
+        applymovement(CHARLOTTE,swagbag_TurnFaceOliver_Movement)
+        waitmovement(CHARLOTTE)
+        goto(Swagbag_LeagueStipend_Dialogue)
+        end
+}
+
+script Swagbag_LeagueStipend_Dialogue {
+        msgbox(gText_Swagbag_SoFirstYoullEach,,SPEAKER_OLIVER)
+        msgbox(gText_Swagbag_BecauseTheBoard,,SPEAKER_OLIVER,TAIL_WHISPER)
+        closemessage
+        addmoney(50000,0)
+        setflag(FLAG_SYS_STARTER_APPS_GET)
+        goto(Swagbag_PokedexApps_Dialogue)
+        end
+}
+
+script Swagbag_PokedexApps_Dialogue {
+        msgbox(gText_Swagbag_AlsoWeveGoneAhead)
+        msgbox(gText_Swagbag_InvasiveMuch,,SPEAKER_CHARLOTTE)
+        msgbox(gText_Swagbag_WellAskNextTime,,SPEAKER_OLIVER)
+        msgbox(gText_Swagbag_AnotherPerk,,SPEAKER_OLIVER)
+        //msgbox(gText_Swagbag_TeachyTVSoIShould,,SPEAKER_ALICIA)
+        msgbox(gText_Swagbag_Correct,,SPEAKER_OLIVER)
+
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox(gText_Swagbag_PlayerRecivedMoney)
+        waitmessage
+        waitfanfare
+        goto(Swagbag_WhenCanWeStart_Dialogue)
+}
+
+script Swagbag_WhenCanWeStart_Dialogue {
+        msgbox(gText_Swagbag_IBelieveThatsEverything,,SPEAKER_OLIVER)
+        msgbox(gText_Swagbag_YeahWhenTheTutorial,,SPEAKER_CHARLOTTE)
+        msgbox(gText_Swagbag_TheGymChallengeOfficially,,SPEAKER_OLIVER)
+        msgbox(gText_Swagbag_FineIllExploreTheCity,,SPEAKER_CHARLOTTE)
+        closemessage
+
+        applymovement(CHARLOTTE,swagbag_LeaveCompound)
+        waitmovement(0)
+        playse(SE_EXIT)
+        removeobject(CHARLOTTE)
+        goto(Swagbag_DontLeaveCuconuTown_Dialogue)
+}
+
+script Swagbag_DontLeaveCuconuTown_Dialogue {
+        msgbox(gText_Swagbag_IllBeWorkingOnMyLaptop,,SPEAKER_OLIVER)
+        msgbox(gText_Swagbag_GotItThanks,,SPEAKER_ALICIA)
+        closemessage
+
+        applymovement(OLIVER,swagbag_WalkToLaptop)
+        waitmovement(0)
+        fadedefaultbgm
+        startquest(QUEST_PLAYERSADVENTURE)
+        endcutscene
+        call(TryAutoSave)
+        releaseall
+        end
+}
+
+script swagbag_HelpPlayer_Script {//TODO Set up actual question a answer for Oliver here
+        msgbox(gText_Swagbag_InTheActualGame,MSGBOX_NPC,SPEAKER_OLIVER)
+
+        applymovement(OLIVER,Common_Movement_FaceRight)
+        waitmovement(0)
+        return
+}
+
+script swagbag_PreventPlayerLeavingCuconuTown_Event_Script {
+    lock
+    msgbox(gText_DontLeaveCuconuTown_Text1,,SPEAKER_ALICIA)
+
+    closemessage
+    applymovement(PLAYER,swagbag_WalkBackwards)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+text gText_Swagbag_WelcomeToRegion {
+    format("{PLAYER}! Welcome to Resido! How was your flight?")
+}
+
+text gText_Swagbag_GreatThePrivateCar {
+    format("Great! The Premium Arriba pickup from the airport was a surprise, but everything was super smooth, thanks!")
+}
+
+text gText_Swagbag_ExcellentYouveAlready {
+    format("Excellent. You've already seen the house, so we can skip the tour... I have some presents!")
+}
+
+text gText_Swagbag_SoFirstYoullEach {
+    format("So first, you'll each be getting a stipend from the League, which should be hitting your accounts soon. That money is yours, no strings attached, so do whatever you like with it. Just don't spend it all in one place!")
+}
+
+text gText_Swagbag_BecauseTheBoard {
+    format("Because accounting absolutely won't let us give you any more...")
+}
+
+text gText_Swagbag_AlsoWeveGoneAhead {
+    format("Next, we've gone ahead and loaded the newest OS onto your phones last night.")
+}
+
+text gText_Swagbag_InvasiveMuch {
+    format("Invasive much?")
+}
+
+text gText_Swagbag_WellAskNextTime {
+    format("Ha ha, we'll ask next time. Now you'll be able to see your League profile and a map of the region.")
+}
+
+text gText_Swagbag_AnotherPerk {
+    format("Another perk: you'll get access to some of the newest bleeding edge apps. We're excited for you to try out Quest Log, which should help keep you organized. As a members of our program, you've also got access to our private Pokédex build, which should prove to be very useful!")
+}
+
+text gText_Swagbag_TeachyTVSoIShould {
+    format("Teachy TV... so I should use that if I have a question or get stuck?")
+}
+
+text gText_Swagbag_Correct {
+    //format("Right! Maps works very well in Resido, and is another available app on your phone. You can press {START_BUTTON} to access all \lof your apps.")
+    format("You can press {START_BUTTON}\nto access all of your apps.")
+}
+
+text gText_Swagbag_PlayerRecivedMoney {
+    format("{PLAYER} received ¥50000, and updated phone apps from Oliver.")
+}
+
+text gText_Swagbag_IBelieveThatsEverything {
+    format("I believe that's everything. Questions?")
+}
+
+text gText_Swagbag_YeahWhenTheTutorial {
+    format("We can't start until tomorrow?")
+}
+
+text gText_Swagbag_TheGymChallengeOfficially {
+    format("Correct, the Gym Challenge officially starts tomorrow. I suggest you get a good night's sleep, and over breakfast, I'll explain how it all works.")
+}
+
+text gText_Swagbag_FineIllExploreTheCity {
+    format("...fine. I'll explore the city a bit! Maybe I'll see you around, {PLAYER}.")
+}
+
+text gText_Swagbag_IllBeWorkingOnMyLaptop {
+    format("{PLAYER}, I'll be working on my laptop here for the next few hours. If you've got any questions, don't be afraid to ask. It's fine if you explore, but don't leave CuconuTown, okay?")
+}
+
+text gText_Swagbag_GotItThanks {
+    format("Got it. Thanks for all the help, Oliver! I'm still so stoked for the opportunity and the Challenge!")
+}
+
+text gText_Swagbag_InTheActualGame {
+    format("In the actual game, this will be a list of questions that the player can ask and getr answers to. Tutorial level shit.")
+}
+
+text gText_DontLeaveCuconuTown_Text1 {
+    format("Oliver mentioned that I shouldn't leave CuconuTown yet! Maybe I should get some sleep...")
+}
+
+movement swagbag_TurnFaceOliver_Movement{
+    walk_up * 2
+    face_down
+    step_end
+}
+
+movement swagbag_GreetPlayer {
+    face_up
+        walk_up
+        delay_16
+        step_end
+}
+
+movement swagbag_LeaveCompound {
+        walk_down * 7
+        step_end
+}
+
+movement swagbag_WalkToLaptop {
+        walk_down * 3
+        walk_right
+        step_end
+}
+
+movement swagbag_WalkBackwards {
+    lock_facing_direction
+    walk_down
+    unlock_facing_direction
+    step_end
+}

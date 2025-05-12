@@ -1,0 +1,610 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ALEKSANDER = 1
+const SUMMER = 2
+const KEIYING = 3
+const CRYING_MAID = 4
+const CAMERA = OBJ_EVENT_ID_CAMERA
+
+script KeiyingRaisonDetre_HideObjectKids_Script {
+    setflag(FLAG_TEMP_1)
+}
+
+script KeiyingRaisonDetre_HideObjectMaid_Script {
+    setflag(FLAG_TEMP_2)
+}
+
+script KeiyingRaisonDetre_ObjectCleanUp_Script {
+    setflag(FLAG_TEMP_1)
+        setflag(FLAG_TEMP_2)
+}
+
+script KeiyingRaisonDetre_MoveIntoFoyer_Script {
+    lock
+        startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
+        setvar(VAR_KEIYING_RAISON_DETRE_STATE,MET_KEIYING_KIDS)
+        applymovement(ALEKSANDER, KeiyingRaisonDetre_ComeDownStairs)
+        delay(48)
+        applymovement(SUMMER, KeiyingRaisonDetre_ComeDownStairs)
+        waitmovement(0)
+        release
+        goto(KeiyingRaisonDetre_KidsMeetPlayer_Dialogue)
+        end
+}
+
+script KeiyingRaisonDetre_KidsMeetPlayer_Dialogue {
+    msgbox(gText_KeiyingRaisonDetre_YoureHereInTheFlesh,,SPEAKER_ALEKSANDER)
+        msgbox(gText_KeiyingRaisonDetre_YoureAFreak,,SPEAKER_SUMMER)
+        closemessage
+
+        applymovement(ALEKSANDER, KeiyingRaisonDetre_RunAroundPlayer)
+
+        msgbox(gText_KeiyingRaisonDetre_MaybeTheyllSign,,SPEAKER_ALEKSANDER)
+        msgbox(gText_KeiyingRaisonDetre_ShutUp,,SPEAKER_SUMMER)
+        msgbox(gText_KeiyingRaisonDetre_ShowUsHowYouTookDown,,SPEAKER_ALEKSANDER)
+        msgbox(gText_KeiyingRaisonDetre_AllRightAllRight,,SPEAKER_KEIYING)
+        applymovement(KEIYING, KeiyingRaisonDetre_WalkIntoFoyer)
+        msgbox(gText_KeiyingRaisonDetre_YouDontWantToScare,,SPEAKER_KEIYING)
+        msgbox(gText_KeiyingRaisonDetre_GonnaGoGet,,SPEAKER_ALEKSANDER)
+        closemessage
+        applymovement(ALEKSANDER, KeiyingRaisonDetre_RunUpstairs)
+        waitmovement(0)
+        msgbox(gText_KeiyingRaisonDetre_SorryAboutThat,,SPEAKER_KEIYING)
+        applymovement(SUMMER, Common_Movement_FaceLeft)
+        waitmovement(0)
+        msgbox(gText_KeiyingRaisonDetre_Dad,,SPEAKER_SUMMER)
+        closemessage
+        applymovement(SUMMER, KeiyingRaisonDetre_RunUpstairs)
+        waitmovement(0)
+        removeobject(SUMMER)
+        removeobject(ALEKSANDER)
+        goto(KeiyingRaisonDetre_CityDiscussion_Dialogue)
+        end
+}
+
+script KeiyingRaisonDetre_CityDiscussion_Dialogue {
+    applymovement(PLAYER, KeiyingRaisonDetre_WalkFromEntrance)
+        waitmovement(0)
+        msgbox(gText_KeiyingRaisonDetre_YourHouseIsBeautiful,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_ItWasImportantToMe,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_ButItsHardToJustify,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_IveBeenStruggling,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_ItsBeenSaidThat,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_ToughToBeAround,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_ICompletelyUnderstand,,SPEAKER_KEIYING)
+        closemessage
+
+        applymovement(KEIYING, KeiyingRaisonDetre_WalkTowardsLiving)
+        waitmovement(0)
+
+        msgbox(gText_KeiyingRaisonDetre_ItsMuchEasier,,SPEAKER_KEIYING)
+        closemessage
+        applymovement(KEIYING, KeiyingRaisonDetre_WalkToDining)
+        waitmovement(0)
+        setobjectxy(KEIYING, 3, 4)
+        setobjectxyperm(KEIYING, 3, 4)
+        turnobject(KEIYING, DIR_EAST)
+        release
+        end
+}
+
+script KeiyingRaisonDetre_ComeSit_Dialogue {
+    lock
+        msgbox(gText_KeiyingRaisonDetre_ComeSit, MSGBOX_NPC,SPEAKER_KEIYING)
+        setvar(VAR_KEIYING_RAISON_DETRE_STATE, START_KEIYING_WINE_SPEECH)
+        closemessage
+        release
+        end
+}
+
+script KeiyingRaisonDetre_InteractAtTable_Script {
+    lock
+        msgbox(gText_KeiyingRaisonDetre_IPickedOut,,SPEAKER_KEIYING)
+        closemessage
+        release
+        end
+}
+
+script KeiyingRaisonDetre_Wine_Dialogue {
+        startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
+    applymovement(PLAYER, Common_Movement_FaceLeft)
+        waitmovement(0)
+
+        msgbox(gText_KeiyingRaisonDetre_HowMuch,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_ThatLastPartIsImportant,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_Shareholders,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_YeahTheCorporate,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_WhatDoYouMean,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_DoYouKnowHow,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_IsntItMostly,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_UsedToBe,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_WoahWaitBigger,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_PeopleLoveBattles,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_TheBroadcasts,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_MyKidsBeingObsessed,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_WereGoingToMake,,SPEAKER_KEIYING)
+
+        applymovement(KEIYING,Common_Movement_FaceAwayPlayer)
+        waitmovement(KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_IPray,,SPEAKER_KEIYING)
+
+        msgbox(gText_KeiyingRaisonDetre_WhatWasThat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        closemessage
+        playse(SE_DING_DONG)
+        waitfanfare
+
+        msgbox(gText_KeiyingRaisonDetre_DinnerIsServed,,SPEAKER_MAID)
+
+        msgbox(gText_KeiyingRaisonDetre_AhLetsEat,,SPEAKER_KEIYING)
+        closemessage
+        applymovement(KEIYING, WalkToDiningRoom)
+        waitmovement(0)
+        release
+        setobjectxy(KEIYING, 37, 5)
+        setobjectxyperm(KEIYING, 37, 5)
+        setvar(VAR_KEIYING_RAISON_DETRE_STATE,POST_KEIYING_WINE_SPEECH)
+        call(TryAutoSave)
+        endcutscene
+        end
+}
+
+script KeiyingRaisonDetre_StartDinner_Script {
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+
+        if (var (VAR_TEMP_0) == 36) {
+            applymovement(PLAYER, WalkToTableFromLeft)
+        } else {
+            applymovement(PLAYER, WalkToTableFromRight)
+        }
+    waitmovement(0)
+        startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
+
+        msgbox(gText_KeiyingRaisonDetre_WereHonoredToHaveYou,,SPEAKER_KEIYING)
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        addobject(ALEKSANDER)
+        addobject(SUMMER)
+        setobjectxy(SUMMER, 42, 7)
+        setobjectxy(ALEKSANDER, 40, 7)
+        setobjectxy(KEIYING, 37, 5)
+        turnobject(SUMMER, DIR_NORTH)
+        turnobject(ALEKSANDER, DIR_NORTH)
+        goto(KeiyingRaisonDetre_DinnerConversation_Dialogue)
+        end
+}
+
+script KeiyingRaisonDetre_DinnerConversation_Dialogue {
+    special(SpawnCameraObject)
+        setvar(VAR_0x8004, 37)
+        setvar(VAR_0x8005, 5)
+        special(TeleportCamera)
+        special(DrawWholeMapView)
+        fadescreen(FADE_FROM_BLACK)
+        applymovement(CAMERA, KeiyingRaisonDetre_PanCamera)
+        msgbox(gText_KeiyingRaisonDetre_YourDadIsRed,,SPEAKER_ALEKSANDER)
+        closemessage
+        msgbox(gText_KeiyingRaisonDetre_HowManyBadges,,SPEAKER_ALEKSANDER)
+        closemessage
+        bufferitemnameplural(STR_VAR_1,ITEM_LAVA_COOKIE,2)
+        msgbox(gText_KeiyingRaisonDetre_DoIHaveToEat,,SPEAKER_SUMMER)
+        closemessage
+		waitmovement(CAMERA)
+        fadescreen(FADE_TO_BLACK)
+        TeleportCamera(43,5)
+        special(RemoveCameraObject)
+        delay(60)
+        playse(SE_POKENAV_CALL)
+        waitse
+        fadescreen(FADE_FROM_BLACK)
+        goto(KeiyingRaisonDetre_RunToWork_Dialogue)
+        release
+        end
+}
+
+script KeiyingRaisonDetre_RunToWork_Dialogue {
+
+    msgbox(gText_KeiyingRaisonDetre_SorryThatsMyPhone,,SPEAKER_KEIYING)
+        closemessage
+        applymovement(KEIYING, KeiyingRaisonDetre_StepAwayFromTable)
+        waitmovement(0)
+        applymovement(KEIYING, Common_Movement_FaceLeft)
+        waitmovement(0)
+        delay(32)
+        applymovement(KEIYING, Common_Movement_FaceRight)
+        waitmovement(0)
+        msgbox(gText_KeiyingRaisonDetre_ShitTheresAnUrgent,,SPEAKER_KEIYING)
+        msgbox(gText_KeiyingRaisonDetre_IWouldHate,,SPEAKER_KEIYING)
+        msgbox(gText_KeiyingRaisonDetre_OhThanks,,SPEAKER_ALICIA,,EMOTE_HAPPY)
+        closemessage
+
+        applymovement(KEIYING, KeiyingRaisonDetre_KissKids)
+        waitmovement(0)
+
+        msgbox(gText_KeiyingRaisonDetre_WaitIThoughtThat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_YeahItDoes,,SPEAKER_SUMMER)
+        msgbox(gText_KeiyingRaisonDetre_What,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_TonOfMoneyInWarp,,SPEAKER_SUMMER)
+
+        msgbox(gText_KeiyingRaisonDetre_OhDamnYouWerent,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_IDontKnowWhy,,SPEAKER_SUMMER)
+        closemessage
+        applymovement(SUMMER, KeiyingRaisonDetre_LeaveDiningRoom)
+        waitmovement(0)
+        fadescreen(FADE_TO_BLACK)
+        removeobject(SUMMER)
+        removeobject(ALEKSANDER)
+        msgbox("The next morning…")
+        closemessage
+        goto(KeiyingRaisonDetre_NewsStory_Script)
+        end
+}
+
+script KeiyingRaisonDetre_NewsStory_Script {
+    setobjectxy(CRYING_MAID, 44, 4)
+        turnobject(CRYING_MAID, DIR_NORTH)
+        turnobject(5, DIR_NORTH)
+        setobjectnewmovementtype(CRYING_MAID, MOVEMENT_TYPE_FACE_UP)
+        setobjectnewmovementtype(5, MOVEMENT_TYPE_FACE_UP)
+        lockall
+        fadescreen(FADE_FROM_BLACK)
+        special(TurnOnTVScreen)
+        delay(60)
+        msgbox(gText_KeiyingRaisonDetre_AndNowWeGoTo,,SPEAKER_NEWS)
+        msgbox(gText_KeiyingRaisonDetre_ThanksKen,,SPEAKER_NEWS_B)
+        msgbox(gText_KeiyingRaisonDetre_WereAlsoLearningThat,,SPEAKER_NEWS)
+        closemessage
+        special(TurnOffTVScreen)
+        applymovement(4, WalkToThePlayer)
+        waitmovement(0)
+
+        msgbox(gText_KeiyingRaisonDetre_IsThereSobAnyhingElse,,SPEAKER_MAID)
+        applymovement(PLAYER, Common_Movement_FaceUp)
+        waitmovement(0)
+
+        msgbox(gText_KeiyingRaisonDetre_AreYouOkay,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_KeiyingRaisonDetre_MySobSonIsInTheICU,,SPEAKER_MAID)
+        closemessage
+        applymovement(CRYING_MAID, KeiyingRaisonDetre_LeaveDiningRoomCrying)
+        waitmovement(0)
+        removeobject(CRYING_MAID)
+        removeobject(KEIYING)
+        addvar(VAR_STORYLINE_STATE,1)
+        setvar(VAR_KEIYING_RAISON_DETRE_STATE, POST_KEIYING_RAISON_DETRE)
+        setvar(VAR_KEIYING_MANSION_STATE,FINISHED_KEIYING_RAISON) //PSF TODO replace with a flag
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script KeiyingRaisonDetre_PreventPlayerLeaving_Script {
+    if (var(VAR_KEIYING_RAISON_DETRE_STATE) < POST_KEIYING_RAISON_DETRE){
+        msgbox(gText_KeiyingRaisonDetre_HasBeenSoGenerous,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+            closemessage
+            applymovement(PLAYER, Common_Movement_WalkUp)
+            waitmovement(0)
+    }
+    release
+        end
+}
+
+text gText_KeiyingRaisonDetre_HasBeenSoGenerous {
+    format("Keiying has been so generous... I should stay.")
+}
+
+text gText_KeiyingRaisonDetre_HasBeenExpectingYou {
+    format("{PLAYER}, KEIYING has been expecting you.")
+}
+text gText_KeiyingRaisonDetre_YoureHereInTheFlesh {
+    format("Aaaahhhh! {PLAYER}! You're here! In the flesh!")
+}
+text gText_KeiyingRaisonDetre_YoureAFreak {
+    format("…Alek, you're a freak.")
+}
+text gText_KeiyingRaisonDetre_MaybeTheyllSign {
+    format("Aren't you excited Summer?! Maybe they'll sign your {PLAYER} shirt! ")
+}
+text gText_KeiyingRaisonDetre_ShutUp {
+    format("…shut up!")
+}
+text gText_KeiyingRaisonDetre_ShowUsHowYouTookDown {
+    format("Oh oh oh, show us how you took down Belen! Can we see some battle moves? Oh come on yes, let's battle, right now, yeah yeah yeah!")
+}
+text gText_KeiyingRaisonDetre_AllRightAllRight {
+    format("All right, all right, calm down. I told you you'd have to stifle your excitement, didn't I?")
+}
+text gText_KeiyingRaisonDetre_YouDontWantToScare {
+    format("You don't want to scare {PLAYER} away, do you?")
+}
+text gText_KeiyingRaisonDetre_GonnaGoGet {
+    format("No no no! Oh, I'm gonna go get all my League stuff, I'll be right back!")
+}
+text gText_KeiyingRaisonDetre_SorryAboutThat {
+    format("Sorry about that. They get… very excited. And don't let Summer's demeanor fool you. I think they've watched your battle against Emrys at least 40 times.")
+}
+text gText_KeiyingRaisonDetre_Dad {
+    format("Dad!")
+}
+text gText_KeiyingRaisonDetre_YourHouseIsBeautiful {
+    format("Your house is beautiful. Actually, the entire city is beautiful.")
+}
+text gText_KeiyingRaisonDetre_ItWasImportantToMe {
+    format("Thank you. It was important to me that I raised my family in PetarosaBorough. Most SharpriseCapital employees want to be in the city - close to the office and the nightlife. ")
+}
+text gText_KeiyingRaisonDetre_ButItsHardToJustify {
+    format("But it's hard to justify raising a family there. It's expensive on this side, sure, but it's less dangerous… and not suffering as much.")
+}
+text gText_KeiyingRaisonDetre_IveBeenStruggling {
+    format("I've been struggling to find the right word for it, but, yeah, suffering sounds right. I've met so many people who are having a really rough time.")
+}
+text gText_KeiyingRaisonDetre_ItsBeenSaidThat {
+    format("I've noticed that Charlotte doesn't quite see the region the way you do! I admire your compassion.")
+}
+text gText_KeiyingRaisonDetre_ToughToBeAround {
+    format("Do I really deserve all of this just because I'm decent at battles?")
+}
+text gText_KeiyingRaisonDetre_ICompletelyUnderstand {
+    format("I completely understand, trust me. When I worked in HodouCity, it wasn't this bad, but despite my best efforts, things have gotten worse.")
+}
+text gText_KeiyingRaisonDetre_ItsMuchEasier {
+    format("Come, let's talk.")
+}
+text gText_KeiyingRaisonDetre_ComeSit {
+    format("Over here!")
+}
+text gText_KeiyingRaisonDetre_IPickedOut {
+    format("Take a seat.")
+}
+text gText_KeiyingRaisonDetre_HowMuch {
+    format("How much do you know about Adelaide?")
+}
+
+text gText_KeiyingRaisonDetre_ThatLastPartIsImportant {
+    format("They don't have deep roots here, but they're a brilliant business person. I don't always see eye to eye with them, but they've never let down a shareholder.")
+}
+
+text gText_KeiyingRaisonDetre_Shareholders{
+    format("What shareholders?")
+}
+
+text gText_KeiyingRaisonDetre_YeahTheCorporate{
+    format("The corporate sponsors who helped us acquire the Pokémon League. Adelaide saw its potential and knew we could make it even bigger. Presto, Arriba and Buzzr all quickly got on board.")
+}
+text gText_KeiyingRaisonDetre_WhatDoYouMean {
+    format("What do you mean?")
+}
+text gText_KeiyingRaisonDetre_DoYouKnowHow {
+    format("Do you know how the Kanto region makes the majority of its revenue?")
+}
+text gText_KeiyingRaisonDetre_IsntItMostly {
+    format("Isn't it mostly manufacturing?")
+}
+text gText_KeiyingRaisonDetre_UsedToBe{
+    format("Used to be. But after Red took the League by storm back in '96, the League has been the primary economic driver. Revenue from the Pokémon League is about to eclipse tourism in Alola too.")
+}
+text gText_KeiyingRaisonDetre_WoahWaitBigger {
+    format("Woah wait, bigger than Alolan tourism?")
+}
+text gText_KeiyingRaisonDetre_PeopleLoveBattles {
+    format("People love Pokémon battles. Adelaide knew if we used our resources to create a compelling product, we wouldn't need Dynamax or League HQs built into cathedrals. We've got what the people want to see.")
+}
+text gText_KeiyingRaisonDetre_TheBroadcasts {
+    format("The broadcasts?")
+}
+text gText_KeiyingRaisonDetre_MyKidsBeingObsessed {
+    format("Yes. My kids being obsessed with you isn't an accident. We're building rock stars.")
+}
+text gText_KeiyingRaisonDetre_WereGoingToMake {
+    format("SharpriseCapital is going to make Resido the region where Trainers come to become rock stars. Resido's new talent will attract the best and the brightest, and the region will be richer for it. We can uplift all of Resido's citizens to something much much greater. You're an investment, {PLAYER}, but it's all part of a much bigger play.")
+}
+text gText_KeiyingRaisonDetre_IPray{
+    format("I choose to believe that this is for the greater good.") //PSF TODO EMOTE sigh
+}
+text gText_KeiyingRaisonDetre_WhatWasThat {
+    format("What did you sa -")
+}
+text gText_KeiyingRaisonDetre_DinnerIsServed {
+    format("Dinner is served!")
+}
+text gText_KeiyingRaisonDetre_AhLetsEat{
+    format("Ah, let's eat!")
+}
+text gText_KeiyingRaisonDetre_WereHonoredToHaveYou {
+    format("{PLAYER}, we're honored to have you in our home. Enjoy dinner!")
+}
+text gText_KeiyingRaisonDetre_YourDadIsRed {
+    format("Is it true your dad is Red from Pallet Town?")
+}
+text gText_KeiyingRaisonDetre_HowManyBadges {
+    format("How many badges did you have in Orre?")
+}
+text gText_KeiyingRaisonDetre_DoIHaveToEat {
+    format("Dad, I was right, {PLAYER} does like {STR_VAR_1}!")
+}
+text gText_KeiyingRaisonDetre_SorryThatsMyPhone {
+    format("Sorry, that's my phone and I need to take that.")
+}
+text gText_KeiyingRaisonDetre_ShitTheresAnUrgent {
+    format("Shit, there's an urgent matter at work. I'm so sorry kids, I'll try to hurry back.")
+}
+
+text gText_KeiyingRaisonDetre_IWouldHate
+{
+    format("{PLAYER}, I would hate to have you make the trek back to CuconuTown this late. We have a guest room, if you'd like to stay here.")
+}
+
+text gText_KeiyingRaisonDetre_OhThanks
+{
+    format("Oh, that would be great, thanks!")
+}
+
+text gText_KeiyingRaisonDetre_WaitIThoughtThat {
+    format("Wait, I thought that hallway just goes upstairs?")
+}
+text gText_KeiyingRaisonDetre_YeahItDoes {
+    format("Yeah, it does. Daddy just teleports to work!")
+}
+text gText_KeiyingRaisonDetre_What {
+    format("…what?")
+}
+text gText_KeiyingRaisonDetre_TonOfMoneyInWarp {
+    format("SharpriseCapital has a ton of money in warp tiles. All the executives have panels from their house to their office installed. He literally teleports to work, everyday.")
+}
+text gText_KeiyingRaisonDetre_OhDamnYouWerent {
+    format("Oh damn, you weren't kidding.")
+}
+text gText_KeiyingRaisonDetre_IDontKnowWhy {
+    format("I don't know why they bother. Our parents are never even home. They're trying so hard to save the world, they're totally ignoring the one right in front of them.\NI wish he would go back to being a Gym Leader!")
+}
+text gText_KeiyingRaisonDetre_AndNowWeGoTo {
+    format("And now we go to Da Lin, for more details about last night's riots. ")
+}
+text gText_KeiyingRaisonDetre_ThanksKen {
+    format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of TheTide, culminating in violent attacks on the CapheCity Police Force. Both sides sustained significant injury, and dozens of members of TheTide were taken into custody last night. Back to you, Ken.")
+}
+text gText_KeiyingRaisonDetre_WereAlsoLearningThat {
+    format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing TheTide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour.")
+}
+text gText_KeiyingRaisonDetre_IsThereSobAnyhingElse {
+    format("Is there anything else I can get you, Lord {PLAYER}?") //PSF TODO EMOTE sob
+}
+text gText_KeiyingRaisonDetre_AreYouOkay {
+    format("Are you okay? What's wrong?")
+}
+text gText_KeiyingRaisonDetre_MySobSonIsInTheICU {
+    format("I'm sorry. My… son is in the ICU after the riots last night. TheTide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!") //PSF TODO EMOTE sob
+}
+movement KeiyingRaisonDetre_ComeDownStairs {
+    walk_down * 4
+        step_end
+}
+
+movement KeiyingRaisonDetre_RunAroundPlayer {
+    jump_2_left
+        jump_2_right
+        jump_2_left
+        jump_2_right
+        jump_2_left
+        jump_2_right
+        jump_2_left
+        jump_2_right
+        jump_2_left
+        jump_2_right
+        jump_2_left
+        jump_2_right
+        jump_2_left
+        jump_2_right
+        face_left
+        step_end
+}
+
+movement KeiyingRaisonDetre_WalkIntoFoyer {
+    walk_down * 4
+        step_end
+}
+
+movement KeiyingRaisonDetre_RunUpstairs {
+    walk_up * 7
+        step_end
+}
+
+movement KeiyingRaisonDetre_WalkFromEntrance {
+    walk_up
+        walk_left * 2
+        walk_up
+        step_end
+}
+
+movement KeiyingRaisonDetre_WalkTowardsLiving {
+    walk_up
+        face_down
+        step_end
+}
+
+movement KeiyingRaisonDetre_WalkToDining {
+    walk_left * 8
+        step_end
+}
+
+movement WalkToDiningRoom {
+    walk_down * 6
+        step_end
+}
+
+movement WalkToTableFromLeft {
+    walk_up
+        walk_right * 9
+        walk_up * 4
+        face_left
+        step_end
+}
+
+movement WalkToTableFromRight {
+    walk_up
+        walk_right * 8
+        walk_up * 4
+        face_left
+        step_end
+}
+
+movement KeiyingRaisonDetre_PanCamera {
+    walk_slow_right * 6
+        step_end
+}
+
+movement KeiyingRaisonDetre_StepAwayFromTable {
+    walk_left
+        step_end
+}
+
+movement KeiyingRaisonDetre_KissKids {
+    walk_down * 3
+        walk_right * 5
+        walk_up
+        walk_in_place_slow_left
+        delay_16
+        walk_in_place_slow_right
+        delay_16
+        walk_down
+        walk_left * 6
+        step_end
+}
+
+movement KeiyingRaisonDetre_LeaveDiningRoom {
+    walk_down
+        walk_left * 5
+        step_end
+}
+
+movement WalkToThePlayer {
+    walk_right
+        face_down
+        step_end
+}
+
+movement KeiyingRaisonDetre_LeaveDiningRoomCrying {
+    walk_up * 2
+        walk_faster_left * 8
+}

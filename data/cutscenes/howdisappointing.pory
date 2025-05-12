@@ -1,0 +1,732 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const POLICEA = 1
+const POLICEB = 2
+const POLICE_MON = 3
+const CHIEF = 4
+const ADAORA = 5
+const GRUNTA = 6
+const GRUNTB = 7
+
+const FLAG_HIDE_POLICE = FLAG_TEMP_1
+const FLAG_HIDE_CHIEF = FLAG_TEMP_4
+const FLAG_HIDE_GRUNTA = FLAG_TEMP_5
+const FLAG_HIDE_GRUNTB = FLAG_TEMP_7
+const FLAG_HIDE_ADAORA = FLAG_TEMP_9
+
+script HowDisappointing_ManageObject_Script
+{
+    switch (var(VAR_HOWDISAPPOINTING_STATE))
+
+   {
+        case MISSION_ASSIGNED: call(HowDisappointing_HideTheTide_Script)
+        case GRUNT1_ARRESTED:
+        case GRUNT2_ARRESTED:
+        case GYM_RAID_STARTED: call(HowDisappointing_MidMission_HideObjects_Script)
+        case SAVED_BEFORE_ADAORA:
+        default: call(HowDisappointing_HideAll_Script)
+    }
+    return
+}
+
+script HowDisappointing_MidMission_HideObjects_Script
+{
+    call(HowDisappointing_HidePoliceShowGrunts)
+    call(HowDisappointing_HideGrunt_Script)
+    call(HowDisappointing_CheckProgressAdaoraVisible_Script)
+    return
+}
+
+script HowDisappointing_HideGrunt_Script
+{
+    if (defeated(TRAINER_HOWDISAPPOINTING_GRUNT1))
+
+   {
+        setflag(FLAG_HIDE_GRUNTA)
+    }
+    if (defeated(TRAINER_HOWDISAPPOINTING_GRUNT2))
+
+   {
+        setflag(FLAG_HIDE_GRUNTB)
+    }
+    return
+}
+
+script HowDisappointing_HideGruntA_Script
+{
+    setflag(FLAG_HIDE_GRUNTA)
+    return
+}
+
+script HowDisappointing_HideGruntB_Script
+{
+    setflag(FLAG_HIDE_GRUNTB)
+    return
+}
+
+script HowDisappointing_CheckProgressAdaoraVisible_Script
+{
+    if (!defeated(TRAINER_HOWDISAPPOINTING_GRUNT1) || !defeated(TRAINER_HOWDISAPPOINTING_GRUNT2))
+
+   {
+        call(HowDisappointing_HideAdaora_Script)
+        return
+    }
+    call(HowDisappointing_ShowAdaora_Script)
+    return
+}
+
+script HowDisappointing_ShowAdaora_Script
+{
+    clearflag(FLAG_HIDE_ADAORA)
+    addobject(ADAORA)
+    return
+}
+
+script HowDisappointing_HideAdaora_Script
+{
+    setflag(FLAG_HIDE_ADAORA)
+    return
+}
+
+script HowDisappointing_HideAll_Script
+{
+    setflag(FLAG_HIDE_POLICE)
+    setflag(FLAG_HIDE_CHIEF)
+    call(HowDisappointing_HideTheTide_Script)
+    return
+}
+
+script HowDisappointing_HideTheTide_Script
+{
+    setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_MEW)
+    call(HowDisappointing_HideAdaora_Script)
+    call(HowDisappointing_HideGruntA_Script)
+    call(HowDisappointing_HideGruntB_Script)
+    return
+}
+
+script HowDisappointing_ShowTheTide_Script
+{
+    call(HowDisappointing_ShowAdaora_Script)
+    call(HowDisappointing_ShowGruntA_Script)
+    call(HowDisappointing_ShowGruntB_Script)
+    return
+}
+
+script HowDisappointing_ShowGruntA_Script
+{
+    clearflag(FLAG_HIDE_GRUNTA)
+    return
+}
+
+script HowDisappointing_ShowGruntB_Script
+{
+    clearflag(FLAG_HIDE_GRUNTB)
+    return
+}
+
+script HowDisappointing_HidePolice_Script
+{
+    setflag(FLAG_HIDE_POLICE)
+    setflag(FLAG_HIDE_CHIEF)
+    return
+}
+
+script HowDisappointing_HidePoliceShowGrunts
+{
+    call(HowDisappointing_HidePolice_Script)
+    setobjectxy(ADAORA,35,20)
+    setobjectxyperm(ADAORA,35,20)
+    setobjectxy(GRUNTA,37,0)
+    setobjectxyperm(GRUNTA,37,0)
+    turnobject(GRUNTA,DIR_WEST)
+    setobjectxy(GRUNTB,17,16)
+    setobjectxyperm(GRUNTB,17,16)
+    turnobject(GRUNTA,DIR_EAST)
+    return
+}
+
+script HowDisappointing_DeterminePlayerPath_Script
+{
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        if(var(VAR_TEMP_1) > 5)
+        {
+            applymovement(PLAYER,Common_Movement_WalkLeft)
+        }
+        else
+        {
+            applymovement(PLAYER,Common_Movement_WalkDown)
+        }
+        fadescreen(FADE_TO_BLACK)
+    waitmovement(PLAYER)
+        setobjectxy(PLAYER,28,9)
+        turnobject(PLAYER,DIR_NORTH)
+        TeleportCamera(28,9)
+        fadescreen(FADE_FROM_BLACK)
+        return
+}
+
+script HowDisappointing_StartRaid_Dialogue
+{
+  lock
+  startcutscene(JUMPPLAYER_HOWDISAPPOINTING_RAID)
+  call(HowDisappointing_DeterminePlayerPath_Script)
+
+  msgbox(format("Thanks for joining us {PLAYER}. Now, this operation is going to be pretty straightforward. We’re walking in, warrant in hand, and arresting terrorists on sight. We suspect there’s a hidden room or something, and they’ll start running out of there as soon as we show up. That’s where our Champion comes into play."))
+
+  msgbox(format("Once they try to give us the slip, you’ll be in charge of hunting down the escaped members. We suspect they’ll flee into the city, and that's where you get after 'em. You don’t have to perform any arrests, just subdue them long enough for an officer to grab ‘em. Make sense, ya’ll?"))
+  closemessage
+
+applymovement(POLICEA,Common_Movement_WalkInPlaceUp)
+applymovement(POLICEB,Common_Movement_WalkInPlaceUp)
+applymovement(POLICE_MON,Common_Movement_WalkInPlaceUp)
+msgbox(format("Yes sir!"))
+waitmovement(POLICE_MON)
+
+msgbox(format("Oh, and Champion?"))
+
+msgbox(format("Yeah?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+
+msgbox(format("Try to not let the leaders go this time, okay?"))
+
+msgbox(format("…yeah."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+
+msgbox(format("Hehehehehe."))
+closemessage
+goto(HowDisappointing_RaidMovement_Script)
+}
+script HowDisappointing_MoveRaidIntoPosition_Script
+{
+    setobjectxy(POLICEA,20,5)
+    setobjectxy(POLICEB,21,5)
+    setobjectxy(POLICE_MON,23,5)
+    setobjectxy(PLAYER,24,5)
+    TeleportCamera(24,5)
+    setobjectxy(CHIEF,22,4)
+}
+script HowDisappointing_ClearRocketFlags_Script
+{
+clearflag(FLAG_HIDE_ADAORA)
+clearflag(FLAG_HIDE_GRUNTA)
+clearflag(FLAG_HIDE_GRUNTB)
+return
+}
+script HowDisappointing_RaidMovement_Script
+{
+    fadescreen(FADE_TO_BLACK)
+    call(HowDisappointing_MoveRaidIntoPosition_Script)
+    delay(16)
+    fadescreen(FADE_FROM_BLACK)
+
+    setvar(VAR_HOWDISAPPOINTING_STATE,GYM_RAID_STARTED)
+    opendoor(5,8)
+    waitdooranim
+
+    applymovement(CHIEF,HowDisappointing_RunIntoGymD)
+    waitmovement(CHIEF)
+    playse(SE_EXIT)
+    removeobject(CHIEF)
+
+    applymovement(POLICEA,HowDisappointing_RunIntoGymA)
+    applymovement(POLICEB,HowDisappointing_RunIntoGymB)
+    applymovement(POLICE_MON,HowDisappointing_RunIntoGymC)
+    waitmovement(POLICEB)
+    playse(SE_EXIT)
+    playse(SE_EXIT)
+    playse(SE_EXIT)
+    waitse
+    waitse
+    waitse
+    removeobject(POLICEA)
+    removeobject(POLICEB)
+    removeobject(POLICE_MON)
+    closedoor(5,8)
+    waitdooranim
+
+    playse(SE_M_EXPLOSION)
+    waitse
+    playse(SE_M_EXPLOSION)
+    waitse
+
+    call(HowDisappointing_ClearRocketFlags_Script)
+    playse(SE_EXIT)
+    addobject(GRUNTA)
+    applymovement(GRUNTA,HowDisappointing_EscapeA)
+    waitmovement(GRUNTA)
+
+    playse(SE_EXIT)
+    waitse
+    addobject(GRUNTB)
+    applymovement(GRUNTB,HowDisappointing_EscapeB)
+    waitmovement(GRUNTB)
+
+    playse(SE_EXIT)
+    waitse
+    addobject(ADAORA)
+    applymovement(ADAORA,HowDisappointing_Escape)
+    waitmovement(0)
+
+    playse(SE_PIN)
+    applymovement(PLAYER,Common_Movement_ExclamationMark)
+    waitmovement(0)
+    call(HowDisappointing_ManageObject_Script)
+        call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
+
+script HowDisappointing_Interfact_Adaora_Script
+{
+    lock
+
+    if (var(VAR_HOWDISAPPOINTING_STATE) == SAVED_BEFORE_ADAORA)
+
+   {
+        goto(HowDisappointing_StartBattle_Script)
+    }
+
+    setvar(VAR_HOWDISAPPOINTING_STATE,SAVED_BEFORE_ADAORA)
+
+  specialvar(VAR_RESULT,GetFalseTimelineCompletion)
+  switch(var(VAR_RESULT))
+  {
+    case FALSE_TIMELINE_NONE_COMPLETE:
+    case FALSE_TIMELINE_BURN_COMPLETE:
+      msgbox(format("How disappointing to see you like this. Not here for a friendly chat?"),MSGBOX_NPC,SPEAKER_ADAORA)
+      msgbox(format("Look Adaora, let's get this over with. You know how this ends."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+    case FALSE_TIMELINE_MAN_COMPLETE:
+    case FALSE_TIMELINE_MAN_BURN_COMPLETE:
+      msgbox(format("Alcmene wasn't enough for you? Didn't you get who you were looking for, and leave the rest of us alone?"),MSGBOX_NPC,SPEAKER_ADAORA)
+      msgbox(format("We're not done until The Tide is finished, and we both know that."),,SPEAKER_ALICIA)
+  }
+
+    msgbox(format("I know how you want to it end. Kai told me all about your meltdown. It doesn't matter how you try to spin this - this problem just won't go away."),,SPEAKER_ADAORA)
+    msgbox(format("Kai doesn't know what he's talking about. None of you do!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("We all know that these companies don’t care about you. Champion? You're a tool for them. Why is this that so hard to see?"),,SPEAKER_ADAORA)
+    msgbox(format("I'm done talking. You can come quietly, or I can make you."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    startmenu_savescreen
+    goto(HowDisappointing_StartBattle_Script)
+}
+
+script HowDisappointing_StartBattle_Script
+{
+    lock
+    msgbox(format("How disappointing."),MSGBOX_NPC,SPEAKER_ADAORA)
+
+    trainerbattle_no_intro(TRAINER_ADAORA_HOWDISAPPOINTING,format("You all did your best…"))
+    goto(HowDisappointing_ArrestScene_Dialogue)
+}
+
+script HowDisappointing_ArrestScene_Dialogue
+{
+    lock
+    startcutscene(JUMPPLAYER_HOWDISAPPOINTING_ARREST)
+    setvar(VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY)
+    clearflag(FLAG_HIDE_POLICE)
+    setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_SUDOWOODO)
+    addobject(POLICE_MON)
+    addobject(POLICEA)
+    setobjectxyperm(POLICEA,35,13)
+    setobjectxy(POLICEA,35,13)
+    setobjectxyperm(POLICE_MON,36,13)
+    setobjectxy(POLICE_MON,36,13)
+    applymovement(POLICEA,HowDisappointing_WalkToArrest)
+    applymovement(POLICE_MON,HowDisappointing_WalkToArrest)
+    applymovement(ADAORA,Common_Movement_FaceUp)
+    waitmovement(POLICEA)
+    msgbox(format("All right officers, {PLAYER} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA) // PSF TODO Replace PLAYER with OBJECT pronoun
+    bufferspeciesname(STR_VAR_1,SPECIES_MIGHTYENA)
+    buffermovename(STR_VAR_2,MOVE_TAKE_DOWN)
+    msgbox(gText_HowDisappointing_PokemonUse,,SPEAKER_POLICEMAN)
+    closemessage
+    //PSF TODO Adaora is knocked down, need animation here
+    applymovement(POLICE_MON,HowDisappointing_UseTakeDown_Movement)
+    delay(8)
+    applymovement(ADAORA,HowDisappointing_FallDown_Movement)
+    waitmovement(ADAORA)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(PLAYER)
+    msgbox(format("What the hell? She was surrendering!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SAD)
+    msgbox(format("Couldn't take any chances, {PLAYER}. Boys, take the suspect in."),,SPEAKER_POLICEMAN)
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_HOWDISAPPOINTING)
+    fadeblackandsetremovewarpfadeflag
+    warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,32,53)
+    waitstate
+}
+
+const ARNAV = 1
+const TECHIE = 2
+const OLIVER = 3
+const CHARLOTTE = 4
+const ADELAIDE = 5
+const CHIEF2 = 6
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+script HowDisappointing_MissionComplete_Dialogue
+{
+    lock
+    addvar(VAR_STORYLINE_STATE,1)
+    setvar(VAR_HOWDISAPPOINTING_STATE,HOWDISAPPOINTING_COMPLETE)
+
+    msgbox(format("Excellent work everybody! Imelda, Doyle, and Adaora have all been arrested, and all of the Gyms were successfully shut down. The region will see how quickly we’re responding to these threats, and hopefully, this will slow their efforts. Maybe I'll send a region wide email..."),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+
+    closemessage
+    applymovement(CHARLOTTE,Common_Movement_WalkUp)
+    applymovement(CHIEF2,Common_Movement_WalkUp)
+    applymovement(ADELAIDE,Common_Movement_WalkRight)
+
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
+    fadescreen(FADE_FROM_BLACK)
+    completequest(QUEST_HOWDISAPPOINTING)
+    call(HowDisappointing_HandleDebrief_Dialogue)
+
+    release
+        call(TryAutoSave)
+    endcutscene
+    call(ExhibitionBattle_TimeSkip_Script)
+    end
+}
+
+script HowDisappointing_HandleDebrief_Dialogue
+{
+    specialvar(VAR_RESULT,GetFalseTimelineCompletion)
+    switch(var(VAR_RESULT))
+    {
+
+        case FALSE_TIMELINE_MAN_HOW_BURN_COMPLETE:
+            call(HowDisappointing_DebriefAfterManhuntHowDisappointing_Dialogue)
+            msgbox(format("...Kei-Ying, do you really believe that?"),,SPEAKER_ALICIA)
+        case FALSE_TIMELINE_MAN_HOW_COMPLETE:
+            call(HowDisappointing_DebriefAfterManhuntHowDisappointing_Dialogue)
+            msgbox(format("...if you say so."),,SPEAKER_ALICIA,TAIL_WHISPER)
+        case FALSE_TIMELINE_HOW_BURN_COMPLETE:
+        case FALSE_TIMELINE_HOW_COMPLETE:
+            call(HowDisappointing_Debrief_Dialogue)
+    }
+    closemessage
+    return
+}
+
+script HowDisappointing_DebriefAfterManhuntHowDisappointing_Dialogue
+{
+    msgbox(gText_HowDisappointing_IAppreciate,,SPEAKER_KEIYING)
+
+    msgbox(format("The police were really agressive."),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+
+    msgbox(gText_HowDisappointing_TheyWereAttacking,,SPEAKER_ALICIA)
+
+    msgbox(format("How are we okay with this? Attacking people with Pokémon? Interogating ordinary people? This isn't what I signed up for!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+
+    msgbox(format("I know this doesn't look good. And, in my opinion, the police WERE a little too rough, but when you look at how much chaos and harm The Tide have caused in the region, taking them out as quickly and efficiently as possible is the right thing to do right? Take it from someone who's been in your shoes - doing the right thing will test your resolve. But we have to push forward if we really want to help the region!"),,SPEAKER_KEIYING)
+}
+
+
+script HowDisappointing_Debrief_Dialogue
+{
+    msgbox(gText_HowDisappointing_IAppreciate,,SPEAKER_KEIYING)
+
+    msgbox(format("I'm glad to have helped but... the police were really agressive about it."),,SPEAKER_ALICIA)
+
+    msgbox(gText_HowDisappointing_TheyWereAttacking,,SPEAKER_ALICIA)
+
+    msgbox(format("That's not cool!"),,SPEAKER_ALICIA)
+
+    msgbox(format("I'm sorry you had to see that, but I'm also not particularly surprised, {PLAYER}. But the goal is ultimately... peace. SharpriseCapital and police are fully aligned on setting an example with The Tide, and terrorists won't be tolerated."),,SPEAKER_KEIYING)
+
+    msgbox(format("...Terrorists."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+    return
+}
+
+script HowDisappointing_GiveNextDirection_Script
+{
+    if(defeated(TRAINER_HOWDISAPPOINTING_GRUNT1))
+
+   {
+        bufferstring(STR_VAR_1,"west")
+    }
+    if(defeated(TRAINER_HOWDISAPPOINTING_GRUNT2))
+
+   {
+        bufferstring(STR_VAR_1,"east")
+    }
+    call(HowDisappointing_CheckProgressAdaoraVisible_Script)
+    if (flag(FLAG_HIDE_ADAORA))
+
+   {
+        msgbox(format("I saw another one heading {STR_VAR_1}, are you on it?"))
+    }
+    else
+
+   {
+        msgbox(format("We got a call that the leader was trying to flee near the village entrance. Get after 'em!"))
+    }
+    closemessage
+    return
+}
+
+script HowDisappointing_GruntABattle_Script
+{
+    lock
+    msgbox(gText_Blank,MSGBOX_NPC,SPEAKER_GRUNT)
+    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT1,gText_Blank)
+    goto(HowDisappointing_GruntA_Arrest_Script)
+}
+
+script HowDisappointing_GruntA_Arrest_Script
+{
+    addvar(VAR_HOWDISAPPOINTING_STATE,1)
+    addobject(POLICEA)
+    setobjectxyperm(POLICEA,33,0)
+    setobjectxy(POLICEA,33,0)
+    applymovement(POLICEA,Common_Movement_WalkRight)
+    msgbox(format("Fine! You got me. Get your pigs, I'll come quietly."))
+    closemessage
+    waitmovement(POLICEA)
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    waitmovement(PLAYER)
+    msgbox(format("Good work {PLAYER}."))
+    call(HowDisappointing_GiveNextDirection_Script)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(GRUNTA)
+    removeobject(POLICEA)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script HowDisappointing_GruntBBattle_Script
+{
+    lock
+    msgbox(gText_Blank,MSGBOX_NPC,SPEAKER_GRUNT)
+    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT2,gText_Blank)
+    goto(HowDisappointing_GruntB_Arrest_Script)
+}
+
+script HowDisappointing_GruntB_Arrest_Script
+{
+    addvar(VAR_HOWDISAPPOINTING_STATE,1)
+
+    addobject(POLICEA)
+    addobject(POLICE_MON)
+
+    setobjectxyperm(POLICEA,22,22)
+    setobjectxy(POLICEA,22,22)
+    setobjectxyperm(POLICE_MON,21,22)
+    setobjectxy(POLICE_MON,21,22)
+
+    applymovement(POLICEA,HowDisappointing_WalkUp5_Movement)
+    applymovement(POLICE_MON,HowDisappointing_WalkUp5_Movement)
+
+    msgbox(format("Screw this, I'm outta here!"),MSGBOX_DEFAULT,SPEAKER_GRUNT,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+    applymovement(GRUNTB,HowDisappointing_RunAway_Movement1)
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    waitmovement(PLAYER)
+    waitmovement(POLICEA)
+    waitmovement(POLICE_MON)
+    msgbox(format("Nice try."),MSGBOX_DEFAULT,SPEAKER_POLICEMAN)
+    //PSF TODO field effect using shock wave and then the grunt laying down
+    bufferspeciesname(STR_VAR_1,SPECIES_LUXRAY)
+    buffermovename(STR_VAR_2,MOVE_SHOCK_WAVE)
+    msgbox(gText_HowDisappointing_PokemonUse,MSGBOX_DEFAULT,SPEAKER_POLICEMAN,TAIL_SHOUT)
+
+    msgbox(format("Aaarrggghh!"),,SPEAKER_ROCKET_MEMBER_B)
+
+    msgbox(format("Woah, was that neccesary?!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
+
+    msgbox(format("The suspect was resisting arrest, and potentially dangerous. Our orders were to apprehrend by any means neccesary to ensure the safety of the civilians in the area."),MSGBOX_DEFAULT,SPEAKER_POLICEMAN)
+
+    msgbox(format("Oh...okay. I get it."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_WHISPER)
+
+    closemessage
+    call(HowDisappointing_GiveNextDirection_Script)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(GRUNTB)
+    removeobject(POLICEA)
+    removeobject(POLICE_MON)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+text gText_HowDisappointing_PokemonUse
+{
+    //PSF TODO Luxray uses Shock Wave first time
+    //PSF TODO Mightyena uses Take Down against Adaora
+    format("{STR_VAR_1}, use {STR_VAR_2}!")
+}
+
+text gText_HowDisappointing_IAppreciate
+{
+    format("I appreciate you handling that, {PLAYER}.")
+}
+
+movement HowDisappointing_WalkIntoFormationNorthLeft_Movement
+{
+    walk_down * 3
+    walk_right
+    step_end
+}
+
+movement HowDisappointing_WalkIntoFormationNorthRight_Movement
+{
+    walk_left
+    walk_down * 4
+    walk_right
+    step_end
+}
+
+movement HowDisappointing_WalkIntoFormationEast_Movement
+{
+    walk_left
+    step_end
+}
+
+movement HowDisappointing_WalkIntoFormationFinal_Movement
+{
+    walk_down
+    face_up
+    step_end
+}
+
+movement HowDisappointing_WalkToPlayer
+{
+    walk_right
+    face_down
+    step_end
+}
+
+movement HowDisappointing_RunIntoGymA
+{
+    walk_up
+    walk_right * 2
+    walk_up
+    step_end
+}
+
+movement HowDisappointing_RunIntoGymB
+{
+    walk_up
+    walk_right
+    walk_up
+    step_end
+}
+
+movement HowDisappointing_RunIntoGymC
+{
+    walk_up
+    walk_left
+    walk_up
+    step_end
+}
+
+movement HowDisappointing_RunIntoGymD
+{
+    walk_up
+    step_end
+}
+
+movement HowDisappointing_Escape
+{
+    delay_16
+    walk_faster_down * 3
+    walk_faster_right * 3
+    walk_faster_down * 4
+    walk_faster_right * 4
+    walk_faster_right * 5
+    step_end
+}
+
+movement HowDisappointing_EscapeA
+{
+    delay_16
+    walk_down * 3
+    face_left
+    emote_exclamation_mark
+    walk_up * 4
+    walk_right * 2
+    walk_faster_right* 4
+    step_end
+}
+movement HowDisappointing_EscapeB
+{
+    delay_16
+    walk_faster_down * 3
+    walk_faster_left * 9
+    walk_faster_down * 6
+    step_end
+}
+
+movement HowDisappointing_WalkUp5_Movement
+{
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+}
+
+movement HowDisappointing_RunAway_Movement1
+{
+    walk_faster_right * 5
+    face_up
+    face_down
+    step_end
+}
+
+movement HowDisappointing_WalkToArrest
+{
+    walk_down * 5
+    step_end
+}
+
+movement HowDisappointing_UseTakeDown_Movement
+{
+    lock_facing_direction
+    walk_faster_down
+    walk_up
+    step_end
+}
+
+script HowDisappointing_FallDown_Movement
+{
+    lock_facing_direction
+    jump_2_down
+    unlock_facing_direction
+    step_end
+}
+
+movement HowDisappointing_LeaveRoomA
+{
+    walk_right
+    walk_up * 3
+    walk_left
+    walk_up * 6
+    step_end
+}
+
+movement HowDisappointing_LeaveRoomB
+{
+    walk_up * 6
+    step_end
+}
+
+text gText_HowDisappointing_TheyWereAttacking
+{
+    format("They were attacking members of the The Tide directly, even though they were coming quietly.")
+}

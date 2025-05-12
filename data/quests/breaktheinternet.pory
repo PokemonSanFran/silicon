@@ -1,0 +1,718 @@
+//gText_Breaktheinternet_
+//Quest_Breaktheinternet_
+
+const FLAG_HIDE_WAREHOUSE_GUARD = FLAG_TEMP_2
+const FLAG_HIDE_ISMAIL = FLAG_TEMP_1
+const FLAG_HIDE_ESPULEE_OUTSKIRTS_GIRL = FLAG_TEMP_7
+const FLAG_HIDE_QIU_VILLAGE_GUY = FLAG_TEMP_7
+const FLAG_HIDE_GRUNTS = FLAG_TEMP_2
+const FLAG_HIDE_GRUNTS_WAVE_2 = FLAG_TEMP_3
+const FLAG_HIDE_BUZZR_CEO = FLAG_TEMP_4
+const FLAG_HIDE_WAREHOUSE_SLURPUFF = FLAG_TEMP_5
+
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const WAREHOUSE_ISMAIL = 1
+const WAREHOUSE_GRUNT4 = 5
+const WAREHOUSE_GRUNT5 = 6
+const WAREHOUSE_BUZZR_CEO = 8
+const WAREHOUSE_SLURPUFF = 4
+
+const PERLACIA_CITY_ISMAIL = 5
+
+script Quest_Breaktheinternet_EliteFour_Dialogue{
+    setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,TALA_MENTIONED_REPORTER)
+    msgbox(format("you should talk to my reporter friend in PerlaciaCity."),MSGBOX_NPC,SPEAKER_TALA)
+}
+
+script Quest_Breaktheinternet_SocialMediaReporter_Dialogue{
+    setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER)
+    msgbox(gText_Breaktheinternet_SocialMediaIs,MSGBOX_NPC,SPEAKER_ISMAIL)
+
+    call_if_quest_complete(QUEST_RABIESOUTBREAK,Quest_Breaktheinternet_Rabies_Dialogue)
+
+    msgbox(gText_Breaktheinternet_IWantTo,MSGBOX_DEFAULT,SPEAKER_ISMAIL)
+    applymovement(PERLACIA_CITY_ISMAIL,Quest_Breaktheinternet_WalkInside)
+    playse(SE_EXIT)
+    waitmovement(PERLACIA_CITY_ISMAIL)
+    removeobject(PERLACIA_CITY_ISMAIL)
+    call(Quest_Breaktheinternet_CountQuestsAndProgress_Script)
+    call(TryAutoSave)
+    release
+    end
+}
+
+script Quest_Breaktheinternet_Rabies_Dialogue{
+    msgbox(gText_Breaktheinternet_TotallyIHunted,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+    msgbox(gText_Breaktheinternet_OhRight,MSGBOX_DEFAULT,SPEAKER_ISMAIL)
+    return
+}
+
+text gText_Breaktheinternet_SocialMediaIs{
+    format("Social media is getting out of control! I spend more of my day trying to verify wild claims than actually reporting on real news.")
+}
+text gText_Breaktheinternet_TotallyIHunted{
+    format("Totally! I hunted a bunch of Glameow in GlavezHill only for the whole story to be totally bogus.")
+}
+text gText_Breaktheinternet_OhRight{
+    format("Oh right, the rabies outbreak! So ridiculous.")
+}
+
+text gText_Breaktheinternet_IWantTo{
+    format("I want to try to investigate where all these claims are coming from, because I think its only going to get worse. You're a Trainer, right? Let's exchange contact info. Keep your eyes peeled on social media for any more bogus stories, and I'll hit you up once I find a good lead.")
+}
+
+movement Quest_Breaktheinternet_WalkInside{
+    walk_left
+    walk_up
+    step_end
+}
+
+script Quest_Breaktheinternet_CountQuestsAndProgress_Script{
+    specialvar(VAR_RESULT,Quest_Breaktheinternet_Count_CompletedSocialMedia)
+        if (var(VAR_RESULT) > 4){
+            call(Quest_Breaktheinternet_CallPlayer_Dialogue)
+        }
+    return
+}
+
+script Quest_Breaktheinternet_CallPlayer_Dialogue{
+    call(Common_EventScript_PhoneRinging)
+        msgbox(gText_Breaktheinternet_HeyPlayer,,SPEAKER_ISMAIL,,,PHONE_ON)
+        msgbox(gText_Breaktheinternet_YeahIllBe,,SPEAKER_ALICIA,,,PHONE_ON)
+        closemessage
+        call(TryAutoSave)
+        release
+        end
+}
+
+script Quest_Breaktheinternet_Ismail_Visibility_Script{
+    specialvar(VAR_0x8003,Quest_Breaktheinternet_Count_CompletedSocialMedia)
+        specialvar(VAR_0x8004,Quest_Breaktheinternet_CountRemainingSubquests)
+
+        if ((var(VAR_0x8003) < 5) || (var(VAR_0x8004) < 2)){
+            setflag(FLAG_HIDE_ISMAIL)
+        }
+    return
+}
+
+script Quest_Breaktheinternet_Ismail_Event_Script{
+    goto_if_quest_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_DescribeQuest_Script)
+        goto(Quest_Breaktheinternet_StartQuest_Script)
+}
+
+script Quest_Breaktheinternet_StartQuest_Script{
+        msgbox(gText_Breaktheinternet_OkayIGot,,SPEAKER_ISMAIL)
+        startquest(QUEST_BREAKTHEINTERNET)
+        msgbox(gText_Breaktheinternet_IGotALead,,SPEAKER_ISMAIL)
+        closemessage
+    call(TryAutoSave)
+        release
+        end
+}
+
+script Quest_Breaktheinternet_DescribeQuest_Script{
+    specialvar(VAR_0x8004,Quest_Breaktheinternet_CountRemainingSubquests)
+
+        if ((var(VAR_0x8004) == QUEST_BREAKTHEINTERNET_SUB_COUNT)){
+            goto(Quest_Breaktheinternet_Describe_FirstQuest_Dialogue)
+        }else{
+            goto(Quest_Breaktheinternet_Describe_SecondQuest_Dialogue)
+        }
+}
+
+script Quest_Breaktheinternet_Describe_FirstQuest_Dialogue{
+    msgbox(gText_Breaktheinternet_IGotALead,,SPEAKER_ISMAIL)
+}
+
+script Quest_Breaktheinternet_Describe_SecondQuest_Dialogue{
+    msgbox(gText_Breaktheinternet_HeadOverTo,,SPEAKER_ISMAIL)
+}
+
+script Quest_Breaktheinternet_EspuleeOutskirts_Script{
+    specialvar(VAR_RESULT,Quest_Breaktheinternet_CountRemainingSubquests)
+        if (var(VAR_RESULT) != 3){
+            return
+        }
+    msgbox(gText_Breaktheinternet_BuzzrWhatAre)
+        trainerbattle_no_intro(TRAINER_BUZZR1,gText_Breaktheinternet_TheBoss)
+    goto(Quest_Breaktheinternet_EspuleeOutskirts_PostBattle_Script)
+}
+
+script Quest_Breaktheinternet_EspuleeOutskirts_PostBattle_Script{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_1)
+        msgbox(gText_Breaktheinternet_YouShouldLay)
+		closemessage
+        fadescreen(FADE_TO_BLACK)
+        removeobject(VAR_LAST_TALKED)
+        fadescreen(FADE_FROM_BLACK)
+        goto(Quest_Breaktheinternet_CallAfterFirst_Dialogue)
+}
+
+script Quest_Breaktheinternet_QiuVillage_Script{
+    specialvar(VAR_RESULT,Quest_Breaktheinternet_CountRemainingSubquests)
+        if (var(VAR_RESULT) != 2){
+            return
+        }
+    msgbox(gText_Breaktheinternet_HaveYouSeen)
+    trainerbattle_no_intro(TRAINER_BUZZR2,gText_Breaktheinternet_ImSoDead)
+    goto(Quest_Breaktheinternet_QiuVillage_PostBattle_Script)
+}
+
+script Quest_Breaktheinternet_QiuVillage_PostBattle_Script{
+    lock
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_2)
+        msgbox(gText_Breaktheinternet_ImTellingYou)
+		closemessage
+        fadescreen(FADE_TO_BLACK)
+        removeobject(VAR_LAST_TALKED)
+        fadescreen(FADE_FROM_BLACK)
+        goto(Quest_Breaktheinternet_CallAfterSecond_Dialogue)
+}
+
+script Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BREAKTHEINTERNET,SUB_QUEST_1)
+
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_ESPULEE_OUTSKIRTS_GIRL)
+        }
+
+    return
+}
+
+script Quest_Breaktheinternet_QiuVillageGuy_Visibility_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BREAKTHEINTERNET,SUB_QUEST_2)
+
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_QIU_VILLAGE_GUY)
+        }
+
+    return
+}
+
+script Quest_Breaktheinternet_CallAfterFirst_Dialogue{
+    lock
+    call(Common_EventScript_PhoneRinging)
+
+    msgbox(gText_Breaktheinternet_AnyLuck,,SPEAKER_ISMAIL,,,PHONE_ON)
+    msgbox(gText_Breaktheinternet_IFought,,SPEAKER_ALICIA,,,PHONE_ON)
+    msgbox(gText_Breaktheinternet_HeadOverTo,,SPEAKER_ISMAIL,,,PHONE_ON)
+    closemessage
+    playse(SE_POKENAV_HANG_UP)
+    call(TryAutoSave)
+    release
+    end
+}
+
+script Quest_Breaktheinternet_CallAfterSecond_Dialogue{
+    lock
+    call(Common_EventScript_PhoneRinging)
+
+    msgbox(gText_Breaktheinternet_OhHiUh,,SPEAKER_ISMAIL,,,PHONE_ON)
+    msgbox(gText_Breaktheinternet_IBattledA,,SPEAKER_ALICIA,,,PHONE_ON)
+    msgbox(gText_Breaktheinternet_UhYesComeBack,,SPEAKER_ISMAIL,,,PHONE_ON)
+    closemessage
+    playse(SE_POKENAV_HANG_UP)
+    call(TryAutoSave)
+    release
+    end
+}
+
+script Quest_Breaktheinternet_Note_Dialogue{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_BREAKTHEINTERNET)
+    if(var(VAR_RESULT)){
+        lock
+        msgbox(gText_Breaktheinternet_ThereIsANote,MSGBOX_AUTOCLOSE)
+    }
+    release
+    end
+}
+
+script Quest_Breaktheinternet_Warehouse_Enemy_Visibility_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BREAKTHEINTERNET,SUB_QUEST_3)
+
+    if (var(VAR_RESULT)){
+        call(Quest_Breaktheinternet_Warehouse_Grunts_Visibility_Script)
+        call(Quest_Breaktheinternet_Warehouse_Grunts2_Visibility_Script)
+        call(Quest_Breaktheinternet_Warehouse_Ismail_Visibility_Script)
+        call(Quest_Breaktheinternet_Warehouse_CEO_Visibility_Script)
+    }
+}
+
+
+script Quest_Breaktheinternet_Slurpuff_Visibility_Script{
+    setflag(FLAG_HIDE_WAREHOUSE_SLURPUFF)
+    return
+}
+
+
+script Quest_Breaktheinternet_Warehouse_Grunts_Visibility_Script{
+    setflag(FLAG_HIDE_GRUNTS)
+    return
+}
+
+script Quest_Breaktheinternet_Warehouse_Grunts2_Visibility_Script{
+    setflag(FLAG_HIDE_GRUNTS_WAVE_2)
+    return
+}
+
+script Quest_Breaktheinternet_Warehouse_Ismail_Visibility_Script{
+    setflag(FLAG_HIDE_ISMAIL)
+    return
+}
+
+script Quest_Breaktheinternet_Warehouse_CEO_Visibility_Script{
+    setflag(FLAG_HIDE_BUZZR_CEO)
+    return
+}
+
+script Quest_Breaktheinternet_WarehouseGuard_Script{
+    specialvar(VAR_RESULT,Quest_Breaktheinternet_CountRemainingSubquests)
+        if (var(VAR_RESULT) < 2){
+            setflag(FLAG_HIDE_WAREHOUSE_GUARD)
+        }
+    return
+}
+
+script Quest_Breaktheinternet_EventScript_Grunt1{
+    trainerbattle_single(TRAINER_BUZZR3,gText_Breaktheinternet_TheySaidYou,gText_Breaktheinternet_IHopeIDont,Quest_Breaktheinternet_EventScript_Grunt1Defeated)
+    msgbox(gText_Breaktheinternet_IGottaFind,MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Quest_Breaktheinternet_EventScript_Grunt1Defeated{
+    msgbox(gText_Breaktheinternet_IGottaFind,MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Quest_Breaktheinternet_EventScript_Grunt2{
+    trainerbattle_single(TRAINER_BUZZR4,gText_Breaktheinternet_Gotcha,gText_Breaktheinternet_ThisIsnt,Quest_Breaktheinternet_EventScript_Grunt2Defeated)
+    msgbox(gText_Breaktheinternet_OhNo,MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Quest_Breaktheinternet_EventScript_Grunt2Defeated{
+    msgbox(gText_Breaktheinternet_OhNo,MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Quest_Breaktheinternet_SetPlayerPosition_Script{
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        if (var(VAR_TEMP_0) == 1){
+            fadescreen(FADE_TO_BLACK)
+            setobjectxy(PLAYER,2,8)
+            TeleportCamera(2,8)
+            applymovement(PLAYER,Common_Movement_FaceLeft)
+            waitmovement(PLAYER)
+            fadescreen(FADE_FROM_BLACK)
+        }
+return
+}
+
+script Quest_Breaktheinternet_TriggerWave2Battle1_Script{
+    lock
+        if (defeated(TRAINER_BUZZR6)){
+                release
+                end
+                }
+    msgbox(gText_Breaktheinternet_StopRightThere)
+    closemessage
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    addobject(WAREHOUSE_GRUNT4)
+    addobject(WAREHOUSE_GRUNT5)
+    applymovement(WAREHOUSE_GRUNT4,Quest_Breaktheinternet_GruntsWalkToPlayer)
+    applymovement(WAREHOUSE_GRUNT5,Quest_Breaktheinternet_GruntsWalkToPlayer)
+    waitmovement(WAREHOUSE_GRUNT4)
+    msgbox(gText_Breaktheinternet_ThisIsTheEnd)
+    trainerbattle_no_intro(TRAINER_BUZZR5,gText_Breaktheinternet_AreWeGoing)
+    goto(Quest_Breaktheinternet_Wave2Battle2_Script)
+    end
+}
+
+script Quest_Breaktheinternet_Wave2Battle2_Script{
+    lock
+    msgbox(gText_Breaktheinternet_IGotThis)
+    trainerbattle_no_intro(TRAINER_BUZZR6,gText_Breaktheinternet_What)
+    goto(Quest_Breaktheinternet_CompleteWave2_Script)
+}
+
+script Quest_Breaktheinternet_CompleteWave2_Script{
+    lock
+    msgbox(gText_Breaktheinternet_OurBossIsMore)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(WAREHOUSE_GRUNT4)
+    removeobject(WAREHOUSE_GRUNT5)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Breaktheinternet_WarehouseSlurfpuff_Event_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BREAKTHEINTERNET,SUB_QUEST_3)
+    faceplayer
+    if (var(VAR_RESULT)){
+        goto(Quest_Breaktheinternet_GiveSlurpuff_Dialogue)
+    }else{
+        goto(Quest_Breaktheinternet_StartFinalCutscene_Dialogue)
+    }
+}
+
+script Quest_Breaktheinternet_StartFinalCutscene_Dialogue{
+    lock
+    if (var(VAR_QUEST_BREAKTHEINTERNET_STATE) != SAVED_BEFORE_BUZZR_CEO){
+
+    if(defeated(TRAINER_BUZZR_CEO_RAID)){
+        goto(Quest_Breaktheinternet_PostRaid_Buzzr_CEO_Dialogue)
+    }
+
+    setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,SAVED_BEFORE_BUZZR_CEO)
+    call(Quest_Breaktheinternet_SetPlayerPosition_Script)
+    msgbox(gText_Breaktheinternet_IsThat,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    playmoncry(SPECIES_SLURPUFF,CRY_MODE_WEAK)
+    waitse
+    msgbox(gText_Breaktheinternet_ItLooksAwful,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+    msgbox(gText_Breaktheinternet_OhSlurpuff,,SPEAKER_ISMAIL)
+    closemessage
+playse(SE_PIN)
+    applymovement(PLAYER,Common_Movement_ExclamationMark)
+    applymovement(WAREHOUSE_SLURPUFF,Common_Movement_ExclamationMark)
+waitse
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    applymovement(WAREHOUSE_SLURPUFF,Quest_Breaktheinternet_SlurpuffMoveToSee)
+    waitmovement(PLAYER)
+    setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_REPORTER_M)
+    addobject(WAREHOUSE_ISMAIL)
+    applymovement(WAREHOUSE_ISMAIL,Quest_Breaktheinternet_IsmailWalkToPlayer)
+    waitmovement(WAREHOUSE_ISMAIL)
+    msgbox(gText_Breaktheinternet_YouCame,,SPEAKER_ISMAIL)
+    closemessage
+    applymovement(WAREHOUSE_SLURPUFF,Quest_Breaktheinternet_RunBehindPlayer)
+    waitmovement(WAREHOUSE_SLURPUFF)
+    playmoncry(SPECIES_SLURPUFF,CRY_MODE_ROAR_2)
+    bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+    msgbox(gText_Breaktheinternet_SlurpuffRan)
+    msgbox(gText_Breaktheinternet_OhDidItNotWork,,SPEAKER_ISMAIL)
+    closemessage
+//PSF TODO figure out how to do the transform script like Castform in merrp's followers
+    removeobject(WAREHOUSE_ISMAIL)
+    setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_DITTO_DOLL)
+    addobject(WAREHOUSE_ISMAIL)
+    setobjectxy(WAREHOUSE_ISMAIL,3,8)
+    msgbox(gText_Breaktheinternet_GuesYoureSmarter,,SPEAKER_BUZZR_CEO)
+    closemessage
+    addobject(WAREHOUSE_BUZZR_CEO)
+    applymovement(WAREHOUSE_BUZZR_CEO,Quest_Breaktheinternet_CEOWalkToPlayer)
+    waitmovement(WAREHOUSE_BUZZR_CEO)
+    applymovement(PLAYER,Common_Movement_FaceDown)
+    waitmovement(PLAYER)
+    msgbox(gText_Breaktheinternet_YouAppearToBe,,SPEAKER_BUZZR_CEO)
+    lockall
+    closemessage
+    startmenu_savescreen
+}
+    goto(Quest_Breaktheinternet_CEO_Battle_Script)
+}
+
+script Quest_Breaktheinternet_CEO_Battle_Script{
+    trainerbattle_no_intro(TRAINER_BUZZR_CEO,gText_Breaktheinternet_HowIsThis)
+    goto(Quest_Breaktheinternet_PostCEOBattle_Dialogue)
+}
+
+script Quest_Breaktheinternet_PostRaid_Buzzr_CEO_Dialogue{
+    msgbox(gText_Persuasivepassenger_IShouldHaveGuessed,MSGBOX_NPC,SPEAKER_BUZZR_CEO)
+    goto(Quest_Breaktheinternet_CEO_Battle_Script)
+}
+
+script Quest_Breaktheinternet_PostCEOBattle_Dialogue{
+    lock
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_3)
+    msgbox(gText_Breaktheinternet_YouAreSomething,,SPEAKER_BUZZR_CEO)
+    msgbox(gText_Breaktheinternet_WhereIs,,SPEAKER_ALICIA)
+    msgbox(gText_Breaktheinternet_YourFriendWontBe,,SPEAKER_BUZZR_CEO)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(WAREHOUSE_BUZZR_CEO)
+    removeobject(WAREHOUSE_ISMAIL)
+    removeobject(WAREHOUSE_GRUNT4)
+    removeobject(WAREHOUSE_GRUNT5)
+    fadescreen(FADE_FROM_BLACK)
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    waitmovement(PLAYER)
+    goto(Quest_Breaktheinternet_GiveSlurpuff_Dialogue)
+}
+
+script Quest_Breaktheinternet_GiveSlurpuff_Dialogue{
+    lock
+    bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+        msgbox(gText_Breaktheinternet_ItLooksBeaten,MSGBOX_YESNO)
+
+        if (var(VAR_RESULT) == NO){
+            call(Breaktheinternet_LeaveGift_Script)
+        }else {
+            call(Breaktheinternet_GiveGift_Script)
+        }
+
+        closemessage
+        release
+        end
+}
+
+script Breaktheinternet_LeaveGift_Script {
+    bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+        msgbox(gText_Breaktheinternet_LooksSad)
+        return
+}
+
+script Breaktheinternet_GiveGift_Script {
+    givemon(SPECIES_SLURPUFF,22,ITEM_TERRAIN_EXTENDER,ITEM_POKE_BALL,NATURE_TIMID)
+    completequest(QUEST_BREAKTHEINTERNET)
+    call(TryAutoSave)
+    addvar(VAR_STORYLINE_STATE,1)
+	setvar(VAR_TEMP_1, SPECIES_SLURPUFF)
+        if (var(VAR_RESULT) == 0){
+            call(Breaktheinternet_SendGiftToParty_Script)
+        } else {
+            call(Breaktheinternet_SendGiftToPC_Script)
+        }
+        return
+
+}
+script Breaktheinternet_SendGiftToParty_Script {
+    call(Breaktheinternet_RecievedGiftFanfare)
+        msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
+
+        if (var(VAR_RESULT) == YES){
+            call(Common_EventScript_GetGiftMonPartySlot)
+            call(Common_EventScript_NameReceivedPartyMon)
+        }
+    return
+}
+
+script Breaktheinternet_SendGiftToPC_Script {
+        call(Breaktheinternet_RecievedGiftFanfare)
+        msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
+
+        if (var(VAR_RESULT) == YES){
+            call(Common_EventScript_NameReceivedBoxMon)
+        }
+    call(Common_EventScript_TransferredToPC)
+    return
+}
+
+script Breaktheinternet_RecievedGiftFanfare {
+        bufferspeciesname(STR_VAR_2,SPECIES_SLURPUFF)
+        removeobject(WAREHOUSE_SLURPUFF)
+        playfanfare(MUS_OBTAIN_ITEM)
+    bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+        msgbox(gText_Breaktheinternet_PlayerTook)
+        waitmessage
+        waitfanfare
+        bufferspeciesname(STR_VAR_1, SPECIES_SLURPUFF)
+        return
+}
+
+movement Quest_Breaktheinternet_GruntsWalkToPlayer{
+    walk_left * 7
+    step_end
+}
+movement Quest_Breaktheinternet_SlurpuffMoveToSee{
+    walk_down
+    walk_right
+    step_end
+}
+movement Quest_Breaktheinternet_IsmailWalkToPlayer{
+    walk_left * 7
+    step_end
+}
+movement Quest_Breaktheinternet_RunBehindPlayer{
+    walk_left
+    walk_up
+    face_right
+    step_end
+}
+movement Quest_Breaktheinternet_CEOWalkToPlayer{
+    walk_left * 8
+    face_up
+}
+text gText_Breaktheinternet_HeyPlayer{
+    format("Hey {PLAYER}, I've made some progress on where these stories are coming from. Can you come to the cafe in CuconuTown?")
+}
+
+text gText_Breaktheinternet_YeahIllBe{
+    format("Yeah, I can be there!")
+}
+
+text gText_Breaktheinternet_OkayIGot{
+    format("Okay, I got a pretty good handle. These posts get tons of engagement regardless of their accuracy... they get clicks. And clicks mean ad dollars. But its dangerous! We need to stop these greedy people.")
+}
+
+text gText_Breaktheinternet_IGotALead{
+    format("I got a lead in EspuleeOutskirts, that posts might be coming from there. Can you investigate?")
+}
+
+text gText_Breaktheinternet_HeadOverTo{
+    format("Okay so EspuleeOutskirts was a start... head over to QiuVillage. I think that goes further down the rabbit hole.")
+}
+
+text gText_Breaktheinternet_BuzzrWhatAre{
+    format("Buzzr, what are you talking about...? Heh, you got me.?")
+}
+
+text gText_Breaktheinternet_TheBoss{
+    format("The boss is gonna hear about this!")
+}
+
+text gText_Breaktheinternet_YouShouldLay{
+    format("You should lay low. Seriously.")
+}
+
+text gText_Breaktheinternet_HaveYouSeen{
+    format("Why would we stop? Have you seen the stock prices?")
+}
+
+text gText_Breaktheinternet_ImSoDead{
+    format("I'm so dead...")
+}
+
+text gText_Breaktheinternet_ImTellingYou{
+    format("I'm telling you, you should skip town.")
+}
+
+text gText_Breaktheinternet_AnyLuck{
+    format("Any luck with that lead?")
+}
+
+text gText_Breaktheinternet_IFought{
+    format("I fought somebody who seemed to know something, but they got away.")
+}
+
+text gText_Breaktheinternet_OhHiUh{
+    format("Oh hi uh {PLAYER}, yes. How you?")
+}
+
+text gText_Breaktheinternet_IBattledA{
+    format("I battled another goon, but nothing to lead me back.")
+}
+
+text gText_Breaktheinternet_UhYesComeBack{
+    format("Yes uh, come to cafe. Thank you!")
+}
+
+text gText_Breaktheinternet_TheySaidYou{
+    format("They said you were coming. Ready?")
+}
+
+text gText_Breaktheinternet_IHopeIDont{
+    format("I hope I don't end up like that reporter...")
+}
+
+text gText_Breaktheinternet_IGottaFind{
+    format("I gotta find a better gig...")
+}
+
+text gText_Breaktheinternet_Gotcha{
+    format("Gotcha! Ready to go down?")
+}
+
+text gText_Breaktheinternet_ThisIsnt{
+    format("This isn't good...")
+}
+
+text gText_Breaktheinternet_OhNo{
+    format("Oh no!")
+}
+
+text gText_Breaktheinternet_StopRightThere{
+    format("Stop right there!")
+}
+
+text gText_Breaktheinternet_ThisIsTheEnd{
+    format("This is the end for you.")
+}
+
+text gText_Breaktheinternet_AreWeGoing{
+    format("Are we going to end up like him...?")
+}
+
+text gText_Breaktheinternet_IGotThis{
+    format("I got this!")
+}
+
+text gText_Breaktheinternet_What{
+    format("What?!?")
+}
+
+text gText_Breaktheinternet_OurBossIsMore{
+    format("Our boss is tougher than us!")
+}
+
+text gText_Breaktheinternet_IsThat{
+    format("Is that Ismail's Slurpuff?")
+}
+
+text gText_Breaktheinternet_ItLooksAwful{
+    format("It looks awful... it's clearly been beat up horribly.")
+}
+
+text gText_Breaktheinternet_OhSlurpuff{
+    format("Oh my {STR_VAR_1}!")
+}
+
+text gText_Breaktheinternet_YouCame{
+    format("{PLAYER} you come!")
+}
+
+text gText_Breaktheinternet_SlurpuffRan{
+    format("{STR_VAR_1} ran behind you. It looks scared.")
+}
+
+text gText_Breaktheinternet_OhDidItNotWork{
+    format("Oh? You not fooled?")
+}
+
+text gText_Breaktheinternet_GuesYoureSmarter{
+    format("Guess you're smarter than we thought!")
+}
+
+text gText_Breaktheinternet_YouAppearToBe{
+    format("You appear to be competent, but this is the end for you.")
+}
+
+text gText_Breaktheinternet_HowIsThis{
+    format("How is this possible?!?!")
+}
+
+text gText_Breaktheinternet_YouAreSomething{
+    format("You are something...")
+}
+
+text gText_Breaktheinternet_WhereIs{
+    format("Where is Ismail?!?")
+}
+
+text gText_Breaktheinternet_YourFriendWontBe{
+    format("Your friend won't be an issue anymore. He learned his lesson.")
+}
+
+text gText_Breaktheinternet_ItLooksBeaten{
+    format("{STR_VAR_1} looks horribly beaten and bruised. Will you take it with you?")
+}
+
+text gText_Breaktheinternet_LooksSad{
+    format("{STR_VAR_1} looks sad.")
+}
+
+text gText_Breaktheinternet_PlayerTook{
+    format("{PLAYER} took Ismail's {STR_VAR_1}!")
+}
+
+text gText_Breaktheinternet_ThereIsANote{
+    format("There is a note on the chair. The handwriting is atrocious.\pPetarosaBorough.Warehouse.Buzzr.")
+}
+

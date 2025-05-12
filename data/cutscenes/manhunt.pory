@@ -1,0 +1,488 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const RAMESH = 2
+const CHARLOTTE = 2
+const FLAG_HIDE_ALCMENE = FLAG_TEMP_1
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
+const MATTHEW = 1
+
+const FLAG_HIDE_NERDS_COPS_SHARPRISESPIRE = FLAG_TEMP_1
+const FLAG_HIDE_CHARLOTTE_SHARPRISESPIRE = FLAG_TEMP_3
+const FLAG_HIDE_RAMESH_SHARPRISESPIRE = FLAG_TEMP_5
+
+//PSF TODO the quest text for Manhunt needs to update with the last recieved clue
+
+script Manhunt_HideCharlotte_Newspaper_Script{
+    setflag(FLAG_HIDE_CHARLOTTE)
+    return
+}
+
+script Manhunt_ShowRamesh_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_MANHUNT)
+    if(var(VAR_RESULT)){
+        setflag(FLAG_HIDE_RAMESH_SHARPRISESPIRE)
+    }
+}
+
+script Manhunt_HideAlcmene_Script {
+    setflag(FLAG_HIDE_ALCMENE)
+    return
+}
+
+script Manhunt_HideCharlotte_Script{
+    setflag(FLAG_HIDE_CHARLOTTE)
+    return
+}
+
+script Manhunt_Interact_Ramesh_Script{
+    returnqueststate(QUEST_MANHUNT)
+
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_MENU_SET_ACTIVE: goto(Manhunt_ActiveQuest_Dialogue)
+        case QUEST_MENU_COMPLETE_QUEST: goto(Manhunt_CompleteQuest_Dialogue)
+        default: goto(Manhunt_Assignment_Dialogue)
+    }
+}
+
+script Manhunt_ActiveQuest_Dialogue{
+    msgbox(format("Every second that I'm up here, I'm losing time on the upcoming promo… I hope you're able to track Alcmene down soon."),MSGBOX_NPC,SPEAKER_RAMESH)
+    end
+}
+
+script Manhunt_CompleteQuest_Dialogue{
+    msgbox(format("I'll be back in the Production studio if you need me."),MSGBOX_NPC,SPEAKER_RAMESH)
+    end
+}
+
+script Manhunt_Assignment_Dialogue {
+    lock
+
+        setvar(VAR_MANHUNT_STATE,ASSIGNED_FIND_ALCMENE)
+
+        msgbox(format("Go find Alcmene. Charlotte will help. The newspaper in Perlacia City is a good place to start, they ran a story on TheTide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
+
+        call(TryAutoSave)
+        startquest(QUEST_MANHUNT)
+        buffermapname(STR_VAR_1,MAP_PERLACIA_CITY)
+        msgbox(gText_YouHaveYourOrders_DoYouWantTo,MSGBOX_YESNO)
+        if (var(VAR_RESULT))
+        {
+            fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_PERLACIA_CITY,6,20)
+        }
+    closemessage
+    release
+    end
+}
+
+//PerlaciaCity
+script Manhunt_Cherie_Battle_Script {
+    lock
+        playse(SE_EXIT)
+        waitse
+        clearflag(FLAG_HIDE_CHARLOTTE)
+        addobject(CHARLOTTE)
+        applymovement(CHARLOTTE,Manhunt_WalkInNewspaper)
+
+        msgbox(format("Hey, we're trying to find Alcmene, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
+
+
+        msgbox(format("Yeah, I wrote the TheTide leadership piece a few months back. It was more than time to see such a great group of youngsters really start to get the recognition they deserve. And getting to really sit down with Alcmene… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
+
+        msgbox(format("Blessed? TheTide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+
+        msgbox(format("…wait. You're that {PLAYER} kid, aren't you? "),,SPEAKER_CHERIE)
+
+        msgbox(format("That's us."),,SPEAKER_ALICIA)
+
+
+        msgbox(format("I should have recognized you two sooner. What're you doing snooping around here? Haven't you two helped enough? "),,SPEAKER_CHERIE)
+
+        msgbox(format("Hey, we just want to talk!"),,SPEAKER_ALICIA)
+
+
+        msgbox(format("As a matter of fact, get the hell out of here. Everything you two do is just hurting the region and lining the pockets of people who don't even care. Get out!"),,SPEAKER_CHERIE)
+        closemessage
+        multi_fixed_2_vs_1(TRAINER_CHERIE,format("…Please don't hurt us any further. What do you want?"),PARTNER_STEVEN)
+        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1)
+        startcutscene(JUMPPLAYER_MANHUNT_NEWS)
+        msgbox(format("Start talking. Who's Alcmene behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+
+        msgbox(format("Alcmene? I swear, I don't know who she is. Nobody does. I'm a reporter… I wouldn't keep that a secret."),,SPEAKER_CHERIE)
+
+        msgbox(format("I KNOW you know some shit."),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+
+        msgbox(format("The only lead I have is a consulting firm in MermerezaCity… there's money flowing between there and TheTide, or, at least there was. I never figured out what was going on though."),,SPEAKER_CHERIE)
+
+        msgbox(format("That's a start…"),,SPEAKER_ALICIA)
+
+
+        msgbox(format("Now please… leave us alone."),MSGBOX_AUTOCLOSE,SPEAKER_CHERIE)
+        applymovement(CHARLOTTE,Manhunt_LeaveNewspaper)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(CHARLOTTE)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+//MermerezaCity
+script Manhunt_Teodoro_Battle_Script {
+    lock
+        playse(SE_EXIT)
+        waitse
+        clearflag(FLAG_HIDE_CHARLOTTE)
+        addobject(CHARLOTTE)
+        applymovement(CHARLOTTE,Manhunt_WalkIntoConsulting)
+        msgbox(format("What are some kids doing here?"),MSGBOX_NPC,SPEAKER_TEODORO)
+
+        msgbox(format("You gonna make this easy? Or are you gonna keep protecting TheTide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+
+        msgbox(format("TheTide? What the hell are you talking about? "),,SPEAKER_TEODORO)
+
+        msgbox(format("We know you're working with TheTide, and we need to find their leader."),,SPEAKER_ALICIA)
+
+
+        msgbox(format("Yeah, I did some work for them a while back. What about it? Gonna rat us out to your bosses?"),,SPEAKER_TEODORO)
+        closemessage
+        multi_fixed_2_vs_1(TRAINER_ALLEN,format("Damn punks."),PARTNER_STEVEN)
+        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2)
+        startcutscene(JUMPPLAYER_MANHUNT_BUSINESS)
+
+        msgbox(format("Wow! They weren't really that strong… did Charlotte really need to go that hard?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+
+        msgbox(format("What do you know about TheTide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(format("Look, I don't know what you're digging for. TheTide is all above ground, nothing to hide, just trying to do some damn good in the world."),,SPEAKER_TEODORO)
+
+        msgbox(format("Good in the world, bullshit. There's gotta be something unusual. Keep thinking!"),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+
+        msgbox(format("The only weird thing about them was buying Balls in bulk from that Speciality Ball Shop… but seriously, there's nothing interesting there."),,SPEAKER_TEODORO)
+
+        msgbox(format("That's in IrisinaTown. Let's move."),,SPEAKER_CHARLOTTE_SHARPRISE)
+// PSF TODO make sure all the NPCs here repeat themselves
+
+        msgbox(format("God forbid some good people try to make some change without these tech cronies ruining it for everybody."),MSGBOX_AUTOCLOSE,SPEAKER_TEODORO)
+        applymovement(CHARLOTTE,Manhunt_LeaveConsulting)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(CHARLOTTE)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+const CHARLOTTE_MON = 3
+
+//IrisinaTown_Balls
+script Manhunt_Dudley_Battle_Script
+{
+    lock
+
+        playse(SE_EXIT)
+        waitse
+        clearflag(FLAG_HIDE_CHARLOTTE)
+        addobject(CHARLOTTE)
+        applymovement(CHARLOTTE,Manhunt_WalkIntoBallShop)
+        applymovement(1,Manhunt_ExclaimAndTurn)
+
+        msgbox(format("How can I help - "),MSGBOX_NPC,SPEAKER_DUDLEY)
+
+        msgbox(format("We're looking for the Alcmene, the leader of TheTide. What do you know about them?"),,SPEAKER_ALICIA)
+
+        msgbox(format("Woah, the Champion. Are you looking to change -"),,SPEAKER_DUDLEY)
+
+        msgbox(format("Hey buddy, focus. Alcemene. TheTide. Tell. Us. What. You. Know."),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(format("TheTide? Yeah, they're one of our customers, why?"),,SPEAKER_DUDLEY)
+
+        msgbox(format("Because we're busting their shit up. They're buying in bulk from you. What are they buying?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(format("What did they buy? I don't think I'm supposed to divulge that, but I can ask my boss."),,SPEAKER_DUDLEY)
+
+        msgbox(format("I'm sure we can help you divulge a little."),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(format("Woah wait hold on!"),,SPEAKER_DUDLEY)
+        closemessage
+        multi_fixed_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_STEVEN)
+        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3)
+        startcutscene(JUMPPLAYER_MANHUNT_BALL)
+
+        msgbox(format("Shit man, I'm just doing my job!"),,SPEAKER_DUDLEY)
+
+        msgbox(format("And we're just trying to do our job. Could you please just tell us what you know?"),,SPEAKER_ALICIA)
+
+        msgbox(format("They bought a bunch of Dusk Balls in bulk. I don't know why, I don't know where they were going or what they were doing. "),,SPEAKER_DUDLEY)
+
+        msgbox(format("What else! Think hard, or else."),,SPEAKER_CHARLOTTE_SHARPRISE)
+        closemessage
+
+        playse(SE_BALL_OPEN)
+        waitse
+        addobject(CHARLOTTE_MON)
+        playmoncry(SPECIES_GROWLITHE,CRY_MODE_ENCOUNTER)
+        waitmoncry
+        //PSF TODO change to charlotte's ace
+
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        msgbox(format("Woah, Charlotte, do we really need… -"),,SPEAKER_ALICIA)
+        waitmovement(PLAYER)
+
+        msgbox(format("I got this {PLAYER} {EMOJI_NOTE}!"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_HAPPY)
+        closemessage
+        applymovement(CHARLOTTE,Common_Movement_WalkInPlaceLeft)
+        waitmovement(CHARLOTTE)
+
+        msgbox(format("One time they had them delivered to Route98, but I swear that doesn't mean anything! Please don't hurt me…"),,SPEAKER_DUDLEY)
+        msgbox(format("sob…"),MSGBOX_AUTOCLOSE,SPEAKER_DUDLEY)
+        applymovement(CHARLOTTE,Manhunt_LeaveBallShop)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(CHARLOTTE)
+        removeobject(CHARLOTTE_MON)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script Manhunt_TransformTreestoTallGrass {
+    setmetatile(24,29,0x015,TRUE)
+    setmetatile(24,28,0x015,TRUE)
+    setmetatile(24,27,0x015,TRUE)
+    setmetatile(24,26,0x015,TRUE)
+}
+//Route98
+script Manhunt_Matthew_Battle_Script {
+        lock
+        clearflag(FLAG_HIDE_CHARLOTTE)
+        addobject(CHARLOTTE)
+        call(Manhunt_TransformTreestoTallGrass)
+        applymovement(CHARLOTTE,Manhunt_WalkOntoRoute)
+        waitmovement(0)
+        applymovement(MATTHEW,Common_Movement_FacePlayer)
+        waitmovement(MATTHEW)
+        msgbox(format("Oh damn, looks like they were right."),,SPEAKER_MATTHEW)
+
+        msgbox(format("Who's they?"),,SPEAKER_ALICIA)
+
+
+        msgbox(format("Yeah, Alcmene told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
+        closemessage
+
+        multi_fixed_2_vs_1(TRAINER_SHANNON,format("Oh damn, looks like they were right."),PARTNER_STEVEN)
+        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
+        startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
+
+        msgbox(format("You're no joke. Alcmene wants you to meet them at Wishaast Lake, after sunset. Just the two of you - no police or SharpriseCapital cronies, or the trail goes cold again. Up to you. They're tired of you hurting people just to track them down, and I agree, you're…"),MSGBOX_AUTOCLOSE,SPEAKER_MATTHEW)
+        closemessage
+        applymovement(MATTHEW,Common_Movement_FaceRight)
+        waitmovement(MATTHEW)
+        msgbox(format("a real piece of work."),,SPEAKER_MATTHEW)
+        closemessage
+        applymovement(CHARLOTTE,Manhunt_LeaveRoute)
+        waitmovement(0)
+        removeobject(CHARLOTTE)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script Manhunt_ReactAdaoraArrest_Dialogue
+{
+    bufferstring(STR_VAR_1,"Adaora")
+    call(Manhunt_React_Dialogue)
+    return
+}
+
+script Manhunt_ReactAdaoraKaiArrest_Dialogue
+{
+    bufferstring(STR_VAR_1,"Adaora and Kai")
+    call(Manhunt_React_Dialogue)
+    return
+}
+
+script Manhunt_React_Dialogue
+{
+    msgbox(format("Your reign of terror against The Tide ends here, {PLAYER}."),MSGBOX_NPC,SPEAKER_ALCMENE)
+    msgbox(format("I can't stand by and watch more innocent people get hurt while your superiors are hellbent on destroying us."),MSGBOX_NPC,SPEAKER_ALCMENE)
+    msgbox(format("And then what you did to {STR_VAR_1}?"),MSGBOX_NPC,SPEAKER_ALCMENE)
+    msgbox(format("No.\N{PAUSE 60}Your war ends with me."),MSGBOX_NPC,SPEAKER_ALCMENE)
+    return
+}
+
+script Manhunt_Encounter_Alcmene_Dialogue {
+    lock
+
+        if(var(VAR_MANHUNT_STATE) != SAVED_BEFORE_ALCMENE){
+            setvar(VAR_MANHUNT_STATE,SAVED_BEFORE_ALCMENE)
+            startmenu_savescreen
+        }
+
+        clearflag(FLAG_HIDE_CHARLOTTE)
+        addobject(CHARLOTTE)
+
+        applymovement(CHARLOTTE,Manhunt_ApproachAtLake)
+        waitmovement(0)
+
+    specialvar(VAR_RESULT,GetFalseTimelineCompletion)
+    switch(var(VAR_RESULT))
+    {
+        case FALSE_TIMELINE_BURN_COMPLETE:
+        case FALSE_TIMELINE_NONE_COMPLETE:
+            msgbox(format("Stop hurting people. I'm here."),MSGBOX_NPC,SPEAKER_ALCMENE)
+
+        case FALSE_TIMELINE_HOW_BURN_COMPLETE:
+            call(Manhunt_ReactAdaoraKaiArrest_Dialogue)
+
+        case FALSE_TIMELINE_HOW_COMPLETE:
+            call(Manhunt_ReactAdaoraArrest_Dialogue)
+    }
+        closemessage
+
+        lock
+
+        multi_fixed_2_vs_1(TRAINER_ALCMENE,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Residoafter all."),PARTNER_STEVEN)
+        setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE)
+        addvar(VAR_STORYLINE_STATE,1)
+        startcutscene(JUMPPLAYER_MANHUNT_ALCMENE)
+
+        msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_ALCMENE,TAIL_WHISPER,EMOTE_SAD) //PSF TODO EMOTE sniff
+
+    specialvar(VAR_RESULT,GetFalseTimelineCompletion)
+    switch(var(VAR_RESULT))
+    {
+        case FALSE_TIMELINE_HOW_BURN_COMPLETE:
+            msgbox(format("TheTide is finished. The region is yours now."),,SPEAKER_ALCMENE)
+    }
+
+    msgbox(format("I'll call this in."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    closemessage
+    playse(SE_POKENAV_CALL)
+    waitse
+    msgbox(format("Adelaide, I've defeated Alcemene. We'll be at the entrance to Lake Wishaast."),,SPEAKER_CHARLOTTE_SHARPRISE,,,PHONE_ON)
+
+        msgbox(format("What!? Wait uh - okay um, excellent work! I was expecting an email, but this will do! I'll send the police right over. This is amazing!"),,SPEAKER_ADELAIDE,,EMOTE_SHOCK,PHONE_ON)
+
+        closemessage
+
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,5,5)
+}
+
+script Manhunt_MissionComplete_Dialogue {
+    lock
+
+        setvar(VAR_MANHUNT_STATE,MANHUNT_COMPLETE)
+
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        applymovement(RAMESH,Common_Movement_FaceDown)
+        waitmovement(0)
+
+        msgbox(format("Good job, {PLAYER}. You should proud of the work you've done today."),,SPEAKER_RAMESH)
+
+        msgbox(format("Really? I feel like proud isn't quite the right emotion - Charlotte and I were pretty rough out there."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+
+        msgbox(format("Look at this way - we can already see them scrambling on Buzzr. Without their leader, its going to be even more difficult for TheTide to mobilize any further initatives. You're making things better, and that's what's important."),,SPEAKER_RAMESH,,EMOTE_HAPPY)
+
+    specialvar(VAR_RESULT,GetFalseTimelineCompletion)
+    switch(var(VAR_RESULT))
+    {
+        case FALSE_TIMELINE_HOW_BURN_COMPLETE:
+        case FALSE_TIMELINE_HOW_COMPLETE:
+            msgbox(format("Then why do I feel like I'm making things worse?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
+
+        case FALSE_TIMELINE_BURN_COMPLETE:
+            msgbox(format("No leader and no base. Without The Tide, will things actually get better?"),TAIL_THOUGHT,EMOTE_CONFUSE)
+
+        case FALSE_TIMELINE_NONE_COMPLETE:
+            msgbox(format("The others won't be this bad, as long as I'm not working with Charlotte again... right?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+            msgbox(format("When this is all over, Residowill be a better place. It will be."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    }
+    closemessage
+
+    completequest(QUEST_MANHUNT)
+        call(TryAutoSave)
+    endcutscene
+    release
+    call(ExhibitionBattle_TimeSkip_Script)
+    end
+}
+
+movement Manhunt_WalkInNewspaper {
+    walk_down * 3
+    walk_left * 3
+    walk_down * 2
+    step_end
+}
+
+movement Manhunt_LeaveNewspaper {
+    walk_up * 2
+    walk_right * 3
+    walk_up * 3
+    step_end
+}
+
+movement Manhunt_WalkIntoConsulting {
+    walk_up * 2
+    jump_2_up
+    face_right
+    step_end
+}
+
+movement Manhunt_LeaveConsulting {
+    walk_down
+    jump_down
+    walk_down * 2
+    step_end
+}
+
+movement Manhunt_WalkIntoBallShop {
+    walk_down * 2
+    walk_left * 2
+    walk_down
+    step_end
+}
+
+movement Manhunt_ExclaimAndTurn {
+    emote_exclamation_mark
+    face_up
+    delay_16
+    faceplayer
+    step_end
+}
+
+movement Manhunt_LeaveBallShop {
+    walk_left * 2
+    walk_down * 4
+    step_end
+}
+
+movement Manhunt_WalkOntoRoute {
+    walk_up * 7
+    step_end
+}
+
+movement Manhunt_LeaveRoute {
+    walk_left * 7
+    walk_up * 6
+    step_end
+}
+
+movement Manhunt_ApproachAtLake {
+    walk_up * 6
+    step_end
+}
+

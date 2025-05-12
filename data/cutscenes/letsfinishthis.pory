@@ -1,0 +1,224 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CAMERA = OBJ_EVENT_ID_CAMERA
+const KAI = 3
+const ADAORA = 13
+const TALA = 15
+const MAGNUS = 16
+const ARMANDO = 17
+const ELLEN = 18
+
+const FLAG_HIDE_POLICE = FLAG_TEMP_2
+const FLAG_HIDE_ELITE = FLAG_TEMP_4
+const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_ADAORA = FLAG_TEMP_3
+
+script LetsFinishThis_ObjectHide_Script{
+    setflag(FLAG_HIDE_POLICE)
+    setflag(FLAG_HIDE_ELITE)
+    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_ADAORA)
+    return
+}
+
+script LetsFinishThis_ObjectSetUp_Script {
+    setflag(FLAG_HIDE_POLICE)
+
+        setobjectxy(ADAORA,32,12)
+        setobjectxyperm(ADAORA,32,12)
+
+        setobjectxy(KAI,33,12)
+        setobjectxyperm(KAI,33,12)
+}
+
+script LetsFinishThis_MovePlayer_Script {
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        if (var(VAR_TEMP_0) != 34 || (var(VAR_TEMP_1) != 13)){
+            fadescreen(FADE_TO_BLACK)
+                setobjectxy(PLAYER,34,13)
+                TeleportCamera(34,13)
+                fadescreen(FADE_FROM_BLACK)
+        }
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+        waitmovement(0)
+        goto(LetsFinishThis_Debrief_Dialogue)
+}
+
+script LetsFinishThis_Debrief_Dialogue
+{
+    lock
+        startcutscene(JUMPPLAYER_LETSFINISHTHIS)
+        msgbox(gText_LetsFinishThis_IDontThinkIm,,SPEAKER_MAGNUS)
+
+        msgbox(gText_LetsFinishThis_ThatPartDoesnt,,SPEAKER_ARMANDO)
+
+        msgbox(gText_LetsFinishThis_ButInnocentPeople,,SPEAKER_TALA)
+
+        msgbox(gText_LetsFinishThis_PerfevtlySane,,SPEAKER_ELLEN)
+
+        msgbox(gText_LetsFinishThis_ButTheyWerentAlways,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_LetsFinishThis_HasAlwaysBeenRuthless,,SPEAKER_ADAORA)
+
+        msgbox(gText_LetsFinishThis_ThatsWhatIMean,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_LetsFinishThis_PerhapsDesperate,,SPEAKER_ARMANDO)
+
+        msgbox(gText_LetsFinishThis_MaybeNowItsTime,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_LetsFinishThis_NowMightBeTheTime,,SPEAKER_MAGNUS)
+
+        msgbox(gText_LetsFinishThis_PublicSentimentIsStrong,,SPEAKER_TALA)
+
+        msgbox(gText_LetsFinishThis_EvenIfWePullIt,,SPEAKER_ADAORA)
+
+        msgbox(gText_LetsFinishThis_TheyCameForTheKings,,SPEAKER_ELLEN)
+
+        msgbox(gText_LetsFinishThis_SoBreakInto,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_LetsFinishThis_APublicConfession,,SPEAKER_ARMANDO)
+
+        msgbox(gText_LetsFinishThis_IWasBeingSarcastic,,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_SHOCK)
+
+        msgbox(gText_LetsFinishThis_TheHardestPartOfThatPlan,,SPEAKER_ELLEN)
+
+        msgbox(gText_LetsFinishThis_TwoOldCoots,,SPEAKER_TALA)
+
+        msgbox(gText_LetsFinishThis_TheWarpPanels,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        closemessage
+        goto(LetsFinishThis_GoToFlashback_Script)
+}
+
+script LetsFinishThis_GoToFlashback_Script {
+    fadescreen(FADE_TO_BLACK)
+        //PSF TODO Flashback
+        msgbox(format("this is a flashback to Oliver's kids explaining the warp panels."),MSGBOX_AUTOCLOSE)
+        fadescreen(FADE_FROM_BLACK)
+        goto(LetsFinishThis_StartPlanning_Dialogue)
+}
+
+script LetsFinishThis_StartPlanning_Dialogue {
+    lock
+
+        msgbox(gText_LetsFinishThis_NobodyHasSeen,,SPEAKER_ADAORA)
+
+        msgbox(gText_LetsFinishThis_WhatAbout,,SPEAKER_ARMANDO)
+        closemessage
+
+        applymovement(PLAYER, Common_Movement_FaceDown)
+        applymovement(ELLEN, LetsFinishThis_WalkToPlayer)
+        waitmovement(ELLEN)
+
+        msgbox(gText_LetsFinishThis_WereOntoSomething,,SPEAKER_ELLEN)
+        closemessage
+
+        applymovement(ELLEN, LetsFinishThis_WalkAway)
+        waitmovement(ELLEN)
+
+        setvar(VAR_STORYLINE_STATE,STORY_BEFORE_RAMESH_BREAKIN)
+        setvar(VAR_HALAI_ISLAND_STATE,POST_WAIT_EVEN_THEN)
+
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+text gText_LetsFinishThis_IDontThinkIm {
+    format("I don’t think I’m surprised by SharpriseCapital, but the government too? All those talks, those negotiations… aren’t they supposed to protect their citizens?")
+}
+
+text gText_LetsFinishThis_ThatPartDoesnt {
+    format("That part doesn’t surprise me. Old age getting to you? We all know, money is their only constituent.")
+}
+
+text gText_LetsFinishThis_ButInnocentPeople {
+    format("But innocent people? Attacking an entire island just to wipe out TheTide? This is insane!")
+}
+
+text gText_LetsFinishThis_PerfevtlySane {
+    format("Perfectly sane. It worked on Arantraz didn’t it? There’s no peaceful path forward. Do you all get it now? They’re poised to kill!")
+}
+
+text gText_LetsFinishThis_ButTheyWerentAlways {
+    format("But they weren’t always, were they?")
+}
+
+text gText_LetsFinishThis_HasAlwaysBeenRuthless {
+    format("SharpriseCapital has always been ruthless! Killing is… new though.")
+}
+
+text gText_LetsFinishThis_ThatsWhatIMean {
+    format("That’s what I mean. We spun up this awesome program, we attacked the operations of their corporate partners, our message is really getting out there! I think they’re nervous.")
+}
+text gText_LetsFinishThis_PerhapsDesperate {
+    format("Perhaps desperate.")
+}
+
+text gText_LetsFinishThis_MaybeNowItsTime {
+    format("Maybe now it's the time to really bring the fight to them!")
+}
+
+text gText_LetsFinishThis_NowMightBeTheTime {
+    format("Now might be the time. We’ve explored every other path.")
+}
+
+text gText_LetsFinishThis_PublicSentimentIsStrong {
+    format("Public sentiment is strong as hell. A confrontation and confession might be a moonshot, but it's a helluva shot, right?")
+}
+
+text gText_LetsFinishThis_EvenIfWePullIt {
+    format("Even if we pull it off, will exposing them even matter? Or work?")
+}
+
+text gText_LetsFinishThis_TheyCameForTheKings {
+    format("They came for the Kings and missed. This may be our only chance to fight back.")
+}
+
+text gText_LetsFinishThis_SoBreakInto {
+    format("So, break into SharpriseSpire, force a confession from Adelaide, broadcast it using their equipment and public sentiment will come crashing down. Right?")
+}
+
+text gText_LetsFinishThis_APublicConfession {
+    format("A public confession would force the government to take action.")
+}
+
+text gText_LetsFinishThis_IWasBeingSarcastic {
+    format("I was being sarcastic!")
+}
+
+text gText_LetsFinishThis_TheHardestPartOfThatPlan {
+    format("The hardest part of that plan is actually just getting to Adelaide. The rest of that is fairly plausible, given we survive.")
+}
+
+text gText_LetsFinishThis_TwoOldCoots {
+    format("Two old coots, some has-beens, and a bunch of kids running into the belly of the beast? Count me the hell in.")
+}
+
+text gText_LetsFinishThis_TheWarpPanels {
+    format("The warp panels!")
+}
+
+text gText_LetsFinishThis_NobodyHasSeen {
+    format("Nobody has seen Keiying since their stunt in the warehouse. Cops have been crawling all over that neighborhood and house looking for him.")
+}
+
+text gText_LetsFinishThis_WhatAbout {
+    format("What about Ramesh? That workaholic absolutely has a panel in their place too. And no police looking for them.")
+}
+
+text gText_LetsFinishThis_WereOntoSomething {
+    format("We’re onto something. You should go prepare! Once we start, I don’t think there’s any turning back. Meet us outside Ramesh’s house in QiuVillage.")
+}
+
+movement LetsFinishThis_WalkToPlayer {
+    walk_right
+        face_up
+        step_end
+}
+
+movement LetsFinishThis_WalkAway {
+    walk_left
+        face_up
+        step_end
+}

@@ -1,0 +1,270 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const FLAG_HIDE_SQUATTERS = FLAG_TEMP_1
+const FLAG_HIDE_CONSTRUCTION = FLAG_TEMP_2
+const EMPLOYEE = 5
+
+const RAINER = 1
+const SQUATTER_B = 3
+const SQUATTER_C = 4
+
+//Quest_BuildingScope_
+//gText_BuildingScope_
+
+script Quest_BuildingScope_MoveEmployee_Script{
+    returnqueststate(QUEST_BUILDINGSCOPE)
+
+    if (var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+    setobjectxy(EMPLOYEE,5,1)
+    setobjectxyperm(EMPLOYEE,5,1)
+    }
+}
+
+script Quest_BuildingScope_ToggleObjects_Script{
+    returnqueststate(QUEST_BUILDINGSCOPE)
+
+    switch (var(VAR_RESULT)){
+        case QUEST_MENU_SET_REWARD:
+            call(Quest_BuildingScope_HideConstruction_Script)
+        case QUEST_MENU_COMPLETE_QUEST:
+            call(Quest_BuildingScope_HideSquatters_Script)
+        default:
+            call(Quest_BuildingScope_HideSquatters_Script)
+            call(Quest_BuildingScope_HideConstruction_Script)
+    }
+    return
+}
+
+script Quest_BuildingScope_HideSquatters_Script{
+    setflag(FLAG_HIDE_SQUATTERS)
+    return
+}
+
+script Quest_BuildingScope_HideConstruction_Script{
+    setflag(FLAG_HIDE_CONSTRUCTION)
+    return
+}
+
+script Quest_BuildingScope_Event_Script{
+    lock
+
+    returnqueststate(QUEST_BUILDINGSCOPE)
+
+    switch(var(VAR_RESULT)){
+        case QUEST_MENU_SET_ACTIVE:
+            faceplayer
+            goto(Quest_BuildingScope_Employee_Active_Dialogue)
+        case QUEST_MENU_SET_REWARD:
+            faceplayer
+            goto(Quest_BuildingScope_Reward_Dialogue)
+        case QUEST_MENU_COMPLETE_QUEST:
+            faceplayer
+        default: goto(Quest_BuildingScope_CheckBadges_Script)
+    }
+}
+
+script Quest_BuildingScope_CheckBadges_Script{
+   special(GetNumberOfBadges)
+
+   if (var(VAR_RESULT) < 5){
+      goto(Quest_BuildingScope_ScaredEmployee_Dialogue)
+   }else{
+       goto(Quest_BuildingScope_StartQuest_Dialogue)
+   }
+}
+
+script Quest_BuildingScope_ScaredEmployee_Dialogue{
+    msgbox(gText_BuildingScope_HowBadCouldItBe,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    release
+    end
+}
+
+script Quest_BuildingScope_StartQuest_Dialogue{
+    faceplayer
+    msgbox(gText_BuildingScope_OhYourePlayer,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(gText_BuildingScope_TheresABuildingIn,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(gText_BuildingScope_AnimalsOrPokemon,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    closemessage
+
+    applymovement(EMPLOYEE,Common_Movement_WalkDown)
+    waitmovement(EMPLOYEE)
+
+    startquest(QUEST_BUILDINGSCOPE)
+    release
+    end
+}
+
+script Quest_BuildingScope_Employee_Active_Dialogue{
+    msgbox(gText_BuildingScope_OneDayIll,MSGBOX_NPC,SPEAKER_SHARPRISECAPITAL_STAFF)
+    end
+}
+
+script Quest_BuildingScope_Squatters_Cutscene{
+    lock
+
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_BUILDINGSCOPE)
+
+    if (!var(VAR_RESULT)){
+        release
+        end
+    }
+
+    applymovement(PLAYER,Common_Movement_FaceUp)
+
+    addobject(RAINER)
+    addobject(SQUATTER_B)
+    addobject(SQUATTER_C)
+
+    applymovement(RAINER,Quest_BuildingScope_WalkToPlayer_Movement)
+    applymovement(SQUATTER_B,Quest_BuildingScope_WalkToPlayer_Movement)
+    applymovement(SQUATTER_C,Quest_BuildingScope_WalkToPlayer_Movement)
+    waitmovement(SQUATTER_C)
+    goto(Quest_BuildingScope_BattleSquatters_Script)
+}
+
+script Quest_BuildingScope_BattleSquatters_Script{
+    msgbox(gText_BuildingScope_FinallyHadTheBalls,,SPEAKER_DEFAULT)
+    trainerbattle_no_intro(TRAINER_BUILDINGSCOPE_A,gText_BuildingScope_WhyWontYou)
+    msgbox(gText_BuildingScope_ThrowingGasAtUs,,SPEAKER_DEFAULT)
+    trainerbattle_no_intro(TRAINER_BUILDINGSCOPE_B,gText_BuildingScope_YouDisgustMe)
+    msgbox(gText_BuildingSCope_NothingIsEverGood,,SPEAKER_RAINER)
+    trainerbattle_no_intro(TRAINER_BUILDINGSCOPE_C,gText_BuildingScope_Scum)
+    goto(Quest_BuildingScope_PostBattle_Dialogue)
+}
+
+script Quest_BuildingScope_PostBattle_Dialogue{
+    lock
+    msgbox(gText_BuildingScope_NobodyIsTryingTo,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_BuildingScope_ThrowingShitAt,,SPEAKER_DEFAULT)
+
+    msgbox(gText_BuildingScope_SomebodyAskedMe,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_BuildingScope_UhHuhPokemon,,SPEAKER_DEFAULT)
+
+    msgbox(gText_BuildingScope_LookTheGuyIWas,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_BuildingScope_NotLikeWeGotAnywhere,,SPEAKER_DEFAULT)
+    closemessage
+
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_BUILDINGSCOPE)
+    release
+    end
+}
+
+script Quest_BuildingScope_Reward_Dialogue{
+    msgbox(gText_BuildingScope_IGotInto,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_BuildingScope_WaitPeopleWere,,SPEAKER_SHARPRISECAPITAL_STAFF)
+
+    msgbox(gText_BuildingScope_YeahTheyWere,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_BuildingScope_OhWowWell,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(gText_BuildingScope_IllSendSomebody,,SPEAKER_SHARPRISECAPITAL_STAFF)
+
+	showmoneybox(0, 0)
+    waitbuttonpress
+    addmoney(50000)
+    playse(SE_SHOP)
+    updatemoneybox(0)
+    waitse
+    waitbuttonpress
+    hidemoneybox
+    closemessage
+
+    completequest(QUEST_BUILDINGSCOPE)
+    release
+    end
+}
+
+script Quest_BuildingScope_PostQuest_Dialogue{
+    msgbox(gText_BuildingScope_WeHired,MSGBOX_NPC,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    end
+}
+
+text gText_BuildingScope_HowBadCouldItBe{
+    format("How bad could it be...? Come on, just barge in there and tell 'em what's what!")
+}
+text gText_BuildingScope_OhYourePlayer{
+    format("Oh! You're {PLAYER}. Maybe... you can help me? I work for SharpriseCapital, in the League Ops Division")
+}
+text gText_BuildingScope_TheresABuildingIn{
+    format("this building is abandoned, so the league wants to buy it to turn it into a battle arena. But I'm pretty sure its overrun by beasts! Nasty things, they attack whenever we try to go inside.")
+}
+text gText_BuildingScope_AnimalsOrPokemon{
+    format("Animals... or pokemon or something. Can you go in there and clear them out, because you're tougher than me!")
+}
+text gText_BuildingScope_OneDayIll{
+    format("one day i'll have some balls")
+}
+text gText_BuildingScope_FinallyHadTheBalls{
+    format("Finally had the balls to come in here yourself huh")
+}
+text gText_BuildingScope_WhyWontYou{
+    format("why wont you leave us alone")
+}
+text gText_BuildingScope_ThrowingGasAtUs{
+    format("throwing gas cans through the windows, setting off stike bombs, playing loud music... what is wrong with you?")
+}
+text gText_BuildingScope_YouDisgustMe{
+    format("you disgust me.")
+}
+text gText_BuildingSCope_NothingIsEverGood{
+    format("nothing is ever good about for you guys huh")
+}
+text gText_BuildingScope_Scum{
+    format("scum.")
+}
+text gText_BuildingScope_NobodyIsTryingTo{
+    format("nobody is trying to hurt you")
+}
+text gText_BuildingScope_ThrowingShitAt{
+    format("throwing shit through the windows? what the hell is that?")
+}
+text gText_BuildingScope_SomebodyAskedMe{
+    format("somebody asked me to help clear out some aggressive pokemon. we had no idea there were people in here")
+}
+text gText_BuildingScope_UhHuhPokemon{
+    format("uh huh. pokemon? really?")
+}
+text gText_BuildingScope_LookTheGuyIWas{
+    format("look, the guy I was helping seemed super nice. he doesn't seem like the kind of guy to attack people. let me go talk to him and clear it up")
+}
+text gText_BuildingScope_NotLikeWeGotAnywhere{
+    format("not like we got anywhere to go")
+}
+text gText_BuildingScope_IGotInto{
+    format("I got inside no problem, but there were no pokemon, just some people living there!")
+}
+text gText_BuildingScope_WaitPeopleWere{
+    format("wait people? like actual humans? not some beasts?")
+}
+text gText_BuildingScope_YeahTheyWere{
+    format("yeah! they're living there because they have nowhere else to go")
+}
+text gText_BuildingScope_OhWowWell{
+    format("oh wow well we can't have that. i suppose we're effectiely taking their home away, but I'll work with the team to find a better place for them. everybody wins!")
+}
+text gText_BuildingScope_IllSendSomebody{
+    format("i'll send somebody over right now. thank you for subduing the ani - those people. what a misunderstanding! and this is for you...")
+}
+text gText_BuildingScope_WeHired{
+    format("we hired the best contractors from Vermilion City to work on the building. we might even be done AHEAD of schedule!")
+}
+
+text AquaHideout_TestText{
+	"Our Hideout's secret?\n"
+	"Well, let's just say…\n"
+	"There's a subespuleeoutskirtse at the far end!\p"
+	"But, by now…\n"
+	"Kekekeke…$"
+}
+
+movement Quest_BuildingScope_WalkToPlayer_Movement{
+    walk_down * 5
+    step_end
+}

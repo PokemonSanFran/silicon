@@ -1,0 +1,190 @@
+//Quest_Battlearcademiniquest_
+//gText_Miniarcade_
+
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHRIS = 1
+
+script Quest_Battlearcademiniquest_Event_Script{
+    goto_if_quest_complete(QUEST_BATTLEARCADEMINIQUEST,Quest_Battlearcademiniquest_Complete_Script)
+    goto_if_quest_active(QUEST_BATTLEARCADEMINIQUEST,Quest_Battlearcademiniquest_Active_Script)
+    goto(Quest_Battlearcademiniquest_StartQuest_Script)
+}
+
+script Quest_Battlearcademiniquest_StartQuest_Script{
+    lock
+    msgbox(gText_Miniarcade_WhatGameIs,,SPEAKER_ALICIA)
+    msgbox(gText_Miniarcade_OhManYouWannaTry,MSGBOX_NPC,SPEAKER_CHRIS)
+    msgbox(gText_Miniarcade_ItsCalledArcade,,SPEAKER_CHRIS)
+    msgbox(gText_Miniarcade_YourePlayingArcade,,SPEAKER_ALICIA)
+    msgbox(gText_Miniarcade_YeahButItsLegit,,SPEAKER_CHRIS)
+    call(Quest_Battlearcademiniquest_CheckQuestAndStart)
+    goto(Quest_Battlearcademiniquest_SaveBeforeChallenge_Script)
+    release
+    end
+}
+
+script Quest_Battlearcademiniquest_AskStartChallenge_Script{
+    call(Quest_Battlearcademiniquest_CheckQuestAndStart)
+    goto(Quest_Battlearcademiniquest_SaveBeforeChallenge_Script)
+}
+
+script Quest_Battlearcademiniquest_CheckQuestAndStart{
+    returnqueststate(QUEST_BATTLEARCADEMINIQUEST)
+
+    if (var(VAR_RESULT)< QUEST_MENU_SET_ACTIVE){
+        startquest(QUEST_BATTLEARCADEMINIQUEST)
+    }
+    return
+}
+
+script Quest_Battlearcademiniquest_CancelChallenge{
+    msgbox(gText_Miniarcade_NotReadyYet,MSGBOX_NPC,SPEAKER_CHRIS)
+    end
+}
+
+script Quest_Battlearcademiniquest_Active_Script{
+    msgbox(gText_Miniarcade_AhhhHereForThe,,SPEAKER_CHRIS)
+    goto(Quest_Battlearcademiniquest_SaveBeforeChallenge_Script)
+}
+
+script Quest_Battlearcademiniquest_Complete_Script{
+    msgbox(gText_Miniarcade_ItchingForMore,,SPEAKER_CHRIS)
+    goto(Quest_Battlearcademiniquest_SaveBeforeChallenge_Script)
+}
+
+script Quest_Battlearcademiniquest_SaveBeforeChallenge_Script{
+    msgbox(gText_Miniarcade_ThisGameIsPrettyWild,,SPEAKER_CHRIS)
+    closemessage
+    special(SavePlayerPartyBattleFrontier)
+    startmenu_savescreen
+
+    if (var(VAR_RESULT) == FALSE){
+        goto(Quest_Battlearcademiniquest_CancelChallenge)
+    }
+    goto(Quest_Battlearcademiniquest_StartChallenge)
+}
+
+script Quest_Battlearcademiniquest_StartChallenge{
+    special(SavePlayerParty)
+    msgbox(gText_Miniarcade_OkaySoPressA,,SPEAKER_CHRIS)
+    //special(LoadEnemyParty)
+    //special(PlayArcadeGame)
+    call(Quest_Battlearcademiniquest_LoadText)
+    msgbox(gText_Miniarcade_ThatMeansEffect,,SPEAKER_CHRIS)
+    closemessage
+    goto(Quest_Battlearcademiniquest_Battle1_Script)
+}
+
+script Quest_Battlearcademiniquest_LoadText{
+
+    random(1)
+        switch(var(VAR_RESULT)){
+            case 0: bufferstring(STR_VAR_1,"my")
+            case 1: bufferstring(STR_VAR_1,"your")
+        }
+
+    random(3)
+        switch(var(VAR_RESULT)){
+            case 0:
+                bufferstring(STR_VAR_2,"asleep")
+            case 1:
+                    bufferstring(STR_VAR_2,"frozen")
+            case 2:
+                        bufferstring(STR_VAR_2,"paralyzed")
+            case 3:
+                            bufferstring(STR_VAR_2,"poisoned")
+        }
+    return
+}
+
+script Quest_Battlearcademiniquest_Battle1_Script{
+    trainerbattle_continue_after_lose(TRAINER_MINI_ARCADE_CHRIS,gText_Miniarcade_ThatWasCrazy)
+
+    call(Quest_Battlearcademiniquest_RestoreParty_Script)
+    if(var(VAR_RESULT) == B_OUTCOME_WON){
+        goto(Quest_Battlearcademiniquest_PostBattle1_Script)
+    }
+
+    goto(Quest_Battlearcademiniquest_ExitChallenge_Script)
+}
+
+script Quest_Battlearcademiniquest_PostBattle1_Script{
+    msgbox(gText_Miniarcade_ThatsNeverNot,,SPEAKER_CHRIS)
+    msgbox(gText_Miniarcade_YoureSuperGood,,SPEAKER_CHRIS)
+    call_if_quest_not_complete(QUEST_BATTLEARCADEMINIQUEST,Quest_Battlearcademiniquest_Reward_Dialogue)
+    closemessage
+    release
+    end
+}
+
+script Quest_Battlearcademiniquest_Reward_Dialogue{
+    msgbox(gText_Miniarcade_YoureLegitTake,,SPEAKER_CHRIS)
+    giveitem(ITEM_TM47)
+    completequest(QUEST_BATTLEARCADEMINIQUEST)
+    return
+}
+
+script Quest_Battlearcademiniquest_RestoreParty_Script{
+    msgbox(gText_Miniarcade_ThatsNeverNot,,SPEAKER_CHRIS)
+    fadescreen(FADE_TO_BLACK)
+    special(LoadPlayerPartyBattleFrontier)
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script Quest_Battlearcademiniquest_ExitChallenge_Script{
+    msgbox(gText_Miniarcade_ImAlwaysDown,,SPEAKER_CHRIS)
+    closemessage
+    release
+    end
+}
+
+text gText_Miniarcade_WhatGameIs{
+	format("What game is this guy playing...?")
+}
+text gText_Miniarcade_OhManYouWannaTry{
+	format("Oh man, you wanna try Arcade Sim +R Accent Core?")
+}
+text gText_Miniarcade_ItsCalledArcade{
+	format("...It's called Arcade Sim?")
+}
+text gText_Miniarcade_YourePlayingArcade{
+	format("You're playing Arcade Sim in an Arcade?")
+}
+text gText_Miniarcade_YeahButItsLegit{
+	format("Yeah, but its legit AF! You ready to play?.")
+}
+text gText_Miniarcade_NotReadyYet{
+	format("Not ready yet? No problem, let me know when you are.")
+}
+text gText_Miniarcade_ThisGameIsPrettyWild{
+	format("This game is pretty wild, so we gotta save your progress first, okay?")
+}
+text gText_Miniarcade_ItchingForMore{
+	format("Itching for more? I'm always down to play.")
+}
+text gText_Miniarcade_OkaySoPressA{
+	format("So, when the game board shows up press {A_BUTTON} to stop the cursor on the effect. That effect gets applied, and then we battle with that effect.")
+}
+text gText_Miniarcade_ThatMeansEffect{
+	format("Oh snap! That means {STR_VAR_1} party is all impacted by {STR_VAR_2}!")
+}
+text gText_Miniarcade_ThatWasCrazy{
+	format("That was crazy! Man, this is game is so awesome.")
+}
+text gText_Miniarcade_ThatsNeverNot{
+	format("That's NEVER not fun.")
+}
+text gText_Miniarcade_YoureSuperGood{
+	format("You're super good, gg for real.")
+}
+text gText_Miniarcade_YoureLegitTake{
+	format("Thanks for playing with me. Take this!")
+}
+text gText_Miniarcade_ImAlwaysDown{
+	format("I'm always down for a runback if you are, let me know!")
+}
+text gText_Miniarcade_AhhhHereForThe{
+    format("Aaah, here for that salty runback?")
+}

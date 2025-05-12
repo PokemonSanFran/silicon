@@ -1,0 +1,212 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+
+script LetsGettheBandBackTogether_HideObject_Script {
+    if (var(VAR_STORYLINE_STATE) == STORY_MORNING_OF_TIMELINE_SPLIT)
+    {
+        //If player has slept after being pitched by Kai, Arantraz should be empty except for Kai
+        setflag(FLAG_TEMP_2)
+    }
+    setflag(FLAG_TEMP_5)
+    setflag(FLAG_TEMP_6)
+    setflag(FLAG_TEMP_7)
+    setflag(FLAG_TEMP_8)
+    setflag(FLAG_TEMP_9)
+}
+
+script LetsGettheBandBackTogether_PreventPlayerEnterTower_Script
+{
+    if (flag(FLAG_TIMELINE_TIMETRAVEL))
+    {
+        lock
+        msgbox(gText_LetsGetTheBandBackTogether_IDontThinkIShould,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+        closemessage
+        applymovement(PLAYER,Common_Movement_WalkDown)
+        waitmovement(0)
+    }
+    release
+    end
+}
+
+//This cutscene plays after the player has decided to side with TheTide.
+script LetsGettheBandBackTogether_MeetInBasement_Script
+{
+
+    if (var(VAR_ARANTRAZ_STATE) == LAST_CHANCE_TRUE_TIMELINE_START)
+    {
+        goto(LetsGettheBandBackTogether_TrueTimelineSplit_Script)
+    }
+
+    lock
+    startcutscene(JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_BEFORE)
+    playse(SE_PIN)
+    waitse
+    applymovement(KAI,Common_Movement_ExclamationMark)
+    waitmovement(KAI)
+    msgbox(gText_LetsGetTheBandBackTogether_IDidntThinkYouWere,MSGBOX_NPC,SPEAKER_KAI,,EMOTE_SHOCK)
+
+    msgbox(gText_LetsGetTheBandBackTogether_IHadAnInsane,,SPEAKER_ALICIA)
+    msgbox(gText_LetsGetTheBandBackTogether_DamnYouDid,,SPEAKER_KAI)
+    msgbox(gText_LetsGetTheBandBackTogether_YouHaveNoIdea,,SPEAKER_ALICIA,,EMOTE_SWEAT)
+
+    msgbox(gText_LetsGetTheBandBackTogether_IReallyThinkWith,,SPEAKER_KAI)
+
+    msgbox(gText_LetsGetTheBandBackTogether_WaitTheEliteFour,,SPEAKER_ALICIA)
+
+    msgbox(gText_LetsGetTheBandBackTogether_OkayKindaThatsActually,,SPEAKER_KAI)
+
+    msgbox(gText_LetsGetTheBandBackTogether_WhatAmIMissing,,SPEAKER_ALICIA)
+
+    msgbox(gText_LetsGetTheBandBackTogether_HasntBeenHeardFromEver,,SPEAKER_KAI)
+
+    msgbox(gText_LetsGetTheBandBackTogether_LetsSplitUp,,SPEAKER_KAI)
+    msgbox(gText_LetsGetTheBandBackTogether_BeforeWeStart,,SPEAKER_KAI)
+
+    msgbox(gText_LetsGetTheBandBackTogether_OhYeahOfCourse,,SPEAKER_ALICIA)
+
+    msgbox(gText_LetsGetTheBandBackTogether_IllWriteUpAPost,,SPEAKER_KAI)
+    setvar(VAR_ARANTRAZ_STATE,LAST_CHANCE_TRUE_TIMELINE_START)
+
+    closemessage
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
+
+script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
+    lock
+        faceplayer
+        msgbox(gText_LetsGetTheBandBackTogether_ReadyToGoLive,MSGBOX_YESNO,,SPEAKER_KAI)
+
+        if (var(VAR_RESULT) == NO){
+
+            msgbox(gText_LetsGetTheBandBackTogether_YeahIGetIt,,SPEAKER_KAI)
+
+                closemessage
+                release
+                end
+        }
+    startcutscene(JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_AFTER)
+
+    setvar(VAR_ARANTRAZ_STATE,START_TRUE_TIMELINE)
+        setvar(VAR_STORYLINE_STATE,STORY_START_TRUE_TIMELINE)
+        setflag(FLAG_TIMELINE_TRUE)
+        setvar(VAR_MASK_OFF_STATE,ASSIGNED_MASK_OFF)
+
+        msgbox(gText_LetsGetTheBandBackTogether_Yes,,SPEAKER_KAI)
+
+        closemessage
+
+        fadescreen(FADE_TO_BLACK)
+        //PSF TODO Replace with Buzzr message
+        msgbox(gText_LetsGetTheBandBackTogether_WereSickOf,,SPEAKER_KAI,TAIL_SHOUT,PHONE_ON)
+        closemessage
+        fadescreen(FADE_FROM_BLACK)
+
+        msgbox(gText_LetsGetTheBandBackTogether_LetsSplitUp,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGetTheBandBackTogether_AnyLeads,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGetTheBandBackTogether_OkayGetGoing,,SPEAKER_KAI)
+
+
+        closemessage
+        applymovement(KAI,LetsGettheBandBackTogether_WalkOffScreen)
+        waitmovement(KAI)
+        playse(SE_EXIT)
+        waitse
+        removeobject(KAI)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+
+}
+text gText_LetsGetTheBandBackTogether_IDidntThinkYouWere {
+    format("I didn’t think you were coming back.")
+}
+
+text gText_LetsGetTheBandBackTogether_IHadAnInsane {
+    format("I had an insane dream last night, which really helped. I'm sorry about what I said yesterday. I was wrong. You can hack it. And SharpriseCapital... they're actually monsters.")
+}
+
+text gText_LetsGetTheBandBackTogether_DamnYouDid{
+    format("Damn, you did more thinking than I thought.")
+}
+
+text gText_LetsGetTheBandBackTogether_YouHaveNoIdea{
+    format("You have no idea how insane that dream was... but I'm serious. I'm here to help.")
+}
+
+text gText_LetsGetTheBandBackTogether_IReallyThinkWith {
+    format("I really think with you and the Elite Four here, we’ve got a fighting chance. You serious?")
+}
+
+text gText_LetsGetTheBandBackTogether_WaitTheEliteFour {
+    format("Wait, the entire Elite Four?")
+}
+
+text gText_LetsGetTheBandBackTogether_OkayKindaThatsActually {
+    format("Okay, kinda. That’s actually the next step. Tala and Magnus convinced Armando to work with us too, but we’ve gotta find Ellen if we really want to present a united front.")
+}
+
+text gText_LetsGetTheBandBackTogether_WhatAmIMissing {
+    format("What am I missing? Can’t we just call them or something?")
+}
+
+text gText_LetsGetTheBandBackTogether_HasntBeenHeardFromEver {
+    format("Ellen hasn’t been heard from ever since SharpriseCapital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore.")
+}
+
+
+text gText_LetsGetTheBandBackTogether_BeforeWeStart {
+    format("We should start rallying the people behind our cause. You’re the champ, after all, let’s put that clout to work.")
+}
+
+text gText_LetsGetTheBandBackTogether_OhYeahOfCourse {
+    format("Oh, yeah, of course. What were you thinking?")
+}
+
+text gText_LetsGetTheBandBackTogether_IllWriteUpAPost {
+    format("I’ll write up a post and you can share it. Once you do, though, SharpriseCapital is probably gonna cut you off, so if there are any perks you wanna use before you lose access you should do it now. Let me know when you’re good to go.")
+}
+
+text gText_LetsGetTheBandBackTogether_ReadyToGoLive {
+    format("Ready to go live?")
+}
+
+text gText_LetsGetTheBandBackTogether_YeahIGetIt {
+    format("Yeah, I get it. Nervous?")
+}
+
+text gText_LetsGetTheBandBackTogether_Yes {
+    format("Yes!")
+}
+
+text gText_LetsGetTheBandBackTogether_WereSickOf {
+    format("We’re sick of SharpriseCapital’s shit. We’re tired of the lies, the attacks, and the greed. Let’s take back our region, together.")
+}
+
+text gText_LetsGetTheBandBackTogether_LetsSplitUp {
+    format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Ellen might be?")
+}
+
+text gText_LetsGetTheBandBackTogether_AnyLeads {
+    format("Where do I even start?")
+}
+
+text gText_LetsGetTheBandBackTogether_OkayGetGoing {
+    format("Try the newspaper in Perlacia City, they did an interview with Ellen right before she disappeared.  I’m gonna make some moves too.")
+}
+
+text gText_LetsGetTheBandBackTogether_IDontThinkIShould {
+    format("…I don’t think I should go in there. I know how this ends.")
+}
+
+movement LetsGettheBandBackTogether_WalkOffScreen {
+    walk_left * 2
+        walk_down * 2
+        step_end
+}

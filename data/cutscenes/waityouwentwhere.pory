@@ -1,0 +1,182 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const OLIVER = 10
+const FLAG_HIDE_OLIVER = FLAG_TEMP_1
+
+script WaitYouWentWhere_ObjectSetUp_Script {
+	call(WaitYouWentWhere_HideOliver_Script)
+	special(GetNumberOfBadges)
+
+	if (var(VAR_RESULT) >= 7)
+	{
+		return
+	}
+
+	if (var(VAR_ARANTRAZ_STATE) != BATTLED_TALA)
+	{
+		return
+	}
+
+	if (var(VAR_WAIT_YOU_WENT_WHERE) != PRE_WAITYOUWENTWHERE)
+	{
+		return
+	}
+
+	call(WaitYouWentWhere_ShowOliver_Script)
+}
+
+script WaitYouWentWhere_HideOliver_Script {
+    setflag(FLAG_HIDE_OLIVER)
+}
+
+script WaitYouWentWhere_ShowOliver_Script {
+    clearflag(FLAG_HIDE_OLIVER)
+}
+
+script WaitYouWentWhere_PlayerSetUp_Script {
+    lock
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        //If player is not standing on the right side, move player there
+        if (var(VAR_TEMP_1) == 1){
+            applymovement(PLAYER, WaitYouWentWhere_PlayerFromSouth)
+        } elif (var(VAR_TEMP_0) == 40){
+            applymovement(PLAYER, WaitYouWentWhere_PlayerFromWest)
+        }
+}
+
+script WaitYouWentWhere_FirstInteract_Dialogue {
+    lock
+        startcutscene(JUMPPLAYER_WAITYOUWENTWHERE)
+        msgbox(gText_WaitYouWentWhere_WelcomeBackFrom,MSGBOX_NPC,SPEAKER_OLIVER)
+        lock //MSGBOX_NPC turns off the earlier lock
+        msgbox(gText_WaitYouWentWhere_YeahThanksFor,,SPEAKER_ALICIA)
+
+        msgbox(gText_WaitYouWentWhere_IHaveSomeBusiness,,SPEAKER_OLIVER)
+        closemessage
+
+
+        call(WaitYouWentWhere_PlayerSetUp_Script)
+        waitmovement(0)
+
+        applymovement(PLAYER,Player_WaitYouWentWhere_WalkWest)
+        applymovement(OLIVER,Oliver_WaitYouWentWhere_WalkWest)
+
+        msgbox(gText_WaitYouWentWhere_IActuallyJustGot,,SPEAKER_ALICIA)
+
+        msgbox(gText_WaitYouWentWhere_ThePassWeGave,,SPEAKER_OLIVER)
+
+        msgbox(gText_WaitYouWentWhere_GaveMeAPass,,SPEAKER_ALICIA)
+
+        msgbox(gText_WaitYouWentWhere_WhatAPainIn,,SPEAKER_OLIVER)
+
+        msgbox(gText_WaitYouWentWhere_YeahIveSeenThem,,SPEAKER_ALICIA)
+
+        msgbox(gText_WaitYouWentWhere_YesBeforeWeRevamped,,SPEAKER_OLIVER)
+
+        msgbox(gText_WaitYouWentWhere_OrreHasALot,,SPEAKER_ALICIA)
+
+        msgbox(gText_WaitYouWentWhere_NoOffense,,SPEAKER_OLIVER)
+
+        msgbox(gText_WaitYouWentWhere_GoingThisWay,,SPEAKER_OLIVER)
+
+        closemessage
+
+        applymovement(OLIVER,WaitYouWentWhere_WalkUpHill)
+        waitmovement(0)
+        removeobject(OLIVER)
+        endcutscene
+        release
+        setvar(VAR_WAIT_YOU_WENT_WHERE,POST_WAITYOUWENTWHERE)
+        end
+}
+
+
+text gText_WaitYouWentWhere_WelcomeBackFrom {
+    format("Ah {PLAYER}, welcome back from Chasilla! I hear you defeated Kauna, as expected from you.")
+}
+
+text gText_WaitYouWentWhere_YeahThanksFor {
+    format("Yeah, thanks for your help. Where are you going?")
+}
+
+text gText_WaitYouWentWhere_YeahNoProblem {
+    format("Haha, it's no problem, really.")
+}
+
+text gText_WaitYouWentWhere_IHaveSomeBusiness {
+    format("I have some business to attend to in CapheCity. Let's walk together. What's interested you the most about Resido?")
+}
+
+text gText_WaitYouWentWhere_IActuallyJustGot {
+    format("Hmm... Actually, I thought Arantraz was really fascinating.")
+}
+
+text gText_WaitYouWentWhere_ThePassWeGave {
+    format("The pass we gave you doesn't let you go there…")
+}
+
+text gText_WaitYouWentWhere_GaveMeAPass {
+    format("Yeah, a TheTide member gave me a pass as an apology. It's complicated.")
+}
+
+text gText_WaitYouWentWhere_WhatAPainIn {
+    format("Uh, TheTide, what a pain in my ass. They're an organization created from the base of prisoner sympathizers, and they've branded themselves as total anti-establishment anarchists. They make a lot of noise for no real reason.")
+}
+
+text gText_WaitYouWentWhere_YeahIveSeenThem {
+    format("Yeah, I've seen them around. What's the deal with the Elite Four? Resido used to have one?")
+}
+
+text gText_WaitYouWentWhere_YesBeforeWeRevamped {
+    format("Yes, before we revamped their League structure. They used to be the strongest Trainers in Resido, but we hope that trainers like you and Charlotte will be able to outshine them soon. Ugh, and finally, we're done dealing with Double Battles… what a mess.")
+}
+
+text gText_WaitYouWentWhere_OrreHasALot {
+    format("Orre has a lot of double battles! They're not that bad.")
+}
+
+text gText_WaitYouWentWhere_NoOffense {
+    format("No offense - I'm sure they're fine, but certainly not fit for a world-class League!")
+}
+
+text gText_WaitYouWentWhere_GoingThisWay {
+    format("Well, time to hike this miserable hill. I'll save you the hassle.  Stay out of trouble, okay?")
+}
+
+movement WaitYouWentWhere_PlayerFromSouth {
+    walk_right
+        walk_up
+        face_left
+        step_end
+}
+
+movement WaitYouWentWhere_PlayerFromWest {
+    walk_down
+        walk_right * 2
+        walk_up
+        face_left
+        step_end
+}
+
+movement Player_WaitYouWentWhere_WalkWest {
+    walk_left * 41
+        step_end
+}
+movement Oliver_WaitYouWentWhere_WalkWest {
+    walk_left * 41
+        face_right
+        step_end
+}
+
+movement WaitYouWentWhere_WalkUpHill {
+    walk_left * 5
+        walk_up
+        walk_left * 5
+        walk_up
+        walk_left * 6
+        step_end
+}
+movement WaitYouWentWhere_WalkSouth{
+    walk_down * 10
+        step_end
+}

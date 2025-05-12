@@ -1,0 +1,694 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const BOSSPKMNA = 2
+const BOSSPKMNB = 3
+const BOSSPKMNC = 6
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
+
+script IGuessWeShouldBeNiceNow_HideObject_Script {
+    setflag(FLAG_TEMP_1)
+    setflag(FLAG_TEMP_2)
+}
+
+script IGuessWeShouldBeNiceNow_ObjectSetup_Script {
+    setflag(FLAG_TEMP_2)
+}
+        script IGuessWeShouldBeNiceNow_PuzzlePrepareObject_Script{
+            setobjectxy(CHARLOTTE,8,23)
+            setobjectxyperm(CHARLOTTE,8,23)
+            setflag(FLAG_TEMP_2)
+        }
+        script IGuessWeShouldBeNiceNow_PuzzleStartObject_Script{
+            setobjectxy(CHARLOTTE,15,19)
+            setobjectxyperm(CHARLOTTE,15,19)
+            setflag(FLAG_TEMP_2)
+        }
+        script IGuessWeShouldBeNiceNow_PuzzleBSolvedObject_Script{
+            setobjectxy(CHARLOTTE,8,6)
+            setobjectxyperm(CHARLOTTE,8,6)
+            setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_UP)
+            setobjectxy(5,7,9)
+            setobjectxyperm(5,7,9)
+        }
+        script IGuessWeShouldBeNiceNow_PostCleanUp_Script{
+            setflag(FLAG_TEMP_4)
+            setflag(FLAG_TEMP_2)
+            setflag(FLAG_TEMP_1)
+            setobjectxy(5,7,9)
+            setobjectxyperm(5,7,9)
+        }
+
+script IGuessWeShouldBeNiceNow_CharlotteInteract_Event_Script {
+    lock
+    faceplayer
+    switch (var(VAR_ROBINWILLIAMSTUNNEL_STATE)){
+        case CHARLOTTE_EXPLAINED_PUZZLE: goto(IGuessWeShouldBeNiceNow_AskPlayer_Script)
+        case PUZZLE_2_SOLVED: goto(IGuessWeShouldBeNiceNow_ReadyPlayer_Dialogue)
+    }
+}
+
+script IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue {
+    lock
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkToPlayer)
+        waitmovement(0)
+
+    msgbox(gText_IGuessWeShouldBeNiceNow_Charl,,SPEAKER_ALICIA)
+    msgbox(gText_IGuessWeShouldBeNiceNow_ThereYouAre,,SPEAKER_CHARLOTTE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_OliverWasTellingMe,,SPEAKER_ALICIA)
+    msgbox(gText_IGuessWeShouldBeNiceNow_IGuessItDoesntMatter,,SPEAKER_CHARLOTTE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_DirectorsNote,,SPEAKER_ADELAIDE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_SoUnfortunately,,SPEAKER_CHARLOTTE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_Unfortunately,,SPEAKER_ALICIA)
+    msgbox(gText_IGuessWeShouldBeNiceNow_WorkingWithPeople,,SPEAKER_CHARLOTTE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_ThanksIGuess,,SPEAKER_ALICIA)
+    msgbox(gText_IGuessWeShouldBeNiceNow_YoureWelcome,,SPEAKER_CHARLOTTE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_PickYourBattles,,SPEAKER_ALICIA)
+
+
+        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,CHARLOTTE_EXPLAINED_PUZZLE)
+        goto (IGuessWeShouldBeNiceNow_AskPlayer_Script)
+}
+
+script IGuessWeShouldBeNiceNow_AskPlayer_Script {
+        lock
+
+        if (var(VAR_RESULT) == NO) {
+            goto(IGuessWeShouldBeNiceNow_PreparePlayer_Dialogue)
+        } else {
+            goto(IGuessWeShouldBeNiceNow_StartPuzzle_Script)
+        }
+}
+
+script IGuessWeShouldBeNiceNow_PreparePlayer_Dialogue {
+        end
+}
+
+script IGuessWeShouldBeNiceNow_StartPuzzle_Script {
+        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,PUZZLE_1_UNSOLVED)
+        lock
+                closemessage
+        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkIntoMaze)
+        waitmovement(0)
+            setobjectxy(CHARLOTTE,15,19)
+            setobjectxyperm(CHARLOTTE,15,19)
+
+        release
+        //PSF TODO add cutscene skips after the puzzles are finalized
+        end
+}
+
+script IGuessWeShouldBeNiceNow_SolvedPuzzleA {
+        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,PUZZLE_1_SOLVED)
+        playse(SE_SWITCH)
+        waitse
+}
+
+script IGuessWeShouldBeNiceNow_SolvedPuzzleB {
+        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,PUZZLE_2_SOLVED)
+        playse(SE_SWITCH)
+        waitse
+        fadescreen(FADE_TO_BLACK)
+        setvar(VAR_0x8004, 8)
+        setvar(VAR_0x8005, 9)
+        special(TeleportCamera)
+        fadescreen(FADE_FROM_BLACK)
+
+        applymovement(5,Common_Movement_WalkLeft)
+        waitmovement(0)
+
+        fadescreen(FADE_TO_BLACK)
+        turnobject(CHARLOTTE, DIR_NORTH)
+        setobjectxy(CHARLOTTE,9,12)
+        setobjectxyperm(CHARLOTTE,9,12)
+        special(ReturnCameraToPlayer)
+        fadescreen(FADE_FROM_BLACK)
+        applymovement(PLAYER,IGuessWeShouldBeNiceNow_WalkRight)
+        waitmovement(0)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_DirectorsNote2,,SPEAKER_ADELAIDE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_ThatWasAmazing,,SPEAKER_ALICIA)
+    msgbox(gText_IGuessWeShouldBeNiceNow_OfCourse,,SPEAKER_CHARLOTTE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_AnywayTherestheBook,,SPEAKER_ALICIA)
+    msgbox(gText_IGuessWeShouldBeNiceNow_ItsDefinitelyNot,,SPEAKER_CHARLOTTE)
+
+
+
+        applymovement(PLAYER,IGuessWeShouldBeNiceNow_ApproachBookB)
+        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_ApproachBookA)
+        waitmovement(0)
+
+
+msgbox(gText_IGuessWeShouldBeNiceNow_Roar)
+
+goto(IGuessWeShouldBeNiceNow_BossProtectBook_Script)
+}
+script IGuessWeShouldBeNiceNow_BossProtectBook_Script {
+    playmoncry(SPECIES_GENGAR, CRY_MODE_ENCOUNTER)
+        playmoncry(SPECIES_CHANDELURE, CRY_MODE_ENCOUNTER)
+        waitse
+
+        clearflag(FLAG_TEMP_2)
+        addobject(BOSSPKMNA)
+        addobject(BOSSPKMNB)
+        addobject(BOSSPKMNC)
+
+       msgbox(gText_IGuessWeShouldBeNiceNow_DirectorsNote3,,SPEAKER_ADELAIDE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_Bingo,,SPEAKER_CHARLOTTE)
+    msgbox(gText_IGuessWeShouldBeNiceNow_UhCharlotte,,SPEAKER_ALICIA)
+    msgbox(gText_IGuessWeShouldBeNiceNow_FineYouCanHelp,,SPEAKER_CHARLOTTE)
+                applymovement(PLAYER,Common_Movement_WalkUp)
+            waitmovement(0)
+        startmenu_savescreen
+        goto(IGuessWeShouldBeNiceNow_CoreEncounter_Script)
+}
+
+script IGuessWeShouldBeNiceNow_CoreEncounter_Script {
+        setwildbattle(SPECIES_GENGAR,60,ITEM_LIFE_ORB,SPECIES_GASTLY,70,ITEM_ORAN_BERRY)
+        playmoncry(SPECIES_GENGAR, CRY_MODE_ENCOUNTER)
+        delay(40)
+        waitmoncry
+        setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        multi_fixed_wild(PARTNER_STEVEN)
+        //PSF TODO make sure you can't catch Armando's ace
+        clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        specialvar(VAR_RESULT, GetBattleOutcome)
+        switch (var (VAR_RESULT)) {
+            case B_OUTCOME_WON:
+                goto(IGuessWeShouldBeNiceNow_ClearBossPokemon_Script)
+        }
+    release
+        end
+}
+
+script IGuessWeShouldBeNiceNow_ReadyPlayer_Dialogue {
+    lock
+            applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    waitmovement(0)
+    release
+    end
+}
+
+script IGuessWeShouldBeNiceNow_ClearBossPokemon_Script {
+        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,ARMANDO_BOSS_DEFEATED)
+    lock
+        closemessage
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        removeobject(BOSSPKMNA)
+        removeobject(BOSSPKMNB)
+        removeobject(BOSSPKMNC)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        goto(IGuessWeShouldBeNiceNow_PostBoss_Dialogue)
+}
+
+script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
+    applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+    applymovement(PLAYER,Common_Movement_FaceRight)
+        msgbox(gText_IGuessWeShouldBeNiceNow_OkayImStarting,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_WhatAmIMissing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_ThosePuzzlesWerent,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_YeahIHadToThink,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_ExactlyYouHad,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_SoTheyreTraining,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_OrTryingAtLeast,,SPEAKER_CHARLOTTE)
+                closemessage
+
+        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_GetBook)
+        waitmovement(0)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        waitmovement(0)
+        removeobject(4)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_SaysOnTheBack,,SPEAKER_CHARLOTTE)
+
+        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_LookAround)
+        waitmovement(0)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_WhewThatWasExhausting,MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        setvar(VAR_ESPULEE_OUTSKIRTS_STATE,ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED)
+
+        if (var(VAR_RESULT) == YES) {
+            msgbox(gText_IGuessWeShouldBeNiceNow_GreatSeeYou)
+        } else {
+            msgbox(gText_IGuessWeShouldBeNiceNow_WellTheChallenges)
+        }
+        closemessage
+
+
+        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_LeaveCave)
+        waitmovement(0)
+        removeobject(CHARLOTTE)
+        call(TryAutoSave)
+        release
+        end
+}
+
+script IGuessWeShouldBeNiceNow_HidePopup_Script{
+    if (var(VAR_ESPULEE_OUTSKIRTS_STATE) == ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED){
+        call(EspuleeOutskirts_HideMapNamePopup_Script)
+    }
+}
+
+script IGuessWeShouldBeNiceNow_ExitCave_Script {
+    lock
+    setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_INVITED_KOMALACABIN)
+    playse(SE_EXIT)
+    waitse
+    clearflag(FLAG_TEMP_3)
+    addobject(CHARLOTTE)
+    applymovement(PLAYER,Common_Movement_WalkRight)
+    applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkOutCave)
+    waitmovement(0)
+    goto(IGuessWeShouldBeNiceNow_End_Dialogue)
+}
+
+script IGuessWeShouldBeNiceNow_End_Dialogue {
+        setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_STUDYING)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_CoolPerfectTiming,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_WhatTookYouSoLong,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_ISpottedAnInteresting,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_WaitWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_AllOfMyPokemon,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_IDidntKnow,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_DaddyOwnsA,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_WaitWhatIThought,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_YeahDaddysPlace,,SPEAKER_CHARLOTTE)
+                closemessage
+
+        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_GestureHouse)
+        waitmovement(0)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_ImGonnaCrash,,SPEAKER_CHARLOTTE)
+                closemessage
+
+        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkTowardsHouse_Movement)
+        waitmovement(CHARLOTTE)
+        removeobject(CHARLOTTE)
+
+        clearflag(FLAG_HIDE_MAP_NAME_POPUP)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_ESPULEE_OUTSKIRTS,6,33)
+        release
+        end
+}
+
+// gText_IGuessWeShouldBeNiceNow_
+
+script IGuessWeShouldBeNice_AddNotesToTable_Script
+{
+
+	if (var(VAR_ESPULEE_OUTSKIRTS_STATE) < CHARLOTTE_STUDYING)
+	{
+		return
+	}
+	setmetatile(6,4,0x249,TRUE)
+}
+
+script IGuessWeShouldBeNiceNow_CharlotteRentalVisibility_Script
+{
+
+	if (var(VAR_ESPULEE_OUTSKIRTS_STATE) < CHARLOTTE_INVITED_KOMALACABIN)
+	{
+		setflag(FLAG_HIDE_CHARLOTTE)
+	}
+
+
+	if (var(VAR_LEAVERRA_FOREST_STATE) > 0)
+	{
+		setflag(FLAG_HIDE_CHARLOTTE)
+	}
+}
+
+script IGuessWeShouldBeNiceNow_CharlotteInteract_Script
+{
+	lock
+	if (var(VAR_ESPULEE_OUTSKIRTS_STATE) == CHARLOTTE_STUDYING)
+	{
+		goto(IGuessWeShoudlBeNiceNow_Shorttermrental_Dialogue)
+	}
+	else
+	{
+		goto(IGuessWeShouldBeNiceNow_Interact_Dialogue)
+	}
+}
+
+script IGuessWeShoudlBeNiceNow_Shorttermrental_Dialogue
+{
+	msgbox(gText_IGuessWeShouldBeNiceNow_YoureDistracting,,SPEAKER_CHARLOTTE,,EMOTE_ANGRY)
+	msgbox(gText_IGuessWeShouldBeNiceNow_YouMentioned,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+	msgbox(gText_IGuessWeShouldBeNiceNow_DaddyHiredAPI,MSGBOX_NPC,SPEAKER_CHARLOTTE)
+	msgbox(gText_IGuessWeShouldBeNiceNow_IWantToGetA,,SPEAKER_CHARLOTTE)
+	msgbox(gText_IGuessWeShouldBeNiceNow_DataOnAll,,SPEAKER_ALICIA,,EMOTE_SHOCK)
+	msgbox(gText_IGuessWeShouldBeNiceNow_YeahThereWasAWholeTeam,,SPEAKER_CHARLOTTE)
+	msgbox(gText_IGuessWeShouldBeNiceNow_ThereWasNeverAny,,SPEAKER_CHARLOTTE)
+	msgbox(gText_IGuessWeShouldBeNiceNow_ThereAreSomeOnThat,,SPEAKER_CHARLOTTE)
+	closemessage
+	applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+	waitmovement(CHARLOTTE)
+	delay(30)
+	applymovement(CHARLOTTE,Common_Movement_FaceUp)
+	msgbox(gText_IGuessWeShouldBeNiceNow_OhAndMe,,SPEAKER_CHARLOTTE)
+	closemessage
+	applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+	waitmovement(CHARLOTTE)
+	setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_DEEP_STUDYING)
+	release
+	end
+}
+
+script IGuessWeShouldBeNiceNow_Interact_Dialogue
+{
+	lock
+	msgbox(gText_IGuessWeShouldBeNiceNow_TheyreFocused,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+	closemessage
+	release
+	end
+}
+
+script IGuessWeShouldBeNiceNow_AdvanceTime_Script
+{
+	switch(var(VAR_ESPULEE_OUTSKIRTS_STATE))
+	{
+		case CHARLOTTE_STUDYING:
+		case CHARLOTTE_DEEP_STUDYING:
+			call(IGuessWeShouldBeNiceNow_AdvanceTimeCondition_Script)
+		default: return
+	}
+}
+
+script IGuessWeShouldBeNiceNow_AdvanceTimeCondition_Script
+{
+	if (var(VAR_LEAVERRA_FOREST_STATE) < CHARLOTTE_WAITING_LEAVERRA_FOREST)
+	{
+		setvar(VAR_LEAVERRA_FOREST_STATE,CHARLOTTE_WAITING_LEAVERRA_FOREST)
+	}
+}
+
+text gText_IGuessWeShouldBeNiceNow_Charl
+{
+    format("Charl-")
+}
+text gText_IGuessWeShouldBeNiceNow_ThereYouAre
+{
+    format("There you are! Took you long enough.")
+}
+text gText_IGuessWeShouldBeNiceNow_OliverWasTellingMe
+{
+    format("Oliver was telling me that we-")
+}
+text gText_IGuessWeShouldBeNiceNow_IGuessItDoesntMatter
+{
+    format("I guess it doesn’t matter. I’ve been taking a look at the puzzle Armando set up and I figured out how this works. ")
+}
+text gText_IGuessWeShouldBeNiceNow_DirectorsNote
+{
+    format("Once the quest info is decided and completed, come back in and fill in dialogue. Charlotte will explain how she figured out the puzzle and how.")
+}
+text gText_IGuessWeShouldBeNiceNow_SoUnfortunately
+{
+    format("So, unfortunately, I’ll need your help to get through this.")
+}
+text gText_IGuessWeShouldBeNiceNow_Unfortunately
+{
+    format("Unfortunately? That’s a little rude….")
+}
+text gText_IGuessWeShouldBeNiceNow_WorkingWithPeople
+{
+    format("Working with people is tedious and the results are mixed so I prefer to do things myself so then I know they’ll be done right, but if I don’t have a choice, you’re not a horrible option.")
+}
+text gText_IGuessWeShouldBeNiceNow_ThanksIGuess
+{
+    format("…thanks. I guess?")
+}
+text gText_IGuessWeShouldBeNiceNow_YoureWelcome
+{
+    format("You’re welcome. Now go step on that panel over there and I’ll head through first. ")
+}
+text gText_IGuessWeShouldBeNiceNow_PickYourBattles
+{
+    format("Pick your battles, {PLAYER}, pick your battles")
+}
+text gText_IGuessWeShouldBeNiceNow_DirectorsNote2
+{
+    format("The girls complete the puzzle. Will likely need to update dialogue during puzzle later")
+}
+text gText_IGuessWeShouldBeNiceNow_ThatWasAmazing
+{
+    format("That was amazing, Charlotte!")
+}
+text gText_IGuessWeShouldBeNiceNow_OfCourse
+{
+    format("Of course. I’m happy you didn’t suck at finishing the puzzle")
+}
+text gText_IGuessWeShouldBeNiceNow_AnywayTherestheBook
+{
+    format("…anyway. There’s the book. Let’s grab it and get out of here.")
+}
+text gText_IGuessWeShouldBeNiceNow_ItsDefinitelyNot
+{
+    format("It’s definitely not that easy. If I was a crusty old man bored out his mind in the middle of nowhere, I would definitely have something guarding this thing. ")
+}
+text gText_IGuessWeShouldBeNiceNow_Roar
+{
+    format("ROAR")
+}
+text gText_IGuessWeShouldBeNiceNow_DirectorsNote3
+{
+    format("Guard Pokemon appear in front of the book")
+}
+text gText_IGuessWeShouldBeNiceNow_Bingo
+{
+    format("Bingo! Alright, let’s see what I can do here")
+}
+text gText_IGuessWeShouldBeNiceNow_UhCharlotte
+{
+    format("Uh Charlotte? I’m right here!")
+}
+text gText_IGuessWeShouldBeNiceNow_FineYouCanHelp
+{
+    format("Fine, you can help. But don’t slow me down. ")
+}
+
+text gText_IGuessWeShouldBeNiceNow_OkayImStarting {
+    format("Okay, I'm starting to understand the training now…A little.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_WhatAmIMissing {
+    format("What am I missing?") //PSF TODO EMOTE pant
+}
+
+text gText_IGuessWeShouldBeNiceNow_ThosePuzzlesWerent {
+    format("Those puzzles weren't physically tough, but we had to think. And those battles… we couldn't brute force them, right?") //PSF TODO EMOTE pant
+}
+
+text gText_IGuessWeShouldBeNiceNow_YeahIHadToThink {
+    format("Yeah, I had to think about a strategy.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_ExactlyYouHad {
+    format("Exactly. You had to think under pressure when you were already worn down.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_SoTheyreTraining {
+    format("So they're training our mental toughness…?")
+}
+
+text gText_IGuessWeShouldBeNiceNow_OrTryingAtLeast {
+    format("Or, trying at least. I'll grab this…")
+}
+
+text gText_IGuessWeShouldBeNiceNow_SaysOnTheBack {
+    format("Says on the back cover, “Bring to the deepest part of LeaverraForest.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_WhewThatWasExhausting {
+    format("Whew, that was exhausting. How about we crash at my place nearby in EspuleeOutskirts and then tackle LeaverraForest tomorrow?")
+}
+
+text gText_IGuessWeShouldBeNiceNow_GreatSeeYou {
+    format("Great, see you in EspuleeOutskirts!")
+}
+
+text gText_IGuessWeShouldBeNiceNow_WellTheChallenges {
+    format("Well, the challenges need both of us… and I'm tired. So I'm going to crash - you're welcome to try LeaverraForest by yourself though.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_CoolPerfectTiming {
+    format("Cool, perfect timing.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_WhatTookYouSoLong {
+    format("What took you so long? You're usually in front.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_ISpottedAnInteresting {
+    format("I spotted an interesting Pokémon while we were working on the puzzles, so I went back and caught it! It was actually my first time catching something.")
+
+}
+text gText_IGuessWeShouldBeNiceNow_WaitWhat {
+    format("Wait, what?")
+}
+
+text gText_IGuessWeShouldBeNiceNow_AllOfMyPokemon {
+    format("All of my Pokémon are normally bred in Unova and sent to me. But I wanted to try raising one from scratch, just to see how it compares.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_IDidntKnow {
+    format("(I didn't know you could DO that.) Oh, well… congrats!")
+}
+
+text gText_IGuessWeShouldBeNiceNow_DaddyOwnsA {
+    format("Daddy owns a KomalaCabin out here. I called him earlier and had him kick out the people that were staying there, so it should be good for us now.")
+
+}
+text gText_IGuessWeShouldBeNiceNow_WaitWhatIThought {
+    format("Wait what? I thought SharpriseCapital-")
+}
+
+text gText_IGuessWeShouldBeNiceNow_YeahDaddysPlace {
+    format("Yeah, Daddy's place is way nicer than some motel or whatever.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_ImGonnaCrash
+{
+	format("I'm actually going to go study for the Championship... but the door will be open. Its on the north end of town.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_YoureDistracting
+{
+	format("You're distracting me, {PLAYER}. What's up?")
+}
+
+text gText_IGuessWeShouldBeNiceNow_YouMentioned
+{
+	format("You mentioned you were studying for the Championship. What do you mean by study?")
+}
+
+text gText_IGuessWeShouldBeNiceNow_DaddyHiredAPI
+{
+	format("Daddy hired a private investgator who compiled information on the 16 Trainers that are going to be in the Championship.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_IWantToGetA
+{
+	format("I want to get a head start on scoping everybody out, so I can plan my strategies out accordingly.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_DataOnAll
+{
+	format("You got data on all on us?! How?")
+}
+
+text gText_IGuessWeShouldBeNiceNow_YeahThereWasAWholeTeam
+{
+	format("Of course, there was a whole team of people they hired to watch the broadcasts. It's all public knowledge, so I figured its fair game.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_ThereWasNeverAny
+{
+	format("There was never any doubt that I was going to get to this point - now to just finish the job.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_ThereAreSomeOnThat
+{
+	format("The dossiers on the far side of the table are ones I'm done with. You can read them if you want.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_OhAndMe
+{
+	format("Oh, and the interviews that we did before the League started are playing on the TV are there, if you wanted to watch.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_TheyreFocused
+{
+	format("Charlotte is completely focused on their studying. It's like I'm not even here!")
+}
+
+movement IGuessWeShouldBeNiceNow_WalkToPlayer {
+    walk_down
+        face_left
+        step_end
+}
+movement IGuessWeShouldBeNiceNow_WalkIntoMaze {
+    walk_up
+        walk_left
+        walk_up * 3
+        walk_right * 8
+        step_end
+}
+movement IGuessWeShouldBeNiceNow_ApproachBookA {
+        walk_left
+        walk_up * 5
+        face_up
+        step_end
+}
+movement IGuessWeShouldBeNiceNow_ApproachBookB {
+        walk_up * 5
+        walk_left
+        face_up
+        step_end
+}
+
+movement IGuessWeShouldBeNiceNow_WalkRight {
+    walk_right * 4
+    step_end
+}
+
+movement IGuessWeShouldBeNiceNow_GetBook {
+    walk_up * 2
+    walk_in_place_faster_up
+	step_end
+}
+movement IGuessWeShouldBeNiceNow_LookAround {
+    face_left
+    delay_16
+    delay_16
+    delay_16
+    face_right
+    delay_16
+    delay_16
+    delay_16
+    face_down
+	step_end
+}
+movement IGuessWeShouldBeNiceNow_LeaveCave {
+    walk_down * 7
+	step_end
+}
+
+movement IGuessWeShouldBeNiceNow_WalkOutCave {
+    walk_down * 2
+    walk_right * 2
+    walk_up
+    face_left
+    step_end
+}
+
+movement IGuessWeShouldBeNiceNow_GestureHouse {
+    face_right
+    delay_16
+    delay_16
+    face_left
+    step_end
+}
+
+movement IGuessWeShouldBeNiceNow_WalkTowardsHouse_Movement {
+    walk_right * 3
+    walk_up * 6
+    step_end
+}

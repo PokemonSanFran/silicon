@@ -1,0 +1,160 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ARNAV = 1
+const TECHIE = 2
+const OLIVER = 3
+const CHARLOTTE = 4
+const ADELAIDE = 5
+const CHIEF = 6
+const RAMESH = 7
+const KEIYING = 8
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+script CongratsYoureanAsshole_ObjectCleanUp_Script
+{
+    call(SharpriseSpire_Leagueops_CheckRewardStatus_Script)
+
+    setobjectxy(KEIYING,34,56)
+    setobjectxyperm(KEIYING,34,56)
+    setobjectmovementtype(KEIYING,MOVEMENT_TYPE_FACE_UP)
+
+    setobjectxy(OLIVER,33,2)
+    setobjectxyperm(OLIVER,33,2)
+    setobjectmovementtype(OLIVER,MOVEMENT_TYPE_FACE_DOWN)
+
+    setobjectxy(RAMESH,5,2)
+    setobjectxyperm(RAMESH,5,2)
+    setobjectmovementtype(RAMESH,MOVEMENT_TYPE_FACE_DOWN)
+}
+
+script CongratsYoureAnAsshole_Intro_Dialogue
+{
+
+    if (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) == START_FALSE_TIMELINE)
+    {
+        goto(CongratsYoureanAsshole_FalseTimelineSplit_Script)
+    }
+
+    setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,START_FALSE_TIMELINE)
+
+    msgbox(gText_CongratsYoureanAsshole_WelcomeBack,MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(gText_CongratsYoureanAsshole_YeahIWantToWork,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    closemessage
+    msgbox(gText_CongratsYoureanAsshole_WedLikeYouTwoToSignal,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+
+    applymovement(KEIYING,Common_Movement_WalkInPlaceLeft)
+    waitmovement(KEIYING)
+
+    msgbox(gText_CongratsYoureanAsshole_TheresNoTurningBack,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+    closemessage
+}
+
+script CongratsYoureanAsshole_FalseTimelineSplit_Script
+{
+    faceplayer
+    msgbox(gText_CongratsYoureanAsshole_WereGoingToSend,MSGBOX_YESNO,SPEAKER_KEIYING)
+
+    if (var(VAR_RESULT) == NO)
+    {
+        msgbox(gText_CongratsYoureanAsshole_OfCouseIfTheres,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+        closemessage
+        release
+        end
+    }
+    else
+    {
+        startcutscene(JUMPPLAYER_CONGRATSYOUREANASSHOLE)
+
+        closemessage
+        setflag(FLAG_TIMELINE_FALSE)
+        setvar(VAR_STORYLINE_STATE,STORY_START_FALSE_TIMELINE)
+
+        fadescreen(FADE_TO_BLACK)
+        showtweet(TWEET_STORY_FALSETIMELINE)
+        fadescreen(FADE_FROM_BLACK)
+
+        msgbox(gText_CongratsYoureanAsshole_ThankYouForThat,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        msgbox(gText_CongratsYoureanAsshole_ThingsWillTake,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+        msgbox(gText_CongratsYoureanAsshole_ThatsTheSpirit,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+        closemessage
+
+        fadescreen(FADE_TO_BLACK)
+        delay(30)
+        call(CongratsYoureanAsshole_ObjectCleanUp_Script)
+        fadescreen(FADE_FROM_BLACK)
+
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+    }
+}
+
+text gText_CongratsYoureanAsshole_WelcomeBack
+{
+	format("Welcome back, {PLAYER}! A good night’s sleep, I hope? Thought things over?")
+}
+
+text gText_CongratsYoureanAsshole_YeahIWantToWork
+{
+	format("Yeah. I want to work with you guys and make sure the League’s next season is as successful as possible.")
+}
+
+text gText_CongratsYoureanAsshole_WevePreparedAStatement
+{
+	format("We’ve prepared a statement reinforcing our commitment to ending TheTide’s operations. We want them to know we’re officially working with the police and that their days are numbered.")
+}
+
+text gText_CongratsYoureanAsshole_WedLikeYouTwoToSignal
+{
+	format("We’d like you to signal boost that statement online as soon as it’s posted. A public condemnation from the most powerful Trainer will send a strong message.")
+	}
+
+text gText_CongratsYoureanAsshole_TheresNoTurningBack
+{
+	format("There’s no turning back from this- once the statement is out the region natives aren’t going to be so friendly to you. If there’s anything you need to do before sending the message, handle it now. Come back and talk to me when you’re ready.")
+}
+
+text gText_CongratsYoureanAsshole_WereGoingToSend
+{
+	format("We’re going to send this message out now. Ready?")
+}
+
+text gText_CongratsYoureanAsshole_OfCouseIfTheres
+{
+	format("Of course. If there’s anything you need to do before then, handle it now. Come back and talk to me when you’re ready.")
+}
+
+text gText_CongratsYoureanAsshole_ThankYouForThat
+{
+	format("Thank you for that… worldwide, our message is getting positive reception, but within the region, there is still some negativity.")
+}
+
+text gText_CongratsYoureanAsshole_ThingsWillTake
+{
+	format("Things will take time.")
+}
+
+text gText_CongratsYoureanAsshole_ThatsTheSpirit
+{
+	format("Oliver, Ramesh, and I all have different missions for you. Come talk to us our offices when you're ready.")
+}
+
+movement CongratsYoureanAsshole_WalkTowardsPlayer
+{
+    walk_up * 4
+    walk_left
+    face_up
+    step_end
+}
+
+movement CongratsYoureanAsshole_WalkTowardsPlayerB
+{
+    walk_up * 5
+    step_end
+}

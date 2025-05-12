@@ -1,0 +1,229 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const THIEF = 8
+
+script Quest_StolenTrade_HideObjectA_Script {
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_STOLENTRADE)
+
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_TEMP_4)
+        }
+}
+
+script Quest_StolenTrade_HideObjectB_Script {
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_STOLENTRADE)
+
+        if (var(VAR_RESULT)){
+            setflag(FLAG_TEMP_3)
+        }
+}
+
+script Quest_StolenTrade_Interact_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_STOLENTRADE)
+        if (var(VAR_RESULT)) {
+            goto(Quest_StolenTrade_QuestComplete_Dialogue)
+        }
+
+    questmenu(QUEST_MENU_CHECK_ACTIVE, QUEST_STOLENTRADE)
+        if (var(VAR_RESULT)) {
+            call(Quest_StolenTrade_PostTrade_Dialogue)
+        } else {
+            call(Quest_StolenTrade_AskForTrade_Dialogue)
+        }
+}
+
+script Quest_StolenTrade_AskForTrade_Dialogue{
+    lock
+    givemon(SPECIES_BAGON, 20, ITEM_NONE)
+    bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
+    bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
+
+
+        msgbox(gText_StolenTrade_DoYouKnowHow,MSGBOX_NPC,SPEAKER_BRONSON)
+
+        msgbox(gText_StolenTrade_YeahYouTrade,MSGBOX_NPC,SPEAKER_ALICIA)
+        
+
+        msgbox(gText_StolenTrade_ExactlyIWantTo,MSGBOX_NPC,SPEAKER_BRONSON)
+        msgbox(gText_StolenTrade_WillYouTrade,MSGBOX_YESNO,SPEAKER_BRONSON)
+
+        if (var(VAR_RESULT) == YES){
+            goto(Quest_StolenTrade_DoTrade_Script)    
+        }else{
+            goto(Quest_StoleTrade_NoTrade_Script)
+        }
+}
+
+script Quest_StoleTrade_NoTrade_Script {
+    msgbox(gText_StolenTrade_NoBigDeal,MSGBOX_NPC,SPEAKER_BRONSON)
+    release
+    end
+}
+
+script Quest_StolenTrade_DoTrade_Script{
+    //use daycare-like system to store traded mon
+    bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
+    bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
+    setvar(VAR_0x8008, INGAME_TRADE_HORSEA)
+    copyvar(VAR_0x8004, VAR_0x8008)
+    specialvar(VAR_RESULT,GetInGameTradeSpeciesInfo)
+    copyvar(VAR_0x8009,VAR_RESULT)
+    special(ChoosePartyMon)
+    waitstate
+    copyvar(VAR_0x800A, VAR_0x8004)
+
+    if (var(VAR_0x800A) == PARTY_NOTHING_CHOSEN){
+        goto(Quest_StoleTrade_NoTrade_Script)
+    }
+
+    copyvar(VAR_0x8005, VAR_0x800A)
+    specialvar(VAR_RESULT, GetTradeSpecies)
+    copyvar(VAR_0x800B, VAR_RESULT)
+
+    if (var(VAR_RESULT) != VAR_0x8009){
+        goto(Quest_StoleTrade_NoTrade_Script)
+    }
+
+    copyvar(VAR_0x8004,VAR_0x8008)
+    copyvar(VAR_0x8005,VAR_0x800A)
+
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    goto(Quest_StolenTrade_RunAfterTrade_Script)
+
+    //givemon(SPECIES_SLURPUFF, 20, ITEM_NONE)
+}
+
+script Quest_StolenTrade_RunAfterTrade_Script{
+    bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
+    bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
+    msgbox(gText_StolenTrade_GottaGo,MSGBOX_NPC,SPEAKER_BRONSON)
+    applymovement(PLAYER,Quest_StolenTrade_WatchRunAway_Movement)
+    applymovement(THIEF,Quest_StolenTrade_RunAway_Movement)
+    waitmovement(0)
+    removeobject(THIEF)
+
+    msgbox(gText_StolenTrade_WaitWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    
+
+    startquest(QUEST_STOLENTRADE)
+    release
+    end
+}
+
+script Quest_StolenTrade_PostTrade_Dialogue{
+    lock
+        bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+        bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
+
+        msgbox(gText_StolenTrade_GimmeBackMy,MSGBOX_NPC,SPEAKER_ALICIA)
+        
+        closemessage
+        
+        playse(SE_PIN)
+        applymovement(THIEF,Common_Movement_ExclamationMark)
+        waitmovement(0)
+        msgbox(gText_StolenTrade_LookImSorryBut,MSGBOX_NPC,SPEAKER_BRONSON)
+
+        msgbox(gText_StolenTrade_IDontWannaHear,MSGBOX_NPC,SPEAKER_ALICIA)
+        
+        closemessage
+        goto(Quest_StolenTrade_StartBattle_Script)
+}
+
+script Quest_StolenTrade_StartBattle_Script{
+    lock
+        msgbox(gText_StolenTrade_ImKeepingThis,MSGBOX_DEFAULT,SPEAKER_BRONSON)
+        closemessage
+        trainerbattle_no_intro(TRAINER_STOLENTRADE_THIEF,gText_StolenTrade_YouDontUnderstand)
+        goto(Quest_StolenTrade_PostBattle_Dialogue)
+}
+
+script Quest_StolenTrade_PostBattle_Dialogue {
+    lock
+        bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+        bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
+        msgbox(gText_StolenTrade_GiveItBack,MSGBOX_NPC,SPEAKER_ALICIA)
+        
+        closemessage
+
+        msgbox(gText_StolenTrade_OkayOkay,MSGBOX_NPC,SPEAKER_BRONSON)
+        givemon(SPECIES_CONKELDURR,40,ITEM_NONE)
+        completequest(QUEST_STOLENTRADE)
+        release
+        end
+}
+
+script Quest_StolenTrade_QuestComplete_Dialogue {
+    lock
+        bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
+        bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
+        msgbox(gText_StolenTrade_YoureNotTakingBack,MSGBOX_NPC,SPEAKER_ALICIA)
+        
+        msgbox(gText_StolenTrade_NoIJustCaught,MSGBOX_NPC,SPEAKER_BRONSON)
+        closemessage
+}
+
+movement Quest_StolenTrade_WatchRunAway_Movement{
+    delay_4
+    face_right
+    delay_4 * 5
+    face_up
+    delay_4 * 2
+    step_end
+}
+
+movement Quest_StolenTrade_RunAway_Movement{
+    walk_faster_right * 6
+    walk_faster_up * 4
+    step_end
+}
+
+text gText_StolenTrade_DoYouKnowHow{
+    format("Do you know how tradebacks work?")
+}
+text gText_StolenTrade_YeahYouTrade{
+    format("Yeah, you trade Pokémon and then immediately trade them back, right?")
+}
+text gText_StolenTrade_ExactlyIWantTo{
+    format("Exactly! I want to evolve my {STR_VAR_1}, which requires a trade.")
+}
+text gText_StolenTrade_WillYouTrade{
+    format("Do you have a {STR_VAR_2}? Will you trade it for my {STR_VAR_1}? We can trade right back afterwards.")
+}
+text gText_StolenTrade_GottaGo{
+    format("Okay, gotta go, bye!")
+}
+text gText_StolenTrade_WaitWhat{
+    format("Wait, what? Come back! My {STR_VAR_2}!")
+}
+text gText_StolenTrade_NoBigDeal{
+    format("No big deal. Let me know if you change your mind.")
+}
+text gText_StolenTrade_GimmeBackMy{
+    format("Gimme back my {STR_VAR_2}!")
+}
+text gText_StolenTrade_LookImSorryBut{
+    format("Look I'm sorry but I gotta -")
+}
+text gText_StolenTrade_IDontWannaHear{
+    format("I don't wanna hear it! You stole from me, and you're not getting away again.")
+}
+text gText_StolenTrade_ImKeepingThis{
+    format("...I'm keeping this {STR_VAR_2}!")
+}
+text gText_StolenTrade_YouDontUnderstand{
+    format("You don't understand! They're going to fire me!")
+}
+text gText_StolenTrade_GiveItBack{
+    format("Give it back! Now. ")
+}
+text gText_StolenTrade_OkayOkay{
+    format("Okay okay...")
+}
+text gText_StolenTrade_YoureNotTakingBack{
+    format("You're not taking back your {STR_VAR_1}?")
+}
+text gText_StolenTrade_NoIJustCaught{
+    format("I just caught it to trade with sombody. The {STR_VAR_2} was to help me with construction. My boss is going to fire me unless I can double out work output in the next week, and I have bills to pay....")
+}

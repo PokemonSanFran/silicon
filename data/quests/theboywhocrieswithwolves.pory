@@ -1,0 +1,204 @@
+const FLAG_HIDE_AMBROGIO = FLAG_TEMP_1
+const AMBROGIO = 10
+
+//Quest_Theboywhocriedwithwolves_
+//gText_Theboywhocriedwithwolves_
+
+script Quest_Theboywhocriedwithwolves_Ambrogio_Visibility_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES)
+
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_AMBROGIO)
+    }
+    return
+}
+
+script Quest_Theboywhocriedwithwolves_CheckSubquests_Script{
+    call_if_quest_active(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_CountSubquestCompletion)
+        if (var(VAR_TEMP_0) > 8){
+            questmenu(QUEST_MENU_SET_REWARD,QUEST_THEBOYWHOCRIESWITHWOLVES)
+        }
+    return
+}
+
+script Quest_Theboywhocriedwithwolves_CountSubquestCompletion{
+        setvar(VAR_TEMP_0,0)
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_1)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_2)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_3)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_4)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_5)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_6)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_7)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_8)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+
+        subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_9)
+        if(var(VAR_RESULT)){
+            addvar(VAR_TEMP_0,1)
+        }
+        return
+}
+
+script Quest_Theboywhocriedwithwolves_Interact_Ambrogio_Script{
+    lock
+    goto_if_quest_active(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Active_Dialogue)
+    goto_if_quest_reward(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Reward_Dialogue)
+    //goto_if_quest_complete(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Completed_Dialogue)
+    goto(Quest_Theboywhocriedwithwolves_StartQuest_Dialogue)
+}
+
+script Quest_Theboywhocriedwithwolves_StartQuest_Dialogue{
+    applymovement(AMBROGIO,Quest_Theboywhocriedwithwolves_LookAround_Movement)
+    msgbox(gText_Theboywhocriedwithwolves_Manwhatami,,SPEAKER_AMBROGIO,,EMOTE_SAD)
+    waitmovement(AMBROGIO)
+    msgbox(gText_Theboywhocriedwithwolves_Heythere,MSGBOX_NPC,SPEAKER_AMBROGIO)
+    lock
+    msgbox(gText_Theboywhocriedwithwolves_Ivehadanawful,,SPEAKER_AMBROGIO)
+    msgbox(gText_Theboywhocriedwithwolves_SorryYouDont,,SPEAKER_AMBROGIO,,EMOTE_SWEAT)
+    msgbox(gText_Theboywhocriedwithwolves_HeyThanksForHearing,,SPEAKER_AMBROGIO)
+    startquest(QUEST_THEBOYWHOCRIESWITHWOLVES)
+    lock
+    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
+    goto_if_quest_reward(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Secret_Dialogue)
+
+    msgbox(gText_Theboywhocriedwithwolves_ItsCoolIm,,SPEAKER_ALICIA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Theboywhocriedwithwolves_Active_Dialogue{
+    msgbox(gText_Theboywhocriedwithwolves_MyLifeWasInThere,MSGBOX_NPC,SPEAKER_AMBROGIO,TAIL_WHISPER)
+}
+
+script Quest_Theboywhocriedwithwolves_Secret_Dialogue{
+    msgbox(gText_Theboywhocriedwithwolves_IActuallyHave,,SPEAKER_ALICIA)
+    goto(Quest_Theboywhocriedwithwolves_Reward_Dialogue)
+}
+
+script Quest_Theboywhocriedwithwolves_TakeItems_Script{
+    removeitem(ITEM_ROTOM_CATALOG,1)
+        removeitem(ITEM_GRACIDEA,1)
+        removeitem(ITEM_REVEAL_GLASS,1)
+        removeitem(ITEM_DNA_SPLICERS,1)
+        removeitem(ITEM_ZYGARDE_CUBE,1)
+        removeitem(ITEM_PRISON_BOTTLE,1)
+        removeitem(ITEM_N_SOLARIZER,1)
+        removeitem(ITEM_N_LUNARIZER,1)
+        removeitem(ITEM_REINS_OF_UNITY,1)
+        return
+}
+
+script Quest_Theboywhocriedwithwolves_Reward_Dialogue{
+    msgbox(gText_Theboywhocriedwithwolves_MyStuff,MSGBOX_NPC,SPEAKER_AMBROGIO)
+    lock
+    msgbox(gText_Theboywhocriedwithwolves_PlayerGave)
+    call(Quest_Theboywhocriedwithwolves_TakeItems_Script)
+    closemessage
+    msgbox(gText_Theboywhocriedwithwolves_IDontHave,,SPEAKER_AMBROGIO)
+    msgbox(gText_Theboywhocriedwithwolves_ItsFine,,SPEAKER_ALICIA)
+    msgbox(gText_Theboywhocriedwithwolves_YouKnowIWas,,SPEAKER_AMBROGIO)
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    msgbox(gText_Theboywhocriedwithwolves_ICanHeal,,SPEAKER_AMBROGIO)
+    msgbox(gText_Theboywhocriedwithwolves_Illtrytohelp,,SPEAKER_AMBROGIO)
+    closemessage
+    applymovement(AMBROGIO,Quest_Theboywhocriedwithwolves_Ambrogio_LeaveScene_Movement)
+    fadescreen(FADE_TO_BLACK)
+    delay(16)
+    removeobject(VAR_LAST_TALKED)
+    fadescreen(FADE_FROM_BLACK)
+    completequest(QUEST_THEBOYWHOCRIESWITHWOLVES)
+    release
+    end
+}
+
+movement Quest_Theboywhocriedwithwolves_Ambrogio_LeaveScene_Movement{
+    walk_up * 3
+    step_end
+}
+
+movement Quest_Theboywhocriedwithwolves_LookAround_Movement{
+    face_left
+    delay_16
+    walk_in_place_right
+    delay_16
+    walk_in_place_left
+    step_end
+}
+text gText_Theboywhocriedwithwolves_Manwhatami{
+    format("Man, what am I going to do now?")
+}
+text gText_Theboywhocriedwithwolves_Heythere{
+    format("Hey there.")
+}
+text gText_Theboywhocriedwithwolves_Ivehadanawful{
+    format("I have had an awful day...Some kids stole my bag earlier and threw my stuff all over that golf course over there. It's a members only course, and there's no reasoning with them... so my things are trapped in there, and I'm stuck out here.")
+}
+text gText_Theboywhocriedwithwolves_SorryYouDont{
+    format("Sorry, you don't want to hear about my problems.")
+}
+text gText_Theboywhocriedwithwolves_HeyThanksForHearing{
+    format("Thanks for hearing me out. It means a lot.")
+}
+text gText_Theboywhocriedwithwolves_ItsCoolIm{
+    format("Its fine! I'm sorry those kids were so awful.")
+}
+text gText_Theboywhocriedwithwolves_MyLifeWasInThere{
+    format("My life was in that bag. My clothes, my blankets, my medications. I don't know how I'm going to survive without them.")
+}
+text gText_Theboywhocriedwithwolves_IActuallyHave{
+    format("Actually, I was in there earlier. Are these your things?")
+}
+text gText_Theboywhocriedwithwolves_MyStuff{
+    format("My stuff! Thank you!")
+}
+text gText_Theboywhocriedwithwolves_PlayerGave{
+    format("{PLAYER} gave Ambrogio back their belongings.")
+}
+text gText_Theboywhocriedwithwolves_IDontHave{
+    format("I don't have any way to repay you. Thank you for your kindness.")
+}
+text gText_Theboywhocriedwithwolves_ItsFine{
+    format("Its fine! I'm glad you got your stuff.")
+}
+text gText_Theboywhocriedwithwolves_YouKnowIWas{
+    format("I'm from Kanto, where I was a doctor. I have a pretty amazing gift, see?")
+}
+text gText_Theboywhocriedwithwolves_ICanHeal{
+    format("I can heal Pokemon by just touching them. I thought I'd be able to continue my practice here in Residobut... my peers here didn't appreciate my gift as much. Their jealousy meant they wouldn't associated with me at all, and without reccomendations, I can't get jobs... and now I'm here.")
+}
+text gText_Theboywhocriedwithwolves_Illtrytohelp{
+    format("My point was, I'm a healer! If I see you around the region, I'll try to help you.")
+}

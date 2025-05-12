@@ -1,0 +1,84 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+const ADELAIDE = 2
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+
+script WelcomeToTheHallOfFame_PostBattle_Dialogue {
+    startcutscene(JUMPPLAYER_WELCOMETOTHEHALLOFFAME)
+    msgbox(gText_WelcomeToTheHallOfFame_YourChampion)
+        closemessage
+        special(DoDomeConfetti)
+        playse(SE_M_ENCORE2)
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
+        delay(60)
+
+        clearflag(FLAG_HIDE_ADELAIDE)
+        addobject(ADELAIDE)
+        applymovement(ADELAIDE,WelcomeToTheHallOfFame_MoveAdelaideToPodium)
+        applymovement(KAI,WelcomeToTheHallOfFame_WalkOutOfWay)
+        waitmovement(ADELAIDE)
+
+        msgbox(gText_WelcomeToTheHallOfFame_ToTheHundreds,,SPEAKER_ADELAIDE)
+
+        closemessage
+
+        playse(SE_M_ENCORE2)
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
+        fadescreen(FADE_TO_BLACK)
+        setobjectxy(PLAYER,9,6)
+        setobjectxy(KAI,8,7)
+        setobjectxy(ADELAIDE,7,7)
+        turnobject(KAI,DIR_SOUTH)
+        turnobject(ADELAIDE,DIR_SOUTH)
+        turnobject(PLAYER,DIR_SOUTH)
+        TeleportCamera(9,6)
+        fadescreen(FADE_FROM_BLACK)
+
+        msgbox(gText_WelcomeToTheHallOfFame_AndNowLetsCreate,,SPEAKER_ADELAIDE)
+
+        closemessage
+
+        setvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,NO_TOURNAMENT)
+        clearflag(FLAG_SHARPRISESTADIUM_TOURNAMENT_HAPPENING)
+        setvar(VAR_STORYLINE_STATE,STORY_WON_FINALS)
+        setflag(FLAG_IS_RESIDO_CHAMPION)
+        fadescreenspeed(FADE_TO_BLACK,24)
+
+        bypass_healblock
+        call(WelcometotheHallofFame_GameClear_Script)
+        waitstate
+        endcutscene
+        releaseall
+        end
+}
+
+script WelcometotheHallofFame_GameClear_Script{
+    special(GameClear)
+        return
+}
+
+//PSF TODO add reference to emails here, maybe pitch the whole crowd on email notifications?
+
+text gText_WelcomeToTheHallOfFame_YourChampion {
+    format("Resido! Your Champion! {PLAYER}!")
+}
+text gText_WelcomeToTheHallOfFame_ToTheHundreds {
+    format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. ")
+}
+text gText_WelcomeToTheHallOfFame_AndNowLetsCreate {
+    format("And now, let's create history together. I am proud to present the first inductee to the SharpriseCapital Hall of Fame. Resido's Champion: {PLAYER}.")
+}
+
+movement WelcomeToTheHallOfFame_MoveAdelaideToPodium {
+    walk_left * 4
+        walk_up * 3
+        walk_left * 6
+        step_end
+}
+
+movement WelcomeToTheHallOfFame_WalkOutOfWay {
+    walk_right
+        walk_up
+        face_down
+        step_end
+}

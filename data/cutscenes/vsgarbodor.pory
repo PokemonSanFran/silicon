@@ -1,0 +1,555 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const OLIVER = 2
+const ALCMENE = 3
+const ROCKET_A = 4
+const ROCKET_B = 5
+const CROWD_A = 6
+const CROWD_B = 7
+const CROWD_C = 8
+const POLICE_A = 9
+const POLICE_B = 10
+const ADELAIDE = 11
+const ORI = 12
+
+
+const FLAG_HIDE_CHARLOTTE_COMPOUND = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER_COMPOUND = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
+
+script VSGarbodor_Arrest_ObjectSetup_Script {
+    setobjectxy(ROCKET_A, 26, 19)
+        setobjectxy(ROCKET_B, 26, 20)
+        setobjectxy(CHARLOTTE, 21, 21)
+        setobjectxy(OLIVER, 21, 22)
+
+        setobjectxyperm(ROCKET_A, 26, 19)
+        setobjectxyperm(ROCKET_B, 26, 20)
+        setobjectxyperm(CHARLOTTE, 21, 21)
+        setobjectxyperm(OLIVER, 21, 22)
+}
+
+script VSGarbodor_ObjectCleanUp_Script{
+    if ((var(VAR_STORYLINE_STATE) > STORY_FERRY_FIXED) && ((var(VAR_STORYLINE_STATE) != STORY_DEFEATED_GARBODOR))){
+        setflag(FLAG_HIDE_CHARLOTTE_COMPOUND)
+            setflag(FLAG_HIDE_OLIVER_COMPOUND)
+            return
+    }
+}
+
+script VSGarbodor_ConstructionObjectCleanUp_Script{
+    if (var(VAR_CONSTRUCTION_STRIKE_STATE) != START_VS_GARBODOR){
+        setflag(FLAG_HIDE_CHARLOTTE)
+    }
+    return
+}
+
+script VSGarbodor_Scouting_Dialogue {
+    lock
+        applymovement(PLAYER, Common_Movement_FaceRight)
+        waitmovement(0)
+        msgbox(gText_VSGarbodor_IDidSomeScouting,,SPEAKER_CHARLOTTE)
+        dynmultichoice(18,6,TRUE,3,0,NULL,
+            "Left",
+            "Right",
+            "Either one.",
+        )
+
+        goto(VSGarbodor_ChooseSide_Script)
+}
+
+script VSGarbodor_RandomSide_Script {
+    random(2)
+        goto(VSGarbodor_ChooseSide_Script)
+}
+
+script VSGarbodor_ChooseSide_Script {
+    switch (var (VAR_RESULT)) {
+        case 0:
+            goto(VSGarbodor_ChooseLeft_Script)
+        case 1:
+                goto(VSGarbodor_ChooseRight_Script)
+        case 2:
+                    goto(VSGarbodor_RandomSide_Script)
+    }
+}
+
+script VSGarbodor_ChooseLeft_Script {
+    setvar(VAR_INNER_CONSTRUCTION_SITE_STATE,PLAYER_LEFT_SIDE)
+        msgbox(gText_VSGarbodor_ThenIllTakeTheRight,,SPEAKER_CHARLOTTE)
+
+        closemessage
+
+        applymovement(CHARLOTTE, VSGarbodor_WalkFurtherRight)
+        delay(60)
+        applymovement(PLAYER, VSGarbodor_WalkTowardsLeftSide)
+        waitmovement(0)
+        removeobject(CHARLOTTE)
+        release
+        end
+}
+
+script VSGarbodor_ChooseRight_Script {
+    setvar(VAR_INNER_CONSTRUCTION_SITE_STATE, PLAYER_RIGHT_SIDE)
+        msgbox(gText_VSGarbodor_CoolIWanted,,SPEAKER_CHARLOTTE)
+
+        closemessage
+
+        applymovement(CHARLOTTE, VSGarbodor_WalkFurtherLeft)
+        delay(60)
+        applymovement(PLAYER, VSGarbodor_WalkTowardsRightSide)
+        waitmovement(0)
+        removeobject(CHARLOTTE)
+        release
+        end
+}
+
+script VSGarbodor_TheTideGrunt1_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_A, gText_VSGarbodor_ScrewThisStadium, gText_VSGarbodor_DamnTheyWereRight, VSGarbodor_TheTideGrunt1_Battle_Script)
+        msgbox(gText_VSGarbodor_WelpIDidWhat, MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
+        goto(VSGarbodor_RemoveGrunt)
+        end
+}
+
+script VSGarbodor_TheTideGrunt2_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_B, gText_VSGarbodor_RightOnCue, gText_VSGarbodor_HmmIGuess, VSGarbodor_TheTideGrunt2_Battle_Script)
+        msgbox(gText_VSGarbodor_BeingBad, MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
+        goto(VSGarbodor_RemoveGrunt)
+        end
+}
+script VSGarbodor_TheTideGrunt3_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_A, gText_VSGarbodor_IsTheName, gText_VSGarbodor_TheyDidntPrepare, VSGarbodor_TheTideGrunt3_Battle_Script)
+        msgbox(gText_VSGarbodor_OhThankGiratina, MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
+        goto(VSGarbodor_RemoveGrunt)
+        end
+}
+
+script VSGarbodor_TheTideGrunt4_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_B, gText_VSGarbodor_LookAtYou, gText_VSGarbodor_ThatsRight, VSGarbodor_TheTideGrunt4_Battle_Script)
+        msgbox(gText_VSGarbodor_HaveFunCleaning, MSGBOX_AUTOCLOSE)
+        goto(VSGarbodor_RemoveGrunt)
+        end
+}
+
+script VS_Garbodor_CoreEncounter_Script {
+    startmenu_savescreen
+        faceplayer
+        setwildbattle(SPECIES_GARBODOR, 40, ITEM_NORMAL_GEM)
+        playmoncry(SPECIES_GARBODOR, CRY_MODE_ENCOUNTER)
+        delay(40)
+        waitmoncry
+        setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        closemessage
+        dowildbattle
+        clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        specialvar(VAR_RESULT, GetBattleOutcome)
+        switch (var (VAR_RESULT)) {
+            case B_OUTCOME_CAUGHT:
+            case B_OUTCOME_WON:
+                goto(VSGarbodor_RemoveGrunt)
+        }
+    release
+        end
+}
+
+script VSGarbodor_RemoveGrunt {
+    lock
+        closemessage
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        removeobject(VAR_LAST_TALKED)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        call(VSGarbodor_CheckDefeated_Script)
+        release
+        end
+}
+
+script VSGarbodor_CheckDefeated_Script {
+    if (flag(FLAG_DEFEATED_CONSTRUCTION_ROCKET_B) && flag(FLAG_DEFEATED_CONSTRUCTION_ROCKET_A) && flag(FLAG_DEFEATED_CONSTRUCTION_MON_A) && flag(FLAG_DEFEATED_CONSTRUCTION_MON_B)) {
+        goto(VSGarbodor_MoveCharlotte_Script)
+    }
+    end
+}
+
+script VSGarbodor_PreventCrossingSides_Script {
+    lock
+        msgbox(gText_VSGarbodor_FeelingLonely,,SPEAKER_CHARLOTTE)
+        closemessage
+
+
+        if (var (VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_RIGHT_SIDE) {
+            applymovement(PLAYER, Common_Movement_WalkRight)
+        } else {
+            applymovement(PLAYER, Common_Movement_WalkLeft)
+        }
+    waitmovement(0)
+        release
+        end
+}
+
+script VSGarbodor_MoveCharlotte_Script {
+    lock
+startcutscene(JUMPPLAYER_VSGARBODOR)
+
+        getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+        clearflag(FLAG_TEMP_1)
+        addobject(CHARLOTTE)
+
+        if (var (VAR_TEMP_0) < 10) {
+            applymovement(PLAYER, Common_Movement_FaceRight)
+                if (var (VAR_TEMP_1) > 9) {
+                    setobjectxy(CHARLOTTE, 11, 12)
+                        copyobjectxytoperm(CHARLOTTE)
+                        applymovement(CHARLOTTE, CharlotteApproachSW)
+                } else {
+                    setobjectxy(CHARLOTTE, 13, 6)
+                        copyobjectxytoperm(CHARLOTTE)
+                        applymovement(CHARLOTTE, CharlotteApproachNW)
+                }
+        } else {
+            if (var (VAR_TEMP_1) > 9) {
+                applymovement(PLAYER, Common_Movement_FaceUp)
+                    setobjectxy(CHARLOTTE, 22, 4)
+                    copyobjectxytoperm(CHARLOTTE)
+                    applymovement(CHARLOTTE, CharlotteApproachSE)
+            } else {
+                applymovement(PLAYER, Common_Movement_FaceLeft)
+                    setobjectxy(CHARLOTTE, 10, 6)
+                    copyobjectxytoperm(CHARLOTTE)
+                    applymovement(CHARLOTTE, CharlotteApproachNE)
+            }
+        }
+    waitmovement(0)
+        goto(VSGarbodor_DefeatedAll_Dialogue)
+}
+
+script VSGarbodor_DefeatedAll_Dialogue {
+    setvar(VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR)
+
+        msgbox(gText_VSGarbodor_GodYouWereTaking,,SPEAKER_CHARLOTTE)
+        closemessage
+
+
+        applymovement(CHARLOTTE, VSGarbodor_LookAround)
+        waitmovement(0)
+        msgbox(gText_VSGarbodor_WhateverMineWereEasy,,SPEAKER_CHARLOTTE)
+        closemessage
+
+
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_ROUTE2, 255, 20, 22)
+        delay(100)
+}
+
+
+script VSGarbodor_Arrest_Script {
+    setvar(VAR_CONSTRUCTION_STRIKE_STATE,THETIDE_ARRESTED)
+        setvar(VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR)
+
+        applymovement(ADELAIDE,Common_Movement_FaceUp)
+        applymovement(CHARLOTTE,Common_Movement_FaceUp)
+        applymovement(OLIVER,Common_Movement_FaceUp)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        waitmovement(0)
+
+        applymovement(ROCKET_A, VSGarbodor_PerpWalk)
+        applymovement(ROCKET_B, VSGarbodor_PerpWalk)
+        applymovement(POLICE_A, VSGarbodor_PerpWalk)
+        applymovement(POLICE_B, VSGarbodor_PerpWalk)
+        waitmovement(0)
+
+        call(VSGarbodor_CleanUpPerpWalk)
+        applymovement(ADELAIDE, Common_Movement_FaceDown)
+        applymovement(CHARLOTTE, Common_Movement_FaceDown)
+        waitmovement(0)
+        goto(VSGarbodor_Negotiating_Dialogue)
+}
+
+script VSGarbodor_CleanUpPerpWalk {
+    removeobject(ROCKET_A)
+        removeobject(ROCKET_B)
+        removeobject(POLICE_A)
+        removeobject(POLICE_B)
+        removeobject(ALCMENE)
+}
+
+script VSGarbodor_Negotiating_Dialogue
+{
+    msgbox(gText_VSGarbodor_AsWeWereNegotiating,,SPEAKER_ADELAIDE)
+
+        msgbox(gText_VSGarbodor_DoneLikeYouGuys,,SPEAKER_ALICIA)
+
+        msgbox(gText_VSGarbodor_ThankYouBoth,,SPEAKER_ADELAIDE)
+        msgbox(gText_VSGarbodor_YouHave,,SPEAKER_ADELAIDE)
+        closemessage
+        special(VSGarbodor_ChooseGemBasedOnStarter)
+        giveitem(VAR_0x8003,1)
+
+        msgbox(gText_VSGarbodor_HowDid,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
+        msgbox(gText_VSGarbodor_DidIMiss,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+        msgbox(gText_VSGarbodor_TheyreOnlyFound,,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
+        msgbox(gText_VSGarbodor_ConsiderIt,,SPEAKER_ADELAIDE)
+        msgbox(gText_VSGarbodor_IThink,,SPEAKER_ADELAIDE)
+        msgbox(gText_VSGarbodor_YeahImBeat, MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+
+        if (var (VAR_RESULT) == NO) {
+
+            msgbox(gText_VSGarbodor_WeirdButOkay,,SPEAKER_CHARLOTTE)
+
+                closemessage
+                call(VSGarbodor_FlyWithoutPlayer_Script)
+                release
+                end
+        } else {
+
+            msgbox(gText_VSGarbodor_LetsBounce,,SPEAKER_CHARLOTTE)
+
+                closemessage
+                fadeblackandsetremovewarpfadeflag
+                warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 7, 3)
+                release
+                end
+        }
+}
+
+script VSGarbodor_FlyWithoutPlayer_Script {
+    applymovement(CHARLOTTE, Common_Movement_WalkInPlaceFasterDown)
+        waitmovement(0)
+        delay(50)
+        setfieldeffectargument(0,1)
+        dofieldeffect(FLDEFF_NPCFLY_OUT)
+        delay(15)
+        removeobject(CHARLOTTE)
+        waitfieldeffect(FLDEFF_NPCFLY_OUT)
+}
+
+script VSGarbodor_ReturnToTheCompound_ObjectSetUp {
+    if (var(VAR_STORYLINE_STATE) == STORY_DEFEATED_GARBODOR){
+        setobjectxy(CHARLOTTE,7,2)
+            setobjectxyperm(CHARLOTTE,7,2)
+            setobjectmovementtype(CHARLOTTE,MOVEMENT_ACTION_FACE_DOWN)
+            setflag(FLAG_HIDE_OLIVER_COMPOUND)
+            return
+    }
+}
+
+script VSGarbodor_ReturnToTheCompound_Dialogue {
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+        if (var(VAR_TEMP_0) != 7){
+            fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 7, 3)
+                waitstate
+        }else{
+            applymovement(PLAYER,Common_Movement_FaceUp)
+                waitmovement(0)
+                msgbox(gText_VSGarbodor_ImGonnaGet,,SPEAKER_CHARLOTTE)
+
+                msgbox(gText_VSGarbodor_HehWellSee,,SPEAKER_ALICIA)
+
+                closemessage
+
+                applymovement(CHARLOTTE, VSGarbodor_WalkUpstairs)
+                waitmovement(0)
+                playse(SE_EXIT)
+                waitse
+                removeobject(CHARLOTTE)
+                setvar(VAR_STORYLINE_STATE,STORY_NEED_SLEEP_BEFORE_ARMANDO)
+
+        call(TryAutoSave)
+                endcutscene
+                release
+                end
+        }
+}
+
+movement VSGarbodor_WalkTowardsLeftSide {
+    walk_up * 8
+        walk_left * 2
+        step_end
+}
+
+movement VSGarbodor_WalkFurtherLeft {
+    walk_up * 15
+        walk_left * 8
+        step_end
+}
+
+movement VSGarbodor_WalkFurtherRight {
+    walk_up * 8
+        walk_right * 8
+        step_end
+}
+
+movement VSGarbodor_WalkTowardsRightSide {
+    walk_up * 8
+        walk_right * 2
+        step_end
+}
+
+movement VSGarbodor_LookAround {
+    face_up
+        delay_16
+        face_left
+        delay_16
+        face_right
+        delay_16
+        step_end
+}
+movement CharlotteApproachSW {
+    walk_left * 6
+        step_end
+}
+movement CharlotteApproachNW {
+    walk_left * 6
+        step_end
+}
+movement CharlotteApproachSE {
+    walk_down * 6
+        step_end
+}
+movement CharlotteApproachNE {
+    walk_right * 7
+        step_end
+}
+
+movement VSGarbodor_PerpWalk {
+    walk_left * 15
+        step_end
+}
+
+movement VSGarbodor_WalkUpstairs {
+    walk_up
+        step_end
+}
+
+text gText_VSGarbodor_IDidSomeScouting {
+    format("I did some scouting while waiting for you. Both sides have two Garbodor and two Trainers guarding ‘em. Do you care which side you take?")
+}
+
+text gText_VSGarbodor_ThenIllTakeTheRight {
+    format("Then I'll take the right side. See you on the other side. Don't take too long!")
+}
+
+text gText_VSGarbodor_CoolIWanted {
+    format("Cool, I wanted the left side anyway.  See you on the other side. Don't take too long!")
+}
+
+text gText_VSGarbodor_ScrewThisStadium {
+    format("Heh, we're TheTide! Screw this stadium and screw SharpriseCapital!")
+}
+
+text gText_VSGarbodor_IsTheName {
+    format("TheTide is the name, and shutting this shit down is our game!")
+}
+
+text gText_VSGarbodor_DamnTheyWereRight {
+    format("Damn, they were right, you're strong…")
+}
+
+text gText_VSGarbodor_TheyDidntPrepare {
+    format("They didn't prepare us for this!")
+}
+
+text gText_VSGarbodor_WelpIDidWhat {
+    format("Welp, I did what I could! Good luck with that stinky shit.")
+}
+
+text gText_VSGarbodor_OhThankGiratina {
+    format("Oh thank Giratina, I can go back to the office now…")
+}
+
+text gText_VSGarbodor_RightOnCue {
+    format("Right on cue, here come the heroes…")
+}
+
+text gText_VSGarbodor_LookAtYou {
+    format("Look at you, thinking you're making any difference!")
+}
+
+text gText_VSGarbodor_HmmIGuess {
+    format("Hmm, I guess I get to be the bad guy today!")
+}
+
+text gText_VSGarbodor_ThatsRight {
+    format("That's right, dance puppets!")
+}
+
+text gText_VSGarbodor_BeingBad {
+    format("Being bad was fun for a day!")
+}
+
+text gText_VSGarbodor_HaveFunCleaning {
+    format("Have fun cleaning up after us, kid.")
+}
+
+text gText_VSGarbodor_FeelingLonely {
+    format("Feeling lonely over there? I got this side, you handle that side!")
+}
+
+text gText_VSGarbodor_GodYouWereTaking {
+    format("God, you were taking forever. They don't teach efficiency in Orre, do they?")
+}
+
+text gText_VSGarbodor_WhateverMineWereEasy {
+    format("Whatever. Mine were easy, they just both used Self-Destruct before I could really get a move in. I already texted Oliver, he said meet in front of the construction site.")
+}
+
+text gText_VSGarbodor_AsWeWereNegotiating {
+    format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpriseCapital Task Force?")
+}
+
+text gText_VSGarbodor_DoneLikeYouGuys {
+    format("Done. Like you guys said, TheTide up to their shit as usual.")
+}
+
+text gText_VSGarbodor_ThankYouBoth {
+    format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship.")
+}
+
+text gText_VSGarbodor_YouHave
+{
+    format("To show my appreciation, I have these for you.")
+}
+
+text gText_VSGarbodor_HowDid
+{
+    format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!")
+}
+
+text gText_VSGarbodor_DidIMiss
+{
+    format("...Did I miss someting?")
+}
+
+text gText_VSGarbodor_TheyreOnlyFound
+{
+    format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!")
+}
+
+text gText_VSGarbodor_ConsiderIt
+{
+    format("They are indeed removed from circulation worldwide, but consider it a perk. SharpriseCapital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!")
+}
+
+text gText_VSGarbodor_IThink{
+    format("Now, I think you two should head back to the Compound and get some rest.")
+}
+
+text gText_VSGarbodor_YeahImBeat {
+    format("Yeah, I'm beat. Do you want a ride back to the Compound?")
+}
+
+text gText_VSGarbodor_WeirdButOkay {
+    format("Weird, but okay. I'll see you around.")
+}
+
+text gText_VSGarbodor_LetsBounce {
+    format("Let's bounce.")
+}
+
+text gText_VSGarbodor_ImGonnaGet {
+    format("I'm gonna get some sleep. Good shit on finishing your Badges. Can't wait to kick your ass at the Championship… whenever that is.")
+}
+
+text gText_VSGarbodor_HehWellSee {
+    format("Heh, we'll see. Good night.")
+}

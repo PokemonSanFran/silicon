@@ -1,0 +1,210 @@
+const FLAG_HIDE_LIIDIA = FLAG_TEMP_A
+const LOCKED_DOOR = 8
+const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
+const LIIDIA = 1
+
+//gText_Manofmanyhats_
+//Quest_Manofmanyhats_
+
+script Quest_Manofmanyhats_Liidia_Waiter_Visibility_Script{
+    returnqueststate(QUEST_INSTALLNATUREPROBES)
+
+        if (var(VAR_RESULT) != QUEST_MENU_COMPLETE_QUEST || var(VAR_QUEST_MANOFMANYHATS) != 0){
+            setflag(FLAG_HIDE_LIIDIA)
+        }
+    return
+}
+
+script Quest_Manofmanyhats_Liidia_Attendant_Visibility_Script{
+        if (var(VAR_QUEST_MANOFMANYHATS) != SEEN_LIIDIA_1ST){
+            setflag(FLAG_HIDE_LIIDIA)
+        }
+    return
+}
+
+script Quest_Manofmanyhats_Liidia_Fisherman_Visibility_Script{
+        if (var(VAR_QUEST_MANOFMANYHATS) < SEEN_LIIDIA_2ND){
+            setflag(FLAG_HIDE_LIIDIA)
+        }
+    return
+}
+
+
+script Quest_Manofmanyhats_Liidia_Waiter_Dialogue{
+    addvar(VAR_QUEST_MANOFMANYHATS,1)
+    msgbox(gText_Manofmanyhats_ShitTheyDidntTeachMe,,SPEAKER_LIIDIA,,EMOTE_SWEAT)
+    closemessage
+    release
+    end
+}
+
+script Quest_Manofmanyhats_Liidia_StationAttendant_Dialogue{
+    addvar(VAR_QUEST_MANOFMANYHATS,1)
+    msgbox(gText_Manofmanyhats_TheyDidWhatOnTheTrackway,,SPEAKER_LIIDIA,,EMOTE_SWEAT)
+    closemessage
+    release
+    end
+}
+
+script Quest_Manofmanyhats_Liidia_Interact_Script{
+    lock
+    goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Active_Dialogue)
+    goto_if_quest_reward(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Reward_Dialogue)
+    goto_if_quest_complete(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Complete_Dialogue)
+    goto(Quest_Manofmanyhats_Liidia_Fisherman_Dialogue)
+}
+
+script Quest_Manofmanyhats_Liidia_Fisherman_Dialogue{
+    addvar(VAR_QUEST_MANOFMANYHATS,1)
+    msgbox(gText_Manofmanyhats_NotASingleBiteThis,,SPEAKER_LIIDIA,,EMOTE_SWEAT)
+    closemessage
+    goto(Quest_Manofmanyhats_StartQuest_Dialogue)
+}
+
+script Quest_Manofmanyhats_StartQuest_Dialogue{
+    playse(SE_PIN)
+    applymovement(LIIDIA,Quest_Manofmanyhats_LiidiaExclaimandTurn_Movement)
+    waitse
+    lock
+    msgbox(gText_Manofmanyhats_OhYourePlayer,MSGBOX_NPC,SPEAKER_LIIDIA)
+    msgbox(gText_Manofmanyhats_ThingsHavent,,SPEAKER_LIIDIA,EMOTE_SWEAT)
+    closemessage
+    applymovement(LIIDIA,Common_Movement_FaceLeft)
+    waitmovement(LIIDIA)
+    msgbox(gText_Manofmanyhats_IHaveToGet,,SPEAKER_LIIDIA)
+    msgbox(gText_Manofmanyhats_YeahIveSeen,,SPEAKER_ALICIA,,EMOTE_SWEAT)
+    applymovement(LIIDIA,Common_Movement_FacePlayer)
+    waitmovement(LIIDIA)
+    msgbox(gText_Manofmanyhats_YeahTheyreNot,,SPEAKER_LIIDIA)
+    msgbox(gText_Manofmanyhats_AndTheWorstPart,,SPEAKER_LIIDIA,,EMOTE_ANGRY)
+    msgbox(gText_Manofmanyhats_CouldYouGet,,SPEAKER_LIIDIA)
+    setvar(VAR_QUEST_MANOFMANYHATS,SEEN_LIIDIA_3RD)
+    startquest(QUEST_MANOFMANYHATS)
+    call(Quest_Manofmanyhats_Active_Dialogue)
+}
+
+script Quest_Manofmanyhats_Active_Dialogue{
+   msgbox(gText_Manofmanyhats_MyRangerStation,MSGBOX_NPC,SPEAKER_LIIDIA)
+}
+
+script Quest_Manofmanyhats_Reward_Dialogue{
+    msgbox(gText_Manofmanyhats_OhYouGot,MSGBOX_NPC,SPEAKER_LIIDIA,,EMOTE_HAPPY)
+
+        if (!flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_WIDE_LENS) && !flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_ROCKY_HELMET)){
+            msgbox(gText_Manofmanyhats_OhAndIfYouSee,,SPEAKER_LIIDIA)
+            msgbox(gText_Manofmanyhats_ThatStuff,,SPEAKER_LIIDIA)
+        }else{
+            msgbox(gText_Manofmanyhats_ThereWasOther,,SPEAKER_ALICIA)
+            msgbox(gText_Manofmanyhats_NahALotOfIt,,SPEAKER_LIIDIA)
+            msgbox(gText_Manofmanyhats_ThatStuff,,SPEAKER_LIIDIA)
+        }
+    applymovement(LIIDIA,Common_Movement_FaceLeft)
+    completequest(QUEST_MANOFMANYHATS)
+    release
+        end
+}
+
+script Quest_Manofmanyhats_Complete_Dialogue{
+    random(3)
+    switch (var(VAR_RESULT)){
+        case 0: msgbox(gText_Manofmanyhats_LyricsA,,SPEAKER_LIIDIA,TAIL_SHOUT)
+        case 1: msgbox(gText_Manofmanyhats_LyricsB,,SPEAKER_LIIDIA,TAIL_SHOUT)
+        case 2: msgbox(gText_Manofmanyhats_LyricsC,,SPEAKER_LIIDIA,TAIL_SHOUT)
+    }
+    msgbox(gText_Manofmanyhats_ThoseHeadphonesMustBe,,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_SWEAT)
+    closemessage
+    release
+    end
+}
+
+script Quest_Manofmanyhats_EnterDoorCombination_Dialogue{
+    setvar(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR)
+        msgbox(gText_Manofmanyhats_OkayTheCombo,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        closemessage
+        playse(SE_DING_DONG)
+        waitse
+        playse(SE_BANG)
+        waitse
+        setmetatile(13,8,0x248,FALSE)
+        special(DrawWholeMapView)
+        warpdoor(MAP_ESPULEE_OUTSKIRTS_RANGER,0)
+        waitstate
+        end
+}
+
+script Quest_Manofmanyhats_CheckDoorLock_Script{
+    if (var(VAR_QUEST_MANOFMANYHATS) > OPEN_LOCKED_DOOR){
+        setflag(FLAG_UNLOCK_DOOR)
+    }
+}
+
+movement Quest_Manofmanyhats_LiidiaExclaimandTurn_Movement{
+    emote_exclamation_mark
+    delay_16
+    face_player
+    step_end
+}
+text gText_Manofmanyhats_ShitTheyDidntTeachMe{
+    format("They didn't teach me how to work the boba machine...")
+}
+text gText_Manofmanyhats_TheyDidWhatOnTheTrackway{
+    format("They did WHAT on the trackway? I don't know if I can do this...")
+}
+text gText_Manofmanyhats_NotASingleBiteThis{
+    format("Not a single bite... this is not going to pay the rent!")
+}
+text gText_Manofmanyhats_OhYourePlayer{
+    format("Oh... you're {PLAYER}. Thanks again for your... help.")
+}
+text gText_Manofmanyhats_ThingsHavent{
+    format("Things haven't really gotten better since I last saw you.")
+}
+text gText_Manofmanyhats_IHaveToGet{
+    format("I had to get a bunch of jobs to make up for that one. I've got bills to pay!")
+}
+text gText_Manofmanyhats_YeahIveSeen{
+    format("Yeah, I saw you working near the trolleys, and at that restaurant too.")
+}
+text gText_Manofmanyhats_YeahTheyreNot{
+    format("Yeah, they're not going well. And neither is this!")
+}
+text gText_Manofmanyhats_AndTheWorstPart{
+    format("And the worst part is, I left my headphones at the Ranger station in EspuleeOutskirts! I'm working so many jobs I don't have time to go back and get them...")
+}
+text gText_Manofmanyhats_CouldYouGet{
+    format("Sorry to ask another favor... could you get them for me?")
+}
+text gText_Manofmanyhats_MyRangerStation{
+    format("The Ranger station is in EspuleeOutskirts. The code for the door... it was something like 3444, I think.")
+}
+text gText_Manofmanyhats_OhYouGot{
+    format("Oh! You got my headphones, thank you so much!")
+}
+text gText_Manofmanyhats_OhAndIfYouSee{
+    format("Oh, and if you saw anything else in there, go ahead and grab it. ")
+}
+text gText_Manofmanyhats_ThatStuff{
+    format("That stuff was there before me, and probably will be there forever.")
+}
+text gText_Manofmanyhats_ThereWasOther{
+    format("There was other stuff there, do you want it?")
+}
+text gText_Manofmanyhats_NahALotOfIt{
+    format("Nah.")
+}
+//PSF TODO Add ~ character to the charmap
+text gText_Manofmanyhats_LyricsA{
+    format("At the car wash, woah\pTalking about the car wash, yeah\pCome on y'all and sing it for me...")
+}
+text gText_Manofmanyhats_LyricsB{
+    format("You are my fire...\pThe one desire...")
+}
+text gText_Manofmanyhats_LyricsC{
+    format("Can't fight the moonlight\pDeep in the dark, you'll surrender your heart...")
+}
+text gText_Manofmanyhats_ThoseHeadphonesMustBe{
+    format("Those headphones must be noise cancelling...")
+}
+text gText_Manofmanyhats_OkayTheCombo{
+    format("Okay, Liidia said the combination was 3444...")
+}

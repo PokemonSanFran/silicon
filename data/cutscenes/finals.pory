@@ -1,0 +1,73 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ADELAIDE = 1 //FLAG_TEMP_1
+const CHARLOTTE = 2 //FLAG_TEMP_2
+const KAI = 3 //FLAG_TEMP_3
+const OLIVER = 4 //FLAG_TEMP_4
+
+script Finals_HideObject_Script {
+    setflag(FLAG_TEMP_1)
+    setflag(FLAG_TEMP_4)
+    setflag(FLAG_TEMP_6)
+}
+
+script Finals_PreparePlayer_Script {
+    lock
+    faceplayer
+    msgbox(gText_Finals_YourSemiFinal,MSGBOX_YESNO)
+    closemessage
+        if (var(VAR_RESULT) == YES){
+            call(GroupStages_MoveObjects_Script)
+        fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_SHARPRISE_STADIUM_ARENA,255,5,6)
+        }
+    release
+        end
+}
+
+script Finals_StopPlayerLeaveLockers_Script {
+    lock
+    applymovement(CHARLOTTE,Common_Movement_FaceDown)
+    waitmovement(0)
+    msgbox(gText_Finals_YourMatchIsUp,,SPEAKER_CHARLOTTE)
+    closemessage
+
+    applymovement(PLAYER,Common_Movement_WalkUp)
+    waitmovement(0)
+    release
+    end
+}
+
+script Finals_StartSemifinals_Script {
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        waitmovement(0)
+        msgbox(gText_GroupStages_Placeholder)
+        closemessage
+        applymovement(PLAYER,Common_Movement_WalkRight)
+        applymovement(1,Common_Movement_WalkLeft)
+        waitmovement(0)
+        msgbox(gText_GroupStages_Placeholder)
+        closemessage
+        trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_SEMIFINALS,gText_GroupStages_Placeholder)
+        setvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,PRE_BATTLE_5)
+        setvar(VAR_STORYLINE_STATE,STORY_SEMIFINAL_COMPLETE)
+        call(Semifinal_Complete_Script)
+}
+
+script Semifinal_Complete_Script{
+        applymovement(PLAYER,GroupStages_WalkToCenterStage)
+        waitmovement(PLAYER)
+        msgbox(gText_GroupStages_Placeholder)
+        special(DoDomeConfetti)
+        playse(SE_APPLAUSE)
+        waitse
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,10,3)
+}
+
+text gText_Finals_YourSemiFinal {
+    format("Your Semifinal match is next. Are you ready?")
+}
+
+text gText_Finals_YourMatchIsUp {
+    format("Your match is up next! Where are you going?")
+}

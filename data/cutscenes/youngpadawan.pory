@@ -1,0 +1,254 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const TALA = 9
+
+script YoungPadawan_Intro_Dialogue
+{
+    lock
+    spawnobject(graphicsId=OBJ_EVENT_GFX_SIDNEY,localId=TALA,x=28,y=60,movementType=MOVEMENT_TYPE_FACE_UP, elevation=3)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,TRUE)
+    applymovement(TALA,YoungPadawan_ApproachFromIsland_Movement)
+    waitmovement(TALA)
+
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    waitmovement(PLAYER)
+    msgbox(gText_YoungPadawan_WowYouLookTired,,SPEAKER_TALA)
+
+    call(Common_EventScript_OutOfCenterPartyHeal)
+
+    msgbox(gText_YoungPadawan_DidTheChallenge,,SPEAKER_TALA)
+
+    msgbox(gText_YoungPadawan_ThankYou,,SPEAKER_ALICIA)
+
+    msgbox(gText_YoungPadawan_DontMentionIt,,SPEAKER_TALA)
+
+    closemessage
+
+    applymovement(TALA,YoungPadawan_LookAtOcean_Movement)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(TALA)
+
+    msgbox(gText_YoungPadawan_LearnALot,,SPEAKER_TALA)
+
+    msgbox(gText_YoungPadawan_TheStoryOfTheIsland,,SPEAKER_ALICIA)
+
+    msgbox(gText_YoungPadawan_ThatQuakeWasOne,,SPEAKER_TALA)
+
+    msgbox(gText_YoungPadawan_HistoryBooksAreCrazy,,SPEAKER_TALA)
+
+    closemessage
+
+    applymovement(TALA,YoungPadawan_WalkBackToPlayer_Movement)
+    waitmovement(TALA)
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    waitmovement(PLAYER)
+
+    msgbox(gText_YoungPadawan_MakesYouWonder,,SPEAKER_TALA)
+
+    msgbox(gText_YoungPadawan_MakesSenseYeah,,SPEAKER_ALICIA)
+
+    goto(YoungPadawan_StartBattle_Script)
+}
+
+script YoungPadawan_StartBattle_Script{
+
+        msgbox(gText_YoungPadawan_YouveGotAGoodSpirit,,SPEAKER_TALA)
+
+        closemessage
+        trainerbattle_continue_after_lose(TRAINER_TALA,gText_YoungPadawan_DontBeatYourselfUp)
+        goto(YoungPadawan_PostBattle_Dialogue)
+}
+
+script YoungPadawan_Secret_Dialogue{
+    msgbox(gText_YoungPadawan_DidYouHack,,SPEAKER_TALA)
+
+        msgbox(gText_YoungPadawan_GotItYouWon,,SPEAKER_ALICIA)
+
+        msgbox(gText_YoungPadawan_KeepItSecretToo,,SPEAKER_TALA)
+
+        closemessage
+
+        additem(ITEM_POWER_ANKLET,1)
+        additem(ITEM_POWER_BAND,1)
+        additem(ITEM_POWER_BRACER,1)
+        additem(ITEM_POWER_LENS,1)
+        additem(ITEM_POWER_WEIGHT,1)
+        additem(ITEM_POWER_BELT,1)
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox(gText_YoungPadawan_FullSet)
+        waitmessage
+        waitfanfare
+        return
+}
+
+script YoungPadawan_NoZRing_Dialogue
+{
+    bufferitemname(STR_VAR_1,ITEM_Z_POWER_RING)
+    msgbox(gText_YoungPadawan_AndISeeYou,,SPEAKER_TALA)
+    return
+}
+
+script YoungPadawan_PostBattle_Dialogue
+{
+    specialvar(VAR_RESULT,GetBattleOutcome)
+
+    if (var(VAR_RESULT) == B_OUTCOME_WON)
+    {
+        call(YoungPadawan_Secret_Dialogue)
+    }
+
+    bypass_healblock
+    msgbox(gText_YoungPadawan_KeepTraining,,SPEAKER_TALA)
+    startcutscene(JUMPPLAYER_YOUNGPADAWAN)
+    special(HealPlayerParty)
+    msgbox(gText_YoungPadawan_IveNeverBattled,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(gText_YoungPadawan_KeepTraining,,SPEAKER_TALA,,EMOTE_LAUGH)
+    msgbox(gText_YoungPadawan_YeahTotally,,SPEAKER_ALICIA)
+    call_if_quest_not_complete(QUEST_ALOHAFROMALOLA,YoungPadawan_NoZRing_Dialogue)
+    msgbox(gText_YoungPadawan_UntilThenHeres,,SPEAKER_TALA)
+    closemessage
+    giveitem(ITEM_GO_GOGGLES,1)
+    setvar(VAR_STORYLINE_STATE,STORY_COMPLETE_ARANTRAZ)
+
+    msgbox(gText_YoungPadawan_ThoseCanBeTough,,SPEAKER_TALA)
+
+    closemessage
+
+    applymovement(TALA,YoungPadawan_WalkUpStairs_Movement)
+    waitmovement(TALA)
+    fadedefaultbgm
+    removeobject(TALA)
+    setvar(VAR_ARANTRAZ_STATE,BATTLED_TALA)
+    setvar(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_COMPLETE)
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
+
+text gText_YoungPadawan_WowYouLookTired {
+    format("Wow, you look tired! Let me help.")
+}
+
+text gText_YoungPadawan_DidTheChallenge {
+    format("Did the challenge kick your ass? Those kids are tough.")
+}
+
+text gText_YoungPadawan_ThankYou {
+    format("Thank you!")
+}
+
+text gText_YoungPadawan_DontMentionIt {
+    format("Don't mention it.")
+}
+
+text gText_YoungPadawan_LearnALot {
+    format("Learn a lot up there?")
+}
+
+text gText_YoungPadawan_TheStoryOfTheIsland {
+    format("The story of the island is crazy. And I didn't realize the earthquakes here could be that vicious.")
+}
+
+text gText_YoungPadawan_ThatQuakeWasOne {
+    format("That quake was one for the history books! Shook me to my core.")
+}
+
+text gText_YoungPadawan_HistoryBooksAreCrazy {
+    format("History books are crazy. Losers don't get a pre-release copy to leave their edits in the margins... the winners just say whatever they want, and everybody has to deal with it.")
+}
+
+text gText_YoungPadawan_MakesYouWonder {
+    format("Makes you wonder how committed to accuracy the winners are. Old geezers like me, who were around for the history in the making, have a responsibility to set the record straight. Gotta make sure the truth doesn't get lost, you know?")
+}
+
+text gText_YoungPadawan_MakesSenseYeah {
+    format("Makes sense, yeah. But the government doesn't have any reason to lie, which is a relief.")
+}
+
+text gText_YoungPadawan_YouveGotAGoodSpirit {
+    format("Hah! You got a good spirit. Let's see how long you can hold up against your elders!")
+}
+
+text gText_YoungPadawan_DidIUnderestimate {
+    format("Did I underestimate you?")
+}
+
+text gText_YoungPadawan_KidYoureSomethingElse {
+    format("Kid, you're something else! But it ends here.")
+}
+
+text gText_YoungPadawan_DontBeatYourselfUp {
+    format("Heh, don't beat yourself up. I got at least 50 years on ya.")
+}
+
+text gText_YoungPadawan_ThisAintHowItWas {
+    format("This ain't how it was supposed to go!")
+}
+
+text gText_YoungPadawan_DidYouHack
+{
+    format("Did you hack the Matrix? Maybe you got REAL lucky on a randomizer run? ... We're gonna pretend I won, okay?")
+}
+
+text gText_YoungPadawan_GotItYouWon {
+    format("Haha got it, you won.")
+}
+
+text gText_YoungPadawan_KeepItSecretToo {
+    format("Keep it secret too. Here, take these.")
+}
+
+text gText_YoungPadawan_KeepTraining {
+    format("Keep training! Once you learn a little bit more about the world, let's battle again.")
+}
+
+text gText_YoungPadawan_AndISeeYou
+{
+    format("And I see you don't have a {STR_VAR_1} yet! I don't have a spare one, but there's a new Alolan exhibit at the Perlacia Museum that could point you in the right direction.")
+}
+
+text gText_YoungPadawan_IveNeverBattled {
+    format("I've never battled anybody so strong!")
+}
+
+text gText_YoungPadawan_YeahTotally {
+    format("Will do!")
+}
+
+text gText_YoungPadawan_UntilThenHeres {
+    format("Now that I'm getting a good look at you, you're not very well equipped at all! I've got an extra one of these you can use, lemme look through this bag...")
+}
+
+text gText_YoungPadawan_ThoseCanBeTough {
+    format("I hear those can be tough to get if you're not from here. Good luck with the rest of your challenge, {PLAYER}.")
+}
+
+text gText_YoungPadawan_FullSet{
+	format("{PLAYER} obtained a set of Power items!")
+}
+
+movement YoungPadawan_ApproachFromIsland_Movement {
+        walk_right * 8
+        step_end
+}
+movement YoungPadawan_StepDownWalkBeside_Movement {
+
+    walk_down
+        face_left
+        step_end
+}
+movement YoungPadawan_LookAtOcean_Movement {
+        walk_up * 3
+        walk_right * 2
+        step_end
+}
+movement YoungPadawan_WalkBackToPlayer_Movement {
+        walk_left * 2
+        walk_down * 3
+        face_right
+        step_end
+}
+movement YoungPadawan_WalkUpStairs_Movement {
+    walk_up * 7
+        step_end
+}

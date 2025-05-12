@@ -1,0 +1,126 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CAMERA = OBJ_EVENT_ID_CAMERA
+const KAI = 1
+const TALA = 3
+const MAGNUS = 2
+const ARMANDO = 6
+const ELLEN = 5
+const ALCMENE = 7
+const ADAORA = 8
+const GRUNTA = 9
+const GRUNTB = 10
+const GRUNTC = 11
+const GRUNTD = 12
+
+script OneDown_SetUpObject_Script {
+        fadescreen(FADE_TO_BLACK)
+
+        setobjectxy(PLAYER,16,14)
+        TeleportCamera(16,14)
+        applymovement(PLAYER,Common_Movement_FaceDown)
+        applymovement(ADAORA,Common_Movement_FaceUp)
+        applymovement(MAGNUS,Common_Movement_FaceUp)
+        waitmovement(MAGNUS)
+
+        fadescreen(FADE_FROM_BLACK)
+        lock
+        goto(OneDown_StartCutscene_Script)
+}
+
+script OneDown_StartCutscene_Script {
+        startcutscene(JUMPPLAYER_ONEDOWN)
+    //PSF TODO Adaora should now begin using Alcmene's theme as her character theme instead of the generic The Tide one
+        msgbox(gText_OneDown_IJustGotFilled,,SPEAKER_ADAORA)
+
+        msgbox(gText_OneDown_ThanksAndYouve,,SPEAKER_ALICIA)
+
+        msgbox(gText_OneDown_IDidntThinkIHad,,SPEAKER_ADAORA)
+
+        closemessage
+
+        applymovement(ADAORA,Common_Movement_FaceRight)
+
+        msgbox(gText_OneDown_SoundsLikeWereBoth,,SPEAKER_MAGNUS)
+
+        closemessage
+        goto(OneDown_StartEarthquake_Script)
+}
+
+script OneDown_StartEarthquake_Script{
+
+        call(Earthquake_PlayFake_EventScript)
+
+        playse(SE_PIN)
+        applymovement(PLAYER,Common_Movement_ExclamationMark)
+        applymovement(MAGNUS,Common_Movement_ExclamationMark)
+        applymovement(ADAORA,Common_Movement_ExclamationMark)
+        waitmovement(ADAORA)
+
+        call(Earthquake_Fake_Aftershock)
+        goto(OneDown_Finish_Dialogue)
+}
+
+script OneDown_Finish_Dialogue {
+
+        applymovement(MAGNUS,Common_Movement_FaceLeft)
+
+        msgbox(gText_OneDown_MyOldBones,,SPEAKER_MAGNUS)
+        closemessage
+
+        applymovement(ADAORA, Common_Movement_FaceUp)
+
+        msgbox(gText_OneDown_GetSomeRest,,SPEAKER_ADAORA)
+
+        closemessage
+
+        applymovement(ADAORA,Common_Movement_FaceRight)
+        applymovement(MAGNUS,Common_Movement_FaceLeft)
+        waitmovement(MAGNUS)
+
+        setvar(VAR_STORYLINE_STATE,STORY_PRE_EARTHQUAKE)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+text gText_OneDown_IJustGotFilled {
+    format("I just got filled in… that was absolutely incredible!")
+}
+
+text gText_OneDown_ThanksAndYouve {
+    format("Thanks. And you've been an awesome leader too. These people love you.")
+}
+
+text gText_OneDown_IDidntThinkIHad {
+    format("I didn't think I had it in me, to be honest. Ell- Alcmene knew better, I guess.")
+}
+
+text gText_OneDown_SoundsLikeWereBoth {
+    format("Sounds like we're both having excellent days! My talks with the region's council have been much more productive than I expected. I think we're actually making some damn progress! If we keep this up -")
+}
+
+text gText_OneDown_MyOldBones {
+    format("My old bones can't handle those quakes like I used to!")
+}
+
+text gText_OneDown_GetSomeRest {
+    format("I know its been a long day, {PLAYER}, you should get some rest. You're still staying at Kai's place in HalaiIsland, right?")
+}
+
+movement OneDown_WalkToPlayer {
+    walk_up * 7
+        walk_right
+        step_end
+}
+
+movement OneDown_WalkOffScreen {
+    walk_down * 7
+        step_end
+}
+
+movement OneDown_AdaoraWalkAway {
+    walk_left
+        walk_down * 7
+        step_end
+}

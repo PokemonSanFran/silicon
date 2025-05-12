@@ -1,0 +1,268 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 10
+const TALA = 9
+
+const FLAG_HIDE_TALA = FLAG_TEMP_1
+const FLAG_HIDE_KAI = FLAG_TEMP_2
+
+script Epilogue_Script_AddKai
+{
+    if (var(VAR_STORYLINE_STATE) != STORY_EPILOGUE)
+    {
+        return
+    }
+
+    spawnobject(graphicsId=OBJ_EVENT_GFX_KAI,localId=KAI,x=8,y=13,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
+//PSF TODO need to pair a new song for this scenario
+}
+
+script Epilogue_Script_AddMalva
+{
+
+    spawnobject(graphicsId=OBJ_EVENT_GFX_SIDNEY,localId=TALA,x=9,y=21,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
+}
+
+script Epilogue_Script_ControlPlayerVisibility
+{
+    clearflag(FLAG_SPAWN_INVISIBLE)
+}
+
+script Epilogue_Script_ObjectVisibility
+{
+    if (var(VAR_STORYLINE_STATE) != STORY_EPILOGUE)
+    {
+        return
+    }
+
+    call(Epilogue_Script_AddKai)
+    call(Epilogue_Script_ControlPlayerVisibility)
+}
+
+script Epilogue_Script_TalaApproachesKai
+{
+    clearflag(FLAG_SHOULD_SKIP_CREDITS)
+    setvar(VAR_STORYLINE_STATE,STORY_CLEAR)
+
+    playbgm(MUS_ENCOUNTER_INTENSE,TRUE)
+    call(Epilogue_Script_AddMalva)
+    applymovement(TALA,moves(
+    walk_up * 5
+    ))
+    waitmovement(TALA)
+    msgbox(text=Epilogue_Text_YouKnowThis,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    closemessage
+    applymovement(KAI,
+    moves(
+        face_down
+        delay_8
+        delay_8
+        delay_8
+        face_right
+    ))
+    applymovement(TALA,moves(
+    walk_up * 3
+    face_left
+    ))
+    waitmovement(TALA)
+    goto(Epilogue_Dialogue_ConversationAboutProgress)
+}
+
+script Epilogue_Dialogue_ConversationAboutProgress
+{
+    msgbox(text=Epilogue_Text_AreYouFeeling,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_AreYou,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_LAUGH)
+    msgbox(text=Epilogue_Text_TheNewSharprise,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=Epilogue_Text_HesJustAnother,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=Epilogue_Text_SharpriseCapitalAnd,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_WereYouExpecting,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SWEAT)
+    msgbox(text=Epilogue_Text_IGuessI,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_PlayerIsA,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SHOCK)
+    msgbox(text=Epilogue_Text_AndLookAt,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_YouManagedTo,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
+    msgbox(text=Epilogue_Text_ThatBringingMore,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_PlayerIsOne,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=Epilogue_Text_ShesGreatBut,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestOne,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestTwo,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestThree,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestFour,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestFive,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_YouMightBe,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_YoureDiscountingAll,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
+    msgbox(text=Epilogue_Text_ListQuestOne,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestTwo,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestThree,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestFour,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ListQuestFive,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    closemessage
+    applymovement(TALA,moves(
+        face_up
+    ))
+    msgbox(text=Epilogue_Text_IveBeenAt,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_TheStruggleTo,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_MyJobThe,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_YouShouldBe,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_YouCanStill,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ItProbablyWont,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_ButItsYour,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    applymovement(KAI,moves(
+        face_up
+    ))
+    msgbox(text=Epilogue_Text_ThanksTala,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    closemessage
+    goto(Epilogue_Script_ShowTweetLeaveMap)
+}
+
+
+script Epilogue_Script_ShowTweetLeaveMap
+{
+    fadescreenspeed(FADE_TO_BLACK,24)
+    setflag(FLAG_REMOVE_WARP_FADE)
+    setflag(FLAG_SPAWN_INVISIBLE)
+    warpsilent(MAP_BLACK_MAP,0)
+    waitstate
+    releaseall
+    end
+}
+
+script Epilogue_Script_GoToCredits
+{
+    showtweet(TWEET_STORY_EPILOGUE)
+    endcutscene
+    fadescreen(FADE_TO_BLACK)
+    callnative(StartCredits)
+    waitstate
+    releaseall
+    end
+}
+
+script Epilogue_Script_WarpToKai
+{
+    marktweetread(TWEET_STORY_EPILOGUE)
+    fadeblackandsetremovewarpfadeflag
+    warpsilent(MAP_HALAI_ISLAND_KAI,0)
+    waitstate
+    release
+    end
+}
+
+text Epilogue_Text_YouKnowThis
+{
+	format("You know, this is usually where I stand when I'm feeling particularly accomplished, or proud.")
+}
+text Epilogue_Text_AreYouFeeling
+{
+	format("Are you feeling proud of all the work you've done?")
+}
+text Epilogue_Text_AreYou
+{
+	format("Are you serious? ")
+}
+text Epilogue_Text_TheNewSharprise
+{
+	format("The new Sharprise CEO... have you heard about him?")
+}
+text Epilogue_Text_HesJustAnother
+{
+	format("He's just another corporate suit! Sure, he's not a murderer like Adelaide, but all of his apologies and promises to turn over a new leaf are completely hollow.")
+}
+text Epilogue_Text_SharpriseCapitalAnd
+{
+	format("Sharprise Capital and all of its slimy tentacles are going to keep making Resido worse. ")
+}
+text Epilogue_Text_WereYouExpecting
+{
+	format("Were you expecting {PLAYER} to defeat Adelaide and that would be the end of Sharprise? It's going to take a lot more than one team of corrupt executives to make Sharprise disappear!")
+}
+text Epilogue_Text_IGuessI
+{
+	format("I guess I wasn't really sure what would happen, but I wish we had done more.")
+}
+text Epilogue_Text_PlayerIsA
+{
+	format("{PLAYER} is a perfect example of you and The Tide's hard work. {PLAYER} was brought to this region BY Sharprise, completely in support of them.")
+}
+text Epilogue_Text_AndLookAt
+{
+	format("And look at her now!")
+}
+text Epilogue_Text_YouManagedTo
+{
+	format("You managed to redirect their fame and talent into actually helping and rebuilding the region. ")
+}
+text Epilogue_Text_ThatBringingMore
+{
+	format("THAT, bringing more people to your cause - that's the real work.")
+}
+text Epilogue_Text_PlayerIsOne
+{
+	format("{PLAYER} is one Trainer!")
+}
+text Epilogue_Text_ShesGreatBut
+{
+	format("She's great, but there's so much more work to be done today!")
+}
+text Epilogue_Text_ListQuestOne
+{
+	format("List quest one...")
+}
+text Epilogue_Text_ListQuestTwo
+{
+	format("List quest two...")
+}
+text Epilogue_Text_ListQuestThree
+{
+	format("List quest three...")
+}
+text Epilogue_Text_ListQuestFour
+{
+	format("List quest four...")
+}
+text Epilogue_Text_ListQuestFive
+{
+	format("List quest five!")
+}
+text Epilogue_Text_YouMightBe
+{
+	format("You might be right, Kai, but...")
+}
+text Epilogue_Text_YoureDiscountingAll
+{
+	format("You're discounting all the work you, {PLAYER} and The Tide HAVE done!")
+}
+text Epilogue_Text_IveBeenAt
+{
+	format("I've been at this longer than you've been alive.")
+}
+text Epilogue_Text_TheStruggleTo
+{
+	format("The struggle to do more will alwys exist.")
+}
+text Epilogue_Text_MyJobThe
+{
+	format("My job... The Tide's job... is to inspire and empower the next generation to keep moving forward.")
+}
+text Epilogue_Text_YouShouldBe
+{
+	format("You should be proud of what you've done, Kai. ")
+}
+text Epilogue_Text_YouCanStill
+{
+	format("You can still appreciate that there is much to be done.")
+}
+text Epilogue_Text_ItProbablyWont
+{
+	format("It probably won't all be done in your lifetime!")
+}
+text Epilogue_Text_ButItsYour
+{
+	format("But its your job to plant berries that only your grandchildren will be able to harvest.")
+}
+text Epilogue_Text_ThanksTala
+{
+	format("...Thanks Tala.")
+}
+text Epilogue_Text_WeveGotMore
+{
+	format("We've got more work to do! Let's get at it.")
+}

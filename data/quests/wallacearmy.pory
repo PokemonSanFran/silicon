@@ -1,0 +1,445 @@
+//Quest_WallaceArmy_
+//gText_WallaceArmy_
+//PSF TODO Change Wallace to Lisia? maybe?
+//
+
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const SOLAR_CEO = 1
+const SOLAR_LADY = 2
+const LEAD_STAN = 3
+const FLAG_HIDE_LEAD_STAN = FLAG_TEMP_1
+
+
+script Quest_WallaceArmy_HideObject_Script{
+    setflag(FLAG_HIDE_LEAD_STAN)
+}
+
+script Quest_WallaceArmy_SetMovementType_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
+    if (var(VAR_RESULT)){
+   setobjectmovementtype(SOLAR_CEO,MOVEMENT_TYPE_FACE_UP)
+   setobjectmovementtype(SOLAR_LADY,MOVEMENT_TYPE_FACE_UP)
+    }
+}
+
+script Quest_WallaceArmy_PreQuest_Dialogue{
+    if (flag(FLAG_IS_CHAMPION)){
+        goto(Quest_WallaceArmy_QuestStart_Dialogue)
+    }else{
+        msgbox(gText_WallaceArmy_WhatMakesThemThinkTheyCanTreat,MSGBOX_NPC,SPEAKER_SHASHI)
+    }
+    end
+}
+
+script Quest_WallaceArmy_CheckQuestState_Script{
+    lock
+    faceplayer
+
+    returnqueststate(QUEST_WALLACEARMY)
+
+    switch(var(VAR_RESULT)){
+        case QUEST_MENU_SET_ACTIVE: goto(Quest_WallaceArmy_Active_Dialogue)
+        case QUEST_MENU_COMPLETE_QUEST: goto(Quest_WallaceArmy_CompleteDialogue)
+        default: goto(Quest_WallaceArmy_PreQuest_Dialogue)
+    }
+}
+
+script Quest_WallaceArmy_QuestStart_Dialogue{
+        msgbox(gText_WallaceArmy_TheseKidsAreGonnaRuin,,SPEAKER_SHASHI)
+        msgbox(gText_WallaceArmy_FirstTheBidNowTheDamnKids,,SPEAKER_SHASHI)
+        msgbox(gText_WallaceArmy_OhTheChampionJustWhat,,SPEAKER_SHASHI)
+
+        msgbox(gText_WallaceArmy_TheLeagueDidntSend,,SPEAKER_ALICIA)
+
+
+        msgbox(gText_WallaceArmy_SighWereEspuleeOutskirtsSolar,,SPEAKER_SHASHI)
+
+        msgbox(gText_WallaceArmy_YouThinkTheLeague,,SPEAKER_ALICIA)
+
+
+        msgbox(gText_WallaceArmy_LookIHaveNoIdea,,SPEAKER_SHASHI)
+        startquest(QUEST_WALLACEARMY)
+}
+
+script Quest_WallaceArmy_Active_Dialogue{
+    call(Quest_WallaceArmy_CheckCompletionRate_Script)
+    call(Quest_WallaceArmy_ListRemainingLocations_Script)
+
+    lock
+    msgbox(gText_WallaceArmy_LooksLikeThereStill,,SPEAKER_SHASHI)
+    end
+}
+
+script Quest_WallaceArmy_PreBattleStan_Script{
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_WALLACEARMY)
+
+    if (var(VAR_RESULT)){
+        release
+        end
+    }
+    closemessage
+    return
+}
+
+script Quest_WallaceArmy_LoadStanSpeech_Script{
+    random(4)
+
+    switch(var(VAR_RESULT)){
+        case 0:
+            bufferstring(STR_VAR_1,gText_Beauty3)
+            bufferspeciesname(STR_VAR_2,SPECIES_MILOTIC)
+        case 1:
+            bufferstring(STR_VAR_1,gText_Coolness)
+            bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
+        case 2:
+            bufferstring(STR_VAR_1,gText_Cuteness)
+            bufferspeciesname(STR_VAR_2,SPECIES_LUDICOLO)
+        case 3:
+            bufferstring(STR_VAR_1,gText_Smartness)
+            bufferspeciesname(STR_VAR_2,SPECIES_WHISCASH)
+        case 4:
+            bufferstring(STR_VAR_1,gText_Toughness)
+            bufferspeciesname(STR_VAR_2,SPECIES_WAILORD)
+}
+return
+}
+
+script Quest_WallaceArmy_Reward_Cutscene{
+    setvar(VAR_TEMP_0,1)
+
+    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_WALLACEARMY)
+    if (!var(VAR_RESULT)){
+        release
+        end
+   }
+
+    applymovement(SOLAR_CEO,Quest_WallaceArmy_ExclaimAndWalkToPlayer_Movement)
+    waitmovement(SOLAR_CEO)
+
+    msgbox(gText_WallaceArmy_WereBackUp,,SPEAKER_SHASHI)
+
+    msgbox(gText_WallaceArmy_TheStanArmyWillNeverDie,,SPEAKER_DEFAULT)
+    closemessage
+    call(Quest_WallaceArmy_LeadStanAppearance_Script)
+
+    applymovement(PLAYER,Quest_WallaceArmy_ExclaimAndFaceNorth_Movement)
+    applymovement(SOLAR_CEO,Quest_WallaceArmy_ExclaimAndFaceNorth_Movement)
+    waitmovement(SOLAR_CEO)
+
+    msgbox(gText_WallaceArmy_HowDidYouGetInHere,,SPEAKER_SHASHI)
+    msgbox(gText_WallaceArmy_WhatIsThatMusic,,SPEAKER_SHASHI)
+
+    msgbox(gText_WallaceArmy_OurArmyWillAlwaysPrevail,,SPEAKER_LEAH)
+    closemessage
+    applymovement(LEAD_STAN,Common_Movement_WalkDown)
+    waitmovement(LEAD_STAN)
+
+    msgbox(gText_WallaceArmy_ImLeahLeaderOfTheStanArmy,,SPEAKER_LEAH)
+    msgbox(gText_WallaceArmy_WaitYoureTheLeader,,SPEAKER_SHASHI)
+
+    msgbox(gText_WallaceArmy_CanItOldMan,,SPEAKER_LEAH)
+
+    msgbox(gText_WallaceArmy_AndYouAttackingTheArmy,,SPEAKER_SHASHI)
+
+    applymovement(LEAD_STAN,Common_Movement_WalkDown)
+    waitmovement(LEAD_STAN)
+
+    goto(Quest_WallaceArmy_StartBattle_Script)
+}
+
+script Quest_WallaceArmy_StartBattle_Script{
+    msgbox(gText_WallaceArmy_ACrimePunishableByDeath,,SPEAKER_LEAH)
+    trainerbattle_no_intro(TRAINER_WALLACEARMY_LEAH,gText_WallaceArmy_MyLord)
+    closemessage
+    goto(Quest_WallaceArmy_PostBattle_Script)
+}
+
+script Quest_WallaceArmy_PostBattle_Script{
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+
+    msgbox(gText_WallaceArmy_WhyAreYouDefending,,SPEAKER_LEAH,TAIL_SHOUT,EMOTE_CONFUSE)
+    msgbox(gText_WallaceArmy_WeReallyHadNothing,,SPEAKER_SHASHI,TAIL_SHOUT)
+    closemessage
+
+    fadescreen(FADE_TO_BLACK)
+    fadedefaultbgm
+    delay(32)
+    call(Quest_WallaceArmy_MoveAllObjects_Script)
+    fadescreen(FADE_FROM_BLACK)
+
+    msgbox(gText_WallaceArmy_ThatsTheWholeStorySee,,SPEAKER_SHASHI)
+
+    msgbox(gText_WallaceArmy_ThereWasNoWallaceAtAll,,SPEAKER_LEAH)
+    msgbox(gText_WallaceArmy_IStillDontKnowWhoThatIs,,SPEAKER_SHASHI)
+    closemessage
+
+    applymovement(LEAD_STAN,Common_Movement_WalkDown)
+    waitmovement(LEAD_STAN)
+
+    msgbox(gText_WallaceArmy_ImSorryForAttacking,,SPEAKER_LEAH,,EMOTE_SWEAT)
+    giveitem(ITEM_LIFE_ORB,1)
+    waitmessage
+    closemessage
+
+    applymovement(LEAD_STAN,Quest_WallaceArmy_WalkOut_Movement)
+    waitmovement(LEAD_STAN)
+    playse(SE_EXIT)
+    waitse
+    removeobject(LEAD_STAN)
+
+    applymovement(SOLAR_CEO,Common_Movement_FaceUp)
+    waitmovement(SOLAR_CEO)
+
+    completequest(QUEST_WALLACEARMY)
+    release
+    end
+}
+
+script Quest_WallaceArmy_CompleteDialogue{
+            msgbox(gText_WallaceArmy_ThankYouForStopping,MSGBOX_NPC,SPEAKER_SHASHI)
+            end
+}
+
+script Quest_WallaceArmy_MoveAllObjects_Script{
+    setobjectxy(SOLAR_CEO,2,4)
+    setobjectxyperm(SOLAR_CEO,2,4)
+
+    setobjectxy(LEAD_STAN,1,4)
+    setobjectxyperm(LEAD_STAN,1,4)
+    applymovement(LEAD_STAN,Common_Movement_FaceUp)
+    waitmovement(LEAD_STAN)
+
+    setobjectxy(PLAYER,1,6)
+    TeleportCamera(1,6)
+    return
+}
+
+script Quest_WallaceArmy_LeadStanAppearance_Script{
+    fadescreen(FADE_TO_BLACK)
+    clearflag(FLAG_HIDE_LEAD_STAN)
+    addobject(LEAD_STAN)
+    delay(16)
+    playse(SE_EXIT)
+    waitse
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    fadescreen(FADE_FROM_BLACK)
+}
+
+
+script Quest_WallaceArmy_ListRemainingLocations_Script{
+    //PSF TODO write a C special to handle this list - she lists out all the cities where there are still stans, and I should use StringAppend / Copy to modifiy this string on the fly
+    if (var(VAR_TEMP_1) == 0){
+        bufferstring(STR_VAR_1,gText_HalaiIsland)
+    }
+
+    if (var(VAR_TEMP_2) == 0){
+        bufferstring(STR_VAR_2,gText_TirabudinPlace)
+    }
+
+    if (var(VAR_TEMP_3) == 0){
+        bufferstring(STR_VAR_3,gText_PerlaciaCity)
+    }
+
+    if (var(VAR_TEMP_4) == 0){
+        bufferstring(STR_VAR_3,gText_Chasilla)
+    }
+
+    if (var(VAR_TEMP_5) == 0){
+        bufferstring(STR_VAR_3,gText_EspuleeOutskirts)
+    }
+
+    return
+}
+
+script Quest_WallaceArmy_CheckCompletionRate_Script{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_WALLACEARMY)
+
+    if(!var(VAR_RESULT)){
+        return
+    }
+
+	setvar(VAR_TEMP_0, 0)
+	setvar(VAR_TEMP_1, 0)
+	setvar(VAR_TEMP_2, 0)
+	setvar(VAR_TEMP_3, 0)
+    setvar(VAR_TEMP_4, 0)
+    setvar(VAR_TEMP_5, 0)
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_1)
+    if (var(VAR_RESULT))
+    {
+        addvar(VAR_TEMP_0,1)
+        addvar(VAR_TEMP_1,1)
+    }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_2)
+    if (var(VAR_RESULT))
+    {
+        addvar(VAR_TEMP_0,1)
+        addvar(VAR_TEMP_2,1)
+    }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_3)
+    if (var(VAR_RESULT))
+    {
+        addvar(VAR_TEMP_0,1)
+        addvar(VAR_TEMP_3,1)
+    }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_4)
+    if (var(VAR_RESULT))
+    {
+        addvar(VAR_TEMP_0,1)
+        addvar(VAR_TEMP_4,1)
+    }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_5)
+    if (var(VAR_RESULT))
+    {
+        addvar(VAR_TEMP_0,1)
+        addvar(VAR_TEMP_5,1)
+    }
+
+    if (var(VAR_TEMP_0) == 5){
+        questmenu(QUEST_MENU_SET_REWARD, QUEST_WALLACEARMY)
+    }
+}
+
+movement Quest_WallaceArmy_ExclaimAndWalkToPlayer_Movement{
+    emote_exclamation_mark
+    walk_fast_right * 2
+    walk_fast_down * 2
+    step_end
+}
+movement Quest_WallaceArmy_ExclaimAndFaceNorth_Movement{
+    emote_exclamation_mark
+    face_up
+    step_end
+}
+movement Quest_WallaceArmy_WalkOut_Movement{
+    walk_right * 2
+    walk_down * 2
+    step_end
+}
+
+text gText_WallaceArmy_WhatMakesThemThinkTheyCanTreat{
+    format("What makes them think they can treat us like this? You can't just back out like that...")
+}
+text gText_WallaceArmy_TheseKidsAreGonnaRuin{
+    format("These kids are gonna ruin my business! First the League, now this?")
+}
+text gText_WallaceArmy_FirstTheBidNowTheDamnKids{
+    format("First the bid goes tits up, and now some kids are going take my business apart...")
+}
+text gText_WallaceArmy_OhTheChampionJustWhat{
+    format("Oh, the Champion. Just what else does the League want to do now?!?")
+}
+text gText_WallaceArmy_TheLeagueDidntSend{
+    format("The League didn't send me! Why did you think so?")
+}
+text gText_WallaceArmy_SighWereEspuleeOutskirtsSolar{
+    format("We're EspuleeOutskirts Solar. We were working with the League to provide solar power for their fancy new statement. They had it all buttoned up, they signed a deal, and then a lawyer pulled a fast one and pulled out of the deal right after I got the materials and staff together. They said some shit about a better option. But I'm absolutely screwed! So I went online and wrote a nasty post about them... and the next thing I know, some kids called the 'Wallace Army' are blowing up my phone, leaving bad reviews, and attacking my servers. We can't even get online! The League sent them!") //PSF TODO EMOTE sigh
+}
+text gText_WallaceArmy_YouThinkTheLeague{
+    format("...You think the League sent Wallace stans after you?")
+}
+text gText_WallaceArmy_LookIHaveNoIdea{
+    format("Look, I don't even know what a stan is, but I do know that I haven't been able to log into all morning. I can't get any work done like this! My newphew is a computer guy and he told me the attacks are coming from specific spots in the region... but I don't even know where to start!")
+}
+text gText_WallaceArmy_LooksLikeThereStill{
+    format("According to my nephew, there are attacks from HalaiIsland, TirabudinPlace, PerlaciaCity, Chasilla, and EspuleeOutskirts.")
+}
+text gText_WallaceArmy_WereBackUp{
+    format("We're back up! I don't know what you did,but I can access my systems again!")
+}
+text gText_WallaceArmy_TheStanArmyWillNeverDie{
+    format("The Wallace Army will never die!")
+}
+text gText_WallaceArmy_HowDidYouGetInHere{
+    format("How did you get in here?")
+}
+text gText_WallaceArmy_WhatIsThatMusic{
+    format("...what is that music?")
+}
+text gText_WallaceArmy_OurArmyWillAlwaysPrevail{
+    format("Our Army will always prevail!")
+}
+text gText_WallaceArmy_ImLeahLeaderOfTheStanArmy{
+    format("I'm Leah, and I'm the Leader of the Wallace Army!")
+}
+text gText_WallaceArmy_WaitYoureTheLeader{
+    format("Wait, you're the leader? You?")
+}
+text gText_WallaceArmy_CanItOldMan{
+    format("Can it, old man.")
+}
+text gText_WallaceArmy_AndYouAttackingTheArmy{
+    format("And you! Champion {PLAYER}, attacking the army?")
+}
+text gText_WallaceArmy_ACrimePunishableByDeath{
+    format("A crime punishable by death!")
+}
+text gText_WallaceArmy_MyLord{
+    format("My Lord...")
+}
+text gText_WallaceArmy_WhyAreYouDefending{
+    format("Why are you defending them anyways? You're young! Don't you understand the might of Wallace!")
+}
+text gText_WallaceArmy_WeReallyHadNothing{
+    format("We really had nothing to do with this Wallace thing, I swear.")
+}
+text gText_WallaceArmy_ThatsTheWholeStorySee{
+    format("That's the whole story, see? Those are all the messages. I didn't know anything about Wallace or anything.")
+}
+text gText_WallaceArmy_ThereWasNoWallaceAtAll {
+    format("...there was no Wallace at all.")
+}
+text gText_WallaceArmy_IStillDontKnowWhoThatIs{
+    format("I still don't know who that is.")
+}
+text gText_WallaceArmy_ImSorryForAttacking{
+    format("I'm sorry for mobilizing the Army. We will now retreat. Take this as an apology.")
+}
+text gText_WallaceArmy_ThankYouForStopping{
+    format("Thank you for stopping them! Now... can somebody explain who Wallace is?")
+}
+text gText_WallaceArmy_OhWallaceSama{
+    format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough.")
+}
+        //PSF TODO write unique text for each stan
+text gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke{
+    format("EspuleeOutskirts Solar? They spoke against our Lord, so we're taking them down! Anybody who gets in our way... is getting taken out!")
+}
+text gText_WallaceArmy_YouDidntHear{
+    format("You didn't hear? After EspuleeOutskirts Solar heard that Wallace was going to perform at the SharpriseStadium, they said refused to power a stadium that was hiring 'tasteless hacks'. How dare they?!")
+}
+text gText_WallaceArmy_PostBattlePlaceholder1{
+	format("PostBattlePlaceholder1")
+}
+text gText_WallaceArmy_PostQuestPlaceholder1{
+	format("PostQuestPlaceholder1")
+}
+text gText_WallaceArmy_PostBattlePlaceholder2{
+	format("PostBattlePlaceholder2")
+}
+text gText_WallaceArmy_PostQuestPlaceholder2{
+	format("PostQuestPlaceholder2")
+}
+text gText_WallaceArmy_PostBattlePlaceholder3{
+	format("PostBattlePlaceholder3")
+}
+text gText_WallaceArmy_PostQuestPlaceholder3{
+	format("PostQuestPlaceholder3")
+}
+text gText_WallaceArmy_PostBattlePlaceholder4{
+	format("PostBattlePlaceholder4")
+}
+text gText_WallaceArmy_PostQuestPlaceholder4{
+	format("PostQuestPlaceholder4")
+}
+text gText_WallaceArmy_PostBattlePlaceholder5{
+	format("PostBattlePlaceholder5")
+}
+text gText_WallaceArmy_PostQuestPlaceholder5{
+	format("PostQuestPlaceholder5")
+}

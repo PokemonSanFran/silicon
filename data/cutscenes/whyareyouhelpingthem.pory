@@ -1,0 +1,685 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const ADAORA = 2
+const ALCMENE = 3
+const KAI = 4
+const PKMNA = 5
+const PKMNB = 6
+const FLAG_HIDE_POLICE = FLAG_TEMP_1
+const FLAG_HIDE_ALCMENE_ADAORA = FLAG_TEMP_2
+const FLAG_HIDE_KAI = FLAG_TEMP_3
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_4
+
+script WhyAreYouHelpingThem_HideObject_Script {
+    setflag(FLAG_HIDE_KAI)
+}
+
+script WhyAreYouHelpingThem_ObjectCleanUp_Script {
+    setflag(FLAG_HIDE_CHARLOTTE)
+    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_ALCMENE_ADAORA)
+    setflag(FLAG_HIDE_POLICE)
+}
+
+script WhyAreYouHelpingThem_MoveObject_Script {
+    setobjectxy(CHARLOTTE,2,16)
+    setobjectxyperm(CHARLOTTE,2,16)
+    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_POLICE)
+}
+
+script WhyAreYouHelpingThem_MoveObjectBoss_Script {
+    setobjectxy(CHARLOTTE,2,16)
+    setobjectxyperm(CHARLOTTE,2,16)
+    setobjectxy(ALCMENE,7,3)
+    setobjectxyperm(ALCMENE,7,3)
+}
+
+script WhyAreYouHelpingThem_MoveObjectAdaora_Script {
+    setflag(FLAG_HIDE_ALCMENE_ADAORA)
+    setobjectxy(ADAORA,1,9)
+    setobjectxyperm(ADAORA,1,9)
+    setobjectxy(CHARLOTTE,2,16)
+    setobjectxyperm(CHARLOTTE,2,16)
+    turnobject(ADAORA,DIR_NORTH)
+}
+
+script WhyAreYouHelpingThem_BlowHoleWall {
+    setmetatile(12,1,0x3F2,FALSE)
+    special(DrawWholeMapView)
+}
+
+script WhyAreYouHelpingThem_ObjectSetUpPostSave_Script {
+    setflag(FLAG_HIDE_POLICE)
+    setflag(FLAG_HIDE_ALCMENE_ADAORA)
+    setobjectxy(KAI,6,3)
+    setobjectxyperm(KAI,6,3)
+    turnobject(KAI,DIR_WEST)
+    setobjectxy(CHARLOTTE,2,16)
+    setobjectxyperm(CHARLOTTE,2,16)
+    return
+}
+
+script WhyAreYouHelpingThem_ObjectDebriefSetUp_Script {
+    setflag(FLAG_HIDE_POLICE)
+    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_CHARLOTTE)
+    setobjectxyperm(4,26,4)
+    setobjectxyperm(5,25,6)
+    setobjectxyperm(6,27,6)
+    setobjectxyperm(7,25,7)
+    setobjectxyperm(8,27,7)
+    return
+}
+
+script WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script {
+    clearflag(FLAG_HIDE_POLICE)
+    clearflag(FLAG_HIDE_ALCMENE_ADAORA)
+    setflag(FLAG_HIDE_KAI)
+
+    setobjectxy(1,6,6)
+    setobjectxy(2,6,5)
+    setobjectxyperm(1,6,6)
+    setobjectxyperm(2,6,5)
+    turnobject(2,DIR_SOUTH)
+
+    setobjectmovementtype(2,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectmovementtype(1,MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script WhyAreYouHelpingThem_StartRaid {
+    lock
+    setvar(VAR_NAVAL_BASE_STATE,NAVAL_BASE_RAID_START)
+    playse(SE_FAILURE)
+    playse(SE_FAILURE)
+    playse(SE_FAILURE)
+    playse(SE_FAILURE)
+    applymovement(CHARLOTTE,Common_Movement_FaceDown)
+    applymovement(7,WhyAreYouHelpingThem_PoliceRunIn)
+    applymovement(8,WhyAreYouHelpingThem_PoliceRunIn)
+    applymovement(9,WhyAreYouHelpingThem_PoliceRunIn)
+    waitmovement(0)
+    msgbox(gText_WhyAreYouHelpingThem_StructuralBreach,MSGBOX_AUTOCLOSE,SPEAKER_SPEAKER)
+    waitmovement(0)
+
+    msgbox(gText_WhyAreYouHelpingThem_DefenseMode,,SPEAKER_CHARLOTTE)
+
+    msgbox(gText_WhyAreYouHelpingThem_WeShouldRedefine,,SPEAKER_ALICIA)
+
+    msgbox(gText_WhyAreYouHelpingThem_LetsSplitUp,,SPEAKER_CHARLOTTE)
+
+    msgbox(gText_WhyAreYouHelpingThem_WhaFineIllTry,,SPEAKER_ALICIA)
+
+    msgbox(gText_WhyAreYouHelpingThem_SeeYa,,SPEAKER_CHARLOTTE)
+
+    closemessage
+
+    applymovement(CHARLOTTE,WhyAreYouHelpingThem_PoliceRunIn)
+    waitmovement(0)
+    removeobject(7)
+    removeobject(8)
+    removeobject(9)
+    call(WhyAreYouHelpingThem_MoveObject_Script)
+    call(TryAutoSave)
+    release
+    end
+}
+
+script WhyAreYouHelpingThem_WitnessBattle {
+    setvar(VAR_NAVAL_BASE_STATE,CHASE_ALCMENE)
+        lock
+        applymovement(ALCMENE,WhyAreYouHelpingThem_FleeTheBattle)
+        waitmovement(0)
+        call(WhyAreYouHelpingThem_MoveObjectBoss_Script)
+
+        msgbox(gText_WhyAreYouHelpingThem_GoAfterIllHold,,SPEAKER_CHARLOTTE)
+
+        closemessage
+        release
+        end
+}
+
+
+script WhyAreYouHelpingThem_PreBattleBoss_Script {
+    lock
+        applymovement(ALCMENE,Common_Movement_FaceLeft)
+        applymovement(PLAYER,WhyAreYouHelpingThem_ApproachAlcmene)
+        waitmovement(0)
+        msgbox(gText_WhyAreYouHelpingThem_ItsAShameThatThe,,SPEAKER_ALCMENE)
+
+        closemessage
+
+        applymovement(ALCMENE,Common_Movement_WalkLeft)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_ButBeatingYou,,SPEAKER_ALCMENE)
+
+        closemessage
+
+        trainerbattle_continue_after_lose(TRAINER_ALCMENE,gText_WhyAreYouHelpingThem_WaitAMinute)
+        goto(WhyAreYouHelpingThem_PostBattleBoss_Dialogue)
+}
+
+script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
+        setvar(VAR_NAVAL_BASE_STATE,SAVE_KAI_NAVAL_BASE)
+        addobject(ADAORA)
+        call(WhyAreYouHelpingThem_MoveObjectAdaora_Script)
+
+        if (defeated(TRAINER_ALCMENE)){
+
+                msgbox(gText_WhyAreYouHelpingThem_YoureIncredible,,SPEAKER_ALCMENE)
+                closemessage
+
+                applymovement(ALCMENE,Common_Movement_WalkInPlaceLeft)
+                waitmovement(0)
+                giveitem(ITEM_MASTER_BALL,1)
+
+        }else {
+
+                msgbox(gText_WhyAreYouHelpingThem_IDidntEvenTouch,,SPEAKER_ALICIA)
+        }
+
+        msgbox(gText_WhyAreYouHelpingThem_ImSorryYouHad,,SPEAKER_ALCMENE)
+
+        closemessage
+
+        applymovement(ADAORA,WhyAreYouHelpingThem_WalkPastPlayer)
+        applymovement(ALCMENE,WhyAreYouHelpingThem_HealAndFaceAdmin)
+        waitmovement(0)
+        call(Common_EventScript_OutOfCenterPartyBypassHeal)
+
+        msgbox(gText_WhyAreYouHelpingThem_IHandledTheBrat,,SPEAKER_ADAORA)
+
+        closemessage
+
+        playse(SE_PIN)
+        waitse
+        applymovement(ADAORA,WhyAreYouHelpingThem_ExclaimAndFacePlayer)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_DamnYouToo,,SPEAKER_ADAORA)
+
+        msgbox(gText_WhyAreYouHelpingThem_WhatWasAllThatShit,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyAreYouHelpingThem_WeveGotToHelp,,SPEAKER_ALCMENE)
+
+        closemessage
+
+        applymovement(ALCMENE,WhyAreYouHelpingThem_BeginEscape)
+        applymovement(ADAORA,WhyAreYouHelpingThem_BeginEscape)
+        waitmovement(0)
+        goto(WhyAreYouHelpingThem_ExplodeWall_Script)
+}
+
+script WhyAreYouHelpingThem_ExplodeWall_Script {
+
+    playse(SE_M_EXPLOSION)
+        waitse
+        setvar(VAR_0x8004,1)
+        setvar(VAR_0x8005,2)
+        setvar(VAR_0x8006,8)
+        setvar(VAR_0x8007,5)
+        special(ShakeCamera)
+        waitstate
+        call(WhyAreYouHelpingThem_BlowHoleWall)
+        clearflag(FLAG_HIDE_KAI)
+        playse(SE_EXIT)
+        waitse
+        addobject(KAI)
+        applymovement(KAI,WhyAreYouHelpingThem_WalkOutOfHole)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_ThisPlaceIs,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyAreYouHelpingThem_WeCantLeavePeople,,SPEAKER_ALCMENE)
+
+        msgbox(gText_WhyAreYouHelpingThem_WeDontHaveTime,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyAreYouHelpingThem_IThinkTheyreRight,,SPEAKER_ADAORA)
+
+        closemessage
+        applymovement(ALCMENE,WhyAreYouHelpingThem_WalkIntoHoleA)
+        applymovement(ADAORA,WhyAreYouHelpingThem_WalkIntoHoleB)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(ADAORA)
+        removeobject(ALCMENE)
+        applymovement(KAI,WhyAreYouHelpingThem_ApproachPlayer)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_YoureWorkingWith,,SPEAKER_ALICIA)
+        closemessage
+        startmenu_savescreen
+        goto(WhyAreYouHelpingThem_StartBattle_Script)
+}
+
+script WhyAreYouHelpingThem_InteractBattle_Script {
+    lock
+        faceplayer
+        goto(WhyAreYouHelpingThem_StartBattle_Script)
+}
+
+script WhyAreYouHelpingThem_StartBattle_Script{
+    msgbox(gText_WhyAreYouHelpingThem_AlwaysHaveBeen,,SPEAKER_KAI_TIDE)
+    closemessage
+    trainerbattle_no_intro(TRAINER_KAI_WHYAREYOUHELPINGTHEM,gText_WhyAreYouHelpingThem_AnotherVictory)
+    goto(WhyAreYouHelpingThem_PostBattle_Dialogue)
+}
+
+script WhyAreYouHelpingThem_PostBattle_Dialogue {
+        startcutscene(JUMPPLAYER_WHYAREYOUHELPINGTHEM)
+
+        setvar(VAR_NAVAL_BASE_STATE,DEFEATED_KAI_NAVAL_BASE)
+        msgbox(gText_WhyAreYouHelpingThem_TellsMeYoureAll,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyAreYouHelpingThem_WhyWouldIt,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyAreYouHelpingThem_Player,,SPEAKER_CHARLOTTE)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceLeft)
+        applymovement(KAI,WhyAreYouHelpingThem_WalkIntoHoleC)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(KAI)
+        setobjectxyperm(CHARLOTTE,1,8)
+        addobject(CHARLOTTE)
+        applymovement(CHARLOTTE,WhyAreYouHelpingThem_RunToPlayer)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_IGotKnockedOut,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_WhyAreYouHelpingThem_NoILostToo,,SPEAKER_ALICIA)
+
+        closemessage
+        setvar(VAR_HALAI_ISLAND_STATE,WHY_ARE_YOU_HELPING_THEM)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_HALAI_ISLAND,255,26,6)
+}
+
+
+script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
+        setvar(VAR_HALAI_ISLAND_STATE,SLEPT_AFTER_RAID) //advance HalaiIsland forward to clean up raid damage
+        setvar(VAR_STORYLINE_STATE,STORY_COMPLETED_NAVAL_BASE)
+        setvar(VAR_PLAYER_HOME_STATE,POST_NAVAL_BASE_RAID)
+        lock
+        applymovement(PLAYER,Common_Movement_FaceUp)
+
+        msgbox(gText_WhyAreYouHelpingThem_GreatWorkInThere)
+        closemessage
+
+        applymovement(6,Common_Movement_WalkUp)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_WeSpottedAndTheir)
+        closemessage
+
+        applymovement(6,WhyAreYouHelpingThem_BackInFormation)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_AShameStillWeveShutDown)
+        closemessage
+
+        applymovement(4,Common_Movement_WalkDown)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_NotBadInThere)
+
+        msgbox(gText_WhyAreYouHelpingThem_WannaCome,MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        endcutscene
+
+        if (var(VAR_RESULT) == YES){
+            closemessage
+            fadescreen(FADE_TO_BLACK)
+            warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F,0)
+        } else {
+            closemessage
+                release
+                end
+        }
+
+    }
+
+script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
+        lock
+        startcutscene(JUMPPLAYER_WHYAREYOUHELPINGTHEM)
+        setvar(VAR_PLAYER_HOME_STATE,NEXT_DAY_CHAMPIONSHIP)
+        applymovement(PLAYER,WhyAreYouHelpingThem_WalkIntoHome)
+        waitmovement(0)
+
+        msgbox(gText_WhyAreYouHelpingThem_WhatADay,,SPEAKER_OLIVER)
+
+        msgbox(gText_WhyAreYouHelpingThem_ItWasADay,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyAreYouHelpingThem_GoodNewsWhileYouWere,,SPEAKER_OLIVER)
+
+        msgbox(gText_WhyAreYouHelpingThem_OhThatWasFast,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_WhyAreYouHelpingThem_DontWorryAboutIt,,SPEAKER_OLIVER)
+
+        msgbox(gText_WhyAreYouHelpingThem_NowIveGotALot,,SPEAKER_OLIVER)
+
+        closemessage
+
+        applymovement(2,WhyAreYouHelpingThem_LeaveCompoundA)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(2)
+
+        msgbox(gText_WhyAreYouHelpingThem_WeveAllGot,,SPEAKER_CHARLOTTE)
+
+        closemessage
+
+
+        applymovement(CHARLOTTE,WhyAreYouHelpingThem_LeaveCompoundB)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(1)
+        endcutscene
+        release
+        end
+}
+
+script WhyAreYouHelpingThem_StartChampionship_Dialogue {
+    msgbox(gText_WhyAreYouHelpingThem_AreYouReadyToBegin,MSGBOX_YESNO)
+
+        if (var(VAR_RESULT) == NO){
+            closemessage
+                return
+        } else {
+            setvar(VAR_STORYLINE_STATE,STORY_START_CHAMPIONSHIP)
+                fadescreen(FADE_TO_BLACK)
+                warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,9,6)
+        }
+}
+
+text gText_WhyAreYouHelpingThem_StructuralBreach {
+    format("STRUCTURAL BREACH DETECTED. BASE IS NOW SHIFTING TO DEFENSE MODE. EVACUATE IMMEDIATELY.")
+}
+
+text gText_WhyAreYouHelpingThem_DefenseMode {
+    format("“Defense mode” is pretty advanced for some abandoned buildings.")
+}
+
+text gText_WhyAreYouHelpingThem_WeShouldRedefine {
+    format("We should redefine abandoned…")
+}
+
+text gText_WhyAreYouHelpingThem_LetsSplitUp {
+    format("Let's split up. I'm faster than you and can cut off the leaders before they escape.")
+}
+
+text gText_WhyAreYouHelpingThem_WhaFineIllTry {
+    format("wha - fine, I'll try to find the source of the hack and shut it down.")
+}
+
+text gText_WhyAreYouHelpingThem_SeeYa {
+    format("See ya.")
+}
+
+text gText_WhyAreYouHelpingThem_GoAfterIllHold {
+    format("Go after Alcmene! I'll hold this one off.")
+}
+
+text gText_WhyAreYouHelpingThem_ItsAShameThatThe {
+    format("It's a shame that the cops have totally infiltrated our youth. ")
+}
+
+text gText_WhyAreYouHelpingThem_ButBeatingYou {
+    format("But beating you is going to be the best route out of here.")
+}
+
+text gText_WhyAreYouHelpingThem_WaitAMinute {
+    format("Wait a minute…")
+}
+
+text gText_WhyAreYouHelpingThem_YoureIncredible {
+    format("You're incredible. Or a cheater. Can't quite tell. Either way, you can have this.")
+}
+
+text gText_WhyAreYouHelpingThem_IDidntEvenTouch {
+    format("…I didn't even touch them…")
+}
+
+text gText_WhyAreYouHelpingThem_ImSorryYouHad {
+    format("I'm sorry you have to experience this. I hope you eventually understand what's at stake here, {PLAYER}. Let me help you.")
+}
+
+text gText_WhyAreYouHelpingThem_IHandledTheBrat {
+    format("I handled the brat. I'm guessing you beat -")
+}
+
+text gText_WhyAreYouHelpingThem_DamnYouToo {
+    format("Damn, you too, {PLAYER}?")
+}
+
+text gText_WhyAreYouHelpingThem_WhatWasAllThatShit {
+    format("What was all that shit you tried to tell me before?! What the hell is TheTide doing?")
+}
+
+text gText_WhyAreYouHelpingThem_WeveGotToHelp {
+    format("We've got to help more comrades escape. Another time.")
+}
+
+text gText_WhyAreYouHelpingThem_ThisPlaceIs {
+    format("This place is swarming with cops. You two need to get the hell out, right now. This goes straight out.")
+}
+
+text gText_WhyAreYouHelpingThem_WeCantLeavePeople {
+    format("We can't leave people behind. ")
+}
+
+text gText_WhyAreYouHelpingThem_WeDontHaveTime {
+    format("We don't have time for this! If you get arrested, this all falls apart! You. Need. To. Go.")
+}
+
+text gText_WhyAreYouHelpingThem_IThinkTheyreRight {
+    format("I think they're right.")
+}
+
+text gText_WhyAreYouHelpingThem_YoureWorkingWith {
+    format("You're working with TheTide too?!?")
+}
+
+text gText_WhyAreYouHelpingThem_AlwaysHaveBeen {
+    format("Always have been.")
+}
+
+text gText_WhyAreYouHelpingThem_AnotherVictory {
+    format("Another victory for the establishment.") //PSF TODO EMOTE sigh
+}
+
+text gText_WhyAreYouHelpingThem_TellsMeYoureAll {
+    format("Adaora tells me you're all good guys… now all this shit? And you? None of this makes any sense!")
+}
+
+text gText_WhyAreYouHelpingThem_WhyWouldIt {
+    format("Why would it? You don't see what your bosses are doing to Resido. You don't see what you're doing to Resido.")
+}
+
+text gText_WhyAreYouHelpingThem_Player {
+    format("{PLAYER}!")
+}
+
+text gText_WhyAreYouHelpingThem_IGotKnockedOut {
+    format("I got knocked out. Did you stop Alcmene?")
+}
+
+text gText_WhyAreYouHelpingThem_NoILostToo {
+    format("No, I lost too.")
+}
+
+text gText_WhyAreYouHelpingThem_GreatWorkInThere {
+    format("Great work in there, team. Andre, what's the sitrep regarding TheTide leadership?")
+}
+
+text gText_WhyAreYouHelpingThem_WeSpottedAndTheir {
+    format("We spotted Alcmene and their lieutenant escaping on Pokemon by using the move Fly. We were unable to track them given our resources.")
+}
+
+text gText_WhyAreYouHelpingThem_AShameStillWeveShutDown {
+    format("A shame. Still, we've shut down their primary base of operations, and we arrested a bunch of these shitheads. This was an absolute win!")
+}
+
+text gText_WhyAreYouHelpingThem_NotBadInThere {
+    format("Not bad in there. Oliver wants you kids back at CuconuTown Compound.")
+}
+
+text gText_WhyAreYouHelpingThem_WhatADay {
+    format("What… a day. I know that was a lot of pressure, but from what I hear, you were both fantastic. Thank you.")
+}
+
+text gText_WhyAreYouHelpingThem_ItWasADay {
+    format("…it was a day.")
+}
+
+text gText_WhyAreYouHelpingThem_GoodNewsWhileYouWere {
+    format("Good news - while you were training in LeaverraForest, construction on SharpriseStadium finished up. The Group Stage will start in 3 days. Hopefully, that's enough time to rest up and get ready.")
+}
+
+text gText_WhyAreYouHelpingThem_OhThatWasFast {
+    format("Oh, that was fast. How did you…")
+}
+
+text gText_WhyAreYouHelpingThem_DontWorryAboutIt {
+    format("Don't worry about it! You two just focus on winning! ")
+}
+
+text gText_WhyAreYouHelpingThem_NowIveGotALot {
+    format("Now, I've got a lot of work to do between now and then. I'll see you both in a few days!")
+}
+
+text gText_WhyAreYouHelpingThem_WeveAllGot {
+    format("We've all got some work to do! I'll see you around, {PLAYER}.")
+}
+
+text gText_WhyAreYouHelpingThem_AreYouReadyToBegin {
+    format("Are you ready to begin the Championship?")
+}
+
+text gText_WhyAreYouHelpingThem_WannaCome{
+    format("{PLAYER}, I'm gonna head over in a bit. Wanna come?")
+}
+
+movement WhyAreYouHelpingThem_PoliceRunIn {
+    walk_left * 8
+        step_end
+}
+
+movement WhyAreYouHelpingThem_FleeTheBattle {
+    walk_up * 4
+        step_end
+}
+
+movement WhyAreYouHelpingThem_ApproachAlcmene {
+    walk_up * 2
+        walk_right * 4
+        step_end
+}
+
+movement WhyAreYouHelpingThem_WalkPastPlayer {
+        walk_up * 4
+    walk_right * 5
+        walk_up
+        step_end
+}
+
+movement WhyAreYouHelpingThem_BeginEscape {
+    walk_right * 3
+        step_end
+}
+
+movement WhyAreYouHelpingThem_ExclaimAndFacePlayer {
+    emote_exclamation_mark
+        face_left
+        step_end
+}
+
+movement WhyAreYouHelpingThem_WalkOutOfHole {
+    walk_down
+        walk_left * 3
+        face_down
+        step_end
+}
+
+movement WhyAreYouHelpingThem_WalkIntoHoleA {
+    walk_right * 3
+        walk_up * 2
+        step_end
+}
+
+movement WhyAreYouHelpingThem_WalkIntoHoleB {
+    walk_right * 3
+        walk_up * 3
+        step_end
+}
+
+movement WhyAreYouHelpingThem_WalkIntoHoleC {
+    walk_right * 6
+        walk_up * 2
+        step_end
+}
+
+movement WhyAreYouHelpingThem_ApproachBossAndPlayer {
+    walk_left
+        walk_up * 8
+        step_end
+}
+
+movement WhyAreYouHelpingThem_HealAndFaceAdmin {
+    walk_in_place_slow_left
+        delay_16
+        delay_16
+        face_down
+        step_end
+}
+
+movement WhyAreYouHelpingThem_ApproachPlayer {
+    walk_down
+        walk_left * 3
+        step_end
+}
+
+movement WhyAreYouHelpingThem_RunToPlayer {
+    walk_up * 5
+        walk_right * 3
+        step_end
+}
+
+movement WhyAreYouHelpingThem_BackInFormation {
+    lock_facing_direction
+        walk_down
+        unlock_facing_direction
+        step_end
+}
+
+movement WhyAreYouHelpingThem_WalkToPlayerFormation {
+    walk_right
+        walk_down
+        step_end
+}
+
+movement WhyAreYouHelpingThem_WalkIntoHome {
+    walk_up * 3
+        step_end
+}
+
+movement WhyAreYouHelpingThem_LeaveCompoundA {
+    walk_right
+        walk_down * 4
+        walk_left
+        walk_in_place_down
+        face_down
+        step_end
+}
+
+movement WhyAreYouHelpingThem_LeaveCompoundB {
+    walk_down * 3
+        step_end
+}

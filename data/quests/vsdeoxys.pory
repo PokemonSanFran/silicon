@@ -1,0 +1,696 @@
+//PSF TODO Set Minior all IV to 31
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+const MINIOR = 9
+
+const VSDEOGUY = 2
+const VSDEOGUY_GDLNGTEPARTK = 4
+const VSDEOGUY_HALERBARESEARCH = 2
+const VSDEORESEARCHER = 1
+
+const FLAG_HIDE_MINIOR_ROCK = FLAG_TEMP_5
+const FLAG_HIDE_VSDEOGUY = FLAG_TEMP_6
+const FLAG_HIDE_VSDEOGUY_HALERBA = FLAG_TEMP_7
+const FLAG_HIDE_VSDEOGUY_RESEARCH = FLAG_TEMP_7
+
+script Vsdeoxys_Script_HideVsdeoguy_Gldngtepark
+{
+    if(var(VAR_QUEST_VSDEOXYS)!= VSDEOGUY_LEFT_ROUTE)
+    {
+        setflag(FLAG_HIDE_VSDEOGUY_RESEARCH)
+    }
+}
+
+script Vsdeoxys_Script_HideObjectRoute
+{
+    call_if_quest_not_active(QUEST_VSDEOXYS,Vsdeoxys_Script_HideVsdeoguyMinior)
+
+    if(var(VAR_QUEST_VSDEOXYS) > VSDEOGUY_INTERACTED)
+    {
+        call(Vsdeoxys_Script_HideVsdeoguyMinior)
+    }
+}
+
+script Vsdeoxys_Script_HideVsdeoguyMinior
+{
+    setflag(FLAG_HIDE_MINIOR_ROCK)
+    setflag(FLAG_HIDE_VSDEOGUY)
+}
+
+
+script Vsdeoxys_Script_InteractVsdeoguy
+{
+    lockall
+    faceplayer
+    if(var(VAR_QUEST_VSDEOXYS) == VSDEOGUY_NOT_INTERACTED)
+    {
+        call(Vsdeoxys_Dialogue_FirstInteractVsdeoguy)
+    }
+    else
+    {
+        msgbox(Vsdeoxys_Text_ThatOrangePokemon,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    }
+    releaseall
+    end
+}
+
+script Vsdeoxys_Dialogue_FirstInteractVsdeoguy
+{
+    setvar(VAR_QUEST_VSDEOXYS, VSDEOGUY_INTERACTED)
+    msgbox(Vsdeoxys_Text_DidYouSend,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(Vsdeoxys_Text_YesIt,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+msgbox(Vsdeoxys_Text_OkaySlow,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_IWasSmashing,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(Vsdeoxys_Text_AndThenThe,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_MyTrumbeakWas,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(Vsdeoxys_Text_WaitSo,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(Vsdeoxys_Text_ItWasnt,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_WhatIs,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_ItsA,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(Vsdeoxys_Text_AndYouThink,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(Vsdeoxys_Text_IKnowIt,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(Vsdeoxys_Text_WeReGonnaBring,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(Vsdeoxys_Text_WhatHaveI,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_SureWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SWEAT,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_MeteorsTheyre,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    giveitem(ITEM_TM192)
+    msgbox(Vsdeoxys_Text_IfYouHave,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(Vsdeoxys_Text_CaptureTheDeoxys,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+}
+
+script Vsdeoxys_Script_CheckIfCanRockSmash
+{
+    lockall
+    checkitem(ITEM_TM192)
+    if (!var(VAR_RESULT))
+    {
+        goto(Vsdeoxys_Dialogue_RockSmashFail)
+        return
+    }
+
+    checkpartylearnknowsfieldmove(MOVE_ROCK_SMASH)
+    if (var(VAR_RESULT) >= PARTY_SIZE)
+    {
+        goto(Vsdeoxys_Dialogue_RockSmashFail)
+        return
+    }
+
+	setfieldeffectargument(0, VAR_RESULT)
+	bufferpartymonnick(STR_VAR_1, VAR_RESULT)
+	buffermovename(STR_VAR_2, MOVE_ROCK_SMASH)
+
+    msgbox(Text_WantToSmash, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES)
+    {
+        msgbox(Text_MonUsedFieldMove, MSGBOX_DEFAULT)
+        closemessage
+        call(Vsdeoxys_Script_UseRockSmashMinior)
+    }
+    else
+    {
+        call(EventScript_CancelSmash)
+    }
+    end
+}
+
+script Vsdeoxys_Dialogue_RockSmashFail
+{
+    msgbox(Text_CantSmash,MSGBOX_DEFAULT)
+    call(Vsdeoxys_Script_PlayCry)
+    msgbox(Vsdeoxys_Text_DidThatRock,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
+    releaseall
+    end
+}
+
+script Vsdeoxys_Script_UseRockSmashMinior
+{
+    lockall
+    dofieldeffect(FLDEFF_USE_ROCK_SMASH)
+    waitstate
+    goto(Vsdeoxys_Script_UseRockSmashMiniorMovement)
+}
+
+script Vsdeoxys_Script_UseRockSmashMiniorMovement
+{
+    applymovement(VAR_LAST_TALKED, Movement_SmashRock)
+    waitmovement(0)
+    removeobject(VAR_LAST_TALKED)
+    call(Vsdeoxys_Script_CreateMiniorObject)
+    releaseall
+    end
+}
+
+script Vsdeoxys_Script_CreateMiniorObject
+{
+    createvobject(OBJ_EVENT_GFX_PIKACHU,MINIOR,9,0,3,DIR_SOUTH)
+    call(Vsdeoxys_Script_Encounter)
+}
+
+script Vsdeoxys_Script_Encounter
+{
+    call(Vsdeoxys_Script_PlayCry)
+    setflag(P_FLAG_FORCE_NO_SHINY)
+    setwildbattle(SPECIES_MINIOR_CORE_ORANGE, 30, ITEM_NONE)
+    //setwildbattle(species=SPECIES_MINIOR_CORE_ORANGE, level=30, item=ITEM_NONE,hpIv=31,atkIv=31,defIv=31,speedIv=31,spAtkIv=31, spDefIv=31)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    clearflag(P_FLAG_FORCE_NO_SHINY)
+
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_CAUGHT)
+    {
+        removeobject(VSDEOGUY)
+        goto(Vsdeoxys_Script_CaughtMinior)
+    }
+    else
+    {
+        goto(Vsdeoxys_Dialogue_ReturnToOverworldWithoutCapturingMinior)
+    }
+}
+
+script Vsdeoxys_Script_PlayCry
+{
+    waitse
+    playmoncry(SPECIES_MINIOR,CRY_MODE_NORMAL)
+    delay(40)
+    waitmoncry
+}
+
+script Vsdeoxys_Dialogue_ReturnToOverworldWithoutCapturingMinior
+{
+    removeobject(MINIOR)
+    msgbox(Vsdeoxys_Text_WaitIsThat,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
+    end
+}
+
+
+script Vsdeoxys_Script_CaughtMinior
+{
+    removeobject(MINIOR)
+    setvar(VAR_QUEST_VSDEOXYS, VSDEOGUY_LEFT_ROUTE)
+    call(Vsdeoxys_Script_ReturnToOverworldAfterCapturingMinior)
+}
+
+script Vsdeoxys_Script_ReturnToOverworldAfterCapturingMinior
+{
+    msgbox(Vsdeoxys_Text_YouDidIt,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    waitmessage
+    call(Vsdeoxys_Script_RunToPlayerAfterMiniorCatch)
+    msgbox(Vsdeoxys_Text_YouCaughtIt,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    applymovement(VSDEOGUY,Vsdeoxys_Movement_VsdeoguyRunOnScreen)
+    waitmovement(VSDEOGUY)
+    removeobject(VSDEOGUY)
+    releaseall
+}
+
+script Vsdeoxys_Script_RunToPlayerAfterMiniorCatch
+{
+    setobjectxyperm(VSDEOGUY, 17, 1)
+    waitmovement(VSDEOGUY)
+    addobject(VSDEOGUY)
+    lockall
+    specialvar(VAR_RESULT,GetPlayerFacingDirection)
+
+    switch (var(VAR_RESULT))
+    {
+    case DIR_NORTH:
+        applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth)
+        waitmovement(VSDEOGUY)
+        applymovement(PLAYER,Vsdeoxys_Movement_Player_TurnRightToFaceVsdeoguy)
+        break
+    case DIR_WEST:
+        applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth)
+        waitmovement(VSDEOGUY)
+        applymovement(PLAYER,Common_Movement_FaceDown)
+        break
+    case DIR_EAST:
+        applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingEast)
+        waitmovement(VSDEOGUY)
+        applymovement(PLAYER,Common_Movement_FaceDown)
+        break
+    }
+}
+
+script Vsdeoxys_Script_VsdeoguyEnterResearch
+{
+    setvar(VAR_QUEST_VSDEOXYS, VSDEOGUY_ENTERED_RESEARCH)
+    faceplayer
+    msgbox(Vsdeoxys_Text_YoureHere,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    waitmessage
+    opendoor(39,8)
+    waitdooranim
+    applymovement(VSDEOGUY_GDLNGTEPARTK,Common_Movement_FaceUp)
+    waitmovement(VSDEOGUY_GDLNGTEPARTK)
+    playse(SE_EXIT)
+    removeobject(VSDEOGUY_GDLNGTEPARTK)
+    closedoor(39,8)
+}
+
+script Vsdeoxys_Script_SetUpResearchObjects
+{
+    if (var(VAR_QUEST_VSDEOXYS) == VSDEOGUY_ENTERED_RESEARCH)
+    {
+        spawnobject(graphicsId=OBJ_EVENT_GFX_BOY_3,localId=VSDEOGUY_HALERBARESEARCH,x=9,y=10,movementType=MOVEMENT_TYPE_FACE_LEFT, elevation=3)
+        turnobject(VSDEORESEARCHER,DIR_EAST)
+    }
+    return
+}
+
+script Vsdeoxys_Dialogue_DiscussMiniorResearch
+{
+    setvar(VAR_QUEST_VSDEOXYS,VSDEOGUY_LEFT_RESEARCH)
+    msgbox(Vsdeoxys_Text_ForTheLastTime, MSGBOX_AUTOCLOSE, SPEAKER_VSDEORESEARCHER)
+    closemessage
+    applymovement(PLAYER,Common_Movement_WalkUp)
+    waitmovement(PLAYER)
+    msgbox(Vsdeoxys_Text_ThisTimeIt,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    msgbox(Vsdeoxys_Text_SeeWhat,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToPlayer)
+    waitmovement(VSDEORESEARCHER)
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    msgbox(Vsdeoxys_Text_AreYouPlayer,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(Vsdeoxys_Text_ThatsHowI,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherTurnUpAndDown)
+    waitmovement(VSDEORESEARCHER)
+    msgbox(Vsdeoxys_Text_OkayLets,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    applymovement(VSDEORESEARCHER,Common_Movement_WalkUp)
+    waitmovement(VSDEORESEARCHER)
+    applymovement(PLAYER,Vsdeoxys_Movement_PlayerAlignWithVsdeoguy)
+    waitmovement(PLAYER)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToBackOfRoom)
+    applymovement(VSDEOGUY_HALERBARESEARCH,Vsdeoxys_Movement_VsdeoguyWalkToBackOfRoom)
+    applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkToBackOfRoom)
+    waitmovement(PLAYER)
+    msgbox(Vsdeoxys_Text_YouKnowHow,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkTowardsComputer)
+    applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkTowardsComputer)
+    waitmovement(PLAYER)
+    msgbox(Vsdeoxys_Text_OkayI,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
+    msgbox(Vsdeoxys_Text_TrustMe,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+msgbox(Vsdeoxys_Text_HowDidYou,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_ISeeThat,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(Vsdeoxys_Text_HowDidThey,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+msgbox(Vsdeoxys_Text_IWasInvest,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
+    msgbox(Vsdeoxys_Text_YouKnowWhat,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToVsdeoguy)
+    waitmovement(VSDEORESEARCHER)
+    applymovement(VSDEOGUY_HALERBARESEARCH,Common_Movement_FaceRight)
+    waitmovement(VSDEOGUY_HALERBARESEARCH)
+    applymovement(VSDEOGUY_HALERBARESEARCH,Vsdeoxys_Script_VsdeoguyRunOffScreen)
+    waitmovement(VSDEOGUY_HALERBARESEARCH)
+    removeobject(VSDEOGUY_HALERBARESEARCH)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkRightToPlayer)
+    applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkToVsdeoresearcher)
+    waitmovement(PLAYER)
+msgbox(Vsdeoxys_Text_WhatHappened,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_IToldHim,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+msgbox(Vsdeoxys_Text_WaitWhat,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_YeahYou,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER,TAIL_DEFAULT,EMOTE_LAUGH,PHONE_OFF)
+    msgbox(Vsdeoxys_Text_IToldThem,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(Vsdeoxys_Text_WaitHes,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
+    msgbox(Vsdeoxys_Text_TheyveGotNothing,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkOffScreen)
+    waitmovement(VSDEORESEARCHER)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherComesBack)
+    waitmovement(VSDEORESEARCHER)
+    msgbox(Vsdeoxys_Text_SeriouslyYou,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(Vsdeoxys_Text_YouWereSmashing,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    giveitem(ITEM_ROCKSMASH_TOOL)
+    call(Vsdeoxys_Script_BufferDescribeRockSmashTool)
+    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToTheirComputer)
+    waitmovement(VSDEORESEARCHER)
+    call(Vsdeoxys_Script_QuestComplete)
+    end
+}
+
+script Vsdeoxys_Dialogue_PostQuestDescribeTool
+{
+    faceplayer
+    msgbox(Vsdeoxys_Text_SeriouslyYou,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    call(Vsdeoxys_Script_BufferDescribeRockSmashTool)
+}
+
+script Vsdeoxys_Script_BufferDescribeRockSmashTool
+{
+    bufferitemname(STR_VAR_1,ITEM_ROCKSMASH_TOOL)
+    msgbox(Vsdeoxys_Text_YouCanUse,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+}
+
+script Vsdeoxys_Script_QuestComplete
+{
+    completequest(QUEST_VSDEOXYS)
+    call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
+    end
+}
+
+script Vsdeoxys_Dialogue_VsdeoresearcherInteract
+{
+    lockall
+    questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_VSDEOXYS)
+    if (!var(VAR_RESULT))
+    {
+        msgbox(Vsdeoxys_Text_AnotherLateNight,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    }
+    else
+    {
+        call(Vsdeoxys_Dialogue_PostQuestDescribeTool)
+    }
+    releaseall
+    end
+}
+
+movement Vsdeoxys_Movement_Player_TurnRightToFaceVsdeoguy
+{
+    face_right
+    step_end
+}
+
+movement Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth
+{
+    walk_fast_left * 7
+    face_player
+}
+
+movement Vsdeoxys_Movement_VsdeoguyRunOnScreen
+{
+    face_right
+    walk_fast_right * 8
+}
+
+movement Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingEast
+{
+    walk_fast_left * 9
+    face_player
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherWalkToPlayer
+{
+    walk_right
+    walk_down
+    face_right
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherTurnUpAndDown
+{
+    face_up
+    delay_16
+    face_right
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherWalkToBackOfRoom
+{
+    walk_up * 7
+    walk_right
+    face_down
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoguyWalkToBackOfRoom
+{
+    walk_up * 6
+    step_end
+}
+
+movement Vsdeoxys_Movement_PlayerAlignWithVsdeoguy
+{
+    walk_right
+    walk_up
+    step_end
+}
+
+movement Vsdeoxys_Movement_PlayerWalkToBackOfRoom
+{
+    walk_up*6
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherWalkTowardsComputer
+{
+    walk_right * 4
+    walk_up * 1
+    face_right
+    step_end
+}
+
+movement Vsdeoxys_Movement_PlayerWalkTowardsComputer
+{
+    walk_right * 4
+    walk_up * 2
+    face_left
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherWalkToVsdeoguy
+{
+    walk_down * 2
+    walk_left * 3
+    step_end
+}
+
+movement Vsdeoxys_Script_VsdeoguyRunOffScreen
+{
+    delay_16
+    delay_16
+    emote_exclamation_mark
+    delay_2
+    walk_down * 7
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherWalkRightToPlayer
+{
+    walk_right * 3
+    step_end
+}
+
+movement Vsdeoxys_Movement_PlayerWalkToVsdeoresearcher
+{
+    walk_down * 2
+    face_left
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherWalkOffScreen
+{
+    face_left
+    walk_left * 7
+    walk_down * 2
+    walk_left * 2
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherComesBack
+{
+    face_right
+    walk_right * 2
+    walk_up * 2
+    walk_right * 7
+    step_end
+}
+
+movement Vsdeoxys_Movement_VsdeoresearcherWalkToTheirComputer
+{
+    walk_left * 6
+    walk_down * 6
+    face_left
+    step_end
+}
+text Vsdeoxys_Text_ThatOrangePokemon
+{
+	format("That orange Pokémon is hiding in one of these rocks! Capture it.")
+}
+text Vsdeoxys_Text_DidYouSend
+{
+	format("Did you send a zap -")
+}
+text Vsdeoxys_Text_YesIt
+{
+	format("Yes! It was here! We have to capture it. Can you capture it? You look like you can capture it.")
+}
+text Vsdeoxys_Text_OkaySlow
+{
+	format("Okay, slow down. What happened?")
+}
+text Vsdeoxys_Text_IWasSmashing
+{
+	format("I was smashing these meteors, right?")
+}
+text Vsdeoxys_Text_AndThenThe
+{
+	format("And then the next thing I remember, an orange thing flew by me super fast, and blasted me with some kind of… Ancient Power! ")
+}
+text Vsdeoxys_Text_MyTrumbeakWas
+{
+	format("My Trumbeak was KO’d in one hit! \nThen it zoomed away!")
+}
+text Vsdeoxys_Text_WaitSo
+{
+	format("Wait, so why did your zap say -")
+}
+text Vsdeoxys_Text_ItWasnt
+{
+	format("It wasn't just any Pokémon! Meteors are from space? An orange super strong Pokémon? It was Deoxys!")
+}
+text Vsdeoxys_Text_WhatIs
+{
+	format("What is...")
+}
+text Vsdeoxys_Text_ItsA
+{
+	format("It's a Pokémon the government doesn't want you to know about, but we know the Hoenn Champion captured one back in 1997. They keep it locked up at a research facility because it's too powerful to let the public know about it. It must've escaped!")
+}
+text Vsdeoxys_Text_AndYouThink
+{
+	format("And you think it's here?")
+}
+text Vsdeoxys_Text_IKnowIt
+{
+	format("I know it's here! I saw it! But I'm not tough enough.\nSo you’re gonna capture it!")
+}
+text Vsdeoxys_Text_WeReGonnaBring
+{
+	format("We’re gonna bring it to the Halbera Research Facility. Not Chasilla. Those guys are in the pocket of big government.\nI - we’re gonna be so famous!")
+}
+text Vsdeoxys_Text_WhatHaveI
+{
+	format("What have I gotten myself into?")
+}
+text Vsdeoxys_Text_SureWhat
+{
+	format("Sure. What were you using to smash these rocks?")
+}
+text Vsdeoxys_Text_MeteorsTheyre
+{
+	format("Meteors! They’re from space. You can use this.")
+}
+text Vsdeoxys_Text_IfYouHave
+{
+	format("If you have a Pokémon in your party that can learn that move, you’ll be able to smash meteors.\nAnd rocks.")
+}
+text Vsdeoxys_Text_CaptureTheDeoxys
+{
+	format("Capture the Deoxys! Once you do, we’ll expose the lies!")
+}
+text Vsdeoxys_Text_WaitIsThat
+{
+	format("Wait… is that what they were talking about?")
+}
+text Vsdeoxys_Text_YouDidIt
+{
+	format("You did it!")
+}
+text Vsdeoxys_Text_YouCaughtIt
+{
+	format("You caught it!\nWe’ve got proof now!\nMeet me at Haelba Research!")
+}
+text Vsdeoxys_Text_DidThatRock
+{
+	format("…Did that rock just make a sound?")
+}
+text Vsdeoxys_Text_YoureHere
+{
+	format("You’re here! Okay. Let’s go. I’ll do the talking.")
+}
+text Vsdeoxys_Text_ForTheLastTime
+{
+	format("Vsdeoguy, for the 385th time, there’s no way -")
+}
+text Vsdeoxys_Text_ThisTimeIt
+{
+	format("This time it's real! I have proof. We caught it. You gotta see it for yourself.")
+}
+text Vsdeoxys_Text_SeeWhat
+{
+	format("See what? That you -")
+}
+text Vsdeoxys_Text_AreYouPlayer
+{
+	format("Are you {PLAYER}? I’ve seen the livestreams for the League. How did Deoxysg- ")
+}
+text Vsdeoxys_Text_ThatsHowI
+{
+	format("That’s how I know it’s legit! This Trainer is tough as nails, saw it with my own eyes!")
+}
+text Vsdeoxys_Text_OkayLets
+{
+	format("Okay! Let’s take a look at your Pokédex. Come with me.")
+}
+text Vsdeoxys_Text_YouKnowHow
+{
+	format("You know how my bosses are. I can’t have too many people in the lab. I’ll come back in a second.")
+}
+text Vsdeoxys_Text_OkayI
+{
+	format("Okay, I battled this -")
+}
+text Vsdeoxys_Text_TrustMe
+{
+	format("Trust me, I know. They told you it was a Deoxys escaped from Hoenn or something, didn't they?")
+}
+text Vsdeoxys_Text_HowDidYou
+{
+	format("How did you know?")
+}
+text Vsdeoxys_Text_ISeeThat
+{
+	format("I see that person once… maybe twice a month. They usually trick some Trainer into helping them, but this is the first time he’s actually brought back something and it didn’t have a blurry photo…")
+}
+text Vsdeoxys_Text_HowDidThey
+{
+	format("How did they trick you into helping them? All of the Trainers that could capture this thing are usually off doing literally anything else.")
+}
+text Vsdeoxys_Text_IWasInvest
+{
+	format("I was invest -")
+}
+text Vsdeoxys_Text_YouKnowWhat
+{
+	format("You know what? Doesn’t matter. But I can’t have this guy bursting into here every month with some nonsense. So I need you to just stay here, and I think we can get them out of our hair once and for all.")
+}
+text Vsdeoxys_Text_WhatHappened
+{
+	format("…what happened?")
+}
+text Vsdeoxys_Text_IToldHim
+{
+	format("I told him that I thought you were a government spy, here to retrieve what was rightfully yours.")
+}
+text Vsdeoxys_Text_WaitWhat
+{
+	format("Wait what?")
+}
+text Vsdeoxys_Text_YeahYou
+{
+	format("Yeah, you should have seen it! I said that we had defense protocols to handle you, but we could only hold you off for so long.")
+}
+text Vsdeoxys_Text_IToldThem
+{
+	format("I told them they were absolutely onto something, you had the real deal, but they needed to delete Buzzr from their phone and told them they needed the first ticket to Fiore, where nobody could track them down.")
+}
+text Vsdeoxys_Text_WaitHes
+{
+	format("Wait, he’s just abandoning everything and leaving?")
+}
+text Vsdeoxys_Text_TheyveGotNothing
+{
+	format("They’ve got nothing to leave behind, I promise. They’ve got no life outside of hunting this thing. Man, I’m so glad that’s over!")
+}
+text Vsdeoxys_Text_SeriouslyYou
+{
+	format("Seriously, you have no idea how much time and energy you’ve saved us. Thank you so much for playing along.")
+}
+text Vsdeoxys_Text_YouWereSmashing
+{
+	format("You were smashing those meteors using your Pokémon,right? You can use this instead.")
+}
+text Vsdeoxys_Text_YouCanUse
+{
+	format("You can use that {STR_VAR_1} to crush any rocks you come across. You don’t need any particular Pokémon with you.")
+}
+text Vsdeoxys_Text_AnotherLateNight
+{
+	format("Another late night… but once I finally have the data on Core distribution and its relationship to personality value…")
+}

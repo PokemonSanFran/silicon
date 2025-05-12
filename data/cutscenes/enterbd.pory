@@ -1,0 +1,322 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const BD = 1
+
+script EnterBD_StartBattle_ObjectSetup_Script {
+    setobjectxyperm(BD,3,5)
+    setobjectmovementtype(BD, MOVEMENT_TYPE_FACE_RIGHT)
+}
+
+script EnterBD_Event_Script {
+    goto_if_quest_active(QUEST_INVERSEHALLUCINOGENIC,Quest_Inversehallucinogenic_BD_Interact_Script)
+    goto_if_quest_complete(QUEST_INVERSEHALLUCINOGENIC,TirabudinPlace_Gym_BDRematch_Script)
+    switch (var (VAR_GYM_7_STATE)) {
+    case GYM_SAVE_BEFORE_LEADER:
+        faceplayer
+        goto(EnterBD_StartBattle_Script)
+    case GYM_DEFEATED_LEADER:
+        goto(EnterBD_PostDefeat1_Dialogue)
+    case GYM_EXPLAINED_BADGE_AND_TM:
+        goto(EnterBD_PostDefeat2_Dialogue)
+    default:
+        goto(EnterBD_MumbleToSelf_Dialogue)
+    }
+}
+
+script EnterBD_MumbleToSelf_Dialogue {
+    lock
+    setvar(VAR_GYM_7_STATE, GYM_SAVE_BEFORE_LEADER)
+    msgbox(gText_EnterBD_StupidParade,,SPEAKER_BD,TAIL_WHISPER)
+    closemessage
+        applymovement(BD, EnterBD_PaceLeftFrontOfDesk)
+    waitmovement(0)
+
+    msgbox(gText_EnterBD_TheyJustDontUnderstand,,SPEAKER_BD,TAIL_WHISPER)
+    closemessage
+
+    applymovement(BD, EnterBD_PaceRightFrontOfDesk)
+    waitmovement(0)
+
+    msgbox(gText_EnterBD_HeyYouSeemBusy,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    closemessage
+
+    playse(SE_PIN)
+    applymovement(BD, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(BD, Common_Movement_FaceDown)
+    waitmovement(0)
+
+    msgbox(gText_EnterBD_ShitShitShit, MSGBOX_NPC,SPEAKER_BD)
+    closemessage
+
+    applymovement(BD, EnterBD_TakeDrugs)
+    waitmovement(BD)
+    applymovement(PLAYER,Common_Movement_WalkLeft)
+    waitmovement(PLAYER)
+    goto(EnterPsf7leader_ExplainLab_Dialogue)
+    //goto(EnterBD_CalculateMovement_Script)
+}
+
+script EnterBD_CalculateMovement_Script {
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+
+    switch (var (VAR_TEMP_0)) {
+    case 8:
+        call(EnterBD_PlayerPosition8)
+    case 9:
+        call(EnterBD_PlayerPosition9)
+    case 10:
+        call(EnterBD_PlayerPosition10)
+    case 11:
+        call(EnterBD_PlayerPosition11)
+    case 12:
+        call(EnterBD_PlayerPosition12)
+    case 13:
+        call(EnterBD_PlayerPosition13)
+    case 14:
+        call(EnterBD_PlayerPosition14)
+    case 15:
+        call(EnterBD_PlayerPosition15)
+    case 16:
+        call(EnterBD_PlayerPosition16)
+    }
+
+    waitmovement(0)
+    applymovement(PLAYER, Common_Movement_FaceRight)
+    waitmovement(0)
+    goto(EnterPsf7leader_ExplainLab_Dialogue)
+}
+
+script EnterBD_PlayerPosition8 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom8)
+}
+script EnterBD_PlayerPosition9 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom9)
+}
+script EnterBD_PlayerPosition10 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom10)
+}
+script EnterBD_PlayerPosition11 {
+    applymovement(BD, EnterBD_BD_WalkAroundToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom11)
+}
+script EnterBD_PlayerPosition12 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom12)
+}
+script EnterBD_PlayerPosition13 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom13)
+}
+script EnterBD_PlayerPosition14 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom14)
+}
+script EnterBD_PlayerPosition15 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom15)
+}
+script EnterBD_PlayerPosition16 {
+    applymovement(BD, EnterBD_BD_WalkToBattlefield)
+    applymovement(PLAYER, EnterBD_MovePlayerFrom16)
+}
+
+script EnterPsf7leader_ExplainLab_Dialogue {
+    reveal(REVEAL_BD)
+    msgbox(gText_EnterBD_SoBackHere,,SPEAKER_BD)
+
+    msgbox(gText_EnterBD_WaitDoesTheLeague,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        startmenu_savescreen
+    goto(EnterBD_StartBattle_Script)
+}
+
+script EnterBD_StartBattle_Script {
+    msgbox(gText_EnterBD_IDontKnow,,SPEAKER_BD)
+    closemessage
+        trainerbattle_no_intro(TRAINER_BD, gText_EnterBD_UghIThinkThisBatch)
+    goto(EnterBD_PostBattle_Script)
+}
+
+script EnterBD_PostBattle_Script {
+    lock
+    startcutscene(JUMPPLAYER_ENTERBD)
+    setflag(FLAG_BADGE07_GET)
+    setvar(VAR_GYM_7_STATE,GYM_DEFEATED_LEADER)
+    setvar(VAR_BD_STATE,BATTLE_1_COMPLETE)
+    addvar(VAR_STORYLINE_STATE, 1)
+    tweetfanfare(TWEET_GYM_TIRABUDIN_PLACE_BADGE,MUS_OBTAIN_BADGE)
+    giveitem(ITEM_TM07)
+    closemessage
+    call(EnterBD_MoveBacktoDesk_Script)
+    waitmovement(BD)
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
+
+script EnterBD_MoveBacktoDesk_Script {
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+
+    if (var (VAR_TEMP_0) != 12) {
+        applymovement(BD, EnterBD_WalkBackToDesk)
+    } else {
+        applymovement(BD, EnterBD_WalkAroundBackToDesk)
+    }
+}
+
+script EnterBD_PostDefeat1_Dialogue {
+    lock
+    setvar(VAR_GYM_7_STATE,GYM_DEFEATED_LEADER)
+    msgbox(gText_EnterBD_TMAreLikeDrugs,MSGBOX_NPC,SPEAKER_BD)
+    closemessage
+        applymovement(BD,Common_Movement_FaceUp)
+    waitmovement(0)
+    release
+    end
+}
+
+script EnterBD_PostDefeat2_Dialogue {
+    lock
+    msgbox(gText_EnterBD_LetsSee,,SPEAKER_BD)
+    closemessage
+        release
+    end
+}
+
+text gText_EnterBD_StupidParade {
+    format("stupid fucking parade…")
+}
+
+text gText_EnterBD_TheyJustDontUnderstand {
+    format("They just don't understand… it was either their way or the highway… and I kept the Gym! And now I'm the traitor?")
+}
+
+text gText_EnterBD_HeyYouSeemBusy {
+    format("Hey, you seem busy, but are you BD?")
+}
+
+text gText_EnterBD_ShitShitShit {
+    format("! Shit. Shit shit shit hi, are you a challenger? Hold on yeah, hold on. NOPE, not doing this sober, hold on… Lemme just…")
+}
+
+text gText_EnterBD_SoBackHere {
+    format("So back here, I experiment with new synthetic drugs. Always trying to get an edge, you know? Let's see if I can battle under the influence of MGB-07.")
+}
+
+text gText_EnterBD_WaitDoesTheLeague {
+    format("Wait, does the League let you battle under the influence like that?")
+}
+
+text gText_EnterBD_IDontKnow {
+    format("I don't know the rules… but I'm sure they won't stop me either way.")
+}
+
+text gText_EnterBD_UghIThinkThisBatch {
+    format("Ugh, I think this batch makes me too nauseous…")
+}
+
+text gText_EnterBD_TMAreLikeDrugs {
+    format("TMs are like drugs, right? They alter your brain chemistry and let you see stuff you'd never see otherwise… that one will teach Psfgymattack7.")
+}
+
+text gText_EnterBD_LetsSee {
+    format("Let's see if I can bang out MGB-08 while I'm riding this high…")
+}
+
+text gText_EnterBD_BadgeGet {
+    format("You received the BDBadge Badge!")
+}
+
+movement EnterBD_PaceLeftFrontOfDesk {
+    walk_right * 3
+    face_up
+    step_end
+}
+
+movement EnterBD_PaceRightFrontOfDesk {
+    walk_left * 3
+    face_up
+    step_end
+}
+
+movement EnterBD_TakeDrugs {
+    walk_left
+    walk_in_place_slow_up
+    delay_16
+    walk_down
+    walk_right
+    step_end
+}
+
+movement EnterBD_BD_WalkToBattlefield {
+    walk_left * 2
+    walk_down * 4
+    face_left
+    step_end
+}
+movement EnterBD_MovePlayerFrom8 {
+    walk_left * 1
+    walk_down * 4
+    step_end
+}
+movement EnterBD_MovePlayerFrom9 {
+    walk_left * 2
+    walk_down * 3
+    step_end
+}
+movement EnterBD_MovePlayerFrom10 {
+    walk_left * 3
+    walk_down * 3
+    step_end
+}
+movement EnterBD_MovePlayerFrom11 {
+    walk_left * 4
+    walk_down * 3
+    step_end
+}
+movement EnterBD_MovePlayerFrom12 {
+    walk_left * 5
+    walk_down * 3
+    step_end
+}
+movement EnterBD_MovePlayerFrom13 {
+    walk_left * 6
+    walk_down * 3
+    step_end
+}
+movement EnterBD_MovePlayerFrom14 {
+    walk_left * 7
+    walk_down * 3
+    step_end
+}
+movement EnterBD_MovePlayerFrom15 {
+    walk_left * 8
+    walk_down * 3
+    step_end
+}
+movement EnterBD_MovePlayerFrom16 {
+    walk_left * 9
+    walk_down * 3
+    step_end
+}
+movement EnterBD_BD_WalkAroundToBattlefield {
+    walk_left * 3
+    walk_down * 3
+    walk_left
+    step_end
+}
+movement EnterBD_WalkBackToDesk {
+    walk_right * 4
+    walk_up * 4
+    step_end
+}
+
+movement EnterBD_WalkAroundBackToDesk {
+    walk_up * 4
+    walk_right * 4
+    face_up
+    step_end
+}

@@ -1,0 +1,174 @@
+//Quest_DexCompletion_
+//gText_DexCompletion_
+script Quest_DexCompletion_Interact_Script{
+    lock
+        faceplayer
+        returnqueststate(QUEST_DEXCOMPLETION)
+
+        switch(var(VAR_RESULT)){
+            case QUEST_MENU_SET_ACTIVE: goto(Quest_DexCompletion_Active_Dialogue)
+            case QUEST_MENU_SET_REWARD: goto(Quest_DexCompletion_Reward_Dialogue)
+            case QUEST_MENU_COMPLETE_QUEST: goto(Quest_DexCompletion_Completed_Dialogue)
+            default: goto(Quest_DexCompletion_StartQuest_Dialogue)
+        }
+}
+
+script Quest_DexCompletion_StartQuest_Dialogue{
+    msgbox(gText_DexCompletion_WeAreTheResearch)
+        msgbox(gText_DexCompletion_WeNormallyStudy)
+        msgbox(gText_DexCompletion_ButTheLastFewYears)
+        msgbox(gText_DexCompletion_YoureATrainer)
+
+        startquest(QUEST_DEXCOMPLETION)
+        call(Quest_DexCompletion_MarkQuests_Script)
+        release
+        end
+}
+
+script Quest_DexCompletion_Debug_Script{
+    addvar(VAR_TEMP_0,1)
+
+    setvar(VAR_0x8006,100)
+
+    if (var(VAR_0x8006) > 99){
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_DEXCOMPLETION,SUB_QUEST_2)
+        }
+    if (var(VAR_0x8006) > 49){
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_DEXCOMPLETION,SUB_QUEST_1)
+    }
+    return
+}
+
+
+script Quest_DexCompletion_MarkQuests_Script{
+    specialvar(VAR_0x8006, GetPokedexCompletionRate)
+
+    if (var(VAR_0x8006) > 99){
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_DEXCOMPLETION,SUB_QUEST_2)
+        }
+    if (var(VAR_0x8006) > 49){
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_DEXCOMPLETION,SUB_QUEST_1)
+    }
+    return
+}
+
+script Quest_DexCompletion_CheckSubquestProgress_Script{
+    setvar(VAR_TEMP_1,0)
+
+        checkitem(ITEM_OVAL_CHARM,1)
+
+        if (var(VAR_RESULT)){
+            setvar(VAR_TEMP_1,1)
+                return
+        }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DEXCOMPLETION,SUB_QUEST_1)
+
+        if (var(VAR_RESULT)){
+            setvar(VAR_TEMP_1,3)
+        }else {
+            setvar(VAR_TEMP_1,2)
+        }
+    return
+}
+
+script Quest_DexCompletion_Active_Dialogue{
+    call(Quest_DexCompletion_MarkQuests_Script)
+        call(Quest_DexCompletion_CheckSubquestProgress_Script)
+
+        switch (var(VAR_TEMP_1)){
+            case 1: goto(Quest_DexCompletion_Sub100Progress_Dialogue)
+            case 2: goto(Quest_DexCompletion_Sub50Progress_Dialogue)
+            case 3: goto(Quest_DexCompletion_FirstReward_Dialogue)
+        }
+}
+
+script Quest_DexCompletion_Sub50Progress_Dialogue{
+    msgbox(gText_DexCompletion_HowIsYourPokeDex,MSGBOX_NPC)
+        end
+}
+
+script Quest_DexCompletion_FirstReward_Dialogue{
+    msgbox(gText_DexCompletion_HowIsYourPokeDex)
+        msgbox(gText_DexCompletion_OhWow50)
+        msgbox(gText_DexCompletion_ThankYouSoMuch,MSGBOX_NPC)
+
+        giveitem(ITEM_OVAL_CHARM,1)
+        release
+        end
+}
+
+script Quest_DexCompletion_MarkReward_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DEXCOMPLETION,SUB_QUEST_2)
+
+    if (var(VAR_RESULT)){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_DEXCOMPLETION)
+        goto(Quest_DexCompletion_Reward_Dialogue)
+    }
+    return
+}
+
+script Quest_DexCompletion_Sub100Progress_Dialogue{
+    call(Quest_DexCompletion_MarkReward_Script)
+    msgbox(gText_DexCompletion_HowIsYourPokeDex100,MSGBOX_NPC)
+    end
+}
+
+script Quest_DexCompletion_Reward_Dialogue{
+    msgbox(gText_DexCompletion_HowIsYourPokeDex100)
+        msgbox(gText_DexCompletion_OhWow100)
+        msgbox(gText_DexCompletion_ThisIsAmazing)
+        giveitem(ITEM_SHINY_CHARM,1)
+        completequest(QUEST_DEXCOMPLETION)
+        release
+        end
+}
+
+script Quest_DexCompletion_Completed_Dialogue{
+    msgbox(gText_DexCompletion_HeyPlayer,MSGBOX_NPC)
+    end
+}
+
+text gText_DexCompletion_WeAreTheResearch{
+    format("we are the research people")
+}
+
+text gText_DexCompletion_WeNormallyStudy{
+    format("we normally study pokemon and their interactions in the region but")
+}
+
+text gText_DexCompletion_ButTheLastFewYears{
+    format("the last few years havbe been rough. the league")
+}
+
+text gText_DexCompletion_YoureATrainer{
+    format("you're a trainer right can you help us? come back after you've completed at least 50% of the pokedex")
+}
+
+text gText_DexCompletion_HowIsYourPokeDex{
+    format("how is your pokedex coming? 50% isn't too much, right")
+}
+
+text gText_DexCompletion_OhWow50{
+    format("oh wow 50% you're awesome")
+}
+
+text gText_DexCompletion_ThankYouSoMuch{
+    format("tysm take this")
+}
+
+text gText_DexCompletion_HowIsYourPokeDex100{
+    format("how is your pokedex coming? are you done?")
+}
+
+text gText_DexCompletion_OhWow100{
+    format("oh wow 100% you fuckin did it")
+}
+
+text gText_DexCompletion_ThisIsAmazing{
+    format("this is amazing, here take this")
+}
+
+text gText_DexCompletion_HeyPlayer{
+    format("hey {PLAYER} welcome back")
+}

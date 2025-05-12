@@ -1,0 +1,607 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+const ADAORA = 2
+const MAGNUS = 3
+
+const FLAG_HIDE_SEARCH = FLAG_TEMP_1
+const VAR_UNDERGROUND_DOOR = VAR_TEMP_C
+
+script ThisIsntRandom_CheckDoor_Script
+{
+    setvar(VAR_UNDERGROUND_DOOR,1)
+
+        if (var(VAR_PARC_STATE) == PLAYER_DISCOVERED_LAB){
+            if (var(VAR_STORYLINE_STATE) == STORY_POST_EARTHQUAKE){
+                call(ThisIsntRandom_UnlockDoor_Dialogue)
+            }
+        }
+}
+
+script ThisIsntRandom_HideObject_AboveGround_Script
+{
+    if (var(VAR_PARC_STATE) != LAB_NOT_DISCOVERED || (var(VAR_STORYLINE_STATE) != STORY_POST_EARTHQUAKE)){
+        setflag(FLAG_HIDE_SEARCH)
+    }
+    return
+}
+
+script ThisIsntRandom_ObjectSetUp_Script
+{
+    fadescreen(FADE_TO_BLACK)
+
+        setobjectxy(PLAYER,13,18)
+        TeleportCamera(13,18)
+
+        clearflag(FLAG_HIDE_SEARCH)
+
+        addobject(KAI)
+        setobjectxy(KAI,12,19)
+        applymovement(KAI,Common_Movement_FaceUp)
+
+        addobject(ADAORA)
+        setobjectxy(ADAORA,13,19)
+        applymovement(ADAORA,Common_Movement_FaceUp)
+
+        addobject(MAGNUS)
+        setobjectxy(MAGNUS,14,19)
+        applymovement(MAGNUS,Common_Movement_FaceUp)
+
+        fadescreen(FADE_FROM_BLACK)
+}
+
+script ThisIsntRandom_UnlockDoor_Dialogue
+{
+    lock
+        startcutscene(JUMPPLAYER_THISISNTRANDOM_DISCOVER)
+        call(ThisIsntRandom_ObjectSetUp_Script)
+        setvar(VAR_PARC_STATE,THETIDE_DISCOVERED_LAB)
+
+        playse(SE_PIN)
+        waitse
+        applymovement(KAI,Common_Movement_ExclamationMark)
+        waitmovement(0)
+
+        msgbox(gText_ThisIsntRandom_OhIsLiterally,,SPEAKER_ADAORA)
+
+        closemessage
+
+        applymovement(KAI,ThisIsRandom_WalkDownStairsA)
+        playse(SE_EXIT)
+        waitse
+
+        applymovement(MAGNUS,ThisIsRandom_WalkDownStairsC)
+        playse(SE_EXIT)
+        waitse
+        applymovement(ADAORA,ThisIsRandom_WalkDownStairsB)
+        playse(SE_EXIT)
+        waitse
+        waitmovement(ADAORA)
+
+        removeobject(ADAORA)
+        removeobject(KAI)
+        removeobject(MAGNUS)
+
+        applymovement(PLAYER,Common_Movement_WalkUp)
+        playse(SE_EXIT)
+        endcutscene
+        fadeblackandsetremovewarpfadeflag
+        warp(MAP_SECRET_PATH,0)
+        end
+}
+
+script ThisIsntRandom_UnlockElectronicDoor_Script
+{
+    setmetatile(7,0,0x269,TRUE)
+        setmetatile(7,1,0x271,TRUE)
+        setmetatile(7,2,0x22F,FALSE)
+        setmetatile(7,3,0x242,FALSE)
+        special(DrawWholeMapView)
+}
+
+script ThisIsntRandom_UndergroundDoor_Dialogue
+{
+    lock
+
+        startcutscene(JUMPPLAYER_THISISNTRANDOM_MON1)
+        msgbox(gText_ThisIsntRandom_AndNowMyTurn,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        applymovement(MAGNUS,ThisIsntRandom_WalkToKeypad)
+        waitmovement(MAGNUS)
+
+        playse(SE_DING_DONG)
+        waitse
+        playse(SE_BANG)
+        waitse
+
+        call(ThisIsntRandom_UnlockElectronicDoor_Script)
+
+        msgbox(gText_ThisIsntRandom_HowDidYou,,SPEAKER_ADAORA)
+
+        closemessage
+
+        applymovement(MAGNUS,Common_Movement_FaceLeft)
+        waitmovement(MAGNUS)
+
+
+        msgbox(gText_ThisIsntRandom_TheSecondSet,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceRight)
+
+        msgbox(gText_ThisIsntRandom_SoIsActuallyTrying,,SPEAKER_ALICIA)
+
+        msgbox(gText_ThisIsntRandom_AboutToFindOut,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_IfWereAllGoing,,SPEAKER_ADAORA)
+
+        closemessage
+
+        applymovement(MAGNUS,ThisIsntRandom_WalkDownHallwayA)
+        applymovement(ADAORA,ThisIsntRandom_WalkDownHallwayB)
+        applymovement(KAI,ThisIsntRandom_WalkDownHallwayC)
+        waitmovement(KAI)
+
+        setflag(FLAG_HIDE_SEARCH)
+        removeobject(MAGNUS)
+        removeobject(ADAORA)
+        removeobject(KAI)
+
+        setvar(VAR_PARC_STATE,MAGNUS_UNLOCKED_DOOR)
+        call(TryAutoSave)
+        release
+        end
+}
+
+script ThisIsntRandom_WalkIntoLab_Dialogue
+{
+    lock
+        setvar(VAR_PARC_STATE,TEAM_INSIDE_LAB)
+
+        msgbox(gText_ThisIsntRandom_LooksOldAsHell,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_TakeThese,,SPEAKER_ADAORA)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceLeft)
+
+        msgbox(gText_ThisIsntRandom_WalkieTalkies,,SPEAKER_ALICIA)
+
+        msgbox(gText_ThisIsntRandom_ToStayInTOuch,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_Yup,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        applymovement(KAI,ThisIsntRandom_WalkIntoLabA)
+        applymovement(MAGNUS,ThisIsntRandom_WalkIntoLabB)
+        applymovement(ADAORA,ThisIsntRandom_WalkIntoLabC)
+
+        waitmovement(ADAORA)
+
+        removeobject(ADAORA)
+        removeobject(KAI)
+        removeobject(MAGNUS)
+
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script ThisIsntRandom_CheckProgressA_Script
+{
+    if (!flag(FLAG_DEFEATED_LAB_MON_A))
+    {
+        goto(ThisIsntRandom_StopProgress_Script)
+    }
+    else
+    {
+        call(ThisIsntRandom_DefeatedFirst_Script)
+    }
+}
+
+script ThisIsntRandom_CheckProgressB_Script
+{
+    if (!flag(FLAG_DEFEATED_LAB_MON_B))
+    {
+        goto(ThisIsntRandom_StopProgress_Script)
+    }
+    else
+    {
+        call(ThisIsntRandom_DefeatedSecond_Script)
+    }
+}
+
+script ThisIsntRandom_StopProgress_Script
+{
+    lock
+        random(2)
+
+        switch (var(VAR_RESULT))
+{
+            case 0: msgbox(gText_ThisIsntRandom_ItsInPain,,SPEAKER_ALICIA)
+            case 1: msgbox(gText_ThisIsntRandom_IWonderIfICan,,SPEAKER_ALICIA)
+        }
+
+
+    closemessage
+
+        applymovement(PLAYER,Common_Movement_WalkDown)
+        waitmovement(PLAYER)
+        release
+        end
+}
+
+script ThisIsntRandom_CoreEncounter_Script
+{
+    startmenu_savescreen
+        faceplayer
+
+        if (!flag(FLAG_DEFEATED_LAB_MON_A))
+{
+            setwildbattle(SPECIES_DONPHAN, 60, ITEM_NONE)
+                playmoncry(SPECIES_DONPHAN, CRY_MODE_ENCOUNTER)
+                }
+        elif (!flag(FLAG_DEFEATED_LAB_MON_B))
+{
+            setwildbattle(SPECIES_GOLURK, 60, ITEM_NONE)
+                playmoncry(SPECIES_GOLURK, CRY_MODE_ENCOUNTER)
+        }
+
+        delay(40)
+        waitmoncry
+        setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        dowildbattle
+        clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        specialvar(VAR_RESULT, GetBattleOutcome)
+        switch (var (VAR_RESULT))
+{
+            case B_OUTCOME_CAUGHT:
+            case B_OUTCOME_WON:
+                goto(ThisIsntRandom_RemoveMon_Script)
+        }
+    release
+        end
+}
+
+script ThisIsntRandom_RemoveMon_Script
+{
+    lock
+        closemessage
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        removeobject(VAR_LAST_TALKED)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        call(TryAutoSave)
+        release
+        end
+}
+
+script ThisIsntRandom_DefeatedFirst_Script
+{
+    lock
+        startcutscene(JUMPPLAYER_THISISNTRANDOM_MON1)
+        setvar(VAR_PARC_STATE,FREED_LAB_POKEMON_1)
+        msgbox(gText_ThisIsntRandom_AreYouGuysSeeing,,SPEAKER_ALICIA)
+
+        msgbox(gText_ThisIsntRandom_YeahIWasAbleTo,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_IGotAttackedButYeah,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_BothHugeProblems,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_RightLooksLikeTheyWanted,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_ButAllOfTheseMachines,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_ImJustTellingYouWhat,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_LetsKeepLooking,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        endcutscene
+        release
+        end
+}
+
+script ThisIsntRandom_DefeatedSecond_Script
+{
+    lock
+        startcutscene(JUMPPLAYER_THISISNTRANDOM_MON2)
+        setvar(VAR_PARC_STATE,FREED_LAB_POKEMON_2)
+        msgbox(gText_ThisIsntRandom_IFoundSomeAccessLogs,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_CanYouGetMeTheExact,,SPEAKER_MAGNUS)
+
+        msgbox(gText_ThisIsntRandom_IThinkSoHoldOn,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_ThoseMonsters,,SPEAKER_MAGNUS)
+
+        msgbox(gText_ThisIsntRandom_AreThoseDatesSpecial,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_TheSecondDateIsOne,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_SilicobraGravelerLarvitar,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_NumelPiloswineNidoking,,SPEAKER_MAGNUS)
+
+        msgbox(gText_ThisIsntRandom_TheyreAllGround,,SPEAKER_ALICIA)
+
+        msgbox(gText_ThisIsntRandom_SoWhat,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ThisIsntRandom_TheDocumentationCalledOut,,SPEAKER_ADAORA)
+
+        msgbox(gText_ThisIsntRandom_AndGroundTypesTo,,SPEAKER_MAGNUS)
+
+        msgbox(gText_ThisIsntRandom_OhNoIDidnt,,SPEAKER_ADAORA)
+        msgbox(gText_ThisIsntRandom_ThisTable,,SPEAKER_MAGNUS)
+
+        msgbox(gText_ThisIsntRandom_AndTheyAttackedUs,,SPEAKER_KAI_TIDE)
+
+
+        msgbox(gText_ThisIsntRandom_LetsKeepGoing,,SPEAKER_ADAORA)
+
+        closemessage
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+text gText_ThisIsntRandom_OhIsLiterally
+{
+    format("Oh,  “TM15” is literally the 15th Technical Machine! I feel pretty dumb, but damn good work.")
+}
+
+text gText_ThisIsntRandom_AndNowMyTurn
+{
+    format("And now my turn…")
+}
+
+text gText_ThisIsntRandom_HowDidYou
+{
+    format("How did you…?")
+}
+
+text gText_ThisIsntRandom_TheSecondSet
+{
+    format("The second set of numbers was the door code.")
+}
+
+text gText_ThisIsntRandom_SoIsActuallyTrying {
+    format("So… is Keiying actually trying to help us?")
+}
+
+text gText_ThisIsntRandom_AboutToFindOut {
+    format("About to find out. Let’s rage!")
+}
+
+text gText_ThisIsntRandom_IfWereAllGoing {
+    format("Hmm. If we’re all going, we should be okay. Let’s see.")
+}
+
+text gText_ThisIsntRandom_DidYouKnowThereWas {
+    format("Adaora, did you know there was a secret tunnel underneath Ferrybuilding?")
+}
+
+text gText_ThisIsntRandom_IfPeopleKnew {
+    format("If people knew about it it wouldn’t be a secret…")
+}
+
+text gText_ThisIsntRandom_DidYouKnowAbout {
+    format("Hey KAI, did you know about the secret laboratory under the ocean?")
+}
+
+text gText_ThisIsntRandom_DotDotDot {
+    format("…")
+}
+
+text gText_ThisIsntRandom_LooksOldAsHell {
+    format("Looks old as hell. And empty. Let’s split up and see what we turn up.")
+}
+
+text gText_ThisIsntRandom_TakeThese {
+    format("Take these.")
+}
+
+text gText_ThisIsntRandom_WalkieTalkies {
+    format("Walkie talkies?")
+}
+
+text gText_ThisIsntRandom_ToStayInTOuch {
+    format("To stay in touch in case we find anything. ")
+}
+
+text gText_ThisIsntRandom_Yup {
+    format("Yup!")
+}
+
+text gText_ThisIsntRandom_AreYouGuysSeeing {
+    format("Are you guys seeing Pokémon strapped to machines?")
+}
+
+text gText_ThisIsntRandom_YeahIWasAbleTo {
+    format("Yeah, I was able to set the poor thing free though.")
+}
+
+text gText_ThisIsntRandom_IGotAttackedButYeah {
+    format("I got attacked, but yeah, I dealt with it. I found some documentation too - this place is called the Infinity Energy Amplification Center. The goal was to use Water and Electric-type Pokémon to help combat fires and power outages.")
+}
+
+text gText_ThisIsntRandom_BothHugeProblems {
+    format("Both huge problems in our area…")
+}
+
+text gText_ThisIsntRandom_RightLooksLikeTheyWanted {
+    format("Right! Looks like they wanted to extract the energy from Pokémon, beef it up, and direct it to locations all over the region. Testing went well, but the extraction was painful and traumatic for the Pokémon, so they shut it down… 50 years ago.")
+}
+
+text gText_ThisIsntRandom_ButAllOfTheseMachines {
+    format("But all of these machines are on! These Pokémon are suffering now!")
+}
+
+text gText_ThisIsntRandom_ImJustTellingYouWhat {
+    format("I’m just telling you what I’m reading!")
+}
+
+text gText_ThisIsntRandom_LetsKeepLooking {
+    format("Let’s keep looking, and freeing more Pokémon then.")
+}
+
+text gText_ThisIsntRandom_IFoundSomeAccessLogs
+{
+    format("I started messing around with this computer and found a system access table!  Each row has a date attached to it... a bunch in 1968... two in 1971... and then three in the last week.")
+}
+
+text gText_ThisIsntRandom_CanYouGetMeTheExact
+{
+    format("Adaora… can you get me the exact dates of the ones in 1971?")
+}
+
+text gText_ThisIsntRandom_IThinkSoHoldOn
+{
+    format("I think so, hold on… yeah! Oh, when I get into this screen, I can see all the data for each specific test. 1971… April 22nd, and June 4th.")
+}
+
+text gText_ThisIsntRandom_ThoseMonsters
+{
+    format("Those monsters. They were trying to kill us.")
+}
+
+text gText_ThisIsntRandom_AreThoseDatesSpecial
+{
+    format("What? Are those dates special?")
+}
+
+text gText_ThisIsntRandom_TheSecondDateIsOne
+{
+    format("The second date is the end of the Arantraz riots. What types of Pokémon did you guys fight down here?")
+}
+
+text gText_ThisIsntRandom_SilicobraGravelerLarvitar
+{
+    format("Silicobra, Graveler, Larvitar…")
+}
+
+text gText_ThisIsntRandom_NumelPiloswineNidoking
+{
+    format("Numel, Piloswine, Nidoking…")
+}
+
+text gText_ThisIsntRandom_TheyreAllGround
+{
+    format("They’re all Ground-type Pokémon.")
+}
+
+text gText_ThisIsntRandom_SoWhat
+{
+    format("So what?")
+}
+
+text gText_ThisIsntRandom_TheDocumentationCalledOut
+{
+    format("The documentation called out specific types of Pokémon are used for specific problems.")
+}
+
+text gText_ThisIsntRandom_AndGroundTypesTo
+{
+    format("Which means it would've be easy to modify the machinery to allow Ground-types to trigger Earthquakes. Those bastards used this system to attack Arantraz.")
+}
+
+text gText_ThisIsntRandom_OhNoIDidnt
+{
+    format("Oh no. I didn’t recognize the earlier names, but the activities in the last few days… their access signature is Adelaide.")
+}
+
+text gText_ThisIsntRandom_ThisTable
+{
+    format("Oh... this table has more columns. You can see specific location names! MermerezaCity, PerlaciaCity, HodouCity... and then a bunch in a row on Arantraz... and the last one is HalaiIsland.")
+}
+
+text gText_ThisIsntRandom_AndTheyAttackedUs
+{
+    format("Wait... but they targeted HalaiIsland. Why attack innocent people?")
+}
+
+text gText_ThisIsntRandom_ToAdelaide
+{
+    format("To Adelaide, you're not innocent people. Most of The Tide lives on the island, don't they?")
+}
+
+text gText_ThisIsntRandom_LetsKeepGoing {
+    format("…Let’s keep going.")
+}
+
+text gText_ThisIsntRandom_ItsInPain {
+    format("That Pokemon looks likes its in pain...")
+}
+
+text gText_ThisIsntRandom_IWonderIfICan {
+    format("I wonder if I can help that Pokemon...")
+}
+
+movement ThisIsRandom_WalkDownStairsA {
+    walk_up * 2
+        walk_right
+        step_end
+}
+movement ThisIsRandom_WalkDownStairsB {
+    walk_right
+        walk_up * 2
+        walk_left
+        step_end
+}
+movement ThisIsRandom_WalkDownStairsC {
+    walk_up * 2
+        walk_left
+        step_end
+}
+
+movement ThisIsntRandom_WalkToKeypad {
+    walk_right * 4
+        walk_up
+        step_end
+}
+
+movement ThisIsntRandom_WalkDownHallwayA {
+    walk_right * 15
+        step_end
+}
+movement ThisIsntRandom_WalkDownHallwayB {
+    walk_right * 20
+        step_end
+}
+movement ThisIsntRandom_WalkDownHallwayC {
+    walk_down
+        walk_right * 18
+        step_end
+}
+
+movement ThisIsntRandom_WalkIntoLabA {
+    walk_down
+        walk_left * 5
+        walk_left * 4
+        step_end
+}
+
+movement ThisIsntRandom_WalkIntoLabB {
+    delay_16
+        walk_right * 7
+        delay_16
+        delay_16
+        step_end
+}
+
+movement ThisIsntRandom_WalkIntoLabC {
+    walk_down
+        walk_left * 4
+        face_down
+        delay_16
+        walk_down
+        walk_left * 4
+        step_end
+}

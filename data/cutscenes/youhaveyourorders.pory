@@ -1,0 +1,176 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ARNAV = 1
+const TECHIE = 2
+const OLIVER = 3
+const CHARLOTTE = 4
+const ADELAIDE = 5
+const CHIEF = 6
+const RAMESH = 7
+const KEIYING = 8
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+script YouHaveYourOrders_ObjectSetUp_Script
+{
+        setobjectxy(CHIEF,34,53)
+        setobjectxyperm(CHIEF,34,53)
+        setobjectmovementtype(CHIEF,MOVEMENT_TYPE_FACE_DOWN)
+
+        setobjectxy(ADELAIDE,35,56)
+        setobjectxyperm(ADELAIDE,35,56)
+        setobjectmovementtype(ADELAIDE,MOVEMENT_TYPE_FACE_UP)
+
+        setobjectxy(CHARLOTTE,33,53)
+        setobjectxyperm(CHARLOTTE,33,53)
+        setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_DOWN)
+}
+
+
+script YouHaveYourOrders_Interact_Keiying_Script
+{
+  returnqueststate(QUEST_HOWDISAPPOINTING)
+
+  switch(var(VAR_RESULT))
+  {
+      case QUEST_MENU_SET_ACTIVE: goto(YouHaveYourOrders_ActiveQuest_Dialogue)
+      case QUEST_MENU_COMPLETE_QUEST: goto(YouHaveYourOrders_CompleteQuest_Dialogue)
+      default: goto(YouHaveYourOrders_Assignment_Dialogue)
+  }
+}
+
+script YouHaveYourOrders_ActiveQuest_Dialogue
+{
+    msgbox(gText_YouHaveYourOrders_ICouldGoShut,MSGBOX_NPC)
+    end
+}
+
+script YouHaveYourOrders_CompleteQuest_Dialogue
+{
+    msgbox(gText_HowDisappointing_IAppreciate,MSGBOX_NPC)
+    end
+}
+
+script YouHaveYourOrders_Assignment_Dialogue
+{
+    startcutscene(JUMPPLAYER_YOUHAVEYOURORDERS)
+    setvar(VAR_HOWDISAPPOINTING_STATE,MISSION_ASSIGNED)
+
+    msgbox(format("{PLAYER}, are you sure you're ready for this mission?"),MSGBOX_NPC,,SPEAKER_KEIYING)
+
+    specialvar(VAR_RESULT,GetFalseTimelineCompletion)
+    switch(var(VAR_RESULT))
+      {
+        case FALSE_TIMELINE_NONE_COMPLETE:
+          msgbox(format("It can't be tougher than any of the other missions I've done, right?"),,SPEAKER_ALICIA)
+          msgbox(format("Hmm. Good point."),,SPEAKER_KEIYING)
+        case FALSE_TIMELINE_BURN_COMPLETE:
+          msgbox(format("Not sure, actually. But I'm pretty sure I can handle it."),,SPEAKER_ALICIA)
+        case FALSE_TIMELINE_MAN_COMPLETE:
+            msgbox(format("Without Alcmene, whatever this is should be easy, right?"),,SPEAKER_ALICIA)
+        case FALSE_TIMELINE_MAN_BURN_COMPLETE:
+            msgbox(format("The work I did with Ramesh and Oliver was... tough. But I know I can handle this. Let's hear it."),,SPEAKER_ALICIA)
+      }
+    closemessage
+
+    applymovement(KEIYING,YouHaveYourOrders_PaceInOffice)
+    waitmovement(0)
+
+    msgbox(format("Law enforcement has confirmed the old Gyms have been repurposed as TheTide recruitment and training centers.The city has loaned us enough officers to perform three simultaneous raids."),,SPEAKER_KEIYING)
+
+    msgbox(format("Why all at once?"),,SPEAKER_ALICIA)
+
+    msgbox(format("That would completely cut off their ability to escape or continue to grow."),,SPEAKER_KEIYING)
+
+    msgbox(format("Oh wow, you guys aren’t messing around."),,SPEAKER_ALICIA)
+
+    msgbox(format("Each of us will be leading a different raid. Charlotte will go to ZenzuIsland, and I'll deal with EspuleeOutskirts. {PLAYER}, you'll take on HodouCity."),,SPEAKER_KEIYING)
+
+    specialvar(VAR_RESULT,GetFalseTimelineCompletion)
+    if(var(VAR_RESULT) == FALSE_TIMELINE_NONE_COMPLETE)
+    {
+      msgbox(format("Charlotte? How did they get invovled?"),,SPEAKER_ALICIA)
+      msgbox(format("We hired them. Their help was invaluable in the past, and when we presented the offer, they didn’t hesitate."),,SPEAKER_KEIYING)
+    }
+
+      call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,YouHaveYourOrders_GymQuestionDialogue)
+
+    applymovement(KEIYING,Common_Movement_FaceDown)
+        waitmovement(0)
+
+        msgbox(format("Thank you, as usual. I sometimes wonder who is actually benefiting from this relationship."),,SPEAKER_KEIYING) //PSF TODO EMOTE sigh
+
+// PSF TODO how do we handle sighing? a new emoji? an overworld animation?
+
+        msgbox(format("I still feel like it's me! I'll do anything to help protect what we've built."),,SPEAKER_ALICIA)
+
+        closemessage
+
+        applymovement(KEIYING,Common_Movement_FacePlayer)
+
+        msgbox(format("In case you haven't already heard, I used to be the leader of the HodouCity Gym."),,SPEAKER_KEIYING)
+
+        closemessage
+
+        playse(SE_PIN)
+        applymovement(PLAYER,Common_Movement_ExclamationMark)
+        waitmovement(0)
+
+        msgbox(format("You were a Gym Leader?"),,SPEAKER_ALICIA)
+
+        msgbox(format("It was one of my greatest accomplishments. But when SharpriseCapital came along and I saw them beginning to usher in a new age for the region, I knew I wanted to help them. I made sure I was absolutely invaluable to them, and that's how I ended up in this spot now."),,SPEAKER_KEIYING)
+
+        msgbox(format("Was that hard?"),,SPEAKER_ALICIA)
+
+        msgbox(format("At the time? No. I believed - I believe I did the right thing. But it is a piece of my past that I miss. I left it behind to pursue something bigger, and there's a little bit of guilt there, you know?"),,SPEAKER_KEIYING)
+
+        applymovement(KEIYING,Common_Movement_FaceDown)
+        waitmovement(0)
+
+      msgbox(gText_YouHaveYourOrders_ICouldGoShut,,SPEAKER_KEIYING)
+
+      msgbox(format("Hopefully, you can accomplish what I can't bring myself to do."),,SPEAKER_KEIYING)
+
+        startquest(QUEST_HOWDISAPPOINTING)
+
+        buffermapname(STR_VAR_1,MAP_HODOU_CITY)
+    msgbox(gText_YouHaveYourOrders_DoYouWantTo,MSGBOX_YESNO)
+        endcutscene
+        if (var(VAR_RESULT)){
+        fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_HODOU_CITY,33,8)
+        }
+
+    closemessage
+    release
+    end
+}
+
+script YouHaveYourOrders_GymQuestionDialogue{
+    msgbox(format("What about TirabudinPlace?"),,SPEAKER_ALICIA)
+    msgbox(format("Our intelligence tells us that we'll be able to take that one with a smaller team."),,SPEAKER_KEIYING)
+    return
+}
+
+movement YouHaveYourOrders_PaceInOffice {
+    walk_left * 2
+    walk_right * 2
+    walk_left * 2
+    walk_right * 2
+    face_player
+}
+
+
+text gText_YouHaveYourOrders_ICouldGoShut
+{
+    format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create.")
+}
+
+text gText_YouHaveYourOrders_DoYouWantTo
+{
+    format("Do you want to go to {STR_VAR_1}?")
+}

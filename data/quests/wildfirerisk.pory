@@ -1,0 +1,215 @@
+//gText_Wildfirerisk_
+//Quest_Wildfirerisk_
+
+const FILIP = 11
+const FLAG_HIDE_FILIP = FLAG_TEMP_8
+
+script Quest_Wildfirerisk_Hide_Filip_Script{
+    setflag(FLAG_HIDE_FILIP)
+    return
+}
+
+script Quest_Wildfirerisk_Interact_Filip_Script{
+    goto_if_quest_complete(QUEST_WILDFIRERISK,Quest_Wildfirerisk_Complete_Dialogue)
+    call(Quest_Wildfirerisk_CheckQuestProgress_Script)
+    goto_if_quest_reward(QUEST_WILDFIRERISK,Quest_Wildfirerisk_Reward_Dialogue)
+    goto_if_quest_active(QUEST_WILDFIRERISK,Quest_Wildfirerisk_Active_Dialogue)
+    goto(Quest_Wildfirerisk_StartQuest_Dialogue)
+}
+
+script Quest_Wildfirerisk_StartQuest_Dialogue{
+    applymovement(FILIP,Common_Movement_FaceAwayPlayer)
+    waitmovement(FILIP)
+    msgbox(gText_Wildfirerisk_GodThisYear,,SPEAKER_FILIP,TAIL_WHISPER,EMOTE_SAD)
+    closemessage
+    applymovement(FILIP,Quest_Wildfirerisk_LookAroundPanic_Movement)
+    waitmovement(FILIP)
+    msgbox(gText_Wildfirerisk_YouAlright,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    applymovement(FILIP,Common_Movement_FacePlayer)
+    waitmovement(FILIP)
+    msgbox(gText_Wildfirerisk_IWork,,SPEAKER_FILIP)
+    msgbox(gText_Wildfirerisk_CanYouHelpUsKo100Firetype,,SPEAKER_FILIP)
+    startquest(QUEST_WILDFIRERISK)
+    call(Quest_Wildfirerisk_CheckQuestProgress_Script)
+    goto_if_quest_reward(QUEST_WILDFIRERISK,Quest_Wildfirerisk_Secret_Dialogue)
+    end
+}
+
+script Quest_Wildfirerisk_Secret_Dialogue{
+    lock
+    msgbox(gText_Wildfirerisk_NowThat,,SPEAKER_ALICIA)
+    //PSF TODO replace with a fire/flying/electric mon on a nearby route
+    random(NUM_SPECIES)
+    bufferspeciesname(STR_VAR_1,VAR_RESULT)
+    msgbox(gText_Wildfirerisk_OhWow,,SPEAKER_FILIP,,EMOTE_SHOCK)
+    goto(Quest_Wildfirerisk_Reward_Dialogue)
+}
+
+script Quest_Wildfirerisk_Active_Dialogue{
+    specialvar(VAR_RESULT,Quest_Wildfirerisk_GetPercentage)
+
+    if (var(VAR_RESULT)>89){
+            msgbox(gText_Wildfirerisk_YoureAlmostThere90Progress,MSGBOX_NPC,SPEAKER_FILIP)
+                end
+        }
+    elif (var(VAR_RESULT)>79){
+        msgbox(gText_Wildfirerisk_Wow80ProgressYourDedication,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    elif (var(VAR_RESULT)>69){
+        msgbox(gText_Wildfirerisk_ThankYouForMakingItTo70,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    elif (var(VAR_RESULT)>59){
+        msgbox(gText_Wildfirerisk_YouveMade60ProgressThank,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    elif (var(VAR_RESULT)>49){
+        msgbox(gText_Wildfirerisk_HalfwayThereThats50Progress,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    elif (var(VAR_RESULT)>39){
+        msgbox(gText_Wildfirerisk_YouveMadeItTo40Progress,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    elif (var(VAR_RESULT)>29){
+        msgbox(gText_Wildfirerisk_30ProgressThatsGreat,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    elif (var(VAR_RESULT)>19){
+        msgbox(gText_Wildfirerisk_ThankYouForMaking20Progress,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    elif (var(VAR_RESULT)>9){
+        msgbox(gText_Wildfirerisk_ItLooksLikeYouveMade10,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+    else{
+        msgbox(gText_Wildfirerisk_HelloHowAreYouProgressingWithOur,MSGBOX_NPC,SPEAKER_FILIP)
+            end
+    }
+}
+
+script Quest_Wildfirerisk_CheckQuestProgress_Script{
+
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_WILDFIRERISK)
+        if (var(VAR_RESULT) == FALSE){
+            return
+        }
+    setvar(VAR_TEMP_0,0)
+
+        if (var(VAR_QUEST_WILDFIRERISK_FIRE_COUNT) == 100){
+            subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WILDFIRERISK,SUB_QUEST_1)
+            addvar(VAR_TEMP_0,1)
+        }
+    if (var(VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT) == 100){
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WILDFIRERISK,SUB_QUEST_2)
+        addvar(VAR_TEMP_0,1)
+    }
+    if (var(VAR_QUEST_WILDFIRERISK_FLYING_COUNT) == 100){
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WILDFIRERISK,SUB_QUEST_3)
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if (var(VAR_TEMP_0) == QUEST_WILDFIRERISK_SUB_COUNT){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_WILDFIRERISK)
+    }
+    return
+}
+
+script Quest_Wildfirerisk_Reward_Dialogue{
+    msgbox(gText_Wildfirerisk_YourPokemonYourEffortsWillHelpKeep,MSGBOX_NPC,SPEAKER_FILIP)
+    giveitem(ITEM_TM43)
+    completequest(QUEST_WILDFIRERISK)
+    goto(Quest_Wildfirerisk_Complete_Dialogue)
+}
+
+script Quest_Wildfirerisk_Complete_Dialogue{
+    msgbox(gText_Wildfirerisk_ThankYouForYourHardWorkInReducing,MSGBOX_NPC,SPEAKER_FILIP)
+    end
+}
+
+movement Quest_Wildfirerisk_LookAroundPanic_Movement{
+    delay_16
+    face_left
+    delay_8
+    face_right
+    delay_16
+    face_left
+    delay_8
+    face_right
+    delay_16
+    face_player
+    step_end
+}
+text gText_Wildfirerisk_NowThat{
+    format("Now that I think about it, I'm pretty sure I've already defeated that many Pokémon.")
+}
+text gText_Wildfirerisk_OhWow{
+    format("Huh. Now that I think about it, I've been seeing way less {STR_VAR_1} around...")
+}
+
+text gText_Wildfirerisk_GodThisYear{
+format("Man, what are we going to do this year... I'm so nervous I could puke...")
+}
+
+text gText_Wildfirerisk_YouAlright{
+format("Hey, you alright?")
+}
+
+text gText_Wildfirerisk_IWork{
+    format("I work for Toxel Energy!")
+}
+
+text gText_Wildfirerisk_CanYouHelpUsKo100Firetype{
+	format("The power company didn't grant enough budget for clearing trees, and the government denied our request to move power cables underground. Can you help us KO 100 Fire-type, 100 Flying-type, and 100 Electric-type Pokémon to lower the risk of fire?")
+}
+
+text gText_Wildfirerisk_HelloHowAreYouProgressingWithOur{
+	format("Hello, how are you progressing with our request? Have you KO'ed any Fire, Flying, or Electric-type Pokémon yet?")
+}
+
+text gText_Wildfirerisk_ItLooksLikeYouveMade10{
+	format("It looks like you've made 10% progress. Keep going, we appreciate your help in keeping the region safe.")
+}
+
+text gText_Wildfirerisk_ThankYouForMaking20Progress{
+	format("Thank you for making 20% progress. We need all the help we can get to prevent wildfires in the area.")
+}
+
+text gText_Wildfirerisk_30ProgressThatsGreat{
+	format("30% progress, that's great. The region will be safer with fewer Fire, Flying, and Electric-type Pokémon around.")
+}
+
+text gText_Wildfirerisk_YouveMadeItTo40Progress{
+	format("You've made it to 40% progress, thank you for your dedication. We hope this will make a difference in preventing wildfires.")
+}
+
+text gText_Wildfirerisk_HalfwayThereThats50Progress{
+	format("Halfway there, that's 50% progress. Thank you for helping us keep the region safe from the threat of wildfires.")
+}
+
+text gText_Wildfirerisk_YouveMade60ProgressThank{
+	format("You've made 60% progress, thank you for continuing to help us. We hope to see the number of Fire, Flying, and Electric-type Pokémon decrease even further.")
+}
+
+text gText_Wildfirerisk_ThankYouForMakingItTo70{
+	format("Thank you for making it to 70% progress. Your efforts will go a long way in protecting the region from potential wildfires.")
+}
+
+text gText_Wildfirerisk_Wow80ProgressYourDedication{
+	format("Wow, 80% progress. Your dedication is much appreciated, and we hope this will help mitigate the risk of wildfires.")
+}
+
+text gText_Wildfirerisk_YoureAlmostThere90Progress{
+	format("You're almost there, 90% progress. We're so grateful for your help in protecting the region from the threat of wildfires.")
+}
+
+
+text gText_Wildfirerisk_YourPokemonYourEffortsWillHelpKeep{
+    format("Congratulations on KO'ing 100 Fire-type, 100 Flying-type, and 100 Electric-type Pokémon. Your efforts will help keep the region safe. As a reward, here's a rare Pokémon that you can add to your collection.")
+}
+
+text gText_Wildfirerisk_ThankYouForYourHardWorkInReducing{
+	format("Thank you for your hard work in reducing the risk of wildfires. We hope that your efforts will make a significant difference in keeping the region safe.")
+}

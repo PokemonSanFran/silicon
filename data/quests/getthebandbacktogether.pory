@@ -1,0 +1,251 @@
+//Quest_GetTheBand_
+//gText_GetTheBand_
+
+const BIKER_A = 4
+const FLAG_HIDE_BIKER_A = FLAG_TEMP_2
+const BIKER_B = 7
+const FLAG_HIDE_BIKER_B = FLAG_TEMP_4
+const BIKER_C = 2
+const FLAG_HIDE_BIKER_C = FLAG_TEMP_2
+const BIKER_D = 6
+const FLAG_HIDE_BIKER_D = FLAG_TEMP_6
+const BIKER_E = 4
+const FLAG_HIDE_BIKER_E = FLAG_TEMP_2
+const TEDORE = 15 
+const FLAG_HIDE_TEDORE = FLAG_TEMP_4
+
+script Quest_GetTheBand_HideTedore_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_ANGELDELIVERY)
+
+    if(!var(VAR_RESULT)){
+        setflag(FLAG_HIDE_TEDORE)
+    }
+}
+
+script Quest_GetTheBand_HideBikerA_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
+
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_BIKER_A)
+    }
+}
+
+script Quest_GetTheBand_HideBikerB_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
+
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_BIKER_B)
+    }
+}
+script Quest_GetTheBand_HideBikerC_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
+
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_BIKER_C)
+    }
+}
+script Quest_GetTheBand_HideBikerD_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
+
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_BIKER_D)
+    }
+}
+script Quest_GetTheBand_HideBikerE_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
+
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_BIKER_E)
+    }
+}
+
+script Quest_GetTheBand_RemoveBikers_Script{
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(VAR_LAST_TALKED)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    return
+}
+
+script Quest_GetTheBand_CheckQuestAndBike_Script{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_GETTHEBANDBACKTOGETHER)
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    return
+}
+
+script Quest_GetTheBand_Interact_BikerA_Dialogue{
+        msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+        call(Quest_GetTheBand_RemoveBikers_Script)
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
+        call(Quest_GetTheBand_CheckProgress_Script)
+        end
+}
+
+script Quest_GetTheBand_Interact_BikerB_Dialogue{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) != 0){
+    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    call(Quest_GetTheBand_RemoveBikers_Script)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
+    call(Quest_GetTheBand_CheckProgress_Script)
+    end
+    }
+    end
+}
+
+script Quest_GetTheBand_Interact_BikerC_Dialogue{
+    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    call(Quest_GetTheBand_RemoveBikers_Script)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
+    call(Quest_GetTheBand_CheckProgress_Script)
+    end
+}
+
+script Quest_GetTheBand_Interact_BikerD_Dialogue{
+    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    call(Quest_GetTheBand_RemoveBikers_Script)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
+    call(Quest_GetTheBand_CheckProgress_Script)
+    end
+}
+
+script Quest_GetTheBand_Interact_BikerE_Dialogue{
+    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    call(Quest_GetTheBand_RemoveBikers_Script)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
+    call(Quest_GetTheBand_CheckProgress_Script)
+    end
+}
+
+script Quest_GetTheBand_CheckProgress_Script{
+    setvar(VAR_TEMP_0,0)
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if (var(VAR_TEMP_0) > 4){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_GETTHEBANDBACKTOGETHER)
+    }
+    return
+}
+
+script Quest_GetTheBand_Interact_Tedore_Script{
+    lock
+    faceplayer
+
+	returnqueststate(QUEST_GETTHEBANDBACKTOGETHER)
+
+	    switch(var(VAR_RESULT)){
+	        case QUEST_MENU_SET_ACTIVE: goto(Quest_GetTheBand_Active_Dialogue)
+	        case QUEST_MENU_SET_REWARD: goto(Quest_GetTheBand_Reward_Dialogue)
+	        case QUEST_MENU_COMPLETE_QUEST: goto(Quest_GetTheBand_Completed_Dialogue)
+	        default: goto(Quest_GetTheBand_StartQuest_Dialogue)
+	}
+}
+
+script Quest_GetTheBand_StartQuest_Dialogue{
+    msgbox(gText_GetTheBand_WeBuiltOutTheHQ)
+    msgbox(gText_GetTheBand_KeepingInTouchIsHard)
+    msgbox(gText_GetTheBand_CanYouTellBikersYouMeet)
+    msgbox(gText_GetTheBand_YoullNeedBike)
+    startquest(QUEST_GETTHEBANDBACKTOGETHER)
+    release
+    end
+}
+
+script Quest_GetTheBand_Active_Dialogue{
+    call(Quest_GetTheBand_CheckProgress_Script)
+
+    switch (var(VAR_TEMP_0)){
+        case 0: msgbox(gText_GetTheBand_AnyLuckOnYourBike,MSGBOX_NPC)
+        case 1: msgbox(gText_GetTheBand_OnePersonCameIn,MSGBOX_NPC)
+        case 2: 
+        case 3: msgbox(gText_GetTheBand_TheyReallyStarting,MSGBOX_NPC)
+        case 4: msgbox(gText_GetTheBand_WowItsSoGreat,MSGBOX_NPC)
+    }
+    end
+}
+
+script Quest_GetTheBand_Reward_Dialogue{
+    msgbox(gText_GetTheBand_AllTheRooms)
+    msgbox(gText_GetTheBand_ItFeelsAwesomeToHelp)
+    msgbox(gText_GetTheBand_TakeThisUpgrade)
+
+    giveitem(ITEM_UPGRADE,1)
+
+    msgbox(gText_GetTheBand_YourBikeGoesFaster,MSGBOX_NPC)
+
+    completequest(QUEST_GETTHEBANDBACKTOGETHER)
+    release
+    end
+}
+
+script Quest_GetTheBand_Completed_Dialogue{
+    msgbox(gText_GetTheBand_HowsTheUpgrade,MSGBOX_NPC)
+    end
+}
+
+text gText_GetTheBand_TheBikersSentYou{
+    format("the bikers sent you to find me? oh snap, i'll go to the curenoport now")
+}
+text gText_GetTheBand_WeBuiltOutTheHQ{
+	format("")
+}
+text gText_GetTheBand_KeepingInTouchIsHard{
+	format("")
+}
+text gText_GetTheBand_CanYouTellBikersYouMeet{
+	format("")
+}
+text gText_GetTheBand_YoullNeedBike{
+	format("")
+}
+text gText_GetTheBand_AnyLuckOnYourBike{
+	format("")
+}
+text gText_GetTheBand_OnePersonCameIn{
+	format("")
+}
+text gText_GetTheBand_TheyReallyStarting{
+	format("")
+}
+text gText_GetTheBand_WowItsSoGreat{
+	format("")
+}
+text gText_GetTheBand_AllTheRooms{
+	format("")
+}
+text gText_GetTheBand_ItFeelsAwesomeToHelp{
+	format("")
+}
+text gText_GetTheBand_TakeThisUpgrade{
+	format("")
+}
+text gText_GetTheBand_YourBikeGoesFaster{
+	format("")
+}
+text gText_GetTheBand_HowsTheUpgrade{
+	format("")
+}

@@ -1,0 +1,146 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const NERIENE = 1
+
+script EnterNeriene_Event_Script {
+    switch (var (VAR_GYM_5_STATE)) {
+    case GYM_SAVE_BEFORE_LEADER:
+        goto(EnterNeriene_StartBattle_Script)
+    case GYM_DEFEATED_LEADER:
+        goto(EnterNeriene_PostDefeat1_Dialogue)
+    case GYM_EXPLAINED_BADGE_AND_TM:
+        goto(EnterNeriene_PostDefeat2_Dialogue)
+    default:
+        goto(EnterNeriene_Intro_Dialogue)
+    }
+}
+
+script EnterNeriene_Intro_Dialogue {
+    lock
+    msgbox(gText_EnterNeriene_AintItBeautiful, MSGBOX_NPC,SPEAKER_NERIENE)
+    reveal(REVEAL_NERIENE)
+    msgbox(gText_EnterNeriene_DoYouKnow,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+
+    msgbox(gText_EnterNeriene_NoWh,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+    msgbox(gText_EnterNeriene_IllTellYouWhy,MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT)
+
+    msgbox(gText_EnterNeriene_YaKnowWhat,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+
+    msgbox(gText_EnterNeriene_WeWould,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+    msgbox(gText_EnterNeriene_WeWouldBlowThem,MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT,EMOTE_HAPPY)
+
+    msgbox(gText_EnterNeriene_ThatRawPower,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+        setvar(VAR_GYM_5_STATE, GYM_SAVE_BEFORE_LEADER)
+    closemessage
+    startmenu_savescreen
+    closemessage
+    goto(EnterNeriene_StartBattle_Script)
+}
+
+script EnterNeriene_StartBattle_Script {
+    trainerbattle_single(TRAINER_NERIENE, gText_EnterNeriene_NowImGonnaShow, gText_EnterNeriene_ManDown, EnterNeriene_NerieneDefeated_Script, NO_MUSIC)
+}
+
+script EnterNeriene_NerieneDefeated_Script {
+    lock
+    startcutscene(JUMPPLAYER_ENTERNERIENE)
+    setflag(FLAG_BADGE05_GET)
+    setvar(VAR_GYM_5_STATE,GYM_DEFEATED_LEADER)
+    setvar(VAR_NERIENE_STATE,BATTLE_1_COMPLETE)
+    setvar(VAR_FORT_YOBU_STATE,DEFEATED_NERIENE)
+    msgbox(gText_EnterNeriene_YoureNoJoke,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+    closemessage
+    tweetfanfare(TWEET_GYM_FORT_YOBU_BADGE,MUS_OBTAIN_BADGE)
+    giveitem(ITEM_TM05)
+    closemessage
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
+
+script EnterNeriene_PostDefeat1_Dialogue {
+    setvar(VAR_GYM_5_STATE, GYM_EXPLAINED_BADGE_AND_TM)
+    lock
+    msgbox(gText_EnterNeriene_MaybeMyDefense, MSGBOX_NPC,SPEAKER_NERIENE)
+        closemessage
+    release
+    end
+}
+
+script EnterNeriene_PostDefeat2_Dialogue {
+    lock
+    msgbox(gText_EnterNeriene_ManTheCompetition, MSGBOX_NPC,SPEAKER_NERIENE)
+        closemessage
+    release
+    end
+}
+
+text gText_EnterNeriene_AintItBeautiful {
+    format("Ain't it beautiful? All of it! The bridge, the ocean, this base. ")
+}
+
+text gText_EnterNeriene_DoYouKnow {
+    format("Do you know why I built the Gym into the base, {PLAYER}?")
+}
+
+text gText_EnterNeriene_NoWh {
+    format("No, wh -")
+}
+
+text gText_EnterNeriene_IllTellYouWhy {
+    format("I'll tell you why! Because this base represents the crown jewel of this here nation: our military defense. We're so strong, people don't even DREAM of attacking us!")
+}
+
+text gText_EnterNeriene_YaKnowWhat {
+    format("Ya know what happens if they did attack?")
+}
+
+text gText_EnterNeriene_WeWould {
+    format("We would -")
+}
+
+text gText_EnterNeriene_WeWouldBlowThem {
+    format("WE WOULD BLOW THEM TO SMITHEEREENS! Oh baby, just gets me excited thinking about how we can blow those idiots right back to the Stone Age.")
+}
+
+text gText_EnterNeriene_ThatRawPower {
+    format("That raw power is so inspiring, once I got the chance, I knew I wanted my career to have the energy of that legacy. That's why we're up here.")
+}
+
+text gText_EnterNeriene_NowImGonnaShow {
+    format("Now, I'm gonna show you that same raw defensive power! Buckle up, solider!")
+}
+
+text gText_EnterNeriene_WeGotACode {
+    format("We got a code Oscar Uniform Charlie Hotel on our hands.")
+}
+
+text gText_EnterNeriene_ScrambleTheJets {
+    format("Scramble the jets!")
+}
+
+text gText_EnterNeriene_ThreatNeutralized {
+    format("Threat neutralized.")
+}
+
+text gText_EnterNeriene_ManDown {
+    format("Man down, man down!")
+}
+
+text gText_EnterNeriene_YoureNoJoke {
+    format("You're no joke! My strategy is usually to wear the opponent out, but I ran out of gas quick against you!")
+}
+
+text gText_EnterNeriene_BadgeGet {
+    format("You received the NerieneBadge Badge!")
+}
+
+text gText_EnterNeriene_MaybeMyDefense {
+    format("Maybe my defense wasn't strong enough? Should I start using Sandstorm? Maybe Toxic...")
+}
+
+text gText_EnterNeriene_ManTheCompetition {
+    format("Man, the competition at the League Finals is gonna a hell of a show. All you kids coming through here are gonna rise real quick through the ranks!")
+}

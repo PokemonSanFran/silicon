@@ -1,0 +1,205 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const RAMESH = 2
+const FLAG_HIDE_RAMESH = FLAG_TEMP_2
+
+script AlwaysWatchingWazowski_FloorWelcome_Script{
+        lock
+
+        if (flag(FLAG_HIDE_RAMESH)){
+            setvar(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE,POST_ALWAYS_WATCHING_WAZOWSKI)
+            release
+            end
+        }
+
+        setvar(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE,STEPPED_INTO_RAMESH_ROOM)
+        msgbox(gText_AlwaysWatchingWazowski_WelcomePlayer,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        releaseall
+        end
+}
+
+script AlwaysWatchingWazowski_MovePlayerIntoPlace_Script{
+        lock
+        startcutscene(JUMPPLAYER_ALWAYSWATCHINGWAZOKWSKI)
+        setvar(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE,POST_ALWAYS_WATCHING_WAZOWSKI)
+
+        applymovement(PLAYER,Common_Movement_WalkUp2)
+        fadescreen(FADE_TO_BLACK)
+        waitmovement(PLAYER)
+        setobjectxy(PLAYER,9,9)
+        TeleportCamera(9,9)
+        applymovement(PLAYER,Common_Movement_WalkUp2)
+        fadescreen(FADE_FROM_BLACK)
+        waitmovement(PLAYER)
+
+        playbgm(MUS_MT_PYRE,FALSE)
+        applymovement(RAMESH,Common_Movement_FacePlayer)
+        goto(AlwaysWatchingWazowski_Intro_Dialogue)
+}
+
+script AlwaysWatchingWazowski_Intro_Dialogue{
+        msgbox(gText_AlwaysWatchingWazowski_IImagineAllTheScreens,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        reveal(REVEAL_RAMESH)
+
+        if(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > START_THE_GANGS_ALL_HERE){
+            msgbox(gText_AlwaysWatchingWazowski_IWishHadPickedADifferentTime,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        }   else {
+            msgbox(gText_AlwaysWatchingWazowski_IWishYouHadVisited,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        }
+    goto(AlwaysWatchingWazowski_HowDidYouKnow_Dialogue)
+}
+
+script AlwaysWatchingWazowski_HowDidYouKnow_Dialogue{
+        msgbox(gText_AlwaysWatchingWazowski_WaitHowDidYouKnow,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_CONFUSE)
+
+        msgbox(gText_AlwaysWatchingWazowski_LookAroundDoYouThink,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        msgbox(gText_AlwaysWatchingWazowski_SecurityUsedToAlsoPerform,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        goto(AlwaysWatchingWazowski_MarketingandProduction_Dialogue)
+}
+script AlwaysWatchingWazowski_MarketingandProduction_Dialogue{
+        msgbox(gText_AlwaysWatchingWazowski_OhOkayYeah,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_AlwaysWatchingWazowski_WeDevelopContent,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+
+        msgbox(gText_AlwaysWatchingWazowski_WhatDoYouMeanMe,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_AlwaysWatchingWazowski_YouCanSeeForYourself,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        closemessage
+        goto(AlwaysWatchingWazowski_ProgramCutscene_Script)
+}
+script AlwaysWatchingWazowski_ProgramCutscene_Script{
+        applymovement(PLAYER,Common_Movement_FaceLeft)
+        fadescreen(FADE_TO_BLACK)
+
+        msgbox(gText_AlwaysWatchingWazowski_OurBiggestContentInitiative,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+
+        msgbox(gText_AlwaysWatchingWazowski_WhatDoYouMean,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_AlwaysWatchingWazowski_TensOfThousandsOfKids,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+
+        msgbox(gText_AlwaysWatchingWazowski_ToPutItSimply,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+
+        msgbox(gText_AlwaysWatchingWazowski_HistoricallyOurInRegion,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+
+        if (var(VAR_ROUTE10_STATE) > HAS_NOT_MET_KAI){
+                msgbox(gText_AlwaysWatchingWazowski_WaitHesDoingTheLeagueChallenge,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        }
+    closemessage
+        fadescreen(FADE_FROM_BLACK)
+        goto(AlwaysWatchingWazowski_MyProductivityHasDropped_Dialogue)
+
+}
+script AlwaysWatchingWazowski_MyProductivityHasDropped_Dialogue{
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        msgbox(gText_AlwaysWatchingWazowski_IImagineThisHasBeenVery,MSGBOX_DEFAULT,SPEAKER_RAMESH)
+
+        applymovement(RAMESH,Common_Movement_FaceUp)
+
+        fadedefaultbgm
+
+        msgbox(gText_AlwaysWatchingWazowski_SorryToBugYou,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        closemessage
+        endcutscene
+        call(TryAutoSave)
+        releaseall
+        end
+}
+script AlwaysWatchingWazowski_IgnoringPlayer_Dialogue{
+    lockall
+        msgbox(gText_AlwaysWatchingWazowski__IgnorePlayer,SPEAKER_MARKETING_STAFF)
+        closemessage
+        releaseall
+        end
+}
+
+text gText_AlwaysWatchingWazowski_WelcomePlayer{
+    format("Welcome {PLAYER}!")
+}
+
+text gText_AlwaysWatchingWazowski_IImagineAllTheScreens{
+    format("I imagine all the screens can be quite overwhelming. I never really think about how many we have until somebody new visits... I'm Ramesh.")
+}
+
+text gText_AlwaysWatchingWazowski_IWishHadPickedADifferentTime{
+    format("I wish Oliver had picked a different time to tell you to come see me. I have at least 493 more minutes of work, and don't have the 12 minutes required to appropriately entertain you...")
+}
+
+text gText_AlwaysWatchingWazowski_IWishYouHadVisited{
+    format("I wish you had visited Adelaide first. I have at least 493 more minutes of work and don't have the 12 minutes required to appropriately entertain you...")
+}
+
+text gText_AlwaysWatchingWazowski_WaitHowDidYouKnow{
+    format("Wait, how did you know that stuff?")
+}
+
+text gText_AlwaysWatchingWazowski_LookAroundDoYouThink{
+    format("Look around. Do you think there's anything in the region that I don't see?")
+}
+
+text gText_AlwaysWatchingWazowski_SecurityUsedToAlsoPerform{
+    format("SharpriseCapitalsecurity used to also perform surveillance, but my team was more than efficient enough to perform that on top of their existing duties.")
+}
+
+text gText_AlwaysWatchingWazowski_OhOkayYeah{
+    format("...oh. Okay. Yeah, there's a lot of screens. This is Marketing and Production, right?")
+}
+
+text gText_AlwaysWatchingWazowski_WeDevelopContent{
+    format("We develop content across all of our social platforms and optimize the perception of our brand to the world. Although right now, our primary project is actually you.")
+}
+
+text gText_AlwaysWatchingWazowski_WhatDoYouMeanMe{
+    format("What do you mean, me?")
+}
+
+text gText_AlwaysWatchingWazowski_YouCanSeeForYourself{
+    format("You can see for yourself. Turn to your left in 3....2...1....")
+}
+
+text gText_AlwaysWatchingWazowski_OurBiggestContentInitiative{
+    format("Our biggest content initiative right now is broadcasting the race between all the League Challengers. My models predict that this will increase our sentiment among the professional battling community by 40%, and 88% among the casual battling communities. Never mind what it will do for your career.")
+}
+
+text gText_AlwaysWatchingWazowski_WhatDoYouMean{
+    format("What do you mean?")
+}
+
+text gText_AlwaysWatchingWazowski_TensOfThousandsOfKids{
+    format("Tens of thousands of kids at home watching you all right now. Everybody loves competition, and even more so, they love watching their favorites progress. Our inbound sponsorship requests have skyrocketed 44.15% , and the challenge just started.")
+}
+
+text gText_AlwaysWatchingWazowski_ToPutItSimply{
+    format("To put it simply, you're all going to be superstars.")
+}
+
+text gText_AlwaysWatchingWazowski_HistoricallyOurInRegion{
+    format("Historically, our in-region sentiment has been primarily negative, but even here, people want to see their hometown hero do well.")
+}
+
+text gText_AlwaysWatchingWazowski_WaitHesDoingTheLeagueChallenge{
+    format("(Wait, he's doing the League challenge? After all that shit talk? What a hypocrite!)")
+}
+
+text gText_AlwaysWatchingWazowski_IImagineThisHasBeenVery{
+    format("I imagine this has been very educational for you, {PLAYER}. But I can see my productivity has dropped 14% as a result of this conversation, and I have some content that needs to be scheduled very soon.")
+}
+
+text gText_AlwaysWatchingWazowski_SorryToBugYou{
+    format("Sorry to bug you. I'll keep trying to put on a good show!")
+}
+
+text gText_AlwaysWatchingWazowski__IgnorePlayer{
+    format("...")
+}
+
+movement PlayerCharDeskWalkFromLeft_Movement{
+    walk_right
+        face_up
+        step_end
+}
+
+movement PlayerCharDeskWalkFromRight_Movement{
+    walk_left *2
+        face_up
+        step_end
+
+}

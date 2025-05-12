@@ -1,0 +1,210 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+const FLAG_HIDE_KAI = FLAG_TEMP_1
+
+script NewAssholeAppears_HideKai_Script{
+    if (var(VAR_ROUTE10_STATE) > SAVED_BEFORE_KAI_ROUTE10){
+        setflag(FLAG_HIDE_KAI)
+    }
+    return
+}
+
+script NewAssholeAppears_WalkToPlayer_Script {
+    lockall
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+    applymovement(KAI,Common_Movement_ExclamationMark)
+    playse(SE_PIN)
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    waitmovement(0)
+
+    switch(var(VAR_TEMP_0)){
+        case 0: applymovement(KAI,NewAssholeAppears_X0_WalkToPlayer_Movement)
+        case 1: applymovement(KAI,NewAssholeAppears_X1_WalkToPlayer_Movement)
+        case 2: applymovement(KAI,NewAssholeAppears_X2_WalkToPlayer_Movement)
+        case 3: applymovement(KAI,NewAssholeAppears_X3_WalkToPlayer_Movement)
+        case 4: applymovement(KAI,NewAssholeAppears_X4_WalkToPlayer_Movement)
+    }
+    waitmovement(0)
+
+    switch(var(VAR_TEMP_1)){
+        case 2: applymovement(KAI,NewAssholeAppears_Y2_WalkToPlayer_Movement)
+        case 6: applymovement(KAI,NewAssholeAppears_Y6_WalkToPlayer_Movement)
+    }
+    waitmovement(0)
+    goto(KaiAlpha_Event_Script)
+}
+
+script KaiAlpha_Event_Script{
+    switch(var(VAR_ROUTE10_STATE)) {
+        case HAS_NOT_MET_KAI: goto(NewAssholeAppears_Intro_Dialogue)
+        case SAVED_BEFORE_KAI_ROUTE10: goto(NewAssholeAppears_StartBattle_Script)
+    }
+}
+
+script NewAssholeAppears_Intro_Dialogue {
+    setvar(VAR_ROUTE10_STATE,SAVED_BEFORE_KAI_ROUTE10)
+    msgbox(gText_NewAssholeAppears_YouLookFamiliar,,SPEAKER_KAI)
+    if (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > DEFEATED_THIRD_LEADER){
+        msgbox(gText_NewAssholeAppears_YeahYouHadSome,,SPEAKER_ALICIA)
+    }else{
+        msgbox(gText_NewAssholeAppears_JustStarted,,SPEAKER_ALICIA)
+    }
+    goto(NewAssholeAppears_BadgeJudge_Dialogue)
+}
+
+script NewAssholeAppears_BadgeJudge_Dialogue {
+
+    special(GetNumberOfBadges)
+
+    switch (var(VAR_RESULT)){
+        case 0: msgbox(gText_NewAssholeAppears_NotDoingMuchGood,,SPEAKER_KAI)
+        case 1: msgbox(gText_NewAssholeAppears_ThoughtIRecognized,,SPEAKER_KAI)
+        default: msgbox(gText_NewAssholeAppears_ColonizersAreReallyGetting,,SPEAKER_KAI)
+    }
+
+    msgbox(gText_NewAssholeAppears_WhatIsYourProblem,,SPEAKER_ALICIA)
+
+    lockall
+    startmenu_savescreen
+    goto(NewAssholeAppears_StartBattle_Script)
+}
+
+script NewAssholeAppears_StartBattle_Script{
+    lockall
+    trainerbattle_single(TRAINER_KAI_NEWASSHOLEAPPEARS,gText_NewAssholeAppears_GoMindYourBusiness,gText_NewAssholeAppears_YoureTough,NewAssholeAppears_PostBattle_Script, NO_MUSIC)
+    closemessage
+
+}
+
+script NewAssholeAppears_PostBattle_Script {
+    lockall
+    startcutscene(JUMPPLAYER_NEWASSHOLEAPPEARS)
+    setvar(VAR_ROUTE10_STATE,DEFEATED_KAI_ROUTE10)
+    msgbox(gText_NewAssholeAppears_Whateveryournameis,,SPEAKER_ALICIA)
+    msgbox(gText_NewAssholeAppears_GentrificationOfMyHome,,SPEAKER_KAI)
+    reveal(REVEAL_KAI)
+    msgbox(gText_NewAssholeAppears_YouSoundCrazyPerson,,SPEAKER_ALICIA)
+    msgbox(gText_NewAssholeAppears_NotStupidJustIgnorant,,SPEAKER_KAI)
+    msgbox(gText_NewAssholeAppears_SeeYouAround,,SPEAKER_KAI)
+    msgbox(gText_NewAssholeAppears_IHopeNot,,SPEAKER_ALICIA)
+
+    closemessage
+    goto(NewAssholeAppears_KaiExit_Script)
+}
+
+script NewAssholeAppears_KaiExit_Script{
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+    switch(var(VAR_TEMP_1)){
+        case 2: applymovement(KAI,NewAssholeAppears_KaiWalkAwaySouth_Movement)
+        case 6: applymovement(KAI,NewAssholeAppears_KaiWalkAwayNorth_Movement)
+    }
+    endcutscene
+	fadescreen(FADE_TO_BLACK)
+    fadedefaultbgm
+    removeobject(KAI)
+	fadescreen(FADE_FROM_BLACK)
+    addvar(VAR_STORYLINE_STATE,1)
+    setvar(VAR_TEMP_0,0)
+    call(TryAutoSave)
+    releaseall
+    end
+}
+
+text gText_NewAssholeAppears_YouLookFamiliar {
+    format("You look familiar. You flew here to do the SharpriseCapitalLeague Challenge, right?")
+}
+
+text gText_NewAssholeAppears_YeahYouHadSome{
+    format("Yeah, you had some weird rant in Perlacia City the other day. I'm {PLAYER}, and yes, I'm doing the challenge.")
+}
+
+text gText_NewAssholeAppears_JustStarted {
+    format("Yeah! Just started not too long ago. Name's {PLAYER}.")
+}
+
+text gText_NewAssholeAppears_NotDoingMuchGood {
+    format("Judging from your Badge count, the program isn't doing you much good.")
+}
+
+text gText_NewAssholeAppears_ThoughtIRecognized {
+    format("...yeah I thought I recognized you. Guess you transplants aren't all a total joke!")
+}
+
+text gText_NewAssholeAppears_ColonizersAreReallyGetting {
+    format("Yeah, I heard about your wins from the guys. The colonizers are really getting a head start, huh?")
+}
+
+text gText_NewAssholeAppears_WhatIsYourProblem {
+    format("Woah, what the hell is your problem?")
+}
+
+text gText_NewAssholeAppears_GoMindYourBusiness {
+    format("Go mind your business in your own region.")
+}
+
+text gText_NewAssholeAppears_YoureTough {
+    format("...you're tough.")
+}
+
+text gText_NewAssholeAppears_Whateveryournameis {
+    format("Are you done being an ass, whateveryournameis?")
+}
+
+text gText_NewAssholeAppears_GentrificationOfMyHome {
+    format("Kai, and only if you're done contributing to the gentrification of my home... but I doubt it. You're stupid, just like the rest of them.")
+}
+
+text gText_NewAssholeAppears_YouSoundCrazyPerson {
+    format("Excuse me!? You sound like a crazy person, but I'm the stupid one?")
+}
+
+text gText_NewAssholeAppears_NotStupidJustIgnorant {
+    format("I take that back - not stupid, just ignorant. I shouldn't be mad at you. The ignorance isn't entirely your fault. ")
+}
+
+text gText_NewAssholeAppears_SeeYouAround {
+    format("See you around.")
+}
+
+text gText_NewAssholeAppears_IHopeNot {
+    format("I hope not.")
+}
+
+movement NewAssholeAppears_X0_WalkToPlayer_Movement {
+    walk_left * 4
+    step_end
+}
+movement NewAssholeAppears_X1_WalkToPlayer_Movement {
+    walk_left * 3
+    step_end
+}
+movement NewAssholeAppears_X2_WalkToPlayer_Movement {
+    walk_left * 2
+    step_end
+}
+movement NewAssholeAppears_X3_WalkToPlayer_Movement {
+    walk_left * 1
+    step_end
+}
+movement NewAssholeAppears_X4_WalkToPlayer_Movement {
+    step_end
+}
+movement NewAssholeAppears_Y2_WalkToPlayer_Movement {
+    walk_up
+    step_end
+}
+movement NewAssholeAppears_Y6_WalkToPlayer_Movement {
+    walk_down
+    step_end
+}
+
+movement NewAssholeAppears_KaiWalkAwayNorth_Movement {
+    walk_up * 8
+    step_end
+}
+
+movement NewAssholeAppears_KaiWalkAwaySouth_Movement {
+    walk_down * 8
+    step_end
+}

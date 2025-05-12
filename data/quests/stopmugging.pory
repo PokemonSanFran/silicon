@@ -1,0 +1,249 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ADELAIDE = 1
+const VICTIM = 2
+const MUGGERA = 3
+const MUGGERB = 4
+const FLAG_HIDE_VICTIM = FLAG_TEMP_2
+const FLAG_HIDE_MUGGERS = FLAG_TEMP_3
+
+//Quest_StopMugging_
+//gText_StopMugging_
+
+script Quest_StopMugging_HideObject_Script{
+    setflag(FLAG_HIDE_VICTIM)
+    removeobject(VICTIM)
+
+    if (defeated(TRAINER_MUGGERA_MUGGERB)){
+        setflag(FLAG_HIDE_MUGGERS)
+    }
+    return
+}
+
+script Quest_StopMugging_Trigger_Script {
+    if (defeated(TRAINER_MUGGERA_MUGGERB)){
+            release
+                end
+        }
+    goto(Quest_StopMugging_RunIntoPlayer_Dialogue)
+}
+
+script Quest_StopMugging_RevealObject_Script{
+    clearflag(FLAG_HIDE_MUGGERS)
+    clearflag(FLAG_HIDE_VICTIM)
+    addobject(MUGGERA)
+    addobject(MUGGERB)
+    addobject(VICTIM)
+    return
+}
+
+script Quest_StopMugging_RunIntoPlayer_Dialogue{
+    lock
+
+    call(Quest_StopMugging_RevealObject_Script)
+
+    msgbox(gText_StopMugging_StopThem)
+    closemessage
+
+    applymovement(MUGGERA,Quest_StopMugging_SlamIntoPlayerA_Movement)
+    applymovement(MUGGERB,Quest_StopMugging_SlamIntoPlayerB_Movement)
+    waitmovement(MUGGERB)
+    applymovement(PLAYER,Quest_StopMugging_FlyBackwards_Movement)
+    waitmovement(PLAYER)
+    delay(30)
+    applymovement(VICTIM,Quest_StopMugging_CatchUp_Movement)
+    waitmovement(VICTIM)
+
+    if (defeated(TRAINER_MUGGERA_MUGGERB)){
+        goto(Quest_StopMugging_StartBattle_Script)
+    }
+
+    msgbox(gText_StopMugging_TheyTook)
+    closemessage
+
+    msgbox(gText_StopMugging_WhatTheHell)
+
+    msgbox(gText_StopMugging_WeNeedThat)
+
+    msgbox(gText_StopMugging_YouNeedSomebodyElse)
+
+    msgbox(gText_StopMugging_YouDontUnderstand)
+
+    msgbox(gText_StopMugging_YouTriedToMug)
+
+    goto(Quest_StopMugging_StartBattle_Script)
+}
+
+script Quest_StopMugging_StartBattle_Script{
+    msgbox(gText_StopMugging_WeDontHaveTimeFor)
+    closemessage
+
+    applymovement(MUGGERA,Common_Movement_WalkDown)
+    waitmovement(MUGGERA)
+
+    trainerbattle_continue_after_lose(TRAINER_MUGGERA_MUGGERB,gText_StopMugging_Shit)
+    goto(Quest_StopMugging_PostBattle_Script)
+}
+
+script Quest_StopMugging_PostBattle_Script{
+    lock
+
+    if (defeated(TRAINER_MUGGERA_MUGGERB)){
+        msgbox(gText_StopMugging_DamnThisGuy)
+        call(Quest_StopMugging_Complete_Dialogue)
+    }else{
+        msgbox(gText_StopMugging_NowStayOut)
+        call(Quest_StopMugging_Complete_Dialogue)
+        call(Quest_StopMugging_Heal_Dialogue)
+    }
+    release
+    end
+}
+
+script Quest_StopMugging_Complete_Dialogue{
+    closemessage
+
+    applymovement(MUGGERA,Quest_StopMugging_LookAround_Movement)
+    waitmovement(MUGGERA)
+    msgbox(gText_StopMugging_ShitIDroppedThePhone)
+    closemessage
+
+    applymovement(MUGGERB,Quest_StopMugging_LookAround_Movement)
+    waitmovement(MUGGERB)
+    msgbox(gText_StopMugging_TheAssholeMust)
+
+    msgbox(gText_StopMugging_IThinkYoure)
+
+    msgbox(gText_StopMugging_WellTry)
+    closemessage
+
+    applymovement(MUGGERB,Quest_StopMugging_WalkAwayB_Movement)
+    applymovement(MUGGERA,Quest_StopMugging_WalkAwayA_Movement)
+    waitmovement(MUGGERA)
+    removeobject(MUGGERA)
+    removeobject(MUGGERB)
+    return
+}
+
+script Quest_StopMugging_Heal_Dialogue{
+    msgbox(gText_StopMugging_ImGladIWas)
+
+    special(HealPlayerParty)
+    special(ResetHealLocationToPerlaciaCity)
+    fadeblackandsetremovewarpfadeflag
+    warpsilent(MAP_PERLACIA_CITY,25,31)
+    release
+    end
+}
+
+text gText_StopMugging_StopThem{
+format("Help! Stop them!")
+}
+
+text gText_StopMugging_TheyTook{
+format("They took my phone! Please help!")
+}
+
+text gText_StopMugging_WhatTheHell{
+format("What the hell are you doing?")
+}
+
+text gText_StopMugging_WeNeedThat{
+format("We need that phone!")
+}
+
+text gText_StopMugging_YouNeedSomebodyElse{
+format("You NEED somebody else's phone?")
+}
+
+text gText_StopMugging_YouDontUnderstand{
+format("You don't understand! Gimme that phone, quick!")
+}
+
+text gText_StopMugging_YouTriedToMug{
+format("You tried to mug somebody and ran into me. What's to understand?")
+}
+
+text gText_StopMugging_WeDontHaveTimeFor{
+format("We don't have time for this!")
+}
+
+text gText_StopMugging_Shit{
+format("Shit!")
+}
+
+text gText_StopMugging_DamnThisGuy{
+format("Damn, you're not messing around...")
+}
+
+text gText_StopMugging_NowStayOut{
+format("Now stay out of our way!")
+}
+
+text gText_StopMugging_ShitIDroppedThePhone{
+format("Shit, I dropped the phone when I ran into them... and I can't find it now!")
+}
+
+text gText_StopMugging_TheAssholeMust{
+format("The asshole must have grabbed it and ran away!")
+}
+
+text gText_StopMugging_IThinkYoure{
+format("I think you're the assholes here.")
+}
+
+text gText_StopMugging_WellTry{
+format("We'll try something else man. Let's get out of here.")
+}
+
+text gText_StopMugging_ImGladIWas{
+format("I'm glad I was able to slow them down... but I need to heal now.")
+}
+
+movement Quest_StopMugging_SlamIntoPlayerA_Movement{
+    walk_faster_down * 6
+    lock_facing_direction
+    jump_2_up
+    delay_16
+    delay_16
+    walk_down
+    unlock_facing_direction
+    step_end
+}
+movement Quest_StopMugging_SlamIntoPlayerB_Movement{
+    walk_faster_left
+    walk_faster_down * 6
+    face_right
+    step_end
+}
+movement Quest_StopMugging_FlyBackwards_Movement{
+    face_up
+    lock_facing_direction
+    jump_2_down
+    walk_up
+    unlock_facing_direction
+    step_end
+}
+movement Quest_StopMugging_CatchUp_Movement{
+    walk_left
+    walk_fast_down * 5
+    step_end
+}
+movement Quest_StopMugging_LookAround_Movement{
+    face_left
+    delay_16
+    delay_16
+    face_right
+    delay_16
+    delay_16
+    face_down
+    step_end
+}
+movement Quest_StopMugging_WalkAwayB_Movement{
+    walk_down * 7
+    step_end
+}
+movement Quest_StopMugging_WalkAwayA_Movement{
+    walk_right
+    walk_down * 7
+    step_end
+}

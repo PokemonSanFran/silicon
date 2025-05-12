@@ -1,0 +1,415 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+const FLAG_HIDE_KAI = FLAG_TEMP_2
+
+//PSF TODO if the player starts these quests and then goes to the false timeline, it needs to be impossible to finish them until you're back in the true timeline
+
+//the quest log should also reflect this
+
+script LetsGrabLunch_HideKai_Outside_Script{
+    if (var(VAR_STORYLINE_STATE) != STORY_SAVE_KAI_ZENZU_ISLAND){
+        setflag(FLAG_HIDE_KAI)
+    }
+    return
+}
+script LetsGrabLunch_HideKai_Inside_Script{
+    if (var(VAR_STORYLINE_STATE) != STORY_POST_BATTLE_KAI_ZENZU_ISLAND && var(VAR_STORYLINE_STATE) != STORY_KAI_EXPLAIN_RESTORATION){
+        setflag(FLAG_HIDE_KAI)
+    }
+    return
+}
+
+script LetsGrabLunch_StartConversation_Dialogue {
+    lockall
+        setvar(VAR_STORYLINE_STATE,STORY_SAVE_KAI_ZENZU_ISLAND)
+        clearflag(FLAG_TEMP_1)
+        addobject(KAI)
+        playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        applymovement(KAI,LetsGrabLunch_WalkUpToPlayer)
+        waitmovement(0)
+
+        msgbox(gText_LetsGrabLunch_HuhWhatAreYouDoing,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_TakingABreak,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_YeahBeingOfficial,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_ThisAgain,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_HeyYouBeatMe,,SPEAKER_KAI)
+
+        startmenu_savescreen
+        goto(LetsGrabLunch_StartBattle_Script)
+}
+
+script LetsGrabLunch_InteractBattle_Script {
+    lockall
+        faceplayer
+        goto(LetsGrabLunch_StartBattle_Script)
+}
+
+script LetsGrabLunch_StartBattle_Script {
+    lockall
+        msgbox(gText_LetsGrabLunch_ButLetsSee,,SPEAKER_KAI)
+        closemessage
+
+
+        trainerbattle_no_intro(TRAINER_KAI_LETSGRABLUNCH,gText_LetsGrabLunch_NahNotRobbed)
+        goto(LetsGrabLunch_PostBattle_Dialogue)
+}
+
+script LetsGrabLunch_PostBattle_Dialogue {
+        startcutscene(JUMPPLAYER_LETSGRABLUNCH)
+    setvar(VAR_STORYLINE_STATE,STORY_POST_BATTLE_KAI_ZENZU_ISLAND)
+
+        msgbox(gText_LetsGrabLunch_GoodGame,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_ImGoingToBe,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_HaventYouHad,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_NahThisIsCool,,SPEAKER_KAI)
+
+        closemessage
+        fadedefaultbgm
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_ZENZU_ISLAND_RESTAURANT,14,9)
+        releaseall
+        end
+}
+
+script LetsGrabLunch_DinerBooth_Dialogue {
+    lockall
+        setvar(VAR_STORYLINE_STATE,STORY_KAI_EXPLAIN_RESTORATION)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        msgbox(gText_LetsGrabLunch_OkayLetsHear,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_IWantToCreate,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_HuhThatsActually,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_YeahITried,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_Who,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_OhTheOldLeaders,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_YouKnowTheyre,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_IKnowItsHard,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_HmmNeverThought,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+        msgbox(gText_LetsGrabLunch_YeahThisSounds,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_ItWouldBeSuch,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_HahaHowCanIHelp,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_CanYouTryTalking,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_WhatAreYouGoing,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_ImGoingToBring,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_WoahWoah,,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+
+        msgbox(gText_LetsGrabLunch_PlayerIts,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_ThisWontBeA,,SPEAKER_ALICIA)
+        msgbox(gText_LetsGrabLunch_YouHaveMy,,SPEAKER_KAI)
+        call(TryAutoSave)
+        endcutscene
+        closemessage
+        end
+}
+
+script LetsGrabLunch_InteractKaiDiner_Dialogue {
+       setflag(FLAG_FACILITY_UNLOCK_KAI)
+    msgbox(gText_LetsGrabLunch_ImJustPlanning,,SPEAKER_KAI)
+    goto(LetsGrabLunch_ShowGymList_Dialogue)
+}
+
+script LetsGrabLunch_ShowGymList_Dialogue{
+    msgbox(gText_LetsGrabLunch_HaveYouDecided,,SPEAKER_KAI,,EMOTE_CONFUSE)
+
+    dynmultichoice(1,1,FALSE,3,0,NULL,
+        "HodouCity",
+        "EspuleeOutskirts",
+        "ZenzuIsland",
+        //"What about TirabudinPlace?",
+        "Nowhere yet."
+    )
+
+        switch (var(VAR_RESULT)){
+            case 0: goto(LetsGrabLunch_HodouCity)
+            case 1: goto(LetsGrabLunch_EspuleeOutskirts)
+            case 2: goto(LetsGrabLunch_ZenzuIsland)
+            //case 3: goto(LetsGrabLunch_TirabudinPlace)
+            default: goto(LetsGrabLunch_CloseMenu)
+        }
+}
+
+
+script LetsGrabLunch_CloseMenu{
+
+    closemessage
+        releaseall
+        end
+}
+
+script LetsGrabLunch_HodouCity {
+    msgbox(gText_LetsGrabLunch_TheLeaderOfThat,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_DoYouWantHodouCity,MSGBOX_YESNO)
+
+        if (var(VAR_RESULT) == NO){
+
+            closemessage
+                releaseall
+                end
+        }else {
+            fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_HODOU_CITY,16,7)
+        }
+}
+script LetsGrabLunch_EspuleeOutskirts {
+    msgbox(gText_LetsGrabLunch_WasALittle,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_DoYouWantEspuleeOutskirts,MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO){
+
+            closemessage
+                releaseall
+                end
+        }else {
+            fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_ESPULEE_OUTSKIRTS,8,18)
+        }
+}
+script LetsGrabLunch_ZenzuIsland {
+    msgbox(gText_LetsGrabLunch_AlmostWalkedOut,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_VeryRealistic,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_TheyreIntense,,SPEAKER_KAI)
+
+        msgbox(gText_LetsGrabLunch_DoYouWantZenzuIsland,MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO){
+
+            closemessage
+                releaseall
+                end
+        }else {
+            fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_ZENZU_ISLAND,3,15)
+        }
+}
+
+script LetsGrabLunch_TirabudinPlace{
+    msgbox(gText_LetsGrabLunch_YouKnowId,,SPEAKER_KAI,,EMOTE_ANGRY)
+    closemessage
+    goto(LetsGrabLunch_ShowGymList_Dialogue)
+}
+
+script LetsGrabLunch_CheckRestorationProgress_Script{
+    setvar(VAR_TEMP_0,0)
+
+        call_if_quest_complete(QUEST_RESTOREHODOUGYM,LetsGrabLunch_IncrementCount_Script)
+        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,LetsGrabLunch_IncrementCount_Script)
+        call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,LetsGrabLunch_IncrementCount_Script)
+        call_if_quest_complete(QUEST_RESTOREZENZUGYM,LetsGrabLunch_IncrementCount_Script)
+
+        if (var(VAR_TEMP_0) > 0 && var(VAR_STORYLINE_STATE) == STORY_KAI_EXPLAIN_RESTORATION){
+            setvar(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE)
+        }
+}
+
+script LetsGrabLunch_IncrementCount_Script{
+    addvar(VAR_TEMP_0,1)
+        return
+}
+
+text gText_LetsGrabLunch_HuhWhatAreYouDoing {
+    format("Huh. What are you doing here? Shouldn't you be busy?")
+}
+
+text gText_LetsGrabLunch_TakingABreak {
+    format("Taking a break. I haven't had a chance to relax since I last saw you.")
+}
+
+text gText_LetsGrabLunch_YeahBeingOfficial {
+    format("Yeah, being SharpriseCapital's official lapdog must be exhausting! Bummer.")
+}
+
+text gText_LetsGrabLunch_ThisAgain {
+    format("This again? And besides, I know you've been busy too. Resido loves their “hometown hero robbed of championship” narrative.")
+}
+
+text gText_LetsGrabLunch_HeyYouBeatMe {
+    format("Hey, you beat me fair and square… but the extra popularity can't hurt.")
+}
+
+text gText_LetsGrabLunch_ButLetsSee {
+    format("But let's see how robbed I really was!")
+}
+
+text gText_LetsGrabLunch_NahNotRobbed {
+    format("Nah, not robbed at all. You're legit as fuck.")
+}
+
+text gText_LetsGrabLunch_GoodGame {
+    format("Good game. I see you finally got the hang of Mega Evolution.")
+}
+
+text gText_LetsGrabLunch_ImGoingToBe {
+    format("Of course! My team and I are going to use whatever tools we can to take down your bosses. As a matter of fact… I'm working on a project.")
+}
+
+text gText_LetsGrabLunch_HaventYouHad {
+    format("Haven't you had enough run-ins with the police already?")
+}
+
+text gText_LetsGrabLunch_NahThisIsCool {
+    format("Nah, this is cool, I swear. Actually, you said you're on break? Cool, we're grabbing lunch at Jim's. My treat.") //PSF TODO Rename Jim's
+}
+
+text gText_LetsGrabLunch_OkayLetsHear {
+    format("Okay, let's hear about your pyramid scheme.")
+}
+
+text gText_LetsGrabLunch_IWantToCreate {
+    format("I want to create training centers all over Resido, to help more Trainers get a real start, kind of like what SharpriseCapital gave you. I wanna use the legacy Gyms, like the one you saw earlier today, as those hubs.")
+}
+
+text gText_LetsGrabLunch_HuhThatsActually {
+    format("Huh. That's actually a pretty cool idea.")
+}
+
+text gText_LetsGrabLunch_YeahITried {
+    format("Yeah! I tried to talk to Imelda and Doyle, but they didn't take it nearly as well as you did.")
+}
+
+text gText_LetsGrabLunch_Who {
+    format("Who…?")
+}
+
+text gText_LetsGrabLunch_OhTheOldLeaders {
+    format("Oh, the old Leaders of the ZenzuIsland and EspuleeOutskirts Gyms. If we can revive those Gyms and strengthen our Trainers, then Trainers from other regions will want to come here, battle us, and help stimulate the region… without any interference from SharpriseCapital.")
+}
+
+text gText_LetsGrabLunch_YouKnowTheyre {
+    format("You know, they're not as bad as you think. I still don't understand your problem with them.")
+}
+
+text gText_LetsGrabLunch_IKnowItsHard {
+    format("I know you don't. It's hard to sit down and explain, but I'm working on it. But maybe it doesn't matter.  Is that what TheTide got wrong? Rather than try to defeat a negative force, maybe we need to focus on being a stronger positive force.")
+}
+
+text gText_LetsGrabLunch_HmmNeverThought {
+    format("Hmm. Never thought about it like that.")
+}
+
+text gText_LetsGrabLunch_YeahThisSounds {
+    format("Yeah, this sounds really cool! Way better than I expected.")
+}
+
+text gText_LetsGrabLunch_ItWouldBeSuch {
+    format("It would be such a boon if the Champion was helping too… and hopefully working on this will help you understand what things used to be like before SharpriseCapital showed up.")
+}
+
+text gText_LetsGrabLunch_HahaHowCanIHelp
+{
+    format("How can I help?")
+}
+
+text gText_LetsGrabLunch_CanYouTryTalking
+{
+    format("Hmm. Can you try talking to Imelda or Doyle? Or maybe visit HodouCity's Gym and see what we can do? Yeah, any of those are good starts, since BD is a lost cause...")
+}
+
+text gText_LetsGrabLunch_WhatAreYouGoing {
+    format("What are you going to do?")
+}
+
+text gText_LetsGrabLunch_ImGoingToBring {
+    format("I'm going to bring the idea to TheTide too. I think it's something everybody can rally behind, right?")
+}
+
+text gText_LetsGrabLunch_WoahWoah{
+    format("Kai, I don't think I can help you if you're working with TheTide.")
+}
+
+text gText_LetsGrabLunch_PlayerIts{
+    format("{PLAYER}, ignore what you think about TheTide for a second - you've seen the good that they've doing in the region, and their ability to work WITH the local communinities is what we need to make this successful. This isn't about companies or teams right now - I just want to help Trainers with the influence that I have.")
+}
+
+text gText_LetsGrabLunch_ThisWontBeA
+{
+    format("This isn't going to be a repeat of SharpriseStadium, right?")
+}
+
+text gText_LetsGrabLunch_YouHaveMy
+{
+    format("You have my absolute word.")
+}
+
+text gText_LetsGrabLunch_ImJustPlanning {
+    format("I'm just planning out my pitch to TheTide.")
+}
+
+text gText_LetsGrabLunch_HaveYouDecided{
+    format("What are you up to? Have you decided which place you'll hit up first?")
+}
+
+text gText_LetsGrabLunch_YouKnowId{
+    format("You know, I'd love to reform that Gym and take it away from BD... but they're a snake. There's no reasonining with them, they've fully turned.")
+}
+
+text gText_LetsGrabLunch_TheLeaderOfThat {
+    format("The Leader of that Gym more or less disappeared after SharpriseCapital shut it down. I know some of his Gym Trainers are still around… but I'm not sure where. ")
+}
+
+text gText_LetsGrabLunch_DoYouWantHodouCity {
+    format("Do you want to go to HodouCity?")
+}
+
+text gText_LetsGrabLunch_WasALittle {
+    format("Imelda was a little receptive to my idea. They said it was a “good first step”, but wouldn't sign on unless I had a plan for dismantling the entire SharpriseCapital League, which in their eyes, is a “total failure for our Trainers”.")
+}
+
+text gText_LetsGrabLunch_DoYouWantEspuleeOutskirts {
+    format("Do you want to go to EspuleeOutskirts?")
+}
+
+text gText_LetsGrabLunch_AlmostWalkedOut {
+    format("Doyle seemed to be interested in the idea of building... something that existed outside of the Sharprise League structure, but he doesn't think I'm thinking big enough. It's part of why he doesn't support The Tide either - they don't think big enough. He thinks he'd be better off going to another region where 'people can actually get things done'.")
+}
+
+text gText_LetsGrabLunch_VeryRealistic {
+    format("Very realistic, I see.")
+}
+
+text gText_LetsGrabLunch_TheyreIntense {
+    format("They're… intense.")
+}
+
+text gText_LetsGrabLunch_DoYouWantZenzuIsland {
+    format("Do you want to go to ZenzuIsland?")
+}
+
+text gText_LetsGrabLunch_FastForwardAdvance {
+    format("You have restored the {STR_VAR_1} Gym. Good job kid. In the main game, that nickname will be replaced with the name of wherever you are.") //PSF TODO
+    // Lunos: To store the current map's name in STR_VAR_1 please use the special(Script_GetCurrentMapName) in the script of choice.
+}
+
+text gText_LetsGrabLunch_FastForwardBlock {
+    format("Come back when its time to do the restoration quests. Or if you already did them, go away!")
+}
+
+
+movement LetsGrabLunch_WalkUpToPlayer {
+    walk_left * 7
+        step_end
+}

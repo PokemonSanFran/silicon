@@ -1,0 +1,412 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const SHINZO = 9
+const SHINZO_2 = 2
+const GUARD = 10
+const BACKUP =  12
+const FLAG_HIDE_BACKUP = FLAG_TEMP_3
+const FLAG_HIDE_SHINZO = FLAG_TEMP_2
+
+//gText_CulturalPurity_
+//Quest_CulturalPurity_
+
+//PSF TODO The text that appears when the quest is active should change for every mahjong tile that the player recieves
+//PSF TODO replace key item with mahjong tile
+
+script Quest_CulturalPurity_HideBackUp_Script{
+    setflag(FLAG_HIDE_BACKUP)
+    return
+}
+
+script Quest_CulturalPurity_MoveGuard_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_CULTURALPURITY)
+    if (var(VAR_RESULT)){
+        setobjectxy(GUARD,16,19)
+        setobjectxyperm(GUARD,16,19)
+    }
+    return
+}
+
+script Quest_CulturalPurity_HideShinzoInside_Script{
+    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_CULTURALPURITY)
+        if (!var(VAR_RESULT)){
+            setflag(FLAG_HIDE_SHINZO)
+        }
+}
+
+script Quest_CulturalPurity_HideLeader_Script{
+
+        if ((var(VAR_SHINZO_STATE) != BATTLE_1_COMPLETE))
+{
+            setflag(FLAG_HIDE_SHINZO)
+        }
+
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_CULTURALPURITY)
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_SHINZO)
+    }
+
+    if ((var(VAR_HOWDISAPPOINTING_STATE) > 0) && (var(VAR_HOWDISAPPOINTING_STATE) != HOWDISAPPOINTING_COMPLETE)){
+        setflag(FLAG_HIDE_SHINZO)
+    }
+
+    return
+}
+
+script Quest_CulturalPurity_Interact_Event_Script{
+    lock
+    faceplayer
+    returnqueststate(QUEST_CULTURALPURITY)
+
+    switch (var(VAR_RESULT)){
+        default: goto(Quest_CulturalPurity_QuestStart_Dialogue)
+    }
+}
+
+script Quest_CulturalPurity_QuestStart_Dialogue{
+    msgbox(gText_CulturalPurity_Player,,SPEAKER_SHINZO)
+    msgbox(gText_CulturalPurity_IReadOnline,,SPEAKER_SHINZO)
+    msgbox(gText_CulturalPurity_TheSaidToStart,,SPEAKER_SHINZO)
+    applymovement(SHINZO,Quest_CulturalPurity_LeaderWalkAway_Movement)
+    waitmovement(SHINZO)
+    removeobject(SHINZO)
+    startquest(QUEST_CULTURALPURITY)
+    release
+    end
+}
+
+script Quest_CulturalPurity_CheckProgress_Script{
+    setvar(VAR_TEMP_0,0)
+
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_CULTURALPURITY)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    checkitem(ITEM_KEY_TO_ROOM_1,1)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    checkitem(ITEM_KEY_TO_ROOM_2,1)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    checkitem(ITEM_KEY_TO_ROOM_4,1)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    checkitem(ITEM_KEY_TO_ROOM_6,1)
+
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+   return
+}
+
+script Quest_CulturalPurity_BackroomA_Interact_Script{
+    lock
+    faceplayer
+    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    call(Quest_CulturalPurity_CheckProgress_Script)
+
+    if (var(VAR_TEMP_0) == 1){
+        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA)
+
+        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        giveitem(ITEM_KEY_TO_ROOM_1,1)
+    }
+    release
+    end
+}
+
+script Quest_CulturalPurity_BackroomB_Interact_Script{
+    lock
+    faceplayer
+    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    call(Quest_CulturalPurity_CheckProgress_Script)
+
+    if (var(VAR_TEMP_0) == 2){
+        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA)
+
+
+        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        giveitem(ITEM_KEY_TO_ROOM_2,1)
+    }
+    release
+    end
+}
+
+script Quest_CulturalPurity_BackroomC_Interact_Script{
+    lock
+    faceplayer
+    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    call(Quest_CulturalPurity_CheckProgress_Script)
+
+    if (var(VAR_TEMP_0) == 3){
+        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA,,SPEAKER_ALICIA)
+
+
+        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        giveitem(ITEM_KEY_TO_ROOM_4,1)
+    }
+    release
+    end
+}
+
+script Quest_CulturalPurity_BackroomD_Interact_Script{
+    lock
+    faceplayer
+    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    call(Quest_CulturalPurity_CheckProgress_Script)
+
+    if (var(VAR_TEMP_0) == 4){
+        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA,,SPEAKER_ALICIA)
+
+
+        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        giveitem(ITEM_KEY_TO_ROOM_6,1)
+    }
+    release
+    end
+}
+
+script Quest_CulturalPurity_Racist_Interact_Script{
+    lock
+    faceplayer
+    returnqueststate(QUEST_CULTURALPURITY)
+
+    switch(var(VAR_RESULT)){
+        case QUEST_MENU_SET_REWARD: goto(Quest_CulturalPurity_ObjectSetUp_Script)
+        default: goto(Quest_CulturalPurity_Racist_FirstGuard_Dialogue)
+}
+}
+
+script Quest_CulturalPurity_ObjectSetUp_Script{
+    fadescreen(FADE_TO_BLACK)
+    call(Quest_CulturalPurity_MakeShinzoVisible_Script)
+    call(Quest_CulturalPurity_MakeBackupVisible_Script)
+
+    setobjectxyperm(SHINZO,14,20)
+    setobjectxy(SHINZO,14,20)
+    turnobject(SHINZO,DIR_NORTH)
+
+    setobjectxyperm(BACKUP,14,19)
+    setobjectxy(BACKUP,14,19)
+
+    fadescreen(FADE_FROM_BLACK)
+    goto(Quest_CulturalPurity_Battle_Script)
+}
+
+script Quest_CulturalPurity_Racist_FirstGuard_Dialogue{
+    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    call(Quest_CulturalPurity_CheckProgress_Script)
+
+    if (var(VAR_TEMP_0) == 5){
+        goto(Quest_CulturalPurity_ShinzoJoin_Dialogue)
+    }
+    release
+    end
+}
+
+script Quest_CulturalPurity_MakeShinzoVisible_Script{
+    clearflag(FLAG_HIDE_SHINZO)
+    addobject(SHINZO)
+    return
+}
+
+script Quest_CulturalPurity_MakeBackupVisible_Script{
+    clearflag(FLAG_HIDE_BACKUP)
+    addobject(BACKUP)
+    return
+}
+
+script Quest_CulturalPurity_ShinzoJoin_Dialogue{
+        msgbox(gText_CulturalPurity_IFiguredItOut,,SPEAKER_SHINZO)
+
+
+        call(Quest_CulturalPurity_MakeShinzoVisible_Script)
+        applymovement(SHINZO,Quest_CulturalPurity_ShinzoWalkToGuard_Movement)
+        waitmovement(SHINZO)
+
+        msgbox(gText_CulturalPurity_IHaveTheCodeButWeNeed,,SPEAKER_SHINZO)
+
+
+        msgbox(gText_CulturalPurity_YepGotEm,,SPEAKER_ALICIA)
+
+
+        msgbox(gText_CulturalPurity_LetMeSee,,SPEAKER_DEFAULT)
+
+        call(Quest_CulturalPurity_LoseTiles_Script)
+
+        msgbox(gText_CulturalPurity_HeyCleetus,,SPEAKER_DEFAULT)
+        call(Quest_CulturalPurity_BackupWalkOut_Script)
+
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_CULTURALPURITY)
+        goto(Quest_CulturalPurity_Battle_Script)
+}
+
+script Quest_CulturalPurity_LoseTiles_Script{
+    removeitem(ITEM_KEY_TO_ROOM_1,1)
+    removeitem(ITEM_KEY_TO_ROOM_2,1)
+    removeitem(ITEM_KEY_TO_ROOM_4,1)
+    removeitem(ITEM_KEY_TO_ROOM_6,1)
+    return
+}
+
+script Quest_CulturalPurity_BackupWalkOut_Script{
+    opendoor(15,18)
+    waitdooranim
+    call(Quest_CulturalPurity_MakeBackupVisible_Script)
+    applymovement(BACKUP,Quest_CulturalPurity_BackupWalkOutside_Movement)
+    waitmovement(BACKUP)
+    closedoor(15,18)
+    applymovement(SHINZO,Common_Movement_FaceUp)
+    waitmovement(SHINZO)
+    return
+}
+
+script Quest_CulturalPurity_Battle_Script{
+        msgbox(gText_CulturalPurity_WellThenItsTimeForYourInitation,,SPEAKER_DEFAULT)
+        //PSF TODO replace Brawly and Wally
+        multi_fixed_2_vs_2(TRAINER_CULTURALPURITY_A,gText_CulturalPurity_OneOfUs,TRAINER_CULTURALPURITY_B,gText_CulturalPurity_OneOfUs,PARTNER_STEVEN)
+        goto(Quest_CulturalPurity_PostBattle_Script)
+}
+
+script Quest_CulturalPurity_PostBattle_Script{
+    msgbox(gText_CulturalPurity_WowWelcomeInside,,SPEAKER_DEFAULT)
+    closemessage
+    applymovement(GUARD,Quest_CulturalPurity_StepAside_Movement)
+    waitmovement(GUARD)
+
+    opendoor(15,18)
+    applymovement(SHINZO,Quest_CulturalPurity_WalkInside_Movement)
+    applymovement(PLAYER,Quest_CulturalPurity_FollowShinzo_Movement)
+    waitmovement(PLAYER)
+    fadeblackandsetremovewarpfadeflag
+    warp(MAP_HODOU_CITY_RACISTHOUSE,0)
+}
+
+script Quest_CulturalPurity_InsideClubhouse_Dialogue{
+    lock
+    addvar(VAR_TEMP_0,1)
+
+    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_CULTURALPURITY)
+        if (!var(VAR_RESULT)){
+            release
+            end
+        }
+
+    applymovement(SHINZO_2,Quest_CulturalPurity_WalkToPlayer_Movement)
+    waitmovement(SHINZO_2)
+    msgbox(gText_CulturalPurity_NeverMind,,SPEAKER_SHINZO)
+
+    closemessage
+    giveitem(ITEM_ORAN_BERRY,1)
+    msgbox(gText_CulturalPurity_IHaveSomeThiking,,SPEAKER_SHINZO)
+
+    closemessage
+    applymovement(SHINZO_2,Quest_CulturalPurity_LeaveClubhouse_Movement)
+    waitmovement(SHINZO_2)
+    playse(SE_EXIT)
+    removeobject(SHINZO_2)
+    waitse
+    setvar(VAR_SHINZO_STATE,QUEST_1_COMPLETE)
+    completequest(QUEST_CULTURALPURITY)
+    release
+    end
+}
+movement Quest_CulturalPurity_LeaderWalkAway_Movement{
+    walk_down * 6
+    step_end
+}
+
+movement Quest_CulturalPurity_ShinzoWalkToGuard_Movement{
+    walk_down * 2
+    walk_right * 5
+}
+
+movement Quest_CulturalPurity_BackupWalkOutside_Movement{
+    walk_down
+    walk_left
+    face_down
+    step_end
+}
+movement Quest_CulturalPurity_StepAside_Movement{
+    lock_facing_direction
+    walk_right
+    step_end
+}
+movement Quest_CulturalPurity_WalkInside_Movement{
+    walk_right
+    walk_up * 2
+    step_end
+}
+movement Quest_CulturalPurity_FollowShinzo_Movement{
+    walk_up * 2
+    step_end
+}
+movement Quest_CulturalPurity_WalkToPlayer_Movement{
+    walk_left
+    walk_down
+    step_end
+}
+movement Quest_CulturalPurity_LeaveClubhouse_Movement{
+    walk_left
+    walk_down
+    step_end
+}
+
+text gText_CulturalPurity_Player{
+    format("{PLAYER} Hello!")
+}
+text gText_CulturalPurity_IReadOnline{
+    format("i read online about a group of people in hodoucity who have stayed tru")
+}
+text gText_CulturalPurity_TheSaidToStart{
+    format("they said start at the center... what does that mean?")
+}
+text gText_CulturalPurity_GoAway{
+    format("go away.")
+}
+text gText_CulturalPurity_WaitIKnowThePassword{
+    format("wait i know the password")
+}
+text gText_CulturalPurity_OhHereYouGo{
+    format("oh here you go")
+}
+text gText_CulturalPurity_IFiguredItOut{
+    format("i figured it out!")
+}
+text gText_CulturalPurity_IHaveTheCodeButWeNeed{
+    format("i have the code word, but need all the tiles")
+}
+text gText_CulturalPurity_YepGotEm{
+    format("yep got em here")
+}
+text gText_CulturalPurity_LetMeSee{
+    format("let me see your tiles.")
+}
+text gText_CulturalPurity_HeyCleetus{
+    format("hey cleetus!")
+}
+text gText_CulturalPurity_WellThenItsTimeForYourInitation{
+    format("Well then, its time for your initation!")
+}
+text gText_CulturalPurity_OneOfUs{
+    format("one of us one of us")
+}
+text gText_CulturalPurity_WowWelcomeInside{
+    format("wow welcome inside")
+}
+text gText_CulturalPurity_NeverMind{
+    format("never mind. they're just nationalists.")
+}
+text gText_CulturalPurity_IHaveSomeThiking{
+    format("i have some thinking to do.")
+}

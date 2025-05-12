@@ -1,0 +1,331 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ADELAIDE = 1 //FLAG_TEMP_1
+const CHARLOTTE = 2 //FLAG_TEMP_2
+const KAI = 3 //FLAG_TEMP_3
+const OLIVER = 4 //FLAG_TEMP_4
+
+script WhyDidntYouRatMeOut_HideObject_Script {
+    setflag(FLAG_TEMP_4)
+}
+
+script WhyDidntYouRatMeOut_CleanUpObject_Script {
+    setflag(FLAG_TEMP_4)
+    setflag(FLAG_TEMP_3)
+}
+
+script WhyDidntYouRatMeOut_StopPlayerLeaving {
+        lock
+        startcutscene(JUMPPLAYER_WHYDIDNTYOURATMEOUT)
+        setflag(FLAG_TEMP_1)
+        setflag(FLAG_TEMP_2)
+        applymovement(KAI,Common_Movement_FaceDown)
+        waitmovement(0)
+
+        msgbox(gText_WhyDidntYouRatMeOut_HeyWait,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        waitmovement(0)
+
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+        if (var(VAR_TEMP_0) == 9){
+            applymovement(KAI,WhyDidntYouRatMeOut_WalkToPlayerLeft)
+        }else {
+            applymovement(KAI,WhyDidntYouRatMeOut_WalkToPlayerRight)
+        }
+    waitmovement(0)
+
+        msgbox(gText_WhyDidntYouRatMeOut_CanWeTalk,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        playse(SE_EXIT)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_SHARPRISE_STADIUM_STANDS,4,6)
+}
+
+script WhyDidntYouRatMeOut_ConversationInStands {
+        applymovement(PLAYER,WhyDidntYouRatMeOut_WalkSlowlyUpStairsLeft)
+        applymovement(1,WhyDidntYouRatMeOut_WalkSlowlyUpStairsRight)
+
+        msgbox(gText_WhyDidntYouRatMeOut_WhatDoYouWant,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_IDidntThinkWed,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyDidntYouRatMeOut_IsSomethingWrongWith,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_ThatsNotWhatI,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyDidntYouRatMeOut_UhHuh,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_WhenYouWalkedIn,,SPEAKER_KAI_TIDE)
+
+        waitmovement(0)
+
+        msgbox(gText_WhyDidntYouRatMeOut_WhyDidntYou,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyDidntYouRatMeOut_IStillHaventDecided,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_WaitShit,,SPEAKER_KAI_TIDE)
+        closemessage
+
+        applymovement(1,WhyDidntYouRatMeOut_WalkBackward)
+        waitmovement(0)
+
+        msgbox(gText_WhyDidntYouRatMeOut_NoCalmDown,,SPEAKER_ALICIA)
+
+        closemessage
+
+        applymovement(1,Common_Movement_WalkLeft)
+        waitmovement(0)
+
+        msgbox(gText_WhyDidntYouRatMeOut_LookPlayer,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyDidntYouRatMeOut_NoYouLook,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_WasNiceToMe4,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_ThankYouAndImSorry,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyDidntYouRatMeOut_UhHuhLetsSeeHow,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_NoSeriouslyItMeans,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyDidntYouRatMeOut_LikeEveryOtherTime,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_YouKnowThem,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WhyDidntYouRatMeOut_YeahTheyreIn,,SPEAKER_ALICIA)
+
+        closemessage
+
+        playse(SE_POKENAV_CALL)
+        waitse
+
+        msgbox(gText_WhyDidntYouRatMeOut_MyGroupIsStarting,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        clearflag(FLAG_TEMP_2)
+        addobject(2)
+        applymovement(1,WhyDidntYouRatMeOut_LeaveStands)
+        applymovement(2,WhyDidntYouRatMeOut_EnterStands)
+        waitmovement(0)
+        removeobject(1)
+
+        msgbox(gText_WhyDidntYouRatMeOut_OhDoYouKnowThat,,SPEAKER_OLIVER)
+
+        msgbox(gText_WhyDidntYouRatMeOut_UhYeahWeMet,,SPEAKER_ALICIA)
+
+        msgbox(gText_WhyDidntYouRatMeOut_IMeantToTell,,SPEAKER_OLIVER)
+
+        closemessage
+        endcutscene
+        playse(SE_EXIT)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_SHARPRISE_STADIUM_SKYBOX,10,3)
+}
+
+script WhyDidntYouRatMeOut_LookAround {
+    turnobject(2, DIR_EAST)
+    turnobject(4, DIR_EAST)
+    turnobject(6, DIR_EAST)
+    turnobject(8, DIR_EAST)
+    delay(20)
+    turnobject(2, DIR_SOUTH)
+    turnobject(4, DIR_SOUTH)
+    turnobject(6, DIR_SOUTH)
+    turnobject(8, DIR_SOUTH)
+    delay(20)
+    turnobject(1, DIR_EAST)
+    turnobject(3, DIR_EAST)
+    turnobject(5, DIR_EAST)
+    turnobject(7, DIR_EAST)
+    delay(20)
+    turnobject(1, DIR_SOUTH)
+    turnobject(3, DIR_SOUTH)
+    turnobject(5, DIR_SOUTH)
+    turnobject(7, DIR_SOUTH)
+    delay(20)
+    return
+}
+
+script WhyDidntYouRatMeOut_WatchCharlotteMatches {
+    lockall
+    msgbox(gText_WhyDidntYouRatMeOut_WinsTheirGroup)
+    closemessage
+
+    call(WhyDidntYouRatMeOut_LookAround)
+
+    applymovement(7,WhyDidntYouRatMeOut_WalkUpToPlayer)
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    waitmovement(0)
+
+    msgbox(gText_WhyDidntYouRatMeOut_YourGroupIsNext,,SPEAKER_OLIVER)
+    closemessage
+
+    setvar(VAR_STORYLINE_STATE,STORY_CHARLOTTE_WON_GROUP)
+
+    call(TryAutoSave)
+    releaseall
+    end
+}
+
+text gText_WhyDidntYouRatMeOut_HeyWait {
+    format("Hey, {PLAYER}, wait.")
+}
+
+text gText_WhyDidntYouRatMeOut_CanWeTalk {
+    format("Can we talk for a second?")
+}
+
+text gText_WhyDidntYouRatMeOut_WhatDoYouWant {
+    format("What do you want?")
+}
+
+text gText_WhyDidntYouRatMeOut_IDidntThinkWed {
+    format("I didn't think we'd see each other here today.")
+}
+
+text gText_WhyDidntYouRatMeOut_IsSomethingWrongWith {
+    format("Is something wrong with your brain where you have to insult me every chance you get? I'm a better Trainer than you, of course I'm here.")
+}
+
+text gText_WhyDidntYouRatMeOut_ThatsNotWhatI {
+    format("That's not what I meant! ...I don't know what I meant. ")
+}
+
+text gText_WhyDidntYouRatMeOut_UhHuh {
+    format("Uh huh.")
+}
+
+text gText_WhyDidntYouRatMeOut_WhenYouWalkedIn {
+    format("When you walked in, I was actually just going to bail. Totally thought you were going to report me the first shot you got.")
+}
+
+text gText_WhyDidntYouRatMeOut_WhyDidntYou {
+    format("Why didn't you?")
+}
+
+text gText_WhyDidntYouRatMeOut_IStillHaventDecided {
+    format("I still haven't decided that I'm not.")
+}
+
+text gText_WhyDidntYouRatMeOut_WaitShit {
+    format("Wait shit -")
+}
+
+text gText_WhyDidntYouRatMeOut_NoCalmDown {
+    format("No, calm down. It's just... this is your home. And you obviously care about it. And I think that's what gives me pause with TheTide. I see people trying to do good things, and trying to help people... and then I see TheTide with all their bullshit, and it makes me wonder “How can they possibly support that?”")
+}
+
+text gText_WhyDidntYouRatMeOut_LookPlayer {
+    format("Look {PLAYER} -")
+}
+
+text gText_WhyDidntYouRatMeOut_NoYouLook {
+    format("No, you look. I think you feel like you need to fight here. I'm just here for me. And... I don't think it's my place to take that from you. Not like that.")
+}
+
+text gText_WhyDidntYouRatMeOut_WasNiceToMe4 {
+    format("(Adaora and Kai... even Alcmene was nice to me. What am I missing?)")
+}
+
+text gText_WhyDidntYouRatMeOut_ThankYouAndImSorry {
+    format("...Thank you. And I'm sorry I've been such an ass to you. You don't deserve that.")
+}
+
+text gText_WhyDidntYouRatMeOut_UhHuhLetsSeeHow {
+    format("Uh huh. Let's see how long this lasts.")
+}
+
+text gText_WhyDidntYouRatMeOut_NoSeriouslyItMeans {
+    format("No seriously, it means a lot... but I still have to crush you in the Championship. ")
+}
+
+text gText_WhyDidntYouRatMeOut_LikeEveryOtherTime {
+    format("Like every other time you've beaten me, right. Besides, we're not going to meet until the Finals. You're not even going to make it through Charlotte!")
+}
+
+text gText_WhyDidntYouRatMeOut_YouKnowThem {
+    format("You know them?")
+}
+
+text gText_WhyDidntYouRatMeOut_YeahTheyreIn {
+    format("Yeah, they're in the program with me. Insanely talented, and super smart. Good luck.")
+}
+
+text gText_WhyDidntYouRatMeOut_MyGroupIsStarting {
+    format("My group is starting soon. Later, cheater.")
+}
+
+text gText_WhyDidntYouRatMeOut_OhDoYouKnowThat {
+    format("Oh, do you know that Trainer, {PLAYER}?")
+}
+
+text gText_WhyDidntYouRatMeOut_UhYeahWeMet {
+    format("Uh… yeah, we met a few times.")
+}
+
+text gText_WhyDidntYouRatMeOut_IMeantToTell {
+    format("I meant to tell you earlier - the SharpriseCapital executives have a fully catered skybox to watch the Championship. We're about to watch Charlotte's group!")
+}
+
+text gText_WhyDidntYouRatMeOut_WinsTheirGroup {
+    format("And Charlotte wins their group, without losing a single Pokémon! What an incredible display of force from this Unovan superstar!")
+}
+
+text gText_WhyDidntYouRatMeOut_YourGroupIsNext {
+    format("Your group is up next! Head through the locker room and you'll reach the arena.  Good luck!")
+}
+
+movement WhyDidntYouRatMeOut_WalkToPlayerLeft {
+    walk_down
+        walk_right * 5
+        walk_down
+        step_end
+}
+
+movement WhyDidntYouRatMeOut_WalkToPlayerRight {
+    walk_down
+        walk_right * 6
+        walk_down
+        step_end
+}
+
+movement WhyDidntYouRatMeOut_WalkSlowlyUpStairsRight {
+    walk_slow_up * 6
+        face_left
+        step_end
+}
+movement WhyDidntYouRatMeOut_WalkSlowlyUpStairsLeft {
+    walk_slow_up * 6
+        face_right
+        step_end
+}
+
+movement WhyDidntYouRatMeOut_WalkBackward {
+    lock_facing_direction
+        walk_right
+        unlock_facing_direction
+        step_end
+}
+
+movement WhyDidntYouRatMeOut_LeaveStands {
+    walk_down * 6
+        step_end
+}
+movement WhyDidntYouRatMeOut_EnterStands {
+    walk_up * 3
+        walk_right
+        walk_up * 3
+        face_left
+        step_end
+}
+
+movement WhyDidntYouRatMeOut_WalkUpToPlayer {
+    walk_up * 3
+    face_left
+    step_end
+}

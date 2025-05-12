@@ -1,0 +1,258 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const EMRYS = 1
+const GUARD = 2
+
+const FLAG_HIDE_EMRYS = FLAG_TEMP_3
+const FLAG_HIDE_GUARD = FLAG_TEMP_2
+// gText_Alohafromalola_
+// Quest_Alohafromalola_
+
+script Quest_Alohafromalola_SetGuardPosition_Script{
+    returnqueststate(QUEST_ALOHAFROMALOLA)
+
+        if (var(VAR_RESULT) != QUEST_MENU_SET_ACTIVE && var(VAR_RESULT) != QUEST_MENU_SET_REWARD){
+            setflag(FLAG_HIDE_GUARD)
+        }
+}
+
+script Quest_Alohafromalola_GuardInteract_Script{
+    lock
+        returnqueststate(QUEST_ALOHAFROMALOLA)
+
+        if (var(VAR_RESULT) == QUEST_MENU_SET_ACTIVE){
+            msgbox(gText_Alohafromalola_WeArePreparing,,SPEAKER_GUARD)
+        }else{
+            msgbox(gText_Alohafromalola_TheresAPrivate,,SPEAKER_GUARD)
+                msgbox(gText_Alohafromalola_WaitICanPerform,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
+        }
+    closemessage
+        release
+        end
+}
+
+script Quest_Alohafromalola_HideLeader_Script{
+
+        if ((var(VAR_EMRYS_STATE) != BATTLE_1_COMPLETE))
+{
+            setflag(FLAG_HIDE_EMRYS)
+        }
+    return
+}
+
+//talk to emrys, gives you quest
+//come back at night, check your party for 3 alola mons
+//battle can be lost
+//if nighttiem and has 3 alola mons and no other mons, warp to an arena with hella people
+//warp back to lobby, give you set a z crystals
+//
+
+script Quest_Alohafromalola_Interact_Event_Script{
+    lock
+        faceplayer
+        returnqueststate(QUEST_ALOHAFROMALOLA)
+
+        if (var(VAR_RESULT) == QUEST_MENU_SET_ACTIVE){
+            goto(Quest_Alohafromalola_CheckTime_Script)
+        }else{
+            goto(Quest_Alohafromalola_StartQuest_Dialogue)
+        }
+}
+
+script Quest_Alohafromalola_StartQuest_Dialogue{
+        msgbox(gText_Alohafromalola_OhManIAm,,SPEAKER_EMRYS,TAIL_WHISPER,EMOTE_SAD)
+        msgbox(gText_Alohafromalola_OhPlayer,,SPEAKER_EMRYS,,EMOTE_SHOCK)
+        msgbox(gText_Alohafromalola_HeyThere,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+        msgbox(gText_Alohafromalola_ImSupposedTo,,SPEAKER_EMRYS,,EMOTE_ANGRY)
+        msgbox(gText_Alohafromalola_OhYouCan,,SPEAKER_EMRYS,TAIL_SHOUT,EMOTE_SHOCK)
+
+        msgbox(gText_Alohafromalola_ComeBackTonight,,SPEAKER_EMRYS,,EMOTE_HAPPY)
+        closemessage
+        startquest(QUEST_ALOHAFROMALOLA)
+        clearflag(FLAG_HIDE_GUARD)
+        addobject(GUARD)
+        release
+        end
+}
+
+script Quest_Alohafromalola_GenerateRandomZCrystal_Script{
+    additem(ITEM_Z_POWER_RING,1)
+        random(18)
+
+        switch(var(VAR_RESULT)){
+            case 0: additem(ITEM_BUGINIUM_Z,1)
+            case 1: additem(ITEM_DARKINIUM_Z,1)
+            case 2: additem(ITEM_DRAGONIUM_Z,1)
+            case 3: additem(ITEM_ELECTRIUM_Z,1)
+            case 4: additem(ITEM_FAIRIUM_Z,1)
+            case 5: additem(ITEM_FIGHTINIUM_Z,1)
+            case 6: additem(ITEM_FIRIUM_Z,1)
+            case 7: additem(ITEM_FLYINIUM_Z,1)
+            case 8: additem(ITEM_GHOSTIUM_Z,1)
+            case 9: additem(ITEM_GRASSIUM_Z,1)
+            case 10: additem(ITEM_GROUNDIUM_Z,1)
+            case 11: additem(ITEM_ICIUM_Z,1)
+            case 12: additem(ITEM_NORMALIUM_Z,1)
+            case 13: additem(ITEM_POISONIUM_Z,1)
+            case 14: additem(ITEM_PSYCHIUM_Z,1)
+            case 15: additem(ITEM_ROCKIUM_Z,1)
+            case 16: additem(ITEM_STEELIUM_Z,1)
+            case 17: additem(ITEM_WATERIUM_Z,1)
+        }
+    return
+}
+
+script Quest_Alohafromalola_CheckTime_Script{
+    gettime
+        if (var(VAR_0x8000) < 21 && (var(VAR_0x8000) > 5)) {
+            msgbox(gText_Alohafromalola_ComeBackTonight)
+                release
+                end
+        }
+    goto(Quest_Alohafromalola_CheckParty_Script)
+}
+
+script Quest_Alohafromalola_CheckParty_Script{
+    specialvar(VAR_RESULT, AlohaFromAlolaCheck)
+
+    //PSF TODO figure out a way to inform players about who is in the alola dex
+
+        if (var(VAR_RESULT) == TRUE){
+            goto(Quest_Alohafromalola_MoveToExhibition_Dialogue)
+        }
+        msgbox(gText_Alohafromalola_YourParty,,SPEAKER_EMRYS)
+        release
+        end
+}
+
+script Quest_Alohafromalola_MoveToExhibition_Dialogue{
+    msgbox(gText_Alohafromalola_PerfectDidYou,,SPEAKER_EMRYS,,EMOTE_HAPPY)
+        setvar(VAR_EMRYS_STATE,EXHIBITION_READY)
+        setflag(FLAG_HIDE_MAP_NAME_POPUP)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_PERLACIA_CITY_GYM,255,11,6)
+}
+
+script Quest_Alohafromalola_CreateCrowd_Script{
+    createvobject(OBJ_EVENT_GFX_WOMAN_5,5,11,3,3,DIR_EAST)
+        createvobject(OBJ_EVENT_GFX_WOMAN_5,6,11,4,3,DIR_EAST)
+        createvobject(OBJ_EVENT_GFX_WOMAN_5,7,11,5,3,DIR_EAST)
+        createvobject(OBJ_EVENT_GFX_WOMAN_5,8,11,6,3,DIR_EAST)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        waitmovement(PLAYER)
+        return
+}
+
+script Quest_Alohafromalola_SetLeaderPosition_Battle_Script{
+    if (var(VAR_EMRYS_STATE) == EXHIBITION_READY){
+        setobjectmovementtype(EMRYS,MOVEMENT_TYPE_FACE_LEFT)
+            setobjectxy(EMRYS,15,6)
+            setobjectxyperm(EMRYS,15,6)
+            return
+    }
+}
+
+script Quest_Alohafromalola_StartBattle_Dialogue{
+    //PSF TODO implement a fade FROM black before and after the warp
+        call(Quest_Alohafromalola_CreateCrowd_Script)
+        msgbox(gText_Alohafromalola_ThankYouAll,,SPEAKER_EMRYS,TAIL_SHOUT,EMOTE_HAPPY)
+        closemessage
+        applymovement(PLAYER,Common_Movement_WalkRight)
+        applymovement(EMRYS,Common_Movement_WalkLeft)
+        waitmovement(EMRYS)
+        //PSF TODO make sure they use a Z-Move here
+        setvar(VAR_EMRYS_STATE,EXHIBITION_COMPLETE)
+        trainerbattle_continue_after_lose(TRAINER_ALOHAFROMALOLA_EMRYS,gText_Alohafromalola_AndZMoves)
+        delay(60)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_PERLACIA_CITY_GYM_ENTRANCE,255,9,13)
+}
+
+script Quest_Alohafromalola_SetLeaderPosition_Thanks_Script{
+    if (var(VAR_EMRYS_STATE) == EXHIBITION_COMPLETE){
+        clearflag(FLAG_HIDE_EMRYS)
+        setobjectxy(EMRYS,9,12)
+        setobjectxyperm(EMRYS,9,12)
+        setobjectmovementtype(EMRYS,MOVEMENT_TYPE_FACE_DOWN)
+    }
+    return
+}
+
+script Quest_Alohafromalola_PostBattle_Script{
+        lock
+        clearflag(FLAG_HIDE_MAP_NAME_POPUP)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        msgbox(gText_Alohafromalola_YouWereGreat,,SPEAKER_EMRYS,,EMOTE_HAPPY)
+        msgbox(gText_Alohafromalola_IRealizeNowYouDont,,SPEAKER_EMRYS)
+        call(Quest_Alohafromalola_GenerateRandomZCrystal_Script)
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox(gText_Alohafromalola_EmrysGaveYou)
+        msgbox(gText_Alohafromalola_GoingToTheBar,,SPEAKER_EMRYS,,EMOTE_SWEAT)
+        closemessage
+        applymovement(EMRYS,Quest_Alohafromalola_WalkToExhibit_Movement)
+        fadescreen(FADE_TO_BLACK)
+        delay(15)
+        removeobject(EMRYS)
+        fadescreen(FADE_FROM_BLACK)
+
+        setvar(VAR_EMRYS_STATE,QUEST_1_COMPLETE)
+        completequest(QUEST_ALOHAFROMALOLA)
+        release
+        end
+}
+
+movement Quest_Alohafromalola_WalkToExhibit_Movement{
+    walk_up * 7
+        step_end
+}
+
+text gText_Alohafromalola_WeArePreparing{
+    format("We are preparing for a private exhibition opening. Please come back another time.")
+}
+text gText_Alohafromalola_TheresAPrivate{
+    format("There is a private exhibition opening tonight. Please come back another time.")
+}
+text gText_Alohafromalola_WaitICanPerform{
+    format("Wait, I can perform at the opening but I can't be there?")
+}
+text gText_Alohafromalola_OhManIAm{
+    format("Oh, this is an absolute mess. Worse than the blunder of Tohjo Falls, I'll say.")
+}
+text gText_Alohafromalola_OhPlayer{
+    format("Oh, {PLAYER}!")
+}
+text gText_Alohafromalola_HeyThere{
+    format("Hey Emrys, you seem... stressed?")
+}
+text gText_Alohafromalola_ImSupposedTo{
+    format("I'm supposed to have an exhibition battle against one of the Alola Island Kahunas tonight for the opening of our 'Aloha from Alola' exhibit. I just recived a call telling me they're cancelling! People were coming for a real battle demonstration, and I don't have a suitable substiute...")
+}
+text gText_Alohafromalola_OhYouCan{
+    format("Oh! You! You're skilled!")
+}
+text gText_Alohafromalola_ComeBackTonight{
+    format("Come back tonight, with 3 Pokémon that can be found in Alola. You'll have to do on such short notice!")
+}
+text gText_Alohafromalola_YourParty{
+    format("Your party needs to be 3 Pokémon, and only those that can be found in Alola. You can look at the exhibit posters around the lobby if you're unsure of what Pokémon are found there.")
+}
+text gText_Alohafromalola_PerfectDidYou{
+    format("Your party looks perfect, and your timing is excellent. Let's get in there!")
+}
+text gText_Alohafromalola_ThankYouAll{
+    format("Thank you all for attending our exhibition! For our finale, {PLAYER} has graceiously offered to battle against the Alolan might of Z-Moves!")
+}
+text gText_Alohafromalola_AndZMoves{
+    format("Not even Z-Moves can stop you!")
+}
+text gText_Alohafromalola_YouWereGreat{
+    format("You were astounding! Thank you so much.")
+}
+text gText_Alohafromalola_IRealizeNowYouDont{
+    format("You won even though we weren't on an even playing field... but you can take this! I can get another one.")
+}
+text gText_Alohafromalola_EmrysGaveYou{
+    format("{PLAYER} obtained a Z-Power Ring and a Z-Crystal!")
+}
+text gText_Alohafromalola_GoingToTheBar{
+    format("And now for some Alolan libations!")
+}

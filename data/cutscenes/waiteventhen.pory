@@ -1,0 +1,301 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+const ADAORA = 2
+const MAGNUS = 3
+const PKMNC = 6
+
+const FLAG_HIDE_SEARCH = FLAG_TEMP_1
+
+script WaitEvenThen_TurnOnMachine_Script {
+    setmetatile(32, 2, 0x2D8, TRUE)
+        setmetatile(33, 2, 0x2D9, TRUE)
+        setmetatile(34, 2, 0x2DA, TRUE)
+        setmetatile(35, 2, 0x2DB, TRUE)
+        setmetatile(32, 3, 0x2E0, TRUE)
+        setmetatile(33, 3, 0x2E1, TRUE)
+        setmetatile(34, 3, 0x2E2, TRUE)
+        setmetatile(35, 3, 0x2E3, TRUE)
+        special(DrawWholeMapView)
+}
+
+script WaitEvenThen_BossSetUp_Script {
+        clearflag(FLAG_HIDE_SEARCH)
+
+        addobject(ADAORA)
+        addobject(MAGNUS)
+        addobject(KAI)
+
+        setobjectmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_UP)
+        setobjectxyperm(MAGNUS,39,4)
+        setobjectxy(MAGNUS,39,4)
+
+        setobjectmovementtype(KAI,MOVEMENT_TYPE_FACE_UP)
+        setobjectxy(KAI,34,6)
+        setobjectxyperm(KAI,34,6)
+
+        setobjectmovementtype(ADAORA,MOVEMENT_TYPE_FACE_UP)
+        setobjectxy(ADAORA,33,7)
+        setobjectxyperm(ADAORA,33,7)
+
+        setobjectxy(PKMNC,33,5)
+        setobjectxyperm(PKMNC,33,5)
+}
+
+script WaitEvenThen_ObjectSetUp_Script {
+    fadescreen(FADE_TO_BLACK)
+
+        setobjectxy(PLAYER,25,4)
+        TeleportCamera(25,4)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+
+        clearflag(FLAG_HIDE_SEARCH)
+
+        addobject(KAI)
+        setobjectxy(KAI,25,5)
+        applymovement(KAI,Common_Movement_FaceRight)
+
+        addobject(ADAORA)
+        setobjectxy(ADAORA,24,4)
+        applymovement(ADAORA,Common_Movement_FaceRight)
+
+        addobject(MAGNUS)
+        setobjectxy(MAGNUS,24,5)
+        applymovement(MAGNUS,Common_Movement_FaceRight)
+
+        fadescreen(FADE_FROM_BLACK)
+}
+
+script WaitEvenThen_PrepareBossEncounter_Dialogue {
+    lock
+        call(WaitEvenThen_ObjectSetUp_Script)
+
+        applymovement(PLAYER,WaitEvenThen_WalkToSleepingA)
+        applymovement(KAI,WaitEvenThen_WalkToSleepingB)
+        applymovement(ADAORA,WaitEvenThen_WalkToSleepingC)
+        applymovement(MAGNUS,WaitEvenThen_WalkToSleepingD)
+        waitmovement(MAGNUS)
+
+        msgbox(gText_WaitEvenThen_IFoundTheAccess,,SPEAKER_MAGNUS)
+
+        msgbox(gText_WaitEvenThen_AndICanHandle,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        applymovement(MAGNUS,WaitEvenThen_WalkToComputer)
+        waitmovement(MAGNUS)
+
+        playse(SE_PC_LOGIN)
+        waitse
+        delay(10)
+        playse(SE_PC_ON)
+        waitse
+
+        call(WaitEvenThen_TurnOnMachine_Script)
+        applymovement(PKMNC,Common_Movement_WalkDown)
+
+        playmoncry(SPECIES_EXCADRILL,CRY_MODE_ENCOUNTER)
+        waitmoncry
+        setvar(VAR_PARC_STATE,SAVE_BEFORE_DYNAMAX)
+
+        msgbox(gText_IGuessWeShouldBeNiceNow_Roar,MSGBOX_AUTOCLOSE)
+
+        setobjectxy(KAI,34,6)
+        setobjectxyperm(KAI,34,6)
+        setobjectxy(ADAORA,33,7)
+        setobjectxyperm(ADAORA,33,7)
+        setobjectxyperm(MAGNUS,39,4)
+        setobjectxy(MAGNUS,39,4)
+        setobjectnewmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_UP)
+        startmenu_savescreen
+        goto(WaitEvenThen_BossEncounter_Script)
+}
+
+script WaitEvenThen_MovePlayerToBoss {
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+    if (var(VAR_TEMP_0) != 33 || (var(VAR_TEMP_1) != 6)){
+        fadescreen(FADE_TO_BLACK)
+        setobjectxy(PLAYER,33,6)
+        TeleportCamera(33,6)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        fadescreen(FADE_FROM_BLACK)
+    }
+        goto(WaitEvenThen_BossEncounter_Script)
+}
+
+script WaitEvenThen_BossEncounter_Script {
+    //PSF TODO Rewrite to have two pokemon OR make it a 1v1 battle instead
+                goto(WaitEvenThen_ClearBossPokemon_Script)
+    setwildbattle(SPECIES_EXCADRILL,70,ITEM_MUSCLE_BAND,SPECIES_NONE)
+        playmoncry(SPECIES_EXCADRILL,CRY_MODE_ENCOUNTER)
+        msgbox(gText_IGuessWeShouldBeNiceNow_Roar,MSGBOX_AUTOCLOSE)
+        delay(40)
+        waitmoncry
+        setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        multi_fixed_wild(PARTNER_STEVEN)
+        clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+        specialvar(VAR_RESULT, GetBattleOutcome)
+        switch (var (VAR_RESULT)) {
+            case B_OUTCOME_CAUGHT:
+            case B_OUTCOME_WON:
+                goto(WaitEvenThen_ClearBossPokemon_Script)
+        }
+    release
+        end
+}
+
+script WaitEvenThen_ClearBossPokemon_Script
+{
+        setvar(VAR_PARC_STATE,DEFEATED_DYNAMAX)
+
+        lock
+        startcutscene(JUMPPLAYER_WAITEVENTHEN)
+        closemessage
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        removeobject(PKMNC)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        goto(WaitEvenThen_PostBossDialogue)
+}
+
+script WaitEvenThen_PostBossDialogue {
+    lock
+
+        setvar(VAR_STORYLINE_STATE,STORY_POST_DYNAMAX_BOSS)
+        setvar(VAR_HALAI_ISLAND_STATE,POST_THIS_ISNT_RANDOM)
+
+        applymovement(PLAYER,Common_Movement_FaceDown)
+        applymovement(KAI,Common_Movement_FaceDown)
+        applymovement(MAGNUS,Common_Movement_FaceDown)
+
+        msgbox(gText_WaitEvenThen_DamnAPowerSpot,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WaitEvenThen_AndTheGovernment,,SPEAKER_MAGNUS)
+
+        msgbox(gText_WaitEvenThen_IllHaveSomeOther,,SPEAKER_ADAORA)
+
+        closemessage
+
+        applymovement(MAGNUS,WaitEvenThen_LeaveLabA)
+        applymovement(ADAORA,WaitEvenThen_LeaveLabB)
+        waitmovement(ADAORA)
+
+        applymovement(KAI,Common_Movement_FaceLeft)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+
+        msgbox(gText_WaitEvenThen_ComingWithMe,MSGBOX_YESNO,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        if (var(VAR_RESULT) == YES){
+        fadeblackandsetremovewarpfadeflag
+            warp(MAP_HALAI_ISLAND,255,34,13)
+                end
+        }else {
+                msgbox(gText_WaitEvenThen_MeetUsIn,,SPEAKER_KAI_TIDE)
+                closemessage
+
+                applymovement(KAI,WaitEvenThen_WalkAwayFromPlayer)
+                waitmovement(KAI)
+
+                removeobject(KAI)
+                removeobject(MAGNUS)
+                removeobject(ADAORA)
+        }
+        call(TryAutoSave)
+    endcutscene
+    release
+        end
+}
+
+text gText_WaitEvenThen_IFoundTheAccess {
+    format("I found the access commands. I think I can turn this off, but I’m certain that it's going to attack us when we do.")
+}
+
+text gText_WaitEvenThen_AndICanHandle {
+    format("{PLAYER} and I can handle it. Let it rip!")
+}
+
+text gText_WaitEvenThen_Yerrrraaaa {
+    format("Yerrrraaaaaa!")
+}
+
+text gText_WaitEvenThen_DamnAPowerSpot {
+    format("Damn, a Power Spot, all the way out here?")
+}
+
+text gText_WaitEvenThen_AndTheGovernment {
+    format("Between SharpriseCapital and the government, I guess nothing is off limits.")
+}
+
+text gText_WaitEvenThen_IllHaveSomeOther {
+    format("I’ll have some other TheTide members clear out the rest of the trapped Pokémon… Let’s go back to HalaiIsland.")
+}
+
+text gText_WaitEvenThen_ComingWithMe {
+    format("Coming with me, {PLAYER}?")
+}
+
+text gText_WaitEvenThen_MeetUsIn {
+    format("Meet us in the center of town, okay?")
+}
+
+movement WaitEvenThen_WalkToSleepingA {
+    walk_right * 6
+        walk_down * 2
+        walk_right * 2
+        face_up
+        step_end
+}
+
+movement WaitEvenThen_WalkToSleepingB {
+    walk_right * 6
+        walk_down
+        walk_right * 3
+        face_up
+        step_end
+}
+
+movement WaitEvenThen_WalkToSleepingC {
+    walk_right * 7
+        walk_down * 3
+        walk_right * 2
+        face_up
+        step_end
+}
+
+movement WaitEvenThen_WalkToSleepingD {
+    walk_right * 7
+        walk_down * 2
+        walk_right * 3
+        face_up
+        step_end
+}
+
+movement WaitEvenThen_WalkToComputer {
+    walk_right
+        walk_up
+        walk_right * 2
+        walk_up * 2
+        walk_right * 2
+        face_up
+        step_end
+}
+
+movement WaitEvenThen_LeaveLabA {
+    walk_down * 2
+        walk_left * 14
+        step_end
+}
+
+movement WaitEvenThen_LeaveLabB {
+    walk_left * 6
+        walk_up * 3
+        walk_left * 4
+        step_end
+}
+
+movement WaitEvenThen_WalkAwayFromPlayer {
+    walk_up
+        walk_left * 9
+        step_end
+}

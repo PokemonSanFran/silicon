@@ -1,0 +1,226 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const OLIVER = 2
+const FLAG_HIDE_OLIVER_CHARLOTTE = FLAG_TEMP_1
+
+script OffYouGo_ObjectCleanUp_Script {
+    if (var(VAR_GOLDENGATEBRIDGE_STATE) != CALLED_BY_CHARLOTTE){
+        setflag(FLAG_HIDE_OLIVER_CHARLOTTE)
+    }
+    return
+}
+
+script OffYouGo_WarpPlayer_Script{
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+    if (var(VAR_TEMP_1) < 11 && (var(VAR_GOLDENGATEBRIDGE_STATE) < POST_OFF_YOU_GO)){
+        fadescreen(FADE_TO_BLACK)
+        setobjectxy(PLAYER,16,11)
+        turnobject(PLAYER,DIR_NORTH)
+        TeleportCamera(16,11)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        fadescreen(FADE_FROM_BLACK)
+        goto(OffYouGo_WelcomeParty_Dialogue)
+    }
+    return
+}
+
+
+script OffYouGo_WakeUp_Dialogue {
+    //PSF TODO alter clock so that the screen stays black
+        startcutscene(JUMPPLAYER_OFFYOUGO_PHONE)
+        setvar(VAR_GOLDENGATEBRIDGE_STATE,CALLED_BY_CHARLOTTE)
+        setvar(VAR_STORYLINE_STATE,STORY_ASSIGNED_ARMANDO_QUESTS)
+        playse(SE_POKENAV_CALL)
+        waitse
+        playse(SE_POKENAV_CALL)
+        waitmessage
+        msgbox(gText_OffYouGo_HuhHello,,SPEAKER_ALICIA,,PHONE_ON)
+
+        msgbox(gText_OffYouGo_HeyWhereAreYou,,SPEAKER_CHARLOTTE,,PHONE_ON)
+
+        msgbox(gText_OffYouGo_YeahImInBed,,SPEAKER_ALICIA,,PHONE_ON)
+
+        msgbox(gText_OffYouGo_ComeOnGetUp,,SPEAKER_CHARLOTTE,,PHONE_ON)
+
+        msgbox(gText_OffYouGo_WaitingForMe,,SPEAKER_ALICIA,,PHONE_ON)
+
+        closemessage
+
+        //TODO PSF Mockup a SMS on the screen
+        msgbox(gText_OffYouGo_PleaseMeetMeOn)
+
+        msgbox(gText_OffYouGo_IllBeRightOver,,SPEAKER_CHARLOTTE,,PHONE_ON)
+
+        msgbox(gText_OffYouGo_YeahIDidntSee,,SPEAKER_ALICIA)
+
+        msgbox(gText_OffYouGo_UghFine,,SPEAKER_CHARLOTTE)
+
+        closemessage
+
+        playse(SE_POKENAV_HANG_UP)
+        waitse
+
+        msgbox(gText_OffYouGo_HowAreTheyAlways,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+        closemessage
+        call(TryAutoSave)
+        endcutscene
+}
+
+script OffYouGo_WelcomeParty_Dialogue {
+
+        setvar(VAR_GOLDENGATEBRIDGE_STATE,POST_OFF_YOU_GO)
+        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,CHARLOTTE_INSIDE_TUNNEL)
+        startcutscene(JUMPPLAYER_OFFYOUGO_BRIDGE)
+
+        msgbox(gText_OffYouGo_WelcomeToTheParty,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_OffYouGo_HonestlyItsFine,,SPEAKER_OLIVER)
+
+        msgbox(gText_OffYouGo_NeitherWasI,,SPEAKER_ALICIA)
+
+        msgbox(gText_OffYouGo_WellYoureBothHere,,SPEAKER_OLIVER)
+
+        closemessage
+
+        applymovement(CHARLOTTE,Common_Movement_FaceRight)
+        waitmovement(CHARLOTTE)
+
+        msgbox(gText_OffYouGo_ThanksButWho,,SPEAKER_CHARLOTTE)
+
+        closemessage
+
+        applymovement(OLIVER,Common_Movement_FaceLeft)
+        waitmovement(OLIVER)
+
+        msgbox(gText_OffYouGo_AsYesYoureNot,,SPEAKER_OLIVER)
+
+        msgbox(gText_OffYouGo_SoWhereIs,,SPEAKER_CHARLOTTE)
+
+        msgbox(gText_OffYouGo_AhYesWellTheyHave,,SPEAKER_OLIVER)
+
+        msgbox(gText_OffYouGo_WeirdOkay,,SPEAKER_CHARLOTTE)
+
+        closemessage
+
+        applymovement(CHARLOTTE,Common_Movement_FaceUp)
+        waitmovement(CHARLOTTE)
+        applymovement(OLIVER, Common_Movement_FaceUp)
+        applymovement(CHARLOTTE,OffYouGo_WalkNorth)
+        waitmovement(CHARLOTTE)
+        playse(SE_EXIT)
+        waitse
+        removeobject(CHARLOTTE)
+
+        msgbox(gText_OffYouGo_OhWait,,SPEAKER_OLIVER)
+
+        closemessage
+
+        applymovement(OLIVER,Common_Movement_FaceDown)
+        waitmovement(OLIVER)
+
+        msgbox(gText_OffYouGo_IDoWishThey,,SPEAKER_OLIVER)
+
+        msgbox(gText_OffYouGo_IllHurrySo,,SPEAKER_ALICIA)
+
+        msgbox(gText_OffYouGo_GoodLuck,,SPEAKER_OLIVER)
+
+        closemessage
+        call(TryAutoSave)
+        endcutscene
+
+        releaseall
+        end
+}
+
+script OffYouGo_InteractOliver_Event_Script {
+    lockall
+        call(OffYouGo_WarpPlayer_Script)
+        msgbox(gText_OffYouGo_ItMightBeAGood,MSGBOX_NPC,SPEAKER_OLIVER)
+
+        closemessage
+        releaseall
+        end
+}
+
+movement OffYouGo_WalkNorth {
+    walk_up * 4
+        step_end
+}
+
+text gText_OffYouGo_RingRing {
+    format("Ring ring…")
+}
+text gText_OffYouGo_HuhHello {
+    format("Huh? Hello?")
+}
+text gText_OffYouGo_HeyWhereAreYou {
+    format("Hey, where are you? Are you still asleep?")
+}
+text gText_OffYouGo_YeahImInBed {
+    format("…yeah, I'm in bed.")
+}
+text gText_OffYouGo_ComeOnGetUp {
+    format("Come on get up, didn't you see Oliver's text? We're waiting for you!")
+}
+text gText_OffYouGo_WaitingForMe {
+    format("Waiting for me…? Hold on, let me read…")
+}
+text gText_OffYouGo_PleaseMeetMeOn {
+    format("Oliver: {PLAYER} and Charlotte, please meet me on the northern side of PiocaBridge. (32 mins ago)")
+}
+text gText_OffYouGo_IllBeRightOver {
+    format("Charlotte: I'll be right over! (31 mins ago)")
+}
+text gText_OffYouGo_YeahIDidntSee {
+    format("Yeah, I didn't see that. I guess I'm on my way.")
+}
+text gText_OffYouGo_UghFine {
+    format("Ugh, fine, get your ass down here!")
+}
+text gText_OffYouGo_HowAreTheyAlways {
+    format("(How are they always up so early…?)")
+}
+text gText_OffYouGo_WelcomeToTheParty {
+    format("Welcome to the party, sleepyhead.")
+}
+text gText_OffYouGo_HonestlyItsFine {
+    format("Honestly {PLAYER}, it's fine. I wasn't expecting Charlotte to be awake so early!")
+}
+text gText_OffYouGo_NeitherWasI {
+    format("…neither was I.")
+}
+text gText_OffYouGo_WellYoureBothHere {
+    format("Well, you're both here now. As you may have guessed, the construction delays are going to delay the Championship by a few weeks. Rather than kill your momentum now, Armando has agreed to train you both, and SharpriseCapital will be footing the bill.")
+}
+text gText_OffYouGo_ThanksButWho {
+    format("Thanks but - who the hell is that?")
+}
+text gText_OffYouGo_AsYesYoureNot {
+    format("Ah yes, you're not from here. Armando is one of the members of the disbanded Resido Elite Four. A powerful trainer indeed, and we think this is an excellent opportunity for you both.")
+}
+text gText_OffYouGo_SoWhereIs {
+    format("So, where is this dude?")
+}
+text gText_OffYouGo_AhYesWellTheyHave {
+    format("Ah yes, well, they have… unconventional training methods. In the middle of LanjingTunnel, you'll find a pathway leading underground where Armando has hidden their notebook. Once you get it, you'll get your next instructions.")
+}
+text gText_OffYouGo_WeirdOkay {
+    format("Weird. Okay. Sounds easy enough, though. Let's make a race of it!")
+}
+text gText_OffYouGo_OhWait {
+    format("Oh wait!")
+}
+text gText_OffYouGo_IDoWishThey {
+    format("I do wish they'd slow down just a little… two more things, {PLAYER}. First, the training requires teamwork. Charlotte is going to get stuck without you pretty quickly. Second, there's very little cell service in LanjingTunnel and LeaverraForest. And now that they're already inside, I can't message them. So can you fill them in?")
+}
+text gText_OffYouGo_IllHurrySo {
+    format("Haha, yeah. I'll hurry so they're not waiting too long!")
+}
+text gText_OffYouGo_GoodLuck {
+    format("Good luck!")
+}
+text gText_OffYouGo_ItMightBeAGood {
+    format("It might be a good idea to stock up before you go in. I know the training is extensive, but there is a town, EspuleeOutskirts, after LanjingTunnel. ")
+}

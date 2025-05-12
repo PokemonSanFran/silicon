@@ -1,0 +1,677 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+const MAGNUS = 2
+const TALA = 3
+const GARBODOR = 4
+const KAI_OUTSIDE = 10
+
+const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_ELITES_1 = FLAG_TEMP_2
+const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
+const FLAG_HIDE_ARMANDO = FLAG_TEMP_5
+const FLAG_HIDE_ALCMENE = FLAG_TEMP_6
+const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
+const FLAG_HIDE_ELLEN = FLAG_TEMP_8
+const FLAG_HIDE_ARIANNA = FLAG_TEMP_9
+
+//gText_YouRealizeTheyreEvilRight_
+//YouRealizeTheyreEvilRight_
+
+script YouRealizeTheyreEvilRight_HideObject_Script {
+    if (var(VAR_ARANTRAZ_STATE) != KAI_SUMMONED_ARANTRAZ && var(VAR_ARANTRAZ_STATE) != POST_ARRIVE_ARANTRAZ){
+        setflag(FLAG_HIDE_KAI)
+    }
+    return
+}
+
+script YouRealizeTheyreEvilRight_HideGarbodor_Script {
+    setflag(FLAG_HIDE_GARBODOR)
+    return
+}
+
+script YouRealizeTheyreEvilRight_HideBasement_Script {
+    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_ELITES_1)
+    setflag(FLAG_HIDE_GARBODOR)
+    setflag(FLAG_HIDE_ARMANDO)
+    setflag(FLAG_HIDE_ALCMENE)
+    setflag(FLAG_HIDE_GRUNTS)
+    setflag(FLAG_HIDE_ELLEN)
+    setflag(FLAG_HIDE_ARIANNA)
+    return
+}
+
+script YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script {
+    setflag(FLAG_HIDE_GARBODOR)
+    setflag(FLAG_HIDE_ARMANDO)
+    setflag(FLAG_HIDE_ALCMENE)
+    setflag(FLAG_HIDE_GRUNTS)
+    setflag(FLAG_HIDE_ELLEN)
+    setflag(FLAG_HIDE_ARIANNA)
+    return
+}
+
+script YouRealizeTheyreEvilRight_CallPlayer_Dialogue {
+    lock
+        startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_PHONE)
+        setvar(VAR_ARANTRAZ_STATE,KAI_SUMMONED_ARANTRAZ)
+        clearflag(FLAG_KAI_CALL_ARANTRAZ)
+        msgbox(gText_YouRealizeTheyreEvilRight_HolyShit,,SPEAKER_ALICIA)
+
+        call(Common_EventScript_PhoneRinging)
+        special(YouRealizeTheyreEvilRight_GetMapForCompletedRestoration)
+        msgbox(gText_YouRealizeTheyreEvilRight_AwesomeJobIn,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_TheyDontLove,,SPEAKER_ALICIA,,,PHONE_ON)
+
+        closemessage
+
+        fadescreen(FADE_TO_BLACK)
+        delay(30)
+        fadescreen(FADE_FROM_BLACK)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_YouSeemSurprised,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_YoureNot,,SPEAKER_ALICIA,,,PHONE_ON)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_IveBeenTrying,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_WhatDoYouMean,,SPEAKER_ALICIA,,,PHONE_ON)
+
+        questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HANG20)
+        if (var(VAR_RESULT)){
+            msgbox(gText_YouRealizeTheyreEvilRight_YoullNeedToCross,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        } else {
+            msgbox(gText_YouRealizeTheyreEvilRight_IWannaShowYou,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        }
+    playse(SE_POKENAV_HANG_UP)
+        waitse
+
+        msgbox(gText_YouRealizeTheyreEvilRight_IDontKnowIf,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+        closemessage
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script YouRealizeTheyreEvilRight_PlayerLandedDialogue {
+    lock
+        setvar(VAR_ARANTRAZ_STATE,POST_ARRIVE_ARANTRAZ)
+        playse(SE_POKENAV_CALL)
+        waitse
+        playse(SE_POKENAV_CALL)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_ImHereWhere,,SPEAKER_ALICIA,,,PHONE_ON)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_SwimAroundThe,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+
+        closemessage
+
+        playse(SE_POKENAV_HANG_UP)
+        waitse
+        release
+        end
+}
+
+script YouRealizeTheyreEvilRight_InteractKai {
+    lock
+        setvar(VAR_ARANTRAZ_STATE,PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT)
+        msgbox(gText_YouRealizeTheyreEvilRight_WelcomeToTheReal,MSGBOX_NPC,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        applymovement(KAI_OUTSIDE,Common_Movement_WalkUp)
+        waitmovement(0)
+        playse(SE_EXIT)
+        waitse
+        removeobject(KAI_OUTSIDE)
+        call(TryAutoSave)
+        release
+        end
+}
+
+script YouRealizeTheyreEvil_Ghost1_Battle_Script{
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_A, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost1_Battle_Script)
+        msgbox(gText_YouRealizeTheyreEvilRight_WhileArantraz,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        end
+}
+
+script YouRealizeTheyreEvil_Ghost2_Battle_Script{
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_B, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost2_Battle_Script)
+        msgbox(gText_YouRealizeTheyreEvilRight_AsThePrisonPopulation,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        end
+}
+
+script YouRealizeTheyreEvil_Ghost3_Battle_Script{
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_C, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost3_Battle_Script)
+        msgbox(gText_YouRealizeTheyreEvilRight_TheInmateWasAlso,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        end
+}
+
+script YouRealizeTheyreEvil_Ghost4_Battle_Script{
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_D, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost4_Battle_Script)
+        msgbox(gText_YouRealizeTheyreEvilRight_TheProtests,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        end
+}
+
+script YouRealizeTheyreEvilRight_RemoveGhost {
+    lock
+        closemessage
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        removeobject(VAR_LAST_TALKED)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        release
+        end
+}
+
+script YouRealizeTheyreEvil_ReleaseGarbodor_Script {
+    applymovement(KAI,YouRealizeTheyreEvilRight_StepBackward)
+        waitmovement(0)
+
+        playse(SE_BALL_OPEN)
+        waitse
+        clearflag(FLAG_HIDE_GARBODOR)
+        addobject(GARBODOR)
+        playmoncry(SPECIES_GARBODOR, CRY_MODE_ENCOUNTER)
+        waitmoncry
+        playse(SE_SHINY)
+        waitse
+}
+
+script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
+    lock
+        startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND)
+        applymovement(PLAYER,YouRealizeTheyreEvilRight_WalkToGroup)
+        waitmovement(0)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_TheChampionHasArrived,,SPEAKER_MAGNUS)
+        reveal(REVEAL_MAGNUS)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_NiceToMeetYou,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_HasBeenUsing,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        playse(SE_PIN)
+        applymovement(TALA,Common_Movement_ExclamationMark)
+        applymovement(MAGNUS,Common_Movement_ExclamationMark)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_WowSuperResourceful,,SPEAKER_MAGNUS)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_ICanFinallyProve,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_DidYouDragMe,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_YesWaitNo,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_DoesntDoAnythingForThis,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_ICanProve,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_How,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_Look,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        call(YouRealizeTheyreEvil_ReleaseGarbodor_Script)
+        applymovement(MAGNUS,Common_Movement_FaceLeft)
+        applymovement(TALA,Common_Movement_FaceUp)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_ThisIsOne,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_IHadToGo,,SPEAKER_ALICIA)
+
+        msgbox(YouRealizeTheyreEvilRight_IBetYouLlThinkDifferentlyAfter,,SPEAKER_KAI_TIDE)
+
+        msgbox(YouRealizeTheyreEvilRight_IReallyDoubtIt,,SPEAKER_ALICIA)
+		closemessage
+
+		applymovement(MAGNUS,Common_Movement_FaceLeft)
+		applymovement(PLAYER,Common_Movement_FaceRight)
+		waitmovement(PLAYER)
+
+        msgbox(YouRealizeTheyreEvilRight_PlayerIPromiseItWill,,SPEAKER_MAGNUS)
+
+        fadescreen(FADE_TO_BLACK)
+        callnative(ShowGarbodor)
+        waitstate
+        goto(YouRealizeTheyreEvilRight_GemDiscovery_Dialogue)
+}
+
+script YouRealizeTheyreEvilRight_GemDiscovery_Dialogue
+{
+        msgbox(YouRealizeTheyreEvilRight_IsThatARock,,SPEAKER_ALICIA)
+
+        msgbox(YouRealizeTheyreEvilRight_CloseItsAGem,,SPEAKER_KAI_TIDE)
+
+        msgbox(YouRealizeTheyreEvilRight_WhatNoWayAdelaide,,SPEAKER_ALICIA)
+
+        msgbox(YouRealizeTheyreEvilRight_IveHadTheOpportunityToSee,,SPEAKER_MAGNUS)
+
+        msgbox(YouRealizeTheyreEvilRight_WhileIWasKeepingAnEye,,SPEAKER_KAI_TIDE)
+
+        msgbox(YouRealizeTheyreEvilRight_AdelaideConfirmedThat,,SPEAKER_ALICIA)
+
+    msgbox(gText_YouRealizeTheyreEvilRight_IsIf,,SPEAKER_TALA)
+    goto(YouRealizeTheyreEvilRight_Framing_Dialogue)
+}
+
+script YouRealizeTheyreEvilRight_Framing_Dialogue {
+        setvar(VAR_ARANTRAZ_STATE,POST_YOU_REALIZE_THEYRE_EVIL_RIGHT)
+        msgbox(gText_YouRealizeTheyreEvilRight_HasBeenFramingYou,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_YouAlsoMetUp,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_ButAdaoraSaid,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_YeahNobodyKnows,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_WhyWhyDoAll,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_CantArgueWithThat,,SPEAKER_TALA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_IJoinedThe,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_AndThatsWhyWere,,SPEAKER_TALA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_YepIThinkItsFinally,,SPEAKER_KAI_TIDE)
+
+        closemessage
+        goto(YouRealizeTheyreEvilRight_InnerMonologue_Dialogue)
+}
+
+script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
+    applymovement(KAI,YouRealizeTheyreEvilRight_WalkAroundToPlayer)
+    waitmovement(0)
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    waitmovement(0)
+
+    msgbox(gText_YouRealizeTheyreEvilRight_LookIKnowThis,,SPEAKER_KAI_TIDE)
+    closemessage
+
+    fadescreen(FADE_TO_BLACK)
+    msgbox(gText_YouRealizeTheyreEvilRight_ShouldIJoin,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(gText_YouRealizeTheyreEvilRight_JoiningThemMeansGoingDeeper,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(gText_YouRealizeTheyreEvilRight_ButTheirCauseIsJust,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(gText_YouRealizeTheyreEvilRight_ButAtWhatCost,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(gText_YouRealizeTheyreEvilRight_CantDoIt,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(gText_YouRealizeTheyreEvilRight_MakingTheRightChoice,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+    fadescreen(FADE_FROM_BLACK)
+    goto(YouRealizeTheyreEvilRight_Confront_Dialogue)
+}
+
+script YouRealizeTheyreEvilRight_Confront_Dialogue{
+    msgbox(gText_YouRealizeTheyreEvilRight_SorryIfThisDisappointsYouAll,,SPEAKER_ALICIA)
+    closemessage
+    playse(SE_PIN)
+    applymovement(MAGNUS,Common_Movement_ExclamationMark)
+    applymovement(TALA,Common_Movement_ExclamationMark)
+    applymovement(KAI,Common_Movement_ExclamationMark)
+    waitmovement(KAI)
+    applymovement(TALA,Common_Movement_FacePlayer)
+    waitmovement(TALA)
+    msgbox(gText_YouRealizeTheyreEvilRight_WaitWhat,,SPEAKER_KAI_TIDE,,EMOTE_SHOCK)
+    msgbox(gText_YouRealizeTheyreEvilRight_WowWasWrong,,SPEAKER_TALA,TAIL_WHISPER,EMOTE_SAD)
+    msgbox(gText_YouRealizeTheyreEvilRight_DontYouUnderstand,,SPEAKER_KAI_TIDE,,EMOTE_ANGRY)
+    msgbox(gText_YouRealizeTheyreEvilRight_JustBecause,,SPEAKER_ALICIA,,EMOTE_ANGRY)
+    msgbox(gText_YouRealizeTheyreEvilRight_CouldntHackIt,,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(gText_YouRealizeTheyreEvilRight_TheyreNot,,SPEAKER_MAGNUS)
+    closemessage
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    waitmovement(PLAYER)
+    msgbox(gText_YouRealizeTheyreEvilRight_TheresNothingToGet,,SPEAKER_ALICIA)
+    closemessage
+    applymovement(PLAYER,Common_Movement_WalkDown)
+        fadeblackandsetremovewarpfadeflag
+    warp(MAP_ARANTRAZ,39,14)
+    waitstate
+    release
+    end
+}
+
+script YouRealizeTheyreEvilRight_PreventPlayer_Script{
+    if (!flag(FLAG_TIMELINE_TIMETRAVEL)){
+        lock
+        msgbox(gText_YouRealizeTheyreEvilRight_ThisIsntWhere,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        closemessage
+        applymovement(PLAYER,Common_Movement_WalkUp)
+        waitmovement(PLAYER)
+    }
+    release
+        end
+}
+
+script YouRealizeTheyreEvilRight_CantSleep_Script{
+    if (var(VAR_ARANTRAZ_STATE) > BATTLED_TALA && (var(VAR_ARANTRAZ_STATE) < POST_YOU_REALIZE_THEYRE_EVIL_RIGHT)){
+        call(YouRealizeTheyreEvilRight_CantSleep_Dialogue)
+    }
+    return
+}
+
+script YouRealizeTheyreEvilRight_CantSleep_Dialogue {
+        msgbox(gText_YouRealizeTheyreEvilRight_IsStillWaiting,,SPEAKER_ALICIA)
+
+        closemessage
+        release
+        end
+}
+
+script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
+    fadescreen(FADE_FROM_BLACK)
+    setvar(VAR_STORYLINE_STATE,STORY_MORNING_OF_TIMELINE_SPLIT)
+
+    applymovement(PLAYER,OkayLetsFixIt_PaceNightmare)
+    waitmovement(0)
+
+    if (flag(FLAG_TIMELINE_TIMETRAVEL)){
+        lock
+            msgbox(gText_OkayLetsFixIt_WhatTheHell,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+            msgbox(gText_OkayLetsFixIt_WasThatReal,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+            msgbox(gText_OkayLetsFixIt_WhatIfIt,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
+            msgbox(gText_OkayLetsFixIt_IRememberI,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    }else{
+
+        msgbox(gText_YouRealizeTheyreEvilRight_ICantBelieveIAlmost,,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(gText_YouRealizeTheyreEvilRight_AndTheyWantToHelp,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
+            msgbox(gText_YouRealizeTheyreEvilRight_ImGoingToBeOn,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    }
+closemessage
+        call(TryAutoSave)
+    release
+    end
+}
+
+text gText_YouRealizeTheyreEvilRight_HolyShit {
+format("Holy shit. That was intense. Guess I need to think all this over, but something isn't adding up.")
+}
+text gText_YouRealizeTheyreEvilRight_AwesomeJobIn {
+format("Awesome job in {STR_VAR_1}. I heard all about it, and I'm so happy things are getting off the ground. I heard you got a phone call and disappeared. Everything okay?")
+}
+text gText_YouRealizeTheyreEvilRight_TheyDontLove {
+format("SharpriseCapital called me. They don't love our project.")
+}
+text gText_YouRealizeTheyreEvilRight_YouSeemSurprised {
+format("You seem surprised.")
+}
+text gText_YouRealizeTheyreEvilRight_YoureNot {
+format("You're not?")
+}
+text gText_YouRealizeTheyreEvilRight_IveBeenTrying {
+format("I've been trying to tell you the whole time, these guys are ruthless. Cruel, even. Good timing though, I think I can finally explain everything to you.")
+}
+text gText_YouRealizeTheyreEvilRight_WhatDoYouMean {
+format("What do you mean?")
+}
+text gText_YouRealizeTheyreEvilRight_IWannaShowYou {
+format("I wanna show you instead. Come to Arantraz.")
+}
+text gText_YouRealizeTheyreEvilRight_YoullNeedToCross {
+format("I wanna show you but you'll need to cross some water to get here. You know how to use {STR_VAR_1}, right? No? You can learn pretty quickly at the Cresalta Vista beach, and then meet me on Arantraz.")
+}
+text gText_YouRealizeTheyreEvilRight_IDontKnowIf {
+format("(I don't know if I can afford to get pulled any deeper into this…)")
+}
+text gText_YouRealizeTheyreEvilRight_ImHereWhere {
+format("I'm here! Where are you?")
+}
+text gText_YouRealizeTheyreEvilRight_SwimAroundThe {
+format("Come swim around the northeast side of the island! You'll see me.")
+}
+text gText_YouRealizeTheyreEvilRight_WelcomeToTheReal {
+format("Welcome to the real Arantraz. I'm going down to the second level, but you should explore here first before coming straight down.")
+}
+text gText_YouRealizeTheyreEvilRight_DotDotDot {
+format("…")
+}
+text gText_YouRealizeTheyreEvilRight_WhileArantraz {
+format("While Arantraz was a prison, it was absolutely not a state of the art facility - rather, criminals deemed “dangerous” were thrown into Arantraz with little regard for health, rehabilitation, or even due process of law, with a preponderance of marginalized communities being locked away. ")
+}
+text gText_YouRealizeTheyreEvilRight_AsThePrisonPopulation {
+format("As the prison population grew, pressure mounted both internally and externally in order to demand a better quality of life for the prisoners.  The prison riot that started the occupation of the island came from an out of control guard killing an inmate for a minor violation. ")
+}
+text gText_YouRealizeTheyreEvilRight_TheInmateWasAlso {
+format("The inmate was also a member of Resido's indigenous population, killed on the land that was stolen from their ancestors. The occupation called for the dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land back to its original owners.")
+}
+text gText_YouRealizeTheyreEvilRight_TheProtests {
+format("The protests gained national attention and seemed to be gathering interest, particularly with the help of Magnus's support, and pressure mounted on the government to comply. At the height of tension, an earthquake broke out, destroying a large portion of the prison and killing inmates and guards and effectively ending the occupation. ")
+}
+text gText_YouRealizeTheyreEvilRight_TheChampionHasArrived {
+format("The Champion has arrived! Great to meet you, I'm Magnus, and I'm the leader of the Resido Elite Four. Or, I was. Now I'm not really sure what I do.")
+}
+text gText_YouRealizeTheyreEvilRight_NiceToMeetYou {
+format("Nice to meet you! …Kai, where are we?")
+}
+text gText_YouRealizeTheyreEvilRight_HasBeenUsing {
+format("TheTide has been using Arantraz's abandoned prison as a training ground.")
+}
+text gText_YouRealizeTheyreEvilRight_WowSuperResourceful {
+format("Wow! Super resourceful. Genius, even.")
+}
+text gText_YouRealizeTheyreEvilRight_ICanFinallyProve {
+format("I can finally prove that SharpriseCapital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit.")
+}
+text gText_YouRealizeTheyreEvilRight_DidYouDragMe {
+format("Did you drag me out here to join a terrorist organization? Did you hear ANYTHING I said on the phone?")
+}
+text gText_YouRealizeTheyreEvilRight_YesWaitNo {
+format("Yes! Wait, no… No, Yes!")
+}
+text gText_YouRealizeTheyreEvilRight_DoesntDoAnythingForThis {
+format("TheTide doesn't do anything for this region. You're attacking innocent people, trying to destroy buildings - fuck, I absolutely should have turned you in!")
+}
+text gText_YouRealizeTheyreEvilRight_ICanProve {
+format("{PLAYER}, listen! I can prove that none of that is true.")
+}
+text gText_YouRealizeTheyreEvilRight_How {
+format("How?!?")
+}
+text gText_YouRealizeTheyreEvilRight_Look {
+format("Look.")
+}
+text gText_YouRealizeTheyreEvilRight_ThisIsOne {
+format("This is one of the Garbodor from the SharpriseStadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?")
+}
+text gText_YouRealizeTheyreEvilRight_IHadToGo {
+format("Yeah. Charlotte and I had to go down there and defeat them and your goons.")
+}
+
+text YouRealizeTheyreEvilRight_IBetYouLlThinkDifferentlyAfter
+{
+    format("I bet you’ll think differently after you take a closer look at what it’s holding. ") // Kai
+}
+
+text YouRealizeTheyreEvilRight_IReallyDoubtIt
+{
+    format("I really doubt it.") // Alicia
+}
+
+text YouRealizeTheyreEvilRight_PlayerIPromiseItWill
+{
+    format("{PLAYER}, I promise it will be worth your while. Would you just look?") // Magnus
+}
+
+text YouRealizeTheyreEvilRight_Huh
+{
+    format("Huh.") // Alicia
+}
+
+text YouRealizeTheyreEvilRight_IsThatARock
+{
+    format("Wait... is that really a Gem?") // Alicia
+}
+
+text YouRealizeTheyreEvilRight_CloseItsAGem
+{
+    format("A Normal Gem to be specific. You've heard of them?") // Kai
+}
+
+text YouRealizeTheyreEvilRight_WhatNoWayAdelaide
+{
+    format("Adelaide gave me one of those after we stopped the SharpriseStadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!") // Alicia
+}
+
+text YouRealizeTheyreEvilRight_IveHadTheOpportunityToSee
+{
+    format("I’ve had the opportunity to see Gems a few times in my career and I can attest that this one is very real.") // Magnus
+}
+
+text YouRealizeTheyreEvilRight_WhileIWasKeepingAnEye
+{
+    format("While I was keeping an eye on things during the SharpriseStadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe Sharprise left one of these Gems on it. They’re the only ones who have access to something like this in the region.") // Kai
+}
+
+text YouRealizeTheyreEvilRight_AdelaideConfirmedThat
+{
+    format("Adelaide confirmed that when she gave me my Gem. So the only way this Garbador could have one…") // Alicia
+}
+
+text gText_YouRealizeTheyreEvilRight_IsIf
+{
+    format("Is if SharpriseCapital equipped it directly.")
+}
+
+text gText_YouRealizeTheyreEvilRight_HasBeenFramingYou {
+format("Kai… SharpriseCapital has been framing you?")
+}
+text gText_YouRealizeTheyreEvilRight_YouAlsoMetUp {
+format("{PLAYER}, you also met up with TheTide in Oroland too, right?")
+}
+text gText_YouRealizeTheyreEvilRight_ButAdaoraSaid {
+format("…yeah. But Adaora said that situation was super weird and was trying to track them down.")
+}
+text gText_YouRealizeTheyreEvilRight_YeahNobodyKnows {
+format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpriseCapital has been sending in agents to make us look shitty. Between that and whatever else SharpriseCapital is feeding you, I'm not surprised you feel the way you do.")
+}
+text gText_YouRealizeTheyreEvilRight_WhyWhyDoAll {
+format("Why? Why do all this to just to screw with you guys?")
+}
+text gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney {
+format("SharpriseCapital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities - all for their agenda.")
+}
+text gText_YouRealizeTheyreEvilRight_CantArgueWithThat {
+format("Can't argue with that.")
+}
+text gText_YouRealizeTheyreEvilRight_IJoinedThe {
+format("I joined the League Challenge to try to change things from the inside. But now I'm certain that we need external pressure in order to improve things for all of us.")
+}
+text gText_YouRealizeTheyreEvilRight_AndThatsWhyWere {
+format("And that's why we're all here.")
+}
+text gText_YouRealizeTheyreEvilRight_YepIThinkItsFinally {
+format("Yep. I think it's finally time we all come together to expose SharpriseCapital for the assholes that they are, and start to take power back for the people.")
+}
+text gText_YouRealizeTheyreEvilRight_LookIKnowThis {
+format("Look, I know this is a lot of information to take in. I know you're going to make the right decision...")
+}
+text gText_YouRealizeTheyreEvilRight_ShouldIJoin{
+	format("Should I join Kai and the Elite Four? Is that the right path? Fighting against SharpriseCapital and the government...")
+}
+text gText_YouRealizeTheyreEvilRight_JoiningThemMeansGoingDeeper{
+	format("Joining them means going deeper into trouble, embracing their methods. The protests, the hacking, the riots... is that really what I want? Adaora says they don't condone violence, but can I even believe her?")
+}
+text gText_YouRealizeTheyreEvilRight_ButTheirCauseIsJust{
+	format("But their cause is just. They want to protect Resido. It's a chance to make a real difference, to fight for what's right.")
+}
+text gText_YouRealizeTheyreEvilRight_ButAtWhatCost{
+	format("But at what cost? I've worked so hard to get this far. To become the Champion. I can make a difference! Do I really want to throw it all away?")
+}
+text gText_YouRealizeTheyreEvilRight_CantDoIt{
+	format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpriseCapital wouldn't lie to me. That would get exposed! Are they just manipulating me, like they tried with the social media stunt?")
+}
+text gText_YouRealizeTheyreEvilRight_MakingTheRightChoice{
+	format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice.")
+}
+text gText_YouRealizeTheyreEvilRight_SorryIfThisDisappointsYouAll{
+	format("I'm sorry if this disappoints you all, but I won't compromise mysel - my values. I'm not going to join you.")
+}
+text gText_YouRealizeTheyreEvilRight_WaitWhat{
+    format("Wait what? {PLAYER}, you're making a mistake!")
+}
+text gText_YouRealizeTheyreEvilRight_WowWasWrong{
+    format("Wow... Armando was wrong about you after all.")
+}
+text gText_YouRealizeTheyreEvilRight_DontYouUnderstand{
+    format("Don't you understand? You're being used, and they're not going to stop.")
+}
+text gText_YouRealizeTheyreEvilRight_JustBecause{
+    format("Just because you couldn't hack it doesn't mean the world is against you, Kai!")
+}
+text gText_YouRealizeTheyreEvilRight_CouldntHackIt{
+    format("Couldn't hack it? I got second to you, and you had a HUGE head start!")
+}
+text gText_YouRealizeTheyreEvilRight_TheyreNot{
+    format("Kai, {PLAYER} will not get it. Its too late.")
+}
+//PSF TODO Replace PLAYER with OBJECT pronoun
+text gText_YouRealizeTheyreEvilRight_TheresNothingToGet{
+    format("I'm not giving up what I have because you guys think SharpriseCapital is some big bad. TheTide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it.")
+}
+text gText_YouRealizeTheyreEvilRight_ThisGarbodor {
+format("Hey, this Garbodor seems to have taken a liking to you, and you seem to understand it pretty well. Do you want it?")
+}
+text gText_YouRealizeTheyreEvilRight_TakeGoodCare {
+format("Take good care of it.")
+}
+text gText_YouRealizeTheyreEvilRight_ThatsFineIll {
+format("That's fine, I'll find a good home for it.")
+}
+text gText_YouRealizeTheyreEvilRight_IsStillWaiting {
+format("Kai is still waiting for me at Arantraz…")
+}
+text gText_YouRealizeTheyreEvilRight_DoYouWantToGo {
+format("Do you want to go to bed?")
+}
+text gText_YouRealizeTheyreEvilRight_ICantBelieveIAlmost {
+format("I can't believe I almost fell for that stunt. Me? Siding with TheTide? After everything I've been through? And all that stuff, just because the battling is a little different?")
+}
+text gText_YouRealizeTheyreEvilRight_AndTheyWantToHelp{
+format("And they claim they want to do better for region? SharpriseCapital is making jobs! And bringing people like me! And stopping terrorists.")
+}
+text gText_YouRealizeTheyreEvilRight_ImGoingToBeOn{
+format("I'm going to be on the right side of history.")
+}
+text gText_YouRealizeTheyreEvilRight_ObtainedGift {
+format("{PLAYER} was given the {STR_VAR_2}.")
+}
+text gText_YouRealizeTheyreEvilRight_ThisIsntWhere{
+    format("...This isn't where I'm supposed to be.")
+}
+
+movement YouRealizeTheyreEvilRight_StepBackward {
+lock_facing_direction
+    walk_up
+    walk_in_place_down
+    unlock_facing_direction
+    step_end
+}
+
+movement YouRealizeTheyreEvilRight_WalkToGroup {
+walk_right * 2
+    walk_up
+    step_end
+}
+
+movement YouRealizeTheyreEvilRight_WalkAroundToPlayer {
+walk_left
+    walk_down * 2
+    face_right
+    step_end
+}
+
+movement YouRealizeTheyreEvilRight_ShowAffection {
+emote_heart
+    jump_in_place_down
+    jump_in_place_down
+    step_end
+}

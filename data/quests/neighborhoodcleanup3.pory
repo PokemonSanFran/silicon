@@ -1,0 +1,223 @@
+const PERSON_A = 3
+const PERSON_B = 4
+const PERSON_C = 5
+const COP = 7
+
+const FLAG_HIDE_PERSON_A = FLAG_TEMP_7
+const FLAG_HIDE_PERSON_B = FLAG_TEMP_8
+const FLAG_HIDE_PERSON_C = FLAG_TEMP_9
+const FLAG_HIDE_COP = FLAG_TEMP_A
+
+//gText_NeighborhoodCleanUp3_
+//Quest_NeighborhoodCleanUp3_
+
+script Quest_NeighborhoodCleanUp3_ObjectVisibility_Script{
+    call(Quest_NeighborhoodCleanUp3_HideBeforeAfterQuest_Script)
+    call(Quest_NeighborhoodCleanUp3_HidePeople_Script)
+}
+
+script Quest_NeighborhoodCleanUp3_HideBeforeAfterQuest_Script{
+    call_if_quest_not_complete(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp3_HideAll_Script)
+        call_if_quest_complete(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_HideAll_Script)
+        return
+}
+
+script Quest_NeighborhoodCleanUp3_HideAll_Script{
+    setflag(FLAG_HIDE_PERSON_A)
+    setflag(FLAG_HIDE_PERSON_B)
+    setflag(FLAG_HIDE_PERSON_C)
+    setflag(FLAG_HIDE_COP)
+    return
+}
+
+script Quest_NeighborhoodCleanUp3_HidePeople_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_1)
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_PERSON_A)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_3)
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_PERSON_B)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_3)
+    if (var(VAR_RESULT)){
+        setflag(FLAG_HIDE_PERSON_C)
+    }
+    return
+}
+
+script Quest_NeighborhoodCleanUp3_ProgressToReward_Script{
+    setvar(VAR_TEMP_0,0)
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_1)
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_2)
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_3)
+    if (var(VAR_RESULT)){
+        addvar(VAR_TEMP_0,1)
+    }
+    if (var(VAR_TEMP_0) == QUEST_NEIGHBORHOODCLEANUP3_SUB_COUNT){
+       questmenu(QUEST_MENU_SET_REWARD,QUEST_NEIGHBORHOODCLEANUP3)
+    }
+    return
+}
+
+script Quest_NeighborhoodCleanUp3_Interact_Cop_Script{
+        goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_Active_Dialogue)
+        goto_if_quest_reward(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_Reward_Dialogue)
+        goto_if_quest_complete(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_Complete_Dialogue)
+        goto(Quest_NeighborhoodCleanUp3_StartQuest_Dialogue)
+}
+
+script Quest_NeighborhoodCleanUp3_StartQuest_Dialogue{
+    msgbox(gText_NeighborhoodCleanUp3_IHateToAskYou,MSGBOX_NPC,SPEAKER_POLICE)
+    startquest(QUEST_NEIGHBORHOODCLEANUP3)
+    end
+}
+
+script Quest_NeighborhoodCleanUp3_Active_Dialogue{
+    msgbox(gText_NeighborhoodCleanUp3_SoHowsThe,MSGBOX_NPC,SPEAKER_POLICE)
+    end
+}
+
+script Quest_NeighborhoodCleanUp3_Reward_Dialogue{
+    msgbox(gText_NeighborhoodCleanUp3_ThankYouSoMuchFor,MSGBOX_NPC,SPEAKER_POLICE)
+    giveitem(ITEM_MAX_REVIVE,5)
+    completequest(QUEST_NEIGHBORHOODCLEANUP3)
+    goto(Quest_NeighborhoodCleanUp3_Complete_Dialogue)
+}
+
+script Quest_NeighborhoodCleanUp3_Complete_Dialogue{
+    msgbox(gText_NeighborhoodCleanUp3_IReallyHopeThoseVagrants,MSGBOX_NPC,SPEAKER_POLICE)
+    end
+}
+
+script Quest_NeighborhoodCleanUp3_Interact_PersonA_Script{
+    trainerbattle_single(TRAINER_VAGRANT_1_GLAVEZ_HILL,gText_NeighborhoodCleanUp3_WhatDoYouWantFrom,gText_NeighborhoodCleanUp3_UghYouGotMe)
+    msgbox(gText_NeighborhoodCleanUp3_ICameToThisTown,MSGBOX_NPC,SPEAKER_RUSTY)
+    goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_RemoveVagrantA_Script)
+    end
+}
+script Quest_NeighborhoodCleanUp3_RemoveVagrantA_Script{
+    lock
+    msgbox(gText_NeighborhoodCleanUp3_ImSorryBut,,SPEAKER_ALICIA)
+    msgbox(gText_NeighborhoodCleanUp3_FineIllGo,,SPEAKER_RUSTY)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_1)
+    call(Quest_NeighborhoodCleanUp3_ProgressToReward_Script)
+    call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
+    release
+    end
+}
+script Quest_NeighborhoodCleanUp3_Interact_PersonB_Script{
+    trainerbattle_single(TRAINER_VAGRANT_2_GLAVEZ_HILL,gText_NeighborhoodCleanUp3_HeyWhatsYour,gText_NeighborhoodCleanUp3_ImJustPassingThrough)
+    msgbox(gText_NeighborhoodCleanUp3_OkayOkayI,MSGBOX_NPC,SPEAKER_WILLOW)
+    goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_RemoveVagrantB_Script)
+    end
+}
+script Quest_NeighborhoodCleanUp3_RemoveVagrantB_Script{
+    lock
+    msgbox(gText_NeighborhoodCleanUp3_ImSorryBut2,,SPEAKER_ALICIA)
+    msgbox(gText_NeighborhoodCleanUp3_WhateverIllLeave,,SPEAKER_WILLOW)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_2)
+    call(Quest_NeighborhoodCleanUp3_ProgressToReward_Script)
+    call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
+    release
+    end
+}
+script Quest_NeighborhoodCleanUp3_Interact_PersonC_Script{
+    trainerbattle_single(TRAINER_VAGRANT_3_GLAVEZ_HILL,gText_NeighborhoodCleanUp3_WhyAreYouBotheringMe,gText_NeighborhoodCleanUp3_UghYoureStronger)
+    msgbox(gText_NeighborhoodCleanUp3_ICameToThisTown2,MSGBOX_NPC,SPEAKER_GRIFF)
+    goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_RemoveVagrantC_Script)
+    end
+}
+script Quest_NeighborhoodCleanUp3_RemoveVagrantC_Script{
+    lock
+    msgbox(gText_NeighborhoodCleanUp3_ImSorryBut3,,SPEAKER_ALICIA)
+    msgbox(gText_NeighborhoodCleanUp3_FineIllGo2,,SPEAKER_GRIFF)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_3)
+    call(Quest_NeighborhoodCleanUp3_ProgressToReward_Script)
+    call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
+    release
+    end
+}
+
+text gText_NeighborhoodCleanUp3_IHateToAskYou{
+    format("I hate to ask you again, but those vagrants are still loitering around town. Could you help me get rid of them once more?")
+}
+
+text gText_NeighborhoodCleanUp3_SoHowsThe{
+    format("So, how's the clean-up going? Have you managed to get rid of all the vagrants?")
+}
+
+text gText_NeighborhoodCleanUp3_ThankYouSoMuchFor{
+    format("Thank you so much for your help! Here, take this as a token of my appreciation.")
+}
+
+text gText_NeighborhoodCleanUp3_IReallyHopeThoseVagrants{
+    format("I really hope those vagrants don't come back. They've been causing trouble for too long.")
+}
+
+text gText_NeighborhoodCleanUp3_WhatDoYouWantFrom{
+    format("What do you want from me, kid? I'm just trying to survive like everyone else.")
+}
+
+text gText_NeighborhoodCleanUp3_UghYouGotMe{
+    format("Ugh, you got me. I'll leave this area, but don't think this is the last you'll see of me.")
+}
+
+text gText_NeighborhoodCleanUp3_ICameToThisTown{
+    format("I came to this town looking for work, but no one would hire me because of my past. I had nowhere else to go.")
+}
+
+text gText_NeighborhoodCleanUp3_ImSorryBut{
+    format("I'm sorry, but you can't stay here any longer. You're causing problems for the residents.")
+}
+
+text gText_NeighborhoodCleanUp3_FineIllGo{
+    format("Fine, I'll go. But it's not like I have anywhere else to go.")
+}
+
+text gText_NeighborhoodCleanUp3_HeyWhatsYour{
+    format("Hey, what's your problem? I'm not doing anything wrong.")
+}
+
+text gText_NeighborhoodCleanUp3_ImJustPassingThrough{
+    format("I'm just passing through this town on my way to somewhere else. Why do you care?")
+}
+
+text gText_NeighborhoodCleanUp3_OkayOkayI{
+    format("Okay, okay, I'll leave. But don't expect me to thank you for it.")
+}
+
+text gText_NeighborhoodCleanUp3_ImSorryBut2{
+    format("I'm sorry, but you can't hang around here anymore. You're causing trouble for the people who live here.")
+}
+
+text gText_NeighborhoodCleanUp3_WhateverIllLeave{
+    format("Whatever, I'll leave. But you're making a big mistake.")
+}
+
+text gText_NeighborhoodCleanUp3_WhyAreYouBotheringMe{
+    format("Why are you bothering me? Can't you see I'm just minding my own business?")
+}
+
+text gText_NeighborhoodCleanUp3_UghYoureStronger{
+    format("Ugh, you're stronger than you look. But I'm not leaving without a fight.")
+}
+
+text gText_NeighborhoodCleanUp3_ICameToThisTown2{
+    format("I came to this town to escape my past, but it seems like it's caught up with me.")
+}
+
+text gText_NeighborhoodCleanUp3_ImSorryBut3{
+    format("I'm sorry, but you have to leave this area. You're not welcome here.")
+}
+
+text gText_NeighborhoodCleanUp3_FineIllGo2{
+    format("Fine, I'll go. But I hope you realize what you're doing.")
+}

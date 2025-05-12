@@ -1,0 +1,97 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const ARMANDO = 2
+const OLIVER = 3
+
+script HaveYouSeenTheNews_AskHelp_Dialogue {
+    setvar(VAR_LEAVERRA_FOREST_STATE, POST_HAVE_YOU_SEEN_THE_NEWS)
+    setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_WELCOME_TO_THE_WAR_ROOM)
+    lock
+    startcutscene(JUMPPLAYER_HAVEYOUSEENTHENEWS)
+    playse(SE_EXIT)
+    waitse
+    addobject(OLIVER)
+    applymovement(OLIVER,Common_Movement_WalkUp)
+    waitmovement(OLIVER)
+
+    msgbox(gText_HaveYouSeenTheNews_Wheeze,,SPEAKER_OLIVER,,EMOTE_SWEAT)
+
+    playse(SE_PIN)
+    applymovement(CHARLOTTE, Common_Movement_ExclamationMark)
+    applymovement(PLAYER, Common_Movement_ExclamationMark)
+    waitmovement(PLAYER)
+    applymovement(PLAYER,Common_Movement_FaceDown)
+    applymovement(CHARLOTTE,Common_Movement_FaceDown)
+    waitmovement(CHARLOTTE)
+
+    msgbox(gText_HaveYouSeenTheNews_WaitHowDidYou,,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
+
+    msgbox(gText_HaveYouSeenTheNews_WedLikeYourHelp,,SPEAKER_OLIVER)
+    msgbox(gText_HaveYouSeenTheNews_ShitWhatDid,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+    msgbox(gText_HaveYouSeenTheNews_YoureStartingToSound,,SPEAKER_OLIVER)
+
+    msgbox(gText_HaveYouSeenTheNews_HowAreWeGoing,,SPEAKER_CHARLOTTE)
+
+    msgbox(gText_HaveYouSeenTheNews_NoTimeToExplain,MSGBOX_YESNO,SPEAKER_OLIVER)
+
+        endcutscene
+    if (var (VAR_RESULT) == NO) {
+
+        msgbox(gText_HaveYouSeenTheNews_FineButDontDawdle,,SPEAKER_OLIVER)
+        closemessage
+
+        applymovement(OLIVER, Common_Movement_WalkDown)
+        applymovement(CHARLOTTE, HaveYouSeenTheNews_LeaveClearingB)
+        waitmovement(0)
+            playse(SE_EXIT)
+        waitse
+        removeobject(CHARLOTTE)
+        removeobject(OLIVER)
+    } else {
+        closemessage
+        playse(SE_EXIT)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS, 17,29)
+        end
+    }
+}
+
+text gText_HaveYouSeenTheNews_Wheeze{
+    format("{PLAYER}... Charlotte... We need.. oh I'm so out of breath...")
+}
+
+text gText_HaveYouSeenTheNews_WaitHowDidYou{
+    format("Oliver? How did you get so deep in here? You can't battle worth shit!")
+}
+
+text gText_HaveYouSeenTheNews_WedLikeYourHelp {
+    format("Never mind that... okay. We'd like your help again.")
+}
+text gText_HaveYouSeenTheNews_ShitWhatDid {
+    format("Shit, what did TheTide do now?")
+}
+text gText_HaveYouSeenTheNews_YoureStartingToSound {
+    format("You're starting to sound like a native… they've completely infiltrated our social media platforms. Adelaide was impressed with your work at SharpriseStadium, and thinks you two might be able to help.")
+}
+text gText_HaveYouSeenTheNews_HowAreWeGoing {
+    format("How are we going to help? Sounds a little above us.")
+}
+text gText_HaveYouSeenTheNews_NoTimeToExplain {
+    format("No time to explain! We're heading to SharpriseSpire right now. Do you want to ride in our Arriba, {PLAYER}?")
+}
+text gText_HaveYouSeenTheNews_FineButDontDawdle {
+    format("Fine, but don't dawdle. Come to the second floor.")
+}
+text gText_HaveYouSeenTheNews_SoundsLikeYouve {
+    format("Sounds like you've been deputized, kid. Just make sure you don't end up a pawn, yeah? You've got real potential.")
+}
+
+movement HaveYouSeenTheNews_LeaveClearingA {
+    walk_down * 3
+    step_end
+}
+movement HaveYouSeenTheNews_LeaveClearingB {
+    walk_down * 2
+    step_end
+}

@@ -1,0 +1,128 @@
+const BUSINESS_MAN = 5
+const FLAG_HIDE_BD = FLAG_TEMP_3
+const FLAG_HIDE_DEALER = FLAG_TEMP_3
+const FLAG_HIDE_BD_GYM = FLAG_TEMP_3
+
+//gText_ShutDownMedicineMan_
+//Quest_ShutDownMedicineMan_
+
+script Quest_ShutDownMedicineMan_HideDealer_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SHUTDOWNMEDICINEMAN)
+
+        if(var(VAR_RESULT)){
+            setflag(FLAG_HIDE_DEALER)
+        }
+    return
+}
+
+script Quest_ShutDownMedicineMan_HideLeaderInGym_Script{
+        if (var(VAR_BD_STATE) == BATTLE_1_COMPLETE)
+		{
+            setflag(FLAG_HIDE_BD_GYM)
+        }
+}
+
+script Quest_ShutDownMedicineMan_ControlLeaderVisibility{
+        if (var(VAR_BD_STATE) != BATTLE_1_COMPLETE)
+		{
+            setflag(FLAG_HIDE_BD)
+        }
+}
+script Quest_ShutDownMedicineMan_Interact_Leader_Script{
+    lock
+        faceplayer
+        returnqueststate(QUEST_SHUTDOWNMEDICINEMAN)
+
+        switch(var(VAR_RESULT)){
+            case QUEST_MENU_SET_ACTIVE: goto(Quest_ShutDownMedicineMan_ActiveDialogue)
+            case QUEST_MENU_SET_REWARD: goto(Quest_ShutDownMedicineMan_Reward_Dialogue)
+            default: goto(Quest_ShutDownMedicineMan_StartQuest_Dialogue)
+        }
+}
+
+script Quest_ShutDownMedicineMan_StartQuest_Dialogue{
+    msgbox(gText_ShutDownMedicineMan_WeHaveAnAssociate,,SPEAKER_DEFAULT)
+        msgbox(gText_ShutDownMedicineMan_WantToMakeSure,,SPEAKER_DEFAULT)
+        startquest(QUEST_SHUTDOWNMEDICINEMAN)
+}
+
+script Quest_ShutDownMedicineMan_ActiveDialogue{
+    msgbox(gText_ShutDownMedicineMan_LetMeKnowWhen,MSGBOX_NPC,SPEAKER_DEFAULT)
+        end
+}
+
+script Quest_ShutDownMedicineMan_MakePurchase_Dialogue{
+    lock
+        questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_SHUTDOWNMEDICINEMAN)
+
+        if(!var(VAR_RESULT)){
+            release
+                end
+        }
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_SHUTDOWNMEDICINEMAN)
+
+        msgbox(gText_ShutDownMedicineMan_OkayMadeThePurchase,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+        msgbox(gText_ShutDownMedicineMan_HeyCanIGetASelfie,,SPEAKER_ALICIA)
+
+        msgbox(gText_ShutDownMedicineMan_OhMyGodYes,,SPEAKER_DEFAULT)
+        //PSF TODO add camera flash and camera sound effect
+        closemessage
+        release
+        end
+}
+
+script Quest_ShutDownMedicineMan_Reward_Dialogue{
+    msgbox(gText_ShutDownMedicineMan_GoodWork,,SPEAKER_DEFAULT)
+        giveitem(ITEM_ABILITY_CAPSULE,1)
+        giveitem(ITEM_ABILITY_PATCH,1)
+        call(Quest_ShutDownMedicineMan_HandleMoney_Script)
+        opendoor(28,15)
+        waitdooranim
+        applymovement(BUSINESS_MAN,Quest_ShutDownMedicineMan_WalkInside_Movement)
+        waitmovement(BUSINESS_MAN)
+        removeobject(BUSINESS_MAN)
+        playse(SE_EXIT)
+        closedoor(28,15)
+        setvar(VAR_BD_STATE,QUEST_1_COMPLETE)
+        completequest(QUEST_SHUTDOWNMEDICINEMAN)
+}
+
+script Quest_ShutDownMedicineMan_HandleMoney_Script{
+    showmoneybox(0, 0)
+        waitbuttonpress
+        addmoney(2000)
+        playse(SE_SHOP)
+        updatemoneybox(0)
+        waitse
+        waitbuttonpress
+        hidemoneybox
+        closemessage
+        return
+}
+text gText_ShutDownMedicineMan_WeHaveAnAssociate{
+    format("we have an... associate over by lakemerrit that is selling herbal products")
+}
+text gText_ShutDownMedicineMan_WantToMakeSure{
+    format("we want to make sure his customer service is up to par, could you help us with a mystery shop? just go buy something and take a pic with him and then come back to me")
+}
+text gText_ShutDownMedicineMan_LetMeKnowWhen{
+    format("let me know when you're able to buy from that dude")
+}
+text gText_ShutDownMedicineMan_OkayMadeThePurchase{
+    format("okay made the purchase, now...")
+}
+text gText_ShutDownMedicineMan_HeyCanIGetASelfie{
+    format("hey can i get a selfie?")
+}
+text gText_ShutDownMedicineMan_OhMyGodYes{
+    format("absolutely yes! i hope you enjoy!")
+}
+text gText_ShutDownMedicineMan_GoodWork{
+    format("good work. got just the proof i needed. here's your payment.")
+}
+movement Quest_ShutDownMedicineMan_WalkInside_Movement{
+    walk_left
+        walk_up
+        step_end
+}

@@ -1,0 +1,195 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ARNAV = 1
+const TECHIE = 2
+const OLIVER = 3
+const CHARLOTTE = 4
+const ADELAIDE = 5
+const CHIEF = 6
+const RAMESH = 7
+const KEIYING = 8
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+script YouRealizeWereEvilRight_Object_Setup_Script {
+setflag(FLAG_HIDE_CHARLOTTE)
+setflag(FLAG_HIDE_ADELAIDE)
+setflag(FLAG_HIDE_NERDS_COPS)
+return
+}
+
+script YouRealizeWereEvilRight_Object_Cleanup_Script {
+setflag(FLAG_HIDE_CHARLOTTE)
+setflag(FLAG_HIDE_ADELAIDE)
+setflag(FLAG_HIDE_NERDS_COPS)
+
+setobjectxy(KEIYING,21,29)
+setobjectxyperm(KEIYING,21,29)
+return
+}
+
+script YouRealizeWereEvilRight_PhoneCall_Dialogue {
+    lockall
+        startcutscene(JUMPPLAYER_YOUREALIZEWEREEVILRIGHT)
+        setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,PRE_YOU_REALIZE_WERE_EVIL_RIGHT)
+        call(Common_EventScript_PhoneRinging)
+        msgbox(gText_YouRealizeWereEvilRight_SorryToBotherYou,,SPEAKER_OLIVER,,,PHONE_ON)
+
+        msgbox(gText_YouRealizeWereEvilRight_YeahImOnMyWay,,SPEAKER_ALICIA,,,PHONE_ON)
+
+        closemessage
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,17,29)
+waitstate
+}
+
+
+script YouRealizeWereEvilRight_Open_Dialogue {
+    lockall
+        setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_YOU_REALIZE_WERE_EVIL_RIGHT)
+        setflag(FLAG_KAI_CALL_ARANTRAZ)
+        setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
+
+        applymovement(PLAYER,Common_Movement_FaceRight)
+
+        //Oliver and the player walk to the conference table. Ramesh is already at the table. The screens behind Ramesh light up as they all sit, showing Kai, the player, and the “Leader” of whatever Gym was restored first. PSF TODO
+
+        setflag(FLAG_KAI_CALL_ARANTRAZ)
+        setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
+
+        msgbox(gText_YouRealizeWereEvilRight_WereEnamored,,SPEAKER_OLIVER)
+
+        msgbox(gText_YouRealizeWereEvilRight_ItsBeenSuperRewarding,,SPEAKER_ALICIA)
+
+        msgbox(gText_YouRealizeWereEvilRight_HoweverTheNext,,SPEAKER_OLIVER)
+
+        msgbox(gText_YouRealizeWereEvilRight_ItWouldBeBetter,,SPEAKER_RAMESH)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceUp)
+
+        msgbox(gText_YouRealizeWereEvilRight_AreYouSayingIHave,,SPEAKER_ALICIA)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceRight)
+
+        msgbox(gText_YouRealizeWereEvilRight_WereNotHere,,SPEAKER_OLIVER)
+
+        msgbox(gText_YouRealizeWereEvilRight_WaitI,,SPEAKER_ALICIA)
+
+        closemessage
+
+        applymovement(KEIYING,YouRealizeWereEvilRight_WalkToTable)
+        waitmovement(KEIYING)
+        setobjectxy(KEIYING,21,29)
+        setobjectxyperm(KEIYING,21,29)
+
+        msgbox(gText_YouRealizeWereEvilRight_ExcellentTiming,,SPEAKER_OLIVER)
+
+        //One of the monitors changes to show TheTide members marching. PSF TODO
+
+        msgbox(gText_YouRealizeWereEvilRight_IThinkYourKindness,,SPEAKER_KEIYING)
+
+        msgbox(gText_YouRealizeWereEvilRight_ShitUsedToBe,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+
+        msgbox(gText_YouRealizeWereEvilRight_UsedToBeASmall,,SPEAKER_KEIYING)
+
+        closemessage
+
+        applymovement(OLIVER, YouRealizeWereEvilRight_MoveAwayFromTable)
+        waitmovement(OLIVER)
+
+        msgbox(gText_YouRealizeWereEvilRight_HidingBehindTheirMask,,SPEAKER_OLIVER)
+
+        msgbox(gText_YouRealizeWereEvilRight_WasActingInGoodFaith,,SPEAKER_OLIVER)
+
+        msgbox(gText_YouRealizeWereEvilRight_TheLocalPolice,,SPEAKER_RAMESH)
+
+        msgbox(gText_YouRealizeWereEvilRight_IKnowThis,,SPEAKER_OLIVER)
+
+        closemessage
+        call(TryAutoSave)
+        endcutscene
+}
+
+text gText_YouRealizeWereEvilRight_SorryToBotherYou {
+    format("Hello {PLAYER}! Sorry to bother you, but there is a slight situation here at SharpriseSpire. It's rather urgent. Please come to the second floor.")
+}
+text gText_YouRealizeWereEvilRight_YeahImOnMyWay {
+    format("Yeah, I'm on my way over!")
+}
+text gText_YouRealizeWereEvilRight_WouldYouLikeToGo {
+    format("Would you like to go to SharpriseSpire?")
+}
+text gText_YouRealizeWereEvilRight_ThisWay {
+    format("This way.")
+}
+text gText_YouRealizeWereEvilRight_WereEnamored {
+    format("We're enamored with the work you're doing and that you've become a mainstay with the professional battling community. ")
+}
+text gText_YouRealizeWereEvilRight_ItsBeenSuperRewarding {
+    format("It's been super rewarding!")
+}
+text gText_YouRealizeWereEvilRight_HoweverTheNext {
+    format("However, the next season of the Challenge is coming up, and we're slightly concerned with your activities and the perception that a SharpriseCapital sponsored Trainer is so intimately involved with the same structure that we sunset when we took over.")
+}
+text gText_YouRealizeWereEvilRight_ItWouldBeBetter {
+    format("It would be better if you found other extracurricular activities instead. A popular way to give back is volunteering at a shelter, or perhaps helping the researchers in Chasilla complete the Pokédex.")
+}
+text gText_YouRealizeWereEvilRight_AreYouSayingIHave {
+    format("Are you saying I have to stop with the project?")
+}
+text gText_YouRealizeWereEvilRight_WereNotHere {
+    format("We're not here to tell you exactly what to do. We would, however, need to strongly reconsider sponsoring a Trainer who was actively undermining our efforts to establish ourselves as the best and most legitimate route for Trainers looking to grow. We don't ever want to be in that situation, so you need to think very carefully about what projects you decide to dedicate yourself to.")
+}
+text gText_YouRealizeWereEvilRight_WaitI {
+    format("Wait… I…")
+}
+text gText_YouRealizeWereEvilRight_ExcellentTiming {
+    format("Excellent timing.")
+}
+text gText_YouRealizeWereEvilRight_IThinkYourKindness {
+    format("I think your kindness is being manipulated, {PLAYER}. Our data suggests that the very Gyms that you're turning into “community centers” are actually being used as recruitment and training hubs for TheTide.")
+}
+
+text gText_YouRealizeWereEvilRight_ShitUsedToBe {
+    format("Kai promised me TheTide was just there to help. He lied to me!")
+}
+
+text gText_YouRealizeWereEvilRight_UsedToBeASmall {
+    format("TheTide used to be a small problem, but they're growing increasingly violent and dangerous. For the good of the region, and our plans, we need to shut them down for good. ")
+}
+text gText_YouRealizeWereEvilRight_HidingBehindTheirMask {
+    format("Alcmene is a coward. Hiding behind their mask because they know their entire operation is completely illegal…")
+}
+text gText_YouRealizeWereEvilRight_WasActingInGoodFaith {
+    format("Precisely. If TheTide was acting in good faith, they'd work with us, no masks, no subterfuge.")
+}
+text gText_YouRealizeWereEvilRight_TheLocalPolice {
+    format("The local police have agreed to continue to work with us to eliminate TheTide. {PLAYER}, as you have before, we'd like you and Charlotte to work alongside us to finish them.")
+}
+
+text gText_YouRealizeWereEvilRight_IKnowThis {
+    format("I know this is a lot to take in at once, {PLAYER}. I think you should go back to the Compound in PetarosaBorough, take a day, and think about this. You don't want to make any career ruining decisions in haste. When you're ready to help, just come back here tomorrow.")
+}
+
+movement YouRealizeWereEvilRight_WalkToTable {
+    walk_up * 3
+        walk_right
+        walk_up * 3
+        face_left
+}
+
+movement YouRealizeWereEvilRight_MoveAwayFromTable {
+        walk_left
+        walk_up
+        walk_down * 2
+        walk_up
+        face_right
+}

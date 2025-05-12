@@ -1,0 +1,124 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const OLIVER = 2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+
+script AaandWereBack_ObjectSetUp_Script {
+    if (var(VAR_STORYLINE_STATE) == STORY_WEST_RESIDO_COMPLETE){
+        setflag(FLAG_HIDE_OLIVER)
+    }
+    return
+}
+
+script AaandWereBack_ObjectHide_Script {
+    if (var(VAR_STORYLINE_STATE) == STORY_FERRY_FIXED){
+        setflag(FLAG_HIDE_CHARLOTTE)
+        setflag(FLAG_HIDE_OLIVER)
+    }
+    return
+}
+
+script AaandWereBack_Monologue
+{
+    addvar(VAR_TEMP_0,1)
+    if (var(VAR_STORYLINE_STATE) != STORY_WEST_RESIDO_COMPLETE)
+    {
+        return
+    }
+
+    if (flag(FLAG_ACT_1_1_COMPLETE))
+    {
+        return
+    }
+
+    lock
+        msgbox(gText_AaandWereBack_GotAllThree,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT,PHONE_OFF)
+        closemessage
+        call(AaandWereBack_WarpToCompound_Script)
+        release
+        setflag(FLAG_ACT_1_1_COMPLETE)
+        end
+}
+
+script AaandWereBack_WarpToCompound_Script {
+        setvar(VAR_PLAYER_HOME_STATE,FINISHED_1_1)
+        msgbox(gText_AaandWereBack_Question,MSGBOX_YESNO)
+        closemessage
+        if (var(VAR_RESULT) == YES){
+            fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F,0)
+        }
+}
+
+script AaandWereBack_Charlotte_Dialogue {
+        msgbox(gText_AaandWereBack_WhatsYourProgress,MSGBOX_NPC,SPEAKER_CHARLOTTE)
+        msgbox(gText_AaandWereBack_OnlyThree,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_AaandWereBack_YeahThatBusted,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(gText_AaandWereBack_INeedToFigure,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_AaandWereBack_HardToComeBy,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(gText_AaandWereBack_ImSureIllFigure,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        closemessage
+}
+
+script AaandWereBack_FerryRepaired_Dialogue {
+        startcutscene(JUMPPLAYER_AAANDWEREBACK)
+        setvar(VAR_STORYLINE_STATE,STORY_FERRY_FIXED)
+        setvar(VAR_FERRY_STATE,FERRY_HALAI_ISLAND_AVAILABLE)
+        showtweet(TWEET_STORY_GRUNT_RESTORED)
+        msgbox(gText_AaandWereBack_ThatsDifferent,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+        msgbox(gText_AaandWereBack_TooBadTheresNoFerry,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+        if (var(VAR_FAINTED_FOG_STATE))
+        {
+                msgbox(gText_AaandWereBack_FindAWayThrough,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+        }
+        closemessage
+        endcutscene
+}
+
+text gText_AaandWereBack_GotAllThree {
+    format("I've got all three Badges from this side of the pennisula. The ferry to Oroland looks like it's going to be broken until at least tomorrow, and I can't head west without Go-Goggles. It's been a long day... I think I should head back to CuconuTown and call it a night.")
+}
+
+text gText_AaandWereBack_Question {
+    format("Do you want to go back to CuconuTown?")
+}
+
+text gText_AaandWereBack_WhatsYourProgress {
+    format("Damn I'm beat. Getting five badges in one day was a hustle! What about you?")
+}
+
+text gText_AaandWereBack_OnlyThree {
+    format("Only three so far. I'm praying the ferry is fixed tomorrow.")
+}
+
+text gText_AaandWereBack_YeahThatBusted {
+    format("Yeah, that busted ferry sucks. I'm going to challenge the IrisinaTown and TirabudinPlace Gyms tomorrow, and the ferry will definately be fixed after that, so Chasilla Gym will be last.")
+}
+
+text gText_AaandWereBack_INeedToFigure {
+    format("I need to figure out how to get some Go-Goggles too...")
+}
+
+text gText_AaandWereBack_HardToComeBy {
+    format("They're hard to come by right now. I only got these because Daddys knows the manufactuer over in Kanto.")
+}
+
+text gText_AaandWereBack_ImSureIllFigure {
+    format("I'm sure I'll figure something out.")
+}
+
+text gText_AaandWereBack_OpeningMessage {
+    format("You have recieved a message from GRUNT.")
+}
+
+text gText_AaandWereBack_ThatsDifferent{
+    format("That's a different notification...")
+}
+text gText_AaandWereBack_TooBadTheresNoFerry{
+    format("Looks like east Resido is next! Too bad there's no ferry directly to the Gym in Chasilla...")
+}
+text gText_AaandWereBack_FindAWayThrough{
+    format("Hopefully, I'll find a way through the fog after that...")
+}

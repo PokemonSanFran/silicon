@@ -1,0 +1,384 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KEIYING = 1
+const KAI = 23
+const FLAG_HIDE_KEIYING = FLAG_TEMP_1
+const FLAG_HIDE_KAI = FLAG_TEMP_C
+
+script WarehouseRave_SetUpRave_Script
+{
+    setweather(WEATHER_FOG_DIAGONAL)
+        doweather
+        playbgm(MUS_RG_GAME_CORNER,TRUE)
+}
+
+script WarehouseRave_HideObject_Script
+{
+    if (var(VAR_WAREHOUSE_RAVE_STATE) != DEFEATED_KEIYING_WAREHOUSE)
+    {
+        setflag(FLAG_HIDE_KAI)
+    }
+    setflag(FLAG_HIDE_KEIYING)
+}
+
+script WarehouseRave_MoveObject_Script
+{
+    setobjectxy(KEIYING,5,5)
+        setobjectxyperm(KEIYING,5,5)
+}
+
+script WarehouseRave_ControlExits_Script
+{
+    switch (var(VAR_WAREHOUSE_RAVE_STATE))
+    {
+        case SAVE_KEIYING_WAREHOUSE: call(WarehouseRave_PostSaveUnlock)
+        case DEFEATED_KEIYING_WAREHOUSE: call(WarehouseRave_MakeExplosionHole_Script)
+        case TOLD_KAI_ABOUT_KEIYING: call(WarehouseRave_MakeExplosionHole_Script)
+    }
+}
+
+script WarehouseRave_PostSaveUnlock
+{
+    setmetatile(9,6,0x208,FALSE)
+        setmetatile(9,7,0x210,FALSE)
+        setmetatile(9,8,0x218,FALSE)
+        special(DrawWholeMapView)
+
+        if(defeated(TRAINER_KEI_YING_WAREHOUSE_RAVE))
+        {
+            call(WarehouseRave_MakeExplosionHole_Script)
+        }
+}
+
+script WarehouseRave_MakeExplosionHole_Script
+{
+    setmetatile(9,1,0x09F,FALSE)
+        setmetatile(9,2,0x0A7,FALSE)
+        special(DrawWholeMapView)
+}
+
+script WarehouseRave_LockDoors_Script
+{
+    setmetatile(9,6,0x214,FALSE)
+        setmetatile(9,7,0x214,FALSE)
+        setmetatile(9,8,0x214,FALSE)
+        special(DrawWholeMapView)
+        playse(SE_SLIDING_DOOR)
+        waitse
+}
+
+
+script WarehouseRave_Intro_Dialogue
+{
+    lock
+        msgbox(gText_WarehouseRave_IsThisPlace,,SPEAKER_ALICIA)
+        closemessage
+
+
+        call(WarehouseRave_LockDoors_Script)
+        playse(SE_PIN)
+        applymovement(PLAYER,Common_Movement_ExclamationMark)
+        waitmovement(0)
+
+        msgbox(gText_WarehouseRave_WhatTheHell,,SPEAKER_ALICIA)
+        closemessage
+
+
+        clearflag(FLAG_HIDE_KEIYING)
+        addobject(KEIYING)
+        applymovement(KEIYING,WarehouseRave_WalkOutShadows)
+        waitmovement(0)
+
+        msgbox(gText_WarehouseRave_ImSorryWeHad,,SPEAKER_KEIYING)
+
+        msgbox(gText_WarehouseRave_WhyAmITrapped,,SPEAKER_ALICIA)
+
+        msgbox(gText_WarehouseRave_HasBeenPredicting,,SPEAKER_KEIYING)
+
+        msgbox(gText_WarehouseRave_SoIDecideTo,,SPEAKER_ALICIA)
+
+        msgbox(gText_WarehouseRave_HasInstructed,,SPEAKER_KEIYING)
+
+        closemessage
+
+        setvar(VAR_WAREHOUSE_RAVE_STATE,SAVE_KEIYING_WAREHOUSE)
+        applymovement(PLAYER,WarehouseRave_WalkToBattle)
+        waitmovement(0)
+        startmenu_savescreen
+        goto(WarehouseRave_Battle_Script)
+}
+
+script Warehourse_Interact_Script
+{
+    faceplayer
+        call(WarehouseRave_LockDoors_Script)
+        goto(WarehouseRave_Battle_Script)
+}
+
+script WarehouseRave_Battle_Script
+{
+    lock
+        msgbox(gText_WarehouseRave_PrepareToFight,,SPEAKER_KEIYING)
+        trainerbattle_no_intro(TRAINER_KEI_YING_WAREHOUSE_RAVE,gText_WarehouseRave_YesTheyllBelieve)
+        closemessage
+
+        goto(WarehouseRave_PostBattle_Script)
+}
+
+script WarehouseRave_PostBattle_Script
+{
+    lock
+        startcutscene(JUMPPLAYER_WAREHOUSERAVE)
+        setvar(VAR_WAREHOUSE_RAVE_STATE,DEFEATED_KEIYING_WAREHOUSE)
+
+        msgbox(gText_WarehouseRave_IFailedToKill,,SPEAKER_KEIYING)
+
+        msgbox(gText_WarehouseRave_WaitWhyAreYou,,SPEAKER_ALICIA)
+        closemessage
+
+        playse(SE_POKENAV_CALL)
+        msgbox(gText_WarehouseRave_PhoneIsRinging)
+        msgbox(gText_WarehouseRave_Now,,SPEAKER_KEIYING)
+
+        closemessage
+
+        applymovement(PLAYER,WarehouseRave_RunOutTheWarehouse)
+        waitmovement(0)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_CURENO_PORT,4)
+}
+
+script WarehouseRave_OutsideWarehouse_Dialogue
+{
+    lock
+        applymovement(PLAYER,WarehouseRave_ExitWarehouse)
+        waitmovement(0)
+        playse(SE_PIN)
+        waitse
+        applymovement(KAI,Common_Movement_ExclamationMark)
+        waitmovement(0)
+        applymovement(KAI,WarehouseRave_RunToPlayer)
+        waitmovement(0)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+
+        msgbox(gText_WarehouseRave_WhenIGotHere,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WarehouseRave_ItWasATrap,,SPEAKER_ALICIA)
+
+        msgbox(gText_WarehouseRave_HolyShitThatWas,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WarehouseRave_TheBattleFelt,,SPEAKER_ALICIA)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceDown)
+        waitmovement(0)
+
+        msgbox(gText_WarehouseRave_AndThenHeToldMe,,SPEAKER_ALICIA)
+
+        msgbox(gText_WarehouseRave_ThatDoesntMake,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        waitmovement(0)
+
+        msgbox(gText_WarehouseRave_WhatDoYouMean,,SPEAKER_ALICIA)
+
+        msgbox(gText_WarehouseRave_CameToTown,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_WarehouseRave_MaybeItIsGuilt,,SPEAKER_ALICIA)
+
+        msgbox(gText_WarehouseRave_WhateverImGlad,,SPEAKER_KAI_TIDE)
+
+        if (var(VAR_STORYLINE_STATE) != STORY_RECIVED_RAVE_INVITE)
+        {
+            msgbox(gText_WarehouseRave_ImHeadingIntoTheCity)
+                msgbox(gText_WarehouseRave_IllSeeYou)
+        }
+        else
+        {
+            msgbox(gText_WarehouseRave_GladYouDidnt,,SPEAKER_KAI_TIDE)
+        }
+    closemessage
+
+
+        applymovement(KAI,WarehouseRave_LeaveCity)
+        waitmovement(0)
+        removeobject(KAI)
+
+        addvar(VAR_STORYLINE_STATE,1)
+        setvar(VAR_WAREHOUSE_RAVE_STATE,TOLD_KAI_ABOUT_KEIYING)
+    call(TryAutoSave)
+        endcutscene
+        end
+}
+
+// Kai walks off screen. The player regains control.
+text gText_WarehouseRave_IsThisPlace
+{
+    format("…is this place empty?")
+}
+
+text gText_WarehouseRave_WhatTheHell
+{
+    format("What the hell is going on?! ")
+}
+
+text gText_WarehouseRave_ImSorryWeHad
+{
+    format("I'm sorry we had to trick you, {PLAYER}.")
+}
+
+text gText_WarehouseRave_WhyAmITrapped
+{
+    format("Why am I trapped here?!")
+}
+
+text gText_WarehouseRave_HasBeenPredicting
+{
+    format("SharpriseCapital has been predicting this for a while now, unfortunately. We've always had a few plans in case your empathy became unmanageable.")
+}
+
+text gText_WarehouseRave_SoIDecideTo
+{
+    format("So I decide to help people and you trap me in a warehouse?")
+}
+
+text gText_WarehouseRave_HasInstructed
+{
+    format("SharpriseCapital has instructed me to neutralize this new threat.")
+}
+
+text gText_WarehouseRave_PrepareToFight
+{
+    format("Prepare to fight for your life!")
+}
+
+text gText_WarehouseRave_YesTheyllBelieve
+{
+    format("Yes… they'll believe I was overpowered by the Champion…")
+}
+
+text gText_WarehouseRave_IFailedToKill
+{
+    format("Once I report back my failure, you'll officially become SharpriseCapital enemy number one. Be careful out there, {PLAYER}.")
+}
+
+text gText_WarehouseRave_WaitWhyAreYou
+{
+    format("Wait, why are you helping me?")
+}
+
+text gText_WarehouseRave_PhoneIsRinging
+{
+    format("Kei-ying's phone is ringing.")
+}
+
+text gText_WarehouseRave_Now
+{
+    format("That's them calling for an update... we don't have time. You need to go!")
+}
+
+text gText_WarehouseRave_WhenIGotHere
+{
+    format("When I got here the front door was locked, and then the side blew open! What the hell happened?")
+}
+
+text gText_WarehouseRave_ItWasATrap
+{
+    format("It was a trap. Keiying tried to take me out! But… ")
+}
+
+text gText_WarehouseRave_HolyShitThatWas
+{
+    format("That was fast! SharpriseCapital attacking you directly, already?")
+}
+
+text gText_WarehouseRave_TheBattleFelt
+{
+    format("The battle felt like they were trying to lose.")
+}
+
+text gText_WarehouseRave_AndThenHeToldMe
+{
+    format("And then he told me to get out of here. He didn't call for backup or anything.")
+}
+
+text gText_WarehouseRave_ThatDoesntMake
+{
+    format("That doesn't make any sense. You think that creep regrets selling us out?")
+}
+
+text gText_WarehouseRave_WhatDoYouMean
+{
+    format("What do you mean?")
+}
+
+text gText_WarehouseRave_CameToTown
+{
+    format("He's like BD - once SharpriseCapital came to town, he jumped ship. He was playing both sides for a while, both working on SharpriseCapital's board and running the Gym in HodouCity.")
+}
+
+text gText_WarehouseRave_MaybeItIsGuilt
+{
+    format("Maybe it is guilt. So weird.")
+}
+
+text gText_WarehouseRave_WhateverImGlad
+{
+    format("Whatever. I'm glad you're okay, even if the reasoning is weird.")
+}
+
+text gText_WarehouseRave_ImHeadingIntoTheCity
+{
+    format("I'm heading into the city to start to get to work on our assignments. I'm so psyched about finally starting to chip away at these assholes, you know?")
+}
+
+text gText_WarehouseRave_GladYouDidnt
+{
+    format("Glad you didn't need me though! Damn, fighting the top brass now, you're still getting stronger. I'll see you at Arantraz.")
+}
+
+text gText_WarehouseRave_IllSeeYou
+{
+    format("I'll see you around.")
+}
+
+movement WarehouseRave_WalkOutShadows
+{
+    walk_right * 4
+        step_end
+}
+
+movement WarehouseRave_WalkToBattle
+{
+    walk_up * 2
+        walk_left * 2
+        step_end
+}
+
+movement WarehouseRave_RunOutTheWarehouse
+{
+    player_run_right * 3
+        player_run_up * 3
+        step_end
+}
+
+movement WarehouseRave_ExitWarehouse
+{
+    face_up
+        step_end
+}
+
+movement WarehouseRave_RunToPlayer
+{
+    player_run_up * 6
+        walk_left
+        step_end
+}
+
+movement WarehouseRave_LeaveCity
+{
+    walk_up * 6
+        step_end
+}

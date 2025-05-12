@@ -1,0 +1,331 @@
+const DRUGHELMETTESTER_IRISNA = 6
+const FLAG_HIDE_DRUGHELMETTESTER_IRISNA = FLAG_TEMP_3
+
+const VAR_PHASE_NUMBER = VAR_TEMP_0
+
+script Quest_DrugHelmetTest_Interact_Drughelmettester
+{
+    lockall
+    faceplayer
+    returnqueststate(QUEST_DRUGHELMETTEST)
+    switch(var(VAR_RESULT))
+	{
+		case QUEST_MENU_SET_ACTIVE: goto(Quest_DrugHelmetTest_Dialogue_Active)
+		case QUEST_MENU_SET_REWARD: goto(Quest_DrugHelmetTest_Script_RewardQuest)
+        case QUEST_MENU_COMPLETE_QUEST: goto(Quest_DrugHelmetTest_Dialogue_QuestIsComplete)
+		default: goto(Quest_DrugHelmetTest_Dialogue_StartQuest)
+	}
+}
+
+script Quest_DrugHelmetTest_Dialogue_StartQuest
+{
+    msgbox(DrugHelmetTest_Text_GymLeaderBD,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(DrugHelmetTest_Text_DoYouWanna,MSGBOX_YESNO,SPEAKER_DRUG_HELMET_TESTER)
+    if(var(VAR_RESULT)==NO)
+    {
+        msgbox(DrugHelmetTest_Text_NoWorriesIf,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    }
+    else
+    {
+        cleartrainerflag(TRAINER_DRUGHELMETTESTER_1)
+        startquest(QUEST_DRUGHELMETTEST)
+        cueobjectplayer(DRUGHELMETTESTER_IRISNA)
+        delay(10)
+        goto(Quest_DrugHelmetTest_Script_FirstTest)
+    }
+    releaseall
+    end
+}
+
+script Quest_DrugHelmetTest_Dialogue_Active
+{
+    msgbox(DrugHelmetTest_Text_YoureBackI,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(DrugHelmetTest_Text_IllManageI,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,0,EMOTE_SWEAT,0)
+    waitmessage
+    goto(Quest_DrugHelmetTest_Script_CheckDrugHelmetTestPhase)
+}
+
+script Quest_DrugHelmetTest_Script_RewardQuest
+{
+    msgbox(DrugHelmetTest_Text_ThanksForBeing,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    checkitemspace(ITEM_QUEST_DRUGHELMETTEST_REWARD,5)
+    if(!var(VAR_RESULT))
+    {
+        msgbox(DrugHelmetTest_Text_SwingByOnce,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    }
+    else
+    {
+        giveitem(ITEM_QUEST_DRUGHELMETTEST_REWARD,5)
+        completequest(QUEST_DRUGHELMETTEST)
+        release
+    }
+    releaseall
+    end
+}
+
+script Quest_DrugHelmetTest_Dialogue_QuestIsComplete
+{
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitDrughelmettester)
+    msgbox(DrugHelmetTest_Text_YourDataRocked,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(DrugHelmetTest_Text_IWorkOnAV,,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(DrugHelmetTest_Text_BDCame,,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(DrugHelmetTest_Text_ILoveWorking,,SPEAKER_DRUG_HELMET_TESTER)
+    closemessage
+    releaseall
+    end
+}
+
+script Quest_DrugHelmetTest_Script_CheckDrugHelmetTestPhase
+{
+    special(SavePlayerParty)
+    if(!defeated(TRAINER_DRUGHELMETTESTER_1)){
+        setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_FIRSTPHASE)
+        goto(Quest_DrugHelmetTest_Script_FirstTest)
+    }
+    elif(!defeated(TRAINER_DRUGHELMETTESTER_2)){
+        setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_SECONDPHASE)
+        goto(Quest_DrugHelmetTest_Script_SecondTest)
+    }
+    elif(!defeated(TRAINER_DRUGHELMETTESTER_3)){
+        setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_THIRDPHASE)
+        goto(Quest_DrugHelmetTest_Script_ThirdTest)
+    }
+}
+
+script Quest_DrugHelmetTest_Script_FirstTest
+{
+    lockall
+    faceplayer
+    special(SavePlayerParty)
+    msgbox(DrugHelmetTest_Text_YoureStrappedIn,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(DrugHelmetTest_Text_OkayLetsStart,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    waitmessage
+    faceplayer
+    locktarget
+    playse(SE_PC_ON)
+    waitse
+    //PSF TODO add special to fill screen with terminal boot text
+    fadescreen(FADE_TO_BLACK)
+    setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_FIRSTPHASE)
+    special(Quest_DrugHelmetTest_ForgetMoveByPhase)
+    special(HealPlayerParty)
+    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_1,DrugHelmetTest_Text_SmoothSailingThrough)
+    goto(Quest_DrugHelmetTest_Script_PostFirstTestBattle)
+}
+
+script Quest_DrugHelmetTest_Script_PostFirstTestBattle
+{
+    lockall
+    faceplayer
+    special(HealPlayerParty)
+    special(LoadPlayerParty)
+    if(defeated(TRAINER_DRUGHELMETTESTER_1))
+    {
+        msgbox(DrugHelmetTest_Text_SmoothSailingThrough,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_SECONDPHASE)
+        goto(Quest_DrugHelmetTest_Script_SecondTest)
+    }
+    else
+    {
+    //PSF TODO make this text to be shown when player loses in battle, and change the battle to be a normal trainer battle where player will white out
+        msgbox(DrugHelmetTest_Text_DidWeJuice,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    }
+    releaseall
+    end
+}
+
+script Quest_DrugHelmetTest_Script_SecondTest
+{
+    lockall
+    faceplayer
+    cleartrainerflag(TRAINER_DRUGHELMETTESTER_2)
+    msgbox(DrugHelmetTest_Text_OkayNowIm,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    waitmessage
+    faceplayer
+    locktarget
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_PC_ON)
+    waitse
+    //PSF TODO add special to fill screen with terminal boot text
+    fadescreen(FADE_TO_BLACK)
+    special(Quest_DrugHelmetTest_ForgetMoveByPhase)
+    special(HealPlayerParty)
+    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_2,DrugHelmetTest_Text_WeAreNailing)
+    goto(Quest_DrugHelmetTest_Script_PostSecondTestBattle)
+}
+
+script Quest_DrugHelmetTest_Script_PostSecondTestBattle
+{
+    lockall
+    faceplayer
+    special(HealPlayerParty)
+    special(LoadPlayerParty)
+    if(defeated(TRAINER_DRUGHELMETTESTER_2))
+    {
+        msgbox(DrugHelmetTest_Text_WeAreNailing,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_THIRDPHASE)
+        goto(Quest_DrugHelmetTest_Script_ThirdTest)
+    }
+    else
+    {
+        msgbox(DrugHelmetTest_Text_ShouldWeHave,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    }
+    releaseall
+    end
+}
+
+script Quest_DrugHelmetTest_Script_ThirdTest
+{
+    lockall
+    faceplayer
+    cleartrainerflag(TRAINER_DRUGHELMETTESTER_3)
+    msgbox(DrugHelmetTest_Text_BraceYourselfIm,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    waitmessage
+    faceplayer
+    locktarget
+    playse(SE_PC_ON)
+    waitse
+    //PSF TODO add special to fill screen with terminal boot text
+    fadescreen(FADE_TO_BLACK)
+    special(Quest_DrugHelmetTest_ForgetMoveByPhase)
+    special(HealPlayerParty)
+    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_3,DrugHelmetTest_Text_NailedIt)
+    goto(Quest_DrugHelmetTest_Script_PostThirdTestBattle)
+}
+
+script Quest_DrugHelmetTest_Script_PostThirdTestBattle
+{
+    lockall
+    faceplayer
+    special(HealPlayerParty)
+    special(LoadPlayerParty)
+    if(defeated(TRAINER_DRUGHELMETTESTER_3))
+    {
+        msgbox(DrugHelmetTest_Text_NailedIt,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_DRUGHELMETTEST)
+        msgbox(DrugHelmetTest_Text_ThatWasPerfect,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(DrugHelmetTest_Text_IveBeenBetter,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        goto(Quest_DrugHelmetTest_Script_RewardQuest)
+    }
+    else
+    {
+        msgbox(DrugHelmetTest_Text_DidIOverload,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    }
+    releaseall
+    end
+}
+
+text DrugHelmetTest_Text_GymLeaderBD
+{
+    format("Gym Leader BD and I have been cooking up something wild - a virtual reality helmet! It’ll really make your head spin, if you catch my drift.")
+}
+
+text DrugHelmetTest_Text_DoYouWanna
+{
+    format("Do you wanna take it for a test run? We need more training data before it’s ready for the next phase.")
+}
+
+text DrugHelmetTest_Text_NoWorriesIf
+{
+    format("No worries. If you want to dive in later, I’ll be here.")
+}
+
+text DrugHelmetTest_Text_YoureBackI
+{
+    format("You’re back! I hope you’re ready to tackle these head on.")
+}
+
+text DrugHelmetTest_Text_IllManageI
+{
+    format("I’ll manage, I was just a little disoriented.")
+}
+
+text DrugHelmetTest_Text_YoureStrappedIn
+{
+    format("You’re strapped in with the helmet. You won’t be able to see a thing until I flip the switch.")
+}
+
+text DrugHelmetTest_Text_OkayLetsStart
+{
+    format("Okay, let’s start with the first test on a low dosage. Your Pokémon might feel a bit off, but that’s just part of the ride.")
+}
+
+text DrugHelmetTest_Text_SmoothSailingThrough
+{
+    format("Smooth sailing through the first test!")
+}
+
+text DrugHelmetTest_Text_DidWeJuice
+{
+    format("Did we juice it up too much?")
+}
+
+text DrugHelmetTest_Text_OkayNowIm
+{
+    format("Okay, now I’m going to turn up the intensity for round two.")
+}
+
+text DrugHelmetTest_Text_WeAreNailing
+{
+    format("We are nailing it!")
+}
+
+text DrugHelmetTest_Text_ShouldWeHave
+{
+    format("Should we have taken it a little lower?")
+}
+
+text DrugHelmetTest_Text_BraceYourselfIm
+{
+    format("Brace yourself! I’m going to max out the dosage for the final test.")
+}
+
+text DrugHelmetTest_Text_NailedIt
+{
+    format("Nailed it!")
+}
+
+text DrugHelmetTest_Text_DidIOverload
+{
+    format("Did I overload your circuit or the helmet’s?")
+}
+
+text DrugHelmetTest_Text_ThatWasPerfect
+{
+    format("That was perfect! You did great. How do you feel?")
+}
+
+text DrugHelmetTest_Text_IveBeenBetter
+{
+    format("I’ve been better. I’ll be fine.")
+}
+
+text DrugHelmetTest_Text_ThanksForBeing
+{
+    format("Thanks for being our guinea pig! Here’s something for your trouble.")
+}
+
+text DrugHelmetTest_Text_SwingByOnce
+{
+    format("Swing by once you’ve got some space. I have a reward with your name on it?")
+}
+
+text DrugHelmetTest_Text_YourDataRocked
+{
+    format("Your data rocked! Now, we’re going to pitch it to investors.")
+}
+
+text DrugHelmetTest_Text_IWorkOnAV
+{
+    format("I work on audio visual effects for music festivals. It's all about using music and lights and videos to transport somebody's mind somewhere else.")
+}
+
+text DrugHelmetTest_Text_BDCame
+{
+    format("BD came to a show that I worked on and was really impressed with my work, and now I work with her. I also helped remodel their Gym!")
+}
+
+text DrugHelmetTest_Text_ILoveWorking
+{
+    format("I love working with BD, but I am interested to see where else I can apply my talents on an even bigger scale!")
+}

@@ -1,0 +1,256 @@
+const PANNEN = 1
+const FLAG_HIDE_PANNEN = FLAG_TEMP_2
+const FLAG_HIDE_JOURNAL = FLAG_TEMP_3
+
+const WIFE = 1
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+//script Quest_Hiddengrottomapping_
+//text Hiddengrottomapping_
+
+script Quest_Hiddengrottomapping_MarkSubquestBiome_Script{
+    addvar(VAR_TEMP_0,1)
+
+    if (var(VAR_RESULT)){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_HIDDENGROTTOMAPPING)
+    }
+    return
+}
+
+script Quest_Hiddengrottomapping_PannenVisibility_Script{
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HIDDENGROTTOMAPPING)
+
+    if (!var(VAR_RESULT)){
+        setflag(FLAG_HIDE_PANNEN)
+    }
+    return
+}
+
+script Quest_Hiddengrottomapping_StartQuest_Dialogue{
+    addvar(VAR_TEMP_0,1)
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HIDDENGROTTOMAPPING)
+
+    if (!var(VAR_RESULT)){
+        end
+    }
+
+    lock
+    applymovement(PANNEN,Quest_Hiddengrottomapping_WalkToPlayer_Movement)
+    waitmovement(PANNEN)
+    msgbox(gText_Hiddengrottomapping_WhyHello,,SPEAKER_PANNEN)
+    applymovement(PANNEN,Common_Movement_FaceUp)
+    msgbox(gText_Hiddengrottomapping_WildPokemonBuild,,SPEAKER_PANNEN)
+    applymovement(PANNEN,Common_Movement_FaceDown)
+    waitmovement(PANNEN)
+    msgbox(gText_Hiddengrottomapping_ButNobodyKnows,,SPEAKER_PANNEN)
+    msgbox(gText_Hiddengrottomapping_DoMeAFavor,,SPEAKER_PANNEN)
+    applymovement(PANNEN,Quest_Hiddengrottomapping_LeaveGrotto_Movement)
+    fadescreen(FADE_TO_BLACK)
+    startquest(QUEST_HIDDENGROTTOMAPPING)
+    removeobject(PANNEN)
+    playse(SE_EXIT)
+    waitse
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Hiddengrottomapping_Reward_Dialogue{
+    completequest(QUEST_HIDDENGROTTOMAPPING)
+    lock
+    msgbox(gText_Hiddengrottomapping_SighHeToldYou,,SPEAKER_NANCY)
+    msgbox(gText_Hiddengrottomapping_IHaventHeard,,SPEAKER_NANCY)
+    msgbox(gText_Hiddengrottomapping_HeTaughtMe,,SPEAKER_NANCY)
+
+    specialvar(VAR_RESULT,Quest_Hiddengrottomapping_CheckForJournalPage)
+
+    if(var(VAR_RESULT)){
+        startquest(QUEST_HIDDENGROTTOMAPPING)
+        goto(Quest_Hiddengrottomapping_TakeJournalPage_Script)
+    }
+
+    msgbox(gText_Hiddengrottomapping_CouldYouKeep,,SPEAKER_NANCY)
+    startquest(QUEST_HIDDENGROTTOMAPPING)
+    closemessage
+    end
+}
+
+movement Quest_Hiddengrottomapping_WalkToPlayer_Movement{
+    walk_down * 5
+    step_end
+}
+
+movement Quest_Hiddengrottomapping_LeaveGrotto_Movement{
+    walk_right
+    walk_down
+    step_end
+}
+
+text gText_Hiddengrottomapping_WhyHello{
+    format("Why hello there! Wasn't expecting to see another Trainer in here.")
+}
+
+text gText_Hiddengrottomapping_WildPokemonBuild{
+    format("We're in a Hidden Grotto. Wild Pokemon create these spaces! Sometimes there are exceptionally rare Pokemon inside, or items they've left behind.")
+}
+
+text gText_Hiddengrottomapping_ButNobodyKnows{
+    format("But nobody knows why they make them! That's what I research.")
+}
+
+text gText_Hiddengrottomapping_DoMeAFavor{
+    format("I see you've got a phone, and if you're a Trainer, you're tracking battle data, right? Keep traveling the region. I think there are five different types of Hidden Grotto biomes in Resido... once you've been to them all, come to my house in HalerbaCity! I'll extract the data from your phone.")
+}
+
+text gText_Hiddengrottomapping_SighHeToldYou{
+    format("He told you to come here? Did he think he'd be here, or was he hoping I'd get the data for you...")
+}
+text gText_Hiddengrottomapping_IHaventHeard{
+    format("Truth be told, I haven't heard from him a while. I know he gets so caught up in his work though.")
+}
+text gText_Hiddengrottomapping_HeTaughtMe{
+    format("He taught me how to withdraw data from Trainer's phones, so if you let me see that for a second...")
+}
+text gText_Hiddengrottomapping_CouldYouKeep{
+    format("Thanks. I'll upload it to his computer. Hey, could you keep an eye out for anything that might indicate his whereabouts? Its been a while since I've seen him, and I'm starting to get worried.")
+}
+text gText_Hiddengrottomapping_OhYouVeMet{
+    format("Ah, so you met my husband, Pannen! Oh, and you're helping with his research. That's excellent! Maybe he'll come home more often.")
+}
+
+script Quest_Hiddengrottomapping_Event_Script{
+    goto_if_quest_active(QUEST_HIDDENGROTTOMAPPING,Quest_Hiddengrottomapping_Active_Dialogue)
+    goto_if_quest_reward(QUEST_HIDDENGROTTOMAPPING,Quest_Hiddengrottomapping_Reward_Dialogue)
+    goto(HalerbaCity_Pannen_Wife_Default_Dialogue)
+}
+
+script Quest_Hiddengrottomapping_Complete_Dialogue{
+    if (flag(FLAG_TEMP_B)){
+        msgbox(gText_Hiddengrottomapping_INeed,,SPEAKER_NANCY)
+    }
+    msgbox(gText_Hiddengrottomapping_IveBeenThiking,,SPEAKER_NANCY)
+    closemessage
+    end
+}
+
+script Quest_Hiddengrottomapping_Active_Dialogue{
+    specialvar(VAR_RESULT,Quest_Hiddengrottomapping_CheckForJournalPage)
+    if (var(VAR_RESULT)){
+        goto(Quest_Hiddengrottomapping_TakeJournalPage_Script)
+    }
+    msgbox(gText_Hiddengrottomapping_OhYouVeMet,,SPEAKER_NANCY)
+    msgbox(gText_Hiddengrottomapping_HeSpentALot,,SPEAKER_NANCY)
+    closemessage
+    end
+}
+
+script Quest_Hiddengrottomapping_CountSubquestsReward_Script{
+    specialvar(VAR_RESULT,Quest_Hiddengrottomapping_CountCompletedSubquests)
+
+    if (var(VAR_RESULT) == 0){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_HIDDENGROTTOMAPPING)
+        goto(Quest_Hiddengrottomapping_Reward_Script)
+    }
+
+    return
+}
+
+script Quest_Hiddengrottomapping_SetUpCutscene_Script{
+    fadescreen(FADE_TO_BLACK)
+    applymovement(WIFE,Common_Movement_FaceDown)
+    setobjectxy(PLAYER,6,3)
+    TeleportCamera(6,3)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(PLAYER)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script Quest_Hiddengrottomapping_Reward_Script{
+    call(Quest_Hiddengrottomapping_SetUpCutscene_Script)
+    msgbox(gText_Hiddengrottomapping_IHaveAFeeling,,SPEAKER_NANCY)
+    msgbox(gText_Hiddengrottomapping_IDidFind,,SPEAKER_NANCY)
+    giveitem(ITEM_PANNEN_MACGUFFIN,1)
+    applymovement(WIFE,Common_Movement_FaceUp)
+    waitmovement(WIFE)
+    setflag(FLAG_TEMP_B)
+    completequest(QUEST_HIDDENGROTTOMAPPING)
+    release
+    end
+}
+
+script Quest_Hiddengrottomapping_TakeJournalPage_Script{
+    msgbox(gText_Hiddengrottomapping_OhYouHave,,SPEAKER_NANCY)
+    closemessage
+    applymovement(WIFE,Quest_Hiddengrottomapping_WalkToWall)
+    waitmovement(WIFE)
+    call(Quest_Hiddengrottomapping_CountSubquestsReward_Script)
+    applymovement(WIFE,Quest_Hiddengrottomapping_WalkToTable)
+    waitmovement(WIFE)
+    msgbox(gText_Hiddengrottomapping_IveTranslated,,SPEAKER_NANCY)
+    closemessage
+    applymovement(WIFE,Common_Movement_FaceLeft)
+    waitmovement(WIFE)
+    release
+    end
+}
+
+script Quest_Hiddengrottomapping_RemoveJournalPage1_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING,SUB_QUEST_1)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_JOURNAL)
+        }
+    return
+}
+
+script Quest_Hiddengrottomapping_RemoveJournalPage2_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING,SUB_QUEST_2)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_JOURNAL)
+        }
+    return
+}
+
+script Quest_Hiddengrottomapping_RemoveJournalPage3_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING,SUB_QUEST_3)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_JOURNAL)
+        }
+    return
+}
+
+movement Quest_Hiddengrottomapping_WalkToWall{
+    walk_right * 2
+    walk_up * 2
+    face_down
+    step_end
+}
+
+movement Quest_Hiddengrottomapping_WalkToTable{
+    walk_down * 2
+    walk_left * 2
+    face_down
+    step_end
+}
+
+text gText_Hiddengrottomapping_INeed{
+    format("I think I need a moment to be alone.")
+}
+text gText_Hiddengrottomapping_IveBeenThiking{
+    format("I've been thinking... he's okay out there. I don't know where he is, but I get the sense he's enjoying what he's doing.")
+}
+text gText_Hiddengrottomapping_HeSpentALot{
+    format("He spent a lot of time researching those Hidden Grottos... like the one you found him in! I just hope he's safe.")
+}
+text gText_Hiddengrottomapping_IHaveAFeeling{
+    format("I have a feeling you're not going to find anymore pages.")
+}
+text gText_Hiddengrottomapping_IDidFind{
+    format("I found the rest of the book laying around here, and with that page, I've got all of his notes, but no clues. Just a lot of rambling about Ultra Space.")
+}
+text gText_Hiddengrottomapping_OhYouHave{
+    format("Oh! You have a page from his journal!")
+}
+text gText_Hiddengrottomapping_IveTranslated{
+    format("I've translated the page for you, you can read it on the wall. Let me know if you make more progress!")
+}

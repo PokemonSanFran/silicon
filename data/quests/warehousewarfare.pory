@@ -1,0 +1,326 @@
+//script Quest_Warehousewarfare_
+//text gText_Warehousewarfare_
+const FLAG_HIDE_BARGE_GUARD = FLAG_TEMP_1
+
+script Quest_Warehousewarfare_Interact_Event_Script{
+    lock
+    faceplayer
+
+    goto_if_quest_active(QUEST_WAREHOUSEWARFARE,Quest_Warehousewarfare_Active_Dialogue)
+    goto_if_quest_reward(QUEST_WAREHOUSEWARFARE,Quest_Warehousewarfare_Reward_Dialogue)
+    goto_if_quest_complete(QUEST_WAREHOUSEWARFARE,Quest_Warehousewarfare_Complete_Dialogue)
+
+    goto(Quest_Warehousewarfare_Welcome_Dialogue)
+}
+
+script Quest_Warehousewarfare_CallPlayer_Dialogue{
+    call(Common_EventScript_PhoneRinging)
+    msgbox(gText_Warehousewarfare_HeyIsThisPlayer,,,,PHONE_ON)
+    msgbox(gText_Warehousewarfare_WeReallyAppreciate,,,,PHONE_ON)
+    msgbox(gText_Warehousewarfare_WedLoveToWorkWith,,,,PHONE_ON)
+    closemessage
+    playse(SE_POKENAV_HANG_UP)
+    startquest(QUEST_WAREHOUSEWARFARE)
+    release
+    end
+}
+
+script Quest_Warehousewarfare_Welcome_Dialogue{
+    msgbox(gText_Warehousewarfare_WelcomeTo,MSGBOX_NPC)
+    end
+}
+
+
+script Quest_Warehousewarfare_Active_Dialogue{
+
+    lock
+    msgbox(gText_Warehousewarfare_GoodToSee,MSGBOX_NPC)
+
+    if (!flag(FLAG_QUEST_WAREHOUSE_WARFARE_EXPLAINED)){
+        setflag(FLAG_QUEST_WAREHOUSE_WARFARE_EXPLAINED)
+        goto(Quest_Warehousewarfare_IntroBarges_Dialogue)
+    }
+    goto(Quest_Warehousewarfare_ExplainBarge_Dialogue)
+}
+
+script Quest_Warehousewarfare_ExplainBarge_Dialogue{
+
+    specialvar(VAR_RESULT,Quest_Warehousewarfare_CountRemainingSubquests)
+
+        switch(var(VAR_RESULT)){
+            case 3: goto(Quest_Warehousewarfare_ExplainBarge1_Dialogue)
+            case 2: goto(Quest_Warehousewarfare_ExplainBarge2_Dialogue)
+            case 1: goto(Quest_Warehousewarfare_ExplainBarge3_Dialogue)
+            default: return
+        }
+}
+
+script Quest_Warehousewarfare_IntroBarges_Dialogue{
+    msgbox(gText_Warehousewarfare_WeveBeenStudying)
+    msgbox(gText_Warehousewarfare_ThereAreAFewThings)
+    msgbox(gText_Warehousewarfare_TheBargesAreAlways)
+    msgbox(gText_Warehousewarfare_TheWorkersArePoorlyPaid)
+    msgbox(gText_Warehousewarfare_WeWantToFree)
+    closemessage
+
+    goto(Quest_Warehousewarfare_ExplainBarge_Dialogue)
+}
+
+//PSF TODO get GetAbnormalWeatherMapNameAndType working to move the barges on the water routes
+
+script Quest_Warehousewarfare_ExplainBarge1_Dialogue{
+    msgbox(gText_Warehousewarfare_WeGotSomebody)
+    msgbox(gText_Warehousewarfare_HeadToOver)
+    closemessage
+    release
+    end
+}
+
+script Quest_Warehousewarfare_ExplainBarge2_Dialogue{
+    msgbox(gText_Warehousewarfare_NewsHasPickedUp)
+    msgbox(gText_Warehousewarfare_GoDownTo)
+    closemessage
+    release
+    end
+}
+
+script Quest_Warehousewarfare_ExplainBarge3_Dialogue{
+    msgbox(gText_Warehousewarfare_TheyveMovedAll)
+    msgbox(gText_Warehousewarfare_OddlyEnough)
+    closemessage
+    release
+    end
+}
+
+script Quest_Warehousewarfare_Reward_Dialogue{
+    msgbox(gText_Warehousewarfare_HolyMoly,MSGBOX_NPC)
+    completequest(QUEST_WAREHOUSEWARFARE)
+    addvar(VAR_STORYLINE_STATE,1)
+    release
+    end
+}
+
+script Quest_Warehousewarfare_Complete_Dialogue{
+    msgbox(gText_Warehousewarfare_ThanksAgain,MSGBOX_NPC)
+    end
+}
+
+script Quest_Warehousewarfare_Barge1Guard_Visibility_Script{
+    returnqueststate(QUEST_WAREHOUSEWARFARE)
+
+    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+        setflag(FLAG_HIDE_BARGE_GUARD)
+    }
+    return
+}
+
+script Quest_Warehousewarfare_Barge2Guard_Visibility_Script{
+    returnqueststate(QUEST_WAREHOUSEWARFARE)
+
+        if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+            specialvar(VAR_RESULT,Quest_Warehousewarfare_CountRemainingSubquests)
+                if (var(VAR_RESULT) < 3){
+                    setflag(FLAG_HIDE_BARGE_GUARD)
+                }
+        }
+    return
+}
+
+script Quest_Warehousewarfare_Barge3Guard_Visibility_Script{
+    returnqueststate(QUEST_WAREHOUSEWARFARE)
+
+        if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+            specialvar(VAR_RESULT,Quest_Warehousewarfare_CountRemainingSubquests)
+                if (var(VAR_RESULT) < 2){
+                    setflag(FLAG_HIDE_BARGE_GUARD)
+                }
+        }
+    return
+}
+
+script Quest_Warehousewarfare_Guard_Dialogue{
+    msgbox(gText_Warehousewarfare_YouAreNotAuthorized,MSGBOX_NPC)
+    release
+    end
+}
+
+script Quest_Warehousewarfare_DebugBarge1_Script{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WAREHOUSEWARFARE,SUB_QUEST_1)
+    msgbox(format("you freed the workers and shut down the engine because both were in the same room."),MSGBOX_NPC)
+    call(TryAutoSave)
+    end
+}
+
+script Quest_Warehousewarfare_DebugBarge2Workers_Script{
+    setflag(FLAG_QUEST_WAREHOUSEWARFARE_BARGE2_WORKERS_CLEAR)
+    call(Quest_Warehousewarfare_CheckBarge2Progress_Script)
+    msgbox(format("you freed the workers."),MSGBOX_NPC)
+    end
+}
+
+script Quest_Warehousewarfare_DebugBarge2Engine_Script{
+    setflag(FLAG_QUEST_WAREHOUSEWARFARE_BARGE2_ENGINE_CLEAR)
+    call(Quest_Warehousewarfare_CheckBarge2Progress_Script)
+    msgbox(format("you shut down the engine."),MSGBOX_NPC)
+    end
+}
+
+script Quest_Warehousewarfare_CheckBarge2Progress_Script{
+    if (flag(FLAG_QUEST_WAREHOUSEWARFARE_BARGE2_WORKERS_CLEAR) && flag(FLAG_QUEST_WAREHOUSEWARFARE_BARGE2_ENGINE_CLEAR)){
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WAREHOUSEWARFARE,SUB_QUEST_2)
+        call(TryAutoSave)
+    }
+    return
+}
+
+script Quest_Warehousewarfare_Barge3Triple_Battle_Script{
+    if (flag(FLAG_QUEST_WAREHOUSEWARFARE_BARGE3_ENGINE_CLEAR)){
+        release
+        end
+    }
+
+    lock
+    msgbox(format("this was a trap, and now you have to battle all of us!"),MSGBOX_AUTOCLOSE)
+    closemessage
+    applymovement(1,Common_Movement_WalkInPlaceUp)
+    waitmovement(1)
+    trainerbattle_no_intro(TRAINER_PRESTO_GRUNT1,gText_Warehousewarfare_GoodLuckGetting)
+    applymovement(2,Common_Movement_WalkInPlaceUp)
+    waitmovement(2)
+    trainerbattle_no_intro(TRAINER_PRESTO_GRUNT2,gText_Warehousewarfare_DidYouReallyThink)
+    applymovement(3,Common_Movement_WalkInPlaceUp)
+    waitmovement(3)
+    trainerbattle_no_intro(TRAINER_PRESTO_GRUNT3,gText_Warehousewarfare_PerhapsThisWas)
+    msgbox(format("guess you need to fight our boss"))
+    setflag(FLAG_QUEST_WAREHOUSEWARFARE_BARGE3_ENGINE_CLEAR)
+    closemessage
+    release
+    end
+}
+
+script Quest_Warehousewarfare_Barge3_CEO_Battle_Script{
+    lock
+
+        if (var(VAR_QUEST_WAREHOUSEWARFARE_STATE) != SAVED_BEFORE_PRESTO_CEO){
+
+        if(defeated(TRAINER_PRESTO_CEO_RAID)){
+            goto(Quest_Warehousewarfare_PostRaid_CEO_Dialogue)
+        }
+
+        setvar(VAR_QUEST_WAREHOUSEWARFARE_STATE,SAVED_BEFORE_PRESTO_CEO)
+        msgbox(gText_Warehousewarfare_OhYouShut,MSGBOX_NPC,SPEAKER_PRESTO_CEO)
+        msgbox(gText_Warehousewarfare_IRegret,,SPEAKER_PRESTO_CEO)
+        msgbox(gText_Warehousewarfare_YouAreInteresting,,SPEAKER_PRESTO_CEO)
+        lockall
+        closemessage
+        startmenu_savescreen
+        }
+    goto(Quest_Warehousewarfare_CEO_Battle_Script)
+}
+
+script Quest_Warehousewarfare_CEO_Battle_Script{
+        trainerbattle_no_intro(TRAINER_PRESTO_CEO,gText_Warehousewarfare_Outstanding)
+    goto(Quest_Warehousewarfare_Post_CEO_Battle_Script)
+}
+
+script Quest_Warehousewarfare_Post_CEO_Battle_Script{
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WAREHOUSEWARFARE,SUB_QUEST_3)
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_WAREHOUSEWARFARE)
+        msgbox(gText_Warehousewarfare_ThisWillSlowUs,,SPEAKER_PRESTO_CEO)
+        closemessage
+    call(TryAutoSave)
+        release
+        end
+}
+
+script Quest_Warehousewarfare_PostRaid_CEO_Dialogue{
+    msgbox(gText_Persuasivepassenger_IShouldHaveGuessed,MSGBOX_NPC,SPEAKER_PRESTO_CEO)
+    goto(Quest_Warehousewarfare_CEO_Battle_Script)
+}
+
+//PSF TODO
+// barge 1 you free the workers and turn off the engine in the same room
+// barge 2 you free the workers and turn off the engine seperately, but can be done in any order
+// barge 3 you turn off the engine which turns off the door trapping the workers, but there are no workers
+
+text gText_Warehousewarfare_WelcomeTo{
+    format("Welcome to the Shopkeepers Union!")
+}
+text gText_Warehousewarfare_HeyIsThisPlayer{
+    format("Hey, is this {PLAYER}?")
+}
+text gText_Warehousewarfare_WeReallyAppreciate{
+    format("We really appreciate all the work you're doing for the Shopkeepers Union! Most Trainers don't give us the time of day.")
+}
+text gText_Warehousewarfare_WedLoveToWorkWith{
+    format("We've seen your work around the region, and would love to work with you in the future, if you're interested. Can you swing by the Shopkeepers Union HQ in CresaltaVista? We're right next to the Center.")
+}
+text gText_Warehousewarfare_HolyMoly{
+    format("Holy moly you did it.")
+}
+text gText_Warehousewarfare_ThanksAgain{
+    format("Thanks again!")
+}
+text gText_Warehousewarfare_GoodToSee{
+    format("Good to see you, {PLAYER}.")
+}
+text gText_Warehousewarfare_WeveBeenStudying{
+    format("We've been studying Presto and how they are able deliever prodcuts to Trainers.")
+}
+text gText_Warehousewarfare_ThereAreAFewThings{
+    format("There are a few things we've learned from watching them.")
+}
+text gText_Warehousewarfare_TheBargesAreAlways{
+    format("First, all of their supplies are located offshore, on floating barges on the oceans of Resido. Those barges are heavily guarded, and only allow works in and out of the buildings.")
+}
+text gText_Warehousewarfare_TheWorkersArePoorlyPaid{
+    format("The workers, unsurprisingly, are terribly paid and working in awful conditions")
+}
+text gText_Warehousewarfare_WeWantToFree{
+    format("The government doesn't seem to be particularly interested helping us fix this problem, so we want to take things into our own hands.")
+}
+text gText_Warehousewarfare_WeGotSomebody{
+    format("We got somebody on the inside, who is able to let you in, and we're hoping from there, you're able to help slow down the operations inside.")
+}
+text gText_Warehousewarfare_HeadToOver{
+    format("Head on over to RouteA, the guard shouldn't be at the door.")
+}
+text gText_Warehousewarfare_NewsHasPickedUp{
+    format("News has reported that Presto orders are slowing down and getting more expensive. I think shutting down that barge actually did something!")
+}
+text gText_Warehousewarfare_GoDownTo{
+    format("Go down to RouteE and get in there! Your path should be open.")
+}
+text gText_Warehousewarfare_TheyveMovedAll{
+    format("They've moved all operations to that third barge. You're doing an awesome job!")
+}
+text gText_Warehousewarfare_OddlyEnough{
+    format("I think even the guards are woring inside overtime, because the guard at the RouteC barge isn't there...")
+}
+text gText_Warehousewarfare_YouAreNotAuthorized{
+    format("You are not authorized to enter.")
+}
+text gText_Warehousewarfare_GoodLuckGetting{
+	format("Good luck getting out this pickle, even if you beat me.")
+}
+text gText_Warehousewarfare_DidYouReallyThink{
+	format("Did you really think this would be easy?")
+}
+text gText_Warehousewarfare_PerhapsThisWas{
+	format("Perhaps this was a bad idea for us...")
+}
+text gText_Warehousewarfare_OhYouShut{
+	format("Oh you shut down the engine... and now you're here to free the workers?")
+}
+text gText_Warehousewarfare_IRegret{
+	format("I regret to inform you, there are no workers. And of course, you fell for it, {PLAYER}.")
+}
+text gText_Warehousewarfare_YouAreInteresting{
+	format("You are interesting... but this is it for you. No more intefering with Presto!")
+}
+text gText_Warehousewarfare_Outstanding{
+	format("Outstanding...")
+}
+text gText_Warehousewarfare_ThisWillSlowUs{
+	format("This will slow us down... but you will not defeat us. You can't.")
+}

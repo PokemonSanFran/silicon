@@ -1,0 +1,337 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const OLIVER = 2
+const ALCMENE = 3
+const ROCKET_A = 4
+const ROCKET_B = 5
+const CROWD_A = 6
+const CROWD_B = 7
+const CROWD_C = 8
+const POLICE_A = 9
+const POLICE_B = 10
+const ADELAIDE = 11
+const ORI = 12
+
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+const FLAG_HIDE_ROCKET_POLICE = FLAG_TEMP_2
+const FLAG_HIDE_OLIVER = FLAG_TEMP_3
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_4
+const FLAG_HIDE_CROWD = FLAG_TEMP_5
+const FLAG_HIDE_ORI = FLAG_TEMP_6
+
+script TheStrikeStrikesBack_HideObject_Script {
+    setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_ROCKET_POLICE)
+        setflag(FLAG_HIDE_OLIVER)
+        setflag(FLAG_HIDE_CHARLOTTE)
+        setflag(FLAG_HIDE_CROWD)
+        return
+}
+
+script TheStrikeStrikesBack_ShowCrowd_Script{
+    setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_ROCKET_POLICE)
+        setflag(FLAG_HIDE_OLIVER)
+        setflag(FLAG_HIDE_CHARLOTTE)
+}
+
+script TheStrikeStrikesBack_UnblockConstruction_Script {
+    if (var(VAR_CONSTRUCTION_STRIKE_STATE)) {
+        setmetatile(21,19,0x211,FALSE)
+            special(DrawWholeMapView)
+    }
+    return
+}
+
+script TheStrikeStrikesBack_ObjectSetup_Script {
+    setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_ROCKET_POLICE)
+}
+
+script TheStrikeStrikesBack_AddRocketObjects_Script{
+    addobject(ALCMENE)
+        addobject(ROCKET_A)
+        addobject(ROCKET_B)
+
+        setobjectxy(ALCMENE,21,19)
+        setobjectxy(ROCKET_A,20,18)
+        setobjectxy(ROCKET_B,22,18)
+        return
+}
+
+script TheStrikeStrikesBack_ObjectCleanup_Script {
+    removeobject(OLIVER)
+        removeobject(CHARLOTTE)
+        removeobject(ALCMENE)
+        removeobject(ROCKET_A)
+        removeobject(ROCKET_B)
+}
+
+script TheStrikeStrikesBack_CrowdFacesNorth_Script {
+    playse(SE_PIN)
+        applymovement(6,TheStrikeStrikesBack_FaceNorth)
+        applymovement(7,Common_Movement_FaceUp)
+        applymovement(8,TheStrikeStrikesBack_FaceNorth)
+        applymovement(9,Common_Movement_FaceUp)
+        applymovement(10,Common_Movement_FaceUp)
+        applymovement(11,TheStrikeStrikesBack_FaceNorth)
+        applymovement(CHARLOTTE,TheStrikeStrikesBack_FaceNorth)
+        applymovement(OLIVER,TheStrikeStrikesBack_FaceNorth)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        waitmovement(0)
+}
+
+script TheStrikeStrikesBack_PhoneCall_Dialogue{
+    lock
+    startcutscene(JUMPPLAYER_THESTRIKESTRIKESBACK)
+        setvar(VAR_STORYLINE_STATE,STORY_CALLED_TO_CONSTRUCTION)
+        setvar(VAR_CONSTRUCTION_STRIKE_STATE,STRIKE_HAS_BEGUN)
+        playse(SE_POKENAV_CALL)
+        waitse
+        playse(SE_POKENAV_CALL)
+        msgbox(gText_TheStrikeStrikesBack_HelloPlayer,MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_ON)
+        msgbox(gText_TheStrikeStrikesBack_OhHi,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+
+        specialvar(VAR_0x8004,GetCurrentMap)
+        switch(var(VAR_0x8004)){
+            case 31:
+            case 37:
+            case 38:
+            case 42: msgbox(gText_TheStrikeStrikesBack_CongratsOnYourFeat,MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+            default: msgbox(gText_TheStrikeStrikesBack_IKnowImLate,MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        }
+
+    msgbox(gText_TheStrikeStrikesBack_ThankYou,,SPEAKER_ALICIA)
+        msgbox(gText_TheStrikeStrikesBack_CutToTheChase,MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        msgbox(gText_TheStrikeStrikesBack_SureRightNow,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        msgbox(gText_TheStrikeStrikesBack_AsSoonAsYouCan,MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+
+        closemessage
+        playse(SE_POKENAV_HANG_UP)
+        waitse
+        msgbox(gText_TheStrikeStrikesBack_DoYouWant,MSGBOX_YESNO)
+
+        if (var(VAR_RESULT) == NO ) {
+            closemessage
+        } else {
+            closemessage
+        fadeblackandsetremovewarpfadeflag
+                warpsilent(MAP_ROUTE2,255,21,25)
+        }
+    release
+        end
+}
+
+script TheStrikeStrikesBack_Intro_Dialogue {
+    lock
+
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+        if (var(VAR_TEMP_0) != 21){
+        fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_ROUTE2,255,21,25)
+                waitstate
+        }else{
+            setvar(VAR_CONSTRUCTION_STRIKE_STATE,START_VS_GARBODOR)
+
+                msgbox(gText_TheStrikeStrikesBack_AndCongratulations,,SPEAKER_OLIVER)
+
+                msgbox(gText_TheStrikeStrikesBack_ISawThemOn,,SPEAKER_ALICIA)
+
+                msgbox(gText_TheStrikeStrikesBack_WellHeresTheProblem,,SPEAKER_OLIVER)
+
+                closemessage
+
+                call(TheStrikeStrikesBack_AddRocketObjects_Script)
+
+                applymovement(ALCMENE,TheStrikeStrikesBack_WalkIntoFrame)
+                applymovement(ROCKET_A,TheStrikeStrikesBack_WalkIntoFrame)
+                applymovement(ROCKET_B,TheStrikeStrikesBack_WalkIntoFrame)
+                waitmovement(0)
+
+                call(TheStrikeStrikesBack_CrowdFacesNorth_Script)
+
+                msgbox(gText_TheStrikeStrikesBack_MyNameIs,,SPEAKER_ALCMENE)
+
+                closemessage
+                reveal(REVEAL_ALCMENE)
+
+                msgbox(gText_TheStrikeStrikesBack_WeAreFighting,,SPEAKER_ALCMENE)
+
+                msgbox(gText_TheStrikeStrikesBack_TheCityDoubles,,SPEAKER_ALCMENE)
+
+                msgbox(gText_TheStrikeStrikesBack_ManagementTriples,,SPEAKER_ALCMENE)
+
+                msgbox(gText_TheStrikeStrikesBack_TheCityQuadruples,,SPEAKER_ALCMENE)
+
+                msgbox(gText_TheStrikeStrikesBack_TheseDemandsAreMore,,SPEAKER_ALCMENE)
+
+                closemessage
+
+                applymovement(ALCMENE,TheStrikeStrikesBack_WalkOutFrame)
+                applymovement(ROCKET_A,TheStrikeStrikesBack_WalkOutFrame)
+                applymovement(ROCKET_B,TheStrikeStrikesBack_WalkOutFrame)
+                applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+                applymovement(PLAYER,Common_Movement_FaceDown)
+                applymovement(9,Common_Movement_FaceDown)
+                applymovement(7,Common_Movement_FaceLeft)
+                applymovement(6,Common_Movement_FaceRight)
+
+                waitmovement(0)
+
+                msgbox(gText_TheStrikeStrikesBack_SighOfCourse,,SPEAKER_OLIVER)
+
+                msgbox(gText_TheStrikeStrikesBack_WaitWhatThatsInsane,,SPEAKER_ALICIA)
+
+                msgbox(gText_TheStrikeStrikesBack_AgreedAndThats,,SPEAKER_OLIVER)
+
+                msgbox(gText_TheStrikeStrikesBack_ThePoliceAreWorking,,SPEAKER_OLIVER)
+
+                msgbox(gText_TheStrikeStrikesBack_AgitatedWildGarbodor,,SPEAKER_OLIVER)
+
+                closemessage
+
+                applymovement(OLIVER,TheStrikeStrikesBack_WalkOutFrame)
+                waitmovement(0)
+                applymovement(CHARLOTTE,TheStrikeStrikesBack_GoToPlayer)
+                waitmovement(0)
+
+                msgbox(gText_TheStrikeStrikesBack_IllBeInThere,,SPEAKER_CHARLOTTE)
+
+                closemessage
+                applymovement(CHARLOTTE,TheStrikeStrikesBack_WalkOutFrame)
+                waitmovement(0)
+                call(TheStrikeStrikesBack_ObjectCleanup_Script)
+        call(TryAutoSave)
+    endcutscene
+                release
+                end
+        }
+}
+
+
+movement TheStrikeStrikesBack_FaceNorth {
+    emote_exclamation_mark
+        face_up
+        step_end
+}
+movement TheStrikeStrikesBack_WalkIntoFrame {
+    walk_down * 3
+        step_end
+}
+movement TheStrikeStrikesBack_WalkOutFrame {
+    walk_left * 2
+        walk_up * 8
+        step_end
+}
+movement TurnInivisible {
+    set_invisible
+        step_end
+}
+movement TurnVisible {
+    set_visible
+        step_end
+}
+movement TheStrikeStrikesBack_GoToPlayer {
+    walk_left
+        face_up
+        step_end
+}
+
+text gText_TheStrikeStrikesBack_CongratsOnAll {
+    format("Hey {PLAYER}. Congrats on all eight badges! Didn't think you had it in you.")
+}
+
+text gText_TheStrikeStrikesBack_DidYouFlyAll {
+    format("…thanks, I think. Did you fly all the way here to tell me that?")
+}
+
+text gText_TheStrikeStrikesBack_AskedMeToPick {
+    format("Nah. Oliver asked me to pick you up. Turns out they need our help. Let's go.")
+}
+
+text gText_TheStrikeStrikesBack_AndCongratulations {
+    format("Congratulations to you, {PLAYER}! You're caught up on the strikes, right?")
+}
+
+text gText_TheStrikeStrikesBack_ISawThemOn {
+    format("Yeah, I saw them on the news. Why are we involved though?")
+}
+
+text gText_TheStrikeStrikesBack_WellHeresTheProblem {
+    format("Well, here's the problem. We - ! oh Lord.")
+}
+
+text gText_TheStrikeStrikesBack_MyNameIs {
+    format("My name is Alcmene, and I am the leader of TheTide. ")
+}
+
+text gText_TheStrikeStrikesBack_WeAreFighting {
+    format("We are fighting alongside the construction workers here, and we are hoping to come to a reasonable conclusion for all. We are requesting, no, DEMANDING:")
+}
+
+text gText_TheStrikeStrikesBack_TheCityDoubles {
+    format("1. The city doubles the pay of these workers.")
+}
+
+text gText_TheStrikeStrikesBack_ManagementTriples {
+    format("2. Management triples their safety and anti-harassment certifications. ")
+}
+
+text gText_TheStrikeStrikesBack_TheCityQuadruples {
+    format("3. The city quadruples the workers' break times.")
+}
+
+text gText_TheStrikeStrikesBack_TheseDemandsAreMore {
+    format("These demands are more than reasonable, and the hard workers  will continue to strike until they are treated fairly and equitably.")
+}
+
+text gText_TheStrikeStrikesBack_SighOfCourse {
+    format("Sigh, of course. Well, they're the reason we brought you here. We've received intel that TheTide is planning on using exploding Pokemon to bring down the construction site. The strike is just a distraction. ")
+}
+
+text gText_TheStrikeStrikesBack_WaitWhatThatsInsane {
+    format("Wait, what? That's insane!")
+}
+
+text gText_TheStrikeStrikesBack_AgreedAndThats {
+    format("Agreed, and that's why we need you two while Adelaide and I work on a peaceful solution.")
+}
+
+text gText_TheStrikeStrikesBack_ThePoliceAreWorking {
+    format("The police are working to make sure the protests remain civil but we don't want a repeat of the riots in CapheCity.")
+}
+
+text gText_TheStrikeStrikesBack_AgitatedWildGarbodor {
+    format("We think TheTide agitated wild Garbodor, and we need you to capture or knock them out while Adelaide and I negotiate with Alcmene. Time is of the essence!")
+}
+
+text gText_TheStrikeStrikesBack_IllBeInThere {
+    format("{PLAYER}, I'll be in there when you're ready.")
+}
+text gText_TheStrikeStrikesBack_HelloPlayer {
+    format("Hello {PLAYER}! I was going to send an email, but Oliver insisted that a call would be more appropriate...")
+}
+text gText_TheStrikeStrikesBack_OhHi {
+    format("Adelaide! Aren't you busy...?")
+}
+text gText_TheStrikeStrikesBack_IKnowImLate {
+    format("So busy in fact, that I'm late in congratulating you. I hear you've got all eight badges!")
+}
+text gText_TheStrikeStrikesBack_CongratsOnYourFeat {
+    format("Nonsense, I'm never too busy to congratulate you on all eight badges!")
+}
+text gText_TheStrikeStrikesBack_ThankYou {
+    format("Heh, thanks! Means a lot.")
+}
+text gText_TheStrikeStrikesBack_CutToTheChase {
+    format("You're right though, we're both about to be very busy. I'll cut to the chase. Could you head down to Route2? Oliver will meet you there and explain everything.")
+}
+text gText_TheStrikeStrikesBack_SureRightNow {
+    format("Sure. Right now?")
+}
+text gText_TheStrikeStrikesBack_AsSoonAsYouCan {
+    format("As soon as you can.")
+}
+text gText_TheStrikeStrikesBack_DoYouWant {
+    format("Do you want to go to Route2?")
+}

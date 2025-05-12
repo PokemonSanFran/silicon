@@ -1,0 +1,282 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const BELEN = 1
+
+script EnterBelen_StartGymBattle_ObjectSetup_Script {
+    if (var (VAR_GYM_1_STATE)== GYM_SAVE_BEFORE_LEADER) {
+        setobjectxyperm(BELEN, 6, 5)
+        setobjectmovementtype(BELEN, MOVEMENT_TYPE_FACE_LEFT)
+    }
+    return
+}
+
+script EnterBelen_PutMeatInOven_Dialogue {
+  lockall
+  setvar(VAR_GYM_1_STATE,GYM_SAVE_BEFORE_LEADER)
+  msgbox(gText_EnterBelen_OneMoreLadle,,SPEAKER_BELEN)
+    closemessage
+  applymovement(BELEN, Common_Movement_Delay48)
+  waitmovement(0)
+  applymovement(BELEN, Common_Movement_WalkInPlaceUp)
+  waitmovement(0)
+  closemessage
+  msgbox(gText_EnterBelen_MeatsInOven, MSGBOX_NPC,SPEAKER_BELEN)
+    closemessage
+  call(EnterBelen_DetermineMovementToBattlefield_Script)
+  goto(EnterBelen_Intro_Dialogue)
+}
+
+script EnterBelen_DetermineMovementToBattlefield_Script {
+  getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+  if (var (VAR_TEMP_1) == 2) {
+    applymovement(BELEN, EnterBelen_WalkSouthToBattlefield)
+
+    if (var (VAR_TEMP_0) == 7) {
+      applymovement(PLAYER, EnterBelen_PlayerWalkToBattlefieldFromLeft)
+    } else {
+      applymovement(PLAYER, EnterBelen_PlayerWalkToBattlefieldFromRight)
+    }
+  } else {
+    applymovement(BELEN, EnterBelen_WalkWestToBattlefield)
+    applymovement(PLAYER, EnterBelen_PlayerWalkToBattlefieldFromDown)
+  }
+  waitmovement(0)
+}
+
+script EnterBelen_Intro_Dialogue {
+  lock
+  msgbox(gText_EnterBelen_MyLatestCreation,,SPEAKER_BELEN)
+    reveal(REVEAL_BELEN)
+  msgbox(gText_EnterBelen_YourSenseOfTaste)
+    startmenu_savescreen
+  goto(EnterBelen_StartGymBattle_Script)
+}
+
+script EnterBelen_StartGymBattle_Script {
+  lock
+  trainerbattle_single(TRAINER_BELEN, gText_EnterBelen_IThinkYouTalk, gText_EnterBelen_WoahSuperSour, EnterBelen_BelenDefeated_Script, NO_MUSIC)
+}
+
+script EnterBelen_BelenDefeated_Script {
+    lockall
+    setflag(FLAG_BADGE01_GET)
+    setvar(VAR_GYM_1_STATE,GYM_DEFEATED_LEADER)
+    setvar(VAR_BELEN_STATE,BATTLE_1_COMPLETE)
+    addvar(VAR_STORYLINE_STATE, 1)
+    call(WowYoureStrong_CheckCutsceneScript)
+    msgbox(gText_EnterBelen_ThatWasDelicious,,SPEAKER_BELEN)
+    closemessage
+    call(EnterBelen_ExplainBuzzr_Dialogue)
+    tweetfanfare(TWEET_GYM_MERMEREZA_CITY_BADGE,MUS_OBTAIN_BADGE)
+    giveitem(ITEM_TM01)
+    msgbox(gText_EnterBelen_OhTheMeat,,SPEAKER_BELEN)
+    closemessage
+    call(EnterBelen_DetermineMovementBackToStove_Script)
+    waitmovement(0)
+    setvar(VAR_TEMP_0,0)
+    call(TryAutoSave)
+    releaseall
+    end
+}
+
+script EnterBelen_ExplainBuzzr_Dialogue{
+    special(GetNumberOfBadges)
+
+    if(var(VAR_RESULT) != 1)
+    {
+        return
+    }
+
+    msgbox(gText_EnterBelen_OkayIllSend,,SPEAKER_BELEN)
+    msgbox(gText_EnterBelen_WhatsBuzzr,,SPEAKER_ALICIA)
+    msgbox(gText_EnterBelen_YouHavenTasted,,SPEAKER_BELEN)
+    msgbox(gText_EnterBelen_BuzzrIs,,SPEAKER_BELEN)
+    call(EnterBelen_DownloadBuzzr_Dialogue)
+    msgbox(gText_EnterBelen_OkayNowLetsTry,,SPEAKER_BELEN)
+    closemessage
+    return
+}
+
+script EnterBelen_DownloadBuzzr_Dialogue{
+    msgbox(gText_EnterBelen_LetMeDownload,,SPEAKER_ALICIA)
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        call(EventScript_InstallBuzzrApp)
+        fadescreen(FADE_FROM_BLACK)
+        return
+}
+
+script EnterBelen_DetermineMovementBackToStove_Script {
+  getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+
+  if (var (VAR_TEMP_0) == 7) {
+    applymovement(BELEN, EnterBelen_WalkNorthBackToStove)
+  } else {
+    applymovement(BELEN, EnterBelen_WalkEastBackToStove)
+  }
+}
+
+script EnterBelen_PostDefeat1_Dialogue {
+  lockall
+  setvar(VAR_GYM_1_STATE,GYM_DEFEATED_LEADER)
+	bufferitemname(STR_VAR_1,ITEM_TM01)
+	buffermovename(STR_VAR_2,MOVE_FLAMETHROWER)
+  msgbox(gText_EnterBelen_WithThatBadge,MSGBOX_NPC,SPEAKER_BELEN)
+      applymovement(BELEN,Common_Movement_FaceUp)
+    waitmovement(0)
+  closemessage
+  releaseall
+  end
+}
+
+script EnterBelen_PostDefeat2_Dialogue {
+  lockall
+  msgbox(gText_EnterBelen_LetsCookTogether,,SPEAKER_BELEN)
+    closemessage
+  releaseall
+  end
+}
+
+movement EnterBelen_WalkSouthToBattlefield {
+  walk_down * 3
+  walk_left * 2
+  face_left
+  step_end
+}
+
+movement EnterBelen_WalkWestToBattlefield {
+  walk_left * 2
+  walk_down * 3
+  face_left
+  step_end
+}
+movement EnterBelen_PlayerWalkToBattlefieldFromLeft {
+  delay_16
+  delay_16
+  delay_16
+  walk_left * 4
+  walk_down * 3
+  face_right
+  step_end
+}
+
+movement EnterBelen_PlayerWalkToBattlefieldFromDown {
+  delay_16
+  delay_16
+  delay_16
+  walk_left * 5
+  walk_down * 2
+  face_right
+  step_end
+}
+
+movement EnterBelen_PlayerWalkToBattlefieldFromRight {
+  delay_16
+  delay_16
+  delay_16
+  walk_left * 6
+  walk_down * 3
+  face_right
+  step_end
+}
+
+movement EnterBelen_WalkEastBackToStove {
+  emote_exclamation_mark
+  walk_right * 3
+  walk_up * 3
+  walk_right
+  face_up
+  walk_left
+  face_up
+  step_end
+}
+
+movement EnterBelen_WalkNorthBackToStove {
+  emote_exclamation_mark
+  walk_up * 3
+  walk_right * 3
+  walk_right
+  face_up
+  walk_left
+  face_up
+  step_end
+}
+
+text gText_EnterBelen_OneMoreLadle {
+  format("Hold on! I've got one brushing of Pinap glaze, and then into the oven...")
+}
+
+text gText_EnterBelen_MeatsInOven {
+  format("Cool, cake's in the oven. ")
+}
+
+text gText_EnterBelen_MyLatestCreation {
+  format("Ticket said you're {PLAYER}, right? I'm Belen, head baker of Poc-Chuc and the Gym Leader here. After you lose, I'll treat you to my latest creation: crepe cake with a Pinap glaze. It's my first time making it, but from that amazing smell, it's gonna be great.")
+}
+
+text gText_EnterBelen_YourSenseOfTaste {
+  format("Did you know that a lot of your sense of taste actually is because of your sense of smell? All of your senses work together to create your culinary experiences. I'll show how I do that in battle too! Let's see if I can overwhelm your palette before my cake burns!")
+}
+
+text gText_EnterBelen_IThinkYouTalk {
+  format("I think you talk more about food than you do battling...")
+}
+
+text gText_EnterBelen_FirstHitOfSpice {
+  format("Whoa, that felt just like the first hit of spice on the tip of my tongue! ")
+}
+
+text gText_EnterBelen_SimmerWasntEnough {
+  format("I've gotta crank the heat, and quick!")
+}
+
+text gText_EnterBelen_WhatABitterDefeat {
+  format("Ouch, what a bitter defeat. Try adding Sitrus Berries?")
+}
+
+text gText_EnterBelen_WoahSuperSour {
+  format("Woah, super sour! I'll add some Micle Berry.")
+}
+
+text gText_EnterBelen_ThatWasDelicious {
+  format("That was delicious! I'm absolutely satiated.")
+}
+
+text gText_EnterBelen_OhTheMeat {
+  format("Oh, the cake!")
+}
+
+text gText_EnterBelen_BadgeGet {
+  format("You recieved the BelenBadge Badge!")
+}
+
+text gText_EnterBelen_WithThatBadge {
+  format("STR_VAR_1 is one of my most delicious moves, it allows your Pokémon to use STR_VAR_2.")
+}
+
+text gText_EnterBelen_LetsCookTogether {
+  format("Let's bake together again soon! Now if you'll excuse me...")
+}
+text gText_EnterBelen_OkayIllSend
+{
+    format("I'll serve up that tweet now!")
+}
+text gText_EnterBelen_WhatsBuzzr
+{
+    format("What's a tweet?")
+}
+text gText_EnterBelen_YouHavenTasted
+{
+    format("You haven't tasted the wonders of Buzzr?")
+}
+text gText_EnterBelen_BuzzrIs
+{
+    format("Everybody in the region uses the app! You can send messages and post updates about your world. In the SharpriseCapital League, when you defeat a Gym Leader, we celebrate with a post on Buzzr! When all the leaders have posted about you, you've qualified for the Championship.")
+}
+text gText_EnterBelen_LetMeDownload
+{
+    format("Let me download it real quick...")
+}
+text gText_EnterBelen_OkayNowLetsTry
+{
+    format("Now let's try this dish!")
+}

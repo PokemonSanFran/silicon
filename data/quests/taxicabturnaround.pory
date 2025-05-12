@@ -1,0 +1,190 @@
+//Quest_Taxicabturnaround_
+//gText_Taxicabturnaround_
+
+script Quest_Taxicabturnaround_Debug_Script{
+    msgbox(format("here are some pokemon to clear the quests with. there might be some in your boxes too."))
+        givemon(SPECIES_GYARADOS,100,0)
+        givemon(SPECIES_WAILORD,100,0)
+        givemon(SPECIES_PERSIAN,100,0)
+        givemon(SPECIES_ARCANINE,100,0)
+        givemon(SPECIES_DRAGONITE,100,0)
+        givemon(SPECIES_AERODACTYL,100,0)
+    return
+}
+
+script Quest_Taxicabturnaround_EliteFour_Dialogue{
+    msgbox(format("go talk to a bunch of different taxis / the trucks around the region."),MSGBOX_NPC,SPEAKER_ARMANDO)
+
+    returnqueststate(QUEST_TAXICABTURNAROUND)
+    if(var(VAR_RESULT) == QUEST_MENU_UNLOCK_QUEST){
+        call(Quest_Taxicabturnaround_Debug_Script)
+        startquest(QUEST_TAXICABTURNAROUND)
+    }
+}
+
+const SEA = 0
+const SKY = 1
+const LAND = 2
+
+script Quest_Taxicabturnaround_CheckQuestTypeAndAsk_Script{
+    specialvar(VAR_RESULT,Quest_Taxicabturnaround_LookUpQuestType)
+
+        switch(var(VAR_RESULT)){
+            case SEA:
+                buffermovename(STR_VAR_1,MOVE_SURF)
+                msgbox(gText_Taxicabturnaround_HaveSea)
+            case SKY:
+                buffermovename(STR_VAR_1,MOVE_FLY)
+                bufferstring(STR_VAR_2,gText_Speed)
+                msgbox(gText_Taxicabturnaround_HaveSky)
+            case LAND:
+                msgbox(gText_Taxicabturnaround_HaveLand)
+        }
+}
+
+script Quest_Taxicabturnaround_AskPokemon_Dialogue{
+    msgbox(gText_Taxicabturnaround_OhTheyMentioned)
+    msgbox(gText_Taxicabturnaround_WeWantTo)
+
+    call(Quest_Taxicabturnaround_CheckQuestTypeAndAsk_Script)
+    msgbox(gText_Taxicabturnaround_DoYouHave,MSGBOX_YESNO)
+
+    if (var(VAR_RESULT) == NO){
+        goto(Quest_Taxicabturnaround_NoRefusePokemon_Dialogue)
+    }else{
+        goto(Quest_Taxicabturnaround_EvaluatePokemon_Script)
+    }
+}
+
+script Quest_Taxicabturnaround_NoRefusePokemon_Dialogue{
+    msgbox(gText_Taxicabturnaround_ComeBackWhen)
+    release
+    end
+}
+
+script Quest_Taxicabturnaround_EvaluatePokemon_Script{
+    special(ChoosePartyMon)
+    waitstate
+
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
+        goto(Quest_Taxicabturnaround_NoRefusePokemon_Dialogue)
+    }
+
+    specialvar(VAR_RESULT,Quest_Taxicabturnaround_CheckRequiredPokemon)
+    if (!var(VAR_RESULT)){
+        goto(Quest_Taxicabturnaround_WrongPokemon_Dialogue)
+    }
+
+    special(BufferMonNickname)
+    msgbox(gText_Taxicabturnaround_AskForMon,MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO){
+        goto(Quest_Taxicabturnaround_NoRefusePokemon_Dialogue)
+    }
+
+    special(HasEnoughMonsForDoubleBattle)
+    if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS){
+        goto(Quest_Taxicabturnaround_NotEnough_Dialogue)
+    }
+
+    goto(Quest_Taxicabturnaround_TakeMonMarkSubquest_Script)
+}
+
+script Quest_Taxicabturnaround_TakeMonMarkSubquest_Script{
+    special(DeleteChosenPartyMon)
+    special(Quest_Taxicabturnaround_MarkSubquestComplete)
+    call(Quest_Taxicabturnaround_CheckReward_Script)
+    call(Quest_Taxicabturnaround_CheckNextStage_Script)
+    closemessage
+    release
+    end
+}
+
+script Quest_Taxicabturnaround_CheckNextStage_Script{
+    specialvar(VAR_RESULT,Quest_Taxicabturnaround_CheckReadyForNext)
+    if (var(VAR_RESULT)){
+        returnqueststate(QUEST_PERSUASIVEPASSENGER)
+        if (var(VAR_RESULT) < QUEST_MENU_SET_ACTIVE){
+            call(Quest_Taxicabturnaround_ProposePersuaive_Dialogue)
+        }
+    }
+    return
+}
+
+script Quest_Taxicabturnaround_CheckReward_Script{
+    specialvar(VAR_RESULT,Quest_Taxicabturnaround_CountRemainingSubquests)
+
+    if (var(VAR_RESULT) == 0){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_TAXICABTURNAROUND)
+    }
+    return
+}
+
+script Quest_Taxicabturnaround_ProposePersuaive_Dialogue{
+    msgbox(gText_Taxicabturnaround_WordHasBeenGetting)
+    return
+}
+
+script Quest_Taxicabturnaround_WrongPokemon_Dialogue{
+    msgbox(gText_Taxicabturnaround_YouKnowIDont)
+    closemessage
+    release
+    end
+}
+
+script Quest_Taxicabturnaround_NotEnough_Dialogue{
+    msgbox(gText_Taxicabturnaround_ThatsYourLast)
+    closemessage
+    release
+    end
+}
+
+script Quest_Taxicabturnaround_Reward_Dialogue{
+    msgbox(gText_Taxicabturnaround_HeyWeAllNoticed)
+    closemessage
+    giveitem(ITEM_OVAL_CHARM,1)
+    msgbox(gText_Taxicabturnaround_YoureARealOne)
+    completequest(QUEST_TAXICABTURNAROUND)
+    return
+}
+
+text gText_Taxicabturnaround_OhTheyMentioned{
+    format("Oh, you're {PLAYER}! They mentioned you'd be coming.")
+}
+text gText_Taxicabturnaround_WeWantTo{
+    format("We're part of the taxicab union and we're trying to expand our fleet by using Pokémon. We've got people to train them, but not enough people to help catch them...")
+}
+text gText_Taxicabturnaround_HaveSea{
+    format("I'm looking for a Pokémon that can learn {STR_VAR_1}. It should be probably be tall too.. like 1.1m.")
+}
+text gText_Taxicabturnaround_HaveSky{
+    format("I need a Pokémon that can learn {STR_VAR_1}. It's gotta be fast! The species should have at least 80 base {STR_VAR_2}.")
+}
+text gText_Taxicabturnaround_HaveLand{
+    format("I'm trying to get a hold of a Pokémon in the Field egg group, something from the land, you know? And its gonna need some bulk, like 32kg.")
+}
+//PSF TODO need to change units based on the player's setting
+//PSF TODO once pokedex is done, should use the egg group strings
+text gText_Taxicabturnaround_DoYouHave{
+    format("Do you have one you can give us??")
+}
+text gText_Taxicabturnaround_ComeBackWhen{
+    format("Come back when you can give us one. Thanks!")
+}
+text gText_Taxicabturnaround_AskForMon{
+    format("This is perfect. Are you sure I can have this {STR_VAR_1} forever?")
+}
+text gText_Taxicabturnaround_YouKnowIDont{
+    format("You know, I don't think this Pokémon will work...")
+}
+text gText_Taxicabturnaround_ThatsYourLast{
+    format("That's the last Pokémon in your party! I can't take it.")
+}
+text gText_Taxicabturnaround_WordHasBeenGetting{
+    format("Word has been getting around about you helping us out. You should talk to the head of the Taxicab union in GlavezHill.")
+}
+text gText_Taxicabturnaround_HeyWeAllNoticed{
+    format("Hey we all noticed how great you've been, and wanted to give you a little something.")
+}
+text gText_Taxicabturnaround_YoureARealOne{
+    format("You're a real one!")
+}

@@ -1,0 +1,21 @@
+script ANewStrike_BreakingNews_Dialogue {
+    clearflag(FLAG_CONSTRUCTION_BREAKING_NEWS)
+    lockall
+    startcutscene(JUMPPLAYER_ANEWSTRIKE)
+    addvar(VAR_STORYLINE_STATE,1)
+    showtweet(TWEET_STORY_STRIKE_BEGIN_1)
+    showtweet(TWEET_STORY_STRIKE_BEGIN_2)
+    goto(ANewStrike_PlayerSelf_Dialogue)
+}
+
+script ANewStrike_PlayerSelf_Dialogue {
+        msgbox(gText_ANewStrike_OhDamn,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE,PHONE_OFF)
+        closemessage
+        endcutscene
+        releaseall
+        end
+}
+
+text gText_ANewStrike_OhDamn {
+    format("Oh damn. I wonder what they'll do if the Championship has to be delayed…")
+}

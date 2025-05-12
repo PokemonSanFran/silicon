@@ -1,0 +1,469 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const RABIA = 10 //FLAG_TEMP_1
+const VITOMIR = 11 //FLAG_TEMP_1
+const TURTONATOR = 13 //FLAG_TEMP_2
+const LANDLORD = 12 //FLAG_TEMP_3
+const ADAORA = 14 //FLAG_TEMP_4
+const FLAG_TALKED_LANDLORD = FLAG_TEMP_1F
+
+script HousingProtest_ObjectSetUp_Script {
+    setflag(FLAG_TEMP_1)
+    setflag(FLAG_TEMP_2)
+    setflag(FLAG_TEMP_3)
+    setflag(FLAG_TEMP_4)
+}
+
+script HousingProtest_PostSave_ObjectSetUp_Script {
+    setobjectxyperm(LANDLORD, 1, 18)
+    setobjectxyperm(RABIA, 1, 20)
+    setobjectxyperm(VITOMIR, 2, 20)
+    setflag(FLAG_TEMP_4)
+}
+
+script HousingProtest_CleanUp_Landlord_Script {
+    setflag(FLAG_TEMP_1)
+    setflag(FLAG_TEMP_2)
+    setflag(FLAG_TEMP_3)
+    setflag(FLAG_TEMP_5)
+    clearflag(FLAG_TEMP_4)
+}
+
+script HousingProtest_CleanUp_Script {
+    setobjectmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
+    setobjectmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+    removeobject(1)
+    removeobject(2)
+    removeobject(3)
+    removeobject(5)
+    removeobject(7)
+    removeobject(8)
+    removeobject(9)
+}
+
+
+script HousingProtest_StartChanting_Dialogue {
+    locktarget
+    msgbox(gText_HousingProtest_RichAndRude,,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
+    applymovement(PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox(gText_HousingProtest_YoureNoGood,,SPEAKER_PROTEST_B,TAIL_SHOUT,EMOTE_ANGRY)
+    applymovement(PLAYER, Common_Movement_FaceDown)
+    waitmovement(0)
+    msgbox(gText_HousingProtest_EverybodySoAngry,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_HousingProtest_ArentGoingToStand,,SPEAKER_PROTEST_B,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(gText_HousingProtest_CantKeepPushing,,SPEAKER_PROTEST_C,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(gText_HousingProtest_DeserveToLive,,SPEAKER_PROTEST_D,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+    goto(HousingProtest_LandlordWalkOutside_Script)
+}
+
+script HousingProtest_MovePlayerIntoPosition {
+    locktarget
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+    switch (var (VAR_TEMP_0)) {
+    case 6:
+        applymovement(PLAYER, HousingProtest_WalkPlayer1Left)
+    case 7:
+        applymovement(PLAYER, HousingProtest_WalkPlayer2Left)
+    case 8:
+        applymovement(PLAYER, HousingProtest_WalkPlayer3Left)
+    case 9:
+        applymovement(PLAYER, HousingProtest_WalkPlayer4Left)
+    }
+    waitmovement(0)
+
+    if (defeated(TRAINER_HOUSINGPROTEST_ROCKET)) {
+        applymovement(PLAYER, HousingProtest_WalkSouthFromLandlord)
+        waitmovement(0)
+    }
+}
+
+script HousingProtest_LandlordWalkOutside_Script {
+    opendoor(2, 17)
+    waitdooranim
+    applymovement(PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    clearflag(FLAG_TEMP_3)
+    addobject(LANDLORD)
+    applymovement(LANDLORD, Common_Movement_WalkDown)
+    waitmovement(0)
+    applymovement(LANDLORD, Common_Movement_WalkDown)
+    waitmovement(0)
+    closedoor(2, 17)
+    waitdooranim
+    applymovement(LANDLORD, Common_Movement_LookAround)
+    waitmovement(0)
+    applymovement(LANDLORD, Common_Movement_FaceDown)
+    waitmovement(0)
+    goto(HousingProtest_LandlordTalkToCrowd_Dialogue)
+}
+
+script HousingProtest_LandlordTalkToCrowd_Dialogue {
+    msgbox(gText_HousingProtest_WeCanComeTo,,SPEAKER_LANDLORD)
+    closemessage
+    call(HousingProtest_MovePlayerIntoPosition)
+    clearflag(FLAG_TEMP_1)
+    playbgm(MUS_RG_ENCOUNTER_ROCKET, FALSE)
+    addobject(RABIA)
+    addobject(VITOMIR)
+    applymovement(RABIA, HousingProtest_ApproachLandlord)
+    applymovement(VITOMIR, HousingProtest_ApproachLandlord)
+    waitmovement(0)
+    applymovement(LANDLORD, Common_Movement_ExclamationMark)
+    playse(SE_PIN)
+    waitmovement(0)
+    msgbox(gText_HousingProtest_OnlyThingWereUnderstanding,,SPEAKER_RABIA)
+    closemessage
+    applymovement(LANDLORD, HousingProtest_BackUp)
+    waitmovement(0)
+    msgbox(gText_HousingProtest_AreYouTrying,,SPEAKER_LANDLORD)
+    msgbox(gText_HousingProtest_TheyCantArrest,,SPEAKER_RABIA)
+    msgbox(gText_HousingProtest_AintGonnaBeNothing,,SPEAKER_VITOMIR)
+    closemessage
+    applymovement(RABIA, Common_Movement_FaceRight)
+    applymovement(VITOMIR, Common_Movement_FaceRight)
+    msgbox(gText_HousingProtest_PeopleCantStayHere,,SPEAKER_VITOMIR)
+    closemessage
+    applymovement(1, Common_Movement_FaceLeft)
+    applymovement(2, Common_Movement_FaceLeft)
+    applymovement(3, Common_Movement_FaceLeft)
+    applymovement(4, Common_Movement_FaceLeft)
+    applymovement(5, Common_Movement_FaceLeft)
+    applymovement(6, Common_Movement_FaceLeft)
+    applymovement(7, Common_Movement_FaceLeft)
+    applymovement(8, Common_Movement_FaceLeft)
+    applymovement(9, Common_Movement_FaceLeft)
+    waitmovement(0)
+    applymovement(6, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    msgbox(gText_HousingProtest_Yeah,,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
+    applymovement(3, Common_Movement_ExclamationMark)
+    msgbox(gText_HousingProtest_LetsDoThis,,SPEAKER_PROTEST_C,TAIL_SHOUT,EMOTE_ANGRY)
+    waitmovement(0)
+    applymovement(2, Common_Movement_ExclamationMark)
+    msgbox(gText_HousingProtest_ScrewThese,,SPEAKER_PROTEST_D,TAIL_SHOUT,EMOTE_ANGRY)
+    waitmovement(0)
+    closemessage
+    applymovement(RABIA, Common_Movement_FaceUp)
+    applymovement(VITOMIR, Common_Movement_FaceUp)
+    waitmovement(0)
+    playse(SE_BALL_OPEN)
+    waitse
+    clearflag(FLAG_TEMP_2)
+    addobject(TURTONATOR)
+    playmoncry(SPECIES_TURTONATOR, CRY_MODE_ENCOUNTER)
+    waitmoncry
+    msgbox(gText_HousingProtest_ToTryReason,,SPEAKER_LANDLORD)
+    msgbox(gText_HousingProtest_AintAThreat,,SPEAKER_VITOMIR)
+    msgbox(gText_HousingProtest_CutItOut,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        closemessage
+    applymovement(PLAYER, HousingProtest_DefendLandlord)
+    applymovement(LANDLORD, HousingProtest_StepAside)
+    waitmovement(0)
+    msgbox(gText_HousingProtest_EveryTimeISee,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_HousingProtest_TheseClowns,,SPEAKER_RABIA)
+    msgbox(gText_HousingProtest_ThisAintYourBusiness,,SPEAKER_VITOMIR)
+    msgbox(gText_HousingProtest_ICanTakeBoth,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        closemessage
+    setvar(VAR_ROUTE99_STATE,SAVE_THETIDE_ROUTE99)
+    copyobjectxytoperm(LANDLORD)
+    copyobjectxytoperm(RABIA)
+    copyobjectxytoperm(VITOMIR)
+    startmenu_savescreen
+    goto(HousingProtest_StartBattle_Script)
+}
+
+script HousingProtest_StartBattle_Script {
+    lockall
+    msgbox(gText_HousingProtest_FineWithMe,,SPEAKER_VITOMIR)
+    closemessage
+    trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET, gText_HousingProtest_ThisIsNotHowThis)
+    goto(HousingProtest_PostBattle_Dialogue)
+}
+
+script HousingProtest_StartBattle_PostSave_Script {
+    locktarget
+    setobjectnewmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
+    setobjectnewmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+    msgbox(gText_HousingProtest_FineWithMe, MSGBOX_NPC,SPEAKER_RABIA)
+    closemessage
+    trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET, gText_HousingProtest_ThisIsNotHowThis)
+    goto(HousingProtest_PostBattle_Dialogue)
+}
+
+script HousingProtest_PostBattle_Dialogue {
+    lockall
+    startcutscene(JUMPPLAYER_HOUSINGPROTEST)
+    setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_CHASILLA_PROTEST)
+    setobjectnewmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
+    setobjectnewmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+    playse(SE_BALL_OPEN)
+    waitse
+    removeobject(TURTONATOR)
+    setvar(VAR_ROUTE99_STATE,DEFEATED_THETIDE_ROUTE99)
+    msgbox(gText_HousingProtest_YouProudNow,,SPEAKER_RABIA)
+    msgbox(gText_HousingProtest_KeepOnLicking,,SPEAKER_VITOMIR)
+    closemessage
+    call(HousingProtest_GruntsAwalkAway_Script)
+    releaseall
+    call(TryAutoSave)
+    endcutscene
+    end
+}
+
+script HousingProtest_GruntsAwalkAway_Script {
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+
+    if (var (VAR_TEMP_1) == 21) {
+        call(HousingProtest_MoveGruntsAroundPlayer_Script)
+    } else {
+        call(HousingProtest_MoveGruntsExit_Script)
+    }
+    waitmovement(0)
+    removeobject(VITOMIR)
+    removeobject(RABIA)
+    fadedefaultbgm
+}
+
+script HousingProtest_MoveGruntsExit_Script {
+    applymovement(VITOMIR, HousingProtest_WalkSouthFromLandlord)
+    applymovement(RABIA, HousingProtest_WalkSouthFromLandlord)
+}
+
+script HousingProtest_MoveGruntsAroundPlayer_Script {
+    applymovement(RABIA, HousingProtest_WalkAroundPlayer)
+    applymovement(VITOMIR, HousingProtest_WalkAroundPlayer)
+}
+
+script HousingProtest_InteractLandlord_Script {
+    lock
+
+    if (var (VAR_ROUTE99_STATE) < DEFEATED_THETIDE_ROUTE99){
+        msgbox(gText_HousingProtest_OhGod, MSGBOX_NPC,SPEAKER_LANDLORD)
+    } elif (!flag (FLAG_TALKED_LANDLORD)){
+        call(HousingProtest_InteractLandlord_Dialogue)
+    } else {
+        msgbox(gText_HousingProtest_ShouldHireThatSecurity, MSGBOX_NPC,SPEAKER_LANDLORD)
+    }
+
+    closemessage
+    release
+    end
+}
+
+script HousingProtest_InteractLandlord_Dialogue {
+    setflag(FLAG_TALKED_LANDLORD)
+
+    msgbox(gText_HousingProtest_HasATendency, MSGBOX_NPC,SPEAKER_LANDLORD)
+    msgbox(gText_HousingProtest_WhyWereProtesting,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_HousingProtest_EntitledToLiveAnyWhere,,SPEAKER_LANDLORD)
+    msgbox(gText_HousingProtest_SubjectToTheSameRent,,SPEAKER_LANDLORD,,EMOTE_ANGRY)
+    msgbox(gText_HousingProtest_SoPeopleWereComing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_HousingProtest_IGuessSo,,SPEAKER_LANDLORD)
+    msgbox(gText_HousingProtest_WhatAboutThePolice,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_HousingProtest_MoreAndMoreCommon,,SPEAKER_LANDLORD)
+}
+
+text gText_HousingProtest_RichAndRude {
+    format("Hey you! Rich and rude! We don't like your attitude!")
+}
+
+text gText_HousingProtest_YoureNoGood {
+    format("Hey you! You're no good! Treat the people like you should!")
+}
+
+text gText_HousingProtest_EverybodySoAngry {
+    format("Why is everybody so angry?")
+}
+
+text gText_HousingProtest_ArentGoingToStand {
+    format("We aren't going to stand for this any longer!")
+}
+
+text gText_HousingProtest_CantKeepPushing {
+    format("You can't keep pushing us out!")
+}
+
+text gText_HousingProtest_DeserveToLive {
+    format("We deserve to live here too!")
+}
+
+text gText_HousingProtest_WeCanComeTo {
+    format("I'm sure we can come to some understanding here, please...")
+}
+
+text gText_HousingProtest_OnlyThingWereUnderstanding {
+    format("The only thing we're understanding is that you need to leave, and take your fancy apartments with you!")
+}
+
+text gText_HousingProtest_AreYouTrying {
+    format("Are you trying to intimidate me? I'll call the police!")
+}
+
+text gText_HousingProtest_TheyCantArrest {
+    format("They can't arrest of all us, right?")
+}
+
+text gText_HousingProtest_AintGonnaBeNothing {
+    format("Ain't gonna be nothing to defend when we done...")
+}
+
+text gText_HousingProtest_PeopleCantStayHere {
+    format("If we, the people of Oroland can't stay here, nobody can. Let's bring it down!")
+}
+
+text gText_HousingProtest_Yeah {
+    format("Yeah!")
+}
+
+text gText_HousingProtest_LetsDoThis {
+    format("Let's do this!")
+}
+
+text gText_HousingProtest_ScrewThese {
+    format("Screw these developers!")
+}
+
+text gText_HousingProtest_ToTryReason {
+    format("I came outside to try to reason with you trash, and you're threatening me and my building?")
+}
+
+text gText_HousingProtest_AintAThreat {
+    format("Ain't a threat. We promising. Call ya boys!")
+}
+
+text gText_HousingProtest_CutItOut {
+    format("Cut it out!")
+}
+
+text gText_HousingProtest_EveryTimeISee {
+    format("Every time I see you guys, you're attacking innocent people. Don't you have something more productive to do?")
+}
+
+text gText_HousingProtest_TheseClowns {
+    format("Innocent? These clowns?! Damn, you transplants really got it twisted.")
+}
+
+text gText_HousingProtest_ThisAintYourBusiness {
+    format("This ain't your business. You should un-involve yourself.")
+}
+
+text gText_HousingProtest_OhGod {
+    format("Oh god... they're going to kill me!")
+}
+
+text gText_HousingProtest_ICanTakeBoth {
+    format("I can take both of you. Leave him alone, or you're going through me.")
+}
+
+text gText_HousingProtest_FineWithMe {
+    format("Pfft, fine with me. Turtonator, Flamethrower!")
+}
+
+text gText_HousingProtest_GoPoundSand {
+    format("Go pound sand, and stay out of TheTide's way.")
+}
+
+text gText_HousingProtest_ThisIsNotHowThis {
+    format("Shit... this is not how this was supposed to go down.")
+}
+
+text gText_HousingProtest_YouProudNow {
+    format("You proud now? C'mon Vitomir.")
+}
+
+text gText_HousingProtest_KeepOnLicking {
+    format("Keep on licking those boots, fam. Dumbass...")
+}
+
+text gText_HousingProtest_HasATendency {
+    format("Thank you very much. You're right, TheTide has a tendency to pick on the defenseless like me.")
+}
+
+text gText_HousingProtest_WhyWereProtesting {
+    format("Why were people protesting?")
+}
+
+text gText_HousingProtest_EntitledToLiveAnyWhere {
+    format("Some of the citizens of Oroland feel that they are... entitled to live anywhere within their city limits.")
+}
+
+text gText_HousingProtest_SubjectToTheSameRent {
+    format("I don't get why they don't think they're subject to the same rent rules and regulations as the rest of us.")
+}
+
+text gText_HousingProtest_SoPeopleWereComing {
+    format("So people were coming to take the building from you?")
+}
+
+text gText_HousingProtest_IGuessSo {
+    format("I guess so.")
+}
+
+text gText_HousingProtest_WhatAboutThePolice {
+    format("What about the police?")
+}
+
+text gText_HousingProtest_MoreAndMoreCommon {
+    format("I'm sure they would have stopped it, but these protests are getting more and more common. The police can't be everywhere at once!")
+}
+
+text gText_HousingProtest_ShouldHireThatSecurity {
+    format("I suppose I should hire that security guard sooner rather than later...")
+}
+
+movement HousingProtest_WalkPlayer1Left {
+    walk_left * 1
+    step_end
+}
+
+movement HousingProtest_WalkPlayer2Left {
+    walk_left * 2
+    step_end
+}
+
+movement HousingProtest_WalkPlayer3Left {
+    walk_left * 3
+    step_end
+}
+
+movement HousingProtest_WalkPlayer4Left {
+    walk_left * 4
+    step_end
+}
+
+movement HousingProtest_ApproachLandlord {
+    walk_up * 4
+    step_end
+}
+
+movement HousingProtest_BackUp {
+    lock_facing_direction
+    walk_slow_up
+    delay_16
+    unlock_facing_direction
+    step_end
+}
+
+movement HousingProtest_DefendLandlord {
+    walk_left * 3
+    face_down
+    step_end
+}
+
+movement HousingProtest_StepAside {
+    walk_left
+    face_down
+    step_end
+}
+
+movement HousingProtest_WalkSouthFromLandlord {
+    walk_down * 4
+    step_end
+}
+
+movement HousingProtest_WalkAroundPlayer {
+    walk_right * 2
+    walk_down * 4
+    step_end
+}

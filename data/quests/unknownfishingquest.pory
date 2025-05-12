@@ -1,0 +1,4 @@
+script UnknownFishingQuest_Placeholder{
+    msgbox(format("this is a placeholder for the unknown fishing quest"),MSGBOX_NPC)
+    end
+}

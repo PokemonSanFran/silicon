@@ -1,0 +1,33 @@
+const NERIENE = 21
+const FLAG_HIDE_NERIENE = FLAG_TEMP_5
+
+//gText_UnknownNerieneA_
+//Quest_UnknownNerieneA_
+
+script Quest_UnknownNerieneA_HideLeader_Script{
+    special(GetNumberOfBadges)
+
+    if (var(VAR_NERIENE_STATE) != BATTLE_1_COMPLETE){
+        setflag(FLAG_HIDE_NERIENE)
+    }
+
+    if (var(VAR_RESULT) < 6){
+        setflag(FLAG_HIDE_NERIENE)
+    }
+
+    switch (var(VAR_HALAI_ISLAND_STATE)){
+        case START_SURVIVAL_CHANCE:
+        case POST_SURVIVAL_CHANCE:
+        case WHY_ARE_YOU_HELPING_THEM:
+        case POST_EARTHQUAKE:
+        case START_EARTHQUAKE_RESCUE:
+        case POST_EARTHQUAKE_RESCUE:
+        case MEET_AT_ROUTE4:
+            setflag(FLAG_HIDE_NERIENE)
+    }
+}
+
+script Quest_UnknownNerieneA_Event_Script{
+    msgbox(format("this is placeholder text since we had no idea what this quest is."),MSGBOX_NPC)
+    end
+}

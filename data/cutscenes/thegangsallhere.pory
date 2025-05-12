@@ -1,0 +1,399 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ARNAV = 1
+const TECHIE = 2
+const OLIVER = 3
+const CHARLOTTE = 4
+const ADELAIDE = 5
+const CHIEF = 6
+const RAMESH = 7
+const KEIYING = 8
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+script TheGangsAllHere_ObjectCleanUp_Script {
+    call(SharpriseSpire_Leagueops_EmptyConferenceRoomOffices)
+    return
+}
+
+script TheGangsAllHere_MidMission_Object_Script{
+    setflag(FLAG_HIDE_NERDS_COPS)
+    setflag(FLAG_HIDE_CHARLOTTE)
+    setflag(FLAG_HIDE_RAMESH)
+    setflag(FLAG_HIDE_KEIYING)
+    setobjectxy(OLIVER,6,46)
+    setobjectxy(ADELAIDE,5,56)
+    setobjectxyperm(ADELAIDE,5,56)
+    return
+}
+
+script TheGangsAllHere_ObjectSetup_Script{
+    setflag(FLAG_HIDE_NERDS_COPS)
+    setflag(FLAG_HIDE_CHARLOTTE)
+    setflag(FLAG_HIDE_RAMESH)
+    setflag(FLAG_HIDE_KEIYING)
+    setobjectxy(ADELAIDE,5,56)
+    setobjectxyperm(ADELAIDE,5,56)
+    return
+}
+
+script TheGangsAllHere_MoveOliverToStairs_Script{
+        addobject(OLIVER) //PSF TODO why is oliver invisible without this
+        setobjectmovementtype(OLIVER,MOVEMENT_TYPE_FACE_DOWN)
+        setobjectxy(OLIVER,16,9)
+        setobjectxyperm(OLIVER,16,9)
+        return
+}
+
+script TheGangsAllHere_OliverAppearStairs_Script{
+    lock
+    playse(SE_EXIT)
+    waitse
+
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+    if (var(VAR_TEMP_0) == 16){
+        applymovement(PLAYER,TheGangsAllHere_StepAsideOliver_Movement)
+        waitmovement(PLAYER)
+        call(TheGangsAllHere_MoveOliverToStairs_Script)
+        applymovement(OLIVER,TheGangsAllHere_WalkStairs_FacePlayer_Movement)
+        waitmovement(OLIVER)
+    }else{
+        call(TheGangsAllHere_MoveOliverToStairs_Script)
+        playse(SE_PIN)
+        applymovement(PLAYER,Common_Movement_FaceLeft)
+        applymovement(OLIVER,TheGangAllHere_WalkStairsToElevator_Movement)
+        waitmovement(OLIVER)
+    }
+
+    goto(TheGangsAllHere_WhatBringsYou_Dialogue)
+}
+
+script TheGangsAllHere_WhatBringsYou_Dialogue{
+    lock
+    setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,START_THE_GANGS_ALL_HERE)
+    playbgm(MUS_RG_FOLLOW_ME,FALSE)
+    msgbox(gText_TheGangsAllHere_WhatBringsYou,,SPEAKER_OLIVER)
+    msgbox(gText_TheGangsAllHere_ToldMeToVisit,,SPEAKER_ALICIA)
+    msgbox(gText_TheGangsAllHere_IsThisWhereYouWork,,SPEAKER_ALICIA)
+    msgbox(gText_TheGangsAllHere_TheTowerYes,,SPEAKER_OLIVER)
+    msgbox(gText_TheGangsAllHere_IHaventBeen,,SPEAKER_OLIVER)
+    msgbox(gText_TheGangsAllHere_OfCourseNot,,SPEAKER_ALICIA)
+
+    closemessage
+    special(HealPlayerParty)
+    applymovement(OLIVER,FollowMe_Movement)
+    waitmovement(OLIVER)
+    setobjectxy(OLIVER,6,46)
+    setobjectxyperm(OLIVER,6,46)
+    fadedefaultbgm
+    //loadword(0,NewScript)
+    //setfollower(OLIVER,0x100) //PSF TODO hook up FollowMe scripts
+    //https://www.pokecommunity.com/showthread.php?t=432529
+    call(TryAutoSave)
+    releaseall
+    end
+}
+
+script TheGangsAllHere_OfficeIsntThatWay_Script{
+    lockall
+    startcutscene(JUMPPLAYER_THEGANGSALLHERE)
+    msgbox(gText_TheGangsAllHere_OfficeIsntThatWay,,SPEAKER_OLIVER)
+
+    closemessage
+    applymovement(PLAYER,TheGangsAllHere_OfficeIsntThatWay_Movement)
+}
+
+script TheGangsAllHere_WalkHallway_Script{
+    applymovement(OLIVER,Common_Movement_WalkDown)
+    applymovement(PLAYER,Common_Movement_WalkDown)
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    setobjectxy(PLAYER,5,52)
+    setobjectxy(OLIVER,6,52)
+    TeleportCamera(5,52)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script TheGangsAllHere_ThisIsOffice_Script{
+    lock
+    faceplayer
+    msgbox(gText_TheGangsAllHere_ThisIsOffice,,SPEAKER_OLIVER)
+    closemessage
+
+    call(TheGangsAllHere_WalkHallway_Script)
+    goto(TheGangsAllHere_ComeOnIn_Dialogue)
+}
+
+script TheGangsAllHere_ComeOnIn_Dialogue{
+    setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_THE_GANGS_ALL_HERE)
+    playbgm(MUS_RG_ENCOUNTER_DEOXYS,FALSE)
+    playse(SE_PIN)
+
+    applymovement(ADELAIDE,Common_Movement_ExclamationMark)
+    waitmovement(ADELAIDE)
+    applymovement(ADELAIDE,TheGangsAllHere_AdelaideWalkToDoor_Movement)
+
+    msgbox(gText_TheGangsAllHere_ComeOnIn,,SPEAKER_ADELAIDE)
+    closemessage
+
+
+    msgbox(gText_TheGangsAllHere_AsYouAsked,,SPEAKER_OLIVER)
+    closemessage
+
+
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    applymovement(OLIVER,Common_Movement_FaceLeft)
+    waitmovement(PLAYER)
+
+    msgbox(gText_TheGangsAllHere_IThoughtYouSaid,,SPEAKER_ALICIA)
+
+    msgbox(gText_TheGangsAllHere_IDidIsee,,SPEAKER_OLIVER)
+
+    goto(TheGangsAllHere_NotIntentionally_Dialogue)
+    end
+}
+
+script TheGangsAllHere_NotIntentionally_Dialogue{
+    msgbox(gText_TheGangsAllHere_NotIntentionally,,SPEAKER_ADELAIDE)
+    reveal(REVEAL_ADELAIDE)
+
+    if(var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI){
+        msgbox(gText_TheGangsAllHere_PleaseTellMe)
+
+    msgbox(gText_TheGangsAllHere_IHeardWonderfulThings,,SPEAKER_OLIVER)
+    }
+
+    msgbox(gText_TheGangsAllHere_InAnyCase)
+
+
+    applymovement(OLIVER,Common_Movement_WalkInPlaceDown)
+    waitmovement(OLIVER)
+
+    msgbox(gText_TheGangsAllHere_ImThrilledTheTiming,,SPEAKER_ADELAIDE)
+    closemessage
+
+
+    goto(TheGangsAllHere_GivePrestoApp_Script)
+    end
+}
+
+script TheGangsAllHere_GivePrestoApp_Script{
+    applymovement(PLAYER,Common_Movement_FaceDown)
+    applymovement(ADELAIDE,TheGangsAllHere_GivePackageToPlayerChar_Movement)
+    waitmovement(ADELAIDE)
+    call(EventScript_InstallPrestoApp)
+    goto(TheGangsAllHere_GivePrestoApp_Dialogue)
+    end
+}
+
+script TheGangsAllHere_GivePrestoApp_Dialogue{
+    msgbox(gText_TheGangsAllHere_PrestoDroneDelivery,,SPEAKER_ADELAIDE)
+
+    applymovement(OLIVER,Common_Movement_FacePlayer)
+    waitmovement(OLIVER)
+    applymovement(PLAYER,Common_Movement_FaceRight)
+
+    msgbox(gText_TheGangsAllHere_NotToPlaceAnyUndue,,SPEAKER_OLIVER)
+
+    msgbox(gText_TheGangsAllHere_OhWowThatMeans,,SPEAKER_ALICIA)
+    closemessage
+
+    applymovement(PLAYER,Common_Movement_FaceDown)
+    msgbox(gText_TheGangsAllHere_WeKnowButNoPressure,,SPEAKER_ADELAIDE)
+
+    goto(TheGangsAllHere_EndScene_Dialogue)
+}
+
+script TheGangsAllHere_EndScene_Dialogue{
+    msgbox(gText_TheGangsAllHere_TimeForNumber7)
+    closemessage
+
+
+    applymovement(OLIVER,Common_Movement_FaceDown)
+
+    msgbox(gText_TheGangsAllHere_WeShall,,SPEAKER_OLIVER)
+
+
+    applymovement(OLIVER,Common_Movement_FacePlayer)
+    applymovement(PLAYER,Common_Movement_FaceRight)
+
+    msgbox(gText_TheGangsAllHere_FeelFreeToContinue,,SPEAKER_OLIVER)
+
+    if(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
+        msgbox(gText_TheGangsAllHere_AhAndIf)
+    }
+
+    closemessage
+
+    applymovement(PLAYER,TheGangsAllHere_WatchPairLeave_Movement)
+    applymovement(ADELAIDE,TheGangsAllHere_AdelaideWalkOut_Movement)
+    applymovement(OLIVER,TheGangsAllHere_OliverWalkOut_Movement)
+    waitmovement(OLIVER)
+    fadedefaultbgm
+    removeobject(ADELAIDE)
+    removeobject(OLIVER)
+    addvar(VAR_STORYLINE_STATE,1)
+    setvar(VAR_TEMP_0,0)
+    endcutscene
+    call(TryAutoSave)
+    release
+    end
+}
+
+text gText_TheGangsAllHere_WhatBringsYou{
+    format("{PLAYER}! What brings you to League HQ?")
+}
+text gText_TheGangsAllHere_ToldMeToVisit{
+    format("Commissioner Adelaide told me to visit after I got my third badge!")
+}
+text gText_TheGangsAllHere_IsThisWhereYouWork{
+    format("Is this where you work?")
+}
+text gText_TheGangsAllHere_TheTowerYes{
+    format("My office is on this floor, yeah! This is League Ops, and everybody here is solely dedicated to making sure the SharpriseCapital Pokemon League is a success.")
+}
+text gText_TheGangsAllHere_IHaventBeen{
+    format("I've an important delivery for the C.E.O., but the workers here in League Ops can be a little... rowdy. Do you mind if I tag along on your tour? I'll keep you in tip-top shape!")
+}
+text gText_TheGangsAllHere_OfCourseNot{
+    format("Of course not!")
+}
+
+text gText_TheGangsAllHere_OfficeIsntThatWay{
+    format("Hey {PLAYER}, the office isn't that way!")
+}
+
+text gText_TheGangsAllHere_ThisIsOffice{
+    format("This is Adelaide's office. After you.")
+}
+
+text gText_TheGangsAllHere_ComeOnIn{
+    format("{PLAYER}! Oliver! Come on in, I just finished an email! Glad you're both here, and excellent timing that you ran into each other.")
+}
+text gText_TheGangsAllHere_AsYouAsked{
+    format("As you asked, I have your package.")
+}
+text gText_TheGangsAllHere_IThoughtYouSaid{
+    format("I thought you said you had a delivery for the C.E.O.?")
+}
+text gText_TheGangsAllHere_IDidIsee{
+    format("I did. I see Adelaide neglected to reveal his full title...?")
+}
+text gText_TheGangsAllHere_NotIntentionally{
+    format("Not intentionally! I was just so swept up in your battle!")
+}
+
+text gText_TheGangsAllHere_PleaseTellMe{
+    format("Oliver, please tell me you'll go back and watch Ramesh's highlight reel later, it was fantastic.")
+}
+text gText_TheGangsAllHere_LikeISaidWe{
+    format("Like I said, we wear a lot of hats.")
+}
+text gText_TheGangsAllHere_IHeardWonderfulThings{
+    format("I heard wonderful things on the way over here, but I'll be certain to observe later.")
+}
+text gText_TheGangsAllHere_InAnyCase{
+    format("In any case, your package, Adelaide.")
+}
+text gText_TheGangsAllHere_ImThrilledTheTiming{
+    format("I'm thrilled the timing worked out, because the package actually isn't for me!")
+}
+text gText_TheGangsAllHere_PrestoDroneDelivery{
+    format("You've got access to Presto's drone delivery program. If you select that app while you're outdoors, you can have apps delievered to you instantly! I'm excited to see how you use our tools.")
+}
+
+text gText_TheGangsAllHere_NotToPlaceAnyUndue{
+    format("Not to place any undue pressure on you, but we personally reviewed all of the applicants to our little program. You were exceptionally popular among the team, so we're very excited to see you perform well!")
+}
+text gText_TheGangsAllHere_OhWowThatMeans{
+    format("Oh. Wow! That means a lot. I'll absolutely put it to use!")
+}
+text gText_TheGangsAllHere_WeKnowButNoPressure{
+    format("We know. But no pressure. Enjoy your journey!")
+}
+text gText_TheGangsAllHere_TimeForNumber7{
+    format("Time for my seventh Boomers coffee for the day. Shall we, Oliver?")
+}
+text gText_TheGangsAllHere_WeShall{
+    format("We shall.")
+}
+text gText_TheGangsAllHere_FeelFreeToContinue{
+    format("Feel free to continue your tour without us, {PLAYER}. Greatly appreciate your help in the battles. Hopefully supporting me wasn't too exhausting!")
+}
+text gText_TheGangsAllHere_AhAndIf{
+    format("Ah, and if you haven't already visited Ramesh, go do so. They're on the Production Floor.")
+}
+movement TheGangsAllHere_OliverWalkToPlayer_Movement{
+    face_right
+    step_end
+}
+movement TheGangsAllHere_OfficeIsntThatWay_Movement{
+    walk_down
+    step_end
+}
+movement TheGangsAllHere_ThisIsOffice_Movement{
+    walk_right * 3
+    step_end
+}
+
+movement TheGangsAllHere_AdelaideWalkToDoor_Movement{
+    walk_right * 2
+    walk_up * 3
+    walk_left
+    face_up
+    step_end
+}
+
+movement TheGangsAllHere_GivePackageToPlayerChar_Movement{
+    walk_left
+    face_up
+    walk_in_place_up
+    step_end
+}
+
+movement TheGangsAllHere_WatchPairLeave_Movement{
+    delay_16 * 2
+    face_up
+    step_end
+}
+
+movement TheGangsAllHere_AdelaideWalkOut_Movement{
+    walk_right
+    walk_up * 8
+    step_end
+}
+
+movement TheGangsAllHere_OliverWalkOut_Movement{
+    walk_up * 8
+    step_end
+}
+movement FollowMe_Movement{
+    walk_left
+    walk_down * 20
+    step_end
+}
+
+movement TheGangsAllHere_StepAsideOliver_Movement{
+    walk_down
+    walk_right
+    face_left
+    step_end
+}
+movement TheGangsAllHere_WalkStairs_FacePlayer_Movement{
+    walk_down * 2
+    emote_exclamation_mark
+    face_right
+    step_end
+}
+
+movement TheGangAllHere_WalkStairsToElevator_Movement{
+    walk_down
+    walk_right * 2
+    step_end
+}

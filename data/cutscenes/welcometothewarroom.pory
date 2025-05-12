@@ -1,0 +1,332 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ARNAV = 1
+const TECHIE = 2
+const OLIVER = 3
+const CHARLOTTE = 4
+const ADELAIDE = 5
+const CHIEF = 6
+const RAMESH = 7
+const KEIYING = 8
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+script WelcomeToTheWarRoom_Object_Setup_Script{
+    setflag(FLAG_HIDE_KEIYING)
+    setflag(FLAG_HIDE_RAMESH)
+}
+
+script WelcomeToTheWarRoom_Object_Hide_Script{
+    setflag(FLAG_HIDE_KEIYING)
+    setflag(FLAG_HIDE_RAMESH)
+    setflag(FLAG_HIDE_NERDS_COPS)
+    setflag(FLAG_HIDE_CHARLOTTE)
+    setflag(FLAG_HIDE_ADELAIDE)
+    setobjectxy(OLIVER,34,2)
+    setobjectmovementtype(OLIVER,MOVEMENT_TYPE_FACE_DOWN)
+}
+
+script WelcomeToTheWarRoom_FaceSpeakerAdelaide {
+    applymovement(TECHIE,Common_Movement_FaceUp)
+    applymovement(ARNAV,Common_Movement_FaceUp)
+    applymovement(CHIEF,Common_Movement_FaceUp)
+    applymovement(OLIVER,Common_Movement_FaceUp)
+    applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(0)
+}
+
+script WelcomeToTheWarRoom_FaceSpeakerArnav {
+    applymovement(TECHIE,Common_Movement_FaceRight)
+    applymovement(ARNAV,Common_Movement_WalkInPlaceFasterDown)
+    applymovement(CHIEF,Common_Movement_FaceUp)
+    applymovement(OLIVER,Common_Movement_FaceRight)
+    applymovement(CHARLOTTE,Common_Movement_FaceRight)
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    waitmovement(0)
+}
+script WelcomeToTheWarRoom_FaceSpeakerTechie {
+    applymovement(TECHIE,Common_Movement_WalkInPlaceFasterDown)
+    applymovement(ARNAV,Common_Movement_FaceLeft)
+    applymovement(CHIEF,Common_Movement_FaceLeft)
+    applymovement(OLIVER,Common_Movement_FaceUp)
+    applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(0)
+}
+script WelcomeToTheWarRoom_FaceSpeakerChief {
+    applymovement(TECHIE,Common_Movement_FaceRight)
+    applymovement(ARNAV,Common_Movement_FaceDown)
+    applymovement(CHIEF,Common_Movement_WalkInPlaceFasterLeft)
+    applymovement(OLIVER,Common_Movement_FaceRight)
+    applymovement(CHARLOTTE,Common_Movement_FaceRight)
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    waitmovement(0)
+}
+script WelcomeToTheWarRoom_FaceSpeakerCharlotte {
+    applymovement(TECHIE,Common_Movement_FaceDown)
+    applymovement(ARNAV,Common_Movement_FaceDown)
+    applymovement(CHIEF,Common_Movement_FaceLeft)
+    applymovement(OLIVER,Common_Movement_FaceDown)
+    applymovement(CHARLOTTE,Common_Movement_WalkInPlaceFasterRight)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(0)
+}
+script WelcomeToTheWarRoom_FaceSpeakerPlayer {
+    applymovement(TECHIE,Common_Movement_FaceDown)
+    applymovement(ARNAV,Common_Movement_FaceDown)
+    applymovement(CHIEF,Common_Movement_FaceLeft)
+    applymovement(OLIVER,Common_Movement_FaceDown)
+    applymovement(CHARLOTTE,Common_Movement_FaceDown)
+    applymovement(PLAYER,Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+}
+script WelcomeToTheWarRoom_FaceSpeakerOliver {
+    applymovement(TECHIE,Common_Movement_FaceLeft)
+    applymovement(ARNAV,Common_Movement_FaceDown)
+    applymovement(CHIEF,Common_Movement_FaceLeft)
+    applymovement(OLIVER,Common_Movement_WalkInPlaceFasterRight)
+    applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(0)
+}
+
+script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
+{
+    lock
+    startcutscene(JUMPPLAYER_WELCOMETOTHEWARROOM)
+    setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_WELCOME_TO_THE_WAR_ROOM)
+    setvar(VAR_FERRYBUILDING_STATE,CHIEF_LEFT_WAR_ROOM)
+
+    call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
+        applymovement(ADELAIDE,WelcomeToTheWarRoom_Pace_Movement)
+        waitmovement(0)
+
+        msgbox(gText_WelcomeToTheWarRoom_OkayEverybodyLetsHearIt,,SPEAKER_ADELAIDE)
+        closemessage
+
+
+        call(WelcomeToTheWarRoom_FaceSpeakerArnav)
+
+        msgbox(gText_WelcomeToTheWarRoom_AllMajorSocialMedia,,SPEAKER_ARNAV)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerTechie)
+        msgbox(gText_WelcomeToTheWarRoom_TheNewOwnersOfOUrAccounts,,SPEAKER_TECH)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerChief)
+        msgbox(gText_WelcomeToTheWarRoom_WeveLongTheorized,,SPEAKER_CHIEF)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
+        msgbox(gText_WelcomeToTheWarRoom_YouReallyImpressed,,SPEAKER_ADELAIDE)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerCharlotte)
+        msgbox(gText_WelcomeToTheWarRoom_HellYeahWedLoveTo,,SPEAKER_CHARLOTTE)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerPlayer)
+        msgbox(gText_WelcomeToTheWarRoom_ImHappyToHelp,,SPEAKER_ALICIA)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
+        msgbox(gText_WelcomeToTheWarRoom_EverybodyUnderstand,,SPEAKER_ADELAIDE)
+        closemessage
+
+
+        call(WelcomeToTheWarRoom_FaceSpeakerChief)
+        msgbox(gText_WelcomeToTheWarRoom_WeveAlreadyOutlined,,SPEAKER_CHIEF)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerCharlotte)
+        msgbox(gText_WelcomeToTheWarRoom_WhyCantWeJust,,SPEAKER_CHARLOTTE)
+        closemessage
+
+
+        call(WelcomeToTheWarRoom_FaceSpeakerChief)
+        msgbox(gText_WelcomeToTheWarRoom_GladToHear,,SPEAKER_CHIEF)
+
+
+        call(WelcomeToTheWarRoom_FaceSpeakerCharlotte)
+        msgbox(gText_WelcomeToTheWarRoom_GotItChief,,SPEAKER_CHARLOTTE)
+        closemessage
+
+
+        call(WelcomeToTheWarRoom_FaceSpeakerChief)
+        msgbox(gText_WelcomeToTheWarRoom_GreatWellStartTheOperation,,SPEAKER_CHIEF)
+        closemessage
+
+        applymovement(CHIEF,WelcomeToTheWarRoom_ChiefLeaveRoom_Movement)
+        delay(30)
+        fadescreen(FADE_TO_BLACK)
+        removeobject(CHIEF)
+        fadescreen(FADE_FROM_BLACK)
+
+        call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
+        msgbox(gText_WelcomeToTheWarRoom_DontLet,,SPEAKER_ADELAIDE)
+        closemessage
+
+        applymovement(ARNAV,WelcomeToTheWarRoom_LeaveRight_Movement)
+        applymovement(TECHIE,WelcomeToTheWarRoom_LeaveLeft_Movement)
+        applymovement(ADELAIDE,WelcomeToTheWarRoom_AdelaideLeaveRoom_Movement)
+
+
+        delay(30)
+        fadescreen(FADE_TO_BLACK)
+        removeobject(ADELAIDE)
+        removeobject(ARNAV)
+        removeobject(TECHIE)
+        fadescreen(FADE_FROM_BLACK)
+
+        applymovement(OLIVER,WelcomeToTheWarRoom_AddressTrainers_Movement)
+        applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+        applymovement(PLAYER,Common_Movement_FaceLeft)
+        waitmovement(OLIVER)
+
+        msgbox(gText_WelcomeToTheWarRoom_ThatsAgainYouTwo,,SPEAKER_OLIVER)
+        closemessage
+
+
+        applymovement(OLIVER,WelcomeToTheWarRoom_OliverLeaveRoom_Movement)
+        delay(30)
+        fadescreen(FADE_TO_BLACK)
+        removeobject(OLIVER)
+        fadescreen(FADE_FROM_BLACK)
+
+        applymovement(CHARLOTTE,Common_Movement_FaceDown)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+
+        msgbox(gText_WelcomeToTheWarRoom_ImGoingToHeadOver,MSGBOX_YESNO,SPEAKER_CHARLOTTE)
+        endcutscene
+
+        if (var(VAR_RESULT) == NO){
+            msgbox(gText_WelcomeToTheWarRoom_OkayIllMeetYou,,SPEAKER_CHARLOTTE)
+            closemessage
+
+            applymovement(CHARLOTTE,WelcomeToTheWarRoom_CharlotteLeaveRoom_Movement)
+            fadescreen(FADE_TO_BLACK)
+            removeobject(CHARLOTTE)
+            fadescreen(FADE_FROM_BLACK)
+            release
+            end
+        } else {
+            closemessage
+
+            fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_ROUTE4,18,90)
+        }
+}
+
+text gText_WelcomeToTheWarRoom_OkayEverybodyLetsHearIt {
+    format("I read the summary email, but I want to hear the whole story.")
+}
+
+text gText_WelcomeToTheWarRoom_AllMajorSocialMedia {
+    format("All major social media networks were attacked this morning. This hack is wild - we've been locked out of our accounts and the administrative teams of those networks can't get us back in.")
+}
+
+text gText_WelcomeToTheWarRoom_TheNewOwnersOfOUrAccounts {
+    format("The new owners of our accounts have been pushing a narrative about SharpriseCapital's “crimes against the region”. They're calling for everybody to boycott the League and the upcoming Championship. We've found evidence that the perpetrators are at NavalBase. ")
+}
+
+text gText_WelcomeToTheWarRoom_WeveLongTheorized {
+    format("We've long theorized that NavalBase is TheTide's primary base of operations so we've got reason to believe that they're the ones behind this cyber-attack. We have authorization to raid their headquarters and are looking -")
+}
+
+text gText_WelcomeToTheWarRoom_YouReallyImpressed {
+    format("Charlotte, {PLAYER} you really impressed me back at SharpriseStadium, and we'd like you to assist as well. You'll work under Chief Bill, and help us shut down these terrorists once and for all.")
+}
+
+text gText_WelcomeToTheWarRoom_HellYeahWedLoveTo {
+    format("Hell yeah, we'd love to.")
+}
+
+text gText_WelcomeToTheWarRoom_ImHappyToHelp {
+    format("I'm happy to help.")
+}
+
+text gText_WelcomeToTheWarRoom_EverybodyUnderstand {
+    format("Everybody understand what they're doing?")
+}
+
+text gText_WelcomeToTheWarRoom_WeveAlreadyOutlined {
+    format("We've already outlined a battle plan. Kids, you're gonna come with me and take the ferry.")
+}
+
+text gText_WelcomeToTheWarRoom_WhyCantWeJust {
+    format("Why can't we just Fly over?")
+}
+
+text gText_WelcomeToTheWarRoom_GladToHear {
+    format("Glad to hear I'm answering to kids now! We're splitting up our force into cells to avoid detection and increase agility. ")
+}
+
+text gText_WelcomeToTheWarRoom_GotItChief {
+    format("…got it Chief.")
+}
+
+text gText_WelcomeToTheWarRoom_GreatWellStartTheOperation {
+    format("Great. We'll start the operation as soon as you're ready. Meet me outside NavalBase.")
+}
+
+text gText_WelcomeToTheWarRoom_DontLet {
+    format("Charlotte, {PLAYER}, don't let the chief's attitude get in the way. You've all got orders, so let's get to it.")
+}
+
+text gText_WelcomeToTheWarRoom_ThatsAgainYouTwo {
+    format("Thanks again you two. Be careful out there!")
+}
+
+text gText_WelcomeToTheWarRoom_ImGoingToHeadOver {
+    format("I'm going to head over to Ferrybuilding. Want to come with?")
+}
+
+text gText_WelcomeToTheWarRoom_OkayIllMeetYou {
+    format("Okay, I'll meet you over there.")
+}
+movement WelcomeToTheWarRoom_Pace_Movement {
+    walk_left * 2
+    walk_right *2
+    walk_left * 2
+    walk_right *2
+    face_down
+    step_end
+}
+movement WelcomeToTheWarRoom_ChiefLeaveRoom_Movement {
+    walk_right
+    walk_down * 4
+    walk_left * 2
+    walk_down * 3
+    step_end
+}
+movement WelcomeToTheWarRoom_LeaveLeft_Movement{
+    walk_left
+    walk_down * 5
+    step_end
+}
+movement WelcomeToTheWarRoom_LeaveRight_Movement{
+    walk_right
+    walk_down * 5
+    step_end
+}
+movement WelcomeToTheWarRoom_AddressTrainers_Movement {
+    walk_left
+    walk_down
+    face_right
+    step_end
+}
+movement WelcomeToTheWarRoom_AdelaideLeaveRoom_Movement{
+    walk_right * 3
+    walk_down * 5
+    step_end
+}
+movement WelcomeToTheWarRoom_OliverLeaveRoom_Movement {
+    walk_down * 4
+    walk_right * 3
+    walk_down * 3
+    step_end
+}
+movement WelcomeToTheWarRoom_CharlotteLeaveRoom_Movement {
+    walk_left
+    walk_down * 4
+    step_end
+}

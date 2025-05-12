@@ -1,0 +1,224 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAUNA = 6
+const FLAG_HIDE_KAUNA = FLAG_TEMP_6
+//gText_Hang20_
+//Quest_Hang20_
+
+script Quest_Hang20_ResetCount_Script
+{
+    setvar(VAR_DEFEATED_CRESALTA_VISTA_COUNT,0)
+    return
+}
+
+script Quest_Hang20_HideLeader_Script
+{
+	if (var(VAR_KAUNA_STATE) != BATTLE_1_COMPLETE)
+	{
+		setflag(FLAG_HIDE_KAUNA)
+	}
+}
+
+script Quest_Hang20_Debug_Script
+{
+    addvar(VAR_TEMP_0,1)
+    setvar(VAR_DEFEATED_CRESALTA_VISTA_COUNT,47)
+    //PSF TODO this count needs to reset if the user
+    //changes the pokemon in their party
+    //uses a healing item
+    callnative(CountDefeatedCresaltaVista)
+    release
+}
+
+script Quest_Hang20_Interact_Script
+{
+    lock
+	faceplayer
+	returnqueststate(QUEST_HANG20)
+
+	switch(var(VAR_RESULT))
+	{
+		case QUEST_MENU_SET_ACTIVE: goto(Quest_Hang20_Active_Dialogue)
+		case QUEST_MENU_SET_REWARD: goto(Quest_Hang20_Reward_Dialogue)
+		default: goto(Quest_Hang20_StartQuest_Dialogue)
+	}
+}
+
+script Quest_Hang20_CheckPreCompletion
+{
+    if (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 29){
+        goto(Quest_Hang20_Secret_Dialogue)
+    }
+    return
+}
+
+script Quest_Hang20_StartQuest_Dialogue
+{
+
+    call(Quest_Hang20_CheckPreCompletion)
+
+    msgbox(gText_Hang20_HeyYouNewHere)
+
+    msgbox(gText_Hang20_YeahOrre)
+
+    msgbox(gText_Hang20_OhDamnThatsLandLocked)
+
+    msgbox(gText_Hang20_WereTouchingTheSea)
+
+    msgbox(gText_Hang20_NoWaves)
+    msgbox(gText_Hang20_DoYouWannaLearn)
+
+    msgbox(gText_Hang20_OhIveNever)
+
+    msgbox(gText_Hang20_ItsToughSoWeGotta)
+    msgbox(gText_Hang20_WaitBeating)
+    msgbox(gText_Hang20_WellTeachYouToSurfIf)
+
+    closemessage
+    startquest(QUEST_HANG20)
+    release
+    end
+}
+
+script Quest_Hang20_Active_Dialogue
+{
+	if (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 28)
+	{
+		msgbox(gText_Hang20_AlmostThere,MSGBOX_NPC)
+	}
+	elif (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 20)
+	{
+		msgbox(gText_Hang20_MaybeYoureTough,MSGBOX_NPC)
+	}
+	elif (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 10)
+	{
+		msgbox(gText_Hang20_SawYouKickingAss,MSGBOX_NPC)
+	}
+	else
+	{
+		msgbox(gText_Hang20_WellTeachYouToSurfIf,MSGBOX_NPC)
+	}
+	end
+}
+
+script Quest_Hang20_Reward_Dialogue
+{
+    msgbox(gText_Hang20_DamnYouAreTough)
+    giveitem(ITEM_HM03,1)
+
+    msgbox(gText_Hang20_OkaySoHeresHow)
+    closemessage
+    applymovement(KAUNA,Quest_Hang20_SurfAway_Movement)
+    completequest(QUEST_HANG20)
+    waitmovement(KAUNA)
+    removeobject(KAUNA)
+    release
+    end
+}
+
+script Quest_Hang20_Secret_Dialogue
+{
+    msgbox(gText_Hang20_OhShitYoure)
+    msgbox(gText_Hang20_YoureSuperTough)
+    msgbox(gText_Hang20_ImFromOrre)
+    msgbox(gText_Hang20_WordItsMad)
+    giveitem(ITEM_HM03,1)
+    msgbox(gText_Hang20_JustWalkUp)
+    closemessage
+    applymovement(KAUNA,Quest_Hang20_SurfAway_Movement)
+    waitmovement(KAUNA)
+    removeobject(KAUNA)
+    questmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_HANG20)
+    release
+    end
+}
+
+movement Quest_Hang20_SurfAway_Movement
+{
+    walk_up * 3
+    walk_right * 5
+    walk_up * 3
+    step_end
+}
+
+text gText_Hang20_HeyYouNewHere
+{
+    format("Yoooo {PLAYER}, right? You're not Resido born, right?")
+}
+text gText_Hang20_YeahOrre
+{
+    format("Yeah, I'm from Orre.")
+}
+text gText_Hang20_OhDamnThatsLandLocked
+{
+    format("Oh damn, that's land locked, right?")
+}
+text gText_Hang20_WereTouchingTheSea
+{
+    format("We're touching the sea, but not anything you can surf in, unfortunately.")
+}
+text gText_Hang20_NoWaves
+{
+    format("No waves? Damn that sucks!")
+}
+text gText_Hang20_DoYouWannaLearn
+{
+    format("You tryna learn how to ride the waves?")
+}
+text gText_Hang20_OhIveNever
+{
+    format("Oh, I've never really given it a shot. Is it hard?")
+}
+text gText_Hang20_ItsToughSoWeGotta
+{
+    format("It's tough, so we gotta make sure you're ready.")
+}
+text gText_Hang20_WaitBeating
+{
+    format("Wait, beating you doesn't make me tough enough?")
+
+    //SPARROW_NOTE: Remove LN 177?
+}
+text gText_Hang20_WellTeachYouToSurfIf
+{
+    format("I'll teach you to Surf if you can defeat 30 Pokémon here in a row. No healing items, no accessing the PC, no leaving CresaltaVista.")
+}
+text gText_Hang20_AlmostThere
+{
+    format("Keep that energy!")
+}
+text gText_Hang20_MaybeYoureTough
+{
+    format("Maybe you're tough after all!")
+}
+text gText_Hang20_SawYouKickingAss
+{
+    format("I saw you kicking ass out there!")
+}
+text gText_Hang20_DamnYouAreTough
+{
+    format("Okay, beating me was no fluke, you're the real deal. Take this!")
+}
+text gText_Hang20_OkaySoHeresHow
+{
+    format("If you have a Pokémon in your party that can learn Surf, you can just walk onto the waves and handle it, no problem. Watch!")
+}
+text gText_Hang20_OhShitYoure
+{
+    format("Hey, you're {PLAYER}, right? Killer waves, right? Not as good as back home, but still sick.")
+}
+text gText_Hang20_YoureSuperTough
+{
+    format("Here to catch some waves?")
+}
+text gText_Hang20_ImFromOrre
+{
+    format("I'm from Orre! We're landlocked, so I never learned to Surf.")
+}
+text gText_Hang20_WordItsMad
+{
+    format("Word? It's mad easy to learn though, hold on...")
+}
+text gText_Hang20_JustWalkUp
+{
+    format("If you've got a Pokémon that can learn Surf, you can just walk onto the waves now, no problem! Check it!")
+}

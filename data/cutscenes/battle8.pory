@@ -1,0 +1,212 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+const FLAG_HIDE_KAI = FLAG_TEMP_1
+
+script Battle8_SetUpObject_Script
+{
+    setflag(FLAG_HIDE_KAI)
+}
+
+script Battle8_StartBattle_ObjectSetUp_Script
+{
+    setobjectxyperm(KAI,19,16)
+    setobjectxy(KAI,19,16)
+}
+
+
+script Battle8_FaceGoToPlayer
+{
+    lock
+    setvar(VAR_BATTLE_8_STATE,SAVE_KAI_PINTILLONHOUSE)
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+
+    playse(SE_PIN)
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+    if (var(VAR_TEMP_0) == 17)
+    {
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        applymovement(KAI,Battle8_ExclaimAndTurn_Movement)
+        waitmovement(KAI)
+        applymovement(KAI,Common_Movement_WalkLeft)
+    }
+    else
+    {
+        applymovement(PLAYER,Common_Movement_FaceLeft)
+        applymovement(KAI,Battle8_ExclaimAndTurn_Movement)
+        waitmovement(KAI)
+        applymovement(KAI,Common_Movement_WalkRight)
+    }
+    waitmovement(KAI)
+    goto(Battle8_ExplainAttraction_Dialogue)
+}
+
+script Battle8_InteractKai
+{
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    if (var(VAR_BATTLE_8_STATE) == NOT_INTERACTED_KAI)
+    {
+       call(Battle8_ExplainAttraction_Dialogue)
+    }
+    else
+    {
+        goto(Battle8_StartBattle_Script)
+    }
+}
+
+script Battle8_ExplainAttraction_Dialogue
+{
+    msgbox(gText_Battle8_YouKnowIWasInGoodMood,MSGBOX_DEFAULT,SPEAKER_KAI)
+
+        if (var(VAR_TEMP_0) == 26){
+            closemessage
+                applymovement(KAI,Battle8_WalkToPlayer)
+                waitmovement(0)
+        }
+
+    msgbox(gText_Battle8_GreatToSeeYouToo,,SPEAKER_ALICIA)
+
+        msgbox(gText_Battle8_PrimaryAttraction,MSGBOX_DEFAULT,SPEAKER_KAI)
+
+        msgbox(gText_Battle8_SoWhatsTheChallenge,,SPEAKER_ALICIA)
+
+        msgbox(gText_Battle8_TheSistersAreExperts,MSGBOX_DEFAULT,SPEAKER_KAI)
+        closemessage
+
+        startmenu_savescreen
+        goto(Battle8_StartBattle_Script)
+}
+
+script Battle8_StartBattle_Script
+{
+
+    lock
+        faceplayer
+        msgbox(gText_Battle8_YouTalkALot,,SPEAKER_ALICIA)
+        closemessage
+
+
+        trainerbattle_no_intro(TRAINER_KAI_BATTLE8,gText_Battle8_MaybeINeed)
+        goto(Battle8_KaiDefeated_Dialogue)
+}
+
+script Battle8_KaiDefeated_Dialogue
+{
+    lock
+        startcutscene(JUMPPLAYER_BATTLE8)
+        setvar(VAR_BATTLE_8_STATE,DEFEATED_KAI_PINTILLONHOUSE)
+        addvar(VAR_STORYLINE_STATE,1)
+
+        msgbox(gText_Battle8_YouKnowItDoesnt,MSGBOX_NPC,SPEAKER_ALICIA)
+
+        msgbox(gText_Battle8_YeahThatsPart,MSGBOX_DEFAULT,SPEAKER_KAI)
+
+        msgbox(gText_Battle8_WhatSituation,MSGBOX_NPC,SPEAKER_ALICIA)
+
+        msgbox(gText_Battle8_NotEngaging,MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(gText_Battle8_TheRegion,MSGBOX_DEFAULT,SPEAKER_KAI)
+        closemessage
+
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+        if (var(VAR_TEMP_0) == 17)
+        {
+            applymovement(PLAYER,Common_Movement_WalkDown)
+                waitmovement(0)
+                applymovement(PLAYER,Common_Movement_FaceUp)
+        }
+
+    applymovement(KAI,Battle8_WalkToTheWest)
+        waitmovement(0)
+        removeobject(KAI)
+        fadedefaultbgm
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+text gText_Battle8_YouKnowIWasInGoodMood
+{
+    format("You know, I was in a good mood after breaking S Rank, and now all of a sudden…")
+}
+
+text gText_Battle8_GreatToSeeYouToo
+{
+    format("Great to see you too. What rank thing are you talking about?")
+}
+
+text gText_Battle8_PrimaryAttraction
+{
+    format("One of the big attractions of Resido - the Seven Sisters Challenge. It used to be a lot more popular when 1v1 battles were a novelty- before the corporations declared it as the official League format.")
+}
+
+text gText_Battle8_SoWhatsTheChallenge
+{
+    format("So, what's the challenge? And how do you get an S Rank?")
+}
+
+text gText_Battle8_TheSistersAreExperts
+{
+    format("The sisters are experts in 1v1, and you've got to beat all of them, in a row, in as few turns as possible. I've heard a rumor that Magnus got an SS Rank once, but those guys are on a different level… but you're not even close to that.")
+}
+
+text gText_Battle8_YouTalkALot
+{
+    format("You talk a lot of shit for somebody that's never beaten me.")
+}
+
+text gText_Battle8_MaybeINeed
+{
+    format("Maybe I need to get an SS Rank to keep up with you…")
+}
+
+text gText_Battle8_YouKnowItDoesnt
+{
+    format("You know, it doesn't have to be like this. I'm not out to get you.")
+}
+
+text gText_Battle8_YeahThatsPart
+{
+    format("Yeah, that's part of the problem. Your ignorance of the situation and your skill almost makes it worse.")
+}
+
+text gText_Battle8_WhatSituation
+{
+    format("What situation? I'm just doing the Gym Challenge. Just like you.")
+}
+
+text gText_Battle8_NotEngaging
+{
+    format("You're collecting badges on this highly curated route, sure, but you're not engaging with the region - my home - beyond that.")
+}
+
+text gText_Battle8_TheRegion
+{
+    format("This region has rich with so much culture that you won't see unless you dig deeper. If you actually care, the Seven Sisters Challenge is a good start.")
+}
+
+movement Battle8_WalkOutOfHouse
+{
+    walk_down
+        step_end
+}
+movement Battle8_GetOutOfWay
+{
+    walk_right
+        step_end
+}
+movement Battle8_WalkToPlayer
+{
+    walk_right * 6
+        step_end
+}
+movement Battle8_WalkToTheWest
+{
+    walk_left * 8
+        step_end
+}
+movement Battle8_ExclaimAndTurn_Movement
+{
+    emote_exclamation_mark
+        face_player
+        step_end
+}

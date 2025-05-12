@@ -1,0 +1,364 @@
+//gText_Ultrawormholeresearch_
+//Quest_Ultrawormholeresearch_
+
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const MADRONE = 1
+const FLAG_HIDE_TOTEM = FLAG_TEMP_1A
+const FLAG_HIDE_ULTRA_BEAST = FLAG_TEMP_1A
+
+script Quest_Ultrawormholeresearch_TryRemoveTotem_Script{
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)){
+        specialvar(VAR_RESULT,GetBattleOutcome)
+
+            if (var(VAR_RESULT) != B_OUTCOME_CAUGHT){
+                return
+            }
+
+        removeobject(VAR_LAST_TALKED)
+            return
+    }
+}
+
+script Quest_Ultrawormholeresearch_HiddenElevator_Script{
+    msgbox(gText_Ultrawormholeresearch_WaitEsperanto,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(gText_Ultrawormholeresearch_TakeTheBook,MSGBOX_YESNO)
+
+    if (var(VAR_RESULT) == NO){
+        closemessage
+        release
+        end
+    }
+    msgbox(gText_Ultrawormholeresearch_TheBookcase)
+    closemessage
+    call(Quest_Ultrawormholeresearch_RevealHiddenWarp_Script)
+    call(Quest_Ultrawormholeresearch_PlayerExplain_Dialogue)
+    release
+    end
+}
+
+script Quest_Ultrawormholeresearch_ShowWarp_Script{
+    setmetatile(0,2,0x2DF,FALSE)
+    special(DrawWholeMapView)
+    return
+}
+
+script Quest_Ultrawormholeresearch_RevealHiddenWarp_Script{
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_ROTATING_GATE)
+    call(Quest_Ultrawormholeresearch_ShowWarp_Script)
+    setobjectxy(PLAYER,0,3)
+    TeleportCamera(0,3)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script Quest_Ultrawormholeresearch_PlayerExplain_Dialogue{
+    msgbox(gText_Ultrawormholeresearch_Whatthehell,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    return
+}
+
+script Quest_Ultrawormholeresearch_Preventvoid_Script{
+    lock
+    msgbox(gText_Ultrawormholeresearch_IWouldntGo,,SPEAKER_MADRONE)
+    closemessage
+    applymovement(PLAYER,Common_Movement_WalkDown)
+    waitmovement(PLAYER)
+    msgbox(gText_Ultrawormholeresearch_IDontThink,,SPEAKER_MADRONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Ultrawormholeresearch_StartQuest_Dialogue{
+    addvar(VAR_TEMP_0,1)
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_ULTRAWORMHOLERESEARCH)
+
+    if (!var(VAR_RESULT)){
+        end
+    }
+
+    //PSF TODO add dialogue and movement here
+
+    setflag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_0)
+    startquest(QUEST_ULTRAWORMHOLERESEARCH)
+}
+
+script Quest_Ultrawormholeresearch_Interact_Madrone_Script{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_ULTRAWORMHOLERESEARCH,Quest_Ultrawormholeresearch_Complete_Dialogue)
+    goto_if_quest_reward(QUEST_ULTRAWORMHOLERESEARCH,Quest_Ultrawormholeresearch_Reward_Dialogue)
+    goto_if_quest_active(QUEST_ULTRAWORMHOLERESEARCH,Quest_Ultrawormholeresearch_Active_Dialogue)
+}
+
+script Quest_Ultrawormholeresearch_Complete_Dialogue{
+
+}
+script Quest_Ultrawormholeresearch_Reward_Dialogue{
+
+}
+script Quest_Ultrawormholeresearch_Active_Dialogue{
+
+}
+
+script Quest_Ultrawormholeresearch_ConstructMenu_Script{
+
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_0)){
+        dynmultipush("Paldea",0)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_1)){
+        dynmultipush("Unova",1)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_2)){
+        dynmultipush("Orre",2)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_3)){
+        dynmultipush("Sinnoh",3)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_4)){
+        dynmultipush("Hoenn",4)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_5)){
+        dynmultipush("Alola",5)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_6)){
+        dynmultipush("Kalos",6)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_7)){
+        dynmultipush("Johto",7)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_8)){
+        dynmultipush("Galar",8)
+    }
+    if(flag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_9)){
+        dynmultipush("Kanto",9)
+    }
+
+    dynmultipush("Never mind.",10)
+        return
+}
+
+script Quest_Ultrawormholeresearch_ComputerSetWarp_Menu{
+    lock
+    msgbox(gText_Ultrawormholeresearch_WhichWormhole)
+    call(Quest_Ultrawormholeresearch_ConstructMenu_Script)
+    dynmultistack(0,0,TRUE,5,TRUE,0,NULL)
+    copyvar(VAR_QUEST_ULTRAWORMHOLE_WARP_DESTINATION,VAR_RESULT)
+    call(Quest_Ultrawormholeresearch_SetDynamicWarp_Script)
+    msgbox(gText_Ultrawormholeresearch_WarpHasBeenSet)
+    closemessage
+    release
+    end
+}
+
+script Quest_Ultrawormholeresearch_SetDynamicWarp_Script{
+    switch(var(VAR_QUEST_ULTRAWORMHOLE_WARP_DESTINATION)){
+                case 0:
+        	bufferstring(STR_VAR_1,"Paldea: ???")
+        	setdynamicwarp(MAP_ULTRA_PALDEA,0)
+        case 1:
+        	bufferstring(STR_VAR_1,"Unova: Relic Castle")
+        	setdynamicwarp(MAP_ULTRA_UNOVA,0)
+        case 2:
+        	bufferstring(STR_VAR_1,"Orre: Mt Battle")
+        	setdynamicwarp(MAP_ULTRA_ORRE,0)
+        case 3:
+        	bufferstring(STR_VAR_1,"Sinnoh: Stark Mountain")
+        	setdynamicwarp(MAP_ULTRA_SINNOH,0)
+        case 4:
+        	bufferstring(STR_VAR_1,"Hoenn: Meteor Falls")
+        	setdynamicwarp(MAP_ULTRA_HOENN,0)
+        case 5:
+        	bufferstring(STR_VAR_1,"Alola: Vast Poni Canyon")
+        	setdynamicwarp(MAP_ULTRA_ALOLA,0)
+        case 6:
+        	bufferstring(STR_VAR_1,"Kalos: Terminus Cave")
+        	setdynamicwarp(MAP_ULTRA_KALOS,0)
+        case 7:
+        	bufferstring(STR_VAR_1,"Johto: Whirl Islands")
+        	setdynamicwarp(MAP_ULTRA_JOHTO,0)
+        case 8:
+        	bufferstring(STR_VAR_1,"Galar: Slumbering Weld")
+        	setdynamicwarp(MAP_ULTRA_GALAR,0)
+        case 9:
+        	bufferstring(STR_VAR_1,"Kanto: Victory Road")
+        	setdynamicwarp(MAP_ULTRA_KANTO,0)
+        default:
+                release
+                end
+    }
+    return
+}
+
+script Quest_Ultrawormholeresearch_StartTotemBattle_Script{
+    lock
+    faceplayer
+    waitse
+    special(Quest_Ultrawormholeresearch_PlayTotemCry)
+    delay(40)
+    waitmoncry
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    setflag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)
+    special(Quest_Ultrawormholeresearch_SetTotemBattle)
+    special(StartRegiBattle) //PSF TODO should be start totem battle
+    waitstate
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    switch(var(VAR_RESULT)){
+        case B_OUTCOME_CAUGHT: goto(Quest_Ultrawormholeresearch_CaughtTotem_Script)
+        case B_OUTCOME_WON:
+        case B_OUTCOME_RAN:
+        case B_OUTCOME_PLAYER_TELEPORTED: goto(Quest_Ultrawormholeresearch_RanFromTotem_Script)
+    }
+    release
+    end
+}
+
+
+script Quest_Ultrawormholeresearch_CaughtTotem_Script{
+    special(Quest_Ultrawormholeresearch_SetDefeatedTotemFlag)
+    //goto(Common_EventScript_RemoveStaticPokemon)
+    call(Quest_Ultrawormholeresearch_ProfCallPlayer_Dialogue)
+    release
+    end
+}
+
+script Quest_Ultrawormholeresearch_ProfCallPlayer_Dialogue{
+    lock
+    specialvar(VAR_0x8004,Quest_Ultrawormholeresearch_BufferTotemPokemonName)
+	bufferspeciesname(STR_VAR_1,VAR_0x8004)
+
+    call(Common_EventScript_PhoneRinging)
+
+    msgbox(gText_Ultrawormholeresearch_PlayerIs,,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(gText_Ultrawormholeresearch_GreatJobCatching,,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(gText_Ultrawormholeresearch_WhenYouComeBack,,SPEAKER_MADRONE,,,PHONE_ON)
+    closemessage
+    playse(SE_POKENAV_HANG_UP)
+    release
+    end
+}
+
+script Quest_Ultrawormholeresearch_RanFromTotem_Script{
+    specialvar(VAR_0x8004,Quest_Ultrawormholeresearch_BufferTotemPokemonName)
+	bufferspeciesname(STR_VAR_1,VAR_0x8004)
+    goto(Common_EventScript_LegendaryFlewAway)
+    release
+    end
+}
+
+script Quest_Ultrawormholeresearch_ControlTotemVisibility{
+    specialvar(VAR_RESULT,Quest_Ultrawormholeresearch_ShouldTotemNotSpawn)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_TOTEM)
+        }
+}
+
+script Quest_Ultrawormholeresearch_TryRemoveUltraBeast{
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)){
+        specialvar(VAR_RESULT,GetBattleOutcome)
+
+            if (var(VAR_RESULT) != B_OUTCOME_CAUGHT){
+                return
+            }
+
+        removeobject(VAR_LAST_TALKED)
+            return
+    }
+}
+
+script Quest_Ultrawormholeresearch_StartUltraBeast_Script{
+    lock
+    faceplayer
+    waitse
+    special(Quest_Ultrawormholeresearch_PlayUltraBeastCry)
+    delay(40)
+    waitmoncry
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    special(Quest_Ultrawormholeresearch_SetUltraBeastBattle)
+    special(StartRegiBattle) //PSF TODO should be start UB battle
+    waitstate
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    switch(var(VAR_RESULT)){
+        case B_OUTCOME_CAUGHT: goto(Quest_Ultrawormholeresearch_CaughtUltraBeast_Script)
+        case B_OUTCOME_WON:
+        case B_OUTCOME_RAN:
+        case B_OUTCOME_PLAYER_TELEPORTED: goto(Quest_Ultrawormholeresearch_RanFromUltraBeast_Script)
+    }
+    release
+    end
+}
+
+script Quest_Ultrawormholeresearch_CaughtUltraBeast_Script{
+    special(Quest_Ultrawormholeresearch_SetSubquestForUltraBeast)
+    specialvar(VAR_RESULT,Quest_Ultrawormholeresearch_CountRemainingSubquests)
+
+    if (var(VAR_RESULT) == 0){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_ULTRAWORMHOLERESEARCH)
+    }
+    goto(Common_EventScript_RemoveStaticPokemon)
+}
+
+script Quest_Ultrawormholeresearch_RanFromUltraBeast_Script{
+    specialvar(VAR_0x8004,Quest_Ultrawormholeresearch_BufferUltraBeastPokemonName)
+    bufferspeciesname(STR_VAR_1,VAR_0x8004)
+    goto(Common_EventScript_LegendaryFlewAway)
+    release
+}
+
+script Quest_Ultrawormholeresearch_ControlUltraBeastVisibility_Script{
+    if (flag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)){
+            setflag(FLAG_HIDE_ULTRA_BEAST)
+    }
+    return
+}
+
+//PSF TODO once maps are built, need to make sure this actually works. Ultra Beasts should not spawn after battling them until the player goes back to the Lab
+
+script Quest_Ultrawormholeresearch_ResetUltraBeastVisbility{
+    if (flag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)){
+        clearflag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)
+    }
+    return
+}
+
+text gText_Ultrawormholeresearch_WaitEsperanto{
+    format("")
+}
+text gText_Ultrawormholeresearch_TakeTheBook{
+    format("")
+}
+text gText_Ultrawormholeresearch_TheBookcase{
+    format("")
+}
+text gText_Ultrawormholeresearch_Whatthehell{
+    format("")
+}
+
+text gText_Ultrawormholeresearch_IWouldntGo{
+    format("I wouldn't go in there right now if I was you.")
+}
+
+text gText_Ultrawormholeresearch_IDontThink{
+    format("I don't think you used the computer to set a warp location... if you walk up those stairs now, you're probably going to be warped into the endless void. Forever.")
+}
+
+text gText_Ultrawormholeresearch_WhichWormhole{
+    format("")
+}
+
+text gText_Ultrawormholeresearch_WarpHasBeenSet{
+    format("The portal has been set to {STR_VAR_1}.")
+}
+
+text gText_Ultrawormholeresearch_PlayerIs{
+    format("{PLAYER} is that you? Excellent, this is Professor Madrone.")
+}
+text gText_Ultrawormholeresearch_GreatJobCatching{
+    format("Excellent job catching that {STR_VAR_1}. I've already sampled its environment data from your Pokédex, and I was able to open another portal!")
+}
+text gText_Ultrawormholeresearch_WhenYouComeBack{
+    format("It's already set up on the computer for you.")
+}

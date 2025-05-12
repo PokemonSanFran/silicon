@@ -1,0 +1,471 @@
+//gText_Prologue_
+//Prologue_
+
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const MAGNUS = 1
+const TALA = 2
+const ARMANDO = 3
+const ELLEN = 4
+const KEIYING = 5
+const IMELDA = 6
+const DOYLE = 7
+const GUARD = 8
+
+const FLAG_HIDE_ELLEN = FLAG_TEMP_1
+
+script Prologue_FlagsVars_Script
+{
+    setvar(VAR_PROLOGUE_STATE,GIVEN_POKEMON)
+    setflag(FLAG_SYS_APP_PROLOUGE_GET)
+    setflag(FLAG_SET_WALL_CLOCK)
+}
+
+script Prologue_Quests_Script{
+        startquest(QUEST_BECOMECHAMPION)
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_1)
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_2)
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_3)
+return
+}
+
+script Prologue_SetUp_Script
+{
+        callnative(GiveItems_Prologue_Intro)
+        call(Prologue_FlagsVars_Script)
+        call(Prologue_IntroTime_Dialogue)
+        //call(Prologue_Quests_Script)
+//PSF TODO open modal to tell player about teaching their pokemon new moves
+        end
+}
+
+script Prologue_LostToMagnus_Script{
+    setvar(VAR_PROLOGUE_STATE,WALKED_IN_CHAMBER)
+    msgbox(gText_Prologue_HelpModal)
+    closemessage
+    release
+    end
+}
+
+script Prologue_InteractMagnus_Script{
+    lock
+        msgbox(gText_Prologue_YouMadeIt,MSGBOX_NPC,SPEAKER_MAGNUS)
+        msgbox(gText_Prologue_WeveBeenWatching,,SPEAKER_MAGNUS)
+        msgbox(gText_Prologue_YoureGoingToBe,,SPEAKER_MAGNUS)
+        closemessage
+        startmenu_savescreen
+        setvar(VAR_PROLOGUE_STATE,LOST_TO_MAGNUS)
+        trainerbattle_no_intro(TRAINER_MAGNUS_PROLOGUE,gText_Prologue_Fantastic)
+        goto(Prologue_PostBattle_Script)
+        release
+        end
+}
+
+script Prologue_MoveEliteRoomObjects_Script{
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        if (var(VAR_TEMP_0) != 6 || (var(VAR_TEMP_1) != 6)){
+            fadescreen(FADE_TO_BLACK)
+                setobjectxy(PLAYER,6,6)
+                TeleportCamera(6,6)
+                applymovement(PLAYER,Common_Movement_FaceUp)
+                applymovement(MAGNUS,Common_Movement_FaceDown)
+                fadescreen(FADE_FROM_BLACK)
+        }
+    return
+}
+
+script Prologue_PostBattle_Script{
+    lock
+        startcutscene(JUMPPLAYER_PROLOGUE_CHAMPION)
+        clearflag(TRAINER_FLAGS_START + TRAINER_MAGNUS_PROLOGUE)
+        setvar(VAR_PROLOGUE_STATE,DEFEATED_MAGNUS)
+        call(Prologue_MoveEliteRoomObjects_Script)
+        delay(16)
+        playse(SE_TRUCK_DOOR)
+        call(OrolandColiseum_Arena_OpenExit_Script)
+        waitse
+        //subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_4)
+        //completequest(QUEST_BECOMECHAMPION)
+        playbgm(MUS_HALL_OF_FAME_ROOM,TRUE)
+        msgbox(gText_Prologue_AdamYouAre,,SPEAKER_MAGNUS,TAIL_SHOUT,EMOTE_HAPPY)
+        msgbox(gText_Prologue_AndPerhaps,,SPEAKER_MAGNUS,TAIL_WHISPER)
+        msgbox(gText_Prologue_WearThis,,SPEAKER_MAGNUS,,EMOTE_HAPPY)
+        closemessage
+        applymovement(MAGNUS,Prologue_LeaveChamber_Movement)
+        applymovement(PLAYER,Common_Movement_WalkUp4)
+        waitmovement(MAGNUS)
+        removeobject(MAGNUS)
+        playse(SE_EXIT)
+        warpdoor(MAP_OROLAND_COLISEUM_HALL,9,9)
+        endcutscene
+        release
+        end
+}
+
+script Prologue_PostWarp_Hall_Dialgoue{
+        setvar(VAR_PROLOGUE_STATE,WALK_INTO_HALL)
+        setrespawn(HEAL_LOCATION_OROLAND_COLISEUM_HALL)
+        applymovement(PLAYER,Common_Movement_WalkUp)
+        waitmovement(PLAYER)
+        lock
+        applymovement(GUARD,Prologue_BlockDoor_Movement)
+        applymovement(MAGNUS,Common_Movement_FaceLeft)
+        msgbox(gText_Prolouge_ItsNotAFull,,SPEAKER_MAGNUS)
+        closemessage
+        applymovement(MAGNUS,Common_Movement_FaceDown)
+        msgbox(gText_Prologue_EllenHasA,,SPEAKER_MAGNUS)
+        closemessage
+        applymovement(MAGNUS,Prologue_Magnus_WalkIntoPosition_Movement)
+        waitmovement(MAGNUS)
+        call(Prologue_PostWarp_PositionObjects_Script)
+        call(TryAutoSave)
+        release
+        end
+}
+
+script Prologue_Ellen_Speech_Dialogue{
+    lock
+        startcutscene(JUMPPLAYER_PROLOGUE_ANNOUNCEMENT)
+        setvar(VAR_PROLOGUE_STATE,ELLEN_ANNOUNCE)
+        call(Prologue_SetUpSeechCrowd_Script)
+        msgbox(gText_Prologue_ThankYouAll,,SPEAKER_ELLEN)
+        msgbox(gText_Prologue_FirstOfCourse,,SPEAKER_ELLEN)
+        msgbox(gText_Prologue_IRegretToInform,,SPEAKER_ELLEN)
+        closemessage
+        call(Prologue_ExclaimCrowd_Script)
+        msgbox(gText_Prologue_IWillRetireAnd,,SPEAKER_ELLEN)
+        closemessage
+        applymovement(ELLEN,Common_Movement_FaceRight)
+        msgbox(gText_Prologue_ICanSoClearlySee,,SPEAKER_ELLEN)
+        closemessage
+        applymovement(ELLEN,Common_Movement_FaceLeft)
+        msgbox(gText_Prologue_AndIFearWeAreFighting,,SPEAKER_ELLEN)
+        closemessage
+        applymovement(ELLEN,Common_Movement_FaceDown)
+        msgbox(gText_Prologue_GoodLuckToAll,,SPEAKER_ELLEN)
+        closemessage
+        applymovement(ELLEN,Prologue_Leaveroom_Movement)
+        delay(30)
+        endcutscene
+        fadescreen(FADE_TO_BLACK)
+        removeobject(ELLEN)
+        call(Prologue_Announcement_PostObjectSetup_Script)
+        fadescreen(FADE_FROM_BLACK)
+        call(TryAutoSave)
+        release
+        end
+}
+
+script Prologue_PostWarp_PositionObjects_Script
+{
+    if(var(VAR_PROLOGUE_STATE) < WALK_INTO_HALL)
+    {
+        return
+    }
+
+    setobjectxyperm(MAGNUS,8,5)
+    setobjectxyperm(GUARD,9,9)
+
+    turnobject(MAGNUS,DIR_NORTH)
+    setobjectmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script Prologue_Announcement_PostObjectSetup_Script
+{
+    if(var(VAR_PROLOGUE_STATE) < ELLEN_ANNOUNCE)
+    {
+        return
+    }
+        setobjectxy(MAGNUS,3,6)
+        setobjectxyperm(MAGNUS,3,6)
+
+        setflag(FLAG_HIDE_ELLEN)
+
+        turnobject(KEIYING,DIR_NORTH)
+        turnobject(IMELDA,DIR_SOUTH)
+        turnobject(TALA,DIR_SOUTH)
+        turnobject(ARMANDO,DIR_NORTH)
+        turnobject(DOYLE,DIR_WEST)
+        turnobject(MAGNUS,DIR_WEST)
+
+        setobjectmovementtype(KEIYING,MOVEMENT_TYPE_FACE_UP)
+        setobjectmovementtype(IMELDA,MOVEMENT_TYPE_FACE_DOWN)
+        setobjectmovementtype(TALA,MOVEMENT_TYPE_FACE_DOWN)
+        setobjectmovementtype(ARMANDO,MOVEMENT_TYPE_FACE_UP)
+        setobjectmovementtype(DOYLE,MOVEMENT_TYPE_FACE_LEFT)
+        setobjectmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_LEFT)
+        return
+}
+
+script Prologue_Announcement_ObjectSetup_Script
+{
+        call(Prologue_PostWarp_PositionObjects_Script)
+        call(Prologue_Announcement_PostObjectSetup_Script)
+}
+
+//PSF TODO use characters intro TWEWY style to introduce each character, use modified flavor text since this happens 10 years earlier
+
+script Prologue_SetUpSeechCrowd_Script{
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+        if (var(VAR_TEMP_0) != 9 || (var(VAR_TEMP_1) != 6)){
+            fadescreen(FADE_TO_BLACK)
+                setobjectxy(PLAYER,9,6)
+                TeleportCamera(9,6)
+                applymovement(PLAYER,Common_Movement_FaceUp)
+                fadescreen(FADE_FROM_BLACK)
+        }
+    applymovement(TALA,Common_Movement_FaceRight)
+        applymovement(ARMANDO,Common_Movement_FaceRight)
+        applymovement(KEIYING,Common_Movement_FaceLeft)
+        applymovement(IMELDA,Common_Movement_FaceLeft)
+        applymovement(DOYLE,Common_Movement_FaceLeft)
+        return
+}
+
+script Prologue_ExclaimCrowd_Script{
+    playse(SE_PIN)
+        applymovement(MAGNUS,Common_Movement_ExclamationMark)
+        applymovement(TALA,Common_Movement_ExclamationMark)
+        applymovement(ARMANDO,Common_Movement_ExclamationMark)
+        applymovement(ELLEN,Common_Movement_ExclamationMark)
+        applymovement(KEIYING,Common_Movement_ExclamationMark)
+        applymovement(IMELDA,Common_Movement_ExclamationMark)
+        applymovement(DOYLE,Common_Movement_ExclamationMark)
+        return
+}
+
+script Prologue_IntroTime_Dialogue
+{
+    lockall
+    msgbox(gText_Prologue_July31,MSGBOX_AUTOCLOSE)
+    closemessage
+    warpsilent(MAP_OROLAND_COLISEUM_HALLWAY,5,12)
+    waitstate
+}
+
+script Prologue_PostBattleTime_Dialogue{
+    fadescreen(FADE_TO_BLACK)
+        msgbox(gText_Prologue_AFewDays)
+        closemessage
+        fadescreen(FADE_FROM_BLACK)
+        goto(Prologue_PostWarp_Hall_Dialgoue)
+        return
+}
+
+script Prologue_TimeSkip_Dialogue{
+    fadescreen(FADE_TO_BLACK)
+        setvar(VAR_PROLOGUE_STATE,WALK_INTO_HALL)
+        fadescreen(FADE_FROM_BLACK)
+        return
+}
+
+script Prologue_BeginAdventure_Dialogue
+{
+    msgbox(gText_Prologue_OnceYouStep,MSGBOX_YESNO,SPEAKER_GUARD)
+    if (var(VAR_RESULT) == YES)
+    {
+        setvar(VAR_PROLOGUE_STATE,START_ADVENTURE)
+        setvar(VAR_CHOSEN_PSF_STARTER,CUTSCENE_NOT_PLAYED)
+        setflag(FLAG_SPAWN_INVISIBLE)
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_BLACK_MAP) //go to character customization
+    }
+    closemessage
+    end
+}
+
+script Prologue_FirstTimeCharacterCustomize_Script
+{
+    msgbox(Prologue_HowDoesTheWorld_Text)
+    closemessage
+    callnative(CustomizeCharacterFromOverworld)
+    waitstate
+    setvar(VAR_FIRSTRUNEXPERIENCE,CHARACTER_CREATED)
+}
+
+script Prologue_FirstTimeNameCharacter_Script
+{
+    callnative(NamePlayerFromOverworld)
+    waitstate
+    msgbox(Prologue_AreYouSure_Text,MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO)
+    {
+        goto(Prolouge_NewPlayerCreation_Script)
+    }
+    closemessage
+    setvar(VAR_FIRSTRUNEXPERIENCE,CHARACTER_NAMED)
+    startmenu_savescreen
+}
+
+script Prologue_FirstTimeReadAcceptLetter_Script
+{
+    setvar(VAR_FIRSTRUNEXPERIENCE,HAS_READ_LETTER)
+    callnative(ReadAcceptLetterFromOverworld)
+    waitstate
+    closemessage
+}
+
+script Prolouge_NewPlayerCreation_Script
+{
+    lock
+    goto_if_lt(VAR_FIRSTRUNEXPERIENCE,CHARACTER_CREATED,Prologue_FirstTimeCharacterCustomize_Script)
+    goto_if_lt(VAR_FIRSTRUNEXPERIENCE,CHARACTER_NAMED,Prologue_FirstTimeNameCharacter_Script)
+    goto_if_lt(VAR_FIRSTRUNEXPERIENCE,HAS_READ_LETTER,Prologue_FirstTimeReadAcceptLetter_Script)
+    goto(ThereCanOnlyBeOne_Player_Monologue)
+}
+
+script Prologue_Tala_Dialogue{
+    msgbox(gText_Prologue_HowCouldThey,MSGBOX_AUTOCLOSE,SPEAKER_TALA,,EMOTE_SHOCK)
+    end
+}
+
+script Prologue_Armando_Dialogue{
+    msgbox(gText_Prologue_IKnewThey,MSGBOX_AUTOCLOSE,SPEAKER_ARMANDO,,EMOTE_SAD)
+    end
+}
+
+script Prologue_Magnus_Dialogue{
+    msgbox(gText_Prologue_OneWhiffOf,MSGBOX_AUTOCLOSE,SPEAKER_MAGNUS,,EMOTE_ANGRY)
+    end
+}
+
+script Prologue_Keiying_Dialogue{
+    msgbox(gText_Prologue_FirstBDThen,MSGBOX_AUTOCLOSE,SPEAKER_KEIYING)
+    end
+}
+
+script Prologue_Imelda_Dialogue{
+    msgbox(gText_Prologue_HeReallyWent,MSGBOX_AUTOCLOSE,SPEAKER_IMELDA,,EMOTE_ANGRY)
+    end
+}
+
+script Prologue_Doyle_Dialogue{
+    msgbox(gText_Prologue_ItsGonnaBeAYearAndThen,MSGBOX_AUTOCLOSE,SPEAKER_DOYLE)
+    end
+}
+
+movement Prologue_LeaveChamber_Movement{
+    walk_up * 3
+        step_end
+}
+
+movement Prologue_BlockDoor_Movement{
+    lock_facing_direction
+        walk_right
+    unlock_facing_direction
+        step_end
+}
+
+movement Prologue_Magnus_WalkIntoPosition_Movement{
+    walk_up
+        walk_left
+        walk_up
+        step_end
+}
+
+movement Prologue_Leaveroom_Movement{
+    walk_right
+        walk_down * 5
+        step_end
+}
+
+text gText_Prologue_July31{
+    format("10 years ago...")
+}
+
+text gText_Prologue_AFewDays{
+    format("The next day...")
+}
+
+text gText_Prologue_HelpModal{
+    format("In the final build, this will be a modal explaining that you can teach your Pokémon different moves from the Summary Screen.")
+}
+
+text gText_Prologue_YouMadeIt{
+    format("You made it, {PLAYER}. Welcome to your final battle.")
+}
+text gText_Prologue_WeveBeenWatching{
+    format("We've been watching your progress for a while now, and your battles against the other three were absolutely captivating.")
+}
+text gText_Prologue_YoureGoingToBe{
+    format("You're going to be a great Champion to carry on the legacy of Resido... if you can defeat me!")
+}
+text gText_Prologue_Fantastic{
+    format("Fantastic work, {PLAYER}.")
+}
+text gText_Prologue_AdamYouAre{
+    format("{PLAYER}! You are now the Resido Pokémon League Champion!")
+}
+text gText_Prologue_AndPerhaps{
+    format("And perhaps, you will be Resido's last true Champion.")
+}
+text gText_Prologue_WearThis{
+    format("Wear this title with as much as I did when I earned it! And now, for the Hall of Fame!")
+}
+text gText_Prolouge_ItsNotAFull{
+    format("Its not the usual celebration, but of course, with the recent news, the budget has been slashed. But we've figured a small gathering with the Elite Four and Gym Leaders would be nice.")
+}
+text gText_Prologue_EllenHasA{
+    format("Ellen was waiting for us to arrive - they've got a speech prepared.")
+}
+
+text gText_Prologue_ThankYouAll{
+    format("Thank you all for being here!")
+}
+
+text gText_Prologue_FirstOfCourse{
+    format("First of course, congratulations to the newest Champion, {PLAYER}! Despite not being from here, you've excelled in our region's competitive climate, and we're honored to cement you into our Hall of Fame.")
+}
+text gText_Prologue_IRegretToInform{
+    format("Of course, I regret to inform you all that effective immediately, I'll be stepping down as a member of the Elite Four.")
+}
+text gText_Prologue_IWillRetireAnd{
+    format("I will be retiring my career as a Trainer, and soon after, I'll be leaving the region.")
+}
+text gText_Prologue_ICanSoClearlySee{
+    format("There's no easy way to put this - I don't have any hope in the new League changes. I think this is beginning of a very dark road ahead of us - we have customs and traditions and culture built here, and they've let the money get in the way of that. For those of you that haven't given up, and are fighting the good fight, you have my deepest respect...")
+}
+text gText_Prologue_AndIFearWeAreFighting{
+    format("but also my deepest sympathies. I fear this is a battle we've already lost, and it's only a matter of time before we've been stripped of everything... and I can't bear the thought of that.")
+}
+text gText_Prologue_GoodLuckToAll{
+    format("Good luck to all of you.")
+}
+text gText_Prologue_HowCouldThey{
+    format("How could they just up and leave? Just like that? No warning? No plan? What...")
+}
+text gText_Prologue_IKnewThey{
+    format("I knew they were unhappy, but this is just as much of a shock to me as it is you guys.  But... Ellen was always about taking action. And I guess this was their best action.")
+}
+text gText_Prologue_OneWhiffOf{
+    format("One whiff of trouble and they leave? Just like that? Fine. Who needs them, we'll find another Elite Four member, won't we?")
+}
+text gText_Prologue_FirstBDThen{
+    format("First BD sells out, now Ellen is quitting... perhaps I'm on the wrong side of history here.")
+}
+
+text gText_Prologue_HeReallyWent{
+    format("What a sad party to send us off. To think, one person could destroy our legacies...")
+}
+
+text gText_Prologue_ItsGonnaBeAYearAndThen{
+    format("It's gonna be a year before they change their minds and are begging to go back to the way things were, no doubt! We got a good thing going for us, and we know what we're doing. We're Gym Leaders, after all!")
+}
+text gText_Prologue_YesTheyJust{
+    format("Yes, they just... left! Walked out and quit, just like that! What now?")
+}
+text gText_Prologue_OnceYouStep{
+    format("Hey, are you ready to get out of here? Once you leave,I can't let you back in.")
+}
+
+text Prologue_AreYouSure_Text
+{
+    format("Are you sure your name is {PLAYER}? You cannot change this later.")
+}
+
+text Prologue_HowDoesTheWorld_Text
+{
+    format("How does the world see you? You can change this later.")
+}
+

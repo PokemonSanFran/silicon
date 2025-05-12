@@ -1,0 +1,233 @@
+//PSF TODO whenever the announce talks, its an ad read, brought to you by one of the big companies
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ADELAIDE = 1 //FLAG_TEMP_1
+const ENTRANT = 1
+const CHARLOTTE = 2 //FLAG_TEMP_2
+const CHARLOTTE_SKYBOX = 8
+const KAI = 3 //FLAG_TEMP_3
+const OLIVER = 4 //FLAG_TEMP_4
+const GUARD = 5
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
+const FLAG_HIDE_ARCEHR = FLAG_TEMP_3
+const FLAG_HIDE_OLIVER = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_6
+
+script GroupStages_Lockers_ObjectSetUp_Script {
+    setobjectxyperm(CHARLOTTE,10,3)
+        setflag(FLAG_HIDE_OLIVER)
+        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_RAMESH)
+}
+
+script GroupStages_Lockers_ObjectCleanUp_Script {
+    setflag(FLAG_HIDE_CHARLOTTE)
+        setflag(FLAG_HIDE_OLIVER)
+        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_RAMESH)
+}
+
+script GroupStages_Skybox_ObjectSetup_Script {
+    setobjectxyperm(CHARLOTTE_SKYBOX,16,6)
+    setobjectmovementtype(CHARLOTTE_SKYBOX,MOVEMENT_TYPE_FACE_DOWN)
+}
+
+script GroupStages_GreetBeforeStart_Dialogue {
+    lock
+        playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
+        applymovement(CHARLOTTE,GroupStages_WalkToPlayer)
+        waitmovement(CHARLOTTE)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        waitmovement(PLAYER)
+        msgbox(gText_GroupStages_EasyPeasy,,SPEAKER_CHARLOTTE)
+        closemessage
+        applymovement(CHARLOTTE,GroupStages_LeaveLockers)
+        waitmovement(CHARLOTTE)
+        playse(SE_EXIT)
+        waitse
+        removeobject(CHARLOTTE)
+        fadedefaultbgm
+        setvar(VAR_STORYLINE_STATE,STORY_READY_GROUP_STAGE)
+        setvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,PRE_BATTLE_1)
+        call(TryAutoSave)
+        release
+        end
+}
+
+script GroupStages_PreparePlayer_Script {
+    lock
+        faceplayer
+        msgbox(gText_GroupStages_OnceYouStart,MSGBOX_YESNO,SPEAKER_LEAGUE_STAFF_A)
+        closemessage
+
+        if (var(VAR_RESULT) == YES){
+            call(GroupStages_ChooseParty_Script)
+                setflag(FLAG_SHARPRISESTADIUM_TOURNAMENT_HAPPENING)
+                call(GroupStages_MoveObjects_Script)
+
+                if (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE) != PRE_BATTLE_4){
+                    setvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,PRE_BATTLE_1)
+                }
+
+        fadeblackandsetremovewarpfadeflag
+            warpsilent(MAP_SHARPRISE_STADIUM_ARENA,255,5,6)
+        }
+    release
+        end
+}
+
+script GroupStages_MoveObjects_Script {
+    applymovement(GUARD,Common_Movement_WalkInPlaceUp)
+        opendoor(10,1)
+        waitdooranim
+        applymovement(GUARD,Common_Movement_WalkUp)
+        playse(SE_EXIT)
+        waitse
+        removeobject(GUARD)
+
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        switch(var(VAR_TEMP_0)){
+            case 9:applymovement(PLAYER,GroupStages_PlayerLeaveLockers_Left)
+            case 10: applymovement(PLAYER,GroupStages_PlayerLeaveLockers)
+            case 11:applymovement(PLAYER,GroupStages_PlayerLeaveLockers_Right)
+        }
+
+    waitmovement(PLAYER)
+        playse(SE_EXIT)
+}
+
+script GroupStages_ChooseParty_Script {
+        special(SavePlayerParty)
+        frontier_set(FRONTIER_DATA_LVL_MODE,2)
+        setvar(VAR_0x8005, 3)
+        special(ChoosePartyForBattleFrontier)
+        waitstate
+        dome_reduceparty
+}
+
+script GroupStages_RoundRobinMatch_Script {
+    applymovement(PLAYER,Common_Movement_FaceRight)
+        waitmovement(PLAYER)
+        msgbox(gText_GroupStages_Placeholder,,SPEAKER_ANNOUNCER,TAIL_SHOUT)
+        closemessage
+        applymovement(PLAYER,Common_Movement_WalkRight)
+        applymovement(ENTRANT,Common_Movement_WalkLeft)
+        waitmovement(ENTRANT)
+        msgbox(gText_GroupStages_Placeholder,,SPEAKER_ACE_TRAINER_M)
+        closemessage
+
+//PSF TODO these trainers as well as the one before the kai fight should be a specifically themed team that Armando teaches you how to twart during the Enter The Master cutscene
+
+        switch (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE)){
+            case PRE_BATTLE_1: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_A,gText_GroupStages_Placeholder)
+            case PRE_BATTLE_2: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_B,gText_GroupStages_Placeholder)
+            case PRE_BATTLE_3: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_C,gText_GroupStages_Placeholder)
+        }
+
+    goto(GroupStages_PostRoundRobinMatch_Script)
+}
+
+script GroupStages_PostRoundRobinMatch_Script {
+    lock
+        addvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,1)
+        special(LoadPlayerParty)
+        special(HealPlayerParty)
+
+        if (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE) == PRE_BATTLE_4){
+            goto(GroupStages_RoundRobinGroupComplete_Script)
+        }
+
+    msgbox(gText_GroupStages_Placeholder,,SPEAKER_ANNOUNCER)
+        closemessage
+
+        applymovement(PLAYER,GroupStages_GetPlayerIntoPosition)
+        applymovement(ENTRANT,GroupStages_WalkOffStage)
+        waitmovement(ENTRANT)
+        msgbox(gText_GroupStages_Placeholder,,SPEAKER_ANNOUNCER)
+        call(GroupStages_ChooseParty_Script)
+
+        removeobject(ENTRANT)
+        call(SharpriseStadium_Arena_MapScripts_OnTransition)
+        addobject(ENTRANT)
+
+        goto(GroupStages_RoundRobinMatch_Script)
+}
+
+
+script GroupStages_RoundRobinGroupComplete_Script {
+        setvar(VAR_STORYLINE_STATE,STORY_GROUP_STATE_COMPLETE)
+        applymovement(PLAYER,GroupStages_WalkToCenterStage)
+        waitmovement(PLAYER)
+        msgbox(gText_GroupStages_Placeholder,SPEAKER_ANNOUNCER,TAIL_SHOUT,EMOTE_SHOCK)
+        special(DoDomeConfetti)
+        playse(SE_APPLAUSE)
+        waitse
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,10,3)
+}
+
+
+text gText_GroupStages_EasyPeasy {
+    format("Easy peasy! Good luck in there!")
+}
+
+text gText_GroupStages_Placeholder{
+    format("this is placeholder text.")
+}
+
+text gText_GroupStages_OnceYouStart {
+    format("Once you start the Group Stage, there's no turning back. You must complete the group stage before you can leave again, and you must complete the tournament before you can leave SharpriseStadium. Are you ready to continue?")
+}
+
+text gText_GroupStages_PlayerReturnToArena {
+    format("Paging competitor {PLAYER}. {PLAYER}. Please return to the arena for your scheduled match.")
+}
+
+text gText_GroupStages_OhRight {
+    format("Oh right, I can't leave once the tournament has started...")
+}
+
+movement GroupStages_WalkToPlayer {
+    walk_down * 6
+        face_left
+        step_end
+}
+
+movement GroupStages_LeaveLockers {
+    walk_in_place_down
+        step_end
+}
+
+movement GroupStages_PlayerLeaveLockers {
+    walk_up * 2
+        step_end
+}
+
+movement GroupStages_PlayerLeaveLockers_Left {
+    walk_right
+        walk_up
+        step_end
+}
+
+movement GroupStages_PlayerLeaveLockers_Right {
+    walk_left
+        walk_up
+        step_end
+}
+
+movement GroupStages_WalkOffStage {
+    walk_right * 2
+        step_end
+}
+
+movement GroupStages_GetPlayerIntoPosition {
+    walk_left
+        face_right
+        step_end
+}
+
+movement GroupStages_WalkToCenterStage {
+    walk_right * 3
+        face_down
+}

@@ -1,0 +1,219 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const OLIVER = 1
+
+script swagbag2_SetUp_Object_Script {
+    setflag(FLAG_TEMP_1)
+    return
+}
+
+script swagbag2_OliverWalkOutGym_Script {
+    opendoor(10, 8)
+    waitdooranim
+    clearflag(FLAG_TEMP_1)
+    addobject(OLIVER)
+    applymovement(OLIVER, Common_Movement_WalkDown)
+    applymovement(PLAYER, swagbag2_GetOutOfWay)
+    waitmovement(0)
+    closedoor(10, 8)
+    waitdooranim
+    goto(swagbag2_Intro_Dialogue)
+}
+
+script swagbag2_Intro_Dialogue {
+    startcutscene(JUMPPLAYER_SWAGBAG2)
+    playbgm(MUS_RG_FOLLOW_ME, FALSE)
+    msgbox(gText_swagbag2_ItWasAPleasure,,SPEAKER_OLIVER)
+
+    msgbox(gText_swagbag2_ItsALot,,SPEAKER_ALICIA)
+
+    msgbox(gText_swagbag2_SoundsLikeYouveRun,,SPEAKER_OLIVER)
+
+    applymovement(OLIVER, swagbag2_LookAwayAndBack)
+    waitmovement(0)
+
+    if (flag(FLAG_RECIEVED_NURSERY_EGG)){
+        goto(swagbag2_DiscussCosts_Dialogue)
+    } else {
+        goto(swagbag2_BringToCenter_Dialogue)
+    }
+}
+
+script swagbag2_DiscussCosts_Dialogue {
+
+    msgbox(gText_swagbag2_IAssumeYouveAlready,,SPEAKER_OLIVER)
+
+    msgbox(gText_swagbag2_TheyWereVeryHelpful,,SPEAKER_ALICIA)
+
+    msgbox(gText_swagbag2_TheBreedingCenterStaff,,SPEAKER_ALICIA)
+
+    msgbox(gText_swagbag2_TheBreedingCenterOffers,,SPEAKER_OLIVER)
+
+    msgbox(gText_swagbag2_ThatsTooBad,,SPEAKER_ALICIA)
+
+    msgbox(gText_swagbag2_HopefullyTheyllHaveIt,,SPEAKER_OLIVER)
+
+
+    goto(swagbag2_Scene_End_Script)
+}
+
+script swagbag2_BringToCenter_Dialogue {
+
+    msgbox(gText_swagbag2_HaveYouSeenThe,,SPEAKER_OLIVER)
+
+    msgbox(gText_swagbag2_NoShouldI,,SPEAKER_ALICIA)
+
+    msgbox(gText_swagbag2_IveGotAFewMinutes,,SPEAKER_OLIVER)
+
+    closemessage
+
+    applymovement(OLIVER, swagbag2_WalkToCenter)
+    applymovement(PLAYER, swagbag2_PlayerWalkToCenter)
+    waitmovement(0)
+
+    msgbox(gText_swagbag2_DontLetTheirDemeanor,,SPEAKER_OLIVER)
+
+    msgbox(gText_swagbag2_WowThatsAwesome,,SPEAKER_ALICIA)
+
+    msgbox(gText_swagbag2_YouShouldReallyTalk,,SPEAKER_OLIVER)
+
+    msgbox(gText_swagbag2_IWillThanks,,SPEAKER_ALICIA)
+
+    msgbox(gText_swagbag2_HappyToHelp,,SPEAKER_OLIVER)
+
+    applymovement(OLIVER, swagbag2_LookAwayAndBack)
+    waitmovement(0)
+
+    msgbox(gText_swagbag2_NowIveGottaRun,,SPEAKER_OLIVER)
+
+
+    goto(swagbag2_Scene_End_Script)
+}
+
+script swagbag2_Scene_End_Script {
+    setvar(VAR_CHASILLA_STATE, SWAGBAG_2_COMPLETE)
+    closemessage
+    applymovement(PLAYER, swagbag2_LetOliverLeave)
+    applymovement(OLIVER, swagbag2_LeaveCity)
+    waitmovement(0)
+    removeobject(OLIVER)
+    fadedefaultbgm
+    release
+    call(TryAutoSave)
+    endcutscene
+    end
+}
+
+text gText_swagbag2_ItWasAPleasure {
+    format("Hello {PLAYER}! It was a pleasure seeing you at the Spire yesterday. How are you liking east Resido?")
+}
+
+text gText_swagbag2_ItsALot {
+    format("...It's a lot. People are much less happy here than back on the mainland.")
+}
+
+text gText_swagbag2_SoundsLikeYouveRun {
+    format("Ah, sounds like you've run into TheTide a few times. Don't mind them, they don't represent all of us, I promise.")
+}
+
+text gText_swagbag2_IAssumeYouveAlready {
+    format("I assume you've already taken advantage of the Breeding Center in preparation for your battle with Kauna?")
+}
+
+text gText_swagbag2_TheyWereVeryHelpful {
+    format("Yes! They were very helpful in helping me prepare.")
+}
+
+text gText_swagbag2_TheBreedingCenterStaff {
+    format("The Breeding Center staff mentioned some pretty high fees for using their services. How do ordinary Trainers afford it so they can take on Kauna too?")
+}
+
+text gText_swagbag2_TheBreedingCenterOffers {
+    format("The Breeding Center offers its Bronze-tier services to all, at a significantly cheaper cost than that of your Gold membership. The school is working on a program to subsidize the Gold level for those involved in the League Challenge, they just... couldn't work out the details in time.")
+}
+
+text gText_swagbag2_ThatsTooBad {
+    format("Hmm... that's too bad. But awesome that they're working on it!")
+}
+
+text gText_swagbag2_HopefullyTheyllHaveIt {
+    format("Yes, hopefully they'll have it all smoothed out in the next year or ten. Now, I've gotta run. Good luck in there!")
+}
+
+text gText_swagbag2_HaveYouSeenThe {
+    format("Have you seen the Chasilla Breeding Center? Truly state of the art.")
+}
+
+text gText_swagbag2_NoShouldI {
+    format("No, should I?")
+}
+
+text gText_swagbag2_IveGotAFewMinutes {
+    format("I've got a few minutes, let me show you!")
+}
+
+text gText_swagbag2_DontLetTheirDemeanor {
+    format("Don't let their demeanor fool you - Kauna is actually one of the leading experts in Pokémon Breeding and Battling. His entire team is bred using this facility's Gold tier experience. Access to those same services is a perk of being under the SharpriseCapital umbrella.")
+}
+
+text gText_swagbag2_WowThatsAwesome {
+    format("Wow, that's awesome!")
+}
+
+text gText_swagbag2_YouShouldReallyTalk {
+    format("You should really talk to the staff. They're obsessed with delighting Trainers like you, and I'm sure they're expecting you.")
+}
+
+text gText_swagbag2_IWillThanks {
+    format("I will. Thanks for the tip!")
+}
+
+text gText_swagbag2_HappyToHelp {
+    format("Happy to help!")
+}
+
+text gText_swagbag2_NowIveGottaRun {
+    format("Now, I've gotta run. Good luck in there!")
+}
+
+movement swagbag2_GetOutOfWay {
+    walk_down
+    face_up
+    step_end
+}
+
+movement swagbag2_LookAwayAndBack {
+    face_left
+    delay_16
+    delay_16
+    face_down
+    step_end
+}
+
+movement swagbag2_LeaveCity {
+    walk_down * 7
+    step_end
+}
+
+movement swagbag2_WalkToCenter {
+    walk_left * 5
+    walk_down * 4
+    walk_left * 2
+    face_down
+    step_end
+}
+
+movement swagbag2_PlayerWalkToCenter {
+    walk_left * 5
+    walk_down * 4
+    walk_left * 2
+    face_up
+    step_end
+}
+
+movement swagbag2_LetOliverLeave {
+    walk_right
+    walk_up
+    walk_left
+    face_up
+    step_end
+}

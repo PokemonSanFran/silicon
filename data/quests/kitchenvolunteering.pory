@@ -1,0 +1,255 @@
+const KITVOL = 1
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+script Kitchenvolunteering_Script_FirstInteractKitvol
+{
+    locktarget
+    goto_if_quest_complete(QUEST_KITCHENVOLUNTEERING,Kitchenvolunteering_Script_SecondInteract)
+    goto_if_quest_reward(QUEST_KITCHENVOLUNTEERING,Kitchenvolunteering_Dialogue_Reward)
+    goto_if_quest_active(QUEST_KITCHENVOLUNTEERING,Kitchenvolunteering_Dialogue_YoureNotDone)
+    goto(Kitchenvolunteering_Dialogue_StartQuest)
+}
+
+script Kitchenvolunteering_Dialogue_StartQuest
+{
+    lock
+    faceplayer
+    msgbox(Kitchenvolunteering_Text_OhYoureHere,,SPEAKER_KITVOL)
+
+    call(Kitchenvolunteering_Script_BufferItemNameA)
+    msgbox(Kitchenvolunteering_Text_HeadDownToTheBasement,,SPEAKER_KITVOL)
+
+    call(Kitchenvolunteering_Script_BufferItemNameB)
+    msgbox(Kitchenvolunteering_Text_HeadDownToTheBasementList,,SPEAKER_KITVOL)
+
+    msgbox(Kitchenvolunteering_Text_ComeBackWhenYoure,,SPEAKER_KITVOL)
+    call(Kitchenvolunteering_Script_GiveKey)
+    msgbox(Kitchenvolunteering_Text_IThinkThey,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+    closemessage
+    startquest(QUEST_KITCHENVOLUNTEERING)
+    call(Kitchenvolunteering_Script_ReturnToWork)
+}
+
+script Kitchenvolunteering_Script_ReturnToWork
+{
+    applymovement(KITVOL,Common_Movement_FaceOriginalDirection)
+    waitmovement(KITVOL)
+    release
+}
+
+script Kitchenvolunteering_Dialogue_YoureNotDone
+{
+    lock
+    faceplayer
+    msgbox(Kitchenvolunteering_Text_OhYoureNotDone,,SPEAKER_KITVOL)
+    call(Kitchenvolunteering_Script_ReturnToWork)
+    end
+}
+
+script Kitchenvolunteering_Script_RemoveItem
+{
+    removeitem(ITEM_STORAGE_KEY,1)
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_KITCHENVOLUNTEERING)
+    if (!var(VAR_RESULT))
+    {
+        call(Kitchenvolunteering_Script_RemoveAllItems)
+    }
+    else
+    {
+        call(Kitchenvolunteering_Script_RemoveDailyItem)
+    }
+}
+
+script Kitchenvolunteering_Script_RemoveAllItems
+{
+    removeitem(ITEM_PANTRY_A,1)
+    removeitem(ITEM_PANTRY_B,1)
+    removeitem(ITEM_PANTRY_C,1)
+    removeitem(ITEM_PANTRY_D,1)
+    removeitem(ITEM_PANTRY_E,1)
+}
+
+script Kitchenvolunteering_Script_RemoveDailyItem
+{
+    copyvar(VAR_0x8004,VAR_QUEST_KITCHEN_ASSIGNED_ITEMS)
+    removeitem(VAR_0x8004,1)
+}
+
+script Kitchenvolunteering_Script_CompleteQuestIfNotComplete
+{
+    completequest(QUEST_KITCHENVOLUNTEERING)
+}
+
+script Kitchenvolunteering_Dialogue_Reward
+{
+    lock
+    faceplayer
+    call(Kitchenvolunteering_Dialogue_ThankPlayer)
+    msgbox(Kitchenvolunteering_Text_TheyNever,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+    setflag(FLAG_DAILY_KITCHEN_VOLUNTEER)
+    special(RandomlyBoostPartyMemberFriendship)
+    call(Kitchenvolunteering_Script_RemoveItem)
+    call_if_quest_not_complete(QUEST_KITCHENVOLUNTEERING,Kitchenvolunteering_Script_CompleteQuestIfNotComplete)
+    release
+    end
+}
+
+script Kitchenvolunteering_Dialogue_ThankPlayer
+{
+    lock
+    faceplayer
+    msgbox(Kitchenvolunteering_Text_OhThankGod,,SPEAKER_KITVOL)
+    msgbox(Kitchenvolunteering_Text_OhAndTheKey,,SPEAKER_KITVOL)
+    closemessage
+    cueobjectplayer(PLAYER)
+    msgbox(Kitchenvolunteering_Text_ComeBackTomorrow,,SPEAKER_KITVOL)
+    call(Kitchenvolunteering_Script_ReturnToWork)
+}
+
+//PSF TODO Add sprites and item descriptions for the basement items
+//PSF TODO make it so the player can only do this once per "day"
+script Kitchenvolunteering_Script_SecondInteract
+{
+    if (flag(FLAG_DAILY_KITCHEN_VOLUNTEER))
+    {
+        goto(Kitchenvolunteering_Dialogue_TooBusy)
+    }
+
+    checkitem(ITEM_STORAGE_KEY,1)
+    if (var(VAR_RESULT))
+    {
+        call(Kitchenvolunteering_Script_CheckForItem)
+        goto(Kitchenvolunteering_Dialogue_YoureNotDone)
+    }
+
+    goto(Kitchenvolunteering_Dialogue_RepeatQuest)
+}
+
+script Kitchenvolunteering_Script_CheckForItem
+{
+
+    copyvar(VAR_0x8004,VAR_QUEST_KITCHEN_ASSIGNED_ITEMS)
+    checkitem(VAR_0x8004,1)
+
+    if (var(VAR_RESULT))
+    {
+        goto(Kitchenvolunteering_Dialogue_Reward)
+        end
+    }
+}
+
+script Kitchenvolunteering_Dialogue_TooBusy
+{
+    lock
+    faceplayer
+    msgbox(Kitchenvolunteering_Text_NowWhereDidIPut,,SPEAKER_KITVOL,TAIL_WHISPER)
+    closemessage
+    release
+    end
+}
+
+script Kitchenvolunteering_Script_BufferSingleItemName
+{
+    copyvar(VAR_0x8004,VAR_QUEST_KITCHEN_ASSIGNED_ITEMS)
+    bufferitemname(STR_VAR_1,VAR_0x8004)
+}
+
+script Kitchenvolunteering_Script_BufferItemNameA
+{
+    bufferitemname(STR_VAR_1,ITEM_PANTRY_A)
+    bufferitemname(STR_VAR_2,ITEM_PANTRY_B)
+    bufferitemname(STR_VAR_3,ITEM_PANTRY_C)
+}
+
+script Kitchenvolunteering_Script_BufferItemNameB
+{
+    bufferitemname(STR_VAR_1,ITEM_PANTRY_D)
+    bufferitemname(STR_VAR_2,ITEM_PANTRY_E)
+}
+
+script Kitchenvolunteering_Dialogue_RepeatQuest
+{
+    lock
+    faceplayer
+    special(KitchenvolunteeringFunc_ChooseRandomPantryItem)
+    msgbox(Kitchenvolunteering_Text_OhWowTheyNever,,SPEAKER_KITVOL)
+    msgbox(Kitchenvolunteering_Text_ThisTimeCanYouGrab,,SPEAKER_KITVOL)
+    call(Kitchenvolunteering_Script_GiveKey)
+    release
+    end
+}
+
+script Kitchenvolunteering_Script_GiveKey
+{
+    msgbox(Kitchenvolunteering_Text_OhRightYouNeedTheKey,,SPEAKER_KITVOL)
+    closemessage
+    cueobjectplayer(KITVOL)
+    giveitem(ITEM_STORAGE_KEY,1)
+}
+
+script Kitchenvolunteering_Script_FindItem
+{
+    special(KitchenvolunteeringFunc_GeneratePantryItem)
+    callstd(STD_FIND_ITEM)
+    special(KitchenvolunteeringFunc_CheckProgressAndSetReward)
+    end
+}
+
+text Kitchenvolunteering_Text_OhYoureHere
+{
+    format("Oh you're here! Finally. Okay let's see...")
+}
+
+text Kitchenvolunteering_Text_HeadDownToTheBasement
+{
+    format("I need you to head down into the basement and grab some items for me. {STR_VAR_1}, {STR_VAR_2}, and {STR_VAR_3}.")
+}
+text Kitchenvolunteering_Text_HeadDownToTheBasementList
+{
+    format("Oh, and I need {STR_VAR_1} and {STR_VAR_2} too.")
+}
+text Kitchenvolunteering_Text_ComeBackWhenYoure
+{
+    format("Come back when you've got all five.")
+}
+text Kitchenvolunteering_Text_IThinkThey
+{
+    format("I don't think they realize that I'm the wrong person...")
+}
+text Kitchenvolunteering_Text_OhYoureNotDone
+{
+    format("Oh you're not done? Let me know when you are.")
+}
+text Kitchenvolunteering_Text_TheyNever
+{
+    format("They never realized they've got the wrong person...")
+}
+text Kitchenvolunteering_Text_OhThankGod
+{
+    format("Oh thank God! I'll take those. Thank you so much!")
+}
+text Kitchenvolunteering_Text_OhAndTheKey
+{
+    format("Oh! And the key. I'll take that.")
+}
+text Kitchenvolunteering_Text_ComeBackTomorrow
+{
+    format("You did good today. Come back tomorrow if you're willing to help out again.")
+}
+text Kitchenvolunteering_Text_NowWhereDidIPut
+{
+    format("Did you see where I put that ladle?")
+}
+text Kitchenvolunteering_Text_OhWowTheyNever
+{
+    format("Oh wow! They never come back.")
+}
+text Kitchenvolunteering_Text_ThisTimeCanYouGrab
+{
+    format("Okay, today I just need you to grab a {STR_VAR_1}.")
+}
+text Kitchenvolunteering_Text_OhRightYouNeedTheKey
+{
+    format("Oh right! You need the key. Here you go.")
+}
+

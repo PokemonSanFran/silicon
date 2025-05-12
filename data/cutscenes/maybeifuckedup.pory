@@ -1,0 +1,154 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ORI = 12
+const FLAG_HIDE_ORI = FLAG_TEMP_6
+
+script MaybeIFuckedUp_ShowOri_Script
+{
+    if (var(VAR_STORYLINE_STATE) != STORY_CONGRATULATED_BY_ADELAIDE)
+    {
+        setflag(FLAG_HIDE_ORI)
+    }
+}
+
+script MaybeIFuckedUp_Dialogue
+{
+    lock
+    startcutscene(JUMPPLAYER_MAYBEIFUCKEDUP)
+    setvar(VAR_STORYLINE_STATE,STORY_RECIEVED_BAMBOO_STAR)
+
+    applymovement(ORI,MaybeIFuckedUp_WalkToPlayer)
+    waitmovement(0)
+    msgbox(gText_MaybeIFuckedUp_ExcuseMeLad,,SPEAKER_ORI)
+    closemessage
+    applymovement(ORI,Common_Movement_WalkUp)
+    waitmovement(0)
+
+    msgbox(gText_MaybeIFuckedUp_OhHi,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_MaybeIFuckedUp_ItsGoodToMeetYou,,SPEAKER_ORI)
+
+    msgbox(gText_MaybeIFuckedUp_ItHasBeenACrazy,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_MaybeIFuckedUp_YourDecisions,,SPEAKER_ORI)
+    giveitem(ITEM_WISH_TAG,1)
+
+    msgbox(gText_MaybeIFuckedUp_IfYouFindYourself,,SPEAKER_ORI)
+
+    msgbox(gText_MaybeIFuckedUp_UhOkay,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_MaybeIFuckedUp_OfCourse,,SPEAKER_ORI)
+    closemessage
+
+    applymovement(PLAYER,MaybeIFuckedUp_WatchOriWalk)
+    applymovement(ORI,MaybeIFuckedUp_WalkOffScreen)
+    waitmovement(ORI)
+    removeobject(ORI)
+
+    msgbox(gText_MaybeIFuckedUp_WhatTheHellWasThat,,SPEAKER_ALICIA)
+
+    msgbox(gText_MaybeIFuckedUp_SomeOldCoot,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+
+    msgbox(gText_MaybeIFuckedUp_ButIHave,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
+    if (flag(FLAG_VISITED_TORGEOT_CLIMB))
+    {
+        msgbox(gText_MaybeIFuckedUp_TallestPoint,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    }
+    else
+    {
+        msgbox(gText_MaybeIFuckedUp_WhereIs,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    }
+
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
+
+text gText_MaybeIFuckedUp_ExcuseMeLad
+{
+	format("Excuse me!.")
+}
+
+text gText_MaybeIFuckedUp_OhHi
+{
+	format("Oh hi!")
+}
+
+text gText_MaybeIFuckedUp_ItsGoodToMeetYou
+{
+	format("It’s good to meet you, Champion {PLAYER}. You’ve had quite an impact since you arrived here, don’t you think?")
+}
+
+text gText_MaybeIFuckedUp_ItHasBeenACrazy
+{
+	format("Not what I had planned when I first came here... worse, actually.")
+}
+
+text gText_MaybeIFuckedUp_YourDecisions
+{
+	format("Your decisions have had a great impact… but not everything is always permanent. Take this.")
+}
+
+text gText_MaybeIFuckedUp_IfYouFindYourself
+{
+	format("If you find yourself having regrets about the path you’ve chosen, bring that to the highest point in the region. I have a friend who can help you.")
+}
+
+text gText_MaybeIFuckedUp_UhOkay
+{
+	format("Uh… okay? Thanks, I guess.")
+}
+
+text gText_MaybeIFuckedUp_OfCourse
+{
+	format("Of course, my child.")
+}
+
+text gText_MaybeIFuckedUp_WhatTheHellWasThat
+{
+	format("...what the hell was that?")
+}
+
+text gText_MaybeIFuckedUp_SomeOldCoot
+{
+    format("Some old coot just walked up to me and handed me this piece of paper... I have no idea what this is supposed to do.")
+}
+
+text gText_MaybeIFuckedUp_ButIHave
+{
+    format("But I can't make things much worse around here, can I?")
+}
+
+text gText_MaybeIFuckedUp_TallestPoint
+{
+   format("Tallest point... is that Twin Peaks? Do I have to do that hike again?")
+}
+
+text gText_MaybeIFuckedUp_WhereIs
+{
+    format("And where is the tallest point anyways?")
+}
+
+movement MaybeIFuckedUp_WalkToPlayer {
+    walk_down * 3
+    walk_right * 3
+    face_up
+    step_end
+}
+
+movement MaybeIFuckedUp_WalkOffScreen {
+    walk_right * 8
+    step_end
+}
+
+movement MaybeIFuckedUp_WatchOriWalk {
+    delay_16
+    delay_16
+    delay_16
+    face_right
+    step_end
+}

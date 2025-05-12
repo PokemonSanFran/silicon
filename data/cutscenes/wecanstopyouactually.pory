@@ -1,0 +1,426 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const POLICE_A = 2
+const POLICE_B = 3
+const ADELAIDE = 4
+
+const FLAG_HIDE_OLIVER= FLAG_TEMP_1
+const FLAG_HIDE_POLICE = FLAG_TEMP_2
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_3
+
+script WeCanStopYouActually_FixPlayerPosition_Script {
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        if (var(VAR_TEMP_0) != 15 || (var(VAR_TEMP_1) != 6)){
+            fadescreen(FADE_TO_BLACK)
+                applymovement(ADELAIDE,Common_Movement_FaceDown)
+                waitmovement(ADELAIDE)
+                setobjectxy(ADELAIDE,15,5)
+                applymovement(PLAYER,Common_Movement_FaceUp)
+                setobjectxy(PLAYER,15,6)
+                TeleportCamera(15,6)
+                fadescreen(FADE_FROM_BLACK)
+        }
+}
+
+script WeCanStopYouActually_PostBattle_Dialogue {
+    lock
+        call(WeCanStopYouActually_FixPlayerPosition_Script)
+        endcutscene
+
+        msgbox(gText_WeCanStopYouActually_SoWhatsYourPlan,,SPEAKER_ADELAIDE)
+
+        msgbox(gText_WeCanStopYouActually_PhoneIsRinging)
+
+        msgbox(gText_WeCanStopYouActually_ThatsTheAuthorities,,SPEAKER_ADELAIDE)
+
+        msgbox(gText_WeCanStopYouActually_OhNo,,SPEAKER_ADELAIDE)
+
+        closemessage
+
+        applymovement(ADELAIDE,WeCanStopYouActually_RunToDesk)
+        waitmovement(ADELAIDE)
+        playse(SE_PC_LOGIN)
+        special(TurnOnTVScreen)
+        delay(30)
+        fadescreen(FADE_TO_BLACK)
+
+        msgbox(gText_WeCanStopYouActually_IAmChiefOperatingOfficer,,SPEAKER_KEIYING)
+
+        closemessage
+
+        fadescreen(FADE_FROM_BLACK)
+
+        msgbox(gText_WeCanStopYouActually_WaitTheHell,,SPEAKER_ADELAIDE)
+
+
+        playse(SE_POKENAV_CALL)
+        waitse
+        msgbox(gText_WeCanStopYouActually_PhoneIsRinging)
+
+        msgbox(gText_WeCanStopYouActually_FindThem,,SPEAKER_ADELAIDE)
+
+        msgbox(gText_WeCanStopYouActually_IDontCare,,SPEAKER_ADELAIDE)
+
+        closemessage
+
+        applymovement(ADELAIDE,WeCanStopYouActually_RageRun)
+        waitmovement(ADELAIDE)
+
+        msgbox(gText_WeCanStopYouActually_TheyToldYou,,SPEAKER_ADELAIDE)
+
+        msgbox(gText_WeCanStopYouActually_I,,SPEAKER_ALICIA)
+
+        closemessage
+
+        applymovement(ADELAIDE,Common_Movement_FaceLeft)
+
+        msgbox(gText_WeCanStopYouActually_Security,,SPEAKER_ADELAIDE)
+
+        msgbox(gText_WeCanStopYouActually_WeAlreadyBeatThem,,SPEAKER_ALICIA)
+
+        closemessage
+
+        applymovement(ADELAIDE,Common_Movement_FaceDown)
+        waitmovement(ADELAIDE)
+
+        msgbox(gText_WeCanStopYouActually_ImNotGoingToPrison,,SPEAKER_ADELAIDE)
+
+        closemessage
+
+        applymovement(ADELAIDE,Common_Movement_WalkDown)
+        waitmovement(ADELAIDE)
+
+        goto(WeCanStopYouActually_StartBossBattle_Script)
+}
+
+script WeCanStopYouActually_StartBossBattle_Script {
+        setvar(VAR_TOWER_RAID_STATE,SAVE_ADELAIDE_SHARPRISESPIRE)
+        msgbox(gText_WeCanStopYouActually_AndIllFrigginKill,,SPEAKER_ADELAIDE)
+
+        closemessage
+
+        trainerbattle_no_intro(TRAINER_ADELAIDE_B,gText_WeCanStopYouActually_Nonono)
+        setvar(VAR_TOWER_RAID_STATE,DEFEATED_SECOND_ADELAIDE)
+}
+
+script WeCanStopYouActually_Arrest_Dialogue {
+    lock
+        startcutscene(JUMPPLAYER_WECANSTOPYOUACTUALLY)
+
+        setvar(VAR_TOWER_RAID_STATE,DEFEATED_ADELAIDE_SHARPRISESPIRE)
+        setvar(VAR_STORYLINE_STATE,STORY_EPILOGUE)
+
+        clearflag(FLAG_HIDE_POLICE)
+        addobject(POLICE_A)
+        addobject(POLICE_B)
+
+        msgbox(gText_WeCanStopYouActually_YoureUnderArrest)
+        closemessage
+
+        applymovement(POLICE_A,WeCanStopYouActually_ArrestWalkInA)
+        applymovement(POLICE_B,WeCanStopYouActually_ArrestWalkInB)
+        applymovement(PLAYER,WeCanStopYouActually_ArrestWalkInC)
+
+        waitmovement(POLICE_B)
+
+        msgbox(gText_WeCanStopYouActually_ForWhat,,SPEAKER_ADELAIDE)
+
+        closemessage
+        endcutscene
+        bypass_healblock
+        setflag(FLAG_SPAWN_INVISIBLE)
+        warpsilent(MAP_BLACK_MAP,0)
+        waitstate
+        release
+        end
+}
+
+script WeCanActuallyStopYou_Script_GoToPerpWalk
+{
+    setflag(FLAG_SYS_GAME_CLEAR)
+    setflag(FLAG_REMOVE_WARP_FADE)
+    setflag(FLAG_SHOULD_SKIP_CREDITS)
+    startmenu_savescreen
+    warpsilent(MAP_WE_CAN_STOP_YOU_ACTUALLY_CUTSCENE,0)
+    waitstate
+    end
+}
+
+const GRUNTA = 1
+const GRUNTB = 2
+const GRUNTC = 3
+const POLICEC = 4
+const OLIVER = 5
+const ADELAIDE_B = 6
+const CHARLOTTE = 7
+const RAMESH = 8
+const POLICED = 9
+const ELLEN = 10
+const TALA = 11
+const MAGNUS = 12
+const ARMANDO = 13
+const ADAORA = 14
+
+script WeCanStopYouActaully_ArrestCutscene {
+        callnative(SetPostCreditsSceneWarpLocation)
+        startcutscene(JUMPPLAYER_EPILOGUE)
+        lockall
+
+        applymovement(GRUNTA,WeCanStopYouActually_MarchRight)
+        applymovement(GRUNTB,WeCanStopYouActually_MarchLeft)
+        applymovement(GRUNTC,WeCanStopYouActually_MarchRight)
+        applymovement(ADAORA,WeCanStopYouActually_MarchLeft)
+        waitmovement(ADAORA)
+        applymovement(PLAYER,WeCanStopYouActually_StepAside)
+        waitmovement(PLAYER)
+        delay(8)
+
+        addobject(POLICEC)
+        applymovement(POLICEC,WeCanStopYouActually_WalkOutOfBuilding)
+        delay(16)
+
+        addobject(OLIVER)
+        applymovement(OLIVER,WeCanStopYouActually_WalkOutOfBuilding)
+        delay(16)
+
+        addobject(ADELAIDE_B)
+        applymovement(ADELAIDE_B,WeCanStopYouActually_WalkOutOfBuilding)
+        delay(16)
+
+        addobject(CHARLOTTE)
+        applymovement(CHARLOTTE,WeCanStopYouActually_WalkOutOfBuilding)
+        delay(16)
+
+        addobject(RAMESH)
+        applymovement(RAMESH,WeCanStopYouActually_WalkOutOfBuilding)
+        delay(16)
+
+        addobject(POLICED)
+        applymovement(POLICED,WeCanStopYouActually_WalkOutOfBuilding)
+        delay(16)
+
+        waitmovement(POLICED)
+
+        removeobject(POLICEC)
+        removeobject(OLIVER)
+        removeobject(ADELAIDE_B)
+        removeobject(CHARLOTTE)
+        removeobject(RAMESH)
+        removeobject(POLICED)
+
+        addobject(ELLEN)
+        random(4)
+        if (var(VAR_RESULT) == 1){
+            applymovement(ELLEN,WeCanStopYouActually_SalutePlayerHeart)
+        }else {
+            applymovement(ELLEN,WeCanStopYouActually_SalutePlayer)
+        }
+    delay(32)
+        waitmovement(ELLEN)
+
+        addobject(TALA)
+        random(4)
+        if (var(VAR_RESULT) == 1){
+            applymovement(TALA,WeCanStopYouActually_SalutePlayerHeart)
+        }else {
+            applymovement(TALA,WeCanStopYouActually_SalutePlayer)
+        }
+    delay(32)
+        waitmovement(TALA)
+
+        addobject(MAGNUS)
+        random(4)
+        if (var(VAR_RESULT) == 1){
+            applymovement(MAGNUS,WeCanStopYouActually_SalutePlayerHeart)
+        }else {
+            applymovement(MAGNUS,WeCanStopYouActually_SalutePlayer)
+        }
+    delay(32)
+        waitmovement(MAGNUS)
+
+        addobject(ARMANDO)
+        random(4)
+        if (var(VAR_RESULT) == 1){
+            applymovement(ARMANDO,WeCanStopYouActually_SalutePlayerHeart)
+        }else {
+            applymovement(ARMANDO,WeCanStopYouActually_SalutePlayer)
+        }
+    delay(32)
+
+        waitmovement(ARMANDO)
+
+        removeobject(TALA)
+        removeobject(MAGNUS)
+        removeobject(ARMANDO)
+        removeobject(ELLEN)
+
+
+        applymovement(PLAYER,Common_Movement_FaceDown)
+        waitmovement(0)
+
+        fadeblackandsetremovewarpfadeflag
+        msgbox(gText_WeCanStopYouActually_TheNextDay,MSGBOX_AUTOCLOSE)
+        closemessage
+        setflag(FLAG_SPAWN_INVISIBLE)
+        warpsilent(MAP_ARANTRAZ,255,8,15)
+}
+
+
+text gText_WeCanStopYouActually_SoWhatsYourPlan {
+    format("So, what’s your plan, beat me up and try to expose me? Nobody is going to believe the terrorists that stormed our office building. There's not even a paper trail - do you know how hard it was, not sending a SINGLE email about this? You’re all going to get arrested, the money will keep flowing in, and life is going to keep moving on.")
+}
+
+text gText_WeCanStopYouActually_PhoneIsRinging{
+    format("Adelaide's phone is ringing.") //PSF TODO EMOTE beep
+}
+
+text gText_WeCanStopYouActually_ThatsTheAuthorities {
+    format("That’s the authorities, probably here to pick you up.")
+}
+
+text gText_WeCanStopYouActually_OhNo {
+    format("…oh no.")
+}
+
+text gText_WeCanStopYouActually_IAmChiefOperatingOfficer {
+    format("I am Keiying, the SharpriseCapital Chief Operating Officer. This is my confession. Two days ago, SharpriseCapital triggered a machine that is responsible for the devastating earthquake on HalaiIsland. We did it to flush out and destroy …")
+}
+
+text gText_WeCanStopYouActually_WaitTheHell {
+    format("WHAT THE HELL ARE THEY DOING?")
+}
+
+text gText_WeCanStopYouActually_FindThem {
+    format("FIND THEM! SHUT THAT DOWN!")
+}
+
+text gText_WeCanStopYouActually_IDontCare {
+    format("I don’t care WHERE THEY ARE JUST END THIS SHIT! I thought they were MISSING! HOW DID THIS HAPPEN?")
+}
+
+text gText_WeCanStopYouActually_TheyToldYou {
+    format("YOU! They told you! That’s how you found out! And now if they confess… they don’t have to take it from you.")
+}
+
+text gText_WeCanStopYouActually_I {
+    format(" I - ")
+}
+
+text gText_WeCanStopYouActually_Security {
+    format("CHARLOTTE! RAMESH! SECURITY!")
+}
+
+text gText_WeCanStopYouActually_WeAlreadyBeatThem {
+    format("We already beat them. You’re alone.")
+}
+
+
+text gText_WeCanStopYouActually_ImNotGoingToPrison {
+    format("…I’m not going to prison. I’m NOT GOING TO JAIL…")
+}
+
+text gText_WeCanStopYouActually_AndIllFrigginKill {
+    format("And I’ll FRIGGIN’ KILL YOU!")
+}
+
+text gText_WeCanStopYouActually_Nonono {
+    format("Nonononononono…")
+}
+
+text gText_WeCanStopYouActually_YoureUnderArrest {
+    format("Adelaide, you’re under arrest!")
+}
+
+text gText_WeCanStopYouActually_ForWhat {
+    format("For what? Using the tools YOUR BOSSES gave me? We’re all going down together! You’re all toast!")
+}
+
+text gText_WeCanStopYouActually_TheNextDay {
+    format("A few months later...")
+}
+
+text gText_WeCanStopYouActually_AndTomorrowStarts {
+    format("And tomorrow starts the beginning of the second season of SharpriseCapital’s Championship League! Trainers from all over Resido will be battling all over to find out who will be this season’s Champ. The new SharpriseCapital CEO released a statement yesterday, showing their excitement for this new chapter in SharpriseCapital history. SharpriseCapital’s entire executive team were all charged with conspiracy and murder, and are currently waiting trial. The previous Champion, {PLAYER}, was unavailable for comment.")
+}
+
+movement WeCanStopYouActually_RunToDesk {
+    walk_up
+        step_end
+}
+
+movement WeCanStopYouActually_RageRun {
+    walk_faster_left
+        walk_faster_right * 2
+        walk_faster_left * 2
+        walk_faster_right * 2
+        walk_faster_left * 2
+        walk_faster_right
+        face_down
+        step_end
+}
+
+movement WeCanStopYouActually_ArrestWalkInA {
+    walk_right * 7
+        walk_up * 2
+        face_right
+        step_end
+}
+
+movement WeCanStopYouActually_ArrestWalkInB {
+    walk_right * 9
+        walk_up * 3
+        face_left
+        step_end
+}
+
+movement WeCanStopYouActually_ArrestWalkInC {
+    walk_right * 2
+        face_left
+        step_end
+}
+
+movement WeCanStopYouActually_MarchLeft {
+        walk_left * 2
+        walk_right * 4
+        delay_8
+        face_up
+        step_end
+}
+movement WeCanStopYouActually_MarchRight {
+    walk_right * 2
+        walk_left * 4
+        delay_8
+        face_up
+        step_end
+}
+
+movement WeCanStopYouActually_WalkOutOfBuilding {
+        walk_down * 4
+        walk_right * 9
+        step_end
+}
+
+movement WeCanStopYouActually_StepAside {
+    walk_right
+        face_left
+        step_end
+}
+
+movement WeCanStopYouActually_SalutePlayerHeart {
+    walk_down
+        face_right
+        emote_heart
+        delay_16 * 2
+        walk_down * 3
+        walk_right * 9
+        step_end
+}
+
+movement WeCanStopYouActually_SalutePlayer{
+    walk_down
+        face_right
+        delay_16 * 2
+        walk_down * 3
+        walk_right * 9
+        step_end
+}

@@ -1,0 +1,166 @@
+const DRUMMER_A = 23
+const DRUMMER_B = 24
+const DRUMMER_C = 25
+const DRUMMER_D = 26
+//Quest_LastMusicVenue_
+//gText_Quest_LastMusicVenue_
+
+script Quest_LastMusicVenue_Debug_Script{
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_LASTMUSICVENUEINRESIDO)
+        fadeblackandsetremovewarpfadeflag
+    warp(MAP_TORA_TOWN,15,16)
+    release
+    end
+}
+
+script Quest_LastMusicVenue_CheckDrummerImpact{
+    returnqueststate(QUEST_LASTMUSICVENUEINRESIDO)
+
+    if (var(VAR_RESULT) < QUEST_MENU_SET_REWARD){
+        call(Quest_LastMusicVenue_HideVenueDrummers)
+        call(Quest_LastMusicVenue_ChangeMusic)
+    }
+}
+
+script Quest_LastMusicVenue_HideVenueDrummers{
+    setflag(FLAG_TEMP_1)
+    return
+}
+
+script Quest_LastMusicVenue_HidePublicDrummers{
+    returnqueststate(QUEST_LASTMUSICVENUEINRESIDO)
+    if (var(VAR_RESULT) > QUEST_MENU_SET_ACTIVE){
+        setflag(FLAG_TEMP_6)
+    }
+}
+
+script Quest_LastMusicVenue_ChangeMusic{
+    playbgm(MUS_RG_FUCHSIA,TRUE)
+    return
+}
+
+script Quest_LastMusicVenue_StartQuest_Script{
+    msgbox(gText_Quest_LastMusicVenue_IHopeYoureNot,MSGBOX_NPC,SPEAKER_DEFAULT)
+
+    msgbox(gText_Quest_LastMusicVenue_WhyIsThat,MSGBOX_NPC,SPEAKER_ALICIA)
+
+
+    msgbox(gText_Quest_LastMusicVenue_ItsAViciousCycle,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(gText_Quest_LastMusicVenue_YoureYoungDoYouKnow,MSGBOX_NPC,SPEAKER_DEFAULT)
+
+    //questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DRUMCIRCLE) // PSF TODO replace with subquest
+    if (var(VAR_RESULT)){
+        msgbox(gText_Quest_LastMusicVenue_ActuallyIMetSome,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(gText_Quest_LastMusicVenue_TheDrumCircle,MSGBOX_NPC,SPEAKER_ALICIA,TAIL_THOUGHT)
+    }else{
+        msgbox(gText_Quest_LastMusicVenue_IllKeepMyEyesPeeled,MSGBOX_NPC,SPEAKER_ALICIA)
+    }
+
+
+
+    startquest(QUEST_LASTMUSICVENUEINRESIDO)
+    release
+    end
+}
+
+script Quest_LastMusicVenue_Active_Dialogue{
+    msgbox(gText_Quest_LastMusicVenue_AnyLuck,MSGBOX_NPC,SPEAKER_DEFAULT)
+
+    //questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DRUMCIRCLE) // PSF TODO replace with subquest
+    if (var(VAR_RESULT)){
+        msgbox(gText_Quest_LastMusicVenue_IHavent,MSGBOX_NPC,SPEAKER_ALICIA)
+    }else{
+        msgbox(gText_Quest_LastMusicVenue_ImStillLooking,MSGBOX_NPC,SPEAKER_ALICIA)
+    }
+
+
+    release
+    end
+}
+
+script Quest_LastMusicVenue_InformDrummers_Dialogue{
+    msgbox(gText_LastMusicVenue_HaveYouGuysSeen,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_LastMusicVenue_Nah,,SPEAKER_TONALLI)
+
+    msgbox(gText_LastMusicVenue_YouNeed,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_LastMusicVenue_ThisCouldBe,,SPEAKER_DRUMMER_B)
+    closemessage
+
+    fadescreen(FADE_TO_BLACK)
+    removeobject(DRUMMER_A)
+    removeobject(DRUMMER_B)
+    removeobject(DRUMMER_C)
+    removeobject(DRUMMER_D)
+    fadescreen(FADE_FROM_BLACK)
+
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_LASTMUSICVENUEINRESIDO)
+    release
+    end
+}
+
+script Quest_LastMusicVenue_Reward_Dialogue{
+    msgbox(gText_Quest_LastMusicVenue_TheseDrummers,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(gText_Quest_LastMusicVenue_TurnsOutTheyKnow,MSGBOX_NPC,SPEAKER_DEFAULT)
+    call(Quest_LastMusicVenue_GiveReward_Script)
+    completequest(QUEST_LASTMUSICVENUEINRESIDO)
+    release
+    end
+}
+
+script Quest_LastMusicVenue_GiveReward_Script{
+    giveitem(ITEM_STARF_BERRY,1)
+    return
+}
+
+text gText_Quest_LastMusicVenue_IHopeYoureNot{
+	format("I hope you're not here to see any music... ain't nothing playing today. Or tomorrow. Or any day after that.")
+}
+text gText_Quest_LastMusicVenue_WhyIsThat{
+	format("Why is that?")
+}
+text gText_Quest_LastMusicVenue_ItsAViciousCycle{
+	format("Its a vicious cycle. The League keeps buying up concert venues to turn into arenas for their crazy new League. The local musicians don't have venues to perform in, so they stop. The remaining venues can't book new musicians because they've all quit. So when the League wants to buy another property... we jump at the chance.") //PSF TODO EMOTE sigh
+}
+text gText_Quest_LastMusicVenue_YoureYoungDoYouKnow{
+	format("You're young, do you know any music artists looking for a venue? Even just one or two would be huge.")
+}
+text gText_Quest_LastMusicVenue_ActuallyIMetSome{
+	format("Actually, I met some! Let me see if they're interested.")
+}
+text gText_Quest_LastMusicVenue_TheDrumCircle{
+	format("(The drum circle in TirabudinPlace would be perfect for this!)")
+}
+text gText_Quest_LastMusicVenue_IllKeepMyEyesPeeled{
+	format("I'll keep my eyes peeled as I travel!")
+}
+text gText_Quest_LastMusicVenue_AnyLuck{
+	format("Any luck finding some artists?")
+}
+text gText_Quest_LastMusicVenue_IHavent{
+	format("I haven't had a chance to talk to them yet!")
+}
+text gText_Quest_LastMusicVenue_ImStillLooking{
+	format("I'm still looking for somebody! But you're right, it's hard...")
+}
+text gText_Quest_LastMusicVenue_TheseDrummers{
+	format("These dummers are amazing! They're so happy to be here, and we were able to work something out!")
+}
+text gText_Quest_LastMusicVenue_TurnsOutTheyKnow{
+	format("Turns out they know other artists too!")
+}
+text gText_LastMusicVenue_HaveYouGuysSeen{
+    format("Have you guys seen the Masonic venue?")
+}
+text gText_LastMusicVenue_Nah{
+    format("Nah, what's that?")
+}
+text gText_LastMusicVenue_YouNeed{
+    format("You need to get down there! They're really looking for musicians and I think you'd be a good fit.")
+}
+text gText_LastMusicVenue_ThisCouldBe{
+    format("This could be our shot yo!")
+}

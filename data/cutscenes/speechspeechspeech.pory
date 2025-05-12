@@ -1,0 +1,497 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CAMERA = OBJ_EVENT_ID_CAMERA
+const KAI = 1
+const TALA = 3
+const MAGNUS = 2
+const ARMANDO = 6
+const ELLEN = 5
+const ALCMENE = 7
+const ADAORA = 8
+const GRUNTA = 9
+const GRUNTB = 10
+const GRUNTC = 11
+const GRUNTD = 12
+
+const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_ELITES = FLAG_TEMP_2
+const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
+const FLAG_HIDE_ARMANDO = FLAG_TEMP_5
+const FLAG_HIDE_ALCMENE = FLAG_TEMP_6
+const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
+const FLAG_HIDE_ELLEN = FLAG_TEMP_8
+const FLAG_HIDE_ADAORA = FLAG_TEMP_9
+
+script SpeechSpeechSpeech_MoveObject_Script {
+    setflag(FLAG_HIDE_GARBODOR)
+    setflag(FLAG_HIDE_ELLEN)
+
+    setobjectxy(KAI,10,8)
+    setobjectxyperm(KAI,10,8)
+    setobjectmovementtype(KAI,MOVEMENT_TYPE_FACE_UP)
+
+    setobjectxy(TALA,7,3)
+    setobjectxyperm(TALA,7,3)
+
+    setobjectxy(MAGNUS,8,3)
+    setobjectxyperm(MAGNUS,8,3)
+}
+
+script SpeechSpeechSpeech_MovePlayer_Script {
+    setobjectxy(PLAYER,9,9)
+        TeleportCamera(9,9)
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        waitmovement(PLAYER)
+
+        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,13,8,8)
+        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,14,11,8)
+        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,15,7,9)
+        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,16,9,10)
+        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,17,10,9)
+        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,18,7,10)
+
+        call(SpeechSpeechSpeech_ResetFacing_Script)
+}
+
+script SpeechSpeechSpeech_CrowdLookAround_Script {
+        turnvobject(13,DIR_WEST)
+        delay(16)
+        turnvobject(15,DIR_EAST)
+        delay(16)
+        turnvobject(16,DIR_EAST)
+        delay(16)
+        turnvobject(18,DIR_EAST)
+        delay(16)
+}
+
+script SpeechSpeechSpeech_ResetFacing_Script {
+        turnvobject(13,DIR_NORTH)
+        turnvobject(14,DIR_NORTH)
+        turnvobject(15,DIR_NORTH)
+        turnvobject(16,DIR_NORTH)
+        turnvobject(17,DIR_NORTH)
+        turnvobject(18,DIR_NORTH)
+}
+
+script SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script {
+
+    setflag(FLAG_HIDE_GARBODOR)
+    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_ALCMENE)
+
+    setobjectxy(TALA,11,17)
+    setobjectxyperm(TALA,11,17)
+    setobjectmovementtype(TALA,MOVEMENT_TYPE_FACE_DOWN)
+
+    setobjectxy(MAGNUS,17,15)
+    setobjectxyperm(MAGNUS,17,15)
+    setobjectmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_LEFT)
+
+    setobjectxy(ADAORA,16,15)
+    setobjectxyperm(ADAORA,16,15)
+    setobjectmovementtype(ADAORA,MOVEMENT_TYPE_FACE_RIGHT)
+
+    setobjectxy(ARMANDO,19,6)
+    setobjectxyperm(ARMANDO,19,6)
+    setobjectmovementtype(ARMANDO,MOVEMENT_TYPE_FACE_DOWN)
+
+    setobjectxy(ELLEN,4,6)
+    setobjectxyperm(ELLEN,4,6)
+    setobjectmovementtype(ELLEN,MOVEMENT_TYPE_FACE_DOWN)
+
+    setobjectmovementtype(GRUNTA,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectnewmovementtype(GRUNTA,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectxy(GRUNTA,11,18)
+    setobjectxyperm(GRUNTA,11,18)
+
+    setobjectmovementtype(GRUNTB,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectnewmovementtype(GRUNTB,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectxy(GRUNTB,17,16)
+    setobjectxyperm(GRUNTB,17,16)
+
+    setobjectmovementtype(GRUNTC,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectnewmovementtype(GRUNTC,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectxy(GRUNTC,19,7)
+    setobjectxyperm(GRUNTC,19,7)
+
+    setobjectmovementtype(GRUNTD,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectnewmovementtype(GRUNTD,MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectxy(GRUNTD,4,7)
+    setobjectxyperm(GRUNTD,4,7)
+}
+
+script SpeechSpeechSpeech_PositionPlayer_Script {
+        lock
+        startcutscene(JUMPPLAYER_SPEECHSPEECHSPEECH)
+
+        applymovement(PLAYER,Common_Movement_WalkRight)
+        applymovement(PLAYER,Common_Movement_WalkRight)
+        fadescreen(FADE_TO_BLACK)
+
+        call(SpeechSpeechSpeech_MovePlayer_Script)
+        fadescreen(FADE_FROM_BLACK)
+
+        goto(SpeechSpeechSpeech_Intro_Dialogue)
+}
+
+script SpeechSpeechSpeech_Intro_Dialogue {
+
+        msgbox(gText_SpeechSpeechSpeech_ThankYouAll,,SPEAKER_ALCMENE)
+        msgbox(gText_SpeechSpeechSpeech_FirstOfAll,,SPEAKER_ALCMENE)
+
+        closemessage
+
+        call(SpeechSpeechSpeech_CrowdLookAround_Script)
+        call(SpeechSpeechSpeech_ResetFacing_Script)
+
+        msgbox(gText_SpeechSpeechSpeech_ForAllYouve,,SPEAKER_ADAORA)
+
+        closemessage
+
+        turnvobject(13,DIR_WEST)
+        delay(16)
+        turnvobject(15,DIR_EAST)
+        msgbox(gText_SpeechSpeechSpeech_WaitWhat,SPEAKER_ROCKET_MEMBER_A)
+
+        turnvobject(16,DIR_EAST)
+        delay(16)
+        turnvobject(18,DIR_EAST)
+        msgbox(gText_SpeechSpeechSpeech_AreTheyEven,SPEAKER_ROCKET_MEMBER_B)
+        closemessage
+
+        call(SpeechSpeechSpeech_ResetFacing_Script)
+
+        msgbox(gText_SpeechSpeechSpeech_HasMyFullConfidence,,SPEAKER_ALCMENE)
+
+        closemessage
+        goto(SpeechSpeechSpeech_StartTransformation_Script)
+}
+
+script SpeechSpeechSpeech_StartTransformation_Script {
+
+        clearflag(FLAG_HIDE_ARMANDO)
+        special(SpawnCameraObject)
+        applymovement(CAMERA,SpeechSpeechSpeech_PanCameraUp)
+        applymovement(ALCMENE,SpeechSpeechSpeech_WalkBackstage)
+        waitmovement(CAMERA)
+        delay(32)
+        applymovement(ALCMENE,SpeechSpeechSpeech_StartSpin)
+        waitmovement(ALCMENE)
+        applymovement(ELLEN,SpeechSpeechSpeech_FinishSpin)
+        waitmovement(ALCMENE)
+        removeobject(ALCMENE)
+        clearflag(FLAG_HIDE_ELLEN)
+        addobject(ELLEN)
+        delay(32)
+
+        applymovement(TALA,SpeechSpeechSpeech_WalkOutElite)
+        applymovement(MAGNUS,SpeechSpeechSpeech_WalkOutElite)
+        applymovement(ARMANDO,SpeechSpeechSpeech_WalkOutElite)
+        applymovement(ELLEN,SpeechSpeechSpeech_WalkOutElite)
+        applymovement(ADAORA,SpeechSpeechSpeech_StepAside)
+        applymovement(CAMERA,SpeechSpeechSpeech_PanCameraDown)
+        waitmovement(CAMERA)
+
+        special(RemoveCameraObject)
+        goto(SpeechSpeechSpeech_EliteReveal_Dialogue)
+}
+
+script SpeechSpeechSpeech_EliteReveal_Dialogue {
+
+        addvar(VAR_STORYLINE_STATE,1)
+
+        msgbox(gText_SpeechSpeechSpeech_Us,,SPEAKER_TALA)
+
+        closemessage
+
+        msgbox(gText_SpeechSpeechSpeech_HolyShit,,SPEAKER_ROCKET_MEMBER_A)
+        closemessage
+
+        call(Earthquake_PlayFake_EventScript)
+
+        playse(SE_PIN)
+        applymovement(GRUNTA,Common_Movement_ExclamationMark)
+        applymovement(GRUNTB,Common_Movement_ExclamationMark)
+        applymovement(GRUNTC,Common_Movement_ExclamationMark)
+        applymovement(GRUNTD,Common_Movement_ExclamationMark)
+        waitmovement(GRUNTD)
+
+        call(Earthquake_WaitOutShake)
+
+        msgbox(gText_SpeechSpeechSpeech_IsAnybodyHurt,,SPEAKER_ADAORA)
+
+        closemessage
+
+        msgbox(gText_SpeechSpeechSpeech_Yeah,,SPEAKER_ROCKET_MEMBER_A)
+
+        msgbox(gText_SpeechSpeechSpeech_HellYes,,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
+        closemessage
+        applymovement(GRUNTD,SpeechSpeechSpeech_LookAround)
+        waitmovement(GRUNTD)
+
+        msgbox(gText_SpeechSpeechSpeech_YouAllKnowHowCompanies,,SPEAKER_ADAORA)
+
+        closemessage
+
+        msgbox(gText_SpeechSpeechSpeech_WereFinally,,SPEAKER_ROCKET_MEMBER_A)
+        closemessage
+
+        applymovement(GRUNTD,SpeechSpeechSpeech_LookAround)
+        msgbox(gText_SpeechSpeechSpeech_ThisIsInsane,,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
+        closemessage
+        waitmovement(GRUNTD)
+
+        applymovement(MAGNUS,Common_Movement_WalkDown)
+        waitmovement(MAGNUS)
+        //Magnus steps forward. Adaora steps aside.
+
+        msgbox(gText_SpeechSpeechSpeech_WeWantToBegin,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        applymovement(ELLEN,Common_Movement_WalkDown)
+        waitmovement(ELLEN)
+        //Ellen steps forward.
+
+        msgbox(gText_SpeechSpeechSpeech_4LeadCharge,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        applymovement(ELLEN,SpeechSpeechSpeech_WalkBackwards)
+        applymovement(ARMANDO,Common_Movement_WalkDown)
+        waitmovement(ARMANDO)
+        //Ellen steps back. Armando steps forward.
+
+        msgbox(gText_SpeechSpeechSpeech_3LeadCharge,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        applymovement(ARMANDO,SpeechSpeechSpeech_WalkBackwards)
+        applymovement(TALA,Common_Movement_WalkDown)
+        waitmovement(TALA)
+        //Ellen steps back. Tala steps forward.
+
+        msgbox(gText_SpeechSpeechSpeech_1LeadCharge,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        applymovement(TALA,SpeechSpeechSpeech_WalkBackwards)
+        waitmovement(TALA)
+
+
+        //Tala steps back.
+
+        msgbox(gText_SpeechSpeechSpeech_IllBeHandling,,SPEAKER_MAGNUS)
+
+        closemessage
+
+        fadescreen(FADE_TO_BLACK)
+        setvar(VAR_ARANTRAZ_STATE,POST_SPEECHSPEECH)
+
+        TeleportCamera(9,9)
+        callnative(DestroyVirtualObjects)
+        call(SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script)
+
+        applymovement(KAI,SpeechSpeechSpeech_WalkToPlayer)
+        fadescreen(FADE_FROM_BLACK)
+        waitmovement(KAI)
+
+        //Screen fades to black. Screen fades back in. Elite Four members are spaced around the room, surrounded by groups of TheTide members. Kai walks up to the player.
+        msgbox(gText_SpeechSpeechSpeech_DamnThisShit,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_SpeechSpeechSpeech_ItFeelsReally,,SPEAKER_ALICIA)
+
+        msgbox(gText_SpeechSpeechSpeech_Yeah,,SPEAKER_KAI_TIDE)
+
+        if (var(VAR_STORYLINE_STATE) != STORY_RAVE_AND_SPEECH_COMPLETE)
+        {
+            msgbox(gText_SpeechSpeechSpeech_YeahAlsoAre,,SPEAKER_KAI_TIDE)
+        }
+        else
+        {
+            msgbox(gText_SpeechSpeechSpeech_ByTheWay,,SPEAKER_KAI_TIDE)
+        }
+        msgbox(gText_SpeechSpeechSpeech_Peace,,SPEAKER_KAI_TIDE)
+
+        closemessage
+
+        applymovement(KAI,SpeechSpeechSpeech_LeaveScreen)
+        waitmovement(KAI)
+        removeobject(KAI)
+    call(TryAutoSave)
+        endcutscene
+        release
+        end
+
+}
+
+text gText_SpeechSpeechSpeech_GoWarehouseRave {
+    format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go.")
+}
+
+text gText_SpeechSpeechSpeech_ThankYouAll {
+    format("Thank you all for coming. For all your hard work. All your support. I have a few announcements for you all.")
+}
+
+text gText_SpeechSpeechSpeech_FirstOfAll {
+    format("First of all, I will be taking a leave of absence. Effectively immediately, Adaora will be leading TheTide. She has my full trust and support.")
+}
+
+text gText_SpeechSpeechSpeech_ForAllYouve {
+    format("Thank you for all you’ve done for us, Alcmene, I hope to live up to your example.")
+}
+
+text gText_SpeechSpeechSpeech_WaitWhat {
+    format("Wait what?")
+}
+
+text gText_SpeechSpeechSpeech_AreTheyEven {
+    format("Are they even qualified?")
+}
+
+text gText_SpeechSpeechSpeech_HasMyFullConfidence {
+    format("Yes, Adaora has my full confidence, as well as the backing of…")
+}
+
+text gText_SpeechSpeechSpeech_Us {
+    format("… US! The Elite Four of Resido!")
+}
+text gText_SpeechSpeechSpeech_HolyShit {
+    format("Holy shit ok, good enough for me!")
+}
+
+text gText_SpeechSpeechSpeech_IsAnybodyHurt {
+    format("Is anybody hurt? …no? Wonderful. Let’s continue. Kai’s restoration project has been going excellently, and we’re going to use that momentum for our next stage. It’s time to take the fight to SharpriseCapital!")
+}
+
+text gText_SpeechSpeechSpeech_Yeah {
+    format("Yeah!")
+}
+
+text gText_SpeechSpeechSpeech_HellYes {
+    format("Hell yes! Woo! Wait, where did Alcmene go?")
+}
+
+text gText_SpeechSpeechSpeech_YouAllKnowHowCompanies {
+    format("You all know how companies like Presto and Buzzr have ruined our lives and families. But with the combined popularity of the Champion, Elite Four and our manpower, I think we can hurt these people where it counts: their wallets. We can’t drive these parasitic companies out of the region… but all that money has to go somewhere. Let’s use that money to strengthen the region and create a brighter future for us all.")
+}
+
+text gText_SpeechSpeechSpeech_WereFinally {
+    format("We’re finally doing it…")
+}
+
+text gText_SpeechSpeechSpeech_ThisIsInsane {
+    format("This is insane yo. But seriously, did Alcmene just disappear?")
+}
+
+text gText_SpeechSpeechSpeech_WeWantToBegin {
+    format("We want to begin by attacking the biggest players in Resido. Each of us will handle a different offensive plan.")
+}
+
+text gText_SpeechSpeechSpeech_4LeadCharge {
+    format("Ellen will lead the charge against Presto.")
+}
+
+text gText_SpeechSpeechSpeech_3LeadCharge {
+    format("Armando will lead the charge against Arriba.")
+}
+
+text gText_SpeechSpeechSpeech_1LeadCharge {
+    format("Tala will lead the charge against Buzzr.")
+}
+
+text gText_SpeechSpeechSpeech_IllBeHandling {
+    format("And I’ll be handling negotiations with the government, and operations here. Adaora will be giving each of you assignments under one of the Elite Four members, so listen up. ")
+}
+text gText_SpeechSpeechSpeech_DamnThisShit {
+    format("Damn, this shit is so crazy! The air is electric!")
+}
+
+text gText_SpeechSpeechSpeech_ItFeelsReally {
+    format("It feels really awesome to start making a difference around here.")
+}
+
+text gText_SpeechSpeechSpeech_YeahAlsoAre {
+    format("Also, are you heading to that party in CurenoPort now? I'll catch up with you in a second, I just gotta talk to Adaora first.")
+}
+
+text gText_SpeechSpeechSpeech_ByTheWay {
+    format("By the way, you and I are free to work with whoever we want. Just talk to the Elite Four member you want to team up with. I gotta go, I told Adaora I’d help set up something.")
+}
+
+text gText_SpeechSpeechSpeech_Peace {
+    format("Peace!")
+}
+
+movement SpeechSpeechSpeech_PanCameraUp {
+    walk_up * 4
+    step_end
+}
+
+movement SpeechSpeechSpeech_WalkBackstage{
+    walk_up * 3
+	step_end
+}
+
+movement SpeechSpeechSpeech_WalkOutElite{
+    walk_down * 2
+	step_end
+}
+
+movement SpeechSpeechSpeech_PanCameraDown {
+    walk_down * 3
+    step_end
+}
+
+movement SpeechSpeechSpeech_StepAside{
+    lock_facing_direction
+    walk_right * 2
+    unlock_facing_direction
+	step_end
+}
+
+movement SpeechSpeechSpeech_WalkBackwards{
+    lock_facing_direction
+    walk_up
+    unlock_facing_direction
+	step_end
+}
+
+movement SpeechSpeechSpeech_WalkToPlayer{
+    walk_left
+    face_down
+	step_end
+}
+
+movement SpeechSpeechSpeech_LeaveScreen{
+    walk_left * 7
+	step_end
+}
+
+movement SpeechSpeechSpeech_StartSpin {
+    face_left
+    face_down
+    face_right
+    face_up
+    face_left
+    face_down
+    face_right
+    face_up
+    step_end
+}
+
+movement SpeechSpeechSpeech_FinishSpin {
+    face_left
+    face_down
+    face_right
+    face_up
+    step_end
+}
+
+movement SpeechSpeechSpeech_LookAround {
+    face_left
+    delay_16
+    face_right
+    delay_16
+    face_up
+    step_end
+}

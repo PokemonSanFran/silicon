@@ -1,0 +1,125 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const AMIARGENTO = 1
+
+script EnterAmiArgento_Event_Script {
+    switch (var(VAR_GYM_8_STATE)) {
+        case GYM_SAVE_BEFORE_LEADER:
+            goto(EnterAmiArgento_FacePlayerBeforeBattle_Script)
+
+        case GYM_DEFEATED_LEADER:
+                goto(EnterAmiArgento_PostGymBattle1_Dialogue)
+        case GYM_EXPLAINED_BADGE_AND_TM:
+                    goto(EnterAmiArgento_PostGymBattle2_Dialogue)
+        default:
+                    goto(EnterAmiArgento_AskAboutGym_Dialogue)
+    }
+}
+
+script EnterAmiArgento_AskAboutGym_Dialogue {
+
+        setvar(VAR_GYM_8_STATE,GYM_SAVE_BEFORE_LEADER)
+        reveal(REVEAL_AMI)
+        msgbox(gText_EnterAmiArgento_SkatingAround,MSGBOX_NPC,SPEAKER_AMIARGENTO)
+
+        msgbox(gText_EnterAmiArgento_ItsInteresting,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_EnterAmiArgento_OhComeOn,,SPEAKER_AMIARGENTO)
+
+        msgbox(gText_EnterAmiArgento_WeirdItsWeird,,SPEAKER_ALICIA)
+
+        msgbox(gText_EnterAmiArgento_IveAlwaysSaid,,SPEAKER_AMIARGENTO)
+
+        msgbox(gText_EnterAmiArgento_WhenIWasAwarded,,SPEAKER_AMIARGENTO)
+                closemessage
+        startmenu_savescreen
+        goto(EnterAmiArgento_StartGymBattle_Script)
+}
+
+script EnterAmiArgento_FacePlayerBeforeBattle_Script {
+        msgbox(gText_EnterAmiArgento_ButTheyNeverWill,MSGBOX_NPC,,SPEAKER_AMIARGENTO)
+        closemessage
+        trainerbattle_no_intro(TRAINER_AMIARGENTO,gText_EnterAmiArgento_AhIGotTooGreedy)
+        goto(EnterAmiArgento_AmiArgentoDeafeated_Script)
+}
+
+script EnterAmiArgento_StartGymBattle_Script {
+        msgbox(gText_EnterAmiArgento_ButTheyNeverWill,,SPEAKER_AMIARGENTO)
+        closemessage
+                trainerbattle_no_intro(TRAINER_AMIARGENTO,gText_EnterAmiArgento_AhIGotTooGreedy)
+        goto(EnterAmiArgento_AmiArgentoDeafeated_Script)
+}
+
+script EnterAmiArgento_AmiArgentoDeafeated_Script {
+    lock
+    startcutscene(JUMPPLAYER_ENTERAMIARGENTO)
+    setflag(FLAG_BADGE08_GET)
+    setvar(VAR_GYM_8_STATE,GYM_DEFEATED_LEADER)
+    addvar(VAR_STORYLINE_STATE,1)
+    tweetfanfare(TWEET_GYM_IRISINA_TOWN_BADGE,MUS_OBTAIN_BADGE)
+    giveitem(ITEM_TM08)
+    closemessage
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
+
+
+script EnterAmiArgento_PostGymBattle1_Dialogue {
+    lock
+        setvar(VAR_GYM_8_STATE,GYM_EXPLAINED_BADGE_AND_TM)
+        msgbox(gText_EnterAmiArgento_ThatTMwill,MSGBOX_NPC,,SPEAKER_AMIARGENTO)
+        closemessage
+                release
+        end
+}
+script EnterAmiArgento_PostGymBattle2_Dialogue {
+    lock
+        msgbox(gText_EnterAmiArgento_IGetSoEmotional,MSGBOX_NPC,,SPEAKER_AMIARGENTO)
+        closemessage
+                release
+        end
+}
+
+text gText_EnterAmiArgento_SkatingAround {
+            format("Skating around the rink down there, you put on quite the show, {PLAYER}! What do you think of the place?")
+        }
+
+text gText_EnterAmiArgento_ItsInteresting {
+            format("It's… interesting?")
+        }
+
+text gText_EnterAmiArgento_OhComeOn {
+            format("Oh come on, you won't hurt my feelings.")
+        }
+
+text gText_EnterAmiArgento_WeirdItsWeird {
+            format("Weird. It's weird.")
+        }
+
+text gText_EnterAmiArgento_IveAlwaysSaid {
+            format("Excellent! I've always said, “Be the strange you want to see in the world!” And I've busted my ass to make this place stranger than fiction… and better than art.")
+        }
+
+text gText_EnterAmiArgento_WhenIWasAwarded {
+            format("When I was awarded this Gym, I knew I had to keep pushing the boundaries. It's important to me to keep bending the rules, keep everybody guessing, thinking, racking their brains to figure me out…")
+        }
+
+text gText_EnterAmiArgento_ButTheyNeverWill {
+            format("But they never will. Now let's see if you can handle the magic!")
+        }
+
+text gText_EnterAmiArgento_AhIGotTooGreedy {
+            format("Ah, I got too greedy and tried to have it all!")
+        }
+
+text gText_EnterAmiArgento_ThatTMwill {
+            format("That TM will teach your Pokémon Psfgymattack8. I hope it's as useful for you as it has been for me!")
+        }
+
+text gText_EnterAmiArgento_IGetSoEmotional {
+            format("I get so emotional every time I think of trainers walking out with my badge. Not because I'm upset… but I'm proud. Now go you magical bitch, conquer the world!")
+        }
+text gText_EnterAmiArgento_BadgeGet {
+    format("You received the AmiArgentoBadge Badge!")
+}

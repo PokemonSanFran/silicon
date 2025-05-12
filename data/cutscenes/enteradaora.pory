@@ -1,0 +1,482 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ADAORA = 1
+const SIARL = 2
+const PERSON1 = 10
+const PERSON2 = 11
+const PERSON3 = 12
+const FLAG_HIDE_ADAORA = FLAG_TEMP_2
+
+script EnterAdaora_ObjectCleanUp_Script {
+
+        if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
+{
+        setobjectxyperm(PERSON1,3,44)
+        setobjectxyperm(PERSON2,3,45)
+        setobjectxyperm(PERSON3,3,46)
+                setflag(FLAG_HIDE_ADAORA)
+        }
+    return
+}
+
+script EnterAdaora_SetConeTiles_Script {
+        if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
+{
+            setmetatile(4,37,0x344,TRUE)
+            setmetatile(4,43,0x344,TRUE)
+            special(DrawWholeMapView)
+        }
+    return
+}
+
+
+script EnterAdaora_InteractSiarl_Script {
+        if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
+{
+            goto(EnterAdaora_GruntApologize_Dialogue)
+        }
+        else {
+            goto(EnterAdaora_Intro_Dialogue)
+        }
+}
+
+script EnterAdaora_PreventPlayerProgress_Dialogue{
+        if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
+        {
+            release
+                end
+        }
+    lock
+    setvar(VAR_TEMP_1,0)
+
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+    switch(var(VAR_TEMP_1)){
+        case 38: applymovement(PERSON1,Common_Movement_ExclamationMark)
+        case 40: applymovement(PERSON2,Common_Movement_ExclamationMark)
+        case 42: applymovement(PERSON3,Common_Movement_ExclamationMark)
+    }
+    waitmovement(0)
+
+    playse(SE_PIN)
+    waitse
+
+    applymovement(PLAYER,Common_Movement_FaceDown)
+    waitmovement(PLAYER)
+    msgbox(gText_EnterAdaora_NoCutting,MSGBOX_DEFAULT,SPEAKER_RESIDENT_A)
+    closemessage
+
+    applymovement(PLAYER,Common_Movement_WalkRight)
+    waitmovement(PLAYER)
+    release
+    end
+}
+
+script EnterAdaora_Intro_Dialogue{
+    lockall
+        startcutscene(JUMPPLAYER_ENTERADAORA)
+        msgbox(gText_EnterAdaora_WhoTheHell,MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
+        msgbox(gText_EnterAdaora_NoSorry,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                msgbox(gText_EnterAdaora_TryingToHelpEverybody,MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
+        msgbox(gText_EnterAdaora_ImNotInLine,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                msgbox(gText_EnterAdaora_TryingToGet,MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(gText_EnterAdaora_WaitListen,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_SHOUT)
+                msgbox(gText_EnterAdaora_NoPunk,MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_SHOUT,EMOTE_ANGRY)
+        applymovement(ADAORA,Common_Movement_FaceDown)
+        playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
+        msgbox(gText_EnterAdaora_HoldOn,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        closemessage
+                applymovement(ADAORA,EnterAdaora_AdaoraWalkToPlayer_Movement)
+        waitmovement(ADAORA)
+        applymovement(SIARL,Common_Movement_FaceRight)
+        waitmovement(SIARL)
+        goto(EnterAdaora_Explain_Dialogue)
+}
+
+script EnterAdaora_Explain_Dialogue{
+        msgbox(gText_EnterAdaora_DidYouListen,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        closemessage
+                applymovement(SIARL,Common_Movement_FaceDown)
+        waitmovement(SIARL)
+        applymovement(SIARL,Common_Movement_Delay48)
+        waitmovement(SIARL)
+        applymovement(SIARL,Common_Movement_FaceRight)
+        waitmovement(SIARL)
+        msgbox(gText_EnterAdaora_TryingToCut,MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
+        msgbox(gText_EnterAdaora_WhatYouHeard,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                closemessage
+        applymovement(ADAORA,Common_Movement_FaceDown)
+        waitmovement(ADAORA)
+        msgbox(gText_EnterAdaora_WhatProblem,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(gText_EnterAdaora_AsshatInterrupted,MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_ANGRY)
+                closemessage
+        goto(EnterAdaora_Apology_Dialogue)
+}
+
+script EnterAdaora_Apology_Dialogue{
+    applymovement(ADAORA,Common_Movement_FaceLeft)
+        waitmovement(ADAORA)
+        msgbox(gText_EnterAdaora_ShouldntTheCones,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                msgbox(gText_EnterAdaora_IForgotToSet,MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_WHISPER,EMOTE_SWEAT)
+        msgbox(gText_EnterAdaora_BeratedSomebody,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                msgbox(gText_EnterAdaora_Sorry,MSGBOX_DEFAULT,SPEAKER_SIARL)
+        closemessage
+        applymovement(ADAORA,Common_Movement_FaceDown)
+        waitmovement(ADAORA)
+        msgbox(gText_EnterAdaora_WhatsYourName,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                closemessage
+        applymovement(ADAORA,Common_Movement_FaceLeft)
+        waitmovement(ADAORA)
+        applymovement(SIARL,Common_Movement_FaceDown)
+        waitmovement(SIARL)
+        msgbox(gText_EnterAdaora_IGotHeated,,SPEAKER_SIARL)
+                msgbox(gText_EnterAdaora_DontRuin,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                closemessage
+        applymovement(SIARL,Common_Movement_FaceRight)
+        msgbox(gText_EnterAdaora_ShouldBeNear,,SPEAKER_SIARL)
+        closemessage
+
+
+        applymovement(ADAORA,EnterAdaora_HopOverTable_Movement)
+        waitmovement(ADAORA)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        waitmovement(PLAYER)
+        applymovement(SIARL,Common_Movement_FaceDown)
+        waitmovement(SIARL)
+
+
+        msgbox(gText_EnterAdaora_NeedToWalk,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                closemessage
+        //Debug_Hop:
+        //setobjectxy(ADAORA,4,25)
+
+        applymovement(ADAORA,EnterAdaora_WalkToLine_Movement)
+        applymovement(PLAYER,EnterAdaora_PlayerWalkToLine_Movement)
+        //goto(Debug_Cones)
+        goto(EnterAdaora_ExplainHope_Dialogue)
+}
+
+script EnterAdaora_ExplainHope_Dialogue{
+        msgbox(gText_EnterAdaora_WhatIsEverybody,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_EnterAdaora_Hope,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(gText_EnterAdaora_WaitHope,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_EnterAdaora_ICanGet,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(gText_EnterAdaora_ThatsAmazing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_EnterAdaora_CityIsntSuperChill,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(gText_EnterAdaora_ButYoureHelping,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_EnterAdaora_YoureNotFromHere,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                closemessage
+        //Debug_Cones:
+        applymovement(ADAORA,EnterAdaora_PlaceConesA_Movement)
+        waitmovement(ADAORA)
+            setmetatile(4,37,0x344,TRUE)
+        special(DrawWholeMapView)
+        applymovement(PLAYER,EnterAdaora_WatchPlaceCones_Movement)
+        applymovement(ADAORA,EnterAdaora_PlaceConesB_Movement)
+        waitmovement(ADAORA)
+            setmetatile(4,43,0x344,TRUE)
+        special(DrawWholeMapView)
+        applymovement(ADAORA,EnterAdaora_PlaceConesC_Movement)
+        waitmovement(ADAORA)
+        msgbox(gText_EnterAdaora_BetweenTheCones,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                closemessage
+        call(EnterAdaora_MoveLine_Script)
+        goto(EnterAdaora_GiveKeystone_Dialogue)
+}
+
+script EnterAdaora_MoveLine_Script{
+    playse(SE_PIN)
+        applymovement(PERSON1,EnterAdaora_MoveLine1_Movement)
+        applymovement(PERSON2,EnterAdaora_MoveLine1_Movement)
+        applymovement(PERSON3,EnterAdaora_MoveLine1_Movement)
+        waitmovement(0)
+        setobjectxy(PERSON1,3,44)
+        setobjectxy(PERSON2,3,45)
+        setobjectxy(PERSON3,3,46)
+        setobjectxyperm(PERSON1,3,44)
+        setobjectxyperm(PERSON2,3,45)
+        setobjectxyperm(PERSON3,3,46)
+}
+
+script EnterAdaora_GiveKeystone_Dialogue{
+    applymovement(ADAORA,EnterAdaora_FacePlayer_Movement)
+        waitmovement(ADAORA)
+        msgbox(gText_EnterAdaora_ThereYouGo,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(gText_EnterAdaora_AGym,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_EnterAdaora_WellGoodLuck,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        call(EventScript_InstallGlassApp)
+        fadescreen(FADE_FROM_BLACK)
+        msgbox(gText_EnterAdaora_IfYouHaveThat,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(gText_EnterAdaora_ThankYouSo,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(gText_EnterAdaora_HopeThatMakes,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(gText_EnterAdaora_IGottaGo,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        closemessage
+        applymovement(ADAORA,EnterAdaora_WalkAway_Movement)
+        waitmovement(ADAORA)
+        removeobject(ADAORA)
+        fadedefaultbgm
+        addvar(VAR_STORYLINE_STATE,1)
+        setvar(VAR_CAPHE_CITY_STATE,LINE_IS_NOT_BLOCKING)
+        setvar(VAR_TEMP_0,0)
+        endcutscene
+    call(TryAutoSave)
+        releaseall
+        end
+}
+
+script EnterAdaora_GruntApologize_Dialogue {
+        msgbox(gText_EnterAdaora_SorryAgain,MSGBOX_NPC,SPEAKER_SIARL)
+        end
+}
+
+movement EnterAdaora_AdaoraWalkToPlayer_Movement {
+    walk_down * 3
+    face_left
+    step_end
+}
+movement EnterAdaora_HopOverTable_Movement {
+    walk_up * 4
+        delay_16
+        walk_down * 4
+        jump_2_down
+        face_left
+        step_end
+}
+movement EnterAdaora_WalkToLine_Movement {
+        walk_down * 14
+        face_left
+        face_player
+        step_end
+}
+movement EnterAdaora_PlayerWalkToLine_Movement {
+        walk_right
+        walk_down * 13
+        step_end
+}
+movement EnterAdaora_WatchPlaceCones_Movement {
+        face_right
+        face_up
+        delay_16 * 2
+        face_down
+        step_end
+}
+
+movement EnterAdaora_PlaceConesA_Movement {
+        walk_right
+        walk_up * 2
+        face_left
+        walk_in_place_left
+        step_end
+}
+movement EnterAdaora_PlaceConesB_Movement {
+        walk_down * 6
+        face_left
+        walk_in_place_left
+        step_end
+}
+movement EnterAdaora_PlaceConesC_Movement {
+        walk_up * 4
+        face_left
+    step_end
+}
+movement EnterAdaora_MoveLine1_Movement {
+    emote_exclamation_mark
+        walk_down * 5
+        face_up
+        step_end
+}
+movement EnterAdaora_MoveLine2_Movement {
+    emote_exclamation_mark
+        delay_16
+        delay_16
+        delay_16
+        walk_right
+        walk_down
+        walk_right
+        walk_down * 2
+        walk_left
+        face_up
+        step_end
+}
+movement EnterAdaora_MoveLine3_Movement {
+    emote_exclamation_mark
+        delay_16
+        delay_16
+        delay_16
+        delay_16
+        walk_right * 3
+        walk_down * 3
+        walk_left
+        face_up
+        step_end
+}
+movement EnterAdaora_FacePlayer_Movement{
+    walk_left
+    face_up
+    step_end
+}
+movement EnterAdaora_WalkAway_Movement {
+    walk_right
+        walk_up * 7
+        step_end
+}
+
+text gText_EnterAdaora_NoCutting{
+    format("No cutting the line!")
+}
+
+text gText_EnterAdaora_WhoTheHell {
+    format("Woah, who the hell do you think you are?")
+}
+
+text gText_EnterAdaora_NoSorry {
+    format("No sorry, I'm just trying to get through, are you able to -")
+}
+
+text gText_EnterAdaora_TryingToHelpEverybody {
+    format("Look, we're trying to help everybody here, and we're doing the best we can. You gotta get in line like everybody else.")
+}
+
+text gText_EnterAdaora_ImNotInLine {
+    format("I'm not in line, I'm trying to -")
+}
+
+text gText_EnterAdaora_TryingToGet {
+    format("Trying to get in front! I know! You follow the rules like everybody else, or you get nothing.")
+}
+
+text gText_EnterAdaora_WaitListen {
+    format("Wait, listen to me -")
+}
+
+text gText_EnterAdaora_NoPunk {
+    format("NO punk, YOU listen to ME. What the hell makes you think -")
+}
+
+text gText_EnterAdaora_HoldOn {
+    format("Siarl, hold on.")
+}
+
+text gText_EnterAdaora_DidYouListen {
+    format("Siarl, did you listen to them?")
+}
+
+text gText_EnterAdaora_TryingToCut {
+    format("Yeah, they're trying to cut the line!")
+}
+
+text gText_EnterAdaora_WhatYouHeard {
+    format("Siarl, that's what you heard... but not what they said.")
+}
+
+text gText_EnterAdaora_WhatProblem {
+    format("Sorry. What seems to be the problem?")
+}
+
+text gText_EnterAdaora_AsshatInterrupted {
+    format("Thanks. Before this asshat interrupted me, I was trying to explain that your line is blocking the road. Nobody can get through. Could you do something about that?")
+}
+
+text gText_EnterAdaora_ShouldntTheCones {
+    format("Damn. Siarl, shouldn't the cones prevent that from happening?")
+}
+
+text gText_EnterAdaora_IForgotToSet {
+    format("...I forgot to set up the cones.")
+}
+
+text gText_EnterAdaora_BeratedSomebody {
+    format("Oh? So, you screwed up, then berated somebody when they tried to ask you to fix it. Asshat sounds about right.")
+}
+
+text gText_EnterAdaora_Sorry {
+    format("...Sorry Adaora.")
+}
+
+text gText_EnterAdaora_WhatsYourName {
+    format("What's your name? ...{PLAYER}.")
+}
+
+text gText_EnterAdaora_IGotHeated {
+    format("Sorry I got so heated {PLAYER}. It's been rough -")
+}
+
+text gText_EnterAdaora_DontRuin {
+    format("Siarl, don't ruin a perfectly good apology with an excuse. Where are the cones?")
+}
+
+text gText_EnterAdaora_ShouldBeNear {
+    format("...they should be near the backstock pallet.")
+}
+
+text gText_EnterAdaora_NeedToWalk {
+    format("I need to walk for a second. Let's walk, {PLAYER}.")
+}
+
+text gText_EnterAdaora_WhatIsEverybody {
+    format("What is everybody lining up for?")
+}
+
+text gText_EnterAdaora_Hope {
+    format("Hope.")
+}
+
+text gText_EnterAdaora_WaitHope {
+    format("Wait, hope?")
+}
+
+text gText_EnterAdaora_ICanGet {
+    format("Sorry, sometimes I get a little whimsical! One of the biggest challenges of being unhoused is access to food and sanitary supplies. My colleagues and I, set up around the city and hand out kits.")
+}
+
+text gText_EnterAdaora_ThatsAmazing {
+    format("Oh wow, that's amazing! But why are you in an alleyway?")
+}
+
+text gText_EnterAdaora_CityIsntSuperChill {
+    format("The city isn't super chill with us, for complicated reasons. We move around a lot and choose unconventional locations in order to avoid the cops. It sucks, but it works.")
+}
+
+text gText_EnterAdaora_ButYoureHelping {
+    format("Wait, but you're helping people! Why isn't the city supporting you?")
+}
+
+text gText_EnterAdaora_YoureNotFromHere {
+    format("Clearly, you're not from here, are you? I can't remember a point in my lifetime where the city helped people, {PLAYER}.")
+}
+
+text gText_EnterAdaora_BetweenTheCones {
+    format("Yo, clear a path between the cones.")
+}
+
+text gText_EnterAdaora_ThereYouGo {
+    format("There you go. Sorry about all of that. What's in ToraTown?")
+}
+
+text gText_EnterAdaora_AGym {
+    format("A Gym! I'm taking part in the League Challenge.")
+}
+
+text gText_EnterAdaora_WellGoodLuck {
+    format("Ah, well good luck. Actually... a League Challenger that isn't from here... let me see your phone..")
+}
+
+text gText_EnterAdaora_IfYouHaveThat {
+    format("That app lets you see the parties of all the Trainers you've fought and a list of the Trainers you have't fought.")
+}
+
+text gText_EnterAdaora_ThankYouSo {
+    format("Thank you so much! But how did you get all this data?")
+}
+
+text gText_EnterAdaora_HopeThatMakes {
+    format("SharpriseCapital has data on all the Trainers in the region, but hasn't released it anywhere publicly. We found their source and... made it available for all. I hear they're not super happy about it, which is probably why they didn't give it to you!")
+}
+
+text gText_EnterAdaora_IGottaGo {
+    format("Hope that makes up for the hassle. I gotta go back before Siarl cusses out another innocent victim. Stay safe out there.")
+}
+
+text gText_EnterAdaora_SorryAgain {
+    format("Sorry again about before.")
+}

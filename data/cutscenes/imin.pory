@@ -1,0 +1,762 @@
+//At Ramesh's house
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const TALA = 1
+const MAGNUS = 2
+const ARMANDO = 3
+const ELLEN = 4
+const KAI = 5
+const PKMNA = 6
+const FLAG_HIDE_RAID = FLAG_TEMP_1
+const FLAG_HIDE_PKMN = FLAG_TEMP_2
+
+//Inside Spire
+const FLAG_HIDE_TOWER_RAID_PARTY = FLAG_TEMP_2
+
+//On League Ops Floor
+const CHARLOTTE = 4
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+script ImIn_HideObject_OutsideHouse_Script {
+
+    setflag(FLAG_HIDE_PKMN)
+        if (var(VAR_STORYLINE_STATE) != STORY_BEFORE_RAMESH_BREAKIN || var(VAR_TOWER_RAID_STATE) != 0){
+            setflag(FLAG_HIDE_RAID)
+        }
+}
+
+script ImIn_PreCharlotte_Object_Script{
+        setflag(FLAG_HIDE_NERDS_COPS)
+        setflag(FLAG_HIDE_OLIVER)
+        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_RAMESH)
+        setflag(FLAG_HIDE_KEIYING)
+
+        setobjectxy(CHARLOTTE,6,56)
+        setobjectxyperm(CHARLOTTE,6,56)
+        setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_UP)
+}
+
+script ImIn_SaveCharlotte_Object_Script{
+    setflag(FLAG_HIDE_NERDS_COPS)
+    setflag(FLAG_HIDE_OLIVER)
+    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_RAMESH)
+    setflag(FLAG_HIDE_KEIYING)
+
+    setobjectxy(CHARLOTTE,7,53)
+    setobjectxyperm(CHARLOTTE,7,53)
+    setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_LEFT)
+}
+
+script ImIn_RevealAdelaideWarp_Script{
+    if (var(VAR_TOWER_RAID_STATE) > SAVE_CHARLOTTE_SHARPRISESPIRE){
+        setmetatile(10,55,0x2DF,FALSE)
+        special(DrawWholeMapView)
+    }
+    return
+}
+
+script ImIn_DestroyWall_Script {
+    if (var(VAR_TOWER_RAID_STATE)){
+        setmetatile(15,13,0x0A7,FALSE)
+            special(DrawWholeMapView)
+    }
+    return
+}
+
+script ImIn_CutsceneSetup_OutsideHouse_Script {
+        clearflag(FLAG_HIDE_RAID)
+
+        addobject(TALA)
+        addobject(MAGNUS)
+        addobject(ARMANDO)
+        addobject(ELLEN)
+        addobject(KAI)
+}
+
+script ImIn_ReleaseFromBall_Script {
+    playse(SE_BALL_OPEN)
+        waitse
+        clearflag(FLAG_HIDE_PKMN)
+        addobject(PKMNA)
+        playmoncry(SPECIES_MACHAMP, CRY_MODE_ENCOUNTER)
+        waitmoncry
+}
+
+script ImIn_ObjectSetUp_InsideHouse_Script {
+    setobjectxyperm(TALA,15,4)
+        setobjectxyperm(MAGNUS,16,3)
+        setobjectxyperm(ARMANDO,17,4)
+        setobjectxyperm(ELLEN,18,5)
+        setobjectxyperm(KAI,19,3)
+}
+
+script ImIn_MoveObject_BeforeWarp_Script {
+    addobject(TALA)
+        addobject(MAGNUS)
+        addobject(ARMANDO)
+        addobject(ELLEN)
+        addobject(KAI)
+
+        setobjectxy(TALA,10,3)
+        setobjectxy(ARMANDO,10,4)
+        setobjectxy(ELLEN,12,3)
+        setobjectxy(KAI,12,4)
+        setobjectxy(MAGNUS,11,2)
+
+        setobjectxy(PLAYER,11,4)
+        TeleportCamera(11,4)
+
+        applymovement(TALA,Common_Movement_FaceRight)
+        applymovement(ARMANDO,Common_Movement_FaceRight)
+        applymovement(ELLEN,Common_Movement_FaceLeft)
+        applymovement(MAGNUS,Common_Movement_FaceDown)
+        applymovement(KAI,Common_Movement_FaceLeft)
+        waitmovement(MAGNUS)
+}
+
+
+script ImIn_CheckPlayer_Script {
+    lock
+
+    //If Elite Four has specifically told you to go to the house to break in, nothing happens here.
+    if (var(VAR_STORYLINE_STATE) != STORY_BEFORE_RAMESH_BREAKIN){
+        release
+            end
+    }
+    goto(ImIn_StartHouseBreak_Script)
+}
+
+script ImIn_StartHouseBreak_Script
+{
+    startcutscene(JUMPPLAYER_IMIN_BREAKIN)
+        setvar(VAR_TOWER_RAID_STATE,BROKEN_IN_RAMESH)
+
+        fadescreen(FADE_TO_BLACK)
+        call(ImIn_CutsceneSetup_OutsideHouse_Script)
+        fadescreen(FADE_FROM_BLACK)
+
+        applymovement(PLAYER,ImIn_ApproachHouse)
+        waitmovement(PLAYER)
+
+        applymovement(ARMANDO,Common_Movement_FaceDown)
+
+        msgbox(gText_ImIn_WereCertainNobody,,SPEAKER_ARMANDO)
+
+        msgbox(gText_ImIn_HasntLeftWorkEarly,,SPEAKER_MAGNUS)
+
+        msgbox(gText_ImIn_WereInPosition,,SPEAKER_ADAORA,,,PHONE_ON)
+        closemessage
+
+        applymovement(KAI,ImIn_WalkAroundHouse)
+        waitmovement(KAI)
+
+        applymovement(TALA,Common_Movement_FaceRight)
+        applymovement(MAGNUS,Common_Movement_FaceRight)
+        applymovement(ARMANDO,Common_Movement_FaceRight)
+        applymovement(ELLEN,Common_Movement_FaceRight)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+        waitmovement(PLAYER)
+
+        msgbox(gText_ImIn_TheSideDoorWill,,SPEAKER_KAI_TIDE)
+
+        msgbox(gText_ImIn_LetsMoveThen,,SPEAKER_TALA)
+        closemessage
+
+        applymovement(KAI,ImIn_WalkToSideDoor)
+        waitmovement(KAI)
+
+        call(ImIn_ReleaseFromBall_Script)
+
+        msgbox(gText_ImIn_BrickBreakSureComes,,SPEAKER_KAI_TIDE)
+                closemessage
+
+        playse(SE_M_BRICK_BREAK)
+        applymovement(PKMNA,ImIn_AttackHouse)
+        waitse
+        waitmovement(PKMNA)
+        call(ImIn_DestroyWall_Script)
+
+        applymovement(PKMNA,ImIn_WalkIntoHouseA)
+        applymovement(TALA,ImIn_WalkIntoHouseB)
+        applymovement(MAGNUS,ImIn_WalkIntoHouseC)
+        applymovement(ARMANDO,ImIn_WalkIntoHouseD)
+        applymovement(ELLEN,ImIn_WalkIntoHouseE)
+        applymovement(KAI,ImIn_WalkIntoHouseF)
+
+        playse(SE_EXIT)
+        playse(SE_EXIT)
+        playse(SE_EXIT)
+        playse(SE_EXIT)
+        playse(SE_EXIT)
+        playse(SE_EXIT)
+        waitse
+        waitmovement(TALA)
+
+        removeobject(PKMNA)
+        removeobject(TALA)
+        removeobject(MAGNUS)
+        removeobject(ARMANDO)
+        removeobject(ELLEN)
+        removeobject(KAI)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script ImIn_UnlockDoor_Script
+{
+    setmetatile(11,6,0x228,FALSE)
+        special(DrawWholeMapView)
+}
+
+script Imin_BeginHouseSearch_Script
+{
+    lock
+        setvar(VAR_TOWER_RAID_STATE,SEARCHING_RAMESH_HOUSE)
+        msgbox(gText_ImIn_OkaySpreadOut,,SPEAKER_TALA)
+        closemessage
+
+        applymovement(TALA,ImIn_SpreadOutHouse)
+        applymovement(MAGNUS,ImIn_SpreadOutHouse)
+        applymovement(ARMANDO,ImIn_SpreadOutHouse)
+        applymovement(ELLEN,ImIn_SpreadOutHouse)
+        applymovement(KAI,ImIn_SpreadOutHouse)
+        waitmovement(KAI)
+
+        setobjectxy(TALA,2,7)
+        setobjectxy(MAGNUS,18,9)
+        setobjectxy(ARMANDO,10,11)
+        setobjectxy(ELLEN,15,17)
+        setobjectxy(KAI,3,13)
+
+        setobjectxyperm(TALA,2,7)
+        setobjectxyperm(MAGNUS,18,9)
+        setobjectxyperm(ARMANDO,10,11)
+        setobjectxyperm(ELLEN,15,17)
+        setobjectxyperm(KAI,3,13)
+
+        release
+        end
+}
+
+script ImIn_FindLockedDoor_Script
+{
+    lock
+
+        setvar(VAR_TOWER_RAID_STATE,FOUND_RAMESH_WARP_DOOR)
+
+        msgbox(gText_ImIn_IFoundADoor,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_ImIn_GuessWereAllLooking,,SPEAKER_KAI_TIDE)
+                closemessage
+
+        release
+        end
+}
+
+script ImIn_InteractDoor_Script
+{
+    checkitem(ITEM_MAGMA_EMBLEM)
+
+        if (var(VAR_RESULT)){
+            goto(ImIn_EnterCorrectCode_Script)
+        }
+
+    msgbox(format("Find the thing to unlock this door!"),MSGBOX_AUTOCLOSE)
+}
+
+script ImIn_EnterCorrectCode_Script
+{
+    lock
+        setvar(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED)
+
+        playse(SE_DING_DONG)
+        waitse
+        playse(SE_SLIDING_DOOR)
+        call(ImIn_UnlockDoor_Script)
+        delay(16)
+
+        fadescreen(FADE_TO_BLACK)
+        call(ImIn_MoveObject_BeforeWarp_Script)
+        fadescreen(FADE_FROM_BLACK)
+
+        msgbox(gText_ImIn_WereIn,,SPEAKER_ARMANDO)
+
+        msgbox(gText_ImIn_OnceYoureAllThrough,,SPEAKER_ADAORA,,,PHONE_ON)
+
+        msgbox(gText_ImIn_ImTooOldFor,,SPEAKER_MAGNUS)
+
+        msgbox(gText_ImIn_ThesePeopleAreFighting,,SPEAKER_KAREN)
+                closemessage
+
+        applymovement(TALA,Common_Movement_WalkRight)
+        waitmovement(TALA)
+        removeobject(TALA)
+        playse(SE_WARP_OUT)
+        applymovement(ARMANDO,ImIn_WalkToWarpFromLeft)
+        waitmovement(ARMANDO)
+        removeobject(ARMANDO)
+        playse(SE_WARP_OUT)
+        applymovement(ELLEN,Common_Movement_WalkLeft)
+        waitmovement(ELLEN)
+        removeobject(ELLEN)
+        playse(SE_WARP_OUT)
+        applymovement(MAGNUS,Common_Movement_WalkDown)
+        waitmovement(MAGNUS)
+        removeobject(MAGNUS)
+        playse(SE_WARP_OUT)
+        applymovement(KAI,ImIn_WalkToWarpFromRight)
+        waitmovement(KAI)
+        removeobject(KAI)
+        playse(SE_WARP_OUT)
+
+        setvar(VAR_STORYLINE_STATE,STORY_WARP_TILE_ACCESSIBLE)
+        setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,TRUE_RAID_START)
+
+        release
+        end
+}
+
+const TALA_B = 3
+const MAGNUS_B = 4
+const ARMANDO_B = 5
+const ELLEN_B = 6
+const KAI_B = 7
+
+script ImIn_MakeRaidPartyVisible_Script
+{
+    if (var(VAR_TOWER_RAID_STATE) > RAMESH_WARP_DOOR_UNLOCKED)
+    {
+        setflag(FLAG_HIDE_TOWER_RAID_PARTY)
+    }
+}
+
+script ImIn_PostWarpSplit_Dialogue
+{
+    lock
+    startcutscene(JUMPPLAYER_IMIN_POSTWARP)
+        setvar(VAR_TOWER_RAID_STATE,TEAM_ENTERED_SHARPRISESPIRE)
+
+        applymovement(PLAYER,Common_Movement_WalkUp2)
+
+        msgbox(gText_ImIn_WereAllIn,,SPEAKER_ARMANDO)
+
+        msgbox(gText_ImIn_LetTheMarch,,SPEAKER_ADAORA,,,PHONE_ON)
+
+        msgbox(gText_ImIn_LetsGoSecure,,SPEAKER_ARMANDO)
+        closemessage
+
+        applymovement(ARMANDO_B,ImIn_WalkAwayFromWarpA)
+        applymovement(MAGNUS_B,ImIn_WalkAwayFromWarpA)
+
+        msgbox(gText_ImIn_ThisPlaceIsProbably,,SPEAKER_KAREN)
+
+        msgbox(gText_ImIn_HasAnOfficeOn,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_ImIn_FloorThenLets,,SPEAKER_TALA)
+        closemessage
+
+        applymovement(TALA_B,ImIn_WalkAwayFromWarpC)
+        applymovement(ELLEN_B,ImIn_WalkAwayFromWarpC)
+        applymovement(KAI_B,ImIn_WalkAwayFromWarpC)
+        delay(30)
+
+        fadescreen(FADE_TO_BLACK)
+        removeobject(TALA_B)
+        removeobject(MAGNUS_B)
+        removeobject(ARMANDO_B)
+        removeobject(ELLEN_B)
+        removeobject(KAI_B)
+        fadescreen(FADE_FROM_BLACK)
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script ImIn_PreventPlayerProgress_Script {
+    if (var(VAR_TOWER_RAID_STATE) > SAVE_CHARLOTTE_SHARPRISESPIRE){
+        release
+            end
+    }
+    lock
+
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        waitmovement(PLAYER)
+
+        msgbox(gText_ImIn_OfficeIsOn,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                closemessage
+
+        applymovement(PLAYER,ImIn_WalkAwayStairs)
+        waitmovement(PLAYER)
+        release
+        end
+}
+
+script ImIn_OfficeReveal_Dialogue{
+    lock
+        setvar(VAR_TOWER_RAID_STATE,SAVE_CHARLOTTE_SHARPRISESPIRE)
+        playbgm(MUS_ENCOUNTER_MAY,TRUE)
+
+        applymovement(PLAYER,ImIn_ApproachDesk_Movement)
+        waitmovement(PLAYER)
+
+        msgbox(gText_ImIn_DoYouLikeMy,,SPEAKER_CHARLOTTE_SHARPRISE)
+        closemessage
+
+        msgbox(gText_ImIn_WhatAreYouDoing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_ImIn_IDidntChooseToAlign,,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(gText_ImIn_WaitTrash,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_ImIn_WasDestryogingThisRegion,,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(gText_ImIn_SoYouJustDontCare,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_ImIn_LookAllThisHelping,,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(gText_ImIn_DaddyWontBeAble,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        closemessage
+
+        applymovement(CHARLOTTE,ImIn_WalkFromDesk_Movement)
+        waitmovement(CHARLOTTE)
+        applymovement(PLAYER,Common_Movement_FaceRight)
+
+        startmenu_savescreen
+        goto(ImIn_StartCharlotteBattle_Script)
+}
+
+script ImIn_StartCharlotteBattle_Script {
+
+    lock
+        msgbox(gText_ImIn_AreDeadDoYou,,SPEAKER_CHARLOTTE_SHARPRISE)
+        closemessage
+
+        trainerbattle_no_intro(TRAINER_CHARLOTTE_IMIN,gText_ImIn_HowDoesThisKeep)
+        goto(ImIn_CharlotteDefeated_Dialogue)
+}
+
+script ImIn_InteractCharlotteBattle_Script
+{
+    if(var(VAR_TOWER_RAID_STATE) == SAVE_CHARLOTTE_SHARPRISESPIRE){
+    playbgm(MUS_ENCOUNTER_MAY,TRUE)
+    goto(ImIn_StartCharlotteBattle_Script)
+    }
+    return
+}
+
+script ImIn_CharlotteDefeated_Dialogue {
+    lock
+    startcutscene(JUMPPLAYER_IMIN_POSTRIVAL)
+        setvar(VAR_TOWER_RAID_STATE,DEFEATED_CHARLOTTE_SHARPRISESPIRE)
+
+        msgbox(gText_ImIn_Wheres,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_ImIn_WhatsTheSecret,,SPEAKER_CHARLOTTE_SHARPRISE)
+
+        msgbox(gText_ImIn_EverythingAboutIsBullshit,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+        msgbox(gText_ImIn_Floor,,SPEAKER_CHARLOTTE_SHARPRISE)
+                call(ImIn_RevealAdelaideWarp_Script)
+        closemessage
+        call(TryAutoSave)
+        endcutscene
+        release
+        end
+}
+
+script ImIn_PostCharlotteBattle_Interact_Dialogue{
+    if(var(VAR_TOWER_RAID_STATE) == DEFEATED_CHARLOTTE_SHARPRISESPIRE){
+        msgbox(gText_ImIn_AllThatTraining,MSGBOX_NPC,SPEAKER_CHARLOTTE_SHARPRISE)
+            }
+    return
+}
+
+script ImIn_InteractCharlotte_Event_Script {
+    lock
+
+        switch(var(VAR_TOWER_RAID_STATE)){
+            case SAVE_CHARLOTTE_SHARPRISESPIRE: call(ImIn_InteractCharlotteBattle_Script)
+            default: call(ImIn_PostCharlotteBattle_Interact_Dialogue)
+        }
+
+    closemessage
+        release
+        end
+}
+
+text gText_ImIn_WereCertainNobody {
+    format("We're certain nobody is home?")
+}
+
+text gText_ImIn_HasntLeftWorkEarly {
+    format("Ramesh hasn't left work early a day in their life. SharpriseCapital is led by monsters, but at least they're hard-working monsters.")
+}
+
+text gText_ImIn_WereInPosition {
+    format("We're in position at CapheCity. Ready to mobilize this diversion when you are.")
+}
+
+text gText_ImIn_TheSideDoorWill {
+    format("The side door will definitely work, didn't see an alarm either.")
+}
+
+text gText_ImIn_LetsMoveThen {
+    format("Let's move then!")
+}
+
+text gText_ImIn_BrickBreakSureComes {
+    format("Brick Break sure comes in handy when most houses are made of the stuff.")
+}
+
+text gText_ImIn_OkaySpreadOut {
+    format("Okay, spread out. We're looking for the warp panel. Use the walkies if you see anything.")
+}
+
+text gText_ImIn_IFoundADoor {
+    format("I found a door with an electronic lock! It takes six digits.")
+}
+
+text gText_ImIn_GuessWereAllLooking {
+    format("Guess we're all looking for any numbers that seem important. No way it's just their birthday, right?")
+}
+
+text gText_ImIn_WereIn {
+    format("Adaora, we're in. Everybody remember the plan?")
+}
+
+text gText_ImIn_OnceYoureAllThrough {
+    format("Once you're all through the panel, I'll lead the diversion protest at the front doors of the tower. Security will be focused on us, letting you to the executive levels and hopefully find Adelaide.")
+}
+
+text gText_ImIn_ImTooOldFor {
+    format("I'm too old for scaling mountains. Armando and I can get into the production studio and get ready to broadcast that confession.")
+}
+
+text gText_ImIn_ThesePeopleAreFighting {
+    format("These people are fighting to kill. Stay safe.")
+}
+
+text gText_ImIn_WereAllIn {
+    format("We're all in.")
+}
+
+text gText_ImIn_LetTheMarch {
+    format("Let the march begin… good luck!")
+}
+
+text gText_ImIn_LetsGoSecure {
+    format("Magnus, let's go secure the studio.")
+}
+
+text gText_ImIn_ThisPlaceIsProbably {
+    format("This place is probably crawling with Trainers. Let's spread out.")
+}
+
+text gText_ImIn_HasAnOfficeOn {
+    format("Adelaide has an office on the 38th floor, I've been there myself.")
+}
+
+text gText_ImIn_FloorThenLets {
+    format("38th floor then, let's move!")
+}
+
+text gText_ImIn_OfficeIsOn {
+    format("Adelaide's office is on Floor 10.")
+}
+
+text gText_ImIn_DoYouLikeMy {
+    format("Do you like my new office?")
+}
+
+text gText_ImIn_WhatAreYouDoing {
+    format("Charlotte, what are you doing here?")
+}
+
+text gText_ImIn_IDidntChooseToAlign {
+    format("I didn't choose to align myself with the ghetto trash. Turns out, if you stick with the good guys, you get a sick job and a corner office.")
+}
+
+text gText_ImIn_WaitTrash {
+    format("Wait, trash? Did you hear what these people did to HalaiIsland?")
+}
+
+text gText_ImIn_WasDestryogingThisRegion {
+    format("TheTide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpriseCapital did for you?")
+}
+
+text gText_ImIn_SoYouJustDontCare {
+    format("So you just don't care that you work for murderers?")
+}
+
+text gText_ImIn_LookAllThisHelping {
+    format("Look, all this helping people shit is cool, but I came here to be the best. I'm done losing to scrubs and I'm done pretending to care.")
+}
+
+text gText_ImIn_DaddyWontBeAble {
+    format("Daddy won't be able to buy your way out of this one.")
+}
+
+text gText_ImIn_AreDeadDoYou {
+    format("If you and Kai are dead, do you think I get to be Champion instead?")
+}
+
+text gText_ImIn_HowDoesThisKeep {
+    format("How does this keep happening?!?!?")
+}
+
+text gText_ImIn_Wheres {
+    format("Where's Adelaide?!")
+}
+
+text gText_ImIn_WhatsTheSecret {
+    format("What's the secret? What am I missing? Why do I keep LOSING?")
+}
+
+text gText_ImIn_EverythingAboutIsBullshit {
+    format("Everything about SharpriseCapital is bullshit. You're not any stronger. The region isn't any better. But as long as they have stans like you, they're going to continue to get richer and more toxic. Tell me where Adelaide is.")
+}
+
+text gText_ImIn_Floor {
+    format("That warp panel goes to the skydeck. His real office is there.")
+}
+
+text gText_ImIn_AllThatTraining {
+    format("…all that training…")
+}
+
+movement ImIn_ApproachHouse {
+    walk_up
+        step_end
+}
+
+movement ImIn_WalkAroundHouse {
+    walk_right
+        walk_down * 5
+        step_end
+}
+
+movement ImIn_WalkToSideDoor {
+    walk_up * 4
+        face_down
+        step_end
+}
+
+movement ImIn_AttackHouse {
+    lock_facing_direction
+        walk_left
+        walk_right
+        step_end
+}
+
+movement ImIn_WalkIntoHouseA {
+    walk_left
+        step_end
+}
+
+movement ImIn_WalkIntoHouseB {
+    walk_right * 5
+        walk_up * 4
+        walk_left
+        step_end
+}
+
+movement ImIn_WalkIntoHouseC {
+    walk_right
+        walk_up * 4
+        walk_left
+        step_end
+}
+
+movement ImIn_WalkIntoHouseD {
+    walk_right * 4
+        walk_up * 3
+        walk_left
+        step_end
+}
+
+movement ImIn_WalkIntoHouseE {
+    walk_up * 4
+        walk_left
+        step_end
+}
+
+movement ImIn_WalkIntoHouseF {
+    walk_down
+        walk_left
+        step_end
+}
+
+movement ImIn_SpreadOutHouse {
+    walk_down * 6
+        step_end
+}
+
+movement ImIn_WalkToWarpFromLeft {
+    walk_up
+        walk_right
+        step_end
+}
+
+movement ImIn_WalkToWarpFromRight {
+    walk_up
+        walk_left
+        step_end
+}
+
+movement ImIn_WalkAwayFromWarpA {
+        walk_fast_up
+        walk_fast_right * 13
+        step_end
+}
+
+movement ImIn_WalkAwayFromWarpB {
+    walk_down * 4
+        step_end
+}
+
+movement ImIn_WalkAwayFromWarpC {
+        walk_fast_right * 7
+        step_end
+}
+
+movement ImIn_WalkAwayFromWarpD {
+    walk_down * 3
+        walk_left * 3
+        walk_down * 3
+        step_end
+}
+
+movement ImIn_WalkAwayFromWarpE {
+    walk_left * 2
+        walk_down * 4
+        step_end
+}
+
+movement ImIn_WalkAwayStairs {
+    lock_facing_direction
+        walk_down
+        unlock_facing_direction
+        step_end
+}
+
+movement ImIn_ApproachDesk_Movement{
+        walk_down * 4
+        step_end
+}
+
+movement ImIn_WalkFromDesk_Movement{
+    walk_right
+        walk_up * 3
+        face_left
+        step_end
+}

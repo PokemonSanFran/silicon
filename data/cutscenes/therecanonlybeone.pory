@@ -1,0 +1,212 @@
+script ThereCanOnlyBeOne_LoadFromSave_Script{
+    switch(var(VAR_CHOSEN_PSF_STARTER))
+    {
+        case NO_STARTER_CHOSEN: goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
+        case CUTSCENE_NOT_PLAYED: goto(Prolouge_NewPlayerCreation_Script)
+        default: goto(ThereCanOnlyBeOne_WarpPlayer_Script)
+    }
+}
+
+script ThereCanOnlyBeOne_Player_Monologue
+{
+    lock
+    msgbox(gText_ThereCanOnlyBe_AlmostPackedAndReady,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_HAPPY,PHONE_OFF)
+    msgbox(gText_ThereCanOnlyBe_ButTheRulesSay,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_SAD,PHONE_OFF)
+    callnative(GenerateDummyPartyMembers)
+    callnative(AddStartersToBox)
+    goto(ThereCanOnlyBeOne_Narrator_Dialogue)
+}
+
+script ThereCanOnlyBeOne_SetUpPlayer_Script
+{
+    if (!flag(FLAG_SYS_B_DASH))
+    {
+        callnative(ClearBag)
+        callnative(ZeroPlayerPartyMons)
+        setflag(FLAG_SYS_B_DASH)
+    }
+    return
+}
+
+script ThereCanOnlyBeOne_Narrator_Dialogue {
+    msgbox(gText_ThereCanOnlyBe_DueToTheDelicateEcosystem)
+    closemessage
+    setvar(VAR_CHOSEN_PSF_STARTER, NO_STARTER_CHOSEN)
+    call(ThereCanOnlyBeOne_SetUpPlayer_Script)
+    startmenu_savescreen
+    goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
+}
+
+script ThereCanOnlyBeOne_ConstructMenu_Script
+{
+	bufferspeciesname(STR_VAR_1,SPECIES_SCYTHER)
+	dynmultipush("{STR_VAR_1}",SPECIES_SCYTHER)
+	bufferspeciesname(STR_VAR_1,SPECIES_CHARCADET)
+	dynmultipush("{STR_VAR_1}",SPECIES_CHARCADET)
+	bufferspeciesname(STR_VAR_1,SPECIES_PETILIL)
+	dynmultipush("{STR_VAR_1}",SPECIES_PETILIL)
+	bufferspeciesname(STR_VAR_1,SPECIES_FLAAFFY)
+	dynmultipush("{STR_VAR_1}",SPECIES_FLAAFFY)
+	bufferspeciesname(STR_VAR_1,SPECIES_MAREANIE)
+	dynmultipush("{STR_VAR_1}",SPECIES_MAREANIE)
+	bufferspeciesname(STR_VAR_1,SPECIES_ARON)
+	dynmultipush("{STR_VAR_1}",SPECIES_ARON)
+	bufferspeciesname(STR_VAR_1,SPECIES_SWINUB)
+	dynmultipush("{STR_VAR_1}",SPECIES_SWINUB)
+	bufferspeciesname(STR_VAR_1,SPECIES_HATTREM)
+	dynmultipush("{STR_VAR_1}",SPECIES_HATTREM)
+	bufferspeciesname(STR_VAR_1,SPECIES_PANCHAM)
+	dynmultipush("{STR_VAR_1}",SPECIES_PANCHAM)
+}
+
+script ThereCanOnlyBeOne_StarterSelectMenu_Script{
+    msgbox(gText_ThereCanOnlyBe_PleaseChooseAPokemon)
+	call(ThereCanOnlyBeOne_ConstructMenu_Script)
+	dynmultistack(0,0,FALSE,4,FALSE,0,NULL)
+    call(ThereCanOnlyBeOne_HandleMenuOutput_Script)
+    goto(ThereCanOnlyBeOne_StarterChoiceMenu_Script)
+}
+
+script ThereCanOnlyBeOne_HandleMenuOutput_Script{
+
+	copyvar(VAR_CHOSEN_PSF_STARTER, VAR_RESULT)
+	bufferspeciesname(STR_VAR_1, VAR_CHOSEN_PSF_STARTER)
+
+    switch (var (VAR_RESULT))
+	{
+        case SPECIES_SCYTHER:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectScytherDesc)
+        case SPECIES_CHARCADET:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectCharcadetDesc)
+        case SPECIES_PETILIL:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectPetililDesc)
+        case SPECIES_FLAAFFY:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectFlaaffyDesc)
+        case SPECIES_MAREANIE:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectMareanieDesc)
+        case SPECIES_ARON:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectAronDesc)
+        case SPECIES_SWINUB:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectSwinubDesc)
+        case SPECIES_HATTREM:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectHattremDesc)
+        case SPECIES_PANCHAM:
+            msgbox(gText_ThereCanOnlyBe_StarterSelectPanchamDesc)
+		default:
+			msgbox(gText_ThereCanOnlyBe_StarterSelectUnknownDesc)
+    }
+}
+
+script ThereCanOnlyBeOne_StarterChoiceMenu_Script {
+    dynmultichoice(1,1,FALSE,6,0,NULL,"Summary","Confirm","Cancel")
+    switch (var (VAR_RESULT)) {
+        case 0:
+            fadescreen(FADE_TO_BLACK)
+            callnative(Script_ShowSiliconStarter)
+            waitstate
+            goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
+        case 1:
+            goto(ThereCanOnlyBeOne_StarterSelectConfirm_Script)
+        case 2:
+            goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
+        default:
+            goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
+    }
+}
+
+script ThereCanOnlyBeOne_StarterSelectConfirm_Script
+{
+    msgbox(gText_ThereCanOnlyBe_StarterAreYouSure, MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT,NO,ThereCanOnlyBeOne_StarterSelectMenu_Script)
+    callnative(MoveStarterToParty)
+    goto(ThereCanOnlyBeOne_StarterSelectEnd_Script)
+}
+
+script ThereCanOnlyBeOne_StarterSelectEnd_Script {
+  setflag(FLAG_SYS_POKEMON_GET)
+  playfanfare(MUS_OBTAIN_ITEM)
+  msgbox(gText_ThereCanOnlyBe_YouChoseToBring)
+  waitfanfare
+  startmenu_savescreen
+  goto(ThereCanOnlyBeOne_WarpPlayer_Script)
+}
+
+script ThereCanOnlyBeOne_WarpPlayer_Script {
+  lock
+  clearflag(FLAG_SPAWN_INVISIBLE)
+fadeblackandsetremovewarpfadeflag
+  warpsilent(MAP_CUCONU_TOWN, 255, 3, 10)
+}
+
+text gText_ThereCanOnlyBe_AlmostPackedAndReady {
+  format("Almost packed and ready to go! I still can't believe I made it...")
+}
+
+text gText_ThereCanOnlyBe_ButTheRulesSay {
+  format("But the rules say I can only bring one of you guys. Man, this sucks. I promise, once we're the Champion, we'll come back for the rest of you! But for now, it's all business...")
+}
+
+text gText_ThereCanOnlyBe_DueToTheDelicateEcosystem {
+  format("Due to the delicate ecosystem of the region, Trainers are permitted to bring one Pokémon from outside the region into the region with them. Please choose one Pokémon to accompany you on your adventure. You will not be able to access the others during your playthrough, so choose wisely.")
+}
+
+text gText_ThereCanOnlyBe_PleaseChooseAPokemon {
+  format("Please choose a Pokémon to bring with you to Resido.")
+}
+
+text gText_ThereCanOnlyBe_YouHaveSelected {
+  format("You have selected {STR_VAR_1}.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectSummaryErrorMessage {
+  format("In the next version, this will lead to the Pokémon summary screen.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectScytherDesc {
+  format("{STR_VAR_1} uses its Ability and Speed to overwhelm opponents.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectCharcadetDesc {
+  format("{STR_VAR_1} evolves into powerful Fire-type Pokemon with physical or special coverage.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectPetililDesc {
+  format("{STR_VAR_1} best utilizies its high Special Attack in the sun.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectFlaaffyDesc {
+  format("{STR_VAR_1} boasts a high Special Attack and diverse move pool.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectMareanieDesc {
+  format("{STR_VAR_1} uses Defense and Special Defense to wear down foes.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectAronDesc {
+  format("{STR_VAR_1} leverages its high Attack and Defense to provide physical support.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectSwinubDesc {
+format("{STR_VAR_1} hits most types for super- effective damage with its high attack.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectHattremDesc {
+format("{STR_VAR_1}'s high Special Attack and  Special Defense makes it ideal for special support.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectPanchamDesc {
+format("{STR_VAR_1} makes up for low Speed with high Attack and unique typing.")
+}
+
+text gText_ThereCanOnlyBe_StarterSelectUnknownDesc
+{
+	format("This is an...interesting choice.")
+}
+
+text gText_ThereCanOnlyBe_StarterAreYouSure {
+format("Are you sure you want to choose {STR_VAR_1}?")
+}
+
+text gText_ThereCanOnlyBe_YouChoseToBring {
+format("You chose to bring {STR_VAR_1} to Resido.")
+}

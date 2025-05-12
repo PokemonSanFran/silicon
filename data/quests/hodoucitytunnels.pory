@@ -1,0 +1,255 @@
+const ELDEST_OUTSIDE= 8
+const ELDEST_TUNNEL = 2
+const TREASURE = 1
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+script Quest_HodouCityTunnels_HideTreasure_Script{
+    setflag(FLAG_TEMP_2)
+
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HODOUTUNNELS)
+        if (var(VAR_RESULT)){
+            setflag(FLAG_TEMP_1)
+        }
+}
+
+script Quest_HodouCityTunnels_Event_Script{
+    returnqueststate(QUEST_HODOUTUNNELS)
+    switch(var(VAR_RESULT)){
+        case QUEST_MENU_COMPLETE_QUEST: msgbox(gText_Quest_HodouCityTunnels_ICannotThank,MSGBOX_NPC,SPEAKER_DEFAULT)
+        case QUEST_MENU_SET_ACTIVE: goto(Quest_HodouCityTunnels_Active_Event_Script)
+        default: msgbox(gText_HodouCity_IMissTheOld,MSGBOX_NPC,SPEAKER_DEFAULT)
+        }
+            release
+            end
+}
+
+script Quest_HodouCityTunnels_Active_Event_Script{
+    switch(var(VAR_QUEST_HODOUTUNNELS)){
+        case NEVER_SPOKEN_ELDER:goto(Quest_HodouCityTunnels_Intro_Dialogue)
+        case SPOKEN_ELDER_FIRST_TIME:goto(Quest_HodouCityTunnels_BadgeCheck_Dialogue)
+        case SENT_TO_FIND_RED_SCROLL:goto(Quest_HodouCityTunnels_WaitingScroll_Dialogue)
+        case FOUND_RED_SCROLL:goto(Quest_HodouCityTunnels_WaitingScroll_Dialogue)
+    }
+}
+
+script Quest_HodouCityTunnels_Intro_Dialogue{
+    lock
+    msgbox(gText_Quest_HodouCityTunnels_OhoHowCanIHelp,MSGBOX_NPC,SPEAKER_DEFAULT)
+
+    msgbox(gText_Quest_HodouCityTunnels_IHeardOnlineThatYou,MSGBOX_NPC,SPEAKER_ALICIA)
+
+    addvar(VAR_QUEST_HODOUTUNNELS,1)
+    goto(Quest_HodouCityTunnels_BadgeCheck_Dialogue)
+}
+
+script Quest_HodouCityTunnels_BadgeCheck_Dialogue{
+    lock
+    special(GetNumberOfBadges)
+	if (var(VAR_RESULT) > 3) {
+    goto(Quest_HodouCityTunnels_RevealSecret_Dialogue)
+    }
+    else {
+        msgbox(gText_Quest_HodouCityTunnels_YoureNotStrongEnough,MSGBOX_NPC,SPEAKER_DEFAULT)
+    }
+    release
+    end
+}
+
+script Quest_HodouCityTunnels_RevealSecret_Dialogue{
+    addvar(VAR_QUEST_HODOUTUNNELS,1)
+    msgbox(gText_Quest_HodouCityTunnels_HmmYouLookStrong,MSGBOX_NPC,SPEAKER_DEFAULT)
+    closemessage
+
+    applymovement(ELDEST_OUTSIDE,Common_Movement_FaceAwayPlayer)
+    waitmovement(ELDEST_OUTSIDE)
+    delay(16)
+
+    applymovement(ELDEST_OUTSIDE,Common_Movement_FacePlayer)
+    waitmovement(ELDEST_OUTSIDE)
+    msgbox(gText_Quest_HodouCityTunnels_YouveHeardCorrectly,MSGBOX_NPC,SPEAKER_DEFAULT)
+    closemessage
+    release
+    end
+}
+
+script Quest_HodouCityTunnels_FirstScrollWarp_Script{
+    lock
+    call(HodouCity_Racisthouse_ScrollNoWarp_Dialogue)
+
+    msgbox(gText_Quest_HodouCityTunnels_WaitIsThis,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+
+
+    applymovement(PLAYER,Quest_HodouCityTunnels_PushScroll_Movement)
+    delay(4)
+    playse(SE_PIN)
+    waitmovement(PLAYER)
+
+    msgbox(gText_Quest_HodouCityTunnels_TheresNoWall,MSGBOX_DEFAULT)
+    addvar(VAR_QUEST_HODOUTUNNELS,1)
+    goto(HodouCity_Racisthouse_ScrollWarp_Script)
+}
+
+script Quest_HodouCityTunnels_WaitingScroll_Dialogue{
+    msgbox(gText_Quest_HodouCityTunnels_HaveYou,MSGBOX_NPC,SPEAKER_DEFAULT)
+    end
+}
+
+script Quest_HodouCityTunnels_Treasure_Script{
+    lock
+    msgbox(gText_Quest_HodouCityTunnels_ThereIsAnOrnate,MSGBOX_DEFAULT)
+
+    msgbox(gText_Quest_HodouCityTunnels_ThisMustBe,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+
+
+    msgbox(gText_Quest_HodouCityTunnels_ThatWontBe,MSGBOX_DEFAULT)
+    closemessage
+
+    clearflag(FLAG_TEMP_2)
+    addobject(ELDEST_TUNNEL)
+
+    playse(SE_PIN)
+    applymovement(PLAYER,Common_Movement_ExclamationMark)
+    waitmovement(PLAYER)
+    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+    if (var(VAR_TEMP_0) != 6){
+        applymovement(PLAYER,Quest_HodouCityTunnels_MoveToTreasureFront_Movement)
+        waitmovement(PLAYER)
+    }
+    applymovement(PLAYER,Common_Movement_FaceDown)
+    waitse
+
+    applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_WalkToPlayer_Movement)
+    waitmovement(ELDEST_TUNNEL)
+
+    msgbox(gText_Quest_HodouCityTunnels_ThankYouFor,MSGBOX_NPC,SPEAKER_DEFAULT)
+
+    msgbox(gText_Quest_HodouCityTunnels_NoProblemThisBox,MSGBOX_NPC,SPEAKER_ALICIA)
+
+
+    msgbox(gText_Quest_HodouCityTunnels_IMayHaveMislead,MSGBOX_NPC,SPEAKER_DEFAULT)
+    closemessage
+
+    applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_TakeTreasure_Movement)
+    applymovement(PLAYER,Quest_HodouCityTunnels_MoveWhileTreasure_Movement)
+    delay(16)
+    delay(16)
+    removeobject(TREASURE)
+
+    playse(SE_CLICK)
+    waitse
+    waitmovement(ELDEST_TUNNEL)
+
+    playse(SE_PIN)
+    waitse
+    applymovement(PLAYER,Common_Movement_ExclamationMark)
+    waitmovement(PLAYER)
+
+    msgbox(gText_Quest_HodouCityTunnels_YouHad,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+
+
+    applymovement(ELDEST_TUNNEL,Common_Movement_FaceLeft)
+
+    msgbox(gText_Quest_HodouCityTunnels_IUsedToLiveHere,MSGBOX_DEFAULT,SPEAKER_DEFAULT)
+    closemessage
+
+    applymovement(ELDEST_TUNNEL,Common_Movement_FaceLeft)
+    waitmovement(ELDEST_TUNNEL)
+
+    msgbox(gText_Quest_HodouCityTunnels_IAsked,MSGBOX_DEFAULT,SPEAKER_DEFAULT)
+    closemessage
+    applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_LeaveTunnel_Movement)
+    applymovement(PLAYER,Common_Movement_FaceDown)
+    waitmovement(ELDEST_TUNNEL)
+    removeobject(ELDEST_TUNNEL)
+    completequest(QUEST_HODOUTUNNELS)
+    call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
+    release
+    end
+}
+
+movement Quest_HodouCityTunnels_PushScroll_Movement{
+    walk_in_place_up
+    emote_exclamation_mark
+    step_end
+}
+movement Quest_HodouCityTunnels_LeaveTunnel_Movement{
+    walk_down * 6
+    step_end
+}
+movement Quest_HodouCityTunnels_TakeTreasure_Movement{
+    walk_up
+    walk_in_place_up
+    step_end
+}
+movement Quest_HodouCityTunnels_WalkToPlayer_Movement{
+    walk_up * 6
+    step_end
+}
+movement Quest_HodouCityTunnels_MoveToTreasureFront_Movement{
+    walk_down
+    walk_right
+    step_end
+}
+movement Quest_HodouCityTunnels_MoveWhileTreasure_Movement{
+    walk_left
+    face_right
+    step_end
+}
+text gText_Quest_HodouCityTunnels_IAsked{
+    format("I asked one of the children in town to post a story about hidden treasure, hoping somebody strong could help me get in here. I tried to reason with these thugs, but as you know, they don't like to listen. Your kindness will not be forgotten. Thank you so much, young Trainer.")
+}
+text gText_Quest_HodouCityTunnels_IMayHaveMislead{
+    format("I may have mislead you. I'm sorry.")
+}
+text gText_Quest_HodouCityTunnels_IUsedToLiveHere{
+    format("I used to live here. I didn't dig this tunnel though - it was always here. I used it for storage away from my wife, haha! When I was drafted many years ago, I lost my home and while I was gone, I lost my family. When I returned, my home had been taken, and access to the tunnel was gone. My treasure is simple... photos of my family. Its all I have left of them.")
+}
+text gText_Quest_HodouCityTunnels_NoProblemThisBox{
+    format("No problem. This box is locked though. We have to find the key.")
+}
+text gText_Quest_HodouCityTunnels_ThankYouFor{
+    format("Thank you for dealing with those thugs. I was able to follow you inside.")
+}
+text gText_Quest_HodouCityTunnels_ThatWontBe{
+    format("That won't be neccesary.")
+}
+text gText_Quest_HodouCityTunnels_ThereIsAnOrnate{
+    format("This is an ornate box on the ground. There is clearly something inside, but it is locked.")
+}
+text gText_Quest_HodouCityTunnels_ThisMustBe{
+    format("This must be the treasure! Ugh, do I have to find a key too?")
+}
+text gText_Quest_HodouCityTunnels_YouHad{
+    format("You had the key the entire time?")
+}
+
+text gText_Quest_HodouCityTunnels_OhoHowCanIHelp{
+	format("Oho, how can I help you, lad?")
+}
+text gText_Quest_HodouCityTunnels_IHeardOnlineThatYou{
+	format("I heard there's a secret treasure hidden in this town. Do you know anything about that?")
+}
+text gText_Quest_HodouCityTunnels_YoureNotStrongEnough{
+	format("You're not strong enough for this treasure. Come back after you've got 4 badges.")
+}
+text gText_Quest_HodouCityTunnels_HmmYouLookStrong{
+	format("Hmm, you look strong enough for the task.")
+}
+text gText_Quest_HodouCityTunnels_YouveHeardCorrectly{
+	format("You've heard correctly. There are secret tunnels under the city, and hidden in them is a treasure greater than anybody knows. Of course, I'm too old to go get it now. Find it, and I'll split it with you. The entrance is guarded by a red scroll, but I don't remember where that is...")
+}
+text gText_Quest_HodouCityTunnels_WaitIsThis{
+    format("Wait, is this the red scroll that guy was talking about...?")
+}
+
+text gText_Quest_HodouCityTunnels_TheresNoWall{
+    format("There's no wall behind the scroll!")
+}
+
+text gText_Quest_HodouCityTunnels_HaveYou{
+    format("Have you had any luck finding the red scroll?")
+}
+
+text gText_Quest_HodouCityTunnels_ICannotThank{
+    format("I cannot thank you enough.")
+}

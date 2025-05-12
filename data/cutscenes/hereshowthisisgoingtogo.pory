@@ -1,0 +1,189 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ADELAIDE = 1 //FLAG_TEMP_1
+const CHARLOTTE = 2 //FLAG_TEMP_2
+const KAI = 3 //FLAG_TEMP_3
+const OLIVER = 4 //FLAG_TEMP_4
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
+const FLAG_HIDE_ARCEHR = FLAG_TEMP_3
+const FLAG_HIDE_OLIVER = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_6
+
+script HeresHowThisIsGoingToGo_ObjectSetUp_Script{
+    setflag(FLAG_HIDE_RAMESH)
+    return
+}
+
+script HeresHowThisIsGoingToGo_ShowKaiandCharlotte{
+    setflag(FLAG_HIDE_RAMESH)
+    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_OLIVER)
+    setobjectxy(KAI,4,5)
+    setobjectxyperm(KAI,4,5)
+    return
+}
+
+script HeresHowThisIsGoingToGo_Lockers_ObjectCleanUp_Script {
+    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_OLIVER)
+    return
+}
+
+script HeresHowThisIsGoingToGo_ConstructionCompleted_Script {
+    if (var(VAR_STORYLINE_STATE) > STORY_COMPLETED_NAVAL_BASE){
+        setmetatile(19,13,0x371,TRUE)
+        setmetatile(19,14,0x379,TRUE)
+        setmetatile(19,15,0x381,TRUE)
+        setmetatile(19,16,0x389,TRUE)
+        setmetatile(19,17,0x391,TRUE)
+        setmetatile(20,13,0x372,TRUE)
+        setmetatile(20,14,0x37A,TRUE)
+        setmetatile(20,15,0x382,TRUE)
+        setmetatile(20,16,0x38A,TRUE)
+        setmetatile(20,17,0x392,TRUE)
+        setmetatile(21,13,0x373,TRUE)
+        setmetatile(21,14,0x37B,TRUE)
+        setmetatile(21,15,0x383,FALSE)
+        setmetatile(21,16,0x38B,TRUE)
+        setmetatile(21,17,0x393,TRUE)
+        setmetatile(22,17,0x394,TRUE)
+        setmetatile(22,14,0x37C,TRUE)
+        setmetatile(22,13,0x374,TRUE)
+        setmetatile(22,16,0x38C,TRUE)
+        setmetatile(22,15,0x384,TRUE)
+        setmetatile(23,15,0x385,TRUE)
+        setmetatile(23,14,0x37D,TRUE)
+        setmetatile(23,13,0x375,TRUE)
+        setmetatile(23,16,0x38D,TRUE)
+        setmetatile(23,17,0x395,TRUE)
+        setmetatile(21,18,0x211,FALSE)
+        special(DrawWholeMapView)
+    }
+    return
+}
+
+script HeresHowThisIsGoingToGo_VirtualObjectSetUp_Script {
+createvobject(OBJ_EVENT_GFX_BOY_2,6,8,5,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_MAN_2,7,9,5,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F,8,10,5,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_OLD_WOMAN,9,11,5,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_HEX_MANIAC,10,12,5,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_LITTLE_BOY_3,11,13,5,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_BOY_1,12,6,6,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_LITTLE_GIRL,13,7,6,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_MAN_1,14,8,6,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M,15,10,6,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_WOMAN_4,16,12,6,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,17,13,6,3,DIR_NORTH)
+createvobject(OBJ_EVENT_GFX_LITTLE_BOY,18,6,5,3,DIR_NORTH)
+return
+}
+
+script HeresHowThisIsGoingToGo_CleanUpVObjects_Script {
+removeobject(6)
+removeobject(7)
+removeobject(8)
+removeobject(9)
+removeobject(10)
+removeobject(11)
+removeobject(12)
+removeobject(13)
+removeobject(14)
+removeobject(15)
+removeobject(16)
+removeobject(17)
+callnative(DestroyVirtualObjects)
+}
+
+script HeresHowThisIsGoingToGo_ExplainLeagueDialogue {
+    lockall
+    startcutscene(JUMPPLAYER_HERESHOWTHISISGOINGTOGO)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(KAI,Common_Movement_FaceUp)
+    waitmovement(0)
+
+msgbox(gText_HeresHowThisIsGoingToGo_CongratulationsOnAll,,SPEAKER_ADELAIDE)
+
+
+msgbox(gText_HeresHowThisIsGoingToGo_WooYay)
+
+msgbox(gText_HeresHowThisIsGoingToGo_ImSureNone,,SPEAKER_ADELAIDE)
+
+msgbox(gText_HeresHowThisIsGoingToGo_WaitIDid,,SPEAKER_CHARLOTTE)
+
+
+msgbox(gText_HeresHowThisIsGoingToGo_DotDotDot)
+
+msgbox(gText_HeresHowThisIsGoingToGo_SoIllGoOver,,SPEAKER_ADELAIDE)
+closemessage
+
+
+applymovement(ADELAIDE,Common_Movement_FaceLeft)
+msgbox(gText_HeresHowThisIsGoingToGo_YourGroupsAnd,,SPEAKER_ADELAIDE)
+
+closemessage
+
+fadescreen(FADE_TO_BLACK)
+setvar(VAR_STORYLINE_STATE,STORY_CHAMPIONSHIP_EXPLAINED)
+playse(SE_EXIT)
+waitse
+removeobject(ADELAIDE)
+removeobject(OLIVER)
+call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
+fadescreen(FADE_FROM_BLACK)
+applymovement(KAI,HeresHowThisIsGoingToGo_GoToBracket)
+waitmovement(KAI)
+    call(TryAutoSave)
+endcutscene
+releaseall
+end
+}
+
+text gText_HeresHowThisIsGoingToGo_CongratulationsOnAll {
+	format("Congratulations on all of your hard work! Welcome to the first stage of the Resido League Championship!")
+}
+
+text gText_HeresHowThisIsGoingToGo_WooYay {
+	format("Woo! Yay!")
+}
+
+text gText_HeresHowThisIsGoingToGo_ImSureNone {
+	format("I'm sure none of you read the information email -")
+}
+
+text gText_HeresHowThisIsGoingToGo_WaitIDid {
+	format("Wait, I did! Did nobody else?")
+	}
+text gText_HeresHowThisIsGoingToGo_DotDotDot {
+	format("…")
+}
+
+text gText_HeresHowThisIsGoingToGo_SoIllGoOver {
+	format("So here's the simple explanation: Win five battles in a row, and you'll be the Champion! If you want the more detailed version, you can view the rules on the monitor to my right.")
+}
+
+text gText_HeresHowThisIsGoingToGo_YourGroupsAnd {
+	format("Your groups, and the eventual final bracket, can also be seen on the monitor. We'll be starting with Group A in two hours. Good luck.")
+}
+
+movement HeresHowThisIsGoingToGo_LeaveLockersA {
+    walk_right * 5
+    walk_down * 3
+    walk_left * 5
+    walk_down * 2
+    step_end
+}
+movement HeresHowThisIsGoingToGo_LeaveLockersB {
+    walk_right * 6
+    walk_down * 4
+    walk_left * 5
+    walk_down * 2
+    step_end
+}
+movement HeresHowThisIsGoingToGo_GoToBracket {
+    walk_down
+    walk_left * 7
+    walk_up * 2
+    step_end
+}

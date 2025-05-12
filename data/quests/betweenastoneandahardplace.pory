@@ -1,0 +1,104 @@
+//Quest_BetweenAStoneAndAHardPlace
+//gText_Quest_BetweenAStoneAndAHardPlace
+//
+//PSF TODO Look into StorytellerGetRecordedTrainerStat to figure out how to cnvert GAME_STAT into stringvar or something that be used or read
+//PSF TODO replace all uses of VAR_NUM_TROLLEY_RIDES with GAME_STAT_TROLLEY_RIDES so we're not using two variables for the same thing
+
+script Quest_BetweenAStoneAndAHardPlace_Event_Script{
+    goto_if_quest_complete(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Complete_Dialogue)
+    goto_if_quest_reward(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Reward_Dialogue)
+    goto_if_quest_active(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Active_Dialogue)
+    goto(CapheCity_TrolleyHQ_CounterWorker_Dialogue)
+}
+
+script Quest_BetweenAStoneAndAHardPlace_Active_Dialogue{
+    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_DidYouHear,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    getgamestat(GAME_STAT_TROLLEY_RIDES, STR_VAR_1)
+
+    switch(var(VAR_RESULT)){
+        case 0:
+            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_YouShouldTry,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+        case 1:
+        case 2:
+        case 3:
+            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_AreYouNew,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+        case 4:
+        case 5:
+        case 6:
+            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_YoureARegular,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+        case 7:
+        case 8:
+        case 9:
+            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_OhWowOnly,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    }
+
+    incrementgamestat(GAME_STAT_TROLLEY_RIDES)
+    end
+}
+
+script Quest_BetweenAStoneAndAHardPlace_Reward_Dialogue{
+    setflag(FLAG_TEMP_1)
+    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_GladToSeeYoureEnjoying,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_ForYourContinuedRidership,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+
+    random(10)
+    switch(var(VAR_RESULT)){
+        case 0: giveitem(ITEM_ICE_STONE)
+        case 1: giveitem(ITEM_FIRE_STONE)
+        case 2: giveitem(ITEM_WATER_STONE)
+        case 3: giveitem(ITEM_THUNDER_STONE)
+        case 4: giveitem(ITEM_LEAF_STONE)
+        case 5: giveitem(ITEM_MOON_STONE)
+        case 6: giveitem(ITEM_SUN_STONE)
+        case 7: giveitem(ITEM_SHINY_STONE)
+        case 8: giveitem(ITEM_DUSK_STONE)
+        case 9: giveitem(ITEM_DAWN_STONE)
+    }
+
+    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_AhhPleaseDont,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_Yeah,MSGBOX_NPC,SPEAKER_ALICIA)
+    completequest(QUEST_BETWEENASTONEANDAHARDPLACE)
+    call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
+    release
+    end
+}
+
+script Quest_BetweenAStoneAndAHardPlace_Complete_Dialogue{
+    special(GetNumberOfBadges)
+    if (!flag(FLAG_TEMP_1) || (var(VAR_RESULT) > 4)){
+        goto(Quest_Rockcollector_StartQuest_Dialogue)
+    }
+    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_WeShouldPivot,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    end
+}
+
+text gText_Quest_BetweenAStoneAndAHardPlace_DidYouHear {
+    format("Did you hear about the promotion we're doing? Ride the trolleys in Resido 10 times, and get a mega powerful stone for pushing the limits of your Pokemons power!")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_YouShouldTry {
+    format("You should try out the trolleys around the region. They're a great way to get around!")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_AreYouNew {
+    format("Are you new to the region? You should really give the trolleys a try!")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_YoureARegular {
+    format("You're a regular, {PLAYER}! Thanks for supporting the trolley system. Come back when you've done 10 rides!")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_OhWowOnly {
+    format("Oh wow! {STR_VAR_1} rides! Excited to get your prize?")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_GladToSeeYoureEnjoying {
+    format("Glad to see you're enjoying the trolley system, {PLAYER}!")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_ForYourContinuedRidership {
+    format("For your continued ridership, we'd like to present you with a special evolutionary stones!")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_AhhPleaseDont {
+    format("Aaah, I can tell you're disappointed. Please don't be mad... we had some Mega Stones, but then we ran out. We had to reword the ad to keep people coming in, but all of the Trainers have been so mad!")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_Yeah {
+    format("...yeah. Not what I was expecting. But thanks, I guess.")
+}
+text gText_Quest_BetweenAStoneAndAHardPlace_WeShouldPivot{
+    format("We should pivot to a more honest advertising model. I don't think I can handle more angry messages on Buzzr!")
+}

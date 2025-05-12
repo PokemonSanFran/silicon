@@ -1,0 +1,438 @@
+const IMELDA_ESPULEE_OUTSKIRTS = 7
+const FLAG_HIDE_IMELDA_ESPULEE_OUTSKIRTS = FLAG_TEMP_1
+
+//Quest_Restoreespuleeoutskirts_
+//gText_Restoreespuleeoutskirts_
+
+script Quest_Restoreespuleeoutskirts_Debug_Script{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_RESTOREESPULEEGYM)
+
+        if (var(VAR_RESULT)){
+            msgbox(format("you now have everything needed to finish this quest, just talk to me again."))
+            closemessage
+            givemon(SPECIES_KRABBY,100,,,,0,,,,,,,,,,,,,move1=MOVE_KNOCK_OFF)
+            givemon(SPECIES_COPPERAJAH,100,,,,0,,,,,,,,,,,,,move1=MOVE_POWER_WHIP)
+        }
+    release
+        end
+}
+
+script Quest_Restoreespuleeoutskirts_MoveImelda_Script{
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+        setobjectxy(IMELDA_ESPULEE_OUTSKIRTS,12,18)
+        setobjectxyperm(IMELDA_ESPULEE_OUTSKIRTS,12,18)
+        setobjectmovementtype(IMELDA_ESPULEE_OUTSKIRTS,MOVEMENT_TYPE_FACE_DOWN)
+    }
+    return
+}
+script Quest_Restoreespuleeoutskirts_HideImelda_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREESPULEEGYM)
+
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_IMELDA_ESPULEE_OUTSKIRTS)
+        }
+}
+
+script Quest_Restoreespuleeoutskirts_BufferStrings_Part1_Script{
+    bufferspeciesname(STR_VAR_1,SPECIES_KRABBY)
+        buffermovename(STR_VAR_2,MOVE_KNOCK_OFF)
+        return
+}
+
+script Quest_Restoreespuleeoutskirts_BufferStrings_Part2_Script{
+    bufferspeciesname(STR_VAR_1,SPECIES_COPPERAJAH)
+        buffermovename(STR_VAR_2,MOVE_POWER_WHIP)
+        return
+}
+
+script Quest_Restoreespuleeoutskirts_StartQuest_Dialogue{
+        msgbox(gText_Restoreespuleeoutskirts_YourePlayer,,SPEAKER_IMELDA)
+        reveal(REVEAL_IMELDA)
+
+        msgbox(gText_Restoreespuleeoutskirts_YeahImHelping,,SPEAKER_ALICIA)
+
+        msgbox(gText_Restoreespuleeoutskirts_AreYouHelping,,SPEAKER_IMELDA)
+
+        msgbox(gText_Restoreespuleeoutskirts_IHearThat,,SPEAKER_ALICIA)
+
+        msgbox(gText_Restoreespuleeoutskirts_TheBestWay,,SPEAKER_IMELDA)
+
+        msgbox(gText_Restoreespuleeoutskirts_RightBut,,SPEAKER_ALICIA)
+
+        msgbox(gText_Restoreespuleeoutskirts_HmmI,,SPEAKER_IMELDA)
+        msgbox(gText_Restoreespuleeoutskirts_IHave,,SPEAKER_IMELDA)
+
+        msgbox(gText_Restoreespuleeoutskirts_LikeTrainer,,SPEAKER_ALICIA)
+
+        msgbox(gText_Restoreespuleeoutskirts_OhIDidnt,,SPEAKER_IMELDA)
+        msgbox(gText_Restoreespuleeoutskirts_TheresABattle,,SPEAKER_IMELDA)
+        msgbox(gText_Restoreespuleeoutskirts_CanYouBring,,SPEAKER_IMELDA)
+        msgbox(gText_Restoreespuleeoutskirts_IFIWant,,SPEAKER_IMELDA)
+        call(Quest_Restoreespuleeoutskirts_BufferStrings_Part1_Script)
+        msgbox(gText_Restoreespuleeoutskirts_WeNeed_A,,SPEAKER_IMELDA)
+        call(Quest_Restoreespuleeoutskirts_BufferStrings_Part2_Script)
+        msgbox(gText_Restoreespuleeoutskirts_WeNeed_B,,SPEAKER_IMELDA)
+        msgbox(gText_Restoreespuleeoutskirts_ComeBack,,SPEAKER_IMELDA)
+
+
+        startquest(QUEST_RESTOREESPULEEGYM)
+        call(Quest_Restoreespuleeoutskirts_Debug_Script)
+        //PSF TODO remove when encounters exist
+        release
+        end
+}
+
+script Quest_EspuleeOutskirts_ConstructMenu_Script{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREESPULEEGYM,SUB_QUEST_1)
+        if(!var(VAR_RESULT)){
+            buffermovename(STR_VAR_1,MOVE_KNOCK_OFF)
+            bufferspeciesname(STR_VAR_2,SPECIES_KRABBY)
+            dynmultipush("{STR_VAR_2} that knows {STR_VAR_1}",0)
+        }
+
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREESPULEEGYM,SUB_QUEST_2)
+        if(!var(VAR_RESULT)){
+            buffermovename(STR_VAR_1,MOVE_POWER_WHIP)
+            bufferspeciesname(STR_VAR_2,SPECIES_COPPERAJAH)
+            dynmultipush("{STR_VAR_2} that knows {STR_VAR_1}",1)
+        }
+
+    dynmultipush("Nothing yet.",2)
+}
+
+script Quest_Restoreespuleeoutskirts_Active_Script{
+    msgbox(gText_Restoreespuleeoutskirts_WeNeedSomePretty,,SPEAKER_IMELDA)
+
+    call(Quest_EspuleeOutskirts_ConstructMenu_Script)
+    dynmultistack(24,0,TRUE,2,TRUE,0,NULL)
+    closemessage
+
+    switch(var(VAR_RESULT)){
+        case 0: goto(Quest_Restoreespuleeoutskirts_HandleKrabby_Script)
+        case 1: goto(Quest_Restoreespuleeoutskirts_HandleCopperajah_Script)
+        case 2:
+        case MULTI_B_PRESSED:
+            goto(Quest_Restoreespuleeoutskirts_Cancel_Dialogue)
+    }
+}
+
+script Quest_Restoreespuleeoutskirts_HandleKrabby_Script{
+    special(ChoosePartyMon)
+        waitstate
+
+        if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
+            goto(Quest_Restoreespuleeoutskirts_Cancel_Dialogue)
+        }
+
+        checkspeciesandmove(SPECIES_KRABBY, MOVE_KNOCK_OFF, VAR_RESULT)
+        if (!var(VAR_RESULT)){
+            goto(Quest_Restoreespuleeoutskirts_Cancel_Dialogue)
+        }
+
+        special(BufferMonNickname)
+        call(Quest_Restoreespuleeoutskirts_AskTakeMon_Dialogue)
+
+        special(HasEnoughMonsForDoubleBattle)
+        if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS){
+            goto(Quest_Restoreespuleeoutskirts_NotEnoughMons_Dialogue)
+        }
+
+    special(DeleteChosenPartyMon)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_1)
+    goto(Quest_Restoreespuleeoutskirts_HandleProgress_Dialogue)
+}
+
+script Quest_Restoreespuleeoutskirts_HandleCopperajah_Script{
+    special(ChoosePartyMon)
+        waitstate
+
+        if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
+            goto(Quest_Restoreespuleeoutskirts_Cancel_Dialogue)
+        }
+
+        checkspeciesandmove(SPECIES_COPPERAJAH, MOVE_POWER_WHIP, VAR_RESULT)
+        if (!var(VAR_RESULT)){
+            goto(Quest_Restoreespuleeoutskirts_Cancel_Dialogue)
+        }
+
+        special(BufferMonNickname)
+        call(Quest_Restoreespuleeoutskirts_AskTakeMon_Dialogue)
+
+        special(HasEnoughMonsForDoubleBattle)
+        if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS){
+            goto(Quest_Restoreespuleeoutskirts_NotEnoughMons_Dialogue)
+        }
+
+    special(DeleteChosenPartyMon)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_2)
+    goto(Quest_Restoreespuleeoutskirts_HandleProgress_Dialogue)
+}
+
+script Quest_Restoreespuleeoutskirts_AskTakeMon_Dialogue{
+    msgbox(gText_Restoreespuleeoutskirts_AreYouSure,MSGBOX_YESNO,SPEAKER_IMELDA)
+
+    if (var(VAR_RESULT) == NO){
+        goto(Quest_Restoreespuleeoutskirts_Cancel_Dialogue)
+    }else{
+        return
+    }
+}
+
+script Quest_Restoreespuleeoutskirts_NotEnoughMons_Dialogue{
+    msgbox(gText_Restoreespuleeoutskirts_IsntThatYour,,SPEAKER_IMELDA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_HandleProgress_Dialogue{
+    msgbox(gText_Restoreespuleeoutskirts_Excellent,,SPEAKER_IMELDA)
+
+    specialvar(VAR_RESULT,Quest_Restoreespuleeoutskirts_CheckRemainingSubquests)
+
+        if (var(VAR_RESULT) == 0){
+            goto(Quest_Restoreespuleeoutskirts_Reward_Dialogue)
+        }else{
+            goto(Quest_Restoreespuleeoutskirts_Active_Script)
+        }
+}
+
+script Quest_Restoreespuleeoutskirts_Cancel_Dialogue{
+        msgbox(gText_Restoreespuleeoutskirts_ComeBack,,SPEAKER_IMELDA)
+        closemessage
+release
+end
+}
+
+script Quest_Restoreespuleeoutskirts_Reward_Dialogue{
+    if (var(VAR_QUEST_RESTOREESPULEEGYM) == SAVE_BEFORE_IMELDA_BATTLE){
+        goto(Quest_Restoreespuleeoutskirts_StartBattle_Script)
+    }
+
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_RESTOREESPULEEGYM)
+    setvar(VAR_QUEST_RESTOREESPULEEGYM,SAVE_BEFORE_IMELDA_BATTLE)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_IAskedA,,SPEAKER_IMELDA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_IAbsolutely,,SPEAKER_ALICIA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_HellIKindaWanna,,SPEAKER_IMELDA)
+
+
+        startmenu_savescreen
+
+        goto(Quest_Restoreespuleeoutskirts_StartBattle_Script)
+}
+
+script Quest_Restoreespuleeoutskirts_StartBattle_Script{
+    lock
+        msgbox(gText_Quest_Restoreespuleeoutskirts_OkayChampion,,SPEAKER_IMELDA)
+        trainerbattle_no_intro(TRAINER_IMELDA,gText_Quest_Restoreespuleeoutskirts_YoureTougherThan)
+        closemessage
+
+        goto(Quest_Restoreespuleeoutskirts_PostBattle_Dialogue)
+}
+
+script Quest_Restoreespuleeoutskirts_PostBattle_Dialogue{
+    lock
+        setvar(VAR_QUEST_RESTOREESPULEEGYM,DEFEATED_IMELDA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_ManIfTrainersSeeYou,,SPEAKER_IMELDA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_IThinkYoureGiving,,SPEAKER_ALICIA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_AndICantWait,,SPEAKER_IMELDA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_IsThatYourGoal,,SPEAKER_ALICIA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_YeahThingsWere,,SPEAKER_IMELDA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_YouCantGoBack,,SPEAKER_ALICIA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_YouDontGet,,SPEAKER_IMELDA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_IWasntHere,,SPEAKER_ALICIA)
+
+        msgbox(gText_Quest_Restoreespuleeoutskirts_YourHeartFeels,,SPEAKER_IMELDA)
+
+        closemessage
+
+        opendoor(12,17)
+        waitdooranim
+        applymovement(IMELDA_ESPULEE_OUTSKIRTS,Common_Movement_WalkUp)
+        waitmovement(IMELDA_ESPULEE_OUTSKIRTS)
+        removeobject(IMELDA_ESPULEE_OUTSKIRTS)
+        playse(SE_EXIT)
+        waitse
+        closedoor(12,17)
+        waitdooranim
+
+        completequest(QUEST_RESTOREESPULEEGYM)
+        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        release
+        end
+}
+
+text gText_Restoreespuleeoutskirts_YourePlayer{
+    format("You're {PLAYER} - Kai mentioned you'd be coming.")
+}
+
+text gText_Restoreespuleeoutskirts_YeahImHelping{
+    format("Yeah, I'm helping them get their project off the ground.")
+}
+text gText_Restoreespuleeoutskirts_AreYouHelping{
+    format("I meant what I said to Kai. I'll help get this off the ground, but we still need to figure out the next steps to taking down the whole League.")
+}
+text gText_Restoreespuleeoutskirts_IHearThat{
+    format("Kai and I want to focus on doing the most good for Trainers in the region now.")
+}
+text gText_Restoreespuleeoutskirts_TheBestWay{
+    format("I'm not interested in bandaid fixes. This new League is hurting people now, right?")
+}
+text gText_Restoreespuleeoutskirts_RightBut{
+    format("If you really believe that there's harm being done, then wouldn't you want start the healing as soon as possible? Kai has a plan right now, that we think that's going to help Trainers in the region today. We're going to make it happen, but it would mean so much to get you onboard.")
+}
+text gText_Restoreespuleeoutskirts_HmmI{
+    format("Hmm. That kid does seem driven. Let's see what I can do.")
+}
+text gText_Restoreespuleeoutskirts_IHave{
+    format("I want to help Trainers learn to adapt. When everything that Trainers trust are stripped away, how can they make the best of the hand they've been dealt?")
+}
+text gText_Restoreespuleeoutskirts_LikeTrainer{
+    format("Like the Trainers of Resido?")
+}
+text gText_Restoreespuleeoutskirts_OhIDidnt{
+    format("Oh! I didn't think of it like that. You're right.")
+}
+text gText_Restoreespuleeoutskirts_TheresABattle{
+    format("There's a Battle Facility in Hoenn and Sinnoh that has a similar concept. A trainer's Pokémon is taken away from them, and they are forced to use rental Pokémon. How hard would that be for us to do...?")
+}
+text gText_Restoreespuleeoutskirts_CanYouBring{
+    format("Can you bring me two Pokémon? ")
+}
+text gText_Restoreespuleeoutskirts_IFIWant{
+    format("If I want to start my own Battle Factory, we'll need to streamline to teaching moves to Pokémon.")
+}
+text gText_Restoreespuleeoutskirts_DidYouFind{
+    format("Did you find the Pokémon I mentioned?")
+}
+
+text gText_Restoreespuleeoutskirts_WeNeed_A{
+    format("We need a {STR_VAR_1} that knows {STR_VAR_2},")
+}
+text gText_Restoreespuleeoutskirts_WeNeed_B{
+    format("and a {STR_VAR_1} that knows {STR_VAR_2}.")
+}
+text gText_Restoreespuleeoutskirts_ComeBack{
+    format("Come back when you've caught one.")
+}
+text gText_Restoreespuleeoutskirts_WeNeed{
+    format("We still need a {STR_VAR_1} that knows {STR_VAR_2}, but we're close!")
+}
+text gText_Restoreespuleeoutskirts_Excellent{
+    format("Excellent! This is perfect.")
+}
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_IAskedA{
+    format("I asked a few others Trainer for similar things. I think after a few tests, we might have something going here! You should stop by and help us test it out.")
+}
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_IAbsolutely{
+    format("I absolutely will!")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_HellIKindaWanna{
+    format("Hell, I kinda wanna see it for myself right now. Are you really all that?")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_OkayChampion{
+    format("Okay Champion, bring it on!")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_YoureTougherThan{
+    format("You're tougher than expected!")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_ManIfTrainersSeeYou{
+    format("Man, if Trainers see you backing this and people already know how strong you are... we've got a shot at real legitimacy.")
+}
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_IThinkYoureGiving{
+    format("I think you're giving me too much credit! Believe it or not, SharpriseCapital's Kickstart problem was a huge part of the reason I was able to hone my skills this much.")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_AndICantWait{
+    format("And I can't wait to turn that power against those assholes. They're gonna collapse under their own weight, and then we can reinstate all the old gyms and go back to when times were good and I was running this joint!")
+}
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_IsThatYourGoal{
+    format("Is that your goal? Just go to back to the past?")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_YeahThingsWere{
+    format("Yeah! Things were so much better before.")
+}
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_YouCantGoBack{
+    format("Imelda, you can't go back to the past. You've gotta stick to the reality we've got right now. I think what you're going to do here is going to make a real difference for Trainers, and that's awesome. But if you want the Trainers of the region to be the best they can be, I think we need to figure out a path forward... in the present. That's what Kai and I want to do.")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_YouDontGet{
+    format("You don't get it, {PLAYER}, you weren't here for before.")
+}
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_IWasntHere{
+    format("I wasn't here, but I'm here now. And while I'm new, I'm really starting to love it here and I want to help Trainers, and help people, just like you do. And we can do that, moving forward.")
+}
+
+
+
+
+text gText_Quest_Restoreespuleeoutskirts_YourHeartFeels{
+    format("Your heart feels like its in the right place. I gotta get back to work. Let's at least get this test off the ground.")
+}
+
+text gText_Restoreespuleeoutskirts_WeNeedSomePretty{
+    format("We need some pretty specific Pokémon if I'm going to get this off the ground. What do you have?")
+}
+
+text gText_Restoreespuleeoutskirts_AreYouSure{
+    format("You sure I can have this {STR_VAR_1}? I'm gonna keep it forever.")
+}
+
+text gText_Restoreespuleeoutskirts_IsntThatYour{
+    format("Isn't that your last Pokémon...?")
+}

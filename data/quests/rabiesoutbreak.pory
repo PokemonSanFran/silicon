@@ -1,0 +1,60 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CAMERA = OBJ_EVENT_ID_CAMERA
+
+//PSF TODO Create script so that Glameow captured here have a much higher chance of PokéRus
+
+script RabiesOutbreak_Officer_Event_Script{
+    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_RABIESOUTBREAK)
+    if (var(VAR_RESULT))
+    {
+        goto(RabiesOutbreak_Reward_Dialogue)
+    }
+
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RABIESOUTBREAK)
+    if (var(VAR_RESULT))
+    {
+        goto(RabiesOutbreak_CompleteQuest_Dialogue)
+
+    }
+
+    msgbox(gText_RabiesOutbreak_ThisOutbreak, MSGBOX_NPC,SPEAKER_DEFAULT)
+    end
+}
+
+script RabiesOutbreak_Reward_Dialogue{
+    msgbox(gText_RabiesOutbreak_INoticed,MSGBOX_NPC,SPEAKER_DEFAULT)
+
+    msgbox(gText_RabiesOutbreak_ImHelping,MSGBOX_NPC,SPEAKER_ALICIA)
+
+    msgbox(gText_RabiesOutbreak_Rabies,MSGBOX_NPC,SPEAKER_DEFAULT)
+    closemessage
+
+    call(RabiesOutbreak_GiveReward_Script)
+    completequest(QUEST_RABIESOUTBREAK)
+    end
+}
+
+script RabiesOutbreak_GiveReward_Script{
+    giveitem(ITEM_LUXURY_BALL,10)
+}
+
+script RabiesOutbreak_CompleteQuest_Dialogue{
+    msgbox(gText_RabiesOutbreak_CrazyWhatYou,MSGBOX_NPC,SPEAKER_DEFAULT)
+    end
+}
+
+text gText_RabiesOutbreak_ThisOutbreak{
+	format("This outbreak is like nothing I've seen before!")
+}
+text gText_RabiesOutbreak_INoticed{
+	format("I noticed you were engaging a lot of Glameow. What are you up to?")
+}
+text gText_RabiesOutbreak_ImHelping{
+	format("I'm helping with the rabies outbreak! I saw online you were rewarding Trainers that can help bring the numbers down.")
+}
+text gText_RabiesOutbreak_Rabies{
+	format("Rabies? I don't know where you saw that, but there's no rabies outbreak. Oddly enough, the Glameow here all seem to be spreading Pokérus at alarmingly high rates. But you came all the way out here to help... I might have something for you. Hold on.")
+}
+text gText_RabiesOutbreak_CrazyWhatYou{
+	format("Crazy what you can read online... rabies? Can Pokémon even get rabies?")
+}
