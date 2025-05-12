@@ -50,6 +50,8 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "constants/pokemon.h"
+#include "options_battle.h" // Battle Settings: Experience
+#include "ui_options_menu.h" // siliconMerge
 
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
@@ -382,6 +384,15 @@ void HandleAction_UseMove(void)
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
     }
 
+    // Start siliconMerge
+	// PSF Move Healing
+    if (!IsPlayerAllowedToUseHealingMoves(gBattlerAttacker, gCurrentMove))
+    {
+        gBattlescriptCurrInstr = BattleScript_FailedFromAtkString;
+        gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+        return;
+    }
+    // End siliconMerge	
     if (IsBattlerAlive(gBattlerAttacker))
     {
         if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -3172,6 +3183,37 @@ void SetAtkCancellerForCalledMove(void)
     gBattleStruct->isAtkCancelerForCalledMove = TRUE;
 }
 
+// Start fogBattle
+static void CancellerFog(u32 *effect)
+{
+    if (!IsFogBattle())
+        return;
+
+    gBattleScripting.battler = gBattlerAttacker;
+    CancelMultiTurnMoves(gBattlerAttacker);
+
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+    {
+        gBattlescriptCurrInstr = BattleScript_FogIsTooDense;
+    }
+    else
+    {
+            gBattlerTarget = GetOppositeBattler(gBattlerAttacker);
+            struct DamageCalculationData damageCalcData;
+            damageCalcData.battlerAtk = gBattlerAttacker;
+            damageCalcData.move = MOVE_NONE;
+            damageCalcData.moveType = TYPE_MYSTERY;
+            damageCalcData.isCrit = FALSE;
+            damageCalcData.randomFactor = FALSE;
+            damageCalcData.updateFlags = TRUE;
+            gBattleStruct->moveDamage[gBattlerTarget] = CalculateMoveDamage(&damageCalcData, 100);
+        gBattlescriptCurrInstr = BattleScript_EmboldenedAttackedFromFog;
+    }
+
+    gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+    *effect = 1;
+}
+// End fogBattle
 static void CancellerFlags(u32 *effect)
 {
     gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_DESTINY_BOND;
@@ -3827,6 +3869,7 @@ static void CancellerMultiTargetMoves(u32 *effect)
 static const MoveSuccessOrderCancellers sMoveSuccessOrderCancellers[] =
 {
     [CANCELLER_FLAGS] = CancellerFlags,
+    [CANCELLER_FOG] = CancellerFog, // fogBattle
     [CANCELLER_STANCE_CHANGE_1] = CancellerStanceChangeOne,
     [CANCELLER_SKY_DROP] = CancellerSkyDrop,
     [CANCELLER_RECHARGE] = CancellerRecharge,
@@ -4669,6 +4712,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         }
         else if (B_OVERWORLD_FOG >= GEN_8
               && (GetCurrentWeather() == WEATHER_FOG_HORIZONTAL || GetCurrentWeather() == WEATHER_FOG_DIAGONAL)
+              && !IsFogBattle() // fogBattle
               && !(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
         {
             gFieldStatuses = STATUS_FIELD_MISTY_TERRAIN;
@@ -4728,7 +4772,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 break;
             case WEATHER_FOG_DIAGONAL:
             case WEATHER_FOG_HORIZONTAL:
-                if (B_OVERWORLD_FOG == GEN_4)
+                // Start fogBattle
+                //if (B_OVERWORLD_FOG == GEN_4)
+                if (B_OVERWORLD_FOG == GEN_4 || IsFogBattle())
+                // End fogBattle
                 {
                     if (!(gBattleWeather & B_WEATHER_FOG))
                     {
@@ -7687,6 +7734,8 @@ u32 ItemBattleEffects(enum ItemCaseId caseID, u32 battler, bool32 moveTurn)
     atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
     atkHoldEffectParam = GetBattlerHoldEffectParam(gBattlerAttacker);
 
+    if (!IsPlayerAllowedToUseHealingItems(gLastUsedItem, FALSE, FALSE, TRUE)) // siliconMerge
+        return effect; // siliconMerge
     switch (caseID)
     {
     case ITEMEFFECT_NONE:
@@ -11883,6 +11932,7 @@ bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct Addi
 
 bool32 IsGen6ExpShareEnabled(void)
 {
+    return IsExperienceOptionNotActive(); // Battle Settings: Experience
     if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
         return FALSE;
 

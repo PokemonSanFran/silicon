@@ -74,6 +74,13 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "cable_club.h"
+// Start siliconMerge
+#include "quests.h"
+#include "quest_logic.h"
+#include "options_battle.h"
+#include "dexnav.h"
+// End siliconMerge
+#include "ui_pokedex.h" // pokedex
 
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
@@ -233,7 +240,11 @@ EWRAM_DATA u16 gLastThrownBall = 0;
 EWRAM_DATA u16 gBallToDisplay = 0;
 EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
-EWRAM_DATA static u8 sTriedEvolving = 0;
+// Start midBattleEvolution
+//EWRAM_DATA static u8 sTriedEvolving = 0;
+EWRAM_DATA u8 gTriedEvolving = 0;
+EWRAM_DATA bool8 gMidBattleEvo = FALSE;
+// End midBattleEvolution
 EWRAM_DATA u8 gCategoryIconSpriteId = 0;
 
 COMMON_DATA void (*gPreBattleCallback1)(void) = NULL;
@@ -325,8 +336,10 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_BUG_MANIAC] = { _("BUG MANIAC"), 15 },
     [TRAINER_CLASS_PSYCHIC] = { _("PSYCHIC"), 6 },
     [TRAINER_CLASS_GENTLEMAN] = { _("GENTLEMAN"), 20, BALL_LUXURY },
-    [TRAINER_CLASS_ELITE_FOUR] = { _("ELITE FOUR"), 25, BALL_ULTRA },
-    [TRAINER_CLASS_LEADER] = { _("LEADER"), 25 },
+    // Start silicon
+    //[TRAINER_CLASS_ELITE_FOUR] = { _("ELITE FOUR"), 25, BALL_ULTRA },
+    // [TRAINER_CLASS_LEADER] = { _("LEADER"), 25 },
+    // End silicon
     [TRAINER_CLASS_SCHOOL_KID] = { _("SCHOOL KID") },
     [TRAINER_CLASS_SR_AND_JR] = { _("SR. AND JR."), 4 },
     [TRAINER_CLASS_WINSTRATE] = { _("WINSTRATE"), 10 },
@@ -360,6 +373,15 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_PIKE_QUEEN] = { _("PIKE QUEEN") },
     [TRAINER_CLASS_PYRAMID_KING] = { _("PYRAMID KING") },
     [TRAINER_CLASS_RS_PROTAG] = { _("{PKMN} TRAINER") },
+    // start Silicon
+    [TRAINER_CLASS_COMRADE] = { _("Comrade") },
+    [TRAINER_CLASS_THE_TIDE_LEADER] = { _("The Tide Leader") },
+    [TRAINER_CLASS_LEADER] = { _("Gym Leader") },
+    [TRAINER_CLASS_EX_LEADER] = { _("Ex-Gym Leader") },
+    [TRAINER_CLASS_SHARPRISE_COO] = { _("SharpRise Chief Operating Officer") },
+    [TRAINER_CLASS_ELITE_FOUR] = { _("Elite Four") },
+    [TRAINER_CLASS_EX_ELITE_FOUR] = { _("Ex-Elite Four") },
+    // End Silicon
 };
 
 static void (* const sTurnActionsFuncsTable[])(void) =
@@ -1719,6 +1741,22 @@ static void CB2_HandleStartMultiBattle(void)
     }
 }
 
+// start merrp battle debug
+void Debug_EndBattleInstantly(void)
+{
+#ifndef NDEBUG
+    if (!JOY_HELD(B_BUTTON))
+        return;
+
+    if (JOY_HELD(DPAD_UP))
+        gSpecialVar_Result = gBattleOutcome = B_OUTCOME_WON;
+    else if (JOY_HELD(DPAD_DOWN))
+        gSpecialVar_Result = gBattleOutcome = B_OUTCOME_LOST;
+#endif
+    return;
+}
+// end merrp battle debug
+
 void BattleMainCB2(void)
 {
     AnimateSprites();
@@ -1735,6 +1773,7 @@ void BattleMainCB2(void)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         SetMainCallback2(CB2_QuitRecordedBattle);
     }
+    Debug_EndBattleInstantly(); // merrp battle debug
 }
 
 static void FreeRestoreBattleData(void)
@@ -2959,7 +2998,10 @@ static void ClearSetBScriptingStruct(void)
     memset(&gBattleScripting, 0, sizeof(gBattleScripting));
 
     gBattleScripting.windowsType = temp;
-    gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
+	// Start siliconMerge
+    //gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
+    gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE];
+	// End siliconMerge
     gBattleScripting.expOnCatch = (B_EXP_CATCH >= GEN_6);
     gBattleScripting.specialTrainerBattleType = specialBattleType;
 }
@@ -3019,7 +3061,10 @@ static void BattleStartClearSetData(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
     {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattleSceneOff == TRUE)
+		// Start siliconMerge
+		// if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattleSceneOff == TRUE)
+		if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS] == TRUE)
+		// End siliconMerge		
             gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
     else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) && GetBattleSceneInRecordedBattle())
@@ -3071,6 +3116,8 @@ static void BattleStartClearSetData(void)
         gBattleStruct->itemLost[B_SIDE_PLAYER][i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         gBattleStruct->itemLost[B_SIDE_OPPONENT][i].originalItem = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
         gPartyCriticalHits[i] = 0;
+        gBattleStruct->battlersItemIds[i][B_SIDE_PLAYER] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
+        gBattleStruct->battlersItemIds[i][B_SIDE_OPPONENT] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
     }
 
     gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
@@ -3687,6 +3734,7 @@ static void DoBattleIntro(void)
     case BATTLE_INTRO_STATE_SET_DEX_AND_BATTLE_VARS:
         if (!gBattleControllerExecFlags)
         {
+            Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(); // siliconMerge
             for (battler = 0; battler < gBattlersCount; battler++)
             {
                 if (GetBattlerSide(battler) == B_SIDE_OPPONENT
@@ -3694,9 +3742,11 @@ static void DoBattleIntro(void)
                                           | BATTLE_TYPE_FRONTIER
                                           | BATTLE_TYPE_LINK
                                           | BATTLE_TYPE_RECORDED_LINK
+                                          | BATTLE_TYPE_FOG // fogBattle
                                           | BATTLE_TYPE_TRAINER_HILL)))
                 {
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
+                    SpeciesData_SetSavedLastForm(gBattleMons[battler].species); // pokedex
                 }
             }
 
@@ -4284,10 +4334,16 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if (FlagGet(B_FLAG_NO_BAG_USE))
+                    // Start fogBattle
+                    //if (FlagGet(B_FLAG_NO_BAG_USE))
+                    if (FlagGet(B_FLAG_NO_BAG_USE) || IsFogBattle())
+                    // End fogBattle
                     {
                         RecordedBattle_ClearBattlerAction(battler, 1);
-                        gSelectionBattleScripts[battler] = BattleScript_ActionSelectionItemsCantBeUsed;
+                    // Start fogBattle
+                    //gSelectionBattleScripts[battler] = BattleScript_ActionSelectionItemsCantBeUsed;
+                    gSelectionBattleScripts[battler] = ReturnBattleScriptCantUseItem();
+                    // End fogBattle
                         gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
                         gBattleStruct->selectionScriptFinished[battler] = FALSE;
                         gBattleStruct->stateIdAfterSelScript[battler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -5374,6 +5430,10 @@ static void RunTurnActionsFunctions(void)
 
     if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
+// Start siliconMerge
+        if (QuestMenu_GetSetQuestState(QUEST_CHALLENGEOFTHE7SISTERS, FLAG_GET_ACTIVE) && !FlagGet(FLAG_TEMP_1))
+            VarSet(VAR_QUEST_CHALLENGEOFTHE7SISTERS_CURRENT_RECORD, VarGet(VAR_QUEST_CHALLENGEOFTHE7SISTERS_CURRENT_RECORD) + 1);
+// End siliconMerge
         gHitMarker &= ~HITMARKER_PASSIVE_DAMAGE;
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }
@@ -5414,6 +5474,7 @@ static void HandleEndTurn_BattleWon(void)
     {
         BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
+        Quest_RPS_StopMoneyLoss(); // siliconMerge
 
         switch (GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA))
         {
@@ -5439,6 +5500,11 @@ static void HandleEndTurn_BattleWon(void)
     }
     else
     {
+        CountDefeatedBackyard(); // siliconMerge
+        CountDefeatedCresaltaVista(); // siliconMerge
+        Quest_Wildfirerisk_CheckDefeatedMon(); // siliconMerge
+        CountDefeatedGlameow(); // siliconMerge
+        CountDefeatedGardenMons(); // siliconMerge
         gBattlescriptCurrInstr = BattleScript_PayDayMoneyAndPickUpItems;
     }
 
@@ -5475,10 +5541,155 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
+        Quest_RPS_StopMoneyLoss(); // siliconMerge
         gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
     }
-
+    SetFogVariableAfterLoss(); // fogBattle
     gBattleMainFunc = HandleEndTurn_FinishBattle;
+// Start siliconMerge
+//used for Quest_GardenCleanUp
+// if defeated a mon on Route1 while quest is astive, increment by 1
+// if quest is active AND defeated more than 47, mark quest as reward
+void CountDefeatedGardenMons(void){
+    u8 defeatedGardenMonCount = VarGet(VAR_DEFEATED_GARDEN_POKEMON);
+
+    if (GetCurrentMap() == MAP_ROUTE1)
+        defeatedGardenMonCount += 1;
+
+    if ((defeatedGardenMonCount > 47) && QuestMenu_GetSetQuestState(QUEST_GARDENCLEANUP,FLAG_GET_ACTIVE)){
+        QuestMenu_GetSetQuestState(QUEST_GARDENCLEANUP,FLAG_SET_REWARD);
+        QuestMenu_GetSetQuestState(QUEST_GARDENCLEANUP,FLAG_REMOVE_ACTIVE);
+    }
+
+    VarSet(VAR_DEFEATED_GARDEN_POKEMON,defeatedGardenMonCount);
+}
+
+void CountDefeatedGlameow(void){
+    /*
+    Iterate every spot in the enemy's party
+    If one is Glameow AND you're in GlavezHill AND its not a Trainer battle, then increment the defeated Glameow count by one
+   If the Glameow count is > 9, AND the Rabies Outbreak quest is active  change the Rabies Outbreak quest to Reward state
+*/
+    u8 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT), i = 0;
+
+    for (i = 0;i < 6;i++)
+    {
+        s32 enemySpecies = GetMonData(&gEnemyParty[i],MON_DATA_SPECIES);
+
+        if (GetCurrentMap() == MAP_GLAVEZ_HILL && (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) && (enemySpecies == SPECIES_GLAMEOW)){
+            defeatedGlameowCount++;
+        }
+    }
+
+    if ((defeatedGlameowCount > 9) && QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_GET_ACTIVE)){
+        QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_SET_REWARD);
+        QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_REMOVE_ACTIVE);
+    }
+
+    VarSet(VAR_DEFEATED_GLAMEOW_COUNT,defeatedGlameowCount);
+}
+
+void CountDefeatedCresaltaVista(void){
+    /*
+    If you're in CresaltaVista AND its not a Trainer battle, then increment the defeated count by one
+    If Hang 20 quest is active AND the count is more than 29, then go to the reward state
+*/
+    u8 defeatedCresaltaVistaCount = VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT);
+
+    if (GetCurrentMap() == MAP_CRESALTA_VISTA && (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))){
+        defeatedCresaltaVistaCount++;
+    }
+
+    if ((defeatedCresaltaVistaCount > 29) && QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_ACTIVE)){
+        QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_SET_REWARD);
+        QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_REMOVE_ACTIVE);
+    }
+
+    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,defeatedCresaltaVistaCount);
+}
+
+void CountDefeatedBackyard(void){
+    u8 defeatedBackyardCount = VarGet(VAR_DEFEATED_BACKYARD_COUNT), i = 0;
+
+    for (i = 0;i < 6;i++)
+    {
+        s32 enemySpecies = GetMonData(&gEnemyParty[i],MON_DATA_SPECIES);
+
+        //PSF TODO The following line currently checks if the map is correct AND its not a trainer battle, but it needs to also check if the enemy type (either of them) is flying type
+        if ((GetCurrentMap() == MAP_ROUTE18 || GetCurrentMap() == MAP_ROUTE20) && (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) && (enemySpecies)){
+            defeatedBackyardCount++;
+        }
+    }
+
+    //PSF TODO the second half of the quest related "count" quests need to all be split into two seperate functions, one for the battle increments and one for the actual counts
+    //for example, this should be something like CheckBackyardQuestState(defeatedBackyardCount) and should live in a new file like quests_psf.c
+    if ((defeatedBackyardCount > 26) && QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_GET_ACTIVE)){
+        QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_SET_REWARD);
+        QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_REMOVE_ACTIVE);
+    }
+
+    VarSet(VAR_DEFEATED_BACKYARD_COUNT,defeatedBackyardCount);
+}
+
+u8 Quest_Wildfirerisk_GetPercentage(void)
+{
+    u16 defeatedFireCount = VarGet(VAR_QUEST_WILDFIRERISK_FIRE_COUNT);
+    u16 defeatedElectricCount = VarGet(VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT);
+    u16 defeatedFlyingCount = VarGet(VAR_QUEST_WILDFIRERISK_FLYING_COUNT);
+    u16 defeatedTotal = (defeatedFireCount + defeatedElectricCount + defeatedFlyingCount);
+
+    return (defeatedTotal * 100)/300;
+}
+
+u8 Quest_Wildfirerisk_CheckDefeatedMon(void)
+{
+    u8 i = 0;
+    u8 defeatedFireCount = VarGet(VAR_QUEST_WILDFIRERISK_FIRE_COUNT);
+    u8 defeatedElectricCount = VarGet(VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT);
+    u8 defeatedFlyingCount = VarGet(VAR_QUEST_WILDFIRERISK_FLYING_COUNT);
+
+    for (i = 0;i < 6;i++)
+    {
+        if((gSpeciesInfo[GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)].types[0] == TYPE_FIRE) || (gSpeciesInfo[GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)].types[1] == TYPE_FIRE)){
+            defeatedFireCount++;
+
+            if (defeatedFireCount >= 100){
+                defeatedFireCount = 100;
+                QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            }
+            VarSet(VAR_QUEST_WILDFIRERISK_FIRE_COUNT,defeatedFireCount);
+        }
+
+        if (gSpeciesInfo[GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)].types[0] == TYPE_ELECTRIC || gSpeciesInfo[GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)].types[1] == TYPE_ELECTRIC){
+
+            defeatedElectricCount++;
+
+            if (defeatedElectricCount >= 100){
+                defeatedElectricCount = 100;
+                QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            }
+            VarSet(VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT,defeatedElectricCount);
+        }
+
+        if (gSpeciesInfo[GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)].types[0] == TYPE_FLYING || gSpeciesInfo[GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)].types[1] == TYPE_FLYING){
+
+            defeatedFlyingCount++;
+
+            if (defeatedFlyingCount >= 100){
+                defeatedFlyingCount = 100;
+                QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            }
+            VarSet(VAR_QUEST_WILDFIRERISK_FLYING_COUNT,defeatedFlyingCount);
+        }
+    }
+
+    if (QuestMenu_GetSetQuestState(QUEST_WILDFIRERISK, FLAG_GET_ACTIVE))
+    {
+        if (QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_GET_COMPLETED,SUB_QUEST_1) && QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_GET_COMPLETED,SUB_QUEST_2) && QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_GET_COMPLETED,SUB_QUEST_3))
+            QuestMenu_GetSetQuestState(QUEST_WILDFIRERISK,FLAG_SET_REWARD);
+    }
+    return 1;
+// End siliconMerge
 }
 
 static void HandleEndTurn_RanFromBattle(void)
@@ -5604,6 +5815,10 @@ static void HandleEndTurn_FinishBattle(void)
             // Recalculate the stats of every party member before the end
             if (!changedForm && B_RECALCULATE_STATS >= GEN_5)
                 CalculateMonStats(&gPlayerParty[i]);
+            // Start siliconMerge
+			PerformPlayerFaintedMonOperations(&gPlayerParty[i]);
+            gBattleStruct->playerBattleItemCount = 0;
+			// End siliconMerge
         }
         // Clear battle mon species to avoid a bug on the next battle that causes
         // healthboxes loading incorrectly due to it trying to create a Mega Indicator
@@ -5612,6 +5827,7 @@ static void HandleEndTurn_FinishBattle(void)
         {
             gBattleMons[i].species = SPECIES_NONE;
         }
+        TryToSetFirstPokemonCatchFlag(); // siliconMerge
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;
     }
@@ -5626,6 +5842,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
+        UpdateChainFishingStreak(); // fishingUpdate
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         if (gDexNavSpecies && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
@@ -5680,11 +5897,17 @@ static void TryEvolvePokemon(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (!(sTriedEvolving & (1u << i)))
+// Start midBattleEvolution
+        //if (!(sTriedEvolving & (1u << i)))
+        if (!(gTriedEvolving & (1u << i)))
+// End midBattleEvolution
         {
             u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i, NULL);
             bool32 evoModeNormal = TRUE;
-            sTriedEvolving |= 1u << i;
+// Start midBattleEvolution
+            //sTriedEvolving |= 1u << i;
+            gTriedEvolving |= 1u << i;
+// End midBattleEvolution
 
             if (species == SPECIES_NONE && (gLeveledUpInBattle & (1u << i)))
             {
@@ -5707,7 +5930,10 @@ static void TryEvolvePokemon(void)
             }
         }
     }
-    sTriedEvolving = 0;
+// Start midBattleEvolution
+    //sTriedEvolving = 0;
+    gTriedEvolving = 0;
+// End midBattleEvolution
     gLeveledUpInBattle = 0;
     gBattleMainFunc = ReturnFromBattleToOverworld;
 }

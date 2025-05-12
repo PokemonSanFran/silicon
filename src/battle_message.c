@@ -35,6 +35,7 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "silicon_shine.h" // siliconMerge
 
 struct BattleWindowText
 {
@@ -135,6 +136,7 @@ static const u8 sText_SpAttack[] = _("Sp. Atk");
 static const u8 sText_SpDefense[] = _("Sp. Def");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
+static const u8 sText_AttackedFromFog[] = _("A wild Pokémon attacked from the fog, but its impossible to identify!\p"); // battleFog
 
 const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
 {
@@ -168,6 +170,27 @@ static const u8 sText_TwoInGameTrainersDefeated[] = _("You defeated {B_TRAINER1_
 const u8 gText_drastically[] = _("drastically ");
 const u8 gText_severely[] = _("severely ");
 static const u8 sText_TerrainReturnedToNormal[] = _("The terrain returned to normal!"); // Unused
+//Battle Settings: Points Message
+static const u8 sText_PkmnGainedPoints[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points and {B_BUFF3} Effort Values!\p");
+static const u8 sText_PkmnGainedEVs[] = _("{B_BUFF1} gained{B_BUFF3}\nEffort Values!\p");
+
+//Battle Settings: Points Summary
+static const u8 sText_AllGainedPoints[] = _("The Pokémon in your party and storage\ngained experience and effort values!\p");
+static const u8 sText_PartyGainedPoints[] = _("The Pokémon in your party\ngained experience and effort values!\p");
+static const u8 sText_StorageGainedPoints[] = _("The Pokémon in your storage\ngained experience and effort values!\p");
+static const u8 sText_AllGainedExp[] = _("The Pokémon in your party and storage\ngained experience!\p");
+static const u8 sText_PartyGainedExp[] = _("The Pokémon in your party\ngained experience!\p");
+static const u8 sText_StorageGainedExp[] = _("The Pokémon in your storage\ngained experience!\p");
+static const u8 sText_AllGainedEVs[] = _("The Pokémon in your party and storage\ngained effort values!\p");
+static const u8 sText_PartyGainedEVs[] = _("The Pokémon in your party\ngained effort values!\p");
+static const u8 sText_StorageGainedEVs[] = _("The Pokémon in your storage\ngained effort values!\p");
+
+//Battle Settings: Take Wild Items
+static const u8 sText_TakeWildItems[] = _("The opposing {B_DEF_NAME_WITH_PREFIX} was\ncarrying an item.\pDo you want to take it?");
+static const u8 sText_ObtainedItem[] = _("Obtained {B_BUFF1}!\p");
+
+// Native Give Items
+static const u8 sText_PlayerReceivedItem[] = _("{B_PLAYER_NAME} got {B_BUFF1}\nfrom {B_TRAINER1_NAME}!\p");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -888,12 +911,29 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ELECTRICCURRENTISRUNNING]             = COMPOUND_STRING("An electric current is running across the battlefield!"),
     [STRINGID_SEEMSWEIRD]                           = COMPOUND_STRING("The battlefield seems weird!"),
     [STRINGID_WAGGLINGAFINGER]                      = COMPOUND_STRING("Waggling a finger let it use {B_CURRENT_MOVE}!"),
+    [STRINGID_TAKEWILDMONITEM]                      = COMPOUND_STRING("The opposing {B_DEF_NAME_WITH_PREFIX} was\ncarrying an item.\pDo you want to take it?"), // Battle Settings: Take Wild Items
+    [STRINGID_OBTAINEDITEM]                         = COMPOUND_STRING("Obtained {B_BUFF1}!\p"), // Battle Settings: Take Wild Items
+    [STRINGID_PLAYERRECEIVEDNATIVEITEM]             = COMPOUND_STRING("{B_PLAYER_NAME} got {B_BUFF1}\nfrom {B_TRAINER1_NAME}!\p"), // Native Give Item
     [STRINGID_BLOCKEDBYSLEEPCLAUSE]                 = COMPOUND_STRING("Sleep Clause kept {B_DEF_NAME_WITH_PREFIX2} awake!"),
     [STRINGID_SUPEREFFECTIVETWOFOES]                = COMPOUND_STRING("It's super effective on {B_DEF_NAME_WITH_PREFIX2} and {B_DEF_PARTNER_NAME}!"),
     [STRINGID_NOTVERYEFFECTIVETWOFOES]              = COMPOUND_STRING("It's not very effective on {B_DEF_NAME_WITH_PREFIX2} and {B_DEF_PARTNER_NAME}!"),
     [STRINGID_ITDOESNTAFFECTTWOFOES]                = COMPOUND_STRING("It doesn't affect {B_DEF_NAME_WITH_PREFIX2} and {B_DEF_PARTNER_NAME}…"),
     [STRINGID_SENDCAUGHTMONPARTYORBOX]              = COMPOUND_STRING("Add {B_DEF_NAME} to your party?"),
     [STRINGID_PKMNSENTTOPCAFTERCATCH]               = gText_PkmnSentToPCAfterCatch,
+    [STRINGID_PKMNGAINEDPOINTS]                     = COMPOUND_STRING("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points and {B_BUFF3} Effort Values!\p"), // Points Messages
+    [STRINGID_PKMNGAINEDEVS]                        = COMPOUND_STRING("{B_BUFF1} gained{B_BUFF3}\nEffort Values!\p"), // Points Messages
+    [STRINGID_STORAGEGAINEDPOINTS]                  = COMPOUND_STRING("The Pokémon in your storage\ngained experience and effort values!\p"), // Points Messages
+    [STRINGID_ALLGAINEDEXP]                         = COMPOUND_STRING("The Pokémon in your party and storage\ngained experience!\p"), // Points Messages
+    [STRINGID_PARTYGAINEDEXP]                       = COMPOUND_STRING("The Pokémon in your party\ngained experience!\p"), // Points Messages
+    [STRINGID_STORAGEGAINEDEXP]                     = COMPOUND_STRING("The Pokémon in your storage\ngained experience!\p"), // Points Messages
+    [STRINGID_ALLGAINEDEVS]                         = COMPOUND_STRING("The Pokémon in your party and storage\ngained effort values!\p"), // Points Messages
+    [STRINGID_PARTYGAINEDEVS]                       = COMPOUND_STRING("The Pokémon in your party\ngained effort values!\p"), // Points Messages
+    [STRINGID_STORAGEGAINEDEVS]                     = COMPOUND_STRING("The Pokémon in your storage\ngained effort values!\p"), // Points Messages
+    [STRINGID_PARTYGAINEDPOINTS]                    = COMPOUND_STRING("The Pokémon in your party\ngained experience and effort values!\p"), // Points Messages
+    [STRINGID_ALLGAINEDPOINTS]                      = COMPOUND_STRING("The Pokémon in your party and storage\ngained experience and effort values!\p"), // Points Messages
+    [STRINGID_FOGISTOODENSE]                        = COMPOUND_STRING("The fog is too dense. It's impossible to aim or focus!{PAUSE 64}"), // fogBattle
+    [STRINGID_EMBOLDENEDATTACKEDFROMFOG]            = COMPOUND_STRING("The emboldened Pokémon attacked from the fog!{PAUSE 64}"), // fogBattle
+    [STRINGID_ITEMSCANTBEUSEDNOWFOG]                = COMPOUND_STRING("The fog is too dense. It's impossible to see your items!{PAUSE 64}"), // fogBattle
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -2125,14 +2165,28 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
-                stringPtr = sText_LegendaryPkmnAppeared;
+            // Start fogBattle
+            if (IsFogBattle())
+                stringPtr = sText_AttackedFromFog;
+            else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+            //if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+            // End fogBattle
+                // Start silicon_shine
+                //stringPtr = sText_LegendaryPkmnAppeared;
+                stringPtr = ReturnShinyAppearedText(FALSE,sText_WildPkmnAppeared);
+                // End silicon_shine
             else if (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]]))
-                stringPtr = sText_TwoWildPkmnAppeared;
+                // Start silicon_shine
+                //stringPtr = sText_TwoWildPkmnAppeared;
+                stringPtr = ReturnShinyAppearedText(TRUE,sText_TwoWildPkmnAppeared);
+                // End silicon_shine
             else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
                 stringPtr = sText_WildPkmnAppearedPause;
             else
-                stringPtr = sText_WildPkmnAppeared;
+                // Start silicon_shine
+                //stringPtr = sText_WildPkmnAppeared;
+                stringPtr = ReturnShinyAppearedText(FALSE,sText_WildPkmnAppeared);
+                // End silicon_shine
         }
         break;
     case STRINGID_INTROSENDOUT: // poke first send-out

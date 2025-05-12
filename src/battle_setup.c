@@ -49,7 +49,10 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "rematch.h" // siliconMerge
+#include "glass.h" // siliconMerge
 #include "wild_encounter.h"
+#include "quest_logic.h" // fogBattle
 
 enum {
     TRANSITION_TYPE_NORMAL,
@@ -80,6 +83,7 @@ static void RegisterTrainerInMatchCall(void);
 static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
+static void DoFogBattle(bool32 isDouble); // fogBattle
 
 EWRAM_DATA TrainerBattleParameter gTrainerBattleParameter = {0};
 EWRAM_DATA u16 gPartnerTrainerId = 0;
@@ -306,6 +310,10 @@ void BattleSetup_StartWildBattle(void)
 {
     if (GetSafariZoneFlag())
         DoSafariBattle();
+    // Start fogBattle
+    else if (ShouldWildBattleBeFog())
+        DoFogBattle(FALSE);
+    // End fogBattle
     else
         DoStandardWildBattle(FALSE);
 }
@@ -580,6 +588,7 @@ static void CB2_EndWildBattle(void)
     }
     else
     {
+        IncrementFogVariable(); // fogBattle
         SetMainCallback2(CB2_ReturnToField);
         DowngradeBadPoison();
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
@@ -1250,6 +1259,7 @@ static void HandleBattleVariantEndParty(void)
 
 static void CB2_EndTrainerBattle(void)
 {
+    SetTrainersDiscovered(); // Google Glass
     HandleBattleVariantEndParty();
 
     if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
@@ -1259,7 +1269,8 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        if (InBattlePyramid() || InTrainerHillChallenge() || (!NoAliveMonsForPlayer()))
+		//if (InBattlePyramid() || InTrainerHillChallenge() || (!NoAliveMonsForPlayer())) // siliconMerge
+        if (InBattlePyramid() || InTrainerHillChallenge() || (!NoAliveMonsForPlayer()) || GetTrainerBattleMode() == TRAINER_BATTLE_CONTINUE_AFTER_LOSE) // siliconMerge
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
@@ -1278,6 +1289,7 @@ static void CB2_EndTrainerBattle(void)
 
 static void CB2_EndRematchBattle(void)
 {
+    SetTrainersDiscovered(); // Google Glass
     if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
     {
         DowngradeBadPoison();
@@ -1505,7 +1517,8 @@ s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId)
 
 // Returns TRUE if the given trainer (by their entry in the rematch table) is not allowed to have rematches.
 // This applies to the Elite Four and Victory Road Wally (if he's not been defeated yet)
-static inline bool32 IsRematchForbidden(s32 rematchTableId)
+//static inline bool32 IsRematchForbidden(s32 rematchTableId) // rematch_action
+bool32 IsRematchForbidden(s32 rematchTableId)
 {
     if (rematchTableId >= REMATCH_ELITE_FOUR_ENTRIES)
         return TRUE;
@@ -1515,7 +1528,8 @@ static inline bool32 IsRematchForbidden(s32 rematchTableId)
         return FALSE;
 }
 
-static void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId)
+//static void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId) // rematch_action
+void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId)
 {
 #if FREE_MATCH_CALL == FALSE
     s32 i;
@@ -1534,7 +1548,8 @@ static void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 table
 #endif //FREE_MATCH_CALL
 }
 
-static inline bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
+//static inline bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct RematchTrainer *table, u16 mapGroup, u16 mapNum) // rematch_action
+bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
 {
     return table[i].mapGroup == mapGroup && table[i].mapNum == mapNum;
 }
@@ -1624,7 +1639,8 @@ static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table,
     return TRUE;
 }
 
-static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 trainerId)
+//static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 trainerId) // rematch_action
+bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 trainerId)
 {
     s32 tableId = TrainerIdToRematchTableId(table, trainerId);
 
@@ -1682,7 +1698,8 @@ static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *t
     return trainerEntry->trainerIds[REMATCHES_COUNT - 1]; // already beaten at max stage
 }
 
-static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16 firstBattleTrainerId)
+//static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16 firstBattleTrainerId) // rematch_action
+void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
 #if FREE_MATCH_CALL == FALSE
     s32 tableId = TrainerIdToRematchTableId(table, firstBattleTrainerId);
@@ -1858,3 +1875,22 @@ u16 CountBattledRematchTeams(u16 trainerId)
 
     return i;
 }
+// Start fogBattle
+static void DoFogBattle(bool32 isDouble)
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    StopPlayerAvatar();
+    gMain.savedCallback = CB2_EndWildBattle;
+    gBattleTypeFlags = 0;
+    gBattleTypeFlags |= BATTLE_TYPE_FOG;
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
+    u32 fogMon = SPECIES_FOG_UNKNOWN;
+    SetMonData(&gEnemyParty[0], MON_DATA_SPECIES, &fogMon);
+    SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, GetSpeciesName(fogMon));
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    IncrementDailyWildBattles();
+    TryUpdateGymLeaderRematchFromWild();
+}
+// End fogBattle
