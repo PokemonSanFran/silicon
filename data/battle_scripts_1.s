@@ -14,6 +14,7 @@
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
+#include "constants/options_battle.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
@@ -5565,10 +5566,41 @@ BattleScript_LocalBattleWonLoseTexts::
 BattleScript_LocalBattleWonReward::
 	getmoneyreward
 	printstring STRINGID_PLAYERGOTMONEY
+@ Start siliconMerge	
+	getprizenativeitiem BattleScript_LocalBattleWonNoBerry
+	printstring STRINGID_PLAYERRECEIVEDNATIVEITEM
+BattleScript_LocalBattleWonNoBerry::
+@ End siliconMerge
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_PayDayMoneyAndPickUpItems::
 	givepaydaymoney
 	pickup
+@ Start siliconMerge	
+	jumpiftakewilditemsoptionnotequal BATTLE_SCRIPT_OPTION_TAKE_WILD_ITEMS_NEVER, BattleScript_TryToTakeWildMonItem
+	end2
+
+BattleScript_TryToTakeWildMonItem:
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_TakeWildMonItem_End
+	setbyte gBattlerTarget, 0
+BattleScript_TakeWildMonItem_Loop_Start:
+	jumpifside BS_TARGET, B_SIDE_PLAYER, BattleScript_TakeWildMonItem_Loop_Increment
+	jumpifnoitem BS_TARGET, BattleScript_TakeWildMonItem_Loop_Increment
+	jumpiftakewilditemsoptionequal BATTLE_SCRIPT_OPTION_TAKE_WILD_ITEMS_ALWAYS, BattleScript_TakeWildMonItem_Loop_NoQuestionsAsked
+	printstring STRINGID_TAKEWILDMONITEM
+	setbyte gBattleCommunication, 0
+	yesnobox
+	jumpifbyte CMP_EQUAL, gBattleCommunication + CURSOR_POSITION, 1, BattleScript_TakeWildMonItem_Loop_Increment
+BattleScript_TakeWildMonItem_Loop_NoQuestionsAsked:
+	getitemHeldby BS_TARGET
+	printstring STRINGID_OBTAINEDITEM
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TakeWildMonItem_Loop_Increment:
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TakeWildMonItem_Loop_Start
+BattleScript_TakeWildMonItem_End:
+@ End siliconMerge
 	end2
 
 BattleScript_LocalBattleLost::
@@ -9052,6 +9084,12 @@ BattleScript_ActionSelectionItemsCantBeUsed::
 	printselectionstring STRINGID_ITEMSCANTBEUSEDNOW
 	endselectionscript
 
+// Start midBattleEvolution
+BattleScript_FlushMessageBoxWait::
+    flushtextbox
+    pause 20
+    return
+// End midBattleEvolution
 BattleScript_FlushMessageBox::
 	flushtextbox
 	return
@@ -10108,3 +10146,30 @@ BattleScript_SleepClausePreventsEnd::
 	printstring STRINGID_BLOCKEDBYSLEEPCLAUSE
 	waitmessage B_WAIT_TIME_LONG
 	end2
+@ Start fogBattle
+BattleScript_FogIsTooDense::
+	printstring STRINGID_FOGISTOODENSE
+	waitmessage B_WAIT_TIME_SHORTEST
+	goto BattleScript_MoveEnd
+
+BattleScript_EmboldenedAttackedFromFog::
+	waitmessage B_WAIT_TIME_SHORTEST
+	cancelmultiturnmoves BS_TARGET
+	adjustdamage
+	printstring STRINGID_EMBOLDENEDATTACKEDFROMFOG
+	waitmessage B_WAIT_TIME_LONG
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
+
+BattleScript_ActionSelectionItemsCantBeUsedFog::
+	printselectionstring STRINGID_ITEMSCANTBEUSEDNOWFOG
+	endselectionscript
+@ End fogBattle

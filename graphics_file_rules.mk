@@ -8,6 +8,11 @@ BATINTGFXDIR := graphics/battle_interface
 MASKSGFXDIR := graphics/battle_anims/masks
 BATTRANSGFXDIR := graphics/battle_transitions
 TYPESGFXDIR := graphics/types
+# Start pokedex
+TYPES13x11GFXDIR := graphics/ui_menus/types/13x11
+TYPES13x13GFXDIR := graphics/ui_menus/types/13x13
+TYPES15x14GFXDIR := graphics/ui_menus/types/15x14
+# End pokedex
 RAYQUAZAGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
@@ -392,6 +397,21 @@ $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
                                   $(TYPESGFXDIR)/move_types_3.gbapal
 	@cat $^ >$@
 
+# Start pokedex
+$(TYPESGFXDIR)/types.gbapal: $(TYPESGFXDIR)/types1.gbapal \
+                                  $(TYPESGFXDIR)/types2.gbapal \
+                                  $(TYPESGFXDIR)/types3.gbapal
+	@cat $^ >$@
+
+$(TYPES13x11GFXDIR)/types.4bpp: $(types:%=$(TYPES13x11GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(TYPES13x13GFXDIR)/types.4bpp: $(types:%=$(TYPES13x13GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(TYPES15x14GFXDIR)/types.4bpp: $(types:%=$(TYPES15x14GFXDIR)/%.4bpp)
+	@cat $^ >$@
+# End pokedex
 graphics/bag/menu.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 
