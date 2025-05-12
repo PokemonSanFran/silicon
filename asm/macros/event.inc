@@ -735,6 +735,7 @@
 	.endif
 	.endm
 
+
 	@ Starts a double trainer battle. Takes a trainer, intro text, loss text, text for when you have too few pokemon
 	@ and an optional event script. When used with an event script you can pass in an optional flag to disable music
 	.macro trainerbattle_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req, event_script=FALSE, music=TRUE
@@ -761,6 +762,13 @@
 	.macro trainerbattle_no_intro trainer:req, lose_text:req
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, OBJ_ID_NONE, \trainer, NULL, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.endm
+
+    @ Start siliconMerge
+	@ Continue a script after losing. Skips intro text
+    .macro trainerbattle_continue_after_lose trainer:req, lose_text:req
+	trainerbattle TRAINER_BATTLE_CONTINUE_AFTER_LOSE, OBJ_ID_NONE, \trainer, NULL, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+    .endm
+	@ End siliconMerge
 
 	@ Starts a double battle with the player against two trainers
 	@ Takes two trainers and defeat text for each
@@ -1658,6 +1666,123 @@
 	.2byte \box
 	.endm
 
+
+	@ Start siliconMerge
+	@ Allows to setup wild battles with a customized Pokémon. It should be used before calling dowildbattle.
+    .macro setcustomwildmon species:req, level:req, item, ball, nature, abilityNum, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny
+    .byte SCR_OP_SETCUSTOMWILDMON
+    .2byte \species
+    .byte \level
+    .ifb \item
+        .2byte ITEM_NONE
+    .else
+        .2byte \item
+    .endif
+    .ifb \ball
+        .byte 0
+    .else
+        .byte \ball
+    .endif
+    .ifb \nature
+        .byte NUM_NATURES
+    .else
+        .byte \nature
+    .endif
+    .ifb \abilityNum
+        .byte 3
+    .else
+        .byte \abilityNum
+    .endif
+    @evs
+    .ifb \hpEv
+        .byte 0
+    .else
+        .byte \hpEv
+    .endif
+    .ifb \atkEv
+        .byte 0
+    .else
+        .byte \atkEv
+    .endif
+    .ifb \defEv
+        .byte 0
+    .else
+        .byte \defEv
+    .endif
+    .ifb \speedEv
+        .byte 0
+    .else
+        .byte \speedEv
+    .endif
+    .ifb \spAtkEv
+        .byte 0
+    .else
+        .byte \spAtkEv
+    .endif
+    .ifb \spDefEv
+        .byte 0
+    .else
+        .byte \spDefEv
+    .endif
+    @ivs
+    .ifb \hpIv
+        .byte 32
+    .else
+        .byte \hpIv
+    .endif
+    .ifb \atkIv
+        .byte 32
+    .else
+        .byte \atkIv
+    .endif
+    .ifb \defIv
+        .byte 32
+    .else
+        .byte \defIv
+    .endif
+    .ifb \speedIv
+        .byte 32
+    .else
+        .byte \speedIv
+    .endif
+    .ifb \spAtkIv
+        .byte 32
+    .else
+        .byte \spAtkIv
+    .endif
+    .ifb \spDefIv
+        .byte 32
+    .else
+        .byte \spDefIv
+    .endif
+    .ifb \move1
+        .2byte 0
+    .else
+        .2byte \move1
+    .endif
+    .ifb \move2
+        .2byte 0
+    .else
+        .2byte \move2
+    .endif
+    .ifb \move3
+        .2byte 0
+    .else
+        .2byte \move3
+    .endif
+    .ifb \move4
+        .2byte 0
+    .else
+        .2byte \move4
+    .endif
+    .ifb \isShiny
+        .byte 0
+    .else
+        .byte \isShiny
+    .endif
+    .endm
+	@ End siliconMerge
+
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro textcolor color:req
 	.byte SCR_OP_TEXTCOLOR
@@ -1845,6 +1970,22 @@
 	.2byte \quantity
 	.endm
 
+    @ Start siliconMerge
+	@ Ceases movement for the event obj. the Player is currently interacting with and that one alone.
+    .macro locktarget
+    .byte SCR_OP_LOCKTARGET
+    .endm
+
+    @ https://www.pokecommunity.com/showpost.php?p=10163613&postcount=81
+    @ Change Object Event Movement Type in Real Time
+
+ .macro setobjectnewmovementtype localId:req, movementType:req
+    setvar VAR_0x8005, \localId
+    setvar VAR_0x8006, \movementType
+    special SetObjectMovementType
+    .endm
+	@ End siliconMerge
+
 	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
 	.byte SCR_OP_DYNMULTICHOICE
 	.2byte \left
@@ -2027,7 +2168,13 @@
 	NO  = 0
 
 	@ Buffers the given text and calls the relevant standard message script (see gStdScripts).
-	.macro msgbox text:req, type=MSGBOX_DEFAULT
+	@ Start siliconMerge
+	.macro msgbox text:req, type=MSGBOX_DEFAULT, speaker=SPEAKER_DEFAULT, tail=TAIL_DEFAULT, emote=EMOTE_DEFAULT, phone=PHONE_OFF
+	setvar VAR_MSGBOX_SPEAKER, \speaker
+	setvar VAR_MSGBOX_TAIL, \tail
+	setvar VAR_MSGBOX_EMOTE, \emote
+	setvar VAR_MSGBOX_PHONE, \phone
+	@ End siliconMerge
 	loadword 0, \text
 	callstd \type
 	.endm
@@ -2165,12 +2312,384 @@
 	special TrySpecialOverworldEvo
 	.endm
 
+    @ Start quests
+	.macro questmenu case:req, questId:req
+    .byte SCR_OP_QUESTMENU
+    .byte \case
+    .byte \questId
+    .endm
+
+    .macro subquestmenu case:req, parentId:req, childId:req
+    .byte SCR_OP_SUBQUESTMENU
+    .byte \case
+    .2byte \parentId
+    .2byte \childId
+    .endm
+
+    @ Check the quest state and return a number associated with quest state
+    .macro returnqueststate questId:req
+    .byte SCR_OP_RETURNQUESTSTATE
+    .byte \questId
+    .endm
+
+    .macro openquestmenu
+    questmenu 0 0
+    .endm
+
+@ Starts the specified quest.
+	.macro startquest quest:req
+	closemessage
+	playfanfare MUS_LEVEL_UP
+    .byte SCR_OP_QUESTOVERWORLD
+    .byte QUEST_MENU_SET_ACTIVE
+    .byte \quest
+    delay QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP
+	.endm
+
+@ Completes the specified quest.
+	.macro completequest quest:req
+	closemessage
+	playfanfare MUS_LEVEL_UP
+    .byte SCR_OP_QUESTOVERWORLD
+    .byte QUEST_MENU_COMPLETE_QUEST
+    .byte \quest
+    delay QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP
+	.endm
+
+.macro unlockquest quest:req
+	questmenu QUEST_MENU_UNLOCK_QUEST \quest
+    .endm
+
+.macro goto_if_quest_inactive quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_INACTIVE \quest
+	goto_if_eq VAR_RESULT, TRUE, \dest
+	.endm
+
+	.macro goto_if_quest_active quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_ACTIVE \quest
+	goto_if_eq VAR_RESULT, TRUE, \dest
+	.endm
+
+	.macro goto_if_quest_reward quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_REWARD \quest
+	goto_if_eq VAR_RESULT, TRUE, \dest
+	.endm
+
+	.macro goto_if_quest_complete quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_COMPLETE \quest
+	goto_if_eq VAR_RESULT, TRUE, \dest
+	.endm
+
+    .macro goto_if_quest_not_inactive quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_INACTIVE \quest
+    goto_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro goto_if_quest_not_active quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_ACTIVE \quest
+    goto_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro goto_if_quest_not_reward quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_REWARD \quest
+    goto_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro goto_if_quest_not_complete quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_COMPLETE \quest
+    goto_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro call_if_quest_inactive quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_INACTIVE \quest
+    call_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro call_if_quest_active quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_ACTIVE \quest
+    call_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro call_if_quest_reward quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_REWARD \quest
+    call_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro call_if_quest_complete quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_COMPLETE \quest
+    call_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro call_if_quest_not_inactive quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_INACTIVE \quest
+    call_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro call_if_quest_not_active quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_ACTIVE \quest
+    call_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro call_if_quest_not_reward quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_REWARD \quest
+    call_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro call_if_quest_not_complete quest:req, dest:req
+    questmenu QUEST_MENU_CHECK_COMPLETE \quest
+    call_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+	.macro completesubquest quest:req, subquest:req
+	closemessage
+	subquestmenu QUEST_MENU_COMPLETE_QUEST, \quest, \subquest
+	.endm
+
+    .macro goto_if_subquest_complete parent:req,child:req, dest:req
+    subquestmenu QUEST_MENU_CHECK_COMPLETE \parent \child
+    goto_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro call_if_subquest_complete parent:req,child:req, dest:req
+    subquestmenu QUEST_MENU_CHECK_COMPLETE \parent \child
+    call_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro goto_if_subquest_not_complete parent:req,child:req, dest:req
+    subquestmenu QUEST_MENU_CHECK_COMPLETE \parent \child
+    goto_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+
+    .macro call_if_subquest_not_complete parent:req,child:req, dest:req
+    subquestmenu QUEST_MENU_CHECK_COMPLETE \parent \child
+    call_if_eq VAR_RESULT, FALSE, \dest
+    .endm
+	@ End quests
+
+	@ Start siliconMerge
+	@ Gets the current value of gameStatId and stores it in VAR_RESULT.
+	@ Optionally, it also allows to store said value in a buffer.
+	.macro getgamestat gameStatId:req, buffer
+	setvar VAR_RESULT, \gameStatId
+	specialvar VAR_RESULT, Script_GetGameStat
+	.ifnb \buffer
+		buffernumberstring \buffer, VAR_RESULT
+	.endif
+	.endm
+
+	@ Checks if the Player has a Pokémon of the specified \species that knows the specified \moveId.
+	@ Stores the result of the comparison in \varId.
+	.macro checkspeciesandmove speciesId:req, moveId:req, varId:req
+	setvar VAR_TEMP_1, \speciesId
+	setvar VAR_TEMP_2, \moveId
+	specialvar \varId, Script_CheckForMonAndMove
+	.endm
+
+	@ Writes the species name of the Pokemon in 'slot' (zero-indexed) of the player's party to the specified buffer.
+	@ If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
+	.macro bufferpartymonspecies stringVarId:req, slot=VAR_0x8004
+	.byte SCR_OP_BUFFERPARTYMONSPECIES
+	stringvar \stringVarId
+	.2byte \slot
+	.endm
+
+    @ Calls the start menu in Save Mode which only allows the player to save their game or not.
+    .macro startmenu_savescreen
+    fadescreen FADE_TO_BLACK
+    special ShowStartMenuSaveScreen
+    waitstate
+    .endm
+
+	@ Writes the name of the specified ability to the specified buffer.
+	.macro bufferabilityname stringVarId:req, ability:req
+	.byte SCR_OP_BUFFERABILITYNAME
+	stringvar \stringVarId
+	.2byte \ability
+	.endm
+
+    @ Writes the name of the specified map to the specified buffer.
+    .macro buffermapname stringVarId:req, map:req
+	.byte SCR_OP_BUFFERMAPNAME
+	stringvar \stringVarId
+    .2byte \map
+    .endm
+
+    @ Inverts the current status of the flag
+	.macro toggleflag flag:req
+	.byte SCR_OP_TOGGLEFLAG
+	.2byte \flag
+    .endm
+@ End siliconMerge
+
+ @ Start Pokevial Branch
+
+	@ Checks or manipulates the size or dose of the Pokevial.
+    @ When parameter is empty, it assumes VIAL_SIZE.
+    @ When amount is empty, it assumes 1.
+	.macro pokevial mode:req, parameter=VIAL_SIZE, amount=1
+	.byte SCR_OP_POKEVIAL
+    .byte \mode
+    .byte \parameter
+    .byte \amount
+	.endm
+
+    @ Gets the current number of doses in the Pokevial and stores it to VAR_0x8006
+    .macro pokevialgetdose
+    specialvar VAR_0x8006,PokevialGetDose
+    .endm
+
+    @ Gets the current size of the Pokevial and stores it to VAR_0x8006
+    .macro pokevialgetsize
+    specialvar VAR_0x8006,PokevialGetSize
+    .endm
+
+    @ Increases the size of the Pokevial by 1
+    @ If the size of the vial exceeds VIAL_MAX_SIZE, it is set to VIAL_MAX_SIZE
+    .macro pokevialincreasesize
+    pokevial VIAL_INCREASE VIAL_SIZE 1
+    .endm
+
+    @ Adds 1 dose to the Pokevial
+    @ If the number of doses exceeds the current size of the Pokevial, it is set to the size of the Pokevial
+    .macro pokevialadddose
+    pokevial VIAL_ADD VIAL_DOSE VIAL_STANDARD_DOSE
+    .endm
+
+    @ Decreases the size of the Pokevial by 1
+    @ If the size of the vial is less than VIAL_MIN_SIZE, it is set to VIAL_MIN_SIZE
+    .macro pokevialdecreasesize
+    pokevial VIAL_DECREASE VIAL_SIZE 1
+    .endm
+
+    @ Removes 1 dose to the Pokevial
+    @ If the number of doses is less than EMPTY_VIAL, it is set to EMPTY_VIAL
+    .macro pokevialremovedose
+    pokevial VIAL_REMOVE VIAL_DOSE VIAL_STANDARD_DOSE
+    .endm
+
+    @ Refill vial so doses equals size, and outputs the success of the oepration to VAR_RESULT
+    .macro pokevialrefill
+    specialvar VAR_RESULT,PokevialRefill
+    .endm
+
+    @ A combination of pokevialincreasesize and pokevialrefill
+    .macro pokevialreward
+    pokevial VIAL_INCREASE VIAL_SIZE 1
+    specialvar VAR_RESULT,PokevialRefill
+    .endm
+
+@ End Pokevial Branch
+
 	.macro ai_vs_ai_battle trainer1:req, trainer2:req
 	setflag B_FLAG_AI_VS_AI_BATTLE
 	setvar VAR_0x8004, \trainer1
 	callnative CreateTrainerPartyForPlayer, requests_effects=1
 	trainerbattle_no_intro \trainer2, NULL
 	.endm
+
+	@ Start buzzr
+    @ Handles all functions related to buzzr
+    @ Takes a mode and a tweetId
+	.macro buzzr mode:req, tweetId:req
+	.byte SCR_OP_BUZZR
+    .byte \mode
+    .2byte \tweetId
+	.endm
+
+    @ Takes a tweetId as an input,
+    @ returns the read status to VAR_RESULT
+    .macro istweetread tweetId:req
+	buzzr GET_READ \tweetId
+	.endm
+
+    @ Takes a tweetId as an input,
+    @ marks that tweet as read
+    .macro marktweetread tweetId:req
+    buzzr MARK_READ \tweetId
+	.endm
+
+    @ Takes a tweetId as an input,
+    @ shows that tweet on the screeen.
+    @ after a button press, hides the tweet
+    .macro showtweet tweetId:req
+    buzzr MARK_READ \tweetId
+    setflag FLAG_SYS_APP_BUZZR_GET
+	buzzr SHOW_TWEET \tweetId
+    waitbuttonpress
+    buzzr HIDE_TWEET 0
+    buzzr CHECK_PIC \tweetId
+    setvar VAR_TEMP_1, \tweetId
+    compare VAR_RESULT TRUE
+    call_if_eq Buzzr_CheckPic_MacroScript
+	.endm
+
+    .macro call_if_tweet_read tweetId:req, dest:req
+	buzzr GET_READ \tweetId
+    call_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro goto_if_tweet_read tweetId:req, dest:req
+	buzzr GET_READ \tweetId
+    goto_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+
+    .macro tweetfanfare tweetId:req, song:req
+    playfanfare \song
+    buzzr MARK_READ \tweetId
+	buzzr SHOW_TWEET \tweetId
+    waitfanfare
+    waitbuttonpress
+    buzzr HIDE_TWEET 0
+    buzzr CHECK_PIC \tweetId
+    setvar VAR_TEMP_1, \tweetId
+    compare VAR_RESULT TRUE
+    call_if_eq Buzzr_CheckPic_MacroScript
+	.endm
+	@ End buzzr
+
+    @ Start qol_field_moves
+
+    @ Checks if any Pokémon in the party can learn a move.
+	@ If so, VAR_RESULT is set to the
+	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
+	@ VAR_0x8004 is also set to this Pokemon's species.
+	.macro checkpartylearnknowsfieldmove move:req
+	.byte SCR_OP_CHECKPARTYLEARNKNOWSFIELDMOVE
+	.2byte \move
+	.endm
+
+    @ End qol_field_moves
+
+	@ Start siliconMerge
+    @ Marks the beginning of a cutscene and skips cutscne if GAME_OPTION_CUTSCENE_SKIP is enabled
+    .macro startcutscene ID:req
+    setvar VAR_CUTSCENE_SKIP, \ID
+    specialvar VAR_RESULT,ShouldSkipCutscene
+    compare VAR_RESULT, 0
+    call_if_ne CutsceneSkip_DoSkip_Script
+    .endm
+
+    @ Resets VAR_CUTSCENE_SKIP to its default value
+    .macro endcutscene
+    special ResetCutsceneStatus
+    .endm
+
+	@ Heals the Player's party.
+	.macro bypass_healblock
+	setvar 0x8000, PLAYER_CAN_HEAL
+	special HealPlayerParty
+	setvar 0x8000, 0
+	.endm
+	@ End siliconMerge
+
+    @ Start rematch_action
+    @ Handle trainer rematches
+    .macro handlerematch dest:req
+    specialvar VAR_RESULT, ShouldTryRematchBattle
+    goto_if_eq VAR_RESULT, TRUE, \dest
+    .endm
+    @ End rematch_action
+	
 
 	@ Sets VAR_RESULT to TRUE if stat can be hyper trained, or to
 	@ FALSE otherwise.
@@ -2240,6 +2759,186 @@
 	.2byte \status1
 	.2byte \slot
 	.endm
+
+    @ Start glass
+	@ For the provided map section, returns the relevant Google Glass location stat to the specified variable.
+    .macro glass mapId = MAPSEC_NONE, state = GLASS_LOCATION_RATE, destination = VAR_RESULT
+	.byte SCR_OP_GLASS
+    .byte \mapId
+    .byte \state
+    .2byte \destination
+	.endm
+
+    .macro glasscurrenttotal destination = VAR_RESULT
+    glass MAPSEC_NONE,GLASS_LOCATION_TOTAL, \destination
+    .endm
+
+    .macro glasscurrentdefeated destination = VAR_RESULT
+    glass MAPSEC_NONE,GLASS_LOCATION_DEFEATED, \destination
+    .endm
+
+    .macro glasscurrentundefeated destination = VAR_RESULT
+    glass MAPSEC_NONE,GLASS_LOCATION_UNDEFEATED, \destination
+    .endm
+
+    .macro glasscurrentdiscovered destination = VAR_RESULT
+    glass MAPSEC_NONE,GLASS_LOCATION_DISCOVERED, \destination
+    .endm
+
+    .macro glasscurrentundiscovered destination = VAR_RESULT
+    glass MAPSEC_NONE,GLASS_LOCATION_UNDISCOVERED, \destination
+    .endm
+
+    .macro glasscurrentincomplete destination = VAR_RESULT
+    glass MAPSEC_NONE,GLASS_LOCATION_INCOMPLETE, \destination
+    .endm
+
+    .macro glasscurrentrate destination = VAR_RESULT
+    glass MAPSEC_NONE,GLASS_LOCATION_RATE, \destination
+    .endm
+
+    .macro glassmaptotal destination = VAR_RESULT
+    glass \mapId ,GLASS_LOCATION_TOTAL, \destination
+    .endm
+
+    .macro glassmapdefeated destination = VAR_RESULT
+    glass \mapId ,GLASS_LOCATION_DEFEATED, \destination
+    .endm
+
+    .macro glassmapundefeated destination = VAR_RESULT
+    glass \mapId ,GLASS_LOCATION_UNDEFEATED, \destination
+    .endm
+
+    .macro glassmapdiscovered destination = VAR_RESULT
+    glass \mapId ,GLASS_LOCATION_DISCOVERED, \destination
+    .endm
+
+    .macro glassmapundiscovered destination = VAR_RESULT
+    glass \mapId ,GLASS_LOCATION_UNDISCOVERED, \destination
+    .endm
+
+    .macro glassmapincomplete destination = VAR_RESULT
+    glass \mapId ,GLASS_LOCATION_INCOMPLETE, \destination
+    .endm
+
+    .macro glassmaprate destination = VAR_RESULT
+    glass \mapId ,GLASS_LOCATION_RATE, \destination
+    .endm
+	@ End glass
+
+    @ Start cueobject
+    @ Cue an object in a direction (walk in place)
+    @ If `wait` is set, waits for movement to complete
+    .macro cueobject localId:req, direction:req, wait=1
+	.byte SCR_OP_CUEOBJECT
+    .2byte \localId
+    .2byte \direction
+    .byte \wait
+    .endm
+
+.macro cueobjectplayer localId:req, wait=1
+    cueobject \localId, DIR_OPPOSITE, \wait
+.endm
+    @ End cueobject
+
+    @ Start callfunc
+    @ call functions and get result
+    .macro callfunc func:req, a, b, c, d
+	.byte SCR_OP_CALLFUNC
+    .4byte \func
+    .ifb \a @ call function like a ScrCmd
+        .byte 0xFF
+    .else
+    .if \a >= 0xFFFF
+        .byte 0
+    .else
+    .ifb \b @ 0-1 args
+        .byte 1
+        .2byte \a
+    .else
+    .ifb \c @ 2 args
+        .byte 2
+        .2byte \a
+        .2byte \b
+    .else
+    .ifb \d @ 3 args
+        .byte 3
+        .2byte \a
+        .2byte \b
+        .2byte \c
+    .else @ 4args
+        .byte 4
+        .2byte \a
+        .2byte \b
+        .2byte \c
+        .2byte \d
+    .endif
+    .endif
+    .endif
+    .endif
+    .endif
+    .endm
+    @ End callfunc
+
+    @ Start siliconMerge
+	@ Spawns a special object event
+    .macro spawnobject graphicsId:req, localId:req, x:req, y:req, movementType=MOVEMENT_TYPE_FACE_DOWN, elevation=3
+    callfunc ScrCmd_createobject
+    .2byte \graphicsId
+    .2byte \movementType
+    .2byte \localId
+    .2byte \x
+    .2byte \y
+    .2byte \elevation
+    .endm
+
+    @ Attempts to take a Pokémon from the player's party and returns different scripts based on the response.
+    .macro takemonfromplayer intro=TakeMon_Dialogue_Intro, notEnoughMons=TakeMon_Dialogue_NotEnoughMons, cancelSelection=TakeMon_Dialogue_CancelSelection, wrongMon=TakeMon_Dialogue_WrongMon, special=TakeMon_Dialogue_Special, confirmTake=TakeMon_Dialogue_ConfirmTake, condition:req
+    call \intro
+    special HasEnoughMonsForDoubleBattle
+    compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+    setvar VAR_RESULT, FALSE
+    goto_if_ne \notEnoughMons
+
+    special ChoosePartyMon
+    waitstate
+    compare VAR_0x8004, PARTY_NOTHING_CHOSEN
+    setvar VAR_RESULT, FALSE
+    goto_if_eq \cancelSelection
+
+    bufferpartymonspecies STR_VAR_1, VAR_0x8004
+    specialvar VAR_RESULT, \condition
+    compare VAR_RESULT, TRUE
+    goto_if_ne \wrongMon
+
+    bufferpartymonnick STR_VAR_1, VAR_0x8004
+    ismonshiny VAR_0x8004
+    compare VAR_RESULT, TRUE
+    setvar VAR_RESULT, FALSE
+    goto_if_eq \special
+
+    call \confirmTake
+    compare VAR_RESULT, NO
+    setvar VAR_RESULT, FALSE
+    goto_if_eq \cancelSelection
+
+    special DeleteChosenPartyMon
+    setvar VAR_RESULT, TRUE
+    closemessage
+    .endm
+
+	@ Checks if the chosen Pokémon is Shiny
+	.macro ismonshiny slot:req
+	.byte SCR_OP_ISMONSHINY
+	.2byte \slot
+	.endm
+
+    @ Looks at all the subquests for a given quest, and if they're all complete, make the parent quest as complete
+    .macro makequestrewardifsubquestscomplete quest:req
+	.byte SCR_OP_MAKEQUESTREWARDIFSUBQUESTSCOMPLETE
+	.2byte \quest
+    .endm
+	@ End siliconMerge
 
 	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
 	.macro checkteratype slot:req
@@ -2312,6 +3011,62 @@
 	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will resume the flow of time if paused, and stop the flow of time otherwise.
 	.macro togglefakertc
 	callnative Script_ToggleFakeRtc, requests_effects=1
+    .endm
+
+    @ Start siliconMerge
+	.macro getonoffbike musSwap:req
+    callnative Script_GetOnOffBike
+    .byte \musSwap
+    .endm
+
+    .macro countremainingsubquests quest:req dest:req
+    callnative Script_Quest_Generic_CountRemainingSubquests
+    .2byte \quest
+    .2byte \dest
+	.endm
+
+    .macro askplayermon askText:req, denyText:req, notEnoughText:req, speakerId:req
+	special BufferMonNickname
+	msgbox \askText, MSGBOX_YESNO, \speakerId
+    goto_if_eq VAR_RESULT, NO, 1f
+	special HasEnoughMonsForDoubleBattle
+    goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, 2f
+	special DeleteChosenPartyMon
+    goto 3f
+
+1:
+	msgbox \denyText, , \speakerId
+	closemessage
+	release
+    end
+
+2:
+	msgbox \notEnoughText, , \speakerId
+	closemessage
+	release
+    end
+3:
+    .endm
+
+    .macro faderemoveobject objectId:req, movement:req
+    applymovement \objectId \movement
+    fadescreen FADE_TO_BLACK
+    removeobject \objectId
+    fadescreen FADE_FROM_BLACK
+    .endm
+
+    @ https://github.com/pret/pokeemerald/wiki/Remove-Warp-Fadescreen
+    @ Fade to black and set the flag before a warp so that screen doesn't fade back in
+    .macro fadeblackandsetremovewarpfadeflag
+    fadescreen FADE_TO_BLACK
+    setflag FLAG_REMOVE_WARP_FADE
+    .endm
+
+    @
+	.macro checktrainerdiscovered trainer:req
+	.byte SCR_OP_CHECKTRAINERDISCOVERED
+	.2byte \trainer
+	@ End siliconMerge
 	.endm
 
 	@ ============================ @
@@ -2422,6 +3177,28 @@
 	.2byte \dest
 	.endm
 
+	@ Start siliconMerge
+    @ Show a map preview for the current map with the WEATHER type.
+    .macro mappreview
+    fadescreen FADE_TO_BLACK
+    callnative Script_MapPreview
+    waitstate
+    .endm
+
+    @ Show the current map's name popup.
+    .macro mappopup
+    callnative Script_MapPopUp
+    .endm
+
+    @ Show that character's reveal
+    .macro reveal charId:req
+    closemessage
+    callfunc Script_RevealCharacter
+    .2byte \charId
+    waitstate
+    .endm
+	@ End siliconMerge
+
 	@ Hides any follower Pokémon if present, putting them into their Poké Ball; by default waits for their movement to finish.
 	.macro hidefollower wait=1
 	callnative ScrFunc_hidefollower
@@ -2444,7 +3221,7 @@
 	callnative Script_SetDifficulty, requests_effects=1
 	.byte \difficulty
 	.endm
-    
+
 	.macro forcesave
 	callnative Script_ForceSaveGame
 	waitstate
@@ -2510,3 +3287,29 @@
 	compare \a, \b
 	cant_see_if 5
 	.endm
+
+	@ Start variableMoney
+	@ Adds value to the player's money. If adding 'value' money would exceed MAX_MONEY, the player's money is set to MAX_MONEY.
+	@ If 'disable' is set to anything but 0 then this command does nothing.
+	.macro variableaddmoney value:req, disable=0
+	.byte SCR_OP_VARIABLEADDMONEY
+	.4byte \value
+	.byte \disable
+	.endm
+
+	@ Subtracts value from the player's money. If the player has less than 'value' money, their money is set to 0.
+	@ If 'disable' is set to anything but 0 then this command does nothing.
+	.macro variableremovemoney value:req, disable=0
+	.byte SCR_OP_VARIABLEREMOVEMONEY
+	.4byte \value
+	.byte \disable
+	.endm
+
+	@ Checks if the player has money >= value. VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
+	@ If 'disable' is set to anything but 0 then this command does nothing.
+	.macro variablecheckmoney value:req, disable=0
+	.byte SCR_OP_VARIABLECHECKMONEY
+	.4byte \value
+	.byte \disable
+	.endm
+	@ End variableMoney

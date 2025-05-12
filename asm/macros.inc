@@ -14,3 +14,11 @@
 	.include "asm/macros/battle_frontier/battle_pyramid.inc"
 	.include "asm/macros/battle_frontier/battle_tower.inc"
 	.include "asm/macros/battle_frontier/frontier_util.inc"
+
+	@ Start siliconMerge
+    .macro teleportcamera x:req, y:req
+    setvar 0x8004, \x
+    setvar 0x8005, \y
+    special TeleportCamera
+    .endm
+	@ End siliconMerge

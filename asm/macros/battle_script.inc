@@ -2590,6 +2590,38 @@
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
 	.endm
 
+@ START OF PSF BATTLE SCRIPT MACROS
+	.macro getprizenativeitiem, jumpInstr:req
+	callnative BS_GetPrizeNativeItem
+	.4byte \jumpInstr
+	.endm
+
+	@ Jumps to \jumpInstr if \takeWildItemsOptVal matches the specified value.
+	.macro jumpiftakewilditemsoptionequal takeWildItemsOptVal:req, jumpInstr:req
+	callnative BS_GetTakeWildItemsOption
+	jumpifbyte CMP_EQUAL, gBattleCommunication, \takeWildItemsOptVal, \jumpInstr
+	.endm
+
+	@ Jumps to \jumpInstr if \takeWildItemsOptVal doesn't match the specified value.
+	.macro jumpiftakewilditemsoptionnotequal takeWildItemsOptVal:req, jumpInstr:req
+	callnative BS_GetTakeWildItemsOption
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, \takeWildItemsOptVal, \jumpInstr
+	.endm
+
+	@ Adds 1 copy of whatever item a specified opponent is carrying to the Player's bag.
+	.macro getitemHeldby battler:req
+	callnative BS_GetItemHeldBy
+	.byte \battler
+	.endm
+
+	@ Jumps to \jumpInstr if \battler isn't holding a valid item.
+	.macro jumpifnoitem battler:req, jumpInstr:req
+	callnative BS_JumpIfNoItem
+	.byte \battler
+	.4byte \jumpInstr
+	.endm
+
+@ END OF PSF BATTLE SCRIPT MACROS
 	.macro flushtextbox
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1

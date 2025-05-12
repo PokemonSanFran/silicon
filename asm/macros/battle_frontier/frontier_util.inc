@@ -157,3 +157,11 @@
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT
 	special CallFrontierUtilFunc
 	.endm
+
+@ Start siliconMerge
+	@ Adds value to the player's BP. If adding 'value' BP would exceed MAX_BATTLE_FRONTIER_POINTS, the player's money is set to MAX_BATTLE_FRONTIER_POINTS.
+	.macro givefrontierbattlepoints value:req
+	.byte 0xe9
+	.4byte \value
+	.endm
+@ End siliconMerge
