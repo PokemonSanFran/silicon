@@ -12,6 +12,7 @@
 #include "battle_gimmick.h"
 #include "bg.h"
 #include "data.h"
+#include "evolution_scene.h" // midBattleEvolution
 #include "item.h"
 #include "item_menu.h"
 #include "link.h"
@@ -42,12 +43,13 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
+#include "options_battle.h" // last_used_ball and quick_run
 #include "caps.h"
 #include "menu.h"
 #include "pokemon_summary_screen.h"
 #include "type_icons.h"
 
-static void PlayerBufferExecCompleted(u32 battler);
+//static void PlayerBufferExecCompleted(u32 battler); // quick_run
 static void PlayerHandleLoadMonSprite(u32 battler);
 static void PlayerHandleSwitchInAnim(u32 battler);
 static void PlayerHandleDrawTrainerPic(u32 battler);
@@ -80,6 +82,7 @@ static void PlayerHandleLinkStandbyMsg(u32 battler);
 static void PlayerHandleResetActionMoveSelection(u32 battler);
 static void PlayerHandleEndLinkBattle(u32 battler);
 static void PlayerHandleBattleDebug(u32 battler);
+static void PlayerHandleMidBattleEvolution(u32 battler); // midBattleEvolution
 
 static void PlayerBufferRunCommand(u32 battler);
 static void MoveSelectionDisplayPpNumber(u32 battler);
@@ -155,6 +158,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,
     [CONTROLLER_ENDLINKBATTLE]            = PlayerHandleEndLinkBattle,
     [CONTROLLER_DEBUGMENU]                = PlayerHandleBattleDebug,
+    [CONTROLLER_MIDBATTLE_EVOLUTION]      = PlayerHandleMidBattleEvolution, // midBattleEvolution
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
@@ -166,7 +170,10 @@ void SetControllerToPlayer(u32 battler)
     gPlayerDpadHoldFrames = 0;
 }
 
-static void PlayerBufferExecCompleted(u32 battler)
+// Start quick_run
+//static void PlayerBufferExecCompleted(u32 battler)
+void PlayerBufferExecCompleted(u32 battler)
+// End quick_run
 {
     gBattlerControllerFuncs[battler] = PlayerBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -250,7 +257,10 @@ static void HandleInputChooseAction(u32 battler)
     DoBounceEffect(battler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(battler, BOUNCE_MON, 7, 1);
 
-    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// Start siliconMerge
+	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
         gPlayerDpadHoldFrames = 0;
@@ -391,7 +401,10 @@ static void HandleInputChooseAction(u32 battler)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted(battler);
         }
-        else if (B_QUICK_MOVE_CURSOR_TO_RUN)
+        // Start quick_run
+        //else if (B_QUICK_MOVE_CURSOR_TO_RUN)
+        else if(IsQuickRunSetToBA())
+        // End quick_run
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) // If wild battle, pressing B moves cursor to "Run".
             {
@@ -402,6 +415,10 @@ static void HandleInputChooseAction(u32 battler)
             }
         }
     }
+    // Start quick_run
+    else if (JOY_NEW(L_BUTTON))
+        AttemptFleeWithL(battler, B_ACTION_RUN);
+    // End quick_run
     else if (JOY_NEW(START_BUTTON))
     {
         SwapHpBarsWithHpText();
@@ -435,7 +452,10 @@ void HandleInputChooseTarget(u32 battler)
             EndBounceEffect(i, BOUNCE_HEALTHBOX);
     }
 
-    if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// Start siliconMerge
+	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
         gPlayerDpadHoldFrames = 0;
@@ -591,7 +611,10 @@ static void HideShownTargets(u32 battler)
 
 void HandleInputShowEntireFieldTargets(u32 battler)
 {
-    if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// Start siliconMerge
+	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
         gPlayerDpadHoldFrames = 0;
@@ -619,7 +642,10 @@ void HandleInputShowEntireFieldTargets(u32 battler)
 
 void HandleInputShowTargets(u32 battler)
 {
-    if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// Start siliconMerge
+	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
         gPlayerDpadHoldFrames = 0;
@@ -661,7 +687,10 @@ void HandleInputChooseMove(u32 battler)
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
-    if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// Start siliconMerge
+	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
         gPlayerDpadHoldFrames = 0;
@@ -1869,6 +1898,21 @@ static void PlayerHandleSwitchInAnim(u32 battler)
     BtlController_HandleSwitchInAnim(battler, TRUE, SwitchIn_TryShinyAnimShowHealthbox);
 }
 
+// Start playerCustom
+u16 const sTrainerBackSprites[NUM_ALL_BODY_TYPES] =
+{
+    TRAINER_BACK_PIC_SILICON_PLAYER_M1,
+    TRAINER_BACK_PIC_SILICON_PLAYER_M2,
+    TRAINER_BACK_PIC_SILICON_PLAYER_M3,
+    TRAINER_BACK_PIC_SILICON_PLAYER_N1,
+    TRAINER_BACK_PIC_SILICON_PLAYER_N2,
+    TRAINER_BACK_PIC_SILICON_PLAYER_N3,
+    TRAINER_BACK_PIC_SILICON_PLAYER_F1,
+    TRAINER_BACK_PIC_SILICON_PLAYER_F2,
+    TRAINER_BACK_PIC_SILICON_PLAYER_F3,
+    TRAINER_BACK_PIC_BRENDAN,
+};
+// End playerCustom
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId)
 {
     u32 trainerPicId;
@@ -1881,19 +1925,28 @@ u32 LinkPlayerGetTrainerPicId(u32 multiplayerId)
     else if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
         trainerPicId = gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
     else
-        trainerPicId = gender + TRAINER_BACK_PIC_BRENDAN;
+// Start playerCustom
+        //trainerPicId = gender + TRAINER_BACK_PIC_BRENDAN;
+        trainerPicId = sTrainerBackSprites[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]];
+// End playerCustom
 
     return trainerPicId;
 }
 
-static u32 PlayerGetTrainerBackPicId(void)
+// Start playerCustom
+u32 PlayerGetTrainerBackPicId(void)
+//static u32 PlayerGetTrainerBackPicId(void)
+// End playerCustom
 {
     u32 trainerPicId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         trainerPicId = LinkPlayerGetTrainerPicId(GetMultiplayerId());
     else
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
+// Start playerCustom
+        trainerPicId = sTrainerBackSprites[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]];
+        //trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
+// End playerCustom
 
     return trainerPicId;
 }
@@ -2386,3 +2439,42 @@ static void PlayerHandleBattleDebug(u32 battler)
     SetMainCallback2(CB2_BattleDebugMenu);
     gBattlerControllerFuncs[battler] = Controller_WaitForDebug;
 }
+
+// Start midBattleEvolution
+static EWRAM_DATA u8 sMidBattleEvolvedPartyId = 0;
+static EWRAM_DATA u8 sMidBattleEvoFramesCount = 0;
+static EWRAM_DATA u8 sSavedBattleTerrain = 0;
+
+void UpdateStatsAfterLevelUp(u32 monId);
+
+static void Controller_WaitForEvo(u32 battler)
+{
+    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+    {
+        PlayerBufferExecCompleted(battler);
+        gBattleTerrain = sSavedBattleTerrain; // Evolution changes terrain.
+        AllocateMonSpritesGfx(); // We need to allocate gfx for mons again
+        UpdateStatsAfterLevelUp(sMidBattleEvolvedPartyId);
+        ReshowBattleScreenAfterMenu();
+    }
+}
+
+static void PlayerHandleMidBattleEvolution(u32 battler)
+{
+    // Don't evolve abruptly, wait a couple of frames.
+    if (++sMidBattleEvoFramesCount == 30)
+    {
+        u32 monId = sMidBattleEvolvedPartyId = gBattleResources->bufferA[battler][MIDBATTLEEVO_PARTY_ID];
+        u32 species = T1_READ_16(&gBattleResources->bufferA[battler][MIDBATTLEEVO_SPECIES_ID]);
+
+        sMidBattleEvoFramesCount = 0;
+        sSavedBattleTerrain = gBattleTerrain;
+        FreeAllWindowBuffers();
+
+        gCB2_AfterEvolution = BattleMainCB2;
+        EvolutionScene(&gPlayerParty[monId], species, TRUE, monId);
+
+        gBattlerControllerFuncs[battler] = Controller_WaitForEvo;
+    }
+}
+// End midBattleEvolution

@@ -21,6 +21,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "silicon_shine.h"
 
 // iwram
 COMMON_DATA u32 gMonShrinkDuration = 0;
@@ -156,6 +157,16 @@ static const struct CaptureStar sCaptureStars[] =
 #define TAG_PARTICLES_PARKBALL    65055
 #define TAG_PARTICLES_BEASTBALL   65056
 #define TAG_PARTICLES_CHERISHBALL 65057
+// Start siliconNewBalls
+#define TAG_PARTICLES_NEWABALL     TAG_PARTICLES_NETBALL
+#define TAG_PARTICLES_NEWBBALL     TAG_PARTICLES_NETBALL
+#define TAG_PARTICLES_NEWCBALL     TAG_PARTICLES_NETBALL
+#define TAG_PARTICLES_NEWDBALL     TAG_PARTICLES_NETBALL
+#define TAG_PARTICLES_NEWEBALL     TAG_PARTICLES_NETBALL
+#define TAG_PARTICLES_NEWFBALL     TAG_PARTICLES_NETBALL
+#define TAG_PARTICLES_NEWGBALL     TAG_PARTICLES_NETBALL
+#define TAG_PARTICLES_NEWHBALL     TAG_PARTICLES_NETBALL
+// End siliconNewBalls
 
 static const struct CompressedSpriteSheet sBallParticleSpriteSheets[] =
 {
@@ -187,6 +198,16 @@ static const struct CompressedSpriteSheet sBallParticleSpriteSheets[] =
     [BALL_PARK]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_PARKBALL},
     [BALL_BEAST]    = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_BEASTBALL},
     [BALL_CHERISH]  = {gBattleAnimSpriteGfx_Particles2,     0x100, TAG_PARTICLES_CHERISHBALL},
+// Start siliconNewBalls
+    [BALL_NEWA]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWABALL},
+    [BALL_NEWB]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWBBALL},
+    [BALL_NEWC]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWCBALL},
+    [BALL_NEWD]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWDBALL},
+    [BALL_NEWE]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWEBALL},
+    [BALL_NEWF]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWFBALL},
+    [BALL_NEWG]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWGBALL},
+    [BALL_NEWH]     = {gBattleAnimSpriteGfx_Particles,      0x100, TAG_PARTICLES_NEWHBALL},
+// End siliconNewBalls
 };
 
 static const struct CompressedSpritePalette sBallParticlePalettes[] =
@@ -219,6 +240,16 @@ static const struct CompressedSpritePalette sBallParticlePalettes[] =
     [BALL_PARK]     = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_PARKBALL},
     [BALL_BEAST]    = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_BEASTBALL},
     [BALL_CHERISH]  = {gBattleAnimSpritePal_Particles2,     TAG_PARTICLES_CHERISHBALL},
+// Start siliconNewBalls
+    [BALL_NEWA]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWABALL},
+    [BALL_NEWB]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWBBALL},
+    [BALL_NEWC]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWCBALL},
+    [BALL_NEWD]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWDBALL},
+    [BALL_NEWE]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWEBALL},
+    [BALL_NEWF]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWFBALL},
+    [BALL_NEWG]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWGBALL},
+    [BALL_NEWH]      = {gBattleAnimSpritePal_CircleImpact,   TAG_PARTICLES_NEWHBALL},
+// End siliconNewBalls
 };
 
 static const union AnimCmd sAnim_RegularBall[] =
@@ -303,6 +334,16 @@ static const u8 sBallParticleAnimNums[POKEBALL_COUNT] =
     [BALL_PARK]    = 5,
     [BALL_BEAST]   = 5,
     [BALL_CHERISH] = 0,
+// Start siliconNewBalls
+    [BALL_NEWA]     = 2,
+    [BALL_NEWB]     = 2,
+    [BALL_NEWC]     = 2,
+    [BALL_NEWD]     = 2,
+    [BALL_NEWE]     = 2,
+    [BALL_NEWF]     = 2,
+    [BALL_NEWG]     = 2,
+    [BALL_NEWH]     = 2,
+// End siliconNewBalls
 };
 
 static const TaskFunc sBallParticleAnimationFuncs[POKEBALL_COUNT] =
@@ -336,6 +377,16 @@ static const TaskFunc sBallParticleAnimationFuncs[POKEBALL_COUNT] =
     [BALL_PARK]    = UltraBallOpenParticleAnimation,
     [BALL_BEAST]   = UltraBallOpenParticleAnimation,
     [BALL_CHERISH] = MasterBallOpenParticleAnimation,
+// Start siliconNewBalls
+    [BALL_NEWA]     = SafariBallOpenParticleAnimation,
+    [BALL_NEWB]     = SafariBallOpenParticleAnimation,
+    [BALL_NEWC]     = SafariBallOpenParticleAnimation,
+    [BALL_NEWD]     = SafariBallOpenParticleAnimation,
+    [BALL_NEWE]     = SafariBallOpenParticleAnimation,
+    [BALL_NEWF]     = SafariBallOpenParticleAnimation,
+    [BALL_NEWG]     = SafariBallOpenParticleAnimation,
+    [BALL_NEWH]     = SafariBallOpenParticleAnimation,
+// End siliconNewBalls
 };
 
 static const struct SpriteTemplate sBallParticleSpriteTemplates[POKEBALL_COUNT] =
@@ -592,6 +643,80 @@ static const struct SpriteTemplate sBallParticleSpriteTemplates[POKEBALL_COUNT] 
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
+// Start siliconNewBalls
+    [BALL_NEWA] = {
+        .tileTag = TAG_PARTICLES_NEWABALL,
+        .paletteTag = TAG_PARTICLES_NEWABALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    [BALL_NEWB] = {
+        .tileTag = TAG_PARTICLES_NEWBBALL,
+        .paletteTag = TAG_PARTICLES_NEWBBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    [BALL_NEWC] = {
+        .tileTag = TAG_PARTICLES_NEWCBALL,
+        .paletteTag = TAG_PARTICLES_NEWCBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    [BALL_NEWD] = {
+        .tileTag = TAG_PARTICLES_NEWDBALL,
+        .paletteTag = TAG_PARTICLES_NEWDBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    [BALL_NEWE] = {
+        .tileTag = TAG_PARTICLES_NEWEBALL,
+        .paletteTag = TAG_PARTICLES_NEWEBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    [BALL_NEWF] = {
+        .tileTag = TAG_PARTICLES_NEWFBALL,
+        .paletteTag = TAG_PARTICLES_NEWFBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    [BALL_NEWG] = {
+        .tileTag = TAG_PARTICLES_NEWGBALL,
+        .paletteTag = TAG_PARTICLES_NEWGBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    [BALL_NEWH] = {
+        .tileTag = TAG_PARTICLES_NEWHBALL,
+        .paletteTag = TAG_PARTICLES_NEWHBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+// End siliconNewBalls
 };
 
 const u16 gBallOpenFadeColors[] =
@@ -625,6 +750,16 @@ const u16 gBallOpenFadeColors[] =
     [BALL_PARK] = RGB(31, 31, 15),
     [BALL_BEAST] = RGB(31, 31, 15),
     [BALL_CHERISH] = RGB(25, 4, 3),
+// Start siliconNewBalls
+    [BALL_NEWA] = RGB(21, 31, 25),
+    [BALL_NEWB] = RGB(21, 31, 25),
+    [BALL_NEWC] = RGB(21, 31, 25),
+    [BALL_NEWD] = RGB(21, 31, 25),
+    [BALL_NEWE] = RGB(21, 31, 25),
+    [BALL_NEWF] = RGB(21, 31, 25),
+    [BALL_NEWG] = RGB(21, 31, 25),
+    [BALL_NEWH] = RGB(21, 31, 25),
+// End siliconNewBalls
 };
 
 const struct SpriteTemplate gPokeblockSpriteTemplate =
@@ -2428,6 +2563,11 @@ void TryShinyAnimation(u8 battler, struct Pokemon *mon)
     bool8 isShiny;
     u8 taskCirc, taskDgnl;
     struct Pokemon* illusionMon;
+
+    // Start silicon_shine
+    TrySiliconShineAnimation(battler,mon);
+    return;
+    // End silicon_shine
 
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
     gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = TRUE;

@@ -31,6 +31,7 @@
 #include "constants/battle_tent.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "color_variation.h" // colorVariation
 
 // Select_ refers to the first Pokémon selection screen where you choose your initial 3 rental Pokémon.
 // Swap_   refers to the subsequent selection screens where you can swap a Pokémon with one from the beaten trainer
@@ -2026,6 +2027,7 @@ static void Select_ReshowMonSprite(void)
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
     sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
+    UniquePalette(OBJ_PLTT_ID(15),&mon->box); // colorVariation
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecY = 0;
 
@@ -2048,6 +2050,8 @@ static void Select_CreateChosenMonsSprites(void)
                 bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
                 sFactorySelectScreen->monPics[i].monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, (i * 72) + 16, 32, i + 13, TAG_NONE);
+                UniquePalette(OBJ_PLTT_ID(i + 13),&mon->box); // colorVariation
+                SetPaletteBufferSlotUnfadedToFaded(i + 13); // colorVariation
                 gSprites[sFactorySelectScreen->monPics[i].monSpriteId].centerToCornerVecX = 0;
                 gSprites[sFactorySelectScreen->monPics[i].monSpriteId].centerToCornerVecY = 0;
                 break;
@@ -2360,6 +2364,7 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_SUMMARY_FADE:
+    	SetPaletteBufferSlotUnfadedToFaded(15); // colorVariation
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
@@ -4068,6 +4073,8 @@ static void Swap_ShowSummaryMonSprite(void)
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
     sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
+    UniquePalette(OBJ_PLTT_ID(15),&mon->box); // colorVariation
+    SetPaletteBufferSlotUnfadedToFaded(15); // colorVariation
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecY = 0;
 
@@ -4285,6 +4292,7 @@ static void Swap_CreateMonSprite(void)
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 
     sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
+    UniquePalette(OBJ_PLTT_ID(15),&mon->box); // colorVariation
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecY = 0;
 

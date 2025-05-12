@@ -25,6 +25,7 @@
 #include "constants/hold_effects.h"
 #include "constants/moves.h"
 #include "constants/items.h"
+#include "options_battle.h"
 #include "constants/trainers.h"
 
 #define AI_ACTION_DONE          (1 << 0)
@@ -111,6 +112,7 @@ void BattleAI_SetupItems(void)
                                | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_FRONTIER
                                | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_RECORDED_LINK)
             )
+        && CanAIUseItems() // siliconMerge
        )
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)

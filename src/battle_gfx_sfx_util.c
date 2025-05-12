@@ -28,6 +28,7 @@
 #include "constants/battle_palace.h"
 #include "constants/battle_move_effects.h"
 #include "constants/event_objects.h" // only for SHADOW_SIZE constants
+#include "color_variation.h" //colorVariation
 
 // this file's functions
 static u8 GetBattlePalaceMoveGroup(u8 battler, u16 move);
@@ -661,6 +662,13 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
     Free(buffer);
 
+    // Start colorVariation
+    UniquePalette(paletteOffset, &mon->box);
+    CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZEOF(16));
+    UniquePalette(BG_PLTT_ID(8) + BG_PLTT_ID(battler), &mon->box);
+    CpuCopy32(&gPlttBufferFaded[BG_PLTT_ID(8) + BG_PLTT_ID(battler)], &gPlttBufferUnfaded[BG_PLTT_ID(8) + BG_PLTT_ID(battler)], PLTT_SIZEOF(16));
+    // End colorVariation
+
     // transform's pink color
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies != SPECIES_NONE)
     {
@@ -980,6 +988,35 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
     void *buffer = malloc_and_decompress(lzPaletteData, NULL);
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     Free(buffer);
+
+    // Start colorVariation
+    struct BoxPokemon boxMon;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    u32 otId = 0, ivs;
+
+    CreateBoxMon(&boxMon, targetSpecies, 5, USE_RANDOM_IVS, TRUE, personalityValue, OT_ID_PRESET, otId);
+
+    if (GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
+    {
+        ivs = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IVS);
+        GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_NICKNAME, nickname);
+        GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_NAME, otName);
+    }
+    else if (GetBattlerSide(battlerAtk) == B_SIDE_OPPONENT)
+    {
+        ivs = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IVS);
+        GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_NICKNAME, nickname);
+        GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_NAME, otName);
+    }
+
+    SetBoxMonData(&boxMon, MON_DATA_IVS, &ivs);
+    SetBoxMonData(&boxMon, MON_DATA_NICKNAME, nickname);
+    SetBoxMonData(&boxMon, MON_DATA_OT_NAME, otName);
+
+    UniquePalette(paletteOffset, &boxMon);
+    CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZEOF(16));
+    // End colorVariation
 
     if (!megaEvo)
     {
@@ -1399,7 +1436,13 @@ void ClearTemporarySpeciesSpriteData(u32 battler, bool32 dontClearTransform, boo
 
 void AllocateMonSpritesGfx(void)
 {
-    u8 i = 0, j;
+// Start midBattleEvolution
+    //u8 i = 0, j;
+    s32 i, j;
+
+    if (gMonSpritesGfxPtr != NULL)
+        return;
+// End midBattleEvolution
 
     gMonSpritesGfxPtr = NULL;
     gMonSpritesGfxPtr = AllocZeroed(sizeof(*gMonSpritesGfxPtr));

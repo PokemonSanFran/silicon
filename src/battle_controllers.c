@@ -25,6 +25,7 @@
 #include "text.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"
+#include "ui_character_customization_menu.h" // playerCustom
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
@@ -40,7 +41,7 @@ static void SetBattlePartyIds(void);
 static void Task_HandleSendLinkBuffersData(u8 taskId);
 static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId);
 static void Task_StartSendOutAnim(u8 taskId);
-static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
+//static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite); // playerCustom
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
 
 void HandleLinkBattleSetup(void)
@@ -1518,6 +1519,17 @@ void BtlController_EmitDebugMenu(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 1);
 }
 
+// Start midBattleEvolution
+void BtlController_EmitMidBattleEvo(u32 battler, u32 bufferId, u32 partyId, u32 species)
+{
+    gBattleResources->transferBuffer[MIDBATTLEEVO_CONTROLLER_ID] = CONTROLLER_MIDBATTLE_EVOLUTION;
+    gBattleResources->transferBuffer[MIDBATTLEEVO_PARTY_ID] = partyId;
+    gBattleResources->transferBuffer[MIDBATTLEEVO_SPECIES_ID] = species & 0xFF;
+    gBattleResources->transferBuffer[MIDBATTLEEVO_SPECIES_ID + 1] = (species & 0xFF00) >> 8;
+    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, MIDBATTLEEVO_COUNT);
+}
+// End midBattleEvolution
+
 // Standardized Controller functions
 
 // Can be used for all the controllers.
@@ -2505,6 +2517,7 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
                 gBattlerSpriteIds[battler] = gBattleStruct->trainerSlideSpriteIds[battler];
 
             gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].oam.paletteNum = battler;
+            SetPlayerBackPicPalette(trainerPicId,&gSprites[gBattleStruct->trainerSlideSpriteIds[battler]]); // playerCustom
         }
         gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].x2 = DISPLAY_WIDTH;
         gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].sSpeedX = -2;
@@ -2856,6 +2869,7 @@ void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, c
         paletteNum = AllocSpritePalette(tagTrainerPal);
         LoadCompressedPalette(trainerPal, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
         gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].oam.paletteNum = paletteNum;
+        SetPlayerBackSlidePicPalette(battler,&gSprites[gBattleStruct->trainerSlideSpriteIds[battler]]); // playerCustom
     }
     else
     {
@@ -2933,7 +2947,10 @@ static void Task_StartSendOutAnim(u8 taskId)
 #undef tControllerFunc_1
 #undef tControllerFunc_2
 
-static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
+// Start playerCustom
+//static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
+void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
+// End playerCustom
 {
     u8 battler = sprite->sBattlerId;
 

@@ -33,7 +33,9 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/items.h"
+#include "options_battle.h" // last_used_ball
 #include "caps.h"
+#include "quest_logic.h" // fogBattle
 
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
@@ -934,7 +936,10 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
         text[0] = CHAR_EXTRA_SYMBOL;
         text[1] = CHAR_LV_2;
 
-        objVram = ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        // Start fogBattle
+        //objVram = ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        objVram = PrintUnknownLevel(lvl, battler, text);
+        // End fogBattle
         xPos = 5 * (3 - (objVram - (text + 2)));
         UpdateIndicatorVisibilityAndType(healthboxSpriteId, TRUE);
     }
@@ -2060,10 +2065,20 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 {
     s32 currentBarValue;
+    // Start hpexpspeed
+    s32 previousVal = 0;
+    bool32 isBarInstant = IsBarOptionInstant(whichBar);
+
+    if (isBarInstant)
+        previousVal = SetInstantBarMove(&gBattleSpritesDataPtr->battleBars[battlerId]);
+    // End hpexpspeed
 
     if (whichBar == HEALTH_BAR) // health bar
     {
-        u16 hpFraction = B_FAST_HP_DRAIN == FALSE ? 1 : max(gBattleSpritesDataPtr->battleBars[battlerId].maxValue / (B_HEALTHBAR_PIXELS / 2), 1);
+    // Start hpexpspeed
+        //u16 hpFraction = B_FAST_HP_DRAIN == FALSE ? 1 : max(gBattleSpritesDataPtr->battleBars[battlerId].maxValue / (B_HEALTHBAR_PIXELS / 2), 1);
+        u16 hpFraction = GetHPFraction(battlerId);
+    // End hpexpspeed
         currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
@@ -2090,7 +2105,14 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
         MoveBattleBarGraphically(battlerId, whichBar);
 
     if (currentBarValue == -1)
+    {
         gBattleSpritesDataPtr->battleBars[battlerId].currValue = 0;
+
+    // Start hpexpspeed
+        if (isBarInstant && whichBar == HEALTH_BAR)
+            UpdateHpTextInHealthbox(gHealthboxSpriteIds[battlerId], HP_CURRENT, previousVal, gBattleSpritesDataPtr->battleBars[battlerId].maxValue);
+    // End hpexpspeed
+    }
 
     return currentBarValue;
 }
@@ -2286,7 +2308,10 @@ static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8
     s32 newVal, result;
     s8 oldToMax, newToMax;
 
-    scale *= (B_FAST_EXP_GROW) ? 2 : 8;
+    // Start hpexpspeed
+    //scale *= (B_FAST_EXP_GROW) ? 2 : 8;
+    scale = GetEXPScale();
+    // End hpexpspeed
     newVal = oldValue - receivedValue;
 
     if (newVal < 0)
@@ -2962,8 +2987,14 @@ static const struct SpriteSheet sSpriteSheet_MoveInfoWindow =
 
 bool32 CanThrowLastUsedBall(void)
 {
-    if (B_LAST_USED_BALL == FALSE)
+    // Start last_used_ball
+    if (!IsLastUsedBallOn())
         return FALSE;
+    //if (B_LAST_USED_BALL == FALSE)
+        //return FALSE;
+    if (IsLastUsedBallOptionAfterAndLastBallIsNone())
+        return FALSE;
+    // End last_used_ball
     if (!CanThrowBall())
         return FALSE;
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER))
@@ -2978,6 +3009,8 @@ void TryAddLastUsedBallItemSprites(void)
 {
     if (B_LAST_USED_BALL == FALSE)
         return;
+    // Start last_used_ball
+    /*
     if (gLastThrownBall == 0
       || (gLastThrownBall != 0 && !CheckBagHasItem(gLastThrownBall, 1)))
     {
@@ -2991,6 +3024,10 @@ void TryAddLastUsedBallItemSprites(void)
         if (firstBall > ITEM_NONE)
             gBallToDisplay = firstBall;
     }
+    */
+    if (ShouldCalculateBallToDisplay())
+        gBallToDisplay = GetBallToDisplay();
+    // End last_used_ball
 
     if (!CanThrowLastUsedBall())
         return;

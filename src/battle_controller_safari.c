@@ -25,6 +25,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
+#include "options_battle.h" // last_used_ball and quick_run
 
 static void SafariHandleDrawTrainerPic(u32 battler);
 static void SafariHandleSuccessBallThrowAnim(u32 battler);
@@ -40,7 +41,7 @@ static void SafariHandleBattleAnimation(u32 battler);
 static void SafariHandleEndLinkBattle(u32 battler);
 
 static void SafariBufferRunCommand(u32 battler);
-static void SafariBufferExecCompleted(u32 battler);
+//static void SafariBufferExecCompleted(u32 battler); //quick_run
 static void CompleteWhenChosePokeblock(u32 battler);
 
 static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
@@ -181,13 +182,21 @@ static void HandleInputChooseAction(u32 battler)
             ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
         }
     }
-    else if (B_QUICK_MOVE_CURSOR_TO_RUN && JOY_NEW(B_BUTTON))
+    // Start quick_run
+    //else if (B_QUICK_MOVE_CURSOR_TO_RUN && JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
+        if(!IsQuickRunSetToBA())
+            return;
+
         PlaySE(SE_SELECT);
         ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
         gActionSelectionCursor[battler] = 3;
         ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
     }
+    else if (JOY_NEW(L_BUTTON))
+        AttemptFleeWithL(battler, B_ACTION_SAFARI_RUN);
+    // End quick_run
 }
 
 static void Controller_WaitForHealthbox(u32 battler)
@@ -225,7 +234,10 @@ static void CompleteWhenChosePokeblock(u32 battler)
     }
 }
 
-static void SafariBufferExecCompleted(u32 battler)
+// Start quick_run
+// static void SafariBufferExecCompleted(u32 battler)
+void SafariBufferExecCompleted(u32 battler)
+// End quick_run
 {
     gBattlerControllerFuncs[battler] = SafariBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
