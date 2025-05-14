@@ -81,8 +81,11 @@
 #define PARTY_MSG_ALREADY_HOLDING_ONE       26
 #define PARTY_MSG_WHICH_APPLIANCE           27
 #define PARTY_MSG_CHOOSE_SECOND_FUSION      28
-#define PARTY_MSG_NO_POKEMON                29
-#define PARTY_MSG_CHOOSE_MON_FOR_BOX        30
+#define PARTY_MSG_WHICH_STATUS              29 // hexorb Branch
+// Start siliconMerge
+#define PARTY_MSG_NO_POKEMON                30
+#define PARTY_MSG_CHOOSE_MON_FOR_BOX        31
+// End siliconMerge
 
 #define PARTY_MSG_NONE                      127
 
@@ -107,5 +110,6 @@
 #define SELECTWINDOW_MOVES       3
 #define SELECTWINDOW_CATALOG     4
 #define SELECTWINDOW_ZYGARDECUBE 5
+#define SELECTWINDOW_HEXORB      6 // hexorb Branch
 
 #endif // GUARD_CONSTANTS_PARTY_MENU_H

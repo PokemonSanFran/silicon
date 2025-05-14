@@ -242,11 +242,48 @@
 #define OBJ_EVENT_GFX_HOOH                       238
 #define OBJ_EVENT_GFX_POKE_BALL                  239
 #define OBJ_EVENT_GFX_OW_MON                     240
+// Start silicon
+#define OBJ_EVENT_GFX_KAI                        241
+#define OBJ_EVENT_GFX_UNKNOWN                    242
+#define OBJ_EVENT_GFX_ADAORA                     243
+#define OBJ_EVENT_GFX_ALCMENE                    244
+#define OBJ_EVENT_GFX_BD                         245
+#define OBJ_EVENT_GFX_BELEN                      246
+#define OBJ_EVENT_GFX_DIMU                       247
+#define OBJ_EVENT_GFX_DOYLE                      248
+#define OBJ_EVENT_GFX_EMRYS                      249
+#define OBJ_EVENT_GFX_IMELDA                     250
+#define OBJ_EVENT_GFX_KAUNA                      251
+#define OBJ_EVENT_GFX_KEIYING                    252
+#define OBJ_EVENT_GFX_MAGNUS                     253
+#define OBJ_EVENT_GFX_NERIENE                    254
+#define OBJ_EVENT_GFX_SHINZO                     255
+#define OBJ_EVENT_GFX_KAI_FAINTED                256
+#define OBJ_EVENT_GFX_ADAORA_FAINTED             257
+#define OBJ_EVENT_GFX_KAI_FIELD_MOVE             258
+#define OBJ_EVENT_GFX_KAUNA_SURFING              259
+#define OBJ_EVENT_GFX_ADELAIDE OBJ_EVENT_GFX_MAXIE
+#define OBJ_EVENT_GFX_ARMANDO OBJ_EVENT_GFX_GLACIA
+#define OBJ_EVENT_GFX_CHARLOTTE OBJ_EVENT_GFX_MAY_NORMAL
+#define OBJ_EVENT_GFX_ELLEN OBJ_EVENT_GFX_DRAKE
+#define OBJ_EVENT_GFX_OLIVER OBJ_EVENT_GFX_PROF_BIRCH
+#define OBJ_EVENT_GFX_RAMESH OBJ_EVENT_GFX_MAGMA_MEMBER_M
+#define OBJ_EVENT_GFX_AMIARGENTO OBJ_EVENT_GFX_JUAN
+#define OBJ_EVENT_GFX_TALA OBJ_EVENT_GFX_SIDNEY
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL             260
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE          261
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_ACRO_BIKE 262
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING            263
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER         264
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE         265
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING            266
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F1_WATERING           267
+// End silicon
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        241
+#define NUM_OBJ_EVENT_GFX                        276
 
 
 // These are dynamic object gfx ids.
@@ -314,6 +351,7 @@
 #define OBJ_EVENT_ID_PLAYER 0xFF
 #define OBJ_EVENT_ID_CAMERA 0x7F
 #define OBJ_EVENT_ID_FOLLOWER 0xFE
+#define OBJ_EVENT_ID_PARK_RANGER (OBJ_EVENT_ID_FOLLOWER - 1) // siliconMerge
 
 // Object event local ids referenced in C files
 #define LOCALID_ROUTE111_PLAYER_FALLING 45
@@ -383,6 +421,25 @@
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1124
+// Start silicon
+#define OBJ_EVENT_PAL_TAG_KAI 0x1125
+#define OBJ_EVENT_PAL_TAG_UNKNOWN 0x1126
+#define OBJ_EVENT_PAL_TAG_ADAORA 0x1127
+#define OBJ_EVENT_PAL_TAG_ALCMENE 0x1128
+#define OBJ_EVENT_PAL_TAG_BD 0x1129
+#define OBJ_EVENT_PAL_TAG_BELEN 0x1130
+#define OBJ_EVENT_PAL_TAG_DIMU 0x1131
+#define OBJ_EVENT_PAL_TAG_DOYLE 0x1132
+#define OBJ_EVENT_PAL_TAG_EMRYS 0x1133
+#define OBJ_EVENT_PAL_TAG_IMELDA 0x1134
+#define OBJ_EVENT_PAL_TAG_KAUNA 0x1135
+#define OBJ_EVENT_PAL_TAG_KEIYING 0x1136
+#define OBJ_EVENT_PAL_TAG_MAGNUS 0x1137
+#define OBJ_EVENT_PAL_TAG_NERIENE 0x1138
+#define OBJ_EVENT_PAL_TAG_SHINZO 0x1139
+#define OBJ_EVENT_PAL_TAG_SILICON 0x1140
+#define OBJ_EVENT_PAL_TAG_SILICON_UNDERWATER  OBJ_EVENT_PAL_TAG_SILICON
+// End silicon
 
 #if OW_FOLLOWERS_POKEBALLS
 // Vanilla
@@ -418,6 +475,16 @@
 #define OBJ_EVENT_PAL_TAG_BALL_BEAST              0x1169
 // Gen VIII
 #define OBJ_EVENT_PAL_TAG_BALL_STRANGE            0x116A
+// Start siliconNewBalls
+#define OBJ_EVENT_PAL_TAG_BALL_NEWA               OBJ_EVENT_PAL_TAG_BALL_NET
+#define OBJ_EVENT_PAL_TAG_BALL_NEWB               OBJ_EVENT_PAL_TAG_BALL_NET
+#define OBJ_EVENT_PAL_TAG_BALL_NEWC               OBJ_EVENT_PAL_TAG_BALL_NET
+#define OBJ_EVENT_PAL_TAG_BALL_NEWD               OBJ_EVENT_PAL_TAG_BALL_NET
+#define OBJ_EVENT_PAL_TAG_BALL_NEWE               OBJ_EVENT_PAL_TAG_BALL_NET
+#define OBJ_EVENT_PAL_TAG_BALL_NEWF               OBJ_EVENT_PAL_TAG_BALL_NET
+#define OBJ_EVENT_PAL_TAG_BALL_NEWG               OBJ_EVENT_PAL_TAG_BALL_NET
+#define OBJ_EVENT_PAL_TAG_BALL_NEWH               OBJ_EVENT_PAL_TAG_BALL_NET
+// End siliconNewBalls
 #endif //OW_FOLLOWERS_POKEBALLS
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611

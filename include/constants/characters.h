@@ -181,6 +181,7 @@
 #define CHAR_NEWLINE           0xFE
 #define EOS                    0xFF // end of string
 
+#define UPPER_LOWER_GAP        (CHAR_a - CHAR_A) // pokedex
 // CHAR_KEYPAD_ICON chars
 #define CHAR_A_BUTTON       0x00
 #define CHAR_B_BUTTON       0x01
@@ -264,6 +265,11 @@
 #define PLACEHOLDER_ID_MAXIE         0xB
 #define PLACEHOLDER_ID_KYOGRE        0xC
 #define PLACEHOLDER_ID_GROUDON       0xD
+// Start playerCustom
+#define PLACEHOLDER_ID_SUBJECT       0xE
+#define PLACEHOLDER_ID_OBJECT        0xF
+#define PLACEHOLDER_ID_POSSESSIVE    0x10
+// End playerCustom
 
 // battle placeholders are located in battle_message.h
 

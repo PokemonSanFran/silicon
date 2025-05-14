@@ -73,7 +73,7 @@
 #define BATTLE_TYPE_RECORDED_LINK      (1 << 25)
 #define BATTLE_TYPE_TRAINER_HILL       (1 << 26)
 #define BATTLE_TYPE_SECRET_BASE        (1 << 27)
-#define BATTLE_TYPE_28                 (1 << 28)
+#define BATTLE_TYPE_FOG                (1 << 28) // fogBattle
 #define BATTLE_TYPE_29                 (1 << 29)
 #define BATTLE_TYPE_30                 (1 << 30)
 #define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31)
@@ -316,7 +316,7 @@ enum BattleWeather
 #define B_WEATHER_SANDSTORM     (1 << BATTLE_WEATHER_SANDSTORM)
 #define B_WEATHER_HAIL          (1 << BATTLE_WEATHER_HAIL)
 #define B_WEATHER_SNOW          (1 << BATTLE_WEATHER_SNOW)
-#define B_WEATHER_FOG           (1 << BATTLE_WEATHER_FOG)
+#define B_WEATHER_FOG           (1 << BATTLE_WEATHER_FOG) // fogBattle
 #define B_WEATHER_STRONG_WINDS  (1 << BATTLE_WEATHER_STRONG_WINDS)
 
 #define B_WEATHER_ANY           (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL | B_WEATHER_STRONG_WINDS | B_WEATHER_SNOW | B_WEATHER_FOG)

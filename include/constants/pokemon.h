@@ -25,6 +25,7 @@
 #define TYPE_STELLAR          20
 #define NUMBER_OF_MON_TYPES   21
 
+#define TYPES_PER_MON         2 // pokedex
 // Pokémon egg groups
 #define EGG_GROUP_NONE                0
 #define EGG_GROUP_MONSTER             1
@@ -42,6 +43,8 @@
 #define EGG_GROUP_DITTO               13
 #define EGG_GROUP_DRAGON              14
 #define EGG_GROUP_NO_EGGS_DISCOVERED  15
+
+#define EGG_GROUP_COUNT               (EGG_GROUP_NO_EGGS_DISCOVERED + 1) // pokedex
 
 #define EGG_GROUPS_PER_MON            2
 
@@ -185,6 +188,7 @@
 #define FRIENDSHIP_EVENT_FAINT_SMALL      6
 #define FRIENDSHIP_EVENT_FAINT_FIELD_PSN  7
 #define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
+#define FRIENDSHIP_EVENT_MUTUAL_AID       9 // siliconMerge
 
 // Constants for GetLeadMonFriendshipScore
 #define FRIENDSHIP_NONE        0
@@ -221,6 +225,7 @@
 #define DAMAGE_CATEGORY_PHYSICAL    0
 #define DAMAGE_CATEGORY_SPECIAL     1
 #define DAMAGE_CATEGORY_STATUS      2
+#define DAMAGE_CATEGORY_COUNT       3 // pokedex
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
@@ -230,6 +235,23 @@
 #define GROWTH_FAST         4
 #define GROWTH_SLOW         5
 
+// Start pokedex
+enum PokedexBodyColors
+{
+    BODY_COLOR_NONE,
+    BODY_COLOR_RED,
+    BODY_COLOR_BLUE,
+    BODY_COLOR_YELLOW,
+    BODY_COLOR_GREEN,
+    BODY_COLOR_BLACK,
+    BODY_COLOR_BROWN,
+    BODY_COLOR_PURPLE,
+    BODY_COLOR_GRAY,
+    BODY_COLOR_WHITE,
+    BODY_COLOR_PINK,
+    BODY_COLOR_COUNT,
+};
+/*
 // Body colors for Pokédex search
 #define BODY_COLOR_RED      0
 #define BODY_COLOR_BLUE     1
@@ -241,6 +263,9 @@
 #define BODY_COLOR_GRAY     7
 #define BODY_COLOR_WHITE    8
 #define BODY_COLOR_PINK     9
+#define BODY_COLOR_COUNT    BODY_COLOR_PINK + 1
+*/
+// End pokedex
 
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 

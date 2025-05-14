@@ -723,15 +723,30 @@
 #define STRINGID_ELECTRICCURRENTISRUNNING             721
 #define STRINGID_SEEMSWEIRD                           722
 #define STRINGID_WAGGLINGAFINGER                      723
-#define STRINGID_BLOCKEDBYSLEEPCLAUSE                 724
-#define STRINGID_SUPEREFFECTIVETWOFOES                725
-#define STRINGID_NOTVERYEFFECTIVETWOFOES              726
-#define STRINGID_ITDOESNTAFFECTTWOFOES                727
-#define STRINGID_SENDCAUGHTMONPARTYORBOX              728
-#define STRINGID_PKMNSENTTOPCAFTERCATCH               729
-#define STRINGID_TOXICSPIKESBADLYPOISONED             730
-
-#define BATTLESTRINGS_COUNT                           731
+#define STRINGID_TAKEWILDMONITEM                      724 // Battle Settings: Take Wild Items
+#define STRINGID_OBTAINEDITEM                         725 // Battle Settings: Take Wild Items
+#define STRINGID_PLAYERRECEIVEDNATIVEITEM             726 // Give Native Item
+#define STRINGID_PKMNGAINEDPOINTS                     727 // Point Messages
+#define STRINGID_PKMNGAINEDEVS                        728 // Point Messages
+#define STRINGID_STORAGEGAINEDPOINTS                  729 // Point Messages
+#define STRINGID_ALLGAINEDEXP                         730 // Point Messages
+#define STRINGID_PARTYGAINEDEXP                       731 // Point Messages
+#define STRINGID_STORAGEGAINEDEXP                     732 // Point Messages
+#define STRINGID_ALLGAINEDEVS                         733 // Point Messages
+#define STRINGID_PARTYGAINEDEVS                       734 // Point Messages
+#define STRINGID_STORAGEGAINEDEVS                     735 // Point Messages
+#define STRINGID_PARTYGAINEDPOINTS                    736 // Point Messages
+#define STRINGID_ALLGAINEDPOINTS                      737 // Point Messages
+#define STRINGID_BLOCKEDBYSLEEPCLAUSE                 738
+#define STRINGID_SUPEREFFECTIVETWOFOES                739
+#define STRINGID_NOTVERYEFFECTIVETWOFOES              740
+#define STRINGID_ITDOESNTAFFECTTWOFOES                741
+#define STRINGID_SENDCAUGHTMONPARTYORBOX              742
+#define STRINGID_PKMNSENTTOPCAFTERCATCH               743
+#define STRINGID_FOGISTOODENSE                        744 // fogBattle
+#define STRINGID_ITEMSCANTBEUSEDNOWFOG                745 // fogBattle
+#define STRINGID_EMBOLDENEDATTACKEDFROMFOG            746 // fogBattle
+#define BATTLESTRINGS_COUNT                           747
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

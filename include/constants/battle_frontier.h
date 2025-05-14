@@ -7,6 +7,15 @@
 
 // Battle Frontier facility ids.
 #define FRONTIER_FACILITY_TOWER    0
+// Start siliconMerge
+enum
+{
+#define FRONTIER_RESTORED_TOWER,
+#define FRONTIER_RESTORED_ARCADE,
+#define FRONTIER_RESTORED_DOJO,
+#define FRONTIER_RESTORED_FACTORY,
+};
+// End siliconMerge
 #define FRONTIER_FACILITY_DOME     1
 #define FRONTIER_FACILITY_PALACE   2  // also Verdanturf Tent
 #define FRONTIER_FACILITY_ARENA    3  // also Fallarbor Tent
@@ -54,7 +63,10 @@
 
 // This is the default number of battles (or floors, in Battle Pyramid) per challenge.
 // There are 2 facilities that differ: Battle Dome (DOME_ROUNDS_COUNT) and Battle Pike (NUM_PIKE_ROOMS).
-#define FRONTIER_STAGES_PER_CHALLENGE 7
+// Start siliconMerge
+#define FRONTIER_STAGES_PER_CHALLENGE 10
+//#define FRONTIER_STAGES_PER_CHALLENGE 7
+// End siliconMerge
 
 // These sets of facility ids would be redundant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous

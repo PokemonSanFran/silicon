@@ -56,17 +56,22 @@
 
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT 2
+// Start siliconMerge
+#define SILICON_DAYCARE_EGG_MAX 10
+#define SILICON_DAYCARE_EGG_NONE (SILICON_DAYCARE_EGG_MAX + 1)
+// End siliconMerge
 #define POKEBLOCKS_COUNT 40
 #define OBJECT_EVENTS_COUNT 16
 #define MAIL_COUNT (10 + PARTY_SIZE)
 #define SECRET_BASES_COUNT 20
 #define POKE_NEWS_COUNT 16
-#define PC_ITEMS_COUNT 50
-#define BAG_ITEMS_COUNT 30
-#define BAG_KEYITEMS_COUNT 30
-#define BAG_POKEBALLS_COUNT 16
-#define BAG_TMHM_COUNT 64
-#define BAG_BERRIES_COUNT 46
+// PSF TODO Update all of these values to match the max size of the pockets
+#define PC_ITEMS_COUNT 0 // siliconMerge
+#define BAG_ITEMS_COUNT 525 // siliconMerge
+#define BAG_KEYITEMS_COUNT 93  // siliconMerge
+#define BAG_POKEBALLS_COUNT 27 // siliconMerge
+#define BAG_TMHM_COUNT 408 // PSF technicalmachine Branch
+#define BAG_BERRIES_COUNT 68 // siliconMerge
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 #define DECOR_MAX_SECRET_BASE 16
 #define DECOR_MAX_PLAYERS_HOUSE 12
@@ -123,28 +128,48 @@
 #define WONDER_NEWS_BODY_TEXT_LINES 10
 #define TYPE_NAME_LENGTH 8
 #define ABILITY_NAME_LENGTH 16
-#define TRAINER_NAME_LENGTH 10
+#define TRAINER_NAME_LENGTH 19 // siliconMerge
 #define CODE_NAME_LENGTH 11
 
 #define MAX_STAMP_CARD_STAMPS 7
 
+// Start Silicon changes
+/*
 #define MALE 0
 #define FEMALE 1
 #define GENDER_COUNT 2
+*/
 
+enum PlayerGender
+{
+    MALE,
+    FEMALE,
+    GENDER_COUNT,
+    NON_BINARY,
+    GENDER_EXPANDED_COUNT,
+};
+// End Silicon changes
 #define NUM_BARD_SONG_WORDS    6
 #define NUM_STORYTELLER_TALES  4
 #define NUM_TRADER_ITEMS       4
 #define GIDDY_MAX_TALES       10
 #define GIDDY_MAX_QUESTIONS    8
 
+// Start siliconMerge
 #define OPTIONS_BUTTON_MODE_NORMAL 0
 #define OPTIONS_BUTTON_MODE_LR 1
 #define OPTIONS_BUTTON_MODE_L_EQUALS_A 2
+/*
+#define OPTIONS_BUTTON_MODE_LR 0
+#define OPTIONS_BUTTON_MODE_L_EQUALS_A 1
+#define OPTIONS_BUTTON_MODE_L_MODE_COUNT 2
+*/
+// End siliconMerge
 
-#define OPTIONS_TEXT_SPEED_SLOW 0
-#define OPTIONS_TEXT_SPEED_MID 1
-#define OPTIONS_TEXT_SPEED_FAST 2
+#define OPTIONS_TEXT_SPEED_SLOW    0
+#define OPTIONS_TEXT_SPEED_MID     1
+#define OPTIONS_TEXT_SPEED_FAST    2
+#define OPTIONS_TEXT_SPEED_INSTANT 3 // siliconMerge
 
 #define OPTIONS_SOUND_MONO 0
 #define OPTIONS_SOUND_STEREO 1
@@ -161,6 +186,7 @@
 #define DIR_SOUTHEAST   6
 #define DIR_NORTHWEST   7
 #define DIR_NORTHEAST   8
+#define DIR_OPPOSITE    DIR_NORTHEAST + 1 //cueobject
 #define CARDINAL_DIRECTION_COUNT DIR_SOUTHWEST
 
 #define AXIS_X     0

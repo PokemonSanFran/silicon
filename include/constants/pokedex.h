@@ -1,6 +1,17 @@
 #ifndef GUARD_CONSTANTS_POKEDEX_H
 #define GUARD_CONSTANTS_POKEDEX_H
 
+// Start pokedex
+enum PokedexSortOrders
+{
+   ORDER_NUMERICAL,
+   ORDER_ALPHABETICAL,
+   ORDER_HEAVIEST,
+   ORDER_LIGHTEST,
+   ORDER_TALLEST,
+   ORDER_SMALLEST
+};
+// End pokedex
 // National Pokédex order
 // These constants are NOT disabled by P_GEN_X_POKEMON to keep pokedex_orders.h clean.
 enum {

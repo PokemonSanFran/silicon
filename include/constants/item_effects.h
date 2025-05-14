@@ -2,9 +2,11 @@
 #define GUARD_CONSTANTS_ITEM_EFFECTS_H
 
 // field 0 masks
+#define ITEM0_HEXORB            0x1  // hexorb Branch
 #define ITEM0_DIRE_HIT          0x30 // Works the same way as the move Focus Energy.
 #define ITEM0_SACRED_ASH        0x40
 #define ITEM0_INFATUATION       0x80
+#define ITEM0_POKEVIAL          0xC0 //Pokevial Branch
 
 // new field 1 masks
 #define ITEM1_X_ATTACK          STAT_ATK
@@ -59,6 +61,7 @@
 #define ITEM6_HEAL_HP_LVL_UP  ((u8) -3)
 #define ITEM6_HEAL_HP_QUARTER ((u8) -4)
 
+#define ITEM6_EV_ALL         0x2 //Sherbet Surprise effect
 // Special PP recovery amounts for ITEM4_HEAL_PP
 #define ITEM6_HEAL_PP_FULL   0x7F
 
@@ -92,5 +95,8 @@
 #define ITEM_EFFECT_PP_MAX 20
 #define ITEM_EFFECT_HEAL_PP 21
 #define ITEM_EFFECT_NONE 22
+#define ITEM_EFFECT_ALL_EV 23 // siliconMerge
+#define ITEM_EFFECT_POKEVIAL 24 //Pokevial Branch
+#define ITEM_EFFECT_HEXORB 25 //hexorb Branch
 
 #endif // GUARD_CONSTANTS_ITEM_EFFECTS_H

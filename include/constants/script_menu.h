@@ -134,6 +134,18 @@
 #define SSTIDAL_SELECTION_EXIT             6
 #define SSTIDAL_SELECTION_COUNT            7
 
+//Ferry Multichoice Menus
+
+
+//Ferry Multichoice Options
+#define FERRY_SELECTION_HALAI_ISLAND 1
+#define FERRY_SELECTION_ARANTRAZ 2
+#define FERRY_SELECTION_FERRYBUILDING 3
+#define FERRY_SELECTION_MARIN 4
+#define FERRY_SELECTION_CHASILLA 5
+
+#define FERRY_SELECTION_EXIT 9
+
 // Std String Ids
 #define STDSTRING_COOL             0
 #define STDSTRING_BEAUTY           1
