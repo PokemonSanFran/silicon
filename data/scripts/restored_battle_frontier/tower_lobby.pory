@@ -1,0 +1,943 @@
+const ATTENDANT_SINGLES = 1
+const ATTENDANT_DOUBLES = 2
+const ATTENDANT_MULTIS = 3
+const ATTENDANT_LINK_MULTIS = 4
+
+const VAR_FACILITY_CHALLENGE_STATUS = VAR_TEMP_0
+const CHALLENGE_STATUS_UNKNOWN = 0
+const CHALLENGE_STATUS_END = 255
+
+const VAR_NEED_TO_FACE_NORTH = VAR_TEMP_1
+
+const MODE_50_SINGLES = 51
+const MODE_50_DOUBLES = 52
+const MODE_50_MULTIS = 53
+const MODE_OPEN_SINGLES = 101
+const MODE_OPEN_DOUBLES = 102
+const MODE_OPEN_MULTIS = 103
+
+mapscripts BattleTower_MapScripts{
+}
+
+script BattleTower_EventScript_PlayerFaceNorth{
+    setvar(VAR_NEED_TO_FACE_NORTH, 1)
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+    end
+}
+
+script BattleTower_EventScript_GetChallengeStatus{
+    frontier_getstatus
+    end
+}
+
+script BattleTower_EventScript_QuitWithoutSaving{
+    lock
+    faceplayer
+    msgbox(BattleTower_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT)
+    closemessage
+    tower_set(TOWER_DATA_WIN_STREAK, 0)
+    tower_set(TOWER_DATA_WIN_STREAK_ACTIVE, FALSE)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    setvar(VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_END)
+    release
+    end
+}
+
+script BattleTower_EventScript_WonChallenge{
+    lock
+    faceplayer
+
+    message(BattleTower_Text_CongratsBeatenSeven)
+    waitmessage
+
+    call(BattleTower_EventScript_GiveRibbons)
+    call(BattleTower_EventScript_GiveBattlePoints)
+    call(BattleTower_EventScript_AskSaveBattle2)
+    goto(BattleTower_EventScript_LookForwardToChallenge)
+}
+
+script BattleTower_EventScript_GiveRibbons{
+    tower_giveribbons
+    if(!var(VAR_RESULT)){
+        return
+    }
+
+    message(BattleTower_Text_HereAreSomeRibbons)
+    waitmessage
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+    msgbox(BattleTower_Text_PutRibbonOnMons, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleTower_EventScript_GiveBattlePoints{
+    //PSF TODO needs a show BP box
+    msgbox(BattleTower_Text_AwardYouTheseBattlePoints, MSGBOX_DEFAULT)
+    buffernumberstring(STR_VAR_1,10)
+    givefrontierbattlepoints(10)
+    msgbox(BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
+    return
+}
+
+script BattleTower_EventScript_LookForwardToChallenge{
+    msgbox(BattleTower_Text_LookForwardToAnotherChallenge, MSGBOX_DEFAULT)
+    closemessage
+    special(LoadPlayerPartyBattleFrontier)
+    setvar(VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_END)
+    release
+    end
+}
+
+script BattleTower_EventScript_LostChallenge {
+    special(LoadPlayerPartyBattleFrontier)
+    if (var(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_MULTIS ||
+        flag(FLAG_CHOSEN_RESTORED_MULTI_BATTLE_NPC_PARTNER)) {
+        goto(BattleTower_EventScript_CancelWinStreak)
+    }
+
+    tower_get(TOWER_DATA_WIN_STREAK)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleTower_EventScript_LostThanksForPlaying)
+    }
+
+    goto(BattleTower_EventScript_CancelWinStreak)
+}
+
+script BattleTower_EventScript_CancelWinStreak {
+    tower_set(TOWER_DATA_WIN_STREAK_ACTIVE, FALSE)
+    goto(BattleTower_EventScript_LostThanksForPlaying)
+}
+
+script BattleTower_EventScript_LostThanksForPlaying {
+    lock
+    faceplayer
+    message(BattleTower_Text_ThankYouForPlaying)
+    waitmessage
+    call(BattleTower_EventScript_AskSaveBattle2)
+    msgbox(BattleTower_Text_LookForwardToAnotherChallenge, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_END)
+    release
+    end
+}
+
+script BattleTower_EventScript_AskSaveBattle2{
+    message(BattleTower_Text_RecordWillBeSaved)
+    waitmessage
+    frontier_checkairshow
+    bypass_healblock
+    tower_save(0)
+    playse(SE_SAVE)
+    waitse
+
+    frontier_get(FRONTIER_DATA_RECORD_DISABLED)
+    if (var(VAR_RESULT) == TRUE){
+        return
+    }
+
+    message(BattleTower_Text_RecordLastMatch)
+    waitmessage
+    //multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    call(EventScript_Construct_YesNo_NoSelected_Menu_Script)
+    if (var(VAR_RESULT) == YES){
+        call(BattleFrontier_EventScript_SaveBattle2)
+    }
+
+    return
+}
+
+script EventScript_Construct_YesNo_NoSelected_Menu_Script{
+    dynmultipush(gText_Yes,YES)
+    dynmultipush(gText_No,NO)
+
+    dynmultistack(19,6,FALSE,2,FALSE,NO,NULL)
+    return
+}
+
+script BattleFrontier_EventScript_SaveBattle2{
+    frontier_savebattle
+    if (var(VAR_RESULT)){
+        playse(SE_SAVE)
+        msgbox(BattleTower_Text_BattleRecordedOnPass, MSGBOX_DEFAULT)
+    }else{
+        msgbox(BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved, MSGBOX_DEFAULT)
+    }
+
+    return
+}
+
+script BattleTower_EventScript_ResumeChallenge{
+    lock
+    faceplayer
+
+    message(BattleTower_Text_WeveBeenWaitingForYou)
+    waitmessage
+    message(BattleTower_Text_ProgressWillBeSaved)
+    waitmessage
+
+    tower_save(CHALLENGE_STATUS_SAVING)
+    playse(SE_SAVE)
+    waitse
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+
+    goto(BattleTower_EventScript_EnterElevator)
+    end
+}
+
+script BattleTower_EventScript_Attendant{
+    lock
+    faceplayer
+    setvar(VAR_FRONTIER_FACILITY,FRONTIER_FACILITY_TOWER)
+
+    if (var(VAR_LAST_TALKED) == ATTENDANT_MULTIS){
+        clearflag(FLAG_CHOSEN_RESTORED_MULTI_BATTLE_NPC_PARTNER)
+    }
+
+
+    switch(var(VAR_LAST_TALKED)){
+        case ATTENDANT_SINGLES: msgbox(BattleTower_Text_WelcomSingleBattle, MSGBOX_DEFAULT)
+        case ATTENDANT_DOUBLES: msgbox(BattleTower_Text_WelcomeDoubleBattle, MSGBOX_DEFAULT)
+        case ATTENDANT_MULTIS: msgbox(BattleTower_Text_WelcomeMultiBattle, MSGBOX_DEFAULT)
+        case ATTENDANT_LINK_MULTIS: msgbox(BattleTower_Text_WelcomeLinkMultiBattle, MSGBOX_DEFAULT)
+    }
+
+    goto(BattleTower_EventScript_AskEnterChallenge)
+}
+
+script BattleTower_EventScript_AskEnterChallenge{
+    switch(var(VAR_LAST_TALKED)){
+        case ATTENDANT_SINGLES: message(BattleTower_Text_TakeSinglesChallenge)
+        case ATTENDANT_DOUBLES: message(BattleTower_Text_TakeDoublesChallenge)
+        case ATTENDANT_MULTIS: message(BattleTower_Text_TakeMultisChallenge)
+        case ATTENDANT_LINK_MULTIS: message(BattleTower_Text_TakeLinkMultisChallenge)
+    }
+
+    call(BattleFrontier_Challenge_Info_Exit_Menu)
+    switch(var(VAR_RESULT)){
+        case 0: goto(BattleTower_EventScript_TryEnterChallenge)
+        case 1: goto(BattleTower_EventScript_ExplainChallenge)
+        case 2: goto(BattleTower_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED: goto(BattleTower_EventScript_CancelChallenge)
+    }
+}
+
+script BattleFrontier_Challenge_Info_Exit_Menu{
+    waitmessage
+    dynmultichoice(18,4,FALSE,3,0,NULL,
+        format("Challenge"),
+        format("Info"),
+        gText_Exit,
+    )
+    return
+}
+
+script BattleTower_EventScript_TryEnterChallenge{
+    switch(var(VAR_LAST_TALKED)){
+        case ATTENDANT_SINGLES: setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
+        case ATTENDANT_DOUBLES: setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES)
+        case ATTENDANT_MULTIS: setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS)
+        case ATTENDANT_LINK_MULTIS: setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS)
+    }
+    setvar(VAR_RESULT,1)
+    frontier_checkineligible
+    goto_if_eq(VAR_0x8004, TRUE, BattleTower_EventScript_NotEnoughValidMons)
+    special(SavePlayerPartyBattleFrontier)
+    frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
+    switch(var(VAR_LAST_TALKED)){
+        case ATTENDANT_SINGLES: msgbox(BattleTower_Text_SelectThreeMons, MSGBOX_DEFAULT)
+        case ATTENDANT_DOUBLES: msgbox(BattleTower_Text_PleaseSelectFourMons, MSGBOX_DEFAULT)
+        case ATTENDANT_MULTIS:
+        case ATTENDANT_LINK_MULTIS: msgbox(BattleTower_Text_PleaseSelectTwoMons, MSGBOX_DEFAULT)
+    }
+
+    fadescreen(FADE_TO_BLACK)
+    frontier_get(FRONTIER_DATA_LVL_MODE)
+    copyvar(VAR_0x8004, VAR_RESULT)
+    switch(var(VAR_LAST_TALKED)){
+        case ATTENDANT_SINGLES: setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
+        case ATTENDANT_DOUBLES: setvar(VAR_0x8005, FRONTIER_DOUBLES_PARTY_SIZE)
+        case ATTENDANT_MULTIS:
+        case ATTENDANT_LINK_MULTIS: setvar(VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE)
+    }
+    special(ChoosePartyForBattleFrontier)
+    waitstate
+    goto_if_eq(VAR_RESULT, 0, BattleTower_EventScript_LoadPartyCancelChallenge)
+    msgbox(BattleTower_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO)
+    switch(var(VAR_RESULT)){
+        case NO: goto(BattleTower_EventScript_LoadPartyCancelChallenge)
+        case YES: goto(BattleTower_EventScript_SaveBeforeChallenge)
+        case MULTI_B_PRESSED: goto(BattleTower_EventScript_LoadPartyCancelChallenge)
+    }
+}
+
+script BattleTower_EventScript_SaveBeforeChallenge{
+    frontier_set(FRONTIER_DATA_SELECTED_MON_ORDER)
+    setvar(VAR_FACILITY_CHALLENGE_STATUS, 0)
+    tower_init
+    tower_set(TOWER_DATA_WIN_STREAK_ACTIVE, TRUE)
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    closemessage
+    delay(2)
+
+    if (var(VAR_LAST_TALKED) == ATTENDANT_LINK_MULTIS){
+        tower_save(0)
+    }
+
+    startmenu_savescreen
+    setvar(VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_END)
+
+    if (var(VAR_RESULT) == FALSE){
+        frontier_set(FRONTIER_DATA_CHALLENGE_STATUS)  // No status provided, so it relies on VAR_0x8006 being 0 already
+        goto(BattleTower_EventScript_CancelChallenge)
+    }
+
+    call(BattleTower_EventScript_HandleMultiplayer)
+    goto(BattleTower_EventScript_EnterElevator)
+}
+
+script BattleTower_EventScript_HandleMultiplayer{
+    if (var(VAR_LAST_TALKED) == ATTENDANT_LINK_MULTIS){
+
+        specialvar(VAR_RESULT, IsWirelessAdapterConnected)
+        if (var(VAR_RESULT)){
+            goto(BattleTower_EventScript_TryWirelessLink)
+        }
+
+        goto(BattleTower_EventScript_TryCableLink)
+    }
+    return
+}
+
+script BattleTower_EventScript_TryWirelessLink{
+    setvar(VAR_0x8004, LINK_GROUP_BATTLE_TOWER)
+    goto(BattleTower_EventScript_ChooseLeader)
+    end
+}
+
+script BattleTower_EventScript_ChooseLeader{
+    message(CableClub_Text_ChooseGroupLeaderOfTwo)
+    waitmessage
+    multichoice(16, 6, MULTI_LINK_LEADER, FALSE)
+    switch(var(VAR_RESULT)){
+        case 0:goto(BattleTower_EventScript_TryJoinGroup)
+        case 1:goto(BattleTower_EventScript_TryBecomeLeader)
+        case 2:goto(BattleTower_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:goto(BattleTower_EventScript_CancelChallenge)
+    }
+    end
+}
+
+script BattleTower_EventScript_TryJoinGroup{
+    call(CableClub_EventScript_TryJoinLinkGroup)
+    switch(var(VAR_RESULT)){
+        case LINKUP_SUCCESS: goto(BattleTower_EventScript_WirelessLinkSuccessful)
+        case LINKUP_FAILED: goto(BattleTower_EventScript_ChooseLeader)
+        case LINKUP_RETRY_ROLE_ASSIGN: goto(BattleTower_EventScript_TryJoinGroup)
+        case LINKUP_FAILED_BATTLE_TOWER: goto(BattleTower_EventScript_AbortLink)
+    }
+    release
+    return
+}
+
+script BattleTower_EventScript_TryBecomeLeader{
+    call(CableClub_EventScript_TryBecomeLinkLeader)
+    switch(var(VAR_RESULT)){
+        case LINKUP_SUCCESS: goto(BattleTower_EventScript_WirelessLinkSuccessful)
+        case LINKUP_FAILED: goto(BattleTower_EventScript_ChooseLeader)
+        case LINKUP_RETRY_ROLE_ASSIGN: goto(BattleTower_EventScript_TryBecomeLeader)
+        case LINKUP_FAILED_BATTLE_TOWER: goto(BattleTower_EventScript_AbortLink)
+    }
+    release
+    return
+}
+
+script BattleTower_EventScript_WirelessLinkSuccessful{
+    call(BattleTower_EventScript_LinkSuccessful)
+    goto(BattleTower_EventScript_EnterElevator)
+    end
+}
+
+script BattleTower_EventScript_TryCableLink{
+    setvar(VAR_0x8004, USING_BATTLE_TOWER)
+    message(gText_PleaseWaitForLink)
+    waitmessage
+    setvar(VAR_0x8005, 0)
+
+    special(TryBattleLinkup)
+    waitstate
+    switch(var(VAR_RESULT)){
+        case LINKUP_SUCCESS: goto(BattleTower_EventScript_CableLinkSuccessful)
+        case LINKUP_SOMEONE_NOT_READY: goto(CableClub_EventScript_AbortLinkSomeoneNotReady)
+        case LINKUP_DIFF_SELECTIONS: goto(BattleTower_EventScript_AbortLinkDifferentSelections)
+        case LINKUP_WRONG_NUM_PLAYERS: goto(BattleTower_EventScript_AbortLinkIncorrectNumberOfPlayers)
+        case LINKUP_FAILED: goto(BattleTower_EventScript_CancelChallenge)
+        case LINKUP_CONNECTION_ERROR: goto(CableClub_EventScript_AbortLinkConnectionError)
+        case LINKUP_FAILED_BATTLE_TOWER: goto(BattleTower_EventScript_AbortLink)
+    }
+    end
+}
+
+script BattleTower_EventScript_AbortLinkDifferentSelections{
+    special(CloseLink)
+    if (var(VAR_0x8005) == 3){
+        goto(BattleTower_EventScript_FriendDifferentSelection)
+    }
+    msgbox(Text_PlayersMadeDifferentSelections, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleTower_EventScript_FriendDifferentSelection{
+    msgbox(BattleTower_Text_FriendChoseDifferentLvlMode, MSGBOX_DEFAULT)
+    msgbox(BattleTower_Text_ChooseDifferentMonsMatchLvlMode, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleTower_EventScript_AbortLinkIncorrectNumberOfPlayers{
+    msgbox(BattleTower_Text_LinkMultiOnlyForTwoPlayers, MSGBOX_DEFAULT)
+    special(CloseLink)
+    msgbox(CableClub_Text_IncorrectNumberOfParticipants, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleTower_EventScript_AbortLink{
+    special(CloseLink)
+
+    switch (var(VAR_0x8005)){
+        case 0: msgbox(BattleTower_Text_FriendChoseDifferentLvlMode, MSGBOX_DEFAULT)
+        case 1: msgbox(BattleTower_Text_FriendAlsoSelectedMon, MSGBOX_DEFAULT)
+        case 2: msgbox(BattleTower_Text_FriendAlsoSelectedMons, MSGBOX_DEFAULT)
+    }
+
+    msgbox(BattleTower_Text_ChooseDifferentMonsMatchLvlMode, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleTower_EventScript_CableLinkSuccessful{
+    call(BattleTower_EventScript_LinkSuccessful)
+    special(TrySetBattleTowerLinkType)
+    goto(BattleTower_EventScript_EnterElevator)
+    end
+}
+
+script BattleTower_EventScript_LinkSuccessful{
+    incrementgamestat(GAME_STAT_ENTERED_BATTLE_TOWER)
+    message(BattleTower_Text_SaveGameBeforeShowingIn)
+    waitmessage
+    tower_save(CHALLENGE_STATUS_SAVING)
+    special(SaveForBattleTowerLink)
+    waitstate
+    playse(SE_SAVE)
+    waitse
+    return
+}
+
+script BattleTower_EventScript_ExplainChallenge{
+    switch(var(VAR_LAST_TALKED)){
+        case ATTENDANT_SINGLES:
+            msgbox(BattleTower_Text_ExplainSinglesChallenge, MSGBOX_DEFAULT)
+        case ATTENDANT_DOUBLES:
+            msgbox(BattleTower_Text_ExplainDoublesChallenge, MSGBOX_DEFAULT)
+        case ATTENDANT_MULTIS:
+            msgbox(BattleTower_Text_ExplainMultisChallenge, MSGBOX_DEFAULT)
+        case ATTENDANT_LINK_MULTIS:
+            msgbox(BattleTower_Text_ExplainLinkMultisChallenge, MSGBOX_DEFAULT)
+    }
+
+    goto(BattleTower_EventScript_AskEnterChallenge)
+    end
+}
+
+script BattleTower_EventScript_ShowResults{
+    lockall
+    switch(var(VAR_RESULT)){
+        case FRONTIER_MODE_SINGLES: frontier_results(FRONTIER_FACILITY_TOWER,FRONTIER_MODE_SINGLES)
+        case FRONTIER_MODE_DOUBLES: frontier_results(FRONTIER_FACILITY_TOWER,FRONTIER_MODE_DOUBLES)
+        case FRONTIER_MODE_MULTIS: frontier_results(FRONTIER_FACILITY_TOWER,FRONTIER_MODE_MULTIS)
+        case FRONTIER_MODE_LINK_MULTIS: frontier_results(FRONTIER_FACILITY_TOWER,FRONTIER_MODE_LINK_MULTIS)
+    }
+    waitbuttonpress
+    special(RemoveRecordsWindow)
+    releaseall
+    end
+}
+
+script BattleTower_EventScript_ShowSinglesResults{
+    setvar(VAR_RESULT,FRONTIER_MODE_SINGLES)
+    goto(BattleTower_EventScript_ShowResults)
+}
+
+script BattleTower_EventScript_ShowDoublesResults{
+    setvar(VAR_RESULT,FRONTIER_MODE_DOUBLES)
+    goto(BattleTower_EventScript_ShowResults)
+}
+
+script BattleTower_EventScript_ShowMultisResults{
+    setvar(VAR_RESULT,FRONTIER_MODE_MULTIS)
+    goto(BattleTower_EventScript_ShowResults)
+}
+
+script BattleTower_EventScript_ShowLinkMultisResults{
+    setvar(VAR_RESULT,FRONTIER_MODE_LINK_MULTIS)
+    goto(BattleTower_EventScript_ShowResults)
+}
+
+script BattleTower_EventScript_NotEnoughValidMons{
+    call(BattleTower_EventScript_GetModeandFormat)
+
+    switch(var(VAR_0x8007)){
+        case MODE_50_SINGLES:
+            msgbox(BattleTower_Text_NotEnoughValidMonsLv50Singles, MSGBOX_DEFAULT)
+        case MODE_50_DOUBLES:
+            msgbox(BattleTower_Text_NotEnoughValidMonsLv50Doubles, MSGBOX_DEFAULT)
+        case MODE_50_MULTIS:
+            msgbox(BattleTower_Text_NotEnoughValidMonsLv50Multis, MSGBOX_DEFAULT)
+        case MODE_OPEN_SINGLES:
+            msgbox(BattleTower_Text_NotEnoughValidMonsLvOpenSingles, MSGBOX_DEFAULT)
+        case MODE_OPEN_DOUBLES:
+            msgbox(BattleTower_Text_NotEnoughValidMonsLvOpenDoubles, MSGBOX_DEFAULT)
+        case MODE_OPEN_MULTIS:
+            msgbox(BattleTower_Text_NotEnoughValidMonsLvOpenMultis, MSGBOX_DEFAULT)
+    }
+
+    release
+    end
+}
+
+script BattleTower_EventScript_GetModeandFormat{
+    setvar(VAR_0x8007,0)
+
+    switch(var(VAR_RESULT)){
+        case FRONTIER_LVL_50: addvar(VAR_0x8007,50)
+        case FRONTIER_LVL_OPEN: addvar(VAR_0x8007,100)
+        default: addvar(VAR_0x8007,200)
+    }
+
+    switch(var(VAR_FRONTIER_BATTLE_MODE)){
+        case FRONTIER_MODE_SINGLES: addvar(VAR_0x8007,1)
+        case FRONTIER_MODE_DOUBLES: addvar(VAR_0x8007,2)
+        default: addvar(VAR_0x8007,3)
+    }
+    return
+}
+
+script BattleTower_EventScript_LoadPartyCancelChallenge{
+    goto(BattleTower_EventScript_CancelChallenge)
+}
+
+script BattleTower_EventScript_CancelChallenge{
+    special(CloseLink)
+    msgbox(BattleTower_Text_LookForwardToAnotherChallenge, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleTower_EventScript_EnterElevator{
+    incrementgamestat(GAME_STAT_ENTERED_BATTLE_TOWER)
+    setvar(VAR_0x8004, FRONTIER_UTIL_FUNC_SET_PARTY_ORDER)
+    call(BattleTower_EventScript_GetPartySize)
+    special(CallFrontierUtilFunc)
+    setvar(VAR_RESULT, 0)
+    goto(BattleTower_EventScript_WaitForLinkOpponentLoad)
+}
+
+script BattleTower_EventScript_WaitForLinkOpponentLoad{
+    tower_loadlinkopponents
+    delay(1)
+
+    if(var(VAR_RESULT) != 6){
+        goto(BattleTower_EventScript_WaitForLinkOpponentLoad)
+    }
+
+    call(BattleTower_EventScript_ShowYouToBattleRoom)
+    clearflag(FLAG_CANCEL_RESTORED_BATTLE_ROOM)
+    setflag(FLAG_HIDE_FACILITY_OPPONENT)
+    setvar(VAR_FACILITY_CHALLENGE_STATUS, 0)
+        fadeblackandsetremovewarpfadeflag
+    warp(MAP_TIRABUDIN_PLACE_GYM_BATTLE_ROOM,4,8)
+    waitstate
+    end
+}
+
+script BattleTower_EventScript_ShowYouToBattleRoom{
+    call(BattleTower_EventScript_BufferModeText)
+
+        if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS){
+            messageautoscroll(BattleTower_Text_ShowYouToBattleRoom)
+            waitmessage
+            delay(48)
+        }else{
+            msgbox(BattleTower_Text_ShowYouToBattleRoom, MSGBOX_DEFAULT)
+        }
+
+    call(BattleTower_EventScript_WalkToElevator)
+    return
+}
+
+script BattleTower_EventScript_WalkToElevator{
+    closemessage
+    call(BattleTower_EventScript_SetAttendantTalkedTo)
+    call(BattleTower_EventScript_GetDoorXCoord)
+    applymovement(VAR_LAST_TALKED, BattleTower_StepAside_Movement)
+    applymovement(OBJ_EVENT_ID_PLAYER, BattleTower_Movement_WalkToElevator)
+    waitmovement(0)
+    opendoor(VAR_0x8004, 1)
+    waitdooranim
+    applymovement(OBJ_EVENT_ID_PLAYER, BattleTower_Movement_PlayerEnterElevator)
+    waitmovement(0)
+    closedoor(VAR_0x8004, 1)
+    waitdooranim
+    return
+}
+
+movement BattleTower_StepAside_Movement{
+    walk_right
+    face_left
+    step_end
+}
+
+movement BattleTower_Movement_WalkToElevator{
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement BattleTower_Movement_AttendantEnterElevator{
+    walk_up
+    set_invisible
+    step_end
+}
+
+movement BattleTower_Movement_PlayerEnterElevator{
+    walk_up
+    walk_up
+    set_invisible
+    step_end
+}
+
+script BattleTower_EventScript_BufferModeText{
+    switch(var(VAR_FRONTIER_BATTLE_MODE)){
+        case FRONTIER_MODE_SINGLES: bufferstdstring(STR_VAR_1, STDSTRING_SINGLE)
+        case FRONTIER_MODE_DOUBLES: bufferstdstring(STR_VAR_1, STDSTRING_DOUBLE)
+        case FRONTIER_MODE_MULTIS: bufferstdstring(STR_VAR_1, STDSTRING_MULTI)
+        case FRONTIER_MODE_LINK_MULTIS: bufferstdstring(STR_VAR_1, STDSTRING_MULTI_LINK)
+    }
+    return
+}
+
+script BattleTower_EventScript_SetAttendantTalkedTo{
+    switch(var(VAR_FRONTIER_BATTLE_MODE)){
+        case FRONTIER_MODE_SINGLES: setvar(VAR_LAST_TALKED, ATTENDANT_SINGLES)
+        case FRONTIER_MODE_DOUBLES: setvar(VAR_LAST_TALKED, ATTENDANT_DOUBLES)
+        case FRONTIER_MODE_MULTIS: setvar(VAR_LAST_TALKED, ATTENDANT_MULTIS)
+        case FRONTIER_MODE_LINK_MULTIS: setvar(VAR_LAST_TALKED, ATTENDANT_LINK_MULTIS)
+    }
+    return
+}
+
+script BattleTower_EventScript_GetDoorXCoord{
+    switch(var(VAR_FRONTIER_BATTLE_MODE)){
+        case FRONTIER_MODE_SINGLES: setvar(VAR_0x8004, 6)
+        case FRONTIER_MODE_DOUBLES: setvar(VAR_0x8004, 10)
+        case FRONTIER_MODE_MULTIS: setvar(VAR_0x8004, 14)
+        case FRONTIER_MODE_LINK_MULTIS: setvar(VAR_0x8004, 18)
+    }
+    return
+}
+
+script BattleTower_EventScript_GetPartySize{
+    switch(var(VAR_FRONTIER_BATTLE_MODE)){
+        case FRONTIER_MODE_SINGLES: setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
+        case FRONTIER_MODE_DOUBLES: setvar(VAR_0x8005, FRONTIER_DOUBLES_PARTY_SIZE)
+        case FRONTIER_MODE_MULTIS: setvar(VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE)
+        case FRONTIER_MODE_LINK_MULTIS: setvar(VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE)
+    }
+    return
+}
+
+script BattleTower_EventScript_RulesBoard{
+    lockall
+    msgbox(BattleTower_Text_RulesAreListed, MSGBOX_DEFAULT)
+    goto(BattleTower_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleTower_EventScript_ReadRulesBoard{
+    message(BattleTower_Text_ReadWhichHeading)
+    waitmessage
+    multichoice(17, 2, MULTI_BATTLE_TOWER_RULES, FALSE)
+    switch(var(VAR_RESULT)){
+        case 0:
+            msgbox(BattleTower_Text_ExplainTowerRules, MSGBOX_DEFAULT)
+        case 1:
+            msgbox(BattleTower_Text_ExplainMonRules, MSGBOX_DEFAULT)
+        case 2:
+            msgbox(BattleTower_Text_ExplainSalonRules, MSGBOX_DEFAULT)
+        case 3:
+            msgbox(BattleTower_Text_ExplainMultiLinkRules, MSGBOX_DEFAULT)
+        case 4:
+        case MULTI_B_PRESSED:
+            releaseall
+            end
+    }
+    goto(BattleTower_EventScript_ReadRulesBoard)
+    end
+}
+
+text BattleTower_Text_DirectYouToBattleRoom{
+    format("I'll direct you to your BATTLE ROOM now.")
+}
+
+text BattleTower_Text_DidntSaveBeforeQuitting{
+    format("Excuse me!\pYou didn't save before you quit your challenge last time.\pBecause of that, your challenge so far has been disqualified. Sorry!")
+}
+
+text BattleTower_Text_CongratsBeatenSeven{
+    format("Congratulations! You've beaten all 10 Trainers!\p")
+}
+
+text BattleTower_Text_ReceivedPrize{
+    format("{PLAYER} received the prize {STR_VAR_1}.")
+}
+
+text BattleTower_Text_ThankYouForPlaying{
+    format("Thank you for playing!\p")
+}
+
+text BattleTower_Text_RecordWillBeSaved{
+    format("Your record will be saved. Please wait.")
+}
+
+text BattleTower_Text_WeveBeenWaitingForYou{
+    format("We've been waiting for you!\p")
+}
+
+text BattleTower_Text_ProgressWillBeSaved{
+    format("Before entering a BATTLE ROOM, your progress will be saved. Please wait.")
+}
+
+text BattleTower_Text_AboutToFace50thTrainer{
+    format("You're finally about to face the 50th TRAINER.\pFrom here on, every time you beat seven TRAINERS in a row, your POKéMON will receive a commemorative RIBBON.\pGood luck!")
+}
+
+text BattleTower_Text_HereAreSomeRibbons{
+    format("Here are some RIBBONS for beating seven tough TRAINERS in a row.\p{PLAYER} received some RIBBONS!")
+}
+
+text BattleTower_Text_PutRibbonOnMons{
+    format("{PLAYER} put the RIBBONS on the challenger POKéMON.")
+}
+
+text BattleTower_Text_DescribeFeelingsAboutBattleTower{
+    format("Excuse me, do you have a moment?\pCan you describe your feelings when you're about to begin a BATTLE TOWER match, or when you've either won or lost a match?")
+}
+
+text BattleTower_Text_FeelWhatWhenYouBegin{
+    format("Okay, what are your feelings when you're about to begin a match?")
+}
+
+text BattleTower_Text_FeelWhatWhenYouveWon{
+    format("What do you feel when you've won a match?")
+}
+
+text BattleTower_Text_FeelWhatWhenYouveLost{
+    format("Can I hear about your feelings when you have lost a match?")
+}
+
+text BattleTower_Text_DontThinkMuchAboutIt{
+    format("Oh, so you don't think much about it? You're one cool customer.")
+}
+
+text BattleTower_Text_ChangedYourMind{
+    format("Hunh? You changed your mind? I guess you're fickle.")
+}
+
+text BattleTower_Text_ThatsHowYouFeel{
+    format("Okay, so that's how you feel? That's quite original.\pThanks!")
+}
+
+text BattleTower_Text_WinsInRowRecorded{
+    format("The number of matches you win in a row is recorded.\pI'd better not get beaten in an embarrassing way!")
+}
+
+text BattleTower_Text_CanLeaveUntilLossOrSevenWins{
+    format("Once you've entered the BATTLE TOWER, you can't leave until you either lose or you beat seven TRAINERS in a row.\pYou'd best be certain that you're up to the challenge.")
+}
+
+text BattleTower_Text_LookForwardToAnotherChallenge{
+    format("We look forward to seeing you on another challenge!")
+}
+
+text BattleTower_Text_WhichLevelMode{
+    format("The BATTLE ROOM offers two levels of challenge, Level 50 and Open Level. Which is your choice?")
+}
+
+text BattleTower_Text_OkayToSaveBeforeEntering{
+    format("Before entering a BATTLE ROOM, your progress must be saved. Is that okay?")
+}
+
+text BattleTower_Text_ShowYouToBattleRoom{
+    format("Right this way to the {STR_VAR_1} Battle Room. Good luck!")
+}
+
+text BattleTower_Text_RecordLastMatch{
+    format("Shall I record your last BATTLE TOWER match on your FRONTIER PASS?")
+}
+
+text BattleTower_Text_NotEnoughValidMonsLv50Singles{
+    format("Excuse me!\pYou don't have three eligible POKéMON.\pYou must have three different POKéMON of Level 50 or less to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready.")
+}
+
+text BattleTower_Text_NotEnoughValidMonsLvOpenSingles{
+    format("Excuse me!\pYou don't have three eligible POKéMON.\pYou must have three different POKéMON to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready.")
+}
+
+text BattleTower_Text_NotEnoughValidMonsLv50Doubles{
+    format("Excuse me!\pYou don't have four eligible POKéMON.\pYou must have four different POKéMON of Level 50 or less to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready.")
+}
+
+text BattleTower_Text_NotEnoughValidMonsLvOpenDoubles{
+    format("Excuse me!\pYou don't have four eligible POKéMON.\pYou must have four different POKéMON to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready.")
+}
+
+text BattleTower_Text_NotEnoughValidMonsLv50Multis{
+    format("Excuse me!\pYou don't have two eligible POKéMON.\pYou must have two different POKéMON of Level 50 or less to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready.")
+}
+
+text BattleTower_Text_NotEnoughValidMonsLvOpenMultis{
+    format("Excuse me!\pYou don't have two eligible POKéMON.\pYou must have two different POKéMON to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready.")
+}
+
+text BattleTower_Text_WelcomSingleBattle{
+    format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the SINGLE BATTLE ROOMS.")
+}
+
+text BattleTower_Text_TakeSinglesChallenge{
+    format("Would you like to take the SINGLE BATTLE ROOM challenge?")
+}
+
+text BattleTower_Text_ExplainSinglesChallenge{
+    format("The BATTLE TOWER's SINGLE BATTLE ROOMS are facilities for conducting SINGLE BATTLES with three POKéMON.\pThere are many SINGLE BATTLE ROOMS in the BATTLE TOWER for team battles.\pIn each of the SINGLE BATTLE ROOMS, seven TRAINERS await your challenge.\pIf you manage to defeat all seven, you will earn Battle Points.\pIf you want to interrupt your challenge, please save the game.\pIf you don't save before interrupting, you will be disqualified.")
+}
+
+text BattleTower_Text_SelectThreeMons{
+    format("Now please select the three POKéMON that are to be entered.")
+}
+
+text BattleTower_Text_WelcomeDoubleBattle{
+    format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the DOUBLE BATTLE ROOMS.")
+}
+
+text BattleTower_Text_TakeDoublesChallenge{
+    format("Would you like to take the DOUBLE BATTLE ROOM challenge?")
+}
+
+text BattleTower_Text_ExplainDoublesChallenge{
+    format("The BATTLE TOWER's DOUBLE BATTLE ROOMS are facilities for conducting DOUBLE BATTLES with four POKéMON.\pThere are many DOUBLE BATTLE ROOMS in the BATTLE TOWER for team battles.\pIn each of the DOUBLE BATTLE ROOMS, seven TRAINERS await your challenge.\pIf you manage to defeat all seven, you will earn Battle Points.\pIf you want to interrupt your challenge, please save the game.\pIf you don't save before interrupting, you will be disqualified.")
+}
+
+text BattleTower_Text_PleaseSelectFourMons{
+    format("Now please select the four POKéMON that are to be entered.")
+}
+
+text BattleTower_Text_WelcomeMultiBattle{
+    format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the MULTI BATTLE ROOMS.")
+}
+
+text BattleTower_Text_TakeMultisChallenge{
+    format("Would you like to take the MULTI BATTLE ROOM challenge?")
+}
+
+text BattleTower_Text_ExplainMultisChallenge{
+    format("The BATTLE TOWER's MULTI BATTLE ROOMS are facilities for conducting MULTI BATTLES.\pFor MULTI BATTLES, you must partner with a TRAINER in the TOWER and enter with two POKéMON each.\pInside the TOWER is a room named the BATTLE SALON where you may meet other TRAINERS.\pThere, you must find a TRAINER to act as your partner in MULTI BATTLES.\pOnce you have partnered up, you will be shown to a MULTI BATTLE ROOM.\pIn the MULTI BATTLE ROOM, seven tag teams await your challenge.\pIf you manage to defeat all seven teams, you will earn Battle Points.\pIf you want to interrupt your challenge, please save the game.\pIf you don't save before interrupting, you will be disqualified.")
+}
+
+text BattleTower_Text_PleaseSelectTwoMons{
+    format("Now please select the two POKéMON that are to be entered.")
+}
+
+text BattleTower_Text_WelcomeLinkMultiBattle{
+    format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the LINK MULTI BATTLE ROOMS.")
+}
+
+text BattleTower_Text_TakeLinkMultisChallenge{
+    format("Would you like to take the LINK MULTI BATTLE ROOM challenge?")
+}
+
+text BattleTower_Text_ExplainLinkMultisChallenge{
+    format("The BATTLE TOWER's MULTI BATTLE ROOMS are facilities for conducting MULTI BATTLES with a friend.\pYou must link with your friend using Wireless Adapters or a Game Boy Advance Game Link cable.\pYou must partner with your friend and enter two different kinds of POKéMON.\pThere are many MULTI BATTLE ROOMS in the BATTLE TOWER for team battles.\pIn a MULTI BATTLE ROOM, seven tag teams await you and your friend to make a tag-team challenge.\pIf you manage to defeat all seven teams, you will earn Battle Points.\pPlease beware that unlike other ROOMS, you may not interrupt your challenge.\pOnce you start, you must battle seven MULTI BATTLES in a row nonstop.")
+}
+
+text BattleTower_Text_LinkMultiOnlyForTwoPlayers{
+    format("The LINK MULTI BATTLE ROOM challenge is only for two linked players.")
+}
+
+text BattleTower_Text_FriendAlsoSelectedMon{
+    format("Your friend has also selected the POKéMON {STR_VAR_1}.")
+}
+
+text BattleTower_Text_FriendAlsoSelectedMons{
+    format("Your friend has also selected the POKéMON {STR_VAR_1} and {STR_VAR_2}.")
+}
+
+text BattleTower_Text_FriendChoseDifferentLvlMode{
+    format("Your friend has chosen a different battle level.")
+}
+
+text BattleTower_Text_ChooseDifferentMonsMatchLvlMode{
+    format("Please choose two POKéMON different from your friend's, match the level you wish to enter, and register again.")
+}
+
+text BattleTower_Text_SaveGameBeforeShowingIn{
+    format("I will save the game before showing you in. Please wait.")
+}
+
+text BattleTower_Text_CongratsDefeatedMaiden{
+    format("Congratulations! You have defeated the SALON MAIDEN and swept seven TRAINERS!")
+}
+
+text BattleTower_Text_AwardYouTheseBattlePoints{
+    format("In recognition of your infinite talent, we award you these Battle Point(s).")
+}
+
+text BattleTower_Text_RulesAreListed{
+    format("The BATTLE TOWER rules are listed.")
+}
+
+text BattleTower_Text_ReadWhichHeading{
+    format("Which heading do you want to read?")
+}
+
+text BattleTower_Text_ExplainTowerRules{
+    format("The BATTLE TOWER is a facility where four types of battles are waged-- SINGLE BATTLE, DOUBLE BATTLE, MULTI BATTLE, and LINK MULTI BATTLE.\pFor each of these types, there are separate BATTLE ROOMS.\pPlease speak with a guide offering the type of battle you wish to enter.")
+}
+
+text BattleTower_Text_ExplainMonRules{
+    format("Depending on the BATTLE ROOM you are entering, you will be required to take a certain number of POKéMON.\pThe SINGLE BATTLE mode requires three POKéMON.\pThe DOUBLE BATTLE mode requires four, and the MULTI modes both require two.")
+}
+
+text BattleTower_Text_ExplainSalonRules{
+    format("The BATTLE SALON is where you must find a partner to form a tag team for the MULTI BATTLE ROOM challenge.\pChoose the best partner for you by examining other TRAINERS' POKéMON and their moves.\pYou may choose a new tag partner after winning seven straight matches.")
+}
+
+text BattleTower_Text_ExplainMultiLinkRules{
+    format("The LINK MULTI BATTLE Mode is for two friends to mount a challenge together.\pYou and your friend must be linked with Wireless Adapters or a GBA Game Link cable.\pYou must choose two POKéMON at the registration counter.\pThese POKéMON must be different from those of your friend.\pYou may not interrupt this challenge in the middle, unlike other modes.")
+}
+
+text BattleTower_Text_BattleRecordedOnPass{
+    format("{PLAYER}'s battle result was recorded on the FRONTIER PASS.")
+}
+
+script BattleFrontier_EventScript_GetCantRecordBattle2{
+	frontier_get(FRONTIER_DATA_RECORD_DISABLED)
+	return
+}
+
+script BattleFrontier_EventScript_GetLvlMode2{
+	frontier_get(FRONTIER_DATA_LVL_MODE)
+	return
+}

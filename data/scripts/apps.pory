@@ -1,0 +1,67 @@
+script EventScript_InstallWavesOfChangeApp
+{
+    //setflag(FLAG_SYS_APP_FUND)
+    bufferstring(STR_VAR_1,"Waves of Change")
+    call(EventScript_ObtainNewApp)
+    return
+}
+
+script EventScript_InstallBuzzrApp
+{
+    setflag(FLAG_SYS_APP_BUZZR_GET)
+    bufferstring(STR_VAR_1,"Buzzr")
+    call(EventScript_ObtainNewApp)
+    return
+}
+
+script EventScript_InstallPrestoApp
+{
+    setflag(FLAG_SYS_APP_PRESTO_GET)
+    bufferstring(STR_VAR_1,"Presto")
+    call(EventScript_ObtainNewApp)
+    return
+}
+
+script EventScript_InstallDexnavApp
+{
+    setflag(FLAG_SYS_APP_DEXNAV_GET)
+    bufferstring(STR_VAR_1,"Dexnav")
+    call(EventScript_ObtainNewApp)
+    return
+}
+
+script EventScript_InstallGlassApp
+{
+    setflag(FLAG_SYS_APP_TRAINER_CARD_GET)
+    bufferstring(STR_VAR_1,"Google Glass")
+    call(EventScript_ObtainNewApp)
+    return
+}
+
+script EventScript_ObtainNewApp
+{
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(gText_AppObtained)
+    waitfanfare
+    waitbuttonpress
+    return
+}
+
+script EventScript_UpgradeApp
+{
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(gText_AppUpgrade)
+    waitfanfare
+    waitbuttonpress
+    return
+}
+
+text gText_AppObtained
+{
+    format("Installed the {STR_VAR_1} application on the phone!")
+}
+
+text gText_AppUpgrade
+{
+    format("The {STR_VAR_1} application on the phone was upgraded!")
+}

@@ -23,10 +23,19 @@ BerryTree_EventScript_Sparkling::
 BerryTree_EventScript_CheckSoil::
 	lock
 	faceplayer
-	specialvar VAR_RESULT, PlayerHasBerries
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
-	specialvar VAR_RESULT, PlayerHasMulch
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToMulch
+    // Start fasterBerry
+    // https://github.com/dunsparce9/pokeemerald-tweaks/commit/40685e31e4d50722a922ec1201a8397f81fc17d2#diff-00fa8265ee1a2f92cb10213280712b674169bdb89ab9404949f0d8736879987dR26
+    specialvar VAR_RESULT, CheckPlayerCanPlant
+	goto_if_eq VAR_RESULT, PLAYER_HAS_BERRY, BerryTree_EventScript_ChooseBerryToPlant
+.if OW_BERRY_MULCH_USAGE == TRUE
+	goto_if_eq VAR_RESULT, PLAYER_HAS_MULCH, BerryTree_EventScript_ChooseMulchToUse
+.endif
+    goto_if_eq VAR_RESULT, PLAYER_HAS_MULCH_AND_BERRY, BerryTree_EventScript_WantToPlantMulch
+	//specialvar VAR_RESULT, PlayerHasBerries
+	//goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
+	//specialvar VAR_RESULT, PlayerHasMulch
+	//goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToMulch
+    // End fasterBerry
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	waitbuttonpress
@@ -157,9 +166,12 @@ BerryTree_EventScript_CheckBerryFullyGrown::
 .if OW_BERRY_MUTATIONS == TRUE
 	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_CheckBerryFullyGrown_Mutation
 .endif
-	msgbox BerryTree_Text_WantToPick, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PickBerry
-	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry
+// Start fasterBerry
+	//msgbox BerryTree_Text_WantToPick, MSGBOX_YESNO
+	//goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PickBerry
+	//goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry
+    goto BerryTree_EventScript_PickBerry
+// End fasterBerry
 
 .set BERRY_NORMAL_BAG_FULL, 0
 .set BERRY_NORMAL_SPACE_IN_BAG, 1
@@ -348,9 +360,12 @@ BerryTree_Text_ExclamationPoint:
 
 .if OW_BERRY_MUTATIONS == TRUE
 BerryTree_EventScript_CheckBerryFullyGrown_Mutation:
-	msgbox BerryTree_Text_WantToPick_Mutation, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PickBerry
-	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry_Mutation
+// Start fasterBerry
+	//msgbox BerryTree_Text_WantToPick_Mutation, MSGBOX_YESNO
+	//goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PickBerry
+	//goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry_Mutation
+    goto BerryTree_EventScript_PickBerry
+// End fasterBerry
 
 BerryTree_EventScript_CancelPickingBerry_Mutation::
 	message BerryTree_Text_BerryLeftUnpicked_Mutation

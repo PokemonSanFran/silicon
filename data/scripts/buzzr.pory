@@ -1,0 +1,125 @@
+script Buzzr_CheckPic_MacroScript {
+    fadescreen(FADE_TO_BLACK)
+    buzzr(SHOW_PIC,VAR_TEMP_1)
+}
+
+script Buzzr_Return{
+    delay(60)
+    return
+}
+
+script BuzzrPost_RabiesOutbreak_Script {
+    lock
+    msgbox(gText_Buzzr_RabiesOutBreak_Message, MSGBOX_DEFAULT)
+
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_RABIESOUTBREAK)
+    if (var (VAR_RESULT)) {
+        startquest(QUEST_RABIESOUTBREAK)
+    } closemessage
+    end
+}
+
+script Buzzr_HideReporter_Script {
+        if (
+            (var(VAR_QUEST_BREAKTHEINTERNET_STATE) != TALA_MENTIONED_REPORTER))
+        {
+            setflag(FLAG_TEMP_4)
+        }
+}
+
+script BuzzrPost_CheckProgress_Script {
+    lock
+    if (var(VAR_QUEST_BREAKTHEINTERNET_STATE)>TALA_MENTIONED_REPORTER) {
+        return
+    } else {
+        msgbox(gText_Buzzr_ThereWasAnError, MSGBOX_DEFAULT)
+    }
+    release
+    closemessage
+    end
+}
+
+script BuzzrPost_SmoothieCrafting_Script {
+    call(BuzzrPost_CheckProgress_Script)
+    msgbox(gText_Buzzr_SmoothieCrafting_Message, MSGBOX_DEFAULT)
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_SMOOTHIECRAFTING)
+    if (var (VAR_RESULT)) {
+        startquest(QUEST_SMOOTHIECRAFTING)
+    }
+    closemessage
+    end
+}
+script BuzzrPost_VSDeoxys_Script {
+    call(BuzzrPost_CheckProgress_Script)
+    showmonpic(SPECIES_DEOXYS_SPEED, 10, 3)
+    msgbox(gText_Buzzr_VSDeoxys_Message, MSGBOX_DEFAULT)
+    hidemonpic
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_VSDEOXYS)
+    if (var (VAR_RESULT)) {
+        startquest(QUEST_VSDEOXYS)
+    }
+    closemessage
+    end
+}
+script BuzzrPost_HodouCityTunnels_Script {
+    call(BuzzrPost_CheckProgress_Script)
+    msgbox(gText_Buzzr_HodouCityTunnels_Message, MSGBOX_DEFAULT)
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_HODOUTUNNELS)
+    if (var (VAR_RESULT)) {
+        startquest(QUEST_HODOUTUNNELS)
+    }
+    closemessage
+    end
+}
+script BuzzrPost_FreshwaterEvolution_Script {
+    call(BuzzrPost_CheckProgress_Script)
+    msgbox(gText_Buzzr_FreshwaterEvolution_Message, MSGBOX_DEFAULT)
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_FRESHWATEREVOLUTION)
+    if (var (VAR_RESULT)) {
+        startquest(QUEST_FRESHWATEREVOLUTION)
+    }
+    closemessage
+    end
+}
+script BuzzrPost_BetweenAStoneAndAHardPlace_Script {
+    call(BuzzrPost_CheckProgress_Script)
+    msgbox(gText_Buzzr_BetweenAStoneAndAHardPlace_Message, MSGBOX_DEFAULT)
+    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_BETWEENASTONEANDAHARDPLACE)
+    if (var (VAR_RESULT)) {
+        startquest(QUEST_BETWEENASTONEANDAHARDPLACE)
+    }
+    closemessage
+    end
+}
+
+text gText_Buzzr_ThereWasAnError {
+    format("There was an error displaying this content. Please try again later.")
+}
+
+text gText_Buzzr_RabiesOutBreak_Message {
+    format("My cousin told me there's a mass rabies outbreak in GlavezHill! Feral Glameow are attacking pets and people, accelerating the spread of the disease. He heard the ASPCA is gonna hook people up who can subdue or capture Glameow to reduce their impact on the local community. I'll be doing my part! hashtagDefeat10Glameow")
+}
+
+text gText_Buzzr_BlueRobbery_Message {
+    format("Last night our store's window was smashed and our stuff was stolen... I caught this brunette and her Quagsire in 4K stealing from us. I've seen her in IrisinaTown, and I need Buzzr to hashtagdoitsthing and help me get justice for small business!")
+}
+
+text gText_Buzzr_SmoothieCrafting_Message {
+    format("Calling all Trainers! We're a new ice cream shop in Chasilla, and we've got the perfect smoothie to clean out your Pokémon and make them easier to train. Bring 3 Pecha Berry, 2 Nanab Berry, and a Rabuta Berry, and we'll make the first one for free! hashtagdetox")
+}
+
+text gText_Buzzr_VSDeoxys_Message {
+    format("I was attacked by a wild Pokémon! It suddenly fell from the sky, changed it shape into this super fast orange thing, and started shooting lasers at me... I did some googling, and I think it was a Deoxys!")
+}
+text gText_Buzzr_HodouCityTunnels_Message {
+    format("Theres a rumor that there is a lost treasure hidden under HodouCity. Is anybody who knows the secrets still alive?")
+}
+text gText_Buzzr_FreshwaterEvolution_Message {
+    format("Check out my favorite spot in HalerbaWilds! There's a clearing with no tall grass, beautiful trees, and a fresh water spring! The water tastes better than anywhere else in the region, and its got magical properties. If you bring an octopus Pokémon, it'll turn shiny!")
+}
+text gText_Buzzr_GemArtist_Message {
+    format("I'm a small business owner and artist from Unova. I love the beach and making art, so I recycle old Beach Glass into beautiful gem. Bring me 10 Beach Glass and I'll make you a gem too!f")
+}
+text gText_Buzzr_BetweenAStoneAndAHardPlace_Message {
+    format("Riding the trolley is the best way to get around! If you ride the trolley more ten times, come to the Bart HQ for a stone that can help push Pokémon even further beyond!")
+}

@@ -1,0 +1,90 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const VAR_FERRY_OBJECT = VAR_0x8004
+const VAR_MAP = VAR_0x8005
+
+script Ferry_Interact_Dialogue
+{
+    lock
+    msgbox(gText_Ferry_ThanksForChoosing)
+    call(ShowFerryMenu_Script)
+    closemessage
+    if (var(VAR_RESULT) == MULTI_B_PRESSED)
+    {
+        msgbox(BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime)
+        release
+        end
+    }
+    call(Ferry_Attendant_EnterShip_Script)
+    callnative(WarpPlayerToFerry)
+}
+
+script Ferry_RemoveAttendant_Script
+{
+    waitmovement(0)
+    delay(30)
+    removeobject(VAR_LAST_TALKED)
+    return
+}
+
+script Ferry_Attendant_EnterShip_Script
+{
+    specialvar(VAR_MAP,GetCurrentMap)
+    switch(var(VAR_MAP))
+    {
+    case MAP_FERRYBUILDING:
+        applymovement(VAR_LAST_TALKED,Common_Movement_WalkInPlaceFasterUp)
+        call(Ferry_RemoveAttendant_Script)
+        applymovement(PLAYER,Common_Movement_WalkUp)
+        setvar(VAR_FERRY_OBJECT, 2)
+    case MAP_HALAI_ISLAND:
+        applymovement(VAR_LAST_TALKED,Common_Movement_WalkInPlaceFasterDown)
+        call(Ferry_RemoveAttendant_Script)
+        applymovement(PLAYER,Common_Movement_WalkDown)
+        setvar(VAR_FERRY_OBJECT, 1)
+    case MAP_ARANTRAZ:
+        applymovement(VAR_LAST_TALKED,Common_Movement_WalkInPlaceFasterUp)
+        call(Ferry_RemoveAttendant_Script)
+        applymovement(PLAYER,Common_Movement_WalkUp)
+        setvar(VAR_FERRY_OBJECT, 2)
+    case MAP_POPIDORA_PIER:
+        applymovement(VAR_LAST_TALKED,Common_Movement_WalkInPlaceFasterUp)
+        call(Ferry_RemoveAttendant_Script)
+        applymovement(PLAYER,Common_Movement_WalkUp)
+        setvar(VAR_FERRY_OBJECT, 8)
+    case MAP_CHASILLA:
+        applymovement(VAR_LAST_TALKED,Common_Movement_WalkInPlaceFasterLeft)
+        call(Ferry_RemoveAttendant_Script)
+        applymovement(PLAYER,Common_Movement_WalkLeft)
+        setvar(VAR_FERRY_OBJECT, 8)
+    case MAP_ESPULEE_OUTSKIRTS:
+        applymovement(VAR_LAST_TALKED,Common_Movement_WalkInPlaceFasterRight)
+        call(Ferry_RemoveAttendant_Script)
+        applymovement(PLAYER,Common_Movement_WalkRight)
+        setvar(VAR_FERRY_OBJECT, 8)
+    }
+    waitmovement(PLAYER)
+    delay(30)
+    hideobjectat(PLAYER,0)
+    call(Common_EventScript_FerryDepart)
+    return
+}
+
+script ShowFerryMenu_Script
+{
+    callnative(ConstructFerryMenu)
+
+    if (var(VAR_RESULT) == 2)
+    {
+        dynmultistack(16,4,TRUE,5,FALSE,0,NULL)
+    }
+    else
+    {
+        dynmultistack(19,6,TRUE,5,FALSE,0,NULL)
+    }
+    return
+}
+
+text gText_Ferry_ThanksForChoosing
+{
+    format("Welcome to the GRUNTFerry! Where would you like to go?")
+}

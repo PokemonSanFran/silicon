@@ -1,0 +1,419 @@
+const OPPONENT = 1
+const ATTENDANT_1 = 2
+
+const NONE_UNHEARD = 50
+const NONE_HEARD = 52
+const SILVER_UNHEARD = 100
+const SILVER_HEARD = 102
+
+const HAS_NO_SYMBOLS = 0
+const HAS_SILVER_SYMBOL = 1
+const HAS_GOLD_SYMBOL = 2
+
+const VAR_CURRENT_BATTLE_NUM = VAR_TEMP_E
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_EnterRoom{
+    setvar(VAR_TEMP_0, 1)
+    applymovement(OBJ_EVENT_ID_PLAYER, TirabudinPlace_Gym_Battle_Room_Movement_PlayerEnter)
+    waitmovement(0)
+
+    frontier_get(FRONTIER_DATA_BATTLE_NUM)
+    if(var(VAR_RESULT) == 0){
+        goto(TirabudinPlace_Gym_Battle_Room_EventScript_OpponentEnter)
+    }
+
+    applymovement(ATTENDANT_1, TirabudinPlace_Gym_Battle_Room_Movement_AttendantApproachPlayer)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceAttendant)
+    waitmovement(0)
+
+    frontier_set(FRONTIER_DATA_RECORD_DISABLED, TRUE)
+    goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskReadyForOpponent)
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_OpponentEnter{
+    special(PSF_SetNextTowerOpponent)
+    addobject(OPPONENT)
+    applymovement(OPPONENT, TirabudinPlace_Gym_Battle_Room_Movement_OpponentEnter)
+    waitmovement(0)
+
+    call(TirabudinPlace_Gym_Battle_Room_PlayBattleIntro_Dialogue)
+    call(TirabudinPlace_Gym_Battle_Room_EventScript_DoTowerBattle)
+    call(TirabudinPlace_Gym_Battle_Room_PlayBattleOutro_Dialogue)
+
+    if(var(VAR_RESULT) == B_OUTCOME_WON){
+        goto(TirabudinPlace_Gym_Battle_Room_EventScript_DefeatedOpponent)
+    }
+    goto(BattleTower_EventScript_WarpToLobbyLost)
+}
+
+script TirabudinPlace_Gym_Battle_Room_PlayBattleIntro_Dialogue{
+    tower_getopponentintro(0)
+
+    specialvar(VAR_TEMP_0,PSF_GetFrontierBrainStatus)
+
+    switch(var(VAR_TEMP_0)){
+        case FRONTIER_BRAIN_NOT_READY:
+            msgbox(gStringVar4, MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_SILVER_FIRST:
+            msgbox(gText_RestoredTower_HiPlayer,MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_SILVER_REMATCH:
+            msgbox(gText_RestoredTower_GotYourStreak,MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_SILVER_COMPLETE:
+            msgbox(gText_RestoredTower_BuildingAnother,MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_GOLD_FIRST:
+            msgbox(gText_RestoredTower_WelcomeToBattle,MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_GOLD_COMPLETE:
+            msgbox(gText_RestoredTower_ItsAlways,MSGBOX_DEFAULT)
+    }
+    waitmessage
+    return
+}
+
+script TirabudinPlace_Gym_Battle_Room_PlayBattleOutro_Dialogue{
+    specialvar(VAR_TEMP_0,PSF_GetFrontierBrainStatus)
+
+    switch(var(VAR_TEMP_0)){
+        case FRONTIER_BRAIN_NOT_READY:
+            return
+        default:
+            call(TirabudinPlace_Gym_Battle_Room_DefeatedBrain_Dialogue)
+    }
+    waitmessage
+    return
+}
+
+script TirabudinPlace_Gym_Battle_Room_DefeatedBrain_Dialogue{
+    switch(var(VAR_TEMP_0)){
+        case FRONTIER_BRAIN_SILVER_FIRST:
+            msgbox(gText_RestoredTower_TakeThisBadge, MSGBOX_DEFAULT)
+            call(TirabudinPlace_Gym_Battle_Room_GiveSymbol_Script)
+            msgbox(gText_RestoredTower_CantWaitToSeeYou, MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_SILVER_REMATCH:
+            msgbox(gText_RestoredTower_CantWaitToSeeYou, MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_SILVER_COMPLETE:
+            msgbox(gText_RestoredTower_LetsSeeHow, MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_GOLD_FIRST:
+            msgbox(gText_RestoredTower_YouDidIt, MSGBOX_DEFAULT)
+            call(TirabudinPlace_Gym_Battle_Room_GiveSymbol_Script)
+            msgbox(gText_RestoredTower_LetsSeeHow, MSGBOX_DEFAULT)
+        case FRONTIER_BRAIN_GOLD_COMPLETE:
+            msgbox(gText_RestoredTower_LetsSeeHow, MSGBOX_DEFAULT)
+    }
+}
+
+script TirabudinPlace_Gym_Battle_Room_GiveSymbol_Script{
+
+    if (var(VAR_TEMP_0) == FRONTIER_BRAIN_SILVER_FIRST){
+        bufferstring(STR_VAR_1,"")
+    }else{
+        bufferstring(STR_VAR_1,"Gold")
+    }
+
+    playfanfare(MUS_OBTAIN_SYMBOL)
+    message(gText_RestoredTower_RecivedBadge)
+    waitmessage
+    waitfanfare
+    special(PSF_GiveFacilitySymbol)
+    return
+}
+
+script BattleTower_EventScript_SetChallengeStatus{
+    tower_set(TOWER_DATA_LVL_MODE)
+    goto(TirabudinPlace_Gym_Battle_Room_EventScript_WarpToLobby)
+}
+
+script BattleTower_EventScript_WarpToLobbyLost{
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST)
+    goto(BattleTower_EventScript_SetChallengeStatus)
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_WarpToLobbyWon{
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON)
+    goto(BattleTower_EventScript_SetChallengeStatus)
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_DefeatedOpponent{
+    frontier_incrementstreak
+    tower_setbattlewon
+    if(var(VAR_RESULT) == FRONTIER_STAGES_PER_CHALLENGE){
+        goto(TirabudinPlace_Gym_Battle_Room_EventScript_WarpToLobbyWon)
+    }
+
+    applymovement(ATTENDANT_1, TirabudinPlace_Gym_Battle_Room_Movement_AttendantApproachPlayer)
+    applymovement(OBJ_EVENT_ID_PLAYER, TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceAttendant)
+    applymovement(OPPONENT, TirabudinPlace_Gym_Battle_Room_Movement_OpponentExit)
+    waitmovement(OPPONENT)
+    removeobject(OPPONENT)
+
+    msgbox(TirabudinPlace_Gym_Battle_Room_Text_RestoreMonsToFullHealth, MSGBOX_DEFAULT)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    bypass_healblock
+
+    playse(MUS_LEVEL_UP)
+    buffernumberstring(STR_VAR_1,3)
+    msgbox(TirabudinPlace_Gym_Battle_Room_Text_YouveAlsoEarned, MSGBOX_DEFAULT)
+    //PSF TODO needs a show BP box
+    givefrontierbattlepoints(3)
+    waitse
+
+    goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskReadyForOpponent)
+}
+script BattleFrontier_Construct_GoOn_Record_Rest_Retire_Menu{
+
+    waitmessage
+    dynmultipush(gText_GoOn,0)
+
+    call(BattleFrontier_EventScript_GetCantRecordBattle)
+    if(var(VAR_RESULT) == FALSE){
+        dynmultipush(gText_Record2,1)
+    }
+
+    dynmultipush(gText_Rest,2)
+    dynmultipush(gText_Retire,3)
+
+    return
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_AskReadyForOpponent{
+
+    frontier_get(FRONTIER_DATA_BATTLE_NUM)
+    call(TirabudinPlace_Gym_Battle_Room_EventScript_ReadyForOpponent)
+    call(BattleFrontier_BattleTower_ConstructAndCall_Menu)
+}
+
+script BattleFrontier_BattleTower_ConstructAndCall_Menu{
+    call(BattleFrontier_Construct_GoOn_Record_Rest_Retire_Menu)
+    dynmultistack(19,2,FALSE,4,TRUE,0,NULL)
+    switch(var(VAR_RESULT)){
+        case 0:goto(TirabudinPlace_Gym_Battle_Room_EventScript_ContinueChallenge)
+        case 1:goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskRecordBattle)
+        case 2:goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskPauseChallenge)
+        case 3:goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskReadyForOpponent)
+    }
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_AskRecordBattle{
+    message(TirabudinPlace_Gym_Battle_Room_Text_RecordYourBattle)
+    waitmessage
+    multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    if(var(VAR_RESULT) == 0){
+        call(BattleFrontier_EventScript_SaveBattle)
+    }
+    goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskReadyForOpponent)
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_AskPauseChallenge{
+    msgbox(TirabudinPlace_Gym_Battle_Room_Text_SaveAndQuitGame, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        goto(TirabudinPlace_Gym_Battle_Room_EventScript_PauseChallenge)
+    }
+
+    goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskReadyForOpponent)
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_AskRetireChallenge{
+    message(TirabudinPlace_Gym_Battle_Room_Text_CancelYourChallenge)
+    waitmessage
+    multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    if(var(VAR_RESULT) == 0){
+        goto(TirabudinPlace_Gym_Battle_Room_EventScript_RetireChallenge)
+    }
+
+    goto(TirabudinPlace_Gym_Battle_Room_EventScript_AskReadyForOpponent)
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_ContinueChallenge{
+    closemessage
+
+    applymovement(OBJ_EVENT_ID_PLAYER, TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceBattle)
+    waitmovement(0)
+    applymovement(ATTENDANT_1, TirabudinPlace_Gym_Battle_Room_Movement_AttendantReturnToPos)
+    waitmovement(0)
+
+    goto(TirabudinPlace_Gym_Battle_Room_EventScript_OpponentEnter)
+}
+
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_PauseChallenge{
+    message(TirabudinPlace_Gym_Battle_Room_Text_SavingPleaseWait)
+    waitmessage
+
+    tower_save(CHALLENGE_STATUS_PAUSED)
+    playse(SE_SAVE)
+    waitse
+
+    fadescreen(FADE_TO_BLACK)
+    frontier_reset
+    end
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_ReadyForOpponent{
+    copyvar(VAR_CURRENT_BATTLE_NUM, VAR_RESULT)
+    addvar(VAR_CURRENT_BATTLE_NUM,1)
+    buffernumberstring(STR_VAR_3,VAR_CURRENT_BATTLE_NUM)
+
+    message(TirabudinPlace_Gym_Battle_Room_Text_ReadyForXOpponent)
+    waitmessage
+
+    return
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_DoTowerBattle{
+    closemessage
+
+    frontier_set(FRONTIER_DATA_RECORD_DISABLED, FALSE)
+
+    special(HealPlayerParty)
+    setvar(VAR_0x8004, SPECIAL_BATTLE_TOWER)
+    setvar(VAR_0x8005, 0)
+    special(LevelUpAllPokemonTo100)
+
+    special(DoSpecialTrainerBattle)
+    waitstate
+    copyvar(VAR_0x8004, VAR_FRONTIER_BATTLE_MODE)
+
+    if(var(VAR_0x8004) != FRONTIER_MODE_LINK_MULTIS){
+        frontier_restorehelditems
+        special(HealPlayerParty)
+        frontier_resetsketch
+    }
+
+    frontier_get(FRONTIER_DATA_BATTLE_OUTCOME)
+    return
+}
+
+movement TirabudinPlace_Gym_Battle_Room_Movement_PlayerEnter{
+    walk_up * 3
+    face_right
+    step_end
+}
+
+movement TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceAttendant{
+    face_left
+        step_end
+}
+
+movement TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceBattle{
+    face_right
+        step_end
+}
+
+movement TirabudinPlace_Gym_Battle_Room_Movement_OpponentEnter{
+    walk_down * 4
+        face_left
+        step_end
+}
+
+movement TirabudinPlace_Gym_Battle_Room_Movement_OpponentExit{
+    walk_up * 4
+        step_end
+}
+
+movement TirabudinPlace_Gym_Battle_Room_Movement_AttendantApproachPlayer{
+    walk_right * 2
+    step_end
+}
+
+movement TirabudinPlace_Gym_Battle_Room_Movement_AttendantReturnToPos{
+    walk_left * 2
+    face_right
+    step_end
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_WarpToLobby{
+    copyvar(VAR_RESULT, VAR_FRONTIER_BATTLE_MODE)
+    fadeblackandsetremovewarpfadeflag
+    switch(var(VAR_RESULT)){
+        case FRONTIER_MODE_SINGLES:
+            warp(MAP_TIRABUDIN_PLACE_GYM_LOBBY, 4, 5)
+        case FRONTIER_MODE_DOUBLES:
+            warp(MAP_TIRABUDIN_PLACE_GYM_LOBBY, 9, 5)
+        case FRONTIER_MODE_MULTIS:
+            warp(MAP_TIRABUDIN_PLACE_GYM_LOBBY, 12, 5)
+        case FRONTIER_MODE_LINK_MULTIS:
+            tower_closelink
+            warp(MAP_TIRABUDIN_PLACE_GYM_LOBBY, 16, 5)
+    }
+    waitstate
+    end
+}
+
+script TirabudinPlace_Gym_Battle_Room_EventScript_RetireChallenge{
+    setflag(FLAG_CANCEL_RESTORED_BATTLE_ROOM)
+        goto(BattleTower_EventScript_WarpToLobbyLost)
+        end
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_RestoreMonsToFullHealth{
+	"We will restore your POKéMON to\nfull health."
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_ReadyForXOpponent{
+    "You will be facing opponent no. {STR_VAR_3}.\nAre you ready?"
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_RecordYourBattle{
+    "Record your battle on your\nFRONTIER PASS?"
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_SaveAndQuitGame{
+    "Would you like to save and\nquit the game?"
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_SavingPleaseWait{
+    "Saving your battle data.\nPlease wait."
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_CancelYourChallenge{
+    "Would you like to cancel your BATTLE\nROOM challenge?"
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_RecordCouldntBeSaved{
+    "There was an error of some sort.\nYour record could not be saved."
+}
+
+text TirabudinPlace_Gym_Battle_Room_Text_YouveAlsoEarned{
+    format("You've also earned {STR_VAR_1} Battle Points!")
+}
+
+text gText_RestoredTower_HiPlayer{
+    format("hi {PLAYER}, let's have a good battle.")
+}
+
+text gText_RestoredTower_GotYourStreak{
+    format("got your streak reset? well, let's see if you can get it started again!")
+}
+
+text gText_RestoredTower_BuildingAnother{
+    format("building another streak? let's see how high you can go!")
+}
+
+text gText_RestoredTower_WelcomeToBattle{
+    format("welcome to battle 100! i'm going to go all out, get ready!")
+}
+
+text gText_RestoredTower_ItsAlways{
+    format("its always a pleasure to battle you, let's make it a good one!")
+}
+
+text gText_RestoredTower_RecivedBadge{
+    format("{PLAYER} recieved the {STR_VAR_1} Badge!")
+}
+text gText_RestoredTower_TakeThisBadge{
+    format("Take this badge!")
+}
+
+text gText_RestoredTower_CantWaitToSeeYou{
+    format("Can't wait to see you again. Come get your streak up to 100!")
+}
+
+text gText_RestoredTower_LetsSeeHow{
+    format("I'm so excited to see how high you can get your streak to be!")
+}
+
+text gText_RestoredTower_YouDidIt{
+    format("You did it! 100 battles in a row! I have nothing else. These are new: the GOLDEN Badge!")
+}

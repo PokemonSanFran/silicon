@@ -1,0 +1,4 @@
+script CutsceneSkip_DoSkip_Script
+{
+    special(SkipCutscene)
+}

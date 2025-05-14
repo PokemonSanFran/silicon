@@ -1,16 +1,21 @@
 Common_EventScript_PkmnCenterNurse::
 	lock
 	faceplayer
+    copyvar VAR_0x8004, VAR_LAST_TALKED // siliconMerge
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, CountPlayerTrainerStars
 	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_GoldCard
-	msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
+    // Start Speedy Nurse
+	//msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO, SPEAKER_NURSE
+    setvar VAR_RESULT, YES
+    // End Speedy Nurse
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn
 	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_Goodbye
 	end
 
 EventScript_PkmnCenterNurse_Goodbye::
-	message gText_WeHopeToSeeYouAgain
+	msgbox gText_WeHopeToSeeYouAgain,,SPEAKER_NURSE // siliconMerge
+    goto EventScript_PkmnCenterNurse_PlayerTurn // Speedy Nurse
 	return
 
 @ VAR_0x8004 is 1 when player has Gold Card; jumps are identical
@@ -25,11 +30,11 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	end
 
 EventScript_PkmnCenterNurse_IllTakeYourPkmn::
-	message gText_IllTakeYourPkmn
+	msgbox gText_IllTakeYourPkmn,,SPEAKER_NURSE // siliconMerge
 	return
 
 EventScript_PkmnCenterNurse_IllTakeYourPkmn2::
-	message gText_IllTakeYourPkmn2
+	msgbox gText_IllTakeYourPkmn2,,SPEAKER_NURSE // siliconMerge
 	return
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
@@ -61,30 +66,33 @@ EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom::
 @ VAR_0x8004 is 1 when player has Gold Card
 EventScript_PkmnCenterNurse_ReturnPkmn::
 	goto_if_eq VAR_0x8004, 1, EventScript_PkmnCenterNurse_ReturnPkmn2
-	message gText_RestoredPkmnToFullHealth
+	msgbox gText_RestoredPkmnToFullHealth,,SPEAKER_NURSE // siliconMerge
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gText_WeHopeToSeeYouAgain
+	msgbox gText_WeHopeToSeeYouAgain,,SPEAKER_NURSE // siliconMerge
+    goto EventScript_PkmnCenterNurse_PlayerTurn // Speedy Nurse
 	return
 
 EventScript_PkmnCenterNurse_ReturnPkmn2::
-	message gText_ThankYouForWaiting
+	msgbox gText_ThankYouForWaiting,,SPEAKER_NURSE // siliconMerge
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gText_WeHopeToSeeYouAgain2
+	msgbox gText_WeHopeToSeeYouAgain2,,SPEAKER_NURSE // siliconMerge
+    goto EventScript_PkmnCenterNurse_PlayerTurn // Speedy Nurse
 	return
 
 EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
 	goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, EventScript_PkmnCenterNurse_ReturnPkmn
-	msgbox gText_RestoredPkmnToFullHealth, MSGBOX_DEFAULT
+	msgbox gText_RestoredPkmnToFullHealth, MSGBOX_DEFAULT, SPEAKER_NURSE // siliconMerge
 	setflag FLAG_NURSE_UNION_ROOM_REMINDER
-	message CableClub_Text_PlayerIsWaiting
+	msgbox CableClub_Text_PlayerIsWaiting,,SPEAKER_NURSE // siliconMerge
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gText_WeHopeToSeeYouAgain
+	msgbox gText_WeHopeToSeeYouAgain,,SPEAKER_NURSE // siliconMerge
+    goto EventScript_PkmnCenterNurse_PlayerTurn // Speedy Nurse
 	return
 
 EventScript_PkmnCenterNurse_CheckPokerus::
@@ -94,29 +102,40 @@ EventScript_PkmnCenterNurse_CheckPokerus::
 	end
 
 EventScript_PkmnCenterNurse_ExplainPokerus::
-	message gText_PokerusExplanation
+	msgbox gText_PokerusExplanation,,SPEAKER_NURSE // siliconMerge
 	setflag FLAG_POKERUS_EXPLAINED
 	return
 
 EventScript_PkmnCenterNurse_GoldCard::
 	goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_AskForUsual
 	setflag FLAG_NURSE_MENTIONS_GOLD_CARD
-	msgbox gText_WelcomeCutShort, MSGBOX_DEFAULT
+	msgbox gText_WelcomeCutShort, MSGBOX_DEFAULT, SPEAKER_NURSE // siliconMerge
 	playse SE_PIN
 	applymovement VAR_0x800B, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement VAR_0x800B, Common_Movement_Delay48
 	waitmovement 0
-	msgbox gText_NoticesGoldCard, MSGBOX_YESNO
+	msgbox gText_NoticesGoldCard, MSGBOX_YESNO, SPEAKER_NURSE // siliconMerge
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_GoldCardHealPkmn
-	message gText_WeHopeToSeeYouAgain2
+	msgbox gText_WeHopeToSeeYouAgain2 // siliconMerge
+    goto EventScript_PkmnCenterNurse_PlayerTurn // Speedy Nurse
 	return
 
 EventScript_PkmnCenterNurse_AskForUsual::
-	msgbox gText_YouWantTheUsual, MSGBOX_YESNO
+	msgbox gText_YouWantTheUsual, MSGBOX_YESNO, SPEAKER_NURSE // siliconMerge
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_GoldCardHealPkmn
-	message gText_WeHopeToSeeYouAgain2
+	msgbox gText_WeHopeToSeeYouAgain2,,SPEAKER_NURSE // siliconMerge
+    goto EventScript_PkmnCenterNurse_PlayerTurn // Speedy Nurse
 	return
+    // Start Speedy Nurse
+EventScript_PkmnCenterNurse_PlayerTurn::
+  closemessage
+  applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+  waitmovement 0
+  call TryAutoSave // autoSave
+  release
+  end
+    // End Speedy Nurse
 
 EventScript_PkmnCenterNurse_GoldCardHealPkmn::
 	setvar VAR_0x8004, 1

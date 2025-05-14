@@ -1,0 +1,67 @@
+script TakeMon_Dialogue_Intro
+{
+    msgbox(TakeMon_Text_Hello)
+}
+
+script TakeMon_Dialogue_NotEnoughMons
+{
+    msgbox(TakeMon_Text_YouNeedTwo)
+    closemessage
+    end
+}
+
+script TakeMon_Dialogue_CancelSelection
+{
+    msgbox(TakeMon_Text_Cancelled)
+    closemessage
+    end
+}
+
+script TakeMon_Dialogue_Special
+{
+    msgbox(TakeMon_Text_CantTakeTooSpecial)
+    closemessage
+    end
+}
+
+script TakeMon_Dialogue_WrongMon
+{
+    msgbox(TakeMon_Text_ThisIsntRight)
+    closemessage
+    end
+}
+
+script TakeMon_Dialogue_ConfirmTake
+{
+    msgbox(TakeMon_Text_AreYouSure,MSGBOX_YESNO)
+}
+
+text TakeMon_Text_Hello
+{
+    format("Hello. I need a Pokémon.")
+}
+
+text TakeMon_Text_YouNeedTwo
+{
+    format("You need two healthy mons.")
+}
+
+text TakeMon_Text_Cancelled
+{
+    format("Cancelled? Okay.")
+}
+
+text TakeMon_Text_CantTakeTooSpecial
+{
+    format("I can't take {STR_VAR_1} - it seems too special!")
+}
+
+text TakeMon_Text_ThisIsntRight
+{
+    format("This {STR_VAR_1} isn't the right Pokémon!")
+}
+
+text TakeMon_Text_AreYouSure
+{
+    format("Are you sure I can take {STR_VAR_1}? You won't get them back.")
+}

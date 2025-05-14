@@ -1,0 +1,106 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+script Earthquake_PlaySoundPlayerSurprise_EventScript
+{
+    playse(SE_PIN)
+    applymovement(PLAYER,Common_Movement_ExclamationMark)
+    //TODO this should be all the characters on screen, use the Vs.Seeker code to do this
+    waitmovement(PLAYER)
+}
+
+script Earthquake_PlayNatural_EventScript
+{
+    callnative(LoadNaturalValues)
+    playse(SE_M_EARTHQUAKE)
+    special(ShakeCamera)
+}
+
+script Earthquake_PlayFake_EventScript
+{
+    callnative(GetStoryLoadFakeEarthquake)
+    playse(SE_M_EARTHQUAKE)
+    special(ShakeCamera)
+}
+
+script Earthquake_Natural_EventScript
+{
+    lock
+    call(Earthquake_PlayNatural_EventScript)
+    call(Earthquake_PlaySoundPlayerSurprise_EventScript)
+    call(Earthquake_Natural_Aftershock)
+    callnative(BufferRandomEarthquakeString)
+    msgbox(gText_Placeholder_Earthquake,MSGBOX_SIGN,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    release
+}
+
+script Earthquake_Natural_Aftershock
+{
+    if (flag(FLAG_TEMP_1))
+    {
+        return
+    }
+    waitstate
+    call(Earthquake_PlayNatural_EventScript)
+    call(Earthquake_WaitOutShake)
+}
+
+script Earthquake_Fake_Aftershock
+{
+    waitstate
+    call(Earthquake_PlayFake_EventScript)
+    call(Earthquake_WaitOutShake)
+}
+
+script Earthquake_WaitOutShake
+{
+    //delay(100)
+    waitstate
+}
+
+text gText_Placeholder_Earthquake
+{
+    format("{STR_VAR_1}")
+}
+
+//PSF TODO populate with real text.
+text gText_NaturalEarthquake_0
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_1
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_2
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_3
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_4
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_5
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_6
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_7
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_8
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}
+text gText_NaturalEarthquake_9
+{
+    format("this is placeholder. oh snap, an earthquake!")
+}

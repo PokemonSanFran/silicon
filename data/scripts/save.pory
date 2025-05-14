@@ -1,0 +1,14 @@
+script TryAutoSave
+{
+    callnative(Script_IsAutosaveTurnedOn)
+    call_if_eq(VAR_RESULT,TRUE,DoAutoSaveFieldEffect)
+}
+
+script DoAutoSaveFieldEffect
+{
+    dofieldeffect(FLDEFF_SAVING)
+    waitfieldeffect(FLDEFF_SAVING)
+    callnative(DoAutoSave)
+    setflag(FLAG_TEMP_F)
+}
+

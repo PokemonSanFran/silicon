@@ -1,0 +1,92 @@
+const SPRAY_OFF_LURE_LOCKED = 0
+const SPRAY_OFF_LURE_UNLOCKED = 1
+const SPRAY_ON_LURE_LOCKED = 100
+const SPRAY_ON_LURE_UNLOCKED =  101
+
+script EventScript_UseInfiniteSpray
+{
+    specialvar(VAR_RESULT,GetInfiniteSprayMode)
+    switch (var(VAR_RESULT))
+    {
+        default:
+        case SPRAY_ON_LURE_LOCKED:
+        case SPRAY_OFF_LURE_LOCKED:
+            goto(EventScript_ToggleInfiniteRepel)
+        case SPRAY_OFF_LURE_UNLOCKED:
+        case SPRAY_ON_LURE_UNLOCKED:
+            goto(EventScript_ShowInfiniteSprayMenu)
+    }
+}
+
+script EventScript_ToggleInfiniteRepel
+{
+    if (!flag(FLAG_INFINITE_MODE_ON))
+    {
+        callnative(HandleToggleInfiniteSpray)
+        goto(EventScript_Message_TurnInfiniteSprayOn)
+    }
+    else
+    {
+        callnative(HandleToggleInfiniteSpray)
+        goto(EventScript_Message_TurnInfiniteSprayOff)
+    }
+}
+
+script EventScript_ShowInfiniteSprayMenu
+{
+    message(InfiniteSpray_Text_WhichMode)
+    waitmessage
+    callnative(DrawInfiniteSprayMenu)
+    waitstate
+    goto(EventScript_HandleInfiniteSprayDecision)
+}
+
+script EventScript_HandleInfiniteSprayDecision
+{
+    switch(var(VAR_RESULT))
+    {
+        case MULTI_B_PRESSED:
+        case VAR_0x8003:
+            closemessage
+            releaseall
+            end
+        case 2:
+            callnative(TurnInfiniteSprayOff)
+            goto(EventScript_Message_TurnInfiniteSprayOff)
+        default:
+            callnative(HandleSprayMenuChoice)
+            callnative(TurnInfiniteSprayOn)
+            goto(EventScript_Message_TurnInfiniteSprayOn)
+    }
+}
+
+script EventScript_Message_TurnInfiniteSprayOn
+{
+    msgbox(InfiniteSpray_Text_ModeActivated,MSGBOX_SIGN)
+    closemessage
+    release
+    end
+}
+
+script EventScript_Message_TurnInfiniteSprayOff
+{
+    msgbox(InfiniteSpray_Text_TurnedOff,MSGBOX_SIGN)
+    closemessage
+    release
+    end
+}
+
+text InfiniteSpray_Text_ModeActivated
+{
+    format("The {STR_VAR_2} is now in {STR_VAR_1} mode.")
+}
+
+text InfiniteSpray_Text_WhichMode
+{
+    format("Which mode would you like to use?")
+}
+
+text InfiniteSpray_Text_TurnedOff
+{
+    format("{STR_VAR_2} was turned off.")
+}
