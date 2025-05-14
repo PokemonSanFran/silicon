@@ -19,9 +19,11 @@
 #include "fldeff_misc.h"
 #include "item_menu.h"
 #include "link.h"
+#include "map_preview_screen.h" // mapPreviews
 #include "match_call.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
+#include "palette.h" // siliconMerge
 #include "pokemon.h"
 #include "safari_zone.h"
 #include "script.h"
@@ -39,12 +41,26 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
+// Start siliconMerge
+#include "constants/rgb.h"
+#include "ui_options_menu.h"
+#include "buzzr_criteria.h"
+#include "qol_field_moves.h"
+#include "earthquake.h"
+#include "catchup.h"
+// End siliconMerge
+#include "siliconDaycare.h" // siliconDaycare
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
+// Start changePlayerDirection
+// https://www.pokecommunity.com/threads/simple-modifications-directory.416647/page-15#post-10402610
+static EWRAM_DATA u8 sCurrentDirection = 0;
+static EWRAM_DATA u8 sPreviousDirection = 0;
 
-COMMON_DATA u8 gSelectedObjectEvent = 0;
-
+static void SetDirectionFromHeldKeys(u16);
+static u32 GetDirectionFromBitfield(u32);
+// End changePlayerDirection
 static void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
 static u16 GetPlayerCurMetatileBehavior(int);
@@ -64,7 +80,10 @@ static bool8 IsArrowWarpMetatileBehavior(u16, u8);
 static s8 GetWarpEventAtMapPosition(struct MapHeader *, struct MapPosition *);
 static void SetupWarp(struct MapHeader *, s8, struct MapPosition *);
 static bool8 TryDoorWarp(struct MapPosition *, u16, u8);
-static s8 GetWarpEventAtPosition(struct MapHeader *, u16, u16, u8);
+// Start siliconMerge
+// static s8 GetWarpEventAtPosition(struct MapHeader *, u16, u16, u8);
+s8 GetWarpEventAtPosition(struct MapHeader *, u16, u16, u8);
+// End siliconMerge
 static const u8 *GetCoordEventScriptAtPosition(struct MapHeader *, u16, u16, u8);
 static const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *, u16, u16, u8);
 static bool8 TryStartCoordEventScript(struct MapPosition *);
@@ -76,6 +95,7 @@ static void UpdateFollowerStepCounter(void);
 #if OW_POISON_DAMAGE < GEN_5
 static bool8 UpdatePoisonStepCounter(void);
 #endif // OW_POISON_DAMAGE
+static bool32 ToggleRunBehavior(void); // siliconMerge
 static bool32 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u32 metatileBehavior, u32 playerDirection);
 static void SetMsgSignPostAndVarFacing(u32 playerDirection);
 static void SetUpWalkIntoSignScript(const u8 *script, u32 playerDirection);
@@ -98,6 +118,71 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->input_field_1_3 = FALSE;
     input->dpadDirection = 0;
 }
+
+// Start changePlayerDirection
+static u32 GetDirectionFromBitfield(u32 bitfield)
+{
+    u32 direction = 0;
+    while (bitfield >>= 1) direction++;
+    return direction;
+}
+
+static bool32 IsOnlyOneDirectionPushed(u32 dpadDirections)
+{
+    return ((dpadDirections & (dpadDirections - 1)) == 0);
+}
+
+static bool32 IsCurrentDirectionNotPushed(u32 dpadDirections)
+{
+    return ((dpadDirections >> sCurrentDirection) & 1) == 0;
+}
+
+static bool32 ShouldUpdateCurrentDirection(u32 dpadDirections)
+{
+    return (sPreviousDirection == DIR_NONE) || (((dpadDirections >> sPreviousDirection) & 1) == 0);
+}
+
+#define NO_DIRECTION_PUSHED 0
+
+static void SetDirectionFromHeldKeys(u16 heldKeys)
+{
+    u32 dpadDirections = NO_DIRECTION_PUSHED;
+
+    if (heldKeys & DPAD_UP)
+        dpadDirections |= (1 << DIR_NORTH);
+    if (heldKeys & DPAD_DOWN)
+        dpadDirections |= (1 << DIR_SOUTH);
+    if (heldKeys & DPAD_LEFT)
+        dpadDirections |= (1 << DIR_WEST);
+    if (heldKeys & DPAD_RIGHT)
+        dpadDirections |= (1 << DIR_EAST);
+
+    if (dpadDirections == NO_DIRECTION_PUSHED)
+    {
+        sCurrentDirection = DIR_NONE;
+        sPreviousDirection = DIR_NONE;
+        return;
+    }
+
+    if (IsOnlyOneDirectionPushed(dpadDirections))
+    {
+        sCurrentDirection = GetDirectionFromBitfield(dpadDirections);
+        sPreviousDirection = DIR_NONE;
+        return;
+    }
+
+    if (IsCurrentDirectionNotPushed(dpadDirections))
+    {
+        sCurrentDirection = DIR_NONE;
+        sPreviousDirection = DIR_NONE;
+    }
+    else if (ShouldUpdateCurrentDirection(dpadDirections))
+    {
+        sCurrentDirection = GetDirectionFromBitfield(dpadDirections & ~(1 << sCurrentDirection));
+        sPreviousDirection = sCurrentDirection;
+    }
+}
+// End changePlayerDirection
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 {
@@ -136,6 +221,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             input->checkStandardWildEncounter = TRUE;
     }
 
+    /*
+    // Start changePlayerDirection
     if (heldKeys & DPAD_UP)
         input->dpadDirection = DIR_NORTH;
     else if (heldKeys & DPAD_DOWN)
@@ -144,6 +231,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
+    */
+    SetDirectionFromHeldKeys(heldKeys);
+    input->dpadDirection = sCurrentDirection;
+    // End changePlayerDirection
 
     if(DEBUG_OVERWORLD_MENU && !DEBUG_OVERWORLD_IN_MENU)
     {
@@ -179,6 +270,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     if (input->tookStep)
     {
+        UpdateChainFishingStreak(); // fishingUpdate
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
         if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
@@ -219,19 +311,32 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
-    if (input->pressedStartButton)
+
+// Start siliconMerge
+    if (input->pressedStartButton && ShowUIStartMenu() == TRUE)
+    /*
+	if (input->pressedStartButton)
     {
-        PlaySE(SE_WIN_OPEN);
+        PlaySE(SE_WIN_OPEN);	
         ShowStartMenu();
+	*/
+		
+        return TRUE;
+// End siliconMerge
         return TRUE;
     }
     
     if (input->tookStep && TryFindHiddenPokemon())
         return TRUE;
+// end mapPreviews
     
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
     
+    // Start siliconMerge
+	if (input->pressedRButton && ToggleRunBehavior())
+        return TRUE;
+	// End siliconMerge
     if (input->pressedRButton && TryStartDexNavSearch())
         return TRUE;
 
@@ -550,12 +655,18 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
-    if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+       // Start qol_field_moves
+	if (CanUseSurfFromInteractedWater())
+        //if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+        // End qol_field_moves
         return EventScript_UseSurf;
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {
-        if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
+        // Start qol_field_moves
+        //if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
+        if (CanUseWaterfallFromInteractedWater())
+        // End qol_field_moves
             return EventScript_UseWaterfall;
         else
             return EventScript_CannotUseWaterfall;
@@ -565,7 +676,8 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
 
 static bool32 TrySetupDiveDownScript(void)
 {
-    if (FlagGet(FLAG_BADGE07_GET) && TrySetDiveWarp() == 2)
+    //if (FlagGet(FLAG_BADGE07_GET) && TrySetDiveWarp() == 2) // qol_field_moves
+    if (CanUseDiveDown()) // qol_field_moves
     {
         ScriptContext_SetupScript(EventScript_UseDive);
         return TRUE;
@@ -575,7 +687,8 @@ static bool32 TrySetupDiveDownScript(void)
 
 static bool32 TrySetupDiveEmergeScript(void)
 {
-    if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
+    //if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1) // qol_field_moves
+    if (CanUseDiveEmerge()) // qol_field_moves
     {
         ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
         return TRUE;
@@ -649,9 +762,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     }
 
     IncrementRematchStepCounter();
+    Buzzr_IncrementSteps(); // siliconMerge
     UpdateFriendshipStepCounter();
+    CatchUpStepExperience(); // siliconMerge
     UpdateFarawayIslandStepCounter();
     UpdateFollowerStepCounter();
+    UpdateSiliconDaycareStepCounter(); // siliconDaycare
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {
@@ -680,12 +796,18 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoWallyCall() == TRUE)
         {
-            ScriptContext_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
+            // Start siliconMerge
+			ScriptContext_SetupScript(ANewStrike_BreakingNews_Dialogue);
+            //ScriptContext_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
+			// End siliconMerge
             return TRUE;
         }
         if (ShouldDoScottFortreeCall() == TRUE)
         {
-            ScriptContext_SetupScript(Route119_EventScript_ScottWonAtFortreeGymCall);
+            // Start siliconMerge
+			//ScriptContext_SetupScript(Route119_EventScript_ScottWonAtFortreeGymCall);
+            ScriptContext_SetupScript(YouRealizeTheyreEvilRight_CallPlayer_Dialogue);
+			// End siliconMerge
             return TRUE;
         }
         if (ShouldDoScottBattleFrontierCall() == TRUE)
@@ -695,12 +817,19 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoRoxanneCall() == TRUE)
         {
-            ScriptContext_SetupScript(RustboroCity_Gym_EventScript_RegisterRoxanne);
+            //ScriptContext_SetupScript(RustboroCity_Gym_EventScript_RegisterRoxanne); // siliconMerge
             return TRUE;
         }
         if (ShouldDoRivalRayquazaCall() == TRUE)
         {
             ScriptContext_SetupScript(MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall);
+			// Start siliconMerge
+            return TRUE;
+        }
+        if (ShouldDoNaturalEarthquake() == TRUE)
+        {
+            ScriptContext_SetupScript(Earthquake_Natural_EventScript);
+			// End siliconMerge
             return TRUE;
         }
         if (UpdateVsSeekerStepCounter())
@@ -1006,7 +1135,10 @@ static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 
     return FALSE;
 }
 
-static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
+// Start siliconMerge
+//static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
+s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
+// End siliconMerge
 {
     s32 i;
     const struct WarpEvent *warpEvent = mapHeader->events->warps;
@@ -1162,6 +1294,20 @@ int SetCableClubWarp(void)
     return 0;
 }
 
+// Start siliconMerge
+extern const u8 EventScript_ToggleRunBehavior_Message[];
+static bool32 ToggleRunBehavior(void)
+{
+    if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_RUN] != GAME_OPTION_RUN_TOGGLE)
+        return FALSE;
+
+    PlaySE(SE_SELECT);
+    FlagToggle(FLAG_SYS_B_DASH);
+    ScriptContext_SetupScript(EventScript_ToggleRunBehavior_Message);
+
+    return TRUE;
+}
+// End siliconMerge
 static bool32 TrySetUpWalkIntoSignpostScript(struct MapPosition *position, u32 metatileBehavior, u32 playerDirection)
 {
     const u8 *script;

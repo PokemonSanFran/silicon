@@ -42,7 +42,9 @@
 #include "constants/moves.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "options_battle.h" // siliconMerge
 #include "constants/pokemon_icon.h"
+#include "color_variation.h" // colorVariation
 
 /*
     NOTE: This file is large. Some general groups of functions have
@@ -105,6 +107,7 @@ enum {
     MSG_ITEM_IS_HELD,
     MSG_CHANGED_TO_ITEM,
     MSG_CANT_STORE_MAIL,
+    MSG_CANT_WITHDRAW, // siliconMerge
 };
 
 // IDs for how to resolve variables in the above messages
@@ -475,7 +478,7 @@ struct PokemonStorageSystemData
     u32 displayMonPersonality;
     u16 displayMonSpecies;
     u16 displayMonItemId;
-    u16 displayUnusedVar;
+    u16 displayMonIsFainted; // siliconMerge
     bool8 setMosaic;
     u8 displayMonMarkings;
     u8 displayMonLevel;
@@ -551,6 +554,7 @@ EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sAutoActionOn = 0;
 EWRAM_DATA static bool8 sJustOpenedBag = 0;
 EWRAM_DATA static bool8 sRefreshDisplayMonGfx = FALSE;
+EWRAM_DATA static struct BoxPokemon sCurrentBoxPokemon = {0}; // colorVariation
 
 // Main tasks
 static void Task_InitPokeStorage(u8);
@@ -636,7 +640,7 @@ static void PlaceMon(void);
 static void RefreshDisplayMon(void);
 static void SetMovingMonData(u8, u8);
 static void SetPlacedMonData(u8, u8);
-static void PurgeMonOrBoxMon(u8, u8);
+//static void PurgeMonOrBoxMon(u8, u8); // siliconMerge
 static void SetShiftedMonData(u8, u8);
 static bool8 TryStorePartyMonInBox(u8);
 static void ResetSelectionAfterDeposit(void);
@@ -1073,6 +1077,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_ITEM_IS_HELD]         = {COMPOUND_STRING("{DYNAMIC 0} is now held."),   MSG_VAR_ITEM_NAME},
     [MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING("Changed to {DYNAMIC 0}."),    MSG_VAR_ITEM_NAME},
     [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("MAIL can't be stored!"),      MSG_VAR_NONE},
+    [MSG_CANT_WITHDRAW]        = {COMPOUND_STRING("Can't be withdrawn."),        MSG_VAR_NONE}, // Fainted Mon
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate =
@@ -2051,11 +2056,13 @@ static void InitStartingPosData(void)
 
 static void SetMonIconTransparency(void)
 {
-    if (sStorage->boxOption == OPTION_MOVE_ITEMS)
-    {
+// Start siliconMerge
+    //if (sStorage->boxOption == OPTION_MOVE_ITEMS)
+    //{
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11));
-    }
+    //}
+// End siliconMerge
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
 }
 
@@ -2600,14 +2607,33 @@ static void Task_OnSelectedMon(u8 taskId)
             }
             break;
         case MENU_PLACE:
-            PlaySE(SE_SELECT);
-            ClearBottomWindow();
-            SetPokeStorageTask(Task_PlaceMon);
+            // Start siliconMerge
+			if (sIsMonBeingMoved && sCursorArea == CURSOR_AREA_IN_PARTY && IsFaintedMon(&sStorage->movingMon))
+            {
+                PlaySE(SE_FAILURE);
+                PrintMessage(MSG_CANT_WITHDRAW);
+                sStorage->state = 6;
+            }
+            else
+            {
+			// End siliconMerge
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPokeStorageTask(Task_PlaceMon);
+            } // siliconMerge
             break;
         case MENU_SHIFT:
             if (!CanShiftMon())
             {
                 sStorage->state = 3;
+            // Start siliconMerge
+			}
+            else if (sIsMonBeingMoved && sCursorArea == CURSOR_AREA_IN_PARTY && IsFaintedMon(&sStorage->movingMon))
+            {
+                PlaySE(SE_FAILURE);
+                PrintMessage(MSG_CANT_WITHDRAW);
+                sStorage->state = 6;
+			// End siliconMerge
             }
             else
             {
@@ -2617,9 +2643,20 @@ static void Task_OnSelectedMon(u8 taskId)
             }
             break;
         case MENU_WITHDRAW:
-            PlaySE(SE_SELECT);
-            ClearBottomWindow();
-            SetPokeStorageTask(Task_WithdrawMon);
+            // Start siliconMerge
+			if (IsFaintedBoxMon(&gPokemonStoragePtr->boxes[StorageGetCurrentBox()][sCursorPosition]))
+            {
+                PlaySE(SE_FAILURE);
+                PrintMessage(MSG_CANT_WITHDRAW);
+                sStorage->state = 6;
+            }
+            else
+            {
+			// End siliconMerge
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPokeStorageTask(Task_WithdrawMon);
+            } // siliconMerge
             break;
         case MENU_STORE:
             if (IsRemovingLastPartyMon())
@@ -2783,6 +2820,10 @@ static void Task_WithdrawMon(u8 taskId)
         }
         else
         {
+            // Start siliconMerge
+			if (VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT))
+                VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT, 0);
+				// End siliconMerge
             SaveCursorPos();
             InitMonPlaceChange(CHANGE_GRAB);
             sStorage->state = 2;
@@ -2850,6 +2891,10 @@ static void Task_DepositMenu(u8 taskId)
         default:
             if (TryStorePartyMonInBox(boxId))
             {
+                // Start siliconMerge
+				if (VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT))
+                    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT, 0);
+					// End siliconMerge
                 sDepositBoxId = boxId;
                 ClearBottomWindow();
                 DestroyChooseBoxMenuSprites();
@@ -3980,6 +4025,14 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
         LZ77UnCompWram(sStorage->displayMonPalette, sStorage->displayMonPalBuffer);
         CpuCopy32(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadPalette(sStorage->displayMonPalBuffer, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
+        UniquePalette(sStorage->displayMonPalOffset, &sCurrentBoxPokemon); //colorVariation
+		 // Start siliconMerge
+        if (sStorage->displayMonIsFainted)
+        {
+            TintPalette_GrayScale(&gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
+            TintPalette_GrayScale(&gPlttBufferFaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
+        }
+		 // End siliconMerge
         sStorage->displayMonSprite->invisible = FALSE;
     }
     else
@@ -4454,6 +4507,10 @@ static void InitBoxMonSprites(u8 boxId)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
                 sStorage->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
+               // Start siliconMerge
+				 if (IsFaintedBoxMon(&gPokemonStoragePtr->boxes[boxId][boxPosition]))
+                    sStorage->boxMonsSprites[count]->oam.objMode = ST_OAM_OBJ_BLEND;
+					// End siliconMerge
             }
             else
             {
@@ -4486,7 +4543,10 @@ static void CreateBoxMonIconAtPos(u8 boxPosition)
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
         sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS));
-        if (sStorage->boxOption == OPTION_MOVE_ITEMS)
+        // Start siliconMerge
+		if (sStorage->boxOption == OPTION_MOVE_ITEMS
+         || IsFaintedBoxMon(&gPokemonStoragePtr->boxes[StorageGetCurrentBox()][boxPosition]))
+		 // End siliconMerge
             sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
@@ -4591,6 +4651,10 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                     sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
                     sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
                     sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
+                    // Start siliconMerge
+					if (IsFaintedBoxMon(&gPokemonStoragePtr->boxes[sStorage->incomingBoxId][boxPosition]))
+                        sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+						// End siliconMerge
                     iconsCreated++;
                 }
             }
@@ -6408,7 +6472,10 @@ static void SetPlacedMonData(u8 boxId, u8 position)
     }
 }
 
-static void PurgeMonOrBoxMon(u8 boxId, u8 position)
+// Start siliconMerge
+void PurgeMonOrBoxMon(u8 boxId, u8 position)
+//static void PurgeMonOrBoxMon(u8 boxId, u8 position)
+// Start siliconMerge
 {
     if (boxId == TOTAL_BOXES_COUNT)
         ZeroMonData(&gPlayerParty[position]);
@@ -6932,6 +6999,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
 
+        CopyMon(&sCurrentBoxPokemon, &mon->box, sizeof(sCurrentBoxPokemon)); // colorVariation
         sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
@@ -6949,12 +7017,14 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+            sStorage->displayMonIsFainted = IsFaintedMon(mon);  // siliconMerge
         }
     }
     else if (mode == MODE_BOX)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
 
+        CopyMon(&sCurrentBoxPokemon, &boxMon, sizeof(sCurrentBoxPokemon)); // colorVariation
         sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
@@ -6974,6 +7044,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+            sStorage->displayMonIsFainted = IsFaintedBoxMon(boxMon);  // siliconMerge
         }
     }
     else
@@ -7194,7 +7265,10 @@ static u8 InBoxInput_Normal(void)
         if (JOY_NEW(B_BUTTON))
             return INPUT_PRESSED_B;
 
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        //Start siliconMerge
+		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+		// if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR) // siliconMerge
+		// End siliconMerge
         {
             if (JOY_HELD(L_BUTTON))
                 return INPUT_SCROLL_LEFT;
@@ -7363,7 +7437,10 @@ static u8 InBoxInput_MovingMultiple(void)
     }
     else
     {
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        //Start siliconMerge
+		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+		// if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR) // siliconMerge
+		// End siliconMerge
         {
             if (JOY_HELD(L_BUTTON))
                 return INPUT_SCROLL_LEFT;
@@ -7531,7 +7608,10 @@ static u8 HandleInput_OnBox(void)
         if (JOY_HELD(DPAD_RIGHT))
             return INPUT_SCROLL_RIGHT;
 
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        //Start siliconMerge
+		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+		// if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR) // siliconMerge
+		// End siliconMerge
         {
             if (JOY_HELD(L_BUTTON))
                 return INPUT_SCROLL_LEFT;

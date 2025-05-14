@@ -9,6 +9,7 @@
 #include "sprite.h"
 #include "strings.h"
 #include "decompress.h"
+#include "battle_tower.h" // siliconMerge
 #include "tv.h"
 
 EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
@@ -75,6 +76,7 @@ u32 GetMoney(u32 *moneyPtr)
 
 void SetMoney(u32 *moneyPtr, u32 newValue)
 {
+    PSF_UnlockCharlotteInBattleFacility(newValue); // siliconMerge
     *moneyPtr = gSaveBlock2Ptr->encryptionKey ^ newValue;
 }
 

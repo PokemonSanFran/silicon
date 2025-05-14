@@ -23,6 +23,14 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/weather.h"
+// Start fogBattle
+#include "constants/wild_encounter.h"
+#include "quest_logic.h"
+// End fogBattle
+// Start fishingUpdate
+#include "battle.h"
+#include "constants/battle.h"
+// End fishingUpdate
 
 extern const u8 EventScript_SprayWoreOff[];
 
@@ -37,13 +45,16 @@ extern const u8 EventScript_SprayWoreOff[];
 #define NUM_FISHING_SPOTS_3 149
 #define NUM_FISHING_SPOTS (NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2 + NUM_FISHING_SPOTS_3)
 
+// Start fogBattle
+/*
 enum {
     WILD_AREA_LAND,
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
 };
-
+*/
+// End fogBattle
 #define WILD_CHECK_REPEL    (1 << 0)
 #define WILD_CHECK_KEEN_EYE (1 << 1)
 
@@ -51,7 +62,7 @@ enum {
 
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
-static void UpdateChainFishingStreak();
+//static void UpdateChainFishingStreak(); // fishingUpdate
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
@@ -459,7 +470,10 @@ void CreateWildMon(u16 species, u8 level)
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr)
 #endif
 
-static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags)
+// Start fogBattle
+//static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags)
+bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags)
+// End fogBattle
 {
     u8 wildMonIndex = 0;
     u8 level;
@@ -519,7 +533,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     u16 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
-    UpdateChainFishingStreak();
+    //UpdateChainFishingStreak(); // fishingUpdate
     CreateWildMon(wildMonSpecies, level);
     return wildMonSpecies;
 }
@@ -666,6 +680,10 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
+            // Start fogBattle
+            else if (ShouldWildBattleBeFog())
+                return GenerateAndStartWildFogBattle(headerId, WILD_AREA_LAND);
+            // End fogBattle
             else if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
                 return FALSE;
             else if (WildEncounterCheck(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
@@ -715,6 +733,10 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
                 return FALSE;
             else if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
                 return FALSE;
+            // Start fogBattle
+            else if (ShouldWildBattleBeFog())
+                return GenerateAndStartWildFogBattle(headerId, WILD_AREA_WATER);
+            // End fogBattle
             else if (prevMetatileBehavior != curMetatileBehavior && !AllowWildCheckOnNewMetatile())
                 return FALSE;
             else if (WildEncounterCheck(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
@@ -873,10 +895,27 @@ u32 CalculateChainFishingShinyRolls(void)
     return (2 * min(gChainFishingDexNavStreak, FISHING_CHAIN_SHINY_STREAK_MAX));
 }
 
-static void UpdateChainFishingStreak()
+//Start fishingUpdate
+//static void UpdateChainFishingStreak()
+void UpdateChainFishingStreak(void)
+//End fishingUpdate
 {
     if (!I_FISHING_CHAIN)
         return;
+
+//Start fishingUpdate
+    if (gBattleOutcome != B_OUTCOME_WON && gBattleOutcome != B_OUTCOME_CAUGHT)
+    {
+        gChainFishingDexNavStreak = 0;
+        return;
+    }
+
+    if (!gIsFishingEncounter)
+    {
+        gChainFishingDexNavStreak = 0;
+        return;
+    }
+//End fishingUpdate
 
     if (gChainFishingDexNavStreak >= FISHING_CHAIN_LENGTH_MAX)
         return;
@@ -965,6 +1004,8 @@ bool8 UpdateRepelCounter(void)
     if (InBattlePike() || InBattlePyramid())
         return FALSE;
     if (InUnionRoom() == TRUE)
+        return FALSE;
+    if (FlagGet(FLAG_INFINITE_MODE_ON))
         return FALSE;
 
     if (steps != 0)

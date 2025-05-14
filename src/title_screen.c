@@ -22,6 +22,11 @@
 #include "graphics.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+// Start bootSequence
+#include "debug_start.h"
+#include "save.h"
+#include "ui_main_menu.h"
+// End bootSequence
 
 enum {
     TAG_VERSION = 1000,
@@ -36,6 +41,7 @@ enum {
 #define VERSION_BANNER_Y_GOAL 66
 #define START_BANNER_X 128
 
+#define DEBUG_START (R_BUTTON | SELECT_BUTTON)  // siliconMerge
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define RESET_RTC_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
 #define BERRY_UPDATE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON)
@@ -48,6 +54,7 @@ static void Task_TitleScreenPhase3(u8);
 static void CB2_GoToMainMenu(void);
 static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
+static void CB2_GoToDebugStartScreen(void); // bootSequence
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
 static void UpdateLegendaryMarkingColor(u8);
@@ -689,6 +696,12 @@ static void Task_TitleScreenPhase1(u8 taskId)
         gTasks[taskId].tSkipToNext = TRUE;
         gTasks[taskId].tCounter = 0;
     }
+    // Start bootSequence
+    else if (JOY_HELD(DEBUG_START) == DEBUG_START)
+    {
+        SetMainCallback2(CB2_GoToDebugStartScreen);
+    }
+    // End bootSequence
 
     if (gTasks[taskId].tCounter != 0)
     {
@@ -783,12 +796,24 @@ static void Task_TitleScreenPhase3(u8 taskId)
     {
         FadeOutBGM(4);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
-        SetMainCallback2(CB2_GoToMainMenu);
+        // Start bootSequence
+        SetCallbackFromSaveStatus();
+        //SetMainCallback2(CB2_GoToMainMenu);
+        // End bootSequence
     }
     else if (JOY_HELD(CLEAR_SAVE_BUTTON_COMBO) == CLEAR_SAVE_BUTTON_COMBO)
     {
-        SetMainCallback2(CB2_GoToClearSaveDataScreen);
+        // Start bootSequence
+        //SetMainCallback2(CB2_GoToClearSaveDataScreen);
+        SetMainCallback2(CB2_GoToEraseMainMenu);
     }
+#ifndef NDEBUG
+    else if (JOY_HELD(DEBUG_START) == DEBUG_START)
+    {
+        SetMainCallback2(CB2_GoToDebugStartScreen);
+    }
+#endif
+        // End bootSequence
     else if (JOY_HELD(RESET_RTC_BUTTON_COMBO) == RESET_RTC_BUTTON_COMBO
       && CanResetRTC() == TRUE)
     {
@@ -821,7 +846,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
     }
 }
 
-static void CB2_GoToMainMenu(void)
+static void UNUSED CB2_GoToMainMenu(void) // siliconMerge
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitMainMenu);
@@ -833,11 +858,17 @@ static void CB2_GoToCopyrightScreen(void)
         SetMainCallback2(CB2_InitCopyrightScreenAfterTitleScreen);
 }
 
-static void CB2_GoToClearSaveDataScreen(void)
+static void UNUSED CB2_GoToClearSaveDataScreen(void) // siliconMerge
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitClearSaveDataScreen);
+// Start siliconMerge
+static void CB2_GoToDebugStartScreen(void)
+{
+    if (!UpdatePaletteFade())
+        SetMainCallback2(CB2_InitDebugStartScreen);
 }
+// End siliconMerge
 
 static void CB2_GoToResetRtcScreen(void)
 {

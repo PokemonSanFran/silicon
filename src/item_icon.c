@@ -7,14 +7,12 @@
 #include "malloc.h"
 #include "move.h"
 #include "sprite.h"
+#include "pokevial.h" // Pokevial Branch
 #include "constants/items.h"
 
 // EWRAM vars
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
 EWRAM_DATA u8 *gItemIcon4x4Buffer = NULL;
-
-// const rom data
-#include "data/item_icon_table.h"
 
 static const struct OamData sOamData_ItemIcon =
 {
@@ -172,6 +170,11 @@ const void *GetItemIconPic(u16 itemId)
             return gItemIcon_TM;
         return gItemIcon_HM;
     }
+
+    // Start Pokevial Branch
+    if (itemId == ITEM_POKEVIAL)
+        return PokevialGetDoseIcon();
+    // End Pokevial Branch
 
     return gItemsInfo[itemId].iconPic;
 }

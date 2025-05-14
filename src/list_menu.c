@@ -86,6 +86,7 @@ static void ListMenuUpdateCursorObject(u8 taskId, u16 x, u16 y, u32 cursorObjId)
 static void ListMenuRemoveCursorObject(u8 taskId, u32 cursorObjId);
 static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite);
 static void SpriteCallback_RedArrowCursor(struct Sprite *sprite);
+static void ListMenu_WrapCursorToOppositeEnd(struct ListMenu *list,bool32 movingDown,s32 currentRow,u32 totalRows); // siliconMerge
 
 // EWRAM vars
 static EWRAM_DATA struct {
@@ -211,7 +212,10 @@ static const struct Subsprite sSubsprite_RedOutline3 =
     .y = 0,
     .shape = SPRITE_SHAPE(8x8),
     .size = SPRITE_SIZE(8x8),
-    .tileOffset = 2,
+    // Start siliconMerge
+	.tileOffset = 0,
+	.tileOffset = 2, 
+	// End siliconMerge
     .priority = 0,
 };
 
@@ -265,6 +269,69 @@ static const struct Subsprite sSubsprite_RedOutline8 =
     .priority = 0,
 };
 
+// Start google_glass
+
+static const struct Subsprite sSubsprite_CrimBarTopLeft =
+{
+    .x = 0,
+    .y = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .tileOffset = 0,
+    .priority = 2,
+};
+
+static const struct Subsprite sSubsprite_CrimBarCenterLeft =
+{
+    .x = 0,
+    .y = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .tileOffset = 2,
+    .priority = 2,
+};
+
+static const struct Subsprite sSubsprite_CrimBarBottomLeft =
+{
+    .x = 0,
+    .y = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .tileOffset = 4,
+    .priority = 2,
+};
+
+static const struct Subsprite sSubsprite_CrimBarTop =
+{
+    .x = 0,
+    .y = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .tileOffset = 1,
+    .priority = 2,
+};
+
+static const struct Subsprite sSubsprite_CrimBarCenter =
+{
+    .x = 0,
+    .y = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .tileOffset = 3,
+    .priority = 2,
+};
+
+static const struct Subsprite sSubsprite_CrimBarBottom =
+{
+    .x = 0,
+    .y = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .tileOffset = 5,
+    .priority = 2,
+};
+
+// End google_glass
 static const struct OamData sOamData_RedArrowCursor =
 {
     .y = 0,
@@ -308,6 +375,10 @@ static const u16 sRedInterface_Pal[]    = INCBIN_U16("graphics/interface/red.gba
 static const u32 sScrollIndicator_Gfx[] = INCBIN_U32("graphics/interface/scroll_indicator.4bpp.lz");
 static const u32 sOutlineCursor_Gfx[]   = INCBIN_U32("graphics/interface/outline_cursor.4bpp.lz");
 static const u32 sArrowCursor_Gfx[]     = INCBIN_U32("graphics/interface/arrow_cursor.4bpp.lz");
+// Start google_glass
+static const u32 sCrimCursor_Gfx[]   = INCBIN_U32("graphics/interface/crim_cursor.4bpp.lz");
+static const u16 sCrimInterface_Pal[]    = INCBIN_U16("graphics/interface/crim.gbapal");
+// End google_glass
 
 // code
 static void ListMenuDummyTask(u8 taskId)
@@ -409,9 +480,28 @@ u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenu
     return taskId;
 }
 
+// Start siliconMerge
+static void ListMenu_WrapCursorToOppositeEnd(struct ListMenu *list,bool32 movingDown,s32 currentRow,u32 totalRows)
+{
+    u32 diffRows = (movingDown == TRUE) ? (totalRows - currentRow) : currentRow;
+    u8 remainingRowDistance = 0;
+
+    while (diffRows > 0)
+    {
+        remainingRowDistance = diffRows > UCHAR_MAX ? UCHAR_MAX : diffRows;
+        ListMenuChangeSelection(list, TRUE, remainingRowDistance, movingDown);
+        diffRows -= remainingRowDistance;
+    }
+}
+// End siliconMerge
 s32 ListMenu_ProcessInput(u8 listTaskId)
 {
-    struct ListMenu *list = (void *) gTasks[listTaskId].data;
+    // Start siliconMerge
+	struct ListMenu *list = (void*) gTasks[listTaskId].data;
+    s32 currentRow = list->scrollOffset + list->selectedRow;
+    u32 totalRows = list->template.totalItems - 1;
+    bool32 movingDown;
+	// End siliconMerge
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -423,12 +513,28 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
     }
     else if (JOY_REPEAT(DPAD_UP))
     {
-        ListMenuChangeSelection(list, TRUE, 1, FALSE);
+        movingDown = FALSE; // siliconMerge
+        // Start siliconMerge
+		if (currentRow == 0)
+            ListMenu_WrapCursorToOppositeEnd(list, !movingDown, currentRow, totalRows);
+        else
+            ListMenuChangeSelection(list, TRUE, 1, movingDown);
+			//ListMenuChangeSelection(list, TRUE, 1, FALSE);
+			// End siliconMerge
+
         return LIST_NOTHING_CHOSEN;
     }
     else if (JOY_REPEAT(DPAD_DOWN))
     {
-        ListMenuChangeSelection(list, TRUE, 1, TRUE);
+        // Start siliconMerge
+		movingDown = TRUE;
+
+        if (currentRow == totalRows)
+            ListMenu_WrapCursorToOppositeEnd(list, !movingDown, currentRow, totalRows);
+        else
+            ListMenuChangeSelection(list, TRUE, 1, movingDown);
+			//ListMenuChangeSelection(list, TRUE, 1, TRUE);
+		// End siliconMerge
         return LIST_NOTHING_CHOSEN;
     }
     else // try to move by one window scroll
@@ -1268,61 +1374,126 @@ u8 ListMenuGetRedOutlineCursorSpriteCount(u16 rowWidth, u16 rowHeight)
     return count;
 }
 
+// Start siliconMerge
+u8 ListMenuGetCrimCursorSpriteCount(u16 rowWidth, u16 rowHeight)
+{
+	u32 numRows, numColumns;
+	rowWidth -= (TILE_SIZE_1BPP + 2);
+	// red outline cursor from vanilla is "width of the current window + 2", but mine actually needs to be "width of the window - one tile" because my cursor doesn't show the right side
+
+    numRows = rowHeight / 8;
+    numColumns = rowWidth / 8;
+
+    return (numRows * 3) + (numColumns * 3);
+}
+
+/*
 void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, struct Subsprite *subsprites)
 {
-    s32 i, j, id = 0;
+       s32 i, j, id = 0;
 
-    subsprites[id] = sSubsprite_RedOutline1;
-    subsprites[id].x = 136;
-    subsprites[id].y = 136;
-    id++;
+       subsprites[id] = sSubsprite_RedOutline1;
+       subsprites[id].x = 136;
+       subsprites[id].y = 136;
+       id++;
 
-    subsprites[id] = sSubsprite_RedOutline2;
-    subsprites[id].x = rowWidth + 128;
-    subsprites[id].y = 136;
-    id++;
+       subsprites[id] = sSubsprite_RedOutline2;
+       subsprites[id].x = rowWidth + 128;
+       subsprites[id].y = 136;
+       id++;
 
-    subsprites[id] = sSubsprite_RedOutline7;
-    subsprites[id].x = 136;
-    subsprites[id].y = rowHeight + 128;
-    id++;
+       subsprites[id] = sSubsprite_RedOutline7;
+       subsprites[id].x = 136;
+       subsprites[id].y = rowHeight + 128;
+       id++;
 
-    subsprites[id] = sSubsprite_RedOutline8;
-    subsprites[id].x = rowWidth + 128;
-    subsprites[id].y = rowHeight + 128;
-    id++;
+       subsprites[id] = sSubsprite_RedOutline8;
+       subsprites[id].x = rowWidth + 128;
+       subsprites[id].y = rowHeight + 128;
+       id++;
 
-    if (rowWidth > 16)
-    {
-        for (i = 8; i < rowWidth - 8; i += 8)
-        {
-            subsprites[id] = sSubsprite_RedOutline3;
-            subsprites[id].x = i - 120;
-            subsprites[id].y = -120;
-            id++;
+       if (rowWidth > 16)
+       {
+       for (i = 8; i < rowWidth - 8; i += 8)
+       {
+       subsprites[id] = sSubsprite_RedOutline3;
+       subsprites[id].x = i - 120;
+       subsprites[id].y = -120;
+       id++;
 
-            subsprites[id] = sSubsprite_RedOutline6;
-            subsprites[id].x = i - 120;
-            subsprites[id].y = rowHeight + 128;
-            id++;
-        }
-    }
+       subsprites[id] = sSubsprite_RedOutline6;
+       subsprites[id].x = i - 120;
+       subsprites[id].y = rowHeight + 128;
+       id++;
+       }
+       }
 
-    if (rowHeight > 16)
-    {
-        for (j = 8; j < rowHeight - 8; j += 8)
-        {
-            subsprites[id] = sSubsprite_RedOutline4;
-            subsprites[id].x = 136;
-            subsprites[id].y = j - 120;
-            id++;
+       if (rowHeight > 16)
+       {
+       for (j = 8; j < rowHeight - 8; j += 8)
+       {
+       subsprites[id] = sSubsprite_RedOutline4;
+       subsprites[id].x = 136;
+       subsprites[id].y = j - 120;
+       id++;
 
-            subsprites[id] = sSubsprite_RedOutline5;
-            subsprites[id].x = rowWidth + 128;
-            subsprites[id].y = j - 120;
-            id++;
-        }
-    }
+       subsprites[id] = sSubsprite_RedOutline5;
+       subsprites[id].x = rowWidth + 128;
+       subsprites[id].y = j - 120;
+       id++;
+       }
+       }
+}
+       */
+
+void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, struct Subsprite *subsprites)
+{
+   s32 id = 0, i;
+   u32 newWidth;
+   u32 numRows = rowHeight / 8;
+   subsprites[id] = sSubsprite_CrimBarTopLeft; // siliconMerge
+   subsprites[id].x = 136;
+   subsprites[id].y = 136;
+
+   subsprites[++id] = sSubsprite_CrimBarBottomLeft;
+   subsprites[id].x = 136;
+   subsprites[id].y = 134 + rowHeight;
+
+   for (i = 1; i < numRows; i++)
+   {
+       subsprites[++id] = sSubsprite_CrimBarCenterLeft;
+       subsprites[id].x = 136;
+       subsprites[id].y = 136 + (i * 8);
+   }
+
+   newWidth = rowWidth;
+   for (i = 1; newWidth >= 8; i++)
+   {
+       newWidth -= 8;
+       subsprites[++id] = sSubsprite_CrimBarCenter;
+       subsprites[id].x = 136 + (i * 8);
+       subsprites[id].y = 136 + 8;
+   }
+
+   newWidth = rowWidth;
+   for (i = 1; newWidth >= 8; i++)
+   {
+       newWidth -= 8;
+       subsprites[++id] = sSubsprite_CrimBarTop;
+       subsprites[id].x = 136 + (i * 8);
+       subsprites[id].y = 136;
+   }
+
+   newWidth = rowWidth;
+   for (i = 1; newWidth >= 8; i++)
+   {
+       newWidth -= 8;
+       subsprites[++id] = sSubsprite_CrimBarBottom;
+       subsprites[id].x = 136 + (i * 8);
+       subsprites[id].y = 134 + rowHeight;
+   }
+}
+// End siliconMerge
 }
 
 static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
@@ -1333,18 +1504,27 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
     struct SpriteTemplate spriteTemplate;
     u8 taskId;
 
-    spriteSheet.data = sOutlineCursor_Gfx;
+    // Start siliconMerge
+	//spriteSheet.data = sOutlineCursor_Gfx;
+    spriteSheet.data = sCrimCursor_Gfx;
+	// End siliconMerge
     spriteSheet.size = 0x100;
     spriteSheet.tag = cursor->tileTag;
     LoadCompressedSpriteSheet(&spriteSheet);
 
     if (cursor->palTag == TAG_NONE)
     {
-        LoadPalette(sRedInterface_Pal, OBJ_PLTT_ID(cursor->palNum), PLTT_SIZE_4BPP);
+    // Start google_glass
+        //LoadPalette(sRedInterface_Pal, OBJ_PLTT_ID(cursor->palNum), PLTT_SIZE_4BPP);
+        LoadPalette(sCrimInterface_Pal, OBJ_PLTT_ID(cursor->palNum), PLTT_SIZE_4BPP);
+    // End google_glass
     }
     else
     {
-        spritePal.data = sRedInterface_Pal;
+    // Start google_glass
+        //spritePal.data = sRedInterface_Pal;
+        spritePal.data = sCrimInterface_Pal;
+    // End google_glass
         spritePal.tag = cursor->palTag;
         LoadSpritePalette(&spritePal);
     }
@@ -1354,7 +1534,10 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
 
     data->tileTag = cursor->tileTag;
     data->palTag = cursor->palTag;
-    data->subspriteTable.subspriteCount = ListMenuGetRedOutlineCursorSpriteCount(cursor->rowWidth, cursor->rowHeight);
+    // Start google_glass
+    //data->subspriteTable.subspriteCount = ListMenuGetRedOutlineCursorSpriteCount(cursor->rowWidth, cursor->rowHeight);
+    data->subspriteTable.subspriteCount = ListMenuGetCrimCursorSpriteCount(cursor->rowWidth, cursor->rowHeight);
+    // End google_glass
     data->subspriteTable.subsprites = data->subspritesPtr = Alloc(data->subspriteTable.subspriteCount * 4);
     ListMenuSetUpRedOutlineCursorSpriteOamTable(cursor->rowWidth, cursor->rowHeight, data->subspritesPtr);
 

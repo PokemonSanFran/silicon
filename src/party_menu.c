@@ -28,6 +28,7 @@
 #include "frontier_util.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "hexorb.h" // hexorb Branch
 #include "international_string_util.h"
 #include "item.h"
 #include "item_menu.h"
@@ -75,6 +76,9 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "pokevial.h" //Pokevial Branch
+#include "options_battle.h" // siliconMerge
+#include "qol_field_moves.h" // pokedex
 
 enum {
     MENU_SUMMARY,
@@ -104,6 +108,13 @@ enum {
     MENU_CATALOG_MOWER,
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
+    // Start hexorb Branch
+    MENU_INFLICT_SLEEP,
+    MENU_INFLICT_POISON,
+    MENU_INFLICT_BURN,
+    MENU_INFLICT_FREEZE_FROSTBITE,
+    MENU_INFLICT_PARALYSIS,
+    // End hexorb Branch
     MENU_FIELD_MOVES
 };
 
@@ -125,6 +136,7 @@ enum {
     ACTIONS_TAKEITEM_TOSS,
     ACTIONS_ROTOM_CATALOG,
     ACTIONS_ZYGARDE_CUBE,
+    ACTIONS_HEXORB, // hexorb Branch
 };
 
 // In CursorCb_FieldMove, field moves <= FIELD_MOVE_WATERFALL are assumed to line up with the badge flags.
@@ -174,6 +186,7 @@ enum {
 #define MENU_DIR_RIGHT    2
 #define MENU_DIR_LEFT    -2
 
+
 #define HM_MOVES_END 0xFFFF
 
 static const u16 sHMMoves[] =
@@ -181,6 +194,8 @@ static const u16 sHMMoves[] =
     MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
     MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
 };
+/*
+Moved to qol_field_moves.h
 
 enum {
     CAN_LEARN_MOVE,
@@ -188,6 +203,7 @@ enum {
     ALREADY_KNOWS_MOVE,
     CANNOT_LEARN_MOVE_IS_EGG
 };
+*/
 
 enum {
     // Window ids 0-5 are implicitly assigned to each party Pokémon in InitPartyMenuBoxes
@@ -295,7 +311,7 @@ static void DisplayPartyPokemonHPBarCheck(struct Pokemon *, struct PartyMenuBox 
 static void DisplayPartyPokemonDescriptionText(u8, struct PartyMenuBox *, u8);
 static bool8 IsMonAllowedInMinigame(u8);
 static void DisplayPartyPokemonDataToTeachMove(u8, u16);
-static u8 CanTeachMove(struct Pokemon *, u16);
+//static u8 CanTeachMove(struct Pokemon *, u16); // qol_field_moves
 static void DisplayPartyPokemonBarDetail(u8, const u8 *, u8, const u8 *);
 static void DisplayPartyPokemonLevel(u8, struct PartyMenuBox *);
 static void DisplayPartyPokemonGender(u8, u16, u8 *, struct PartyMenuBox *);
@@ -389,7 +405,11 @@ static void Task_SendMailToPCYesNo(u8);
 static void Task_HandleSendMailToPCYesNoInput(u8);
 static void Task_LoseMailMessageYesNo(u8);
 static void Task_HandleLoseMailMessageYesNoInput(u8);
-static bool8 TrySwitchInPokemon(void);
+// Start SameSwitchCancelsSwitch
+// https://github.com/pret/pokeemerald/wiki/Shifting-to-Pok%C3%A9mon-Already-in-Battle-Exits-the-Shift-Menu
+// static bool8 TrySwitchInPokemon(void);
+static u32 TrySwitchInPokemon(void);
+// End SameSwitchCancelsSwitch
 static void Task_SpinTradeYesNo(u8);
 static void Task_HandleSpinTradeYesNoInput(u8);
 static void Task_CancelAfterAorBPress(u8);
@@ -478,7 +498,7 @@ static void Task_ChoosePartyMon(u8 taskId);
 static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
 static void Task_BattlePyramidChooseMonHeldItems(u8);
-static void ShiftMoveSlot(struct Pokemon *, u8, u8);
+//static void ShiftMoveSlot(struct Pokemon *, u8, u8); // surpriseTrade
 static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, bool8);
 static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, bool8);
 static void CursorCb_Summary(u8);
@@ -515,6 +535,18 @@ static bool8 SetUpFieldMove_Dive(void);
 void TryItemHoldFormChange(struct Pokemon *mon);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
+//Start Pokevial Branch
+void UsePokevial(u8);
+static void Task_PokevialLoop(u8);
+static void PokevialStartVariablesAndRun(u8 taskId, TaskFunc task);
+//End Pokevial Branch
+// Start hexorb Branch
+static void TryHexorbAndPrintResult(u8);
+static void DisplayHexorbResult(u8, u32, enum HexorbResultCodes, struct Pokemon*);
+static void Task_RetryHexorbAfterFailedStatus(u8);
+static void Task_RetryHexorbAfterFailedMon(u8);
+static void DisplayHexorbMessageAndScheduleTask(u8, const u8*, TaskFunc, bool32);
+// End hexorb Branch
 
 // static const data
 #include "data/party_menu.h"
@@ -1520,9 +1552,13 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             u8 partyId = GetPartyIdFromBattleSlot((u8)*slotPtr);
             if (GetMonData(&gPlayerParty[*slotPtr], MON_DATA_HP) > 0
                 || GetMonData(&gPlayerParty[*slotPtr], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG
-                || ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && partyId >= (PARTY_SIZE / 2)))
+                // Start siliconMerge
+				|| ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && partyId >= (PARTY_SIZE / 2))
+                || IsFaintedMon(&gPlayerParty[*slotPtr]))
+				// End siliconMerge
             {
                 // Can't select if egg, alive, or doesn't belong to you
+                // Can't select if Fainted Mon is active and the 'mon in question has fainted either.
                 PlaySE(SE_FAILURE);
             }
             else
@@ -2264,14 +2300,21 @@ static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
     }
 }
 
-static u8 CanTeachMove(struct Pokemon *mon, u16 move)
+//static u8 CanTeachMove(struct Pokemon *mon, u16 move) // qol_field_moves
+u8 CanTeachMove(struct Pokemon *mon, u16 move) //qol_field_moves
 {
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
-    else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
+    // Start pokedex
+    //else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
+        //return CANNOT_LEARN_MOVE;
+    else if (!CanMonEverLearnMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
         return CANNOT_LEARN_MOVE;
+    // End pokedex
     else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
+    else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
+        return CANNOT_LEARN_MOVE;
     else
         return CAN_LEARN_MOVE;
 }
@@ -2719,6 +2762,11 @@ void DisplayPartyMenuStdMessage(u32 stringId)
         case PARTY_MSG_WHICH_APPLIANCE:
             *windowPtr = AddWindow(&sOrderWhichApplianceMsgWindowTemplate);
             break;
+            // Start hexorb Branch
+        case PARTY_MSG_WHICH_STATUS:
+            *windowPtr = AddWindow(&sInflictWhichStatusMsgWindowTemplate);
+            break;
+            // End hexorb Branch
         default:
             *windowPtr = AddWindow(&sDefaultPartyMsgWindowTemplate);
             break;
@@ -2784,6 +2832,11 @@ static u8 DisplaySelectionWindow(u8 windowType)
     case SELECTWINDOW_ZYGARDECUBE:
         window = sZygardeCubeSelectWindowTemplate;
         break;
+        // Start hexorb Branch
+    case SELECTWINDOW_HEXORB:
+        window = sHexorbSelectWindowTemplate;
+        break;
+        // End hexorb Branch
     default: // SELECTWINDOW_MOVES
         window = sMoveSelectWindowTemplate;
         break;
@@ -3764,12 +3817,21 @@ static void CursorCb_Cancel2(u8 taskId)
 
 static void CursorCb_SendMon(u8 taskId)
 {
+    u32 switchMon = TrySwitchInPokemon(); // SameSwitchCancelsSwitch
+
     PlaySE(SE_SELECT);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
-    if (TrySwitchInPokemon() == TRUE)
+    //if (TrySwitchInPokemon() == TRUE) // SameSwitchCancelsSwitch
+    if (switchMon == CAN_SWITCH)
     {
         Task_ClosePartyMenu(taskId);
     }
+    // Start SameSwitchCancelsSwitch
+    else if (switchMon == SAME_SWITCH)
+    {
+        HandleChooseMonCancel(taskId,GetCurrentPartySlotPtr());
+    }
+    // End SameSwitchCancelsSwitch
     else
     {
         // gStringVar4 below is the error message buffered by TrySwitchInPokemon
@@ -4006,6 +4068,16 @@ static void CursorCb_FieldMove(u8 taskId)
                 sPartyMenuInternal->data[0] = fieldMove;
                 break;
             case FIELD_MOVE_DIG:
+                // Start siliconMerge
+				//If the user is on Route4, they will be able to dig in the right spot to uncover the Lab
+                if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE4)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE4))
+                {
+                    StringExpandPlaceholders(gStringVar4, gText_WantToUseDig);
+                    //PSF TODO Figure out how to load the pokemon's name here
+                }
+                else {
+				// End siliconMerge
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
                 GetMapNameGeneric(gStringVar1, mapHeader->regionMapSectionId);
                 StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
@@ -4154,7 +4226,7 @@ static bool8 SetUpFieldMove_Fly(void)
 
 void CB2_ReturnToPartyMenuFromFlyMap(void)
 {
-    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToFieldWithOpenMenu);
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToUIMenu);
 }
 
 static void FieldCallback_Waterfall(void)
@@ -4525,6 +4597,14 @@ void CB2_ShowPartyMenuForItemUse(void)
         task = Task_SetSacredAshCB;
         msgId = PARTY_MSG_NONE;
     }
+    //Start Pokevial Branch
+    else if (GetItemEffectType(gSpecialVar_ItemId) == ITEM_EFFECT_POKEVIAL)
+    {
+        gPartyMenu.slotId = 0;
+        task = Task_SetSacredAshCB;
+        msgId = PARTY_MSG_NONE;
+    }
+    //End Pokevial Branch
     else
     {
         if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_TM_HM)
@@ -4722,6 +4802,10 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     else
     {
         gPartyMenuUseExitCallback = TRUE;
+        // Start siliconMerge
+		if (VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT))
+            VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT, 0);
+		// End siliconMerge
         if (!IsItemFlute(item))
         {
             PlaySE(SE_USE_ITEM);
@@ -6700,8 +6784,16 @@ u8 GetItemEffectType(u16 item)
         return ITEM_EFFECT_X_ITEM;
     else if (itemEffect[0] & ITEM0_SACRED_ASH)
         return ITEM_EFFECT_SACRED_ASH;
+    //Start Pokevial Branch
+    else if (itemEffect[0] & ITEM0_POKEVIAL)
+        return ITEM_EFFECT_POKEVIAL;
+    //End Pokevial Branch
     else if (itemEffect[3] & ITEM3_LEVEL_UP)
         return ITEM_EFFECT_RAISE_LEVEL;
+    // Start hexorb Branch
+    else if (itemEffect[0] & ITEM0_HEXORB)
+        return ITEM_EFFECT_HEXORB;
+    // End hexorb Branch
 
     statusCure = itemEffect[3] & ITEM3_STATUS_ALL;
     if (statusCure || (itemEffect[0] >> 7))
@@ -6786,7 +6878,10 @@ static void TryTutorSelectedMon(u8 taskId)
 
 void CB2_PartyMenuFromStartMenu(void)
 {
-    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToFieldWithOpenMenu);
+	// Start siliconMerge
+//     InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToFieldWithOpenMenu);
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToUIMenu);
+	// End siliconMerge
 }
 
 // Giving an item by selecting Give from the bag menu
@@ -7232,7 +7327,10 @@ static u8 GetPartyMenuActionsTypeInBattle(struct Pokemon *mon)
     return ACTIONS_SUMMARY_ONLY;
 }
 
-static bool8 TrySwitchInPokemon(void)
+// Start SameSwitchCancelsSwitch
+//static bool8 TrySwitchInPokemon(void)
+static u32 TrySwitchInPokemon(void)
+// End SameSwitchCancelsSwitch
 {
     u8 slot = GetCursorSelectionMonId();
     u8 newSlot;
@@ -7243,13 +7341,19 @@ static bool8 TrySwitchInPokemon(void)
     {
         StringCopy(gStringVar1, GetTrainerPartnerName());
         StringExpandPlaceholders(gStringVar4, gText_CantSwitchWithAlly);
-        return FALSE;
+        // Start SameSwitchCancelsSwitch
+        return NO_SWITCH;
+        // return FALSE;
+        // End SameSwitchCancelsSwitch
     }
     if (GetMonData(&gPlayerParty[slot], MON_DATA_HP) == 0)
     {
         GetMonNickname(&gPlayerParty[slot], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_PkmnHasNoEnergy);
-        return FALSE;
+        // Start SameSwitchCancelsSwitch
+        return NO_SWITCH;
+        // return FALSE;
+        // End SameSwitchCancelsSwitch
     }
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -7257,38 +7361,56 @@ static bool8 TrySwitchInPokemon(void)
         {
             GetMonNickname(&gPlayerParty[slot], gStringVar1);
             StringExpandPlaceholders(gStringVar4, gText_PkmnAlreadyInBattle);
-            return FALSE;
+            // Start SameSwitchCancelsSwitch
+            return SAME_SWITCH;
+            // return FALSE;
+            // End SameSwitchCancelsSwitch
         }
     }
     if (GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
     {
         StringExpandPlaceholders(gStringVar4, gText_EggCantBattle);
-        return FALSE;
+        // Start SameSwitchCancelsSwitch
+        return NO_SWITCH;
+        // return FALSE;
+        // End SameSwitchCancelsSwitch
     }
     if (GetPartyIdFromBattleSlot(slot) == gBattleStruct->prevSelectedPartySlot)
     {
         GetMonNickname(&gPlayerParty[slot], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_PkmnAlreadySelected);
-        return FALSE;
+        // Start SameSwitchCancelsSwitch
+        return NO_SWITCH;
+        // return FALSE;
+        // End SameSwitchCancelsSwitch
     }
     if (gPartyMenu.action == PARTY_ACTION_ABILITY_PREVENTS)
     {
         SetMonPreventsSwitchingString();
-        return FALSE;
+        // Start SameSwitchCancelsSwitch
+        return NO_SWITCH;
+        // return FALSE;
+        // End SameSwitchCancelsSwitch
     }
     if (gPartyMenu.action == PARTY_ACTION_CANT_SWITCH)
     {
         u8 currBattler = gBattlerInMenuId;
         GetMonNickname(&gPlayerParty[GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[currBattler])], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantSwitchOut);
-        return FALSE;
+        // Start SameSwitchCancelsSwitch
+        return NO_SWITCH;
+        // return FALSE;
+        // End SameSwitchCancelsSwitch
     }
     gSelectedMonPartyId = GetPartyIdFromBattleSlot(slot);
     gPartyMenuUseExitCallback = TRUE;
     newSlot = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[gBattlerInMenuId]);
     SwitchPartyMonSlots(newSlot, slot);
     SwapPartyPokemon(&gPlayerParty[newSlot], &gPlayerParty[slot]);
-    return TRUE;
+    // Start SameSwitchCancelsSwitch
+    return CAN_SWITCH;
+    // return TRUE;
+    // End SameSwitchCancelsSwitch
 }
 
 void BufferBattlePartyCurrentOrder(void)
@@ -7810,7 +7932,10 @@ void MoveDeleterForgetMove(void)
         ShiftMoveSlot(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
 
-static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
+// Start surpriseTrade
+//static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
+void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
+// End surpriseTrade
 {
     u16 move1 = GetMonData(mon, MON_DATA_MOVE1 + slotTo);
     u16 move0 = GetMonData(mon, MON_DATA_MOVE1 + slotFrom);
@@ -7863,3 +7988,270 @@ void IsLastMonThatKnowsSurf(void)
             gSpecialVar_Result = !P_CAN_FORGET_HIDDEN_MOVE;
     }
 }
+//Start Pokevial Branch
+static bool8 IsMonNotFullyHealed(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 currentHP = GetMonData(mon,MON_DATA_HP);
+    u16 maxHP = GetMonData(mon,MON_DATA_MAX_HP);
+    u32 status = GetMonData(mon,MON_DATA_STATUS);
+
+    u8 currentPP = 0, maxPP = 0;
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+
+    s32 j;
+
+    if (currentHP < maxHP)
+        return TRUE;  // Found a Pok├⌐mon with less than full HP
+
+    if (status != 0)
+        return TRUE;  // Found a Pok├⌐mon with a status condition
+
+    for (j = 0; j < MAX_MON_MOVES; j++)
+    {
+        currentPP = GetMonData(mon, MON_DATA_PP1 + j);
+        maxPP = CalculatePPWithBonus(GetMonData(mon,MON_DATA_MOVE1 + j), ppBonuses, j);
+
+        if (currentPP < maxPP)
+        {
+            return TRUE;  // Found a Pok├⌐mon with less than max PP
+        }
+    }
+
+    return FALSE;
+}
+
+void HealMonFromSlotId(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u32 j = 0, ppBonuses = 0;
+    u8 arg[4] = {0,0,0,0};
+
+    // restore HP.
+    u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    arg[0] = maxHP;
+    arg[1] = maxHP >> 8;
+    SetMonData(mon, MON_DATA_HP, arg);
+
+    // restore PP.
+    ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    for(j = 0; j < MAX_MON_MOVES; j++)
+    {
+        arg[0] = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + j), ppBonuses, j);
+        SetMonData(mon, MON_DATA_PP1 + j, arg);
+    }
+
+    // since status is u32, the four 0 assignments here are probably for safety to prevent undefined data from reaching SetMonData.
+    arg[0] = 0;
+    arg[1] = 0;
+    arg[2] = 0;
+    arg[3] = 0;
+    SetMonData(mon, MON_DATA_STATUS, arg);
+}
+
+#define tUsedOnSlot   data[0]
+#define tHadEffect    data[1]
+#define tLastSlotUsed data[2]
+
+void ItemUseCB_UsePokevial(u8 taskId, TaskFunc task)
+{
+    PokevialStartVariablesAndRun(taskId, task);
+}
+
+static void Task_UsePokevialFromField(u8 taskId)
+{
+    PokevialStartVariablesAndRun(taskId,NULL);
+}
+
+void PokevialStartVariablesAndRun(u8 taskId, TaskFunc task)
+{
+    if (gPartyMenu.slotId == 1)
+        sPartyMenuInternal->tHadEffect = FALSE;
+
+    sPartyMenuInternal->tUsedOnSlot = FALSE;
+    sPartyMenuInternal->tLastSlotUsed = gPartyMenu.slotId;
+
+    UsePokevial(taskId);
+}
+
+void InitPartyMenuForPokevialFromField(u8 taskId)
+{
+    gPartyMenu.slotId = 0;
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE, PARTY_MSG_NONE, Task_UsePokevialFromField, CB2_ReturnToField);
+}
+
+void UsePokevial(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 hp = 0, maxHP = 0;
+
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+    {
+        gTasks[taskId].func = Task_PokevialLoop;
+        return;
+    }
+
+    if (!IsMonNotFullyHealed())
+    {
+        gTasks[taskId].func = Task_PokevialLoop;
+        return;
+    }
+
+    hp = GetMonData(mon, MON_DATA_HP);
+    maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+
+    PlaySE(SE_USE_ITEM);
+    HealMonFromSlotId();
+    SetPartyMonAilmentGfx(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
+    if (gSprites[sPartyMenuBoxes[gPartyMenu.slotId].statusSpriteId].invisible)
+        DisplayPartyPokemonLevelCheck(mon, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
+    AnimatePartySlot(sPartyMenuInternal->tLastSlotUsed, 0);
+    AnimatePartySlot(gPartyMenu.slotId, 1);
+    if (hp != maxHP)
+    {
+    PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_PokevialLoop);
+    ResetHPTaskData(taskId, 0, hp);
+    }
+
+    sPartyMenuInternal->tUsedOnSlot = TRUE;
+    sPartyMenuInternal->tHadEffect = TRUE;
+}
+
+static void Task_PokevialLoop(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive())
+        return;
+
+    if (sPartyMenuInternal->tUsedOnSlot == TRUE)
+    {
+        sPartyMenuInternal->tUsedOnSlot = FALSE;
+        sPartyMenuInternal->tLastSlotUsed = gPartyMenu.slotId;
+    }
+
+    gPartyMenu.slotId++;
+    if (gPartyMenu.slotId < PARTY_SIZE)
+    {
+        UsePokevial(taskId);
+        return;
+    }
+
+    gPartyMenuUseExitCallback = FALSE;
+    if (sPartyMenuInternal->tHadEffect)
+    {
+        PokevialDoseDown(VIAL_STANDARD_DOSE);
+        DisplayPartyMenuMessage(gText_YourPkmnWereRestored, FALSE);
+    }
+    else
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    gPartyMenu.slotId = 0;
+}
+//End Pokevial Branch
+
+// Start hexorb Branch
+static void DisplayHexorbMessageAndScheduleTask(u8 taskId, const u8* message, TaskFunc nextTask, bool32 useExitCallback)
+{
+    gPartyMenuUseExitCallback = useExitCallback;
+    DisplayPartyMenuMessage(message, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = nextTask;
+}
+
+void ItemUseCB_UseHexorb(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    if (!GetMonData(mon, MON_DATA_HP))
+    {
+        DisplayHexorbResult(taskId, 0, HEXORB_RESULT_FAIL_FAINTED, mon);
+        return;
+    }
+
+    SetPartyMonSelectionActions(gPlayerParty, gPartyMenu.slotId, ACTIONS_HEXORB);
+    DisplaySelectionWindow(SELECTWINDOW_HEXORB);
+    DisplayPartyMenuStdMessage(PARTY_MSG_WHICH_STATUS);
+    gTasks[taskId].data[0] = TASK_NONE;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
+
+static void TryHexorbAndPrintResult(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u32 status = Hexorb_ConvertMenuPosToStatus(data[0]);
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    enum HexorbResultCodes result = (Hexorb_TryInflictStatus(mon, status));
+
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+
+    DisplayHexorbResult(taskId, status, result, mon);
+}
+
+static void DisplayHexorbResult(u8 taskId, u32 status, enum HexorbResultCodes result, struct Pokemon* mon)
+{
+    switch (result)
+    {
+        case HEXORB_RESULT_SUCCESS:
+            UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+            PlayCry_ByMode(GetMonData(mon, MON_DATA_SPECIES), 0, CRY_MODE_WEAK);
+            Hexorb_ConstructSuccessMessage(mon, status);
+            DisplayHexorbMessageAndScheduleTask(taskId, gStringVar4, Task_ClosePartyMenuAfterText, TRUE);
+            break;
+        case HEXORB_RESULT_FAIL_ABILITY:
+            PlaySE(SE_SELECT);
+            Hexorb_ConstructAbilityFailureMessage(mon,status);
+            DisplayHexorbMessageAndScheduleTask(taskId, gStringVar4, Task_RetryHexorbAfterFailedStatus, FALSE);
+            break;
+        case HEXORB_RESULT_FAIL_TYPE_0:
+        case HEXORB_RESULT_FAIL_TYPE_1:
+            gPartyMenuUseExitCallback = FALSE;
+            PlaySE(SE_SELECT);
+            Hexorb_ConstructTypeFailureMessage(mon, status, result);
+            DisplayHexorbMessageAndScheduleTask(taskId, gStringVar4, Task_RetryHexorbAfterFailedStatus, FALSE);
+            break;
+        case HEXORB_RESULT_FAIL_HAS_STATUS:
+            PlaySE(SE_SELECT);
+            Hexorb_ConstructStatusFailureMessage(mon);
+            DisplayHexorbMessageAndScheduleTask(taskId, gStringVar4, Task_RetryHexorbAfterFailedMon, FALSE);
+            break;
+        default:
+        case HEXORB_RESULT_FAIL_FAINTED:
+            PlaySE(SE_SELECT);
+            Hexorb_ConstructStatusFailureMessage(mon);
+            DisplayHexorbMessageAndScheduleTask(taskId, gText_WontHaveEffect, Task_RetryHexorbAfterFailedMon, FALSE);
+            break;
+    }
+}
+
+static void Task_RetryHexorbAfterFailedStatus(u8 taskId)
+{
+    if (!JOY_NEW(A_BUTTON | B_BUTTON))
+        return;
+
+    ClearDialogWindowAndFrame(WIN_MSG,FALSE);
+    PlaySE(SE_SELECT);
+    ItemUseCB_UseHexorb(taskId, Task_HandleSelectionMenuInput);
+}
+
+static void Task_RetryHexorbAfterFailedMon(u8 taskId)
+{
+    if (!JOY_NEW(A_BUTTON | B_BUTTON))
+        return;
+
+    ClearDialogWindowAndFrame(WIN_MSG,FALSE);
+    DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
+    PlaySE(SE_SELECT);
+    gTasks[taskId].func = Task_HandleChooseMonInput;
+}
+
+void InitPartyMenuForHexorbFromField(u8 taskId)
+{
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE, PARTY_MSG_USE_ON_WHICH_MON, Task_HandleChooseMonInput, CB2_ReturnToField);
+}
+// End hexorb Branch
+
+#undef tUsedOnSlot
+#undef tHadEffect
+#undef tLastSlotUsed

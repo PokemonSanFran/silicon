@@ -3,9 +3,12 @@
 #include "event_data.h"
 #include "script.h"
 #include "constants/battle.h"
+#include "options_battle.h" // siliconMerge
 
 enum DifficultyLevel GetCurrentDifficultyLevel(void)
 {
+    return GetBattleDifficulty(); // siliconMerge
+
     if (!B_VAR_DIFFICULTY)
         return DIFFICULTY_NORMAL;
 

@@ -27,6 +27,8 @@
 #include "constants/hold_effects.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
+#include "options_battle.h" // siliconMerge
+#include "siliconDaycare.h" // siliconDaycare
 
 #define IS_DITTO(species) (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_DITTO || gSpeciesInfo[species].eggGroups[1] == EGG_GROUP_DITTO)
 
@@ -34,7 +36,9 @@ static void ClearDaycareMonMail(struct DaycareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y);
 static u8 ModifyBreedingScoreForOvalCharm(u8 score);
-static u16 GetEggSpecies(u16 species);
+// static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves); // surpriseTrade
+//static u16 GetEggSpecies(u16 species); // surpriseTrade
+static u8 *AppendMonGenderSymbol(u8 *name, struct BoxPokemon *boxMon); // siliconDaycare
 
 // RAM buffers used to assist with BuildEggMoveset()
 EWRAM_DATA static u16 sHatchedEggLevelUpMoves[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
@@ -336,11 +340,6 @@ static void ApplyDaycareExperience(struct Pokemon *mon)
     CalculateMonStats(mon);
 }
 
-static u32 GetExpAtLevelCap(struct Pokemon *mon)
-{
-    return gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate][GetCurrentLevelCap()];
-}
-
 static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
 {
     u32 species;
@@ -363,19 +362,32 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     if (GetMonData(&pokemon, MON_DATA_LEVEL) < GetCurrentLevelCap())
     {
         experience = GetMonData(&pokemon, MON_DATA_EXP) + daycareMon->steps;
-        u32 maxExp = GetExpAtLevelCap(&pokemon);
-        if (experience > maxExp)
-            experience = maxExp;
         SetMonData(&pokemon, MON_DATA_EXP, &experience);
         ApplyDaycareExperience(&pokemon);
     }
 
+    // Start siliconDaycare
+    /*
     gPlayerParty[PARTY_SIZE - 1] = pokemon;
     if (daycareMon->mail.message.itemId)
     {
         GiveMailToMon(&gPlayerParty[PARTY_SIZE - 1], &daycareMon->mail.message);
         ClearDaycareMonMail(&daycareMon->mail);
     }
+    */
+
+    u32 destination = AddMonToPartyOrBox(pokemon);
+    gSpecialVar_0x8009 = destination;
+    if (daycareMon->mail.message.itemId)
+    {
+        if (destination == MON_GIVEN_TO_PARTY)
+            GiveMailToMon(&gPlayerParty[PARTY_SIZE - 1], &daycareMon->mail.message);
+        else if (TakeMailFromMonAndSave(&pokemon) == MAIL_NONE)
+            ClearMail(&daycareMon->mail.message);
+
+        ClearDaycareMonMail(&daycareMon->mail);
+    }
+    // End siliconDaycare
 
     ZeroBoxMonData(&daycareMon->mon);
     daycareMon->steps = 0;
@@ -422,6 +434,7 @@ static u8 GetNumLevelsGainedForDaycareMon(struct DaycareMon *daycareMon)
     u8 numLevelsGained = GetNumLevelsGainedFromSteps(daycareMon);
     ConvertIntToDecimalStringN(gStringVar2, numLevelsGained, STR_CONV_MODE_LEFT_ALIGN, 2);
     GetBoxMonNickname(&daycareMon->mon, gStringVar1);
+    AppendMonGenderSymbol(gStringVar1, &daycareMon->mon); // siliconDaycare
     return numLevelsGained;
 }
 
@@ -493,7 +506,10 @@ static void UNUSED ClearAllDaycareData(struct DayCare *daycare)
 // Determines what the species of an Egg would be based on the given species.
 // It determines this by working backwards through the evolution chain of the
 // given species.
-static u16 GetEggSpecies(u16 species)
+// Start surpriseTrade
+//static u16 GetEggSpecies(u16 species)
+u16 GetEggSpecies(u16 species)
+// End surpriseTrade
 {
     int i, j, k;
     bool8 found;
@@ -598,7 +614,17 @@ static void _TriggerPendingDaycareMaleEgg(struct DayCare *daycare)
 
 void TriggerPendingDaycareEgg(void)
 {
-    _TriggerPendingDaycareEgg(&gSaveBlock1Ptr->daycare);
+    // Start siliconDaycare
+    //_TriggerPendingDaycareEgg(&gSaveBlock1Ptr->daycare);
+    if (NoMoreRoomDaycareEggs())
+        return;
+
+    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
+    _TriggerPendingDaycareEgg(daycare);
+    GenerateAndStoreEgg(daycare,GetEmptyEggIndex());
+    DebugPrintEggsAtDaycare();
+    ShowEggNotification();
+    // End siliconDaycare
 }
 
 static void UNUSED TriggerPendingDaycareMaleEgg(void)
@@ -1216,7 +1242,10 @@ bool8 ShouldEggHatch(void)
     return TryProduceOrHatchEgg(&gSaveBlock1Ptr->daycare);
 }
 
-static bool8 IsEggPending(struct DayCare *daycare)
+// Start siliconDaycare
+//static bool8 IsEggPending(struct DayCare *daycare)
+static bool8 UNUSED IsEggPending(struct DayCare *daycare)
+// End siliconDaycare
 {
     return (daycare->offspringPersonality != 0);
 }
@@ -1254,7 +1283,10 @@ void GetDaycareMonNicknames(void)
 u8 GetDaycareState(void)
 {
     u8 numMons;
-    if (IsEggPending(&gSaveBlock1Ptr->daycare))
+    // Start siliconDaycare
+    //if (IsEggPending(&gSaveBlock1Ptr->daycare))
+    if (NoEggsAtDaycare() == FALSE)
+    // End siliconDaycare
     {
         return DAYCARE_EGG_WAITING;
     }
@@ -1357,7 +1389,10 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     }
 }
 
-static u8 GetDaycareCompatibilityScoreFromSave(void)
+// Start siliconDaycare
+//static u8 GetDaycareCompatibilityScoreFromSave(void)
+u8 GetDaycareCompatibilityScoreFromSave(void)
+// End siliconDaycare
 {
     // Changed to also store result for scripts
     gSpecialVar_Result = GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare);
@@ -1599,3 +1634,35 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
 
     return score;
 }
+
+// Start siliconDaycare
+void GenerateAndStoreEgg(struct DayCare *daycare, u32 eggIndex)
+{
+    struct Pokemon egg;
+    u8 parentSlots[DAYCARE_MON_COUNT] = {0};
+
+    if (GetDaycareCompatibilityScore(daycare) == PARENTS_INCOMPATIBLE)
+        return;
+
+    u16 species = DetermineEggSpeciesAndParentSlots(daycare, parentSlots);
+    if (P_INCENSE_BREEDING < GEN_9)
+        AlterEggSpeciesWithIncenseItem(&species, daycare);
+    SetInitialEggData(&egg, species, daycare);
+    daycare->offspringPersonality = 0;
+    InheritIVs(&egg, daycare);
+    MarkMonForEffortValuePerk(&egg);
+    InheritPokeball(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
+    BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
+    if (P_ABILITY_INHERITANCE >= GEN_6)
+        InheritAbility(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
+
+    GiveMoveIfItem(&egg, daycare);
+
+    bool32 isEgg = TRUE;
+    SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
+    daycare->daycareEgg[eggIndex].egg = egg.box;
+    SaveOriginalEggIvs(daycare,eggIndex);
+    DebugPrintIvs();
+}
+// End siliconDaycare
+

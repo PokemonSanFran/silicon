@@ -1,13 +1,17 @@
 #include "global.h"
+#include "item.h" // siliconMerge
+#include "constants/items.h" // siliconMerge
 #include "battle_pyramid.h"
 #include "bg.h"
 #include "fieldmap.h"
 #include "fldeff.h"
 #include "fldeff_misc.h"
 #include "frontier_util.h"
+#include "quest_logic.h" // siliconMerge
 #include "menu.h"
 #include "mirage_tower.h"
 #include "overworld.h"
+#include "random.h" // siliconMerge
 #include "palette.h"
 #include "pokenav.h"
 #include "script.h"
@@ -16,6 +20,7 @@
 #include "tv.h"
 #include "constants/rgb.h"
 #include "constants/metatile_behaviors.h"
+#include "event_object_movement.h" // siliconMerge
 #include "wild_encounter.h"
 
 struct ConnectionFlags
@@ -30,6 +35,7 @@ EWRAM_DATA u16 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};
 EWRAM_DATA static struct ConnectionFlags sMapConnectionFlags = {0};
+EWRAM_DATA u8 gGlobalFieldTintMode = GLOBAL_FIELD_TINT_NONE; // siliconMerge
 
 COMMON_DATA struct BackupMapLayout gBackupMapLayout = {0};
 
@@ -50,9 +56,28 @@ static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, 
 
 static inline u16 GetBorderBlockAt(int x, int y)
 {
-    int i = (x + 1) & 1;
-    i += ((y + 1) & 1) * 2;
-    return gMapHeader.mapLayout->border[i] | MAPGRID_COLLISION_MASK;
+    // Start Custom Border Dimensions
+    // https://github.com/pret/pokeemerald/wiki/Custom-Border-Dimensions
+    /*
+       int i = (x + 1) & 1;
+       i += ((y + 1) & 1) * 2;
+       return gMapHeader.mapLayout->border[i] | MAPGRID_COLLISION_MASK;
+       */
+
+    s32 xPrime;
+    s32 yPrime;
+    const struct MapLayout *mapLayout = gMapHeader.mapLayout;
+
+    xPrime = x - MAP_OFFSET;
+    xPrime += 8 * mapLayout->borderWidth;
+    xPrime %= mapLayout->borderWidth;
+
+    yPrime = y - MAP_OFFSET;
+    yPrime += 8 * mapLayout->borderHeight;
+    yPrime %= mapLayout->borderHeight;
+
+    return (mapLayout->border[xPrime + yPrime * mapLayout->borderWidth] | MAPGRID_COLLISION_MASK);
+	// End Custom Border Dimensions
 }
 
 #define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < gBackupMapLayout.width && y >= 0 && y < gBackupMapLayout.height)
@@ -105,7 +130,11 @@ static void InitMapLayoutData(struct MapHeader *mapHeader)
     gBackupMapLayout.width = width;
     height = mapLayout->height + MAP_OFFSET_H;
     gBackupMapLayout.height = height;
-    if (width * height <= MAX_MAP_DATA_SIZE)
+	// Start siliconMerge
+    if (KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(mapHeader->mapLayoutId))
+        Quest_Kitchenvolunteering_CreatePantryMaze();
+    else if (width * height <= MAX_MAP_DATA_SIZE)
+	// End siliconMerge
     {
         InitBackupMapLayoutData(mapLayout->map, mapLayout->width, mapLayout->height);
         InitBackupMapLayoutConnections(mapHeader);
@@ -869,6 +898,22 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
 // Below two are dummied functions from FRLG, used to tint the overworld palettes for the Quest Log
 static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
+    // Start siliconMerge
+	switch (gGlobalFieldTintMode)
+    {
+        case GLOBAL_FIELD_TINT_NONE:
+            return;
+        case GLOBAL_FIELD_TINT_GRAYSCALE:
+            TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
+            break;
+        case GLOBAL_FIELD_TINT_SEPIA:
+            TintPalette_SepiaTone(gPlttBufferUnfaded + offset, size);
+            break;
+        default:
+            return;
+    }
+    CpuCopy16(gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, size * sizeof(u16));
+	// End siliconMerge
 
 }
 

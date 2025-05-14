@@ -34,6 +34,7 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/items.h"
+#include "color_variation.h" // colorVariation
 
 struct EvoInfo
 {
@@ -212,6 +213,7 @@ void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u
     u32 personality;
     bool32 isShiny;
     u8 id;
+    struct BoxPokemon boxMon2; //colorVariation
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -263,6 +265,10 @@ void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u
                         personality,
                         TRUE);
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(currSpecies, isShiny, personality), OBJ_PLTT_ID(1), PLTT_SIZE_4BPP);
+    // Start colorVariation
+    UniquePalette(OBJ_PLTT_ID(1), &mon->box);
+    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
+    // End colorVariation
 
     SetMultiuseSpriteTemplateToPokemon(currSpecies, B_POSITION_OPPONENT_LEFT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -278,6 +284,12 @@ void EvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u
                         personality,
                         TRUE);
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(postEvoSpecies, isShiny, personality), OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+    // Start colorVariation
+    CopyMon(&boxMon2, &mon->box, sizeof(boxMon2));
+    SetBoxMonData(&boxMon2, MON_DATA_SPECIES, &postEvoSpecies);
+    UniquePalette(OBJ_PLTT_ID(2), &boxMon2);
+    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(2)], &gPlttBufferUnfaded[OBJ_PLTT_ID(2)], PLTT_SIZE_4BPP);
+    // End colorVariation
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -313,6 +325,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     u16 postEvoSpecies;
     u32 personality;
     struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
+    struct BoxPokemon boxMon2; //colorVariation
     bool8 isShiny;
 
     postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
@@ -355,6 +368,12 @@ static void CB2_EvolutionSceneLoadGraphics(void)
                         personality,
                         TRUE);
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(postEvoSpecies, isShiny, personality), OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+    // Start colorVariation
+    CopyMon(&boxMon2, &mon->box, sizeof(boxMon2));
+    SetBoxMonData(&boxMon2, MON_DATA_SPECIES, &postEvoSpecies);
+    UniquePalette(OBJ_PLTT_ID(2), &boxMon2);
+    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(2)], &gPlttBufferUnfaded[OBJ_PLTT_ID(2)], PLTT_SIZE_4BPP);
+    // End colorVariation
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -381,6 +400,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
 {
     struct Pokemon *mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskId].tPartyId];
     u16 postEvoSpecies = gTasks[sEvoStructPtr->evoTaskId].tPostEvoSpecies;
+    struct BoxPokemon boxMon2; //colorVariation
 
     switch (gMain.state)
     {
@@ -425,6 +445,12 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
                                 personality,
                                 TRUE);
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(postEvoSpecies, isShiny, personality), OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+            // Start colorVariation
+            CopyMon(&boxMon2, &mon->box, sizeof(boxMon2));
+            SetBoxMonData(&boxMon2, MON_DATA_SPECIES, &postEvoSpecies);
+            UniquePalette(OBJ_PLTT_ID(2), &boxMon2);
+            CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(2)], &gPlttBufferUnfaded[OBJ_PLTT_ID(2)], PLTT_SIZE_4BPP);
+            // End colorVariation
             gMain.state++;
         }
         break;
@@ -469,6 +495,7 @@ void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSprit
     u32 personality;
     u8 id;
     bool8 isShiny;
+    struct BoxPokemon boxMon2; // colorVariation
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
     StringCopy_Nickname(gStringVar1, name);
@@ -490,6 +517,12 @@ void TradeEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, u8 preEvoSprit
                         TRUE);
 
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(postEvoSpecies, isShiny, personality), OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+    // Start colorVariation
+    CopyMon(&boxMon2, &mon->box, sizeof(boxMon2));
+    SetBoxMonData(&boxMon2, MON_DATA_SPECIES, &postEvoSpecies);
+    UniquePalette(OBJ_PLTT_ID(2), &boxMon2);
+    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(2)], &gPlttBufferUnfaded[OBJ_PLTT_ID(2)], PLTT_SIZE_4BPP);
+    // End colorVariation
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_LEFT);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
@@ -636,6 +669,24 @@ enum {
 // Task data from CycleEvolutionMonSprite
 #define tEvoStopped data[8]
 
+// Start midBattleEvolution
+static void ChangeMusicAfterEvo(u32 taskId)
+{
+    if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
+    {
+        if (gMidBattleEvo) {
+            m4aMPlayContinue(&gMPlayInfo_BGM);
+        }
+        else {
+            StopMapMusic();
+            Overworld_PlaySpecialMapMusic();
+        }
+    }
+}
+
+void m4aSongNumStartForPlayer(u16 n, struct MusicPlayerInfo *mPlayInfo);
+
+// End midBattleEvolution
 static void Task_EvolutionScene(u8 taskId)
 {
     u32 var;
@@ -689,8 +740,20 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_START_MUSIC:
         if (!IsSEPlaying())
         {
-            // Start music, fade background to black
+// Start midBattleEvolution
+            //Start music, fade background to black
             PlayNewMapMusic(MUS_EVOLUTION);
+            if (gMidBattleEvo)
+            {
+                // Play evolution track in SE player, so that the battle music still plays in the background.
+                m4aSongNumStartForPlayer(MUS_EVOLUTION, &gMPlayInfo_SE2);
+            }
+            else
+            {
+                // Start music, fade background to black
+                PlayNewMapMusic(MUS_EVOLUTION);
+            }
+// End midBattleEvolution
             gTasks[taskId].tState++;
             BeginNormalPaletteFade(0x1C, 4, 0, 0x10, RGB_BLACK);
         }
@@ -785,11 +848,7 @@ static void Task_EvolutionScene(u8 taskId)
             if (var != MOVE_NONE && !gTasks[taskId].tEvoWasStopped)
             {
                 u8 nickname[POKEMON_NAME_BUFFER_SIZE];
-                if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
-                {
-                    StopMapMusic();
-                    Overworld_PlaySpecialMapMusic();
-                }
+                ChangeMusicAfterEvo(taskId); // midBattleEvolution
 
                 gTasks[taskId].tBits |= TASK_BIT_LEARN_MOVE;
                 gTasks[taskId].tLearnsFirstMove = FALSE;
@@ -814,11 +873,16 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_END:
         if (!gPaletteFade.active)
         {
-            if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
-            {
-                StopMapMusic();
-                Overworld_PlaySpecialMapMusic();
-            }
+// Start midBattleEvolution
+            /*
+               if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
+               {
+               StopMapMusic();
+               Overworld_PlaySpecialMapMusic();
+               }
+               */
+            ChangeMusicAfterEvo(taskId);
+// End midBattleEvolution
             if (!gTasks[taskId].tEvoWasStopped)
                 CreateShedinja(gTasks[taskId].tPreEvoSpecies, mon);
 

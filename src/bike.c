@@ -9,6 +9,7 @@
 #include "sound.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
+#include "options_music.h" // siliconMerge
 
 // this file's functions
 static void MovePlayerOnMachBike(u8, u16, u16);
@@ -1005,8 +1006,12 @@ void GetOnOffBike(u8 transitionFlags)
     else
     {
         SetPlayerAvatarTransitionFlags(transitionFlags);
-        Overworld_SetSavedMusic(MUS_CYCLING);
-        Overworld_ChangeMusicTo(MUS_CYCLING);
+// Start siliconMerge
+        Overworld_SetSavedMusic(GetBikeMusicFromOption());
+        Overworld_ChangeMusicTo(GetBikeMusicFromOption());
+        //Overworld_SetSavedMusic(MUS_CYCLING);
+        //Overworld_ChangeMusicTo(MUS_CYCLING);
+// End siliconMerge
     }
 }
 

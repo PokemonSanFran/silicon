@@ -13,6 +13,11 @@
 #include "trainer_hill.h"
 #include "link.h"
 #include "constants/game_stat.h"
+// Start bootSequence
+#include "ui_main_menu.h"
+#include "options_game.h"
+#include "accept.h"
+// End bootSequence
 
 static u16 CalculateChecksum(void *, u16);
 static bool8 ReadFlashSector(u8, struct SaveSector *);
@@ -1088,3 +1093,42 @@ static void CopyFromSaveBlock3(u32 sectorId, struct SaveSector *sector)
     u32 size = SaveBlock3Size(sectorId);
     memcpy(sector->saveBlock3Chunk, (u8 *)&gSaveblock3 + (sectorId * SAVE_BLOCK_3_CHUNK_SIZE), size);
 }
+
+// Start bootSequence
+void SetCallbackFromSaveStatus(void)
+{
+    MainCallback callback = NULL;
+
+    switch(gSaveFileStatus)
+    {
+        case SAVE_STATUS_EMPTY:
+            callback = CB2_GoToDevIntro;
+            break;
+        case SAVE_STATUS_OK:
+            callback = CB2_GoToUIMainMenu;
+            break;
+        case SAVE_STATUS_CORRUPT:
+            callback = CB2_GoToUIMainMenu;
+            //PSF TODO need to merge in the latest expansion which has the save type error screen
+            //once that is merged, write a variant of those screens to tell the user about the error message and then boot them either to the continue game callback OR the new game callback
+            //do the same for SAVE_STATUS_ERROR, which is the default case
+            //callback = CB2_GoToCorruptSaveMessage;
+            //const u8 gText_SaveFileCorrupted[] = _("The save file is corrupted. The\nprevious save file will be loaded.";
+            break;
+        default:
+        case SAVE_STATUS_ERROR:
+            callback = CB2_GoToDevIntro;
+            //DoSaveFailedScreen(0;
+            //callback = CB2_SaveFailedScreen;
+            //callback = CB2_GoToNoSaveErrorMessage;
+            //const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue to corruption or damage.");
+            break;
+    }
+
+    if (CheckSaveBootAndFileStatus())
+        callback = CB2_ContinueSavedGame;
+
+    SetMainCallback2(callback);
+}
+// End bootSequence
+

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "item.h"
+#include "party_menu.h" // PSF technicalmachine Branch
 #include "berry.h"
 #include "pokeball.h"
 #include "string_util.h"
@@ -20,6 +21,8 @@
 #include "constants/moves.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
+#include "sprays.h" // siliconMerge
+#include "move.h" // siliconMerge
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -27,6 +30,7 @@ static const u8 *ItemId_GetPluralName(u16);
 static bool32 DoesItemHavePluralName(u16);
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
+EWRAM_DATA struct ItemSlot gTmHmItemSlots[BAG_TMHM_COUNT] = {0}; //PSF technicalmachine Branch
 
 #include "data/pokemon/item_effects.h"
 #include "data/items.h"
@@ -41,12 +45,12 @@ static void SetBagItemQuantity(u16 *quantity, u16 newValue)
     *quantity =  newValue ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-static u16 GetPCItemQuantity(u16 *quantity)
+static u16 UNUSED GetPCItemQuantity(u16 *quantity) // siliconMerge
 {
     return *quantity;
 }
 
-static void SetPCItemQuantity(u16 *quantity, u16 newValue)
+static void UNUSED SetPCItemQuantity(u16 *quantity, u16 newValue) // siliconMerge
 {
     *quantity = newValue;
 }
@@ -66,6 +70,23 @@ void ApplyNewEncryptionKeyToBagItems_(u32 newKey) // really GF?
     ApplyNewEncryptionKeyToBagItems(newKey);
 }
 
+//Start PSF technicalmachine Branch
+void DeserializeTmHmItemSlots(void)
+{
+    int i;
+
+    for (i = 0; i < BAG_TMHM_COUNT; ++i)
+    {
+        u8 bit = i % 8;
+
+        gTmHmItemSlots[i].itemId = 0;
+        SetBagItemQuantity(&(gTmHmItemSlots[i].quantity), 0);
+        if (gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[i / 8] & (1<<bit))
+            AddBagItem(i + ITEM_TM01, 1);
+    }
+}
+//End PSF technicalmachine Branch
+
 void SetBagItemsPointers(void)
 {
     gBagPockets[ITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Items;
@@ -77,7 +98,8 @@ void SetBagItemsPointers(void)
     gBagPockets[BALLS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_PokeBalls;
     gBagPockets[BALLS_POCKET].capacity = BAG_POKEBALLS_COUNT;
 
-    gBagPockets[TMHM_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_TMHM;
+    //gBagPockets[TMHM_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_TMHM;
+    gBagPockets[TMHM_POCKET].itemSlots = &gTmHmItemSlots[0]; //PSF technicalmachine Branch
     gBagPockets[TMHM_POCKET].capacity = BAG_TMHM_COUNT;
 
     gBagPockets[BERRIES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
@@ -110,7 +132,7 @@ u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 
 bool8 IsBagPocketNonEmpty(u8 pocket)
 {
-    u8 i;
+    u32 i; // siliconMerge
 
     for (i = 0; i < gBagPockets[pocket - 1].capacity; i++)
     {
@@ -122,7 +144,7 @@ bool8 IsBagPocketNonEmpty(u8 pocket)
 
 bool8 CheckBagHasItem(u16 itemId, u16 count)
 {
-    u8 i;
+    u32 i; // siliconMerge
     u8 pocket;
 
     if (ItemId_GetPocket(itemId) == 0)
@@ -190,7 +212,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
 
 u32 GetFreeSpaceForItemInBag(u16 itemId)
 {
-    u8 i;
+    u32 i; // siliconMerge
     u8 pocket = ItemId_GetPocket(itemId) - 1;
     u16 ownedCount;
     u32 spaceForItem = 0;
@@ -214,9 +236,19 @@ u32 GetFreeSpaceForItemInBag(u16 itemId)
     return spaceForItem;
 }
 
+//Start PSF technicalmachine Branch
+
+static void SetTmHmOwned(u16 itemId)
+{
+    u8* flagByte = &gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[(itemId - ITEM_TM01) / 8];
+    *flagByte = (*flagByte) | (1 << ((itemId - ITEM_TM01) % 8));
+}
+
+//End PSF technicalmachine Branch
+
 bool8 AddBagItem(u16 itemId, u16 count)
 {
-    u8 i;
+    u32 i; // siliconMerge
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
@@ -236,6 +268,24 @@ bool8 AddBagItem(u16 itemId, u16 count)
         itemPocket = &gBagPockets[pocket];
         newItems = AllocZeroed(itemPocket->capacity * sizeof(struct ItemSlot));
         memcpy(newItems, itemPocket->itemSlots, itemPocket->capacity * sizeof(struct ItemSlot));
+
+        /*
+         * TODO may no longer need with 1.8 merge
+        //Begin PSF technicalmachine Branch
+        switch(pocket)
+        {
+            case BERRIES_POCKET:
+                slotCapacity = MAX_BERRY_CAPACITY;
+            break;
+            case TMHM_POCKET:
+                slotCapacity = 1;
+            break;
+            default:
+                slotCapacity = MAX_BAG_ITEM_CAPACITY;
+            break;
+        }
+        //End PSF technicalmachine Branch
+        */
 
         for (i = 0; i < itemPocket->capacity; i++)
         {
@@ -297,6 +347,8 @@ bool8 AddBagItem(u16 itemId, u16 count)
                     {
                         // created a new slot and added quantity
                         SetBagItemQuantity(&newItems[i].quantity, count);
+                        if (pocket == TMHM_POCKET) // PSF technicalmachine Branch
+                            SetTmHmOwned(itemId); // PSF technicalmachine Branch
                         count = 0;
                         break;
                     }
@@ -317,7 +369,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
 
 bool8 RemoveBagItem(u16 itemId, u16 count)
 {
-    u8 i;
+    u32 i; // siliconMerge
     u16 totalQuantity = 0;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
@@ -408,7 +460,7 @@ u8 GetPocketByItemId(u16 itemId)
     return ItemId_GetPocket(itemId);
 }
 
-void ClearItemSlots(struct ItemSlot *itemSlots, u8 itemCount)
+void ClearItemSlots(struct ItemSlot *itemSlots, u32 itemCount) // siliconMerge
 {
     u16 i;
 
@@ -419,127 +471,32 @@ void ClearItemSlots(struct ItemSlot *itemSlots, u8 itemCount)
     }
 }
 
-static s32 FindFreePCItemSlot(void)
+static s32 UNUSED FindFreePCItemSlot(void) // siliconMerge
 {
-    s8 i;
-
-    for (i = 0; i < PC_ITEMS_COUNT; i++)
-    {
-        if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_NONE)
-            return i;
-    }
     return -1;
 }
 
 u8 CountUsedPCItemSlots(void)
 {
-    u8 usedSlots = 0;
-    u8 i;
-
-    for (i = 0; i < PC_ITEMS_COUNT; i++)
-    {
-        if (gSaveBlock1Ptr->pcItems[i].itemId != ITEM_NONE)
-            usedSlots++;
-    }
-    return usedSlots;
+    return 0; // siliconMerge
 }
 
 bool8 CheckPCHasItem(u16 itemId, u16 count)
 {
-    u8 i;
-
-    for (i = 0; i < PC_ITEMS_COUNT; i++)
-    {
-        if (gSaveBlock1Ptr->pcItems[i].itemId == itemId && GetPCItemQuantity(&gSaveBlock1Ptr->pcItems[i].quantity) >= count)
-            return TRUE;
-    }
-    return FALSE;
+    return TRUE;
 }
 
 bool8 AddPCItem(u16 itemId, u16 count)
 {
-    u8 i;
-    s8 freeSlot;
-    u16 ownedCount;
-    struct ItemSlot *newItems;
-
-    // Copy PC items
-    newItems = AllocZeroed(sizeof(gSaveBlock1Ptr->pcItems));
-    memcpy(newItems, gSaveBlock1Ptr->pcItems, sizeof(gSaveBlock1Ptr->pcItems));
-
-    // Use any item slots that already contain this item
-    for (i = 0; i < PC_ITEMS_COUNT; i++)
-    {
-        if (newItems[i].itemId == itemId)
-        {
-            ownedCount = GetPCItemQuantity(&newItems[i].quantity);
-            if (ownedCount + count <= MAX_PC_ITEM_CAPACITY)
-            {
-                SetPCItemQuantity(&newItems[i].quantity, ownedCount + count);
-                memcpy(gSaveBlock1Ptr->pcItems, newItems, sizeof(gSaveBlock1Ptr->pcItems));
-                Free(newItems);
-                return TRUE;
-            }
-            count += ownedCount - MAX_PC_ITEM_CAPACITY;
-            SetPCItemQuantity(&newItems[i].quantity, MAX_PC_ITEM_CAPACITY);
-            if (count == 0)
-            {
-                memcpy(gSaveBlock1Ptr->pcItems, newItems, sizeof(gSaveBlock1Ptr->pcItems));
-                Free(newItems);
-                return TRUE;
-            }
-        }
-    }
-
-    // Put any remaining items into a new item slot.
-    if (count > 0)
-    {
-        freeSlot = FindFreePCItemSlot();
-        if (freeSlot == -1)
-        {
-            Free(newItems);
-            return FALSE;
-        }
-        else
-        {
-            newItems[freeSlot].itemId = itemId;
-            SetPCItemQuantity(&newItems[freeSlot].quantity, count);
-        }
-    }
-
-    // Copy items back to the PC
-    memcpy(gSaveBlock1Ptr->pcItems, newItems, sizeof(gSaveBlock1Ptr->pcItems));
-    Free(newItems);
-    return TRUE;
+    return FALSE;
 }
 
 void RemovePCItem(u8 index, u16 count)
 {
-    gSaveBlock1Ptr->pcItems[index].quantity -= count;
-    if (gSaveBlock1Ptr->pcItems[index].quantity == 0)
-    {
-        gSaveBlock1Ptr->pcItems[index].itemId = ITEM_NONE;
-        CompactPCItems();
-    }
 }
 
 void CompactPCItems(void)
 {
-    u16 i;
-    u16 j;
-
-    for (i = 0; i < PC_ITEMS_COUNT - 1; i++)
-    {
-        for (j = i + 1; j < PC_ITEMS_COUNT; j++)
-        {
-            if (gSaveBlock1Ptr->pcItems[i].itemId == 0)
-            {
-                struct ItemSlot temp = gSaveBlock1Ptr->pcItems[i];
-                gSaveBlock1Ptr->pcItems[i] = gSaveBlock1Ptr->pcItems[j];
-                gSaveBlock1Ptr->pcItems[j] = temp;
-            }
-        }
-    }
 }
 
 void SwapRegisteredBike(void)
@@ -909,7 +866,14 @@ u32 ItemId_GetHoldEffectParam(u32 itemId)
 
 const u8 *ItemId_GetDescription(u16 itemId)
 {
-    return gItemsInfo[SanitizeItemId(itemId)].description;
+    // Start siliconMerge
+	if (IsInfiniteSprayAndLureLocked(itemId))
+        return sInfiniteSprayRepelDesc;
+    if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
+        return gMovesInfo[ItemId_GetSecondaryId(itemId)].description;
+    else
+        return gItemsInfo[SanitizeItemId(itemId)].description;
+	// End siliconMerge
 }
 
 u8 ItemId_GetImportance(u16 itemId)
@@ -979,6 +943,12 @@ u32 ItemId_GetFlingPower(u32 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].flingPower;
 }
 
+// Start siliconMerge
+u32 ItemId_GetNativeItemGroup(u32 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].nativeItemGroup;
+}
+// End siliconMerge
 
 u32 GetItemStatus1Mask(u16 itemId)
 {

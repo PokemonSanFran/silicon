@@ -11,13 +11,13 @@
 #include "text_window.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "clear_save_data_menu.h" // bootSequence
 
 extern const u8 gText_ClearAllSaveData[];
 extern const u8 gText_ClearingData[];
 
 static void Task_DoClearSaveDataScreenYesNo(u8);
 static void Task_ClearSaveDataScreenYesNoChoice(u8);
-static void Task_ClearSaveData(u8);
 static bool8 SetupClearSaveDataScreen(void);
 static void CB2_FadeAndDoReset(void);
 static void InitClearSaveDataScreenWindows(void);
@@ -102,7 +102,8 @@ static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
     }
 }
 
-static void Task_ClearSaveData(u8 taskId)
+//static void Task_ClearSaveData(u8 taskId) // bootSequence
+void Task_ClearSaveData(u8 taskId) // bootSequence
 {
     ClearSaveData();
     DestroyTask(taskId);

@@ -248,3 +248,53 @@ u8 ScanlineEffect_InitWave(u8 startLine, u8 endLine, u8 frequency, u8 amplitude,
 
     return taskId;
 }
+// Start siliconMerge
+u8 ScanlineEffect_InitWave_Defaults()
+{
+    u8 startLine = 0;
+    u8 endLine = DISPLAY_HEIGHT;
+    u8 frequency = 4;
+    u8 amplitude = 4;
+    u8 delayInterval = 0;
+    u8 regOffset = SCANLINE_EFFECT_REG_BG1HOFS;
+    bool8 applyBattleBgOffsets = TRUE;
+    int i;
+    int offset;
+    struct ScanlineEffectParams params;
+    u8 taskId;
+
+    ScanlineEffect_Clear();
+
+    params.dmaDest = (void*)(REG_ADDR_BG0HOFS + regOffset);
+    params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
+    params.initState = 1;
+    params.unused9 = 0;
+    ScanlineEffect_SetParams(params);
+
+    taskId = CreateTask(TaskFunc_UpdateWavePerFrame, 0);
+
+    gTasks[taskId].tStartLine = startLine;
+    gTasks[taskId].tEndLine = endLine;
+    gTasks[taskId].tWaveLength = 256 / frequency;
+    gTasks[taskId].tSrcBufferOffset = 0;
+    gTasks[taskId].tFramesUntilMove = delayInterval;
+    gTasks[taskId].tDelayInterval = delayInterval;
+    gTasks[taskId].tRegOffset = regOffset;
+    gTasks[taskId].tApplyBattleBgOffsets = applyBattleBgOffsets;
+
+    gScanlineEffect.waveTaskId = taskId;
+    sShouldStopWaveTask = FALSE;
+
+    GenerateWave(&gScanlineEffectRegBuffers[0][320], frequency, amplitude, endLine - startLine);
+
+    offset = 320;
+    for (i = startLine; i < endLine; i++)
+    {
+        gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[0][offset];
+        gScanlineEffectRegBuffers[1][i] = gScanlineEffectRegBuffers[0][offset];
+        offset++;
+    }
+
+    return taskId;
+}
+// End siliconMerge

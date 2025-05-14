@@ -746,11 +746,16 @@ static void CreatePCMultichoice(void)
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, x, 33, TEXT_SKIP_DRAW, NULL);
     }
 
+     // Start siliconMerge
+	AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_PokemonStorageSystem, x, 1, TEXT_SKIP_DRAW, NULL);
+	/*
     // Change PC name if player has met Lanette
     if (FlagGet(FLAG_SYS_PC_LANETTE))
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, x, 1, TEXT_SKIP_DRAW, NULL);
     else
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, x, 1, TEXT_SKIP_DRAW, NULL);
+		*/
+     // End siliconMerge
 
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, x, 17);
@@ -1010,7 +1015,10 @@ static bool8 IsPicboxClosed(void)
 
 u8 CreateWindowFromRect(u8 x, u8 y, u8 width, u8 height)
 {
-    struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, width, height, 15, 100);
+// Start siliconMerge
+    struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, width, height, 15, 184);
+	//    struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, width, height, 15, 100);
+// End siliconMerge
     u8 windowId = AddWindow(&template);
     PutWindowTilemap(windowId);
     return windowId;

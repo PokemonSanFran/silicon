@@ -19,6 +19,10 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 #include "constants/trainer_types.h"
+// Start siliconMerge
+#include "rematch.h"
+#include "quest_logic.h"
+// End siliconMerge
 
 // this file's functions
 static u8 CheckTrainer(u8 objectEventId);
@@ -48,6 +52,10 @@ static bool8 JumpInPlaceBuriedTrainer(u8 taskId, struct Task *task, struct Objec
 static bool8 WaitRevealBuriedTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
 
 static void SpriteCB_TrainerIcons(struct Sprite *sprite);
+// Start rematch_action
+static void SpriteCB_RematchIcon(struct Sprite *sprite);
+static void StopRematchFieldEffect(struct Sprite *sprite, u32 objEventId);
+// End rematch_action
 
 // IWRAM common
 COMMON_DATA u16 gWhichTrainerToFaceAfterBattle = 0;
@@ -65,6 +73,7 @@ static const u8 sEmotion_QuestionMarkGfx[] = INCBIN_U8("graphics/field_effects/p
 static const u8 sEmotion_HeartGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_heart.4bpp");
 static const u8 sEmotion_DoubleExclamationMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_double_exclamation.4bpp");
 static const u8 sEmotion_XGfx[] = INCBIN_U8("graphics/field_effects/pics/emote_x.4bpp");
+static const u8 sRematch_Gfx[] = INCBIN_U8("graphics/field_effects/pics/rematch.4bpp"); // rematch_action
 // HGSS emote graphics ripped by Lemon on The Spriters Resource: https://www.spriters-resource.com/ds_dsi/pokemonheartgoldsoulsilver/sheet/30497/
 static const u8 sEmotion_Gfx[] = INCBIN_U8("graphics/misc/emotes.4bpp");
 
@@ -159,6 +168,16 @@ static const struct SpriteFrameImage sSpriteImageTable_HeartIcon[] =
         .size = sizeof(sEmotion_HeartGfx)
     }
 };
+
+// Start rematch_action
+static const struct SpriteFrameImage sSpriteImageTable_RematchIcon[] =
+{
+    {
+        .data = sRematch_Gfx,
+        .size = sizeof(sRematch_Gfx)
+    }
+};
+// End rematch_action
 
 static const struct SpriteFrameImage sSpriteImageTable_Emotes[] =
 {
@@ -354,6 +373,19 @@ static const struct SpriteTemplate sSpriteTemplate_Emote =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_TrainerIcons
 };
+
+// Start rematch_action
+static const struct SpriteTemplate sSpriteTemplate_Rematch =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
+    .oam = &sOamData_Icons,
+    .anims = sSpriteAnimTable_Icons,
+    .images = sSpriteImageTable_RematchIcon,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_RematchIcon
+};
+// End rematch_action
 
 // code
 bool8 CheckForTrainersWantingBattle(void)
@@ -590,15 +622,15 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 ap
             return 0;
     }
 
-    rangeX = trainerObj->range.rangeX;
-    rangeY = trainerObj->range.rangeY;
-    trainerObj->range.rangeX = 0;
-    trainerObj->range.rangeY = 0;
+    rangeX = trainerObj->rangeX;
+    rangeY = trainerObj->rangeY;
+    trainerObj->rangeX = 0;
+    trainerObj->rangeY = 0;
 
     collision = GetCollisionAtCoords(trainerObj, x, y, direction);
 
-    trainerObj->range.rangeX = rangeX;
-    trainerObj->range.rangeY = rangeY;
+    trainerObj->rangeX = rangeX;
+    trainerObj->rangeY = rangeY;
     if (collision == COLLISION_OBJECT_EVENT)
         return approachDistance;
 
@@ -981,6 +1013,45 @@ static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnim
 
     StartSpriteAnim(sprite, spriteAnimNum);
 }
+
+// Start rematch_action
+u8 FldEff_RematchIcon(void)
+{
+    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Rematch, 0, 0, 0x53);
+    struct Sprite *sprite;
+
+    if (spriteId == MAX_SPRITES)
+        return 0;
+
+    sprite = &gSprites[spriteId];
+    SetIconSpriteData(sprite, FLDEFF_WANT_REMATCH, 0);
+    sprite->oam.paletteNum = 0;
+    return 0;
+}
+
+static void SpriteCB_RematchIcon(struct Sprite *sprite)
+{
+    u8 objEventId;
+    struct Sprite *objEventSprite;
+
+    if (TryGetObjectEventIdByLocalIdAndMap(sprite->sLocalId, sprite->sMapNum, sprite->sMapGroup, &objEventId))
+        StopRematchFieldEffect(sprite, objEventId);
+
+    objEventSprite = &gSprites[gObjectEvents[objEventId].spriteId];
+
+    if (gObjectEvents[objEventId].localId == gSpecialVar_LastTalked)
+        StopRematchFieldEffect(sprite, objEventId);
+
+    sprite->x = objEventSprite->x;
+    sprite->y = objEventSprite->y - 16;
+}
+
+static void StopRematchFieldEffect(struct Sprite *sprite, u32 objEventId)
+{
+    ResetRematchIconOnObject(&gObjectEvents[objEventId]);
+    FieldEffectStop(sprite, sprite->sFldEffId);
+}
+// End rematch_action
 
 static void SpriteCB_TrainerIcons(struct Sprite *sprite)
 {

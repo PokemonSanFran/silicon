@@ -376,6 +376,46 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     return TRUE;
 }
 
+// Start siliconMerge
+void RunTextPrinters(void)
+{
+    int i;
+    u16 temp;
+
+    do
+    {
+        int numEmpty = 0;
+        for (i = 0; i < WINDOWS_MAX; ++i)
+        {
+            if (sTextPrinters[i].active != 0)
+            {
+                temp = RenderFont(&sTextPrinters[i]);
+                switch (temp) {
+                    case RENDER_PRINT:
+                        CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
+                        if (sTextPrinters[i].callback != 0)
+                            sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
+                        break;
+                    case RENDER_UPDATE:
+                        if (sTextPrinters[i].callback != 0)
+                            sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
+                        return;
+                    case RENDER_FINISH:
+                        sTextPrinters[i].active = 0;
+                        break;
+                }
+            }
+            else
+            {
+                numEmpty++;
+            }
+        }
+        if(numEmpty == WINDOWS_MAX)
+            return;
+    }while(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] == OPTIONS_TEXT_SPEED_INSTANT);
+}
+
+/*
 void RunTextPrinters(void)
 {
     int i;
@@ -403,6 +443,8 @@ void RunTextPrinters(void)
         }
     }
 }
+*/
+// End siliconMerge
 
 bool32 IsTextPrinterActive(u8 id)
 {
@@ -1050,7 +1092,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *
 static u16 RenderText(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
-    u16 currChar;
+    u16 currChar, nextChar; // siliconMerge
     s32 width;
     s32 widthHelper;
 
@@ -1075,6 +1117,21 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->delayCounter = 3;
         else
             textPrinter->delayCounter = textPrinter->textSpeed;
+
+        // Start siliconMerge
+        switch (GetPlayerTextSpeed())
+        {
+            case OPTIONS_TEXT_SPEED_SLOW:
+            case OPTIONS_TEXT_SPEED_MID:
+            case OPTIONS_TEXT_SPEED_FAST:
+                repeats = 1;
+                break;
+            case OPTIONS_TEXT_SPEED_INSTANT:
+                repeats = 2;
+                break;
+        }
+        // End siliconMerge
+
 
         currChar = *textPrinter->printerTemplate.currentChar;
         textPrinter->printerTemplate.currentChar++;

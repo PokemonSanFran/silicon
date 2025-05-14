@@ -76,6 +76,16 @@ static u16 GetBattlerPokeballItemId(u8 battlerId);
 #define GFX_TAG_PARK_BALL    55025
 #define GFX_TAG_BEAST_BALL   55026
 #define GFX_TAG_CHERISH_BALL 55027
+// Start siliconNewBalls
+#define GFX_TAG_NEWA_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_NEWB_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_NEWC_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_NEWD_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_NEWE_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_NEWF_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_NEWG_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_NEWH_BALL GFX_TAG_NET_BALL
+// End siliconNewBalls
 
 const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT] =
 {
@@ -107,6 +117,16 @@ const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT] =
     [BALL_PARK]    = {gBallGfx_Park,    384, GFX_TAG_PARK_BALL},
     [BALL_BEAST]   = {gBallGfx_Beast,   384, GFX_TAG_BEAST_BALL},
     [BALL_CHERISH] = {gBallGfx_Cherish, 384, GFX_TAG_CHERISH_BALL},
+// Start siliconNewBalls
+    [BALL_NEWA]    = {gBallGfx_NewA,     384, GFX_TAG_NEWA_BALL},
+    [BALL_NEWB]    = {gBallGfx_NewB,     384, GFX_TAG_NEWB_BALL},
+    [BALL_NEWC]    = {gBallGfx_NewC,     384, GFX_TAG_NEWC_BALL},
+    [BALL_NEWD]    = {gBallGfx_NewD,     384, GFX_TAG_NEWD_BALL},
+    [BALL_NEWE]    = {gBallGfx_NewE,     384, GFX_TAG_NEWE_BALL},
+    [BALL_NEWF]    = {gBallGfx_NewF,     384, GFX_TAG_NEWF_BALL},
+    [BALL_NEWG]    = {gBallGfx_NewG,     384, GFX_TAG_NEWG_BALL},
+    [BALL_NEWH]    = {gBallGfx_NewH,     384, GFX_TAG_NEWH_BALL},
+// End siliconNewBalls
 };
 
 const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
@@ -139,6 +159,16 @@ const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
     [BALL_PARK]    = {gBallPal_Park,    GFX_TAG_PARK_BALL},
     [BALL_BEAST]   = {gBallPal_Beast,   GFX_TAG_BEAST_BALL},
     [BALL_CHERISH] = {gBallPal_Cherish, GFX_TAG_CHERISH_BALL},
+// Start siliconNewBalls
+    [BALL_NEWA]     = {gBallPal_NewA,     GFX_TAG_NEWA_BALL},
+    [BALL_NEWB]     = {gBallPal_NewB,     GFX_TAG_NEWB_BALL},
+    [BALL_NEWC]     = {gBallPal_NewC,     GFX_TAG_NEWC_BALL},
+    [BALL_NEWD]     = {gBallPal_NewD,     GFX_TAG_NEWD_BALL},
+    [BALL_NEWE]     = {gBallPal_NewE,     GFX_TAG_NEWE_BALL},
+    [BALL_NEWF]     = {gBallPal_NewF,     GFX_TAG_NEWF_BALL},
+    [BALL_NEWG]     = {gBallPal_NewG,     GFX_TAG_NEWG_BALL},
+    [BALL_NEWH]     = {gBallPal_NewH,     GFX_TAG_NEWH_BALL},
+// End siliconNewBalls
 };
 
 static const struct OamData sBallOamData =
@@ -536,6 +566,88 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
         .affineAnims = sAffineAnim_BallRotate,
         .callback = SpriteCB_BallThrow,
     },
+// Start siliconNewBalls
+    [BALL_NEWA] =
+    {
+        .tileTag = GFX_TAG_NEWA_BALL,
+        .paletteTag = GFX_TAG_NEWA_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_NEWB] =
+    {
+        .tileTag = GFX_TAG_NEWB_BALL,
+        .paletteTag = GFX_TAG_NEWB_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_NEWC] =
+    {
+        .tileTag = GFX_TAG_NEWC_BALL,
+        .paletteTag = GFX_TAG_NEWC_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_NEWD] =
+    {
+        .tileTag = GFX_TAG_NEWD_BALL,
+        .paletteTag = GFX_TAG_NEWD_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_NEWE] =
+    {
+        .tileTag = GFX_TAG_NEWE_BALL,
+        .paletteTag = GFX_TAG_NEWE_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_NEWF] =
+    {
+        .tileTag = GFX_TAG_NEWF_BALL,
+        .paletteTag = GFX_TAG_NEWF_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_NEWG] =
+    {
+        .tileTag = GFX_TAG_NEWG_BALL,
+        .paletteTag = GFX_TAG_NEWG_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_NEWH] =
+    {
+        .tileTag = GFX_TAG_NEWH_BALL,
+        .paletteTag = GFX_TAG_NEWH_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+// End siliconNewBalls
 };
 
 #define tFrames          data[0]
@@ -1566,6 +1678,7 @@ void LoadBallGfx(u8 ballId)
     case BALL_NET ... BALL_NEST:
     case BALL_REPEAT:
     case BALL_SAFARI:
+    case BALL_NEWA ... BALL_NEWH: // siliconNewBalls
         var = GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag);
         LZDecompressVram(gOpenPokeballGfx, (void *)(OBJ_VRAM0 + 0x100 + var * 32));
         break;

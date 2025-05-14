@@ -1157,7 +1157,10 @@ static void SetNamesAndTextSpeed(struct BerryCrushGame *game)
         game->players[i].name[PLAYER_NAME_LENGTH] = EOS;
     }
 
-    switch (gSaveBlock2Ptr->optionsTextSpeed)
+    // Start siliconMerge
+	//    switch (gSaveBlock2Ptr->optionsTextSpeed)
+	switch (gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED])
+    // End siliconMerge
     {
     case OPTIONS_TEXT_SPEED_SLOW:
         game->textSpeed = 8;

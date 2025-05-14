@@ -294,7 +294,13 @@ void InitMonMarkingsMenu(struct MonMarkingsMenu *ptr)
 
 static void BufferMenuWindowTiles(void)
 {
+    // Start siliconMerge
+	#ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
+    const struct TilesPal *frame = GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE]);
+    #else
+	// End siliconMerge
     const struct TilesPal *frame = GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType);
+    #endif // siliconMerge
     sMenu->frameTiles = frame->tiles;
     sMenu->framePalette = frame->pal;
     sMenu->tileLoadState = 0;

@@ -536,7 +536,6 @@ static void BufferChallengeTime(void)
 {
 #if FREE_TRAINER_HILL == FALSE
     s32 total, minutes, secondsWhole, secondsFraction;
-
     total = gSaveBlock1Ptr->trainerHill.timer;
     if (total >= HILL_MAX_TIME)
         total = HILL_MAX_TIME;
@@ -620,7 +619,6 @@ void PrintOnTrainerHillRecordsWindow(void)
 #if FREE_TRAINER_HILL == FALSE
     s32 i, x, y;
     u32 total, minutes, secondsWhole, secondsFraction;
-
     SetUpDataStruct();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_TimeBoard, 0xD0);
@@ -660,7 +658,7 @@ static u32 GetTimerValue(u32 *src)
     return *src;
 }
 
-static void SetTimerValue(u32 *dst, u32 val)
+static void UNUSED SetTimerValue(u32 *dst, u32 val) // siliconMerge
 {
     *dst = val;
 }
@@ -1066,11 +1064,14 @@ static u8 GetPrizeListId(bool8 allowTMs)
     return prizeListId;
 }
 
-static u16 GetPrizeItemId(void)
+static u16 UNUSED GetPrizeItemId(void) // siliconMerge
 {
+    // Start siliconMerge
+	/*
     u8 i;
     const u16 *prizeList;
-    s32 trainerNumSum = 0, prizeListSetId, minutes, id;
+    //s32 trainerNumSum = 0, prizeListSetId, minutes, id;
+    s32 trainerNumSum = 0, prizeListSetId;
 
     // First determine which set of prize lists to use. The sets of lists only differ in
     // what TMs they can offer as the "grand prize" for a time under 12 minutes.
@@ -1094,6 +1095,7 @@ static u16 GetPrizeItemId(void)
     else
         i = GetPrizeListId(FALSE);
 
+#ifndef FREE_TRAINER_HILL
     // 1 is added to Expert mode's prize list selection because otherwise it has the same prizes as Variety
     if (gSaveBlock1Ptr->trainerHill.mode == HILL_MODE_EXPERT)
         i = (i + 1) % NUM_TRAINER_HILL_PRIZE_LISTS;
@@ -1128,7 +1130,14 @@ static u16 GetPrizeItemId(void)
         id = 4; // ITEM_FLUFFY_TAIL
     else
         id = 5; // ITEM_GREAT_BALL
+    #else
+        prizeList = sPrizeListSets[prizeListSetId][0];
+        id = 0;
+    #endif
 
     return prizeList[id];
+    */
+    return 0;
+// End siliconMerge
 }
 #endif //FREE_TRAINER_HILL

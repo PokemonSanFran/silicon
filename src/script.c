@@ -340,13 +340,27 @@ const u8 *MapHeaderCheckScriptTable(u8 tag)
         if (!varIndex1)
             return NULL; // Reached end of table
         ptr += 2;
+        // Start Trigger-Map-Scripts-By_Flag
+		// https://github.com/pret/pokeemerald/wiki/Trigger-Map-Scripts-By-Flag
+        bool32 isFlag = varIndex1 < VARS_START;
+        bool32 flagSet = isFlag && FlagGet(varIndex1);
+        // End Trigger-Map-Scripts-By_Flag
 
         // Read second var
         varIndex2 = T1_READ_16(ptr);
         ptr += 2;
 
         // Run map script if vars are equal
-        if (VarGet(varIndex1) == VarGet(varIndex2))
+        // Start Trigger-Map-Scripts-By_Flag
+        //if (VarGet(varIndex1) == VarGet(varIndex2))
+        if (isFlag && ((VarGet(varIndex2) != 0 && flagSet) || (VarGet(varIndex2) == 0 && !flagSet)))
+        {
+            const u8 *mapScript = T2_READ_PTR(ptr);
+            if (!Script_HasNoEffect(mapScript))
+                return mapScript;
+        }
+        else if (VarGet(varIndex1) == VarGet(varIndex2))
+        // End Trigger-Map-Scripts-By_Flag
         {
             const u8 *mapScript = T2_READ_PTR(ptr);
             if (!Script_HasNoEffect(mapScript))

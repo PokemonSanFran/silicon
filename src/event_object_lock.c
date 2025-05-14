@@ -206,6 +206,19 @@ bool8 IsFreezeObjectAndPlayerFinished(void)
     }
 }
 
+// Start siliconMerge
+void ScriptFreezeTargetObjectEvent(void)
+{
+    u8 taskId;
+
+    taskId = CreateTask(Task_FreezeSelectedObjectAndPlayer, 80);
+    if (!gObjectEvents[gSelectedObjectEvent].singleMovementActive)
+    {
+        FreezeObjectEvent(&gObjectEvents[gSelectedObjectEvent]);
+        gTasks[taskId].tObjectFrozen = TRUE;
+    }
+}
+// End siliconMerge
 #undef tPlayerFrozen
 #undef tObjectFrozen
 #undef tObjectId

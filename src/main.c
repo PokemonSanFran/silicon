@@ -297,13 +297,24 @@ static void ReadKeys(void)
     gMain.heldKeys = gMain.heldKeysRaw;
 
     // Remap L to A if the L=A option is enabled.
-    if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    // Start siliconMerge
+	if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	//if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	// End Start siliconMerge
     {
         if (JOY_NEW(L_BUTTON))
             gMain.newKeys |= A_BUTTON;
 
         if (JOY_HELD(L_BUTTON))
+        // Start LButtonTurbo
+        // https://github.com/pret/pokeemerald/wiki/Make-L-Button-Be-Turbo-A-When-L=A-Option-Is-Set
+        {
+		// End LButtonTurbo
             gMain.heldKeys |= A_BUTTON;
+		// Start LButtonTurbo
+            gMain.newKeys ^= A_BUTTON;
+        } 
+		// End LButtonTurbo
     }
 
     if (JOY_NEW(gMain.watchedKeysMask))

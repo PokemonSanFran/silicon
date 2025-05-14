@@ -9,9 +9,12 @@
 #include "field_weather.h"
 #include "berry.h"
 #include "main.h"
+#include "mazegen.h" // siliconMerge
 #include "overworld.h"
 #include "wallclock.h"
+#include "quest_logic.h" // siliconMerge
 #include "constants/form_change_types.h"
+#include "quest_logic.h" // siliconMerge
 
 static void UpdatePerDay(struct Time *localTime);
 static void UpdatePerMinute(struct Time *localTime);
@@ -19,7 +22,8 @@ static void FormChangeTimeUpdate();
 
 void InitTimeBasedEvents(void)
 {
-    FlagSet(FLAG_SYS_CLOCK_SET);
+    //FlagSet(FLAG_SYS_CLOCK_SET); // siliconMerge
+    FlagSet(FLAG_SET_WALL_CLOCK); // siliconMerge
     RtcCalcLocalTime();
     gSaveBlock2Ptr->lastBerryTreeUpdate = gLocalTime;
     VarSet(VAR_DAYS, gLocalTime.days);
@@ -27,7 +31,8 @@ void InitTimeBasedEvents(void)
 
 void DoTimeBasedEvents(void)
 {
-    if (FlagGet(FLAG_SYS_CLOCK_SET) && !InPokemonCenter())
+    //if (FlagGet(FLAG_SYS_CLOCK_SET) && !InPokemonCenter()) // siliconMerge
+    if (FlagGet(FLAG_SET_WALL_CLOCK) && !InPokemonCenter()) // siliconMerge
     {
         RtcCalcLocalTime();
         UpdatePerDay(&gLocalTime);
@@ -55,6 +60,7 @@ static void UpdatePerDay(struct Time *localTime)
         SetShoalItemFlag(daysSince);
         SetRandomLotteryNumber(daysSince);
         UpdateDaysPassedSinceFormChange(daysSince);
+        Quest_CutePokemon_DailyEvent(daysSince); // siliconMerge
         *days = localTime->days;
     }
 }

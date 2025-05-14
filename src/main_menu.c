@@ -18,6 +18,7 @@
 #include "list_menu.h"
 #include "mystery_event_menu.h"
 #include "naming_screen.h"
+#include "new_game.h" // siliconMerge
 #include "option_menu.h"
 #include "overworld.h"
 #include "palette.h"
@@ -523,9 +524,20 @@ static const u8 *const sFemalePresetNames[] = {
     COMPOUND_STRING("HALIE")
 };
 
+// Start Silicon Prologue
+static const u8 *const sChampionPresetNames[] = {
+        COMPOUND_STRING("Adam"),
+};
+// End Silicon Prologue
 // The number of male vs. female names is assumed to be the same.
 // If they aren't, the smaller of the two sizes will be used and any extra names will be ignored.
 #define NUM_PRESET_NAMES min(ARRAY_COUNT(sMalePresetNames), ARRAY_COUNT(sFemalePresetNames))
+// Start bootSequence
+u32 ChooseRandomPresetName(void)
+{
+    return (Random() % NUM_PRESET_NAMES);
+}
+// End bootSequence
 
 enum
 {
@@ -1620,8 +1632,10 @@ static void Task_NewGameBirchSpeech_StartNamingScreen(u8 taskId)
     {
         FreeAllWindowBuffers();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tLotadSpriteId);
-        NewGameBirchSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
+        //NewGameBirchSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES); // bootSequence
+        AssignDefaultPlayerName(); //bootSequence
         DestroyTask(taskId);
+        InitPlayerTrainerId(); // siliconMerge
         DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_NewGameBirchSpeech_ReturnFromNamingScreen);
     }
 }
@@ -2125,6 +2139,8 @@ static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
 
 void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
 {
+// Start bootSequence
+/*
     const u8 *name;
     u8 i;
 
@@ -2136,6 +2152,32 @@ void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
         gSaveBlock2Ptr->playerName[i] = name[i];
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
 }
+*/
+    const u8 *name;
+    u8 i;
+
+    switch(gSaveBlock2Ptr->playerGender)
+    {
+        case MALE:
+            name = sMalePresetNames[nameId];
+            break;
+        case FEMALE:
+            name = sFemalePresetNames[nameId];
+            break;
+        default:
+            if (nameId % 2 == 0)
+                name = sMalePresetNames[nameId];
+            else
+                name = sFemalePresetNames[nameId];
+            break;
+    }
+
+    if (VarGet(VAR_PROLOGUE_STATE) == NOT_STARTED)
+        name = sChampionPresetNames[0];
+
+    SetEOSForPlayerName(name);
+}
+// End bootSequence
 
 static void CreateMainMenuErrorWindow(const u8 *str)
 {

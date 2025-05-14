@@ -33,6 +33,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "m4a.h"
+#include "nameplate.h" // siliconMerge
 #include "map_name_popup.h"
 #include "match_call.h"
 #include "menu.h"
@@ -61,6 +62,7 @@
 #include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
+#include "ui_start_menu.h" // siliconMerge
 #include "scanline_effect.h"
 #include "wild_encounter.h"
 #include "vs_seeker.h"
@@ -72,6 +74,13 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "constants/rgb.h" // siliconMerge
+#include "qol_field_moves.h" // qol_field_moves
+#include "options_game.h" // Game Settings
+#include "options_battle.h" // Battle Settings
+#include "rematch.h" // siliconMerge
+#include "options_music.h" // siliconMerge
+#include "map_preview_screen.h" // mapPreviews
 
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 
@@ -383,6 +392,8 @@ void Overworld_ResetStateAfterFly(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
+    FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
+    ClearFieldMoveFlags(); // qol_field_moves
 }
 
 void Overworld_ResetStateAfterTeleport(void)
@@ -393,6 +404,8 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
+    FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
+    ClearFieldMoveFlags(); // qol_field_moves
     RunScriptImmediately(EventScript_ResetMrBriney);
 }
 
@@ -404,6 +417,8 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
+    FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
+    ClearFieldMoveFlags(); // qol_field_moves
 }
 
 #if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
@@ -440,6 +455,8 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
+    FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
+    ClearFieldMoveFlags(); // qol_field_moves
     if (B_RESET_FLAGS_VARS_AFTER_WHITEOUT == TRUE)
         Overworld_ResetBattleFlagsAndVars();
     // If you were defeated by Kyogre/Groudon and the step counter has
@@ -558,13 +575,26 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
     }
 }
 
-static void InitMapView(void)
+// Start siliconMerge
+void InitMapView(void)
+// static void InitMapView(void)
+// End siliconMerge
 {
     ResetFieldCamera();
+// Start siliconMerge
+    for (s32 paletteIndex = 0; paletteIndex < 15; paletteIndex++)
+        ApplyGlobalFieldPaletteTint(paletteIndex);
+// End siliconMerge
     CopyMapTilesetsToVram(gMapHeader.mapLayout);
     LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();
     InitTilesetAnimations();
+} // siliconMerge
+
+void RemoveTintFromObjectEvents(void)
+{
+    if (gGlobalFieldTintMode == GLOBAL_FIELD_TINT_NONE)
+        RemoveTintFromObjectEventPalettes();
 }
 
 const struct MapLayout *GetMapLayout(u16 mapLayoutId)
@@ -578,6 +608,7 @@ void ApplyCurrentWarp(void)
     gSaveBlock1Ptr->location = sWarpDestination;
     sFixedDiveWarp = sDummyWarpData;
     sFixedHoleWarp = sDummyWarpData;
+	ForceClearMessageBoxData(); // siliconMerge
 }
 
 static void ClearDiveAndHoleWarps(void)
@@ -826,6 +857,94 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
     return SetDiveWarp(CONNECTION_DIVE, x, y);
 }
 
+// Start siliconMerge
+void CheckSetVisitedRouteFlags(void)
+{
+    if ((VarGet(VAR_ARANTRAZ_STATE) >= BATTLED_TALA) && FlagGet(FLAG_VISITED_ANBEH_BEND))
+        FlagSet(FLAG_VISITED_ROUTE11);
+
+    if (FlagGet(FLAG_VISITED_FORT_YOBU) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
+        FlagSet(FLAG_VISITED_ROUTE16);
+
+    if (FlagGet(FLAG_VISITED_CRESALTA_VISTA) && FlagGet(FLAG_VISITED_HALERBAWILDS_WEST))
+        FlagSet(FLAG_VISITED_ROUTE22);
+
+    if (FlagGet(FLAG_VISITED_QIU_VILLAGE) && FlagGet(FLAG_VISITED_HALERBAWILDS_SOUTH))
+        FlagSet(FLAG_VISITED_ROUTE18);
+
+    if (FlagGet(FLAG_VISITED_PERLACIA_CITY) && FlagGet(FLAG_VISITED_POPIDORA_PIER))
+        FlagSet(FLAG_VISITED_ROUTE4);
+
+    if (FlagGet(FLAG_VISITED_CAPHE_CITY) && FlagGet(FLAG_VISITED_MERMEREZA_CITY))
+        FlagSet(FLAG_VISITED_ROUTE10);
+
+    if (FlagGet(FLAG_VISITED_MERMEREZA_CITY) && FlagGet(FLAG_VISITED_GLAVEZ_HILL))
+        FlagSet(FLAG_VISITED_ROUTE8);
+
+    if (FlagGet(FLAG_VISITED_OROLAND) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
+        FlagSet(FLAG_VISITED_PSFROUTE7E17FDD1);
+
+    if (FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
+        FlagSet(FLAG_VISITED_ROUTE14);
+
+    if(FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_MERMEREZA_CITY))
+        FlagSet(FLAG_VISITED_ROUTE5);
+
+    if(FlagGet(FLAG_VISITED_POPIDORA_PIER) && FlagGet(FLAG_VISITED_ARANTRAZ))
+        FlagSet(FLAG_VISITED_ROUTE_D);
+
+    if(FlagGet(FLAG_VISITED_CUCONU_TOWN) && FlagGet(FLAG_VISITED_GLAVEZ_HILL))
+        FlagSet(FLAG_VISITED_ROUTE6);
+
+    if(FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_TORGEOT_CLIMB_BASE))
+        FlagSet(FLAG_VISITED_ROUTE3);
+
+    if(FlagGet(FLAG_VISITED_ANBEH_BEND) && FlagGet(FLAG_VISITED_POPIDORA_PIER))
+        FlagSet(FLAG_VISITED_PSFROUTE9F45DA86);
+
+    if(FlagGet(FLAG_VISITED_ARANTRAZ) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
+        FlagSet(FLAG_VISITED_ROUTE_C);
+
+    if(FlagGet(FLAG_VISITED_GLAVEZ_HILL) && FlagGet(FLAG_VISITED_CURENO_PORT))
+        FlagSet(FLAG_VISITED_ROUTE1);
+
+    if(FlagGet(FLAG_VISITED_PERLACIA_CITY) && FlagGet(FLAG_VISITED_CURENO_PORT))
+        FlagSet(FLAG_VISITED_ROUTE2);
+
+    if(FlagGet(FLAG_VISITED_WAJABI_LAKE) && FlagGet(FLAG_VISITED_QIU_VILLAGE))
+        FlagSet(FLAG_VISITED_ROUTE20);
+
+    if(FlagGet(FLAG_VISITED_ZENZU_ISLAND))
+        FlagSet(FLAG_VISITED_NONGYU_BRIDGE);
+
+    if(FlagGet(FLAG_VISITED_TORA_TOWN) && FlagGet(FLAG_VISITED_CAPHE_CITY))
+        FlagSet(FLAG_VISITED_ROUTE9);
+
+    if(FlagGet(FLAG_VISITED_TIRABUDIN_PLACE) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
+        FlagSet(FLAG_VISITED_ROUTE7);
+
+    if(FlagGet(FLAG_VISITED_PETAROSA_BOROUGH) && FlagGet(FLAG_VISITED_CRESALTA_VISTA))
+        FlagSet(FLAG_VISITED_ROUTE13);
+
+    if(FlagGet(FLAG_VISITED_HALAI_ISLAND) && FlagGet(FLAG_VISITED_ARANTRAZ))
+        FlagSet(FLAG_VISITED_ROUTE_A);
+
+    if(FlagGet(FLAG_VISITED_CHASILLA) && FlagGet(FLAG_VISITED_OROLAND))
+        FlagSet(FLAG_VISITED_ROUTE99);
+
+    if(FlagGet(FLAG_VISITED_LEAVERRA_FOREST) && FlagGet(FLAG_VISITED_ESPULEE_OUTSKIRTS))
+        FlagSet(FLAG_VISITED_ROUTE100);
+
+    if(FlagGet(FLAG_VISITED_ANBEH_BEND) && FlagGet(FLAG_VISITED_CAPHE_CITY))
+        FlagSet(FLAG_VISITED_ROUTE12);
+
+    if (FlagGet(FLAG_VISITED_OROLAND) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
+        FlagSet(FLAG_VISITED_ROUTE_B);
+
+    if(FlagGet(FLAG_VISITED_ESPULEE_OUTSKIRTS) && FlagGet(FLAG_VISITED_CHASILLA))
+        FlagSet(FLAG_VISITED_ROUTE_E);
+}
+// End siliconMerge
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     s32 paletteIndex;
@@ -844,6 +963,10 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetDexNavSearch();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
+    // Start rematch_action
+    //TryUpdateRandomTrainerRematches(mapGroup, mapNum);
+    UpdateTrainerRematchState(mapGroup, mapNum);
+    // End rematch_action
 #if FREE_MATCH_CALL == FALSE
     TryUpdateRandomTrainerRematches(mapGroup, mapNum);
 #endif //FREE_MATCH_CALL
@@ -853,10 +976,13 @@ if (I_VS_SEEKER_CHARGING != 0)
 
     DoTimeBasedEvents();
     SetSavedWeatherFromCurrMapHeader();
+    WaterBerriesIfRaining(); // autoWater
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
+    CheckSetVisitedRouteFlags(); // siliconMerge
+    UpdateChainFishingStreak(); // fishingUpdate
     InitMap();
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
     LoadSecondaryTilesetPalette(gMapHeader.mapLayout);
@@ -868,6 +994,7 @@ if (I_VS_SEEKER_CHARGING != 0)
     UpdateLocationHistoryForRoamer();
     MoveAllRoamers();
     DoCurrentWeather();
+    WaterBerriesIfRaining(); // autoWater
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
 
@@ -906,9 +1033,12 @@ static void LoadMapFromWarp(bool32 a1)
     CheckLeftFriendsSecretBase();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
-    ResetDexNavSearch();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
+    // Start rematch_action
+    //TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    UpdateTrainerRematchState(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    // End rematch_action
 #if FREE_MATCH_CALL == FALSE
     TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
 #endif //FREE_MATCH_CALL
@@ -919,15 +1049,20 @@ if (I_VS_SEEKER_CHARGING != 0)
     if (a1 != TRUE)
         DoTimeBasedEvents();
     SetSavedWeatherFromCurrMapHeader();
+    WaterBerriesIfRaining(); // autoWater
     ChooseAmbientCrySpecies();
     if (isOutdoors)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
+    CheckSetVisitedRouteFlags(); // siliconMerge
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
-    gChainFishingDexNavStreak = 0;
+    // Start fishingUpdate
+    //gChainFishingDexNavStreak = 0;
+    UpdateChainFishingStreak();
+    // End fishingUpdate
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
@@ -1042,12 +1177,20 @@ bool32 Overworld_IsBikingAllowed(void)
 // Flash level of 8 is fully black
 void SetDefaultFlashLevel(void)
 {
+
+    // Start qol_field_moves
+#ifdef QOL_NO_MESSAGING
+    if(CanUseFlash())
+        FlagSet(FLAG_SYS_USE_FLASH);
+#endif //QOL_NO_MESSAGING
+   // End qol_field_moves
     if (!gMapHeader.cave)
         gSaveBlock1Ptr->flashLevel = 0;
     else if (FlagGet(FLAG_SYS_USE_FLASH))
         gSaveBlock1Ptr->flashLevel = 1;
     else
         gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;
+    TryUseFlash(); // qol_field_moves
 }
 
 void SetFlashLevel(s32 flashLevel)
@@ -1210,6 +1353,24 @@ void Overworld_ResetMapMusic(void)
 {
     ResetMapMusic();
 }
+// Start siliconMerge
+u16 GetCorrectMusicForScenario(void)
+{
+    u16 music = GetCurrLocationDefaultMusic();
+    CorrectSavedMusic();
+
+    if (music != MUS_ABNORMAL_WEATHER && music != MUS_NONE)
+    {
+        if (gSaveBlock1Ptr->savedMusic)
+            music = gSaveBlock1Ptr->savedMusic;
+        else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
+            music = MUS_UNDERWATER;
+        else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+            music = GetSurfMusicFromOption();
+    }
+    return music;
+}
+// End siliconMerge
 
 void Overworld_PlaySpecialMapMusic(void)
 {
@@ -1423,6 +1584,17 @@ u8 GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
+// start mapPreviews
+u8 GetLastUsedWarpMapSectionId(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gLastUsedWarp.mapGroup, gLastUsedWarp.mapNum)->regionMapSectionId;
+}
+
+u8 GetDestinationWarpMapSectionId(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum)->regionMapSectionId;
+}
+// end mapPreviews
 bool8 IsMapTypeOutdoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
@@ -1527,6 +1699,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
             PlayerStep(inputStruct.dpadDirection, newKeys, heldKeys);
         }
     }
+    HoldButtonToSkipCutscene(heldKeys); // Game Options: Cutscenes
 }
 
 void CB1_Overworld(void)
@@ -1610,18 +1783,19 @@ void CB2_NewGame(void)
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
-    NewGameInitData();
+    //NewGameInitData(); // bootSequence
     ResetInitialPlayerAvatarState();
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
-    gFieldCallback = ExecuteTruckSequence;
+    //gFieldCallback = ExecuteTruckSequence; // siliconMerge
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
 }
+
 
 void CB2_WhiteOut(void)
 {
@@ -1636,10 +1810,14 @@ void CB2_WhiteOut(void)
         ResetInitialPlayerAvatarState();
         ScriptContext_Init();
         UnlockPlayerFieldControls();
+        // Start Battle Options: Whiteout
+        //gFieldCallback = FieldCB_WarpExitFadeFromBlack;
         if (IsFRLGWhiteout())
             gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
         else
-            gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+            SetUpFieldCallbackOnWhiteOut();
+            //gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+        // End Battle Options: Whiteout
         state = 0;
         DoMapLoadLoop(&state);
         SetFieldVBlankCallback();
@@ -1753,6 +1931,13 @@ void CB2_ReturnToFieldWithOpenMenu(void)
     CB2_ReturnToField();
 }
 
+// Start siliconMerge
+void CB2_ReturnToUIMenu(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+	StartMenu_Menu_Init(CB2_ReturnToField, FALSE);
+}
+// End siliconMerge
 void CB2_ReturnToFieldContinueScript(void)
 {
     FieldClearVBlankHBlankCallbacks();
@@ -1833,7 +2018,8 @@ void CB2_ContinueSavedGame(void)
     }
 }
 
-static void FieldClearVBlankHBlankCallbacks(void)
+//static void FieldClearVBlankHBlankCallbacks(void) // siliconMerge
+void FieldClearVBlankHBlankCallbacks(void)
 {
     if (UsedPokemonCenterWarp() == TRUE)
         CloseLink();
@@ -1856,7 +2042,8 @@ static void FieldClearVBlankHBlankCallbacks(void)
     SetHBlankCallback(NULL);
 }
 
-static void SetFieldVBlankCallback(void)
+//static void SetFieldVBlankCallback(void) // siliconMerge
+void SetFieldVBlankCallback(void)
 {
     SetVBlankCallback(VBlankCB_Field);
 }
@@ -2024,7 +2211,12 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 a2)
         (*state)++;
         break;
     case 11:
-        if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+        // start mapPreviews
+        if (ShouldRunFadeInMapPreviewScreen())
+            RunFadeInMapPreviewScreen();
+        //if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+        else if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+        // end mapPreviews
             ShowMapNamePopup();
         (*state)++;
         break;
@@ -2148,7 +2340,7 @@ static bool32 ReturnToFieldLink(u8 *state)
     return FALSE;
 }
 
-static void DoMapLoadLoop(u8 *state)
+void DoMapLoadLoop(u8 *state) // siliconMerge
 {
     while (!LoadMapInStepsLocal(state, FALSE));
 }
@@ -2229,6 +2421,7 @@ static void ResumeMap(bool32 a1)
     ResumePausedWeather();
     if (!a1)
         SetUpFieldTasks();
+    WaterBerriesIfRaining(); // autoWater
     RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();
 }
@@ -3348,7 +3541,8 @@ static u8 ReformatItemDescription(u16 item, u8 *dest)
     u8 count = 0;
     u8 numLines = 1;
     u8 maxChars = 32;
-    u8 *desc = (u8 *)ItemId_GetDescription(item);
+    //u8 *desc = (u8 *)gItemsInfo[item].description;
+    u8 *desc = (u8 *)ItemId_GetDescription(item); // silicon
 
     while (*desc != EOS)
     {
@@ -3411,7 +3605,8 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
         return; //no box if item obtained previously
     }
 
-    SetWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, 8);
+    //     SetWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, 8);
+	SetWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, CalculateNextWindowBaseblock()); // siliconMerge
     sHeaderBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sHeaderBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sHeaderBoxWindowId);

@@ -37,8 +37,10 @@
 #include "constants/heal_locations.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "map_preview_screen.h" // mapPreviews
 #include "trainer_hill.h"
 #include "fldeff.h"
+#include "options_game.h" // autoSave
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
@@ -114,13 +116,25 @@ void FadeInFromBlack(void)
 void WarpFadeOutScreen(void)
 {
     u8 currentMapType = GetCurrentMapType();
+
+    // start removeWarpFadescreen
+    if (FlagGet(FLAG_REMOVE_WARP_FADE))
+    {
+        FlagClear(FLAG_REMOVE_WARP_FADE);
+        return;
+    }
+    // end removeWarpFadescreen
+
     switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
     {
     case 0:
         FadeScreen(FADE_TO_BLACK, 0);
         break;
     case 1:
-        FadeScreen(FADE_TO_WHITE, 0);
+        // start mapPreviews
+        //FadeScreen(FADE_TO_WHITE, 0);
+        FadeScreen(GetFadeScreenModeFromMapPreviewType(),0);
+        // End mapPreviews
     }
 }
 
@@ -464,6 +478,7 @@ static void Task_ReturnToFieldNoScript(u8 taskId)
 {
     if (WaitForWeatherFadeIn() == 1)
     {
+        CountAndTryAutoSave(); //autoSave
         UnlockPlayerFieldControls();
         DestroyTask(taskId);
         ScriptUnfreezeObjectEvents();

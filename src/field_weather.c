@@ -17,7 +17,14 @@
 #include "task.h"
 #include "trig.h"
 #include "gpu_regs.h"
+#include "field_effect.h" // siliconMerge
 #include "field_camera.h"
+// start mapPreviews
+#include "map_preview_screen.h"
+// end mapPreviews
+// start autoWater
+#include "berry.h"
+// end autoWater
 
 #define DROUGHT_COLOR_INDEX(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
@@ -174,7 +181,10 @@ static const u8 ALIGNED(2) sBasePaletteColorMapTypes[32] =
     COLOR_MAP_DARK_CONTRAST,
     COLOR_MAP_DARK_CONTRAST,
     COLOR_MAP_DARK_CONTRAST,
-    COLOR_MAP_DARK_CONTRAST,
+    // start mapPreviews
+    //COLOR_MAP_DARK_CONTRAST,
+    COLOR_MAP_NONE, // This was changed from COLOR_MAP_DARK_CONTRAST to make sure certain weather effects don't affect map preview colors.
+    // end mapPreviews
     COLOR_MAP_NONE,
     COLOR_MAP_NONE,
     // sprite palettes
@@ -235,6 +245,11 @@ void SetNextWeather(u8 weather)
     {
         PlayRainStoppingSoundEffect();
     }
+// Start autoWater
+    {
+        WaterBerriesIfRaining();
+    }
+// end autoWater
 
     if (gWeatherPtr->nextWeather != weather && gWeatherPtr->currWeather == weather)
     {
@@ -318,7 +333,10 @@ static void Task_WeatherMain(u8 taskId)
 
 static void None_Init(void)
 {
-    Weather_SetBlendCoeffs(8, 12); // Indoor shadows
+    // start mapPreviews
+    if (!IsMapPreviewTypeFadeIn(gMapHeader.regionMapSectionId))
+        Weather_SetBlendCoeffs(8, 12); // Indoor shadows
+    // end mapPreviews
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 0;
 }

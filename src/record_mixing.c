@@ -1277,7 +1277,7 @@ static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records
     }
 }
 
-static void FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct RankingHall1P *mixRecords)
+static void UNUSED FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct RankingHall1P *mixRecords)
 {
     s32 i, j;
 
@@ -1305,7 +1305,7 @@ static void FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct R
     }
 }
 
-static void FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct RankingHall2P *mixRecords)
+static void UNUSED FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct RankingHall2P *mixRecords)
 {
     s32 i, j;
 
@@ -1333,7 +1333,7 @@ static void FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct R
     }
 }
 
-static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallRecords)
+static void UNUSED SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallRecords)
 {
     s32 i, j;
 

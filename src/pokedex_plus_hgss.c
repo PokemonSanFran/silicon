@@ -93,6 +93,8 @@ enum
     SEARCH_TOPBAR_COUNT
 };
 
+// Start pokedex
+/*
 enum
 {
    ORDER_NUMERICAL,
@@ -102,6 +104,8 @@ enum
    ORDER_TALLEST,
    ORDER_SMALLEST
 };
+*/
+// End pokedex
 
 enum
 {

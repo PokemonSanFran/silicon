@@ -11,8 +11,12 @@
 #define SPRAY_GET 1
 
 #define NUM_SPRAY_STRENGTH 3
-#define SPRAY_MENU_Y_COORD 8
+// Start siliconMerge
+//#define SPRAY_MENU_Y_COORD 8
+#define SPRAY_MENU_Y_COORD 6
+// End siliconMerge
 
+#define LOCAL_VAR_CANCEL gSpecialVar_0x8003 // siliconMerge
 #define LOCAL_VAR_SPRAY gSpecialVar_0x8004
 #define LOCAL_VAR_SPRAY_CONST VAR_0x8004
 
@@ -95,8 +99,10 @@ void DrawSprayMenu(void)
         yCoord = SPRAY_MENU_Y_COORD - (2 * count);
         count++;
     }
-
-    gSpecialVar_0x8003 = count;
+    // Start siliconMerge
+	LOCAL_VAR_CANCEL = count;
+    //gSpecialVar_0x8003 = count;
+	// End siliconMerge
     menuItems[count].text = gText_Cancel2;
 
     DrawMultichoiceMenuInternal(18, yCoord, 0, FALSE, menuPos, menuItems, count+1);

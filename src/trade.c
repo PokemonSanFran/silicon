@@ -50,6 +50,9 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
+#include "color_variation.h" // colorVariation
+#include "surprise_trade.h" // surpriseTrade
+#include "ui_pokedex.h" // pokedex
 
 // IDs for RunTradeMenuCallback
 enum {
@@ -2790,7 +2793,10 @@ static void LoadTradeMonPic(u8 whichParty, u8 state)
 
         HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[whichParty * 2 + B_POSITION_OPPONENT_LEFT], species, personality);
 
-        LoadCompressedSpritePaletteWithTag(GetMonFrontSpritePal(mon), species);
+        // Start colorVariation
+        //LoadCompressedSpritePaletteWithTag(GetMonFrontSpritePal(mon), species);
+        LoadCompressedUniqueSpritePaletteWithTag(GetMonFrontSpritePal(mon), species, &mon->box);
+        // End colorVariation
         sTradeAnim->monSpecies[whichParty] = species;
         sTradeAnim->monPersonalities[whichParty] = personality;
         break;
@@ -3057,6 +3063,7 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
     {
         u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
         u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+        SpeciesData_SetSavedLastForm(species); // pokedex
         species = SpeciesToNationalPokedexNum(species);
         GetSetPokedexFlag(species, FLAG_SET_SEEN);
         HandleSetPokedexFlag(species, FLAG_SET_CAUGHT, personality);
@@ -3304,7 +3311,7 @@ static void BufferTradeSceneStrings(void)
 {
     u8 mpId;
     u8 name[POKEMON_NAME_BUFFER_SIZE];
-    const struct InGameTrade *ingameTrade;
+    //const struct InGameTrade *ingameTrade; //surpriseTrade
 
     if (sTradeAnim->isLinkTrade)
     {
@@ -3317,9 +3324,16 @@ static void BufferTradeSceneStrings(void)
     }
     else
     {
-        ingameTrade = &sIngameTrades[gSpecialVar_0x8004];
-        StringCopy(gStringVar1, ingameTrade->otName);
-        StringCopy_Nickname(gStringVar3, ingameTrade->nickname);
+        //Start surpriseTrade
+        /*
+           ingameTrade = &sIngameTrades[gSpecialVar_0x8004];
+           StringCopy(gStringVar1, ingameTrade->otName);
+           StringCopy_Nickname(gStringVar3, ingameTrade->nickname);
+        */
+        GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, gStringVar1);
+        GetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, name);
+        StringCopy_Nickname(gStringVar3, name);
+        //End surpriseTrade
         GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, name);
         StringCopy_Nickname(gStringVar2, name);
     }
@@ -4827,7 +4841,10 @@ static void Task_InGameTrade(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_InitInGameTrade);
-        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
+        // Start surpriseTrade
+        //gFieldCallback = FieldCB_ContinueScriptHandleMusic;
+        gFieldCallback = ShowTradedMon;
+        // End surpriseTrade
         DestroyTask(taskId);
     }
 }

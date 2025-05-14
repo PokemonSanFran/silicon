@@ -5,6 +5,7 @@
 #include "field_effect.h"
 #include "fldeff.h"
 #include "gpu_regs.h"
+#include "map_preview_screen.h" // mapPreviews
 #include "main.h"
 #include "overworld.h"
 #include "palette.h"
@@ -26,7 +27,7 @@ struct FlashStruct
 };
 
 static void FieldCallback_Flash(void);
-static void FldEff_UseFlash(void);
+//static void FldEff_UseFlash(void); // qol_field_moves
 static bool8 TryDoMapTransition(void);
 static void DoExitCaveTransition(void);
 static void Task_ExitCaveTransition1(u8 taskId);
@@ -36,7 +37,7 @@ static void Task_ExitCaveTransition4(u8 taskId);
 static void Task_ExitCaveTransition5(u8 taskId);
 static void DoEnterCaveTransition(void);
 static void Task_EnterCaveTransition1(u8 taskId);
-static void Task_EnterCaveTransition2(u8 taskId);
+//static void Task_EnterCaveTransition2(u8 taskId); // mapPreviews
 static void Task_EnterCaveTransition3(u8 taskId);
 static void Task_EnterCaveTransition4(u8 taskId);
 
@@ -98,7 +99,10 @@ static void FieldCallback_Flash(void)
     gTasks[taskId].data[9] = (uintptr_t)FldEff_UseFlash;
 }
 
-static void FldEff_UseFlash(void)
+// Start qol_field_moves
+//static void FldEff_UseFlash(void)
+void FldEff_UseFlash(void)
+// End qol_field_moves
 {
     PlaySE(SE_M_REFLECT);
     FlagSet(FLAG_SYS_USE_FLASH);
@@ -156,6 +160,13 @@ static bool8 TryDoMapTransition(void)
     u8 i;
     u8 fromType = GetLastUsedWarpMapType();
     u8 toType = GetCurrentMapType();
+// start mapPreviews
+    if (ShouldRunCaveMapPreviewScreen())
+    {
+        RunMapPreviewScreen(gMapHeader.regionMapSectionId);
+        return TRUE;
+    }
+// end mapPreviews	
 
     for (i = 0; sTransitionTypes[i].fromType; i++)
     {
@@ -298,7 +309,10 @@ static void Task_EnterCaveTransition1(u8 taskId)
     gTasks[taskId].func = Task_EnterCaveTransition2;
 }
 
-static void Task_EnterCaveTransition2(u8 taskId)
+// start mapPreviews
+//static void Task_EnterCaveTransition2(u8 taskId)
+void Task_EnterCaveTransition2(u8 taskId)
+// end mapPreviews
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(sCaveTransitionTiles, (void *)(VRAM + 0xC000));
@@ -363,3 +377,4 @@ static void Task_EnterCaveTransition4(u8 taskId)
         SetMainCallback2(gMain.savedCallback);
     }
 }
+

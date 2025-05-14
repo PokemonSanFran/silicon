@@ -11,6 +11,8 @@
 #include "sprite.h"
 #include "constants/field_effects.h"
 
+#include "field_puzzles.h" // siliconMerge
+
 // static functions
 static void FieldCallback_Dig(void);
 static void StartDigFieldEffect(void);
@@ -18,7 +20,17 @@ static void StartDigFieldEffect(void);
 // text
 bool8 SetUpFieldMove_Dig(void)
 {
-    if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
+    // Start siliconMerge
+	//If on Route4, allow player to dig AND hasn't already uncovered the lab
+    if (ShouldDoSecretLabDigEffect())
+    {
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FieldCallback_Dig;
+        return TRUE;
+    }
+    else if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
+	// if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
+	// End siliconMerge
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = FieldCallback_Dig;
@@ -43,7 +55,10 @@ bool8 FldEff_UseDig(void)
 
     gTasks[taskId].data[8] = (u32)StartDigFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartDigFieldEffect;
-    if (!ShouldDoBrailleDigEffect())
+    // Start siliconMerge
+	//if (!ShouldDoBrailleDigEffect())
+    if (!ShouldDoSecretLabDigEffect())
+	// End siliconMerge
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     return FALSE;
 }
@@ -53,9 +68,13 @@ static void StartDigFieldEffect(void)
     u8 taskId;
 
     FieldEffectActiveListRemove(FLDEFF_USE_DIG);
-    if (ShouldDoBrailleDigEffect())
+    // Start siliconMerge
+	//if (!ShouldDoBrailleDigEffect())
+    if (!ShouldDoSecretLabDigEffect())
+	// End siliconMerge
     {
         // EventScript_DigSealedChamber handles DoBrailleDigEffect call
+        DoSecretLabDigEffect(); // siliconMerge
         ScriptContext_Enable();
     }
     else

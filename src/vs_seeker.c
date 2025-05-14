@@ -91,7 +91,7 @@ static u8 GetVsSeekerResponseInArea(void);
 #if FREE_MATCH_CALL == FALSE
 static u8 GetResponseMovementTypeFromTrainerGraphicsId(u8 graphicsId);
 #endif //FREE_MATCH_CALL
-static u16 GetTrainerFlagFromScript(const u8 * script);
+u16 GetTrainerFlagFromScript(const u8 * script); // rematch_action
 static void ClearAllTrainerRematchStates(void);
 #if FREE_MATCH_CALL == FALSE
 static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo);
@@ -704,7 +704,8 @@ static u8 GetResponseMovementTypeFromTrainerGraphicsId(u8 graphicsId)
 }
 #endif //FREE_MATCH_CALL
 
-static u16 GetTrainerFlagFromScript(const u8 *script)
+//static u16 GetTrainerFlagFromScript(const u8 *script) // rematch_action
+u16 GetTrainerFlagFromScript(const u8 *script) // rematch_action
     /*
  * The trainer flag is a little-endian short located +2 from
  * the script pointer, assuming the trainerbattle command is

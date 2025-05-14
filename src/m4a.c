@@ -111,6 +111,15 @@ void m4aSongNumStart(u16 n)
     MPlayStart(mplay->info, song->header);
 }
 
+// Start midBattleEvolution
+void m4aSongNumStartForPlayer(u16 n, struct MusicPlayerInfo *mPlayInfo)
+{
+    const struct Song *songTable = gSongTable;
+    const struct Song *song = &songTable[n];
+
+    MPlayStart(mPlayInfo, song->header);
+}
+// End midBattleEvolution
 void m4aSongNumStartOrChange(u16 n)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;

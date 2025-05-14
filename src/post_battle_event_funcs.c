@@ -8,6 +8,16 @@
 #include "script_pokemon_util.h"
 #include "tv.h"
 #include "constants/heal_locations.h"
+#include "quest_logic.h" // siliconMerge
+
+// Start siliconMerge
+void SetPostCreditsSceneWarpLocation(void)
+{
+    u32 healLocation = (FlagGet(FLAG_TIMELINE_TRUE)) ? HEAL_LOCATION_HALAI_ISLAND_KAI : HEAL_LOCATION_PETAROSA_BOROUGH_COMPOUND_1F;
+
+    SetContinueGameWarpToHealLocation(healLocation);
+}
+// End siliconMerge
 
 int GameClear(void)
 {
@@ -35,10 +45,16 @@ int GameClear(void)
 
     SetContinueGameWarpStatus();
 
-    if (gSaveBlock2Ptr->playerGender == MALE)
+// Start siliconMerge
+    /*
+        if (gSaveBlock2Ptr->playerGender == MALE)
         SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
     else
         SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
+        */
+
+    SetPostCreditsSceneWarpLocation();
+	// End siliconMerge
 
     ribbonGet = FALSE;
 

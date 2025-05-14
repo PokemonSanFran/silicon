@@ -250,6 +250,7 @@ void CopyPartyAndObjectsFromSave(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();
+    DeserializeTmHmItemSlots(); //PSF technicalmachine Branch
 }
 
 void LoadPlayerBag(void)
@@ -270,7 +271,8 @@ void LoadPlayerBag(void)
 
     // load player TMs and HMs.
     for (i = 0; i < BAG_TMHM_COUNT; i++)
-        gLoadedSaveData.TMsHMs[i] = gSaveBlock1Ptr->bagPocket_TMHM[i];
+        gLoadedSaveData.TMsHMs[i] = gTmHmItemSlots[i]; //PSF technicalmachine Branch
+        //gLoadedSaveData.TMsHMs[i] = gSaveBlock1Ptr->bagPocket_TMHM[i];
 
     // load player berries.
     for (i = 0; i < BAG_BERRIES_COUNT; i++)
@@ -302,7 +304,8 @@ void SavePlayerBag(void)
 
     // save player TMs and HMs.
     for (i = 0; i < BAG_TMHM_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_TMHM[i] = gLoadedSaveData.TMsHMs[i];
+        gTmHmItemSlots[i] = gLoadedSaveData.TMsHMs[i]; // PSF technicalmachine Branch
+        //gSaveBlock1Ptr->bagPocket_TMHM[i] = gLoadedSaveData.TMsHMs[i];
 
     // save player berries.
     for (i = 0; i < BAG_BERRIES_COUNT; i++)
@@ -338,3 +341,24 @@ static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
     ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);
     ApplyNewEncryptionKeyToHword(&gSaveBlock1Ptr->coins, encryptionKey);
 }
+// Start siliconMerge
+void SavePlayerPartyBattleFrontier(void)
+{
+    int i;
+
+    gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        gSaveBlock1Ptr->playerPartyBattleFrontier[i] = gPlayerParty[i];
+}
+
+void LoadPlayerPartyBattleFrontier(void)
+{
+    int i;
+
+    gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        gPlayerParty[i] = gSaveBlock1Ptr->playerPartyBattleFrontier[i];
+}
+// End siliconMerge

@@ -55,6 +55,18 @@
 #include "list_menu.h"
 #include "malloc.h"
 #include "constants/event_objects.h"
+// Start siliconMerge
+#include "region_map.h"
+#include "quests.h"
+#include "quest_logic.h"
+#include "buzzr.h"
+#include "pokevial.h"
+#include "qol_field_moves.h" // qol_field_moves
+#include "glass.h"
+#include "options_music.h"
+#include "quest_logic.h"
+#include "quest_ow.h"
+// End siliconMerge
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);
@@ -3003,6 +3015,435 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     return TRUE;
 }
 
+// Start siliconMerge
+bool8 ScrCmd_locktarget(struct ScriptContext *ctx)
+{
+    if (IsOverworldLinkActive())
+    {
+        return FALSE;
+    }
+    else
+    {
+        ScriptFreezeTargetObjectEvent();
+        SetupNativeScript(ctx, IsFreezePlayerFinished);
+        return TRUE;
+    }
+}
+
+bool8 ScrCmd_questmenu(struct ScriptContext *ctx)
+{
+    u8 caseId = ScriptReadByte(ctx);
+    u8 questId = VarGet(ScriptReadByte(ctx));
+
+    switch (caseId)
+    {
+    case QUEST_MENU_OPEN:
+    default:
+        BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
+        QuestMenu_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        ScriptContext_Stop();
+        break;
+    case QUEST_MENU_UNLOCK_QUEST:
+        QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+        break;
+    case QUEST_MENU_SET_ACTIVE:
+        QuestMenu_ScriptSetActive(questId);
+        break;
+    case QUEST_MENU_SET_REWARD:
+        QuestMenu_ScriptSetReward(questId);
+        break;
+    case QUEST_MENU_COMPLETE_QUEST:
+        QuestMenu_ScriptSetComplete(questId);
+        break;
+    case QUEST_MENU_CHECK_UNLOCKED:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_UNLOCKED))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_CHECK_INACTIVE:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_INACTIVE))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_CHECK_ACTIVE:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_ACTIVE))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_CHECK_REWARD:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_REWARD))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_CHECK_COMPLETE:
+        if (QuestMenu_GetSetQuestState(questId, FLAG_GET_COMPLETED))
+            gSpecialVar_Result = TRUE;
+        else
+            gSpecialVar_Result = FALSE;
+        break;
+    case QUEST_MENU_BUFFER_QUEST_NAME:
+            QuestMenu_CopyQuestName(gStringVar1, questId);
+        break;
+    case QUEST_MENU_UNCOMPLETE_QUEST:
+            QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_COMPLETED);
+        break;
+    }
+
+    return TRUE;
+}
+
+bool8 ScrCmd_returnqueststate(struct ScriptContext *ctx)
+{
+    u8 questId = VarGet(ScriptReadByte(ctx));
+    gSpecialVar_Result = ReturnQuestState(questId);
+    return FALSE;
+}
+
+bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
+{
+    u8 caseId = ScriptReadByte(ctx);
+    u8 parentId = VarGet(ScriptReadHalfword(ctx));
+    u8 childId = VarGet(ScriptReadHalfword(ctx));
+
+    switch (caseId)
+    {
+        case QUEST_MENU_COMPLETE_QUEST:
+            QuestMenu_GetSetSubquestState(parentId ,FLAG_SET_COMPLETED,childId);
+            break;
+        case QUEST_MENU_CHECK_COMPLETE:
+            if (QuestMenu_GetSetSubquestState(parentId ,FLAG_GET_COMPLETED,childId))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case QUEST_MENU_BUFFER_QUEST_NAME:
+            QuestMenu_CopySubquestName(gStringVar1,parentId,childId);
+            break;
+    }
+
+    return TRUE;
+}
+
+bool8 ScrCmd_setcustomwildmon(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    u8 level = ScriptReadByte(ctx);
+    u16 item = ScriptReadHalfword(ctx);
+    u8 ball = ScriptReadByte(ctx);
+    u8 nature = ScriptReadByte(ctx);
+    u8 abilityNum = ScriptReadByte(ctx);
+    u8 hpEv = ScriptReadByte(ctx);
+    u8 atkEv = ScriptReadByte(ctx);
+    u8 defEv = ScriptReadByte(ctx);
+    u8 speedEv = ScriptReadByte(ctx);
+    u8 spAtkEv = ScriptReadByte(ctx);
+    u8 spDefEv = ScriptReadByte(ctx);
+    u8 hpIv = ScriptReadByte(ctx);
+    u8 atkIv = ScriptReadByte(ctx);
+    u8 defIv = ScriptReadByte(ctx);
+    u8 speedIv = ScriptReadByte(ctx);
+    u8 spAtkIv = ScriptReadByte(ctx);
+    u8 spDefIv = ScriptReadByte(ctx);
+    u16 move1 = ScriptReadHalfword(ctx);
+    u16 move2 = ScriptReadHalfword(ctx);
+    u16 move3 = ScriptReadHalfword(ctx);
+    u16 move4 = ScriptReadHalfword(ctx);
+    bool8 isShiny = ScriptReadByte(ctx);
+
+    u8 evs[NUM_STATS] = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
+    u8 ivs[NUM_STATS] = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
+    u16 moves[4] = {move1, move2, move3, move4};
+
+    gSpecialVar_Result = CreateCustomMon(species, level, item, ball, nature, abilityNum, evs, ivs, moves, isShiny);
+    return FALSE;
+}
+bool8 ScrCmd_givefrontierbattlepoints(struct ScriptContext *ctx)
+{
+    u32 amount = VarGet(ScriptReadWord(ctx));
+    GiveFrontierBattlePoints(amount);
+    return FALSE;
+}
+
+bool8 ScrCmd_bufferpartymonspecies(struct ScriptContext *ctx)
+{
+    u32 stringVarIndex = ScriptReadByte(ctx);
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+    u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
+
+    StringCopy(sScriptStringVars[stringVarIndex], GetSpeciesName(species));
+    return FALSE;
+}
+
+bool8 ScrCmd_bufferabilityname(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    u16 ability = VarGet(ScriptReadHalfword(ctx));
+
+    StringCopy(sScriptStringVars[stringVarIndex], gAbilitiesInfo[ability].name);
+    return FALSE;
+}
+
+bool8 ScrCmd_buffermapname(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    u16 mapId = VarGet(ScriptReadHalfword(ctx));
+    u16 mapGroup = (mapId>> 8) & 0xFF;
+    u16 mapNum = (mapId & 0xFF);
+    u16 mapSecId = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId;
+
+    GetMapName(sScriptStringVars[stringVarIndex], mapSecId, 0);
+    return FALSE;
+}
+// End siliconMerge
+//Start Pokevial Branch
+bool8 ScrCmd_pokevial(struct ScriptContext *ctx)
+{
+    u8 mode = ScriptReadByte(ctx);
+    u8 parameter = ScriptReadByte(ctx);
+    u8 amount = ScriptReadByte(ctx);
+
+    switch (mode) {
+        case VIAL_GET:
+            switch (parameter) {
+                case VIAL_SIZE:
+                    PokevialGetSize();
+                    break;
+                case VIAL_DOSE:
+                    PokevialGetDose();
+                    break;
+            }
+            break;
+
+        case VIAL_UP:
+            switch (parameter) {
+                case VIAL_SIZE:
+                    PokevialSizeUp(amount);
+                    break;
+                case VIAL_DOSE:
+                    PokevialDoseUp(amount);
+                    break;
+            }
+            break;
+
+        case VIAL_DOWN:
+            switch (parameter) {
+                case VIAL_SIZE:
+                    PokevialSizeDown(amount);
+                    break;
+                case VIAL_DOSE:
+                    PokevialDoseDown(amount);
+                    break;
+            }
+            break;
+
+        case VIAL_REFILL:
+            PokevialRefill();
+            break;
+    }
+    return TRUE;
+}
+//End Pokevial Branch
+// Start siliconMerge
+bool8 ScrCmd_toggleflag(struct ScriptContext *ctx)
+{
+    FlagToggle(ScriptReadHalfword(ctx));
+    return FALSE;
+}
+
+bool8 ScrCmd_buzzr(struct ScriptContext *ctx)
+{
+    u8 mode = ScriptReadByte(ctx);
+    u16 tweetId = ScriptReadHalfword(ctx);
+
+    switch(mode){
+        case GET_READ:
+            gSpecialVar_Result = Buzzr_IsTweetRead(tweetId);
+            break;
+        case MARK_READ:
+            Buzzr_MarkTweetAsRead(tweetId);
+            break;
+        case SHOW_TWEET:
+            Buzzr_ShowTweetOverworld(tweetId);
+            break;
+        case HIDE_TWEET:
+            Buzzr_HideTweetOverworld();
+            break;
+        case CHECK_PIC:
+            if (GetPictureTiles(tweetId))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case SHOW_PIC:
+            Buzzr_ShowPicOverworld(VarGet(tweetId));
+            break;
+    }
+    return TRUE;
+}
+// End siliconMerge
+// Start qol_field_moves
+bool8 ScrCmd_checkpartylearnknowsfieldmove(struct ScriptContext *ctx)
+{
+    u16 move = ScriptReadHalfword(ctx);
+
+    PartyHasMonLearnsKnowsFieldMove(move);
+
+    return FALSE;
+}
+// End qol_field_moves
+// Start siliconMerge
+bool8 ScrCmd_glass(struct ScriptContext *ctx)
+{
+    u8 mapId = ScriptReadByte(ctx);
+    u8 state = ScriptReadByte(ctx);
+    u16 *destination = GetVarPointer(ScriptReadHalfword(ctx));
+
+    *destination = Glass_OverworldReturnLocationStat(mapId,state);
+    return FALSE;
+}
+
+bool8 ScrCmd_checktrainerdiscovered(struct ScriptContext *ctx)
+{
+    u32 index = VarGet(ScriptReadHalfword(ctx));
+    gSpecialVar_Result = IsTrainerDiscovered(index);
+    return FALSE;
+}
+
+bool8 ScrCmd_startquestoverworld(struct ScriptContext *ctx)
+{
+    u8 state = ScriptReadByte(ctx);
+    u8 quest = VarGet(ScriptReadByte(ctx));
+
+    if (state == QUEST_MENU_SET_ACTIVE)
+        QuestMenu_ScriptSetActive(quest);
+    else
+        QuestMenu_ScriptSetComplete(quest);
+
+    QuestOverworld(state,quest,FALSE);
+    return FALSE;
+}
+// End siliconMerge
+// Start cueobject
+
+extern const u8 Common_Movement_ExclamationMark[];
+extern const u8 Common_Movement_WalkInPlaceDown[];
+extern const u8 Common_Movement_WalkInPlaceUp[];
+extern const u8 Common_Movement_WalkInPlaceLeft[];
+extern const u8 Common_Movement_WalkInPlaceRight[];
+extern const u8 Common_Movement_QuestionMark[];
+
+static const u8* const sWalkInPlaceScripts[] =
+{
+    [DIR_NONE]      = Common_Movement_ExclamationMark,
+    [DIR_SOUTH]     = Common_Movement_WalkInPlaceDown,
+    [DIR_NORTH]     = Common_Movement_WalkInPlaceUp,
+    [DIR_WEST]      = Common_Movement_WalkInPlaceLeft,
+    [DIR_EAST]      = Common_Movement_WalkInPlaceRight,
+    [DIR_SOUTHWEST] = Common_Movement_QuestionMark,
+    [DIR_SOUTHEAST] = Common_Movement_QuestionMark,
+    [DIR_NORTHWEST] = Common_Movement_QuestionMark,
+    [DIR_NORTHEAST] = Common_Movement_QuestionMark,
+};
+
+// Make an object walk in place and (optionally) wait for movement
+// Used to condense repeated `applymovement, waitmovement 0` use
+bool8 ScrCmd_cueobject(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u16 direction = VarGet(ScriptReadHalfword(ctx));
+    u8 shouldWait = ScriptReadByte(ctx);
+
+    if (direction == DIR_OPPOSITE)
+        direction = GetOppositeDirection(gObjectEvents[0].facingDirection);
+
+    // Cued movements never have to put away the follower pokemon
+    //gObjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;
+    ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, sWalkInPlaceScripts[direction]);
+    sMovingNpcId = localId;
+
+     if (shouldWait)
+     {
+         // waitmovement 0
+        sMovingNpcMapGroup = gSaveBlock1Ptr->location.mapGroup;
+        sMovingNpcMapNum = gSaveBlock1Ptr->location.mapNum;
+        SetupNativeScript(ctx, WaitForMovementFinish);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+// End cueobject
+
+// Start callfunc
+bool8 ScrCmd_callfunc(struct ScriptContext *ctx)
+{
+    u32 func = ScriptReadWord(ctx);
+    u32 argNum = ScriptReadByte(ctx);
+    u16 args[4];
+    u32 i;
+
+    if (argNum <= ARRAY_COUNT(args))
+        for (i = 0; i < argNum; i++)
+            args[i] = VarGet(ScriptReadHalfword(ctx));
+
+    switch (argNum)
+    {
+    case 0:
+        gSpecialVar_Result = ((u32 (*)(void)) func)();
+        break;
+    case 1:
+        gSpecialVar_Result = ((u32 (*)(u16)) func)(args[0]);
+        break;
+    case 2:
+        gSpecialVar_Result = ((u32 (*)(u16, u16)) func)(args[0], args[1]);
+        break;
+    case 3:
+        gSpecialVar_Result = ((u32 (*)(u16, u16, u16)) func)(args[0], args[1], args[2]);
+        break;
+    case 4:
+        gSpecialVar_Result = ((u32 (*)(u16, u16, u16, u16)) func)(args[0], args[1], args[2], args[3]);
+        break;
+    default: // call like ScrCmd
+        return ((ScrCmdFunc) func)(ctx);
+        break;
+    }
+    return FALSE;
+}
+// End callfunc
+// Start siliconMerge
+bool8 ScrCmd_createobject(struct ScriptContext *ctx)
+{
+    u16 graphicsId = ScriptReadHalfword(ctx);
+    u16 movementBehavior = ScriptReadHalfword(ctx);
+    u16 localId = ScriptReadHalfword(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx)) + MAP_OFFSET;
+    u16 y = VarGet(ScriptReadHalfword(ctx)) + MAP_OFFSET;
+    u16 elevation = ScriptReadHalfword(ctx);
+
+    SpawnSpecialObjectEventParameterized(graphicsId, movementBehavior, localId, x, y, elevation);
+    return FALSE;
+}
+
+bool32 ScrCmd_ismonshiny(struct ScriptContext *ctx)
+{
+    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = IsMonShiny(&gPlayerParty[partyIndex]);
+    return FALSE;
+}
+
+bool32 ScrCmd_makequestrewardifsubquestscomplete(struct ScriptContext *ctx)
+{
+    u32 relevantQuest = VarGet(ScriptReadHalfword(ctx));
+    Quest_Generic_MakeQuestRewardIfSubquestsComplete(relevantQuest);
+    return FALSE;
+}
+// End siliconMerge
 void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1);
@@ -3010,6 +3451,43 @@ void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
     sIsScriptedWildDouble = TRUE;
 }
 
+// Start siliconMerge
+void Script_GetOnOffBike(struct ScriptContext *ctx)
+{
+    bool8 musSwap = ScriptReadByte(ctx);
+    u8 bikeTransitionFlags = (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE) ? PLAYER_AVATAR_FLAG_ACRO_BIKE : PLAYER_AVATAR_FLAG_MACH_BIKE;
+
+    if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    {
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
+        if (musSwap)
+        {
+            Overworld_ClearSavedMusic();
+            Overworld_PlaySpecialMapMusic();
+        }
+    }
+    else
+    {
+        SetPlayerAvatarTransitionFlags(bikeTransitionFlags);
+        if (musSwap)
+        {
+            Overworld_SetSavedMusic(GetBikeMusicFromOption());
+            Overworld_ChangeMusicTo(GetBikeMusicFromOption());
+        }
+    }
+}
+
+bool8 ScrCmd_bufferspeciesheight(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    u16 species = VarGet(ScriptReadHalfword(ctx)) & ((1 << 10) - 1); // ignore possible shiny / form bits
+    u32 height = GetSpeciesHeight(species);
+
+    ConvertIntToDecimalStringN(sScriptStringVars[stringVarIndex], height, STR_CONV_MODE_LEFT_ALIGN, CountDigits(height));
+
+    return FALSE;
+}
+// End siliconMerge
 bool8 ScrCmd_removeallitem(struct ScriptContext *ctx)
 {
     u32 itemId = VarGet(ScriptReadHalfword(ctx));
@@ -3020,8 +3498,18 @@ bool8 ScrCmd_removeallitem(struct ScriptContext *ctx)
     gSpecialVar_Result = count;
     RemoveBagItem(itemId, count);
 
+}
+// Start siliconMerge
+
+bool8 Script_Quest_Generic_CountRemainingSubquests(struct ScriptContext *ctx)
+{
+    u32 quest = VarGet(ScriptReadHalfword(ctx));
+    u16 *varPointer = GetVarPointer(ScriptReadHalfword(ctx));
+
+    *varPointer = Quest_Generic_CountRemainingSubquests(quest);
     return FALSE;
 }
+// End siliconMerge
 
 bool8 ScrCmd_getobjectxy(struct ScriptContext *ctx)
 {
@@ -3140,3 +3628,46 @@ void Script_EndTrainerCanSeeIf(struct ScriptContext *ctx)
     if (ctx->breakOnTrainerBattle && sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         StopScript(ctx);
 }
+// Start siliconMerge
+bool8 ScrCmd_variableaddmoney(struct ScriptContext *ctx)
+{
+    u32 amount = VarGet(ScriptReadWord(ctx));
+    u8 ignore = ScriptReadByte(ctx);
+
+    if (!ignore)
+    {
+        Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+        AddMoney(&gSaveBlock1Ptr->money, amount);
+    }
+    return FALSE;
+}
+
+bool8 ScrCmd_variableremovemoney(struct ScriptContext *ctx)
+{
+    u32 amount = VarGet(ScriptReadWord(ctx));
+    u8 ignore = ScriptReadByte(ctx);
+
+    if (!ignore)
+    {
+        Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+        RemoveMoney(&gSaveBlock1Ptr->money, amount);
+    }
+    return FALSE;
+}
+
+bool8 ScrCmd_variablecheckmoney(struct ScriptContext *ctx)
+{
+    u32 amount = VarGet(ScriptReadWord(ctx));
+    u8 ignore = ScriptReadByte(ctx);
+
+    if (!ignore)
+    {
+        Script_RequestEffects(SCREFF_V1);
+
+        gSpecialVar_Result = IsEnoughMoney(&gSaveBlock1Ptr->money, amount);
+    }
+    return FALSE;
+}
+// End siliconMerge

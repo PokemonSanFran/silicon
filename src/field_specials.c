@@ -33,6 +33,7 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "quests.h" // siliconMerge
 #include "random.h"
 #include "rayquaza_scene.h"
 #include "region_map.h"
@@ -64,11 +65,15 @@
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
+#include "constants/quests.h" // siliconMerge
 #include "constants/party_menu.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "palette.h"
+#include "pokemon_storage_system.h" // siliconMerge
+#include "options_visual.h" // siliconMerge
+
 #include "battle_util.h"
 #include "naming_screen.h"
 
@@ -89,6 +94,8 @@ static EWRAM_DATA u8 sSlidingDoorFrame = 0;
 static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
+static EWRAM_DATA u16 sSharpriseSpire_NeverRead = 0; // siliconMerge
+static EWRAM_DATA u16 sSharpriseSpire_DefaultFloorChoice = 0; // siliconMerge
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
 
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
@@ -372,7 +379,10 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 
 bool32 ShouldDoWallyCall(void)
 {
-    if (FlagGet(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL))
+// Start siliconMerge
+    //This function runs after the player has 6 badges and takes 250 steps - this triggers the "A New Strike" cutscene.
+    if (GetNumberOfBadges() > 5 && FlagGet(FLAG_CONSTRUCTION_BREAKING_NEWS))
+// End siliconMerge
     {
         switch (gMapHeader.mapType)
         {
@@ -380,7 +390,7 @@ bool32 ShouldDoWallyCall(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
-            if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
+            if (++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER)) < 250) // siliconMerge
                 return FALSE;
             break;
         default:
@@ -397,7 +407,11 @@ bool32 ShouldDoWallyCall(void)
 
 bool32 ShouldDoScottFortreeCall(void)
 {
-    if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
+// Start siliconMerge
+    //This function runs 10 steps after "You Realize We're Evil" plays
+    if (VarGet(VAR_STORYLINE_STATE) == STORY_POST_YOU_REALIZE_WERE_EVIL && FlagGet(FLAG_KAI_CALL_ARANTRAZ))
+    //if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
+// End siliconMerge
     {
         switch (gMapHeader.mapType)
         {
@@ -405,7 +419,7 @@ bool32 ShouldDoScottFortreeCall(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
-            if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
+            if (++(*GetVarPointer(VAR_KAI_CALL_ARANTRAZ_STEP_COUNTER)) < 10) // siliconMerge
                 return FALSE;
             break;
         default:
@@ -467,7 +481,10 @@ bool32 ShouldDoRoxanneCall(void)
         return FALSE;
     }
 
-    return TRUE;
+    // Start siliconMerge
+	//return TRUE;
+    return FALSE; //PSF Roxanne should never call
+	// End siliconMerge
 }
 
 bool32 ShouldDoRivalRayquazaCall(void)
@@ -1282,6 +1299,30 @@ void IsGrassTypeInParty(void)
     gSpecialVar_Result = FALSE;
 }
 
+// Start siliconMerge
+void IsFireTypeInParty(void)
+{
+    u8 i;
+    u16 species;
+    struct Pokemon *pokemon;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        pokemon = &gPlayerParty[i];
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        {
+            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            if (gSpeciesInfo[species].types[0] == TYPE_FIRE || gSpeciesInfo[species].types[1] == TYPE_FIRE)
+            {
+                gSpecialVar_Result = TRUE;
+                PurgeMonOrBoxMon(TOTAL_BOXES_COUNT,i);
+                return;
+            }
+        }
+    }
+    gSpecialVar_Result = FALSE;
+}
+// End siliconMerge
+
 void SpawnCameraObject(void)
 {
     u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
@@ -1709,6 +1750,21 @@ void OffsetCameraForBattle(void)
     SetCameraPanning(8, 0);
 }
 
+// Start siliconMerge
+void TeleportCamera(void)
+{
+    UpdateSavedPos();
+    MoveCameraAndRedrawMap(gSpecialVar_0x8004 - gSaveBlock1Ptr->pos.x,
+                           gSpecialVar_0x8005 - gSaveBlock1Ptr->pos.y);
+}
+
+void ReturnCameraToPlayer(void)
+{
+    MoveCameraAndRedrawMap(gSaveBlock1Ptr->savedPos.x - gSaveBlock1Ptr->pos.x,
+                           gSaveBlock1Ptr->savedPos.y - gSaveBlock1Ptr->pos.y);
+}
+// End siliconMerge
+
 static const struct WindowTemplate sWindowTemplate_ElevatorFloor =
 {
     .bg = 0,
@@ -1738,6 +1794,24 @@ static const u8 *const sDeptStoreFloorNames[] =
     [DEPT_STORE_FLOORNUM_10F] = gText_10F,
     [DEPT_STORE_FLOORNUM_11F] = gText_11F,
     [DEPT_STORE_FLOORNUM_ROOFTOP] = gText_Rooftop
+}; // siliconMerge
+
+// Start siliconMerge
+const u8 *const gSharpriseSpireFloorNames[] =
+{
+    [DEPT_STORE_FLOORNUM_B4F] = gText_B4F,
+    [SHARPRISESPIRE_FLOORNUM_1F] = gText_1F,
+    [SHARPRISESPIRE_FLOORNUM_2F] = gText_2F,
+    [SHARPRISESPIRE_FLOORNUM_3F] = gText_3F,
+    [SHARPRISESPIRE_FLOORNUM_4F] = gText_4F,
+    [SHARPRISESPIRE_FLOORNUM_5F] = gText_5PF,
+    [SHARPRISESPIRE_FLOORNUM_6F] = gText_6F,
+    [SHARPRISESPIRE_FLOORNUM_7F] = gText_7F,
+    [SHARPRISESPIRE_FLOORNUM_8F] = gText_8F,
+    [SHARPRISESPIRE_FLOORNUM_9F] = gText_9F,
+    [SHARPRISESPIRE_FLOORNUM_10F] = gText_10F,
+    [SHARPRISESPIRE_FLOORNUM_11F] = gText_11F,
+// End siliconMerge
 };
 
 static const u16 sElevatorWindowTiles_Ascending[ELEVATOR_WINDOW_HEIGHT][ELEVATOR_LIGHT_STAGES] =
@@ -1777,6 +1851,86 @@ static const u16 sElevatorWindowTiles_Descending[ELEVATOR_WINDOW_HEIGHT][ELEVATO
         METATILE_BattleFrontier_Elevator_Bottom1
     },
 };
+
+//Start SharpriseSpire Elevator Scripts
+
+void SetSharpriseSpireFloor(void)
+{
+    u8 SharpriseSpireFloor = 0;
+
+/*
+    switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+    {
+        case MAP_NUM(SHARPRISE_SPIRE_1F):
+            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_1F;
+            break;
+        case MAP_NUM(SHARPRISE_SPIRE_2F):
+            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_2F;
+            break;
+        case MAP_NUM(SHARPRISE_SPIRE_5F):
+            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_5F;
+            break;
+        case MAP_NUM(SHARPRISE_SPIRE_10F):
+            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_10F;
+            break;
+        default:
+            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_1F;
+            break;
+    }
+    */
+    VarSet(VAR_DEPT_STORE_FLOOR, SharpriseSpireFloor); //TODO Change VAR_DEPT_STORE_FLOOR to one more suited to PSF
+}
+
+u16 GetTowerFloorDefaultFloorChoice(void)
+{
+    sSharpriseSpire_NeverRead = 0;
+    sSharpriseSpire_DefaultFloorChoice = 0;
+
+    /*
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(SHARPRISE_SPIRE_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+            case MAP_NUM(SHARPRISE_SPIRE_10F):
+                sSharpriseSpire_NeverRead = 0;
+                sSharpriseSpire_DefaultFloorChoice = 0;
+                break;
+            case MAP_NUM(SHARPRISE_SPIRE_5F):
+                sSharpriseSpire_NeverRead = 0;
+                sSharpriseSpire_DefaultFloorChoice = 1;
+                break;
+            case MAP_NUM(SHARPRISE_SPIRE_2F):
+                sSharpriseSpire_NeverRead = 0;
+                sSharpriseSpire_DefaultFloorChoice = 2;
+                break;
+            case MAP_NUM(SHARPRISE_SPIRE_1F):
+                sSharpriseSpire_NeverRead = 0;
+                sSharpriseSpire_DefaultFloorChoice = 3;
+                break;
+        }
+    }
+*/
+
+    return sSharpriseSpire_DefaultFloorChoice;
+}
+
+void ShowSharpriseSpireElevatorFloorSelect(void)
+{
+    int xPos;
+
+    sTutorMoveAndElevatorWindowId = AddWindow(&sWindowTemplate_ElevatorFloor);
+    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
+
+    xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
+
+    xPos = GetStringCenterAlignXOffset(1, gSharpriseSpireFloorNames[gSpecialVar_0x8005], 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gSharpriseSpireFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
+
+    PutWindowTilemap(sTutorMoveAndElevatorWindowId);
+    CopyWindowToVram(sTutorMoveAndElevatorWindowId, 3);
+}
+//End SharpriseSpire Elevator Scripts
 
 void SetDeptStoreFloor(void)
 {
@@ -2951,12 +3105,25 @@ void TakeFrontierBattlePoints(void)
         gSaveBlock2Ptr->frontier.battlePoints -= gSpecialVar_0x8004;
 }
 
-void GiveFrontierBattlePoints(void)
+// Start siliconMerge
+// void GiveFrontierBattlePoints(void)
+void GiveFrontierBattlePoints(u32 amount)
 {
-    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
+    u32 pointsToBeSet = (gSaveBlock2Ptr->frontier.battlePoints + amount);
+
+    if (pointsToBeSet > MAX_BATTLE_FRONTIER_POINTS)
+        pointsToBeSet = MAX_BATTLE_FRONTIER_POINTS;
+
+    gSaveBlock2Ptr->frontier.cardBattlePoints = pointsToBeSet;
+    gSaveBlock2Ptr->frontier.battlePoints = pointsToBeSet;
+	/*
+	    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
         gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
     else
         gSaveBlock2Ptr->frontier.battlePoints = gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004;
+
+	*/
+// End siliconMerge
 }
 
 u16 GetFrontierBattlePoints(void)
@@ -3827,6 +3994,12 @@ void ResetHealLocationFromDewford(void)
         SetLastHealLocationWarp(HEAL_LOCATION_PETALBURG_CITY);
 }
 
+// Start siliconMerge
+void ResetHealLocationToPerlaciaCity(void)
+{
+    SetLastHealLocationWarp(HEAL_LOCATION_PERLACIA_CITY);
+}
+// siliconMerge
 bool8 InPokemonCenter(void)
 {
     static const u16 sPokemonCenters[] =
@@ -4246,6 +4419,217 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
+// Start siliconMerge
+u8 GetNumberOfBadges(void)
+{
+    u8 count = 0;
+
+    const u32 badgeList[] =
+    {
+        FLAG_BADGE01_GET,
+        FLAG_BADGE02_GET,
+        FLAG_BADGE03_GET,
+        FLAG_BADGE04_GET,
+        FLAG_BADGE05_GET,
+        FLAG_BADGE06_GET,
+        FLAG_BADGE07_GET,
+        FLAG_BADGE08_GET,
+        FLAG_SYS_RESTORED_TOWER_GOLD,
+        FLAG_SYS_RESTORED_ARCADE_GOLD,
+        FLAG_SYS_RESTORED_DOJO_GOLD,
+        FLAG_SYS_RESTORED_FACTORY_GOLD,
+    };
+
+    for (u32 badgeIndex = 0; badgeIndex < ARRAY_COUNT(badgeList); badgeIndex++)
+        if (FlagGet(badgeList[badgeIndex]))
+            count++;
+
+    gSpecialVar_Result = count;
+    return count;
+}
+
+#define NUM_ARANTRAZ_TRAINERS 6
+
+u8 CheckNumArantrazExhibitDefeated(void)
+{
+    u32 trainerFlag, count = 0;
+
+    for(trainerFlag = 0; trainerFlag < NUM_ARANTRAZ_TRAINERS; trainerFlag++)
+        if (FlagGet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_A + trainerFlag))
+            count++;
+
+    if (count == NUM_ARANTRAZ_TRAINERS)
+        VarSet(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_FINISH);
+
+    gSpecialVar_Result = count;
+    return count;
+}
+
+void CheckSpecies(void)
+{
+    u8 i;
+    u16 species;
+    struct Pokemon *pokemon;
+    for (i = 0; i < CalculatePlayerPartyCount(); i++)
+    {
+        pokemon = &gPlayerParty[i];
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        {
+            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            if (species == gSpecialVar_0x8005)
+            {
+                gSpecialVar_Result = TRUE;
+                return;
+            }
+            else
+            {
+                gSpecialVar_Result = FALSE;
+            }
+        }
+    }
+}
+
+void DeleteChosenPartyMon(void)
+{
+    struct Pokemon *pokemon = &gPlayerParty[gSpecialVar_0x8004];
+    ZeroMonData(pokemon);
+    CompactPartySlots();
+}
+
+u32 Script_GetGameStat(void)
+{
+    return GetGameStat(gSpecialVar_Result);
+}
+
+bool8 AlohaFromAlolaCheck(void)
+{
+    u8 i, count = 0;
+
+    if (CalculatePlayerPartyCount() == 3)
+    {
+        for (i = 0; i <= 3; i++)
+        {
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+            if ((gSpeciesInfo[species].isAlolanForm)
+             || (gSpeciesInfo[species].isAlolaDex))
+                count++;
+        }
+    }
+
+    return (count == 3) ? TRUE : FALSE;
+}
+
+bool8 Script_CheckForMonAndMove(void)
+{
+    u8 i;
+
+    for (i = 0; i <= CalculatePlayerPartyCount(); i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        if (species == VarGet(VAR_TEMP_1) && MonKnowsMove(&gPlayerParty[i], VarGet(VAR_TEMP_2)))
+        {
+            gSpecialVar_0x8004 = i;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void Script_GetCurrentMapName(void)
+{
+    GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
+}
+
+void CopyMonToStolenTradeStorage(void)
+{
+    CopyMon(&gSaveBlock1Ptr->stolenTrade, &gPlayerParty[gSpecialVar_0x8004], sizeof(struct Pokemon));
+}
+
+void CopyMonFromStolenTradeStorage(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE
+         && GetMonData(&gSaveBlock1Ptr->stolenTrade, MON_DATA_SPECIES) != SPECIES_NONE)
+        {
+            CopyMon(&gPlayerParty[i], &gSaveBlock1Ptr->stolenTrade, sizeof(struct Pokemon));
+            memset(&gSaveBlock1Ptr->stolenTrade, 0, sizeof(gSaveBlock1Ptr->stolenTrade));
+            break;
+        }
+    }
+}
+
+void RandomlyBoostPartyMemberFriendship(void)
+{
+    u32 party[PARTY_SIZE];
+    struct Pokemon *pokemon;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+        party[i] = i;
+
+    Shuffle(party, PARTY_SIZE, sizeof(party[0]));
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        pokemon = &gPlayerParty[party[i]];
+        if (!GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES))
+            continue;
+
+        if (GetMonData(pokemon, MON_DATA_IS_EGG))
+            continue;
+
+        if (GetMonData(pokemon,MON_DATA_FRIENDSHIP) >= MAX_FRIENDSHIP)
+            continue;
+
+        AdjustFriendship(pokemon, FRIENDSHIP_EVENT_MUTUAL_AID);
+    }
+}
+
+bool8 CheckPartyHasOneMon(void)
+{
+    u8 count = 0;
+
+    count = CalculatePlayerPartyCount();
+    return (count == 1) ? TRUE : FALSE;
+}
+
+u8 ConvertChallengeTurnsToRank(void)
+{
+    u8 numChallengeTurns = VarGet(VAR_QUEST_CHALLENGEOFTHE7SISTERS_CURRENT_RECORD);
+    u8 challengeRank = 0;
+
+    if (numChallengeTurns < 8){
+        challengeRank = 0;
+    }
+    if (numChallengeTurns > 7){
+        challengeRank = 1;
+    }
+    if (numChallengeTurns > 14){
+        challengeRank = 2;
+    }
+    if (numChallengeTurns > 21){
+        challengeRank = 3;
+    }
+    if (numChallengeTurns > 28){
+        challengeRank = 4;
+    }
+    if (numChallengeTurns > 35){
+        challengeRank = 5;
+    }
+    if (numChallengeTurns > 42){
+        challengeRank = 6;
+    }
+
+    if (FlagGet(FLAG_TEMP_1)){
+        challengeRank = 7;
+    }
+
+    return challengeRank;
+}
+// End siliconMerge
 void TrySkyBattle(void)
 {
     int i;

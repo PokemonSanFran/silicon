@@ -218,7 +218,10 @@ void DrawDoorMetatileAt(int x, int y, u16 *tiles)
 
     if (offset >= 0)
     {
-        DrawMetatile(METATILE_LAYER_TYPE_COVERED, tiles, offset);
+        // Start siliconMerge
+		DrawMetatile(0xFF, tiles, offset);
+		// DrawMetatile(METATILE_LAYER_TYPE_COVERED, tiles, offset);
+		// End siliconMerge
         sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
@@ -244,41 +247,50 @@ static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x,
 
 static void DrawMetatile(s32 metatileLayerType, const u16 *tiles, u16 offset)
 {
-    switch (metatileLayerType)
+    // Start siliconMerge
+	if (metatileLayerType == 0xFF) 
+	    //switch (metatileLayerType)
+		// case METATILE_LAYER_TYPE_SPLIT:
+	// End siliconMerge	
     {
-    case METATILE_LAYER_TYPE_SPLIT:
+        // A door metatile shall be drawn, we use covered behavior // siliconMerge
         // Draw metatile's bottom layer to the bottom background layer.
         gOverworldTilemapBuffer_Bg3[offset] = tiles[0];
         gOverworldTilemapBuffer_Bg3[offset + 1] = tiles[1];
         gOverworldTilemapBuffer_Bg3[offset + 0x20] = tiles[2];
         gOverworldTilemapBuffer_Bg3[offset + 0x21] = tiles[3];
 
-        // Draw transparent tiles to the middle background layer.
+        // Draw transparent tiles to the top background layer. // siliconMerge
         gOverworldTilemapBuffer_Bg2[offset] = 0;
         gOverworldTilemapBuffer_Bg2[offset + 1] = 0;
         gOverworldTilemapBuffer_Bg2[offset + 0x20] = 0;
         gOverworldTilemapBuffer_Bg2[offset + 0x21] = 0;
 
-        // Draw metatile's top layer to the top background layer.
+        // Draw metatile's top layer to the middle background layer. // siliconMerge
         gOverworldTilemapBuffer_Bg1[offset] = tiles[4];
         gOverworldTilemapBuffer_Bg1[offset + 1] = tiles[5];
         gOverworldTilemapBuffer_Bg1[offset + 0x20] = tiles[6];
         gOverworldTilemapBuffer_Bg1[offset + 0x21] = tiles[7];
-        break;
-    case METATILE_LAYER_TYPE_COVERED:
+// Start siliconMerge
+    }
+    else
+    {
+// Ed siliconMerge
         // Draw metatile's bottom layer to the bottom background layer.
         gOverworldTilemapBuffer_Bg3[offset] = tiles[0];
         gOverworldTilemapBuffer_Bg3[offset + 1] = tiles[1];
         gOverworldTilemapBuffer_Bg3[offset + 0x20] = tiles[2];
         gOverworldTilemapBuffer_Bg3[offset + 0x21] = tiles[3];
 
-        // Draw metatile's top layer to the middle background layer.
+        // Draw metatile's middle layer to the middle background layer. // siliconMerge
         gOverworldTilemapBuffer_Bg2[offset] = tiles[4];
         gOverworldTilemapBuffer_Bg2[offset + 1] = tiles[5];
         gOverworldTilemapBuffer_Bg2[offset + 0x20] = tiles[6];
         gOverworldTilemapBuffer_Bg2[offset + 0x21] = tiles[7];
 
-        // Draw transparent tiles to the top background layer.
+        // Start siliconMerge
+		/*
+		// Draw transparent tiles to the top background layer.
         gOverworldTilemapBuffer_Bg1[offset] = 0;
         gOverworldTilemapBuffer_Bg1[offset + 1] = 0;
         gOverworldTilemapBuffer_Bg1[offset + 0x20] = 0;
@@ -297,12 +309,20 @@ static void DrawMetatile(s32 metatileLayerType, const u16 *tiles, u16 offset)
         gOverworldTilemapBuffer_Bg2[offset + 0x20] = tiles[2];
         gOverworldTilemapBuffer_Bg2[offset + 0x21] = tiles[3];
 
-        // Draw metatile's top layer to the top background layer, which covers object event sprites.
         gOverworldTilemapBuffer_Bg1[offset] = tiles[4];
         gOverworldTilemapBuffer_Bg1[offset + 1] = tiles[5];
         gOverworldTilemapBuffer_Bg1[offset + 0x20] = tiles[6];
         gOverworldTilemapBuffer_Bg1[offset + 0x21] = tiles[7];
         break;
+		*/
+		// End siliconMerge
+        // Draw metatile's top layer to the top background layer, which covers object event sprites.
+		// Start siliconMerge
+        gOverworldTilemapBuffer_Bg1[offset] = tiles[8];
+        gOverworldTilemapBuffer_Bg1[offset + 1] = tiles[9];
+        gOverworldTilemapBuffer_Bg1[offset + 0x20] = tiles[10];
+        gOverworldTilemapBuffer_Bg1[offset + 0x21] = tiles[11];
+		// End siliconMerge
     }
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
@@ -425,7 +445,10 @@ void CameraUpdate(void)
     gTotalCameraPixelOffsetY -= movementSpeedY;
 }
 
-void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
+// Start siliconMerge
+//void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
+void MoveCameraAndRedrawMap(int deltaX, int deltaY)
+// End siliconMerge
 {
     CameraMove(deltaX, deltaY);
     UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
@@ -434,6 +457,13 @@ void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
     gTotalCameraPixelOffsetY -= deltaY * 16;
 }
 
+// siliconMerge
+void UpdateSavedPos(void)
+{
+    gSaveBlock1Ptr->savedPos.x = gSaveBlock1Ptr->pos.x;
+    gSaveBlock1Ptr->savedPos.y = gSaveBlock1Ptr->pos.y;
+}
+// siliconMerge
 void SetCameraPanningCallback(void (*callback)(void))
 {
     sFieldCameraPanningCallback = callback;

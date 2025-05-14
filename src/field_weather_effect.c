@@ -13,6 +13,12 @@
 #include "task.h"
 #include "trig.h"
 #include "gpu_regs.h"
+// start mapPreviews
+#include "map_preview_screen.h"
+// end mapPreviews
+// start autoWater
+#include "berry.h"
+// end autoWater
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
 
@@ -153,7 +159,10 @@ void Sunny_InitVars(void)
 {
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 20;
-    Weather_SetBlendCoeffs(8, 12);
+    // start mapPreviews
+    if (!IsMapPreviewTypeFadeIn(gMapHeader.regionMapSectionId))
+        Weather_SetBlendCoeffs(8, 12); // Indoor shadows
+    // end mapPreviews
 }
 
 void Sunny_InitAll(void)
@@ -2496,6 +2505,7 @@ void SetWeather(u32 weather)
 {
     SetSavedWeather(weather);
     SetNextWeather(GetSavedWeather());
+    WaterBerriesIfRaining(); // autoWater
 }
 
 void SetWeather_Unused(u32 weather)

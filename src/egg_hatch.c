@@ -37,6 +37,8 @@
 #include "battle.h" // to get rid of later
 #include "constants/rgb.h"
 #include "party_menu.h"
+#include "color_variation.h" // colorVariation
+#include "siliconDaycare.h" // siliconDaycare
 
 #define GFXTAG_EGG       12345
 #define GFXTAG_EGG_SHARD 23456
@@ -310,7 +312,10 @@ static const s16 sEggShardVelocities[][2] =
     {Q_8_8(2.5),        Q_8_8(-7.5)},
 };
 
-static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
+// Start siliconDaycare
+//static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
+void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
+// End siliconDaycare
 {
     u16 species;
     u32 personality, pokerus;
@@ -344,6 +349,8 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 
     for (i = 0; i < NUM_STATS; i++)
         SetMonData(temp, MON_DATA_HP_IV + i,  &ivs[i]);
+
+    ApplyEffortValuePerk(egg,temp); // siliconDaycare
 
     language = GAME_LANGUAGE;
     SetMonData(temp, MON_DATA_LANGUAGE, &language);
@@ -448,7 +455,10 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesL
             HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->spritesGfx[(useAlt * 2) + B_POSITION_OPPONENT_LEFT],
                                      species, pid);
-            LoadCompressedSpritePaletteWithTag(GetMonFrontSpritePal(mon), species);
+            // Start colorVariation
+            //LoadCompressedSpritePaletteWithTag(GetMonFrontSpritePal(mon), species);
+            LoadCompressedUniqueSpritePaletteWithTag(GetMonFrontSpritePal(mon),species,&mon->box);
+            // End colorVariation
             *speciesLoc = species;
         }
         break;

@@ -91,6 +91,24 @@ static const struct SpriteTemplate sSpriteTemplate_SwapLine =
 };
 
 // code
+// Start siliconMerge
+void ResetAllBgsCoordinatesAndBgCntRegs(void)
+{
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_BG3CNT, 0);
+    SetGpuReg(REG_OFFSET_BG2CNT, 0);
+    SetGpuReg(REG_OFFSET_BG1CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+}
+// End siliconMerge
 void ResetVramOamAndBgCntRegs(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
@@ -251,7 +269,10 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
 
 u8 GetLRKeysPressed(void)
 {
-    if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+    // Start siliconMerge
+	if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+    //if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+	// End siliconMerge
     {
         if (JOY_NEW(L_BUTTON))
             return MENU_L_PRESSED;
@@ -264,7 +285,10 @@ u8 GetLRKeysPressed(void)
 
 u8 GetLRKeysPressedAndHeld(void)
 {
-    if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+    // Start siliconMerge
+	if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+	//if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+	// End siliconMerge
     {
         if (JOY_REPEAT(L_BUTTON))
             return MENU_L_PRESSED;

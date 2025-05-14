@@ -356,8 +356,12 @@ bool32 MoveRecordedBattleToSaveData(void)
     battleSave->lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleSave->frontierFacility = sFrontierFacility;
     battleSave->frontierBrainSymbol = sFrontierBrainSymbol;
-    battleSave->battleScene = gSaveBlock2Ptr->optionsBattleSceneOff;
-    battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
+    // Start siliconMerge
+	battleSave->battleScene = gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS];
+    //battleSave->battleScene = gSaveBlock2Ptr->optionsBattleSceneOff;
+    battleSave->textSpeed = gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED];
+    //battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
+	// End siliconMerge
     battleSave->AI_scripts = sAI_Scripts;
 
     if (TRAINER_BATTLE_PARAM.opponentA >= TRAINER_RECORD_MIXING_FRIEND && TRAINER_BATTLE_PARAM.opponentA < TRAINER_RECORD_MIXING_APPRENTICE)

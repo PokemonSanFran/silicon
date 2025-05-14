@@ -29,6 +29,7 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "options_visual.h" // siliconMerge
 
 enum
 {
@@ -71,6 +72,8 @@ enum
     SEARCH_TOPBAR_COUNT
 };
 
+// Start pokedex
+/*
 enum
 {
    ORDER_NUMERICAL,
@@ -80,6 +83,8 @@ enum
    ORDER_TALLEST,
    ORDER_SMALLEST
 };
+*/
+// End pokedex
 
 enum
 {
@@ -1869,7 +1874,10 @@ static void Task_ClosePokedex(u8 taskId)
         ClearMonSprites();
         FreeWindowAndBgBuffers();
         DestroyTask(taskId);
-        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+        // Start siliconMerge
+		SetMainCallback2(CB2_ReturnToUIMenu);
+        //SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+		// End siliconMerge
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         Free(sPokedexView);
     }
@@ -3469,7 +3477,10 @@ static void Task_HandleInfoScreenInput(u8 taskId)
         return;
     }
     if ((JOY_NEW(DPAD_LEFT)
-     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            // Start pokedex
+     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+//     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+		    // End pokedex
      && sPokedexView->selectedScreen > 0)
     {
         sPokedexView->selectedScreen--;
@@ -3478,7 +3489,10 @@ static void Task_HandleInfoScreenInput(u8 taskId)
         return;
     }
     if ((JOY_NEW(DPAD_RIGHT)
-     || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            // Start pokedex
+     || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+//	      || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+		    // End pokedex
      && sPokedexView->selectedScreen < CANCEL_SCREEN)
     {
         sPokedexView->selectedScreen++;
@@ -3716,7 +3730,10 @@ static void Task_HandleCryScreenInput(u8 taskId)
             return;
         }
         if (JOY_NEW(DPAD_LEFT)
-         || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+             // Start pokedex
+		         || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+//         || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+		    // End pokedex
         {
             BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 0x10, RGB_BLACK);
             m4aMPlayContinue(&gMPlayInfo_BGM);
@@ -3726,7 +3743,10 @@ static void Task_HandleCryScreenInput(u8 taskId)
             return;
         }
         if (JOY_NEW(DPAD_RIGHT)
-         || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            // Start pokedex
+         || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+//         || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+		    // End pokedex		 
         {
             if (!sPokedexListItem->owned)
             {
@@ -3886,7 +3906,10 @@ static void Task_HandleSizeScreenInput(u8 taskId)
         PlaySE(SE_PC_OFF);
     }
     else if (JOY_NEW(DPAD_LEFT)
-     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            // Start pokedex
+     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+//	      || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+		    // End pokedex
     {
         BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 0x10, RGB_BLACK);
         sPokedexView->screenSwitchState = 2;
@@ -4250,7 +4273,10 @@ static void PrintUnknownMonMeasurements(void)
 
 static u8* GetUnknownMonHeightString(void)
 {
-    if (UNITS == UNITS_IMPERIAL)
+    // start silicon
+    //if (UNITS == UNITS_IMPERIAL)
+    if (IsMeasurementSystemImperial())
+    // End silicon
         return ReplaceDecimalSeparator(gText_UnkHeight);
     else
         return ReplaceDecimalSeparator(gText_UnkHeightMetric);
@@ -4258,7 +4284,10 @@ static u8* GetUnknownMonHeightString(void)
 
 static u8* GetUnknownMonWeightString(void)
 {
-    if (UNITS == UNITS_IMPERIAL)
+    // start silicon
+    //if (UNITS == UNITS_IMPERIAL)
+    if (IsMeasurementSystemImperial())
+    // End silicon
         return ReplaceDecimalSeparator(gText_UnkWeight);
     else
         return ReplaceDecimalSeparator(gText_UnkWeightMetric);
@@ -4278,7 +4307,10 @@ static u8* ReplaceDecimalSeparator(const u8* originalString)
             continue;
         }
 
-        modifiedString[i] = CHAR_DEC_SEPARATOR;
+            // Start pokedex
+		//modifiedString[i] = CHAR_DEC_SEPARATOR;
+        modifiedString[i] = GetDecimalSeparatorChar();
+		    // End pokedex
         replaced = TRUE;
     }
     modifiedString[length] = EOS;
@@ -4307,8 +4339,11 @@ static void PrintOwnedMonHeight(u16 species)
 
 u8* ConvertMonHeightToString(u32 height)
 {
-    if (UNITS == UNITS_IMPERIAL)
+    // start silicon
+    //if (UNITS == UNITS_IMPERIAL)
+    if (IsMeasurementSystemImperial())
         return ConvertMonHeightToImperialString(height);
+    // End silicon
     else
         return ConvertMonHeightToMetricString(height);
 }
@@ -4328,7 +4363,10 @@ static void PrintOwnedMonWeight(u16 species)
 
 u8* ConvertMonWeightToString(u32 weight)
 {
-    if (UNITS == UNITS_IMPERIAL)
+    // start silicon
+    //if (UNITS == UNITS_IMPERIAL)
+    if (IsMeasurementSystemImperial())
+    // End silicon
         return ConvertMonWeightToImperialString(weight);
     else
         return ConvertMonWeightToMetricString(weight);
@@ -4345,11 +4383,22 @@ static u8* ConvertMonHeightToImperialString(u32 height)
     feet = inches / INCHES_IN_FOOT_FACTOR;
     inches = (inches - (feet * INCHES_IN_FOOT_FACTOR)) / 10;
 
-    heightString[index++] = EXT_CTRL_CODE_BEGIN;
-    heightString[index++] = EXT_CTRL_CODE_CLEAR_TO;
+    // Start pokedex
+    //heightString[index++] = EXT_CTRL_CODE_BEGIN;
+    //heightString[index++] = EXT_CTRL_CODE_CLEAR_TO;
+    if (!FlagGet(FLAG_SCRIPT_USE))
+    {
+        heightString[index++] = EXT_CTRL_CODE_BEGIN;
+        heightString[index++] = EXT_CTRL_CODE_CLEAR_TO;
+    }
+    // end pokedex
     if (feet / 10 == 0)
     {
-        heightString[index++] = INCHES_IN_ONE_AND_HALF_FOOT;
+    // Start pokedex
+        //heightString[index++] = INCHES_IN_ONE_AND_HALF_FOOT;
+        if (!FlagGet(FLAG_SCRIPT_USE))
+            heightString[index++] = INCHES_IN_ONE_AND_HALF_FOOT;
+    // end pokedex
         heightString[index++] = feet + CHAR_0;
     }
     else
@@ -4362,7 +4411,10 @@ static u8* ConvertMonHeightToImperialString(u32 height)
     heightString[index++] = (inches / 10) + CHAR_0;
     heightString[index++] = (inches % 10) + CHAR_0;
     heightString[index++] = CHAR_DBL_QUOTE_RIGHT;
-    heightString[index++] = EOS;
+    // Start pokedex
+    //heightString[index++] = EOS;
+    heightString[index] = EOS;
+    // End pokedex
 
     return heightString;
 }
@@ -4388,7 +4440,10 @@ static u8* ConvertMonWeightToImperialString(u32 weight)
 
     if ((weightString[index] = (lbs / 100000) + CHAR_0) == CHAR_0 && !output)
     {
-        weightString[index++] = CHAR_SPACER;
+            // Start pokedex
+		if (!FlagGet(FLAG_SCRIPT_USE))
+            weightString[index++] = CHAR_SPACER;
+			    // end pokedex
     }
     else
     {
@@ -4399,7 +4454,10 @@ static u8* ConvertMonWeightToImperialString(u32 weight)
     lbs %= 100000;
     if ((weightString[index] = (lbs / 10000) + CHAR_0) == CHAR_0 && !output)
     {
-        weightString[index++] = CHAR_SPACER;
+           // Start pokedex
+		 if (!FlagGet(FLAG_SCRIPT_USE))
+            weightString[index++] = CHAR_SPACER;
+			    // end pokedex
     }
     else
     {
@@ -4410,7 +4468,10 @@ static u8* ConvertMonWeightToImperialString(u32 weight)
     lbs %= 10000;
     if ((weightString[index] = (lbs / 1000) + CHAR_0) == CHAR_0 && !output)
     {
-        weightString[index++] = CHAR_SPACER;
+          // Start pokedex
+		  if (!FlagGet(FLAG_SCRIPT_USE))
+            weightString[index++] = CHAR_SPACER;
+			    // end pokedex
     }
     else
     {
@@ -4421,7 +4482,10 @@ static u8* ConvertMonWeightToImperialString(u32 weight)
     lbs %= 1000;
     weightString[index++] = (lbs / 100) + CHAR_0;
     lbs %= 100;
-    weightString[index++] = CHAR_DEC_SEPARATOR;
+      // Start pokedex
+	  //weightString[index++] = CHAR_DEC_SEPARATOR;
+    weightString[index++] = GetDecimalSeparatorChar();
+	    // end pokedex
     weightString[index++] = (lbs / 10) + CHAR_0;
     weightString[index++] = CHAR_SPACE;
     weightString[index++] = CHAR_l;
@@ -4454,7 +4518,10 @@ static u8* ConvertMeasurementToMetricString(u32 num, u32* index)
     result = num / 1000;
     if (result == 0)
     {
-        string[(*index)++] = CHAR_SPACER;
+            // Start pokedex
+		if (!FlagGet(FLAG_SCRIPT_USE))
+            string[(*index)++] = CHAR_SPACER;
+			    // end pokedex
         outputted = FALSE;
     }
     else
@@ -4466,7 +4533,10 @@ static u8* ConvertMeasurementToMetricString(u32 num, u32* index)
     result = (num % 1000) / 100;
     if (result == 0 && !outputted)
     {
-        string[(*index)++] = CHAR_SPACER;
+            // Start pokedex
+		if (!FlagGet(FLAG_SCRIPT_USE))
+            string[(*index)++] = CHAR_SPACER;
+			    // end pokedex
         outputted = FALSE;
     }
     else
@@ -4476,7 +4546,10 @@ static u8* ConvertMeasurementToMetricString(u32 num, u32* index)
     }
 
     string[(*index)++] = CHAR_0 + ((num % 1000) % 100) / 10;
-    string[(*index)++] = CHAR_DEC_SEPARATOR;
+        // Start pokedex
+	//string[(*index)++] = CHAR_DEC_SEPARATOR;
+    string[(*index)++] = GetDecimalSeparatorChar();
+	    // end pokedex
     string[(*index)++] = CHAR_0 + ((num % 1000) % 100) % 10;
     string[(*index)++] = CHAR_SPACE;
 
@@ -4732,7 +4805,10 @@ static void UNUSED PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
     result = num / 1000;
     if (result == 0)
     {
-        str[0] = CHAR_SPACER;
+            // Start pokedex
+		if (!FlagGet(FLAG_SCRIPT_USE))
+            str[0] = CHAR_SPACER;
+			    // end pokedex
         outputted = FALSE;
     }
     else
@@ -4744,7 +4820,10 @@ static void UNUSED PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
     result = (num % 1000) / 100;
     if (result == 0 && !outputted)
     {
-        str[1] = CHAR_SPACER;
+            // Start pokedex
+		if (!FlagGet(FLAG_SCRIPT_USE))
+            str[1] = CHAR_SPACER;
+			    // end pokedex
         outputted = FALSE;
     }
     else
@@ -4754,7 +4833,10 @@ static void UNUSED PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
     }
 
     str[2] = CHAR_0 + ((num % 1000) % 100) / 10;
-    str[3] = CHAR_DEC_SEPARATOR;
+        // Start pokedex
+	//str[3] = CHAR_DEC_SEPARATOR;
+    str[3] = GetDecimalSeparatorChar();
+	    // end pokedex
     str[4] = CHAR_0 + ((num % 1000) % 100) % 10;
     str[5] = EOS;
     PrintInfoSubMenuText(windowId, str, left, top);
@@ -4762,9 +4844,9 @@ static void UNUSED PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
 
 // The footprints are drawn on WIN_FOOTPRINT, which uses BG palette 15 (loaded with graphics/text_window/message_box.gbapal)
 // The footprint pixels are stored as 1BPP, and set to the below color index in this palette when converted to 4BPP.
-#define FOOTPRINT_COLOR_IDX  2
+//#define FOOTPRINT_COLOR_IDX  2 // pokedex
 
-#define NUM_FOOTPRINT_TILES  4
+//#define NUM_FOOTPRINT_TILES  4 // pokedex
 
 void DrawFootprint(u8 windowId, u16 species)
 {

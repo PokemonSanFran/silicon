@@ -51,6 +51,7 @@
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "options_battle.h" // siliconMerge
 
 #define TAG_POCKET_SCROLL_ARROW 110
 #define TAG_BAG_SCROLL_ARROW    111
@@ -138,7 +139,7 @@ static void PrepareTMHMMoveWindow(void);
 static bool8 IsWallysBag(void);
 static void Task_WallyTutorialBagMenu(u8);
 static void Task_BagMenu_HandleInput(u8);
-static void GetItemName(u8 *, u16);
+//static void GetItemName(u8 *, u16); // pokedex
 static void PrintItemDescription(int);
 static void BagMenu_PrintCursorAtPos(u8, u8);
 static void BagMenu_Print(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
@@ -568,7 +569,10 @@ void ResetBagScrollPositions(void)
 
 void CB2_BagMenuFromStartMenu(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFieldWithOpenMenu);
+    // Start siliconMerge
+	GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToUIMenu);
+	//GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFieldWithOpenMenu);
+	// End siliconMerge
 }
 
 void CB2_BagMenuFromBattle(void)
@@ -909,7 +913,10 @@ static void LoadBagItemListBuffers(u8 pocketId)
     gMultiuseListMenuTemplate.maxShowed = gBagMenu->numShownItems[pocketId];
 }
 
-static void GetItemName(u8 *dest, u16 itemId)
+// Start pokedex
+//static void GetItemName(u8 *dest, u16 itemId)
+void GetItemName(u8 *dest, u16 itemId)
+// End pokedex
 {
     u8 *end;
     switch (gBagPosition.pocket)
@@ -926,7 +933,7 @@ static void GetItemName(u8 *dest, u16 itemId)
         else
         {
             // Get TM number
-            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 3); // PSF technicalmachine Branch
             StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         }
         break;
@@ -1816,7 +1823,15 @@ static void ItemMenu_UseOutOfBattle(u8 taskId)
     if (ItemId_GetFieldFunc(gSpecialVar_ItemId))
     {
         RemoveContextWindow();
-        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU)
+        // Start siliconMerge
+		if (!IsPlayerAllowedToUseHealingItems(gSpecialVar_ItemId, TRUE, FALSE, TRUE))
+        {
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_ThisItemCannotBeUsed, HandleErrorMessage);
+        }
+        else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU)
+		//if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU)
+		// End siliconMerge
+
         {
             PrintThereIsNoPokemon(taskId);
         }
@@ -2020,6 +2035,15 @@ static void ItemMenu_UseInBattle(u8 taskId)
     u16 type = ItemId_GetType(gSpecialVar_ItemId);
     if (!ItemId_GetBattleUsage(gSpecialVar_ItemId))
         return;
+
+    // Start siliconMerge
+	if (!CanUseBagItems(gSpecialVar_ItemId) || !IsPlayerAllowedToUseHealingItems(gSpecialVar_ItemId, FALSE, TRUE, FALSE))
+    {
+        RemoveContextWindow();
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_ThisItemCannotBeUsed, HandleErrorMessage);
+        return;
+    }
+	// End siliconMerge
 
     RemoveContextWindow();
     if (type == ITEM_USE_BAG_MENU)

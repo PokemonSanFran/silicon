@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "caps.h"
 #include "pokemon.h"
+#include "options_battle.h" // siliconMerge
 
 
 u32 GetCurrentLevelCap(void)
@@ -32,7 +33,10 @@ u32 GetCurrentLevelCap(void)
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {
-        return VarGet(B_LEVEL_CAP_VARIABLE);
+         // Start siliconMerge
+		//return VarGet(B_LEVEL_CAP_VARIABLE);
+        return GetCurrentPSFLevelCap();
+		 // End siliconMerge
     }
 
     return MAX_LEVEL;
@@ -44,7 +48,10 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
     static const u32 sExpScalingUp[5]   = { 16, 8, 4, 2, 1 };
 
     u32 levelDifference;
-    u32 currentLevelCap = GetCurrentLevelCap();
+     // Start siliconMerge
+	//u32 currentLevelCap = GetCurrentLevelCap();
+    u32 currentLevelCap = GetCurrentPSFLevelCap();
+	 // End siliconMerge
 
     if (B_EXP_CAP_TYPE == EXP_CAP_NONE)
         return expValue;
@@ -76,6 +83,12 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
         else
             return expValue / sExpScalingDown[levelDifference];
     }
+    // Start siliconMerge
+	else if (level < currentLevelCap)
+    {
+        return expValue;
+    }
+	// End siliconMerge
     else
     {
        return expValue;

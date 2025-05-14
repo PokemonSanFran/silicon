@@ -418,3 +418,12 @@ void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool32 is24
     *txtPtr++ = EOS;
     *txtPtr = EOS;
 }
+// Start pokedex
+const u8 *const gTimeName[] =
+{
+    [TIME_MORNING] = COMPOUND_STRING("Morning"),
+    [TIME_DAY] = COMPOUND_STRING("Day"),
+    [TIME_EVENING] = COMPOUND_STRING("Evening"),
+    [TIME_NIGHT] = COMPOUND_STRING("Night"),
+};
+// End pokedex

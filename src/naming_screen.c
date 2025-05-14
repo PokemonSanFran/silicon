@@ -29,6 +29,7 @@
 #include "main.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
+#include "main_menu.h" // bootSequence
 
 enum {
     INPUT_NONE,
@@ -408,7 +409,10 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
         sNamingScreen->destBuffer = destBuffer;
         sNamingScreen->returnCallback = returnCallback;
 
-        if (templateNum == NAMING_SCREEN_PLAYER)
+        // Start playerCustom
+        // if (templateNum == NAMING_SCREEN_PLAYER)
+        if (templateNum == NAMING_SCREEN_PLAYER || templateNum == NAMING_SCREEN_SUBJECT_PRONOUN || templateNum == NAMING_SCREEN_OBJECT_PRONOUN || templateNum == NAMING_SCREEN_POSSESIVE_PRONOUN)
+        // End playerCustom
             StartTimer1();
 
         SetMainCallback2(CB2_LoadNamingScreen);
@@ -1393,8 +1397,11 @@ static void NamingScreen_CreatePlayerIcon(void)
 {
     u16 rivalGfxId;
     u8 spriteId;
-
-    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, sNamingScreen->monSpecies);
+    // Start playerCustom
+    u8 bodyType = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
+    rivalGfxId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL,bodyType);
+    //rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, sNamingScreen->monSpecies);
+    // End playerCustom
     spriteId = CreateObjectGraphicsSprite(rivalGfxId, SpriteCallbackDummy, 56, 37, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
@@ -1748,6 +1755,11 @@ static void (*const sDrawTextEntryBoxFuncs[])(void) =
     [NAMING_SCREEN_NICKNAME]   = DrawMonTextEntryBox,
     [NAMING_SCREEN_WALDA]      = DrawNormalTextEntryBox,
     [NAMING_SCREEN_CODE]       = DrawNormalTextEntryBox,
+    // Start playerCustom
+    [NAMING_SCREEN_SUBJECT_PRONOUN]     = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_OBJECT_PRONOUN]     = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_POSSESIVE_PRONOUN]     = DrawNormalTextEntryBox,
+    // End playerCustom
 };
 
 static void DrawTextEntryBox(void)
@@ -2162,6 +2174,37 @@ static const struct NamingScreenTemplate sCodeScreenTemplate =
     .title = sText_EnterCode,
 };
 
+// Start playerCustom
+static const struct NamingScreenTemplate sSubjectPronounScreenTemplate =
+{
+    .copyExistingString = FALSE,
+    .maxChars = PLAYER_NAME_LENGTH,
+    .iconFunction = 1,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .title = COMPOUND_STRING("Your Subject Pronoun?"),
+};
+
+static const struct NamingScreenTemplate sObjectPronounScreenTemplate =
+{
+    .copyExistingString = FALSE,
+    .maxChars = PLAYER_NAME_LENGTH,
+    .iconFunction = 1,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .title = COMPOUND_STRING("Your Object Pronoun?"),
+};
+
+static const struct NamingScreenTemplate sPossessivePronounScreenTemplate =
+{
+    .copyExistingString = FALSE,
+    .maxChars = PLAYER_NAME_LENGTH,
+    .iconFunction = 1,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .title = COMPOUND_STRING("Your Possessive Pronoun?"),
+};
+// End playerCustom
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 {
     [NAMING_SCREEN_PLAYER]     = &sPlayerNamingScreenTemplate,
@@ -2170,6 +2213,11 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
     [NAMING_SCREEN_NICKNAME]   = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_WALDA]      = &sWaldaWordsScreenTemplate,
     [NAMING_SCREEN_CODE]       = &sCodeScreenTemplate,
+    // Start playerCustom
+    [NAMING_SCREEN_SUBJECT_PRONOUN]     = &sSubjectPronounScreenTemplate,
+    [NAMING_SCREEN_OBJECT_PRONOUN]     = &sObjectPronounScreenTemplate,
+    [NAMING_SCREEN_POSSESIVE_PRONOUN]     = &sPossessivePronounScreenTemplate,
+    // End playerCustom
 };
 
 static const struct OamData sOam_8x8 =
@@ -2620,4 +2668,23 @@ static const struct SpritePalette sSpritePalettes[] =
     {}
 };
 
+// Start bootSequence
+void NamePlayerFromOverworld(void)
+{
+    AssignDefaultPlayerName();
+    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+}
 
+void SetEOSForPlayerName(const u8* name)
+{
+    for (u32 index = 0; index < PLAYER_NAME_LENGTH; index++)
+        gSaveBlock2Ptr->playerName[index] = name[index];
+
+    gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
+}
+
+void AssignDefaultPlayerName(void)
+{
+    NewGameBirchSpeech_SetDefaultPlayerName(ChooseRandomPresetName());
+}
+// End bootSequence

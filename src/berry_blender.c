@@ -2174,7 +2174,10 @@ static void HandlePlayerInput(void)
 
     if (sBerryBlender->gameEndState == 0)
     {
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A && JOY_NEW(A_BUTTON))
+        // Start siliconMerge
+		//if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A && JOY_NEW(A_BUTTON))
+		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A && JOY_NEW(A_BUTTON))
+        // End siliconMerge
         {
             if (JOY_HELD_RAW(A_BUTTON | L_BUTTON) != (A_BUTTON | L_BUTTON))
                 pressedA = TRUE;

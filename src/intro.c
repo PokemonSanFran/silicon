@@ -1057,6 +1057,15 @@ static void MainCB2_EndIntro(void)
         SetMainCallback2(CB2_InitTitleScreen);
 }
 
+// Start siliconMerge
+u32 SkipCopyrightScreen(u32 state)
+{
+    if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(L_BUTTON)) || (JOY_NEW(START_BUTTON)))
+        return COPYRIGHT_START_FADE;
+
+    return state;
+}
+// End siliconMerge
 static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
 {
     LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + tilesetAddress));
@@ -1110,6 +1119,7 @@ static u8 SetUpCopyrightScreen(void)
         UpdatePaletteFade();
         gMain.state++;
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
+        gMain.state = SkipCopyrightScreen(gMain.state); // siliconMerge
         break;
     case COPYRIGHT_START_FADE:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
@@ -1163,7 +1173,10 @@ void CB2_InitCopyrightScreenAfterBootup(void)
         LoadGameSave(SAVE_NORMAL);
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             Sav2_ClearSetDefault();
-        SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
+        // Start siliconMerge
+		//SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
+        SetPokemonCryStereo(gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_SPEAKER]);
+		// End siliconMerge
         InitHeap(gHeap, HEAP_SIZE);
     }
 }

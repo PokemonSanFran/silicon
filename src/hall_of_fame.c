@@ -57,7 +57,7 @@ static void ClearVramOamPltt_LoadHofPal(void);
 static void LoadHofGfx(void);
 static void InitHofBgs(void);
 static bool8 CreateHofConfettiSprite(void);
-static void StartCredits(void);
+//static void StartCredits(void); //siliconMerge
 static bool8 LoadHofBgs(void);
 static void Task_Hof_InitMonData(u8 taskId);
 static void Task_Hof_InitTeamSaveData(u8 taskId);
@@ -511,7 +511,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(0, COPYWIN_FULL);
-    gTasks[taskId].func = Task_Hof_TrySaveData;
+    gTasks[taskId].func = Task_Hof_TrySaveData; //PSF TODO change to asking if player wants to save
 }
 
 static void FreeAllHoFMem(void)
@@ -702,7 +702,13 @@ static void Task_Hof_DisplayPlayer(u8 taskId)
     ShowBg(3);
     gTasks[taskId].tPlayerSpriteID = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), TRUE, 120, 72, 6, TAG_NONE);
     AddWindow(&sHof_WindowTemplate);
-    LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, BG_PLTT_ID(13));
+// Start siliconMerge
+	#ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
+	LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, BG_PLTT_ID(13));
+    #else
+	LoadWindowGfx(1, gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE], 0x21D, BG_PLTT_ID(13));
+	#endif
+// End siliconMerge
     LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     gTasks[taskId].tFrameCount = 120;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;
@@ -775,7 +781,10 @@ static void Task_Hof_HandleExit(u8 taskId)
     }
 }
 
-static void StartCredits(void)
+// Start siliconMerge
+//static void StartCredits(void)
+void StartCredits(void)
+// End siliconMerge
 {
     SetMainCallback2(CB2_StartCreditsSequence);
 }

@@ -67,10 +67,18 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 #include "save.h"
+#include "quests.h" // siliconMerge
+#include "story_jump.h" // siliconMerge
+#include "constants/story_jump.h"  // siliconMerge
+#include "ui_character_customization_menu.h" // playerCustom
 
+static const u8 sDebugText_QuestState[] =               _("Quest state: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}"); // siliconMerge
+static const u8 sDebugText_QuestID[] =                  _("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}"); // siliconMerge
 // *******************************
 enum DebugMenu
 {
+    DEBUG_MENU_ITEM_QUEST, // siliconMerge
+    DEBUG_MENU_ITEM_JUMP, // siliconMerge
     DEBUG_MENU_ITEM_UTILITIES,
     DEBUG_MENU_ITEM_PCBAG,
     DEBUG_MENU_ITEM_PARTY,
@@ -101,6 +109,7 @@ enum UtilDebugMenu
     DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
     DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS,
     DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI,
+    DEBUG_UTIL_MENU_ITEM_CUSTOMIZE, // playerCustom
 };
 
 enum GivePCBagDebugMenu
@@ -144,6 +153,103 @@ enum ScriptDebugMenu
     DEBUG_UTIL_MENU_ITEM_SCRIPT_6,
     DEBUG_UTIL_MENU_ITEM_SCRIPT_7,
     DEBUG_UTIL_MENU_ITEM_SCRIPT_8,
+     DEBUG_UTIL_MENU_ITEM_SCRIPT_9, // siliconMerge
+    DEBUG_UTIL_MENU_ITEM_SCRIPT_10, // siliconMerge
+ // Start siliconMerge
+};
+enum { //Jump Acts
+    DEBUG_JUMP_MENU_ITEM_ACT0,
+    DEBUG_JUMP_MENU_ITEM_ACT1,
+    DEBUG_JUMP_MENU_ITEM_ACT2,
+    DEBUG_JUMP_MENU_ITEM_ACT3,
+    DEBUG_JUMP_MENU_ITEM_ACT4,
+    DEBUG_JUMP_MENU_ITEM_ACT5F,
+    DEBUG_JUMP_MENU_ITEM_ACT5T,
+};
+enum { //Jump Cutscenes
+    DEBUG_JUMP_MENU_ITEM_SWAGBAG,
+    DEBUG_JUMP_MENU_ITEM_READYSETI,
+    DEBUG_JUMP_MENU_ITEM_ENTERBELEN,
+    DEBUG_JUMP_MENU_ITEM_ENTERSHINZO,
+    DEBUG_JUMP_MENU_ITEM_ENTEREMRYS,
+    DEBUG_JUMP_MENU_ITEM_NEWASSHOLEAPPEARS,
+    DEBUG_JUMP_MENU_ITEM_ENTERARIANA,
+    DEBUG_JUMP_MENU_ITEM_OLDASSHOLEAPPEARS,
+    DEBUG_JUMP_MENU_ITEM_GROUPOFASSHOLESAPPEARS,
+    DEBUG_JUMP_MENU_ITEM_WOWYOURESTRONG,
+    DEBUG_JUMP_MENU_ITEM_THEGANGSALLHERE,
+    DEBUG_JUMP_MENU_ITEM_ALWAYSWATCHINGWAZOKWSKI,
+    DEBUG_JUMP_MENU_ITEM_HOWDOWEGETHOME,
+    DEBUG_JUMP_MENU_ITEM_AAANDWEREBACK,
+    DEBUG_JUMP_MENU_ITEM_ASSHOLESHOME,
+    DEBUG_JUMP_MENU_ITEM_HOUSINGPROTEST,
+    DEBUG_JUMP_MENU_ITEM_SWAGBAG2,
+    DEBUG_JUMP_MENU_ITEM_ENTERKAUNA,
+    DEBUG_JUMP_MENU_ITEM_SORRYABOUTMYFRIENDS,
+    //DEBUG_JUMP_MENU_ITEM_THESTORYSOFAR,
+    DEBUG_JUMP_MENU_ITEM_YOUNGPADAWAN,
+    DEBUG_JUMP_MENU_ITEM_WAITYOUWENTWHERE,
+    DEBUG_JUMP_MENU_ITEM_ENTERNERIENE,
+    DEBUG_JUMP_MENU_ITEM_FRIENDSFORDINNER,
+    DEBUG_JUMP_MENU_ITEM_KEIYINGSRAISONDETRE,
+    DEBUG_JUMP_MENU_ITEM_BEACHBATTLE,
+    DEBUG_JUMP_MENU_ITEM_ENTERDIMU,
+    DEBUG_JUMP_MENU_ITEM_ANEWSTRIKE,
+    DEBUG_JUMP_MENU_ITEM_ANDWEMARCHON,
+    DEBUG_JUMP_MENU_ITEM_ENTERBD,
+    DEBUG_JUMP_MENU_ITEM_BATTLE8,
+    DEBUG_JUMP_MENU_ITEM_ENTERAMIARGENTO,
+    DEBUG_JUMP_MENU_ITEM_THESTRIKESTRIKESBACK,
+    DEBUG_JUMP_MENU_ITEM_VSGARBODOR,
+    DEBUG_JUMP_MENU_ITEM_UNKNOWNARANTRAZCUTSCENE,
+    DEBUG_JUMP_MENU_ITEM_OFFYOUGO,
+    DEBUG_JUMP_MENU_ITEM_IGUESSWESHOULDBENICENOW,
+    DEBUG_JUMP_MENU_ITEM_ENTERTHEMASTER,
+    DEBUG_JUMP_MENU_ITEM_HAVEYOUSEENTHENEWS,
+    DEBUG_JUMP_MENU_ITEM_WELCOMETOTHEWARROOM,
+    DEBUG_JUMP_MENU_ITEM_SURVIVALCHANCE333,
+    DEBUG_JUMP_MENU_ITEM_WHYAREYOUHELPINGTHEM,
+    DEBUG_JUMP_MENU_ITEM_WHYAREYOUHELPINGTHEMSLEEP,
+    DEBUG_JUMP_MENU_ITEM_HERESHOWTHISISGOINGTOGO,
+    DEBUG_JUMP_MENU_ITEM_WHYDIDNTYOURATMEOUT,
+    DEBUG_JUMP_MENU_ITEM_GROUPSTAGES,
+    DEBUG_JUMP_MENU_ITEM_FINALS,
+    DEBUG_JUMP_MENU_ITEM_WAITHEDIDWHAT,
+    DEBUG_JUMP_MENU_ITEM_WELCOMETOTHEHALLOFFAME,
+    DEBUG_JUMP_MENU_ITEM_BEINGCHAMPIONISHARD,
+    DEBUG_JUMP_MENU_ITEM_LETSGRABLUNCH,
+    DEBUG_JUMP_MENU_ITEM_RESTOREHODOU_CITY,
+    DEBUG_JUMP_MENU_ITEM_RESTOREZENZU_ISLAND,
+    DEBUG_JUMP_MENU_ITEM_RESTOREESPULEE_OUTSKIRTS,
+    //DEBUG_JUMP_MENU_ITEM_RESTORETIRABUDIN_PLACE,
+    DEBUG_JUMP_MENU_ITEM_YOUREALIZEWEREEVILRIGHT,
+    DEBUG_JUMP_MENU_ITEM_YOUREALIZETHEYREEVILRIGHT,
+    DEBUG_JUMP_MENU_ITEM_CONGRATSYOUREANASSHOLE,
+    DEBUG_JUMP_MENU_ITEM_YOUHAVEYOURORDERS,
+    DEBUG_JUMP_MENU_ITEM_HOWDISAPPOINTING,
+    DEBUG_JUMP_MENU_ITEM_LETSBURNTHISMOTHERDOWN,
+    DEBUG_JUMP_MENU_ITEM_MANHUNT,
+    DEBUG_JUMP_MENU_ITEM_EXHIBITIONBATTLE,
+    DEBUG_JUMP_MENU_ITEM_MAYBEIFUCKEDUP,
+    DEBUG_JUMP_MENU_ITEM_OKAYLETSFIXIT,
+    DEBUG_JUMP_MENU_ITEM_LETSGETTHEBANDBACKTOGETHER,
+    DEBUG_JUMP_MENU_ITEM_MASKOFF,
+    DEBUG_JUMP_MENU_ITEM_LETSFIXTHIS,
+    DEBUG_JUMP_MENU_ITEM_LOCKEDOUT,
+    DEBUG_JUMP_MENU_ITEM_WAREHOUSERAVE,
+    DEBUG_JUMP_MENU_ITEM_SPEECHSPEECHSPEECH,
+    DEBUG_JUMP_MENU_ITEM_PERSUASIVEPASSENGER,
+    DEBUG_JUMP_MENU_ITEM_BREAKTHEINTERNET,
+    DEBUG_JUMP_MENU_ITEM_WAREHOUSEWARFARE,
+    DEBUG_JUMP_MENU_ITEM_ONEDOWN,
+    DEBUG_JUMP_MENU_ITEM_EARTHQUAKE,
+    DEBUG_JUMP_MENU_ITEM_THISISNTRANDOM,
+    DEBUG_JUMP_MENU_ITEM_WAITEVENTHEN,
+    DEBUG_JUMP_MENU_ITEM_LETSFINISHTHIS,
+    DEBUG_JUMP_MENU_ITEM_IMIN,
+    DEBUG_JUMP_MENU_ITEM_YOUCANTSTOPME,
+    DEBUG_JUMP_MENU_ITEM_WECANSTOPYOUACTUALLY,
+ // End siliconMerge	
 };
 
 enum FlagsVarsDebugMenu
@@ -231,6 +337,13 @@ enum SoundDebugMenu
     DEBUG_SOUND_MENU_ITEM_MUS,
 };
 
+ // Start siliconMerge
+enum QuestDebugMenu
+{
+    DEBUG_QUEST_MENU_ITEM_SET,
+    DEBUG_QUEST_MENU_ITEM_JUMP,
+};
+// End  // siliconMerge
 enum BerryFunctionsMenu
 {
     DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL,
@@ -264,6 +377,10 @@ enum BerryFunctionsMenu
 #define DEBUG_NUMBER_DIGITS_VARIABLE_VALUE 5
 #define DEBUG_NUMBER_DIGITS_ITEMS 4
 #define DEBUG_NUMBER_DIGITS_ITEM_QUANTITY 3
+// Start siliconMerge
+#define DEBUG_NUMBER_DIGITS_QUESTS 3
+#define DEBUG_NUMBER_DIGITS_STATES 2
+// End siliconMerge
 
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
@@ -328,14 +445,20 @@ static void DebugAction_Util_Script_5(u8 taskId);
 static void DebugAction_Util_Script_6(u8 taskId);
 static void DebugAction_Util_Script_7(u8 taskId);
 static void DebugAction_Util_Script_8(u8 taskId);
+// Start siliconMerge
+static void DebugAction_Util_Script_9(u8 taskId);
+static void DebugAction_Util_Script_10(u8 taskId);
+// End siliconMerge
 
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
 static void DebugAction_OpenPCBagMenu(u8 taskId);
 static void DebugAction_OpenPartyMenu(u8 taskId);
 static void DebugAction_OpenScriptsMenu(u8 taskId);
+static void DebugAction_OpenJumpActsMenu(u8 taskId); // siliconMerge
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
 static void DebugAction_OpenGiveMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
+static void DebugAction_OpenQuestMenu(u8 taskId); // siliconMerge
 
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
@@ -343,6 +466,7 @@ static void DebugTask_HandleMenuInput_PCBag(u8 taskId);
 static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId);
 static void DebugTask_HandleMenuInput_Party(u8 taskId);
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
+static void DebugTask_HandleMenuInput_Jump(u8 taskId); // siliconMerge
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId);
 static void DebugTask_HandleMenuInput_Battle(u8 taskId);
 static void DebugTask_HandleMenuInput_Give(u8 taskId);
@@ -367,6 +491,17 @@ static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
+static void DebugAction_Util_Customize(u8 taskId); // playerCustom
+// Start siliconMerge
+static void DebugAction_OpenJumpAct0Menu(u8 taskId);
+static void DebugAction_OpenJumpAct1Menu(u8 taskId);
+static void DebugAction_OpenJumpAct2Menu(u8 taskId);
+static void DebugAction_OpenJumpAct3Menu(u8 taskId);
+static void DebugAction_OpenJumpAct4Menu(u8 taskId);
+static void DebugAction_OpenJumpAct5FMenu(u8 taskId);
+static void DebugAction_OpenJumpAct5TMenu(u8 taskId);
+static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId);
+// End siliconMerge
 static void DebugAction_Util_BerryFunctions(u8 taskId);
 static void DebugAction_Util_CheckEWRAMCounters(u8 taskId);
 static void DebugAction_Util_Steven_Multi(u8 taskId);
@@ -377,7 +512,6 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
-static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
 static void DebugAction_PCBag_AccessPC(u8 taskId);
@@ -443,6 +577,14 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId);
 static void DebugAction_Sound_MUS(u8 taskId);
 static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 
+// Start siliconMerge
+static void DebugAction_Quest_Set(u8 taskId);
+static void DebugAction_Quest_Jump(u8 taskId);
+static void DebugAction_Quest(u8 taskId);
+static void DebugAction_Quest_SelectQuest(u8 taskId);
+static void DebugAction_Quest_SelectState(u8 taskId);
+// End siliconMerge
+
 static void DebugAction_BerryFunctions_ClearAll(u8 taskId);
 static void DebugAction_BerryFunctions_Ready(u8 taskId);
 static void DebugAction_BerryFunctions_NextStage(u8 taskId);
@@ -464,6 +606,10 @@ extern const u8 Debug_EventScript_Script_5[];
 extern const u8 Debug_EventScript_Script_6[];
 extern const u8 Debug_EventScript_Script_7[];
 extern const u8 Debug_EventScript_Script_8[];
+// Start siliconMerge
+extern const u8 Debug_EventScript_Script_9[];
+extern const u8 Debug_EventScript_Script_10[];
+// End siliconMerge
 extern const u8 DebugScript_DaycareMonsNotCompatible[];
 extern const u8 DebugScript_OneDaycareMons[];
 extern const u8 DebugScript_ZeroDaycareMons[];
@@ -554,6 +700,10 @@ static const s32 sPowersOfTen[] =
 // List Menu Items
 static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
+// Start siliconMerge
+    [DEBUG_MENU_ITEM_QUEST]     = {COMPOUND_STRING("Quest…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_QUEST},
+    [DEBUG_MENU_ITEM_JUMP]     = {COMPOUND_STRING("Story Jump…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_JUMP},
+// End siliconMerge	
     [DEBUG_MENU_ITEM_UTILITIES]     = {COMPOUND_STRING("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_UTILITIES},
     [DEBUG_MENU_ITEM_PCBAG]         = {COMPOUND_STRING("PC/Bag…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_MENU_ITEM_PCBAG},
     [DEBUG_MENU_ITEM_PARTY]         = {COMPOUND_STRING("Party…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_MENU_ITEM_PARTY},
@@ -584,6 +734,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {COMPOUND_STRING("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}"),  DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
     [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]  = {COMPOUND_STRING("EWRAM Counters…{CLEAR_TO 110}{RIGHT_ARROW}"),   DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS},
     [DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI]    = {COMPOUND_STRING("Steven Multi"),                                 DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI},
+    [DEBUG_UTIL_MENU_ITEM_CUSTOMIZE]     = {COMPOUND_STRING("Customize Player"),                                  DEBUG_UTIL_MENU_ITEM_CUSTOMIZE}, // playerCustom
 };
 
 static const struct ListMenuItem sDebugMenu_Items_PCBag[] =
@@ -615,6 +766,119 @@ static const struct ListMenuItem sDebugMenu_Items_Party[] =
     [DEBUG_PARTY_MENU_ITEM_CHECK_EVS]       = {COMPOUND_STRING("Check EVs"),       DEBUG_PARTY_MENU_ITEM_CHECK_EVS},
     [DEBUG_PARTY_MENU_ITEM_CHECK_IVS]       = {COMPOUND_STRING("Check IVs"),       DEBUG_PARTY_MENU_ITEM_CHECK_IVS},
     [DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY]     = {COMPOUND_STRING("Clear Party"),     DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY},
+}; // siliconMerge
+// Start siliconMerge
+static const struct ListMenuItem sDebugMenu_Items_JumpActs[] =
+{
+    {COMPOUND_STRING("Act0"), DEBUG_JUMP_MENU_ITEM_ACT0},
+    {COMPOUND_STRING("Act1"), DEBUG_JUMP_MENU_ITEM_ACT1},
+    {COMPOUND_STRING("Act2"), DEBUG_JUMP_MENU_ITEM_ACT2},
+    {COMPOUND_STRING("Act3"), DEBUG_JUMP_MENU_ITEM_ACT3},
+    {COMPOUND_STRING("Act4"), DEBUG_JUMP_MENU_ITEM_ACT4},
+    {COMPOUND_STRING("Act5F"), DEBUG_JUMP_MENU_ITEM_ACT5F},
+    {COMPOUND_STRING("Act5T"), DEBUG_JUMP_MENU_ITEM_ACT5T},
+};
+static const struct ListMenuItem sDebugMenu_Items_JumpAct0[] =
+{
+    {COMPOUND_STRING("swagbag"),JUMPPLAYER_SWAGBAG},
+    {COMPOUND_STRING("ReadySetI"),JUMPPLAYER_READYSETI},
+};
+static const struct ListMenuItem sDebugMenu_Items_JumpAct1[] =
+{
+    {COMPOUND_STRING("EnterBelen"),JUMPPLAYER_ENTERBELEN},
+    {COMPOUND_STRING("EnterShinzo"),JUMPPLAYER_ENTERSHINZO},
+    {COMPOUND_STRING("EnterEmrys"),JUMPPLAYER_ENTEREMRYS},
+    {COMPOUND_STRING("NewAssholeAppears"),JUMPPLAYER_NEWASSHOLEAPPEARS},
+    {COMPOUND_STRING("OldAssholeAppears"),JUMPPLAYER_OLDASSHOLEAPPEARS},
+    {COMPOUND_STRING("GroupofAssholesAppears"),JUMPPLAYER_GROUPOFASSHOLESAPPEARS},
+    {COMPOUND_STRING("WowYoureStrong"),JUMPPLAYER_WOWYOURESTRONG_PERLACIA_CITY},
+    {COMPOUND_STRING("TheGangsAllHere"),JUMPPLAYER_THEGANGSALLHERE},
+    {COMPOUND_STRING("AlwaysWatchingWazokwski"),JUMPPLAYER_ALWAYSWATCHINGWAZOKWSKI},
+    {COMPOUND_STRING("EnterAdaora"),JUMPPLAYER_ENTERADAORA},
+    {COMPOUND_STRING("HowDoWeGetHome"),JUMPPLAYER_HOWDOWEGETHOME},
+    {COMPOUND_STRING("AaandWereBack"),JUMPPLAYER_AAANDWEREBACK},
+    {COMPOUND_STRING("AssholesHome"),JUMPPLAYER_ASSHOLESHOME},
+    {COMPOUND_STRING("HousingProtest"),JUMPPLAYER_HOUSINGPROTEST},
+    {COMPOUND_STRING("swagbag2"),JUMPPLAYER_SWAGBAG2},
+    {COMPOUND_STRING("EnterKauna"),JUMPPLAYER_ENTERKAUNA},
+    {COMPOUND_STRING("SorryAboutMyFriends"),JUMPPLAYER_SORRYABOUTMYFRIENDS},
+    {COMPOUND_STRING("TheStorySoFar"),JUMPPLAYER_THESTORYSOFAR_ALL},
+    {COMPOUND_STRING("YoungPadawan"),JUMPPLAYER_YOUNGPADAWAN},
+};
+static const struct ListMenuItem sDebugMenu_Items_JumpAct2[] =
+{
+    {COMPOUND_STRING("WaitYouWentWhere"),JUMPPLAYER_WAITYOUWENTWHERE},
+    {COMPOUND_STRING("EnterNeriene"),JUMPPLAYER_ENTERNERIENE},
+    {COMPOUND_STRING("FriendsForDinner"),JUMPPLAYER_FRIENDSFORDINNER},
+    {COMPOUND_STRING("Keiyingsraisondetre"),JUMPPLAYER_KEIYINGSRAISONDETRE},
+    {COMPOUND_STRING("BeachBattle"),JUMPPLAYER_BEACHBATTLE},
+    {COMPOUND_STRING("EnterDimu"),JUMPPLAYER_ENTERDIMU},
+    {COMPOUND_STRING("ANewStrike"),JUMPPLAYER_ANEWSTRIKE},
+    {COMPOUND_STRING("AndWeMarchOn"),JUMPPLAYER_ANDWEMARCHON},
+    {COMPOUND_STRING("EnterBD"),JUMPPLAYER_ENTERBD},
+    {COMPOUND_STRING("Battle8"),JUMPPLAYER_BATTLE8},
+    {COMPOUND_STRING("EnterAmiArgento"),JUMPPLAYER_ENTERAMIARGENTO},
+    {COMPOUND_STRING("TheStrikeStrikesBack"),JUMPPLAYER_THESTRIKESTRIKESBACK},
+    {COMPOUND_STRING("VSGarbodor"),JUMPPLAYER_VSGARBODOR},
+};
+static const struct ListMenuItem sDebugMenu_Items_JumpAct3[] =
+{
+    {COMPOUND_STRING("OffYouGo"),JUMPPLAYER_OFFYOUGO_BRIDGE},
+    {COMPOUND_STRING("IGuessWeShouldBeNiceNow"),JUMPPLAYER_IGUESSWESHOULDBENICENOW},
+    {COMPOUND_STRING("EntertheMaster"),JUMPPLAYER_ENTERTHEMASTER},
+    {COMPOUND_STRING("HaveYouSeenTheNews"),JUMPPLAYER_HAVEYOUSEENTHENEWS},
+    {COMPOUND_STRING("WelcometotheWarRoom"),JUMPPLAYER_WELCOMETOTHEWARROOM},
+    {COMPOUND_STRING("SurvivalChance333"),JUMPPLAYER_SURVIVALCHANCE333},
+    {COMPOUND_STRING("WhyAreYouHelpingThem"),JUMPPLAYER_WHYAREYOUHELPINGTHEM},
+    {COMPOUND_STRING("WhyAreYouHelpingThemSleep"),JUMPPLAYER_WHYAREYOUHELPINGTHEMSLEEP},
+    {COMPOUND_STRING("HeresHowThisIsGoingToGo"),JUMPPLAYER_HERESHOWTHISISGOINGTOGO},
+    {COMPOUND_STRING("WhyDidntYouRatMeOut"),JUMPPLAYER_WHYDIDNTYOURATMEOUT},
+    {COMPOUND_STRING("GroupStages"),JUMPPLAYER_GROUPSTAGES},
+    {COMPOUND_STRING("Finals"),JUMPPLAYER_FINALS},
+    {COMPOUND_STRING("WaitHeDidWhat"),JUMPPLAYER_WAITHEDIDWHAT},
+    {COMPOUND_STRING("WelcometotheHallofFame"),JUMPPLAYER_WELCOMETOTHEHALLOFFAME},
+};
+static const struct ListMenuItem sDebugMenu_Items_JumpAct4[] =
+{
+    {COMPOUND_STRING("BeingChampionisHard"),JUMPPLAYER_BEINGCHAMPIONISHARD},
+    {COMPOUND_STRING("LetsGrabLunch"),JUMPPLAYER_LETSGRABLUNCH},
+    {COMPOUND_STRING("RestoreHodouCity"),JUMPPLAYER_RESTOREHODOU_CITY},
+    {COMPOUND_STRING("RestoreZenzuIsland"),JUMPPLAYER_RESTOREZENZU_ISLAND},
+    {COMPOUND_STRING("RestoreEspuleeOutskirts"),JUMPPLAYER_RESTOREESPULEE_OUTSKIRTS},
+    {COMPOUND_STRING("YouRealizeWereEvilRight"),JUMPPLAYER_YOUREALIZEWEREEVILRIGHT},
+    {COMPOUND_STRING("YouRealizeTheyreEvilRight"),JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND},
+};
+static const struct ListMenuItem sDebugMenu_Items_JumpAct5F[] =
+{
+    {COMPOUND_STRING("CongratsYoureanAsshole"),JUMPPLAYER_CONGRATSYOUREANASSHOLE},
+    {COMPOUND_STRING("YouHaveYourOrders"),JUMPPLAYER_YOUHAVEYOURORDERS},
+    {COMPOUND_STRING("HowDisappointing"),JUMPPLAYER_HOWDISAPPOINTING_ARREST},
+    {COMPOUND_STRING("LetsBurnThisMotherDown"),JUMPPLAYER_LETSBURNTHISMOTHERDOWN},
+    {COMPOUND_STRING("Manhunt"),JUMPPLAYER_MANHUNT_ALCMENE},
+    {COMPOUND_STRING("ExhibitionBattle"),JUMPPLAYER_EXHIBITIONBATTLE},
+    {COMPOUND_STRING("MaybeIFuckedUp"),JUMPPLAYER_MAYBEIFUCKEDUP},
+    {COMPOUND_STRING("OkayLetsFixit"),JUMPPLAYER_OKAYLETSFIXIT},
+};
+static const struct ListMenuItem sDebugMenu_Items_JumpAct5T[] =
+{
+    {COMPOUND_STRING("LetsGettheBandBackTogether"),JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_AFTER},
+    {COMPOUND_STRING("MaskOff"),JUMPPLAYER_MASKOFF_ALCMENE},
+    {COMPOUND_STRING("LetsFixThis"),JUMPPLAYER_LETSFIXTHIS},
+    {COMPOUND_STRING("LockedOut"),JUMPPLAYER_LOCKEDOUT},
+    {COMPOUND_STRING("WarehouseRave"),JUMPPLAYER_WAREHOUSERAVE},
+    {COMPOUND_STRING("SpeechSpeechSpeech"),JUMPPLAYER_SPEECHSPEECHSPEECH},
+    {COMPOUND_STRING("PersuasivePassenger"),JUMPPLAYER_PERSUASIVEPASSENGER},
+    {COMPOUND_STRING("BreakTheInternet"),JUMPPLAYER_BREAKTHEINTERNET},
+    {COMPOUND_STRING("WarehouseWarfare"),JUMPPLAYER_WAREHOUSEWARFARE},
+    {COMPOUND_STRING("OneDown"),JUMPPLAYER_ONEDOWN},
+    {COMPOUND_STRING("Earthquake"),JUMPPLAYER_EARTHQUAKE_OUTSIDE},
+    {COMPOUND_STRING("ThisIsntRandom"),JUMPPLAYER_THISISNTRANDOM_MON2},
+    {COMPOUND_STRING("WaitEvenThen"),JUMPPLAYER_WAITEVENTHEN},
+    {COMPOUND_STRING("LetsFinishThis"),JUMPPLAYER_LETSFINISHTHIS},
+    {COMPOUND_STRING("ImIn"),JUMPPLAYER_IMIN_POSTWARP},
+    {COMPOUND_STRING("YouCantStopMe"),JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE},
+    {COMPOUND_STRING("WeCanStopYouActually"),JUMPPLAYER_WECANSTOPYOUACTUALLY},
+// End siliconMerge
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
@@ -714,6 +978,14 @@ static const struct ListMenuItem sDebugMenu_Items_Sound[] =
     [DEBUG_SOUND_MENU_ITEM_MUS] = {COMPOUND_STRING("Music…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_SOUND_MENU_ITEM_MUS},
 };
 
+// Start siliconMerge
+static const struct ListMenuItem sDebugMenu_Items_Quest[] =
+{
+    [DEBUG_QUEST_MENU_ITEM_SET]           = {COMPOUND_STRING("Set quest…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_QUEST_MENU_ITEM_SET},
+    [DEBUG_QUEST_MENU_ITEM_JUMP]          = {COMPOUND_STRING("Warp to quest…{CLEAR_TO 110}{RIGHT_ARROW}"), DEBUG_QUEST_MENU_ITEM_JUMP},
+};
+// End siliconMerge
+
 static const struct ListMenuItem sDebugMenu_Items_BerryFunctions[] =
 {
     [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = {COMPOUND_STRING("Clear map trees"),      DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL},
@@ -732,9 +1004,11 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [DEBUG_MENU_ITEM_PARTY]         = DebugAction_OpenPartyMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
     [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
+    [DEBUG_MENU_ITEM_JUMP]      = DebugAction_OpenJumpActsMenu, // siliconMerge
     [DEBUG_MENU_ITEM_FLAGVAR]       = DebugAction_OpenFlagsVarsMenu,
     //[DEBUG_MENU_ITEM_BATTLE]        = DebugAction_OpenBattleMenu,
     [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
+    [DEBUG_MENU_ITEM_QUEST]         = DebugAction_OpenQuestMenu, // siliconMerge
     [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
 };
 
@@ -757,6 +1031,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
     [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]  = DebugAction_Util_CheckEWRAMCounters,
     [DEBUG_UTIL_MENU_ITEM_STEVEN_MULTI]    = DebugAction_Util_Steven_Multi,
+    [DEBUG_UTIL_MENU_ITEM_CUSTOMIZE]     = DebugAction_Util_Customize // playerCustom
 };
 
 static void (*const sDebugMenu_Actions_PCBag[])(u8) =
@@ -800,6 +1075,125 @@ static void (*const sDebugMenu_Actions_Scripts[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_SCRIPT_6] = DebugAction_Util_Script_6,
     [DEBUG_UTIL_MENU_ITEM_SCRIPT_7] = DebugAction_Util_Script_7,
     [DEBUG_UTIL_MENU_ITEM_SCRIPT_8] = DebugAction_Util_Script_8,
+// Start siliconMerge
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_9] = DebugAction_Util_Script_9,
+    [DEBUG_UTIL_MENU_ITEM_SCRIPT_10] = DebugAction_Util_Script_10,
+};
+static void (*const sDebugMenu_Actions_JumpActs[])(u8) =
+{
+    [DEBUG_JUMP_MENU_ITEM_ACT0] = DebugAction_OpenJumpAct0Menu,
+    [DEBUG_JUMP_MENU_ITEM_ACT1] = DebugAction_OpenJumpAct1Menu,
+    [DEBUG_JUMP_MENU_ITEM_ACT2] = DebugAction_OpenJumpAct2Menu,
+    [DEBUG_JUMP_MENU_ITEM_ACT3] = DebugAction_OpenJumpAct3Menu,
+    [DEBUG_JUMP_MENU_ITEM_ACT4] = DebugAction_OpenJumpAct4Menu,
+    [DEBUG_JUMP_MENU_ITEM_ACT5F] = DebugAction_OpenJumpAct5FMenu,
+    [DEBUG_JUMP_MENU_ITEM_ACT5T] = DebugAction_OpenJumpAct5TMenu,
+};
+
+static void (*const sDebugMenu_Action_JumpAct0[])(u8) =
+{
+    [JUMPPLAYER_SWAGBAG] = DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_READYSETI] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+};
+static void (*const sDebugMenu_Action_JumpAct1[])(u8) =
+{
+    [JUMPPLAYER_ENTERBELEN] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERSHINZO] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTEREMRYS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_NEWASSHOLEAPPEARS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_OLDASSHOLEAPPEARS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_GROUPOFASSHOLESAPPEARS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_FLYINGBLIND_NORTH] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WOWYOURESTRONG_PERLACIA_CITY] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_THEGANGSALLHERE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ALWAYSWATCHINGWAZOKWSKI] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERADAORA] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_HOWDOWEGETHOME] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_AAANDWEREBACK] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ASSHOLESHOME] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_HOUSINGPROTEST] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_SWAGBAG2] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERKAUNA] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_SORRYABOUTMYFRIENDS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_THESTORYSOFAR_ALL] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_YOUNGPADAWAN] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+};
+static void (*const sDebugMenu_Action_JumpAct2[])(u8) =
+{
+    [JUMPPLAYER_WAITYOUWENTWHERE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERNERIENE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_FRIENDSFORDINNER] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_KEIYINGSRAISONDETRE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_BEACHBATTLE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERDIMU] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ANEWSTRIKE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ANDWEMARCHON] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERBD] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_BATTLE8] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERAMIARGENTO] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_THESTRIKESTRIKESBACK] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_VSGARBODOR] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+};
+static void (*const sDebugMenu_Action_JumpAct3[])(u8) =
+{
+    [JUMPPLAYER_OFFYOUGO_BRIDGE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_IGUESSWESHOULDBENICENOW] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ENTERTHEMASTER] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_HAVEYOUSEENTHENEWS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WELCOMETOTHEWARROOM] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_SURVIVALCHANCE333] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WHYAREYOUHELPINGTHEM] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WHYAREYOUHELPINGTHEMSLEEP] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_HERESHOWTHISISGOINGTOGO] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WHYDIDNTYOURATMEOUT] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_GROUPSTAGES] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_FINALS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WAITHEDIDWHAT] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WELCOMETOTHEHALLOFFAME] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+};
+static void (*const sDebugMenu_Action_JumpAct4[])(u8) =
+{
+    [JUMPPLAYER_BEINGCHAMPIONISHARD] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_LETSGRABLUNCH] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_RESTOREHODOU_CITY] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_RESTOREZENZU_ISLAND] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_RESTOREESPULEE_OUTSKIRTS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    //[JUMPPLAYER_RESTORETIRABUDIN_PLACE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_YOUREALIZEWEREEVILRIGHT] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+};
+static void (*const sDebugMenu_Action_JumpAct5F[])(u8) =
+{
+    [JUMPPLAYER_CONGRATSYOUREANASSHOLE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_YOUHAVEYOURORDERS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_HOWDISAPPOINTING_ARREST] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_LETSBURNTHISMOTHERDOWN] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_MANHUNT_ALCMENE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_EXHIBITIONBATTLE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_MAYBEIFUCKEDUP] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_OKAYLETSFIXIT] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+};
+static void (*const sDebugMenu_Action_JumpAct5T[])(u8) =
+{
+    [JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_AFTER] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_MASKOFF_ALCMENE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_LETSFIXTHIS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_LOCKEDOUT] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WAREHOUSERAVE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_SPEECHSPEECHSPEECH] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_PERSUASIVEPASSENGER] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_BREAKTHEINTERNET] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WAREHOUSEWARFARE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_ONEDOWN] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_EARTHQUAKE_OUTSIDE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_THISISNTRANDOM_MON2] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WAITEVENTHEN] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_LETSFINISHTHIS] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_IMIN_POSTRIVAL] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_WECANSTOPYOUACTUALLY] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+    [JUMPPLAYER_EPILOGUE] =     DebugAction_Jump_JumpPlayerToStoryPoint,
+// End siliconMerge
 };
 
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
@@ -840,6 +1234,13 @@ static void (*const sDebugMenu_Actions_Sound[])(u8) =
     [DEBUG_SOUND_MENU_ITEM_MUS] = DebugAction_Sound_MUS,
 };
 
+// Start siliconMerge
+static void (*const sDebugMenu_Actions_Quest[])(u8) =
+{
+    [DEBUG_QUEST_MENU_ITEM_SET]  = DebugAction_Quest_Set,
+    [DEBUG_QUEST_MENU_ITEM_JUMP] = DebugAction_Quest_Jump,
+};
+// End siliconMerge
 static void (*const sDebugMenu_Actions_BerryFunctions[])(u8) =
 {
     [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = DebugAction_BerryFunctions_ClearAll,
@@ -868,6 +1269,19 @@ static const struct WindowTemplate sDebugMenuWindowTemplateExtra =
     .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA - 1,
     .tilemapTop = 1,
     .width = DEBUG_MENU_WIDTH_EXTRA,
+// Start siliconMerge
+    .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+
+static const struct WindowTemplate sDebugMenuWindowTemplateExtra_Wide =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA_WIDE - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_MENU_WIDTH_EXTRA_WIDE,
+// End siliconMerge
     .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
     .paletteNum = 15,
     .baseBlock = 1,
@@ -950,6 +1364,56 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Scripts =
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Scripts),
 };
 
+// Start siliconMerge
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpActs =
+{
+    .items = sDebugMenu_Items_JumpActs,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpActs),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpAct0 =
+{
+    .items = sDebugMenu_Items_JumpAct0,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpAct0),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpAct1 =
+{
+    .items = sDebugMenu_Items_JumpAct1,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpAct1),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpAct2 =
+{
+    .items = sDebugMenu_Items_JumpAct2,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpAct2),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpAct3 =
+{
+    .items = sDebugMenu_Items_JumpAct3,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpAct3),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpAct4 =
+{
+    .items = sDebugMenu_Items_JumpAct4,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpAct4),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpAct5F =
+{
+    .items = sDebugMenu_Items_JumpAct5F,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpAct5F),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_JumpAct5T =
+{
+    .items = sDebugMenu_Items_JumpAct5T,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_JumpAct5T),
+};
+// End siliconMerge
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_FlagsVars =
 {
     .items = sDebugMenu_Items_FlagsVars,
@@ -990,6 +1454,14 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
     .items = sDebugMenu_Items_Sound,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sound),
+}; // siliconMerge
+// Start siliconMerge
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Quest =
+{
+    .items = sDebugMenu_Items_Quest,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Quest),
+// End siliconMerge
 };
 
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_BerryFunctions =
@@ -1443,6 +1915,159 @@ static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
 {
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Scripts, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
 }
+// Start siliconMerge
+static void DebugTask_HandleMenuInput_Jump(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_JumpActs[input]) != NULL)
+            func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMainMenu();
+    }
+}
+static void DebugTask_HandleMenuInput_JumpAct0(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Action_JumpAct0[input]) != NULL)
+            gTasks[taskId].data[5] = input;
+        func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenJumpActsMenu(taskId);
+    }
+}
+static void DebugTask_HandleMenuInput_JumpAct1(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Action_JumpAct1[input]) != NULL)
+            gTasks[taskId].data[5] = input;
+        func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenJumpActsMenu(taskId);
+    }
+}
+static void DebugTask_HandleMenuInput_JumpAct2(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Action_JumpAct2[input]) != NULL)
+            gTasks[taskId].data[5] = input;
+        func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenJumpActsMenu(taskId);
+    }
+}
+static void DebugTask_HandleMenuInput_JumpAct3(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Action_JumpAct3[input]) != NULL)
+            gTasks[taskId].data[5] = input;
+        func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenJumpActsMenu(taskId);
+    }
+}
+static void DebugTask_HandleMenuInput_JumpAct4(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Action_JumpAct4[input]) != NULL)
+            gTasks[taskId].data[5] = input;
+        func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenJumpActsMenu(taskId);
+    }
+}
+static void DebugTask_HandleMenuInput_JumpAct5F(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Action_JumpAct5F[input]) != NULL)
+            gTasks[taskId].data[5] = input;
+        func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenJumpActsMenu(taskId);
+    }
+}
+static void DebugTask_HandleMenuInput_JumpAct5T(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Action_JumpAct5T[input]) != NULL)
+            gTasks[taskId].data[5] = input;
+        func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        DebugAction_OpenJumpActsMenu(taskId);
+    }
+}
+// End siliconMerge
 
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
 {
@@ -1644,6 +2269,27 @@ static void DebugTask_HandleMenuInput_Give(u8 taskId)
 static void DebugTask_HandleMenuInput_Sound(u8 taskId)
 {
     DebugTask_HandleMenuInput_General(taskId, sDebugMenu_Actions_Sound, DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+// Start siliconMerge
+}
+
+static void DebugTask_HandleMenuInput_Quest(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Quest[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ReShowMainMenu();
+    }
+// End siliconMerge
 }
 
 static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId)
@@ -1677,6 +2323,48 @@ static void DebugAction_OpenScriptsMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleMenuInput_Scripts, sDebugMenu_ListTemplate_Scripts);
 }
 
+// Start siliconMerge
+static void DebugAction_OpenJumpActsMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Jump, sDebugMenu_ListTemplate_JumpActs);
+}
+static void DebugAction_OpenJumpAct0Menu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_JumpAct0, sDebugMenu_ListTemplate_JumpAct0);
+}
+static void DebugAction_OpenJumpAct1Menu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_JumpAct1, sDebugMenu_ListTemplate_JumpAct1);
+}
+static void DebugAction_OpenJumpAct2Menu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_JumpAct2, sDebugMenu_ListTemplate_JumpAct2);
+}
+static void DebugAction_OpenJumpAct3Menu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_JumpAct3, sDebugMenu_ListTemplate_JumpAct3);
+}
+static void DebugAction_OpenJumpAct4Menu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_JumpAct4, sDebugMenu_ListTemplate_JumpAct4);
+}
+static void DebugAction_OpenJumpAct5FMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_JumpAct5F, sDebugMenu_ListTemplate_JumpAct5F);
+}
+static void DebugAction_OpenJumpAct5TMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_JumpAct5T, sDebugMenu_ListTemplate_JumpAct5T);
+}
+// End siliconMerge
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -1694,6 +2382,14 @@ static void DebugAction_OpenSoundMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
+// Start siliconMerge
+}
+
+static void DebugAction_OpenQuestMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Quest, sDebugMenu_ListTemplate_Quest);
+// End siliconMerge
 }
 
 static void DebugAction_Util_BerryFunctions(u8 taskId)
@@ -2168,6 +2864,25 @@ static void DebugAction_Util_Script_8(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_8);
 }
+// Start siliconMerge
+static void DebugAction_Util_Script_9(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_9);
+}
+static void DebugAction_Util_Script_10(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_Script_10);
+}
+// *******************************
+// Actions Jump
+static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId)
+{
+    u32 chosenStoryPoint = gTasks[taskId].data[5];
+    JumpPlayerToStoryPoint(chosenStoryPoint, JUMP_DEBUG);
+    WarpPlayerAfterVarSet();
+    Debug_DestroyMenu_Full(taskId);
+}
+// End siliconMerge
 
 // *******************************
 // Actions Flags and Vars
@@ -3636,7 +4351,8 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
     }
 }
 
-static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
+//static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId) // siliconMerge
+void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)  // siliconMerge
 {
     u16 itemId;
 
@@ -3818,6 +4534,174 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 
 #undef tCurrentSong
 
+ // Start siliconMerge
+// *******************************
+// Quest Menu
+
+#define tQuestJump data[5]
+#define tQuestID data[6]
+
+static void DebugAction_Quest_Set(u8 taskId)
+{
+    gTasks[taskId].tQuestJump = FALSE;
+    DebugAction_Quest(taskId);
+}
+
+static void DebugAction_Quest_Jump(u8 taskId)
+{
+    gTasks[taskId].tQuestJump = TRUE;
+    DebugAction_Quest(taskId);
+}
+
+static void DebugAction_Quest(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra_Wide);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    // Display initial quest
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
+    QuestMenu_CopyQuestName(gStringVar1, 0);
+    StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+    StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+
+    gTasks[taskId].func = DebugAction_Quest_SelectQuest;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = 0;
+    gTasks[taskId].tDigit = 0;
+}
+
+static void DebugAction_Quest_SelectQuest(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+
+        if (JOY_NEW(DPAD_UP))
+        {
+            gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput >= QUEST_COUNT)
+                gTasks[taskId].tInput = QUEST_COUNT - 1;
+        }
+        if (JOY_NEW(DPAD_DOWN))
+        {
+            gTasks[taskId].tInput -= sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput < 0)
+                gTasks[taskId].tInput = 0;
+        }
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            if (gTasks[taskId].tDigit > 0)
+                gTasks[taskId].tDigit -= 1;
+        }
+        if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (gTasks[taskId].tDigit < DEBUG_NUMBER_DIGITS_QUESTS - 1)
+                gTasks[taskId].tDigit += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        QuestMenu_CopyQuestName(gStringVar1, gTasks[taskId].tInput);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
+        StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].tQuestID = gTasks[taskId].tInput;
+        gTasks[taskId].tInput = 0;
+        gTasks[taskId].tDigit = 0;
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
+        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+
+        gTasks[taskId].func = DebugAction_Quest_SelectState;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+static void DebugAction_Quest_SelectState(u8 taskId)
+{
+    u32 questId = gTasks[taskId].tQuestID;
+
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+
+        if (JOY_NEW(DPAD_UP))
+        {
+            gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
+            u32 stateCount = GetMaxQuestState(questId);
+            if (gTasks[taskId].tInput >= stateCount)
+                gTasks[taskId].tInput = stateCount - 1;
+        }
+        if (JOY_NEW(DPAD_DOWN))
+        {
+            gTasks[taskId].tInput -= sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput < 0)
+                gTasks[taskId].tInput = 0;
+        }
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            if (gTasks[taskId].tDigit > 0)
+                gTasks[taskId].tDigit -= 1;
+        }
+        if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (gTasks[taskId].tDigit < DEBUG_NUMBER_DIGITS_STATES)
+                gTasks[taskId].tDigit += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
+        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+
+        if (gTasks[taskId].tQuestJump)
+            QuestMenu_JumpToQuestState(questId, gTasks[taskId].tInput);
+        else
+            QuestMenu_SetupQuestState(questId, gTasks[taskId].tInput);
+
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+#undef tQuestJump
+#undef tQuestID
+ // End siliconMerge
 #undef tMenuTaskId
 #undef tWindowId
 #undef tSubWindowId
@@ -4539,3 +5423,10 @@ static void DebugAction_Util_CheckEWRAMCounters(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_EWRAMCounters);
 }
+// Start playerCustom
+static void DebugAction_Util_Customize(u8 taskId)
+{
+    CleanupOverworldWindowsAndTilemaps();
+    CustomizeCharacterFromOverworld();
+}
+// End playerCustom

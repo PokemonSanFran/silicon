@@ -27,6 +27,9 @@
 #include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "pokevial.h" //Pokevial Branch
+#include "options_battle.h" // siliconMerge
+#include "ui_pokedex.h" // pokedex
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
@@ -35,6 +38,12 @@ static void HealPlayerBoxes(void);
 void HealPlayerParty(void)
 {
     u32 i;
+// Start siliconMerge
+    if (!CanHealPlayer())
+        return;
+	
+	PokevialRefill(); //Pokevial Branch
+// End siliconMerge
     for (i = 0; i < gPlayerPartyCount; i++)
         HealPokemon(&gPlayerParty[i]);
     if (OW_PC_HEAL >= GEN_8)
@@ -236,6 +245,21 @@ void ReducePlayerPartyToSelectedMons(void)
     CalculatePlayerPartyCount();
 }
 
+// Start siliconMerge
+void LevelUpAllPokemonTo100(void) 
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++) 
+	{
+        struct Pokemon *pokemon = &gPlayerParty[i];
+        if (GetMonData(pokemon, MON_DATA_SPECIES, NULL) != SPECIES_NONE) 
+		{
+            u32 exp = gExperienceTables[gSpeciesInfo[GetMonData(pokemon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
+            SetMonData(pokemon, MON_DATA_EXP, &exp);
+            CalculateMonStats(pokemon);
+        }
+    }
+}
+// End siliconMerge
 void CanHyperTrain(struct ScriptContext *ctx)
 {
     u32 stat = ScriptReadByte(ctx);
@@ -332,7 +356,10 @@ void SetTeraType(struct ScriptContext *ctx)
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
  */
-static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, enum PokeBall ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 gmaxFactor, u8 teraType, u8 dmaxLevel)
+// Start siliconMerge
+//static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, enum PokeBall ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 gmaxFactor, u8 teraType, u8 dmaxLevel)
+u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, enum PokeBall ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 gmaxFactor, u8 teraType, u8 dmaxLevel)
+// End siliconMerge
 {
     u16 nationalDexNum;
     int sentToPc;
@@ -462,6 +489,7 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     {
         // set pokédex flags
         nationalDexNum = SpeciesToNationalPokedexNum(species);
+        SpeciesData_SetSavedLastForm(species); // siliconMerge
         if (sentToPc != MON_CANT_GIVE)
         {
             GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);

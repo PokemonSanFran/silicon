@@ -1,10 +1,14 @@
 #include "global.h"
 #include "menu.h"
+#include "nameplate.h" // siliconMerge
+#include "event_data.h" // siliconMerge
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "match_call.h"
 #include "field_message_box.h"
+#include "constants/nameplate.h" // siliconMerge
+#include "constants/vars.h" // siliconMerge
 #include "text_window.h"
 #include "script.h"
 
@@ -69,6 +73,7 @@ bool8 ShowFieldMessage(const u8 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
+    DrawNameplate(); // siliconMerge
     ExpandStringAndStartDrawFieldMessage(str, TRUE);
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_NORMAL;
     return TRUE;
@@ -138,6 +143,7 @@ void HideFieldMessageBox(void)
 {
     DestroyTask_DrawFieldMessage();
     ClearDialogWindowAndFrame(0, TRUE);
+    ClearMessageBoxAddOns(); // siliconMerge
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
 }
 

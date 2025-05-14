@@ -10,6 +10,7 @@
 #include "map_name_popup.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "nameplate.h" // siliconMerge
 #include "palette.h"
 #include "pokedex.h"
 #include "pokemon_icon.h"
@@ -76,21 +77,36 @@ const u16 gStandardMenuPalette[] = INCBIN_U16("graphics/interface/std_menu.gbapa
 
 static const u8 sTextSpeedFrameDelays[] =
 {
-    [OPTIONS_TEXT_SPEED_SLOW] = 8,
-    [OPTIONS_TEXT_SPEED_MID]  = 4,
-    [OPTIONS_TEXT_SPEED_FAST] = 1
+    // Start siliconMerge
+    [OPTIONS_TEXT_SPEED_SLOW]    = 8,
+    [OPTIONS_TEXT_SPEED_MID]     = 4,
+    [OPTIONS_TEXT_SPEED_FAST]    = 1,
+    [OPTIONS_TEXT_SPEED_INSTANT] = 1,
+	// End siliconMerge
 };
 
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
 {
     {
         .bg = 0,
-        .tilemapLeft = 2,
+        // Start siliconMerge
+
+		.tilemapLeft = 1,
+        .tilemapTop = 13,
+        .width = 28,
+        .height = 6,
+		/*
+		.tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
         .height = 4,
+		*/
+		// End siliconMerge
         .paletteNum = 15,
-        .baseBlock = 0x194
+        // Start siliconMerge
+		.baseBlock = 0x234
+		//.baseBlock = 0x194
+		// End siliconMerge
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -99,7 +115,10 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
 {
     .bg = 0,
     .tilemapLeft = 21,
-    .tilemapTop = 9,
+    // Start siliconMerge
+	.tilemapTop = 7,
+	//.tilemapTop = 9,
+	// End siliconMerge
     .width = 5,
     .height = 4,
     .paletteNum = 15,
@@ -178,9 +197,15 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = 0;
+// Start siliconMerge
+//    printer.y = 0;
     printer.y = 1;
+// End siliconMerge
     printer.currentX = 0;
+// Start siliconMerge
+//    printer.currentY = 0;
     printer.currentY = 1;
+// End siliconMerge
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
     printer.unk = 0;
@@ -214,7 +239,10 @@ void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonP
 void LoadMessageBoxAndBorderGfx(void)
 {
     LoadMessageBoxGfx(0, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
-    LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
+    // Start siliconMerge
+	//LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
+    LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
+	// End siliconMerge
 }
 
 void LoadSignPostWindowFrameGfx(void)
@@ -436,6 +464,7 @@ static void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u
 
 static void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
+    /*
     FillBgTilemapBufferRect(bg,
                             DLG_WINDOW_BASE_TILE_NUM + 1,
                             tilemapLeft - 2,
@@ -527,6 +556,22 @@ static void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u
                             1,
                             1,
                             DLG_WINDOW_PALETTE_NUM);
+    */
+    //Top Left
+    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 5, tilemapLeft - 1, tilemapTop, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    //Left Bar
+    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 7, tilemapLeft - 1, tilemapTop + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
+    //           _
+    //Top Right
+    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 6, tilemapLeft + width, tilemapTop, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    //Right Bar
+    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 10, tilemapLeft + width, tilemapTop + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
+    //Bottom Left
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 11), tilemapLeft - 1, tilemapTop + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    //Bottom Bar
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 12), tilemapLeft, tilemapTop + height, width, 1, DLG_WINDOW_PALETTE_NUM);
+    //Bottom Right
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 13), tilemapLeft + width, tilemapTop + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
 }
 
 static void WindowFunc_ClearStdWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -593,14 +638,23 @@ u32 GetPlayerTextSpeed(void)
 {
     if (gTextFlags.forceMidTextSpeed)
         return OPTIONS_TEXT_SPEED_MID;
-    return gSaveBlock2Ptr->optionsTextSpeed;
+    // Start siliconMerge
+	return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED];
+	//return gSaveBlock2Ptr->optionsTextSpeed;
+	// End siliconMerge
 }
 
 u8 GetPlayerTextSpeedDelay(void)
 {
     u32 speed;
-    if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
+// Start siliconMerge
+    if (gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] > OPTIONS_TEXT_SPEED_INSTANT)
+        gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] = OPTIONS_TEXT_SPEED_MID;
+    /*
+	if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
         gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
+	*/
+// End siliconMerge
     speed = GetPlayerTextSpeed();
     return sTextSpeedFrameDelays[speed];
 }

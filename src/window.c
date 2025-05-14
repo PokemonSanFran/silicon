@@ -722,3 +722,23 @@ u32 WindowTemplateWidthPx(const struct WindowTemplate *template)
 {
     return template->width * TILE_WIDTH;
 }
+// Start siliconMerge
+u32 CalculateNextWindowBaseblock(void)
+{
+    u32 activeWindowId = 0;
+
+    for (u32 windowIndex = 0; windowIndex < WINDOWS_MAX; windowIndex++)
+    {
+        if (GetWindowAttribute(windowIndex,WINDOW_BG) == 0xFF)
+            continue;
+
+        activeWindowId = windowIndex;
+    }
+
+    u32 baseblock = GetWindowAttribute(activeWindowId,WINDOW_BASE_BLOCK);
+    u32 height = GetWindowAttribute(activeWindowId,WINDOW_HEIGHT);
+    u32 width = GetWindowAttribute(activeWindowId,WINDOW_WIDTH);
+
+    return (baseblock + (height * width));
+}
+// End siliconMerge

@@ -164,15 +164,22 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
     case RENDER_STATE_SCROLL:
         if (textPrinter->scrollDistance)
         {
-            if (textPrinter->scrollDistance < sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed])
+// Start siliconMerge
+            if (textPrinter->scrollDistance < sScrollDistances[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]])
+            //if (textPrinter->scrollDistance < sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed])
+// End siliconMerge
             {
                 ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance = 0;
             }
             else
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                textPrinter->scrollDistance -= sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed];
+// Start siliconMerge
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, sScrollDistances[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                textPrinter->scrollDistance -= sScrollDistances[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]];
+                //ScrollWindow(textPrinter->printerTemplate.windowId, 0, sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                //textPrinter->scrollDistance -= sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed];
+// End siliconMerge
             }
             CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
         }

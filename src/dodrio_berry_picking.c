@@ -4613,7 +4613,13 @@ static void LoadGfx(void)
         sGfx->state++;
         break;
     case 4:
+        // Start siliconMerge
+		#ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
+        LoadWindowFrameGfx(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE]);
+        #else
+		// End siliconMerge
         LoadWindowFrameGfx(gSaveBlock2Ptr->optionsWindowFrameType);
+        #endif // siliconMerge
         LoadUserWindowFrameGfx();
         sGfx->state++;
         break;

@@ -44,9 +44,17 @@
 #include "berry_powder.h"
 #include "mystery_gift.h"
 #include "union_room_chat.h"
+#include "constants/items.h" // siliconMerge
+#include "ui_options_menu.h" // bootSequence
+#include "quests.h" // bootSequence
+#include "buzzr.h" // bootSequence
+#include "glass.h" // bootSequence
+#include "debug.h" // bootSequence
 #include "constants/map_groups.h"
 #include "constants/items.h"
 #include "difficulty.h"
+#include "siliconDaycare.h" // siliconDaycare
+#include "ui_character_customization_menu.h" // playerCustom
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -85,8 +93,13 @@ void CopyTrainerId(u8 *dst, u8 *src)
         dst[i] = src[i];
 }
 
-static void InitPlayerTrainerId(void)
+// Start siliconStarter
+//static void InitPlayerTrainerId(void)
+//{
+void InitPlayerTrainerId(void)
 {
+    SeedRngAndSetTrainerId();
+// End siliconStarter
     u32 trainerId = (Random() << 16) | GetGeneratedTrainerIdLower();
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
 }
@@ -94,12 +107,17 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
+    // Start bootSequence
+    OptionMenu_ResetAllToDefault();
+    /*
+	gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
+	*/
+    // End bootSequence
 }
 
 static void ClearPokedexFlags(void)
@@ -107,6 +125,7 @@ static void ClearPokedexFlags(void)
     gUnusedPokedexU8 = 0;
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
+    memset(&gSaveBlock2Ptr->pokedex, 0, sizeof(gSaveBlock2Ptr->pokedex)); // pokedex
 }
 
 void ClearAllContestWinnerPics(void)
@@ -130,7 +149,11 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    // Start bootSequence
+    // SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    FlagSet(FLAG_SPAWN_INVISIBLE);
+    SetWarpDestination(MAP_GROUP(OROLAND_COLISEUM_HALLWAY), MAP_NUM(OROLAND_COLISEUM_HALLWAY), WARP_ID_NONE, 5, 18);
+    // End bootSequence
     WarpIntoMap();
 }
 
@@ -166,7 +189,10 @@ void NewGameInitData(void)
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
+    // Start siliconStarter
+    //InitPlayerTrainerId();
     InitPlayerTrainerId();
+    // End siliconStarter
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
@@ -174,7 +200,8 @@ void NewGameInitData(void)
     ResetGabbyAndTy();
     ClearSecretBases();
     ClearBerryTrees();
-    SetMoney(&gSaveBlock1Ptr->money, 3000);
+    //SetMoney(&gSaveBlock1Ptr->money, 3000); // bootSequence
+    SetInitalMoney(); // bootSequence
     SetCoins(0);
     ResetLinkContestBoolean();
     ResetGameStats();
@@ -188,7 +215,7 @@ void NewGameInitData(void)
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
-    NewGameInitPCItems();
+    // NewGameInitPCItems(); // bootSequence
     ClearPokeblocks();
     ClearDecorationInventories();
     InitEasyChatPhrases();
@@ -208,9 +235,17 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    // Start bootSequence
+    QuestMenu_ResetMenuSaveData();
+    OptionMenu_ResetAllToDefault();
+    Buzzr_ResetSaveData();
+    Glass_ResetSaveData();
+    SetPlayerAvatarToChampion(); // playerCustom
+    // End bootSequence
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetItemFlags();
     ResetDexNav();
+    ClearSiliconDaycareData(); // siliconDaycare
 }
 
 static void ResetMiniGamesRecords(void)
@@ -219,6 +254,34 @@ static void ResetMiniGamesRecords(void)
     SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
     ResetPokemonJumpRecords();
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
+// Start siliconMerge
+}
+
+void GivePlayerAllTechnicalMachines(void)
+{
+    DebugAction_PCBag_Fill_PocketTMHM(0);
+}
+
+void GivePlayerHealingItems(void)
+{
+    u32 healingIndex;
+
+    const u32 healingItems[] =
+    {
+        ITEM_MAX_REVIVE,
+        ITEM_MAX_POTION,
+        ITEM_MAX_ELIXIR,
+    };
+
+    for (healingIndex = 0; healingIndex < ARRAY_COUNT(healingItems); healingIndex++)
+        if (CheckBagHasSpace(healingItems[healingIndex],1))
+            AddBagItem(healingItems[healingIndex], 1);
+}
+
+void SetInitalMoney(void)
+{
+    SetMoney(&gSaveBlock1Ptr->money, STARTING_MONEY);
+// End siliconMerge	
 }
 
 static void ResetItemFlags(void)
@@ -235,3 +298,12 @@ static void ResetDexNav(void)
 #endif
     gSaveBlock3Ptr->dexNavChain = 0;
 }
+
+// Start bootSequence
+void ResetBagAndParty(void)
+{
+    ZeroPlayerPartyMons();
+    ResetItemFlags();
+    ClearBag();
+}
+// End bootSequence
