@@ -317,6 +317,7 @@ gSpecials::
 	def_special InitRoamer
 	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
+	def_special IsFireTypeInParty // siliconMerge
 	def_special DoContestHallWarp
 	def_special LoadWallyZigzagoon
 	def_special IsStarterInParty
@@ -473,7 +474,7 @@ gSpecials::
 	def_special ShowBattlePointsWindow
 	def_special UpdateBattlePointsWindow
 	def_special CloseBattlePointsWindow
-	def_special GiveFrontierBattlePoints
+	//def_special GiveFrontierBattlePoints
 	def_special TakeFrontierBattlePoints
 	def_special GetFrontierBattlePoints
 	def_special ShowFrontierExchangeCornerItemIconWindow
@@ -541,7 +542,123 @@ gSpecials::
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
+// Start siliconMerge
+	def_special ScriptSetTotemBoost
+    def_special TeleportCamera
+    def_special ReturnCameraToPlayer
+	def_special SetSharpriseSpireFloor
+	def_special GetTowerFloorDefaultFloorChoice
+    def_special ShowSharpriseSpireElevatorFloorSelect
+    def_special GetNumberOfBadges
+    def_special GetPartySlotIfMonCanMegaEvolve
+    def_special SetObjectMovementType
+    def_special CheckNumArantrazExhibitDefeated
+    def_special GetCurrentMap
+// End siliconMerge	
 	def_special TrySpecialOverworldEvo
+// Start siliconMerge
+    def_special ResetHealLocationToPerlaciaCity
+    def_special CheckSpecies
+	def_special DeleteChosenPartyMon
+	def_special Script_GetGameStat
+	def_special AlohaFromAlolaCheck
+	def_special IsPartyFullOfShinyOctillery
+	def_special Script_CheckForMonAndMove
+	def_special GetPokedexCompletionRate
+	def_special Script_GetCurrentMapName
+	def_special CopyMonToStolenTradeStorage
+	def_special CopyMonFromStolenTradeStorage
+    def_special RandomlyBoostPartyMemberFriendship
+    def_special CheckPartyHasOneMon
+    def_special ConvertChallengeTurnsToRank
+    def_special Quest_Wildfirerisk_GetPercentage
+    def_special GenerateMazeItemsSeed
+    def_special KitchenvolunteeringFunc_GeneratePantryItem
+    def_special KitchenvolunteeringFunc_CheckProgressAndSetReward
+    def_special KitchenvolunteeringFunc_ChooseRandomPantryItem
+    def_special Quest_Rockcollector_CheckTakenStoneFlags
+    def_special Quest_Rockcollector_TakeAllStonesFromBag
+    def_special Quest_Rockcollector_CountRemainingSubquests
+    def_special Quest_Rockcollector_CheckSubquestTakeStone
+    def_special Quest_Rockcollector_RespawnStones
+    def_special HiddenGrotto_LoadDiscoveredGrottoText
+    def_special HiddenGrotto_LoadGrottoAndWarpPlayer
+    def_special Quest_Hiddengrottomapping_CheckForJournalPage
+    def_special Quest_Hiddengrottomapping_CountCompletedSubquests
+    def_special Quest_Ultrawormholeresearch_SetTotemBattle
+    def_special Quest_Ultrawormholeresearch_ShouldTotemNotSpawn
+    def_special Quest_Ultrawormholeresearch_SetDefeatedTotemFlag
+    def_special Quest_Ultrawormholeresearch_BufferTotemPokemonName
+    def_special Quest_Ultrawormholeresearch_PlayTotemCry
+    def_special Quest_Ultrawormholeresearch_PlayUltraBeastCry
+    def_special Quest_Ultrawormholeresearch_SetUltraBeastBattle
+    def_special Quest_Ultrawormholeresearch_BufferUltraBeastPokemonName
+    def_special Quest_Ultrawormholeresearch_SetSubquestForUltraBeast
+    def_special Quest_Ultrawormholeresearch_CountRemainingSubquests
+    def_special Taxi_CalculateFeeAndCharge
+    def_special Taxi_BufferDestinationMapName
+    def_special Quest_Taxicabturnaround_IsSubquestComplete
+    def_special Quest_Taxicabturnaround_CheckRequiredPokemon
+    def_special Quest_Taxicabturnaround_MarkSubquestComplete
+    def_special Quest_Taxicabturnaround_CountRemainingSubquests
+    def_special Quest_Taxicabturnaround_CheckReadyForNext
+    def_special Quest_Bodegaburnout_IsSubquestComplete
+    def_special Quest_Bodegaburnout_Catch_MarkSubquestComplete
+    def_special Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem
+    def_special Quest_Bodegaburnout_CountRemainingSubquests
+    def_special Quest_Bodegaburnout_CheckReadyForNext
+    def_special Quest_Bodegaburnout_LoadRequestText
+    def_special Quest_Bodegaburnout_GetQuestType
+    def_special Quest_Bodegaburnout_CheckLocationAndMatchItem
+    def_special Quest_Bodegaburnout_CheckRequiredPokemon
+    def_special Quest_Bodegaburnout_CheckAndSetRescueFlag
+    def_special Quest_Bodegaburnout_ClearRescueFlag
+    def_special Quest_Breaktheinternet_Count_CompletedSocialMedia
+    def_special Quest_Breaktheinternet_CountRemainingSubquests
+    def_special Quest_Warehousewarfare_CountRemainingSubquests
+    def_special Quest_Persuasivepassenger_CountRemainingSubquests
+    def_special Quest_Persuasivepassenger_CheckQuestAndChooseDriver
+    def_special Quest_Persuasivepassenger_CheckNeededItems
+    def_special Quest_Persuasivepassenger_TakeNeededItems
+    def_special Quest_Skilllibrary_StoreAndCompare
+    def_special Quest_Skilllibrary_Debug
+    def_special Quest_Mutaidaidfund_CalculateMoneyAndText
+    def_special Quest_Mutualaidfund_CheckMoney
+    def_special Quest_Mutualaidfund_TakeDonation
+    def_special Quest_Brucelee_UpdateType
+    def_special Quest_Brucelee_BufferTypeName
+    def_special Quest_Brucelee_CheckIfPartyTypes
+    def_special ShowStartMenuSaveScreen
+    def_special Quest_Restorezenzugym_CheckRemainingSubquests
+    def_special Quest_Restoreespuleeoutskirts_CheckRemainingSubquests
+    def_special Quest_Taxicabturnaround_LookUpQuestType
+    def_special Quest_SmoothieCrafting_CheckNeededItems
+    def_special YouRealizeTheyreEvilRight_GetMapForCompletedRestoration
+    def_special VSGarbodor_ChooseGemBasedOnStarter
+    def_special ShouldShowAlcmene
+
+@ Restored Frontier
+
+    def_special PSF_SetNextTowerOpponent
+    def_special PSF_GetFrontierBrainStatus
+    def_special Debug_MakeStreak40
+    def_special PSF_GiveFacilitySymbol
+    def_special LevelUpAllPokemonTo100
+    def_special SavePlayerPartyBattleFrontier
+    def_special LoadPlayerPartyBattleFrontier
+
+    //Start Pokevial Branch
+    def_special PokevialGetDose
+    def_special PokevialGetSize
+    def_special PokevialRefill
+    //End Pokevial Branch
+
+    def_special ShouldSkipCutscene
+    def_special SkipCutscene
+    def_special ResetCutsceneStatus
+
+    def_special GetFalseTimelineCompletion
+// End siliconMerge	
 	def_special GetNumberSprayStrength
 	def_special GetSprayId
 	def_special GetLastUsedSprayType
@@ -560,6 +677,14 @@ gSpecials::
 	def_special Script_GetChosenMonDefensiveEVs
 	def_special Script_GetChosenMonOffensiveIVs
 	def_special Script_GetChosenMonDefensiveIVs
+// Start siliconMerge
+	def_special GetPuzzleValue
+    def_special GetInfiniteSprayMode
+	def_special Quest_DrugHelmetTest_ForgetMoveByPhase
+	def_special Script_GetObjectFacingDirection
+    def_special CheckPlayerCanPlant
+    def_special Quest_RPS_CalculateWager
+// End siliconMerge	
 	def_special UseBlankMessageToCancelPokemonPic
 	def_special EnterCode
 	def_special GetCodeFeedback

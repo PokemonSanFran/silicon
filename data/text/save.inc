@@ -23,6 +23,13 @@ gText_DifferentSaveFile::
 	.string "Are you sure you want to save now\n"
 	.string "and overwrite the other save file?$"
 
+gText_PSF_DiffererentSaveFile::
+	.string "There is a different game file that is\n"
+	.string "already saved. If you save now, the\n"
+	.string "other file's adventure, including items\n"
+	.string "and Pokémon, will be entirely lost. Are\n"
+	.string "you sure you want to save now and\n"
+	.string "overwrite the other save file?$"
 gText_SaveError::
 	.string "Save error.\p"
 	.string "Please exchange the\n"

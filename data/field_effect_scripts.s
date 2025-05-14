@@ -78,8 +78,26 @@ gFieldEffectScriptPointers::
 	.4byte gFldEffScript_DoubleExclMarkIcon             @ FLDEFF_DOUBLE_EXCL_MARK_ICON
 	.4byte gFieldEffectScript_TracksSlither             @ FLDEFF_TRACKS_SLITHER
 	.4byte gFieldEffectScript_TracksBug                 @ FLDEFF_TRACKS_BUG
-	.4byte gFieldEffectScript_TracksSpot                @ FLDEFF_TRACKS_SPOT
-	.4byte gFieldEffectScript_CaveDust                  @ FLDEFF_CAVE_DUST
+@ Start qol_field_moves
+@ THESE NEED TO BE ALIGNED WITH THE VALUES IN include/constants/field_effects.h
+@ If FLDEFF_USE_SURF_TOOL is 74, it needs to be 73 in this list too
+
+    .4byte gFieldEffectScript_UseSurfTool               @ FLDEFF_USE_SURF_TOOL
+    .4byte gFieldEffectScript_UseWaterfallTool          @ FLDEFF_USE_WATERFALL_TOOL 
+    .4byte gFieldEffectScript_UseDiveTool               @ FLDEFF_USE_DIVE_TOOL
+    .4byte gFieldEffectScript_UseTeleportTool           @ FLDEFF_USE_TELEPORT_TOOL
+@ End qol_field_moves
+@ Start rematch_action
+    .4byte gFieldEffectScript_WantRematch               @ FLDEFF_WANT_REMATCH
+@ End rematch_action
+    .4byte gFieldEffectScript_CaveDust                  @ FLDEFF_CAVE_DUST
+@ Start autoSave
+    .4byte gFieldEffectScript_Saving                    @ FLDEFF_SAVING
+
+gFieldEffectScript_Saving::
+    field_eff_loadfadedpal_callnative gSpritePalette_SavingFieldEffect, FldEff_Saving
+    field_eff_end
+@ End autoSave
     
 gFieldEffectScript_ExclamationMarkIcon1::
 	field_eff_callnative FldEff_ExclamationMarkIcon
@@ -352,6 +370,26 @@ gFieldEffectScript_MoveDeoxysRock::
 	field_eff_callnative FldEff_MoveDeoxysRock
 	field_eff_end
 
+@ Start qol_field_moves
+ 
+ gFieldEffectScript_UseSurfTool::
+    field_eff_callnative FldEff_UseSurfTool
+    field_eff_end
+ 
+ gFieldEffectScript_UseWaterfallTool::
+     field_eff_callnative FldEff_UseWaterfallTool
+    field_eff_end
+ 
+ gFieldEffectScript_UseDiveTool::
+     field_eff_callnative FldEff_UseDiveTool
+    field_eff_end
+ 
+ gFieldEffectScript_UseTeleportTool::
+     field_eff_callnative FldEff_UseTeleportTool
+    field_eff_end
+ 
+ @ End qol_field_moves
+
 gFldEffScript_UseVsSeeker::
 	field_eff_callnative FldEff_UseVsSeeker
 	field_eff_end
@@ -368,6 +406,11 @@ gFieldEffectScript_TracksBug::
 	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_TracksBug
 	field_eff_end
 
+@ Start rematch_action
+ gFieldEffectScript_WantRematch::
+     field_eff_callnative FldEff_RematchIcon
+    field_eff_end
+ @ End rematch_action
 gFieldEffectScript_TracksSpot::
 	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_TracksSpot
 	field_eff_end

@@ -251,6 +251,31 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_BUFFERITEMNAMEPLURAL          ScrCmd_bufferitemnameplural,        requests_effects=1  @ 0xe2
 	script_cmd_table_entry SCR_OP_DYNMULTICHOICE                ScrCmd_dynmultichoice,              requests_effects=1  @ 0xe3
 	script_cmd_table_entry SCR_OP_DYNMULTIPUSH                  ScrCmd_dynmultipush,                requests_effects=1  @ 0xe4
+	// Start siliconMerge
+    script_cmd_table_entry SCR_OP_LOCKTARGET                             ScrCmd_locktarget, requests_effects=1                        @ 0xe5
+    script_cmd_table_entry SCR_OP_QUESTMENU                              ScrCmd_questmenu, requests_effects=1                         @ 0xe6
+    script_cmd_table_entry SCR_OP_SUBQUESTMENU                           ScrCmd_subquestmenu, requests_effects=1                      @ 0xe7
+    script_cmd_table_entry SCR_OP_RETURNQUESTSTATE                       ScrCmd_returnqueststate, requests_effects=1                  @ 0xe8
+    script_cmd_table_entry SCR_OP_GIVEFRONTIERBATTLEPOINTS               ScrCmd_givefrontierbattlepoints, requests_effects=1          @ 0xe9
+    script_cmd_table_entry SCR_OP_BUFFERPARTYMONSPECIES                  ScrCmd_bufferpartymonspecies, requests_effects=1             @ 0xea
+    script_cmd_table_entry SCR_OP_BUFFERABILITYNAME                      ScrCmd_bufferabilityname, requests_effects=1                 @ 0xeb
+    script_cmd_table_entry SCR_OP_BUFFERMAPNAME                          ScrCmd_buffermapname, requests_effects=1                     @ 0xec
+    script_cmd_table_entry SCR_OP_POKEVIAL                               ScrCmd_pokevial, requests_effects=1                          @ 0xed
+    script_cmd_table_entry SCR_OP_TOGGLEFLAG                             ScrCmd_toggleflag, requests_effects=1                        @ 0xee
+    script_cmd_table_entry SCR_OP_BUZZR                                  ScrCmd_buzzr, requests_effects=1                             @ 0xef
+    script_cmd_table_entry SCR_OP_CHECKPARTYLEARNKNOWSFIELDMOVE          ScrCmd_checkpartylearnknowsfieldmove, requests_effects=1     @ 0xf0 // qol_field_moves
+    script_cmd_table_entry SCR_OP_GLASS                                  ScrCmd_glass, requests_effects=1                             @ 0xf1 // google_glass
+    script_cmd_table_entry SCR_OP_CUEOBJECT                              ScrCmd_cueobject, requests_effects=1                         @ 0xf2 // cueobject
+    script_cmd_table_entry SCR_OP_CALLFUNC                               ScrCmd_callfunc, requests_effects=1                          @ 0xf3 // callfunc
+    script_cmd_table_entry SCR_OP_ISMONSHINY                             ScrCmd_ismonshiny, requests_effects=1 @ 0xf4
+    script_cmd_table_entry SCR_OP_MAKEQUESTREWARDIFSUBQUESTSCOMPLETE     ScrCmd_makequestrewardifsubquestscomplete, requests_effects=1 @ 0xf5
+    script_cmd_table_entry SCR_OP_SETCUSTOMWILDMON                       ScrCmd_setcustomwildmon, requests_effects=1 @ 0xf6
+    script_cmd_table_entry SCR_OP_CHECKTRAINERDISCOVERED                 ScrCmd_checktrainerdiscovered , requests_effects=1 @ 0xf7
+    script_cmd_table_entry SCR_OP_QUESTOVERWORLD                 ScrCmd_startquestoverworld, requests_effects=1 @ 0xf8
+	script_cmd_table_entry SCR_OP_VARIABLEADDMONEY                      ScrCmd_variableaddmoney,                    requests_effects=1  @ 0x90
+	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                   ScrCmd_variableremovemoney,                 requests_effects=1  @ 0x91
+	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                    ScrCmd_variablecheckmoney,                  requests_effects=1  @ 0x92
+	// End siliconMerge
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::
