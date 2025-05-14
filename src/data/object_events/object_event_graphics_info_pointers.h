@@ -236,6 +236,34 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphir
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMay;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh;
+// Start silicon
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlcmeneWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BdWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BelenWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DimuWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DoyleWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EmrysWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ImeldaWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KeiyingWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagnusWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NerieneWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ShinzoWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFainted;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraFainted;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFieldMove;
+// End silicon
 // Begin pokemon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower;
@@ -490,6 +518,34 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_HOOH] =                     &gObjectEventGraphicsInfo_HoOh,
     [OBJ_EVENT_GFX_POKE_BALL] =                &gObjectEventGraphicsInfo_PokeBall,
     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
+    // Start silicon
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerF1Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerF1MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F1_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerF1AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerF1Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF1Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF1FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF1Fishing,
+    [OBJ_EVENT_GFX_KAI] =                      &gObjectEventGraphicsInfo_KaiNormal,
+    [OBJ_EVENT_GFX_UNKNOWN] =                  &gObjectEventGraphicsInfo_UnknownNormal,
+    [OBJ_EVENT_GFX_ADAORA] =                   &gObjectEventGraphicsInfo_AdaoraWalking,
+    [OBJ_EVENT_GFX_ALCMENE] =                  &gObjectEventGraphicsInfo_AlcmeneWalking,
+    [OBJ_EVENT_GFX_BD] =                       &gObjectEventGraphicsInfo_BdWalking,
+    [OBJ_EVENT_GFX_BELEN] =                    &gObjectEventGraphicsInfo_BelenWalking,
+    [OBJ_EVENT_GFX_DIMU] =                     &gObjectEventGraphicsInfo_DimuWalking,
+    [OBJ_EVENT_GFX_DOYLE] =                    &gObjectEventGraphicsInfo_DoyleWalking,
+    [OBJ_EVENT_GFX_EMRYS] =                    &gObjectEventGraphicsInfo_EmrysWalking,
+    [OBJ_EVENT_GFX_IMELDA] =                   &gObjectEventGraphicsInfo_ImeldaWalking,
+    [OBJ_EVENT_GFX_KAUNA] =                    &gObjectEventGraphicsInfo_KaunaWalking,
+    [OBJ_EVENT_GFX_KAUNA_SURFING] =            &gObjectEventGraphicsInfo_KaunaSurfing,
+    [OBJ_EVENT_GFX_KEIYING] =                  &gObjectEventGraphicsInfo_KeiyingWalking,
+    [OBJ_EVENT_GFX_MAGNUS] =                   &gObjectEventGraphicsInfo_MagnusWalking,
+    [OBJ_EVENT_GFX_NERIENE] =                  &gObjectEventGraphicsInfo_NerieneWalking,
+    [OBJ_EVENT_GFX_SHINZO] =                   &gObjectEventGraphicsInfo_ShinzoWalking,
+    [OBJ_EVENT_GFX_KAI_FAINTED] =              &gObjectEventGraphicsInfo_KaiFainted,
+    [OBJ_EVENT_GFX_ADAORA_FAINTED] =           &gObjectEventGraphicsInfo_AdaoraFainted,
+    [OBJ_EVENT_GFX_KAI_FIELD_MOVE] =           &gObjectEventGraphicsInfo_KaiFieldMove,
+    // End silicon
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

@@ -140,6 +140,11 @@ static const struct FormChange sKinglerFormChangeTable[] =
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_KINGLER_GMAX},
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_KINGLER_MEGA, ITEM_KINGLERNITE},
+#endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_KRABBY
@@ -186,7 +191,11 @@ static const struct FormChange sGyaradosFormChangeTable[] = {
 static const struct FormChange sLaprasFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_LAPRAS_GMAX},
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_LAPRAS_MEGA, ITEM_LAPRASNITE},
 #endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_LAPRAS
@@ -725,6 +734,11 @@ static const struct FormChange sGarbodorFormChangeTable[] =
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_GARBODOR_GMAX},
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_GARBODOR_MEGA, ITEM_GARBODORNITE},
+#endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_TRUBBISH
@@ -1061,6 +1075,11 @@ static const struct FormChange sCorviknightFormChangeTable[] =
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_CORVIKNIGHT_GMAX},
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_CORVIKNIGHT_MEGA, ITEM_CORVIKNIGHTNITE},
+#endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_ROOKIDEE
@@ -1071,6 +1090,11 @@ static const struct FormChange sOrbeetleFormChangeTable[] =
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_ORBEETLE_GMAX},
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_ORBEETLE_MEGA, ITEM_ORBEETLENITE},
+#endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_BLIPBUG
@@ -1080,7 +1104,11 @@ static const struct FormChange sDrednawFormChangeTable[] =
 {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_DREDNAW_GMAX},
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_DREDNAW_MEGA, ITEM_DREDNAWNITE},
 #endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_CHEWTLE
@@ -1118,7 +1146,11 @@ static const struct FormChange sSandacondaFormChangeTable[] =
 {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_SANDACONDA_GMAX},
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_SANDACONDA_MEGA, ITEM_SANDACONDANITE},
 #endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_SILICOBRA
@@ -1159,6 +1191,11 @@ static const struct FormChange sCentiskorchFormChangeTable[] =
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_CENTISKORCH_GMAX},
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_CENTISKORCH_MEGA, ITEM_CENTISKORCHNITE},
+#endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_SIZZLIPEDE
@@ -1168,7 +1205,11 @@ static const struct FormChange sHattereneFormChangeTable[] =
 {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_HATTERENE_GMAX},
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_HATTERENE_MEGA, ITEM_HATTERENENITE},
 #endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_HATENNA
@@ -1217,6 +1258,11 @@ static const struct FormChange sCopperajahFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_COPPERAJAH_GMAX},
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_COPPERAJAH_MEGA, ITEM_COPPERAJAHNITE},
+#endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_CUFANT
@@ -1225,7 +1271,11 @@ static const struct FormChange sCopperajahFormChangeTable[] = {
 static const struct FormChange sDuraludonFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_DURALUDON_GMAX},
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_DURALUDON_MEGA, ITEM_DURALUDONNITE},
 #endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_DURALUDON
@@ -1251,13 +1301,22 @@ static const struct FormChange sUrshifuSingleStrikeFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_URSHIFU_SINGLE_STRIKE_GMAX},
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_MEGA, ITEM_URSHIFUNITE_SINGLE},
+#endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 
 static const struct FormChange sUrshifuRapidStrikeFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_URSHIFU_RAPID_STRIKE_GMAX},
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_URSHIFU_RAPID_STRIKE_STYLE_MEGA, ITEM_URSHIFUNITE_RAPID},
 #endif
+// End siliconMerge
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_KUBFU

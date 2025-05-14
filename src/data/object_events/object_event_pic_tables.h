@@ -1210,6 +1210,32 @@ static const struct SpriteFrameImage sPicTable_Ball_STRANGE[] = {
     POKEBALL_PIC_FRAMES(Strange),
 };
 #endif //ITEM_STRANGE_BALL
+// Start siliconNewBalls
+static const struct SpriteFrameImage sPicTable_Ball_NEWA[] = {
+        POKEBALL_PIC_FRAMES(NewA),
+};
+static const struct SpriteFrameImage sPicTable_Ball_NEWB[] = {
+        POKEBALL_PIC_FRAMES(NewB),
+};
+static const struct SpriteFrameImage sPicTable_Ball_NEWC[] = {
+        POKEBALL_PIC_FRAMES(NewC),
+};
+static const struct SpriteFrameImage sPicTable_Ball_NEWD[] = {
+        POKEBALL_PIC_FRAMES(NewD),
+};
+static const struct SpriteFrameImage sPicTable_Ball_NEWE[] = {
+        POKEBALL_PIC_FRAMES(NewE),
+};
+static const struct SpriteFrameImage sPicTable_Ball_NEWF[] = {
+        POKEBALL_PIC_FRAMES(NewF),
+};
+static const struct SpriteFrameImage sPicTable_Ball_NEWG[] = {
+        POKEBALL_PIC_FRAMES(NewG),
+};
+static const struct SpriteFrameImage sPicTable_Ball_NEWH[] = {
+        POKEBALL_PIC_FRAMES(NewH),
+};
+// End siliconNewBalls
 #endif //OW_FOLLOWERS_POKEBALLS
 
 static const struct SpriteFrameImage sPicTable_DeoxysOld[] = {
@@ -1355,3 +1381,145 @@ static const struct SpriteFrameImage sPicTable_KirliaOld[] = {
 static const struct SpriteFrameImage sPicTable_RubySapphireMay[] = {
     overworld_ascending_frames(gObjectEventPic_RubySapphireMayNormal, 2, 4),
 };
+
+// Start silicon
+static const struct SpriteFrameImage sPicTable_siliconPlayerF1Normal[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerF1NormalRunning, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerF1MachBike[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerF1MachBike, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerF1AcroBike[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerF1AcroBike, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerF1Surfing[] = {
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 3),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Surfing, 4, 4, 5),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerF1Underwater[] = {
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerF1Underwater, 4, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerF1FieldMove[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerF1FieldMove, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerF1Fishing[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerF1Fishing, 4, 4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_KaiNormal[] = {
+    overworld_ascending_frames(gObjectEventPic_KaiNormal,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_KaiFainted[] =
+{
+    obj_frame_tiles(gObjectEventPic_KaiFainted),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_KaiFieldMove[] =
+{
+    overworld_ascending_frames(gObjectEventPic_KaiFieldMove, 4, 4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_AdaoraFainted[] =
+{
+    obj_frame_tiles(gObjectEventPic_AdaoraFainted),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_AdaoraWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_AdaoraWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_AlcmeneWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_AlcmeneWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_BdWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_BdWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_BelenWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_BelenWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_DimuWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_DimuWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_DoyleWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_DoyleWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_EmrysWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_EmrysWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_ImeldaWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_ImeldaWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_KaunaSurfing[] =
+{
+    overworld_ascending_frames(gObjectEventPic_KaunaSurfing,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_KaunaWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_KaunaWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_KeiyingWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_KeiyingWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_MagnusWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_MagnusWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_NerieneWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_NerieneWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_ShinzoWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_ShinzoWalking,4,4),
+};
+
+static const struct SpriteFrameImage sPicTable_Unknown[] = {
+    obj_frame_tiles(gObjectEventPic_UnknownNormal),
+};
+// End silicon

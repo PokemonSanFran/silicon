@@ -174,6 +174,20 @@ const u8 gItemEffect_SacredAsh[7] = {
     [6] = ITEM6_HEAL_HP_FULL,
 };
 
+//Start Pokevial Branch
+const u8 gItemEffect_Pokevial[7] = {
+    [0] = ITEM0_POKEVIAL,
+    [3] = ITEM3_STATUS_ALL,
+    [4] = ITEM4_REVIVE | ITEM4_HEAL_HP | ITEM4_HEAL_PP,
+    [6] = ITEM6_HEAL_HP_FULL | ITEM6_HEAL_PP_FULL,
+};
+//End Pokevial Branch
+
+// Start hexorb branch
+const u8 gItemEffect_Hexorb[7] = {
+    [0] = ITEM0_HEXORB,
+};
+// End Hexorb branch
 #define VITAMIN_FRIENDSHIP_CHANGE(i)             \
     [(i) + 0] = 5, /* Friendship change, low */  \
     [(i) + 1] = 3, /* Friendship change, mid */  \
@@ -459,3 +473,10 @@ const u8 gItemEffect_TamatoBerry[10] = {
     [6] = ITEM6_SUBTRACT_EV,
     EV_BERRY_FRIENDSHIP_CHANGE,
 };
+// Start siliconMerge
+const u8 gItemEffect_SherbetSurprise[10] = {
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_RESET_EV | ITEM6_EV_ALL,
+    EV_BERRY_FRIENDSHIP_CHANGE,
+};
+// End siliconMerge

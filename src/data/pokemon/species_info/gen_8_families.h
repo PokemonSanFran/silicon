@@ -776,6 +776,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Skwovet"),
         .cryId = CRY_SKWOVET,
         .natDexNum = NATIONAL_DEX_SKWOVET,
+        .residoDexNum = RESIDO_DEX_SKWOVET,
         .categoryName = _("Cheeky"),
         .height = 3,
         .weight = 25,
@@ -840,6 +841,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Greedent"),
         .cryId = CRY_GREEDENT,
         .natDexNum = NATIONAL_DEX_GREEDENT,
+        .residoDexNum = RESIDO_DEX_GREEDENT,
         .categoryName = _("Greedy"),
         .height = 6,
         .weight = 60,
@@ -904,6 +906,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Rookidee"),
         .cryId = CRY_ROOKIDEE,
         .natDexNum = NATIONAL_DEX_ROOKIDEE,
+        .residoDexNum = RESIDO_DEX_ROOKIDEE,
         .categoryName = _("Tiny Bird"),
         .height = 2,
         .weight = 18,
@@ -976,6 +979,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Corvisquire"),
         .cryId = CRY_CORVISQUIRE,
         .natDexNum = NATIONAL_DEX_CORVISQUIRE,
+        .residoDexNum = RESIDO_DEX_CORVISQUIRE,
         .categoryName = _("Raven"),
         .height = 8,
         .weight = 160,
@@ -1048,6 +1052,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Corviknight"),
         .cryId = CRY_CORVIKNIGHT,
         .natDexNum = NATIONAL_DEX_CORVIKNIGHT,
+        .residoDexNum = RESIDO_DEX_CORVIKNIGHT,
         .categoryName = _("Raven"),
         .height = 22,
         .weight = 750,
@@ -1117,6 +1122,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Corviknight"),
         .cryId = CRY_CORVIKNIGHT,
         .natDexNum = NATIONAL_DEX_CORVIKNIGHT,
+        .residoDexNum = RESIDO_DEX_CORVIKNIGHT,
         .categoryName = _("Raven"),
         .height = 140,
         .weight = 0,
@@ -1151,6 +1157,66 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sCorviknightFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_CORVIKNIGHT_MEGA] =
+    {
+        .baseHP        = 98,
+        .baseAttack    = 87,
+        .baseDefense   = 105,
+        .baseSpeed     = 67,
+        .baseSpAttack  = 53,
+        .baseSpDefense = 85,
+        .types = MON_TYPES(TYPE_FLYING, TYPE_STEEL),
+        .catchRate = 45,
+        .expYield = 248,
+        .evYield_Defense = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = { ABILITY_PRESSURE, ABILITY_UNNERVE, ABILITY_MIRROR_ARMOR },
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Corviknight"),
+        .cryId = CRY_CORVIKNIGHT,
+        .natDexNum = NATIONAL_DEX_CORVIKNIGHT,
+        .residoDexNum = RESIDO_DEX_CORVIKNIGHT,
+        .categoryName = _("Raven"),
+        .height = 140,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "Imbued with Gigantamax energy, its\n"
+            "wings can whip up winds more\n"
+            "forceful than any a hurricane could\n"
+            "muster. The gusts blow everything away."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 348,
+        .trainerOffset = 6,
+        .frontPic = gMonFrontPic_CorviknightGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 2,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CorviknightGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 3,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CorviknightGmax,
+        .shinyPalette = gMonShinyPalette_CorviknightGmax,
+        .iconSprite = gMonIcon_CorviknightGmax,
+        .iconPalIndex = 0,
+        SHADOW(2, 8, SHADOW_SIZE_L)
+        FOOTPRINT(Corviknight)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sCorviknightLevelUpLearnset,
+        .teachableLearnset = sCorviknightTeachableLearnset,
+        .formSpeciesIdTable = sCorviknightFormSpeciesIdTable,
+        .formChangeTable = sCorviknightFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_ROOKIDEE
 
 #if P_FAMILY_BLIPBUG
@@ -1176,6 +1242,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Blipbug"),
         .cryId = CRY_BLIPBUG,
         .natDexNum = NATIONAL_DEX_BLIPBUG,
+        .residoDexNum = RESIDO_DEX_BLIPBUG,
         .categoryName = _("Larva"),
         .height = 4,
         .weight = 80,
@@ -1241,6 +1308,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Dottler"),
         .cryId = CRY_DOTTLER,
         .natDexNum = NATIONAL_DEX_DOTTLER,
+        .residoDexNum = RESIDO_DEX_DOTTLER,
         .categoryName = _("Radome"),
         .height = 4,
         .weight = 195,
@@ -1305,6 +1373,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Orbeetle"),
         .cryId = CRY_ORBEETLE,
         .natDexNum = NATIONAL_DEX_ORBEETLE,
+        .residoDexNum = RESIDO_DEX_ORBEETLE,
         .categoryName = _("Seven Spot"),
         .height = 4,
         .weight = 408,
@@ -1372,6 +1441,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Orbeetle"),
         .cryId = CRY_ORBEETLE,
         .natDexNum = NATIONAL_DEX_ORBEETLE,
+        .residoDexNum = RESIDO_DEX_ORBEETLE,
         .categoryName = _("Seven Spot"),
         .height = 140,
         .weight = 0,
@@ -1406,6 +1476,66 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sOrbeetleFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_ORBEETLE_MEGA] =
+    {
+        .baseHP        = 115,
+        .baseAttack    = 35,
+        .baseDefense   = 120,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 120,
+        .types = MON_TYPES(TYPE_BUG, TYPE_PSYCHIC),
+        .catchRate = 45,
+        .expYield = 253,
+        .evYield_SpDefense = 3,
+        .itemRare = ITEM_PSYCHIC_SEED,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = { ABILITY_PSYCHIC_SURGE, ABILITY_PSYCHIC_SURGE, ABILITY_PSYCHIC_SURGE},
+        .bodyColor = BODY_COLOR_RED,
+        .speciesName = _("Orbeetle"),
+        .cryId = CRY_ORBEETLE,
+        .natDexNum = NATIONAL_DEX_ORBEETLE,
+        .residoDexNum = RESIDO_DEX_ORBEETLE,
+        .categoryName = _("Seven Spot"),
+        .height = 140,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "Its brain has grown to a\n"
+            "gargantuan size, as has the rest of its body.\n"
+            "This Pokémon's intellect and\n"
+            "psychic abilities are overpowering."),
+        .pokemonScale = 491,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_OrbeetleGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 2,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_OrbeetleGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 6,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_OrbeetleGmax,
+        .shinyPalette = gMonShinyPalette_OrbeetleGmax,
+        .iconSprite = gMonIcon_OrbeetleGmax,
+        .iconPalIndex = 0,
+        FOOTPRINT(Orbeetle)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sOrbeetleLevelUpLearnset,
+        .teachableLearnset = sOrbeetleTeachableLearnset,
+        .formSpeciesIdTable = sOrbeetleFormSpeciesIdTable,
+        .formChangeTable = sOrbeetleFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_BLIPBUG
 
 #if P_FAMILY_NICKIT
@@ -1431,6 +1561,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Nickit"),
         .cryId = CRY_NICKIT,
         .natDexNum = NATIONAL_DEX_NICKIT,
+        .residoDexNum = RESIDO_DEX_NICKIT,
         .categoryName = _("Fox"),
         .height = 6,
         .weight = 89,
@@ -1495,6 +1626,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Thievul"),
         .cryId = CRY_THIEVUL,
         .natDexNum = NATIONAL_DEX_THIEVUL,
+        .residoDexNum = RESIDO_DEX_THIEVUL,
         .categoryName = _("Fox"),
         .height = 12,
         .weight = 199,
@@ -1559,6 +1691,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Gossifleur"),
         .cryId = CRY_GOSSIFLEUR,
         .natDexNum = NATIONAL_DEX_GOSSIFLEUR,
+        .residoDexNum = RESIDO_DEX_GOSSIFLEUR,
         .categoryName = _("Flowering"),
         .height = 4,
         .weight = 22,
@@ -1623,6 +1756,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Eldegoss"),
         .cryId = CRY_ELDEGOSS,
         .natDexNum = NATIONAL_DEX_ELDEGOSS,
+        .residoDexNum = RESIDO_DEX_ELDEGOSS,
         .categoryName = _("Cotton Bloom"),
         .height = 5,
         .weight = 25,
@@ -1815,6 +1949,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Chewtle"),
         .cryId = CRY_CHEWTLE,
         .natDexNum = NATIONAL_DEX_CHEWTLE,
+        .residoDexNum = RESIDO_DEX_CHEWTLE,
         .categoryName = _("Snapping"),
         .height = 3,
         .weight = 85,
@@ -1882,6 +2017,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Drednaw"),
         .cryId = CRY_DREDNAW,
         .natDexNum = NATIONAL_DEX_DREDNAW,
+        .residoDexNum = RESIDO_DEX_DREDNAW,
         .categoryName = _("Bite"),
         .height = 10,
         .weight = 1155,
@@ -1950,6 +2086,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Drednaw"),
         .cryId = CRY_DREDNAW,
         .natDexNum = NATIONAL_DEX_DREDNAW,
+        .residoDexNum = RESIDO_DEX_DREDNAW,
         .categoryName = _("Bite"),
         .height = 240,
         .weight = 0,
@@ -1984,6 +2121,65 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sDrednawFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_DREDNAW_MEGA] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 130,
+        .baseDefense   = 145,
+        .baseSpeed     = 74,
+        .baseSpAttack  = 48,
+        .baseSpDefense = 88,
+        .types = MON_TYPES(TYPE_ROCK, TYPE_FIGHTING),
+        .catchRate = 75,
+        .expYield = 170,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),
+        .abilities = { ABILITY_DAUNTLESS_SHIELD, ABILITY_DAUNTLESS_SHIELD, ABILITY_DAUNTLESS_SHIELD},
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Drednaw"),
+        .cryId = CRY_DREDNAW,
+        .natDexNum = NATIONAL_DEX_DREDNAW,
+        .residoDexNum = RESIDO_DEX_DREDNAW,
+        .categoryName = _("Bite"),
+        .height = 240,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "In the Galar region, there's a tale\n"
+            "about this Pokémon chewing up a\n"
+            "mountain and using the rubble to stop a\n"
+            "flood."),
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_DrednawGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_DrednawGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_DrednawGmax,
+        .shinyPalette = gMonShinyPalette_DrednawGmax,
+        .iconSprite = gMonIcon_DrednawGmax,
+        .iconPalIndex = 0,
+        FOOTPRINT(Drednaw)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sDrednawLevelUpLearnset,
+        .teachableLearnset = sDrednawTeachableLearnset,
+        .formSpeciesIdTable = sDrednawFormSpeciesIdTable,
+        .formChangeTable = sDrednawFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_CHEWTLE
 
 #if P_FAMILY_YAMPER
@@ -2009,6 +2205,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Yamper"),
         .cryId = CRY_YAMPER,
         .natDexNum = NATIONAL_DEX_YAMPER,
+        .residoDexNum = RESIDO_DEX_YAMPER,
         .categoryName = _("Puppy"),
         .height = 3,
         .weight = 135,
@@ -2073,6 +2270,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Boltund"),
         .cryId = CRY_BOLTUND,
         .natDexNum = NATIONAL_DEX_BOLTUND,
+        .residoDexNum = RESIDO_DEX_BOLTUND,
         .categoryName = _("Dog"),
         .height = 10,
         .weight = 340,
@@ -2825,6 +3023,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Silicobra"),
         .cryId = CRY_SILICOBRA,
         .natDexNum = NATIONAL_DEX_SILICOBRA,
+        .residoDexNum = RESIDO_DEX_SILICOBRA,
         .categoryName = _("Sand Snake"),
         .height = 22,
         .weight = 76,
@@ -2888,6 +3087,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Sandaconda"),
         .cryId = CRY_SANDACONDA,
         .natDexNum = NATIONAL_DEX_SANDACONDA,
+        .residoDexNum = RESIDO_DEX_SANDACONDA,
         .categoryName = _("Sand Snake"),
         .height = 38,
         .weight = 655,
@@ -2953,6 +3153,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Sandaconda"),
         .cryId = CRY_SANDACONDA,
         .natDexNum = NATIONAL_DEX_SANDACONDA,
+        .residoDexNum = RESIDO_DEX_SANDACONDA,
         .categoryName = _("Sand Snake"),
         .height = 220,
         .weight = 0,
@@ -2987,6 +3188,66 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sSandacondaFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_SANDACONDA_MEGA] =
+    {
+        .baseHP        = 72,
+        .baseAttack    = 107,
+        .baseDefense   = 125,
+        .baseSpeed     = 71,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_GROUND),
+        .catchRate = 120,
+        .expYield = 179,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_SAND_SPIT, ABILITY_SHED_SKIN, ABILITY_SAND_VEIL },
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Sandaconda"),
+        .cryId = CRY_SANDACONDA,
+        .natDexNum = NATIONAL_DEX_SANDACONDA,
+        .residoDexNum = RESIDO_DEX_SANDACONDA,
+        .categoryName = _("Sand Snake"),
+        .height = 220,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "Its sand pouch has grown to tremendous\n"
+            "proportions. More than 1,000,000 tons of\n"
+            "sand now swirl around its body with enough\n"
+            "speed and power to pulverize a skyscraper."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 610,
+        .trainerOffset = 17,
+        .frontPic = gMonFrontPic_SandacondaGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_SandacondaGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 5,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_SandacondaGmax,
+        .shinyPalette = gMonShinyPalette_SandacondaGmax,
+        .iconSprite = gMonIcon_SandacondaGmax,
+        .iconPalIndex = 1,
+        SHADOW(0, 14, SHADOW_SIZE_M)
+        FOOTPRINT(Sandaconda)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sSandacondaLevelUpLearnset,
+        .teachableLearnset = sSandacondaTeachableLearnset,
+        .formSpeciesIdTable = sSandacondaFormSpeciesIdTable,
+        .formChangeTable = sSandacondaFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_SILICOBRA
 
 #if P_FAMILY_CRAMORANT
@@ -3012,6 +3273,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Cramorant"),
         .cryId = CRY_CRAMORANT,
         .natDexNum = NATIONAL_DEX_CRAMORANT,
+        .residoDexNum = RESIDO_DEX_CRAMORANT,
         .categoryName = _("Gulp"),
         .height = 8,
         .weight = 180,
@@ -3076,6 +3338,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Cramorant"),
         .cryId = CRY_CRAMORANT,
         .natDexNum = NATIONAL_DEX_CRAMORANT,
+        .residoDexNum = RESIDO_DEX_CRAMORANT,
         .categoryName = _("Gulp"),
         .height = 8,
         .weight = 180,
@@ -3132,6 +3395,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Cramorant"),
         .cryId = CRY_CRAMORANT,
         .natDexNum = NATIONAL_DEX_CRAMORANT,
+        .residoDexNum = RESIDO_DEX_CRAMORANT,
         .categoryName = _("Gulp"),
         .height = 8,
         .weight = 180,
@@ -3190,6 +3454,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Arrokuda"),
         .cryId = CRY_ARROKUDA,
         .natDexNum = NATIONAL_DEX_ARROKUDA,
+        .residoDexNum = RESIDO_DEX_ARROKUDA,
         .categoryName = _("Rush"),
         .height = 5,
         .weight = 10,
@@ -3254,6 +3519,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Barraskewda"),
         .cryId = CRY_BARRASKEWDA,
         .natDexNum = NATIONAL_DEX_BARRASKEWDA,
+        .residoDexNum = RESIDO_DEX_BARRASKEWDA,
         .categoryName = _("Skewer"),
         .height = 13,
         .weight = 300,
@@ -3620,6 +3886,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Sizzlipede"),
         .cryId = CRY_SIZZLIPEDE,
         .natDexNum = NATIONAL_DEX_SIZZLIPEDE,
+        .residoDexNum = RESIDO_DEX_SIZZLIPEDE,
         .categoryName = _("Radiator"),
         .height = 7,
         .weight = 10,
@@ -3687,6 +3954,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Centiskorch"),
         .cryId = CRY_CENTISKORCH,
         .natDexNum = NATIONAL_DEX_CENTISKORCH,
+        .residoDexNum = RESIDO_DEX_CENTISKORCH,
         .categoryName = _("Radiator"),
         .height = 30,
         .weight = 1200,
@@ -3756,6 +4024,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Centiskorch"),
         .cryId = CRY_CENTISKORCH,
         .natDexNum = NATIONAL_DEX_CENTISKORCH,
+        .residoDexNum = RESIDO_DEX_CENTISKORCH,
         .categoryName = _("Radiator"),
         .height = 750,
         .weight = 0,
@@ -3790,6 +4059,65 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sCentiskorchFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_CENTISKORCH_MEGA] =
+    {
+        .baseHP        = 110,
+        .baseAttack    = 155,
+        .baseDefense   = 90,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 100,
+        .types = MON_TYPES(TYPE_DRAGON,TYPE_FIRE),
+        .catchRate = 75,
+        .expYield = 184,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = { ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE, ABILITY_FLAME_BODY },
+        .bodyColor = BODY_COLOR_RED,
+        .speciesName = _("Centiskorc"),
+        .cryId = CRY_CENTISKORCH,
+        .natDexNum = NATIONAL_DEX_CENTISKORCH,
+        .residoDexNum = RESIDO_DEX_CENTISKORCH,
+        .categoryName = _("Radiator"),
+        .height = 750,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "The heat that comes off a\n"
+            "Gigantamax Centiskorch may destabilize air\n"
+            "currents. Sometimes it can even\n"
+            "cause storms."),
+        .pokemonScale = 275,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_CentiskorchGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 5,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CentiskorchGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CentiskorchGmax,
+        .shinyPalette = gMonShinyPalette_CentiskorchGmax,
+        .iconSprite = gMonIcon_CentiskorchGmax,
+        .iconPalIndex = 0,
+        FOOTPRINT(Centiskorch)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sCentiskorchLevelUpLearnset,
+        .teachableLearnset = sCentiskorchTeachableLearnset,
+        .formSpeciesIdTable = sCentiskorchFormSpeciesIdTable,
+        .formChangeTable = sCentiskorchFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_SIZZLIPEDE
 
 #if P_FAMILY_CLOBBOPUS
@@ -3815,6 +4143,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Clobbopus"),
         .cryId = CRY_CLOBBOPUS,
         .natDexNum = NATIONAL_DEX_CLOBBOPUS,
+        .residoDexNum = RESIDO_DEX_CLOBBOPUS,
         .categoryName = _("Tantrum"),
         .height = 6,
         .weight = 40,
@@ -3879,6 +4208,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Grapploct"),
         .cryId = CRY_GRAPPLOCT,
         .natDexNum = NATIONAL_DEX_GRAPPLOCT,
+        .residoDexNum = RESIDO_DEX_GRAPPLOCT,
         .categoryName = _("Jujitsu"),
         .height = 16,
         .weight = 390,
@@ -3942,6 +4272,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Sinistea"),
         .cryId = CRY_SINISTEA,
         .natDexNum = NATIONAL_DEX_SINISTEA,
+        .residoDexNum = RESIDO_DEX_SINISTEA,
         .categoryName = _("Black Tea"),
         .height = 1,
         .weight = 2,
@@ -4006,6 +4337,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Sinistea"),
         .cryId = CRY_SINISTEA,
         .natDexNum = NATIONAL_DEX_SINISTEA,
+        .residoDexNum = RESIDO_DEX_SINISTEA,
         .categoryName = _("Black Tea"),
         .height = 1,
         .weight = 2,
@@ -4071,6 +4403,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Polteageist"),
         .cryId = CRY_POLTEAGEIST,
         .natDexNum = NATIONAL_DEX_POLTEAGEIST,
+        .residoDexNum = RESIDO_DEX_POLTEAGEIST,
         .categoryName = _("Black Tea"),
         .height = 2,
         .weight = 4,
@@ -4134,6 +4467,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Polteageist"),
         .cryId = CRY_POLTEAGEIST,
         .natDexNum = NATIONAL_DEX_POLTEAGEIST,
+        .residoDexNum = RESIDO_DEX_POLTEAGEIST,
         .categoryName = _("Black Tea"),
         .height = 2,
         .weight = 4,
@@ -4200,6 +4534,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Hatenna"),
         .cryId = CRY_HATENNA,
         .natDexNum = NATIONAL_DEX_HATENNA,
+        .residoDexNum = RESIDO_DEX_HATENNA,
         .categoryName = _("Calm"),
         .height = 4,
         .weight = 34,
@@ -4264,6 +4599,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Hattrem"),
         .cryId = CRY_HATTREM,
         .natDexNum = NATIONAL_DEX_HATTREM,
+        .residoDexNum = RESIDO_DEX_HATTREM,
         .categoryName = _("Serene"),
         .height = 6,
         .weight = 48,
@@ -4326,6 +4662,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Hatterene"),
         .cryId = CRY_HATTERENE,
         .natDexNum = NATIONAL_DEX_HATTERENE,
+        .residoDexNum = RESIDO_DEX_HATTERENE,
         .categoryName = _("Silent"),
         .height = 21,
         .weight = 51,
@@ -4390,6 +4727,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Hatterene"),
         .cryId = CRY_HATTERENE,
         .natDexNum = NATIONAL_DEX_HATTERENE,
+        .residoDexNum = RESIDO_DEX_HATTERENE,
         .categoryName = _("Silent"),
         .height = 260,
         .weight = 0,
@@ -4424,6 +4762,66 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sHattereneFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_HATTERENE_MEGA] =
+    {
+        .baseHP        = 57,
+        .baseAttack    = 90,
+        .baseDefense   = 95,
+        .baseSpeed     = 29,
+        .baseSpAttack  = 136,
+        .baseSpDefense = 103,
+        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FAIRY),
+        .catchRate = 45,
+        .expYield = 255,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),
+        .abilities = { ABILITY_HEALER, ABILITY_ANTICIPATION, ABILITY_MAGIC_BOUNCE },
+        .bodyColor = BODY_COLOR_PINK,
+        .speciesName = _("Hatterene"),
+        .cryId = CRY_HATTERENE,
+        .natDexNum = NATIONAL_DEX_HATTERENE,
+        .residoDexNum = RESIDO_DEX_HATTERENE,
+        .categoryName = _("Silent"),
+        .height = 260,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "This Pokémon can read the\n"
+            "emotions of creatures over 30 miles away.\n"
+            "The minute it senses hostility, it\n"
+            "goes on the attack."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+        .frontPic = gMonFrontPic_HattereneGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_HattereneGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 3,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_HattereneGmax,
+        .shinyPalette = gMonShinyPalette_HattereneGmax,
+        .iconSprite = gMonIcon_HattereneGmax,
+        .iconPalIndex = 0,
+        SHADOW(-3, 13, SHADOW_SIZE_S)
+        FOOTPRINT(Hatterene)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sHattereneLevelUpLearnset,
+        .teachableLearnset = sHattereneTeachableLearnset,
+        .formSpeciesIdTable = sHattereneFormSpeciesIdTable,
+        .formChangeTable = sHattereneFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_HATENNA
 
 #if P_FAMILY_IMPIDIMP
@@ -5069,6 +5467,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Snom"),
         .cryId = CRY_SNOM,
         .natDexNum = NATIONAL_DEX_SNOM,
+        .residoDexNum = RESIDO_DEX_SNOM,
         .categoryName = _("Worm"),
         .height = 3,
         .weight = 38,
@@ -5133,6 +5532,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Frosmoth"),
         .cryId = CRY_FROSMOTH,
         .natDexNum = NATIONAL_DEX_FROSMOTH,
+        .residoDexNum = RESIDO_DEX_FROSMOTH,
         .categoryName = _("Frost Moth"),
         .height = 13,
         .weight = 420,
@@ -5304,6 +5704,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggMoveLearnset = sEiscueEggMoveLearnset,
         .formSpeciesIdTable = sEiscueFormSpeciesIdTable,
         .formChangeTable = sEiscueFormChangeTable,
+        .residoDexNum = RESIDO_DEX_EISCUE,
     },
 
     [SPECIES_EISCUE_NOICE] =
@@ -5360,6 +5761,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggMoveLearnset = sEiscueEggMoveLearnset,
         .formSpeciesIdTable = sEiscueFormSpeciesIdTable,
         .formChangeTable = sEiscueFormChangeTable,
+        .residoDexNum = RESIDO_DEX_EISCUE,
     },
 #endif //P_FAMILY_EISCUE
 
@@ -5639,6 +6041,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Cufant"),
         .cryId = CRY_CUFANT,
         .natDexNum = NATIONAL_DEX_CUFANT,
+        .residoDexNum = RESIDO_DEX_CUFANT,
         .categoryName = _("Copperderm"),
         .height = 12,
         .weight = 1000,
@@ -5704,6 +6107,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Copperajah"),
         .cryId = CRY_COPPERAJAH,
         .natDexNum = NATIONAL_DEX_COPPERAJAH,
+        .residoDexNum = RESIDO_DEX_COPPERAJAH,
         .categoryName = _("Copperderm"),
         .height = 30,
         .weight = 6500,
@@ -5769,6 +6173,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Copperajah"),
         .cryId = CRY_COPPERAJAH,
         .natDexNum = NATIONAL_DEX_COPPERAJAH,
+        .residoDexNum = RESIDO_DEX_COPPERAJAH,
         .categoryName = _("Copperderm"),
         .height = 230,
         .weight = 0,
@@ -5803,6 +6208,67 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sCopperajahFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_COPPERAJAH_MEGA] =
+    {
+        .baseHP        = 122,
+        .baseAttack    = 130,
+        .baseDefense   = 69,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 69,
+        .types = MON_TYPES(TYPE_STEEL),
+        .catchRate = 90,
+        .expYield = 175,
+        .evYield_Attack = 2,
+        .itemRare = ITEM_LAGGING_TAIL,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_MINERAL),
+        .abilities = { ABILITY_SHEER_FORCE, ABILITY_NONE, ABILITY_HEAVY_METAL },
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Copperajah"),
+        .cryId = CRY_COPPERAJAH,
+        .natDexNum = NATIONAL_DEX_COPPERAJAH,
+        .residoDexNum = RESIDO_DEX_COPPERAJAH,
+        .categoryName = _("Copperderm"),
+        .height = 230,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "After this Pokémon has Gigantamaxed,\n"
+            "its massive nose can utterly demolish\n"
+            "large structures with a single\n"
+            "smashing blow."),
+        .pokemonScale = 275,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_CopperajahGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 2,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CopperajahGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 7,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CopperajahGmax,
+        .shinyPalette = gMonShinyPalette_CopperajahGmax,
+        .iconSprite = gMonIcon_CopperajahGmax,
+        .iconPalIndex = 0,
+        SHADOW(0, 11, SHADOW_SIZE_L)
+        FOOTPRINT(Copperajah)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sCopperajahLevelUpLearnset,
+        .teachableLearnset = sCopperajahTeachableLearnset,
+        .formSpeciesIdTable = sCopperajahFormSpeciesIdTable,
+        .formChangeTable = sCopperajahFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_CUFANT
 
 #if P_FAMILY_DRACOZOLT
@@ -5828,6 +6294,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Dracozolt"),
         .cryId = CRY_DRACOZOLT,
         .natDexNum = NATIONAL_DEX_DRACOZOLT,
+        .residoDexNum = RESIDO_DEX_DRACOZOLT,
         .categoryName = _("Fossil"),
         .height = 18,
         .weight = 1900,
@@ -5892,6 +6359,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Arctozolt"),
         .cryId = CRY_ARCTOZOLT,
         .natDexNum = NATIONAL_DEX_ARCTOZOLT,
+        .residoDexNum = RESIDO_DEX_ARCTOZOLT,
         .categoryName = _("Fossil"),
         .height = 23,
         .weight = 1500,
@@ -5955,6 +6423,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Dracovish"),
         .cryId = CRY_DRACOVISH,
         .natDexNum = NATIONAL_DEX_DRACOVISH,
+        .residoDexNum = RESIDO_DEX_DRACOVISH,
         .categoryName = _("Fossil"),
         .height = 23,
         .weight = 2150,
@@ -6019,6 +6488,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Arctovish"),
         .cryId = CRY_ARCTOVISH,
         .natDexNum = NATIONAL_DEX_ARCTOVISH,
+        .residoDexNum = RESIDO_DEX_ARCTOVISH,
         .categoryName = _("Fossil"),
         .height = 20,
         .weight = 1750,
@@ -6083,6 +6553,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Duraludon"),
         .cryId = CRY_DURALUDON,
         .natDexNum = NATIONAL_DEX_DURALUDON,
+        .residoDexNum = RESIDO_DEX_DURALUDON,
         .categoryName = _("Alloy"),
         .height = 18,
         .weight = 400,
@@ -6153,6 +6624,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Duraludon"),
         .cryId = CRY_DURALUDON,
         .natDexNum = NATIONAL_DEX_DURALUDON,
+        .residoDexNum = RESIDO_DEX_DURALUDON,
         .categoryName = _("Alloy"),
         .height = 430,
         .weight = 0,
@@ -6188,6 +6660,65 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formChangeTable = sDuraludonFormChangeTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_DURALUDON_MEGA] =
+    {
+        .baseHP        = 170,
+        .baseAttack    = 115,
+        .baseDefense   = 115,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 180,
+        .baseSpDefense = 30,
+        .types = MON_TYPES(TYPE_STEEL, TYPE_DRAGON),
+        .catchRate = 45,
+        .expYield = 187,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 30,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_STEELWORKER, ABILITY_STEELWORKER, ABILITY_STEELWORKER},
+        .bodyColor = BODY_COLOR_WHITE,
+        .speciesName = _("Duraludon"),
+        .cryId = CRY_DURALUDON,
+        .natDexNum = NATIONAL_DEX_DURALUDON,
+        .residoDexNum = RESIDO_DEX_DURALUDON,
+        .categoryName = _("Alloy"),
+        .height = 430,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "The hardness of its cells is\n"
+            "exceptional, even among Steel types. It\n"
+            "also has a body structure that's\n"
+            "resistant to earthquakes."),
+        .pokemonScale = 267,
+        .pokemonOffset = 2,
+        .trainerScale = 286,
+        .trainerOffset = 1,
+        .frontPic = gMonFrontPic_DuraludonGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_DuraludonGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_DuraludonGmax,
+        .shinyPalette = gMonShinyPalette_DuraludonGmax,
+        .iconSprite = gMonIcon_DuraludonGmax,
+        .iconPalIndex = 0,
+        FOOTPRINT(Duraludon)
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sDuraludonLevelUpLearnset,
+        .teachableLearnset = sDuraludonTeachableLearnset,
+        .formSpeciesIdTable = sDuraludonFormSpeciesIdTable,
+        .formChangeTable = sDuraludonFormChangeTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 
 #if P_GEN_9_CROSS_EVOS
     [SPECIES_ARCHALUDON] =
@@ -6212,6 +6743,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Archaludon"),
         .cryId = CRY_ARCHALUDON,
         .natDexNum = NATIONAL_DEX_ARCHALUDON,
+        .residoDexNum = RESIDO_DEX_ARCHALUDON,
         .categoryName = _("Alloy"),
         .height = 20,
         .weight = 600,
@@ -6868,6 +7400,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Kubfu"),
         .cryId = CRY_KUBFU,
         .natDexNum = NATIONAL_DEX_KUBFU,
+        .residoDexNum = RESIDO_DEX_KUBFU,
         .categoryName = _("Wushu"),
         .height = 6,
         .weight = 120,
@@ -6935,6 +7468,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Urshifu"),
         .cryId = CRY_URSHIFU_SINGLE_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
+        .residoDexNum = RESIDO_DEX_URSHIFU,
         .categoryName = _("Wushu"),
         .height = 19,
         .weight = 1050,
@@ -7002,6 +7536,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Urshifu"),
         .cryId = CRY_URSHIFU_SINGLE_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
+        .residoDexNum = RESIDO_DEX_URSHIFU,
         .categoryName = _("Wushu"),
         .height = 290,
         .weight = 0,
@@ -7037,6 +7572,65 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_MEGA] =
+    {
+        .baseHP        = 120,
+        .baseAttack    = 150,
+        .baseDefense   = 100,
+        .baseSpeed     = 97,
+        .baseSpAttack  = 83,
+        .baseSpDefense = 100,
+        .types = MON_TYPES(TYPE_DARK),
+        .catchRate = 3,
+        .expYield = 275,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 120,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .abilities = { ABILITY_DARK_AURA, ABILITY_NONE, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Urshifu"),
+        .cryId = CRY_URSHIFU_SINGLE_STRIKE,
+        .natDexNum = NATIONAL_DEX_URSHIFU,
+        .residoDexNum = RESIDO_DEX_URSHIFU,
+        .categoryName = _("Wushu"),
+        .height = 290,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "People call it the embodiment of\n"
+            "rage. It's said that this Pokémon's\n"
+            "terrifying expression and shout will\n"
+            "rid the world of malevolence."),
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 326,
+        .trainerOffset = 4,
+        .frontPic = gMonFrontPic_UrshifuSingleStrikeGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_UrshifuSingleStrikeGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_UrshifuSingleStrikeGmax,
+        .shinyPalette = gMonShinyPalette_UrshifuSingleStrikeGmax,
+        .iconSprite = gMonIcon_UrshifuSingleStrikeGmax,
+        .iconPalIndex = 0,
+        FOOTPRINT(Urshifu)
+        .isLegendary = TRUE,
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sUrshifuSingleStrikeLevelUpLearnset,
+        .teachableLearnset = sUrshifuSingleStrikeTeachableLearnset,
+        .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 
     [SPECIES_URSHIFU_RAPID_STRIKE] =
     {
@@ -7060,6 +7654,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Urshifu"),
         .cryId = CRY_URSHIFU_RAPID_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
+        .residoDexNum = RESIDO_DEX_URSHIFU,
         .categoryName = _("Wushu"),
         .height = 19,
         .weight = 1050,
@@ -7127,6 +7722,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .speciesName = _("Urshifu"),
         .cryId = CRY_URSHIFU_RAPID_STRIKE,
         .natDexNum = NATIONAL_DEX_URSHIFU,
+        .residoDexNum = RESIDO_DEX_URSHIFU,
         .categoryName = _("Wushu"),
         .height = 260,
         .weight = 0,
@@ -7162,6 +7758,65 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
     },
 #endif //P_GIGANTAMAX_FORMS
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_MEGA] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 150,
+        .baseDefense   = 100,
+        .baseSpeed     = 97,
+        .baseSpAttack  = 83,
+        .baseSpDefense = 100,
+        .types = MON_TYPES(TYPE_WATER),
+        .catchRate = 3,
+        .expYield = 275,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 120,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Urshifu"),
+        .cryId = CRY_URSHIFU_RAPID_STRIKE,
+        .natDexNum = NATIONAL_DEX_URSHIFU,
+        .residoDexNum = RESIDO_DEX_URSHIFU,
+        .categoryName = _("Wushu"),
+        .height = 260,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "As it waits for the right moment to\n"
+            "unleash its Gigantamax power, this\n"
+            "Pokémon maintains a perfect one-\n"
+            "legged stance. It won't even twitch."),
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 326,
+        .trainerOffset = 4,
+        .frontPic = gMonFrontPic_UrshifuRapidStrikeGmax,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_UrshifuRapidStrikeGmax,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4,
+        //.backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_UrshifuRapidStrikeGmax,
+        .shinyPalette = gMonShinyPalette_UrshifuRapidStrikeGmax,
+        .iconSprite = gMonIcon_UrshifuRapidStrikeGmax,
+        .iconPalIndex = 0,
+        FOOTPRINT(Urshifu)
+        .isLegendary = TRUE,
+        .isMegaEvolution = TRUE,
+        .levelUpLearnset = sUrshifuRapidStrikeLevelUpLearnset,
+        .teachableLearnset = sUrshifuRapidStrikeTeachableLearnset,
+        .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
+    },
+#endif //P_MEGA_EVOLUTIONS
+// End siliconMerge
 #endif //P_FAMILY_KUBFU
 
 

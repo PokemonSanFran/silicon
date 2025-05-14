@@ -1,3 +1,4 @@
+#include "give_native_item.h" // siliconMerge
 #if I_USE_EVO_HELD_ITEMS_FROM_BAG == TRUE
     #define EVO_HELD_ITEM_TYPE ITEM_USE_PARTY_MENU
     #define EVO_HELD_ITEM_FIELD_FUNC ItemUseOutOfBattle_EvolutionStone
@@ -137,7 +138,16 @@ static const u8 sTeraShardDesc[]      = _("These shards may\n"
 static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
                                           "is unsuitable for\n"
                                           "local soil.");
+// Start siliconMerge
+static const u8 sInfiniteSprayRepelDesc[] = _(
+        "This device\n"
+        "repels wild\n"
+        "Pokémon.");
 
+static const u8 sUrshifuiteDesc[]     = _("This stone enables\n"
+        "Urshifu to Mega\n"
+        "Evolve in battle.");
+// End siliconMerge
 const struct Item gItemsInfo[] =
 {
     [ITEM_NONE] =
@@ -153,6 +163,128 @@ const struct Item gItemsInfo[] =
     },
 
 // Poké Balls
+    // Start siliconNewBalls
+    [ITEM_NEWA_BALL] =
+    {
+        .name = _("Vitality Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Fighting- and\n"
+                "Fire-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWA,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    [ITEM_NEWB_BALL] =
+    {
+        .name = _("Psyche Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Psychic- and\n"
+                "Dark-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWB,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    [ITEM_NEWC_BALL] =
+    {
+        .name = _("Mineral Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Rock- and\n"
+                "Grass-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWC,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    [ITEM_NEWD_BALL] =
+    {
+        .name = _("Electro Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Steel- and\n"
+                "Electric-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWD,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    [ITEM_NEWE_BALL] =
+    {
+        .name = _("Bog Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Ground- and\n"
+                "Poison-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWE,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    [ITEM_NEWF_BALL] =
+    {
+        .name = _("Jetstream Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Flying- and\n"
+                "Ice-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWF,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    [ITEM_NEWG_BALL] =
+    {
+        .name = _("Fable Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Fairy- and\n"
+                "Dragon-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWG,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    [ITEM_NEWH_BALL] =
+    {
+        .name = _("Paradox Ball"),
+        .price = 1000,
+        .description = COMPOUND_STRING(
+                "A Ball that works\n"
+                "well on Ghost- and\n"
+                "Normal-type Pokémon."),
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_THROW_BALL,
+        .secondaryId = BALL_NEWH,
+        .iconPic = gItemIcon_NetBall,
+        .iconPalette = gItemIconPalette_NetBall,
+    },
+    // End siliconNewBalls
 
     [ITEM_STRANGE_BALL] =
     {
@@ -1566,6 +1698,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_LONELY,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_RedMint,
     },
@@ -1583,6 +1716,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_ADAMANT,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_RedMint,
     },
@@ -1600,6 +1734,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_NAUGHTY,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_RedMint,
     },
@@ -1617,6 +1752,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_BRAVE,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_RedMint,
     },
@@ -1634,6 +1770,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_BOLD,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_BlueMint,
     },
@@ -1651,6 +1788,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_IMPISH,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_BlueMint,
     },
@@ -1668,6 +1806,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_LAX,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_BlueMint,
     },
@@ -1685,6 +1824,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_RELAXED,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_BlueMint,
     },
@@ -1702,6 +1842,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_MODEST,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_LightBlueMint,
     },
@@ -1719,6 +1860,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_MILD,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_LightBlueMint,
     },
@@ -1736,6 +1878,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_RASH,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_LightBlueMint,
     },
@@ -1753,6 +1896,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_QUIET,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_LightBlueMint,
     },
@@ -1770,6 +1914,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_CALM,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_PinkMint,
     },
@@ -1787,6 +1932,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_GENTLE,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_PinkMint,
     },
@@ -1804,6 +1950,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_CAREFUL,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_PinkMint,
     },
@@ -1821,6 +1968,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_SASSY,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_PinkMint,
     },
@@ -1838,6 +1986,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_TIMID,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_GreenMint,
     },
@@ -1855,6 +2004,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_HASTY,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_GreenMint,
     },
@@ -1872,6 +2022,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_JOLLY,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_GreenMint,
     },
@@ -1889,6 +2040,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_NAIVE,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_GreenMint,
     },
@@ -1906,6 +2058,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
         .secondaryId = NATURE_SERIOUS,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_Mint,
         .iconPalette = gItemIconPalette_YellowMint,
     },
@@ -9163,6 +9316,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
         .effect = gItemEffect_ParalyzeHeal,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_CheriBerry,
         .iconPalette = gItemIconPalette_CheriBerry,
     },
@@ -9183,6 +9337,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
         .effect = gItemEffect_Awakening,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_ChestoBerry,
         .iconPalette = gItemIconPalette_ChestoBerry,
     },
@@ -9203,6 +9358,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
         .effect = gItemEffect_Antidote,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_PechaBerry,
         .iconPalette = gItemIconPalette_PechaBerry,
     },
@@ -9223,6 +9379,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
         .effect = gItemEffect_BurnHeal,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_RawstBerry,
         .iconPalette = gItemIconPalette_RawstBerry,
     },
@@ -9243,6 +9400,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
         .effect = gItemEffect_IceHeal,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_AspearBerry,
         .iconPalette = gItemIconPalette_AspearBerry,
     },
@@ -9264,6 +9422,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_RESTORE_PP,
         .effect = gItemEffect_LeppaBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_LeppaBerry,
         .iconPalette = gItemIconPalette_LeppaBerry,
     },
@@ -9285,6 +9444,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_RESTORE_HP,
         .effect = gItemEffect_OranBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_OranBerry,
         .iconPalette = gItemIconPalette_OranBerry,
     },
@@ -9305,6 +9465,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
         .effect = gItemEffect_PersimBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_1, // siliconMerge
         .iconPic = gItemIcon_PersimBerry,
         .iconPalette = gItemIconPalette_PersimBerry,
     },
@@ -9325,6 +9486,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
         .effect = gItemEffect_FullHeal,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_LumBerry,
         .iconPalette = gItemIconPalette_LumBerry,
     },
@@ -9355,6 +9517,7 @@ const struct Item gItemsInfo[] =
         .battleUsage = EFFECT_ITEM_RESTORE_HP,
         .effect = gItemEffect_SitrusBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_SitrusBerry,
         .iconPalette = gItemIconPalette_SitrusBerry,
     },
@@ -9371,6 +9534,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_FigyBerry,
         .iconPalette = gItemIconPalette_FigyBerry,
     },
@@ -9387,6 +9551,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_WikiBerry,
         .iconPalette = gItemIconPalette_WikiBerry,
     },
@@ -9403,6 +9568,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_MagoBerry,
         .iconPalette = gItemIconPalette_MagoBerry,
     },
@@ -9419,6 +9585,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_AguavBerry,
         .iconPalette = gItemIconPalette_AguavBerry,
     },
@@ -9435,6 +9602,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_2, // siliconMerge
         .iconPic = gItemIcon_IapapaBerry,
         .iconPalette = gItemIconPalette_IapapaBerry,
     },
@@ -9538,6 +9706,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_PomegBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_PomegBerry,
         .iconPalette = gItemIconPalette_PomegBerry,
     },
@@ -9556,6 +9725,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_KelpsyBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_KelpsyBerry,
         .iconPalette = gItemIconPalette_KelpsyBerry,
     },
@@ -9574,6 +9744,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_QualotBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_QualotBerry,
         .iconPalette = gItemIconPalette_QualotBerry,
     },
@@ -9592,6 +9763,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_HondewBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_HondewBerry,
         .iconPalette = gItemIconPalette_HondewBerry,
     },
@@ -9610,6 +9782,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_GrepaBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_GrepaBerry,
         .iconPalette = gItemIconPalette_GrepaBerry,
     },
@@ -9628,6 +9801,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_TamatoBerry,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_3, // siliconMerge
         .iconPic = gItemIcon_TamatoBerry,
         .iconPalette = gItemIconPalette_TamatoBerry,
     },
@@ -9800,6 +9974,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_ChilanBerry,
         .iconPalette = gItemIconPalette_ChilanBerry,
     },
@@ -9819,6 +9994,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_OccaBerry,
         .iconPalette = gItemIconPalette_OccaBerry,
     },
@@ -9838,6 +10014,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_PasshoBerry,
         .iconPalette = gItemIconPalette_PasshoBerry,
     },
@@ -9857,6 +10034,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_WacanBerry,
         .iconPalette = gItemIconPalette_WacanBerry,
     },
@@ -9876,6 +10054,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_RindoBerry,
         .iconPalette = gItemIconPalette_RindoBerry,
     },
@@ -9895,6 +10074,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_YacheBerry,
         .iconPalette = gItemIconPalette_YacheBerry,
     },
@@ -9914,6 +10094,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_ChopleBerry,
         .iconPalette = gItemIconPalette_ChopleBerry,
     },
@@ -9933,6 +10114,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_KebiaBerry,
         .iconPalette = gItemIconPalette_KebiaBerry,
     },
@@ -9952,6 +10134,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_ShucaBerry,
         .iconPalette = gItemIconPalette_ShucaBerry,
     },
@@ -9971,6 +10154,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_CobaBerry,
         .iconPalette = gItemIconPalette_CobaBerry,
     },
@@ -9990,6 +10174,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_PayapaBerry,
         .iconPalette = gItemIconPalette_PayapaBerry,
     },
@@ -10009,6 +10194,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_TangaBerry,
         .iconPalette = gItemIconPalette_TangaBerry,
     },
@@ -10028,6 +10214,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_ChartiBerry,
         .iconPalette = gItemIconPalette_ChartiBerry,
     },
@@ -10047,6 +10234,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_KasibBerry,
         .iconPalette = gItemIconPalette_KasibBerry,
     },
@@ -10066,6 +10254,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_HabanBerry,
         .iconPalette = gItemIconPalette_HabanBerry,
     },
@@ -10085,6 +10274,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_ColburBerry,
         .iconPalette = gItemIconPalette_ColburBerry,
     },
@@ -10104,6 +10294,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_BabiriBerry,
         .iconPalette = gItemIconPalette_BabiriBerry,
     },
@@ -10123,6 +10314,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_RoseliBerry,
         .iconPalette = gItemIconPalette_RoseliBerry,
     },
@@ -10142,6 +10334,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_LiechiBerry,
         .iconPalette = gItemIconPalette_LiechiBerry,
     },
@@ -10161,6 +10354,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_GanlonBerry,
         .iconPalette = gItemIconPalette_GanlonBerry,
     },
@@ -10180,6 +10374,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_SalacBerry,
         .iconPalette = gItemIconPalette_SalacBerry,
     },
@@ -10199,6 +10394,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_PetayaBerry,
         .iconPalette = gItemIconPalette_PetayaBerry,
     },
@@ -10218,6 +10414,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_ApicotBerry,
         .iconPalette = gItemIconPalette_ApicotBerry,
     },
@@ -10237,6 +10434,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_LansatBerry,
         .iconPalette = gItemIconPalette_LansatBerry,
     },
@@ -10256,6 +10454,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_StarfBerry,
         .iconPalette = gItemIconPalette_StarfBerry,
     },
@@ -10274,6 +10473,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_EnigmaBerry,
         .iconPalette = gItemIconPalette_EnigmaBerry,
     },
@@ -10293,6 +10493,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_MicleBerry,
         .iconPalette = gItemIconPalette_MicleBerry,
     },
@@ -10312,6 +10513,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_5, // siliconMerge
         .iconPic = gItemIcon_CustapBerry,
         .iconPalette = gItemIconPalette_CustapBerry,
     },
@@ -10330,6 +10532,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_JabocaBerry,
         .iconPalette = gItemIconPalette_JabocaBerry,
     },
@@ -10348,6 +10551,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_RowapBerry,
         .iconPalette = gItemIconPalette_RowapBerry,
     },
@@ -10366,6 +10570,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_KeeBerry,
         .iconPalette = gItemIconPalette_KeeBerry,
     },
@@ -10384,6 +10589,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+        .nativeItemGroup = NATIVE_ITEM_GROUP_4, // siliconMerge
         .iconPic = gItemIcon_MarangaBerry,
         .iconPalette = gItemIconPalette_MarangaBerry,
     },
@@ -10407,7 +10613,7 @@ const struct Item gItemsInfo[] =
     },
 
 // TMs/HMs. They don't have a set flingPower, as that's handled by GetFlingPowerFromItemId.
-
+/*
     [ITEM_TM_FOCUS_PUNCH] =
     {
         .name = _("TM01"),
@@ -11767,7 +11973,8 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
         .secondaryId = MOVE_NONE, // Todo
     },
-
+    */
+#include "data/siliconMachines.h"
     [ITEM_HM_CUT] =
     {
         .name = _("HM01"),
@@ -13607,7 +13814,236 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_BerserkGene,
         .iconPalette = gItemIconPalette_BerserkGene,
     },
+    //Start siliconMerge
+    [ITEM_LOST_DOLL] =
+    {
+        .name = _("Lost Doll"),
+        .description = COMPOUND_STRING("Abigayle's lost doll.\n""Return it to her in\n""GlavezHill."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_SHERBET_SURPRISE] =
+    {
+        .name = _("ShrbtSrprise"),
+        .description = COMPOUND_STRING("Makes a Pokémon\n""friendly but resets\n""EVs to zero."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
+        .flingPower = 30,
+    },
+    [ITEM_PANNEN_JOURNAL_PAGE_1] =
+    {
+        .name = _("JournalPage1"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANNEN_JOURNAL_PAGE_2] =
+    {
+        .name = _("JournalPage2"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANNEN_JOURNAL_PAGE_3] =
+    {
+        .name = _("JournalPage3"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANNEN_MACGUFFIN] =
+    {
+        .name = _("PannenMcGuffn"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_BODEGA_DELIVERY_1] =
+    {
+        .name = _("BodegaDelvry1"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_BODEGA_DELIVERY_2] =
+    {
+        .name = _("BodegaDelvry2"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_BODEGA_DELIVERY_3] =
+    {
+        .name = _("BodegaDelvry3"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_BODEGA_DELIVERY_4] =
+    {
+        .name = _("BodegaDelvry4"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_BODEGA_DELIVERY_5] =
+    {
+        .name = _("BodegaDelvry5"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_BODEGA_DELIVERY_6] =
+    {
+        .name = _("BodegaDelvry6"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_BEACH_GLASS] =
+    {
+        .name = _("BeachGlass"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    //Start Pokevial Branch
+    [ITEM_POKEVIAL] =
+    {
+        .name = _("Pokévial"),
+        .description = COMPOUND_STRING("Restores all\n""POKéMON to full\n""health."),
+        .importance = 1,
 
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Pokevial,
+    },
+    //End Pokevial Branch
+    //Start qol_field_moves
+    [ITEM_CUT_TOOL] =
+    {
+        .name = _("Cut Tool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""cutting trees."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CutTool,
+    },
+    [ITEM_FLY_TOOL] =
+    {
+        .name = _("Fly Tool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""going places."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_FlyTool,
+    },
+
+    [ITEM_SURF_TOOL] =
+    {
+        .name = _("Surf Tool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""riding waves."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_SurfTool,
+    },
+
+    [ITEM_STRENGTH_TOOL] =
+    {
+        .name = _("Strength Tool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""moving boulders."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_StrengthTool,
+    },
+
+    [ITEM_FLASH_TOOL] =
+    {
+        .name = _("Flash Tool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""lighting caves."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_FlashTool,
+    },
+
+    [ITEM_ROCKSMASH_TOOL] =
+    {
+        .name = _("RockSmashTool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""smashing rocks."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_RockSmashTool,
+    },
+
+    [ITEM_WATERFALL_TOOL] =
+    {
+        .name = _("WaterfallTool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""climbing waterfalls."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_WaterfallTool,
+    },
+
+    [ITEM_DIVE_TOOL] =
+    {
+        .name = _("Dive Tool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""diving underwater."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_DiveTool,
+    },
+
+    [ITEM_TELEPORT_TOOL] =
+    {
+        .name = _("Teleport Tool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""getting to safety."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_TeleportTool,
+    },
+
+    [ITEM_SWEETSCENT_TOOL] =
+    {
+        .name = _("SweetScntTool"),
+        .price = 0,
+        .description = COMPOUND_STRING("This tool\n""is used for\n""luring pokemon."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_SweetScentTool,
+    },
+    //End qol_field_moves
+    [ITEM_INFINITE_SPRAY] =
+    {
+        .name = _("Endless Spray"),
+        .price = 0,
+        .importance = 1,
+        .description = COMPOUND_STRING("This device\n""attracts or repels\n""wild Pokémon."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_InfiniteSpray,
+    },
+	//End siliconMerge
     [ITEM_FAIRY_FEATHER] =
     {
         .name = _("Fairy Feather"),
@@ -14099,4 +14535,226 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+    //Start siliconMerge
+	[ITEM_KINGLERNITE] =
+    {
+        .name = _("Kinglerite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Kingler to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_LAPRASNITE] =
+    {
+        .name = _("Laprasite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Lapras to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_GARBODORNITE] =
+    {
+        .name = _("Garbodorite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Garbodor to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_CORVIKNIGHTNITE] =
+    {
+        .name = _("Corviknite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Corviknight to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_ORBEETLENITE] =
+    {
+        .name = _("Orbeetleite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Orbeetle to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_DREDNAWNITE] =
+    {
+        .name = _("Drednawite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Drednaw to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_SANDACONDANITE] =
+    {
+        .name = _("Sandacite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Sandaconda to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_CENTISKORCHNITE] =
+    {
+        .name = _("Centiskite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Centiskorch to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_HATTERENENITE] =
+    {
+        .name = _("Hatterite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Hatterene to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_COPPERAJAHNITE] =
+    {
+        .name = _("Copperajite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Copperajah to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_DURALUDONNITE] =
+    {
+        .name = _("Duraludite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Duraludon to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_URSHIFUNITE_SINGLE] =
+    {
+        .name = _("UrshifiteSngl"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = sUrshifuiteDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+    [ITEM_URSHIFUNITE_RAPID] =
+    {
+        .name = _("UrshifiteRpid"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = sUrshifuiteDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Venusaurite,
+        .iconPalette = gItemIconPalette_Venusaurite,
+    },
+	//End siliconMerge
+    // Start hexorb branch
+    [ITEM_HEXORB] =
+    {
+        .name = _("Box of Disaster"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+                //PSF TODO rewrite when larger description box is implemented
+            "Gives a Pokémon\n"
+            "a status condition\n"
+            "outside of battle."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Hexorb,
+        .effect = gItemEffect_Hexorb,
+        .iconPic = gItemIcon_Hexorb,
+        .iconPalette = gItemIconPalette_Hexorb,
+    }
+// End hexorb Branch
 };

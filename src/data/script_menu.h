@@ -908,6 +908,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_BERRY_PLOT]                 = MULTICHOICE(MultichoiceList_BerryPlot),
 };
 
+
 const u8 *const gStdStrings[] =
 {
     [STDSTRING_COOL] = gText_Cool,
@@ -954,8 +955,11 @@ static const u8 sLinkServicesMultichoiceIds[] =
 
 static const u8 *const sPCNameStrings[] =
 {
-    gText_SomeonesPC,
-    gText_LanettesPC,
+    // Start siliconMerge
+	//gText_SomeonesPC,
+    //gText_LanettesPC,
+    gText_PokemonStorageSystem,
+	// End siliconMerge
     gText_PlayersPC,
     gText_LogOff,
 };

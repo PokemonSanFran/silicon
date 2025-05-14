@@ -1,6 +1,8 @@
 const u32 gItemIcon_QuestionMark[] = INCBIN_U32("graphics/items/icons/question_mark.4bpp.lz");
 const u32 gItemIconPalette_QuestionMark[] = INCBIN_U32("graphics/items/icon_palettes/question_mark.gbapal.lz");
 
+const u32 gItemIcon_NoItem[] = INCBIN_U32("graphics/items/icons/no_item.4bpp.lz"); // siliconMerge
+
 const u32 gItemIcon_ReturnToFieldArrow[] = INCBIN_U32("graphics/items/icons/return_to_field_arrow.4bpp.lz");
 const u32 gItemIconPalette_ReturnToFieldArrow[] = INCBIN_U32("graphics/items/icon_palettes/return_to_field_arrow.gbapal.lz");
 
@@ -2065,6 +2067,21 @@ const u32 gItemIconPalette_LustrousGlobe[] = INCBIN_U32("graphics/items/icon_pal
 const u32 gItemIcon_BerserkGene[] = INCBIN_U32("graphics/items/icons/berserk_gene.4bpp.lz");
 const u32 gItemIconPalette_BerserkGene[] = INCBIN_U32("graphics/items/icon_palettes/berserk_gene.gbapal.lz");
 
+// Start Pokevial Branch
+const u32 gItemIcon_Pokevial0[] = INCBIN_U32("graphics/items/icons/pokevial0.4bpp.lz");
+const u32 gItemIcon_Pokevial1[] = INCBIN_U32("graphics/items/icons/pokevial1.4bpp.lz");
+const u32 gItemIcon_Pokevial2[] = INCBIN_U32("graphics/items/icons/pokevial2.4bpp.lz");
+const u32 gItemIcon_Pokevial3[] = INCBIN_U32("graphics/items/icons/pokevial3.4bpp.lz");
+const u32 gItemIcon_Pokevial4[] = INCBIN_U32("graphics/items/icons/pokevial4.4bpp.lz");
+const u32 gItemIcon_Pokevial5[] = INCBIN_U32("graphics/items/icons/pokevial5.4bpp.lz");
+const u32 gItemIcon_Pokevial6[] = INCBIN_U32("graphics/items/icons/pokevial6.4bpp.lz");
+const u32 gItemIcon_Pokevial7[] = INCBIN_U32("graphics/items/icons/pokevial7.4bpp.lz");
+const u32 gItemIcon_Pokevial8[] = INCBIN_U32("graphics/items/icons/pokevial8.4bpp.lz");
+const u32 gItemIcon_Pokevial9[] = INCBIN_U32("graphics/items/icons/pokevial9.4bpp.lz");
+const u32 gItemIcon_Pokevial[] = INCBIN_U32("graphics/items/icons/pokevial.4bpp.lz");
+
+const u32 gItemIconPalette_Pokevial[] = INCBIN_U32("graphics/items/icon_palettes/pokevial.gbapal.lz");
+//End Pokevial Branch
 const u32 gItemIcon_FairyFeather[] = INCBIN_U32("graphics/items/icons/fairy_feather.4bpp.lz");
 const u32 gItemIconPalette_FairyFeather[] = INCBIN_U32("graphics/items/icon_palettes/fairy_feather.gbapal.lz");
 
@@ -2099,3 +2116,8 @@ const u32 gItemIconPalette_SwapSnack[] = INCBIN_U32("graphics/items/icon_palette
 
 const u32 gItemIcon_TwiceSpicedRadish[] = INCBIN_U32("graphics/items/icons/twice_spiced_radish.4bpp.lz");
 const u32 gItemIconPalette_TwiceSpicedRadish[] = INCBIN_U32("graphics/items/icon_palettes/twice_spiced_radish.gbapal.lz");
+
+// Start hexorb branch
+const u32 gItemIcon_Hexorb[] = INCBIN_U32("graphics/items/icons/hexorb.4bpp.lz");
+const u32 gItemIconPalette_Hexorb[] = INCBIN_U32("graphics/items/icon_palettes/hexorb.gbapal.lz");
+// End hexorb branch

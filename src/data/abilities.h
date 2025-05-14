@@ -2408,4 +2408,17 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+    // Start siliconMerge
+	[ABILITY_SWIFT_ASCENT] =
+    {
+        .name = _("Swift Ascent"),
+        .description = COMPOUND_STRING("KO & entry boost best stat."),
+        .aiRating = 7,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .cantBeSuppressed = TRUE,
+        .cantBeOverwritten = TRUE,
+    },
+	// End siliconMerge
 };

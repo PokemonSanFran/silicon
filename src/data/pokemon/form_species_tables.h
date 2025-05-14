@@ -382,6 +382,11 @@ static const u16 sKinglerFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_KINGLER_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_KINGLER_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_KRABBY
@@ -505,6 +510,11 @@ static const u16 sLaprasFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_LAPRAS_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_LAPRAS_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_LAPRAS
@@ -1223,6 +1233,11 @@ static const u16 sGarbodorFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_GARBODOR_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_GARBODOR_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_TRUBBISH
@@ -1798,6 +1813,11 @@ static const u16 sCorviknightFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_CORVIKNIGHT_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_CORVIKNIGHT_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_ROOKIDEE
@@ -1808,6 +1828,11 @@ static const u16 sOrbeetleFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_ORBEETLE_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_ORBEETLE_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_BLIPBUG
@@ -1817,7 +1842,11 @@ static const u16 sDrednawFormSpeciesIdTable[] = {
     SPECIES_DREDNAW,
 #if P_GIGANTAMAX_FORMS
     SPECIES_DREDNAW_GMAX,
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_DREDNAW_MEGA,
 #endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_CHEWTLE
@@ -1856,6 +1885,11 @@ static const u16 sSandacondaFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_SANDACONDA_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_SANDACONDA_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_SILICOBRA
@@ -1889,6 +1923,11 @@ static const u16 sCentiskorchFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_CENTISKORCH_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_CENTISKORCH_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_SIZZLIPEDE
@@ -1912,7 +1951,11 @@ static const u16 sHattereneFormSpeciesIdTable[] = {
     SPECIES_HATTERENE,
 #if P_GIGANTAMAX_FORMS
     SPECIES_HATTERENE_GMAX,
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_HATTERENE_MEGA,
 #endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_HATENNA
@@ -2029,6 +2072,11 @@ static const u16 sCopperajahFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_COPPERAJAH_GMAX,
 #endif
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_COPPERAJAH_MEGA,
+#endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_CUFANT
@@ -2038,7 +2086,11 @@ static const u16 sDuraludonFormSpeciesIdTable[] = {
     SPECIES_DURALUDON,
 #if P_GIGANTAMAX_FORMS
     SPECIES_DURALUDON_GMAX,
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_DURALUDON_MEGA,
 #endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_DURALUDON
@@ -2074,7 +2126,12 @@ static const u16 sUrshifuFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_URSHIFU_SINGLE_STRIKE_GMAX,
     SPECIES_URSHIFU_RAPID_STRIKE_GMAX,
+// Start siliconMerge
+#if P_MEGA_EVOLUTIONS
+    SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_MEGA,
+    SPECIES_URSHIFU_RAPID_STRIKE_STYLE_MEGA,
 #endif
+// End siliconMerge
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_KUBFU

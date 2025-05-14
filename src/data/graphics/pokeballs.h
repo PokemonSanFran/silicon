@@ -83,3 +83,28 @@ const u32 gBallGfx_Cherish[] = INCBIN_U32("graphics/balls/cherish.4bpp.lz");
 const u32 gBallPal_Cherish[] = INCBIN_U32("graphics/balls/cherish.gbapal.lz");
 
 const u32 gOpenPokeballGfx[] = INCBIN_U32("graphics/balls/open.4bpp.lz");
+// Start siliconNewBalls
+const u32 gBallGfx_NewA[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewA[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+
+const u32 gBallGfx_NewB[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewB[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+
+const u32 gBallGfx_NewC[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewC[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+
+const u32 gBallGfx_NewD[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewD[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+
+const u32 gBallGfx_NewE[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewE[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+
+const u32 gBallGfx_NewF[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewF[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+
+const u32 gBallGfx_NewG[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewG[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+
+const u32 gBallGfx_NewH[] = INCBIN_U32("graphics/balls/net.4bpp.lz");
+const u32 gBallPal_NewH[] = INCBIN_U32("graphics/balls/net.gbapal.lz");
+// End siliconNewBalls
