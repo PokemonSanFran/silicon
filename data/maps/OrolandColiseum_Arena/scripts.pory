@@ -1,0 +1,66 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts OrolandColiseum_Arena_MapScripts{
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_PROLOGUE_STATE , GIVEN_POKEMON: OrolandColiseum_Arena_WalkInCloseDoor_Script
+        VAR_PROLOGUE_STATE,LOST_TO_MAGNUS: Prologue_LostToMagnus_Script
+    ]
+    MAP_SCRIPT_ON_LOAD{
+        call(OrolandColiseum_Arena_CloseDoorsOnLoad_Script)
+    }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE[
+        VAR_TEMP_1, 0: OrolandColiseum_Arena_PlayerTurnNorth_Script
+    ]
+}
+
+script OrolandColiseum_Arena_PlayerTurnNorth_Script{
+    turnobject(PLAYER,DIR_NORTH)
+    end
+}
+
+script OrolandColiseum_Arena_WalkInCloseDoor_Script{
+    lockall
+    setrespawn(HEAL_LOCATION_OROLAND_COLISEUM_ARENA)
+    applymovement(PLAYER,Common_Movement_WalkUp6)
+    waitmovement(PLAYER)
+    playse(SE_TRUCK_DOOR)
+    call(OrolandColiseum_Arena_CloseDoors_Script)
+    setvar(VAR_PROLOGUE_STATE,WALKED_IN_CHAMBER)
+    releaseall
+    end
+}
+
+script OrolandColiseum_Arena_CloseDoorsOnLoad_Script{
+    if (var(VAR_PROLOGUE_STATE) > GIVEN_POKEMON){
+        call(OrolandColiseum_Arena_CloseTopDoors_Script)
+        call(OrolandColiseum_Arena_CloseBottomDoors_Script)
+    }
+}
+
+script OrolandColiseum_Arena_CloseDoors_Script{
+    call(OrolandColiseum_Arena_CloseTopDoors_Script)
+    call(OrolandColiseum_Arena_CloseBottomDoors_Script)
+    return
+}
+
+script OrolandColiseum_Arena_OpenExit_Script{
+    setmetatile(6,2,METATILE_EliteFour_OpenDoor_Opening,FALSE)
+    special(DrawWholeMapView)
+    return
+}
+
+script OrolandColiseum_Arena_CloseTopDoors_Script{
+    setmetatile(5,12,METATILE_EliteFour_EntryDoor_ClosedTop,TRUE)
+    setmetatile(6,12,METATILE_EliteFour_EntryDoor_ClosedTop,TRUE)
+    setmetatile(7,12,METATILE_EliteFour_EntryDoor_ClosedTop,TRUE)
+    special(DrawWholeMapView)
+    return
+}
+
+script OrolandColiseum_Arena_CloseBottomDoors_Script{
+    setmetatile(5,13,METATILE_EliteFour_EntryDoor_ClosedBottom,TRUE)
+    setmetatile(6,13,METATILE_EliteFour_EntryDoor_ClosedBottom,TRUE)
+    setmetatile(7,13,METATILE_EliteFour_EntryDoor_ClosedBottom,TRUE)
+    special(DrawWholeMapView)
+    return
+}

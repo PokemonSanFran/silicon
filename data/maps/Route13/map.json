@@ -1,0 +1,85 @@
+{
+  "id": "MAP_ROUTE13",
+  "name": "Route13",
+  "layout": "LAYOUT_ROUTE13",
+  "music": "MUS_DEWFORD",
+  "region_map_section": "MAPSEC_ROUTE13",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_PETAROSA_BOROUGH",
+      "offset": 42,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_CRESALTA_VISTA",
+      "offset": -15,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M",
+      "x": 26,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route13_EventScript_Alice_Script",
+      "flag": "FLAG_TEMP_4"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
+      "x": 11,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Ultrawormholeresearch_StartTotemBattle_Script",
+      "flag": "FLAG_TEMP_1A"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 28,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE13_GROTTO",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 28,
+      "y": 2,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Hiddengrotto_EnterGrotto_Dialogue"
+    },
+    {
+      "type": "sign",
+      "x": 28,
+      "y": 3,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Hiddengrotto_EnterGrotto_Dialogue"
+    }
+  ]
+}

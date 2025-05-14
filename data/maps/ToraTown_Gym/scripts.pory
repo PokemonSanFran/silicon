@@ -1,0 +1,49 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const SHINZO = 1
+
+mapscripts ToraTown_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+    call(ToraTown_Gym_LeaderVisibility_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0,0: AaandWereBack_Monologue
+    ]
+}
+
+script EnterShinzo_Event_Script {
+    switch (var (VAR_GYM_2_STATE)) {
+        case 3:
+            goto(EnterShinzo_StartGymBattle_Script)
+        case 4:
+            goto(EnterShinzo_PostDefeat1_Dialogue)
+        case 5:
+            goto(EnterShinzo_PostDefeat2_Dialogue)
+        default:
+            goto(EnterShinzo_ShinzoIntro_Dialogue)
+    }
+}
+
+script ToraTown_Gym_HideLeaderScript{
+    setflag(FLAG_TEMP_1)
+}
+
+script ToraTown_Gym_LeaderVisibility_Script{
+switch(var(VAR_SHINZO_STATE)){
+    case BATTLE_1_COMPLETE: call(ToraTown_Gym_HideLeaderScript)
+    case QUEST_1_COMPLETE: call(ToraTown_Gym_HideLeaderScript)
+    default: return
+}
+}
+
+script ToraTown_Gym_Entrance_Guy_Script{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_3)
+    call(Quest_HybridCulture_CheckSubquests_Script)
+    msgbox(gText_ToraTown_Gym_ThePayapaBerry,MSGBOX_NPC)
+    applymovement(2,Common_Movement_FaceLeft)
+    end
+}
+
+text gText_ToraTown_Gym_ThePayapaBerry{
+    format("A lot of staff that train here to try stock up on Payapa and Shuca Berries. At first they were super expensive, since they don't really grow in Resido. But the trainers from Resido all give berries when defeated, and the trainers from Sinnoh all give berries from their homeland - which include the Payapa and the Shuca Berries! Needless to say, Trainers from Sinnoh became super popular super fast.")
+}

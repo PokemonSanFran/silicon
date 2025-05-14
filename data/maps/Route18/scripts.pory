@@ -1,0 +1,4 @@
+mapscripts Route18_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+    }
+}

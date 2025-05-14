@@ -1,0 +1,93 @@
+mapscripts Arantraz_MessHall_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(YouRealizeTheyreEvilRight_HideGarbodor_Script)
+        call(Arantraz_MessHall_ObjectVisibility_Script)
+        call(Quest_Redomugging_Hide_Muggers_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ARANTRAZ_STATE, PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT: YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue
+        VAR_ARANTRAZ_STATE, PRE_SPEECHSPEECH: SpeechSpeechSpeech_PositionPlayer_Script
+        VAR_STORYLINE_STATE, STORY_1ST_TAKEDOWN: OneDown_SetUpObject_Script
+    ]
+}
+
+script Arantraz_MessHall_ObjectVisibility_Script{
+    switch(var(VAR_ARANTRAZ_STATE)){
+        case 0: call(YouRealizeTheyreEvilRight_HideBasement_Script)
+        case FIRST_ARRIVED_ARANTRAZ: call(YouRealizeTheyreEvilRight_HideBasement_Script)
+        case BATTLED_TALA: call(YouRealizeTheyreEvilRight_HideBasement_Script)
+        case PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT: call(YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script)
+        case POST_YOU_REALIZE_THEYRE_EVIL_RIGHT: call(LetsGettheBandBackTogether_HideObject_Script)
+        case LAST_CHANCE_TRUE_TIMELINE_START: call(LetsGettheBandBackTogether_HideObject_Script)
+        case START_TRUE_TIMELINE: call(YouRealizeTheyreEvilRight_HideBasement_Script)
+        case PRE_SPEECHSPEECH: call(SpeechSpeechSpeech_MoveObject_Script)
+        case POST_SPEECHSPEECH: call(SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script)
+        return
+    }
+}
+
+script Arantraz_MessHall_Kai_Event_Script {
+    lock
+        switch (var(VAR_STORYLINE_STATE)){
+            case STORY_MORNING_OF_TIMELINE_SPLIT: call(LetsGettheBandBackTogether_MeetInBasement_Script)
+        }
+    release
+        end
+}
+
+script Arantraz_MessHall_Tala_Event_Script {
+    lock
+
+    switch (var(VAR_STORYLINE_STATE)){
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_TALA)
+        case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Breaktheinternet_EliteFour_Dialogue)
+    }
+    closemessage
+
+    release
+    end
+}
+
+
+script Arantraz_MessHall_Magnus_Event_Script {
+    lock
+
+    switch (var(VAR_STORYLINE_STATE)){
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_MAGNUS)
+        case STORY_RAVE_AND_SPEECH_COMPLETE: msgbox("I don't have a takedown quest for you.",MSGBOX_NPC,SPEAKER_MAGNUS)
+    }
+
+    closemessage
+
+    release
+    end
+}
+
+
+script Arantraz_MessHall_Armando_Event_Script {
+    lock
+
+    switch (var(VAR_STORYLINE_STATE)){
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_ARMANDO)
+        case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Taxicabturnaround_EliteFour_Dialogue)
+    }
+
+    closemessage
+
+    release
+    end
+}
+
+script Arantraz_MessHall_Ellen_Event_Script {
+    lock
+
+    switch (var(VAR_STORYLINE_STATE)){
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_ELLEN)
+        case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Bodegaburnout_EliteFour_Dialogue)
+    }
+
+    closemessage
+
+    release
+    end
+}

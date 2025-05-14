@@ -1,0 +1,23 @@
+mapscripts Oroland_Warehouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(Oroland_Warehouse_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_RESUME {
+        call(WarehouseRave_ControlExits_Script)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(WarehouseRave_ControlExits_Script)
+    }
+}
+
+script Oroland_Warehouse_MapScripts_OnTransition {
+    switch (var(VAR_WAREHOUSE_RAVE_STATE)){
+        case 1:
+            call(WarehouseRave_SetUpRave_Script)
+                call(WarehouseRave_HideObject_Script)
+        case 2:
+                call(WarehouseRave_MoveObject_Script)
+                call(WarehouseRave_SetUpRave_Script)
+        default: call(WarehouseRave_HideObject_Script)
+    }
+}

@@ -1,0 +1,21 @@
+mapscripts PetarosaBorough_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE, STORY_EAST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
+                FLAG_VISITED_PETAROSA_BOROUGH, FALSE: Generic_Mappreview
+    ]
+
+    MAP_SCRIPT_ON_TRANSITION {
+        call(FriendsForDinner_BlockMansionAccess_Script)
+        call(Quest_BuildingScope_MoveEmployee_Script)
+        call(Quest_Breaktheinternet_WarehouseGuard_Script)
+    }
+}
+
+script PetarosaBorough_MansionGuard_InteractScript {
+    if (var(VAR_FORT_YOBU_STATE) < MET_KEIYING_OUTSIDE_GYM){
+        msgbox("...",MSGBOX_NPC)
+    } else {
+        msgbox(gText_KeiyingRaisonDetre_HasBeenExpectingYou, MSGBOX_NPC)
+    }
+    end
+}

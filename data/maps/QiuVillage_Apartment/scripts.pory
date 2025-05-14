@@ -1,0 +1,17 @@
+mapscripts QiuVillage_Apartment_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+    }
+}
+script QiuVillage_Apartment_InteractAntone_Event_Script {
+    lock
+        switch(var(VAR_MASK_OFF_STATE)){
+            case 0: return
+            case 1: return
+            case 2: return
+            case 3: return
+            case 8: return
+            default: call(MaskOff_QuestA_Dialogue)
+        }
+    release
+        end
+}

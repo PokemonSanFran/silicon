@@ -1,0 +1,9 @@
+mapscripts SharpriseStadium_Construction_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(VSGarbodor_ConstructionObjectCleanUp_Script)
+    }
+    MAP_SCRIPT_ON_LOAD {
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+    ]
+}

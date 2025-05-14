@@ -1,0 +1,21 @@
+//gText_Chasilla_University_
+mapscripts Chasilla_University_MapScripts{
+
+}
+
+script Chasilla_University_DisplayCase_Script{
+    lock
+    bufferitemname(STR_VAR_3,ITEM_COIN_CASE)
+    msgbox(gText_Chasilla_University_DisplayCase,MSGBOX_SIGN)
+
+    switch(var(VAR_CHASILLA_AXE_STATE)){
+        case AXE_UNTOUCHED: goto(Quest_StealTheAxe_AxeUntouched_Script)
+        case AXE_STOLEN:
+        case AXE_THROWN_AWAY: goto(Quest_StealTheAxe_AxeStolen_Dialogue)
+        case AXE_TURNED_OVER: goto(Quest_StealTheAxe_TurnedOverAxe_Dialogue)
+    }
+}
+
+text gText_Chasilla_University_DisplayCase{
+    format("The display case has a collection of medals, trophies, and photos.")
+}

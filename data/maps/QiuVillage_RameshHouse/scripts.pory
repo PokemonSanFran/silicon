@@ -1,0 +1,34 @@
+mapscripts QiuVillage_RameshHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(QiuVillage_Ramesh_House_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TOWER_RAID_STATE,1:Imin_BeginHouseSearch_Script 
+    ]
+    MAP_SCRIPT_ON_LOAD {
+        goto(QiuVillage_Ramesh_House_MapScripts_OnLoad)
+    }
+}
+
+script QiuVillage_Ramesh_House_MapScripts_OnTransition {
+    switch (var(VAR_TOWER_RAID_STATE)){
+        case 1: call(ImIn_ObjectSetUp_InsideHouse_Script)
+        case 2: return
+        case 3: return
+        default: call(ImIn_HideObject_OutsideHouse_Script)
+    }
+}
+
+script QiuVillage_Ramesh_House_MapScripts_OnLoad {
+    if (var(VAR_TOWER_RAID_STATE) > 3){
+        call(ImIn_UnlockDoor_Script)
+    }
+}
+
+script QiuVillage_ElectronicDoor_Event_Script {
+    switch (var(VAR_TOWER_RAID_STATE)){
+        case 2: call(ImIn_FindLockedDoor_Script)
+        case 3: call(ImIn_InteractDoor_Script)
+        case 4: return
+    }
+}

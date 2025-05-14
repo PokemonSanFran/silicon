@@ -1,0 +1,15 @@
+mapscripts IrisinaTown_InfoTech_MapScripts{}
+
+script IrisinaTown_IT_Interact_Clerk_Script{
+    goto_if_quest_not_inactive(QUEST_FOODTRUCKBUREACRACY,Quest_Foodtruckbureaucracy_IT_Active_Dialogue)
+    goto(IrisinaTown_IT_Clerk_Dialogue)
+}
+
+script IrisinaTown_IT_Clerk_Dialogue{
+   msgbox(gText_IrisinaTown_IT_UghTheWalk,,MSGBOX_NPC,SPEAKER_WALDRON) 
+    end
+}
+
+text gText_IrisinaTown_IT_UghTheWalk{
+    format("Ugh, the walk from the trolley stop is brutal. Wish I could get one closer...")
+}

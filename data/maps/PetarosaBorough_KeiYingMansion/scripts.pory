@@ -1,0 +1,18 @@
+mapscripts PetarosaBorough_KeiYingMansion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(PetarosaBorough_Mansion_MapScripts_OnTransition)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_KEIYING_RAISON_DETRE_STATE, 0: KeiyingRaisonDetre_MoveIntoFoyer_Script
+    ]
+}
+
+script PetarosaBorough_Mansion_MapScripts_OnTransition {
+    switch (var(VAR_KEIYING_RAISON_DETRE_STATE)){
+        case 1: call(KeiyingRaisonDetre_HideObjectKids_Script)
+        case 2: call(KeiyingRaisonDetre_HideObjectKids_Script)
+        case 3: call(KeiyingRaisonDetre_HideObjectKids_Script)
+        case 4: call(KeiyingRaisonDetre_ObjectCleanUp_Script)
+    }
+}

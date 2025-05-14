@@ -1,0 +1,4 @@
+mapscripts Psfroute7e17fdd1_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+    }
+}

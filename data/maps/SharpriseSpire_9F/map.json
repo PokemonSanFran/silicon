@@ -1,0 +1,42 @@
+{
+  "id": "MAP_SHARPRISE_SPIRE_9F",
+  "name": "SharpriseSpire_9F",
+  "layout": "LAYOUT_SHARPRISE_SPIRE_9F",
+  "music": "MUS_RG_SILPH",
+  "region_map_section": "MAPSEC_SHARPRISESPIRE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_SHARPRISE_SPIRE_8F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 12,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_SHARPRISE_SPIRE_10F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_SALESORCETOWER_ELEVATOR",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

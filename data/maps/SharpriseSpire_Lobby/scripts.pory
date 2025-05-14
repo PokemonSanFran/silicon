@@ -1,0 +1,19 @@
+const FLAG_HIDE_GUARD = FLAG_TEMP_1
+
+mapscripts SharpriseSpire_Lobby_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(SharpriseSpire_GuardRaidFloors_Script)
+        call(ImIn_MakeRaidPartyVisible_Script)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED: ImIn_PostWarpSplit_Dialogue
+                FLAG_VISITED_SHARPRISESPIRE, FALSE: Generic_Mappreview
+    ]
+}
+
+script SharpriseSpire_GuardRaidFloors_Script{
+    if (var(VAR_TOWER_RAID_STATE) > FOUND_RAMESH_WARP_DOOR){
+        setflag(FLAG_HIDE_GUARD)
+    }
+}

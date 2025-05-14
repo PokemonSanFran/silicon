@@ -1,0 +1,175 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ARNAV = 1
+const TECHIE = 2
+const OLIVER = 3
+const CHARLOTTE = 4
+const ADELAIDE = 5
+const CHIEF = 6
+const RAMESH = 7
+
+//PSF TODO Add awards on Adelaide's wall about the different awards he's won for sending great emails, having inbox zero, most organized email
+
+const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
+const FLAG_HIDE_OLIVER = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_RAMESH = FLAG_TEMP_5
+const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+
+mapscripts SharpriseSpire_Leagueops_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        switch(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE)){
+            case POST_WOW_YOURE_STRONG: call(TheGangsAllHere_ObjectSetup_Script)
+            case START_THE_GANGS_ALL_HERE: call(TheGangsAllHere_MidMission_Object_Script)
+            case POST_THE_GANGS_ALL_HERE: call(TheGangsAllHere_ObjectCleanUp_Script)
+            case PRE_WELCOME_TO_THE_WAR_ROOM: call(WelcomeToTheWarRoom_Object_Setup_Script)
+            case POST_WELCOME_TO_THE_WAR_ROOM: call(WelcomeToTheWarRoom_Object_Hide_Script)
+            case PRE_YOU_REALIZE_WERE_EVIL_RIGHT: call(YouRealizeWereEvilRight_Object_Setup_Script)
+            case POST_YOU_REALIZE_WERE_EVIL_RIGHT:
+                call(YouRealizeWereEvilRight_Object_Cleanup_Script)
+            case START_FALSE_TIMELINE:
+                call(CongratsYoureanAsshole_ObjectCleanUp_Script)
+                call(YouHaveYourOrders_ObjectSetUp_Script)
+                call(LetsBurnThisMotherDown_ShowAdelaide_Script)
+                call(Manhunt_ShowRamesh_Script)
+            case TRUE_RAID_START:
+                  call(SharpriseSpire_Leagueops_TrueTimeline_Objects_Script)
+            default: call(SharpriseSpire_Leagueops_EmptyConferenceRoomOffices)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0,0: AaandWereBack_Monologue
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_WELCOME_TO_THE_WAR_ROOM: SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_YOU_REALIZE_WERE_EVIL_RIGHT: SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE, POST_WOW_YOURE_STRONG: TheGangsAllHere_OliverAppearStairs_Script
+        VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_KAI_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
+        VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY: HowDisappointing_MissionComplete_Dialogue
+        VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE: Manhunt_MissionComplete_Dialogue
+        VAR_STORYLINE_STATE,STORY_3RD_THETIDE_TAKEDOWN: ExhibitionBattle_CheckMissionProgress_Script
+        VAR_STORYLINE_STATE,STORY_THETIDE_FINISHED: ExhibitionBattle_TimeSkip_Script
+    ]
+    MAP_SCRIPT_ON_LOAD {
+        call(ImIn_RevealAdelaideWarp_Script)
+    }
+}
+
+script SharpriseSpire_Leagueops_TrueTimeline_Objects_Script{
+        switch(var(VAR_TOWER_RAID_STATE)){
+            case TEAM_ENTERED_SHARPRISESPIRE: call(ImIn_PreCharlotte_Object_Script)
+            case SAVE_CHARLOTTE_SHARPRISESPIRE:
+            default: call(ImIn_SaveCharlotte_Object_Script)
+    }
+    return
+}
+
+script SharpriseSpire_Leagueops_EmptyConferenceRoomOffices{
+        setflag(FLAG_HIDE_NERDS_COPS)
+        setflag(FLAG_HIDE_OLIVER)
+        setflag(FLAG_HIDE_CHARLOTTE)
+        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_RAMESH)
+        setflag(FLAG_HIDE_KEIYING)
+        return
+}
+script SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script{
+    lock
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        if (var(VAR_TEMP_0) != 17){
+            fadescreen(FADE_TO_BLACK)
+                setobjectxy(PLAYER,17,29)
+                TeleportCamera(17,29)
+                fadescreen(FADE_FROM_BLACK)
+        }
+
+    switch (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE)){
+        case PRE_WELCOME_TO_THE_WAR_ROOM: goto(WelcomeToTheWarRoom_ExplainSitaution_Dialogue)
+        case PRE_YOU_REALIZE_WERE_EVIL_RIGHT: goto(YouRealizeWereEvilRight_Open_Dialogue)
+    }
+}
+
+script SharpriseSpire_Leagueops_Oliver_Event_Script{
+    lock
+    faceplayer
+    switch (var(VAR_STORYLINE_STATE)){
+        case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
+        case STORY_START_FALSE_TIMELINE:
+        case STORY_1ST_THETIDE_TAKEDOWN:
+        case STORY_2ND_THETIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Interact_Oliver_Script)
+    }
+    release
+    end
+}
+
+script SharpriseSpire_Leagueops_Keiying_Event_Script{
+    lock
+    faceplayer
+    switch(var(VAR_STORYLINE_STATE)){
+        case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
+        case STORY_START_FALSE_TIMELINE:
+        case STORY_1ST_THETIDE_TAKEDOWN:
+        case STORY_2ND_THETIDE_TAKEDOWN: call(YouHaveYourOrders_Interact_Keiying_Script)
+}
+release
+end
+}
+
+script SharpriseSpire_Leagueops_Ramesh_Event_Script{
+    lock
+    faceplayer
+    switch(var(VAR_STORYLINE_STATE)){
+        case STORY_MORNING_OF_TIMELINE_SPLIT: return
+        case STORY_START_FALSE_TIMELINE:
+        case STORY_1ST_THETIDE_TAKEDOWN:
+        case STORY_2ND_THETIDE_TAKEDOWN: goto(Manhunt_Interact_Ramesh_Script)
+}
+release
+end
+}
+
+script SharpriseSpire_Leagueops_Charlotte_Event_Script{
+    lock
+    faceplayer
+    call(ImIn_InteractCharlotteBattle_Script)
+    call(ImIn_PostCharlotteBattle_Interact_Dialogue)
+    closemessage
+
+}
+
+script SharpriseSpire_Leagueops_CheckRewardStatus_Script{
+    setvar(VAR_TEMP_1,0)
+
+    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_LETSBURNTHISMOTHERDOWN)
+
+    if(var(VAR_RESULT)){
+        addvar(VAR_TEMP_1,1)
+    }
+    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_HOWDISAPPOINTING)
+
+    if(var(VAR_RESULT)){
+        addvar(VAR_TEMP_1,1)
+    }
+    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_MANHUNT)
+
+    if(var(VAR_RESULT)){
+        addvar(VAR_TEMP_1,1)
+    }
+
+    if (var(VAR_TEMP_1) == 0){
+        call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
+    }
+    return
+}
+
+script SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script{
+    removeobject(ARNAV)
+    removeobject(TECHIE)
+    removeobject(CHARLOTTE)
+    removeobject(CHIEF)
+    removeobject(ADELAIDE)
+    setflag(FLAG_HIDE_NERDS_COPS)
+    setflag(FLAG_HIDE_CHARLOTTE)
+    setflag(FLAG_HIDE_ADELAIDE)
+    return
+}

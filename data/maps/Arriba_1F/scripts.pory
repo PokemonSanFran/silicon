@@ -1,0 +1,19 @@
+//gText_Arriba_1F_
+//Arriba_1F_
+
+mapscripts Arriba_1F_MapScripts{
+}
+
+script Arriba_1F_StairsGuard_Dialogue{
+    msgbox(gText_Arriba_1F_SorryNo,MSGBOX_NPC,SPEAKER_ARRIBA_GRUNT2)
+
+    if (flag(FLAG_QUEST_PERSUASIVE_PASSENGER_PLAYER_KIDNAPPED)){
+        goto(Quest_Persuasivepassenger_Grunt2_Event_Script)
+    }
+
+    end
+}
+
+text gText_Arriba_1F_SorryNo{
+    format("Sorry, no entry for non-employees.")
+}

@@ -1,0 +1,60 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts Arantraz_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(YouRealizeTheyreEvilRight_HideObject_Script)
+    }
+
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_STORYLINE_STATE, STORY_EPILOGUE: Epilogue_Script_ObjectVisibility
+    ]
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE, STORY_EPILOGUE: Epilogue_Script_TalaApproachesKai
+            FLAG_VISITED_ARANTRAZ, FALSE: Generic_Mappreview
+        VAR_ARANTRAZ_STATE, KAI_SUMMONED_ARANTRAZ: YouRealizeTheyreEvilRight_PlayerLandedDialogue
+    ]
+}
+
+script ArantrazAttendant_HealPlayer_Script {
+        lock
+        call(Common_EventScript_OutOfCenterPartyHeal)
+        msgbox(gText_Arantraz_IveHealedYourParty)
+        call(ResetArantrazExhibit_Script)
+        closemessage
+        release
+        end
+}
+
+script ResetArantrazExhibit_Script
+{
+    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_A)
+    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_B)
+    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_C)
+    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_D)
+    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_E)
+    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_F)
+
+    if (var(VAR_ARANTRAZ_STATE) == FIRST_ARRIVED_ARANTRAZ)
+    {
+        setvar(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_NOT_STARTED)
+    }
+}
+
+script Arantraz_ChooseFerryDestination_Script {
+    call(Ferry_Interact_Dialogue)
+}
+
+script Arantraz_EventScript_DeliveryD{
+    returnqueststate(QUEST_BODEGABURNOUT)
+    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+        goto(Quest_Bodegaburnout_DeliveryD_Dialogue)
+    }
+
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        end
+}
+
+text gText_Arantraz_IveHealedYourParty {
+    format("I've healed your party! You can battle these Trainers as often as you like.")
+}

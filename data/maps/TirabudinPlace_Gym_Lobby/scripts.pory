@@ -1,0 +1,49 @@
+//gText_TirabudinPlace_Gym_Lobby_
+//TirabudinPlace_Gym_Lobby_
+
+const ATTENDANT_SINGLES = 1
+const ATTENDANT_DOUBLES = 2
+const ATTENDANT_MULTIS = 3
+const ATTENDANT_LINK_MULTIS = 4
+
+const VAR_FACILITY_CHALLENGE_STATUS = VAR_TEMP_0
+const CHALLENGE_STATUS_UNKNOWN = 0
+
+const VAR_NEED_TO_FACE_NORTH = VAR_TEMP_1
+
+mapscripts TirabudinPlace_Gym_Lobby_MapScripts{
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_UNKNOWN: BattleTower_EventScript_GetChallengeStatus
+        VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING: BattleTower_EventScript_QuitWithoutSaving
+        VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED: BattleTower_EventScript_ResumeChallenge
+        VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_WON: BattleTower_EventScript_WonChallenge
+        VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST: BattleTower_EventScript_LostChallenge
+    ]
+
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE[
+        VAR_NEED_TO_FACE_NORTH, 0:BattleTower_EventScript_PlayerFaceNorth
+    ]
+
+    MAP_SCRIPT_ON_TRANSITION{
+        call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,TirabudinPlace_Gym_Lobby_RepositionAttendant_Script)
+    }
+}
+
+script TirabudinPlace_Gym_Lobby_RepositionAttendant_Script{
+    setobjectxyperm(ATTENDANT_SINGLES,4,4)
+    setobjectmovementtype(ATTENDANT_SINGLES,MOVEMENT_TYPE_FACE_DOWN)
+    return
+}
+
+script TirabudinPlace_Gym_Lobby_Attendant_Singles{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTORETIRABUDINGYM)
+    if(var(VAR_RESULT)){
+        goto(BattleTower_EventScript_Attendant)
+    }
+    msgbox(gText_TirabudinPlace_Gym_Lobby_ThisWayTo,MSGBOX_NPC,SPEAKER_GYM_ATTENDANT)
+    end
+}
+
+text gText_TirabudinPlace_Gym_Lobby_ThisWayTo{
+    format("If you're here for the Gym, its right through these doors.")
+}

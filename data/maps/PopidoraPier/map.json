@@ -1,0 +1,205 @@
+{
+  "id": "MAP_POPIDORA_PIER",
+  "name": "PopidoraPier",
+  "layout": "LAYOUT_POPIDORA_PIER",
+  "music": "MUS_SLATEPORT",
+  "region_map_section": "MAPSEC_POPIDORA_PIER",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ANBEH_BEND",
+      "offset": -3,
+      "direction": "left"
+    },
+    {
+      "map": "MAP_ROUTE4",
+      "offset": 0,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_ROUTE_D",
+      "offset": 46,
+      "direction": "up"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
+      "x": 78,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GroupOfAssholesAppears_GruntInteract_Script",
+      "flag": "TRAINER_FLAGS_START+TRAINER_IHSAN_AND_EMMITT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "x": 79,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GroupOfAssholesAppears_GruntInteract_Script",
+      "flag": "TRAINER_FLAGS_START+TRAINER_IHSAN_AND_EMMITT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
+      "x": 80,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GroupOfAssholesAppears_GruntInteract_Script",
+      "flag": "TRAINER_FLAGS_START+TRAINER_IHSAN_AND_EMMITT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "x": 83,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GroupOfAssholesAppears_GruntInteract_Script",
+      "flag": "TRAINER_FLAGS_START+TRAINER_IHSAN_AND_EMMITT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
+      "x": 82,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GroupOfAssholesAppears_GruntInteract_Script",
+      "flag": "TRAINER_FLAGS_START+TRAINER_IHSAN_AND_EMMITT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "x": 84,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GroupOfAssholesAppears_GruntInteract_Script",
+      "flag": "TRAINER_FLAGS_START+TRAINER_IHSAN_AND_EMMITT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_DEVON_EMPLOYEE",
+      "x": 81,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GroupOfAssholesAppears_LookForXanax_Dialogue",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
+      "x": 46,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
+      "x": 46,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PopidoraPier_InteractFerryAttendant_Script",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_OLIVER",
+      "x": 42,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "WaitYouWentWhere_FirstInteract_Dialogue",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 62,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_POPIDORA_PIER_ARCADE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 85,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_GROUP_OF_ASSHOLES_STATE",
+      "var_value": "0",
+      "script": "GroupOfAssholesAppears_CheckPartySize"
+    },
+    {
+      "type": "trigger",
+      "x": 76,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_GROUP_OF_ASSHOLES_STATE",
+      "var_value": "0",
+      "script": "GroupOfAssholesAppears_CheckPartySize"
+    },
+    {
+      "type": "trigger",
+      "x": 81,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_GROUP_OF_ASSHOLES_STATE",
+      "var_value": "1",
+      "script": "GroupOfAssholes_PostSaveTrigger_Script"
+    }
+  ],
+  "bg_events": [
+
+  ]
+}

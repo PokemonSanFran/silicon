@@ -1,0 +1,34 @@
+mapscripts Route2_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Route2_ConstructionVisibility_Script)
+        call(Quest_NeighborhoodCleanUp_ObjectVisibility_Script)
+        call(MaybeIFuckedUp_ShowOri_Script)
+        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(HeresHowThisIsGoingToGo_ConstructionCompleted_Script)
+        call(TheStrikeStrikesBack_UnblockConstruction_Script)
+    }
+    MAP_SCRIPT_ON_RESUME{
+        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_CONSTRUCTION_STRIKE_STATE, STRIKE_HAS_BEGUN: TheStrikeStrikesBack_Intro_Dialogue
+            VAR_CONSTRUCTION_STRIKE_STATE, DEFEATED_GARBODOR: VSGarbodor_Arrest_Script
+            VAR_STORYLINE_STATE, STORY_CONGRATULATED_BY_ADELAIDE: MaybeIFuckedUp_Dialogue
+    ]
+}
+
+
+script Route2_ConstructionVisibility_Script {
+    switch (var(VAR_CONSTRUCTION_STRIKE_STATE)){
+        case STRIKE_NOT_STARTED: call(TheStrikeStrikesBack_HideObject_Script)
+        case STRIKE_HAS_BEGUN: call(TheStrikeStrikesBack_ObjectSetup_Script)
+        case START_VS_GARBODOR: call(TheStrikeStrikesBack_ShowCrowd_Script)
+        case DEFEATED_GARBODOR: call(VSGarbodor_Arrest_ObjectSetup_Script)
+        case THETIDE_ARRESTED: call(TheStrikeStrikesBack_HideObject_Script)
+    }
+
+    return
+}
+

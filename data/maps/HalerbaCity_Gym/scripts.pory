@@ -1,0 +1,15 @@
+const DIMU = 1
+const FLAG_HIDE_DIMU = FLAG_TEMP_1
+
+mapscripts HalerbaCity_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(HalerbaCity_Gym_LeaderVisibility_Script)
+    }
+}
+
+script HalerbaCity_Gym_LeaderVisibility_Script{
+    if (var(VAR_DIMU_STATE) != NO_BADGE && var(VAR_DIMU_STATE) != QUEST_2_COMPLETE){
+        setflag(FLAG_HIDE_DIMU)
+    }
+    return
+}

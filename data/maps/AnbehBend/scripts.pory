@@ -1,0 +1,16 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
+
+mapscripts AnbehBend_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(OldAssholeAppears_ControlVisibility_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+        [
+        VAR_TEMP_0,0: AaandWereBack_Monologue
+        FLAG_VISITED_ANBEH_BEND, FALSE: Generic_Mappreview
+        ]
+}

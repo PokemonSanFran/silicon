@@ -1,0 +1,38 @@
+{
+  "id": "MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_2F",
+  "name": "EspuleeOutskirts_KomalaCabin_2F",
+  "layout": "LAYOUT_ESPULEE_OUTSKIRTS_SHORTTERMRENTAL_2F",
+  "music": "MUS_SCHOOL",
+  "region_map_section": "MAPSEC_ESPULEE_OUTSKIRTS",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "CuconuTown_Compound_2F_Bed_Script"
+    }
+  ],
+  "bg_events": []
+}

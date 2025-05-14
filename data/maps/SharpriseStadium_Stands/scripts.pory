@@ -1,0 +1,19 @@
+mapscripts SharpriseStadium_Stands_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(SharpriseStadium_Stands_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE, 28: WhyDidntYouRatMeOut_ConversationInStands
+    ]
+}
+
+script SharpriseStadium_Stands_MapScripts_OnTransition {
+    switch (var(VAR_STORYLINE_STATE)){
+        case 28: call(WhyDidntYouRatMeOut_HideObject_Script)
+        default: call(WhyDidntYouRatMeOut_CleanUpObject_Script)
+
+    }
+}
+
+
+

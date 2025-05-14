@@ -15,7 +15,13 @@ IslandCave_EventScript_TryRemoveRegice::
 	return
 
 IslandCave_OnLoad:
+	//specialvar VAR_RESULT GetPuzzleValue
+	//compare VAR_RESULT, GAME_OPTION_PUZZLES_OFF
+	//goto_if_eq DontHidePuzzle
 	call_if_unset FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_HideRegiEntrance
+	end
+
+DontHidePuzzle::
 	end
 
 IslandCave_EventScript_HideRegiEntrance::

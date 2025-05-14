@@ -1,0 +1,22 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const DOYLE = 2
+const FLAG_HIDE_DOYLE = FLAG_TEMP_1
+
+mapscripts ZenzuIsland_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(LetsGrabLunch_HideKai_Outside_Script)
+        call(Restorezenzugym_HideDoyle_Outside_Script)
+        call(LetsGrabLunch_CheckRestorationProgress_Script)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
+        FLAG_VISITED_ZENZU_ISLAND, FALSE: Generic_Mappreview
+    ]
+
+}
+
+script ZenzuIsland_Movies_Dialogue{
+    msgbox(format("this is a movie theater. the cafe is inside."),MSGBOX_SIGN)
+    end
+}

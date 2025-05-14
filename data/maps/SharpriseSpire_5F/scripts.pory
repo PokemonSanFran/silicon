@@ -1,0 +1,11 @@
+mapscripts SharpriseSpire_5F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(SharpriseSpire_5F_MapScripts_OnTransition)
+    }
+}
+
+script SharpriseSpire_5F_MapScripts_OnTransition {
+    if (var(VAR_TOWER_RAID_STATE) > 4){
+        //call(ImIn_HideStairsGuard_Script)
+    }
+}

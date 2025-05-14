@@ -1,0 +1,9 @@
+mapscripts PerlaciaCity_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(EnterEmrys_LeaderPosition_Script)
+        call(Quest_Alohafromalola_SetLeaderPosition_Battle_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_EMRYS_STATE,EXHIBITION_READY: Quest_Alohafromalola_StartBattle_Dialogue
+    ]
+}

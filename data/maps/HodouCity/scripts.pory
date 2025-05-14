@@ -1,0 +1,45 @@
+mapscripts HodouCity_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION {
+        call(HowDisappointing_ManageObject_Script)
+        call(Quest_CulturalPurity_HideLeader_Script)
+        call(Quest_CulturalPurity_HideBackUp_Script)
+        call(Quest_CulturalPurity_MoveGuard_Script)
+        call(Quest_Restorehodoucity_HidePewfatOutside_Script)
+        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_HODOU_CITY, FALSE: Generic_Mappreview
+        VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
+    ]
+    MAP_SCRIPT_ON_LOAD{
+        call(Quest_Restorehodoucity_LockGymDoor_Script)
+    }
+}
+
+script HodouCity_GymDoor_Dialogue
+{
+    returnqueststate(QUEST_HOWDISAPPOINTING)
+    if (var(VAR_RESULT) == QUEST_MENU_SET_ACTIVE)
+    {
+        msgbox(format("I'm supposed to wait outside."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+        closemessage
+        return
+    }
+
+    returnqueststate(QUEST_RESTOREHODOUGYM)
+    if (var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST)
+    {
+        msgbox(format("The door is open."),MSGBOX_SIGN)
+        return
+    }
+
+    msgbox(format("The door is locked."),MSGBOX_SIGN)
+    end
+}
+
+text gText_HodouCity_IMissTheOld
+{
+    format("I miss the old days. I get so nostalgic for my childhood...I loved growing up in these streets.")
+}

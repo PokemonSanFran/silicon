@@ -1,0 +1,61 @@
+mapscripts LeaverraForest_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(EnterTheMaster_LeaverraForest_ObjectSetup_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+                FLAG_VISITED_LEAVERRA_FOREST, FALSE: Generic_Mappreview
+]
+
+}
+
+script LeaverraForest_ForestSign_Script{
+    msgbox(gText_LeaverraForest_RegionParkSign,MSGBOX_SIGN)
+
+    returnqueststate(QUEST_INSTALLNATUREPROBES)
+
+    switch (var(VAR_RESULT)){
+        case QUEST_MENU_SET_ACTIVE:
+            goto(Quest_InstallNatureProbes_InstallForestProbe_Script)
+        case QUEST_MENU_COMPLETE_QUEST:
+            msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+        default:
+            release
+            end
+    }
+}
+
+script LeaverraForest_HillSign_Script{
+   msgbox(gText_LeaverraForest_RegionParkSign,MSGBOX_SIGN)
+
+    returnqueststate(QUEST_INSTALLNATUREPROBES)
+
+    switch (var(VAR_RESULT)){
+        case QUEST_MENU_SET_ACTIVE:
+            goto(Quest_InstallNatureProbes_InstallHillProbe_Script)
+        case QUEST_MENU_COMPLETE_QUEST:
+            msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+        default:
+            release
+            end
+    }
+}
+
+script LeaverraForest_ShoreSign_Script{
+   msgbox(gText_LeaverraForest_RegionParkSign,MSGBOX_SIGN)
+
+    returnqueststate(QUEST_INSTALLNATUREPROBES)
+
+    switch (var(VAR_RESULT)){
+        case QUEST_MENU_SET_ACTIVE:
+            goto(Quest_InstallNatureProbes_InstallShoreProbe_Script)
+        case QUEST_MENU_COMPLETE_QUEST:
+            msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+        default:
+            release
+            end
+    }
+}
+
+text gText_LeaverraForest_RegionParkSign{
+    format("LeaverraForest Regional Park")
+}

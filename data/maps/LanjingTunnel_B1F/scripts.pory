@@ -1,0 +1,23 @@
+mapscripts LanjingTunnel_B1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(Robinwilltunnel_B1F_MapScripts_OnTransition)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ROBINWILLIAMSTUNNEL_STATE, 1:IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue
+    ]
+}
+
+script Robinwilltunnel_B1F_MapScripts_OnTransition {
+    switch (var(VAR_ROBINWILLIAMSTUNNEL_STATE)){
+        case 0: goto(IGuessWeShouldBeNiceNow_HideObject_Script)
+        case 1: goto(IGuessWeShouldBeNiceNow_ObjectSetup_Script)
+        case 2: goto(IGuessWeShouldBeNiceNow_PuzzlePrepareObject_Script)
+        case 3: goto(IGuessWeShouldBeNiceNow_PuzzleStartObject_Script)
+        case 4: goto(IGuessWeShouldBeNiceNow_PuzzleStartObject_Script)
+        case 5: goto(IGuessWeShouldBeNiceNow_PuzzleBSolvedObject_Script)
+        case 6: goto(IGuessWeShouldBeNiceNow_PostCleanUp_Script)
+
+    }
+}
+

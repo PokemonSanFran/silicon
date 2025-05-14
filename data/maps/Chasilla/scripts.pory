@@ -1,0 +1,89 @@
+mapscripts Chasilla_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION {
+        call(BreedingCenter_Script_SignifyEggReady)
+        call(swagbag2_SetUp_Object_Script)
+        call(Quest_GetTheBand_HideBikerA_Script)
+        call(SorryAboutMyFriends_Adaora_Visible_Script)
+        call(Quest_StealTheAxe_UnlockDoor_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_CHASILLA_STATE, DEFEATED_KAUNA: SorryAboutMyFriends_CheckCutscene_Script
+        FLAG_VISITED_CHASILLA, FALSE: Generic_Mappreview
+    ]
+
+    MAP_SCRIPT_ON_RETURN_TO_FIELD{
+    }
+}
+
+script Chasilla_Stan_Interact_Script{
+    lock
+        call(Quest_WallaceArmy_LoadStanSpeech_Script)
+        msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+        call(Quest_WallaceArmy_PreBattleStan_Script)
+
+        trainerbattle_single(TRAINER_CHASILLA_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,Chasilla_Stan_PostBattle_Script)
+        goto(Chasilla_Stan_PostBattle_Script)
+}
+
+script Chasilla_Stan_PostBattle_Script{
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_4)
+        call(Quest_WallaceArmy_CheckCompletionRate_Script)
+        questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
+        if (!var(VAR_RESULT)){
+            msgbox(gText_WallaceArmy_PostBattlePlaceholder1)
+        }else {
+            msgbox(gText_WallaceArmy_PostQuestPlaceholder1)
+        }
+
+    release
+        end
+}
+
+script Chasilla_Biker_Interact_Script{
+    msgbox(gText_Chasilla_PlaceholderBiker,MSGBOX_NPC)
+
+    call(Quest_GetTheBand_CheckQuestAndBike_Script)
+    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
+        goto(Quest_GetTheBand_Interact_BikerA_Dialogue)
+    }
+    end
+}
+
+script Chasilla_University_Locked_Door_Script{
+    msgbox(gText_Chasilla_TheDoor,MSGBOX_SIGN)
+    call(Quest_StealTheAxe_LockedDoor_Dialogue)
+    release
+    end
+}
+
+script Berekley_Leland_Interact_Script{
+    lock
+    bufferspeciesname(STR_VAR_1,SPECIES_STUFFUL)
+    bufferitemname(STR_VAR_3,ITEM_COIN_CASE)
+
+    switch(var(VAR_CHASILLA_AXE_STATE)){
+        case AXE_UNTOUCHED: goto(Chasilla_Leland_Story_Dialogue)
+        case AXE_STOLEN: goto(Quest_StealTheAxe_DiscussStolen_Dialogue)
+        case AXE_ASKED:
+        case AXE_THROWN_AWAY: goto(Quest_StealTheAxe_AskAxe_Dialogue)
+        case AXE_TURNED_OVER: goto(Quest_StealTheAxe_HasAxe_Dialogue)
+    }
+}
+
+script Chasilla_Leland_Story_Dialogue{
+    msgbox(gText_Chasilla_IAttended,MSGBOX_NPC,SPEAKER_LELAND)
+        return
+}
+
+text gText_Chasilla_PlaceholderBiker{
+    format("i am a biker, and this is placeholder text.")
+}
+
+text gText_Chasilla_TheDoor{
+    format("The door is locked.")
+}
+
+text gText_Chasilla_IAttended{
+    format("You know, I used to go to Chasillauniversity! I was on their football team, and helped win the {STR_VAR_3} so many years ago. There's an old legend that it actually gives the holders power, but I'm proof that its nonsense. The {STR_VAR_3} means so much to me and my teammates, but its just a symbol.")
+}

@@ -1,0 +1,10 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts OrolandColiseum_Hallway_MapScripts{
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_PROLOGUE_STATE,NOT_STARTED: Prologue_SetUp_Script
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE[
+    VAR_TEMP_1, 0: OrolandColiseum_Arena_PlayerTurnNorth_Script
+    ]
+}

@@ -1,0 +1,354 @@
+{
+  "id": "MAP_SHARPRISE_STADIUM_CONSTRUCTION",
+  "name": "SharpriseStadium_Construction",
+  "layout": "LAYOUT_SHARPRISESTADIUM_CONSTRUCTION",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region_map_section": "MAPSEC_SHARPRISESTADIUM",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
+      "x": 11,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
+      "x": 5,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "VSGarbodor_TheTideGrunt2_Battle_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_A"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "x": 2,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "VSGarbodor_TheTideGrunt1_Battle_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_B"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
+      "x": 19,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "VSGarbodor_TheTideGrunt4_Battle_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_A"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "x": 23,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "VSGarbodor_TheTideGrunt3_Battle_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_B"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "VS_Garbodor_CoreEncounter_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_B"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "x": 3,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "VS_Garbodor_CoreEncounter_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_A"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "x": 22,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "VS_Garbodor_CoreEncounter_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_A"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "x": 18,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "VS_Garbodor_CoreEncounter_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_B"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 24,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE2",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 0,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 1,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 3,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "1",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_INNER_CONSTRUCTION_SITE_STATE",
+      "var_value": "0",
+      "script": "VSGarbodor_Scouting_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_CONSTRUCTION_STRIKE_STATE",
+      "var_value": "2",
+      "script": "VSGarbodor_PreventCrossingSides_Script"
+    }
+  ],
+  "bg_events": []
+}

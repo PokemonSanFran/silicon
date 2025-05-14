@@ -1,0 +1,38 @@
+mapscripts CresaltaVista_MapScripts {
+
+    MAP_SCRIPT_ON_TRANSITION {
+        call(BeachBattle_ObjectVisibility_Script)
+        call(CutePokemon_Script_ControlMelissaCresaltaOutsideVisibility)
+        call(Quest_ShutDownMedicineMan_ControlLeaderVisibility)
+        call(Quest_Hang20_ResetCount_Script)
+        call(Quest_GetTheBand_HideBikerB_Script)
+        call(Quest_Restorehodoucity_HideJames_CresaltaVista_Script)
+        call(Quest_Hang20_HideLeader_Script)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE, STORY_EAST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
+                FLAG_VISITED_CRESALTA_VISTA, FALSE: Generic_Mappreview
+    ]
+
+
+}
+
+script CresaltaVista_Biker_Interact_Script{
+    msgbox(gText_CresaltaVista_PlaceholderBiker,MSGBOX_NPC)
+
+    call(Quest_GetTheBand_CheckQuestAndBike_Script)
+
+    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
+        goto(Quest_GetTheBand_Interact_BikerB_Dialogue)
+    }
+    end
+}
+
+text gText_CresaltaVista_PlaceholderBiker{
+    format("i am a biker, and this is placeholder text.")
+}
+
+text gText_CresaltaVista_PlaceholderOrolandFan{
+    format("i used to go to the Oroland stadium a lot. i sitll have my ticket stub!")
+}

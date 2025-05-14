@@ -1,0 +1,18 @@
+//gText_PerlaciaCity_Sanitation
+//PerlaciaCity_Sanitation
+
+mapscripts PerlaciaCity_Sanitation_MapScripts{}
+
+script PerlaciaCity_Sanitation_Interact_Clerk_Script{
+    goto_if_quest_not_inactive(QUEST_FOODTRUCKBUREACRACY,Quest_Foodtruckbureaucracy_Sani_Active_Dialogue)
+    goto(PerlaciaCity_Sanitation_Clerk_Dialogue)
+}
+
+script PerlaciaCity_Sanitation_Clerk_Dialogue{
+   msgbox(gText_PerlaciaCity_Sanitation_CouldTheInternet,,MSGBOX_NPC,SPEAKER_WALDRON) 
+    end
+}
+
+text gText_PerlaciaCity_Sanitation_CouldTheInternet{
+    format("The internet here is so slow! I've been told the problem is a router, but good luck getting one from IT!")
+}

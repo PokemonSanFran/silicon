@@ -1,0 +1,42 @@
+{
+  "id": "MAP_LANJING_TUNNEL",
+  "name": "LanjingTunnel",
+  "layout": "LAYOUT_ROBINWILLTUNNEL",
+  "music": "MUS_RG_MT_MOON",
+  "region_map_section": "MAPSEC_ROBINWILLTUNNEL",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_PIOCA_BRIDGE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 29,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_ESPULEE_OUTSKIRTS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_LANJING_TUNNEL_B1F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

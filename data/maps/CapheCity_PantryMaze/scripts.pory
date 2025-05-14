@@ -1,0 +1,5 @@
+mapscripts CapheCity_PantryMaze_MapScripts{
+    MAP_SCRIPT_ON_LOAD{
+        special(GenerateMazeItemsSeed)
+    }
+}

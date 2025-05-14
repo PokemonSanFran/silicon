@@ -1,0 +1,10 @@
+mapscripts PerlaciaCity_Gym_Entrance_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Alohafromalola_HideLeader_Script)
+        call(Quest_Alohafromalola_SetLeaderPosition_Thanks_Script)
+        call(Quest_Alohafromalola_SetGuardPosition_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_EMRYS_STATE,EXHIBITION_COMPLETE: Quest_Alohafromalola_PostBattle_Script 
+    ]
+}

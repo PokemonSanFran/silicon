@@ -1,0 +1,24 @@
+mapscripts SharpriseSpire_10F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(SharpriseSpire_10F_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+    ]
+}
+
+script SharpriseSpire_10F_MapScripts_OnTransition {
+    switch (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE)){
+        case 4: call(TheGangsAllHere_ObjectCleanUp_Script)
+    }
+
+    //switch (var(VAR_TOWER_RAID_STATE)){
+        //case 0: call(ImIn_HideCharlotte_Script)
+        //case 1: call(ImIn_HideCharlotte_Script)
+        //case 2: call(ImIn_HideCharlotte_Script)
+        //case 3: call(ImIn_HideCharlotte_Script)
+        //case 4: call(ImIn_HideCharlotte_Script)
+        //case 5: call(ImIn_HideStairsGuard_Script)
+                //call(ImIn_ShowCharlotte_Script)
+        //default: call(ImIn_ResumeSave_Script)
+    //}
+}

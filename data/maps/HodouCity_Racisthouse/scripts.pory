@@ -1,0 +1,39 @@
+mapscripts HodouCity_Racisthouse_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_CulturalPurity_HideShinzoInside_Script)
+        call(Quest_CulturalPurity_MoveGuard_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_TEMP_0, 0: Quest_CulturalPurity_InsideClubhouse_Dialogue
+    ]
+}
+
+script HodouCity_Racisthouse_Scroll_Script{
+    lock
+
+    switch (var(VAR_QUEST_HODOUTUNNELS)){
+        case 2: goto(Quest_HodouCityTunnels_FirstScrollWarp_Script)
+        case 3: goto(HodouCity_Racisthouse_ScrollWarp_Script)
+        case 4: goto(HodouCity_Racisthouse_ScrollWarp_Script)
+        default: call(HodouCity_Racisthouse_ScrollNoWarp_Dialogue)
+    }
+    release
+    end
+}
+
+script HodouCity_Racisthouse_ScrollWarp_Script{
+    lock
+    playse(SE_EXIT)
+        fadeblackandsetremovewarpfadeflag
+    warpsilent(MAP_HODOU_CITY_TUNNEL,1)
+    release
+    end
+}
+
+script HodouCity_Racisthouse_ScrollNoWarp_Dialogue{
+    msgbox(gText_HodouCity_Racisthouse_ScrollDesc,MSGBOX_SIGN)
+}
+
+text gText_HodouCity_Racisthouse_ScrollDesc{
+    format("There is a beautiful red scroll hanging on the wall.")
+}

@@ -539,9 +539,9 @@ Route111_EventScript_Hayden::
 	msgbox Route111_Text_HaydenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route111_EventScript_Bianca::
-	trainerbattle_single TRAINER_BIANCA, Route111_Text_BiancaIntro, Route111_Text_BiancaDefeat
-	msgbox Route111_Text_BiancaPostBattle, MSGBOX_AUTOCLOSE
+Route111_EventScript_Charlotte::
+	trainerbattle_single TRAINER_CHARLOTTE, Route111_Text_CharlotteIntro, Route111_Text_CharlotteDefeat
+	msgbox Route111_Text_CharlottePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Tyron::

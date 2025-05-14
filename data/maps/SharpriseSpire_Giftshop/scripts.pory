@@ -1,0 +1,6 @@
+mapscripts SharpriseSpire_Giftshop_MapScripts{
+	    MAP_SCRIPT_ON_TRANSITION{
+        call(SharpriseSpire_GuardRaidFloors_Script)
+    }
+
+}

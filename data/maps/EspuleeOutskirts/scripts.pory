@@ -1,0 +1,142 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const LIIDIA = 2
+const DIMU = 3
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
+const FLAG_HIDE_LIIDIA = FLAG_TEMP_4
+const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
+
+mapscripts EspuleeOutskirts_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_Restoreespuleeoutskirts_HideImelda_Script)
+        call(Quest_Restoreespuleeoutskirts_MoveImelda_Script)
+        call(EspuleeOutskirts_HideCharlotte_Script)
+        call(EspuleeOutskirts_HideLiidia_Script)
+        call(Quest_GetTheBand_HideBikerD_Script)
+        call(IGuessWeShouldBeNiceNow_HidePopup_Script)
+        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        call(Quest_Manofmanyhats_CheckDoorLock_Script)
+        call(Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_ESPULEE_OUTSKIRTS, FALSE: Generic_Mappreview
+        VAR_ESPULEE_OUTSKIRTS_STATE, ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED: IGuessWeShouldBeNiceNow_ExitCave_Script
+            VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
+    ]
+
+    MAP_SCRIPT_ON_LOAD{
+        call(EspuleeOutskirts_LockRangerDoor_Script)
+    }
+}
+
+script EspuleeOutskirts_HideCharlotte_Script {
+    setflag(FLAG_HIDE_CHARLOTTE)
+        return
+}
+
+script EspuleeOutskirts_HideLiidia_Script{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES)
+
+        if (var(VAR_RESULT)){
+            setflag(FLAG_HIDE_LIIDIA)
+        }
+    return
+}
+
+script EspuleeOutskirts_LockRangerDoor_Script{
+        if(var(VAR_QUEST_MANOFMANYHATS) < OPEN_LOCKED_DOOR){
+            setmetatile(13,8,0x23B,TRUE)
+        }
+}
+
+script EspuleeOutskirts_RangerStationDoor_Script{
+    lock
+        msgbox(gText_EspuleeOutskirts_TheDoorIsLocked,MSGBOX_SIGN)
+        goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_EnterDoorCombination_Dialogue)
+}
+
+script EspuleeOutskirts_Stan_Interact_Script{
+    lock
+        call(Quest_WallaceArmy_LoadStanSpeech_Script)
+        msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+        call(Quest_WallaceArmy_PreBattleStan_Script)
+
+        trainerbattle_single(TRAINER_ESPULEE_OUTSKIRTS_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,EspuleeOutskirts_Stan_PostBattle_Script)
+        goto(EspuleeOutskirts_Stan_PostBattle_Script)
+}
+
+script EspuleeOutskirts_Stan_PostBattle_Script{
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_5)
+        call(Quest_WallaceArmy_CheckCompletionRate_Script)
+        questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
+        if (!var(VAR_RESULT)){
+            msgbox(gText_WallaceArmy_PostBattlePlaceholder1)
+        }else {
+            msgbox(gText_WallaceArmy_PostQuestPlaceholder1)
+        }
+
+    release
+        end
+}
+
+script EspuleeOutskirts_HideMapNamePopup_Script{
+    setflag(FLAG_HIDE_MAP_NAME_POPUP)
+        return
+}
+
+script EspuleeOutskirts_Biker_Interact_Script{
+    msgbox(gText_EspuleeOutskirts_PlaceholderBiker,MSGBOX_NPC)
+
+    call(Quest_GetTheBand_CheckQuestAndBike_Script)
+
+    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
+            goto(Quest_GetTheBand_Interact_BikerD_Dialogue)
+        }
+    end
+}
+
+script EspuleeOutskirts_Imelda_Interact_Script{
+    lock
+        faceplayer
+        returnqueststate(QUEST_RESTOREESPULEEGYM)
+
+        switch(var(VAR_RESULT)){
+            case QUEST_MENU_SET_ACTIVE: call(Quest_Restoreespuleeoutskirts_Active_Script)
+            case QUEST_MENU_SET_REWARD: call(Quest_Restoreespuleeoutskirts_Reward_Dialogue)
+            default: call(EspuleeOutskirts_Imelda_PreQuest_Dialogue)
+        }
+}
+
+script EspuleeOutskirts_Imelda_PreQuest_Dialogue{
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+        goto(Quest_Restoreespuleeoutskirts_StartQuest_Dialogue)
+    }
+    else{
+        call(EspuleeOutskirts_Imelda_Dialogue)
+    }
+}
+
+script EspuleeOutskirts_Imelda_Dialogue{
+    msgbox(gText_EspuleeOutskirts_IUsedToBe,MSGBOX_NPC)
+        end
+}
+
+script EspuleeOutskirts_Girl_Interact_Script{
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_NPC)
+    goto_if_quest_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_EspuleeOutskirts_Script)
+    end
+}
+
+text gText_EspuleeOutskirts_PlaceholderBiker{
+    format("i am a biker, and this is placeholder text.")
+}
+
+text gText_EspuleeOutskirts_TheDoorIsLocked{
+    format("The door is locked.")
+}
+
+text gText_EspuleeOutskirts_IUsedToBe{
+    format("i used to be the leader of the gym in town!")
+}

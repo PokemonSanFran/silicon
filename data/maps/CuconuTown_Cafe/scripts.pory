@@ -1,0 +1,7 @@
+const FLAG_HIDE_ISMAIL = FLAG_TEMP_1
+
+mapscripts CuconuTown_Cafe_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_Breaktheinternet_Ismail_Visibility_Script)
+    }
+}

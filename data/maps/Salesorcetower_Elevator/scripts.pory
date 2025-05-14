@@ -1,0 +1,178 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts Salesorcetower_Elevator_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(SharpriseSpire_Elevator_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: SharpriseSpire_Elevator_AttendantMissing_Dialogue
+    ]
+}
+
+script SharpriseSpire_Elevator_MapScripts_OnTransition {
+    if (var(VAR_TOWER_RAID_STATE) > RAMESH_WARP_DOOR_UNLOCKED || !flag(FLAG_BADGE03_GET)){
+        goto(SharpriseSpire_Elevator_HideAttendant_Script)
+    }
+}
+
+script SharpriseSpire_Elevator_AttendantMissing_Dialogue {
+    setvar(VAR_TEMP_0,1)
+        if (var(VAR_TOWER_RAID_STATE) > 4 || !flag(FLAG_BADGE03_GET)){
+            lock
+                applymovement(PLAYER,Common_Movement_FaceLeft)
+                waitmovement(0)
+                msgbox(gText_SharpriseSpire_Elevator_TheAttendantIsGone,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+                closemessage
+
+                release
+                end
+        } else {
+            release
+                end
+        }
+}
+
+script SharpriseSpire_Elevator_HideAttendant_Script {
+    setflag(FLAG_TEMP_1)
+}
+
+script SharpriseSpire_ElevatorAttendant_PickFloor_Script{
+        msgbox(gText_WhichFloorWouldYouLike,MSGBOX_NPC,SPEAKER_ATTENDANT)
+        dynmultichoice(1,1,FALSE,3,0,NULL, "Floor 1: Foyer","Floor 30: Lobby","Floor 34: Park","Floor 35: Giftshop","Floor 37: Production","Floor 38: Leagueops","Cancel")
+        closemessage
+        if (var(VAR_RESULT) == MULTI_B_PRESSED)
+        {
+            end
+        }
+
+        if (var(VAR_RESULT) == 6)
+        {
+            end
+        }
+
+        fadeblackandsetremovewarpfadeflag
+        switch (var(VAR_RESULT)){
+            case 0: warpsilent(MAP_SHARPRISE_SPIRE_1F,2)
+            case 1: warpsilent(MAP_SHARPRISE_SPIRE_LOBBY,2)
+            case 2: warpsilent(MAP_SHARPRISE_SPIRE_PARK,2)
+            case 3: warpsilent(MAP_SHARPRISE_SPIRE_GIFTSHOP,2)
+            case 4: warpsilent(MAP_SHARPRISE_SPIRE_PRODUCTION,2)
+            case 5: warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,2)
+        }
+}
+
+
+script SharpriseSpire_ElevatorAttendant_Script {
+    lock
+        faceplayer
+        setvar(VAR_0x8004,0) //don't know what purpose this serves
+        if (flag(FLAG_TEMP_2)){
+            call(SharpriseSpireElevator_EventScript_SetFloor)
+        }
+    copyvar(VAR_0x8005,VAR_TOWER_FLOOR)
+
+        special(ShowSharpriseSpireElevatorFloorSelect) // PSF TODO Figure out why the floor does not display correctly when you walk from 2F to 1F and then use the elevator
+        message(gText_WhichFloorWouldYouLike)
+        waitmessage
+        setvar(VAR_0x8004,0) //don't know what purpose this serves
+        goto(SharpriseSpireElevator_EventScript_ChooseFromX)
+        end
+}
+
+script SharpriseSpireElevator_EventScript_ChooseFromX  {
+    specialvar(VAR_RESULT,GetTowerFloorDefaultFloorChoice)
+        switch(var(VAR_RESULT))
+        {
+            case 0: multichoicedefault(0,0,MULTI_FLOORS,0,FALSE)
+            case 1: multichoicedefault(0,0,MULTI_FLOORS,1,FALSE)
+            case 2: multichoicedefault(0,0,MULTI_FLOORS,2,FALSE)
+            case 3: multichoicedefault(0,0,MULTI_FLOORS,3,FALSE)
+        }
+    goto(SharpriseSpireElevator_EventScript_ChooseFloor)
+        end
+}
+
+script SharpriseSpireElevator_EventScript_ChooseFloor{
+    switch(var(VAR_RESULT)) {
+        case 0: goto(SharpriseSpireElevator_EventScript_10thFloor)
+        case 1: goto(SharpriseSpireElevator_EventScript_5thFloor)
+        case 2: goto(SharpriseSpireElevator_EventScript_2ndFloor)
+        case 3: goto(SharpriseSpireElevator_EventScript_1stFloor)
+        case 4: goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        case(MULTI_B_PRESSED): goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+    }
+    end
+}
+
+script SharpriseSpireElevator_EventScript_1stFloor{
+    setvar(VAR_0x8006,SHARPRISESPIRE_FLOORNUM_1F)
+        setdynamicwarp(MAP_SHARPRISE_SPIRE_1F,255,8,2)
+        if (var(VAR_TOWER_FLOOR) == SHARPRISESPIRE_FLOORNUM_1F)    {
+            goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        }
+    call(SharpriseSpireElevator_EventScript_MoveElevator)
+        setvar(VAR_TOWER_FLOOR,SHARPRISESPIRE_FLOORNUM_1F)
+        goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        end
+}
+script SharpriseSpireElevator_EventScript_2ndFloor{
+    setvar(VAR_0x8006,SHARPRISESPIRE_FLOORNUM_2F)
+        setdynamicwarp(MAP_SHARPRISE_SPIRE_2F,255,9,39)
+        if (var(VAR_TOWER_FLOOR) == SHARPRISESPIRE_FLOORNUM_2F)    {
+            goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        }
+    call(SharpriseSpireElevator_EventScript_MoveElevator)
+        setvar(VAR_TOWER_FLOOR,SHARPRISESPIRE_FLOORNUM_2F)
+        goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        end
+}
+script SharpriseSpireElevator_EventScript_5thFloor{
+    setvar(VAR_0x8006,SHARPRISESPIRE_FLOORNUM_5F)
+        setdynamicwarp(MAP_SHARPRISE_SPIRE_5F,255,16,28)
+        if (var(VAR_TOWER_FLOOR) == SHARPRISESPIRE_FLOORNUM_5F)    {
+            goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        }
+    call(SharpriseSpireElevator_EventScript_MoveElevator)
+        setvar(VAR_TOWER_FLOOR,SHARPRISESPIRE_FLOORNUM_5F)
+        goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        end
+}
+script SharpriseSpireElevator_EventScript_10thFloor{
+    setvar(VAR_0x8006,SHARPRISESPIRE_FLOORNUM_10F)
+        setdynamicwarp(MAP_SHARPRISE_SPIRE_10F,255,8,2)
+        if (var(VAR_TOWER_FLOOR) == SHARPRISESPIRE_FLOORNUM_10F)   {
+            goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        }
+    call(SharpriseSpireElevator_EventScript_MoveElevator)
+        setvar(VAR_TOWER_FLOOR,SHARPRISESPIRE_FLOORNUM_10F)
+        goto(SharpriseSpireElevator_EventScript_ExitFloorSelect)
+        end
+}
+
+script SharpriseSpireElevator_EventScript_ExitFloorSelect{
+    special(CloseDeptStoreElevatorWindow)
+        release
+        end
+}
+
+script SharpriseSpireElevator_EventScript_MoveElevator{
+    special(CloseDeptStoreElevatorWindow)
+        closemessage
+        applymovement(VAR_LAST_TALKED,Common_Movement_WalkInPlaceFasterDown)
+        waitmovement(0)
+        waitse
+        special(MoveElevator)
+        waitstate
+        setflag(FLAG_TEMP_2)
+        return
+}
+
+script SharpriseSpireElevator_EventScript_SetFloor{
+    special(SetSharpriseSpireFloor)
+        return
+}
+
+text gText_SharpriseSpire_Elevator_TheAttendantIsGone {
+    format("The attendant is gone...but I don't think the elevator works without their keycard. Guess I have to take the stairs.")
+}
+

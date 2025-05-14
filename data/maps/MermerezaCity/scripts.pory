@@ -1,0 +1,47 @@
+mapscripts MermerezaCity_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Recruitlocalartists_Ramesh_Visibility_Script)
+        call(Quest_Recruitlocalartists_Smeargle_Visibility_Script)
+        call(Quest_Restaurantexpansion_MermerezaCity_Leader_Visibilty_Script)
+        call(WowYoureStrong_HideObject_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE, DEFEATED_THIRD_LEADER: WowYoureStrong_WalkToPlayer_Script
+        FLAG_VISITED_MERMEREZA_CITY, FALSE: Generic_Mappreview
+    ]
+}
+
+script MermerezaCity_1_Interact_Script{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_RECRUITLOCALARTISTS)
+
+    if (var(VAR_QUEST_RECRUITLOLCAARTISTS) == SMEARGLE_NO_LOCALS && (var(VAR_RESULT))){
+        goto(Quest_Recruitlocalartists_First_Dialogue)
+    }else{
+        msgbox(gText_MermerezaCity_Placeholder,MSGBOX_NPC)
+        end
+    }
+}
+
+script MermerezaCity_2_Interact_Script{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_RECRUITLOCALARTISTS)
+
+    if (var(VAR_QUEST_RECRUITLOLCAARTISTS) == SMEARGLE_LOCAL_1 && (var(VAR_RESULT))){
+        goto(Quest_Recruitlocalartists_Second_Dialogue)
+    }else{
+        msgbox(gText_MermerezaCity_Placeholder,MSGBOX_NPC)
+        end
+    }
+}
+
+script MermerezaCity_3_Interact_Script{
+    msgbox(gText_MermerezaCity_Placeholder,MSGBOX_NPC)
+
+    if (defeated(TRAINER_PERSUASIVE_LANDLORD)){
+       goto(Quest_Persuasivepassenger_Sibling_Dialogue)
+    }
+    end
+}
+
+text gText_MermerezaCity_Placeholder{
+    format("")
+}

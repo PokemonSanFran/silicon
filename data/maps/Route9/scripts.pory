@@ -1,0 +1,10 @@
+mapscripts Route9_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Vsdeoxys_Script_HideObjectRoute)
+        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+    }
+    MAP_SCRIPT_ON_RESUME
+    {
+        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
+    }
+}

@@ -1,0 +1,10 @@
+const FLAG_HIDE_GUARD = FLAG_TEMP_1
+
+mapscripts SharpriseSpire_Park_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(SharpriseSpire_GuardRaidFloors_Script)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE[
+    ]
+}

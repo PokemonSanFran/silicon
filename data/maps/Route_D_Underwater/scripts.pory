@@ -1,0 +1,5 @@
+mapscripts Route_D_Underwater_MapScripts{
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_QUEST_GLITTERS_GOLD_STATE,NOT_SHOWN_PICTURE: Quest_Allthatglittersmightbegold_ShowVideo_Dialogue
+    ]
+}

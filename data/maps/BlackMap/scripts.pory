@@ -1,0 +1,13 @@
+mapscripts BlackMap_MapScripts {
+        MAP_SCRIPT_ON_FRAME_TABLE [
+            VAR_TEMP_0, 0: BlackMap_Script_RunScript
+        ]
+}
+
+script BlackMap_Script_RunScript
+{
+    call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_WarpToKai)
+    goto_if_eq(VAR_STORYLINE_STATE,STORY_EPILOGUE,WeCanActuallyStopYou_Script_GoToPerpWalk)
+    goto_if_eq(VAR_STORYLINE_STATE,STORY_CLEAR,Epilogue_Script_GoToCredits)
+    goto(ThereCanOnlyBeOne_LoadFromSave_Script)
+}

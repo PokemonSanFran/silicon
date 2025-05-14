@@ -1,0 +1,22 @@
+mapscripts Route13_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Restaurantexpansion2_HideStaffC_Script)
+        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+    }
+    MAP_SCRIPT_ON_RESUME{
+        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
+    }
+}
+
+
+script Route13_EventScript_Alice_Script{
+    trainerbattle_single(TRAINER_JAINTOR,gText_Alice_PreBattle,gText_Alice_PostBattle,Quest_Restaurantexpansion2_TrainerC_PostBattle_Script)
+        call(Quest_Restaurantexpansion2_TrainerC_PostBattle_Script)
+}
+text gText_Alice_PreBattle{
+	format("")
+}
+text gText_Alice_PostBattle{
+	format("")
+}
+

@@ -1,0 +1,22 @@
+mapscripts NongyuBridge_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
+    }
+    MAP_SCRIPT_ON_RESUME{
+        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_NONGYU_BRIDGE, FALSE: Generic_Mappreview
+]
+}
+
+
+script NongyuBridge_ConstructionWorker_Dialogue{
+    msgbox(NongyuBridge_TheBridgeIs,MSGBOX_NPC)
+    end
+}
+
+text NongyuBridge_TheBridgeIs{
+    format("The bridge is under construction.")
+}

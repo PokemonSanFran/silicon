@@ -1,0 +1,42 @@
+mapscripts CapheCity_GRUNTOffice_MapScripts{}
+
+script CapheCity_TrolleyHQ_Manager_Quest_Script{
+    lock
+    faceplayer
+    goto_if_quest_inactive(QUEST_ROCKCOLLECTOR,Quest_BetweenAStoneAndAHardPlace_Event_Script)
+    goto(Quest_Rockcollector_Event_Script)
+}
+
+script CapheCity_TrolleyHQ_CounterWorker_Dialogue{
+    msgbox(gText_CapheCity_TrolleyHQ_DoYouHave,MSGBOX_NPC)
+    end
+}
+
+script CapheCity_TrolleyHQ_Machine_Script{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_BETWEENASTONEANDAHARDPLACE)
+    if (var(VAR_RESULT)){
+    //PSF TODO There should be a script every frame that checks if you've ridden the Trolley more than 10 times, AND if the quest is active, marks it as complete
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_BETWEENASTONEANDAHARDPLACE)
+    }
+
+    msgbox("if that quest is acitve,\pyou rode the GRUNTten times.\pTalk to the guy now",MSGBOX_SIGN)
+    end
+}
+
+script CapheCity_TrolleyHQ_Interact_Clerk_Script{
+    goto_if_quest_not_inactive(QUEST_FOODTRUCKBUREACRACY,Quest_Foodtruckbureaucracy_DOT_Active_Dialogue)
+    goto(CapheCity_TrolleyHQ_Clerk_Dialogue)
+}
+
+script CapheCity_TrolleyHQ_Clerk_Dialogue{
+    msgbox(gText_CapheCity_TrolleyHQ_IHateHaving,MSGBOX_NPC,SPEAKER_ISIDORE)
+    end
+}
+
+text gText_CapheCity_TrolleyHQ_IHateHaving{
+    format("I hate having to leave the office to get food... but ordering Rapidoordash is so expensive!")
+}
+
+text gText_CapheCity_TrolleyHQ_DoYouHave{
+    format("Do you have any idea what it takes to make sure all the trolleys run on time? Especially when ridership is down...")
+}

@@ -1,0 +1,21 @@
+{
+  "id": "MAP_LAYOUT_TESTER",
+  "name": "LayoutTester",
+  "layout": "LAYOUT_ROUTE130_MIRAGE_ISLAND",
+  "music": "MUS_RG_FUCHSIA",
+  "region_map_section": "MAPSEC_HALAI_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "old_layout": "LAYOUT_LAYOUT_TESTER"
+}

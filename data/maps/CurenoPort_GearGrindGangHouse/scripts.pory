@@ -1,0 +1,91 @@
+const BIKER_C = 1
+const BIKER_D = 2
+const BIKER_E = 3
+const BIKER_F = 4
+
+//CurenoPort_GearGrindGangHouse_
+//CurenoPort_GearGrindGangHouse_Text_
+
+mapscripts CurenoPort_GearGrindGangHouse_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+        [
+            VAR_TEMP_0, 0: CurenoPort_GearGrindGangHouse_Script_TryToPutPlayerOnBike
+        ]
+        MAP_SCRIPT_ON_FRAME_TABLE
+        [
+            VAR_TEMP_0, 1: CurenoPort_GearGrindGangHouse_Script_CheckAcceptance
+        ]
+}
+
+script CurenoPort_GearGrindGangHouse_Script_TryToPutPlayerOnBike
+{
+    addvar(VAR_TEMP_0, 1)
+    returnqueststate(QUEST_ANGELDELIVERY)
+    if (var(VAR_RESULT) >= QUEST_MENU_SET_REWARD)
+    {
+        getonoffbike(FALSE)
+    }
+}
+
+script CurenoPort_GearGrindGangHouse_Script_CheckAcceptance
+{
+    addvar(VAR_TEMP_0,1)
+    lock
+    returnqueststate(QUEST_ANGELDELIVERY)
+    switch (var(VAR_RESULT))
+    {
+        case QUEST_MENU_SET_REWARD:
+            goto(AngelDelivery_Dialogue_PreBattle)
+        case QUEST_MENU_COMPLETE_QUEST:
+            release
+            end
+        default:
+            goto(CurenoPort_GearGrindGangHouse_Dialogue_KickOut)
+    }
+}
+
+script CurenoPort_GearGrindGangHouse_Dialogue_GuardsBlockDoor{
+    applymovement(BIKER_C,CurenoPort_GearGrindGangHouse_Movement_GuardFromLeft)
+    applymovement(BIKER_D,CurenoPort_GearGrindGangHouse_Movement_GuardFromRight)
+
+    waitmovement(BIKER_D)
+    msgbox(CurenoPort_GearGrindGangHouse_Text_BikersOnly,,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(CurenoPort_GearGrindGangHouse_Text_YoullHaveToLeave,,SPEAKER_ANGELDELIVERYBIKERD)
+    closemessage
+    return
+}
+
+script CurenoPort_GearGrindGangHouse_Dialogue_KickOut
+{
+   call(CurenoPort_GearGrindGangHouse_Dialogue_GuardsBlockDoor)
+    fadeblackandsetremovewarpfadeflag
+    warp(MAP_CURENO_PORT,2,21)
+    release
+    end
+}
+
+text CurenoPort_GearGrindGangHouse_Text_BikersOnly
+{
+    format("Gear Grind Gang only.")
+}
+
+text CurenoPort_GearGrindGangHouse_Text_YoullHaveToLeave
+{
+    format("You'll have to leave.")
+}
+
+movement CurenoPort_GearGrindGangHouse_Movement_GuardFromLeft {
+    face_left
+    face_right
+    face_up
+    face_down
+    step_end
+}
+
+movement CurenoPort_GearGrindGangHouse_Movement_GuardFromRight {
+    face_left
+    face_right
+    face_up
+    face_down
+    step_end
+}

@@ -1,0 +1,22 @@
+mapscripts LeaverraForest_Inner_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+    setflag(FLAG_VISITED_LEAVERRA_FOREST)
+        call(EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_LEAVERRA_FOREST_STATE, LEAVERRA_FOREST_MAZE_COMPLETE: EnterTheMaster_ClearingIntro_Dialogue
+        VAR_LEAVERRA_FOREST_STATE, FINISHED_ARMANDO_PUZZLES: HaveYouSeenTheNews_AskHelp_Dialogue
+    ]
+}
+
+script LeaverraForest_Armando_Interact_Script {
+    lock
+    faceplayer
+    switch (var(VAR_LEAVERRA_FOREST_STATE)){
+        case POST_HAVE_YOU_SEEN_THE_NEWS: msgbox(gText_HaveYouSeenTheNews_SoundsLikeYouve,,SPEAKER_ARMANDO)
+        default: call(EnterTheMaster_ExplainRobots_Dialogue)
+            }
+        closemessage
+        release
+        end
+    }

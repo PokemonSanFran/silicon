@@ -1,0 +1,9 @@
+mapscripts SharpriseSpire_Lab_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Ultrawormholeresearch_SetDynamicWarp_Script)
+        call(Quest_Ultrawormholeresearch_ResetUltraBeastVisbility)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_TEMP_0,0: Quest_Ultrawormholeresearch_StartQuest_Dialogue
+    ]
+}

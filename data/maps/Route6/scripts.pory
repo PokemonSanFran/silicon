@@ -1,0 +1,31 @@
+mapscripts Route6_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Restorehodoucity_HideBlackbelt_Route6_Script)
+        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+        call(CatchTutorial_HideProfessor_Script)
+    }
+    MAP_SCRIPT_ON_RESUME{
+        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
+    }
+}
+script Route6_EventScript_BlackbeltE{
+    trainerbattle_single(TRAINER_BLACKBELT_E,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
+
+        if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
+            goto(Quest_Restorehodoucity_Recruit_Blackbelt_E_Dialogue)
+        }
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        end
+}
+
+script Route6_EventScript_DeliveryA{
+    trainerbattle_single(TRAINER_BODEGA_1,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
+
+    returnqueststate(QUEST_BODEGABURNOUT)
+    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+        goto(Quest_Bodegaburnout_DeliveryA_Dialogue)
+    }
+
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        end
+}

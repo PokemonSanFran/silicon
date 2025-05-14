@@ -1,0 +1,26 @@
+mapscripts CapheCity_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(EnterAdaora_ObjectCleanUp_Script)
+        call(Quest_Manofmanyhats_Liidia_Attendant_Visibility_Script)
+        call(RPS_Script_ControlMontyOppVisibility)
+        call(RestoreZenzuIsland_Script_ControlCapheMontyVisibility)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(EnterAdaora_SetConeTiles_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0,0: AaandWereBack_Monologue
+        FLAG_VISITED_CAPHE_CITY, FALSE: Generic_Mappreview
+    ]
+}
+
+script CapheCity_EventScript_DeliveryE{
+    returnqueststate(QUEST_BODEGABURNOUT)
+    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+        goto(Quest_Bodegaburnout_DeliveryE_Dialogue)
+    }
+
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        end
+}

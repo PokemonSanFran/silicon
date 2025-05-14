@@ -1,0 +1,39 @@
+mapscripts TirabudinPlace_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(AndWeMarchOn_ObjectVisibility_Script)
+        call(Quest_LastMusicVenue_HidePublicDrummers)
+        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        call(Quest_Inversehallucinogenic_ControlLeaderVisibilityOutside_Script)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_TIRABUDIN_PLACE, FALSE: Generic_Mappreview
+        VAR_STORYLINE_STATE, STORY_EAST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
+            VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
+    ]
+}
+
+script TirabudinPlace_Stan_Interact_Script{
+    lock
+        call(Quest_WallaceArmy_LoadStanSpeech_Script)
+        msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+        call(Quest_WallaceArmy_PreBattleStan_Script)
+
+        trainerbattle_single(TRAINER_TIRABUDIN_PLACE_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,TirabudinPlace_Stan_PostBattle_Script)
+        goto(TirabudinPlace_Stan_PostBattle_Script)
+}
+
+script TirabudinPlace_Stan_PostBattle_Script{
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_2)
+        call(Quest_WallaceArmy_CheckCompletionRate_Script)
+        questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
+        if (!var(VAR_RESULT)){
+            msgbox(gText_WallaceArmy_PostBattlePlaceholder1)
+        }else {
+            msgbox(gText_WallaceArmy_PostQuestPlaceholder1)
+        }
+
+    release
+        end
+}

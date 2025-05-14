@@ -183,7 +183,7 @@ BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint::
 	end
 
 BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints::
-	special GiveFrontierBattlePoints
+    givefrontierbattlepoints(VAR_0x8004)
 	msgbox BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	msgbox BattleFrontier_ScottsHouse_Text_ExplainBattlePoints, MSGBOX_DEFAULT
 	setflag FLAG_SCOTT_GIVES_BATTLE_POINTS

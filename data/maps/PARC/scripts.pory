@@ -1,0 +1,28 @@
+mapscripts PARC_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(PARC_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(PARC_MapScripts_OnLoad)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_PARC, FALSE: Generic_Mappreview
+        VAR_PARC_STATE, 3: ThisIsntRandom_WalkIntoLab_Dialogue
+    ]
+}
+
+script PARC_MapScripts_OnTransition {
+
+    switch (var(VAR_PARC_STATE)){
+        case 3: return
+        case 7: call(WaitEvenThen_BossSetUp_Script)
+        default: call(ThisIsntRandom_HideObject_AboveGround_Script)
+    }
+
+}
+
+script PARC_MapScripts_OnLoad {
+    if (var(VAR_PARC_STATE) == 7){
+        call(WaitEvenThen_TurnOnMachine_Script)
+    }
+}

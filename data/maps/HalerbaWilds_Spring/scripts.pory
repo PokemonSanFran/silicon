@@ -1,0 +1,28 @@
+mapscripts HalerbaWilds_Spring_MapScripts{
+	MAP_SCRIPT_ON_TRANSITION {
+		call(Quest_FreshwaterEvolution_HideObject_Script)
+	}
+}
+
+//PSF TODO write evo method so that the spring bypasses most other evo methods
+// https://docs.google.com/spreadsheets/d/1TLIOdydz6I1bkhSNhv9f0xoqBBbGmTYaUuTgLqXkwJQ/edit#gid=0
+
+
+script HalerbaWilds_Spring_Bystander_Event_Script
+{
+	returnqueststate(QUEST_FRESHWATEREVOLUTION)
+
+	switch (var(VAR_RESULT))
+	{
+        case 4:
+			msgbox(gText_Quest_FreshwaterEvolution_IWonderWhat, MSGBOX_NPC)
+		default:
+			msgbox(gText_HalerbaWilds_Spring_ThisPlace, MSGBOX_NPC)
+	end
+}
+}
+
+text gText_HalerbaWilds_Spring_ThisPlace
+{
+	format("Man, this place is absolutely beautiful!")
+}

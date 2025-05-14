@@ -1,0 +1,207 @@
+mapscripts EspuleeOutskirts_KomalaCabin_1F_MapScripts
+{
+	MAP_SCRIPT_ON_TRANSITION
+	{
+		call(IGuessWeShouldBeNiceNow_CharlotteRentalVisibility_Script)
+	}
+	MAP_SCRIPT_ON_LOAD
+	{
+		call(IGuessWeShouldBeNice_AddNotesToTable_Script)
+	}
+}
+
+script EspuleeOutskirts_Shorttermrental_CharlotteNotes_Script
+{
+	lock
+	if (var(VAR_ESPULEE_OUTSKIRTS_STATE) < CHARLOTTE_STUDYING)
+	{
+		releaseall
+		return
+	}
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_CharlotteSpread)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_IBetterNot,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+	closemessage
+}
+
+script EspuleeOutskirts_Shorttermrental_DossierTable_Script
+{
+	lock
+	if (var(VAR_ESPULEE_OUTSKIRTS_STATE) < CHARLOTTE_STUDYING)
+	{
+		releaseall
+		return
+	}
+
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_DossierSpread)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_WhichOne)
+    dynmultichoice(1,1,TRUE,2,0,NULL,"Kai", "{PLAYER}", "Neither")
+
+	switch(var(VAR_RESULT))
+	{
+		case 0: call(EspuleeOutskirts_Shorttermrental_ReadKaiDossier_Script)
+		case 1: call(EspuleeOutskirts_Shorttermrental_ReadPlayerDossier_Script)
+	}
+			closemessage
+			release
+			end
+}
+
+script EspuleeOutskirts_Shorttermrental_WatchInterview_Script
+{
+	lock
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_ThereIsAn,MSGBOX_YESNO)
+
+	if (var(VAR_RESULT) == YES)
+	{
+		call(EspuleeOutskirts_Shorttermrental_CharlotteInterview_Script)
+	}
+
+	closemessage
+	release
+	end
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_DossierSpread
+{
+	format("There is a stack of folders with a sticky note that says DONE on top.")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_CharlotteSpread
+{
+	format("There are pieces of paper scattered across the table, organized into rows and columns, with sticky notes all over them. It's impossible to understand what is happening.")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_IBetterNot
+{
+	format("Charlotte has some organization system in place... I better not touch them.")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_WhichOne
+{
+	format("Which folder do you want to read?")
+}
+
+script EspuleeOutskirts_Shorttermrental_ReadKaiDossier_Script
+{
+	bufferspeciesname(STR_VAR_1,SPECIES_DRATINI)
+	msgbox(EspuleeOutskirts_Shorttermrental_KaiDossier)
+	bufferstring(STR_VAR_3,"Kai's")
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_TheRestOf)
+}
+
+script EspuleeOutskirts_Shorttermrental_ReadPlayerDossier_Script
+{
+	bufferspeciesname(STR_VAR_1,VAR_STARTER_MON)
+	bufferstring(STR_VAR_2,gText_ThreeQuestionMarks) // PSF TODO Replace with strings from customization menu
+	msgbox(EspuleeOutskirts_Shorttermrental_PlayerDossier)
+	bufferstring(STR_VAR_3,"your")
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_TheRestOf)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_ThosePages)
+
+}
+
+script EspuleeOutskirts_Shorttermrental_CharlotteInterview_Script
+{
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_TheLowerThird)
+	msgbox(gText_EspuleeOutskirts_Shortermrental_Data)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_IDontBelieve,,SPEAKER_CHARLOTTE)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_IWasAtThe,,SPEAKER_CHARLOTTE)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_EvenWhenDaddy,,SPEAKER_CHARLOTTE)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_IDontThinkI,,SPEAKER_CHARLOTTE)
+	msgbox(gText_EspuleeOutskirts_Shorttermrental_IHaveToBeTheBest,,SPEAKER_CHARLOTTE)
+	msgbox(gText_EspuleeOutskirts_Shortermrental_TheInterview)
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_ThereIsAn
+{
+	format("There is an inteview with Charlotte playing on the television. Do you want to watch it?")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_TheRestOf
+{
+	format("The rest of the pages are just extremely detailed notes for all of {STR_VAR_3} battles...")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_ThosePages
+{
+	format("Those pages have even more notes in the margins, and lots of highlighted lines. Charlotte is very intently studying you!")
+}
+
+text EspuleeOutskirts_Shorttermrental_KaiDossier
+{
+	format(
+		"Kai\N"
+		"Pronouns: He/Him\N"
+		"Origin: Halai Island\N"
+		"Age: 23, Born April 19 1996\N"
+		"Zodiac: Whimsicott (Western), Rat (Eastern)\N"
+		"Personality: Extroverted, Sensing, Thinking, Percieving\N"
+		"Battling Skill: 2/5\N"
+		"Ace Pokémon: {STR_VAR_1}\N"
+		"Battle Style: Hyper Offense with Screens"
+	)
+}
+
+text EspuleeOutskirts_Shorttermrental_PlayerDossier
+{
+	format(
+		"{PLAYER}\N"
+		"Pronouns: {STR_VAR_2}\N"
+		"Origin: Agate Village, Orre\N"
+		"Age: 24, Born March 7 1995\N"
+		"Zodiac: Alomomola (Western), Pig (Eastern)\N"
+		"Personality: Introverted, Observant, Feeling, Judging\N"
+		"Battling Skill: 5/5\N"
+		"Ace Pokémon: {STR_VAR_1}\N"
+		"Battle Style: Versatile"
+	)
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_TheLowerThird
+{
+	format("The lower third of the screen shows some basic information about Charlotte.")
+}
+
+text gText_EspuleeOutskirts_Shortermrental_Data
+{
+	format(
+		"Charlotte\N"
+		"Pronouns: She/Her\N"
+		"Age: 26, Born October 23 1992"
+	)
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_IDontBelieve
+{
+	format("I don't believe in having an ace Pokémon that you always use. If your party isn't always adapting for the situation, you're just a bad Trainer. That being said... {EMOJI_HEART} I do have a soft spot for my Lapras. It was my first partner Pokémon, and its my preferred choice for Mega Evolution.")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_MyBattleStyle
+{
+	format("My battle style is a healthy mix of offense and defense. It doesn't make sense to leave yourself vulnerable in one spot or another.")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_IWasAtThe
+{
+	format("I'm from the Unova region. I was at the top of my class at the Lemon Battle Academy, but I've always been interested in Pokémon battles.")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_EvenWhenDaddy
+{
+	format("My daddy has also been supportive of my goals, and made sure I had access to the best tools available to make sure I could progress my battling career. I'm worked with some of the best teachers in the world and I'm ready to finally put everything I've learned together.")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_IDontThinkI
+{
+	format("I don't think where I come from had a huge hand in how I got here. I think there's some skill you're just naturally born with, but even moreso, I know I'm a hard worker. I push Pokémon to the limit, and I make sure I'm just as hard on myself - I'm no slacker!")
+}
+
+text gText_EspuleeOutskirts_Shorttermrental_IHaveToBeTheBest
+{
+	format("I'm going to be the League Champion because I'm the best. Nobody is working harder than me, nobody is as smart as me, and nobody's Pokemon are as strong as mine. I've got the total pacakge!")
+}
+
+text gText_EspuleeOutskirts_Shortermrental_TheInterview
+{
+	format("The interview began playing again from the start.")
+}

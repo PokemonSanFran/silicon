@@ -1,0 +1,47 @@
+//PSF TODO GGW layout: https://i.imgur.com/B1PeWTU.png, each side if 72x72
+
+mapscripts HalerbaWilds_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Restorehodoucity_HideBlackbelt_HalerbaWilds_Script)
+    }
+MAP_SCRIPT_ON_FRAME_TABLE [
+                //FLAG_VISITED_HALERBAWILDS_NORTH, FALSE: Generic_Mappreview
+                //FLAG_VISITED_HALERBAWILDS_WEST, FALSE: Generic_Mappreview
+                //FLAG_VISITED_HALERBAWILDS_EAST, FALSE: Generic_Mappreview
+                //FLAG_VISITED_HALERBAWILDS_SOUTH, FALSE: Generic_Mappreview
+                FLAG_VISITED_HALERBAWILDS, FALSE: Generic_Mappreview
+]
+
+
+
+
+}
+script HalerbaWilds_EventScript_BlackbeltF{
+    trainerbattle_single(TRAINER_BLACKBELT_F,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
+
+        if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
+            goto(Quest_Restorehodoucity_Recruit_Blackbelt_F_Dialogue)
+        }
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        end
+}
+
+script HalerbaWilds_EventScript_Helen{
+    trainerbattle_single(TRAINER_HELEN,gText_HalerbaWilds_HaveYouEver,gText_HalerbaWilds_NotReadyForBattle)
+
+    msgbox(gText_HalerbaWilds_ImSupposedToBeGetting,MSGBOX_NPC,SPEAKER_HELEN)
+
+    end
+}
+
+text gText_HalerbaWilds_HaveYouEver{
+    format("Have you ever gotten cold feet?")
+}
+
+text gText_HalerbaWilds_NotReadyForBattle{
+    format("I'm not ready for battle or marriage...")
+}
+
+text gText_HalerbaWilds_ImSupposedToBeGetting{
+    format("I'm supposed to be getting married today. But I don't think I can do it...")
+}

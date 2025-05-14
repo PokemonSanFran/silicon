@@ -1,0 +1,38 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const BELEN = 1
+const FLAG_HIDE_BELEN = FLAG_TEMP_1
+
+mapscripts MermerezaCity_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(EnterBelen_StartGymBattle_ObjectSetup_Script)
+        call(MermerezaCity_Gym_Leader_Visibility_Script)
+        call(Quest_Restaurantexpansion2_HideEmployees_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0,0: AaandWereBack_Monologue
+    ]
+}
+
+script MermerezaCity_Gym_Leader_Visibility_Script{
+    switch(var(VAR_BELEN_STATE)){
+        case NO_BADGE:
+        case QUEST_2_COMPLETE:
+        case BATTLE_2_COMPLETE: return
+        default: setflag(FLAG_HIDE_BELEN)
+    }
+    return
+}
+
+script EnterBelen_Event_Script {
+  switch (var (VAR_GYM_1_STATE)) {
+  case 3:
+    goto(EnterBelen_StartGymBattle_Script)
+  case 4:
+    goto(EnterBelen_PostDefeat1_Dialogue)
+  case 5:
+    goto(EnterBelen_PostDefeat2_Dialogue)
+  default:
+    goto(EnterBelen_PutMeatInOven_Dialogue)
+  }
+}

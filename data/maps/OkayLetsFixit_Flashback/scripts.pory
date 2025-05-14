@@ -1,0 +1,12 @@
+mapscripts OkayLetsFixit_Flashback_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        goto(OkayLetsFixit_Flashback_MapScripts_OnLoad)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE,52: OkayLetsFixit_StartFlashback_Script
+    ]
+}
+
+script OkayLetsFixit_Flashback_MapScripts_OnLoad {
+    call(Script_SetGrayscaleTint)
+}

@@ -1,0 +1,100 @@
+{
+  "id": "MAP_OROLAND_WAREHOUSE",
+  "name": "Oroland_Warehouse",
+  "layout": "LAYOUT_OROLAND_WAREHOUSE",
+  "music": "MUS_PETALBURG_WOODS",
+  "region_map_section": "MAPSEC_CURENO_PORT",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_KEIYING",
+      "x": 1,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Warehourse_Interact_Script",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_CURENO_PORT",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_CURENO_PORT",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_CURENO_PORT",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_CURENO_PORT",
+      "dest_warp_id": "4"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_WAREHOUSE_RAVE_STATE",
+      "var_value": "1",
+      "script": "WarehouseRave_Intro_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_WAREHOUSE_RAVE_STATE",
+      "var_value": "1",
+      "script": "WarehouseRave_Intro_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_WAREHOUSE_RAVE_STATE",
+      "var_value": "1",
+      "script": "WarehouseRave_Intro_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_WAREHOUSE_RAVE_STATE",
+      "var_value": "1",
+      "script": "WarehouseRave_Intro_Dialogue"
+    }
+  ],
+  "bg_events": []
+}

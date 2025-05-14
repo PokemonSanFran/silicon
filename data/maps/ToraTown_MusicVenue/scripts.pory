@@ -1,0 +1,26 @@
+mapscripts ToraTown_MusicVenue_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_LastMusicVenue_CheckDrummerImpact)
+    }
+}
+
+script ToraTown_Musicvenue_Interact_Ladislau_Script{
+    lock
+
+    returnqueststate(QUEST_LASTMUSICVENUEINRESIDO)
+    switch(var(VAR_RESULT)){
+            case QUEST_MENU_SET_ACTIVE: goto(Quest_LastMusicVenue_Active_Dialogue)
+            case QUEST_MENU_SET_REWARD: goto(Quest_LastMusicVenue_Reward_Dialogue)
+            case QUEST_MENU_COMPLETE_QUEST: goto(ToraTown_Musicvenue_Drummers_Dialogue)
+            default: goto(Quest_LastMusicVenue_StartQuest_Script)
+            }
+}
+
+script ToraTown_Musicvenue_Drummers_Dialogue{
+    msgbox(gText_ToraTown_Musicvenue_ManTheseDummers,MSGBOX_NPC)
+    end
+}
+
+text gText_ToraTown_Musicvenue_ManTheseDummers{
+    format("Man, these drummers are something else!")
+}

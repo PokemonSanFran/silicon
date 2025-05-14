@@ -1,0 +1,8 @@
+//gText_Arriba_2F_
+//Arriba_2F_
+
+mapscripts Arriba_2F_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+    call(Quest_Persuasivepassenger_CEO_Visbility_Script)
+}
+}

@@ -1,0 +1,10 @@
+const FLAG_HIDE_INSIDE_TOWER = FLAG_TEMP_1
+
+mapscripts WeCanStopYouActually_Cutscene_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE, STORY_EPILOGUE: WeCanStopYouActaully_ArrestCutscene
+    ]
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_HIDE_INSIDE_TOWER)
+    }
+}

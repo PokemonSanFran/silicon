@@ -1,0 +1,19 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts Arriba_CarInterior_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE[
+        VAR_TEMP_1, 0: Arriba_CarInterior_PlayerFaceUp
+    ]
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_TEMP_1, 3: Quest_Persuasivepassenger_Driver1_Event_Script
+        VAR_TEMP_1, 2: Quest_Persuasivepassenger_Driver2_Event_Script
+        VAR_TEMP_1, 1: Quest_Persuasivepassenger_Driver3_Event_Script
+        VAR_TEMP_1, 4: Quest_Persuasivepassenger_SetCutsceneVar_Script
+    ]
+}
+
+script Arriba_CarInterior_PlayerFaceUp{
+    setvar(VAR_TEMP_1,4)
+    turnobject(PLAYER,DIR_NORTH)
+    end
+}

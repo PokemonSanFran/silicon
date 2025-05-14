@@ -1,0 +1,101 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts SharpriseSpire_2F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(SharpriseSpire_2F_MapScripts_OnTransition)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_WELCOME_TO_THE_WAR_ROOM: SharpriseSpire_2F_MovePlayerIntoPosition_Script
+            VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_YOU_REALIZE_WERE_EVIL_RIGHT: SharpriseSpire_2F_MovePlayerIntoPosition_Script
+            VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_KAI_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
+            VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY: HowDisappointing_MissionComplete_Dialogue
+            VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE: Manhunt_MissionComplete_Dialogue
+            VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED: ImIn_PostWarpSplit_Dialogue
+    ]
+}
+
+script SharpriseSpire_2F_MapScripts_OnTransition {
+
+    switch (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE)){
+        case 0: 
+        case STEPPED_INTO_RAMESH_ROOM:
+        case POST_ALWAYS_WATCHING_WAZOWSKI:
+        case POST_WELCOME_TO_THE_WAR_ROOM: call(WelcomeToTheWarRoom_Object_Hide_Script)
+        case PRE_WELCOME_TO_THE_WAR_ROOM: call(WelcomeToTheWarRoom_Object_Setup_Script)
+        case PRE_YOU_REALIZE_WERE_EVIL_RIGHT: call(YouRealizeWereEvilRight_Object_Setup_Script)
+        case POST_YOU_REALIZE_THEYRE_EVIL_RIGHT: call(YouRealizeWereEvilRight_Object_Cleanup_Script)
+        case START_FALSE_TIMELINE: call(CongratsYoureanAsshole_ObjectCleanUp_Script)
+        default: call(WelcomeToTheWarRoom_Object_Hide_Script)
+    }
+
+    if (flag(FLAG_TIMELINE_FALSE)){
+
+        switch (var(VAR_MANHUNT_STATE)){
+            case 0: return
+            //default: call(Manhunt_TowerObjectSetUp_Script) //Ramesh is in her office, already gave you mission
+        }
+
+        switch (var(VAR_HOWDISAPPOINTING_STATE)){
+            case MISSION_NOT_ASSIGNED: return
+            //case DEFEATED_ADAORA_HODOU_CITY: call(HowDisappointing_PostMissionObjectSetUp_Script) //Adelaide is in Keiying's office, thanking everybody for their work
+            default: call(YouHaveYourOrders_ObjectSetUp_Script) //Keiying is in his office, already gave you mission
+        }
+
+        if (var(VAR_LETSBURNTHISMOTHERSTATE) == DEFEATED_KAI_ARANTRAZ) {
+            //call(LetsBurnThisMotherDown_ObjectMove_Script)
+        }
+    }
+}
+
+script SharpriseSpire_2F_MovePlayerIntoPosition_Script {
+    lock
+        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+
+        if (var(VAR_TEMP_0) != 17){
+            fadescreen(FADE_TO_BLACK)
+                setobjectxy(PLAYER,17,33)
+                TeleportCamera(17,33)
+                fadescreen(FADE_FROM_BLACK)
+        }
+
+    switch (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE)){
+        case PRE_WELCOME_TO_THE_WAR_ROOM: goto(WelcomeToTheWarRoom_ExplainSitaution_Dialogue)
+        case PRE_YOU_REALIZE_WERE_EVIL_RIGHT: goto(YouRealizeWereEvilRight_Open_Dialogue)
+    }
+}
+
+script SharpriseSpire_2F_Oliver_Event_Script {
+    lock
+        switch (var(VAR_STORYLINE_STATE)){
+            //case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
+            //case STORY_START_FALSE_TIMELINE: call(LetsBurnThisMotherDown_Assignment_Dialogue)
+            //case STORY_1ST_THETIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Assignment_Dialogue)
+            case STORY_2ND_THETIDE_TAKEDOWN: return//call(LetsBurnThisMotherDown_Assignment_Dialogue)
+        }
+    release
+        end
+}
+
+script SharpriseSpire_2F_Keiying_Event_Script {
+    lock
+        switch (var(VAR_STORYLINE_STATE)){
+            case STORY_START_FALSE_TIMELINE: call(YouHaveYourOrders_Assignment_Dialogue)
+            case STORY_1ST_THETIDE_TAKEDOWN: call(YouHaveYourOrders_Assignment_Dialogue)
+            case STORY_2ND_THETIDE_TAKEDOWN: call(YouHaveYourOrders_Assignment_Dialogue)
+        }
+    release
+        end
+}
+
+script SharpriseSpire_2F_Ramesh_Event_Script {
+    lock
+        switch (var(VAR_STORYLINE_STATE)){
+            case STORY_START_FALSE_TIMELINE: call(Manhunt_Assignment_Dialogue)
+            case STORY_1ST_THETIDE_TAKEDOWN: call(Manhunt_Assignment_Dialogue)
+            case STORY_2ND_THETIDE_TAKEDOWN: call(Manhunt_Assignment_Dialogue)
+            default: call(AlwaysWatchingWazowski_IgnoringPlayer_Dialogue)
+        }
+    release
+        end
+}

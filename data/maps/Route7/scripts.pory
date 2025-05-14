@@ -1,0 +1,16 @@
+mapscripts Route7_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Restorehodoucity_HideBlackbelt_Route7_Script)
+    }
+}
+
+
+script Route7_EventScript_BlackbeltC{
+    trainerbattle_single(TRAINER_BLACKBELT_C,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
+
+        if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
+            goto(Quest_Restorehodoucity_Recruit_Blackbelt_C_Dialogue)
+        }
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        end
+}

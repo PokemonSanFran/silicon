@@ -1,0 +1,165 @@
+{
+  "id": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
+  "name": "PetarosaBorough_KeiYingMansion",
+  "layout": "LAYOUT_PETAROSA_BOROUGH_MANSION",
+  "music": "MUS_SLATEPORT",
+  "region_map_section": "MAPSEC_PETAROSA_BOROUGH",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_3",
+      "x": 25,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
+      "x": 26,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_KEIYING",
+      "x": 23,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiyingRaisonDetre_InteractAtTable_Script",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
+      "x": 42,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
+      "x": 39,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 24,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_PETAROSA_BOROUGH",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 25,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_PETAROSA_BOROUGH",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var_value": "1",
+      "script": "KeiyingRaisonDetre_ComeSit_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var_value": "1",
+      "script": "KeiyingRaisonDetre_ComeSit_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var_value": "2",
+      "script": "KeiyingRaisonDetre_Wine_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 37,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var_value": "3",
+      "script": "KeiyingRaisonDetre_StartDinner_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 36,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var_value": "3",
+      "script": "KeiyingRaisonDetre_StartDinner_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_F",
+      "var_value": "0",
+      "script": "KeiyingRaisonDetre_PreventPlayerLeaving_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_F",
+      "var_value": "0",
+      "script": "KeiyingRaisonDetre_PreventPlayerLeaving_Script"
+    }
+  ],
+  "bg_events": []
+}

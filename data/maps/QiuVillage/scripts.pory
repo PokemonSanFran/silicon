@@ -1,0 +1,46 @@
+mapscripts QiuVillage_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(ImIn_HideObject_OutsideHouse_Script)
+        call(Quest_ReturnDoll_HideObject_Script)
+        call(Quest_StolenTrade_HideObjectA_Script)
+        call(CutePokemon_Script_ControlMelissaQiuOutsideVisibility)
+        call(Quest_ButOnlyIn_HideGunda_Script)
+        call(Quest_Breaktheinternet_QiuVillageGuy_Visibility_Script)
+        call_if_quest_complete(QUEST_WILDFIRERISK,Quest_Wildfirerisk_Hide_Filip_Script)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(ImIn_DestroyWall_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+                FLAG_VISITED_QIU_VILLAGE, FALSE: Generic_Mappreview
+]
+
+}
+
+script Ramesh_House_LockedDoor_Script {
+    msgbox(gText_QiuVillage_LockedDoor,MSGBOX_SIGN)
+    end
+}
+
+script Waite_Interact_Script{
+    msgbox(gText_QiuVillage_ICantBelieve,,SPEAKER_WAITE,TAIL_WHISPER)
+    special(GetNumberOfBadges)
+    goto_if_set(FLAG_BADGE05_GET,Quest_Foodtruckbureaucracy_Food_Interact_Script)
+    end
+}
+
+script QiuVillage_Guy_Interact_Script{
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_NPC)
+    goto_if_quest_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_QiuVillage_Script)
+    end
+}
+
+text gText_QiuVillage_ICantBelieve{
+    format("I can't believe this shit!")
+}
+
+text gText_QiuVillage_LockedDoor {
+    format("The front door is locked.")
+}
+
+

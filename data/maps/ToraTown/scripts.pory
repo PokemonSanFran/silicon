@@ -1,0 +1,40 @@
+mapscripts ToraTown_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_HybridCulture_HideLeader_Script)
+        call(Quest_GetTheBand_HideBikerE_Script)
+        call(WowYoureStrong_HideObject_Script)
+    }
+    MAP_SCRIPT_ON_LOAD{
+       call(Quest_ArtisanBalls3_ChangeDoorMetatile_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE, DEFEATED_THIRD_LEADER: WowYoureStrong_WalkToPlayer_Script
+        FLAG_VISITED_TORA_TOWN, FALSE: Generic_Mappreview
+    ]
+}
+
+script ToraTown_FashionDesigner_Script{
+    msgbox(gText_ToraTown_ImAFashion,MSGBOX_NPC)
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_2)
+        call(Quest_HybridCulture_CheckSubquests_Script)
+        end
+}
+
+script ToraTown_Biker_Interact_Script{
+    msgbox(gText_ToraTown_PlaceholderBiker,MSGBOX_NPC)
+
+    call(Quest_GetTheBand_CheckQuestAndBike_Script)
+
+    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
+        goto(Quest_GetTheBand_Interact_BikerE_Dialogue)
+    }
+    end
+}
+
+text gText_ToraTown_PlaceholderBiker{
+    format("i am a biker, and this is placeholder text.")
+}
+
+text gText_ToraTown_ImAFashion{
+    format("I'm a fashion designer. I can't afford to travel to Sinnoh... but I love when their tourists come here! They're always wearing the latest styles and fashions, and so much of it doesn't translate when looking online.")
+}

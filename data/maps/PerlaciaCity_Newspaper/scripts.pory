@@ -1,0 +1,27 @@
+mapscripts PerlaciaCity_Newspaper_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Manhunt_HideCharlotte_Newspaper_Script)
+        call(Quest_Redomugging_Hide_Victim_Script)
+    }
+}
+
+script PerlaciaCity_Newspaper_InteractCherie_Event_Script {
+    lock
+
+        if (flag(FLAG_TIMELINE_FALSE)){
+            switch(var(VAR_MANHUNT_STATE)){
+                case NOT_ASSIGNED: return
+                case ASSIGNED_FIND_ALCMENE: call(Manhunt_Cherie_Battle_Script)
+                default: msgbox("...",MSGBOX_AUTOCLOSE)
+            }
+
+        } else {
+            switch(var(VAR_MASK_OFF_STATE)){
+                case 0: return
+                case 8: return
+                default: call(MaskOff_QuestH_Dialogue)
+            }
+        }
+    release
+        end
+}

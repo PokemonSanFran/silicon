@@ -1,0 +1,12 @@
+mapscripts HodouCity_Gym_MapScripts{
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM: Quest_Restorehodoucity_FirstTimeInside_Dialogue
+        VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER: Quest_Restorehodoucity_FoundJames_Dialogue 
+        VAR_QUEST_RESTOREHODOUGYM,FOUND_ALL_BLACKBELTS: Quest_Restorehodoucity_Reward_Dialogue
+    ]
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Restorehodoucity_HidePokemnon_Script)
+        call(Quest_Restorehodoucity_HideTrainers_Inside_Script)
+        call(Quest_Restorehodoucity_HideJames_HodouCity_Script)
+    }
+}

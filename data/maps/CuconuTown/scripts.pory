@@ -1,0 +1,58 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts CuconuTown_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(AngelDelivery_Script_HideBikers)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_PLAYER_HOME_STATE, 0: ImProbablyBetterThanYou_StandingOutside_Dialogue
+        FLAG_VISITED_CUCONU_TOWN, FALSE: Generic_Mappreview
+    ]
+    MAP_SCRIPT_ON_LOAD
+    {
+        call(Champion_LockFrontDoor_Script)
+    }
+}
+
+script Champion_TurnPlayerAwayHome_Script
+{
+    if (!flag(FLAG_SYS_GAME_CLEAR))
+    {
+        return
+    }
+
+    lockall
+    msgbox(gText_RemindPlayerNewHome)
+    closemessage
+    applymovement(PLAYER,swagbag_WalkBackwards)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script Champion_LockFrontDoor_Script
+{
+    if (!flag(FLAG_SYS_GAME_CLEAR))
+    {
+        return
+    }
+    setmetatile(3,9,0x239,TRUE)
+    setmetatile(3,8,0x239,TRUE) //PSF TODO Figure out how to turn off warp, or swithc with a door that isn't coded as a "door"
+}
+
+text gText_RemindPlayerNewHome {
+    format("You don't live here anymore!")
+}
+
+script CuconuTown_Dialogue_Unhoused
+{
+    lock
+    msgbox(format("I am an unhoused person, and this is placeholder text. Sometimes I ask for money."),MSGBOX_NPC,SPEAKER_UNHOUSED)
+    call(EventScript_UnhousedInteractPlayer)
+    release
+    end
+}
+

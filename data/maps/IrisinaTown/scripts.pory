@@ -1,0 +1,18 @@
+mapscripts IrisinaTown_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(RestoreZenzuIsland_Script_ControlIrisinaDrughelmettesterVisibility)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        FLAG_VISITED_IRISINA_TOWN, FALSE: Generic_Mappreview
+        VAR_STORYLINE_STATE, STORY_EAST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
+    ]
+}
+
+text gText_IrisinaTown_PlaceholderOrolandFan
+{
+    format("did you know that Toxic Spikes lose their potency after a few hours? safe to touch and everything")
+}

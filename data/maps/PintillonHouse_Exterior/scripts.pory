@@ -1,0 +1,27 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const KAI = 1
+
+mapscripts PintillonHouse_Exterior_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        goto(PintillonHouse_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        FLAG_VISITED_PINTILLONHOUSE, FALSE: Generic_Mappreview
+        VAR_STORYLINE_STATE, STORY_EAST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
+    ]
+}
+
+script PintillonHouse_MapScripts_OnTransition
+{
+    if (var(VAR_BATTLE_8_STATE) == DEFEATED_KAI_PINTILLONHOUSE)
+    {
+        call(Battle8_SetUpObject_Script)
+    }
+    else
+    {
+        call(Battle8_StartBattle_ObjectSetUp_Script)
+    }
+}

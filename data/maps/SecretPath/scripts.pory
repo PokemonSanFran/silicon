@@ -1,0 +1,21 @@
+mapscripts SecretPath_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(SecretPath_MapScripts_OnLoad)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_PARC_STATE, 2:ThisIsntRandom_UndergroundDoor_Dialogue
+    ]
+}
+
+script SecretPath_MapScripts_OnLoad {
+
+    switch (var(VAR_PARC_STATE)){
+        case 1: setflag(FLAG_TEMP_1)
+        case 2: return
+        default:
+            call(ThisIsntRandom_UnlockElectronicDoor_Script)
+            setflag(FLAG_TEMP_1)
+    }
+}

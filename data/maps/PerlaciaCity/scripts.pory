@@ -1,0 +1,57 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const VICTIM = 2
+const MUGGERA = 3
+const MUGGERB = 4
+
+mapscripts PerlaciaCity_MapScripts {
+    MAP_SCRIPT_ON_RESUME {
+        call(Quest_StopMugging_HideObject_Script)
+    }
+
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_StopMugging_HideObject_Script)
+        call(Buzzr_HideReporter_Script)
+        call(WowYoureStrong_HideObject_Script)
+        call(CutePokemon_Script_ControlMelissaPerlaciaOutsideVisibility)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_PERLACIA_CITY, FALSE: Generic_Mappreview
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE, DEFEATED_THIRD_LEADER: WowYoureStrong_WalkToPlayer_Script
+    ]
+}
+
+script PerlaciaCity_Stan_Interact_Script{
+    lock
+        call(Quest_WallaceArmy_LoadStanSpeech_Script)
+        msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+        call(Quest_WallaceArmy_PreBattleStan_Script)
+
+        trainerbattle_single(TRAINER_PERLACIA_CITY_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,PerlaciaCity_Stan_PostBattle_Script)
+        goto(PerlaciaCity_Stan_PostBattle_Script)
+}
+
+script PerlaciaCity_Stan_PostBattle_Script{
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_3)
+        call(Quest_WallaceArmy_CheckCompletionRate_Script)
+        questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
+        if (!var(VAR_RESULT)){
+            msgbox(gText_WallaceArmy_PostBattlePlaceholder1,,SPEAKER_STAN_PERLACIA_CITY)
+        }else {
+            msgbox(gText_WallaceArmy_PostQuestPlaceholder1,,SPEAKER_STAN_PERLACIA_CITY)
+        }
+
+    release
+        end
+}
+
+script PerlaciaCity_EventScript_DeliveryF{
+    returnqueststate(QUEST_BODEGABURNOUT)
+    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
+        goto(Quest_Bodegaburnout_DeliveryF_Dialogue)
+    }
+
+    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        end
+}

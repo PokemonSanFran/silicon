@@ -1,0 +1,144 @@
+{
+  "id": "MAP_PARC",
+  "name": "PARC",
+  "layout": "LAYOUT_PARC",
+  "music": "MUS_RG_POKE_MANSION",
+  "region_map_section": "MAPSEC_PARC",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_KAI",
+      "x": 32,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ADAORA",
+      "x": 31,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
+      "x": 33,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
+      "x": 4,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThisIsntRandom_CoreEncounter_Script",
+      "flag": "FLAG_DEFEATED_LAB_MON_A"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
+      "x": 4,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThisIsntRandom_CoreEncounter_Script",
+      "flag": "FLAG_DEFEATED_LAB_MON_B"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GROUDON_FRONT",
+      "x": 33,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "WaitEvenThen_MovePlayerToBoss",
+      "flag": "FLAG_DEFEATED_LAB_DYNAMAX"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 32,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_SECRET_PATH",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_PARC_STATE",
+      "var_value": "TEAM_INSIDE_LAB",
+      "script": "ThisIsntRandom_CheckProgressA_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_PARC_STATE",
+      "var_value": "FREED_LAB_POKEMON_1",
+      "script": "ThisIsntRandom_CheckProgressB_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_PARC_STATE",
+      "var_value": "FREED_LAB_POKEMON_2",
+      "script": "WaitEvenThen_PrepareBossEncounter_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_PARC_STATE",
+      "var_value": "FREED_LAB_POKEMON_2",
+      "script": "WaitEvenThen_PrepareBossEncounter_Dialogue"
+    }
+  ],
+  "bg_events": []
+}

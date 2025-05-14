@@ -1,0 +1,28 @@
+mapscripts ToraTown_Ramen_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+    }
+}
+
+script ToraTown_Ramen_InteractFanny_Event_Script {
+    lock
+        switch(var(VAR_MASK_OFF_STATE)){
+            case NOT_ASSIGNED:
+            case ASSIGNED_MASK_OFF:
+            case GOT_MASK_OFF_CLUE_1:
+            case DEFEATED_MASK_OFF_ALCMENE: return
+            default: call(MaskOff_QuestI_Dialogue)
+        }
+    release
+        end
+}
+
+script ToraTown_Ramen_FoodCulture_Script{
+    msgbox(gText_ToraTown_Ramen_TheRamenIsGreat,MSGBOX_NPC)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_1)
+    call(Quest_HybridCulture_CheckSubquests_Script)
+    end
+}
+
+text gText_ToraTown_Ramen_TheRamenIsGreat{
+    format("The ramen is great, but my favorite item on the menu are the Poffins! Poffins are a Sinnoh dessert, but here they use all sorts of flavors you can't find overseas! The tastiest are the yellow Poke Bean! Or wait, is it the Casteliacone flavor...?")
+}

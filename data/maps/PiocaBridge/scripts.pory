@@ -1,0 +1,10 @@
+mapscripts PiocaBridge_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(OffYouGo_ObjectCleanUp_Script)
+        call(AngelDelivery_Script_HideBikers)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE[
+                FLAG_VISITED_PIOCA_BRIDGE, FALSE: Generic_Mappreview
+    ]
+
+}

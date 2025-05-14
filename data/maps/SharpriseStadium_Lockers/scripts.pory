@@ -1,0 +1,103 @@
+mapscripts SharpriseStadium_Lockers_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(SharpriseStadium_Lockers_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_LOAD {
+    }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_STORYLINE_STATE, STORY_START_CHAMPIONSHIP: HeresHowThisIsGoingToGo_VirtualObjectSetUp_Script
+            VAR_STORYLINE_STATE, STORY_CHAMPIONSHIP_EXPLAINED: HeresHowThisIsGoingToGo_CleanUpVObjects_Script
+    ]
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_SHARPRISESTADIUM, FALSE: Generic_Mappreview
+    VAR_STORYLINE_STATE, STORY_START_CHAMPIONSHIP: HeresHowThisIsGoingToGo_ExplainLeagueDialogue
+        VAR_STORYLINE_STATE, STORY_CHARLOTTE_WON_GROUP: GroupStages_GreetBeforeStart_Dialogue
+        VAR_STORYLINE_STATE, STORY_SEMIFINAL_COMPLETE: WaitHeDidWhat_RivalsGoToMatch_Script
+        VAR_STORYLINE_STATE, STORY_POST_DIANTHA: ExhibitionBattle_PostBattle_Dialogue
+    ]
+}
+
+script SharpriseStadium_Lockers_MapScripts_OnTransition {
+    switch (var(VAR_STORYLINE_STATE)){
+        case STORY_START_CHAMPIONSHIP: call(HeresHowThisIsGoingToGo_ObjectSetUp_Script)
+        case STORY_CHAMPIONSHIP_EXPLAINED: call(HeresHowThisIsGoingToGo_ShowKaiandCharlotte)
+        case STORY_CHARLOTTE_WON_GROUP: call(GroupStages_Lockers_ObjectSetUp_Script)
+        case STORY_READY_GROUP_STAGE: call(GroupStages_Lockers_ObjectCleanUp_Script)
+        case STORY_GROUP_STATE_COMPLETE: call(Finals_HideObject_Script)
+        case STORY_SEMIFINAL_COMPLETE: call(WaitHeDidWhat_ObjectSetUp_Script)
+        case STORY_WATCH_SEMIFINAL: call(WaitHeDidWhat_ObjectMidSetUp_Script)
+        case STORY_READY_FINALS: call(WaitHeDidWhat_MeltdownSetUp_Script)
+        case STORY_SAVE_FINALS: call(WaitHeDidWhat_MeltdownPostSaveSetUp_Script)
+        case STORY_POST_DIANTHA: call(ExhibitionBattle_HideObject_Script)
+        case STORY_CONGRATULATED_BY_ADELAIDE: call(ExhibitionBattle_HideObject_Script)
+        default: call(WaitHeDidWhat_ObjectMidSetUp_Script)
+    }
+}
+
+script SharpriseStadium_Lockers_Charlotte_Event_Script {
+    lock
+        faceplayer
+        switch (var(VAR_STORYLINE_STATE)){
+            case STORY_READY_FINALS: call(WaitHeDidWhat_CharlotteMeltdown_Dialogue)
+            case STORY_CONGRATULATED_BY_ADELAIDE: call(ExhibitionBattle_Charlotte_Dialogue)
+        }
+    closemessage
+
+        release
+        end
+}
+
+script SharpriseStadium_Lockers_InteractArenaGuard_Script {
+    lock
+        faceplayer
+
+        switch (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE)){
+            case PRE_BATTLE_1: goto(GroupStages_PreparePlayer_Script)
+            case PRE_BATTLE_4: goto(Finals_PreparePlayer_Script)
+            case PRE_BATTLE_5: goto(WaitHeDidWhat_PreparePlayer_Script)
+        }
+
+    switch (var(VAR_STORYLINE_STATE)){
+        case STORY_SAVE_DIANTHA: goto(ExhibitionBattle_MoveFromDoor_Script)
+    }
+}
+
+script SharpriseStadium_Lockers_Information_Script{
+    lock
+        //PSF TODO change from YESNO to proper menu
+        msgbox(gText_SharpriseStadium_Lockers_WHatWouldYouLike,MSGBOX_YESNO)
+
+        if (var(VAR_RESULT) == YES){
+            goto(BattleFrontier_BattleDomeLobby_EventScript_ShowPrevTourneyTree)
+        }else {
+            goto(SharpriseStadium_Lockers_TournamentRules_Dialgoue)
+        }
+}
+
+script SharpriseStadium_Lockers_TournamentRules_Dialgoue{
+
+    fadescreen(FADE_TO_BLACK)
+        // PSF TODO The screen shows images of the League breakdown as Adelaide explains the structure.
+
+        if (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE) < PRE_BATTLE_4){
+            msgbox(gText_SharpriseStadium_Lockers_Information_ForTheGroupStage)
+            msgbox(gText_SharpriseStadium_Lockers_Information_TheTrainerWith)
+        }
+    msgbox(gText_SharpriseStadium_Lockers_Information_InTheFinalStage)
+        closemessage
+
+        fadescreen(FADE_FROM_BLACK)
+}
+
+text gText_SharpriseStadium_Lockers_Information_ForTheGroupStage {
+    format("For the Group Stage, you'll be randomly split into four groups of four trainers. You'll battle all of the other Trainers in your group, and each match will be on a different terrain battlefield. You will bring six Pokémon with you, and choose three before the start of each match in the Group Stage. You will be healed after every match, but you may not use items from your bag during battle. ")
+}
+text gText_SharpriseStadium_Lockers_Information_TheTrainerWith {
+    format("The Trainer with the best record in a group will proceed to the Semi-Finals. In the event of a tie, we will go to a tiebreaker.")
+}
+text gText_SharpriseStadium_Lockers_Information_InTheFinalStage {
+    format("In the Final Stage, you will be paired against another winning Trainer from a different Group. You will battle on a neutral battlefield, with a full party of six. The Semi-Final winners will then face off for the Championship! Trainers can change their six Pokémon between matches, but are still not permitted to use items during battle.")
+}
+text gText_SharpriseStadium_Lockers_WHatWouldYouLike{
+    format("What information would you like? Press Yes for Bracket, and No for Rules.")
+}

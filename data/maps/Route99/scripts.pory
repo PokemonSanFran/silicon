@@ -1,0 +1,37 @@
+mapscripts Route99_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Route99_MapScripts_OnTransition)
+        call(Quest_Restaurantexpansion2_HideStaffD_Script)
+    }
+
+    MAP_SCRIPT_ON_RESUME {
+        goto(Route99_MapScripts_OnResume)
+    }
+}
+
+
+script Route99_MapScripts_OnResume {
+        if (defeated(TRAINER_HOUSINGPROTEST_ROCKET)){
+            goto(HousingProtest_CleanUp_Script)
+        }
+}
+
+script Route99_MapScripts_OnTransition {
+    switch (var (VAR_ROUTE99_STATE)) {
+        case PROTEST_NOTSTARTED: goto(HousingProtest_ObjectSetUp_Script)
+        case SAVE_THETIDE_ROUTE99: goto(HousingProtest_PostSave_ObjectSetUp_Script)
+        case DEFEATED_THETIDE_ROUTE99: goto(HousingProtest_CleanUp_Landlord_Script)
+                                             return
+    }
+}
+
+script Route99_EventScript_Ferran_Script{
+    trainerbattle_single(TRAINER_BUSSER,gText_Ferran_PreBattle,gText_Ferran_PostBattle, Quest_Restaurantexpansion2_TrainerD_PostBattle_Script)
+    call(Quest_Restaurantexpansion2_TrainerE_PostBattle_Script)
+}
+text gText_Ferran_PreBattle{
+	format("")
+}
+text gText_Ferran_PostBattle{
+	format("")
+}

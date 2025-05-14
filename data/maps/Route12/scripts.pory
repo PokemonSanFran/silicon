@@ -1,0 +1,6 @@
+mapscripts Route12_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_ArtisanBalls2_CheckTrainerB_Script)
+    }
+}
+

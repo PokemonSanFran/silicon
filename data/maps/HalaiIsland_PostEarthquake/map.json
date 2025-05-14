@@ -1,0 +1,36 @@
+{
+  "id": "MAP_HALAI_ISLAND_POST_EARTHQUAKE",
+  "name": "HalaiIsland_PostEarthquake",
+  "layout": "LAYOUT_HALAI_ISLAND_POST_EARTHQUAKE",
+  "music": "MUS_RG_FUCHSIA",
+  "region_map_section": "MAPSEC_HALAI_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "CutePokemon_Script_DebugGiveMon"
+    }
+  ],
+  "bg_events": [
+
+  ]
+}

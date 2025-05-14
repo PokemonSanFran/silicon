@@ -1,0 +1,5 @@
+mapscripts RouteC_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Warehousewarfare_Barge3Guard_Visibility_Script)
+    }
+}

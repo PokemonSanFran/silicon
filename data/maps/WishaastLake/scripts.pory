@@ -1,0 +1,83 @@
+mapscripts WishaastLake_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_ShutDownMedicineMan_HideDealer_Script)
+        call(WishaastLake_ObjectVisibility_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_WISHAAST_LAKE, FALSE: Generic_Mappreview
+]
+
+}
+
+script WishaastLake_ObjectVisibility_Script {
+    call(Manhunt_HideCharlotte_Script)
+    setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ARCHIE)
+
+    specialvar(VAR_RESULT,ShouldShowAlcmene)
+    if (!var(VAR_RESULT))
+    {
+        call(Manhunt_HideAlcmene_Script)
+    }
+    return
+}
+
+script WishaastLake_InteractEllen_Event_Script {
+    lock
+        //PSF TODO figure out better pre / post battle speech
+        if (flag(FLAG_TIMELINE_TRUE) && var(VAR_MASK_OFF_STATE) > GOT_MASK_OFF_CLUE_3){
+            call(MaskOff_Encounter_Alcmene_Dialogue)
+        } elif (flag(FLAG_TIMELINE_FALSE) && var(VAR_MANHUNT_STATE) > GOT_MANHUNT_CLUE_3){
+            call(Manhunt_Encounter_Alcmene_Dialogue)
+        } elif (var(VAR_STORYLINE_STATE) < STORY_ASSIGNED_ARMANDO_QUESTS){
+            msgbox("random flavor text about training here",MSGBOX_AUTOCLOSE)
+        }
+    release
+        end
+}
+
+script WishaastLake_Herb_Dealer_Script{
+    lock
+    faceplayer
+    msgbox(gText_WishaastLake_HeyManWhatCanI)
+	waitmessage
+	pokemart(HerbDealerShop)
+    msgbox(gText_WishaastLake_ThanksComeAgain)
+    // After making a successful purchase in a Poké Mart, the Id of the map that the Player
+    // is at gets written to VAR_TEMP_1. If VAR_TEMP_1 is MAP_WISHAAST_LAKE in this context,
+    // that's because the Player made a successful purchase there.
+    if (var(VAR_TEMP_1) == MAP_WISHAAST_LAKE){
+        goto(Quest_ShutDownMedicineMan_MakePurchase_Dialogue)
+    }
+}
+
+mart HerbDealerShop{
+    ITEM_ENERGY_ROOT
+    ITEM_HEAL_POWDER
+}
+
+script WishaastLake_Interact_HerbBystander_Dialogue{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SHUTDOWNMEDICINEMAN)
+
+    if(var(VAR_RESULT)){
+        msgbox(gText_WishaastLake_OhManDidYouHear,MSGBOX_NPC)
+    }else {
+        msgbox(gText_WishaastLake_ThisGuyIs,MSGBOX_NPC)
+    }
+    end
+}
+
+text gText_WishaastLake_HeyManWhatCanI{
+    format("hey man what can i get you today")
+}
+
+text gText_WishaastLake_ThanksComeAgain{
+    format("thanks come again!")
+}
+
+text gText_WishaastLake_ThisGuyIs{
+    format("this guy has the best herbs, and so much cheaper than the place in CresaltaVista! I don't think this guy is like totally above board...")
+}
+
+text gText_WishaastLake_OhManDidYouHear{
+    format("oh man did you hear? the herb guy got shut down. looks like somebody ratted him out for not having a license. now we can only buy from that place in CresaltaVista!")
+}

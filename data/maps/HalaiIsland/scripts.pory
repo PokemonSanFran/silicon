@@ -1,0 +1,111 @@
+mapscripts HalaiIsland_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(HalaiIsland_LayoutSwap_Script)
+        call(Quest_StealTheAxe_HideLeader_Script)
+        call(HalaiIsland_ObjectVisibility_Script)
+        call(CutePokemon_Script_ControlMelissaHalaiOutsideVisibility)
+        call(Earthquake_HideTransport_Script)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        goto(HalaiIsland_MapScripts_OnLoad)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_HALAI_ISLAND, FALSE: Generic_Mappreview
+        VAR_HALAI_ISLAND_STATE, START_SURVIVAL_CHANCE: SurvivalChance333_ExplainOperation
+        VAR_HALAI_ISLAND_STATE, WHY_ARE_YOU_HELPING_THEM: WhyAreYouHelpingThem_MissionDebrief_Dialogue
+        VAR_HALAI_ISLAND_STATE, POST_EARTHQUAKE: Earthquake_ShowDestroyedCity_Script
+        VAR_HALAI_ISLAND_STATE, POST_EARTHQUAKE_RESCUE: Earthquake_PostRescue_Dialogue
+        VAR_STORYLINE_STATE, STORY_POST_DYNAMAX_BOSS: LetsFinishThis_MovePlayer_Script
+    ]
+}
+
+script HalaiIsland_ObjectVisibility_Script {
+
+    switch (var(VAR_HALAI_ISLAND_STATE)){
+        case 0: goto(SurvivalChance333_HideObject_HalaiIsland_Script)
+        case SAVE_KAI_HALAI_ISLAND: call(SurvivalChance333_HideObject_HalaiIsland_Script)
+        case START_SURVIVAL_CHANCE: call(AssholesHome_HideObject_Script)
+        case WHY_ARE_YOU_HELPING_THEM: call(WhyAreYouHelpingThem_ObjectDebriefSetUp_Script)
+        case POST_EARTHQUAKE: call(Earthquake_HideObject_Script)
+        case POST_EARTHQUAKE_RESCUE: call(Earthquake_HideObject_Script)
+        case POST_THIS_ISNT_RANDOM: call(LetsFinishThis_ObjectSetUp_Script)
+        case POST_WAIT_EVEN_THEN: call(LetsFinishThis_ObjectHide_Script)
+        default:
+            call(AssholesHome_HideObject_Script)
+            call(SurvivalChance333_HideObject_HalaiIsland_Script)
+    }
+    return
+}
+
+script HalaiIsland_LayoutSwap_Script {
+    if (var(VAR_HALAI_ISLAND_STATE) > START_CHAMPIONSHIP_CLEAN_RAID){
+        setmaplayoutindex(LAYOUT_HALAI_ISLAND_POST_EARTHQUAKE)
+    }
+}
+
+script HalaiIsland_MapScripts_OnLoad {
+        if (var(VAR_HALAI_ISLAND_STATE) > START_SURVIVAL_CHANCE && var(VAR_HALAI_ISLAND_STATE) < START_CHAMPIONSHIP_CLEAN_RAID){
+            call(Navalbase_PostRaidTiles_Script)
+        }
+}
+
+script Navalbase_PostRaidTiles_Script {
+    call(SurvivalChance333_FreezeIce)
+    call(SurvivalChance333_SetLava)
+    call(SurvivalChance333_BlowOpenDoors)
+}
+
+script HalaiIsland_ChooseFerryDestination_Script
+{
+    call(Ferry_Interact_Dialogue)
+}
+
+script HalaiIsland_Person1_Fisherman {
+    if (var(VAR_HALAI_ISLAND_STATE) == START_EARTHQUAKE_RESCUE){
+        addvar(VAR_HALAI_ISLAND_STATE,2)
+        msgbox(format("thanks for saving me!"),MSGBOX_NPC)
+        end
+    }else {
+        msgbox(format("i am a dude!"),MSGBOX_NPC)
+    }
+    end
+}
+
+script HalaiIsland_Stan_Interact_Script{
+    lock
+    call(Quest_WallaceArmy_LoadStanSpeech_Script)
+    msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+    call(Quest_WallaceArmy_PreBattleStan_Script)
+
+    trainerbattle_single(TRAINER_HALAI_ISLAND_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,HalaiIsland_Stan_PostBattle_Script)
+    goto(HalaiIsland_Stan_PostBattle_Script)
+}
+
+script HalaiIsland_Stan_PostBattle_Script{
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_1)
+    call(Quest_WallaceArmy_CheckCompletionRate_Script)
+    questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
+        if (!var(VAR_RESULT)){
+        msgbox(gText_WallaceArmy_PostBattlePlaceholder1)
+        }else {
+            msgbox(gText_WallaceArmy_PostQuestPlaceholder1)
+        }
+
+        release
+        end
+}
+
+script HalaiIsland_Landlord_Dialogue{
+    msgbox(gText_HalaiIsland_ManAfterThese,MSGBOX_NPC)
+
+    specialvar(VAR_RESULT,Quest_Persuasivepassenger_CountRemainingSubquests)
+    if (var(VAR_RESULT) == 2){
+       goto(Quest_Persuasivepassenger_Landlord_Battle_Script)
+    }
+    end
+}
+
+text gText_HalaiIsland_ManAfterThese{
+    format("Man, after this rent hikes, I'm gonna make a killing on this building!")
+}

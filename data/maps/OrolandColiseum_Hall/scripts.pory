@@ -1,0 +1,16 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts OrolandColiseum_Hall_MapScripts{
+    MAP_SCRIPT_ON_FRAME_TABLE
+        [
+        VAR_PROLOGUE_STATE,DEFEATED_MAGNUS: Prologue_PostBattleTime_Dialogue
+        ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+        [
+        VAR_TEMP_1, 0: OrolandColiseum_Arena_PlayerTurnNorth_Script
+        ]
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(Prologue_Announcement_ObjectSetup_Script)
+    }
+}

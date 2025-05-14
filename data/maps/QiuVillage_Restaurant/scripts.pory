@@ -1,0 +1,10 @@
+mapscripts QiuVillage_Restaurant_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(CutePokemon_Script_ControlMelissaQiuInsideVisibility)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+        [
+        VAR_CUTE_POKEMON_GUESS, VAR_CUTE_POKEMON_EISCUE_HINT_2:CutePokemon_Dialogue_GreetingQiu
+        ]
+}

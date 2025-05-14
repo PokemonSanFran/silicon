@@ -1,0 +1,45 @@
+const FLAG_HIDE_RAMESH = FLAG_TEMP_2
+
+mapscripts SharpriseSpire_Production_MapScripts{
+	    MAP_SCRIPT_ON_TRANSITION{
+        call(SharpriseSpire_GuardRaidFloors_Script)
+        call(SharpriseSpire_Production_Ramesh_Visibility_Script)
+    }
+}
+
+script SharpriseSpire_Production_Ramesh_Visibility_Script{
+    setvar(VAR_TEMP_0,0)
+    setvar(VAR_TEMP_1,0)
+
+    special(GetNumberOfBadges) 
+    if (var(VAR_RESULT) > 4){
+        addvar(VAR_TEMP_1,1)
+    }
+
+    //returnqueststate(QUEST_RECRUITLOCALARTISTS)
+    //if (var(VAR_RESULT) < QUEST_MENU_SET_ACTIVE){
+
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_RECRUITLOCALARTISTS)
+    if(var(VAR_RESULT)){
+        addvar(VAR_TEMP_1,1)
+    }
+
+    if (var(VAR_STORYLINE_STATE) > STORY_KAI_EXPLAIN_RESTORATION && (var(VAR_STORYLINE_STATE) != STORY_RECIEVED_BAMBOO_STAR)){
+        addvar(VAR_TEMP_0,1)
+    }
+
+    if(var(VAR_TEMP_0) > 0 || (var(VAR_TEMP_1) == 2)){
+        setflag(FLAG_HIDE_RAMESH)
+    }
+    return
+}
+
+script SharpriseSpire_Interact_Ramesh_Script{
+    returnqueststate(QUEST_RECRUITLOCALARTISTS)
+
+    switch(var(VAR_RESULT)){
+        case QUEST_MENU_SET_ACTIVE: goto(Quest_Recruitlocalartists_Active_Dialogue)
+        case QUEST_MENU_SET_REWARD: goto(Quest_Recruitlocalartists_CompleteQuest_Dialogue)
+        default: goto(AlwaysWatchingWazowski_IgnoringPlayer_Dialogue)
+    }
+}

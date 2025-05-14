@@ -1,0 +1,53 @@
+{
+  "id": "MAP_ROUTE_D_UNDERWATER",
+  "name": "Route_D_Underwater",
+  "layout": "LAYOUT_UNDERWATER_ROUTE_D",
+  "music": "MUS_UNDERWATER",
+  "region_map_section": "MAPSEC_ROUTE_D",
+  "requires_flash": false,
+  "weather": "WEATHER_UNDERWATER_BUBBLES",
+  "map_type": "MAP_TYPE_UNDERWATER",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE_D",
+      "offset": 0,
+      "direction": "emerge"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
+      "x": 45,
+      "y": 66,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Allthatglittersmightbegold_CoreEncounter_Script",
+      "flag": "FLAG_QUEST_ALLTHATGLITTERS_DEFEATED_POKEMON"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BIG_SNORLAX_DOLL",
+      "x": 42,
+      "y": 19,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Allthatglittersmightbegold_ReturnSurface_Script",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

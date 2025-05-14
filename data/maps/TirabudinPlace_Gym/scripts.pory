@@ -1,0 +1,81 @@
+const FLAG_HIDE_BD_GYM = FLAG_TEMP_3
+
+mapscripts TirabudinPlace_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_Inversehallucinogenic_ControlTrainerVisibility_Script)
+        call(TirabudinPlace_Gym_Leader_Visibility_Script)
+        call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,Quest_Restoretirabudinplace_Leader_Visibility_Script)
+        goto(TirabudinPlace_Gym_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: Quest_Inversehallucinogenic_ScreenDistortion_Script
+    ]
+}
+
+script TirabudinPlace_Gym_Leader_Visibility_Script{
+    switch(var(VAR_BD_STATE)){
+        case BATTLE_1_COMPLETE: call(Quest_ShutDownMedicineMan_HideLeaderInGym_Script)
+        //case QUEST_1_COMPLETE: call(Quest_Inversehallucinogenic_HideLeaderInGym_Script)
+        default: return
+    }
+    return
+}
+
+script TirabudinPlace_Gym_MapScripts_OnTransition {
+    switch (var (VAR_GYM_7_STATE)) {
+        case 3: goto(EnterBD_StartBattle_ObjectSetup_Script)
+    }
+}
+
+script TirabudinPlace_Gym_EventScript_Merril{
+	trainerbattle_single(TRAINER_TIRABUDIN_PLACE_GYM_1,DewfordTown_Gym_Text_TakaoIntro, DewfordTown_Gym_Text_TakaoDefeat, DewfordTown_Gym_EventScript_TakaoBrightenRoom)
+	msgbox(DewfordTown_Gym_Text_TakaoPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script TirabudinPlace_Gym_EventScript_Kinsey{
+}
+
+script TirabudinPlace_Gym_EventScript_Kaley{
+}
+
+script TirabudinPlace_Gym_EventScript_Torey{
+}
+
+script TirabudinPlace_Gym_BDRematch_Script{
+    //PSF TODO replace with a new method for judging if its rematch time
+    goto_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoretirabudinplace_Dialogue)
+    specialvar(VAR_RESULT,ShouldTryRematchBattle)
+
+    if (var(VAR_RESULT)){
+        goto(TirabudinPlace_Gym_PreRematch_Dialogue)
+    }
+    else {
+        goto(TirabudinPlace_Gym_PostRematch_Dialogue)
+    }
+}
+
+script TirabudinPlace_Gym_PreRematch_Dialogue{
+    msgbox(gText_TirabudinPlace_Gym_PlayerAreYou,MSGBOX_NPC,SPEAKER_BD)
+    trainerbattle_no_intro(TRAINER_DRUG_BD,gText_TirabudinPlace_Gym_IShouldTryBattlingSober)
+    goto(TirabudinPlace_Gym_PostRematch_Dialogue)
+}
+
+script TirabudinPlace_Gym_PostRematch_Dialogue{
+    msgbox(gText_TirabudinPlace_Gym_OohImBurned,MSGBOX_NPC,SPEAKER_BD)
+    closemessage
+    release
+    end
+}
+
+text gText_TirabudinPlace_Gym_PlayerAreYou{
+    format("{PLAYER}! So glad I don't have to hold back anymore... and I can break out the real good batches!")
+}
+
+text gText_TirabudinPlace_Gym_IShouldTryBattlingSober{
+    format("I should try battling sober some day...")
+}
+
+text gText_TirabudinPlace_Gym_OohImBurned{
+    format("Oof, I'm burned out! Let's battle again tomorrow, okay?")
+}

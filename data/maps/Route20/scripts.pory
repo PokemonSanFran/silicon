@@ -1,0 +1,5 @@
+mapscripts Route20_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+    }
+}
+

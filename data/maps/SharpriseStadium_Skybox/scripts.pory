@@ -1,0 +1,28 @@
+const FLAG_HIDE_SPECTATORS = FLAG_TEMP_2
+const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
+
+mapscripts SharpriseStadium_Skybox_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        switch (var(VAR_STORYLINE_STATE)){
+            case STORY_CHAMPIONSHIP_EXPLAINED: call(WaitHeDidWhat_HideObject_Script)
+            case STORY_CHARLOTTE_WON_GROUP: call(WaitHeDidWhat_HideObject_Script)
+            case STORY_READY_GROUP_STAGE: call(GroupStages_Skybox_ObjectSetup_Script)
+            case STORY_WATCH_SEMIFINAL: return
+            case STORY_READY_FINALS: call(WaitHeDidWhat_HideObject_Script)
+            case STORY_SAVE_FINALS: call(WaitHeDidWhat_HideObject_Script)
+            case STORY_THETIDE_FINISHED: call(WaitHeDidWhat_HideObject_Script)
+            case STORY_SAVE_DIANTHA: call(WaitHeDidWhat_HideObject_Script)
+            default: call(SharpriseStadium_Skybox_EmptySkybox_Script)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STORYLINE_STATE, STORY_CHAMPIONSHIP_EXPLAINED: WhyDidntYouRatMeOut_WatchCharlotteMatches
+            VAR_STORYLINE_STATE, STORY_WATCH_SEMIFINAL: WaitHeDidWhat_WatchOtherSemifinal_Dialogue 
+            VAR_STORYLINE_STATE, STORY_THETIDE_FINISHED: ExhibitionBattle_PrepPlayer_Script
+    ]
+}
+
+script SharpriseStadium_Skybox_EmptySkybox_Script {
+    setflag(FLAG_HIDE_CHARLOTTE)
+    setflag(FLAG_HIDE_SPECTATORS)
+}

@@ -1,0 +1,33 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const CHARLOTTE = 1
+const ADAORA = 2
+const ALCMENE = 3
+const KAI = 4
+const PKMNA = 5
+const PKMNB = 6
+
+mapscripts NavalBase_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Navalbase_Object_Setup_Script)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (var(VAR_NAVAL_BASE_STATE) > CHASE_ALCMENE){
+            call(WhyAreYouHelpingThem_BlowHoleWall)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_NAVAL_BASE, FALSE: Generic_Mappreview
+        VAR_NAVAL_BASE_STATE, NAVAL_BASE_RAID_NOT_STARTED: WhyAreYouHelpingThem_StartRaid
+    ]
+}
+
+script Navalbase_Object_Setup_Script {
+    switch(var(VAR_NAVAL_BASE_STATE)) {
+        case 0: goto(WhyAreYouHelpingThem_HideObject_Script)
+        case 1: goto(WhyAreYouHelpingThem_MoveObject_Script)
+        case 2: goto(WhyAreYouHelpingThem_MoveObjectBoss_Script)
+        case 3: goto(WhyAreYouHelpingThem_ObjectSetUpPostSave_Script)
+        default: goto(WhyAreYouHelpingThem_ObjectCleanUp_Script)
+    }
+    return
+}

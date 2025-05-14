@@ -1,0 +1,40 @@
+//PSF TODO implement buying stuff scripts
+const SILPH = 2
+
+mapscripts ToraTown_Balls_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Quest_ArtisanBalls3_HideSilph_Script)
+        call(Quest_ArtisanBalls2_HideEmployees_Script)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_3, 0: Quest_ArtisanBalls3_Reward_Cutscene
+    ]
+}
+
+script ToraTown_Balls_Interact_Sergey_Script{
+    lock
+
+    if (var(VAR_TEMP_5) != 0){
+        goto(Quest_ArtisanBalls_BetweenStates_Dialogue)
+    }
+
+questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_ARTISANBALLS1)
+    if (!var(VAR_RESULT)){
+        goto(Quest_ArtisanBalls1_CheckStatus_Script)
+    }
+
+questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_ARTISANBALLS2)
+    if (!var(VAR_RESULT)){
+        goto(Quest_ArtisanBalls2_ShopQuestChoice_Script)
+    }
+
+questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_ARTISANBALLS3)
+    if (!var(VAR_RESULT)){
+        goto(Quest_ArtisanBalls3_ShopQuestChoice_Script)
+    }else{
+        goto(Quest_ArtisanBalls3_Post_Dialogue)
+    }
+    release
+    end
+}

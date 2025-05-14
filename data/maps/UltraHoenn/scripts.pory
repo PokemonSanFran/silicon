@@ -1,0 +1,8 @@
+mapscripts UltraHoenn_MapScripts {
+    MAP_SCRIPT_ON_RESUME{
+        call(Quest_Ultrawormholeresearch_TryRemoveUltraBeast)
+    }
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Ultrawormholeresearch_ControlUltraBeastVisibility_Script)
+    }
+}

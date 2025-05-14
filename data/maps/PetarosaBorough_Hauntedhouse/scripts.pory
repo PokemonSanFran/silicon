@@ -1,0 +1,9 @@
+mapscripts PetarosaBorough_Hauntedhouse_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(PetarosaBorough_Hauntedhouse_MapScripts_OnTransition)
+    }
+}
+
+script PetarosaBorough_Hauntedhouse_MapScripts_OnTransition {
+}
+

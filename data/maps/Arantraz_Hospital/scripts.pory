@@ -1,0 +1,19 @@
+mapscripts Arantraz_Hospital_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(Arantraz_Hospital_MapScripts_OnTransition)
+    }
+}
+
+script Arantraz_Hospital_MapScripts_OnTransition {
+
+    switch (var(VAR_LETSBURNTHISMOTHERSTATE)){
+        case 2: call(LetsBurnThisMotherDown_ObjectShow_Script)
+        default: call(LetsBurnThisMotherDown_ObjectHide_Script)
+    }
+}
+
+script Arantraz_Hospital_Charlotte_Event_Script {
+    lock
+    goto(LetsBurnThisMotherDown_StartBattle_Script)
+
+}

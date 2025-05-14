@@ -1,0 +1,10 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+// VAR_FERRY_STATE is used to track what locations are available via ferry
+// 0: Default, HalaiIsland available
+// 1:
+// 2:
+// 3:
+mapscripts Orolandferry_MapScripts {
+}
+

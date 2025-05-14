@@ -1,0 +1,36 @@
+const AMBROGIO = 10
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts WajabiLake_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+        call(Quest_Theboywhocriedwithwolves_Ambrogio_Visibility_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_WAJABI_LAKE, FALSE: Generic_Mappreview
+]
+
+}
+
+script WajabiLake_Membersonly_Dialogue{
+    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BUTONLYINMYBACKYARD)
+    if (var(VAR_RESULT)){
+        release
+        end
+    }
+    lock
+    msgbox(gText_WajabiLake_Accessdenied,,SPEAKER_SPEAKER)
+    msgbox(gText_WajabiLake_Firstplacethateven,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+    applymovement(PLAYER,Common_Movement_WalkUp)
+    waitmovement(PLAYER)
+    release
+    end
+}
+
+text gText_WajabiLake_Accessdenied{
+    format("Access is denied. This area is members only.")
+}
+
+text gText_WajabiLake_Firstplacethateven{
+    format("First place that even SharpriseCapital couldn't get me into...")
+}

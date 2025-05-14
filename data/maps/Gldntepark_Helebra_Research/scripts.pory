@@ -1,0 +1,15 @@
+mapscripts Gldntepark_Helebra_Research_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        //call(Quest_VSDeoxys_HideVsdeoguyResearch_Script)
+    }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+    [
+        VAR_QUEST_VSDEOXYS, VSDEOGUY_ENTERED_RESEARCH: Vsdeoxys_Script_SetUpResearchObjects
+    ]
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_QUEST_VSDEOXYS, VSDEOGUY_ENTERED_RESEARCH: Vsdeoxys_Dialogue_DiscussMiniorResearch
+    ]
+}

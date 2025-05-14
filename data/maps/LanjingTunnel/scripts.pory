@@ -1,0 +1,13 @@
+mapscripts LanjingTunnel_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        goto(Robinwilltunnel_MapScripts_OnTransition)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        FLAG_VISITED_ROBINWILLTUNNEL, FALSE: Generic_Mappreview
+]
+
+}
+
+script Robinwilltunnel_MapScripts_OnTransition {
+}
+

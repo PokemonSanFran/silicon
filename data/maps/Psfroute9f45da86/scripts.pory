@@ -1,0 +1,5 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const OLIVER = 1
+
+mapscripts Psfroute9f45da86_MapScripts {
+}

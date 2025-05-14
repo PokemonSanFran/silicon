@@ -1,0 +1,28 @@
+mapscripts PopidoraPier_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+{
+		call(WaitYouWentWhere_ObjectSetUp_Script)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0,0: AaandWereBack_Monologue
+        FLAG_VISITED_POPIDORA_PIER, FALSE: Generic_Mappreview
+    ]
+}
+
+script PopidoraPier_InteractFerryAttendant_Script
+{
+    if (var(VAR_FERRY_STATE) < FERRY_ARANTRAZ_AVAILABLE)
+    {
+        msgbox(gText_PreventPlayerFerry_ImSorryYou,MSGBOX_NPC)
+        release
+        end
+    }
+    goto(Ferry_Interact_Dialogue)
+}
+
+text gText_PreventPlayerFerry_ImSorryYou
+{
+    format("I'm sorry, you don't appear to have the correct ticket to board the Ferry to Arantraz.")
+}
