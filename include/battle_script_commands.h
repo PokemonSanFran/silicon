@@ -28,6 +28,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 u8 GetBattlerTurnOrderNum(u8 battlerId);
 bool32 NoAliveMonsForPlayer(void);
 bool32 NoAliveMonsForEitherParty(void);
+u32 GetMonHoldEffect(struct Pokemon *mon); // Battle Settings: Experience
 void SetMoveEffect(bool32 primary, bool32 certain);
 bool32 CanBattlerSwitch(u32 battlerId);
 void BattleDestroyYesNoCursorAt(u8 cursorPosition);
@@ -55,6 +56,7 @@ bool32 IsMoveNotAllowedInSkyBattles(u32 move);
 bool32 DoSwitchInAbilities(u32 battlerId);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
+u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId); // last_used_ball
 void SaveBattlerTarget(u32 battler);
 void SaveBattlerAttacker(u32 battler);
 

@@ -3,6 +3,12 @@
 
 #include "constants/moves.h"
 #include "constants/trainers.h"
+// Start google_glass
+#include "constants/event_objects.h"
+#include "constants/region_map_sections.h"
+#include "glass.h"
+// End google_glass
+#include "constants/reveal.h" // reveal
 #include "constants/battle.h"
 #include "difficulty.h"
 
@@ -95,6 +101,13 @@ struct Trainer
              u8 startingStatus:6;    // this trainer starts a battle with a given status. see include/constants/battle.h for values
     /*0x1F*/ u8 mugshotColor;
     /*0x20*/ u8 partySize;
+	bool8 isNative:1; // Native Give Berry
+	u8 trainerType:3; // Bag Items && google_glass
+  // Start google_glass
+	u16 objectEventGraphicsId;
+	u16 mapSec;
+	enum RevealIds characterRevealId;
+  // End google_glass
     /*0x21*/ u8 poolSize;
     /*0x22*/ u8 poolRuleIndex;
     /*0x23*/ u8 poolPickIndex;
@@ -103,7 +116,10 @@ struct Trainer
 
 struct TrainerClass
 {
-    u8 name[13];
+    // Start silicon
+    //u8 name[13];
+    u8 name[42];
+    // End silicon
     u8 money;
     u16 ball;
 };
@@ -115,6 +131,7 @@ struct TypeInfo
     u8 palette;
     u16 zMove;
     u16 maxMove;
+    u16 siliconRGBValue; // pokedex
     u16 teraTypeRGBValue;    // Most values pulled from the Tera type icon palette.
     u16 damageCategory:2;    // Used for B_PHYSICAL_SPECIAL_SPLIT <= GEN_3
     u16 useSecondTypeIconPalette:1;
@@ -160,6 +177,30 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
+// Start silicon
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerM1[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerM2[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerM3[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerN1[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerN2[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerN3[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerF1[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerF2[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerF3[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Kai[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Adaora[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Bd[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Belen[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Dimu[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Doyle[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Emrys[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Imelda[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Kauna[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Keiying[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Magnus[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Neriene[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Shinzo[];
+// End silicon
 
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];

@@ -19,6 +19,7 @@ void StoreSelectedPokemonInDaycare(void);
 u16 TakePokemonFromDaycare(void);
 void GetDaycareCost(void);
 u8 GetNumLevelsGainedFromDaycare(void);
+u16 GetEggSpecies(u16 species); // pokedex
 void TriggerPendingDaycareEgg(void);
 void RejectEggFromDayCare(void);
 void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation);
@@ -36,5 +37,11 @@ u8 GetEggMovesBySpecies(u16 species, u16 *eggMoves);
 bool8 SpeciesCanLearnEggMove(u16 species, u16 move);
 void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon);
 u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
+// Start siliconDaycare
+void GenerateAndStoreEgg(struct DayCare *daycare, u32 eggIndex);
+u8 GetDaycareCompatibilityScoreFromSave(void);
+void BufferUnhatchedMonEgg(void);
+// End siliconDaycare
+u16 GetEggSpecies(u16 species); // surpriseTrade
 
 #endif // GUARD_DAYCARE_H

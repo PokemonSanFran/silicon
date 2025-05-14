@@ -34,6 +34,7 @@ extern const u8 BattleScript_LocalBattleLost[];
 extern const u8 BattleScript_LocalBattleLostPrintWhiteOut[];
 extern const u8 BattleScript_LocalBattleLostEnd[];
 extern const u8 BattleScript_CheckDomeDrew[];
+extern const u8 BattleScript_FlushMessageBoxWait[]; // midBattleEvolution
 extern const u8 BattleScript_FlushMessageBox[];
 extern const u8 BattleScript_LinkBattleWonOrLost[];
 extern const u8 BattleScript_FrontierTrainerBattleWon[];
@@ -860,5 +861,10 @@ extern const u8 BattleScript_EffectSpicyExtract[];
 extern const u8 BattleScript_DamageToQuarterTargetHP[];
 extern const u8 BattleScript_EffectFickleBeam[];
 extern const u8 BattleScript_FickleBeamDoubled[];
+// Start fogBattle
+extern const u8 BattleScript_FogIsTooDense[];
+extern const u8 BattleScript_ActionSelectionItemsCantBeUsedFog[];
+extern const u8 BattleScript_EmboldenedAttackedFromFog[];
+// End fogBattle
 
 #endif // GUARD_BATTLE_SCRIPTS_H

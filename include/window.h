@@ -75,8 +75,18 @@ void BlitBitmapRectToWindow4BitTo8Bit(u32 windowId, const u8 *pixels, u16 srcX, 
 void CopyWindowToVram8Bit(u32 windowId, u8 mode);
 u32 WindowWidthPx(u32 windowId);
 u32 WindowTemplateWidthPx(const struct WindowTemplate *template);
+u32 CalculateNextWindowBaseblock(void); // siliconMerge
 
 extern struct Window gWindows[];
 extern void *gWindowBgTilemapBuffers[];
 
+//begin FRLG import
+
+//pokefirered\include\window.h to get FRLG intro working
+
+#define COPYWIN_MAP  1
+#define COPYWIN_GFX  2
+#define COPYWIN_BOTH 3
+
+//end FRLG import
 #endif // GUARD_WINDOW_H

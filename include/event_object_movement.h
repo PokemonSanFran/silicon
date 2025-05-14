@@ -123,6 +123,7 @@ extern const u8 *const gBerryTreePaletteSlotTablePointers[];
 void ResetObjectEvents(void);
 u8 GetMoveDirectionAnimNum(u8 direction);
 u8 GetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId);
+u8 GetObjectTrainerTypeByObjectEventId(u8 objectEventId); //autoWater
 bool8 TryGetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId, u8 *objectEventId);
 u8 GetObjectEventIdByXY(s16 x, s16 y);
 void SetObjectEventDirection(struct ObjectEvent *objectEvent, u8 direction);
@@ -147,6 +148,7 @@ void RemoveFollowingPokemon(void);
 struct ObjectEvent *GetFollowerObject(void);
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY);
 u8 CreateObjectGraphicsSprite(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
+u8 CreateObjectGraphicsSprite2(u16, void (*)(struct Sprite *), s16 x, s16 y, u32 tag); // siliconMerge
 u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup);
 u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation);
 u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *);
@@ -489,6 +491,7 @@ void SetVirtualObjectInvisibility(u8 virtualObjId, bool32 invisible);
 bool32 IsVirtualObjectInvisible(u8 virtualObjId);
 void SetVirtualObjectSpriteAnim(u8 virtualObjId, u8 animNum);
 bool32 IsVirtualObjectAnimating(u8 virtualObjId);
+void RemoveTintFromObjectEventPalettes(void); // siiliconMerge
 u8 GetObjectEventIdByLocalId(u8 localId);
 bool32 IsFollowerVisible(void);
 
@@ -501,5 +504,7 @@ u8 GetSidewaysStairsCollision(struct ObjectEvent *objectEvent, u8 dir, u8 curren
 
 bool8 MovementAction_EmoteX_Step0(struct ObjectEvent *, struct Sprite *);
 bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *, struct Sprite *);
+const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8); //rematch_action
+u8 GetObjectEventIdByLocalId(u8); // cueobject
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

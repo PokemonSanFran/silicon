@@ -486,6 +486,7 @@ extern const u8 gText_1F[];
 extern const u8 gText_2F[];
 extern const u8 gText_3F[];
 extern const u8 gText_4F[];
+extern const u8 gText_5PF[]; // siliconMerge
 extern const u8 gText_5F[];
 extern const u8 gText_6F[];
 extern const u8 gText_7F[];
@@ -775,6 +776,7 @@ extern const u8 gText_ItGotAway[];
 extern const u8 gText_HallOfFame[];
 extern const u8 gText_LogOff[];
 extern const u8 gText_LanettesPC[];
+extern const u8 gText_PokemonStorageSystem[]; // siliconMerge
 extern const u8 gText_SomeonesPC[];
 extern const u8 gText_PlayersPC[];
 extern const u8 gText_WhichPCShouldBeAccessed[];
@@ -2394,6 +2396,98 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
+//Start PSF Locations
+extern const u8 gText_QiuVillage[];
+extern const u8 gText_HalerbaCity[];
+extern const u8 gText_PetarosaBorough[];
+extern const u8 gText_CresaltaVista[];
+extern const u8 gText_IrisinaTown[];
+extern const u8 gText_MermerezaCity[];
+extern const u8 gText_CurenoPort[];
+extern const u8 gText_CuconuTown[];
+extern const u8 gText_Oroland[];
+extern const u8 gText_EspuleeOutskirts[];
+extern const u8 gText_Chasilla[];
+extern const u8 gText_CapheCity[];
+extern const u8 gText_HodouCity[];
+extern const u8 gText_ToraTown[];
+extern const u8 gText_PerlaciaCity[];
+extern const u8 gText_GlavezHill[];
+extern const u8 gText_HalaiIsland[];
+extern const u8 gText_TirabudinPlace[];
+extern const u8 gText_TorgeotClimb[];
+extern const u8 gText_Navalbase[];
+extern const u8 gText_PintillonHouse[];
+extern const u8 gText_Moragasteps[];
+extern const u8 gText_Deyoungmuseum[];
+extern const u8 gText_Dutchwindmills[];
+extern const u8 gText_AnbehBend[];
+extern const u8 gText_Palacefinearts[];
+extern const u8 gText_FortYobu[];
+extern const u8 gText_Transpyramid[];
+extern const u8 gText_Ferrybuilding[];
+extern const u8 gText_Dragongate[];
+extern const u8 gText_PopidoraPier[];
+extern const u8 gText_SharpriseStadium[];
+extern const u8 gText_OrolandColiseum[];
+extern const u8 gText_Orolandferry[];
+extern const u8 gText_PiocaBridge[];
+extern const u8 gText_Robinwilltunnel[];
+extern const u8 gText_LeaverraForest[];
+extern const u8 gText_WishaastLake[];
+extern const u8 gText_WajabiLake[];
+extern const u8 gText_ZenzuIsland[];
+extern const u8 gText_Siliconvalley[];
+extern const u8 gText_Arantraz[];
+extern const u8 gText_Psfcave8[];
+extern const u8 gText_Route11[];
+extern const u8 gText_Route16[];
+extern const u8 gText_Route22[];
+extern const u8 gText_Route18[];
+extern const u8 gText_Route4[];
+extern const u8 gText_Route10[];
+extern const u8 gText_Route8[];
+extern const u8 gText_Psfroute7e17fdd1[];
+extern const u8 gText_Route14[];
+extern const u8 gText_Route5[];
+extern const u8 gText_RouteD[];
+extern const u8 gText_Route6[];
+extern const u8 gText_Route3[];
+extern const u8 gText_Psfroute9f45da86[];
+extern const u8 gText_RouteC[];
+extern const u8 gText_Route1[];
+extern const u8 gText_Route2[];
+extern const u8 gText_SecretPath[];
+extern const u8 gText_NongyuBridge[];
+extern const u8 gText_Route20[];
+extern const u8 gText_Route9[];
+extern const u8 gText_Route7[];
+extern const u8 gText_Route13[];
+extern const u8 gText_RouteA[];
+extern const u8 gText_Route100[];
+extern const u8 gText_Route98[];
+extern const u8 gText_Route99[];
+extern const u8 gText_Route12[];
+extern const u8 gText_RouteB[];
+extern const u8 gText_RouteE[];
+extern const u8 gText_HalerbaWilds[];
+extern const u8 gText_SharpriseSpire[];
+extern const u8 gText_PARC[];
+extern const u8 gText_Agatevillage[];
+//End PSF Locations
+
+// Start VS Garbador Choose side
+extern const u8 gText_DontCare[];
+// End VS Garbador Choose side
+
+// Start Secret Lab Discovery
+extern const u8 gText_WantToUseDig[];
+// End Secret Lab Discovery
+
+// Start QuestAnnounce
+extern const u8 gText_QuestActive[];
+extern const u8 gText_QuestComplete[];
+// End QuestAnnounce
 // Naming Screen
 extern const u8 gText_MoveOkBack[];
 extern const u8 gText_YourName[];
@@ -2401,10 +2495,79 @@ extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
+//Start CorporateSponsor
+extern const u8 gText_Buzzr[];
+extern const u8 gText_Arriba[];
+extern const u8 gText_Presto[];
+// End CorporateSponsor
+
+// Start Quest_Restorezenzugym
+extern const u8 gText_PokemonPsychoShift[];
+extern const u8 gText_PokemonEffectSpore[];
+// End Quest_Restorezenzugym
+
+// Start Quest_Bodegaburnout
+extern const u8 gText_Bodegaburnout_PersonA[];
+extern const u8 gText_Bodegaburnout_PersonB[];
+extern const u8 gText_Bodegaburnout_PersonC[];
+extern const u8 gText_Bodegaburnout_PersonD[];
+extern const u8 gText_Bodegaburnout_PersonE[];
+extern const u8 gText_Bodegaburnout_PersonF[];
+extern const u8 gText_Bodegaburnout_PersonG[];
+extern const u8 gText_Bodegaburnout_PersonH[];
+extern const u8 gText_Bodegaburnout_PersonI[];
+extern const u8 gText_Bodegaburnout_PersonJ[];
+extern const u8 gText_Bodegaburnout_PersonK[];
+extern const u8 gText_Bodegaburnout_PersonL[];
+extern const u8 gText_Bodegaburnout_StrongMon[];
+extern const u8 gText_Bodegaburnout_ColdMon[];
+extern const u8 gText_Bodegaburnout_SmartMon[];
+extern const u8 gText_Bodegaburnout_FairyMon[];
+extern const u8 gText_Bodegaburnout_AssistWithStocking[];
+extern const u8 gText_Bodegaburnout_HelpKeepFood[];
+extern const u8 gText_Bodegaburnout_BalanceOurBooks[];
+extern const u8 gText_Bodegaburnout_RaiseTheMood[];
+// End Quest_Bodegaburnout
+
+// Start Debug Start
+extern const u8 gText_SelectPoint[];
+extern const u8 gText_ProlougeIntro[];
+extern const u8 gText_BecomeChampion[];
+extern const u8 gText_TheAnnouncement[];
+extern const u8 gText_BeginAdventure[];
+extern const u8 gText_ChosenStarter[];
+extern const u8 gText_ImProbablyBetterThanYou[];
+// End Debug Start
+
+//Start Save Screen
+extern const u8 gText_SaveYourAdventure[];
+extern const u8 gText_NowSavingAdventure[];
+extern const u8 gText_ThereWasAnError[];
+extern const u8 gText_EraseHeader[];
+extern const u8 gText_EraseOldAdventure[];
+extern const u8 gText_EraseQuestion[];
+extern const u8 gText_YouSaved[];
+extern const u8 gText_ConfirmOverwrite[];
+extern const u8 gText_CancelOverwrite[];
+//End Save Screen
+
+//Start Pokevial Branch
+extern const u8 gText_PokevialHasDoses[];
+extern const u8 gText_PokevialIsEmpty[];
+extern const u8 gText_YourPkmnWereRestored[];
+//End Pokevial Branch
+
 // Exp. Share
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
+//Start Fainted Mon
+extern const u8 gText_CantBeWithdrawn[];
+//End Fainted Mon
+
+//Start Bag Items
+extern const u8 gText_ThisItemCannotBeUsed[];
+// End Bag Items
 extern const u8 gText_BasePointsResetToZero[];
 
 // Map name pop-up
@@ -2421,4 +2584,19 @@ extern const u8 gText_Rename[]; // change nickname from summary screen
 // Switch Caught Mon into Party
 extern const u8 gText_CannotSendMonToBoxHM[];
 
+// Start playerCustom
+extern const u8 gText_Custom[];
+
+extern const u8 gText_They[];
+extern const u8 gText_He[];
+extern const u8 gText_She[];
+
+extern const u8 gText_Them[];
+extern const u8 gText_Him[];
+extern const u8 gText_Her[];
+
+extern const u8 gText_Their[];
+extern const u8 gText_His[];
+extern const u8 gText_Hers[];
+// End playerCustom
 #endif // GUARD_STRINGS_H

@@ -14,6 +14,7 @@ enum
     MAP_INPUT_MOVE_END,
     MAP_INPUT_A_BUTTON,
     MAP_INPUT_B_BUTTON,
+    MAP_INPUT_START_BUTTON, // siliconMerge
     MAP_INPUT_R_BUTTON
 };
 
@@ -88,6 +89,7 @@ struct RegionMapLocation
     u8 width;
     u8 height;
     const u8 *name;
+    u16 visitedFlag; // siliconMerge
 };
 
 // Exported RAM declarations

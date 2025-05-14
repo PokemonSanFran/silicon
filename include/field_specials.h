@@ -32,6 +32,12 @@ bool8 UsedPokemonCenterWarp(void);
 void ResetFanClub(void);
 bool8 ShouldShowBoxWasFullMessage(void);
 void SetPCBoxToSendMon(u8 boxId);
+// Start siliconMerge
+u8 GetNumberOfBadges(void);
+u8 CheckNumArantrazExhibitDefeated(void);
+void GiveFrontierBattlePoints(u32 amount);
+void DeleteChosenPartyMon(void);
+// End siliconMerge
 void PreparePartyForSkyBattle(void);
 void GetObjectPosition(u16*, u16*, u32, u32);
 bool32 CheckObjectAtXY(u32, u32);

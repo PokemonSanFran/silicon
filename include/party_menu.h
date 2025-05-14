@@ -43,6 +43,7 @@ u8 DisplayPartyMenuMessage(const u8 *str, bool8 keepOpen);
 bool8 IsPartyMenuTextPrinterActive(void);
 void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 HPDifference, TaskFunc task);
 u8 GetAilmentFromStatus(u32 status);
+u8 CanTeachMove(struct Pokemon *mon, u16 move); //qol_field_moves
 u8 GetMonAilment(struct Pokemon *mon);
 void DisplayPartyMenuStdMessage(u32 stringId);
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
@@ -105,5 +106,32 @@ void MoveDeleterForgetMove(void);
 void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
+void ItemUseCB_UsePokevial(u8 taskId, TaskFunc task); //Pokevial Branch
+void InitPartyMenuForPokevialFromField(u8 taskId); //Pokevial Branch
+// Start qol_field_moves
+// These are all moved from src/party_menu.c
+u8 CanMonLearnTMTutor(struct Pokemon *, u16, u8);
 
+enum {
+    CAN_LEARN_MOVE,
+    CANNOT_LEARN_MOVE,
+    ALREADY_KNOWS_MOVE,
+    CANNOT_LEARN_MOVE_IS_EGG
+};
+// End qol_field_moves
+
+// Start SameSwitchCancelsSwitch
+// https://github.com/pret/pokeemerald/wiki/Shifting-to-Pok%C3%A9mon-Already-in-Battle-Exits-the-Shift-Menu
+enum {
+    NO_SWITCH,
+    CAN_SWITCH,
+    SAME_SWITCH
+};
+// End SameSwitchCancelsSwitch
+
+// Start hexorb Branch
+void ItemUseCB_UseHexorb(u8 taskId, TaskFunc task);
+void InitPartyMenuForHexorbFromField(u8 taskId);
+// End hexorb Branch
+void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom); // surpriseTrade
 #endif // GUARD_PARTY_MENU_H

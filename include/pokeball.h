@@ -31,6 +31,16 @@ enum PokeBall
     BALL_PARK = 25,
     BALL_BEAST = 26,
     BALL_CHERISH = 27,
+// Start siliconNewBalls
+    BALL_NEWA = 28,
+    BALL_NEWB = 29,
+    BALL_NEWC = 30,
+    BALL_NEWD = 31,
+    BALL_NEWE = 32,
+    BALL_NEWF = 33,
+    BALL_NEWG = 34,
+    BALL_NEWH = 35,
+// End siliconNewBalls
     POKEBALL_COUNT
 };
 

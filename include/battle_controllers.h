@@ -129,6 +129,14 @@ struct ChooseMoveStruct
     struct ZMoveData zmove;
 };
 
+// Start midBattleEvolution
+// For controller's buffers
+#define MIDBATTLEEVO_CONTROLLER_ID  0
+#define MIDBATTLEEVO_PARTY_ID       1
+#define MIDBATTLEEVO_SPECIES_ID     2
+// species passed as u16, so slot 3 is occupied
+#define MIDBATTLEEVO_COUNT          4
+// End midBattleEvolution
 enum
 {
     CONTROLLER_GETMONDATA,
@@ -182,8 +190,9 @@ enum
     CONTROLLER_BATTLEANIMATION,
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
-    CONTROLLER_ENDLINKBATTLE,
+    CONTROLLER_ENDLINKBATTLE, // midBattleEvolution
     CONTROLLER_DEBUGMENU,
+    CONTROLLER_MIDBATTLE_EVOLUTION, // midBattleEvolution
     /*new controllers should go here*/
     CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
@@ -246,6 +255,7 @@ void BtlController_EmitLinkStandbyMsg(u32 battler, u32 bufferId, u8 mode, bool32
 void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(u32 battler, u32 bufferId);
+void BtlController_EmitMidBattleEvo(u32 battler, u32 bufferId, u32 partyId, u32 species); // midBattleEvolution
 
 void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
@@ -293,6 +303,7 @@ void BtlController_HandleHidePartyStatusSummary(u32 battler);
 void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);
 
 // player controller
+void PlayerBufferExecCompleted(u32 battler); // quick_run
 void SetControllerToPlayer(u32 battler);
 void SetBattleEndCallbacks(u32 battler);
 void PlayerHandleBallThrowAnim(u32 battler);
@@ -313,6 +324,10 @@ void HandleInputShowEntireFieldTargets(u32 battler);
 void HandleInputShowTargets(u32 battler);
 void HandleMoveSwitching(u32 battler);
 void HandleChooseMoveAfterDma3(u32 battler);
+// Start playerCustom
+void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
+u32 PlayerGetTrainerBackPicId(void);
+// End playerCustom
 
 // recorded player controller
 void SetControllerToRecordedPlayer(u32 battler);
@@ -327,6 +342,7 @@ void SetControllerToPlayerPartner(u32 battler);
 
 // safari controller
 void SetControllerToSafari(u32 battler);
+void SafariBufferExecCompleted(u32 battler); // quick_run
 
 // wally controller
 void SetControllerToWally(u32 battler);

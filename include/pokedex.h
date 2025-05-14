@@ -19,4 +19,6 @@ void PrintMonMeasurements(u16 species, u32 owned);
 u8* ConvertMonHeightToString(u32 height);
 u8* ConvertMonWeightToString(u32 weight);
 
+#define FLAG_SCRIPT_USE FLAG_TEMP_1 // Silicon Exclusive for when height and weight are being called from scripts
+
 #endif // GUARD_POKEDEX_H

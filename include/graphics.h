@@ -63,6 +63,24 @@ extern const u32 gBallGfx_Beast[];
 extern const u32 gBallPal_Beast[];
 extern const u32 gBallGfx_Cherish[];
 extern const u32 gBallPal_Cherish[];
+// Start siliconNewBalls
+extern const u32 gBallGfx_NewA[];
+extern const u32 gBallPal_NewA[];
+extern const u32 gBallGfx_NewB[];
+extern const u32 gBallPal_NewB[];
+extern const u32 gBallGfx_NewC[];
+extern const u32 gBallPal_NewC[];
+extern const u32 gBallGfx_NewD[];
+extern const u32 gBallPal_NewD[];
+extern const u32 gBallGfx_NewE[];
+extern const u32 gBallPal_NewE[];
+extern const u32 gBallGfx_NewF[];
+extern const u32 gBallPal_NewF[];
+extern const u32 gBallGfx_NewG[];
+extern const u32 gBallPal_NewG[];
+extern const u32 gBallGfx_NewH[];
+extern const u32 gBallPal_NewH[];
+// End siliconNewBalls
 extern const u32 gOpenPokeballGfx[];
 
 // Pokémon gfx
@@ -92,6 +110,7 @@ extern const u32 gPokeblock_Gfx[];
 
 extern const u32 gItemIcon_QuestionMark[];
 extern const u32 gItemIconPalette_QuestionMark[];
+extern const u32 gItemIcon_NoItem[]; // siliconMerge
 
 // Decorations
 extern const u32 gDecorIcon_HeavyDesk[];
@@ -3388,6 +3407,25 @@ extern const u8 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+// Start Pokevial Branch
+extern const u32 gItemIcon_Pokevial0[];
+extern const u32 gItemIcon_Pokevial1[];
+extern const u32 gItemIcon_Pokevial2[];
+extern const u32 gItemIcon_Pokevial3[];
+extern const u32 gItemIcon_Pokevial4[];
+extern const u32 gItemIcon_Pokevial5[];
+extern const u32 gItemIcon_Pokevial6[];
+extern const u32 gItemIcon_Pokevial7[];
+extern const u32 gItemIcon_Pokevial8[];
+extern const u32 gItemIcon_Pokevial9[];
+extern const u32 gItemIcon_Pokevial[];
+
+extern const u32 gItemIconPalette_Pokevial[];
+// End Pokevial Branch
+// Start hexorb branch
+extern const u32 gItemIcon_Hexorb[];
+extern const u32 gItemIconPalette_Hexorb[];
+// End hexorb Branch
 extern const u32 gBattleIcons_Gfx1[];
 extern const u32 gBattleIcons_Gfx2[];
 extern const u32 gBattleIcons_Pal1[];

@@ -17,8 +17,15 @@
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
+// Start siliconMerge
+#include "constants/buzzr.h"
+#include "ui_start_menu.h"
+#include "ui_options_menu.h"
+// End siliconMerge
 #include "constants/items.h"
 #include "config/save.h"
+#include "constants/ui_resido_species.h" // pokedex
+#include "constants/ui_character_customization_menu.h" // playerCustom
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -124,6 +131,7 @@
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
+#define NUM_TM_BYTES ROUND_BITS_TO_BYTES(BAG_TMHM_COUNT) // PSF technicalmachine Branch
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
@@ -191,6 +199,8 @@ struct UCoords32
     u32 y;
 };
 
+#include "quests.h" // quest menu
+#define MAX_PRESTO_BUY_AGAIN_ITEMS 5 //For the Presto Menu
 struct Time
 {
     /*0x00*/ s16 days;
@@ -204,6 +214,23 @@ struct Time
 
 struct SaveBlock3
 {
+// Start siliconMerge
+#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
+#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
+#define QUEST_STATES 5 //Number of different quest states tracked in the saveblock
+    struct QuestListProperties savedQuestListProperties;
+    struct QuestListPosition savedQuestPositions;
+    u8 questData[QUEST_FLAGS_COUNT * QUEST_STATES];
+    u8 subQuests[SUB_FLAGS_COUNT];
+    u8 startMenuAppIndex[NUM_TOTAL_APPS];
+    u16 prestoBuyAgainItem[MAX_PRESTO_BUY_AGAIN_ITEMS];
+    u16 lastUsedBall;
+    u8 customizationValues[NUM_CUSTOMIZATION_PARTS];
+    u8 rgbValues[NUM_CUSTOMIZATION_PARTS][NUM_COLOR_OPTIONS];
+    u8 playerSubjectPronoun[PLAYER_NAME_LENGTH + 1];
+    u8 playerObjectPronoun[PLAYER_NAME_LENGTH + 1];
+    u8 playerPosesivePronoun[PLAYER_NAME_LENGTH + 1];
+// End siliconMerge	
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
 #endif
@@ -226,6 +253,7 @@ struct Pokedex
     /*0x03*/ u8 unknown2;
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
+    u16 pokedexPersonality[POKEDEX_FORM_COUNT]; // pokedex
     /*0x0C*/ u32 unknown3;
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2 == FALSE
     /*0x10*/ u8 filler[0x68]; // Previously Dex Flags, feel free to remove.
@@ -537,12 +565,16 @@ struct SaveBlock2
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-             u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+	// Start siliconMerge
+	/*
+    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]                           Replaced by optionsGame[GAME_OPTIONS_BUTTON_MODE]
+    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]                                  Replaced by optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]
+             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes     Replaced by optionsVisual[VISUAL_OPTIONS_FRAME_TYPE]
+             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]                                             Replaced by optionsMusic[MUSIC_OPTIONS_SPEAKER]
+             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]                                  Replaced by optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE]
+             u16 optionsBattleSceneOff:1; // whether battle animations are disabled                         Replaced by optionsBattle[BATTLE_OPTIONS_ANIMATIONS]
+	*/
+	// End siliconMerge
              u16 regionMapZoom:1; // whether the map is zoomed in
              //u16 padding1:4;
              //u16 padding2;
@@ -565,6 +597,13 @@ struct SaveBlock2
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
+    // Start siliconMerge
+	u8 optionsGame[NUM_OPTIONS_GAME_SETTINGS];
+    u8 optionsBattle[NUM_OPTIONS_BATTLE_SETTINGS];
+    u8 optionsVisual[NUM_OPTIONS_VISUAL_SETTINGS];
+    u8 optionsMusic[NUM_OPTIONS_MUSIC_SETTINGS];
+    u8 optionsRandom[NUM_OPTIONS_RANDOM_SETTINGS];
+	// End siliconMerge
 }; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -814,9 +853,22 @@ struct DaycareMon
     u32 steps;
 };
 
+// Start siliconDaycare
+struct DaycareEgg
+{
+    struct BoxPokemon egg;
+    u8 originalIv[NUM_STATS];
+    u32 steps;
+};
+// End siliconDaycare
+
 struct DayCare
 {
     struct DaycareMon mons[DAYCARE_MON_COUNT];
+// Start siliconDaycare
+    struct DaycareEgg daycareEgg[SILICON_DAYCARE_EGG_MAX];
+    struct Pokemon viewMon;
+// End siliconDaycare
     u32 offspringPersonality;
     u32 stepCounter;
 };
@@ -1008,6 +1060,33 @@ struct ExternalEventFlags
 
 } __attribute__((packed));/*size = 0x15*/
 
+
+//Start Pokevial Branch
+struct Pokevial
+{
+    u8 Size : 4;
+    u8 Dose : 4;
+};
+//End Pokevial Branch
+
+//Start buzzr Branch
+struct Buzzr
+{
+    u8 Filter : 4;
+    bool8 Sort : 1;
+    bool8 IsRead[TWEET_COUNT];
+    u8 Order[TWEET_COUNT];
+};
+// End buzzr Branch
+
+// Start google_glass
+struct Glass
+{
+    u8 TrainerSort : 4;
+    u8 LocationSort : 4;
+    bool8 DiscoveredTrainer[TRAINERS_COUNT];
+};
+// End google_glass
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -1029,11 +1108,12 @@ struct SaveBlock1
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
+    /*0x498*/ struct ItemSlot pcItems[1]; // siliconMerge
     /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    u8 bagPocket_TMHMOwnedFlags[NUM_TM_BYTES]; //allow for an amount of TMs/HMs dictated by the BAG_TMHM_COUNT constant // PSF technicalmachine Branch
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
@@ -1119,7 +1199,15 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
+    /*0x3???*/ struct Pokemon stolenTrade;
     // sizeof: 0x3???
+    u16 mazeLayoutSeed;
+    u16 mazeItemsSeed;
+    struct Pokevial pokevial; //Pokevial Branch
+    struct Buzzr buzzr; //Buzzr Branch
+    /*0x??*/   struct Pokemon playerPartyBattleFrontier[PARTY_SIZE];
+    u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
+    struct Glass glass; // google_glass
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

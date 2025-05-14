@@ -712,6 +712,13 @@
 #define KEY_OR_INTR     0x0000
 #define KEY_AND_INTR    0x8000
 #define DPAD_ANY        ((DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN))
+// Start siliconMerge
+#define DPAD_LEFTRIGHT  (DPAD_RIGHT | DPAD_LEFT)
+#define DPAD_RIGHTLEFT  DPAD_LEFTRIGHT
+#define DPAD_UPDOWN  (DPAD_DOWN | DPAD_UP)
+#define DPAD_DOWNUP  DPAD_UPDOWN
+#define ALL_BUT_START_OR_A ((DPAD_ANY | B_BUTTON | SELECT_BUTTON | R_BUTTON | L_BUTTON))
+// End siliconMerge
 #define JOY_EXCL_DPAD   0x030F
 
 // interrupt flags

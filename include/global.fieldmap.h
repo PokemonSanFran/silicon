@@ -54,6 +54,10 @@ struct MapLayout
     /*0x0C*/ const u16 *map;
     /*0x10*/ const struct Tileset *primaryTileset;
     /*0x14*/ const struct Tileset *secondaryTileset;
+	// Start siliconMerge
+    u8 borderWidth;
+    u8 borderHeight;
+	// End siliconMerge
 };
 
 struct BackupMapLayout
@@ -224,6 +228,7 @@ struct ObjectEvent
              u8 directionOverwrite:4;
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ u8 playerCopyableMovement; // COPY_MOVE_*
+             u32 hasRematchIcon:1; // rematch_action
     /*0x23*/ u8 spriteId;
     /*size = 0x24*/
 };
@@ -301,6 +306,11 @@ enum
     COLLISION_ISOLATED_HORIZONTAL_RAIL,
     COLLISION_VERTICAL_RAIL,
     COLLISION_HORIZONTAL_RAIL,
+    //Start qol_field_moves
+    COLLISION_START_SURFING,
+    COLLISION_START_CUT,
+    COLLISION_START_ROCK_SMASH,
+    //End qol_field_moves
     COLLISION_STAIR_WARP,
     COLLISION_SIDEWAYS_STAIRS_TO_RIGHT,
     COLLISION_SIDEWAYS_STAIRS_TO_LEFT
@@ -343,6 +353,7 @@ struct PlayerAvatar
     // these two are timer history arrays which [0] is the active timer for acro bike. every element is backed up to the next element upon update.
     /*0x14*/ u8 dirTimerHistory[8];
     /*0x1C*/ u8 abStartSelectTimerHistory[8];
+    u8 skipCutsceneFrameCounter; // siliconMerge
 };
 
 struct Camera

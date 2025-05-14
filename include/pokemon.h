@@ -106,6 +106,7 @@ enum {
     MON_DATA_SPEED2,
     MON_DATA_SPATK2,
     MON_DATA_SPDEF2,
+    MON_DATA_IS_FAINTED, // siliconMerge
     MON_DATA_HYPER_TRAINED_HP,
     MON_DATA_HYPER_TRAINED_ATK,
     MON_DATA_HYPER_TRAINED_DEF,
@@ -119,12 +120,19 @@ enum {
     MON_DATA_EVOLUTION_TRACKER,
 };
 
+#define MON_DATA_GETS_SILICON_BREEDING_PERKS MON_DATA_IS_SHADOW // siliconDaycare
 struct PokemonSubstruct0
 {
     u16 species:11; // 2047 species.
     u16 teraType:5; // 30 types.
-    u16 heldItem:10; // 1023 items.
-    u16 unused_02:6;
+	// Start siliconMerge
+    //u16 heldItem:10; // 1023 items
+    u16 heldItem:11;
+	// End siliconMerge
+    // Start siliconMerge
+	//u16 unused_02:6;
+	u16 unused_02:5;
+	// End siliconMerge
     u32 experience:21;
     u32 nickname11:8; // 11th character of nickname.
     u32 unused_04:3;
@@ -132,7 +140,11 @@ struct PokemonSubstruct0
     u8 friendship;
     u16 pokeball:6; // 63 balls.
     u16 nickname12:8; // 12th character of nickname.
-    u16 unused_0A:2;
+    // Start siliconMerge
+	u16 unused_0A:1;
+	//u16 unused_0A:2;
+	// End siliconMerge
+     bool8 isFainted:1; // siliconMerge
 };
 
 struct PokemonSubstruct1
@@ -384,6 +396,7 @@ struct SpeciesInfo /*0xC4*/
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
     u16 cryId;
     u16 natDexNum;
+    u16 residoDexNum; // pokedex
     u16 height; //in decimeters
     u16 weight; //in hectograms
     u16 pokemonScale;
@@ -450,6 +463,7 @@ struct SpeciesInfo /*0xC4*/
     u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
     u32 tmIlliterate:1;     // This species will be unable to learn the universal moves.
     u32 isFrontierBanned:1; // This species is not allowed to participate in Battle Frontier facilities.
+    u32 isAlolaDex:1; // siliconMerge
     u32 padding4:11;
     // Shadow settings
     s8 enemyShadowXOffset; // This determines the X-offset for an enemy Pokémon's shadow during battle; negative values point left, positive values point right.
@@ -796,6 +810,7 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 u32 GetMonAffectionHearts(struct Pokemon *pokemon);
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
+u8 CreateCustomMon(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny); // siliconMerge
 u8 CalculatePartyCount(struct Pokemon *party);
 u16 SanitizeSpeciesId(u16 species);
 bool32 IsSpeciesEnabled(u16 species);
@@ -803,8 +818,16 @@ u16 GetCryIdBySpecies(u16 species);
 u16 GetSpeciesPreEvolution(u16 species);
 void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
+// Start pokedex
+const u8 *GetAbilityName(u16 abilityId);
+const u8 *GetAbilityDesc(u32 abilityId);
+const u8 *GetMoveDesc(u32 moveId);
+const u8 *GetMoveCategoryName(u32 moveId);
+// End pokedex
 void UpdateDaysPassedSinceFormChange(u16 days);
 void TrySetDayLimitToFormChange(struct Pokemon *mon);
+u32 GetSpeciesColor(u16 species);// siliconMerge
+u32 GetSpeciesGenderRatio(u16 species);// siliconMerge
 u32 CheckDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler);
 uq4_12_t GetDynamaxLevelHPMultiplier(u32 dynamaxLevel, bool32 inverseMultiplier);
 u32 GetRegionalFormByRegion(u32 species, u32 region);

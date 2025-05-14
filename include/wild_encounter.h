@@ -50,5 +50,7 @@ u8 ChooseWildMonIndex_Land(void);
 u8 ChooseWildMonIndex_WaterRock(void);
 u8 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
+bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags); // fogBattle
+void UpdateChainFishingStreak(void); // fishingUpdate
 
 #endif // GUARD_WILD_ENCOUNTER_H

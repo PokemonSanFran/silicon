@@ -89,6 +89,7 @@
 #define TIME_NIGHT             3
 
 extern struct Time gLocalTime;
+extern const u8 *const gTimeName[TIME_NIGHT+1]; // pokedex
 
 void RtcDisableInterrupts(void);
 void RtcRestoreInterrupts(void);

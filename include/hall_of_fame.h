@@ -1,6 +1,8 @@
 #ifndef GUARD_HALL_OF_FAME_H
 #define GUARD_HALL_OF_FAME_H
 
+void StartCredits(void); // PSF change
+
 struct HallofFameMon
 {
     u32 tid;

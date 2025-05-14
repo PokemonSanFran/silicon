@@ -643,6 +643,7 @@ struct BattleStruct
     u8 turnCountersTracker;
     u16 wrappedMove[MAX_BATTLERS_COUNT];
     u16 moveTarget[MAX_BATTLERS_COUNT];
+    bool32 givenPointsBoxMons; // Battle Settings: Experience
     u32 expShareExpValue;
     u32 expValue;
     u8 expGettersOrder[PARTY_SIZE]; // First battlers which were sent out, then via exp-share
@@ -789,7 +790,8 @@ struct BattleStruct
     u8 isSkyBattle:1;
     s32 aiDelayTimer; // Counts number of frames AI takes to choose an action.
     s32 aiDelayFrames; // Number of frames it took to choose an action.
-    s32 aiDelayCycles; // Number of cycles it took to choose an action.
+    u16 playerBattleItemCount;
+    u16 battlersItemIds[PARTY_SIZE][NUM_BATTLE_SIDES]; // Battle Settings: Take Wild Items, contains the id of the item held by each party member from every side.
     u8 timesGotHit[NUM_BATTLE_SIDES][PARTY_SIZE];
     u8 transformZeroToHero[NUM_BATTLE_SIDES];
     u8 stickySyrupdBy[MAX_BATTLERS_COUNT];
@@ -1176,6 +1178,10 @@ extern u16 gBallToDisplay;
 extern bool8 gLastUsedBallMenuPresent;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
 extern u8 gCategoryIconSpriteId;
+// Start midBattleEvolution
+extern u8 gTriedEvolving;
+extern bool8 gMidBattleEvo;
+// End midBattleEvolution
 
 static inline bool32 IsBattlerAlive(u32 battler)
 {
@@ -1281,6 +1287,13 @@ static inline bool32 IsBattlerInvalidForSpreadMove(u32 battlerAtk, u32 battlerDe
         || !IsBattlerAlive(battlerDef)
         || (battlerDef == BATTLE_PARTNER(battlerAtk) && (moveTarget == MOVE_TARGET_BOTH));
 }
+
+// Start fogBattle
+static inline bool32 IsFogBattle(void)
+{
+    return gBattleTypeFlags & BATTLE_TYPE_FOG;
+}
+// End fogBattle
 
 static inline bool32 IsBattlerSideProtected(u32 battler)
 {

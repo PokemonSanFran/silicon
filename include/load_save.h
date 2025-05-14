@@ -57,5 +57,9 @@ void LoadPlayerBag(void);
 void SavePlayerBag(void);
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey);
 void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
+ // Start silconMerge
+void SavePlayerPartyBattleTower(void); 
+void LoadPlayerPartyBattleTower(void);
+ // End silconMerge
 
 #endif // GUARD_LOAD_SAVE_H

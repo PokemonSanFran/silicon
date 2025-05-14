@@ -75,7 +75,7 @@ struct BagMenu
     const u8 *contextMenuItemsPtr;
     u8 contextMenuItemsBuffer[4];
     u8 contextMenuNumItems;
-    u8 numItemStacks[POCKETS_COUNT];
+    u16 numItemStacks[POCKETS_COUNT]; // silconMerge
     u8 numShownItems[POCKETS_COUNT];
     s16 graphicsLoadState;
     u8 unused2[14];
@@ -110,5 +110,6 @@ void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void CloseItemMessage(u8 taskId);
 void ItemMenu_RotomCatalog(u8 taskId);
+void GetItemName(u8 *, u16); // pokedex
 
 #endif //GUARD_ITEM_MENU_H

@@ -25,6 +25,7 @@ struct Item
     u8 type;
     u8 battleUsage;
     u8 flingPower;
+    u8 nativeItemGroup; // silconMerge
     const u32 *iconPic;
     const u32 *iconPalette;
 };
@@ -32,11 +33,12 @@ struct Item
 struct BagPocket
 {
     struct ItemSlot *itemSlots;
-    u8 capacity;
+    u16 capacity; // silconMerge
 };
 
 extern const struct Item gItemsInfo[];
 extern struct BagPocket gBagPockets[];
+extern struct ItemSlot gTmHmItemSlots[BAG_TMHM_COUNT];// PSF technicalmachine Branch
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
 void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
@@ -52,7 +54,7 @@ u32 GetFreeSpaceForItemInBag(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 count);
 bool8 RemoveBagItem(u16 itemId, u16 count);
 u8 GetPocketByItemId(u16 itemId);
-void ClearItemSlots(struct ItemSlot *itemSlots, u8 itemCount);
+void ClearItemSlots(struct ItemSlot *itemSlots, u16 itemCount); // silconMerge
 u8 CountUsedPCItemSlots(void);
 bool8 CheckPCHasItem(u16 itemId, u16 count);
 bool8 AddPCItem(u16 itemId, u16 count);
@@ -82,8 +84,10 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 u32 ItemId_GetSecondaryId(u32 itemId);
 u32 ItemId_GetFlingPower(u32 itemId);
+u32 ItemId_GetNativeItemGroup(u32 itemId);  // silconMerge
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
+void DeserializeTmHmItemSlots(void); // PSF technicalmachine Branch
 
 /* Expands to:
  * enum

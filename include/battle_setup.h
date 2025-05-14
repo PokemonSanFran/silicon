@@ -109,5 +109,12 @@ void BattleSetup_StartTrainerBattle_Debug(void);
 s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
 s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
 u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId);
+// Start rematch_action
+bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 trainerId);
+void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16 firstBattleTrainerId);
+bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct RematchTrainer *table, u16 mapGroup, u16 mapNum);
+void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId);
+bool32 IsRematchForbidden(s32 rematchTableId);
+// End rematch_action
 
 #endif // GUARD_BATTLE_SETUP_H

@@ -408,6 +408,30 @@ extern const u8 EventScript_UseRockSmash[];
 extern const u8 EventScript_UseDig[];
 extern const u8 EventScript_UseCutGrass[];
 
+// Start qol_field_moves
+extern const u8 EventScript_CutTreeDown[];
+extern const u8 EventScript_UseCut[];
+extern const u8 EventScript_UseCutTool[];
+extern const u8 EventScript_UseSurfMove[];
+extern const u8 EventScript_UseSurfTool[];
+extern const u8 EventScript_UseSurfFieldEffect[];
+extern const u8 EventScript_UseStrengthTool[];
+extern const u8 EventScript_UseFlashTool[];
+extern const u8 EventScript_SmashRock[];
+extern const u8 EventScript_UseRockSmash[];
+extern const u8 EventScript_UseRockSmashTool[];
+extern const u8 Vsdeoxys_Script_UseRockSmashMinior[];
+extern const u8 Vsdeoxys_Script_UseRockSmashMiniorMovement[];
+extern const u8 EventScript_UseWaterfallMon[];
+extern const u8 EventScript_UseWaterfallTool[];
+extern const u8 EventScript_UseWaterfallFieldEffect[];
+extern const u8 EventScript_UseDiveTool[];
+extern const u8 EventScript_AskTeleportTool[];
+// End qol_field_moves
+// Start siliconMerge
+extern const u8 EventScript_UseInfiniteSpray[];
+extern const u8 EventScript_RegenerateFog[];
+// End siliconMerge
 //player pc
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC[];
@@ -578,6 +602,10 @@ extern const u8 EventScript_EggHatch[];
 extern const u8 AbnormalWeather_EventScript_EndEventAndCleanup_1[];
 extern const u8 IslandCave_EventScript_OpenRegiEntrance[];
 extern const u8 MauvilleCity_EventScript_RegisterWallyCall[];
+// Start siliconMerge
+extern const u8 ANewStrike_BreakingNews_Dialogue[];
+extern const u8 YouRealizeTheyreEvilRight_CallPlayer_Dialogue[];
+// End siliconMerge
 extern const u8 Route119_EventScript_ScottWonAtFortreeGymCall[];
 extern const u8 LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall[];
 extern const u8 RustboroCity_Gym_EventScript_RegisterRoxanne[];
@@ -649,6 +677,12 @@ extern const u8 VSSeeker_Text_NoTrainersWithinRange[];
 extern const u8 VSSeeker_Text_TrainersNotReady[];
 extern const u8 EventScript_VsSeekerChargingDone[];
 
+// Start siliconMerge
+extern const u8 WarpToBlackMap[];
+extern const u8 TheStorySoFar_CheckNumberDefeated_Script[];
+extern const u8 Route4_UncoverSecretLab_Script[];
+extern const u8 Earthquake_Natural_EventScript[];
+// End siliconMerge
 extern const u8 Common_Movement_FollowerSafeStart[];
 extern const u8 Common_Movement_FollowerSafeEnd[];
 
@@ -663,5 +697,9 @@ extern const u8 EventScript_LostSignal[];
 extern const u8 EventScript_TooDark[];
 extern const u8 EventScript_MovedTooFast[];
 
+// Start siliconMerge
+extern const u8 Fishing_Cutscene_JumpOutOfWater[];
+extern const u8 Fishing_Cutscene_YellAtPlayer[];
+// End siliconMerge
 
 #endif // GUARD_EVENT_SCRIPTS_H

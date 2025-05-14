@@ -51,6 +51,7 @@ extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
+extern u8 gGlobalFieldTintMode; // siliconMerge
 extern bool8 gExitStairsMovementDisabled;
 extern bool8 gSkipShowMonAnim;
 
@@ -69,6 +70,7 @@ void LoadObjEventTemplatesFromHeader(void);
 void LoadSaveblockObjEventScripts(void);
 void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y);
 void SetObjEventTemplateMovementType(u8 localId, u8 movementType);
+void RemoveTintFromObjectEvents(void); // siliconMerge
 const struct MapLayout *GetMapLayout(u16 mapLayoutId);
 void ApplyCurrentWarp(void);
 struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
@@ -93,6 +95,7 @@ void SetContinueGameWarpToDynamicWarp(int unused);
 const struct MapConnection *GetMapConnection(u8 dir);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
+void CheckSetVisitedRouteFlags(); // siliconMerge
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
 void ResetInitialPlayerAvatarState(void);
 void StoreInitialPlayerAvatarState(void);
@@ -106,6 +109,7 @@ u16 GetLocationMusic(struct WarpData *warp);
 u16 GetCurrLocationDefaultMusic(void);
 u16 GetWarpDestinationMusic(void);
 void Overworld_ResetMapMusic(void);
+u16 GetCorrectMusicForScenario(void); // siliconMerge
 void Overworld_PlaySpecialMapMusic(void);
 void Overworld_SetSavedMusic(u16 songNum);
 void Overworld_ClearSavedMusic(void);
@@ -145,6 +149,11 @@ void CB2_ReturnToFieldContinueScript(void);
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void CB2_ReturnToFieldFadeFromBlack(void);
 void CB2_ContinueSavedGame(void);
+ // Start siliconMerge
+void FieldClearVBlankHBlankCallbacks(void);
+void SetFieldVBlankCallback(void);
+void DoMapLoadLoop(u8 *);
+ // End siliconMerge
 void ResetAllMultiplayerState(void);
 u32 GetCableClubPartnersReady(void);
 u16 SetInCableClubSeat(void);
@@ -156,6 +165,11 @@ bool32 Overworld_RecvKeysFromLinkIsRunning(void);
 bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
+void CB2_ReturnToUIMenu(void); // siliconMerge
+// start mapPreviews
+u8 GetLastUsedWarpMapSectionId(void);
+u8 GetDestinationWarpMapSectionId(void);
+// end mapPreviews
 
 // Item Description Headers
 enum ItemObtainFlags

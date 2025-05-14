@@ -1,7 +1,12 @@
 #ifndef GUARD_MONEY_H
 #define GUARD_MONEY_H
 
-#define MAX_MONEY 999999 // Can be increased to INT_MAX
+// Start siliconMerge
+#define STARTING_MONEY 2891 // PSF TODO Balance this to be correct
+#define MAX_MONEY 99999999 // Can be increased to INT_MAX
+// #define MAX_MONEY 999999 // Can be increased to INT_MAX
+#define CHARLOTTE_MONEY (MAX_MONEY / 10) * 7
+// End siliconMerge
 
 #define MAX_MONEY_DIGITS ((MAX_MONEY > 999999999) ? 10 : \
         (MAX_MONEY > 99999999) ? 9 : \

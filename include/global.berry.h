@@ -25,6 +25,7 @@ struct Berry
     u8 sour;
     u8 smoothness;
     u8 drainRate;
+    u8 nativeItemGroup; // siliconMerge
 };
 
 // with no const fields
@@ -50,6 +51,7 @@ struct Berry2
     u8 sour;
     u8 smoothness;
     u8 drainRate;
+    u8 nativeItemGroup; // siliconMerge
 };
 
 struct EnigmaBerry

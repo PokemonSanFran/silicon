@@ -27,6 +27,8 @@ bool8 SetUpFieldMove_Flash(void);
 void CB2_DoChangeMap(void);
 bool8 GetMapPairFadeToType(u8 _fromType, u8 _toType);
 bool8 GetMapPairFadeFromType(u8 _fromType, u8 _toType);
+void FldEff_UseFlash(void); // qol_field_moves
+void Task_EnterCaveTransition2(u8 taskId); // mapPreviews
 
 // strength
 bool8 SetUpFieldMove_Strength(void);
@@ -40,6 +42,7 @@ void StartSweetScentFieldEffect(void);
 // teleport
 bool8 SetUpFieldMove_Teleport(void);
 bool8 FldEff_UseTeleport(void);
+void StartTeleportFieldEffect(void); // qol_field_moves
 
 // dig
 bool8 SetUpFieldMove_Dig(void);
@@ -51,4 +54,5 @@ u8 CreateFieldMoveTask(void);
 bool8 SetUpFieldMove_RockSmash(void);
 bool8 FldEff_UseRockSmash(void);
 
+void Task_DoFieldMove_RunFunc(u8 taskId); // qol_field_moves
 #endif // GUARD_FLDEFF_H

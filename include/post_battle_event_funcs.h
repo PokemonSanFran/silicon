@@ -1,0 +1,1 @@
+int GameClear(void);

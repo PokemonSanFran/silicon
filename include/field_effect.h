@@ -22,6 +22,7 @@ void FieldEffectActiveListRemove(u8 id);
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void FieldEffectActiveListAdd(u8 id);
 void FieldEffectScript_LoadTiles(u8 **script);
+void ApplyGlobalFieldPaletteTint(u8 paletteIdx); // siliconMerge
 void FieldEffectScript_LoadFadedPalette(u8 **script);
 void FieldEffectScript_LoadPalette(u8 **script);
 void FieldEffectScript_CallNative(u8 **script, u32 *val);
@@ -48,7 +49,25 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority);
 void StartEscapeRopeFieldEffect(void);
+void ReturnToFieldFromRegionMapWarpSelect(void); // siliconMerge
 void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
 void FieldEff_CaveDust(void);
 
+// Start qol_field_moves
+#include "task.h"
+
+void Task_SurfFieldEffect(u8);
+void SurfFieldEffect_Init(struct Task *);
+void SurfFieldEffect_JumpOnSurfBlob(struct Task *);
+void SurfFieldEffect_End(struct Task *);
+
+bool8 WaterfallFieldEffect_Init(struct Task *task, struct ObjectEvent *objectEvent);
+bool8 WaterfallFieldEffect_RideUp(struct Task *task, struct ObjectEvent *objectEvent);
+bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *task, struct ObjectEvent *objectEvent);
+void Task_UseWaterfall(u8);
+
+void Task_UseDive(u8);
+bool8 DiveFieldEffect_Init(struct Task *);
+bool8 DiveFieldEffect_TryWarp(struct Task *);
+// End qol_field_moves
 #endif // GUARD_FIELD_EFFECTS_H
