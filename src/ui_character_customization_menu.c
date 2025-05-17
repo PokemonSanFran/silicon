@@ -1891,7 +1891,7 @@ void SetCustomPlayerPalette(u16 *palette)
         bTonSecondary  = (bTonSecondary  * 2) + 5;
     }
 
-    for (i = 0; i < COLOR_DISABLED; i++, *palette++)
+    for (i = 0; i < PLAYER_PALETTE_COUNT; i++, *palette++)
     {
         r = GET_R(*palette);
         g = GET_G(*palette);
@@ -1997,6 +1997,7 @@ void SetCustomPlayerPalette(u16 *palette)
                     b = (u16)((tone * b)) >> 8;
                 }
                 break;
+                /*
             case PLAYER_PRIMARY_COLOR_3:
                 if(!disableCustomPrimaryColor){
                     r = rTonePrimary;
@@ -2008,6 +2009,7 @@ void SetCustomPlayerPalette(u16 *palette)
                     b = (u16)((tone * b)/2) >> 8;
                 }
                 break;
+                */
                 //Secondary
             case PLAYER_SECONDARY_COLOR_1:
                 if(!disableCustomSecondaryColor){
