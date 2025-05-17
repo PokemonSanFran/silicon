@@ -1309,7 +1309,7 @@ static u16 GetLocationHoverCheckTileTag(void)
 
 static u32 GetLocationSortFromSaveBlock(void)
 {
-    return gSaveBlock1Ptr->glass.LocationSort;
+    return gSaveBlock3Ptr->glass.LocationSort;
 }
 
 static void PopulateLocationList(void)
@@ -1979,12 +1979,12 @@ static u32 IncrementSortOrder(bool32 isTrainerMode)
 
 static void WriteLocationSortToSaveBlock(u32 sort)
 {
-    gSaveBlock1Ptr->glass.LocationSort = sort;
+    gSaveBlock3Ptr->glass.LocationSort = sort;
 }
 
 static void WriteTrainerSortToSaveBlock(u32 sort)
 {
-    gSaveBlock1Ptr->glass.TrainerSort = sort;
+    gSaveBlock3Ptr->glass.TrainerSort = sort;
 }
 
 static void SetSortOrderAndSave(void)
@@ -2056,7 +2056,7 @@ static void SaveScrollAndRowPositions(void)
 
 static u32 GetTrainerSortFromSaveBlock(void)
 {
-    return gSaveBlock1Ptr->glass.TrainerSort;
+    return gSaveBlock3Ptr->glass.TrainerSort;
 }
 
 static void ChangeSortAndReloadTrainerList(u8 taskId)
@@ -2768,7 +2768,7 @@ u32 GetTrainerType(u32 trainerId)
 
 bool32 IsTrainerDiscovered(u32 trainerId)
 {
-    if (gSaveBlock1Ptr->glass.DiscoveredTrainer[trainerId] == TRUE)
+    if (gSaveBlock3Ptr->glass.DiscoveredTrainer[trainerId] == TRUE)
         return TRUE;
 
     return (IsTrainerDefeated(trainerId));
@@ -2800,7 +2800,7 @@ void SetTrainersDiscovered(void)
 
 void SetTrainerDiscovered(u32 trainerId)
 {
-   gSaveBlock1Ptr->glass.DiscoveredTrainer[trainerId] = TRUE;
+   gSaveBlock3Ptr->glass.DiscoveredTrainer[trainerId] = TRUE;
 }
 
 static void SortAllTrainersAZ(u32 numTrainers)
@@ -3475,11 +3475,11 @@ void Glass_ResetSaveData(void)
 {
     u32 i;
 
-    gSaveBlock1Ptr->glass.LocationSort = GLASS_SORT_LOCATION_DEFAULT;
-    gSaveBlock1Ptr->glass.TrainerSort = GLASS_SORT_TRAINER_DEFAULT;
+    gSaveBlock3Ptr->glass.LocationSort = GLASS_SORT_LOCATION_DEFAULT;
+    gSaveBlock3Ptr->glass.TrainerSort = GLASS_SORT_TRAINER_DEFAULT;
 
     for (i = 0; i < TRAINERS_COUNT; i++)
-        gSaveBlock1Ptr->glass.DiscoveredTrainer[i] = FALSE;
+        gSaveBlock3Ptr->glass.DiscoveredTrainer[i] = FALSE;
 }
 
 u32 Glass_OverworldReturnLocationStat(u32 locationId, u32 stat)

@@ -813,8 +813,10 @@ static void BuyMenuDrawMapBg(void)
         {
             metatile = MapGridGetMetatileIdAt(x + i, y + j);
             if (BuyMenuCheckForOverlapWithMenuBg(i, j) == TRUE)
-                metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j);
+                // Start siliconMerge
+                //metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j);
 				metatileLayerType = 0;
+                // End siliconMerge
             else
                 metatileLayerType = METATILE_LAYER_TYPE_COVERED;
 

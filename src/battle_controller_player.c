@@ -2443,7 +2443,7 @@ static void PlayerHandleBattleDebug(u32 battler)
 // Start midBattleEvolution
 static EWRAM_DATA u8 sMidBattleEvolvedPartyId = 0;
 static EWRAM_DATA u8 sMidBattleEvoFramesCount = 0;
-static EWRAM_DATA u8 sSavedBattleTerrain = 0;
+static EWRAM_DATA u8 sSavedBattleEnvironment = 0;
 
 void UpdateStatsAfterLevelUp(u32 monId);
 
@@ -2452,7 +2452,7 @@ static void Controller_WaitForEvo(u32 battler)
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
         PlayerBufferExecCompleted(battler);
-        gBattleTerrain = sSavedBattleTerrain; // Evolution changes terrain.
+        gBattleEnvironment = sSavedBattleEnvironment; // Evolution changes terrain.
         AllocateMonSpritesGfx(); // We need to allocate gfx for mons again
         UpdateStatsAfterLevelUp(sMidBattleEvolvedPartyId);
         ReshowBattleScreenAfterMenu();
@@ -2468,7 +2468,7 @@ static void PlayerHandleMidBattleEvolution(u32 battler)
         u32 species = T1_READ_16(&gBattleResources->bufferA[battler][MIDBATTLEEVO_SPECIES_ID]);
 
         sMidBattleEvoFramesCount = 0;
-        sSavedBattleTerrain = gBattleTerrain;
+        sSavedBattleEnvironment = gBattleEnvironment;
         FreeAllWindowBuffers();
 
         gCB2_AfterEvolution = BattleMainCB2;

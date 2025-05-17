@@ -227,7 +227,10 @@ const u8 gText_ThanksIllSendItHome[] = _("Thanks!\nI'll send it to your PC at ho
 const u8 gText_YouDontHaveMoney[] = _("You don't have enough money.{PAUSE_UNTIL_PRESS}");
 const u8 gText_NoMoreRoomForThis[] = _("You have no more room for this\nitem.{PAUSE_UNTIL_PRESS}");
 const u8 gText_SpaceForVar1Full[] = _("The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}");
-const u8 gText_AnythingElseICanHelp[] = _("Is there anything else I can help\nyou with?");
+// Start siliconMerge
+//const u8 gText_AnythingElseICanHelp[] = _("Is there anything else I can help\nyou with?");
+const u8 gText_AnythingElseICanHelp[] = _("What would you like to do?");
+// End siliconMerge
 const u8 gText_CanIHelpWithAnythingElse[] = _("Can I help you with anything else?");
 const u8 gText_ThrowInPremierBall[] = _("I'll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ThrowInPremierBalls[] = _("I'll throw in {STR_VAR_1} PREMIER BALLS, too.{PAUSE_UNTIL_PRESS}");
@@ -498,6 +501,7 @@ const u8 gText_TMs_Hms[] = _("TMs & HMs");
 const u8 gText_Berries2[] = _("BERRIES");
 const u8 gText_SomeonesPC[] = _("SOMEONE'S PC");
 const u8 gText_LanettesPC[] = _("LANETTE'S PC");
+const u8 gText_PokemonStorageSystem[] = _("Pokémon Storage System"); // PSF
 const u8 gText_PlayersPC[] = _("{PLAYER}'s PC");
 const u8 gText_HallOfFame[] = _("HALL OF FAME");
 const u8 gText_LogOff[] = _("LOG OFF");
@@ -552,6 +556,7 @@ const u8 gText_2F[] = _("2F");
 const u8 gText_3F[] = _("3F");
 const u8 gText_4F[] = _("4F");
 const u8 gText_5F[] = _("5F");
+const u8 gText_5PF[] = _("5F (Park)"); // PSF
 const u8 gText_6F[] = _("6F");
 const u8 gText_7F[] = _("7F");
 const u8 gText_8F[] = _("8F");
@@ -1287,11 +1292,174 @@ const u8 gText_Answer[] = _("ANSWER");
 const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BERRY");
 const u8 gText_Berries[] = _("BERRIES");
+// Start PSF Locations
+const u8 gText_QiuVillage[] = _("QiuVillage");
+const u8 gText_HalerbaCity[] = _("HalerbaCity");
+const u8 gText_PetarosaBorough[] = _("PetarosaBorough");
+const u8 gText_CresaltaVista[] = _("CresaltaVista");
+const u8 gText_IrisinaTown[] = _("IrisinaTown");
+const u8 gText_MermerezaCity[] = _("MermerezaCity");
+const u8 gText_CurenoPort[] = _("CurenoPort");
+const u8 gText_CuconuTown[] = _("CuconuTown");
+const u8 gText_Oroland[] = _("Oroland");
+const u8 gText_EspuleeOutskirts[] = _("EspuleeOutskirts");
+const u8 gText_Chasilla[] = _("Chasilla");
+const u8 gText_CapheCity[] = _("CapheCity");
+const u8 gText_HodouCity[] = _("HodouCity");
+const u8 gText_ToraTown[] = _("ToraTown");
+const u8 gText_PerlaciaCity[] = _("PerlaciaCity");
+const u8 gText_GlavezHill[] = _("GlavezHill");
+const u8 gText_HalaiIsland[] = _("HalaiIsland");
+const u8 gText_TirabudinPlace[] = _("TirabudinPlace");
+const u8 gText_TorgeotClimb[] = _("TorgeotClimb");
+const u8 gText_Navalbase[] = _("NavalBase");
+const u8 gText_PintillonHouse[] = _("PintillonHouse_Exterior");
+const u8 gText_Moragasteps[] = _("Moragasteps");
+const u8 gText_Deyoungmuseum[] = _("Deyoungmuseum");
+const u8 gText_Dutchwindmills[] = _("Dutchwindmills");
+const u8 gText_AnbehBend[] = _("AnbehBend");
+const u8 gText_Palacefinearts[] = _("Palacefinearts");
+const u8 gText_FortYobu[] = _("FortYobu");
+const u8 gText_Transpyramid[] = _("Transpyramid");
+const u8 gText_Ferrybuilding[] = _("Ferrybuilding");
+const u8 gText_Dragongate[] = _("Dragongate");
+const u8 gText_PopidoraPier[] = _("PopidoraPier");
+const u8 gText_SharpriseStadium[] = _("SharpriseStadium");
+const u8 gText_OrolandColiseum[] = _("OrolandColiseum");
+const u8 gText_Orolandferry[] = _("Orolandferry");
+const u8 gText_PiocaBridge[] = _("PiocaBridge");
+const u8 gText_Robinwilltunnel[] = _("LanjingTunnel");
+const u8 gText_LeaverraForest[] = _("LeaverraForest");
+const u8 gText_WishaastLake[] = _("WishaastLake");
+const u8 gText_WajabiLake[] = _("WajabiLake");
+const u8 gText_ZenzuIsland[] = _("ZenzuIsland");
+const u8 gText_Siliconvalley[] = _("Siliconvalley");
+const u8 gText_Arantraz[] = _("Arantraz");
+const u8 gText_Psfcave8[] = _("Psfcave8");
+const u8 gText_Route11[] = _("Route11");
+const u8 gText_Route16[] = _("Route16");
+const u8 gText_Route22[] = _("Route22");
+const u8 gText_Route18[] = _("Route18");
+const u8 gText_Route4[] = _("Route4");
+const u8 gText_Route10[] = _("Route10");
+const u8 gText_Route8[] = _("Route8");
+const u8 gText_Psfroute7e17fdd1[] = _("Psfroute7e17fdd1");
+const u8 gText_Route14[] = _("Route14");
+const u8 gText_Route5[] = _("Route5");
+const u8 gText_RouteD[] = _("RouteD");
+const u8 gText_Route6[] = _("Route6");
+const u8 gText_Route3[] = _("Route3");
+const u8 gText_Psfroute9f45da86[] = _("Psfroute9f45da86");
+const u8 gText_RouteC[] = _("RouteC");
+const u8 gText_Route1[] = _("Route1");
+const u8 gText_Route2[] = _("Route2");
+const u8 gText_SecretPath[] = _("SecretPath");
+const u8 gText_NongyuBridge[] = _("NongyuBridge");
+const u8 gText_Route20[] = _("Route20");
+const u8 gText_Route9[] = _("Route9");
+const u8 gText_Route7[] = _("Route7");
+const u8 gText_Route13[] = _("Route13");
+const u8 gText_RouteA[] = _("RouteA");
+const u8 gText_Route100[] = _("Route100");
+const u8 gText_Route98[] = _("Route98");
+const u8 gText_Route99[] = _("Route99");
+const u8 gText_Route12[] = _("Route12");
+const u8 gText_RouteB[] = _("RouteB");
+const u8 gText_RouteE[] = _("RouteE");
+const u8 gText_HalerbaWilds[] = _("HalerbaWilds");
+const u8 gText_SharpriseSpire[] = _("SharpriseSpire");
+const u8 gText_PARC[] = _("PARC");
+const u8 gText_Agatevillage[] = _("Agate Village");
+// End PSF Locations
+// Start VS Garbador Choose side
+const u8 gText_DontCare[] = _("Either one.");
+// End VS Garbador Choose side
+// Start Secret Lab Discovery
+const u8 gText_WantToUseDig[] = _("Do you want to use Dig here?");
+// End Secret Lab Discovery
+// Start QuestAnnounce
+const u8 gText_QuestActive[] = _("active");
+const u8 gText_QuestComplete[] = _("complete");
+// End QuestAnnounce
+// Start Quest_Restorezenzugym
+const u8 gText_PokemonPsychoShift[] = _("a Pokemon that knows \nthe move Psycho Shift");
+const u8 gText_PokemonEffectSpore[] = _("a Pokemon that has \nthe ability Effect Spore");
+// End Quest_Restorezenzugym
+// Start Quest_Bodegaburnout
+const u8 gText_Bodegaburnout_PersonA[] = _("person A");
+const u8 gText_Bodegaburnout_PersonB[] = _("person B");
+const u8 gText_Bodegaburnout_PersonC[] = _("person C");
+const u8 gText_Bodegaburnout_PersonD[] = _("person D");
+const u8 gText_Bodegaburnout_PersonE[] = _("person E");
+const u8 gText_Bodegaburnout_PersonF[] = _("person F");
+const u8 gText_Bodegaburnout_PersonG[] = _("person G");
+const u8 gText_Bodegaburnout_PersonH[] = _("person H");
+const u8 gText_Bodegaburnout_PersonI[] = _("person I");
+const u8 gText_Bodegaburnout_PersonJ[] = _("person J");
+const u8 gText_Bodegaburnout_PersonK[] = _("person K");
+const u8 gText_Bodegaburnout_PersonL[] = _("person L");
+const u8 gText_Bodegaburnout_StrongMon[] =_("strong");
+const u8 gText_Bodegaburnout_ColdMon[] =_("cold");
+const u8 gText_Bodegaburnout_SmartMon[] = _("smart");
+const u8 gText_Bodegaburnout_FairyMon[] =_("fairy");
+
+const u8 gText_Bodegaburnout_AssistWithStocking[] = _("assist with stocking the shelves");
+const u8 gText_Bodegaburnout_HelpKeepFood[] = _("help keep food cold");
+const u8 gText_Bodegaburnout_BalanceOurBooks[] = _("balance our books");
+const u8 gText_Bodegaburnout_RaiseTheMood[] = _("raise the mood and ambiance");
+// End Quest_Bodegaburnout
+// Start Debug Start
+const u8 gText_SelectPoint[] = _("Select a point in Act 0. You will go\nto directly after that point. Press B to cancel.");
+const u8 gText_ProlougeIntro[] = _("Prologue Intro");
+const u8 gText_BecomeChampion[] =_("Become Champion");
+const u8 gText_TheAnnouncement[] =_("The Announcement");
+const u8 gText_BeginAdventure[] =_("Begin Adventure");
+const u8 gText_ChosenStarter[] =_("Chosen Starter");
+const u8 gText_ImProbablyBetterThanYou[] =_("I'm Probably Better Than You");
+// End Debug Start
+// Start New Save Screen
+const u8 gText_SaveYourAdventure[] = _("Would you like to save your adventure\nso far?");
+const u8 gText_NowSavingAdventure[] = _("Now saving your Pokémon adventure...\nDon't turn off the power.");
+const u8 gText_ThereWasAnError[] = _("There was an error. You did not save.");
+const u8 gText_EraseHeader[] = _("CAUTION!");
+const u8 gText_EraseOldAdventure[] = _("If you continue, this will overwrite the\npreviously saved adventure and its\nprogress. This cannot be recovered.");
+const u8 gText_EraseQuestion[] = _("Overwrite this save?");
+const u8 gText_YouSaved[] = _("You saved your progress!");
+const u8 gText_ConfirmOverwrite[] = _("{START_BUTTON}+{A_BUTTON} Overwrite Old Adventure");
+const u8 gText_CancelOverwrite[] = _("Press any other button to cancel.");
+// End New Save Screen
+// Start Pokevial Branch
+const u8 gText_PokevialHasDoses[] =_("The {STR_VAR_1} has {STR_VAR_2} doses remaining.\nUse the {STR_VAR_1}?");
+const u8 gText_PokevialIsEmpty[] =_("The {STR_VAR_1} is empty!\nRefill it by healing at a {STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
+const u8 gText_YourPkmnWereRestored[] =_("Your Pokémon were restored to full health.{PAUSE_UNTIL_PRESS}");
+//End Pokevial Branch
+// Start siliconMerge
+const u8 gText_RunBehaviorWalk[] =_("walk");
+const u8 gText_RunBehaviorRun[] =_("run");
+// End siliconMerge
 const u8 gText_ExpShareOn[] = _("The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}");
+// Start Bag Items and Item Healing
+const u8 gText_ThisItemCannotBeUsed[] = _("You can't use this item!");
+// End Bag Items and Item Healing
 const u8 gText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 const u8 gText_AM[] = _("AM");
 const u8 gText_PM[] = _("PM");
 const u8 gText_Relearn[] = _("{START_BUTTON} RELEARN"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
 const u8 gText_Rename[] = _("RENAME");
 const u8 gText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}");
+// Start playerCustom
+const u8 gText_Custom[] =_("Custom");
+
+const u8 gText_They[] =_("They");
+const u8 gText_He[] =_("He");
+const u8 gText_She[] =_("She");
+
+const u8 gText_Them[] =_("Them");
+const u8 gText_Him[] =_("Him");
+const u8 gText_Her[] =_("Her");
+
+const u8 gText_Their[] =_("Their");
+const u8 gText_His[] =_("His");
+const u8 gText_Hers[] =_("Hers");
+// End playerCustom

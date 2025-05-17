@@ -2771,11 +2771,18 @@ static void AwardBattleTowerRibbons(void)
             partyIndex = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
             ribbons[i].partyIndex = partyIndex;
             ribbons[i].count = 0;
-            if (!GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType))
+            // Start siliconMerge
+            //if (!GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType))
+            if (!GetMonData(&gSaveBlock1Ptr->playerPartyBattleFrontier[partyIndex], ribbonType))
+            // End siliconMerge
             {
                 gSpecialVar_Result = TRUE;
-                SetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType, &gSpecialVar_Result);
-                ribbons[i].count = GetRibbonCount(&gSaveBlock1Ptr->playerParty[partyIndex]);
+            // Start siliconMerge
+                //SetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType, &gSpecialVar_Result);
+                SetMonData(&gSaveBlock1Ptr->playerPartyBattleFrontier[partyIndex], ribbonType, &gSpecialVar_Result);
+                //ribbons[i].count = GetRibbonCount(&gSaveBlock1Ptr->playerParty[partyIndex]);
+                ribbons[i].count = GetRibbonCount(&gSaveBlock1Ptr->playerPartyBattleFrontier[partyIndex]);
+            // End siliconMerge
             }
         }
     }
@@ -2794,7 +2801,10 @@ static void AwardBattleTowerRibbons(void)
         }
         if (ribbons[0].count > NUM_CUTIES_RIBBONS)
         {
-            TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerParty[ribbons[0].partyIndex], ribbonType);
+            // Start siliconMerge
+            //TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerParty[ribbons[0].partyIndex], ribbonType);
+            TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerPartyBattleFrontier[ribbons[0].partyIndex], ribbonType);
+            // End siliconMerge
         }
     }
 }
@@ -2839,7 +2849,7 @@ static void UNUSED FillEReaderTrainerWithPlayerData(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
-u8 GetEreaderTrainerFrontSpriteId(void)
+u8 UNUSED GetEreaderTrainerFrontSpriteId(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return gFacilityClassToPicIndex[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];
@@ -2848,7 +2858,7 @@ u8 GetEreaderTrainerFrontSpriteId(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
-u8 GetEreaderTrainerClassId(void)
+u8 UNUSED GetEreaderTrainerClassId(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];

@@ -2139,9 +2139,9 @@ static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
 
 void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
 {
+    const u8 *name;
 // Start bootSequence
 /*
-    const u8 *name;
     u8 i;
 
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -2151,11 +2151,7 @@ void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
-}
 */
-    const u8 *name;
-    u8 i;
-
     switch(gSaveBlock2Ptr->playerGender)
     {
         case MALE:
@@ -2255,8 +2251,12 @@ static void MainMenu_FormatSavegameBadges(void)
 
 static void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)
 {
+    /*
+    // Start siliconMerge
     LoadBgTiles(bgId, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, tileOffset);
     LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+    // End siliconMerge
+    */
 }
 
 static void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 baseTileNum)

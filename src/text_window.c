@@ -121,12 +121,9 @@ void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
 void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     // Start siliconMerge
-	#ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
-    LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE], destOffset, palOffset);
-    #else
+    //LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
+    LoadWindowGfx(windowId, 0, destOffset, palOffset);
 	// End siliconMerge
-    LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
-    #endif // siliconMerge
 }
 
 void DrawTextBorderOuter(u8 windowId, u16 tileNum, u8 palNum)
@@ -210,14 +207,11 @@ const u16 *GetOverworldTextboxPalettePtr(void)
 void LoadUserWindowBorderGfxOnBg(u8 bg, u16 destOffset, u8 palOffset)
 {
     // Start siliconMerge
-	#ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
-    LoadBgTiles(bg, sWindowFrames[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE]].tiles, 0x120, destOffset);
-    LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE])->pal, palOffset, PLTT_SIZE_4BPP);
-    #else
+    //LoadBgTiles(bg, sWindowFrames[gSaveBlock2Ptr->optionsWindowFrameType].tiles, 0x120, destOffset);
+    //LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, palOffset, PLTT_SIZE_4BPP);
+    LoadBgTiles(bg, sWindowFrames[0].tiles, 0x120, destOffset);
+    LoadPalette(GetWindowFrameTilesPal(0)->pal, palOffset, PLTT_SIZE_4BPP);
 	// End siliconMerge
-    LoadBgTiles(bg, sWindowFrames[gSaveBlock2Ptr->optionsWindowFrameType].tiles, 0x120, destOffset);
-    LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, palOffset, PLTT_SIZE_4BPP);
-    #endif // siliconMerge
 }
 
 void LoadDexNavWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)

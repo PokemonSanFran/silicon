@@ -1291,7 +1291,7 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     // When applying script movements to follower, it may have frozen animation that must be cleared
-    if ((localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen) 
+    if ((localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen)
             || ((objEvent = &gObjectEvents[GetObjectEventIdByLocalId(localId)]) && IS_OW_MON_OBJ(objEvent)))
     {
         ClearObjectEventMovement(objEvent, &gSprites[objEvent->spriteId]);
@@ -2401,7 +2401,7 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_TRAINERBATTLE);
-    
+
     TrainerBattleLoadArgs(ctx->scriptPtr);
     ctx->scriptPtr = BattleSetup_ConfigureTrainerBattle(ctx->scriptPtr);
     return FALSE;
@@ -3487,7 +3487,7 @@ bool8 ScrCmd_bufferspeciesheight(struct ScriptContext *ctx)
 
     return FALSE;
 }
-// End siliconMerge
+// Start siliconMerge
 bool8 ScrCmd_removeallitem(struct ScriptContext *ctx)
 {
     u32 itemId = VarGet(ScriptReadHalfword(ctx));
@@ -3497,9 +3497,8 @@ bool8 ScrCmd_removeallitem(struct ScriptContext *ctx)
     u32 count = CountTotalItemQuantityInBag(itemId);
     gSpecialVar_Result = count;
     RemoveBagItem(itemId, count);
-
+    return FALSE;
 }
-// Start siliconMerge
 
 bool8 Script_Quest_Generic_CountRemainingSubquests(struct ScriptContext *ctx)
 {

@@ -12,6 +12,7 @@
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
 #include "fonts.h"
+#include "options_visual.h" // siliconMerge
 
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
@@ -89,6 +90,7 @@ static const u8 sWindowVerticalScrollSpeeds[] = {
     [OPTIONS_TEXT_SPEED_SLOW] = 1,
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
+    [OPTIONS_TEXT_SPEED_INSTANT] = 4, // siliconMerge
 };
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
@@ -376,11 +378,11 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     return TRUE;
 }
 
-// Start siliconMerge
 void RunTextPrinters(void)
 {
     int i;
-    u16 temp;
+// Start siliconMerge
+u16 temp;
 
     do
     {
@@ -391,16 +393,16 @@ void RunTextPrinters(void)
             {
                 temp = RenderFont(&sTextPrinters[i]);
                 switch (temp) {
-                    case RENDER_PRINT:
+                    case 0:
                         CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                         if (sTextPrinters[i].callback != 0)
                             sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
                         break;
-                    case RENDER_UPDATE:
+                    case 3:
                         if (sTextPrinters[i].callback != 0)
                             sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
                         return;
-                    case RENDER_FINISH:
+                    case 1:
                         sTextPrinters[i].active = 0;
                         break;
                 }
@@ -412,14 +414,8 @@ void RunTextPrinters(void)
         }
         if(numEmpty == WINDOWS_MAX)
             return;
-    }while(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] == OPTIONS_TEXT_SPEED_INSTANT);
-}
-
+	}while(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] == OPTIONS_TEXT_SPEED_INSTANT);
 /*
-void RunTextPrinters(void)
-{
-    int i;
-
     if (!gDisableTextPrinters)
     {
         for (i = 0; i < WINDOWS_MAX; ++i)
@@ -442,9 +438,9 @@ void RunTextPrinters(void)
             }
         }
     }
-}
 */
 // End siliconMerge
+}
 
 bool32 IsTextPrinterActive(u8 id)
 {
@@ -1095,6 +1091,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     u16 currChar, nextChar; // siliconMerge
     s32 width;
     s32 widthHelper;
+    u8 repeats = 0;	// siliconMerge
 
     switch (textPrinter->state)
     {
@@ -1105,7 +1102,10 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         if (textPrinter->delayCounter && textPrinter->textSpeed)
         {
             textPrinter->delayCounter--;
-            if (gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON)))
+            // Start siliconMerge
+			//if (gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON)))
+            if ((gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON))))
+			// End siliconMerge
             {
                 subStruct->hasPrintBeenSpedUp = TRUE;
                 textPrinter->delayCounter = 0;
@@ -1119,7 +1119,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->delayCounter = textPrinter->textSpeed;
 
         // Start siliconMerge
-        switch (GetPlayerTextSpeed())
+		switch (GetPlayerTextSpeed())
         {
             case OPTIONS_TEXT_SPEED_SLOW:
             case OPTIONS_TEXT_SPEED_MID:
@@ -1130,11 +1130,12 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 repeats = 2;
                 break;
         }
-        // End siliconMerge
 
-
+        do {
+		// End siliconMerge
         currChar = *textPrinter->printerTemplate.currentChar;
         textPrinter->printerTemplate.currentChar++;
+        nextChar = *textPrinter->printerTemplate.currentChar; // siliconMerge
 
         switch (currChar)
         {
@@ -1348,6 +1349,25 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             else
                 textPrinter->printerTemplate.currentX += gCurGlyph.width;
         }
+        // Start siliconMerge
+		if (repeats == 2)
+        {
+            switch (nextChar)
+            {
+            case CHAR_NEWLINE:
+            case PLACEHOLDER_BEGIN:
+            case EXT_CTRL_CODE_BEGIN:
+            case CHAR_PROMPT_CLEAR:
+            case CHAR_PROMPT_SCROLL:
+            case CHAR_KEYPAD_ICON:
+            case EOS:
+                repeats--;
+                break;
+            }
+        }
+        repeats--;
+        } while (repeats > 0);
+		// End siliconMerge
         return RENDER_PRINT;
     case RENDER_STATE_WAIT:
         if (TextPrinterWait(textPrinter))

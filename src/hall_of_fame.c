@@ -703,11 +703,8 @@ static void Task_Hof_DisplayPlayer(u8 taskId)
     gTasks[taskId].tPlayerSpriteID = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), TRUE, 120, 72, 6, TAG_NONE);
     AddWindow(&sHof_WindowTemplate);
 // Start siliconMerge
-	#ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
-	LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, BG_PLTT_ID(13));
-    #else
-	LoadWindowGfx(1, gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE], 0x21D, BG_PLTT_ID(13));
-	#endif
+	//LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, BG_PLTT_ID(13));
+	LoadWindowGfx(1, 0, 0x21D, BG_PLTT_ID(13));
 // End siliconMerge
     LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     gTasks[taskId].tFrameCount = 120;

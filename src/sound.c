@@ -8,6 +8,7 @@
 #include "constants/cries.h"
 #include "constants/songs.h"
 #include "task.h"
+#include "options_music.h" //siliconMerge
 #include "test_runner.h"
 
 struct Fanfare
@@ -180,6 +181,11 @@ bool8 IsNotWaitingForBGMStop(void)
 void PlayFanfareByFanfareNum(u8 fanfareNum)
 {
     u16 songNum;
+	// Start siliconMerge
+    if (AreFanfaresMuted())
+        return;
+	// End siliconMerge
+
     m4aMPlayStop(&gMPlayInfo_BGM);
     songNum = sFanfares[fanfareNum].songNum;
     sFanfareCounter = sFanfares[fanfareNum].duration;
@@ -188,6 +194,14 @@ void PlayFanfareByFanfareNum(u8 fanfareNum)
 
 bool8 WaitFanfare(bool8 stop)
 {
+	// Start siliconMerge
+    if (AreFanfaresMuted())
+    {
+        m4aMPlayContinue(&gMPlayInfo_BGM);
+        return TRUE;
+    }
+	// End siliconMerge
+
     if (sFanfareCounter)
     {
         sFanfareCounter--;
@@ -468,6 +482,8 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryPriority(priority);
 
     species = GetCryIdBySpecies(species);
+    ReturnDummyCryIfMuted(&species); // siliconMerge
+
     if (species != CRY_NONE)
     {
         species--;
@@ -547,17 +563,26 @@ void PlayBGM(u16 songNum)
         songNum = 0;
     if (songNum == MUS_NONE)
         songNum = 0;
+    ReturnDummyMusicIfMuted(&songNum); // siliconMerge
     m4aSongNumStart(songNum);
 }
 
 void PlaySE(u16 songNum)
 {
-    m4aSongNumStart(songNum);
+	// Start siliconMerge
+	if (AreSoundEffectsMuted())
+		m4aSongNumStop(songNum);
+	else
+		m4aSongNumStart(songNum);
+	// End siliconMerge
 }
 
 void PlaySE12WithPanning(u16 songNum, s8 pan)
 {
-    m4aSongNumStart(songNum);
+	// Start siliconMerge
+    //m4aSongNumStart(songNum);
+    PlaySE(songNum);
+	// End siliconMerge
     m4aMPlayImmInit(&gMPlayInfo_SE1);
     m4aMPlayImmInit(&gMPlayInfo_SE2);
     m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
@@ -566,14 +591,20 @@ void PlaySE12WithPanning(u16 songNum, s8 pan)
 
 void PlaySE1WithPanning(u16 songNum, s8 pan)
 {
-    m4aSongNumStart(songNum);
+	// Start siliconMerge
+    //m4aSongNumStart(songNum);
+    PlaySE(songNum);
+	// End siliconMerge
     m4aMPlayImmInit(&gMPlayInfo_SE1);
     m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
 }
 
 void PlaySE2WithPanning(u16 songNum, s8 pan)
 {
-    m4aSongNumStart(songNum);
+	// Start siliconMerge
+    //m4aSongNumStart(songNum);
+    PlaySE(songNum);
+	// End siliconMerge
     m4aMPlayImmInit(&gMPlayInfo_SE2);
     m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, pan);
 }

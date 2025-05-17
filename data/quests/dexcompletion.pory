@@ -41,7 +41,7 @@ script Quest_DexCompletion_Debug_Script{
 
 
 script Quest_DexCompletion_MarkQuests_Script{
-    specialvar(VAR_0x8006, GetPokedexCompletionRate)
+    specialvar(VAR_0x8006, GetPokedexPercentage)
 
     if (var(VAR_0x8006) > 99){
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_DEXCOMPLETION,SUB_QUEST_2)

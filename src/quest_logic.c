@@ -124,7 +124,7 @@ bool32 KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(int mapLayoutId)
 
 void Quest_Kitchenvolunteering_CreatePantryMaze(void)
 {
-    SeedRng(gSaveBlock1Ptr->mazeLayoutSeed);
+    SeedRng(gSaveBlock3Ptr->mazeLayoutSeed);
     GenerateMazeMap(5, 5, &gMazeTemplates[CAVE_STAIRS_TEMPLATE_SET]);
     KitchenvolunteeringFunc_HidePantryItems();
     KitchenvolunteeringFunc_RestoreChosenPantryItem();

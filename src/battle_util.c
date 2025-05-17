@@ -392,7 +392,7 @@ void HandleAction_UseMove(void)
         gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
         return;
     }
-    // End siliconMerge	
+    // End siliconMerge
     if (IsBattlerAlive(gBattlerAttacker))
     {
         if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -9965,7 +9965,7 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
     return uq4_12_multiply_by_int_half_down(modifier, atkStat);
 }
 
-static bool32 CanEvolve(u32 species)
+bool32 CanEvolve(u32 species) // siliconMerge
 {
     u32 i;
     const struct Evolution *evolutions = GetSpeciesEvolutions(species);

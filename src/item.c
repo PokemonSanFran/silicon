@@ -460,7 +460,7 @@ u8 GetPocketByItemId(u16 itemId)
     return ItemId_GetPocket(itemId);
 }
 
-void ClearItemSlots(struct ItemSlot *itemSlots, u32 itemCount) // siliconMerge
+void ClearItemSlots(struct ItemSlot *itemSlots, u16 itemCount) // siliconMerge
 {
     u16 i;
 

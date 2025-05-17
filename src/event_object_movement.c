@@ -53,7 +53,9 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/trainer_types.h"
 #include "constants/union_room.h"
+#include "rematch.h" // siliconMerge
 #include "constants/weather.h"
+#include "ui_character_customization_menu.h" // playerCustom
 
 // this file was known as evobjmv.c in Game Freak's original source
 
@@ -160,6 +162,7 @@ static void ApplyLevitateMovement(u8);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
 static void CreateReflectionEffectSprites(void);
+//static u8 GetObjectEventIdByLocalId(u8); // cueobject
 static u8 GetObjectEventIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableObjectEventId(u16, u8, u8, u8 *);
 static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *);
@@ -168,7 +171,7 @@ static u16 GetObjectEventFlagIdByObjectEventId(u8);
 static void UpdateObjectEventVisibility(struct ObjectEvent *, struct Sprite *);
 static void MakeSpriteTemplateFromObjectEventTemplate(const struct ObjectEventTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 static void GetObjectEventMovingCameraOffset(s16 *, s16 *);
-static const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8);
+//static const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8); // siliconMerge
 static void RemoveObjectEventIfOutsideView(struct ObjectEvent *);
 static void SpawnObjectEventOnReturnToField(u8, s16, s16);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
@@ -200,6 +203,7 @@ static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
 static bool8 GetFollowerInfo(u32 *species, bool32 *shiny, bool32 *female);
 static u32 LoadDynamicFollowerPalette(u32 species, bool32 shiny, bool32 female);
+static u32 LoadSpriteSheetWithTag(const struct ObjectEventGraphicsInfo *graphicsInfo, u32 tag); // siliconMerge
 static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u32 species, bool32 shiny, bool32 female);
 static bool8 NpcTakeStep(struct Sprite *);
 static bool8 AreElevationsCompatible(u8, u8);
@@ -512,6 +516,24 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
+    // Start silicon
+    {gObjectEventPal_siliconPlayer,         OBJ_EVENT_PAL_TAG_SILICON},
+    {gObjectEventPal_KaiNormal,             OBJ_EVENT_PAL_TAG_KAI},
+    {gObjectEventPal_UnknownNormal,         OBJ_EVENT_PAL_TAG_UNKNOWN},
+    {gObjectEventPal_AdaoraWalking,         OBJ_EVENT_PAL_TAG_ADAORA},
+    {gObjectEventPal_AlcmeneWalking,        OBJ_EVENT_PAL_TAG_ALCMENE},
+    {gObjectEventPal_BdWalking,             OBJ_EVENT_PAL_TAG_BD},
+    {gObjectEventPal_BelenWalking,          OBJ_EVENT_PAL_TAG_BELEN},
+    {gObjectEventPal_DimuWalking,           OBJ_EVENT_PAL_TAG_DIMU},
+    {gObjectEventPal_DoyleWalking,          OBJ_EVENT_PAL_TAG_DOYLE},
+    {gObjectEventPal_EmrysWalking,          OBJ_EVENT_PAL_TAG_EMRYS},
+    {gObjectEventPal_ImeldaWalking,         OBJ_EVENT_PAL_TAG_IMELDA},
+    {gObjectEventPal_KaunaWalking,          OBJ_EVENT_PAL_TAG_KAUNA},
+    {gObjectEventPal_KeiyingWalking,        OBJ_EVENT_PAL_TAG_KEIYING},
+    {gObjectEventPal_MagnusWalking,         OBJ_EVENT_PAL_TAG_MAGNUS},
+    {gObjectEventPal_NerieneWalking,        OBJ_EVENT_PAL_TAG_NERIENE},
+    {gObjectEventPal_ShinzoWalking,         OBJ_EVENT_PAL_TAG_SHINZO},
+    // End silicon
 #if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
     {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
@@ -543,6 +565,16 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     #ifdef ITEM_STRANGE_BALL
     {gObjectEventPal_StrangeBall,           OBJ_EVENT_PAL_TAG_BALL_STRANGE},
     #endif //ITEM_STRANGE_BALL
+// Start siliconNewBalls
+    {gObjectEventPal_NewABall,               OBJ_EVENT_PAL_TAG_BALL_NEWA},
+    {gObjectEventPal_NewBBall,               OBJ_EVENT_PAL_TAG_BALL_NEWB},
+    {gObjectEventPal_NewCBall,               OBJ_EVENT_PAL_TAG_BALL_NEWC},
+    {gObjectEventPal_NewDBall,               OBJ_EVENT_PAL_TAG_BALL_NEWD},
+    {gObjectEventPal_NewEBall,               OBJ_EVENT_PAL_TAG_BALL_NEWE},
+    {gObjectEventPal_NewFBall,               OBJ_EVENT_PAL_TAG_BALL_NEWF},
+    {gObjectEventPal_NewGBall,               OBJ_EVENT_PAL_TAG_BALL_NEWG},
+    {gObjectEventPal_NewHBall,               OBJ_EVENT_PAL_TAG_BALL_NEWH},
+// End siliconNewBalls
 #endif //OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_Substitute,            OBJ_EVENT_PAL_TAG_SUBSTITUTE},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
@@ -1704,6 +1736,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     // Use palette from species palette table
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_SHINY(objectEvent), OW_FEMALE(objectEvent));
+    SetPlayerPalette(sprite->template->paletteTag,sprite); // playerCustom
     if (OW_GFX_COMPRESS && sprite->usingSheet)
         sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
     GetMapCoordsFromSpritePos(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
@@ -1744,6 +1777,7 @@ static u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEv
     if (subspriteTables)
         SetSubspriteTables(&gSprites[gObjectEvents[objectEventId].spriteId], subspriteTables);
 
+    HandleRematchIconForSingleObjectEvent(&gObjectEvents[objectEventId], objectEventId); // rematch_action
     return objectEventId;
 }
 
@@ -1863,6 +1897,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     }
 
     spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
+    SetPlayerPalette(gSprites[spriteId].template->paletteTag,&gSprites[spriteId]); //playerCustom
 
     Free(spriteTemplate);
 
@@ -1876,6 +1911,72 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     }
     return spriteId;
 }
+
+// Start siliconMerge
+
+static u32 LoadSpriteSheetWithTag(const struct ObjectEventGraphicsInfo *graphicsInfo, u32 tag)
+{
+    if (graphicsInfo->compressed)
+    {
+        struct CompressedSpriteSheet sSpriteSheet_Objects =
+        {
+            .data = graphicsInfo->images[0].data,
+            .size = graphicsInfo->images[0].size,
+            .tag = tag,
+        };
+        LoadCompressedSpriteSheet(&sSpriteSheet_Objects);
+    }
+    else
+    {
+        struct SpriteSheet sSpriteSheet_Objects =
+        {
+            .data = graphicsInfo->images[0].data,
+            .size = graphicsInfo->images[0].size,
+            .tag = tag,
+        };
+        LoadSpriteSheet(&sSpriteSheet_Objects);
+    }
+    return tag;
+}
+
+u8 CreateObjectGraphicsSprite2(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u32 tag)
+{
+    const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
+    u32 spriteId = MAX_SPRITES;
+    bool32 isShiny = graphicsId & OBJ_EVENT_MON_SHINY;
+    struct SpriteTemplate *spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
+
+    if (spriteTemplate == NULL)
+        return MAX_SPRITES;
+
+    spriteTemplate->tileTag = LoadSpriteSheetWithTag(graphicsInfo,tag);
+    spriteTemplate->paletteTag = graphicsInfo->paletteTag;
+    spriteTemplate->oam = graphicsInfo->oam;
+
+    spriteTemplate->anims = gDummySpriteAnimTable;
+    spriteTemplate->images = NULL;
+    spriteTemplate->affineAnims = gDummySpriteAffineAnimTable;
+
+    if (isShiny)
+        graphicsId -= SPECIES_SHINY_TAG;
+
+    if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
+    {
+        u32 paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, spriteTemplate);
+        spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
+    }
+    else if (spriteTemplate->paletteTag != TAG_NONE)
+    {
+        LoadObjectEventPalette(spriteTemplate->paletteTag);
+    }
+
+    spriteId = CreateSprite(spriteTemplate, x, y, 0);
+    SetPlayerPalette(gSprites[spriteId].template->paletteTag,&gSprites[spriteId]); // playerCustom
+
+    Free(spriteTemplate);
+    return spriteId;
+}
+// End siliconMerge
 
 #define sVirtualObjId   data[0]
 #define sVirtualObjElev data[1]
@@ -1921,6 +2022,7 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevati
         InitObjectPriorityByElevation(sprite, elevation);
         SetObjectSubpriorityByElevation(elevation, sprite, 1);
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(direction));
+        SetPlayerPalette(sprite->template->paletteTag,sprite); // playerCustom
     }
     return spriteId;
 }
@@ -2454,6 +2556,9 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     {
         switch (gMapHeader.regionMapSectionId)
         {
+             // Start siliconMerge
+             /*
+            // PSF TODO Update this with flavor text depending on location
         case MAPSEC_RUSTBORO_CITY:
         case MAPSEC_PEWTER_CITY:
             multi = TYPE_ROCK;
@@ -2492,6 +2597,8 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         case MAPSEC_VIRIDIAN_CITY:
             multi = TYPE_GROUND;
             break;
+            */
+             // End siliconMerge
         default:
             multi = NUMBER_OF_MON_TYPES;
         }
@@ -2710,7 +2817,9 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
 
         ResetObjectEventFldEffData(objectEvent);
         SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
+        SetPlayerPalette(sprite->template->paletteTag,sprite); // playerCustom
     }
+    HandleRematchIconForSingleObjectEvent(objectEvent,objectEventId); // rematch_action
 }
 
 static void ResetObjectEventFldEffData(struct ObjectEvent *objectEvent)
@@ -2723,6 +2832,7 @@ static void ResetObjectEventFldEffData(struct ObjectEvent *objectEvent)
     objectEvent->inShallowFlowingWater = FALSE;
     objectEvent->inSandPile = FALSE;
     objectEvent->inHotSprings = FALSE;
+    ResetRematchIconOnObject(objectEvent); // rematch_action
     ObjectEventClearHeldMovement(objectEvent);
 }
 
@@ -2750,7 +2860,12 @@ u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate *template, struct S
     u8 i = FindObjectEventPaletteIndexByTag(template->paletteTag);
     if (i == 0xFF)
         return i;
-    return UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
+    // Start playerCustom
+    //return UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
+    u32 paletteNum = UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
+    SetPlayerPalette(template->paletteTag,sprite);
+    return paletteNum;
+    // End playerCustom
 }
 
 // Set graphics *by info*
@@ -2782,6 +2897,7 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
     sprite->y += 16 + sprite->centerToCornerVecY;
     if (objectEvent->trackedByCamera)
         CameraObjectReset();
+    SetPlayerPalette(graphicsInfo->paletteTag,sprite); // playerCustom
 }
 
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u16 graphicsId)
@@ -3011,6 +3127,7 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    ApplyGlobalFieldPaletteTint(paletteSlot); // siliconMerge
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
@@ -3368,7 +3485,10 @@ static u8 UNUSED GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 m
     return gObjectEvents[objectEventId].trainerType;
 }
 
-static u8 UNUSED GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
+// Start siliconMerge
+//static u8 UNUSED GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
+u8 GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
+// End siliconMerge
 {
     return gObjectEvents[objectEventId].trainerType;
 }
@@ -3389,7 +3509,10 @@ u8 GetObjectEventBerryTreeId(u8 objectEventId)
     return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
 
-static const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+// Start siliconMerge
+//static const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+// End siliconMerge
 {
     const struct ObjectEventTemplate *templates;
     const struct MapHeader *mapHeader;
@@ -3507,6 +3630,10 @@ void InitObjectEventPalettes(u8 reflectionType)
     }
 }
 
+void RemoveTintFromObjectEventPalettes()
+{
+    PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], 0, 5);
+}
 u16 GetObjectPaletteTag(u8 palSlot)
 {
     u8 i;
@@ -3839,7 +3966,8 @@ bool8 MovementType_LookAround_Step2(struct ObjectEvent *objectEvent, struct Spri
 
 bool8 MovementType_LookAround_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4159,7 +4287,8 @@ bool8 MovementType_FaceDownAndUp_Step2(struct ObjectEvent *objectEvent, struct S
 
 bool8 MovementType_FaceDownAndUp_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4209,7 +4338,8 @@ bool8 MovementType_FaceLeftAndRight_Step2(struct ObjectEvent *objectEvent, struc
 
 bool8 MovementType_FaceLeftAndRight_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4259,7 +4389,8 @@ bool8 MovementType_FaceUpAndLeft_Step2(struct ObjectEvent *objectEvent, struct S
 
 bool8 MovementType_FaceUpAndLeft_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4309,7 +4440,8 @@ bool8 MovementType_FaceUpAndRight_Step2(struct ObjectEvent *objectEvent, struct 
 
 bool8 MovementType_FaceUpAndRight_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4359,7 +4491,8 @@ bool8 MovementType_FaceDownAndLeft_Step2(struct ObjectEvent *objectEvent, struct
 
 bool8 MovementType_FaceDownAndLeft_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4409,7 +4542,8 @@ bool8 MovementType_FaceDownAndRight_Step2(struct ObjectEvent *objectEvent, struc
 
 bool8 MovementType_FaceDownAndRight_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4459,7 +4593,8 @@ bool8 MovementType_FaceDownUpAndLeft_Step2(struct ObjectEvent *objectEvent, stru
 
 bool8 MovementType_FaceDownUpAndLeft_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4509,7 +4644,8 @@ bool8 MovementType_FaceDownUpAndRight_Step2(struct ObjectEvent *objectEvent, str
 
 bool8 MovementType_FaceDownUpAndRight_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4559,7 +4695,8 @@ bool8 MovementType_FaceUpLeftAndRight_Step2(struct ObjectEvent *objectEvent, str
 
 bool8 MovementType_FaceUpLeftAndRight_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4609,7 +4746,8 @@ bool8 MovementType_FaceDownLeftAndRight_Step2(struct ObjectEvent *objectEvent, s
 
 bool8 MovementType_FaceDownLeftAndRight_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
     {
         sprite->sTypeFuncId = 4;
         return TRUE;
@@ -4652,7 +4790,8 @@ bool8 MovementType_RotateCounterclockwise_Step1(struct ObjectEvent *objectEvent,
 
 bool8 MovementType_RotateCounterclockwise_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
         sprite->sTypeFuncId = 3;
     return FALSE;
 }
@@ -4692,7 +4831,8 @@ bool8 MovementType_RotateClockwise_Step1(struct ObjectEvent *objectEvent, struct
 
 bool8 MovementType_RotateClockwise_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent))
+    // if (WaitForMovementDelay(sprite) || ObjectEventIsTrainerAndCloseToPlayer(objectEvent)) // https://github.com/pret/pokeemerald/wiki/Trainers-No-Longer-Spin-to-Face-You-Right-As-You-Pass-Them
+    if (WaitForMovementDelay(sprite))
         sprite->sTypeFuncId = 3;
     return FALSE;
 }
@@ -5539,7 +5679,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
         direction = gObjectEvents[gPlayerAvatar.objectEventId].movementDirection;
         objectEvent->facingDirectionLocked = TRUE;
     }
-    
+
     MoveCoords(direction, &x, &y);
     GetCollisionAtCoords(objectEvent, x, y, direction); // Sets directionOverwrite for stairs
     if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
@@ -9243,6 +9383,11 @@ static void UpdateObjectEventOffscreen(struct ObjectEvent *objectEvent, struct S
 
     objectEvent->offScreen = FALSE;
 
+    // Start ForceLoadOffscreen
+    // https://www.pokecommunity.com/threads/simple-modifications-directory.416647/page-15#post-10410338
+    if (FlagGet(FLAG_FORCE_LOAD_OFFSCREEN_OBJ))
+        return;
+    // End ForceLoadOffscreen
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (sprite->coordOffsetEnabled)
     {
@@ -10614,7 +10759,10 @@ static void SpriteCB_VirtualObject(struct Sprite *sprite)
     UpdateObjectEventSpriteInvisibility(sprite, sprite->sInvisible);
 }
 
-static void UNUSED DestroyVirtualObjects(void)
+// Start siliconMerge
+//static void UNUSED DestroyVirtualObjects(void)
+void DestroyVirtualObjects(void)
+// End siliconMerge
 {
     int i;
 
@@ -11001,6 +11149,19 @@ u8 MovementAction_Fly_Finish(struct ObjectEvent *objectEvent, struct Sprite *spr
     return TRUE;
 }
 
+// Start siliconMerge
+void SetObjectMovementType(void)
+{
+    struct ObjectEvent *objectEvent = &gObjectEvents[GetObjectEventIdByLocalId(gSpecialVar_0x8005)];
+    u8 movementType = gSpecialVar_0x8006;
+
+    objectEvent->movementType = movementType;
+    objectEvent->directionSequenceIndex = 0;
+    objectEvent->playerCopyableMovement = 0;
+    gSprites[objectEvent->spriteId].callback = sMovementTypeCallbacks[movementType];
+    gSprites[objectEvent->spriteId].data[1] = 0;
+}
+// End siliconMerge
 bool8 MovementAction_EmoteX_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ObjectEventGetLocalIdAndMap(objectEvent, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
@@ -11017,6 +11178,15 @@ bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *object
     return TRUE;
 }
 
+// Start rematch_action
+bool8 MovementAction_Rematch_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    ObjectEventGetLocalIdAndMap(objectEvent, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
+    FieldEffectStart(FLDEFF_WANT_REMATCH);
+    sprite->sActionFuncId = 1;
+    return TRUE;
+}
+// End rematch_action
 // Get gfx data from daycare pokemon and store it in vars
 void GetDaycareGraphics(struct ScriptContext *ctx)
 {
@@ -11049,6 +11219,14 @@ void GetDaycareGraphics(struct ScriptContext *ctx)
     }
     gSpecialVar_Result = i;
 }
+
+// Start siliconMerge
+u32 Script_GetObjectFacingDirection(void)
+{
+    u8 objId = GetObjectEventIdByLocalId(VarGet(VAR_TEMP_1));
+    return gObjectEvents[objId].facingDirection;
+}
+// End siliconMerge
 
 // running slow
 static void StartSlowRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)

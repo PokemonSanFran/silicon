@@ -120,7 +120,7 @@ static void CB2_LoadMap2(void);
 static void VBlankCB_Field(void);
 static void SpriteCB_LinkPlayer(struct Sprite *);
 static void ChooseAmbientCrySpecies(void);
-static void DoMapLoadLoop(u8 *);
+//static void DoMapLoadLoop(u8 *); // siliconMerge
 static bool32 LoadMapInStepsLocal(u8 *, bool32);
 static bool32 LoadMapInStepsLink(u8 *);
 static bool32 ReturnToFieldLocal(u8 *);
@@ -181,8 +181,10 @@ static u16 KeyInterCB_DeferToEventScript(u32);
 static u16 GetDirectionForDpadKey(u16);
 static void CB1_OverworldLink(void);
 static void SetKeyInterceptCallback(u16 (*func)(u32));
-static void SetFieldVBlankCallback(void);
-static void FieldClearVBlankHBlankCallbacks(void);
+// Start siliconMerge
+//static void SetFieldVBlankCallback(void);
+//static void FieldClearVBlankHBlankCallbacks(void);
+// End siliconMerge
 static void TransitionMapMusic(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u16, u8);
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);

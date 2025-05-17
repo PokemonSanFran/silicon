@@ -1013,6 +1013,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
     switch (TRAINER_BATTLE_PARAM.mode)
     {
+    case TRAINER_BATTLE_CONTINUE_AFTER_LOSE: // siliconMerge
     case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         return EventScript_DoNoIntroTrainerBattle;
     case TRAINER_BATTLE_DOUBLE:

@@ -212,6 +212,33 @@ struct Time
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
+//Start Pokevial Branch
+struct Pokevial
+{
+    u8 Size : 4;
+    u8 Dose : 4;
+};
+//End Pokevial Branch
+
+//Start buzzr Branch
+struct Buzzr
+{
+    u8 Filter : 4;
+    bool8 Sort : 1;
+    bool8 IsRead[TWEET_COUNT];
+    u8 Order[TWEET_COUNT];
+};
+// End buzzr Branch
+
+// Start google_glass
+struct Glass
+{
+    u8 TrainerSort : 4;
+    u8 LocationSort : 4;
+    bool8 DiscoveredTrainer[TRAINERS_COUNT];
+};
+// End google_glass
+
 struct SaveBlock3
 {
 // Start siliconMerge
@@ -220,6 +247,9 @@ struct SaveBlock3
 #define QUEST_STATES 5 //Number of different quest states tracked in the saveblock
     struct QuestListProperties savedQuestListProperties;
     struct QuestListPosition savedQuestPositions;
+    struct Pokevial pokevial; //Pokevial Branch
+    struct Buzzr buzzr; //Buzzr Branch
+    struct Glass glass; // google_glass
     u8 questData[QUEST_FLAGS_COUNT * QUEST_STATES];
     u8 subQuests[SUB_FLAGS_COUNT];
     u8 startMenuAppIndex[NUM_TOTAL_APPS];
@@ -230,7 +260,10 @@ struct SaveBlock3
     u8 playerSubjectPronoun[PLAYER_NAME_LENGTH + 1];
     u8 playerObjectPronoun[PLAYER_NAME_LENGTH + 1];
     u8 playerPosesivePronoun[PLAYER_NAME_LENGTH + 1];
-// End siliconMerge	
+    u16 mazeLayoutSeed;
+    u16 mazeItemsSeed;
+    u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
+// End siliconMerge
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
 #endif
@@ -238,7 +271,10 @@ struct SaveBlock3
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    u8 dexNavSearchLevels[NUM_SPECIES];
+    // Start silconMerge
+    //u8 dexNavSearchLevels[NUM_SPECIES];
+    u8 dexNavSearchLevels[RESIDO_DEX_COUNT];
+    // End silconMerge
 #endif
     u8 dexNavChain;
 }; /* max size 1624 bytes */
@@ -566,14 +602,12 @@ struct SaveBlock2
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
 	// Start siliconMerge
-	/*
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]                           Replaced by optionsGame[GAME_OPTIONS_BUTTON_MODE]
-    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]                                  Replaced by optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]
-             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes     Replaced by optionsVisual[VISUAL_OPTIONS_FRAME_TYPE]
-             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]                                             Replaced by optionsMusic[MUSIC_OPTIONS_SPEAKER]
-             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]                                  Replaced by optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE]
-             u16 optionsBattleSceneOff:1; // whether battle animations are disabled                         Replaced by optionsBattle[BATTLE_OPTIONS_ANIMATIONS]
-	*/
+    ///*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]                           Replaced by optionsGame[GAME_OPTIONS_BUTTON_MODE]
+   // /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]                                  Replaced by optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]
+    //         u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes     Replaced by optionsVisual[VISUAL_OPTIONS_FRAME_TYPE]
+     //        u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]                                             Replaced by optionsMusic[MUSIC_OPTIONS_SPEAKER]
+      //       u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]                                  Replaced by optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE]
+       //      u16 optionsBattleSceneOff:1; // whether battle animations are disabled                         Replaced by optionsBattle[BATTLE_OPTIONS_ANIMATIONS]
 	// End siliconMerge
              u16 regionMapZoom:1; // whether the map is zoomed in
              //u16 padding1:4;
@@ -1061,32 +1095,6 @@ struct ExternalEventFlags
 } __attribute__((packed));/*size = 0x15*/
 
 
-//Start Pokevial Branch
-struct Pokevial
-{
-    u8 Size : 4;
-    u8 Dose : 4;
-};
-//End Pokevial Branch
-
-//Start buzzr Branch
-struct Buzzr
-{
-    u8 Filter : 4;
-    bool8 Sort : 1;
-    bool8 IsRead[TWEET_COUNT];
-    u8 Order[TWEET_COUNT];
-};
-// End buzzr Branch
-
-// Start google_glass
-struct Glass
-{
-    u8 TrainerSort : 4;
-    u8 LocationSort : 4;
-    bool8 DiscoveredTrainer[TRAINERS_COUNT];
-};
-// End google_glass
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -1116,6 +1124,7 @@ struct SaveBlock1
     u8 bagPocket_TMHMOwnedFlags[NUM_TM_BYTES]; //allow for an amount of TMs/HMs dictated by the BAG_TMHM_COUNT constant // PSF technicalmachine Branch
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
+    struct Coords16 savedPos;
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
     /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
@@ -1123,8 +1132,9 @@ struct SaveBlock1
     /*0x9C2*/ u8 unused_9C2[6];
 #if FREE_MATCH_CALL == FALSE
     /*0x9C8*/ u16 trainerRematchStepCounter;
-    /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
+    // /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES]; // siliconMerge
 #endif //FREE_MATCH_CALL
+    /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES]; // siliconMerge
     /*0xA2E*/ //u8 padding3[2];
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0xC70*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
@@ -1150,10 +1160,10 @@ struct SaveBlock1
     /*0x2B92*/ u8 outbreakLocationMapNum;
     /*0x2B93*/ u8 outbreakLocationMapGroup;
     /*0x2B94*/ u8 outbreakPokemonLevel;
-    /*0x2B95*/ u8 outbreakUnused1;
-    /*0x2B96*/ u16 outbreakUnused2;
+    // /*0x2B95*/ u8 outbreakUnused1; // siliconMerge
+    // /*0x2B96*/ u16 outbreakUnused2; // siliconMerge
     /*0x2B98*/ u16 outbreakPokemonMoves[MAX_MON_MOVES];
-    /*0x2BA0*/ u8 outbreakUnused3;
+    // /*0x2BA0*/ u8 outbreakUnused3; // siliconMerge
     /*0x2BA1*/ u8 outbreakPokemonProbability;
     /*0x2BA2*/ u16 outbreakDaysLeft;
     /*0x2BA4*/ struct GabbyAndTyData gabbyAndTyData;
@@ -1201,13 +1211,7 @@ struct SaveBlock1
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
     /*0x3???*/ struct Pokemon stolenTrade;
     // sizeof: 0x3???
-    u16 mazeLayoutSeed;
-    u16 mazeItemsSeed;
-    struct Pokevial pokevial; //Pokevial Branch
-    struct Buzzr buzzr; //Buzzr Branch
     /*0x??*/   struct Pokemon playerPartyBattleFrontier[PARTY_SIZE];
-    u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
-    struct Glass glass; // google_glass
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

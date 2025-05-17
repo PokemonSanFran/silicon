@@ -746,7 +746,11 @@
 #define STRINGID_FOGISTOODENSE                        744 // fogBattle
 #define STRINGID_ITEMSCANTBEUSEDNOWFOG                745 // fogBattle
 #define STRINGID_EMBOLDENEDATTACKEDFROMFOG            746 // fogBattle
-#define BATTLESTRINGS_COUNT                           747
+// Start siliconMerge
+//#define STRINGID_TOXICSPIKESBADLYPOISONED             730
+#define STRINGID_TOXICSPIKESBADLYPOISONED             747
+// End siliconMerge
+#define BATTLESTRINGS_COUNT                           748
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

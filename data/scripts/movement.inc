@@ -1,12 +1,20 @@
 @ Starting from here, these movements are considered
 @ 'safe' (won't put follower into a Pokeball)
 Common_Movement_FollowerSafeStart::
-Common_Movement_QuestionMark:
+// Start siliconMerge
+Common_Movement_QuestionMark::
+// End siliconMerge
 	emote_question_mark
 	step_end
 
-Common_Movement_ExclamationMark:
+// Start siliconMerge
+Common_Movement_ExclamationMark::
+// End siliconMerge
 	emote_exclamation_mark
+// Start siliconMerge
+Common_Movement_Heart:
+    emote_heart
+// End siliconMerge
 	step_end
 
 Common_Movement_Delay48:
@@ -59,15 +67,21 @@ Common_Movement_FaceUp:
 	face_up
 	step_end
 
-Common_Movement_WalkInPlaceDown:
+// Start siliconMerge
+Common_Movement_WalkInPlaceDown::
+// End siliconMerge
 	walk_in_place_down
 	step_end
 
-Common_Movement_WalkInPlaceLeft:
+// Start siliconMerge
+Common_Movement_WalkInPlaceLeft::
+// End siliconMerge
 	walk_in_place_left
 	step_end
 
-Common_Movement_WalkInPlaceRight:
+// Start siliconMerge
+Common_Movement_WalkInPlaceRight::
+// End siliconMerge
 	walk_in_place_right
 	step_end
 
@@ -100,6 +114,32 @@ Common_Movement_WalkUp:
 	walk_up
 	step_end
 
+// Start siliconMerge
+Common_Movement_WalkInPlaceUp::
+    walk_in_place_up
+    step_end
+
+Common_Movement_WalkDown:
+	walk_down
+	step_end
+
+Common_Movement_WalkLeft:
+	walk_left
+	step_end
+
+Common_Movement_WalkRight:
+	walk_right
+	step_end
+
+Common_Movement_LookAround:
+    face_left
+    delay_16
+    delay_16
+    face_right
+    delay_16
+    delay_16
+    step_end
+// End siliconMerge
 @ Unused
 Common_Movement_WalkUp2::
 	walk_up

@@ -453,6 +453,62 @@ static const u8 *ExpandPlaceholder_PlayerName(void)
     return gSaveBlock2Ptr->playerName;
 }
 
+// Start playerCustom
+static const u8 *ExpandPlaceholder_PlayerSubjectPronoun(void)
+{
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SUBJECT_PRONOUN]){
+        case 0:
+            return gText_They;
+        break;
+        case 1:
+            return gText_He;
+        break;
+        case 2:
+            return gText_She;
+        break;
+        default:
+            return gSaveBlock3Ptr->playerSubjectPronoun;
+        break;
+    }
+}
+
+static const u8 *ExpandPlaceholder_PlayerObjectPronoun(void)
+{
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_OBJECT_PRONOUN]){
+        case 0:
+            return gText_Them;
+        break;
+        case 1:
+            return gText_Him;
+        break;
+        case 2:
+            return gText_Her;
+        break;
+        default:
+            return gSaveBlock3Ptr->playerObjectPronoun;
+        break;
+    }
+}
+
+static const u8 *ExpandPlaceholder_PlayerPosesivePronoun(void)
+{
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN]){
+        case 0:
+            return gText_Their;
+        break;
+        case 1:
+            return gText_His;
+        break;
+        case 2:
+            return gText_Hers;
+        break;
+        default:
+            return gSaveBlock3Ptr->playerPosesivePronoun;
+        break;
+    }
+}
+// End playerCustom
+
 static const u8 *ExpandPlaceholder_StringVar1(void)
 {
     return gStringVar1;
@@ -539,6 +595,11 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_MAXIE]        = ExpandPlaceholder_Maxie,
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
         [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
+// Start playerCustom
+        [PLACEHOLDER_ID_SUBJECT]      = ExpandPlaceholder_PlayerSubjectPronoun,
+        [PLACEHOLDER_ID_OBJECT]       = ExpandPlaceholder_PlayerObjectPronoun,
+        [PLACEHOLDER_ID_POSSESSIVE]   = ExpandPlaceholder_PlayerPosesivePronoun,
+// End playerCustom
     };
 
     if (id >= ARRAY_COUNT(funcs))

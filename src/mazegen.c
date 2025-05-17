@@ -354,7 +354,7 @@ static void PlaceItemBall(u8 mazeWidth, u8 mazeHeight)
 
     u32 itemCoords[QUEST_KITCHENVOLUNTEERING_SUB_COUNT+1][2];
 
-    SeedRng(gSaveBlock1Ptr->mazeItemsSeed);
+    SeedRng(gSaveBlock3Ptr->mazeItemsSeed);
 
     itemCoords[MAZE_PLAYER_START_POSITION][0] = MAZE_PLAYER_SPAWN_X;
     itemCoords[MAZE_PLAYER_START_POSITION][1] = MAZE_PLAYER_SPAWN_Y;
@@ -432,13 +432,13 @@ struct Maze *GenerateMazeMap(u16 width, u16 height, const struct TemplateSet *te
 }
 
 void GenerateMazeLayoutSeed(void){
-    gSaveBlock1Ptr->mazeLayoutSeed = Random();
+    gSaveBlock3Ptr->mazeLayoutSeed = Random();
 }
 
 void GenerateMazeItemsSeed(void){
-    gSaveBlock1Ptr->mazeItemsSeed = Random();
+    gSaveBlock3Ptr->mazeItemsSeed = Random();
 
-    while (gSaveBlock1Ptr->mazeItemsSeed == gSaveBlock1Ptr->mazeLayoutSeed) {
-        gSaveBlock1Ptr->mazeItemsSeed = Random();
+    while (gSaveBlock3Ptr->mazeItemsSeed == gSaveBlock3Ptr->mazeLayoutSeed) {
+        gSaveBlock3Ptr->mazeItemsSeed = Random();
     }
 }

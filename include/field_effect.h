@@ -50,7 +50,7 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority);
 void StartEscapeRopeFieldEffect(void);
 void ReturnToFieldFromRegionMapWarpSelect(void); // siliconMerge
-void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
+void FieldEffectFreeGraphicsResources(struct Sprite *sprite); // autoSave
 void FieldEff_CaveDust(void);
 
 // Start qol_field_moves

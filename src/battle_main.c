@@ -3064,7 +3064,7 @@ static void BattleStartClearSetData(void)
 		// Start siliconMerge
 		// if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattleSceneOff == TRUE)
 		if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS] == TRUE)
-		// End siliconMerge		
+		// End siliconMerge
             gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
     else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) && GetBattleSceneInRecordedBattle())
@@ -5546,6 +5546,8 @@ static void HandleEndTurn_BattleLost(void)
     }
     SetFogVariableAfterLoss(); // fogBattle
     gBattleMainFunc = HandleEndTurn_FinishBattle;
+}
+
 // Start siliconMerge
 //used for Quest_GardenCleanUp
 // if defeated a mon on Route1 while quest is astive, increment by 1
@@ -5608,7 +5610,8 @@ void CountDefeatedCresaltaVista(void){
     VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,defeatedCresaltaVistaCount);
 }
 
-void CountDefeatedBackyard(void){
+void CountDefeatedBackyard(void)
+{
     u8 defeatedBackyardCount = VarGet(VAR_DEFEATED_BACKYARD_COUNT), i = 0;
 
     for (i = 0;i < 6;i++)
@@ -5689,8 +5692,8 @@ u8 Quest_Wildfirerisk_CheckDefeatedMon(void)
             QuestMenu_GetSetQuestState(QUEST_WILDFIRERISK,FLAG_SET_REWARD);
     }
     return 1;
-// End siliconMerge
 }
+// End siliconMerge
 
 static void HandleEndTurn_RanFromBattle(void)
 {

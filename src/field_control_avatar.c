@@ -317,22 +317,20 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     /*
 	if (input->pressedStartButton)
     {
-        PlaySE(SE_WIN_OPEN);	
+        PlaySE(SE_WIN_OPEN);
         ShowStartMenu();
+    }
 	*/
-		
+
         return TRUE;
 // End siliconMerge
-        return TRUE;
-    }
-    
+
     if (input->tookStep && TryFindHiddenPokemon())
         return TRUE;
-// end mapPreviews
-    
+
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
-    
+
     // Start siliconMerge
 	if (input->pressedRButton && ToggleRunBehavior())
         return TRUE;

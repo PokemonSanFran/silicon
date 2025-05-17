@@ -1842,6 +1842,7 @@ static const u16 sDrednawFormSpeciesIdTable[] = {
     SPECIES_DREDNAW,
 #if P_GIGANTAMAX_FORMS
     SPECIES_DREDNAW_GMAX,
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     SPECIES_DREDNAW_MEGA,
@@ -1951,6 +1952,7 @@ static const u16 sHattereneFormSpeciesIdTable[] = {
     SPECIES_HATTERENE,
 #if P_GIGANTAMAX_FORMS
     SPECIES_HATTERENE_GMAX,
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     SPECIES_HATTERENE_MEGA,
@@ -2086,6 +2088,7 @@ static const u16 sDuraludonFormSpeciesIdTable[] = {
     SPECIES_DURALUDON,
 #if P_GIGANTAMAX_FORMS
     SPECIES_DURALUDON_GMAX,
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     SPECIES_DURALUDON_MEGA,
@@ -2126,6 +2129,7 @@ static const u16 sUrshifuFormSpeciesIdTable[] = {
 #if P_GIGANTAMAX_FORMS
     SPECIES_URSHIFU_SINGLE_STRIKE_GMAX,
     SPECIES_URSHIFU_RAPID_STRIKE_GMAX,
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_MEGA,

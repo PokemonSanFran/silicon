@@ -63,7 +63,10 @@
 #define POKEBLOCKS_COUNT 40
 #define OBJECT_EVENTS_COUNT 16
 #define MAIL_COUNT (10 + PARTY_SIZE)
-#define SECRET_BASES_COUNT 20
+// Start siliconMerge
+#define SECRET_BASES_COUNT 1
+//#define SECRET_BASES_COUNT 20
+// End siliconMerge
 #define POKE_NEWS_COUNT 16
 // PSF TODO Update all of these values to match the max size of the pockets
 #define PC_ITEMS_COUNT 0 // siliconMerge
@@ -73,8 +76,12 @@
 #define BAG_TMHM_COUNT 408 // PSF technicalmachine Branch
 #define BAG_BERRIES_COUNT 68 // siliconMerge
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
-#define DECOR_MAX_SECRET_BASE 16
-#define DECOR_MAX_PLAYERS_HOUSE 12
+// Start siliconMerge
+//#define DECOR_MAX_SECRET_BASE 16
+//#define DECOR_MAX_PLAYERS_HOUSE 12
+#define DECOR_MAX_SECRET_BASE 1
+#define DECOR_MAX_PLAYERS_HOUSE 1
+// End siliconMerge
 #define APPRENTICE_COUNT 4
 #define APPRENTICE_MAX_QUESTIONS 9
 #define MAX_REMATCH_ENTRIES 100 // only REMATCH_TABLE_ENTRIES (78) are used
@@ -156,14 +163,16 @@ enum PlayerGender
 #define GIDDY_MAX_QUESTIONS    8
 
 // Start siliconMerge
+/*
 #define OPTIONS_BUTTON_MODE_NORMAL 0
 #define OPTIONS_BUTTON_MODE_LR 1
 #define OPTIONS_BUTTON_MODE_L_EQUALS_A 2
-/*
+*/
+#define OPTIONS_BUTTON_MODE_NORMAL 0
+
 #define OPTIONS_BUTTON_MODE_LR 0
 #define OPTIONS_BUTTON_MODE_L_EQUALS_A 1
 #define OPTIONS_BUTTON_MODE_L_MODE_COUNT 2
-*/
 // End siliconMerge
 
 #define OPTIONS_TEXT_SPEED_SLOW    0

@@ -790,6 +790,7 @@ struct BattleStruct
     u8 isSkyBattle:1;
     s32 aiDelayTimer; // Counts number of frames AI takes to choose an action.
     s32 aiDelayFrames; // Number of frames it took to choose an action.
+    s32 aiDelayCycles; // Number of cycles it took to choose an action.
     u16 playerBattleItemCount;
     u16 battlersItemIds[PARTY_SIZE][NUM_BATTLE_SIDES]; // Battle Settings: Take Wild Items, contains the id of the item held by each party member from every side.
     u8 timesGotHit[NUM_BATTLE_SIDES][PARTY_SIZE];

@@ -4083,6 +4083,7 @@ static void CursorCb_FieldMove(u8 taskId)
                 StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
                 DisplayFieldMoveExitAreaMessage(taskId);
                 sPartyMenuInternal->data[0] = fieldMove;
+                }
                 break;
             case FIELD_MOVE_FLY:
                 gPartyMenu.exitCallback = CB2_OpenFlyMap;

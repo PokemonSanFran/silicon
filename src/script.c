@@ -341,9 +341,11 @@ const u8 *MapHeaderCheckScriptTable(u8 tag)
             return NULL; // Reached end of table
         ptr += 2;
         // Start Trigger-Map-Scripts-By_Flag
+        // Start Trigger-Map-Scripts-By_Flag
 		// https://github.com/pret/pokeemerald/wiki/Trigger-Map-Scripts-By-Flag
         bool32 isFlag = varIndex1 < VARS_START;
         bool32 flagSet = isFlag && FlagGet(varIndex1);
+		// End Trigger-Map-Scripts-By_Flag
         // End Trigger-Map-Scripts-By_Flag
 
         // Read second var

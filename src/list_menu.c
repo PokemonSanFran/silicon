@@ -213,8 +213,8 @@ static const struct Subsprite sSubsprite_RedOutline3 =
     .shape = SPRITE_SHAPE(8x8),
     .size = SPRITE_SIZE(8x8),
     // Start siliconMerge
-	.tileOffset = 0,
-	.tileOffset = 2, 
+	//.tileOffset = 0,
+	.tileOffset = 2,
 	// End siliconMerge
     .priority = 0,
 };
@@ -1494,7 +1494,6 @@ void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, st
    }
 }
 // End siliconMerge
-}
 
 static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
 {

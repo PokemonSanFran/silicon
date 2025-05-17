@@ -191,6 +191,7 @@ static const struct FormChange sGyaradosFormChangeTable[] = {
 static const struct FormChange sLaprasFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_LAPRAS_GMAX},
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_LAPRAS_MEGA, ITEM_LAPRASNITE},
@@ -1104,6 +1105,7 @@ static const struct FormChange sDrednawFormChangeTable[] =
 {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_DREDNAW_GMAX},
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_DREDNAW_MEGA, ITEM_DREDNAWNITE},
@@ -1146,6 +1148,7 @@ static const struct FormChange sSandacondaFormChangeTable[] =
 {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_SANDACONDA_GMAX},
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_SANDACONDA_MEGA, ITEM_SANDACONDANITE},
@@ -1205,6 +1208,7 @@ static const struct FormChange sHattereneFormChangeTable[] =
 {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_HATTERENE_GMAX},
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_HATTERENE_MEGA, ITEM_HATTERENENITE},
@@ -1271,6 +1275,7 @@ static const struct FormChange sCopperajahFormChangeTable[] = {
 static const struct FormChange sDuraludonFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_DURALUDON_GMAX},
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_DURALUDON_MEGA, ITEM_DURALUDONNITE},
@@ -1312,6 +1317,7 @@ static const struct FormChange sUrshifuSingleStrikeFormChangeTable[] = {
 static const struct FormChange sUrshifuRapidStrikeFormChangeTable[] = {
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_URSHIFU_RAPID_STRIKE_GMAX},
+#endif
 // Start siliconMerge
 #if P_MEGA_EVOLUTIONS
     {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_URSHIFU_RAPID_STRIKE_STYLE_MEGA, ITEM_URSHIFUNITE_RAPID},

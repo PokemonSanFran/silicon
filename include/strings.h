@@ -2396,7 +2396,7 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
-//Start PSF Locations
+// Start PSF Locations
 extern const u8 gText_QiuVillage[];
 extern const u8 gText_HalerbaCity[];
 extern const u8 gText_PetarosaBorough[];
@@ -2474,7 +2474,7 @@ extern const u8 gText_HalerbaWilds[];
 extern const u8 gText_SharpriseSpire[];
 extern const u8 gText_PARC[];
 extern const u8 gText_Agatevillage[];
-//End PSF Locations
+// End PSF Locations
 
 // Start VS Garbador Choose side
 extern const u8 gText_DontCare[];
@@ -2495,7 +2495,7 @@ extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
-//Start CorporateSponsor
+// Start CorporateSponsor
 extern const u8 gText_Buzzr[];
 extern const u8 gText_Arriba[];
 extern const u8 gText_Presto[];
@@ -2539,7 +2539,7 @@ extern const u8 gText_ChosenStarter[];
 extern const u8 gText_ImProbablyBetterThanYou[];
 // End Debug Start
 
-//Start Save Screen
+// Start Save Screen
 extern const u8 gText_SaveYourAdventure[];
 extern const u8 gText_NowSavingAdventure[];
 extern const u8 gText_ThereWasAnError[];
@@ -2549,7 +2549,7 @@ extern const u8 gText_EraseQuestion[];
 extern const u8 gText_YouSaved[];
 extern const u8 gText_ConfirmOverwrite[];
 extern const u8 gText_CancelOverwrite[];
-//End Save Screen
+// End Save Screen
 
 //Start Pokevial Branch
 extern const u8 gText_PokevialHasDoses[];
@@ -2561,11 +2561,11 @@ extern const u8 gText_YourPkmnWereRestored[];
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
-//Start Fainted Mon
+// Start Fainted Mon
 extern const u8 gText_CantBeWithdrawn[];
-//End Fainted Mon
+// End Fainted Mon
 
-//Start Bag Items
+// Start Bag Items
 extern const u8 gText_ThisItemCannotBeUsed[];
 // End Bag Items
 extern const u8 gText_BasePointsResetToZero[];

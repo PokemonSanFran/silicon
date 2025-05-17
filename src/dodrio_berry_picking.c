@@ -24,6 +24,7 @@
 #include "window.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "ui_options_menu.h" // siliconMerge
 
 // Note that in this file 'Dodrio Berry Picking' is often
 // shortened to DodrioGame or just Game for convenience
@@ -4614,12 +4615,9 @@ static void LoadGfx(void)
         break;
     case 4:
         // Start siliconMerge
-		#ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
-        LoadWindowFrameGfx(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FRAME_TYPE]);
-        #else
-		// End siliconMerge
-        LoadWindowFrameGfx(gSaveBlock2Ptr->optionsWindowFrameType);
-        #endif // siliconMerge
+        //LoadWindowFrameGfx(gSaveBlock2Ptr->optionsWindowFrameType);
+        LoadWindowFrameGfx(gSaveBlock2Ptr->optionsVisual[0]);
+        // End siliconMerge
         LoadUserWindowFrameGfx();
         sGfx->state++;
         break;

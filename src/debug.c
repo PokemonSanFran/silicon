@@ -249,7 +249,7 @@ enum { //Jump Cutscenes
     DEBUG_JUMP_MENU_ITEM_IMIN,
     DEBUG_JUMP_MENU_ITEM_YOUCANTSTOPME,
     DEBUG_JUMP_MENU_ITEM_WECANSTOPYOUACTUALLY,
- // End siliconMerge	
+ // End siliconMerge
 };
 
 enum FlagsVarsDebugMenu
@@ -360,6 +360,7 @@ enum BerryFunctionsMenu
 #define DEBUG_MENU_WIDTH_MAIN 17
 #define DEBUG_MENU_HEIGHT_MAIN 9
 
+#define DEBUG_MENU_WIDTH_EXTRA_WIDE 20
 #define DEBUG_MENU_WIDTH_EXTRA 10
 #define DEBUG_MENU_HEIGHT_EXTRA 4
 
@@ -703,7 +704,7 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
 // Start siliconMerge
     [DEBUG_MENU_ITEM_QUEST]     = {COMPOUND_STRING("Quest…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_QUEST},
     [DEBUG_MENU_ITEM_JUMP]     = {COMPOUND_STRING("Story Jump…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_JUMP},
-// End siliconMerge	
+// End siliconMerge
     [DEBUG_MENU_ITEM_UTILITIES]     = {COMPOUND_STRING("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}"),    DEBUG_MENU_ITEM_UTILITIES},
     [DEBUG_MENU_ITEM_PCBAG]         = {COMPOUND_STRING("PC/Bag…{CLEAR_TO 110}{RIGHT_ARROW}"),       DEBUG_MENU_ITEM_PCBAG},
     [DEBUG_MENU_ITEM_PARTY]         = {COMPOUND_STRING("Party…{CLEAR_TO 110}{RIGHT_ARROW}"),        DEBUG_MENU_ITEM_PARTY},

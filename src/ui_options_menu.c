@@ -963,9 +963,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [VISUAL_OPTIONS_PRESET]          = VISUAL_PRESET_DEFAULT,
             [VISUAL_OPTIONS_UNITS]           = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD,
             [VISUAL_OPTIONS_TEXT_SPEED]      = VISUAL_OPTION_TEXTSPEED_FAST,
-            #ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
-            [VISUAL_OPTIONS_FRAME_TYPE]      = 0,
-            #endif
             [VISUAL_OPTIONS_FONT_SWITCHER]   = VISUAL_OPTION_FONT_SWITCHER_EMERALD,
             [VISUAL_OPTIONS_COLOR]           = VISUAL_OPTION_COLOR_PLATINUM,
             [VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_INDIVIDUAL_VALUES,
@@ -974,9 +971,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [VISUAL_OPTIONS_PRESET]          = VISUAL_PRESET_SPEEDRUN,
             [VISUAL_OPTIONS_UNITS]           = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD,
             [VISUAL_OPTIONS_TEXT_SPEED]      = VISUAL_OPTION_TEXTSPEED_INSTANT,
-            #ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
-            [VISUAL_OPTIONS_FRAME_TYPE]      = 0,
-            #endif
             [VISUAL_OPTIONS_FONT_SWITCHER]   = VISUAL_OPTION_FONT_SWITCHER_EMERALD,
             [VISUAL_OPTIONS_COLOR]           = VISUAL_OPTION_COLOR_PLATINUM,
             [VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_INDIVIDUAL_VALUES,
@@ -2012,57 +2006,6 @@ static const struct OptionData VisualSettings_Settings_Options[NUM_OPTIONS_VISUA
             },
         .numOptions = 4,
     },
-    #ifdef SHOW_VISUAL_OPTIONS_FRAME_TYPE
-    [VISUAL_OPTIONS_FRAME_TYPE] =
-    {
-        .title = _("Frame Type"),
-        .options = {
-            _("Frame 1"),
-            _("Frame 2"),
-            _("Frame 3"),
-            _("Frame 4"),
-            _("Frame 5"),
-            _("Frame 6"),
-            _("Frame 7"),
-            _("Frame 8"),
-            _("Frame 9"),
-            _("Frame 10"),
-            _("Frame 11"),
-            _("Frame 12"),
-            _("Frame 13"),
-            _("Frame 14"),
-            _("Frame 15"),
-            _("Frame 16"),
-            _("Frame 17"),
-            _("Frame 18"),
-            _("Frame 19"),
-            _("Frame 20"),
-            },
-        .optionDescription = {
-            _("Frame 1"),
-            _("Frame 2"),
-            _("Frame 3"),
-            _("Frame 4"),
-            _("Frame 5"),
-            _("Frame 6"),
-            _("Frame 7"),
-            _("Frame 8"),
-            _("Frame 9"),
-            _("Frame 10"),
-            _("Frame 11"),
-            _("Frame 12"),
-            _("Frame 13"),
-            _("Frame 14"),
-            _("Frame 15"),
-            _("Frame 16"),
-            _("Frame 17"),
-            _("Frame 18"),
-            _("Frame 19"),
-            _("Frame 20"),
-            },
-        .numOptions = 20,
-    },
-    #endif
     [VISUAL_OPTIONS_FONT_SWITCHER] =
     {
         .title = _("Font Switcher"),

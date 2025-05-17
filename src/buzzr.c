@@ -1104,7 +1104,7 @@ static u16 GetLikes(u16 tweetId)
 
 bool32 Buzzr_IsTweetRead(u16 tweetId)
 {
-    return gSaveBlock1Ptr->buzzr.IsRead[tweetId];
+    return gSaveBlock3Ptr->buzzr.IsRead[tweetId];
 }
 
 const u8 *GetUsername(u16 userId)
@@ -1655,7 +1655,7 @@ static void SetNumTimelineTweets(u32 num)
 
 static u32 GetTweetIdFromSaveblockPosition(u32 index)
 {
-    return gSaveBlock1Ptr->buzzr.Order[index];
+    return gSaveBlock3Ptr->buzzr.Order[index];
 }
 
 static bool32 IfTweetIdInSaveBlockIsZero(u32 index)
@@ -1800,8 +1800,8 @@ static u32 GetFilter(void)
 
 static void ReadFilterAndModeFromSaveBlock(void)
 {
-    sBuzzrState->filter = gSaveBlock1Ptr->buzzr.Filter;
-    sBuzzrState->oldestTop = gSaveBlock1Ptr->buzzr.Sort;
+    sBuzzrState->filter = gSaveBlock3Ptr->buzzr.Filter;
+    sBuzzrState->oldestTop = gSaveBlock3Ptr->buzzr.Sort;
 }
 
 static void WriteTimelineOrderToSaveBlock(void)
@@ -1809,35 +1809,35 @@ static void WriteTimelineOrderToSaveBlock(void)
     u32 j = 0;
 
     for(j = 0; j < TWEET_COUNT; j++)
-        gSaveBlock1Ptr->buzzr.Order[j] = GetTweetIdFromPosition(j);
+        gSaveBlock3Ptr->buzzr.Order[j] = GetTweetIdFromPosition(j);
 }
 
 void Buzzr_MarkTweetAsRead(u16 tweetId)
 {
-    gSaveBlock1Ptr->buzzr.IsRead[tweetId] = TRUE;
+    gSaveBlock3Ptr->buzzr.IsRead[tweetId] = TRUE;
 }
 
 static u32 WriteFilterToSaveBlock(u32 filter)
 {
-    gSaveBlock1Ptr->buzzr.Filter = filter;
+    gSaveBlock3Ptr->buzzr.Filter = filter;
     return filter;
 }
 
 static bool32 WriteSortToSaveBlock(bool32 oldestTop)
 {
-    gSaveBlock1Ptr->buzzr.Sort = oldestTop;
+    gSaveBlock3Ptr->buzzr.Sort = oldestTop;
     return oldestTop;
 }
 
 void Buzzr_ResetSaveData(void)
 {
     u32 i;
-    gSaveBlock1Ptr->buzzr.Filter = 0;
-    gSaveBlock1Ptr->buzzr.Sort = FALSE;
+    gSaveBlock3Ptr->buzzr.Filter = 0;
+    gSaveBlock3Ptr->buzzr.Sort = FALSE;
     for (i = 0; i < TWEET_COUNT ; i++)
     {
-        gSaveBlock1Ptr->buzzr.IsRead[i] = FALSE;
-        gSaveBlock1Ptr->buzzr.Order[i] = 0;
+        gSaveBlock3Ptr->buzzr.IsRead[i] = FALSE;
+        gSaveBlock3Ptr->buzzr.Order[i] = 0;
     }
 }
 

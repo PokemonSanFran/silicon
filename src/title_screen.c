@@ -862,6 +862,8 @@ static void UNUSED CB2_GoToClearSaveDataScreen(void) // siliconMerge
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitClearSaveDataScreen);
+}
+
 // Start siliconMerge
 static void CB2_GoToDebugStartScreen(void)
 {

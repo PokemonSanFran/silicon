@@ -789,7 +789,7 @@ bool32 IsPlayerAllowedToCatchBattler(u8 battlerId)
         return TRUE;
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_FIRST_ONLY:
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_DUPLICATE:
-        if (gSaveBlock1Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup])
+        if (gSaveBlock3Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup])
             return FALSE;
         break;
     }
@@ -800,9 +800,9 @@ bool32 IsPlayerAllowedToCatchBattler(u8 battlerId)
 void TryToSetFirstPokemonCatchFlag(void)
 {
     if (GetFirstPokemonCatchOption() == BATTLE_OPTION_FIRST_POKEMON_CATCH_FIRST_ONLY && GetCurrentMapType() == MAP_TYPE_ROUTE)
-        gSaveBlock1Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup] = TRUE;
+        gSaveBlock3Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup] = TRUE;
     else if (GetFirstPokemonCatchOption() == BATTLE_OPTION_FIRST_POKEMON_CATCH_DUPLICATE && GetCurrentMapType() == MAP_TYPE_ROUTE && gBattleOutcome == B_OUTCOME_CAUGHT)
-        gSaveBlock1Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup] = TRUE;
+        gSaveBlock3Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup] = TRUE;
 }
 
 // ***********************************************************************

@@ -1764,3 +1764,9 @@ u32 GetSpanPerImage(u32 shape, u32 size)
 {
     return sSpanPerImage[shape][size];
 }
+// Start pokedex
+void EnableProcessSpriteCopyRequests(void)
+{
+    sShouldProcessSpriteCopyRequests = TRUE;
+}
+// End pokedex

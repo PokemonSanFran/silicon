@@ -1367,7 +1367,7 @@ static void ItemStorage_PrintItemQuantity(u8 windowId, u16 value, u32 mode, u8 x
 // Start an item Withdraw/Toss
 static void ItemStorage_DoItemAction(u8 taskId)
 {
-    u8 *end;
+    //u8 *end; //disable player pc
     s16 *data = gTasks[taskId].data;
     u16 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
     pos = 0; //disable player pc
@@ -1376,7 +1376,6 @@ static void ItemStorage_DoItemAction(u8 taskId)
 
     if (!tInTossMenu)
     {
-        //if (gSaveBlock1Ptr->pcItems[pos].quantity == 1) // disable player pc
         if (gSaveBlock1Ptr->pcItems[pos].quantity == 1)
         {
             // Withdrawing 1 item, do it automatically

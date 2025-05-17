@@ -267,7 +267,7 @@ static u8 RunSaveCallback(void);
 static void ShowSaveMessage(const u8 *message, u8 (*saveCallback)(void));
 static void HideSaveMessageWindow(void);
 static void HideSaveInfoWindow(void);
-static void SaveStartTimer(void);
+//static void SaveStartTimer(void); // siliconMerge
 static bool8 SaveSuccesTimer(void);
 static bool8 SaveErrorTimer(void);
 static void InitBattlePyramidRetire(void);
@@ -993,7 +993,10 @@ static void HideSaveInfoWindow(void)
     RemoveSaveInfoWindow();
 }
 
-static void SaveStartTimer(void)
+// Start siliconMerge
+//static void SaveStartTimer(void)
+void SaveStartTimer(void)
+// End siliconMerge
 {
     sSaveDialogTimer = 60;
 }
@@ -1505,3 +1508,15 @@ void Script_ForceSaveGame(struct ScriptContext *ctx)
     gMenuCallback = SaveCallback;
     sSaveDialogCallback = SaveSavingMessageCallback;
 }
+// Start autoSave
+void DoAutoSave(void)
+{
+    SaveMapView();
+    sSavingComplete = FALSE;
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
+    //u8 saveStatus = TrySavingData(SAVE_NORMAL);
+    TrySavingData(SAVE_NORMAL);
+    gDifferentSaveFile = FALSE;
+    return;
+}
+// End autoSave

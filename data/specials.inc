@@ -554,7 +554,7 @@ gSpecials::
     def_special SetObjectMovementType
     def_special CheckNumArantrazExhibitDefeated
     def_special GetCurrentMap
-// End siliconMerge	
+// End siliconMerge
 	def_special TrySpecialOverworldEvo
 // Start siliconMerge
     def_special ResetHealLocationToPerlaciaCity
@@ -564,7 +564,7 @@ gSpecials::
 	def_special AlohaFromAlolaCheck
 	def_special IsPartyFullOfShinyOctillery
 	def_special Script_CheckForMonAndMove
-	def_special GetPokedexCompletionRate
+	def_special GetPokedexPercentage
 	def_special Script_GetCurrentMapName
 	def_special CopyMonToStolenTradeStorage
 	def_special CopyMonFromStolenTradeStorage
@@ -658,7 +658,7 @@ gSpecials::
     def_special ResetCutsceneStatus
 
     def_special GetFalseTimelineCompletion
-// End siliconMerge	
+// End siliconMerge
 	def_special GetNumberSprayStrength
 	def_special GetSprayId
 	def_special GetLastUsedSprayType
@@ -684,7 +684,7 @@ gSpecials::
 	def_special Script_GetObjectFacingDirection
     def_special CheckPlayerCanPlant
     def_special Quest_RPS_CalculateWager
-// End siliconMerge	
+// End siliconMerge
 	def_special UseBlankMessageToCancelPokemonPic
 	def_special EnterCode
 	def_special GetCodeFeedback
