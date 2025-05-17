@@ -11,6 +11,8 @@ Common_Movement_QuestionMark::
 Common_Movement_ExclamationMark::
 // End siliconMerge
 	emote_exclamation_mark
+	step_end
+
 // Start siliconMerge
 Common_Movement_Heart:
     emote_heart
