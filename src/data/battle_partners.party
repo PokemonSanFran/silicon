@@ -41,3 +41,134 @@ EVs: 252 Atk / 252 SpA / 6 SpD
 - Protect
 - Solar Beam
 - Dragon Claw
+
+=== PARTNER_KAI ===
+Name: Kai
+Class: Comrade
+Pic: Kai
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_ADAORA ===
+Name: Adaora
+Class: Comrade
+Pic: Adaora
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_BD ===
+Name: Bd
+Class: Ex Leader
+Pic: Bd
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_BELEN ===
+Name: Belen
+Class: Leader
+Pic: Belen
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_DIMU ===
+Name: Dimu
+Class: Leader
+Pic: Dimu
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_DOYLE ===
+Name: Doyle
+Class: Leader
+Pic: Doyle
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_EMRYS ===
+Name: Emrys
+Class: Leader
+Pic: Emrys
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_IMELDA ===
+Name: Imelda
+Class: Ex Leader
+Pic: Imelda
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_KAUNA ===
+Name: Kauna
+Class: Leader
+Pic: Kauna
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_KEI_YING ===
+Name: Kei_Ying
+Class: Ex Leader
+Pic: Kei_Ying
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_MAGNUS ===
+Name: Magnus
+Class: Ex Elite Four
+Pic: Magnus
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_NERIENE ===
+Name: Neriene
+Class: Leader
+Pic: Neriene
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
+=== PARTNER_SHINZO ===
+Name: Shinzo
+Class: Leader
+Pic: Shinzo
+Gender: Male
+Music: Male
+
+Raichu
+Level: 1
+
