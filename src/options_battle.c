@@ -1163,7 +1163,7 @@ void AttemptFleeWithL(u32 battler, u32 mode)
 
     PlaySE(SE_SELECT);
     TryHideLastUsedBall();
-    BtlController_EmitTwoReturnValues(battler, BUFFER_B, mode, 0);
+    BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, mode, 0);
 
     if (mode == B_ACTION_RUN)
         PlayerBufferExecCompleted(battler);
