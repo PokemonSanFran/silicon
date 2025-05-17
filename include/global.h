@@ -248,7 +248,6 @@ struct SaveBlock3
     struct QuestListProperties savedQuestListProperties;
     struct QuestListPosition savedQuestPositions;
     struct Pokevial pokevial; //Pokevial Branch
-    struct Buzzr buzzr; //Buzzr Branch
     struct Glass glass; // google_glass
     u8 questData[QUEST_FLAGS_COUNT * QUEST_STATES];
     u8 subQuests[SUB_FLAGS_COUNT];
@@ -271,10 +270,7 @@ struct SaveBlock3
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    // Start silconMerge
-    //u8 dexNavSearchLevels[NUM_SPECIES];
-    u8 dexNavSearchLevels[RESIDO_DEX_COUNT];
-    // End silconMerge
+    u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     u8 dexNavChain;
 }; /* max size 1624 bytes */
@@ -637,6 +633,7 @@ struct SaveBlock2
     u8 optionsVisual[NUM_OPTIONS_VISUAL_SETTINGS];
     u8 optionsMusic[NUM_OPTIONS_MUSIC_SETTINGS];
     u8 optionsRandom[NUM_OPTIONS_RANDOM_SETTINGS];
+    struct Buzzr buzzr; //Buzzr Branch
 	// End siliconMerge
 }; // sizeof=0xF2C
 
