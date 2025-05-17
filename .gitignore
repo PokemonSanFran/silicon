@@ -44,7 +44,11 @@ tools/trainerproc/trainerproc
 tags
 make.txt
 *.vimsess
-*.inc
+data/maps/*/*.inc
+data/quests/*/*.inc
+data/cutscenes/*/*.inc
+src/data/battle_partners.h
+src/data/trainers.h
 *.mermaid
 tools/poryscript/poryscript
 tools/poryscript/*.md
