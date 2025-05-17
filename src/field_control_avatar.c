@@ -51,6 +51,8 @@
 // End siliconMerge
 #include "siliconDaycare.h" // siliconDaycare
 
+COMMON_DATA u8 gSelectedObjectEvent = 0;
+
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
 // Start changePlayerDirection
