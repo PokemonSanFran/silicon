@@ -2,5 +2,5 @@
 	path = tools/poryscript
 	url = https://github.com/huderlem/poryscript
 [submodule "tools/porypal"]
-	path = tools/porypal/
+	path = tools/porypal
 	url = https://github.com/Loxed/porypal/
