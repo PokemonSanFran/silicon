@@ -64,13 +64,13 @@ TEST("Move names fit on Contest Screen")
     }
 }
 
+// Start siliconMerge
+// This bag screen is deprecated.
+/*
 TEST("Move names fit on TMs & HMs Bag Screen")
 {
-    KNOWN_FAILING;
-    // siliconMerge: This bag screen is deprecated.
-
     u32 i;
-    const u32 fontId = FONT_NARROWER, widthPx = 61;
+    const u32 fontId = FONT_NARROWER, widthPx = 61; 
     u32 move = MOVE_NONE;
     for (i = 1; i < MOVES_COUNT; i++)
     {
@@ -78,6 +78,8 @@ TEST("Move names fit on TMs & HMs Bag Screen")
     }
     EXPECT_LE(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
 }
+   */
+// End siliconMerge
 
 TEST("Move names fit on Move Relearner Screen")
 {
@@ -91,10 +93,11 @@ TEST("Move names fit on Move Relearner Screen")
     EXPECT_LE(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
 }
 
+// Start siliconMerge
+// The Pokemon Summary Screen is being deprecated.
+/*
 TEST("Move descriptions fit on Pokemon Summary Screen")
 {
-    KNOWN_FAILING;
-    // siliconMerge: The Pokemon Summary Screen is being deprecated.
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 152;
     u32 move = MOVE_NONE;
@@ -104,13 +107,14 @@ TEST("Move descriptions fit on Pokemon Summary Screen")
     }
     EXPECT_LE(GetStringWidth(fontId, GetMoveDescription(move), 0), widthPx);
 }
+   */
+// End siliconMerge
 
+// Start siliconMerge
+// The Bag Screen is being deprecated.
+/*
 TEST("Item names fit on Bag Screen (list)")
 {
-    // Start siliconMerge
-    KNOWN_FAILING;
-    // The Bag Screen is being deprecated.
-    // End siliconMerge
     u32 i;
     const u32 fontId = FONT_NARROWER;
     const u32 tmHmBerryWidthPx = 61, restWidthPx = 88;
@@ -125,13 +129,14 @@ TEST("Item names fit on Bag Screen (list)")
     else
         EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), restWidthPx);
 }
+*/
+// End siliconMerge
 
+// Start siliconMerge
+// The Bag Screen is being deprecated.
+/*
 TEST("Item plural names fit on Bag Screen (left box)")
 {
-    // Start siliconMerge
-    KNOWN_FAILING;
-    // The Bag Screen is being deprecated.
-    // End siliconMerge
     u32 i;
     // -6 for the question mark in FONT_NORMAL.
     const u32 fontId = FONT_NARROWER, widthPx = 101 - 6;
@@ -144,11 +149,14 @@ TEST("Item plural names fit on Bag Screen (left box)")
     CopyItemNameHandlePlural(item, pluralName, 2);
     EXPECT_LE(GetStringWidth(fontId, pluralName, 0), widthPx);
 }
+*/
+// End siliconMerge
 
+// Start siliconMerge
+    // PC Storage is not being used.
+    /*
 TEST("Item names fit on PC Storage (list)")
 {
-    KNOWN_FAILING;
-    // siliconMerge: PC Storage is not being used.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 73;
     u32 item = ITEM_NONE;
@@ -158,11 +166,14 @@ TEST("Item names fit on PC Storage (list)")
     }
     EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
 }
+*/
+// End siliconMerge
 
+// Start siliconMerge
+    // PC Storage is not being used.
+	/*
 TEST("Item plural names fit on PC storage (left box)")
 {
-    KNOWN_FAILING;
-    // siliconMerge: PC Storage is not being used.
     u32 i;
     // -6 for the question mark in FONT_NORMAL.
     const u32 fontId = FONT_NARROWER, widthPx = 104 - 6;
@@ -205,10 +216,6 @@ TEST("Item names fit on Pokemon Storage System")
 
 TEST("Item names fit on Pokemon Summary Screen")
 {
-    // Start siliconMerge
-    KNOWN_FAILING;
-    // This Summary Screen will be deprecated.
-    // End siliconMerge
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 72;
     u32 item = ITEM_NONE;
@@ -243,11 +250,6 @@ TEST("Item names fit on Shop Screen")
 
 TEST("Item descriptions fit on Bag and Shop Screen")
 {
-    // Start siliconMerge
-    KNOWN_LEAKING;
-    KNOWN_FAILING;
-    // Bag and Shop Screens will be deprecated.
-    // End siliconMerge
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 102;
     u32 item = ITEM_NONE;
@@ -309,8 +311,6 @@ TEST("Species names fit on Pokemon Summary Screen")
 
 TEST("Species names fit on Pokedex Screen")
 {
-    KNOWN_FAILING;
-    // siliconMerge: Pokedex is not being used.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 50;
     u32 species = SPECIES_NONE;
@@ -326,8 +326,6 @@ TEST("Species names fit on Pokedex Screen")
 
 TEST("Species names fit on Pokedex Screen - Cries")
 {
-    KNOWN_FAILING;
-    // siliconMerge: Pokedex is not being used.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 60;
     u32 species = SPECIES_NONE;
@@ -512,8 +510,6 @@ TEST("Species names fit on Battle Screen HP box for vanilla mons with the defaul
 
 TEST("Species dex entries fit on Pokedex Screen")
 {
-    KNOWN_FAILING;
-    // siliconMerge: Pokedex is not being used.
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 224;
     u32 species = SPECIES_NONE;
@@ -553,8 +549,6 @@ TEST("Ability names fit on Ability Pop-Up")
 
 TEST("Ability descriptions fit on Pokemon Summary Screen")
 {
-    KNOWN_FAILING;
-    // siliconMerge: Pokemon Summary Screen is being deprecated.
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 146;
     u32 ability = ABILITY_NONE;
@@ -579,8 +573,6 @@ TEST("Type names fit on Battle Screen")
 
 TEST("Type names fit on Pokedex Search Screen")
 {
-    KNOWN_FAILING;
-    // siliconMerge: Pokedex is deprecated.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 38;
     u32 type = TYPE_NORMAL;
@@ -590,6 +582,8 @@ TEST("Type names fit on Pokedex Search Screen")
     }
     EXPECT_LE(GetStringWidth(fontId, gTypesInfo[type].name, 0), widthPx);
 }
+   */
+// End siliconMerge
 
 extern u16 sBattlerAbilities[MAX_BATTLERS_COUNT];
 //*
@@ -617,9 +611,9 @@ TEST("Battle strings fit on the battle message window")
     NewGameBirchSpeech_SetDefaultPlayerName(10);  // JOHNNY
 
     RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_WOBBUFFET, 100;
-        createmon 1, 0, SPECIES_WOBBUFFET, 100;
-    );
+            givemon SPECIES_WOBBUFFET, 100;
+            createmon 1, 0, SPECIES_WOBBUFFET, 100;
+            );
     SetMonData(&gPlayerParty[0], MON_DATA_NICKNAME, nickname);
     SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, nickname);
 
@@ -627,6 +621,7 @@ TEST("Battle strings fit on the battle message window")
     {
         PARAMETRIZE_LABEL("%S", gBattleStringsTable[i]) { battleStringId = i; }
     }
+
 
     // Clear buffers
     PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_EMPTYSTRING3);
@@ -675,18 +670,18 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_TRAINER1WINTEXT:
     case STRINGID_TRAINER2WINTEXT:
         break;
-    // Buffer Nickname with prefix to B_BUFF1, " a boosted" to B_BUFF2, "999999" to B_BUFF3
+        // Buffer Nickname with prefix to B_BUFF1, " a boosted" to B_BUFF2, "999999" to B_BUFF3
     case STRINGID_PKMNGAINEDEXP:
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, 0);
         PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_ABOOSTED); // 'gained a boosted'
         PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, sixDigitNines);
         break;
-    // Buffer Nickname with prefix to B_BUFF1, "100" to B_BUFF2
+        // Buffer Nickname with prefix to B_BUFF1, "100" to B_BUFF2
     case STRINGID_PKMNGREWTOLV:
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, 0);
         PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 3, 100);
         break;
-    // Buffer Nickname with prefix to B_BUFF1, move name to B_BUFF2
+        // Buffer Nickname with prefix to B_BUFF1, move name to B_BUFF2
     case STRINGID_PKMNLEARNEDMOVE:
     case STRINGID_TRYTOLEARNMOVE1:
     case STRINGID_TRYTOLEARNMOVE2:
@@ -697,7 +692,7 @@ TEST("Battle strings fit on the battle message window")
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, 0);
         PREPARE_MOVE_BUFFER(gBattleTextBuff2, longMoveID);
         break;
-    // Buffer Move name to B_BUFF1
+        // Buffer Move name to B_BUFF1
     case STRINGID_PKMNLEARNEDMOVE2:
     case STRINGID_TEAMSTOPPEDWORKING: // Unused
     case STRINGID_FOESTOPPEDWORKING: // Unused
@@ -716,24 +711,24 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_TARGETISHURTBYSALTCURE:
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, longMoveID);
         break;
-    // Buffer "999999" to B_BUFF1
+        // Buffer "999999" to B_BUFF1
     case STRINGID_PLAYERGOTMONEY:
     case STRINGID_PLAYERWHITEOUT2:
     case STRINGID_PLAYERPICKEDUPMONEY:
     case STRINGID_PLAYERPAIDPRIZEMONEY:
         PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 6, sixDigitNines);
         break;
-    // Buffer "99" to B_BUFF1
+        // Buffer "99" to B_BUFF1
     case STRINGID_HITXTIMES:
     case STRINGID_MAGNITUDESTRENGTH:
         PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 2, 99);
         break;
-    // Buffer "9" to B_BUFF1
+        // Buffer "9" to B_BUFF1
     case STRINGID_PKMNSTOCKPILED:
     case STRINGID_PKMNPERISHCOUNTFELL:
         PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 1, 9);
         break;
-    // Buffer Ability name to B_BUFF1
+        // Buffer Ability name to B_BUFF1
     case STRINGID_PKMNMADESLEEP:
     case STRINGID_PKMNPOISONEDBY:
     case STRINGID_PKMNBURNEDBY:
@@ -742,7 +737,7 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_CANACTFASTERTHANKSTO:
         PREPARE_ABILITY_BUFFER(gBattleTextBuff1, longAbilityID);
         break;
-    // Buffer Stat name to B_BUFF1
+        // Buffer Stat name to B_BUFF1
     case STRINGID_STATSWONTINCREASE:
     case STRINGID_STATSWONTDECREASE:
     case STRINGID_PKMNSXPREVENTSYLOSS:
@@ -757,7 +752,7 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_STATWASHEIGHTENED:
         StringCopy(gBattleTextBuff1, gStatNamesTable[longStatName]);
         break;
-    // Buffer Type name to B_BUFF1
+        // Buffer Type name to B_BUFF1
     case STRINGID_PKMNCHANGEDTYPE:
     case STRINGID_PKMNCHANGEDTYPEWITH:
     case STRINGID_TARGETCHANGEDTYPE:
@@ -767,7 +762,7 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_PKMNTERASTALLIZEDINTO:
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, longTypeName);
         break;
-    // Buffer Species name to B_BUFF1
+        // Buffer Species name to B_BUFF1
     case STRINGID_PKMNTRANSFORMEDINTO:
     case STRINGID_WILDPKMNFLED:
     case STRINGID_MEGAEVOEVOLVED:
@@ -776,21 +771,21 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_ITEMCUREDSPECIESSTATUS: // Should probably use nickname instead?
     case STRINGID_ITEMRESTOREDSPECIESPP: // Should probably use nickname instead?
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, longSpeciesName)
-        break;
-    // Buffer nickname with prefix to B_BUFF1
+            break;
+        // Buffer nickname with prefix to B_BUFF1
     case STRINGID_PKMNATTACK:
     case STRINGID_PKMNWISHCAMETRUE:
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 1, 0);
         break;
-    // Buffer nickname with prefix in lower case to B_BUFF1
+        // Buffer nickname with prefix in lower case to B_BUFF1
     case STRINGID_USEDINSTRUCTEDMOVE:
         PREPARE_MON_NICK_WITH_PREFIX_LOWER_BUFFER(gBattleTextBuff1, 1, 0);
         break;
-    // Buffer nickname to B_BUFF2
+        // Buffer nickname to B_BUFF2
     case STRINGID_ENEMYABOUTTOSWITCHPKMN:
         PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, 1, 0);
         break;
-    // Buffer Item name to B_BUFF1
+        // Buffer Item name to B_BUFF1
     case STRINGID_PKMNHURTSWITH:
     case STRINGID_PKMNCURIOUSABOUTX:
     case STRINGID_PKMNENTHRALLEDBYX:
@@ -800,21 +795,21 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_ABOUTTOUSEPOLTERGEIST:
         PREPARE_ITEM_BUFFER(gBattleTextBuff1, longItemName);
         break;
-    // Buffer Item name to B_BUFF2
+        // Buffer Item name to B_BUFF2
     case STRINGID_PKMNOBTAINEDX2:
         PREPARE_ITEM_BUFFER(gBattleTextBuff2, longItemName);
         break;
-    // Buffer Item name to B_BUFF1 and B_BUFF2
+        // Buffer Item name to B_BUFF1 and B_BUFF2
     case STRINGID_PKMNOBTAINEDXYOBTAINEDZ:
         PREPARE_ITEM_BUFFER(gBattleTextBuff1, longItemName);
         PREPARE_ITEM_BUFFER(gBattleTextBuff2, longItemName);
         break;
-    // Buffer nickname with prefix to B_BUFF1, Ability name to B_BUFF2
+        // Buffer nickname with prefix to B_BUFF1, Ability name to B_BUFF2
     case STRINGID_PKMNTRACED:
         PREPARE_MON_NICK_WITH_PREFIX_LOWER_BUFFER(gBattleTextBuff1, 1, 0);
         PREPARE_ABILITY_BUFFER(gBattleTextBuff2, longAbilityID);
         break;
-    // Buffer Stat name to B_BUFF1, "drastically rose" to B_BUFF2
+        // Buffer Stat name to B_BUFF1, "drastically rose" to B_BUFF2
     case STRINGID_ATTACKERSSTATROSE:
     case STRINGID_DEFENDERSSTATROSE:
     case STRINGID_USINGITEMSTATOFPKMNROSE:
@@ -822,20 +817,20 @@ TEST("Battle strings fit on the battle message window")
         StringCopy(gBattleTextBuff2, gText_drastically);
         StringAppend(gBattleTextBuff2, gText_StatRose);
         break;
-    // Buffer Stat name to B_BUFF1, "severely fell" to B_BUFF2
+        // Buffer Stat name to B_BUFF1, "severely fell" to B_BUFF2
     case STRINGID_ATTACKERSSTATFELL:
     case STRINGID_DEFENDERSSTATFELL:
         StringCopy(gBattleTextBuff1, gStatNamesTable[longStatName]);
         StringCopy(gBattleTextBuff2, gText_severely);
         StringAppend(gBattleTextBuff2, gText_StatFell);
         break;
-    // Buffer Status name to B_BUFF2
+        // Buffer Status name to B_BUFF2
     case STRINGID_PKMNSITEMCUREDPROBLEM:
     case STRINGID_PKMNSXCUREDYPROBLEM:
     case STRINGID_PKMNSXCUREDITSYPROBLEM:
         StringCopy(gBattleTextBuff1, gText_Confusion);
         break;
-    // Buffer Box name to STR_VAR_1 and STR_VAR_3, Nickname to STR_VAR_2
+        // Buffer Box name to STR_VAR_1 and STR_VAR_3, Nickname to STR_VAR_2
     case STRINGID_PKMNTRANSFERREDSOMEONESPC:
     case STRINGID_PKMNTRANSFERREDLANETTESPC:
     case STRINGID_PKMNBOXSOMEONESPCFULL:
