@@ -22,8 +22,16 @@ jobs:
       - name: Install binutils
         run: |
           sudo apt update
-          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
-        # build-essential and git are already installed
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 unzip
+          # build-essential and git are already installed
+
+      - name: Install Poryscript
+        run: |
+          mkdir -p tools/poryscript
+          wget https://github.com/huderlem/poryscript/releases/download/3.5.2/poryscript-linux.zip
+          unzip -j poryscript-linux.zip -d tools/poryscript
+          chmod +x tools/poryscript/poryscript
+          rm poryscript-linux.zip
 
       - name: ROM
         env:
