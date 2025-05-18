@@ -3201,6 +3201,7 @@ static void CancellerFog(u32 *effect)
             gBattlerTarget = GetOppositeBattler(gBattlerAttacker);
             struct DamageCalculationData damageCalcData;
             damageCalcData.battlerAtk = gBattlerAttacker;
+            damageCalcData.battlerDef = 0;
             damageCalcData.move = MOVE_NONE;
             damageCalcData.moveType = TYPE_MYSTERY;
             damageCalcData.isCrit = FALSE;

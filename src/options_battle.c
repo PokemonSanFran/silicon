@@ -313,6 +313,9 @@ void Script_AreIndividualValuesDisabled(void)
 
 bool32 AreIndividualValuesDisabled(void)
 {
+#ifdef TESTING
+    return FALSE;
+#endif
     return !(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES]);
 }
 
