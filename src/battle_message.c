@@ -170,27 +170,6 @@ static const u8 sText_TwoInGameTrainersDefeated[] = _("You defeated {B_TRAINER1_
 const u8 gText_drastically[] = _("drastically ");
 const u8 gText_severely[] = _("severely ");
 static const u8 sText_TerrainReturnedToNormal[] = _("The terrain returned to normal!"); // Unused
-//Battle Settings: Points Message
-static const u8 sText_PkmnGainedPoints[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points and {B_BUFF3} Effort Values!\p");
-static const u8 sText_PkmnGainedEVs[] = _("{B_BUFF1} gained{B_BUFF3}\nEffort Values!\p");
-
-//Battle Settings: Points Summary
-static const u8 sText_AllGainedPoints[] = _("The Pokémon in your party and storage\ngained experience and effort values!\p");
-static const u8 sText_PartyGainedPoints[] = _("The Pokémon in your party\ngained experience and effort values!\p");
-static const u8 sText_StorageGainedPoints[] = _("The Pokémon in your storage\ngained experience and effort values!\p");
-static const u8 sText_AllGainedExp[] = _("The Pokémon in your party and storage\ngained experience!\p");
-static const u8 sText_PartyGainedExp[] = _("The Pokémon in your party\ngained experience!\p");
-static const u8 sText_StorageGainedExp[] = _("The Pokémon in your storage\ngained experience!\p");
-static const u8 sText_AllGainedEVs[] = _("The Pokémon in your party and storage\ngained effort values!\p");
-static const u8 sText_PartyGainedEVs[] = _("The Pokémon in your party\ngained effort values!\p");
-static const u8 sText_StorageGainedEVs[] = _("The Pokémon in your storage\ngained effort values!\p");
-
-//Battle Settings: Take Wild Items
-static const u8 sText_TakeWildItems[] = _("The opposing {B_DEF_NAME_WITH_PREFIX} was\ncarrying an item.\pDo you want to take it?");
-static const u8 sText_ObtainedItem[] = _("Obtained {B_BUFF1}!\p");
-
-// Native Give Items
-static const u8 sText_PlayerReceivedItem[] = _("{B_PLAYER_NAME} got {B_BUFF1}\nfrom {B_TRAINER1_NAME}!\p");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -911,7 +890,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ELECTRICCURRENTISRUNNING]             = COMPOUND_STRING("An electric current is running across the battlefield!"),
     [STRINGID_SEEMSWEIRD]                           = COMPOUND_STRING("The battlefield seems weird!"),
     [STRINGID_WAGGLINGAFINGER]                      = COMPOUND_STRING("Waggling a finger let it use {B_CURRENT_MOVE}!"),
-    [STRINGID_TAKEWILDMONITEM]                      = COMPOUND_STRING("The opposing {B_DEF_NAME_WITH_PREFIX} was\ncarrying an item.\pDo you want to take it?"), // Battle Settings: Take Wild Items
+    [STRINGID_TAKEWILDMONITEM]                      = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}\ndropped {B_BUFF1}.\pDo you want to take it?"), // Battle Settings: Take Wild Items
     [STRINGID_OBTAINEDITEM]                         = COMPOUND_STRING("Obtained {B_BUFF1}!\p"), // Battle Settings: Take Wild Items
     [STRINGID_PLAYERRECEIVEDNATIVEITEM]             = COMPOUND_STRING("{B_PLAYER_NAME} got {B_BUFF1}\nfrom {B_TRAINER1_NAME}!\p"), // Native Give Item
     [STRINGID_BLOCKEDBYSLEEPCLAUSE]                 = COMPOUND_STRING("Sleep Clause kept {B_DEF_NAME_WITH_PREFIX2} awake!"),
