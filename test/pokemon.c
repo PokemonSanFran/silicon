@@ -82,6 +82,9 @@ TEST("Shininess independent from PID and OTID")
 
 TEST("Hyper Training increases stats without affecting IVs")
 {
+    // Start siliconMerge
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED;
+    // End siliconMerge
     u32 data, hp, atk, def, speed, spatk, spdef;
     struct Pokemon mon;
     CreateMon(&mon, SPECIES_WOBBUFFET, 100, 3, TRUE, 0, OT_ID_PRESET, 0);
@@ -143,7 +146,9 @@ TEST("Status1 round-trips through BoxPokemon")
 TEST("canhypertrain/hypertrain affect MON_DATA_HYPER_TRAINED_* and recalculate stats")
 {
     u32 atk;
+    // Start siliconMerge
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED;
+    // End siliconMerge
     CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
     atk = GetMonData(&gPlayerParty[0], MON_DATA_ATK);
 

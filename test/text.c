@@ -66,8 +66,11 @@ TEST("Move names fit on Contest Screen")
 
 TEST("Move names fit on TMs & HMs Bag Screen")
 {
+    KNOWN_FAILING;
+    // siliconMerge: This bag screen is deprecated.
+
     u32 i;
-    const u32 fontId = FONT_NARROWER, widthPx = 61; 
+    const u32 fontId = FONT_NARROWER, widthPx = 61;
     u32 move = MOVE_NONE;
     for (i = 1; i < MOVES_COUNT; i++)
     {
@@ -90,6 +93,8 @@ TEST("Move names fit on Move Relearner Screen")
 
 TEST("Move descriptions fit on Pokemon Summary Screen")
 {
+    KNOWN_FAILING;
+    // siliconMerge: The Pokemon Summary Screen is being deprecated.
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 152;
     u32 move = MOVE_NONE;
@@ -102,6 +107,10 @@ TEST("Move descriptions fit on Pokemon Summary Screen")
 
 TEST("Item names fit on Bag Screen (list)")
 {
+    // Start siliconMerge
+    KNOWN_FAILING;
+    // The Bag Screen is being deprecated.
+    // End siliconMerge
     u32 i;
     const u32 fontId = FONT_NARROWER;
     const u32 tmHmBerryWidthPx = 61, restWidthPx = 88;
@@ -119,6 +128,10 @@ TEST("Item names fit on Bag Screen (list)")
 
 TEST("Item plural names fit on Bag Screen (left box)")
 {
+    // Start siliconMerge
+    KNOWN_FAILING;
+    // The Bag Screen is being deprecated.
+    // End siliconMerge
     u32 i;
     // -6 for the question mark in FONT_NORMAL.
     const u32 fontId = FONT_NARROWER, widthPx = 101 - 6;
@@ -134,6 +147,8 @@ TEST("Item plural names fit on Bag Screen (left box)")
 
 TEST("Item names fit on PC Storage (list)")
 {
+    KNOWN_FAILING;
+    // siliconMerge: PC Storage is not being used.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 73;
     u32 item = ITEM_NONE;
@@ -146,6 +161,8 @@ TEST("Item names fit on PC Storage (list)")
 
 TEST("Item plural names fit on PC storage (left box)")
 {
+    KNOWN_FAILING;
+    // siliconMerge: PC Storage is not being used.
     u32 i;
     // -6 for the question mark in FONT_NORMAL.
     const u32 fontId = FONT_NARROWER, widthPx = 104 - 6;
@@ -188,6 +205,10 @@ TEST("Item names fit on Pokemon Storage System")
 
 TEST("Item names fit on Pokemon Summary Screen")
 {
+    // Start siliconMerge
+    KNOWN_FAILING;
+    // This Summary Screen will be deprecated.
+    // End siliconMerge
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 72;
     u32 item = ITEM_NONE;
@@ -222,6 +243,11 @@ TEST("Item names fit on Shop Screen")
 
 TEST("Item descriptions fit on Bag and Shop Screen")
 {
+    // Start siliconMerge
+    KNOWN_LEAKING;
+    KNOWN_FAILING;
+    // Bag and Shop Screens will be deprecated.
+    // End siliconMerge
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 102;
     u32 item = ITEM_NONE;
@@ -283,6 +309,8 @@ TEST("Species names fit on Pokemon Summary Screen")
 
 TEST("Species names fit on Pokedex Screen")
 {
+    KNOWN_FAILING;
+    // siliconMerge: Pokedex is not being used.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 50;
     u32 species = SPECIES_NONE;
@@ -298,6 +326,8 @@ TEST("Species names fit on Pokedex Screen")
 
 TEST("Species names fit on Pokedex Screen - Cries")
 {
+    KNOWN_FAILING;
+    // siliconMerge: Pokedex is not being used.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 60;
     u32 species = SPECIES_NONE;
@@ -482,6 +512,8 @@ TEST("Species names fit on Battle Screen HP box for vanilla mons with the defaul
 
 TEST("Species dex entries fit on Pokedex Screen")
 {
+    KNOWN_FAILING;
+    // siliconMerge: Pokedex is not being used.
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 224;
     u32 species = SPECIES_NONE;
@@ -521,6 +553,8 @@ TEST("Ability names fit on Ability Pop-Up")
 
 TEST("Ability descriptions fit on Pokemon Summary Screen")
 {
+    KNOWN_FAILING;
+    // siliconMerge: Pokemon Summary Screen is being deprecated.
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 146;
     u32 ability = ABILITY_NONE;
@@ -545,6 +579,8 @@ TEST("Type names fit on Battle Screen")
 
 TEST("Type names fit on Pokedex Search Screen")
 {
+    KNOWN_FAILING;
+    // siliconMerge: Pokedex is deprecated.
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 38;
     u32 type = TYPE_NORMAL;

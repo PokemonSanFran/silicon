@@ -34,13 +34,6 @@ jobs:
         run: |
           make -j${nproc} check
 
-      - name: Install Poryscript
-        run: |
-          mkdir -p tools/poryscript
-          wget https://github.com/huderlem/poryscript/releases/download/3.5.2/poryscript-linux.zip
-          unzip -oj poryscript-linux.zip 'poryscript-linux/poryscript' 'poryscript-linux/command_config.json' -d tools/poryscript
-          chmod +x tools/poryscript/poryscript
-          rm poryscript-linux.zip
 # End siliconMerge
       - name: ROM
         env:
