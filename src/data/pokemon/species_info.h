@@ -962,7 +962,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .height = 0,
         .weight = 0,
         .genderRatio = MON_GENDERLESS,
-        .description = gFallbackPokedexText,
+        .description = COMPOUND_STRING(
+            "This is a Pokémon.\n"),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 256,
