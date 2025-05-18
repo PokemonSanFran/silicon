@@ -11974,6 +11974,7 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
         .secondaryId = MOVE_NONE, // Todo
     },
+    */
     [ITEM_HM_CUT] =
     {
         .name = _("HM01"),
@@ -12093,7 +12094,6 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
         .secondaryId = MOVE_DIVE,
     },
-    */
 
 
     // Charms
@@ -13820,6 +13820,46 @@ const struct Item gItemsInfo[] =
         .name = _("Lost Doll"),
         .description = COMPOUND_STRING("Abigayle's lost doll.\n""Return it to her in\n""GlavezHill."),
         .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANTRY_A] =
+    {
+        .name = _("Tin of Beans"),
+        .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANTRY_B] =
+    {
+        .name = _("Pasta"),
+        .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANTRY_C] =
+    {
+        .name = _("Peanut Butter"),
+        .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANTRY_D] =
+    {
+        .name = _("Apple Sauce"),
+        .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_PANTRY_E] =
+    {
+        .name = _("Granola"),
+        .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
