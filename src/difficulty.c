@@ -17,6 +17,8 @@ enum DifficultyLevel GetCurrentDifficultyLevel(void)
 
 void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
 {
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_BATTLE_DIFFICULTY] = desiredDifficulty; // siliconMerge
+
     if (!B_VAR_DIFFICULTY)
         return;
 
