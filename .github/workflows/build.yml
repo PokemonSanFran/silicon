@@ -25,6 +25,13 @@ jobs:
           sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 unzip
           # build-essential and git are already installed
 # Start siliconMerge
+
+      - name: Test
+        env:
+          TEST: 1
+        run: |
+          make -j${nproc} check
+
       - name: Install Poryscript
         run: |
           mkdir -p tools/poryscript
@@ -37,9 +44,3 @@ jobs:
         env:
           COMPARE: 0
         run: make -j${nproc} -O all
-
-      - name: Test
-        env:
-          TEST: 1
-        run: |
-          make -j${nproc} check
