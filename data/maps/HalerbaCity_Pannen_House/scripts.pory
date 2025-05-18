@@ -1,5 +1,4 @@
 mapscripts HalerbaCity_Pannen_House_MapScripts{
-    return
 }
 
 script HalerbaCity_Pannen_House_Event_Script{
