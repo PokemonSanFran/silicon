@@ -18,11 +18,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
 
       - name: Install binutils
         run: |
           sudo apt update
-          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 unzip
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go
           # build-essential and git are already installed
 # Start siliconMerge
 
