@@ -338,7 +338,9 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_GENTLEMAN] = { _("GENTLEMAN"), 20, BALL_LUXURY },
     // Start silicon
     //[TRAINER_CLASS_ELITE_FOUR] = { _("ELITE FOUR"), 25, BALL_ULTRA },
+    [TRAINER_CLASS_ELITE_FOUR] = { _("Elite Four") },
     // [TRAINER_CLASS_LEADER] = { _("LEADER"), 25 },
+    [TRAINER_CLASS_LEADER] = { _("Gym Leader") },
     // End silicon
     [TRAINER_CLASS_SCHOOL_KID] = { _("SCHOOL KID") },
     [TRAINER_CLASS_SR_AND_JR] = { _("SR. AND JR."), 4 },
@@ -376,10 +378,8 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     // start Silicon
     [TRAINER_CLASS_COMRADE] = { _("Comrade") },
     [TRAINER_CLASS_THE_TIDE_LEADER] = { _("The Tide Leader") },
-    [TRAINER_CLASS_LEADER] = { _("Gym Leader") },
     [TRAINER_CLASS_EX_LEADER] = { _("Ex-Gym Leader") },
     [TRAINER_CLASS_SHARPRISE_COO] = { _("SharpRise Chief Operating Officer") },
-    [TRAINER_CLASS_ELITE_FOUR] = { _("Elite Four") },
     [TRAINER_CLASS_EX_ELITE_FOUR] = { _("Ex-Elite Four") },
     // End Silicon
 };
