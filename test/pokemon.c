@@ -82,9 +82,6 @@ TEST("Shininess independent from PID and OTID")
 
 TEST("Hyper Training increases stats without affecting IVs")
 {
-    // Start siliconMerge
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED;
-    // End siliconMerge
     u32 data, hp, atk, def, speed, spatk, spdef;
     struct Pokemon mon;
     CreateMon(&mon, SPECIES_WOBBUFFET, 100, 3, TRUE, 0, OT_ID_PRESET, 0);
