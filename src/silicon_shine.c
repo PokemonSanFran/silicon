@@ -22,6 +22,7 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "event_data.h"
+#include "test_runner.h"
 
 static void Task_SiliconShine(u8);
 static void PlayShineSoundBasedOnSide(u32);
@@ -160,10 +161,11 @@ static void Task_SiliconShine(u8 taskId)
         gSprites[spriteId].spriteBattler = battler;
     }
 
-    if (taskTimer < SPAWN_SHINE_FRAME_COUNT + 1)
+    if (taskTimer < SPAWN_SHINE_FRAME_COUNT)
         return;
 
     DestroyTask(taskId);
+
 }
 
 static void SpriteCB_SiliconShine_RenderShineAnimation(struct Sprite *sprite)
@@ -179,7 +181,7 @@ static void SpriteCB_SiliconShine_RenderShineAnimation(struct Sprite *sprite)
     if ((frameIndex < numFrames) && (timer % SHINE_FRAME_LENGTH == 0))
         CpuSmartCopy16(sSiliconShineFrames[frameIndex], (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, SHINE_FRAME_SIZE);
 
-    if (frameIndex == SHINE_FRAME_SOUND_PLAY)
+    if (frameIndex == SHINE_FRAME_SOUND_PLAY && !gTestRunnerHeadless)
         PlayShineSoundBasedOnSide(battler);
 
     if (timer < ((SHINE_FRAME_LENGTH * numFrames) + SHINE_ANIM_LINGER))
