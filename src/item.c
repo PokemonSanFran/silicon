@@ -132,7 +132,7 @@ u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 
 bool8 IsBagPocketNonEmpty(u8 pocket)
 {
-    u32 i; // siliconMerge
+    u16 i; // siliconMerge
 
     for (i = 0; i < gBagPockets[pocket - 1].capacity; i++)
     {
@@ -144,7 +144,7 @@ bool8 IsBagPocketNonEmpty(u8 pocket)
 
 bool8 CheckBagHasItem(u16 itemId, u16 count)
 {
-    u32 i; // siliconMerge
+    u16 i; // siliconMerge
     u8 pocket;
 
     if (ItemId_GetPocket(itemId) == 0)
@@ -212,7 +212,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
 
 u32 GetFreeSpaceForItemInBag(u16 itemId)
 {
-    u32 i; // siliconMerge
+    u16 i; // siliconMerge
     u8 pocket = ItemId_GetPocket(itemId) - 1;
     u16 ownedCount;
     u32 spaceForItem = 0;
@@ -248,7 +248,7 @@ static void SetTmHmOwned(u16 itemId)
 
 bool8 AddBagItem(u16 itemId, u16 count)
 {
-    u32 i; // siliconMerge
+    u16 i; // siliconMerge
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
@@ -369,7 +369,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
 
 bool8 RemoveBagItem(u16 itemId, u16 count)
 {
-    u32 i; // siliconMerge
+    u16 i; // siliconMerge
     u16 totalQuantity = 0;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
