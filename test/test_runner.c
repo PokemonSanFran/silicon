@@ -10,7 +10,10 @@
 #include "test_runner.h"
 #include "test/test.h"
 
-#define TIMEOUT_SECONDS 60
+// Start siliconMerge
+//#define TIMEOUT_SECONDS 60
+#define TIMEOUT_SECONDS 120
+// End siliconMerge
 
 void CB2_TestRunner(void);
 

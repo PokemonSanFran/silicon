@@ -249,6 +249,9 @@ TEST("Item names fit on Shop Screen")
     EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
 }
 
+// Start siliconMerge
+// Both screens are deprecated.
+/*
 TEST("Item descriptions fit on Bag and Shop Screen")
 {
     u32 i;
@@ -260,6 +263,8 @@ TEST("Item descriptions fit on Bag and Shop Screen")
     }
     EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].description, 0), widthPx);
 }
+*/
+// End siliconMerge
 
 TEST("Species names fit on Battle Screen HP box")
 {
@@ -509,6 +514,9 @@ TEST("Species names fit on Battle Screen HP box for vanilla mons with the defaul
         EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
 }
 
+// Start siliconMerge
+// Both screens are deprecated.
+/*
 TEST("Species dex entries fit on Pokedex Screen")
 {
     u32 i;
@@ -523,6 +531,8 @@ TEST("Species dex entries fit on Pokedex Screen")
     }
     EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].description, 0), widthPx);
 }
+*/
+// End siliconMerge
 
 TEST("Ability names fit on Pokemon Summary Screen")
 {
