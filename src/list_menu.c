@@ -212,10 +212,7 @@ static const struct Subsprite sSubsprite_RedOutline3 =
     .y = 0,
     .shape = SPRITE_SHAPE(8x8),
     .size = SPRITE_SIZE(8x8),
-    // Start siliconMerge
-	//.tileOffset = 0,
-	.tileOffset = 2,
-	// End siliconMerge
+    .tileOffset = 2,
     .priority = 0,
 };
 
