@@ -27,6 +27,26 @@ void PutFirstMemBlockHeader(void *block, u32 size)
     PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - sizeof(struct MemBlock));
 }
 
+void MonitorHeap(struct MemBlock *head, u32 size, const char *location)
+{
+    return;
+    u32 totalHeapSize = 0;
+    u32 freeHeapSize = 0;
+
+    struct MemBlock *cur = head;
+    do
+    {
+        totalHeapSize += cur->size;
+        if (!cur->allocated)
+            freeHeapSize += cur->size;
+        cur = cur->next;
+    } while (cur != head);
+
+    u32 used = totalHeapSize - freeHeapSize;
+    u32 percent = used * 100 / totalHeapSize;
+    DebugPrintf("%s: %d bytes | Total Used: %d/%d (%d\%)",location,size,used,totalHeapSize,percent);
+}
+
 void *AllocInternal(void *heapStart, u32 size, const char *location)
 {
     struct MemBlock *pos = (struct MemBlock *)heapStart;
@@ -77,6 +97,7 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 pos->locationHi = ((uintptr_t)location) >> 14;
                 pos->locationLo = (uintptr_t)location;
 
+                MonitorHeap(head,size,location);
                 return pos->data;
             }
         }
@@ -101,6 +122,7 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
             while (block != head);
             Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L%s:%d, %s: OOM allocating %d bytes", gTestRunnerState.test->filename, SourceLine(0), location, size);
 #endif
+            MonitorHeap((struct MemBlock*) head,size,location);
             return NULL;
         }
 
