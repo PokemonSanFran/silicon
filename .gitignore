@@ -52,8 +52,6 @@ data/scripts/restored_battle_frontier/*.inc
 src/data/battle_partners.h
 src/data/trainers.h
 *.mermaid
-tools/poryscript/poryscript
-tools/poryscript/*.md
 go.mod
 misc/log.txt
 *.sw*
