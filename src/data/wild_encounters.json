@@ -11732,7 +11732,77 @@
               }
             ]
           }
+        },
+        {
+            "map": "MAP_ROUTE6",
+            "base_label": "gRoute6_0",
+            "land_mons": {
+                "encounter_rate": 10,
+                "mons": [
+                    {
+                        "min_level": 11,
+                        "max_level": 14,
+                        "species": "SPECIES_YUNGOOS"
+                    },
+                    {
+                        "min_level": 11,
+                        "max_level": 14,
+                        "species": "SPECIES_PIDGEY"
+                    },
+                    {
+                        "min_level": 12,
+                        "max_level": 13,
+                        "species": "SPECIES_MAREEP"
+                    },
+                    {
+                        "min_level": 12,
+                        "max_level": 13,
+                        "species": "SPECIES_VULPIX"
+                    },
+                    {
+                        "min_level": 10,
+                        "max_level": 13,
+                        "species": "SPECIES_KRICKETOT"
+                    },
+                    {
+                        "min_level": 5,
+                        "max_level": 5,
+                        "species": "SPECIES_FLABEBE"
+                    },
+                    {
+                        "min_level": 12,
+                        "max_level": 13,
+                        "species": "SPECIES_MAREEP"
+                    },
+                    {
+                        "min_level": 12,
+                        "max_level": 13,
+                        "species": "SPECIES_VULPIX"
+                    },
+                    {
+                        "min_level": 10,
+                        "max_level": 13,
+                        "species": "SPECIES_KRICKETOT"
+                    },
+                    {
+                        "min_level": 10,
+                        "max_level": 14,
+                        "species": "SPECIES_FLABEBE_YELLOW"
+                    },
+                    {
+                        "min_level": 10,
+                        "max_level": 14,
+                        "species": "SPECIES_FLABEBE_YELLOW"
+                    },
+                    {
+                        "min_level": 14,
+                        "max_level": 14,
+                        "species": "SPECIES_ORICORIO_POM_POM"
+                    }
+                ]
+            }
         }
+
       ]
     },
     {
