@@ -1173,7 +1173,7 @@ static void PressedUpButton(){
 
 struct CustomizationData
 {
-    const u8 title[MAX_CUSTOMIZATION_OPTIONS_PER_SETTING];
+    const u8 title[CUSTOMIZATION_OPTION_NAME_LENGTH];
     const u8 options[MAX_CUSTOMIZATION_OPTIONS_PER_SETTING][CUSTOMIZATION_OPTION_NAME_LENGTH];
     u8 numOptions;
 };
