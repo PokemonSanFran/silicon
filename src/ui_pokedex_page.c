@@ -49,8 +49,9 @@
 #include "data/ui_pokedex_type_sprites.h"
 #include "data/ui_pokedex_sprite_coordinates.h"
 
-const struct PokemonFormTable pokemonFormTable[][MAX_NUM_FORMS_EVOLUTIONS] =
+const struct PokemonFormTable pokemonFormTable[POKEDEX_FORM_COUNT][NUMBER_OF_MON_TYPES] =
 {
+    // NUMBER_OF_MON_TYPES is how many Silvally types there are which is generally how big this table will ever get because we don't have Alcremie.
 #include "data/pokemon/silicon_form_table.h"
 };
 
@@ -3107,8 +3108,118 @@ bool32 PageForms_IsSpeciesMega(u16 species)
     return (gSpeciesInfo[species].isMegaEvolution);
 }
 
+enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
+{
+    switch (species)
+    {
+        default:
+            return POKEDEX_FORM_NONE;
+        case SPECIES_PIDGEOT:
+            return POKEDEX_FORM_PIDGEOT;
+        case SPECIES_ALAKAZAM:
+            return POKEDEX_FORM_ALAKAZAM;
+        case SPECIES_SLOWBRO:
+            return POKEDEX_FORM_SLOWBRO;
+        case SPECIES_KINGLER:
+            return POKEDEX_FORM_KINGLER;
+        case SPECIES_GYARADOS:
+            return POKEDEX_FORM_GYARADOS;
+        case SPECIES_LAPRAS:
+            return POKEDEX_FORM_LAPRAS;
+        case SPECIES_AERODACTYL:
+            return POKEDEX_FORM_AERODACTYL;
+        case SPECIES_AMPHAROS:
+            return POKEDEX_FORM_AMPHAROS;
+        case SPECIES_SCIZOR:
+            return POKEDEX_FORM_SCIZOR;
+        case SPECIES_TYRANITAR:
+            return POKEDEX_FORM_TYRANITAR;
+        case SPECIES_SWAMPERT:
+            return POKEDEX_FORM_SWAMPERT;
+        case SPECIES_GARDEVOIR:
+            return POKEDEX_FORM_GARDEVOIR;
+        case SPECIES_AGGRON:
+            return POKEDEX_FORM_AGGRON;
+        case SPECIES_MEDICHAM:
+            return POKEDEX_FORM_MEDICHAM;
+        case SPECIES_SHARPEDO:
+            return POKEDEX_FORM_SHARPEDO;
+        case SPECIES_CAMERUPT:
+            return POKEDEX_FORM_CAMERUPT;
+        case SPECIES_CHERRIM:
+            return POKEDEX_FORM_CHERRIM;
+        case SPECIES_LOPUNNY:
+            return POKEDEX_FORM_LOPUNNY;
+        case SPECIES_GALLADE:
+            return POKEDEX_FORM_GALLADE;
+        case SPECIES_ROTOM:
+            return POKEDEX_FORM_ROTOM;
+        case SPECIES_GARBODOR:
+            return POKEDEX_FORM_GARBODOR;
+        case SPECIES_VIVILLON:
+            return POKEDEX_FORM_VIVILLON;
+        case SPECIES_FLABEBE:
+            return POKEDEX_FORM_FLABEBE;
+        case SPECIES_FLOETTE:
+            return POKEDEX_FORM_FLOETTE;
+        case SPECIES_FLORGES:
+            return POKEDEX_FORM_FLORGES;
+        case SPECIES_AEGISLASH:
+            return POKEDEX_FORM_AEGISLASH;
+        case SPECIES_ORICORIO:
+            return POKEDEX_FORM_ORICORIO;
+        case SPECIES_WISHIWASHI:
+            return POKEDEX_FORM_WISHIWASHI;
+        case SPECIES_SILVALLY:
+            return POKEDEX_FORM_SILVALLY;
+        case SPECIES_MINIOR:
+            return POKEDEX_FORM_MINIOR;
+        case SPECIES_CORVIKNIGHT:
+            return POKEDEX_FORM_CORVIKNIGHT;
+        case SPECIES_ORBEETLE:
+            return POKEDEX_FORM_ORBEETLE;
+        case SPECIES_DREDNAW:
+            return POKEDEX_FORM_DREDNAW;
+        case SPECIES_SANDACONDA:
+            return POKEDEX_FORM_SANDACONDA;
+        case SPECIES_CRAMORANT:
+            return POKEDEX_FORM_CRAMORANT;
+        case SPECIES_CENTISKORCH:
+            return POKEDEX_FORM_CENTISKORCH;
+        case SPECIES_SINISTEA:
+            return POKEDEX_FORM_SINISTEA;
+        case SPECIES_POLTEAGEIST:
+            return POKEDEX_FORM_POLTEAGEIST;
+        case SPECIES_HATTERENE:
+            return POKEDEX_FORM_HATTERENE;
+        case SPECIES_EISCUE_ICE:
+            return POKEDEX_FORM_EISCUE_ICE;
+        case SPECIES_COPPERAJAH:
+            return POKEDEX_FORM_COPPERAJAH;
+        case SPECIES_DURALUDON:
+            return POKEDEX_FORM_DURALUDON;
+        case SPECIES_URSHIFU_SINGLE_STRIKE:
+            return POKEDEX_FORM_URSHIFU_SINGLE_STRIKE;
+        case SPECIES_URSHIFU_RAPID_STRIKE:
+            return POKEDEX_FORM_URSHIFU_RAPID_STRIKE;
+        case SPECIES_URSALUNA:
+            return POKEDEX_FORM_URSALUNA;
+        case SPECIES_MAUSHOLD:
+            return POKEDEX_FORM_MAUSHOLD;
+        case SPECIES_SQUAWKABILLY:
+            return POKEDEX_FORM_SQUAWKABILLY;
+        case SPECIES_PALAFIN:
+            return POKEDEX_FORM_PALAFIN;
+        case SPECIES_TATSUGIRI:
+            return POKEDEX_FORM_TATSUGIRI;
+        case SPECIES_GIMMIGHOUL:
+            return POKEDEX_FORM_GIMMIGHOUL;
+    }
+}
+
 static u32 PageForms_CountFormsForMons(u32 species)
 {
+    species = ConvertSpeciesToFormTableEnum(species);
     const struct PokemonFormTable *forms = pokemonFormTable[species];
 
     u32 count = 0;
@@ -3131,12 +3242,13 @@ static u32 PageForm_GetMonForFormList(void)
 
 static void PageForm_PopulateFormList(void)
 {
-    u32 species = PageForm_GetMonForFormList();
+    u32 originalSpecies = PageForm_GetMonForFormList();
+    u32 species = ConvertSpeciesToFormTableEnum(originalSpecies);
 
     if (pokemonFormTable[species][0].originalSpecies == SPECIES_NONE)
         return;
 
-    PageEvolution_SetNumMons(PageForms_CountFormsForMons(species));
+    PageEvolution_SetNumMons(PageForms_CountFormsForMons(originalSpecies));
 
     for (u32 formIndex = 0; formIndex < PageEvolution_GetNumMons(); formIndex++)
     {
@@ -3822,7 +3934,7 @@ static void PageForms_PrintTransformationCriteria(enum PokedexPageEvolutionWindo
     PageForms_GenerateTransformString(method,param1,param2,param3,originalSpecies,currentPosition);
 
     StringCopy(gStringVar4,COMPOUND_STRING(""));
-    StringExpandPlaceholders(gStringVar4,pokemonFormTable[PageForm_GetMonForFormList()][currentPosition].description);
+    StringExpandPlaceholders(gStringVar4,pokemonFormTable[ConvertSpeciesToFormTableEnum(PageForm_GetMonForFormList())][currentPosition].description);
 
     BreakStringAutomatic(gStringVar4, windowWidth, screenLines, fontId);
 

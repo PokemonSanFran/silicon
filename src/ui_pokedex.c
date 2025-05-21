@@ -1974,7 +1974,7 @@ static void SpeciesData_PrintHeader(u32 shownSpecies)
 u32 SpeciesData_ConvertSpeciesToCosmeticFormId(u32 species)
 {
     u32 form = 0;
-    u32 baseSpecies = GET_BASE_SPECIES_ID(species);
+    u32 baseSpecies = ConvertSpeciesToFormTableEnum(GET_BASE_SPECIES_ID(species));
 
     const struct PokemonFormTable *forms = pokemonFormTable[baseSpecies];
 

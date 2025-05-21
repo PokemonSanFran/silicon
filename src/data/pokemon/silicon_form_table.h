@@ -1,4 +1,4 @@
-[SPECIES_PIDGEOT] =
+[POKEDEX_FORM_PIDGEOT] =
 {
     {
         .originalSpecies = SPECIES_PIDGEOT,
@@ -8,7 +8,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_ALAKAZAM] =
+    [POKEDEX_FORM_ALAKAZAM] =
 {
     {
         .originalSpecies = SPECIES_ALAKAZAM,
@@ -18,7 +18,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_SLOWBRO] =
+    [POKEDEX_FORM_SLOWBRO] =
 {
     {
         .originalSpecies = SPECIES_SLOWBRO,
@@ -28,7 +28,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_KINGLER] =
+    [POKEDEX_FORM_KINGLER] =
 {
     {
         .originalSpecies = SPECIES_KINGLER,
@@ -38,7 +38,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_GYARADOS] =
+    [POKEDEX_FORM_GYARADOS] =
 {
     {
         .originalSpecies = SPECIES_GYARADOS,
@@ -48,7 +48,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_LAPRAS] =
+    [POKEDEX_FORM_LAPRAS] =
 {
     {
         .originalSpecies = SPECIES_LAPRAS,
@@ -58,7 +58,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_AERODACTYL] =
+    [POKEDEX_FORM_AERODACTYL] =
 {
     {
         .originalSpecies = SPECIES_AERODACTYL,
@@ -68,7 +68,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_AMPHAROS] =
+    [POKEDEX_FORM_AMPHAROS] =
 {
     {
         .originalSpecies = SPECIES_AMPHAROS,
@@ -78,7 +78,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_SCIZOR] =
+    [POKEDEX_FORM_SCIZOR] =
 {
     {
         .originalSpecies = SPECIES_SCIZOR,
@@ -88,7 +88,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_TYRANITAR] =
+    [POKEDEX_FORM_TYRANITAR] =
 {
     {
         .originalSpecies = SPECIES_TYRANITAR,
@@ -98,7 +98,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_SWAMPERT] =
+    [POKEDEX_FORM_SWAMPERT] =
 {
     {
         .originalSpecies = SPECIES_SWAMPERT,
@@ -108,7 +108,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_GARDEVOIR] =
+    [POKEDEX_FORM_GARDEVOIR] =
 {
     {
         .originalSpecies = SPECIES_GARDEVOIR,
@@ -118,7 +118,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_AGGRON] =
+    [POKEDEX_FORM_AGGRON] =
 {
     {
         .originalSpecies = SPECIES_AGGRON,
@@ -128,7 +128,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_MEDICHAM] =
+    [POKEDEX_FORM_MEDICHAM] =
 {
     {
         .originalSpecies = SPECIES_MEDICHAM,
@@ -138,7 +138,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_SHARPEDO] =
+    [POKEDEX_FORM_SHARPEDO] =
 {
     {
         .originalSpecies = SPECIES_SHARPEDO,
@@ -148,7 +148,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_CAMERUPT] =
+    [POKEDEX_FORM_CAMERUPT] =
 {
     {
         .originalSpecies = SPECIES_CAMERUPT,
@@ -158,7 +158,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_CHERRIM] =
+    [POKEDEX_FORM_CHERRIM] =
 {
     {
         .originalSpecies = SPECIES_CHERRIM_OVERCAST,
@@ -177,7 +177,7 @@
         .description = COMPOUND_STRING("Transforms when Ability is {STR_VAR_2} and weather is not {STR_VAR_1}, or on faint, switch or battle end."),
     },
 },
-    [SPECIES_LOPUNNY] =
+    [POKEDEX_FORM_LOPUNNY] =
 {
     {
         .originalSpecies = SPECIES_LOPUNNY,
@@ -187,7 +187,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_GALLADE] =
+    [POKEDEX_FORM_GALLADE] =
 {
     {
         .originalSpecies = SPECIES_GALLADE,
@@ -197,7 +197,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_ROTOM] =
+    [POKEDEX_FORM_ROTOM] =
 {
     {
         .originalSpecies = SPECIES_ANY,
@@ -242,7 +242,7 @@
         .description = COMPOUND_STRING("Transforms when {STR_VAR_1} is used."),
     },
 },
-    [SPECIES_GARBODOR] =
+    [POKEDEX_FORM_GARBODOR] =
 {
     {
         .originalSpecies = SPECIES_GARBODOR,
@@ -252,7 +252,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_VIVILLON] =
+    [POKEDEX_FORM_VIVILLON] =
 {
     {
         .originalSpecies = SPECIES_VIVILLON,
@@ -395,7 +395,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_VIVILLON,
     },
 },
-    [SPECIES_FLABEBE] =
+    [POKEDEX_FORM_FLABEBE] =
 {
     {
         .originalSpecies = SPECIES_FLABEBE,
@@ -433,7 +433,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_FLABEBE,
     },
 },
-    [SPECIES_FLOETTE] =
+    [POKEDEX_FORM_FLOETTE] =
 {
     {
         .originalSpecies = SPECIES_FLOETTE,
@@ -471,7 +471,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_FLOETTE,
     },
 },
-    [SPECIES_FLORGES] =
+    [POKEDEX_FORM_FLORGES] =
 {
     {
         .originalSpecies = SPECIES_FLORGES,
@@ -510,7 +510,7 @@
     },
 },
 
-    [SPECIES_AEGISLASH] =
+    [POKEDEX_FORM_AEGISLASH] =
 {
     {
         .originalSpecies = SPECIES_AEGISLASH_BLADE,
@@ -527,7 +527,7 @@
     },
 },
 
-    [SPECIES_ORICORIO] =
+    [POKEDEX_FORM_ORICORIO] =
 {
     {
         .originalSpecies = SPECIES_ANY,
@@ -559,7 +559,7 @@
     },
 },
 
-    [SPECIES_WISHIWASHI] =
+    [POKEDEX_FORM_WISHIWASHI] =
 {
     {
         .originalSpecies = SPECIES_WISHIWASHI_SCHOOL,
@@ -581,7 +581,7 @@
     },
 },
 
-    [SPECIES_SILVALLY] =
+    [POKEDEX_FORM_SILVALLY] =
 {
     {
         .originalSpecies = SPECIES_ANY,
@@ -729,7 +729,7 @@
     },
 },
 
-    [SPECIES_MINIOR] =
+    [POKEDEX_FORM_MINIOR] =
 {
     {
         .originalSpecies = SPECIES_MINIOR_CORE,
@@ -799,7 +799,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_MINIOR,
     },
 },
-    [SPECIES_CORVIKNIGHT] =
+    [POKEDEX_FORM_CORVIKNIGHT] =
 {
     {
         .originalSpecies = SPECIES_CORVIKNIGHT,
@@ -809,7 +809,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_ORBEETLE] =
+    [POKEDEX_FORM_ORBEETLE] =
 {
     {
         .originalSpecies = SPECIES_ORBEETLE,
@@ -819,7 +819,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_DREDNAW] =
+    [POKEDEX_FORM_DREDNAW] =
 {
     {
         .originalSpecies = SPECIES_DREDNAW,
@@ -829,7 +829,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_SANDACONDA] =
+    [POKEDEX_FORM_SANDACONDA] =
 {
     {
         .originalSpecies = SPECIES_SANDACONDA,
@@ -839,7 +839,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_CRAMORANT] =
+    [POKEDEX_FORM_CRAMORANT] =
 {
     {
         .originalSpecies = SPECIES_CRAMORANT,
@@ -870,7 +870,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_CRAMORANT,
     },
 },
-    [SPECIES_CENTISKORCH] =
+    [POKEDEX_FORM_CENTISKORCH] =
 {
     {
         .originalSpecies = SPECIES_CENTISKORCH,
@@ -880,7 +880,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_SINISTEA] =
+    [POKEDEX_FORM_SINISTEA] =
 {
     {
         .originalSpecies = SPECIES_SINISTEA,
@@ -897,7 +897,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_SINISTEA,
     },
 },
-    [SPECIES_POLTEAGEIST] =
+    [POKEDEX_FORM_POLTEAGEIST] =
 {
     {
         .originalSpecies = SPECIES_POLTEAGEIST,
@@ -914,7 +914,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_POLTEAGEIST,
     },
 },
-    [SPECIES_HATTERENE] =
+    [POKEDEX_FORM_HATTERENE] =
 {
     {
         .originalSpecies = SPECIES_HATTERENE,
@@ -924,7 +924,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_EISCUE_ICE] =
+    [POKEDEX_FORM_EISCUE_ICE] =
 {
     {
         .originalSpecies = SPECIES_EISCUE_ICE,
@@ -940,7 +940,7 @@
         .description = COMPOUND_STRING("Transforms in {STR_VAR_1} weather, or end of the battle."),
     },
 },
-    [SPECIES_COPPERAJAH] =
+    [POKEDEX_FORM_COPPERAJAH] =
 {
     {
         .originalSpecies = SPECIES_COPPERAJAH,
@@ -950,7 +950,7 @@
         .param1 = ITEM_COPPERAJAHNITE,
     },
 },
-    [SPECIES_DURALUDON] =
+    [POKEDEX_FORM_DURALUDON] =
 {
     {
         .originalSpecies = SPECIES_DURALUDON,
@@ -960,7 +960,7 @@
         .param1 = ITEM_DURALUDONNITE,
     },
 },
-    [SPECIES_URSHIFU_SINGLE_STRIKE] =
+    [POKEDEX_FORM_URSHIFU_SINGLE_STRIKE] =
 {
     {
         .originalSpecies = SPECIES_URSHIFU,
@@ -976,7 +976,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_URSHIFU_RAPID_STRIKE] =
+    [POKEDEX_FORM_URSHIFU_RAPID_STRIKE] =
 {
     {
         .originalSpecies = SPECIES_URSHIFU,
@@ -992,7 +992,7 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [SPECIES_URSALUNA] =
+    [POKEDEX_FORM_URSALUNA] =
 {
     {
         .originalSpecies = SPECIES_URSALUNA,
@@ -1001,15 +1001,15 @@
         .description = COMPOUND_STRING("Cannot change its form."),
     },
     /*
-    {
-        .originalSpecies = SPECIES_URSALUNA,
-        .targetSpecies = SPECIES_URSALUNA_BLOODMOON,
-        .method = SPECIES_LOCKED,
-        .description = COMPOUND_STRING("Cannot change its form."),
-    },
-    */
+       {
+       .originalSpecies = SPECIES_URSALUNA,
+       .targetSpecies = SPECIES_URSALUNA_BLOODMOON,
+       .method = SPECIES_LOCKED,
+       .description = COMPOUND_STRING("Cannot change its form."),
+       },
+       */
 },
-    [SPECIES_MAUSHOLD] =
+    [POKEDEX_FORM_MAUSHOLD] =
 {
     {
         .originalSpecies = SPECIES_MAUSHOLD,
@@ -1026,7 +1026,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_MAUSHOLD,
     },
 },
-    [SPECIES_SQUAWKABILLY] =
+    [POKEDEX_FORM_SQUAWKABILLY] =
 {
     {
         .originalSpecies = SPECIES_SQUAWKABILLY,
@@ -1057,7 +1057,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_SQUAWKABILLY,
     },
 },
-    [SPECIES_PALAFIN] =
+    [POKEDEX_FORM_PALAFIN] =
 {
     {
         .originalSpecies = SPECIES_PALAFIN_ZERO,
@@ -1072,7 +1072,7 @@
         .description = COMPOUND_STRING("Transforms when fainted or the battle ends. "),
     },
 },
-    [SPECIES_TATSUGIRI] =
+    [POKEDEX_FORM_TATSUGIRI] =
 {
     {
         .originalSpecies = SPECIES_TATSUGIRI,
@@ -1096,7 +1096,7 @@
         .cosmeticFormConstant = POKEDEX_FORM_TATSUGIRI,
     },
 },
-    [SPECIES_GIMMIGHOUL] =
+    [POKEDEX_FORM_GIMMIGHOUL] =
 {
     {
         .originalSpecies = SPECIES_GIMMIGHOUL,

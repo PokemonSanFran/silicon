@@ -117,7 +117,7 @@ extern void (* const pageInputTaskLUT[])(u8 taskId);
 extern const u8 sPokedexWindowFontColors[][3];
 extern const u8 *const sFilterListTexts[];
 
-extern const struct PokemonFormTable pokemonFormTable[][MAX_NUM_FORMS_EVOLUTIONS];
+extern const struct PokemonFormTable pokemonFormTable[POKEDEX_FORM_COUNT][NUMBER_OF_MON_TYPES];
 
 static const u16 pokedexPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/palettes/default.gbapal");
 
@@ -250,6 +250,7 @@ void SpeciesData_PrintMonSprite(u32 shownSpecies);
 void SpeciesData_PrintMonTypes(u32);
 const u8 *GetFormName(u32 species);
 bool32 PageForms_IsSpeciesMega(u16 species);
+enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species);
 void Task_PageWeaknesses_Input(u8 taskId);
 void SpeciesFilter_PrintTextAndSprites(u32 windowId, enum PokedexFilterList currentFilter, bool32 firstRun, u32 fontId);
 void SpeciesFilter_EditPage_ResetValuesAtRowEnd(u32 *typesInRow, u32 *x, u32 *y, enum PokedexFilterList currentFilter, bool32 weaknessLabel);
