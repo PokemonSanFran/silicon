@@ -193,8 +193,8 @@ static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/pa
 static const u32 statsBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.4bpp.lz");
 static const u32 statsBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.bin.lz");
 
-static const u32 mainMenuLocationBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/bg.4bpp.lz");
-static const u32 mainMenuLocationBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/bg.bin.lz");
+static const u32 mainMenuLocationBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.lz");
+static const u32 mainMenuLocationBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.lz");
 
 static const u32 mainMenuContinueMenuBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.4bpp.lz");
 static const u32 mainMenuContinueMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.bin.lz");
@@ -1182,7 +1182,8 @@ static void PrintMainMenuContinueHelpBar(void)
 
 static void PrintPlayerIcon(void)
 {
-    u32 graphicsId = OBJ_EVENT_GFX_KAI; // TODO replace with actual player
+    u8 bodyType = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
+    u32 graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL,bodyType);
     u32 spriteId = CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, 15, 30, 0);
     gSprites[spriteId].oam.priority = 1;
     SetPlayerIconSpriteId(spriteId);

@@ -7,6 +7,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "field_effect.h"
+#include "field_player_avatar.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "item.h"
@@ -2007,6 +2008,11 @@ static void PrintQuestSprite(s32 questId, enum QuestMenuRows row)
             entityId += OBJ_EVENT_MON;
         default:
         case QUEST_SPRITE_TYPE_OBJECT:
+            if (entityId == OBJ_EVENT_GFX_BRENDAN_NORMAL)
+            {
+                u32 bodyType = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
+                entityId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL,bodyType);
+            }
             spriteId = CreateObjectGraphicsSprite2(entityId, SpriteCallbackDummy, x, y, tag);
             break;
         case QUEST_SPRITE_TYPE_CANCEL:
