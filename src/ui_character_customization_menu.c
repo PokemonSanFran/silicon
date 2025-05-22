@@ -1173,211 +1173,214 @@ static void PressedUpButton(){
 
 struct CustomizationData
 {
-    const u8 title[CUSTOMIZATION_OPTION_NAME_LENGTH];
-    const u8 options[MAX_CUSTOMIZATION_OPTIONS_PER_SETTING][CUSTOMIZATION_OPTION_NAME_LENGTH];
+    const u8* title;
+    const u8* options[MAX_CUSTOMIZATION_OPTIONS_PER_SETTING];
     u8 numOptions;
 };
 
-const struct CustomizationData Customization_Options[NUM_CUSTOMIZATION_PARTS] = {
+const struct CustomizationData Customization_Options[NUM_CUSTOMIZATION_PARTS] =
+{
     [CUSTOMIZATION_BODY_TYPE] =
     {
-        .title = _("Body Type"),
-        .options = {
-            _("Type 1"),
-            _("Type 2"),
-            _("Type 3"),
-            _("Type 4"),
-            _("Type 5"),
-            _("Type 6"),
-            _("Type 7"),
-            _("Type 8"),
-            _("Type 9"),
+        .title = COMPOUND_STRING("Body Type"),
+        .options =
+        {
+            [BODY_TYPE_M1] = COMPOUND_STRING("Type 1"),
+            [BODY_TYPE_M2] = COMPOUND_STRING("Type 2"),
+            [BODY_TYPE_M3] = COMPOUND_STRING("Type 3"),
+            [BODY_TYPE_N1] = COMPOUND_STRING("Type 4"),
+            [BODY_TYPE_N2] = COMPOUND_STRING("Type 5"),
+            [BODY_TYPE_N3] = COMPOUND_STRING("Type 6"),
+            [BODY_TYPE_F1] = COMPOUND_STRING("Type 7"),
+            [BODY_TYPE_F2] = COMPOUND_STRING("Type 8"),
+            [BODY_TYPE_F3] = COMPOUND_STRING("Type 9"),
         },
-        .numOptions = 9,
+        .numOptions = NUM_BODY_TYPES,
     },
     [CUSTOMIZATION_SKIN_COLOR] =
     {
-        .title = _("Skin Color"),
+        .title = COMPOUND_STRING("Skin Color"),
         .options = {
-            _("Pale Ivory"),
-            _("Porcelain"),
-            _("Fair"),
-            _("Warm Ivory"),
-            _("Sand"),
-            _("Peach"),
-            _("Rose"),
-            _("Golden"),
-            _("Olive"),
-            _("Caramel"),
-            _("Honey"),
-            _("Amber"),
-            _("Mahogany"),
-            _("Sienna"),
-            _("Bronze"),
-            _("Espresso"),
-            _("Ebony"),
-            _("Cocoa"),
-            _("Custom {A_BUTTON}"),
+            [SKIN_COLOR_PALE_IVORY] = COMPOUND_STRING("Pale Ivory"),
+            [SKIN_COLOR_PORCELAIN] = COMPOUND_STRING("Porcelain"),
+            [SKIN_COLOR_FAIR] = COMPOUND_STRING("Fair"),
+            [SKIN_COLOR_WARM_IVORY] = COMPOUND_STRING("Warm Ivory"),
+            [SKIN_COLOR_SAND] = COMPOUND_STRING("Sand"),
+            [SKIN_COLOR_PEACH] = COMPOUND_STRING("Peach"),
+            [SKIN_COLOR_ROSE] = COMPOUND_STRING("Rose"),
+            [SKIN_COLOR_GOLDEN] = COMPOUND_STRING("Golden"),
+            [SKIN_COLOR_OLIVE] = COMPOUND_STRING("Olive"),
+            [SKIN_COLOR_CARAMEL] = COMPOUND_STRING("Caramel"),
+            [SKIN_COLOR_HONEY] = COMPOUND_STRING("Honey"),
+            [SKIN_COLOR_AMBER] = COMPOUND_STRING("Amber"),
+            [SKIN_COLOR_MAHOGANY] = COMPOUND_STRING("Mahogany"),
+            [SKIN_COLOR_SIENNA] = COMPOUND_STRING("Sienna"),
+            [SKIN_COLOR_BRONZE] = COMPOUND_STRING("Bronze"),
+            [SKIN_COLOR_ESPRESSO] = COMPOUND_STRING("Espresso"),
+            [SKIN_COLOR_EBONY] = COMPOUND_STRING("Ebony"),
+            [SKIN_COLOR_COCOA] = COMPOUND_STRING("Cocoa"),
+            [SKIN_COLOR_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
         .numOptions = NUM_SKIN_COLOR,
     },
     [CUSTOMIZATION_HAIR_COLOR] =
     {
-        .title = _("Hair Color"),
+        .title = COMPOUND_STRING("Hair Color"),
         .options = {
-            _("Gold"),
-            _("Dark Brown"),
-            _("Ash Brown"),
-            _("Light Brown"),
-            _("Platinum"),
-            _("Pink Brown"),
-            _("Wine Red"),
-            _("Green"),
-            _("White"),
-            _("Pink"),
-            _("Blue"),
-            _("Red"),
-            _("Smoky Pink"),
-            _("Blue Green"),
-            _("Lavender"),
-            _("Violet"),
-            _("Scarlet"),
-            _("Silver"),
-            _("Ash Purple"),
-            _("Ash White"),
-            _("Ash Blond"),
-            _("Ash Green"),
-            _("Dark Denim"),
-            _("Denim"),
-            _("Light Denim"),
-            _("Black"),
-            _("Custom {A_BUTTON}"),
+            [HAIR_COLOR_GOLD] = COMPOUND_STRING("Gold"),
+            [HAIR_COLOR_DARK_BROWN] = COMPOUND_STRING("Dark Brown"),
+            [HAIR_COLOR_ASH_BROWN] = COMPOUND_STRING("Ash Brown"),
+            [HAIR_COLOR_LIGHT_BROWN] = COMPOUND_STRING("Light Brown"),
+            [HAIR_COLOR_PLATINUM] = COMPOUND_STRING("Platinum"),
+            [HAIR_COLOR_PINK_BROWN] = COMPOUND_STRING("Pink Brown"),
+            [HAIR_COLOR_WINE_RED] = COMPOUND_STRING("Wine Red"),
+            [HAIR_COLOR_GREEN] = COMPOUND_STRING("Green"),
+            [HAIR_COLOR_WHITE] = COMPOUND_STRING("White"),
+            [HAIR_COLOR_PINK] = COMPOUND_STRING("Pink"),
+            [HAIR_COLOR_BLUE] = COMPOUND_STRING("Blue"),
+            [HAIR_COLOR_RED] = COMPOUND_STRING("Red"),
+            [HAIR_COLOR_SMOKY_PINK] = COMPOUND_STRING("Smoky Pink"),
+            [HAIR_COLOR_BLUE_GREEN] = COMPOUND_STRING("Blue Green"),
+            [HAIR_COLOR_LAVENDER] = COMPOUND_STRING("Lavender"),
+            [HAIR_COLOR_VIOLET] = COMPOUND_STRING("Violet"),
+            [HAIR_COLOR_SCARLET] = COMPOUND_STRING("Scarlet"),
+            [HAIR_COLOR_SILVER] = COMPOUND_STRING("Silver"),
+            [HAIR_COLOR_ASH_PURPLE] = COMPOUND_STRING("Ash Purple"),
+            [HAIR_COLOR_ASH_WHITE] = COMPOUND_STRING("Ash White"),
+            [HAIR_COLOR_ASH_BLOND] = COMPOUND_STRING("Ash Blond"),
+            [HAIR_COLOR_ASH_GREEN] = COMPOUND_STRING("Ash Green"),
+            [HAIR_COLOR_DARK_DENIM] = COMPOUND_STRING("Dark Denim"),
+            [HAIR_COLOR_DENIM] = COMPOUND_STRING("Denim"),
+            [HAIR_COLOR_LIGHT_DENIM] = COMPOUND_STRING("Light Denim"),
+            [HAIR_COLOR_BLACK] = COMPOUND_STRING("Black"),
+            [HAIR_COLOR_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
         .numOptions = NUM_HAIR_COLOR,
     },
     [CUSTOMIZATION_PRIMARY_COLOR] =
     {
-        .title = _("Primary Color"),
+        .title = COMPOUND_STRING("Primary Color"),
         .options = {
-            _("Scarlet"),
-            _("Black"),
-            _("White"),
-            _("Golden"),
-            _("Ruby"),
-            _("Emerald"),
-            _("Sapphire"),
-            _("Violet"),
-            _("Silver"),
-            _("Custom {A_BUTTON}"),
+            [OUTFIT_COLOR_SCARLET] = COMPOUND_STRING("Scarlet"),
+            [OUTFIT_COLOR_BLACK] = COMPOUND_STRING("Black"),
+            [OUTFIT_COLOR_WHITE] = COMPOUND_STRING("White"),
+            [OUTFIT_COLOR_GOLDEN] = COMPOUND_STRING("Golden"),
+            [OUTFIT_COLOR_RUBY] = COMPOUND_STRING("Ruby"),
+            [OUTFIT_COLOR_EMERALD] = COMPOUND_STRING("Emerald"),
+            [OUTFIT_COLOR_SAPPHIRE] = COMPOUND_STRING("Sapphire"),
+            [OUTFIT_COLOR_VIOLET] = COMPOUND_STRING("Violet"),
+            [OUTFIT_COLOR_SILVER] = COMPOUND_STRING("Silver"),
+            [OUTFIT_COLOR_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
         .numOptions = NUM_PRIMARY_COLOR,
     },
     [CUSTOMIZATION_SECONDARY_COLOR] =
     {
-        .title = _("Secondary Color"),
+        .title = COMPOUND_STRING("Accent Color"),
         .options = {
-            _("Scarlet"),
-            _("Black"),
-            _("White"),
-            _("Golden"),
-            _("Ruby"),
-            _("Emerald"),
-            _("Sapphire"),
-            _("Violet"),
-            _("Silver"),
-            _("Custom {A_BUTTON}"),
+            [OUTFIT_COLOR_SCARLET] = COMPOUND_STRING("Scarlet"),
+            [OUTFIT_COLOR_BLACK] = COMPOUND_STRING("Black"),
+            [OUTFIT_COLOR_WHITE] = COMPOUND_STRING("White"),
+            [OUTFIT_COLOR_GOLDEN] = COMPOUND_STRING("Golden"),
+            [OUTFIT_COLOR_RUBY] = COMPOUND_STRING("Ruby"),
+            [OUTFIT_COLOR_EMERALD] = COMPOUND_STRING("Emerald"),
+            [OUTFIT_COLOR_SAPPHIRE] = COMPOUND_STRING("Sapphire"),
+            [OUTFIT_COLOR_VIOLET] = COMPOUND_STRING("Violet"),
+            [OUTFIT_COLOR_SILVER] = COMPOUND_STRING("Silver"),
+            [OUTFIT_COLOR_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
         .numOptions = NUM_PRIMARY_COLOR,
     },
     [CUSTOMIZATION_SUBJECT_PRONOUN] =
     {
-        .title = _("Subject Pronoun"),
+        .title = COMPOUND_STRING("Subject Pronoun"),
         .options = {
-            _("They"),
-            _("He"),
-            _("She"),
-            _("Custom {A_BUTTON}"),
+            [PRONOUN_SUBJECT_THEY] = COMPOUND_STRING("They"),
+            [PRONOUN_SUBJECT_HE] = COMPOUND_STRING("He"),
+            [PRONOUN_SUBJECT_SHE] = COMPOUND_STRING("She"),
+            [PRONOUN_SUBJECT_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
-        .numOptions = 4,
+        .numOptions = PRONOUN_SUBJECT_COUNT,
     },
     [CUSTOMIZATION_OBJECT_PRONOUN] =
     {
-        .title = _("Object Pronoun"),
+        .title = COMPOUND_STRING("Object Pronoun"),
         .options = {
-            _("Them"),
-            _("Him"),
-            _("Her"),
-            _("Custom {A_BUTTON}"),
+            [PRONOUN_OBJECT_THEM] = COMPOUND_STRING("Them"),
+            [PRONOUN_OBJECT_HIM] = COMPOUND_STRING("Him"),
+            [PRONOUN_OBJECT_HER] = COMPOUND_STRING("Her"),
+            [PRONOUN_OBJECT_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
-        .numOptions = 4,
+        .numOptions = PRONOUN_OBJECT_COUNT,
     },
     [CUSTOMIZATION_POSSESIVE_PRONOUN] =
     {
-        .title = _("Possesive Pronoun"),
+        .title = COMPOUND_STRING("Possessive Pronoun"),
         .options = {
-            _("Their"),
-            _("His"),
-            _("Hers"),
-            _("Custom {A_BUTTON}"),
+            [PRONOUN_POSSESSIVE_THEIR] = COMPOUND_STRING("Their"),
+            [PRONOUN_POSSESSIVE_HIS] = COMPOUND_STRING("His"),
+            [PRONOUN_POSSESSIVE_HER] = COMPOUND_STRING("Hers"),
+            [PRONOUN_POSSESSIVE_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
-        .numOptions = 4,
+        .numOptions = PRONOUN_POSSESSIVE_COUNT,
     },
 };
 
-const struct CustomizationData Custom_Color_Options[NUM_COLOR_OPTIONS] = {
+const struct CustomizationData Custom_Color_Options[NUM_COLOR_OPTIONS] =
+{
     [OPTION_COLOR_RED] =
     {
-        .title = _("Red Value"),
+        .title = COMPOUND_STRING("Red Value"),
         .options = {
-            _("0/10"),
-            _("1/10"),
-            _("2/10"),
-            _("3/10"),
-            _("4/10"),
-            _("5/10"),
-            _("6/10"),
-            _("7/10"),
-            _("8/10"),
-            _("9/10"),
-            _("10/10"),
+            [0] = COMPOUND_STRING("0"),
+            [1] = COMPOUND_STRING("1"),
+            [2] = COMPOUND_STRING("2"),
+            [3] = COMPOUND_STRING("3"),
+            [4] = COMPOUND_STRING("4"),
+            [5] = COMPOUND_STRING("5"),
+            [6] = COMPOUND_STRING("6"),
+            [7] = COMPOUND_STRING("7"),
+            [8] = COMPOUND_STRING("8"),
+            [9] = COMPOUND_STRING("9"),
+            [10] = COMPOUND_STRING("10"),
         },
-        .numOptions = 11,
+        .numOptions = NUM_COLOR_LEVEL,
     },
     [OPTION_COLOR_GREEN] =
     {
-        .title = _("Green Value"),
+        .title = COMPOUND_STRING("Green Value"),
         .options = {
-            _("0/10"),
-            _("1/10"),
-            _("2/10"),
-            _("3/10"),
-            _("4/10"),
-            _("5/10"),
-            _("6/10"),
-            _("7/10"),
-            _("8/10"),
-            _("9/10"),
-            _("10/10"),
+            [0] = COMPOUND_STRING("0"),
+            [1] = COMPOUND_STRING("1"),
+            [2] = COMPOUND_STRING("2"),
+            [3] = COMPOUND_STRING("3"),
+            [4] = COMPOUND_STRING("4"),
+            [5] = COMPOUND_STRING("5"),
+            [6] = COMPOUND_STRING("6"),
+            [7] = COMPOUND_STRING("7"),
+            [8] = COMPOUND_STRING("8"),
+            [9] = COMPOUND_STRING("9"),
+            [10] = COMPOUND_STRING("10"),
         },
-        .numOptions = 11,
+        .numOptions = NUM_COLOR_LEVEL,
     },
     [OPTION_COLOR_BLUE] =
     {
-        .title = _("Blue Value"),
+        .title = COMPOUND_STRING("Blue Value"),
         .options = {
-            _("0/10"),
-            _("1/10"),
-            _("2/10"),
-            _("3/10"),
-            _("4/10"),
-            _("5/10"),
-            _("6/10"),
-            _("7/10"),
-            _("8/10"),
-            _("9/10"),
-            _("10/10"),
+            [0] = COMPOUND_STRING("0"),
+            [1] = COMPOUND_STRING("1"),
+            [2] = COMPOUND_STRING("2"),
+            [3] = COMPOUND_STRING("3"),
+            [4] = COMPOUND_STRING("4"),
+            [5] = COMPOUND_STRING("5"),
+            [6] = COMPOUND_STRING("6"),
+            [7] = COMPOUND_STRING("7"),
+            [8] = COMPOUND_STRING("8"),
+            [9] = COMPOUND_STRING("9"),
+            [10] = COMPOUND_STRING("10"),
         },
-        .numOptions = 11,
+        .numOptions = NUM_COLOR_LEVEL,
     },
 };
 
@@ -1396,7 +1399,7 @@ static void PrintToWindow(u8 colorIdx)
 {
     u8 i;
     u8* end;
-    u32 windowWidth = 41;
+    u32 windowWidth = 0;
     u32 x, y;
     enum CustomizeWindows windowId;
 
@@ -1414,8 +1417,13 @@ static void PrintToWindow(u8 colorIdx)
         //Options Title
         x = 8;
         y = 6;
-        for(i = 0; i < NUM_MAX_CUSTOMIZATION_PARTS_ON_SCREEN; i++){
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, Customization_Options[sMenuDataPtr->currentFirstOption + i].title);
+        windowWidth = 80;
+        for(i = 0; i < NUM_MAX_CUSTOMIZATION_PARTS_ON_SCREEN; i++)
+        {
+            end = StringCopy(gStringVar4,Customization_Options[sMenuDataPtr->currentFirstOption + i].title);
+            PrependFontIdToFit(gStringVar4,end,0,windowWidth);
+
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, gStringVar4);
         }
 
         //Options Configuration
@@ -1427,7 +1435,7 @@ static void PrintToWindow(u8 colorIdx)
             if((sMenuDataPtr->currentFirstOption + i == CUSTOMIZATION_SUBJECT_PRONOUN ||
                         sMenuDataPtr->currentFirstOption + i == CUSTOMIZATION_OBJECT_PRONOUN ||
                         sMenuDataPtr->currentFirstOption + i == CUSTOMIZATION_POSSESIVE_PRONOUN) &&
-                    gSaveBlock3Ptr->customizationValues[sMenuDataPtr->currentFirstOption + i] == Customization_Options[sMenuDataPtr->currentFirstOption + i].numOptions - 1){
+                    gSaveBlock3Ptr->customizationValues[sMenuDataPtr->currentFirstOption + i] == (Customization_Options[sMenuDataPtr->currentFirstOption + i].numOptions - 1)){
                 switch(sMenuDataPtr->currentFirstOption + i){
                     case CUSTOMIZATION_SUBJECT_PRONOUN:
                         if(HasCustomSubjectPronounBeenModified()){
@@ -1462,6 +1470,7 @@ static void PrintToWindow(u8 colorIdx)
                 }
             }
 
+            windowWidth = 41;
             PrependFontIdToFit(gStringVar4,end,0,windowWidth);
             x = 14;
             y = 6;
@@ -1506,6 +1515,7 @@ static void PrintToWindow(u8 colorIdx)
         x = 14;
         y = 6;
         windowId = CUSTOM_WINDOW_VALUES;
+        windowWidth = 41;
         for(i = 0; i < NUM_COLOR_OPTIONS; i++){
             end = StringCopy(gStringVar1,Custom_Color_Options[i].options[gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][i]]);
             PrependFontIdToFit(gStringVar1,end,0,windowWidth);
@@ -1593,13 +1603,13 @@ static void Task_MenuMain(u8 taskId)
     if(JOY_NEW(DPAD_RIGHT) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
 	{
         if(!sMenuDataPtr->isCustomPaletteScren){
-            if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1)
+            if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1))
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = 0;
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]++;
         }
         else{
-            if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1)
+            if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1))
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = 0;
             else
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren]++;
@@ -1616,13 +1626,13 @@ static void Task_MenuMain(u8 taskId)
 	{
         if(!sMenuDataPtr->isCustomPaletteScren){
             if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == 0)
-                gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1;
+                gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1);
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]--;
         }
         else{
             if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == 0)
-                gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1;
+                gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1);
             else
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren]--;
         }
@@ -1643,7 +1653,7 @@ static void Task_MenuMain(u8 taskId)
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
-            else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1 &&
+            else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
                sMenuDataPtr->cursorPlace != CUSTOMIZATION_BODY_TYPE &&
                sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
                sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
@@ -1652,7 +1662,7 @@ static void Task_MenuMain(u8 taskId)
                 sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
                 sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
             }
-            else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1 &&
+            else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
                 (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
                 sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
                 sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN)){
@@ -1749,12 +1759,12 @@ void SetPlayerAvatarToChampion(void)
 static const u16 sSkinColorList[] =
 {
     [SKIN_COLOR_PALE_IVORY] = RGB2GBA(255, 231, 205),
-    [SKIN_COLOR_LIGHT_PORCELAIN] = RGB2GBA(240, 213, 187),
-    [SKIN_COLOR_FAIR_BEIGE] = RGB2GBA(225, 184, 153),
+    [SKIN_COLOR_PORCELAIN] = RGB2GBA(240, 213, 187),
+    [SKIN_COLOR_FAIR] = RGB2GBA(225, 184, 153),
     [SKIN_COLOR_WARM_IVORY] = RGB2GBA(210, 170, 140),
-    [SKIN_COLOR_LIGHT_SAND] = RGB2GBA(195, 156, 128),
+    [SKIN_COLOR_SAND] = RGB2GBA(195, 156, 128),
     [SKIN_COLOR_PEACH] = RGB2GBA(232, 190, 163),
-    [SKIN_COLOR_ROSY_BEIGE] = RGB2GBA(200, 150, 120),
+    [SKIN_COLOR_ROSE] = RGB2GBA(200, 150, 120),
     [SKIN_COLOR_GOLDEN] = RGB2GBA(180, 140, 110),
     [SKIN_COLOR_OLIVE] = RGB2GBA(160, 130, 95),
     [SKIN_COLOR_CARAMEL] = RGB2GBA(170, 110, 80),
@@ -1762,10 +1772,10 @@ static const u16 sSkinColorList[] =
     [SKIN_COLOR_AMBER] = RGB2GBA(130, 80, 50),
     [SKIN_COLOR_MAHOGANY] = RGB2GBA(110, 60, 40),
     [SKIN_COLOR_SIENNA] = RGB2GBA(90, 50, 30),
-    [SKIN_COLOR_DEEP_BRONZE] = RGB2GBA(70, 40, 20),
+    [SKIN_COLOR_BRONZE] = RGB2GBA(70, 40, 20),
     [SKIN_COLOR_ESPRESSO] = RGB2GBA(60, 30, 15),
-    [SKIN_COLOR_DARK_EBONY] = RGB2GBA(40, 20, 10),
-    [SKIN_COLOR_RICH_COCOA] = RGB2GBA(30, 15, 10),
+    [SKIN_COLOR_EBONY] = RGB2GBA(40, 20, 10),
+    [SKIN_COLOR_COCOA] = RGB2GBA(30, 15, 10),
 };
 
 static const u16 sHairColorList[] =
@@ -1774,7 +1784,7 @@ static const u16 sHairColorList[] =
     [HAIR_COLOR_DARK_BROWN] = RGB2GBA(60, 40, 20),
     [HAIR_COLOR_ASH_BROWN] = RGB2GBA(130, 110, 90),
     [HAIR_COLOR_LIGHT_BROWN] = RGB2GBA(150, 110, 70),
-    [HAIR_COLOR_PLATINUM_BLOND] = RGB2GBA(230, 230, 210),
+    [HAIR_COLOR_PLATINUM] = RGB2GBA(230, 230, 210),
     [HAIR_COLOR_PINK_BROWN] = RGB2GBA(190, 130, 130),
     [HAIR_COLOR_WINE_RED] = RGB2GBA(100, 30, 50),
     [HAIR_COLOR_GREEN] = RGB2GBA(50, 130, 70),
@@ -1792,9 +1802,9 @@ static const u16 sHairColorList[] =
     [HAIR_COLOR_ASH_WHITE] = RGB2GBA(220, 220, 220),
     [HAIR_COLOR_ASH_BLOND] = RGB2GBA(200, 180, 150),
     [HAIR_COLOR_ASH_GREEN] = RGB2GBA(120, 140, 110),
-    [HAIR_COLOR_DARK_DENIM_BLUE] = RGB2GBA(40, 70, 110),
-    [HAIR_COLOR_DENIM_BLUE] = RGB2GBA(70, 100, 150),
-    [HAIR_COLOR_LIGHT_DENIM_BLUE] = RGB2GBA(120, 150, 190),
+    [HAIR_COLOR_DARK_DENIM] = RGB2GBA(40, 70, 110),
+    [HAIR_COLOR_DENIM] = RGB2GBA(70, 100, 150),
+    [HAIR_COLOR_LIGHT_DENIM] = RGB2GBA(120, 150, 190),
     [HAIR_COLOR_BLACK] = RGB2GBA(30, 20, 10),
 };
 
