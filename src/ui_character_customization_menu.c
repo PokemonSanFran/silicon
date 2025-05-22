@@ -1208,6 +1208,7 @@ const struct CustomizationData Customization_Options[NUM_CUSTOMIZATION_PARTS] =
             [SKIN_COLOR_SAND] = COMPOUND_STRING("Sand"),
             [SKIN_COLOR_PEACH] = COMPOUND_STRING("Peach"),
             [SKIN_COLOR_ROSE] = COMPOUND_STRING("Rose"),
+            [SKIN_COLOR_DANDELION] = COMPOUND_STRING("Dandelion"),
             [SKIN_COLOR_GOLDEN] = COMPOUND_STRING("Golden"),
             [SKIN_COLOR_OLIVE] = COMPOUND_STRING("Olive"),
             [SKIN_COLOR_CARAMEL] = COMPOUND_STRING("Caramel"),
@@ -1765,6 +1766,7 @@ static const u16 sSkinColorList[] =
     [SKIN_COLOR_SAND] = RGB2GBA(195, 156, 128),
     [SKIN_COLOR_PEACH] = RGB2GBA(232, 190, 163),
     [SKIN_COLOR_ROSE] = RGB2GBA(200, 150, 120),
+    [SKIN_COLOR_DANDELION] = RGB2GBA(218,202,126),
     [SKIN_COLOR_GOLDEN] = RGB2GBA(180, 140, 110),
     [SKIN_COLOR_OLIVE] = RGB2GBA(160, 130, 95),
     [SKIN_COLOR_CARAMEL] = RGB2GBA(170, 110, 80),
@@ -1830,21 +1832,21 @@ void SetCustomPlayerPalette(u16 *palette)
     bool8 disableCustomPrimaryColor = FALSE;
     bool8 disableCustomSecondaryColor = FALSE;
     //Skin
-    u8 rToneSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][VISUAL_OPTION_COLOR_RED];
-    u8 gToneSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][VISUAL_OPTION_COLOR_GREEN];
-    u8 bTonSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][VISUAL_OPTION_COLOR_BLUE];
+    u8 rToneSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_RED];
+    u8 gToneSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_BLUE];
     //Hair
-    u8 rToneHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][VISUAL_OPTION_COLOR_RED];
-    u8 gToneHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][VISUAL_OPTION_COLOR_GREEN];
-    u8 bTonHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][VISUAL_OPTION_COLOR_BLUE];
+    u8 rToneHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_RED];
+    u8 gToneHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_BLUE];
     //Primary
-    u8 rTonePrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][VISUAL_OPTION_COLOR_RED];
-    u8 gTonePrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][VISUAL_OPTION_COLOR_GREEN];
-    u8 bTonPrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][VISUAL_OPTION_COLOR_BLUE];
+    u8 rTonePrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_RED];
+    u8 gTonePrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonPrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_BLUE];
     //Secondary
-    u8 rToneSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][VISUAL_OPTION_COLOR_RED];
-    u8 gToneSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][VISUAL_OPTION_COLOR_GREEN];
-    u8 bTonSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][VISUAL_OPTION_COLOR_BLUE];
+    u8 rToneSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_RED];
+    u8 gToneSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_BLUE];
 
 
     //Skin
