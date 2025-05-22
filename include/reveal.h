@@ -6,19 +6,20 @@ void RevealCharacter(enum RevealIds revealId, bool32 overworldState);
 
 struct RevealCharacterStruct
 {
-    u32 trainerId;
-    u32 buzzrId;
+    u16 trainerId;
+    u16 buzzrId;
     const u8 *const quote;
     const u8 *const bio;
-    const u32 accentColor;
+    const u16 accentColor;
 };
 
-struct RevealPrintConfig {
-    u32 fontId;
-    u32 x;
-    u32 y;
-    u32 colorIndex;
-    u32 frameThreshold;
+struct RevealPrintConfig
+{
+    u8 fontId;
+    u8 x;
+    u8 y;
+    u8 colorIndex;
+    u8 frameThreshold;
 };
 
 
