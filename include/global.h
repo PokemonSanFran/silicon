@@ -255,7 +255,7 @@ struct SaveBlock3
     u16 prestoBuyAgainItem[MAX_PRESTO_BUY_AGAIN_ITEMS];
     u16 lastUsedBall;
     u8 customizationValues[NUM_CUSTOMIZATION_PARTS];
-    u8 rgbValues[NUM_CUSTOMIZATION_PARTS][NUM_COLOR_OPTIONS];
+    u8 rgbValues[NUM_CUSTOM_COLOR_OPTIONS][NUM_COLOR_OPTIONS];
     u8 playerSubjectPronoun[PLAYER_NAME_LENGTH + 1];
     u8 playerObjectPronoun[PLAYER_NAME_LENGTH + 1];
     u8 playerPosesivePronoun[PLAYER_NAME_LENGTH + 1];

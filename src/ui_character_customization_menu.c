@@ -464,7 +464,7 @@ void Character_Customization_Menu_Init(MainCallback callback)
         sMenuDataPtr->Temp_Customization_Settings[i] = gSaveBlock3Ptr->customizationValues[i];
     }
 
-    for(i = 0; i < NUM_CUSTOMIZATION_PARTS; i++){
+    for(i = CUSTOMIZATION_SKIN_COLOR; i < NUM_CUSTOM_COLOR_OPTIONS; i++){
         for(j = 0; j < NUM_COLOR_OPTIONS; j++){
             sMenuDataPtr->Temp_Custom_Color_Settings[i][j] = gSaveBlock3Ptr->rgbValues[i][j];
         }
@@ -491,7 +491,7 @@ static void ResetSaveBlockCustomizationDataBeforeExit(void)
         gSaveBlock3Ptr->customizationValues[i] = sMenuDataPtr->Temp_Customization_Settings[i];
     }
 
-    for(i = 0; i < NUM_CUSTOMIZATION_PARTS; i++){
+    for(i = CUSTOMIZATION_SKIN_COLOR; i < NUM_CUSTOM_COLOR_OPTIONS; i++){
         for(j = 0; j < NUM_COLOR_OPTIONS; j++){
             gSaveBlock3Ptr->rgbValues[i][j] = sMenuDataPtr->Temp_Custom_Color_Settings[i][j];
         }
@@ -1755,6 +1755,10 @@ void SetPlayerPalette(u32 paletteTag, struct Sprite *sprite)
 void SetPlayerAvatarToChampion(void)
 {
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE] = BODY_TYPE_CHAMPION;
+
+    for (enum CustomizationOptions optionIndex = 1; optionIndex <  NUM_CUSTOM_COLOR_OPTIONS; optionIndex++)
+        for (enum OptionColorRGB colorIndex = 0; colorIndex < NUM_COLOR_OPTIONS; colorIndex++)
+            gSaveBlock3Ptr->rgbValues[optionIndex][colorIndex] = (Random() %  NUM_COLOR_LEVEL);
 }
 
 static const u16 sSkinColorList[] =

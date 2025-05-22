@@ -4,7 +4,8 @@
 #include "ui_character_customization_menu.h"
 
 //For Customization
-enum{
+enum CustomizationOptions
+{
     CUSTOMIZATION_BODY_TYPE,
     CUSTOMIZATION_SKIN_COLOR,
     CUSTOMIZATION_HAIR_COLOR,
@@ -16,7 +17,10 @@ enum{
     NUM_CUSTOMIZATION_PARTS,
 };
 
-enum{
+#define NUM_CUSTOM_COLOR_OPTIONS (CUSTOMIZATION_SECONDARY_COLOR + 1)
+
+enum OptionColorRGB
+{
     OPTION_COLOR_RED,
     OPTION_COLOR_GREEN,
     OPTION_COLOR_BLUE,
