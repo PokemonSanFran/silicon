@@ -32,7 +32,6 @@ script ThereCanOnlyBeOne_Narrator_Dialogue {
     msgbox(gText_ThereCanOnlyBe_DueToTheDelicateEcosystem)
     closemessage
     setvar(VAR_CHOSEN_PSF_STARTER, NO_STARTER_CHOSEN)
-    call(ThereCanOnlyBeOne_SetUpPlayer_Script)
     startmenu_savescreen
     goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
 }
