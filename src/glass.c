@@ -45,7 +45,7 @@
 void DebugSetTrainerStatus(void);
 
 static void Glass_Init(MainCallback, s32, s32, s32, u16, u16);
-static bool32 AllocateStructs(void);
+static bool8 AllocateStructs(void);
 static void Glass_SetupCB(void);
 static void FreeSpritePalettesResetSpriteData(void);
 static void InitBgsAndLoadBackgroundGraphics(bool32);
@@ -56,8 +56,8 @@ static void StartFadeAndSetUpBasedOnMode(void);
 static void Glass_VBlankCB(void);
 static void Glass_MainCB(void);
 
-static bool32 Glass_InitBgs(bool32);
-static bool32 AllocZeroedTilemapBuffers(void);
+static bool8 Glass_InitBgs(bool32);
+static bool8 AllocZeroedTilemapBuffers(void);
 static void HandleAndShowBgs(bool32);
 static void SetScheduleBgs(u32);
 static void SetBackgroundTransparency(void);
@@ -74,7 +74,7 @@ static const u32* GetBg2Tilemap(void);
 static const u32* GetBg3Tilemap(void);
 static const u16* GetRelevantPalette(void);
 
-static bool32 IsAppTrainerMode(void);
+static bool8 IsAppTrainerMode(void);
 static void ToggleGlassMode(void);
 static void SetUpLocationMode(u8);
 static void SwitchToTrainerMode(u8);
@@ -90,49 +90,49 @@ static void LoadCreateLocationModeSprites(void);
 
 static void LoadMarkSpriteSheets(void);
 static void LoadSingleMarkSprite(u32, u32, u32, u32);
-static u32 CalculateTileTag(u32, u32, u32, u32);
+static u16 CalculateTileTag(u32, u32, u32, u32);
 
 static void CreateMapCursor(void);
 static void SpriteCallback_MapCursor(struct Sprite*);
 static void HandleMapCursorVisibility(struct Sprite*, s32);
 static void MoveMapCursorSprite(struct Sprite*, u32);
-static u32 CalculateMiniMapXCoord(u32);
-static u32 CalculateMiniMapYCoord(u32);
-static u32 CalculateMiniMapCoord(u32);
+static u8 CalculateMiniMapXCoord(u32);
+static u8 CalculateMiniMapYCoord(u32);
+static u8 CalculateMiniMapCoord(u32);
 
 static void CreateLocationArrowSpritePair(void);
 static void CreateUpLocationArrowSprite(void);
 static void CreateDownLocationArrowSprite(void);
 static void CreateLocationArrowSprite(u32,const u32*, u32, u32, void (*callback)(struct Sprite*));
 static void SpriteCB_MenuArrow(struct Sprite*);
-static bool32 ArrowPositionIsTop(struct Sprite*);
+static bool8 ArrowPositionIsTop(struct Sprite*);
 static void AnimateLocationArrowSprite(struct Sprite*, u32);
 static void HandleMenuArrowSpriteVisibility(struct Sprite*, bool32);
-static bool32 IsCursorOrPositionAtBottom(void);
-static bool32 IsCursorOrPositionAtTop(void);
-static bool32 IsTrainerCursorAtTop(void);
-static bool32 IsTrainerCursorAtBottom(void);
-static bool32 IsLocationPositionAtTop(void);
-static bool32 IsLocationPositionAtBottom(void);
+static bool8 IsCursorOrPositionAtBottom(void);
+static bool8 IsCursorOrPositionAtTop(void);
+static bool8 IsTrainerCursorAtTop(void);
+static bool8 IsTrainerCursorAtBottom(void);
+static bool8 IsLocationPositionAtTop(void);
+static bool8 IsLocationPositionAtBottom(void);
 
 static void InitalizeCheckMonSpriteId(void);
 static void DestroyCheckMonCursorSprite(void);
 static void SaveCheckMonCursorSpriteId(u32);
 static void PrintLocationCheckmark(u8, u32, u8);
 static void CheckLocationCreateCheckHoverSprite(struct ListMenu*, s32);
-static u32 CalculateCheckmarkVerticalPosition(struct ListMenu*);
+static u8 CalculateCheckmarkVerticalPosition(struct ListMenu*);
 static void CreateCheckSprite(u32, u32);
 static u16 GetLocationHoverCheckTileTag(void);
 
-static u32 GetLocationSortFromSaveBlock(void);
+static u8 GetLocationSortFromSaveBlock(void);
 static void PopulateLocationList(void);
 static void SetNumListElements(u32);
-static u32 GetNumListElements(void);
+static u8 GetNumListElements(void);
 static void BuildLocationListTemplate(void);
-static u32 GenerateList(void);
+static u8 GenerateList(void);
 static void AssignCancelNameAndId(u8);
 
-static u32 GetCurrentSort(void);
+static u8 GetCurrentSort(void);
 static void SortLocationsById(void);
 static void SortAllLocationsAZ(void);
 static void SortAllLocationUndiscoveredFirst(void);
@@ -149,11 +149,11 @@ static void SortLocationsConqueredFirst(u32*, u32);
 static void AddSortedLocationsToList(u32*, u32, u32*, u32);
 static void PopulateListMenuWithSortedLocation(u32*, u32);
 
-static bool32 IsLocationVisited(u32);
-static bool32 IsBothLocationsLocked(u32*, u32, u32);
-static bool32 IsLocationStateVisible(u32);
-static bool32 IsLocationConquered(u32);
-static u32 GetLocationPercent(u32);
+static bool8 IsLocationVisited(u32);
+static bool8 IsBothLocationsLocked(u32*, u32, u32);
+static bool8 IsLocationStateVisible(u32);
+static bool8 IsLocationConquered(u32);
+static u8 GetLocationPercent(u32);
 static const u8* GetLocationName(u32);
 
 static void PrintMenuHeader(void);
@@ -161,7 +161,7 @@ static void HandleMenuHeader(void);
 static void Glass_PrintSortModeHeader(u32, u32);
 static const u8* GetSortName(u32);
 static void PrintLocationName(void);
-static u32 CalculateLocationNameXPosition(u32, u8*, u32);
+static u8 CalculateLocationNameXPosition(u32, u8*, u32);
 
 static void PrintHelpBar(void);
 static const u8* GetHelpBarText(void);
@@ -169,10 +169,10 @@ static const u8 *GetHelpBarTrainerText(u32);
 static const u8 *GetHelpBarLocationText(u32);
 
 static void Task_LocationInput(u8);
-static u32 GetLocationIdFromCurrentPosition(void);
-static u32 GetCurrentPosition(void);
-static u32 GetLocationScrollOffset(void);
-static u32 GetLocationRowPosition(void);
+static u8 GetLocationIdFromCurrentPosition(void);
+static u8 GetCurrentPosition(void);
+static u8 GetLocationScrollOffset(void);
+static u8 GetLocationRowPosition(void);
 static void SaveChosenLocation(u32);
 
 static void MoveCursorFunc(s32, bool8, struct ListMenu*);
@@ -180,7 +180,7 @@ static void PlayCursorSound(bool32);
 
 static void HandleLocationStats(s32);
 static void PrintLocationStats(s32, u32);
-static u32 GetMapSectionFromTrainerId(u32);
+static u8 GetMapSectionFromTrainerId(u32);
 static void CountNumberTrainers(u32, u32*);
 static void HandleLocationStatsTotal(u32*);
 static void HandleLocationStatsDiscovered(u32*);
@@ -192,11 +192,11 @@ static void PrintLocationPercent(u32, u32, u32);
 static void PrintLocationTotal(u32, u32);
 static void PrintLocationDefeated(u32, u32);
 static void PrintLocationRemaining(u32, u32);
-static u32 GetLocationStat(u32);
+static u8 GetLocationStat(u32);
 
 static void HandleLocationInput(u32, u8, u32);
 
-static u32 IncrementSortOrder(bool32);
+static u8 IncrementSortOrder(bool32);
 static void WriteLocationSortToSaveBlock(u32);
 static void WriteTrainerSortToSaveBlock(u32);
 static void SetSortOrderAndSave(void);
@@ -209,10 +209,10 @@ static void ResetLocationCursorToTop(s16*);
 
 static void DestroyListClearWindow(s16*);
 static void SaveScrollAndRowPositions(void);
-static u32 GetTrainerSortFromSaveBlock(void);
+static u8 GetTrainerSortFromSaveBlock(void);
 static void ChangeSortAndReloadTrainerList(u8);
 static void BuildTrainerListTemplate(u32);
-static u32 GetChosenLocation(void);
+static u8 GetChosenLocation(void);
 
 static void PopulateTrainerList(u32);
 static void SortTrainerList();
@@ -226,38 +226,38 @@ static void PrintAllParties(void);
 static void InitalizeNameplateSpriteId(void);
 static void HandleTrainerName(void);
 static void PrintNameplate(void);
-static u32 CalculateVerticalNameplatePosition(void);
+static u8 CalculateVerticalNameplatePosition(void);
 static void LoadNameplateSprite(void);
 static void SaveNameplateSpriteId(u32);
 static void SpriteCallback_Nameplate(struct Sprite *sprite);
 static void MoveNameplate(void);
-static u32 GetNameplateSpriteId(void);
+static u8 GetNameplateSpriteId(void);
 
-static u32 GetTrainerIdFromCurrentPosition(void);
-static u32 GetTrainerIdFromPosition(u32);
+static u8 GetTrainerIdFromCurrentPosition(void);
+static u8 GetTrainerIdFromPosition(u32);
 static void PrintTrainerName(void);
 static const u8 *GetTrainerName(u32);
 static void* CalculateTrainerNameTileDestination(void);
 static u8* CreateTrainerNameWindowAddText(u32*);
 static void CopyTrainerNameWindowOntoNameplateMemory(u8*, void*, u32);
-static u32 CalculateTrainerNameHorizontalPosition(u32, u32, u32);
+static u8 CalculateTrainerNameHorizontalPosition(u32, u32, u32);
 static void DestroyNameplateSpriteId(void);
 
 static void PrintMonCursor(void);
-static u32 CalculateVerticalMonCursorPosition(u32);
+static u8 CalculateVerticalMonCursorPosition(u32);
 static void LoadMonCursorSprite(void);
 static void SpriteCallback_MonCursor(struct Sprite *sprite);
 static void MoveMonCursor(void);
-static u32 GetCheckMonCursorSpriteId(void);
-static u32 CalculateVerticalTrainerPosition(u32);
-static u32 CalculateCursorHorizontalPosition(void);
+static u8 GetCheckMonCursorSpriteId(void);
+static u8 CalculateVerticalTrainerPosition(u32);
+static u8 CalculateCursorHorizontalPosition(void);
 
 static void IncrementTrainerColumn(void);
 static void DecrementTrainerColumn(void);
 static void ChangeTrainerColumn(s32);
-static bool32 IsCursorMovingRight(s32);
-static bool32 IsColumnOnFirstMon(u32);
-static bool32 IsColumnOnTrainer(u32);
+static bool8 IsCursorMovingRight(s32);
+static bool8 IsColumnOnFirstMon(u32);
+static bool8 IsColumnOnTrainer(u32);
 static void SetColumnToTrainerIfCanPlayReveal(void);
 static void AdjustTrainerColumn(u32);
 static void SetCurrentTrainerColumn(u32);
@@ -271,16 +271,16 @@ static void HandleSprites(u32, u32, u32);
 static void PopulateTrainerIdsArray(u32*);
 static void MoveTrainerRowsWhenFound(u32[GLASS_TRAINER_MAX_SHOWED][2], struct OnScreenRow[GLASS_TRAINER_MAX_SHOWED], u32[GLASS_TRAINER_MAX_SHOWED], u32[GLASS_TRAINER_MAX_SHOWED]);
 static void LoopThroughScreenRows(u32*, u32*, u32);
-static bool32 HaveAnyTrainersMovedScreenRow(u32*, u32*);
+static bool8 HaveAnyTrainersMovedScreenRow(u32*, u32*);
 
-static u32 GetCurrentTrainerRow(void);
-static u32 GetCurrentTrainerColumn(void);
+static u8 GetCurrentTrainerRow(void);
+static u8 GetCurrentTrainerColumn(void);
 
 static s32 GetCurrentCursorScreenRowPosition(void);
 static void SetCurrentCursorScreenRowPosition(u32);
-static u32 GetNumberOfScreenRows(void);
-static u32 ConvertTrainerRowToScreenRow(u32, u32);
-static u32 ConvertScreenRowToPositionInTrainerList(u32, u32);
+static u8 GetNumberOfScreenRows(void);
+static u8 ConvertTrainerRowToScreenRow(u32, u32);
+static u8 ConvertScreenRowToPositionInTrainerList(u32, u32);
 static void SetScreenRow(u32, u32);
 
 static void CreateTrainerArrowSpritePair(void);
@@ -291,8 +291,8 @@ static void SaveHoverSpriteId(u32);
 static void InitalizeHoverSpriteId(void);
 static void DestroyHoverSpriteId(void);
 
-static bool32 IsTrainerDefeated(u32);
-static bool32 IsTrainerRematch(u32);
+static bool8 IsTrainerDefeated(u32);
+static bool8 IsTrainerRematch(u32);
 
 static void SortAllTrainersAZ(u32);
 static void StoreTrainersInTempList(u32, u32*);
@@ -309,37 +309,37 @@ static void ResetTrainerRowAndCursor(void);
 static void EmptyTrainerList(void);
 
 static void PrintTrainerAndParty(u32);
-static u32 GetTrainerIdFromTrainerFromScreenRow(u32);
-static u32 GetListPositionFromScreenRow(u32);
-static u32 GetTrainerOWSpriteIfBattled(u32);
+static u8 GetTrainerIdFromTrainerFromScreenRow(u32);
+static u8 GetListPositionFromScreenRow(u32);
+static u8 GetTrainerOWSpriteIfBattled(u32);
 static void PrintTrainerSprite(u32, u32);
 static void PrintParty(u32, u32);
 static void SavePartySizeForRow(u32, u32);
-static u32 GetPartySizeForRow(u32);
-static u32 CalculateHorizontalMonPosition(u32);
-static u32 CalculateHorizontalMonCursorPosition(u32);
+static u8 GetPartySizeForRow(u32);
+static u8 CalculateHorizontalMonPosition(u32);
+static u8 CalculateHorizontalMonCursorPosition(u32);
 static void PrintPartyMon(u32,struct Pokemon*, u32, u32 y);
 static void SetSpriteId(u32, u32, u32);
 static void DestroyPartySprites(u32);
 static void DestroyAllPartySprites(void);
 
-static u32 CreateMarkSprite(u32, u32, u16, void (*callback)(struct Sprite*));
+static u8 CreateMarkSprite(u32, u32, u16, void (*callback)(struct Sprite*));
 static void PrintTrainerStateMark(u32, u32, u32);
 static void PrintElevatedTrainerStateMark(void);
-static u32 GetMarkFromTrainerId(u32, bool32);
+static u8 GetMarkFromTrainerId(u32, bool32);
 
 static void MoveSprites(u32, u32);
 static void MoveTrainerForNameplate(s32);
 static void HandleTrainerSpriteAnimation(void);
 static void StopTrainerRowAnimation(u32, u32, u32);
 static void AnimateTrainerRow(u32, u32, u32);
-static bool32 IsCurrentRowIsDefeatedTrainer(u32);
+static bool8 IsCurrentRowIsDefeatedTrainer(u32);
 static void ChangeBackground(u32);
 
 static void Task_TrainerInput(u8);
 
 static void HandleTrainerModeAPress(u8, u32);
-static bool32 CanPlayTrainerReveal(u32);
+static bool8 CanPlayTrainerReveal(u32);
 static enum RevealIds GetRevealFromTrainerId(u32);
 static void HandleCharacterReveal(u8, u32);
 static void PlayTrainerReveal(u8 taskId);
@@ -348,7 +348,7 @@ static void HandlePartyMonSelection(u32, u8);
 static void GoToPokemonSummary(u8);
 static void Task_LoadPokemonSummary(u8);
 
-static bool32 IsReturningFromOtherScreen(u32);
+static bool8 IsReturningFromOtherScreen(u32);
 static void HandleSavedTrainerModeData(u32, u32, u32, u16, u16);
 static void RestoreTrainerModeData(u32, u32, u32, u16, u16);
 static void RestoreScrollAndRowPositions(u32, u32);
@@ -613,7 +613,7 @@ static void Glass_Init(MainCallback callback, s32 locationId, s32 row, s32 colum
     SetMainCallback2(Glass_SetupCB);
 }
 
-static bool32 AllocateStructs(void)
+static bool8 AllocateStructs(void)
 {
     sGlassState = AllocZeroed(sizeof(struct GlassState));
     sGlassLists = AllocZeroed(sizeof(struct GlassLists));
@@ -732,7 +732,7 @@ static void Glass_MainCB(void)
     UpdatePaletteFade();
 }
 
-static bool32 Glass_InitBgs(bool32 isFirst)
+static bool8 Glass_InitBgs(bool32 isFirst)
 {
     ResetAllBgsCoordinates();
     if(!AllocZeroedTilemapBuffers())
@@ -743,7 +743,7 @@ static bool32 Glass_InitBgs(bool32 isFirst)
     return TRUE;
 }
 
-static bool32 AllocZeroedTilemapBuffers(void)
+static bool8 AllocZeroedTilemapBuffers(void)
 {
     u32 backgroundId;
 
@@ -893,7 +893,7 @@ static const u16 *GetRelevantPalette(void)
     }
 }
 
-static bool32 IsAppTrainerMode(void)
+static bool8 IsAppTrainerMode(void)
 {
     return sGlassState->trainerMode;
 }
@@ -1084,7 +1084,7 @@ static void LoadSingleMarkSprite(u32 type, u32 hover, u32 rematch, u32 state)
     LoadCompressedSpriteSheet(&sSpriteSheet_TrainerMarks);
 }
 
-static u32 CalculateTileTag(u32 type, u32 rematch, u32 hover, u32 state)
+static u16 CalculateTileTag(u32 type, u32 rematch, u32 hover, u32 state)
 {
 
     if (type == GLASS_TRAINER_TYPE_REGULAR)
@@ -1123,21 +1123,21 @@ static void MoveMapCursorSprite(struct Sprite *sprite, u32 map)
     sprite->y2 = CalculateMiniMapYCoord(gRegionMapEntries[map].y);
 }
 
-static u32 CalculateMiniMapXCoord(u32 coord)
+static u8 CalculateMiniMapXCoord(u32 coord)
 {
     u32 newCoord = ((CalculateMiniMapCoord(coord)));
 
     return (newCoord > 106) ? 106 : newCoord;
 }
 
-static u32 CalculateMiniMapYCoord(u32 coord)
+static u8 CalculateMiniMapYCoord(u32 coord)
 {
     u32 newCoord = ((CalculateMiniMapCoord(coord)));
 
     return (newCoord > 94) ? 94: newCoord;
 }
 
-static u32 CalculateMiniMapCoord(u32 coord)
+static u8 CalculateMiniMapCoord(u32 coord)
 {
     return ((coord * (240/112) * 2) + 4);
 }
@@ -1185,7 +1185,7 @@ static void SpriteCB_MenuArrow(struct Sprite *sprite)
     HandleMenuArrowSpriteVisibility(sprite,arrowPosIsTop);
 }
 
-static u32 ArrowPositionIsTop(struct Sprite *sprite)
+static bool8 ArrowPositionIsTop(struct Sprite *sprite)
 {
     return (sprite->y < (DISPLAY_HEIGHT / 2));
 }
@@ -1210,32 +1210,32 @@ static void HandleMenuArrowSpriteVisibility(struct Sprite *sprite, bool32 arrowP
             );
 }
 
-static bool32 IsCursorOrPositionAtTop(void)
+static bool8 IsCursorOrPositionAtTop(void)
 {
     return (IsAppTrainerMode() ? IsTrainerCursorAtTop() : IsLocationPositionAtTop());
 }
 
-static bool32 IsCursorOrPositionAtBottom(void)
+static bool8 IsCursorOrPositionAtBottom(void)
 {
     return (IsAppTrainerMode() ? IsTrainerCursorAtBottom() : IsLocationPositionAtBottom());
 }
 
-static bool32 IsTrainerCursorAtTop(void)
+static bool8 IsTrainerCursorAtTop(void)
 {
     return (GetCurrentCursorScreenRowPosition() == GLASS_ROW_1);
 }
 
-static bool32 IsTrainerCursorAtBottom(void)
+static bool8 IsTrainerCursorAtBottom(void)
 {
     return (GetCurrentCursorScreenRowPosition() == GLASS_ROW_4);
 }
 
-static bool32 IsLocationPositionAtTop(void)
+static bool8 IsLocationPositionAtTop(void)
 {
     return (GetCurrentPosition() == 0);
 }
 
-static bool32 IsLocationPositionAtBottom(void)
+static bool8 IsLocationPositionAtBottom(void)
 {
     return (GetCurrentPosition() == GetNumListElements());
 }
@@ -1280,7 +1280,7 @@ static void CheckLocationCreateCheckHoverSprite(struct ListMenu *list, s32 locat
     CreateCheckSprite(x,y);
 }
 
-static u32 CalculateCheckmarkVerticalPosition(struct ListMenu *list)
+static u8 CalculateCheckmarkVerticalPosition(struct ListMenu *list)
 {
     u8 yMultiplier = GetFontAttribute(gMultiuseListMenuTemplate.fontId, FONTATTR_MAX_LETTER_HEIGHT) + gMultiuseListMenuTemplate.itemVerticalPadding;
     u8 y = list->selectedRow * yMultiplier + gMultiuseListMenuTemplate.upText_Y;
@@ -1307,7 +1307,7 @@ static u16 GetLocationHoverCheckTileTag(void)
     return CalculateTileTag(GLASS_TRAINER_TYPE_REGULAR,GLASS_TRAINER_REMATCH_NO,GLASS_TRAINER_HOVER_YES,GLASS_TRAINER_STATE_COMPLETE);
 }
 
-static u32 GetLocationSortFromSaveBlock(void)
+static u8 GetLocationSortFromSaveBlock(void)
 {
     return gSaveBlock3Ptr->glass.LocationSort;
 }
@@ -1329,7 +1329,7 @@ static void SetNumListElements(u32 num)
     sGlassLists->numListElements = num;
 }
 
-static u32 GetNumListElements(void)
+static u8 GetNumListElements(void)
 {
     return sGlassLists->numListElements;
 }
@@ -1359,7 +1359,7 @@ static void BuildLocationListTemplate(void)
     gMultiuseListMenuTemplate.cursorKind = CURSOR_RED_OUTLINE;
 }
 
-static u32 GenerateList(void)
+static u8 GenerateList(void)
 {
     switch(GetCurrentSort())
     {
@@ -1393,7 +1393,7 @@ static void AssignCancelNameAndId(u8 numRow)
     sListMenuItems[numRow].id = LIST_CANCEL;
 }
 
-static u32 GetCurrentSort(void)
+static u8 GetCurrentSort(void)
 {
     return sGlassState->sortOrder;
 }
@@ -1549,12 +1549,12 @@ static void PopulateListMenuWithSortedLocation(u32* sortedLocationIndicies, u32 
         PopulateListMenuLocations(row, sortedLocationIndicies[row]);
 }
 
-static bool32 IsLocationVisited(u32 listNum)
+static bool8 IsLocationVisited(u32 listNum)
 {
     return (FlagGet(gRegionMapEntries[listNum].visitedFlag));
 }
 
-static bool32 IsBothLocationsLocked(u32* sortedLocationIndicies, u32 firstIndex, u32 secondIndex)
+static bool8 IsBothLocationsLocked(u32* sortedLocationIndicies, u32 firstIndex, u32 secondIndex)
 {
     if (IsLocationVisited(sortedLocationIndicies[firstIndex]))
         return FALSE;
@@ -1565,7 +1565,7 @@ static bool32 IsBothLocationsLocked(u32* sortedLocationIndicies, u32 firstIndex,
     return TRUE;
 }
 
-static bool32 IsLocationStateVisible(u32 listNum)
+static bool8 IsLocationStateVisible(u32 listNum)
 {
     if (!IsLocationVisited(listNum))
         return FALSE;
@@ -1576,7 +1576,7 @@ static bool32 IsLocationStateVisible(u32 listNum)
     return TRUE;
 }
 
-static bool32 IsLocationConquered(u32 listNum)
+static bool8 IsLocationConquered(u32 listNum)
 {
     if (!IsLocationVisited(listNum))
         return FALSE;
@@ -1587,7 +1587,7 @@ static bool32 IsLocationConquered(u32 listNum)
     return TRUE;
 }
 
-static u32 GetLocationPercent(u32 location)
+static u8 GetLocationPercent(u32 location)
 {
     u32 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
     CountNumberTrainers(location,statArray);
@@ -1680,7 +1680,7 @@ static void PrintLocationName(void)
     Free(locationName);
 }
 
-static u32 CalculateLocationNameXPosition(u32 fontId, u8* locationName, u32 letterSpacing)
+static u8 CalculateLocationNameXPosition(u32 fontId, u8* locationName, u32 letterSpacing)
 {
     u32 stringWidth = 0;
     stringWidth = GetStringWidth(fontId,locationName,letterSpacing) + 1;
@@ -1742,22 +1742,22 @@ static void Task_LocationInput(u8 taskId)
     SaveChosenLocation(entityId);
 }
 
-static u32 GetLocationIdFromCurrentPosition(void)
+static u8 GetLocationIdFromCurrentPosition(void)
 {
     return sListMenuItems[GetCurrentPosition()].id;
 }
 
-static u32 GetCurrentPosition(void)
+static u8 GetCurrentPosition(void)
 {
     return (GetLocationScrollOffset() + GetLocationRowPosition());
 }
 
-static u32 GetLocationScrollOffset(void)
+static u8 GetLocationScrollOffset(void)
 {
     return sListMenuState.scroll;
 }
 
-static u32 GetLocationRowPosition(void)
+static u8 GetLocationRowPosition(void)
 {
     return sListMenuState.row;
 }
@@ -1810,7 +1810,7 @@ static void PrintLocationStats(s32 locationId, u32 windowId)
     PrintLocationRemaining(windowId, fontId);
 }
 
-static u32 GetMapSectionFromTrainerId(u32 trainerId)
+static u8 GetMapSectionFromTrainerId(u32 trainerId)
 {
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].mapSec;
 }
@@ -1939,7 +1939,7 @@ static void PrintLocationRemaining(u32 windowId, u32 fontId)
     Free(remainingString);
 }
 
-static u32 GetLocationStat(u32 stat)
+static u8 GetLocationStat(u32 stat)
 {
     return sGlassState->locationStats[stat];
 }
@@ -1964,7 +1964,7 @@ static void HandleLocationInput(u32 input, u8 taskId, u32 entityId)
     }
 }
 
-static u32 IncrementSortOrder(bool32 isTrainerMode)
+static u8 IncrementSortOrder(bool32 isTrainerMode)
 {
     u32 currentSort = GetCurrentSort();
     currentSort++;
@@ -2054,7 +2054,7 @@ static void SaveScrollAndRowPositions(void)
     sListMenuState.storedRowPosition = sListMenuState.row;
 }
 
-static u32 GetTrainerSortFromSaveBlock(void)
+static u8 GetTrainerSortFromSaveBlock(void)
 {
     return gSaveBlock3Ptr->glass.TrainerSort;
 }
@@ -2078,7 +2078,7 @@ static void BuildTrainerListTemplate(u32 locationId)
     PrintElevatedTrainerStateMark();
 }
 
-static u32 GetChosenLocation(void)
+static u8 GetChosenLocation(void)
 {
     return sGlassState->chosenLocation;
 }
@@ -2203,7 +2203,7 @@ static void PrintNameplate(void)
     SaveNameplateSpriteId(spriteId);
 }
 
-static u32 CalculateVerticalNameplatePosition(void)
+static u8 CalculateVerticalNameplatePosition(void)
 {
     return CalculateVerticalTrainerPosition(GetCurrentCursorScreenRowPosition()) + (TILE_SIZE_1BPP / 2);
 }
@@ -2260,17 +2260,17 @@ static void MoveNameplate(void)
     gSprites[spriteId].y = y;
 }
 
-static u32 GetNameplateSpriteId(void)
+static u8 GetNameplateSpriteId(void)
 {
     return sListMenuState.interfaceSpriteIds[GLASS_UI_NAMEPLATE];
 }
 
-static u32 GetTrainerIdFromCurrentPosition(void)
+static u8 GetTrainerIdFromCurrentPosition(void)
 {
     return GetTrainerIdFromPosition(GetCurrentTrainerRow());
 }
 
-static u32 GetTrainerIdFromPosition(u32 position)
+static u8 GetTrainerIdFromPosition(u32 position)
 {
     return sGlassLists->TrainerList[position];
 }
@@ -2336,7 +2336,7 @@ static void CopyTrainerNameWindowOntoNameplateMemory(u8* windowTileData, void *d
     CpuCopy32(windowTileData + UCHAR_MAX + 1, dest, windowWidth * (TILE_SIZE_1BPP / 2));
 }
 
-static u32 CalculateTrainerNameHorizontalPosition(u32 fontId, u32 trainerId, u32 letterSpacing)
+static u8 CalculateTrainerNameHorizontalPosition(u32 fontId, u32 trainerId, u32 letterSpacing)
 {
     u32 stringWidth = GetStringWidth(fontId,GetTrainerName(trainerId),letterSpacing) + 1;
 
@@ -2369,7 +2369,7 @@ static void PrintMonCursor(void)
     SaveCheckMonCursorSpriteId(spriteId);
 }
 
-static u32 CalculateVerticalMonCursorPosition(u32 screenRow)
+static u8 CalculateVerticalMonCursorPosition(u32 screenRow)
 {
     return CalculateVerticalTrainerPosition(screenRow) - GLASS_MON_CURSOR_PADDING;
 }
@@ -2403,17 +2403,17 @@ static void MoveMonCursor(void)
     gSprites[spriteId].x = CalculateCursorHorizontalPosition();
 }
 
-static u32 GetCheckMonCursorSpriteId(void)
+static u8 GetCheckMonCursorSpriteId(void)
 {
     return sListMenuState.interfaceSpriteIds[GLASS_UI_CHECK_MON_CURSOR];
 }
 
-static u32 CalculateVerticalTrainerPosition(u32 row)
+static u8 CalculateVerticalTrainerPosition(u32 row)
 {
     return row * PARTY_HEIGHT + PARTY_VERTICAL_OFFSET;
 }
 
-static u32 CalculateCursorHorizontalPosition(void)
+static u8 CalculateCursorHorizontalPosition(void)
 {
     u32 column = GetCurrentTrainerColumn();
 
@@ -2462,17 +2462,17 @@ static void ChangeTrainerColumn(s32 delta)
     MoveMonCursor();
 }
 
-static bool32 IsCursorMovingRight(s32 delta)
+static bool8 IsCursorMovingRight(s32 delta)
 {
     return (delta == 1);
 }
 
-static bool32 IsColumnOnFirstMon(u32 column)
+static bool8 IsColumnOnFirstMon(u32 column)
 {
     return (column == GLASS_MON_1);
 }
 
-static bool32 IsColumnOnTrainer(u32 column)
+static bool8 IsColumnOnTrainer(u32 column)
 {
     return (column == GLASS_TRAINER_HEADER);
 }
@@ -2636,7 +2636,7 @@ void MoveTrainerRowsWhenFound(u32 rowMovementRecord[GLASS_TRAINER_MAX_SHOWED][2]
                 sGlassLists->onScreenRow[rowMovementRecord[secondRow][GLASS_NEW_ROW]].spriteId[columnIndex] = tempScreenRow[rowMovementRecord[secondRow][GLASS_ORIGINAL_ROW]].spriteId[columnIndex];
 }
 
-static bool32 HaveAnyTrainersMovedScreenRow(u32* originalTrainerId, u32* newTrainerId)
+static bool8 HaveAnyTrainersMovedScreenRow(u32* originalTrainerId, u32* newTrainerId)
 {
     u32 oldRow, newRow = 0;
 
@@ -2655,12 +2655,12 @@ static void PopulateTrainerIdsArray(u32* rows)
         rows[i] = GetTrainerIdFromTrainerFromScreenRow(i);
 }
 
-static u32 GetCurrentTrainerRow(void)
+static u8 GetCurrentTrainerRow(void)
 {
     return sListMenuState.trainerRow;
 }
 
-static u32 GetCurrentTrainerColumn(void)
+static u8 GetCurrentTrainerColumn(void)
 {
     return sListMenuState.trainerColumn;
 }
@@ -2675,13 +2675,13 @@ static void SetCurrentCursorScreenRowPosition(u32 row)
     sListMenuState.cursorScreenRow = row;
 }
 
-static u32 GetNumberOfScreenRows(void)
+static u8 GetNumberOfScreenRows(void)
 {
     u32 numList = GetNumListElements();
     return (numList > GLASS_TRAINER_MAX_SHOWED) ? GLASS_TRAINER_MAX_SHOWED : numList;
 }
 
-static u32 ConvertTrainerRowToScreenRow(u32 currentPosition, u32 numListElements)
+static u8 ConvertTrainerRowToScreenRow(u32 currentPosition, u32 numListElements)
 {
     if (currentPosition > numListElements)
         return GLASS_SCREEN_ROW_LAST;
@@ -2691,7 +2691,7 @@ static u32 ConvertTrainerRowToScreenRow(u32 currentPosition, u32 numListElements
         return GLASS_SCREEN_ROW_BUFFER;
 }
 
-static u32 ConvertScreenRowToPositionInTrainerList(u32 numListElements, u32 currentPosition)
+static u8 ConvertScreenRowToPositionInTrainerList(u32 numListElements, u32 currentPosition)
 {
     if (currentPosition < GLASS_SCREEN_ROW_LAST)
         return 0;
@@ -2774,12 +2774,12 @@ bool32 IsTrainerDiscovered(u32 trainerId)
     return (IsTrainerDefeated(trainerId));
 }
 
-static bool32 IsTrainerDefeated(u32 trainerID)
+static bool8 IsTrainerDefeated(u32 trainerID)
 {
     return FlagGet(TRAINER_FLAGS_START + trainerID);
 }
 
-static bool32 IsTrainerRematch(u32 trainerId)
+static bool8 IsTrainerRematch(u32 trainerId)
 {
     u32 tableIndex, trainerIndex;
 
@@ -2983,13 +2983,13 @@ static void PrintTrainerAndParty(u32 screenRow)
     PrintParty(trainerId, screenRow);
 }
 
-static u32 GetTrainerIdFromTrainerFromScreenRow(u32 screenRow)
+static u8 GetTrainerIdFromTrainerFromScreenRow(u32 screenRow)
 {
     u32 listNum = GetListPositionFromScreenRow(screenRow);
     return GetTrainerIdFromPosition(listNum);
 }
 
-static u32 GetListPositionFromScreenRow(u32 screenRow)
+static u8 GetListPositionFromScreenRow(u32 screenRow)
 {
     return sGlassLists->onScreenRow[screenRow].listPosition;
 }
@@ -2999,7 +2999,7 @@ u32 GetOverworldSpriteFromTrainerId(enum ResidoTrainerIds trainerId)
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].objectEventGraphicsId;
 }
 
-static u32 GetTrainerOWSpriteIfBattled(u32 trainerId)
+static u8 GetTrainerOWSpriteIfBattled(u32 trainerId)
 {
     if (IsTrainerDiscovered(trainerId))
         return GetOverworldSpriteFromTrainerId(trainerId);
@@ -3035,17 +3035,17 @@ static void SavePartySizeForRow(u32 partySize, u32 row)
     sGlassLists->onScreenRow[row].partySize = partySize;
 }
 
-static u32 GetPartySizeForRow(u32 row)
+static u8 GetPartySizeForRow(u32 row)
 {
     return sGlassLists->onScreenRow[row].partySize;
 }
 
-static u32 CalculateHorizontalMonPosition(u32 column)
+static u8 CalculateHorizontalMonPosition(u32 column)
 {
     return (PARTY_HEIGHT * 2) + (column * PARTY_HEIGHT);
 }
 
-static u32 CalculateHorizontalMonCursorPosition(u32 column)
+static u8 CalculateHorizontalMonCursorPosition(u32 column)
 {
     return CalculateHorizontalMonPosition(column) - 8;
 }
@@ -3111,7 +3111,7 @@ static void DestroyAllPartySprites(void)
         }
 }
 
-static u32 CreateMarkSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct Sprite*))
+static u8 CreateMarkSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct Sprite*))
 {
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
     TempSpriteTemplate.tileTag = TileTag;
@@ -3153,7 +3153,7 @@ static void PrintElevatedTrainerStateMark(void)
     PrintTrainerStateMark(trainerId, screenRow, 0);
 }
 
-static u32 GetMarkFromTrainerId(u32 trainerId, bool32 hover)
+static u8 GetMarkFromTrainerId(u32 trainerId, bool32 hover)
 {
     u32 type = GetTrainerType(trainerId);
     bool32 rematch = IsTrainerRematch(trainerId);
@@ -3220,7 +3220,7 @@ static void HandleTrainerSpriteAnimation(void)
     }
 }
 
-static bool32 IsCurrentRowIsDefeatedTrainer(u32 row)
+static bool8 IsCurrentRowIsDefeatedTrainer(u32 row)
 {
     if (GetCurrentCursorScreenRowPosition() != row)
         return FALSE;
@@ -3294,7 +3294,7 @@ static void HandleTrainerModeAPress(u8 taskId,u32 trainerId)
         HandlePartyMonSelection(trainerId, taskId);
 }
 
-static u32 CanPlayTrainerReveal(u32 trainerId)
+static bool8 CanPlayTrainerReveal(u32 trainerId)
 {
     if (!GetRevealFromTrainerId(trainerId))
         return FALSE;
@@ -3380,7 +3380,7 @@ void CB2_ReturnToTrainerScreen(void)
     Glass_Init(sGlassState->savedCallback,locationId,row,column,sListMenuState.storedRowPosition,sListMenuState.storedScrollOffset);
 }
 
-static bool32 IsReturningFromOtherScreen(u32 locationId)
+static bool8 IsReturningFromOtherScreen(u32 locationId)
 {
     return (locationId != GLASS_NO_LOCATION_SAVED);
 }
