@@ -495,7 +495,10 @@ static void CB2_InitBattleInternal(void)
     else
     {
         gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
-        if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+        // Start siliconMerge
+        //if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+        if (!GetBattleIntroSkip() && !gTestRunnerHeadless)
+        // End siliconMerge
         {
             ScanlineEffect_Clear();
 
@@ -544,7 +547,10 @@ static void CB2_InitBattleInternal(void)
     LoadBattleTextboxAndBackground();
     ResetSpriteData();
     ResetTasks();
-    if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+    // Start siliconMerge
+    //if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+    if (!GetBattleIntroSkip() && !gTestRunnerHeadless)
+    // End siliconMerge
         DrawBattleEntryBackground();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = MAX_BATTLERS_COUNT;
@@ -1949,7 +1955,10 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 otIdType = OT_ID_PRESET;
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
-            CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            // Start Battle Settings: Trainer Scaling
+            //CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            CreateMon(&party[i], HandleScaledSpecies(partyData[monIndex].species), HandleScaledLevel(partyData[monIndex].lvl,monsCount), 0, TRUE, personalityValue, otIdType, fixedOtId);
+            // End Battle Settings: Trainer Scaling
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);
@@ -2636,7 +2645,10 @@ void SpriteCB_WildMon(struct Sprite *sprite)
 {
     sprite->callback = SpriteCB_MoveWildMonToRight;
     StartSpriteAnimIfDifferent(sprite, 0);
-    if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+    // Start siliconMerge
+    //if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+    if (!GetBattleIntroSkip() && !gTestRunnerHeadless)
+    // End siliconMerge
     {
         if (WILD_DOUBLE_BATTLE)
             BeginNormalPaletteFade((0x10000 << sprite->sBattler) | (0x10000 << BATTLE_PARTNER(sprite->sBattler)), 0, 10, 10, RGB(8, 8, 8));
@@ -2649,7 +2661,10 @@ static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite)
 {
     if ((gIntroSlideFlags & 1) == 0)
     {
-        if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+        // Start siliconMerge
+        //if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+        if (!GetBattleIntroSkip() && !gTestRunnerHeadless)
+        // End siliconMerge
             sprite->x2 += 2;
         else
             sprite->x2 = 0;
@@ -2669,7 +2684,10 @@ static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite)
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->sBattler]);
         sprite->callback = SpriteCB_WildMonAnimate;
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+        // Start siliconMerge
+        //if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
+        if (!GetBattleIntroSkip() && !gTestRunnerHeadless)
+        // End siliconMerge
         {
             if (WILD_DOUBLE_BATTLE)
                 BeginNormalPaletteFade((0x10000 << sprite->sBattler) | (0x10000 << BATTLE_PARTNER(sprite->sBattler)), 0, 10, 0, RGB(8, 8, 8));

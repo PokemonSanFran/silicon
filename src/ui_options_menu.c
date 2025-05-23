@@ -810,8 +810,10 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_MOVE_HEALING]           = BATTLE_OPTION_MOVE_HEALING_ALLOWED,
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_BOSS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
+            /*
             [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
             [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+            */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 0,
             [BATTLE_OPTIONS_INTRO]                  = 1,
@@ -844,8 +846,10 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_MOVE_HEALING]           = BATTLE_OPTION_MOVE_HEALING_ALLOWED,
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_TRAINER,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
+            /*
             [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
             [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+            */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 1,
             [BATTLE_OPTIONS_INTRO]                  = 1,
@@ -878,8 +882,10 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_MOVE_HEALING]           = BATTLE_OPTION_MOVE_HEALING_ALLOWED,
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_BOSS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
+            /*
             [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
             [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+            */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 1,
             [BATTLE_OPTIONS_INTRO]                  = 1,
@@ -912,8 +918,10 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_MOVE_HEALING]           = BATTLE_OPTION_MOVE_HEALING_ALLOWED,
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_BOSS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
+            /*
             [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
             [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+            */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 0,
             [BATTLE_OPTIONS_INTRO]                  = 0,
@@ -946,8 +954,10 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_MOVE_HEALING]           = BATTLE_OPTION_MOVE_HEALING_DISABLED,
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_ITEMS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
+            /*
             [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
             [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+            */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 1,
             [BATTLE_OPTIONS_ANIMATIONS]             = 0,
             [BATTLE_OPTIONS_INTRO]                  = 0,
@@ -1387,13 +1397,13 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
         .title = COMPOUND_STRING("Run"),
         .options = {
             COMPOUND_STRING("Always"),
-            COMPOUND_STRING("Toogle"),
+            COMPOUND_STRING("Toggle"),
             COMPOUND_STRING("Manual"),
             },
         .optionDescription = {
-            COMPOUND_STRING("Always Description"),
-            COMPOUND_STRING("Toogle Description"),
-            COMPOUND_STRING("Manual Description"),
+            COMPOUND_STRING("The player will always walk. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will run."),
+            COMPOUND_STRING("Pressing the {R_BUTTON} will change the player's behavior betweeen always walking and always running."),
+            COMPOUND_STRING("The player will always run. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will walk."),
             },
         .numOptions = 3,
     },
@@ -1421,11 +1431,11 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             COMPOUND_STRING("Recency"),
             },
         .optionDescription = {
-            COMPOUND_STRING("Off"),
-            COMPOUND_STRING("Name"),
-            COMPOUND_STRING("Type"),
-            COMPOUND_STRING("Amount"),
-            COMPOUND_STRING("Recency"),
+            COMPOUND_STRING("Not implemented."),
+            COMPOUND_STRING("Not implemented."),
+            COMPOUND_STRING("Not implemented."),
+            COMPOUND_STRING("Not implemented."),
+            COMPOUND_STRING("Not implemented."),
             },
         .numOptions = 5,
     },
@@ -1486,8 +1496,6 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to all the Pokemon in the player's party and the player's PC storage boxes."),
             COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to all the Pokemon in the player's party."),
             COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to the Pokemon that participated in battle."),
-            COMPOUND_STRING("Party"),
-            COMPOUND_STRING("Active"),
         },
         .numOptions = 3,
     },
@@ -1598,8 +1606,8 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("Off"),
         },
         .optionDescription = {
-            COMPOUND_STRING("Lorem"),
-            COMPOUND_STRING("Lorem"),
+            COMPOUND_STRING("Not implemented."),
+            COMPOUND_STRING("Not implemented."),
         },
         .numOptions = BATTLE_OPTION_WILD_SCALING_COUNT,
     },
@@ -1730,9 +1738,9 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("None"),
         },
         .optionDescription = {
-            COMPOUND_STRING("Ask"),
-            COMPOUND_STRING("Forced"),
-            COMPOUND_STRING("None"),
+            COMPOUND_STRING("Players are asked if they want to nickname a new Pokémon upon capture."),
+            COMPOUND_STRING("Players forced to nickname a new Pokémon upon capture."),
+            COMPOUND_STRING("Players are not asked if they want to nickname a new Pokémon upon capture."),
         },
         .numOptions = 3,
     },
@@ -1820,6 +1828,7 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
         },
         .numOptions = 2,
     },
+    /*
     [BATTLE_OPTIONS_BASE_STAT_EQUALIZER] =
     {
         .title = COMPOUND_STRING("Base Stat Equalizer"),
@@ -1882,6 +1891,7 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
         },
         .numOptions = NUMBER_OF_MON_TYPES + 1,
     },
+    */
     [BATTLE_OPTIONS_TYPE_ICONS] =
     {
         .title = COMPOUND_STRING("Type Icons"),
@@ -1890,8 +1900,8 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("Hide"),
         },
         .optionDescription = {
-            COMPOUND_STRING("Show"),
-            COMPOUND_STRING("Hide"),
+            COMPOUND_STRING("Not implemented."),
+            COMPOUND_STRING("Not implemented."),
         },
         .numOptions = 2,
     },
@@ -1903,21 +1913,21 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("Off"),
         },
         .optionDescription = {
-            COMPOUND_STRING("Graphical elements such as move animations,  status afflications and weather are played."),
-            COMPOUND_STRING("Graphical elements such as move animations,  status afflications and weather are not played."),
+            COMPOUND_STRING("Graphical battle elements such as move animations,  status afflications and weather are played."),
+            COMPOUND_STRING("Graphical battle elements such as move animations,  status afflications and weather are not played."),
         },
         .numOptions = 2,
     },
     [BATTLE_OPTIONS_INTRO] =
     {
-        .title = COMPOUND_STRING("Intro"),
+        .title = COMPOUND_STRING("Battle Intro"),
         .options = {
             COMPOUND_STRING("Normal"),
             COMPOUND_STRING("Skip"),
         },
         .optionDescription = {
-            COMPOUND_STRING("Normal"),
-            COMPOUND_STRING("Skip"),
+            COMPOUND_STRING("The slide animation that happens at the beginning of the battle plays normally."),
+            COMPOUND_STRING("The slide animation that happens at the beginning of the battle is skipped."),
         },
         .numOptions = 2,
     },

@@ -26,6 +26,7 @@
 #include "constants/abilities.h"
 #include "constants/songs.h"
 #include "ui_character_customization_menu.h" // playerCustom
+#include "options_battle.h" // siliconMerge
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
@@ -2585,7 +2586,10 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
         gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].x2 = DISPLAY_WIDTH;
         gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].sSpeedX = -2;
     }
-    if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
+    // Start siliconMerge
+    //if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
+    if (GetBattleIntroSkip() || gTestRunnerHeadless)
+    // End siliconMerge
         gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].callback = SpriteCB_TrainerSpawn;
     else
         gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;

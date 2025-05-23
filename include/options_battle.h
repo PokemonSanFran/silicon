@@ -97,3 +97,6 @@ bool32 IsBarOptionInstant(u8);
 u32 GetHPFraction(u8);
 u32 GetEXPScale(void);
 s32 SetInstantBarMove(struct BattleBarInfo *bar);
+
+// Battle Settings: Battle Intro
+enum optionBattleIntro GetBattleIntroSkip(void);

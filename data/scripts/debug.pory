@@ -181,6 +181,7 @@ script Debug_EventScript_Script_1
 
 script Debug_EventScript_Script_2
 {
+    trainerbattle_no_intro(TRAINER_BELEN,Debug_FlagsNotSetOverworldConfigMessage_Text)
 	end
 }
 

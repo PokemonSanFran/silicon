@@ -118,7 +118,7 @@ u32 ApplyExpMultipliers(struct Pokemon tempMon,s32 experience)
     if (CheckBagHasItem(ITEM_EXP_CHARM, 1))
         experience = (experience * 150) / 100;
 
-    return (GetExperienceExpMultiplerValue() * experience);
+    return (GetExperienceExpMultiplerValue() * experience) / 100;
 }
 
 static void CalcAndSetNewExp(struct BoxPokemon *boxMon, struct Pokemon tempMon,s32 battleEXP)
@@ -295,12 +295,13 @@ u32 GetExperienceExpMultiplerValue(void)
 {
     switch(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER])
     {
-        case BATTLE_OPTION_MULTIPLIER_0: return 0;
-        case BATTLE_OPTION_MULTIPLIER_1_5: return 1.5;
-        case BATTLE_OPTION_MULTIPLIER_2: return 2;
+        case BATTLE_OPTION_MULTIPLIER_0: return 100 * 0;
+        case BATTLE_OPTION_MULTIPLIER_1_5: return 100 * 1.5;
+        case BATTLE_OPTION_MULTIPLIER_2: return 100 * 2;
         default:
-        case BATTLE_OPTION_MULTIPLIER_1: return 1;
+        case BATTLE_OPTION_MULTIPLIER_1: return 100 * 1;
     }
+    return 0;
 }
 
 // ***********************************************************************
@@ -912,6 +913,7 @@ u32 HandleScaledSpecies(u32 origSpecies)
 
 static u32 GetScaledSpecies(u32 origSpecies)
 {
+    // PSF TODO Update with formula to figure out when to evolve the Pokemonn
     return origSpecies;
 }
 
@@ -1233,3 +1235,13 @@ u32 GetEXPScale(void)
         case BATTLE_OPTION_BAR_SPEED_INSTANT: return (B_EXPBAR_PIXELS / 8) * 0;
     }
 }
+
+// ***********************************************************************
+// Battle Settings: Intro
+// ***********************************************************************
+
+enum optionBattleIntro GetBattleIntroSkip(void)
+{
+    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INTRO];
+}
+
