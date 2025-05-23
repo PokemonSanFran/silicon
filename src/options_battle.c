@@ -1087,6 +1087,7 @@ static u32 GetBestBallForBattle(void)
                 break;
             if (ballsPocket->itemSlots[i].itemId == ITEM_MASTER_BALL)
                 continue;
+
             odds = GetCatchingOdds(atkId, defId, ballsPocket->itemSlots[i].itemId);
             if (odds > newOdds)
             {

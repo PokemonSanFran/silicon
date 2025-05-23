@@ -15981,7 +15981,10 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
 {
     u32 odds, i;
     u32 catchRate;
-    u32 ballId = ItemIdToBallId(gLastUsedItem);
+    // Start last_used_ball
+    //u32 ballId = ItemIdToBallId(gLastUsedItem);
+    u32 ballId = ItemIdToBallId(itemId);
+    // End last_used_ball
     u16 ballMultiplier = 100;
     s8 ballAddition = 0;
 
@@ -15989,9 +15992,9 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
     else
-        catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
+        catchRate = gSpeciesInfo[gBattleMons[defId].species].catchRate;
 
-    if (gSpeciesInfo[gBattleMons[gBattlerTarget].species].isUltraBeast)
+    if (gSpeciesInfo[gBattleMons[defId].species].isUltraBeast)
     {
         if (ballId == BALL_BEAST)
             ballMultiplier = 500;
@@ -16017,7 +16020,7 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                     ballMultiplier = 150;
                 break;
             case BALL_NET:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_WATER, TYPE_BUG))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_WATER, TYPE_BUG))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_DIVE:
@@ -16029,25 +16032,25 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                 if (B_NEST_BALL_MODIFIER >= GEN_6)
                 {
                     //((41 - Pokémon's level) ÷ 10)× if Pokémon's level is between 1 and 29, 1× otherwise.
-                    if (gBattleMons[gBattlerTarget].level < 30)
-                        ballMultiplier = 410 - (gBattleMons[gBattlerTarget].level * 10);
+                    if (gBattleMons[defId].level < 30)
+                        ballMultiplier = 410 - (gBattleMons[defId].level * 10);
                 }
                 else if (B_NEST_BALL_MODIFIER >= GEN_5)
                 {
                     //((41 - Pokémon's level) ÷ 10)×, minimum 1×
-                    if (gBattleMons[gBattlerTarget].level < 31)
-                        ballMultiplier = 410 - (gBattleMons[gBattlerTarget].level * 10);
+                    if (gBattleMons[defId].level < 31)
+                        ballMultiplier = 410 - (gBattleMons[defId].level * 10);
                 }
-                else if (gBattleMons[gBattlerTarget].level < 40)
+                else if (gBattleMons[defId].level < 40)
                 {
                     //((40 - Pokémon's level) ÷ 10)×, minimum 1×
-                    ballMultiplier = 400 - (gBattleMons[gBattlerTarget].level * 10);
+                    ballMultiplier = 400 - (gBattleMons[defId].level * 10);
                     if (ballMultiplier <= 90)
                         ballMultiplier = 100;
                 }
                 break;
             case BALL_REPEAT:
-                if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
+                if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[defId].species), FLAG_GET_CAUGHT))
                     ballMultiplier = (B_REPEAT_BALL_MODIFIER >= GEN_7 ? 350 : 300);
                 break;
             case BALL_TIMER:
@@ -16065,11 +16068,11 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                     ballMultiplier = (B_QUICK_BALL_MODIFIER >= GEN_5 ? 500 : 400);
                 break;
             case BALL_LEVEL:
-                if (gBattleMons[gBattlerAttacker].level >= 4 * gBattleMons[gBattlerTarget].level)
+                if (gBattleMons[atId].level >= 4 * gBattleMons[defId].level)
                     ballMultiplier = 800;
-                else if (gBattleMons[gBattlerAttacker].level > 2 * gBattleMons[gBattlerTarget].level)
+                else if (gBattleMons[atId].level > 2 * gBattleMons[defId].level)
                     ballMultiplier = 400;
-                else if (gBattleMons[gBattlerAttacker].level > gBattleMons[gBattlerTarget].level)
+                else if (gBattleMons[atId].level > gBattleMons[defId].level)
                     ballMultiplier = 200;
                 break;
             case BALL_LURE:
@@ -16085,7 +16088,7 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                 break;
             case BALL_MOON:
                 {
-                    const struct Evolution *evolutions = GetSpeciesEvolutions(gBattleMons[gBattlerTarget].species);
+                    const struct Evolution *evolutions = GetSpeciesEvolutions(gBattleMons[defId].species);
                     if (evolutions == NULL)
                         break;
                     for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
@@ -16097,21 +16100,21 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                 }
                 break;
             case BALL_LOVE:
-                if (gBattleMons[gBattlerTarget].species == gBattleMons[gBattlerAttacker].species)
+                if (gBattleMons[defId].species == gBattleMons[atId].species)
                 {
-                    u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
-                    u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
+                    u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[defId]]);
+                    u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[atId]]);
 
                     if (gender1 != gender2 && gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS)
                         ballMultiplier = 800;
                 }
                 break;
             case BALL_FAST:
-                if (gSpeciesInfo[gBattleMons[gBattlerTarget].species].baseSpeed >= 100)
+                if (gSpeciesInfo[gBattleMons[defId].species].baseSpeed >= 100)
                     ballMultiplier = 400;
                 break;
             case BALL_HEAVY:
-                i = GetSpeciesWeight(gBattleMons[gBattlerTarget].species);
+                i = GetSpeciesWeight(gBattleMons[defId].species);
                 if (B_HEAVY_BALL_MODIFIER >= GEN_7)
                 {
                     if (i < 1000)
@@ -16149,7 +16152,7 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                 }
                 break;
             case BALL_DREAM:
-                if (B_DREAM_BALL_MODIFIER >= GEN_8 && (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP || GetBattlerAbility(gBattlerTarget) == ABILITY_COMATOSE))
+                if (B_DREAM_BALL_MODIFIER >= GEN_8 && (gBattleMons[defId].status1 & STATUS1_SLEEP || GetBattlerAbility(defId) == ABILITY_COMATOSE))
                     ballMultiplier = 400;
                 break;
             case BALL_BEAST:
@@ -16157,35 +16160,35 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                 break;
 // Start siliconNewBalls
             case BALL_NEWA:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_FIGHTING, TYPE_FIRE))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_FIGHTING, TYPE_FIRE))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_NEWB:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_PSYCHIC, TYPE_DARK))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_PSYCHIC, TYPE_DARK))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_NEWC:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_ROCK, TYPE_GRASS))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_ROCK, TYPE_GRASS))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_NEWD:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_STEEL, TYPE_ELECTRIC))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_STEEL, TYPE_ELECTRIC))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_NEWE:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_GROUND, TYPE_POISON))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_GROUND, TYPE_POISON))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_NEWF:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_FLYING, TYPE_ICE))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_FLYING, TYPE_ICE))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_NEWG:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_FAIRY, TYPE_DRAGON))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_FAIRY, TYPE_DRAGON))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case BALL_NEWH:
-                if (IS_BATTLER_ANY_TYPE(gBattlerTarget, TYPE_GHOST, TYPE_NORMAL))
+                if (IS_BATTLER_ANY_TYPE(defId, TYPE_GHOST, TYPE_NORMAL))
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
 // End siliconNewBalls
@@ -16199,12 +16202,12 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
         catchRate = catchRate + ballAddition;
 
     odds = (catchRate * ballMultiplier / 100)
-        * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
-        / (3 * gBattleMons[gBattlerTarget].maxHP);
+        * (gBattleMons[defId].maxHP * 3 - gBattleMons[defId].hp * 2)
+        / (3 * gBattleMons[defId].maxHP);
 
-    if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
+    if (gBattleMons[defId].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
         odds *= 2;
-    if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE))
+    if (gBattleMons[defId].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE))
         odds = (odds * 15) / 10;
 
     return odds;
