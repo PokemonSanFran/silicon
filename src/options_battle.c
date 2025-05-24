@@ -12,6 +12,7 @@
 #include "battle_interface.h"
 #include "constants/songs.h"
 #include "sound.h"
+#include "line_break.h"
 #include "event_data.h"
 
 // Battle Settings: Experience
@@ -29,7 +30,8 @@ static bool32 HasAlreadyPrintedGotExpMsg(void);
 // Battle Settings: Whiteout
 static u32 GetRespawnOptionValue(void);
 static u32 IsWhiteoutSetToDeath(void);
-static bool8 PrintGameOverMessage(u8 taskId, const u8 *text, u8 x, u8 y);
+static void GenerateGameOverMessage(u32 windowId, u32 fontId, u8* dest);
+static bool8 PrintGameOverMessage(u8 taskId, u8 x, u8 y);
 static void Task_PrintGameOverText(u8 taskId);
 static void FieldCB_PrintGameOverText(void);
 static bool32 TryToMoveMonFromStorageSystem(void);
@@ -401,16 +403,29 @@ static u32 IsWhiteoutSetToDeath(void)
     return (GetRespawnOptionValue() == BATTLE_OPTION_WHITEOUT_DEATH);
 }
 
-static bool8 PrintGameOverMessage(u8 taskId, const u8 *text, u8 x, u8 y)
+static void GenerateGameOverMessage(u32 windowId, u32 fontId, u8* dest)
+{
+    u32 screenLines = 10;
+    u32 windowWidth = (GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_SIZE_1BPP)- 0;
+
+    StringCopy(dest,COMPOUND_STRING("You have no Pokémon in the party or the PC that can battle. Your adventure is over. Thanks for playing!{PAUSE_UNTIL_PRESS}"));
+    BreakStringAutomatic(dest, windowWidth, screenLines, fontId);
+}
+
+static bool8 PrintGameOverMessage(u8 taskId, u8 x, u8 y)
 {
     u8 windowId = gTasks[taskId].tWindowId;
+    u32 fontId = FONT_NORMAL;
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 speed = 1;
 
     switch (gTasks[taskId].tPrintState)
     {
     case 0:
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-        StringExpandPlaceholders(gStringVar4, text);
-        AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 1, 0, sGameOverTextColors, 1, gStringVar4);
+        GenerateGameOverMessage(windowId,fontId,gStringVar4);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sGameOverTextColors, speed, gStringVar4);
         gTextFlags.canABSpeedUpPrint = FALSE;
         gTasks[taskId].tPrintState = 1;
         break;
@@ -442,10 +457,13 @@ static void Task_PrintGameOverText(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        if (PrintGameOverMessage(taskId, COMPOUND_STRING("You have no Pokémon in the party or the PC that can battle.\nYour adventure is over.\nThanks for playing!\p"), 2, 8))
+        if (PrintGameOverMessage(taskId, 2, 8))
             gTasks[taskId].tState++;
         break;
     case 2:
+        if (!JOY_NEW(A_BUTTON) && !JOY_NEW(B_BUTTON))
+            break;
+
         windowId = gTasks[taskId].tWindowId;
         ClearWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_MAP);

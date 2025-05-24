@@ -16068,11 +16068,11 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                     ballMultiplier = (B_QUICK_BALL_MODIFIER >= GEN_5 ? 500 : 400);
                 break;
             case BALL_LEVEL:
-                if (gBattleMons[atId].level >= 4 * gBattleMons[defId].level)
+                if (gBattleMons[atkId].level >= 4 * gBattleMons[defId].level)
                     ballMultiplier = 800;
-                else if (gBattleMons[atId].level > 2 * gBattleMons[defId].level)
+                else if (gBattleMons[atkId].level > 2 * gBattleMons[defId].level)
                     ballMultiplier = 400;
-                else if (gBattleMons[atId].level > gBattleMons[defId].level)
+                else if (gBattleMons[atkId].level > gBattleMons[defId].level)
                     ballMultiplier = 200;
                 break;
             case BALL_LURE:
@@ -16100,10 +16100,10 @@ u32 GetCatchingOdds(u8 atkId, u8 defId, u16 itemId)
                 }
                 break;
             case BALL_LOVE:
-                if (gBattleMons[defId].species == gBattleMons[atId].species)
+                if (gBattleMons[defId].species == gBattleMons[atkId].species)
                 {
                     u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[defId]]);
-                    u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[atId]]);
+                    u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[atkId]]);
 
                     if (gender1 != gender2 && gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS)
                         ballMultiplier = 800;
