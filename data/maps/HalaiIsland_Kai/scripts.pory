@@ -11,5 +11,6 @@ script HalaiIsland_Kai_OnTransition {
     {
         default: call(LetsFixThis_HideObjectHouse_Script)
     }
+    call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_SetPostGameValues)
 }
 

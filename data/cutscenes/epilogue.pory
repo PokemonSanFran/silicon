@@ -38,11 +38,15 @@ script Epilogue_Script_ObjectVisibility
     call(Epilogue_Script_ControlPlayerVisibility)
 }
 
-script Epilogue_Script_TalaApproachesKai
+script Epilogue_Script_SetPostGameValues
 {
     clearflag(FLAG_SHOULD_SKIP_CREDITS)
     setvar(VAR_STORYLINE_STATE,STORY_CLEAR)
+}
 
+script Epilogue_Script_TalaApproachesKai
+{
+    call(Epilogue_Script_SetPostGameValues)
     playbgm(MUS_ENCOUNTER_INTENSE,TRUE)
     call(Epilogue_Script_AddMalva)
     applymovement(TALA,moves(
