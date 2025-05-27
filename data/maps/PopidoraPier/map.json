@@ -178,7 +178,7 @@
       "elevation": 0,
       "var": "VAR_GROUP_OF_ASSHOLES_STATE",
       "var_value": "0",
-      "script": "GroupOfAssholesAppears_CheckPartySize"
+      "script": "GroupOfAssholesAppears_GroupAssault_Dialogue"
     },
     {
       "type": "trigger",
@@ -187,7 +187,7 @@
       "elevation": 0,
       "var": "VAR_GROUP_OF_ASSHOLES_STATE",
       "var_value": "0",
-      "script": "GroupOfAssholesAppears_CheckPartySize"
+      "script": "GroupOfAssholesAppears_GroupAssault_Dialogue"
     },
     {
       "type": "trigger",

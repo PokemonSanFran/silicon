@@ -7,34 +7,6 @@ const GRUNT5 = 5
 const GRUNT6 = 6
 const DAVID = 7
 
-script GroupOfAssholesAppears_CheckPartySize {
-    special(HasEnoughMonsForDoubleBattle)
-
-        if (var(VAR_RESULT) == PLAYER_HAS_TWO_USABLE_MONS){
-            goto(GroupOfAssholesAppears_GroupAssault_Dialogue)
-        }else {
-            goto(GroupOfAssholesAppears_MovePlayerAway_Script)
-        }
-}
-
-script GroupOfAssholesAppears_MovePlayerAway_Script {
-        lockall
-        msgbox(gText_GroupOfAssholesAppears_IThinkINeedMore,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                closemessage
-        call(GroupOfAssholesAppears_DecidePlayerMovement_NotEnoughMons_Script)
-        releaseall
-        end
-}
-
-script GroupOfAssholesAppears_DecidePlayerMovement_NotEnoughMons_Script {
-    getplayerxy(VAR_TEMP_1,VAR_TEMP_2)
-        switch(var(VAR_TEMP_1)) {
-            case 36: applymovement(PLAYER,Common_Movement_WalkRight)
-            default: applymovement(PLAYER,Common_Movement_WalkDown)
-        }
-    waitmovement(0)
-}
-
 script GroupOfAssholesAppears_GroupAssault_Dialogue {
     lockall
         playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
@@ -63,16 +35,21 @@ script GroupOfAssholesAppears_GroupAssault_Dialogue {
         call(GroupOfAssholesAppears_PlayerToDavid_Script)
         goto(GroupOfAssholesAppears_PlayerIntervene_Dialogue)
 }
-script GroupOfAssholesAppears_PlayerToDavid_Script {
-        playse(SE_PIN)
-        applymovement(PLAYER,Common_Movement_ExclamationMark)
-        waitmovement(0)
-        getplayerxy(VAR_TEMP_1,VAR_TEMP_2)
+script GroupOfAssholesAppears_PlayerToDavid_Script
+{
+    playse(SE_PIN)
+    applymovement(PLAYER,Common_Movement_ExclamationMark)
+    waitmovement(0)
+    getplayerxy(VAR_TEMP_1,VAR_TEMP_2)
 
-        switch(var(VAR_TEMP_1)) {
-            case 36: applymovement(PLAYER,GroupOfAssholesAppears_WalkFromEast_Movement)
-            default: applymovement(PLAYER,GroupOfAssholesAppears_WalkFromWest_Movement)
-        }
+    if (var(VAR_TEMP_1) > 76)
+    {
+        applymovement(PLAYER,GroupOfAssholesAppears_WalkFromEast_Movement)
+    }
+    else
+    {
+        applymovement(PLAYER,GroupOfAssholesAppears_WalkFromWest_Movement)
+    }
     waitmovement(0)
 }
 
