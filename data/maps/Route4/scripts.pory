@@ -1,10 +1,12 @@
 mapscripts Route4_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call(ThisIsntRandom_HideObject_AboveGround_Script)
         special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
     }
-    MAP_SCRIPT_ON_LOAD {
-       call(Route4_MapScripts_OnLoad)
+    MAP_SCRIPT_ON_LOAD
+    {
+        call_if_set(FLAG_DISCOVERED_PARC,Route4_MapScripts_OnLoad)
     }
     MAP_SCRIPT_ON_RESUME
     {
@@ -12,30 +14,9 @@ mapscripts Route4_MapScripts {
     }
 }
 
-script Route4_UncoverSecretLab_Script {
-    //PSF TODO Add better transition effect here, maybe the cutting grass animation
-    setmetatile(12,16,0x055,FALSE)
-    setmetatile(12,17,0x05D,FALSE)
-    setmetatile(12,18,0x065,FALSE)
-    setmetatile(13,16,0x056,FALSE)
-    setmetatile(13,17,METATILE_General_CaveEntrance_Bottom,FALSE)
-    setmetatile(13,18,0x066,FALSE)
-    setmetatile(14,16,0x057,FALSE)
-    setmetatile(14,17,0x05F,FALSE)
-    setmetatile(14,18,0x067,FALSE)
-    special(DrawWholeMapView)
-
-    if (var(VAR_PARC_STATE) == LAB_NOT_DISCOVERED){
-        addvar(VAR_PARC_STATE,PLAYER_DISCOVERED_LAB)
-        setvar(VAR_TEMP_C,0)
-    }
-}
-
-
-script Route4_MapScripts_OnLoad {
-    if (var(VAR_PARC_STATE)){
-        call(Route4_UncoverSecretLab_Script)
-    }
+script Route4_MapScripts_OnLoad
+{
+    callnative(UncoverDoorsLab)
 }
 
 script Route4_EventScript_BlackbeltB{

@@ -411,6 +411,7 @@ EventScript_DigSealedChamber:: @ fallthrough
 	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
 	callnative DoBrailleDigEffect
+    callnative DoSecretLabDigEffect // siliconMerge
 	releaseall
 	end
 

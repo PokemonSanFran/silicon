@@ -9,6 +9,7 @@
 #include "party_menu.h"
 #include "script.h"
 #include "sprite.h"
+#include "field_puzzles.h" // siliconMerge
 #include "constants/field_effects.h"
 
 // static functions
@@ -18,7 +19,10 @@ static void StartDigFieldEffect(void);
 // text
 bool8 SetUpFieldMove_Dig(void)
 {
-    if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
+    // Start siliconMerge
+    // if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
+    if ((CanUseDigOrEscapeRopeOnCurMap() == TRUE) || (ShouldDoSecretLabDigEffect() == TRUE))
+    // End siliconMerge
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = FieldCallback_Dig;
@@ -53,7 +57,10 @@ static void StartDigFieldEffect(void)
     u8 taskId;
 
     FieldEffectActiveListRemove(FLDEFF_USE_DIG);
-    if (ShouldDoBrailleDigEffect())
+    // Start siliconMerge
+    //if (ShouldDoBrailleDigEffect()
+    if ((ShouldDoBrailleDigEffect()) || (ShouldDoSecretLabDigEffect()))
+    // End siliconMerge
     {
         // EventScript_DigSealedChamber handles DoBrailleDigEffect call
         ScriptContext_Enable();

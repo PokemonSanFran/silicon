@@ -700,6 +700,7 @@ extern const u8 EventScript_MovedTooFast[];
 // Start siliconMerge
 extern const u8 Fishing_Cutscene_JumpOutOfWater[];
 extern const u8 Fishing_Cutscene_YellAtPlayer[];
+extern const u8 ThisIsntRandom_CheckDoor_Script[];
 // End siliconMerge
 
 #endif // GUARD_EVENT_SCRIPTS_H

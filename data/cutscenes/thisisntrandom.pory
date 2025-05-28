@@ -8,11 +8,16 @@ const VAR_UNDERGROUND_DOOR = VAR_TEMP_C
 
 script ThisIsntRandom_CheckDoor_Script
 {
-        if (var(VAR_PARC_STATE) == PLAYER_DISCOVERED_LAB){
-            if (var(VAR_STORYLINE_STATE) == STORY_POST_EARTHQUAKE){
-                call(ThisIsntRandom_UnlockDoor_Dialogue)
-            }
-        }
+    if (var(VAR_PARC_STATE) != PLAYER_DISCOVERED_LAB)
+    {
+        return
+    }
+
+    if (var(VAR_STORYLINE_STATE) != STORY_POST_EARTHQUAKE)
+    {
+        return
+    }
+    call(ThisIsntRandom_UnlockDoor_Dialogue)
 }
 
 script ThisIsntRandom_HideObject_AboveGround_Script

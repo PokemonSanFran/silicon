@@ -11,24 +11,56 @@
 #include "fieldmap.h"
 #include "party_menu.h"
 #include "fldeff.h"
+#include "quest_logic.h"
 
 #include "event_scripts.h" //PSF allows for calling of mapscript to set secret lab
 
 bool8 ShouldDoSecretLabDigEffect(void)
 {
-    if (!FlagGet(FLAG_DISCOVERED_PARC)
-     && (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE4)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE4)))
-    {
-         if ((gSaveBlock1Ptr->pos.x > 11 && gSaveBlock1Ptr->pos.x < 15) && (gSaveBlock1Ptr->pos.y > 15 && gSaveBlock1Ptr->pos.y < 19))
-             return TRUE;
-    }
+    if (FlagGet(FLAG_DISCOVERED_PARC))
+        return FALSE;
 
-    return FALSE;
+    if (GetCurrentMap() != MAP_ROUTE4)
+        return FALSE;
+
+    u32 pX = gSaveBlock1Ptr->pos.x;
+    u32 pY = gSaveBlock1Ptr->pos.y;
+
+    if (pX < 12 || pX > 14)
+        return FALSE;
+
+    if (pY < 16 || pY > 18)
+        return FALSE;
+
+    return TRUE;
+}
+
+void UncoverDoorsLab(void)
+{
+    MapGridSetMetatileIdAt((12 + MAP_OFFSET), (16 + MAP_OFFSET), 0x103);
+    MapGridSetMetatileIdAt((13 + MAP_OFFSET), (16 + MAP_OFFSET), 0x104);
+    MapGridSetMetatileIdAt((14 + MAP_OFFSET), (16 + MAP_OFFSET), 0x105);
+
+    MapGridSetMetatileIdAt((12 + MAP_OFFSET), (17 + MAP_OFFSET), 0x10B);
+    MapGridSetMetatileIdAt((13 + MAP_OFFSET), (17 + MAP_OFFSET), METATILE_General_CaveEntrance_Bottom);
+    MapGridSetMetatileIdAt((14 + MAP_OFFSET), (17 + MAP_OFFSET), 0x10D);
+
+    MapGridSetMetatileIdAt((12 + MAP_OFFSET), (18 + MAP_OFFSET), 0x113);
+    MapGridSetMetatileIdAt((13 + MAP_OFFSET), (18 + MAP_OFFSET), 0x114);
+    MapGridSetMetatileIdAt((14 + MAP_OFFSET), (18 + MAP_OFFSET), 0x115);
+
+    DrawWholeMapView();
 }
 
 void DoSecretLabDigEffect(void)
 {
-    ScriptContext_SetupScript(Route4_UncoverSecretLab_Script);
+    UncoverDoorsLab();
+
+    if (VarGet(VAR_PARC_STATE) == LAB_NOT_DISCOVERED)
+        VarSet(VAR_PARC_STATE,PLAYER_DISCOVERED_LAB);
+
     PlaySE(SE_BANG);
+    FlagSet(FLAG_DISCOVERED_PARC);
+
+    ScriptContext_SetupScript(ThisIsntRandom_CheckDoor_Script);
 }
