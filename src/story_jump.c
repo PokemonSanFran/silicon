@@ -1452,6 +1452,7 @@ void JumpPlayerTo_ClearAllAct2(bool32 jumpType)
     JumpPlayerTo_BeachBattle(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_EnterDimu(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_ANewStrike(JUMP_CUTSCENE_SKIP);
+    JumpPlayerTo_AndWeMarchOn(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_EnterBD(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_Battle8(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_EnterAmiArgento(JUMP_CUTSCENE_SKIP);
