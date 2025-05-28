@@ -3,9 +3,5 @@ mapscripts Route10_MapScripts {
         special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
             call(NewAssholeAppears_HideKai_Script)
     }
-    MAP_SCRIPT_ON_FRAME_TABLE
-    [
-        VAR_TEMP_0,0: AaandWereBack_Monologue
-    ]
 }
 

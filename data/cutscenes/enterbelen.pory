@@ -74,6 +74,7 @@ script EnterBelen_BelenDefeated_Script {
     waitmovement(0)
     setvar(VAR_TEMP_0,0)
     call(TryAutoSave)
+    call(AaandWereBack_Monologue)
     releaseall
     end
 }

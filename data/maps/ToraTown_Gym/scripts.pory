@@ -7,7 +7,6 @@ mapscripts ToraTown_Gym_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
-        VAR_TEMP_0,0: AaandWereBack_Monologue
     ]
 }
 

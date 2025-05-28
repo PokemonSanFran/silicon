@@ -40,6 +40,7 @@ script EnterShinzo_ShinzoDefeated_Script {
     call(WowYoureStrong_CheckCutsceneScript)
     setvar(VAR_TEMP_0,0)
     call(TryAutoSave)
+    call(AaandWereBack_Monologue)
     releaseall
     end
 }

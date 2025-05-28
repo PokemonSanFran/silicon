@@ -6,7 +6,6 @@ mapscripts PopidoraPier_MapScripts
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
-        VAR_TEMP_0,0: AaandWereBack_Monologue
         FLAG_VISITED_POPIDORA_PIER, FALSE: Generic_Mappreview
     ]
 }

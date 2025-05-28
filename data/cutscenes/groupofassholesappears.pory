@@ -154,6 +154,7 @@ script GroupOfAssholesAppears_GiveRewards_Dialogue {
         setvar(VAR_TEMP_0,0)
         endcutscene
         call(TryAutoSave)
+        call(AaandWereBack_Monologue)
         releaseall
         end
 }
