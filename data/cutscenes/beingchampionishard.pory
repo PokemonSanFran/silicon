@@ -9,19 +9,15 @@ script BeingChampionIsHard_ObjectCleanUp_Script {
     return
 }
 
-script BeingChampionIsHard_TimeSkip {
+script BeingChampionIsHard_TimeSkip
+{
         startcutscene(JUMPPLAYER_BEINGCHAMPIONISHARD)
-    fadescreen(FADE_TO_BLACK)
-        msgbox(gText_BeingChampionIsHard_OneMonthLater)
-        closemessage
         goto(BeingChampionIsHard_PostTimeSkip)
 }
 
 script BeingChampionIsHard_PostTimeSkip {
-    playse(SE_EXIT)
+        playse(SE_EXIT)
         waitse
-        fadescreen(FADE_FROM_BLACK)
-
         applymovement(PLAYER,BeingChampionIsHard_WalkToOliver)
         waitmovement(0)
 
@@ -85,7 +81,7 @@ text gText_BeingChampionIsHard_GoodMorningChampion {
     format("Good morning Champion {PLAYER}.")
 }
 text gText_BeingChampionIsHard_ItsAlmostBeenAMonth {
-    format("It's almost been a month… doesn't saying that get old?")
+    format("You've been calling me that for a month since I won… doesn't that get old?")
 }
 text gText_BeingChampionIsHard_OfCourseNot {
     format("Of course not. You've earned it! Now on the docket for today…")
