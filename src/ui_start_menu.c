@@ -158,7 +158,7 @@ static u8 StartMenu_GetCurrentApp(void);
 static void PrintToAllWindows(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
-static u8 GetCurrentAppFromIndex(u8 index);
+static enum AppsIds GetCurrentAppFromIndex(u8 index);
 static u8 GetCurrentSignal();
 static void *GetSpriteCallbackForIcon(u32, bool32);
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y);
@@ -474,12 +474,17 @@ static void AddNewAppsToStartMenuIndex(void)
 {
     u32 appId;
 
-    if (GetFirstEmptyIndexSlot() == NO_SLOTS)
-        return;
 
     for(appId = 0; appId < NUM_TOTAL_APPS; appId++)
+    {
         if (IsAppUnlocked(appId) && !IsAppInIndex(appId))
+        {
+            if (GetFirstEmptyIndexSlot() == NO_SLOTS)
+                break;
+
             gSaveBlock3Ptr->startMenuAppIndex[GetFirstEmptyIndexSlot()] = appId;
+        }
+    }
 }
 
 static u32 GetStaggeredIndexPosition(u32 index)
@@ -532,7 +537,7 @@ static void StartMenuTempIndextoIndex()
 {
     u8 i;
 
-    for(i = APP_POKEMON; i < NUM_TOTAL_APPS - 1; i++){
+    for(i = 0; i < NUM_TOTAL_APPS; i++){
         gSaveBlock3Ptr->startMenuAppIndex[i] = sMenuDataPtr->startMenuAppTempIndex[i];
 
         sMenuDataPtr->currentAppId = sMenuDataPtr->TempAppId;
@@ -540,12 +545,18 @@ static void StartMenuTempIndextoIndex()
     }
 }
 
-static u8 GetCurrentAppFromIndex(u8 index)
+static enum AppsIds GetCurrentAppFromIndex(u8 index)
 {
+    enum AppsIds app;
     if(index >= NUM_TOTAL_APPS)
-        return gSaveBlock3Ptr->startMenuAppIndex[index % NUM_TOTAL_APPS];
+        app = gSaveBlock3Ptr->startMenuAppIndex[index % NUM_TOTAL_APPS];
     else
-        return gSaveBlock3Ptr->startMenuAppIndex[index];
+        app = gSaveBlock3Ptr->startMenuAppIndex[index];
+
+    if (app > APP_NONE)
+        app = APP_NONE;
+
+    return app;
 }
 
 static void StartMenuIndextoTempIndex()
@@ -1039,7 +1050,8 @@ static bool8 StartMenu_DisplayPhoneApps(void)
 
     for(phoneIconSlot = 0; phoneIconSlot < NUM_APPS_PER_SCREEN; phoneIconSlot++){
 
-        phoneApp = GetCurrentAppFromIndex(currentApp + NUM_TOTAL_APPS - phoneIconSlot + 2);
+        u32 index = (currentApp + NUM_TOTAL_APPS - phoneIconSlot + 2);
+        phoneApp = GetCurrentAppFromIndex(index);
         StartMenu_DrawPhoneAppIcon(phoneIconSlot, windowId, sStartMenuAppGfx[phoneApp][0], sStartMenuAppGfx[phoneApp][1],x,y,appIconHeight,appIconWidth);
 
         x += 6;
