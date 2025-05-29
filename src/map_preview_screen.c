@@ -780,6 +780,10 @@ static bool8 MapHasPreviewScreen(u8 mapsec, u8 type)
     u8 idx;
 
     idx = GetMapPreviewScreenIdx(mapsec);
+
+    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP))
+        return FALSE;
+
     if (idx != MPS_COUNT)
     {
         if (type == MPS_TYPE_ANY)

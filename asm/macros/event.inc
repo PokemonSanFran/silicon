@@ -2689,7 +2689,6 @@
     goto_if_eq VAR_RESULT, TRUE, \dest
     .endm
     @ End rematch_action
-	
 
 	@ Sets VAR_RESULT to TRUE if stat can be hyper trained, or to
 	@ FALSE otherwise.
@@ -3059,6 +3058,7 @@
     @ Fade to black and set the flag before a warp so that screen doesn't fade back in
     .macro fadeblackandsetremovewarpfadeflag
     fadescreen FADE_TO_BLACK
+    setflag FLAG_HIDE_MAP_NAME_POPUP
     setflag FLAG_REMOVE_WARP_FADE
     .endm
 

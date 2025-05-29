@@ -34,6 +34,7 @@ script ThisIsntRandom_ObjectSetUp_Script
 
         setobjectxy(PLAYER,13,18)
         TeleportCamera(13,18)
+        applymovement(PLAYER,Common_Movement_FaceDown)
 
         clearflag(FLAG_HIDE_SEARCH)
 
