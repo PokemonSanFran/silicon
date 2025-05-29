@@ -74,32 +74,41 @@ script Prologue_MoveEliteRoomObjects_Script{
     return
 }
 
-script Prologue_PostBattle_Script{
+script Prologue_PostBattle_Script
+{
     lock
-        startcutscene(JUMPPLAYER_PROLOGUE_CHAMPION)
-        clearflag(TRAINER_FLAGS_START + TRAINER_MAGNUS_PROLOGUE)
-        setvar(VAR_PROLOGUE_STATE,DEFEATED_MAGNUS)
-        call(Prologue_MoveEliteRoomObjects_Script)
-        delay(16)
-        playse(SE_TRUCK_DOOR)
-        call(OrolandColiseum_Arena_OpenExit_Script)
-        waitse
-        //subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_4)
-        //completequest(QUEST_BECOMECHAMPION)
-        playbgm(MUS_HALL_OF_FAME_ROOM,TRUE)
-        msgbox(gText_Prologue_AdamYouAre,,SPEAKER_MAGNUS,TAIL_SHOUT,EMOTE_HAPPY)
-        msgbox(gText_Prologue_AndPerhaps,,SPEAKER_MAGNUS,TAIL_WHISPER)
-        msgbox(gText_Prologue_WearThis,,SPEAKER_MAGNUS,,EMOTE_HAPPY)
-        closemessage
-        applymovement(MAGNUS,Prologue_LeaveChamber_Movement)
-        applymovement(PLAYER,Common_Movement_WalkUp4)
-        waitmovement(MAGNUS)
-        removeobject(MAGNUS)
-        playse(SE_EXIT)
-        warpdoor(MAP_OROLAND_COLISEUM_HALL,9,9)
-        endcutscene
-        release
-        end
+    startcutscene(JUMPPLAYER_PROLOGUE_CHAMPION)
+    clearflag(TRAINER_FLAGS_START + TRAINER_MAGNUS_PROLOGUE)
+    setvar(VAR_PROLOGUE_STATE,DEFEATED_MAGNUS)
+    call(Prologue_MoveEliteRoomObjects_Script)
+    delay(16)
+    playse(SE_TRUCK_DOOR)
+    call(OrolandColiseum_Arena_OpenExit_Script)
+    waitse
+    //subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_4)
+    //completequest(QUEST_BECOMECHAMPION)
+    playbgm(MUS_HALL_OF_FAME_ROOM,TRUE)
+    msgbox(gText_Prologue_AdamYouAre,,SPEAKER_MAGNUS,TAIL_SHOUT,EMOTE_HAPPY)
+    msgbox(gText_Prologue_AndPerhaps,,SPEAKER_MAGNUS,TAIL_WHISPER)
+    msgbox(gText_Prologue_WearThis,,SPEAKER_MAGNUS,,EMOTE_HAPPY)
+    closemessage
+    applymovement(MAGNUS,Prologue_LeaveChamber_Movement)
+    applymovement(PLAYER,Common_Movement_WalkUp4)
+    waitmovement(MAGNUS)
+    removeobject(MAGNUS)
+    playse(SE_EXIT)
+    fadeblackandsetremovewarpfadeflag
+    warpdoor(MAP_OROLAND_COLISEUM_HALL,9,9)
+    endcutscene
+    msgbox(gText_Prologue_AFewDays)
+    closemessage
+    waitstate
+}
+
+script Prologue_PostBattleTime_Dialogue
+{
+    goto(Prologue_PostWarp_Hall_Dialgoue)
+    return
 }
 
 script Prologue_PostWarp_Hall_Dialgoue{
@@ -244,15 +253,6 @@ script Prologue_IntroTime_Dialogue
     waitstate
 }
 
-script Prologue_PostBattleTime_Dialogue{
-    fadescreen(FADE_TO_BLACK)
-        msgbox(gText_Prologue_AFewDays)
-        closemessage
-        fadescreen(FADE_FROM_BLACK)
-        goto(Prologue_PostWarp_Hall_Dialgoue)
-        return
-}
-
 script Prologue_TimeSkip_Dialogue{
     fadescreen(FADE_TO_BLACK)
         setvar(VAR_PROLOGUE_STATE,WALK_INTO_HALL)
@@ -376,7 +376,7 @@ text gText_Prologue_July31{
 }
 
 text gText_Prologue_AFewDays{
-    format("The next day...")
+    format("The next day...{PAUSE_UNTIL_PRESS}")
 }
 
 text gText_Prologue_HelpModal{
