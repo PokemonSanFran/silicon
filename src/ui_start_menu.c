@@ -808,11 +808,6 @@ static const u8 sText_Unknown_Location[] = _("Unknown");
 static const u8 sText_ClockDigits[] =  _("{STR_VAR_2}:{STR_VAR_3}$");
 static const u8 sText_ClockDigitsLeadingZero[] =  _("{STR_VAR_2}:0{STR_VAR_3}$");
 
-static const u8 sText_App_Morning[] = _("Morning");
-static const u8 sText_App_Day[]     = _("Day");
-static const u8 sText_App_Evening[] = _("Evening");
-static const u8 sText_App_Night[]   = _("Night");
-
 static const u8 sText_HelpBar_Default[] = _("{A_BUTTON} Open {B_BUTTON} Return {SELECT_BUTTON} Reorder {START_BUTTON} Save");
 static const u8 sText_HelpBar_MoveMode[] = _("{A_BUTTON} Place {B_BUTTON} Return to Menu");
 static const u8 sText_HelpBar_SaveAsk[] = _("{START_BUTTON} Save Adventure {B_BUTTON} Cancel");
@@ -994,13 +989,13 @@ static void StartMenu_PrintTimeOfDay(void)
     FillWindowPixelBuffer(WINDOW_TIME_STRING, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     if(hours >= 6 && hours < 10)
-        StringExpandPlaceholders(gStringVar1, sText_App_Morning);
+        StringExpandPlaceholders(gStringVar1, gText_Morning);
     else if(hours < 19)
-        StringExpandPlaceholders(gStringVar1, sText_App_Day);
+        StringExpandPlaceholders(gStringVar1, gText_Day);
     else if(hours < 20)
-        StringExpandPlaceholders(gStringVar1, sText_App_Evening);
+        StringExpandPlaceholders(gStringVar1, gText_Evening);
     else
-        StringExpandPlaceholders(gStringVar1, sText_App_Night);
+        StringExpandPlaceholders(gStringVar1, gText_Night);
 
     AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, GetFontAttribute(FONT_NARROW,FONTATTR_LETTER_SPACING), GetFontAttribute(FONT_NARROW,FONTATTR_LETTER_SPACING), sMenuWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW, gStringVar1);
     CopyWindowToVram(WINDOW_TIME_STRING,COPYWIN_GFX);
