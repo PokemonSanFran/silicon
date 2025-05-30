@@ -71,9 +71,11 @@ script NewAssholeAppears_BadgeJudge_Dialogue {
 
 script NewAssholeAppears_StartBattle_Script{
     lockall
-    trainerbattle_single(TRAINER_KAI_NEWASSHOLEAPPEARS,gText_NewAssholeAppears_GoMindYourBusiness,gText_NewAssholeAppears_YoureTough,NewAssholeAppears_PostBattle_Script, NO_MUSIC)
+    faceplayer
+    msgbox(gText_NewAssholeAppears_GoMindYourBusiness,,SPEAKER_KAI)
     closemessage
-
+    trainerbattle_no_intro(TRAINER_KAI_NEWASSHOLEAPPEARS,gText_NewAssholeAppears_YoureTough)
+    goto(NewAssholeAppears_PostBattle_Script)
 }
 
 script NewAssholeAppears_PostBattle_Script {
