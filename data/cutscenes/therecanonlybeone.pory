@@ -10,6 +10,7 @@ script ThereCanOnlyBeOne_LoadFromSave_Script{
 script ThereCanOnlyBeOne_Player_Monologue
 {
     lock
+    setrespawn(HEAL_LOCATION_CUCONU_TOWN_COMPOUND_2F)
     msgbox(gText_ThereCanOnlyBe_AlmostPackedAndReady,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_HAPPY,PHONE_OFF)
     msgbox(gText_ThereCanOnlyBe_ButTheRulesSay,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_SAD,PHONE_OFF)
     callnative(GenerateDummyPartyMembers)
