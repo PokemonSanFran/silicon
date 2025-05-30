@@ -509,8 +509,8 @@ void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
 
 void WarpPlayerAfterVarSet()
 {
+    //ResetInitialPlayerAvatarState();
     DoWarp();
-    ResetInitialPlayerAvatarState();
 }
 
 static void IncrementStorylineVariable()
@@ -775,7 +775,7 @@ void GiveItems_EnterBelen(bool32 jumpType)
 void JumpPlayerTo_EnterBelen(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
 
     GiveItems_EnterBelen(jumpType);
     FlagsVarWarp_EnterFallkner();
@@ -805,7 +805,7 @@ void GiveItems_EnterShinzo(bool32 jumpType)
 void JumpPlayerTo_EnterShinzo(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_EnterAdaora(jumpType);
 
     GiveItems_EnterShinzo(jumpType);
     FlagsVarWarp_EnterShinzo();
@@ -834,7 +834,7 @@ void FlagsVarWarp_EnterEmrys()
 void JumpPlayerTo_EnterEmrys(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
 
     GiveItems_EnterEmrys(jumpType);
     FlagsVarWarp_EnterEmrys();
@@ -852,7 +852,7 @@ void FlagsVarWarp_NewAssholeAppears()
 void JumpPlayerTo_NewAssholeAppears(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
 
     FlagsVarWarp_NewAssholeAppears();
 }
@@ -871,7 +871,7 @@ void FlagsVarWarp_OldAssholeAppears()
 void JumpPlayerTo_OldAssholeAppears(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
 
     FlagsVarWarp_OldAssholeAppears();
 }
@@ -895,7 +895,7 @@ void GiveItems_GroupofAssoholesAppears(bool32 jumpType)
 void JumpPlayerTo_GroupofAssholesAppears(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
     GiveItems_GroupofAssoholesAppears(jumpType);
     FlagsVarWarp_GroupofAssholesAppears();
 }
@@ -911,7 +911,7 @@ void FlagsVarWarp_FlyingBlind()
 void JumpPlayerTo_FlyingBlind(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
 
     FlagsVarWarp_FlyingBlind();
 }
@@ -986,7 +986,7 @@ void GiveItems_EnterAdaora(bool32 jumpType)
 void JumpPlayerTo_EnterAdaora(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
 
     GiveItems_EnterAdaora(jumpType);
     FlagsVarWarp_EnterAdaora();
@@ -1004,7 +1004,7 @@ void FlagsVarWarp_HowDoWeGetHome()
 void JumpPlayerTo_HowDoWeGetHome(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_ReadySetI(jumpType);
+        JumpPlayerTo_CatchTutorial(jumpType);
 
     FlagsVarWarp_HowDoWeGetHome();
 }
@@ -1027,7 +1027,6 @@ void JumpPlayerTo_ClearAllAct1(bool32 jumpType)
     JumpPlayerTo_GroupofAssholesAppears(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_WowYoureStrong(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_TheGangsAllHere(JUMP_CUTSCENE_SKIP);
-    JumpPlayerTo_EnterAdaora(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_HowDoWeGetHome(JUMP_CUTSCENE_SKIP);
 }
 
