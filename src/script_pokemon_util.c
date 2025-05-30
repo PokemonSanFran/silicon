@@ -34,6 +34,7 @@
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 static void HealPlayerBoxes(void);
+static UNUSED void FaintPlayerBoxes(void);
 
 void HealPlayerParty(void)
 {
@@ -41,7 +42,7 @@ void HealPlayerParty(void)
 // Start siliconMerge
     if (!CanHealPlayer())
         return;
-	
+
 	PokevialRefill(); //Pokevial Branch
 // End siliconMerge
     for (i = 0; i < gPlayerPartyCount; i++)
@@ -52,6 +53,14 @@ void HealPlayerParty(void)
     // Recharge Tera Orb, if possible.
     if (B_FLAG_TERA_ORB_CHARGED != 0 && CheckBagHasItem(ITEM_TERA_ORB, 1))
         FlagSet(B_FLAG_TERA_ORB_CHARGED);
+}
+
+void FaintPlayerParty(void)
+{
+    u32 i;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+        FaintPokemon(&gPlayerParty[i]);
 }
 
 static void HealPlayerBoxes(void)
@@ -66,6 +75,22 @@ static void HealPlayerBoxes(void)
             boxMon = &gPokemonStoragePtr->boxes[boxId][boxPosition];
             if (GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
                 HealBoxPokemon(boxMon);
+        }
+    }
+}
+
+static UNUSED void FaintPlayerBoxes(void)
+{
+    int boxId, boxPosition;
+    struct BoxPokemon *boxMon;
+
+    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            boxMon = &gPokemonStoragePtr->boxes[boxId][boxPosition];
+            if (GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
+                FaintBoxPokemon(boxMon);
         }
     }
 }
@@ -246,12 +271,12 @@ void ReducePlayerPartyToSelectedMons(void)
 }
 
 // Start siliconMerge
-void LevelUpAllPokemonTo100(void) 
+void LevelUpAllPokemonTo100(void)
 {
-    for (u32 i = 0; i < PARTY_SIZE; i++) 
+    for (u32 i = 0; i < PARTY_SIZE; i++)
 	{
         struct Pokemon *pokemon = &gPlayerParty[i];
-        if (GetMonData(pokemon, MON_DATA_SPECIES, NULL) != SPECIES_NONE) 
+        if (GetMonData(pokemon, MON_DATA_SPECIES, NULL) != SPECIES_NONE)
 		{
             u32 exp = gExperienceTables[gSpeciesInfo[GetMonData(pokemon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
             SetMonData(pokemon, MON_DATA_EXP, &exp);

@@ -818,6 +818,8 @@ u16 GetCryIdBySpecies(u16 species);
 u16 GetSpeciesPreEvolution(u16 species);
 void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
+void FaintPokemon(struct Pokemon *mon);
+void FaintBoxPokemon(struct BoxPokemon *mon);
 // Start pokedex
 const u8 *GetAbilityName(u16 abilityId);
 const u8 *GetAbilityDesc(u32 abilityId);

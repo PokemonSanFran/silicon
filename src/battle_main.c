@@ -79,6 +79,7 @@
 #include "quest_logic.h"
 #include "options_battle.h"
 #include "dexnav.h"
+#include "script_pokemon_util.h"
 // End siliconMerge
 #include "ui_pokedex.h" // pokedex
 
@@ -1750,16 +1751,22 @@ static void CB2_HandleStartMultiBattle(void)
 // start merrp battle debug
 void Debug_EndBattleInstantly(void)
 {
-#ifndef NDEBUG
+#if NDEBUG
+        return;
+#endif
+
     if (!JOY_HELD(B_BUTTON))
         return;
 
     if (JOY_HELD(DPAD_UP))
+    {
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_WON;
+    }
     else if (JOY_HELD(DPAD_DOWN))
+    {
+        VarSet(VAR_TEMP_0,B_OUTCOME_LOST);
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_LOST;
-#endif
-    return;
+    }
 }
 // end merrp battle debug
 
@@ -5529,6 +5536,16 @@ static void HandleEndTurn_BattleWon(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
+static void FaintPartyDuringDebug(void)
+{
+#if NDEBUG
+        return;
+#endif
+
+    if (VarGet(VAR_TEMP_0) == B_OUTCOME_LOST)
+        FaintPlayerParty();
+}
+
 static void HandleEndTurn_BattleLost(void)
 {
     gCurrentActionFuncId = 0;
@@ -5563,6 +5580,7 @@ static void HandleEndTurn_BattleLost(void)
         gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
     }
     SetFogVariableAfterLoss(); // fogBattle
+    FaintPartyDuringDebug();
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
