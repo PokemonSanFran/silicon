@@ -54,11 +54,10 @@ script Swagbag_LeagueStipend_Dialogue {
 }
 
 script Swagbag_PokedexApps_Dialogue {
-        msgbox(gText_Swagbag_AlsoWeveGoneAhead)
+        msgbox(gText_Swagbag_AlsoWeveGoneAhead,,SPEAKER_OLIVER)
         msgbox(gText_Swagbag_InvasiveMuch,,SPEAKER_CHARLOTTE)
         msgbox(gText_Swagbag_WellAskNextTime,,SPEAKER_OLIVER)
         msgbox(gText_Swagbag_AnotherPerk,,SPEAKER_OLIVER)
-        //msgbox(gText_Swagbag_TeachyTVSoIShould,,SPEAKER_ALICIA)
         msgbox(gText_Swagbag_Correct,,SPEAKER_OLIVER)
 
         playfanfare(MUS_OBTAIN_ITEM)
@@ -121,7 +120,7 @@ text gText_Swagbag_WelcomeToRegion {
 }
 
 text gText_Swagbag_GreatThePrivateCar {
-    format("Great! The Premium Arriba pickup from the airport was a surprise, but everything was super smooth, thanks!")
+    format("Great! The fancy car pickup from the airport was a surprise, but everything was super smooth, thanks!")
 }
 
 text gText_Swagbag_ExcellentYouveAlready {
@@ -137,7 +136,7 @@ text gText_Swagbag_BecauseTheBoard {
 }
 
 text gText_Swagbag_AlsoWeveGoneAhead {
-    format("Next, we've gone ahead and loaded the newest OS onto your phones last night.")
+    format("Next, as you may have noticed, we loaded the newest Sharprise operating system onto your phones.")
 }
 
 text gText_Swagbag_InvasiveMuch {
@@ -145,15 +144,11 @@ text gText_Swagbag_InvasiveMuch {
 }
 
 text gText_Swagbag_WellAskNextTime {
-    format("Ha ha, we'll ask next time. Now you'll be able to see your League profile and a map of the region.")
+    format("Ha ha, we'll ask next time! Now you'll be able to see your League profile and a Resido map.")
 }
 
 text gText_Swagbag_AnotherPerk {
     format("Another perk: you'll get access to some of the newest bleeding edge apps. We're excited for you to try out Quest Log, which should help keep you organized. As a members of our program, you've also got access to our private Pokédex build, which should prove to be very useful!")
-}
-
-text gText_Swagbag_TeachyTVSoIShould {
-    format("Teachy TV... so I should use that if I have a question or get stuck?")
 }
 
 text gText_Swagbag_Correct {
