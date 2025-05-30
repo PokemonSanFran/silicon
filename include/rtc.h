@@ -2,6 +2,7 @@
 #define GUARD_RTC_UTIL_H
 
 #include "siirtc.h"
+#include "constants/rtc.h" // siliconDNS
 
 #define RTC_INIT_ERROR         0x0001
 #define RTC_INIT_WARNING       0x0002
@@ -17,6 +18,8 @@
 
 #define RTC_ERR_FLAG_MASK      0x0FF0
 
+// Start siliconDNS
+/*
 //Morning and evening don't exist in Gen 3
 #if OW_TIMES_OF_DAY == GEN_3
     #define MORNING_HOUR_BEGIN 0
@@ -82,14 +85,16 @@
     #define NIGHT_HOUR_BEGIN   20
     #define NIGHT_HOUR_END     6
 #endif
+*/
 
-#define TIME_MORNING           0
-#define TIME_DAY               1
-#define TIME_EVENING           2
-#define TIME_NIGHT             3
+//#define TIME_MORNING           0
+//#define TIME_DAY               1
+//#define TIME_EVENING           2
+//#define TIME_NIGHT             3
+// End siliconDNS
 
 extern struct Time gLocalTime;
-extern const u8 *const gTimeName[TIME_NIGHT+1]; // pokedex
+extern const u8 *const gTimeName[TIME_OF_DAY_COUNT]; // pokedex
 
 void RtcDisableInterrupts(void);
 void RtcRestoreInterrupts(void);

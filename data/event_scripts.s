@@ -75,6 +75,7 @@
 #include "constants/reveal.h" @ reveal
 #include "constants/siliconDaycare.h" @ siliconDaycare 
 #include "constants/siliconStarter.h" @ siliconStarter
+#include "constants/rtc.h" @ siliconDNS
 @ End siliconMerge
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"

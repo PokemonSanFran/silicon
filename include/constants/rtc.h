@@ -1,0 +1,25 @@
+#ifndef GUARD_CONSTANTS_RTC_H
+#define GUARD_CONSTANTS_RTC_H
+
+enum TimeOfDay
+{
+    TIME_MORNING,
+    TIME_DAY,
+    TIME_EVENING,
+    TIME_NIGHT,
+    TIME_OF_DAY_COUNT,
+};
+
+#define MORNING_HOUR_BEGIN 6
+#define MORNING_HOUR_END   10
+
+#define DAY_HOUR_BEGIN     10
+#define DAY_HOUR_END       19
+
+#define EVENING_HOUR_BEGIN 19
+#define EVENING_HOUR_END   20
+
+#define NIGHT_HOUR_BEGIN   20
+#define NIGHT_HOUR_END     6
+
+#endif // GUARD_CONSTANTS_RTC_H
