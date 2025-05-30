@@ -107,17 +107,23 @@ script CatchTutorial_PostCatching_Script
     waitmovement(PROF)
     msgbox(gText_CatchingTutorial_ThatsReally,,SPEAKER_PROF_TRACHY)
     call(CatchTutorial_GiveBallsSetFlag_Script)
-    goto(CatchTutorial_SetFlag_Script)
+    goto(CatchTutorial_End_Script)
 }
 
-script CatchTutorial_SetFlag_Script
+script CatchTutorial_SetFlagSave_Script
 {
     setflag(FLAG_PLAYED_CATCH_TUTORIAL)
-    msgbox(gText_CatchingTutorial_IfYouWant,,SPEAKER_PROF_TRACHY)
+    call(TryAutoSave)
+}
+
+script CatchTutorial_End_Script
+{
     closemessage
     fadedefaultbgm
+    msgbox(gText_CatchingTutorial_IfYouWant,,SPEAKER_PROF_TRACHY)
+    closemessage
+    call_if_unset(FLAG_PLAYED_CATCH_TUTORIAL,CatchTutorial_SetFlagSave_Script)
     endcutscene
-    call(TryAutoSave)
     release
     end
 }
@@ -143,7 +149,7 @@ script CatchTutorial_GiveBallsSetFlag_Script
 script CatchTutorial_RefuseCatching_Script
 {
     msgbox(gText_CatchTutorial_NoProblem,,SPEAKER_PROF_TRACHY)
-    goto(CatchTutorial_SetFlag_Script)
+    goto(CatchTutorial_End_Script)
 }
 text gText_CatchTutorial_HeyThere
 {
