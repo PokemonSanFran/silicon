@@ -3358,7 +3358,9 @@ bool8 ScrCmd_cueobject(struct ScriptContext *ctx)
     u8 shouldWait = ScriptReadByte(ctx);
 
     if (direction == DIR_OPPOSITE)
-        direction = GetOppositeDirection(gObjectEvents[0].facingDirection);
+        direction = GetOppositeDirection(gObjectEvents[GetObjectEventIdByLocalId(OBJ_EVENT_ID_PLAYER)].facingDirection);
+    else if (direction == DIR_FACING)
+        direction = gObjectEvents[GetObjectEventIdByLocalId(localId)].facingDirection;
 
     // Cued movements never have to put away the follower pokemon
     //gObjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;

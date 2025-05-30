@@ -186,6 +186,23 @@ enum PlayerGender
 #define OPTIONS_BATTLE_STYLE_SHIFT 0
 #define OPTIONS_BATTLE_STYLE_SET 1
 
+// Start cueobject
+enum
+{
+    DIR_NONE,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_EAST,
+    DIR_SOUTHWEST,
+    DIR_SOUTHEAST,
+    DIR_NORTHWEST,
+    DIR_NORTHEAST,
+    DIR_OPPOSITE,
+    DIR_FACING,
+};
+
+/*
 #define DIR_NONE        0
 #define DIR_SOUTH       1
 #define DIR_NORTH       2
@@ -196,6 +213,8 @@ enum PlayerGender
 #define DIR_NORTHWEST   7
 #define DIR_NORTHEAST   8
 #define DIR_OPPOSITE    DIR_NORTHEAST + 1 //cueobject
+*/
+// End cueobject
 #define CARDINAL_DIRECTION_COUNT DIR_SOUTHWEST
 
 #define AXIS_X     0

@@ -2838,6 +2838,10 @@
 .macro cueobjectplayer localId:req, wait=1
     cueobject \localId, DIR_OPPOSITE, \wait
 .endm
+
+.macro cueobjecttalking localId:req, wait=1
+    cueobject \localId, DIR_FACING, \wait
+.endm
     @ End cueobject
 
     @ Start callfunc
