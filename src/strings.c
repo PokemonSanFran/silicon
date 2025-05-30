@@ -1463,3 +1463,8 @@ const u8 gText_Their[] =_("Their");
 const u8 gText_His[] =_("His");
 const u8 gText_Hers[] =_("Hers");
 // End playerCustom
+// Start siliconDNS
+const u8 gText_Morning[] = _("Morning");
+const u8 gText_Evening[] = _("Evening");
+const u8 gText_Night[]   = _("Night");
+// End siliconDNS

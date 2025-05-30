@@ -2599,4 +2599,9 @@ extern const u8 gText_Their[];
 extern const u8 gText_His[];
 extern const u8 gText_Hers[];
 // End playerCustom
+// Start siliconDNS
+extern const u8 gText_Morning[];
+extern const u8 gText_Evening[];
+extern const u8 gText_Night[];
+// End siliconDNS
 #endif // GUARD_STRINGS_H

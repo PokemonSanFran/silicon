@@ -20,22 +20,33 @@ script CuconuTown_Compound_2F_Bed_Script {
         //Ask the player when they should go to bed
         gettime
 
-        call(BedScript_DetermineTimeOfDay)
         call(BedScript_SetNewTime_Script)
 
         goto(BedScript_AdvanceStory_Script)
 }
 
 script BedScript_SetNewTime_Script{
-    msgbox(gText_BedScript_WhenShouldWake)
-    dynmultichoice(1,1,FALSE,3,0,NULL,"Morning", "Midday", "Night", "Not tired yet.")
-    closemessage
+//PSF TODO replace with call to check the current time of day
+    random(4)
+    switch(var(VAR_RESULT))
+    {
+        default:
+        case TIME_MORNING: bufferstring(STR_VAR_3,gText_BedScript_Morning)
+        case TIME_DAY: bufferstring(STR_VAR_3,gText_BedScript_Day)
+        case TIME_EVENING: bufferstring(STR_VAR_3,gText_BedScript_Evening)
+        case TIME_NIGHT: bufferstring(STR_VAR_3,gText_BedScript_Night)
+    }
+    msgbox(gText_BedScript_WhenShouldWake,,SPEAKER_ALICIA)
 
-    switch(var(VAR_RESULT)){
-        case 0: initclock(6,0)
-        case 1: initclock(14,0)
-        case 2: initclock(21,0)
-        case 3:
+    dynmultichoice(1,1,FALSE,3,0,NULL,gText_Morning, gText_Day, gText_Evening,gText_Night,"Not tired yet.")
+    closemessage
+    switch(var(VAR_RESULT))
+    {
+//PSF TODO replace with call to advance time to next occurance of this time
+        case TIME_MORNING: initclock(MORNING_HOUR_BEGIN,0)
+        case TIME_DAY: initclock(DAY_HOUR_BEGIN,0)
+        case TIME_EVENING: initclock(EVENING_HOUR_BEGIN,0)
+        case TIME_NIGHT: initclock(NIGHT_HOUR_BEGIN,0)
         case MULTI_B_PRESSED: goto(BedScript_CancelSleep_Script)
     }
     return
@@ -44,20 +55,6 @@ script BedScript_SetNewTime_Script{
 script BedScript_CancelSleep_Script{
     fadescreen(FADE_FROM_BLACK)
     end
-}
-
-script BedScript_DetermineTimeOfDay{
-        gettime
-
-        if (var(VAR_RESULT) < 16){
-            bufferstring(STR_VAR_3,"Midday")
-        }
-        if (var(VAR_RESULT) < 9){
-            bufferstring(STR_VAR_3,"Morning")
-        }
-        if (var(VAR_RESULT) > 15){
-            bufferstring(STR_VAR_3,"Night")
-        }
 }
 
 script BedScript_AdvanceStory_Script{
@@ -78,7 +75,28 @@ script BedScript_AdvanceStory_Script{
         end
 }
 
-text gText_BedScript_WhenShouldWake {
-    format("It is currently {STR_VAR_3}. What time of day do you want to wake up tomorrow?")
+text gText_BedScript_Morning
+{
+    format("I'm still a bit tired...")
+}
+
+text gText_BedScript_Day
+{
+    format("I could go for a nap.")
+}
+
+text gText_BedScript_Evening
+{
+    format("I should get to bed early tonight!")
+}
+
+text gText_BedScript_Night
+{
+    format("Wow, it's late!")
+}
+
+text gText_BedScript_WhenShouldWake
+{
+    format("{STR_VAR_3}\nI'll wake up again at...")
 }
 
