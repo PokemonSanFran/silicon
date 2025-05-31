@@ -42,18 +42,24 @@ script EnterBelen_DetermineMovementToBattlefield_Script {
   waitmovement(0)
 }
 
-script EnterBelen_Intro_Dialogue {
+script EnterBelen_Intro_Dialogue
+{
   lock
   msgbox(gText_EnterBelen_MyLatestCreation,,SPEAKER_BELEN)
-    reveal(REVEAL_BELEN)
-  msgbox(gText_EnterBelen_YourSenseOfTaste)
-    startmenu_savescreen
+  reveal(REVEAL_BELEN)
+  msgbox(gText_EnterBelen_YourSenseOfTaste,,SPEAKER_BELEN,,EMOTE_HAPPY)
+  startmenu_savescreen
   goto(EnterBelen_StartGymBattle_Script)
 }
 
-script EnterBelen_StartGymBattle_Script {
-  lock
-  trainerbattle_single(TRAINER_BELEN, gText_EnterBelen_IThinkYouTalk, gText_EnterBelen_WoahSuperSour, EnterBelen_BelenDefeated_Script, NO_MUSIC)
+script EnterBelen_StartGymBattle_Script
+{
+    lock
+    faceplayer
+    msgbox(gText_EnterBelen_IThinkYouTalk,,SPEAKER_ALICIA,,EMOTE_SWEAT)
+    closemessage
+    trainerbattle_no_intro(TRAINER_BELEN,gText_EnterBelen_WoahSuperSour)
+    goto(EnterBelen_BelenDefeated_Script)
 }
 
 script EnterBelen_BelenDefeated_Script {

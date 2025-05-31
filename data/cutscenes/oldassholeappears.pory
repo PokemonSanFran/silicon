@@ -94,7 +94,7 @@ script OldAssholeAppears_PostBattle_Script
     msgbox(gText_OldAssholeAppears_TakingThisAllSeriously,,SPEAKER_CHARLOTTE)
 
     giveitem(ITEM_SS_TICKET)
-    msgbox(gText_OldAssholeAppears_FamiliarWith, MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+    msgbox(gText_OldAssholeAppears_FamiliarWith,MSGBOX_YESNO,SPEAKER_CHARLOTTE)
     if (var (VAR_RESULT) == 1){
         msgbox(gText_OldAssholeAppears_ThoughtSo,,SPEAKER_CHARLOTTE)
     } else {

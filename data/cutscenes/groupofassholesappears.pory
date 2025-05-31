@@ -7,34 +7,37 @@ const GRUNT5 = 5
 const GRUNT6 = 6
 const DAVID = 7
 
-script GroupOfAssholesAppears_GroupAssault_Dialogue {
-    lockall
-        playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
-        //applymovement(GRUNT1,Common_Movement_WalkInPlaceRight)
-        waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_YouShouldBeAshamed,,SPEAKER_ROCKET_MEMBER_A)
-        //applymovement(GRUNT2,Common_Movement_WalkInPlaceUp)
-        waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_HaventYouDoneEnough,,SPEAKER_ROCKET_MEMBER_A)
-        //applymovement(GRUNT3,Common_Movement_WalkInPlaceUp)
-        waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_GiveJelenaBack,,SPEAKER_ROCKET_MEMBER_A)
-        applymovement(DAVID,GroupOfAssholesAppears_LookAround_Movement)
-        waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_IDontKnowWho,,SPEAKER_DAVID)
-        //applymovement(GRUNT4,Common_Movement_WalkInPlaceUp)
-        waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_WeDontWantToHear,,SPEAKER_ROCKET_MEMBER_A)
-        applymovement(DAVID,Common_Movement_FaceLeft)
-        waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_RuinLives,,SPEAKER_DAVID)
-        //applymovement(GRUNT5,Common_Movement_WalkInPlaceUp)
-        waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_NotIfWeHave,,SPEAKER_ROCKET_MEMBER_B)
-        closemessage
-        call(GroupOfAssholesAppears_PlayerToDavid_Script)
-        goto(GroupOfAssholesAppears_PlayerIntervene_Dialogue)
+script GroupOfAssholesAppears_GroupAssault_Dialogue
+{
+    lock
+    playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
+
+    cueobjecttalking(GRUNT1)
+    msgbox(gText_GroupOfAssholesAppears_YouShouldBeAshamed,,SPEAKER_ROCKET_MEMBER_A)
+    cueobjecttalking(GRUNT2)
+    msgbox(gText_GroupOfAssholesAppears_HaventYouDoneEnough,,SPEAKER_ROCKET_MEMBER_A)
+    cueobjecttalking(GRUNT3)
+    msgbox(gText_GroupOfAssholesAppears_GiveJelenaBack,,SPEAKER_ROCKET_MEMBER_A)
+
+    applymovement(DAVID,GroupOfAssholesAppears_LookAround_Movement)
+    waitmovement(0)
+    msgbox(gText_GroupOfAssholesAppears_IDontKnowWho,,SPEAKER_DAVID)
+
+    cueobjecttalking(GRUNT4)
+    msgbox(gText_GroupOfAssholesAppears_WeDontWantToHear,,SPEAKER_ROCKET_MEMBER_A)
+
+    applymovement(DAVID,Common_Movement_FaceLeft)
+    waitmovement(0)
+    msgbox(gText_GroupOfAssholesAppears_RuinLives,,SPEAKER_DAVID)
+
+    cueobjecttalking(GRUNT5)
+    msgbox(gText_GroupOfAssholesAppears_NotIfWeHave,,SPEAKER_ROCKET_MEMBER_B)
+    closemessage
+
+    call(GroupOfAssholesAppears_PlayerToDavid_Script)
+    goto(GroupOfAssholesAppears_PlayerIntervene_Dialogue)
 }
+
 script GroupOfAssholesAppears_PlayerToDavid_Script
 {
     playse(SE_PIN)
@@ -99,9 +102,9 @@ script GroupOfAssholes_StartBattle_Script {
         applymovement(DAVID,Common_Movement_FaceDown)
         waitmovement(0)
         msgbox(gText_GroupOfAssholesAppears_WhoTheHellYouThink,,SPEAKER_ISHAN)
+        closemessage
         trainerbattle_no_intro(TRAINER_IHSAN_AND_EMMITT,gText_GroupOfAssholesAppears_WoahWhoDidWePick)
         goto(GroupOfAssholesAppears_GroupLeaves_Dialogue)
-        closemessage
 }
 
 script GroupOfAssholesAppears_GroupLeaves_Dialogue {

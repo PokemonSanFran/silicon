@@ -1,7 +1,8 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const SHINZO = 1
 
-script EnterShinzo_ShinzoIntro_Dialogue {
+script EnterShinzo_ShinzoIntro_Dialogue
+{
         setvar(VAR_GYM_2_STATE, GYM_SAVE_BEFORE_LEADER)
         msgbox(gText_EnterShinzo_ReachingTheSummit,MSGBOX_NPC,SPEAKER_SHINZO)
         reveal(REVEAL_SHINZO)
@@ -20,8 +21,14 @@ script EnterShinzo_ShinzoIntro_Dialogue {
         goto(EnterShinzo_StartGymBattle_Script)
 }
 
-script EnterShinzo_StartGymBattle_Script {
-        trainerbattle_single(TRAINER_SHINZO, gText_EnterShinzo_EnGarde, gText_EnterShinzo_ItsAnHonorToLose, EnterShinzo_ShinzoDefeated_Script, NO_MUSIC)
+script EnterShinzo_StartGymBattle_Script
+{
+    lock
+    faceplayer
+    msgbox(gText_EnterShinzo_EnGarde,,SPEAKER_SHINZO,TAIL_SHOUT)
+    closemessage
+    trainerbattle_no_intro(TRAINER_SHINZO, gText_EnterShinzo_ItsAnHonorToLose)
+    goto(EnterShinzo_ShinzoDefeated_Script)
 }
 
 script EnterShinzo_ShinzoDefeated_Script {
@@ -66,7 +73,7 @@ script EnterShinzo_ExplainBuzzr_Dialogue{
 script EnterShinzo_PostDefeat1_Dialogue {
     setvar(VAR_GYM_2_STATE,GYM_EXPLAINED_BADGE_AND_TM)
         lockall
-        msgbox(gText_EnterShinzo_TradedPokemonUpTo,MSGBOX_NPC,,SPEAKER_SHINZO)
+        msgbox(gText_EnterShinzo_TradedPokemonUpTo,MSGBOX_NPC,SPEAKER_SHINZO)
         closemessage
         releaseall
         end
@@ -74,7 +81,7 @@ script EnterShinzo_PostDefeat1_Dialogue {
 
 script EnterShinzo_PostDefeat2_Dialogue {
         lockall
-        msgbox(gText_EnterShinzo_NextTimeWeBattle,MSGBOX_NPC,,SPEAKER_SHINZO)
+        msgbox(gText_EnterShinzo_NextTimeWeBattle,MSGBOX_NPC,SPEAKER_SHINZO)
                 closemessage
         releaseall
         end
