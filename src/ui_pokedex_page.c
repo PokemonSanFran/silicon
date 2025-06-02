@@ -422,6 +422,8 @@ static void PageMoves_SetNumMoves(u32);
 static void Debug_PrintMovesList(void);
 static void Debug_PrintMonList(u32);
 static u32 PageMoves_GetTargetMove(void);
+static enum EvolutionConditions PageEvolution_GetCondition(u32 familyIndex, s32 condition);
+static void PageEvolution_SetCondition(u32 familyIndex, s32 condition);
 static void PageMoves_SetTargetMove(u32 moveId);
 static void PageMoves_SnapToLoadedCursorAndPosition(void);
 static u32 PageMoves_GetCurrentPositionInMoveList(void);
@@ -535,6 +537,7 @@ static void PageEvolutionForms_PrintDetails(enum PokedexPages page);
 static void PageEvolution_PrintEvolutionDetails(void);
 static void PageForms_PrintFormDetails(void);
 static void PageForms_PrintOriginalAndTargetSpecies(enum PokedexPageEvolutionWindows windowId, u32 fontId, u32 letterSpacing, u32 lineSpacing, u32 windowWidth, u32 currentPosition);
+static void BufferWeatherName(u32 weather);
 static void PageForms_PrintTransformationCriteria(enum PokedexPageEvolutionWindows windowId, u32 fontId, u32 letterSpacing, u32 lineSpacing, u32 windowWidth, u32 currentPosition);
 static void PageEvolution_SpeciesData_PrintSpeciesNum(u32 species, enum PokedexPageEvolutionWindows windowId);
 static void PageEvolution_SpeciesData_PrintStats(u32 species, enum PokedexPageEvolutionWindows windowId);
@@ -2078,7 +2081,7 @@ void PageMoves_PrintMachineMethod(u32 species, u32 currentPosition, u32 fontId, 
     {
         u32 machineId = ITEM_TM01 + machineIndex;
 
-        if (PageMoves_GetMoveIdFromPosition(currentPosition) != ItemId_GetSecondaryId(machineId))
+        if (PageMoves_GetMoveIdFromPosition(currentPosition) != GetItemSecondaryId(machineId))
             continue;
 
         CopyItemName(machineId,gStringVar1);
@@ -2989,6 +2992,16 @@ static s32 PageEvolution_GetTargetSpecies(u32 familyIndex)
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_TARGET_SPECIES];
 }
 
+static void PageEvolution_SetCondition(u32 familyIndex, s32 condition)
+{
+    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION] = condition;
+}
+
+static enum EvolutionConditions UNUSED PageEvolution_GetCondition(u32 familyIndex, s32 condition)
+{
+    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION];
+}
+
 static void PageEvolution_SetParam1(u32 familyIndex, s32 param1)
 {
     sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1] = param1;
@@ -3305,7 +3318,10 @@ static void PageEvolution_PopulateEvolutionsList(void)
                 PageEvolution_SetTargetSpecies(overallIndex, targetSpecies);
                 PageEvolution_SetOriginalSpecies(overallIndex, familyList[i]);
                 PageEvolution_SetMethod(overallIndex, evolutions[j].method);
-                PageEvolution_SetParam1(overallIndex, evolutions[j].param);
+                PageEvolution_SetCondition(overallIndex, evolutions[j].params->condition);
+                PageEvolution_SetParam1(overallIndex, evolutions[j].params->arg1);
+                PageEvolution_SetParam2(overallIndex, evolutions[j].params->arg2);
+                PageEvolution_SetParam3(overallIndex, evolutions[j].params->arg3);
 
                 familyList[overallIndex + 1] = targetSpecies;
                 familyDone[overallIndex + 1] = FALSE;
@@ -3548,230 +3564,127 @@ static void PageEvolution_PrintEvolutionDetails(void)
         {
             default:
             case EVO_NONE:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("No Pokémon evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_FRIENDSHIP:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches a friendship higher than 119 and levels up, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_FRIENDSHIP_DAY:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches a friendship higher than 119 and levels up during day, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_FRIENDSHIP_NIGHT:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches a friendship higher than 119 and levels up during night, it will evolve into {STR_VAR_3}. "));
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("No Pokémon evolve into {STR_VAR_3}."));
                 break;
             case EVO_LEVEL:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
+                if (descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1] == IF_MIN_FRIENDSHIP)
+                {
+                    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when leveled up with high friendship."));
+                }
+                else
+                {
+                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
+                    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when it reaches level {STR_VAR_1}."));
+                }
                 break;
             case EVO_TRADE:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} is traded away, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_TRADE_ITEM:
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} is traded away while holding a {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when traded."));
                 break;
             case EVO_ITEM:
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a {STR_VAR_1} is used on {STR_VAR_2}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_ATK_GT_DEF:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} and its Attack is less than its Defense, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_ATK_EQ_DEF:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} and its Attack equals its Defense, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_ATK_LT_DEF:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} and its Attack is greater than its Defense, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_SILCOON:
-            case EVO_LEVEL_CASCOON:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1}, it will randomly evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_NINJASK:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_SHEDINJA:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1}, and its Trainer has an empty Pokéball in their bag and they have an empty slot in their party, the trainer will have a {STR_VAR_3}. "));
-                break;
-            case EVO_BEAUTY:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} has achieved a Beauty stat of {STR_VAR_3} and levels up, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_FEMALE:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a Female {STR_VAR_2} reaches Level {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_MALE:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a Male {STR_VAR_2} reaches Level {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_NIGHT:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} during night, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_DAY:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} during day, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_DUSK:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} during dusk, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_HOLD_DAY:
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up during day while holding a {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_HOLD_NIGHT:
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up during night while holding a {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_MOVE:
-                StringCopy(gStringVar1,GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up while knowing the move {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_FRIENDSHIP_MOVE_TYPE:
-                StringCopy(gStringVar1,gTypesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]].name);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches a friendship higher than 119 and levels up while knowing a {STR_VAR_1}-type move, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_SPECIFIC_MAP:
-                u32 map = descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1];
-                u32 mapGroup = (map >> 8) & 0xFF;
-                u32 mapNum = map & 0xFF;
-                descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1] = (Overworld_GetMapHeaderByGroupAndId(mapGroup,mapNum)->regionMapSectionId);
-            case EVO_MAPSEC:
-                // Pok├⌐mon levels up on specified mapsec
-                GetMapNameGeneric(gStringVar1,descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up while at {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_MALE:
-                // specified item is used on a male Pok├⌐mon
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a {STR_VAR_1} is used on a Male {STR_VAR_2}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_FEMALE:
-                // specified item is used on a female Pok├⌐mon
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a {STR_VAR_1} is used on a Female {STR_VAR_2}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_RAIN:
-                // Pok├⌐mon reaches the specified level during rain in the overworld
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up while it is raining, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_SPECIFIC_MON_IN_PARTY:
-                // Pok├⌐mon levels up with a specified Pok├⌐mon in party
-                StringCopy(gStringVar1,GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up while a {STR_VAR_1} is in the party, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_DARK_TYPE_MON_IN_PARTY:
-                // Pok├⌐mon reaches the specified level with a Dark Type Pok├⌐mon in party
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} while a Dark-type is in the party, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_TRADE_SPECIFIC_MON:
-                // Pok├⌐mon is traded for a specified Pok├⌐mon
-                StringCopy(gStringVar1,GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} is traded for a {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_NATURE_AMPED:
-                // Pok├⌐mon reaches the specified level, it has a Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky nature.
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} with any of the following nature, it will evolve into Amped {STR_VAR_3}: Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, Quirky. "));
-                break;
-            case EVO_LEVEL_NATURE_LOW_KEY:
-                // Pok├⌐mon reaches the specified level, it has a Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful nature.
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1} with any of the following nature, it will evolve into Low-Key {STR_VAR_3}: Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, Careful. "));
-                break;
-            case EVO_CRITICAL_HITS:
-                // Pok├⌐mon performs specified number of critical hits in one battle
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} lands {STR_VAR_1} critical hits in a single battle, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_SCRIPT_TRIGGER_DMG:
-                // Pok├⌐mon has specified HP below max, then player interacts trigger
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} has less than {STR_VAR_1} HP and its Trainer interacts with a rock, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_DARK_SCROLL:
-                // interacts with Scroll of Darkness
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a Trainer interacts with a Scroll of Darkness when {STR_VAR_2} is in the party, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_WATER_SCROLL:
-                // interacts with Scroll of Waters
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a Trainer interacts with a Scroll of Waters when {STR_VAR_2} is in the party, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_NIGHT:
-                // specified item is used on Pok├⌐mon, is night
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a {STR_VAR_1} is used on {STR_VAR_2} during night, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_DAY:
-                // specified item is used on Pok├⌐mon, is day
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a {STR_VAR_1} is used on {STR_VAR_2} during day, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_HOLD:
-                // Pok├⌐mon levels up, holds specified item
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up while it is holding a {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_LEVEL_FOG:
-                // Pok├⌐mon reaches the specified level during fog in the overworld
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up while it is foggy, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_MOVE_TWO_SEGMENT:
-            case EVO_MOVE_THREE_SEGMENT:
-                // Pok├⌐mon levels up, knows specified move, has a personality value with a modulus of 0
-                StringCopy(gStringVar1,GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up while knowing the move {STR_VAR_1}, it will evolve into {STR_VAR_3}. 1% of the time, it will have two segments instead of three. "));
-                break;
-            case EVO_LEVEL_FAMILY_OF_THREE:
-            case EVO_LEVEL_FAMILY_OF_FOUR:
-                // Pok├⌐mon reaches the specified level in battle with a personality value with a modulus of 0
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} reaches Level {STR_VAR_1}, it will evolve into {STR_VAR_3}. 1% of the time, it will be a family of three instead of four. "));
-                break;
-            case EVO_USE_MOVE_TWENTY_TIMES:
-                // Pok├⌐mon levels up after having used a move for at least 20 times
-                StringCopy(gStringVar1,GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When {STR_VAR_2} levels up after using the move {STR_VAR_1} 20 times, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_RECOIL_DAMAGE_MALE:
-                // Pok├⌐mon levels up after having suffered specified amount of non-fainting recoil damage as a male
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a Male {STR_VAR_2} suffers {STR_VAR_1} HP of recoil damage without fainting, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_RECOIL_DAMAGE_FEMALE:
-                // Pok├⌐mon levels up after having suffered specified amount of non-fainting recoil damage as a female
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a Female {STR_VAR_2} suffers {STR_VAR_1} HP of recoil damage without fainting, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_ITEM_COUNT_999:
-                // Pok├⌐mon levels up after trainer has collected 999 of a specific item
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a Trainer collects 999 {STR_VAR_1} and has {STR_VAR_2} in the party, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_DEFEAT_THREE_WITH_ITEM:
-                // Pok├⌐mon levels up after having defeat 3 Pok├⌐mon of the same species holding the specified item
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1],gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a {STR_VAR_2} defeats three {STR_VAR_2} that are holding {STR_VAR_1}, it will evolve into {STR_VAR_3}. "));
-                break;
-            case EVO_OVERWORLD_STEPS:
-                // Pok├⌐mon levels up after having taken a specific amount of steps in the overworld
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("When a {STR_VAR_2} takes {STR_VAR_1} while following their Trainer outside of their Pokéball, it will evolve into {STR_VAR_3}. "));
+                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], gStringVar1);
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when exposed to a {STR_VAR_1}."));
                 break;
         }
+
+        switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION])
+        {
+            case IF_GENDER:
+                switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1])
+                {
+                    case MON_MALE:
+                        StringAppend(gStringVar4, COMPOUND_STRING(" This only works for male Pokémon."));
+                        break;
+                    case MON_FEMALE:
+                        StringAppend(gStringVar4, COMPOUND_STRING(" This only works for female Pokémon."));
+                        break;
+                }
+                break;
+            case IF_MIN_FRIENDSHIP:
+                StringAppend(gStringVar4, COMPOUND_STRING(" A friendship of at least 120 is required."));
+                break;
+            case IF_ATK_GT_DEF:
+                StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be greater than its Defense."));
+                break;
+            case IF_ATK_EQ_DEF:
+                StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must equal its Defense."));
+                break;
+            case IF_ATK_LT_DEF:
+                StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be less than its Defense."));
+                break;
+            case IF_TIME:
+                {
+                    const u8* timeStr = NULL;
+                    switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1])
+                    {
+                        case TIME_MORNING: timeStr = COMPOUND_STRING("morning"); break;
+                        case TIME_DAY:     timeStr = COMPOUND_STRING("daytime"); break;
+                        case TIME_EVENING: timeStr = COMPOUND_STRING("evening"); break;
+                        case TIME_NIGHT:   timeStr = COMPOUND_STRING("night"); break;
+                    }
+                    StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during the "));
+                    StringAppend(gStringVar4, timeStr);
+                    StringAppend(gStringVar4, COMPOUND_STRING("."));
+                }
+                break;
+            case IF_HOLD_ITEM:
+                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], gStringVar1);
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must be holding a {STR_VAR_1}."));
+                break;
+            case IF_IN_MAPSEC:
+                GetMapNameGeneric(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]);
+                StringAppend(gStringVar4, COMPOUND_STRING(" This must happen while in {STR_VAR_1}."));
+                break;
+            case IF_KNOWS_MOVE:
+                StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must know the move {STR_VAR_1}."));
+                break;
+            case IF_SPECIES_IN_PARTY:
+                StringCopy(gStringVar1, GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
+                StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1} must be in your party."));
+                break;
+            case IF_TYPE_IN_PARTY:
+                StringCopy(gStringVar1, gTypesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]].name);
+                StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1}-type Pokémon must be in your party."));
+                break;
+            case IF_WEATHER:
+                BufferWeatherName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]);
+                StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during {STR_VAR_1} weather."));
+                break;
+            case IF_NATURE:
+                StringCopy(gStringVar1, gNaturesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]].name);
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must have a {STR_VAR_1} nature."));
+                break;
+            case IF_AMPED_NATURE:
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must have an amped nature (Hardy, Brave, Adamant, etc.)."));
+                break;
+            case IF_LOW_KEY_NATURE:
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must have a low-key nature (Lonely, Bold, Relaxed, etc.)."));
+                break;
+            case IF_RECOIL_DAMAGE_GE:
+                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must take at least {STR_VAR_1} HP in recoil damage without fainting."));
+                break;
+            case IF_CRITICAL_HITS_GE:
+                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, 2);
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must land {STR_VAR_1} critical hits in a single battle."));
+                break;
+            case IF_USED_MOVE_X_TIMES:
+                StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
+                ConvertIntToDecimalStringN(gStringVar2, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM2], STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must use {STR_VAR_1} {STR_VAR_2} times."));
+                break;
+            case IF_MIN_OVERWORLD_STEPS:
+                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, 4);
+                StringAppend(gStringVar4, COMPOUND_STRING(" It must take {STR_VAR_1} steps while following you."));
+                break;
+            case CONDITIONS_END:
+                break;
+        }
+
         StringAppend(string,gStringVar4);
     }
 
-    BreakStringAutomatic(string, windowWidth, screenLines, fontId);
+    BreakStringAutomatic(string, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,string);
     Free(string);
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -3936,7 +3849,7 @@ static void PageForms_PrintTransformationCriteria(enum PokedexPageEvolutionWindo
     StringCopy(gStringVar4,COMPOUND_STRING(""));
     StringExpandPlaceholders(gStringVar4,pokemonFormTable[ConvertSpeciesToFormTableEnum(PageForm_GetMonForFormList())][currentPosition].description);
 
-    BreakStringAutomatic(gStringVar4, windowWidth, screenLines, fontId);
+    BreakStringAutomatic(gStringVar4, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
 
     u32 x = 4, y = GetFontAttribute(fontId,FONTATTR_MAX_LETTER_HEIGHT);
 
@@ -4365,7 +4278,7 @@ static void PageStats_PrintItems(u32 species, enum PokedexPageStatsWindows windo
 
     for (u32 listId = 0; listId < ARRAY_COUNT(items); listId++)
     {
-        GetItemName(gStringVar1,items[listId]);
+        StringCopy(gStringVar1,GetItemName(items[listId]));
 
         if (items[listId] == ITEM_NONE && !listId)
             continue;
@@ -4837,7 +4750,7 @@ static void PageInformation_PrintSpeciesFlavor(u32 species)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     StringCopy(gStringVar1,GetSpeciesPokedexDescription(species));
 
-    BreakStringAutomatic(gStringVar1, windowWidth, screenLines, fontId);
+    BreakStringAutomatic(gStringVar1, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }

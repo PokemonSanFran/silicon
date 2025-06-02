@@ -1787,7 +1787,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Not Started"),
                 .setupFunc = DebugQuest_VSDeoxys,
-                side_quest_map(ROUTE9),
+                side_quest_map(MAP_ROUTE9),
                 .warpId = -1,
                 .x = 17,
                 .y = 3,
@@ -1796,7 +1796,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Recived Rock Smash TM"),
                 .setupFunc = DebugQuest_VSDeoxys,
-                side_quest_map(ROUTE9),
+                side_quest_map(MAP_ROUTE9),
                 .warpId = -1,
                 .x = 9,
                 .y = 1,
@@ -1805,7 +1805,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("After Minior Battle"),
                 .setupFunc = DebugQuest_VSDeoxys,
-                side_quest_map(HALERBA_CITY),
+                side_quest_map(MAP_HALERBA_CITY),
                 .warpId = -1,
                 .x = 39,
                 .y = 10,
@@ -1814,14 +1814,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Has Entered Research"),
                 .setupFunc = DebugQuest_VSDeoxys,
-                side_quest_map(GLDNTEPARK_HELEBRA_RESEARCH),
+                side_quest_map(MAP_GLDNTEPARK_HELEBRA_RESEARCH),
                 .warpId = 0,
             },
             [STATE_QUEST_VSDEOXYS_COMPLETE_QUEST] =
             {
                 .name = COMPOUND_STRING("Complete Quest"),
                 .setupFunc = DebugQuest_VSDeoxys,
-                side_quest_map(GLDNTEPARK_HELEBRA_RESEARCH),
+                side_quest_map(MAP_GLDNTEPARK_HELEBRA_RESEARCH),
                 .warpId = 0,
             },
         },
@@ -2062,7 +2062,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Quest Not Started"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(PIOCA_BRIDGE),
+                side_quest_map(MAP_PIOCA_BRIDGE),
                 .warpId = -1,
                 .x = 7,
                 .y = 17,
@@ -2071,7 +2071,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Recieved Bike"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(PIOCA_BRIDGE),
+                side_quest_map(MAP_PIOCA_BRIDGE),
                 .warpId = -1,
                 .x = 7,
                 .y = 17,
@@ -2080,7 +2080,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("About To_Deliver Item"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(ROUTE9),
+                side_quest_map(MAP_ROUTE9),
                 .warpId = -1,
                 .x = 29,
                 .y = 3,
@@ -2089,7 +2089,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Delivered Item"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(ROUTE98),
+                side_quest_map(MAP_ROUTE98),
                 .warpId = -1,
                 .x = 29,
                 .y = 3,
@@ -2098,21 +2098,21 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Before Battle"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
+                side_quest_map(MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
                 .warpId = 0,
             },
             [STATE_QUEST_ANGELDELIVERY_HAS_LOST_BATTLE] =
             {
                 .name = COMPOUND_STRING("Has Lost Battle"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(CURENO_PORT),
+                side_quest_map(MAP_CURENO_PORT),
                 .warpId = 0,
             },
             [STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST] =
             {
                 .name = COMPOUND_STRING("Completed Quest"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
+                side_quest_map(MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
                 .warpId = 0,
             },
         },
@@ -2166,14 +2166,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Quest Not Started"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(PERLACIA_CITY),
+                side_quest_map(MAP_PERLACIA_CITY),
                 .warpId = 11,
             },
             [STATE_QUEST_CUTEPOKEMON_GUESSING_FOR_EISCUE]=
             {
                 .name = COMPOUND_STRING("Guessing for Eiscue"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(PERLACIA_CITY_COFFEE),
+                side_quest_map(MAP_PERLACIA_CITY_COFFEE),
                 .x = 4,
                 .y = 7,
             },
@@ -2181,70 +2181,70 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Gave Eiscue"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(QIU_VILLAGE),
+                side_quest_map(MAP_QIU_VILLAGE),
                 .warpId = 2,
             },
             [STATE_QUEST_CUTEPOKEMON_WON_BATTLE_1]=
             {
                 .name = COMPOUND_STRING("Won Battle 1"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(QIU_VILLAGE),
+                side_quest_map(MAP_QIU_VILLAGE),
                 .warpId = 2,
             },
             [STATE_QUEST_CUTEPOKEMON_GUESSING_FOR_CORSOLA]=
             {
                 .name = COMPOUND_STRING("Guessing for Corsola"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(QIU_VILLAGE),
+                side_quest_map(MAP_QIU_VILLAGE),
                 .warpId = 2,
             },
             [STATE_QUEST_CUTEPOKEMON_GAVE_CORSOLA]=
             {
                 .name = COMPOUND_STRING("Gave Corsola"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(CRESALTA_VISTA),
+                side_quest_map(MAP_CRESALTA_VISTA),
                 .warpId = 0,
             },
             [STATE_QUEST_CUTEPOKEMON_WON_BATTLE_2]=
             {
                 .name = COMPOUND_STRING("Won Battle 2"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(CRESALTA_VISTA),
+                side_quest_map(MAP_CRESALTA_VISTA),
                 .warpId = 0,
             },
             [STATE_QUEST_CUTEPOKEMON_GUESSING_FOR_DUSKULL]=
             {
                 .name = COMPOUND_STRING("Guessing for Duskull"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(CRESALTA_VISTA),
+                side_quest_map(MAP_CRESALTA_VISTA),
                 .warpId = 0,
             },
             [STATE_QUEST_CUTEPOKEMON_GAVE_DUSKULL]=
             {
                 .name = COMPOUND_STRING("Gave Duskull"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(HALAI_ISLAND),
+                side_quest_map(MAP_HALAI_ISLAND),
                 .warpId = 4,
             },
             [STATE_QUEST_CUTEPOKEMON_WON_BATTLE_3]=
             {
                 .name = COMPOUND_STRING("Won Battle 3"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(HALAI_ISLAND),
+                side_quest_map(MAP_HALAI_ISLAND),
                 .warpId = 4,
             },
             [STATE_QUEST_CUTEPOKEMON_GUESSING_FOR_SCRAFTY]=
             {
                 .name = COMPOUND_STRING("Guessing for Scrafty"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(HALAI_ISLAND),
+                side_quest_map(MAP_HALAI_ISLAND),
                 .warpId = 4,
             },
             [STATE_QUEST_CUTEPOKEMON_QUEST_COMPLETE]=
             {
                 .name = COMPOUND_STRING("Quest Complete"),
                 .setupFunc = DebugQuest_CutePokemon,
-                side_quest_map(HALAI_ISLAND),
+                side_quest_map(MAP_HALAI_ISLAND),
                 .warpId = 4,
             },
         },
@@ -2609,14 +2609,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Not Started"),
                 .setupFunc = DebugQuest_RestoreTirabudinGym,
-                side_quest_map(TIRABUDIN_PLACE),
+                side_quest_map(MAP_TIRABUDIN_PLACE),
                 .warpId = 1,
             },
             [1]=
             {
                 .name = COMPOUND_STRING("Completed"),
                 .setupFunc = DebugQuest_RestoreTirabudinGym,
-                side_quest_map(TIRABUDIN_PLACE_GYM),
+                side_quest_map(MAP_TIRABUDIN_PLACE_GYM),
                 .warpId = -1,
                 .x = 6,
                 .y = 5,
@@ -2705,7 +2705,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Not Started"),
                 .setupFunc = DebugQuest_DrugHelmetTest,
-                side_quest_map(IRISINA_TOWN),
+                side_quest_map(MAP_IRISINA_TOWN),
                 .warpId = -1,
                 .x = 7,
                 .y = 21,
@@ -2714,7 +2714,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Lost Battle"),
                 .setupFunc = DebugQuest_DrugHelmetTest,
-                side_quest_map(IRISINA_TOWN),
+                side_quest_map(MAP_IRISINA_TOWN),
                 .warpId = -1,
                 .x = 7,
                 .y = 21,
@@ -2723,7 +2723,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Defeated All Three"),
                 .setupFunc = DebugQuest_DrugHelmetTest,
-                side_quest_map(IRISINA_TOWN),
+                side_quest_map(MAP_IRISINA_TOWN),
                 .warpId = -1,
                 .x = 7,
                 .y = 21,
@@ -2732,7 +2732,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Completed Quest"),
                 .setupFunc = DebugQuest_DrugHelmetTest,
-                side_quest_map(IRISINA_TOWN),
+                side_quest_map(MAP_IRISINA_TOWN),
                 .warpId = -1,
                 .x = 7,
                 .y = 21,
@@ -2755,7 +2755,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Not Started"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2764,7 +2764,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Started Quest"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2773,7 +2773,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Quest Complete"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2782,7 +2782,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 0"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2791,7 +2791,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 1"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2800,7 +2800,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 2"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2809,7 +2809,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 3"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2818,7 +2818,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 4"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2827,7 +2827,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 5"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2836,7 +2836,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 6"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2845,7 +2845,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 7"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2854,7 +2854,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 8"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2863,7 +2863,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 9"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2872,7 +2872,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Streak 10"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2881,7 +2881,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Ready For Dice"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,
@@ -2890,7 +2890,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Dice Given"),
                 .setupFunc = DebugQuest_RPS,
-                side_quest_map(CAPHE_CITY),
+                side_quest_map(MAP_CAPHE_CITY),
                 .warpId = -1,
                 .x = 9,
                 .y = 19,

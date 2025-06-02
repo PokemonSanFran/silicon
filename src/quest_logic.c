@@ -119,7 +119,7 @@ static void KitchenvolunteeringFunc_HidePantryItems(void);
 
 bool32 KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(int mapLayoutId)
 {
-    return (mapLayoutId == Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(CAPHE_CITY_PANTRY_MAZE), MAP_NUM(CAPHE_CITY_PANTRY_MAZE))->mapLayoutId);
+    return (mapLayoutId == Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CAPHE_CITY_PANTRY_MAZE), MAP_NUM(MAP_CAPHE_CITY_PANTRY_MAZE))->mapLayoutId);
 }
 
 void Quest_Kitchenvolunteering_CreatePantryMaze(void)
@@ -2223,14 +2223,16 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
 
 bool32 GenerateAndStartWildFogBattle(u32 headerId, u32 area)
 {
+    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, area);
+
     if (area == WILD_AREA_LAND)
     {
-        if (!TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, area, 0))
+        if (!TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo, area, 0))
             return FALSE;
     }
     else
     {
-        if (!TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, area, 0))
+        if (!TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo, area, 0))
             return FALSE;
     }
 

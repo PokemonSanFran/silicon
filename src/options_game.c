@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fieldmap.h"
+#include "follower_npc.h"
 #include "event_data.h"
 #include "bike.h"
 #include "ui_options_menu.h"
@@ -86,6 +87,7 @@ bool32 PlayerNotOnBikeShouldWalk(u16 heldKeys)
             || ((!isBButtonHeld) && (optionRunValue == GAME_OPTION_RUN_TOGGLE) && (!FlagGet(FLAG_SYS_B_DASH)))
             || ((!isBButtonHeld) && (optionRunValue == GAME_OPTION_RUN_MANUAL))
             || (!CanPlayerRun())
+            || (FollowerNPCComingThroughDoor())
            );
 }
 

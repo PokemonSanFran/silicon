@@ -267,6 +267,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFieldMov
 // Begin pokemon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BallLight;
 
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster;
@@ -546,6 +547,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ADAORA_FAINTED] =           &gObjectEventGraphicsInfo_AdaoraFainted,
     [OBJ_EVENT_GFX_KAI_FIELD_MOVE] =           &gObjectEventGraphicsInfo_KaiFieldMove,
     // End silicon
+    [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

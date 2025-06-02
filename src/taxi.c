@@ -41,15 +41,15 @@ bool8 Taxi_CalculateFeeAndCharge(void){
 
     switch (destination){
         case 0:
-            SetWarpDestinationToMapWarp(MAP_GROUP(CAPHE_CITY),MAP_NUM(CAPHE_CITY),0);
+            SetWarpDestinationToMapWarp(MAP_GROUP(MAP_CAPHE_CITY),MAP_NUM(MAP_CAPHE_CITY),0);
             taxiFare += 3000;
             break;
         case 1:
-            SetWarpDestinationToMapWarp(MAP_GROUP(CHASILLA),MAP_NUM(CHASILLA),7);
+            SetWarpDestinationToMapWarp(MAP_GROUP(MAP_CHASILLA),MAP_NUM(MAP_CHASILLA),7);
             taxiFare = 6000;
             break;
         case 2:
-            SetWarpDestinationToMapWarp(MAP_GROUP(CRESALTA_VISTA),MAP_NUM(CRESALTA_VISTA),7);
+            SetWarpDestinationToMapWarp(MAP_GROUP(MAP_CRESALTA_VISTA),MAP_NUM(MAP_CRESALTA_VISTA),7);
             taxiFare = 9000;
             break;
     }

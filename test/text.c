@@ -606,10 +606,10 @@ extern u16 sBattlerAbilities[MAX_BATTLERS_COUNT];
 TEST("Battle strings fit on the battle message window")
 {
     u32 i, j, strWidth;
-    u32 start = BATTLESTRINGS_TABLE_START;
-    u32 end = BATTLESTRINGS_COUNT - 1;
+    u32 start = STRINGID_TABLE_START + 1;
+    u32 end = STRINGID_COUNT - 1;
     const u32 fontId = FONT_NORMAL;
-    u32 battleStringId = 0;
+    enum StringID battleStringId = 0;
     u8 *battleString = Alloc(BATTLE_STRING_BUFFER_SIZE);
 
     s32 sixDigitNines = 999999;                                 // 36 pixels.
@@ -758,7 +758,6 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_TARGETABILITYSTATRAISE:
     case STRINGID_TARGETSSTATWASMAXEDOUT:
     case STRINGID_ATTACKERABILITYSTATRAISE:
-    case STRINGID_LASTABILITYRAISEDSTAT:
     case STRINGID_TARGETABILITYSTATLOWER:
     case STRINGID_SCRIPTINGABILITYSTATRAISE:
     case STRINGID_BATTLERABILITYRAISEDSTAT:
@@ -856,6 +855,7 @@ TEST("Battle strings fit on the battle message window")
     default:
         break;
     }
+    EXPECT(gBattleStringsTable[battleStringId] != NULL);
     BattleStringExpandPlaceholders(gBattleStringsTable[battleStringId], battleString, BATTLE_STRING_BUFFER_SIZE);
     DebugPrintf("Battle String ID %d: %S", battleStringId, battleString);
     for (j = 1;; j++)

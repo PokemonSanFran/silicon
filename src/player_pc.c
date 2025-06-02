@@ -1060,13 +1060,13 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
 
 static void ItemStorage_PrintDescription(s32 id)
 {
+    id = 0; // siliconMerge
     const u8 *description;
     u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
 
     // Get item description (or Cancel text)
     if (id != LIST_CANCEL)
-        //description = (u8 *)ItemId_GetDescription(gSaveBlock1Ptr->pcItems[id].itemId); // disable player pc
-        description = (u8 *)ItemId_GetDescription(gSaveBlock1Ptr->pcItems[0].itemId);
+        description = (u8 *)GetItemDescription(gSaveBlock1Ptr->pcItems[id].itemId);
     else
         description = ItemStorage_GetMessage(MSG_GO_BACK_TO_PREV);
 
@@ -1210,7 +1210,7 @@ static const u8 *ItemStorage_GetMessage(u16 itemId)
         string = gText_MoveVar1Where;
         break;
     default:
-        string = ItemId_GetDescription(itemId);
+        string = GetItemDescription(itemId);
         break;
     }
     return string;
@@ -1478,7 +1478,7 @@ static void ItemStorage_DoItemToss(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
-    if (!ItemId_GetImportance(gSaveBlock1Ptr->pcItems[pos].itemId))
+    if (!GetItemImportance(gSaveBlock1Ptr->pcItems[pos].itemId))
     {
         // Show toss confirmation prompt
         // disable player pc

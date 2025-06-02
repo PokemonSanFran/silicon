@@ -193,7 +193,7 @@ u32 GetMonItemHoldEffect(u16 heldItem)
     }
     else
     {
-        return ItemId_GetHoldEffect(heldItem);
+        return GetItemHoldEffect(heldItem);
     }
 }
 
@@ -207,8 +207,8 @@ static u32 CalcNewEV(u32 statIndex, struct Pokemon tempMon,  u32 totalEVs, u32 e
 
     heldItem = GetMonData(&tempMon, MON_DATA_HELD_ITEM, 0);
     holdEffect = GetMonItemHoldEffect(heldItem);
-    stat = ItemId_GetSecondaryId(heldItem);
-    bonus = ItemId_GetHoldEffectParam(heldItem);
+    stat = GetItemSecondaryId(heldItem);
+    bonus = GetItemHoldEffectParam(heldItem);
 
     if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == statIndex)
         evIncrease = (evYield + bonus) * multiplier;
@@ -409,7 +409,7 @@ static void GenerateGameOverMessage(u32 windowId, u32 fontId, u8* dest)
     u32 windowWidth = (GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_SIZE_1BPP)- 0;
 
     StringCopy(dest,COMPOUND_STRING("You have no Pokémon in the party or the PC that can battle. Your adventure is over. Thanks for playing!{PAUSE_UNTIL_PRESS}"));
-    BreakStringAutomatic(dest, windowWidth, screenLines, fontId);
+    BreakStringAutomatic(dest, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
 }
 
 static bool8 PrintGameOverMessage(u8 taskId, u8 x, u8 y)
@@ -616,7 +616,7 @@ static bool32 ShouldTrainerTypeImpactItemUse(void)
 
 bool32 CanUseBagItems(u16 itemId)
 {
-    if ((ItemId_GetPocket(itemId) != POCKET_POKE_BALLS))
+    if ((GetItemPocket(itemId) != POCKET_POKE_BALLS))
     {
         switch (GetBagItemsOption())
         {
@@ -637,7 +637,7 @@ bool32 CanUseBagItems(u16 itemId)
 
 void TryToIncreaseBattleItemUseCount(u16 itemId)
 {
-    if (ItemId_GetPocket(itemId) != POCKET_POKE_BALLS)
+    if (GetItemPocket(itemId) != POCKET_POKE_BALLS)
         gBattleStruct->playerBattleItemCount++;
 }
 
@@ -847,10 +847,10 @@ static u32 GetItemHealingOption(void)
 
 bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 checkBattleUse, bool8 checkHeldEffect)
 {
-    ItemUseFunc itemUseFunc = ItemId_GetFieldFunc(itemId);
-    u16 itemBattleUsageEffect = ItemId_GetBattleUsage(itemId);
+    ItemUseFunc itemUseFunc = GetItemFieldFunc(itemId);
+    u16 itemBattleUsageEffect = GetItemBattleUsage(itemId);
     u32 i;
-    u16 itemHeldEffect = ItemId_GetHoldEffect(itemId);
+    u16 itemHeldEffect = GetItemHoldEffect(itemId);
 
     if (GetItemHealingOption() == BATTLE_OPTION_ITEM_HEALING_DISABLED)
     {

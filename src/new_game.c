@@ -55,6 +55,7 @@
 #include "difficulty.h"
 #include "siliconDaycare.h" // siliconDaycare
 #include "ui_character_customization_menu.h" // playerCustom
+#include "follower_npc.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -150,9 +151,9 @@ static void ClearFrontierRecord(void)
 static void WarpToTruck(void)
 {
     // Start bootSequence
-    // SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    // SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
     FlagSet(FLAG_SPAWN_INVISIBLE);
-    SetWarpDestination(MAP_GROUP(OROLAND_COLISEUM_HALLWAY), MAP_NUM(OROLAND_COLISEUM_HALLWAY), WARP_ID_NONE, 5, 18);
+    SetWarpDestination(MAP_GROUP(MAP_OROLAND_COLISEUM_HALLWAY), MAP_NUM(MAP_OROLAND_COLISEUM_HALLWAY), WARP_ID_NONE, 5, 18);
     // End bootSequence
     WarpIntoMap();
 }
@@ -246,6 +247,7 @@ void NewGameInitData(void)
     ResetItemFlags();
     ResetDexNav();
     ClearSiliconDaycareData(); // siliconDaycare
+    ClearFollowerNPCData();
 }
 
 static void ResetMiniGamesRecords(void)
@@ -281,7 +283,7 @@ void GivePlayerHealingItems(void)
 void SetInitalMoney(void)
 {
     SetMoney(&gSaveBlock1Ptr->money, STARTING_MONEY);
-// End siliconMerge	
+// End siliconMerge
 }
 
 static void ResetItemFlags(void)

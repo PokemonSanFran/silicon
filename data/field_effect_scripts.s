@@ -77,8 +77,8 @@ gFieldEffectScriptPointers::
 	.4byte gFldEffScript_XIcon                          @ FLDEFF_X_ICON
 	.4byte gFldEffScript_DoubleExclMarkIcon             @ FLDEFF_DOUBLE_EXCL_MARK_ICON
 	.4byte gFieldEffectScript_TracksSlither             @ FLDEFF_TRACKS_SLITHER
-	.4byte gFieldEffectScript_TracksSpot                @ FLDEFF_TRACKS_SPOT
 	.4byte gFieldEffectScript_TracksBug                 @ FLDEFF_TRACKS_BUG
+	.4byte gFieldEffectScript_TracksSpot                @ FLDEFF_TRACKS_SPOT
 @ Start qol_field_moves
 @ THESE NEED TO BE ALIGNED WITH THE VALUES IN include/constants/field_effects.h
 @ If FLDEFF_USE_SURF_TOOL is 74, it needs to be 73 in this list too
@@ -94,6 +94,7 @@ gFieldEffectScriptPointers::
     .4byte gFieldEffectScript_CaveDust                  @ FLDEFF_CAVE_DUST
 @ Start autoSave
     .4byte gFieldEffectScript_Saving                    @ FLDEFF_SAVING
+	.4byte gFieldEffectScript_Defog                     @ FLDEFF_DEFOG
 
 gFieldEffectScript_Saving::
     field_eff_loadfadedpal_callnative gSpritePalette_SavingFieldEffect, FldEff_Saving
@@ -423,3 +424,7 @@ gFieldEffectScript_TracksSlither::
 gFieldEffectScript_CaveDust::
 	field_eff_loadfadedpal_callnative gSpritePalette_CaveDust FldEff_CaveDust
 	field_eff_end
+
+gFieldEffectScript_Defog::
+    field_eff_callnative FldEff_Defog
+    field_eff_end

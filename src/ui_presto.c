@@ -3597,55 +3597,55 @@ u8 getCarouselType(){
     if(partyHP < 26 || partyStatus < 33)
         return CAROUSEL_NEED_TO_HEAL;
 
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE100) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE100)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(HALERBA_CITY) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(HALERBA_CITY)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ESPULEE_OUTSKIRTS) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ESPULEE_OUTSKIRTS)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE18) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE18)))
+    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE22) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE22)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE100) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE100)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_HALERBA_CITY) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_HALERBA_CITY)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ESPULEE_OUTSKIRTS) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ESPULEE_OUTSKIRTS)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE18) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE18)))
         return CAROUSEL_FOREST_EXPLORE;
 
     //PSF TODO Uncomment relevant lines when routes are created
-    /*if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE_D) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE_D)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE_C) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE_C)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(NONGYU_BRIDGE)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE20) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE20)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE_A) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE_A)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE98) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE98)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE_B) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE_B)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE_E) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE_E)))
+    /*if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_D) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_D)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_C) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_C)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NONGYU_BRIDGE)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE20) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE20)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_A) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_A)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE98) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE98)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_B) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_B)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_E) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_E)))
         return CAROUSEL_WATER_EXPLORE;*/
 
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(NONGYU_BRIDGE)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE20) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE20)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE98) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE98)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE_B) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE_B)))
+    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NONGYU_BRIDGE)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE20) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE20)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE98) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE98)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_B) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_B)))
         return CAROUSEL_WATER_EXPLORE;
 
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE11) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE11)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE16) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE16)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE4) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE4)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE10) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE10)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE8) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE8)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(PSFROUTE7E17FDD1) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PSFROUTE7E17FDD1)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE14) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE14)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE5) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE5)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE6) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE6)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE3) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE3)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(PSFROUTE9F45DA86) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PSFROUTE9F45DA86)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE1) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE1)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE2)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SECRET_PATH) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SECRET_PATH)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(NONGYU_BRIDGE)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE9) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE9)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE7) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE7)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE13) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE13)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE100) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE100)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE99) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE99)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE12) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE12)))
+    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE11) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE11)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE16) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE16)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE4) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE4)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE10) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE10)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE8) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE8)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PSFROUTE7E17FDD1) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PSFROUTE7E17FDD1)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE14) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE14)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE5) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE5)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE6) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE6)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE3) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE3)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PSFROUTE9F45DA86) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PSFROUTE9F45DA86)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE1) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE1)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE2) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE2)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SECRET_PATH) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SECRET_PATH)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NONGYU_BRIDGE)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE9) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE9)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE7) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE7)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE13) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE13)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE100) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE100)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE99) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE99)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE12) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE12)))
         return CAROUSEL_ROUTE_EXPLORE;
 
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(ARANTRAZ) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ARANTRAZ)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(PIOCA_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PIOCA_BRIDGE)))
+    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ARANTRAZ) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ARANTRAZ)) ||
+       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PIOCA_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PIOCA_BRIDGE)))
         return CAROUSEL_CAVE_EXPLORE;
 
     return CAROUSEL_RANDOM;

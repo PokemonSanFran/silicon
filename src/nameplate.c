@@ -11,8 +11,8 @@
 #include "string_util.h"
 #include "random.h"
 #include "constants/nameplate.h"
-#include "data/speaker_data.h"
 #include "map_name_popup.h"
+#include "data/speaker_data.h"
 #include "quest_logic.h"
 
 static bool32 AllocateNameplateStrings(void);
@@ -539,7 +539,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
     u32 spriteId = MAX_SPRITES;
     u32 SpriteTag = GFXTAG_SPEAKER_ICON;
     struct CompressedSpriteSheet sSpriteSheet_Speaker_Icon;
-    struct CompressedSpritePalette spritePalette;
+    struct SpritePalette spritePalette;
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     DestroySpeakerIconSprite();
@@ -557,7 +557,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
 
     spritePalette.data = sSpeakerData[speaker].speakerPal;
     spritePalette.tag = paltag;
-    LoadCompressedSpritePalette(&spritePalette);
+    LoadSpritePalette(&spritePalette);
 
     spriteId = CreateSprite(&TempSpriteTemplate, 0, 0, 0);
 

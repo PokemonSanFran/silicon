@@ -61,3 +61,4 @@ misc/log.txt
 *.smol
 *.fastSmol
 *.smolTM
+__pycache__

@@ -103,7 +103,7 @@ void DrawSprayMenu(void)
         if (!CheckBagHasItem(currentSpray, 1))
             continue;
 
-        menuItems[count].text = ItemId_GetName(currentSpray);
+        menuItems[count].text = GetItemName(currentSpray);
         VarSet(LOCAL_VAR_SPRAY_CONST + count, currentSpray);
 
         if (VAR_LAST_REPEL_LURE_USED != 0)
@@ -128,7 +128,7 @@ void HandleSprayMenuChoice(void)
 
     LOCAL_VAR_SPRAY = VarGet(LOCAL_VAR_SPRAY_CONST + gSpecialVar_Result);
 
-    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(LOCAL_VAR_SPRAY) | lureMask);
+    VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(LOCAL_VAR_SPRAY) | lureMask);
 
     if (VAR_LAST_REPEL_LURE_USED != 0)
         VarSet(VAR_LAST_REPEL_LURE_USED, LOCAL_VAR_SPRAY);
@@ -158,7 +158,7 @@ void DrawInfiniteSprayMenu(void)
 
     for (count = 0; count < (NUM_SPRAY_TYPE); count++)
     {
-        menuItems[count].text = ItemId_GetName(currentSpray);
+        menuItems[count].text = GetItemName(currentSpray);
         VarSet(LOCAL_VAR_SPRAY_CONST + count, currentSpray);
         currentSpray+= (ITEM_LURE - ITEM_REPEL);
     }
@@ -200,7 +200,7 @@ void DoInfiniteSpray(void)
 
     LOCAL_VAR_SPRAY = VarGet(LOCAL_VAR_SPRAY_CONST + gSpecialVar_Result);
     lureMask = GetLureMask(LOCAL_VAR_SPRAY);
-    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(ITEM_INFINITE_SPRAY) | lureMask);
+    VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(ITEM_INFINITE_SPRAY) | lureMask);
 
     lastSpray = GetLastUsedSprayType();
     VarSet(VAR_LAST_REPEL_LURE_USED, lastSpray);

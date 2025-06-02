@@ -13,11 +13,12 @@
 #define FISHING_CHAIN_SHINY_STREAK_MAX 20
 
 // Start fogBattle
-enum {
+enum WildPokemonArea {
     WILD_AREA_LAND,
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
+    WILD_AREA_HIDDEN
 };
 // End fogBattle
 #endif // GUARD_CONSTANTS_WILD_ENCOUNTER_H

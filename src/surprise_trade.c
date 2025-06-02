@@ -346,9 +346,9 @@ const u32 blockedHoldEffects[] =
 
 static bool32 IsItemBlocked(u32 item)
 {
-    u32 itemHoldEffect = ItemId_GetHoldEffect(item);
+    u32 itemHoldEffect = GetItemHoldEffect(item);
 
-    if (ItemId_GetImportance(item))
+    if (GetItemImportance(item))
         return TRUE;
 
     for (u32 holdIndex = 0; holdIndex < ARRAY_COUNT(blockedHoldEffects); holdIndex++)

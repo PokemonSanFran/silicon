@@ -10,7 +10,7 @@ struct SpeakerData
     const u8 title[SPEAKER_NAME_LENGTH];
     const u8 gender;
     const u32 *speakerIcon;
-    const u32 *speakerPal;
+    const u16 *speakerPal;
 };
 
 void DrawNameplate(void);

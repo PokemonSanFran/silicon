@@ -2,10 +2,10 @@ const struct TemplateSet gMazeTemplates[] =
 {
     [CAVE_STAIRS_TEMPLATE_SET] = {
         .mapBase = MAP_CAPHE_CITY_PANTRY_MAZE,
-        .templates = 
+        .templates =
         {
             {
-                .mapNumber = MAP_NUM(CAVE_TEMPLATE_1),
+                .mapNumber = MAP_NUM(MAP_CAVE_TEMPLATE_1),
                 .varietyWeights = {60, 40, 0, 0},
                 .adjacencyWeights = {
                     {50, 50, 0}, // NORTH
@@ -16,7 +16,7 @@ const struct TemplateSet gMazeTemplates[] =
                 .totalWeight = 100,
             },
             {
-                .mapNumber = MAP_NUM(CAVE_TEMPLATE_3),
+                .mapNumber = MAP_NUM(MAP_CAVE_TEMPLATE_3),
                 .varietyWeights = {60, 40, 0, 0},
                 .adjacencyWeights = {
                     {0, 0, 100}, // NORTH
@@ -27,7 +27,7 @@ const struct TemplateSet gMazeTemplates[] =
                 .totalWeight = 100,
             },
             {
-                .mapNumber = MAP_NUM(CAVE_TEMPLATE_4),
+                .mapNumber = MAP_NUM(MAP_CAVE_TEMPLATE_4),
                 .varietyWeights = {60, 40, 0, 0},
                 .adjacencyWeights = {
                     {0, 0, 100}, // NORTH

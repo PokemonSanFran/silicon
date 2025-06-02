@@ -359,6 +359,14 @@ u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, struct BoxPokemo
     return index;
 }
 
+u32 LoadUniqueSpritePaletteWithTag(const u16* pal, u16 tag, struct BoxPokemon *boxMon)
+{
+    struct SpritePalette spritePal;
+    spritePal.data = pal;
+    spritePal.tag = tag;
+    return LoadUniqueSpritePalette(&spritePal, boxMon);
+}
+
 s32 GetValueFromSource(struct BoxPokemon *boxMon)
 {
     u8 otId[4];
@@ -601,29 +609,4 @@ void SetPaletteBufferSlotUnfadedToFaded(u32 paletteSlot)
 {
     for (u32 paletteIndex = OBJ_PLTT_ID(paletteSlot); paletteIndex < OBJ_PLTT_ID(paletteSlot) + 16; paletteIndex++)
         gPlttBufferUnfaded[paletteIndex] = gPlttBufferFaded[paletteIndex];
-}
-
-void LoadCompressedUniqueSpritePalette(const struct CompressedSpritePalette *src, struct BoxPokemon *boxMon)
-{
-    struct SpritePalette dest;
-    void *ptr = AllocZeroed(0x3000);
-
-    LZ77UnCompWram(src->data, ptr);
-    dest.data = (void*) ptr;
-    dest.tag = src->tag;
-    LoadUniqueSpritePalette(&dest, boxMon);
-    Free(ptr);
-}
-
-u32 LoadCompressedUniqueSpritePaletteWithTag(const u32 *pal, u16 tag, struct BoxPokemon *boxMon)
-{
-    u32 index;
-    struct SpritePalette dest;
-    void *buffer = malloc_and_decompress(pal, NULL);
-
-    dest.data = buffer;
-    dest.tag = tag;
-    index = LoadUniqueSpritePalette(&dest, boxMon);
-    Free(buffer);
-    return index;
 }

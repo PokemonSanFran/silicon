@@ -1902,7 +1902,7 @@ static void SpeciesData_PrintSpeciesNumAndDesc(u32 shownSpecies, u32* padding)
     end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1} {STR_VAR_2}"));
     //PSF TODO replace yen with octhorpe
 
-    BreakStringAutomatic(gStringVar3, POKEDEX_SPECIESLIST_DATA_WIDTH, 2, fontId);
+    BreakStringAutomatic(gStringVar3, POKEDEX_SPECIESLIST_DATA_WIDTH, 2, fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, fontId, GetWindowAttribute(windowId, WINDOW_WIDTH));
     *padding = CalculateStringHeight(gStringVar3);
 

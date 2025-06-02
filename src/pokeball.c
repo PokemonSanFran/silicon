@@ -129,7 +129,7 @@ const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT] =
 // End siliconNewBalls
 };
 
-const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
+const struct SpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
 {
     [BALL_STRANGE] = {gBallPal_Strange, GFX_TAG_STRANGE_BALL},
     [BALL_POKE]    = {gBallPal_Poke,    GFX_TAG_POKE_BALL},
@@ -1105,8 +1105,8 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         u16 wantedCryCase;
         u8 taskId;
 
-        mon = GetPartyBattlerData(battler);
-        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+        mon = GetBattlerMon(battler);
+        if (!IsOnPlayerSide(battler))
             pan = 25;
         else
             pan = -25;
@@ -1153,7 +1153,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
     StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[sprite->sBattler]], BATTLER_AFFINE_EMERGE);
 
-    if (GetBattlerSide(sprite->sBattler) == B_SIDE_OPPONENT)
+    if (!IsOnPlayerSide(sprite->sBattler))
         gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = SpriteCB_OpponentMonFromBall;
     else
         gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = SpriteCB_PlayerMonFromBall;
@@ -1389,7 +1389,7 @@ void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, 
     u8 spriteId;
 
     LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_POKE]);
-    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[BALL_POKE]);
+    LoadSpritePalette(&gBallSpritePalettes[BALL_POKE]);
     spriteId = CreateSprite(&gBallSpriteTemplates[BALL_POKE], x, y, subpriority);
 
     gSprites[spriteId].sMonSpriteId = monSpriteId;
@@ -1501,7 +1501,7 @@ u8 CreateTradePokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPri
     u8 spriteId;
 
     LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_POKE]);
-    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[BALL_POKE]);
+    LoadSpritePalette(&gBallSpritePalettes[BALL_POKE]);
     spriteId = CreateSprite(&gBallSpriteTemplates[BALL_POKE], x, y, subPriority);
     gSprites[spriteId].sMonSpriteId = monSpriteId;
     gSprites[spriteId].sDelay = delay;
@@ -1603,7 +1603,7 @@ void StartHealthboxSlideIn(u8 battler)
     healthboxSprite->x2 = 0x73;
     healthboxSprite->y2 = 0;
     healthboxSprite->callback = SpriteCB_HealthboxSlideIn;
-    if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+    if (!IsOnPlayerSide(battler))
     {
         healthboxSprite->sSpeedX = -healthboxSprite->sSpeedX;
         healthboxSprite->sSpeedY = -healthboxSprite->sSpeedY;
@@ -1669,7 +1669,7 @@ void LoadBallGfx(u8 ballId)
     if (GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag) == 0xFFFF)
     {
         LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[ballId]);
-        LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[ballId]);
+        LoadSpritePalette(&gBallSpritePalettes[ballId]);
     }
 
     switch (ballId)
@@ -1694,7 +1694,7 @@ void FreeBallGfx(u8 ballId)
 static u16 GetBattlerPokeballItemId(u8 battler)
 {
     struct Pokemon *illusionMon;
-    struct Pokemon *mon = GetPartyBattlerData(battler);
+    struct Pokemon *mon = GetBattlerMon(battler);
 
     illusionMon = GetIllusionMonPtr(battler);
     if (illusionMon != NULL)
@@ -1705,7 +1705,7 @@ static u16 GetBattlerPokeballItemId(u8 battler)
 
 enum PokeBall ItemIdToBallId(u32 ballItem)
 {
-    enum PokeBall secondaryId = ItemId_GetSecondaryId(ballItem);
+    enum PokeBall secondaryId = GetItemSecondaryId(ballItem);
 
     if (secondaryId <= BALL_STRANGE || secondaryId >= POKEBALL_COUNT)
         return BALL_STRANGE;

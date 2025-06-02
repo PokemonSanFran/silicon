@@ -231,10 +231,10 @@ script Debug_CheckSaveBlock
 	msgbox(Debug_SaveBlock1Size, MSGBOX_DEFAULT)
 	callnative(CheckSaveBlock2Size)
 	msgbox(Debug_SaveBlock2Size, MSGBOX_DEFAULT)
-	callnative(CheckPokemonStorageSize)
-	msgbox(Debug_PokemonStorageSize, MSGBOX_DEFAULT)
 	callnative(CheckSaveBlock3Size)
 	msgbox(Debug_SaveBlock3Size, MSGBOX_DEFAULT)
+	callnative(CheckPokemonStorageSize)
+	msgbox(Debug_PokemonStorageSize, MSGBOX_DEFAULT)
 	release
 	end
 }
@@ -704,3 +704,45 @@ text Debug_EventScript_FontTest_Text_9
 {
     format("{FONT_SMALL_NARROWER}42 × 138 = 5796.\nMr Jock, TV quiz PhD: bags 20% fewer lynx at a café; voilà, they're “worth” ♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11 Nintendo GBA can connect to a Nintendo GameCube console! He claimed-though I don't believe him-to have done so in an eyes-shut state…?")
 }
+
+script Debug_EventScript_TellTheTime
+{
+    callnative(DebugMenu_CalculateTime)
+    msgbox(Debug_EventScript_TellTheTime_Text_0, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    end
+}
+
+script Debug_EventScript_PrintTimeOfDay
+{
+    callnative(DebugMenu_CalculateTimeOfDay)
+    msgbox(DebugEventScript_PrintWeekday_Text_0, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    end
+}
+
+script Debug_EventScript_FakeRTCNotEnabled
+{
+    msgbox(Debug_EventScript_FakeRTCNotEnabled_Text_0, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    return
+}
+
+text Debug_EventScript_FakeRTCNotEnabled_Text_0
+{
+    format("You currently do not have Fake RTC\nenabled. Please enable it in include/\lconfig/overworld.h")
+}
+
+text Debug_EventScript_TellTheTime_Text_0
+{
+    format("Time and date:\n{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3}")
+}
+
+text DebugEventScript_PrintWeekday_Text_0
+{
+    format("Time of day: {STR_VAR_1}")
+}
+
