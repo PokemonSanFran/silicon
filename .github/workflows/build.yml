@@ -3,9 +3,11 @@ name: CI
 on:
   push:
     branches:
+      # Start siliconMerge
       # - master
       - main
       # - upcoming
+      # End siliconMerge
   pull_request:
 
 jobs:
