@@ -23,8 +23,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      # Start siliconMerge
         with:
           submodules: 'true'
+      # End siliconMerge
 
       - name: Install binutils
         run: |
@@ -38,13 +40,16 @@ jobs:
           COMPARE: 0
         run: make -j${nproc} -O all
 
+      # Start siliconMerge
       - name: Upload Artifacts to Google Drive
         uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
         with:
           target: /home/runner/work/game_pkmnsnfrn/game_pkmnsnfrn/silicon.gba
           credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           parent_folder_id: 1E4meFn1GkW-F5Ykco-2qUz6M54fiwsN5
+      # End siliconMerge
 
+      # Start siliconMerge
       - name: Update Discord channel with build
         env:
           DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK }}
@@ -59,6 +64,7 @@ jobs:
             {{EVENT_PAYLOAD.head_commit.message}}
             **Download**: https://bit.ly/3IgDnk9
             <@&953393961148493834>"
+      # End siliconMerge
 
       - name: Test
         env:
