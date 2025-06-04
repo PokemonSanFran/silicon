@@ -2992,7 +2992,7 @@ static void PageEvolution_SetParam(u32 familyIndex, s32 method)
     sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM] = method;
 }
 
-static s32 PageEvolution_GetParam(u32 familyIndex)
+static s32 UNUSED PageEvolution_GetParam(u32 familyIndex)
 {
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM];
 }
@@ -3013,7 +3013,7 @@ static void PageEvolution_SetCondition(u32 familyIndex, s32 condition)
 }
 
 
-static enum EvolutionConditions PageEvolution_GetCondition(u32 familyIndex, s32 condition)
+static enum EvolutionConditions UNUSED PageEvolution_GetCondition(u32 familyIndex, s32 condition)
 {
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION];
 }

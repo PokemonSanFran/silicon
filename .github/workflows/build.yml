@@ -45,7 +45,7 @@ jobs:
           credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           parent_folder_id: 1E4meFn1GkW-F5Ykco-2qUz6M54fiwsN5
 
-      - name: discord notification with commit messages
+      - name: Update Discord channel with build
         env:
           DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK }}
           DISCORD_AVATAR: https://archives.bulbagarden.net/media/upload/c/ca/BT294.png
