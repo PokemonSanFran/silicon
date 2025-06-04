@@ -3,9 +3,8 @@ name: CI
 on:
   push:
     branches:
-      # - master
-      # - upcoming
-      - main
+      - master
+      - upcoming
   pull_request:
 
 jobs:
@@ -21,42 +20,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          submodules: "recursive"
 
       - name: Install binutils
         run: |
           sudo apt update
-          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
         # build-essential and git are already installed
 
       - name: ROM
         env:
           COMPARE: 0
         run: make -j${nproc} -O all
-              # Start siliconMerge
-      - name: Upload Artifacts TO Google Drive
-        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
-        with:
-          target: /home/runner/work/game_pkmnsnfrn/game_pkmnsnfrn/silicon.gba
-          credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-          parent_folder_id: 1E4meFn1GkW-F5Ykco-2qUz6M54fiwsN5
-
-      - name: discord notification with commit messages
-        env:
-          DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK }}
-          DISCORD_AVATAR: https://archives.bulbagarden.net/media/upload/c/ca/BT294.png
-          DISCORD_USERNAME: Loudred
-          uses: Ilshidur/action-discord@master
-          with:
-            args: |
-              "# New Game Build
-              **Please update to this build ASAP.**
-              ## Changelog
-              {{EVENT_PAYLOAD.head_commit.message}}
-              **Download**: https://bit.ly/3IgDnk9
-              <@&953393961148493834>"
-              # End siliconMerge
 
       - name: Test
         env:
@@ -70,3 +44,4 @@ jobs:
     steps:
       - name: Automatically pass for allcontributors
         run: echo "CI automatically passes for allcontributors" && exit 0
+
