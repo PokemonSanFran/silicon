@@ -58,16 +58,17 @@ script BedScript_CancelSleep_Script{
 }
 
 script BedScript_AdvanceStory_Script{
-    switch(var(VAR_STORYLINE_STATE)){
+    switch(var(VAR_STORYLINE_STATE))
+    {
         case STORY_NOT_STARTED: call(TwoHoursAgo_GiveFashionCase_Script)
         case STORY_WEST_RESIDO_COMPLETE: call(AaandWereBack_FerryRepaired_Dialogue)
         case STORY_NEED_SLEEP_BEFORE_ARMANDO: call(OffYouGo_WakeUp_Dialogue)
-		case STORY_ASSIGNED_ARMANDO_QUESTS: call(IGuessWeShouldBeNiceNow_AdvanceTime_Script)
+        case STORY_ASSIGNED_ARMANDO_QUESTS: call(IGuessWeShouldBeNiceNow_AdvanceTime_Script)
         case STORY_COMPLETED_NAVAL_BASE: call(WhyAreYouHelpingThem_StartChampionship_Dialogue)
         case STORY_POST_YOU_REALIZE_WERE_EVIL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)
         case STORY_MORNING_AFTER_TIMETRAVEL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)
         case STORY_DEFEATED_ALCMENE: call(LetsFixThis_EliteVideo_Dialogue)
-        case STORY_PRE_EARTHQUAKE: call(Earthquake_ThatNight_Dialogue)
+        case STORY_PRE_EARTHQUAKE: goto(Earthquake_ThatNight_Dialogue)
         default:
     }
         fadescreen(FADE_FROM_BLACK)

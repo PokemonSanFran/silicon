@@ -7,6 +7,8 @@ const GRUNTA = 15
 const GRUNTB = 16
 const GRUNTC = 17
 
+const FLAG_HIDE_KAI_HOUSE = FLAG_TEMP_1
+
 const FLAG_HIDE_TRANSPORT = FLAG_TEMP_1F
 
 script Earthquake_HideObject_Script {
@@ -48,56 +50,57 @@ script Earthquake_PostRescue_Objects_Script {
         TeleportCamera(32,13)
 }
 
-script Earthquake_ThatNight_Dialogue {
-    fadescreen(FADE_TO_BLACK)
-        clearflag(FLAG_TEMP_1)
-        addobject(KAI_HOUSE)
-        applymovement(KAI_HOUSE,Common_Movement_FaceDown)
+script Earthquake_ThatNight_Dialogue
+{
+    clearflag(FLAG_HIDE_KAI_HOUSE)
+    addobject(KAI_HOUSE)
+    applymovement(KAI_HOUSE,Common_Movement_FaceDown)
+    waitmovement(KAI_HOUSE)
 
-        startcutscene(JUMPPLAYER_EARTHQUAKE_INSIDE)
-        msgbox(gText_Earthquake_ThatNight)
-        closemessage
-        fadescreen(FADE_FROM_BLACK)
+    startcutscene(JUMPPLAYER_EARTHQUAKE_INSIDE)
+    msgbox(gText_Earthquake_ThatNight)
+    closemessage
+    fadescreen(FADE_FROM_BLACK)
 
-        call(Earthquake_PlayFake_EventScript)
+    call(Earthquake_PlayFake_EventScript)
 
-        playse(SE_PIN)
-        applymovement(PLAYER,Common_Movement_ExclamationMark)
-        applymovement(1,Common_Movement_ExclamationMark)
+    playse(SE_PIN)
+    applymovement(PLAYER,Common_Movement_ExclamationMark)
+    applymovement(KAI_HOUSE,Common_Movement_ExclamationMark)
 
-        call(Earthquake_Fake_Aftershock)
+    call(Earthquake_Fake_Aftershock)
 
-        msgbox(gText_Earthquake_AreYouOkay,MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
-                closemessage
+    msgbox(gText_Earthquake_AreYouOkay,MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+            closemessage
 
-        msgbox(gText_Earthquake_OhNo,MSGBOX_DEFAULT,SPEAKER_RESIDENT_A,TAIL_SHOUT)
-        closemessage
+    msgbox(gText_Earthquake_OhNo,MSGBOX_DEFAULT,SPEAKER_RESIDENT_A,TAIL_SHOUT)
+    closemessage
 
-        applymovement(PLAYER,Earthquake_WalkOutOfBed)
+    applymovement(PLAYER,Earthquake_WalkOutOfBed)
 
-        msgbox(gText_Earthquake_HelpMe,MSGBOX_DEFAULT,SPEAKER_RESIDENT_B,TAIL_SHOUT,EMOTE_SHOCK)
+    msgbox(gText_Earthquake_HelpMe,MSGBOX_DEFAULT,SPEAKER_RESIDENT_B,TAIL_SHOUT,EMOTE_SHOCK)
 
-        msgbox(gText_Earthquake_ImFine,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                closemessage
+    msgbox(gText_Earthquake_ImFine,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    closemessage
 
-        applymovement(KAI_HOUSE,Earthquake_WalkToWall)
-        waitmovement(KAI_HOUSE)
+    applymovement(KAI_HOUSE,Earthquake_WalkToWall)
+    waitmovement(KAI_HOUSE)
 
-        msgbox(gText_Earthquake_ThePowersDead,MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
-        closemessage
+    msgbox(gText_Earthquake_ThePowersDead,MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+    closemessage
 
-        applymovement(KAI_HOUSE,Earthquake_RunOutside)
-        waitmovement(KAI_HOUSE)
-        playse(SE_EXIT)
-        waitse
-        removeobject(KAI_HOUSE)
+    applymovement(KAI_HOUSE,Earthquake_RunOutside)
+    waitmovement(KAI_HOUSE)
+    playse(SE_EXIT)
+    waitse
+    removeobject(KAI_HOUSE)
 
-        applymovement(PLAYER,Earthquake_RunFromBedOutside)
-        waitmovement(PLAYER)
+    applymovement(PLAYER,Earthquake_RunFromBedOutside)
+    waitmovement(PLAYER)
 
-        setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
-        fadeblackandsetremovewarpfadeflag
-        warp(MAP_HALAI_ISLAND,2)
+    setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
+    fadeblackandsetremovewarpfadeflag
+    warp(MAP_HALAI_ISLAND,2)
 }
 
 script Earthquake_ShowDestroyedCity_Script {
