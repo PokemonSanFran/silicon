@@ -71,6 +71,7 @@ struct PokedexStatsPageData
 struct PokedexEvolutionPageData
 {
     s16 familyList[MAX_NUM_FORMS_EVOLUTIONS][POKEDEX_EVOLUTION_ATTRIBUTE_COUNT];
+    bool8 hasCondition[MAX_NUM_FORMS_EVOLUTIONS];
     u16 monList[MAX_NUM_FORMS_EVOLUTIONS];
     u16 numMons;
     u8 monListPosition;
@@ -424,6 +425,8 @@ static void Debug_PrintMonList(u32);
 static u32 PageMoves_GetTargetMove(void);
 static enum EvolutionConditions PageEvolution_GetCondition(u32 familyIndex, s32 condition);
 static void PageEvolution_SetCondition(u32 familyIndex, s32 condition);
+static bool32 PageEvolution_GetHasCondition(u32 familyIndex);
+static void PageEvolution_SetHasCondition(u32 familyIndex, s32 condition);
 static void PageMoves_SetTargetMove(u32 moveId);
 static void PageMoves_SnapToLoadedCursorAndPosition(void);
 static u32 PageMoves_GetCurrentPositionInMoveList(void);
@@ -552,16 +555,18 @@ static u32 PageEvolution_GetOriginalSpecies(u32 monIndex);
 static void PageEvolution_SetMonList(u32 monIndex, u32 species);
 static void PageEvolution_SetOriginalSpecies(u32 familyIndex, u32 originalSpecies);
 static u32 PageEvolution_GetOriginalSpecies(u32 familyIndex);
+static void PageEvolution_SetParam(u32 familyIndex, s32 method);
+static s32 PageEvolution_GetParam(u32 familyIndex);
 static void PageEvolution_SetMethod(u32 familyIndex, s32 method);
 static s32 PageEvolution_GetMethod(u32 familyIndex);
 static void PageEvolution_SetTargetSpecies(u32 familyIndex, s32 targetSpecies);
 static s32 PageEvolution_GetTargetSpecies(u32 familyIndex);
-static void PageEvolution_SetParam1(u32 familyIndex, s32 param1);
-static s32 PageEvolution_GetParam1(u32 familyIndex);
-static void PageEvolution_SetParam2(u32 familyIndex, s32 param2);
-static s32 PageEvolution_GetParam2(u32 familyIndex);
-static void PageEvolution_SetParam3(u32 familyIndex, s32 param3);
-static s32 PageEvolution_GetParam3(u32 familyIndex);
+static void PageEvolution_SetArg1(u32 familyIndex, s32 arg1);
+static s32 PageEvolution_GetArg1(u32 familyIndex);
+static void PageEvolution_SetArg2(u32 familyIndex, s32 arg2);
+static s32 PageEvolution_GetArg2(u32 familyIndex);
+static void PageEvolution_SetArg3(u32 familyIndex, s32 arg3);
+static s32 PageEvolution_GetArg3(u32 familyIndex);
 static void PageEvolution_SetNumMons(u32 numMons);
 static u32 PageEvolution_GetNumMons(void);
 static void PageEvolution_SetMonListPosition(u32 monListPosition);
@@ -1292,9 +1297,9 @@ static void Debug_PrintMonInFormsList(void)
                 //GetSpeciesName(PageEvolution_GetOriginalSpecies(a)),
                 //GetSpeciesName(PageEvolution_GetTargetSpecies(a)),
                 PageEvolution_GetMethod(a),
-                PageEvolution_GetParam1(a),
-                PageEvolution_GetParam2(a),
-                PageEvolution_GetParam3(a));
+                PageEvolution_GetArg1(a),
+                PageEvolution_GetArg2(a),
+                PageEvolution_GetArg3(a));
     }
 }
 
@@ -2982,6 +2987,16 @@ static s32 PageEvolution_GetMethod(u32 familyIndex)
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_METHOD];
 }
 
+static void PageEvolution_SetParam(u32 familyIndex, s32 method)
+{
+    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM] = method;
+}
+
+static s32 PageEvolution_GetParam(u32 familyIndex)
+{
+    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM];
+}
+
 static void PageEvolution_SetTargetSpecies(u32 familyIndex, s32 targetSpecies)
 {
     sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_TARGET_SPECIES] = targetSpecies;
@@ -2997,39 +3012,50 @@ static void PageEvolution_SetCondition(u32 familyIndex, s32 condition)
     sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION] = condition;
 }
 
-static enum EvolutionConditions UNUSED PageEvolution_GetCondition(u32 familyIndex, s32 condition)
+
+static enum EvolutionConditions PageEvolution_GetCondition(u32 familyIndex, s32 condition)
 {
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION];
 }
 
-static void PageEvolution_SetParam1(u32 familyIndex, s32 param1)
+static bool32 PageEvolution_GetHasCondition(u32 familyIndex)
 {
-    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1] = param1;
+    return sPokedexEvolutionPageData->hasCondition[familyIndex];
 }
 
-static s32 PageEvolution_GetParam1(u32 familyIndex)
+static void PageEvolution_SetHasCondition(u32 familyIndex, s32 condition)
 {
-    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1];
+    sPokedexEvolutionPageData->hasCondition[familyIndex] = condition;
 }
 
-static void PageEvolution_SetParam2(u32 familyIndex, s32 param2)
+static void PageEvolution_SetArg1(u32 familyIndex, s32 param1)
 {
-    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM2] = param2;
+    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_ARG1] = param1;
 }
 
-static s32 PageEvolution_GetParam2(u32 familyIndex)
+static s32 PageEvolution_GetArg1(u32 familyIndex)
 {
-    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM2];
+    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_ARG1];
 }
 
-static void PageEvolution_SetParam3(u32 familyIndex, s32 param3)
+static void PageEvolution_SetArg2(u32 familyIndex, s32 param2)
 {
-    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM3] = param3;
+    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_ARG2] = param2;
 }
 
-static s32 PageEvolution_GetParam3(u32 familyIndex)
+static s32 PageEvolution_GetArg2(u32 familyIndex)
 {
-    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM3];
+    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_ARG2];
+}
+
+static void PageEvolution_SetArg3(u32 familyIndex, s32 param3)
+{
+    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_ARG3] = param3;
+}
+
+static s32 PageEvolution_GetArg3(u32 familyIndex)
+{
+    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_ARG3];
 }
 
 static void PageEvolution_SetNumMons(u32 numMons)
@@ -3110,9 +3136,9 @@ static void PageForms_ResetFormList(void)
     {
         PageEvolution_SetOriginalSpecies(formIndex, 0);
         PageEvolution_SetTargetSpecies(formIndex, 0);
-        PageEvolution_SetParam1(formIndex, 0);
-        PageEvolution_SetParam2(formIndex, 0);
-        PageEvolution_SetParam3(formIndex, 0);
+        PageEvolution_SetArg1(formIndex, 0);
+        PageEvolution_SetArg2(formIndex, 0);
+        PageEvolution_SetArg3(formIndex, 0);
     }
 }
 
@@ -3268,9 +3294,9 @@ static void PageForm_PopulateFormList(void)
         PageEvolution_SetOriginalSpecies(formIndex,pokemonFormTable[species][formIndex].originalSpecies);
         PageEvolution_SetTargetSpecies(formIndex,pokemonFormTable[species][formIndex].targetSpecies);
         PageEvolution_SetMonList(formIndex,pokemonFormTable[species][formIndex].targetSpecies);
-        PageEvolution_SetParam1(formIndex, pokemonFormTable[species][formIndex].param1);
-        PageEvolution_SetParam2(formIndex, pokemonFormTable[species][formIndex].param2);
-        PageEvolution_SetParam3(formIndex, pokemonFormTable[species][formIndex].param3);
+        PageEvolution_SetArg1(formIndex, pokemonFormTable[species][formIndex].param1);
+        PageEvolution_SetArg2(formIndex, pokemonFormTable[species][formIndex].param2);
+        PageEvolution_SetArg3(formIndex, pokemonFormTable[species][formIndex].param3);
         PageEvolution_SetMethod(formIndex, pokemonFormTable[species][formIndex].method);
     }
 
@@ -3288,7 +3314,8 @@ static void PageEvolution_PopulateEvolutionsList(void)
     PageEvolution_SetTargetSpecies(overallIndex, species);
     PageEvolution_SetOriginalSpecies(overallIndex, SPECIES_EGG);
     PageEvolution_SetMethod(overallIndex, EVO_NONE);
-    PageEvolution_SetParam1(overallIndex, 0);
+    PageEvolution_SetArg1(overallIndex, 0);
+    PageEvolution_SetHasCondition(overallIndex, FALSE);
 
     overallIndex++;
 
@@ -3315,13 +3342,20 @@ static void PageEvolution_PopulateEvolutionsList(void)
             {
                 u32 targetSpecies = evolutions[j].targetSpecies;
 
-                PageEvolution_SetTargetSpecies(overallIndex, targetSpecies);
                 PageEvolution_SetOriginalSpecies(overallIndex, familyList[i]);
                 PageEvolution_SetMethod(overallIndex, evolutions[j].method);
+                PageEvolution_SetParam(overallIndex, evolutions[j].param);
+                PageEvolution_SetTargetSpecies(overallIndex, targetSpecies);
+
+                if (evolutions[j].params == NULL)
+                    PageEvolution_SetHasCondition(overallIndex, FALSE);
+                else
+                    PageEvolution_SetHasCondition(overallIndex, TRUE);
+
                 PageEvolution_SetCondition(overallIndex, evolutions[j].params->condition);
-                PageEvolution_SetParam1(overallIndex, evolutions[j].params->arg1);
-                PageEvolution_SetParam2(overallIndex, evolutions[j].params->arg2);
-                PageEvolution_SetParam3(overallIndex, evolutions[j].params->arg3);
+                PageEvolution_SetArg1(overallIndex, evolutions[j].params->arg1);
+                PageEvolution_SetArg2(overallIndex, evolutions[j].params->arg2);
+                PageEvolution_SetArg3(overallIndex, evolutions[j].params->arg3);
 
                 familyList[overallIndex + 1] = targetSpecies;
                 familyDone[overallIndex + 1] = FALSE;
@@ -3567,13 +3601,13 @@ static void PageEvolution_PrintEvolutionDetails(void)
                 StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("No Pokémon evolve into {STR_VAR_3}."));
                 break;
             case EVO_LEVEL:
-                if (descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1] == IF_MIN_FRIENDSHIP)
+                if (descData[POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION] == IF_MIN_FRIENDSHIP)
                 {
                     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when leveled up with high friendship."));
                 }
                 else
                 {
-                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
+                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM]));
                     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when it reaches level {STR_VAR_1}."));
                 }
                 break;
@@ -3581,104 +3615,123 @@ static void PageEvolution_PrintEvolutionDetails(void)
                 StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when traded."));
                 break;
             case EVO_ITEM:
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], gStringVar1);
+                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM], gStringVar1);
                 StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when exposed to a {STR_VAR_1}."));
                 break;
         }
 
-        switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION])
+        if (PageEvolution_GetHasCondition(a))
         {
-            case IF_GENDER:
-                switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1])
-                {
-                    case MON_MALE:
-                        StringAppend(gStringVar4, COMPOUND_STRING(" This only works for male Pokémon."));
-                        break;
-                    case MON_FEMALE:
-                        StringAppend(gStringVar4, COMPOUND_STRING(" This only works for female Pokémon."));
-                        break;
-                }
-                break;
-            case IF_MIN_FRIENDSHIP:
-                StringAppend(gStringVar4, COMPOUND_STRING(" A friendship of at least 120 is required."));
-                break;
-            case IF_ATK_GT_DEF:
-                StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be greater than its Defense."));
-                break;
-            case IF_ATK_EQ_DEF:
-                StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must equal its Defense."));
-                break;
-            case IF_ATK_LT_DEF:
-                StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be less than its Defense."));
-                break;
-            case IF_TIME:
-                {
-                    const u8* timeStr = NULL;
-                    switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1])
+            switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION])
+            {
+                case IF_GENDER:
+                    switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1])
                     {
-                        case TIME_MORNING: timeStr = COMPOUND_STRING("morning"); break;
-                        case TIME_DAY:     timeStr = COMPOUND_STRING("daytime"); break;
-                        case TIME_EVENING: timeStr = COMPOUND_STRING("evening"); break;
-                        case TIME_NIGHT:   timeStr = COMPOUND_STRING("night"); break;
+                        case MON_MALE:
+                            StringAppend(gStringVar4, COMPOUND_STRING(" This only works for male Pokémon."));
+                            break;
+                        case MON_FEMALE:
+                            StringAppend(gStringVar4, COMPOUND_STRING(" This only works for female Pokémon."));
+                            break;
                     }
-                    StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during the "));
-                    StringAppend(gStringVar4, timeStr);
-                    StringAppend(gStringVar4, COMPOUND_STRING("."));
-                }
-                break;
-            case IF_HOLD_ITEM:
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], gStringVar1);
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must be holding a {STR_VAR_1}."));
-                break;
-            case IF_IN_MAPSEC:
-                GetMapNameGeneric(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]);
-                StringAppend(gStringVar4, COMPOUND_STRING(" This must happen while in {STR_VAR_1}."));
-                break;
-            case IF_KNOWS_MOVE:
-                StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must know the move {STR_VAR_1}."));
-                break;
-            case IF_SPECIES_IN_PARTY:
-                StringCopy(gStringVar1, GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1} must be in your party."));
-                break;
-            case IF_TYPE_IN_PARTY:
-                StringCopy(gStringVar1, gTypesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]].name);
-                StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1}-type Pokémon must be in your party."));
-                break;
-            case IF_WEATHER:
-                BufferWeatherName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]);
-                StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during {STR_VAR_1} weather."));
-                break;
-            case IF_NATURE:
-                StringCopy(gStringVar1, gNaturesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]].name);
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must have a {STR_VAR_1} nature."));
-                break;
-            case IF_AMPED_NATURE:
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must have an amped nature (Hardy, Brave, Adamant, etc.)."));
-                break;
-            case IF_LOW_KEY_NATURE:
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must have a low-key nature (Lonely, Bold, Relaxed, etc.)."));
-                break;
-            case IF_RECOIL_DAMAGE_GE:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, 3);
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must take at least {STR_VAR_1} HP in recoil damage without fainting."));
-                break;
-            case IF_CRITICAL_HITS_GE:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, 2);
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must land {STR_VAR_1} critical hits in a single battle."));
-                break;
-            case IF_USED_MOVE_X_TIMES:
-                StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1]));
-                ConvertIntToDecimalStringN(gStringVar2, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM2], STR_CONV_MODE_LEFT_ALIGN, 3);
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must use {STR_VAR_1} {STR_VAR_2} times."));
-                break;
-            case IF_MIN_OVERWORLD_STEPS:
-                ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM1], STR_CONV_MODE_LEFT_ALIGN, 4);
-                StringAppend(gStringVar4, COMPOUND_STRING(" It must take {STR_VAR_1} steps while following you."));
-                break;
-            case CONDITIONS_END:
-                break;
+                    break;
+                case IF_MIN_FRIENDSHIP:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" A friendship of at least 120 is required."));
+                    break;
+                case IF_ATK_GT_DEF:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be greater than its Defense."));
+                    break;
+                case IF_ATK_EQ_DEF:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must equal its Defense."));
+                    break;
+                case IF_ATK_LT_DEF:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be less than its Defense."));
+                    break;
+                case IF_NOT_TIME:
+                    {
+                        const u8* timeStr = NULL;
+                        switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1])
+                        {
+                            case TIME_MORNING: timeStr = COMPOUND_STRING("morning"); break;
+                            case TIME_DAY:     timeStr = COMPOUND_STRING("daytime"); break;
+                            case TIME_EVENING: timeStr = COMPOUND_STRING("evening"); break;
+                            case TIME_NIGHT:   timeStr = COMPOUND_STRING("night"); break;
+                        }
+                        StringAppend(gStringVar4, COMPOUND_STRING(" This cannot happen during the "));
+                        StringAppend(gStringVar4, timeStr);
+                        StringAppend(gStringVar4, COMPOUND_STRING("."));
+                    }
+                    break;
+                case IF_TIME:
+                    {
+                        const u8* timeStr = NULL;
+                        switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1])
+                        {
+                            case TIME_MORNING: timeStr = COMPOUND_STRING("morning"); break;
+                            case TIME_DAY:     timeStr = COMPOUND_STRING("daytime"); break;
+                            case TIME_EVENING: timeStr = COMPOUND_STRING("evening"); break;
+                            case TIME_NIGHT:   timeStr = COMPOUND_STRING("night"); break;
+                        }
+                        StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during the "));
+                        StringAppend(gStringVar4, timeStr);
+                        StringAppend(gStringVar4, COMPOUND_STRING("."));
+                    }
+                    break;
+                case IF_HOLD_ITEM:
+                    CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], gStringVar1);
+                    StringExpandPlaceholders(gStringVar2, COMPOUND_STRING(" It must be holding a {STR_VAR_1}."));
+                    StringAppend(gStringVar4,gStringVar2);
+                    break;
+                case IF_IN_MAPSEC:
+                    GetMapNameGeneric(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" This must happen while in {STR_VAR_1}."));
+                    break;
+                case IF_KNOWS_MOVE:
+                    StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must know the move {STR_VAR_1}."));
+                    break;
+                case IF_SPECIES_IN_PARTY:
+                    StringCopy(gStringVar1, GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1} must be in your party."));
+                    break;
+                case IF_TYPE_IN_PARTY:
+                    StringCopy(gStringVar1, gTypesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]].name);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1}-type Pokémon must be in your party."));
+                    break;
+                case IF_WEATHER:
+                    BufferWeatherName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during {STR_VAR_1} weather."));
+                    break;
+                case IF_NATURE:
+                    StringCopy(gStringVar1, gNaturesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]].name);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must have a {STR_VAR_1} nature."));
+                    break;
+                case IF_AMPED_NATURE:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must have an amped nature (Hardy, Brave, Adamant, etc.)."));
+                    break;
+                case IF_LOW_KEY_NATURE:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must have a low-key nature (Lonely, Bold, Relaxed, etc.)."));
+                    break;
+                case IF_RECOIL_DAMAGE_GE:
+                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], STR_CONV_MODE_LEFT_ALIGN, 3);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must take at least {STR_VAR_1} HP in recoil damage without fainting."));
+                    break;
+                case IF_CRITICAL_HITS_GE:
+                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], STR_CONV_MODE_LEFT_ALIGN, 2);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must land {STR_VAR_1} critical hits in a single battle."));
+                    break;
+                case IF_USED_MOVE_X_TIMES:
+                    StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]));
+                    ConvertIntToDecimalStringN(gStringVar2, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG2], STR_CONV_MODE_LEFT_ALIGN, 3);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must use {STR_VAR_1} {STR_VAR_2} times."));
+                    break;
+                case IF_MIN_OVERWORLD_STEPS:
+                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], STR_CONV_MODE_LEFT_ALIGN, 4);
+                    StringAppend(gStringVar4, COMPOUND_STRING(" It must take {STR_VAR_1} steps while following you."));
+                    break;
+                case CONDITIONS_END:
+                    break;
+            }
         }
 
         StringAppend(string,gStringVar4);
@@ -3839,9 +3892,9 @@ static void PageForms_PrintTransformationCriteria(enum PokedexPageEvolutionWindo
     u32 screenLines = POKEDEX_STATS_FORMS_DESC_SCREEN_LINES;
 
     s32 originalSpecies = (PageEvolution_GetOriginalSpecies(currentPosition));
-    s32 param1 = PageEvolution_GetParam1(currentPosition);
-    s32 param2 = PageEvolution_GetParam2(currentPosition);
-    s32 param3 = PageEvolution_GetParam3(currentPosition);
+    s32 param1 = PageEvolution_GetArg1(currentPosition);
+    s32 param2 = PageEvolution_GetArg2(currentPosition);
+    s32 param3 = PageEvolution_GetArg3(currentPosition);
     s32 method = PageEvolution_GetMethod(currentPosition);
 
     PageForms_GenerateTransformString(method,param1,param2,param3,originalSpecies,currentPosition);
