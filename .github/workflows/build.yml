@@ -28,6 +28,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+          sudo apt install -y golang-go # siliconMerge
         # build-essential and git are already installed
 
       - name: ROM
