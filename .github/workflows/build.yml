@@ -42,11 +42,12 @@ jobs:
 
       # Start siliconMerge
       - name: Upload Artifacts to Google Drive
-        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
+        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.3.1
         with:
-          target: /home/runner/work/game_pkmnsnfrn/game_pkmnsnfrn/silicon.gba
+          target: /home/runner/work/silicon/silicon/silicon.gba
           credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           parent_folder_id: 1E4meFn1GkW-F5Ykco-2qUz6M54fiwsN5
+          override: true
       # End siliconMerge
 
       # Start siliconMerge
