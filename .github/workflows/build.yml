@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: 'true'
 
       - name: Install binutils
         run: |
@@ -43,7 +45,7 @@ jobs:
           credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           parent_folder_id: 1E4meFn1GkW-F5Ykco-2qUz6M54fiwsN5
 
-      - name: discord notification with commit messages 
+      - name: discord notification with commit messages
         env:
           DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK }}
           DISCORD_AVATAR: https://archives.bulbagarden.net/media/upload/c/ca/BT294.png
@@ -70,4 +72,3 @@ jobs:
     steps:
       - name: Automatically pass for allcontributors
         run: echo "CI automatically passes for allcontributors" && exit 0
-
