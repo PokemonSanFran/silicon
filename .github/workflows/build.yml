@@ -35,12 +35,28 @@ jobs:
         env:
           COMPARE: 0
         run: make -j${nproc} -O all
+
       - name: Upload Artifacts to Google Drive
         uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
         with:
           target: /home/runner/work/game_pkmnsnfrn/game_pkmnsnfrn/silicon.gba
           credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           parent_folder_id: 1E4meFn1GkW-F5Ykco-2qUz6M54fiwsN5
+
+      - name: discord notification with commit messages 
+        env:
+          DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK }}
+          DISCORD_AVATAR: https://archives.bulbagarden.net/media/upload/c/ca/BT294.png
+          DISCORD_USERNAME: Loudred
+        uses: Ilshidur/action-discord@master
+        with:
+          args: |
+            "# New Game Build
+            **Please update to this build ASAP.**
+            ## Changelog
+            {{EVENT_PAYLOAD.head_commit.message}}
+            **Download**: https://bit.ly/3IgDnk9
+            <@&953393961148493834>"
 
       - name: Test
         env:
