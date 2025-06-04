@@ -251,7 +251,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_BUFFERITEMNAMEPLURAL          ScrCmd_bufferitemnameplural,        requests_effects=1  @ 0xe2
 	script_cmd_table_entry SCR_OP_DYNMULTICHOICE                ScrCmd_dynmultichoice,              requests_effects=1  @ 0xe3
 	script_cmd_table_entry SCR_OP_DYNMULTIPUSH                  ScrCmd_dynmultipush,                requests_effects=1  @ 0xe4
-	// Start siliconMerge
+	@ Start siliconMerge
     script_cmd_table_entry SCR_OP_LOCKTARGET                             ScrCmd_locktarget, requests_effects=1                        @ 0xe5
     script_cmd_table_entry SCR_OP_QUESTMENU                              ScrCmd_questmenu, requests_effects=1                         @ 0xe6
     script_cmd_table_entry SCR_OP_SUBQUESTMENU                           ScrCmd_subquestmenu, requests_effects=1                      @ 0xe7
@@ -275,7 +275,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_VARIABLEADDMONEY                      ScrCmd_variableaddmoney,                    requests_effects=1  @ 0x90
 	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                   ScrCmd_variableremovemoney,                 requests_effects=1  @ 0x91
 	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                    ScrCmd_variablecheckmoney,                  requests_effects=1  @ 0x92
-	// End siliconMerge
+	@ End siliconMerge
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::
