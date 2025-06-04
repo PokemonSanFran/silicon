@@ -35,6 +35,12 @@ jobs:
         env:
           COMPARE: 0
         run: make -j${nproc} -O all
+      - name: Upload Artifacts to Google Drive
+        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
+        with:
+          target: /home/runner/work/game_pkmnsnfrn/game_pkmnsnfrn/silicon.gba
+          credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          parent_folder_id: 1E4meFn1GkW-F5Ykco-2qUz6M54fiwsN5
 
       - name: Test
         env:
