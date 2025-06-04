@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       # Start siliconMerge  
-	with:
+      with:
           submodules: "recursive"
       # End siliconMerge  
 
