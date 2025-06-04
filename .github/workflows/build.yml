@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - main
       - upcoming
   pull_request:
 
