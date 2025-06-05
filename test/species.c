@@ -139,8 +139,6 @@ TEST("No species has two evolutions that use the evolution tracker")
     EXPECT(evolutionTrackerEvolutions < 2);
 }
 
-#include "debug.h"
-
 extern const u8 gFallbackPokedexText[];
 
 TEST("Every species has a description")
@@ -152,11 +150,6 @@ TEST("Every species has a description")
         if (IsSpeciesEnabled(i))
             PARAMETRIZE { species = i; }
     }
-
-    u32 pass = StringCompare(GetSpeciesPokedexDescription(species), gFallbackPokedexText);
-
-    if (pass == 0)
-        DebugPrintf("species %d",species);
 
     EXPECT_NE(StringCompare(GetSpeciesPokedexDescription(species), gFallbackPokedexText), 0);
 }
