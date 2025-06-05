@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include "global.h"
+#include "battle.h"
 #include "gpu_regs.h"
 #include "load_save.h"
 #include "main.h"
@@ -250,6 +251,8 @@ top:
         else
             gTestRunnerState.timeoutSeconds = UINT_MAX;
         InitHeap(gHeap, HEAP_SIZE);
+        // Needed for mid battle evo change
+        gMonSpritesGfxPtr = NULL;
         ResetTasks();
         EnableInterrupts(INTR_FLAG_TIMER2);
         REG_TM2CNT_L = UINT16_MAX - (274 * 60); // Approx. 1 second.
