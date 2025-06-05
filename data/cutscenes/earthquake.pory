@@ -52,12 +52,13 @@ script Earthquake_PostRescue_Objects_Script {
 
 script Earthquake_ThatNight_Dialogue
 {
+    startcutscene(JUMPPLAYER_EARTHQUAKE_INSIDE)
+
     clearflag(FLAG_HIDE_KAI_HOUSE)
     addobject(KAI_HOUSE)
     applymovement(KAI_HOUSE,Common_Movement_FaceDown)
     waitmovement(KAI_HOUSE)
 
-    startcutscene(JUMPPLAYER_EARTHQUAKE_INSIDE)
     msgbox(gText_Earthquake_ThatNight)
     closemessage
     fadescreen(FADE_FROM_BLACK)
@@ -108,26 +109,26 @@ script Earthquake_ShowDestroyedCity_Script {
         msgbox(gText_Earthquake_HolyShit,MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         TeleportCamera(11,7)
         special(SpawnCameraObject)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         applymovement(CAMERA,Earthquake_PanCameraDown)
         waitmovement(CAMERA)
 
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         TeleportCamera(33,26)
         special(SpawnCameraObject)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         applymovement(CAMERA,Earthquake_PanCameraUp)
         waitmovement(CAMERA)
 
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         TeleportCamera(29,33)
 
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(Earthquake_StartRescue_Dialogue)
 }
 
@@ -177,9 +178,9 @@ script Earthquake_PostRescue_Dialogue {
         msgbox(gText_Earthquake_OkayThingsSeemToBe,MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
 
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         call(Earthquake_PostRescue_Objects_Script)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         msgbox(gText_Earthquake_WeveManagedToReestablish,MSGBOX_DEFAULT,SPEAKER_ADAORA)
                 closemessage
@@ -267,13 +268,13 @@ script Earthquake_AskPlayerWarp_Script {
                 closemessage
                         }
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(GRUNTA)
         removeobject(GRUNTB)
         removeobject(GRUNTC)
         removeobject(KAI)
         removeobject(ADAORA)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         call(TryAutoSave)
         release

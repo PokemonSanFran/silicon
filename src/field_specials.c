@@ -1755,8 +1755,7 @@ void OffsetCameraForBattle(void)
 void TeleportCamera(void)
 {
     UpdateSavedPos();
-    MoveCameraAndRedrawMap(gSpecialVar_0x8004 - gSaveBlock1Ptr->pos.x,
-                           gSpecialVar_0x8005 - gSaveBlock1Ptr->pos.y);
+    MoveCameraAndRedrawMap((gSpecialVar_0x8004 - gSaveBlock1Ptr->pos.x),(gSpecialVar_0x8005 - gSaveBlock1Ptr->pos.y));
 }
 
 void ReturnCameraToPlayer(void)
