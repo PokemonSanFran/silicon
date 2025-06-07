@@ -425,8 +425,6 @@ static void Debug_PrintMonList(u32);
 static u32 PageMoves_GetTargetMove(void);
 static enum EvolutionConditions PageEvolution_GetCondition(u32 familyIndex, s32 condition);
 static void PageEvolution_SetCondition(u32 familyIndex, s32 condition);
-static bool32 PageEvolution_GetHasCondition(u32 familyIndex);
-static void PageEvolution_SetHasCondition(u32 familyIndex, s32 condition);
 static void PageMoves_SetTargetMove(u32 moveId);
 static void PageMoves_SnapToLoadedCursorAndPosition(void);
 static u32 PageMoves_GetCurrentPositionInMoveList(void);
@@ -537,10 +535,11 @@ static void DebugEvolutionPrintCoorindates(void);
 static void PageEvolution_ChangeCursorPosition(void);
 static void PageEvolution_PrintEvolutionList();
 static void PageEvolutionForms_PrintDetails(enum PokedexPages page);
+static bool32 PageEvolution_GenerateEvolutionDetails(u8* string, u32 spotlightMon, u32 evoIndex);
 static void PageEvolution_PrintEvolutionDetails(void);
 static void PageForms_PrintFormDetails(void);
 static void PageForms_PrintOriginalAndTargetSpecies(enum PokedexPageEvolutionWindows windowId, u32 fontId, u32 letterSpacing, u32 lineSpacing, u32 windowWidth, u32 currentPosition);
-static void BufferWeatherName(u32 weather);
+static void BufferWeatherName(u32 weather, u8* string);
 static void PageForms_PrintTransformationCriteria(enum PokedexPageEvolutionWindows windowId, u32 fontId, u32 letterSpacing, u32 lineSpacing, u32 windowWidth, u32 currentPosition);
 static void PageEvolution_SpeciesData_PrintSpeciesNum(u32 species, enum PokedexPageEvolutionWindows windowId);
 static void PageEvolution_SpeciesData_PrintStats(u32 species, enum PokedexPageEvolutionWindows windowId);
@@ -2304,7 +2303,7 @@ static void ParentDisplay_CreateMenu(void)
 
     CopyWindowToVram(windowId,COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(BG0_POKEDEX_TEXT_CONTENT); //without this box doesn't appear at all
-                                                        DebugParentPrintCoorindates();
+    DebugParentPrintCoorindates();
 }
 
 static void ParentDisplay_PrintAllParents(void)
@@ -2571,7 +2570,7 @@ static void ParentDisplay_CreateArrowSprites(u32 windowId)
     {
         SpriteTag = spriteIndex + POKEDEX_PARENT_ARROW_GFXTAG;
 
-    u32 y = (height * spriteIndex) + upMargin - (TILE_SIZE_1BPP);
+        u32 y = (height * spriteIndex) + upMargin - (TILE_SIZE_1BPP);
 
         struct CompressedSpriteSheet sSpriteSheet_PokedexParentArrow = {arrowSpriteTable[spriteIndex], 256, SpriteTag};
         TempSpriteTemplate.tileTag = SpriteTag;
@@ -3018,16 +3017,6 @@ static enum EvolutionConditions UNUSED PageEvolution_GetCondition(u32 familyInde
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION];
 }
 
-static bool32 PageEvolution_GetHasCondition(u32 familyIndex)
-{
-    return sPokedexEvolutionPageData->hasCondition[familyIndex];
-}
-
-static void PageEvolution_SetHasCondition(u32 familyIndex, s32 condition)
-{
-    sPokedexEvolutionPageData->hasCondition[familyIndex] = condition;
-}
-
 static void PageEvolution_SetArg1(u32 familyIndex, s32 param1)
 {
     sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_ARG1] = param1;
@@ -3315,7 +3304,6 @@ static void PageEvolution_PopulateEvolutionsList(void)
     PageEvolution_SetOriginalSpecies(overallIndex, SPECIES_EGG);
     PageEvolution_SetMethod(overallIndex, EVO_NONE);
     PageEvolution_SetArg1(overallIndex, 0);
-    PageEvolution_SetHasCondition(overallIndex, FALSE);
 
     overallIndex++;
 
@@ -3346,12 +3334,6 @@ static void PageEvolution_PopulateEvolutionsList(void)
                 PageEvolution_SetMethod(overallIndex, evolutions[j].method);
                 PageEvolution_SetParam(overallIndex, evolutions[j].param);
                 PageEvolution_SetTargetSpecies(overallIndex, targetSpecies);
-
-                if (evolutions[j].params == NULL)
-                    PageEvolution_SetHasCondition(overallIndex, FALSE);
-                else
-                    PageEvolution_SetHasCondition(overallIndex, TRUE);
-
                 PageEvolution_SetCondition(overallIndex, evolutions[j].params->condition);
                 PageEvolution_SetArg1(overallIndex, evolutions[j].params->arg1);
                 PageEvolution_SetArg2(overallIndex, evolutions[j].params->arg2);
@@ -3389,7 +3371,7 @@ static void PageEvolution_PopulateEvolutionsList(void)
         if (exists == FALSE)
         {
             PageEvolution_SetMonList(y, b);
-        y++;
+            y++;
             z++;
         }
     }
@@ -3566,10 +3548,310 @@ static void PageEvolution_PrintEvolutionList(void)
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
+static bool32 PageEvolution_GenerateEvolutionDetails(u8* string, u32 spotlightMon, u32 evoIndex)
+{
+    u32 param;
+    bool32 success = FALSE;
+    u32 originalSpecies = PageEvolution_GetOriginalSpecies(evoIndex);
+
+    if (originalSpecies == SPECIES_NONE || originalSpecies >= SPECIES_EGG)
+    {
+        StringCopy(gStringVar1,GetSpeciesName(spotlightMon));
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("No Pokémon evolve into {STR_VAR_1}."));
+        StringAppend(string,gStringVar4);
+        return TRUE;
+    }
+
+
+    //PSF TODO remove Galar Weezing Totem Vikavolt H Lilligant and figure out Bloodmon Ursaluna
+    const struct Evolution *evolutions = GetSpeciesEvolutions(originalSpecies);
+
+    for (u32 methodIndex = 0; evolutions[methodIndex].method != EVOLUTIONS_END ; methodIndex++)
+    {
+        if (evolutions[methodIndex].targetSpecies != spotlightMon)
+            continue;
+
+        success = TRUE;
+        StringCopy(gStringVar1,GetSpeciesName(originalSpecies));
+
+        switch(evolutions[methodIndex].method)
+        {
+            default:
+            case EVO_NONE:
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("EVO_NONE "));
+                StringAppend(string,gStringVar4);
+                break;
+            case EVO_LEVEL:
+            case EVO_LEVEL_BATTLE_ONLY:
+                param = evolutions[methodIndex].param;
+                if (param)
+                {
+                    ConvertIntToDecimalStringN(gStringVar2, param, STR_CONV_MODE_LEFT_ALIGN, CountDigits(param));
+                    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} at {LV}{STR_VAR_2}"));
+                }
+                else
+                {
+                    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} upon level up"));
+                }
+                StringAppend(string,gStringVar4);
+
+                if (evolutions[methodIndex].method == EVO_LEVEL_BATTLE_ONLY)
+                    StringAppend(string, COMPOUND_STRING(" during battle"));
+                break;
+            case EVO_TRADE:
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} when traded"));
+                StringAppend(string,gStringVar4);
+                break;
+            case EVO_ITEM:
+                StringCopy(gStringVar2,GetItemName(evolutions[methodIndex].param));
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} upon exposure to {STR_VAR_2}"));
+                StringAppend(string,gStringVar4);
+                break;
+            case EVO_SPLIT_FROM_EVO:
+                StringCopy(gStringVar2,GetSpeciesName(evolutions[methodIndex].param));
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} after it evolves into {STR_VAR_2}"));
+                StringAppend(string,gStringVar4);
+                break;
+            case EVO_SCRIPT_TRIGGER:
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} under specific circumstances"));
+                StringAppend(string,gStringVar4);
+                break;
+            case EVO_BATTLE_END:
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} after battle"));
+                StringAppend(string,gStringVar4);
+                break;
+            case EVO_SPIN:
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Evolves from {STR_VAR_1} after the Trainer spins"));
+                StringAppend(string,gStringVar4);
+                break;
+        }
+
+        if (evolutions[methodIndex].params != NULL)
+        {
+            u32 stop = 0;
+            u32 conditionIndex = 0;
+            u32 arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+            u32 arg2 = evolutions[methodIndex].params[conditionIndex].arg2;
+            u32 arg3 = evolutions[methodIndex].params[conditionIndex].arg3;
+
+            for (conditionIndex = 0; evolutions[methodIndex].params[conditionIndex].condition != CONDITIONS_END; conditionIndex++)
+                stop++;
+
+            StringAppend(string,COMPOUND_STRING(" while "));
+
+            for (u32 conditionIndex = 0; evolutions[methodIndex].params[conditionIndex].condition != CONDITIONS_END; conditionIndex++)
+            {
+                switch (evolutions[methodIndex].params[conditionIndex].condition)
+                {
+                    default:
+                    case IF_GENDER:
+                        if(evolutions[methodIndex].params[conditionIndex].arg1 == MON_FEMALE)
+                            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("gender is female"));
+                        else
+                            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("gender is male"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_TIME:
+                        switch(evolutions[methodIndex].params[conditionIndex].arg1)
+                        {
+                            case TIME_MORNING: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is morning"));
+                                               break;
+                            case TIME_DAY: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is day"));
+                                           break;
+                            case TIME_EVENING: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is evening"));
+                                               break;
+                            case TIME_NIGHT: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is night"));
+                                             break;
+                        }
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_NOT_TIME:
+                        switch(evolutions[methodIndex].params[conditionIndex].arg1)
+                        {
+                            case TIME_MORNING: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is not morning"));
+                                               break;
+                            case TIME_DAY: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is not day"));
+                                           break;
+                            case TIME_EVENING: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is not evening"));
+                                               break;
+                            case TIME_NIGHT: StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("it is not night"));
+                                             break;
+                        }
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_MIN_FRIENDSHIP:
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("friendship > {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_ATK_GT_DEF:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("its Attack > Defense"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_ATK_EQ_DEF:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("its Attack = Defense"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_ATK_LT_DEF:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("its Attack < Defense"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_HOLD_ITEM:
+                        StringCopy(gStringVar2,GetItemName(evolutions[methodIndex].params[conditionIndex].arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("holding {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_PID_UPPER_MODULO_10_GT:
+                    case IF_PID_UPPER_MODULO_10_EQ:
+                    case IF_PID_UPPER_MODULO_10_LT:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("having a random (50%) genetic trait"));
+                        StringAppend(string,gStringVar4);
+                    case IF_MIN_BEAUTY:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("if beauty > {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_MIN_COOLNESS:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("if coolness > {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_MIN_SMARTNESS:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("if smartness > {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_MIN_TOUGHNESS:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("if toughness > {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_MIN_CUTENESS:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("if cuteness > {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_SPECIES_IN_PARTY:
+                        StringCopy(gStringVar2, GetSpeciesName(evolutions[methodIndex].params[conditionIndex].arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_2} is in the party"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_IN_MAP:
+                    case IF_IN_MAPSEC:
+                        GetMapNameGeneric(gStringVar2,evolutions[methodIndex].params[conditionIndex].arg1);
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("current location is {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_KNOWS_MOVE:
+                        StringCopy(gStringVar2, GetMoveName(evolutions[methodIndex].params[conditionIndex].arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("knowing {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_TRADE_PARTNER_SPECIES:
+                        StringCopy(gStringVar2, GetSpeciesName(evolutions[methodIndex].params[conditionIndex].arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("being traded for a {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_TYPE_IN_PARTY:
+                        StringCopy(gStringVar2, gTypesInfo[(evolutions[methodIndex].params[conditionIndex].arg1)].name);
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("a {STR_VAR_2}-type is in the party"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_WEATHER:
+                        BufferWeatherName(evolutions[methodIndex].params[conditionIndex].arg1, gStringVar1);
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("current weather is {STR_VAR_2}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_KNOWS_MOVE_TYPE:
+                        StringCopy(gStringVar2, gTypesInfo[(evolutions[methodIndex].params[conditionIndex].arg1)].name);
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("knowing {STR_VAR_2}-type move"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_NATURE:
+                        StringCopy(gStringVar2, gNaturesInfo[(evolutions[methodIndex].params[conditionIndex].arg1)].name);
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("having a {STR_VAR_2} nature"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_AMPED_NATURE:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("having a Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky nature"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_LOW_KEY_NATURE:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("having a Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful nature"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_RECOIL_DAMAGE_GE:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("sustaining more than {STR_VAR_2} recoil damage"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_CURRENT_DAMAGE_GE:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("sustaining more than {STR_VAR_2} damage"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_CRITICAL_HITS_GE:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("landing more than {STR_VAR_2} critical hits"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_USED_MOVE_X_TIMES:
+                        arg1 = evolutions[methodIndex].params[conditionIndex].arg1;
+                        arg2 = evolutions[methodIndex].params[conditionIndex].arg2;
+                        StringCopy(gStringVar2,GetMoveName(arg1));
+                        ConvertIntToDecimalStringN(gStringVar3, arg2, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg2));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("using {STR_VAR_2} {STR_VAR_3} times"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_DEFEAT_X_WITH_ITEMS:
+                        StringCopy(gStringVar1,GetSpeciesName(arg1));
+                        StringCopy(gStringVar2,GetItemName(arg2));
+                        ConvertIntToDecimalStringN(gStringVar3, arg3, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg3));
+
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("defeating {STR_VAR_1} that are holding {STR_VAR_2} {STR_VAR_3} times"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_PID_MODULO_100_EQ:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("having a random (1%) genetic trait"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_PID_MODULO_100_LT:
+                    case IF_PID_MODULO_100_GT:
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("having a random (99%) genetic trait"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_MIN_OVERWORLD_STEPS:
+                        ConvertIntToDecimalStringN(gStringVar2, arg1, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg1));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("following their Trainer for {STR_VAR_2} steps"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                    case IF_BAG_ITEM_COUNT:
+                        CopyItemNameHandlePlural(arg1,gStringVar1,arg2);
+                        ConvertIntToDecimalStringN(gStringVar2, arg2, STR_CONV_MODE_LEFT_ALIGN, CountDigits(arg2));
+                        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("their Trainer has {STR_VAR_2} {STR_VAR_1}"));
+                        StringAppend(string,gStringVar4);
+                        break;
+                }
+                if (stop != (conditionIndex + 1))
+                    StringAppend(string, COMPOUND_STRING(", and "));
+            }
+        }
+        StringAppend(string, COMPOUND_STRING(". "));
+    }
+    return success;
+}
+
 static void PageEvolution_PrintEvolutionDetails(void)
 {
     enum PokedexPageEvolutionWindows windowId = PAGE_EVOLUTION_WINDOW_METHOD_DESC;
-    u32 descData[POKEDEX_EVOLUTION_ATTRIBUTE_COUNT];
     u32 currentPosition = PageEvolution_GetMonListPosition();
     u32 fontId = FONT_EVOLUTION_DESC;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
@@ -3583,161 +3865,16 @@ static void PageEvolution_PrintEvolutionDetails(void)
     u8 *string = Alloc(POKEDEX_PAGE_STRING_LENGTH);
     StringCopy(string,COMPOUND_STRING(""));
 
-    for (u32 a = 0; a < MAX_NUM_FORMS_EVOLUTIONS; a++)
+    for (u32 evoIndex = 0; evoIndex < MAX_NUM_FORMS_EVOLUTIONS; evoIndex++)
     {
-        for (u32 i = 0; i < POKEDEX_EVOLUTION_ATTRIBUTE_COUNT; i++)
-            descData[i] = sPokedexEvolutionPageData->familyList[a][i];
-
-        if (spotlightMon != descData[POKEDEX_EVOLUTION_ATTRIBUTE_TARGET_SPECIES])
+        if (PageEvolution_GetTargetSpecies(evoIndex) != spotlightMon)
             continue;
 
-        StringCopy(gStringVar2,GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ORIGINAL_SPECIES]));
-        StringCopy(gStringVar3,GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_TARGET_SPECIES]));
-
-        switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_METHOD])
-        {
-            default:
-            case EVO_NONE:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("No Pokémon evolve into {STR_VAR_3}."));
-                break;
-            case EVO_LEVEL:
-                if (descData[POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION] == IF_MIN_FRIENDSHIP)
-                {
-                    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when leveled up with high friendship."));
-                }
-                else
-                {
-                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM], STR_CONV_MODE_LEFT_ALIGN, CountDigits(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM]));
-                    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when it reaches level {STR_VAR_1}."));
-                }
-                break;
-            case EVO_TRADE:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when traded."));
-                break;
-            case EVO_ITEM:
-                CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_PARAM], gStringVar1);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} evolves into {STR_VAR_3} when exposed to a {STR_VAR_1}."));
-                break;
-        }
-
-        if (PageEvolution_GetHasCondition(a))
-        {
-            switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION])
-            {
-                case IF_GENDER:
-                    switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1])
-                    {
-                        case MON_MALE:
-                            StringAppend(gStringVar4, COMPOUND_STRING(" This only works for male Pokémon."));
-                            break;
-                        case MON_FEMALE:
-                            StringAppend(gStringVar4, COMPOUND_STRING(" This only works for female Pokémon."));
-                            break;
-                    }
-                    break;
-                case IF_MIN_FRIENDSHIP:
-                    StringAppend(gStringVar4, COMPOUND_STRING(" A friendship of at least 120 is required."));
-                    break;
-                case IF_ATK_GT_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be greater than its Defense."));
-                    break;
-                case IF_ATK_EQ_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must equal its Defense."));
-                    break;
-                case IF_ATK_LT_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING(" Its Attack must be less than its Defense."));
-                    break;
-                case IF_NOT_TIME:
-                    {
-                        const u8* timeStr = NULL;
-                        switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1])
-                        {
-                            case TIME_MORNING: timeStr = COMPOUND_STRING("morning"); break;
-                            case TIME_DAY:     timeStr = COMPOUND_STRING("daytime"); break;
-                            case TIME_EVENING: timeStr = COMPOUND_STRING("evening"); break;
-                            case TIME_NIGHT:   timeStr = COMPOUND_STRING("night"); break;
-                        }
-                        StringAppend(gStringVar4, COMPOUND_STRING(" This cannot happen during the "));
-                        StringAppend(gStringVar4, timeStr);
-                        StringAppend(gStringVar4, COMPOUND_STRING("."));
-                    }
-                    break;
-                case IF_TIME:
-                    {
-                        const u8* timeStr = NULL;
-                        switch (descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1])
-                        {
-                            case TIME_MORNING: timeStr = COMPOUND_STRING("morning"); break;
-                            case TIME_DAY:     timeStr = COMPOUND_STRING("daytime"); break;
-                            case TIME_EVENING: timeStr = COMPOUND_STRING("evening"); break;
-                            case TIME_NIGHT:   timeStr = COMPOUND_STRING("night"); break;
-                        }
-                        StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during the "));
-                        StringAppend(gStringVar4, timeStr);
-                        StringAppend(gStringVar4, COMPOUND_STRING("."));
-                    }
-                    break;
-                case IF_HOLD_ITEM:
-                    CopyItemName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], gStringVar1);
-                    StringExpandPlaceholders(gStringVar2, COMPOUND_STRING(" It must be holding a {STR_VAR_1}."));
-                    StringAppend(gStringVar4,gStringVar2);
-                    break;
-                case IF_IN_MAPSEC:
-                    GetMapNameGeneric(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" This must happen while in {STR_VAR_1}."));
-                    break;
-                case IF_KNOWS_MOVE:
-                    StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]));
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must know the move {STR_VAR_1}."));
-                    break;
-                case IF_SPECIES_IN_PARTY:
-                    StringCopy(gStringVar1, GetSpeciesName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]));
-                    StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1} must be in your party."));
-                    break;
-                case IF_TYPE_IN_PARTY:
-                    StringCopy(gStringVar1, gTypesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]].name);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" A {STR_VAR_1}-type Pokémon must be in your party."));
-                    break;
-                case IF_WEATHER:
-                    BufferWeatherName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" This must happen during {STR_VAR_1} weather."));
-                    break;
-                case IF_NATURE:
-                    StringCopy(gStringVar1, gNaturesInfo[descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]].name);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must have a {STR_VAR_1} nature."));
-                    break;
-                case IF_AMPED_NATURE:
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must have an amped nature (Hardy, Brave, Adamant, etc.)."));
-                    break;
-                case IF_LOW_KEY_NATURE:
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must have a low-key nature (Lonely, Bold, Relaxed, etc.)."));
-                    break;
-                case IF_RECOIL_DAMAGE_GE:
-                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], STR_CONV_MODE_LEFT_ALIGN, 3);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must take at least {STR_VAR_1} HP in recoil damage without fainting."));
-                    break;
-                case IF_CRITICAL_HITS_GE:
-                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], STR_CONV_MODE_LEFT_ALIGN, 2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must land {STR_VAR_1} critical hits in a single battle."));
-                    break;
-                case IF_USED_MOVE_X_TIMES:
-                    StringCopy(gStringVar1, GetMoveName(descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1]));
-                    ConvertIntToDecimalStringN(gStringVar2, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG2], STR_CONV_MODE_LEFT_ALIGN, 3);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must use {STR_VAR_1} {STR_VAR_2} times."));
-                    break;
-                case IF_MIN_OVERWORLD_STEPS:
-                    ConvertIntToDecimalStringN(gStringVar1, descData[POKEDEX_EVOLUTION_ATTRIBUTE_ARG1], STR_CONV_MODE_LEFT_ALIGN, 4);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" It must take {STR_VAR_1} steps while following you."));
-                    break;
-                case CONDITIONS_END:
-                    break;
-            }
-        }
-
-        StringAppend(string,gStringVar4);
+        if (PageEvolution_GenerateEvolutionDetails(string,spotlightMon,evoIndex))
+            break;
     }
 
-    BreakStringAutomatic(string, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
+    BreakStringAutomatic(string, windowWidth, screenLines, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,string);
     Free(string);
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -3803,53 +3940,53 @@ const u8 *const sTerrainNames[BATTLE_ENVIRONMENT_COUNT] =
     [BATTLE_ENVIRONMENT_ULTRA_SPACE] = COMPOUND_STRING("Ultra_Space"),
 };
 
-static void BufferWeatherName(u32 weather)
+static void BufferWeatherName(u32 weather, u8* string)
 {
     switch (weather)
     {
-        case B_WEATHER_RAIN_DOWNPOUR: StringCopy(gStringVar1,COMPOUND_STRING("downpour rainy"));
+        case B_WEATHER_RAIN_DOWNPOUR: StringCopy(string,COMPOUND_STRING("downpour rainy"));
                                       break;
-        case B_WEATHER_RAIN_PRIMAL: StringCopy(gStringVar1,COMPOUND_STRING("primal rainy"));
+        case B_WEATHER_RAIN_PRIMAL: StringCopy(string,COMPOUND_STRING("primal rainy"));
                                     break;
         case B_WEATHER_RAIN_NORMAL:
-        case B_WEATHER_RAIN: StringCopy(gStringVar1,COMPOUND_STRING("rainy"));
+        case B_WEATHER_RAIN: StringCopy(string,COMPOUND_STRING("rainy"));
                              break;
-        case ~B_WEATHER_RAIN: StringCopy(gStringVar1,COMPOUND_STRING("not rain"));
+        case ~B_WEATHER_RAIN: StringCopy(string,COMPOUND_STRING("not rain"));
                               break;
-                                            break;
-        case B_WEATHER_SANDSTORM: StringCopy(gStringVar1,COMPOUND_STRING("sandstorm"));
+                              break;
+        case B_WEATHER_SANDSTORM: StringCopy(string,COMPOUND_STRING("sandstorm"));
                                   break;
-        case ~B_WEATHER_SANDSTORM: StringCopy(gStringVar1,COMPOUND_STRING("not sandstorm"));
+        case ~B_WEATHER_SANDSTORM: StringCopy(string,COMPOUND_STRING("not sandstorm"));
                                    break;
-        case B_WEATHER_SUN_PRIMAL: StringCopy(gStringVar1,COMPOUND_STRING("primal sunny"));
+        case B_WEATHER_SUN_PRIMAL: StringCopy(string,COMPOUND_STRING("primal sunny"));
                                    break;
         case B_WEATHER_SUN_NORMAL:
-        case B_WEATHER_SUN: StringCopy(gStringVar1,COMPOUND_STRING("sunny"));
+        case B_WEATHER_SUN: StringCopy(string,COMPOUND_STRING("sunny"));
                             break;
         default:
-        case (~B_WEATHER_SUN): StringCopy(gStringVar1,COMPOUND_STRING("not sunny"));
+        case (~B_WEATHER_SUN): StringCopy(string,COMPOUND_STRING("not sunny"));
                                break;
-        case B_WEATHER_HAIL: StringCopy(gStringVar1,COMPOUND_STRING("hailing"));
+        case B_WEATHER_HAIL: StringCopy(string,COMPOUND_STRING("hailing"));
                              break;
-        case ~B_WEATHER_HAIL: StringCopy(gStringVar1,COMPOUND_STRING("not hailing"));
+        case ~B_WEATHER_HAIL: StringCopy(string,COMPOUND_STRING("not hailing"));
                               break;
-        case B_WEATHER_STRONG_WINDS: StringCopy(gStringVar1,COMPOUND_STRING("extremely windy"));
+        case B_WEATHER_STRONG_WINDS: StringCopy(string,COMPOUND_STRING("extremely windy"));
                                      break;
-        case ~B_WEATHER_STRONG_WINDS: StringCopy(gStringVar1,COMPOUND_STRING("not windy"));
+        case ~B_WEATHER_STRONG_WINDS: StringCopy(string,COMPOUND_STRING("not windy"));
                                       break;
-        case B_WEATHER_SNOW: StringCopy(gStringVar1,COMPOUND_STRING("snowing"));
+        case B_WEATHER_SNOW: StringCopy(string,COMPOUND_STRING("snowing"));
                              break;
-        case ~B_WEATHER_SNOW: StringCopy(gStringVar1,COMPOUND_STRING("not snowing"));
+        case ~B_WEATHER_SNOW: StringCopy(string,COMPOUND_STRING("not snowing"));
                               break;
-        case B_WEATHER_FOG: StringCopy(gStringVar1,COMPOUND_STRING("foggy"));
+        case B_WEATHER_FOG: StringCopy(string,COMPOUND_STRING("foggy"));
                             break;
-        case ~B_WEATHER_FOG: StringCopy(gStringVar1,COMPOUND_STRING("not foggy"));
+        case ~B_WEATHER_FOG: StringCopy(string,COMPOUND_STRING("not foggy"));
                              break;
-        case B_WEATHER_ANY: StringCopy(gStringVar1,COMPOUND_STRING("any"));
+        case B_WEATHER_ANY: StringCopy(string,COMPOUND_STRING("any"));
                             break;
-        case B_WEATHER_PRIMAL_ANY: StringCopy(gStringVar1,COMPOUND_STRING("primal"));
+        case B_WEATHER_PRIMAL_ANY: StringCopy(string,COMPOUND_STRING("primal"));
                                    break;
-        case ~B_WEATHER_ANY: StringCopy(gStringVar1,COMPOUND_STRING("no"));
+        case ~B_WEATHER_ANY: StringCopy(string,COMPOUND_STRING("no"));
                              break;
     }
 }
@@ -3864,7 +4001,7 @@ static void PageForms_GenerateTransformString(u32 method, u32 param1, u32 param2
             CopyItemName(param1,gStringVar1);
             break;
         case FORM_CHANGE_BATTLE_WEATHER:
-            BufferWeatherName(param1);
+            BufferWeatherName(param1, gStringVar1);
             StringCopy(gStringVar2,GetAbilityName(param2));
             break;
         case FORM_CHANGE_BATTLE_BEFORE_MOVE:
