@@ -4283,7 +4283,6 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .speciesName = _("Lilligant"),
         .cryId = CRY_LILLIGANT,
         .natDexNum = NATIONAL_DEX_LILLIGANT,
-        .residoDexNum = RESIDO_DEX_LILLIGANT,
         .categoryName = _("Spinning"),
         .height = 12,
         .weight = 192,

@@ -2282,7 +2282,16 @@ static void SpeciesGrid_PrintMonNumber(u32 rowIndex, u32 columnIndex, u32 specie
 
 u32 ConvertSpeciesIdToResidoDex(u32 speciesId)
 {
-    return gSpeciesInfo[speciesId].residoDexNum + 1;
+    return gSpeciesInfo[speciesId].residoDexNum;
+}
+
+bool8 SpeciesIsResidoDex(u32 speciesId)
+{
+    for (enum ResidoDexNumbers speciesIndex = 0; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
+        if (speciesId == gResidoPokedexOrder_Numerical[speciesIndex])
+            return TRUE;
+
+    return FALSE;
 }
 
 void SpeciesGrid_PrintMonIcon(u32 rowIndex,u32 columnIndex, u32 species)
@@ -2962,7 +2971,7 @@ static u32 SpeciesGrid_GetSavedSpecies(void)
 static u32 SpeciesGrid_SanitizeSavedSpecies(void)
 {
     u32 species = SpeciesGrid_GetSavedSpecies();
-    return (species == SPECIES_NONE) ? gResidoPokedexOrder_Numerical[0] : species;
+    return (species == SPECIES_NONE) ? gResidoPokedexOrder_Numerical[1] : species;
 }
 
 static void SpeciesGrid_SetSavedSpecies(u32 species)
@@ -2993,6 +3002,10 @@ static void SpeciesGrid_SetCursorPositionFromSavedSpecies(void)
     {
         if (speciesList[listIndex] != species)
             continue;
+
+        // PSF TODO I have no idea why this is required, but removing it introduces an issue where the saved species is always one ahead of the actual species
+        if (listIndex)
+            listIndex--;
 
         y = listIndex / NUM_SPECIES_LIST_COLUMNS;
         x = listIndex % NUM_SPECIES_LIST_COLUMNS;

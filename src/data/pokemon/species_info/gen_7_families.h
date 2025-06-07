@@ -1297,7 +1297,6 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .speciesName = _("Vikavolt"),
         .cryId = CRY_VIKAVOLT,
         .natDexNum = NATIONAL_DEX_VIKAVOLT,
-        .residoDexNum = RESIDO_DEX_VIKAVOLT,
         .categoryName = _("Stag Beetle"),
         .height = 26,
         .weight = 1475,

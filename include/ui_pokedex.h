@@ -265,5 +265,6 @@ u32 SpeciesData_ConvertSpeciesToCosmeticFormId(u32 species);
 void PokedexPage_PlaySpeciesCry(u32 species, bool32 shouldOverride);
 bool32 SpeciesGrid_GetShouldPlayCry(void);
 void SpeciesGrid_SetShouldPlayCry(bool32 value);
+bool8 SpeciesIsResidoDex(u32 speciesId);
 
 #endif // GUARD_UI_POKEDEX_H

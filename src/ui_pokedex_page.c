@@ -71,7 +71,6 @@ struct PokedexStatsPageData
 struct PokedexEvolutionPageData
 {
     s16 familyList[MAX_NUM_FORMS_EVOLUTIONS][POKEDEX_EVOLUTION_ATTRIBUTE_COUNT];
-    bool8 hasCondition[MAX_NUM_FORMS_EVOLUTIONS];
     u16 monList[MAX_NUM_FORMS_EVOLUTIONS];
     u16 numMons;
     u8 monListPosition;
@@ -423,8 +422,6 @@ static void PageMoves_SetNumMoves(u32);
 static void Debug_PrintMovesList(void);
 static void Debug_PrintMonList(u32);
 static u32 PageMoves_GetTargetMove(void);
-static enum EvolutionConditions PageEvolution_GetCondition(u32 familyIndex, s32 condition);
-static void PageEvolution_SetCondition(u32 familyIndex, s32 condition);
 static void PageMoves_SetTargetMove(u32 moveId);
 static void PageMoves_SnapToLoadedCursorAndPosition(void);
 static u32 PageMoves_GetCurrentPositionInMoveList(void);
@@ -554,8 +551,6 @@ static u32 PageEvolution_GetOriginalSpecies(u32 monIndex);
 static void PageEvolution_SetMonList(u32 monIndex, u32 species);
 static void PageEvolution_SetOriginalSpecies(u32 familyIndex, u32 originalSpecies);
 static u32 PageEvolution_GetOriginalSpecies(u32 familyIndex);
-static void PageEvolution_SetParam(u32 familyIndex, s32 method);
-static s32 PageEvolution_GetParam(u32 familyIndex);
 static void PageEvolution_SetMethod(u32 familyIndex, s32 method);
 static s32 PageEvolution_GetMethod(u32 familyIndex);
 static void PageEvolution_SetTargetSpecies(u32 familyIndex, s32 targetSpecies);
@@ -2986,16 +2981,6 @@ static s32 PageEvolution_GetMethod(u32 familyIndex)
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_METHOD];
 }
 
-static void PageEvolution_SetParam(u32 familyIndex, s32 method)
-{
-    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM] = method;
-}
-
-static s32 UNUSED PageEvolution_GetParam(u32 familyIndex)
-{
-    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_PARAM];
-}
-
 static void PageEvolution_SetTargetSpecies(u32 familyIndex, s32 targetSpecies)
 {
     sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_TARGET_SPECIES] = targetSpecies;
@@ -3004,17 +2989,6 @@ static void PageEvolution_SetTargetSpecies(u32 familyIndex, s32 targetSpecies)
 static s32 PageEvolution_GetTargetSpecies(u32 familyIndex)
 {
     return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_TARGET_SPECIES];
-}
-
-static void PageEvolution_SetCondition(u32 familyIndex, s32 condition)
-{
-    sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION] = condition;
-}
-
-
-static enum EvolutionConditions UNUSED PageEvolution_GetCondition(u32 familyIndex, s32 condition)
-{
-    return sPokedexEvolutionPageData->familyList[familyIndex][POKEDEX_EVOLUTION_ATTRIBUTE_CONDITION];
 }
 
 static void PageEvolution_SetArg1(u32 familyIndex, s32 param1)
@@ -3302,8 +3276,6 @@ static void PageEvolution_PopulateEvolutionsList(void)
 
     PageEvolution_SetTargetSpecies(overallIndex, species);
     PageEvolution_SetOriginalSpecies(overallIndex, SPECIES_EGG);
-    PageEvolution_SetMethod(overallIndex, EVO_NONE);
-    PageEvolution_SetArg1(overallIndex, 0);
 
     overallIndex++;
 
@@ -3330,15 +3302,11 @@ static void PageEvolution_PopulateEvolutionsList(void)
             {
                 u32 targetSpecies = evolutions[j].targetSpecies;
 
-                PageEvolution_SetOriginalSpecies(overallIndex, familyList[i]);
-                PageEvolution_SetMethod(overallIndex, evolutions[j].method);
-                PageEvolution_SetParam(overallIndex, evolutions[j].param);
-                PageEvolution_SetTargetSpecies(overallIndex, targetSpecies);
-                PageEvolution_SetCondition(overallIndex, evolutions[j].params->condition);
-                PageEvolution_SetArg1(overallIndex, evolutions[j].params->arg1);
-                PageEvolution_SetArg2(overallIndex, evolutions[j].params->arg2);
-                PageEvolution_SetArg3(overallIndex, evolutions[j].params->arg3);
+                if (!SpeciesIsResidoDex(targetSpecies))
+                    continue;
 
+                PageEvolution_SetOriginalSpecies(overallIndex, familyList[i]);
+                PageEvolution_SetTargetSpecies(overallIndex, targetSpecies);
                 familyList[overallIndex + 1] = targetSpecies;
                 familyDone[overallIndex + 1] = FALSE;
                 newEvolutionAdded = TRUE;
@@ -3562,8 +3530,6 @@ static bool32 PageEvolution_GenerateEvolutionDetails(u8* string, u32 spotlightMo
         return TRUE;
     }
 
-
-    //PSF TODO remove Galar Weezing Totem Vikavolt H Lilligant and figure out Bloodmon Ursaluna
     const struct Evolution *evolutions = GetSpeciesEvolutions(originalSpecies);
 
     for (u32 methodIndex = 0; evolutions[methodIndex].method != EVOLUTIONS_END ; methodIndex++)
@@ -3874,6 +3840,7 @@ static void PageEvolution_PrintEvolutionDetails(void)
             break;
     }
 
+    // PSF TODO Replace uses of BreakStringAutomatic with BreakStringNaive once 1.13 drops
     BreakStringAutomatic(string, windowWidth, screenLines, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,string);
     Free(string);
