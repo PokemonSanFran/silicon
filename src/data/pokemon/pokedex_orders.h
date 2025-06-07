@@ -5354,6 +5354,7 @@ const u16 gPokedexOrder_Numerical[] =
 
 const u16 gResidoPokedexOrder_Numerical[] =
 {
+    SPECIES_NONE,
     SPECIES_PIDGEY,
     SPECIES_PIDGEOTTO,
     SPECIES_PIDGEOT,
@@ -5829,6 +5830,7 @@ const u16 gResidoPokedexOrder_Numerical[] =
 
 const u16 gResidoPokedexOrder_Alphabetical[] =
 {
+    SPECIES_NONE,
     SPECIES_ABRA,
     SPECIES_AEGISLASH_BLADE,
     SPECIES_AEGISLASH,
@@ -6304,6 +6306,7 @@ const u16 gResidoPokedexOrder_Alphabetical[] =
 
 const u16 gResidoPokedexOrder_Weight[] =
 {
+    SPECIES_NONE,
     SPECIES_KARTANA,
     SPECIES_FLABEBE,
     SPECIES_SINISTEA,
@@ -6779,6 +6782,7 @@ const u16 gResidoPokedexOrder_Weight[] =
 
 const u16 gResidoPokedexOrder_Height[] =
 {
+    SPECIES_NONE,
     SPECIES_FLABEBE,
     SPECIES_GIMMIGHOUL_ROAMING,
     SPECIES_SINISTEA,

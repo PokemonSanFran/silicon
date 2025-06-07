@@ -1,5 +1,6 @@
 enum ResidoDexNumbers
 {
+    RESIDO_DEX_NONE,
     RESIDO_DEX_PIDGEY,
     RESIDO_DEX_PIDGEOTTO,
     RESIDO_DEX_PIDGEOT,

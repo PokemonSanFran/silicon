@@ -14189,7 +14189,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .speciesName = _("Weezing"),
         .cryId = CRY_WEEZING,
         .natDexNum = NATIONAL_DEX_WEEZING,
-        .residoDexNum = RESIDO_DEX_WEEZING,
         .categoryName = _("Poison Gas"),
         .height = 30,
         .weight = 160,
