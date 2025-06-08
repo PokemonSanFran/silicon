@@ -270,11 +270,6 @@ MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales:
 	.string "Then tell me, have you any tales that\n"
 	.string "are even remotely legendary?$"
 
-@ Unused
-MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale:
-	.string "Incidentally… Would you care to hear\n"
-	.string "another legendary tale?$"
-
 MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend:
 	.string "Hmm…\n"
 	.string "I'm not satisfied…\p"
@@ -841,12 +836,6 @@ MauvilleCity_PokemonCenter_1F_EventScript_TellPlayersTale::
 
 MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller::
 	msgbox MauvilleCity_PokemonCenter_1F_Text_StorytellerFeelingTheBlues, MSGBOX_DEFAULT
-	release
-	end
-
-@ Unused
-MauvilleCity_PokemonCenter_1F_EventScript_WaitingForRecordMix::
-	msgbox MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested, MSGBOX_DEFAULT
 	release
 	end
 

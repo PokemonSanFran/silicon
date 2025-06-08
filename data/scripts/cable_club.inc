@@ -42,12 +42,6 @@ CableClub_EventScript_DistributeEonTicket::
 	release
 	end
 
-@ Unused?
-CableClub_EventScript_MysteryGiftThankYou2::
-	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_DEFAULT
-	release
-	end
-
 CableClub_OnWarp:
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
@@ -250,11 +244,6 @@ CableClub_EventScript_WelcomeToCableClub::
 	goto CableClub_EventScript_SelectCableClubRoom
 	end
 
-CableClub_EventScript_UnusedWelcomeToCableClub::
-	msgbox CableClub_Text_WhichService, MSGBOX_DEFAULT
-	goto CableClub_EventScript_SelectCableClubRoom
-	end
-
 CableClub_EventScript_SelectCableClubRoom::
 	setvar VAR_0x8004, 0
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_CableClubUnlockedRecordCorner
@@ -366,12 +355,6 @@ CableClub_EventScript_EnterColosseum::
 	special DoCableClubWarp
 	waitstate
 	end
-
-@ Unused
-CableClub_EventScript_PlayerApproachLinkRoomRight::
-	applymovement LOCALID_PLAYER, Movement_PlayerApproachLinkRoomRight
-	waitmovement 0
-	return
 
 CableClub_EventScript_WarpTo4PColosseum::
 	special SetCableClubWarp
@@ -567,13 +550,6 @@ MossdeepCity_GameCorner_1F_EventScript_AbortMinigame::
 	release
 	end
 
-@ Unused
-CableClub_EventScript_CableClubWarp::
-	special SetCableClubWarp
-	special DoCableClubWarp
-	waitstate
-	end
-
 CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants::
 	special CloseLink
 	msgbox CableClub_Text_IncorrectNumberOfParticipants, MSGBOX_DEFAULT
@@ -606,11 +582,6 @@ Movement_AttendantFaceDown:
 	face_down
 	step_end
 
-@ Unused
-Movement_AttendantFaceRight:
-	face_right
-	step_end
-
 Movement_AttendantFaceLeft:
 	face_left
 	step_end
@@ -620,7 +591,6 @@ Movement_PlayerExitLinkRoom:
 	walk_down
 	step_end
 
-@ Functionally unused
 Movement_PlayerApproachLinkRoomRight:
 	walk_right
 	walk_up
@@ -635,11 +605,6 @@ Movement_PlayerApproachLinkRoomLeft:
 
 Movement_PlayerEnterLinkRoom:
 	walk_up
-	step_end
-
-@ Unused
-Movement_PlayerFaceAttendantLeft:
-	face_left
 	step_end
 
 Movement_PlayerFaceAttendantRight:
@@ -725,20 +690,6 @@ EventScript_TradeCenter_Chair0::
 
 EventScript_TradeCenter_Chair1::
 	setvar VAR_0x8005, 1
-	special PlayerEnteredTradeSeat
-	waitstate
-	end
-
-/* Never used */
-EventScript_TradeCenter_Chair2::
-	setvar VAR_0x8005, 2
-	special PlayerEnteredTradeSeat
-	waitstate
-	end
-
-/* Never used */
-EventScript_TradeCenter_Chair3::
-	setvar VAR_0x8005, 3
 	special PlayerEnteredTradeSeat
 	waitstate
 	end

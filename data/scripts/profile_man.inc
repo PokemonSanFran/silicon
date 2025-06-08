@@ -87,10 +87,6 @@ ProfileMan_EventScript_DeclineNewProfile::
 	release
 	end
 
-@ Unused
-ProfileMan_EventScript_Ret::
-	return
-
 ProfileMan_Text_CollectTrainerProfiles:
 	.string "Hello there, TRAINER!\n"
 	.string "You've got a wonderful smile, there.\p"

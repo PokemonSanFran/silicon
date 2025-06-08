@@ -1377,12 +1377,6 @@ LilycoveCity_ContestLobby_Text_ContestReception:
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.$"
 
-@ Unused
-LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests:
-	.string "Hello!\p"
-	.string "This reception counter is only\n"
-	.string "for 4-player POKéMON CONTESTS.$"
-
 LilycoveCity_ContestLobby_Text_EnterContest1:
 	.string "Would you like to enter your POKéMON\n"
 	.string "in our CONTESTS?$"
@@ -1574,14 +1568,6 @@ ContestHall_Text_PickUpPrizeAtCounterLater:
 	.string "the reception counter later.\l"
 	.string "Please do compete again!$"
 
-@ Unused
-ContestHall_Text_OnlyRegister4Players:
-	.string "I only register four players for\n"
-	.string "POKéMON CONTESTS.\p"
-	.string "If three other players link up, all\n"
-	.string "four may enter the same CONTEST.\p"
-	.string "Would you like to take part?$"
-
 LilycoveCity_ContestLobby_Text_ProgressWillBeSaved:
 	.string "Before entering a CONTEST, your\n"
 	.string "progress will be saved.$"
@@ -1589,30 +1575,6 @@ LilycoveCity_ContestLobby_Text_ProgressWillBeSaved:
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
 	.string "We hope you will participate another\n"
 	.string "time.$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_EnterContest2:
-	.string "Would you like to enter a CONTEST?$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_Explain4PlayerContest:
-	.string "When four players are ready, connect\n"
-	.string "over a Game Link cable, and register\l"
-	.string "with me, please.\p"
-	.string "Please choose the same CONTEST\n"
-	.string "as your fellow contestants.\p"
-	.string "The CONTEST begins as soon as all\n"
-	.string "players register their entry.\p"
-	.string "After that, the usual CONTEST rules\n"
-	.string "apply.$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_EnterWhichContest2:
-	.string "Which CONTEST would you like to enter?$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon2:
-	.string "Which POKéMON would you like to enter?$"
 
 LilycoveCity_ContestLobby_Text_Transmitting:
 	.string "Transmitting…$"
@@ -1631,16 +1593,6 @@ LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice:
 LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel:
 	.string "Please wait.\n"
 	.string "… … B Button: Cancel$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2:
-	.string "We hope you will participate another\n"
-	.string "time.$"
-
-@ Unused
-LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain:
-	.string "Transmission error.\n"
-	.string "Please try again.$"
 
 LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX:
 	.string "Your POKéMON will be entered in\n"

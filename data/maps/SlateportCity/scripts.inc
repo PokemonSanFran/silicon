@@ -650,11 +650,6 @@ SlateportCity_Movement_TyExit:
 	walk_left
 	step_end
 
-SlateportCity_Movement_Unused:
-	walk_down
-	walk_in_place_faster_up
-	step_end
-
 SlateportCity_Movement_SternEnterHarbor:
 	walk_right
 	walk_up

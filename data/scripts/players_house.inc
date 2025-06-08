@@ -480,11 +480,6 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	releaseall
 	end
 
-@ Never called.
-PlayersHouse_1F_EventScript_AirLatiBroadcast::
-	setflag FLAG_SYS_TV_LATIAS_LATIOS
-	return
-
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
 	setvar VAR_0x8008, MALE
 	setvar VAR_0x8009, LOCALID_PLAYERS_HOUSE_1F_DAD

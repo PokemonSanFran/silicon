@@ -193,13 +193,6 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger4::
 	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
 	end
 
-@ Unused
-Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger5::
-	lockall
-	setvar VAR_TEMP_9, 5
-	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
-	end
-
 Route110_TrickHousePuzzle5_EventScript_Mechadoll5Trigger0::
 	lockall
 	setvar VAR_TEMP_9, 0
@@ -487,14 +480,6 @@ Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4::
 	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft4
 	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft4
 	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4
-	return
-
-Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5::
-	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5
-	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5
-	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5
-	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5
-	call_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5
 	return
 
 Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1::

@@ -200,13 +200,6 @@ LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest:
 	walk_in_place_faster_up
 	step_end
 
-@ Unused, the player is already facing this direction so its unneeded
-LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayWest:
-	delay_16
-	delay_16
-	walk_in_place_faster_right
-	step_end
-
 LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast:
 	walk_right
 	walk_right

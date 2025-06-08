@@ -141,12 +141,6 @@ MossdeepCity_StevensHouse_EventScript_Letter::
 	releaseall
 	end
 
-@ Unused, leftover from RS
-MossdeepCity_StevensHouse_EventScript_DiveItemBall::
-	finditem ITEM_HM_DIVE
-	setflag FLAG_RECEIVED_HM_DIVE
-	end
-
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:
 	.string "STEVEN: {PLAYER}{KUN}…\p"
 	.string "As you can see, there's not much here,\n"
@@ -182,10 +176,6 @@ MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
 
 MossdeepCity_StevensHouse_Text_ObtainedBeldum:
 	.string "{PLAYER} obtained a BELDUM.$"
-
-@ Unused
-MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:
-	.string "There is no space for another POKéMON.$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
 	.string "{PLAYER} left the POKé BALL where\n"

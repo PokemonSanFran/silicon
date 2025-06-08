@@ -618,17 +618,6 @@ PetalburgCity_Gym_Movement_WallysDadApproachPlayerWest:
 	walk_up
 	step_end
 
-PetalburgCity_Gym_Movement_Unused:
-	walk_in_place_faster_up
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_8
-	walk_in_place_faster_down
-	step_end
-
 PetalburgCity_Gym_Movement_WallyArriveNorth:
 	delay_16
 	walk_up
@@ -1506,11 +1495,6 @@ PetalburgCity_Gym_Text_DoorAppearsLocked:
 PetalburgCity_Gym_Text_EnterSpeedRoom:
 	.string "“SPEED ROOM,” the sign says.\p"
 	.string "Do you want to go through?$"
-
-@ Unused
-PetalburgCity_Gym_Text_DoorAppearsLocked2:
-	.string "This door appears to be locked\n"
-	.string "right now…$"
 
 PetalburgCity_Gym_Text_EnterAccuracyRoom:
 	.string "“ACCURACY ROOM,” the sign says.\p"

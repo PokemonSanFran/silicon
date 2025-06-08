@@ -134,17 +134,6 @@ Route111_EventScript_RootFossilDisappeared::
 	releaseall
 	end
 
-@ Unused
-Route111_Movement_PlayerFall::
-	lock_anim
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	step_end
-
 Route111_EventScript_Girl::
 	lock
 	faceplayer
@@ -164,13 +153,6 @@ Route111_EventScript_ReceivedBerry::
 	release
 	end
 
-@ Unused
-Route111_EventScript_ViciousSandstormTriggerUp::
-	lockall
-	setvar VAR_0x8004, 0
-	goto Route111_EventScript_ViciousSandstormTrigger
-	end
-
 Route111_EventScript_ViciousSandstormTriggerDown::
 	lockall
 	setvar VAR_0x8004, 1
@@ -180,13 +162,6 @@ Route111_EventScript_ViciousSandstormTriggerDown::
 Route111_EventScript_ViciousSandstormTriggerLeft::
 	lockall
 	setvar VAR_0x8004, 2
-	goto Route111_EventScript_ViciousSandstormTrigger
-	end
-
-@ Unused
-Route111_EventScript_ViciousSandstormTriggerRight::
-	lockall
-	setvar VAR_0x8004, 3
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 

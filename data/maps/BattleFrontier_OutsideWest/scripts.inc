@@ -85,16 +85,6 @@ BattleFrontier_OutsideWest_EventScript_BattlePikeSign::
 	msgbox BattleFrontier_OutsideWest_Text_BattlePikeSign, MSGBOX_SIGN
 	end
 
-@ Unused. Of note, Battle Tower is in the East section in the final release
-BattleFrontier_OutsideWest_EventScript_UnusedNPC1::
-	msgbox BattleFrontier_OutsideWest_Text_ThisIsBattleTower, MSGBOX_NPC
-	end
-
-@ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC2::
-	msgbox BattleFrontier_OutsideWest_Text_CantFindBattleTower, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_EventScript_Boy1::
 	msgbox BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends, MSGBOX_NPC
 	end
@@ -233,11 +223,6 @@ BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors::
 
 BattleFrontier_OutsideWest_EventScript_Fisherman1::
 	msgbox BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling, MSGBOX_NPC
-	end
-
-@ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC3::
-	msgbox BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_Gentleman::

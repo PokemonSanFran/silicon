@@ -237,10 +237,6 @@ LilycoveCity_LilycoveMuseum_1F_Text_StoneTabletWithAncientText:
 	.string "small characters of an ancient,\l"
 	.string "unreadable language.$"
 
-LilycoveCity_LilycoveMuseum_1F_Text_WorksOfMagnificence:
-	.string "Hmmm…\n"
-	.string "What works of great magnificence…$"
-
 LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts:
 	.string "Battling with POKéMON is fun,\n"
 	.string "I'll grant you that.\p"
