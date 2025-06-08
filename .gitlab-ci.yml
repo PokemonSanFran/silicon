@@ -44,6 +44,8 @@ upload_to_catbox:
         export CATBOX_URL COMMIT_MESSAGE
         envsubst < discord_embed_template.json > expanded.json
         curl -d @expanded.json -H "Content-Type: application/json" "$DISCORD_WEBHOOK_URL"
+    rules:
+      - if: '$CI_COMMIT_BRANCH == "main"'
 
 test_rom:
   stage: test
