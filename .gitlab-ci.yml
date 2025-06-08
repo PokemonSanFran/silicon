@@ -33,7 +33,7 @@ upload_to_catbox:
     script:
       - |
         COMMIT_HASH=$(git rev-parse --verify HEAD)
-        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+        COMMIT_MESSAGE=$(git log -1 --pretty=%B | jq -Rs . | sed 's/^"\(.*\)"$/\1/')
         MAX_LENGTH=3900
         if [ ${#COMMIT_MESSAGE} -gt $MAX_LENGTH ]; then
         COMMIT_MESSAGE="${COMMIT_MESSAGE:0:$MAX_LENGTH}"
