@@ -23,5 +23,9 @@ extern const u8 gFontShortNarrowLatinGlyphWidths[];
 extern const u16 gFontShortNarrowLatinGlyphs[];
 extern const u8 gFontShortNarrowerLatinGlyphWidths[];
 extern const u16 gFontShortNarrowerLatinGlyphs[];
+// Start addCrimFont
+extern const u8 gFontOutlineLatinGlyphWidths[];
+extern const u16 gFontOutlineLatinGlyphs[];
+// End addCrimFont
 
 #endif // GUARD_FONTS_H
