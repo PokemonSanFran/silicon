@@ -295,15 +295,7 @@ void PrintExpShareMessage(void)
 
 u32 GetExperienceExpMultiplerValue(void)
 {
-    switch(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER])
-    {
-        case BATTLE_OPTION_MULTIPLIER_0: return 100 * 0;
-        case BATTLE_OPTION_MULTIPLIER_1_5: return 100 * 1.5;
-        case BATTLE_OPTION_MULTIPLIER_2: return 100 * 2;
-        default:
-        case BATTLE_OPTION_MULTIPLIER_1: return 100 * 1;
-    }
-    return 0;
+    return (gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER]);
 }
 
 // ***********************************************************************

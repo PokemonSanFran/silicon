@@ -1533,13 +1533,11 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
         .options = {
             COMPOUND_STRING("0"),
             COMPOUND_STRING("Normal"),
-            COMPOUND_STRING("1.5"),
             COMPOUND_STRING("2"),
         },
         .optionDescription = {
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 0."),
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 1."),
-            COMPOUND_STRING("Exp. Points earned in battle are multiplied by 1.5."),
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 2."),
         },
         .numOptions = 4,
