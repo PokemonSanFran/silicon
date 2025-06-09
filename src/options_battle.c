@@ -19,7 +19,7 @@
 static u32 GetBattleExperienceOption(void);
 static bool32 IsMonInvalid(struct Pokemon);
 static bool32 IsMonMaxLevel(struct Pokemon);
-static void CalcAndSetNewExp(struct BoxPokemon *, struct Pokemon,s32);
+static void CalcAndSetNewExp(struct BoxPokemon *, struct Pokemon,u32);
 static u32 GetEVYield(u32, u16);
 static void CheckAndCalcEVs(u32, u32, struct Pokemon, struct BoxPokemon *);
 static u16 SetEVsIfMaxed(u16, u32, u8);
@@ -123,7 +123,7 @@ u32 ApplyExpMultipliers(struct Pokemon tempMon,s32 experience)
     return (GetExperienceExpMultiplerValue() * experience) / 100;
 }
 
-static void CalcAndSetNewExp(struct BoxPokemon *boxMon, struct Pokemon tempMon,s32 battleEXP)
+static void CalcAndSetNewExp(struct BoxPokemon *boxMon, struct Pokemon tempMon,u32 battleEXP)
 {
     u32 origExp = GetBoxMonData(boxMon,MON_DATA_EXP);
     u32 totalExp = ApplyExpMultipliers(tempMon,battleEXP) + origExp;
