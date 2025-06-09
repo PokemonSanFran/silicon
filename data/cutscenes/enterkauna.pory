@@ -36,9 +36,15 @@ msgbox(gText_EnterKauna_SoundsExciting,,SPEAKER_ALICIA)
     goto(EnterKauna_StartGymBattle_Script)
 }
 
-script EnterKauna_StartGymBattle_Script {
+script EnterKauna_StartGymBattle_Script
+{
+    lock
+    faceplayer
+    msgbox(gText_EnterKauna_HaHaNoYeah,,SPEAKER_KAUNA)
+    closemessage
     special(PreparePartyForLittleCupBattle)
-    trainerbattle_single(TRAINER_KAUNA, gText_EnterKauna_HaHaNoYeah, gText_EnterKauna_ImNotTrippin, EnterKauna_KaunaDefeated_Script, NO_MUSIC)
+    trainerbattle_no_intro(TRAINER_KAUNA, gText_EnterKauna_ImNotTrippin)
+    goto(EnterKauna_KaunaDefeated_Script)
 }
 
 script EnterKauna_KaunaDefeated_Script {
