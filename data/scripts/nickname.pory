@@ -5,7 +5,6 @@ script EventScript_TryToNicknamePokemon
     {
         return
     }
-
     elif (var(VAR_TEMP_1) == BATTLE_OPTION_NICKNAME_FORCED)
     {
         call(Common_EventScript_GetGiftMonPartySlot)
@@ -20,7 +19,6 @@ script EventScript_TryToNicknamePokemon
             }
         }
     }
-
     else
     {
         call(Common_EventScript_GetGiftMonPartySlot)

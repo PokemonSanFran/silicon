@@ -16418,22 +16418,6 @@ void BattleDestroyYesNoCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
-// Start Battle Settings: Nickname
-static void RedrawPostBattleScene(void)
-{
-    gBattleEnvironment = BATTLE_ENVIRONMENT_PLAIN;
-    InitBattleBgsVideo();
-    LoadBattleTextboxAndBackground();
-    gBattle_BG3_X = 256;
-    ResetSpriteData();
-    ResetTasks();
-    FreeAllSpritePalettes();
-    SetVBlankCallback(VBlankCB_Battle);
-    ShowBg(0);
-    ShowBg(3);
-}
-// End Battle Settings: Nickname
-
 static void Cmd_trygivecaughtmonnick(void)
 {
     CMD_ARGS();
@@ -16507,8 +16491,8 @@ static void Cmd_trygivecaughtmonnick(void)
             {
                 PrepareStringBattle(STRINGID_POKEMONMUSTHAVEANICKNAME, gBattlerTarget);
                 gBattleCommunication[MSG_DISPLAY] = 1;
+                // PSF TODO how do I insert a pause here?
                 gBattleCommunication[MULTIUSE_STATE] = 2;
-                RedrawPostBattleScene();
                 return;
             }
             else
