@@ -16418,6 +16418,7 @@ void BattleDestroyYesNoCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
+// Start Battle Settings: Nickname
 static void RedrawPostBattleScene(void)
 {
     gBattleEnvironment = BATTLE_ENVIRONMENT_PLAIN;
@@ -16431,6 +16432,7 @@ static void RedrawPostBattleScene(void)
     ShowBg(0);
     ShowBg(3);
 }
+// End Battle Settings: Nickname
 
 static void Cmd_trygivecaughtmonnick(void)
 {
@@ -16499,7 +16501,7 @@ static void Cmd_trygivecaughtmonnick(void)
         if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
         {
             SetMonData(GetBattlerMon(gBattlerTarget), MON_DATA_NICKNAME, gBattleStruct->caughtMonNick);
-            // Start nickname
+            // Start Battle Settings: Nickname
             //gBattleCommunication[MULTIUSE_STATE]++;
             if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_FORCED && !IsMonNicknamed(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]))
             {
@@ -16513,7 +16515,7 @@ static void Cmd_trygivecaughtmonnick(void)
             {
                 gBattleCommunication[MULTIUSE_STATE]++;
             }
-            // End nickname
+            // End Battle Settings: Nickname
         }
         break;
     case 4:
@@ -18915,7 +18917,7 @@ void BS_JumpIfNoWhiteOut(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-// Start nickname
+// Start Battle Settings: Nickname
 void BS_JumpIfCantNickname(void)
 {
     NATIVE_ARGS(const u8 *jumpInstr);
@@ -18933,4 +18935,4 @@ void BS_JumpIfForcedToNickname(void)
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
-// End nickname
+// End Battle Settings: Nickname
