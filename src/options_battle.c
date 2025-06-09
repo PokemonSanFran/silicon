@@ -120,7 +120,7 @@ u32 ApplyExpMultipliers(struct Pokemon tempMon,s32 experience)
     if (CheckBagHasItem(ITEM_EXP_CHARM, 1))
         experience = (experience * 150) / 100;
 
-    return (GetExperienceExpMultiplerValue() * experience) / 100;
+    return (GetExperienceExpMultiplerValue() * experience);
 }
 
 static void CalcAndSetNewExp(struct BoxPokemon *boxMon, struct Pokemon tempMon,u32 battleEXP)
