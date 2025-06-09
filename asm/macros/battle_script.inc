@@ -2585,6 +2585,20 @@
 	.4byte \jumpInstr
 	.endm
 
+    @ Start nickname
+    @ Jumps to \jumpInstr if the Nickname Battle Option is set to None.
+    .macro jumpifcantnickname jumpInstr:req
+    callnative BS_JumpIfCantNickname
+    .4byte \jumpInstr
+    .endm
+
+    @ Jumps to \jumpInstr if the Nickname Battle Option is set to Forced.
+    .macro jumpifforcedtonickname jumpInstr:req
+    callnative BS_JumpIfForcedToNickname
+    .4byte \jumpInstr
+    .endm
+    @ End nickname
+
 @ END OF PSF BATTLE SCRIPT MACROS
 	.macro flushtextbox
 	printstring STRINGID_EMPTYSTRING3

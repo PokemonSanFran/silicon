@@ -1264,3 +1264,25 @@ enum optionBattleIntro GetBattleIntroSkip(void)
     return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INTRO];
 }
 
+// ***********************************************************************
+// Battle Settings: Nickname
+// // ***********************************************************************
+
+u32 GetNicknameOption(void)
+{
+    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_NICKNAME];
+}
+
+bool32 IsMonNicknamed(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
+
+    GetMonData(mon, MON_DATA_NICKNAME, nickname);
+    return (StringCompare(GetSpeciesName(species), nickname));
+}
+
+bool32 IsChosenMonNicknamed(void)
+{
+    return IsMonNicknamed(&gPlayerParty[gSpecialVar_0x8004]);
+}

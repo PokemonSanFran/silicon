@@ -1,0 +1,24 @@
+script EventScript_TryToNicknamePokemon {
+    specialvar(VAR_TEMP_1, GetNicknameOption)
+    if (var(VAR_TEMP_1) == BATTLE_SCRIPT_OPTION_NICKNAME_NONE) {
+        return
+    }
+    elif (var(VAR_TEMP_1) == BATTLE_SCRIPT_OPTION_NICKNAME_FORCED) {
+        call(Common_EventScript_GetGiftMonPartySlot)
+        specialvar(VAR_TEMP_1, IsChosenMonNicknamed)
+        while (var(VAR_TEMP_1) == 0) {
+            call(Common_EventScript_NameReceivedPartyMon)
+            specialvar(VAR_TEMP_1, IsChosenMonNicknamed)
+            if (var(VAR_TEMP_1) == 0) {
+                msgbox("Your Pokémon must have a nickname!")
+            }
+        }
+    } else {
+        call(Common_EventScript_GetGiftMonPartySlot)
+        msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            call(Common_EventScript_NameReceivedPartyMon)
+        }
+    }
+    return
+}

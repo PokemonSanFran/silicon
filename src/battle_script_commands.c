@@ -16418,6 +16418,20 @@ void BattleDestroyYesNoCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
+static void RedrawPostBattleScene(void)
+{
+    gBattleEnvironment = BATTLE_ENVIRONMENT_PLAIN;
+    InitBattleBgsVideo();
+    LoadBattleTextboxAndBackground();
+    gBattle_BG3_X = 256;
+    ResetSpriteData();
+    ResetTasks();
+    FreeAllSpritePalettes();
+    SetVBlankCallback(VBlankCB_Battle);
+    ShowBg(0);
+    ShowBg(3);
+}
+
 static void Cmd_trygivecaughtmonnick(void)
 {
     CMD_ARGS();
@@ -16485,7 +16499,21 @@ static void Cmd_trygivecaughtmonnick(void)
         if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
         {
             SetMonData(GetBattlerMon(gBattlerTarget), MON_DATA_NICKNAME, gBattleStruct->caughtMonNick);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            // Start nickname
+            //gBattleCommunication[MULTIUSE_STATE]++;
+            if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_FORCED && !IsMonNicknamed(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]))
+            {
+                PrepareStringBattle(STRINGID_POKEMONMUSTHAVEANICKNAME, gBattlerTarget);
+                gBattleCommunication[MSG_DISPLAY] = 1;
+                gBattleCommunication[MULTIUSE_STATE] = 2;
+                RedrawPostBattleScene();
+                return;
+            }
+            else
+            {
+                gBattleCommunication[MULTIUSE_STATE]++;
+            }
+            // End nickname
         }
         break;
     case 4:
@@ -18886,3 +18914,23 @@ void BS_JumpIfNoWhiteOut(void)
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+// Start nickname
+void BS_JumpIfCantNickname(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+    if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_NONE)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_JumpIfForcedToNickname(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+    if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_FORCED)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+// End nickname

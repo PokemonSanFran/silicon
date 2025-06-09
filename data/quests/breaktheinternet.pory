@@ -485,12 +485,7 @@ script Breaktheinternet_GiveGift_Script {
 }
 script Breaktheinternet_SendGiftToParty_Script {
     call(Breaktheinternet_RecievedGiftFanfare)
-        msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
-
-        if (var(VAR_RESULT) == YES){
-            call(Common_EventScript_GetGiftMonPartySlot)
-            call(Common_EventScript_NameReceivedPartyMon)
-        }
+    call(EventScript_TryToNicknamePokemon)
     return
 }
 

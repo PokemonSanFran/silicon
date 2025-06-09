@@ -71,6 +71,7 @@
 #include "constants/buzzr.h"
 #include "constants/story_jump.h"
 #include "constants/pokevial.h" @ Pokevial Branch
+#include "constants/options_battle.h" @ nickname
 #include "constants/story_jump.h"
 #include "constants/options_game.h"
 #include "constants/glass.h"
@@ -1231,6 +1232,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/restored_battle_frontier/tower_battleroom.inc"
 .include "data/scripts/buzzr.inc"
 .include "data/scripts/apps.inc"
+.include "data/scripts/nickname.inc" @ nickname
 .include "data/scripts/cutscene.inc"
 .include "data/scripts/fishing.inc"
 .include "data/scripts/surprise_trade.inc" @ surpriseTrade
