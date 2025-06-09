@@ -231,7 +231,7 @@ static bool32 HasAlreadyGivenPointsBoxMons(void)
     return FALSE;
 }
 
-void ApplyPointsBoxMons(s32 battleEXP, u16 defeatedSpecies)
+void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
 {
     u32 boxId, boxPosition, totalEVs;
     struct Pokemon tempMon;
