@@ -97,6 +97,8 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
 {
     u8 level = 0;
 
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Experience
+
     PARAMETRIZE { level = 10; }
     PARAMETRIZE { level = 50; }
     PARAMETRIZE { level = MAX_LEVEL; }
