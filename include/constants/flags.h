@@ -747,7 +747,7 @@
 #define FLAG_DEFEATED_CONSTRUCTION_MON_A 0x2A6 // Silicon Flag
 #define FLAG_DEFEATED_CONSTRUCTION_MON_B 0x2A7 // Silicon Flag
 #define FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT 0x2A8 // Silicon Flag
-#define FLAG_UNUSED_0x2A9  0x2A9 // Unused Flag
+#define FLAG_LITTLE_CUP_BATTLE                                      0x2A9 // Silicon Flag
 #define FLAG_UNUSED_0x2AA  0x2AA // Unused Flag
 #define FLAG_UNUSED_0x2AB  0x2AB // Unused Flag
 #define FLAG_UNUSED_0x2AC  0x2AC // Unused Flag

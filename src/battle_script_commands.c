@@ -73,6 +73,7 @@
 #include "options_battle.h" // Battle Settings
 #include "data/battle_move_effects.h"
 #include "ui_pokedex.h" // pokedex
+#include "little_cup.h" // littlecup
 
 // table to avoid ugly powing on gba (courtesy of doesnt)
 // this returns (i^2.5)/4
@@ -4913,6 +4914,10 @@ static bool32 BattleTypeAllowsExp(void)
               | BATTLE_TYPE_BATTLE_TOWER
               | BATTLE_TYPE_EREADER_TRAINER))
         return FALSE;
+    // Start littlecup
+    else if (IsCurrentBattleLittleCup())
+        return FALSE;
+    // End littlecup
     else
         return TRUE;
 }
@@ -5338,6 +5343,11 @@ bool32 NoAliveMonsForPlayer(void)
 
     if (B_MULTI_BATTLE_WHITEOUT < GEN_4 && gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
         maxI = MULTI_PARTY_SIZE;
+
+    // Start littlecup
+    if (WasPreviousBattleLittleCup())
+        return TRUE;
+    // End littlecup
 
     // Get total HP for the player's party to determine if the player has lost
     for (i = 0; i < maxI; i++)
