@@ -903,9 +903,6 @@ static bool32 IsTrainerScalingOff(void)
 
 u32 HandleScaledLevel(u32 origEnemyLevel, u32 origNumEnemyMon)
 {
-   if (TESTING)
-       return origEnemyLevel;
-
    if (IsTrainerScalingOff())
        return origEnemyLevel;
 
