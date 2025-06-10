@@ -213,8 +213,8 @@ enum optionBattleBagItemsValues
 
 enum optionBattleLevelValues
 {
-    BATTLE_OPTION_LEVEL_CAP,
     BATTLE_OPTION_LEVEL_NO_CAP,
+    BATTLE_OPTION_LEVEL_CAP,
     BATTLE_OPTION_LEVEL_COUNT,
 };
 
