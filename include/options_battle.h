@@ -3,7 +3,7 @@
 // Battle Settings: Experience
 bool32 IsExperienceOptionNotActive(void);
 bool32 IsExperienceOptionAll(void);
-u32 ApplyExpMultipliers(struct Pokemon,s32);
+u64 ApplyExpMultipliers(struct Pokemon,s32);
 u32 GetMonItemHoldEffect(u16);
 void ApplyPointsBoxMons(u32, u16);
 void PrintExpShareMessage(void);

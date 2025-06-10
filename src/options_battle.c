@@ -107,7 +107,7 @@ static bool32 IsMonMaxLevel(struct Pokemon tempMon)
     return (GetMonData(&tempMon,MON_DATA_LEVEL) >= MAX_LEVEL);
 }
 
-u32 ApplyExpMultipliers(struct Pokemon tempMon,s32 experience)
+u64 ApplyExpMultipliers(struct Pokemon tempMon,s32 experience)
 {
     if (IsTradedMon(&tempMon))
         experience = (experience * 150) / 100;
@@ -126,7 +126,7 @@ u32 ApplyExpMultipliers(struct Pokemon tempMon,s32 experience)
 static void CalcAndSetNewExp(struct BoxPokemon *boxMon, struct Pokemon tempMon,u32 battleEXP)
 {
     u32 origExp = GetBoxMonData(boxMon,MON_DATA_EXP);
-    u32 totalExp = ApplyExpMultipliers(tempMon,battleEXP) + origExp;
+    u64 totalExp = ApplyExpMultipliers(tempMon,battleEXP) + origExp;
     SetBoxMonData(boxMon,MON_DATA_EXP,&totalExp);
 }
 
@@ -903,6 +903,9 @@ static bool32 IsTrainerScalingOff(void)
 
 u32 HandleScaledLevel(u32 origEnemyLevel, u32 origNumEnemyMon)
 {
+   if (TESTING)
+       return origEnemyLevel;
+
    if (IsTrainerScalingOff())
        return origEnemyLevel;
 
