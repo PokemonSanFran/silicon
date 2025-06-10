@@ -266,7 +266,6 @@ u8 MovementAction_FlyUp_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_Fly_Finish(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_FlyDown_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_FlyDown_Step1(struct ObjectEvent *, struct Sprite *);
-u8 MovementAction_Rematch_Step0(struct ObjectEvent *, struct Sprite *); // rematch_action
 u8 MovementActionFunc_RunSlowDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementActionFunc_RunSlowUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementActionFunc_RunSlowLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
@@ -1650,28 +1649,28 @@ bool8 (*const gMovementActionFuncs_WalkSlowStairsRight[])(struct ObjectEvent *, 
     MovementAction_PauseSpriteAnim,
 };
 
-u8 (*const gMovementActionFuncs_SurfStillDown[])(struct ObjectEvent *, struct Sprite *) = 
+u8 (*const gMovementActionFuncs_SurfStillDown[])(struct ObjectEvent *, struct Sprite *) =
 {
     MovementAction_SurfStillDown_Step0,
     MovementAction_SurfStillDown_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
-u8 (*const gMovementActionFuncs_SurfStillUp[])(struct ObjectEvent *, struct Sprite *) = 
+u8 (*const gMovementActionFuncs_SurfStillUp[])(struct ObjectEvent *, struct Sprite *) =
 {
     MovementAction_SurfStillUp_Step0,
     MovementAction_SurfStillUp_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
-u8 (*const gMovementActionFuncs_SurfStillLeft[])(struct ObjectEvent *, struct Sprite *) = 
+u8 (*const gMovementActionFuncs_SurfStillLeft[])(struct ObjectEvent *, struct Sprite *) =
 {
     MovementAction_SurfStillLeft_Step0,
     MovementAction_SurfStillLeft_Step1,
     MovementAction_PauseSpriteAnim,
 };
 
-u8 (*const gMovementActionFuncs_SurfStillRight[])(struct ObjectEvent *, struct Sprite *) = 
+u8 (*const gMovementActionFuncs_SurfStillRight[])(struct ObjectEvent *, struct Sprite *) =
 {
     MovementAction_SurfStillRight_Step0,
     MovementAction_SurfStillRight_Step1,
