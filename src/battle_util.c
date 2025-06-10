@@ -52,6 +52,7 @@
 #include "constants/pokemon.h"
 #include "options_battle.h" // Battle Settings: Experience
 #include "ui_options_menu.h" // siliconMerge
+#include "little_cup.h" // littlecup
 
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
@@ -7598,6 +7599,10 @@ u8 GetAttackerObedienceForAction()
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return OBEYS;
+    // Start littlecup
+    if (IsCurrentBattleLittleCup())
+        return OBEYS;
+    // End littlecup
     if (BattlerHasAi(gBattlerAttacker))
         return OBEYS;
 

@@ -14,6 +14,7 @@
 #include "sound.h"
 #include "line_break.h"
 #include "event_data.h"
+#include "little_cup.h" // littlecup
 
 // Battle Settings: Experience
 static u32 GetBattleExperienceOption(void);
@@ -913,6 +914,9 @@ u32 HandleScaledLevel(u32 origEnemyLevel, u32 origNumEnemyMon)
 {
    if (IsTrainerScalingOff())
        return origEnemyLevel;
+
+   if (IsCurrentBattleLittleCup())
+       return LITTLE_CUP_LEVEL;
 
    //if (IsPlayerUsingGlassOnDefeatedTrainer())
        //return origEnemyLevel;
