@@ -379,7 +379,7 @@ static const struct SpriteTemplate sSpriteTemplate_Emote =
 static const struct SpriteTemplate sSpriteTemplate_Rematch =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_EMOTES,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_RematchIcon,
@@ -1029,7 +1029,7 @@ u8 FldEff_RematchIcon(void)
 
     sprite = &gSprites[spriteId];
     SetIconSpriteData(sprite, FLDEFF_WANT_REMATCH, 0);
-    sprite->oam.paletteNum = 0;
+    UpdateSpritePaletteByTemplate(&sSpriteTemplate_Emote, sprite);
     return 0;
 }
 

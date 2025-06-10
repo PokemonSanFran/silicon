@@ -226,6 +226,8 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
 bool8 UpdateVsSeekerStepCounter(void)
 {
 #if FREE_MATCH_CALL == FALSE
+    // Start rematch_action
+    /*
     u8 x = 0;
 
     if (!I_VS_SEEKER_CHARGING) return FALSE;
@@ -251,6 +253,8 @@ bool8 UpdateVsSeekerStepCounter(void)
             return TRUE;
         }
     }
+    */
+    // End rematch_action
 #endif //FREE_MATCH_CALL
 
     return FALSE;
@@ -291,14 +295,22 @@ static void ResetMovementOfRematchableTrainers(void)
 static void VsSeekerResetInBagStepCounter(void)
 {
 #if FREE_MATCH_CALL == FALSE
+    // Start rematch_action
+    /*
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
+    */
+    // End rematch_action
 #endif //FREE_MATCH_CALL
 }
 
 static void VsSeekerResetChargingStepCounter(void)
 {
 #if FREE_MATCH_CALL == FALSE
+    // Start rematch_action
+    /*
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
+    */
+    // End rematch_action
 #endif //FREE_MATCH_CALL
 }
 
@@ -414,7 +426,12 @@ static void Task_VsSeeker_ShowResponseToPlayer(u8 taskId)
 static u8 CanUseVsSeeker(void)
 {
 #if FREE_MATCH_CALL == FALSE
+    // Start rematch_action
+    /*
     u8 vsSeekerChargeSteps = gSaveBlock1Ptr->trainerRematchStepCounter;
+    */
+    u8 vsSeekerChargeSteps = VSSEEKER_RECHARGE_STEPS;
+    // End rematch_action
 
     if ((vsSeekerChargeSteps == VSSEEKER_RECHARGE_STEPS) && (GetRematchableTrainerLocalId() == 0xFF))
         return VSSEEKER_NO_ONE_IN_RANGE;
@@ -704,24 +721,18 @@ static u8 GetResponseMovementTypeFromTrainerGraphicsId(u8 graphicsId)
 }
 #endif //FREE_MATCH_CALL
 
-//static u16 GetTrainerFlagFromScript(const u8 *script) // rematch_action
-u16 GetTrainerFlagFromScript(const u8 *script) // rematch_action
-    /*
- * The trainer flag is a little-endian short located +2 from
- * the script pointer, assuming the trainerbattle command is
- * first in the script.  Because scripts are unaligned, and
- * because the ARM processor requires shorts to be 16-bit
- * aligned, this function needs to perform explicit bitwise
- * operations to get the correct flag.
- *
- * 5c XX YY ZZ ...
- *       -- --
-     */
+// Start rematch_action
+//static u16 GetTrainerFlagFromScript(const u8 *script)
+u16 GetTrainerFlagFromScript(const u8 *script)
+// End rematch_action
 {
-    u16 trainerFlag;
+    /*
+     *  * The trainer flag is a located 3 bytes (command + flags + localIdA) from the script pointer, assuming the trainerbattle command is first in the script.
+     *   * Because scripts are unaligned, and because the ARM processor requires shorts to be 16-bit aligned, this function needs to perform explicit bitwise operations to get the correct flag.
+     *        */
 
-    script += 2;
-    trainerFlag = script[0];
+    script += 3;
+    u16 trainerFlag = script[0];
     trainerFlag |= script[1] << 8;
     return trainerFlag;
 }

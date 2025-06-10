@@ -1834,26 +1834,39 @@ void IncrementRematchStepCounter(void)
     if (IsVsSeekerEnabled())
         return;
 
+    // Start rematch_action
+    /*
     if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
         gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
     else
         gSaveBlock1Ptr->trainerRematchStepCounter++;
+    */
+    // End rematch_action
 #endif //FREE_MATCH_CALL
 }
 
 #if FREE_MATCH_CALL == FALSE
 static bool32 IsRematchStepCounterMaxed(void)
 {
+    // Start rematch_action
+    /*
     if (HasAtLeastFiveBadges() && gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
         return TRUE;
     else
+    */
+    // End rematch_action
         return FALSE;
 }
 
 void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
 {
     if (IsRematchStepCounterMaxed() && UpdateRandomTrainerRematches(gRematchTable, mapGroup, mapNum) == TRUE)
+    // Start rematch_action
+        return;
+    /*
         gSaveBlock1Ptr->trainerRematchStepCounter = 0;
+    */
+    // End rematch_action
 }
 #endif //FREE_MATCH_CALL
 
@@ -1870,6 +1883,7 @@ bool32 IsRematchTrainerIn(u16 mapGroup, u16 mapNum)
 #if FREE_MATCH_CALL == FALSE
 static u16 GetRematchTrainerId(u16 trainerId)
 {
+    return GetPSFRematchTrainerId(trainerId); // rematch_action
     if (FlagGet(I_VS_SEEKER_CHARGING) && (I_VS_SEEKER_CHARGING != 0))
         return GetRematchTrainerIdVSSeeker(trainerId);
     else

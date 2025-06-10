@@ -11385,16 +11385,6 @@ bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *object
     return TRUE;
 }
 
-// Start rematch_action
-bool8 MovementAction_Rematch_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
-{
-    ObjectEventGetLocalIdAndMap(objectEvent, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-    FieldEffectStart(FLDEFF_WANT_REMATCH);
-    sprite->sActionFuncId = 1;
-    return TRUE;
-}
-// End rematch_action
-
 bool8 PlayerIsUnderWaterfall(struct ObjectEvent *objectEvent)
 {
     s16 x;
