@@ -1,16 +1,7 @@
 stages:
   - build
-  - deploy
   - test
-
-variables:
-  GAME_VERSION: "EMERALD"
-  GAME_REVISION: "0"
-  GAME_LANGUAGE: "ENGLISH"
-  COMPARE: "0"
-  UNUSED_ERROR: "1"
-  GIT_SUBMODULE_STRATEGY: recursive
-  NPROC: "16"
+  - deploy
 
 build_rom:
   stage: build
@@ -24,10 +15,26 @@ build_rom:
       - silicon.gba
     expire_in: 5 minutes
 
+test_rom:
+  stage: test
+  image: ubuntu:latest
+  before_script:
+    - apt update && apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go make git cmake
+    - git clone --depth=1 --single-branch git@github.com:mgba-emu/mgba.git
+    - cd mgba
+    - mkdir build
+    - cd build
+    - cmake .. -DBUILD_ROM_TEST=ON -DDISABLE_FRONTENDS=ON
+    - make -j$(nproc)
+    - sudo make install
+    - cd ../../  # go back to the project root if needed
+  script:
+    - make -j$(nproc) check
+
 upload_to_catbox:
     stage: deploy
     image: ubuntu:latest
-    needs: ["build_rom"]
+    needs: ["test_rom"]
     before_script:
       - apt update && apt install -y git gettext curl jq
     script:
@@ -46,11 +53,3 @@ upload_to_catbox:
         curl -d @expanded.json -H "Content-Type: application/json" "$DISCORD_WEBHOOK_URL"
     rules:
       - if: '$CI_COMMIT_BRANCH == "main"'
-
-test_rom:
-  stage: test
-  image: ubuntu:latest
-  before_script:
-    - apt update && apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go make git
-  script:
-    - make -j$(nproc) check
