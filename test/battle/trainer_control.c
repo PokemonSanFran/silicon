@@ -11,6 +11,7 @@
 #include "constants/abilities.h"
 #include "constants/trainers.h"
 #include "constants/battle.h"
+#include "options_battle.h" // Battle Settings: Trainer Scaling
 
 #define NUM_TEST_TRAINERS 11
 
@@ -32,12 +33,29 @@ enum DifficultyLevel GetTrainerDifficultyLevelTest(u16 trainerId)
     return difficulty;
 }
 
+// Start Battle Settings: Trainer Scaling
+u32 TrainerScalingGetLevel(u32 trainerId, u32 slot)
+{
+    return sTestTrainers[GetTrainerDifficultyLevelTest(trainerId)][trainerId].party[slot].lvl;
+}
+
+u32 TrainerScalingGetPartySize(u32 trainerId)
+{
+    return sTestTrainers[GetTrainerDifficultyLevelTest(trainerId)][trainerId].partySize;
+}
+// End Battle Settings: Trainer Scaling
+
 TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
 {
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
     u32 currTrainer = 0;
     u8 nickBuffer[20];
     CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainers[GetTrainerDifficultyLevelTest(currTrainer)][currTrainer], TRUE, BATTLE_TYPE_TRAINER);
+// Start Battle Settings: Trainer Scaling
+    u32 expectedLevel[TrainerScalingGetPartySize(currTrainer)];
+    expectedLevel[0] = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    expectedLevel[1] = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,1),TrainerScalingGetPartySize(currTrainer));
+// End Battle Settings: Trainer Scaling
     EXPECT(IsMonShiny(&testParty[0]));
     EXPECT(!IsMonShiny(&testParty[1]));
 
@@ -85,8 +103,12 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
     EXPECT(GetMonData(&testParty[1], MON_DATA_SPATK_EV, 0) == 0);
     EXPECT(GetMonData(&testParty[1], MON_DATA_SPDEF_EV, 0) == 0);
 
-    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL, 0) == 67);
-    EXPECT(GetMonData(&testParty[1], MON_DATA_LEVEL, 0) == 5);
+    // Start Battle Settings: Trainer Scaling
+    //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL, 0) == 67);
+    //EXPECT(GetMonData(&testParty[1], MON_DATA_LEVEL, 0) == 5);
+    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL, 0) == expectedLevel[0]);
+    EXPECT(GetMonData(&testParty[1], MON_DATA_LEVEL, 0) == expectedLevel[1]);
+    // End Battle Settings: Trainer Scaling
 
     EXPECT(GetMonData(&testParty[0], MON_DATA_MOVE1, 0) == MOVE_AIR_SLASH);
     EXPECT(GetMonData(&testParty[0], MON_DATA_MOVE2, 0) == MOVE_BARRIER);
@@ -206,8 +228,12 @@ TEST("Difficulty changes which party if used for NPCs if defined for the difficu
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
     u32 currTrainer = 2;
     CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainers[GetTrainerDifficultyLevelTest(currTrainer)][currTrainer], TRUE, BATTLE_TYPE_TRAINER);
+    // Start Battle Settings: Trainer Scaling
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_ARCEUS);
-    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 99);
+    //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 99);
+    u32 expectedLevel = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == expectedLevel);
+    // End Battle Settings: Trainer Scaling
     Free(testParty);
 }
 
@@ -217,8 +243,12 @@ TEST("Difficulty changes which party if used for NPCs if defined for the difficu
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
     u32 currTrainer = 2;
     CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainers[GetTrainerDifficultyLevelTest(currTrainer)][currTrainer], TRUE, BATTLE_TYPE_TRAINER);
+    // Start Battle Settings: Trainer Scaling
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_MEWTWO);
-    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 50);
+    //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 50);
+    u32 expectedLevel = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == expectedLevel);
+    // End Battle Settings: Trainer Scaling
     Free(testParty);
 }
 
