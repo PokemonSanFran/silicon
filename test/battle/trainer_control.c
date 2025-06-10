@@ -218,7 +218,11 @@ TEST("Difficulty changes which party if used for NPCs if defined for the difficu
     u32 currTrainer = 2;
     CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainers[GetTrainerDifficultyLevelTest(currTrainer)][currTrainer], TRUE, BATTLE_TYPE_TRAINER);
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_METAPOD);
-    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 1);
+    // Start Battle Settings: Trainer Scaling
+    //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 1);
+    u32 expectedLevel = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == expectedLevel);
+    // End Battle Settings: Trainer Scaling
     Free(testParty);
 }
 
