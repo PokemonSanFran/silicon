@@ -1,5 +1,3 @@
-//PSF TODO reach out to oldplayer when starting on the Little Cup Gym https://discord.com/channels/@me/1091534369123991634/1091541464019898448
-//https://discord.com/channels/419213663107416084/1077168246555430962/1077214746765434971
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const KAUNA = 1
 
@@ -38,8 +36,15 @@ msgbox(gText_EnterKauna_SoundsExciting,,SPEAKER_ALICIA)
     goto(EnterKauna_StartGymBattle_Script)
 }
 
-script EnterKauna_StartGymBattle_Script {
-    trainerbattle_single(TRAINER_KAUNA, gText_EnterKauna_HaHaNoYeah, gText_EnterKauna_ImNotTrippin, EnterKauna_KaunaDefeated_Script, NO_MUSIC)
+script EnterKauna_StartGymBattle_Script
+{
+    lock
+    faceplayer
+    msgbox(gText_EnterKauna_HaHaNoYeah,,SPEAKER_KAUNA)
+    closemessage
+    special(PreparePartyForLittleCupBattle)
+    trainerbattle_no_intro(TRAINER_KAUNA, gText_EnterKauna_ImNotTrippin)
+    goto(EnterKauna_KaunaDefeated_Script)
 }
 
 script EnterKauna_KaunaDefeated_Script {
@@ -64,9 +69,8 @@ script EnterKauna_KaunaDefeated_Script {
 
 script EnterKauna_PostDefeat1_Dialogue {
     lock
-msgbox(gText_EnterKauna_KeepingTheBabiesSafe,MSGBOX_NPC,SPEAKER_KAUNA)
-
     setvar(VAR_GYM_4_STATE,GYM_EXPLAINED_BADGE_AND_TM)
+    msgbox(gText_EnterKauna_KeepingTheBabiesSafe,MSGBOX_NPC,SPEAKER_KAUNA)
     closemessage
     release
     end
@@ -97,8 +101,9 @@ text gText_EnterKauna_BruhYouveGotta {
         format("Bruh, you've gotta go some day. Sickest place to breed Pokémon in the WORLD. And I've been to them all. The breeze in your hair, the sand in your tires, the faint smell of ocean... man that shit just hits, you know? Gets me all fired up!")
 }
 
-text gText_EnterKauna_OhUhSoundsCool {
-        format("Oh uh, sounds cool I guess...")
+text gText_EnterKauna_OhUhSoundsCool
+{
+    format("Oh uh, sounds cool I guess...")
 }
 
 text gText_EnterKauna_ForRealISwear {

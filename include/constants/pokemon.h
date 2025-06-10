@@ -149,6 +149,7 @@
 
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100
+#define LITTLE_CUP_LEVEL 5 // littlecup
 
 #define MAX_DYNAMAX_LEVEL 10
 

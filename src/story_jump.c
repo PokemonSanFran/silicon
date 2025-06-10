@@ -62,6 +62,7 @@
 #include "post_battle_event_funcs.h"
 #include "quest_logic.h"
 #include "siliconStarter.h"
+#include "constants/heal_locations.h"
 
 static void IncrementStorylineVariable();
 static void PreventVariableFromReversion(u16, u8, u8);
@@ -575,6 +576,7 @@ void GiveItems_Prologue_Intro(bool32 jumpType)
     VarSet(VAR_PROLOGUE_STATE,GIVEN_POKEMON);
     FlagSet(FLAG_SYS_APP_PROLOUGE_GET);
     FlagSet(FLAG_SET_WALL_CLOCK);
+    SetLastHealLocationWarp(HEAL_LOCATION_OROLAND_COLISEUM_ARENA);
 }
 
 void JumpPlayerTo_Prologue_Intro(bool32 jumpType)
@@ -677,6 +679,7 @@ void JumpPlayerTo_StarterChoice(bool32 jumpType)
 void FlagsVarWarp_ImProbablyBetterThanYou(void)
 {
     VarSet(VAR_PLAYER_HOME_STATE, HAS_MET_CHARLOTTE);
+    SetLastHealLocationWarp(HEAL_LOCATION_CUCONU_TOWN_COMPOUND_2F);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F), MAP_NUM(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F), 2, USE_WARP_ID, USE_WARP_ID);
 }
 
@@ -1757,6 +1760,7 @@ void JumpPlayerTo_WelcometotheHallofFame(bool32 jumpType)
 void FlagsVarWarp_BeingChampionisHard()
 {
     VarSet(VAR_STORYLINE_STATE, STORY_EXPLORE_ZENZU_ISLAND);
+    SetLastHealLocationWarp(HEAL_LOCATION_PETAROSA_BOROUGH_COMPOUND_1F);
     SetWarpDestination(MAP_GROUP(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F),MAP_NUM(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F),NO_WARP_ID,7,9);
 }
 
@@ -2286,6 +2290,7 @@ void JumpPlayerTo_MaskOff_Alcmene(bool32 jumpType)
 void FlagsVarWarp_LockedOut()
 {
     FlagSet(FLAG_LOCKEDOUT_PLAYED);
+    SetLastHealLocationWarp(HEAL_LOCATION_HALAI_ISLAND_KAI);
     SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_KAI),MAP_NUM(MAP_HALAI_ISLAND_KAI),0,USE_WARP_ID,USE_WARP_ID);
 }
 

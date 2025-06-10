@@ -1,1 +1,207 @@
-mapscripts Chasilla_Gym_MapScripts {}
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const ATTENDANT = 2
+
+mapscripts Chasilla_Gym_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0, 0: Chasilla_Gym_EventScript_EligibilityChecker
+    ]
+}
+
+script Chasilla_Gym_EventScript_EligibilityChecker
+{
+    addvar(VAR_TEMP_0,1)
+    lock
+    specialvar(VAR_RESULT, CheckPlayerLittleCupEligibility)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        goto(Chasilla_Gym_Attendant_Intro_Dialogue)
+    }
+    goto(Chasilla_Gym_Attendant_CheckDialogue_Script)
+}
+
+script Chasilla_Gym_Attendant_CheckDialogue_Script
+{
+    if(flag(FLAG_BADGE04_GET))
+    {
+        release
+        end
+    }
+    // if has battled anybody in the gym, then release and end PSF TODO
+    goto(Chasilla_Gym_Attendant_Inform_Script)
+}
+
+script Chasilla_Gym_Attendant_Inform_Script
+{
+    applymovement(PLAYER,Common_Movement_FaceRight)
+    waitmovement(PLAYER)
+    msgbox(gText_Chasilla_Gym_WelcomeTo)
+    msgbox(gText_Chasilla_Gym_ComeTalkToMe)
+    closemessage
+    release
+    end
+}
+
+script Chasilla_Gym_Attendant_Interact_Script
+{
+    lock
+    faceplayer
+    if(flag(FLAG_BADGE04_GET))
+    {
+        goto(Chasilla_Gym_Attendant_Victory_Script)
+    }
+
+    // if has been battled but lost, give the player a hint
+
+    goto(Chasilla_Gym_Attendant_Intro_Dialogue)
+}
+
+script Chasilla_Gym_Attendant_Intro_Dialogue
+{
+    msgbox(gText_Chasilla_Gym_WelcomeTo)
+    msgbox(gText_Chasilla_Gym_WeHaveState)
+    specialvar(VAR_RESULT, CheckPlayerLittleCupEligibility)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        goto(Chasilla_Gym_Attendant_Refuse_Dialogue)
+    }
+    if (var(VAR_0x8005) == SPECIES_NONE)
+    {
+        call(Chasilla_Gym_Attendant_Accept_NoDevolve_Dialogue)
+    }
+    else
+    {
+        call(Chasilla_Gym_Attendant_Accept_Devolve_Dialogue)
+    }
+    goto(Chasilla_Gym_Attendant_ExplainMenu_Dialogue)
+}
+
+script Chasilla_Gym_Attendant_Accept_NoDevolve_Dialogue
+{
+    msgbox(gText_Chasilla_Gym_OhItLooks)
+}
+
+script Chasilla_Gym_Attendant_Accept_Devolve_Dialogue
+{
+    bufferspeciesname(STR_VAR_1, VAR_0x8005)
+    bufferspeciesname(STR_VAR_2, VAR_0x8004)
+    msgbox(gText_Chasilla_Gym_ForExample)
+}
+
+script Chasilla_Gym_Attendant_Refuse_Dialogue
+{
+    msgbox(gText_Chasilla_Gym_DoesntLook)
+    msgbox(gText_Chasilla_Gym_ComeBack)
+    closemessage
+    goto(Chasilla_Gym_WarpOutside_Script)
+}
+
+script Chasilla_Gym_WarpOutside_Script
+{
+    warp(MAP_CHASILLA,0)
+    waitstate
+    end
+}
+
+script Chasilla_Gym_Attendant_ExplainMenu_Dialogue
+{
+    msgbox(gText_Chasilla_Gym_DidYouWant)
+    call(Chasilla_Gym_Attendant_ExplainMenu_Script)
+    call(Chasilla_Gym_Attendant_HandleMenu_Script)
+}
+
+script Chasilla_Gym_Attendant_ExplainMenu_Script
+{
+   dynmultichoice(1,1,TRUE,3,0,DYN_MULTICHOICE_CB_NONE,
+    "Levels & Experience",
+    "Moves",
+    "Non-Evolving",
+    "All set!",
+)
+}
+
+script Chasilla_Gym_Attendant_HandleMenu_Script
+{
+    switch (var(VAR_RESULT))
+    {
+        case 0: msgbox(gText_Chasilla_Gym_WillNotGain)
+        case 1: msgbox(gText_Chasilla_Gym_ForgetMoves)
+        case 2: msgbox(gText_Chasilla_Gym_NonEvolve)
+        default:
+        case MULTI_B_PRESSED:
+        goto(Chasilla_Gym_Attendant_GoodLuck_Dialogue)
+    }
+
+    msgbox(gText_Chasilla_Gym_DontWorry)
+    goto(Chasilla_Gym_Attendant_ExplainMenu_Dialogue)
+}
+
+script Chasilla_Gym_Attendant_GoodLuck_Dialogue
+{
+    msgbox(gText_Chasilla_Gym_ComeTalkToMe)
+    closemessage
+    release
+    end
+}
+
+script Chasilla_Gym_Attendant_Victory_Script
+{
+    msgbox(gText_Chasilla_Gym_YouDidIt,MSGBOX_NPC)
+}
+
+text gText_Chasilla_Gym_WelcomeTo
+{
+    format("Welcome to Chasilla Gym! We only battle with our freshly bred Pokémon.")
+}
+text gText_Chasilla_Gym_ComeTalkToMe
+{
+    format("Our Gym can be confusing - good luck in there, but come talk to me if you have any questions!")
+}
+text gText_Chasilla_Gym_WeHaveState
+{
+    format("In order to level the playing field, you can only battle with Pokémon that are capable of evolving, but have not yet begun evolving.")
+}
+text gText_Chasilla_Gym_OhItLooks
+{
+    format("Oh, it looks like your party is already unevolved. You came prepared.")
+}
+text gText_Chasilla_Gym_ForExample
+{
+    format("For example, your {STR_VAR_1} will turn into {STR_VAR_2} during battle.")
+}
+text gText_Chasilla_Gym_DidYouWant
+{
+    format("Did you want to ask about any other rules?")
+}
+text gText_Chasilla_Gym_DoesntLook
+{
+    format("It doesn't look like any of the Pokémon in your party are related to evolution though.")
+}
+text gText_Chasilla_Gym_ComeBack
+{
+    format("Come back when you have some! We always suggest that Trainers use our state of the art breeding facilities. See you soon!")
+}
+text gText_Chasilla_Gym_WillNotGain
+{
+    format("At the beginning of every battle in this Gym, your Pokémon will revert to its earliest evolution level and back to Level 5. They will not gain experience or effort values during battle.")
+}
+
+text gText_Chasilla_Gym_ForgetMoves
+{
+    format("If your Pokémon know a move that an earlier evolution cannot learn, they'll forget it during battle.")
+}
+
+text gText_Chasilla_Gym_NonEvolve
+{
+    format("If you have a Pokémon in your party that is not related to evolution, it will disappear from your party.")
+}
+
+text gText_Chasilla_Gym_DontWorry
+{
+    format("Don't worry! At the end of battle, all your Pokémon will go back to normal.")
+}
+
+text gText_Chasilla_Gym_YouDidIt
+{
+    format("Congrats on the win, {PLAYER}!. I wonder how he battles when he's not here in the Gym...")
+}

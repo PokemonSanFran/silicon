@@ -56,6 +56,7 @@
 #include "glass.h" // siliconMerge
 #include "wild_encounter.h"
 #include "quest_logic.h" // fogBattle
+#include "little_cup.h" // littlecup
 
 enum {
     TRANSITION_TYPE_NORMAL,
@@ -1288,9 +1289,19 @@ static void SaveChangesToPlayerParty(void)
 
 static void HandleBattleVariantEndParty(void)
 {
-    if (B_FLAG_SKY_BATTLE == 0 || !FlagGet(B_FLAG_SKY_BATTLE))
+    // Start littlecup
+    ResetTemporaryLittleCupVar();
+    //if (B_FLAG_SKY_BATTLE == 0 || !FlagGet(B_FLAG_SKY_BATTLE))
+    if (!FlagGet(B_FLAG_SKY_BATTLE) && !(IsCurrentBattleLittleCup()))
         return;
-    SaveChangesToPlayerParty();
+    if (FlagGet(B_FLAG_SKY_BATTLE))
+        SaveChangesToPlayerParty();
+
+    if (IsCurrentBattleLittleCup())
+        SetTemporaryLittleCupVar();
+
+    FlagClear(FLAG_LITTLE_CUP_BATTLE);
+    // End littlecup
     LoadPlayerParty();
     FlagClear(B_FLAG_SKY_BATTLE);
 }

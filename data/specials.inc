@@ -692,3 +692,7 @@ gSpecials::
     def_special IsChosenMonNicknamed
     def_special GetNicknameOption
 // End Battle Settings: Nickname
+// Start littlecup
+    def_special CheckPlayerLittleCupEligibility
+    def_special PreparePartyForLittleCupBattle
+// End littlecup
