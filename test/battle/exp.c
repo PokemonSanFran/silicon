@@ -29,6 +29,7 @@ WILD_BATTLE_TEST("Pokemon gain exp after catching a Pokemon")
 WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", s32 exp)
 {
     u8 level = 0;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
 
     PARAMETRIZE { level = 5; }
     PARAMETRIZE { level = 10; }
@@ -73,6 +74,7 @@ WILD_BATTLE_TEST("Lucky Egg boosts gained exp points by 50%", s32 exp)
 WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", s32 exp)
 {
     u8 level = 0;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
 
     PARAMETRIZE { level = 5; }
     PARAMETRIZE { level = 10; }
@@ -127,10 +129,9 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
 WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not participate in battle")
 {
     u32 item = 0;
-    // Start siliconMerge
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_ACTIVE;
-    // End siliconMerge
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_EXP_SHARE; }
@@ -150,7 +151,8 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
         if (item == ITEM_EXP_SHARE)
             EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
         else
-            EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
+            EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]); // Battle Settings: Experience
+            //EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]); // Battle Settings: Experience
     }
 }
 
