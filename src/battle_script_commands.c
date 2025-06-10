@@ -16482,7 +16482,21 @@ static void Cmd_trygivecaughtmonnick(void)
         if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
         {
             SetMonData(GetBattlerMon(gBattlerTarget), MON_DATA_NICKNAME, gBattleStruct->caughtMonNick);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            // Start Battle Settings: Nickname
+            //gBattleCommunication[MULTIUSE_STATE]++;
+            if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_FORCED && !IsMonNicknamed(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]))
+            {
+                PrepareStringBattle(STRINGID_POKEMONMUSTHAVEANICKNAME, gBattlerTarget);
+                gBattleCommunication[MSG_DISPLAY] = 1;
+                // PSF TODO how do I insert a pause here?
+                gBattleCommunication[MULTIUSE_STATE] = 2;
+                return;
+            }
+            else
+            {
+                gBattleCommunication[MULTIUSE_STATE]++;
+            }
+            // End Battle Settings: Nickname
         }
         break;
     case 4:
@@ -18883,3 +18897,23 @@ void BS_JumpIfNoWhiteOut(void)
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+// Start Battle Settings: Nickname
+void BS_JumpIfCantNickname(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+    if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_NONE)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_JumpIfForcedToNickname(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+    if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_FORCED)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+// End Battle Settings: Nickname

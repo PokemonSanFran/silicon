@@ -725,4 +725,8 @@ extern const u8 Fishing_Cutscene_YellAtPlayer[];
 extern const u8 ThisIsntRandom_CheckDoor_Script[];
 // End siliconMerge
 
+// Start Battle Settings: Nickname
+extern const u8 gText_YourPokemonMustHaveNickname[];
+// End Battle Settings: Nickname
+
 #endif // GUARD_EVENT_SCRIPTS_H

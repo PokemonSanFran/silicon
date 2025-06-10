@@ -192,10 +192,16 @@ BattleScript_TryPrintCaughtMonInfo:
 	setbyte gBattleCommunication, 0
 	displaydexinfo
 BattleScript_TryNicknameCaughtMon::
+    @ Start Battle Settings: Nickname
+    jumpifcantnickname BattleScript_PostNamingScreen
+    jumpifforcedtonickname BattleScript_DoNicknameCaughtMon 
+    @ End Battle Settings: Nickname
 	printstring STRINGID_GIVENICKNAMECAPTURED
 	waitstate
 	setbyte gBattleCommunication, 0
+BattleScript_GiveCaughtMonANickname:: @ Battle Settings: Nickname
 	trygivecaughtmonnick
+BattleScript_PostNamingScreen::
 	givecaughtmon BattleScript_SuccessBallThrowEnd
 	printfromtable gCaughtMonStringIds
 	waitmessage B_WAIT_TIME_LONG
@@ -205,6 +211,13 @@ BattleScript_GiveCaughtMonEnd::
 BattleScript_SuccessBallThrowEnd::
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
+
+@ Start Battle Settings: Nickname
+BattleScript_DoNicknameCaughtMon::
+    setbyte gBattleCommunication + MULTIUSE_STATE, 2 @ Go straight to the case 2 of Cmd_trygivecaughtmonnick
+    printstring STRINGID_LETSGIVEITANICKNAME
+    goto BattleScript_GiveCaughtMonANickname
+@ End Battle Settings: Nickname
 
 BattleScript_WallyBallThrow::
 	printstring STRINGID_GOTCHAPKMNCAUGHTWALLY

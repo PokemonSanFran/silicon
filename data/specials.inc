@@ -688,3 +688,7 @@ gSpecials::
 	def_special UseBlankMessageToCancelPokemonPic
 	def_special EnterCode
 	def_special GetCodeFeedback
+// Start Battle Settings: Nickname
+    def_special IsChosenMonNicknamed
+    def_special GetNicknameOption
+// End Battle Settings: Nickname

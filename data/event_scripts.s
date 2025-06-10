@@ -71,6 +71,7 @@
 #include "constants/buzzr.h"
 #include "constants/story_jump.h"
 #include "constants/pokevial.h" @ Pokevial Branch
+#include "constants/options_battle.h" @ Battle Settings: Nickname
 #include "constants/story_jump.h"
 #include "constants/options_game.h"
 #include "constants/glass.h"
@@ -957,10 +958,6 @@ gText_PlayerHouseBootPC::
 gText_PokeblockLinkCanceled::
 	.string "The link was canceled.$"
 
-gText_UnusedNicknameReceivedPokemon::
-	.string "Want to give a nickname to\n"
-	.string "the {STR_VAR_2} you received?$"
-
 gText_PlayerWhitedOut::
 	.string "{PLAYER} is out of usable\n"
 	.string "POKéMON!\p{PLAYER} whited out!$"
@@ -1231,6 +1228,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/restored_battle_frontier/tower_battleroom.inc"
 .include "data/scripts/buzzr.inc"
 .include "data/scripts/apps.inc"
+.include "data/scripts/nickname.inc" @ Battle Settings: Nickname
 .include "data/scripts/cutscene.inc"
 .include "data/scripts/fishing.inc"
 .include "data/scripts/surprise_trade.inc" @ surpriseTrade

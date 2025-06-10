@@ -62,6 +62,11 @@ void TryToSetFirstPokemonCatchFlag();
 // Battle Settings: Item Healing
 bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 checkBattleUse, bool8 checkHeldEffect);
 
+// Battle Settings: Nickname
+u32 GetNicknameOption(void);
+bool32 IsMonNicknamed(struct Pokemon *mon);
+bool32 IsChosenMonNicknamed(void);
+
 // Battle Settings: Trainer Scaling
 u32 HandleScaledLevel(u32, u32);
 u32 HandleScaledSpecies(u32);

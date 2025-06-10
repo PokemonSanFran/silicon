@@ -278,12 +278,7 @@ script Quest_StealTheAxe_HasAxe_Dialogue{
 
 script Quest_StealTheAxe_SendGiftToParty_Script {
     call(Quest_StealTheAxe_RecievedGiftFanfare)
-        msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
-
-        if (var(VAR_RESULT) == YES){
-            call(Common_EventScript_GetGiftMonPartySlot)
-                call(Common_EventScript_NameReceivedPartyMon)
-        }
+    call(EventScript_TryToNicknamePokemon)
 }
 
 script Quest_StealTheAxe_SendGiftToPC_Script {

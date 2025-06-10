@@ -31,6 +31,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "options_visual.h" // siliconMerge
+#include "options_battle.h" // Battle Settings: Nickname
 #include "config/pokedex_plus_hgss.h"
 
 enum
@@ -4142,8 +4143,25 @@ static void Task_HandleCaughtMonPageInput(u8 taskId)
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
-        gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
-        gTasks[taskId].func = Task_ExitCaughtMonPage;
+        // Start Battle Settings: Nickname
+        //gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
+        //gTasks[taskId].func = Task_ExitCaughtMonPage;
+        if (GetNicknameOption() == BATTLE_OPTION_NICKNAME_NONE)
+        {
+            SetVBlankCallback(VBlankCB_Battle);
+            SetMainCallback1(CB1_Overworld);
+            SetMainCallback2(CB2_ReturnToField);
+            ClearMonSprites();
+            FreeWindowAndBgBuffers();
+            Free(sPokedexView);
+            DestroyTask(taskId);
+        }
+        else
+        {
+            gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
+            gTasks[taskId].func = Task_ExitCaughtMonPage;
+        }
+        // End Battle Settings: Nickname
     }
     // Flicker caught screen color
     else if (++gTasks[taskId].tPalTimer & 16)
