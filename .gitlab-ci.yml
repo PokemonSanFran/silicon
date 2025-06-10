@@ -20,11 +20,12 @@ test_rom:
     - cd mgba
     - mkdir build
     - cd build
-    - cmake .. -DBUILD_ROM_TEST=ON -DDISABLE_FRONTENDS=ON
+    - cmake .. -DBUILD_HEADLESS=ON -DDISABLE_FRONTENDS=ON
     - make -j$(nproc)
     - make install
     - cd ../../  # go back to the project root if needed
   script:
+    - chmod +x tools/mgba/mgba-rom-test
     - make -j$(nproc) check
 
 upload_to_catbox:
