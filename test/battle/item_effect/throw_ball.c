@@ -2,9 +2,9 @@
 #include "test/battle.h"
 
 // Start siliconNewBalls
-SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations", s16 damage)
+SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations")
 {
-    u16 ball;
+    u16 ball = 0;
     PARAMETRIZE { ball = BALL_STRANGE; }
     PARAMETRIZE { ball = BALL_POKE; }
     PARAMETRIZE { ball = BALL_GREAT; }
@@ -33,14 +33,14 @@ SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations", s16 damage)
     PARAMETRIZE { ball = BALL_PARK; }
     PARAMETRIZE { ball = BALL_BEAST; }
     PARAMETRIZE { ball = BALL_CHERISH; }
-    PARAMETRIZE { ball = ITEM_NEWA_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWB_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWC_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWD_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWE_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWF_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWG_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWH_BALL;}
+    PARAMETRIZE { ball = BALL_NEWA;}
+    PARAMETRIZE { ball = BALL_NEWB;}
+    PARAMETRIZE { ball = BALL_NEWC;}
+    PARAMETRIZE { ball = BALL_NEWD;}
+    PARAMETRIZE { ball = BALL_NEWE;}
+    PARAMETRIZE { ball = BALL_NEWF;}
+    PARAMETRIZE { ball = BALL_NEWG;}
+    PARAMETRIZE { ball = BALL_NEWH;}
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Ball(ball); }
         OPPONENT(SPECIES_WOBBUFFET) {Ball(ball);}
@@ -53,49 +53,49 @@ SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations", s16 damage)
 
 WILD_BATTLE_TEST("Ball Animations: Show all Ball catch animations")
 {
-    u16 ball = 0;
+    u16 throw = 0;
+    PARAMETRIZE { throw = ITEM_STRANGE_BALL;}
+    PARAMETRIZE { throw = ITEM_POKE_BALL;}
+    PARAMETRIZE { throw = ITEM_GREAT_BALL;}
+    PARAMETRIZE { throw = ITEM_ULTRA_BALL;}
+    PARAMETRIZE { throw = ITEM_MASTER_BALL;}
+    PARAMETRIZE { throw = ITEM_PREMIER_BALL;}
+    PARAMETRIZE { throw = ITEM_HEAL_BALL;}
+    PARAMETRIZE { throw = ITEM_NET_BALL;}
+    PARAMETRIZE { throw = ITEM_NEST_BALL;}
+    PARAMETRIZE { throw = ITEM_DIVE_BALL;}
+    PARAMETRIZE { throw = ITEM_DUSK_BALL;}
+    PARAMETRIZE { throw = ITEM_TIMER_BALL;}
+    PARAMETRIZE { throw = ITEM_QUICK_BALL;}
+    PARAMETRIZE { throw = ITEM_REPEAT_BALL;}
+    PARAMETRIZE { throw = ITEM_LUXURY_BALL;}
+    PARAMETRIZE { throw = ITEM_LEVEL_BALL;}
+    PARAMETRIZE { throw = ITEM_LURE_BALL;}
+    PARAMETRIZE { throw = ITEM_MOON_BALL;}
+    PARAMETRIZE { throw = ITEM_FRIEND_BALL;}
+    PARAMETRIZE { throw = ITEM_LOVE_BALL;}
+    PARAMETRIZE { throw = ITEM_FAST_BALL;}
+    PARAMETRIZE { throw = ITEM_HEAVY_BALL;}
+    PARAMETRIZE { throw = ITEM_DREAM_BALL;}
+    PARAMETRIZE { throw = ITEM_SAFARI_BALL;}
+    PARAMETRIZE { throw = ITEM_SPORT_BALL;}
+    PARAMETRIZE { throw = ITEM_PARK_BALL;}
+    PARAMETRIZE { throw = ITEM_BEAST_BALL;}
+    PARAMETRIZE { throw = ITEM_CHERISH_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWA_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWB_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWC_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWD_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWE_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWF_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWG_BALL;}
+    PARAMETRIZE { throw = ITEM_NEWH_BALL;}
 
-    PARAMETRIZE { ball = ITEM_STRANGE_BALL; }
-    PARAMETRIZE { ball = ITEM_POKE_BALL; }
-    PARAMETRIZE { ball = ITEM_GREAT_BALL; }
-    PARAMETRIZE { ball = ITEM_ULTRA_BALL; }
-    PARAMETRIZE { ball = ITEM_MASTER_BALL; }
-    PARAMETRIZE { ball = ITEM_PREMIER_BALL; }
-    PARAMETRIZE { ball = ITEM_HEAL_BALL; }
-    PARAMETRIZE { ball = ITEM_NET_BALL; }
-    PARAMETRIZE { ball = ITEM_NEST_BALL; }
-    PARAMETRIZE { ball = ITEM_DIVE_BALL; }
-    PARAMETRIZE { ball = ITEM_DUSK_BALL; }
-    PARAMETRIZE { ball = ITEM_TIMER_BALL; }
-    PARAMETRIZE { ball = ITEM_QUICK_BALL; }
-    PARAMETRIZE { ball = ITEM_REPEAT_BALL; }
-    PARAMETRIZE { ball = ITEM_LUXURY_BALL; }
-    PARAMETRIZE { ball = ITEM_LEVEL_BALL; }
-    PARAMETRIZE { ball = ITEM_LURE_BALL; }
-    PARAMETRIZE { ball = ITEM_MOON_BALL; }
-    PARAMETRIZE { ball = ITEM_FRIEND_BALL; }
-    PARAMETRIZE { ball = ITEM_LOVE_BALL; }
-    PARAMETRIZE { ball = ITEM_FAST_BALL; }
-    PARAMETRIZE { ball = ITEM_HEAVY_BALL; }
-    PARAMETRIZE { ball = ITEM_DREAM_BALL; }
-    PARAMETRIZE { ball = ITEM_SAFARI_BALL; }
-    PARAMETRIZE { ball = ITEM_SPORT_BALL; }
-    PARAMETRIZE { ball = ITEM_PARK_BALL; }
-    PARAMETRIZE { ball = ITEM_BEAST_BALL; }
-    PARAMETRIZE { ball = ITEM_CHERISH_BALL; }
-    PARAMETRIZE { ball = ITEM_NEWA_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWB_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWC_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWD_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWE_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWF_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWG_BALL;}
-    PARAMETRIZE { ball = ITEM_NEWH_BALL;}
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Ball(ball);}
-        OPPONENT(SPECIES_CATERPIE) {Ball(ball);}
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_CATERPIE);
     } WHEN {
-        TURN { USE_ITEM(player, ball, partyIndex: 0); }
+        TURN { USE_ITEM(player, throw, partyIndex: 0); }
     } SCENE {
         ANIMATION(ANIM_TYPE_SPECIAL, B_ANIM_BALL_THROW, player);
     }

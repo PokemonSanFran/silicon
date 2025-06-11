@@ -858,6 +858,12 @@ struct moveWithPP {
 #define SpAttackIV(spAttackIV) SpAttackIV_(__LINE__, spAttackIV)
 #define SpDefenseIV(spDefenseIV) SpDefenseIV_(__LINE__, spDefenseIV)
 #define SpeedIV(speedIV) SpeedIV_(__LINE__, speedIV)
+#define HPEV(hpEV) HPEV_(__LINE__, hpEV)
+#define AttackEV(attackEV) AttackEV_(__LINE__, attackEV)
+#define DefenseEV(defenseEV) DefenseEV_(__LINE__, defenseEV)
+#define SpAttackEV(spAttackEV) SpAttackEV_(__LINE__, spAttackEV)
+#define SpDefenseEV(spDefenseEV) SpDefenseEV_(__LINE__, spDefenseEV)
+#define SpeedEV(speedEV) SpeedEV_(__LINE__, speedEV)
 #define Item(item) Item_(__LINE__, item)
 #define Moves(move1, ...) do { u16 moves_[MAX_MON_MOVES] = {move1, __VA_ARGS__}; Moves_(__LINE__, moves_); } while(0)
 #define MovesWithPP(movewithpp1, ...) MovesWithPP_(__LINE__, (struct moveWithPP[MAX_MON_MOVES]) {movewithpp1, __VA_ARGS__})
@@ -868,7 +874,7 @@ struct moveWithPP {
 #define GigantamaxFactor(gigantamaxFactor) GigantamaxFactor_(__LINE__, gigantamaxFactor)
 #define TeraType(teraType) TeraType_(__LINE__, teraType)
 #define Shadow(isShadow) Shadow_(__LINE__, shadow)
-#define Ball(teraType) Ball_(__LINE__, teraType) // siliconNewBalls
+#define Ball(ball) Ball_(__LINE__, ball) // siliconNewBalls
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
 void TestSetConfig(u32 sourceLine, enum GenConfigTag configTag, u32 value);
@@ -896,6 +902,12 @@ void DefenseIV_(u32 sourceLine, u32 defenseIV);
 void SpAttackIV_(u32 sourceLine, u32 spAttackIV);
 void SpDefenseIV_(u32 sourceLine, u32 spDefenseIV);
 void SpeedIV_(u32 sourceLine, u32 speedIV);
+void HPEV_(u32 sourceLine, u32 hpEV);
+void AttackEV_(u32 sourceLine, u32 attackEV);
+void DefenseEV_(u32 sourceLine, u32 defenseEV);
+void SpAttackEV_(u32 sourceLine, u32 spAttackEV);
+void SpDefenseEV_(u32 sourceLine, u32 spDefenseEV);
+void SpeedEV_(u32 sourceLine, u32 speedEV);
 void Item_(u32 sourceLine, u32 item);
 void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES]);
 void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES]);

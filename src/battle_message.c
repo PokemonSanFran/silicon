@@ -899,8 +899,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_ITDOESNTAFFECTTWOFOES]                = COMPOUND_STRING("It doesn't affect {B_DEF_NAME_WITH_PREFIX2} and {B_DEF_PARTNER_NAME}…"),
     [STRINGID_SENDCAUGHTMONPARTYORBOX]              = COMPOUND_STRING("Add {B_DEF_NAME} to your party?"),
     [STRINGID_PKMNSENTTOPCAFTERCATCH]               = gText_PkmnSentToPCAfterCatch,
-    [STRINGID_PKMNGAINEDPOINTS]                     = COMPOUND_STRING("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points and {B_BUFF3} Effort Values!\p"), // Points Messages
-    [STRINGID_PKMNGAINEDEVS]                        = COMPOUND_STRING("{B_BUFF1} gained{B_BUFF3}\nEffort Values!\p"), // Points Messages
+    [STRINGID_PKMNGAINEDPOINTS]                     = COMPOUND_STRING("{B_BUFF1} gained {B_BUFF2} Exp. Points and {B_BUFF3} {B_EFFORT_VALUE}!\p"), // Points Messages
+    [STRINGID_PKMNGAINEDEVS]                        = COMPOUND_STRING("{B_BUFF1} gained {B_BUFF3}\n{B_EFFORT_VALUE}!\p"), // Points Messages
     [STRINGID_STORAGEGAINEDPOINTS]                  = COMPOUND_STRING("The Pokémon in your storage\ngained experience and effort values!\p"), // Points Messages
     [STRINGID_ALLGAINEDEXP]                         = COMPOUND_STRING("The Pokémon in your party and storage\ngained experience!\p"), // Points Messages
     [STRINGID_PARTYGAINEDEXP]                       = COMPOUND_STRING("The Pokémon in your party\ngained experience!\p"), // Points Messages
@@ -925,6 +925,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_LETSGIVEITANICKNAME]                  = COMPOUND_STRING("Let's give {B_DEF_NAME} a nickname!\p"),
     [STRINGID_POKEMONMUSTHAVEANICKNAME]             = gText_YourPokemonMustHaveNickname,
     // End Battle Settings: Nickname
+    [STRINGID_PKMNGAINEDPOINTSBOOSTED]              = COMPOUND_STRING("{B_BUFF1} gained a boosted {B_BUFF2} Exp. Points and {B_BUFF3} {B_EFFORT_VALUE}!\p"), // printEVs
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1529,6 +1530,10 @@ static const u8 sText_Your1[] = _("Your");
 static const u8 sText_Opposing1[] = _("The opposing");
 static const u8 sText_Your2[] = _("your");
 static const u8 sText_Opposing2[] = _("the opposing");
+// Start printEVs
+static const u8 sText_EffortValue[] = _("Effort Value");
+static const u8 sText_EffortValues[] = _("Effort Values");
+// End printEVs
 
 // This is four lists of moves which use a different attack string in Japanese
 // to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.
@@ -3172,6 +3177,14 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX2:
                 HANDLE_NICKNAME_STRING_LOWERCASE(gBattleScripting.battler)
                 break;
+            // Start printEVs
+            case B_TXT_EFFORT_VALUE:
+                if (gBattleStruct->evsGiven == 1)
+                    toCpy = sText_EffortValue;
+                else
+                    toCpy = sText_EffortValues;
+                break;
+            // End printEVs
             }
 
             if (toCpy != NULL)

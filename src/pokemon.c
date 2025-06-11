@@ -5566,7 +5566,10 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
     }
 }
 
-void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
+// Start printEVs
+//void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
+s32 MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
+// End printEVs
 {
     u8 evs[NUM_STATS];
     u16 evIncrease = 0;
@@ -5577,6 +5580,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     u8 stat;
     u8 bonus;
     u32 currentEVCap = GetCurrentEVCap();
+    s32 gaintedTotal = 0; // printEVs
 
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
     if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
@@ -5669,8 +5673,10 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
 
         evs[i] += evIncrease;
         totalEVs += evIncrease;
+        gaintedTotal += evIncrease; // printEVs
         SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
     }
+    return gaintedTotal; // printEVs
 }
 
 u16 GetMonEVCount(struct Pokemon *mon)

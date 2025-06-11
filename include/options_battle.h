@@ -73,6 +73,9 @@ u32 HandleScaledSpecies(u32);
 
 // Battle Settings: Points Message
 bool32 IsPointsMessagesOptionOn(void);
+void PrintMonRecievedEffortValues(u32 wasSentOut,u8* expMonId);
+u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted);
+u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted);
 
 // Battle Settings: Points Summary
 bool32 IsPointsSummaryOff(void);
