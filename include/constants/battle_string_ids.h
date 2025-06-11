@@ -759,6 +759,7 @@ enum StringID
     STRINGID_FOGISTOODENSE,
     STRINGID_ITEMSCANTBEUSEDNOWFOG,
     STRINGID_EMBOLDENEDATTACKEDFROMFOG,
+    STRINGID_PKMNGAINEDPOINTSBOOSTED, // Because we only have 3 buffers, we need to duplicate STRINGID_PKMNGAINEDPOINTS for the case where it prints 'a boosted'. (printEVs)
     STRINGID_COUNT
 };
 

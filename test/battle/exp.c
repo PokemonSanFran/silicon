@@ -157,3 +157,118 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
 }
 
 #endif // I_EXP_SHARE_ITEM
+
+WILD_BATTLE_TEST("Points Messages: Gains Exp")
+{
+    u32 bigEV = 0, item = 0;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+
+    PARAMETRIZE { bigEV = MAX_PER_STAT_EVS; item = ITEM_NONE;}
+    PARAMETRIZE { bigEV = 25; item = ITEM_POWER_WEIGHT;}
+    PARAMETRIZE { bigEV = 25; item = ITEM_NONE;}
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("The wild Caterpie fainted!");
+
+        if (bigEV == MAX_PER_STAT_EVS)
+            MESSAGE("Wobbuffet gained 3 Exp. Points!");
+        else if (item == ITEM_POWER_WEIGHT)
+            MESSAGE("Wobbuffet gained 3 Exp. Points and 9 Effort Values!");
+        else
+            MESSAGE("Wobbuffet gained 3 Exp. Points and 1 Effort Value!");
+
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][99]);
+
+        if (bigEV == MAX_PER_STAT_EVS)
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV);
+        else if (item == ITEM_POWER_WEIGHT)
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
+        else
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
+    }
+
+}
+
+WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp")
+{
+    u32 bigEV = 0, item = 0;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+
+    PARAMETRIZE { bigEV = MAX_PER_STAT_EVS; item = ITEM_NONE;}
+    PARAMETRIZE { bigEV = 25; item = ITEM_POWER_WEIGHT;}
+    PARAMETRIZE { bigEV = 25; item = ITEM_NONE;}
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); OTName("Test"); Item(item); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("The wild Caterpie fainted!");
+
+        if (bigEV == MAX_PER_STAT_EVS)
+            MESSAGE("Wobbuffet gained a boosted 4 Exp. Points!");
+        else if (item == ITEM_POWER_WEIGHT)
+            MESSAGE("Wobbuffet gained a boosted 4 Exp. Points and 9 Effort Values!");
+        else
+            MESSAGE("Wobbuffet gained a boosted 4 Exp. Points and 1 Effort Value!");
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][99]);
+
+        if (bigEV == MAX_PER_STAT_EVS)
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV);
+        else if (item == ITEM_POWER_WEIGHT)
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
+        else
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
+    }
+
+}
+
+WILD_BATTLE_TEST("Points Messages: Gains EVs")
+{
+    u32 bigEV = 0, item = 0;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+
+    PARAMETRIZE { bigEV = MAX_PER_STAT_EVS; item = ITEM_NONE;}
+    PARAMETRIZE { bigEV = 25; item = ITEM_POWER_WEIGHT;}
+    PARAMETRIZE { bigEV = 25; item = ITEM_NONE;}
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("The wild Caterpie fainted!");
+
+        if (item == ITEM_POWER_WEIGHT)
+            MESSAGE("Wobbuffet gained 9 Effort Values!");
+        else if (bigEV != MAX_PER_STAT_EVS)
+            MESSAGE("Wobbuffet gained 1 Effort Value!");
+
+    } THEN {
+        if (bigEV == MAX_PER_STAT_EVS)
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV);
+        else if (item == ITEM_POWER_WEIGHT)
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
+        else
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
+    }
+
+}
