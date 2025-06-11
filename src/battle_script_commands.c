@@ -5072,6 +5072,7 @@ static void Cmd_getexp(void)
         {
             bool32 wasSentOut = (gBattleStruct->expSentInMons & (1u << *expMonId)) != 0;
             holdEffect = GetMonHoldEffect(&gPlayerParty[*expMonId]);
+            u32 monLvl = GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL); // printEVs
 
             if ((holdEffect != HOLD_EFFECT_EXP_SHARE && !wasSentOut && !IsGen6ExpShareEnabled())
              || GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
@@ -5080,17 +5081,32 @@ static void Cmd_getexp(void)
                 gBattleStruct->battlerExpReward = 0;
             }
             else if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && *expMonId >= 3)
-                  || GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+                    // Start printEVs
+                    || monLvl == MAX_LEVEL)
+                  //|| GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+                    // End printEVs
             {
                 gBattleScripting.getexpState = 5;
                 gBattleStruct->battlerExpReward = 0;
+                // Start printEvs
+                /*
                 if (B_MAX_LEVEL_EV_GAINS >= GEN_5)
                     MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species);
                 ApplyPointsBoxMons(gBattleStruct->expShareExpValue,gBattleMons[gBattlerFainted].species); // Battle Settings: Experience
                 PrintExpShareMessage(); // Battle Settings: Experience
+                */
+                // Mon gained only evs, no exp
+                if (monLvl == MAX_LEVEL && B_MAX_LEVEL_EV_GAINS >= GEN_5)
+                {
+                    gBattleStruct->evsGiven = MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species);
+                    PrintMonRecievedEffortValues(wasSentOut, expMonId);
+                }
+                // End printEvs
             }
             else
             {
+                bool32 printBoosted = FALSE;
+                u32 stringId;
                 // Music change in a wild battle after fainting opposing pokemon.
                 if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                     && (gBattleMons[0].hp || (IsDoubleBattle() && gBattleMons[2].hp))
@@ -5113,7 +5129,7 @@ static void Cmd_getexp(void)
                     if ((holdEffect == HOLD_EFFECT_EXP_SHARE || IsGen6ExpShareEnabled())
                         && (B_SPLIT_EXP < GEN_6 || gBattleStruct->battlerExpReward == 0)) // only give exp share bonus in later gens if the mon wasn't sent out
                     {
-                        gBattleStruct->battlerExpReward += GetSoftLevelCapExpValue(gPlayerParty[*expMonId].level, gBattleStruct->expShareExpValue);;
+                        gBattleStruct->battlerExpReward += GetSoftLevelCapExpValue(gPlayerParty[*expMonId].level, gBattleStruct->expShareExpValue);
                     }
 
                     ApplyExperienceMultipliers(&gBattleStruct->battlerExpReward, *expMonId, gBattlerFainted);
@@ -5133,6 +5149,8 @@ static void Cmd_getexp(void)
                     if (IsTradedMon(&gPlayerParty[*expMonId]))
                     {
                         // check if the Pokémon doesn't belong to the player
+                        /*
+                        // Start printEVs
                         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && *expMonId >= 3)
                             i = STRINGID_EMPTYSTRING4;
                         else
@@ -5141,6 +5159,10 @@ static void Cmd_getexp(void)
                     else
                     {
                         i = STRINGID_EMPTYSTRING4;
+                        */
+                        if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && *expMonId >= 3))
+                            printBoosted = TRUE;
+                        // End printEVs
                     }
 
                     // get exp getter battler
@@ -5158,14 +5180,27 @@ static void Cmd_getexp(void)
                         gBattleStruct->expGetterBattlerId = 0;
                     }
 
+                    // Start printEVs
+                    /*
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, *expMonId);
                     // buffer 'gained' or 'gained a boosted'
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleStruct->battlerExpReward);
+                    */
+                    gBattleStruct->evsGiven = MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species);
+                    gEffectBattler = gBattleStruct->evsGiven;
+                    if (gBattleStruct->evsGiven == 0)
+                        stringId = PrintMonRecievedExperience(expMonId, printBoosted);
+                    else
+                        stringId = PrintMonRecievedEffortAndExperience(expMonId,printBoosted);
+                    // End printEVs
 
                     if (wasSentOut || holdEffect == HOLD_EFFECT_EXP_SHARE)
                     {
-                        PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                    // Start printEVs
+                        PrepareStringBattle(stringId, gBattleStruct->expGetterBattlerId);
+                        //PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                    // End printEVs
                     }
                     else if (IsGen6ExpShareEnabled() && !gBattleStruct->teamGotExpMsgPrinted) // Print 'the rest of your team got exp' message once, when all of the sent-in mons were given experience
                     {
@@ -5177,8 +5212,7 @@ static void Cmd_getexp(void)
                         gBattleStruct->teamGotExpMsgPrinted = TRUE;
                     }
 
-                    ApplyPointsBoxMons(gBattleStruct->expShareExpValue,gBattleMons[gBattlerFainted].species); // Battle Settings: Experience
-                    MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species);
+                    //MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species); // printEVs
                 }
                 gBattleScripting.getexpState++;
             }
@@ -5293,6 +5327,9 @@ static void Cmd_getexp(void)
                 }
             }
             gBattleScripting.getexpState = 6; // we're done
+
+            ApplyPointsBoxMons(gBattleStruct->expShareExpValue,gBattleMons[gBattlerFainted].species); // Battle Settings: Experience
+            PrintExpShareMessage(); // Battle Settings: Experience
         }
         break;
     case 6: // increment instruction

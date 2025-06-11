@@ -29,15 +29,8 @@ test_rom:
   image: ubuntu:latest
   before_script:
     - apt update && apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go make git cmake libelf-dev
-    - git clone --depth=1 --single-branch https://github.com/mgba-emu/mgba.git
-    - cd mgba
-    - mkdir build
-    - cd build
-    - cmake .. -DBUILD_HEADLESS=ON -DDISABLE_FRONTENDS=ON
-    - make -j$(nproc)
-    - make install
-    - cd ../../  # go back to the project root if needed
   script:
+    - make -j$(nproc) > /dev/null
     - make -j$(nproc) check
 
 upload_to_catbox:

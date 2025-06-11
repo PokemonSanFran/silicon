@@ -1758,6 +1758,48 @@ void SpeedIV_(u32 sourceLine, u32 speedIV)
     SetMonData(DATA.currentMon, MON_DATA_SPEED_IV, &speedIV);
 }
 
+void HPEV_(u32 sourceLine, u32 hpEV)
+{
+    INVALID_IF(!DATA.currentMon, "HP EV outside of PLAYER/OPPONENT");
+    INVALID_IF(hpEV > MAX_PER_STAT_EVS, "Illegal HP EV: %d", hpEV);
+    SetMonData(DATA.currentMon, MON_DATA_HP_EV, &hpEV);
+}
+
+void AttackEV_(u32 sourceLine, u32 attackEV)
+{
+    INVALID_IF(!DATA.currentMon, "Attack EV outside of PLAYER/OPPONENT");
+    INVALID_IF(attackEV > MAX_PER_STAT_EVS, "Illegal attack EV: %d", attackEV);
+    SetMonData(DATA.currentMon, MON_DATA_ATK_EV, &attackEV);
+}
+
+void DefenseEV_(u32 sourceLine, u32 defenseEV)
+{
+    INVALID_IF(!DATA.currentMon, "Defense EV outside of PLAYER/OPPONENT");
+    INVALID_IF(defenseEV > MAX_PER_STAT_EVS, "Illegal defense EV: %d", defenseEV);
+    SetMonData(DATA.currentMon, MON_DATA_DEF_EV, &defenseEV);
+}
+
+void SpAttackEV_(u32 sourceLine, u32 spAttackEV)
+{
+    INVALID_IF(!DATA.currentMon, "SpAttack EV outside of PLAYER/OPPONENT");
+    INVALID_IF(spAttackEV > MAX_PER_STAT_EVS, "Illegal special attack EV: %d", spAttackEV);
+    SetMonData(DATA.currentMon, MON_DATA_SPATK_EV, &spAttackEV);
+}
+
+void SpDefenseEV_(u32 sourceLine, u32 spDefenseEV)
+{
+    INVALID_IF(!DATA.currentMon, "SpDefense EV outside of PLAYER/OPPONENT");
+    INVALID_IF(spDefenseEV > MAX_PER_STAT_EVS, "Illegal special defense EV: %d", spDefenseEV);
+    SetMonData(DATA.currentMon, MON_DATA_SPDEF_EV, &spDefenseEV);
+}
+
+void SpeedEV_(u32 sourceLine, u32 speedEV)
+{
+    INVALID_IF(!DATA.currentMon, "Speed EV outside of PLAYER/OPPONENT");
+    INVALID_IF(speedEV > MAX_PER_STAT_EVS, "Illegal speed EV: %d", speedEV);
+    SetMonData(DATA.currentMon, MON_DATA_SPEED_EV, &speedEV);
+}
+
 void Item_(u32 sourceLine, u32 item)
 {
     INVALID_IF(!DATA.currentMon, "Item outside of PLAYER/OPPONENT");
@@ -1843,6 +1885,7 @@ void Shadow_(u32 sourceLine, bool32 isShadow)
 void Ball_(u32 sourceLine, enum PokeBall ball)
 {
     INVALID_IF(!DATA.currentMon, "Ball outside of PLAYER/OPPONENT");
+    INVALID_IF(ball >= POKEBALL_COUNT, "Illegal ball: %d", &ball);
     SetMonData(DATA.currentMon, MON_DATA_POKEBALL, &ball);
 }
 // End siliconNewBalls

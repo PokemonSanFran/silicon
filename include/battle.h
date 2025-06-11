@@ -623,6 +623,7 @@ struct BattleStruct
     u8 teamGotExpMsgPrinted:1; // The 'Rest of your team got msg' has been printed.
     u8 givenExpMons; // Bits for enemy party's pokemon that gave exp to player's party.
     u8 expSentInMons; // As bits for player party mons - not including exp share mons.
+    u8 evsGiven; // Effort values given for the pokemon, used to distinguish between 1 or more Effort Value(s) (printEVs)
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
