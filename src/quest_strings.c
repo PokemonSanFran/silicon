@@ -13,11 +13,6 @@ const u8 gText_Quest_ReturnDoll_Desc[] = _("Help Abigayle find her lost doll. Th
 const u8 gText_Quest_ReturnDoll_DoneDesc[] = _("You found Abigayle's lost doll in QiuVillage\nand returned it to her.");
 const u8 gText_Quest_ReturnDoll_Map[] = _("MermerezaCity");
 
-const u8 gText_Quest_StopMugging_Name[] = _("Stop Mugging");
-const u8 gText_Quest_StopMugging_Desc[] = _("Somebody is getting mugged in an alley way. Stop the perpatrators!");
-const u8 gText_Quest_StopMugging_DoneDesc[] = _("You stopped a mugging from taking\nplace.");
-const u8 gText_Quest_StopMugging_Map[] = _("PerlaciaCity");
-
 const u8 gText_Quest_StolenTrade_Name[] = _("Stolen Trade");
 const u8 gText_Quest_StolenTrade_Desc[] = _("She wanted to trade with you to evolve\nher Swirlix and then trade back,\nbut she ran away with your Gurdurr!");
 const u8 gText_Quest_StolenTrade_DoneDesc[] = _("You hunted down the Trainer\nand got back your Conkeldurr.");
@@ -432,11 +427,6 @@ const u8 gText_Quest_StealTheAxe_Name[] =_("Steal The Axe");
 const u8 gText_Quest_StealTheAxe_Desc[] =_("Lorem Desc");
 const u8 gText_Quest_StealTheAxe_DoneDesc[] =_("Done Desc");
 const u8 gText_Quest_StealTheAxe_Map[] =_("HalaiIsland");
-
-const u8 gText_Quest_BecomeChampion_Name[] =_("Become Champion");;
-const u8 gText_Quest_BecomeChampion_Desc[] =_("Become the Champion of the Resido\nPokémon League by defeating the\nElite Four.");
-const u8 gText_Quest_BecomeChampion_DoneDesc[] =_("You defeated the Elite Four\nand became the Champion of the Resido\nPokémon League!");
-const u8 gText_Quest_BecomeChampion_Map[] =_("OrolandColiseum");
 
 const u8 gText_Quest_Skilllibrary_Name[] =_("Skill Library");
 const u8 gText_Quest_Skilllibrary_Desc[] =_("");
@@ -1136,22 +1126,6 @@ const u8 gText_Quest_Recruitlocalartists_Sub2_Map[] = _("N/A");
 const u8 gText_Quest_Recruitlocalartists_Sub3_Name[] = _("Name");
 const u8 gText_Quest_Recruitlocalartists_Sub3_Desc[] = _("Lorem Desc");
 const u8 gText_Quest_Recruitlocalartists_Sub3_Map[] = _("N/A");
-
-const u8 gText_Quest_BecomeChampion_Sub1_Name[] =_("Tala");
-const u8 gText_Quest_BecomeChampion_Sub1_Desc[] =_("You defeated Tala of the Resido\nElite Four.");
-const u8 gText_Quest_BecomeChampion_Sub1_Map[] =_("OrolandColiseum");
-
-const u8 gText_Quest_BecomeChampion_Sub2_Name[] =_("Armando");
-const u8 gText_Quest_BecomeChampion_Sub2_Desc[] =_("You defeated Armando of the Resido\nElite Four.");
-const u8 gText_Quest_BecomeChampion_Sub2_Map[] =_("OrolandColiseum");
-
-const u8 gText_Quest_BecomeChampion_Sub3_Name[] =_("Ellen");
-const u8 gText_Quest_BecomeChampion_Sub3_Desc[] =_("You defeated Ellen of the Resido\nElite Four.");
-const u8 gText_Quest_BecomeChampion_Sub3_Map[] =_("OrolandColiseum");
-
-const u8 gText_Quest_BecomeChampion_Sub4_Name[] =_("Magnus");
-const u8 gText_Quest_BecomeChampion_Sub4_Desc[] =_("You defeated Magnus of the Resido\nElite Four.");
-const u8 gText_Quest_BecomeChampion_Sub4_Map[] =_("OrolandColiseum");
 
 const u8 gText_Quest_ArmandosTraining_Sub1_Name[] = _("Lorem");
 const u8 gText_Quest_ArmandosTraining_Sub1_Desc[] = _("Lorem");

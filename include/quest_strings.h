@@ -13,11 +13,6 @@ extern const u8 gText_Quest_ReturnDoll_Desc[];
 extern const u8 gText_Quest_ReturnDoll_DoneDesc[];
 extern const u8 gText_Quest_ReturnDoll_Map[];
 
-extern const u8 gText_Quest_StopMugging_Name[];
-extern const u8 gText_Quest_StopMugging_Desc[];
-extern const u8 gText_Quest_StopMugging_DoneDesc[];
-extern const u8 gText_Quest_StopMugging_Map[];
-
 extern const u8 gText_Quest_StolenTrade_Name[];
 extern const u8 gText_Quest_StolenTrade_Desc[];
 extern const u8 gText_Quest_StolenTrade_DoneDesc[];
@@ -432,11 +427,6 @@ extern const u8 gText_Quest_StealTheAxe_Name[];
 extern const u8 gText_Quest_StealTheAxe_Desc[];
 extern const u8 gText_Quest_StealTheAxe_DoneDesc[];
 extern const u8 gText_Quest_StealTheAxe_Map[];
-
-extern const u8 gText_Quest_BecomeChampion_Name[];
-extern const u8 gText_Quest_BecomeChampion_Desc[];
-extern const u8 gText_Quest_BecomeChampion_DoneDesc[];
-extern const u8 gText_Quest_BecomeChampion_Map[];
 
 extern const u8 gText_Quest_Skilllibrary_Name[];
 extern const u8 gText_Quest_Skilllibrary_Desc[];
@@ -1164,22 +1154,6 @@ extern const u8 gText_Quest_Recruitlocalartists_Sub2_Map[];
 extern const u8 gText_Quest_Recruitlocalartists_Sub3_Name[];
 extern const u8 gText_Quest_Recruitlocalartists_Sub3_Desc[];
 extern const u8 gText_Quest_Recruitlocalartists_Sub3_Map[];
-
-extern const u8 gText_Quest_BecomeChampion_Sub1_Name[];
-extern const u8 gText_Quest_BecomeChampion_Sub1_Desc[];
-extern const u8 gText_Quest_BecomeChampion_Sub1_Map[];
-
-extern const u8 gText_Quest_BecomeChampion_Sub2_Name[];
-extern const u8 gText_Quest_BecomeChampion_Sub2_Desc[];
-extern const u8 gText_Quest_BecomeChampion_Sub2_Map[];
-
-extern const u8 gText_Quest_BecomeChampion_Sub3_Name[];
-extern const u8 gText_Quest_BecomeChampion_Sub3_Desc[];
-extern const u8 gText_Quest_BecomeChampion_Sub3_Map[];
-
-extern const u8 gText_Quest_BecomeChampion_Sub4_Name[];
-extern const u8 gText_Quest_BecomeChampion_Sub4_Desc[];
-extern const u8 gText_Quest_BecomeChampion_Sub4_Map[];
 
 extern const u8 gText_Quest_ArmandosTraining_Sub1_Name[];
 extern const u8 gText_Quest_ArmandosTraining_Sub1_Desc[];

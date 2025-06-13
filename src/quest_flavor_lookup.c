@@ -182,10 +182,6 @@ const u8 *GetQuestDesc_PlayersAdventure()
             {
                 return gText_ChampionsAdventure_Flavor2;
             }
-            else if (VarGet(VAR_PROLOGUE_STATE) > NOT_STARTED)
-            {
-                return gText_Quest_BecomeChampion_Desc;
-            }
             else
                 return gText_Quest_PlayersAdventure_Desc;
         default:
