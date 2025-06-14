@@ -34,14 +34,16 @@ script HousingProtest_CleanUp_Script {
     removeobject(1)
     removeobject(2)
     removeobject(3)
+    removeobject(4)
     removeobject(5)
+    removeobject(6)
     removeobject(7)
     removeobject(8)
     removeobject(9)
 }
 
-
-script HousingProtest_StartChanting_Dialogue {
+script HousingProtest_StartChanting_Dialogue
+{
     locktarget
     msgbox(gText_HousingProtest_RichAndRude,,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
     applymovement(PLAYER, Common_Movement_FaceUp)
@@ -57,25 +59,43 @@ script HousingProtest_StartChanting_Dialogue {
     goto(HousingProtest_LandlordWalkOutside_Script)
 }
 
-script HousingProtest_MovePlayerIntoPosition {
-    locktarget
-    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    switch (var (VAR_TEMP_0)) {
-    case 6:
-        applymovement(PLAYER, HousingProtest_WalkPlayer1Left)
-    case 7:
-        applymovement(PLAYER, HousingProtest_WalkPlayer2Left)
-    case 8:
-        applymovement(PLAYER, HousingProtest_WalkPlayer3Left)
-    case 9:
-        applymovement(PLAYER, HousingProtest_WalkPlayer4Left)
+script HousingProtest_MovePlayerIntoPosition
+{
+    if (var(VAR_ROUTE99_STATE) == PROTEST_NOTSTARTED)
+    {
+        goto(HousingProtest_MovePlayerToProtest)
     }
-    waitmovement(0)
+    elif (var(VAR_ROUTE99_STATE) == SAVE_THETIDE_ROUTE99)
+    {
+       goto(HousingProtest_MovePlayerToBattle)
+    }
+    else
+    {
+        return
+    }
+}
 
-    if (defeated(TRAINER_HOUSINGPROTEST_ROCKET)) {
-        applymovement(PLAYER, HousingProtest_WalkSouthFromLandlord)
-        waitmovement(0)
-    }
+script HousingProtest_MovePlayerToProtest
+{
+    applymovement(PLAYER,Common_Movement_WalkUp)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    waitmovement(PLAYER)
+    setobjectxy(PLAYER,5,18)
+    turnobject(PLAYER,DIR_EAST)
+    TeleportCamera(5,18)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    goto(HousingProtest_StartChanting_Dialogue)
+}
+
+script HousingProtest_MovePlayerToBattle
+{
+    applymovement(PLAYER,Common_Movement_WalkUp)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    waitmovement(PLAYER)
+    setobjectxy(PLAYER,2,18)
+    turnobject(PLAYER,DIR_SOUTH)
+    TeleportCamera(2,18)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 }
 
 script HousingProtest_LandlordWalkOutside_Script {
@@ -101,7 +121,6 @@ script HousingProtest_LandlordWalkOutside_Script {
 script HousingProtest_LandlordTalkToCrowd_Dialogue {
     msgbox(gText_HousingProtest_WeCanComeTo,,SPEAKER_LANDLORD)
     closemessage
-    call(HousingProtest_MovePlayerIntoPosition)
     clearflag(FLAG_TEMP_1)
     playbgm(MUS_RG_ENCOUNTER_ROCKET, FALSE)
     addobject(RABIA)
@@ -243,7 +262,7 @@ script HousingProtest_InteractLandlord_Script {
     } elif (!flag (FLAG_TALKED_LANDLORD)){
         call(HousingProtest_InteractLandlord_Dialogue)
     } else {
-        msgbox(gText_HousingProtest_ShouldHireThatSecurity, MSGBOX_NPC,SPEAKER_LANDLORD)
+        msgbox(gText_HousingProtest_ShouldHireThatSecurity, MSGBOX_NPC,SPEAKER_LANDLORD,TAIL_WHISPER)
     }
 
     closemessage
@@ -297,7 +316,7 @@ text gText_HousingProtest_OnlyThingWereUnderstanding {
 }
 
 text gText_HousingProtest_AreYouTrying {
-    format("Are you trying to intimidate me? I'll call the police!")
+    format("Are you trying to intimidate me? I'm just doing my job. Don't make me call the police!")
 }
 
 text gText_HousingProtest_TheyCantArrest {
@@ -325,11 +344,11 @@ text gText_HousingProtest_ScrewThese {
 }
 
 text gText_HousingProtest_ToTryReason {
-    format("I came outside to try to reason with you trash, and you're threatening me and my building?")
+    format("Look, I'm just the super. I don't own this building, but I am responsible for making sure you don't trash it. I'm trying to reason with you and you're threatening me?")
 }
 
 text gText_HousingProtest_AintAThreat {
-    format("Ain't a threat. We promising. Call ya boys!")
+    format("I don't care if you're the landlord or working for the landlord, and I promise if you don't get out of the way, we're gonna have a problem.")
 }
 
 text gText_HousingProtest_CutItOut {
@@ -393,11 +412,11 @@ text gText_HousingProtest_SubjectToTheSameRent {
 }
 
 text gText_HousingProtest_SoPeopleWereComing {
-    format("So people were coming to take the building from you?")
+    format("So people were coming to take over the building?")
 }
 
 text gText_HousingProtest_IGuessSo {
-    format("I guess so.")
+    format("I guess so?")
 }
 
 text gText_HousingProtest_WhatAboutThePolice {
@@ -409,7 +428,7 @@ text gText_HousingProtest_MoreAndMoreCommon {
 }
 
 text gText_HousingProtest_ShouldHireThatSecurity {
-    format("I suppose I should hire that security guard sooner rather than later...")
+    format("I don't get paid enough to be the super and security...")
 }
 
 movement HousingProtest_WalkPlayer1Left {

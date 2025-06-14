@@ -136,7 +136,7 @@ text gText_AssholesHome_GuessICanJudge {
 }
 
 text gText_AssholesHome_ThrowsTheirMoney {
-    format("SharpriseCapitalthrows their money around, and the strong get stronger...")
+    format("SharpRise Capital throws their money around, and the strong get stronger...")
 }
 
 text gText_AssholesHome_SoMuchForThe {

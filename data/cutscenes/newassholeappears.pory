@@ -83,12 +83,13 @@ script NewAssholeAppears_PostBattle_Script {
     startcutscene(JUMPPLAYER_NEWASSHOLEAPPEARS)
     setvar(VAR_ROUTE10_STATE,DEFEATED_KAI_ROUTE10)
     msgbox(gText_NewAssholeAppears_Whateveryournameis,,SPEAKER_ALICIA)
-    msgbox(gText_NewAssholeAppears_GentrificationOfMyHome,,SPEAKER_KAI)
+    msgbox(gText_NewAssholeAppears_MyNameIsKai,,SPEAKER_KAI)
     reveal(REVEAL_KAI)
+    msgbox(gText_NewAssholeAppears_EveryoneCater,,SPEAKER_KAI)
     msgbox(gText_NewAssholeAppears_YouSoundCrazyPerson,,SPEAKER_ALICIA)
     msgbox(gText_NewAssholeAppears_NotStupidJustIgnorant,,SPEAKER_KAI)
     msgbox(gText_NewAssholeAppears_SeeYouAround,,SPEAKER_KAI)
-    msgbox(gText_NewAssholeAppears_IHopeNot,,SPEAKER_ALICIA)
+    msgbox(gText_NewAssholeAppears_IHopeNot,,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_ANGRY)
 
     closemessage
     goto(NewAssholeAppears_KaiExit_Script)
@@ -154,16 +155,20 @@ text gText_NewAssholeAppears_Whateveryournameis {
     format("Are you done being an ass, whateveryournameis?")
 }
 
-text gText_NewAssholeAppears_GentrificationOfMyHome {
-    format("Kai, and only if you're done contributing to the gentrification of my home... but I doubt it. You're stupid, just like the rest of them.")
+text gText_NewAssholeAppears_MyNameIsKai {
+    format("My name is Kai.")
+}
+
+text gText_NewAssholeAppears_EveryoneCater {
+    format("Everyone's falling over themselves to cater to transplants like you. The rest of us who are actually a part of this community get left in the cold. But I wouldn't expect you to understand that.")
 }
 
 text gText_NewAssholeAppears_YouSoundCrazyPerson {
-    format("Excuse me!? You sound like a crazy person, but I'm the stupid one?")
+    format("You sound like a crazy person.")
 }
 
 text gText_NewAssholeAppears_NotStupidJustIgnorant {
-    format("I take that back - not stupid, just ignorant. I shouldn't be mad at you. The ignorance isn't entirely your fault. ")
+    format("I'm not crazy, you're just ignorant. I shouldn't be mad at you. The ignorance isn't entirely your fault. ")
 }
 
 text gText_NewAssholeAppears_SeeYouAround {
