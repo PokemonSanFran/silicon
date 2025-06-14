@@ -20,20 +20,11 @@ script Prologue_FlagsVars_Script
     setflag(FLAG_SET_WALL_CLOCK)
 }
 
-script Prologue_Quests_Script{
-        startquest(QUEST_BECOMECHAMPION)
-        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_1)
-        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_2)
-        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_3)
-return
-}
-
 script Prologue_SetUp_Script
 {
         callnative(GiveItems_Prologue_Intro)
         call(Prologue_FlagsVars_Script)
         call(Prologue_IntroTime_Dialogue)
-        //call(Prologue_Quests_Script)
 //PSF TODO open modal to tell player about teaching their pokemon new moves
         end
 }
@@ -85,8 +76,6 @@ script Prologue_PostBattle_Script
     playse(SE_TRUCK_DOOR)
     call(OrolandColiseum_Arena_OpenExit_Script)
     waitse
-    //subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BECOMECHAMPION,SUB_QUEST_4)
-    //completequest(QUEST_BECOMECHAMPION)
     playbgm(MUS_HALL_OF_FAME_ROOM,TRUE)
     msgbox(gText_Prologue_AdamYouAre,,SPEAKER_MAGNUS,TAIL_SHOUT,EMOTE_HAPPY)
     msgbox(gText_Prologue_AndPerhaps,,SPEAKER_MAGNUS,TAIL_WHISPER)
