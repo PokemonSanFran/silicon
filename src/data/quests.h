@@ -1628,46 +1628,6 @@ static const struct SubQuest
             COMPOUND_STRING("Caught")
 	),
 };
-static const struct SubQuest
-	sBecomeChampion_Sub[QUEST_BECOMECHAMPION_SUB_COUNT] = {
-	sub_quest(
-	        220,
-	        gText_Quest_BecomeChampion_Sub1_Name,
-	        gText_Quest_BecomeChampion_Sub1_Desc,
-	        gText_Quest_BecomeChampion_Sub1_Map,
-            OBJ_EVENT_GFX_TALA,
-            QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
-	),
-	sub_quest(
-	        221,
-	        gText_Quest_BecomeChampion_Sub2_Name,
-	        gText_Quest_BecomeChampion_Sub2_Desc,
-	        gText_Quest_BecomeChampion_Sub2_Map,
-            OBJ_EVENT_GFX_ARMANDO,
-            QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
-	),
-	sub_quest(
-	        222,
-	        gText_Quest_BecomeChampion_Sub3_Name,
-	        gText_Quest_BecomeChampion_Sub3_Desc,
-	        gText_Quest_BecomeChampion_Sub3_Map,
-            OBJ_EVENT_GFX_ELLEN,
-            QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
-	),
-	sub_quest(
-	        223,
-	        gText_Quest_BecomeChampion_Sub4_Name,
-	        gText_Quest_BecomeChampion_Sub4_Desc,
-	        gText_Quest_BecomeChampion_Sub4_Map,
-            OBJ_EVENT_GFX_MAGNUS,
-            QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
-	),
-};
-
 static const struct SubQuest sArmandosTraining_Sub[QUEST_RESTAURANTEXPANSION2_SUB_COUNT] = {
 	sub_quest(
 	        224,
@@ -2634,17 +2594,6 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .subquests = NULL,
         .numSubquests = 0
     },
-    [QUEST_BECOMECHAMPION] =
-    {
-        .name = gText_Quest_BecomeChampion_Name,
-        .desc = gText_Quest_BecomeChampion_Desc,
-        .donedesc = gText_Quest_BecomeChampion_DoneDesc,
-        .map = gText_Quest_BecomeChampion_Map,
-        .sprite = OBJ_EVENT_GFX_MAGNUS,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
-        .subquests = sBecomeChampion_Sub,
-        .numSubquests = QUEST_BECOMECHAMPION_SUB_COUNT
-    },
     [QUEST_SKILLLIBRARY] =
     {
         .name = gText_Quest_Skilllibrary_Name,
@@ -3095,17 +3044,6 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .subquests = NULL,
         .numSubquests = 0,
     },
-    [QUEST_GF_KNICK] =
-    {
-        .name = COMPOUND_STRING("???"),
-        .desc = COMPOUND_STRING("???"),
-        .donedesc = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
-        .subquests = NULL,
-        .numSubquests = 0,
-    },
     [QUEST_GF_LITTLESPARROW] =
     {
         .name = COMPOUND_STRING("???"),
@@ -3128,40 +3066,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .subquests = NULL,
         .numSubquests = 0,
     },
-    [QUEST_GF_PASCAL] =
-    {
-        .name = COMPOUND_STRING("???"),
-        .desc = COMPOUND_STRING("???"),
-        .donedesc = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
-        .subquests = NULL,
-        .numSubquests = 0,
-    },
-    [QUEST_GF_RIOLUWOTT] =
-    {
-        .name = COMPOUND_STRING("???"),
-        .desc = COMPOUND_STRING("???"),
-        .donedesc = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
-        .subquests = NULL,
-        .numSubquests = 0,
-    },
     [QUEST_GF_STRIDER] =
-    {
-        .name = COMPOUND_STRING("???"),
-        .desc = COMPOUND_STRING("???"),
-        .donedesc = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
-        .subquests = NULL,
-        .numSubquests = 0,
-    },
-    [QUEST_GF_VIKTHOR] =
     {
         .name = COMPOUND_STRING("???"),
         .desc = COMPOUND_STRING("???"),
