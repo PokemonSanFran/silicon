@@ -388,7 +388,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_KEIYING] =
     {
         .name = _("Keiying"),
-        .title = _("Sharp Rise COO"),
+        .title = _("SharpRise COO"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Keiying,
         .speakerPal = sSpeakerPal_Keiying,
@@ -500,7 +500,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_RAMESH] =
     {
         .name = _("Ramesh"),
-        .title = _("Sharp Rise CMO"),
+        .title = _("SharpRise CMO"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Ramesh,
         .speakerPal = sSpeakerPal_Ramesh,
@@ -1012,7 +1012,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_ADELAIDE] =
     {
         .name = _("Adelaide"),
-        .title = _("Sharp Rise CEO"),
+        .title = _("SharpRise CEO"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Proton,
         .speakerPal = sSpeakerPal_Proton,
@@ -1419,7 +1419,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_SHARPRISECAPITAL_STAFF] =
     {
-        .name = _("Sharp Rise Staff"),
+        .name = _("SharpRise Staff"),
         .title = _("???"),
         .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Firebreather,

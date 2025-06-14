@@ -1050,22 +1050,22 @@ text BreedingCenter_Text_ThankYouForContributingTo
 
 text BreedingCenter_Text_ThanksToYourAffiliationWith
 {
-    format("Thanks to your affiliation with Sharp Rise, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("Thanks to your affiliation with SharpRise, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
 }
 
 text BreedingCenter_Text_ThanksToYourAffiliationWithEdit
 {
-    format("Thanks to your affiliation with Sharp Rise, inlcuding the cost of the Individual Values that you changed, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("Thanks to your affiliation with SharpRise, inlcuding the cost of the Individual Values that you changed, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
 }
 
 text BreedingCenter_Text_WithoutTheSharpRiseDiscount
 {
-    format("Without the Sharp Rise discount, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("Without the SharpRise discount, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
 }
 
 text BreedingCenter_Text_WithoutTheSharpRiseDiscountEdit
 {
-    format("Without the Sharp Rise discount, inlcuding the cost of the Individual Values that you changed, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("Without the SharpRise discount, inlcuding the cost of the Individual Values that you changed, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
 }
 
 text BreedingCenter_Text_YouDontHaveEnough
@@ -1105,11 +1105,11 @@ text BreedingCenter_Text_LetsGet
 
 text BreedingCenter_Text_GeneEditNoDiscount
 {
-    format("Without the Sharp Rise discount, changing these Individual Values will cost ¥{STR_VAR_2}. Do you still want to do it?")
+    format("Without the SharpRise discount, changing these Individual Values will cost ¥{STR_VAR_2}. Do you still want to do it?")
 }
 text BreedingCenter_Text_GeneEditYesDiscount
 {
-    format("Thanks to your affiliation with Sharp Rise, changing these Individual Values will cost ¥{STR_VAR_2}. Do you still want to do it?")
+    format("Thanks to your affiliation with SharpRise, changing these Individual Values will cost ¥{STR_VAR_2}. Do you still want to do it?")
 }
 text BreedingCenter_Text_YourChangesAreDone
 {
