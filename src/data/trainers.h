@@ -166,7 +166,7 @@
 #line 143
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 142
-        .trainerPic = TRAINER_PIC_BELEN,
+        .trainerPic = TRAINER_PIC_SILICON_PLAYER_F3,
         .encounterMusic_gender =
 0,
 #line 144

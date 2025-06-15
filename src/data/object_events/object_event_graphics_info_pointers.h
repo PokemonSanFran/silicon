@@ -244,6 +244,13 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1FieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Underwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Fishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking;
@@ -527,6 +534,13 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF1Underwater,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF1FieldMove,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF1Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerF3Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerF3MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerF3AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerF3Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF3Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF3FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF3Fishing,
     [OBJ_EVENT_GFX_KAI] =                      &gObjectEventGraphicsInfo_KaiNormal,
     [OBJ_EVENT_GFX_UNKNOWN] =                  &gObjectEventGraphicsInfo_UnknownNormal,
     [OBJ_EVENT_GFX_ADAORA] =                   &gObjectEventGraphicsInfo_AdaoraWalking,

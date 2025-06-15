@@ -392,6 +392,17 @@ const u32 gObjectEventPic_siliconPlayerF1Fishing[] = INCBIN_U32("graphics/object
 const u32 gObjectEventPic_siliconPlayerF1Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/watering.4bpp");
 const u32 gObjectEventPic_siliconPlayerF1Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
 const u32 gObjectEventPic_siliconPlayerF1Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/underwater.4bpp");
+
+const u32 gObjectEventPic_siliconPlayerF3NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/f3/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerF3Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/underwater.4bpp");
+
 const u32 gObjectEventPic_KaiNormal[] = INCBIN_U32("graphics/object_events/pics/people/kai/walking.4bpp", "graphics/object_events/pics/people/kai/running.4bpp");
 const u16 gObjectEventPal_KaiNormal[] = INCBIN_U16("graphics/object_events/palettes/kai.gbapal");
 
