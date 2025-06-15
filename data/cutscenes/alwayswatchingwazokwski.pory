@@ -136,7 +136,7 @@ text gText_AlwaysWatchingWazowski_LookAroundDoYouThink{
 }
 
 text gText_AlwaysWatchingWazowski_SecurityUsedToAlsoPerform{
-    format("SharpriseCapitalsecurity used to also perform surveillance, but my team was more than efficient enough to perform that on top of their existing duties.")
+    format("SharpRise Capital security used to also perform surveillance, but my team was more than efficient enough to perform that on top of their existing duties.")
 }
 
 text gText_AlwaysWatchingWazowski_OhOkayYeah{

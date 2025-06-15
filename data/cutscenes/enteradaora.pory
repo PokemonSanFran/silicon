@@ -471,7 +471,7 @@ text gText_EnterAdaora_ThankYouSo {
 }
 
 text gText_EnterAdaora_HopeThatMakes {
-    format("SharpriseCapital has data on all the Trainers in the region, but hasn't released it anywhere publicly. We found their source and... made it available for all. I hear they're not super happy about it, which is probably why they didn't give it to you!")
+    format("SharpRise Capital has data on all the Trainers in the region, but hasn't released it anywhere publicly. We found their source and... made it available for all. I hear they're not super happy about it, which is probably why they didn't give it to you!")
 }
 
 text gText_EnterAdaora_IGottaGo {

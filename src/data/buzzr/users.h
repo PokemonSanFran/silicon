@@ -137,7 +137,7 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_SHARPRISECAPTIAL] =
     {
-        .username = _("SharpriseCapital"),
+        .username = _("SharpRise Capital"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DOYLE] =

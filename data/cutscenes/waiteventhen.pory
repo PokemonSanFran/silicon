@@ -224,7 +224,7 @@ text gText_WaitEvenThen_DamnAPowerSpot {
 }
 
 text gText_WaitEvenThen_AndTheGovernment {
-    format("Between SharpriseCapital and the government, I guess nothing is off limits.")
+    format("Between SharpRise Capital and the government, I guess nothing is off limits.")
 }
 
 text gText_WaitEvenThen_IllHaveSomeOther {

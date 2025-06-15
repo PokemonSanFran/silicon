@@ -160,7 +160,7 @@ switch(var(VAR_RESULT))
         msgbox(format("Are you trying to tell me that the same company that is deupitzing transplants to attack civilians and works with the police to brutalize people are the 'good' guys?"),,SPEAKER_KAI_TIDE)
 }
 
-    msgbox(format("You know, people here in Arantraz died trying to do things the right way… but anybody with power doesn't care. Not the government. Not SharpriseCapital. None of these ridiciulous companies!"),,SPEAKER_KAI_TIDE)
+    msgbox(format("You know, people here in Arantraz died trying to do things the right way… but anybody with power doesn't care. Not the government. Not SharpRise Capital. None of these ridiciulous companies!"),,SPEAKER_KAI_TIDE)
 
     closemessage
 

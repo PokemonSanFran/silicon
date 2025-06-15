@@ -444,7 +444,7 @@ script HowDisappointing_Debrief_Dialogue
 
     msgbox(format("That's not cool!"),,SPEAKER_ALICIA)
 
-    msgbox(format("I'm sorry you had to see that, but I'm also not particularly surprised, {PLAYER}. But the goal is ultimately... peace. SharpriseCapital and police are fully aligned on setting an example with The Tide, and terrorists won't be tolerated."),,SPEAKER_KEIYING)
+    msgbox(format("I'm sorry you had to see that, but I'm also not particularly surprised, {PLAYER}. But the goal is ultimately... peace. SharpRise Capital and police are fully aligned on setting an example with The Tide, and terrorists won't be tolerated."),,SPEAKER_KEIYING)
 
     msgbox(format("...Terrorists."),,SPEAKER_ALICIA,TAIL_THOUGHT)
 

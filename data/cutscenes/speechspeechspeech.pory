@@ -360,7 +360,7 @@ text gText_SpeechSpeechSpeech_HolyShit {
 }
 
 text gText_SpeechSpeechSpeech_IsAnybodyHurt {
-    format("Is anybody hurt? …no? Wonderful. Let’s continue. Kai’s restoration project has been going excellently, and we’re going to use that momentum for our next stage. It’s time to take the fight to SharpriseCapital!")
+    format("Is anybody hurt? …no? Wonderful. Let’s continue. Kai’s restoration project has been going excellently, and we’re going to use that momentum for our next stage. It’s time to take the fight to SharpRise Capital!")
 }
 
 text gText_SpeechSpeechSpeech_Yeah {

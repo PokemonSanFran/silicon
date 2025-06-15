@@ -181,7 +181,7 @@ text gText_OldAssholeAppears_LetsYouCallARide {
 }
 
 text gText_OldAssholeAppears_LetsYouUse {
-    format("That card lets you use Arriba for free! I went to the SharpriseSpire, and the League Commissioner gave me these for being the first Challenger to visit! It also lets you use the Subway System for free, but I think I'll stick to Arriba. Less homeless people to deal with, you know?")
+    format("That card lets you use Arriba for free! I went to the SharpRise Spire, and the League Commissioner gave me these for being the first Challenger to visit! It also lets you use the Subway System for free, but I think I'll stick to Arriba. Less homeless people to deal with, you know?")
 }
 
 text gText_OldAssholeAppears_YouveBeenSuperNice {

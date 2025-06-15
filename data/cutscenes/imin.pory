@@ -499,7 +499,7 @@ text gText_ImIn_WereCertainNobody {
 }
 
 text gText_ImIn_HasntLeftWorkEarly {
-    format("Ramesh hasn't left work early a day in their life. SharpriseCapital is led by monsters, but at least they're hard-working monsters.")
+    format("Ramesh hasn't left work early a day in their life. SharpRise Capital is led by monsters, but at least they're hard-working monsters.")
 }
 
 text gText_ImIn_WereInPosition {
@@ -591,7 +591,7 @@ text gText_ImIn_WaitTrash {
 }
 
 text gText_ImIn_WasDestryogingThisRegion {
-    format("TheTide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpriseCapital did for you?")
+    format("TheTide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpRise Capital did for you?")
 }
 
 text gText_ImIn_SoYouJustDontCare {
@@ -623,7 +623,7 @@ text gText_ImIn_WhatsTheSecret {
 }
 
 text gText_ImIn_EverythingAboutIsBullshit {
-    format("Everything about SharpriseCapital is bullshit. You're not any stronger. The region isn't any better. But as long as they have stans like you, they're going to continue to get richer and more toxic. Tell me where Adelaide is.")
+    format("Everything about SharpRise Capital is bullshit. You're not any stronger. The region isn't any better. But as long as they have stans like you, they're going to continue to get richer and more toxic. Tell me where Adelaide is.")
 }
 
 text gText_ImIn_Floor {

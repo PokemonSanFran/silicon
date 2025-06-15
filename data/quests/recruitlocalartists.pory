@@ -286,11 +286,11 @@ text gText_Recruitlocalartists_TheseMurals{
 }
 
 text gText_Recruitlocalartists_TheLocalsLove{
-    format("The locals love them too. I want to figure out how SharpriseCapital can work with these artists to create a marketing campaign that really resonates with the people. Can you help me track down the artists? Come to the Production Studio in the SharpriseSpire once you've found them.")
+    format("The locals love them too. I want to figure out how SharpRise Capital can work with these artists to create a marketing campaign that really resonates with the people. Can you help me track down the artists? Come to the Production Studio in the SharpRise Spire once you've found them.")
 }
 
 text gText_Recruitlocalartists_HelloPlayer{
-    format("Hello {PLAYER}. We haven't formerly met yet, but I'm Ramesh, VP of Marketing for SharpriseCapital. We've always been very impressed with your work.")
+    format("Hello {PLAYER}. We haven't formerly met yet, but I'm Ramesh, VP of Marketing for SharpRise Capital. We've always been very impressed with your work.")
 }
 
 movement Quest_Recruitlocalartists_RunPastScreen_Movement{

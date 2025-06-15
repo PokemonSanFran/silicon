@@ -264,10 +264,10 @@ const struct Tweet gTweets[] =
     {
         .userId = BUZZR_USER_NEWS,
         .content = COMPOUND_STRING(
-            "BREAKING NEWS: SharpriseStadium construction\n"
+            "BREAKING NEWS: SharpRise Stadium construction\n"
             "crew has declared a strike. Their demands\n"
             "are unclear at this time. This puts the\n"
-            "upcoming dates of the SharpriseCapital League\n"
+            "upcoming dates of the SharpRise Capital League\n"
             "Championship in danger.\n"
             "(1/2)"
             ),
@@ -281,7 +281,7 @@ const struct Tweet gTweets[] =
     {
         .userId = BUZZR_USER_NEWS,
         .content = COMPOUND_STRING(
-            "BREAKING NEWS: SharpriseStadium construction\n"
+            "BREAKING NEWS: SharpRise Stadium construction\n"
             "crew has declared a strike. Anonymous\n"
             "sources claim that TheTide is\n"
             "responsible for instigating this protest\n"

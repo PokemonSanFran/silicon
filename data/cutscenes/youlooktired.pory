@@ -151,11 +151,11 @@ text gText_YouLookTired_GladIWasAbleToRun {
 }
 
 text gText_YouLookTired_IGuessYouDoToo {
-    format("Ramesh... they work for SharpriseCapital, right? So I guess you do too?")
+    format("Ramesh... they work for SharpRise Capital, right? So I guess you do too?")
 }
 
 text gText_YouLookTired_ChiefOperatingOfficer {
-    format("Yes sorry, I'm the SharpriseCapitalChief Operating Officer, and Adelaide's right hand. It's a pleasure to meet you, we're all very impressed with you.")
+    format("Yes sorry, I'm the SharpRise Capital Chief Operating Officer, and Adelaide's right hand. It's a pleasure to meet you, we're all very impressed with you.")
 }
 
 text gText_YouLookTired_IKeepHearingThat {
@@ -167,7 +167,7 @@ text gText_YouLookTired_WaitDidntISeeYou{
 }
 
 text gText_YouLookTired_WhereDidYou{
-    format("Where did you hear that name? You shouldn't repeat that around other members of SharpriseCapital. Besides, that couldn't have been me.")
+    format("Where did you hear that name? You shouldn't repeat that around other members of SharpRise Capital. Besides, that couldn't have been me.")
 }
 
 text gText_YouLookTired_IKnowYoureRacing{

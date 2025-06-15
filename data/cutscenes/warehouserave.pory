@@ -236,7 +236,7 @@ text gText_WarehouseRave_WhyAmITrapped
 
 text gText_WarehouseRave_HasBeenPredicting
 {
-    format("SharpriseCapital has been predicting this for a while now, unfortunately. We've always had a few plans in case your empathy became unmanageable.")
+    format("SharpRise Capital has been predicting this for a while now, unfortunately. We've always had a few plans in case your empathy became unmanageable.")
 }
 
 text gText_WarehouseRave_SoIDecideTo
@@ -246,7 +246,7 @@ text gText_WarehouseRave_SoIDecideTo
 
 text gText_WarehouseRave_HasInstructed
 {
-    format("SharpriseCapital has instructed me to neutralize this new threat.")
+    format("SharpRise Capital has instructed me to neutralize this new threat.")
 }
 
 text gText_WarehouseRave_PrepareToFight
@@ -261,7 +261,7 @@ text gText_WarehouseRave_YesTheyllBelieve
 
 text gText_WarehouseRave_IFailedToKill
 {
-    format("Once I report back my failure, you'll officially become SharpriseCapital enemy number one. Be careful out there, {PLAYER}.")
+    format("Once I report back my failure, you'll officially become SharpRise Capital enemy number one. Be careful out there, {PLAYER}.")
 }
 
 text gText_WarehouseRave_WaitWhyAreYou
@@ -291,7 +291,7 @@ text gText_WarehouseRave_ItWasATrap
 
 text gText_WarehouseRave_HolyShitThatWas
 {
-    format("That was fast! SharpriseCapital attacking you directly, already?")
+    format("That was fast! SharpRise Capital attacking you directly, already?")
 }
 
 text gText_WarehouseRave_TheBattleFelt
@@ -316,7 +316,7 @@ text gText_WarehouseRave_WhatDoYouMean
 
 text gText_WarehouseRave_CameToTown
 {
-    format("He's like BD - once SharpriseCapital came to town, he jumped ship. He was playing both sides for a while, both working on SharpriseCapital's board and running the Gym in HodouCity.")
+    format("He's like BD - once SharpRise Capital came to town, he jumped ship. He was playing both sides for a while, both working on SharpRise Capital's board and running the Gym in HodouCity.")
 }
 
 text gText_WarehouseRave_MaybeItIsGuilt

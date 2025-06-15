@@ -376,7 +376,7 @@ text gText_Quest_Restoreespuleeoutskirts_ManIfTrainersSeeYou{
 
 
 text gText_Quest_Restoreespuleeoutskirts_IThinkYoureGiving{
-    format("I think you're giving me too much credit! Believe it or not, SharpriseCapital's Kickstart problem was a huge part of the reason I was able to hone my skills this much.")
+    format("I think you're giving me too much credit! Believe it or not, SharpRise Capital's Kickstart problem was a huge part of the reason I was able to hone my skills this much.")
 }
 
 

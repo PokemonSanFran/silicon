@@ -187,7 +187,7 @@ text gText_SorryAboutMyFriends_IGiveYouALot {
 }
 
 text gText_SorryAboutMyFriends_IAppreciateTheGesture {
-    format("I appreciate the gesture, but doesn't my version of the app from SharpriseCapitalget me everywhere?")
+    format("I appreciate the gesture, but doesn't my version of the app from SharpRise Capital get me everywhere?")
 }
 
 text gText_SorryAboutMyFriends_WantedYouToGoThere {

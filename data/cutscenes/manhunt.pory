@@ -285,7 +285,7 @@ script Manhunt_Matthew_Battle_Script {
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
         startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
 
-        msgbox(format("You're no joke. Alcmene wants you to meet them at Wishaast Lake, after sunset. Just the two of you - no police or SharpriseCapital cronies, or the trail goes cold again. Up to you. They're tired of you hurting people just to track them down, and I agree, you're…"),MSGBOX_AUTOCLOSE,SPEAKER_MATTHEW)
+        msgbox(format("You're no joke. Alcmene wants you to meet them at Wishaast Lake, after sunset. Just the two of you - no police or SharpRise Capital cronies, or the trail goes cold again. Up to you. They're tired of you hurting people just to track them down, and I agree, you're…"),MSGBOX_AUTOCLOSE,SPEAKER_MATTHEW)
         closemessage
         applymovement(MATTHEW,Common_Movement_FaceRight)
         waitmovement(MATTHEW)

@@ -269,7 +269,7 @@ text gText_WhyDidntYouRatMeOut_UhYeahWeMet {
 }
 
 text gText_WhyDidntYouRatMeOut_IMeantToTell {
-    format("I meant to tell you earlier - the SharpriseCapital executives have a fully catered skybox to watch the Championship. We're about to watch Charlotte's group!")
+    format("I meant to tell you earlier - the SharpRise Capital executives have a fully catered skybox to watch the Championship. We're about to watch Charlotte's group!")
 }
 
 text gText_WhyDidntYouRatMeOut_WinsTheirGroup {

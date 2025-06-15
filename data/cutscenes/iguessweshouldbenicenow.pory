@@ -557,7 +557,7 @@ text gText_IGuessWeShouldBeNiceNow_DaddyOwnsA {
 
 }
 text gText_IGuessWeShouldBeNiceNow_WaitWhatIThought {
-    format("Wait what? I thought SharpriseCapital-")
+    format("Wait what? I thought SharpRise Capital-")
 }
 
 text gText_IGuessWeShouldBeNiceNow_YeahDaddysPlace {

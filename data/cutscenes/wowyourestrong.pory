@@ -210,11 +210,11 @@ text gText_WowYoureStrong_WhatAShow {
 }
 
 text gText_WowYoureStrong_OhUhThanksALot {
-    format("Oh uh, thanks a lot, that's very nice. I'm guessing you work at SharpriseCapital…?")
+    format("Oh uh, thanks a lot, that's very nice. I'm guessing you work at SharpRise Capital…?")
 }
 
 text gText_WowYoureStrong_WhereMyManners {
-    format("Hah! Oh my, I'm sorry. Where are my manners? My name is Adelaide, and I'm the SharpriseCapitalLeague Commissioner, appointed by our corporate sponsors, Buzzr, Presto, and Arriba.")
+    format("Hah! Oh my, I'm sorry. Where are my manners? My name is Adelaide, and I'm the SharpRise Capital League Commissioner, appointed by our corporate sponsors, Buzzr, Presto, and Arriba.")
 }
 
 text gText_WowYoureStrong_ShouldHaveKnown {
@@ -222,11 +222,11 @@ text gText_WowYoureStrong_ShouldHaveKnown {
 }
 
 text gText_WowYoureStrong_DreamBig {
-    format("Dream big {PLAYER}! That's the attitude we wanna see. We're big dreamers over at SharpriseCapitaltoo. That's why we built the Sharprise Spire! I wrote a stunning email introduction after it was completed... I'll have to forward it to you, it's really some of my best writing.")
+    format("Dream big {PLAYER}! That's the attitude we wanna see. We're big dreamers over at SharpRise Capital too. That's why we built the SharpRise  Spire! I wrote a stunning email introduction after it was completed... I'll have to forward it to you, it's really some of my best writing.")
 }
 
 text gText_WowYoureStrong_YouShouldComeBy {
-    format("You should come by once you're done exploring! My office is on the 38th floor of the SharpriseSpire in {STR_VAR_2}.")
+    format("You should come by once you're done exploring! My office is on the 38th floor of the SharpRise Spire in {STR_VAR_2}.")
 }
 
 text gText_WowYoureStrong_RunToMeeting {

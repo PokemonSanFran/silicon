@@ -125,7 +125,7 @@ script LetsFinishThis_StartPlanning_Dialogue {
 }
 
 text gText_LetsFinishThis_IDontThinkIm {
-    format("I don’t think I’m surprised by SharpriseCapital, but the government too? All those talks, those negotiations… aren’t they supposed to protect their citizens?")
+    format("I don’t think I’m surprised by SharpRise Capital, but the government too? All those talks, those negotiations… aren’t they supposed to protect their citizens?")
 }
 
 text gText_LetsFinishThis_ThatPartDoesnt {
@@ -145,7 +145,7 @@ text gText_LetsFinishThis_ButTheyWerentAlways {
 }
 
 text gText_LetsFinishThis_HasAlwaysBeenRuthless {
-    format("SharpriseCapital has always been ruthless! Killing is… new though.")
+    format("SharpRise Capital has always been ruthless! Killing is… new though.")
 }
 
 text gText_LetsFinishThis_ThatsWhatIMean {
@@ -176,7 +176,7 @@ text gText_LetsFinishThis_TheyCameForTheKings {
 }
 
 text gText_LetsFinishThis_SoBreakInto {
-    format("So, break into SharpriseSpire, force a confession from Adelaide, broadcast it using their equipment and public sentiment will come crashing down. Right?")
+    format("So, break into SharpRise Spire, force a confession from Adelaide, broadcast it using their equipment and public sentiment will come crashing down. Right?")
 }
 
 text gText_LetsFinishThis_APublicConfession {

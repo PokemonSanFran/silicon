@@ -152,7 +152,7 @@ text gText_swagbag2_IveGotAFewMinutes {
 }
 
 text gText_swagbag2_DontLetTheirDemeanor {
-    format("Don't let their demeanor fool you - Kauna is actually one of the leading experts in Pokémon Breeding and Battling. His entire team is bred using this facility's Gold tier experience. Access to those same services is a perk of being under the SharpriseCapital umbrella.")
+    format("Don't let their demeanor fool you - Kauna is actually one of the leading experts in Pokémon Breeding and Battling. His entire team is bred using this facility's Gold tier experience. Access to those same services is a perk of being under the SharpRise Capital umbrella.")
 }
 
 text gText_swagbag2_WowThatsAwesome {

@@ -1329,7 +1329,7 @@ const u8 gText_Transpyramid[] = _("Transpyramid");
 const u8 gText_Ferrybuilding[] = _("Ferrybuilding");
 const u8 gText_Dragongate[] = _("Dragongate");
 const u8 gText_PopidoraPier[] = _("PopidoraPier");
-const u8 gText_SharpriseStadium[] = _("SharpriseStadium");
+const u8 gText_SharpriseStadium[] = _("SharpRise Stadium");
 const u8 gText_OrolandColiseum[] = _("OrolandColiseum");
 const u8 gText_Orolandferry[] = _("Orolandferry");
 const u8 gText_PiocaBridge[] = _("PiocaBridge");
@@ -1372,7 +1372,7 @@ const u8 gText_Route12[] = _("Route12");
 const u8 gText_RouteB[] = _("RouteB");
 const u8 gText_RouteE[] = _("RouteE");
 const u8 gText_HalerbaWilds[] = _("HalerbaWilds");
-const u8 gText_SharpriseSpire[] = _("SharpriseSpire");
+const u8 gText_SharpriseSpire[] = _("SharpRise Spire");
 const u8 gText_PARC[] = _("PARC");
 const u8 gText_Agatevillage[] = _("Agate Village");
 // End PSF Locations

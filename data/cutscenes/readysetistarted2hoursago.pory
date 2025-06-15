@@ -91,7 +91,7 @@ text gText_TwoHoursAgo_YoureInARace {
 }
 
 text gText_TwoHoursAgo_TheTouranemtnWillTest {
-    format("The tournament will test all of your skills as a Trainer, but the winner will become a SharpriseCapital-sponsored career Pokémon Trainer.")
+    format("The tournament will test all of your skills as a Trainer, but the winner will become a SharpRise Capital-sponsored career Pokémon Trainer.")
 }
 
 text gText_TwoHoursAgo_WeExpectTheBest {

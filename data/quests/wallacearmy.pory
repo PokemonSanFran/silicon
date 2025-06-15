@@ -411,7 +411,7 @@ text gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke{
     format("EspuleeOutskirts Solar? They spoke against our Lord, so we're taking them down! Anybody who gets in our way... is getting taken out!")
 }
 text gText_WallaceArmy_YouDidntHear{
-    format("You didn't hear? After EspuleeOutskirts Solar heard that Wallace was going to perform at the SharpriseStadium, they said refused to power a stadium that was hiring 'tasteless hacks'. How dare they?!")
+    format("You didn't hear? After EspuleeOutskirts Solar heard that Wallace was going to perform at the SharpRise Stadium, they said refused to power a stadium that was hiring 'tasteless hacks'. How dare they?!")
 }
 text gText_WallaceArmy_PostBattlePlaceholder1{
 	format("PostBattlePlaceholder1")

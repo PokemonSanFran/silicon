@@ -62,7 +62,7 @@
 #define DEPT_STORE_FLOORNUM_11F      14
 #define DEPT_STORE_FLOORNUM_ROOFTOP  15
 
-// SharpriseSpire Floor Numbers
+// SharpRise Spire Floor Numbers
 #define SHARPRISESPIRE_FLOORNUM_1F        1
 #define SHARPRISESPIRE_FLOORNUM_2F        2
 #define SHARPRISESPIRE_FLOORNUM_3F        3

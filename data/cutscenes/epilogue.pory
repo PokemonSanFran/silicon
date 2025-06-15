@@ -77,7 +77,7 @@ script Epilogue_Dialogue_ConversationAboutProgress
     msgbox(text=Epilogue_Text_AreYou,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_LAUGH)
     msgbox(text=Epilogue_Text_TheNewSharprise,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
     msgbox(text=Epilogue_Text_HesJustAnother,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
-    msgbox(text=Epilogue_Text_SharpriseCapitalAnd,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=Epilogue_Text_SharpRiseCapitalAnd,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=Epilogue_Text_WereYouExpecting,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SWEAT)
     msgbox(text=Epilogue_Text_IGuessI,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=Epilogue_Text_PlayerIsA,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SHOCK)
@@ -170,7 +170,7 @@ text Epilogue_Text_HesJustAnother
 {
 	format("He's just another corporate suit! Sure, he's not a murderer like Adelaide, but all of his apologies and promises to turn over a new leaf are completely hollow.")
 }
-text Epilogue_Text_SharpriseCapitalAnd
+text Epilogue_Text_SharpRiseCapitalAnd
 {
 	format("Sharprise Capital and all of its slimy tentacles are going to keep making Resido worse. ")
 }

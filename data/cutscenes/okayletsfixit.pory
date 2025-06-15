@@ -171,7 +171,7 @@ text gText_OkayLetsFixIt_LetsLookBack {
 }
 
 text gText_OkayLetsFixIt_ThisWasTheNight {
-    format("This was the night I decided to help SharpriseCapital.")
+    format("This was the night I decided to help SharpRise Capital.")
 }
 text gText_OkayLetsFixIt_Why {
     format("Why?")
@@ -183,7 +183,7 @@ text gText_OkayLetsFixIt_YouSawItAll {
     format("You saw what they were saying with your own eyes, no?")
 }
 text gText_OkayLetsFixIt_ImTheChampion {
-    format("I'm the Champion! And I wanted to be a Champion so bad... and I knew that going against SharpriseCapital meant that it was over. I didn't want to sacrifice anything to help them, and I knew I would have to.")
+    format("I'm the Champion! And I wanted to be a Champion so bad... and I knew that going against SharpRise Capital meant that it was over. I didn't want to sacrifice anything to help them, and I knew I would have to.")
 }
 text gText_OkayLetsFixIt_AndNow{
     format("And now?")
@@ -205,7 +205,7 @@ text gText_OkayLetsFixIt_WhatTheHell {
 }
 
 text gText_OkayLetsFixIt_WasThatReal{
-    format("Was that real? I sided with SharpriseCapital and... made things worse? Yeah, that was worse. It was just a dream... but it felt so real!")
+    format("Was that real? I sided with SharpRise Capital and... made things worse? Yeah, that was worse. It was just a dream... but it felt so real!")
 }
 
 text gText_OkayLetsFixIt_WhatIfIt{

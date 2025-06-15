@@ -386,7 +386,7 @@ text gText_Earthquake_ItsJustABunch {
 }
 
 text gText_Earthquake_IDontThinkSo {
-    format("…I don't think so. Kei-ying was really trying to help me. Even when I had dinner with him, their energy was different from everybody else in SharpriseCapital.")
+    format("…I don't think so. Kei-ying was really trying to help me. Even when I had dinner with him, their energy was different from everybody else in SharpRise Capital.")
 }
 
 text gText_Earthquake_HowCanYouTrust {

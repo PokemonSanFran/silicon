@@ -540,7 +540,7 @@ text gText_WhyAreYouHelpingThem_ItWasADay {
 }
 
 text gText_WhyAreYouHelpingThem_GoodNewsWhileYouWere {
-    format("Good news - while you were training in LeaverraForest, construction on SharpriseStadium finished up. The Group Stage will start in 3 days. Hopefully, that's enough time to rest up and get ready.")
+    format("Good news - while you were training in LeaverraForest, construction on SharpRise Stadium finished up. The Group Stage will start in 3 days. Hopefully, that's enough time to rest up and get ready.")
 }
 
 text gText_WhyAreYouHelpingThem_OhThatWasFast {

@@ -190,7 +190,7 @@ text gText_BuildingScope_HowBadCouldItBe{
     format("How bad could it be...? Come on, just barge in there and tell 'em what's what!")
 }
 text gText_BuildingScope_OhYourePlayer{
-    format("Oh! You're {PLAYER}. Maybe... you can help me? I work for SharpriseCapital, in the League Ops Division")
+    format("Oh! You're {PLAYER}. Maybe... you can help me? I work for SharpRise Capital, in the League Ops Division")
 }
 text gText_BuildingScope_TheresABuildingIn{
     format("this building is abandoned, so the league wants to buy it to turn it into a battle arena. But I'm pretty sure its overrun by beasts! Nasty things, they attack whenever we try to go inside.")

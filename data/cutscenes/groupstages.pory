@@ -177,7 +177,7 @@ text gText_GroupStages_Placeholder{
 }
 
 text gText_GroupStages_OnceYouStart {
-    format("Once you start the Group Stage, there's no turning back. You must complete the group stage before you can leave again, and you must complete the tournament before you can leave SharpriseStadium. Are you ready to continue?")
+    format("Once you start the Group Stage, there's no turning back. You must complete the group stage before you can leave again, and you must complete the tournament before you can leave SharpRise Stadium. Are you ready to continue?")
 }
 
 text gText_GroupStages_PlayerReturnToArena {

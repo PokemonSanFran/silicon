@@ -11,7 +11,7 @@ script SharpriseSpire_Production_Ramesh_Visibility_Script{
     setvar(VAR_TEMP_0,0)
     setvar(VAR_TEMP_1,0)
 
-    special(GetNumberOfBadges) 
+    special(GetNumberOfBadges)
     if (var(VAR_RESULT) > 4){
         addvar(VAR_TEMP_1,1)
     }

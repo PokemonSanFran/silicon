@@ -164,7 +164,7 @@ text gText_Inversehallucinogenic_Player{
     format("{PLAYER} good timing! I'm testing new aerosol drug, and I need somebody who I know can actually battle well. Can you come inside and rechallenge our Gym? We'll all be under the effects of the new variant. It's totally safe, but I think it changes how you battle. I think. Anyways, see you in there!")
 }
 text gText_Inversehallucinogenic_IKnewSharpriseCapital{
-	format("I knew SharpriseCapital's purchase of the Hall of Fame was just the beginning.")
+	format("I knew SharpRise Capital's purchase of the Hall of Fame was just the beginning.")
 }
 text gText_Inversehallucinogenic_TheyreNot{
 	format("They're not satisfied with small victories.")
@@ -176,7 +176,7 @@ text gText_Inversehallucinogenic_IAuthorizedThe{
 	format("I authorized the full buyout on the board because I knew they needed someone to do it.")
 }
 text gText_Inversehallucinogenic_TheBoardWasn{
-	format("The board wasn't a unified front, and that gave SharpriseCapital exactly what they needed.")
+	format("The board wasn't a unified front, and that gave SharpRise Capital exactly what they needed.")
 }
 text gText_Inversehallucinogenic_LyingToImelda{
 	format("Lying to Imelda hurt, but I knew she wouldn't understand. Nobody did.")
@@ -185,7 +185,7 @@ text gText_Inversehallucinogenic_IBelievedThat{
 	format("I believed that the ends justified the means.")
 }
 text gText_Inversehallucinogenic_IKnewIf{
-	format("I knew if SharpriseCapital didn't use me, they would find another way.")
+	format("I knew if SharpRise Capital didn't use me, they would find another way.")
 }
 text gText_Inversehallucinogenic_IWantedTo{
 	format("I wanted to work with them, not against them.")

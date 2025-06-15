@@ -399,7 +399,7 @@ text gText_YouRealizeTheyreEvilRight_AwesomeJobIn {
 format("Awesome job in {STR_VAR_1}. I heard all about it, and I'm so happy things are getting off the ground. I heard you got a phone call and disappeared. Everything okay?")
 }
 text gText_YouRealizeTheyreEvilRight_TheyDontLove {
-format("SharpriseCapital called me. They don't love our project.")
+format("SharpRise Capital called me. They don't love our project.")
 }
 text gText_YouRealizeTheyreEvilRight_YouSeemSurprised {
 format("You seem surprised.")
@@ -459,7 +459,7 @@ text gText_YouRealizeTheyreEvilRight_WowSuperResourceful {
 format("Wow! Super resourceful. Genius, even.")
 }
 text gText_YouRealizeTheyreEvilRight_ICanFinallyProve {
-format("I can finally prove that SharpriseCapital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit.")
+format("I can finally prove that SharpRise Capital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit.")
 }
 text gText_YouRealizeTheyreEvilRight_DidYouDragMe {
 format("Did you drag me out here to join a terrorist organization? Did you hear ANYTHING I said on the phone?")
@@ -480,7 +480,7 @@ text gText_YouRealizeTheyreEvilRight_Look {
 format("Look.")
 }
 text gText_YouRealizeTheyreEvilRight_ThisIsOne {
-format("This is one of the Garbodor from the SharpriseStadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?")
+format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?")
 }
 text gText_YouRealizeTheyreEvilRight_IHadToGo {
 format("Yeah. Charlotte and I had to go down there and defeat them and your goons.")
@@ -518,7 +518,7 @@ text YouRealizeTheyreEvilRight_CloseItsAGem
 
 text YouRealizeTheyreEvilRight_WhatNoWayAdelaide
 {
-    format("Adelaide gave me one of those after we stopped the SharpriseStadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!") // Alicia
+    format("Adelaide gave me one of those after we stopped the SharpRise Stadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!") // Alicia
 }
 
 text YouRealizeTheyreEvilRight_IveHadTheOpportunityToSee
@@ -528,7 +528,7 @@ text YouRealizeTheyreEvilRight_IveHadTheOpportunityToSee
 
 text YouRealizeTheyreEvilRight_WhileIWasKeepingAnEye
 {
-    format("While I was keeping an eye on things during the SharpriseStadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe Sharprise left one of these Gems on it. They’re the only ones who have access to something like this in the region.") // Kai
+    format("While I was keeping an eye on things during the SharpRise Stadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe SharpRise  left one of these Gems on it. They’re the only ones who have access to something like this in the region.") // Kai
 }
 
 text YouRealizeTheyreEvilRight_AdelaideConfirmedThat
@@ -538,11 +538,11 @@ text YouRealizeTheyreEvilRight_AdelaideConfirmedThat
 
 text gText_YouRealizeTheyreEvilRight_IsIf
 {
-    format("Is if SharpriseCapital equipped it directly.")
+    format("Is if SharpRise Capital equipped it directly.")
 }
 
 text gText_YouRealizeTheyreEvilRight_HasBeenFramingYou {
-format("Kai… SharpriseCapital has been framing you?")
+format("Kai… SharpRise Capital has been framing you?")
 }
 text gText_YouRealizeTheyreEvilRight_YouAlsoMetUp {
 format("{PLAYER}, you also met up with TheTide in Oroland too, right?")
@@ -551,13 +551,13 @@ text gText_YouRealizeTheyreEvilRight_ButAdaoraSaid {
 format("…yeah. But Adaora said that situation was super weird and was trying to track them down.")
 }
 text gText_YouRealizeTheyreEvilRight_YeahNobodyKnows {
-format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpriseCapital has been sending in agents to make us look shitty. Between that and whatever else SharpriseCapital is feeding you, I'm not surprised you feel the way you do.")
+format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpRise Capital has been sending in agents to make us look shitty. Between that and whatever else SharpRise Capital is feeding you, I'm not surprised you feel the way you do.")
 }
 text gText_YouRealizeTheyreEvilRight_WhyWhyDoAll {
 format("Why? Why do all this to just to screw with you guys?")
 }
 text gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney {
-format("SharpriseCapital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities - all for their agenda.")
+format("SharpRise Capital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities - all for their agenda.")
 }
 text gText_YouRealizeTheyreEvilRight_CantArgueWithThat {
 format("Can't argue with that.")
@@ -569,13 +569,13 @@ text gText_YouRealizeTheyreEvilRight_AndThatsWhyWere {
 format("And that's why we're all here.")
 }
 text gText_YouRealizeTheyreEvilRight_YepIThinkItsFinally {
-format("Yep. I think it's finally time we all come together to expose SharpriseCapital for the assholes that they are, and start to take power back for the people.")
+format("Yep. I think it's finally time we all come together to expose SharpRise Capital for the assholes that they are, and start to take power back for the people.")
 }
 text gText_YouRealizeTheyreEvilRight_LookIKnowThis {
 format("Look, I know this is a lot of information to take in. I know you're going to make the right decision...")
 }
 text gText_YouRealizeTheyreEvilRight_ShouldIJoin{
-	format("Should I join Kai and the Elite Four? Is that the right path? Fighting against SharpriseCapital and the government...")
+	format("Should I join Kai and the Elite Four? Is that the right path? Fighting against SharpRise Capital and the government...")
 }
 text gText_YouRealizeTheyreEvilRight_JoiningThemMeansGoingDeeper{
 	format("Joining them means going deeper into trouble, embracing their methods. The protests, the hacking, the riots... is that really what I want? Adaora says they don't condone violence, but can I even believe her?")
@@ -587,7 +587,7 @@ text gText_YouRealizeTheyreEvilRight_ButAtWhatCost{
 	format("But at what cost? I've worked so hard to get this far. To become the Champion. I can make a difference! Do I really want to throw it all away?")
 }
 text gText_YouRealizeTheyreEvilRight_CantDoIt{
-	format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpriseCapital wouldn't lie to me. That would get exposed! Are they just manipulating me, like they tried with the social media stunt?")
+	format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Are they just manipulating me, like they tried with the social media stunt?")
 }
 text gText_YouRealizeTheyreEvilRight_MakingTheRightChoice{
 	format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice.")
@@ -615,7 +615,7 @@ text gText_YouRealizeTheyreEvilRight_TheyreNot{
 }
 //PSF TODO Replace PLAYER with OBJECT pronoun
 text gText_YouRealizeTheyreEvilRight_TheresNothingToGet{
-    format("I'm not giving up what I have because you guys think SharpriseCapital is some big bad. TheTide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it.")
+    format("I'm not giving up what I have because you guys think SharpRise Capital is some big bad. TheTide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it.")
 }
 text gText_YouRealizeTheyreEvilRight_ThisGarbodor {
 format("Hey, this Garbodor seems to have taken a liking to you, and you seem to understand it pretty well. Do you want it?")
@@ -636,7 +636,7 @@ text gText_YouRealizeTheyreEvilRight_ICantBelieveIAlmost {
 format("I can't believe I almost fell for that stunt. Me? Siding with TheTide? After everything I've been through? And all that stuff, just because the battling is a little different?")
 }
 text gText_YouRealizeTheyreEvilRight_AndTheyWantToHelp{
-format("And they claim they want to do better for region? SharpriseCapital is making jobs! And bringing people like me! And stopping terrorists.")
+format("And they claim they want to do better for region? SharpRise Capital is making jobs! And bringing people like me! And stopping terrorists.")
 }
 text gText_YouRealizeTheyreEvilRight_ImGoingToBeOn{
 format("I'm going to be on the right side of history.")

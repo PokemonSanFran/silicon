@@ -283,7 +283,7 @@ text gText_WeCanStopYouActually_OhNo {
 }
 
 text gText_WeCanStopYouActually_IAmChiefOperatingOfficer {
-    format("I am Keiying, the SharpriseCapital Chief Operating Officer. This is my confession. Two days ago, SharpriseCapital triggered a machine that is responsible for the devastating earthquake on HalaiIsland. We did it to flush out and destroy …")
+    format("I am Keiying, the SharpRise Capital Chief Operating Officer. This is my confession. Two days ago, SharpRise Capital triggered a machine that is responsible for the devastating earthquake on HalaiIsland. We did it to flush out and destroy …")
 }
 
 text gText_WeCanStopYouActually_WaitTheHell {
@@ -340,7 +340,7 @@ text gText_WeCanStopYouActually_TheNextDay {
 }
 
 text gText_WeCanStopYouActually_AndTomorrowStarts {
-    format("And tomorrow starts the beginning of the second season of SharpriseCapital’s Championship League! Trainers from all over Resido will be battling all over to find out who will be this season’s Champ. The new SharpriseCapital CEO released a statement yesterday, showing their excitement for this new chapter in SharpriseCapital history. SharpriseCapital’s entire executive team were all charged with conspiracy and murder, and are currently waiting trial. The previous Champion, {PLAYER}, was unavailable for comment.")
+    format("And tomorrow starts the beginning of the second season of SharpRise Capital’s Championship League! Trainers from all over Resido will be battling all over to find out who will be this season’s Champ. The new SharpRise Capital CEO released a statement yesterday, showing their excitement for this new chapter in SharpRise Capital history. SharpRise Capital’s entire executive team were all charged with conspiracy and murder, and are currently waiting trial. The previous Champion, {PLAYER}, was unavailable for comment.")
 }
 
 movement WeCanStopYouActually_RunToDesk {

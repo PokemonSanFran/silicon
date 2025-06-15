@@ -1660,7 +1660,7 @@ static u32 GetMenuCursorSpriteId(void)
 
 static void LoadCompletionIconSprite(void)
 {
-    struct CompressedSpriteSheet sSpriteSheet_CompletionSharprise =
+    struct CompressedSpriteSheet sSpriteSheet_CompletionSharpRise =
     {
         sharpriseSprite,
         (16*16),
@@ -1677,7 +1677,7 @@ static void LoadCompletionIconSprite(void)
     if (HasPlayerJoinedTheTide())
         LoadCompressedSpriteSheet(&sSpriteSheet_CompletionTide);
     else
-        LoadCompressedSpriteSheet(&sSpriteSheet_CompletionSharprise);
+        LoadCompressedSpriteSheet(&sSpriteSheet_CompletionSharpRise);
     LoadSpritePalette(&sMainMenuInterfaceSpritePalette);
 }
 

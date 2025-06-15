@@ -434,7 +434,7 @@ text gText_VSGarbodor_CoolIWanted {
 }
 
 text gText_VSGarbodor_ScrewThisStadium {
-    format("Heh, we're TheTide! Screw this stadium and screw SharpriseCapital!")
+    format("Heh, we're TheTide! Screw this stadium and screw SharpRise Capital!")
 }
 
 text gText_VSGarbodor_IsTheName {
@@ -494,7 +494,7 @@ text gText_VSGarbodor_WhateverMineWereEasy {
 }
 
 text gText_VSGarbodor_AsWeWereNegotiating {
-    format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpriseCapital Task Force?")
+    format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?")
 }
 
 text gText_VSGarbodor_DoneLikeYouGuys {
@@ -527,7 +527,7 @@ text gText_VSGarbodor_TheyreOnlyFound
 
 text gText_VSGarbodor_ConsiderIt
 {
-    format("They are indeed removed from circulation worldwide, but consider it a perk. SharpriseCapital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!")
+    format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!")
 }
 
 text gText_VSGarbodor_IThink{

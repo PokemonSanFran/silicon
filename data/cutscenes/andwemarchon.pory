@@ -400,7 +400,7 @@ text gText_AndWeMarchOn_JustNotTheWay {
 }
 
 text gText_AndWeMarchOn_WeveGotAResponsibility {
-    format("We've got a responsibility here. The profit motive can not… WILL NOT erase our history. It lives on in our hearts. In our stories Our legends. And no corporation, SharpriseCapital or otherwise, can take that away from us!")
+    format("We've got a responsibility here. The profit motive can not… WILL NOT erase our history. It lives on in our hearts. In our stories Our legends. And no corporation, SharpRise Capital or otherwise, can take that away from us!")
 }
 
 movement AndWeMarchOn_WatchParade_Movement{

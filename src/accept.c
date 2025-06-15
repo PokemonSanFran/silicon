@@ -900,7 +900,7 @@ static const u8* const sTextEmail[] =
     COMPOUND_STRING(""),
     COMPOUND_STRING("Congratulations! We’re thrilled to"),
     COMPOUND_STRING("inform you that your application"),
-    COMPOUND_STRING("for the Sharprise Capital"),
+    COMPOUND_STRING("for the SharpRise Capital"),
     COMPOUND_STRING("Kickstart Grant has been accepted."),
     COMPOUND_STRING("You’ve proven yourself as one of"),
     COMPOUND_STRING("the brightest upcoming Pokémon"),
@@ -914,7 +914,7 @@ static const u8* const sTextEmail[] =
     COMPOUND_STRING("Resido region this September"),
     COMPOUND_STRING(""),
     COMPOUND_STRING("▶ Competing in the first-ever"),
-    COMPOUND_STRING("season of the Sharprise Capital"),
+    COMPOUND_STRING("season of the SharpRise Capital"),
     COMPOUND_STRING("Pokémon League (powered by"),
     COMPOUND_STRING("Presto)"),
     COMPOUND_STRING(""),
@@ -931,7 +931,7 @@ static const u8* const sTextEmail[] =
     COMPOUND_STRING(""),
     COMPOUND_STRING("Best,"),
     COMPOUND_STRING(""),
-    COMPOUND_STRING("The Sharprise Capital Team"),
+    COMPOUND_STRING("The SharpRise Capital Team"),
 };
 
 static void ShowEmailText(void)

@@ -136,7 +136,7 @@ text gText_Swagbag_BecauseTheBoard {
 }
 
 text gText_Swagbag_AlsoWeveGoneAhead {
-    format("Next, as you may have noticed, we loaded the newest Sharprise operating system onto your phones.")
+    format("Next, as you may have noticed, we loaded the newest SharpRise operating system onto your phones.")
 }
 
 text gText_Swagbag_InvasiveMuch {

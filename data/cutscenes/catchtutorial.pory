@@ -157,7 +157,7 @@ text gText_CatchTutorial_HeyThere
 }
 text gText_CatchTutorial_IDontRecognize
 {
-	format("I don't recognize you... and you're coming out of CuconuTown - you must be one of those Sharprise Trainers!")
+	format("I don't recognize you... and you're coming out of CuconuTown - you must be one of those SharpRise Trainers!")
 
 }
 text gText_CatchTutorial_YeahImNew

@@ -119,13 +119,13 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 }
 
 text gText_YouRealizeWereEvilRight_SorryToBotherYou {
-    format("Hello {PLAYER}! Sorry to bother you, but there is a slight situation here at SharpriseSpire. It's rather urgent. Please come to the second floor.")
+    format("Hello {PLAYER}! Sorry to bother you, but there is a slight situation here at SharpRise Spire. It's rather urgent. Please come to the second floor.")
 }
 text gText_YouRealizeWereEvilRight_YeahImOnMyWay {
     format("Yeah, I'm on my way over!")
 }
 text gText_YouRealizeWereEvilRight_WouldYouLikeToGo {
-    format("Would you like to go to SharpriseSpire?")
+    format("Would you like to go to SharpRise Spire?")
 }
 text gText_YouRealizeWereEvilRight_ThisWay {
     format("This way.")
@@ -137,7 +137,7 @@ text gText_YouRealizeWereEvilRight_ItsBeenSuperRewarding {
     format("It's been super rewarding!")
 }
 text gText_YouRealizeWereEvilRight_HoweverTheNext {
-    format("However, the next season of the Challenge is coming up, and we're slightly concerned with your activities and the perception that a SharpriseCapital sponsored Trainer is so intimately involved with the same structure that we sunset when we took over.")
+    format("However, the next season of the Challenge is coming up, and we're slightly concerned with your activities and the perception that a SharpRise Capital sponsored Trainer is so intimately involved with the same structure that we sunset when we took over.")
 }
 text gText_YouRealizeWereEvilRight_ItWouldBeBetter {
     format("It would be better if you found other extracurricular activities instead. A popular way to give back is volunteering at a shelter, or perhaps helping the researchers in Chasilla complete the Pokédex.")

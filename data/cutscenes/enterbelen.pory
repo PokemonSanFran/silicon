@@ -277,7 +277,7 @@ text gText_EnterBelen_YouHavenTasted
 }
 text gText_EnterBelen_BuzzrIs
 {
-    format("Everybody in the region uses the app! You can send messages and post updates about your world. In the SharpriseCapital League, when you defeat a Gym Leader, we celebrate with a post on Buzzr! When all the leaders have posted about you, you've qualified for the Championship.")
+    format("Everybody in the region uses the app! You can send messages and post updates about your world. In the SharpRise Capital League, when you defeat a Gym Leader, we celebrate with a post on Buzzr! When all the leaders have posted about you, you've qualified for the Championship.")
 }
 text gText_EnterBelen_LetMeDownload
 {

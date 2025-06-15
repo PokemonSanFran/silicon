@@ -257,7 +257,7 @@ text gText_TheGangsAllHere_IsThisWhereYouWork{
     format("Is this where you work?")
 }
 text gText_TheGangsAllHere_TheTowerYes{
-    format("My office is on this floor, yeah! This is League Ops, and everybody here is solely dedicated to making sure the SharpriseCapital Pokemon League is a success.")
+    format("My office is on this floor, yeah! This is League Ops, and everybody here is solely dedicated to making sure the SharpRise Capital Pokemon League is a success.")
 }
 text gText_TheGangsAllHere_IHaventBeen{
     format("I've an important delivery for the C.E.O., but the workers here in League Ops can be a little... rowdy. Do you mind if I tag along on your tour? I'll keep you in tip-top shape!")

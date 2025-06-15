@@ -225,7 +225,7 @@ text gText_ExhibitionBattle_IsThis
 
 text gText_ExhibitionBattle_IDontKnow
 {
-    format("Was this worth it? Was helping SharpriseCapital and fighting against these people the decision I should have made? Is being 'famous' worth it?")
+    format("Was this worth it? Was helping SharpRise Capital and fighting against these people the decision I should have made? Is being 'famous' worth it?")
 }
 
 text gText_ExhibitionBattle_SickBattleOut {

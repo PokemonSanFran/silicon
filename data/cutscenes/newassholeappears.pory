@@ -116,7 +116,7 @@ script NewAssholeAppears_KaiExit_Script{
 }
 
 text gText_NewAssholeAppears_YouLookFamiliar {
-    format("You look familiar. You flew here to do the SharpriseCapitalLeague Challenge, right?")
+    format("You look familiar. You flew here to do the SharpRise Capital League Challenge, right?")
 }
 
 text gText_NewAssholeAppears_YeahYouHadSome{

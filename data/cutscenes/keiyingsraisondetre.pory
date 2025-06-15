@@ -351,7 +351,7 @@ text gText_KeiyingRaisonDetre_YourHouseIsBeautiful {
     format("Your house is beautiful. Actually, the entire city is beautiful.")
 }
 text gText_KeiyingRaisonDetre_ItWasImportantToMe {
-    format("Thank you. It was important to me that I raised my family in PetarosaBorough. Most SharpriseCapital employees want to be in the city - close to the office and the nightlife. ")
+    format("Thank you. It was important to me that I raised my family in PetarosaBorough. Most SharpRise Capital employees want to be in the city - close to the office and the nightlife. ")
 }
 text gText_KeiyingRaisonDetre_ButItsHardToJustify {
     format("But it's hard to justify raising a family there. It's expensive on this side, sure, but it's less dangerous… and not suffering as much.")
@@ -417,7 +417,7 @@ text gText_KeiyingRaisonDetre_MyKidsBeingObsessed {
     format("Yes. My kids being obsessed with you isn't an accident. We're building rock stars.")
 }
 text gText_KeiyingRaisonDetre_WereGoingToMake {
-    format("SharpriseCapital is going to make Resido the region where Trainers come to become rock stars. Resido's new talent will attract the best and the brightest, and the region will be richer for it. We can uplift all of Resido's citizens to something much much greater. You're an investment, {PLAYER}, but it's all part of a much bigger play.")
+    format("SharpRise Capital is going to make Resido the region where Trainers come to become rock stars. Resido's new talent will attract the best and the brightest, and the region will be richer for it. We can uplift all of Resido's citizens to something much much greater. You're an investment, {PLAYER}, but it's all part of a much bigger play.")
 }
 text gText_KeiyingRaisonDetre_IPray{
     format("I choose to believe that this is for the greater good.") //PSF TODO EMOTE sigh
@@ -470,7 +470,7 @@ text gText_KeiyingRaisonDetre_What {
     format("…what?")
 }
 text gText_KeiyingRaisonDetre_TonOfMoneyInWarp {
-    format("SharpriseCapital has a ton of money in warp tiles. All the executives have panels from their house to their office installed. He literally teleports to work, everyday.")
+    format("SharpRise Capital has a ton of money in warp tiles. All the executives have panels from their house to their office installed. He literally teleports to work, everyday.")
 }
 text gText_KeiyingRaisonDetre_OhDamnYouWerent {
     format("Oh damn, you weren't kidding.")

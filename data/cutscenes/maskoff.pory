@@ -213,7 +213,7 @@ text gText_MaskOff_TheOneAndOnly {
     format("the one and only… Ellen.")
 }
 text gText_MaskOff_IFormedTheTide {
-    format("I formed TheTide as a response to SharpriseCapital’s growing influence over the region a few years ago. ")
+    format("I formed TheTide as a response to SharpRise Capital’s growing influence over the region a few years ago. ")
 }
 text gText_MaskOff_ButWhyGo {
     format("But why go into hiding as Alcmene?")

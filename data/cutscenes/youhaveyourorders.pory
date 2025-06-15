@@ -122,7 +122,7 @@ script YouHaveYourOrders_Assignment_Dialogue
 
         msgbox(format("You were a Gym Leader?"),,SPEAKER_ALICIA)
 
-        msgbox(format("It was one of my greatest accomplishments. But when SharpriseCapital came along and I saw them beginning to usher in a new age for the region, I knew I wanted to help them. I made sure I was absolutely invaluable to them, and that's how I ended up in this spot now."),,SPEAKER_KEIYING)
+        msgbox(format("It was one of my greatest accomplishments. But when SharpRise Capital came along and I saw them beginning to usher in a new age for the region, I knew I wanted to help them. I made sure I was absolutely invaluable to them, and that's how I ended up in this spot now."),,SPEAKER_KEIYING)
 
         msgbox(format("Was that hard?"),,SPEAKER_ALICIA)
 

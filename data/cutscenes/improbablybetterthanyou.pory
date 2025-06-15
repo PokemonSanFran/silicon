@@ -131,7 +131,7 @@ text gText_ImProbablyBetterThanYou_WelcomeToTheMost{
 }
 
 text gText_ImProbablyBetterThanYou_KindaShabbyHuh {
-    format("This place is kinda shabby, huh? I thought SharpriseCapitalwas pulling out all the stops for us, but there's not a butler in sight! And no private tennis courts! Not that I ever play, but it's the principle of the thing...")
+    format("This place is kinda shabby, huh? I thought SharpRise Capital was pulling out all the stops for us, but there's not a butler in sight! And no private tennis courts! Not that I ever play, but it's the principle of the thing...")
 }
 
 text gText_ImProbablyBetterThanYou_OhYeahUh {

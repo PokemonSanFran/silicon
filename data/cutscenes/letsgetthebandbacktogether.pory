@@ -129,7 +129,7 @@ text gText_LetsGetTheBandBackTogether_IDidntThinkYouWere {
 }
 
 text gText_LetsGetTheBandBackTogether_IHadAnInsane {
-    format("I had an insane dream last night, which really helped. I'm sorry about what I said yesterday. I was wrong. You can hack it. And SharpriseCapital... they're actually monsters.")
+    format("I had an insane dream last night, which really helped. I'm sorry about what I said yesterday. I was wrong. You can hack it. And SharpRise Capital... they're actually monsters.")
 }
 
 text gText_LetsGetTheBandBackTogether_DamnYouDid{
@@ -157,7 +157,7 @@ text gText_LetsGetTheBandBackTogether_WhatAmIMissing {
 }
 
 text gText_LetsGetTheBandBackTogether_HasntBeenHeardFromEver {
-    format("Ellen hasn’t been heard from ever since SharpriseCapital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore.")
+    format("Ellen hasn’t been heard from ever since SharpRise Capital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore.")
 }
 
 
@@ -170,7 +170,7 @@ text gText_LetsGetTheBandBackTogether_OhYeahOfCourse {
 }
 
 text gText_LetsGetTheBandBackTogether_IllWriteUpAPost {
-    format("I’ll write up a post and you can share it. Once you do, though, SharpriseCapital is probably gonna cut you off, so if there are any perks you wanna use before you lose access you should do it now. Let me know when you’re good to go.")
+    format("I’ll write up a post and you can share it. Once you do, though, SharpRise Capital is probably gonna cut you off, so if there are any perks you wanna use before you lose access you should do it now. Let me know when you’re good to go.")
 }
 
 text gText_LetsGetTheBandBackTogether_ReadyToGoLive {
@@ -186,7 +186,7 @@ text gText_LetsGetTheBandBackTogether_Yes {
 }
 
 text gText_LetsGetTheBandBackTogether_WereSickOf {
-    format("We’re sick of SharpriseCapital’s shit. We’re tired of the lies, the attacks, and the greed. Let’s take back our region, together.")
+    format("We’re sick of SharpRise Capital’s shit. We’re tired of the lies, the attacks, and the greed. Let’s take back our region, together.")
 }
 
 text gText_LetsGetTheBandBackTogether_LetsSplitUp {
