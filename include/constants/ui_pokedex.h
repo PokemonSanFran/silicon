@@ -233,7 +233,7 @@ enum
     MON_RELATIONSHIP_COUNT,
 };
 
-enum
+enum PokedexEvolution
 {
     EVOLUTION_NULL,
     MON_CAN_EVOLVE,
