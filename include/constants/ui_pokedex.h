@@ -243,6 +243,13 @@ enum PokedexEvolution
     EVOLUTION_STAGE_COUNT,
 };
 
+enum PokedexEvolutionCheckMode
+{
+    CHECK_CAN_EVOLVE,
+    CHECK_HAS_EVOLVED,
+    CHECK_NO_EVOLTION,
+};
+
 enum PokedexFamilyAttributes
 {
     POKEDEX_EVOLUTION_ATTRIBUTE_ORIGINAL_SPECIES,
