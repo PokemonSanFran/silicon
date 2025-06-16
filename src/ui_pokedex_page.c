@@ -2115,7 +2115,7 @@ static bool32 IsValidParent(u32 parentMon, u32 targetSpecies, u32 moveId, u32 re
     if (!SharesEggGroup(parentMon, targetSpecies))
         return FALSE;
 
-    if (CanEvolve(parentMon))
+    if (SpeciesFilter_CheckEvolutionStatus(parentMon, CHECK_CAN_EVOLVE))
         return FALSE;
 
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(parentMon);
