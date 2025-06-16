@@ -60,6 +60,7 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
+#include "ui_pokedex.h" // dexNav
 
 #if DEXNAV_ENABLED
 STATIC_ASSERT(DN_FLAG_SEARCHING != 0, DNFlagSearching_Must_Not_Be_Zero);
@@ -811,11 +812,16 @@ static void LoadSearchIconData(void)
 static u8 GetSearchLevel(u16 species)
 {
     u8 searchLevel;
+    // Start dexNav
+    /*
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    searchLevel = gSaveBlock2Ptr->dexNavSearchLevels[species];
+    searchLevel = gSaveBlock3Ptr->dexNavSearchLevels[species];
 #else
     searchLevel = 0;
 #endif
+    */
+    // End dexNav
+    searchLevel = gSaveBlock2Ptr->dexNavSearchLevels[ConvertSpeciesIdToResidoDex(species)];
     return searchLevel;
 }
 
@@ -2689,10 +2695,16 @@ u32 CalculateDexNavShinyRolls(void)
 
 void TryIncrementSpeciesSearchLevel()
 {
+    if (gSaveBlock2Ptr->dexNavSearchLevels[ConvertSpeciesIdToResidoDex(gDexNavSpecies)] < 255)
+        gSaveBlock2Ptr->dexNavSearchLevels[ConvertSpeciesIdToResidoDex(gDexNavSpecies)]++;
+    // Start dexNav
+    /*
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER && gSaveBlock2Ptr->dexNavSearchLevels[gDexNavSpecies] < 255)
-        gSaveBlock2Ptr->dexNavSearchLevels[gDexNavSpecies]++;
+    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER && gSaveBlock3Ptr->dexNavSearchLevels[gDexNavSpecies] < 255)
+        gSaveBlock3Ptr->dexNavSearchLevels[gDexNavSpecies]++;
 #endif
+    */
+    // End dexNav
 }
 
 void ResetDexNavSearch(void)
