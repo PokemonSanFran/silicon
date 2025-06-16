@@ -2529,7 +2529,7 @@ static u32 SpeciesMenu_GetMenuHeight(void)
 
 bool32 SpeciesMenu_IsSpeciesRelatedEvolution(u32 species)
 {
-    return CanEvolve(species) || (GetEggSpecies(species) != species);
+    return (SpeciesFilter_CheckEvolutionStatus(species,CHECK_CAN_EVOLVE) || SpeciesFilter_CheckEvolutionStatus(species,CHECK_HAS_EVOLVED));
 }
 
 const u16 regionalFormTable[] =
