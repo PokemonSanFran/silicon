@@ -302,9 +302,11 @@ struct SaveBlock3
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
+    /*
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    u8 dexNavSearchLevels[NUM_SPECIES];
+    u8 dexNavSearchLevels[RESIDO_DEX_COUNT];
 #endif
+*/
     u8 dexNavChain;
 }; /* max size 1624 bytes */
 
@@ -667,6 +669,9 @@ struct SaveBlock2
     u8 optionsMusic[NUM_OPTIONS_MUSIC_SETTINGS];
     u8 optionsRandom[NUM_OPTIONS_RANDOM_SETTINGS];
     struct Buzzr buzzr; //Buzzr Branch
+#if USE_DEXNAV_SEARCH_LEVELS == TRUE
+    u8 dexNavSearchLevels[RESIDO_DEX_COUNT];
+#endif
 	// End siliconMerge
 }; // sizeof=0xF2C
 
