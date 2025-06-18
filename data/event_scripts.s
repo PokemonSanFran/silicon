@@ -1642,3 +1642,5 @@ EventScript_VsSeekerChargingDone::
 @ End siliconMerge
 
 	.include "data/maps/CapheCommunityGarden/scripts.inc"
+
+	.include "data/maps/Arantraz_Prison/scripts.inc"

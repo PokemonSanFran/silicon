@@ -8376,6 +8376,18 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/CapheCommunityGarden/border.bin",
       "blockdata_filepath": "data/layouts/CapheCommunityGarden/map.bin"
+    },
+    {
+      "id": "LAYOUT_ARANTRAZ_PRISON",
+      "name": "Arantraz_Prison_Layout",
+      "width": 50,
+      "height": 70,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/Arantraz_Prison/border.bin",
+      "blockdata_filepath": "data/layouts/Arantraz_Prison/map.bin"
     }
   ]
 }
