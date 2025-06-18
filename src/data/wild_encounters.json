@@ -23940,106 +23940,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -24049,106 +24049,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -24158,106 +24158,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -24267,106 +24267,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_LITWICK"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 23,
-                    "max_level": 28,
-                    "species": "SPECIES_MUNNA"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 24,
-                    "max_level": 28,
-                    "species": "SPECIES_HONEDGE"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 25,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 29,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 23,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 25,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 29,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -24376,106 +24376,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -24485,106 +24485,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -24594,106 +24594,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -24703,106 +24703,106 @@
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 39,
-                    "species": "SPECIES_POLTEAGEIST_PHONY"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_ARMAROUGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 32,
-                    "max_level": 40,
-                    "species": "SPECIES_CERULEDGE"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 31,
-                    "max_level": 38,
-                    "species": "SPECIES_LAMPENT"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 30,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_CHEST"
-                },
-                {
-                    "min_level": 20,
-                    "max_level": 40,
-                    "species": "SPECIES_GIMMIGHOUL_ROAMING"
-                }
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 39,
+                "species": "SPECIES_POLTEAGEIST_PHONY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_ARMAROUGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 40,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 38,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
+              },
+              {
+                "min_level": 20,
+                "max_level": 40,
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+              }
             ]
           }
         },
@@ -25981,6 +25981,442 @@
                 "min_level": 18,
                 "max_level": 21,
                 "species": "SPECIES_SPINDA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
+          "base_label": "gCapheCity_PantryMaze_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
+          "base_label": "gCapheCity_PantryMaze_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
+          "base_label": "gCapheCity_PantryMaze_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
+          "base_label": "gCapheCity_PantryMaze_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_FIDOUGH"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 5,
+                "max_level": 20,
+                "species": "SPECIES_NACLI"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
               }
             ]
           }
