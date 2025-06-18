@@ -110,6 +110,7 @@
 #define FLAG_COLLECTED_ALL_SILVER_SYMBOLS    0x5C
 #define FLAG_GOOD_LUCK_SAFARI_ZONE           0x5D // Set after talking to NPC blocking Safari Zone entrance/exit once.
 #define FLAG_RECEIVED_WAILMER_PAIL           0x5E
+#define FLAG_NO_WHITEOUT                     0x5E // Silicon Flag
 #define FLAG_RECEIVED_POKEBLOCK_CASE         0x5F
 #define FLAG_RECEIVED_SECRET_POWER           0x60
 #define FLAG_MET_TEAM_AQUA_HARBOR            0x61
