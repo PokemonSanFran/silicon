@@ -238,7 +238,5 @@
       "script": "TheStorySoFar_ReadSign6_Dialogue"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

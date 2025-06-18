@@ -199,7 +199,5 @@
       "script": "GroupOfAssholes_PostSaveTrigger_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
