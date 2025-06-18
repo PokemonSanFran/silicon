@@ -8364,6 +8364,18 @@
       "secondary_tileset": "gTileset_Shop",
       "border_filepath": "data/layouts/Perlacia_City_Coffee/border.bin",
       "blockdata_filepath": "data/layouts/Perlacia_City_Coffee/map.bin"
+    },
+    {
+      "id": "LAYOUT_CAPHE_COMMUNITY_GARDEN",
+      "name": "CapheCommunityGarden_Layout",
+      "width": 20,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/CapheCommunityGarden/border.bin",
+      "blockdata_filepath": "data/layouts/CapheCommunityGarden/map.bin"
     }
   ]
 }
