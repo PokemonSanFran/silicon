@@ -536,11 +536,11 @@ static const u16 sPlayerAvatarGfxToStateFlag[NUM_ALL_BODY_TYPES][5][2] =
     },
     [BODY_TYPE_F3] =
     {
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL,     PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE,  PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_ACRO_BIKE,  PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING,    PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_F3_NORMAL,     PLAYER_AVATAR_FLAG_ON_FOOT},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_F3_MACH_BIKE,  PLAYER_AVATAR_FLAG_MACH_BIKE},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_F3_ACRO_BIKE,  PLAYER_AVATAR_FLAG_ACRO_BIKE},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_F3_SURFING,    PLAYER_AVATAR_FLAG_SURFING},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_F3_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
     },
 };
 // End playerCustom
@@ -1828,8 +1828,13 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
+        // Start playerCustom
+        /*
         if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)
             return sPlayerAvatarGfxToStateFlag[gender][i][1];
+        */
+        if (sPlayerAvatarGfxToStateFlag[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]][i][0] == graphicsId)
+            return sPlayerAvatarGfxToStateFlag[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]][i][1];
     }
     return PLAYER_AVATAR_FLAG_ON_FOOT;
 }
@@ -1841,8 +1846,15 @@ u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
 
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
+        // Start playerCustom
+        /*
         if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & flags)
             return sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][0];
+        */
+        DebugPrintf("GetPlayerAvatarStateTransitionByGraphicsId %d %d",i,gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]);
+        if (sPlayerAvatarGfxToStateFlag[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]][i][1] & flags)
+            return sPlayerAvatarGfxToStateFlag[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]][i][0];
+        // End playerCustom
     }
     return 0;
 }
