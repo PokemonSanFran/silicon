@@ -238,7 +238,5 @@
       "script": "swagbag2_OliverWalkOutGym_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
