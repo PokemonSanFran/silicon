@@ -12489,12 +12489,16 @@ const struct Item gItemsInfo[] =
 
     [ITEM_SUPER_ROD] =
     {
-        .name = _("Super Rod"),
+        // Start wildEncounters
+        //.name = _("Super Rod"),
+        .name = _("Fishing Rod"),
         .price = 0,
         .description = COMPOUND_STRING(
-                "The best fishing\n"
+                //"The best fishing\n"
+                "A fishing\n"
                 "rod for catching\n"
                 "wild Pokémon."),
+        // End wildEncounters
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
