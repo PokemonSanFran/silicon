@@ -443,7 +443,5 @@
       "script": "HowDoWeGetHome_YellingDistance_Dialogue"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
