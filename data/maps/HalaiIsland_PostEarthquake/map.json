@@ -12,13 +12,9 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
-  "object_events": [
-
-  ],
-  "warp_events": [
-
-  ],
+  "connections": null,
+  "object_events": [],
+  "warp_events": [],
   "coord_events": [
     {
       "type": "trigger",
@@ -30,7 +26,5 @@
       "script": "CutePokemon_Script_DebugGiveMon"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
