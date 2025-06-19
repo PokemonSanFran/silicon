@@ -8388,6 +8388,18 @@
       "secondary_tileset": "gTileset_Slateport",
       "border_filepath": "data/layouts/Arantraz_Prison/border.bin",
       "blockdata_filepath": "data/layouts/Arantraz_Prison/map.bin"
+    },
+    {
+      "id": "LAYOUT_GLAVEZ_HEIGHTS",
+      "name": "GlavezHeights_Layout",
+      "width": 20,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Lavaridge",
+      "border_filepath": "data/layouts/GlavezHeights/border.bin",
+      "blockdata_filepath": "data/layouts/GlavezHeights/map.bin"
     }
   ]
 }

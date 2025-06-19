@@ -1644,3 +1644,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/CapheCommunityGarden/scripts.inc"
 
 	.include "data/maps/Arantraz_Prison/scripts.inc"
+
+	.include "data/maps/GlavezHeights/scripts.inc"
