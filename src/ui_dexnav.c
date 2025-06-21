@@ -1,0 +1,79 @@
+#include "global.h"
+#include "battle_main.h"
+#include "battle_setup.h"
+#include "bg.h"
+#include "data.h"
+#include "daycare.h"
+#include "decompress.h"
+#include "dexnav.h"
+#include "event_data.h"
+#include "event_object_movement.h"
+#include "event_scripts.h"
+#include "field_effect.h"
+#include "field_effect_helpers.h"
+#include "field_message_box.h"
+#include "field_player_avatar.h"
+#include "field_screen_effect.h"
+#include "fieldmap.h"
+#include "gpu_regs.h"
+#include "graphics.h"
+#include "item.h"
+#include "international_string_util.h"
+#include "m4a.h"
+#include "map_name_popup.h"
+#include "main.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "metatile_behavior.h"
+#include "move.h"
+#include "overworld.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "pokemon_icon.h"
+#include "pokemon_summary_screen.h"
+#include "random.h"
+#include "region_map.h"
+#include "rtc.h"
+#include "scanline_effect.h"
+#include "script.h"
+#include "script_pokemon_util.h"
+#include "sound.h"
+#include "sprite.h"
+#include "start_menu.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
+#include "text.h"
+#include "text_window.h"
+#include "wild_encounter.h"
+#include "window.h"
+#include "constants/map_types.h"
+#include "constants/species.h"
+#include "constants/dexnav.h"
+#include "constants/maps.h"
+#include "constants/field_effects.h"
+#include "constants/items.h"
+#include "constants/songs.h"
+#include "constants/abilities.h"
+#include "constants/rgb.h"
+#include "constants/region_map_sections.h"
+#include "gba/m4a_internal.h"
+#include "ui_pokedex.h"
+
+struct DexNavMenu
+{
+    MainCallback savedCallback;
+    u8 state;
+    u8 cursorSpriteId;
+    u8 cursorPosition;
+    u16 landSpecies[LAND_WILD_COUNT];
+    u16 waterSpecies[WATER_WILD_COUNT + FISH_WILD_COUNT];
+    u8 habitat;
+    u8 typeIconSpriteIds[TYPES_PER_MON];
+    u8 starSpriteIds[DEXNAV_STAR_COUNT];
+};
+
+

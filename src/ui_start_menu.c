@@ -26,6 +26,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "ui_pokedex.h"
+#include "dexnav.h"
 #include "pokenav.h"
 #include "pokemon_icon.h"
 #include "quests.h"
@@ -1684,7 +1685,7 @@ static void Task_MenuMain(u8 taskId)
                     }
                     break;
                 case APP_BUZZR:
-                        if(GetCurrentSignal() != 0){
+                    if(GetCurrentSignal() != 0){
                         PlayCry_Normal(SPECIES_CUTIEFLY,0);
 
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -1719,26 +1720,9 @@ static void Task_MenuMain(u8 taskId)
                     break;
                 case APP_DEXNAV:
                     if(GetCurrentSignal() != 0){
-                        /*/
-                          This should be added when this branch merges with the one with the dexnav and the HasMapMons its a
-                          function that checks that there are wild encounter in that specific area since there were reports
-                          of the game crashing with ghoulslash's dexnav if there are no pokemon in some emulators so I think
-                          its safer to add this as a check
-                          remove everything else in this if when we merge the dexnav
-                          if(HasMapMons()){
-                          PlaySE(SE_SELECT);
-                          BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                          gTasks[taskId].func = Task_OpenDexNavFromStartMenu;
-                          }
-                          else{
-                          PlaySE(SE_BOO);
-                          sMenuDataPtr->shouldShowErrorMessage = TRUE;
-                          }
-                          */
-                        PlaySE(SE_PC_OFF);
+                        PlaySE(SE_SELECT);
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                        //gTasks[taskId].func = Task_MenuTurnOff;
-                        gTasks[taskId].func = Task_OpenSaveMenuStartMenu;
+                        gTasks[taskId].func = Task_OpenDexNavFromStartMenu;
                     }
                     else{
                         PlaySE(SE_BOO);
