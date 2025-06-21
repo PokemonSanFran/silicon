@@ -283,7 +283,7 @@ const struct Tweet gTweets[] =
         .content = COMPOUND_STRING(
             "BREAKING NEWS: SharpRise Stadium construction\n"
             "crew has declared a strike. Anonymous\n"
-            "sources claim that TheTide is\n"
+            "sources claim that The Tide is\n"
             "responsible for instigating this protest\n"
             "but we'll have more information as the\n"
             "situation develops.\n"

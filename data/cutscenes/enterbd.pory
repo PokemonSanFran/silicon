@@ -191,7 +191,7 @@ text gText_EnterBD_StupidParade {
 }
 
 text gText_EnterBD_TheyJustDontUnderstand {
-    format("They just don't understand… it was either their way or the highway… and I kept the Gym! And now I'm the traitor?")
+    format("They just don't understand… SharpRise was going to own this place, one way or another. We were never going to win. I made sure that Tirabudin Gym kept its Gym! And what, I'm a traitor because I kept my job? Got paid?")
 }
 
 text gText_EnterBD_HeyYouSeemBusy {

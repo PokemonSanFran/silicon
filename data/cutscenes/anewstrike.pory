@@ -9,7 +9,7 @@ script ANewStrike_BreakingNews_Dialogue {
 }
 
 script ANewStrike_PlayerSelf_Dialogue {
-        msgbox(gText_ANewStrike_OhDamn,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE,PHONE_OFF)
+        msgbox(gText_ANewStrike_OhDamn,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK,PHONE_OFF)
         closemessage
         endcutscene
         releaseall
@@ -17,5 +17,5 @@ script ANewStrike_PlayerSelf_Dialogue {
 }
 
 text gText_ANewStrike_OhDamn {
-    format("Oh damn. I wonder what they'll do if the Championship has to be delayed…")
+    format("Oh damn. SharpRise can't delay the Championship. That's the whole reason we're here!")
 }

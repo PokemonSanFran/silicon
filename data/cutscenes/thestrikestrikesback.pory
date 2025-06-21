@@ -159,12 +159,6 @@ script TheStrikeStrikesBack_Intro_Dialogue {
 
                 msgbox(gText_TheStrikeStrikesBack_TheCityDoubles,,SPEAKER_ALCMENE)
 
-                msgbox(gText_TheStrikeStrikesBack_ManagementTriples,,SPEAKER_ALCMENE)
-
-                msgbox(gText_TheStrikeStrikesBack_TheCityQuadruples,,SPEAKER_ALCMENE)
-
-                msgbox(gText_TheStrikeStrikesBack_TheseDemandsAreMore,,SPEAKER_ALCMENE)
-
                 closemessage
 
                 applymovement(ALCMENE,TheStrikeStrikesBack_WalkOutFrame)
@@ -266,23 +260,11 @@ text gText_TheStrikeStrikesBack_MyNameIs {
 }
 
 text gText_TheStrikeStrikesBack_WeAreFighting {
-    format("We are fighting alongside the construction workers here, and we are hoping to come to a reasonable conclusion for all. We are requesting, no, DEMANDING:")
+    format("We are fighting alongside the construction workers here, and we are hoping to come to a reasonable conclusion for all.")
 }
 
 text gText_TheStrikeStrikesBack_TheCityDoubles {
-    format("1. The city doubles the pay of these workers.")
-}
-
-text gText_TheStrikeStrikesBack_ManagementTriples {
-    format("2. Management triples their safety and anti-harassment certifications. ")
-}
-
-text gText_TheStrikeStrikesBack_TheCityQuadruples {
-    format("3. The city quadruples the workers' break times.")
-}
-
-text gText_TheStrikeStrikesBack_TheseDemandsAreMore {
-    format("These demands are more than reasonable, and the hard workers  will continue to strike until they are treated fairly and equitably.")
+    format("Our single demand is that the pay for all Sharprise Stadium construction workers is doubled. Until this demand is met, these hard-working Resido laborers will dig not another hole, place another brick, or lay another cable.")
 }
 
 text gText_TheStrikeStrikesBack_SighOfCourse {
