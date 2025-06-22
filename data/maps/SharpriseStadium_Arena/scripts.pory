@@ -12,8 +12,11 @@ mapscripts SharpriseStadium_Arena_MapScripts {
         VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 1: BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound1Audience
         VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 2: BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience
         VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 3: BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience
-        VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 4: BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience
-        VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 5: BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience
+        VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 4: BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience
+        VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 5: BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience
+        // PSF TODO When shadows are turned on, the game runs out of sprites for big audiences and the intro transition will hang. I will evantually refactor this scene to less different obects and a new object transition entirely, but until then, I am setting these to just use the small audiences.
+        //VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 4: BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience
+        //VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, 5: BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience
         VAR_STORYLINE_STATE, 49: BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience
         VAR_STORYLINE_STATE, 50: BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience
     ]
