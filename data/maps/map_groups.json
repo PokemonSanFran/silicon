@@ -295,7 +295,10 @@
     "HalerbaCity_PokemonCenter_1F",
     "HalerbaCity_Pannen_House",
     "HalerbaCity_Gym",
-    "Gldntepark_Helebra_Research"
+    "Gldntepark_Helebra_Research",
+    "HalerbaCity_GymA",
+    "HalerbaCity_GymB",
+    "HalerbaCity_GymC"
   ],
   "gMapGroup_IndoorQiuVillage": [
     "QiuVillage_Restaurant",

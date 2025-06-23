@@ -8400,6 +8400,42 @@
       "secondary_tileset": "gTileset_Lavaridge",
       "border_filepath": "data/layouts/GlavezHeights/border.bin",
       "blockdata_filepath": "data/layouts/GlavezHeights/map.bin"
+    },
+    {
+      "id": "LAYOUT_HALERBA_CITY_GYM_C",
+      "name": "HalerbaCity_GymC_Layout",
+      "width": 20,
+      "height": 20,
+      "border_width": 4,
+      "border_height": 4,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PrettyPetalFlowerShop",
+      "border_filepath": "data/layouts/HalerbaCity_GymC/border.bin",
+      "blockdata_filepath": "data/layouts/HalerbaCity_GymC/map.bin"
+    },
+    {
+      "id": "LAYOUT_HALERBA_CITY_GYM_B",
+      "name": "HalerbaCity_GymB_Layout",
+      "width": 20,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PrettyPetalFlowerShop",
+      "border_filepath": "data/layouts/HalerbaCity_GymB/border.bin",
+      "blockdata_filepath": "data/layouts/HalerbaCity_GymB/map.bin"
+    },
+    {
+      "id": "LAYOUT_HALERBA_CITY_GYM_A",
+      "name": "HalerbaCity_GymA_Layout",
+      "width": 20,
+      "height": 20,
+      "border_width": 4,
+      "border_height": 4,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PrettyPetalFlowerShop",
+      "border_filepath": "data/layouts/HalerbaCity_GymA/border.bin",
+      "blockdata_filepath": "data/layouts/HalerbaCity_GymA/map.bin"
     }
   ]
 }

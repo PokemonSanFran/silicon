@@ -1646,3 +1646,9 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/Arantraz_Prison/scripts.inc"
 
 	.include "data/maps/GlavezHeights/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymC/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymB/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymA/scripts.inc"
