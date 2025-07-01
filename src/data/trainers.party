@@ -3274,6 +3274,618 @@ Overworld Sprite: Prof Birch
 Raichu
 Level: 1
 
+=== TRAINER_00317DFA ===
+Name: 00317DFA
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Happiny  
+Ability: Friend Guard  
+EVs: 156 Def  
+Lax Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Helping Hand  
+- Light Screen  
+- Icy Wind  
+
+Smoliv @ Oran Berry  
+Ability: Harvest  
+EVs: 144 HP / 12 Atk  
+Jolly Nature  
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Leech Seed  
+- Charm  
+- Razor Leaf  
+- Helping Hand  
+
+Squawkabilly  
+Ability: Hustle  
+EVs: 84 Atk / 64 Spe  
+Adamant Nature  
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Quick Attack  
+- Air Cutter  
+- Pounce  
+- Reversal  
+
+=== TRAINER_0049EFE8 ===
+Name: 0049EFE8
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Vulpix @ Charcoal  
+Ability: Drought  
+EVs: 56 Atk / 56 SpA / 44 Spe  
+Lonely Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Fire Spin  
+- Flame Charge  
+- Weather Ball  
+- Quick Attack  
+
+Sizzlipede @ Passho Berry  
+Ability: Flame Body  
+EVs: 56 Atk / 100 Spe  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bug Bite  
+- Flame Wheel  
+- Smokescreen  
+
+Lampent  
+Ability: Flame Body  
+Modest Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Will-O-Wisp  
+- Hex  
+- Fire Spin  
+- Sunny Day  
+
+=== TRAINER_023957DE ===
+Name: 023957DE
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Dragonair @ Oran Berry  
+Ability: Shed Skin  
+EVs: 72 HP / 40 Def / 40 SpD  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Thunder Wave  
+- Dragon Tail  
+- Supersonic  
+- Slam  
+
+Deino  
+Ability: Hustle  
+EVs: 148 Atk / 4 Def  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bite  
+- Headbutt  
+- Dragon Tail  
+
+Zweilous  
+Ability: Hustle  
+EVs: 148 Atk / 4 SpD  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bite  
+- Fire Fang  
+- Thunder Fang  
+- Ice Fang  
+
+
+=== TRAINER_006E7EFD ===
+Name: 006E7EFD
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Hitmonchan  
+Ability: Inner Focus  
+EVs: 56 Atk / 100 Spe  
+Lonely Nature  
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Baton Pass  
+- Swords Dance  
+- Vacuum Wave  
+- Metronome  
+
+Pawmo  
+Ability: Iron Fist  
+EVs: 56 Atk / 100 Spe  
+Adamant Nature  
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Baton Pass  
+- Mach Punch  
+- Thunder Punch  
+- Agility  
+
+Mienshao @ Focus Sash  
+Ability: Reckless  
+EVs: 72 HP / 36 Def / 36 SpD  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- High Jump Kick  
+- Detect  
+- Endure  
+- Reversal  
+
+
+
+=== TRAINER_007F06A5 ===
+Name: 007F06A5
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Marshtomp @ Sitrus Berry  
+Ability: Torrent  
+IVs: 0 Atk  
+- Mirror Coat  
+- Muddy Water  
+- Counter  
+
+Slowpoke  
+Ability: Own Tempo  
+IVs: 0 Atk  
+- Light Screen  
+- Rain Dance  
+- Chilling Water  
+
+Arrokuda @ Metronome  
+Ability: Propeller Tail  
+- Aqua Jet  
+
+
+
+
+=== TRAINER_01103D48 ===
+Name: 01103D48
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Pachirisu  
+Ability: Pickup  
+EVs: 144 SpA  
+Relaxed Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Follow Me  
+- Charge Beam  
+- Thief  
+- Mud Shot  
+
+Wattrel @ Oran Berry  
+Ability: Wind Power  
+EVs: 80 SpA / 64 Spe  
+Mild Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Tailwind  
+- Roost  
+- Pluck  
+- Charge Beam  
+
+Shinx @ Magnet  
+Ability: Intimidate  
+EVs: 44 HP / 56 Atk / 44 Spe  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bite  
+- Charge  
+- Spark  
+- Ice Fang  
+
+=== TRAINER_0272920D ===
+Name: 0272920D
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Carvanha @ Rocky Helmet  
+Ability: Rough Skin  
+Level: 25  
+EVs: 116 Atk / 28 Spe  
+Bashful Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Aqua Jet  
+- Bite  
+- Focus Energy  
+
+Thievul  
+Ability: Unburden  
+Level: 24  
+EVs: 36 HP / 32 Def / 32 SpA / 24 SpD / 24 Spe  
+Hardy Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Nasty Plot  
+- Snarl  
+- Quick Attack  
+
+Murkrow @ Mental Herb  
+Ability: Prankster  
+Level: 25  
+EVs: 56 HP / 56 Def / 40 SpD  
+Careful Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Haze  
+- Wing Attack  
+- Taunt  
+- Thief  
+
+=== TRAINER_022A53A0 ===
+Name: 022A53A0
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Kricketune @ Focus Band
+Ability: Swarm
+Level: 20
+EVs: 28 HP/24 Atk/36 Def/24 SpD/44 Spe
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sing
+- Sticky Web
+- Leech Life
+
+Sewaddle @ Focus Band
+Ability: Swarm
+Level: 24
+EVs: 68 HP/20 Atk/68 Def
+Naughty Nature
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Razor Leaf
+- Struggle Bug
+- Electroweb
+
+Ariados @ Silver Powder
+Ability: Swarm
+Level: 25
+EVs: 152 Spe
+Hardy Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Night Shade
+- Fell Stinger
+- Bug Bite
+
+
+
+=== TRAINER_012ED80D ===
+Name: 012ED80D
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+
+Mudbray  
+Ability: Stamina  
+EVs: 24 Atk / 128 Def  
+Lax Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Strength  
+- Counter  
+- Bulldoze  
+- Double Kick  
+
+Drilbur  
+Ability: Sand Force  
+EVs: 136 Atk  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Sandstorm  
+- Metal Claw  
+- Bulldoze  
+- Rock Tomb  
+
+Numel  
+Ability: Simple  
+EVs: 76 Atk / 72 SpA  
+Quiet Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Incinerate  
+- Bulldoze  
+- Focus Energy  
+
+
+
+=== TRAINER_01E6E96E ===
+Name: 01E6E96E
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Minior @ Power Herb  
+Ability: Shields Down  
+EVs: 92 Atk / 56 SpA  
+Brave Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Meteor Beam  
+- Rollout  
+- Acrobatics  
+- U-turn  
+
+Vivillon @ Mental Herb  
+Ability: Friend Guard  
+EVs: 80 HP / 68 Spe  
+Jolly Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Swift  
+- U-turn  
+- Stun Spore  
+- Tailwind  
+
+Swellow @ Silk Scarf  
+Ability: Scrappy  
+EVs: 148 Atk  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Rage  
+- Return  
+- Aerial Ace  
+- U-turn  
+
+
+
+
+=== TRAINER_0092D526 ===
+Name: 0092D526
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Bounsweet  
+Ability: Leaf Guard  
+EVs: 96 SpA / 60 Spe  
+Modest Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Magical Leaf  
+- Draining Kiss  
+
+Amoonguss @ Black Sludge  
+Ability: Effect Spore  
+EVs: 84 Def / 64 SpD  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Rage Powder  
+- Poison Powder  
+- Venoshock  
+- Stun Spore  
+
+Capsakid  
+Ability: Chlorophyll  
+EVs: 156 SpA  
+Bold Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Magical Leaf  
+- Growth  
+- Ingrain  
+
+
+
+
+=== TRAINER_00C593A8 ===
+Name: 00C593A8
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Spheal @ Wacan Berry
+Ability: Ice Body
+Level: 20
+EVs: 64 HP/84 Atk
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Rollout
+- Snowscape
+- Ice Ball
+
+Sealeo @ Metronome
+Ability: Ice Body
+Level: 24
+EVs: 44 HP/100 Atk
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Snowscape
+- Rollout
+- Ice Ball
+
+Jynx
+Ability: Oblivious
+Level: 23
+EVs: 52 HP/104 SpA
+Calm Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Psychic Noise
+- Confusion
+- Icy Wind
+
+
+
+=== TRAINER_01E7C79B ===
+Name: 01E7C79B
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Dottler  
+Ability: Swarm  
+EVs: 88 Def / 64 SpD  
+Calm Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Reflect  
+- Light Screen  
+- Confusion  
+- Struggle Bug  
+
+Hatenna @ Twisted Spoon  
+Ability: Anticipation  
+EVs: 56 SpA / 88 Spe  
+Mild Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Psybeam  
+- Disarming Voice  
+- Nuzzle  
+
+Meditite  
+Ability: Pure Power  
+EVs: 92 Atk / 40 Def / 24 SpD  
+Lonely Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Zen Headbutt  
+- Force Palm  
+- Work Up  
+
+
+
+
+=== TRAINER_01C7AF3F ===
+Name: 01C7AF3F
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Flabebe (Flabebe-Yellow) @ Oran Berry
+Ability: Symbiosis
+Level: 23
+EVs: 52 Def/96 SpD
+Bold Nature
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Tearful Look
+- Disarming Voice
+- Magical Leaf
+- Light Screen
+
+Ralts
+Ability: Trace
+Level: 20
+EVs: 116 SpA/36 Spe
+Modest Nature
+IVs: 0 Atk
+- Disarming Voice
+- Psybeam
+- Charge Beam
+
+Kirlia @ Sitrus Berry
+Ability: Trace
+Level: 21
+EVs: 64 SpA/88 Spe
+Modest Nature
+IVs: 0 Atk
+- Disarming Voice
+- Psybeam
+- Life Dew
+
+
+
+=== TRAINER_02EEB783 ===
+Name: 02EEB783
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Yamask
+Ability: Mummy
+Level: 21
+EVs: 80 HP/76 SpA
+Quirky Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Will-O-Wisp
+- Protect
+- Hex
+
+Honedge @ Occa Berry
+Ability: No Guard
+Level: 25
+EVs: 144 SpD
+Brave Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Aerial Ace
+- Shadow Sneak
+- Iron Head
+
+Rotom
+Ability: Levitate
+Level: 25
+EVs: 96 SpA/48 SpD
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Charge
+- Thunder Shock
+- Astonish
+- Swift
+
+
+
+=== TRAINER_026E91A6 ===
+Name: 026E91A6
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Lairon @ Sitrus Berry
+Ability: Rock Head
+Level: 20
+EVs: 144 Def
+Relaxed Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Headbutt
+- Metal Claw
+- Rock Tomb
+- Roar
+
+Klink @ Ganlon Berry
+Ability: Clear Body
+Level: 24
+EVs: 4 Def/104 SpA/48 SpD
+Bold Nature
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Metal Sound
+- Charge Beam
+- Sandstorm
+
+Varoom
+Ability: Overcoat
+Level: 25
+EVs: 152 SpA
+Relaxed Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sludge
+- Gyro Ball
+- Headbutt
+- Lick
+
+=== TRAINER_029E0EF0 ===
+Name: 029E0EF0
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Nidorino  
+Ability: Poison Point  
+Level: 22  
+EVs: 96 Atk / 16 Def / 32 SpD  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Toxic Spikes  
+- Dig  
+- Poison Sting  
+- Trailblaze  
+
+Tentacool  
+Ability: Clear Body  
+Level: 25  
+EVs: 24 HP / 120 SpA  
+Mild Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bubble Beam  
+- Acid Spray  
+- Toxic  
+
+Gulpin @ Sitrus Berry  
+Ability: Gluttony  
+Level: 23  
+EVs: 80 HP / 72 Atk  
+Impish Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Amnesia  
+- Acid Armor  
+- Encore  
+- Ice Punch  
+
+=== TRAINER_00E46F7D ===
+Name: 00E46F7D
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Raichu
+Level: 1
+
 === TRAINER_DUSTY_4 ===
 Name: Blank
 Pic: Cooltrainer M
@@ -4307,158 +4919,6 @@ Raichu
 Level: 1
 
 === TRAINER_TONY_5 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_TAKAO ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_HITOSHI ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_KIYO ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_KOICHI ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_NOB_1 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_NOB_2 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_NOB_3 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_NOB_4 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_NOB_5 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_YUJI ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_DAISUKE ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_ATSUSHI ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_KIRK ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_GRUNT_AQUA_HIDEOUT_7 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_GRUNT_AQUA_HIDEOUT_8 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_SHAWN ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_FERNANDO_1 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_DALTON_1 ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Raichu
-Level: 1
-
-=== TRAINER_DALTON_2 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
