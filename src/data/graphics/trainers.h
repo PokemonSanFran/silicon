@@ -288,7 +288,7 @@ const u32 gTrainerFrontPic_SiliconPlayerN1[] = INCBIN_U32("graphics/trainers/fro
 const u32 gTrainerFrontPic_SiliconPlayerN2[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.lz");
 const u32 gTrainerFrontPic_SiliconPlayerN3[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.lz");
 const u32 gTrainerFrontPic_SiliconPlayerF1[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.lz");
-const u32 gTrainerFrontPic_SiliconPlayerF2[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.lz");
+const u32 gTrainerFrontPic_SiliconPlayerF2[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF2.4bpp.lz");
 const u32 gTrainerFrontPic_SiliconPlayerF3[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF3.4bpp.lz");
 
 const u32 gTrainerFrontPic_Kai[] = INCBIN_U32("graphics/trainers/front_pics/kai.4bpp.lz");
@@ -351,7 +351,7 @@ const u8 gTrainerBackPic_SiliconPlayerN1[] = INCBIN_U8("graphics/trainers/back_p
 const u8 gTrainerBackPic_SiliconPlayerN2[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
 const u8 gTrainerBackPic_SiliconPlayerN3[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
 const u8 gTrainerBackPic_SiliconPlayerF1[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerF2[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
+const u8 gTrainerBackPic_SiliconPlayerF2[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF2.4bpp");
 const u8 gTrainerBackPic_SiliconPlayerF3[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF3.4bpp");
 
 const u8 gTrainerBackPic_Kai[] = INCBIN_U8("graphics/trainers/back_pics/kai.4bpp");
