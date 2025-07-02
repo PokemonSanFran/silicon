@@ -3148,8 +3148,6 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_SHARPEDO;
         case SPECIES_CAMERUPT:
             return POKEDEX_FORM_CAMERUPT;
-        case SPECIES_CHERRIM:
-            return POKEDEX_FORM_CHERRIM;
         case SPECIES_LOPUNNY:
             return POKEDEX_FORM_LOPUNNY;
         case SPECIES_GALLADE:
@@ -3170,8 +3168,6 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_AEGISLASH;
         case SPECIES_ORICORIO:
             return POKEDEX_FORM_ORICORIO;
-        case SPECIES_WISHIWASHI:
-            return POKEDEX_FORM_WISHIWASHI;
         case SPECIES_SILVALLY:
             return POKEDEX_FORM_SILVALLY;
         case SPECIES_MINIOR:
@@ -3194,8 +3190,6 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_POLTEAGEIST;
         case SPECIES_HATTERENE:
             return POKEDEX_FORM_HATTERENE;
-        case SPECIES_EISCUE_ICE:
-            return POKEDEX_FORM_EISCUE_ICE;
         case SPECIES_COPPERAJAH:
             return POKEDEX_FORM_COPPERAJAH;
         case SPECIES_DURALUDON:
@@ -3206,6 +3200,8 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_URSHIFU_RAPID_STRIKE;
         case SPECIES_URSALUNA:
             return POKEDEX_FORM_URSALUNA;
+        case SPECIES_MIMIKYU:
+            return POKEDEX_FORM_MIMIKYU;
         case SPECIES_MAUSHOLD:
             return POKEDEX_FORM_MAUSHOLD;
         case SPECIES_SQUAWKABILLY:
