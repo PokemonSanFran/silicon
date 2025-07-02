@@ -3883,8 +3883,40 @@ Name: 00E46F7D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Raichu
-Level: 1
+Pupitar
+Ability: Shed Skin
+Level: 23
+Tera Type: Rock
+EVs: 12 HP/92 Atk/32 Def/12 SpD
+Brave Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Stomping Tantrum
+- Rock Slide
+- Payback
+
+Kabuto
+Ability: Weak Armor
+Level: 22
+Tera Type: Rock
+EVs: 36 Atk/112 Spe
+Jolly Nature
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Aqua Jet
+- Absorb
+- Rock Tomb
+- Protect
+
+Tyrunt @ Hard Stone
+Ability: Sturdy
+Level: 23
+Tera Type: Rock
+EVs: 72 Atk/80 Def
+Impish Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Dragon Tail
+- Bite
+- Ancient Power
+- Protect
 
 === TRAINER_DUSTY_4 ===
 Name: Blank
