@@ -6555,7 +6555,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .speciesName = _("Corsola"),
         .cryId = CRY_CORSOLA,
         .natDexNum = NATIONAL_DEX_CORSOLA,
-        .residoDexNum = RESIDO_DEX_CORSOLA,
         .categoryName = _("Coral"),
         .height = 6,
         .weight = 5,
