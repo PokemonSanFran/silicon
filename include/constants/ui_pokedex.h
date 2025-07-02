@@ -233,7 +233,7 @@ enum
     MON_RELATIONSHIP_COUNT,
 };
 
-enum
+enum PokedexEvolution
 {
     EVOLUTION_NULL,
     MON_CAN_EVOLVE,
@@ -241,6 +241,13 @@ enum
     MON_FULLY_EVOLVED,
     NO_EVOLUTION,
     EVOLUTION_STAGE_COUNT,
+};
+
+enum PokedexEvolutionCheckMode
+{
+    CHECK_CAN_EVOLVE,
+    CHECK_HAS_EVOLVED,
+    CHECK_NO_EVOLTION,
 };
 
 enum PokedexFamilyAttributes

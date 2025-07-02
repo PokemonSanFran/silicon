@@ -8,6 +8,7 @@ const FLAG_HIDE_QIU_VILLAGE_GUY = FLAG_TEMP_7
 const FLAG_HIDE_GRUNTS = FLAG_TEMP_2
 const FLAG_HIDE_GRUNTS_WAVE_2 = FLAG_TEMP_3
 const FLAG_HIDE_BUZZR_CEO = FLAG_TEMP_4
+const FLAG_HIDE_ISMAIL_PERLACIA = FLAG_TEMP_4
 const FLAG_HIDE_WAREHOUSE_SLURPUFF = FLAG_TEMP_5
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
@@ -45,6 +46,15 @@ script Quest_Breaktheinternet_Rabies_Dialogue{
     msgbox(gText_Breaktheinternet_TotallyIHunted,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
     msgbox(gText_Breaktheinternet_OhRight,MSGBOX_DEFAULT,SPEAKER_ISMAIL)
     return
+}
+
+script Buzzr_HideReporter_Script
+{
+        if (
+            (var(VAR_QUEST_BREAKTHEINTERNET_STATE) != TALA_MENTIONED_REPORTER))
+        {
+            setflag(FLAG_HIDE_ISMAIL_PERLACIA)
+        }
 }
 
 text gText_Breaktheinternet_SocialMediaIs{
