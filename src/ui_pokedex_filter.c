@@ -2712,7 +2712,7 @@ static void SpeciesFilter_EditPage_PrintDescription(void)
     u32 currentListPosition = SpeciesFilter_EditPage_GetListPosition();
     u32 descWidth = GetWindowAttribute(FILTER_PAGE_MOVE_WINDOW_DESC,WINDOW_WIDTH) * TILE_WIDTH;
 
-    u32 fontId = FONT_POKEDEX_FILTER_MOVE_LIST;
+    u32 fontId = FONT_POKEDEX_FILTER_MOVE_DESC;
     u32 x = 4;
     u32 y = 0;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
