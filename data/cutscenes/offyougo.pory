@@ -192,7 +192,7 @@ text gText_OffYouGo_NeitherWasI {
     format("…neither was I.")
 }
 text gText_OffYouGo_WellYoureBothHere {
-    format("Well, you're both here now. As you may have guessed, the construction delays are going to delay the Championship by a few weeks. Rather than kill your momentum now, Armando has agreed to train you both, and SharpRise Capital will be footing the bill.")
+    format("Well, you're both here now. As you may have guessed, the construction strike is going to delay the Championship by a few weeks. Rather than kill your momentum now, Armando has agreed to train you both, and SharpRise Capital will be footing his... substantial consultation fee.")
 }
 text gText_OffYouGo_ThanksButWho {
     format("Thanks but - who the hell is that?")

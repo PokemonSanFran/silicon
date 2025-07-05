@@ -175,6 +175,7 @@ script TheGangsAllHere_NotIntentionally_Dialogue{
     applymovement(OLIVER,Common_Movement_WalkInPlaceDown)
     waitmovement(OLIVER)
 
+    bufferitemname(STR_VAR_1,ITEM_DRAGONIUM_Z)
     msgbox(gText_TheGangsAllHere_ImThrilledTheTiming,,SPEAKER_ADELAIDE)
     closemessage
 
@@ -278,13 +279,13 @@ text gText_TheGangsAllHere_ComeOnIn{
     format("{PLAYER}! Oliver! Come on in, I just finished an email! Glad you're both here, and excellent timing that you ran into each other.")
 }
 text gText_TheGangsAllHere_AsYouAsked{
-    format("As you asked, I have your package.")
+    format("As you asked, I have your package from Emrys.")
 }
 text gText_TheGangsAllHere_IThoughtYouSaid{
     format("I thought you said you had a delivery for the C.E.O.?")
 }
 text gText_TheGangsAllHere_IDidIsee{
-    format("I did. I see Adelaide neglected to reveal his full title...?")
+    format("I did. I see Adelaide neglected to reveal her full title...?")
 }
 text gText_TheGangsAllHere_NotIntentionally{
     format("Not intentionally! I was just so swept up in your battle!")
@@ -303,10 +304,11 @@ text gText_TheGangsAllHere_InAnyCase{
     format("In any case, your package, Adelaide.")
 }
 text gText_TheGangsAllHere_ImThrilledTheTiming{
-    format("I'm thrilled the timing worked out, because the package actually isn't for me!")
+    format("Ah, my {STR_VAR_1}, wonderful.\nI've also got something for you, {PLAYER}! Let me see your phone...")
 }
+
 text gText_TheGangsAllHere_PrestoDroneDelivery{
-    format("You've got access to Presto's drone delivery program. If you select that app while you're outdoors, you can have apps delievered to you instantly! I'm excited to see how you use our tools.")
+    format("As a member of the SharpRise family, I've just granted you special access to Presto's drone delivery service. If you select that app while you're outdoors, you can have items delievered to you instantly! I'm excited to see how you use our tools.")
 }
 
 text gText_TheGangsAllHere_NotToPlaceAnyUndue{
@@ -316,7 +318,7 @@ text gText_TheGangsAllHere_OhWowThatMeans{
     format("Oh. Wow! That means a lot. I'll absolutely put it to use!")
 }
 text gText_TheGangsAllHere_WeKnowButNoPressure{
-    format("We know. But no pressure. Enjoy your journey!")
+    format("We always make sure our Trainers have an edge on the competition!")
 }
 text gText_TheGangsAllHere_TimeForNumber7{
     format("Time for my seventh Boomers coffee for the day. Shall we, Oliver?")

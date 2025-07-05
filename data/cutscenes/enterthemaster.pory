@@ -218,6 +218,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
         msgbox(gText_EnterTheMaster_Oh,,SPEAKER_CHARLOTTE)
 
         msgbox(gText_EnterTheMaster_SoWhatsNext,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
         msgbox(gText_EnterTheMaster_OneOfTheGoals,,SPEAKER_ARMANDO)
         closemessage
         giveitem(ITEM_MEGA_RING)
@@ -409,7 +410,7 @@ text gText_EnterTheMaster_SoWhatsNext{
 
 text gText_EnterTheMaster_OneOfTheGoals
 {
-    format("One of the goals of this training is to better acquaint you with Mega Evolution. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here...")
+    format("{PLAYER}, you may have noticed other Trainers using Mega Evolution. SharpRise wants to make sure their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise has also provided {PLAYER} with a {STR_VAR_1}. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here...")
 }
 
 text gText_EnterTheMaster_CharlotteDoYou
@@ -424,7 +425,7 @@ text gText_EnterTheMaster_MegaEvolution
 
 text gText_EnterTheMaster_YouCan
 {
-    format("Your Key Stone will only work once per battle, and if your Pokémon will revert back to normal after it faints or when the battle ends.")
+    format("Your {STR_VAR_1} will only work once per battle, and your Pokémon will revert back to normal after it faints or when the battle ends.")
 }
 
 text gText_EnterTheMaster_CanMegaEvolve {
