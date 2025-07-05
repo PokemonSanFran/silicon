@@ -1,0 +1,19 @@
+script Phenomenon_StartEncounter
+{
+    lock
+    switch(var(VAR_TEMP_E))
+    {
+        default:
+        case 0: //PHENOMENON_TYPE_ENCOUNTER
+            playse(SE_PIN)
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+            dowildbattle
+        break
+        case 1: //PHENOMENON_TYPE_ITEM
+            setphenomenondata
+            callstd(STD_FIND_ITEM)
+        break
+    }
+    release
+    end
+}

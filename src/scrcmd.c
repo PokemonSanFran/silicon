@@ -36,6 +36,7 @@
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "phenomenon.h" // phenomenon
 #include "pokedex.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
@@ -3776,3 +3777,12 @@ bool8 ScrCmd_variablecheckmoney(struct ScriptContext *ctx)
     return FALSE;
 }
 // End siliconMerge
+// Start phenomenon
+bool8 ScrCmd_setphenomenondata(struct ScriptContext *ctx)
+{
+    gSpecialVar_0x8000 = GetCurrentPhenomenonArgument();
+    gSpecialVar_0x8001 = 1;
+
+    return FALSE;
+}
+// End phenomenon
