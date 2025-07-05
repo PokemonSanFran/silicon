@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const RABIA = 10 //FLAG_TEMP_1
 const VITOMIR = 11 //FLAG_TEMP_1
-const TURTONATOR = 13 //FLAG_TEMP_2
+const ARCANINE = 13 //FLAG_TEMP_2
 const LANDLORD = 12 //FLAG_TEMP_3
 const ADAORA = 14 //FLAG_TEMP_4
 const FLAG_TALKED_LANDLORD = FLAG_TEMP_1F
@@ -169,8 +169,8 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     playse(SE_BALL_OPEN)
     waitse
     clearflag(FLAG_TEMP_2)
-    addobject(TURTONATOR)
-    playmoncry(SPECIES_TURTONATOR, CRY_MODE_ENCOUNTER)
+    addobject(ARCANINE)
+    playmoncry(SPECIES_ARCANINE, CRY_MODE_ENCOUNTER)
     waitmoncry
     msgbox(gText_HousingProtest_ToTryReason,,SPEAKER_LANDLORD)
     msgbox(gText_HousingProtest_AintAThreat,,SPEAKER_VITOMIR)
@@ -218,7 +218,7 @@ script HousingProtest_PostBattle_Dialogue {
     setobjectnewmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
     playse(SE_BALL_OPEN)
     waitse
-    removeobject(TURTONATOR)
+    removeobject(ARCANINE)
     setvar(VAR_ROUTE99_STATE,DEFEATED_THETIDE_ROUTE99)
     msgbox(gText_HousingProtest_YouProudNow,,SPEAKER_RABIA)
     msgbox(gText_HousingProtest_KeepOnLicking,,SPEAKER_VITOMIR)
