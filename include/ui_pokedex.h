@@ -90,6 +90,7 @@ struct PokedexGridStaticResources
 struct PokedexLists
 {
     u16 numMonsInList;
+    u16 numCaughtMonsInList;
     u16 onScreenMons[NUM_SPECIES_LIST_ROWS][NUM_SPECIES_LIST_COLUMNS];
     u16 currentMonList[RESIDO_DEX_COUNT];
     u16 totalNumRows;
@@ -266,5 +267,6 @@ void PokedexPage_PlaySpeciesCry(u32 species, bool32 shouldOverride);
 bool32 SpeciesGrid_GetShouldPlayCry(void);
 void SpeciesGrid_SetShouldPlayCry(bool32 value);
 bool8 SpeciesIsResidoDex(u32 speciesId);
+bool8 SpeciesFilter_CheckEvolutionStatus(u32 species, enum PokedexEvolutionCheckMode mode);
 
 #endif // GUARD_UI_POKEDEX_H

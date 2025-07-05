@@ -2115,7 +2115,7 @@ static bool32 IsValidParent(u32 parentMon, u32 targetSpecies, u32 moveId, u32 re
     if (!SharesEggGroup(parentMon, targetSpecies))
         return FALSE;
 
-    if (CanEvolve(parentMon))
+    if (SpeciesFilter_CheckEvolutionStatus(parentMon, CHECK_CAN_EVOLVE))
         return FALSE;
 
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(parentMon);
@@ -3148,8 +3148,6 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_SHARPEDO;
         case SPECIES_CAMERUPT:
             return POKEDEX_FORM_CAMERUPT;
-        case SPECIES_CHERRIM:
-            return POKEDEX_FORM_CHERRIM;
         case SPECIES_LOPUNNY:
             return POKEDEX_FORM_LOPUNNY;
         case SPECIES_GALLADE:
@@ -3170,8 +3168,6 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_AEGISLASH;
         case SPECIES_ORICORIO:
             return POKEDEX_FORM_ORICORIO;
-        case SPECIES_WISHIWASHI:
-            return POKEDEX_FORM_WISHIWASHI;
         case SPECIES_SILVALLY:
             return POKEDEX_FORM_SILVALLY;
         case SPECIES_MINIOR:
@@ -3194,8 +3190,6 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_POLTEAGEIST;
         case SPECIES_HATTERENE:
             return POKEDEX_FORM_HATTERENE;
-        case SPECIES_EISCUE_ICE:
-            return POKEDEX_FORM_EISCUE_ICE;
         case SPECIES_COPPERAJAH:
             return POKEDEX_FORM_COPPERAJAH;
         case SPECIES_DURALUDON:
@@ -3206,6 +3200,8 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_URSHIFU_RAPID_STRIKE;
         case SPECIES_URSALUNA:
             return POKEDEX_FORM_URSALUNA;
+        case SPECIES_MIMIKYU:
+            return POKEDEX_FORM_MIMIKYU;
         case SPECIES_MAUSHOLD:
             return POKEDEX_FORM_MAUSHOLD;
         case SPECIES_SQUAWKABILLY:
@@ -4371,7 +4367,7 @@ static void PageStats_PrintStatsDesc(void)
 {
     u32 species = ParentDisplay_GetFutureSpeciesId();
     enum PokedexPageStatsWindows windowId = PAGE_STATS_WINDOW_ABILITIES_DESC;
-    u32 fontId = FONT_ABILITY_DESC;
+    u32 fontId = PageStats_GetAbilityMode() ? FONT_ABILITY_DESC : FONT_STATS_DESC;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 lineHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
@@ -4680,7 +4676,7 @@ static void PageInformation_PrintSpeciesData(u32 species)
     enum PokedexPageInformationWindows windowId = PAGE_INFORMATION_WINDOW_DATA;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    u32 fontId = FONT_ABILITY_DESC;
+    u32 fontId = FONT_STATS_DESC;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 lineHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
@@ -4898,7 +4894,7 @@ static void PageInformation_PrintSpeciesFlavor(u32 species)
     enum PokedexPageInformationWindows windowId = PAGE_INFORMATION_WINDOW_FLAVOR;
     u32 x = 4, y = 0;
 
-    u32 fontId = FONT_ABILITY_DESC;
+    u32 fontId = FONT_SPECIES_FLAVOR;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING) - 3;
     u32 windowWidth = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_SIZE_1BPP;
@@ -5088,7 +5084,7 @@ static void PageWeaknesses_PrintLegendText(void)
     u32 windowId = ParentDisplay_GetWindowId();
     u32 x = 4;
     u32 y = 0;
-    u32 fontId = FONT_ABILITY_DESC;
+    u32 fontId = FONT_LEGEND;
 
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);

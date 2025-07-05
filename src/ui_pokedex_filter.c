@@ -34,6 +34,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "data/ui_pokedex_type_sprites.h"
+#include "data/ui_pokedex_evolution.h"
 
 static void SpeciesFilter_ResetEntireOption(enum PokedexFilterList);
 static void SpeciesFilter_ResetFilterSingleOption(enum PokedexFilterList, u32);
@@ -490,17 +491,28 @@ static bool32 SpeciesFilter_DoesSpeciesLearnFilteredMove(u32 filterIndex, u32 sp
     return FALSE;
 }
 
+bool8 SpeciesFilter_CheckEvolutionStatus(u32 species, enum PokedexEvolutionCheckMode mode)
+{
+    u32 natDexId = ConvertSpeciesIdToResidoDex(species);
+    enum PokedexEvolution check = residoEvolution[natDexId];
+
+    if (mode == CHECK_CAN_EVOLVE)
+        return ((check == MON_CAN_EVOLVE) || (check == MON_HAS_EVOLVED_STILL_CAN));
+    else if (mode == CHECK_HAS_EVOLVED)
+        return ((check == MON_FULLY_EVOLVED) || (check == MON_HAS_EVOLVED_STILL_CAN));
+
+    return FALSE;
+}
+
 bool32 SpeciesFilter_IsSpeciesAtEvolutionLevel(u32 species)
 {
     u32 filterIndex, filter;
-    bool32 canEvolve, hasEvolved;
 
     if (sFilterSet->filterEvolution[0] == EVOLUTION_STAGE_COUNT)
         return TRUE;
 
-    // PSF TODO this function is incredibly slow. We should generate a table offline to traverse.
-    canEvolve = CanEvolve(species);
-    hasEvolved = (GetEggSpecies(species) != species);
+    bool32 canEvolve = SpeciesFilter_CheckEvolutionStatus(species, CHECK_CAN_EVOLVE);
+    bool32 hasEvolved = SpeciesFilter_CheckEvolutionStatus(species, CHECK_HAS_EVOLVED);
 
     for (filterIndex = 0; filterIndex < EVOLUTION_STAGE_COUNT ; filterIndex++)
     {
@@ -2700,7 +2712,7 @@ static void SpeciesFilter_EditPage_PrintDescription(void)
     u32 currentListPosition = SpeciesFilter_EditPage_GetListPosition();
     u32 descWidth = GetWindowAttribute(FILTER_PAGE_MOVE_WINDOW_DESC,WINDOW_WIDTH) * TILE_WIDTH;
 
-    u32 fontId = FONT_POKEDEX_FILTER_MOVE_LIST;
+    u32 fontId = FONT_POKEDEX_FILTER_MOVE_DESC;
     u32 x = 4;
     u32 y = 0;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
