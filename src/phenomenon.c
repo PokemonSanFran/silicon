@@ -43,7 +43,6 @@ u16 getFieldEffectForPhenomenon(u16 slot);
 
 struct Phenomenon{
     u8 fldEffSpriteId;
-    u8 stepsTimer;
     int coordX;
     int coordY;
     u8 phenomenonType;
@@ -433,7 +432,6 @@ void InitializePhenomenonData(u8 numPhenomenon){
         sPhenomenonData[numPhenomenon].coordX         = 0;
         sPhenomenonData[numPhenomenon].coordY         = 0;
         sPhenomenonData[numPhenomenon].phenomenonType = PHENOMENON_TYPES;
-        sPhenomenonData[numPhenomenon].stepsTimer     = PHENOMENON_MAX_TIMER;
         sPhenomenonData[numPhenomenon].fldEffSpriteId = MAX_SPRITES;
         sPhenomenonData[numPhenomenon].active         = FALSE;
         sPhenomenonData[numPhenomenon].argument       = 0;
@@ -454,15 +452,12 @@ static u8 FindInactivePhenomenonSlot(void){
 }
 
 void TryCreatingPhenomenon(void){
-    s16 Phenomenon_Timer;
     u8 emptyPhenomenonSlot = FindInactivePhenomenonSlot();
     InitializePhenomenonData(emptyPhenomenonSlot);
 
     if(emptyPhenomenonSlot < NUM_MAX_PHENOMENONS){
-        Phenomenon_Timer  = (Random() % (PHENOMENON_MAX_TIMER - PHENOMENON_MIN_TIMER)) + PHENOMENON_MIN_TIMER;
 
         if(GeneratePhenomenonTile(emptyPhenomenonSlot)){
-            sPhenomenonData[emptyPhenomenonSlot].stepsTimer = Phenomenon_Timer;
 
             if(GeneratePhenomenonFieldEffectAt(emptyPhenomenonSlot, getFieldEffectForPhenomenon(emptyPhenomenonSlot))){
                 sPhenomenonData[emptyPhenomenonSlot].active = TRUE;
@@ -610,18 +605,6 @@ void CheckForNPCPhenomenon(void){
     }
 }
 
-static void ClearFinishedPhenomenonData(void){
-    u8 i;
-
-    for(i = 0; i < NUM_MAX_PHENOMENONS; i++){
-        if(sPhenomenonData[i].active){
-            sPhenomenonData[i].stepsTimer--;
-            if(sPhenomenonData[i].stepsTimer == 0)
-                ClearPhenomenonData(i);
-        }
-    }
-}
-
 static bool8 ShouldCreateAPhenomenon(void){
     return (Random() % 100) < (PHENOMENON_CHANCE_PER_STEP + 1);
 }
@@ -668,7 +651,6 @@ bool8 CheckForPhenomenon(void){
         if(isThereAnEmptyPhenomenon && ShouldCreateAPhenomenon())
             TryCreatingPhenomenon();
 
-        ClearFinishedPhenomenonData();
     }
 
     return FALSE;
