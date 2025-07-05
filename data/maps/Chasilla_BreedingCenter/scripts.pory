@@ -7,8 +7,7 @@ mapscripts Chasilla_BreedingCenter_MapScripts
 
 script BreedingCenter_Script_SignifyEggReady
 {
-    if (flag(FLAG_PENDING_DAYCARE_EGG))
-    {
+    if (flag(FLAG_PENDING_DAYCARE_EGG)) {
         setobjectmovementtype(BREEDINGEGG,MOVEMENT_TYPE_FACE_RIGHT)
     }
 }
@@ -488,14 +487,13 @@ script BreedingCenter_Dialogue_InformPlayer
     callnative(Script_AreEffortValuesEnabled)
     msgbox(BreedingCenter_Text_ExplainEgg,,SPEAKER_BREEDINGEGG)
 
-    if (!flag(FLAG_TIMELINE_TRUE))
+    bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
+    bufferspeciesname(STR_VAR_3,SPECIES_MAGIKARP)
+    msgbox(BreedingCenter_Text_ExplainIncubatorPremise,,SPEAKER_BREEDINGEGG)
+    msgbox(BreedingCenter_Text_ExplainIncubatorStepsWhenTrue,,SPEAKER_BREEDINGEGG)
+    if (var(VAR_RESULT))
     {
-        msgbox(BreedingCenter_Text_ExplainIncubatorPremise,,SPEAKER_BREEDINGEGG)
-        msgbox(BreedingCenter_Text_ExplainIncubatorStepsWhenTrue,,SPEAKER_BREEDINGEGG)
-        if (var(VAR_RESULT))
-        {
-            msgbox(BreedingCenter_Text_ExplainEVPerksWhenTrue,,SPEAKER_BREEDINGEGG)
-        }
+        msgbox(BreedingCenter_Text_ExplainEVPerksWhenTrue,,SPEAKER_BREEDINGEGG)
     }
 
     callnative(Script_AreIndividualValuesDisabled)
@@ -505,12 +503,28 @@ script BreedingCenter_Dialogue_InformPlayer
     }
 
     callnative(BufferEggPrices)
-    msgbox(BreedingCenter_Text_ExplainEggsFees,,SPEAKER_BREEDINGEGG)
-    if (!var(VAR_RESULT))
+    bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
+    bufferspeciesname(STR_VAR_3,SPECIES_MAGIKARP)
+
+    if (flag(FLAG_TIMELINE_TRUE))
     {
-        callnative(BufferStatPrices)
-        msgbox(BreedingCenter_Text_ExplainEggEditFees,,SPEAKER_BREEDINGEGG)
+        msgbox(BreedingCenter_Text_ExplainEggsFeesBronze,,SPEAKER_BREEDINGEGG)
+        if (!var(VAR_RESULT))
+        {
+            callnative(BufferStatPrices)
+            msgbox(BreedingCenter_Text_ExplainEggEditFeesBronze,,SPEAKER_BREEDINGEGG)
+        }
     }
+    else
+    {
+        msgbox(BreedingCenter_Text_ExplainEggsFeesGold,,SPEAKER_BREEDINGEGG)
+        if (!var(VAR_RESULT))
+        {
+            callnative(BufferStatPrices)
+            msgbox(BreedingCenter_Text_ExplainEggEditFeesGold,,SPEAKER_BREEDINGEGG)
+        }
+    }
+
     closemessage
 
     specialvar(VAR_RESULT,GetDaycareState)
@@ -607,6 +621,8 @@ script BreedingCenter_Script_TakeEggSequence
     showmoneybox(0,0)
     callnative(Script_CalculateAndBufferEggPickupCost)
     callnative(Script_GetDaycareCostCode)
+    bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
+    bufferspeciesname(STR_VAR_3,SPECIES_MAGIKARP)
 
     switch(var(VAR_RESULT))
     {
@@ -939,7 +955,7 @@ text BreedingCenter_Text_ExplainEggEdit
 
 text BreedingCenter_Text_ExplainIncubatorPremise
 {
-    format("While your Egg is waiting to be picked up, we'll store your Eggs in our proprietary incubator.")
+    format("If you are a {STR_VAR_2} Plan member, while your Egg is waiting to be picked up, we will store your Eggs in our proprietary incubator. If you are not a {STR_VAR_2} Plan member, we invite you to apply for a {STR_VAR_2} Plan membership.")
 }
 
 text BreedingCenter_Text_ExplainIncubatorStepsWhenTrue
@@ -952,14 +968,24 @@ text BreedingCenter_Text_ExplainEVPerksWhenTrue
     format("The incubator also diffuses a specific vitamin solution through the Egg’s membrane, so your Pokémon’s Effort Values have been optimized. Of course, you can change them yourself too.")
 }
 
-text BreedingCenter_Text_ExplainEggsFees
+text BreedingCenter_Text_ExplainEggsFeesGold
 {
-    format("We charge {STR_VAR_1} for every Egg that is being picked up.")
+    format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. Your out of pocket cost to pick up an Egg is ¥{STR_VAR_1}.")
 }
 
-text BreedingCenter_Text_ExplainEggEditFees
+text BreedingCenter_Text_ExplainEggEditFeesGold
 {
-    format("If you use our gene editing services, we charge {STR_VAR_2} for every Individual Value that is changed.")
+    format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. If you use our gene editing services, the cost for every Individual Values you change is ¥{{STR_VAR_1}.")
+}
+
+text BreedingCenter_Text_ExplainEggsFeesBronze
+{
+    format("As a {STR_VAR_3} Plan member,  you are responsible for the full cost of our services. Your out of pocket cost to pick up an Egg is ¥{STR_VAR_1}.")
+}
+
+text BreedingCenter_Text_ExplainEggEditFeesBronze
+{
+    format("As a {STR_VAR_3} Plan member, you are responsible for the full cost of our services. For every Individual Values you change, the cost is ¥{{STR_VAR_1}.")
 }
 
 text BreedingCenter_Text_ImTheEgg
@@ -1050,22 +1076,22 @@ text BreedingCenter_Text_ThankYouForContributingTo
 
 text BreedingCenter_Text_ThanksToYourAffiliationWith
 {
-    format("Thanks to your affiliation with SharpRise, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. Your out of pocket cost to pick up this Egg is ¥{STR_VAR_1}. Do you still want it?")
 }
 
 text BreedingCenter_Text_ThanksToYourAffiliationWithEdit
 {
-    format("Thanks to your affiliation with SharpRise, inlcuding the cost of the Individual Values that you changed, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. The out of pocket cost to pick up this Egg is ¥{STR_VAR_1}, which includes the cost of the Individual Values you changed. Do you still want it?")
 }
 
 text BreedingCenter_Text_WithoutTheSharpRiseDiscount
 {
-    format("Without the SharpRise discount, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("Our records indicate that you are no longer a {STR_VAR_2} Plan member. Your plan has been downgraded to the {STR_VAR_3} Plan, which does not include any discounts. Your out of pocket cost to pick up this Egg is ¥{STR_VAR_1}. Do you still want it?")
 }
 
 text BreedingCenter_Text_WithoutTheSharpRiseDiscountEdit
 {
-    format("Without the SharpRise discount, inlcuding the cost of the Individual Values that you changed, this Egg will cost ¥{STR_VAR_1}. Do you still want it?")
+    format("Our records indicate that you are no longer a {STR_VAR_2} Plan member. Your plan has been downgraded to the {STR_VAR_3} Plan, which does not include any discounts. Your out of pocket cost to pick up this Egg is ¥{STR_VAR_1}, which includes the cost of the Individual Values you changed. Do you still want it?")
 }
 
 text BreedingCenter_Text_YouDontHaveEnough

@@ -526,7 +526,7 @@ void FinalizeIndividualValueChanges(void)
 void BufferStatPrices(void)
 {
     u32 statCost = CalculateStatCost();
-    ConvertIntToDecimalStringN(gStringVar2, statCost, STR_CONV_MODE_LEFT_ALIGN,CountDigits(statCost));
+    ConvertIntToDecimalStringN(gStringVar1, statCost, STR_CONV_MODE_LEFT_ALIGN,CountDigits(statCost));
 }
 
 void BufferEggPrices(void)

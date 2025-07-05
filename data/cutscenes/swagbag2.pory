@@ -46,6 +46,8 @@ script swagbag2_DiscussCosts_Dialogue {
 
     msgbox(gText_swagbag2_TheBreedingCenterStaff,,SPEAKER_ALICIA)
 
+    bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
+    bufferspeciesname(STR_VAR_3,SPECIES_MAGIKARP)
     msgbox(gText_swagbag2_TheBreedingCenterOffers,,SPEAKER_OLIVER)
 
     msgbox(gText_swagbag2_ThatsTooBad,,SPEAKER_ALICIA)
@@ -128,7 +130,7 @@ text gText_swagbag2_TheBreedingCenterStaff {
 }
 
 text gText_swagbag2_TheBreedingCenterOffers {
-    format("The Breeding Center offers its Bronze-tier services to all, at a significantly cheaper cost than that of your Gold membership. The school is working on a program to subsidize the Gold level for those involved in the League Challenge, they just... couldn't work out the details in time.")
+    format("The Breeding Center offers its {STR_VAR_3} Plan services to all, at a significantly cheaper cost than that of your {STR_VAR_2} Plan. The school is working on a program to subsidize the {STR_VAR_2} Plan for those involved in the League Challenge, they just... couldn't work out the details in time.")
 }
 
 text gText_swagbag2_ThatsTooBad {
