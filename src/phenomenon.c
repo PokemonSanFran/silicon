@@ -76,47 +76,56 @@ static bool8 MetatileBehavior_IsBridgeTile(u16 tileBehaviour){
     return FALSE;
 }
 
-static u8 GeneratePhenomenonType(u16 tileBehaviour){
-    u8 rand = Random() % 100;
+static u8 GeneratePhenomenonType(u16 tileBehaviour)
+{
+    if (tileBehaviour != MB_CAVE && MetatileBehavior_IsBridgeTile(tileBehaviour))
+        return PHENOMENON_TYPE_ENCOUNTER;
 
-    if(rand < PHENOMENON_ITEM_CHANCE && (tileBehaviour == MB_CAVE || MetatileBehavior_IsBridgeTile(tileBehaviour)))
+    if ((Random() % 100) < PHENOMENON_ITEM_CHANCE)
         return PHENOMENON_TYPE_ITEM;
 
     return PHENOMENON_TYPE_ENCOUNTER;
 }
 
-static u16 GenerateItemForPhenomenon(u16 tileBehaviour){
-    u16 itemToReturn;
+static u16 GenerateItemForPhenomenon(u16 tileBehaviour)
+{
 
-    static const u16 sDustCloudItemList[] = {
-        ITEM_FIRE_STONE,      ITEM_WATER_STONE,        ITEM_THUNDER_STONE,   ITEM_LEAF_STONE,      ITEM_SUN_STONE,
-        ITEM_SHINY_STONE,     ITEM_DUSK_STONE,         ITEM_DAWN_STONE,      ITEM_ICE_STONE,       ITEM_HARD_STONE,
+    static const u16 sDustCloudItemList[] =
+    {
+        ITEM_FIRE_STONE,
+        ITEM_WATER_STONE,
+        ITEM_THUNDER_STONE,
+        ITEM_LEAF_STONE,
+        ITEM_SUN_STONE,
+        ITEM_SHINY_STONE,
+        ITEM_DUSK_STONE,
+        ITEM_DAWN_STONE,
+        ITEM_ICE_STONE,
+        ITEM_HARD_STONE,
+        ITEM_LINKING_CORD,
         ITEM_EVERSTONE
     };
 
-    if(MetatileBehavior_IsBridgeTile(tileBehaviour)){
-        u8 rand = Random() % 100;
+    if(!MetatileBehavior_IsBridgeTile(tileBehaviour))
+        return sDustCloudItemList[Random() % ARRAY_COUNT(sDustCloudItemList)];
 
-        if(rand < 15)
-            itemToReturn = ITEM_HEALTH_WING;
-        else if(rand < 30)
-            itemToReturn = ITEM_MUSCLE_WING;
-        else if(rand < 45)
-            itemToReturn = ITEM_RESIST_WING;
-        else if(rand < 60)
-            itemToReturn = ITEM_GENIUS_WING;
-        else if(rand < 75)
-            itemToReturn = ITEM_CLEVER_WING;
-        else if(rand < 90)
-            itemToReturn = ITEM_SWIFT_WING;
-        else
-            itemToReturn = ITEM_PRETTY_WING;
-    }
-    else{ //MB_CAVE
-        itemToReturn = sDustCloudItemList[Random() % 11];
-    }
+    u32 rand = Random() % 100;
 
-    return itemToReturn;
+    if(rand < 15)
+        return ITEM_HEALTH_WING;
+    else if(rand < 30)
+        return ITEM_MUSCLE_WING;
+    else if(rand < 45)
+        return ITEM_RESIST_WING;
+    else if(rand < 60)
+        return ITEM_GENIUS_WING;
+    else if(rand < 75)
+        return ITEM_CLEVER_WING;
+    else if(rand < 90)
+        return ITEM_SWIFT_WING;
+    else
+        return ITEM_PRETTY_WING;
+
 }
 
 
@@ -385,7 +394,7 @@ static bool8 GeneratePhenomenonTile(u8 numPhenomenon)
                     case PHENOMENON_TYPE_ENCOUNTER:
                         GenerateWildPokemonForPhenomenon(numPhenomenon);
                         if(sPhenomenonData[numPhenomenon].argument2 == MON_LEVEL_NONEXISTENT){
-                            DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonTile Failed to find level for species: %d", numPhenomenon, sPhenomenonData[numPhenomenon].argument);
+                            //DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonTile Failed to find level for species: %d", numPhenomenon, sPhenomenonData[numPhenomenon].argument);
                             return FALSE;
                         }
                     break;
@@ -416,7 +425,7 @@ bool8 GeneratePhenomenonFieldEffectAt(u8 numPhenomenon, u8 fldEffId){
     gFieldEffectArguments[3] = 2;
     fldEffSpriteId = FieldEffectStart(fldEffId);
 
-    DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonFieldEffectAt fldEffSpriteId %d fldEffId: %d", fldEffSpriteId, fldEffId);
+    //DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonFieldEffectAt fldEffSpriteId %d fldEffId: %d", fldEffSpriteId, fldEffId);
     if (fldEffSpriteId == MAX_SPRITES)
         return FALSE;
 
@@ -512,7 +521,6 @@ u16 getFieldEffectForPhenomenon(u16 slot){
         fldEffId = FLDEFF_CAVE_DUST; //Flying Pokémon's shadow
         break;
     }
-
     return fldEffId;
 }
 
@@ -593,10 +601,9 @@ void CheckForNPCPhenomenonFromObjectEvent(struct ObjectEvent *objectEvent){
 }
 
 void CheckForNPCPhenomenon(void){
-    u8 i, j;
     s16 posX, posY;
 
-    for(i = 0; i < OBJECT_EVENTS_COUNT; i++){
+    for(u32 i = 0; i < OBJECT_EVENTS_COUNT; i++){
         if(gObjectEvents[i].movementActionId != MOVEMENT_ACTION_NONE){
             posX = gObjectEvents[i].currentCoords.x - MAP_OFFSET;
             posY = gObjectEvents[i].currentCoords.y - MAP_OFFSET;
