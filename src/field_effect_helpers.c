@@ -20,6 +20,7 @@
 #include "field_player_avatar.h"
 #include "event_data.h"
 // End autoSave
+#include "phenomenon.h" // phenomenon
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 #define PAL_TAG_REFLECTION_OFFSET 0x2000 // reflection tag value is paletteTag + 0x2000
@@ -1036,48 +1037,6 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *sprite)
 #undef sMapGroup
 #undef sPrevX
 #undef sPrevY
-
-// Start phenomenon
-void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
-{
-    u32 fieldEffectId = sprite->sWaitFldEff;
-    u32 sound = MUS_DUMMY;
-    u32 delay = 0;
-
-    switch (fieldEffectId)
-    {
-        default:
-        case FLDEFF_SHAKING_GRASS:
-        case FLDEFF_SHAKING_LONG_GRASS:
-            sound = SE_SUDOWOODO_SHAKE;
-            delay = 100;
-            break;
-        case FLDEFF_SAND_HOLE:
-        case FLDEFF_CAVE_DUST:
-            sound = SE_LAVARIDGE_FALL_WARP;
-            delay = 150;
-            break;
-        case FLDEFF_WATER_SURFACING:
-            sound = SE_M_BUBBLE;
-            delay = 200;
-            break;
-    }
-
-    if (sprite->data[6] == 0)
-        sprite->data[6] = delay;
-
-    if (sprite->data[6] == delay)
-    {
-        PlaySE(sound);
-        sprite->data[6] = 1;
-    }
-    else
-    {
-        sprite->data[6]++;
-    }
-
-}
-// End phenomenon
 
 u32 FldEff_ShakingGrass(void)
 {

@@ -22,6 +22,7 @@
 #include "tv.h"
 #include "link.h"
 #include "script.h"
+#include "sound.h"
 #include "wild_encounter.h"
 #include "battle_debug.h"
 #include "battle_pike.h"
@@ -31,6 +32,7 @@
 #include "constants/game_stat.h"
 #include "constants/phenomenon.h"
 #include "constants/item.h"
+#include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/weather.h"
@@ -661,4 +663,48 @@ bool8 CheckForPhenomenon(void){
     }
 
     return FALSE;
+}
+
+#define sWaitFldEff  data[0]
+#define sSoundEffectDelay data[6]
+
+void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
+{
+    u32 fieldEffectId = sprite->sWaitFldEff;
+    u32 sound = MUS_DUMMY;
+    u32 delay = 0;
+
+    switch (fieldEffectId)
+    {
+        //PSF TODO figure out if these are the best sound effects
+        default:
+        case FLDEFF_SHAKING_GRASS:
+        case FLDEFF_SHAKING_LONG_GRASS:
+            sound = SE_SUDOWOODO_SHAKE;
+            delay = 100;
+            break;
+        case FLDEFF_SAND_HOLE:
+        case FLDEFF_CAVE_DUST:
+            sound = SE_LAVARIDGE_FALL_WARP;
+            delay = 150;
+            break;
+        case FLDEFF_WATER_SURFACING:
+            sound = SE_M_BUBBLE;
+            delay = 200;
+            break;
+    }
+
+    if (sprite->data[6] == 0)
+        sprite->data[6] = delay;
+
+    if (sprite->data[6] == delay)
+    {
+        PlaySE(sound);
+        sprite->data[6] = 1;
+    }
+    else
+    {
+        sprite->data[6]++;
+    }
+
 }

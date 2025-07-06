@@ -10,6 +10,7 @@ void CheckForNPCPhenomenon(void);
 void CheckForNPCSteppingIntoPhenomenon(s16 npcX, s16 npcY);
 void CheckForNPCPhenomenonFromObjectEvent(struct ObjectEvent *objectEvent);
 void ClearAllPhenomenonData(void);
+void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite);
 
 #define ENABLE_COMMON_ENCOUNTERS             FALSE        // If enabled will let rustling grass spawn Pokemon in the Land encounter table + the Phenomenon encounter table
 #define PHENOMENON_COMMON_ENCOUNTER_CHANCE   30           // Percent of chances of getting a common encounter if ENABLE_COMMON_ENCOUNTERS is enabled
