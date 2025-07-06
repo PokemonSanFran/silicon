@@ -1,5 +1,6 @@
 #include "global.h"
 #include "phenomenon.h"
+#include "math.h"
 #include "pokemon.h"
 #include "metatile_behavior.h"
 #include "dexnav.h"
@@ -39,9 +40,9 @@
 #include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
 
-//Config
 u8 IsThereAPhenomenonOnCords(s16 coordX, s16 coordXY);
 u16 getFieldEffectForPhenomenon(u16 slot);
+static u32 CalculateDistanceBetweenPoints(s16 x1, s16 y1, s16 x2, s16 y2);
 
 struct Phenomenon{
     u8 fldEffSpriteId;
@@ -665,31 +666,75 @@ bool8 CheckForPhenomenon(void){
     return FALSE;
 }
 
+static u32 CalculateDistanceBetweenPoints(s16 x1, s16 y1, s16 x2, s16 y2)
+{
+    s32 horizontal = max(x1,x2) - min(x1,x2);
+    s32 vertical = max(y1,y2) - min(y1,y2);
+    return Sqrt((horizontal * horizontal) + (vertical * vertical));
+}
+
 #define sWaitFldEff  data[0]
 #define sSoundEffectDelay data[6]
 
 void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
 {
-    u32 fieldEffectId = sprite->sWaitFldEff;
     u32 sound = MUS_DUMMY;
     u32 delay = 0;
 
-    switch (fieldEffectId)
+    s16 playerX, playerY;
+    s16 phenomenonX =  sPhenomenonData[0].coordX + MAP_OFFSET;
+    s16 phenomenonY =  sPhenomenonData[0].coordY + MAP_OFFSET;
+    PlayerGetDestCoords(&playerX, &playerY);
+    u32 distance = MAX_PHENOMENON_DISTANCE - (CalculateDistanceBetweenPoints(playerX, playerY, phenomenonX, phenomenonY) - 1);
+
+    u32 volume = 65535 * distance / MAX_PHENOMENON_DISTANCE;
+
+    switch (sprite->sWaitFldEff)
     {
         //PSF TODO figure out if these are the best sound effects
+        /*
+         * DIRT
+         * fu zaku 37
+         * lavaridge fall warp
+         * truck unload
+         * mud ball
+         * sand attack
+         * sandstorm
+         *
+         * GRASS
+         * switch
+         * click
+         * sudowoodo shake
+         *
+         * WATER
+         * puddle
+         * balloon blue > red > yellow
+         * bubble / bubbl3
+         * crabhammer
+         *
+         * BRIDGE
+         * jump kick
+         * wing attack
+         * bridge walk
+         * door
+         * */
+        //PSF TODO figure out how to change volume based on distance
+        //PSF add bridge shadow effect
         default:
         case FLDEFF_SHAKING_GRASS:
         case FLDEFF_SHAKING_LONG_GRASS:
             sound = SE_SUDOWOODO_SHAKE;
-            delay = 100;
+            delay = PHENOMENON_SOUND_DELAY_GRASS;;
             break;
         case FLDEFF_SAND_HOLE:
         case FLDEFF_CAVE_DUST:
             sound = SE_LAVARIDGE_FALL_WARP;
+            delay = PHENOMENON_SOUND_DELAY_DUST;
             delay = 150;
             break;
         case FLDEFF_WATER_SURFACING:
             sound = SE_M_BUBBLE;
+            delay = PHENOMENON_SOUND_DELAY_WATER;
             delay = 200;
             break;
     }
