@@ -1069,7 +1069,6 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
     if (sprite->data[6] == delay)
     {
         PlaySE(sound);
-        DebugPrintf("yes");
         sprite->data[6] = 1;
     }
     else
