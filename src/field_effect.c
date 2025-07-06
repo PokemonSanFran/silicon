@@ -4258,6 +4258,7 @@ u8 FldEff_CaveDust(void)
     {
         gSprites[spriteId].coordOffsetEnabled = TRUE;
         gSprites[spriteId].data[0] = 22;
+        gSprites[spriteId].callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
 
     return spriteId;

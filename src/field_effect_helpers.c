@@ -1037,6 +1037,49 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *sprite)
 #undef sPrevX
 #undef sPrevY
 
+// Start phenomenon
+void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
+{
+    u32 fieldEffectId = sprite->sWaitFldEff;
+    u32 sound = MUS_DUMMY;
+    u32 delay = 0;
+
+    switch (fieldEffectId)
+    {
+        default:
+        case FLDEFF_SHAKING_GRASS:
+        case FLDEFF_SHAKING_LONG_GRASS:
+            sound = SE_SUDOWOODO_SHAKE;
+            delay = 100;
+            break;
+        case FLDEFF_SAND_HOLE:
+        case FLDEFF_CAVE_DUST:
+            sound = SE_LAVARIDGE_FALL_WARP;
+            delay = 150;
+            break;
+        case FLDEFF_WATER_SURFACING:
+            sound = SE_M_BUBBLE;
+            delay = 200;
+            break;
+    }
+
+    if (sprite->data[6] == 0)
+        sprite->data[6] = delay;
+
+    if (sprite->data[6] == delay)
+    {
+        PlaySE(sound);
+        DebugPrintf("yes");
+        sprite->data[6] = 1;
+    }
+    else
+    {
+        sprite->data[6]++;
+    }
+
+}
+// End phenomenon
+
 u32 FldEff_ShakingGrass(void)
 {
     u8 spriteId;
@@ -1049,6 +1092,7 @@ u32 FldEff_ShakingGrass(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_GRASS;
+        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
 
     return spriteId;
@@ -1066,6 +1110,7 @@ u32 FldEff_ShakingGrass2(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_LONG_GRASS;
+        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
 
     return spriteId;
@@ -1083,6 +1128,7 @@ u32 FldEff_UnusedSand(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SAND_HOLE;
+        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
     return spriteId;
 }
@@ -1099,6 +1145,7 @@ u32 FldEff_WaterSurfacing(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_WATER_SURFACING;
+        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
 
     return spriteId;
