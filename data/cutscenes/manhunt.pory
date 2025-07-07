@@ -104,7 +104,13 @@ script Manhunt_Cherie_Battle_Script {
 
         msgbox(format("As a matter of fact, get the hell out of here. Everything you two do is just hurting the region and lining the pockets of people who don't even care. Get out!"),,SPEAKER_CHERIE)
         closemessage
-        multi_fixed_2_vs_1(TRAINER_CHERIE,format("…Please don't hurt us any further. What do you want?"),PARTNER_STEVEN)
+        goto(Manhunt_StartBattle1_Script)
+}
+script Manhunt_StartBattle1_Script
+{
+        choose_mons
+        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle1_Script)
+        multi_2_vs_1(TRAINER_CHERIE,format("…Please don't hurt us any further. What do you want?"),PARTNER_STEVEN)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1)
         startcutscene(JUMPPLAYER_MANHUNT_NEWS)
         msgbox(format("Start talking. Who's Alcmene behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
@@ -152,7 +158,13 @@ script Manhunt_Teodoro_Battle_Script {
 
         msgbox(format("Yeah, I did some work for them a while back. What about it? Gonna rat us out to your bosses?"),,SPEAKER_TEODORO)
         closemessage
-        multi_fixed_2_vs_1(TRAINER_ALLEN,format("Damn punks."),PARTNER_STEVEN)
+        goto(Manhunt_StartBattle2_Script)
+}
+script Manhunt_StartBattle2_Script
+{
+        choose_mons
+        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle2_Script)
+        multi_2_vs_1(TRAINER_ALLEN,format("Damn punks."),PARTNER_STEVEN)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2)
         startcutscene(JUMPPLAYER_MANHUNT_BUSINESS)
 
@@ -213,8 +225,14 @@ script Manhunt_Dudley_Battle_Script
         msgbox(format("I'm sure we can help you divulge a little."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
         msgbox(format("Woah wait hold on!"),,SPEAKER_DUDLEY)
+        multi_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_STEVEN)
         closemessage
-        multi_fixed_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_STEVEN)
+        goto(Manhunt_StartBattle3_Script)
+}
+script Manhunt_StartBattle3_Script
+{
+        choose_mons
+        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle3_Script)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3)
         startcutscene(JUMPPLAYER_MANHUNT_BALL)
 
@@ -280,8 +298,13 @@ script Manhunt_Matthew_Battle_Script {
 
         msgbox(format("Yeah, Alcmene told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
         closemessage
-
-        multi_fixed_2_vs_1(TRAINER_SHANNON,format("Oh damn, looks like they were right."),PARTNER_STEVEN)
+        goto(Manhunt_StartBattle4_Script)
+}
+script Manhunt_StartBattle4_Script
+{
+        choose_mons
+        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle4_Script)
+        multi_2_vs_1(TRAINER_SHANNON,format("Oh damn, looks like they were right."),PARTNER_STEVEN)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
         startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
 
@@ -325,6 +348,7 @@ script Manhunt_React_Dialogue
 
 script Manhunt_Encounter_Alcmene_Dialogue {
     lock
+    faceplayer
 
         if(var(VAR_MANHUNT_STATE) != SAVED_BEFORE_ALCMENE){
             setvar(VAR_MANHUNT_STATE,SAVED_BEFORE_ALCMENE)
@@ -351,10 +375,16 @@ script Manhunt_Encounter_Alcmene_Dialogue {
             call(Manhunt_ReactAdaoraArrest_Dialogue)
     }
         closemessage
+        goto(Manhunt_StartAlcmeneBattle_Script)
+}
 
+script Manhunt_StartAlcmeneBattle_Script
+{
+        choose_mons
+        goto_if_eq(VAR_RESULT,0,Manhunt_StartAlcmeneBattle_Script)
+        multi_2_vs_1(TRAINER_ALCMENE,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Residoafter all."),PARTNER_STEVEN)
         lock
-
-        multi_fixed_2_vs_1(TRAINER_ALCMENE,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Residoafter all."),PARTNER_STEVEN)
+        faceplayer
         setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE)
         addvar(VAR_STORYLINE_STATE,1)
         startcutscene(JUMPPLAYER_MANHUNT_ALCMENE)
