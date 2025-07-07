@@ -41,13 +41,13 @@ script Quest_StolenTrade_AskForTrade_Dialogue{
         msgbox(gText_StolenTrade_DoYouKnowHow,MSGBOX_NPC,SPEAKER_BRONSON)
 
         msgbox(gText_StolenTrade_YeahYouTrade,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
 
         msgbox(gText_StolenTrade_ExactlyIWantTo,MSGBOX_NPC,SPEAKER_BRONSON)
         msgbox(gText_StolenTrade_WillYouTrade,MSGBOX_YESNO,SPEAKER_BRONSON)
 
         if (var(VAR_RESULT) == YES){
-            goto(Quest_StolenTrade_DoTrade_Script)    
+            goto(Quest_StolenTrade_DoTrade_Script)
         }else{
             goto(Quest_StoleTrade_NoTrade_Script)
         }
@@ -104,7 +104,7 @@ script Quest_StolenTrade_RunAfterTrade_Script{
     removeobject(THIEF)
 
     msgbox(gText_StolenTrade_WaitWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    
+
 
     startquest(QUEST_STOLENTRADE)
     release
@@ -117,16 +117,16 @@ script Quest_StolenTrade_PostTrade_Dialogue{
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
 
         msgbox(gText_StolenTrade_GimmeBackMy,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         closemessage
-        
+
         playse(SE_PIN)
         applymovement(THIEF,Common_Movement_ExclamationMark)
         waitmovement(0)
         msgbox(gText_StolenTrade_LookImSorryBut,MSGBOX_NPC,SPEAKER_BRONSON)
 
         msgbox(gText_StolenTrade_IDontWannaHear,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         closemessage
         goto(Quest_StolenTrade_StartBattle_Script)
 }
@@ -144,7 +144,7 @@ script Quest_StolenTrade_PostBattle_Dialogue {
         bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
         msgbox(gText_StolenTrade_GiveItBack,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         closemessage
 
         msgbox(gText_StolenTrade_OkayOkay,MSGBOX_NPC,SPEAKER_BRONSON)
@@ -159,7 +159,7 @@ script Quest_StolenTrade_QuestComplete_Dialogue {
         bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
         msgbox(gText_StolenTrade_YoureNotTakingBack,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         msgbox(gText_StolenTrade_NoIJustCaught,MSGBOX_NPC,SPEAKER_BRONSON)
         closemessage
 }

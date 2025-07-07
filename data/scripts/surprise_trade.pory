@@ -12,7 +12,7 @@ script SurpriseTrade_Script_CheckParty
 
     copyvar(VAR_0x8005,VAR_0x8004)
     callnative(CreateWonderTradePokemon)
-    special(DoInGameTradeScene)
+    callnative(DoSurpriseTrade)
     waitstate
     release
     end
