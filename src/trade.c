@@ -320,6 +320,7 @@ static void Task_AnimateWirelessSignal(u8);
 static void Task_OpenCenterWhiteColumn(u8);
 static void Task_CloseCenterWhiteColumn(u8);
 static void CB2_SaveAndEndWirelessTrade(void);
+static void Task_SurpriseTrade(u8 taskId); // surpriseTrade
 
 #include "data/trade.h"
 
@@ -4846,18 +4847,39 @@ void DoInGameTradeScene(void)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
 
+void DoSurpriseTrade(void)
+{
+    LockPlayerFieldControls();
+    CreateTask(Task_SurpriseTrade, 10);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+}
+
 static void Task_InGameTrade(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_InitInGameTrade);
-        // Start surpriseTrade
-        //gFieldCallback = FieldCB_ContinueScriptHandleMusic;
-        gFieldCallback = ShowTradedMon;
-        // End surpriseTrade
+        gFieldCallback = ShowTradedMonReturnToField; // surpriseTrade
         DestroyTask(taskId);
     }
 }
+
+// Start surprise_trade
+static void Task_SurpriseTrade(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(CB2_InitInGameTrade);
+        gFieldCallback = ShowTradedMonReturnToStartMenu;
+        DestroyTask(taskId);
+    }
+}
+
+void ShowTradedMonReturnToField(void)
+{
+    ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_ReturnToFieldContinueScript);
+}
+// End surprise_trade
 
 static void CheckPartnersMonForRibbons(void)
 {
