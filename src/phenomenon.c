@@ -60,7 +60,7 @@ struct Phenomenon{
 EWRAM_DATA struct Phenomenon sPhenomenonData[NUM_MAX_PHENOMENONS] = {0};
 
 static bool8 MetatileBehavior_IsBridgeTile(u16 tileBehaviour){
-    switch(tileBehaviour){ //To be configured
+    switch(tileBehaviour){ //PSF TODO To be configured
         case MB_BRIDGE_OVER_OCEAN:
         case MB_BRIDGE_OVER_POND_LOW:
         case MB_BRIDGE_OVER_POND_MED:
@@ -81,7 +81,7 @@ static bool8 MetatileBehavior_IsBridgeTile(u16 tileBehaviour){
 
 static u8 GeneratePhenomenonType(u16 tileBehaviour)
 {
-    if (tileBehaviour != MB_CAVE && MetatileBehavior_IsBridgeTile(tileBehaviour))
+    if (tileBehaviour != MB_CAVE && !MetatileBehavior_IsBridgeTile(tileBehaviour))
         return PHENOMENON_TYPE_ENCOUNTER;
 
     if ((Random() % 100) < PHENOMENON_ITEM_CHANCE)
@@ -92,7 +92,6 @@ static u8 GeneratePhenomenonType(u16 tileBehaviour)
 
 static u16 GenerateItemForPhenomenon(u16 tileBehaviour)
 {
-
     static const u16 sDustCloudItemList[] =
     {
         ITEM_FIRE_STONE,
@@ -676,20 +675,36 @@ static u32 CalculateDistanceBetweenPoints(s16 x1, s16 y1, s16 x2, s16 y2)
 #define sWaitFldEff  data[0]
 #define sSoundEffectDelay data[6]
 
+bool8 IsFieldEffectForPhenomenon(u32 fieldEffectId)
+{
+    return (fieldEffectId == FLDEFF_SHAKING_GRASS || fieldEffectId == FLDEFF_SHAKING_LONG_GRASS || fieldEffectId == FLDEFF_SAND_HOLE || fieldEffectId == FLDEFF_CAVE_DUST || fieldEffectId == FLDEFF_WATER_SURFACING);
+}
+
 void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
 {
-    u32 sound = MUS_DUMMY;
-    u32 delay = 0;
+    u32 fieldEffectId = sprite->sWaitFldEff;
 
+    if (!IsFieldEffectForPhenomenon(fieldEffectId))
+        return;
+
+    s16 phenomenonX = 0, phenomenonY = 0;
+
+    if(sPhenomenonData[0].active)
+    {
+        phenomenonX = sPhenomenonData[0].coordX + MAP_OFFSET;
+        phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
+    }
+
+    // PSF TODO update with Dexnav coordinates
+
+    u32 sound = MUS_DUMMY, delay = 0;
     s16 playerX, playerY;
-    s16 phenomenonX =  sPhenomenonData[0].coordX + MAP_OFFSET;
-    s16 phenomenonY =  sPhenomenonData[0].coordY + MAP_OFFSET;
     PlayerGetDestCoords(&playerX, &playerY);
     u32 distance = MAX_PHENOMENON_DISTANCE - (CalculateDistanceBetweenPoints(playerX, playerY, phenomenonX, phenomenonY) - 1);
 
     u32 volume = 65535 * distance / MAX_PHENOMENON_DISTANCE;
 
-    switch (sprite->sWaitFldEff)
+    switch (fieldEffectId)
     {
         //PSF TODO figure out if these are the best sound effects
         /*
@@ -739,17 +754,17 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
             break;
     }
 
-    if (sprite->data[6] == 0)
-        sprite->data[6] = delay;
+    if (sprite->sSoundEffectDelay == 0)
+        sprite->sSoundEffectDelay = delay;
 
-    if (sprite->data[6] == delay)
+    if (sprite->sSoundEffectDelay == delay)
     {
         PlaySE(sound);
-        sprite->data[6] = 1;
+        sprite->sSoundEffectDelay = 1;
     }
     else
     {
-        sprite->data[6]++;
+        sprite->sSoundEffectDelay++;
     }
 }
 
