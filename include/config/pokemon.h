@@ -51,7 +51,7 @@
 
 // Other settings
 #ifdef TESTING
-#define P_CRIES_ENABLED                  FALSE // If TRUE, Pokémon will have cries. Disabling this saves around a LOT of ROM space (over 25%!), but instead we recommend disabling individual unused Pokémon families in include/config/species_enabled.h.
+#define P_CRIES_ENABLED                  TRUE // If TRUE, Pokémon will have cries. Disabling this saves around a LOT of ROM space (over 25%!), but instead we recommend disabling individual unused Pokémon families in include/config/species_enabled.h.
 #else
 #define P_CRIES_ENABLED                  TRUE // If TRUE, Pokémon will have cries. Disabling this saves around a LOT of ROM space (over 25%!), but instead we recommend disabling individual unused Pokémon families in include/config/species_enabled.h.
 #endif

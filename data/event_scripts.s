@@ -1233,6 +1233,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/fishing.inc"
 .include "data/scripts/surprise_trade.inc" @ surpriseTrade
 .include "data/scripts/save.inc" @ autoSave
+.include "data/scripts/phenomenon.inc" @ autoSave
 
 ## SILICON CUTSCENES
 .include "data/cutscenes/prologue.inc"

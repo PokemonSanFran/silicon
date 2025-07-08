@@ -46,6 +46,7 @@
 #include "new_game.h"
 #include "palette.h"
 #include "play_time.h"
+#include "phenomenon.h" // phenomenon
 #include "random.h"
 #include "roamer.h"
 #include "rotating_gate.h"
@@ -1007,6 +1008,7 @@ if (I_VS_SEEKER_CHARGING != 0)
     WaterBerriesIfRaining(); // autoWater
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
+    ClearAllPhenomenonData(); // phenomenon
 
     if (OW_HIDE_REPEAT_MAP_POPUP)
     {
@@ -1897,6 +1899,7 @@ static void OverworldBasic(void)
            UpdatePalettesWithTime(PALETTES_ALL);
         }
     }
+    RestartPhenomenon(); // phenomenon
 }
 
 // This CB2 is used when starting

@@ -32,6 +32,7 @@
 #include "battle.h"
 #include "constants/battle.h"
 // End fishingUpdate
+#include "constants/phenomenon.h" // phenomenon
 
 extern const u8 EventScript_SprayWoreOff[];
 
@@ -489,6 +490,11 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
         case WILD_AREA_HIDDEN:
             wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
             break;
+            // Start phenomenon
+        case WILD_AREA_PHENOMENON:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].phenomenonMonsInfo;
+            break;
+            // End phenomenon
         }
     }
 

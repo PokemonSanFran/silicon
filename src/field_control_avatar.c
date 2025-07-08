@@ -25,6 +25,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h" // siliconMerge
+#include "phenomenon.h" // phenomenon
 #include "pokemon.h"
 #include "safari_zone.h"
 #include "script.h"
@@ -865,6 +866,13 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext_SetupScript(EventScript_VsSeekerChargingDone);
             return TRUE;
         }
+        // Start phenomenon
+        if(CheckForPhenomenon() == TRUE)
+        {
+            ScriptContext_SetupScript(Phenomenon_StartEncounter);
+            return TRUE;
+        }
+        // End phenomenon
     }
 
     if (SafariZoneTakeStep() == TRUE)
