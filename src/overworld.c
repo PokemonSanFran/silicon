@@ -1899,6 +1899,7 @@ static void OverworldBasic(void)
            UpdatePalettesWithTime(PALETTES_ALL);
         }
     }
+    RestartPhenomenon(); // phenomenon
 }
 
 // This CB2 is used when starting

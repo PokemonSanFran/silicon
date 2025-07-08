@@ -751,5 +751,20 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
     {
         sprite->data[6]++;
     }
+}
 
+void RestartPhenomenon(void)
+{
+    for (u32 phenomenonID = 0; phenomenonID < NUM_MAX_PHENOMENONS; phenomenonID++)
+    {
+        if(sPhenomenonData[phenomenonID].active == FALSE)
+            continue;
+
+        u32 fldEffId = sPhenomenonData[phenomenonID].fldEffId;
+
+        if (FieldEffectActiveListContains(fldEffId))
+            continue;
+
+        GeneratePhenomenonFieldEffectAt(phenomenonID,fldEffId);
+    }
 }
