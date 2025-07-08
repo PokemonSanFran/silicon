@@ -1050,7 +1050,6 @@ u32 FldEff_ShakingGrass(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_GRASS;
-        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
 
     return spriteId;
@@ -1068,7 +1067,6 @@ u32 FldEff_ShakingGrass2(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SHAKING_LONG_GRASS;
-        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
 
     return spriteId;
@@ -1086,7 +1084,6 @@ u32 FldEff_UnusedSand(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_SAND_HOLE;
-        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
     return spriteId;
 }
@@ -1103,7 +1100,6 @@ u32 FldEff_WaterSurfacing(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->sWaitFldEff = FLDEFF_WATER_SURFACING;
-        sprite->callback = SpriteCB_PlayFieldEffectSound; // phenomenon
     }
 
     return spriteId;
@@ -1862,6 +1858,8 @@ void WaitFieldEffectSpriteAnim(struct Sprite *sprite)
         FieldEffectStop(sprite, sprite->sWaitFldEff);
     else
         UpdateObjectEventSpriteInvisibility(sprite, FALSE);
+
+    SpriteCB_PlayFieldEffectSound(sprite);
 }
 
 static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevation, u8 subpriority)
