@@ -786,6 +786,7 @@ u8 TrySavingData(u8 saveType)
         return SAVE_STATUS_ERROR;
     }
 
+    SaveMapView();
     HandleSavingData(saveType);
     if (!gDamagedSaveSectors)
     {
