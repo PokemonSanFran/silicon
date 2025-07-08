@@ -1,5 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const THIEF = 8
 
 script Quest_StolenTrade_HideObjectA_Script {
     questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_STOLENTRADE)
@@ -31,82 +30,79 @@ script Quest_StolenTrade_Interact_Script{
         }
 }
 
-script Quest_StolenTrade_AskForTrade_Dialogue{
+script Quest_StolenTrade_AskForTrade_Dialogue
+{
     lock
     givemon(SPECIES_BAGON, 20, ITEM_NONE)
+
+	setvar(VAR_0x8008, INGAME_TRADE_HORSEA)
+	copyvar(VAR_0x8004, VAR_0x8008)
+	specialvar(VAR_RESULT, GetInGameTradeSpeciesInfo)
+	copyvar(VAR_0x8009, VAR_RESULT)
     bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
     bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
+    msgbox(gText_StolenTrade_DoYouKnowHow,MSGBOX_NPC,SPEAKER_BRONSON)
+    msgbox(gText_StolenTrade_YeahYouTrade,,SPEAKER_ALICIA)
+    msgbox(gText_StolenTrade_ExactlyIWantTo,,SPEAKER_BRONSON)
+    msgbox(gText_StolenTrade_WillYouTrade,MSGBOX_YESNO,SPEAKER_BRONSON)
 
-
-        msgbox(gText_StolenTrade_DoYouKnowHow,MSGBOX_NPC,SPEAKER_BRONSON)
-
-        msgbox(gText_StolenTrade_YeahYouTrade,MSGBOX_NPC,SPEAKER_ALICIA)
-        
-
-        msgbox(gText_StolenTrade_ExactlyIWantTo,MSGBOX_NPC,SPEAKER_BRONSON)
-        msgbox(gText_StolenTrade_WillYouTrade,MSGBOX_YESNO,SPEAKER_BRONSON)
-
-        if (var(VAR_RESULT) == YES){
-            goto(Quest_StolenTrade_DoTrade_Script)    
-        }else{
-            goto(Quest_StoleTrade_NoTrade_Script)
-        }
+    if (var(VAR_RESULT) == YES)
+    {
+        closemessage
+        goto(Quest_StolenTrade_DoTrade_Script)
+    }
+    else
+    {
+        closemessage
+        goto(Quest_StolenTrade_NoTrade_Script)
+    }
 }
 
-script Quest_StoleTrade_NoTrade_Script {
-    msgbox(gText_StolenTrade_NoBigDeal,MSGBOX_NPC,SPEAKER_BRONSON)
-    release
-    end
-}
-
-script Quest_StolenTrade_DoTrade_Script{
-    //use daycare-like system to store traded mon
-    bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
-    bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
-    setvar(VAR_0x8008, INGAME_TRADE_HORSEA)
-    copyvar(VAR_0x8004, VAR_0x8008)
-    specialvar(VAR_RESULT,GetInGameTradeSpeciesInfo)
-    copyvar(VAR_0x8009,VAR_RESULT)
-    special(ChoosePartyMon)
-    waitstate
-    copyvar(VAR_0x800A, VAR_0x8004)
-
-    if (var(VAR_0x800A) == PARTY_NOTHING_CHOSEN){
-        goto(Quest_StoleTrade_NoTrade_Script)
-    }
-
-    copyvar(VAR_0x8005, VAR_0x800A)
-    specialvar(VAR_RESULT, GetTradeSpecies)
-    copyvar(VAR_0x800B, VAR_RESULT)
-
-    if (var(VAR_RESULT) != VAR_0x8009){
-        goto(Quest_StoleTrade_NoTrade_Script)
-    }
-
-    copyvar(VAR_0x8004,VAR_0x8008)
-    copyvar(VAR_0x8005,VAR_0x800A)
-
-    special(CreateInGameTradePokemon)
-    special(DoInGameTradeScene)
-    waitstate
+script Quest_StolenTrade_DoTrade_Script
+{
+	special(ChoosePartyMon)
+	waitstate
+	copyvar(VAR_0x800A, VAR_0x8004)
+	goto_if_eq(VAR_0x8004, PARTY_NOTHING_CHOSEN, Quest_StolenTrade_NoTrade_Script)
+	copyvar(VAR_0x8005, VAR_0x800A)
+	specialvar(VAR_RESULT, GetTradeSpecies)
+	copyvar(VAR_0x800B, VAR_RESULT)
+	goto_if_ne(VAR_RESULT, VAR_0x8009, Quest_StolenTrade_WrongMon_Script)
+	copyvar(VAR_0x8004, VAR_0x8008)
+	copyvar(VAR_0x8005, VAR_0x800A)
+	special(CreateInGameTradePokemon)
+	special(DoInGameTradeScene)
+	waitstate
+	bufferspeciesname(STR_VAR_1, VAR_0x8009)
     goto(Quest_StolenTrade_RunAfterTrade_Script)
-
-    //givemon(SPECIES_SLURPUFF, 20, ITEM_NONE)
 }
 
-script Quest_StolenTrade_RunAfterTrade_Script{
+script Quest_StolenTrade_RunAfterTrade_Script
+{
     bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
     bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
     msgbox(gText_StolenTrade_GottaGo,MSGBOX_NPC,SPEAKER_BRONSON)
     applymovement(PLAYER,Quest_StolenTrade_WatchRunAway_Movement)
-    applymovement(THIEF,Quest_StolenTrade_RunAway_Movement)
+    applymovement(NPC_STOLEN_TRADE_QIU,Quest_StolenTrade_RunAway_Movement)
     waitmovement(0)
-    removeobject(THIEF)
-
+    removeobject(NPC_STOLEN_TRADE_QIU)
     msgbox(gText_StolenTrade_WaitWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    
-
     startquest(QUEST_STOLENTRADE)
+    release
+    end
+}
+
+script Quest_StolenTrade_NoTrade_Script
+{
+    msgbox(gText_StolenTrade_NoBigDeal,,SPEAKER_BRONSON)
+    release
+    end
+}
+
+script Quest_StolenTrade_WrongMon_Script
+{
+    bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
+    msgbox(format("Oh, this isn't a {STR_VAR_2}!"),,SPEAKER_BRONSON,EMOTE_SHOCK)
     release
     end
 }
@@ -117,16 +113,16 @@ script Quest_StolenTrade_PostTrade_Dialogue{
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
 
         msgbox(gText_StolenTrade_GimmeBackMy,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         closemessage
-        
+
         playse(SE_PIN)
-        applymovement(THIEF,Common_Movement_ExclamationMark)
+        applymovement(NPC_STOLEN_TRADE_CURENO,Common_Movement_ExclamationMark)
         waitmovement(0)
         msgbox(gText_StolenTrade_LookImSorryBut,MSGBOX_NPC,SPEAKER_BRONSON)
 
         msgbox(gText_StolenTrade_IDontWannaHear,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         closemessage
         goto(Quest_StolenTrade_StartBattle_Script)
 }
@@ -144,7 +140,7 @@ script Quest_StolenTrade_PostBattle_Dialogue {
         bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
         msgbox(gText_StolenTrade_GiveItBack,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         closemessage
 
         msgbox(gText_StolenTrade_OkayOkay,MSGBOX_NPC,SPEAKER_BRONSON)
@@ -159,7 +155,7 @@ script Quest_StolenTrade_QuestComplete_Dialogue {
         bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
         msgbox(gText_StolenTrade_YoureNotTakingBack,MSGBOX_NPC,SPEAKER_ALICIA)
-        
+
         msgbox(gText_StolenTrade_NoIJustCaught,MSGBOX_NPC,SPEAKER_BRONSON)
         closemessage
 }

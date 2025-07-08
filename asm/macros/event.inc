@@ -3145,6 +3145,7 @@
 
 	.macro hideitemdescription
 	callnative ScriptHideItemDescription, requests_effects=1
+    closemessage
 	.endm
 
 	@ Remove all of specified item from the player's bag and return the number of removed items to VAR_RESULT
