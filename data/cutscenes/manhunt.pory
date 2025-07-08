@@ -225,7 +225,6 @@ script Manhunt_Dudley_Battle_Script
         msgbox(format("I'm sure we can help you divulge a little."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
         msgbox(format("Woah wait hold on!"),,SPEAKER_DUDLEY)
-        multi_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_STEVEN)
         closemessage
         goto(Manhunt_StartBattle3_Script)
 }
@@ -233,6 +232,7 @@ script Manhunt_StartBattle3_Script
 {
         choose_mons
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle3_Script)
+        multi_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_STEVEN)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3)
         startcutscene(JUMPPLAYER_MANHUNT_BALL)
 
