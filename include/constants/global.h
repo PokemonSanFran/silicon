@@ -70,7 +70,7 @@
 // End siliconMerge
 #define POKE_NEWS_COUNT 16
 // PSF TODO Update all of these values to match the max size of the pockets
-#define PC_ITEMS_COUNT 0 // siliconMerge
+#define PC_ITEMS_COUNT 1 // siliconMerge
 #define BAG_ITEMS_COUNT 525 // siliconMerge
 #define BAG_KEYITEMS_COUNT 93  // siliconMerge
 #define BAG_POKEBALLS_COUNT 27 // siliconMerge
