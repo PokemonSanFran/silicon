@@ -282,11 +282,27 @@
 #define OBJ_EVENT_GFX_RAMESH                       OBJ_EVENT_GFX_MAGMA_MEMBER_M
 #define OBJ_EVENT_GFX_AMIARGENTO                   OBJ_EVENT_GFX_JUAN
 #define OBJ_EVENT_GFX_TALA                         OBJ_EVENT_GFX_SIDNEY
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_NORMAL     269
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_MACH_BIKE  270
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_ACRO_BIKE  271
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_SURFING    272
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_UNDERWATER 273
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_FIELD_MOVE 274
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_FISHING    275
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F3_WATERING   276
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_NORMAL     277
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_MACH_BIKE  278
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_ACRO_BIKE  279
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_SURFING    280
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_UNDERWATER 281
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_FIELD_MOVE 282
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_FISHING    283
+#define OBJ_EVENT_GFX_SILICON_PLAYER_F2_WATERING   284
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        277
+#define NUM_OBJ_EVENT_GFX                        285
 //#define NUM_OBJ_EVENT_GFX                        242
 
 

@@ -90,6 +90,7 @@ struct PokedexGridStaticResources
 struct PokedexLists
 {
     u16 numMonsInList;
+    u16 numCaughtMonsInList;
     u16 onScreenMons[NUM_SPECIES_LIST_ROWS][NUM_SPECIES_LIST_COLUMNS];
     u16 currentMonList[RESIDO_DEX_COUNT];
     u16 totalNumRows;

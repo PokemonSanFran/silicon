@@ -11,7 +11,7 @@ mapscripts WishaastLake_MapScripts {
 
 script WishaastLake_ObjectVisibility_Script {
     call(Manhunt_HideCharlotte_Script)
-    setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ARCHIE)
+    setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ALCMENE)
 
     specialvar(VAR_RESULT,ShouldShowAlcmene)
     if (!var(VAR_RESULT))

@@ -158,25 +158,6 @@
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
     },
 },
-    [POKEDEX_FORM_CHERRIM] =
-{
-    {
-        .originalSpecies = SPECIES_CHERRIM_OVERCAST,
-        .targetSpecies = SPECIES_CHERRIM_SUNSHINE,
-        .param1 = B_WEATHER_SUN,
-        .param2 = ABILITY_FLOWER_GIFT,
-        .method = FORM_CHANGE_BATTLE_WEATHER,
-        .description = COMPOUND_STRING("Transforms when Ability is {STR_VAR_2} and weather is {STR_VAR_1}."),
-    },
-    {
-        .originalSpecies = SPECIES_CHERRIM_SUNSHINE,
-        .targetSpecies = SPECIES_CHERRIM_OVERCAST,
-        .param1 = B_WEATHER_SUN,
-        .param2 = ABILITY_FLOWER_GIFT,
-        .method = FORM_CHANGE_BATTLE_WEATHER,
-        .description = COMPOUND_STRING("Transforms when Ability is {STR_VAR_2} and weather is not {STR_VAR_1}, or on faint, switch or battle end."),
-    },
-},
     [POKEDEX_FORM_LOPUNNY] =
 {
     {
@@ -558,29 +539,6 @@
         .description = COMPOUND_STRING("Transforms when {STR_VAR_1} is used."),
     },
 },
-
-    [POKEDEX_FORM_WISHIWASHI] =
-{
-    {
-        .originalSpecies = SPECIES_WISHIWASHI_SCHOOL,
-        .targetSpecies = SPECIES_WISHIWASHI_SOLO,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
-        .param1 = ABILITY_SCHOOLING,
-        .param2 = HP_LOWER_EQ_THAN,
-        .param3 = 25,
-        .description = COMPOUND_STRING("Transforms when Ability is {STR_VAR_1} and HP percent is {STR_VAR_2} {STR_VAR_3}, or on faint, switch or battle end."),
-    },
-    {
-        .originalSpecies = SPECIES_WISHIWASHI_SOLO,
-        .targetSpecies = SPECIES_WISHIWASHI_SCHOOL,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
-        .param1 = ABILITY_SCHOOLING,
-        .param2 = HP_HIGHER_THAN,
-        .param3 = 25,
-        .description = COMPOUND_STRING("Transforms when Ability is {STR_VAR_1} and HP percent is {STR_VAR_2} {STR_VAR_3}."),
-    },
-},
-
     [POKEDEX_FORM_SILVALLY] =
 {
     {
@@ -799,6 +757,19 @@
         .cosmeticFormConstant = POKEDEX_FORM_MINIOR,
     },
 },
+    [POKEDEX_FORM_MIMIKYU] =
+{
+    {
+        .originalSpecies = SPECIES_MIMIKYU,
+        .targetSpecies = SPECIES_MIMIKYU_BUSTED,
+        .description = COMPOUND_STRING("Transforms when damaged by an attack."),
+    },
+    {
+        .originalSpecies = SPECIES_MIMIKYU_BUSTED,
+        .targetSpecies = SPECIES_MIMIKYU_DISGUISED,
+        .description = COMPOUND_STRING("Transforms at the end of battle."),
+    },
+},
     [POKEDEX_FORM_CORVIKNIGHT] =
 {
     {
@@ -922,22 +893,6 @@
         .param1 = ITEM_HATTERENENITE,
         .method = FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
-    },
-},
-    [POKEDEX_FORM_EISCUE_ICE] =
-{
-    {
-        .originalSpecies = SPECIES_EISCUE_ICE,
-        .targetSpecies =    SPECIES_EISCUE_NOICE,
-        .method = FORM_CHANGE_HIT_BY_MOVE,
-        .description = COMPOUND_STRING("Transforms after being hit by a physical move."),
-    },
-    {
-        .originalSpecies = SPECIES_EISCUE_NOICE,
-        .targetSpecies =  SPECIES_EISCUE_ICE,
-        .method = FORM_CHANGE_BATTLE_WEATHER,
-        .param1 = B_WEATHER_SNOW,
-        .description = COMPOUND_STRING("Transforms in {STR_VAR_1} weather, or end of the battle."),
     },
 },
     [POKEDEX_FORM_COPPERAJAH] =
@@ -1068,7 +1023,7 @@
     {
         .originalSpecies = SPECIES_PALAFIN_HERO,
         .targetSpecies = SPECIES_PALAFIN_ZERO,
-        .method = FORM_CHANGE_END_BATTLE,
+        .method = FORM_CHANGE_HIT_BY_MOVE,
         .description = COMPOUND_STRING("Transforms when fainted or the battle ends. "),
     },
 },

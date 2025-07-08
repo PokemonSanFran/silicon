@@ -11,7 +11,6 @@ script LetsFixThis_EliteVideo_Dialogue
 {
     startcutscene(JUMPPLAYER_LETSFIXTHIS)
     lock
-        fadescreen(FADE_TO_BLACK)
         clearflag(FLAG_HIDE_KAI)
         addobject(KAI)
 
@@ -24,8 +23,8 @@ script LetsFixThis_EliteVideo_Dialogue
         msgbox(gText_LetsFixThis_WePrayTheGovernment,,SPEAKER_MAGNUS)
 
         msgbox(gText_LetsFixThis_ButWeWillNot,,SPEAKER_TALA)
-
         closemessage
+        fadescreen(FADE_FROM_BLACK)
 
         goto(LetsFixThis_GetMessage_Dialogue)
 }
@@ -33,7 +32,6 @@ script LetsFixThis_EliteVideo_Dialogue
 script LetsFixThis_GetMessage_Dialogue
 {
     applymovement(KAI,Common_Movement_FaceLeft)
-        fadescreen(FADE_FROM_BLACK)
         applymovement(PLAYER,Common_Movement_WalkRight)
         waitmovement(PLAYER)
 

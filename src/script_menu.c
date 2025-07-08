@@ -141,16 +141,19 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8
 
 static void MultichoiceDynamicEventDebug_OnInit(struct DynamicListMenuEventArgs *eventArgs)
 {
+    return;
     DebugPrintf("OnInit: %d", eventArgs->windowId);
 }
 
 static void MultichoiceDynamicEventDebug_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
 {
+    return;
     DebugPrintf("OnSelectionChanged: %d", eventArgs->selectedItem);
 }
 
 static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventArgs *eventArgs)
 {
+    return;
     DebugPrintf("OnDestroy: %d", eventArgs->windowId);
 }
 

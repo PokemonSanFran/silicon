@@ -2640,6 +2640,12 @@ static void InitObjectEventsReturnToField(void)
     SpawnObjectEventsOnReturnToField(0, 0);
     RotatingGate_InitPuzzleAndGraphics();
     RunOnReturnToFieldMapScript();
+
+    // Start playerCustom
+    struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+    ObjectEventSetGraphicsId(player, GetPlayerAvatarGraphicsIdByCurrentState());
+    ObjectEventTurn(player, player->movementDirection);
+    // End playerCustom
 }
 
 static void SetCameraToTrackPlayer(void)
