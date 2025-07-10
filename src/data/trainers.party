@@ -3318,6 +3318,7 @@ Ability: Drought
 EVs: 56 Atk / 56 SpA / 44 Spe  
 Lonely Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+Level: 22
 - Fire Spin  
 - Flame Charge  
 - Weather Ball  
@@ -3328,6 +3329,7 @@ Ability: Flame Body
 EVs: 56 Atk / 100 Spe  
 Adamant Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+Level: 22
 - Bug Bite  
 - Flame Wheel  
 - Smokescreen  
@@ -3336,6 +3338,7 @@ Lampent
 Ability: Flame Body  
 Modest Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+Level: 21
 - Will-O-Wisp  
 - Hex  
 - Fire Spin  
@@ -3346,132 +3349,141 @@ Name: 023957DE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Dragonair @ Oran Berry  
-Ability: Shed Skin  
-EVs: 72 HP / 40 Def / 40 SpD  
-Adamant Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Thunder Wave  
-- Dragon Tail  
-- Supersonic  
-- Slam  
+Dragonair @ Oran Berry
+Ability: Shed Skin
+Level: 25
+EVs: 72 HP/40 Def/40 SpD
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Thunder Wave
+- Dragon Tail
+- Supersonic
+- Slam
 
-Deino  
-Ability: Hustle  
-EVs: 148 Atk / 4 Def  
-Adamant Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Bite  
-- Headbutt  
-- Dragon Tail  
+Deino
+Ability: Hustle
+Level: 21
+EVs: 148 Atk/4 Def
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Bite
+- Headbutt
+- Dragon Tail
 
-Zweilous  
-Ability: Hustle  
-EVs: 148 Atk / 4 SpD  
-Adamant Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Bite  
-- Fire Fang  
-- Thunder Fang  
-- Ice Fang  
-
+Zweilous
+Ability: Hustle
+Level: 22
+EVs: 148 Atk/4 SpD
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Bite
+- Fire Fang
+- Thunder Fang
+- Ice Fang
 
 === TRAINER_006E7EFD ===
 Name: 006E7EFD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Hitmonchan  
-Ability: Inner Focus  
-EVs: 56 Atk / 100 Spe  
-Lonely Nature  
-IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Baton Pass  
-- Swords Dance  
-- Vacuum Wave  
-- Metronome  
+Hitmonchan
+Ability: Inner Focus
+Level: 22
+EVs: 56 Atk/100 Spe
+Lonely Nature
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Baton Pass
+- Swords Dance
+- Vacuum Wave
+- Metronome
 
-Pawmo  
-Ability: Iron Fist  
-EVs: 56 Atk / 100 Spe  
-Adamant Nature  
-IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Baton Pass  
-- Mach Punch  
-- Thunder Punch  
-- Agility  
+Pawmo
+Ability: Iron Fist
+Level: 21
+EVs: 56 Atk/100 Spe
+Adamant Nature
+IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Baton Pass
+- Mach Punch
+- Thunder Punch
+- Agility
 
-Mienshao @ Focus Sash  
-Ability: Reckless  
-EVs: 72 HP / 36 Def / 36 SpD  
-Adamant Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- High Jump Kick  
-- Detect  
-- Endure  
-- Reversal  
-
-
+Mienshao @ Focus Sash
+Ability: Reckless
+Level: 21
+EVs: 72 HP/36 Def/36 SpD
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- High Jump Kick
+- Detect
+- Endure
+- Reversal
 
 === TRAINER_007F06A5 ===
 Name: 007F06A5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Marshtomp @ Sitrus Berry  
-Ability: Torrent  
-IVs: 0 Atk  
-- Mirror Coat  
-- Muddy Water  
-- Counter  
+Marshtomp @ Sitrus Berry
+Ability: Torrent
+Level: 20
+Tera Type: Water
+IVs: 0 Atk
+- Mirror Coat
+- Muddy Water
+- Counter
 
-Slowpoke  
-Ability: Own Tempo  
-IVs: 0 Atk  
-- Light Screen  
-- Rain Dance  
-- Chilling Water  
+Slowpoke
+Ability: Own Tempo
+Level: 24
+Tera Type: Water
+IVs: 0 Atk
+- Light Screen
+- Rain Dance
+- Chilling Water
 
-Arrokuda @ Metronome  
-Ability: Propeller Tail  
-- Aqua Jet  
-
-
-
+Arrokuda @ Metronome
+Ability: Propeller Tail
+Level: 24
+Tera Type: Water
+- Aqua Jet
 
 === TRAINER_01103D48 ===
 Name: 01103D48
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Pachirisu  
-Ability: Pickup  
-EVs: 144 SpA  
-Relaxed Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Follow Me  
-- Charge Beam  
-- Thief  
-- Mud Shot  
+Pachirisu
+Ability: Pickup
+Level: 23
+EVs: 144 SpA
+Relaxed Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Follow Me
+- Charge Beam
+- Thief
+- Mud Shot
 
-Wattrel @ Oran Berry  
-Ability: Wind Power  
-EVs: 80 SpA / 64 Spe  
-Mild Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Tailwind  
-- Roost  
-- Pluck  
-- Charge Beam  
+Wattrel @ Oran Berry
+Ability: Wind Power
+Level: 22
+EVs: 80 SpA/64 Spe
+Mild Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Tailwind
+- Roost
+- Pluck
+- Charge Beam
 
-Shinx @ Magnet  
-Ability: Intimidate  
-EVs: 44 HP / 56 Atk / 44 Spe  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Bite  
-- Charge  
-- Spark  
-- Ice Fang  
+Shinx @ Magnet
+Ability: Intimidate
+Level: 21
+EVs: 44 HP/56 Atk/44 Spe
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Bite
+- Charge
+- Spark
+- Ice Fang
 
 === TRAINER_0272920D ===
 Name: 0272920D
@@ -3551,109 +3563,109 @@ Name: 012ED80D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
+Mudbray
+Ability: Stamina
+Level: 21
+EVs: 24 Atk/128 Def
+Lax Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Strength
+- Counter
+- Bulldoze
+- Double Kick
 
-Mudbray  
-Ability: Stamina  
-EVs: 24 Atk / 128 Def  
-Lax Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Strength  
-- Counter  
-- Bulldoze  
-- Double Kick  
+Drilbur
+Ability: Sand Force
+Level: 20
+EVs: 136 Atk
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sandstorm
+- Metal Claw
+- Bulldoze
+- Rock Tomb
 
-Drilbur  
-Ability: Sand Force  
-EVs: 136 Atk  
-Adamant Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Sandstorm  
-- Metal Claw  
-- Bulldoze  
-- Rock Tomb  
-
-Numel  
-Ability: Simple  
-EVs: 76 Atk / 72 SpA  
-Quiet Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Incinerate  
-- Bulldoze  
-- Focus Energy  
-
-
+Numel
+Ability: Simple
+Level: 21
+EVs: 76 Atk/72 SpA
+Quiet Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Incinerate
+- Bulldoze
+- Focus Energy
 
 === TRAINER_01E6E96E ===
 Name: 01E6E96E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Minior @ Power Herb  
-Ability: Shields Down  
-EVs: 92 Atk / 56 SpA  
-Brave Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Meteor Beam  
-- Rollout  
-- Acrobatics  
-- U-turn  
+Minior @ Power Herb
+Ability: Shields Down
+Level: 22
+EVs: 92 Atk/56 SpA
+Brave Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Meteor Beam
+- Rollout
+- Acrobatics
+- U-turn
 
-Vivillon @ Mental Herb  
-Ability: Friend Guard  
-EVs: 80 HP / 68 Spe  
-Jolly Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Swift  
-- U-turn  
-- Stun Spore  
-- Tailwind  
+Vivillon @ Mental Herb
+Ability: Friend Guard
+Level: 20
+EVs: 80 HP/68 Spe
+Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Swift
+- U-turn
+- Stun Spore
+- Tailwind
 
-Swellow @ Silk Scarf  
-Ability: Scrappy  
-EVs: 148 Atk  
-Adamant Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Rage  
-- Return  
-- Aerial Ace  
-- U-turn  
-
-
-
+Swellow @ Silk Scarf
+Ability: Scrappy
+Level: 22
+EVs: 148 Atk
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Rage
+- Return
+- Aerial Ace
+- U-turn
 
 === TRAINER_0092D526 ===
 Name: 0092D526
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Bounsweet  
-Ability: Leaf Guard  
-EVs: 96 SpA / 60 Spe  
-Modest Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Magical Leaf  
-- Draining Kiss  
+Bounsweet
+Ability: Leaf Guard
+Level: 21
+EVs: 96 SpA/60 Spe
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Magical Leaf
+- Draining Kiss
 
-Amoonguss @ Black Sludge  
-Ability: Effect Spore  
-EVs: 84 Def / 64 SpD  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Rage Powder  
-- Poison Powder  
-- Venoshock  
-- Stun Spore  
+Amoonguss @ Black Sludge
+Ability: Effect Spore
+Level: 20
+EVs: 84 Def/64 SpD
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Rage Powder
+- Poison Powder
+- Venoshock
+- Stun Spore
 
-Capsakid  
-Ability: Chlorophyll  
-EVs: 156 SpA  
-Bold Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Magical Leaf  
-- Growth  
-- Ingrain  
-
-
-
+Capsakid
+Ability: Chlorophyll
+Level: 21
+EVs: 156 SpA
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Magical Leaf
+- Growth
+- Ingrain
 
 === TRAINER_00C593A8 ===
 Name: 00C593A8
@@ -3690,43 +3702,41 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Confusion
 - Icy Wind
 
-
-
 === TRAINER_01E7C79B ===
 Name: 01E7C79B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Dottler  
-Ability: Swarm  
-EVs: 88 Def / 64 SpD  
-Calm Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Reflect  
-- Light Screen  
-- Confusion  
-- Struggle Bug  
+Dottler
+Ability: Swarm
+Level: 22
+EVs: 88 Def/64 SpD
+Calm Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Reflect
+- Light Screen
+- Confusion
+- Struggle Bug
 
-Hatenna @ Twisted Spoon  
-Ability: Anticipation  
-EVs: 56 SpA / 88 Spe  
-Mild Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Psybeam  
-- Disarming Voice  
-- Nuzzle  
+Hatenna @ Twisted Spoon
+Ability: Anticipation
+Level: 23
+EVs: 56 SpA/88 Spe
+Mild Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Psybeam
+- Disarming Voice
+- Nuzzle
 
-Meditite  
-Ability: Pure Power  
-EVs: 92 Atk / 40 Def / 24 SpD  
-Lonely Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Zen Headbutt  
-- Force Palm  
-- Work Up  
-
-
-
+Meditite
+Ability: Pure Power
+Level: 24
+EVs: 92 Atk/40 Def/24 SpD
+Lonely Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Zen Headbutt
+- Force Palm
+- Work Up
 
 === TRAINER_01C7AF3F ===
 Name: 01C7AF3F
