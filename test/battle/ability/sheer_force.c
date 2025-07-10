@@ -617,6 +617,8 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = 1; j < MOVES_COUNT; j += 4)
     {
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -698,8 +700,12 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     s16 damage1, damage2;
     u32 move = 0;
     for (u32 j = 2; j < MOVES_COUNT; j += 4)
+    {
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
+    }
     GIVEN {
         PLAYER(SPECIES_STEELIX) { Ability(ABILITY_SHEER_FORCE); Item(ITEM_BLUK_BERRY); }
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); Level(100); Item(ITEM_BLUK_BERRY); }
@@ -778,8 +784,12 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     s16 damage1, damage2;
     u32 move = 0;
     for (u32 j = 3; j < MOVES_COUNT; j += 4)
+    {
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
+    }
     GIVEN {
         PLAYER(SPECIES_STEELIX) { Ability(ABILITY_SHEER_FORCE); Item(ITEM_BLUK_BERRY); }
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); Level(100); Item(ITEM_BLUK_BERRY); }
@@ -859,6 +869,8 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = 4; j < MOVES_COUNT; j += 4)
     {
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }

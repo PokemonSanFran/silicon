@@ -75,6 +75,9 @@
 #include "ui_pokedex.h" // pokedex
 #include "little_cup.h" // littlecup
 
+// Exp test
+#include "silicon_test_exp.h"
+
 // table to avoid ugly powing on gba (courtesy of doesnt)
 // this returns (i^2.5)/4
 // the quarters cancel so no need to re-quadruple them in actual calculation
@@ -5234,6 +5237,23 @@ static void Cmd_getexp(void)
                 gBattleResources->beforeLvlUp->level             = currLvl;
                 gBattleResources->beforeLvlUp->learnMultipleMoves = FALSE;
 
+                if (TESTING && gSiliconExpTestState.expTestShouldSet)
+                {
+                    u32 expToReward;
+                    if (gSiliconExpTestState.expTestExp == 0)
+                        expToReward = 0;
+                    else
+                        expToReward = gSiliconExpTestState.expTestExp - GetMonData(&gPlayerParty[0], MON_DATA_EXP);
+                    gBattleStruct->battlerExpReward = expToReward;
+                    gSiliconExpTestState.expTestShouldSet = FALSE;
+                }
+
+                if (TESTING && gSiliconExpTestState.noReward)
+                {
+                    gBattleStruct->battlerExpReward = 0;
+                    gSiliconExpTestState.noReward = FALSE;
+                }
+
                 BtlController_EmitExpUpdate(gBattleStruct->expGetterBattlerId, B_COMM_TO_CONTROLLER, *expMonId, gBattleStruct->battlerExpReward);
                 MarkBattlerForControllerExec(gBattleStruct->expGetterBattlerId);
             }
@@ -9388,7 +9408,7 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 6:
-        if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE)
+        if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE || TESTING)
         {
             // Draw page 2 of level up box
             PlaySE(SE_SELECT);
@@ -9398,7 +9418,7 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 8:
-        if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE)
+        if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE || TESTING)
         {
             // Close level up box
             PlaySE(SE_SELECT);
@@ -18964,3 +18984,45 @@ void BS_JumpIfForcedToNickname(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 // End Battle Settings: Nickname
+
+void BS_HandleExpTest(void)
+{
+    NATIVE_ARGS();
+
+    // Set mon in the back to the next mon in the test
+    ExpTest_SetBackMonToNext();
+
+    for (u32 i = 0; i < gEnemyPartyCount; i++)
+    {
+        //  Revive all mons in the party
+        if (gSiliconExpTestState.currentMon <= gSiliconExpTestState.numMons + 1)
+            gEnemyParty[i].hp = gEnemyParty[i].maxHP;
+    }
+
+    //  This needs to be set to that mons can give EXP multiple times in a battle
+    gBattleStruct->givenExpMons = 0;
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_HandleExpTestSetup(void)
+{
+    NATIVE_ARGS();
+
+    gSiliconExpTestState.expTestShouldSet = TRUE;
+    gSiliconExpTestState.currentMon = 0;
+    gSiliconExpTestState.numMons = ExpTest_GetNumMonsForTrainer(gSiliconExpTestState.data->trainerIds[gSiliconExpTestState.trainerIndex]);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_HandleExpTestFinish(void)
+{
+    NATIVE_ARGS();
+
+    gSiliconExpTestState.expTestExp = GetMonData(&gPlayerParty[0], MON_DATA_EXP);
+    gSiliconExpTestState.trainerIndex++;
+    gSiliconExpTestState.noReward = TRUE;
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}

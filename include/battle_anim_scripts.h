@@ -938,6 +938,9 @@ extern const u8 gBattleAnimMove_GMaxDepletion[];
 extern const u8 gBattleAnimMove_GMaxOneBlow[];
 extern const u8 gBattleAnimMove_GMaxRapidFlow[];
 
+//  Test moves
+extern const u8 gBattleAnimMove_TestMoves[];
+
 // status animations
 extern const u8 gBattleAnimStatus_Poison[];
 extern const u8 gBattleAnimStatus_Confusion[];
