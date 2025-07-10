@@ -18283,8 +18283,10 @@ gBattleAnimMove_MightyCleave::
 gBattleAnimMove_SupercellSlam::
 	end @to do
 
+@ Start trainerExpTests
 gBattleAnimMove_TestMoves::
 	end
+@ End trainerExpTests
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
 gBattleAnimMove_None::

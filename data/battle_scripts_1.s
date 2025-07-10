@@ -10065,7 +10065,7 @@ BattleScript_ActionSelectionItemsCantBeUsedFog::
 	endselectionscript
 @ End fogBattle
 
-@ Test Moves
+@ Start trainerExpTests
 BattleScript_EffectExpTest::
 	attackcanceler
 	attackstring
@@ -10092,7 +10092,7 @@ BattleScript_EffectExpTestFinish::
 	waitanimation
 	goto BattleScript_MoveEnd
 
-@ End Test Moves
+@ End trainerExpTests
 
 
 BattleScript_QuestionForfeitBattle::

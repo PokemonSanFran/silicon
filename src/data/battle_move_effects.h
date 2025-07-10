@@ -2213,6 +2213,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+// Start trainerExpTests
     [EFFECT_EXP_TEST] =
     {
         .battleScript = BattleScript_EffectExpTest,
@@ -2230,4 +2231,5 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectExpTestFinish,
         .battleTvScore = 0, // TODO: Assign points
     },
+// End trainerExpTests
 };

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 #include "silicon_test_exp.h"
+#include "gba/isagbprint.h"
 
 #define SiliconExpTest(data) _SiliconExpTest(data, player)
 
@@ -18,6 +19,11 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
 
     GIVEN {
         PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
+        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
+        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
+        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
+        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
+        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_EXP_TEST); Speed(1); }
         OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_EXP_TEST); Speed(1); }
     } WHEN {
@@ -29,6 +35,8 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
     } FINALLY {
         u32 finalExp = gSiliconExpTestState.expTestExp;
         EXPECT_GT(finalExp, ExpTest_GetTargetExp(species, data->targetLevel));
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            DebugPrintf("mon %d %d",i,GetMonData(&gPlayerParty[i],MON_DATA_EXP));
     }
 }
 
@@ -64,7 +72,7 @@ static const struct SiliconExpTestData sTestData =
 
 //  Actual tests here
 
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: placeholder")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Belen")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 

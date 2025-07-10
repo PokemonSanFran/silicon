@@ -992,6 +992,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 255,
         FOOTPRINT(QuestionMark)
     },
-    #include "species_info/testing_species.h"
+    #include "species_info/testing_species.h" // trainerExpTests
 	// End siliconMerge
 };

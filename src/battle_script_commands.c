@@ -75,8 +75,7 @@
 #include "ui_pokedex.h" // pokedex
 #include "little_cup.h" // littlecup
 
-// Exp test
-#include "silicon_test_exp.h"
+#include "silicon_test_exp.h" // trainerExpTests
 
 // table to avoid ugly powing on gba (courtesy of doesnt)
 // this returns (i^2.5)/4
@@ -5237,6 +5236,7 @@ static void Cmd_getexp(void)
                 gBattleResources->beforeLvlUp->level             = currLvl;
                 gBattleResources->beforeLvlUp->learnMultipleMoves = FALSE;
 
+// Start trainerExpTests
                 if (TESTING && gSiliconExpTestState.expTestShouldSet)
                 {
                     u32 expToReward;
@@ -5253,6 +5253,7 @@ static void Cmd_getexp(void)
                     gBattleStruct->battlerExpReward = 0;
                     gSiliconExpTestState.noReward = FALSE;
                 }
+// End trainerExpTests
 
                 BtlController_EmitExpUpdate(gBattleStruct->expGetterBattlerId, B_COMM_TO_CONTROLLER, *expMonId, gBattleStruct->battlerExpReward);
                 MarkBattlerForControllerExec(gBattleStruct->expGetterBattlerId);
@@ -9408,7 +9409,10 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 6:
+// Start trainerExpTests
+        //if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE)
         if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE || TESTING)
+// End trainerExpTests
         {
             // Draw page 2 of level up box
             PlaySE(SE_SELECT);
@@ -9418,7 +9422,10 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 8:
+// Start trainerExpTests
+        //if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE)
         if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE || TESTING)
+// End trainerExpTests
         {
             // Close level up box
             PlaySE(SE_SELECT);
@@ -19005,6 +19012,7 @@ void BS_HandleExpTest(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+// Start trainerExpTests
 void BS_HandleExpTestSetup(void)
 {
     NATIVE_ARGS();
@@ -19026,3 +19034,4 @@ void BS_HandleExpTestFinish(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+// End trainerExpTests

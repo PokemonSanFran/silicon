@@ -348,9 +348,11 @@ enum BattleMoveEffects
     EFFECT_SPECTRAL_THIEF,
     EFFECT_RECOIL,
     EFFECT_SMACK_DOWN,
+    // Start trainerExpTests
     EFFECT_EXP_TEST,
     EFFECT_EXP_TEST_SETUP,
     EFFECT_EXP_TEST_FINISH,
+    // End trainerExpTests
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

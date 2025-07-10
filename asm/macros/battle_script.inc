@@ -2599,6 +2599,7 @@
     .endm
     @ End Battle Settings: Nickname
 
+@ Start trainerExpTests
 	@ Exp Test move handling
 	.macro exptesthandler
 	callnative BS_HandleExpTest
@@ -2613,6 +2614,7 @@
 	.macro exptestfinish
 	callnative BS_HandleExpTestFinish
 	.endm
+@ End trainerExpTests
 
 @ END OF PSF BATTLE SCRIPT MACROS
 	.macro flushtextbox
