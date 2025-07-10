@@ -2599,6 +2599,21 @@
     .endm
     @ End Battle Settings: Nickname
 
+	@ Exp Test move handling
+	.macro exptesthandler
+	callnative BS_HandleExpTest
+	.endm
+
+	@ Exp Test setup handling
+	.macro exptestsetup
+	callnative BS_HandleExpTestSetup
+	.endm
+
+	@ Exp Test finish handling
+	.macro exptestfinish
+	callnative BS_HandleExpTestFinish
+	.endm
+
 @ END OF PSF BATTLE SCRIPT MACROS
 	.macro flushtextbox
 	printstring STRINGID_EMPTYSTRING3
