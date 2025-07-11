@@ -5235,23 +5235,31 @@ static void Cmd_getexp(void)
                 gBattleResources->beforeLvlUp->stats[STAT_SPDEF] = GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPDEF);
                 gBattleResources->beforeLvlUp->level             = currLvl;
                 gBattleResources->beforeLvlUp->learnMultipleMoves = FALSE;
-
 // Start trainerExpTests
-                if (TESTING && gSiliconExpTestState.expTestShouldSet)
+                if (TESTING && gBattleTurnCounter == 0)
                 {
                     u32 expToReward;
                     if (gSiliconExpTestState.expTestExp == 0)
+                    {
                         expToReward = 0;
+                    }
+                    else if (gSiliconExpTestState.useBackMon)
+                    {
+                        expToReward = gSiliconExpTestState.backExp - GetMonData(&gPlayerParty[1], MON_DATA_EXP);
+                        gSiliconExpTestState.useBackMon = FALSE;
+                    }
                     else
+                    {
                         expToReward = gSiliconExpTestState.expTestExp - GetMonData(&gPlayerParty[0], MON_DATA_EXP);
+                        gSiliconExpTestState.useBackMon = TRUE;
+                    }
                     gBattleStruct->battlerExpReward = expToReward;
-                    gSiliconExpTestState.expTestShouldSet = FALSE;
+                    gSiliconExpTestState.isFinalTurn = FALSE;
                 }
 
-                if (TESTING && gSiliconExpTestState.noReward)
+                if (TESTING && gSiliconExpTestState.isFinalTurn)
                 {
                     gBattleStruct->battlerExpReward = 0;
-                    gSiliconExpTestState.noReward = FALSE;
                 }
 // End trainerExpTests
 
@@ -19017,9 +19025,9 @@ void BS_HandleExpTestSetup(void)
 {
     NATIVE_ARGS();
 
-    gSiliconExpTestState.expTestShouldSet = TRUE;
     gSiliconExpTestState.currentMon = 0;
     gSiliconExpTestState.numMons = ExpTest_GetNumMonsForTrainer(gSiliconExpTestState.data->trainerIds[gSiliconExpTestState.trainerIndex]);
+    gSiliconExpTestState.isFinalTurn = FALSE;
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -19029,8 +19037,9 @@ void BS_HandleExpTestFinish(void)
     NATIVE_ARGS();
 
     gSiliconExpTestState.expTestExp = GetMonData(&gPlayerParty[0], MON_DATA_EXP);
+    gSiliconExpTestState.backExp = GetMonData(&gPlayerParty[1], MON_DATA_EXP);
     gSiliconExpTestState.trainerIndex++;
-    gSiliconExpTestState.noReward = TRUE;
+    gSiliconExpTestState.isFinalTurn = TRUE;
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
