@@ -3278,9 +3278,11 @@ Level: 1
 Name: 00317DFA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Happiny  
 Ability: Friend Guard  
+Level: 19
 EVs: 156 Def  
 Lax Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
@@ -3290,6 +3292,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 Smoliv @ Oran Berry  
 Ability: Harvest  
+Level: 20
 EVs: 144 HP / 12 Atk  
 Jolly Nature  
 IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
@@ -3300,6 +3303,7 @@ IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 Squawkabilly  
 Ability: Hustle  
+Level: 22
 EVs: 84 Atk / 64 Spe  
 Adamant Nature  
 IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe  
@@ -3452,6 +3456,7 @@ Tera Type: Water
 Name: 01103D48
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Pachirisu
 Ability: Pickup
@@ -3525,6 +3530,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 022A53A0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Kricketune @ Focus Band
 Ability: Swarm
@@ -3599,6 +3605,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 01E6E96E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Minior @ Power Herb
 Ability: Shields Down
@@ -3637,6 +3644,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 0092D526
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Bounsweet
 Ability: Leaf Guard
@@ -3671,6 +3679,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 00C593A8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Spheal @ Wacan Berry
 Ability: Ice Body
@@ -3742,6 +3751,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 01C7AF3F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Flabebe (Flabebe-Yellow) @ Oran Berry
 Ability: Symbiosis
@@ -3780,6 +3790,7 @@ IVs: 0 Atk
 Name: 02EEB783
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Yamask
 Ability: Mummy
@@ -3892,6 +3903,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 00E46F7D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Pupitar
 Ability: Shed Skin
