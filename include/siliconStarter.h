@@ -30,5 +30,6 @@ void MoveStarterToParty(void);
 void GenerateDummyPartyMembers(void);
 void AddStartersToBox(void);
 bool32 ShouldMonBeShiny(u32 personality, u32 trainerId);
+u8 GetLowestLevelStarter(void);
 
 #endif // GUARD_SILICON_STARTER_H

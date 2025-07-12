@@ -456,3 +456,12 @@ void MoveStarterToParty(void)
     GiveDebugStarter();
     CompactPartySlots();
 }
+
+u8 GetLowestLevelStarter(void)
+{
+    u32 level = MAX_LEVEL;
+    for (u32 starterIndex = 0; starterIndex < SILICON_STARTER_COUNT; starterIndex++)
+        level = min(level,sStarterMonTable[starterIndex].level);
+
+    return level;
+}
