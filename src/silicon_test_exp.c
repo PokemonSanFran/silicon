@@ -32,7 +32,8 @@ void ExpTest_SetBackMonToNext(void)
     if (gSiliconExpTestState.currentMon < gSiliconExpTestState.numMons)
     {
         species = trainerMon->species;
-        level = trainerMon->lvl;
+        //level = trainerMon->lvl;
+        level = 18;
     }
     else
     {

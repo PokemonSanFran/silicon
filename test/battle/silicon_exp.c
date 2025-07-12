@@ -3,9 +3,9 @@
 #include "silicon_test_exp.h"
 #include "gba/isagbprint.h"
 
-#define SiliconExpTest(data) _SiliconExpTest(data, player)
+#define SiliconExpTest(data, benchPercent) _SiliconExpTest(data, player, benchPercent)
 
-void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon *player)
+void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon *player, u32 benchPercent)
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
 
@@ -19,11 +19,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
 
     GIVEN {
         PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
-        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
-        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
-        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
-        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
-        PLAYER(species) { Level(data->startLevel); Speed(100); Moves(MOVE_CELEBRATE, MOVE_EXP_TEST_SETUP, MOVE_EXP_TEST_FINISH); }
+        PLAYER(species) { Level(data->startLevel); Speed(100); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_EXP_TEST); Speed(1); }
         OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_EXP_TEST); Speed(1); }
     } WHEN {
@@ -34,9 +30,25 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
         TURN { MOVE(player, MOVE_EXP_TEST_FINISH); }
     } FINALLY {
         u32 finalExp = gSiliconExpTestState.expTestExp;
-        EXPECT_GT(finalExp, ExpTest_GetTargetExp(species, data->targetLevel));
-        for (u32 i = 0; i < PARTY_SIZE; i++)
-            DebugPrintf("mon %d %d",i,GetMonData(&gPlayerParty[i],MON_DATA_EXP));
+        u32 targetFrontExp = ExpTest_GetTargetExp(species, data->targetLevel);
+        u32 finalExpBack = gSiliconExpTestState.backExp;
+        u32 targetBackExp = ExpTest_GetTargetExp(species, data->startLevel) + benchPercent * (ExpTest_GetTargetExp(species, data->targetLevel) - ExpTest_GetTargetExp(species, data->startLevel)) / 100;
+
+        if (finalExp < targetFrontExp)
+        {
+            u32 missingExp = targetFrontExp - finalExp;
+            u32 expToGet = targetFrontExp - ExpTest_GetTargetExp(species, data->startLevel);
+            u32 fracProgress = 100 * (finalExp - ExpTest_GetTargetExp(species, data->startLevel)) / expToGet;
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Active Pokemon need %d more exp (0.%d to goal)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress);
+        }
+
+        if (finalExpBack < targetBackExp)
+        {
+            u32 missingExp = targetBackExp - finalExpBack;
+            u32 expToGet = targetBackExp - ExpTest_GetTargetExp(species, data->startLevel);
+            u32 fracProgress = 100 * (finalExpBack - ExpTest_GetTargetExp(species, data->startLevel)) / expToGet;
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Benched Pokemon need %d more exp (0.%d to goal of 0.%d of level %d to %d)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress, benchPercent, data->startLevel, data->targetLevel);
+        }
     }
 }
 
@@ -76,5 +88,5 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Belen")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
-    SiliconExpTest(&sTestData);
+    SiliconExpTest(&sTestData, 75);
 }

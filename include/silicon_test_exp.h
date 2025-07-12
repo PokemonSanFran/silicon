@@ -15,12 +15,13 @@ struct SiliconExpTestData
 struct SiliconExpTestState
 {
     u32 expTestExp:21;
-    u32 expTestShouldSet:1;
+    u32 isFinalTurn:1;
     u32 currentMon:3;
     u32 trainerIndex:7;
     u32 numMons:3;
-    u32 noReward:1;
-    u32 unused:28;
+    u32 backExp:21;
+    u32 useBackMon:1;
+    u32 unused:8;
     const struct SiliconExpTestData *data;
 };
 
