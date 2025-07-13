@@ -975,7 +975,7 @@ text BreedingCenter_Text_ExplainEggsFeesGold
 
 text BreedingCenter_Text_ExplainEggEditFeesGold
 {
-    format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. If you use our gene editing services, the cost for every Individual Values you change is ¥{{STR_VAR_1}.")
+    format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. If you use our gene editing services, the cost for every Individual Values you change is ¥{STR_VAR_1}.")
 }
 
 text BreedingCenter_Text_ExplainEggsFeesBronze
@@ -985,7 +985,7 @@ text BreedingCenter_Text_ExplainEggsFeesBronze
 
 text BreedingCenter_Text_ExplainEggEditFeesBronze
 {
-    format("As a {STR_VAR_3} Plan member, you are responsible for the full cost of our services. For every Individual Values you change, the cost is ¥{{STR_VAR_1}.")
+    format("As a {STR_VAR_3} Plan member, you are responsible for the full cost of our services. For every Individual Values you change, the cost is ¥{STR_VAR_1}.")
 }
 
 text BreedingCenter_Text_ImTheEgg
