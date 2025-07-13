@@ -236,7 +236,7 @@ text gText_WaitHeDidWhat_GoodLuck {
 }
 
 text gText_WaitHeDidWhat_ILostToThat {
-    format("I lost to that absolute garbage Trainer? What happened?")
+    format("I lost to that absolute garbage Trainer? What happened? He must have cheated... right!?")
 }
 
 text gText_WaitHeDidWhat_GetTheFuck {
@@ -252,7 +252,8 @@ text gText_WaitHeDidWhat_AbsoluteBullshit {
 }
 
 text gText_WaitHeDidWhat_DaddyINeed
-    format("...But I did everything, just we planned... Daddy, I need you to fix this!")
+{
+    format("...I executed our plan perfectly! It's not my fault Daddy - he must have tricked me! Fix this now, Daddy!\p...\pWhat do you mean you're working on it? What are you going to do!?")
 }
 
 text gText_WaitHeDidWhat_IDontThinkYouCan {
