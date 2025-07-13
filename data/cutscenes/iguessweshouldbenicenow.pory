@@ -354,6 +354,7 @@ script IGuessWeShoudlBeNiceNow_Shorttermrental_Dialogue
 	msgbox(gText_IGuessWeShouldBeNiceNow_DaddyHiredAPI,MSGBOX_NPC,SPEAKER_CHARLOTTE)
 	msgbox(gText_IGuessWeShouldBeNiceNow_IWantToGetA,,SPEAKER_CHARLOTTE)
 	msgbox(gText_IGuessWeShouldBeNiceNow_DataOnAll,,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(gText_IGuessWeShouldBeNiceNow_TheresADifference,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
 	msgbox(gText_IGuessWeShouldBeNiceNow_YeahThereWasAWholeTeam,,SPEAKER_CHARLOTTE)
 	msgbox(gText_IGuessWeShouldBeNiceNow_ThereWasNeverAny,,SPEAKER_CHARLOTTE)
 	msgbox(gText_IGuessWeShouldBeNiceNow_ThereAreSomeOnThat,,SPEAKER_CHARLOTTE)
@@ -591,12 +592,17 @@ text gText_IGuessWeShouldBeNiceNow_IWantToGetA
 
 text gText_IGuessWeShouldBeNiceNow_DataOnAll
 {
-	format("You got data on all on us?! How?")
+    format("Wait... your Dad hired somebody to spy on everybody else? Even me!?")
 }
 
 text gText_IGuessWeShouldBeNiceNow_YeahThereWasAWholeTeam
 {
-	format("Of course, there was a whole team of people they hired to watch the broadcasts. It's all public knowledge, so I figured its fair game.")
+	format("Of course! Except isn't one guy, it was a whole team of people. All of our League activity is publicly broadcast and public knowledge, so I figured its fair game.")
+}
+
+text gText_IGuessWeShouldBeNiceNow_TheresADifference
+{
+    format("Am I going to be battling against Charlotte? Or am I battling Charlotte, and her dad, and all their resources!?")
 }
 
 text gText_IGuessWeShouldBeNiceNow_ThereWasNeverAny
