@@ -5,7 +5,7 @@
 #include "gba/isagbprint.h"
 
 #define SiliconExpTest(data, benchPercent) _SiliconExpTest(data, player, benchPercent)
-#define SILICON_MINIMUM_BENCH_LEVEL_PERCENT 90
+#define SILICON_MINIMUM_BENCH_LEVEL_PERCENT 75
 
 void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon *player, u32 benchPercent)
 {
@@ -60,7 +60,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
 static const struct SiliconExpTestData sBelenTrainers =
 {
     .startLevel = MIN_LEVEL,
-    .targetLevel = LEVEL_CAP_VALUE_1,
+    .targetLevel = LEVEL_CAP_VALUE_0,
     .trainerIds =
     {
         TRAINER_00317DFA,
