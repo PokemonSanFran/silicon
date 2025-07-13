@@ -143,13 +143,14 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
 }
 
 script WaitHeDidWhat_CharlotteMeltdown_Dialogue {
-    random(4)
+    random(5)
 
         switch (var(VAR_RESULT)) {
-            case 0:msgbox(gText_WaitHeDidWhat_ILostToThat,,SPEAKER_CHARLOTTE)
-            case 1:msgbox(gText_WaitHeDidWhat_GetTheFuck,,SPEAKER_CHARLOTTE)
-            case 2:msgbox(gText_WaitHeDidWhat_HowCouldThisHappen,,SPEAKER_CHARLOTTE)
-            case 3:msgbox(gText_WaitHeDidWhat_AbsoluteBullshit,,SPEAKER_CHARLOTTE)
+            case 0:msgbox(gText_WaitHeDidWhat_ILostToThat,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD)
+            case 1:msgbox(gText_WaitHeDidWhat_GetTheFuck,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY)
+            case 2:msgbox(gText_WaitHeDidWhat_HowCouldThisHappen,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD)
+            case 3:msgbox(gText_WaitHeDidWhat_AbsoluteBullshit,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY)
+            case 4:msgbox(gText_WaitHeDidWhat_DaddyINeed,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD,PHONE_ON)
         }
 
 
@@ -175,9 +176,10 @@ script WaitHeDidWhat_WalkIntoChampionshipPosition {
         applymovement(PLAYER,WaitHeDidWhat_WalkToBattlefieldPosition)
         waitmovement(0)
         msgbox(gText_WaitHeDidWhat_IDontThinkYouCan,,SPEAKER_KAI)
-
-
-        msgbox(gText_WaitHeDidWhat_ImReallyHappy,,SPEAKER_ALICIA)
+        msgbox(gText_WaitHeDidWhat_YouMightBeAbleToOutspend,,SPEAKER_KAI)
+        msgbox(gText_WaitHeDidWhat_ImGoingToBe,,SPEAKER_KAI)
+        msgbox(gText_WaitHeDidWhat_ImReallyHappy,,SPEAKER_ALICIA,,EMOTE_HAPPY)
+        msgbox(gText_WaitHeDidWhat_ButIveNeverLost,,SPEAKER_ALICIA)
 
         setvar(VAR_STORYLINE_STATE,STORY_SAVE_FINALS)
 
@@ -190,7 +192,7 @@ script WaitHeDidWhat_StartBattle_Script{
         applymovement(PLAYER,Common_Movement_WalkRight)
         applymovement(1,Common_Movement_WalkLeft)
         waitmovement(0)
-        msgbox(gText_WaitHeDidWhat_ForResido,,SPEAKER_KAI)
+        msgbox(gText_WaitHeDidWhat_ForResido,,SPEAKER_KAI,TAIL_SHOUT)
         trainerbattle_no_intro(TRAINER_KAI_FINALS,gText_WaitHeDidWhat_SoClose)
         closemessage
 
@@ -226,7 +228,7 @@ text gText_WaitHeDidWhat_MakeSureYouGive {
 }
 
 text gText_WaitHeDidWhat_WhatEmail {
-    format("I don't know what email he's talking about... I dont' even use my email.")
+    format("I don't know what email he's talking about... I don't even use my email.")
 }
 
 text gText_WaitHeDidWhat_GoodLuck {
@@ -249,16 +251,37 @@ text gText_WaitHeDidWhat_AbsoluteBullshit {
     format("Absolute bullshit. Argh I cannot believe this shit…")
 }
 
-text gText_WaitHeDidWhat_IDontThinkYouCan {
-    format("{PLAYER}, I don't think you can beat me when I have home court advantage! I already beat one cheater, and I'm gonna take you down too!")
+text gText_WaitHeDidWhat_DaddyINeed
+    format("...But I did everything, just we planned... Daddy, I need you to fix this!")
 }
+
+text gText_WaitHeDidWhat_IDontThinkYouCan {
+    format("{PLAYER}, I don't think you can beat me when I have home court advantage!")
+}
+
+text gText_WaitHeDidWhat_YouMightBeAbleToOutspend
+{
+    format("You and Charlotte and SharpRise might be able to outspend me, but you can't outwork me and my Pokémon!")
+}
+
+text gText_WaitHeDidWhat_ImGoingToBe
+{
+    format("I'm going to be the Resido Champion!")
+}
+
 
 text gText_WaitHeDidWhat_ImReallyHappy {
-    format("I'm really happy for you! But I'm keeping my undefeated streak against you, Kai.")
+    format("Kai, I'm super proud of you. I'm even happy you've gotten this far!")
 }
 
+text gText_WaitHeDidWhat_ButIveNeverLost
+{
+    format("But I've got an undefeated winning streak against you, and that isn't changing now.")
+}
+
+
 text gText_WaitHeDidWhat_ForResido {
-    format("For Resido!")
+    format("I'll beat you... for Resido!")
 }
 
 text gText_WaitHeDidWhat_SoClose {
