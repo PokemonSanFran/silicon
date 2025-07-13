@@ -20,6 +20,7 @@
 #include "event_object_movement.h"
 #include "script_pokemon_util.h"
 #include "roamer.h"
+#include "m4a.h"
 #include "tv.h"
 #include "link.h"
 #include "script.h"
@@ -701,8 +702,12 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
     s16 playerX, playerY;
     PlayerGetDestCoords(&playerX, &playerY);
     u32 distance = MAX_PHENOMENON_DISTANCE - (CalculateDistanceBetweenPoints(playerX, playerY, phenomenonX, phenomenonY) - 1);
-
     u32 volume = 65535 * distance / MAX_PHENOMENON_DISTANCE;
+
+    // PSF TODO figure out how to adjust volume
+    m4aMPlayVolumeControl(&gMPlayInfo_SE1,TRACKS_ALL,volume);
+    m4aMPlayVolumeControl(&gMPlayInfo_SE2,TRACKS_ALL,volume);
+    m4aMPlayVolumeControl(&gMPlayInfo_SE3,TRACKS_ALL,volume);
 
     switch (fieldEffectId)
     {
