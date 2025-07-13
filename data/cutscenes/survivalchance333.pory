@@ -191,29 +191,6 @@ script SurvivalChance333_ExplainOperation {
 
         msgbox(gText_SurvivalChance333_SoThatsThePlan,,SPEAKER_CHIEF)
 
-        msgbox(gText_SurvivalChance333_OneProblemForUs,,SPEAKER_CHARLOTTE)
-
-
-        msgbox(gText_SurvivalChance333_HereWeGo,,SPEAKER_CHIEF)
-
-        msgbox(gText_SurvivalChance333_IKnowWereSupposed,,SPEAKER_CHARLOTTE)
-
-
-        msgbox(gText_SurvivalChance333_OhHellThatsRight,,SPEAKER_CHIEF)
-        closemessage
-
-        applymovement(7,SurvivalChance333_GiveTM)
-        applymovement(8,SurvivalChance333_GiveTM)
-        waitmovement(0)
-        giveitem(ITEM_TM40)
-        closemessage
-
-        applymovement(7,SurvivalChance333_BackToPosition)
-        applymovement(8,SurvivalChance333_BackToPosition)
-        waitmovement(0)
-
-        msgbox(gText_SurvivalChance333_IAlwaysForget,,SPEAKER_CHIEF)
-
         msgbox(gText_SurvivalChance333_NoSir,,SPEAKER_POLICE)
 
         msgbox(gText_SurvivalChance333_LetsGetThisParty,,SPEAKER_CHIEF)
@@ -339,27 +316,6 @@ text gText_SurvivalChance333_YoureAPairOfKids {
 }
 text gText_SurvivalChance333_SoThatsThePlan {
     format("So that's the plan. Any questions?")
-}
-
-text gText_SurvivalChance333_OneProblemForUs {
-    format("One problem for us.")
-}
-
-text gText_SurvivalChance333_HereWeGo {
-    format("Here we go… what?")
-}
-
-text gText_SurvivalChance333_IKnowWereSupposed {
-    format("I know we're supposed to blast the walls to drive out the TheTide members, but {PLAYER} and I don't have the Self-Destruct TM.")
-}
-
-text gText_SurvivalChance333_OhHellThatsRight {
-    format("Oh hell, that's right. Not your fault. Marcus, Phillip, give ‘em yours.")
-}
-
-text gText_SurvivalChance333_IAlwaysForget {
-    format("I always forget - we took those out of circulation in Resido a few years ago. Criminals were using them for too many smash and grabs, so now they're for police use only. Any other questions?")
-
 }
 text gText_SurvivalChance333_NoSir {
     format("NO sir.")
