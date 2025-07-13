@@ -1,2 +1,25 @@
-mapscripts EspuleeOutskirts_KomalaCabin_2F_MapScripts {
+const PLAYER = OBJ_EVENT_ID_PLAYER
+mapscripts EspuleeOutskirts_KomalaCabin_2F_MapScripts {}
+
+script EspuleeOutskirts_KomalaCabin_2F_PreventPlayerBedroom_Script
+{
+    lock
+    if (var(VAR_ESPULEE_OUTSKIRTS_STATE) < ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED)
+    {
+        // PSF TODO the player should not even be able to get into this house until Charlotte opens it
+        release
+        end
+    }
+    if (var(VAR_STORYLINE_STATE) >= STORY_COMPLETED_NAVAL_BASE)
+    {
+        release
+        end
+    }
+    msgbox(format("I think I'd rather be in my own bedroom."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+    applymovement(PLAYER,Common_Movement_WalkDown)
+    waitmovement(0)
+    releaseall
+    end
+
 }
