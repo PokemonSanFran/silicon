@@ -27,6 +27,7 @@
 #include "config/save.h"
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
+#include "constants/adventure_guides.h" // adventureGuide
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -284,6 +285,7 @@ struct SaveBlock3
     u8 startMenuAppIndex[NUM_TOTAL_APPS];
     u16 prestoBuyAgainItem[MAX_PRESTO_BUY_AGAIN_ITEMS];
     u16 lastUsedBall;
+    bool8 hasSeenGuide[NUM_GUIDES];
     u8 customizationValues[NUM_CUSTOMIZATION_PARTS];
     u8 rgbValues[NUM_CUSTOM_COLOR_OPTIONS][NUM_COLOR_OPTIONS];
     u8 playerSubjectPronoun[PLAYER_NAME_LENGTH + 1];
