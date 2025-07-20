@@ -404,6 +404,15 @@ void Task_OpenPokedexFromStartMenu(u8 taskId)
 
 static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
 {
+    u32 targetGuide = GUIDE_OPENING_POKEDEX;
+
+    if (!shouldSkipGuide(targetGuide))
+    {
+        VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN,targetGuide);
+        Adventure_Guide_Init(callback);
+        return;
+    }
+
     if (AllocateStructs())
     {
         SetMainCallback2(callback);
