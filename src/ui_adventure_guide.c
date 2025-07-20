@@ -38,23 +38,6 @@
 #include "constants/ui_adventure_guide.h"
 #include "ui_options_menu.h"
 
-enum{
-	ADVENTURE_GUIDE_FRONT_BG,
-	ADVENTURE_GUIDE_BG_NORMAL,
-	ADVENTURE_GUIDE_BG_TRANSPARENT,
-	NUM_ADVENTURE_GUIDE_BACKGROUNDS,
-};
-
-enum{
-    SPRITE_UP_ARROW,
-    SPRITE_DOWN_ARROW,
-    SPRITE_LEFT_ARROW,
-    SPRITE_RIGHT_ARROW,
-    NUM_ADVENTURE_GUIDE_SPRITES,
-};
-
-#define ADVENTURE_GUIDE_TRANSPARENCY_STRENGTH 3
-
 //==========DEFINES==========//
 struct MenuResources
 {
@@ -87,6 +70,12 @@ static void Menu_FadeAndBail(void);
 static bool8 Menu_LoadGraphics(void);
 static void Menu_InitWindows(void);
 static void PrintToWindow(u8 windowId, u8 colorIdx);
+static void AdventureGuide_PrintCursor(u32 windowId);
+static void AdventureGuide_PrintGuideList(u32 windowId);
+static void AdventureGuide_PrintTitle(u32 windowId);
+static void AdventureGuide_PrintNumber(u32 windowId);
+static void AdventureGuide_PrintDescription(u32 windowId);
+static void AdventureGuide_PrintHelpbar(u32 windowId);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void AdventureGuide_LoadBackgroundPalette(void);
@@ -152,22 +141,13 @@ static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/adventu
 static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/white.gbapal");
 static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/yellow.gbapal");
 
-enum Colors
-{
-    FONT_BLACK,
-    FONT_WHITE,
-    FONT_WHITE_2,
-    FONT_RED,
-    FONT_BLUE,
-};
-
 static const u8 sMenuWindowFontColors[][3] =
 {
-    [FONT_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
-    [FONT_WHITE]   = {TEXT_COLOR_TRANSPARENT,  1,  TEXT_COLOR_TRANSPARENT},
-    [FONT_WHITE_2] = {TEXT_COLOR_TRANSPARENT,  2,  TEXT_COLOR_TRANSPARENT},
-    [FONT_RED]     = {TEXT_COLOR_TRANSPARENT,  14, TEXT_COLOR_TRANSPARENT},
-    [FONT_BLUE]    = {TEXT_COLOR_TRANSPARENT,  4,  TEXT_COLOR_TRANSPARENT},
+    [FONT_COLOR_ADVENTURE_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
+    [FONT_COLOR_ADVENTURE_WHITE]   = {TEXT_COLOR_TRANSPARENT,  1,  TEXT_COLOR_TRANSPARENT},
+    [FONT_COLOR_ADVENTURE_WHITE_2] = {TEXT_COLOR_TRANSPARENT,  2,  TEXT_COLOR_TRANSPARENT},
+    [FONT_COLOR_ADVENTURE_RED]     = {TEXT_COLOR_TRANSPARENT,  14, TEXT_COLOR_TRANSPARENT},
+    [FONT_COLOR_ADVENTURE_BLUE]    = {TEXT_COLOR_TRANSPARENT,  4,  TEXT_COLOR_TRANSPARENT},
 };
 
 //==========FUNCTIONS==========//
@@ -291,7 +271,7 @@ static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus
 static void CreateUpArrowSprite(void)
 {
     u8 spriteId;
-    u8 SpriteTag = SPRITE_UP_ARROW;
+    u8 SpriteTag = SPRITE_ADVENTURE_UP_ARROW;
     struct CompressedSpriteSheet sSpriteSheet_AdventureGuideUpArrow = {gAdventureGuideUpArrow_Gfx, 0x0800, SpriteTag};
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
@@ -300,11 +280,11 @@ static void CreateUpArrowSprite(void)
 
     LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideUpArrow);
     spriteId = CreateSprite(&TempSpriteTemplate, UP_ARROW_X, UP_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW] = spriteId;
+    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW] = spriteId;
 
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW]].oam.size = SPRITE_SIZE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW]].oam.priority = 1;
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW]].oam.size = SPRITE_SIZE(32x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW]].oam.priority = 1;
 }
 
 #define DOWN_ARROW_X UP_ARROW_X
@@ -313,7 +293,7 @@ static void CreateUpArrowSprite(void)
 static void CreateDownArrowSprite(void)
 {
     u8 spriteId;
-    u8 SpriteTag = SPRITE_DOWN_ARROW;
+    u8 SpriteTag = SPRITE_ADVENTURE_DOWN_ARROW;
     struct CompressedSpriteSheet sSpriteSheet_AdventureGuideDownArrow = {gAdventureGuideDownArrow_Gfx, 0x0800, SpriteTag};
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
@@ -322,11 +302,11 @@ static void CreateDownArrowSprite(void)
 
     LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideDownArrow);
     spriteId = CreateSprite(&TempSpriteTemplate, DOWN_ARROW_X, DOWN_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW] = spriteId;
+    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW] = spriteId;
 
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW]].oam.size = SPRITE_SIZE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW]].oam.priority = 1;
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW]].oam.size = SPRITE_SIZE(32x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW]].oam.priority = 1;
 }
 
 #define LEFT_ARROW_X 8
@@ -335,7 +315,7 @@ static void CreateDownArrowSprite(void)
 static void CreateLeftArrowSprite(void)
 {
     u8 spriteId;
-    u8 SpriteTag = SPRITE_LEFT_ARROW;
+    u8 SpriteTag = SPRITE_ADVENTURE_LEFT_ARROW;
     struct CompressedSpriteSheet sSpriteSheet_AdventureGuideLeftArrow = {gAdventureGuideLeftArrow_Gfx, 0x0800, SpriteTag};
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
@@ -344,11 +324,11 @@ static void CreateLeftArrowSprite(void)
 
     LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideLeftArrow);
     spriteId = CreateSprite(&TempSpriteTemplate, LEFT_ARROW_X, LEFT_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_LEFT_ARROW] = spriteId;
+    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW] = spriteId;
 
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_LEFT_ARROW]].oam.shape    = SPRITE_SHAPE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_LEFT_ARROW]].oam.size     = SPRITE_SIZE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_LEFT_ARROW]].oam.priority = 1;
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW]].oam.shape    = SPRITE_SHAPE(16x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW]].oam.size     = SPRITE_SIZE(16x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW]].oam.priority = 1;
 }
 
 #define RIGHT_ARROW_X 240 - 16
@@ -357,7 +337,7 @@ static void CreateLeftArrowSprite(void)
 static void CreateRightArrowSprite(void)
 {
     u8 spriteId;
-    u8 SpriteTag = SPRITE_RIGHT_ARROW;
+    u8 SpriteTag = SPRITE_ADVENTURE_RIGHT_ARROW;
     struct CompressedSpriteSheet sSpriteSheet_AdventureGuideRightArrow = {gAdventureGuideRightArrow_Gfx, 0x0800, SpriteTag};
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
@@ -366,11 +346,11 @@ static void CreateRightArrowSprite(void)
 
     LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideRightArrow);
     spriteId = CreateSprite(&TempSpriteTemplate, RIGHT_ARROW_X, RIGHT_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_RIGHT_ARROW] = spriteId;
+    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW] = spriteId;
 
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_RIGHT_ARROW]].oam.shape    = SPRITE_SHAPE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_RIGHT_ARROW]].oam.size     = SPRITE_SIZE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_RIGHT_ARROW]].oam.priority = 1;
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW]].oam.shape    = SPRITE_SHAPE(16x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW]].oam.size     = SPRITE_SIZE(16x16);
+    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW]].oam.priority = 1;
 }
 
 static void Menu_MainCB(void)
@@ -434,7 +414,7 @@ static bool8 Menu_DoGfxSetup(void)
         gMain.state++;
         break;
     case 5:
-        PrintToWindow(WINDOW_1, FONT_WHITE);
+        PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
         CreateTask(Task_MenuWaitFadeIn, 0);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         gMain.state++;
@@ -859,7 +839,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
 
 static const u8 sText_Dummy[] = _("????");
 
-static const u8 sText_MenuTitle[] = _("Adventure Guide");
 static const u8 sText_PageNum[]   = _("{DPAD_LEFTRIGHT} Page {STR_VAR_1}/{STR_VAR_2}");
 static const u8 sText_HelpBar[]   = _("{A_BUTTON} View Guide {B_BUTTON} Return");
 static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
@@ -871,35 +850,51 @@ static const u8 sDarkBButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide
 
 static void PrintToWindow(u8 windowId, u8 colorIdx)
 {
-    u8 i, j;
-    u8 font = 1;
-    u8 x = 1;
-    u8 y = 1;
-    u8 cursorX   =  sMenuDataPtr->cursorNumX * 120;
-    u8 cursorY   = (sMenuDataPtr->cursorNumY - sMenuDataPtr->yFirstItem) * 16;
-    u8 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
-
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    x = 0;
-    y = 2;
+    AdventureGuide_PrintCursor(windowId);
+    AdventureGuide_PrintGuideList(windowId);
+
+    AdventureGuide_PrintTitle(windowId);
+
+    AdventureGuide_PrintNumber(windowId);
+    AdventureGuide_PrintDescription(windowId);
+    AdventureGuide_PrintHelpbar(windowId);
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+}
+
+static void AdventureGuide_PrintCursor(u32 windowId)
+{
+    u32 x = 0;
+    u32 y = 2;
+    u8 cursorX   =  sMenuDataPtr->cursorNumX * 120;
+    u8 cursorY   = (sMenuDataPtr->cursorNumY - sMenuDataPtr->yFirstItem) * 16;
     if(!sMenuDataPtr->singleGuideMode){
         if(sMenuDataPtr->isWindowOpen)
             BlitBitmapToWindow(windowId, sCursor2, (x * 8) + cursorX, (y * 8) + cursorY, 120, 16);
         else
             BlitBitmapToWindow(windowId, sCursor,  (x * 8) + cursorX, (y * 8) + cursorY, 120, 16);
     }
+}
 
-    if(sMenuDataPtr->isWindowOpen || sMenuDataPtr->singleGuideMode){
-        colorIdx = FONT_WHITE_2;
-    }
+static void AdventureGuide_PrintGuideList(u32 windowId)
+{
+    u32 x = 1;
+    u32 y = 1;
+    u32 font = FONT_NORMAL;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_BLACK;
+
+    if(sMenuDataPtr->isWindowOpen || sMenuDataPtr->singleGuideMode)
+        colorIdx = FONT_COLOR_ADVENTURE_WHITE;
 
     if(!sMenuDataPtr->singleGuideMode){
-        for(i = 0; i < MAX_ADVENTURE_GUIDE_ITEMS; i++){
+        for(u32 i = 0; i < MAX_ADVENTURE_GUIDE_ITEMS; i++){
             x = ((i % MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 15);
             y = 2 + ((i / MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 2);
 
-            j = i + (sMenuDataPtr->yFirstItem * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW);
+            u32 j = i + (sMenuDataPtr->yFirstItem * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW);
 
             if(AdventureGuideInfo[j].flagToUnlock == 0 || FlagGet(AdventureGuideInfo[j].flagToUnlock))
                 AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, AdventureGuideInfo[j].title);
@@ -907,47 +902,67 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
                 AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sText_Dummy);
         }
     }
+}
 
+static void AdventureGuide_PrintTitle(u32 windowId)
+{
+    u32 x = 4;
+    u32 y = 0;
+    u32 font = FONT_NORMAL;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
+    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
+    const u8 *str = (sMenuDataPtr->singleGuideMode) ? AdventureGuideInfo[optionNum].title : COMPOUND_STRING("Adventure Guide");
+
+    AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+}
+
+static void AdventureGuide_PrintNumber(u32 windowId)
+{
+    u32 x = 0;
+    u32 y = 0;
+    u8 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
     if(sMenuDataPtr->isWindowOpen || sMenuDataPtr->singleGuideMode){
         x = 2;
         y = 2;
-         BlitBitmapToWindow(windowId, sGuideBox, (x * 8), (y * 8), 208, 128);
-
-        //Title
-        AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8) + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, AdventureGuideInfo[optionNum].title);
-
-        //Description
-        y++;
-        AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, (x * 8) + 4, (y * 8) + 5, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
+        BlitBitmapToWindow(windowId, sGuideBox, (x * 8), (y * 8), 208, 128);
 
         //Page Number
         y = 16;
         ConvertIntToDecimalStringN(gStringVar1, sMenuDataPtr->windowInfoNum + 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, AdventureGuideInfo[optionNum].numPages, STR_CONV_MODE_RIGHT_ALIGN, 2);
         StringExpandPlaceholders(gStringVar4, sText_PageNum);
-        AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, (x * 8) + 4, (y * 8) + 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
+        AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, (x * 8) + 4, (y * 8) + 1, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], 0xFF, gStringVar4);
     }
+}
 
-    if(!sMenuDataPtr->singleGuideMode){
-        x = 0;
-        y = 0;
-        AddTextPrinterParameterized4(windowId, font, x + 4, y, 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sText_MenuTitle);
+static void AdventureGuide_PrintDescription(u32 windowId)
+{
+    u32 x = 8;
+    u32 y = 4;
+    u8 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
+        //Description
+        y++;
+        AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, (x * 8) + 4, (y * 8) + 5, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], 0xFF, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
 
-        //Help Bar
+}
+
+static void AdventureGuide_PrintHelpbar(u32 windowId)
+{
+    u32 x = 0;
+    u32 y = 0;
+    u32 font = FONT_NORMAL;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
+    //Help Bar
+    x = 0;
+    y = 18;
+    AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sText_HelpBar);
+    //Darkned A and B buttons
+    if(sMenuDataPtr->isWindowOpen){
         x = 0;
         y = 18;
-        AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sText_HelpBar);
-        //Darkned A and B buttons
-        if(sMenuDataPtr->isWindowOpen){
-            x = 0;
-            y = 18;
-            BlitBitmapToWindow(windowId, sDarkAButton, (x * 8) + 4,  (y * 8) + 3, 8, 8);
-            BlitBitmapToWindow(windowId, sDarkBButton, (x * 8) + 71, (y * 8) + 3 , 8, 8);
-        }
+        BlitBitmapToWindow(windowId, sDarkAButton, (x * 8) + 4,  (y * 8) + 3, 8, 8);
+        BlitBitmapToWindow(windowId, sDarkBButton, (x * 8) + 71, (y * 8) + 3 , 8, 8);
     }
-
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
 }
 
 bool8 shouldSkipGuide(u8 guideNum){
@@ -1080,16 +1095,16 @@ static void Task_MenuMain(u8 taskId)
         if (JOY_NEW(A_BUTTON)){
             if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum++;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else if(sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else if(unlocked){
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
         }
 
@@ -1097,12 +1112,12 @@ static void Task_MenuMain(u8 taskId)
         {
             if(sMenuDataPtr->windowInfoNum != 0 && sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum--;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else if(sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else
                 closeMenu = TRUE;
@@ -1111,52 +1126,52 @@ static void Task_MenuMain(u8 taskId)
         if ((JOY_NEW(DPAD_RIGHT))){
             if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum++;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else if(sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else{
                 if(sMenuDataPtr->cursorNumX == MAX_CURSOR_NUM_X - 1)
                     sMenuDataPtr->cursorNumX = 0;
                 else
                     sMenuDataPtr->cursorNumX++;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
         }
 
         if ((JOY_NEW(DPAD_LEFT))){
             if(sMenuDataPtr->windowInfoNum != 0 && sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum--;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else if(sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else{
                 if(sMenuDataPtr->cursorNumX == 0)
                     sMenuDataPtr->cursorNumX = MAX_CURSOR_NUM_X - 1;
                 else
                     sMenuDataPtr->cursorNumX--;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
         }
 
         if ((JOY_NEW(DPAD_DOWN))){
             if(sMenuDataPtr->isWindowOpen == FALSE){
                 PressedDownButton_AdventureGuide();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
         }
 
         if ((JOY_NEW(DPAD_UP))){
             if(sMenuDataPtr->isWindowOpen == FALSE){
                 PressedUpButton_AdventureGuide();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
         }
     }
@@ -1168,7 +1183,7 @@ static void Task_MenuMain(u8 taskId)
         {
             if(sMenuDataPtr->windowInfoNum != numpages){
                 sMenuDataPtr->windowInfoNum++;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else
                 closeMenu = TRUE;
@@ -1178,7 +1193,7 @@ static void Task_MenuMain(u8 taskId)
         {
             if(sMenuDataPtr->windowInfoNum != 0){
                 sMenuDataPtr->windowInfoNum--;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
             }
             else
                 closeMenu = TRUE;
@@ -1186,7 +1201,7 @@ static void Task_MenuMain(u8 taskId)
     }
 
     if(closeMenu){
-        PrintToWindow(WINDOW_1, FONT_WHITE);
+        PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_MenuTurnOff;
