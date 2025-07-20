@@ -393,7 +393,6 @@ void Task_OpenPokedexFromStartMenu(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
     StartMenu_Menu_FreeResources();
     PlayRainStoppingSoundEffect();
     CleanupOverworldWindowsAndTilemaps();
@@ -501,6 +500,7 @@ void Pokedex_SetupCallback(void)
             SpeciesGrid_SetCurrentSpeciesFromCursorPosition();
             if (firstOpen)
                 PlaySE(SE_PC_LOGIN);
+            IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
             gMain.state++;
             break;
         case 7:
