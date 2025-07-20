@@ -409,6 +409,7 @@ static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
     if (!shouldSkipGuide(targetGuide))
     {
         VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN,targetGuide);
+        gMain.savedCallback = callback;
         Adventure_Guide_Init(callback);
         return;
     }
