@@ -36,6 +36,8 @@
 #include "constants/songs.h"
 #include "data/ui_pokedex_type_sprites.h"
 #include "data/ui_pokedex_sprite_coordinates.h"
+#include "constants/ui_adventure_guide.h"
+#include "ui_adventure_guide.h"
 
 static void Pokedex_InitializeAndSaveCallback(MainCallback);
 static bool32 AllocateStructs(void);
