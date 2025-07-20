@@ -35,7 +35,7 @@
 #include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
-#include "constants/adventure_guides.h"
+#include "constants/ui_adventure_guide.h"
 #include "ui_options_menu.h"
 
 enum{
@@ -175,12 +175,12 @@ static const u8 sMenuWindowFontColors[][3] =
 void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
 {
     //s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
-    {
+    if (gPaletteFade.active)
+        return;
+
         CleanupOverworldWindowsAndTilemaps();
         Adventure_Guide_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
-    }
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere

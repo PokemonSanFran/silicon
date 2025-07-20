@@ -27,7 +27,7 @@
 #include "config/save.h"
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
-#include "constants/adventure_guides.h" // adventureGuide
+#include "constants/ui_adventure_guide.h" // adventureGuide
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
