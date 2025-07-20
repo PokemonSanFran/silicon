@@ -186,14 +186,12 @@ void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
 // This is our main initialization function if you want to call the menu from elsewhere
 void Adventure_Guide_Init(MainCallback callback)
 {
-    DebugPrintf("Adventure_Guide_Init");
     u16 guideToOpen;
     if ((sMenuDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
     {
         SetMainCallback2(callback);
         return;
     }
-    DebugPrintf("Alloc success");
 
     // initialize stuff
     sMenuDataPtr->gfxLoadState = 0;
@@ -226,7 +224,6 @@ void Adventure_Guide_Init(MainCallback callback)
 
 static void Menu_RunSetup(void)
 {
-    DebugPrintf("Menu_RunSetup");
     while (1)
     {
         if (Menu_DoGfxSetup() == TRUE)
@@ -394,7 +391,6 @@ static void Menu_VBlankCB(void)
 
 static bool8 Menu_DoGfxSetup(void)
 {
-    DebugPrintf("Menu_DoGfxSetup");
     switch (gMain.state)
     {
     case 0:
