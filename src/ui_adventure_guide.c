@@ -39,6 +39,7 @@
 #include "constants/rgb.h"
 #include "constants/ui_adventure_guide.h"
 #include "ui_options_menu.h"
+#include "ui_pokedex.h"
 
 //==========DEFINES==========//
 struct MenuResources
@@ -55,11 +56,6 @@ struct MenuResources
     u8 spriteIDs[NUM_ADVENTURE_GUIDE_SPRITES];
 };
 
-enum WindowIds
-{
-    WINDOW_1,
-};
-
 //==========EWRAM==========//
 static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
@@ -71,14 +67,15 @@ static bool8 Menu_InitBgs(void);
 static void Menu_FadeAndBail(void);
 static bool8 Menu_LoadGraphics(void);
 static void Menu_InitWindows(void);
-static void PrintToWindow(u8 windowId, u8 colorIdx);
-static void AdventureGuide_PrintCursor(u32 windowId);
-static void AdventureGuide_PrintGuideList(u32 windowId);
-static void AdventureGuide_PrintWindowTitle(u32 windowId, u32 optionNum);
-static void AdventureGuide_PrintAppTitle(u32 windowId, u32 optionNum);
-static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum);
-static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum);
-static void AdventureGuide_PrintHelpbar(u32 windowId, u32 optionNum);
+static void PrintToWindow(void);
+static void AdventureGuide_PrintAppTitle(void); // DONE
+static void AdventureGuide_PrintGuideText(void);
+static void AdventureGuide_PrintWindowTitle(u32 optionNum);
+static void AdventureGuide_PrintDescription(u32 optionNum);
+static void AdventureGuide_PrintNumber(u32 optionNum);
+static void AdventureGuide_PrintCursor(void);
+static void AdventureGuide_PrintGuideList(void);
+static void AdventureGuide_PrintHelpbar(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void AdventureGuide_LoadBackgroundPalette(void);
@@ -113,15 +110,65 @@ static const struct BgTemplate sMenuBgTemplates[] =
 
 static const struct WindowTemplate sMenuWindowTemplates[] =
 {
-    [WINDOW_1] =
+    [WINDOW_ADVENTURE_LIST_HEADER] =
     {
-        .bg = 0,            // which bg to print text on
-        .tilemapLeft = 0,   // position from left (per 8 pixels)
-        .tilemapTop = 0,    // position from top (per 8 pixels)
-        .width = 30,        // width (per 8 pixels)
-        .height = 20,       // height (per 8 pixels)
-        .paletteNum = 0,    // palette index to use for text
-        .baseBlock = 1,     // tile start in VRAM
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1,
+    },
+    [WINDOW_ADVENTURE_LIST] =
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 30,
+        .height = 16,
+        .paletteNum = 0,
+        .baseBlock = 1 + (30 * 2),
+    },
+    [WINDOW_ADVENTURE_LIST_FOOTER] =
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 18,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1 + (30 * 2) + (30 * 16),
+    },
+    [WINDOW_ADVENTURE_GUIDE_HEADER] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 2,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2),
+    },
+    [WINDOW_ADVENTURE_GUIDE_DESC] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 4,
+        .width = 26,
+        .height = 12,
+        .paletteNum = 0,
+        .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2) + (26 * 2),
+    },
+    [WINDOW_ADVENTURE_GUIDE_FOOTER] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 16,
+        .width = 26,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2) + (26 * 2) + (26 * 12),
     },
 };
 
@@ -417,7 +464,18 @@ static bool8 Menu_DoGfxSetup(void)
             gMain.state++;
             break;
         case 5:
-            PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+            AdventureGuide_PrintAppTitle();
+
+            if ((sMenuDataPtr->isWindowOpen == TRUE) || (sMenuDataPtr->singleGuideMode == TRUE))
+            {
+                AdventureGuide_PrintGuideText();
+            }
+            else
+            {
+                AdventureGuide_PrintGuideList();
+            }
+
+            AdventureGuide_PrintHelpbar();
             CreateTask(Task_MenuWaitFadeIn, 0);
             BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
             gMain.state++;
@@ -609,17 +667,18 @@ static void AdventureGuide_LoadBackgroundPalette(void)
     }
 }
 
+static void ClearAllWindows(void)
+{
+    for (enum AdventureWindows windowId = 0; windowId < WINDOW_ADVENTURE_COUNT; windowId++)
+        ClearWindowCopyToVram(windowId);
+}
+
 static void Menu_InitWindows(void)
 {
     InitWindows(sMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-
-    FillWindowPixelBuffer(WINDOW_1, 0);
-    LoadUserWindowBorderGfx(WINDOW_1, 720, 14 * 16);
-    PutWindowTilemap(WINDOW_1);
-    CopyWindowToVram(WINDOW_1, 3);
-
+    ClearAllWindows();
     ScheduleBgCopyTilemapToVram(2);
 }
 #define GUIDE_NAME_LENGTH 30
@@ -641,9 +700,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Your Adventure Guide"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
         .isAdvancedGuide = TRUE,
@@ -653,9 +712,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Wild Pokemon"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -664,9 +723,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Your Rotom Phone"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -675,9 +734,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Auto Heal"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -686,9 +745,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Opening Pokedex"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -697,9 +756,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Let's Go"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -708,9 +767,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Your Pokemon Boxes"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -719,9 +778,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Locking On"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -730,9 +789,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Crouching"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -741,9 +800,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("No Idea 1"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
         .isAdvancedGuide = TRUE,
@@ -753,9 +812,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Catching Pokemon"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -764,9 +823,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("No Idea 2"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -775,9 +834,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Something 1"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -786,9 +845,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Something 2"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -797,9 +856,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Something 3"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -808,9 +867,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Something 4"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -819,9 +878,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Something 5"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -830,9 +889,9 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Something 6"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
         .numPages = 3,
     },
@@ -841,145 +900,151 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
 static const u8 sText_Dummy[] = _("????");
 
 static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
-static const u8 sCursor2[]        = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor_2.4bpp");
+static const u8 sCursorDark[]        = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor_2.4bpp");
 static const u8 sBlackWindow[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/black_window.4bpp");
-static const u8 sGuideBox[]       = INCBIN_U8("graphics/ui_menus/adventure_guide/guideBox.4bpp");
 static const u8 sDarkAButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/dark_a_button.4bpp");
 static const u8 sDarkBButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/dark_b_button.4bpp");
 
-static void PrintToWindow(u8 windowId, u8 colorIdx)
+static void PrintToWindow(void)
 {
-    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
-
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    AdventureGuide_PrintAppTitle(windowId, optionNum);
+    AdventureGuide_PrintAppTitle();
 
     if ((sMenuDataPtr->isWindowOpen == TRUE) || (sMenuDataPtr->singleGuideMode == TRUE))
-    {
-        BlitBitmapToWindow(windowId, sGuideBox, 16, 16, 208, 128);
-        AdventureGuide_PrintWindowTitle(windowId, optionNum);
-        AdventureGuide_PrintDescription(windowId, optionNum);
-        AdventureGuide_PrintNumber(windowId, optionNum);
-    }
+        AdventureGuide_PrintGuideText();
     else
-    {
-        AdventureGuide_PrintCursor(windowId);
-        AdventureGuide_PrintGuideList(windowId);
-    }
+        AdventureGuide_PrintGuideList();
 
-    AdventureGuide_PrintHelpbar(windowId, optionNum);
-
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    AdventureGuide_PrintHelpbar();
 }
 
-static void AdventureGuide_PrintCursor(u32 windowId)
-{
-    u32 x = 0;
-    u32 y = 2;
-    u8 cursorX   =  sMenuDataPtr->cursorNumX * 120;
-    u8 cursorY   = (sMenuDataPtr->cursorNumY - sMenuDataPtr->yFirstItem) * 16;
-    if(!sMenuDataPtr->singleGuideMode){
-        if(sMenuDataPtr->isWindowOpen)
-            BlitBitmapToWindow(windowId, sCursor2, (x * 8) + cursorX, (y * 8) + cursorY, 120, 16);
-        else
-            BlitBitmapToWindow(windowId, sCursor,  (x * 8) + cursorX, (y * 8) + cursorY, 120, 16);
-    }
-}
-
-static void AdventureGuide_PrintGuideList(u32 windowId)
-{
-    u32 x = 1;
-    u32 y = 1;
-    u32 font = FONT_NORMAL;
-    // PSF TODO use Crim font here
-    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
-
-    if(sMenuDataPtr->isWindowOpen || sMenuDataPtr->singleGuideMode)
-        colorIdx = FONT_COLOR_ADVENTURE_WHITE;
-
-    if(!sMenuDataPtr->singleGuideMode){
-        for(u32 i = 0; i < MAX_ADVENTURE_GUIDE_ITEMS; i++){
-            x = ((i % MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 15);
-            y = 2 + ((i / MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 2);
-
-            u32 j = i + (sMenuDataPtr->yFirstItem * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW);
-
-            if (gSaveBlock3Ptr->hasSeenGuide[j] == TRUE)
-                AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, AdventureGuideInfo[j].title);
-            else
-                AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sText_Dummy);
-        }
-    }
-}
-
-static void AdventureGuide_PrintWindowTitle(u32 windowId, u32 optionNum)
-{
-    u32 x = 20;
-    u32 y = 17;
-    u32 font = FONT_NORMAL;
-    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
-    const u8 *str = AdventureGuideInfo[optionNum].title;
-
-    AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
-}
-
-static void AdventureGuide_PrintAppTitle(u32 windowId, u32 optionNum)
+static void AdventureGuide_PrintAppTitle(void)
 {
     u32 x = 4;
     u32 y = 0;
     u32 font = FONT_NORMAL;
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
     const u8 *str = COMPOUND_STRING("Adventure Guide");
+    enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST_HEADER;
 
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum)
+static void AdventureGuide_PrintGuideText(void)
+{
+    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
+
+    AdventureGuide_PrintWindowTitle(optionNum);
+    AdventureGuide_PrintDescription(optionNum);
+    AdventureGuide_PrintNumber(optionNum);
+}
+
+static void AdventureGuide_PrintWindowTitle(u32 optionNum)
+{
+    u32 x = 4;
+    u32 y = 0;
+    u32 font = FONT_NORMAL;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
+    const u8 *str = AdventureGuideInfo[optionNum].title;
+    enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER;
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(2));
+    AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void AdventureGuide_PrintDescription(u32 optionNum)
 {
     u32 fontId = FONT_SMALL_NARROW;
     u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
-    u32 letterHeight = GetFontAttribute(fontId,FONTATTR_MAX_LETTER_HEIGHT);
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
-    u32 x = 20;
-    u32 y = 30;
-    u32 lines = ADVENTURE_GUIDE_INFO_HEIGHT / (lineSpacing + letterHeight);
+    u32 x = 16;
+    u32 y = 8;
+    enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_DESC;
 
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     u8 *end = StringExpandPlaceholders(gStringVar3, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
 
-    BreakStringAutomatic(gStringVar3, ADVENTURE_GUIDE_INFO_WIDTH, lines, fontId, HIDE_SCROLL_PROMPT);
+    BreakStringAutomatic(gStringVar3, ADVENTURE_GUIDE_INFO_WIDTH, ADVENTURE_GUIDE_LINES, fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, fontId, ADVENTURE_GUIDE_INFO_WIDTH);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], TEXT_SKIP_DRAW, gStringVar3);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum)
+static void AdventureGuide_PrintNumber(u32 optionNum)
 {
     if (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode)
         return;
 
+    enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_FOOTER;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
     u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+    u32 x = 4;
+    u32 y = 0;
 
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(2));
     ConvertIntToDecimalStringN(gStringVar1, currentPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(currentPageNumber));
     ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{DPAD_LEFTRIGHT} Page {STR_VAR_1} / {STR_VAR_2}"));
-    AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, 20, 129, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, x, y, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-
-static void AdventureGuide_PrintHelpbar(u32 windowId, u32 optionNum)
+static void AdventureGuide_PrintCursor(void)
 {
-    u32 x = 0;
-    u32 y = 18;
+    enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST;
+    u32 x = 0 + (sMenuDataPtr->cursorNumX * 120);
+    u32 y = (sMenuDataPtr->cursorNumY - sMenuDataPtr->yFirstItem) * 16;
+
+    BlitBitmapToWindow(windowId, sCursor, x, y,  120, 16);
+}
+
+static void AdventureGuide_PrintGuideList(void)
+{
+    u32 font = FONT_NORMAL;
+    enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST;
+    // PSF TODO use Crim font here
+    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    AdventureGuide_PrintCursor();
+
+    for(u32 i = 0; i < MAX_ADVENTURE_GUIDE_ITEMS; i++)
+    {
+        u32 x = (((i % MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 15) * 8) + 4;
+        u32 y = 1 + ((i / MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 16);
+        u32 j = i + (sMenuDataPtr->yFirstItem * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW);
+        const u8 *str = (gSaveBlock3Ptr->hasSeenGuide[j] == TRUE) ? AdventureGuideInfo[j].title : COMPOUND_STRING("???");
+
+        AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+    }
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void AdventureGuide_PrintHelpbar(void)
+{
+    u32 x = 4;
+    u32 y = 1;
     u32 font = FONT_SMALL_NARROW;
+    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
     u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+    enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST_FOOTER;
 
     bool32 isMainMenu = (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode);
     bool32 isLastPage = ((currentPageNumber / finalPageNumber) == 1);
     bool32 isFirstPage = ((finalPageNumber != 1) && ((currentPageNumber == 1)));
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     if (isMainMenu)
     {
@@ -998,16 +1063,9 @@ static void AdventureGuide_PrintHelpbar(u32 windowId, u32 optionNum)
         StringCopy(gStringVar1,COMPOUND_STRING("{A_BUTTON} Next Page {B_BUTTON} Previous Page {START_BUTTON} Return"));
     }
 
-    AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, gStringVar1);
-    return;
-
-    //Darkned A and B buttons
-    if(sMenuDataPtr->isWindowOpen){
-        x = 0;
-        y = 18;
-        BlitBitmapToWindow(windowId, sDarkAButton, (x * 8) + 4,  (y * 8) + 3, 8, 8);
-        BlitBitmapToWindow(windowId, sDarkBButton, (x * 8) + 71, (y * 8) + 3 , 8, 8);
-    }
+    AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, gStringVar1);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 bool8 shouldSkipGuide(u8 guideNum){
@@ -1135,100 +1193,117 @@ static void Task_MenuMain(u8 taskId)
     bool32 unlocked = (gSaveBlock3Ptr->hasSeenGuide[optionNum] == TRUE);
     bool8 closeMenu = FALSE;
 
-    if(!sMenuDataPtr->singleGuideMode){
-
-        if (JOY_NEW(A_BUTTON)){
-            if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen){
+    if(!sMenuDataPtr->singleGuideMode)
+    {
+        if (JOY_NEW(A_BUTTON))
+        {
+            if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen)
+            {
                 sMenuDataPtr->windowInfoNum++;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
-            else if(sMenuDataPtr->isWindowOpen){
+            else if(sMenuDataPtr->isWindowOpen)
+            {
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
-            else if(unlocked){
+            else if(unlocked)
+            {
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
         }
 
         if (JOY_NEW(B_BUTTON))
         {
-            if(sMenuDataPtr->windowInfoNum != 0 && sMenuDataPtr->isWindowOpen){
+            if(sMenuDataPtr->windowInfoNum != 0 && sMenuDataPtr->isWindowOpen)
+            {
                 sMenuDataPtr->windowInfoNum--;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
-            else if(sMenuDataPtr->isWindowOpen){
+            else if(sMenuDataPtr->isWindowOpen)
+            {
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
             else
                 closeMenu = TRUE;
         }
 
-        if ((JOY_NEW(DPAD_RIGHT))){
-            if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen){
+        if ((JOY_NEW(DPAD_RIGHT)))
+        {
+            if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen)
+            {
                 sMenuDataPtr->windowInfoNum++;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
-            else if(sMenuDataPtr->isWindowOpen){
+            else if(sMenuDataPtr->isWindowOpen)
+            {
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
-            else{
+            else
+            {
                 if(sMenuDataPtr->cursorNumX == MAX_CURSOR_NUM_X - 1)
                     sMenuDataPtr->cursorNumX = 0;
                 else
                     sMenuDataPtr->cursorNumX++;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
         }
 
-        if ((JOY_NEW(DPAD_LEFT))){
+        if ((JOY_NEW(DPAD_LEFT)))
+        {
             if(sMenuDataPtr->windowInfoNum != 0 && sMenuDataPtr->isWindowOpen){
                 sMenuDataPtr->windowInfoNum--;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
-            else if(sMenuDataPtr->isWindowOpen){
+            else if(sMenuDataPtr->isWindowOpen)
+            {
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
-            else{
+            else
+            {
                 if(sMenuDataPtr->cursorNumX == 0)
                     sMenuDataPtr->cursorNumX = MAX_CURSOR_NUM_X - 1;
                 else
                     sMenuDataPtr->cursorNumX--;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
         }
 
-        if ((JOY_NEW(DPAD_DOWN))){
+        if ((JOY_NEW(DPAD_DOWN)))
+        {
             if(sMenuDataPtr->isWindowOpen == FALSE){
                 PressedDownButton_AdventureGuide();
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
         }
 
-        if ((JOY_NEW(DPAD_UP))){
+        if ((JOY_NEW(DPAD_UP)))
+        {
             if(sMenuDataPtr->isWindowOpen == FALSE){
                 PressedUpButton_AdventureGuide();
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
         }
     }
-    else{
+    else
+    {
         if (JOY_NEW(START_BUTTON))
             closeMenu = TRUE;
 
         if (JOY_NEW(A_BUTTON) || JOY_NEW(DPAD_RIGHT))
         {
-            if(sMenuDataPtr->windowInfoNum != numpages){
+            if(sMenuDataPtr->windowInfoNum != numpages)
+            {
                 sMenuDataPtr->windowInfoNum++;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
             else
                 closeMenu = TRUE;
@@ -1236,19 +1311,29 @@ static void Task_MenuMain(u8 taskId)
 
         if ((JOY_NEW(DPAD_LEFT)) || JOY_NEW(B_BUTTON))
         {
-            if(sMenuDataPtr->windowInfoNum != 0){
+            if(sMenuDataPtr->windowInfoNum != 0)
+            {
                 sMenuDataPtr->windowInfoNum--;
-                PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+                PrintToWindow();
             }
             else
                 closeMenu = TRUE;
         }
     }
 
-    if(closeMenu){
-        PrintToWindow(WINDOW_1, FONT_COLOR_ADVENTURE_WHITE);
+    if(closeMenu)
+    {
+        PrintToWindow();
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_MenuTurnOff;
     }
 }
+
+// PSF TODO
+// header should be dimmed when window is open
+// button interactions in window mode need to actually match the help bar
+// button interctionas in non-window mode need to match the help bar
+// palettes on sprites need to be corrected for both window and menu modes
+// palette for text needs to use red in the last slot
+// need to split up mega window into smaller windows for perf
