@@ -59,6 +59,7 @@
 #include "ui_main_menu.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
+#include "ui_adventure_guide.h"
 
 //==========DEFINES==========//
 struct MenuResources
@@ -1409,7 +1410,8 @@ void Task_OpenPokenavStartMenu(u8 taskId)
     {
 		PlayRainStoppingSoundEffect();
 		CleanupOverworldWindowsAndTilemaps();
-        CreateTask(Task_OpenMapSystemFromStartMenu, 0);
+        CreateTask(Task_OpenAdventureGuideFromStartMenu,0);
+        //CreateTask(Task_OpenMapSystemFromStartMenu, 0);
     }
 }
 

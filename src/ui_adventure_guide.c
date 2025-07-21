@@ -77,7 +77,7 @@ static void AdventureGuide_PrintGuideList(u32 windowId);
 static void AdventureGuide_PrintTitle(u32 windowId, u32 optionNum);
 static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum);
 static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum);
-static void AdventureGuide_PrintHelpbar(u32 windowId);
+static void AdventureGuide_PrintHelpbar(u32 windowId, u32 optionNum);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void AdventureGuide_LoadBackgroundPalette(void);
@@ -848,7 +848,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
 
 static const u8 sText_Dummy[] = _("????");
 
-static const u8 sText_HelpBar[]   = _("{A_BUTTON} View Guide {B_BUTTON} Return");
 static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
 static const u8 sCursor2[]        = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor_2.4bpp");
 static const u8 sBlackWindow[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/black_window.4bpp");
@@ -869,7 +868,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
     AdventureGuide_PrintNumber(windowId, optionNum);
     AdventureGuide_PrintDescription(windowId, optionNum);
-    AdventureGuide_PrintHelpbar(windowId);
+    AdventureGuide_PrintHelpbar(windowId, optionNum);
 
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, 3);
@@ -955,16 +954,39 @@ static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum)
     AddTextPrinterParameterized4(windowId, font, 20, 30, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], TEXT_SKIP_DRAW, gStringVar3);
 }
 
-static void AdventureGuide_PrintHelpbar(u32 windowId)
+static void AdventureGuide_PrintHelpbar(u32 windowId, u32 optionNum)
 {
     u32 x = 0;
-    u32 y = 0;
-    u32 font = FONT_NORMAL;
+    u32 y = 18;
+    u32 font = FONT_SMALL_NARROW;
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
-    //Help Bar
-    x = 0;
-    y = 18;
-    AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sText_HelpBar);
+    u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
+    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+
+    bool32 isMainMenu = (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode);
+    bool32 isLastPage = ((currentPageNumber / finalPageNumber) == 1);
+    bool32 isFirstPage = ((finalPageNumber != 1) && ((currentPageNumber == 1)));
+
+    if (isMainMenu)
+    {
+        StringCopy(gStringVar1,COMPOUND_STRING("{A_BUTTON} View Guide {B_BUTTON} Return"));
+    }
+    else if (isLastPage)
+    {
+        StringCopy(gStringVar1,COMPOUND_STRING("{B_BUTTON} Previous Page {START_BUTTON} Return"));
+    }
+    else if (isFirstPage)
+    {
+        StringCopy(gStringVar1,COMPOUND_STRING("{A_BUTTON} Next Page {START_BUTTON} Return"));
+    }
+    else
+    {
+        StringCopy(gStringVar1,COMPOUND_STRING("{A_BUTTON} Next Page {B_BUTTON} Previous Page {START_BUTTON} Return"));
+    }
+
+    AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, gStringVar1);
+    return;
+
     //Darkned A and B buttons
     if(sMenuDataPtr->isWindowOpen){
         x = 0;
