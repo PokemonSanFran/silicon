@@ -29,6 +29,7 @@
 #include "task.h"
 #include "text_window.h"
 #include "trig.h"
+#include "tv.h"
 #include "overworld.h"
 #include "event_data.h"
 #include "constants/items.h"
@@ -839,7 +840,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
 
 static const u8 sText_Dummy[] = _("????");
 
-static const u8 sText_PageNum[]   = _("{DPAD_LEFTRIGHT} Page {STR_VAR_1}/{STR_VAR_2}");
 static const u8 sText_HelpBar[]   = _("{A_BUTTON} View Guide {B_BUTTON} Return");
 static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
 static const u8 sCursor2[]        = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor_2.4bpp");
@@ -918,21 +918,19 @@ static void AdventureGuide_PrintTitle(u32 windowId)
 
 static void AdventureGuide_PrintNumber(u32 windowId)
 {
-    u32 x = 0;
-    u32 y = 0;
-    u8 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
-    if(sMenuDataPtr->isWindowOpen || sMenuDataPtr->singleGuideMode){
-        x = 2;
-        y = 2;
-        BlitBitmapToWindow(windowId, sGuideBox, (x * 8), (y * 8), 208, 128);
+    if (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode)
+        return;
 
-        //Page Number
-        y = 16;
-        ConvertIntToDecimalStringN(gStringVar1, sMenuDataPtr->windowInfoNum + 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
-        ConvertIntToDecimalStringN(gStringVar2, AdventureGuideInfo[optionNum].numPages, STR_CONV_MODE_RIGHT_ALIGN, 2);
-        StringExpandPlaceholders(gStringVar4, sText_PageNum);
-        AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, (x * 8) + 4, (y * 8) + 1, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], 0xFF, gStringVar4);
-    }
+    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
+    u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
+    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+
+    BlitBitmapToWindow(windowId, sGuideBox, 16, 16, 208, 128);
+
+    ConvertIntToDecimalStringN(gStringVar1, currentPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(currentPageNumber));
+    ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{DPAD_LEFTRIGHT} Page {STR_VAR_1} / {STR_VAR_2}"));
+    AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, 20, 129, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static void AdventureGuide_PrintDescription(u32 windowId)
