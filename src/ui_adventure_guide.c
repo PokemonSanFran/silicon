@@ -632,7 +632,6 @@ struct AdventureGuideData
     const u8 title[GUIDE_NAME_LENGTH];
     const u8 *description[MAX_GUIDE_PAGES];
     const u8 numPages;
-    u16 flagToUnlock;
     bool8 isAdvancedGuide;
 };
 
@@ -747,7 +746,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
         .isAdvancedGuide = TRUE,
     },
     [GUIDE_CATCHING_POKEMON] =
@@ -771,7 +769,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
     },
     [GUIDE_SOMETHING_1] =
     {
@@ -783,7 +780,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
     },
     [GUIDE_SOMETHING_2] =
     {
@@ -795,7 +791,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
     },
     [GUIDE_SOMETHING_3] =
     {
@@ -807,7 +802,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
     },
     [GUIDE_SOMETHING_4] =
     {
@@ -819,7 +813,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
     },
     [GUIDE_SOMETHING_5] =
     {
@@ -831,7 +824,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
     },
     [GUIDE_SOMETHING_6] =
     {
@@ -843,7 +835,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. Cras ornare sit amet velit et accumsan. Morbi ut est finibus, faucibus purus ut, commodo eros. Morbi sagittis, massa et facilisis convallis, metus mi gravida lacus, ut porttitor orci neque ac nunc. 3"),
         },
         .numPages = 3,
-        .flagToUnlock = FLAG_TEST,
     },
 };
 
@@ -901,6 +892,7 @@ static void AdventureGuide_PrintGuideList(u32 windowId)
     u32 x = 1;
     u32 y = 1;
     u32 font = FONT_NORMAL;
+    // PSF TODO use Crim font here
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
 
     if(sMenuDataPtr->isWindowOpen || sMenuDataPtr->singleGuideMode)
@@ -913,7 +905,7 @@ static void AdventureGuide_PrintGuideList(u32 windowId)
 
             u32 j = i + (sMenuDataPtr->yFirstItem * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW);
 
-            if(AdventureGuideInfo[j].flagToUnlock == 0 || FlagGet(AdventureGuideInfo[j].flagToUnlock))
+            if (gSaveBlock3Ptr->hasSeenGuide[j] == TRUE)
                 AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, AdventureGuideInfo[j].title);
             else
                 AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sText_Dummy);
@@ -1140,7 +1132,7 @@ static void Task_MenuMain(u8 taskId)
 {
     u8 optionNum = sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW + sMenuDataPtr->cursorNumX;
     u8 numpages = AdventureGuideInfo[optionNum].numPages - 1;
-    bool8 unlocked = AdventureGuideInfo[optionNum].flagToUnlock == 0 || FlagGet(AdventureGuideInfo[optionNum].flagToUnlock);
+    bool32 unlocked = (gSaveBlock3Ptr->hasSeenGuide[optionNum] == TRUE);
     bool8 closeMenu = FALSE;
 
     if(!sMenuDataPtr->singleGuideMode){
