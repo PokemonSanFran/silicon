@@ -73,9 +73,9 @@ static void Menu_InitWindows(void);
 static void PrintToWindow(u8 windowId, u8 colorIdx);
 static void AdventureGuide_PrintCursor(u32 windowId);
 static void AdventureGuide_PrintGuideList(u32 windowId);
-static void AdventureGuide_PrintTitle(u32 windowId);
-static void AdventureGuide_PrintNumber(u32 windowId);
-static void AdventureGuide_PrintDescription(u32 windowId);
+static void AdventureGuide_PrintTitle(u32 windowId, u32 optionNum);
+static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum);
+static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum);
 static void AdventureGuide_PrintHelpbar(u32 windowId);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
@@ -850,15 +850,17 @@ static const u8 sDarkBButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide
 
 static void PrintToWindow(u8 windowId, u8 colorIdx)
 {
+    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
+
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     AdventureGuide_PrintCursor(windowId);
     AdventureGuide_PrintGuideList(windowId);
 
-    AdventureGuide_PrintTitle(windowId);
+    AdventureGuide_PrintTitle(windowId, optionNum);
 
-    AdventureGuide_PrintNumber(windowId);
-    AdventureGuide_PrintDescription(windowId);
+    AdventureGuide_PrintNumber(windowId, optionNum);
+    AdventureGuide_PrintDescription(windowId, optionNum);
     AdventureGuide_PrintHelpbar(windowId);
 
     PutWindowTilemap(windowId);
@@ -904,24 +906,22 @@ static void AdventureGuide_PrintGuideList(u32 windowId)
     }
 }
 
-static void AdventureGuide_PrintTitle(u32 windowId)
+static void AdventureGuide_PrintTitle(u32 windowId, u32 optionNum)
 {
     u32 x = 4;
     u32 y = 0;
     u32 font = FONT_NORMAL;
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
-    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
     const u8 *str = (sMenuDataPtr->singleGuideMode) ? AdventureGuideInfo[optionNum].title : COMPOUND_STRING("Adventure Guide");
 
     AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
 }
 
-static void AdventureGuide_PrintNumber(u32 windowId)
+static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum)
 {
     if (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode)
         return;
 
-    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
     u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
 
@@ -933,14 +933,9 @@ static void AdventureGuide_PrintNumber(u32 windowId)
     AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, 20, 129, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static void AdventureGuide_PrintDescription(u32 windowId)
+static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum)
 {
-    u32 x = 8;
-    u32 y = 4;
-    u8 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
-        //Description
-        y++;
-        AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, (x * 8) + 4, (y * 8) + 5, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], 0xFF, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
+    AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, 68, 45, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], 0xFF, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
 
 }
 
