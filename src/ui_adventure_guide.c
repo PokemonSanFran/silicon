@@ -74,7 +74,8 @@ static void Menu_InitWindows(void);
 static void PrintToWindow(u8 windowId, u8 colorIdx);
 static void AdventureGuide_PrintCursor(u32 windowId);
 static void AdventureGuide_PrintGuideList(u32 windowId);
-static void AdventureGuide_PrintTitle(u32 windowId, u32 optionNum);
+static void AdventureGuide_PrintWindowTitle(u32 windowId, u32 optionNum);
+static void AdventureGuide_PrintAppTitle(u32 windowId, u32 optionNum);
 static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum);
 static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum);
 static void AdventureGuide_PrintHelpbar(u32 windowId, u32 optionNum);
@@ -156,11 +157,11 @@ static const u8 sMenuWindowFontColors[][3] =
 // UI loader template
 void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
 {
-    //s16 *data = gTasks[taskId].data;
     if (gPaletteFade.active)
         return;
 
     CleanupOverworldWindowsAndTilemaps();
+    VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES);
     Adventure_Guide_Init(CB2_ReturnToFieldWithOpenMenu);
     DestroyTask(taskId);
 }
@@ -860,14 +861,21 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    AdventureGuide_PrintAppTitle(windowId, optionNum);
 
-    AdventureGuide_PrintCursor(windowId);
-    AdventureGuide_PrintGuideList(windowId);
+    if ((sMenuDataPtr->isWindowOpen == TRUE) || (sMenuDataPtr->singleGuideMode == TRUE))
+    {
+        BlitBitmapToWindow(windowId, sGuideBox, 16, 16, 208, 128);
+        AdventureGuide_PrintWindowTitle(windowId, optionNum);
+        AdventureGuide_PrintDescription(windowId, optionNum);
+        AdventureGuide_PrintNumber(windowId, optionNum);
+    }
+    else
+    {
+        AdventureGuide_PrintCursor(windowId);
+        AdventureGuide_PrintGuideList(windowId);
+    }
 
-    AdventureGuide_PrintTitle(windowId, optionNum);
-
-    AdventureGuide_PrintNumber(windowId, optionNum);
-    AdventureGuide_PrintDescription(windowId, optionNum);
     AdventureGuide_PrintHelpbar(windowId, optionNum);
 
     PutWindowTilemap(windowId);
@@ -893,7 +901,7 @@ static void AdventureGuide_PrintGuideList(u32 windowId)
     u32 x = 1;
     u32 y = 1;
     u32 font = FONT_NORMAL;
-    u32 colorIdx = FONT_COLOR_ADVENTURE_BLACK;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
 
     if(sMenuDataPtr->isWindowOpen || sMenuDataPtr->singleGuideMode)
         colorIdx = FONT_COLOR_ADVENTURE_WHITE;
@@ -913,15 +921,44 @@ static void AdventureGuide_PrintGuideList(u32 windowId)
     }
 }
 
-static void AdventureGuide_PrintTitle(u32 windowId, u32 optionNum)
+static void AdventureGuide_PrintWindowTitle(u32 windowId, u32 optionNum)
+{
+    u32 x = 20;
+    u32 y = 17;
+    u32 font = FONT_NORMAL;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
+    const u8 *str = AdventureGuideInfo[optionNum].title;
+
+    AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+}
+
+static void AdventureGuide_PrintAppTitle(u32 windowId, u32 optionNum)
 {
     u32 x = 4;
     u32 y = 0;
     u32 font = FONT_NORMAL;
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
-    const u8 *str = (sMenuDataPtr->singleGuideMode) ? AdventureGuideInfo[optionNum].title : COMPOUND_STRING("Adventure Guide");
+    const u8 *str = COMPOUND_STRING("Adventure Guide");
 
     AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+}
+
+static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum)
+{
+    u32 fontId = FONT_SMALL_NARROW;
+    u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+    u32 letterHeight = GetFontAttribute(fontId,FONTATTR_MAX_LETTER_HEIGHT);
+    u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+    u32 x = 20;
+    u32 y = 30;
+    u32 lines = ADVENTURE_GUIDE_INFO_HEIGHT / (lineSpacing + letterHeight);
+
+    u8 *end = StringExpandPlaceholders(gStringVar3, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
+
+    BreakStringAutomatic(gStringVar3, ADVENTURE_GUIDE_INFO_WIDTH, lines, fontId, HIDE_SCROLL_PROMPT);
+    PrependFontIdToFit(gStringVar3, end, fontId, ADVENTURE_GUIDE_INFO_WIDTH);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], TEXT_SKIP_DRAW, gStringVar3);
 }
 
 static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum)
@@ -932,27 +969,12 @@ static void AdventureGuide_PrintNumber(u32 windowId, u32 optionNum)
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
     u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
 
-    BlitBitmapToWindow(windowId, sGuideBox, 16, 16, 208, 128);
-
     ConvertIntToDecimalStringN(gStringVar1, currentPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(currentPageNumber));
     ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{DPAD_LEFTRIGHT} Page {STR_VAR_1} / {STR_VAR_2}"));
     AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, 20, 129, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static void AdventureGuide_PrintDescription(u32 windowId, u32 optionNum)
-{
-    u32 font = FONT_SMALL_NARROW;
-    u32 lineSpacing = GetFontAttribute(font,FONTATTR_LINE_SPACING);
-    u32 letterHeight = GetFontAttribute(font,FONTATTR_MAX_LETTER_HEIGHT);
-    u32 lines = 128 / (lineSpacing + letterHeight);
-    u8 *end = StringExpandPlaceholders(gStringVar3, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
-
-    BreakStringAutomatic(gStringVar3, ADVENTURE_GUIDE_INFO_WIDTH, lines, font, HIDE_SCROLL_PROMPT);
-    PrependFontIdToFit(gStringVar3, end, font, ADVENTURE_GUIDE_INFO_WIDTH);
-
-    AddTextPrinterParameterized4(windowId, font, 20, 30, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], TEXT_SKIP_DRAW, gStringVar3);
-}
 
 static void AdventureGuide_PrintHelpbar(u32 windowId, u32 optionNum)
 {
