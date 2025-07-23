@@ -46,7 +46,7 @@ struct MenuResources
 {
     MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
     u8 gfxLoadState;
-    u16 bgTilemapBuffers[BG_ADVENTURE_GUIDE][0x400];
+    u16 bgTilemapBuffers[BG_ADVENTURE_GUIDE_COUNT][0x400];
     u8 cursorNumX;
     u8 cursorNumY;
     u8 yFirstItem;
@@ -58,7 +58,6 @@ struct MenuResources
 
 //==========EWRAM==========//
 static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
@@ -67,7 +66,6 @@ static bool8 Menu_InitBgs(void);
 static void Menu_FadeAndBail(void);
 static bool8 Menu_LoadGraphics(void);
 static void Menu_InitWindows(void);
-static void PrintToWindow(void);
 static void AdventureGuide_PrintAppTitle(void); // DONE
 static void AdventureGuide_PrintGuideText(void);
 static void AdventureGuide_PrintWindowTitle(u32 optionNum);
@@ -95,22 +93,22 @@ static u8 getCurrentOptionNumPages(void);
 static const struct BgTemplate sMenuBgTemplates[] =
 {
     {
-        .bg = 0,    // windows, etc
+        .bg = BG0_ADVENTURE_GUIDE_TEXT,    // windows, etc
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
+        .priority = 0
+    },
+    {
+        .bg = BG1_ADVENTURE_GUIDE_LIST,    // this bg loads the UI tilemap
+        .charBaseIndex = 3,
+        .mapBaseIndex = 30,
         .priority = 1
     },
     {
-        .bg = 1,    // this bg loads the UI tilemap
-        .charBaseIndex = 3,
-        .mapBaseIndex = 30,
-        .priority = 2
-    },
-    {
-        .bg = 2,
+        .bg = BG2_ADVENTURE_LIST_BOXES,
         .charBaseIndex = 3,
         .mapBaseIndex = 28,
-        .priority = 3,
+        .priority = 2,
     }
 };
 
@@ -507,7 +505,6 @@ static bool8 Menu_DoGfxSetup(void)
 static void Menu_FreeResources(void)
 {
     try_free(sMenuDataPtr);
-    try_free(sBg1TilemapBuffer);
     FreeAllWindowBuffers();
 }
 
@@ -910,18 +907,6 @@ static const u8 sCursorDark[]        = INCBIN_U8("graphics/ui_menus/adventure_gu
 static const u8 sBlackWindow[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/black_window.4bpp");
 static const u8 sDarkAButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/dark_a_button.4bpp");
 static const u8 sDarkBButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/dark_b_button.4bpp");
-
-static void PrintToWindow(void)
-{
-    AdventureGuide_PrintAppTitle();
-
-    if ((sMenuDataPtr->isWindowOpen == TRUE) || (sMenuDataPtr->singleGuideMode == TRUE))
-        AdventureGuide_PrintGuideText();
-    else
-        AdventureGuide_PrintGuideList();
-
-    AdventureGuide_PrintHelpbar();
-}
 
 static void AdventureGuide_PrintAppTitle(void)
 {
@@ -1354,151 +1339,6 @@ static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
             AdventureGuide_LeaveAdventureGuide(taskId);
         else
             AdventureGuide_LeaveGuideReturnToMenu();
-    }
-}
-
-static void Task_MenuMain2(u8 taskId)
-{
-    u8 optionNum = sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW + sMenuDataPtr->cursorNumX;
-    u8 numpages = AdventureGuideInfo[optionNum].numPages - 1;
-    bool32 unlocked = (gSaveBlock3Ptr->hasSeenGuide[optionNum] == TRUE);
-    bool8 closeMenu = FALSE;
-
-    if(!sMenuDataPtr->singleGuideMode)
-    {
-        if (JOY_NEW(A_BUTTON))
-        {
-            if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen)
-            {
-                sMenuDataPtr->windowInfoNum++;
-                AdventureGuide_PrintGuideText();
-            }
-            else if(sMenuDataPtr->isWindowOpen)
-            {
-                sMenuDataPtr->windowInfoNum = 0;
-                Menu_ChangeTransparentTilemap();
-                AdventureGuide_PrintGuideText();
-            }
-            else if(unlocked)
-            {
-                Menu_ChangeTransparentTilemap();
-                AdventureGuide_PrintGuideText();
-            }
-            AdventureGuide_PrintHelpbar();
-        }
-
-        if (JOY_NEW(B_BUTTON))
-        {
-            if(sMenuDataPtr->windowInfoNum != 0 && sMenuDataPtr->isWindowOpen)
-            {
-                sMenuDataPtr->windowInfoNum--;
-                PrintToWindow();
-            }
-            else if(sMenuDataPtr->isWindowOpen)
-            {
-                sMenuDataPtr->windowInfoNum = 0;
-                Menu_ChangeTransparentTilemap();
-                PrintToWindow();
-            }
-            else
-                closeMenu = TRUE;
-        }
-
-        if ((JOY_NEW(DPAD_RIGHT)))
-        {
-            if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen)
-            {
-                sMenuDataPtr->windowInfoNum++;
-                PrintToWindow();
-            }
-            else if(sMenuDataPtr->isWindowOpen)
-            {
-                sMenuDataPtr->windowInfoNum = 0;
-                Menu_ChangeTransparentTilemap();
-                PrintToWindow();
-            }
-            else
-            {
-                if(sMenuDataPtr->cursorNumX == MAX_CURSOR_NUM_X - 1)
-                    sMenuDataPtr->cursorNumX = 0;
-                else
-                    sMenuDataPtr->cursorNumX++;
-                PrintToWindow();
-            }
-        }
-
-        if ((JOY_NEW(DPAD_LEFT)))
-        {
-            if(sMenuDataPtr->windowInfoNum != 0 && sMenuDataPtr->isWindowOpen){
-                sMenuDataPtr->windowInfoNum--;
-                PrintToWindow();
-            }
-            else if(sMenuDataPtr->isWindowOpen)
-            {
-                sMenuDataPtr->windowInfoNum = 0;
-                Menu_ChangeTransparentTilemap();
-                PrintToWindow();
-            }
-            else
-            {
-                if(sMenuDataPtr->cursorNumX == 0)
-                    sMenuDataPtr->cursorNumX = MAX_CURSOR_NUM_X - 1;
-                else
-                    sMenuDataPtr->cursorNumX--;
-                PrintToWindow();
-            }
-        }
-
-        if ((JOY_NEW(DPAD_DOWN)))
-        {
-            if(sMenuDataPtr->isWindowOpen == FALSE){
-                PressedDownButton_AdventureGuide();
-                PrintToWindow();
-            }
-        }
-
-        if ((JOY_NEW(DPAD_UP)))
-        {
-            if(sMenuDataPtr->isWindowOpen == FALSE){
-                PressedUpButton_AdventureGuide();
-                PrintToWindow();
-            }
-        }
-    }
-    else
-    {
-        if (JOY_NEW(START_BUTTON))
-            closeMenu = TRUE;
-
-        if (JOY_NEW(A_BUTTON) || JOY_NEW(DPAD_RIGHT))
-        {
-            if(sMenuDataPtr->windowInfoNum != numpages)
-            {
-                sMenuDataPtr->windowInfoNum++;
-                PrintToWindow();
-            }
-            else
-                closeMenu = TRUE;
-        }
-
-        if ((JOY_NEW(DPAD_LEFT)) || JOY_NEW(B_BUTTON))
-        {
-            if(sMenuDataPtr->windowInfoNum != 0)
-            {
-                sMenuDataPtr->windowInfoNum--;
-                PrintToWindow();
-            }
-            else
-                closeMenu = TRUE;
-        }
-    }
-
-    if(closeMenu)
-    {
-        PrintToWindow();
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_MenuTurnOff;
     }
 }
 
