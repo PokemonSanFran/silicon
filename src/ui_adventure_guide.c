@@ -78,6 +78,8 @@ static void AdventureGuide_PrintGuideList(void);
 static void AdventureGuide_PrintHelpbar(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
+static bool32 AdventureGuide_GetSingleGuideMode(void);
+static void AdventureGuide_LeaveAdventureGuide(u8 taskId);
 static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleFirstPageInput(u8 taskId, u32 optionNum);
@@ -1218,6 +1220,18 @@ void SetTheFlag(void)
         gSaveBlock3Ptr->hasSeenGuide[GUIDE_YOUR_ADVENTURE_GUIDE] = TRUE;
 }
 
+static bool32 AdventureGuide_GetSingleGuideMode(void)
+{
+    return sMenuDataPtr->singleGuideMode;
+}
+
+static void AdventureGuide_LeaveAdventureGuide(u8 taskId)
+{
+    PlaySE(SE_PC_OFF);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_MenuTurnOff;
+}
+
 static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum)
 {
     bool32 unlocked = (gSaveBlock3Ptr->hasSeenGuide[optionNum] == TRUE);
@@ -1232,9 +1246,7 @@ static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum)
 
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_MenuTurnOff;
+        AdventureGuide_LeaveAdventureGuide(taskId);
     }
 
     if (JOY_NEW(DPAD_DOWN))
@@ -1300,11 +1312,14 @@ static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum)
 {
     if (JOY_NEW(A_BUTTON) || (JOY_NEW(DPAD_RIGHT)) || (JOY_NEW(START_BUTTON)))
     {
-        AdventureGuide_LeaveGuideReturnToMenu();
+        if (AdventureGuide_GetSingleGuideMode())
+            AdventureGuide_LeaveAdventureGuide(taskId);
+        else
+            AdventureGuide_LeaveGuideReturnToMenu();
     }
     if (JOY_NEW(B_BUTTON) || (JOY_NEW(DPAD_LEFT)))
     {
-        AdventureGuide_DecrementGuidePage();
+            AdventureGuide_DecrementGuidePage();
     }
 }
 
@@ -1316,7 +1331,10 @@ static void AdventureGuide_HandleFirstPageInput(u8 taskId, u32 optionNum)
     }
     if (JOY_NEW(B_BUTTON) || (JOY_NEW(DPAD_LEFT)) || (JOY_NEW(START_BUTTON)))
     {
-        AdventureGuide_LeaveGuideReturnToMenu();
+        if (AdventureGuide_GetSingleGuideMode())
+            AdventureGuide_LeaveAdventureGuide(taskId);
+        else
+            AdventureGuide_LeaveGuideReturnToMenu();
     }
 }
 
@@ -1332,7 +1350,10 @@ static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
     }
     if (JOY_NEW(START_BUTTON))
     {
-        AdventureGuide_LeaveGuideReturnToMenu();
+        if (AdventureGuide_GetSingleGuideMode())
+            AdventureGuide_LeaveAdventureGuide(taskId);
+        else
+            AdventureGuide_LeaveGuideReturnToMenu();
     }
 }
 
