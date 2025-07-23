@@ -46,7 +46,7 @@ struct MenuResources
 {
     MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
     u8 gfxLoadState;
-    u16 bgTilemapBuffers[NUM_ADVENTURE_GUIDE_BACKGROUNDS][0x400];
+    u16 bgTilemapBuffers[BG_ADVENTURE_GUIDE][0x400];
     u8 cursorNumX;
     u8 cursorNumY;
     u8 yFirstItem;
@@ -541,50 +541,50 @@ static bool8 Menu_InitBgs(void)
 }
 
 static void setNormalBackground(void){
-    SetBgAttribute(ADVENTURE_GUIDE_BG_NORMAL, BG_ATTR_PRIORITY, ADVENTURE_GUIDE_BG_NORMAL);
+    SetBgAttribute(BG1_ADVENTURE_GUIDE_LIST, BG_ATTR_PRIORITY, BG1_ADVENTURE_GUIDE_LIST);
     InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
-    SetBgTilemapBuffer(ADVENTURE_GUIDE_BG_NORMAL, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_NORMAL]);
-    ScheduleBgCopyTilemapToVram(ADVENTURE_GUIDE_BG_NORMAL);
+    SetBgTilemapBuffer(BG1_ADVENTURE_GUIDE_LIST, sMenuDataPtr->bgTilemapBuffers[BG1_ADVENTURE_GUIDE_LIST]);
+    ScheduleBgCopyTilemapToVram(BG1_ADVENTURE_GUIDE_LIST);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    ShowBg(ADVENTURE_GUIDE_FRONT_BG);
-    ShowBg(ADVENTURE_GUIDE_BG_NORMAL);
-    ChangeBgX(ADVENTURE_GUIDE_BG_NORMAL, 0, 0);
-    ChangeBgY(ADVENTURE_GUIDE_BG_NORMAL, 0, 0);
+    ShowBg(BG0_ADVENTURE_GUIDE_TEXT);
+    ShowBg(BG1_ADVENTURE_GUIDE_LIST);
+    ChangeBgX(BG1_ADVENTURE_GUIDE_LIST, 0, 0);
+    ChangeBgY(BG1_ADVENTURE_GUIDE_LIST, 0, 0);
 }
 
 static void setTransparentBackground(void){
     u8 strength = ADVENTURE_GUIDE_TRANSPARENCY_STRENGTH;
-    SetBgTilemapBuffer(ADVENTURE_GUIDE_BG_TRANSPARENT, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT]);
-    ScheduleBgCopyTilemapToVram(ADVENTURE_GUIDE_BG_TRANSPARENT);
+    SetBgTilemapBuffer(BG2_ADVENTURE_LIST_BOXES, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
+    ScheduleBgCopyTilemapToVram(BG2_ADVENTURE_LIST_BOXES);
 
     //Transparency
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1); //Blend Background over the rest
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(strength, strength));
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 
-    ShowBg(ADVENTURE_GUIDE_BG_TRANSPARENT);
-    ChangeBgX(ADVENTURE_GUIDE_BG_TRANSPARENT, 0, 0);
-    ChangeBgY(ADVENTURE_GUIDE_BG_TRANSPARENT, 0, 0);
+    ShowBg(BG2_ADVENTURE_LIST_BOXES);
+    ChangeBgX(BG2_ADVENTURE_LIST_BOXES, 0, 0);
+    ChangeBgY(BG2_ADVENTURE_LIST_BOXES, 0, 0);
 }
 
 static void removeTransparentBackground(){
-    SetBgAttribute(ADVENTURE_GUIDE_BG_TRANSPARENT, BG_ATTR_PRIORITY, ADVENTURE_GUIDE_BG_TRANSPARENT);
+    SetBgAttribute(BG2_ADVENTURE_LIST_BOXES, BG_ATTR_PRIORITY, BG2_ADVENTURE_LIST_BOXES);
     InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
-    SetBgTilemapBuffer(ADVENTURE_GUIDE_BG_TRANSPARENT, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT]);
-    ScheduleBgCopyTilemapToVram(ADVENTURE_GUIDE_BG_TRANSPARENT);
+    SetBgTilemapBuffer(BG2_ADVENTURE_LIST_BOXES, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
+    ScheduleBgCopyTilemapToVram(BG2_ADVENTURE_LIST_BOXES);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    ShowBg(ADVENTURE_GUIDE_BG_TRANSPARENT);
+    ShowBg(BG2_ADVENTURE_LIST_BOXES);
 }
 
 static void Menu_ChangeTransparentTilemap(void)
 {
-    try_free(sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT]);
-    memset(sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT], 0, 0x800);
+    try_free(sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
+    memset(sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES], 0, 0x800);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sMenuBgTemplates, NELEMS(sMenuBgTemplates));
-    SetBgTilemapBuffer(1, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT]);
+    SetBgTilemapBuffer(1, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
     ScheduleBgCopyTilemapToVram(1);
     ShowBg(0);
     ShowBg(1);
@@ -592,11 +592,11 @@ static void Menu_ChangeTransparentTilemap(void)
 
     sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
     if(sMenuDataPtr->isWindowOpen){
-        LZDecompressWram(sBlackBgTilemap, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT]);
+        LZDecompressWram(sBlackBgTilemap, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
         //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(3, 3));
     }
     else{
-        LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT]);
+        LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
         //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(6, 6));
     }
 }
@@ -614,14 +614,14 @@ static bool8 Menu_LoadGraphics(void)
             if (FreeTempTileDataBuffersIfPossible() != TRUE)
             {
                 if(sMenuDataPtr->singleGuideMode)
-                    LZDecompressWram(sBlackBgTilemap_Single, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_NORMAL]);
+                    LZDecompressWram(sBlackBgTilemap_Single, sMenuDataPtr->bgTilemapBuffers[BG1_ADVENTURE_GUIDE_LIST]);
                 else
-                    LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_NORMAL]);
+                    LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[BG1_ADVENTURE_GUIDE_LIST]);
                 sMenuDataPtr->gfxLoadState++;
             }
             break;
         case 2:
-            LZDecompressWram(sBackgroundTilemap, sMenuDataPtr->bgTilemapBuffers[ADVENTURE_GUIDE_BG_TRANSPARENT]);
+            LZDecompressWram(sBackgroundTilemap, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
             sMenuDataPtr->gfxLoadState++;
             break;
         case 3:
