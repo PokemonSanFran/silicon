@@ -78,6 +78,10 @@ static void AdventureGuide_PrintGuideList(void);
 static void AdventureGuide_PrintHelpbar(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
+static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum);
+static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum);
+static void AdventureGuide_HandleFirstPageInput(u8 taskId, u32 optionNum);
+static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_LoadBackgroundPalette(void);
 static void setNormalBackground(void);
 static void setTransparentBackground(void);
@@ -939,10 +943,18 @@ static void AdventureGuide_PrintGuideText(void)
     AdventureGuide_PrintWindowTitle(optionNum);
     AdventureGuide_PrintDescription(optionNum);
     AdventureGuide_PrintNumber(optionNum);
+    AdventureGuide_PrintHelpbar();
+
+    for (enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER; windowId < WINDOW_ADVENTURE_COUNT ; windowId++)
+    {
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
+    }
 }
 
 static void AdventureGuide_PrintWindowTitle(u32 optionNum)
 {
+    DebugPrintf("AdventureGuide_PrintWindowTitle");
     u32 x = 4;
     u32 y = 0;
     u32 font = FONT_NORMAL;
@@ -952,12 +964,11 @@ static void AdventureGuide_PrintWindowTitle(u32 optionNum)
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(2));
     AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void AdventureGuide_PrintDescription(u32 optionNum)
 {
+    DebugPrintf("AdventureGuide_PrintDescription");
     u32 fontId = FONT_SMALL_NARROW;
     u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
@@ -972,14 +983,11 @@ static void AdventureGuide_PrintDescription(u32 optionNum)
     PrependFontIdToFit(gStringVar3, end, fontId, ADVENTURE_GUIDE_INFO_WIDTH);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], TEXT_SKIP_DRAW, gStringVar3);
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void AdventureGuide_PrintNumber(u32 optionNum)
 {
-    if (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode)
-        return;
+    DebugPrintf("AdventureGuide_PrintNumber");
 
     enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_FOOTER;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
@@ -992,8 +1000,6 @@ static void AdventureGuide_PrintNumber(u32 optionNum)
     ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{DPAD_LEFTRIGHT} Page {STR_VAR_1} / {STR_VAR_2}"));
     AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, x, y, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], TEXT_SKIP_DRAW, gStringVar4);
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void AdventureGuide_PrintCursor(void)
@@ -1188,6 +1194,150 @@ static u8 getCurrentOptionNumPages(void){
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
+    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
+    u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
+    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+
+    bool32 isMainMenu = (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode);
+    bool32 isLastPage = ((currentPageNumber / finalPageNumber) == 1);
+    bool32 isFirstPage = ((finalPageNumber != 1) && ((currentPageNumber == 1)));
+
+    if (isMainMenu)
+        AdventureGuide_HandleMainMenuInput(taskId, optionNum);
+    else if (isLastPage)
+        AdventureGuide_HandleLastPageInput(taskId, optionNum);
+    else if (isFirstPage)
+        AdventureGuide_HandleFirstPageInput(taskId, optionNum);
+    else
+        AdventureGuide_HandleAnyPageInput(taskId, optionNum);
+}
+
+void SetTheFlag(void)
+{
+    //for (u32 i = 0; i < NUM_GUIDES; i++)
+        gSaveBlock3Ptr->hasSeenGuide[GUIDE_YOUR_ADVENTURE_GUIDE] = TRUE;
+}
+
+static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum)
+{
+    bool32 unlocked = (gSaveBlock3Ptr->hasSeenGuide[optionNum] == TRUE);
+
+    if (JOY_NEW(A_BUTTON) && unlocked)
+    {
+        sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
+        ClearWindowCopyToVram(WINDOW_ADVENTURE_LIST);
+        AdventureGuide_PrintGuideText();
+        //Menu_ChangeTransparentTilemap();
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_PC_OFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_MenuTurnOff;
+    }
+
+    if (JOY_NEW(DPAD_DOWN))
+    {
+        PressedDownButton_AdventureGuide();
+        AdventureGuide_PrintGuideList();
+    }
+
+    if (JOY_NEW(DPAD_UP))
+    {
+        PressedUpButton_AdventureGuide();
+        AdventureGuide_PrintGuideList();
+    }
+
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if(sMenuDataPtr->cursorNumX == 0)
+            sMenuDataPtr->cursorNumX = MAX_CURSOR_NUM_X - 1;
+        else
+            sMenuDataPtr->cursorNumX--;
+
+        AdventureGuide_PrintGuideList();
+    }
+
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if(sMenuDataPtr->cursorNumX == MAX_CURSOR_NUM_X - 1)
+            sMenuDataPtr->cursorNumX = 0;
+        else
+            sMenuDataPtr->cursorNumX++;
+
+        AdventureGuide_PrintGuideList();
+    }
+}
+
+static void AdventureGuide_LeaveGuideReturnToMenu(void)
+{
+    sMenuDataPtr->windowInfoNum = 0;
+    sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
+    ClearWindowCopyToVram(WINDOW_ADVENTURE_GUIDE_HEADER);
+    ClearWindowCopyToVram(WINDOW_ADVENTURE_GUIDE_DESC);
+    ClearWindowCopyToVram(WINDOW_ADVENTURE_GUIDE_FOOTER);
+    AdventureGuide_PrintAppTitle();
+    AdventureGuide_PrintGuideList();
+    AdventureGuide_PrintHelpbar();
+    //ClearAllWindows();
+    //Menu_ChangeTransparentTilemap();
+}
+
+static void AdventureGuide_IncrementGuidePage(void)
+{
+    sMenuDataPtr->windowInfoNum++;
+    AdventureGuide_PrintGuideText();
+}
+
+static void AdventureGuide_DecrementGuidePage(void)
+{
+    sMenuDataPtr->windowInfoNum--;
+    AdventureGuide_PrintGuideText();
+}
+
+static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum)
+{
+    if (JOY_NEW(A_BUTTON) || (JOY_NEW(DPAD_RIGHT)) || (JOY_NEW(START_BUTTON)))
+    {
+        AdventureGuide_LeaveGuideReturnToMenu();
+    }
+    if (JOY_NEW(B_BUTTON) || (JOY_NEW(DPAD_LEFT)))
+    {
+        AdventureGuide_DecrementGuidePage();
+    }
+}
+
+static void AdventureGuide_HandleFirstPageInput(u8 taskId, u32 optionNum)
+{
+    if (JOY_NEW(A_BUTTON) || (JOY_NEW(DPAD_RIGHT)))
+    {
+        AdventureGuide_IncrementGuidePage();
+    }
+    if (JOY_NEW(B_BUTTON) || (JOY_NEW(DPAD_LEFT)) || (JOY_NEW(START_BUTTON)))
+    {
+        AdventureGuide_LeaveGuideReturnToMenu();
+    }
+}
+
+static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
+{
+    if (JOY_NEW(A_BUTTON) || (JOY_NEW(DPAD_RIGHT)))
+    {
+        AdventureGuide_IncrementGuidePage();
+    }
+    if (JOY_NEW(B_BUTTON) || (JOY_NEW(DPAD_LEFT)))
+    {
+        AdventureGuide_DecrementGuidePage();
+    }
+    if (JOY_NEW(START_BUTTON))
+    {
+        AdventureGuide_LeaveGuideReturnToMenu();
+    }
+}
+
+static void Task_MenuMain2(u8 taskId)
+{
     u8 optionNum = sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW + sMenuDataPtr->cursorNumX;
     u8 numpages = AdventureGuideInfo[optionNum].numPages - 1;
     bool32 unlocked = (gSaveBlock3Ptr->hasSeenGuide[optionNum] == TRUE);
@@ -1200,19 +1350,20 @@ static void Task_MenuMain(u8 taskId)
             if(sMenuDataPtr->windowInfoNum != numpages && sMenuDataPtr->isWindowOpen)
             {
                 sMenuDataPtr->windowInfoNum++;
-                PrintToWindow();
+                AdventureGuide_PrintGuideText();
             }
             else if(sMenuDataPtr->isWindowOpen)
             {
                 sMenuDataPtr->windowInfoNum = 0;
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow();
+                AdventureGuide_PrintGuideText();
             }
             else if(unlocked)
             {
                 Menu_ChangeTransparentTilemap();
-                PrintToWindow();
+                AdventureGuide_PrintGuideText();
             }
+            AdventureGuide_PrintHelpbar();
         }
 
         if (JOY_NEW(B_BUTTON))
