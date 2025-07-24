@@ -60,9 +60,12 @@ static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
+static void CreateListArrows(void);
+static void CreatePageArrows(void);
 static bool8 Menu_DoGfxSetup(void);
 static bool8 Menu_InitBgs(void);
 static void HandleAndShowBgs(void);
+static void SetBackgroundTransparency(void);
 static void SetScheduleBgs(u32 backgroundId);
 static bool8 AllocZeroedTilemapBuffers(void);
 static void Menu_FadeAndBail(void);
@@ -205,6 +208,13 @@ static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options
 static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
 static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
 
+static const struct SpritePalette sAdventureSpritePalette =
+{
+    .data = sMenuPalette_Platinum,
+    .tag = PAL_ADVENTURE_UI_SPRITES,
+};
+
+
 static const u8 sMenuWindowFontColors[][3] =
 {
     [FONT_COLOR_ADVENTURE_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
@@ -223,7 +233,7 @@ void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
 
     CleanupOverworldWindowsAndTilemaps();
     VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES);
-    Adventure_Guide_Init(CB2_ReturnToFieldWithOpenMenu);
+    Adventure_Guide_Init(CB2_ReturnToUIMenu);
     DestroyTask(taskId);
 }
 
@@ -237,24 +247,21 @@ void Adventure_Guide_Init(MainCallback callback)
         return;
     }
 
-    // initialize stuff
     sMenuDataPtr->savedCallback = callback;
-    sMenuDataPtr->cursorNumX = 0;
-    sMenuDataPtr->cursorNumY = 0;
     sMenuDataPtr->yFirstItem = 0;
-    sMenuDataPtr->isWindowOpen = FALSE;
     sMenuDataPtr->windowInfoNum = 0;
 
     guideToOpen = VarGet(VAR_ADVENTURE_GUIDE_TO_OPEN);
-    //VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES); // reset the variable
 
-    if(guideToOpen >= NUM_GUIDES){
+    if(guideToOpen >= NUM_GUIDES)
+    {
         sMenuDataPtr->isWindowOpen    = FALSE;
         sMenuDataPtr->singleGuideMode = FALSE;
         sMenuDataPtr->cursorNumY      = 0;
         sMenuDataPtr->cursorNumX      = 0;
     }
-    else{
+    else
+    {
         gSaveBlock3Ptr->hasSeenGuide[guideToOpen] = TRUE;
         sMenuDataPtr->isWindowOpen    = TRUE;
         sMenuDataPtr->singleGuideMode = TRUE;
@@ -285,6 +292,7 @@ static void SpriteCallback_AdventureGuide_UpArrow(struct Sprite *sprite)
         sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
+
 }
 
 static void SpriteCallback_AdventureGuide_DownArrow(struct Sprite *sprite)
@@ -323,92 +331,92 @@ static void SpriteCallback_AdventureGuide_RightArrow(struct Sprite *sprite)
         sprite->invisible = TRUE;
 }
 
-#define UP_ARROW_X 120 - 16
-#define UP_ARROW_Y 0
-
-static void CreateUpArrowSprite(void)
+static void CreateListArrows(void)
 {
-    u8 spriteId;
-    u8 SpriteTag = SPRITE_ADVENTURE_UP_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_AdventureGuideUpArrow = {gAdventureGuideUpArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+    u32 arrowIds[] =
+    {
+        SPRITE_ADVENTURE_UP_ARROW,
+        SPRITE_ADVENTURE_DOWN_ARROW,
+    };
 
-    TempSpriteTemplate.tileTag = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_AdventureGuide_UpArrow;
+    for (u32 arrowCount = 0; arrowCount < ARRAY_COUNT(arrowIds); arrowCount++)
+    {
+        u32 arrowId = arrowIds[arrowCount];
+        const u32 *data;
 
-    LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideUpArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, UP_ARROW_X, UP_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW] = spriteId;
+        if (arrowCount == 0)
+            data = gAdventureGuideUpArrow_Gfx;
+        else
+            data = gAdventureGuideDownArrow_Gfx;
 
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW]].oam.size = SPRITE_SIZE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_UP_ARROW]].oam.priority = 1;
+        struct CompressedSpriteSheet sSpriteSheet_AdventureGuideArrow =
+        {
+            data,
+            2048,
+            arrowId,
+        };
+        struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+        TempSpriteTemplate.tileTag = arrowId;
+        TempSpriteTemplate.callback = (arrowId == SPRITE_ADVENTURE_UP_ARROW) ? SpriteCallback_AdventureGuide_UpArrow : SpriteCallback_AdventureGuide_DownArrow;
+        TempSpriteTemplate.paletteTag = PAL_ADVENTURE_UI_SPRITES;
+
+        LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideArrow);
+        LoadSpritePalette(&sAdventureSpritePalette);
+        u32 y = (arrowId == SPRITE_ADVENTURE_UP_ARROW) ? ADVENTURE_UP_ARROW_Y : ADVENTURE_DOWN_ARROW_Y;
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, ADVENTURE_UP_ARROW_X, y, 0);
+        sMenuDataPtr->spriteIDs[arrowId] = spriteId;
+
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].invisible = FALSE;
+
+        if (arrowId == SPRITE_ADVENTURE_DOWN_ARROW)
+            gSprites[spriteId].vFlip = TRUE;
+
+    }
 }
 
-#define DOWN_ARROW_X UP_ARROW_X
-#define DOWN_ARROW_Y 160 - 16
-
-static void CreateDownArrowSprite(void)
+static void CreatePageArrows(void)
 {
-    u8 spriteId;
-    u8 SpriteTag = SPRITE_ADVENTURE_DOWN_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_AdventureGuideDownArrow = {gAdventureGuideDownArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+    u32 arrowIds[2] = {SPRITE_ADVENTURE_LEFT_ARROW, SPRITE_ADVENTURE_RIGHT_ARROW};
+    for (u32 arrowCount = 0; arrowCount < ARRAY_COUNT(arrowIds); arrowCount++)
+    {
+        u32 arrowId = arrowIds[arrowCount];
+        const u32 *data;
+        if (arrowCount == 0)
+            data = gAdventureGuideLeftArrow_Gfx;
+        else
+            data = gAdventureGuideRightArrow_Gfx;
 
-    TempSpriteTemplate.tileTag = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_AdventureGuide_DownArrow;
+        struct CompressedSpriteSheet sSpriteSheet_AdventureGuideArrow =
+        {
+            data,
+            2048,
+            ADVENTURE_SPRITE_TAG + arrowId,
+        };
+        struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
-    LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideDownArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, DOWN_ARROW_X, DOWN_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW] = spriteId;
+        TempSpriteTemplate.tileTag = ADVENTURE_SPRITE_TAG + arrowId;
+        TempSpriteTemplate.callback = (arrowId == SPRITE_ADVENTURE_LEFT_ARROW) ? SpriteCallback_AdventureGuide_LeftArrow : SpriteCallback_AdventureGuide_RightArrow;
+        TempSpriteTemplate.paletteTag = PAL_ADVENTURE_UI_SPRITES;
 
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW]].oam.size = SPRITE_SIZE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_DOWN_ARROW]].oam.priority = 1;
-}
+        LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideArrow);
+        LoadSpritePalette(&sAdventureSpritePalette);
+        u32 x = (arrowId == SPRITE_ADVENTURE_LEFT_ARROW) ? ADVENTURE_LEFT_ARROW_X: ADVENTURE_RIGHT_ARROW_X;
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, x, ADVENTURE_LEFT_ARROW_Y, 0);
+        sMenuDataPtr->spriteIDs[arrowId] = spriteId;
 
-#define LEFT_ARROW_X 8
-#define LEFT_ARROW_Y (160 / 2)
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].invisible = FALSE;
 
-static void CreateLeftArrowSprite(void)
-{
-    u8 spriteId;
-    u8 SpriteTag = SPRITE_ADVENTURE_LEFT_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_AdventureGuideLeftArrow = {gAdventureGuideLeftArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+        if (arrowId == SPRITE_ADVENTURE_RIGHT_ARROW)
+            gSprites[spriteId].hFlip = TRUE;
 
-    TempSpriteTemplate.tileTag  = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_AdventureGuide_LeftArrow;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideLeftArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, LEFT_ARROW_X, LEFT_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW]].oam.shape    = SPRITE_SHAPE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW]].oam.size     = SPRITE_SIZE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_LEFT_ARROW]].oam.priority = 1;
-}
-
-#define RIGHT_ARROW_X 240 - 16
-#define RIGHT_ARROW_Y LEFT_ARROW_Y
-
-static void CreateRightArrowSprite(void)
-{
-    u8 spriteId;
-    u8 SpriteTag = SPRITE_ADVENTURE_RIGHT_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_AdventureGuideRightArrow = {gAdventureGuideRightArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    TempSpriteTemplate.tileTag  = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_AdventureGuide_RightArrow;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_AdventureGuideRightArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, RIGHT_ARROW_X, RIGHT_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW]].oam.shape    = SPRITE_SHAPE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW]].oam.size     = SPRITE_SIZE(16x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_ADVENTURE_RIGHT_ARROW]].oam.priority = 1;
+    }
 }
 
 static void Menu_MainCB(void)
@@ -432,17 +440,19 @@ static bool8 Menu_DoGfxSetup(void)
     switch (gMain.state)
     {
         case 0:
-            DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
-                SetVBlankHBlankCallbacksToNull();
+            DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+            SetVBlankHBlankCallbacksToNull();
             ClearScheduledBgCopiesToVram();
-            ResetVramOamAndBgCntRegs();
+            /*
+               ResetVramOamAndBgCntRegs();
+               ResetAllBgsCoordinatesAndBgCntRegs();
+           */
             gMain.state++;
             break;
         case 1:
             ScanlineEffect_Stop();
-            FreeAllSpritePalettes();
             ResetPaletteFade();
-            ResetSpriteData();
+            FreeSpritePalettesResetSpriteData();
             ResetTasks();
             gMain.state++;
             break;
@@ -454,6 +464,7 @@ static bool8 Menu_DoGfxSetup(void)
             }
             else
             {
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 Menu_FadeAndBail();
                 return TRUE;
             }
@@ -462,11 +473,6 @@ static bool8 Menu_DoGfxSetup(void)
             gMain.state++;
             break;
         case 4:
-            CreateUpArrowSprite();
-            CreateDownArrowSprite();
-            CreateLeftArrowSprite();
-            CreateRightArrowSprite();
-            LoadMessageBoxAndBorderGfx();
             Menu_InitWindows();
             gMain.state++;
             break;
@@ -484,6 +490,8 @@ static bool8 Menu_DoGfxSetup(void)
 
             AdventureGuide_PrintHelpbar();
             CreateTask(Task_MenuWaitFadeIn, 0);
+            CreateListArrows();
+            CreatePageArrows();
             BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
             gMain.state++;
             break;
@@ -491,7 +499,7 @@ static bool8 Menu_DoGfxSetup(void)
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
             gMain.state++;
             break;
-        default:
+        case 7:
             SetVBlankCallback(Menu_VBlankCB);
             SetMainCallback2(Menu_MainCB);
             return TRUE;
@@ -499,16 +507,13 @@ static bool8 Menu_DoGfxSetup(void)
     return FALSE;
 }
 
-#define try_free(ptr) ({        \
-        void ** ptr__ = (void **)&(ptr);   \
-        if (*ptr__ != NULL)                \
-        Free(*ptr__);                  \
-        })
-
 static void Menu_FreeResources(void)
 {
-    try_free(sMenuDataPtr);
+    if (sMenuDataPtr != NULL)
+        Free(sMenuDataPtr);
+
     FreeAllWindowBuffers();
+    FreeBackgrounds();
 }
 
 static void Task_MenuWaitFadeAndBail(u8 taskId)
@@ -523,7 +528,6 @@ static void Task_MenuWaitFadeAndBail(u8 taskId)
 
 static void Menu_FadeAndBail(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_MenuWaitFadeAndBail, 0);
     SetVBlankCallback(Menu_VBlankCB);
     SetMainCallback2(Menu_MainCB);
@@ -556,7 +560,15 @@ static void HandleAndShowBgs(void)
         SetScheduleBgs(backgroundId);
         ShowBg(backgroundId);
     }
-    //SetBackgroundTransparency();
+    SetBackgroundTransparency();
+}
+
+static void SetBackgroundTransparency(void)
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT1_BG2);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(6, 6));
+    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
+    ShowBg(BG2_ADVENTURE_LIST_BOXES);
 }
 
 static void SetScheduleBgs(u32 backgroundId)
@@ -903,7 +915,6 @@ static void AdventureGuide_PrintGuideText(void)
 
 static void AdventureGuide_PrintWindowTitle(u32 optionNum)
 {
-    DebugPrintf("AdventureGuide_PrintWindowTitle");
     u32 x = 4;
     u32 y = 0;
     u32 font = FONT_NORMAL;
@@ -917,7 +928,6 @@ static void AdventureGuide_PrintWindowTitle(u32 optionNum)
 
 static void AdventureGuide_PrintDescription(u32 optionNum)
 {
-    DebugPrintf("AdventureGuide_PrintDescription");
     u32 fontId = FONT_SMALL_NARROW;
     u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
@@ -936,8 +946,6 @@ static void AdventureGuide_PrintDescription(u32 optionNum)
 
 static void AdventureGuide_PrintNumber(u32 optionNum)
 {
-    DebugPrintf("AdventureGuide_PrintNumber");
-
     enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_FOOTER;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
     u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
@@ -1062,8 +1070,7 @@ static void Task_MenuTurnOff(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    Menu_FreeResources();
-    DestroyTask(taskId);
+    Menu_FadeAndBail();
 }
 
 
@@ -1183,10 +1190,8 @@ static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum)
     if (JOY_NEW(A_BUTTON) && unlocked)
     {
         sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
-        //ClearWindowCopyToVram(WINDOW_ADVENTURE_LIST);
-        ShowBg(0);
         AdventureGuide_PrintGuideText();
-        //Menu_ChangeTransparentTilemap();
+        ShowBg(0);
     }
 
     if (JOY_NEW(B_BUTTON))
@@ -1229,8 +1234,8 @@ static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum)
 
 static void AdventureGuide_LeaveGuideReturnToMenu(void)
 {
-    sMenuDataPtr->windowInfoNum = 0;
     sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
+    sMenuDataPtr->windowInfoNum = 0;
     HideBg(0);
     AdventureGuide_PrintAppTitle();
     AdventureGuide_PrintGuideList();
@@ -1302,8 +1307,4 @@ static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
 
 // PSF TODO
 // header should be dimmed when window is open
-// button interactions in window mode need to actually match the help bar
-// button interctionas in non-window mode need to match the help bar
-// palettes on sprites need to be corrected for both window and menu modes
 // palette for text needs to use red in the last slot
-// need to split up mega window into smaller windows for perf
