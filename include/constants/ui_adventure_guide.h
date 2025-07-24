@@ -33,7 +33,7 @@ enum
     FONT_COLOR_ADVENTURE_BLUE,
 };
 
-enum
+enum AdventureBackgrounds
 {
 	BG0_ADVENTURE_GUIDE_TEXT,
 	BG1_ADVENTURE_GUIDE_LIST,
