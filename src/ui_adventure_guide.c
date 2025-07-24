@@ -45,7 +45,6 @@
 struct MenuResources
 {
     MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
-    u8 gfxLoadState;
     u8 *bgTilemapBuffers[BG_ADVENTURE_GUIDE_COUNT];
     u8 cursorNumX;
     u8 cursorNumY;
@@ -67,7 +66,7 @@ static void HandleAndShowBgs(void);
 static void SetScheduleBgs(u32 backgroundId);
 static bool8 AllocZeroedTilemapBuffers(void);
 static void Menu_FadeAndBail(void);
-static bool8 Menu_LoadGraphics(void);
+static void Menu_LoadGraphics(void);
 static void Menu_InitWindows(void);
 static void AdventureGuide_PrintAppTitle(void); // DONE
 static void AdventureGuide_PrintGuideText(void);
@@ -99,13 +98,13 @@ static const struct BgTemplate sMenuBgTemplates[] =
     },
     {
         .bg = BG1_ADVENTURE_GUIDE_LIST,    // this bg loads the UI tilemap
-        .charBaseIndex = 3,
+        .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .priority = 1
     },
     {
         .bg = BG2_ADVENTURE_LIST_BOXES,
-        .charBaseIndex = 3,
+        .charBaseIndex = 2,
         .mapBaseIndex = 28,
         .priority = 2,
     },
@@ -178,27 +177,24 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .height = 2,
         .paletteNum = 0,
         .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2) + (26 * 2) + (26 * 12),
-    },
+    }
 };
 
-static const u32 sMenuTiles[]             = INCBIN_U32("graphics/ui_menus/adventure_guide/tiles.4bpp.lz");
-static const u32 sMenuTilemap[]           = INCBIN_U32("graphics/ui_menus/adventure_guide/tilemap.bin.lz");
-static const u32 sBlackBgTilemap[]        = INCBIN_U32("graphics/ui_menus/adventure_guide/tilemap_black.bin.lz");
-static const u32 sBlackBgTilemap_Single[] = INCBIN_U32("graphics/ui_menus/adventure_guide/tilemap_black_single.bin.lz");
-static const u32 sBackgroundTilemap[]     = INCBIN_U32("graphics/ui_menus/adventure_guide/bg_tilemap.bin.lz");
-static const u32 sFrontBgTilemap[]        = INCBIN_U32("graphics/ui_menus/adventure_guide/front_tilemap.bin.lz");
+static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.lz");
+static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.lz");
 
-static const u16 sMenuPalette[]          = INCBIN_U16("graphics/ui_menus/adventure_guide/palette_custom.gbapal");
+static const u32 sMenuBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.4bpp.lz");
+static const u32 sMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.bin.lz");
 
-static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/red.gbapal");
-static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/black.gbapal");
-static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/green.gbapal");
-static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/blue.gbapal");
-static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/platinum.gbapal");
-static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/scarlet.gbapal");
-static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/violet.gbapal");
-static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/white.gbapal");
-static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/yellow.gbapal");
+static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
+static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");
+static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal");
+static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal");
+static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal");
+static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal");
+static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal");
+static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
+static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
 
 static const u8 sMenuWindowFontColors[][3] =
 {
@@ -233,7 +229,6 @@ void Adventure_Guide_Init(MainCallback callback)
     }
 
     // initialize stuff
-    sMenuDataPtr->gfxLoadState = 0;
     sMenuDataPtr->savedCallback = callback;
     sMenuDataPtr->cursorNumX = 0;
     sMenuDataPtr->cursorNumY = 0;
@@ -450,7 +445,7 @@ static bool8 Menu_DoGfxSetup(void)
         case 2:
             if (Menu_InitBgs())
             {
-                sMenuDataPtr->gfxLoadState = 0;
+                Menu_LoadGraphics();
                 gMain.state++;
             }
             else
@@ -460,8 +455,7 @@ static bool8 Menu_DoGfxSetup(void)
             }
             break;
         case 3:
-            if (Menu_LoadGraphics() == TRUE)
-                gMain.state++;
+            gMain.state++;
             break;
         case 4:
             CreateUpArrowSprite();
@@ -557,6 +551,9 @@ static void HandleAndShowBgs(void)
     {
         SetScheduleBgs(backgroundId);
         ShowBg(backgroundId);
+
+        if (backgroundId == BG1_ADVENTURE_GUIDE_LIST)
+            HideBg(BG1_ADVENTURE_GUIDE_LIST);
     }
     //SetBackgroundTransparency();
 }
@@ -577,45 +574,39 @@ static bool8 Menu_InitBgs(void)
 
     return TRUE;
 }
-static bool8 Menu_LoadGraphics(void)
+
+static const u32* const sAdventureTilesLUT[] =
 {
-    switch (sMenuDataPtr->gfxLoadState)
+    [BG0_ADVENTURE_GUIDE_TEXT] = NULL,
+    [BG1_ADVENTURE_GUIDE_LIST] = NULL,
+    [BG2_ADVENTURE_LIST_BOXES] = sListBgTiles,
+    [BG3_ADVENTURE_LIST_GENERIC] = sMenuBgTiles,
+};
+
+static const u32* const sAdventureTilemapLUT[] =
+{
+    [BG0_ADVENTURE_GUIDE_TEXT] = NULL,
+    [BG1_ADVENTURE_GUIDE_LIST] = NULL,
+    [BG2_ADVENTURE_LIST_BOXES] = sListBgTilemap,
+    [BG3_ADVENTURE_LIST_GENERIC] = sMenuBgTilemap,
+};
+
+static void Menu_LoadGraphics(void)
+{
+    ResetTempTileDataBuffers();
+
+    for (enum AdventureBackgrounds backgroundId = 1; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
     {
-        case 0:
-            ResetTempTileDataBuffers();
-            DecompressAndCopyTileDataToVram(1, sMenuTiles, 0, 0, 0);
-            sMenuDataPtr->gfxLoadState++;
-            break;
-        case 1:
-            if (FreeTempTileDataBuffersIfPossible() != TRUE)
-            {
-                if(sMenuDataPtr->singleGuideMode)
-                    LZDecompressWram(sBlackBgTilemap_Single, sMenuDataPtr->bgTilemapBuffers[BG1_ADVENTURE_GUIDE_LIST]);
-                else
-                    LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[BG1_ADVENTURE_GUIDE_LIST]);
-                sMenuDataPtr->gfxLoadState++;
-            }
-            break;
-        case 2:
-            LZDecompressWram(sBackgroundTilemap, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
-            sMenuDataPtr->gfxLoadState++;
-            break;
-        case 3:
-            AdventureGuide_LoadBackgroundPalette();
-            sMenuDataPtr->gfxLoadState++;
-            break;
-        default:
-            sMenuDataPtr->gfxLoadState = 0;
-            return TRUE;
+        DecompressAndLoadBgGfxUsingHeap(backgroundId, sAdventureTilesLUT[backgroundId], 0, 0, 0);
+        CopyToBgTilemapBuffer(backgroundId, sAdventureTilemapLUT[backgroundId],0,0);
     }
-    return FALSE;
+    AdventureGuide_LoadBackgroundPalette();
 }
 
 static void AdventureGuide_LoadBackgroundPalette(void)
 {
-    u8 chosenBackgroundColor = gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR];
-
-    switch(chosenBackgroundColor){
+    switch(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR])
+    {
         case VISUAL_OPTION_COLOR_BLACK:
             LoadPalette(sMenuPalette_Black, 0, 32);
             break;
@@ -625,6 +616,7 @@ static void AdventureGuide_LoadBackgroundPalette(void)
         case VISUAL_OPTION_COLOR_GREEN:
             LoadPalette(sMenuPalette_Green, 0, 32);
             break;
+        default:
         case VISUAL_OPTION_COLOR_PLATINUM:
             LoadPalette(sMenuPalette_Platinum, 0, 32);
             break;
@@ -642,9 +634,6 @@ static void AdventureGuide_LoadBackgroundPalette(void)
             break;
         case VISUAL_OPTION_COLOR_YELLOW:
             LoadPalette(sMenuPalette_Yellow, 0, 32);
-            break;
-        default:
-            LoadPalette(sMenuPalette, 0, 32);
             break;
     }
 }
@@ -1178,7 +1167,7 @@ static void Task_MenuMain(u8 taskId)
 void SetTheFlag(void)
 {
     //for (u32 i = 0; i < NUM_GUIDES; i++)
-        gSaveBlock3Ptr->hasSeenGuide[GUIDE_YOUR_ADVENTURE_GUIDE] = TRUE;
+    gSaveBlock3Ptr->hasSeenGuide[GUIDE_YOUR_ADVENTURE_GUIDE] = TRUE;
 }
 
 static bool32 AdventureGuide_GetSingleGuideMode(void)
@@ -1280,7 +1269,7 @@ static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum)
     }
     if (JOY_NEW(B_BUTTON) || (JOY_NEW(DPAD_LEFT)))
     {
-            AdventureGuide_DecrementGuidePage();
+        AdventureGuide_DecrementGuidePage();
     }
 }
 
