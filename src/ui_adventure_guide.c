@@ -91,13 +91,13 @@ static u8 getCurrentOptionNumPages(void);
 static const struct BgTemplate sMenuBgTemplates[] =
 {
     {
-        .bg = BG0_ADVENTURE_GUIDE_TEXT,    // windows, etc
+        .bg = BG0_ADVENTURE_GUIDE_TEXT,
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .priority = 0
     },
     {
-        .bg = BG1_ADVENTURE_GUIDE_LIST,    // this bg loads the UI tilemap
+        .bg = BG1_ADVENTURE_GUIDE_LIST,
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .priority = 1
@@ -179,6 +179,12 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2) + (26 * 2) + (26 * 12),
     }
 };
+
+static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
+static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_up.4bpp.lz");
+static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.lz");
+static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.lz");
+static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.lz");
 
 static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.lz");
 static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.lz");
@@ -313,11 +319,6 @@ static void SpriteCallback_AdventureGuide_RightArrow(struct Sprite *sprite)
     else
         sprite->invisible = TRUE;
 }
-
-static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_up.4bpp.lz");
-static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.lz");
-static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.lz");
-static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.lz");
 
 #define UP_ARROW_X 120 - 16
 #define UP_ARROW_Y 0
@@ -868,13 +869,6 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
     },
 };
 
-static const u8 sText_Dummy[] = _("????");
-
-static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
-static const u8 sCursorDark[]        = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor_2.4bpp");
-static const u8 sBlackWindow[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/black_window.4bpp");
-static const u8 sDarkAButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/dark_a_button.4bpp");
-static const u8 sDarkBButton[]    = INCBIN_U8("graphics/ui_menus/adventure_guide/dark_b_button.4bpp");
 
 static void AdventureGuide_PrintAppTitle(void)
 {
