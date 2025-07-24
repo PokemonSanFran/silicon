@@ -98,20 +98,20 @@ static const struct BgTemplate sMenuBgTemplates[] =
     },
     {
         .bg = BG1_ADVENTURE_GUIDE_LIST,
-        .charBaseIndex = 1,
-        .mapBaseIndex = 30,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 25,
         .priority = 1
     },
     {
         .bg = BG2_ADVENTURE_LIST_BOXES,
         .charBaseIndex = 2,
-        .mapBaseIndex = 28,
+        .mapBaseIndex = 21,
         .priority = 2,
     },
     {
         .bg = BG3_ADVENTURE_LIST_GENERIC,
         .charBaseIndex = 3,
-        .mapBaseIndex = 26,
+        .mapBaseIndex = 20,
         .priority = 3,
     }
 };
@@ -185,6 +185,9 @@ static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus
 static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.lz");
 static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.lz");
 static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.lz");
+
+static const u32 sTransBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.4bpp.lz");
+static const u32 sTransBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.bin.lz");
 
 static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.lz");
 static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.lz");
@@ -552,9 +555,6 @@ static void HandleAndShowBgs(void)
     {
         SetScheduleBgs(backgroundId);
         ShowBg(backgroundId);
-
-        if (backgroundId == BG1_ADVENTURE_GUIDE_LIST)
-            HideBg(BG1_ADVENTURE_GUIDE_LIST);
     }
     //SetBackgroundTransparency();
 }
@@ -579,7 +579,7 @@ static bool8 Menu_InitBgs(void)
 static const u32* const sAdventureTilesLUT[] =
 {
     [BG0_ADVENTURE_GUIDE_TEXT] = NULL,
-    [BG1_ADVENTURE_GUIDE_LIST] = NULL,
+    [BG1_ADVENTURE_GUIDE_LIST] = sTransBgTiles,
     [BG2_ADVENTURE_LIST_BOXES] = sListBgTiles,
     [BG3_ADVENTURE_LIST_GENERIC] = sMenuBgTiles,
 };
@@ -587,7 +587,7 @@ static const u32* const sAdventureTilesLUT[] =
 static const u32* const sAdventureTilemapLUT[] =
 {
     [BG0_ADVENTURE_GUIDE_TEXT] = NULL,
-    [BG1_ADVENTURE_GUIDE_LIST] = NULL,
+    [BG1_ADVENTURE_GUIDE_LIST] = sTransBgTilemap,
     [BG2_ADVENTURE_LIST_BOXES] = sListBgTilemap,
     [BG3_ADVENTURE_LIST_GENERIC] = sMenuBgTilemap,
 };
