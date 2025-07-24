@@ -46,7 +46,7 @@ struct MenuResources
 {
     MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
     u8 gfxLoadState;
-    u16 bgTilemapBuffers[BG_ADVENTURE_GUIDE_COUNT][0x400];
+    u8 *bgTilemapBuffers[BG_ADVENTURE_GUIDE_COUNT];
     u8 cursorNumX;
     u8 cursorNumY;
     u8 yFirstItem;
@@ -63,6 +63,9 @@ static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 static void Menu_RunSetup(void);
 static bool8 Menu_DoGfxSetup(void);
 static bool8 Menu_InitBgs(void);
+static void HandleAndShowBgs(void);
+static void SetScheduleBgs(u32 backgroundId);
+static bool8 AllocZeroedTilemapBuffers(void);
 static void Menu_FadeAndBail(void);
 static bool8 Menu_LoadGraphics(void);
 static void Menu_InitWindows(void);
@@ -83,10 +86,6 @@ static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleFirstPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_LoadBackgroundPalette(void);
-static void setNormalBackground(void);
-static void setTransparentBackground(void);
-static void removeTransparentBackground(void);
-static void Menu_ChangeTransparentTilemap(void);
 static u8 getCurrentOptionNumPages(void);
 
 //==========CONST=DATA==========//
@@ -109,6 +108,12 @@ static const struct BgTemplate sMenuBgTemplates[] =
         .charBaseIndex = 3,
         .mapBaseIndex = 28,
         .priority = 2,
+    },
+    {
+        .bg = BG3_ADVENTURE_LIST_GENERIC,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 26,
+        .priority = 3,
     }
 };
 
@@ -526,78 +531,52 @@ static void Menu_FadeAndBail(void)
     SetMainCallback2(Menu_MainCB);
 }
 
-static bool8 Menu_InitBgs(void)
+static bool8 AllocZeroedTilemapBuffers(void)
 {
-    ResetBgsAndClearDma3BusyFlags(0);
-    //Background 1
-    setNormalBackground();
+    for (enum AdventureBackgrounds backgroundId = 0; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
+    {
+        sMenuDataPtr->bgTilemapBuffers[backgroundId] = AllocZeroed(BG_SCREEN_SIZE);
 
-    //Background 2 - Transparent
-    setTransparentBackground();
+        if (sMenuDataPtr->bgTilemapBuffers[backgroundId] == NULL)
+            return FALSE;
+
+        if (sMenuDataPtr->bgTilemapBuffers[backgroundId] == NULL)
+            return FALSE;
+
+        memset(sMenuDataPtr->bgTilemapBuffers[backgroundId],0,BG_SCREEN_SIZE);
+    }
     return TRUE;
 }
 
-static void setNormalBackground(void){
-    SetBgAttribute(BG1_ADVENTURE_GUIDE_LIST, BG_ATTR_PRIORITY, BG1_ADVENTURE_GUIDE_LIST);
-    InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
-    SetBgTilemapBuffer(BG1_ADVENTURE_GUIDE_LIST, sMenuDataPtr->bgTilemapBuffers[BG1_ADVENTURE_GUIDE_LIST]);
-    ScheduleBgCopyTilemapToVram(BG1_ADVENTURE_GUIDE_LIST);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    ShowBg(BG0_ADVENTURE_GUIDE_TEXT);
-    ShowBg(BG1_ADVENTURE_GUIDE_LIST);
-    ChangeBgX(BG1_ADVENTURE_GUIDE_LIST, 0, 0);
-    ChangeBgY(BG1_ADVENTURE_GUIDE_LIST, 0, 0);
-}
-
-static void setTransparentBackground(void){
-    u8 strength = ADVENTURE_GUIDE_TRANSPARENCY_STRENGTH;
-    SetBgTilemapBuffer(BG2_ADVENTURE_LIST_BOXES, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
-    ScheduleBgCopyTilemapToVram(BG2_ADVENTURE_LIST_BOXES);
-
-    //Transparency
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1); //Blend Background over the rest
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(strength, strength));
-    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
-
-    ShowBg(BG2_ADVENTURE_LIST_BOXES);
-    ChangeBgX(BG2_ADVENTURE_LIST_BOXES, 0, 0);
-    ChangeBgY(BG2_ADVENTURE_LIST_BOXES, 0, 0);
-}
-
-static void removeTransparentBackground(){
-    SetBgAttribute(BG2_ADVENTURE_LIST_BOXES, BG_ATTR_PRIORITY, BG2_ADVENTURE_LIST_BOXES);
-    InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
-    SetBgTilemapBuffer(BG2_ADVENTURE_LIST_BOXES, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
-    ScheduleBgCopyTilemapToVram(BG2_ADVENTURE_LIST_BOXES);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    ShowBg(BG2_ADVENTURE_LIST_BOXES);
-}
-
-static void Menu_ChangeTransparentTilemap(void)
+static void HandleAndShowBgs(void)
 {
-    try_free(sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
-    memset(sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES], 0, 0x800);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sMenuBgTemplates, NELEMS(sMenuBgTemplates));
-    SetBgTilemapBuffer(1, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
-    ScheduleBgCopyTilemapToVram(1);
-    ShowBg(0);
-    ShowBg(1);
-    ShowBg(2);
+    InitBgsFromTemplates(0, sMenuBgTemplates, BG_ADVENTURE_GUIDE_COUNT);
 
-    sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
-    if(sMenuDataPtr->isWindowOpen){
-        LZDecompressWram(sBlackBgTilemap, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
-        //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(3, 3));
+    for (enum AdventureBackgrounds backgroundId = 0; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
+    {
+        SetScheduleBgs(backgroundId);
+        ShowBg(backgroundId);
     }
-    else{
-        LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[BG2_ADVENTURE_LIST_BOXES]);
-        //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(6, 6));
-    }
+    //SetBackgroundTransparency();
 }
 
+static void SetScheduleBgs(u32 backgroundId)
+{
+    SetBgTilemapBuffer(backgroundId, sMenuDataPtr->bgTilemapBuffers[backgroundId]);
+    ScheduleBgCopyTilemapToVram(backgroundId);
+}
+
+static bool8 Menu_InitBgs(void)
+{
+    ResetAllBgsCoordinates();
+    if(!AllocZeroedTilemapBuffers())
+        return FALSE;
+
+    HandleAndShowBgs();
+
+    return TRUE;
+}
 static bool8 Menu_LoadGraphics(void)
 {
     switch (sMenuDataPtr->gfxLoadState)
@@ -1097,14 +1076,11 @@ static void Task_MenuWaitFadeIn(u8 taskId)
 
 static void Task_MenuTurnOff(u8 taskId)
 {
-    if (!gPaletteFade.active)
-    {
-        removeTransparentBackground();
-        //VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, 0);
-        SetMainCallback2(sMenuDataPtr->savedCallback);
-        Menu_FreeResources();
-        DestroyTask(taskId);
-    }
+    if (gPaletteFade.active)
+        return;
+
+    Menu_FreeResources();
+    DestroyTask(taskId);
 }
 
 
