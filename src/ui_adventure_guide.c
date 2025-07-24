@@ -98,85 +98,85 @@ static const struct BgTemplate sMenuBgTemplates[] =
     },
     {
         .bg = BG1_ADVENTURE_GUIDE_LIST,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 25,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
         .priority = 1
     },
     {
         .bg = BG2_ADVENTURE_LIST_BOXES,
         .charBaseIndex = 2,
-        .mapBaseIndex = 21,
+        .mapBaseIndex = 29,
         .priority = 2,
     },
     {
         .bg = BG3_ADVENTURE_LIST_GENERIC,
         .charBaseIndex = 3,
-        .mapBaseIndex = 20,
+        .mapBaseIndex = 28,
         .priority = 3,
     }
 };
 
 static const struct WindowTemplate sMenuWindowTemplates[] =
 {
-    [WINDOW_ADVENTURE_LIST_HEADER] =
-    {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 30,
-        .height = 2,
-        .paletteNum = 0,
-        .baseBlock = 1,
-    },
-    [WINDOW_ADVENTURE_LIST] =
-    {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 2,
-        .width = 30,
-        .height = 16,
-        .paletteNum = 0,
-        .baseBlock = 1 + (30 * 2),
-    },
-    [WINDOW_ADVENTURE_LIST_FOOTER] =
-    {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 18,
-        .width = 30,
-        .height = 2,
-        .paletteNum = 0,
-        .baseBlock = 1 + (30 * 2) + (30 * 16),
-    },
     [WINDOW_ADVENTURE_GUIDE_HEADER] =
     {
-        .bg = 0,
+        .bg = BG0_ADVENTURE_GUIDE_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 2,
         .width = 26,
         .height = 2,
         .paletteNum = 0,
-        .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2),
+        .baseBlock = 1,
     },
     [WINDOW_ADVENTURE_GUIDE_DESC] =
     {
-        .bg = 0,
+        .bg = BG0_ADVENTURE_GUIDE_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 4,
         .width = 26,
         .height = 12,
         .paletteNum = 0,
-        .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2) + (26 * 2),
+        .baseBlock = 1 + (26 * 2),
     },
     [WINDOW_ADVENTURE_GUIDE_FOOTER] =
     {
-        .bg = 0,
+        .bg = BG0_ADVENTURE_GUIDE_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 16,
         .width = 26,
         .height = 2,
         .paletteNum = 0,
-        .baseBlock = 1 + (30 * 2) + (30 * 16) + (30 * 2) + (26 * 2) + (26 * 12),
+        .baseBlock = 1 + (26 * 2) + (26 * 12),
+    },
+    [WINDOW_ADVENTURE_LIST_HEADER] =
+    {
+        .bg = BG1_ADVENTURE_GUIDE_LIST,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2),
+    },
+    [WINDOW_ADVENTURE_LIST] =
+    {
+        .bg = BG1_ADVENTURE_GUIDE_LIST,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 30,
+        .height = 16,
+        .paletteNum = 0,
+        .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2) + (30 * 2),
+    },
+    [WINDOW_ADVENTURE_LIST_FOOTER] =
+    {
+        .bg = BG1_ADVENTURE_GUIDE_LIST,
+        .tilemapLeft = 0,
+        .tilemapTop = 18,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2) + (30 * 2) + (30 * 16),
     }
 };
 
@@ -894,7 +894,7 @@ static void AdventureGuide_PrintGuideText(void)
     AdventureGuide_PrintNumber(optionNum);
     AdventureGuide_PrintHelpbar();
 
-    for (enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER; windowId < WINDOW_ADVENTURE_COUNT ; windowId++)
+    for (enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER; windowId < WINDOW_ADVENTURE_LIST_HEADER; windowId++)
     {
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_FULL);
@@ -1183,7 +1183,8 @@ static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum)
     if (JOY_NEW(A_BUTTON) && unlocked)
     {
         sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
-        ClearWindowCopyToVram(WINDOW_ADVENTURE_LIST);
+        //ClearWindowCopyToVram(WINDOW_ADVENTURE_LIST);
+        ShowBg(0);
         AdventureGuide_PrintGuideText();
         //Menu_ChangeTransparentTilemap();
     }
@@ -1230,9 +1231,7 @@ static void AdventureGuide_LeaveGuideReturnToMenu(void)
 {
     sMenuDataPtr->windowInfoNum = 0;
     sMenuDataPtr->isWindowOpen = !sMenuDataPtr->isWindowOpen;
-    ClearWindowCopyToVram(WINDOW_ADVENTURE_GUIDE_HEADER);
-    ClearWindowCopyToVram(WINDOW_ADVENTURE_GUIDE_DESC);
-    ClearWindowCopyToVram(WINDOW_ADVENTURE_GUIDE_FOOTER);
+    HideBg(0);
     AdventureGuide_PrintAppTitle();
     AdventureGuide_PrintGuideList();
     AdventureGuide_PrintHelpbar();
