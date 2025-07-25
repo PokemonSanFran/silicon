@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ui_adventure_guide.h"
+#include "options_visual.h"
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
@@ -128,7 +129,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapTop = 2,
         .width = 26,
         .height = 2,
-        .paletteNum = 0,
+        .paletteNum = 15,
         .baseBlock = 1,
     },
     [WINDOW_ADVENTURE_GUIDE_DESC] =
@@ -138,7 +139,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapTop = 4,
         .width = 26,
         .height = 12,
-        .paletteNum = 0,
+        .paletteNum = 15,
         .baseBlock = 1 + (26 * 2),
     },
     [WINDOW_ADVENTURE_GUIDE_FOOTER] =
@@ -148,7 +149,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapTop = 16,
         .width = 26,
         .height = 2,
-        .paletteNum = 0,
+        .paletteNum = 15,
         .baseBlock = 1 + (26 * 2) + (26 * 12),
     },
     [WINDOW_ADVENTURE_LIST_HEADER] =
@@ -158,7 +159,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum = 0,
+        .paletteNum = 15,
         .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2),
     },
     [WINDOW_ADVENTURE_LIST] =
@@ -168,7 +169,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapTop = 2,
         .width = 30,
         .height = 16,
-        .paletteNum = 0,
+        .paletteNum = 15,
         .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2) + (30 * 2),
     },
     [WINDOW_ADVENTURE_LIST_FOOTER] =
@@ -178,7 +179,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapTop = 18,
         .width = 30,
         .height = 2,
-        .paletteNum = 0,
+        .paletteNum = 15,
         .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2) + (30 * 2) + (30 * 16),
     }
 };
@@ -207,6 +208,7 @@ static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/options
 static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal");
 static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
 static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
+static const u16 adventurePalettesText[] = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/text.gbapal");
 
 static const struct SpritePalette sAdventureSpritePalette =
 {
@@ -616,39 +618,25 @@ static void Menu_LoadGraphics(void)
     AdventureGuide_LoadBackgroundPalette();
 }
 
+static const u16* const sAdventurePalettesLUT[] =
+{
+    [VISUAL_OPTION_COLOR_RED] =      sMenuPalette_Red,
+    [VISUAL_OPTION_COLOR_GREEN] =    sMenuPalette_Green,
+    [VISUAL_OPTION_COLOR_BLUE] =     sMenuPalette_Blue,
+    [VISUAL_OPTION_COLOR_YELLOW] =   sMenuPalette_Yellow,
+    [VISUAL_OPTION_COLOR_BLACK] =    sMenuPalette_Black,
+    [VISUAL_OPTION_COLOR_WHITE] =    sMenuPalette_White,
+    [VISUAL_OPTION_COLOR_PLATINUM] = sMenuPalette_Platinum,
+    [VISUAL_OPTION_COLOR_SCARLET] =  sMenuPalette_Scarlet,
+    [VISUAL_OPTION_COLOR_VIOLET] =   sMenuPalette_Violet,
+    [VISUAL_OPTION_COLOR_CUSTOM] =   sMenuPalette_Platinum,
+    [VISUAL_OPTION_COLOR_COUNT] =    sMenuPalette_Platinum,
+};
+
 static void AdventureGuide_LoadBackgroundPalette(void)
 {
-    switch(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR])
-    {
-        case VISUAL_OPTION_COLOR_BLACK:
-            LoadPalette(sMenuPalette_Black, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_BLUE:
-            LoadPalette(sMenuPalette_Blue, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_GREEN:
-            LoadPalette(sMenuPalette_Green, 0, 32);
-            break;
-        default:
-        case VISUAL_OPTION_COLOR_PLATINUM:
-            LoadPalette(sMenuPalette_Platinum, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_RED:
-            LoadPalette(sMenuPalette_Red, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_SCARLET:
-            LoadPalette(sMenuPalette_Scarlet, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_VIOLET:
-            LoadPalette(sMenuPalette_Violet, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_WHITE:
-            LoadPalette(sMenuPalette_White, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_YELLOW:
-            LoadPalette(sMenuPalette_Yellow, 0, 32);
-            break;
-    }
+    LoadPalette(sAdventurePalettesLUT[GetVisualColor()], PAL_SLOT_ADVENTURE_UI, PLTT_SIZE_4BPP);
+    LoadPalette(adventurePalettesText,PAL_SLOT_ADVENTURE_TEXT,PLTT_SIZE_4BPP);
 }
 
 static void ClearAllWindows(void)
@@ -922,7 +910,7 @@ static void AdventureGuide_PrintWindowTitle(u32 optionNum)
     const u8 *str = AdventureGuideInfo[optionNum].title;
     enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER;
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(2));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(5));
     AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
 }
 
@@ -952,7 +940,7 @@ static void AdventureGuide_PrintNumber(u32 optionNum)
     u32 x = 4;
     u32 y = 0;
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(2));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(5));
     ConvertIntToDecimalStringN(gStringVar1, currentPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(currentPageNumber));
     ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{DPAD_LEFTRIGHT} Page {STR_VAR_1} / {STR_VAR_2}"));
@@ -1307,4 +1295,3 @@ static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
 
 // PSF TODO
 // header should be dimmed when window is open
-// palette for text needs to use red in the last slot
