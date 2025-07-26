@@ -409,7 +409,7 @@ static void Pokedex_ReturnFromAdventureGuide(void)
 
 static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
 {
-    u32 targetGuide = GUIDE_OPENING_POKEDEX;
+    u32 targetGuide = GUIDE_POKEDEX;
 
     if (!shouldSkipGuide(targetGuide))
     {
