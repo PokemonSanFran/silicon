@@ -7,6 +7,8 @@ void Task_OpenAdventureGuideFromStartMenu(u8 taskId);
 void Adventure_Guide_Init(MainCallback callback);
 bool8 shouldSkipGuide(u8 guideNum);
 void Task_OpenAdventureGuideFromMenu(u8 taskId);
+void OpenAdventureGuideFromScript(void);
+void Script_shouldSkipGuide(void);
 
 struct AdventureGuideData
 {

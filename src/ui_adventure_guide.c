@@ -61,6 +61,7 @@ struct MenuResources
 static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 
 //==========STATIC=DEFINES==========//
+static void Task_OpenAdventureGuideFromScript(u8 taskId);
 static void Menu_RunSetup(void);
 static void CreateListArrows(void);
 static void CreatePageArrows(void);
@@ -231,6 +232,23 @@ void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
     CleanupOverworldWindowsAndTilemaps();
     VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES);
     Adventure_Guide_Init(CB2_ReturnToUIMenu);
+    DestroyTask(taskId);
+}
+
+void OpenAdventureGuideFromScript(void)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    PlayRainStoppingSoundEffect();
+    CleanupOverworldWindowsAndTilemaps();
+    CreateTask(Task_OpenAdventureGuideFromScript,0);
+}
+
+static void Task_OpenAdventureGuideFromScript(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    Adventure_Guide_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     DestroyTask(taskId);
 }
 
@@ -793,6 +811,12 @@ static void AdventureGuide_PrintHelpbar(void)
     AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, gStringVar1);
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+void Script_shouldSkipGuide(void)
+{
+    enum AdventureGuideList guide = VarGet(VAR_ADVENTURE_GUIDE_TO_OPEN);
+    gSpecialVar_Result = (shouldSkipGuide(guide));
 }
 
 bool8 shouldSkipGuide(u8 guideNum){

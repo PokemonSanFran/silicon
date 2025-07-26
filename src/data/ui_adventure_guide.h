@@ -11,4 +11,15 @@ static const struct AdventureGuideData AdventureGuideInfo[] =
         },
         .isAdvancedGuide = FALSE,
     },
+    [GUIDE_POKEDEX] =
+    {
+        .title = COMPOUND_STRING("Pokédex"),
+        .description =
+        {
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 3"),
+        },
+        .isAdvancedGuide = TRUE,
+    },
 };
