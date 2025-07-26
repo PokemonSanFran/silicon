@@ -458,10 +458,6 @@ static bool8 Menu_DoGfxSetup(void)
             DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
             SetVBlankHBlankCallbacksToNull();
             ClearScheduledBgCopiesToVram();
-            /*
-               ResetVramOamAndBgCntRegs();
-               ResetAllBgsCoordinatesAndBgCntRegs();
-           */
             gMain.state++;
             break;
         case 1:
@@ -485,13 +481,10 @@ static bool8 Menu_DoGfxSetup(void)
             }
             break;
         case 3:
-            gMain.state++;
-            break;
-        case 4:
             Menu_InitWindows();
             gMain.state++;
             break;
-        case 5:
+        case 4:
             AdventureGuide_PrintAppTitle();
 
             if ((sMenuDataPtr->isWindowOpen == TRUE) || (sMenuDataPtr->singleGuideMode == TRUE))
@@ -504,6 +497,9 @@ static bool8 Menu_DoGfxSetup(void)
             }
 
             AdventureGuide_PrintHelpbar();
+            gMain.state++;
+            break;
+        case 5:
             CreateTask(Task_MenuWaitFadeIn, 0);
             CreateListArrows();
             CreatePageArrows();
@@ -713,7 +709,15 @@ static void AdventureGuide_PrintWindowTitle(u32 optionNum)
     ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING(" ({STR_VAR_1}/{STR_VAR_2})"));
 
-    StringCopy(gStringVar2,AdventureGuideInfo[optionNum].title);
+    if (AdventureGuideInfo[optionNum].title[0] == '\0')
+    {
+        StringCopy(gStringVar2,COMPOUND_STRING("Example Title"));
+    }
+    else
+    {
+        StringCopy(gStringVar2,AdventureGuideInfo[optionNum].title);
+    }
+
     u8* end = StringAppend(gStringVar2,gStringVar4);
     PrependFontIdToFit(gStringVar2, end, font, ADVENTURE_GUIDE_INFO_WIDTH);
     AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, gStringVar2);
@@ -727,9 +731,18 @@ static void AdventureGuide_PrintDescription(u32 optionNum)
     u32 x = 16;
     u32 y = 8;
     enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_DESC;
+    u8 *end;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    u8 *end = StringExpandPlaceholders(gStringVar3, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
+    if (AdventureGuideInfo[optionNum].description[0] &&
+        AdventureGuideInfo[optionNum].description[0][0] != '\0')
+    {
+        end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("Example Description"));
+    }
+    else
+    {
+        end = StringExpandPlaceholders(gStringVar3, AdventureGuideInfo[optionNum].description[sMenuDataPtr->windowInfoNum]);
+    }
 
     BreakStringAutomatic(gStringVar3, ADVENTURE_GUIDE_INFO_WIDTH, ADVENTURE_GUIDE_LINES, fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, fontId, ADVENTURE_GUIDE_INFO_WIDTH);
@@ -931,10 +944,10 @@ static u8 AdventureGuide_GetNumberPages(void)
     u32 numPages = 0;
 
     for (numPages = 0; numPages < MAX_GUIDE_PAGES; numPages++)
-        if (AdventureGuideInfo[optionNum].description[numPages] == NULL)
+        if (AdventureGuideInfo[optionNum].description[numPages][0] == '\0')
             break;
 
-    return numPages;
+    return (numPages < 1) ? 1 : numPages;
 }
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
