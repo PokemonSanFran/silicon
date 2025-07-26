@@ -73,10 +73,11 @@ static void Menu_FadeAndBail(void);
 static void Menu_LoadGraphics(void);
 static void Menu_InitWindows(void);
 static void AdventureGuide_PrintAppTitle(void); // DONE
+static void FillBgWithTile(u32 bg, const void *src);
+static void LoadTilesToBg(u32 backgroundId);
 static void AdventureGuide_PrintGuideText(void);
 static void AdventureGuide_PrintWindowTitle(u32 optionNum);
 static void AdventureGuide_PrintDescription(u32 optionNum);
-static void AdventureGuide_PrintNumber(u32 optionNum);
 static void AdventureGuide_PrintCursor(void);
 static void AdventureGuide_PrintGuideList(void);
 static void AdventureGuide_PrintHelpbar(void);
@@ -138,19 +139,9 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapLeft = 2,
         .tilemapTop = 4,
         .width = 26,
-        .height = 12,
+        .height = 14,
         .paletteNum = 15,
         .baseBlock = 1 + (26 * 2),
-    },
-    [WINDOW_ADVENTURE_GUIDE_FOOTER] =
-    {
-        .bg = BG0_ADVENTURE_GUIDE_TEXT,
-        .tilemapLeft = 2,
-        .tilemapTop = 16,
-        .width = 26,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = 1 + (26 * 2) + (26 * 12),
     },
     [WINDOW_ADVENTURE_LIST_HEADER] =
     {
@@ -160,7 +151,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 30,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2),
+        .baseBlock = 1 + (26 * 2) + (26 * 14),
     },
     [WINDOW_ADVENTURE_LIST] =
     {
@@ -170,7 +161,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 30,
         .height = 16,
         .paletteNum = 15,
-        .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2) + (30 * 2),
+        .baseBlock = 1 + (26 * 2) + (26 * 14) + (30 * 2),
     },
     [WINDOW_ADVENTURE_LIST_FOOTER] =
     {
@@ -180,7 +171,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 30,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 1 + (26 * 2) + (26 * 12) + (26 * 2) + (30 * 2) + (30 * 16),
+        .baseBlock = 1 + (26 * 2) + (26 * 14) + (30 * 2) + (30 * 16),
     }
 };
 
@@ -209,6 +200,11 @@ static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options
 static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
 static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
 static const u16 adventurePalettesText[] = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/text.gbapal");
+static const u8 sBlackTile[32] =
+{
+    [0 ... 31] = (PLTT_SIZE_4BPP + 2)
+};
+
 
 static const struct SpritePalette sAdventureSpritePalette =
 {
@@ -221,7 +217,7 @@ static const u8 sMenuWindowFontColors[][3] =
 {
     [FONT_COLOR_ADVENTURE_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
     [FONT_COLOR_ADVENTURE_WHITE]   = {TEXT_COLOR_TRANSPARENT,  1,  TEXT_COLOR_TRANSPARENT},
-    [FONT_COLOR_ADVENTURE_WHITE_2] = {TEXT_COLOR_TRANSPARENT,  2,  TEXT_COLOR_TRANSPARENT},
+    [FONT_COLOR_ADVENTURE_WHITE_2] = {TEXT_COLOR_TRANSPARENT,  PAL_ID_ADVENTURE_LIST_TEXT,  TEXT_COLOR_TRANSPARENT},
     [FONT_COLOR_ADVENTURE_RED]     = {TEXT_COLOR_TRANSPARENT,  14, TEXT_COLOR_TRANSPARENT},
     [FONT_COLOR_ADVENTURE_BLUE]    = {TEXT_COLOR_TRANSPARENT,  4,  TEXT_COLOR_TRANSPARENT},
 };
@@ -610,7 +606,7 @@ static void Menu_LoadGraphics(void)
 {
     ResetTempTileDataBuffers();
 
-    for (enum AdventureBackgrounds backgroundId = 1; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
+    for (enum AdventureBackgrounds backgroundId = BG1_ADVENTURE_GUIDE_LIST; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
     {
         DecompressAndLoadBgGfxUsingHeap(backgroundId, sAdventureTilesLUT[backgroundId], 0, 0, 0);
         CopyToBgTilemapBuffer(backgroundId, sAdventureTilemapLUT[backgroundId],0,0);
@@ -672,7 +668,7 @@ static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
         .title = _("Your Adventure Guide"),
         .description =
         {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 1"),
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
             COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
         },
@@ -889,9 +885,9 @@ static void AdventureGuide_PrintGuideText(void)
 {
     u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
 
+    FillBgWithTile(BG2_ADVENTURE_LIST_BOXES,sBlackTile);
     AdventureGuide_PrintWindowTitle(optionNum);
     AdventureGuide_PrintDescription(optionNum);
-    AdventureGuide_PrintNumber(optionNum);
     AdventureGuide_PrintHelpbar();
 
     for (enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER; windowId < WINDOW_ADVENTURE_LIST_HEADER; windowId++)
@@ -907,11 +903,20 @@ static void AdventureGuide_PrintWindowTitle(u32 optionNum)
     u32 y = 0;
     u32 font = FONT_NORMAL;
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
-    const u8 *str = AdventureGuideInfo[optionNum].title;
     enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER;
+    u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
+    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(5));
-    AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+
+    ConvertIntToDecimalStringN(gStringVar1, currentPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(currentPageNumber));
+    ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING(" ({STR_VAR_1}/{STR_VAR_2})"));
+
+    StringCopy(gStringVar2,AdventureGuideInfo[optionNum].title);
+    u8* end = StringAppend(gStringVar2,gStringVar4);
+    PrependFontIdToFit(gStringVar2, end, font, ADVENTURE_GUIDE_INFO_WIDTH);
+    AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, gStringVar2);
 }
 
 static void AdventureGuide_PrintDescription(u32 optionNum)
@@ -932,21 +937,6 @@ static void AdventureGuide_PrintDescription(u32 optionNum)
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_BLACK], TEXT_SKIP_DRAW, gStringVar3);
 }
 
-static void AdventureGuide_PrintNumber(u32 optionNum)
-{
-    enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_FOOTER;
-    u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
-    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
-    u32 x = 4;
-    u32 y = 0;
-
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(5));
-    ConvertIntToDecimalStringN(gStringVar1, currentPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(currentPageNumber));
-    ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{DPAD_LEFTRIGHT} Page {STR_VAR_1} / {STR_VAR_2}"));
-    AddTextPrinterParameterized4(windowId, FONT_SMALL_NARROW, x, y, 0, 0, sMenuWindowFontColors[FONT_COLOR_ADVENTURE_WHITE], TEXT_SKIP_DRAW, gStringVar4);
-}
-
 static void AdventureGuide_PrintCursor(void)
 {
     enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST;
@@ -961,12 +951,17 @@ static void AdventureGuide_PrintGuideList(void)
     u32 font = FONT_NORMAL;
     enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST;
     // PSF TODO use Crim font here
-    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE_2;
+
+    FillPalette(ADVENTURE_CURSOR_COLOR,PAL_INDEX_CURSOR,2);
+    FillPalette(ADVENTURE_LIST_TEXT_COLOR,PAL_INDEX_LIST_TEXT,2);
+
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    LoadTilesToBg(BG2_ADVENTURE_LIST_BOXES);
 
     AdventureGuide_PrintCursor();
 
-    for(u32 i = 0; i < MAX_ADVENTURE_GUIDE_ITEMS; i++)
+    for (u32 i = 0; i < MAX_ADVENTURE_GUIDE_ITEMS; i++)
     {
         u32 x = (((i % MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 15) * 8) + 4;
         u32 y = 1 + ((i / MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 16);
@@ -1153,12 +1148,6 @@ static void Task_MenuMain(u8 taskId)
         AdventureGuide_HandleAnyPageInput(taskId, optionNum);
 }
 
-void SetTheFlag(void)
-{
-    //for (u32 i = 0; i < NUM_GUIDES; i++)
-    gSaveBlock3Ptr->hasSeenGuide[GUIDE_YOUR_ADVENTURE_GUIDE] = TRUE;
-}
-
 static bool32 AdventureGuide_GetSingleGuideMode(void)
 {
     return sMenuDataPtr->singleGuideMode;
@@ -1169,6 +1158,24 @@ static void AdventureGuide_LeaveAdventureGuide(u8 taskId)
     PlaySE(SE_PC_OFF);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_MenuTurnOff;
+}
+
+static void FillBgWithTile(u32 bg, const void *src)
+{
+    LoadBgTiles(BG2_ADVENTURE_LIST_BOXES, sBlackTile, sizeof(sBlackTile), 0);
+    FillBgTilemapBufferRect(BG2_ADVENTURE_LIST_BOXES, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, PAL_ID_ADVENTURE_UI);
+
+    FillPalette(ADVENTURE_DARK_CURSOR_COLOR,PAL_INDEX_CURSOR,2);
+    FillPalette(ADVENTURE_DARK_LIST_TEXT_COLOR,PAL_INDEX_LIST_TEXT,2);
+
+    CopyBgTilemapBufferToVram(BG2_ADVENTURE_LIST_BOXES);
+}
+
+static void LoadTilesToBg(u32 backgroundId)
+{
+    DecompressAndLoadBgGfxUsingHeap(backgroundId, sAdventureTilesLUT[backgroundId], 0, 0, 0);
+    CopyToBgTilemapBuffer(backgroundId, sAdventureTilemapLUT[backgroundId],0,0);
+    CopyBgTilemapBufferToVram(backgroundId);
 }
 
 static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum)
