@@ -1,25 +1,26 @@
 #include "global.h"
-#include "ui_adventure_guide.h"
-#include "options_visual.h"
-#include "strings.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "event_data.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "international_string_util.h"
 #include "item.h"
+#include "item_icon.h"
 #include "item_menu.h"
 #include "item_menu_icons.h"
-#include "list_menu.h"
-#include "item_icon.h"
 #include "item_use.h"
-#include "international_string_util.h"
+#include "line_break.h"
+#include "list_menu.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "options_visual.h"
+#include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "scanline_effect.h"
@@ -27,20 +28,20 @@
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
+#include "strings.h"
 #include "task.h"
 #include "text_window.h"
 #include "trig.h"
 #include "tv.h"
-#include "line_break.h"
-#include "overworld.h"
-#include "event_data.h"
-#include "constants/items.h"
-#include "constants/field_weather.h"
-#include "constants/songs.h"
-#include "constants/rgb.h"
-#include "constants/ui_adventure_guide.h"
+#include "ui_adventure_guide.h"
 #include "ui_options_menu.h"
 #include "ui_pokedex.h"
+#include "constants/field_weather.h"
+#include "constants/items.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/ui_adventure_guide.h"
+#include "data/ui_adventure_guide.h"
 
 //==========DEFINES==========//
 struct MenuResources
@@ -90,7 +91,7 @@ static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleFirstPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_LoadBackgroundPalette(void);
-static u8 getCurrentOptionNumPages(void);
+static u8 AdventureGuide_GetNumberPages(void);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -205,13 +206,11 @@ static const u8 sBlackTile[32] =
     [0 ... 31] = (PLTT_SIZE_4BPP + 2)
 };
 
-
 static const struct SpritePalette sAdventureSpritePalette =
 {
     .data = sMenuPalette_Platinum,
     .tag = PAL_ADVENTURE_UI_SPRITES,
 };
-
 
 static const u8 sMenuWindowFontColors[][3] =
 {
@@ -323,7 +322,7 @@ static void SpriteCallback_AdventureGuide_RightArrow(struct Sprite *sprite)
     sprite->x2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    if(sMenuDataPtr->windowInfoNum < getCurrentOptionNumPages() - 1 && (sMenuDataPtr->singleGuideMode || sMenuDataPtr->isWindowOpen))
+    if(sMenuDataPtr->windowInfoNum < AdventureGuide_GetNumberPages() - 1 && (sMenuDataPtr->singleGuideMode || sMenuDataPtr->isWindowOpen))
         sprite->invisible = FALSE;
     else
         sprite->invisible = TRUE;
@@ -649,223 +648,6 @@ static void Menu_InitWindows(void)
     ClearAllWindows();
     ScheduleBgCopyTilemapToVram(2);
 }
-#define GUIDE_NAME_LENGTH 30
-#define MAX_GUIDE_DESCRIPTION_LENGTH 800
-#define MAX_GUIDE_PAGES 5
-#define FLAG_TEST FLAG_WATTSON_REMATCH_AVAILABLE
-
-struct AdventureGuideData
-{
-    const u8 title[GUIDE_NAME_LENGTH];
-    const u8 *description[MAX_GUIDE_PAGES];
-    const u8 numPages;
-    bool8 isAdvancedGuide;
-};
-
-static const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] = {
-    [GUIDE_YOUR_ADVENTURE_GUIDE] =
-    {
-        .title = _("Your Adventure Guide"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-        .isAdvancedGuide = TRUE,
-    },
-    [GUIDE_WILD_POKEMON] =
-    {
-        .title = _("Wild Pokemon"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_YOUR_ROTOM_PHONE] =
-    {
-        .title = _("Your Rotom Phone"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_AUTO_HEAL] =
-    {
-        .title = _("Auto Heal"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_OPENING_POKEDEX] =
-    {
-        .title = _("Opening Pokedex"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_LETS_GO] =
-    {
-        .title = _("Let's Go"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_YOUR_POKEMON_BOXES] =
-    {
-        .title = _("Your Pokemon Boxes"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_LOCKING_ON] =
-    {
-        .title = _("Locking On"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_CROUCHING] =
-    {
-        .title = _("Crouching"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_NO_IDEA_1] =
-    {
-        .title = _("No Idea 1"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-        .isAdvancedGuide = TRUE,
-    },
-    [GUIDE_CATCHING_POKEMON] =
-    {
-        .title = _("Catching Pokemon"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_NO_IDEA_2] =
-    {
-        .title = _("No Idea 2"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_SOMETHING_1] =
-    {
-        .title = _("Something 1"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_SOMETHING_2] =
-    {
-        .title = _("Something 2"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_SOMETHING_3] =
-    {
-        .title = _("Something 3"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_SOMETHING_4] =
-    {
-        .title = _("Something 4"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_SOMETHING_5] =
-    {
-        .title = _("Something 5"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-    [GUIDE_SOMETHING_6] =
-    {
-        .title = _("Something 6"),
-        .description =
-        {
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 1"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 2"),
-            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. 3"),
-        },
-        .numPages = 3,
-    },
-};
-
-
 static void AdventureGuide_PrintAppTitle(void)
 {
     u32 x = 4;
@@ -905,7 +687,7 @@ static void AdventureGuide_PrintWindowTitle(u32 optionNum)
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
     enum AdventureWindows windowId = WINDOW_ADVENTURE_GUIDE_HEADER;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
-    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+    u32 finalPageNumber = AdventureGuide_GetNumberPages();
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(5));
 
@@ -980,10 +762,9 @@ static void AdventureGuide_PrintHelpbar(void)
     u32 x = 4;
     u32 y = 1;
     u32 font = FONT_SMALL_NARROW;
-    u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
-    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+    u32 finalPageNumber = AdventureGuide_GetNumberPages();
     enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST_FOOTER;
 
     bool32 isMainMenu = (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode);
@@ -1120,19 +901,24 @@ static void PressedDownButton_AdventureGuide(){
     }
 }
 
-static u8 getCurrentOptionNumPages(void){
-    u8 optionNum = sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW + sMenuDataPtr->cursorNumX;
-    return AdventureGuideInfo[optionNum].numPages;
+static u8 AdventureGuide_GetNumberPages(void)
+{
+    u32 optionNum = sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW + sMenuDataPtr->cursorNumX;
+    u32 numPages = 0;
+
+    for (numPages = 0; numPages < MAX_GUIDE_PAGES; numPages++)
+        if (AdventureGuideInfo[optionNum].description[numPages] == NULL)
+            break;
+
+    return numPages;
 }
 
-#define MAX_CURSOR_NUM_X 2
-#define MAX_CURSOR_NUM_Y 8
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
     u32 optionNum = (sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) + sMenuDataPtr->cursorNumX;
     u32 currentPageNumber = sMenuDataPtr->windowInfoNum + 1;
-    u32 finalPageNumber = AdventureGuideInfo[optionNum].numPages;
+    u32 finalPageNumber = AdventureGuide_GetNumberPages();
 
     bool32 isMainMenu = (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode);
     bool32 isLastPage = ((currentPageNumber / finalPageNumber) == 1);
@@ -1301,4 +1087,8 @@ static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
 }
 
 // PSF TODO
-// header should be dimmed when window is open
+// Determine the list of adventure guides that should appear
+// Find places in game to put all adventure guides
+// Insert them into the game
+// Write text for all adventure guides
+// Test all the different kinds
