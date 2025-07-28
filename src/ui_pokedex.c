@@ -36,6 +36,8 @@
 #include "constants/songs.h"
 #include "data/ui_pokedex_type_sprites.h"
 #include "data/ui_pokedex_sprite_coordinates.h"
+#include "constants/ui_adventure_guide.h"
+#include "ui_adventure_guide.h"
 
 static void Pokedex_InitializeAndSaveCallback(MainCallback);
 static bool32 AllocateStructs(void);
@@ -393,7 +395,6 @@ void Task_OpenPokedexFromStartMenu(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
     StartMenu_Menu_FreeResources();
     PlayRainStoppingSoundEffect();
     CleanupOverworldWindowsAndTilemaps();
@@ -401,8 +402,23 @@ void Task_OpenPokedexFromStartMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+static void Pokedex_ReturnFromAdventureGuide(void)
+{
+    Pokedex_InitializeAndSaveCallback(gMain.savedCallback);
+}
+
 static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
 {
+    u32 targetGuide = GUIDE_POKEDEX;
+
+    if (!shouldSkipGuide(targetGuide))
+    {
+        VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN,targetGuide);
+        gMain.savedCallback = callback;
+        Adventure_Guide_Init(Pokedex_ReturnFromAdventureGuide);
+        return;
+    }
+
     if (AllocateStructs())
     {
         SetMainCallback2(callback);
@@ -500,7 +516,10 @@ void Pokedex_SetupCallback(void)
             SpeciesGrid_PrintGrid();
             SpeciesGrid_SetCurrentSpeciesFromCursorPosition();
             if (firstOpen)
+            {
                 PlaySE(SE_PC_LOGIN);
+                IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
+            }
             gMain.state++;
             break;
         case 7:
