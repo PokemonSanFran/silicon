@@ -71,6 +71,7 @@
 #include "quest_ow.h"
 // End siliconMerge
 #include "constants/map_types.h"
+#include "ui_adventure_guide.h" // adventureGuide
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);

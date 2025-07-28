@@ -1,3 +1,7 @@
+# Ensure submodules are initialized before anything else
+$(info Checking/initializing submodules...)
+DUMMY := $(shell bash init_submodules.sh)
+
 # GBA rom header
 TITLE       := POKEMON SILICON
 GAME_CODE   := BPEE

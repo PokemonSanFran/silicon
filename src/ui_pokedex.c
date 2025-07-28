@@ -36,6 +36,8 @@
 #include "constants/songs.h"
 #include "data/ui_pokedex_type_sprites.h"
 #include "data/ui_pokedex_sprite_coordinates.h"
+#include "constants/ui_adventure_guide.h"
+#include "ui_adventure_guide.h"
 
 static void Pokedex_InitializeAndSaveCallback(MainCallback);
 static bool32 AllocateStructs(void);
@@ -99,7 +101,11 @@ static u32 SpeciesGrid_ConvertMonCursorToVerticalPosition(void);
 static void SpeciesGrid_ResetCurrentPositionInMonList(void);
 static u32 SpeciesGrid_GetCurrentPositionInMonList(void);
 static void SpeciesGrid_SetCurrentPositionInMonList(s32);
+static u32 SpeciesGrid_GetNumberCaughtMonsInList(void);
+static void SpeciesGrid_IncreaseNumberCaughtMonsInList(u32);
+static void SpeciesGrid_ResetNumberCaughtMonsInList(void);
 static u32 SpeciesGrid_GetNumberMonsInList(void);
+static u32 SpeciesGrid_CalculateCaughtDenominator(void);
 static void SpeciesGrid_SetNumberMonsInList(u32);
 static void SpeciesGrid_ResetCurrentMonList(void);
 static void SpeciesGrid_SetCurrentSpeciesFromCursorPosition(void);
@@ -389,7 +395,6 @@ void Task_OpenPokedexFromStartMenu(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
     StartMenu_Menu_FreeResources();
     PlayRainStoppingSoundEffect();
     CleanupOverworldWindowsAndTilemaps();
@@ -397,8 +402,23 @@ void Task_OpenPokedexFromStartMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+static void Pokedex_ReturnFromAdventureGuide(void)
+{
+    Pokedex_InitializeAndSaveCallback(gMain.savedCallback);
+}
+
 static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
 {
+    u32 targetGuide = GUIDE_POKEDEX;
+
+    if (!shouldSkipGuide(targetGuide))
+    {
+        VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN,targetGuide);
+        gMain.savedCallback = callback;
+        Adventure_Guide_Init(Pokedex_ReturnFromAdventureGuide);
+        return;
+    }
+
     if (AllocateStructs())
     {
         SetMainCallback2(callback);
@@ -496,7 +516,10 @@ void Pokedex_SetupCallback(void)
             SpeciesGrid_PrintGrid();
             SpeciesGrid_SetCurrentSpeciesFromCursorPosition();
             if (firstOpen)
+            {
                 PlaySE(SE_PC_LOGIN);
+                IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
+            }
             gMain.state++;
             break;
         case 7:
@@ -919,7 +942,6 @@ static bool32 SpeciesFilter_ShouldShowUltraBeastLegendary(u32 species)
     return (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_SEEN));
 }
 
-
 static void SpeciesGrid_RemoveUltraBeastAndLegendary(u16* filteredList)
 {
     u32 speciesIndex, species;
@@ -1044,12 +1066,15 @@ static void SpeciesGrid_PopulateListAfterFilter(u16* filteredList)
     u32 listIndex = 0;
     u32 speciesIndex = 0;
 
+    SpeciesGrid_ResetNumberCaughtMonsInList();
+
     for (speciesIndex = 0; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
     {
         if (filteredList[speciesIndex] == SPECIES_NONE)
             continue;
 
         SpeciesGrid_SetSpeciesCurrentMonList(listIndex++, filteredList[speciesIndex]);
+        SpeciesGrid_IncreaseNumberCaughtMonsInList(filteredList[speciesIndex]);
     }
 
     for (speciesIndex = listIndex; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
@@ -1455,9 +1480,50 @@ static void SpeciesGrid_SetCurrentPositionInMonList(s32 position)
     sPokedexState->speciesListPosition = position;
 }
 
+static u32 SpeciesGrid_GetNumberCaughtMonsInList(void)
+{
+    return sPokedexLists->numCaughtMonsInList;
+}
+
+static void SpeciesGrid_IncreaseNumberCaughtMonsInList(u32 species)
+{
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT))
+        sPokedexLists->numCaughtMonsInList++;
+}
+
+static void SpeciesGrid_ResetNumberCaughtMonsInList(void)
+{
+    sPokedexLists->numCaughtMonsInList = 0;
+}
+
 static u32 SpeciesGrid_GetNumberMonsInList(void)
 {
     return sPokedexLists->numMonsInList;
+}
+
+static u32 SpeciesGrid_CalculateCaughtDenominator(void)
+{
+    bool32 seenFlags[RESIDO_DEX_COUNT] = {FALSE};
+    u32 seenCount = 0;
+
+    for (u32 speciesIndex = 0; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
+    {
+        u32 species = sPokedexLists->currentMonList[speciesIndex];
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        enum ResidoDexNumbers residoDexNum = ConvertSpeciesIdToResidoDex(species);
+        if (residoDexNum == RESIDO_DEX_NONE)
+            continue;
+
+        if (seenFlags[residoDexNum])
+            continue;
+
+        seenFlags[residoDexNum] = TRUE;
+        seenCount++;
+    }
+     return seenCount;
 }
 
 static void SpeciesGrid_SetNumberMonsInList(u32 numSpecies)
@@ -1925,10 +1991,11 @@ static void SpeciesData_PrintCaughtFormName(void)
 
 static void SpeciesData_PrintCaught(enum PokedexPageWindows windowId, u32 fontId, u32 x, u32 y, u32 letterSpacing, u32 lineSpacing)
 {
-    u32 numMon = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+    u32 numMon = SpeciesGrid_GetNumberCaughtMonsInList();
     u8 *dexString = Alloc(15);
+    u32 denominator = SpeciesGrid_CalculateCaughtDenominator();
     ConvertIntToDecimalStringN(gStringVar1,numMon,STR_CONV_MODE_LEFT_ALIGN,CountDigits(numMon));
-    ConvertIntToDecimalStringN(gStringVar2,RESIDO_DEX_COUNT_NO_FORMS,STR_CONV_MODE_LEFT_ALIGN,CountDigits(RESIDO_DEX_COUNT_NO_FORMS));
+    ConvertIntToDecimalStringN(gStringVar2,denominator,STR_CONV_MODE_LEFT_ALIGN,CountDigits(denominator));
 
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Caught {STR_VAR_1}/{STR_VAR_2}"));
     StringCopy(dexString, gStringVar4);

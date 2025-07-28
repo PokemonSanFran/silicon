@@ -27,6 +27,7 @@
 #include "config/save.h"
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
+#include "constants/ui_adventure_guide.h" // adventureGuide
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -284,6 +285,7 @@ struct SaveBlock3
     u8 startMenuAppIndex[NUM_TOTAL_APPS];
     u16 prestoBuyAgainItem[MAX_PRESTO_BUY_AGAIN_ITEMS];
     u16 lastUsedBall;
+    bool8 hasSeenGuide[NUM_GUIDES];
     u8 customizationValues[NUM_CUSTOMIZATION_PARTS];
     u8 rgbValues[NUM_CUSTOM_COLOR_OPTIONS][NUM_COLOR_OPTIONS];
     u8 playerSubjectPronoun[PLAYER_NAME_LENGTH + 1];
@@ -1148,7 +1150,7 @@ struct SaveBlock1
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x498*/ struct ItemSlot pcItems[1]; // siliconMerge
+    /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
     /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
@@ -1156,7 +1158,7 @@ struct SaveBlock1
     u8 bagPocket_TMHMOwnedFlags[NUM_TM_BYTES]; //allow for an amount of TMs/HMs dictated by the BAG_TMHM_COUNT constant // PSF technicalmachine Branch
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    struct Coords16 savedPos;
+    struct Coords16 savedPos; // siliconMerge
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
     /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
@@ -1240,9 +1242,9 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
-    /*0x3???*/ struct Pokemon stolenTrade;
+    /*0x3???*/ struct Pokemon stolenTrade; // siliconMerge
     // sizeof: 0x3???
-    /*0x??*/   struct Pokemon playerPartyBattleFrontier[PARTY_SIZE];
+    /*0x??*/   struct Pokemon playerPartyBattleFrontier[PARTY_SIZE]; // siliconMerge
 };
 
 extern struct SaveBlock1 *gSaveBlock1Ptr;

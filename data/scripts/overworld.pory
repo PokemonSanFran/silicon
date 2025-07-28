@@ -2,3 +2,19 @@ script Generic_Mappreview
 {
     mappreview
 }
+
+script RunAdventureGuideScript
+{
+    callnative(Script_shouldSkipGuide)
+
+    if (var(VAR_RESULT) == TRUE)
+    {
+        setvar(VAR_ADVENTURE_GUIDE_TO_OPEN,NUM_GUIDES)
+    }
+    else
+    {
+        callnative(OpenAdventureGuideFromScript)
+        waitstate
+    }
+}
+
