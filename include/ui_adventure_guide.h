@@ -14,7 +14,7 @@ struct AdventureGuideData
 {
     const u8 *title;
     const u8 *description[MAX_GUIDE_PAGES];
-    bool8 isAdvancedGuide;
+    u8 isAdvancedGuide:2;
 };
 
 #endif // GUARD_UI_ADVENTURE_GUIDE_H

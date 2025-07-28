@@ -118,4 +118,11 @@ enum AdventureWindows
 #define MAX_CURSOR_NUM_X 2
 #define MAX_CURSOR_NUM_Y 8
 
+enum AdvancedGuideStatus
+{
+    ADVENTURE_GUIDE_NONE,
+    ADVENTURE_GUIDE_BASIC,
+    ADVENTURE_GUIDE_ADVANCED,
+};
+
 #endif //GUARD_ADVENTURE_GUIDES_H

@@ -79,15 +79,18 @@ static void FillBgWithTile(u32 bg, const void *src);
 static void LoadTilesToBg(u32 backgroundId);
 static void AdventureGuide_PrintGuideText(void);
 static void AdventureGuide_PrintWindowTitle(u32 optionNum);
+static bool32 AdventureGuide_IsPopulated(enum AdventureGuideList guide);
 static void AdventureGuide_PrintDescription(u32 optionNum);
 static void AdventureGuide_PrintCursor(void);
 static void AdventureGuide_PrintGuideList(void);
+static const u8* AdventureGuide_GetGuideTitle(enum AdventureGuideList guide);
 static void AdventureGuide_PrintHelpbar(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static bool32 AdventureGuide_GetSingleGuideMode(void);
 static void AdventureGuide_LeaveAdventureGuide(u8 taskId);
 static void AdventureGuide_HandleMainMenuInput(u8 taskId, u32 optionNum);
+static void AdventureGuide_HandleOnlyPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleFirstPageInput(u8 taskId, u32 optionNum);
 static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum);
@@ -327,10 +330,15 @@ static void SpriteCallback_AdventureGuide_LeftArrow(struct Sprite *sprite)
     u8 val = sprite->data[0];
     sprite->x2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
+    u32 numberPages = AdventureGuide_GetNumberPages();
 
     if(sMenuDataPtr->windowInfoNum != 0 && (sMenuDataPtr->singleGuideMode || sMenuDataPtr->isWindowOpen))
         sprite->invisible = FALSE;
     else
+        sprite->invisible = TRUE;
+
+
+    if (numberPages == 1)
         sprite->invisible = TRUE;
 }
 
@@ -339,10 +347,14 @@ static void SpriteCallback_AdventureGuide_RightArrow(struct Sprite *sprite)
     u8 val = sprite->data[0] + 128;
     sprite->x2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
+    u32 numberPages = AdventureGuide_GetNumberPages();
 
-    if(sMenuDataPtr->windowInfoNum < AdventureGuide_GetNumberPages() - 1 && (sMenuDataPtr->singleGuideMode || sMenuDataPtr->isWindowOpen))
+    if(sMenuDataPtr->windowInfoNum < numberPages - 1 && (sMenuDataPtr->singleGuideMode || sMenuDataPtr->isWindowOpen))
         sprite->invisible = FALSE;
     else
+        sprite->invisible = TRUE;
+
+    if (numberPages == 1)
         sprite->invisible = TRUE;
 }
 
@@ -693,6 +705,11 @@ static void AdventureGuide_PrintGuideText(void)
     }
 }
 
+static bool32 AdventureGuide_IsPopulated(enum AdventureGuideList guide)
+{
+    return (AdventureGuideInfo[guide].isAdvancedGuide > 0);
+}
+
 static void AdventureGuide_PrintWindowTitle(u32 optionNum)
 {
     u32 x = 4;
@@ -709,14 +726,7 @@ static void AdventureGuide_PrintWindowTitle(u32 optionNum)
     ConvertIntToDecimalStringN(gStringVar2, finalPageNumber, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(finalPageNumber));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING(" ({STR_VAR_1}/{STR_VAR_2})"));
 
-    if (AdventureGuideInfo[optionNum].title[0] == '\0')
-    {
-        StringCopy(gStringVar2,COMPOUND_STRING("Example Title"));
-    }
-    else
-    {
-        StringCopy(gStringVar2,AdventureGuideInfo[optionNum].title);
-    }
+    StringCopy(gStringVar2,AdventureGuide_GetGuideTitle(optionNum));
 
     u8* end = StringAppend(gStringVar2,gStringVar4);
     PrependFontIdToFit(gStringVar2, end, font, ADVENTURE_GUIDE_INFO_WIDTH);
@@ -734,8 +744,7 @@ static void AdventureGuide_PrintDescription(u32 optionNum)
     u8 *end;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    if (AdventureGuideInfo[optionNum].description[0] &&
-        AdventureGuideInfo[optionNum].description[0][0] != '\0')
+    if (AdventureGuide_IsPopulated(optionNum) == FALSE)
     {
         end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("Example Description"));
     }
@@ -759,6 +768,24 @@ static void AdventureGuide_PrintCursor(void)
     BlitBitmapToWindow(windowId, sCursor, x, y,  120, 16);
 }
 
+static const u8 sText_Unknown[]          = _("???");
+static const u8 sText_Example[]          = _("Example Title");
+
+static const u8* AdventureGuide_GetGuideTitle(enum AdventureGuideList guide)
+{
+    bool32 unlocked = gSaveBlock3Ptr->hasSeenGuide[guide] == TRUE;
+    bool32 populated = AdventureGuide_IsPopulated(guide);
+
+    if ((unlocked == TRUE) && (populated == TRUE))
+        return AdventureGuideInfo[guide].title;
+    else if (unlocked == FALSE)
+        return sText_Unknown;
+    else if (populated == FALSE)
+        return sText_Example;
+    else
+        return sText_Unknown;
+}
+
 static void AdventureGuide_PrintGuideList(void)
 {
     u32 font = FONT_NORMAL;
@@ -779,9 +806,7 @@ static void AdventureGuide_PrintGuideList(void)
         u32 x = (((i % MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 15) * 8) + 4;
         u32 y = 1 + ((i / MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 16);
         u32 j = i + (sMenuDataPtr->yFirstItem * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW);
-        const u8 *str = (gSaveBlock3Ptr->hasSeenGuide[j] == TRUE) ? AdventureGuideInfo[j].title : COMPOUND_STRING("???");
-
-        AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, str);
+        AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, AdventureGuide_GetGuideTitle(j));
     }
 
     PutWindowTilemap(windowId);
@@ -801,6 +826,7 @@ static void AdventureGuide_PrintHelpbar(void)
     bool32 isMainMenu = (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode);
     bool32 isLastPage = ((currentPageNumber / finalPageNumber) == 1);
     bool32 isFirstPage = ((finalPageNumber != 1) && ((currentPageNumber == 1)));
+    bool32 isOnlyPage = (finalPageNumber == 1);
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -808,13 +834,17 @@ static void AdventureGuide_PrintHelpbar(void)
     {
         StringCopy(gStringVar1,COMPOUND_STRING("{A_BUTTON} View Guide {B_BUTTON} Return"));
     }
-    else if (isLastPage)
+    else if (isLastPage && !isOnlyPage)
     {
         StringCopy(gStringVar1,COMPOUND_STRING("{B_BUTTON} Previous Page {START_BUTTON} Return"));
     }
-    else if (isFirstPage)
+    else if (isFirstPage && !isOnlyPage)
     {
         StringCopy(gStringVar1,COMPOUND_STRING("{A_BUTTON} Next Page {START_BUTTON} Return"));
+    }
+    if (isOnlyPage)
+    {
+        StringCopy(gStringVar1,COMPOUND_STRING("{START_BUTTON} Return"));
     }
     else
     {
@@ -842,7 +872,7 @@ bool8 shouldSkipGuide(u8 guideNum){
         switch(gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_SKIP_GUIDES]){
             case GAME_OPTION_GUIDE_SKIP_GENERAL:
                 //Skip general guides only
-                if(!AdventureGuideInfo[guideNum].isAdvancedGuide)
+                if(AdventureGuideInfo[guideNum].isAdvancedGuide != ADVENTURE_GUIDE_ADVANCED)
                     return TRUE;
                 break;
             case GAME_OPTION_GUIDE_SKIP_ALL:
@@ -943,11 +973,22 @@ static u8 AdventureGuide_GetNumberPages(void)
     u32 optionNum = sMenuDataPtr->cursorNumY * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW + sMenuDataPtr->cursorNumX;
     u32 numPages = 0;
 
-    for (numPages = 0; numPages < MAX_GUIDE_PAGES; numPages++)
-        if (AdventureGuideInfo[optionNum].description[numPages][0] == '\0')
-            break;
+    if (optionNum >= ARRAY_COUNT(AdventureGuideInfo))
+        return 1;
 
-    return (numPages < 1) ? 1 : numPages;
+    if (AdventureGuide_IsPopulated(optionNum) == FALSE)
+        return 1;
+
+    for (numPages = 0; numPages < MAX_GUIDE_PAGES; numPages++)
+    {
+        if (AdventureGuideInfo[optionNum].description[numPages] == NULL ||
+                AdventureGuideInfo[optionNum].description[numPages][0] == '\0')
+        {
+            break;
+        }
+    }
+
+    return (numPages == 0) ? 1 : numPages;
 }
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
@@ -960,15 +1001,32 @@ static void Task_MenuMain(u8 taskId)
     bool32 isMainMenu = (!sMenuDataPtr->isWindowOpen && !sMenuDataPtr->singleGuideMode);
     bool32 isLastPage = ((currentPageNumber / finalPageNumber) == 1);
     bool32 isFirstPage = ((finalPageNumber != 1) && ((currentPageNumber == 1)));
+    bool32 isOnlyPage = (finalPageNumber == 1);
 
     if (isMainMenu)
+    {
         AdventureGuide_HandleMainMenuInput(taskId, optionNum);
-    else if (isLastPage)
+    }
+    else if (isLastPage && !isOnlyPage)
+    {
         AdventureGuide_HandleLastPageInput(taskId, optionNum);
-    else if (isFirstPage)
+        return;
+    }
+    else if (isFirstPage && !isOnlyPage)
+    {
         AdventureGuide_HandleFirstPageInput(taskId, optionNum);
+        return;
+    }
+    else if (isOnlyPage)
+    {
+        AdventureGuide_HandleOnlyPageInput(taskId, optionNum);
+        return;
+    }
     else
+    {
         AdventureGuide_HandleAnyPageInput(taskId, optionNum);
+        return;
+    }
 }
 
 static bool32 AdventureGuide_GetSingleGuideMode(void)
@@ -1072,6 +1130,17 @@ static void AdventureGuide_DecrementGuidePage(void)
 {
     sMenuDataPtr->windowInfoNum--;
     AdventureGuide_PrintGuideText();
+}
+
+static void AdventureGuide_HandleOnlyPageInput(u8 taskId, u32 optionNum)
+{
+    if (JOY_NEW(A_BUTTON) || (JOY_NEW(DPAD_RIGHT)) || (JOY_NEW(START_BUTTON)) || (JOY_NEW(B_BUTTON)) || (JOY_NEW(DPAD_LEFT)))
+    {
+        if (AdventureGuide_GetSingleGuideMode())
+            AdventureGuide_LeaveAdventureGuide(taskId);
+        else
+            AdventureGuide_LeaveGuideReturnToMenu();
+    }
 }
 
 static void AdventureGuide_HandleLastPageInput(u8 taskId, u32 optionNum)
