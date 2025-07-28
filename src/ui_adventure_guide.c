@@ -1198,3 +1198,4 @@ static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
 // Insert them into the game
 // Write text for all adventure guides
 // Test all the different kinds
+// meta/docs/adventure_guide.md

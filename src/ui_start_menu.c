@@ -1410,8 +1410,7 @@ void Task_OpenPokenavStartMenu(u8 taskId)
     {
 		PlayRainStoppingSoundEffect();
 		CleanupOverworldWindowsAndTilemaps();
-        CreateTask(Task_OpenAdventureGuideFromStartMenu,0);
-        //CreateTask(Task_OpenMapSystemFromStartMenu, 0);
+        CreateTask(Task_OpenMapSystemFromStartMenu, 0);
     }
 }
 

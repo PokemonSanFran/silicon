@@ -516,8 +516,10 @@ void Pokedex_SetupCallback(void)
             SpeciesGrid_PrintGrid();
             SpeciesGrid_SetCurrentSpeciesFromCursorPosition();
             if (firstOpen)
+            {
                 PlaySE(SE_PC_LOGIN);
-            IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
+                IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
+            }
             gMain.state++;
             break;
         case 7:
