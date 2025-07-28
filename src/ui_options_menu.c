@@ -772,6 +772,7 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [GAME_OPTIONS_PUZZLES]           = GAME_OPTION_PUZZLES_ON,
             [GAME_OPTIONS_ITEM_SORT]         = 2,
             [GAME_OPTIONS_CUTSCENE]          = GAME_OPTION_CUTSCENE_PLAY,
+            [GAME_OPTIONS_SKIP_GUIDES]       = GAME_OPTION_GUIDE_SKIP_OFF,
         },
         [GAME_PRESET_SPEEDRUN] = {
             [GAME_OPTIONS_PRESET]            = GAME_PRESET_SPEEDRUN,
@@ -782,6 +783,7 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [GAME_OPTIONS_PUZZLES]           = GAME_OPTION_PUZZLES_ON,
             [GAME_OPTIONS_ITEM_SORT]         = 4,
             [GAME_OPTIONS_CUTSCENE]          = GAME_OPTION_CUTSCENE_SKIP,
+            [GAME_OPTIONS_SKIP_GUIDES]       = GAME_OPTION_GUIDE_SKIP_ALL,
         }
     },
     [BATTLE_SETTINGS] =
@@ -1455,7 +1457,22 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             //COMPOUND_STRING("During every story related scene,the player can hold {START_BUTTON} to automaticlaly skip the cutscene."),
             COMPOUND_STRING("Every story related scene without gameplay is automatically skipped."),
             },
-        .numOptions = 2,
+        .numOptions = GAME_OPTION_CUTSCENE_COUNT,
+    },
+    [GAME_OPTIONS_SKIP_GUIDES] =
+    {
+        .title = COMPOUND_STRING("Adventure Guides"),
+        .options = {
+            COMPOUND_STRING("Skip None"),
+            COMPOUND_STRING("Skip General"),
+            COMPOUND_STRING("Skip All"),
+        },
+        .optionDescription = {
+            COMPOUND_STRING("The game will instruct and inform players about all systems and mechanics."),
+            COMPOUND_STRING("The game will instruct and inform players about all mechanics and additions that are new to Pokémon Silicon."),
+            COMPOUND_STRING("The game will not instruct players about any game mehanics."),
+        },
+        .numOptions = GAME_OPTION_GUIDE_SKIP_COUNT,
     },
 };
 
