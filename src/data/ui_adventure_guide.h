@@ -1,4 +1,4 @@
-const struct AdventureGuideData AdventureGuideInfo[NUM_GUIDES] =
+const struct AdventureGuideData AdventureGuideInfo[] =
 {
     [GUIDE_ADVENTURE_GUIDE] =
     {
