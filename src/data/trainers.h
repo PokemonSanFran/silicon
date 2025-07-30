@@ -9210,7 +9210,7 @@
         },
     },
 #line 3943
-    [DIFFICULTY_NORMAL][TRAINER_DUSTY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_031A849F] =
     {
 #line 3944
         .trainerName = _("Blank"),
@@ -9225,7 +9225,7 @@
         {
             {
 #line 3948
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 3950
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9237,7 +9237,7 @@
         },
     },
 #line 3951
-    [DIFFICULTY_NORMAL][TRAINER_DUSTY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_032E8AC9] =
     {
 #line 3952
         .trainerName = _("Blank"),
@@ -9252,7 +9252,7 @@
         {
             {
 #line 3956
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 3958
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9264,7 +9264,7 @@
         },
     },
 #line 3959
-    [DIFFICULTY_NORMAL][TRAINER_GABBY_AND_TY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_0389363C] =
     {
 #line 3960
         .trainerName = _("Blank"),
@@ -9279,7 +9279,7 @@
         {
             {
 #line 3964
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 3966
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9291,7 +9291,7 @@
         },
     },
 #line 3967
-    [DIFFICULTY_NORMAL][TRAINER_GABBY_AND_TY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_040CEA33] =
     {
 #line 3968
         .trainerName = _("Blank"),
@@ -9306,7 +9306,7 @@
         {
             {
 #line 3972
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 3974
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9318,7 +9318,7 @@
         },
     },
 #line 3975
-    [DIFFICULTY_NORMAL][TRAINER_GABBY_AND_TY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_041FD20E] =
     {
 #line 3976
         .trainerName = _("Blank"),
@@ -9333,7 +9333,7 @@
         {
             {
 #line 3980
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 3982
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9345,7 +9345,7 @@
         },
     },
 #line 3983
-    [DIFFICULTY_NORMAL][TRAINER_GABBY_AND_TY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_045FDD44] =
     {
 #line 3984
         .trainerName = _("Blank"),
@@ -9360,7 +9360,7 @@
         {
             {
 #line 3988
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 3990
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9372,7 +9372,7 @@
         },
     },
 #line 3991
-    [DIFFICULTY_NORMAL][TRAINER_GABBY_AND_TY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_0465BF77] =
     {
 #line 3992
         .trainerName = _("Blank"),
@@ -9387,7 +9387,7 @@
         {
             {
 #line 3996
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 3998
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9399,7 +9399,7 @@
         },
     },
 #line 3999
-    [DIFFICULTY_NORMAL][TRAINER_GABBY_AND_TY_6] =
+    [DIFFICULTY_NORMAL][TRAINER_0467DF00] =
     {
 #line 4000
         .trainerName = _("Blank"),
@@ -9414,7 +9414,7 @@
         {
             {
 #line 4004
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4006
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9426,7 +9426,7 @@
         },
     },
 #line 4007
-    [DIFFICULTY_NORMAL][TRAINER_LOLA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_04687C53] =
     {
 #line 4008
         .trainerName = _("Blank"),
@@ -9441,7 +9441,7 @@
         {
             {
 #line 4012
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4014
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9453,7 +9453,7 @@
         },
     },
 #line 4015
-    [DIFFICULTY_NORMAL][TRAINER_AUSTINA] =
+    [DIFFICULTY_NORMAL][TRAINER_048D5D99] =
     {
 #line 4016
         .trainerName = _("Blank"),
@@ -9468,7 +9468,7 @@
         {
             {
 #line 4020
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4022
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9480,7 +9480,7 @@
         },
     },
 #line 4023
-    [DIFFICULTY_NORMAL][TRAINER_GWEN] =
+    [DIFFICULTY_NORMAL][TRAINER_04A59E40] =
     {
 #line 4024
         .trainerName = _("Blank"),
@@ -9495,7 +9495,7 @@
         {
             {
 #line 4028
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4030
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9507,7 +9507,7 @@
         },
     },
 #line 4031
-    [DIFFICULTY_NORMAL][TRAINER_LOLA_2] =
+    [DIFFICULTY_NORMAL][TRAINER_04E334E9] =
     {
 #line 4032
         .trainerName = _("Blank"),
@@ -9522,7 +9522,7 @@
         {
             {
 #line 4036
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4038
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9534,7 +9534,7 @@
         },
     },
 #line 4039
-    [DIFFICULTY_NORMAL][TRAINER_LOLA_3] =
+    [DIFFICULTY_NORMAL][TRAINER_05BDEABF] =
     {
 #line 4040
         .trainerName = _("Blank"),
@@ -9549,7 +9549,7 @@
         {
             {
 #line 4044
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4046
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9561,7 +9561,7 @@
         },
     },
 #line 4047
-    [DIFFICULTY_NORMAL][TRAINER_LOLA_4] =
+    [DIFFICULTY_NORMAL][TRAINER_06400A0C] =
     {
 #line 4048
         .trainerName = _("Blank"),
@@ -9576,7 +9576,7 @@
         {
             {
 #line 4052
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4054
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9588,7 +9588,7 @@
         },
     },
 #line 4055
-    [DIFFICULTY_NORMAL][TRAINER_LOLA_5] =
+    [DIFFICULTY_NORMAL][TRAINER_068B06CE] =
     {
 #line 4056
         .trainerName = _("Blank"),
@@ -9603,7 +9603,7 @@
         {
             {
 #line 4060
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4062
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9615,7 +9615,7 @@
         },
     },
 #line 4063
-    [DIFFICULTY_NORMAL][TRAINER_RICKY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_06BE2D1B] =
     {
 #line 4064
         .trainerName = _("Blank"),
@@ -9630,7 +9630,7 @@
         {
             {
 #line 4068
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4070
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9642,7 +9642,7 @@
         },
     },
 #line 4071
-    [DIFFICULTY_NORMAL][TRAINER_SIMON] =
+    [DIFFICULTY_NORMAL][TRAINER_06C68007] =
     {
 #line 4072
         .trainerName = _("Blank"),
@@ -9657,7 +9657,7 @@
         {
             {
 #line 4076
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4078
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9669,7 +9669,7 @@
         },
     },
 #line 4079
-    [DIFFICULTY_NORMAL][TRAINER_CHARLIE] =
+    [DIFFICULTY_NORMAL][TRAINER_06D2BD08] =
     {
 #line 4080
         .trainerName = _("Blank"),
@@ -9684,7 +9684,7 @@
         {
             {
 #line 4084
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4086
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9696,7 +9696,7 @@
         },
     },
 #line 4087
-    [DIFFICULTY_NORMAL][TRAINER_RICKY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_070F6125] =
     {
 #line 4088
         .trainerName = _("Blank"),
@@ -9711,7 +9711,7 @@
         {
             {
 #line 4092
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4094
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9723,7 +9723,7 @@
         },
     },
 #line 4095
-    [DIFFICULTY_NORMAL][TRAINER_RICKY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_07D063A5] =
     {
 #line 4096
         .trainerName = _("Blank"),
@@ -9738,7 +9738,7 @@
         {
             {
 #line 4100
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4102
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9750,7 +9750,7 @@
         },
     },
 #line 4103
-    [DIFFICULTY_NORMAL][TRAINER_RICKY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_09AEC824] =
     {
 #line 4104
         .trainerName = _("Blank"),
@@ -9765,7 +9765,7 @@
         {
             {
 #line 4108
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4110
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9777,7 +9777,7 @@
         },
     },
 #line 4111
-    [DIFFICULTY_NORMAL][TRAINER_RICKY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_09B7B6C8] =
     {
 #line 4112
         .trainerName = _("Blank"),
@@ -9792,7 +9792,7 @@
         {
             {
 #line 4116
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4118
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9804,7 +9804,7 @@
         },
     },
 #line 4119
-    [DIFFICULTY_NORMAL][TRAINER_RANDALL] =
+    [DIFFICULTY_NORMAL][TRAINER_0A542D33] =
     {
 #line 4120
         .trainerName = _("Blank"),
@@ -9819,7 +9819,7 @@
         {
             {
 #line 4124
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4126
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9831,7 +9831,7 @@
         },
     },
 #line 4127
-    [DIFFICULTY_NORMAL][TRAINER_PARKER] =
+    [DIFFICULTY_NORMAL][TRAINER_0A8B9F88] =
     {
 #line 4128
         .trainerName = _("Blank"),
@@ -9846,7 +9846,7 @@
         {
             {
 #line 4132
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4134
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9858,7 +9858,7 @@
         },
     },
 #line 4135
-    [DIFFICULTY_NORMAL][TRAINER_GEORGE] =
+    [DIFFICULTY_NORMAL][TRAINER_0A8FC005] =
     {
 #line 4136
         .trainerName = _("Blank"),
@@ -9873,7 +9873,7 @@
         {
             {
 #line 4140
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4142
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9885,7 +9885,7 @@
         },
     },
 #line 4143
-    [DIFFICULTY_NORMAL][TRAINER_BERKE] =
+    [DIFFICULTY_NORMAL][TRAINER_0AAB38A6] =
     {
 #line 4144
         .trainerName = _("Blank"),
@@ -9900,7 +9900,7 @@
         {
             {
 #line 4148
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4150
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9912,7 +9912,7 @@
         },
     },
 #line 4151
-    [DIFFICULTY_NORMAL][TRAINER_BRAXTON] =
+    [DIFFICULTY_NORMAL][TRAINER_0AF40D0B] =
     {
 #line 4152
         .trainerName = _("Blank"),
@@ -9927,7 +9927,7 @@
         {
             {
 #line 4156
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4158
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9939,7 +9939,7 @@
         },
     },
 #line 4159
-    [DIFFICULTY_NORMAL][TRAINER_VINCENT] =
+    [DIFFICULTY_NORMAL][TRAINER_0B48C7D0] =
     {
 #line 4160
         .trainerName = _("Blank"),
@@ -9954,7 +9954,7 @@
         {
             {
 #line 4164
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4166
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9966,7 +9966,7 @@
         },
     },
 #line 4167
-    [DIFFICULTY_NORMAL][TRAINER_LEROY] =
+    [DIFFICULTY_NORMAL][TRAINER_0C0A9B2F] =
     {
 #line 4168
         .trainerName = _("Blank"),
@@ -9981,7 +9981,7 @@
         {
             {
 #line 4172
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4174
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -9993,7 +9993,7 @@
         },
     },
 #line 4175
-    [DIFFICULTY_NORMAL][TRAINER_WILTON_1] =
+    [DIFFICULTY_NORMAL][TRAINER_0C543C80] =
     {
 #line 4176
         .trainerName = _("Blank"),
@@ -10008,7 +10008,7 @@
         {
             {
 #line 4180
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4182
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10020,7 +10020,7 @@
         },
     },
 #line 4183
-    [DIFFICULTY_NORMAL][TRAINER_EDGAR] =
+    [DIFFICULTY_NORMAL][TRAINER_0C95C833] =
     {
 #line 4184
         .trainerName = _("Blank"),
@@ -10035,7 +10035,7 @@
         {
             {
 #line 4188
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4190
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10047,7 +10047,7 @@
         },
     },
 #line 4191
-    [DIFFICULTY_NORMAL][TRAINER_ALBERT] =
+    [DIFFICULTY_NORMAL][TRAINER_0D416B2C] =
     {
 #line 4192
         .trainerName = _("Blank"),
@@ -10062,7 +10062,7 @@
         {
             {
 #line 4196
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4198
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10074,7 +10074,7 @@
         },
     },
 #line 4199
-    [DIFFICULTY_NORMAL][TRAINER_SAMUEL] =
+    [DIFFICULTY_NORMAL][TRAINER_0D4BA0F1] =
     {
 #line 4200
         .trainerName = _("Blank"),
@@ -10089,7 +10089,7 @@
         {
             {
 #line 4204
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4206
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10101,7 +10101,7 @@
         },
     },
 #line 4207
-    [DIFFICULTY_NORMAL][TRAINER_VITO] =
+    [DIFFICULTY_NORMAL][TRAINER_0DA021EF] =
     {
 #line 4208
         .trainerName = _("Blank"),
@@ -10116,7 +10116,7 @@
         {
             {
 #line 4212
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4214
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10128,7 +10128,7 @@
         },
     },
 #line 4215
-    [DIFFICULTY_NORMAL][TRAINER_OWEN] =
+    [DIFFICULTY_NORMAL][TRAINER_0E19F1A8] =
     {
 #line 4216
         .trainerName = _("Blank"),
@@ -10143,7 +10143,7 @@
         {
             {
 #line 4220
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4222
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10155,7 +10155,7 @@
         },
     },
 #line 4223
-    [DIFFICULTY_NORMAL][TRAINER_WILTON_2] =
+    [DIFFICULTY_NORMAL][TRAINER_0E42221A] =
     {
 #line 4224
         .trainerName = _("Blank"),
@@ -10170,7 +10170,7 @@
         {
             {
 #line 4228
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4230
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10182,7 +10182,7 @@
         },
     },
 #line 4231
-    [DIFFICULTY_NORMAL][TRAINER_WILTON_3] =
+    [DIFFICULTY_NORMAL][TRAINER_0ED24EF1] =
     {
 #line 4232
         .trainerName = _("Blank"),
@@ -10197,7 +10197,7 @@
         {
             {
 #line 4236
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4238
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10209,7 +10209,7 @@
         },
     },
 #line 4239
-    [DIFFICULTY_NORMAL][TRAINER_WILTON_4] =
+    [DIFFICULTY_NORMAL][TRAINER_0F03CF8D] =
     {
 #line 4240
         .trainerName = _("Blank"),
@@ -10224,7 +10224,7 @@
         {
             {
 #line 4244
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4246
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10236,7 +10236,7 @@
         },
     },
 #line 4247
-    [DIFFICULTY_NORMAL][TRAINER_WILTON_5] =
+    [DIFFICULTY_NORMAL][TRAINER_0F3D8011] =
     {
 #line 4248
         .trainerName = _("Blank"),
@@ -10251,7 +10251,7 @@
         {
             {
 #line 4252
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4254
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10263,7 +10263,7 @@
         },
     },
 #line 4255
-    [DIFFICULTY_NORMAL][TRAINER_WARREN] =
+    [DIFFICULTY_NORMAL][TRAINER_0F3DB5D8] =
     {
 #line 4256
         .trainerName = _("Blank"),
@@ -10278,7 +10278,7 @@
         {
             {
 #line 4260
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4262
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10290,7 +10290,7 @@
         },
     },
 #line 4263
-    [DIFFICULTY_NORMAL][TRAINER_MARY] =
+    [DIFFICULTY_NORMAL][TRAINER_0F5F82C3] =
     {
 #line 4264
         .trainerName = _("Blank"),
@@ -10305,7 +10305,7 @@
         {
             {
 #line 4268
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4270
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10317,7 +10317,7 @@
         },
     },
 #line 4271
-    [DIFFICULTY_NORMAL][TRAINER_ALEXIA] =
+    [DIFFICULTY_NORMAL][TRAINER_0FFBCCB9] =
     {
 #line 4272
         .trainerName = _("Blank"),
@@ -10332,7 +10332,7 @@
         {
             {
 #line 4276
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4278
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10344,7 +10344,7 @@
         },
     },
 #line 4279
-    [DIFFICULTY_NORMAL][TRAINER_JODY] =
+    [DIFFICULTY_NORMAL][TRAINER_1075163A] =
     {
 #line 4280
         .trainerName = _("Blank"),
@@ -10359,7 +10359,7 @@
         {
             {
 #line 4284
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4286
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10371,7 +10371,7 @@
         },
     },
 #line 4287
-    [DIFFICULTY_NORMAL][TRAINER_WENDY] =
+    [DIFFICULTY_NORMAL][TRAINER_10751EAA] =
     {
 #line 4288
         .trainerName = _("Blank"),
@@ -10386,7 +10386,7 @@
         {
             {
 #line 4292
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4294
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10398,7 +10398,7 @@
         },
     },
 #line 4295
-    [DIFFICULTY_NORMAL][TRAINER_KEIRA] =
+    [DIFFICULTY_NORMAL][TRAINER_10E3552B] =
     {
 #line 4296
         .trainerName = _("Blank"),
@@ -10413,7 +10413,7 @@
         {
             {
 #line 4300
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4302
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10425,7 +10425,7 @@
         },
     },
 #line 4303
-    [DIFFICULTY_NORMAL][TRAINER_BROOKE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_1114BC23] =
     {
 #line 4304
         .trainerName = _("Blank"),
@@ -10440,7 +10440,7 @@
         {
             {
 #line 4308
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4310
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10452,7 +10452,7 @@
         },
     },
 #line 4311
-    [DIFFICULTY_NORMAL][TRAINER_JENNIFER] =
+    [DIFFICULTY_NORMAL][TRAINER_114EB3AD] =
     {
 #line 4312
         .trainerName = _("Blank"),
@@ -10467,7 +10467,7 @@
         {
             {
 #line 4316
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4318
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10479,7 +10479,7 @@
         },
     },
 #line 4319
-    [DIFFICULTY_NORMAL][TRAINER_HOPE] =
+    [DIFFICULTY_NORMAL][TRAINER_11EDE0DC] =
     {
 #line 4320
         .trainerName = _("Blank"),
@@ -10494,7 +10494,7 @@
         {
             {
 #line 4324
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4326
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10506,7 +10506,7 @@
         },
     },
 #line 4327
-    [DIFFICULTY_NORMAL][TRAINER_SHANNON] =
+    [DIFFICULTY_NORMAL][TRAINER_120A20F6] =
     {
 #line 4328
         .trainerName = _("Blank"),
@@ -10521,7 +10521,7 @@
         {
             {
 #line 4332
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4334
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10533,7 +10533,7 @@
         },
     },
 #line 4335
-    [DIFFICULTY_NORMAL][TRAINER_MICHELLE] =
+    [DIFFICULTY_NORMAL][TRAINER_13113EC0] =
     {
 #line 4336
         .trainerName = _("Blank"),
@@ -10548,7 +10548,7 @@
         {
             {
 #line 4340
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4342
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10560,7 +10560,7 @@
         },
     },
 #line 4343
-    [DIFFICULTY_NORMAL][TRAINER_CAROLINE] =
+    [DIFFICULTY_NORMAL][TRAINER_1387ABBC] =
     {
 #line 4344
         .trainerName = _("Blank"),
@@ -10575,7 +10575,7 @@
         {
             {
 #line 4348
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4350
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10587,7 +10587,7 @@
         },
     },
 #line 4351
-    [DIFFICULTY_NORMAL][TRAINER_JULIE] =
+    [DIFFICULTY_NORMAL][TRAINER_148A3C6B] =
     {
 #line 4352
         .trainerName = _("Blank"),
@@ -10602,7 +10602,7 @@
         {
             {
 #line 4356
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4358
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10614,7 +10614,7 @@
         },
     },
 #line 4359
-    [DIFFICULTY_NORMAL][TRAINER_BROOKE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_14C5EE6C] =
     {
 #line 4360
         .trainerName = _("Blank"),
@@ -10629,7 +10629,7 @@
         {
             {
 #line 4364
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4366
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10641,7 +10641,7 @@
         },
     },
 #line 4367
-    [DIFFICULTY_NORMAL][TRAINER_BROOKE_3] =
+    [DIFFICULTY_NORMAL][TRAINER_1508BB71] =
     {
 #line 4368
         .trainerName = _("Blank"),
@@ -10656,7 +10656,7 @@
         {
             {
 #line 4372
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4374
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10668,7 +10668,7 @@
         },
     },
 #line 4375
-    [DIFFICULTY_NORMAL][TRAINER_BROOKE_4] =
+    [DIFFICULTY_NORMAL][TRAINER_1510C80A] =
     {
 #line 4376
         .trainerName = _("Blank"),
@@ -10683,7 +10683,7 @@
         {
             {
 #line 4380
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4382
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10695,7 +10695,7 @@
         },
     },
 #line 4383
-    [DIFFICULTY_NORMAL][TRAINER_BROOKE_5] =
+    [DIFFICULTY_NORMAL][TRAINER_15598A38] =
     {
 #line 4384
         .trainerName = _("Blank"),
@@ -10710,7 +10710,7 @@
         {
             {
 #line 4388
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4390
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10722,7 +10722,7 @@
         },
     },
 #line 4391
-    [DIFFICULTY_NORMAL][TRAINER_PATRICIA] =
+    [DIFFICULTY_NORMAL][TRAINER_15A66566] =
     {
 #line 4392
         .trainerName = _("Blank"),
@@ -10737,7 +10737,7 @@
         {
             {
 #line 4396
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4398
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10749,7 +10749,7 @@
         },
     },
 #line 4399
-    [DIFFICULTY_NORMAL][TRAINER_KINDRA] =
+    [DIFFICULTY_NORMAL][TRAINER_15C87858] =
     {
 #line 4400
         .trainerName = _("Blank"),
@@ -10764,7 +10764,7 @@
         {
             {
 #line 4404
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4406
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10776,7 +10776,7 @@
         },
     },
 #line 4407
-    [DIFFICULTY_NORMAL][TRAINER_TAMMY] =
+    [DIFFICULTY_NORMAL][TRAINER_1648CE6E] =
     {
 #line 4408
         .trainerName = _("Blank"),
@@ -10791,7 +10791,7 @@
         {
             {
 #line 4412
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4414
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10803,7 +10803,7 @@
         },
     },
 #line 4415
-    [DIFFICULTY_NORMAL][TRAINER_VALERIE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_1710375D] =
     {
 #line 4416
         .trainerName = _("Blank"),
@@ -10818,7 +10818,7 @@
         {
             {
 #line 4420
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4422
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10830,7 +10830,7 @@
         },
     },
 #line 4423
-    [DIFFICULTY_NORMAL][TRAINER_TASHA] =
+    [DIFFICULTY_NORMAL][TRAINER_17DCC938] =
     {
 #line 4424
         .trainerName = _("Blank"),
@@ -10845,7 +10845,7 @@
         {
             {
 #line 4428
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4430
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10857,7 +10857,7 @@
         },
     },
 #line 4431
-    [DIFFICULTY_NORMAL][TRAINER_VALERIE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_188A6F20] =
     {
 #line 4432
         .trainerName = _("Blank"),
@@ -10872,7 +10872,7 @@
         {
             {
 #line 4436
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4438
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10884,7 +10884,7 @@
         },
     },
 #line 4439
-    [DIFFICULTY_NORMAL][TRAINER_VALERIE_3] =
+    [DIFFICULTY_NORMAL][TRAINER_1932C509] =
     {
 #line 4440
         .trainerName = _("Blank"),
@@ -10899,7 +10899,7 @@
         {
             {
 #line 4444
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4446
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10911,7 +10911,7 @@
         },
     },
 #line 4447
-    [DIFFICULTY_NORMAL][TRAINER_VALERIE_4] =
+    [DIFFICULTY_NORMAL][TRAINER_19477C78] =
     {
 #line 4448
         .trainerName = _("Blank"),
@@ -10926,7 +10926,7 @@
         {
             {
 #line 4452
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4454
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10938,7 +10938,7 @@
         },
     },
 #line 4455
-    [DIFFICULTY_NORMAL][TRAINER_VALERIE_5] =
+    [DIFFICULTY_NORMAL][TRAINER_19C5BAD7] =
     {
 #line 4456
         .trainerName = _("Blank"),
@@ -10953,7 +10953,7 @@
         {
             {
 #line 4460
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4462
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10965,7 +10965,7 @@
         },
     },
 #line 4463
-    [DIFFICULTY_NORMAL][TRAINER_CINDY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_19CD0726] =
     {
 #line 4464
         .trainerName = _("Blank"),
@@ -10980,7 +10980,7 @@
         {
             {
 #line 4468
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4470
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -10992,7 +10992,7 @@
         },
     },
 #line 4471
-    [DIFFICULTY_NORMAL][TRAINER_DAPHNE] =
+    [DIFFICULTY_NORMAL][TRAINER_19D7682B] =
     {
 #line 4472
         .trainerName = _("Blank"),
@@ -11007,7 +11007,7 @@
         {
             {
 #line 4476
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4478
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11019,7 +11019,7 @@
         },
     },
 #line 4479
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_SPACE_CENTER_2] =
+    [DIFFICULTY_NORMAL][TRAINER_1A2CA162] =
     {
 #line 4480
         .trainerName = _("Blank"),
@@ -11034,7 +11034,7 @@
         {
             {
 #line 4484
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4486
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11046,7 +11046,7 @@
         },
     },
 #line 4487
-    [DIFFICULTY_NORMAL][TRAINER_CINDY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_1A763631] =
     {
 #line 4488
         .trainerName = _("Blank"),
@@ -11061,7 +11061,7 @@
         {
             {
 #line 4492
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4494
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11073,7 +11073,7 @@
         },
     },
 #line 4495
-    [DIFFICULTY_NORMAL][TRAINER_BRIANNA] =
+    [DIFFICULTY_NORMAL][TRAINER_1AE5CAF7] =
     {
 #line 4496
         .trainerName = _("Blank"),
@@ -11088,7 +11088,7 @@
         {
             {
 #line 4500
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4502
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11100,7 +11100,7 @@
         },
     },
 #line 4503
-    [DIFFICULTY_NORMAL][TRAINER_NAOMI] =
+    [DIFFICULTY_NORMAL][TRAINER_1AE89BEB] =
     {
 #line 4504
         .trainerName = _("Blank"),
@@ -11115,7 +11115,7 @@
         {
             {
 #line 4508
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4510
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11127,7 +11127,7 @@
         },
     },
 #line 4511
-    [DIFFICULTY_NORMAL][TRAINER_CINDY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_1AEA3CEA] =
     {
 #line 4512
         .trainerName = _("Blank"),
@@ -11142,7 +11142,7 @@
         {
             {
 #line 4516
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4518
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11154,7 +11154,7 @@
         },
     },
 #line 4519
-    [DIFFICULTY_NORMAL][TRAINER_CINDY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_1B517ABD] =
     {
 #line 4520
         .trainerName = _("Blank"),
@@ -11169,7 +11169,7 @@
         {
             {
 #line 4524
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4526
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11181,7 +11181,7 @@
         },
     },
 #line 4527
-    [DIFFICULTY_NORMAL][TRAINER_CINDY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_1B616469] =
     {
 #line 4528
         .trainerName = _("Blank"),
@@ -11196,7 +11196,7 @@
         {
             {
 #line 4532
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4534
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11208,7 +11208,7 @@
         },
     },
 #line 4535
-    [DIFFICULTY_NORMAL][TRAINER_CINDY_6] =
+    [DIFFICULTY_NORMAL][TRAINER_1BA35D11] =
     {
 #line 4536
         .trainerName = _("Blank"),
@@ -11223,7 +11223,7 @@
         {
             {
 #line 4540
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4542
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11235,7 +11235,7 @@
         },
     },
 #line 4543
-    [DIFFICULTY_NORMAL][TRAINER_MELISSA] =
+    [DIFFICULTY_NORMAL][TRAINER_1BB1218F] =
     {
 #line 4544
         .trainerName = _("Blank"),
@@ -11250,7 +11250,7 @@
         {
             {
 #line 4548
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4550
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11262,7 +11262,7 @@
         },
     },
 #line 4551
-    [DIFFICULTY_NORMAL][TRAINER_SHEILA] =
+    [DIFFICULTY_NORMAL][TRAINER_1BC45966] =
     {
 #line 4552
         .trainerName = _("Blank"),
@@ -11277,7 +11277,7 @@
         {
             {
 #line 4556
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4558
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11289,7 +11289,7 @@
         },
     },
 #line 4559
-    [DIFFICULTY_NORMAL][TRAINER_SHIRLEY] =
+    [DIFFICULTY_NORMAL][TRAINER_1C2B088C] =
     {
 #line 4560
         .trainerName = _("Blank"),
@@ -11304,7 +11304,7 @@
         {
             {
 #line 4564
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4566
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11316,7 +11316,7 @@
         },
     },
 #line 4567
-    [DIFFICULTY_NORMAL][TRAINER_JESSICA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_1C6CA7F6] =
     {
 #line 4568
         .trainerName = _("Blank"),
@@ -11331,7 +11331,7 @@
         {
             {
 #line 4572
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4574
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11343,7 +11343,7 @@
         },
     },
 #line 4575
-    [DIFFICULTY_NORMAL][TRAINER_CONNIE] =
+    [DIFFICULTY_NORMAL][TRAINER_1CBE4FB1] =
     {
 #line 4576
         .trainerName = _("Blank"),
@@ -11358,7 +11358,7 @@
         {
             {
 #line 4580
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4582
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11370,7 +11370,7 @@
         },
     },
 #line 4583
-    [DIFFICULTY_NORMAL][TRAINER_BRIDGET] =
+    [DIFFICULTY_NORMAL][TRAINER_1CBFAF10] =
     {
 #line 4584
         .trainerName = _("Blank"),
@@ -11385,7 +11385,7 @@
         {
             {
 #line 4588
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4590
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11397,7 +11397,7 @@
         },
     },
 #line 4591
-    [DIFFICULTY_NORMAL][TRAINER_OLIVIA] =
+    [DIFFICULTY_NORMAL][TRAINER_1CC4D5D6] =
     {
 #line 4592
         .trainerName = _("Blank"),
@@ -11412,7 +11412,7 @@
         {
             {
 #line 4596
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4598
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11424,7 +11424,7 @@
         },
     },
 #line 4599
-    [DIFFICULTY_NORMAL][TRAINER_TIFFANY] =
+    [DIFFICULTY_NORMAL][TRAINER_1D63E5A1] =
     {
 #line 4600
         .trainerName = _("Blank"),
@@ -11439,7 +11439,7 @@
         {
             {
 #line 4604
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4606
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11451,7 +11451,7 @@
         },
     },
 #line 4607
-    [DIFFICULTY_NORMAL][TRAINER_JESSICA_2] =
+    [DIFFICULTY_NORMAL][TRAINER_1D7A6DED] =
     {
 #line 4608
         .trainerName = _("Blank"),
@@ -11466,7 +11466,7 @@
         {
             {
 #line 4612
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4614
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11478,7 +11478,7 @@
         },
     },
 #line 4615
-    [DIFFICULTY_NORMAL][TRAINER_JESSICA_3] =
+    [DIFFICULTY_NORMAL][TRAINER_1D93B10D] =
     {
 #line 4616
         .trainerName = _("Blank"),
@@ -11493,7 +11493,7 @@
         {
             {
 #line 4620
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4622
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11505,7 +11505,7 @@
         },
     },
 #line 4623
-    [DIFFICULTY_NORMAL][TRAINER_JESSICA_4] =
+    [DIFFICULTY_NORMAL][TRAINER_1DD07C78] =
     {
 #line 4624
         .trainerName = _("Blank"),
@@ -11520,7 +11520,7 @@
         {
             {
 #line 4628
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4630
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11532,7 +11532,7 @@
         },
     },
 #line 4631
-    [DIFFICULTY_NORMAL][TRAINER_JESSICA_5] =
+    [DIFFICULTY_NORMAL][TRAINER_1E5E6E80] =
     {
 #line 4632
         .trainerName = _("Blank"),
@@ -11547,7 +11547,7 @@
         {
             {
 #line 4636
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4638
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11559,7 +11559,7 @@
         },
     },
 #line 4639
-    [DIFFICULTY_NORMAL][TRAINER_WINSTON_1] =
+    [DIFFICULTY_NORMAL][TRAINER_1EE34E30] =
     {
 #line 4640
         .trainerName = _("Blank"),
@@ -11574,7 +11574,7 @@
         {
             {
 #line 4644
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4646
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11586,7 +11586,7 @@
         },
     },
 #line 4647
-    [DIFFICULTY_NORMAL][TRAINER_MOLLIE] =
+    [DIFFICULTY_NORMAL][TRAINER_1F24A6B1] =
     {
 #line 4648
         .trainerName = _("Blank"),
@@ -11601,7 +11601,7 @@
         {
             {
 #line 4652
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4654
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11613,7 +11613,7 @@
         },
     },
 #line 4655
-    [DIFFICULTY_NORMAL][TRAINER_GARRET] =
+    [DIFFICULTY_NORMAL][TRAINER_1F2A70D3] =
     {
 #line 4656
         .trainerName = _("Blank"),
@@ -11628,7 +11628,7 @@
         {
             {
 #line 4660
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4662
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11640,7 +11640,7 @@
         },
     },
 #line 4663
-    [DIFFICULTY_NORMAL][TRAINER_WINSTON_2] =
+    [DIFFICULTY_NORMAL][TRAINER_1FD08020] =
     {
 #line 4664
         .trainerName = _("Blank"),
@@ -11655,7 +11655,7 @@
         {
             {
 #line 4668
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4670
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11667,7 +11667,7 @@
         },
     },
 #line 4671
-    [DIFFICULTY_NORMAL][TRAINER_WINSTON_3] =
+    [DIFFICULTY_NORMAL][TRAINER_200650CA] =
     {
 #line 4672
         .trainerName = _("Blank"),
@@ -11682,7 +11682,7 @@
         {
             {
 #line 4676
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4678
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11694,7 +11694,7 @@
         },
     },
 #line 4679
-    [DIFFICULTY_NORMAL][TRAINER_WINSTON_4] =
+    [DIFFICULTY_NORMAL][TRAINER_20170FA5] =
     {
 #line 4680
         .trainerName = _("Blank"),
@@ -11709,7 +11709,7 @@
         {
             {
 #line 4684
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4686
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11721,7 +11721,7 @@
         },
     },
 #line 4687
-    [DIFFICULTY_NORMAL][TRAINER_WINSTON_5] =
+    [DIFFICULTY_NORMAL][TRAINER_20993B87] =
     {
 #line 4688
         .trainerName = _("Blank"),
@@ -11736,7 +11736,7 @@
         {
             {
 #line 4692
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4694
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11748,7 +11748,7 @@
         },
     },
 #line 4695
-    [DIFFICULTY_NORMAL][TRAINER_STEVE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_20A10A97] =
     {
 #line 4696
         .trainerName = _("Blank"),
@@ -11763,7 +11763,7 @@
         {
             {
 #line 4700
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4702
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11775,7 +11775,7 @@
         },
     },
 #line 4703
-    [DIFFICULTY_NORMAL][TRAINER_THALIA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_20A6F3A6] =
     {
 #line 4704
         .trainerName = _("Blank"),
@@ -11790,7 +11790,7 @@
         {
             {
 #line 4708
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4710
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11802,7 +11802,7 @@
         },
     },
 #line 4711
-    [DIFFICULTY_NORMAL][TRAINER_MARK] =
+    [DIFFICULTY_NORMAL][TRAINER_20DC389D] =
     {
 #line 4712
         .trainerName = _("Blank"),
@@ -11817,7 +11817,7 @@
         {
             {
 #line 4716
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4718
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11829,7 +11829,7 @@
         },
     },
 #line 4719
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MT_CHIMNEY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_2177173C] =
     {
 #line 4720
         .trainerName = _("Blank"),
@@ -11844,7 +11844,7 @@
         {
             {
 #line 4724
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4726
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11856,7 +11856,7 @@
         },
     },
 #line 4727
-    [DIFFICULTY_NORMAL][TRAINER_STEVE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_2180E5CD] =
     {
 #line 4728
         .trainerName = _("Blank"),
@@ -11871,7 +11871,7 @@
         {
             {
 #line 4732
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4734
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11883,7 +11883,7 @@
         },
     },
 #line 4735
-    [DIFFICULTY_NORMAL][TRAINER_STEVE_3] =
+    [DIFFICULTY_NORMAL][TRAINER_21EB8B2C] =
     {
 #line 4736
         .trainerName = _("Blank"),
@@ -11898,7 +11898,7 @@
         {
             {
 #line 4740
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4742
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11910,7 +11910,7 @@
         },
     },
 #line 4743
-    [DIFFICULTY_NORMAL][TRAINER_STEVE_4] =
+    [DIFFICULTY_NORMAL][TRAINER_22BA389B] =
     {
 #line 4744
         .trainerName = _("Blank"),
@@ -11925,7 +11925,7 @@
         {
             {
 #line 4748
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4750
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11937,7 +11937,7 @@
         },
     },
 #line 4751
-    [DIFFICULTY_NORMAL][TRAINER_STEVE_5] =
+    [DIFFICULTY_NORMAL][TRAINER_22DD5E2B] =
     {
 #line 4752
         .trainerName = _("Blank"),
@@ -11952,7 +11952,7 @@
         {
             {
 #line 4756
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4758
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11964,7 +11964,7 @@
         },
     },
 #line 4759
-    [DIFFICULTY_NORMAL][TRAINER_LUIS] =
+    [DIFFICULTY_NORMAL][TRAINER_22E7DE36] =
     {
 #line 4760
         .trainerName = _("Blank"),
@@ -11979,7 +11979,7 @@
         {
             {
 #line 4764
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4766
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -11991,7 +11991,7 @@
         },
     },
 #line 4767
-    [DIFFICULTY_NORMAL][TRAINER_DOMINIK] =
+    [DIFFICULTY_NORMAL][TRAINER_23C3170F] =
     {
 #line 4768
         .trainerName = _("Blank"),
@@ -12006,7 +12006,7 @@
         {
             {
 #line 4772
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4774
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12018,7 +12018,7 @@
         },
     },
 #line 4775
-    [DIFFICULTY_NORMAL][TRAINER_DOUGLAS] =
+    [DIFFICULTY_NORMAL][TRAINER_23F50BC3] =
     {
 #line 4776
         .trainerName = _("Blank"),
@@ -12033,7 +12033,7 @@
         {
             {
 #line 4780
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4782
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12045,7 +12045,7 @@
         },
     },
 #line 4783
-    [DIFFICULTY_NORMAL][TRAINER_DARRIN] =
+    [DIFFICULTY_NORMAL][TRAINER_2434A25C] =
     {
 #line 4784
         .trainerName = _("Blank"),
@@ -12060,7 +12060,7 @@
         {
             {
 #line 4788
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4790
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12072,7 +12072,7 @@
         },
     },
 #line 4791
-    [DIFFICULTY_NORMAL][TRAINER_TONY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_245235C9] =
     {
 #line 4792
         .trainerName = _("Blank"),
@@ -12087,7 +12087,7 @@
         {
             {
 #line 4796
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4798
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12099,7 +12099,7 @@
         },
     },
 #line 4799
-    [DIFFICULTY_NORMAL][TRAINER_JEROME] =
+    [DIFFICULTY_NORMAL][TRAINER_246CBBD5] =
     {
 #line 4800
         .trainerName = _("Blank"),
@@ -12114,7 +12114,7 @@
         {
             {
 #line 4804
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4806
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12126,7 +12126,7 @@
         },
     },
 #line 4807
-    [DIFFICULTY_NORMAL][TRAINER_MATTHEW] =
+    [DIFFICULTY_NORMAL][TRAINER_247FE019] =
     {
 #line 4808
         .trainerName = _("Blank"),
@@ -12141,7 +12141,7 @@
         {
             {
 #line 4812
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4814
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12153,7 +12153,7 @@
         },
     },
 #line 4815
-    [DIFFICULTY_NORMAL][TRAINER_DAVID] =
+    [DIFFICULTY_NORMAL][TRAINER_24AAFD0D] =
     {
 #line 4816
         .trainerName = _("Blank"),
@@ -12168,7 +12168,7 @@
         {
             {
 #line 4820
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4822
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12180,7 +12180,7 @@
         },
     },
 #line 4823
-    [DIFFICULTY_NORMAL][TRAINER_SPENCER] =
+    [DIFFICULTY_NORMAL][TRAINER_24AC96DF] =
     {
 #line 4824
         .trainerName = _("Blank"),
@@ -12195,7 +12195,7 @@
         {
             {
 #line 4828
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4830
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12207,7 +12207,7 @@
         },
     },
 #line 4831
-    [DIFFICULTY_NORMAL][TRAINER_ROLAND] =
+    [DIFFICULTY_NORMAL][TRAINER_2561CB61] =
     {
 #line 4832
         .trainerName = _("Blank"),
@@ -12222,7 +12222,7 @@
         {
             {
 #line 4836
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4838
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12234,7 +12234,7 @@
         },
     },
 #line 4839
-    [DIFFICULTY_NORMAL][TRAINER_NOLEN] =
+    [DIFFICULTY_NORMAL][TRAINER_26268FB4] =
     {
 #line 4840
         .trainerName = _("Blank"),
@@ -12249,7 +12249,7 @@
         {
             {
 #line 4844
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4846
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12261,7 +12261,7 @@
         },
     },
 #line 4847
-    [DIFFICULTY_NORMAL][TRAINER_STAN] =
+    [DIFFICULTY_NORMAL][TRAINER_265174A6] =
     {
 #line 4848
         .trainerName = _("Blank"),
@@ -12276,7 +12276,7 @@
         {
             {
 #line 4852
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4854
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12288,7 +12288,7 @@
         },
     },
 #line 4855
-    [DIFFICULTY_NORMAL][TRAINER_BARRY] =
+    [DIFFICULTY_NORMAL][TRAINER_272FA5B8] =
     {
 #line 4856
         .trainerName = _("Blank"),
@@ -12303,7 +12303,7 @@
         {
             {
 #line 4860
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4862
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12315,7 +12315,7 @@
         },
     },
 #line 4863
-    [DIFFICULTY_NORMAL][TRAINER_DEAN] =
+    [DIFFICULTY_NORMAL][TRAINER_27B23C10] =
     {
 #line 4864
         .trainerName = _("Blank"),
@@ -12330,7 +12330,7 @@
         {
             {
 #line 4868
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4870
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12342,7 +12342,7 @@
         },
     },
 #line 4871
-    [DIFFICULTY_NORMAL][TRAINER_RODNEY] =
+    [DIFFICULTY_NORMAL][TRAINER_27CEF8F2] =
     {
 #line 4872
         .trainerName = _("Blank"),
@@ -12357,7 +12357,7 @@
         {
             {
 #line 4876
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4878
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12369,7 +12369,7 @@
         },
     },
 #line 4879
-    [DIFFICULTY_NORMAL][TRAINER_RICHARD] =
+    [DIFFICULTY_NORMAL][TRAINER_27E6F69F] =
     {
 #line 4880
         .trainerName = _("Blank"),
@@ -12384,7 +12384,7 @@
         {
             {
 #line 4884
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4886
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12396,7 +12396,7 @@
         },
     },
 #line 4887
-    [DIFFICULTY_NORMAL][TRAINER_HERMAN] =
+    [DIFFICULTY_NORMAL][TRAINER_28B294D2] =
     {
 #line 4888
         .trainerName = _("Blank"),
@@ -12411,7 +12411,7 @@
         {
             {
 #line 4892
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4894
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12423,7 +12423,7 @@
         },
     },
 #line 4895
-    [DIFFICULTY_NORMAL][TRAINER_SANTIAGO] =
+    [DIFFICULTY_NORMAL][TRAINER_28E0625E] =
     {
 #line 4896
         .trainerName = _("Blank"),
@@ -12438,7 +12438,7 @@
         {
             {
 #line 4900
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4902
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12450,7 +12450,7 @@
         },
     },
 #line 4903
-    [DIFFICULTY_NORMAL][TRAINER_GILBERT] =
+    [DIFFICULTY_NORMAL][TRAINER_292E386F] =
     {
 #line 4904
         .trainerName = _("Blank"),
@@ -12465,7 +12465,7 @@
         {
             {
 #line 4908
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4910
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12477,7 +12477,7 @@
         },
     },
 #line 4911
-    [DIFFICULTY_NORMAL][TRAINER_FRANKLIN] =
+    [DIFFICULTY_NORMAL][TRAINER_29AE727B] =
     {
 #line 4912
         .trainerName = _("Blank"),
@@ -12492,7 +12492,7 @@
         {
             {
 #line 4916
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4918
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12504,7 +12504,7 @@
         },
     },
 #line 4919
-    [DIFFICULTY_NORMAL][TRAINER_KEVIN] =
+    [DIFFICULTY_NORMAL][TRAINER_2A305E88] =
     {
 #line 4920
         .trainerName = _("Blank"),
@@ -12519,7 +12519,7 @@
         {
             {
 #line 4924
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4926
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12531,7 +12531,7 @@
         },
     },
 #line 4927
-    [DIFFICULTY_NORMAL][TRAINER_JACK] =
+    [DIFFICULTY_NORMAL][TRAINER_2A3F43CA] =
     {
 #line 4928
         .trainerName = _("Blank"),
@@ -12546,7 +12546,7 @@
         {
             {
 #line 4932
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4934
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12558,7 +12558,7 @@
         },
     },
 #line 4935
-    [DIFFICULTY_NORMAL][TRAINER_DUDLEY] =
+    [DIFFICULTY_NORMAL][TRAINER_2A7BF9FF] =
     {
 #line 4936
         .trainerName = _("Blank"),
@@ -12573,7 +12573,7 @@
         {
             {
 #line 4940
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4942
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12585,7 +12585,7 @@
         },
     },
 #line 4943
-    [DIFFICULTY_NORMAL][TRAINER_CHAD] =
+    [DIFFICULTY_NORMAL][TRAINER_2A83B15E] =
     {
 #line 4944
         .trainerName = _("Blank"),
@@ -12600,7 +12600,7 @@
         {
             {
 #line 4948
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4950
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12612,7 +12612,7 @@
         },
     },
 #line 4951
-    [DIFFICULTY_NORMAL][TRAINER_TONY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_2AD73BF3] =
     {
 #line 4952
         .trainerName = _("Blank"),
@@ -12627,7 +12627,7 @@
         {
             {
 #line 4956
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4958
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12639,7 +12639,7 @@
         },
     },
 #line 4959
-    [DIFFICULTY_NORMAL][TRAINER_TONY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_2B163825] =
     {
 #line 4960
         .trainerName = _("Blank"),
@@ -12654,7 +12654,7 @@
         {
             {
 #line 4964
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4966
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12666,7 +12666,7 @@
         },
     },
 #line 4967
-    [DIFFICULTY_NORMAL][TRAINER_TONY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_2B249E40] =
     {
 #line 4968
         .trainerName = _("Blank"),
@@ -12681,7 +12681,7 @@
         {
             {
 #line 4972
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4974
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12693,7 +12693,7 @@
         },
     },
 #line 4975
-    [DIFFICULTY_NORMAL][TRAINER_TONY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_2BCA066C] =
     {
 #line 4976
         .trainerName = _("Blank"),
@@ -12708,7 +12708,7 @@
         {
             {
 #line 4980
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4982
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12720,7 +12720,7 @@
         },
     },
 #line 4983
-    [DIFFICULTY_NORMAL][TRAINER_DALTON_3] =
+    [DIFFICULTY_NORMAL][TRAINER_2C040422] =
     {
 #line 4984
         .trainerName = _("Blank"),
@@ -12735,7 +12735,7 @@
         {
             {
 #line 4988
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4990
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12747,7 +12747,7 @@
         },
     },
 #line 4991
-    [DIFFICULTY_NORMAL][TRAINER_DALTON_4] =
+    [DIFFICULTY_NORMAL][TRAINER_2C22CE48] =
     {
 #line 4992
         .trainerName = _("Blank"),
@@ -12762,7 +12762,7 @@
         {
             {
 #line 4996
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4998
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12774,7 +12774,7 @@
         },
     },
 #line 4999
-    [DIFFICULTY_NORMAL][TRAINER_DALTON_5] =
+    [DIFFICULTY_NORMAL][TRAINER_2C398893] =
     {
 #line 5000
         .trainerName = _("Blank"),
@@ -12789,7 +12789,7 @@
         {
             {
 #line 5004
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5006
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12801,7 +12801,7 @@
         },
     },
 #line 5007
-    [DIFFICULTY_NORMAL][TRAINER_COLE] =
+    [DIFFICULTY_NORMAL][TRAINER_2C5FFA9F] =
     {
 #line 5008
         .trainerName = _("Blank"),
@@ -12816,7 +12816,7 @@
         {
             {
 #line 5012
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5014
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12828,7 +12828,7 @@
         },
     },
 #line 5015
-    [DIFFICULTY_NORMAL][TRAINER_JEFF] =
+    [DIFFICULTY_NORMAL][TRAINER_2D1A100A] =
     {
 #line 5016
         .trainerName = _("Blank"),
@@ -12843,7 +12843,7 @@
         {
             {
 #line 5020
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5022
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12855,7 +12855,7 @@
         },
     },
 #line 5023
-    [DIFFICULTY_NORMAL][TRAINER_AXLE] =
+    [DIFFICULTY_NORMAL][TRAINER_2D203158] =
     {
 #line 5024
         .trainerName = _("Blank"),
@@ -12870,7 +12870,7 @@
         {
             {
 #line 5028
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5030
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12882,7 +12882,7 @@
         },
     },
 #line 5031
-    [DIFFICULTY_NORMAL][TRAINER_JACE] =
+    [DIFFICULTY_NORMAL][TRAINER_2D29DC23] =
     {
 #line 5032
         .trainerName = _("Blank"),
@@ -12897,7 +12897,7 @@
         {
             {
 #line 5036
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5038
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12909,7 +12909,7 @@
         },
     },
 #line 5039
-    [DIFFICULTY_NORMAL][TRAINER_KEEGAN] =
+    [DIFFICULTY_NORMAL][TRAINER_2D6DE246] =
     {
 #line 5040
         .trainerName = _("Blank"),
@@ -12924,7 +12924,7 @@
         {
             {
 #line 5044
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5046
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12936,7 +12936,7 @@
         },
     },
 #line 5047
-    [DIFFICULTY_NORMAL][TRAINER_BERNIE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_2D92F001] =
     {
 #line 5048
         .trainerName = _("Blank"),
@@ -12951,7 +12951,7 @@
         {
             {
 #line 5052
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5054
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12963,7 +12963,7 @@
         },
     },
 #line 5055
-    [DIFFICULTY_NORMAL][TRAINER_BERNIE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_2DC29B9E] =
     {
 #line 5056
         .trainerName = _("Blank"),
@@ -12978,7 +12978,7 @@
         {
             {
 #line 5060
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5062
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -12990,7 +12990,7 @@
         },
     },
 #line 5063
-    [DIFFICULTY_NORMAL][TRAINER_BERNIE_3] =
+    [DIFFICULTY_NORMAL][TRAINER_2E218A8E] =
     {
 #line 5064
         .trainerName = _("Blank"),
@@ -13005,7 +13005,7 @@
         {
             {
 #line 5068
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5070
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13017,7 +13017,7 @@
         },
     },
 #line 5071
-    [DIFFICULTY_NORMAL][TRAINER_BERNIE_4] =
+    [DIFFICULTY_NORMAL][TRAINER_2E593FA9] =
     {
 #line 5072
         .trainerName = _("Blank"),
@@ -13032,7 +13032,7 @@
         {
             {
 #line 5076
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5078
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13044,7 +13044,7 @@
         },
     },
 #line 5079
-    [DIFFICULTY_NORMAL][TRAINER_BERNIE_5] =
+    [DIFFICULTY_NORMAL][TRAINER_2EC49459] =
     {
 #line 5080
         .trainerName = _("Blank"),
@@ -13059,7 +13059,7 @@
         {
             {
 #line 5084
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5086
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13071,7 +13071,7 @@
         },
     },
 #line 5087
-    [DIFFICULTY_NORMAL][TRAINER_DREW] =
+    [DIFFICULTY_NORMAL][TRAINER_2F0770D3] =
     {
 #line 5088
         .trainerName = _("Blank"),
@@ -13086,7 +13086,7 @@
         {
             {
 #line 5092
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5094
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13098,7 +13098,7 @@
         },
     },
 #line 5095
-    [DIFFICULTY_NORMAL][TRAINER_BEAU] =
+    [DIFFICULTY_NORMAL][TRAINER_2F09421D] =
     {
 #line 5096
         .trainerName = _("Blank"),
@@ -13113,7 +13113,7 @@
         {
             {
 #line 5100
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5102
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13125,7 +13125,7 @@
         },
     },
 #line 5103
-    [DIFFICULTY_NORMAL][TRAINER_LARRY] =
+    [DIFFICULTY_NORMAL][TRAINER_2FF79A0B] =
     {
 #line 5104
         .trainerName = _("Blank"),
@@ -13140,7 +13140,7 @@
         {
             {
 #line 5108
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5110
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13152,7 +13152,7 @@
         },
     },
 #line 5111
-    [DIFFICULTY_NORMAL][TRAINER_SHANE] =
+    [DIFFICULTY_NORMAL][TRAINER_3009CC76] =
     {
 #line 5112
         .trainerName = _("Blank"),
@@ -13167,7 +13167,7 @@
         {
             {
 #line 5116
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5118
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13179,7 +13179,7 @@
         },
     },
 #line 5119
-    [DIFFICULTY_NORMAL][TRAINER_JUSTIN] =
+    [DIFFICULTY_NORMAL][TRAINER_30522A9A] =
     {
 #line 5120
         .trainerName = _("Blank"),
@@ -13194,7 +13194,7 @@
         {
             {
 #line 5124
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5126
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13206,7 +13206,7 @@
         },
     },
 #line 5127
-    [DIFFICULTY_NORMAL][TRAINER_ETHAN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_30ACE135] =
     {
 #line 5128
         .trainerName = _("Blank"),
@@ -13221,7 +13221,7 @@
         {
             {
 #line 5132
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5134
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13233,7 +13233,7 @@
         },
     },
 #line 5135
-    [DIFFICULTY_NORMAL][TRAINER_AUTUMN] =
+    [DIFFICULTY_NORMAL][TRAINER_311B3EFC] =
     {
 #line 5136
         .trainerName = _("Blank"),
@@ -13248,7 +13248,7 @@
         {
             {
 #line 5140
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5142
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13260,7 +13260,7 @@
         },
     },
 #line 5143
-    [DIFFICULTY_NORMAL][TRAINER_TRAVIS] =
+    [DIFFICULTY_NORMAL][TRAINER_317B8932] =
     {
 #line 5144
         .trainerName = _("Blank"),
@@ -13275,7 +13275,7 @@
         {
             {
 #line 5148
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5150
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13287,7 +13287,7 @@
         },
     },
 #line 5151
-    [DIFFICULTY_NORMAL][TRAINER_ETHAN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_31D36FE6] =
     {
 #line 5152
         .trainerName = _("Blank"),
@@ -13302,7 +13302,7 @@
         {
             {
 #line 5156
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5158
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13314,7 +13314,7 @@
         },
     },
 #line 5159
-    [DIFFICULTY_NORMAL][TRAINER_ETHAN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_32C1F13D] =
     {
 #line 5160
         .trainerName = _("Blank"),
@@ -13329,7 +13329,7 @@
         {
             {
 #line 5164
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5166
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13341,7 +13341,7 @@
         },
     },
 #line 5167
-    [DIFFICULTY_NORMAL][TRAINER_ETHAN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_33AB4856] =
     {
 #line 5168
         .trainerName = _("Blank"),
@@ -13356,7 +13356,7 @@
         {
             {
 #line 5172
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5174
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13368,7 +13368,7 @@
         },
     },
 #line 5175
-    [DIFFICULTY_NORMAL][TRAINER_ETHAN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_3566F099] =
     {
 #line 5176
         .trainerName = _("Blank"),
@@ -13383,7 +13383,7 @@
         {
             {
 #line 5180
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5182
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13395,7 +13395,7 @@
         },
     },
 #line 5183
-    [DIFFICULTY_NORMAL][TRAINER_BRENT] =
+    [DIFFICULTY_NORMAL][TRAINER_35E0E027] =
     {
 #line 5184
         .trainerName = _("Blank"),
@@ -13410,7 +13410,7 @@
         {
             {
 #line 5188
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5190
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13422,7 +13422,7 @@
         },
     },
 #line 5191
-    [DIFFICULTY_NORMAL][TRAINER_DONALD] =
+    [DIFFICULTY_NORMAL][TRAINER_36662EEF] =
     {
 #line 5192
         .trainerName = _("Blank"),
@@ -13437,7 +13437,7 @@
         {
             {
 #line 5196
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5198
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13449,7 +13449,7 @@
         },
     },
 #line 5199
-    [DIFFICULTY_NORMAL][TRAINER_TAYLOR] =
+    [DIFFICULTY_NORMAL][TRAINER_3681E8DE] =
     {
 #line 5200
         .trainerName = _("Blank"),
@@ -13464,7 +13464,7 @@
         {
             {
 #line 5204
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5206
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13476,7 +13476,7 @@
         },
     },
 #line 5207
-    [DIFFICULTY_NORMAL][TRAINER_JEFFREY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_3789DC6E] =
     {
 #line 5208
         .trainerName = _("Blank"),
@@ -13491,7 +13491,7 @@
         {
             {
 #line 5212
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5214
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13503,7 +13503,7 @@
         },
     },
 #line 5215
-    [DIFFICULTY_NORMAL][TRAINER_DEREK] =
+    [DIFFICULTY_NORMAL][TRAINER_37B9EFB7] =
     {
 #line 5216
         .trainerName = _("Blank"),
@@ -13518,7 +13518,7 @@
         {
             {
 #line 5220
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5222
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13530,7 +13530,7 @@
         },
     },
 #line 5223
-    [DIFFICULTY_NORMAL][TRAINER_JEFFREY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_37EDB78E] =
     {
 #line 5224
         .trainerName = _("Blank"),
@@ -13545,7 +13545,7 @@
         {
             {
 #line 5228
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5230
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13557,7 +13557,7 @@
         },
     },
 #line 5231
-    [DIFFICULTY_NORMAL][TRAINER_JEFFREY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_382E2AB3] =
     {
 #line 5232
         .trainerName = _("Blank"),
@@ -13572,7 +13572,7 @@
         {
             {
 #line 5236
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5238
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13584,7 +13584,7 @@
         },
     },
 #line 5239
-    [DIFFICULTY_NORMAL][TRAINER_JEFFREY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_3842496B] =
     {
 #line 5240
         .trainerName = _("Blank"),
@@ -13599,7 +13599,7 @@
         {
             {
 #line 5244
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5246
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13611,7 +13611,7 @@
         },
     },
 #line 5247
-    [DIFFICULTY_NORMAL][TRAINER_JEFFREY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_387351C1] =
     {
 #line 5248
         .trainerName = _("Blank"),
@@ -13626,7 +13626,7 @@
         {
             {
 #line 5252
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5254
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13638,7 +13638,7 @@
         },
     },
 #line 5255
-    [DIFFICULTY_NORMAL][TRAINER_EDWARD] =
+    [DIFFICULTY_NORMAL][TRAINER_38A47BDB] =
     {
 #line 5256
         .trainerName = _("Blank"),
@@ -13653,7 +13653,7 @@
         {
             {
 #line 5260
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5262
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13665,7 +13665,7 @@
         },
     },
 #line 5263
-    [DIFFICULTY_NORMAL][TRAINER_PRESTON] =
+    [DIFFICULTY_NORMAL][TRAINER_3924756E] =
     {
 #line 5264
         .trainerName = _("Blank"),
@@ -13680,7 +13680,7 @@
         {
             {
 #line 5268
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5270
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13692,7 +13692,7 @@
         },
     },
 #line 5271
-    [DIFFICULTY_NORMAL][TRAINER_VIRGIL] =
+    [DIFFICULTY_NORMAL][TRAINER_3947ACC3] =
     {
 #line 5272
         .trainerName = _("Blank"),
@@ -13707,7 +13707,7 @@
         {
             {
 #line 5276
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5278
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13719,7 +13719,7 @@
         },
     },
 #line 5279
-    [DIFFICULTY_NORMAL][TRAINER_BLAKE] =
+    [DIFFICULTY_NORMAL][TRAINER_39AD4606] =
     {
 #line 5280
         .trainerName = _("Blank"),
@@ -13734,7 +13734,7 @@
         {
             {
 #line 5284
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5286
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13746,7 +13746,7 @@
         },
     },
 #line 5287
-    [DIFFICULTY_NORMAL][TRAINER_WILLIAM] =
+    [DIFFICULTY_NORMAL][TRAINER_39E0AE4F] =
     {
 #line 5288
         .trainerName = _("Blank"),
@@ -13761,7 +13761,7 @@
         {
             {
 #line 5292
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5294
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13773,7 +13773,7 @@
         },
     },
 #line 5295
-    [DIFFICULTY_NORMAL][TRAINER_JOSHUA] =
+    [DIFFICULTY_NORMAL][TRAINER_39E78D45] =
     {
 #line 5296
         .trainerName = _("Blank"),
@@ -13788,7 +13788,7 @@
         {
             {
 #line 5300
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5302
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13800,7 +13800,7 @@
         },
     },
 #line 5303
-    [DIFFICULTY_NORMAL][TRAINER_CAMERON_1] =
+    [DIFFICULTY_NORMAL][TRAINER_3A11452B] =
     {
 #line 5304
         .trainerName = _("Blank"),
@@ -13815,7 +13815,7 @@
         {
             {
 #line 5308
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5310
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13827,7 +13827,7 @@
         },
     },
 #line 5311
-    [DIFFICULTY_NORMAL][TRAINER_CAMERON_2] =
+    [DIFFICULTY_NORMAL][TRAINER_3A840205] =
     {
 #line 5312
         .trainerName = _("Blank"),
@@ -13842,7 +13842,7 @@
         {
             {
 #line 5316
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5318
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13854,7 +13854,7 @@
         },
     },
 #line 5319
-    [DIFFICULTY_NORMAL][TRAINER_CAMERON_3] =
+    [DIFFICULTY_NORMAL][TRAINER_3AD97475] =
     {
 #line 5320
         .trainerName = _("Blank"),
@@ -13869,7 +13869,7 @@
         {
             {
 #line 5324
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5326
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13881,7 +13881,7 @@
         },
     },
 #line 5327
-    [DIFFICULTY_NORMAL][TRAINER_CAMERON_4] =
+    [DIFFICULTY_NORMAL][TRAINER_3AEE4974] =
     {
 #line 5328
         .trainerName = _("Blank"),
@@ -13896,7 +13896,7 @@
         {
             {
 #line 5332
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5334
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13908,7 +13908,7 @@
         },
     },
 #line 5335
-    [DIFFICULTY_NORMAL][TRAINER_CAMERON_5] =
+    [DIFFICULTY_NORMAL][TRAINER_3BAF0C60] =
     {
 #line 5336
         .trainerName = _("Blank"),
@@ -13923,7 +13923,7 @@
         {
             {
 #line 5340
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5342
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13935,7 +13935,7 @@
         },
     },
 #line 5343
-    [DIFFICULTY_NORMAL][TRAINER_JACLYN] =
+    [DIFFICULTY_NORMAL][TRAINER_3BDED445] =
     {
 #line 5344
         .trainerName = _("Blank"),
@@ -13950,7 +13950,7 @@
         {
             {
 #line 5348
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5350
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13962,7 +13962,7 @@
         },
     },
 #line 5351
-    [DIFFICULTY_NORMAL][TRAINER_HANNAH] =
+    [DIFFICULTY_NORMAL][TRAINER_3C621048] =
     {
 #line 5352
         .trainerName = _("Blank"),
@@ -13977,7 +13977,7 @@
         {
             {
 #line 5356
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5358
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -13989,7 +13989,7 @@
         },
     },
 #line 5359
-    [DIFFICULTY_NORMAL][TRAINER_SAMANTHA] =
+    [DIFFICULTY_NORMAL][TRAINER_3C74DAE2] =
     {
 #line 5360
         .trainerName = _("Blank"),
@@ -14004,7 +14004,7 @@
         {
             {
 #line 5364
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5366
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14016,7 +14016,7 @@
         },
     },
 #line 5367
-    [DIFFICULTY_NORMAL][TRAINER_MAURA] =
+    [DIFFICULTY_NORMAL][TRAINER_3C7AC359] =
     {
 #line 5368
         .trainerName = _("Blank"),
@@ -14031,7 +14031,7 @@
         {
             {
 #line 5372
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5374
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14043,7 +14043,7 @@
         },
     },
 #line 5375
-    [DIFFICULTY_NORMAL][TRAINER_KAYLA] =
+    [DIFFICULTY_NORMAL][TRAINER_3CDE5F9E] =
     {
 #line 5376
         .trainerName = _("Blank"),
@@ -14058,7 +14058,7 @@
         {
             {
 #line 5380
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5382
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14070,7 +14070,7 @@
         },
     },
 #line 5383
-    [DIFFICULTY_NORMAL][TRAINER_ALEXIS] =
+    [DIFFICULTY_NORMAL][TRAINER_3CECE368] =
     {
 #line 5384
         .trainerName = _("Blank"),
@@ -14085,7 +14085,7 @@
         {
             {
 #line 5388
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5390
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14097,7 +14097,7 @@
         },
     },
 #line 5391
-    [DIFFICULTY_NORMAL][TRAINER_JACKI_1] =
+    [DIFFICULTY_NORMAL][TRAINER_3CFF3841] =
     {
 #line 5392
         .trainerName = _("Blank"),
@@ -14112,7 +14112,7 @@
         {
             {
 #line 5396
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5398
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14124,7 +14124,7 @@
         },
     },
 #line 5399
-    [DIFFICULTY_NORMAL][TRAINER_JACKI_2] =
+    [DIFFICULTY_NORMAL][TRAINER_3D502E2F] =
     {
 #line 5400
         .trainerName = _("Blank"),
@@ -14139,7 +14139,7 @@
         {
             {
 #line 5404
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5406
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14151,7 +14151,7 @@
         },
     },
 #line 5407
-    [DIFFICULTY_NORMAL][TRAINER_JACKI_3] =
+    [DIFFICULTY_NORMAL][TRAINER_3D7FDE57] =
     {
 #line 5408
         .trainerName = _("Blank"),
@@ -14166,7 +14166,7 @@
         {
             {
 #line 5412
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5414
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14178,7 +14178,7 @@
         },
     },
 #line 5415
-    [DIFFICULTY_NORMAL][TRAINER_JACKI_4] =
+    [DIFFICULTY_NORMAL][TRAINER_3DCD0BBC] =
     {
 #line 5416
         .trainerName = _("Blank"),
@@ -14193,7 +14193,7 @@
         {
             {
 #line 5420
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5422
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14205,7 +14205,7 @@
         },
     },
 #line 5423
-    [DIFFICULTY_NORMAL][TRAINER_JACKI_5] =
+    [DIFFICULTY_NORMAL][TRAINER_3E17924C] =
     {
 #line 5424
         .trainerName = _("Blank"),
@@ -14220,7 +14220,7 @@
         {
             {
 #line 5428
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5430
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14232,7 +14232,7 @@
         },
     },
 #line 5431
-    [DIFFICULTY_NORMAL][TRAINER_WALTER_1] =
+    [DIFFICULTY_NORMAL][TRAINER_3EB6FA04] =
     {
 #line 5432
         .trainerName = _("Blank"),
@@ -14247,7 +14247,7 @@
         {
             {
 #line 5436
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5438
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14259,7 +14259,7 @@
         },
     },
 #line 5439
-    [DIFFICULTY_NORMAL][TRAINER_MICAH] =
+    [DIFFICULTY_NORMAL][TRAINER_3EFCF1C8] =
     {
 #line 5440
         .trainerName = _("Blank"),
@@ -14274,7 +14274,7 @@
         {
             {
 #line 5444
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5446
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14286,7 +14286,7 @@
         },
     },
 #line 5447
-    [DIFFICULTY_NORMAL][TRAINER_THOMAS] =
+    [DIFFICULTY_NORMAL][TRAINER_3F0BF52E] =
     {
 #line 5448
         .trainerName = _("Blank"),
@@ -14301,7 +14301,7 @@
         {
             {
 #line 5452
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5454
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14313,7 +14313,7 @@
         },
     },
 #line 5455
-    [DIFFICULTY_NORMAL][TRAINER_WALTER_2] =
+    [DIFFICULTY_NORMAL][TRAINER_4000C8A0] =
     {
 #line 5456
         .trainerName = _("Blank"),
@@ -14328,7 +14328,7 @@
         {
             {
 #line 5460
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5462
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14340,7 +14340,7 @@
         },
     },
 #line 5463
-    [DIFFICULTY_NORMAL][TRAINER_WALTER_3] =
+    [DIFFICULTY_NORMAL][TRAINER_403D932D] =
     {
 #line 5464
         .trainerName = _("Blank"),
@@ -14355,7 +14355,7 @@
         {
             {
 #line 5468
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5470
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14367,7 +14367,7 @@
         },
     },
 #line 5471
-    [DIFFICULTY_NORMAL][TRAINER_WALTER_4] =
+    [DIFFICULTY_NORMAL][TRAINER_408862C4] =
     {
 #line 5472
         .trainerName = _("Blank"),
@@ -14382,7 +14382,7 @@
         {
             {
 #line 5476
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5478
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14394,7 +14394,7 @@
         },
     },
 #line 5479
-    [DIFFICULTY_NORMAL][TRAINER_WALTER_5] =
+    [DIFFICULTY_NORMAL][TRAINER_419282AD] =
     {
 #line 5480
         .trainerName = _("Blank"),
@@ -14409,7 +14409,7 @@
         {
             {
 #line 5484
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5486
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14421,7 +14421,7 @@
         },
     },
 #line 5487
-    [DIFFICULTY_NORMAL][TRAINER_SIDNEY] =
+    [DIFFICULTY_NORMAL][TRAINER_419FCBAE] =
     {
 #line 5488
         .trainerName = _("Blank"),
@@ -14436,7 +14436,7 @@
         {
             {
 #line 5492
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5494
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14448,7 +14448,7 @@
         },
     },
 #line 5495
-    [DIFFICULTY_NORMAL][TRAINER_PHOEBE] =
+    [DIFFICULTY_NORMAL][TRAINER_41B8591B] =
     {
 #line 5496
         .trainerName = _("Blank"),
@@ -14463,7 +14463,7 @@
         {
             {
 #line 5500
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5502
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14475,7 +14475,7 @@
         },
     },
 #line 5503
-    [DIFFICULTY_NORMAL][TRAINER_GLACIA] =
+    [DIFFICULTY_NORMAL][TRAINER_41DCF7BA] =
     {
 #line 5504
         .trainerName = _("Blank"),
@@ -14490,7 +14490,7 @@
         {
             {
 #line 5508
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5510
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14502,7 +14502,7 @@
         },
     },
 #line 5511
-    [DIFFICULTY_NORMAL][TRAINER_DRAKE] =
+    [DIFFICULTY_NORMAL][TRAINER_4227B911] =
     {
 #line 5512
         .trainerName = _("Blank"),
@@ -14517,7 +14517,7 @@
         {
             {
 #line 5516
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5518
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14529,7 +14529,7 @@
         },
     },
 #line 5519
-    [DIFFICULTY_NORMAL][TRAINER_ROXANNE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_4239B726] =
     {
 #line 5520
         .trainerName = _("Blank"),
@@ -14544,7 +14544,7 @@
         {
             {
 #line 5524
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5526
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14556,7 +14556,7 @@
         },
     },
 #line 5527
-    [DIFFICULTY_NORMAL][TRAINER_BRAWLY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_42BC1D70] =
     {
 #line 5528
         .trainerName = _("Blank"),
@@ -14571,7 +14571,7 @@
         {
             {
 #line 5532
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5534
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14583,7 +14583,7 @@
         },
     },
 #line 5535
-    [DIFFICULTY_NORMAL][TRAINER_WATTSON_1] =
+    [DIFFICULTY_NORMAL][TRAINER_42BE3E94] =
     {
 #line 5536
         .trainerName = _("Blank"),
@@ -14598,7 +14598,7 @@
         {
             {
 #line 5540
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5542
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14610,7 +14610,7 @@
         },
     },
 #line 5543
-    [DIFFICULTY_NORMAL][TRAINER_FLANNERY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_42C68371] =
     {
 #line 5544
         .trainerName = _("Blank"),
@@ -14625,7 +14625,7 @@
         {
             {
 #line 5548
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5550
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14637,7 +14637,7 @@
         },
     },
 #line 5551
-    [DIFFICULTY_NORMAL][TRAINER_NORMAN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_432F34FA] =
     {
 #line 5552
         .trainerName = _("Blank"),
@@ -14652,7 +14652,7 @@
         {
             {
 #line 5556
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5558
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14664,7 +14664,7 @@
         },
     },
 #line 5559
-    [DIFFICULTY_NORMAL][TRAINER_WINONA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_437E553A] =
     {
 #line 5560
         .trainerName = _("Blank"),
@@ -14679,7 +14679,7 @@
         {
             {
 #line 5564
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5566
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14691,7 +14691,7 @@
         },
     },
 #line 5567
-    [DIFFICULTY_NORMAL][TRAINER_TATE_AND_LIZA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_4394141C] =
     {
 #line 5568
         .trainerName = _("Blank"),
@@ -14706,7 +14706,7 @@
         {
             {
 #line 5572
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5574
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14718,7 +14718,7 @@
         },
     },
 #line 5575
-    [DIFFICULTY_NORMAL][TRAINER_JUAN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_43B111AD] =
     {
 #line 5576
         .trainerName = _("Blank"),
@@ -14733,7 +14733,7 @@
         {
             {
 #line 5580
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5582
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14745,7 +14745,7 @@
         },
     },
 #line 5583
-    [DIFFICULTY_NORMAL][TRAINER_JERRY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_43B30B5D] =
     {
 #line 5584
         .trainerName = _("Blank"),
@@ -14760,7 +14760,7 @@
         {
             {
 #line 5588
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5590
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14772,7 +14772,7 @@
         },
     },
 #line 5591
-    [DIFFICULTY_NORMAL][TRAINER_TED] =
+    [DIFFICULTY_NORMAL][TRAINER_43D6557C] =
     {
 #line 5592
         .trainerName = _("Blank"),
@@ -14787,7 +14787,7 @@
         {
             {
 #line 5596
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5598
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14799,7 +14799,7 @@
         },
     },
 #line 5599
-    [DIFFICULTY_NORMAL][TRAINER_PAUL] =
+    [DIFFICULTY_NORMAL][TRAINER_44251BF9] =
     {
 #line 5600
         .trainerName = _("Blank"),
@@ -14814,7 +14814,7 @@
         {
             {
 #line 5604
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5606
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14826,7 +14826,7 @@
         },
     },
 #line 5607
-    [DIFFICULTY_NORMAL][TRAINER_JERRY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_44D28B98] =
     {
 #line 5608
         .trainerName = _("Blank"),
@@ -14841,7 +14841,7 @@
         {
             {
 #line 5612
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5614
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14853,7 +14853,7 @@
         },
     },
 #line 5615
-    [DIFFICULTY_NORMAL][TRAINER_JERRY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_44E68738] =
     {
 #line 5616
         .trainerName = _("Blank"),
@@ -14868,7 +14868,7 @@
         {
             {
 #line 5620
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5622
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14880,7 +14880,7 @@
         },
     },
 #line 5623
-    [DIFFICULTY_NORMAL][TRAINER_JERRY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_44F86666] =
     {
 #line 5624
         .trainerName = _("Blank"),
@@ -14895,7 +14895,7 @@
         {
             {
 #line 5628
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5630
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14907,7 +14907,7 @@
         },
     },
 #line 5631
-    [DIFFICULTY_NORMAL][TRAINER_JERRY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_458C3B90] =
     {
 #line 5632
         .trainerName = _("Blank"),
@@ -14922,7 +14922,7 @@
         {
             {
 #line 5636
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5638
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14934,7 +14934,7 @@
         },
     },
 #line 5639
-    [DIFFICULTY_NORMAL][TRAINER_KAREN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_45CBA787] =
     {
 #line 5640
         .trainerName = _("Blank"),
@@ -14949,7 +14949,7 @@
         {
             {
 #line 5644
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5646
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14961,7 +14961,7 @@
         },
     },
 #line 5647
-    [DIFFICULTY_NORMAL][TRAINER_GEORGIA] =
+    [DIFFICULTY_NORMAL][TRAINER_45E5EB22] =
     {
 #line 5648
         .trainerName = _("Blank"),
@@ -14976,7 +14976,7 @@
         {
             {
 #line 5652
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5654
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -14988,7 +14988,7 @@
         },
     },
 #line 5655
-    [DIFFICULTY_NORMAL][TRAINER_KAREN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_45ECBA80] =
     {
 #line 5656
         .trainerName = _("Blank"),
@@ -15003,7 +15003,7 @@
         {
             {
 #line 5660
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5662
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15015,7 +15015,7 @@
         },
     },
 #line 5663
-    [DIFFICULTY_NORMAL][TRAINER_KAREN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_460AB144] =
     {
 #line 5664
         .trainerName = _("Blank"),
@@ -15030,7 +15030,7 @@
         {
             {
 #line 5668
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5670
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15042,7 +15042,7 @@
         },
     },
 #line 5671
-    [DIFFICULTY_NORMAL][TRAINER_KAREN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_46169EA5] =
     {
 #line 5672
         .trainerName = _("Blank"),
@@ -15057,7 +15057,7 @@
         {
             {
 #line 5676
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5678
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15069,7 +15069,7 @@
         },
     },
 #line 5679
-    [DIFFICULTY_NORMAL][TRAINER_KAREN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_464C4C44] =
     {
 #line 5680
         .trainerName = _("Blank"),
@@ -15084,7 +15084,7 @@
         {
             {
 #line 5684
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5686
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15096,7 +15096,7 @@
         },
     },
 #line 5687
-    [DIFFICULTY_NORMAL][TRAINER_KATE_AND_JOY] =
+    [DIFFICULTY_NORMAL][TRAINER_473EE9DE] =
     {
 #line 5688
         .trainerName = _("Blank"),
@@ -15111,7 +15111,7 @@
         {
             {
 #line 5692
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5694
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15123,7 +15123,7 @@
         },
     },
 #line 5695
-    [DIFFICULTY_NORMAL][TRAINER_ANNA_AND_MEG_1] =
+    [DIFFICULTY_NORMAL][TRAINER_4787A98D] =
     {
 #line 5696
         .trainerName = _("Blank"),
@@ -15138,7 +15138,7 @@
         {
             {
 #line 5700
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5702
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15150,7 +15150,7 @@
         },
     },
 #line 5703
-    [DIFFICULTY_NORMAL][TRAINER_ANNA_AND_MEG_2] =
+    [DIFFICULTY_NORMAL][TRAINER_479BBFEB] =
     {
 #line 5704
         .trainerName = _("Blank"),
@@ -15165,7 +15165,7 @@
         {
             {
 #line 5708
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5710
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15177,7 +15177,7 @@
         },
     },
 #line 5711
-    [DIFFICULTY_NORMAL][TRAINER_ANNA_AND_MEG_3] =
+    [DIFFICULTY_NORMAL][TRAINER_47EACF7E] =
     {
 #line 5712
         .trainerName = _("Blank"),
@@ -15192,7 +15192,7 @@
         {
             {
 #line 5716
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5718
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15204,7 +15204,7 @@
         },
     },
 #line 5719
-    [DIFFICULTY_NORMAL][TRAINER_ANNA_AND_MEG_4] =
+    [DIFFICULTY_NORMAL][TRAINER_4848801D] =
     {
 #line 5720
         .trainerName = _("Blank"),
@@ -15219,7 +15219,7 @@
         {
             {
 #line 5724
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5726
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15231,7 +15231,7 @@
         },
     },
 #line 5727
-    [DIFFICULTY_NORMAL][TRAINER_ANNA_AND_MEG_5] =
+    [DIFFICULTY_NORMAL][TRAINER_487BEC6D] =
     {
 #line 5728
         .trainerName = _("Blank"),
@@ -15246,7 +15246,7 @@
         {
             {
 #line 5732
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5734
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15258,7 +15258,7 @@
         },
     },
 #line 5735
-    [DIFFICULTY_NORMAL][TRAINER_VICTOR] =
+    [DIFFICULTY_NORMAL][TRAINER_492E0A66] =
     {
 #line 5736
         .trainerName = _("Blank"),
@@ -15273,7 +15273,7 @@
         {
             {
 #line 5740
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5742
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15285,7 +15285,7 @@
         },
     },
 #line 5743
-    [DIFFICULTY_NORMAL][TRAINER_MIGUEL_1] =
+    [DIFFICULTY_NORMAL][TRAINER_494ECB35] =
     {
 #line 5744
         .trainerName = _("Blank"),
@@ -15300,7 +15300,7 @@
         {
             {
 #line 5748
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5750
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15312,7 +15312,7 @@
         },
     },
 #line 5751
-    [DIFFICULTY_NORMAL][TRAINER_COLTON] =
+    [DIFFICULTY_NORMAL][TRAINER_494F5379] =
     {
 #line 5752
         .trainerName = _("Blank"),
@@ -15327,7 +15327,7 @@
         {
             {
 #line 5756
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5758
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15339,7 +15339,7 @@
         },
     },
 #line 5759
-    [DIFFICULTY_NORMAL][TRAINER_MIGUEL_2] =
+    [DIFFICULTY_NORMAL][TRAINER_49805D55] =
     {
 #line 5760
         .trainerName = _("Blank"),
@@ -15354,7 +15354,7 @@
         {
             {
 #line 5764
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5766
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15366,7 +15366,7 @@
         },
     },
 #line 5767
-    [DIFFICULTY_NORMAL][TRAINER_MIGUEL_3] =
+    [DIFFICULTY_NORMAL][TRAINER_49EA8A40] =
     {
 #line 5768
         .trainerName = _("Blank"),
@@ -15381,7 +15381,7 @@
         {
             {
 #line 5772
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5774
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15393,7 +15393,7 @@
         },
     },
 #line 5775
-    [DIFFICULTY_NORMAL][TRAINER_MIGUEL_4] =
+    [DIFFICULTY_NORMAL][TRAINER_4A323E4A] =
     {
 #line 5776
         .trainerName = _("Blank"),
@@ -15408,7 +15408,7 @@
         {
             {
 #line 5780
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5782
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15420,7 +15420,7 @@
         },
     },
 #line 5783
-    [DIFFICULTY_NORMAL][TRAINER_MIGUEL_5] =
+    [DIFFICULTY_NORMAL][TRAINER_4A3EB696] =
     {
 #line 5784
         .trainerName = _("Blank"),
@@ -15435,7 +15435,7 @@
         {
             {
 #line 5788
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5790
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15447,7 +15447,7 @@
         },
     },
 #line 5791
-    [DIFFICULTY_NORMAL][TRAINER_VICTORIA] =
+    [DIFFICULTY_NORMAL][TRAINER_4ABDB43A] =
     {
 #line 5792
         .trainerName = _("Blank"),
@@ -15462,7 +15462,7 @@
         {
             {
 #line 5796
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5798
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15474,7 +15474,7 @@
         },
     },
 #line 5799
-    [DIFFICULTY_NORMAL][TRAINER_VANESSA] =
+    [DIFFICULTY_NORMAL][TRAINER_4AD6DB47] =
     {
 #line 5800
         .trainerName = _("Blank"),
@@ -15489,7 +15489,7 @@
         {
             {
 #line 5804
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5806
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15501,7 +15501,7 @@
         },
     },
 #line 5807
-    [DIFFICULTY_NORMAL][TRAINER_BETHANY] =
+    [DIFFICULTY_NORMAL][TRAINER_4AF51B8A] =
     {
 #line 5808
         .trainerName = _("Blank"),
@@ -15516,7 +15516,7 @@
         {
             {
 #line 5812
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5814
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15528,7 +15528,7 @@
         },
     },
 #line 5815
-    [DIFFICULTY_NORMAL][TRAINER_ISABEL_1] =
+    [DIFFICULTY_NORMAL][TRAINER_4B2BC403] =
     {
 #line 5816
         .trainerName = _("Blank"),
@@ -15543,7 +15543,7 @@
         {
             {
 #line 5820
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5822
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15555,7 +15555,7 @@
         },
     },
 #line 5823
-    [DIFFICULTY_NORMAL][TRAINER_ISABEL_2] =
+    [DIFFICULTY_NORMAL][TRAINER_4B3B0356] =
     {
 #line 5824
         .trainerName = _("Blank"),
@@ -15570,7 +15570,7 @@
         {
             {
 #line 5828
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5830
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15582,7 +15582,7 @@
         },
     },
 #line 5831
-    [DIFFICULTY_NORMAL][TRAINER_ISABEL_3] =
+    [DIFFICULTY_NORMAL][TRAINER_4B431569] =
     {
 #line 5832
         .trainerName = _("Blank"),
@@ -15597,7 +15597,7 @@
         {
             {
 #line 5836
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5838
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15609,7 +15609,7 @@
         },
     },
 #line 5839
-    [DIFFICULTY_NORMAL][TRAINER_ISABEL_4] =
+    [DIFFICULTY_NORMAL][TRAINER_4B5B4954] =
     {
 #line 5840
         .trainerName = _("Blank"),
@@ -15624,7 +15624,7 @@
         {
             {
 #line 5844
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5846
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15636,7 +15636,7 @@
         },
     },
 #line 5847
-    [DIFFICULTY_NORMAL][TRAINER_ISABEL_5] =
+    [DIFFICULTY_NORMAL][TRAINER_4C2D23EC] =
     {
 #line 5848
         .trainerName = _("Blank"),
@@ -15651,7 +15651,7 @@
         {
             {
 #line 5852
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5854
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15663,7 +15663,7 @@
         },
     },
 #line 5855
-    [DIFFICULTY_NORMAL][TRAINER_TIMOTHY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_4CE97031] =
     {
 #line 5856
         .trainerName = _("Blank"),
@@ -15678,7 +15678,7 @@
         {
             {
 #line 5860
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5862
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15690,7 +15690,7 @@
         },
     },
 #line 5863
-    [DIFFICULTY_NORMAL][TRAINER_TIMOTHY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_4CF43F23] =
     {
 #line 5864
         .trainerName = _("Blank"),
@@ -15705,7 +15705,7 @@
         {
             {
 #line 5868
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5870
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15717,7 +15717,7 @@
         },
     },
 #line 5871
-    [DIFFICULTY_NORMAL][TRAINER_TIMOTHY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_4D8F9D46] =
     {
 #line 5872
         .trainerName = _("Blank"),
@@ -15732,7 +15732,7 @@
         {
             {
 #line 5876
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5878
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15744,7 +15744,7 @@
         },
     },
 #line 5879
-    [DIFFICULTY_NORMAL][TRAINER_TIMOTHY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_4D98F6C4] =
     {
 #line 5880
         .trainerName = _("Blank"),
@@ -15759,7 +15759,7 @@
         {
             {
 #line 5884
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5886
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15771,7 +15771,7 @@
         },
     },
 #line 5887
-    [DIFFICULTY_NORMAL][TRAINER_TIMOTHY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_4E072263] =
     {
 #line 5888
         .trainerName = _("Blank"),
@@ -15786,7 +15786,7 @@
         {
             {
 #line 5892
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5894
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15798,7 +15798,7 @@
         },
     },
 #line 5895
-    [DIFFICULTY_NORMAL][TRAINER_VICKY] =
+    [DIFFICULTY_NORMAL][TRAINER_4E0C1EFE] =
     {
 #line 5896
         .trainerName = _("Blank"),
@@ -15813,7 +15813,7 @@
         {
             {
 #line 5900
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5902
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15825,7 +15825,7 @@
         },
     },
 #line 5903
-    [DIFFICULTY_NORMAL][TRAINER_SHELBY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_4E226A6E] =
     {
 #line 5904
         .trainerName = _("Blank"),
@@ -15840,7 +15840,7 @@
         {
             {
 #line 5908
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5910
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15852,7 +15852,7 @@
         },
     },
 #line 5911
-    [DIFFICULTY_NORMAL][TRAINER_SHELBY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_4E5AAFAE] =
     {
 #line 5912
         .trainerName = _("Blank"),
@@ -15867,7 +15867,7 @@
         {
             {
 #line 5916
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5918
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15879,7 +15879,7 @@
         },
     },
 #line 5919
-    [DIFFICULTY_NORMAL][TRAINER_SHELBY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_4F10DCA9] =
     {
 #line 5920
         .trainerName = _("Blank"),
@@ -15894,7 +15894,7 @@
         {
             {
 #line 5924
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5926
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15906,7 +15906,7 @@
         },
     },
 #line 5927
-    [DIFFICULTY_NORMAL][TRAINER_SHELBY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_50AE78E5] =
     {
 #line 5928
         .trainerName = _("Blank"),
@@ -15921,7 +15921,7 @@
         {
             {
 #line 5932
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5934
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15933,7 +15933,7 @@
         },
     },
 #line 5935
-    [DIFFICULTY_NORMAL][TRAINER_SHELBY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_513A43EE] =
     {
 #line 5936
         .trainerName = _("Blank"),
@@ -15948,7 +15948,7 @@
         {
             {
 #line 5940
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5942
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15960,7 +15960,7 @@
         },
     },
 #line 5943
-    [DIFFICULTY_NORMAL][TRAINER_CALVIN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_51A32DCA] =
     {
 #line 5944
         .trainerName = _("Blank"),
@@ -15975,7 +15975,7 @@
         {
             {
 #line 5948
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5950
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -15987,7 +15987,7 @@
         },
     },
 #line 5951
-    [DIFFICULTY_NORMAL][TRAINER_BILLY] =
+    [DIFFICULTY_NORMAL][TRAINER_51F6B834] =
     {
 #line 5952
         .trainerName = _("Blank"),
@@ -16002,7 +16002,7 @@
         {
             {
 #line 5956
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5958
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16014,7 +16014,7 @@
         },
     },
 #line 5959
-    [DIFFICULTY_NORMAL][TRAINER_JOSH] =
+    [DIFFICULTY_NORMAL][TRAINER_5209EDF0] =
     {
 #line 5960
         .trainerName = _("Blank"),
@@ -16029,7 +16029,7 @@
         {
             {
 #line 5964
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5966
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16041,7 +16041,7 @@
         },
     },
 #line 5967
-    [DIFFICULTY_NORMAL][TRAINER_TOMMY] =
+    [DIFFICULTY_NORMAL][TRAINER_52CFC159] =
     {
 #line 5968
         .trainerName = _("Blank"),
@@ -16056,7 +16056,7 @@
         {
             {
 #line 5972
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5974
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16068,7 +16068,7 @@
         },
     },
 #line 5975
-    [DIFFICULTY_NORMAL][TRAINER_JOEY] =
+    [DIFFICULTY_NORMAL][TRAINER_538D052D] =
     {
 #line 5976
         .trainerName = _("Blank"),
@@ -16083,7 +16083,7 @@
         {
             {
 #line 5980
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5982
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16095,7 +16095,7 @@
         },
     },
 #line 5983
-    [DIFFICULTY_NORMAL][TRAINER_BEN] =
+    [DIFFICULTY_NORMAL][TRAINER_53A1A61A] =
     {
 #line 5984
         .trainerName = _("Blank"),
@@ -16110,7 +16110,7 @@
         {
             {
 #line 5988
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5990
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16122,7 +16122,7 @@
         },
     },
 #line 5991
-    [DIFFICULTY_NORMAL][TRAINER_QUINCY] =
+    [DIFFICULTY_NORMAL][TRAINER_53B06C7B] =
     {
 #line 5992
         .trainerName = _("Blank"),
@@ -16137,7 +16137,7 @@
         {
             {
 #line 5996
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5998
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16149,7 +16149,7 @@
         },
     },
 #line 5999
-    [DIFFICULTY_NORMAL][TRAINER_KATELYNN] =
+    [DIFFICULTY_NORMAL][TRAINER_54110A38] =
     {
 #line 6000
         .trainerName = _("Blank"),
@@ -16164,7 +16164,7 @@
         {
             {
 #line 6004
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6006
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16176,7 +16176,7 @@
         },
     },
 #line 6007
-    [DIFFICULTY_NORMAL][TRAINER_JAYLEN] =
+    [DIFFICULTY_NORMAL][TRAINER_549792BA] =
     {
 #line 6008
         .trainerName = _("Blank"),
@@ -16191,7 +16191,7 @@
         {
             {
 #line 6012
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6014
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16203,7 +16203,7 @@
         },
     },
 #line 6015
-    [DIFFICULTY_NORMAL][TRAINER_DILLON] =
+    [DIFFICULTY_NORMAL][TRAINER_54BAC2DA] =
     {
 #line 6016
         .trainerName = _("Blank"),
@@ -16218,7 +16218,7 @@
         {
             {
 #line 6020
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6022
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16230,7 +16230,7 @@
         },
     },
 #line 6023
-    [DIFFICULTY_NORMAL][TRAINER_CALVIN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_54F170BE] =
     {
 #line 6024
         .trainerName = _("Blank"),
@@ -16245,7 +16245,7 @@
         {
             {
 #line 6028
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6030
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16257,7 +16257,7 @@
         },
     },
 #line 6031
-    [DIFFICULTY_NORMAL][TRAINER_CALVIN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_558F80F9] =
     {
 #line 6032
         .trainerName = _("Blank"),
@@ -16272,7 +16272,7 @@
         {
             {
 #line 6036
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6038
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16284,7 +16284,7 @@
         },
     },
 #line 6039
-    [DIFFICULTY_NORMAL][TRAINER_CALVIN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_55CA00A1] =
     {
 #line 6040
         .trainerName = _("Blank"),
@@ -16299,7 +16299,7 @@
         {
             {
 #line 6044
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6046
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16311,7 +16311,7 @@
         },
     },
 #line 6047
-    [DIFFICULTY_NORMAL][TRAINER_CALVIN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_55D0BEAA] =
     {
 #line 6048
         .trainerName = _("Blank"),
@@ -16326,7 +16326,7 @@
         {
             {
 #line 6052
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6054
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16338,7 +16338,7 @@
         },
     },
 #line 6055
-    [DIFFICULTY_NORMAL][TRAINER_EDDIE] =
+    [DIFFICULTY_NORMAL][TRAINER_55D90FA8] =
     {
 #line 6056
         .trainerName = _("Blank"),
@@ -16353,7 +16353,7 @@
         {
             {
 #line 6060
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6062
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16365,7 +16365,7 @@
         },
     },
 #line 6063
-    [DIFFICULTY_NORMAL][TRAINER_ALLEN] =
+    [DIFFICULTY_NORMAL][TRAINER_55EBF949] =
     {
 #line 6064
         .trainerName = _("Blank"),
@@ -16380,7 +16380,7 @@
         {
             {
 #line 6068
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6070
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16392,7 +16392,7 @@
         },
     },
 #line 6071
-    [DIFFICULTY_NORMAL][TRAINER_TIMMY] =
+    [DIFFICULTY_NORMAL][TRAINER_565DE3C4] =
     {
 #line 6072
         .trainerName = _("Blank"),
@@ -16407,7 +16407,7 @@
         {
             {
 #line 6076
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6078
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16419,7 +16419,7 @@
         },
     },
 #line 6079
-    [DIFFICULTY_NORMAL][TRAINER_WALLACE] =
+    [DIFFICULTY_NORMAL][TRAINER_56775C71] =
     {
 #line 6080
         .trainerName = _("Blank"),
@@ -16434,7 +16434,7 @@
         {
             {
 #line 6084
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6086
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16446,7 +16446,7 @@
         },
     },
 #line 6087
-    [DIFFICULTY_NORMAL][TRAINER_ANDREW] =
+    [DIFFICULTY_NORMAL][TRAINER_56C1FE08] =
     {
 #line 6088
         .trainerName = _("Blank"),
@@ -16461,7 +16461,7 @@
         {
             {
 #line 6092
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6094
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16473,7 +16473,7 @@
         },
     },
 #line 6095
-    [DIFFICULTY_NORMAL][TRAINER_IVAN] =
+    [DIFFICULTY_NORMAL][TRAINER_56E6EFAA] =
     {
 #line 6096
         .trainerName = _("Blank"),
@@ -16488,7 +16488,7 @@
         {
             {
 #line 6100
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6102
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16500,7 +16500,7 @@
         },
     },
 #line 6103
-    [DIFFICULTY_NORMAL][TRAINER_CLAUDE] =
+    [DIFFICULTY_NORMAL][TRAINER_57E254F5] =
     {
 #line 6104
         .trainerName = _("Blank"),
@@ -16515,7 +16515,7 @@
         {
             {
 #line 6108
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6110
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16527,7 +16527,7 @@
         },
     },
 #line 6111
-    [DIFFICULTY_NORMAL][TRAINER_ELLIOT_1] =
+    [DIFFICULTY_NORMAL][TRAINER_57E7E83A] =
     {
 #line 6112
         .trainerName = _("Blank"),
@@ -16542,7 +16542,7 @@
         {
             {
 #line 6116
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6118
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16554,7 +16554,7 @@
         },
     },
 #line 6119
-    [DIFFICULTY_NORMAL][TRAINER_NED] =
+    [DIFFICULTY_NORMAL][TRAINER_5819E497] =
     {
 #line 6120
         .trainerName = _("Blank"),
@@ -16569,7 +16569,7 @@
         {
             {
 #line 6124
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6126
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16581,7 +16581,7 @@
         },
     },
 #line 6127
-    [DIFFICULTY_NORMAL][TRAINER_DALE] =
+    [DIFFICULTY_NORMAL][TRAINER_58A6A51E] =
     {
 #line 6128
         .trainerName = _("Blank"),
@@ -16596,7 +16596,7 @@
         {
             {
 #line 6132
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6134
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16608,7 +16608,7 @@
         },
     },
 #line 6135
-    [DIFFICULTY_NORMAL][TRAINER_NOLAN] =
+    [DIFFICULTY_NORMAL][TRAINER_58BEBECC] =
     {
 #line 6136
         .trainerName = _("Blank"),
@@ -16623,7 +16623,7 @@
         {
             {
 #line 6140
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6142
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16635,7 +16635,7 @@
         },
     },
 #line 6143
-    [DIFFICULTY_NORMAL][TRAINER_BARNY] =
+    [DIFFICULTY_NORMAL][TRAINER_58F43966] =
     {
 #line 6144
         .trainerName = _("Blank"),
@@ -16650,7 +16650,7 @@
         {
             {
 #line 6148
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6150
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16662,7 +16662,7 @@
         },
     },
 #line 6151
-    [DIFFICULTY_NORMAL][TRAINER_WADE] =
+    [DIFFICULTY_NORMAL][TRAINER_59592DE4] =
     {
 #line 6152
         .trainerName = _("Blank"),
@@ -16677,7 +16677,7 @@
         {
             {
 #line 6156
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6158
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16689,7 +16689,7 @@
         },
     },
 #line 6159
-    [DIFFICULTY_NORMAL][TRAINER_CARTER] =
+    [DIFFICULTY_NORMAL][TRAINER_598585C1] =
     {
 #line 6160
         .trainerName = _("Blank"),
@@ -16704,7 +16704,7 @@
         {
             {
 #line 6164
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6166
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16716,7 +16716,7 @@
         },
     },
 #line 6167
-    [DIFFICULTY_NORMAL][TRAINER_ELLIOT_2] =
+    [DIFFICULTY_NORMAL][TRAINER_59981F0D] =
     {
 #line 6168
         .trainerName = _("Blank"),
@@ -16731,7 +16731,7 @@
         {
             {
 #line 6172
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6174
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16743,7 +16743,7 @@
         },
     },
 #line 6175
-    [DIFFICULTY_NORMAL][TRAINER_ELLIOT_3] =
+    [DIFFICULTY_NORMAL][TRAINER_59E335AB] =
     {
 #line 6176
         .trainerName = _("Blank"),
@@ -16758,7 +16758,7 @@
         {
             {
 #line 6180
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6182
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16770,7 +16770,7 @@
         },
     },
 #line 6183
-    [DIFFICULTY_NORMAL][TRAINER_ELLIOT_4] =
+    [DIFFICULTY_NORMAL][TRAINER_59FFFCED] =
     {
 #line 6184
         .trainerName = _("Blank"),
@@ -16785,7 +16785,7 @@
         {
             {
 #line 6188
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6190
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16797,7 +16797,7 @@
         },
     },
 #line 6191
-    [DIFFICULTY_NORMAL][TRAINER_ELLIOT_5] =
+    [DIFFICULTY_NORMAL][TRAINER_5ABF4FA4] =
     {
 #line 6192
         .trainerName = _("Blank"),
@@ -16812,7 +16812,7 @@
         {
             {
 #line 6196
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6198
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16824,7 +16824,7 @@
         },
     },
 #line 6199
-    [DIFFICULTY_NORMAL][TRAINER_RONALD] =
+    [DIFFICULTY_NORMAL][TRAINER_5AC61FE5] =
     {
 #line 6200
         .trainerName = _("Blank"),
@@ -16839,7 +16839,7 @@
         {
             {
 #line 6204
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6206
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16851,7 +16851,7 @@
         },
     },
 #line 6207
-    [DIFFICULTY_NORMAL][TRAINER_JACOB] =
+    [DIFFICULTY_NORMAL][TRAINER_5AD29FF8] =
     {
 #line 6208
         .trainerName = _("Blank"),
@@ -16866,7 +16866,7 @@
         {
             {
 #line 6212
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6214
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16878,7 +16878,7 @@
         },
     },
 #line 6215
-    [DIFFICULTY_NORMAL][TRAINER_ANTHONY] =
+    [DIFFICULTY_NORMAL][TRAINER_5AD4C218] =
     {
 #line 6216
         .trainerName = _("Blank"),
@@ -16893,7 +16893,7 @@
         {
             {
 #line 6220
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6222
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16905,7 +16905,7 @@
         },
     },
 #line 6223
-    [DIFFICULTY_NORMAL][TRAINER_BENJAMIN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_5B5F6AE8] =
     {
 #line 6224
         .trainerName = _("Blank"),
@@ -16920,7 +16920,7 @@
         {
             {
 #line 6228
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6230
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16932,7 +16932,7 @@
         },
     },
 #line 6231
-    [DIFFICULTY_NORMAL][TRAINER_BENJAMIN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_5B6304FF] =
     {
 #line 6232
         .trainerName = _("Blank"),
@@ -16947,7 +16947,7 @@
         {
             {
 #line 6236
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6238
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16959,7 +16959,7 @@
         },
     },
 #line 6239
-    [DIFFICULTY_NORMAL][TRAINER_BENJAMIN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_5B75B30F] =
     {
 #line 6240
         .trainerName = _("Blank"),
@@ -16974,7 +16974,7 @@
         {
             {
 #line 6244
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6246
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -16986,7 +16986,7 @@
         },
     },
 #line 6247
-    [DIFFICULTY_NORMAL][TRAINER_BENJAMIN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_5B983361] =
     {
 #line 6248
         .trainerName = _("Blank"),
@@ -17001,7 +17001,7 @@
         {
             {
 #line 6252
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6254
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17013,7 +17013,7 @@
         },
     },
 #line 6255
-    [DIFFICULTY_NORMAL][TRAINER_BENJAMIN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_5BD8EA81] =
     {
 #line 6256
         .trainerName = _("Blank"),
@@ -17028,7 +17028,7 @@
         {
             {
 #line 6260
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6262
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17040,7 +17040,7 @@
         },
     },
 #line 6263
-    [DIFFICULTY_NORMAL][TRAINER_ABIGAIL_1] =
+    [DIFFICULTY_NORMAL][TRAINER_5C315841] =
     {
 #line 6264
         .trainerName = _("Blank"),
@@ -17055,7 +17055,7 @@
         {
             {
 #line 6268
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6270
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17067,7 +17067,7 @@
         },
     },
 #line 6271
-    [DIFFICULTY_NORMAL][TRAINER_JASMINE] =
+    [DIFFICULTY_NORMAL][TRAINER_5C573C11] =
     {
 #line 6272
         .trainerName = _("Blank"),
@@ -17082,7 +17082,7 @@
         {
             {
 #line 6276
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6278
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17094,7 +17094,7 @@
         },
     },
 #line 6279
-    [DIFFICULTY_NORMAL][TRAINER_ABIGAIL_2] =
+    [DIFFICULTY_NORMAL][TRAINER_5CAB03DD] =
     {
 #line 6280
         .trainerName = _("Blank"),
@@ -17109,7 +17109,7 @@
         {
             {
 #line 6284
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6286
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17121,7 +17121,7 @@
         },
     },
 #line 6287
-    [DIFFICULTY_NORMAL][TRAINER_ABIGAIL_3] =
+    [DIFFICULTY_NORMAL][TRAINER_5CBDB116] =
     {
 #line 6288
         .trainerName = _("Blank"),
@@ -17136,7 +17136,7 @@
         {
             {
 #line 6292
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6294
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17148,7 +17148,7 @@
         },
     },
 #line 6295
-    [DIFFICULTY_NORMAL][TRAINER_ABIGAIL_4] =
+    [DIFFICULTY_NORMAL][TRAINER_5D0C4B8F] =
     {
 #line 6296
         .trainerName = _("Blank"),
@@ -17163,7 +17163,7 @@
         {
             {
 #line 6300
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6302
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17175,7 +17175,7 @@
         },
     },
 #line 6303
-    [DIFFICULTY_NORMAL][TRAINER_ABIGAIL_5] =
+    [DIFFICULTY_NORMAL][TRAINER_5D2CCD41] =
     {
 #line 6304
         .trainerName = _("Blank"),
@@ -17190,7 +17190,7 @@
         {
             {
 #line 6308
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6310
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17202,7 +17202,7 @@
         },
     },
 #line 6311
-    [DIFFICULTY_NORMAL][TRAINER_DYLAN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_5D5F491E] =
     {
 #line 6312
         .trainerName = _("Blank"),
@@ -17217,7 +17217,7 @@
         {
             {
 #line 6316
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6318
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17229,7 +17229,7 @@
         },
     },
 #line 6319
-    [DIFFICULTY_NORMAL][TRAINER_DYLAN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_5D81D8F9] =
     {
 #line 6320
         .trainerName = _("Blank"),
@@ -17244,7 +17244,7 @@
         {
             {
 #line 6324
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6326
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17256,7 +17256,7 @@
         },
     },
 #line 6327
-    [DIFFICULTY_NORMAL][TRAINER_DYLAN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_5D86E702] =
     {
 #line 6328
         .trainerName = _("Blank"),
@@ -17271,7 +17271,7 @@
         {
             {
 #line 6332
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6334
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17283,7 +17283,7 @@
         },
     },
 #line 6335
-    [DIFFICULTY_NORMAL][TRAINER_DYLAN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_5D9ABC58] =
     {
 #line 6336
         .trainerName = _("Blank"),
@@ -17298,7 +17298,7 @@
         {
             {
 #line 6340
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6342
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17310,7 +17310,7 @@
         },
     },
 #line 6343
-    [DIFFICULTY_NORMAL][TRAINER_DYLAN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_5DA9F2AE] =
     {
 #line 6344
         .trainerName = _("Blank"),
@@ -17325,7 +17325,7 @@
         {
             {
 #line 6348
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6350
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17337,7 +17337,7 @@
         },
     },
 #line 6351
-    [DIFFICULTY_NORMAL][TRAINER_MARIA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_5E13316C] =
     {
 #line 6352
         .trainerName = _("Blank"),
@@ -17352,7 +17352,7 @@
         {
             {
 #line 6356
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6358
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17364,7 +17364,7 @@
         },
     },
 #line 6359
-    [DIFFICULTY_NORMAL][TRAINER_MARIA_2] =
+    [DIFFICULTY_NORMAL][TRAINER_5EA7A638] =
     {
 #line 6360
         .trainerName = _("Blank"),
@@ -17379,7 +17379,7 @@
         {
             {
 #line 6364
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6366
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17391,7 +17391,7 @@
         },
     },
 #line 6367
-    [DIFFICULTY_NORMAL][TRAINER_MARIA_3] =
+    [DIFFICULTY_NORMAL][TRAINER_5EB4C98F] =
     {
 #line 6368
         .trainerName = _("Blank"),
@@ -17406,7 +17406,7 @@
         {
             {
 #line 6372
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6374
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17418,7 +17418,7 @@
         },
     },
 #line 6375
-    [DIFFICULTY_NORMAL][TRAINER_MARIA_4] =
+    [DIFFICULTY_NORMAL][TRAINER_5EF71DA1] =
     {
 #line 6376
         .trainerName = _("Blank"),
@@ -17433,7 +17433,7 @@
         {
             {
 #line 6380
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6382
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17445,7 +17445,7 @@
         },
     },
 #line 6383
-    [DIFFICULTY_NORMAL][TRAINER_MARIA_5] =
+    [DIFFICULTY_NORMAL][TRAINER_5F858802] =
     {
 #line 6384
         .trainerName = _("Blank"),
@@ -17460,7 +17460,7 @@
         {
             {
 #line 6388
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6390
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17472,7 +17472,7 @@
         },
     },
 #line 6391
-    [DIFFICULTY_NORMAL][TRAINER_CAMDEN] =
+    [DIFFICULTY_NORMAL][TRAINER_5FA4C80F] =
     {
 #line 6392
         .trainerName = _("Blank"),
@@ -17487,7 +17487,7 @@
         {
             {
 #line 6396
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6398
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17499,7 +17499,7 @@
         },
     },
 #line 6399
-    [DIFFICULTY_NORMAL][TRAINER_DEMETRIUS] =
+    [DIFFICULTY_NORMAL][TRAINER_5FD48FB2] =
     {
 #line 6400
         .trainerName = _("Blank"),
@@ -17514,7 +17514,7 @@
         {
             {
 #line 6404
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6406
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17526,7 +17526,7 @@
         },
     },
 #line 6407
-    [DIFFICULTY_NORMAL][TRAINER_ISAIAH_1] =
+    [DIFFICULTY_NORMAL][TRAINER_5FF1DEC5] =
     {
 #line 6408
         .trainerName = _("Blank"),
@@ -17541,7 +17541,7 @@
         {
             {
 #line 6412
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6414
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17553,7 +17553,7 @@
         },
     },
 #line 6415
-    [DIFFICULTY_NORMAL][TRAINER_PABLO_1] =
+    [DIFFICULTY_NORMAL][TRAINER_6016A968] =
     {
 #line 6416
         .trainerName = _("Blank"),
@@ -17568,7 +17568,7 @@
         {
             {
 #line 6420
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6422
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17580,7 +17580,7 @@
         },
     },
 #line 6423
-    [DIFFICULTY_NORMAL][TRAINER_CHASE] =
+    [DIFFICULTY_NORMAL][TRAINER_6058C03B] =
     {
 #line 6424
         .trainerName = _("Blank"),
@@ -17595,7 +17595,7 @@
         {
             {
 #line 6428
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6430
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17607,7 +17607,7 @@
         },
     },
 #line 6431
-    [DIFFICULTY_NORMAL][TRAINER_ISAIAH_2] =
+    [DIFFICULTY_NORMAL][TRAINER_60C3BD24] =
     {
 #line 6432
         .trainerName = _("Blank"),
@@ -17622,7 +17622,7 @@
         {
             {
 #line 6436
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6438
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17634,7 +17634,7 @@
         },
     },
 #line 6439
-    [DIFFICULTY_NORMAL][TRAINER_ISAIAH_3] =
+    [DIFFICULTY_NORMAL][TRAINER_60C56554] =
     {
 #line 6440
         .trainerName = _("Blank"),
@@ -17649,7 +17649,7 @@
         {
             {
 #line 6444
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6446
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17661,7 +17661,7 @@
         },
     },
 #line 6447
-    [DIFFICULTY_NORMAL][TRAINER_ISAIAH_4] =
+    [DIFFICULTY_NORMAL][TRAINER_60D66B86] =
     {
 #line 6448
         .trainerName = _("Blank"),
@@ -17676,7 +17676,7 @@
         {
             {
 #line 6452
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6454
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17688,7 +17688,7 @@
         },
     },
 #line 6455
-    [DIFFICULTY_NORMAL][TRAINER_ISAIAH_5] =
+    [DIFFICULTY_NORMAL][TRAINER_6102A0FC] =
     {
 #line 6456
         .trainerName = _("Blank"),
@@ -17703,7 +17703,7 @@
         {
             {
 #line 6460
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6462
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17715,7 +17715,7 @@
         },
     },
 #line 6463
-    [DIFFICULTY_NORMAL][TRAINER_ISOBEL] =
+    [DIFFICULTY_NORMAL][TRAINER_61E76999] =
     {
 #line 6464
         .trainerName = _("Blank"),
@@ -17730,7 +17730,7 @@
         {
             {
 #line 6468
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6470
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17742,7 +17742,7 @@
         },
     },
 #line 6471
-    [DIFFICULTY_NORMAL][TRAINER_DONNY] =
+    [DIFFICULTY_NORMAL][TRAINER_626AECE8] =
     {
 #line 6472
         .trainerName = _("Blank"),
@@ -17757,7 +17757,7 @@
         {
             {
 #line 6476
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6478
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17769,7 +17769,7 @@
         },
     },
 #line 6479
-    [DIFFICULTY_NORMAL][TRAINER_TALIA] =
+    [DIFFICULTY_NORMAL][TRAINER_62851FFB] =
     {
 #line 6480
         .trainerName = _("Blank"),
@@ -17784,7 +17784,7 @@
         {
             {
 #line 6484
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6486
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17796,7 +17796,7 @@
         },
     },
 #line 6487
-    [DIFFICULTY_NORMAL][TRAINER_KATELYN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_62C33409] =
     {
 #line 6488
         .trainerName = _("Blank"),
@@ -17811,7 +17811,7 @@
         {
             {
 #line 6492
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6494
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17823,7 +17823,7 @@
         },
     },
 #line 6495
-    [DIFFICULTY_NORMAL][TRAINER_ALLISON] =
+    [DIFFICULTY_NORMAL][TRAINER_62D0F875] =
     {
 #line 6496
         .trainerName = _("Blank"),
@@ -17838,7 +17838,7 @@
         {
             {
 #line 6500
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6502
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17850,7 +17850,7 @@
         },
     },
 #line 6503
-    [DIFFICULTY_NORMAL][TRAINER_KATELYN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_63409A54] =
     {
 #line 6504
         .trainerName = _("Blank"),
@@ -17865,7 +17865,7 @@
         {
             {
 #line 6508
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6510
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17877,7 +17877,7 @@
         },
     },
 #line 6511
-    [DIFFICULTY_NORMAL][TRAINER_KATELYN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_6397B964] =
     {
 #line 6512
         .trainerName = _("Blank"),
@@ -17892,7 +17892,7 @@
         {
             {
 #line 6516
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6518
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17904,7 +17904,7 @@
         },
     },
 #line 6519
-    [DIFFICULTY_NORMAL][TRAINER_KATELYN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_63DB05B6] =
     {
 #line 6520
         .trainerName = _("Blank"),
@@ -17919,7 +17919,7 @@
         {
             {
 #line 6524
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6526
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17931,7 +17931,7 @@
         },
     },
 #line 6527
-    [DIFFICULTY_NORMAL][TRAINER_KATELYN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_63DC02C9] =
     {
 #line 6528
         .trainerName = _("Blank"),
@@ -17946,7 +17946,7 @@
         {
             {
 #line 6532
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6534
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17958,7 +17958,7 @@
         },
     },
 #line 6535
-    [DIFFICULTY_NORMAL][TRAINER_NICOLAS_1] =
+    [DIFFICULTY_NORMAL][TRAINER_6439D44C] =
     {
 #line 6536
         .trainerName = _("Blank"),
@@ -17973,7 +17973,7 @@
         {
             {
 #line 6540
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6542
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -17985,7 +17985,7 @@
         },
     },
 #line 6543
-    [DIFFICULTY_NORMAL][TRAINER_NICOLAS_2] =
+    [DIFFICULTY_NORMAL][TRAINER_64E30596] =
     {
 #line 6544
         .trainerName = _("Blank"),
@@ -18000,7 +18000,7 @@
         {
             {
 #line 6548
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6550
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18012,7 +18012,7 @@
         },
     },
 #line 6551
-    [DIFFICULTY_NORMAL][TRAINER_NICOLAS_3] =
+    [DIFFICULTY_NORMAL][TRAINER_6566F645] =
     {
 #line 6552
         .trainerName = _("Blank"),
@@ -18027,7 +18027,7 @@
         {
             {
 #line 6556
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6558
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18039,7 +18039,7 @@
         },
     },
 #line 6559
-    [DIFFICULTY_NORMAL][TRAINER_NICOLAS_4] =
+    [DIFFICULTY_NORMAL][TRAINER_656A39C8] =
     {
 #line 6560
         .trainerName = _("Blank"),
@@ -18054,7 +18054,7 @@
         {
             {
 #line 6564
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6566
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18066,7 +18066,7 @@
         },
     },
 #line 6567
-    [DIFFICULTY_NORMAL][TRAINER_NICOLAS_5] =
+    [DIFFICULTY_NORMAL][TRAINER_656EC067] =
     {
 #line 6568
         .trainerName = _("Blank"),
@@ -18081,7 +18081,7 @@
         {
             {
 #line 6572
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6574
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18093,7 +18093,7 @@
         },
     },
 #line 6575
-    [DIFFICULTY_NORMAL][TRAINER_AARON] =
+    [DIFFICULTY_NORMAL][TRAINER_65CE4F87] =
     {
 #line 6576
         .trainerName = _("Blank"),
@@ -18108,7 +18108,7 @@
         {
             {
 #line 6580
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6582
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18120,7 +18120,7 @@
         },
     },
 #line 6583
-    [DIFFICULTY_NORMAL][TRAINER_PERRY] =
+    [DIFFICULTY_NORMAL][TRAINER_662EBAAA] =
     {
 #line 6584
         .trainerName = _("Blank"),
@@ -18135,7 +18135,7 @@
         {
             {
 #line 6588
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6590
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18147,7 +18147,7 @@
         },
     },
 #line 6591
-    [DIFFICULTY_NORMAL][TRAINER_HUGH] =
+    [DIFFICULTY_NORMAL][TRAINER_66531C74] =
     {
 #line 6592
         .trainerName = _("Blank"),
@@ -18162,7 +18162,7 @@
         {
             {
 #line 6596
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6598
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18174,7 +18174,7 @@
         },
     },
 #line 6599
-    [DIFFICULTY_NORMAL][TRAINER_PHIL] =
+    [DIFFICULTY_NORMAL][TRAINER_66B16F22] =
     {
 #line 6600
         .trainerName = _("Blank"),
@@ -18189,7 +18189,7 @@
         {
             {
 #line 6604
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6606
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18201,7 +18201,7 @@
         },
     },
 #line 6607
-    [DIFFICULTY_NORMAL][TRAINER_JARED] =
+    [DIFFICULTY_NORMAL][TRAINER_66D26AEC] =
     {
 #line 6608
         .trainerName = _("Blank"),
@@ -18216,7 +18216,7 @@
         {
             {
 #line 6612
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6614
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18228,7 +18228,7 @@
         },
     },
 #line 6615
-    [DIFFICULTY_NORMAL][TRAINER_HUMBERTO] =
+    [DIFFICULTY_NORMAL][TRAINER_675DA518] =
     {
 #line 6616
         .trainerName = _("Blank"),
@@ -18243,7 +18243,7 @@
         {
             {
 #line 6620
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6622
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18255,7 +18255,7 @@
         },
     },
 #line 6623
-    [DIFFICULTY_NORMAL][TRAINER_PRESLEY] =
+    [DIFFICULTY_NORMAL][TRAINER_677A22D7] =
     {
 #line 6624
         .trainerName = _("Blank"),
@@ -18270,7 +18270,7 @@
         {
             {
 #line 6628
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6630
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18282,7 +18282,7 @@
         },
     },
 #line 6631
-    [DIFFICULTY_NORMAL][TRAINER_EDWARDO] =
+    [DIFFICULTY_NORMAL][TRAINER_6792B394] =
     {
 #line 6632
         .trainerName = _("Blank"),
@@ -18297,7 +18297,7 @@
         {
             {
 #line 6636
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6638
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18309,7 +18309,7 @@
         },
     },
 #line 6639
-    [DIFFICULTY_NORMAL][TRAINER_COLIN] =
+    [DIFFICULTY_NORMAL][TRAINER_683A2305] =
     {
 #line 6640
         .trainerName = _("Blank"),
@@ -18324,7 +18324,7 @@
         {
             {
 #line 6644
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6646
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18336,7 +18336,7 @@
         },
     },
 #line 6647
-    [DIFFICULTY_NORMAL][TRAINER_ROBERT_1] =
+    [DIFFICULTY_NORMAL][TRAINER_692DD7CF] =
     {
 #line 6648
         .trainerName = _("Blank"),
@@ -18351,7 +18351,7 @@
         {
             {
 #line 6652
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6654
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18363,7 +18363,7 @@
         },
     },
 #line 6655
-    [DIFFICULTY_NORMAL][TRAINER_BENNY] =
+    [DIFFICULTY_NORMAL][TRAINER_698BB117] =
     {
 #line 6656
         .trainerName = _("Blank"),
@@ -18378,7 +18378,7 @@
         {
             {
 #line 6660
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6662
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18390,7 +18390,7 @@
         },
     },
 #line 6663
-    [DIFFICULTY_NORMAL][TRAINER_CHESTER] =
+    [DIFFICULTY_NORMAL][TRAINER_69EE8132] =
     {
 #line 6664
         .trainerName = _("Blank"),
@@ -18405,7 +18405,7 @@
         {
             {
 #line 6668
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6670
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18417,7 +18417,7 @@
         },
     },
 #line 6671
-    [DIFFICULTY_NORMAL][TRAINER_ROBERT_2] =
+    [DIFFICULTY_NORMAL][TRAINER_6A35EE35] =
     {
 #line 6672
         .trainerName = _("Blank"),
@@ -18432,7 +18432,7 @@
         {
             {
 #line 6676
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6678
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18444,7 +18444,7 @@
         },
     },
 #line 6679
-    [DIFFICULTY_NORMAL][TRAINER_ROBERT_3] =
+    [DIFFICULTY_NORMAL][TRAINER_6A3930E6] =
     {
 #line 6680
         .trainerName = _("Blank"),
@@ -18459,7 +18459,7 @@
         {
             {
 #line 6684
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6686
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18471,7 +18471,7 @@
         },
     },
 #line 6687
-    [DIFFICULTY_NORMAL][TRAINER_ROBERT_4] =
+    [DIFFICULTY_NORMAL][TRAINER_6A48F28F] =
     {
 #line 6688
         .trainerName = _("Blank"),
@@ -18486,7 +18486,7 @@
         {
             {
 #line 6692
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6694
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18498,7 +18498,7 @@
         },
     },
 #line 6695
-    [DIFFICULTY_NORMAL][TRAINER_ROBERT_5] =
+    [DIFFICULTY_NORMAL][TRAINER_6A8EEC78] =
     {
 #line 6696
         .trainerName = _("Blank"),
@@ -18513,7 +18513,7 @@
         {
             {
 #line 6700
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6702
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18525,7 +18525,7 @@
         },
     },
 #line 6703
-    [DIFFICULTY_NORMAL][TRAINER_ALEX] =
+    [DIFFICULTY_NORMAL][TRAINER_6AABC7EA] =
     {
 #line 6704
         .trainerName = _("Blank"),
@@ -18540,7 +18540,7 @@
         {
             {
 #line 6708
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6710
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18552,7 +18552,7 @@
         },
     },
 #line 6711
-    [DIFFICULTY_NORMAL][TRAINER_BECK] =
+    [DIFFICULTY_NORMAL][TRAINER_6ABE3EC1] =
     {
 #line 6712
         .trainerName = _("Blank"),
@@ -18567,7 +18567,7 @@
         {
             {
 #line 6716
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6718
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18579,7 +18579,7 @@
         },
     },
 #line 6719
-    [DIFFICULTY_NORMAL][TRAINER_YASU] =
+    [DIFFICULTY_NORMAL][TRAINER_6B14C259] =
     {
 #line 6720
         .trainerName = _("Blank"),
@@ -18594,7 +18594,7 @@
         {
             {
 #line 6724
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6726
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18606,7 +18606,7 @@
         },
     },
 #line 6727
-    [DIFFICULTY_NORMAL][TRAINER_TAKASHI] =
+    [DIFFICULTY_NORMAL][TRAINER_6BEEE6BE] =
     {
 #line 6728
         .trainerName = _("Blank"),
@@ -18621,7 +18621,7 @@
         {
             {
 #line 6732
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6734
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18633,7 +18633,7 @@
         },
     },
 #line 6735
-    [DIFFICULTY_NORMAL][TRAINER_DIANNE] =
+    [DIFFICULTY_NORMAL][TRAINER_6C7736F9] =
     {
 #line 6736
         .trainerName = _("Blank"),
@@ -18648,7 +18648,7 @@
         {
             {
 #line 6740
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6742
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18660,7 +18660,7 @@
         },
     },
 #line 6743
-    [DIFFICULTY_NORMAL][TRAINER_JANI] =
+    [DIFFICULTY_NORMAL][TRAINER_6CC913A2] =
     {
 #line 6744
         .trainerName = _("Blank"),
@@ -18675,7 +18675,7 @@
         {
             {
 #line 6748
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6750
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18687,7 +18687,7 @@
         },
     },
 #line 6751
-    [DIFFICULTY_NORMAL][TRAINER_LAO_1] =
+    [DIFFICULTY_NORMAL][TRAINER_6D45549A] =
     {
 #line 6752
         .trainerName = _("Blank"),
@@ -18702,7 +18702,7 @@
         {
             {
 #line 6756
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6758
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18714,7 +18714,7 @@
         },
     },
 #line 6759
-    [DIFFICULTY_NORMAL][TRAINER_LUNG] =
+    [DIFFICULTY_NORMAL][TRAINER_6E1E82B2] =
     {
 #line 6760
         .trainerName = _("Blank"),
@@ -18729,7 +18729,7 @@
         {
             {
 #line 6764
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6766
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18741,7 +18741,7 @@
         },
     },
 #line 6767
-    [DIFFICULTY_NORMAL][TRAINER_LAO_2] =
+    [DIFFICULTY_NORMAL][TRAINER_6E663040] =
     {
 #line 6768
         .trainerName = _("Blank"),
@@ -18756,7 +18756,7 @@
         {
             {
 #line 6772
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6774
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18768,7 +18768,7 @@
         },
     },
 #line 6775
-    [DIFFICULTY_NORMAL][TRAINER_LAO_3] =
+    [DIFFICULTY_NORMAL][TRAINER_6ED2C120] =
     {
 #line 6776
         .trainerName = _("Blank"),
@@ -18783,7 +18783,7 @@
         {
             {
 #line 6780
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6782
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18795,7 +18795,7 @@
         },
     },
 #line 6783
-    [DIFFICULTY_NORMAL][TRAINER_LAO_4] =
+    [DIFFICULTY_NORMAL][TRAINER_6F5C8078] =
     {
 #line 6784
         .trainerName = _("Blank"),
@@ -18810,7 +18810,7 @@
         {
             {
 #line 6788
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6790
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18822,7 +18822,7 @@
         },
     },
 #line 6791
-    [DIFFICULTY_NORMAL][TRAINER_LAO_5] =
+    [DIFFICULTY_NORMAL][TRAINER_6F5E9CF9] =
     {
 #line 6792
         .trainerName = _("Blank"),
@@ -18837,7 +18837,7 @@
         {
             {
 #line 6796
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6798
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18849,7 +18849,7 @@
         },
     },
 #line 6799
-    [DIFFICULTY_NORMAL][TRAINER_JOCELYN] =
+    [DIFFICULTY_NORMAL][TRAINER_6FC24896] =
     {
 #line 6800
         .trainerName = _("Blank"),
@@ -18864,7 +18864,7 @@
         {
             {
 #line 6804
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6806
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18876,7 +18876,7 @@
         },
     },
 #line 6807
-    [DIFFICULTY_NORMAL][TRAINER_LAURA] =
+    [DIFFICULTY_NORMAL][TRAINER_6FF3213D] =
     {
 #line 6808
         .trainerName = _("Blank"),
@@ -18891,7 +18891,7 @@
         {
             {
 #line 6812
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6814
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18903,7 +18903,7 @@
         },
     },
 #line 6815
-    [DIFFICULTY_NORMAL][TRAINER_CYNDY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_701AC24E] =
     {
 #line 6816
         .trainerName = _("Blank"),
@@ -18918,7 +18918,7 @@
         {
             {
 #line 6820
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6822
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18930,7 +18930,7 @@
         },
     },
 #line 6823
-    [DIFFICULTY_NORMAL][TRAINER_CORA] =
+    [DIFFICULTY_NORMAL][TRAINER_703B73C4] =
     {
 #line 6824
         .trainerName = _("Blank"),
@@ -18945,7 +18945,7 @@
         {
             {
 #line 6828
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6830
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18957,7 +18957,7 @@
         },
     },
 #line 6831
-    [DIFFICULTY_NORMAL][TRAINER_PAULA] =
+    [DIFFICULTY_NORMAL][TRAINER_70C712D3] =
     {
 #line 6832
         .trainerName = _("Blank"),
@@ -18972,7 +18972,7 @@
         {
             {
 #line 6836
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6838
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -18984,7 +18984,7 @@
         },
     },
 #line 6839
-    [DIFFICULTY_NORMAL][TRAINER_CYNDY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_70EAAAF5] =
     {
 #line 6840
         .trainerName = _("Blank"),
@@ -18999,7 +18999,7 @@
         {
             {
 #line 6844
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6846
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19011,7 +19011,7 @@
         },
     },
 #line 6847
-    [DIFFICULTY_NORMAL][TRAINER_CYNDY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_70F1A62B] =
     {
 #line 6848
         .trainerName = _("Blank"),
@@ -19026,7 +19026,7 @@
         {
             {
 #line 6852
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6854
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19038,7 +19038,7 @@
         },
     },
 #line 6855
-    [DIFFICULTY_NORMAL][TRAINER_CYNDY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_7169C897] =
     {
 #line 6856
         .trainerName = _("Blank"),
@@ -19053,7 +19053,7 @@
         {
             {
 #line 6860
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6862
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19065,7 +19065,7 @@
         },
     },
 #line 6863
-    [DIFFICULTY_NORMAL][TRAINER_CYNDY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_7178DF27] =
     {
 #line 6864
         .trainerName = _("Blank"),
@@ -19080,7 +19080,7 @@
         {
             {
 #line 6868
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6870
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19092,7 +19092,7 @@
         },
     },
 #line 6871
-    [DIFFICULTY_NORMAL][TRAINER_MADELINE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_7190E405] =
     {
 #line 6872
         .trainerName = _("Blank"),
@@ -19107,7 +19107,7 @@
         {
             {
 #line 6876
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6878
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19119,7 +19119,7 @@
         },
     },
 #line 6879
-    [DIFFICULTY_NORMAL][TRAINER_CLARISSA] =
+    [DIFFICULTY_NORMAL][TRAINER_71CE545E] =
     {
 #line 6880
         .trainerName = _("Blank"),
@@ -19134,7 +19134,7 @@
         {
             {
 #line 6884
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6886
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19146,7 +19146,7 @@
         },
     },
 #line 6887
-    [DIFFICULTY_NORMAL][TRAINER_ANGELICA] =
+    [DIFFICULTY_NORMAL][TRAINER_7249425F] =
     {
 #line 6888
         .trainerName = _("Blank"),
@@ -19161,7 +19161,7 @@
         {
             {
 #line 6892
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6894
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19173,7 +19173,7 @@
         },
     },
 #line 6895
-    [DIFFICULTY_NORMAL][TRAINER_MADELINE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_72641C9D] =
     {
 #line 6896
         .trainerName = _("Blank"),
@@ -19188,7 +19188,7 @@
         {
             {
 #line 6900
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6902
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19200,7 +19200,7 @@
         },
     },
 #line 6903
-    [DIFFICULTY_NORMAL][TRAINER_MADELINE_3] =
+    [DIFFICULTY_NORMAL][TRAINER_729F2BBB] =
     {
 #line 6904
         .trainerName = _("Blank"),
@@ -19215,7 +19215,7 @@
         {
             {
 #line 6908
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6910
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19227,7 +19227,7 @@
         },
     },
 #line 6911
-    [DIFFICULTY_NORMAL][TRAINER_MADELINE_4] =
+    [DIFFICULTY_NORMAL][TRAINER_72F25B41] =
     {
 #line 6912
         .trainerName = _("Blank"),
@@ -19242,7 +19242,7 @@
         {
             {
 #line 6916
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6918
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19254,7 +19254,7 @@
         },
     },
 #line 6919
-    [DIFFICULTY_NORMAL][TRAINER_MADELINE_5] =
+    [DIFFICULTY_NORMAL][TRAINER_732D4997] =
     {
 #line 6920
         .trainerName = _("Blank"),
@@ -19269,7 +19269,7 @@
         {
             {
 #line 6924
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6926
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19281,7 +19281,7 @@
         },
     },
 #line 6927
-    [DIFFICULTY_NORMAL][TRAINER_BEVERLY] =
+    [DIFFICULTY_NORMAL][TRAINER_73A561CC] =
     {
 #line 6928
         .trainerName = _("Blank"),
@@ -19296,7 +19296,7 @@
         {
             {
 #line 6932
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6934
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19308,7 +19308,7 @@
         },
     },
 #line 6935
-    [DIFFICULTY_NORMAL][TRAINER_IMANI] =
+    [DIFFICULTY_NORMAL][TRAINER_7420DB0C] =
     {
 #line 6936
         .trainerName = _("Blank"),
@@ -19323,7 +19323,7 @@
         {
             {
 #line 6940
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6942
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19335,7 +19335,7 @@
         },
     },
 #line 6943
-    [DIFFICULTY_NORMAL][TRAINER_KYLA] =
+    [DIFFICULTY_NORMAL][TRAINER_7435DE7C] =
     {
 #line 6944
         .trainerName = _("Blank"),
@@ -19350,7 +19350,7 @@
         {
             {
 #line 6948
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6950
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19362,7 +19362,7 @@
         },
     },
 #line 6951
-    [DIFFICULTY_NORMAL][TRAINER_DENISE] =
+    [DIFFICULTY_NORMAL][TRAINER_75A2A667] =
     {
 #line 6952
         .trainerName = _("Blank"),
@@ -19377,7 +19377,7 @@
         {
             {
 #line 6956
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6958
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19389,7 +19389,7 @@
         },
     },
 #line 6959
-    [DIFFICULTY_NORMAL][TRAINER_BETH] =
+    [DIFFICULTY_NORMAL][TRAINER_75D602F2] =
     {
 #line 6960
         .trainerName = _("Blank"),
@@ -19404,7 +19404,7 @@
         {
             {
 #line 6964
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6966
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19416,7 +19416,7 @@
         },
     },
 #line 6967
-    [DIFFICULTY_NORMAL][TRAINER_TARA] =
+    [DIFFICULTY_NORMAL][TRAINER_77DDBBAF] =
     {
 #line 6968
         .trainerName = _("Blank"),
@@ -19431,7 +19431,7 @@
         {
             {
 #line 6972
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6974
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19443,7 +19443,7 @@
         },
     },
 #line 6975
-    [DIFFICULTY_NORMAL][TRAINER_MISSY] =
+    [DIFFICULTY_NORMAL][TRAINER_783AB388] =
     {
 #line 6976
         .trainerName = _("Blank"),
@@ -19458,7 +19458,7 @@
         {
             {
 #line 6980
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6982
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19470,7 +19470,7 @@
         },
     },
 #line 6983
-    [DIFFICULTY_NORMAL][TRAINER_ALICE] =
+    [DIFFICULTY_NORMAL][TRAINER_78564BE5] =
     {
 #line 6984
         .trainerName = _("Blank"),
@@ -19485,7 +19485,7 @@
         {
             {
 #line 6988
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6990
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19497,7 +19497,7 @@
         },
     },
 #line 6991
-    [DIFFICULTY_NORMAL][TRAINER_JENNY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_7885ECAF] =
     {
 #line 6992
         .trainerName = _("Blank"),
@@ -19512,7 +19512,7 @@
         {
             {
 #line 6996
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6998
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19524,7 +19524,7 @@
         },
     },
 #line 6999
-    [DIFFICULTY_NORMAL][TRAINER_GRACE] =
+    [DIFFICULTY_NORMAL][TRAINER_78B73516] =
     {
 #line 7000
         .trainerName = _("Blank"),
@@ -19539,7 +19539,7 @@
         {
             {
 #line 7004
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7006
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19551,7 +19551,7 @@
         },
     },
 #line 7007
-    [DIFFICULTY_NORMAL][TRAINER_TANYA] =
+    [DIFFICULTY_NORMAL][TRAINER_78BD858D] =
     {
 #line 7008
         .trainerName = _("Blank"),
@@ -19566,7 +19566,7 @@
         {
             {
 #line 7012
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7014
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19578,7 +19578,7 @@
         },
     },
 #line 7015
-    [DIFFICULTY_NORMAL][TRAINER_SHARON] =
+    [DIFFICULTY_NORMAL][TRAINER_7933DA6C] =
     {
 #line 7016
         .trainerName = _("Blank"),
@@ -19593,7 +19593,7 @@
         {
             {
 #line 7020
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7022
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19605,7 +19605,7 @@
         },
     },
 #line 7023
-    [DIFFICULTY_NORMAL][TRAINER_NIKKI] =
+    [DIFFICULTY_NORMAL][TRAINER_793992D8] =
     {
 #line 7024
         .trainerName = _("Blank"),
@@ -19620,7 +19620,7 @@
         {
             {
 #line 7028
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7030
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19632,7 +19632,7 @@
         },
     },
 #line 7031
-    [DIFFICULTY_NORMAL][TRAINER_BRENDA] =
+    [DIFFICULTY_NORMAL][TRAINER_797E296B] =
     {
 #line 7032
         .trainerName = _("Blank"),
@@ -19647,7 +19647,7 @@
         {
             {
 #line 7036
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7038
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19659,7 +19659,7 @@
         },
     },
 #line 7039
-    [DIFFICULTY_NORMAL][TRAINER_KATIE] =
+    [DIFFICULTY_NORMAL][TRAINER_79EF1DEB] =
     {
 #line 7040
         .trainerName = _("Blank"),
@@ -19674,7 +19674,7 @@
         {
             {
 #line 7044
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7046
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19686,7 +19686,7 @@
         },
     },
 #line 7047
-    [DIFFICULTY_NORMAL][TRAINER_SUSIE] =
+    [DIFFICULTY_NORMAL][TRAINER_7A03677D] =
     {
 #line 7048
         .trainerName = _("Blank"),
@@ -19701,7 +19701,7 @@
         {
             {
 #line 7052
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7054
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19713,7 +19713,7 @@
         },
     },
 #line 7055
-    [DIFFICULTY_NORMAL][TRAINER_KARA] =
+    [DIFFICULTY_NORMAL][TRAINER_7A0C086F] =
     {
 #line 7056
         .trainerName = _("Blank"),
@@ -19728,7 +19728,7 @@
         {
             {
 #line 7060
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7062
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19740,7 +19740,7 @@
         },
     },
 #line 7063
-    [DIFFICULTY_NORMAL][TRAINER_DANA] =
+    [DIFFICULTY_NORMAL][TRAINER_7A89C403] =
     {
 #line 7064
         .trainerName = _("Blank"),
@@ -19755,7 +19755,7 @@
         {
             {
 #line 7068
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7070
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19767,7 +19767,7 @@
         },
     },
 #line 7071
-    [DIFFICULTY_NORMAL][TRAINER_SIENNA] =
+    [DIFFICULTY_NORMAL][TRAINER_7A8D30C6] =
     {
 #line 7072
         .trainerName = _("Blank"),
@@ -19782,7 +19782,7 @@
         {
             {
 #line 7076
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7078
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19794,7 +19794,7 @@
         },
     },
 #line 7079
-    [DIFFICULTY_NORMAL][TRAINER_DEBRA] =
+    [DIFFICULTY_NORMAL][TRAINER_7ABC77C1] =
     {
 #line 7080
         .trainerName = _("Blank"),
@@ -19809,7 +19809,7 @@
         {
             {
 #line 7084
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7086
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19821,7 +19821,7 @@
         },
     },
 #line 7087
-    [DIFFICULTY_NORMAL][TRAINER_LINDA] =
+    [DIFFICULTY_NORMAL][TRAINER_7B5DF36F] =
     {
 #line 7088
         .trainerName = _("Blank"),
@@ -19836,7 +19836,7 @@
         {
             {
 #line 7092
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7094
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19848,7 +19848,7 @@
         },
     },
 #line 7095
-    [DIFFICULTY_NORMAL][TRAINER_KAYLEE] =
+    [DIFFICULTY_NORMAL][TRAINER_7C3BD57C] =
     {
 #line 7096
         .trainerName = _("Blank"),
@@ -19863,7 +19863,7 @@
         {
             {
 #line 7100
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7102
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19875,7 +19875,7 @@
         },
     },
 #line 7103
-    [DIFFICULTY_NORMAL][TRAINER_LAUREL] =
+    [DIFFICULTY_NORMAL][TRAINER_7C4240E1] =
     {
 #line 7104
         .trainerName = _("Blank"),
@@ -19890,7 +19890,7 @@
         {
             {
 #line 7108
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7110
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19902,7 +19902,7 @@
         },
     },
 #line 7111
-    [DIFFICULTY_NORMAL][TRAINER_CARLEE] =
+    [DIFFICULTY_NORMAL][TRAINER_7C5056CA] =
     {
 #line 7112
         .trainerName = _("Blank"),
@@ -19917,7 +19917,7 @@
         {
             {
 #line 7116
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7118
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19929,7 +19929,7 @@
         },
     },
 #line 7119
-    [DIFFICULTY_NORMAL][TRAINER_JENNY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_7C8BD62F] =
     {
 #line 7120
         .trainerName = _("Blank"),
@@ -19944,7 +19944,7 @@
         {
             {
 #line 7124
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7126
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19956,7 +19956,7 @@
         },
     },
 #line 7127
-    [DIFFICULTY_NORMAL][TRAINER_JENNY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_7C9308EF] =
     {
 #line 7128
         .trainerName = _("Blank"),
@@ -19971,7 +19971,7 @@
         {
             {
 #line 7132
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7134
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -19983,7 +19983,7 @@
         },
     },
 #line 7135
-    [DIFFICULTY_NORMAL][TRAINER_JENNY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_7CAF6877] =
     {
 #line 7136
         .trainerName = _("Blank"),
@@ -19998,7 +19998,7 @@
         {
             {
 #line 7140
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7142
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20010,7 +20010,7 @@
         },
     },
 #line 7143
-    [DIFFICULTY_NORMAL][TRAINER_JENNY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_7CBB25EB] =
     {
 #line 7144
         .trainerName = _("Blank"),
@@ -20025,7 +20025,7 @@
         {
             {
 #line 7148
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7150
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20037,7 +20037,7 @@
         },
     },
 #line 7151
-    [DIFFICULTY_NORMAL][TRAINER_HEIDI] =
+    [DIFFICULTY_NORMAL][TRAINER_7CD1AAE1] =
     {
 #line 7152
         .trainerName = _("Blank"),
@@ -20052,7 +20052,7 @@
         {
             {
 #line 7156
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7158
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20064,7 +20064,7 @@
         },
     },
 #line 7159
-    [DIFFICULTY_NORMAL][TRAINER_BECKY] =
+    [DIFFICULTY_NORMAL][TRAINER_7D0F1751] =
     {
 #line 7160
         .trainerName = _("Blank"),
@@ -20079,7 +20079,7 @@
         {
             {
 #line 7164
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7166
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20091,7 +20091,7 @@
         },
     },
 #line 7167
-    [DIFFICULTY_NORMAL][TRAINER_CAROL] =
+    [DIFFICULTY_NORMAL][TRAINER_7D28CB20] =
     {
 #line 7168
         .trainerName = _("Blank"),
@@ -20106,7 +20106,7 @@
         {
             {
 #line 7172
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7174
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20118,7 +20118,7 @@
         },
     },
 #line 7175
-    [DIFFICULTY_NORMAL][TRAINER_NANCY] =
+    [DIFFICULTY_NORMAL][TRAINER_7D536E72] =
     {
 #line 7176
         .trainerName = _("Blank"),
@@ -20133,7 +20133,7 @@
         {
             {
 #line 7180
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7182
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20145,7 +20145,7 @@
         },
     },
 #line 7183
-    [DIFFICULTY_NORMAL][TRAINER_MARTHA] =
+    [DIFFICULTY_NORMAL][TRAINER_7DC358C0] =
     {
 #line 7184
         .trainerName = _("Blank"),
@@ -20160,7 +20160,7 @@
         {
             {
 #line 7188
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7190
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20172,7 +20172,7 @@
         },
     },
 #line 7191
-    [DIFFICULTY_NORMAL][TRAINER_DIANA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_7DEC9A40] =
     {
 #line 7192
         .trainerName = _("Blank"),
@@ -20187,7 +20187,7 @@
         {
             {
 #line 7196
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7198
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20199,7 +20199,7 @@
         },
     },
 #line 7199
-    [DIFFICULTY_NORMAL][TRAINER_CEDRIC] =
+    [DIFFICULTY_NORMAL][TRAINER_7E2F7EB8] =
     {
 #line 7200
         .trainerName = _("Blank"),
@@ -20214,7 +20214,7 @@
         {
             {
 #line 7204
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7206
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20226,7 +20226,7 @@
         },
     },
 #line 7207
-    [DIFFICULTY_NORMAL][TRAINER_IRENE] =
+    [DIFFICULTY_NORMAL][TRAINER_7E7CD9D3] =
     {
 #line 7208
         .trainerName = _("Blank"),
@@ -20241,7 +20241,7 @@
         {
             {
 #line 7212
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7214
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20253,7 +20253,7 @@
         },
     },
 #line 7215
-    [DIFFICULTY_NORMAL][TRAINER_DIANA_2] =
+    [DIFFICULTY_NORMAL][TRAINER_7E8CCD84] =
     {
 #line 7216
         .trainerName = _("Blank"),
@@ -20268,7 +20268,7 @@
         {
             {
 #line 7220
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7222
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20280,7 +20280,7 @@
         },
     },
 #line 7223
-    [DIFFICULTY_NORMAL][TRAINER_DIANA_3] =
+    [DIFFICULTY_NORMAL][TRAINER_8010F97E] =
     {
 #line 7224
         .trainerName = _("Blank"),
@@ -20295,7 +20295,7 @@
         {
             {
 #line 7228
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7230
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20307,7 +20307,7 @@
         },
     },
 #line 7231
-    [DIFFICULTY_NORMAL][TRAINER_DIANA_4] =
+    [DIFFICULTY_NORMAL][TRAINER_805C25F0] =
     {
 #line 7232
         .trainerName = _("Blank"),
@@ -20322,7 +20322,7 @@
         {
             {
 #line 7236
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7238
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20334,7 +20334,7 @@
         },
     },
 #line 7239
-    [DIFFICULTY_NORMAL][TRAINER_DIANA_5] =
+    [DIFFICULTY_NORMAL][TRAINER_80941A21] =
     {
 #line 7240
         .trainerName = _("Blank"),
@@ -20349,7 +20349,7 @@
         {
             {
 #line 7244
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7246
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20361,7 +20361,7 @@
         },
     },
 #line 7247
-    [DIFFICULTY_NORMAL][TRAINER_AMY_AND_LIV_1] =
+    [DIFFICULTY_NORMAL][TRAINER_80AAA333] =
     {
 #line 7248
         .trainerName = _("Blank"),
@@ -20376,7 +20376,7 @@
         {
             {
 #line 7252
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7254
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20388,7 +20388,7 @@
         },
     },
 #line 7255
-    [DIFFICULTY_NORMAL][TRAINER_AMY_AND_LIV_2] =
+    [DIFFICULTY_NORMAL][TRAINER_810A3F32] =
     {
 #line 7256
         .trainerName = _("Blank"),
@@ -20403,7 +20403,7 @@
         {
             {
 #line 7260
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7262
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20415,7 +20415,7 @@
         },
     },
 #line 7263
-    [DIFFICULTY_NORMAL][TRAINER_GINA_AND_MIA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_811C7730] =
     {
 #line 7264
         .trainerName = _("Blank"),
@@ -20430,7 +20430,7 @@
         {
             {
 #line 7268
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7270
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20442,7 +20442,7 @@
         },
     },
 #line 7271
-    [DIFFICULTY_NORMAL][TRAINER_MIU_AND_YUKI] =
+    [DIFFICULTY_NORMAL][TRAINER_814D0113] =
     {
 #line 7272
         .trainerName = _("Blank"),
@@ -20457,7 +20457,7 @@
         {
             {
 #line 7276
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7278
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20469,7 +20469,7 @@
         },
     },
 #line 7279
-    [DIFFICULTY_NORMAL][TRAINER_AMY_AND_LIV_3] =
+    [DIFFICULTY_NORMAL][TRAINER_822DC7A8] =
     {
 #line 7280
         .trainerName = _("Blank"),
@@ -20484,7 +20484,7 @@
         {
             {
 #line 7284
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7286
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20496,7 +20496,7 @@
         },
     },
 #line 7287
-    [DIFFICULTY_NORMAL][TRAINER_GINA_AND_MIA_2] =
+    [DIFFICULTY_NORMAL][TRAINER_827A5D21] =
     {
 #line 7288
         .trainerName = _("Blank"),
@@ -20511,7 +20511,7 @@
         {
             {
 #line 7292
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7294
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20523,7 +20523,7 @@
         },
     },
 #line 7295
-    [DIFFICULTY_NORMAL][TRAINER_AMY_AND_LIV_4] =
+    [DIFFICULTY_NORMAL][TRAINER_82A19B69] =
     {
 #line 7296
         .trainerName = _("Blank"),
@@ -20538,7 +20538,7 @@
         {
             {
 #line 7300
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7302
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20550,7 +20550,7 @@
         },
     },
 #line 7303
-    [DIFFICULTY_NORMAL][TRAINER_AMY_AND_LIV_5] =
+    [DIFFICULTY_NORMAL][TRAINER_83008F9D] =
     {
 #line 7304
         .trainerName = _("Blank"),
@@ -20565,7 +20565,7 @@
         {
             {
 #line 7308
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7310
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20577,7 +20577,7 @@
         },
     },
 #line 7311
-    [DIFFICULTY_NORMAL][TRAINER_AMY_AND_LIV_6] =
+    [DIFFICULTY_NORMAL][TRAINER_831DE561] =
     {
 #line 7312
         .trainerName = _("Blank"),
@@ -20592,7 +20592,7 @@
         {
             {
 #line 7316
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7318
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20604,7 +20604,7 @@
         },
     },
 #line 7319
-    [DIFFICULTY_NORMAL][TRAINER_HUEY] =
+    [DIFFICULTY_NORMAL][TRAINER_8327758B] =
     {
 #line 7320
         .trainerName = _("Blank"),
@@ -20619,7 +20619,7 @@
         {
             {
 #line 7324
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7326
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20631,7 +20631,7 @@
         },
     },
 #line 7327
-    [DIFFICULTY_NORMAL][TRAINER_EDMOND] =
+    [DIFFICULTY_NORMAL][TRAINER_834B75E7] =
     {
 #line 7328
         .trainerName = _("Blank"),
@@ -20646,7 +20646,7 @@
         {
             {
 #line 7332
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7334
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20658,7 +20658,7 @@
         },
     },
 #line 7335
-    [DIFFICULTY_NORMAL][TRAINER_ERNEST_1] =
+    [DIFFICULTY_NORMAL][TRAINER_8365EA32] =
     {
 #line 7336
         .trainerName = _("Blank"),
@@ -20673,7 +20673,7 @@
         {
             {
 #line 7340
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7342
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20685,7 +20685,7 @@
         },
     },
 #line 7343
-    [DIFFICULTY_NORMAL][TRAINER_DWAYNE] =
+    [DIFFICULTY_NORMAL][TRAINER_83A26233] =
     {
 #line 7344
         .trainerName = _("Blank"),
@@ -20700,7 +20700,7 @@
         {
             {
 #line 7348
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7350
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20712,7 +20712,7 @@
         },
     },
 #line 7351
-    [DIFFICULTY_NORMAL][TRAINER_PHILLIP] =
+    [DIFFICULTY_NORMAL][TRAINER_83B9A038] =
     {
 #line 7352
         .trainerName = _("Blank"),
@@ -20727,7 +20727,7 @@
         {
             {
 #line 7356
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7358
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20739,7 +20739,7 @@
         },
     },
 #line 7359
-    [DIFFICULTY_NORMAL][TRAINER_LEONARD] =
+    [DIFFICULTY_NORMAL][TRAINER_840416CD] =
     {
 #line 7360
         .trainerName = _("Blank"),
@@ -20754,7 +20754,7 @@
         {
             {
 #line 7364
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7366
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20766,7 +20766,7 @@
         },
     },
 #line 7367
-    [DIFFICULTY_NORMAL][TRAINER_DUNCAN] =
+    [DIFFICULTY_NORMAL][TRAINER_843DFC91] =
     {
 #line 7368
         .trainerName = _("Blank"),
@@ -20781,7 +20781,7 @@
         {
             {
 #line 7372
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7374
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20793,7 +20793,7 @@
         },
     },
 #line 7375
-    [DIFFICULTY_NORMAL][TRAINER_ERNEST_2] =
+    [DIFFICULTY_NORMAL][TRAINER_857ACD94] =
     {
 #line 7376
         .trainerName = _("Blank"),
@@ -20808,7 +20808,7 @@
         {
             {
 #line 7380
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7382
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20820,7 +20820,7 @@
         },
     },
 #line 7383
-    [DIFFICULTY_NORMAL][TRAINER_ERNEST_3] =
+    [DIFFICULTY_NORMAL][TRAINER_8580525E] =
     {
 #line 7384
         .trainerName = _("Blank"),
@@ -20835,7 +20835,7 @@
         {
             {
 #line 7388
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7390
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20847,7 +20847,7 @@
         },
     },
 #line 7391
-    [DIFFICULTY_NORMAL][TRAINER_ERNEST_4] =
+    [DIFFICULTY_NORMAL][TRAINER_866AE208] =
     {
 #line 7392
         .trainerName = _("Blank"),
@@ -20862,7 +20862,7 @@
         {
             {
 #line 7396
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7398
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20874,7 +20874,7 @@
         },
     },
 #line 7399
-    [DIFFICULTY_NORMAL][TRAINER_ERNEST_5] =
+    [DIFFICULTY_NORMAL][TRAINER_8677EFB3] =
     {
 #line 7400
         .trainerName = _("Blank"),
@@ -20889,7 +20889,7 @@
         {
             {
 #line 7404
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7406
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20901,7 +20901,7 @@
         },
     },
 #line 7407
-    [DIFFICULTY_NORMAL][TRAINER_ELI] =
+    [DIFFICULTY_NORMAL][TRAINER_86D37FF1] =
     {
 #line 7408
         .trainerName = _("Blank"),
@@ -20916,7 +20916,7 @@
         {
             {
 #line 7412
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7414
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20928,7 +20928,7 @@
         },
     },
 #line 7415
-    [DIFFICULTY_NORMAL][TRAINER_ANNIKA] =
+    [DIFFICULTY_NORMAL][TRAINER_86F7AA4A] =
     {
 #line 7416
         .trainerName = _("Blank"),
@@ -20943,7 +20943,7 @@
         {
             {
 #line 7420
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7422
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20955,7 +20955,7 @@
         },
     },
 #line 7423
-    [DIFFICULTY_NORMAL][TRAINER_JAZMYN] =
+    [DIFFICULTY_NORMAL][TRAINER_872183CD] =
     {
 #line 7424
         .trainerName = _("Blank"),
@@ -20970,7 +20970,7 @@
         {
             {
 #line 7428
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7430
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -20982,7 +20982,7 @@
         },
     },
 #line 7431
-    [DIFFICULTY_NORMAL][TRAINER_JONAS] =
+    [DIFFICULTY_NORMAL][TRAINER_87B5E929] =
     {
 #line 7432
         .trainerName = _("Blank"),
@@ -20997,7 +20997,7 @@
         {
             {
 #line 7436
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7438
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21009,7 +21009,7 @@
         },
     },
 #line 7439
-    [DIFFICULTY_NORMAL][TRAINER_KAYLEY] =
+    [DIFFICULTY_NORMAL][TRAINER_885C781B] =
     {
 #line 7440
         .trainerName = _("Blank"),
@@ -21024,7 +21024,7 @@
         {
             {
 #line 7444
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7446
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21036,7 +21036,7 @@
         },
     },
 #line 7447
-    [DIFFICULTY_NORMAL][TRAINER_AURON] =
+    [DIFFICULTY_NORMAL][TRAINER_8878003B] =
     {
 #line 7448
         .trainerName = _("Blank"),
@@ -21051,7 +21051,7 @@
         {
             {
 #line 7452
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7454
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21063,7 +21063,7 @@
         },
     },
 #line 7455
-    [DIFFICULTY_NORMAL][TRAINER_KELVIN] =
+    [DIFFICULTY_NORMAL][TRAINER_88864D1E] =
     {
 #line 7456
         .trainerName = _("Blank"),
@@ -21078,7 +21078,7 @@
         {
             {
 #line 7460
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7462
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21090,7 +21090,7 @@
         },
     },
 #line 7463
-    [DIFFICULTY_NORMAL][TRAINER_MARLEY] =
+    [DIFFICULTY_NORMAL][TRAINER_8972F540] =
     {
 #line 7464
         .trainerName = _("Blank"),
@@ -21105,7 +21105,7 @@
         {
             {
 #line 7468
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7470
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21117,7 +21117,7 @@
         },
     },
 #line 7471
-    [DIFFICULTY_NORMAL][TRAINER_REYNA] =
+    [DIFFICULTY_NORMAL][TRAINER_898AF31D] =
     {
 #line 7472
         .trainerName = _("Blank"),
@@ -21132,7 +21132,7 @@
         {
             {
 #line 7476
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7478
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21144,7 +21144,7 @@
         },
     },
 #line 7479
-    [DIFFICULTY_NORMAL][TRAINER_HUDSON] =
+    [DIFFICULTY_NORMAL][TRAINER_8A0B40C0] =
     {
 #line 7480
         .trainerName = _("Blank"),
@@ -21159,7 +21159,7 @@
         {
             {
 #line 7484
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7486
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21171,7 +21171,7 @@
         },
     },
 #line 7487
-    [DIFFICULTY_NORMAL][TRAINER_CONOR] =
+    [DIFFICULTY_NORMAL][TRAINER_8A2C65A3] =
     {
 #line 7488
         .trainerName = _("Blank"),
@@ -21186,7 +21186,7 @@
         {
             {
 #line 7492
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7494
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21198,7 +21198,7 @@
         },
     },
 #line 7495
-    [DIFFICULTY_NORMAL][TRAINER_EDWIN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_8A829476] =
     {
 #line 7496
         .trainerName = _("Blank"),
@@ -21213,7 +21213,7 @@
         {
             {
 #line 7500
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7502
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21225,7 +21225,7 @@
         },
     },
 #line 7503
-    [DIFFICULTY_NORMAL][TRAINER_HECTOR] =
+    [DIFFICULTY_NORMAL][TRAINER_8AC1B5C1] =
     {
 #line 7504
         .trainerName = _("Blank"),
@@ -21240,7 +21240,7 @@
         {
             {
 #line 7508
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7510
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21252,7 +21252,7 @@
         },
     },
 #line 7511
-    [DIFFICULTY_NORMAL][TRAINER_TABITHA_MOSSDEEP] =
+    [DIFFICULTY_NORMAL][TRAINER_8AF40B23] =
     {
 #line 7512
         .trainerName = _("Blank"),
@@ -21267,7 +21267,7 @@
         {
             {
 #line 7516
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7518
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21279,7 +21279,7 @@
         },
     },
 #line 7519
-    [DIFFICULTY_NORMAL][TRAINER_EDWIN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_8B31AC38] =
     {
 #line 7520
         .trainerName = _("Blank"),
@@ -21294,7 +21294,7 @@
         {
             {
 #line 7524
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7526
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21306,7 +21306,7 @@
         },
     },
 #line 7527
-    [DIFFICULTY_NORMAL][TRAINER_EDWIN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_8B32317E] =
     {
 #line 7528
         .trainerName = _("Blank"),
@@ -21321,7 +21321,7 @@
         {
             {
 #line 7532
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7534
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21333,7 +21333,7 @@
         },
     },
 #line 7535
-    [DIFFICULTY_NORMAL][TRAINER_EDWIN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_8B3657A9] =
     {
 #line 7536
         .trainerName = _("Blank"),
@@ -21348,7 +21348,7 @@
         {
             {
 #line 7540
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7542
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21360,7 +21360,7 @@
         },
     },
 #line 7543
-    [DIFFICULTY_NORMAL][TRAINER_EDWIN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_8B3C49E3] =
     {
 #line 7544
         .trainerName = _("Blank"),
@@ -21375,7 +21375,7 @@
         {
             {
 #line 7548
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7550
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21387,7 +21387,7 @@
         },
     },
 #line 7551
-    [DIFFICULTY_NORMAL][TRAINER_WALLY_VR_1] =
+    [DIFFICULTY_NORMAL][TRAINER_8B6D195D] =
     {
 #line 7552
         .trainerName = _("Blank"),
@@ -21402,7 +21402,7 @@
         {
             {
 #line 7556
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7558
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21414,7 +21414,7 @@
         },
     },
 #line 7559
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_103_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_8BB65E5E] =
     {
 #line 7560
         .trainerName = _("Blank"),
@@ -21429,7 +21429,7 @@
         {
             {
 #line 7564
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7566
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21441,7 +21441,7 @@
         },
     },
 #line 7567
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_110_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_8C186D17] =
     {
 #line 7568
         .trainerName = _("Blank"),
@@ -21456,7 +21456,7 @@
         {
             {
 #line 7572
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7574
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21468,7 +21468,7 @@
         },
     },
 #line 7575
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_119_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_8C853607] =
     {
 #line 7576
         .trainerName = _("Blank"),
@@ -21483,7 +21483,7 @@
         {
             {
 #line 7580
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7582
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21495,7 +21495,7 @@
         },
     },
 #line 7583
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_103_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_8D6D5B2C] =
     {
 #line 7584
         .trainerName = _("Blank"),
@@ -21510,7 +21510,7 @@
         {
             {
 #line 7588
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7590
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21522,7 +21522,7 @@
         },
     },
 #line 7591
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_110_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_8D93124A] =
     {
 #line 7592
         .trainerName = _("Blank"),
@@ -21537,7 +21537,7 @@
         {
             {
 #line 7596
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7598
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21549,7 +21549,7 @@
         },
     },
 #line 7599
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_119_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_8DAF08C5] =
     {
 #line 7600
         .trainerName = _("Blank"),
@@ -21564,7 +21564,7 @@
         {
             {
 #line 7604
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7606
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21576,7 +21576,7 @@
         },
     },
 #line 7607
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_103_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_8DE17D94] =
     {
 #line 7608
         .trainerName = _("Blank"),
@@ -21591,7 +21591,7 @@
         {
             {
 #line 7612
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7614
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21603,7 +21603,7 @@
         },
     },
 #line 7615
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_110_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_8E60CF6E] =
     {
 #line 7616
         .trainerName = _("Blank"),
@@ -21618,7 +21618,7 @@
         {
             {
 #line 7620
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7622
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21630,7 +21630,7 @@
         },
     },
 #line 7623
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_ROUTE_119_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_8EA873A0] =
     {
 #line 7624
         .trainerName = _("Blank"),
@@ -21645,7 +21645,7 @@
         {
             {
 #line 7628
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7630
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21657,7 +21657,7 @@
         },
     },
 #line 7631
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_103_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_8EB76821] =
     {
 #line 7632
         .trainerName = _("Blank"),
@@ -21672,7 +21672,7 @@
         {
             {
 #line 7636
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7638
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21684,7 +21684,7 @@
         },
     },
 #line 7639
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_110_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_8ED15D51] =
     {
 #line 7640
         .trainerName = _("Blank"),
@@ -21699,7 +21699,7 @@
         {
             {
 #line 7644
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7646
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21711,7 +21711,7 @@
         },
     },
 #line 7647
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_119_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_8F28F86A] =
     {
 #line 7648
         .trainerName = _("Blank"),
@@ -21726,7 +21726,7 @@
         {
             {
 #line 7652
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7654
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21738,7 +21738,7 @@
         },
     },
 #line 7655
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_103_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_8F2EA270] =
     {
 #line 7656
         .trainerName = _("Blank"),
@@ -21753,7 +21753,7 @@
         {
             {
 #line 7660
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7662
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21765,7 +21765,7 @@
         },
     },
 #line 7663
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_110_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_8F9579E4] =
     {
 #line 7664
         .trainerName = _("Blank"),
@@ -21780,7 +21780,7 @@
         {
             {
 #line 7668
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7670
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21792,7 +21792,7 @@
         },
     },
 #line 7671
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_119_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_8F988020] =
     {
 #line 7672
         .trainerName = _("Blank"),
@@ -21807,7 +21807,7 @@
         {
             {
 #line 7676
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7678
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21819,7 +21819,7 @@
         },
     },
 #line 7679
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_103_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_8FE817BA] =
     {
 #line 7680
         .trainerName = _("Blank"),
@@ -21834,7 +21834,7 @@
         {
             {
 #line 7684
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7686
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21846,7 +21846,7 @@
         },
     },
 #line 7687
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_110_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_90353D81] =
     {
 #line 7688
         .trainerName = _("Blank"),
@@ -21861,7 +21861,7 @@
         {
             {
 #line 7692
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7694
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21873,7 +21873,7 @@
         },
     },
 #line 7695
-    [DIFFICULTY_NORMAL][TRAINER_MAY_ROUTE_119_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_9054973F] =
     {
 #line 7696
         .trainerName = _("Blank"),
@@ -21888,7 +21888,7 @@
         {
             {
 #line 7700
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7702
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21900,7 +21900,7 @@
         },
     },
 #line 7703
-    [DIFFICULTY_NORMAL][TRAINER_ISAAC_1] =
+    [DIFFICULTY_NORMAL][TRAINER_90A72ACF] =
     {
 #line 7704
         .trainerName = _("Blank"),
@@ -21915,7 +21915,7 @@
         {
             {
 #line 7708
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7710
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21927,7 +21927,7 @@
         },
     },
 #line 7711
-    [DIFFICULTY_NORMAL][TRAINER_DAVIS] =
+    [DIFFICULTY_NORMAL][TRAINER_90E1658C] =
     {
 #line 7712
         .trainerName = _("Blank"),
@@ -21942,7 +21942,7 @@
         {
             {
 #line 7716
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7718
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21954,7 +21954,7 @@
         },
     },
 #line 7719
-    [DIFFICULTY_NORMAL][TRAINER_MITCHELL] =
+    [DIFFICULTY_NORMAL][TRAINER_918A1734] =
     {
 #line 7720
         .trainerName = _("Blank"),
@@ -21969,7 +21969,7 @@
         {
             {
 #line 7724
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7726
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21981,7 +21981,7 @@
         },
     },
 #line 7727
-    [DIFFICULTY_NORMAL][TRAINER_ISAAC_2] =
+    [DIFFICULTY_NORMAL][TRAINER_91D249C3] =
     {
 #line 7728
         .trainerName = _("Blank"),
@@ -21996,7 +21996,7 @@
         {
             {
 #line 7732
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7734
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22008,7 +22008,7 @@
         },
     },
 #line 7735
-    [DIFFICULTY_NORMAL][TRAINER_ISAAC_3] =
+    [DIFFICULTY_NORMAL][TRAINER_91D48E4E] =
     {
 #line 7736
         .trainerName = _("Blank"),
@@ -22023,7 +22023,7 @@
         {
             {
 #line 7740
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7742
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22035,7 +22035,7 @@
         },
     },
 #line 7743
-    [DIFFICULTY_NORMAL][TRAINER_ISAAC_4] =
+    [DIFFICULTY_NORMAL][TRAINER_922542C3] =
     {
 #line 7744
         .trainerName = _("Blank"),
@@ -22050,7 +22050,7 @@
         {
             {
 #line 7748
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7750
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22062,7 +22062,7 @@
         },
     },
 #line 7751
-    [DIFFICULTY_NORMAL][TRAINER_ISAAC_5] =
+    [DIFFICULTY_NORMAL][TRAINER_93009D3B] =
     {
 #line 7752
         .trainerName = _("Blank"),
@@ -22077,7 +22077,7 @@
         {
             {
 #line 7756
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7758
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22089,7 +22089,7 @@
         },
     },
 #line 7759
-    [DIFFICULTY_NORMAL][TRAINER_LYDIA_1] =
+    [DIFFICULTY_NORMAL][TRAINER_93D9B506] =
     {
 #line 7760
         .trainerName = _("Blank"),
@@ -22104,7 +22104,7 @@
         {
             {
 #line 7764
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7766
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22116,7 +22116,7 @@
         },
     },
 #line 7767
-    [DIFFICULTY_NORMAL][TRAINER_HALLE] =
+    [DIFFICULTY_NORMAL][TRAINER_9427896B] =
     {
 #line 7768
         .trainerName = _("Blank"),
@@ -22131,7 +22131,7 @@
         {
             {
 #line 7772
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7774
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22143,7 +22143,7 @@
         },
     },
 #line 7775
-    [DIFFICULTY_NORMAL][TRAINER_GARRISON] =
+    [DIFFICULTY_NORMAL][TRAINER_9501C16B] =
     {
 #line 7776
         .trainerName = _("Blank"),
@@ -22158,7 +22158,7 @@
         {
             {
 #line 7780
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7782
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22170,7 +22170,7 @@
         },
     },
 #line 7783
-    [DIFFICULTY_NORMAL][TRAINER_LYDIA_2] =
+    [DIFFICULTY_NORMAL][TRAINER_9566DD87] =
     {
 #line 7784
         .trainerName = _("Blank"),
@@ -22185,7 +22185,7 @@
         {
             {
 #line 7788
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7790
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22197,7 +22197,7 @@
         },
     },
 #line 7791
-    [DIFFICULTY_NORMAL][TRAINER_LYDIA_3] =
+    [DIFFICULTY_NORMAL][TRAINER_95A74E78] =
     {
 #line 7792
         .trainerName = _("Blank"),
@@ -22212,7 +22212,7 @@
         {
             {
 #line 7796
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7798
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22224,7 +22224,7 @@
         },
     },
 #line 7799
-    [DIFFICULTY_NORMAL][TRAINER_LYDIA_4] =
+    [DIFFICULTY_NORMAL][TRAINER_963F893A] =
     {
 #line 7800
         .trainerName = _("Blank"),
@@ -22239,7 +22239,7 @@
         {
             {
 #line 7804
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7806
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22251,7 +22251,7 @@
         },
     },
 #line 7807
-    [DIFFICULTY_NORMAL][TRAINER_LYDIA_5] =
+    [DIFFICULTY_NORMAL][TRAINER_966F37E6] =
     {
 #line 7808
         .trainerName = _("Blank"),
@@ -22266,7 +22266,7 @@
         {
             {
 #line 7812
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7814
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22278,7 +22278,7 @@
         },
     },
 #line 7815
-    [DIFFICULTY_NORMAL][TRAINER_JACKSON_1] =
+    [DIFFICULTY_NORMAL][TRAINER_96859C9B] =
     {
 #line 7816
         .trainerName = _("Blank"),
@@ -22293,7 +22293,7 @@
         {
             {
 #line 7820
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7822
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22305,7 +22305,7 @@
         },
     },
 #line 7823
-    [DIFFICULTY_NORMAL][TRAINER_LORENZO] =
+    [DIFFICULTY_NORMAL][TRAINER_9695D7CC] =
     {
 #line 7824
         .trainerName = _("Blank"),
@@ -22320,7 +22320,7 @@
         {
             {
 #line 7828
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7830
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22332,7 +22332,7 @@
         },
     },
 #line 7831
-    [DIFFICULTY_NORMAL][TRAINER_SEBASTIAN] =
+    [DIFFICULTY_NORMAL][TRAINER_96A60AED] =
     {
 #line 7832
         .trainerName = _("Blank"),
@@ -22347,7 +22347,7 @@
         {
             {
 #line 7836
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7838
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22359,7 +22359,7 @@
         },
     },
 #line 7839
-    [DIFFICULTY_NORMAL][TRAINER_JACKSON_2] =
+    [DIFFICULTY_NORMAL][TRAINER_973C00CE] =
     {
 #line 7840
         .trainerName = _("Blank"),
@@ -22374,7 +22374,7 @@
         {
             {
 #line 7844
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7846
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22386,7 +22386,7 @@
         },
     },
 #line 7847
-    [DIFFICULTY_NORMAL][TRAINER_JACKSON_3] =
+    [DIFFICULTY_NORMAL][TRAINER_9784BB4E] =
     {
 #line 7848
         .trainerName = _("Blank"),
@@ -22401,7 +22401,7 @@
         {
             {
 #line 7852
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7854
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22413,7 +22413,7 @@
         },
     },
 #line 7855
-    [DIFFICULTY_NORMAL][TRAINER_JACKSON_4] =
+    [DIFFICULTY_NORMAL][TRAINER_9834CDCC] =
     {
 #line 7856
         .trainerName = _("Blank"),
@@ -22428,7 +22428,7 @@
         {
             {
 #line 7860
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7862
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22440,7 +22440,7 @@
         },
     },
 #line 7863
-    [DIFFICULTY_NORMAL][TRAINER_JACKSON_5] =
+    [DIFFICULTY_NORMAL][TRAINER_98547A36] =
     {
 #line 7864
         .trainerName = _("Blank"),
@@ -22455,7 +22455,7 @@
         {
             {
 #line 7868
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7870
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22467,7 +22467,7 @@
         },
     },
 #line 7871
-    [DIFFICULTY_NORMAL][TRAINER_CATHERINE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_98C7143B] =
     {
 #line 7872
         .trainerName = _("Blank"),
@@ -22482,7 +22482,7 @@
         {
             {
 #line 7876
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7878
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22494,7 +22494,7 @@
         },
     },
 #line 7879
-    [DIFFICULTY_NORMAL][TRAINER_JENNA] =
+    [DIFFICULTY_NORMAL][TRAINER_992FCC96] =
     {
 #line 7880
         .trainerName = _("Blank"),
@@ -22509,7 +22509,7 @@
         {
             {
 #line 7884
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7886
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22521,7 +22521,7 @@
         },
     },
 #line 7887
-    [DIFFICULTY_NORMAL][TRAINER_SOPHIA] =
+    [DIFFICULTY_NORMAL][TRAINER_99D74322] =
     {
 #line 7888
         .trainerName = _("Blank"),
@@ -22536,7 +22536,7 @@
         {
             {
 #line 7892
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7894
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22548,7 +22548,7 @@
         },
     },
 #line 7895
-    [DIFFICULTY_NORMAL][TRAINER_CATHERINE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_9A45ED29] =
     {
 #line 7896
         .trainerName = _("Blank"),
@@ -22563,7 +22563,7 @@
         {
             {
 #line 7900
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7902
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22575,7 +22575,7 @@
         },
     },
 #line 7903
-    [DIFFICULTY_NORMAL][TRAINER_CATHERINE_3] =
+    [DIFFICULTY_NORMAL][TRAINER_9AAFB9A8] =
     {
 #line 7904
         .trainerName = _("Blank"),
@@ -22590,7 +22590,7 @@
         {
             {
 #line 7908
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7910
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22602,7 +22602,7 @@
         },
     },
 #line 7911
-    [DIFFICULTY_NORMAL][TRAINER_CATHERINE_4] =
+    [DIFFICULTY_NORMAL][TRAINER_9B4CAAEF] =
     {
 #line 7912
         .trainerName = _("Blank"),
@@ -22617,7 +22617,7 @@
         {
             {
 #line 7916
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7918
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22629,7 +22629,7 @@
         },
     },
 #line 7919
-    [DIFFICULTY_NORMAL][TRAINER_CATHERINE_5] =
+    [DIFFICULTY_NORMAL][TRAINER_9B92F975] =
     {
 #line 7920
         .trainerName = _("Blank"),
@@ -22644,7 +22644,7 @@
         {
             {
 #line 7924
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7926
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22656,7 +22656,7 @@
         },
     },
 #line 7927
-    [DIFFICULTY_NORMAL][TRAINER_JULIO] =
+    [DIFFICULTY_NORMAL][TRAINER_9BA8D6B8] =
     {
 #line 7928
         .trainerName = _("Blank"),
@@ -22671,7 +22671,7 @@
         {
             {
 #line 7932
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7934
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22683,7 +22683,7 @@
         },
     },
 #line 7935
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_SEAFLOOR_CAVERN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_9BBA4D3E] =
     {
 #line 7936
         .trainerName = _("Blank"),
@@ -22698,7 +22698,7 @@
         {
             {
 #line 7940
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7942
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22710,7 +22710,7 @@
         },
     },
 #line 7943
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_UNUSED] =
+    [DIFFICULTY_NORMAL][TRAINER_9BD745C1] =
     {
 #line 7944
         .trainerName = _("Blank"),
@@ -22725,7 +22725,7 @@
         {
             {
 #line 7948
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7950
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22737,7 +22737,7 @@
         },
     },
 #line 7951
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MT_PYRE_4] =
+    [DIFFICULTY_NORMAL][TRAINER_9C9A9B43] =
     {
 #line 7952
         .trainerName = _("Blank"),
@@ -22752,7 +22752,7 @@
         {
             {
 #line 7956
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7958
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22764,7 +22764,7 @@
         },
     },
 #line 7959
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_JAGGED_PASS] =
+    [DIFFICULTY_NORMAL][TRAINER_9CC51698] =
     {
 #line 7960
         .trainerName = _("Blank"),
@@ -22779,7 +22779,7 @@
         {
             {
 #line 7964
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7966
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22791,7 +22791,7 @@
         },
     },
 #line 7967
-    [DIFFICULTY_NORMAL][TRAINER_MARC] =
+    [DIFFICULTY_NORMAL][TRAINER_9D0B799C] =
     {
 #line 7968
         .trainerName = _("Blank"),
@@ -22806,7 +22806,7 @@
         {
             {
 #line 7972
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7974
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22818,7 +22818,7 @@
         },
     },
 #line 7975
-    [DIFFICULTY_NORMAL][TRAINER_BRENDEN] =
+    [DIFFICULTY_NORMAL][TRAINER_9D2974CA] =
     {
 #line 7976
         .trainerName = _("Blank"),
@@ -22833,7 +22833,7 @@
         {
             {
 #line 7980
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7982
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22845,7 +22845,7 @@
         },
     },
 #line 7983
-    [DIFFICULTY_NORMAL][TRAINER_LILITH] =
+    [DIFFICULTY_NORMAL][TRAINER_9DE6AF69] =
     {
 #line 7984
         .trainerName = _("Blank"),
@@ -22860,7 +22860,7 @@
         {
             {
 #line 7988
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7990
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22872,7 +22872,7 @@
         },
     },
 #line 7991
-    [DIFFICULTY_NORMAL][TRAINER_CRISTIAN] =
+    [DIFFICULTY_NORMAL][TRAINER_9E9E96C3] =
     {
 #line 7992
         .trainerName = _("Blank"),
@@ -22887,7 +22887,7 @@
         {
             {
 #line 7996
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 7998
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22899,7 +22899,7 @@
         },
     },
 #line 7999
-    [DIFFICULTY_NORMAL][TRAINER_SYLVIA] =
+    [DIFFICULTY_NORMAL][TRAINER_9EBDE860] =
     {
 #line 8000
         .trainerName = _("Blank"),
@@ -22914,7 +22914,7 @@
         {
             {
 #line 8004
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8006
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22926,7 +22926,7 @@
         },
     },
 #line 8007
-    [DIFFICULTY_NORMAL][TRAINER_LEONARDO] =
+    [DIFFICULTY_NORMAL][TRAINER_9F335F56] =
     {
 #line 8008
         .trainerName = _("Blank"),
@@ -22941,7 +22941,7 @@
         {
             {
 #line 8012
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8014
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22953,7 +22953,7 @@
         },
     },
 #line 8015
-    [DIFFICULTY_NORMAL][TRAINER_ATHENA] =
+    [DIFFICULTY_NORMAL][TRAINER_9FB07CC0] =
     {
 #line 8016
         .trainerName = _("Blank"),
@@ -22968,7 +22968,7 @@
         {
             {
 #line 8020
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8022
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -22980,7 +22980,7 @@
         },
     },
 #line 8023
-    [DIFFICULTY_NORMAL][TRAINER_HARRISON] =
+    [DIFFICULTY_NORMAL][TRAINER_9FFBEDD1] =
     {
 #line 8024
         .trainerName = _("Blank"),
@@ -22995,7 +22995,7 @@
         {
             {
 #line 8028
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8030
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23007,7 +23007,7 @@
         },
     },
 #line 8031
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MT_CHIMNEY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_A03F3B0B] =
     {
 #line 8032
         .trainerName = _("Blank"),
@@ -23022,7 +23022,7 @@
         {
             {
 #line 8036
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8038
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23034,7 +23034,7 @@
         },
     },
 #line 8039
-    [DIFFICULTY_NORMAL][TRAINER_CLARENCE] =
+    [DIFFICULTY_NORMAL][TRAINER_A0852317] =
     {
 #line 8040
         .trainerName = _("Blank"),
@@ -23049,7 +23049,7 @@
         {
             {
 #line 8044
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8046
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23061,7 +23061,7 @@
         },
     },
 #line 8047
-    [DIFFICULTY_NORMAL][TRAINER_TERRY] =
+    [DIFFICULTY_NORMAL][TRAINER_A0CE2BCF] =
     {
 #line 8048
         .trainerName = _("Blank"),
@@ -23076,7 +23076,7 @@
         {
             {
 #line 8052
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8054
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23088,7 +23088,7 @@
         },
     },
 #line 8055
-    [DIFFICULTY_NORMAL][TRAINER_NATE] =
+    [DIFFICULTY_NORMAL][TRAINER_A122FEC6] =
     {
 #line 8056
         .trainerName = _("Blank"),
@@ -23103,7 +23103,7 @@
         {
             {
 #line 8060
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8062
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23115,7 +23115,7 @@
         },
     },
 #line 8063
-    [DIFFICULTY_NORMAL][TRAINER_KATHLEEN] =
+    [DIFFICULTY_NORMAL][TRAINER_A1502FA5] =
     {
 #line 8064
         .trainerName = _("Blank"),
@@ -23130,7 +23130,7 @@
         {
             {
 #line 8068
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8070
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23142,7 +23142,7 @@
         },
     },
 #line 8071
-    [DIFFICULTY_NORMAL][TRAINER_CLIFFORD] =
+    [DIFFICULTY_NORMAL][TRAINER_A173BD9E] =
     {
 #line 8072
         .trainerName = _("Blank"),
@@ -23157,7 +23157,7 @@
         {
             {
 #line 8076
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8078
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23169,7 +23169,7 @@
         },
     },
 #line 8079
-    [DIFFICULTY_NORMAL][TRAINER_NICHOLAS] =
+    [DIFFICULTY_NORMAL][TRAINER_A1B34299] =
     {
 #line 8080
         .trainerName = _("Blank"),
@@ -23184,7 +23184,7 @@
         {
             {
 #line 8084
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8086
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23196,7 +23196,7 @@
         },
     },
 #line 8087
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_SPACE_CENTER_3] =
+    [DIFFICULTY_NORMAL][TRAINER_A226BBD6] =
     {
 #line 8088
         .trainerName = _("Blank"),
@@ -23211,7 +23211,7 @@
         {
             {
 #line 8092
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8094
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23223,7 +23223,7 @@
         },
     },
 #line 8095
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_SPACE_CENTER_4] =
+    [DIFFICULTY_NORMAL][TRAINER_A26B64E5] =
     {
 #line 8096
         .trainerName = _("Blank"),
@@ -23238,7 +23238,7 @@
         {
             {
 #line 8100
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8102
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23250,7 +23250,7 @@
         },
     },
 #line 8103
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_SPACE_CENTER_5] =
+    [DIFFICULTY_NORMAL][TRAINER_A2F2E8FF] =
     {
 #line 8104
         .trainerName = _("Blank"),
@@ -23265,7 +23265,7 @@
         {
             {
 #line 8108
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8110
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23277,7 +23277,7 @@
         },
     },
 #line 8111
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_SPACE_CENTER_6] =
+    [DIFFICULTY_NORMAL][TRAINER_A30D6A65] =
     {
 #line 8112
         .trainerName = _("Blank"),
@@ -23292,7 +23292,7 @@
         {
             {
 #line 8116
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8118
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23304,7 +23304,7 @@
         },
     },
 #line 8119
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_SPACE_CENTER_7] =
+    [DIFFICULTY_NORMAL][TRAINER_A33F468D] =
     {
 #line 8120
         .trainerName = _("Blank"),
@@ -23319,7 +23319,7 @@
         {
             {
 #line 8124
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8126
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23331,7 +23331,7 @@
         },
     },
 #line 8127
-    [DIFFICULTY_NORMAL][TRAINER_MACEY] =
+    [DIFFICULTY_NORMAL][TRAINER_A377CCDF] =
     {
 #line 8128
         .trainerName = _("Blank"),
@@ -23346,7 +23346,7 @@
         {
             {
 #line 8132
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8134
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23358,7 +23358,7 @@
         },
     },
 #line 8135
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_RUSTBORO_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_A393F9F0] =
     {
 #line 8136
         .trainerName = _("Blank"),
@@ -23373,7 +23373,7 @@
         {
             {
 #line 8140
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8142
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23385,7 +23385,7 @@
         },
     },
 #line 8143
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_RUSTBORO_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_A39AB67C] =
     {
 #line 8144
         .trainerName = _("Blank"),
@@ -23400,7 +23400,7 @@
         {
             {
 #line 8148
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8150
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23412,7 +23412,7 @@
         },
     },
 #line 8151
-    [DIFFICULTY_NORMAL][TRAINER_PAXTON] =
+    [DIFFICULTY_NORMAL][TRAINER_A3EBD43B] =
     {
 #line 8152
         .trainerName = _("Blank"),
@@ -23427,7 +23427,7 @@
         {
             {
 #line 8156
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8158
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23439,7 +23439,7 @@
         },
     },
 #line 8159
-    [DIFFICULTY_NORMAL][TRAINER_ISABELLA] =
+    [DIFFICULTY_NORMAL][TRAINER_A489434F] =
     {
 #line 8160
         .trainerName = _("Blank"),
@@ -23454,7 +23454,7 @@
         {
             {
 #line 8164
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8166
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23466,7 +23466,7 @@
         },
     },
 #line 8167
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_WEATHER_INST_5] =
+    [DIFFICULTY_NORMAL][TRAINER_A49FED84] =
     {
 #line 8168
         .trainerName = _("Blank"),
@@ -23481,7 +23481,7 @@
         {
             {
 #line 8172
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8174
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23493,7 +23493,7 @@
         },
     },
 #line 8175
-    [DIFFICULTY_NORMAL][TRAINER_TABITHA_MT_CHIMNEY] =
+    [DIFFICULTY_NORMAL][TRAINER_A4BDD551] =
     {
 #line 8176
         .trainerName = _("Blank"),
@@ -23508,7 +23508,7 @@
         {
             {
 #line 8180
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8182
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23520,7 +23520,7 @@
         },
     },
 #line 8183
-    [DIFFICULTY_NORMAL][TRAINER_JONATHAN] =
+    [DIFFICULTY_NORMAL][TRAINER_A4D47D9E] =
     {
 #line 8184
         .trainerName = _("Blank"),
@@ -23535,7 +23535,7 @@
         {
             {
 #line 8188
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8190
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23547,7 +23547,7 @@
         },
     },
 #line 8191
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_RUSTBORO_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_A4DC84A0] =
     {
 #line 8192
         .trainerName = _("Blank"),
@@ -23562,7 +23562,7 @@
         {
             {
 #line 8196
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8198
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23574,7 +23574,7 @@
         },
     },
 #line 8199
-    [DIFFICULTY_NORMAL][TRAINER_MAY_RUSTBORO_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_A4EC97B5] =
     {
 #line 8200
         .trainerName = _("Blank"),
@@ -23589,7 +23589,7 @@
         {
             {
 #line 8204
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8206
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23601,7 +23601,7 @@
         },
     },
 #line 8207
-    [DIFFICULTY_NORMAL][TRAINER_MAXIE_MAGMA_HIDEOUT] =
+    [DIFFICULTY_NORMAL][TRAINER_A50CF67B] =
     {
 #line 8208
         .trainerName = _("Blank"),
@@ -23616,7 +23616,7 @@
         {
             {
 #line 8212
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8214
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23628,7 +23628,7 @@
         },
     },
 #line 8215
-    [DIFFICULTY_NORMAL][TRAINER_MAXIE_MT_CHIMNEY] =
+    [DIFFICULTY_NORMAL][TRAINER_A62D49C6] =
     {
 #line 8216
         .trainerName = _("Blank"),
@@ -23643,7 +23643,7 @@
         {
             {
 #line 8220
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8222
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23655,7 +23655,7 @@
         },
     },
 #line 8223
-    [DIFFICULTY_NORMAL][TRAINER_TIANA] =
+    [DIFFICULTY_NORMAL][TRAINER_A6328173] =
     {
 #line 8224
         .trainerName = _("Blank"),
@@ -23670,7 +23670,7 @@
         {
             {
 #line 8228
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8230
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23682,7 +23682,7 @@
         },
     },
 #line 8231
-    [DIFFICULTY_NORMAL][TRAINER_HALEY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_A646F21E] =
     {
 #line 8232
         .trainerName = _("Blank"),
@@ -23697,7 +23697,7 @@
         {
             {
 #line 8236
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8238
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23709,7 +23709,7 @@
         },
     },
 #line 8239
-    [DIFFICULTY_NORMAL][TRAINER_JANICE] =
+    [DIFFICULTY_NORMAL][TRAINER_A685428F] =
     {
 #line 8240
         .trainerName = _("Blank"),
@@ -23724,7 +23724,7 @@
         {
             {
 #line 8244
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8246
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23736,7 +23736,7 @@
         },
     },
 #line 8247
-    [DIFFICULTY_NORMAL][TRAINER_VIVI] =
+    [DIFFICULTY_NORMAL][TRAINER_A686809A] =
     {
 #line 8248
         .trainerName = _("Blank"),
@@ -23751,7 +23751,7 @@
         {
             {
 #line 8252
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8254
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23763,7 +23763,7 @@
         },
     },
 #line 8255
-    [DIFFICULTY_NORMAL][TRAINER_HALEY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_A7154C64] =
     {
 #line 8256
         .trainerName = _("Blank"),
@@ -23778,7 +23778,7 @@
         {
             {
 #line 8260
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8262
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23790,7 +23790,7 @@
         },
     },
 #line 8263
-    [DIFFICULTY_NORMAL][TRAINER_HALEY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_A725F3F3] =
     {
 #line 8264
         .trainerName = _("Blank"),
@@ -23805,7 +23805,7 @@
         {
             {
 #line 8268
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8270
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23817,7 +23817,7 @@
         },
     },
 #line 8271
-    [DIFFICULTY_NORMAL][TRAINER_HALEY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_A7376C87] =
     {
 #line 8272
         .trainerName = _("Blank"),
@@ -23832,7 +23832,7 @@
         {
             {
 #line 8276
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8278
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23844,7 +23844,7 @@
         },
     },
 #line 8279
-    [DIFFICULTY_NORMAL][TRAINER_HALEY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_A76F8352] =
     {
 #line 8280
         .trainerName = _("Blank"),
@@ -23859,7 +23859,7 @@
         {
             {
 #line 8284
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8286
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23871,7 +23871,7 @@
         },
     },
 #line 8287
-    [DIFFICULTY_NORMAL][TRAINER_SALLY] =
+    [DIFFICULTY_NORMAL][TRAINER_A783BCA8] =
     {
 #line 8288
         .trainerName = _("Blank"),
@@ -23886,7 +23886,7 @@
         {
             {
 #line 8292
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8294
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23898,7 +23898,7 @@
         },
     },
 #line 8295
-    [DIFFICULTY_NORMAL][TRAINER_ROBIN] =
+    [DIFFICULTY_NORMAL][TRAINER_A7D689F5] =
     {
 #line 8296
         .trainerName = _("Blank"),
@@ -23913,7 +23913,7 @@
         {
             {
 #line 8300
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8302
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23925,7 +23925,7 @@
         },
     },
 #line 8303
-    [DIFFICULTY_NORMAL][TRAINER_ANDREA] =
+    [DIFFICULTY_NORMAL][TRAINER_A7DCD657] =
     {
 #line 8304
         .trainerName = _("Blank"),
@@ -23940,7 +23940,7 @@
         {
             {
 #line 8308
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8310
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23952,7 +23952,7 @@
         },
     },
 #line 8311
-    [DIFFICULTY_NORMAL][TRAINER_CRISSY] =
+    [DIFFICULTY_NORMAL][TRAINER_A80F3799] =
     {
 #line 8312
         .trainerName = _("Blank"),
@@ -23967,7 +23967,7 @@
         {
             {
 #line 8316
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8318
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -23979,7 +23979,7 @@
         },
     },
 #line 8319
-    [DIFFICULTY_NORMAL][TRAINER_RICK] =
+    [DIFFICULTY_NORMAL][TRAINER_A82FABFC] =
     {
 #line 8320
         .trainerName = _("Blank"),
@@ -23994,7 +23994,7 @@
         {
             {
 #line 8324
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8326
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24006,7 +24006,7 @@
         },
     },
 #line 8327
-    [DIFFICULTY_NORMAL][TRAINER_LYLE] =
+    [DIFFICULTY_NORMAL][TRAINER_A8413608] =
     {
 #line 8328
         .trainerName = _("Blank"),
@@ -24021,7 +24021,7 @@
         {
             {
 #line 8332
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8334
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24033,7 +24033,7 @@
         },
     },
 #line 8335
-    [DIFFICULTY_NORMAL][TRAINER_JOSE] =
+    [DIFFICULTY_NORMAL][TRAINER_A8BA94B6] =
     {
 #line 8336
         .trainerName = _("Blank"),
@@ -24048,7 +24048,7 @@
         {
             {
 #line 8340
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8342
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24060,7 +24060,7 @@
         },
     },
 #line 8343
-    [DIFFICULTY_NORMAL][TRAINER_DOUG] =
+    [DIFFICULTY_NORMAL][TRAINER_A90E2D03] =
     {
 #line 8344
         .trainerName = _("Blank"),
@@ -24075,7 +24075,7 @@
         {
             {
 #line 8348
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8350
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24087,7 +24087,7 @@
         },
     },
 #line 8351
-    [DIFFICULTY_NORMAL][TRAINER_GREG] =
+    [DIFFICULTY_NORMAL][TRAINER_A968DBA5] =
     {
 #line 8352
         .trainerName = _("Blank"),
@@ -24102,7 +24102,7 @@
         {
             {
 #line 8356
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8358
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24114,7 +24114,7 @@
         },
     },
 #line 8359
-    [DIFFICULTY_NORMAL][TRAINER_KENT] =
+    [DIFFICULTY_NORMAL][TRAINER_A990AE14] =
     {
 #line 8360
         .trainerName = _("Blank"),
@@ -24129,7 +24129,7 @@
         {
             {
 #line 8364
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8366
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24141,7 +24141,7 @@
         },
     },
 #line 8367
-    [DIFFICULTY_NORMAL][TRAINER_JAMES_1] =
+    [DIFFICULTY_NORMAL][TRAINER_A9F2709A] =
     {
 #line 8368
         .trainerName = _("Blank"),
@@ -24156,7 +24156,7 @@
         {
             {
 #line 8372
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8374
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24168,7 +24168,7 @@
         },
     },
 #line 8375
-    [DIFFICULTY_NORMAL][TRAINER_JAMES_2] =
+    [DIFFICULTY_NORMAL][TRAINER_AA81DD0B] =
     {
 #line 8376
         .trainerName = _("Blank"),
@@ -24183,7 +24183,7 @@
         {
             {
 #line 8380
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8382
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24195,7 +24195,7 @@
         },
     },
 #line 8383
-    [DIFFICULTY_NORMAL][TRAINER_JAMES_3] =
+    [DIFFICULTY_NORMAL][TRAINER_AB576C3B] =
     {
 #line 8384
         .trainerName = _("Blank"),
@@ -24210,7 +24210,7 @@
         {
             {
 #line 8388
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8390
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24222,7 +24222,7 @@
         },
     },
 #line 8391
-    [DIFFICULTY_NORMAL][TRAINER_JAMES_4] =
+    [DIFFICULTY_NORMAL][TRAINER_ABD18218] =
     {
 #line 8392
         .trainerName = _("Blank"),
@@ -24237,7 +24237,7 @@
         {
             {
 #line 8396
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8398
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24249,7 +24249,7 @@
         },
     },
 #line 8399
-    [DIFFICULTY_NORMAL][TRAINER_JAMES_5] =
+    [DIFFICULTY_NORMAL][TRAINER_ABF9DAAF] =
     {
 #line 8400
         .trainerName = _("Blank"),
@@ -24264,7 +24264,7 @@
         {
             {
 #line 8404
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8406
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24276,7 +24276,7 @@
         },
     },
 #line 8407
-    [DIFFICULTY_NORMAL][TRAINER_BRICE] =
+    [DIFFICULTY_NORMAL][TRAINER_ABFE6286] =
     {
 #line 8408
         .trainerName = _("Blank"),
@@ -24291,7 +24291,7 @@
         {
             {
 #line 8412
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8414
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24303,7 +24303,7 @@
         },
     },
 #line 8415
-    [DIFFICULTY_NORMAL][TRAINER_TRENT_1] =
+    [DIFFICULTY_NORMAL][TRAINER_AC004835] =
     {
 #line 8416
         .trainerName = _("Blank"),
@@ -24318,7 +24318,7 @@
         {
             {
 #line 8420
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8422
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24330,7 +24330,7 @@
         },
     },
 #line 8423
-    [DIFFICULTY_NORMAL][TRAINER_LENNY] =
+    [DIFFICULTY_NORMAL][TRAINER_ACB85CBA] =
     {
 #line 8424
         .trainerName = _("Blank"),
@@ -24345,7 +24345,7 @@
         {
             {
 #line 8428
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8430
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24357,7 +24357,7 @@
         },
     },
 #line 8431
-    [DIFFICULTY_NORMAL][TRAINER_LUCAS_1] =
+    [DIFFICULTY_NORMAL][TRAINER_ACE2090A] =
     {
 #line 8432
         .trainerName = _("Blank"),
@@ -24372,7 +24372,7 @@
         {
             {
 #line 8436
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8438
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24384,7 +24384,7 @@
         },
     },
 #line 8439
-    [DIFFICULTY_NORMAL][TRAINER_ALAN] =
+    [DIFFICULTY_NORMAL][TRAINER_AD1AA26D] =
     {
 #line 8440
         .trainerName = _("Blank"),
@@ -24399,7 +24399,7 @@
         {
             {
 #line 8444
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8446
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24411,7 +24411,7 @@
         },
     },
 #line 8447
-    [DIFFICULTY_NORMAL][TRAINER_CLARK] =
+    [DIFFICULTY_NORMAL][TRAINER_AD70C4BA] =
     {
 #line 8448
         .trainerName = _("Blank"),
@@ -24426,7 +24426,7 @@
         {
             {
 #line 8452
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8454
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24438,7 +24438,7 @@
         },
     },
 #line 8455
-    [DIFFICULTY_NORMAL][TRAINER_ERIC] =
+    [DIFFICULTY_NORMAL][TRAINER_AD8C8210] =
     {
 #line 8456
         .trainerName = _("Blank"),
@@ -24453,7 +24453,7 @@
         {
             {
 #line 8460
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8462
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24465,7 +24465,7 @@
         },
     },
 #line 8463
-    [DIFFICULTY_NORMAL][TRAINER_LUCAS_2] =
+    [DIFFICULTY_NORMAL][TRAINER_ADC94E2C] =
     {
 #line 8464
         .trainerName = _("Blank"),
@@ -24480,7 +24480,7 @@
         {
             {
 #line 8468
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8470
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24492,7 +24492,7 @@
         },
     },
 #line 8471
-    [DIFFICULTY_NORMAL][TRAINER_MIKE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_AE0ED10D] =
     {
 #line 8472
         .trainerName = _("Blank"),
@@ -24507,7 +24507,7 @@
         {
             {
 #line 8476
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8478
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24519,7 +24519,7 @@
         },
     },
 #line 8479
-    [DIFFICULTY_NORMAL][TRAINER_MIKE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_AE99A6E1] =
     {
 #line 8480
         .trainerName = _("Blank"),
@@ -24534,7 +24534,7 @@
         {
             {
 #line 8484
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8486
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24546,7 +24546,7 @@
         },
     },
 #line 8487
-    [DIFFICULTY_NORMAL][TRAINER_TRENT_2] =
+    [DIFFICULTY_NORMAL][TRAINER_AE9CFA41] =
     {
 #line 8488
         .trainerName = _("Blank"),
@@ -24561,7 +24561,7 @@
         {
             {
 #line 8492
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8494
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24573,7 +24573,7 @@
         },
     },
 #line 8495
-    [DIFFICULTY_NORMAL][TRAINER_TRENT_3] =
+    [DIFFICULTY_NORMAL][TRAINER_AEDC9768] =
     {
 #line 8496
         .trainerName = _("Blank"),
@@ -24588,7 +24588,7 @@
         {
             {
 #line 8500
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8502
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24600,7 +24600,7 @@
         },
     },
 #line 8503
-    [DIFFICULTY_NORMAL][TRAINER_TRENT_4] =
+    [DIFFICULTY_NORMAL][TRAINER_AF0898E7] =
     {
 #line 8504
         .trainerName = _("Blank"),
@@ -24615,7 +24615,7 @@
         {
             {
 #line 8508
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8510
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24627,7 +24627,7 @@
         },
     },
 #line 8511
-    [DIFFICULTY_NORMAL][TRAINER_TRENT_5] =
+    [DIFFICULTY_NORMAL][TRAINER_AF765F9F] =
     {
 #line 8512
         .trainerName = _("Blank"),
@@ -24642,7 +24642,7 @@
         {
             {
 #line 8516
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8518
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24654,7 +24654,7 @@
         },
     },
 #line 8519
-    [DIFFICULTY_NORMAL][TRAINER_DEZ_AND_LUKE] =
+    [DIFFICULTY_NORMAL][TRAINER_AFA4A980] =
     {
 #line 8520
         .trainerName = _("Blank"),
@@ -24669,7 +24669,7 @@
         {
             {
 #line 8524
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8526
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24681,7 +24681,7 @@
         },
     },
 #line 8527
-    [DIFFICULTY_NORMAL][TRAINER_LEA_AND_JED] =
+    [DIFFICULTY_NORMAL][TRAINER_AFA5BAC9] =
     {
 #line 8528
         .trainerName = _("Blank"),
@@ -24696,7 +24696,7 @@
         {
             {
 #line 8532
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8534
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24708,7 +24708,7 @@
         },
     },
 #line 8535
-    [DIFFICULTY_NORMAL][TRAINER_KIRA_AND_DAN_1] =
+    [DIFFICULTY_NORMAL][TRAINER_AFD8F2EF] =
     {
 #line 8536
         .trainerName = _("Blank"),
@@ -24723,7 +24723,7 @@
         {
             {
 #line 8540
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8542
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24735,7 +24735,7 @@
         },
     },
 #line 8543
-    [DIFFICULTY_NORMAL][TRAINER_KIRA_AND_DAN_2] =
+    [DIFFICULTY_NORMAL][TRAINER_AFE855B1] =
     {
 #line 8544
         .trainerName = _("Blank"),
@@ -24750,7 +24750,7 @@
         {
             {
 #line 8548
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8550
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24762,7 +24762,7 @@
         },
     },
 #line 8551
-    [DIFFICULTY_NORMAL][TRAINER_KIRA_AND_DAN_3] =
+    [DIFFICULTY_NORMAL][TRAINER_AFFCC47E] =
     {
 #line 8552
         .trainerName = _("Blank"),
@@ -24777,7 +24777,7 @@
         {
             {
 #line 8556
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8558
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24789,7 +24789,7 @@
         },
     },
 #line 8559
-    [DIFFICULTY_NORMAL][TRAINER_KIRA_AND_DAN_4] =
+    [DIFFICULTY_NORMAL][TRAINER_B0FC622D] =
     {
 #line 8560
         .trainerName = _("Blank"),
@@ -24804,7 +24804,7 @@
         {
             {
 #line 8564
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8566
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24816,7 +24816,7 @@
         },
     },
 #line 8567
-    [DIFFICULTY_NORMAL][TRAINER_KIRA_AND_DAN_5] =
+    [DIFFICULTY_NORMAL][TRAINER_B1DA7383] =
     {
 #line 8568
         .trainerName = _("Blank"),
@@ -24831,7 +24831,7 @@
         {
             {
 #line 8572
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8574
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24843,7 +24843,7 @@
         },
     },
 #line 8575
-    [DIFFICULTY_NORMAL][TRAINER_JOHANNA] =
+    [DIFFICULTY_NORMAL][TRAINER_B253DEF2] =
     {
 #line 8576
         .trainerName = _("Blank"),
@@ -24858,7 +24858,7 @@
         {
             {
 #line 8580
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8582
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24870,7 +24870,7 @@
         },
     },
 #line 8583
-    [DIFFICULTY_NORMAL][TRAINER_GERALD] =
+    [DIFFICULTY_NORMAL][TRAINER_B2925134] =
     {
 #line 8584
         .trainerName = _("Blank"),
@@ -24885,7 +24885,7 @@
         {
             {
 #line 8588
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8590
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24897,7 +24897,7 @@
         },
     },
 #line 8591
-    [DIFFICULTY_NORMAL][TRAINER_VIVIAN] =
+    [DIFFICULTY_NORMAL][TRAINER_B2A5CB2B] =
     {
 #line 8592
         .trainerName = _("Blank"),
@@ -24912,7 +24912,7 @@
         {
             {
 #line 8596
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8598
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24924,7 +24924,7 @@
         },
     },
 #line 8599
-    [DIFFICULTY_NORMAL][TRAINER_DANIELLE] =
+    [DIFFICULTY_NORMAL][TRAINER_B32A1E98] =
     {
 #line 8600
         .trainerName = _("Blank"),
@@ -24939,7 +24939,7 @@
         {
             {
 #line 8604
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8606
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24951,7 +24951,7 @@
         },
     },
 #line 8607
-    [DIFFICULTY_NORMAL][TRAINER_HIDEO] =
+    [DIFFICULTY_NORMAL][TRAINER_B3B1644E] =
     {
 #line 8608
         .trainerName = _("Blank"),
@@ -24966,7 +24966,7 @@
         {
             {
 #line 8612
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8614
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -24978,7 +24978,7 @@
         },
     },
 #line 8615
-    [DIFFICULTY_NORMAL][TRAINER_KEIGO] =
+    [DIFFICULTY_NORMAL][TRAINER_B3CE95A4] =
     {
 #line 8616
         .trainerName = _("Blank"),
@@ -24993,7 +24993,7 @@
         {
             {
 #line 8620
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8622
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25005,7 +25005,7 @@
         },
     },
 #line 8623
-    [DIFFICULTY_NORMAL][TRAINER_RILEY] =
+    [DIFFICULTY_NORMAL][TRAINER_B3FB2F4B] =
     {
 #line 8624
         .trainerName = _("Blank"),
@@ -25020,7 +25020,7 @@
         {
             {
 #line 8628
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8630
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25032,7 +25032,7 @@
         },
     },
 #line 8631
-    [DIFFICULTY_NORMAL][TRAINER_FLINT] =
+    [DIFFICULTY_NORMAL][TRAINER_B42E7E27] =
     {
 #line 8632
         .trainerName = _("Blank"),
@@ -25047,7 +25047,7 @@
         {
             {
 #line 8636
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8638
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25059,7 +25059,7 @@
         },
     },
 #line 8639
-    [DIFFICULTY_NORMAL][TRAINER_ASHLEY] =
+    [DIFFICULTY_NORMAL][TRAINER_B42F5023] =
     {
 #line 8640
         .trainerName = _("Blank"),
@@ -25074,7 +25074,7 @@
         {
             {
 #line 8644
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8646
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25086,7 +25086,7 @@
         },
     },
 #line 8647
-    [DIFFICULTY_NORMAL][TRAINER_WALLY_MAUVILLE] =
+    [DIFFICULTY_NORMAL][TRAINER_B435B7EF] =
     {
 #line 8648
         .trainerName = _("Blank"),
@@ -25101,7 +25101,7 @@
         {
             {
 #line 8652
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8654
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25113,7 +25113,7 @@
         },
     },
 #line 8655
-    [DIFFICULTY_NORMAL][TRAINER_WALLY_VR_2] =
+    [DIFFICULTY_NORMAL][TRAINER_B438F348] =
     {
 #line 8656
         .trainerName = _("Blank"),
@@ -25128,7 +25128,7 @@
         {
             {
 #line 8660
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8662
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25140,7 +25140,7 @@
         },
     },
 #line 8663
-    [DIFFICULTY_NORMAL][TRAINER_WALLY_VR_3] =
+    [DIFFICULTY_NORMAL][TRAINER_B489F821] =
     {
 #line 8664
         .trainerName = _("Blank"),
@@ -25155,7 +25155,7 @@
         {
             {
 #line 8668
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8670
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25167,7 +25167,7 @@
         },
     },
 #line 8671
-    [DIFFICULTY_NORMAL][TRAINER_WALLY_VR_4] =
+    [DIFFICULTY_NORMAL][TRAINER_B490300F] =
     {
 #line 8672
         .trainerName = _("Blank"),
@@ -25182,7 +25182,7 @@
         {
             {
 #line 8676
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8678
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25194,7 +25194,7 @@
         },
     },
 #line 8679
-    [DIFFICULTY_NORMAL][TRAINER_WALLY_VR_5] =
+    [DIFFICULTY_NORMAL][TRAINER_B53E1C28] =
     {
 #line 8680
         .trainerName = _("Blank"),
@@ -25209,7 +25209,7 @@
         {
             {
 #line 8684
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8686
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25221,7 +25221,7 @@
         },
     },
 #line 8687
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_LILYCOVE_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_B5E055E7] =
     {
 #line 8688
         .trainerName = _("Blank"),
@@ -25236,7 +25236,7 @@
         {
             {
 #line 8692
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8694
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25248,7 +25248,7 @@
         },
     },
 #line 8695
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_LILYCOVE_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_B6330B06] =
     {
 #line 8696
         .trainerName = _("Blank"),
@@ -25263,7 +25263,7 @@
         {
             {
 #line 8700
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8702
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25275,7 +25275,7 @@
         },
     },
 #line 8703
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_LILYCOVE_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_B66CAB9E] =
     {
 #line 8704
         .trainerName = _("Blank"),
@@ -25290,7 +25290,7 @@
         {
             {
 #line 8708
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8710
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25302,7 +25302,7 @@
         },
     },
 #line 8711
-    [DIFFICULTY_NORMAL][TRAINER_MAY_LILYCOVE_MUDKIP] =
+    [DIFFICULTY_NORMAL][TRAINER_B6E3D521] =
     {
 #line 8712
         .trainerName = _("Blank"),
@@ -25317,7 +25317,7 @@
         {
             {
 #line 8716
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8718
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25329,7 +25329,7 @@
         },
     },
 #line 8719
-    [DIFFICULTY_NORMAL][TRAINER_MAY_LILYCOVE_TREECKO] =
+    [DIFFICULTY_NORMAL][TRAINER_B6F23A27] =
     {
 #line 8720
         .trainerName = _("Blank"),
@@ -25344,7 +25344,7 @@
         {
             {
 #line 8724
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8726
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25356,7 +25356,7 @@
         },
     },
 #line 8727
-    [DIFFICULTY_NORMAL][TRAINER_MAY_LILYCOVE_TORCHIC] =
+    [DIFFICULTY_NORMAL][TRAINER_B71419A1] =
     {
 #line 8728
         .trainerName = _("Blank"),
@@ -25371,7 +25371,7 @@
         {
             {
 #line 8732
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8734
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25383,7 +25383,7 @@
         },
     },
 #line 8735
-    [DIFFICULTY_NORMAL][TRAINER_JONAH] =
+    [DIFFICULTY_NORMAL][TRAINER_B77C014B] =
     {
 #line 8736
         .trainerName = _("Blank"),
@@ -25398,7 +25398,7 @@
         {
             {
 #line 8740
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8742
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25410,7 +25410,7 @@
         },
     },
 #line 8743
-    [DIFFICULTY_NORMAL][TRAINER_HENRY] =
+    [DIFFICULTY_NORMAL][TRAINER_B791766D] =
     {
 #line 8744
         .trainerName = _("Blank"),
@@ -25425,7 +25425,7 @@
         {
             {
 #line 8748
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8750
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25437,7 +25437,7 @@
         },
     },
 #line 8751
-    [DIFFICULTY_NORMAL][TRAINER_ROGER] =
+    [DIFFICULTY_NORMAL][TRAINER_B7998A66] =
     {
 #line 8752
         .trainerName = _("Blank"),
@@ -25452,7 +25452,7 @@
         {
             {
 #line 8756
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8758
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25464,7 +25464,7 @@
         },
     },
 #line 8759
-    [DIFFICULTY_NORMAL][TRAINER_ALEXA] =
+    [DIFFICULTY_NORMAL][TRAINER_B7C2EB7F] =
     {
 #line 8760
         .trainerName = _("Blank"),
@@ -25479,7 +25479,7 @@
         {
             {
 #line 8764
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8766
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25491,7 +25491,7 @@
         },
     },
 #line 8767
-    [DIFFICULTY_NORMAL][TRAINER_RUBEN] =
+    [DIFFICULTY_NORMAL][TRAINER_B7EFEE71] =
     {
 #line 8768
         .trainerName = _("Blank"),
@@ -25506,7 +25506,7 @@
         {
             {
 #line 8772
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8774
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25518,7 +25518,7 @@
         },
     },
 #line 8775
-    [DIFFICULTY_NORMAL][TRAINER_KOJI_1] =
+    [DIFFICULTY_NORMAL][TRAINER_B84B3D2A] =
     {
 #line 8776
         .trainerName = _("Blank"),
@@ -25533,7 +25533,7 @@
         {
             {
 #line 8780
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8782
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25545,7 +25545,7 @@
         },
     },
 #line 8783
-    [DIFFICULTY_NORMAL][TRAINER_WAYNE] =
+    [DIFFICULTY_NORMAL][TRAINER_B8C5628C] =
     {
 #line 8784
         .trainerName = _("Blank"),
@@ -25560,7 +25560,7 @@
         {
             {
 #line 8788
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8790
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25572,7 +25572,7 @@
         },
     },
 #line 8791
-    [DIFFICULTY_NORMAL][TRAINER_AIDAN] =
+    [DIFFICULTY_NORMAL][TRAINER_B94D66E3] =
     {
 #line 8792
         .trainerName = _("Blank"),
@@ -25587,7 +25587,7 @@
         {
             {
 #line 8796
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8798
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25599,7 +25599,7 @@
         },
     },
 #line 8799
-    [DIFFICULTY_NORMAL][TRAINER_REED] =
+    [DIFFICULTY_NORMAL][TRAINER_B9C56D15] =
     {
 #line 8800
         .trainerName = _("Blank"),
@@ -25614,7 +25614,7 @@
         {
             {
 #line 8804
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8806
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25626,7 +25626,7 @@
         },
     },
 #line 8807
-    [DIFFICULTY_NORMAL][TRAINER_TISHA] =
+    [DIFFICULTY_NORMAL][TRAINER_BA12D98F] =
     {
 #line 8808
         .trainerName = _("Blank"),
@@ -25641,7 +25641,7 @@
         {
             {
 #line 8812
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8814
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25653,7 +25653,7 @@
         },
     },
 #line 8815
-    [DIFFICULTY_NORMAL][TRAINER_TORI_AND_TIA] =
+    [DIFFICULTY_NORMAL][TRAINER_BA4155D3] =
     {
 #line 8816
         .trainerName = _("Blank"),
@@ -25668,7 +25668,7 @@
         {
             {
 #line 8820
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8822
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25680,7 +25680,7 @@
         },
     },
 #line 8823
-    [DIFFICULTY_NORMAL][TRAINER_KIM_AND_IRIS] =
+    [DIFFICULTY_NORMAL][TRAINER_BA4DFC3A] =
     {
 #line 8824
         .trainerName = _("Blank"),
@@ -25695,7 +25695,7 @@
         {
             {
 #line 8828
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8830
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25707,7 +25707,7 @@
         },
     },
 #line 8831
-    [DIFFICULTY_NORMAL][TRAINER_TYRA_AND_IVY] =
+    [DIFFICULTY_NORMAL][TRAINER_BA60011F] =
     {
 #line 8832
         .trainerName = _("Blank"),
@@ -25722,7 +25722,7 @@
         {
             {
 #line 8836
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8838
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25734,7 +25734,7 @@
         },
     },
 #line 8839
-    [DIFFICULTY_NORMAL][TRAINER_MEL_AND_PAUL] =
+    [DIFFICULTY_NORMAL][TRAINER_BA924FF7] =
     {
 #line 8840
         .trainerName = _("Blank"),
@@ -25749,7 +25749,7 @@
         {
             {
 #line 8844
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8846
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25761,7 +25761,7 @@
         },
     },
 #line 8847
-    [DIFFICULTY_NORMAL][TRAINER_JOHN_AND_JAY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_BB07DD1B] =
     {
 #line 8848
         .trainerName = _("Blank"),
@@ -25776,7 +25776,7 @@
         {
             {
 #line 8852
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8854
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25788,7 +25788,7 @@
         },
     },
 #line 8855
-    [DIFFICULTY_NORMAL][TRAINER_JOHN_AND_JAY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_BB531FBA] =
     {
 #line 8856
         .trainerName = _("Blank"),
@@ -25803,7 +25803,7 @@
         {
             {
 #line 8860
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8862
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25815,7 +25815,7 @@
         },
     },
 #line 8863
-    [DIFFICULTY_NORMAL][TRAINER_JOHN_AND_JAY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_BB6FD0A4] =
     {
 #line 8864
         .trainerName = _("Blank"),
@@ -25830,7 +25830,7 @@
         {
             {
 #line 8868
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8870
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25842,7 +25842,7 @@
         },
     },
 #line 8871
-    [DIFFICULTY_NORMAL][TRAINER_JOHN_AND_JAY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_BBBC4B4C] =
     {
 #line 8872
         .trainerName = _("Blank"),
@@ -25857,7 +25857,7 @@
         {
             {
 #line 8876
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8878
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25869,7 +25869,7 @@
         },
     },
 #line 8879
-    [DIFFICULTY_NORMAL][TRAINER_JOHN_AND_JAY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_BBD56E26] =
     {
 #line 8880
         .trainerName = _("Blank"),
@@ -25884,7 +25884,7 @@
         {
             {
 #line 8884
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8886
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25896,7 +25896,7 @@
         },
     },
 #line 8887
-    [DIFFICULTY_NORMAL][TRAINER_RELI_AND_IAN] =
+    [DIFFICULTY_NORMAL][TRAINER_BC01A85B] =
     {
 #line 8888
         .trainerName = _("Blank"),
@@ -25911,7 +25911,7 @@
         {
             {
 #line 8892
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8894
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25923,7 +25923,7 @@
         },
     },
 #line 8895
-    [DIFFICULTY_NORMAL][TRAINER_LILA_AND_ROY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_BC74FA1D] =
     {
 #line 8896
         .trainerName = _("Blank"),
@@ -25938,7 +25938,7 @@
         {
             {
 #line 8900
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8902
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25950,7 +25950,7 @@
         },
     },
 #line 8903
-    [DIFFICULTY_NORMAL][TRAINER_LILA_AND_ROY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_BC7E8D55] =
     {
 #line 8904
         .trainerName = _("Blank"),
@@ -25965,7 +25965,7 @@
         {
             {
 #line 8908
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8910
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -25977,7 +25977,7 @@
         },
     },
 #line 8911
-    [DIFFICULTY_NORMAL][TRAINER_LILA_AND_ROY_3] =
+    [DIFFICULTY_NORMAL][TRAINER_BCDFD312] =
     {
 #line 8912
         .trainerName = _("Blank"),
@@ -25992,7 +25992,7 @@
         {
             {
 #line 8916
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8918
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26004,7 +26004,7 @@
         },
     },
 #line 8919
-    [DIFFICULTY_NORMAL][TRAINER_LILA_AND_ROY_4] =
+    [DIFFICULTY_NORMAL][TRAINER_BCEFD799] =
     {
 #line 8920
         .trainerName = _("Blank"),
@@ -26019,7 +26019,7 @@
         {
             {
 #line 8924
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8926
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26031,7 +26031,7 @@
         },
     },
 #line 8927
-    [DIFFICULTY_NORMAL][TRAINER_LILA_AND_ROY_5] =
+    [DIFFICULTY_NORMAL][TRAINER_BD01F8F4] =
     {
 #line 8928
         .trainerName = _("Blank"),
@@ -26046,7 +26046,7 @@
         {
             {
 #line 8932
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8934
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26058,7 +26058,7 @@
         },
     },
 #line 8935
-    [DIFFICULTY_NORMAL][TRAINER_LISA_AND_RAY] =
+    [DIFFICULTY_NORMAL][TRAINER_BDC38E1E] =
     {
 #line 8936
         .trainerName = _("Blank"),
@@ -26073,7 +26073,7 @@
         {
             {
 #line 8940
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8942
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26085,7 +26085,7 @@
         },
     },
 #line 8943
-    [DIFFICULTY_NORMAL][TRAINER_CHRIS] =
+    [DIFFICULTY_NORMAL][TRAINER_BE2AF14F] =
     {
 #line 8944
         .trainerName = _("Blank"),
@@ -26100,7 +26100,7 @@
         {
             {
 #line 8948
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8950
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26112,7 +26112,7 @@
         },
     },
 #line 8951
-    [DIFFICULTY_NORMAL][TRAINER_DAWSON] =
+    [DIFFICULTY_NORMAL][TRAINER_BEB2BD3E] =
     {
 #line 8952
         .trainerName = _("Blank"),
@@ -26127,7 +26127,7 @@
         {
             {
 #line 8956
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8958
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26139,7 +26139,7 @@
         },
     },
 #line 8959
-    [DIFFICULTY_NORMAL][TRAINER_SARAH] =
+    [DIFFICULTY_NORMAL][TRAINER_BF07B94F] =
     {
 #line 8960
         .trainerName = _("Blank"),
@@ -26154,7 +26154,7 @@
         {
             {
 #line 8964
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8966
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26166,7 +26166,7 @@
         },
     },
 #line 8967
-    [DIFFICULTY_NORMAL][TRAINER_DARIAN] =
+    [DIFFICULTY_NORMAL][TRAINER_BF2827C0] =
     {
 #line 8968
         .trainerName = _("Blank"),
@@ -26181,7 +26181,7 @@
         {
             {
 #line 8972
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8974
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26193,7 +26193,7 @@
         },
     },
 #line 8975
-    [DIFFICULTY_NORMAL][TRAINER_HAILEY] =
+    [DIFFICULTY_NORMAL][TRAINER_BF74896F] =
     {
 #line 8976
         .trainerName = _("Blank"),
@@ -26208,7 +26208,7 @@
         {
             {
 #line 8980
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8982
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26220,7 +26220,7 @@
         },
     },
 #line 8983
-    [DIFFICULTY_NORMAL][TRAINER_CHANDLER] =
+    [DIFFICULTY_NORMAL][TRAINER_BF8ADEF1] =
     {
 #line 8984
         .trainerName = _("Blank"),
@@ -26235,7 +26235,7 @@
         {
             {
 #line 8988
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8990
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26247,7 +26247,7 @@
         },
     },
 #line 8991
-    [DIFFICULTY_NORMAL][TRAINER_KALEB] =
+    [DIFFICULTY_NORMAL][TRAINER_C0800804] =
     {
 #line 8992
         .trainerName = _("Blank"),
@@ -26262,7 +26262,7 @@
         {
             {
 #line 8996
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8998
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26274,7 +26274,7 @@
         },
     },
 #line 8999
-    [DIFFICULTY_NORMAL][TRAINER_JOSEPH] =
+    [DIFFICULTY_NORMAL][TRAINER_C091F2C5] =
     {
 #line 9000
         .trainerName = _("Blank"),
@@ -26289,7 +26289,7 @@
         {
             {
 #line 9004
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9006
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26301,7 +26301,7 @@
         },
     },
 #line 9007
-    [DIFFICULTY_NORMAL][TRAINER_ALYSSA] =
+    [DIFFICULTY_NORMAL][TRAINER_C10351D2] =
     {
 #line 9008
         .trainerName = _("Blank"),
@@ -26316,7 +26316,7 @@
         {
             {
 #line 9012
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9014
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26328,7 +26328,7 @@
         },
     },
 #line 9015
-    [DIFFICULTY_NORMAL][TRAINER_MARCOS] =
+    [DIFFICULTY_NORMAL][TRAINER_C1C428F7] =
     {
 #line 9016
         .trainerName = _("Blank"),
@@ -26343,7 +26343,7 @@
         {
             {
 #line 9020
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9022
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26355,7 +26355,7 @@
         },
     },
 #line 9023
-    [DIFFICULTY_NORMAL][TRAINER_RHETT] =
+    [DIFFICULTY_NORMAL][TRAINER_C1C621AC] =
     {
 #line 9024
         .trainerName = _("Blank"),
@@ -26370,7 +26370,7 @@
         {
             {
 #line 9028
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9030
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26382,7 +26382,7 @@
         },
     },
 #line 9031
-    [DIFFICULTY_NORMAL][TRAINER_TYRON] =
+    [DIFFICULTY_NORMAL][TRAINER_C203C024] =
     {
 #line 9032
         .trainerName = _("Blank"),
@@ -26397,7 +26397,7 @@
         {
             {
 #line 9036
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9038
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26409,7 +26409,7 @@
         },
     },
 #line 9039
-    [DIFFICULTY_NORMAL][TRAINER_CELINA] =
+    [DIFFICULTY_NORMAL][TRAINER_C2174D90] =
     {
 #line 9040
         .trainerName = _("Blank"),
@@ -26424,7 +26424,7 @@
         {
             {
 #line 9044
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9046
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26436,7 +26436,7 @@
         },
     },
 #line 9047
-    [DIFFICULTY_NORMAL][TRAINER_BIANCA] =
+    [DIFFICULTY_NORMAL][TRAINER_C24EFC92] =
     {
 #line 9048
         .trainerName = _("Blank"),
@@ -26451,7 +26451,7 @@
         {
             {
 #line 9052
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9054
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26463,7 +26463,7 @@
         },
     },
 #line 9055
-    [DIFFICULTY_NORMAL][TRAINER_HAYDEN] =
+    [DIFFICULTY_NORMAL][TRAINER_C290C9F5] =
     {
 #line 9056
         .trainerName = _("Blank"),
@@ -26478,7 +26478,7 @@
         {
             {
 #line 9060
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9062
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26490,7 +26490,7 @@
         },
     },
 #line 9063
-    [DIFFICULTY_NORMAL][TRAINER_SOPHIE] =
+    [DIFFICULTY_NORMAL][TRAINER_C29CDC34] =
     {
 #line 9064
         .trainerName = _("Blank"),
@@ -26505,7 +26505,7 @@
         {
             {
 #line 9068
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9070
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26517,7 +26517,7 @@
         },
     },
 #line 9071
-    [DIFFICULTY_NORMAL][TRAINER_COBY] =
+    [DIFFICULTY_NORMAL][TRAINER_C3B3B17B] =
     {
 #line 9072
         .trainerName = _("Blank"),
@@ -26532,7 +26532,7 @@
         {
             {
 #line 9076
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9078
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26544,7 +26544,7 @@
         },
     },
 #line 9079
-    [DIFFICULTY_NORMAL][TRAINER_LAWRENCE] =
+    [DIFFICULTY_NORMAL][TRAINER_C414BED0] =
     {
 #line 9080
         .trainerName = _("Blank"),
@@ -26559,7 +26559,7 @@
         {
             {
 #line 9084
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9086
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26571,7 +26571,7 @@
         },
     },
 #line 9087
-    [DIFFICULTY_NORMAL][TRAINER_WYATT] =
+    [DIFFICULTY_NORMAL][TRAINER_C42A775B] =
     {
 #line 9088
         .trainerName = _("Blank"),
@@ -26586,7 +26586,7 @@
         {
             {
 #line 9092
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9094
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26598,7 +26598,7 @@
         },
     },
 #line 9095
-    [DIFFICULTY_NORMAL][TRAINER_ANGELINA] =
+    [DIFFICULTY_NORMAL][TRAINER_C4A167E0] =
     {
 #line 9096
         .trainerName = _("Blank"),
@@ -26613,7 +26613,7 @@
         {
             {
 #line 9100
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9102
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26625,7 +26625,7 @@
         },
     },
 #line 9103
-    [DIFFICULTY_NORMAL][TRAINER_KAI] =
+    [DIFFICULTY_NORMAL][TRAINER_C4C98FC4] =
     {
 #line 9104
         .trainerName = _("Blank"),
@@ -26640,7 +26640,7 @@
         {
             {
 #line 9108
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9110
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26652,7 +26652,7 @@
         },
     },
 #line 9111
-    [DIFFICULTY_NORMAL][TRAINER_CHARLOTTE] =
+    [DIFFICULTY_NORMAL][TRAINER_C533F091] =
     {
 #line 9112
         .trainerName = _("Blank"),
@@ -26667,7 +26667,7 @@
         {
             {
 #line 9116
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9118
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26679,7 +26679,7 @@
         },
     },
 #line 9119
-    [DIFFICULTY_NORMAL][TRAINER_DEANDRE] =
+    [DIFFICULTY_NORMAL][TRAINER_C6600959] =
     {
 #line 9120
         .trainerName = _("Blank"),
@@ -26694,7 +26694,7 @@
         {
             {
 #line 9124
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9126
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26706,7 +26706,7 @@
         },
     },
 #line 9127
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_1] =
+    [DIFFICULTY_NORMAL][TRAINER_C6666859] =
     {
 #line 9128
         .trainerName = _("Blank"),
@@ -26721,7 +26721,7 @@
         {
             {
 #line 9132
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9134
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26733,7 +26733,7 @@
         },
     },
 #line 9135
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_2] =
+    [DIFFICULTY_NORMAL][TRAINER_C690158D] =
     {
 #line 9136
         .trainerName = _("Blank"),
@@ -26748,7 +26748,7 @@
         {
             {
 #line 9140
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9142
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26760,7 +26760,7 @@
         },
     },
 #line 9143
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_3] =
+    [DIFFICULTY_NORMAL][TRAINER_C6E61EDA] =
     {
 #line 9144
         .trainerName = _("Blank"),
@@ -26775,7 +26775,7 @@
         {
             {
 #line 9148
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9150
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26787,7 +26787,7 @@
         },
     },
 #line 9151
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_4] =
+    [DIFFICULTY_NORMAL][TRAINER_C7630112] =
     {
 #line 9152
         .trainerName = _("Blank"),
@@ -26802,7 +26802,7 @@
         {
             {
 #line 9156
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9158
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26814,7 +26814,7 @@
         },
     },
 #line 9159
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_5] =
+    [DIFFICULTY_NORMAL][TRAINER_C789FBF5] =
     {
 #line 9160
         .trainerName = _("Blank"),
@@ -26829,7 +26829,7 @@
         {
             {
 #line 9164
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9166
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26841,7 +26841,7 @@
         },
     },
 #line 9167
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_6] =
+    [DIFFICULTY_NORMAL][TRAINER_C7E06CB4] =
     {
 #line 9168
         .trainerName = _("Blank"),
@@ -26856,7 +26856,7 @@
         {
             {
 #line 9172
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9174
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26868,7 +26868,7 @@
         },
     },
 #line 9175
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_7] =
+    [DIFFICULTY_NORMAL][TRAINER_C7F16F5B] =
     {
 #line 9176
         .trainerName = _("Blank"),
@@ -26883,7 +26883,7 @@
         {
             {
 #line 9180
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9182
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26895,7 +26895,7 @@
         },
     },
 #line 9183
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_8] =
+    [DIFFICULTY_NORMAL][TRAINER_C82E0F99] =
     {
 #line 9184
         .trainerName = _("Blank"),
@@ -26910,7 +26910,7 @@
         {
             {
 #line 9188
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9190
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26922,7 +26922,7 @@
         },
     },
 #line 9191
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_9] =
+    [DIFFICULTY_NORMAL][TRAINER_C84D5BA6] =
     {
 #line 9192
         .trainerName = _("Blank"),
@@ -26937,7 +26937,7 @@
         {
             {
 #line 9196
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9198
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -26949,7 +26949,7 @@
         },
     },
 #line 9199
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_10] =
+    [DIFFICULTY_NORMAL][TRAINER_C8563FAA] =
     {
 #line 9200
         .trainerName = _("Blank"),
@@ -26964,3494 +26964,11 @@
         {
             {
 #line 9204
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 9206
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 9205
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9207
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_11] =
-    {
-#line 9208
-        .trainerName = _("Blank"),
-#line 9209
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9210
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9212
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9214
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9213
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9215
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_12] =
-    {
-#line 9216
-        .trainerName = _("Blank"),
-#line 9217
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9218
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9220
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9222
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9221
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9223
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_13] =
-    {
-#line 9224
-        .trainerName = _("Blank"),
-#line 9225
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9226
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9228
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9230
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9229
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9231
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_14] =
-    {
-#line 9232
-        .trainerName = _("Blank"),
-#line 9233
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9234
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9236
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9238
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9237
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9239
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_15] =
-    {
-#line 9240
-        .trainerName = _("Blank"),
-#line 9241
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9242
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9244
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9246
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9245
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9247
-    [DIFFICULTY_NORMAL][TRAINER_GRUNT_MAGMA_HIDEOUT_16] =
-    {
-#line 9248
-        .trainerName = _("Blank"),
-#line 9249
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9250
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9252
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9254
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9253
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9255
-    [DIFFICULTY_NORMAL][TRAINER_TABITHA_MAGMA_HIDEOUT] =
-    {
-#line 9256
-        .trainerName = _("Blank"),
-#line 9257
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9258
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9260
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9262
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9261
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9263
-    [DIFFICULTY_NORMAL][TRAINER_DARCY] =
-    {
-#line 9264
-        .trainerName = _("Blank"),
-#line 9265
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9266
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9268
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9270
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9269
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9271
-    [DIFFICULTY_NORMAL][TRAINER_MAXIE_MOSSDEEP] =
-    {
-#line 9272
-        .trainerName = _("Blank"),
-#line 9273
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9274
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9276
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9278
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9277
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9279
-    [DIFFICULTY_NORMAL][TRAINER_PETE] =
-    {
-#line 9280
-        .trainerName = _("Blank"),
-#line 9281
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9282
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9284
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9286
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9285
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9287
-    [DIFFICULTY_NORMAL][TRAINER_ISABELLE] =
-    {
-#line 9288
-        .trainerName = _("Blank"),
-#line 9289
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9290
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9292
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9294
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9293
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9295
-    [DIFFICULTY_NORMAL][TRAINER_ANDRES_1] =
-    {
-#line 9296
-        .trainerName = _("Blank"),
-#line 9297
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9298
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9300
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9302
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9301
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9303
-    [DIFFICULTY_NORMAL][TRAINER_JOSUE] =
-    {
-#line 9304
-        .trainerName = _("Blank"),
-#line 9305
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9306
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9308
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9310
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9309
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9311
-    [DIFFICULTY_NORMAL][TRAINER_CAMRON] =
-    {
-#line 9312
-        .trainerName = _("Blank"),
-#line 9313
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9314
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9316
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9318
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9317
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9319
-    [DIFFICULTY_NORMAL][TRAINER_CORY_1] =
-    {
-#line 9320
-        .trainerName = _("Blank"),
-#line 9321
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9322
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9324
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9326
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9325
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9327
-    [DIFFICULTY_NORMAL][TRAINER_CAROLINA] =
-    {
-#line 9328
-        .trainerName = _("Blank"),
-#line 9329
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9330
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9332
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9334
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9333
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9335
-    [DIFFICULTY_NORMAL][TRAINER_ELIJAH] =
-    {
-#line 9336
-        .trainerName = _("Blank"),
-#line 9337
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9338
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9340
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9342
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9341
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9343
-    [DIFFICULTY_NORMAL][TRAINER_CELIA] =
-    {
-#line 9344
-        .trainerName = _("Blank"),
-#line 9345
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9346
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9348
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9350
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9349
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9351
-    [DIFFICULTY_NORMAL][TRAINER_BRYAN] =
-    {
-#line 9352
-        .trainerName = _("Blank"),
-#line 9353
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9354
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9356
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9358
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9357
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9359
-    [DIFFICULTY_NORMAL][TRAINER_BRANDEN] =
-    {
-#line 9360
-        .trainerName = _("Blank"),
-#line 9361
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9362
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9364
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9366
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9365
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9367
-    [DIFFICULTY_NORMAL][TRAINER_BRYANT] =
-    {
-#line 9368
-        .trainerName = _("Blank"),
-#line 9369
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9370
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9372
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9374
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9373
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9375
-    [DIFFICULTY_NORMAL][TRAINER_SHAYLA] =
-    {
-#line 9376
-        .trainerName = _("Blank"),
-#line 9377
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9378
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9380
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9382
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9381
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9383
-    [DIFFICULTY_NORMAL][TRAINER_KYRA] =
-    {
-#line 9384
-        .trainerName = _("Blank"),
-#line 9385
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9386
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9388
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9390
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9389
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9391
-    [DIFFICULTY_NORMAL][TRAINER_JAIDEN] =
-    {
-#line 9392
-        .trainerName = _("Blank"),
-#line 9393
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9394
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9396
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9398
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9397
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9399
-    [DIFFICULTY_NORMAL][TRAINER_ALIX] =
-    {
-#line 9400
-        .trainerName = _("Blank"),
-#line 9401
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9402
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9404
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9406
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9405
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9407
-    [DIFFICULTY_NORMAL][TRAINER_HELENE] =
-    {
-#line 9408
-        .trainerName = _("Blank"),
-#line 9409
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9410
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9412
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9414
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9413
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9415
-    [DIFFICULTY_NORMAL][TRAINER_MARLENE] =
-    {
-#line 9416
-        .trainerName = _("Blank"),
-#line 9417
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9418
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9420
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9422
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9421
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9423
-    [DIFFICULTY_NORMAL][TRAINER_DEVAN] =
-    {
-#line 9424
-        .trainerName = _("Blank"),
-#line 9425
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9426
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9428
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9430
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9429
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9431
-    [DIFFICULTY_NORMAL][TRAINER_JOHNSON] =
-    {
-#line 9432
-        .trainerName = _("Blank"),
-#line 9433
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9434
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9436
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9438
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9437
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9439
-    [DIFFICULTY_NORMAL][TRAINER_MELINA] =
-    {
-#line 9440
-        .trainerName = _("Blank"),
-#line 9441
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9442
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9444
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9446
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9445
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9447
-    [DIFFICULTY_NORMAL][TRAINER_BRANDI] =
-    {
-#line 9448
-        .trainerName = _("Blank"),
-#line 9449
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9450
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9452
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9454
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9453
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9455
-    [DIFFICULTY_NORMAL][TRAINER_AISHA] =
-    {
-#line 9456
-        .trainerName = _("Blank"),
-#line 9457
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9458
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9460
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9462
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9461
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9463
-    [DIFFICULTY_NORMAL][TRAINER_MAKAYLA] =
-    {
-#line 9464
-        .trainerName = _("Blank"),
-#line 9465
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9466
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9468
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9470
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9469
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9471
-    [DIFFICULTY_NORMAL][TRAINER_FABIAN] =
-    {
-#line 9472
-        .trainerName = _("Blank"),
-#line 9473
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9474
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9476
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9478
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9477
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9479
-    [DIFFICULTY_NORMAL][TRAINER_DAYTON] =
-    {
-#line 9480
-        .trainerName = _("Blank"),
-#line 9481
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9482
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9484
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9486
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9485
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9487
-    [DIFFICULTY_NORMAL][TRAINER_RACHEL] =
-    {
-#line 9488
-        .trainerName = _("Blank"),
-#line 9489
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9490
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9492
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9494
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9493
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9495
-    [DIFFICULTY_NORMAL][TRAINER_LEONEL] =
-    {
-#line 9496
-        .trainerName = _("Blank"),
-#line 9497
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9498
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9500
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9502
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9501
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9503
-    [DIFFICULTY_NORMAL][TRAINER_CALLIE] =
-    {
-#line 9504
-        .trainerName = _("Blank"),
-#line 9505
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9506
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9508
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9510
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9509
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9511
-    [DIFFICULTY_NORMAL][TRAINER_CALE] =
-    {
-#line 9512
-        .trainerName = _("Blank"),
-#line 9513
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9514
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9516
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9518
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9517
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9519
-    [DIFFICULTY_NORMAL][TRAINER_MYLES] =
-    {
-#line 9520
-        .trainerName = _("Blank"),
-#line 9521
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9522
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9524
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9526
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9525
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9527
-    [DIFFICULTY_NORMAL][TRAINER_PAT] =
-    {
-#line 9528
-        .trainerName = _("Blank"),
-#line 9529
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9530
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9532
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9534
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9533
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9535
-    [DIFFICULTY_NORMAL][TRAINER_CRISTIN_1] =
-    {
-#line 9536
-        .trainerName = _("Blank"),
-#line 9537
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9538
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9540
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9542
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9541
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9543
-    [DIFFICULTY_NORMAL][TRAINER_MAY_RUSTBORO_TREECKO] =
-    {
-#line 9544
-        .trainerName = _("Blank"),
-#line 9545
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9546
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9548
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9550
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9549
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9551
-    [DIFFICULTY_NORMAL][TRAINER_MAY_RUSTBORO_TORCHIC] =
-    {
-#line 9552
-        .trainerName = _("Blank"),
-#line 9553
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9554
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9556
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9558
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9557
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9559
-    [DIFFICULTY_NORMAL][TRAINER_ROXANNE_2] =
-    {
-#line 9560
-        .trainerName = _("Blank"),
-#line 9561
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9562
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9564
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9566
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9565
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9567
-    [DIFFICULTY_NORMAL][TRAINER_ROXANNE_3] =
-    {
-#line 9568
-        .trainerName = _("Blank"),
-#line 9569
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9570
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9572
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9574
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9573
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9575
-    [DIFFICULTY_NORMAL][TRAINER_ROXANNE_4] =
-    {
-#line 9576
-        .trainerName = _("Blank"),
-#line 9577
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9578
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9580
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9582
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9581
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9583
-    [DIFFICULTY_NORMAL][TRAINER_ROXANNE_5] =
-    {
-#line 9584
-        .trainerName = _("Blank"),
-#line 9585
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9586
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9588
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9590
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9589
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9591
-    [DIFFICULTY_NORMAL][TRAINER_BRAWLY_2] =
-    {
-#line 9592
-        .trainerName = _("Blank"),
-#line 9593
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9594
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9596
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9598
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9597
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9599
-    [DIFFICULTY_NORMAL][TRAINER_BRAWLY_3] =
-    {
-#line 9600
-        .trainerName = _("Blank"),
-#line 9601
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9602
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9604
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9606
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9605
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9607
-    [DIFFICULTY_NORMAL][TRAINER_BRAWLY_4] =
-    {
-#line 9608
-        .trainerName = _("Blank"),
-#line 9609
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9610
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9612
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9614
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9613
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9615
-    [DIFFICULTY_NORMAL][TRAINER_BRAWLY_5] =
-    {
-#line 9616
-        .trainerName = _("Blank"),
-#line 9617
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9618
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9620
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9622
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9621
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9623
-    [DIFFICULTY_NORMAL][TRAINER_WATTSON_2] =
-    {
-#line 9624
-        .trainerName = _("Blank"),
-#line 9625
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9626
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9628
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9630
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9629
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9631
-    [DIFFICULTY_NORMAL][TRAINER_WATTSON_3] =
-    {
-#line 9632
-        .trainerName = _("Blank"),
-#line 9633
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9634
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9636
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9638
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9637
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9639
-    [DIFFICULTY_NORMAL][TRAINER_WATTSON_4] =
-    {
-#line 9640
-        .trainerName = _("Blank"),
-#line 9641
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9642
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9644
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9646
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9645
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9647
-    [DIFFICULTY_NORMAL][TRAINER_WATTSON_5] =
-    {
-#line 9648
-        .trainerName = _("Blank"),
-#line 9649
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9650
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9652
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9654
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9653
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9655
-    [DIFFICULTY_NORMAL][TRAINER_FLANNERY_2] =
-    {
-#line 9656
-        .trainerName = _("Blank"),
-#line 9657
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9658
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9660
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9662
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9661
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9663
-    [DIFFICULTY_NORMAL][TRAINER_FLANNERY_3] =
-    {
-#line 9664
-        .trainerName = _("Blank"),
-#line 9665
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9666
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9668
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9670
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9669
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9671
-    [DIFFICULTY_NORMAL][TRAINER_FLANNERY_4] =
-    {
-#line 9672
-        .trainerName = _("Blank"),
-#line 9673
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9674
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9676
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9678
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9677
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9679
-    [DIFFICULTY_NORMAL][TRAINER_FLANNERY_5] =
-    {
-#line 9680
-        .trainerName = _("Blank"),
-#line 9681
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9682
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9684
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9686
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9685
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9687
-    [DIFFICULTY_NORMAL][TRAINER_NORMAN_2] =
-    {
-#line 9688
-        .trainerName = _("Blank"),
-#line 9689
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9690
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9692
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9694
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9693
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9695
-    [DIFFICULTY_NORMAL][TRAINER_NORMAN_3] =
-    {
-#line 9696
-        .trainerName = _("Blank"),
-#line 9697
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9698
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9700
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9702
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9701
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9703
-    [DIFFICULTY_NORMAL][TRAINER_NORMAN_4] =
-    {
-#line 9704
-        .trainerName = _("Blank"),
-#line 9705
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9706
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9708
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9710
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9709
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9711
-    [DIFFICULTY_NORMAL][TRAINER_NORMAN_5] =
-    {
-#line 9712
-        .trainerName = _("Blank"),
-#line 9713
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9714
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9716
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9718
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9717
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9719
-    [DIFFICULTY_NORMAL][TRAINER_WINONA_2] =
-    {
-#line 9720
-        .trainerName = _("Blank"),
-#line 9721
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9722
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9724
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9726
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9725
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9727
-    [DIFFICULTY_NORMAL][TRAINER_WINONA_3] =
-    {
-#line 9728
-        .trainerName = _("Blank"),
-#line 9729
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9730
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9732
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9734
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9733
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9735
-    [DIFFICULTY_NORMAL][TRAINER_WINONA_4] =
-    {
-#line 9736
-        .trainerName = _("Blank"),
-#line 9737
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9738
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9740
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9742
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9741
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9743
-    [DIFFICULTY_NORMAL][TRAINER_WINONA_5] =
-    {
-#line 9744
-        .trainerName = _("Blank"),
-#line 9745
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9746
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9748
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9750
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9749
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9751
-    [DIFFICULTY_NORMAL][TRAINER_TATE_AND_LIZA_2] =
-    {
-#line 9752
-        .trainerName = _("Blank"),
-#line 9753
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9754
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9756
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9758
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9757
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9759
-    [DIFFICULTY_NORMAL][TRAINER_TATE_AND_LIZA_3] =
-    {
-#line 9760
-        .trainerName = _("Blank"),
-#line 9761
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9762
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9764
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9766
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9765
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9767
-    [DIFFICULTY_NORMAL][TRAINER_TATE_AND_LIZA_4] =
-    {
-#line 9768
-        .trainerName = _("Blank"),
-#line 9769
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9770
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9772
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9774
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9773
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9775
-    [DIFFICULTY_NORMAL][TRAINER_TATE_AND_LIZA_5] =
-    {
-#line 9776
-        .trainerName = _("Blank"),
-#line 9777
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9778
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9780
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9782
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9781
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9783
-    [DIFFICULTY_NORMAL][TRAINER_JUAN_2] =
-    {
-#line 9784
-        .trainerName = _("Blank"),
-#line 9785
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9786
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9788
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9790
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9789
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9791
-    [DIFFICULTY_NORMAL][TRAINER_JUAN_3] =
-    {
-#line 9792
-        .trainerName = _("Blank"),
-#line 9793
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9794
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9796
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9798
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9797
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9799
-    [DIFFICULTY_NORMAL][TRAINER_JUAN_4] =
-    {
-#line 9800
-        .trainerName = _("Blank"),
-#line 9801
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9802
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9804
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9806
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9805
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9807
-    [DIFFICULTY_NORMAL][TRAINER_JUAN_5] =
-    {
-#line 9808
-        .trainerName = _("Blank"),
-#line 9809
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9810
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9812
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9814
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9813
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9815
-    [DIFFICULTY_NORMAL][TRAINER_ANGELO] =
-    {
-#line 9816
-        .trainerName = _("Blank"),
-#line 9817
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9818
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9820
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9822
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9821
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9823
-    [DIFFICULTY_NORMAL][TRAINER_DARIUS] =
-    {
-#line 9824
-        .trainerName = _("Blank"),
-#line 9825
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9826
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9828
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9830
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9829
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9831
-    [DIFFICULTY_NORMAL][TRAINER_STEVEN] =
-    {
-#line 9832
-        .trainerName = _("Blank"),
-#line 9833
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9834
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9836
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9838
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9837
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9839
-    [DIFFICULTY_NORMAL][TRAINER_ANABEL] =
-    {
-#line 9840
-        .trainerName = _("Blank"),
-#line 9841
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9842
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9844
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9846
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9845
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9847
-    [DIFFICULTY_NORMAL][TRAINER_TUCKER] =
-    {
-#line 9848
-        .trainerName = _("Blank"),
-#line 9849
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9850
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9852
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9854
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9853
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9855
-    [DIFFICULTY_NORMAL][TRAINER_SPENSER] =
-    {
-#line 9856
-        .trainerName = _("Blank"),
-#line 9857
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9858
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9860
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9862
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9861
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9863
-    [DIFFICULTY_NORMAL][TRAINER_GRETA] =
-    {
-#line 9864
-        .trainerName = _("Blank"),
-#line 9865
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9866
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9868
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9870
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9869
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9871
-    [DIFFICULTY_NORMAL][TRAINER_NOLAND] =
-    {
-#line 9872
-        .trainerName = _("Blank"),
-#line 9873
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9874
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9876
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9878
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9877
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9879
-    [DIFFICULTY_NORMAL][TRAINER_LUCY] =
-    {
-#line 9880
-        .trainerName = _("Blank"),
-#line 9881
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9882
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9884
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9886
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9885
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9887
-    [DIFFICULTY_NORMAL][TRAINER_BRANDON] =
-    {
-#line 9888
-        .trainerName = _("Blank"),
-#line 9889
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9890
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9892
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9894
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9893
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9895
-    [DIFFICULTY_NORMAL][TRAINER_ANDRES_2] =
-    {
-#line 9896
-        .trainerName = _("Blank"),
-#line 9897
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9898
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9900
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9902
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9901
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9903
-    [DIFFICULTY_NORMAL][TRAINER_ANDRES_3] =
-    {
-#line 9904
-        .trainerName = _("Blank"),
-#line 9905
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9906
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9908
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9910
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9909
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9911
-    [DIFFICULTY_NORMAL][TRAINER_ANDRES_4] =
-    {
-#line 9912
-        .trainerName = _("Blank"),
-#line 9913
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9914
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9916
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9918
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9917
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9919
-    [DIFFICULTY_NORMAL][TRAINER_ANDRES_5] =
-    {
-#line 9920
-        .trainerName = _("Blank"),
-#line 9921
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9922
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9924
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9926
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9925
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9927
-    [DIFFICULTY_NORMAL][TRAINER_CORY_2] =
-    {
-#line 9928
-        .trainerName = _("Blank"),
-#line 9929
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9930
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9932
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9934
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9933
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9935
-    [DIFFICULTY_NORMAL][TRAINER_CORY_3] =
-    {
-#line 9936
-        .trainerName = _("Blank"),
-#line 9937
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9938
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9940
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9942
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9941
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9943
-    [DIFFICULTY_NORMAL][TRAINER_CORY_4] =
-    {
-#line 9944
-        .trainerName = _("Blank"),
-#line 9945
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9946
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9948
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9950
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9949
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9951
-    [DIFFICULTY_NORMAL][TRAINER_CORY_5] =
-    {
-#line 9952
-        .trainerName = _("Blank"),
-#line 9953
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9954
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9956
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9958
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9957
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9959
-    [DIFFICULTY_NORMAL][TRAINER_PABLO_2] =
-    {
-#line 9960
-        .trainerName = _("Blank"),
-#line 9961
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9962
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9964
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9966
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9965
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9967
-    [DIFFICULTY_NORMAL][TRAINER_PABLO_3] =
-    {
-#line 9968
-        .trainerName = _("Blank"),
-#line 9969
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9970
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9972
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9974
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9973
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9975
-    [DIFFICULTY_NORMAL][TRAINER_PABLO_4] =
-    {
-#line 9976
-        .trainerName = _("Blank"),
-#line 9977
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9978
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9980
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9982
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9981
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9983
-    [DIFFICULTY_NORMAL][TRAINER_PABLO_5] =
-    {
-#line 9984
-        .trainerName = _("Blank"),
-#line 9985
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9986
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9988
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9990
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9989
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9991
-    [DIFFICULTY_NORMAL][TRAINER_KOJI_2] =
-    {
-#line 9992
-        .trainerName = _("Blank"),
-#line 9993
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 9994
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 9996
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9998
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9997
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 9999
-    [DIFFICULTY_NORMAL][TRAINER_KOJI_3] =
-    {
-#line 10000
-        .trainerName = _("Blank"),
-#line 10001
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10002
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10004
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10006
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10005
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10007
-    [DIFFICULTY_NORMAL][TRAINER_KOJI_4] =
-    {
-#line 10008
-        .trainerName = _("Blank"),
-#line 10009
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10010
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10012
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10014
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10013
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10015
-    [DIFFICULTY_NORMAL][TRAINER_KOJI_5] =
-    {
-#line 10016
-        .trainerName = _("Blank"),
-#line 10017
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10018
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10020
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10022
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10021
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10023
-    [DIFFICULTY_NORMAL][TRAINER_CRISTIN_2] =
-    {
-#line 10024
-        .trainerName = _("Blank"),
-#line 10025
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10026
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10028
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10030
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10029
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10031
-    [DIFFICULTY_NORMAL][TRAINER_CRISTIN_3] =
-    {
-#line 10032
-        .trainerName = _("Blank"),
-#line 10033
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10034
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10036
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10038
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10037
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10039
-    [DIFFICULTY_NORMAL][TRAINER_CRISTIN_4] =
-    {
-#line 10040
-        .trainerName = _("Blank"),
-#line 10041
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10042
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10044
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10046
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10045
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10047
-    [DIFFICULTY_NORMAL][TRAINER_CRISTIN_5] =
-    {
-#line 10048
-        .trainerName = _("Blank"),
-#line 10049
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10050
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10052
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10054
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10053
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10055
-    [DIFFICULTY_NORMAL][TRAINER_FERNANDO_2] =
-    {
-#line 10056
-        .trainerName = _("Blank"),
-#line 10057
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10058
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10060
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10062
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10061
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10063
-    [DIFFICULTY_NORMAL][TRAINER_FERNANDO_3] =
-    {
-#line 10064
-        .trainerName = _("Blank"),
-#line 10065
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10066
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10068
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10070
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10069
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10071
-    [DIFFICULTY_NORMAL][TRAINER_FERNANDO_4] =
-    {
-#line 10072
-        .trainerName = _("Blank"),
-#line 10073
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10074
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10076
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10078
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10077
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10079
-    [DIFFICULTY_NORMAL][TRAINER_FERNANDO_5] =
-    {
-#line 10080
-        .trainerName = _("Blank"),
-#line 10081
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10082
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10084
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10086
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10085
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10087
-    [DIFFICULTY_NORMAL][TRAINER_SAWYER_2] =
-    {
-#line 10088
-        .trainerName = _("Blank"),
-#line 10089
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10090
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10092
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10094
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10093
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10095
-    [DIFFICULTY_NORMAL][TRAINER_SAWYER_3] =
-    {
-#line 10096
-        .trainerName = _("Blank"),
-#line 10097
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10098
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10100
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10102
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10101
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10103
-    [DIFFICULTY_NORMAL][TRAINER_SAWYER_4] =
-    {
-#line 10104
-        .trainerName = _("Blank"),
-#line 10105
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10106
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10108
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10110
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10109
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10111
-    [DIFFICULTY_NORMAL][TRAINER_SAWYER_5] =
-    {
-#line 10112
-        .trainerName = _("Blank"),
-#line 10113
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10114
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10116
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10118
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10117
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10119
-    [DIFFICULTY_NORMAL][TRAINER_GABRIELLE_2] =
-    {
-#line 10120
-        .trainerName = _("Blank"),
-#line 10121
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10122
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10124
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10126
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10125
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10127
-    [DIFFICULTY_NORMAL][TRAINER_GABRIELLE_3] =
-    {
-#line 10128
-        .trainerName = _("Blank"),
-#line 10129
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10130
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10132
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10134
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10133
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10135
-    [DIFFICULTY_NORMAL][TRAINER_GABRIELLE_4] =
-    {
-#line 10136
-        .trainerName = _("Blank"),
-#line 10137
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10138
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10140
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10142
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10141
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10143
-    [DIFFICULTY_NORMAL][TRAINER_GABRIELLE_5] =
-    {
-#line 10144
-        .trainerName = _("Blank"),
-#line 10145
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10146
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10148
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10150
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10149
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10151
-    [DIFFICULTY_NORMAL][TRAINER_THALIA_2] =
-    {
-#line 10152
-        .trainerName = _("Blank"),
-#line 10153
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10154
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10156
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10158
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10157
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10159
-    [DIFFICULTY_NORMAL][TRAINER_THALIA_3] =
-    {
-#line 10160
-        .trainerName = _("Blank"),
-#line 10161
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10162
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10164
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10166
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10165
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10167
-    [DIFFICULTY_NORMAL][TRAINER_THALIA_4] =
-    {
-#line 10168
-        .trainerName = _("Blank"),
-#line 10169
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10170
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10172
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10174
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10173
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10175
-    [DIFFICULTY_NORMAL][TRAINER_THALIA_5] =
-    {
-#line 10176
-        .trainerName = _("Blank"),
-#line 10177
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10178
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10180
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10182
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10181
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10183
-    [DIFFICULTY_NORMAL][TRAINER_MARIELA] =
-    {
-#line 10184
-        .trainerName = _("Blank"),
-#line 10185
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10186
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10188
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10190
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10189
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10191
-    [DIFFICULTY_NORMAL][TRAINER_ALVARO] =
-    {
-#line 10192
-        .trainerName = _("Blank"),
-#line 10193
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10194
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10196
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10198
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10197
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10199
-    [DIFFICULTY_NORMAL][TRAINER_EVERETT] =
-    {
-#line 10200
-        .trainerName = _("Blank"),
-#line 10201
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10202
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10204
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10206
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10205
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10207
-    [DIFFICULTY_NORMAL][TRAINER_RED] =
-    {
-#line 10208
-        .trainerName = _("Blank"),
-#line 10209
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10210
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10212
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10214
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10213
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10215
-    [DIFFICULTY_NORMAL][TRAINER_LEAF] =
-    {
-#line 10216
-        .trainerName = _("Blank"),
-#line 10217
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10218
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10220
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10222
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10221
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10223
-    [DIFFICULTY_NORMAL][TRAINER_BRENDAN_PLACEHOLDER] =
-    {
-#line 10224
-        .trainerName = _("Blank"),
-#line 10225
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10226
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10228
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10230
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10229
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 10231
-    [DIFFICULTY_NORMAL][TRAINER_MAY_PLACEHOLDER] =
-    {
-#line 10232
-        .trainerName = _("Blank"),
-#line 10233
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 10234
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 10236
-            .species = SPECIES_RAICHU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10238
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10237
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
