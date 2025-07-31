@@ -3431,7 +3431,6 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Marshtomp @ Sitrus Berry
 Ability: Torrent
 Level: 20
-Tera Type: Water
 IVs: 0 Atk
 - Mirror Coat
 - Muddy Water
@@ -3440,7 +3439,6 @@ IVs: 0 Atk
 Slowpoke
 Ability: Own Tempo
 Level: 24
-Tera Type: Water
 IVs: 0 Atk
 - Light Screen
 - Rain Dance
@@ -3449,7 +3447,6 @@ IVs: 0 Atk
 Arrokuda @ Metronome
 Ability: Propeller Tail
 Level: 24
-Tera Type: Water
 - Aqua Jet
 
 === TRAINER_01103D48 ===
@@ -3908,7 +3905,6 @@ Battle Type: Double
 Pupitar
 Ability: Shed Skin
 Level: 23
-Tera Type: Rock
 EVs: 12 HP/92 Atk/32 Def/12 SpD
 Brave Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -3919,7 +3915,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Kabuto
 Ability: Weak Armor
 Level: 22
-Tera Type: Rock
 EVs: 36 Atk/112 Spe
 Jolly Nature
 IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -3931,7 +3926,6 @@ IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Tyrunt @ Hard Stone
 Ability: Sturdy
 Level: 23
-Tera Type: Rock
 EVs: 72 Atk/80 Def
 Impish Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -3957,8 +3951,16 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Ceruledge @ Aspear Berry  
+Ability: Flash Fire  
+Level: 25  
+EVs: 136 Spe  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Trick  
+- Poltergeist  
+- Bitter Blade  
+- Destiny Bond
 
 === TRAINER_0389363C ===
 Name: Blank
