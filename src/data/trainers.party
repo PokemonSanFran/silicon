@@ -3951,24 +3951,53 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Ceruledge @ Aspear Berry  
-Ability: Flash Fire  
-Level: 25  
-EVs: 136 Spe  
-Hasty Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Trick  
-- Poltergeist  
-- Bitter Blade  
+Shroodle @ Big Nugget
+Ability: Unburden
+Level: 21
+EVs: 128 Spe
+Naive Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Fling
+- Acrobatics
+- Baton Pass
+
+Ceruledge @ Aspear Berry
+Ability: Flash Fire
+Level: 25
+EVs: 136 Spe
+Hasty Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Trick
+- Poltergeist
+- Bitter Blade
 - Destiny Bond
 
 === TRAINER_0389363C ===
 Name: Blank
 Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT / AI_FLAG_PREFER_STATUS_MOVES / AI_FLAG_WEIGH_ABILITY_PREDICTION / AI_FLAG_PREDICT_SWITCH / AI_FLAG_PREDICT_INCOMING_MON / AI_FLAG_PP_STALL_PREVENTION / AI_FLAG_PREDICT_MOVE
+Battle Type: Double
 
-Spewpa
-Level: 1
+Linoone @ Figy Berry
+Ability: Gluttony
+Level: 20
+EVs: 132 Atk
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Belly Drum
+- Snore
+- Rest
+- Slash
+
+Maushold-Four
+Ability: Friend Guard
+Level: 22
+EVs: 112 Def/20 SpD
+Impish Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Follow Me
+- Helping Hand
+- Echoed Voice
 
 === TRAINER_040CEA33 ===
 Name: Blank
