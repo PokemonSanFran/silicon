@@ -4002,10 +4002,27 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 === TRAINER_040CEA33 ===
 Name: Blank
 Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT / AI_FLAG_PREFER_STATUS_MOVES / AI_FLAG_WEIGH_ABILITY_PREDICTION / AI_FLAG_PREDICT_SWITCH / AI_FLAG_PREDICT_INCOMING_MON / AI_FLAG_PP_STALL_PREVENTION / AI_FLAG_PREDICT_MOVE
 
-Spewpa
-Level: 1
+Palpitoad @ Rindo Berry
+Ability: Swift Swim
+Level: 23
+EVs: 96 Def/28 SpD
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Rain Dance
+- Mud Shot
+- Water Pulse
+
+Stunky @ Chople Berry
+Ability: Stench
+Level: 20
+EVs: 68 Def/56 SpD
+Sassy Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Toxic Spikes
+- Venoshock
+- Body Slam
 
 === TRAINER_041FD20E ===
 Name: Blank
