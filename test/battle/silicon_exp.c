@@ -81,6 +81,9 @@ static const struct SiliconExpTestData sBelenTrainers =
         TRAINER_026E91A6,
         TRAINER_029E0EF0,
         TRAINER_00E46F7D,
+        TRAINER_032E8AC9,
+        TRAINER_0389363C,
+        TRAINER_040CEA33,
         TRAINER_NONE
     },
 };
