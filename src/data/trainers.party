@@ -3278,6 +3278,7 @@ Level: 1
 Name: 00317DFA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Glavez Hill
 Battle Type: Double
 
 Happiny  
@@ -3316,6 +3317,7 @@ IVs: 14 HP / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 0049EFE8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route8
 
 Vulpix @ Charcoal  
 Ability: Drought  
@@ -3352,6 +3354,7 @@ Level: 21
 Name: 023957DE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route6
 
 Dragonair @ Oran Berry
 Ability: Shed Skin
@@ -3389,6 +3392,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 006E7EFD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Glavez Hill
 
 Hitmonchan
 Ability: Inner Focus
@@ -3427,6 +3431,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 007F06A5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route8
 
 Marshtomp @ Sitrus Berry
 Ability: Torrent
@@ -3453,6 +3458,7 @@ Level: 24
 Name: 01103D48
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route8
 Battle Type: Double
 
 Pachirisu
@@ -3491,6 +3497,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 0272920D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Glavez Hill
 
 Carvanha @ Rocky Helmet  
 Ability: Rough Skin  
@@ -3527,6 +3534,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 022A53A0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route6
 Battle Type: Double
 
 Kricketune @ Focus Band
@@ -3565,6 +3573,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 012ED80D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Glavez Hill
 
 Mudbray
 Ability: Stamina
@@ -3602,6 +3611,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 01E6E96E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route8
 Battle Type: Double
 
 Minior @ Power Herb
@@ -3641,6 +3651,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 0092D526
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route6
 Battle Type: Double
 
 Bounsweet
@@ -3676,6 +3687,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 00C593A8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Glavez Hill
 Battle Type: Double
 
 Spheal @ Wacan Berry
@@ -3712,6 +3724,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 01E7C79B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route6
 
 Dottler
 Ability: Swarm
@@ -3748,6 +3761,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 01C7AF3F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Glavez Hill
 Battle Type: Double
 
 Flabebe (Flabebe-Yellow) @ Oran Berry
@@ -3787,6 +3801,7 @@ IVs: 0 Atk
 Name: 02EEB783
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route8
 Battle Type: Double
 
 Yamask
@@ -3826,6 +3841,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 026E91A6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route8
 
 Lairon @ Sitrus Berry
 Ability: Rock Head
@@ -3863,6 +3879,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 029E0EF0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route6
 
 Nidorino  
 Ability: Poison Point  
@@ -3900,6 +3917,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 00E46F7D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route6
 Battle Type: Double
 
 Pupitar
@@ -3934,14 +3952,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Ancient Power
 - Protect
 
-=== TRAINER_031A849F ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Spewpa
-Level: 1
-
 /*
 * PSF TODO stopped here
 */
@@ -3950,6 +3960,8 @@ Level: 1
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Mermereza City
+Type: Regular
 
 Shroodle @ Big Nugget
 Ability: Unburden
@@ -3977,6 +3989,8 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT / AI_FLAG_PREFER_STATUS_MOVES / AI_FLAG_WEIGH_ABILITY_PREDICTION / AI_FLAG_PREDICT_SWITCH / AI_FLAG_PREDICT_INCOMING_MON / AI_FLAG_PP_STALL_PREVENTION / AI_FLAG_PREDICT_MOVE
 Battle Type: Double
+Map Section: Mermereza City 
+Type: Regular
 
 Linoone @ Figy Berry
 Ability: Gluttony
@@ -4002,7 +4016,9 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 === TRAINER_040CEA33 ===
 Name: Blank
 Pic: Cooltrainer M
+Type: Regular
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT / AI_FLAG_PREFER_STATUS_MOVES / AI_FLAG_WEIGH_ABILITY_PREDICTION / AI_FLAG_PREDICT_SWITCH / AI_FLAG_PREDICT_INCOMING_MON / AI_FLAG_PP_STALL_PREVENTION / AI_FLAG_PREDICT_MOVE
+Map Section: Mermereza City 
 
 Palpitoad @ Rindo Berry
 Ability: Swift Swim
@@ -4023,6 +4039,14 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Toxic Spikes
 - Venoshock
 - Body Slam
+
+=== TRAINER_031A849F ===
+Name: Blank
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Spewpa
+Level: 1
 
 === TRAINER_041FD20E ===
 Name: Blank
