@@ -55,9 +55,3 @@ script MermerezaGym_EventScript_040CEA33
     end
 }
 
-script MermerezaGyM_EventScript_DefeatGymTrainers
-{
-    setflag(TRAINER_FLAGS_START+TRAINER_040CEA33)
-    setflag(TRAINER_FLAGS_START+TRAINER_0389363C)
-    setflag(TRAINER_FLAGS_START+TRAINER_032E8AC9)
-}

@@ -3455,3 +3455,10 @@
     call RunAdventureGuideScript
 	.endm
     @ End adventureGuide
+
+    @ Start trainerBattles
+	.macro cleargymtrainersandgetbadge gym:req
+    setvar VAR_CURRENT_GYM, \gym
+    callnative ClearGymTrainer_Script
+    .endm
+    @ end trainerBattles
