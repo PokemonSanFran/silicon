@@ -92,7 +92,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         msgbox(gText_YouRealizeWereEvilRight_ExcellentTiming,,SPEAKER_OLIVER)
 
-        //One of the monitors changes to show TheTide members marching. PSF TODO
+        //One of the monitors changes to show The Tide members marching. PSF TODO
 
         msgbox(gText_YouRealizeWereEvilRight_IThinkYourKindness,,SPEAKER_KEIYING)
 
@@ -155,24 +155,27 @@ text gText_YouRealizeWereEvilRight_ExcellentTiming {
     format("Excellent timing.")
 }
 text gText_YouRealizeWereEvilRight_IThinkYourKindness {
-    format("I think your kindness is being manipulated, {PLAYER}. Our data suggests that the very Gyms that you're turning into “community centers” are actually being used as recruitment and training hubs for TheTide.")
+    format("I think your kindness is being manipulated, {PLAYER}. Our data suggests that the very Gyms that you're turning into “community centers” are actually being used as recruitment and training hubs for The Tide.")
 }
 
 text gText_YouRealizeWereEvilRight_ShitUsedToBe {
-    format("Kai promised me TheTide was just there to help. He lied to me!")
+    format("Kai promised me The Tide was just there to help. Are you saying he lied to me?!")
 }
 
 text gText_YouRealizeWereEvilRight_UsedToBeASmall {
-    format("TheTide used to be a small problem, but they're growing increasingly violent and dangerous. For the good of the region, and our plans, we need to shut them down for good. ")
+    format("They can't be trusted, {PLAYER}. The Tide used to be a small problem, but you've witnessed them growing increasingly violent and dangerous. You were there during the violent protests near Chasilla, and also saw how they nearly destroyed Sharp Rise Arena. For the good of the region, and our plans, we need to shut them down for good. ")
 }
+
 text gText_YouRealizeWereEvilRight_HidingBehindTheirMask {
-    format("Alcmene is a coward. Hiding behind their mask because they know their entire operation is completely illegal…")
+    format("Why do you think Alcmene hides behind a mask? It's because they know their operation is completely illegal!")
 }
+
 text gText_YouRealizeWereEvilRight_WasActingInGoodFaith {
-    format("Precisely. If TheTide was acting in good faith, they'd work with us, no masks, no subterfuge.")
+    format("Precisely. If The Tide was acting in good faith, they'd work with us, no masks, no subterfuge.")
 }
+
 text gText_YouRealizeWereEvilRight_TheLocalPolice {
-    format("The local police have agreed to continue to work with us to eliminate TheTide. {PLAYER}, as you have before, we'd like you and Charlotte to work alongside us to finish them.")
+    format("The local police have agreed to continue to work with us to eliminate The Tide. {PLAYER}, as you have before, we'd like you and Charlotte to work alongside us to finish them.")
 }
 
 text gText_YouRealizeWereEvilRight_IKnowThis {

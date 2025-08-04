@@ -268,6 +268,8 @@ script YouRealizeTheyreEvilRight_Framing_Dialogue {
         setvar(VAR_ARANTRAZ_STATE,POST_YOU_REALIZE_THEYRE_EVIL_RIGHT)
         msgbox(gText_YouRealizeTheyreEvilRight_HasBeenFramingYou,,SPEAKER_ALICIA)
 
+        msgbox(gText_YouRealizeTheyreEvilRight_WhyWould,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
         msgbox(gText_YouRealizeTheyreEvilRight_YouAlsoMetUp,,SPEAKER_KAI_TIDE)
 
         msgbox(gText_YouRealizeTheyreEvilRight_ButAdaoraSaid,,SPEAKER_ALICIA)
@@ -276,9 +278,13 @@ script YouRealizeTheyreEvilRight_Framing_Dialogue {
 
         msgbox(gText_YouRealizeTheyreEvilRight_WhyWhyDoAll,,SPEAKER_ALICIA)
 
+        msgbox(gText_YouRealizeTheyreEvilRight_WhatIsHe,,SPEAKER_ALICIA,TAIL_THOUGHT)
+
         msgbox(gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney,,SPEAKER_KAI_TIDE)
 
         msgbox(gText_YouRealizeTheyreEvilRight_CantArgueWithThat,,SPEAKER_TALA)
+
+        msgbox(gText_YouRealizeTheyreEvilRight_TheirGoals,,SPEAKER_ALICIA,TAIL_THOUGHT)
 
         msgbox(gText_YouRealizeTheyreEvilRight_IJoinedThe,,SPEAKER_KAI_TIDE)
 
@@ -542,8 +548,13 @@ text gText_YouRealizeTheyreEvilRight_IsIf
 }
 
 text gText_YouRealizeTheyreEvilRight_HasBeenFramingYou {
-format("Kai… SharpRise Capital has been framing you?")
+format("Kai… Are you saying SharpRise Capital has been framing you?")
 }
+
+text gText_YouRealizeTheyreEvilRight_WhyWould {
+    format("That doesn't make sense for SharpRise - they've been so good to me!")
+}
+
 text gText_YouRealizeTheyreEvilRight_YouAlsoMetUp {
 format("{PLAYER}, you also met up with TheTide in Oroland too, right?")
 }
@@ -553,12 +564,23 @@ format("…yeah. But Adaora said that situation was super weird and was trying t
 text gText_YouRealizeTheyreEvilRight_YeahNobodyKnows {
 format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpRise Capital has been sending in agents to make us look shitty. Between that and whatever else SharpRise Capital is feeding you, I'm not surprised you feel the way you do.")
 }
+
 text gText_YouRealizeTheyreEvilRight_WhyWhyDoAll {
 format("Why? Why do all this to just to screw with you guys?")
 }
-text gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney {
-format("SharpRise Capital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities - all for their agenda.")
+
+text gText_YouRealizeTheyreEvilRight_WhatIsHe {
+    format("What is he talking about? SharpRise has spent all this money reshaping the League - doesn't that benefit all Trainers?")
 }
+
+text gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney {
+format("SharpRise Capital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities. And now that they've had a successful run at it, they're sinking their fingers into even more of Resido - they're not going to stop at some Pokemon League.")
+}
+
+text gText_YouRealizeTheyreEvilRight_TheirGoals{
+    format("Kei-Ying said that SharpRise's goal is to uplift the entire region. They've already managed to change my life with access to all these apps and services - why WOULD they stop with just us? They want to help everybody!")
+}
+
 text gText_YouRealizeTheyreEvilRight_CantArgueWithThat {
 format("Can't argue with that.")
 }
@@ -575,19 +597,22 @@ text gText_YouRealizeTheyreEvilRight_LookIKnowThis {
 format("Look, I know this is a lot of information to take in. I know you're going to make the right decision...")
 }
 text gText_YouRealizeTheyreEvilRight_ShouldIJoin{
-	format("Should I join Kai and the Elite Four? Is that the right path? Fighting against SharpRise Capital and the government...")
+	format("Fighting against SharpRise Capital and the government and the government doesn't make any sense! There's no way this is the right path.")
 }
 text gText_YouRealizeTheyreEvilRight_JoiningThemMeansGoingDeeper{
-	format("Joining them means going deeper into trouble, embracing their methods. The protests, the hacking, the riots... is that really what I want? Adaora says they don't condone violence, but can I even believe her?")
+	format("They're just asking for trouble. The protests, the hacking, the riots... is that really what I want? Adaora says The Tide doesn't condone violence, but can I even believe her?")
 }
+
 text gText_YouRealizeTheyreEvilRight_ButTheirCauseIsJust{
-	format("But their cause is just. They want to protect Resido. It's a chance to make a real difference, to fight for what's right.")
+    format("They might think they're right. They do want to protect Resido and make a difference, but this isn't it.")
 }
+
 text gText_YouRealizeTheyreEvilRight_ButAtWhatCost{
-	format("But at what cost? I've worked so hard to get this far. To become the Champion. I can make a difference! Do I really want to throw it all away?")
+	format("I've worked so hard to get this far. To become the Champion. I can make a difference as I am! Throwing it all away now doesn't make any sense.")
 }
+
 text gText_YouRealizeTheyreEvilRight_CantDoIt{
-	format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Are they just manipulating me, like they tried with the social media stunt?")
+	format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Is The Tide just manipulating me, like they tried with the social media stunt?")
 }
 text gText_YouRealizeTheyreEvilRight_MakingTheRightChoice{
 	format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice.")
