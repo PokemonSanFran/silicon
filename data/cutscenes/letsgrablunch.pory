@@ -87,6 +87,10 @@ script LetsGrabLunch_DinerBooth_Dialogue {
 
         msgbox(gText_LetsGrabLunch_IWantToCreate,,SPEAKER_KAI)
 
+        msgbox(gText_LetsGrabLunch_IsntThere,,SPEAKER_ALICIA)
+
+        msgbox(gText_LetsGrabLunch_ThisWill,,SPEAKER_KAI)
+
         msgbox(gText_LetsGrabLunch_HuhThatsActually,,SPEAKER_ALICIA)
 
         msgbox(gText_LetsGrabLunch_YeahITried,,SPEAKER_KAI)
@@ -281,6 +285,14 @@ text gText_LetsGrabLunch_OkayLetsHear {
 
 text gText_LetsGrabLunch_IWantToCreate {
     format("I want to create training centers all over Resido, to help more Trainers get a real start, kind of like what SharpRise Capital gave you. I wanna use the legacy Gyms, like the one you saw earlier today, as those hubs.")
+}
+
+text gText_LetsGrabLunch_IsntThere{
+    format("Isn't there a Gym in Kanto like this? They lost their spot in the offical League, but those people are still training and taking challengers.")
+}
+
+text gText_LetsGrabLunch_ThisWill{
+    format("This will be better than that. That dojo in Saffron City is content being an also-ran with no real legitimacy. What I'm talking about is a revival by the people, for the people. We don't need a corporation telling us what counts and what doesn't. We can decide that on our own.")
 }
 
 text gText_LetsGrabLunch_HuhThatsActually {
