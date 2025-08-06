@@ -32,13 +32,14 @@ void ExpTest_SetBackMonToNext(void)
     if (gSiliconExpTestState.currentMon < gSiliconExpTestState.numMons)
     {
         species = trainerMon->species;
-        //level = trainerMon->lvl;
-        level = 18;
+        level = trainerMon->lvl;
     }
     else
     {
         species = SPECIES_WYNAUT;
         level = 100;
+        u32 move = MOVE_CELEBRATE;
+        SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_MOVE1, &move);
     }
 
     SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_NICKNAME, gSpeciesInfo[species].speciesName);

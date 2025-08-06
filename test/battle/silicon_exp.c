@@ -15,9 +15,8 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
     u32 numTrainers = ExpTest_CountTrainers(data);
     gSiliconExpTestState.data = data;
     u32 species = ExpTest_GetSlowestMonForBracket(startLevel, data->targetLevel);
-    u32 numMons = 0;
     for (u32 i = 0; i < numTrainers; i++) {
-        PARAMETRIZE { numMons = ExpTest_GetNumMonsForTrainer(data->trainerIds[i]); }
+        PARAMETRIZE { }
     }
 
     GIVEN {
@@ -27,7 +26,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
         OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_EXP_TEST); Speed(1); }
     } WHEN {
         TURN { MOVE(player, MOVE_EXP_TEST_SETUP); }
-        for (u32 i = 0; i < numMons; i++) {
+        for (u32 i = 0; i < PARTY_SIZE; i++) {
             TURN { }
         }
         TURN { MOVE(player, MOVE_EXP_TEST_FINISH); }
@@ -98,15 +97,21 @@ static const struct SiliconExpTestData sKai_NewassholeappearsTrainers =
         TRAINER_NONE
     },
 };
+*/
+
 static const struct SiliconExpTestData sShinzo_GymTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_1,
     .targetLevel = LEVEL_CAP_VALUE_2,
     .trainerIds =
     {
+        TRAINER_031A849F,
+        TRAINER_041FD20E,
+        TRAINER_045FDD44,
         TRAINER_NONE
     },
 };
+/*
 static const struct SiliconExpTestData sCharlotte_OldassholeappearsTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_2,
@@ -412,12 +417,14 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Newassholeappears")
 
     SiliconExpTest(&sKai_NewassholeappearsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
+*/
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Shinzo Gym")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
     SiliconExpTest(&sShinzo_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
+/*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Oldassholeappears")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
