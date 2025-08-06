@@ -3281,7 +3281,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Map Section: Glavez Hill
 Battle Type: Double
 
-Happiny  
+Happiny
 Ability: Friend Guard  
 Level: 19
 EVs: 156 Def  
@@ -3952,10 +3952,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Ancient Power
 - Protect
 
-/*
-* PSF TODO stopped here
-*/
-
 === TRAINER_032E8AC9 ===
 Name: Blank
 Pic: Cooltrainer M
@@ -3988,7 +3984,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT / AI_FLAG_PREFER_STATUS_MOVES / AI_FLAG_WEIGH_ABILITY_PREDICTION / AI_FLAG_PREDICT_SWITCH / AI_FLAG_PREDICT_INCOMING_MON / AI_FLAG_PP_STALL_PREVENTION / AI_FLAG_PREDICT_MOVE
-Battle Type: Double
+Battle Type: Single 
 Map Section: Mermereza City 
 Type: Regular
 
@@ -4002,16 +3998,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Snore
 - Rest
 - Slash
-
-Maushold-Four
-Ability: Friend Guard
-Level: 22
-EVs: 112 Def/20 SpD
-Impish Nature
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Follow Me
-- Helping Hand
-- Echoed Voice
 
 === TRAINER_040CEA33 ===
 Name: Blank
@@ -4045,24 +4031,91 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Murkrow @ Twisted Spoon
+Ability: Prankster
+Level: 25
+EVs: 64 Atk/64 SpA
+Docile Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Tailwind
+- Dual Wingbeat
+- Heat Wave
 
-=== TRAINER_041FD20E ===
-Name: Blank
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Inkay @ Roseli Berry
+Ability: Contrary
+Level: 26
+EVs: 64 Atk/64 SpA
+Quirky Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Psybeam
+- Rock Slide
+- Future Sight
 
-Spewpa
-Level: 1
+Lokix @ Chople Berry
+Ability: Tinted Lens
+Level: 26
+EVs: 128 Atk
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Aerial Ace
+- Trailblaze
 
 === TRAINER_045FDD44 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Foongus @ Shuca Berry
+Ability: Effect Spore
+Level: 24
+EVs: 84 Def/40 SpD
+Quiet Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Poison Powder
+- Stun Spore
+- Pollen Puff
+
+Varoom @ Payapa Berry
+Ability: Overcoat
+Level: 26
+EVs: 124 SpD
+Quiet Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Toxic Spikes
+- Toxic
+- Venoshock
+
+Ariados @ Spell Tag
+Ability: Swarm
+Level: 24
+EVs: 60 Atk/52 Def/20 SpD
+Quiet Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Hex
+- Leech Life
+
+=== TRAINER_041FD20E ===
+Name: Blank
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Mareanie @ Mystic Water
+Ability: Limber  
+Level: 25  
+EVs: 136 SpD  
+Impish Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Liquidation  
+- Ice Spinner  
+
+Deino @ Never-Melt Ice  
+Ability: Hustle  
+Level: 25  
+EVs: 64 Atk / 64 SpA  
+Mild Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Ice Fang  
+- Dragon Breath  
 
 === TRAINER_0465BF77 ===
 Name: Blank
@@ -4111,6 +4164,10 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 
 Spewpa
 Level: 1
+
+/*
+* PSF TODO stopped here
+*/
 
 === TRAINER_05BDEABF ===
 Name: Blank
