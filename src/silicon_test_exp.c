@@ -37,7 +37,7 @@ void ExpTest_SetBackMonToNext(void)
     else
     {
         species = SPECIES_WYNAUT;
-        level = 100;
+        level = MAX_LEVEL;
         u32 move = MOVE_CELEBRATE;
         SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_MOVE1, &move);
     }
