@@ -70,7 +70,7 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
 {
     setvar(VAR_LETSBURNTHISMOTHERSTATE,ASSIGNED_BURN_MOTHER)
 
-    msgbox(format("We still need to find their new base of operations. Ever since we shut down NavalBase, we haven't been able to make heads or tails on where they're operating out of."),MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("We still need to find their new base of operations. Ever since we shut down NavalBase we haven't been able to make heads or tails on where they're operating out of."),MSGBOX_NPC,SPEAKER_OLIVER)
 
     msgbox(format("{PLAYER}, you're closer to the community then we are. Perhaps there's something you've learned, or could poke around to see if you can find traces of their new hideout."),,SPEAKER_OLIVER)
 
@@ -83,7 +83,7 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
         case FALSE_TIMELINE_MAN_HOW_COMPLETE:
             msgbox(format("I don't want a repeat of what happened to Adaora."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
         case FALSE_TIMELINE_MAN_COMPLETE:
-            msgbox(format("Maybe without Alcemene, he'll finally listen to reason."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("Maybe without Alcemene he'll finally listen to reason."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
 
     msgbox(format("I think I can still help him. I need to get to Arantraz."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
@@ -141,7 +141,7 @@ script LetsBurnThisMotherDown_ConfrontPlayer
 
             msgbox(format("The Tide isn't going to survive without Alcmene. This is a sinking ship, Kai."),,SPEAKER_ALICIA)
 
-            msgbox(format("What a stupid thing to say, {PLAYER}. Saving Residofrom you goes beyond Alcmene. Even if you take her down, there's hundreds of us to take up the cause."),,SPEAKER_ALICIA)
+            msgbox(format("What a stupid thing to say, {PLAYER}. Saving Resido from you goes beyond Alcmene. Even if you take her down there's hundreds of us to take up the cause."),,SPEAKER_ALICIA)
 
             msgbox(format("From ME?!?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
     }
@@ -157,7 +157,7 @@ switch(var(VAR_RESULT))
         msgbox(format("You don't think we've tried that? You just got here, {PLAYER}."),,SPEAKER_KAI_TIDE)
 
       case FALSE_TIMELINE_MAN_HOW_COMPLETE:
-        msgbox(format("Are you trying to tell me that the same company that is deupitzing transplants to attack civilians and works with the police to brutalize people are the 'good' guys?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Are you trying to tell me that the same company that is deputizing transplants to attack civilians and works with the police to brutalize people are the 'good' guys?"),,SPEAKER_KAI_TIDE)
 }
 
     msgbox(format("You know, people here in Arantraz died trying to do things the right way… but anybody with power doesn't care. Not the government. Not SharpRise Capital. None of these ridiciulous companies!"),,SPEAKER_KAI_TIDE)
@@ -200,7 +200,7 @@ script LetsBurnThisMotherDown_StartBattle_Script
 {
     call(LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script)
 
-    msgbox(format("I'm going for revolution. With or without you."),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+    msgbox(format("We're winning this revolution. With or without you."),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
     closemessage
 
     trainerbattle_no_intro(TRAINER_KAI_LETSBURNTHISMOTHERDOWN,format("Damn it! I can't keep up!"))
@@ -257,7 +257,7 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
             msgbox(format("Whatever."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
         default:
-            msgbox(format("No, I… they're not like the rest of TheTide. I thought we could work with them. I was wrong."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+            msgbox(format("No, I… he's not like the rest of The Tide. I thought we could work with him. I was wrong."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
             msgbox(format("Yeah, no shit! None of these people can be trusted. {PLAYER}, you could have gotten seriously hurt."),,SPEAKER_CHARLOTTE_SHARPRISE)
             msgbox(format("I know, I know. I'm sorry."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     }
@@ -295,7 +295,7 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     switch(var(VAR_RESULT))
     {
        case FALSE_TIMELINE_NONE_COMPLETE:
-        msgbox(format("I'm sorry. I really thought I could change their mind."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("I'm sorry. I really thought I could change his mind."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("You're young, and it ended well."),,SPEAKER_ADELAIDE)
         msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
 
@@ -304,15 +304,15 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
         msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
         msgbox(format("You've taken out their new base of operations and we've arrested their leader!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
         msgbox(format("I feel like all we've done so far is attack and harass people."),,SPEAKER_ALICIA,,EMOTE_SAD)
-        msgbox(format("Look, cleaning a wound hurts at the beginning, but it heals eventually,right?"),,SPEAKER_ADELAIDE)
-        msgbox(format("We're working for the greater good, and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
+        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_ADELAIDE)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
 
        case FALSE_TIMELINE_HOW_COMPLETE:
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
         msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
         msgbox(format("You've taken out their new base of operations and we've taken away their ability to recruit!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
         msgbox(format("People were actively relying on the The Tide, I saw that with my own eyes. How do we help those people now?"),,SPEAKER_ALICIA)
-        msgbox(format("We're working for the greater good, and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
 
        case FALSE_TIMELINE_MAN_HOW_COMPLETE:
         msgbox(format("Another job well done, {PLAYER}."),,SPEAKER_ADELAIDE)
@@ -322,8 +322,8 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
         msgbox(format("You and Charlotte have finally dismantled The Tide!"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
         msgbox(format("People were actively relying on the The Tide, I saw that with my own eyes. How do we help those people now?"),,SPEAKER_ALICIA)
         msgbox(format("I feel like all we've done so far is attack and harass people."),,SPEAKER_ALICIA,,EMOTE_SAD)
-        msgbox(format("Look, cleaning a wound hurts at the beginning, but it heals eventually,right?"),,SPEAKER_ADELAIDE)
-        msgbox(format("We're working for the greater good, and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
+        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_ADELAIDE)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
         msgbox(format("Is the greater good just a region without opposition to Adelaide?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
         msgbox(format("..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage

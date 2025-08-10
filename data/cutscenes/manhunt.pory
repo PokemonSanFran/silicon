@@ -87,7 +87,7 @@ script Manhunt_Cherie_Battle_Script {
         msgbox(format("Hey, we're trying to find Alcmene, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-        msgbox(format("Yeah, I wrote the TheTide leadership piece a few months back. It was more than time to see such a great group of youngsters really start to get the recognition they deserve. And getting to really sit down with Alcmene… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
+        msgbox(format("Yeah, I wrote the TheTide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Alcmene… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
 
         msgbox(format("Blessed? TheTide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
@@ -174,10 +174,11 @@ script Manhunt_StartBattle2_Script
 
         msgbox(format("Look, I don't know what you're digging for. TheTide is all above ground, nothing to hide, just trying to do some damn good in the world."),,SPEAKER_TEODORO)
 
-        msgbox(format("Good in the world, bullshit. There's gotta be something unusual. Keep thinking!"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("If you don't start talking this is going to get very messy."),,SPEAKER_CHARLOTTE_SHARPRISE,EMOTE_ANGRY)
 
+        msgbox(format("Wait! Okay, okay..."),,SPEAKER_TEODORO)
 
-        msgbox(format("The only weird thing about them was buying Balls in bulk from that Speciality Ball Shop… but seriously, there's nothing interesting there."),,SPEAKER_TEODORO)
+        msgbox(format("The only thing I can think of is that they buy Balls in bulk from that Speciality Ball Shop…"),,SPEAKER_TEODORO)
 
         msgbox(format("That's in IrisinaTown. Let's move."),,SPEAKER_CHARLOTTE_SHARPRISE)
 // PSF TODO make sure all the NPCs here repeat themselves
@@ -210,19 +211,15 @@ script Manhunt_Dudley_Battle_Script
 
         msgbox(format("How can I help - "),MSGBOX_NPC,SPEAKER_DUDLEY)
 
-        msgbox(format("We're looking for the Alcmene, the leader of TheTide. What do you know about them?"),,SPEAKER_ALICIA)
+        msgbox(format("Alcemene. The Tide. Tell us what you know."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Woah, the Champion. Are you looking to change -"),,SPEAKER_DUDLEY)
+        msgbox(format("What? The Tide? Yeah, they're one of our customers."),,SPEAKER_DUDLEY)
 
-        msgbox(format("Hey buddy, focus. Alcemene. TheTide. Tell. Us. What. You. Know."),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("What are they buying in bulk from you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("TheTide? Yeah, they're one of our customers, why?"),,SPEAKER_DUDLEY)
+        msgbox(format("...\pI don't think I'm supposed to divulge that, but I can ask my boss."),,SPEAKER_DUDLEY)
 
-        msgbox(format("Because we're busting their shit up. They're buying in bulk from you. What are they buying?"),,SPEAKER_CHARLOTTE_SHARPRISE)
-
-        msgbox(format("What did they buy? I don't think I'm supposed to divulge that, but I can ask my boss."),,SPEAKER_DUDLEY)
-
-        msgbox(format("I'm sure we can help you divulge a little."),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("Don't bother your boss. After all, he's going to have to run the shop on his own after this."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
         msgbox(format("Woah wait hold on!"),,SPEAKER_DUDLEY)
         closemessage
@@ -261,8 +258,8 @@ script Manhunt_StartBattle3_Script
         applymovement(CHARLOTTE,Common_Movement_WalkInPlaceLeft)
         waitmovement(CHARLOTTE)
 
-        msgbox(format("One time they had them delivered to Route98, but I swear that doesn't mean anything! Please don't hurt me…"),,SPEAKER_DUDLEY)
-        msgbox(format("sob…"),MSGBOX_AUTOCLOSE,SPEAKER_DUDLEY)
+        msgbox(format("One time they had them delivered to Route98! That's all I know! Please don't hurt me…"),,SPEAKER_DUDLEY,EMOTE_SAD)
+        closemessage
         applymovement(CHARLOTTE,Manhunt_LeaveBallShop)
         waitmovement(0)
         playse(SE_EXIT)
@@ -382,7 +379,7 @@ script Manhunt_StartAlcmeneBattle_Script
 {
         choose_mons
         goto_if_eq(VAR_RESULT,0,Manhunt_StartAlcmeneBattle_Script)
-        multi_2_vs_1(TRAINER_ALCMENE,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Residoafter all."),PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_ALCMENE,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Resido after all."),PARTNER_STEVEN)
         lock
         faceplayer
         setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE)
@@ -423,9 +420,9 @@ script Manhunt_MissionComplete_Dialogue {
 
         msgbox(format("Good job, {PLAYER}. You should proud of the work you've done today."),,SPEAKER_RAMESH)
 
-        msgbox(format("Really? I feel like proud isn't quite the right emotion - Charlotte and I were pretty rough out there."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+        msgbox(format("Really? I feel like proud isn't quite the right emotion - things were pretty rough out there."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 
-        msgbox(format("Look at this way - we can already see them scrambling on Buzzr. Without their leader, its going to be even more difficult for TheTide to mobilize any further initatives. You're making things better, and that's what's important."),,SPEAKER_RAMESH,,EMOTE_HAPPY)
+        msgbox(format("Look at this way - we can already see them scrambling on Buzzr. Without their leader it's going to be even more difficult for TheTide to mobilize any further initatives. You're making things better and that's what's important."),,SPEAKER_RAMESH,,EMOTE_HAPPY)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
@@ -438,8 +435,8 @@ script Manhunt_MissionComplete_Dialogue {
             msgbox(format("No leader and no base. Without The Tide, will things actually get better?"),TAIL_THOUGHT,EMOTE_CONFUSE)
 
         case FALSE_TIMELINE_NONE_COMPLETE:
-            msgbox(format("The others won't be this bad, as long as I'm not working with Charlotte again... right?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
-            msgbox(format("When this is all over, Residowill be a better place. It will be."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("The others won't be this bad as long as I'm not working with Charlotte again... right?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+            msgbox(format("When this is all over Resido will be a better place. It will be."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
     closemessage
 
