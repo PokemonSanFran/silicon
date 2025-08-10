@@ -3448,3 +3448,10 @@
 	callnative ScriptChangeFollowerNPCBattlePartner
 	.2byte \battlePartner
 	.endm
+
+    @ Start adventureGuide
+	.macro openadventureguide guide:req
+    setvar VAR_ADVENTURE_GUIDE_TO_OPEN, \guide
+    call RunAdventureGuideScript
+	.endm
+    @ End adventureGuide

@@ -80,6 +80,7 @@
 #include "constants/siliconDaycare.h" @ siliconDaycare 
 #include "constants/siliconStarter.h" @ siliconStarter
 #include "constants/rtc.h" @ siliconDNS
+#include "constants/ui_adventure_guide.h" @ adventureGuide
 @ End siliconMerge
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"

@@ -59,6 +59,7 @@
 #include "ui_main_menu.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
+#include "ui_adventure_guide.h"
 
 //==========DEFINES==========//
 struct MenuResources
