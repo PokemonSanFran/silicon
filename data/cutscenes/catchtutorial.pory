@@ -34,10 +34,10 @@ script CatchTutorial_ProfIntro_Script
     applymovement(PROF,CatchTutorial_WalkToPlayer_Movement)
     waitmovement(PROF)
 
-    msgbox(gText_CatchTutorial_HeyThere,,SPEAKER_PROF_TRACHY)
-    msgbox(gText_CatchTutorial_IDontRecognize,,SPEAKER_PROF_TRACHY)
-    msgbox(gText_CatchTutorial_YeahImNew,,SPEAKER_ALICIA)
-    msgbox(gText_CatchTutorial_ItsUsuallyEasyTo,,SPEAKER_PROF_TRACHY)
+    msgbox(format("Hey there!"),,SPEAKER_PROF_TRACHY)
+    msgbox(format("I don't recognize you... and you're coming out of CuconuTown - you must be one of those SharpRise Trainers!"),,SPEAKER_PROF_TRACHY)
+    msgbox(format("Yeah! How were you able to tell?"),,SPEAKER_ALICIA)
+    msgbox(format("It's usually easy to pick out transplants. You all have thi -"),,SPEAKER_PROF_TRACHY)
     closemessage
 
     call(Earthquake_PlayNatural_EventScript)
@@ -49,13 +49,13 @@ script CatchTutorial_ProfIntro_Script
 
     call(Earthquake_Natural_Aftershock)
 
-    msgbox(gText_CatchTutorial_WoahWoah,,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
-    msgbox(gText_CatchTutorial_ThatsAnother,,SPEAKER_PROF_TRACHY,,EMOTE_LAUGH)
-    msgbox(gText_CatchTutorial_HowOften,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-    msgbox(gText_CatchTutorial_TheyreNot,,SPEAKER_PROF_TRACHY)
+    msgbox(format("Woah woah what was that?!?! Is that a Pokémon attack?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
+    msgbox(format("That's another easy way you identify 'em... how they react to earthquakes."),,SPEAKER_PROF_TRACHY,,EMOTE_LAUGH)
+    msgbox(format("You're not freaking out - how often do those happen?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    msgbox(format("They're not super rare, but it doesn't happen every day. They're largely harmless though."),,SPEAKER_PROF_TRACHY)
 
     bufferpartymonspecies(STR_VAR_1,0)
-    msgbox(gText_CatchTutorial_IWasGoing,,SPEAKER_PROF_TRACHY)
+    msgbox(format("I was going to offer to teach you how to catch Pokémon! I always offer to help out new Trainers, but it looks like you've already got a {STR_VAR_1}! But in case you need a refresher..."),,SPEAKER_PROF_TRACHY)
     goto(CatchTutorial_AskPlayer_Script)
 }
 
@@ -69,7 +69,7 @@ script CatchTutorial_InteractProf_Script
 
 script CatchTutorial_AskPlayer_Script
 {
-    msgbox(gText_CatchTutorial_DoYouWant,MSGBOX_YESNO,SPEAKER_PROF_TRACHY)
+    msgbox(format("Do you want me to teach you how to catch a Pokémon?"),MSGBOX_YESNO,SPEAKER_PROF_TRACHY)
     goto(CatchTutorial_HandleAnswer_Script)
 }
 
@@ -87,11 +87,11 @@ script CatchTutorial_HandleAnswer_Script
 
 script CatchTutorial_StartCatchingScene_Script
 {
-    msgbox(gText_CatchTutorial_OkayLetSee,,SPEAKER_PROF_TRACHY)
+    msgbox(format("Okay, let's see, you walk around here until one attacks..."),,SPEAKER_PROF_TRACHY)
     closemessage
     applymovement(PROF,Common_Movement_FaceAwayPlayer)
     waitmovement(PROF)
-    msgbox(gText_CatchTutorial_HeresOne,,SPEAKER_PROF_TRACHY)
+    msgbox(format("Aha!"),,SPEAKER_PROF_TRACHY)
     closemessage
     special(SavePlayerParty)
     special(LoadWallyZigzagoon)
@@ -105,7 +105,7 @@ script CatchTutorial_PostCatching_Script
     special(LoadPlayerParty)
     applymovement(PROF,Common_Movement_FacePlayer)
     waitmovement(PROF)
-    msgbox(gText_CatchingTutorial_ThatsReally,,SPEAKER_PROF_TRACHY)
+    msgbox(format("That's really it! Different Pokéballs will have more effective based on what Pokémon, or where you are... sometimes what time of day... it can be complicated."),,SPEAKER_PROF_TRACHY)
     call(CatchTutorial_GiveBallsSetFlag_Script)
     goto(CatchTutorial_End_Script)
 }
@@ -120,7 +120,7 @@ script CatchTutorial_End_Script
 {
     closemessage
     fadedefaultbgm
-    msgbox(gText_CatchingTutorial_IfYouWant,,SPEAKER_PROF_TRACHY)
+    msgbox(format("If you want me to show you in the future, just come to talk to me!"),,SPEAKER_PROF_TRACHY)
     closemessage
     call_if_unset(FLAG_PLAYED_CATCH_TUTORIAL,CatchTutorial_SetFlagSave_Script)
     endcutscene
@@ -134,21 +134,21 @@ script CatchTutorial_GiveBallsSetFlag_Script
     {
         return
     }
-    msgbox(gText_CatchingTutorial_AsAMatter,,SPEAKER_PROF_TRACHY)
+    msgbox(format("As a matter of fact, I've got a few types here. Here you go!"),,SPEAKER_PROF_TRACHY)
     closemessage
     playfanfare(MUS_OBTAIN_ITEM)
     additem(ITEM_REPEAT_BALL,2)
     additem(ITEM_DUSK_BALL,1)
     additem(ITEM_QUICK_BALL,1)
     additem(ITEM_DREAM_BALL,1)
-    msgbox(gText_CatchTutorial_SomeBalls)
+    msgbox(format("{PLAYER} obtained some PokéBalls!"))
     waitmessage
     waitfanfare
 }
 
 script CatchTutorial_RefuseCatching_Script
 {
-    msgbox(gText_CatchTutorial_NoProblem,,SPEAKER_PROF_TRACHY)
+    msgbox(format("No problem!"),,SPEAKER_PROF_TRACHY)
     goto(CatchTutorial_End_Script)
 }
 text gText_CatchTutorial_HeyThere

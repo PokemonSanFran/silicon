@@ -15,7 +15,7 @@ script PetarosaBorough_MansionGuard_InteractScript {
     if (var(VAR_FORT_YOBU_STATE) < MET_KEIYING_OUTSIDE_GYM){
         msgbox("...",MSGBOX_NPC)
     } else {
-        msgbox(gText_KeiyingRaisonDetre_HasBeenExpectingYou, MSGBOX_NPC)
+        msgbox(format("{PLAYER}, KEIYING has been expecting you."), MSGBOX_NPC)
     }
     end
 }

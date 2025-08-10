@@ -6,7 +6,7 @@ script IrisinaTown_IT_Interact_Clerk_Script{
 }
 
 script IrisinaTown_IT_Clerk_Dialogue{
-   msgbox(gText_IrisinaTown_IT_UghTheWalk,,MSGBOX_NPC,SPEAKER_WALDRON) 
+   msgbox(format("Ugh, the walk from the trolley stop is brutal. Wish I could get one closer..."),,MSGBOX_NPC,SPEAKER_WALDRON) 
     end
 }
 

@@ -20,9 +20,9 @@ script Quest_InstallNatureProbes_Interact_Liidia_Script
 
 script Quest_InstallNatureProbes_StartQuest_Dialogue
 {
-	msgbox(gText_InstallNatureProbes_GeezIGottaWorkTonight, MSGBOX_NPC,SPEAKER_DEFAULT)
-	msgbox(gText_InstallNatureProbes_CanYouHelp, MSGBOX_NPC,SPEAKER_DEFAULT)
-	msgbox(gText_InstallNatureProbes_YouHaveAPokedex, MSGBOX_NPC,SPEAKER_DEFAULT)
+	msgbox(format("Geez, I gotta work late tonight if I'm going to finish these reports and the install...\pActually, you're a Trainer! Trainers are exploring places and shit, right?"), MSGBOX_NPC,SPEAKER_DEFAULT)
+	msgbox(format("Can you help me with something? I don't think it'll put you too far out of your way. I need to install three probes in LeaverraForest for tracking Pokémon movement. One in the deepest part of the forest, one up on the tallest hill, and one over by the lakeshore. Installing is really easy, you just clip them to the sign posts that we've already got set up there."), MSGBOX_NPC,SPEAKER_DEFAULT)
+	msgbox(format("You've got a PokéDex? Great. I can upgrade it with the Resido Habitat Mode if you help me out."), MSGBOX_NPC,SPEAKER_DEFAULT)
 
 	startquest(QUEST_INSTALLNATUREPROBES)
 	release
@@ -32,18 +32,18 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
 script Quest_InstallNatureProbes_Active_Dialogue
 {
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
-	msgbox(gText_InstallNatureProbes_WhatProbes,MSGBOX_NPC,SPEAKER_DEFAULT)
+	msgbox(format("What probes did you already install in LeaverraForest?"),MSGBOX_NPC,SPEAKER_DEFAULT)
 
     if (var(VAR_TEMP_1) == 0){
-        msgbox(gText_InstallNatureProbes_TheProbeInTheForest,MSGBOX_NPC,SPEAKER_DEFAULT)
+        msgbox(format("One probe goes in the deepest part of the forest."),MSGBOX_NPC,SPEAKER_DEFAULT)
     }
 
     if (var(VAR_TEMP_2) == 0){
-        msgbox(gText_InstallNatureProbes_TheProbeOnTheHill,MSGBOX_NPC,SPEAKER_DEFAULT)
+        msgbox(format("One probe goes on the tallest hill."),MSGBOX_NPC,SPEAKER_DEFAULT)
     }
 
     if (var(VAR_TEMP_3) == 0){
-        msgbox(gText_InstallNatureProbes_TheProbeByTheShore,MSGBOX_NPC,SPEAKER_DEFAULT)
+        msgbox(format("One probe goes by the lake shore."),MSGBOX_NPC,SPEAKER_DEFAULT)
     }
 }
 
@@ -52,18 +52,18 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
 
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     if(var(VAR_RESULT)){
-        msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+        msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         release
         end
     }
 
-    msgbox(gText_InstallNatureProbes_YeahThisSeemsToMatch,,SPEAKER_ALICIA)
+    msgbox(format("Yeah, this seems to match the description... deepest part of the forest."),,SPEAKER_ALICIA)
 
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
     playse(SE_CONTEST_HEART)
-    msgbox(gText_InstallNatureProbes_PlayerInstalledForest)
+    msgbox(format("{PLAYER} installed the probe in the forest."))
     waitse
     waitmessage
 
@@ -75,17 +75,17 @@ script Quest_InstallNatureProbes_InstallHillProbe_Script{
 
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     if(var(VAR_RESULT)){
-        msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+        msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         release
         end
     }
-    msgbox(gText_InstallNatureProbes_ThisIsAsGoodOfAHill,,SPEAKER_ALICIA)
+    msgbox(format("This is as good as a hill as I'm going to find, right?"),,SPEAKER_ALICIA)
 
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
     playse(SE_CONTEST_HEART)
-    msgbox(gText_InstallNatureProbes_PlayerInstalledHill)
+    msgbox(format("{PLAYER} installed the probe on the hill."))
     waitse
     waitmessage
 
@@ -96,18 +96,18 @@ script Quest_InstallNatureProbes_InstallShoreProbe_Script{
     lock
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
     if(var(VAR_RESULT)){
-        msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+        msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         release
         end
     }
 
-    msgbox(gText_InstallNatureProbes_JustGottaMakeSure,,SPEAKER_ALICIA)
+    msgbox(format("Just gotta make sure its attached correctly..."),,SPEAKER_ALICIA)
 
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
     playse(SE_CONTEST_HEART)
-    msgbox(gText_InstallNatureProbes_PlayerInstalledShore)
+    msgbox(format("{PLAYER} installed the probe by the shore."))
     waitse
     waitmessage
 
@@ -156,7 +156,7 @@ script Quest_InstallNatureProbes_CheckCompletionRate_Script
 
 script Quest_InstallNatureProbes_Reward_Cutscene
 {
-    msgbox(gText_InstallNatureProbes_WowYouGotAll,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Wow! You got all of them in? Let's test that..."),MSGBOX_NPC,SPEAKER_DEFAULT)
 
     applymovement(LIIDIA,Common_Movement_FaceAwayPlayer)
     waitmovement(LIIDIA)
@@ -166,12 +166,12 @@ script Quest_InstallNatureProbes_Reward_Cutscene
 
     applymovement(LIIDIA,Common_Movement_FacePlayer)
     waitmovement(LIIDIA)
-    msgbox(gText_InstallNatureProbes_TheTrackingIsWorking,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("The tracking is working! You did great, thank you so much. Could I see your Pokédex please? Oh, this isn't the Residomodel... Orre? Fascinating. It should work the same..."),MSGBOX_NPC,SPEAKER_DEFAULT)
     closemessage
 
-    msgbox(gText_InstallNatureProbes_OkayDone,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Okay, done!"),MSGBOX_NPC,SPEAKER_DEFAULT)
     playfanfare(MUS_OBTAIN_ITEM)
-    msgbox(gText_InstallNatureProbes_PokedexUpgradedWith)
+    msgbox(format("{PLAYER}'s Pokédex was upgraded with Habitat Mode!"))
     waitmessage
     waitfanfare
     //PSF TODO find a different rewards for this app and update the text
@@ -180,14 +180,14 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     playse(SE_POKENAV_CALL)
     waitse
 
-    msgbox(gText_InstallNatureProbes_ThatsMyBoss,,SPEAKER_LIIDIA)
+    msgbox(format("That's my boss, let me just answer that."),,SPEAKER_LIIDIA)
     applymovement(LIIDIA,Common_Movement_FaceAwayPlayer)
     waitmovement(LIIDIA)
 
-    msgbox(gText_InstallNatureProbes_GoForLiidia,,,PHONE_ON)
+    msgbox(format("Go for Liidia!"),,,PHONE_ON)
     closemessage
     delay(32)
-    msgbox(gText_InstallNatureProbes_IUnderstand,,,PHONE_ON)
+    msgbox(format("...I understand."),,,PHONE_ON)
     closemessage
 
     playse(SE_POKENAV_HANG_UP)
@@ -195,8 +195,8 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     applymovement(LIIDIA,Common_Movement_FacePlayer)
     waitmovement(LIIDIA)
 
-    msgbox(gText_InstallNatureProbes_HeThankedMe,,SPEAKER_LIIDIA)
-    msgbox(gText_InstallNatureProbes_IRealizeNow,,SPEAKER_LIIDIA)
+    msgbox(format("He thanked me... and then told me that my job was redundant. He told I'm fired, and have to leave the premises immediately."),,SPEAKER_LIIDIA)
+    msgbox(format("I realize now, I think you put me out of a job. How could I be so... naive?"),,SPEAKER_LIIDIA)
     closemessage
 
     applymovement(LIIDIA,Quest_InstallNatureProbes_LeaveStation_Movement)

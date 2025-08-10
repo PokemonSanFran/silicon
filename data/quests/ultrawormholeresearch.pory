@@ -20,15 +20,15 @@ script Quest_Ultrawormholeresearch_TryRemoveTotem_Script{
 }
 
 script Quest_Ultrawormholeresearch_HiddenElevator_Script{
-    msgbox(gText_Ultrawormholeresearch_WaitEsperanto,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
-    msgbox(gText_Ultrawormholeresearch_TakeTheBook,MSGBOX_YESNO)
+    msgbox(format(""),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(format(""),MSGBOX_YESNO)
 
     if (var(VAR_RESULT) == NO){
         closemessage
         release
         end
     }
-    msgbox(gText_Ultrawormholeresearch_TheBookcase)
+    msgbox(format(""))
     closemessage
     call(Quest_Ultrawormholeresearch_RevealHiddenWarp_Script)
     call(Quest_Ultrawormholeresearch_PlayerExplain_Dialogue)
@@ -53,18 +53,18 @@ script Quest_Ultrawormholeresearch_RevealHiddenWarp_Script{
 }
 
 script Quest_Ultrawormholeresearch_PlayerExplain_Dialogue{
-    msgbox(gText_Ultrawormholeresearch_Whatthehell,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format(""),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     return
 }
 
 script Quest_Ultrawormholeresearch_Preventvoid_Script{
     lock
-    msgbox(gText_Ultrawormholeresearch_IWouldntGo,,SPEAKER_MADRONE)
+    msgbox(format("I wouldn't go in there right now if I was you."),,SPEAKER_MADRONE)
     closemessage
     applymovement(PLAYER,Common_Movement_WalkDown)
     waitmovement(PLAYER)
-    msgbox(gText_Ultrawormholeresearch_IDontThink,,SPEAKER_MADRONE)
+    msgbox(format("I don't think you used the computer to set a warp location... if you walk up those stairs now, you're probably going to be warped into the endless void. Forever."),,SPEAKER_MADRONE)
     closemessage
     release
     end
@@ -141,12 +141,12 @@ script Quest_Ultrawormholeresearch_ConstructMenu_Script{
 
 script Quest_Ultrawormholeresearch_ComputerSetWarp_Menu{
     lock
-    msgbox(gText_Ultrawormholeresearch_WhichWormhole)
+    msgbox(format(""))
     call(Quest_Ultrawormholeresearch_ConstructMenu_Script)
     dynmultistack(0,0,TRUE,5,TRUE,0,NULL)
     copyvar(VAR_QUEST_ULTRAWORMHOLE_WARP_DESTINATION,VAR_RESULT)
     call(Quest_Ultrawormholeresearch_SetDynamicWarp_Script)
-    msgbox(gText_Ultrawormholeresearch_WarpHasBeenSet)
+    msgbox(format("The portal has been set to {STR_VAR_1}."))
     closemessage
     release
     end
@@ -231,9 +231,9 @@ script Quest_Ultrawormholeresearch_ProfCallPlayer_Dialogue{
 
     call(Common_EventScript_PhoneRinging)
 
-    msgbox(gText_Ultrawormholeresearch_PlayerIs,,SPEAKER_MADRONE,,,PHONE_ON)
-    msgbox(gText_Ultrawormholeresearch_GreatJobCatching,,SPEAKER_MADRONE,,,PHONE_ON)
-    msgbox(gText_Ultrawormholeresearch_WhenYouComeBack,,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(format("{PLAYER} is that you? Excellent, this is Professor Madrone."),,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(format("Excellent job catching that {STR_VAR_1}. I've already sampled its environment data from your Pokédex, and I was able to open another portal!"),,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(format("It's already set up on the computer for you."),,SPEAKER_MADRONE,,,PHONE_ON)
     closemessage
     playse(SE_POKENAV_HANG_UP)
     release

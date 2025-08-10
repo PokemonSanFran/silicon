@@ -20,15 +20,15 @@ script Quest_Wildfirerisk_Interact_Filip_Script{
 script Quest_Wildfirerisk_StartQuest_Dialogue{
     applymovement(FILIP,Common_Movement_FaceAwayPlayer)
     waitmovement(FILIP)
-    msgbox(gText_Wildfirerisk_GodThisYear,,SPEAKER_FILIP,TAIL_WHISPER,EMOTE_SAD)
+    msgbox(format("Man, what are we going to do this year... I'm so nervous I could puke..."),,SPEAKER_FILIP,TAIL_WHISPER,EMOTE_SAD)
     closemessage
     applymovement(FILIP,Quest_Wildfirerisk_LookAroundPanic_Movement)
     waitmovement(FILIP)
-    msgbox(gText_Wildfirerisk_YouAlright,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    msgbox(format("Hey, you alright?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
     applymovement(FILIP,Common_Movement_FacePlayer)
     waitmovement(FILIP)
-    msgbox(gText_Wildfirerisk_IWork,,SPEAKER_FILIP)
-    msgbox(gText_Wildfirerisk_CanYouHelpUsKo100Firetype,,SPEAKER_FILIP)
+    msgbox(format("I work for Toxel Energy!"),,SPEAKER_FILIP)
+    msgbox(format("The power company didn't grant enough budget for clearing trees, and the government denied our request to move power cables underground. Can you help us KO 100 Fire-type, 100 Flying-type, and 100 Electric-type Pokémon to lower the risk of fire?"),,SPEAKER_FILIP)
     startquest(QUEST_WILDFIRERISK)
     call(Quest_Wildfirerisk_CheckQuestProgress_Script)
     goto_if_quest_reward(QUEST_WILDFIRERISK,Quest_Wildfirerisk_Secret_Dialogue)
@@ -37,11 +37,11 @@ script Quest_Wildfirerisk_StartQuest_Dialogue{
 
 script Quest_Wildfirerisk_Secret_Dialogue{
     lock
-    msgbox(gText_Wildfirerisk_NowThat,,SPEAKER_ALICIA)
+    msgbox(format("Now that I think about it, I'm pretty sure I've already defeated that many Pokémon."),,SPEAKER_ALICIA)
     //PSF TODO replace with a fire/flying/electric mon on a nearby route
     random(NUM_SPECIES)
     bufferspeciesname(STR_VAR_1,VAR_RESULT)
-    msgbox(gText_Wildfirerisk_OhWow,,SPEAKER_FILIP,,EMOTE_SHOCK)
+    msgbox(format("Huh. Now that I think about it, I've been seeing way less {STR_VAR_1} around..."),,SPEAKER_FILIP,,EMOTE_SHOCK)
     goto(Quest_Wildfirerisk_Reward_Dialogue)
 }
 
@@ -49,43 +49,43 @@ script Quest_Wildfirerisk_Active_Dialogue{
     specialvar(VAR_RESULT,Quest_Wildfirerisk_GetPercentage)
 
     if (var(VAR_RESULT)>89){
-            msgbox(gText_Wildfirerisk_YoureAlmostThere90Progress,MSGBOX_NPC,SPEAKER_FILIP)
+            msgbox(format("You're almost there, 90% progress. We're so grateful for your help in protecting the region from the threat of wildfires."),MSGBOX_NPC,SPEAKER_FILIP)
                 end
         }
     elif (var(VAR_RESULT)>79){
-        msgbox(gText_Wildfirerisk_Wow80ProgressYourDedication,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("Wow, 80% progress. Your dedication is much appreciated, and we hope this will help mitigate the risk of wildfires."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     elif (var(VAR_RESULT)>69){
-        msgbox(gText_Wildfirerisk_ThankYouForMakingItTo70,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("Thank you for making it to 70% progress. Your efforts will go a long way in protecting the region from potential wildfires."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     elif (var(VAR_RESULT)>59){
-        msgbox(gText_Wildfirerisk_YouveMade60ProgressThank,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("You've made 60% progress, thank you for continuing to help us. We hope to see the number of Fire, Flying, and Electric-type Pokémon decrease even further."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     elif (var(VAR_RESULT)>49){
-        msgbox(gText_Wildfirerisk_HalfwayThereThats50Progress,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("Halfway there, that's 50% progress. Thank you for helping us keep the region safe from the threat of wildfires."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     elif (var(VAR_RESULT)>39){
-        msgbox(gText_Wildfirerisk_YouveMadeItTo40Progress,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("You've made it to 40% progress, thank you for your dedication. We hope this will make a difference in preventing wildfires."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     elif (var(VAR_RESULT)>29){
-        msgbox(gText_Wildfirerisk_30ProgressThatsGreat,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("30% progress, that's great. The region will be safer with fewer Fire, Flying, and Electric-type Pokémon around."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     elif (var(VAR_RESULT)>19){
-        msgbox(gText_Wildfirerisk_ThankYouForMaking20Progress,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("Thank you for making 20% progress. We need all the help we can get to prevent wildfires in the area."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     elif (var(VAR_RESULT)>9){
-        msgbox(gText_Wildfirerisk_ItLooksLikeYouveMade10,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("It looks like you've made 10% progress. Keep going, we appreciate your help in keeping the region safe."),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
     else{
-        msgbox(gText_Wildfirerisk_HelloHowAreYouProgressingWithOur,MSGBOX_NPC,SPEAKER_FILIP)
+        msgbox(format("Hello, how are you progressing with our request? Have you KO'ed any Fire, Flying, or Electric-type Pokémon yet?"),MSGBOX_NPC,SPEAKER_FILIP)
             end
     }
 }
@@ -118,14 +118,14 @@ script Quest_Wildfirerisk_CheckQuestProgress_Script{
 }
 
 script Quest_Wildfirerisk_Reward_Dialogue{
-    msgbox(gText_Wildfirerisk_YourPokemonYourEffortsWillHelpKeep,MSGBOX_NPC,SPEAKER_FILIP)
+    msgbox(format("Congratulations on KO'ing 100 Fire-type, 100 Flying-type, and 100 Electric-type Pokémon. Your efforts will help keep the region safe. As a reward, here's a rare Pokémon that you can add to your collection."),MSGBOX_NPC,SPEAKER_FILIP)
     giveitem(ITEM_TM43)
     completequest(QUEST_WILDFIRERISK)
     goto(Quest_Wildfirerisk_Complete_Dialogue)
 }
 
 script Quest_Wildfirerisk_Complete_Dialogue{
-    msgbox(gText_Wildfirerisk_ThankYouForYourHardWorkInReducing,MSGBOX_NPC,SPEAKER_FILIP)
+    msgbox(format("Thank you for your hard work in reducing the risk of wildfires. We hope that your efforts will make a significant difference in keeping the region safe."),MSGBOX_NPC,SPEAKER_FILIP)
     end
 }
 

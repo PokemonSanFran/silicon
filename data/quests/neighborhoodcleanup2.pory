@@ -87,56 +87,56 @@ script Quest_NeighborhoodCleanUp2_Interact_Cop_Script{
 }
 
 script Quest_NeighborhoodCleanUp2_StartQuest_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp2_HeyThereIts,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("Hey there, it's good to see you again. The vagrants have returned to the park, and we need your help to get them out of there once more."),MSGBOX_NPC,SPEAKER_POLICE)
     startquest(QUEST_NEIGHBORHOODCLEANUP2)
     end
 }
 
 script Quest_NeighborhoodCleanUp2_Active_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp2_HeyHowsIt,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("Hey, how's it going? Have you made any progress in removing the vagrants from the park?"),MSGBOX_NPC,SPEAKER_POLICE)
     end
 }
 
 script Quest_NeighborhoodCleanUp2_Reward_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp2_ThankYouForYourHelp,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("Thank you for your help. As a token of my appreciation, take this item. It'll help you in your journey."),MSGBOX_NPC,SPEAKER_POLICE)
     giveitem(ITEM_MAX_REVIVE,5)
     completequest(QUEST_NEIGHBORHOODCLEANUP2)
     goto(Quest_NeighborhoodCleanUp2_Complete_Dialogue)
 }
 
 script Quest_NeighborhoodCleanUp2_Complete_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp2_WellIThinkI,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("Well, I think I'll head back to the station. Good luck with the rest of your journey!"),MSGBOX_NPC,SPEAKER_POLICE)
     end
 }
 
 script Quest_NeighborhoodCleanUp2_Interact_PersonA_Script{
     trainerbattle_single(TRAINER_VAGRANT_1_CURENO_PORT,gText_NeighborhoodCleanUp2_WhoAreYouDo,gText_NeighborhoodCleanUp2_IGuessImNot)
-    msgbox(gText_NeighborhoodCleanUp2_ImJustTryingTo,MSGBOX_NPC,SPEAKER_RUSTY)
+    msgbox(format("I'm just trying to get by. It's tough out here on the streets, you know?"),MSGBOX_NPC,SPEAKER_RUSTY)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantA_Script)
     end
 }
 script Quest_NeighborhoodCleanUp2_Interact_PersonB_Script{
     trainerbattle_single(TRAINER_VAGRANT_2_CURENO_PORT,gText_NeighborhoodCleanUp2_YouThinkYoureTough,gText_NeighborhoodCleanUp2_ImJustHangingOut)
-    msgbox(gText_NeighborhoodCleanUp2_ICantBelieveI,MSGBOX_NPC,SPEAKER_WILLOW)
+    msgbox(format("I can't believe I lost. I guess I'll leave the park now."),MSGBOX_NPC,SPEAKER_WILLOW)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantB_Script)
     end
 }
 script Quest_NeighborhoodCleanUp2_Interact_PersonC_Script{
     trainerbattle_single(TRAINER_VAGRANT_3_CURENO_PORT,gText_NeighborhoodCleanUp2_IllBattleYouIf,gText_NeighborhoodCleanUp2_YouWantMeToLeave)
-    msgbox(gText_NeighborhoodCleanUp2_ImJustTrying,MSGBOX_NPC,SPEAKER_GRIFF)
+    msgbox(format("I'm just trying to catch some Z's. Is that too much to ask?"),MSGBOX_NPC,SPEAKER_GRIFF)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantC_Script)
     end
 }
 script Quest_NeighborhoodCleanUp2_Interact_PersonD_Script{
     trainerbattle_single(TRAINER_VAGRANT_4_CURENO_PORT,gText_NeighborhoodCleanUp2_WhatDoYouWant,gText_NeighborhoodCleanUp2_YoureStrongerThanYou)
-    msgbox(gText_NeighborhoodCleanUp2_ImJustHereTo,MSGBOX_NPC,SPEAKER_LUNA)
+    msgbox(format("I'm just here to relax. Can't a guy catch a break?"),MSGBOX_NPC,SPEAKER_LUNA)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantD_Script)
     end
 }
 script Quest_NeighborhoodCleanUp2_RemoveVagrantA_Script{
     lock
-    msgbox(gText_NeighborhoodCleanUp2_ImSorryBut,,SPEAKER_ALICIA)
-    msgbox(gText_NeighborhoodCleanUp2_OkayOkayIll,,SPEAKER_RUSTY)
+    msgbox(format("I'm sorry, but you can't stay here. It's for the best."),,SPEAKER_ALICIA)
+    msgbox(format("Okay, okay, I'll leave. But you should know that there are worse things out there than me."),,SPEAKER_RUSTY)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP2,SUB_QUEST_1)
     call(Quest_NeighborhoodCleanUp2_ProgressToReward_Script)
     call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
@@ -145,8 +145,8 @@ script Quest_NeighborhoodCleanUp2_RemoveVagrantA_Script{
 }
 script Quest_NeighborhoodCleanUp2_RemoveVagrantB_Script{
     lock
-    msgbox(gText_NeighborhoodCleanUp2_YouNeedToLeaveThis,,SPEAKER_ALICIA)
-    msgbox(gText_NeighborhoodCleanUp2_AlrightAlrightI,,SPEAKER_WILLOW)
+    msgbox(format("You need to leave this area. It's not safe here."),,SPEAKER_ALICIA)
+    msgbox(format("Alright, alright, I'm leaving. But you're not doing me any favors, you know."),,SPEAKER_WILLOW)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP2,SUB_QUEST_2)
     call(Quest_NeighborhoodCleanUp2_ProgressToReward_Script)
     call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
@@ -155,8 +155,8 @@ script Quest_NeighborhoodCleanUp2_RemoveVagrantB_Script{
 }
 script Quest_NeighborhoodCleanUp2_RemoveVagrantC_Script{
     lock
-    msgbox(gText_NeighborhoodCleanUp2_SorryBut,,SPEAKER_ALICIA)
-    msgbox(gText_NeighborhoodCleanUp2_FineFineI,,SPEAKER_GRIFF)
+    msgbox(format("I'm sorry, but I have to ask you to leave. It's not safe for you or anyone else here."),,SPEAKER_ALICIA)
+    msgbox(format("Fine, fine, I'll leave. But you're making a big mistake, pal."),,SPEAKER_GRIFF)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP2,SUB_QUEST_3)
     call(Quest_NeighborhoodCleanUp2_ProgressToReward_Script)
     call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
@@ -165,8 +165,8 @@ script Quest_NeighborhoodCleanUp2_RemoveVagrantC_Script{
 }
 script Quest_NeighborhoodCleanUp2_RemoveVagrantD_Script{
     lock
-    msgbox(gText_NeighborhoodCleanUp2_ImSorryBut,,SPEAKER_ALICIA)
-    msgbox(gText_NeighborhoodCleanUp2_OkayOkayIm,,SPEAKER_LUNA)
+    msgbox(format("I'm sorry, but you can't stay here. It's for the best."),,SPEAKER_ALICIA)
+    msgbox(format("Okay, okay, I'm leaving. But don't think you've seen the last of me."),,SPEAKER_LUNA)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP2,SUB_QUEST_4)
     call(Quest_NeighborhoodCleanUp2_ProgressToReward_Script)
     call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)

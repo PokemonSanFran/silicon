@@ -5,7 +5,7 @@ const VAR_MAP = VAR_0x8005
 script Ferry_Interact_Dialogue
 {
     lock
-    msgbox(gText_Ferry_ThanksForChoosing)
+    msgbox(format("Welcome to the GRUNTFerry! Where would you like to go?"))
     call(ShowFerryMenu_Script)
     closemessage
     if (var(VAR_RESULT) == MULTI_B_PRESSED)

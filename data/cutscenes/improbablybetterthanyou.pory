@@ -28,7 +28,7 @@ script ImProbablyBetterThanYou_StandingOutside_Dialogue {
     lockall
         startcutscene(JUMPPLAYER_IMPROBABLYBETTERTHANYOU)
         setvar(VAR_PLAYER_HOME_STATE,HAS_NOT_MET_CHARLOTTE)
-        msgbox(gText_ImProbablyBetterThanYou_DeepBreath,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Let's do this."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
         // PSF TODO Cutscnee skip crashes when used here
         closemessage
         call(ImProbablyBetterThanYou_MovePlayerInside_Script)
@@ -47,9 +47,9 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
         waitmovement(0)
         applymovement(CHARLOTTE,ImProbablyBetterThanYou_WalkToPlayer)
         waitmovement(0)
-        msgbox(gText_ImProbablyBetterThanYou_YouMustBe,,SPEAKER_CHARLOTTE)
+        msgbox(format("You must be {PLAYER}! I'm the other trainer in the Kickstart program, Charlotte."),,SPEAKER_CHARLOTTE)
         reveal(REVEAL_CHARLOTTE)
-        msgbox(gText_ImProbablyBetterThanYou_WelcomeToTheMost,,SPEAKER_CHARLOTTE)
+        msgbox(format("Welcome to the most boring place in the Resido region... CuconuTown."),,SPEAKER_CHARLOTTE)
         closemessage
                 goto (ImProbablyBetterThanYou_KindaShabby_Dialogue)
         end
@@ -58,29 +58,29 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
 script ImProbablyBetterThanYou_KindaShabby_Dialogue {
         applymovement(CHARLOTTE,ImProbablyBetterThanYou_LookAround)
         waitmovement(0)
-        msgbox(gText_ImProbablyBetterThanYou_KindaShabbyHuh,,SPEAKER_CHARLOTTE)
+        msgbox(format("This place is kinda shabby, huh? I thought SharpRise Capital was pulling out all the stops for us, but there's not a butler in sight! And no private tennis courts! Not that I ever play, but it's the principle of the thing..."),,SPEAKER_CHARLOTTE)
         closemessage
-        msgbox(gText_ImProbablyBetterThanYou_OhYeahUh,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_ImProbablyBetterThanYou_ThisHouseIsFriggin,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-        msgbox(gText_ImProbablyBetterThanYou_MyFlightWasEarlierToday,,SPEAKER_CHARLOTTE)
+        msgbox(format("Oh yeah uh, it's too bad..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("This house is friggin' huge! Bigger than anywhere I've ever stayed, that's for sure..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+        msgbox(format("My flight was earlier today, so I've just been waiting around."),,SPEAKER_CHARLOTTE)
         goto(ImProbablyBetterThanYou_FoodAndWhereYouFrom_Dialogue)
         end
 }
 
 script ImProbablyBetterThanYou_FoodAndWhereYouFrom_Dialogue {
-        msgbox(gText_ImProbablyBetterThanYou_IOrderedSomeFoodToo,,SPEAKER_CHARLOTTE)
-        msgbox(gText_ImProbablyBetterThanYou_WhereAreYouFrom,,SPEAKER_CHARLOTTE)
-        msgbox(gText_ImProbablyBetterThanYou_AgateVillageOrre,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_ImProbablyBetterThanYou_UndellaTownUnova,,SPEAKER_CHARLOTTE)
+        msgbox(format("I ordered some food too - Rapidoordash is the same here as it is back in Unova, and my Mom's card is still on the account! I'm sure she gets... points or something, right?"),,SPEAKER_CHARLOTTE)
+        msgbox(format("Where are you from?"),,SPEAKER_CHARLOTTE)
+        msgbox(format("Agate Village, Orre. You?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Undella Town, Unova. Agate, right? I don't think I've heard of it... oh well. Probably just as boring as Undella. SO GLAD to be out of there!"),,SPEAKER_CHARLOTTE)
         goto (ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue)
         end
 }
 
 script ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue {
-        msgbox(gText_ImProbablyBetterThanYou_IKnowOurOrientation,,SPEAKER_CHARLOTTE)
+        msgbox(format("I know our orientation is supposed to start soon, or something like that. I took the bedroom on the left, so the one to the right is yours. I tried to take the good one because I got here first..."),,SPEAKER_CHARLOTTE)
         applymovement(CHARLOTTE,ImProbablyBetterThanYou_GestureUpstairs)
         waitmovement(0)
-        msgbox(gText_ImProbablyBetterThanYou_ButBothRooms,,SPEAKER_CHARLOTTE,,EMOTE_LAUGH)
+        msgbox(format("but both rooms are exactly the same! Let's chill after you unpack."),,SPEAKER_CHARLOTTE,,EMOTE_LAUGH)
                 closemessage
         applymovement(CHARLOTTE,ImProbablyBetterThanYou_WalkToCouch)
         waitmovement(0)
@@ -93,7 +93,7 @@ script ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue {
 
 script ImProbablyBetterThanYou_PreventPlayerLeaving_Script {
     lockall
-        msgbox(gText_ImProbablyBetterThanYou_IShouldCheckOut,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("I should check out my room!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
                 closemessage
         applymovement(PLAYER,Common_Movement_WalkUp)
         waitmovement(0)
@@ -104,12 +104,12 @@ script ImProbablyBetterThanYou_PreventPlayerLeaving_Script {
 script ImProbablyBetterThanYou_Annoyed_Dialogue {
     switch (var(VAR_TALKED_CHARLOTTE)) {
         case 1:
-            msgbox(gText_ImProbablyBetterThanYou_OhManAreYouTrying,MSGBOX_NPC,,SPEAKER_CHARLOTTE)
+            msgbox(format("Oh man, are you trying to do some bonding or something? Lemme finish this truffle burger first..."),MSGBOX_NPC,,SPEAKER_CHARLOTTE)
             addvar(VAR_TALKED_CHARLOTTE,1)
         case 2:
-            msgbox(gText_ImProbablyBetterThanYou_NomNomNom)
+            msgbox(format("Nom nom nom..."))
         default:
-            msgbox(gText_ImProbablyBetterThanYou_GoCheckOutYourRoom,MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            msgbox(format("Go check out your room!"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
             setvar(VAR_TALKED_CHARLOTTE,1)
     }
         closemessage

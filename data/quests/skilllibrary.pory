@@ -11,13 +11,13 @@ script Quest_Skilllibrary_Event_Script{
 }
 
 script Quest_Skilllibrary_StartQuest_Dialogue{
-    msgbox(gText_Skilllibrary_WereBuilding,MSGBOX_NPC)
-    msgbox(gText_Skilllibrary_TheGoalIs)
-    msgbox(gText_Skilllibrary_OhWowThat,,SPEAKER_ALICIA,,EMOTE_HAPPY)
-    msgbox(gText_Skilllibrary_TheProblemIs)
-    msgbox(gText_Skilllibrary_Theyrenot)
-    msgbox(gText_Skilllibrary_YoureChampion)
-    msgbox(gText_Skilllibrary_IHaveAMachineToCopy)
+    msgbox(format("We're building a library for Trainers! But without books.There are tons of Trainers that aren't competing in the League Challenge!"),MSGBOX_NPC)
+    msgbox(format("But its become impossible get a hold of Technical Machines if you're not in the challenge."))
+    msgbox(format("Oh wow, that sounds so amazing!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
+    msgbox(format("The problem is... the League challenge. There's no Gym here anymore, so Trainers don't come here. Its too out of the way to justify anybody coming here, so we don't get any donations."))
+    msgbox(format("They're not gonna start coming to ol' ZenzuIsland!"))
+    msgbox(format("I recognize ya, you're Champion {PLAYER}, yeah?"))
+    msgbox(format("I built a machine that lets make record the data of a Technical Machine, so I can redistribute it.Could you stop here as you collect more TMs? I'll make copies of them, and hopefully we can build a library of all the TMs in Resido!"))
     closemessage
     startquest(QUEST_SKILLLIBRARY)
     goto(Quest_Skilllibrary_FirstCheck_Dialogue)
@@ -27,8 +27,8 @@ script Quest_Skilllibrary_StartQuest_Dialogue{
 
 script Quest_Skilllibrary_FirstCheck_Dialogue{
     special(Quest_Skilllibrary_StoreAndCompare)
-    msgbox(gText_Skilllibrary_HowManyTM)
-    msgbox(gText_Skilllibrary_OkayXThis)
+    msgbox(format("How many TMs do you have to start?"))
+    msgbox(format("Okay! {STR_VAR_1} is a good start."))
     goto(Quest_Skilllibrary_CopyTM_Script)
 }
 
@@ -37,18 +37,18 @@ script Quest_Skilllibrary_Active_Dialogue{
         goto(Quest_Skilllibrary_FirstCheck_Dialogue)
     }
 
-    msgbox(gText_Skilllibrary_HowManyMore)
+    msgbox(format("How many more TMs did you bring me?"))
 
     special(Quest_Skilllibrary_StoreAndCompare)
     if(var(VAR_RESULT)){
-        msgbox(gText_Skilllibrary_IllCopyThese)
+        msgbox(format("I'll copy these {STR_VAR_2}!"))
         goto(Quest_Skilllibrary_CopyTM_Script)
     }
     goto(Quest_Skilllibrary_NothingYet_Dialogue)
 }
 
 script Quest_Skilllibrary_NothingYet_Dialogue{
-    msgbox(gText_Skilllibrary_NothingNew)
+    msgbox(format("Nothing new? That's okay. Let me know if that changes!"))
     closemessage
 }
 
@@ -59,13 +59,13 @@ script Quest_Skilllibrary_CopyTM_Script{
     waitse
     applymovement(PERSON,Quest_Skilllibrary_PresentToPlayer_Movement)
     waitmovement(PERSON)
-    msgbox(gText_Skilllibrary_OkayDone)
+    msgbox(format("Okay, done!"))
     applymovement(PERSON,Quest_Skilllibrary_ReturnToPlayer)
     waitmovement(PERSON)
     if (var(VAR_QUEST_SKILLLIBRARY_TM_COUNT) == NUM_TECHNICAL_MACHINES){
         goto(Quest_Skilllibrary_Reward_Dialogue)
     }
-    msgbox(gText_Skilllibrary_IThinkThere)
+    msgbox(format("I think there are {STR_VAR_3} left. Keep it up!"))
     closemessage
     release
     end
@@ -74,9 +74,9 @@ script Quest_Skilllibrary_CopyTM_Script{
 script Quest_Skilllibrary_Reward_Dialogue{
 //PSF TODO currently impossible to finish this quest until TMs are expanded to 399 but I swear it works
 // BAG_TMHM_COUNT needs to be increased or the bag won't hold enough
-    msgbox(gText_Skilllibrary_OhWait)
-    msgbox(gText_Skilllibrary_ThatsAllOfThem)
-    msgbox(gText_Skilllibrary_YouveHelpedMe)
+    msgbox(format("Oh wait..."))
+    msgbox(format("That's all of them!"))
+    msgbox(format("Now Trainers have access all of the moves of the region! Thank you so much! Take this."))
     giveitem(ITEM_STARF_BERRY)
     completequest(QUEST_SKILLLIBRARY)
     closemessage
@@ -85,7 +85,7 @@ script Quest_Skilllibrary_Reward_Dialogue{
 }
 
 script Quest_Skilllibrary_Completed_Dialogue{
-    msgbox(gText_Skilllibrary_ThanksAgain,MSGBOX_NPC)
+    msgbox(format("Thanks again."),MSGBOX_NPC)
     end
 }
 movement Quest_Skilllibrary_WalkToMachine_Movement{

@@ -32,22 +32,22 @@ script Quest_Taxicabturnaround_CheckQuestTypeAndAsk_Script{
         switch(var(VAR_RESULT)){
             case SEA:
                 buffermovename(STR_VAR_1,MOVE_SURF)
-                msgbox(gText_Taxicabturnaround_HaveSea)
+                msgbox(format("I'm looking for a Pokémon that can learn {STR_VAR_1}. It should be probably be tall too.. like 1.1m."))
             case SKY:
                 buffermovename(STR_VAR_1,MOVE_FLY)
                 bufferstring(STR_VAR_2,gText_Speed)
-                msgbox(gText_Taxicabturnaround_HaveSky)
+                msgbox(format("I need a Pokémon that can learn {STR_VAR_1}. It's gotta be fast! The species should have at least 80 base {STR_VAR_2}."))
             case LAND:
-                msgbox(gText_Taxicabturnaround_HaveLand)
+                msgbox(format("I'm trying to get a hold of a Pokémon in the Field egg group, something from the land, you know? And its gonna need some bulk, like 32kg."))
         }
 }
 
 script Quest_Taxicabturnaround_AskPokemon_Dialogue{
-    msgbox(gText_Taxicabturnaround_OhTheyMentioned)
-    msgbox(gText_Taxicabturnaround_WeWantTo)
+    msgbox(format("Oh, you're {PLAYER}! They mentioned you'd be coming."))
+    msgbox(format("We're part of the taxicab union and we're trying to expand our fleet by using Pokémon. We've got people to train them, but not enough people to help catch them..."))
 
     call(Quest_Taxicabturnaround_CheckQuestTypeAndAsk_Script)
-    msgbox(gText_Taxicabturnaround_DoYouHave,MSGBOX_YESNO)
+    msgbox(format("Do you have one you can give us??"),MSGBOX_YESNO)
 
     if (var(VAR_RESULT) == NO){
         goto(Quest_Taxicabturnaround_NoRefusePokemon_Dialogue)
@@ -57,7 +57,7 @@ script Quest_Taxicabturnaround_AskPokemon_Dialogue{
 }
 
 script Quest_Taxicabturnaround_NoRefusePokemon_Dialogue{
-    msgbox(gText_Taxicabturnaround_ComeBackWhen)
+    msgbox(format("Come back when you can give us one. Thanks!"))
     release
     end
 }
@@ -76,7 +76,7 @@ script Quest_Taxicabturnaround_EvaluatePokemon_Script{
     }
 
     special(BufferMonNickname)
-    msgbox(gText_Taxicabturnaround_AskForMon,MSGBOX_YESNO)
+    msgbox(format("This is perfect. Are you sure I can have this {STR_VAR_1} forever?"),MSGBOX_YESNO)
     if (var(VAR_RESULT) == NO){
         goto(Quest_Taxicabturnaround_NoRefusePokemon_Dialogue)
     }
@@ -120,29 +120,29 @@ script Quest_Taxicabturnaround_CheckReward_Script{
 }
 
 script Quest_Taxicabturnaround_ProposePersuaive_Dialogue{
-    msgbox(gText_Taxicabturnaround_WordHasBeenGetting)
+    msgbox(format("Word has been getting around about you helping us out. You should talk to the head of the Taxicab union in GlavezHill."))
     return
 }
 
 script Quest_Taxicabturnaround_WrongPokemon_Dialogue{
-    msgbox(gText_Taxicabturnaround_YouKnowIDont)
+    msgbox(format("You know, I don't think this Pokémon will work..."))
     closemessage
     release
     end
 }
 
 script Quest_Taxicabturnaround_NotEnough_Dialogue{
-    msgbox(gText_Taxicabturnaround_ThatsYourLast)
+    msgbox(format("That's the last Pokémon in your party! I can't take it."))
     closemessage
     release
     end
 }
 
 script Quest_Taxicabturnaround_Reward_Dialogue{
-    msgbox(gText_Taxicabturnaround_HeyWeAllNoticed)
+    msgbox(format("Hey we all noticed how great you've been, and wanted to give you a little something."))
     closemessage
     giveitem(ITEM_OVAL_CHARM,1)
-    msgbox(gText_Taxicabturnaround_YoureARealOne)
+    msgbox(format("You're a real one!"))
     completequest(QUEST_TAXICABTURNAROUND)
     return
 }

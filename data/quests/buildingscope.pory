@@ -73,16 +73,16 @@ script Quest_BuildingScope_CheckBadges_Script{
 }
 
 script Quest_BuildingScope_ScaredEmployee_Dialogue{
-    msgbox(gText_BuildingScope_HowBadCouldItBe,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("How bad could it be...? Come on, just barge in there and tell 'em what's what!"),,SPEAKER_SHARPRISECAPITAL_STAFF)
     release
     end
 }
 
 script Quest_BuildingScope_StartQuest_Dialogue{
     faceplayer
-    msgbox(gText_BuildingScope_OhYourePlayer,,SPEAKER_SHARPRISECAPITAL_STAFF)
-    msgbox(gText_BuildingScope_TheresABuildingIn,,SPEAKER_SHARPRISECAPITAL_STAFF)
-    msgbox(gText_BuildingScope_AnimalsOrPokemon,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("Oh! You're {PLAYER}. Maybe... you can help me? I work for SharpRise Capital, in the League Ops Division"),,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("this building is abandoned, so the league wants to buy it to turn it into a battle arena. But I'm pretty sure its overrun by beasts! Nasty things, they attack whenever we try to go inside."),,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("Animals... or pokemon or something. Can you go in there and clear them out, because you're tougher than me!"),,SPEAKER_SHARPRISECAPITAL_STAFF)
     closemessage
 
     applymovement(EMPLOYEE,Common_Movement_WalkDown)
@@ -94,7 +94,7 @@ script Quest_BuildingScope_StartQuest_Dialogue{
 }
 
 script Quest_BuildingScope_Employee_Active_Dialogue{
-    msgbox(gText_BuildingScope_OneDayIll,MSGBOX_NPC,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("one day i'll have some balls"),MSGBOX_NPC,SPEAKER_SHARPRISECAPITAL_STAFF)
     end
 }
 
@@ -122,31 +122,31 @@ script Quest_BuildingScope_Squatters_Cutscene{
 }
 
 script Quest_BuildingScope_BattleSquatters_Script{
-    msgbox(gText_BuildingScope_FinallyHadTheBalls,,SPEAKER_DEFAULT)
+    msgbox(format("Finally had the balls to come in here yourself huh"),,SPEAKER_DEFAULT)
     trainerbattle_no_intro(TRAINER_BUILDINGSCOPE_A,gText_BuildingScope_WhyWontYou)
-    msgbox(gText_BuildingScope_ThrowingGasAtUs,,SPEAKER_DEFAULT)
+    msgbox(format("throwing gas cans through the windows, setting off stike bombs, playing loud music... what is wrong with you?"),,SPEAKER_DEFAULT)
     trainerbattle_no_intro(TRAINER_BUILDINGSCOPE_B,gText_BuildingScope_YouDisgustMe)
-    msgbox(gText_BuildingSCope_NothingIsEverGood,,SPEAKER_RAINER)
+    msgbox(format("nothing is ever good about for you guys huh"),,SPEAKER_RAINER)
     trainerbattle_no_intro(TRAINER_BUILDINGSCOPE_C,gText_BuildingScope_Scum)
     goto(Quest_BuildingScope_PostBattle_Dialogue)
 }
 
 script Quest_BuildingScope_PostBattle_Dialogue{
     lock
-    msgbox(gText_BuildingScope_NobodyIsTryingTo,,SPEAKER_ALICIA)
+    msgbox(format("nobody is trying to hurt you"),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_BuildingScope_ThrowingShitAt,,SPEAKER_DEFAULT)
+    msgbox(format("throwing shit through the windows? what the hell is that?"),,SPEAKER_DEFAULT)
 
-    msgbox(gText_BuildingScope_SomebodyAskedMe,,SPEAKER_ALICIA)
-
-
-    msgbox(gText_BuildingScope_UhHuhPokemon,,SPEAKER_DEFAULT)
-
-    msgbox(gText_BuildingScope_LookTheGuyIWas,,SPEAKER_ALICIA)
+    msgbox(format("somebody asked me to help clear out some aggressive pokemon. we had no idea there were people in here"),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_BuildingScope_NotLikeWeGotAnywhere,,SPEAKER_DEFAULT)
+    msgbox(format("uh huh. pokemon? really?"),,SPEAKER_DEFAULT)
+
+    msgbox(format("look, the guy I was helping seemed super nice. he doesn't seem like the kind of guy to attack people. let me go talk to him and clear it up"),,SPEAKER_ALICIA)
+
+
+    msgbox(format("not like we got anywhere to go"),,SPEAKER_DEFAULT)
     closemessage
 
     questmenu(QUEST_MENU_SET_REWARD,QUEST_BUILDINGSCOPE)
@@ -155,16 +155,16 @@ script Quest_BuildingScope_PostBattle_Dialogue{
 }
 
 script Quest_BuildingScope_Reward_Dialogue{
-    msgbox(gText_BuildingScope_IGotInto,,SPEAKER_ALICIA)
+    msgbox(format("I got inside no problem, but there were no pokemon, just some people living there!"),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_BuildingScope_WaitPeopleWere,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("wait people? like actual humans? not some beasts?"),,SPEAKER_SHARPRISECAPITAL_STAFF)
 
-    msgbox(gText_BuildingScope_YeahTheyWere,,SPEAKER_ALICIA)
+    msgbox(format("yeah! they're living there because they have nowhere else to go"),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_BuildingScope_OhWowWell,,SPEAKER_SHARPRISECAPITAL_STAFF)
-    msgbox(gText_BuildingScope_IllSendSomebody,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("oh wow well we can't have that. i suppose we're effectiely taking their home away, but I'll work with the team to find a better place for them. everybody wins!"),,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("i'll send somebody over right now. thank you for subduing the ani - those people. what a misunderstanding! and this is for you..."),,SPEAKER_SHARPRISECAPITAL_STAFF)
 
 	showmoneybox(0, 0)
     waitbuttonpress
@@ -182,7 +182,7 @@ script Quest_BuildingScope_Reward_Dialogue{
 }
 
 script Quest_BuildingScope_PostQuest_Dialogue{
-    msgbox(gText_BuildingScope_WeHired,MSGBOX_NPC,,SPEAKER_SHARPRISECAPITAL_STAFF)
+    msgbox(format("we hired the best contractors from Vermilion City to work on the building. we might even be done AHEAD of schedule!"),MSGBOX_NPC,,SPEAKER_SHARPRISECAPITAL_STAFF)
     end
 }
 

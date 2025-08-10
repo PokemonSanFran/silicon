@@ -11,8 +11,8 @@ script ThereCanOnlyBeOne_Player_Monologue
 {
     lock
     setrespawn(HEAL_LOCATION_CUCONU_TOWN_COMPOUND_2F)
-    msgbox(gText_ThereCanOnlyBe_AlmostPackedAndReady,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_HAPPY,PHONE_OFF)
-    msgbox(gText_ThereCanOnlyBe_ButTheRulesSay,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_SAD,PHONE_OFF)
+    msgbox(format("Almost packed and ready to go! I still can't believe I made it..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_HAPPY,PHONE_OFF)
+    msgbox(format("But the rules say I can only bring one of you guys. Man, this sucks. I promise, once we're the Champion, we'll come back for the rest of you! But for now, it's all business..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_SAD,PHONE_OFF)
     callnative(GenerateDummyPartyMembers)
     callnative(AddStartersToBox)
     goto(ThereCanOnlyBeOne_Narrator_Dialogue)
@@ -30,7 +30,7 @@ script ThereCanOnlyBeOne_SetUpPlayer_Script
 }
 
 script ThereCanOnlyBeOne_Narrator_Dialogue {
-    msgbox(gText_ThereCanOnlyBe_DueToTheDelicateEcosystem)
+    msgbox(format("Due to the delicate ecosystem of the region, Trainers are permitted to bring one Pokémon from outside the region into the region with them. Please choose one Pokémon to accompany you on your adventure. You will not be able to access the others during your playthrough, so choose wisely."))
     closemessage
     setvar(VAR_CHOSEN_PSF_STARTER, NO_STARTER_CHOSEN)
     startmenu_savescreen
@@ -60,7 +60,7 @@ script ThereCanOnlyBeOne_ConstructMenu_Script
 }
 
 script ThereCanOnlyBeOne_StarterSelectMenu_Script{
-    msgbox(gText_ThereCanOnlyBe_PleaseChooseAPokemon)
+    msgbox(format("Please choose a Pokémon to bring with you to Resido."))
 	call(ThereCanOnlyBeOne_ConstructMenu_Script)
 	dynmultistack(0,0,FALSE,4,FALSE,0,NULL)
     call(ThereCanOnlyBeOne_HandleMenuOutput_Script)
@@ -75,25 +75,25 @@ script ThereCanOnlyBeOne_HandleMenuOutput_Script{
     switch (var (VAR_RESULT))
 	{
         case SPECIES_SCYTHER:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectScytherDesc)
+            msgbox(format("{STR_VAR_1} uses its Ability and Speed to overwhelm opponents."))
         case SPECIES_CHARCADET:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectCharcadetDesc)
+            msgbox(format("{STR_VAR_1} evolves into powerful Fire-type Pokemon with physical or special coverage."))
         case SPECIES_PETILIL:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectPetililDesc)
+            msgbox(format("{STR_VAR_1} best utilizies its high Special Attack in the sun."))
         case SPECIES_FLAAFFY:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectFlaaffyDesc)
+            msgbox(format("{STR_VAR_1} boasts a high Special Attack and diverse move pool."))
         case SPECIES_MAREANIE:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectMareanieDesc)
+            msgbox(format("{STR_VAR_1} uses Defense and Special Defense to wear down foes."))
         case SPECIES_ARON:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectAronDesc)
+            msgbox(format("{STR_VAR_1} leverages its high Attack and Defense to provide physical support."))
         case SPECIES_SWINUB:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectSwinubDesc)
+            msgbox(format("{STR_VAR_1} hits most types for super- effective damage with its high attack."))
         case SPECIES_HATTREM:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectHattremDesc)
+            msgbox(format("{STR_VAR_1}'s high Special Attack and  Special Defense makes it ideal for special support."))
         case SPECIES_PANCHAM:
-            msgbox(gText_ThereCanOnlyBe_StarterSelectPanchamDesc)
+            msgbox(format("{STR_VAR_1} makes up for low Speed with high Attack and unique typing."))
 		default:
-			msgbox(gText_ThereCanOnlyBe_StarterSelectUnknownDesc)
+			msgbox(format("This is an...interesting choice."))
     }
 }
 
@@ -116,7 +116,7 @@ script ThereCanOnlyBeOne_StarterChoiceMenu_Script {
 
 script ThereCanOnlyBeOne_StarterSelectConfirm_Script
 {
-    msgbox(gText_ThereCanOnlyBe_StarterAreYouSure, MSGBOX_YESNO)
+    msgbox(format("Are you sure you want to choose {STR_VAR_1}?"), MSGBOX_YESNO)
     goto_if_eq(VAR_RESULT,NO,ThereCanOnlyBeOne_StarterSelectMenu_Script)
     callnative(MoveStarterToParty)
     goto(ThereCanOnlyBeOne_StarterSelectEnd_Script)
@@ -125,7 +125,7 @@ script ThereCanOnlyBeOne_StarterSelectConfirm_Script
 script ThereCanOnlyBeOne_StarterSelectEnd_Script {
   setflag(FLAG_SYS_POKEMON_GET)
   playfanfare(MUS_OBTAIN_ITEM)
-  msgbox(gText_ThereCanOnlyBe_YouChoseToBring)
+  msgbox(format("You chose to bring {STR_VAR_1} to Resido."))
   waitfanfare
   startmenu_savescreen
   goto(ThereCanOnlyBeOne_WarpPlayer_Script)

@@ -147,11 +147,11 @@ script ImIn_StartHouseBreak_Script
 
         applymovement(ARMANDO,Common_Movement_FaceDown)
 
-        msgbox(gText_ImIn_WereCertainNobody,,SPEAKER_ARMANDO)
+        msgbox(format("We're certain nobody is home?"),,SPEAKER_ARMANDO)
 
-        msgbox(gText_ImIn_HasntLeftWorkEarly,,SPEAKER_MAGNUS)
+        msgbox(format("Ramesh hasn't left work early a day in their life. SharpRise Capital is led by monsters, but at least they're hard-working monsters."),,SPEAKER_MAGNUS)
 
-        msgbox(gText_ImIn_WereInPosition,,SPEAKER_ADAORA,,,PHONE_ON)
+        msgbox(format("We're in position at CapheCity. Ready to mobilize this diversion when you are."),,SPEAKER_ADAORA,,,PHONE_ON)
         closemessage
 
         applymovement(KAI,ImIn_WalkAroundHouse)
@@ -164,9 +164,9 @@ script ImIn_StartHouseBreak_Script
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
 
-        msgbox(gText_ImIn_TheSideDoorWill,,SPEAKER_KAI_TIDE)
+        msgbox(format("The side door will definitely work, didn't see an alarm either."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_ImIn_LetsMoveThen,,SPEAKER_TALA)
+        msgbox(format("Let's move then!"),,SPEAKER_TALA)
         closemessage
 
         applymovement(KAI,ImIn_WalkToSideDoor)
@@ -174,7 +174,7 @@ script ImIn_StartHouseBreak_Script
 
         call(ImIn_ReleaseFromBall_Script)
 
-        msgbox(gText_ImIn_BrickBreakSureComes,,SPEAKER_KAI_TIDE)
+        msgbox(format("Brick Break sure comes in handy when most houses are made of the stuff."),,SPEAKER_KAI_TIDE)
                 closemessage
 
         playse(SE_M_BRICK_BREAK)
@@ -221,7 +221,7 @@ script Imin_BeginHouseSearch_Script
 {
     lock
         setvar(VAR_TOWER_RAID_STATE,SEARCHING_RAMESH_HOUSE)
-        msgbox(gText_ImIn_OkaySpreadOut,,SPEAKER_TALA)
+        msgbox(format("Okay, spread out. We're looking for the warp panel. Use the walkies if you see anything."),,SPEAKER_TALA)
         closemessage
 
         applymovement(TALA,ImIn_SpreadOutHouse)
@@ -253,9 +253,9 @@ script ImIn_FindLockedDoor_Script
 
         setvar(VAR_TOWER_RAID_STATE,FOUND_RAMESH_WARP_DOOR)
 
-        msgbox(gText_ImIn_IFoundADoor,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("I found a door with an electronic lock! It takes six digits."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ImIn_GuessWereAllLooking,,SPEAKER_KAI_TIDE)
+        msgbox(format("Guess we're all looking for any numbers that seem important. No way it's just their birthday, right?"),,SPEAKER_KAI_TIDE)
                 closemessage
 
         release
@@ -288,13 +288,13 @@ script ImIn_EnterCorrectCode_Script
         call(ImIn_MoveObject_BeforeWarp_Script)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_ImIn_WereIn,,SPEAKER_ARMANDO)
+        msgbox(format("Adaora, we're in. Everybody remember the plan?"),,SPEAKER_ARMANDO)
 
-        msgbox(gText_ImIn_OnceYoureAllThrough,,SPEAKER_ADAORA,,,PHONE_ON)
+        msgbox(format("Once you're all through the panel, I'll lead the diversion protest at the front doors of the tower. Security will be focused on us, letting you to the executive levels and hopefully find Adelaide."),,SPEAKER_ADAORA,,,PHONE_ON)
 
-        msgbox(gText_ImIn_ImTooOldFor,,SPEAKER_MAGNUS)
+        msgbox(format("I'm too old for scaling mountains. Armando and I can get into the production studio and get ready to broadcast that confession."),,SPEAKER_MAGNUS)
 
-        msgbox(gText_ImIn_ThesePeopleAreFighting,,SPEAKER_KAREN)
+        msgbox(format("These people are fighting to kill. Stay safe."),,SPEAKER_KAREN)
                 closemessage
 
         applymovement(TALA,Common_Movement_WalkRight)
@@ -347,21 +347,21 @@ script ImIn_PostWarpSplit_Dialogue
 
         applymovement(PLAYER,Common_Movement_WalkUp2)
 
-        msgbox(gText_ImIn_WereAllIn,,SPEAKER_ARMANDO)
+        msgbox(format("We're all in."),,SPEAKER_ARMANDO)
 
-        msgbox(gText_ImIn_LetTheMarch,,SPEAKER_ADAORA,,,PHONE_ON)
+        msgbox(format("Let the march begin… good luck!"),,SPEAKER_ADAORA,,,PHONE_ON)
 
-        msgbox(gText_ImIn_LetsGoSecure,,SPEAKER_ARMANDO)
+        msgbox(format("Magnus, let's go secure the studio."),,SPEAKER_ARMANDO)
         closemessage
 
         applymovement(ARMANDO_B,ImIn_WalkAwayFromWarpA)
         applymovement(MAGNUS_B,ImIn_WalkAwayFromWarpA)
 
-        msgbox(gText_ImIn_ThisPlaceIsProbably,,SPEAKER_KAREN)
+        msgbox(format("This place is probably crawling with Trainers. Let's spread out."),,SPEAKER_KAREN)
 
-        msgbox(gText_ImIn_HasAnOfficeOn,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Adelaide has an office on the 38th floor, I've been there myself."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ImIn_FloorThenLets,,SPEAKER_TALA)
+        msgbox(format("38th floor then, let's move!"),,SPEAKER_TALA)
         closemessage
 
         applymovement(TALA_B,ImIn_WalkAwayFromWarpC)
@@ -392,7 +392,7 @@ script ImIn_PreventPlayerProgress_Script {
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(PLAYER)
 
-        msgbox(gText_ImIn_OfficeIsOn,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Adelaide's office is on Floor 10."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
 
         applymovement(PLAYER,ImIn_WalkAwayStairs)
@@ -409,22 +409,22 @@ script ImIn_OfficeReveal_Dialogue{
         applymovement(PLAYER,ImIn_ApproachDesk_Movement)
         waitmovement(PLAYER)
 
-        msgbox(gText_ImIn_DoYouLikeMy,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("Do you like my new office?"),,SPEAKER_CHARLOTTE_SHARPRISE)
         closemessage
 
-        msgbox(gText_ImIn_WhatAreYouDoing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Charlotte, what are you doing here?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ImIn_IDidntChooseToAlign,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("I didn't choose to align myself with the ghetto trash. Turns out, if you stick with the good guys, you get a sick job and a corner office."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(gText_ImIn_WaitTrash,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Wait, trash? Did you hear what these people did to HalaiIsland?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ImIn_WasDestryogingThisRegion,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("TheTide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpRise Capital did for you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(gText_ImIn_SoYouJustDontCare,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("So you just don't care that you work for murderers?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ImIn_LookAllThisHelping,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("Look, all this helping people shit is cool, but I came here to be the best. I'm done losing to scrubs and I'm done pretending to care."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(gText_ImIn_DaddyWontBeAble,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Daddy won't be able to buy your way out of this one."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
         applymovement(CHARLOTTE,ImIn_WalkFromDesk_Movement)
@@ -438,7 +438,7 @@ script ImIn_OfficeReveal_Dialogue{
 script ImIn_StartCharlotteBattle_Script {
 
     lock
-        msgbox(gText_ImIn_AreDeadDoYou,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("If you and Kai are dead, do you think I get to be Champion instead?"),,SPEAKER_CHARLOTTE_SHARPRISE)
         closemessage
 
         trainerbattle_no_intro(TRAINER_CHARLOTTE_IMIN,gText_ImIn_HowDoesThisKeep)
@@ -459,13 +459,13 @@ script ImIn_CharlotteDefeated_Dialogue {
     startcutscene(JUMPPLAYER_IMIN_POSTRIVAL)
         setvar(VAR_TOWER_RAID_STATE,DEFEATED_CHARLOTTE_SHARPRISESPIRE)
 
-        msgbox(gText_ImIn_Wheres,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Where's Adelaide?!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ImIn_WhatsTheSecret,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("What's the secret? What am I missing? Why do I keep LOSING?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(gText_ImIn_EverythingAboutIsBullshit,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Everything about SharpRise Capital is bullshit. You're not any stronger. The region isn't any better. But as long as they have stans like you, they're going to continue to get richer and more toxic. Tell me where Adelaide is."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ImIn_Floor,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("That warp panel goes to the skydeck. His real office is there."),,SPEAKER_CHARLOTTE_SHARPRISE)
                 call(ImIn_RevealAdelaideWarp_Script)
         closemessage
         call(TryAutoSave)
@@ -476,7 +476,7 @@ script ImIn_CharlotteDefeated_Dialogue {
 
 script ImIn_PostCharlotteBattle_Interact_Dialogue{
     if(var(VAR_TOWER_RAID_STATE) == DEFEATED_CHARLOTTE_SHARPRISESPIRE){
-        msgbox(gText_ImIn_AllThatTraining,MSGBOX_NPC,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("…all that training…"),MSGBOX_NPC,SPEAKER_CHARLOTTE_SHARPRISE)
             }
     return
 }

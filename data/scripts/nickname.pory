@@ -15,7 +15,7 @@ script EventScript_TryToNicknamePokemon
             specialvar(VAR_TEMP_1, IsChosenMonNicknamed)
             if (var(VAR_TEMP_1) == 0)
             {
-                msgbox(gText_YourPokemonMustHaveNickname)
+                msgbox(format("Your Pokémon must have a nickname!"))
             }
         }
     }

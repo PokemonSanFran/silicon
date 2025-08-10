@@ -18,7 +18,7 @@ mapscripts Chasilla_MapScripts{
 script Chasilla_Stan_Interact_Script{
     lock
         call(Quest_WallaceArmy_LoadStanSpeech_Script)
-        msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+        msgbox(format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough."),MSGBOX_NPC)
         call(Quest_WallaceArmy_PreBattleStan_Script)
 
         trainerbattle_single(TRAINER_CHASILLA_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,Chasilla_Stan_PostBattle_Script)
@@ -31,9 +31,9 @@ script Chasilla_Stan_PostBattle_Script{
         call(Quest_WallaceArmy_CheckCompletionRate_Script)
         questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
         if (!var(VAR_RESULT)){
-            msgbox(gText_WallaceArmy_PostBattlePlaceholder1)
+            msgbox(format("PostBattlePlaceholder1"))
         }else {
-            msgbox(gText_WallaceArmy_PostQuestPlaceholder1)
+            msgbox(format("PostQuestPlaceholder1"))
         }
 
     release
@@ -41,7 +41,7 @@ script Chasilla_Stan_PostBattle_Script{
 }
 
 script Chasilla_Biker_Interact_Script{
-    msgbox(gText_Chasilla_PlaceholderBiker,MSGBOX_NPC)
+    msgbox(format("i am a biker, and this is placeholder text."),MSGBOX_NPC)
 
     call(Quest_GetTheBand_CheckQuestAndBike_Script)
     if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
@@ -51,7 +51,7 @@ script Chasilla_Biker_Interact_Script{
 }
 
 script Chasilla_University_Locked_Door_Script{
-    msgbox(gText_Chasilla_TheDoor,MSGBOX_SIGN)
+    msgbox(format("The door is locked."),MSGBOX_SIGN)
     call(Quest_StealTheAxe_LockedDoor_Dialogue)
     release
     end
@@ -72,7 +72,7 @@ script Berekley_Leland_Interact_Script{
 }
 
 script Chasilla_Leland_Story_Dialogue{
-    msgbox(gText_Chasilla_IAttended,MSGBOX_NPC,SPEAKER_LELAND)
+    msgbox(format("You know, I used to go to Chasillauniversity! I was on their football team, and helped win the {STR_VAR_3} so many years ago. There's an old legend that it actually gives the holders power, but I'm proof that its nonsense. The {STR_VAR_3} means so much to me and my teammates, but its just a symbol."),MSGBOX_NPC,SPEAKER_LELAND)
         return
 }
 

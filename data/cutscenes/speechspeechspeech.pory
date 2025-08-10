@@ -135,32 +135,32 @@ script SpeechSpeechSpeech_PositionPlayer_Script {
 
 script SpeechSpeechSpeech_Intro_Dialogue {
 
-        msgbox(gText_SpeechSpeechSpeech_ThankYouAll,,SPEAKER_ALCMENE)
-        msgbox(gText_SpeechSpeechSpeech_FirstOfAll,,SPEAKER_ALCMENE)
+        msgbox(format("Thank you all for coming. For all your hard work. All your support. I have a few announcements for you all."),,SPEAKER_ALCMENE)
+        msgbox(format("First of all, I will be taking a leave of absence. Effectively immediately, Adaora will be leading TheTide. She has my full trust and support."),,SPEAKER_ALCMENE)
 
         closemessage
 
         call(SpeechSpeechSpeech_CrowdLookAround_Script)
         call(SpeechSpeechSpeech_ResetFacing_Script)
 
-        msgbox(gText_SpeechSpeechSpeech_ForAllYouve,,SPEAKER_ADAORA)
+        msgbox(format("Thank you for all you’ve done for us, Alcmene, I hope to live up to your example."),,SPEAKER_ADAORA)
 
         closemessage
 
         turnvobject(13,DIR_WEST)
         delay(16)
         turnvobject(15,DIR_EAST)
-        msgbox(gText_SpeechSpeechSpeech_WaitWhat,SPEAKER_ROCKET_MEMBER_A)
+        msgbox(format("Wait what?"),SPEAKER_ROCKET_MEMBER_A)
 
         turnvobject(16,DIR_EAST)
         delay(16)
         turnvobject(18,DIR_EAST)
-        msgbox(gText_SpeechSpeechSpeech_AreTheyEven,SPEAKER_ROCKET_MEMBER_B)
+        msgbox(format("Are they even qualified?"),SPEAKER_ROCKET_MEMBER_B)
         closemessage
 
         call(SpeechSpeechSpeech_ResetFacing_Script)
 
-        msgbox(gText_SpeechSpeechSpeech_HasMyFullConfidence,,SPEAKER_ALCMENE)
+        msgbox(format("Yes, Adaora has my full confidence, as well as the backing of…"),,SPEAKER_ALCMENE)
 
         closemessage
         goto(SpeechSpeechSpeech_StartTransformation_Script)
@@ -199,11 +199,11 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         addvar(VAR_STORYLINE_STATE,1)
 
-        msgbox(gText_SpeechSpeechSpeech_Us,,SPEAKER_TALA)
+        msgbox(format("… US! The Elite Four of Resido!"),,SPEAKER_TALA)
 
         closemessage
 
-        msgbox(gText_SpeechSpeechSpeech_HolyShit,,SPEAKER_ROCKET_MEMBER_A)
+        msgbox(format("Holy shit ok, good enough for me!"),,SPEAKER_ROCKET_MEMBER_A)
         closemessage
 
         call(Earthquake_PlayFake_EventScript)
@@ -217,26 +217,26 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         call(Earthquake_WaitOutShake)
 
-        msgbox(gText_SpeechSpeechSpeech_IsAnybodyHurt,,SPEAKER_ADAORA)
+        msgbox(format("Is anybody hurt? …no? Wonderful. Let’s continue. Kai’s restoration project has been going excellently, and we’re going to use that momentum for our next stage. It’s time to take the fight to SharpRise Capital!"),,SPEAKER_ADAORA)
 
         closemessage
 
-        msgbox(gText_SpeechSpeechSpeech_Yeah,,SPEAKER_ROCKET_MEMBER_A)
+        msgbox(format("Yeah!"),,SPEAKER_ROCKET_MEMBER_A)
 
-        msgbox(gText_SpeechSpeechSpeech_HellYes,,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
+        msgbox(format("Hell yes! Woo! Wait, where did Alcmene go?"),,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
         closemessage
         applymovement(GRUNTD,SpeechSpeechSpeech_LookAround)
         waitmovement(GRUNTD)
 
-        msgbox(gText_SpeechSpeechSpeech_YouAllKnowHowCompanies,,SPEAKER_ADAORA)
+        msgbox(format("You all know how companies like Presto and Buzzr have ruined our lives and families. But with the combined popularity of the Champion, Elite Four and our manpower, I think we can hurt these people where it counts: their wallets. We can’t drive these parasitic companies out of the region… but all that money has to go somewhere. Let’s use that money to strengthen the region and create a brighter future for us all."),,SPEAKER_ADAORA)
 
         closemessage
 
-        msgbox(gText_SpeechSpeechSpeech_WereFinally,,SPEAKER_ROCKET_MEMBER_A)
+        msgbox(format("We’re finally doing it…"),,SPEAKER_ROCKET_MEMBER_A)
         closemessage
 
         applymovement(GRUNTD,SpeechSpeechSpeech_LookAround)
-        msgbox(gText_SpeechSpeechSpeech_ThisIsInsane,,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
+        msgbox(format("This is insane yo. But seriously, did Alcmene just disappear?"),,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
         closemessage
         waitmovement(GRUNTD)
 
@@ -244,7 +244,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         waitmovement(MAGNUS)
         //Magnus steps forward. Adaora steps aside.
 
-        msgbox(gText_SpeechSpeechSpeech_WeWantToBegin,,SPEAKER_MAGNUS)
+        msgbox(format("We want to begin by attacking the biggest players in Resido. Each of us will handle a different offensive plan."),,SPEAKER_MAGNUS)
 
         closemessage
 
@@ -252,7 +252,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         waitmovement(ELLEN)
         //Ellen steps forward.
 
-        msgbox(gText_SpeechSpeechSpeech_4LeadCharge,,SPEAKER_MAGNUS)
+        msgbox(format("Ellen will lead the charge against Presto."),,SPEAKER_MAGNUS)
 
         closemessage
 
@@ -261,7 +261,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         waitmovement(ARMANDO)
         //Ellen steps back. Armando steps forward.
 
-        msgbox(gText_SpeechSpeechSpeech_3LeadCharge,,SPEAKER_MAGNUS)
+        msgbox(format("Armando will lead the charge against Arriba."),,SPEAKER_MAGNUS)
 
         closemessage
 
@@ -270,7 +270,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         waitmovement(TALA)
         //Ellen steps back. Tala steps forward.
 
-        msgbox(gText_SpeechSpeechSpeech_1LeadCharge,,SPEAKER_MAGNUS)
+        msgbox(format("Tala will lead the charge against Buzzr."),,SPEAKER_MAGNUS)
 
         closemessage
 
@@ -280,7 +280,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         //Tala steps back.
 
-        msgbox(gText_SpeechSpeechSpeech_IllBeHandling,,SPEAKER_MAGNUS)
+        msgbox(format("And I’ll be handling negotiations with the government, and operations here. Adaora will be giving each of you assignments under one of the Elite Four members, so listen up. "),,SPEAKER_MAGNUS)
 
         closemessage
 
@@ -296,21 +296,21 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         waitmovement(KAI)
 
         //Screen fades to black. Screen fades back in. Elite Four members are spaced around the room, surrounded by groups of TheTide members. Kai walks up to the player.
-        msgbox(gText_SpeechSpeechSpeech_DamnThisShit,,SPEAKER_KAI_TIDE)
+        msgbox(format("Damn, this shit is so crazy! The air is electric!"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_SpeechSpeechSpeech_ItFeelsReally,,SPEAKER_ALICIA)
+        msgbox(format("It feels really awesome to start making a difference around here."),,SPEAKER_ALICIA)
 
-        msgbox(gText_SpeechSpeechSpeech_Yeah,,SPEAKER_KAI_TIDE)
+        msgbox(format("Yeah!"),,SPEAKER_KAI_TIDE)
 
         if (var(VAR_STORYLINE_STATE) != STORY_RAVE_AND_SPEECH_COMPLETE)
         {
-            msgbox(gText_SpeechSpeechSpeech_YeahAlsoAre,,SPEAKER_KAI_TIDE)
+            msgbox(format("Also, are you heading to that party in CurenoPort now? I'll catch up with you in a second, I just gotta talk to Adaora first."),,SPEAKER_KAI_TIDE)
         }
         else
         {
-            msgbox(gText_SpeechSpeechSpeech_ByTheWay,,SPEAKER_KAI_TIDE)
+            msgbox(format("By the way, you and I are free to work with whoever we want. Just talk to the Elite Four member you want to team up with. I gotta go, I told Adaora I’d help set up something."),,SPEAKER_KAI_TIDE)
         }
-        msgbox(gText_SpeechSpeechSpeech_Peace,,SPEAKER_KAI_TIDE)
+        msgbox(format("Peace!"),,SPEAKER_KAI_TIDE)
 
         closemessage
 

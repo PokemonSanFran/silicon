@@ -9,13 +9,13 @@ script HodouCity_Proudpanda_Employee_Script{
 }
 
 script HodouCity_Proudpanda_HappyGreeting_Dialogue{
-    msgbox(gText_ProudPanda_Player,,SPEAKER_SHOPKEEPER,,EMOTE_HAPPY)
+    msgbox(format("{PLAYER}! What do you need?"),,SPEAKER_SHOPKEEPER,,EMOTE_HAPPY)
     waitmessage
     return
 }
 
 script HodouCity_Proudpanda_DefaultGreeting_Dialogue{
-    msgbox(gText_ProduPanda_WhatCan,,SPEAKER_SHOPKEEPER)
+    msgbox(format("Welcome to the Proud Panda, what can I get for you?"),,SPEAKER_SHOPKEEPER)
     waitmessage
     return
 }
@@ -26,12 +26,12 @@ script HodouCity_Proudpanda_Shop_Script{
 }
 
 script HodouCity_Proudpanda_DefaultThanks_Dialogue{
-    msgbox(gText_Proudpanda_Thanks,,SPEAKER_SHOPKEEPER)
+    msgbox(format("Thanks for coming in!"),,SPEAKER_SHOPKEEPER)
     closemessage
 }
 
 script HodouCity_Proudpanda_HappyThanks_Dialogue{
-    msgbox(gText_Proudpanda_GoodToSee,,SPEAKER_SHOPKEEPER)
+    msgbox(format("Good to see you {PLAYER}!"),,SPEAKER_SHOPKEEPER)
     closemessage
 }
 

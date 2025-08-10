@@ -35,7 +35,7 @@ script Quest_Allthatglittersmightbegold_Interact_Elior_Script{
 }
 
 script Quest_Allthatglittersmightbegold_StartQuest_Dialogue{
-    msgbox(gText_Allthatglittersmightbegold_HeyThere,MSGBOX_NPC,SPEAKER_ELIOR,,)
+    msgbox(format("Hey there, young one. You look like you're up for a challenge! My boat here and I, we go fishing out in the Bay every weekend. My newphew got me one of them fancy underside camera for my boat, and I was watching it and... well come look!"),MSGBOX_NPC,SPEAKER_ELIOR,,)
         closemessage
         goto(Quest_Allthatglittersmightbegold_BeforeVideo_Script)
 }
@@ -55,7 +55,7 @@ script Quest_Allthatglittersmightbegold_ShowVideo_Dialogue{
         setvar(VAR_TEMP_1,0)
         call(Quest_Allthatglittersmightbegold_StartSparkle_Script)
         delay(30)
-        msgbox(gText_Allthatglittersmightbegold_SeeThatThere,,SPEAKER_ELIOR,,EMOTE_SHOCK)
+        msgbox(format("See that there sparkle? You know there used to be a big old gold rush around these parts. I betcha that's there some gold!"),,SPEAKER_ELIOR,,EMOTE_SHOCK)
         closemessage
         call(Quest_Allthatglittersmightbegold_StartSparkle_Script)
         clearflag(FLAG_QUEST_ALLTHATGLITTERS_DEFEATED_POKEMON)
@@ -68,16 +68,16 @@ script Quest_Allthatglittersmightbegold_AfterVideo_Dialogue{
     setvar(VAR_QUEST_GLITTERS_GOLD_STATE,QUEST_ASSIGNED)
         clearflag(FLAG_HIDE_MAP_NAME_POPUP)
         applymovement(PLAYER,Common_Movement_FaceUp)
-        msgbox(gText_Allthatglittersmightbegold_ImTooOld,,SPEAKER_ELIOR,,)
+        msgbox(format("I'm too old to go on adventures anymore, but I'll cut you a deal. I'll lend you my diving equipment, and if you go down and get it for me, we'll split it... you keep 70%!"),,SPEAKER_ELIOR,,)
         startquest(QUEST_ALLTHATGLITTERSMIGHTBEGOLD)
-        msgbox(gText_Allthatglittersmightbegold_Holla,,SPEAKER_ELIOR,,)
+        msgbox(format("Holla at me when you're ready to head down."),,SPEAKER_ELIOR,,)
         release
         end
 }
 
 script Quest_Allthatglittersmightbegold_Active_Dialogue{
-    msgbox(gText_Allthatglittersmightbegold_YouHeadingDown,MSGBOX_YESNO,SPEAKER_ELIOR,,)
-    msgbox(gText_Allthatglittersmightbegold_OkayIPut,,SPEAKER_ELIOR,,)
+    msgbox(format("You heading down there?"),MSGBOX_YESNO,SPEAKER_ELIOR,,)
+    msgbox(format("Okay! I put a beacon down there for you, just talk to it when you're ready to come back, and I'll pull ya up."),,SPEAKER_ELIOR,,)
     closemessage
 
         warpsilent(MAP_ROUTE_D_UNDERWATER,42,19)
@@ -118,14 +118,14 @@ script Quest_Allthatglittersmightbegold_RemoveFloatzel_Script{
     fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(VAR_LAST_TALKED)
         fadescreenswapbuffers(FADE_FROM_BLACK)
-        msgbox(gText_Allthatglittersmightbegold_WaitWasThat,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+        msgbox(format("Wait, was that the sparkle? Let me go tell Elior..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
         questmenu(QUEST_MENU_SET_REWARD,QUEST_ALLTHATGLITTERSMIGHTBEGOLD)
         closemessage
         return
 }
 
 script Quest_Allthatglittersmightbegold_ReturnSurface_Script{
-    msgbox(gText_Allthatglittersmightbegold_DoYouWantToReturn,MSGBOX_YESNO)
+    msgbox(format("Do you want to return to Elior on RouteD?"),MSGBOX_YESNO)
         closemessage
         if (var(VAR_RESULT) == YES){
             setvar(VAR_QUEST_GLITTERS_GOLD_STATE,POST_DIVE)
@@ -143,19 +143,19 @@ script Quest_Allthatglittersmightbegold_CheckSuccess_Script{
 }
 
 script Quest_Allthatglittersmightbegold_EmptyHanded_Dialogue{
-    msgbox(gText_Allthatglittersmightbegold_CouldntFindIt,,SPEAKER_ELIOR,,EMOTE_SWEAT)
+    msgbox(format("Couldn't find it yet? No matter, I'm sure its down there somewhere."),,SPEAKER_ELIOR,,EMOTE_SWEAT)
     closemessage
     end
 }
 
 script Quest_Allthatglittersmightbegold_Reward_Dialogue{
-    msgbox(gText_Allthatglittersmightbegold_YouGotTheTreasure,,SPEAKER_ELIOR,,EMOTE_HAPPY)
+    msgbox(format("You got the treasure?!? Let me see! ...Oh. It was just a Pokémon? "),,SPEAKER_ELIOR,,EMOTE_HAPPY)
         if (var(VAR_QUEST_GLITTERS_GOLD_STATE) == CAUGHT_SHINY){
-            msgbox(gText_Allthatglittersmightbegold_AtLeastYou,,SPEAKER_ELIOR,,)
+            msgbox(format("At least you caught it, I hope its strong as it is sparkly!"),,SPEAKER_ELIOR,,)
         }else{
-            msgbox(gText_Allthatglittersmightbegold_AShameYou,,SPEAKER_ELIOR,,EMOTE_SAD)
+            msgbox(format("A shame you didn't catch it!"),,SPEAKER_ELIOR,,EMOTE_SAD)
         }
-    msgbox(gText_Allthatglittersmightbegold_IWasThinking,,SPEAKER_ELIOR,,)
+    msgbox(format("I was thinking while you were down there, I'm too old for that diving nonsense. Let me teach you something..."),,SPEAKER_ELIOR,,)
         call(Quest_Allthatglittersmightbegold_GiveReward_Script)
         setflag(FLAG_UNLOCKED_DIVE)
         completequest(QUEST_ALLTHATGLITTERSMIGHTBEGOLD)
@@ -165,15 +165,15 @@ script Quest_Allthatglittersmightbegold_Reward_Dialogue{
 
 script Quest_Allthatglittersmightbegold_GiveReward_Script{
     playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(gText_Allthatglittersmightbegold_GaveYou)
+        msgbox(format("Elior taught your Pokémon how to Dive!"))
         additem(ITEM_HM08)
         waitmessage
         waitfanfare
-        msgbox(gText_Allthatglittersmightbegold_OkayIfYou,,SPEAKER_ELIOR,,)
+        msgbox(format("Okay! If you have a Pokémon with you that can learn Dive, you can explore the ocean floor. Maybe you'll find treasure after all!"),,SPEAKER_ELIOR,,)
 }
 
 script Quest_Allthatglittersmightbegold_Completed_Dialogue{
-    msgbox(gText_Allthatglittersmightbegold_IfYouFind,MSGBOX_NPC,SPEAKER_ELIOR,,EMOTE_HAPPY)
+    msgbox(format("If you find something truly amazing down there, let me know about it! I'll trade you more gear for a fun story."),MSGBOX_NPC,SPEAKER_ELIOR,,EMOTE_HAPPY)
 }
 
 text gText_Allthatglittersmightbegold_HeyThere{

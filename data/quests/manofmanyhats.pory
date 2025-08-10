@@ -32,7 +32,7 @@ script Quest_Manofmanyhats_Liidia_Fisherman_Visibility_Script{
 
 script Quest_Manofmanyhats_Liidia_Waiter_Dialogue{
     addvar(VAR_QUEST_MANOFMANYHATS,1)
-    msgbox(gText_Manofmanyhats_ShitTheyDidntTeachMe,,SPEAKER_LIIDIA,,EMOTE_SWEAT)
+    msgbox(format("They didn't teach me how to work the boba machine..."),,SPEAKER_LIIDIA,,EMOTE_SWEAT)
     closemessage
     release
     end
@@ -40,7 +40,7 @@ script Quest_Manofmanyhats_Liidia_Waiter_Dialogue{
 
 script Quest_Manofmanyhats_Liidia_StationAttendant_Dialogue{
     addvar(VAR_QUEST_MANOFMANYHATS,1)
-    msgbox(gText_Manofmanyhats_TheyDidWhatOnTheTrackway,,SPEAKER_LIIDIA,,EMOTE_SWEAT)
+    msgbox(format("They did WHAT on the trackway? I don't know if I can do this..."),,SPEAKER_LIIDIA,,EMOTE_SWEAT)
     closemessage
     release
     end
@@ -56,7 +56,7 @@ script Quest_Manofmanyhats_Liidia_Interact_Script{
 
 script Quest_Manofmanyhats_Liidia_Fisherman_Dialogue{
     addvar(VAR_QUEST_MANOFMANYHATS,1)
-    msgbox(gText_Manofmanyhats_NotASingleBiteThis,,SPEAKER_LIIDIA,,EMOTE_SWEAT)
+    msgbox(format("Not a single bite... this is not going to pay the rent!"),,SPEAKER_LIIDIA,,EMOTE_SWEAT)
     closemessage
     goto(Quest_Manofmanyhats_StartQuest_Dialogue)
 }
@@ -66,37 +66,37 @@ script Quest_Manofmanyhats_StartQuest_Dialogue{
     applymovement(LIIDIA,Quest_Manofmanyhats_LiidiaExclaimandTurn_Movement)
     waitse
     lock
-    msgbox(gText_Manofmanyhats_OhYourePlayer,MSGBOX_NPC,SPEAKER_LIIDIA)
-    msgbox(gText_Manofmanyhats_ThingsHavent,,SPEAKER_LIIDIA,EMOTE_SWEAT)
+    msgbox(format("Oh... you're {PLAYER}. Thanks again for your... help."),MSGBOX_NPC,SPEAKER_LIIDIA)
+    msgbox(format("Things haven't really gotten better since I last saw you."),,SPEAKER_LIIDIA,EMOTE_SWEAT)
     closemessage
     applymovement(LIIDIA,Common_Movement_FaceLeft)
     waitmovement(LIIDIA)
-    msgbox(gText_Manofmanyhats_IHaveToGet,,SPEAKER_LIIDIA)
-    msgbox(gText_Manofmanyhats_YeahIveSeen,,SPEAKER_ALICIA,,EMOTE_SWEAT)
+    msgbox(format("I had to get a bunch of jobs to make up for that one. I've got bills to pay!"),,SPEAKER_LIIDIA)
+    msgbox(format("Yeah, I saw you working near the trolleys, and at that restaurant too."),,SPEAKER_ALICIA,,EMOTE_SWEAT)
     applymovement(LIIDIA,Common_Movement_FacePlayer)
     waitmovement(LIIDIA)
-    msgbox(gText_Manofmanyhats_YeahTheyreNot,,SPEAKER_LIIDIA)
-    msgbox(gText_Manofmanyhats_AndTheWorstPart,,SPEAKER_LIIDIA,,EMOTE_ANGRY)
-    msgbox(gText_Manofmanyhats_CouldYouGet,,SPEAKER_LIIDIA)
+    msgbox(format("Yeah, they're not going well. And neither is this!"),,SPEAKER_LIIDIA)
+    msgbox(format("And the worst part is, I left my headphones at the Ranger station in EspuleeOutskirts! I'm working so many jobs I don't have time to go back and get them..."),,SPEAKER_LIIDIA,,EMOTE_ANGRY)
+    msgbox(format("Sorry to ask another favor... could you get them for me?"),,SPEAKER_LIIDIA)
     setvar(VAR_QUEST_MANOFMANYHATS,SEEN_LIIDIA_3RD)
     startquest(QUEST_MANOFMANYHATS)
     call(Quest_Manofmanyhats_Active_Dialogue)
 }
 
 script Quest_Manofmanyhats_Active_Dialogue{
-   msgbox(gText_Manofmanyhats_MyRangerStation,MSGBOX_NPC,SPEAKER_LIIDIA)
+   msgbox(format("The Ranger station is in EspuleeOutskirts. The code for the door... it was something like 3444, I think."),MSGBOX_NPC,SPEAKER_LIIDIA)
 }
 
 script Quest_Manofmanyhats_Reward_Dialogue{
-    msgbox(gText_Manofmanyhats_OhYouGot,MSGBOX_NPC,SPEAKER_LIIDIA,,EMOTE_HAPPY)
+    msgbox(format("Oh! You got my headphones, thank you so much!"),MSGBOX_NPC,SPEAKER_LIIDIA,,EMOTE_HAPPY)
 
         if (!flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_WIDE_LENS) && !flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_ROCKY_HELMET)){
-            msgbox(gText_Manofmanyhats_OhAndIfYouSee,,SPEAKER_LIIDIA)
-            msgbox(gText_Manofmanyhats_ThatStuff,,SPEAKER_LIIDIA)
+            msgbox(format("Oh, and if you saw anything else in there, go ahead and grab it. "),,SPEAKER_LIIDIA)
+            msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_LIIDIA)
         }else{
-            msgbox(gText_Manofmanyhats_ThereWasOther,,SPEAKER_ALICIA)
-            msgbox(gText_Manofmanyhats_NahALotOfIt,,SPEAKER_LIIDIA)
-            msgbox(gText_Manofmanyhats_ThatStuff,,SPEAKER_LIIDIA)
+            msgbox(format("There was other stuff there, do you want it?"),,SPEAKER_ALICIA)
+            msgbox(format("Nah."),,SPEAKER_LIIDIA)
+            msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_LIIDIA)
         }
     applymovement(LIIDIA,Common_Movement_FaceLeft)
     completequest(QUEST_MANOFMANYHATS)
@@ -107,11 +107,11 @@ script Quest_Manofmanyhats_Reward_Dialogue{
 script Quest_Manofmanyhats_Complete_Dialogue{
     random(3)
     switch (var(VAR_RESULT)){
-        case 0: msgbox(gText_Manofmanyhats_LyricsA,,SPEAKER_LIIDIA,TAIL_SHOUT)
-        case 1: msgbox(gText_Manofmanyhats_LyricsB,,SPEAKER_LIIDIA,TAIL_SHOUT)
-        case 2: msgbox(gText_Manofmanyhats_LyricsC,,SPEAKER_LIIDIA,TAIL_SHOUT)
+        case 0: msgbox(format("At the car wash, woah\pTalking about the car wash, yeah\pCome on y'all and sing it for me..."),,SPEAKER_LIIDIA,TAIL_SHOUT)
+        case 1: msgbox(format("You are my fire...\pThe one desire..."),,SPEAKER_LIIDIA,TAIL_SHOUT)
+        case 2: msgbox(format("Can't fight the moonlight\pDeep in the dark, you'll surrender your heart..."),,SPEAKER_LIIDIA,TAIL_SHOUT)
     }
-    msgbox(gText_Manofmanyhats_ThoseHeadphonesMustBe,,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_SWEAT)
+    msgbox(format("Those headphones must be noise cancelling..."),,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_SWEAT)
     closemessage
     release
     end
@@ -119,7 +119,7 @@ script Quest_Manofmanyhats_Complete_Dialogue{
 
 script Quest_Manofmanyhats_EnterDoorCombination_Dialogue{
     setvar(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR)
-        msgbox(gText_Manofmanyhats_OkayTheCombo,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Okay, Liidia said the combination was 3444..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage
         playse(SE_DING_DONG)
         waitse

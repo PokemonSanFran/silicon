@@ -56,22 +56,22 @@ script Quest_Hang20_StartQuest_Dialogue
 
     call(Quest_Hang20_CheckPreCompletion)
 
-    msgbox(gText_Hang20_HeyYouNewHere)
+    msgbox(format("Yoooo {PLAYER}, right? You're not Resido born, right?"))
 
-    msgbox(gText_Hang20_YeahOrre)
+    msgbox(format("Yeah, I'm from Orre."))
 
-    msgbox(gText_Hang20_OhDamnThatsLandLocked)
+    msgbox(format("Oh damn, that's land locked, right?"))
 
-    msgbox(gText_Hang20_WereTouchingTheSea)
+    msgbox(format("We're touching the sea, but not anything you can surf in, unfortunately."))
 
-    msgbox(gText_Hang20_NoWaves)
-    msgbox(gText_Hang20_DoYouWannaLearn)
+    msgbox(format("No waves? Damn that sucks!"))
+    msgbox(format("You tryna learn how to ride the waves?"))
 
-    msgbox(gText_Hang20_OhIveNever)
+    msgbox(format("Oh, I've never really given it a shot. Is it hard?"))
 
-    msgbox(gText_Hang20_ItsToughSoWeGotta)
-    msgbox(gText_Hang20_WaitBeating)
-    msgbox(gText_Hang20_WellTeachYouToSurfIf)
+    msgbox(format("It's tough, so we gotta make sure you're ready."))
+    msgbox(format("Wait, beating you doesn't make me tough enough?"))
+    msgbox(format("I'll teach you to Surf if you can defeat 30 Pokémon here in a row. No healing items, no accessing the PC, no leaving CresaltaVista."))
 
     closemessage
     startquest(QUEST_HANG20)
@@ -83,29 +83,29 @@ script Quest_Hang20_Active_Dialogue
 {
 	if (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 28)
 	{
-		msgbox(gText_Hang20_AlmostThere,MSGBOX_NPC)
+		msgbox(format("Keep that energy!"),MSGBOX_NPC)
 	}
 	elif (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 20)
 	{
-		msgbox(gText_Hang20_MaybeYoureTough,MSGBOX_NPC)
+		msgbox(format("Maybe you're tough after all!"),MSGBOX_NPC)
 	}
 	elif (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 10)
 	{
-		msgbox(gText_Hang20_SawYouKickingAss,MSGBOX_NPC)
+		msgbox(format("I saw you kicking ass out there!"),MSGBOX_NPC)
 	}
 	else
 	{
-		msgbox(gText_Hang20_WellTeachYouToSurfIf,MSGBOX_NPC)
+		msgbox(format("I'll teach you to Surf if you can defeat 30 Pokémon here in a row. No healing items, no accessing the PC, no leaving CresaltaVista."),MSGBOX_NPC)
 	}
 	end
 }
 
 script Quest_Hang20_Reward_Dialogue
 {
-    msgbox(gText_Hang20_DamnYouAreTough)
+    msgbox(format("Okay, beating me was no fluke, you're the real deal. Take this!"))
     giveitem(ITEM_HM03,1)
 
-    msgbox(gText_Hang20_OkaySoHeresHow)
+    msgbox(format("If you have a Pokémon in your party that can learn Surf, you can just walk onto the waves and handle it, no problem. Watch!"))
     closemessage
     applymovement(KAUNA,Quest_Hang20_SurfAway_Movement)
     completequest(QUEST_HANG20)
@@ -117,12 +117,12 @@ script Quest_Hang20_Reward_Dialogue
 
 script Quest_Hang20_Secret_Dialogue
 {
-    msgbox(gText_Hang20_OhShitYoure)
-    msgbox(gText_Hang20_YoureSuperTough)
-    msgbox(gText_Hang20_ImFromOrre)
-    msgbox(gText_Hang20_WordItsMad)
+    msgbox(format("Hey, you're {PLAYER}, right? Killer waves, right? Not as good as back home, but still sick."))
+    msgbox(format("Here to catch some waves?"))
+    msgbox(format("I'm from Orre! We're landlocked, so I never learned to Surf."))
+    msgbox(format("Word? It's mad easy to learn though, hold on..."))
     giveitem(ITEM_HM03,1)
-    msgbox(gText_Hang20_JustWalkUp)
+    msgbox(format("If you've got a Pokémon that can learn Surf, you can just walk onto the waves now, no problem! Check it!"))
     closemessage
     applymovement(KAUNA,Quest_Hang20_SurfAway_Movement)
     waitmovement(KAUNA)

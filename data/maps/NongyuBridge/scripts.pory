@@ -13,7 +13,7 @@ mapscripts NongyuBridge_MapScripts{
 
 
 script NongyuBridge_ConstructionWorker_Dialogue{
-    msgbox(NongyuBridge_TheBridgeIs,MSGBOX_NPC)
+    msgbox(format("The bridge is under construction."),MSGBOX_NPC)
     end
 }
 

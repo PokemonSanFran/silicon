@@ -9,7 +9,7 @@ script PerlaciaCity_Sanitation_Interact_Clerk_Script{
 }
 
 script PerlaciaCity_Sanitation_Clerk_Dialogue{
-   msgbox(gText_PerlaciaCity_Sanitation_CouldTheInternet,,MSGBOX_NPC,SPEAKER_WALDRON) 
+   msgbox(format("The internet here is so slow! I've been told the problem is a router, but good luck getting one from IT!"),,MSGBOX_NPC,SPEAKER_WALDRON) 
     end
 }
 

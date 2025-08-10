@@ -6,7 +6,7 @@ const ARMANDO = 2
 //Quest_Armandostraining_
 
 script Quest_Armandostraining_StartQuest_Script{
-        msgbox(gText_Armandostraining_OkayLetsACrack,,SPEAKER_CHARLOTTE)
+        msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
         closemessage
         applymovement(CHARLOTTE,Quest_Armandostraining_WalkToRobots)
         fadescreen(FADE_TO_BLACK)
@@ -18,7 +18,7 @@ script Quest_Armandostraining_StartQuest_Script{
 
 script Quest_Armandostraining_Interact_Charlotte_Script{
     lock
-    msgbox(gText_Armandostraining_OkayWhatIfISendOut,,SPEAKER_CHARLOTTE,TAIL_WHISPER)
+    msgbox(format("Okay, what if I send out this Pokémon first..."),,SPEAKER_CHARLOTTE,TAIL_WHISPER)
     release
     end
 }
@@ -43,7 +43,7 @@ script Quest_Armandostraining_Battle_Setup_Script{
 script Quest_Armandostraining_Interact_Robot_Script{
     lock
     faceplayer
-    msgbox(gText_Armandostraining_RobotQuestion)
+    msgbox(format("Hello {PLAYER}. Which scenario would you like to run?"))
 
     dynmultichoice(1,1,TRUE,4,0,NULL,
         "Scenario 1",
@@ -68,7 +68,7 @@ script Quest_Armandostraining_CheckSubquest_Script{
         return
     }
 
-    msgbox(gText_Armandostraining_Youvealready,MSGBOX_YESNO,SPEAKER_OLIVER)
+    msgbox(format("You've already completed this puzzle. Are you going to try again?"),MSGBOX_YESNO,SPEAKER_OLIVER)
 
     if (var(VAR_RESULT) == NO){
         goto(Quest_Armandostraining_Interact_Robot_Script)
@@ -83,7 +83,7 @@ script Quest_Armandostraining_Battle_Robot1_Script{
     setvar(VAR_TEMP_0,1)
     call(Quest_Armandostraining_Battle_Setup_Script)
     trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_1,gText_Armandostraining_BeepBoop)
-    msgbox(gText_Armandostraining_ExcellentWorkPlayer)
+    msgbox(format("Excellent work!"))
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ARMANDOSTRAINING,SUB_QUEST_1)
     call(Quest_Quest_Armandostraining_CheckReward_Script)
     release
@@ -97,7 +97,7 @@ script Quest_Armandostraining_Battle_Robot2_Script{
     setvar(VAR_TEMP_0,2)
     call(Quest_Armandostraining_Battle_Setup_Script)
     trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_2,gText_Armandostraining_BeepBoop)
-    msgbox(gText_Armandostraining_ExcellentWorkPlayer)
+    msgbox(format("Excellent work!"))
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ARMANDOSTRAINING,SUB_QUEST_2)
     call(Quest_Quest_Armandostraining_CheckReward_Script)
     release
@@ -111,7 +111,7 @@ script Quest_Armandostraining_Battle_Robot3_Script{
     setvar(VAR_TEMP_0,3)
     call(Quest_Armandostraining_Battle_Setup_Script)
     trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_3,gText_Armandostraining_BeepBoop)
-    msgbox(gText_Armandostraining_ExcellentWorkPlayer)
+    msgbox(format("Excellent work!"))
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ARMANDOSTRAINING,SUB_QUEST_3)
     call(Quest_Quest_Armandostraining_CheckReward_Script)
     release
@@ -125,7 +125,7 @@ script Quest_Armandostraining_Battle_Robot4_Script{
     setvar(VAR_TEMP_0,4)
     call(Quest_Armandostraining_Battle_Setup_Script)
     trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_4,gText_Armandostraining_BeepBoop)
-    msgbox(gText_Armandostraining_ExcellentWorkPlayer)
+    msgbox(format("Excellent work!"))
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ARMANDOSTRAINING,SUB_QUEST_4)
     call(Quest_Quest_Armandostraining_CheckReward_Script)
     release
@@ -161,7 +161,7 @@ script Quest_Quest_Armandostraining_CheckReward_Script{
 
 script Quest_Armandostraining_Interact_CharlotteRobot_Script{
     lock
-    msgbox(gText_Armandostraining_ThisRobotIsFor,MSGBOX_AUTOCLOSE)
+    msgbox(format("This robot is for Charlotte."),MSGBOX_AUTOCLOSE)
     release
     end
 }
@@ -182,12 +182,12 @@ script Quest_ArmandoTraining_CompleteQuest_Script{
     setvar(VAR_LEAVERRA_FOREST_STATE,FINISHED_ARMANDO_PUZZLES)
     applymovement(ARMANDO,Common_Movement_FaceDown)
     waitmovement(ARMANDO)
-    msgbox(gText_Armandostraining_WellItsBeenQuite_Script,,SPEAKER_ARMANDO)
-    msgbox(gText_Armandostraining_AWeek,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
-    msgbox(gText_Armandostraining_ItFeelsLike,,SPEAKER_ALICIA,,EMOTE_SHOCK)
-    msgbox(gText_Armandostraining_YeahTheForest,,SPEAKER_ARMANDO)
+    msgbox(format("Well, it's been quite a week. Impressed you were both able to clear those puzzles so quickly."),,SPEAKER_ARMANDO)
+    msgbox(format("A week?!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
+    msgbox(format("It feels like maybe a day at most!"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(format("Yeah, the forest has that effect on people..."),,SPEAKER_ARMANDO)
     completequest(QUEST_ARMANDOSTRAINING)
-    msgbox(gText_Armandostraining_EitherWay,,SPEAKER_ARMANDO)
+    msgbox(format("Either way, good job. Go ahead and rest -"),,SPEAKER_ARMANDO)
     closemessage
     end
 }

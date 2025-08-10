@@ -39,7 +39,7 @@ script Arantraz_MessHall_Tala_Event_Script {
     lock
 
     switch (var(VAR_STORYLINE_STATE)){
-        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_TALA)
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_TALA)
         case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Breaktheinternet_EliteFour_Dialogue)
     }
     closemessage
@@ -53,7 +53,7 @@ script Arantraz_MessHall_Magnus_Event_Script {
     lock
 
     switch (var(VAR_STORYLINE_STATE)){
-        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_MAGNUS)
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_MAGNUS)
         case STORY_RAVE_AND_SPEECH_COMPLETE: msgbox("I don't have a takedown quest for you.",MSGBOX_NPC,SPEAKER_MAGNUS)
     }
 
@@ -68,7 +68,7 @@ script Arantraz_MessHall_Armando_Event_Script {
     lock
 
     switch (var(VAR_STORYLINE_STATE)){
-        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_ARMANDO)
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_ARMANDO)
         case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Taxicabturnaround_EliteFour_Dialogue)
     }
 
@@ -82,7 +82,7 @@ script Arantraz_MessHall_Ellen_Event_Script {
     lock
 
     switch (var(VAR_STORYLINE_STATE)){
-        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(gText_SpeechSpeechSpeech_GoWarehouseRave,MSGBOX_NPC,SPEAKER_ELLEN)
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_ELLEN)
         case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Bodegaburnout_EliteFour_Dialogue)
     }
 

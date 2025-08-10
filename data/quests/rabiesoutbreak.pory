@@ -17,16 +17,16 @@ script RabiesOutbreak_Officer_Event_Script{
 
     }
 
-    msgbox(gText_RabiesOutbreak_ThisOutbreak, MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("This outbreak is like nothing I've seen before!"), MSGBOX_NPC,SPEAKER_DEFAULT)
     end
 }
 
 script RabiesOutbreak_Reward_Dialogue{
-    msgbox(gText_RabiesOutbreak_INoticed,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("I noticed you were engaging a lot of Glameow. What are you up to?"),MSGBOX_NPC,SPEAKER_DEFAULT)
 
-    msgbox(gText_RabiesOutbreak_ImHelping,MSGBOX_NPC,SPEAKER_ALICIA)
+    msgbox(format("I'm helping with the rabies outbreak! I saw online you were rewarding Trainers that can help bring the numbers down."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-    msgbox(gText_RabiesOutbreak_Rabies,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Rabies? I don't know where you saw that, but there's no rabies outbreak. Oddly enough, the Glameow here all seem to be spreading Pokérus at alarmingly high rates. But you came all the way out here to help... I might have something for you. Hold on."),MSGBOX_NPC,SPEAKER_DEFAULT)
     closemessage
 
     call(RabiesOutbreak_GiveReward_Script)
@@ -39,7 +39,7 @@ script RabiesOutbreak_GiveReward_Script{
 }
 
 script RabiesOutbreak_CompleteQuest_Dialogue{
-    msgbox(gText_RabiesOutbreak_CrazyWhatYou,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Crazy what you can read online... rabies? Can Pokémon even get rabies?"),MSGBOX_NPC,SPEAKER_DEFAULT)
     end
 }
 

@@ -63,9 +63,9 @@ script Quest_CulturalPurity_Interact_Event_Script{
 }
 
 script Quest_CulturalPurity_QuestStart_Dialogue{
-    msgbox(gText_CulturalPurity_Player,,SPEAKER_SHINZO)
-    msgbox(gText_CulturalPurity_IReadOnline,,SPEAKER_SHINZO)
-    msgbox(gText_CulturalPurity_TheSaidToStart,,SPEAKER_SHINZO)
+    msgbox(format("{PLAYER} Hello!"),,SPEAKER_SHINZO)
+    msgbox(format("i read online about a group of people in hodoucity who have stayed tru"),,SPEAKER_SHINZO)
+    msgbox(format("they said start at the center... what does that mean?"),,SPEAKER_SHINZO)
     applymovement(SHINZO,Quest_CulturalPurity_LeaderWalkAway_Movement)
     waitmovement(SHINZO)
     removeobject(SHINZO)
@@ -112,13 +112,13 @@ script Quest_CulturalPurity_CheckProgress_Script{
 script Quest_CulturalPurity_BackroomA_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 1){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA)
 
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_1,1)
     }
     release
@@ -128,14 +128,14 @@ script Quest_CulturalPurity_BackroomA_Interact_Script{
 script Quest_CulturalPurity_BackroomB_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 2){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA)
 
 
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_2,1)
     }
     release
@@ -145,14 +145,14 @@ script Quest_CulturalPurity_BackroomB_Interact_Script{
 script Quest_CulturalPurity_BackroomC_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 3){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA,,SPEAKER_ALICIA)
 
 
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_4,1)
     }
     release
@@ -162,14 +162,14 @@ script Quest_CulturalPurity_BackroomC_Interact_Script{
 script Quest_CulturalPurity_BackroomD_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 4){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA,,SPEAKER_ALICIA)
 
 
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_6,1)
     }
     release
@@ -204,7 +204,7 @@ script Quest_CulturalPurity_ObjectSetUp_Script{
 }
 
 script Quest_CulturalPurity_Racist_FirstGuard_Dialogue{
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 5){
@@ -227,24 +227,24 @@ script Quest_CulturalPurity_MakeBackupVisible_Script{
 }
 
 script Quest_CulturalPurity_ShinzoJoin_Dialogue{
-        msgbox(gText_CulturalPurity_IFiguredItOut,,SPEAKER_SHINZO)
+        msgbox(format("i figured it out!"),,SPEAKER_SHINZO)
 
 
         call(Quest_CulturalPurity_MakeShinzoVisible_Script)
         applymovement(SHINZO,Quest_CulturalPurity_ShinzoWalkToGuard_Movement)
         waitmovement(SHINZO)
 
-        msgbox(gText_CulturalPurity_IHaveTheCodeButWeNeed,,SPEAKER_SHINZO)
+        msgbox(format("i have the code word, but need all the tiles"),,SPEAKER_SHINZO)
 
 
-        msgbox(gText_CulturalPurity_YepGotEm,,SPEAKER_ALICIA)
+        msgbox(format("yep got em here"),,SPEAKER_ALICIA)
 
 
-        msgbox(gText_CulturalPurity_LetMeSee,,SPEAKER_DEFAULT)
+        msgbox(format("let me see your tiles."),,SPEAKER_DEFAULT)
 
         call(Quest_CulturalPurity_LoseTiles_Script)
 
-        msgbox(gText_CulturalPurity_HeyCleetus,,SPEAKER_DEFAULT)
+        msgbox(format("hey cleetus!"),,SPEAKER_DEFAULT)
         call(Quest_CulturalPurity_BackupWalkOut_Script)
 
         questmenu(QUEST_MENU_SET_REWARD,QUEST_CULTURALPURITY)
@@ -272,14 +272,14 @@ script Quest_CulturalPurity_BackupWalkOut_Script{
 }
 
 script Quest_CulturalPurity_Battle_Script{
-        msgbox(gText_CulturalPurity_WellThenItsTimeForYourInitation,,SPEAKER_DEFAULT)
+        msgbox(format("Well then, its time for your initation!"),,SPEAKER_DEFAULT)
         //PSF TODO replace Brawly and Wally
         multi_fixed_2_vs_2(TRAINER_CULTURALPURITY_A,gText_CulturalPurity_OneOfUs,TRAINER_CULTURALPURITY_B,gText_CulturalPurity_OneOfUs,PARTNER_STEVEN)
         goto(Quest_CulturalPurity_PostBattle_Script)
 }
 
 script Quest_CulturalPurity_PostBattle_Script{
-    msgbox(gText_CulturalPurity_WowWelcomeInside,,SPEAKER_DEFAULT)
+    msgbox(format("wow welcome inside"),,SPEAKER_DEFAULT)
     closemessage
     applymovement(GUARD,Quest_CulturalPurity_StepAside_Movement)
     waitmovement(GUARD)
@@ -304,11 +304,11 @@ script Quest_CulturalPurity_InsideClubhouse_Dialogue{
 
     applymovement(SHINZO_2,Quest_CulturalPurity_WalkToPlayer_Movement)
     waitmovement(SHINZO_2)
-    msgbox(gText_CulturalPurity_NeverMind,,SPEAKER_SHINZO)
+    msgbox(format("never mind. they're just nationalists."),,SPEAKER_SHINZO)
 
     closemessage
     giveitem(ITEM_ORAN_BERRY,1)
-    msgbox(gText_CulturalPurity_IHaveSomeThiking,,SPEAKER_SHINZO)
+    msgbox(format("i have some thinking to do."),,SPEAKER_SHINZO)
 
     closemessage
     applymovement(SHINZO_2,Quest_CulturalPurity_LeaveClubhouse_Movement)

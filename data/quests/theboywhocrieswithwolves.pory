@@ -80,30 +80,30 @@ script Quest_Theboywhocriedwithwolves_Interact_Ambrogio_Script{
 
 script Quest_Theboywhocriedwithwolves_StartQuest_Dialogue{
     applymovement(AMBROGIO,Quest_Theboywhocriedwithwolves_LookAround_Movement)
-    msgbox(gText_Theboywhocriedwithwolves_Manwhatami,,SPEAKER_AMBROGIO,,EMOTE_SAD)
+    msgbox(format("Man, what am I going to do now?"),,SPEAKER_AMBROGIO,,EMOTE_SAD)
     waitmovement(AMBROGIO)
-    msgbox(gText_Theboywhocriedwithwolves_Heythere,MSGBOX_NPC,SPEAKER_AMBROGIO)
+    msgbox(format("Hey there."),MSGBOX_NPC,SPEAKER_AMBROGIO)
     lock
-    msgbox(gText_Theboywhocriedwithwolves_Ivehadanawful,,SPEAKER_AMBROGIO)
-    msgbox(gText_Theboywhocriedwithwolves_SorryYouDont,,SPEAKER_AMBROGIO,,EMOTE_SWEAT)
-    msgbox(gText_Theboywhocriedwithwolves_HeyThanksForHearing,,SPEAKER_AMBROGIO)
+    msgbox(format("I have had an awful day...Some kids stole my bag earlier and threw my stuff all over that golf course over there. It's a members only course, and there's no reasoning with them... so my things are trapped in there, and I'm stuck out here."),,SPEAKER_AMBROGIO)
+    msgbox(format("Sorry, you don't want to hear about my problems."),,SPEAKER_AMBROGIO,,EMOTE_SWEAT)
+    msgbox(format("Thanks for hearing me out. It means a lot."),,SPEAKER_AMBROGIO)
     startquest(QUEST_THEBOYWHOCRIESWITHWOLVES)
     lock
     call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
     goto_if_quest_reward(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Secret_Dialogue)
 
-    msgbox(gText_Theboywhocriedwithwolves_ItsCoolIm,,SPEAKER_ALICIA)
+    msgbox(format("Its fine! I'm sorry those kids were so awful."),,SPEAKER_ALICIA)
     closemessage
     release
     end
 }
 
 script Quest_Theboywhocriedwithwolves_Active_Dialogue{
-    msgbox(gText_Theboywhocriedwithwolves_MyLifeWasInThere,MSGBOX_NPC,SPEAKER_AMBROGIO,TAIL_WHISPER)
+    msgbox(format("My life was in that bag. My clothes, my blankets, my medications. I don't know how I'm going to survive without them."),MSGBOX_NPC,SPEAKER_AMBROGIO,TAIL_WHISPER)
 }
 
 script Quest_Theboywhocriedwithwolves_Secret_Dialogue{
-    msgbox(gText_Theboywhocriedwithwolves_IActuallyHave,,SPEAKER_ALICIA)
+    msgbox(format("Actually, I was in there earlier. Are these your things?"),,SPEAKER_ALICIA)
     goto(Quest_Theboywhocriedwithwolves_Reward_Dialogue)
 }
 
@@ -121,18 +121,18 @@ script Quest_Theboywhocriedwithwolves_TakeItems_Script{
 }
 
 script Quest_Theboywhocriedwithwolves_Reward_Dialogue{
-    msgbox(gText_Theboywhocriedwithwolves_MyStuff,MSGBOX_NPC,SPEAKER_AMBROGIO)
+    msgbox(format("My stuff! Thank you!"),MSGBOX_NPC,SPEAKER_AMBROGIO)
     lock
-    msgbox(gText_Theboywhocriedwithwolves_PlayerGave)
+    msgbox(format("{PLAYER} gave Ambrogio back their belongings."))
     call(Quest_Theboywhocriedwithwolves_TakeItems_Script)
     closemessage
-    msgbox(gText_Theboywhocriedwithwolves_IDontHave,,SPEAKER_AMBROGIO)
-    msgbox(gText_Theboywhocriedwithwolves_ItsFine,,SPEAKER_ALICIA)
-    msgbox(gText_Theboywhocriedwithwolves_YouKnowIWas,,SPEAKER_AMBROGIO)
+    msgbox(format("I don't have any way to repay you. Thank you for your kindness."),,SPEAKER_AMBROGIO)
+    msgbox(format("Its fine! I'm glad you got your stuff."),,SPEAKER_ALICIA)
+    msgbox(format("I'm from Kanto, where I was a doctor. I have a pretty amazing gift, see?"),,SPEAKER_AMBROGIO)
     closemessage
     call(Common_EventScript_OutOfCenterPartyHeal)
-    msgbox(gText_Theboywhocriedwithwolves_ICanHeal,,SPEAKER_AMBROGIO)
-    msgbox(gText_Theboywhocriedwithwolves_Illtrytohelp,,SPEAKER_AMBROGIO)
+    msgbox(format("I can heal Pokemon by just touching them. I thought I'd be able to continue my practice here in Residobut... my peers here didn't appreciate my gift as much. Their jealousy meant they wouldn't associated with me at all, and without reccomendations, I can't get jobs... and now I'm here."),,SPEAKER_AMBROGIO)
+    msgbox(format("My point was, I'm a healer! If I see you around the region, I'll try to help you."),,SPEAKER_AMBROGIO)
     closemessage
     applymovement(AMBROGIO,Quest_Theboywhocriedwithwolves_Ambrogio_LeaveScene_Movement)
     fadescreen(FADE_TO_BLACK)

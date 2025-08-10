@@ -40,7 +40,7 @@ script TirabudinPlace_Gym_Lobby_Attendant_Singles{
     if(var(VAR_RESULT)){
         goto(BattleTower_EventScript_Attendant)
     }
-    msgbox(gText_TirabudinPlace_Gym_Lobby_ThisWayTo,MSGBOX_NPC,SPEAKER_GYM_ATTENDANT)
+    msgbox(format("If you're here for the Gym, its right through these doors."),MSGBOX_NPC,SPEAKER_GYM_ATTENDANT)
     end
 }
 

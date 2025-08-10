@@ -48,7 +48,7 @@ script Vsdeoxys_Script_InteractVsdeoguy
     }
     else
     {
-        msgbox(Vsdeoxys_Text_ThatOrangePokemon,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+        msgbox(format("That orange Pokémon is hiding in one of these rocks! Capture it."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     }
     releaseall
     end
@@ -57,25 +57,25 @@ script Vsdeoxys_Script_InteractVsdeoguy
 script Vsdeoxys_Dialogue_FirstInteractVsdeoguy
 {
     setvar(VAR_QUEST_VSDEOXYS, VSDEOGUY_INTERACTED)
-    msgbox(Vsdeoxys_Text_DidYouSend,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(Vsdeoxys_Text_YesIt,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-msgbox(Vsdeoxys_Text_OkaySlow,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_IWasSmashing,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(Vsdeoxys_Text_AndThenThe,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_MyTrumbeakWas,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(Vsdeoxys_Text_WaitSo,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(Vsdeoxys_Text_ItWasnt,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_WhatIs,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_ItsA,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(Vsdeoxys_Text_AndYouThink,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(Vsdeoxys_Text_IKnowIt,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(Vsdeoxys_Text_WeReGonnaBring,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(Vsdeoxys_Text_WhatHaveI,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_SureWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SWEAT,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_MeteorsTheyre,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(format("Did you send a zap -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Yes! It was here! We have to capture it. Can you capture it? You look like you can capture it."),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+msgbox(format("Okay, slow down. What happened?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
+    msgbox(format("I was smashing these meteors, right?"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(format("And then the next thing I remember, an orange thing flew by me super fast, and blasted me with some kind of… Ancient Power! "),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(format("My Trumbeak was KO’d in one hit! \nThen it zoomed away!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(format("Wait, so why did your zap say -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("It wasn't just any Pokémon! Meteors are from space? An orange super strong Pokémon? It was Deoxys!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(format("What is..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
+    msgbox(format("It's a Pokémon the government doesn't want you to know about, but we know the Hoenn Champion captured one back in 1997. They keep it locked up at a research facility because it's too powerful to let the public know about it. It must've escaped!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(format("And you think it's here?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("I know it's here! I saw it! But I'm not tough enough.\nSo you’re gonna capture it!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(format("We’re gonna bring it to the Halbera Research Facility. Not Chasilla. Those guys are in the pocket of big government.\nI - we’re gonna be so famous!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(format("What have I gotten myself into?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
+    msgbox(format("Sure. What were you using to smash these rocks?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SWEAT,PHONE_OFF)
+    msgbox(format("Meteors! They’re from space. You can use this."),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
     giveitem(ITEM_TM192)
-    msgbox(Vsdeoxys_Text_IfYouHave,MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(Vsdeoxys_Text_CaptureTheDeoxys,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    msgbox(format("If you have a Pokémon in your party that can learn that move, you’ll be able to smash meteors.\nAnd rocks."),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+    msgbox(format("Capture the Deoxys! Once you do, we’ll expose the lies!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
 }
 
 script Vsdeoxys_Script_CheckIfCanRockSmash
@@ -117,7 +117,7 @@ script Vsdeoxys_Dialogue_RockSmashFail
 {
     msgbox(Text_CantSmash,MSGBOX_DEFAULT)
     call(Vsdeoxys_Script_PlayCry)
-    msgbox(Vsdeoxys_Text_DidThatRock,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
+    msgbox(format("…Did that rock just make a sound?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
     releaseall
     end
 }
@@ -180,7 +180,7 @@ script Vsdeoxys_Script_PlayCry
 script Vsdeoxys_Dialogue_ReturnToOverworldWithoutCapturingMinior
 {
     removeobject(MINIOR)
-    msgbox(Vsdeoxys_Text_WaitIsThat,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
+    msgbox(format("Wait… is that what they were talking about?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
     end
 }
 
@@ -194,10 +194,10 @@ script Vsdeoxys_Script_CaughtMinior
 
 script Vsdeoxys_Script_ReturnToOverworldAfterCapturingMinior
 {
-    msgbox(Vsdeoxys_Text_YouDidIt,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    msgbox(format("You did it!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     waitmessage
     call(Vsdeoxys_Script_RunToPlayerAfterMiniorCatch)
-    msgbox(Vsdeoxys_Text_YouCaughtIt,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    msgbox(format("You caught it!\nWe’ve got proof now!\nMeet me at Haelba Research!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     applymovement(VSDEOGUY,Vsdeoxys_Movement_VsdeoguyRunOnScreen)
     waitmovement(VSDEOGUY)
     removeobject(VSDEOGUY)
@@ -236,7 +236,7 @@ script Vsdeoxys_Script_VsdeoguyEnterResearch
 {
     setvar(VAR_QUEST_VSDEOXYS, VSDEOGUY_ENTERED_RESEARCH)
     faceplayer
-    msgbox(Vsdeoxys_Text_YoureHere,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    msgbox(format("You’re here! Okay. Let’s go. I’ll do the talking."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     waitmessage
     opendoor(39,8)
     waitdooranim
@@ -260,20 +260,20 @@ script Vsdeoxys_Script_SetUpResearchObjects
 script Vsdeoxys_Dialogue_DiscussMiniorResearch
 {
     setvar(VAR_QUEST_VSDEOXYS,VSDEOGUY_LEFT_RESEARCH)
-    msgbox(Vsdeoxys_Text_ForTheLastTime, MSGBOX_AUTOCLOSE, SPEAKER_VSDEORESEARCHER)
+    msgbox(format("Vsdeoguy, for the 385th time, there’s no way -"), MSGBOX_AUTOCLOSE, SPEAKER_VSDEORESEARCHER)
     closemessage
     applymovement(PLAYER,Common_Movement_WalkUp)
     waitmovement(PLAYER)
-    msgbox(Vsdeoxys_Text_ThisTimeIt,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
-    msgbox(Vsdeoxys_Text_SeeWhat,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("This time it's real! I have proof. We caught it. You gotta see it for yourself."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    msgbox(format("See what? That you -"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToPlayer)
     waitmovement(VSDEORESEARCHER)
     applymovement(PLAYER,Common_Movement_FaceLeft)
-    msgbox(Vsdeoxys_Text_AreYouPlayer,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    msgbox(Vsdeoxys_Text_ThatsHowI,MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+    msgbox(format("Are you {PLAYER}? I’ve seen the livestreams for the League. How did Deoxysg- "),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("That’s how I know it’s legit! This Trainer is tough as nails, saw it with my own eyes!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherTurnUpAndDown)
     waitmovement(VSDEORESEARCHER)
-    msgbox(Vsdeoxys_Text_OkayLets,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("Okay! Let’s take a look at your Pokédex. Come with me."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER,Common_Movement_WalkUp)
     waitmovement(VSDEORESEARCHER)
     applymovement(PLAYER,Vsdeoxys_Movement_PlayerAlignWithVsdeoguy)
@@ -282,17 +282,17 @@ script Vsdeoxys_Dialogue_DiscussMiniorResearch
     applymovement(VSDEOGUY_HALERBARESEARCH,Vsdeoxys_Movement_VsdeoguyWalkToBackOfRoom)
     applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkToBackOfRoom)
     waitmovement(PLAYER)
-    msgbox(Vsdeoxys_Text_YouKnowHow,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("You know how my bosses are. I can’t have too many people in the lab. I’ll come back in a second."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkTowardsComputer)
     applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkTowardsComputer)
     waitmovement(PLAYER)
-    msgbox(Vsdeoxys_Text_OkayI,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
-    msgbox(Vsdeoxys_Text_TrustMe,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-msgbox(Vsdeoxys_Text_HowDidYou,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_ISeeThat,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    msgbox(Vsdeoxys_Text_HowDidThey,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-msgbox(Vsdeoxys_Text_IWasInvest,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
-    msgbox(Vsdeoxys_Text_YouKnowWhat,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("Okay, I battled this -"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
+    msgbox(format("Trust me, I know. They told you it was a Deoxys escaped from Hoenn or something, didn't they?"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+msgbox(format("How did you know?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(format("I see that person once… maybe twice a month. They usually trick some Trainer into helping them, but this is the first time he’s actually brought back something and it didn’t have a blurry photo…"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("How did they trick you into helping them? All of the Trainers that could capture this thing are usually off doing literally anything else."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+msgbox(format("I was invest -"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
+    msgbox(format("You know what? Doesn’t matter. But I can’t have this guy bursting into here every month with some nonsense. So I need you to just stay here, and I think we can get them out of our hair once and for all."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToVsdeoguy)
     waitmovement(VSDEORESEARCHER)
     applymovement(VSDEOGUY_HALERBARESEARCH,Common_Movement_FaceRight)
@@ -303,19 +303,19 @@ msgbox(Vsdeoxys_Text_IWasInvest,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkRightToPlayer)
     applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkToVsdeoresearcher)
     waitmovement(PLAYER)
-msgbox(Vsdeoxys_Text_WhatHappened,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_IToldHim,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-msgbox(Vsdeoxys_Text_WaitWhat,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_YeahYou,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER,TAIL_DEFAULT,EMOTE_LAUGH,PHONE_OFF)
-    msgbox(Vsdeoxys_Text_IToldThem,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    msgbox(Vsdeoxys_Text_WaitHes,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
-    msgbox(Vsdeoxys_Text_TheyveGotNothing,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+msgbox(format("…what happened?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
+    msgbox(format("I told him that I thought you were a government spy, here to retrieve what was rightfully yours."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+msgbox(format("Wait what?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+    msgbox(format("Yeah, you should have seen it! I said that we had defense protocols to handle you, but we could only hold you off for so long."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER,TAIL_DEFAULT,EMOTE_LAUGH,PHONE_OFF)
+    msgbox(format("I told them they were absolutely onto something, you had the real deal, but they needed to delete Buzzr from their phone and told them they needed the first ticket to Fiore, where nobody could track them down."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("Wait, he’s just abandoning everything and leaving?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
+    msgbox(format("They’ve got nothing to leave behind, I promise. They’ve got no life outside of hunting this thing. Man, I’m so glad that’s over!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkOffScreen)
     waitmovement(VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherComesBack)
     waitmovement(VSDEORESEARCHER)
-    msgbox(Vsdeoxys_Text_SeriouslyYou,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    msgbox(Vsdeoxys_Text_YouWereSmashing,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("Seriously, you have no idea how much time and energy you’ve saved us. Thank you so much for playing along."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("You were smashing those meteors using your Pokémon,right? You can use this instead."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     giveitem(ITEM_ROCKSMASH_TOOL)
     call(Vsdeoxys_Script_BufferDescribeRockSmashTool)
     applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToTheirComputer)
@@ -327,14 +327,14 @@ msgbox(Vsdeoxys_Text_WaitWhat,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE
 script Vsdeoxys_Dialogue_PostQuestDescribeTool
 {
     faceplayer
-    msgbox(Vsdeoxys_Text_SeriouslyYou,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("Seriously, you have no idea how much time and energy you’ve saved us. Thank you so much for playing along."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     call(Vsdeoxys_Script_BufferDescribeRockSmashTool)
 }
 
 script Vsdeoxys_Script_BufferDescribeRockSmashTool
 {
     bufferitemname(STR_VAR_1,ITEM_ROCKSMASH_TOOL)
-    msgbox(Vsdeoxys_Text_YouCanUse,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+    msgbox(format("You can use that {STR_VAR_1} to crush any rocks you come across. You don’t need any particular Pokémon with you."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
 }
 
 script Vsdeoxys_Script_QuestComplete
@@ -350,7 +350,7 @@ script Vsdeoxys_Dialogue_VsdeoresearcherInteract
     questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_VSDEOXYS)
     if (!var(VAR_RESULT))
     {
-        msgbox(Vsdeoxys_Text_AnotherLateNight,MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
+        msgbox(format("Another late night… but once I finally have the data on Core distribution and its relationship to personality value…"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     }
     else
     {

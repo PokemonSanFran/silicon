@@ -29,7 +29,7 @@ script HalerbaWilds_EventScript_BlackbeltF{
 script HalerbaWilds_EventScript_Helen{
     trainerbattle_single(TRAINER_HELEN,gText_HalerbaWilds_HaveYouEver,gText_HalerbaWilds_NotReadyForBattle)
 
-    msgbox(gText_HalerbaWilds_ImSupposedToBeGetting,MSGBOX_NPC,SPEAKER_HELEN)
+    msgbox(format("I'm supposed to be getting married today. But I don't think I can do it..."),MSGBOX_NPC,SPEAKER_HELEN)
 
     end
 }

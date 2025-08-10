@@ -48,43 +48,43 @@ script LetsFinishThis_Debrief_Dialogue
 {
     lock
         startcutscene(JUMPPLAYER_LETSFINISHTHIS)
-        msgbox(gText_LetsFinishThis_IDontThinkIm,,SPEAKER_MAGNUS)
+        msgbox(format("I don’t think I’m surprised by SharpRise Capital, but the government too? All those talks, those negotiations… aren’t they supposed to protect their citizens?"),,SPEAKER_MAGNUS)
 
-        msgbox(gText_LetsFinishThis_ThatPartDoesnt,,SPEAKER_ARMANDO)
+        msgbox(format("That part doesn’t surprise me. Old age getting to you? We all know, money is their only constituent."),,SPEAKER_ARMANDO)
 
-        msgbox(gText_LetsFinishThis_ButInnocentPeople,,SPEAKER_TALA)
+        msgbox(format("But innocent people? Attacking an entire island just to wipe out TheTide? This is insane!"),,SPEAKER_TALA)
 
-        msgbox(gText_LetsFinishThis_PerfevtlySane,,SPEAKER_ELLEN)
+        msgbox(format("Perfectly sane. It worked on Arantraz didn’t it? There’s no peaceful path forward. Do you all get it now? They’re poised to kill!"),,SPEAKER_ELLEN)
 
-        msgbox(gText_LetsFinishThis_ButTheyWerentAlways,,SPEAKER_KAI_TIDE)
+        msgbox(format("But they weren’t always, were they?"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LetsFinishThis_HasAlwaysBeenRuthless,,SPEAKER_ADAORA)
+        msgbox(format("SharpRise Capital has always been ruthless! Killing is… new though."),,SPEAKER_ADAORA)
 
-        msgbox(gText_LetsFinishThis_ThatsWhatIMean,,SPEAKER_KAI_TIDE)
+        msgbox(format("That’s what I mean. We spun up this awesome program, we attacked the operations of their corporate partners, our message is really getting out there! I think they’re nervous."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LetsFinishThis_PerhapsDesperate,,SPEAKER_ARMANDO)
+        msgbox(format("Perhaps desperate."),,SPEAKER_ARMANDO)
 
-        msgbox(gText_LetsFinishThis_MaybeNowItsTime,,SPEAKER_KAI_TIDE)
+        msgbox(format("Maybe now it's the time to really bring the fight to them!"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LetsFinishThis_NowMightBeTheTime,,SPEAKER_MAGNUS)
+        msgbox(format("Now might be the time. We’ve explored every other path."),,SPEAKER_MAGNUS)
 
-        msgbox(gText_LetsFinishThis_PublicSentimentIsStrong,,SPEAKER_TALA)
+        msgbox(format("Public sentiment is strong as hell. A confrontation and confession might be a moonshot, but it's a helluva shot, right?"),,SPEAKER_TALA)
 
-        msgbox(gText_LetsFinishThis_EvenIfWePullIt,,SPEAKER_ADAORA)
+        msgbox(format("Even if we pull it off, will exposing them even matter? Or work?"),,SPEAKER_ADAORA)
 
-        msgbox(gText_LetsFinishThis_TheyCameForTheKings,,SPEAKER_ELLEN)
+        msgbox(format("They came for the Kings and missed. This may be our only chance to fight back."),,SPEAKER_ELLEN)
 
-        msgbox(gText_LetsFinishThis_SoBreakInto,,SPEAKER_KAI_TIDE)
+        msgbox(format("So, break into SharpRise Spire, force a confession from Adelaide, broadcast it using their equipment and public sentiment will come crashing down. Right?"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LetsFinishThis_APublicConfession,,SPEAKER_ARMANDO)
+        msgbox(format("A public confession would force the government to take action."),,SPEAKER_ARMANDO)
 
-        msgbox(gText_LetsFinishThis_IWasBeingSarcastic,,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_SHOCK)
+        msgbox(format("I was being sarcastic!"),,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_SHOCK)
 
-        msgbox(gText_LetsFinishThis_TheHardestPartOfThatPlan,,SPEAKER_ELLEN)
+        msgbox(format("The hardest part of that plan is actually just getting to Adelaide. The rest of that is fairly plausible, given we survive."),,SPEAKER_ELLEN)
 
-        msgbox(gText_LetsFinishThis_TwoOldCoots,,SPEAKER_TALA)
+        msgbox(format("Two old coots, some has-beens, and a bunch of kids running into the belly of the beast? Count me the hell in."),,SPEAKER_TALA)
 
-        msgbox(gText_LetsFinishThis_TheWarpPanels,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("The warp panels!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
         goto(LetsFinishThis_GoToFlashback_Script)
 }
@@ -100,16 +100,16 @@ script LetsFinishThis_GoToFlashback_Script {
 script LetsFinishThis_StartPlanning_Dialogue {
     lock
 
-        msgbox(gText_LetsFinishThis_NobodyHasSeen,,SPEAKER_ADAORA)
+        msgbox(format("Nobody has seen Keiying since their stunt in the warehouse. Cops have been crawling all over that neighborhood and house looking for him."),,SPEAKER_ADAORA)
 
-        msgbox(gText_LetsFinishThis_WhatAbout,,SPEAKER_ARMANDO)
+        msgbox(format("What about Ramesh? That workaholic absolutely has a panel in their place too. And no police looking for them."),,SPEAKER_ARMANDO)
         closemessage
 
         applymovement(PLAYER, Common_Movement_FaceDown)
         applymovement(ELLEN, LetsFinishThis_WalkToPlayer)
         waitmovement(ELLEN)
 
-        msgbox(gText_LetsFinishThis_WereOntoSomething,,SPEAKER_ELLEN)
+        msgbox(format("We’re onto something. You should go prepare! Once we start, I don’t think there’s any turning back. Meet us outside Ramesh’s house in QiuVillage."),,SPEAKER_ELLEN)
         closemessage
 
         applymovement(ELLEN, LetsFinishThis_WalkAway)

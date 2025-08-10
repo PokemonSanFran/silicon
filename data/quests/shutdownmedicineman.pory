@@ -41,13 +41,13 @@ script Quest_ShutDownMedicineMan_Interact_Leader_Script{
 }
 
 script Quest_ShutDownMedicineMan_StartQuest_Dialogue{
-    msgbox(gText_ShutDownMedicineMan_WeHaveAnAssociate,,SPEAKER_DEFAULT)
-        msgbox(gText_ShutDownMedicineMan_WantToMakeSure,,SPEAKER_DEFAULT)
+    msgbox(format("we have an... associate over by lakemerrit that is selling herbal products"),,SPEAKER_DEFAULT)
+        msgbox(format("we want to make sure his customer service is up to par, could you help us with a mystery shop? just go buy something and take a pic with him and then come back to me"),,SPEAKER_DEFAULT)
         startquest(QUEST_SHUTDOWNMEDICINEMAN)
 }
 
 script Quest_ShutDownMedicineMan_ActiveDialogue{
-    msgbox(gText_ShutDownMedicineMan_LetMeKnowWhen,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("let me know when you're able to buy from that dude"),MSGBOX_NPC,SPEAKER_DEFAULT)
         end
 }
 
@@ -61,11 +61,11 @@ script Quest_ShutDownMedicineMan_MakePurchase_Dialogue{
         }
     questmenu(QUEST_MENU_SET_REWARD,QUEST_SHUTDOWNMEDICINEMAN)
 
-        msgbox(gText_ShutDownMedicineMan_OkayMadeThePurchase,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("okay made the purchase, now..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(gText_ShutDownMedicineMan_HeyCanIGetASelfie,,SPEAKER_ALICIA)
+        msgbox(format("hey can i get a selfie?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_ShutDownMedicineMan_OhMyGodYes,,SPEAKER_DEFAULT)
+        msgbox(format("absolutely yes! i hope you enjoy!"),,SPEAKER_DEFAULT)
         //PSF TODO add camera flash and camera sound effect
         closemessage
         release
@@ -73,7 +73,7 @@ script Quest_ShutDownMedicineMan_MakePurchase_Dialogue{
 }
 
 script Quest_ShutDownMedicineMan_Reward_Dialogue{
-    msgbox(gText_ShutDownMedicineMan_GoodWork,,SPEAKER_DEFAULT)
+    msgbox(format("good work. got just the proof i needed. here's your payment."),,SPEAKER_DEFAULT)
         giveitem(ITEM_ABILITY_CAPSULE,1)
         giveitem(ITEM_ABILITY_PATCH,1)
         call(Quest_ShutDownMedicineMan_HandleMoney_Script)

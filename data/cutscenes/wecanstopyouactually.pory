@@ -27,13 +27,13 @@ script WeCanStopYouActually_PostBattle_Dialogue {
         call(WeCanStopYouActually_FixPlayerPosition_Script)
         endcutscene
 
-        msgbox(gText_WeCanStopYouActually_SoWhatsYourPlan,,SPEAKER_ADELAIDE)
+        msgbox(format("So, what’s your plan, beat me up and try to expose me? Nobody is going to believe the terrorists that stormed our office building. There's not even a paper trail - do you know how hard it was, not sending a SINGLE email about this? You’re all going to get arrested, the money will keep flowing in, and life is going to keep moving on."),,SPEAKER_ADELAIDE)
 
-        msgbox(gText_WeCanStopYouActually_PhoneIsRinging)
+        msgbox(format("Adelaide's phone is ringing."))
 
-        msgbox(gText_WeCanStopYouActually_ThatsTheAuthorities,,SPEAKER_ADELAIDE)
+        msgbox(format("That’s the authorities, probably here to pick you up."),,SPEAKER_ADELAIDE)
 
-        msgbox(gText_WeCanStopYouActually_OhNo,,SPEAKER_ADELAIDE)
+        msgbox(format("…oh no."),,SPEAKER_ADELAIDE)
 
         closemessage
 
@@ -44,46 +44,46 @@ script WeCanStopYouActually_PostBattle_Dialogue {
         delay(30)
         fadescreen(FADE_TO_BLACK)
 
-        msgbox(gText_WeCanStopYouActually_IAmChiefOperatingOfficer,,SPEAKER_KEIYING)
+        msgbox(format("I am Keiying, the SharpRise Capital Chief Operating Officer. This is my confession. Two days ago, SharpRise Capital triggered a machine that is responsible for the devastating earthquake on HalaiIsland. We did it to flush out and destroy …"),,SPEAKER_KEIYING)
 
         closemessage
 
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_WeCanStopYouActually_WaitTheHell,,SPEAKER_ADELAIDE)
+        msgbox(format("WHAT THE HELL ARE THEY DOING?"),,SPEAKER_ADELAIDE)
 
 
         playse(SE_POKENAV_CALL)
         waitse
-        msgbox(gText_WeCanStopYouActually_PhoneIsRinging)
+        msgbox(format("Adelaide's phone is ringing."))
 
-        msgbox(gText_WeCanStopYouActually_FindThem,,SPEAKER_ADELAIDE)
+        msgbox(format("FIND THEM! SHUT THAT DOWN!"),,SPEAKER_ADELAIDE)
 
-        msgbox(gText_WeCanStopYouActually_IDontCare,,SPEAKER_ADELAIDE)
+        msgbox(format("I don’t care WHERE THEY ARE JUST END THIS SHIT! I thought they were MISSING! HOW DID THIS HAPPEN?"),,SPEAKER_ADELAIDE)
 
         closemessage
 
         applymovement(ADELAIDE,WeCanStopYouActually_RageRun)
         waitmovement(ADELAIDE)
 
-        msgbox(gText_WeCanStopYouActually_TheyToldYou,,SPEAKER_ADELAIDE)
+        msgbox(format("YOU! They told you! That’s how you found out! And now if they confess… they don’t have to take it from you."),,SPEAKER_ADELAIDE)
 
-        msgbox(gText_WeCanStopYouActually_I,,SPEAKER_ALICIA)
+        msgbox(format(" I - "),,SPEAKER_ALICIA)
 
         closemessage
 
         applymovement(ADELAIDE,Common_Movement_FaceLeft)
 
-        msgbox(gText_WeCanStopYouActually_Security,,SPEAKER_ADELAIDE)
+        msgbox(format("CHARLOTTE! RAMESH! SECURITY!"),,SPEAKER_ADELAIDE)
 
-        msgbox(gText_WeCanStopYouActually_WeAlreadyBeatThem,,SPEAKER_ALICIA)
+        msgbox(format("We already beat them. You’re alone."),,SPEAKER_ALICIA)
 
         closemessage
 
         applymovement(ADELAIDE,Common_Movement_FaceDown)
         waitmovement(ADELAIDE)
 
-        msgbox(gText_WeCanStopYouActually_ImNotGoingToPrison,,SPEAKER_ADELAIDE)
+        msgbox(format("…I’m not going to prison. I’m NOT GOING TO JAIL…"),,SPEAKER_ADELAIDE)
 
         closemessage
 
@@ -95,7 +95,7 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
 script WeCanStopYouActually_StartBossBattle_Script {
         setvar(VAR_TOWER_RAID_STATE,SAVE_ADELAIDE_SHARPRISESPIRE)
-        msgbox(gText_WeCanStopYouActually_AndIllFrigginKill,,SPEAKER_ADELAIDE)
+        msgbox(format("And I’ll FRIGGIN’ KILL YOU!"),,SPEAKER_ADELAIDE)
 
         closemessage
 
@@ -114,7 +114,7 @@ script WeCanStopYouActually_Arrest_Dialogue {
         addobject(POLICE_A)
         addobject(POLICE_B)
 
-        msgbox(gText_WeCanStopYouActually_YoureUnderArrest)
+        msgbox(format("Adelaide, you’re under arrest!"))
         closemessage
 
         applymovement(POLICE_A,WeCanStopYouActually_ArrestWalkInA)
@@ -123,7 +123,7 @@ script WeCanStopYouActually_Arrest_Dialogue {
 
         waitmovement(POLICE_B)
 
-        msgbox(gText_WeCanStopYouActually_ForWhat,,SPEAKER_ADELAIDE)
+        msgbox(format("For what? Using the tools YOUR BOSSES gave me? We’re all going down together! You’re all toast!"),,SPEAKER_ADELAIDE)
 
         closemessage
         endcutscene
@@ -259,7 +259,7 @@ script WeCanStopYouActaully_ArrestCutscene {
         waitmovement(0)
 
         fadeblackandsetremovewarpfadeflag
-        msgbox(gText_WeCanStopYouActually_TheNextDay,MSGBOX_AUTOCLOSE)
+        msgbox(format("A few months later..."),MSGBOX_AUTOCLOSE)
         closemessage
         setflag(FLAG_SPAWN_INVISIBLE)
         warpsilent(MAP_ARANTRAZ,255,8,15)

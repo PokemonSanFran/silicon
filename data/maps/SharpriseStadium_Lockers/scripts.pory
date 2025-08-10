@@ -65,7 +65,7 @@ script SharpriseStadium_Lockers_InteractArenaGuard_Script {
 script SharpriseStadium_Lockers_Information_Script{
     lock
         //PSF TODO change from YESNO to proper menu
-        msgbox(gText_SharpriseStadium_Lockers_WHatWouldYouLike,MSGBOX_YESNO)
+        msgbox(format("What information would you like? Press Yes for Bracket, and No for Rules."),MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == YES){
             goto(BattleFrontier_BattleDomeLobby_EventScript_ShowPrevTourneyTree)
@@ -80,10 +80,10 @@ script SharpriseStadium_Lockers_TournamentRules_Dialgoue{
         // PSF TODO The screen shows images of the League breakdown as Adelaide explains the structure.
 
         if (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE) < PRE_BATTLE_4){
-            msgbox(gText_SharpriseStadium_Lockers_Information_ForTheGroupStage)
-            msgbox(gText_SharpriseStadium_Lockers_Information_TheTrainerWith)
+            msgbox(format("For the Group Stage, you'll be randomly split into four groups of four trainers. You'll battle all of the other Trainers in your group, and each match will be on a different terrain battlefield. You will bring six Pokémon with you, and choose three before the start of each match in the Group Stage. You will be healed after every match, but you may not use items from your bag during battle. "))
+            msgbox(format("The Trainer with the best record in a group will proceed to the Semi-Finals. In the event of a tie, we will go to a tiebreaker."))
         }
-    msgbox(gText_SharpriseStadium_Lockers_Information_InTheFinalStage)
+    msgbox(format("In the Final Stage, you will be paired against another winning Trainer from a different Group. You will battle on a neutral battlefield, with a full party of six. The Semi-Final winners will then face off for the Championship! Trainers can change their six Pokémon between matches, but are still not permitted to use items during battle."))
         closemessage
 
         fadescreen(FADE_FROM_BLACK)

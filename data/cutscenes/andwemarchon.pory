@@ -61,7 +61,7 @@ script AndWeMarchOn_StartParadeMovement_Script {
         applymovement(PARADE_FLOAT_B, AndWeMarchOn_ParadeProcession_Movement)
         applymovement(PARADE_FLOAT_C, AndWeMarchOn_ParadeProcession_Movement)
 
-        msgbox(gText_AndWeMarchOn_WowPeopleHere,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+        msgbox(format("Wow, people here really love their Double Battles… but then why is Singles the official League  format?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
         closemessage
 		waitmovement(CAMERA)
 		waitmovement(TALA)
@@ -71,7 +71,7 @@ script AndWeMarchOn_StartParadeMovement_Script {
         waitmovement(0) //don't move on until parade finishes walking
         special(RemoveCameraObject)
 
-        msgbox(gText_AndWeMarchOn_AndNowSomeWords,MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
+        msgbox(format("And now, some words from our Grand Marshall, Tala!"),MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
         reveal(REVEAL_TALA)
         closemessage
         goto(AndWeMarchOn_Opening_Dialogue)
@@ -85,7 +85,7 @@ script AndWeMarchOn_Opening_Dialogue {
         applymovement(TALA, AndWeMarchOn_WalkToFloatCenter_Movement)
         waitmovement(0)
 
-        msgbox(gText_AndWeMarchOn_Resido,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+        msgbox(format("Resido!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
         closemessage
 
         //TODO implement fireworks on screen
@@ -94,7 +94,7 @@ script AndWeMarchOn_Opening_Dialogue {
         waitse
         playse(SE_BANG)
         waitse
-        msgbox(gText_AndWeMarchOn_ThankYouForSupporting,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+        msgbox(format("Thank you for supporting our annual Doubles Parade! This has been a fuckin' blast! Who's having a good time?!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
 
         playse(SE_APPLAUSE)
         waitse
@@ -105,29 +105,29 @@ script AndWeMarchOn_Opening_Dialogue {
 }
 
 script AndWeMarchOn_InviteOntoStage_Dialogue {
-        msgbox(gText_AndWeMarchOn_WeHaveASpecialGuest,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+        msgbox(format("We have a special guest for you all today! Rupert, please come up to the stage!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
         closemessage
 
         applymovement(RUPERT, AndWeMarchOn_WalkOntoStage_Movement)
         waitmovement(0)
 
-        msgbox(gText_AndWeMarchOn_RupertHereIsTheWinner,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+        msgbox(format("Rupert here is the winner of the MermerezaCity Preparatory School graduation tournament! NORMALLY, the winner gets a scholarship from the Resido League. But our new corporate overlords have decided that growing the in-region talent isn't a budget priority!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
         closemessage
 
-        msgbox(gText_AndWeMarchOn_Boo,MSGBOX_DEFAULT,SPEAKER_CROWD_A)
-        msgbox(gText_AndWeMarchOn_LetsGo,MSGBOX_DEFAULT,SPEAKER_CROWD_B)
+        msgbox(format("Boo!"),MSGBOX_DEFAULT,SPEAKER_CROWD_A)
+        msgbox(format("Let's go Rupert!"),MSGBOX_DEFAULT,SPEAKER_CROWD_B)
 
-        msgbox(gText_AndWeMarchOn_ButThatsNotGoing,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+        msgbox(format("But that's not going to stop us from nurturing that talent ourselves!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
         closemessage
 
-        msgbox(gText_AndWeMarchOn_YayRupert,MSGBOX_DEFAULT,SPEAKER_CROWD_C)
+        msgbox(format("Yaaaay Rupert!"),MSGBOX_DEFAULT,SPEAKER_CROWD_C)
         goto(AndWeMarchOn_StartCutsceneBattle_Script)
 }
 
 script AndWeMarchOn_StartCutsceneBattle_Script {
-        msgbox(gText_AndWeMarchOn_RupertAreYouReady,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
-        msgbox(gText_AndWeMarchOn_Woo,MSGBOX_DEFAULT,SPEAKER_CROWD_D)
-        msgbox(gText_AndWeMarchOn_Yeah,MSGBOX_DEFAULT,SPEAKER_CROWD_A)
+        msgbox(format("Rupert, are you ready to bring an old master out of retirement?"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+        msgbox(format("Woooo!"),MSGBOX_DEFAULT,SPEAKER_CROWD_D)
+        msgbox(format("Yeah!"),MSGBOX_DEFAULT,SPEAKER_CROWD_A)
         closemessage
 
         applymovement(TALA, AndWeMarchOn_WalkToLeftSide_Movement)
@@ -136,10 +136,10 @@ script AndWeMarchOn_StartCutsceneBattle_Script {
         applymovement(RUPERT, Common_Movement_FaceLeft)
         waitmovement(0)
 
-        msgbox(gText_AndWeMarchOn_LetsRock,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+        msgbox(format("Let's rock!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
         closemessage
 
-        msgbox(gText_AndWeMarchOn_AndOurBattle,MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
+        msgbox(format("And our battle is underway!"),MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
         closemessage
         goto(AndWeMarchOn_CutsceneBattleScript)
 
@@ -169,9 +169,9 @@ script AndWeMarchOn_CutsceneBattleScript {
         playmoncry(SPECIES_KECLEON, CRY_MODE_ENCOUNTER)
         waitmoncry
 
-        msgbox(gText_AndWeMarchOn_AttackPatternSigma,MSGBOX_DEFAULT,SPEAKER_RUPERT)
+        msgbox(format("Attack pattern Sigma!"),MSGBOX_DEFAULT,SPEAKER_RUPERT)
 
-        msgbox(gText_AndWeMarchOn_HelpingHand,MSGBOX_DEFAULT,SPEAKER_TALA)
+        msgbox(format("Helping Hand! Breaking Swipe!"),MSGBOX_DEFAULT,SPEAKER_TALA)
         closemessage
 
         applymovement(PKMN1, AndWeMarchOn_Attack_Movement)
@@ -193,15 +193,15 @@ script AndWeMarchOn_CutsceneBattleScript {
 		waitmovement(PKMN2)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_AndWeMarchOn_AndWithASupercharged,MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
+        msgbox(format("And with a supercharged Breaking Swipe, Tala ends the battle in one turn! The exhibition winner is the Elite Four's TALA!"),MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
         goto(AndWeMarchOn_PostBattle_Dialogue)
 }
 
 script AndWeMarchOn_PostBattle_Dialogue {
 
-        msgbox(gText_AndWeMarchOn_DamnThatsHow,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+        msgbox(format("Damn, that's how she beat me too… wait, did they say Elite Four? Resido doesn't have those, does it?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
 
-        msgbox(gText_AndWeMarchOn_LetsGiveItUp,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+        msgbox(format("Let's give it up for Rupert!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
 
         playse(SE_APPLAUSE)
         waitse
@@ -220,7 +220,7 @@ script AndWeMarchOn_PostBattle_Dialogue {
 
 script AndWeMarchOn_PostBattleSpeech_Dialogue {
 
-        msgbox(gText_AndWeMarchOn_ItsBeenAWildYear,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+        msgbox(format("It's been a wild year, hasn't it? Who's loving our new Pokémon League? The League that's too good for the likes of young Rupert."),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
         closemessage
 
         playse(SE_APPLAUSE) //PSF TODO: change to booing sound
@@ -229,33 +229,33 @@ script AndWeMarchOn_PostBattleSpeech_Dialogue {
         applymovement(TALA, AndWeMarchOn_WalkToSouthStage_Movement)
         waitmovement(0)
 
-        msgbox(gText_AndWeMarchOn_OhItsNotAllBad,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+        msgbox(format("Oh, it's not all bad, is it? Yeah, our beloved elected officials sold our League to the highest bidder. And yeah, they've bulldozed all of our traditions and replaced them with some soulless husk of a League. AND YEAH, they pushed our entire battling community out and replaced them with highly paid drones that couldn't battle their way out of a paper bag…."),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
         closemessage
 
         applymovement(TALA, AndWeMarchOn_WalkToNorthStage_Movement)
         waitmovement(0)
 
-        msgbox(gText_AndWeMarchOn_Boo,MSGBOX_DEFAULT,SPEAKER_CROWD_B)
+        msgbox(format("Boo!"),MSGBOX_DEFAULT,SPEAKER_CROWD_B)
 
-        msgbox(gText_AndWeMarchOn_FuckTheseGuys,MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Fuck these guys!"),MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_GiveUsBackOur,MSGBOX_DEFAULT,SPEAKER_CROWD_D,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Give us back our League!"),MSGBOX_DEFAULT,SPEAKER_CROWD_D,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_ButHeyItsNot,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+        msgbox(format("But hey! It's not all bad, right? TirabudinPlace got to keep its Gym!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
 
-        msgbox(gText_AndWeMarchOn_Traitor,MSGBOX_DEFAULT,SPEAKER_CROWD_A,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Traitor!"),MSGBOX_DEFAULT,SPEAKER_CROWD_A,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_DownWith,MSGBOX_DEFAULT,SPEAKER_CROWD_B,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Down with BD!"),MSGBOX_DEFAULT,SPEAKER_CROWD_B,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_WhatASlimeball,MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("What a slimeball!"),MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_JustNotTheWay,MSGBOX_DEFAULT,SPEAKER_TALA)
+        msgbox(format("…just not the way we would have hoped."),MSGBOX_DEFAULT,SPEAKER_TALA)
         closemessage
 
         applymovement(TALA, AndWeMarchOn_GoBackToCenter_Movement)
         waitmovement(0)
 
-        msgbox(gText_AndWeMarchOn_WeveGotAResponsibility,MSGBOX_DEFAULT,SPEAKER_TALA)
+        msgbox(format("We've got a responsibility here. The profit motive can not… WILL NOT erase our history. It lives on in our hearts. In our stories Our legends. And no corporation, SharpRise Capital or otherwise, can take that away from us!"),MSGBOX_DEFAULT,SPEAKER_TALA)
         closemessage
         goto(AndWeMarchOn_ParadeEnd_Script)
 

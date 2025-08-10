@@ -80,13 +80,13 @@ script EnterTheMaster_Ready_Dialogue
 {
 
     setvar(VAR_LEAVERRA_FOREST_STATE,CHARLOTTE_ENTERED_LEAVERRA_FOREST)
-        msgbox(gText_EnterTheMaster_MorningReady,,SPEAKER_CHARLOTTE)
+        msgbox(format("Morning. Ready to find this old dude?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_AsReadyAs,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("As ready as I'm going to be!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_EnterTheMaster_DaddySentAnother,,SPEAKER_CHARLOTTE)
+        msgbox(format("Daddy sent another care package, so if we stick together, I'll keep you healed up."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_ThanksDad,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Thanks… dad?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
         applymovement(CHARLOTTE,EnterTheMaster_WalkIntoWoods)
@@ -107,10 +107,10 @@ script EnterTheMaster_InteractFollower_Script
 	random(4)
 
         switch(var(VAR_RESULT)){
-            case 0: msgbox(gText_EnterTheMaster_HowDoYouThink,MSGBOX_NPC,SPEAKER_CHARLOTTE)
-            case 1: msgbox(gText_EnterTheMaster_YouKnow,MSGBOX_NPC,SPEAKER_CHARLOTTE)
-            case 2: msgbox(gText_EnterTheMaster_IThoughtGymLeaders,MSGBOX_NPC,SPEAKER_CHARLOTTE)
-            case 3: msgbox(gText_EnterTheMaster_DoYouThinkTheyre,MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 0: msgbox(format("How do you think my new Pokémon is faring? I'm curious to see how it integrates with the rest of my team."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 1: msgbox(format("You know, I'm really sick of TheTide's shit. Its their fault we're stuck in this stupid forest."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 2: msgbox(format("I thought Resido's Gym Leaders would be tougher. I wonder how their old Elite Four stacks up to Unova's?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 3: msgbox(format("Do you think they're going to be worth all this hassle?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
         }
 
     closemessage
@@ -121,7 +121,7 @@ script EnterTheMaster_InteractFollower_Script
 script EnterTheMaster_LeaveWoods_Script {
     lock
         faceplayer
-        msgbox(gText_EnterTheMaster_TiredAlready,,SPEAKER_CHARLOTTE)
+        msgbox(format("Tired already? I'll be waiting here."),,SPEAKER_CHARLOTTE)
         closemessage
 }
 
@@ -134,11 +134,11 @@ script EnterTheMaster_CompleteMaze_Dialogue {
         setobjectxyperm(CHARLOTTE,24,22)
 
         faceplayer
-        msgbox(gText_EnterTheMaster_IDontThinkTheres,,SPEAKER_CHARLOTTE)
+        msgbox(format("I don't think there's anywhere else for them to be… they've gotta be in here."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_YouThinkTheyve,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("You think they've just been alone in here, waiting for us for Dialga knows how long?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_EnterTheMaster_TheyreGettingPaid,,SPEAKER_CHARLOTTE)
+        msgbox(format("They're getting paid. "),,SPEAKER_CHARLOTTE)
         closemessage
 
         applymovement(CHARLOTTE,EnterTheMaster_WalkIntoWoods)
@@ -159,12 +159,12 @@ script EnterTheMaster_ClearingIntro_Dialogue
         applymovement(PLAYER,EnterTheMaster_ApproachArmando)
         waitmovement(0)
 
-        msgbox(gText_EnterTheMaster_WelcomeTo,,SPEAKER_ARMANDO)
+        msgbox(format("Charlotte! {PLAYER}! Welcome to LeaverraForest. Excellent work so far!"),,SPEAKER_ARMANDO)
 
-        msgbox(gText_EnterTheMaster_ThanksYoure,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Thanks. You're Armando?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         reveal(REVEAL_ARMANDO)
-        msgbox(gText_EnterTheMaster_AndMyNotebook,,SPEAKER_ARMANDO)
+        msgbox(format("Yeah! And my notebook?"),,SPEAKER_ARMANDO)
         closemessage
 
         applymovement(ARMANDO,Common_Movement_FaceLeft)
@@ -173,11 +173,11 @@ script EnterTheMaster_ClearingIntro_Dialogue
 
 		bufferspeciesname(STR_VAR_1,SPECIES_HYDREIGON)
 		bufferspeciesname(STR_VAR_2,SPECIES_MAGMORTAR)
-        msgbox(gText_EnterTheMaster_GettingThemToBattle,,SPEAKER_ARMANDO)
+        msgbox(format("I hope {STR_VAR_1} and {STR_VAR_2} in LanjingTunnel weren't too much trouble. Getting them to battle without my direct commands was certainly a challenge."),,SPEAKER_ARMANDO)
 
-        msgbox(gText_EnterTheMaster_IsThatWhatYoure,,SPEAKER_CHARLOTTE)
+        msgbox(format("Is that what you're teaching us? Battling with our eyes closed? Sounds useful."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_EveryClientAlways,,SPEAKER_ARMANDO)
+        msgbox(format("Every client always sends me a smartass… Let's get -"),,SPEAKER_ARMANDO)
         closemessage
 
         call(EnterTheMaster_StartEarthquake_Script)
@@ -188,46 +188,46 @@ script EnterTheMaster_ClearingIntro_Dialogue
         applymovement(ARMANDO,EnterTheMaster_Pace)
         waitmovement(0)
 
-        msgbox(gText_EnterTheMaster_AreEitherOfYou,,SPEAKER_ARMANDO)
+        msgbox(format("Are either of you familiar with the Scott's Trainer Theory?"),,SPEAKER_ARMANDO)
 
-        msgbox(gText_EnterTheMaster_YeahThatsTheBattleFrontier,,SPEAKER_CHARLOTTE)
+        msgbox(format("Yeah, that's the Battle Frontier guy, right?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_HmmTheSmartass,,SPEAKER_ARMANDO)
+        msgbox(format("Hmm, the smartass actually knows something!"),,SPEAKER_ARMANDO)
 
-        msgbox(gText_EnterTheMaster_OhDoesEachPart,,SPEAKER_CHARLOTTE)
+        msgbox(format("Oh… does each part of this training map to each of those principles?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_SorryDidntGoTo,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Sorry, didn't go to Battle prep school. Who is Scott and what are these principles?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         applymovement(CHARLOTTE,Common_Movement_FaceRight)
         applymovement(PLAYER,Common_Movement_FaceLeft)
         waitmovement(0)
 
-        msgbox(gText_EnterTheMaster_ScottIsTheFounder,,SPEAKER_CHARLOTTE)
+        msgbox(format("Scott is the founder of an amusement park in Hoenn. Its attractions were designed to test what Scott believed were the qualities that all Master trainers require… "),,SPEAKER_CHARLOTTE)
 
         delay(16)
         fadescreen(FADE_TO_BLACK)
-        msgbox(gText_EnterTheMaster_OneEternity)
+        msgbox(format("One eternity later…"))
         applymovement(CHARLOTTE,Common_Movement_FaceUp)
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(0)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_EnterTheMaster_AndSoConcludes,,SPEAKER_CHARLOTTE)
+        msgbox(format("…and so concludes my theory on how your silly little tests correspond with each of Scott's 7 principles."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_SortaKindaNotReally,,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_Oh,,SPEAKER_CHARLOTTE)
+        msgbox(format("…sorta, kinda, not really. If you think life is going to map one to one like that for you, you've got a rude awakening ahead."),,SPEAKER_ARMANDO)
+        msgbox(format("…Oh."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_SoWhatsNext,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("So what's next?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
-        msgbox(gText_EnterTheMaster_OneOfTheGoals,,SPEAKER_ARMANDO)
+        msgbox(format("{PLAYER}, you may have noticed other Trainers using Mega Evolution. SharpRise wants to make sure their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise has also provided {PLAYER} with a {STR_VAR_1}. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here..."),,SPEAKER_ARMANDO)
         closemessage
         giveitem(ITEM_MEGA_RING)
-        msgbox(gText_EnterTheMaster_CharlotteDoYou,,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_MegaEvolution,,SPEAKER_CHARLOTTE)
-        msgbox(gText_EnterTheMaster_YouCan,,SPEAKER_CHARLOTTE)
+        msgbox(format("Charlotte, do you wanna - "),,SPEAKER_ARMANDO)
+        msgbox(format("When your Pokémon is holding its Mega Stone and you have a Key Stone, you can press {START_BUTTON} in battle to trigger a transformation! At the beginning of your turn, your Pokémon will Mega Evolve, which will juice their stats and sometimes give them a new type or ability."),,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} will only work once per battle, and your Pokémon will revert back to normal after it faints or when the battle ends."),,SPEAKER_CHARLOTTE)
         call(EnterTheMaster_MegaEvolution_Dialogue)
-        msgbox(gText_EnterTheMaster_YouGot,,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_IfYouGo,MSGBOX_DEFAULT,SPEAKER_ARMANDO)
+        msgbox(format("Pretty much got all the basics."),,SPEAKER_ARMANDO)
+        msgbox(format("If you go further back into the clearing, there are battle simulation robots there. The one on the right are for {PLAYER} - they're calibrated specifically based on the battle data that SharpRise Capital gave me for each of you."),MSGBOX_DEFAULT,SPEAKER_ARMANDO)
         goto(EnterTheMaster_ExplainRobots_Dialogue)
 }
 
@@ -243,8 +243,8 @@ script EnterTheMaster_StartEarthquake_Script
 
     call(Earthquake_Natural_Aftershock)
 
-    msgbox(gText_EnterTheMaster_NoInjuries,,SPEAKER_ARMANDO)
-    msgbox(gText_EnterTheMaster_NowThatsAnIdea,,SPEAKER_ARMANDO,TAIL_WHISPER)
+    msgbox(format("No injuries? Fantastic."),,SPEAKER_ARMANDO)
+    msgbox(format("Now that's an idea...\n{PAUSE 30}A training course set during a constant earthquake..."),,SPEAKER_ARMANDO,TAIL_WHISPER)
     closemessage
 }
 
@@ -260,17 +260,17 @@ script EnterTheMaster_MegaEvolution_Dialogue
     bufferpartymonnick(STR_VAR_1,VAR_0x8004)
     if (var(VAR_RESULT))
     {
-        msgbox(gText_EnterTheMaster_CanMegaEvolveSomeday,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} will be capable of Mega Evolution once it fully evolves, but it needs to be holding the right Mega Stone."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
     else
     {
-        msgbox(gText_EnterTheMaster_CanMegaEvolve,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the right Mega Stone."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
 }
 
 script EnterTheMaster_ExplainRobots_Dialogue{
-    msgbox(gText_EnterTheMaster_IfYouTalk,MSGBOX_DEFAULT,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_TheFirstStage,,SPEAKER_ARMANDO)
+    msgbox(format("If you talk to them, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that are assigned to you."),MSGBOX_DEFAULT,SPEAKER_ARMANDO)
+        msgbox(format("The first stage needed you to work together, but for this one, don't help each other."),,SPEAKER_ARMANDO)
         closemessage
         goto_if_quest_not_active(QUEST_ARMANDOSTRAINING,Quest_Armandostraining_StartQuest_Script)
         call(TryAutoSave)

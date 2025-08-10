@@ -44,9 +44,9 @@ switch(var(VAR_RESULT)){
 }
 
 script Quest_ButOnlyIn_StartQuest_Dialogue{
-    msgbox(gText_ButOnlyIn_TheresBuildingAApartment)
-    msgbox(gText_ButOnlyIn_ButTheWildPokemonAroundHere)
-    msgbox(gText_ButOnlyIn_CanYouHelpMeProve)
+    msgbox(format("They're building an apartment complex here for low incoming housing! Its going to be a great development and help for people in the city."))
+    msgbox(format("But the wild Pokemon around here... they can be aggressive. The environment committee is doing a final inspection and I'm afraid we wont pass if there's too many aggressive wild Pokemon."))
+    msgbox(format("Can you help us out? We, the Committee for Reasonable Housing, want to make sure this inspection passes in a way that's best for everybody. I've heard the birds can be the most territorial. Can you knockout 27 or so Flying-type Pokemon on Route18 and Route20? That should help bring the levels down."))
 
     startquest(QUEST_BUTONLYINMYBACKYARD)
     release
@@ -54,19 +54,19 @@ script Quest_ButOnlyIn_StartQuest_Dialogue{
 }
 
 script Quest_ButOnlyIn_Active_Dialogue{
-    msgbox(gText_ButOnlyIn_IJustWantTheKids,MSGBOX_NPC)
+    msgbox(format("I just want the kids to be safe!"),MSGBOX_NPC)
     end
 }
 
 script Quest_ButOnlyIn_Reward_Dialogue{
-    msgbox(gText_ButOnlyIn_TheHousingCrew)
-    msgbox(gText_ButOnlyIn_YouKnowTheGolf)
+    msgbox(format("The inspection just wrapped up but... it failed. Your work still wasn't enough. It's a bummer but we're going to work with the city to make sure this gets done right. Thank you for your help though! Take this."))
+    msgbox(format("You know the golf course over by WajabiLake? You can't get in there without an invitiation from a member. I'll add you to my guest list, so you should be able to get in now. There's tons of rare Pokemon on the course, so maybe it'll be worth it for you."))
     completequest(QUEST_BUTONLYINMYBACKYARD)
     end
 }
 
 script Quest_ButOnlyIn_Complete_Dialogue{
-    msgbox(gText_ButOnlyIn_WhatAShame,MSGBOX_NPC)
+    msgbox(format("What a shame..."),MSGBOX_NPC)
     end
 }
 
@@ -74,12 +74,12 @@ script Quest_ButOnlyIn_Complete_Dialogue{
 //also use Quest_ButOnlyIn_HideNimby_Script there
 script Quest_ButOnlyIn_Bar_Dialogue{
     lock
-    msgbox(gText_ButOnlyIn_AndAToastToTheGeniusGunda)
-    msgbox(gText_ButOnlyIn_HereHere)
-    msgbox(gText_ButOnlyIn_HowDidYouPull)
-    msgbox(gText_ButOnlyIn_IMeanIfTheBirdsAreGone)
-    msgbox(gText_ButOnlyIn_ItWasEasyToConvince)
-    msgbox(gText_ButOnlyThe_AndQiuVillageRemains)
+    msgbox(format("And a toast to the genius Gunda!"))
+    msgbox(format("here here!"))
+    msgbox(format("how did you pull it off"))
+    msgbox(format("i mean if the birds are gone, there's going to be more bugs and fish... and if the place is overrun with those, the enviromental freaks won't let anything develop."))
+    msgbox(format("it was easy to convince some trainers to get rid of a sbitload of birds and bam! the hippies showed up and shut it all down. i didn't have to do anything"))
+    msgbox(format("and the QiuVillage remains hobo free! we're doing God's work, keeping our schools and familiies safe"))
     closemessage
     release
     end

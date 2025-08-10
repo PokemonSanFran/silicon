@@ -18,17 +18,17 @@ script Unhoused_AskDonation_Dialogue
     lock
     showmoneybox(0,0)
     buffernumberstring(STR_VAR_1,UNHOUSED_ASK_AMOUNT)
-    msgbox(gText_Unhoused_SpareChangeOldMan,MSGBOX_YESNO,SPEAKER_UNHOUSED)
+    msgbox(format("Hey uh, spare ¥{STR_VAR_1} for an homie down on their luck?"),MSGBOX_YESNO,SPEAKER_UNHOUSED)
     if (var(VAR_RESULT) == YES)
     {
         removemoney(UNHOUSED_ASK_AMOUNT,0)
         updatemoneybox(0)
         special(RandomlyBoostPartyMemberFriendship)
-        msgbox(gText_Unhoused_AppreciateIt,,SPEAKER_UNHOUSED)
+        msgbox(format("Appreciate it. Good luck doing... whatever you're doing."),,SPEAKER_UNHOUSED)
     }
     else
     {
-        msgbox(gText_Unhoused_WereAllHurtin,,SPEAKER_UNHOUSED)
+        msgbox(format("I know, we're all hurtin' out here. Have a nice day, ya hear?"),,SPEAKER_UNHOUSED)
     }
     hidemoneybox
     closemessage

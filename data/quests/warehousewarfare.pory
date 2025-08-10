@@ -15,9 +15,9 @@ script Quest_Warehousewarfare_Interact_Event_Script{
 
 script Quest_Warehousewarfare_CallPlayer_Dialogue{
     call(Common_EventScript_PhoneRinging)
-    msgbox(gText_Warehousewarfare_HeyIsThisPlayer,,,,PHONE_ON)
-    msgbox(gText_Warehousewarfare_WeReallyAppreciate,,,,PHONE_ON)
-    msgbox(gText_Warehousewarfare_WedLoveToWorkWith,,,,PHONE_ON)
+    msgbox(format("Hey, is this {PLAYER}?"),,,,PHONE_ON)
+    msgbox(format("We really appreciate all the work you're doing for the Shopkeepers Union! Most Trainers don't give us the time of day."),,,,PHONE_ON)
+    msgbox(format("We've seen your work around the region, and would love to work with you in the future, if you're interested. Can you swing by the Shopkeepers Union HQ in CresaltaVista? We're right next to the Center."),,,,PHONE_ON)
     closemessage
     playse(SE_POKENAV_HANG_UP)
     startquest(QUEST_WAREHOUSEWARFARE)
@@ -26,7 +26,7 @@ script Quest_Warehousewarfare_CallPlayer_Dialogue{
 }
 
 script Quest_Warehousewarfare_Welcome_Dialogue{
-    msgbox(gText_Warehousewarfare_WelcomeTo,MSGBOX_NPC)
+    msgbox(format("Welcome to the Shopkeepers Union!"),MSGBOX_NPC)
     end
 }
 
@@ -34,7 +34,7 @@ script Quest_Warehousewarfare_Welcome_Dialogue{
 script Quest_Warehousewarfare_Active_Dialogue{
 
     lock
-    msgbox(gText_Warehousewarfare_GoodToSee,MSGBOX_NPC)
+    msgbox(format("Good to see you, {PLAYER}."),MSGBOX_NPC)
 
     if (!flag(FLAG_QUEST_WAREHOUSE_WARFARE_EXPLAINED)){
         setflag(FLAG_QUEST_WAREHOUSE_WARFARE_EXPLAINED)
@@ -56,11 +56,11 @@ script Quest_Warehousewarfare_ExplainBarge_Dialogue{
 }
 
 script Quest_Warehousewarfare_IntroBarges_Dialogue{
-    msgbox(gText_Warehousewarfare_WeveBeenStudying)
-    msgbox(gText_Warehousewarfare_ThereAreAFewThings)
-    msgbox(gText_Warehousewarfare_TheBargesAreAlways)
-    msgbox(gText_Warehousewarfare_TheWorkersArePoorlyPaid)
-    msgbox(gText_Warehousewarfare_WeWantToFree)
+    msgbox(format("We've been studying Presto and how they are able deliever prodcuts to Trainers."))
+    msgbox(format("There are a few things we've learned from watching them."))
+    msgbox(format("First, all of their supplies are located offshore, on floating barges on the oceans of Resido. Those barges are heavily guarded, and only allow works in and out of the buildings."))
+    msgbox(format("The workers, unsurprisingly, are terribly paid and working in awful conditions"))
+    msgbox(format("The government doesn't seem to be particularly interested helping us fix this problem, so we want to take things into our own hands."))
     closemessage
 
     goto(Quest_Warehousewarfare_ExplainBarge_Dialogue)
@@ -69,31 +69,31 @@ script Quest_Warehousewarfare_IntroBarges_Dialogue{
 //PSF TODO get GetAbnormalWeatherMapNameAndType working to move the barges on the water routes
 
 script Quest_Warehousewarfare_ExplainBarge1_Dialogue{
-    msgbox(gText_Warehousewarfare_WeGotSomebody)
-    msgbox(gText_Warehousewarfare_HeadToOver)
+    msgbox(format("We got somebody on the inside, who is able to let you in, and we're hoping from there, you're able to help slow down the operations inside."))
+    msgbox(format("Head on over to RouteA, the guard shouldn't be at the door."))
     closemessage
     release
     end
 }
 
 script Quest_Warehousewarfare_ExplainBarge2_Dialogue{
-    msgbox(gText_Warehousewarfare_NewsHasPickedUp)
-    msgbox(gText_Warehousewarfare_GoDownTo)
+    msgbox(format("News has reported that Presto orders are slowing down and getting more expensive. I think shutting down that barge actually did something!"))
+    msgbox(format("Go down to RouteE and get in there! Your path should be open."))
     closemessage
     release
     end
 }
 
 script Quest_Warehousewarfare_ExplainBarge3_Dialogue{
-    msgbox(gText_Warehousewarfare_TheyveMovedAll)
-    msgbox(gText_Warehousewarfare_OddlyEnough)
+    msgbox(format("They've moved all operations to that third barge. You're doing an awesome job!"))
+    msgbox(format("I think even the guards are woring inside overtime, because the guard at the RouteC barge isn't there..."))
     closemessage
     release
     end
 }
 
 script Quest_Warehousewarfare_Reward_Dialogue{
-    msgbox(gText_Warehousewarfare_HolyMoly,MSGBOX_NPC)
+    msgbox(format("Holy moly you did it."),MSGBOX_NPC)
     completequest(QUEST_WAREHOUSEWARFARE)
     addvar(VAR_STORYLINE_STATE,1)
     release
@@ -101,7 +101,7 @@ script Quest_Warehousewarfare_Reward_Dialogue{
 }
 
 script Quest_Warehousewarfare_Complete_Dialogue{
-    msgbox(gText_Warehousewarfare_ThanksAgain,MSGBOX_NPC)
+    msgbox(format("Thanks again!"),MSGBOX_NPC)
     end
 }
 
@@ -139,7 +139,7 @@ script Quest_Warehousewarfare_Barge3Guard_Visibility_Script{
 }
 
 script Quest_Warehousewarfare_Guard_Dialogue{
-    msgbox(gText_Warehousewarfare_YouAreNotAuthorized,MSGBOX_NPC)
+    msgbox(format("You are not authorized to enter."),MSGBOX_NPC)
     release
     end
 }
@@ -208,9 +208,9 @@ script Quest_Warehousewarfare_Barge3_CEO_Battle_Script{
         }
 
         setvar(VAR_QUEST_WAREHOUSEWARFARE_STATE,SAVED_BEFORE_PRESTO_CEO)
-        msgbox(gText_Warehousewarfare_OhYouShut,MSGBOX_NPC,SPEAKER_PRESTO_CEO)
-        msgbox(gText_Warehousewarfare_IRegret,,SPEAKER_PRESTO_CEO)
-        msgbox(gText_Warehousewarfare_YouAreInteresting,,SPEAKER_PRESTO_CEO)
+        msgbox(format("Oh you shut down the engine... and now you're here to free the workers?"),MSGBOX_NPC,SPEAKER_PRESTO_CEO)
+        msgbox(format("I regret to inform you, there are no workers. And of course, you fell for it, {PLAYER}."),,SPEAKER_PRESTO_CEO)
+        msgbox(format("You are interesting... but this is it for you. No more intefering with Presto!"),,SPEAKER_PRESTO_CEO)
         lockall
         closemessage
         startmenu_savescreen
@@ -226,7 +226,7 @@ script Quest_Warehousewarfare_CEO_Battle_Script{
 script Quest_Warehousewarfare_Post_CEO_Battle_Script{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WAREHOUSEWARFARE,SUB_QUEST_3)
         questmenu(QUEST_MENU_SET_REWARD,QUEST_WAREHOUSEWARFARE)
-        msgbox(gText_Warehousewarfare_ThisWillSlowUs,,SPEAKER_PRESTO_CEO)
+        msgbox(format("This will slow us down... but you will not defeat us. You can't."),,SPEAKER_PRESTO_CEO)
         closemessage
     call(TryAutoSave)
         release
@@ -234,7 +234,7 @@ script Quest_Warehousewarfare_Post_CEO_Battle_Script{
 }
 
 script Quest_Warehousewarfare_PostRaid_CEO_Dialogue{
-    msgbox(gText_Persuasivepassenger_IShouldHaveGuessed,MSGBOX_NPC,SPEAKER_PRESTO_CEO)
+    msgbox(format("I should have guessed you'd be behind these... disruptions."),MSGBOX_NPC,SPEAKER_PRESTO_CEO)
     goto(Quest_Warehousewarfare_CEO_Battle_Script)
 }
 

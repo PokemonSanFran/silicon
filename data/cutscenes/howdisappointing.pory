@@ -342,7 +342,7 @@ script HowDisappointing_ArrestScene_Dialogue
     msgbox(format("All right officers, {PLAYER} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA) // PSF TODO Replace PLAYER with OBJECT pronoun
     bufferspeciesname(STR_VAR_1,SPECIES_MIGHTYENA)
     buffermovename(STR_VAR_2,MOVE_TAKE_DOWN)
-    msgbox(gText_HowDisappointing_PokemonUse,,SPEAKER_POLICEMAN)
+    msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),,SPEAKER_POLICEMAN)
     closemessage
     //PSF TODO Adaora is knocked down, need animation here
     applymovement(POLICE_MON,HowDisappointing_UseTakeDown_Movement)
@@ -422,11 +422,11 @@ script HowDisappointing_HandleDebrief_Dialogue
 
 script HowDisappointing_DebriefAfterManhuntHowDisappointing_Dialogue
 {
-    msgbox(gText_HowDisappointing_IAppreciate,,SPEAKER_KEIYING)
+    msgbox(format("I appreciate you handling that, {PLAYER}."),,SPEAKER_KEIYING)
 
     msgbox(format("The police were really agressive."),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
-    msgbox(gText_HowDisappointing_TheyWereAttacking,,SPEAKER_ALICIA)
+    msgbox(format("They were attacking members of the The Tide directly, even though they were coming quietly."),,SPEAKER_ALICIA)
 
     msgbox(format("How are we okay with this? Attacking people with Pokémon? Interogating ordinary people? This isn't what I signed up for!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
@@ -436,11 +436,11 @@ script HowDisappointing_DebriefAfterManhuntHowDisappointing_Dialogue
 
 script HowDisappointing_Debrief_Dialogue
 {
-    msgbox(gText_HowDisappointing_IAppreciate,,SPEAKER_KEIYING)
+    msgbox(format("I appreciate you handling that, {PLAYER}."),,SPEAKER_KEIYING)
 
     msgbox(format("I'm glad to have helped but... the police were really agressive about it."),,SPEAKER_ALICIA)
 
-    msgbox(gText_HowDisappointing_TheyWereAttacking,,SPEAKER_ALICIA)
+    msgbox(format("They were attacking members of the The Tide directly, even though they were coming quietly."),,SPEAKER_ALICIA)
 
     msgbox(format("That's not cool!"),,SPEAKER_ALICIA)
 
@@ -542,7 +542,7 @@ script HowDisappointing_GruntB_Arrest_Script
     //PSF TODO field effect using shock wave and then the grunt laying down
     bufferspeciesname(STR_VAR_1,SPECIES_LUXRAY)
     buffermovename(STR_VAR_2,MOVE_SHOCK_WAVE)
-    msgbox(gText_HowDisappointing_PokemonUse,MSGBOX_DEFAULT,SPEAKER_POLICEMAN,TAIL_SHOUT)
+    msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),MSGBOX_DEFAULT,SPEAKER_POLICEMAN,TAIL_SHOUT)
 
     msgbox(format("Aaarrggghh!"),,SPEAKER_ROCKET_MEMBER_B)
 

@@ -32,26 +32,26 @@ script KeiyingRaisonDetre_MoveIntoFoyer_Script {
 }
 
 script KeiyingRaisonDetre_KidsMeetPlayer_Dialogue {
-    msgbox(gText_KeiyingRaisonDetre_YoureHereInTheFlesh,,SPEAKER_ALEKSANDER)
-        msgbox(gText_KeiyingRaisonDetre_YoureAFreak,,SPEAKER_SUMMER)
+    msgbox(format("Aaaahhhh! {PLAYER}! You're here! In the flesh!"),,SPEAKER_ALEKSANDER)
+        msgbox(format("…Alek, you're a freak."),,SPEAKER_SUMMER)
         closemessage
 
         applymovement(ALEKSANDER, KeiyingRaisonDetre_RunAroundPlayer)
 
-        msgbox(gText_KeiyingRaisonDetre_MaybeTheyllSign,,SPEAKER_ALEKSANDER)
-        msgbox(gText_KeiyingRaisonDetre_ShutUp,,SPEAKER_SUMMER)
-        msgbox(gText_KeiyingRaisonDetre_ShowUsHowYouTookDown,,SPEAKER_ALEKSANDER)
-        msgbox(gText_KeiyingRaisonDetre_AllRightAllRight,,SPEAKER_KEIYING)
+        msgbox(format("Aren't you excited Summer?! Maybe they'll sign your {PLAYER} shirt! "),,SPEAKER_ALEKSANDER)
+        msgbox(format("…shut up!"),,SPEAKER_SUMMER)
+        msgbox(format("Oh oh oh, show us how you took down Belen! Can we see some battle moves? Oh come on yes, let's battle, right now, yeah yeah yeah!"),,SPEAKER_ALEKSANDER)
+        msgbox(format("All right, all right, calm down. I told you you'd have to stifle your excitement, didn't I?"),,SPEAKER_KEIYING)
         applymovement(KEIYING, KeiyingRaisonDetre_WalkIntoFoyer)
-        msgbox(gText_KeiyingRaisonDetre_YouDontWantToScare,,SPEAKER_KEIYING)
-        msgbox(gText_KeiyingRaisonDetre_GonnaGoGet,,SPEAKER_ALEKSANDER)
+        msgbox(format("You don't want to scare {PLAYER} away, do you?"),,SPEAKER_KEIYING)
+        msgbox(format("No no no! Oh, I'm gonna go get all my League stuff, I'll be right back!"),,SPEAKER_ALEKSANDER)
         closemessage
         applymovement(ALEKSANDER, KeiyingRaisonDetre_RunUpstairs)
         waitmovement(0)
-        msgbox(gText_KeiyingRaisonDetre_SorryAboutThat,,SPEAKER_KEIYING)
+        msgbox(format("Sorry about that. They get… very excited. And don't let Summer's demeanor fool you. I think they've watched your battle against Emrys at least 40 times."),,SPEAKER_KEIYING)
         applymovement(SUMMER, Common_Movement_FaceLeft)
         waitmovement(0)
-        msgbox(gText_KeiyingRaisonDetre_Dad,,SPEAKER_SUMMER)
+        msgbox(format("Dad!"),,SPEAKER_SUMMER)
         closemessage
         applymovement(SUMMER, KeiyingRaisonDetre_RunUpstairs)
         waitmovement(0)
@@ -64,25 +64,25 @@ script KeiyingRaisonDetre_KidsMeetPlayer_Dialogue {
 script KeiyingRaisonDetre_CityDiscussion_Dialogue {
     applymovement(PLAYER, KeiyingRaisonDetre_WalkFromEntrance)
         waitmovement(0)
-        msgbox(gText_KeiyingRaisonDetre_YourHouseIsBeautiful,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Your house is beautiful. Actually, the entire city is beautiful."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_ItWasImportantToMe,,SPEAKER_KEIYING)
+        msgbox(format("Thank you. It was important to me that I raised my family in PetarosaBorough. Most SharpRise Capital employees want to be in the city - close to the office and the nightlife. "),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_ButItsHardToJustify,,SPEAKER_KEIYING)
+        msgbox(format("But it's hard to justify raising a family there. It's expensive on this side, sure, but it's less dangerous… and not suffering as much."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_IveBeenStruggling,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("I've been struggling to find the right word for it, but, yeah, suffering sounds right. I've met so many people who are having a really rough time."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_ItsBeenSaidThat,,SPEAKER_KEIYING)
+        msgbox(format("I've noticed that Charlotte doesn't quite see the region the way you do! I admire your compassion."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_ToughToBeAround,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Do I really deserve all of this just because I'm decent at battles?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_ICompletelyUnderstand,,SPEAKER_KEIYING)
+        msgbox(format("I completely understand, trust me. When I worked in HodouCity, it wasn't this bad, but despite my best efforts, things have gotten worse."),,SPEAKER_KEIYING)
         closemessage
 
         applymovement(KEIYING, KeiyingRaisonDetre_WalkTowardsLiving)
         waitmovement(0)
 
-        msgbox(gText_KeiyingRaisonDetre_ItsMuchEasier,,SPEAKER_KEIYING)
+        msgbox(format("Come, let's talk."),,SPEAKER_KEIYING)
         closemessage
         applymovement(KEIYING, KeiyingRaisonDetre_WalkToDining)
         waitmovement(0)
@@ -95,7 +95,7 @@ script KeiyingRaisonDetre_CityDiscussion_Dialogue {
 
 script KeiyingRaisonDetre_ComeSit_Dialogue {
     lock
-        msgbox(gText_KeiyingRaisonDetre_ComeSit, MSGBOX_NPC,SPEAKER_KEIYING)
+        msgbox(format("Over here!"), MSGBOX_NPC,SPEAKER_KEIYING)
         setvar(VAR_KEIYING_RAISON_DETRE_STATE, START_KEIYING_WINE_SPEECH)
         closemessage
         release
@@ -104,7 +104,7 @@ script KeiyingRaisonDetre_ComeSit_Dialogue {
 
 script KeiyingRaisonDetre_InteractAtTable_Script {
     lock
-        msgbox(gText_KeiyingRaisonDetre_IPickedOut,,SPEAKER_KEIYING)
+        msgbox(format("Take a seat."),,SPEAKER_KEIYING)
         closemessage
         release
         end
@@ -115,45 +115,45 @@ script KeiyingRaisonDetre_Wine_Dialogue {
     applymovement(PLAYER, Common_Movement_FaceLeft)
         waitmovement(0)
 
-        msgbox(gText_KeiyingRaisonDetre_HowMuch,,SPEAKER_KEIYING)
+        msgbox(format("How much do you know about Adelaide?"),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_ThatLastPartIsImportant,,SPEAKER_KEIYING)
+        msgbox(format("They don't have deep roots here, but they're a brilliant business person. I don't always see eye to eye with them, but they've never let down a shareholder."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_Shareholders,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("What shareholders?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_YeahTheCorporate,,SPEAKER_KEIYING)
+        msgbox(format("The corporate sponsors who helped us acquire the Pokémon League. Adelaide saw its potential and knew we could make it even bigger. Presto, Arriba and Buzzr all quickly got on board."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_WhatDoYouMean,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("What do you mean?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_DoYouKnowHow,,SPEAKER_KEIYING)
+        msgbox(format("Do you know how the Kanto region makes the majority of its revenue?"),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_IsntItMostly,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Isn't it mostly manufacturing?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_UsedToBe,,SPEAKER_KEIYING)
+        msgbox(format("Used to be. But after Red took the League by storm back in '96, the League has been the primary economic driver. Revenue from the Pokémon League is about to eclipse tourism in Alola too."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_WoahWaitBigger,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Woah wait, bigger than Alolan tourism?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_PeopleLoveBattles,,SPEAKER_KEIYING)
+        msgbox(format("People love Pokémon battles. Adelaide knew if we used our resources to create a compelling product, we wouldn't need Dynamax or League HQs built into cathedrals. We've got what the people want to see."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_TheBroadcasts,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("The broadcasts?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_MyKidsBeingObsessed,,SPEAKER_KEIYING)
+        msgbox(format("Yes. My kids being obsessed with you isn't an accident. We're building rock stars."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_WereGoingToMake,,SPEAKER_KEIYING)
+        msgbox(format("SharpRise Capital is going to make Resido the region where Trainers come to become rock stars. Resido's new talent will attract the best and the brightest, and the region will be richer for it. We can uplift all of Resido's citizens to something much much greater. You're an investment, {PLAYER}, but it's all part of a much bigger play."),,SPEAKER_KEIYING)
 
         applymovement(KEIYING,Common_Movement_FaceAwayPlayer)
         waitmovement(KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_IPray,,SPEAKER_KEIYING)
+        msgbox(format("I choose to believe that this is for the greater good."),,SPEAKER_KEIYING)
 
-        msgbox(gText_KeiyingRaisonDetre_WhatWasThat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("What did you sa -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
         playse(SE_DING_DONG)
         waitfanfare
 
-        msgbox(gText_KeiyingRaisonDetre_DinnerIsServed,,SPEAKER_MAID)
+        msgbox(format("Dinner is served!"),,SPEAKER_MAID)
 
-        msgbox(gText_KeiyingRaisonDetre_AhLetsEat,,SPEAKER_KEIYING)
+        msgbox(format("Ah, let's eat!"),,SPEAKER_KEIYING)
         closemessage
         applymovement(KEIYING, WalkToDiningRoom)
         waitmovement(0)
@@ -177,7 +177,7 @@ script KeiyingRaisonDetre_StartDinner_Script {
     waitmovement(0)
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
 
-        msgbox(gText_KeiyingRaisonDetre_WereHonoredToHaveYou,,SPEAKER_KEIYING)
+        msgbox(format("{PLAYER}, we're honored to have you in our home. Enjoy dinner!"),,SPEAKER_KEIYING)
         closemessage
         fadescreen(FADE_TO_BLACK)
         addobject(ALEKSANDER)
@@ -199,12 +199,12 @@ script KeiyingRaisonDetre_DinnerConversation_Dialogue {
         special(DrawWholeMapView)
         fadescreen(FADE_FROM_BLACK)
         applymovement(CAMERA, KeiyingRaisonDetre_PanCamera)
-        msgbox(gText_KeiyingRaisonDetre_YourDadIsRed,,SPEAKER_ALEKSANDER)
+        msgbox(format("Is it true your dad is Red from Pallet Town?"),,SPEAKER_ALEKSANDER)
         closemessage
-        msgbox(gText_KeiyingRaisonDetre_HowManyBadges,,SPEAKER_ALEKSANDER)
+        msgbox(format("How many badges did you have in Orre?"),,SPEAKER_ALEKSANDER)
         closemessage
         bufferitemnameplural(STR_VAR_1,ITEM_LAVA_COOKIE,2)
-        msgbox(gText_KeiyingRaisonDetre_DoIHaveToEat,,SPEAKER_SUMMER)
+        msgbox(format("Dad, I was right, {PLAYER} does like {STR_VAR_1}!"),,SPEAKER_SUMMER)
         closemessage
 		waitmovement(CAMERA)
         fadescreen(FADE_TO_BLACK)
@@ -221,7 +221,7 @@ script KeiyingRaisonDetre_DinnerConversation_Dialogue {
 
 script KeiyingRaisonDetre_RunToWork_Dialogue {
 
-    msgbox(gText_KeiyingRaisonDetre_SorryThatsMyPhone,,SPEAKER_KEIYING)
+    msgbox(format("Sorry, that's my phone and I need to take that."),,SPEAKER_KEIYING)
         closemessage
         applymovement(KEIYING, KeiyingRaisonDetre_StepAwayFromTable)
         waitmovement(0)
@@ -230,24 +230,24 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
         delay(32)
         applymovement(KEIYING, Common_Movement_FaceRight)
         waitmovement(0)
-        msgbox(gText_KeiyingRaisonDetre_ShitTheresAnUrgent,,SPEAKER_KEIYING)
-        msgbox(gText_KeiyingRaisonDetre_IWouldHate,,SPEAKER_KEIYING)
-        msgbox(gText_KeiyingRaisonDetre_OhThanks,,SPEAKER_ALICIA,,EMOTE_HAPPY)
+        msgbox(format("Shit, there's an urgent matter at work. I'm so sorry kids, I'll try to hurry back."),,SPEAKER_KEIYING)
+        msgbox(format("{PLAYER}, I would hate to have you make the trek back to CuconuTown this late. We have a guest room, if you'd like to stay here."),,SPEAKER_KEIYING)
+        msgbox(format("Oh, that would be great, thanks!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
         closemessage
 
         applymovement(KEIYING, KeiyingRaisonDetre_KissKids)
         waitmovement(0)
 
-        msgbox(gText_KeiyingRaisonDetre_WaitIThoughtThat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Wait, I thought that hallway just goes upstairs?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_YeahItDoes,,SPEAKER_SUMMER)
-        msgbox(gText_KeiyingRaisonDetre_What,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Yeah, it does. Daddy just teleports to work!"),,SPEAKER_SUMMER)
+        msgbox(format("…what?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_TonOfMoneyInWarp,,SPEAKER_SUMMER)
+        msgbox(format("SharpRise Capital has a ton of money in warp tiles. All the executives have panels from their house to their office installed. He literally teleports to work, everyday."),,SPEAKER_SUMMER)
 
-        msgbox(gText_KeiyingRaisonDetre_OhDamnYouWerent,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Oh damn, you weren't kidding."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_IDontKnowWhy,,SPEAKER_SUMMER)
+        msgbox(format("I don't know why they bother. Our parents are never even home. They're trying so hard to save the world, they're totally ignoring the one right in front of them.\NI wish he would go back to being a Gym Leader!"),,SPEAKER_SUMMER)
         closemessage
         applymovement(SUMMER, KeiyingRaisonDetre_LeaveDiningRoom)
         waitmovement(0)
@@ -270,21 +270,21 @@ script KeiyingRaisonDetre_NewsStory_Script {
         fadescreen(FADE_FROM_BLACK)
         special(TurnOnTVScreen)
         delay(60)
-        msgbox(gText_KeiyingRaisonDetre_AndNowWeGoTo,,SPEAKER_NEWS)
-        msgbox(gText_KeiyingRaisonDetre_ThanksKen,,SPEAKER_NEWS_B)
-        msgbox(gText_KeiyingRaisonDetre_WereAlsoLearningThat,,SPEAKER_NEWS)
+        msgbox(format("And now we go to Da Lin, for more details about last night's riots. "),,SPEAKER_NEWS)
+        msgbox(format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of TheTide, culminating in violent attacks on the CapheCity Police Force. Both sides sustained significant injury, and dozens of members of TheTide were taken into custody last night. Back to you, Ken."),,SPEAKER_NEWS_B)
+        msgbox(format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing TheTide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour."),,SPEAKER_NEWS)
         closemessage
         special(TurnOffTVScreen)
         applymovement(4, WalkToThePlayer)
         waitmovement(0)
 
-        msgbox(gText_KeiyingRaisonDetre_IsThereSobAnyhingElse,,SPEAKER_MAID)
+        msgbox(format("Is there anything else I can get you, Lord {PLAYER}?"),,SPEAKER_MAID)
         applymovement(PLAYER, Common_Movement_FaceUp)
         waitmovement(0)
 
-        msgbox(gText_KeiyingRaisonDetre_AreYouOkay,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Are you okay? What's wrong?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_KeiyingRaisonDetre_MySobSonIsInTheICU,,SPEAKER_MAID)
+        msgbox(format("I'm sorry. My… son is in the ICU after the riots last night. TheTide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_MAID)
         closemessage
         applymovement(CRYING_MAID, KeiyingRaisonDetre_LeaveDiningRoomCrying)
         waitmovement(0)
@@ -301,7 +301,7 @@ script KeiyingRaisonDetre_NewsStory_Script {
 
 script KeiyingRaisonDetre_PreventPlayerLeaving_Script {
     if (var(VAR_KEIYING_RAISON_DETRE_STATE) < POST_KEIYING_RAISON_DETRE){
-        msgbox(gText_KeiyingRaisonDetre_HasBeenSoGenerous,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Keiying has been so generous... I should stay."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
             closemessage
             applymovement(PLAYER, Common_Movement_WalkUp)
             waitmovement(0)

@@ -63,7 +63,7 @@ script CutePokemon_Dialogue_GreetingPerlacia
 	addobject(MELISSA_PERLACIA_INSIDE)
 	applymovement(MELISSA_PERLACIA_INSIDE,CutePokemon_WalkToPlayer_Movement)
 	waitmovement(MELISSA_PERLACIA_INSIDE)
-	msgbox(CutePokemon_Text_WelcomeShortStaffed,,SPEAKER_MELISSA)
+	msgbox(format("Welcome to The Boba Shop! Sorry, we’re short staffed today!"),,SPEAKER_MELISSA)
 	closemessage
 	release
 	end
@@ -86,7 +86,7 @@ script CutePokemon_Script_PerlaciaSelectDialogue
 script CutePokemon_Dialogue_FirstInteraction
 {
 	addvar(QUEST_CUTEPOKEMON,1)
-	msgbox(CutePokemon_Text_AreYouFree,,SPEAKER_MELISSA)
+	msgbox(format("Hey, are you free? I’m about to run to my next shift across Resido. Do you have time to help me find a cute Pokémon? I keep picking up shifts, because everybody’s burnt out."),,SPEAKER_MELISSA)
 
 		dynmultichoice(
 				1,1,TRUE,2,0,NULL,
@@ -112,14 +112,14 @@ script CutePokemon_Script_SelectOptionCheckPokemon
 		release
 		end
 	}
-	msgbox(CutePokemon_Text_ThatWasFast,MSGBOX_NPC,SPEAKER_MELISSA)
+	msgbox(format("That was fast! Show me!"),MSGBOX_NPC,SPEAKER_MELISSA)
 
 	special(ChoosePartyMon)
 	waitstate
 
 	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
 	{
-		msgbox(CutePokemon_Text_NoMonBobaInstead,,SPEAKER_MELISSA)
+		msgbox(format("Oh, you don’t have a Pokémon? Do you want to order a boba drink instead?"),,SPEAKER_MELISSA)
 		closemessage
 		release
 		end
@@ -138,11 +138,11 @@ script CutePokemon_Dialogue_PerlaciaGuess
 	{
 	default:
 		case VAR_CUTE_POKEMON_EISCUE_HINT_0:
-			msgbox(CutePokemon_Text_IveBeenLookingIce,,SPEAKER_MELISSA)
+			msgbox(format("I’ve been looking for this cute Pokémon. It’s an Ice-type. Can you catch one for me? But only if you have time. You can say no!"),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_EISCUE_HINT_1:
-			msgbox(CutePokemon_Text_BringIceShort,,SPEAKER_MELISSA)
+			msgbox(format("Bring the cute Ice-type Pokémon that’s shorter than {STR_VAR_1}. I’ve gotta go back to work!"),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_EISCUE_HINT_2:
-			msgbox(CutePokemon_Text_BringIceShortTrapped,,SPEAKER_MELISSA)
+			msgbox(format("Bring the cute Ice-type Pokémon that’s shorter than {STR_VAR_1} and is trapped in its own head. I’ve gotta go back to work!"),,SPEAKER_MELISSA)
 	}
 
 	call(CutePokemon_Script_SelectOptionCheckPokemon)
@@ -158,11 +158,11 @@ script CutePokemon_Script_PerlaciaCheck
 	switch(var(VAR_TEMP_0))
 	{
 		case VAR_CUTE_POKEMON_EISCUE_HINT_0:
-			msgbox(CutePokemon_Text_ThisIsFine,,SPEAKER_MELISSA)
+			msgbox(format("This is fine… but it's not an Ice-type like I asked for."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_EISCUE_HINT_1:
-			msgbox(CutePokemon_Text_ShorterThanHeight,,SPEAKER_MELISSA)
+			msgbox(format("Oh! This is a cute Pokémon! But the one I have in mind is shorter than {STR_VAR_1}."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_EISCUE_HINT_2:
-			msgbox(CutePokemon_Text_ShorterAndHeight,,SPEAKER_MELISSA)
+			msgbox(format("Oh! This is a cute Pokémon! But the one I have in mind feels trapped in its own head."),,SPEAKER_MELISSA)
 		default: goto(CutePokemon_Script_PerlaciaAsk)
 	}
 	return
@@ -173,7 +173,7 @@ script CutePokemon_Script_PerlaciaAsk
 	askplayermon(CutePokemon_Text_ThatsItThankYou,CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_1)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_EISCUE_HINT_2)
-	msgbox(CutePokemon_Text_IKnewYoudBe,,SPEAKER_MELISSA)
+	msgbox(format("Hell yeah! I knew you’d be a real one!"),,SPEAKER_MELISSA)
 	closemessage
 	release
 	end
@@ -181,7 +181,7 @@ script CutePokemon_Script_PerlaciaAsk
 
 script CutePokemon_Dialogue_SubquestComplete
 {
-	msgbox(CutePokemon_Text_IHaveToGetBack,,SPEAKER_MELISSA)
+	msgbox(format("I have to get back to work, do you want some boba?"),,SPEAKER_MELISSA)
 	closemessage
 	release
 	end
@@ -189,7 +189,7 @@ script CutePokemon_Dialogue_SubquestComplete
 
 script CutePokemon_Dialogue_CheckItemSpace
 {
-	msgbox(CutePokemon_Text_ThisTimeIHave,,SPEAKER_MELISSA)
+	msgbox(format("This time, I have something for you in exchange for the right Pokémon. Come back when you've made room!"),,SPEAKER_MELISSA)
 		closemessage
 		release
 		end
@@ -239,7 +239,7 @@ script CutePokemon_Dialogue_GreetingQiu
 	addobject(MELISSA_QIU_INSIDE)
 	applymovement(MELISSA_QIU_INSIDE,CutePokemon_WalkToPlayer_Movement)
 	waitmovement(MELISSA_QIU_INSIDE)
-	msgbox(CutePokemon_Text_WelcomeToShop,,SPEAKER_MELISSA)
+	msgbox(format("Welcome to The Boba Shop!"),,SPEAKER_MELISSA)
 	closemessage
 	release
 	end
@@ -251,7 +251,7 @@ script CutePokemon_Dialogue_RecognizeGoOutsideQiu
 	lock
     bufferspeciesname(STR_VAR_1,SPECIES_EISCUE)
     buffermapname(STR_VAR_2,MAP_PERLACIA_CITY)
-	msgbox(CutePokemon_Text_DidntYouHelpEiscue,MSGBOX_NPC,SPEAKER_MELISSA)
+	msgbox(format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with him a bit since you gave him to me. I’m about to go on my break. Let’s battle outside!"),MSGBOX_NPC,SPEAKER_MELISSA)
 	closemessage
 	applymovement(MELISSA_QIU_INSIDE,CutePokemon_WalkToExit_Movement)
 	fadescreen(FADE_TO_BLACK)
@@ -282,12 +282,12 @@ script CutePokemon_Script_QiuSelectDialogue
 
 script CutePokemon_Script_BattleQiu
 {
-	msgbox(CutePokemon_Text_DoYouMind,,SPEAKER_MELISSA)
+	msgbox(format("Do you mind if I smoke?"),,SPEAKER_MELISSA)
 	closemessage
 	trainerbattle_no_intro(TRAINER_MELISSA_QIU,CutePokemon_Text_INeedToTrain)
 	//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_BATTLE_QIU_COMPLETE)
-	msgbox(CutePokemon_Text_DoYouHaveTime,,SPEAKER_MELISSA)
+	msgbox(format("Good work {PLAYER}. Do you, by chance, have time to help me find another cute Pokémon?"),,SPEAKER_MELISSA)
 
 	dynmultichoice(
 			1,1,TRUE,2,0,NULL,
@@ -307,11 +307,11 @@ script CutePokemon_Dialogue_QiuGuess
 	{
 	default:
 		case VAR_CUTE_POKEMON_CORSOLA_HINT_0:
-            msgbox(CutePokemon_Text_MyPartnerAskedPink,,SPEAKER_MELISSA)
+            msgbox(format("My partner asked me to find this pink Pokémon for him, but I have too many shifts to find the time to catch one."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_CORSOLA_HINT_1:
-            msgbox(CutePokemon_Text_PinkAndWeighs,,SPEAKER_MELISSA)
+            msgbox(format("Hey, did you ever get the chance to get that pink Pokémon that weighs less than {STR_VAR_1}?"),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_CORSOLA_HINT_2:
-            msgbox(CutePokemon_Text_PinkWeighsPacks,,SPEAKER_MELISSA)
+            msgbox(format("Hey, did you ever get the chance to get that pink Pokémon that weighs less than {STR_VAR_1} and travels in packs?"),,SPEAKER_MELISSA)
 	}
 
         checkitemspace(ITEM_QUEST_CUTEPOKEMON_1,1)
@@ -333,11 +333,11 @@ script CutePokemon_Script_QiuCheck
 	switch(var(VAR_TEMP_0))
 	{
 		case VAR_CUTE_POKEMON_CORSOLA_HINT_0:
-			msgbox(CutePokemon_Text_ThisIsntPink,,SPEAKER_MELISSA)
+			msgbox(format("This Pokémon isn’t pink."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_CORSOLA_HINT_1:
-			msgbox(CutePokemon_Text_PinkWrongWeight,,SPEAKER_MELISSA)
+			msgbox(format("While this Pokémon is cute and pink, the one I had in mind weighs less than {STR_VAR_1}."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_CORSOLA_HINT_2:
-			msgbox(CutePokemon_Text_PinkWeightPacks,,SPEAKER_MELISSA)
+			msgbox(format("Oh! This is a cute Pokémon! But the one I have in mind is for the girls, and travels in packs."),,SPEAKER_MELISSA)
 		default: goto(CutePokemon_Script_QiuAsk)
 	}
 	return
@@ -349,8 +349,8 @@ script CutePokemon_Script_QiuAsk
 	askplayermon(CutePokemon_Text_MyPartnerWillBeExcited,CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_2)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_CORSOLA_HINT_2)
-	msgbox(CutePokemon_Text_IKnewYoudBe,,SPEAKER_MELISSA)
-	msgbox(CutePokemon_Text_ThanksForAllHelp,,SPEAKER_MELISSA)
+	msgbox(format("Hell yeah! I knew you’d be a real one!"),,SPEAKER_MELISSA)
+	msgbox(format("Thanks for all your help so far. You’re really saving me as I waste away at these jobs. Here's something for your help!"),,SPEAKER_MELISSA)
 	closemessage
 	cueobjectplayer(MELISSA_QIU_OUTSIDE)
 	giveitem(ITEM_QUEST_CUTEPOKEMON_1,1)
@@ -400,7 +400,7 @@ script CutePokemon_Dialogue_GreetingCresalta
 	addobject(MELISSA_CRESALTA_INSIDE)
 	applymovement(MELISSA_CRESALTA_INSIDE,CutePokemon_WalkToPlayer_Movement)
 	waitmovement(MELISSA_CRESALTA_INSIDE)
-	msgbox(CutePokemon_Text_WelcomeToShop,,SPEAKER_MELISSA)
+	msgbox(format("Welcome to The Boba Shop!"),,SPEAKER_MELISSA)
 	closemessage
 	release
 	end
@@ -412,7 +412,7 @@ script CutePokemon_Dialogue_RecognizeGoOutsideCresalta
 	lock
     bufferspeciesname(STR_VAR_1,SPECIES_CORSOLA)
     buffermapname(STR_VAR_2,MAP_QIU_VILLAGE)
-	msgbox(CutePokemon_Text_DidntYouHelpCorsola,,SPEAKER_MELISSA)
+	msgbox(format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with her a bit since you gave her to me. I’m about to go on my break. Let’s battle outside!"),,SPEAKER_MELISSA)
 	closemessage
 	applymovement(MELISSA_CRESALTA_INSIDE,CutePokemon_WalkToExit_Movement)
 	fadescreen(FADE_TO_BLACK)
@@ -438,12 +438,12 @@ script CutePokemon_Script_CresaltaSelectDialogue
 
 script CutePokemon_Script_BattleCresalta
 {
-	msgbox(CutePokemon_Text_DoYouMind,,SPEAKER_MELISSA)
+	msgbox(format("Do you mind if I smoke?"),,SPEAKER_MELISSA)
 	closemessage
 	trainerbattle_no_intro(TRAINER_MELISSA_CRESALTA,CutePokemon_Text_INeedToTrain)
 	//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_BATTLE_CRESALTA_COMPLETE)
-	msgbox(CutePokemon_Text_DoYouHaveTime,,SPEAKER_MELISSA)
+	msgbox(format("Good work {PLAYER}. Do you, by chance, have time to help me find another cute Pokémon?"),,SPEAKER_MELISSA)
 
 	dynmultichoice(
 			1,1,TRUE,2,0,NULL,
@@ -462,11 +462,11 @@ script CutePokemon_Dialogue_CresaltaGuess
 	{
 	default:
 		case VAR_CUTE_POKEMON_DUSKULL_HINT_0:
-            msgbox(CutePokemon_Text_ThisMonLevitate,,SPEAKER_MELISSA)
+            msgbox(format("I'm looking for a cute Pokémon with the Ability {STR_VAR_1}."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_DUSKULL_HINT_1:
-            msgbox(CutePokemon_Text_MonLevitateAndEvolve,,SPEAKER_MELISSA)
+            msgbox(format("Did you ever find that cute Pokémon with the Ability {STR_VAR_1} and can evolve?"),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_DUSKULL_HINT_2:
-            msgbox(CutePokemon_Text_LevitateEvolveCloak,,SPEAKER_MELISSA)
+            msgbox(format("Did you ever find that cute Pokémon with the Ability {STR_VAR_1}, can evolve and wears a cloak?"),,SPEAKER_MELISSA)
 	}
 
 	call(CutePokemon_Script_SelectOptionCheckPokemon)
@@ -482,11 +482,11 @@ script CutePokemon_Script_CresaltaCheck
 	switch(var(VAR_TEMP_0))
 	{
 		case VAR_CUTE_POKEMON_DUSKULL_HINT_0:
-			msgbox(CutePokemon_Text_ThisCantLevitate,,SPEAKER_MELISSA)
+			msgbox(format("Dude, this Pokémon doesn't have {STR_VAR_1}."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_DUSKULL_HINT_1:
-			msgbox(CutePokemon_Text_CuteLevitateNeedsEvolve,,SPEAKER_MELISSA)
+			msgbox(format("While this Pokémon is cute and has {STR_VAR_1}, the one I had in mind can evolve."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_DUSKULL_HINT_2:
-			msgbox(CutePokemon_Text_CuteLeviitteEvolveNeedsCloak,,SPEAKER_MELISSA)
+			msgbox(format("Oh, I forgot that this Pokémon has {STR_VAR_1} and evolve, but the one I had in mind is like, wearing a cloak."),,SPEAKER_MELISSA)
 		default: goto(CutePokemon_Script_CresaltaAsk)
 	}
 	return
@@ -497,7 +497,7 @@ script CutePokemon_Script_CresaltaAsk
 	askplayermon(CutePokemon_Text_ThanksForFinding,CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_3)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_GREETING_HALAI)
-	msgbox(CutePokemon_Text_ThanksForBeingAHomie,,SPEAKER_MELISSA)
+	msgbox(format("Hell yeah! Thanks for being a homie."),,SPEAKER_MELISSA)
 	closemessage
 	release
 	end
@@ -534,12 +534,12 @@ script CutePokemon_Script_HalaiSelectDialogue
 script CutePokemon_Script_BattleHalai
 {
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_ASK_BATTLE_HALAI)
-	msgbox(CutePokemon_Text_WeHaveToBattle,,SPEAKER_MELISSA)
+	msgbox(format("Hey {PLAYER}. We have to battle because the game designer said so."),,SPEAKER_MELISSA)
 	closemessage
 	trainerbattle_no_intro(TRAINER_MELISSA_HALAI,CutePokemon_Text_INeedToTrain)
 	//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_BATTLE_HALAI_COMPLETE)
-	msgbox(CutePokemon_Text_GoodWorkPlayer,,SPEAKER_MELISSA)
+	msgbox(format("Good work {PLAYER}. Do you, by chance, have time to help me find one last cute Pokémon?"),,SPEAKER_MELISSA)
 
 	dynmultichoice(
 			1,1,TRUE,2,0,NULL,
@@ -559,11 +559,11 @@ script CutePokemon_Dialogue_HalaiGuess
 	{
 	default:
 		case VAR_CUTE_POKEMON_SCRAFTY_HINT_0:
-            msgbox(CutePokemon_Text_CanBeBredDragon,,SPEAKER_MELISSA)
+            msgbox(format("I'm looking for a cute Pokémon that can be bred with dragons."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_SCRAFTY_HINT_1:
-            msgbox(CutePokemon_Text_CanBeBredDragonAcidSpray,,SPEAKER_MELISSA)
+            msgbox(format("Hey, {PLAYER}, did you come across a cute Pokémon that can breed with dragons and learn the move {STR_VAR_1}?"),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_SCRAFTY_HINT_2:
-            msgbox(CutePokemon_Text_CanBeBredDragonAcidSprayHasMohawk,,SPEAKER_MELISSA)
+            msgbox(format("Hey, {PLAYER}, did you come across a cute Pokémon that can breed with dragons and learn the move {STR_VAR_1} that basically has a mohawk?"),,SPEAKER_MELISSA)
 	}
 
 	checkitemspace(ITEM_QUEST_CUTEPOKEMON_2,1)
@@ -585,11 +585,11 @@ script CutePokemon_Script_HalaiCheck
 	switch(var(VAR_TEMP_0))
 	{
 		case VAR_CUTE_POKEMON_SCRAFTY_HINT_0:
-			msgbox(CutePokemon_Text_DidYouEvenRead,,SPEAKER_MELISSA)
+			msgbox(format("Dude, did you even read the Pokédex entry?"),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_SCRAFTY_HINT_1:
-			msgbox(CutePokemon_Text_CuteDragonsNeedsAcid,,SPEAKER_MELISSA)
+			msgbox(format("While this Pokémon is cute and can breed with dragons, the Pokémon I had in mind can learn the move {STR_VAR_1}."),,SPEAKER_MELISSA)
 		case VAR_CUTE_POKEMON_SCRAFTY_HINT_2:
-			msgbox(CutePokemon_Text_CuteDragonAcidSprayNeedsMOhawk,,SPEAKER_MELISSA)
+			msgbox(format("Oh, I forgot about this one. The cute Pokémon I had in mind has a mohawk. Or looks like it has a mohawk…? I don’t know."),,SPEAKER_MELISSA)
 		default: goto(CutePokemon_Script_HalaiAsk)
 	}
 	return
@@ -602,7 +602,7 @@ script CutePokemon_Script_HalaiAsk
 
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_4)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_CORRECT)
-	msgbox(CutePokemon_Text_ThanksForBeingAealOneIMadeThis,,SPEAKER_MELISSA)
+	msgbox(format("Hell yeah! Thanks for being a real one and helping me find all these Pokémon. Take this, I made this myself on break!"),,SPEAKER_MELISSA)
 	closemessage
 	cueobjectplayer(MELISSA_QIU_OUTSIDE)
 	giveitem(ITEM_QUEST_CUTEPOKEMON_2,1)
@@ -616,14 +616,14 @@ script CutePokemon_Dialogue_Rematch
 {
 	if(var(VAR_CUTE_POKEMON_GUESS) != VAR_CUTE_POKEMON_REMATCH_COMPLETE)
 	{
-		msgbox(CutePokemon_Text_DoYouHaveTimeToBattle,,SPEAKER_MELISSA)
+		msgbox(format("Hey {PLAYER}. Thanks again for helping me catch those cute Pokémon. Do you have time to battle?"),,SPEAKER_MELISSA)
 		closemessage
 		trainerbattle_no_intro(TRAINER_MELISSA_REMATCH,CutePokemon_Text_INeedToTrain)
 		//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 		setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_REMATCH_COMPLETE)
 	}
 
-	msgbox(CutePokemon_Text_PostBattleBoba,,SPEAKER_MELISSA)
+	msgbox(format("Wanna grab some post battle boba?"),,SPEAKER_MELISSA)
 	closemessage
 	release
 	end

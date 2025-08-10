@@ -38,10 +38,10 @@ script WishaastLake_InteractEllen_Event_Script {
 script WishaastLake_Herb_Dealer_Script{
     lock
     faceplayer
-    msgbox(gText_WishaastLake_HeyManWhatCanI)
+    msgbox(format("hey man what can i get you today"))
 	waitmessage
 	pokemart(HerbDealerShop)
-    msgbox(gText_WishaastLake_ThanksComeAgain)
+    msgbox(format("thanks come again!"))
     // After making a successful purchase in a Poké Mart, the Id of the map that the Player
     // is at gets written to VAR_TEMP_1. If VAR_TEMP_1 is MAP_WISHAAST_LAKE in this context,
     // that's because the Player made a successful purchase there.
@@ -59,9 +59,9 @@ script WishaastLake_Interact_HerbBystander_Dialogue{
     questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SHUTDOWNMEDICINEMAN)
 
     if(var(VAR_RESULT)){
-        msgbox(gText_WishaastLake_OhManDidYouHear,MSGBOX_NPC)
+        msgbox(format("oh man did you hear? the herb guy got shut down. looks like somebody ratted him out for not having a license. now we can only buy from that place in CresaltaVista!"),MSGBOX_NPC)
     }else {
-        msgbox(gText_WishaastLake_ThisGuyIs,MSGBOX_NPC)
+        msgbox(format("this guy has the best herbs, and so much cheaper than the place in CresaltaVista! I don't think this guy is like totally above board..."),MSGBOX_NPC)
     }
     end
 }

@@ -25,18 +25,18 @@ script EnterBD_Event_Script {
 script EnterBD_MumbleToSelf_Dialogue {
     lock
     setvar(VAR_GYM_7_STATE, GYM_SAVE_BEFORE_LEADER)
-    msgbox(gText_EnterBD_StupidParade,,SPEAKER_BD,TAIL_WHISPER)
+    msgbox(format("stupid fucking parade…"),,SPEAKER_BD,TAIL_WHISPER)
     closemessage
         applymovement(BD, EnterBD_PaceLeftFrontOfDesk)
     waitmovement(0)
 
-    msgbox(gText_EnterBD_TheyJustDontUnderstand,,SPEAKER_BD,TAIL_WHISPER)
+    msgbox(format("They just don't understand… SharpRise was going to own this place, one way or another. We were never going to win. I made sure that Tirabudin Gym kept its Gym! And what, I'm a traitor because I kept my job? Got paid?"),,SPEAKER_BD,TAIL_WHISPER)
     closemessage
 
     applymovement(BD, EnterBD_PaceRightFrontOfDesk)
     waitmovement(0)
 
-    msgbox(gText_EnterBD_HeyYouSeemBusy,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Hey, you seem busy, but are you BD?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 
     playse(SE_PIN)
@@ -45,7 +45,7 @@ script EnterBD_MumbleToSelf_Dialogue {
     applymovement(BD, Common_Movement_FaceDown)
     waitmovement(0)
 
-    msgbox(gText_EnterBD_ShitShitShit, MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("! Shit. Shit shit shit hi, are you a challenger? Hold on yeah, hold on. NOPE, not doing this sober, hold on… Lemme just…"), MSGBOX_NPC,SPEAKER_BD)
     closemessage
 
     applymovement(BD, EnterBD_TakeDrugs)
@@ -125,15 +125,15 @@ script EnterBD_PlayerPosition16 {
 
 script EnterPsf7leader_ExplainLab_Dialogue {
     reveal(REVEAL_BD)
-    msgbox(gText_EnterBD_SoBackHere,,SPEAKER_BD)
+    msgbox(format("So back here, I experiment with new synthetic drugs. Always trying to get an edge, you know? Let's see if I can battle under the influence of MGB-07."),,SPEAKER_BD)
 
-    msgbox(gText_EnterBD_WaitDoesTheLeague,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Wait, does the League let you battle under the influence like that?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         startmenu_savescreen
     goto(EnterBD_StartBattle_Script)
 }
 
 script EnterBD_StartBattle_Script {
-    msgbox(gText_EnterBD_IDontKnow,,SPEAKER_BD)
+    msgbox(format("I don't know the rules… but I'm sure they won't stop me either way."),,SPEAKER_BD)
     closemessage
         trainerbattle_no_intro(TRAINER_BD, gText_EnterBD_UghIThinkThisBatch)
     goto(EnterBD_PostBattle_Script)
@@ -170,7 +170,7 @@ script EnterBD_MoveBacktoDesk_Script {
 script EnterBD_PostDefeat1_Dialogue {
     lock
     setvar(VAR_GYM_7_STATE,GYM_DEFEATED_LEADER)
-    msgbox(gText_EnterBD_TMAreLikeDrugs,MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("TMs are like drugs, right? They alter your brain chemistry and let you see stuff you'd never see otherwise… that one will teach Psfgymattack7."),MSGBOX_NPC,SPEAKER_BD)
     closemessage
         applymovement(BD,Common_Movement_FaceUp)
     waitmovement(0)
@@ -180,7 +180,7 @@ script EnterBD_PostDefeat1_Dialogue {
 
 script EnterBD_PostDefeat2_Dialogue {
     lock
-    msgbox(gText_EnterBD_LetsSee,,SPEAKER_BD)
+    msgbox(format("Let's see if I can bang out MGB-08 while I'm riding this high…"),,SPEAKER_BD)
     closemessage
         release
     end

@@ -40,20 +40,20 @@ script Quest_LastMusicVenue_ChangeMusic{
 }
 
 script Quest_LastMusicVenue_StartQuest_Script{
-    msgbox(gText_Quest_LastMusicVenue_IHopeYoureNot,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("I hope you're not here to see any music... ain't nothing playing today. Or tomorrow. Or any day after that."),MSGBOX_NPC,SPEAKER_DEFAULT)
 
-    msgbox(gText_Quest_LastMusicVenue_WhyIsThat,MSGBOX_NPC,SPEAKER_ALICIA)
+    msgbox(format("Why is that?"),MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-    msgbox(gText_Quest_LastMusicVenue_ItsAViciousCycle,MSGBOX_NPC,SPEAKER_DEFAULT)
-    msgbox(gText_Quest_LastMusicVenue_YoureYoungDoYouKnow,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Its a vicious cycle. The League keeps buying up concert venues to turn into arenas for their crazy new League. The local musicians don't have venues to perform in, so they stop. The remaining venues can't book new musicians because they've all quit. So when the League wants to buy another property... we jump at the chance."),MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("You're young, do you know any music artists looking for a venue? Even just one or two would be huge."),MSGBOX_NPC,SPEAKER_DEFAULT)
 
     //questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DRUMCIRCLE) // PSF TODO replace with subquest
     if (var(VAR_RESULT)){
-        msgbox(gText_Quest_LastMusicVenue_ActuallyIMetSome,MSGBOX_NPC,SPEAKER_ALICIA)
-        msgbox(gText_Quest_LastMusicVenue_TheDrumCircle,MSGBOX_NPC,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Actually, I met some! Let me see if they're interested."),MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("(The drum circle in TirabudinPlace would be perfect for this!)"),MSGBOX_NPC,SPEAKER_ALICIA,TAIL_THOUGHT)
     }else{
-        msgbox(gText_Quest_LastMusicVenue_IllKeepMyEyesPeeled,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("I'll keep my eyes peeled as I travel!"),MSGBOX_NPC,SPEAKER_ALICIA)
     }
 
 
@@ -64,13 +64,13 @@ script Quest_LastMusicVenue_StartQuest_Script{
 }
 
 script Quest_LastMusicVenue_Active_Dialogue{
-    msgbox(gText_Quest_LastMusicVenue_AnyLuck,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Any luck finding some artists?"),MSGBOX_NPC,SPEAKER_DEFAULT)
 
     //questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DRUMCIRCLE) // PSF TODO replace with subquest
     if (var(VAR_RESULT)){
-        msgbox(gText_Quest_LastMusicVenue_IHavent,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("I haven't had a chance to talk to them yet!"),MSGBOX_NPC,SPEAKER_ALICIA)
     }else{
-        msgbox(gText_Quest_LastMusicVenue_ImStillLooking,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("I'm still looking for somebody! But you're right, it's hard..."),MSGBOX_NPC,SPEAKER_ALICIA)
     }
 
 
@@ -79,15 +79,15 @@ script Quest_LastMusicVenue_Active_Dialogue{
 }
 
 script Quest_LastMusicVenue_InformDrummers_Dialogue{
-    msgbox(gText_LastMusicVenue_HaveYouGuysSeen,,SPEAKER_ALICIA)
+    msgbox(format("Have you guys seen the Masonic venue?"),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_LastMusicVenue_Nah,,SPEAKER_TONALLI)
+    msgbox(format("Nah, what's that?"),,SPEAKER_TONALLI)
 
-    msgbox(gText_LastMusicVenue_YouNeed,,SPEAKER_ALICIA)
+    msgbox(format("You need to get down there! They're really looking for musicians and I think you'd be a good fit."),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_LastMusicVenue_ThisCouldBe,,SPEAKER_DRUMMER_B)
+    msgbox(format("This could be our shot yo!"),,SPEAKER_DRUMMER_B)
     closemessage
 
     fadescreen(FADE_TO_BLACK)
@@ -103,8 +103,8 @@ script Quest_LastMusicVenue_InformDrummers_Dialogue{
 }
 
 script Quest_LastMusicVenue_Reward_Dialogue{
-    msgbox(gText_Quest_LastMusicVenue_TheseDrummers,MSGBOX_NPC,SPEAKER_DEFAULT)
-    msgbox(gText_Quest_LastMusicVenue_TurnsOutTheyKnow,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("These dummers are amazing! They're so happy to be here, and we were able to work something out!"),MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Turns out they know other artists too!"),MSGBOX_NPC,SPEAKER_DEFAULT)
     call(Quest_LastMusicVenue_GiveReward_Script)
     completequest(QUEST_LASTMUSICVENUEINRESIDO)
     release

@@ -17,11 +17,11 @@ script EnterDimu_Event_Script {
 script EnterDimu_Intro_Dialogue {
     lock
         reveal(REVEAL_DIMU)
-        msgbox(gText_EnterDimu_WatchYourStep,MSGBOX_NPC,SPEAKER_DIMU)
+        msgbox(format("Watch your step, there are thousands of different seeds under your feet. It was an incredible amount of work to get all these micro-climates in perfect working order…"),MSGBOX_NPC,SPEAKER_DIMU)
 
-        msgbox(gText_EnterDimu_GrowingAGarden,,SPEAKER_DIMU)
+        msgbox(format("Growing a garden is much like raising a team of Pokémon - they require constant care and attention, and even the slightest miscalculation can ruin the entire crop."),,SPEAKER_DIMU)
 
-        msgbox(gText_EnterDimu_ItsEasyToDestroy,,SPEAKER_DIMU)
+        msgbox(format("It's easy to destroy a flower bed with poor planning, but luckily, Pokémon are more resilient. "),,SPEAKER_DIMU)
 
         setvar(VAR_GYM_6_STATE,GYM_SAVE_BEFORE_LEADER)
         startmenu_savescreen
@@ -52,7 +52,7 @@ script EnterDimu_PostGymBattle_Script {
 script EnterDimu_PostGymBattle1_Dialogue {
         setvar(VAR_GYM_6_STATE,GYM_EXPLAINED_BADGE_AND_TM)
         lock
-        msgbox(gText_EnterDimu_ThatTechnicalMachineWill,MSGBOX_NPC,SPEAKER_DIMU)
+        msgbox(format("That Technical Machine will plant a seed in your Pokémon's mind, allowing them to use the move Psfgymattack6."),MSGBOX_NPC,SPEAKER_DIMU)
                 closemessage
         release
         end
@@ -60,7 +60,7 @@ script EnterDimu_PostGymBattle1_Dialogue {
 
 script EnterDimu_PostGymBattle2_Dialogue {
     lock
-        msgbox(gText_EnterDimu_AfterAGoodHaircut,MSGBOX_NPC,SPEAKER_DIMU)
+        msgbox(format("After a good haircut and when I'm done repotting everybody, I'll have to get them some battle exposure against you!"),MSGBOX_NPC,SPEAKER_DIMU)
                 closemessage
         release
         end

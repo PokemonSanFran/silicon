@@ -18,28 +18,28 @@ script MaybeIFuckedUp_Dialogue
 
     applymovement(ORI,MaybeIFuckedUp_WalkToPlayer)
     waitmovement(0)
-    msgbox(gText_MaybeIFuckedUp_ExcuseMeLad,,SPEAKER_ORI)
+    msgbox(format("Excuse me!."),,SPEAKER_ORI)
     closemessage
     applymovement(ORI,Common_Movement_WalkUp)
     waitmovement(0)
 
-    msgbox(gText_MaybeIFuckedUp_OhHi,,SPEAKER_ALICIA)
+    msgbox(format("Oh hi!"),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_MaybeIFuckedUp_ItsGoodToMeetYou,,SPEAKER_ORI)
+    msgbox(format("It’s good to meet you, Champion {PLAYER}. You’ve had quite an impact since you arrived here, don’t you think?"),,SPEAKER_ORI)
 
-    msgbox(gText_MaybeIFuckedUp_ItHasBeenACrazy,,SPEAKER_ALICIA)
+    msgbox(format("Not what I had planned when I first came here... worse, actually."),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_MaybeIFuckedUp_YourDecisions,,SPEAKER_ORI)
+    msgbox(format("Your decisions have had a great impact… but not everything is always permanent. Take this."),,SPEAKER_ORI)
     giveitem(ITEM_WISH_TAG,1)
 
-    msgbox(gText_MaybeIFuckedUp_IfYouFindYourself,,SPEAKER_ORI)
+    msgbox(format("If you find yourself having regrets about the path you’ve chosen, bring that to the highest point in the region. I have a friend who can help you."),,SPEAKER_ORI)
 
-    msgbox(gText_MaybeIFuckedUp_UhOkay,,SPEAKER_ALICIA)
+    msgbox(format("Uh… okay? Thanks, I guess."),,SPEAKER_ALICIA)
 
 
-    msgbox(gText_MaybeIFuckedUp_OfCourse,,SPEAKER_ORI)
+    msgbox(format("Of course, my child."),,SPEAKER_ORI)
     closemessage
 
     applymovement(PLAYER,MaybeIFuckedUp_WatchOriWalk)
@@ -47,19 +47,19 @@ script MaybeIFuckedUp_Dialogue
     waitmovement(ORI)
     removeobject(ORI)
 
-    msgbox(gText_MaybeIFuckedUp_WhatTheHellWasThat,,SPEAKER_ALICIA)
+    msgbox(format("...what the hell was that?"),,SPEAKER_ALICIA)
 
-    msgbox(gText_MaybeIFuckedUp_SomeOldCoot,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(format("Some old coot just walked up to me and handed me this piece of paper... I have no idea what this is supposed to do."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
 
-    msgbox(gText_MaybeIFuckedUp_ButIHave,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("But I can't make things much worse around here, can I?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
     if (flag(FLAG_VISITED_TORGEOT_CLIMB))
     {
-        msgbox(gText_MaybeIFuckedUp_TallestPoint,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Tallest point... is that Twin Peaks? Do I have to do that hike again?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
     else
     {
-        msgbox(gText_MaybeIFuckedUp_WhereIs,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("And where is the tallest point anyways?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
 
     call(TryAutoSave)

@@ -11,7 +11,7 @@ script HalerbaCity_Pannen_House_Event_Script{
 }
 
 script HalerbaCity_Pannen_Wife_Default_Dialogue{
-    msgbox(gText_HalerbaCity_Pannen_Wife_MyHusbandIs,,SPEAKER_NANCY)
+    msgbox(format("My husband is a researcher in unusual Pokemon habitats. You're a Trainer, right? I'm sure you'll run into him in your travels."),,SPEAKER_NANCY)
     closemessage
     end
 }

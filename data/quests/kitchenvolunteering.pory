@@ -14,17 +14,17 @@ script Kitchenvolunteering_Dialogue_StartQuest
 {
     lock
     faceplayer
-    msgbox(Kitchenvolunteering_Text_OhYoureHere,,SPEAKER_KITVOL)
+    msgbox(format("Oh you're here! Finally. Okay let's see..."),,SPEAKER_KITVOL)
 
     call(Kitchenvolunteering_Script_BufferItemNameA)
-    msgbox(Kitchenvolunteering_Text_HeadDownToTheBasement,,SPEAKER_KITVOL)
+    msgbox(format("I need you to head down into the basement and grab some items for me. {STR_VAR_1}, {STR_VAR_2}, and {STR_VAR_3}."),,SPEAKER_KITVOL)
 
     call(Kitchenvolunteering_Script_BufferItemNameB)
-    msgbox(Kitchenvolunteering_Text_HeadDownToTheBasementList,,SPEAKER_KITVOL)
+    msgbox(format("Oh, and I need {STR_VAR_1} and {STR_VAR_2} too."),,SPEAKER_KITVOL)
 
-    msgbox(Kitchenvolunteering_Text_ComeBackWhenYoure,,SPEAKER_KITVOL)
+    msgbox(format("Come back when you've got all five."),,SPEAKER_KITVOL)
     call(Kitchenvolunteering_Script_GiveKey)
-    msgbox(Kitchenvolunteering_Text_IThinkThey,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+    msgbox(format("I don't think they realize that I'm the wrong person..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     closemessage
     startquest(QUEST_KITCHENVOLUNTEERING)
     call(Kitchenvolunteering_Script_ReturnToWork)
@@ -41,7 +41,7 @@ script Kitchenvolunteering_Dialogue_YoureNotDone
 {
     lock
     faceplayer
-    msgbox(Kitchenvolunteering_Text_OhYoureNotDone,,SPEAKER_KITVOL)
+    msgbox(format("Oh you're not done? Let me know when you are."),,SPEAKER_KITVOL)
     call(Kitchenvolunteering_Script_ReturnToWork)
     end
 }
@@ -85,7 +85,7 @@ script Kitchenvolunteering_Dialogue_Reward
     lock
     faceplayer
     call(Kitchenvolunteering_Dialogue_ThankPlayer)
-    msgbox(Kitchenvolunteering_Text_TheyNever,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+    msgbox(format("They never realized they've got the wrong person..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     setflag(FLAG_DAILY_KITCHEN_VOLUNTEER)
     special(RandomlyBoostPartyMemberFriendship)
     call(Kitchenvolunteering_Script_RemoveItem)
@@ -98,11 +98,11 @@ script Kitchenvolunteering_Dialogue_ThankPlayer
 {
     lock
     faceplayer
-    msgbox(Kitchenvolunteering_Text_OhThankGod,,SPEAKER_KITVOL)
-    msgbox(Kitchenvolunteering_Text_OhAndTheKey,,SPEAKER_KITVOL)
+    msgbox(format("Oh thank God! I'll take those. Thank you so much!"),,SPEAKER_KITVOL)
+    msgbox(format("Oh! And the key. I'll take that."),,SPEAKER_KITVOL)
     closemessage
     cueobjectplayer(PLAYER)
-    msgbox(Kitchenvolunteering_Text_ComeBackTomorrow,,SPEAKER_KITVOL)
+    msgbox(format("You did good today. Come back tomorrow if you're willing to help out again."),,SPEAKER_KITVOL)
     call(Kitchenvolunteering_Script_ReturnToWork)
 }
 
@@ -142,7 +142,7 @@ script Kitchenvolunteering_Dialogue_TooBusy
 {
     lock
     faceplayer
-    msgbox(Kitchenvolunteering_Text_NowWhereDidIPut,,SPEAKER_KITVOL,TAIL_WHISPER)
+    msgbox(format("Did you see where I put that ladle?"),,SPEAKER_KITVOL,TAIL_WHISPER)
     closemessage
     release
     end
@@ -172,8 +172,8 @@ script Kitchenvolunteering_Dialogue_RepeatQuest
     lock
     faceplayer
     special(KitchenvolunteeringFunc_ChooseRandomPantryItem)
-    msgbox(Kitchenvolunteering_Text_OhWowTheyNever,,SPEAKER_KITVOL)
-    msgbox(Kitchenvolunteering_Text_ThisTimeCanYouGrab,,SPEAKER_KITVOL)
+    msgbox(format("Oh wow! They never come back."),,SPEAKER_KITVOL)
+    msgbox(format("Okay, today I just need you to grab a {STR_VAR_1}."),,SPEAKER_KITVOL)
     call(Kitchenvolunteering_Script_GiveKey)
     release
     end
@@ -181,7 +181,7 @@ script Kitchenvolunteering_Dialogue_RepeatQuest
 
 script Kitchenvolunteering_Script_GiveKey
 {
-    msgbox(Kitchenvolunteering_Text_OhRightYouNeedTheKey,,SPEAKER_KITVOL)
+    msgbox(format("Oh right! You need the key. Here you go."),,SPEAKER_KITVOL)
     closemessage
     cueobjectplayer(KITVOL)
     giveitem(ITEM_STORAGE_KEY,1)

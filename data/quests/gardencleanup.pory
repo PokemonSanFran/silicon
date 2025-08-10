@@ -57,9 +57,9 @@ script Quest_GardenCleanUp_Event_Script{
 script Quest_GardenCleanUp_Start_Dialogue{
     lock
         faceplayer
-        msgbox(gText_GardenCleanUp_ILearned)
-        msgbox(gText_GardenCleanUp_ITriedTo)
-        msgbox(gText_GardenCleanUp_CouldYouHelp)
+        msgbox(format("I learned about community gardens from my older brother"))
+        msgbox(format("i tried to start one, but there's too many strong and scary pokemon on Route1"))
+        msgbox(format("could you help me clear the garden?"))
         startquest(QUEST_GARDENCLEANUP)
         setvar(VAR_DEFEATED_GARDEN_POKEMON,0)
         release
@@ -68,23 +68,23 @@ script Quest_GardenCleanUp_Start_Dialogue{
 script Quest_GardenCleanUp_Active_Dialogue{
 
     if (var(VAR_DEFEATED_GARDEN_POKEMON) > 46){
-        msgbox(gText_GardenCleanUp_SoClose,MSGBOX_NPC)
+        msgbox(format("its looking a lot less scary, we're so close"),MSGBOX_NPC)
     }elif (var(VAR_DEFEATED_GARDEN_POKEMON) > 40){
-        msgbox(gText_GardenCleanUp_ItsReallyStarting,MSGBOX_NPC)
+        msgbox(format("its really starting to look great"),MSGBOX_NPC)
     }elif (var(VAR_DEFEATED_GARDEN_POKEMON) > 30){
-        msgbox(gText_GardenCleanUp_WowYouBeatALot,MSGBOX_NPC)
+        msgbox(format("wow, you beat a lot of them"),MSGBOX_NPC)
     }elif (var(VAR_DEFEATED_GARDEN_POKEMON) > 20){
-        msgbox(gText_GardenCleanUp_ITriedToGoEarlier,MSGBOX_NPC)
+        msgbox(format("i tried to go earlier, and I almost got attacked!"),MSGBOX_NPC)
     }elif (var(VAR_DEFEATED_GARDEN_POKEMON) > 10){
-        msgbox(gText_GardenCleanUp_DidYouGoOver,MSGBOX_NPC)
+        msgbox(format("did you head over there yet"),MSGBOX_NPC)
     }else{
-        msgbox(gText_GardenCleanUp_ThankYouForYourHelp,MSGBOX_NPC)
+        msgbox(format("thanks for your help"),MSGBOX_NPC)
     }
     end
 }
 script Quest_GardenCleanUp_Reward_Cutscene{
     faceplayer
-        msgbox(gText_GardenCleanUp_OhMyGodYoureDone)
+        msgbox(format("oh my god youre done?"))
 
         applymovement(MARIA_A,Quest_GardenCleanUp_RunToGarden_Movement)
         waitmovement(MARIA_A)
@@ -94,7 +94,7 @@ script Quest_GardenCleanUp_Reward_Cutscene{
         end
 }
 script Quest_GardenCleanUp_Complete_Dialogue{
-    msgbox(gText_GardenCleanUp_ImSoExcitedToStartPlanting,MSGBOX_NPC)
+    msgbox(format("im so excited to start planting!"),MSGBOX_NPC)
         end
 }
 

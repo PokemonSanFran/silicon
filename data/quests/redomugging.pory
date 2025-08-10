@@ -59,28 +59,28 @@ script Quest_Redomugging_Interact_Script{
 
 script Quest_Redomugging_StartQuest_Dialogue{
         call(Quest_Redomugging_MovePlayer_Arantraz_Script)
-        msgbox(gText_Redomugging_WaitArentYou)
+        msgbox(format("Wait, aren't you the muggers from PerlaciaCity?"))
 
-        msgbox(gText_Redomugging_OhHellNot)
+        msgbox(format("Oh hell, not again."))
 
-        msgbox(gText_Redomugging_WaitDidIPick)
+        msgbox(format("Wait, did I pick the wrong side? There's no way TheTide is intentionally working with muggers."))
 
-        msgbox(gText_Redomugging_NahWereStill)
+        msgbox(format("Nah, we're still the good guys, you just got it twisted."))
 
-        msgbox(gText_Redomugging_SinceWhenDo)
+        msgbox(format("Since when do the good guys mug people for their phones?"))
 
-        msgbox(gText_Redomugging_ThePersonWe)
-        msgbox(gText_Redomugging_WeCaughtThem)
-        msgbox(gText_Redomugging_YeahWeWere)
+        msgbox(format("The person we stole that phone from... they're a reporter. They're about to release a story about those riots in CapheCity... but they got it all wrong."))
+        msgbox(format("Our tech guys were able to see some of the stuff they were cooking up, and its crazy! They're saying we started the riot just to cause chaos and some other bullshit."))
+        msgbox(format("Without their phone, they can't log into their servers to work on the story, so we were going to steal it and hope that our guys could just wipe all their work."))
 
-        msgbox(gText_Redomugging_FramingYouGuys)
+        msgbox(format("Hmm. Getting the story wrong seems to be normal for the news around here."))
 
-        msgbox(gText_Redomugging_ExactlyWeCant)
+        msgbox(format("Exactly! We can't go back to PerlaciaCity now though, and that story is gonna drop any day now."))
 
-        msgbox(gText_Redomugging_IsItToo)
+        msgbox(format("...is it too crazy to send somebody else? Could I try to grab it?"))
 
-        msgbox(gText_Redomugging_MaybeNot)
-        msgbox(gText_Redomugging_MaybeHeadDownTo)
+        msgbox(format("Maybe not?"))
+        msgbox(format("Maybe head to the newspaper in PerlaciaCity and see if you can get in a room with the reporter. Let us know if you get lucky!"))
         closemessage
 
         startquest(QUEST_REDOMUGGING)
@@ -88,7 +88,7 @@ script Quest_Redomugging_StartQuest_Dialogue{
 }
 
 script Quest_Redomugging_Active_Dialogue{
-    msgbox(gText_Redomugging_AnyLuck,MSGBOX_NPC)
+    msgbox(format("Any luck getting that phone?"),MSGBOX_NPC)
     return
 }
 
@@ -107,7 +107,7 @@ script Quest_Redomugging_Interact_Victim_Script{
 }
 
 script Quest_Redomugging_TooBusy_Dialogue{
-    msgbox(gText_Redomugging_Sorry)
+    msgbox(format("Sorry, I have to meet this deadline..."))
     return
 }
 
@@ -116,23 +116,23 @@ script Quest_Redomugging_TooBusy_Dialogue{
 
 script Quest_Redomugging_StealPhone_Dialogue{
     faceplayer
-    msgbox(gText_Redomugging_HeyThereHow)
+    msgbox(format("Hey there, how can I -"))
     closemessage
 
     playse(SE_PIN)
     applymovement(VICTIM,Common_Movement_ExclamationMark)
     waitmovement(VICTIM)
 
-    msgbox(gText_Redomugging_ChampionPlayer)
+    msgbox(format("Champion {PLAYER}! You're here! And you're the one that saved me from those muggers too. I keep telling everybody it was you, and nobody believes me."))
 
-    msgbox(gText_Redomugging_YeahThatWasMe)
+    msgbox(format("Yeah, that was me."))
 
-    msgbox(gText_Redomugging_WhatBringsYou)
+    msgbox(format("What are you doing here? Celebrities usually don't waltz into newspapers."))
 
-    msgbox(gText_Redomugging_UhIWanted)
+    msgbox(format("Uh, I wanted to check on you! Make sure you were okay after that mugging. I know people get shaken up."))
 
-    msgbox(gText_Redomugging_WowYouReallyAre)
-    msgbox(gText_Redomugging_WhileYoureHere)
+    msgbox(format("Wow! You really are the best. I was a little rattled, but I got my phone back and got away while you battled them. All is well!"))
+    msgbox(format("While you're here, how about an interview? I see you're publicly supporting TheTide, and I'd love to pick your brain!"))
     closemessage
 
     fadescreen(FADE_TO_BLACK)
@@ -143,7 +143,7 @@ script Quest_Redomugging_StealPhone_Dialogue{
     turnobject(PLAYER,DIR_WEST)
     fadescreen(FADE_FROM_BLACK)
 
-    msgbox(gText_Redomugging_OhManThisIsGreat)
+    msgbox(format("Oh man, this is so juicy! Okay, I gotta run to the restroom, but don't go anywhere,okay?"))
     closemessage
 
     applymovement(VICTIM,Quest_Redomugging_LeaveRoom_Movement)
@@ -159,7 +159,7 @@ script Quest_Redomugging_StealPhone_Dialogue{
     dofieldeffectsparkle(12,14,0)
     waitfieldeffect(FLDEFF_SPARKLE)
 
-    msgbox(gText_Redomugging_OkayGottaGrab)
+    msgbox(format("They left their phone! Perfect, let's grab it, turn it off, and get out of here."))
 
     applymovement(PLAYER,Common_Movement_WalkInPlaceUp)
     waitmovement(PLAYER)
@@ -175,7 +175,7 @@ script Quest_Redomugging_SpottedByReporter_Script{
         if (var(VAR_RESULT)){
             lock
                 faceplayer
-                msgbox(gText_Redomugging_HeyWerentYouMid)
+                msgbox(format("Hey, weren't you like, mid-interview?"))
                 closemessage
 
                 fadescreen(FADE_TO_BLACK)
@@ -184,7 +184,7 @@ script Quest_Redomugging_SpottedByReporter_Script{
                 TeleportCamera(12,15)
                 fadescreen(FADE_FROM_BLACK)
 
-                msgbox(gText_Redomugging_IGottaGet)
+                msgbox(format("I need to get out of here without being seen..."))
         }
     release
         end
@@ -196,7 +196,7 @@ script Quest_Redomugging_LeaveNewspaper_Script{
         if(var(VAR_RESULT)){
             lock
 
-                msgbox(gText_Redomugging_INeedTo)
+                msgbox(format("I gotta get this reporter's phone to Arantraz!"))
 
                 applymovement(PLAYER,Common_Movement_WalkUp)
                 waitmovement(PLAYER)
@@ -207,23 +207,23 @@ script Quest_Redomugging_LeaveNewspaper_Script{
 }
 
 script Quest_Redomugging_MissingPhone_Dialogue{
-    msgbox(gText_Redomugging_HeyYouDisappeared,MSGBOX_NPC)
+    msgbox(format("Hey, you disappeared! I figured you got busy, totally fine. Sucks though, I seem to have misplaced my phone... I'm so absentminded!"),MSGBOX_NPC)
     return
 }
 
 script Quest_Redomugging_Reward_Dialogue{
     call(Quest_Redomugging_MovePlayer_Arantraz_Script)
-    msgbox(gText_Redomugging_YouDidAwesome)
+    msgbox(format("You did awesome, oh man!"))
 
-    msgbox(gText_Redomugging_Thanks)
+    msgbox(format("Thanks!"))
 
-    msgbox(gText_Redomugging_WellTakeThat)
+    msgbox(format("We'll take that off your hands..."))
     closemessage
 
-    msgbox(gText_Redomugging_PlayerGave,MSGBOX_AUTOCLOSE)
+    msgbox(format("{PLAYER} gave the reporter's phone to TheTide."),MSGBOX_AUTOCLOSE)
     removeitem(ITEM_FAME_CHECKER)
 
-    msgbox(gText_Redomugging_AwesomeWellGive)
+    msgbox(format("Awesome, we'll give this to our guys and see if they stop this story from getting out."))
     closemessage
 
     applymovement(MUGGER_B_ARANTRAZ,Quest_Redomugging_WalkOffScreen_Movement)
@@ -234,7 +234,7 @@ script Quest_Redomugging_Reward_Dialogue{
 }
 
 script Quest_Redomugging_Completed_Dialogue{
-    msgbox(gText_Redomugging_EvenBetterThan,MSGBOX_NPC)
+    msgbox(format("Even better than we expected - our guys were able to use that phone to wipe out all that guys shitty work. That interview about you is also gone, no worries."),MSGBOX_NPC)
     return
 }
 text gText_Redomugging_WaitArentYou{

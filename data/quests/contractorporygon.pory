@@ -12,30 +12,30 @@ script Quest_ContractorPorygon_Debug_Script{
 script Quest_ContractorPorygon_StartQuest_Dialogue{
     lock
     faceplayer
-    msgbox(gText_ContractorPorygon_HeyWereAStartup)
-    msgbox(gText_ContractorPorygon_WeHaventEatenOrSlept)
-    msgbox(gText_ContractorPorygon_WhenWeDoGetHungry)
+    msgbox(format("hey we're a startup. the league asked us to replicate the work of Cinnabar Pokemon Lab and create Porygon... and its evolutions... in one work"))
+    msgbox(format("its a tough task. we haven't eaten or slept in about 90 hours"))
+    msgbox(format("when we do get hungry, we're not gonna have time to get food. could you swing by later and grab food for us? we'll tell you what we want."))
     closemessage
     startquest(QUEST_CONTRACTORPORYGON)
     release
     end
 }
 script Quest_ContractorPorygon_Subquest1_Ineligible_Dialogue{
-    msgbox(gText_ContractorPorygon_WantToGetOutThisUpgrade,MSGBOX_NPC)
+    msgbox(format("want to get out this up-grade.... and i'm so close! after this block of code, I'll eat..."),MSGBOX_NPC)
     applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
     waitmovement(VAR_LAST_TALKED)
 
     end
 }
 script Quest_ContractorPorygon_Subquest2_Ineligible_Dialogue{
-    msgbox(gText_ContractorPorygon_TheyWantMeToReplicate,MSGBOX_NPC)
+    msgbox(format("they want me to replicate the dubious disc? that's why its DUBIOUS!"),MSGBOX_NPC)
     applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
     waitmovement(VAR_LAST_TALKED)
 
     end
 }
 script Quest_ContractorPorygon_Subquest3_Ineligible_Dialogue{
-    msgbox(gText_ContractorPorygon_NotReallyHungryYet,MSGBOX_NPC)
+    msgbox(format("not really hungry right now... maybe later though. you're probably wondering why we couldn't just order delievery, right? well, we're testing the Porygon on our phones! can't use them for anything else while the tests are running, haha."),MSGBOX_NPC)
     applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
     waitmovement(VAR_LAST_TALKED)
 
@@ -44,8 +44,8 @@ script Quest_ContractorPorygon_Subquest3_Ineligible_Dialogue{
 script Quest_ContractorPorygon_Subquest1_Request_Dialogue{
     lock
     faceplayer
-    msgbox(gText_ContractorPorygon_OkayGoodStoppingPoint)
-    msgbox(gText_ContractorPorygon_CouldIGetDumplings)
+    msgbox(format("okay, good stopping point!"))
+    msgbox(format("could i get some dumplings? dumpling king in the qiuvillage is the best spot for them."))
 
     checkitem(ITEM_PEWTER_CRUNCHIES,1)
     if (var(VAR_RESULT)){
@@ -59,8 +59,8 @@ script Quest_ContractorPorygon_Subquest1_Request_Dialogue{
 script Quest_ContractorPorygon_Subquest2_Request_Dialogue{
     lock
     faceplayer
-    msgbox(gText_ContractorPorygon_IThinkTheDisc)
-    msgbox(gText_ContractorPorygon_AreYouStillGetting)
+    msgbox(format("i think the disc is done...."))
+    msgbox(format("i hear you were getting us food, is that still a thing? Yeah? can I get a salad from Sweetgreeen? It's in Chasilla."))
 
     checkitem(ITEM_LAVA_COOKIE,1)
     if (var(VAR_RESULT)){
@@ -74,8 +74,8 @@ script Quest_ContractorPorygon_Subquest2_Request_Dialogue{
 script Quest_ContractorPorygon_Subquest3_Request_Dialogue{
     lock
     faceplayer
-    msgbox(gText_ContractorPorygon_TheProgressTheyreMaking)
-    msgbox(gText_ContractorPorygon_IDidntRealize)
+    msgbox(format("the progress they're making is fucking insane! are the prototypes working well?"))
+    msgbox(format("i didn't realize how hungry i was gonna be"))
 
     checkitem(ITEM_RAGE_CANDY_BAR,1)
     if (var(VAR_RESULT)){
@@ -102,7 +102,7 @@ script Quest_ContractorPorygon_GivePorygon_Script{
     }
 
         playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(gText_ContractorPorygon_YouRecievedA)
+        msgbox(format("You recieved a {STR_VAR_2}!"))
         waitmessage
         waitfanfare
 }
@@ -110,7 +110,7 @@ script Quest_ContractorPorygon_GivePorygon_Script{
 script Quest_ContractorPorygon_Subquest1_Thanks_Dialogue{
     lock
     faceplayer
-    msgbox(gText_ContractorPorygon_ScoreSalad)
+    msgbox(format("score! salad. thank you so much! i just finished this, give is a try."))
     closemessage
     call(Quest_ContractorPorygon_GivePorygon_Script)
     applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
@@ -122,7 +122,7 @@ script Quest_ContractorPorygon_Subquest1_Thanks_Dialogue{
 script Quest_ContractorPorygon_Subquest2_Thanks_Dialogue{
     lock
     faceplayer
-    msgbox(gText_ContractorPorygon_YesssDumpling)
+    msgbox(format("yesssss dumplings this is gonna be so good. here, take this Pokemon."))
     closemessage
     call(Quest_ContractorPorygon_GivePorygon_Script)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CONTRACTORPORYGON,SUB_QUEST_2)
@@ -195,10 +195,10 @@ script Quest_ContractorPorygon_HandleMoney_Script{
 }
 
 script Quest_ContractorPorygon_Reward_Dialogue{
-    msgbox(gText_ContractorPorygon_HellYesCurry)
-    msgbox(gText_ContractorPorygon_ThisShouldPay)
+    msgbox(format("hellllll yes curry! UGH this shit is gonna slap."))
+    msgbox(format("This cash should cover the cost of lunch, right??"))
     call(Quest_ContractorPorygon_HandleMoney_Script)
-    msgbox(gText_ContractorPorygon_AndForHelpingUs)
+    msgbox(format("And for helping us, you can have this too. You're a beta tester!"))
     call(Quest_ContractorPorygon_GivePorygon_Script)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CONTRACTORPORYGON,SUB_QUEST_3)
     applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
@@ -208,7 +208,7 @@ script Quest_ContractorPorygon_Reward_Dialogue{
     end
 }
 script Quest_ContractorPorygon_Completed_Dialogue{
-    msgbox(gText_ContractorPorygon_IThinkWereGonnaMake,MSGBOX_NPC)
+    msgbox(format("I think we're gonna make the deadline!"),MSGBOX_NPC)
     applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
     waitmovement(VAR_LAST_TALKED)
     end
@@ -216,7 +216,7 @@ script Quest_ContractorPorygon_Completed_Dialogue{
 
 script Quest_ContractorPorygon_Focused_Dialogue{
     lock
-    msgbox(gText_ContractorPorygon_Focused)
+    msgbox(format("Hmm....."))
     closemessage
     release
     end

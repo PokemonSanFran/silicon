@@ -13,25 +13,25 @@ script GroupOfAssholesAppears_GroupAssault_Dialogue
     playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
 
     cueobjecttalking(GRUNT1)
-    msgbox(gText_GroupOfAssholesAppears_YouShouldBeAshamed,,SPEAKER_ROCKET_MEMBER_A)
+    msgbox(format("You should be ashamed!"),,SPEAKER_ROCKET_MEMBER_A)
     cueobjecttalking(GRUNT2)
-    msgbox(gText_GroupOfAssholesAppears_HaventYouDoneEnough,,SPEAKER_ROCKET_MEMBER_A)
+    msgbox(format("Haven't you done enough already?"),,SPEAKER_ROCKET_MEMBER_A)
     cueobjecttalking(GRUNT3)
-    msgbox(gText_GroupOfAssholesAppears_GiveJelenaBack,,SPEAKER_ROCKET_MEMBER_A)
+    msgbox(format("Give Jelena back her store!"),,SPEAKER_ROCKET_MEMBER_A)
 
     applymovement(DAVID,GroupOfAssholesAppears_LookAround_Movement)
     waitmovement(0)
-    msgbox(gText_GroupOfAssholesAppears_IDontKnowWho,,SPEAKER_DAVID)
+    msgbox(format("I don't know who Jelena is or what you want, or what I did to any of you!"),,SPEAKER_DAVID)
 
     cueobjecttalking(GRUNT4)
-    msgbox(gText_GroupOfAssholesAppears_WeDontWantToHear,,SPEAKER_ROCKET_MEMBER_A)
+    msgbox(format("We don't want to hear it! How many lives are you going to try to ruin?"),,SPEAKER_ROCKET_MEMBER_A)
 
     applymovement(DAVID,Common_Movement_FaceLeft)
     waitmovement(0)
-    msgbox(gText_GroupOfAssholesAppears_RuinLives,,SPEAKER_DAVID)
+    msgbox(format("Ruin lives? I'm opening a store!"),,SPEAKER_DAVID)
 
     cueobjecttalking(GRUNT5)
-    msgbox(gText_GroupOfAssholesAppears_NotIfWeHave,,SPEAKER_ROCKET_MEMBER_B)
+    msgbox(format("Not if we have anything to say about it."),,SPEAKER_ROCKET_MEMBER_B)
     closemessage
 
     call(GroupOfAssholesAppears_PlayerToDavid_Script)
@@ -57,22 +57,22 @@ script GroupOfAssholesAppears_PlayerToDavid_Script
 }
 
 script GroupOfAssholesAppears_PlayerIntervene_Dialogue {
-        msgbox(gText_GroupOfAssholesAppears_WhatTheHell,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("What the hell is going on here? Why are you ganging up on this guy?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
         applymovement(GRUNT2,Common_Movement_FaceRight)
         applymovement(GRUNT3,Common_Movement_FaceRight)
         applymovement(GRUNT5,Common_Movement_FaceLeft)
         applymovement(GRUNT4,Common_Movement_FaceLeft)
         waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_NothingWrongWith,,SPEAKER_ROCKET_MEMBER_A)
-        msgbox(gText_GroupOfAssholesAppears_ThisIsntAProtest,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Nothing wrong with a little protest, kid. And where do you get off, defending this guy?"),,SPEAKER_ROCKET_MEMBER_A)
+        msgbox(format("This isn't a protest. This is straight-up intimidation. Leave him alone!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 applymovement(DAVID,Common_Movement_FaceDown)
         waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_OhThank,,SPEAKER_DAVID)
+        msgbox(format("I don't know what they were going to do or what I did to them... I don't have anything to give you yet! Please, just leave me alone!"),,SPEAKER_DAVID)
         closemessage
         applymovement(PLAYER,GroupOfAssholesAppears_LookAround_Movement)
         waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_HeMightBeAsking,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("He might be asking, but I'm not. Leave."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 setvar(VAR_GROUP_OF_ASSHOLES_STATE,SAVE_THETIDE_POPIDORA_PIER)
         closemessage
         startmenu_savescreen
@@ -93,7 +93,7 @@ script GroupOfAssholes_PostSaveTrigger_Script {
 
 script GroupOfAssholesAppears_GruntInteract_Script {
     lockall
-        msgbox(gText_GroupOfAssholesAppears_GoDefend,MSGBOX_NPC,SPEAKER_ROCKET_MEMBER_B)
+        msgbox(format("Go ahead, defend this clown!"),MSGBOX_NPC,SPEAKER_ROCKET_MEMBER_B)
         end
 }
 
@@ -101,7 +101,7 @@ script GroupOfAssholes_StartBattle_Script {
         lockall
         applymovement(DAVID,Common_Movement_FaceDown)
         waitmovement(0)
-        msgbox(gText_GroupOfAssholesAppears_WhoTheHellYouThink,,SPEAKER_ISHAN)
+        msgbox(format("I don't know who the hell you think you are, but anybody defending this trash clearly isn't going to be reasoned with. We'll show you!"),,SPEAKER_ISHAN)
         closemessage
         trainerbattle_no_intro(TRAINER_IHSAN_AND_EMMITT,gText_GroupOfAssholesAppears_WoahWhoDidWePick)
         goto(GroupOfAssholesAppears_GroupLeaves_Dialogue)
@@ -111,8 +111,8 @@ script GroupOfAssholesAppears_GroupLeaves_Dialogue {
         lockall
         startcutscene(JUMPPLAYER_GROUPOFASSHOLESAPPEARS)
         setvar(VAR_GROUP_OF_ASSHOLES_STATE,PLAYER_HAS_DEFEATED_THETIDE)
-        msgbox(gText_GroupOfAssholesAppears_PfftLooksLikeTheLeagueSent,SPEAKER_ROCKET_MEMBER_B)
-        msgbox(gText_GroupOfAssholesAppears_YouBothMakeMeSick,SPEAKER_ISHAN)
+        msgbox(format("Pfft, looks like the League sent by some enforcers to clear us out. Lame as hell."),SPEAKER_ROCKET_MEMBER_B)
+        msgbox(format("You both make me sick. Leave our people alone! *spits*"),SPEAKER_ISHAN)
         closemessage
         applymovement(GRUNT1,GroupOfAssholesAppears_LeavePopidoraPier_Slot1_Movement)
         applymovement(GRUNT2,GroupOfAssholesAppears_LeavePopidoraPier_Slot2_Movement)
@@ -128,30 +128,30 @@ script GroupOfAssholesAppears_GroupLeaves_Dialogue {
         removeobject(GRUNT5)
         removeobject(GRUNT6)
         fadedefaultbgm
-        msgbox(gText_GroupOfAssholesAppears_DontComeBackAssholes,SPEAKER_DAVID,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Yeah! And don't come back assholes!"),SPEAKER_DAVID,TAIL_SHOUT,EMOTE_ANGRY)
         goto(GroupOfAssholesAppears_ExplainTeam_Dialogue)
 }
 
 script GroupOfAssholesAppears_ExplainTeam_Dialogue {
         applymovement(PLAYER,Common_Movement_FaceUp)
-        msgbox(gText_GroupOfAssholesAppears_ThankYou,SPEAKER_DAVID,,EMOTE_LOVE)
-        msgbox(gText_GroupOfAssholesAppears_AreYouGoing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(gText_GroupOfAssholesAppears_GonnaNeedToPop,,SPEAKER_DAVID,,EMOTE_SWEAT)
-        msgbox(gText_GroupOfAssholesAppears_WhyWereTheyBullying,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(gText_GroupOfAssholesAppears_SomethingStupidLikeThat,,SPEAKER_DAVID)
-        msgbox(gText_GroupOfAssholesAppears_ThatDoesntMakeAny,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(gText_GroupOfAssholesAppears_MementoBoutique,,SPEAKER_DAVID,,EMOTE_HAPPY)
-        msgbox(gText_GroupOfAssholesAppears_ASouvenirShop,MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-                msgbox(gText_GroupOfAssholesAppears_WhenIPitchedIt,,SPEAKER_DAVID)
-        msgbox(gText_GroupOfAssholesAppears_ThatMakesSense,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Thank you so much..."),SPEAKER_DAVID,,EMOTE_LOVE)
+        msgbox(format("Are you going to be okay?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                msgbox(format("Honestly? Gonna need to pop several Xanax after I come down from this panic attack, but I'll survive for sure."),,SPEAKER_DAVID,,EMOTE_SWEAT)
+        msgbox(format("Why were they bullying you? Who are they?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                msgbox(format("Uhh... I think A Wave or something stupid like that. I don't know what they want from me, they're like this band of idiots that just roll around everywhere, getting high and telling people they can't do things. Guess it was my turn."),,SPEAKER_DAVID)
+        msgbox(format("That doesn't make any sense! You're just trying to open a.... Uh..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                msgbox(format("Memento Boutique!"),,SPEAKER_DAVID,,EMOTE_HAPPY)
+        msgbox(format("A souvenir shop?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+                msgbox(format("When I pitched it to the League, it was a little more...upscale than some tacky place to buy snow globes and magnets. We're talking handcrafted items from the people of Resido! "),,SPEAKER_DAVID)
+        msgbox(format("Oh, yeah... that makes sense."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 goto(GroupOfAssholesAppears_GiveRewards_Dialogue)
 }
 
 script GroupOfAssholesAppears_GiveRewards_Dialogue {
-    msgbox(gText_GroupOfAssholesAppears_YoullHaveToCome,,SPEAKER_DAVID,,EMOTE_LOVE)
+    msgbox(format("You'll have to come by once I open! And here, take this!"),,SPEAKER_DAVID,,EMOTE_LOVE)
         closemessage
         giveitem(ITEM_DOWSING_MACHINE,1)
-        msgbox(gText_GroupOfAssholesAppears_IfYouPutThatOn,,SPEAKER_DAVID)
+        msgbox(format("If you put that on, it'll point you towards hidden shit on the ground. My sister gave that to me... but I'm like literally never going to use it. Me? Dig around in the dirt? Wearing that? Absolutely not."),,SPEAKER_DAVID)
         closemessage
         addvar(VAR_STORYLINE_STATE,1)
         setvar(VAR_TEMP_0,0)
@@ -167,9 +167,9 @@ script GroupOfAssholesAppears_LookForXanax_Dialogue {
         applymovement(DAVID,GroupOfAssholesAppears_LookAround_Movement)
 
         if (var(VAR_GROUP_OF_ASSHOLES_STATE) == SAVE_THETIDE_POPIDORA_PIER)   {
-            msgbox(gText_GroupOfAssholesAppears_Help,,SPEAKER_DAVID,,EMOTE_SAD)
+            msgbox(format("Somebody help me..."),,SPEAKER_DAVID,,EMOTE_SAD)
         }else{
-            msgbox(gText_GroupOfAssholesAppears_WhereDidIPut,,SPEAKER_DAVID,TAIL_WHISPER)
+            msgbox(format("Now, where did I put those pills...?"),,SPEAKER_DAVID,TAIL_WHISPER)
         }
         closemessage
         releaseall

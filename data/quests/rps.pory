@@ -94,31 +94,31 @@ script RPS_Script_InteractMontyQuestActive
     showmoneybox(0,0)
     call(RPS_Script_GetWager)
     buffernumberstring(STR_VAR_2 ,VAR_0x8004)
-    msgbox(RPS_Text_Readyto, MSGBOX_NPC, SPEAKER_MONTY)
+    msgbox(format("Ready to give it a shot?"), MSGBOX_NPC, SPEAKER_MONTY)
 
     if(!var(VAR_RESULT))
     {
         goto(RPS_Dialogue_NotEnoughMoney)
     }
 
-    msgbox(RPS_Text_Letsput,MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
-    msgbox(RPS_Text_hotshot,MSGBOX_DEFAULT,SPEAKER_MONTY)
-    msgbox(RPS_Text_lowdown,MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("Let's put some stakes on it. ¥{STR_VAR_2}, winner takes the pot."),MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
+    msgbox(format("Hueh hueh hueh, I know a hotshot Trainer like you has ¥{STR_VAR_2} laying around, right?"),MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("Here's the lowdown:"),MSGBOX_DEFAULT,SPEAKER_MONTY)
 
     hidemoneybox
     call(RPS_Script_GiveRiggedMon)
     buffermovename(STR_VAR_1,MOVE_UPPER_HAND)
     buffermovename(STR_VAR_2,MOVE_MACH_PUNCH)
-    msgbox(RPS_Text_UpperHand,MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("{STR_VAR_1} trumps {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_MONTY)
     buffermovename(STR_VAR_2,MOVE_FOCUS_PUNCH)
     buffermovename(STR_VAR_1,MOVE_MACH_PUNCH)
-    msgbox(RPS_Text_Machbeats,MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("{STR_VAR_1} beats {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_MONTY)
     buffermovename(STR_VAR_2,MOVE_UPPER_HAND)
     buffermovename(STR_VAR_1,MOVE_FOCUS_PUNCH)
-    msgbox(RPS_Text_FocusPunchWin,MSGBOX_DEFAULT,SPEAKER_MONTY)
-    msgbox(RPS_Text_ifpokemonfaints,MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("{STR_VAR_1} wins out over {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("If your Pokémon faints, you lose."),MSGBOX_DEFAULT,SPEAKER_MONTY)
     bufferspeciesname(STR_VAR_1,SPECIES_HITMONCHAN)
-    msgbox(RPS_Text_EasyYeah,MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("Easy, yeah? Let's see how lucky you are. You can even use my lucky {STR_VAR_1}!"),MSGBOX_DEFAULT,SPEAKER_MONTY)
     closemessage
     trainerbattle_continue_after_lose(TRAINER_MONTY, RPS_Text_MakeYoureOwnLuck)
     call(RPS_Script_JudgeBattleOutcome)
@@ -145,24 +145,24 @@ script RPS_Script_JudgeBattleOutcome
 
 script RPS_Dialogue_QuestComplete
 {
-    msgbox(RPS_Text_Luckranout, MSGBOX_DEFAULT, SPEAKER_MONTY)
-    msgbox(RPS_Text_YouWerent, MSGBOX_DEFAULT, SPEAKER_PLAYER)
-    msgbox(RPS_Text_implying, MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("My luck ran out. I'm shocked."), MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("You weren't ever lucky to begin with!"), MSGBOX_DEFAULT, SPEAKER_PLAYER)
+    msgbox(format("He? watch your mouth, what are you implying..."), MSGBOX_DEFAULT, SPEAKER_MONTY)
     bufferitemname(STR_VAR_1,ITEM_PUNCHING_GLOVE)
     bufferstring(STR_VAR_1,format("Google Glass"))
-    msgbox(RPS_Text_MyGoogleGlass, MSGBOX_DEFAULT, SPEAKER_PLAYER)
-    msgbox(RPS_Text_Suspensive, MSGBOX_DEFAULT, SPEAKER_MONTY)
-    msgbox(RPS_Text_YouGotMe, MSGBOX_DEFAULT SPEAKER_MONTY)
-    msgbox(RPS_Text_WaitYou, MSGBOX_DEFAULT, SPEAKER_PLAYER)
-    msgbox(RPS_Text_OfCurse, MSGBOX_DEFAULT, SPEAKER_MONTY)
-    msgbox(RPS_Text_WhenIStarted, MSGBOX_DEFAULT, SPEAKER_MONTY)
-    msgbox(RPS_Text_ButForNow, MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("My {STR_VAR_2} can see everything about your Pokémon. I can see that your Pokémon was stronger than mine and holding {STR_VAR_1}."), MSGBOX_DEFAULT, SPEAKER_PLAYER)
+    msgbox(format("..."), MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("You got me! Hueh hueh hueh, kids these days are too high tech to fool. Maybe I need to target a... less savvy demographic."), MSGBOX_DEFAULT SPEAKER_MONTY)
+    msgbox(format("Wait,you tageted me specifically?"), MSGBOX_DEFAULT, SPEAKER_PLAYER)
+    msgbox(format("Hueh hueh hueh, of course! I don't want to con region natives, but I have no problem ripping off techie transplants. You're so gullible!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("You know, when I started hustling, I was just trying to get my house back. But now? I'm just good at getting people to hand over their cash!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("But for now, I'm not goin anywhere. {PLAYER}, anytime you want a rematch, I'll be here."), MSGBOX_DEFAULT, SPEAKER_MONTY)
     showmoneybox(0, 0)
     addmoney(QUEST_RPS_BASE_WAGER)
     waitbuttonpress
     playse(SE_SHOP)
     updatemoneybox
-    msgbox(RPS_Text_Next, , SPEAKER_MONTY)
+    msgbox(format("Next time, I'll play fair, hueh hueh hueh."), , SPEAKER_MONTY)
     hidemoneybox
     closemessage
     completequest(QUEST_RPS)
@@ -172,13 +172,13 @@ script RPS_Dialogue_QuestComplete
 
 script RPS_Dialogue_LostQuestBattle
 {
-    msgbox(RPS_Text_ToughBreak, , SPEAKER_MONTY )
+    msgbox(format("Tough break kid."), , SPEAKER_MONTY )
     showmoneybox(0, 0)
     removemoney(QUEST_RPS_BASE_WAGER)
     waitbuttonpress
     playse(SE_SHOP)
     updatemoneybox
-    msgbox(RPS_Text_NextTime, , SPEAKER_MONTY )
+    msgbox(format("Better luck next time!"), , SPEAKER_MONTY )
     hidemoneybox
     closemessage
 }
@@ -204,15 +204,15 @@ script RPS_Script_JudgeStreak
 
 script RPS_Dialogue_ZeroStreak
 {
-    msgbox(RPS_Text_HeyU,MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("Hey {PLAYER}!"),MSGBOX_DEFAULT,SPEAKER_MONTY)
 
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
     if(var(VAR_RESULT))
     {
-        msgbox(RPS_Text_ThisProduction,MSGBOX_DEFAULT,SPEAKER_MONTY)
+        msgbox(format("This production is somethin' else! So many moving parts. But ol' Monty is putting his own spin on this here fundraising."),MSGBOX_DEFAULT,SPEAKER_MONTY)
     }
 
-    msgbox(RPS_Text_FeelingLucky,MSGBOX_DEFAULT,SPEAKER_MONTY)
+    msgbox(format("How lucky are you feeling today?"),MSGBOX_DEFAULT,SPEAKER_MONTY)
     callnative(Quest_RPS_CheckWager)
     if(var(VAR_RESULT))
     {
@@ -237,7 +237,7 @@ script RPS_Dialogue_AskFirstStreak
 
 script RPS_Dialogue_CannotAffordWager
 {
-    msgbox(RPS_Text_LookMoreBroke, MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
+    msgbox(format("Hueh hueh hueh, you look more broke than me! Come back when your luck has changed."), MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
     closemessage
     releaseall
     end
@@ -258,7 +258,7 @@ script RPS_Script_JudgeWagerBattleOutcome
 script RPS_Script_StartWagerBattle
 {
     call (RPS_Script_GiveFairMon)
-    msgbox(RPS_Text_AllRight, MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("Hueh hueh hueh, all right! Mach! Focus! Hand!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
     closemessage
     trainerbattle_continue_after_lose(TRAINER_MONTY, RPS_Text_WellWhat)
     call(RPS_Script_JudgeWagerBattleOutcome)
@@ -280,7 +280,7 @@ script RPS_Dialogue_LostWagerBattle
     waitbuttonpress
     playse(SE_SHOP)
     updatemoneybox
-    msgbox(RPS_Text_Pleasure, ,SPEAKER_MONTY)
+    msgbox(format("Pleasure doing business with ya. Holler if you're up for another round."), ,SPEAKER_MONTY)
     waitbuttonpress
     hidemoneybox
     closemessage
@@ -365,13 +365,13 @@ script RPS_Dialogue_GiveItem
 script RPS_Dialogue_CompletedStreak
 {
     call(RPS_Script_IncrementStreak)
-    msgbox(RPS_Text_Imtapped,,SPEAKER_MONTYOPP)
+    msgbox(format("Okay okay, I'm tapped out, you got me."),,SPEAKER_MONTYOPP)
     showmoneybox(0,0)
     callnative(Quest_RPS_PayWager)
     waitbuttonpress
     playse(SE_SHOP)
     updatemoneybox
-    msgbox(RPS_Text_IHungUp,,SPEAKER_MONTYOPP)
+    msgbox(format("Maybe it's time I hung up my hustler's hat."),,SPEAKER_MONTYOPP)
     hidemoneybox
     closemessage
     call(RPS_Script_StreakReset)
@@ -383,13 +383,13 @@ script RPS_Dialogue_PostStreak
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
     if(var(VAR_RESULT))
     {
-        msgbox(RPS_Text_YouKnowIThink,,SPEAKER_MONTY)
-        msgbox(RPS_Text_TakingMoneyFrom,,SPEAKER_MONTY)
-        msgbox(RPS_Text_ThanksFor,MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
+        msgbox(format("Hueh hueh, I think this studio gig really suits me!"),,SPEAKER_MONTY)
+        msgbox(format("I'm still taking money from folks with heavy pockets... but now we're fueling this here production! I'm havin' a great time usin' my hustlin' powers for good."),,SPEAKER_MONTY)
+        msgbox(format("Thanks for setting me up!"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
     }
     else
     {
-        msgbox(RPS_Text_MightBeDone,MSGBOX_AUTOCLOSE,SPEAKER_MONTYOPP)
+        msgbox(format("Might be done with Mach-Focus-Hand... I think I need to find a bigger hustle, something more fufilling."),MSGBOX_AUTOCLOSE,SPEAKER_MONTYOPP)
     }
 }
 

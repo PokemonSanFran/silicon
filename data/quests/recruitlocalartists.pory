@@ -127,18 +127,18 @@ script Quest_Recruitlocalartists_StartQuest_Dialogue{
 
     if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
         faceplayer
-        msgbox(gText_Recruitlocalartists_HelloPlayer)
+        msgbox(format("Hello {PLAYER}. We haven't formerly met yet, but I'm Ramesh, VP of Marketing for SharpRise Capital. We've always been very impressed with your work."))
         closemessage
     }
 
     applymovement(RAMESH_MERMEREZA_CITY,Common_Movement_FaceUp)
     waitmovement(RAMESH_MERMEREZA_CITY)
 
-    msgbox(gText_Recruitlocalartists_TheseMurals)
+    msgbox(format("These murals... they're a cornerstone of the culture of this city. They depict the growth and struggles of not only this community, but the region as a whole."))
     closemessage
 
     faceplayer
-    msgbox(gText_Recruitlocalartists_TheLocalsLove)
+    msgbox(format("The locals love them too. I want to figure out how SharpRise Capital can work with these artists to create a marketing campaign that really resonates with the people. Can you help me track down the artists? Come to the Production Studio in the SharpRise Spire once you've found them."))
     closemessage
 
     applymovement(RAMESH_MERMEREZA_CITY,Quest_Recruitlocalartists_LeaveMission_Movement)
@@ -153,7 +153,7 @@ script Quest_Recruitlocalartists_StartQuest_Dialogue{
 
 script Quest_Recruitlocalartists_First_Dialogue{
     addvar(VAR_QUEST_RECRUITLOLCAARTISTS,1)
-        msgbox(gText_Recruitlocalartists_TheMurals,MSGBOX_NPC)
+        msgbox(format("The murals are painted by this rag tag group! They come in, paint real fast and then proof, they're gone!"),MSGBOX_NPC)
         end
 }
 
@@ -165,7 +165,7 @@ script Quest_Recruitlocalartists_Second_Dialogue{
         addobject(SMEARGLE)
         setobjectxy(SMEARGLE,36,2)
         applymovement(SMEARGLE,Quest_Recruitlocalartists_RunPastScreen_Movement)
-        msgbox(gText_Recruitlocalartists_ISawOne)
+        msgbox(format("I saw one of those mural painters once. I'll tell you a secret... they're Pokémon!"))
         closemessage
         waitmovement(SMEARGLE)
         fadescreen(FADE_TO_BLACK)
@@ -182,7 +182,7 @@ script Quest_Recruitlocalartists_CoreEncounter_Script{
         faceplayer
         call(Quest_Recruitlocalartists_SetSmeargle_Script)
         playmoncry(SPECIES_SMEARGLE,CRY_MODE_ENCOUNTER)
-        msgbox(gText_Recruitlocalartists_Smear)
+        msgbox(format("Smear!"))
         delay(40)
         waitmoncry
         setflag(FLAG_SYS_CTRL_OBJ_DELETE)
@@ -220,7 +220,7 @@ script Quest_Recruitlocalartists_RemoveSmeargle_Script{
 script Quest_Recruitlocalartists_SmeargleRunAway_Script{
     lock
         call(Quest_Recruitlocalartists_RemoveSmeargle_Script)
-        msgbox(gText_Recruitlocalartists_TheSmeargleRan,MSGBOX_AUTOCLOSE)
+        msgbox(format("The Smeargle ran away!"),MSGBOX_AUTOCLOSE)
         release
         end
 }
@@ -240,7 +240,7 @@ script Quest_Recruitlocalartists_ClearSmeargleSub_Script{
 }
 
 script Quest_Recruitlocalartists_Active_Dialogue{
-    msgbox(gText_Recruitlocalartists_YouStillHavent,MSGBOX_NPC)
+    msgbox(format("You still haven't found those mural artists?"),MSGBOX_NPC)
         end
 }
 
@@ -250,8 +250,8 @@ script Quest_Recruitlocalartists_CompleteQuest_Dialogue{
     applymovement(RAMESH_PRODUCTION,Common_Movement_ExclamationMark)
     waitmovement(RAMESH_PRODUCTION)
     waitse
-    msgbox(gText_Recruitlocalartists_TheyWerePokemon)
-    msgbox(gText_Recruitlocalartists_WellThenIDont)
+    msgbox(format("They were Pokémon?! Fascinating. Those murals were incredibly complex and yet... hmm."))
+    msgbox(format("Well then I don't want to hire them, obviously. They're better off with a Trainer. A shame they won't be painting in MermerezaCity anymore, but I'll just have to find somebody else. Thanks for your help."))
     completequest(QUEST_RECRUITLOCALARTISTS)
     release
     end

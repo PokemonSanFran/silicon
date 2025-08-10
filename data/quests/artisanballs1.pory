@@ -103,10 +103,10 @@ script Quest_ArtisanBalls1_CheckStatus_Script {
 }
 
 script Quest_ArtisanBalls1_Start_Dialogue {
-	msgbox(gText_Quest_ArtisanBalls1_IGotFired, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("I make craft PokéBalls. I'm tired of working for somebody else, and want to open a shop selling my Balls! Would you be willing to test my PokeBalls?"), MSGBOX_NPC,SPEAKER_SERGEY)
 	call(Quest_ArtisanBalls1_GiveFirstSet)
 	startquest(QUEST_ARTISANBALLS1)
-    msgbox(gText_Quest_ArtisanBalls1_ComeBack,MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("That set has one of each: Fast, Level, Lure, Love, Friend and a Moon Ball. The books explain how to best use them. Come back if you need more PokeBalls."),MSGBOX_NPC,SPEAKER_SERGEY)
     end
 }
 
@@ -119,7 +119,7 @@ script Quest_ArtisanBalls1_GiveFirstSet {
 	additem(ITEM_FRIEND_BALL, 1)
 	additem(ITEM_MOON_BALL, 1)
 	playfanfare(MUS_OBTAIN_ITEM)
-	msgbox(gText_Quest_ArtisanBalls1_SergeyGaveYou)
+	msgbox(format("{PLAYER} obtained a set of craft PokéBalls!"))
 	waitmessage
 	waitfanfare
 	return
@@ -128,15 +128,15 @@ script Quest_ArtisanBalls1_GiveFirstSet {
 
 script Quest_ArtisanBalls1_Active_Dialogue {
 
-    msgbox(gText_Quest_ArtisanBalls1_HowIsProgress, MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("How is progress going?"), MSGBOX_NPC,SPEAKER_SERGEY)
     call(Quest_ArtisanBalls1_During_ReplenishBalls_Script)
 
     if (var(VAR_TEMP_0) > 0)
     {
-        msgbox(gText_Quest_ArtisanBalls1_JustMadeThatToday, MSGBOX_NPC,SPEAKER_SERGEY)
+        msgbox(format("Just made those today. Let me know how they do!"), MSGBOX_NPC,SPEAKER_SERGEY)
         end
     }
-    msgbox(gText_Quest_ArtisanBalls1__ThoseBallsCanBe, MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("Those balls can be tricky to use! You gotta make sure you're picking the right targets."), MSGBOX_NPC,SPEAKER_SERGEY)
     end
     }
 
@@ -211,7 +211,7 @@ script Quest_ArtisanBalls1_During_ReplenishBalls_Script {
 }
 
 script Quest_ArtisanBalls1_Reward_Dialogue {
-	msgbox(gText_Quest_ArtisanBalls1_SoTheyAllWork, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("So they all work well? Fantastic. Thank you so much for your help! Time to start reaching out and really selling them. Take this as a thanks!"), MSGBOX_NPC,SPEAKER_SERGEY)
 	call(Quest_ArtisanBalls1_GiveReward_Script)
 	completequest(QUEST_ARTISANBALLS1)
 	end
@@ -267,9 +267,9 @@ script Quest_ArtisanBalls2_CheckTrainerC_Script{
 
 script Quest_ArtisanBalls2_ShopQuestChoiceChoosePrompt_Script{
     if (var(VAR_RESULT)){
-        msgbox(gText_Quest_ArtisanBalls2_LookingToBuyActive,MSGBOX_YESNO)
+        msgbox(format("Hey {PLAYER}! Are you here to buy, or do you have an update?"),MSGBOX_YESNO)
     }else{
-	msgbox(gText_Quest_ArtisanBalls2_LookingToBuyOr, MSGBOX_YESNO)
+	msgbox(format("Hey {PLAYER}! Are you here to buy, or do you wanna hear the latest news with the business?"), MSGBOX_YESNO)
     }
     return
 }
@@ -319,7 +319,7 @@ script Quest_ArtisanBalls2_GenerateDailyBall_Script {
 
 script Quest_ArtisanBalls2_AskRandomBall_Script {
 	showmoneybox(0, 0)
-	msgbox(gText_Quest_ArtisanBalls2_IMadeA, MSGBOX_YESNO)
+	msgbox(format("I made a small batch this morning. Want {STR_VAR_3} for ¥1300?"), MSGBOX_YESNO)
 
 	if (var(VAR_RESULT) == YES)
 	{
@@ -357,7 +357,7 @@ script Quest_ArtisanBalls2_BuyRandomBall_Script {
 }
 
 script Quest_ArtisanBalls2_DeclineRandomBall_Script {
-	msgbox(gText_Quest_ArtisanBalls2_NoWorries, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("I'll be here if you change your mind."), MSGBOX_NPC,SPEAKER_SERGEY)
 	return
 }
 
@@ -376,12 +376,12 @@ script Quest_ArtisanBalls2_During_ProgressCheck_Script {
 
 
 script Quest_ArtisanBalls2_Start_Dialogue {
-	msgbox(gText_Quest_ArtisanBalls2_ImReadyToExpand, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("Things are going well, and I think I'm ready to expand."), MSGBOX_NPC,SPEAKER_SERGEY)
 
-	msgbox(gText_Quest_ArtisanBalls2_ThatsAmazing, MSGBOX_NPC,SPEAKER_ALICIA)
+	msgbox(format("That's amazing! Congrats Sergey!"), MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-	msgbox(gText_Quest_ArtisanBalls2_INeedHelp, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("I need help though. There's a lot of work to do, so I'm going to need to hire people... I think I need an office manager, customer service rep, and a marketing manger. Could you help me find some people? I want to hire people that really use and understand my products. There's gotta be Trainers out there that are using my Balls, right?"), MSGBOX_NPC,SPEAKER_SERGEY)
 	startquest(QUEST_ARTISANBALLS2)
 	end
 }
@@ -392,9 +392,9 @@ script Quest_ArtisanBalls2_Active_Dialogue {
     call(Quest_ArtisanBalls2_CheckReward_Script)
 
     if(var(VAR_TEMP_0) > 0){
-        msgbox(gText_Quest_ArtisanBalls2_WowPeopleAre,MSGBOX_NPC,SPEAKER_SERGEY)
+        msgbox(format("Wow! People are slowly trickling in... I think we can actually pull this off!"),MSGBOX_NPC,SPEAKER_SERGEY)
     }else{
-        msgbox(gText_Quest_ArtisanBalls2_FindingHelp, MSGBOX_NPC,SPEAKER_SERGEY)
+        msgbox(format("Finding help is tough, isn't it?"), MSGBOX_NPC,SPEAKER_SERGEY)
     }
     end
 }
@@ -408,15 +408,15 @@ script Quest_ArtisanBalls2_TrainerA_PostBattle_Script{
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_ARTISANBALLS2, SUB_QUEST_1)
     call(Quest_ArtisanBalls2_CheckReward_Script)
 
-	msgbox(gText_Quest_ArtisanBalls2_WhereDidYouGet, MSGBOX_NPC,SPEAKER_ALICIA)
+	msgbox(format("Where did you get those PokéBalls?"), MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-	msgbox(gText_Quest_ArtisanBalls2_MyGirlfriend, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("My girlfriend got them for me as a present! I guess there's some craft seller making them."), MSGBOX_NPC,SPEAKER_SERGEY)
 
-	msgbox(gText_Quest_ArtisanBalls2_OfficeManagerRight, MSGBOX_NPC,SPEAKER_ALICIA)
+	msgbox(format("You mentioned Office Management, right? The guy who made those balls is actually looking to hire somebody for that. You should talk to him, he's in ToraTown."), MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-	msgbox(gText_Quest_ArtisanBalls2_WaitReally, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("Wait, really? I absolutely need a new gig, and that sounds amazing! Thank you so much."), MSGBOX_NPC,SPEAKER_SERGEY)
 
 	fadescreen(FADE_TO_BLACK)
 	removeobject(TRAINER_A)
@@ -434,14 +434,14 @@ script Quest_ArtisanBalls2_TrainerB_PostBattle_Script{
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_ARTISANBALLS2, SUB_QUEST_2)
     call(Quest_ArtisanBalls2_CheckReward_Script)
 
-	msgbox(gText_Quest_ArtisanBalls2_WhereDidYouGet, MSGBOX_NPC,SPEAKER_ALICIA)
+	msgbox(format("Where did you get those PokéBalls?"), MSGBOX_NPC,SPEAKER_ALICIA)
 
-	msgbox(gText_Quest_ArtisanBalls2_ISawThe, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("I saw the collection on Buzzr and wanted to try them out. Why?"), MSGBOX_NPC,SPEAKER_SERGEY)
 
-	msgbox(gText_Quest_ArtisanBalls2_YouSaidYouWereInto, MSGBOX_NPC,SPEAKER_ALICIA)
+	msgbox(format("You said you were into branding, right? The guy who made those balls is actually looking to hire somebody for that. You should talk to him, he's in ToraTown."), MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-	msgbox(gText_Quest_ArtisanBalls2_OhManWhat, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("Oh man, what? I gotta get over there right now!"), MSGBOX_NPC,SPEAKER_SERGEY)
 
 	fadescreen(FADE_TO_BLACK)
 	removeobject(TRAINER_B)
@@ -460,15 +460,15 @@ script Quest_ArtisanBalls2_TrainerC_PostBattle_Script{
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_ARTISANBALLS2, SUB_QUEST_3)
     call(Quest_ArtisanBalls2_CheckReward_Script)
 
-	msgbox(gText_Quest_ArtisanBalls2_WhereDidYouGet, MSGBOX_NPC,SPEAKER_ALICIA)
+	msgbox(format("Where did you get those PokéBalls?"), MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-	msgbox(gText_Quest_ArtisanBalls2_IMetTheVendor, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("I met the vendor a local business trade show!"), MSGBOX_NPC,SPEAKER_SERGEY)
 
-	msgbox(gText_Quest_ArtisanBalls2_IfYouLikeHelping, MSGBOX_NPC,SPEAKER_ALICIA)
+	msgbox(format("If you like helping people, the guy who made those Balls is looking for a customer service rep. You should go to ToraTown and talk to him!"), MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-	msgbox(gText_Quest_ArtisanBalls2_ThatWouldBe, MSGBOX_NPC,SPEAKER_SERGEY)
+	msgbox(format("That would be amazing! I'll head over there now."), MSGBOX_NPC,SPEAKER_SERGEY)
 
 	fadescreen(FADE_TO_BLACK)
 	removeobject(TRAINER_C)
@@ -508,7 +508,7 @@ script Quest_ArtisanBalls2_CheckReward_Script{
 }
 
 script Quest_ArtisanBalls2_Reward_Dialogue {
-    msgbox(gText_Quest_ArtisanBalls2_IThinkIHaveTheStaff,MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("I think I have the staff to finally expand out. It's all thanks to you. I was able to do a limited run of a new ball, and I want you to have some!"),MSGBOX_NPC,SPEAKER_SERGEY)
     call(Quest_ArtisanBalls2_GiveReward_Script)
     completequest(QUEST_ARTISANBALLS2)
     end
@@ -536,10 +536,10 @@ script Quest_ArtisanBalls3_ShopQuestChoice_Script {
 script Quest_ArtisanBalls3_GenerateMart_Script {
     lock
     faceplayer
-    msgbox(gText_Quest_ArtisanBalls3_WhatBallsDoYou)
+    msgbox(format("What PokéBalls do you need today?"))
 	waitmessage
 	pokemart(ArtisanBallsShop)
-    msgbox(gText_Quest_ArtisanBalls3_ThanksAgain,MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("Thanks again!"),MSGBOX_NPC,SPEAKER_SERGEY)
 	release
 }
 
@@ -569,8 +569,8 @@ script Quest_ArtisanBalls3_DuringProgressCheck_Script {
 }
 
 script Quest_ArtisanBalls3_Start_Dialogue {
-    msgbox(gText_Quest_ArtisanBalls3_BusinessHasBeen,MSGBOX_NPC,SPEAKER_SERGEY)
-    msgbox(gText_Quest_ArtisanBalls3_IveBeenTalkingTo,MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("Business has been crazy! The new staff really has been amazing, we've got a good product, and I'm doing what I love."),MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("I've been talking to some Silph Co. executives too. They want to acquire us! I want to see if we can do a big marketing push soon so I can keep showing them growth. Could you do me one last favor? Go defeat one of the Gym Leaders in Resido using a Pokémon in one of those Balls."),MSGBOX_NPC,SPEAKER_SERGEY)
     startquest(QUEST_ARTISANBALLS3)
     release
     end
@@ -579,7 +579,7 @@ script Quest_ArtisanBalls3_Start_Dialogue {
 //PSF TODO When battling any of the Gym Leaders, check if the player has a pokemon in their party with the riht ball. if they do AND they win the battle, mark ArtisanQuest3 as complete
 
 script Quest_ArtisanBalls3_Active_Dialogue {
-    msgbox(gText_Quest_ArtisanBalls3_CantWaitToSee,MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("I can't wait to see your battle!"),MSGBOX_NPC,SPEAKER_SERGEY)
     end
 }
 
@@ -606,11 +606,11 @@ script Quest_ArtisanBalls3_Reward_Cutscene{
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(SERGEY)
 
-    msgbox(gText_Quest_ArtisanBalls3_DidYouHearThat,MSGBOX_DEFAULT)
-    msgbox(gText_Quest_ArtisanBalls3_NoButItSounds,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Did you hear that?!?!?"),MSGBOX_DEFAULT)
+    msgbox(format("No, but it sounds like something good!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
 
-    msgbox(gText_Quest_ArtisanBalls3_TheyWantToAcquire,MSGBOX_DEFAULT)
+    msgbox(format("They want to acquire us! We're getting a huge buyout, and we get to keep working at Silph as part of their new craft division! This was all thanks to you, {PLAYER}. I couldn't have asked for more. They gave us this to celebrate the acquisition, but I want you to have it."),MSGBOX_DEFAULT)
     call(Quest_ArtisanBalls3_GiveReward_Script)
     completequest(QUEST_ARTISANBALLS3)
     end
@@ -627,10 +627,10 @@ script Quest_ArtisanBalls3_Post_Dialogue{
     if(var(VAR_RESULT)){
 
     lock
-    msgbox(gText_Quest_ArtisanBalls1_TheDoorIsLockedBut,MSGBOX_YESNO)
+    msgbox(format("The door is locked, but there is a sign on the door: This location has been closed. Please direct all questions to support at silph.co. Thank you for choosing Silph Co.!\pThere is another note below it. Do you want to read it?"),MSGBOX_YESNO)
 
     if(var(VAR_RESULT) == YES){
-    msgbox(gText_Quest_ArtisanBalls1_ToMyCustomers,MSGBOX_SIGN)
+    msgbox(format("To my loyal customers,\NSilph laid us all off. They bought my company, took the patents, and laid us all off. I feel so... used. Thank you for your support as we grew and thank you for enjoying our products. Special thanks to {PLAYER}, who always believed in us.\p- Sergey"),MSGBOX_SIGN)
     }
 
     }
@@ -639,7 +639,7 @@ script Quest_ArtisanBalls3_Post_Dialogue{
 }
 
 script Quest_ArtisanBalls_BetweenStates_Dialogue {
-    msgbox(gText_Quest_ArtisanBalls3_ImSoExcitedForWhat,MSGBOX_NPC,SPEAKER_SERGEY)
+    msgbox(format("I'm so excited for what will come next!"),MSGBOX_NPC,SPEAKER_SERGEY)
     end
 }
 script Quest_ArtisanBalls3_ChangeDoorMetatile_Script {
@@ -653,7 +653,7 @@ script Quest_ArtisanBalls3_ChangeDoorMetatile_Script {
 }
 
 script Quest_ArtisanBalls_ReadBook_Dialogue{
-    msgbox(gText_Quest_ArtisanBalls1_WhichPokeBall)
+    msgbox(format("Which craft Poké Ball would you like to read about?"))
     dynmultipush("Level Ball", ITEM_LEVEL_BALL)
     dynmultipush("Lure Ball", ITEM_LURE_BALL)
     dynmultipush("Moon Ball", ITEM_MOON_BALL)
@@ -666,13 +666,13 @@ script Quest_ArtisanBalls_ReadBook_Dialogue{
     closemessage
 
     switch(var(VAR_RESULT)){
-        case ITEM_LURE_BALL: msgbox(gText_Quest_ArtisanBalls1_ExplainLure)
-        case ITEM_FAST_BALL: msgbox(gText_Quest_ArtisanBalls1_ExplainFast)
-        case ITEM_LEVEL_BALL: msgbox(gText_Quest_ArtisanBalls1_ExplainLevel)
-        case ITEM_HEAVY_BALL: msgbox(gText_Quest_ArtisanBalls1_ExplainHeavy)
-        case ITEM_LOVE_BALL: msgbox(gText_Quest_ArtisanBalls1_ExplainLove)
-        case ITEM_FRIEND_BALL: msgbox(gText_Quest_ArtisanBalls1_ExplainFriend)
-        case ITEM_MOON_BALL: msgbox(gText_Quest_ArtisanBalls1_ExplainMoon)
+        case ITEM_LURE_BALL: msgbox(format("The Lure Ball works best in a battle that was initated by fishing."))
+        case ITEM_FAST_BALL: msgbox(format("Pokémon that are naturally very fast will be more easily captured with the Fast Ball."))
+        case ITEM_LEVEL_BALL: msgbox(format("The Level Ball is most successful when the user's Pokémon is a higher level than the wild Pokémon being captured."))
+        case ITEM_HEAVY_BALL: msgbox(format("The Heavy Ball is less successful on light Pokémon and more successful on Heavy Pokémon!"))
+        case ITEM_LOVE_BALL: msgbox(format("The Love Ball works best when the user's Pokémon is the opposite gender of the wild Pokémon being captured."))
+        case ITEM_FRIEND_BALL: msgbox(format("Pokémon captured with the Friend Ball will initally be more friendly to the Trainer that captured it."))
+        case ITEM_MOON_BALL: msgbox(format("If the Pokémon being captured is part of an evolutionary family that uses a Moon Stone to evolve, the Moon Ball will be more effective."))
         //PSF TODO Why doesn't pressing B work here?
         case MULTI_B_PRESSED:
         case ITEMS_COUNT: end

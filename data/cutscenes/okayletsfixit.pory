@@ -28,7 +28,7 @@ script OkayLetsFixit_ReachTop_Script {
         applymovement(PLAYER, OkayLetsFixit_WalkToPeak)
         waitmovement(PLAYER)
         bufferitemname(STR_VAR_1,ITEM_WISH_TAG)
-        msgbox(gText_OkayLetsFixIt_TheBambooStar)
+        msgbox(format("The {STR_VAR_1} is glowing!"))
         closemessage
 
         playse(SE_M_DETECT)
@@ -41,21 +41,21 @@ script OkayLetsFixit_ReachTop_Script {
         addobject(HIKO)
         fadescreen(FADE_FROM_WHITE)
 
-        msgbox(gText_OkayLetsFixIt_ImGladYouCame,,SPEAKER_HIKO)
+        msgbox(format("Ah {PLAYER}, I'm glad you came. I'm Hiko."),,SPEAKER_HIKO)
         closemessage
 
         applymovement(PLAYER, OkayLetsFixit_LookAround)
         waitmovement(0)
 
-        msgbox(gText_OkayLetsFixIt_WhatWhereDidYou,,SPEAKER_ALICIA)
+        msgbox(format("What… where… did you come from?! What the hell is going on?"),,SPEAKER_ALICIA)
 
 
-        msgbox(gText_OkayLetsFixIt_HaveYouRealized,,SPEAKER_HIKO)
+        msgbox(format("Have you realized the error in your ways?"),,SPEAKER_HIKO)
 
-        msgbox(gText_OkayLetsFixIt_InComingHere,,SPEAKER_ALICIA)
+        msgbox(format("In coming here? Yeah, I think - "),,SPEAKER_ALICIA)
 
 
-        msgbox(gText_OkayLetsFixIt_LetsLookBack,,SPEAKER_HIKO)
+        msgbox(format("Let's look back."),,SPEAKER_HIKO)
         closemessage
 
         fadeblackandsetremovewarpfadeflag
@@ -67,21 +67,21 @@ script OkayLetsFixit_StartFlashback_Script {
     lock
         setvar(VAR_STORYLINE_STATE,STORY_BEGIN_LETS_FIX_IT)
 
-        msgbox(gText_OkayLetsFixIt_ThisWasTheNight,,SPEAKER_ALICIA)
+        msgbox(format("This was the night I decided to help SharpRise Capital."),,SPEAKER_ALICIA)
 
 
         applymovement(HIKO, Common_Movement_FaceLeft)
         waitmovement(HIKO)
-        msgbox(gText_OkayLetsFixIt_Why,,SPEAKER_HIKO)
+        msgbox(format("Why?"),,SPEAKER_HIKO)
 
         applymovement(PLAYER, Common_Movement_FaceRight)
         waitmovement(PLAYER)
 
-        msgbox(gText_OkayLetsFixIt_IDidntBelieve,,SPEAKER_ALICIA,TAIL_WHISPER)
-        msgbox(gText_OkayLetsFixIt_YouSawItAll,,SPEAKER_HIKO)
-        msgbox(gText_OkayLetsFixIt_ImTheChampion,,SPEAKER_ALICIA,,EMOTE_SHOCK)
-        msgbox(gText_OkayLetsFixIt_AndNow,,SPEAKER_HIKO)
-        msgbox(gText_OkayLetsFixIt_AndNowIveBecome,,SPEAKER_ALICIA,,EMOTE_SAD)
+        msgbox(format("I heard Kai and TheTide...but what I wanted was more important."),,SPEAKER_ALICIA,TAIL_WHISPER)
+        msgbox(format("You saw what they were saying with your own eyes, no?"),,SPEAKER_HIKO)
+        msgbox(format("I'm the Champion! And I wanted to be a Champion so bad... and I knew that going against SharpRise Capital meant that it was over. I didn't want to sacrifice anything to help them, and I knew I would have to."),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+        msgbox(format("And now?"),,SPEAKER_HIKO)
+        msgbox(format("And now I've become a cog in the machine that they were trying to stop. I'm actually a part of the problem. Lives got worse because of me."),,SPEAKER_ALICIA,,EMOTE_SAD)
         closemessage
 
         delay(30)
@@ -107,10 +107,10 @@ script OkayLetsFixit_ReturnToPeak_Script {
         waitmovement(HIKO)
         waitmovement(PLAYER)
 
-        msgbox(gText_OkayLetsFixIt_WaitWhatWhoAreYou,,SPEAKER_ALICIA)
+        msgbox(format("Wait what - who are you? How are you -"),,SPEAKER_ALICIA)
 
 
-        msgbox(gText_OkayLetsFixIt_IHopeYouMake,,SPEAKER_HIKO)
+        msgbox(format("I hope you make the right decision this time, {PLAYER}."),,SPEAKER_HIKO)
         closemessage
         playse(SE_ORB)
         fadescreen(FADE_TO_WHITE) //PSF TODO Implement glowing with Hiko as source, mimic "DoOrbEffect"

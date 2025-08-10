@@ -31,7 +31,7 @@ script HodouCity_Racisthouse_ScrollWarp_Script{
 }
 
 script HodouCity_Racisthouse_ScrollNoWarp_Dialogue{
-    msgbox(gText_HodouCity_Racisthouse_ScrollDesc,MSGBOX_SIGN)
+    msgbox(format("There is a beautiful red scroll hanging on the wall."),MSGBOX_SIGN)
 }
 
 text gText_HodouCity_Racisthouse_ScrollDesc{

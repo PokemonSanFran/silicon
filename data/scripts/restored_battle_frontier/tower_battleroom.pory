@@ -56,15 +56,15 @@ script TirabudinPlace_Gym_Battle_Room_PlayBattleIntro_Dialogue{
         case FRONTIER_BRAIN_NOT_READY:
             msgbox(gStringVar4, MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_SILVER_FIRST:
-            msgbox(gText_RestoredTower_HiPlayer,MSGBOX_DEFAULT)
+            msgbox(format("hi {PLAYER}, let's have a good battle."),MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_SILVER_REMATCH:
-            msgbox(gText_RestoredTower_GotYourStreak,MSGBOX_DEFAULT)
+            msgbox(format("got your streak reset? well, let's see if you can get it started again!"),MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_SILVER_COMPLETE:
-            msgbox(gText_RestoredTower_BuildingAnother,MSGBOX_DEFAULT)
+            msgbox(format("building another streak? let's see how high you can go!"),MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_GOLD_FIRST:
-            msgbox(gText_RestoredTower_WelcomeToBattle,MSGBOX_DEFAULT)
+            msgbox(format("welcome to battle 100! i'm going to go all out, get ready!"),MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_GOLD_COMPLETE:
-            msgbox(gText_RestoredTower_ItsAlways,MSGBOX_DEFAULT)
+            msgbox(format("its always a pleasure to battle you, let's make it a good one!"),MSGBOX_DEFAULT)
     }
     waitmessage
     return
@@ -86,19 +86,19 @@ script TirabudinPlace_Gym_Battle_Room_PlayBattleOutro_Dialogue{
 script TirabudinPlace_Gym_Battle_Room_DefeatedBrain_Dialogue{
     switch(var(VAR_TEMP_0)){
         case FRONTIER_BRAIN_SILVER_FIRST:
-            msgbox(gText_RestoredTower_TakeThisBadge, MSGBOX_DEFAULT)
+            msgbox(format("Take this badge!"), MSGBOX_DEFAULT)
             call(TirabudinPlace_Gym_Battle_Room_GiveSymbol_Script)
-            msgbox(gText_RestoredTower_CantWaitToSeeYou, MSGBOX_DEFAULT)
+            msgbox(format("Can't wait to see you again. Come get your streak up to 100!"), MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_SILVER_REMATCH:
-            msgbox(gText_RestoredTower_CantWaitToSeeYou, MSGBOX_DEFAULT)
+            msgbox(format("Can't wait to see you again. Come get your streak up to 100!"), MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_SILVER_COMPLETE:
-            msgbox(gText_RestoredTower_LetsSeeHow, MSGBOX_DEFAULT)
+            msgbox(format("I'm so excited to see how high you can get your streak to be!"), MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_GOLD_FIRST:
-            msgbox(gText_RestoredTower_YouDidIt, MSGBOX_DEFAULT)
+            msgbox(format("You did it! 100 battles in a row! I have nothing else. These are new: the GOLDEN Badge!"), MSGBOX_DEFAULT)
             call(TirabudinPlace_Gym_Battle_Room_GiveSymbol_Script)
-            msgbox(gText_RestoredTower_LetsSeeHow, MSGBOX_DEFAULT)
+            msgbox(format("I'm so excited to see how high you can get your streak to be!"), MSGBOX_DEFAULT)
         case FRONTIER_BRAIN_GOLD_COMPLETE:
-            msgbox(gText_RestoredTower_LetsSeeHow, MSGBOX_DEFAULT)
+            msgbox(format("I'm so excited to see how high you can get your streak to be!"), MSGBOX_DEFAULT)
     }
 }
 
@@ -153,7 +153,7 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_DefeatedOpponent{
 
     playse(MUS_LEVEL_UP)
     buffernumberstring(STR_VAR_1,3)
-    msgbox(TirabudinPlace_Gym_Battle_Room_Text_YouveAlsoEarned, MSGBOX_DEFAULT)
+    msgbox(format("You've also earned {STR_VAR_1} Battle Points!"), MSGBOX_DEFAULT)
     //PSF TODO needs a show BP box
     givefrontierbattlepoints(3)
     waitse

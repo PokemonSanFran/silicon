@@ -62,7 +62,7 @@ script EventScript_HandleInfiniteSprayDecision
 
 script EventScript_Message_TurnInfiniteSprayOn
 {
-    msgbox(InfiniteSpray_Text_ModeActivated,MSGBOX_SIGN)
+    msgbox(format("The {STR_VAR_2} is now in {STR_VAR_1} mode."),MSGBOX_SIGN)
     closemessage
     release
     end
@@ -70,7 +70,7 @@ script EventScript_Message_TurnInfiniteSprayOn
 
 script EventScript_Message_TurnInfiniteSprayOff
 {
-    msgbox(InfiniteSpray_Text_TurnedOff,MSGBOX_SIGN)
+    msgbox(format("{STR_VAR_2} was turned off."),MSGBOX_SIGN)
     closemessage
     release
     end

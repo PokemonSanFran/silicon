@@ -45,16 +45,16 @@ script HousingProtest_CleanUp_Script {
 script HousingProtest_StartChanting_Dialogue
 {
     locktarget
-    msgbox(gText_HousingProtest_RichAndRude,,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Hey you! Rich and rude! We don't like your attitude!"),,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
     applymovement(PLAYER, Common_Movement_FaceUp)
     waitmovement(0)
-    msgbox(gText_HousingProtest_YoureNoGood,,SPEAKER_PROTEST_B,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Hey you! You're no good! Treat the people like you should!"),,SPEAKER_PROTEST_B,TAIL_SHOUT,EMOTE_ANGRY)
     applymovement(PLAYER, Common_Movement_FaceDown)
     waitmovement(0)
-    msgbox(gText_HousingProtest_EverybodySoAngry,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_HousingProtest_ArentGoingToStand,,SPEAKER_PROTEST_B,TAIL_SHOUT,EMOTE_ANGRY)
-    msgbox(gText_HousingProtest_CantKeepPushing,,SPEAKER_PROTEST_C,TAIL_SHOUT,EMOTE_ANGRY)
-    msgbox(gText_HousingProtest_DeserveToLive,,SPEAKER_PROTEST_D,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Why is everybody so angry?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("We aren't going to stand for this any longer!"),,SPEAKER_PROTEST_B,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("You can't keep pushing us out!"),,SPEAKER_PROTEST_C,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("We deserve to live here too!"),,SPEAKER_PROTEST_D,TAIL_SHOUT,EMOTE_ANGRY)
     closemessage
     goto(HousingProtest_LandlordWalkOutside_Script)
 }
@@ -119,7 +119,7 @@ script HousingProtest_LandlordWalkOutside_Script {
 }
 
 script HousingProtest_LandlordTalkToCrowd_Dialogue {
-    msgbox(gText_HousingProtest_WeCanComeTo,,SPEAKER_LANDLORD)
+    msgbox(format("I'm sure we can come to some understanding here, please..."),,SPEAKER_LANDLORD)
     closemessage
     clearflag(FLAG_TEMP_1)
     playbgm(MUS_RG_ENCOUNTER_ROCKET, FALSE)
@@ -131,17 +131,17 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     applymovement(LANDLORD, Common_Movement_ExclamationMark)
     playse(SE_PIN)
     waitmovement(0)
-    msgbox(gText_HousingProtest_OnlyThingWereUnderstanding,,SPEAKER_RABIA)
+    msgbox(format("The only thing we're understanding is that you need to leave, and take your fancy apartments with you!"),,SPEAKER_RABIA)
     closemessage
     applymovement(LANDLORD, HousingProtest_BackUp)
     waitmovement(0)
-    msgbox(gText_HousingProtest_AreYouTrying,,SPEAKER_LANDLORD)
-    msgbox(gText_HousingProtest_TheyCantArrest,,SPEAKER_RABIA)
-    msgbox(gText_HousingProtest_AintGonnaBeNothing,,SPEAKER_VITOMIR)
+    msgbox(format("Are you trying to intimidate me? I'm just doing my job. Don't make me call the police!"),,SPEAKER_LANDLORD)
+    msgbox(format("They can't arrest of all us, right?"),,SPEAKER_RABIA)
+    msgbox(format("Ain't gonna be nothing to defend when we done..."),,SPEAKER_VITOMIR)
     closemessage
     applymovement(RABIA, Common_Movement_FaceRight)
     applymovement(VITOMIR, Common_Movement_FaceRight)
-    msgbox(gText_HousingProtest_PeopleCantStayHere,,SPEAKER_VITOMIR)
+    msgbox(format("If we, the people of Oroland can't stay here, nobody can. Let's bring it down!"),,SPEAKER_VITOMIR)
     closemessage
     applymovement(1, Common_Movement_FaceLeft)
     applymovement(2, Common_Movement_FaceLeft)
@@ -155,12 +155,12 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     waitmovement(0)
     applymovement(6, Common_Movement_ExclamationMark)
     waitmovement(0)
-    msgbox(gText_HousingProtest_Yeah,,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Yeah!"),,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
     applymovement(3, Common_Movement_ExclamationMark)
-    msgbox(gText_HousingProtest_LetsDoThis,,SPEAKER_PROTEST_C,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Let's do this!"),,SPEAKER_PROTEST_C,TAIL_SHOUT,EMOTE_ANGRY)
     waitmovement(0)
     applymovement(2, Common_Movement_ExclamationMark)
-    msgbox(gText_HousingProtest_ScrewThese,,SPEAKER_PROTEST_D,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Screw these developers!"),,SPEAKER_PROTEST_D,TAIL_SHOUT,EMOTE_ANGRY)
     waitmovement(0)
     closemessage
     applymovement(RABIA, Common_Movement_FaceUp)
@@ -172,17 +172,17 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     addobject(ARCANINE)
     playmoncry(SPECIES_ARCANINE, CRY_MODE_ENCOUNTER)
     waitmoncry
-    msgbox(gText_HousingProtest_ToTryReason,,SPEAKER_LANDLORD)
-    msgbox(gText_HousingProtest_AintAThreat,,SPEAKER_VITOMIR)
-    msgbox(gText_HousingProtest_CutItOut,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Look, I'm just the super. I don't own this building, but I am responsible for making sure you don't trash it. I'm trying to reason with you and you're threatening me?"),,SPEAKER_LANDLORD)
+    msgbox(format("I don't care if you're the landlord or working for the landlord, and I promise if you don't get out of the way, we're gonna have a problem."),,SPEAKER_VITOMIR)
+    msgbox(format("Cut it out!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
     applymovement(PLAYER, HousingProtest_DefendLandlord)
     applymovement(LANDLORD, HousingProtest_StepAside)
     waitmovement(0)
-    msgbox(gText_HousingProtest_EveryTimeISee,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_HousingProtest_TheseClowns,,SPEAKER_RABIA)
-    msgbox(gText_HousingProtest_ThisAintYourBusiness,,SPEAKER_VITOMIR)
-    msgbox(gText_HousingProtest_ICanTakeBoth,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Every time I see you guys, you're attacking innocent people. Don't you have something more productive to do?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Innocent? These clowns?! Damn, you transplants really got it twisted."),,SPEAKER_RABIA)
+    msgbox(format("This ain't your business. You should un-involve yourself."),,SPEAKER_VITOMIR)
+    msgbox(format("I can take both of you. Leave him alone, or you're going through me."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
     setvar(VAR_ROUTE99_STATE,SAVE_THETIDE_ROUTE99)
     copyobjectxytoperm(LANDLORD)
@@ -194,7 +194,7 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
 
 script HousingProtest_StartBattle_Script {
     lockall
-    msgbox(gText_HousingProtest_FineWithMe,,SPEAKER_VITOMIR)
+    msgbox(format("Pfft, fine with me. Turtonator, Flamethrower!"),,SPEAKER_VITOMIR)
     closemessage
     trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET, gText_HousingProtest_ThisIsNotHowThis)
     goto(HousingProtest_PostBattle_Dialogue)
@@ -204,7 +204,7 @@ script HousingProtest_StartBattle_PostSave_Script {
     locktarget
     setobjectnewmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
     setobjectnewmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
-    msgbox(gText_HousingProtest_FineWithMe, MSGBOX_NPC,SPEAKER_RABIA)
+    msgbox(format("Pfft, fine with me. Turtonator, Flamethrower!"), MSGBOX_NPC,SPEAKER_RABIA)
     closemessage
     trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET, gText_HousingProtest_ThisIsNotHowThis)
     goto(HousingProtest_PostBattle_Dialogue)
@@ -220,8 +220,8 @@ script HousingProtest_PostBattle_Dialogue {
     waitse
     removeobject(ARCANINE)
     setvar(VAR_ROUTE99_STATE,DEFEATED_THETIDE_ROUTE99)
-    msgbox(gText_HousingProtest_YouProudNow,,SPEAKER_RABIA)
-    msgbox(gText_HousingProtest_KeepOnLicking,,SPEAKER_VITOMIR)
+    msgbox(format("You proud now? C'mon Vitomir."),,SPEAKER_RABIA)
+    msgbox(format("Keep on licking those boots, fam. Dumbass..."),,SPEAKER_VITOMIR)
     closemessage
     call(HousingProtest_GruntsAwalkAway_Script)
     releaseall
@@ -258,11 +258,11 @@ script HousingProtest_InteractLandlord_Script {
     lock
 
     if (var (VAR_ROUTE99_STATE) < DEFEATED_THETIDE_ROUTE99){
-        msgbox(gText_HousingProtest_OhGod, MSGBOX_NPC,SPEAKER_LANDLORD)
+        msgbox(format("Oh god... they're going to kill me!"), MSGBOX_NPC,SPEAKER_LANDLORD)
     } elif (!flag (FLAG_TALKED_LANDLORD)){
         call(HousingProtest_InteractLandlord_Dialogue)
     } else {
-        msgbox(gText_HousingProtest_ShouldHireThatSecurity, MSGBOX_NPC,SPEAKER_LANDLORD,TAIL_WHISPER)
+        msgbox(format("I don't get paid enough to be the super and security..."), MSGBOX_NPC,SPEAKER_LANDLORD,TAIL_WHISPER)
     }
 
     closemessage
@@ -273,14 +273,14 @@ script HousingProtest_InteractLandlord_Script {
 script HousingProtest_InteractLandlord_Dialogue {
     setflag(FLAG_TALKED_LANDLORD)
 
-    msgbox(gText_HousingProtest_HasATendency, MSGBOX_NPC,SPEAKER_LANDLORD)
-    msgbox(gText_HousingProtest_WhyWereProtesting,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_HousingProtest_EntitledToLiveAnyWhere,,SPEAKER_LANDLORD)
-    msgbox(gText_HousingProtest_SubjectToTheSameRent,,SPEAKER_LANDLORD,,EMOTE_ANGRY)
-    msgbox(gText_HousingProtest_SoPeopleWereComing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_HousingProtest_IGuessSo,,SPEAKER_LANDLORD)
-    msgbox(gText_HousingProtest_WhatAboutThePolice,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_HousingProtest_MoreAndMoreCommon,,SPEAKER_LANDLORD)
+    msgbox(format("Thank you very much. You're right, TheTide has a tendency to pick on the defenseless like me."), MSGBOX_NPC,SPEAKER_LANDLORD)
+    msgbox(format("Why were people protesting?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Some of the citizens of Oroland feel that they are... entitled to live anywhere within their city limits."),,SPEAKER_LANDLORD)
+    msgbox(format("I don't get why they don't think they're subject to the same rent rules and regulations as the rest of us."),,SPEAKER_LANDLORD,,EMOTE_ANGRY)
+    msgbox(format("So people were coming to take over the building?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("I guess so?"),,SPEAKER_LANDLORD)
+    msgbox(format("What about the police?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("I'm sure they would have stopped it, but these protests are getting more and more common. The police can't be everywhere at once!"),,SPEAKER_LANDLORD)
 }
 
 text gText_HousingProtest_RichAndRude {

@@ -16,21 +16,21 @@ script EnterNeriene_Event_Script {
 
 script EnterNeriene_Intro_Dialogue {
     lock
-    msgbox(gText_EnterNeriene_AintItBeautiful, MSGBOX_NPC,SPEAKER_NERIENE)
+    msgbox(format("Ain't it beautiful? All of it! The bridge, the ocean, this base. "), MSGBOX_NPC,SPEAKER_NERIENE)
     reveal(REVEAL_NERIENE)
-    msgbox(gText_EnterNeriene_DoYouKnow,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+    msgbox(format("Do you know why I built the Gym into the base, {PLAYER}?"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
 
-    msgbox(gText_EnterNeriene_NoWh,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("No, wh -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-    msgbox(gText_EnterNeriene_IllTellYouWhy,MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT)
+    msgbox(format("I'll tell you why! Because this base represents the crown jewel of this here nation: our military defense. We're so strong, people don't even DREAM of attacking us!"),MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT)
 
-    msgbox(gText_EnterNeriene_YaKnowWhat,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+    msgbox(format("Ya know what happens if they did attack?"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
 
-    msgbox(gText_EnterNeriene_WeWould,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("We would -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-    msgbox(gText_EnterNeriene_WeWouldBlowThem,MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT,EMOTE_HAPPY)
+    msgbox(format("WE WOULD BLOW THEM TO SMITHEEREENS! Oh baby, just gets me excited thinking about how we can blow those idiots right back to the Stone Age."),MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT,EMOTE_HAPPY)
 
-    msgbox(gText_EnterNeriene_ThatRawPower,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+    msgbox(format("That raw power is so inspiring, once I got the chance, I knew I wanted my career to have the energy of that legacy. That's why we're up here."),MSGBOX_DEFAULT,SPEAKER_NERIENE)
         setvar(VAR_GYM_5_STATE, GYM_SAVE_BEFORE_LEADER)
     closemessage
     startmenu_savescreen
@@ -49,7 +49,7 @@ script EnterNeriene_NerieneDefeated_Script {
     setvar(VAR_GYM_5_STATE,GYM_DEFEATED_LEADER)
     setvar(VAR_NERIENE_STATE,BATTLE_1_COMPLETE)
     setvar(VAR_FORT_YOBU_STATE,DEFEATED_NERIENE)
-    msgbox(gText_EnterNeriene_YoureNoJoke,MSGBOX_DEFAULT,SPEAKER_NERIENE)
+    msgbox(format("You're no joke! My strategy is usually to wear the opponent out, but I ran out of gas quick against you!"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
     closemessage
     tweetfanfare(TWEET_GYM_FORT_YOBU_BADGE,MUS_OBTAIN_BADGE)
     giveitem(ITEM_TM05)
@@ -63,7 +63,7 @@ script EnterNeriene_NerieneDefeated_Script {
 script EnterNeriene_PostDefeat1_Dialogue {
     setvar(VAR_GYM_5_STATE, GYM_EXPLAINED_BADGE_AND_TM)
     lock
-    msgbox(gText_EnterNeriene_MaybeMyDefense, MSGBOX_NPC,SPEAKER_NERIENE)
+    msgbox(format("Maybe my defense wasn't strong enough? Should I start using Sandstorm? Maybe Toxic..."), MSGBOX_NPC,SPEAKER_NERIENE)
         closemessage
     release
     end
@@ -71,7 +71,7 @@ script EnterNeriene_PostDefeat1_Dialogue {
 
 script EnterNeriene_PostDefeat2_Dialogue {
     lock
-    msgbox(gText_EnterNeriene_ManTheCompetition, MSGBOX_NPC,SPEAKER_NERIENE)
+    msgbox(format("Man, the competition at the League Finals is gonna a hell of a show. All you kids coming through here are gonna rise real quick through the ranks!"), MSGBOX_NPC,SPEAKER_NERIENE)
         closemessage
     release
     end

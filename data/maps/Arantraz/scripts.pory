@@ -19,7 +19,7 @@ mapscripts Arantraz_MapScripts {
 script ArantrazAttendant_HealPlayer_Script {
         lock
         call(Common_EventScript_OutOfCenterPartyHeal)
-        msgbox(gText_Arantraz_IveHealedYourParty)
+        msgbox(format("I've healed your party! You can battle these Trainers as often as you like."))
         call(ResetArantrazExhibit_Script)
         closemessage
         release

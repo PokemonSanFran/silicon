@@ -56,13 +56,13 @@ script LetsBurnThisMotherDown_Interact_Oliver_Script
 
 script LetsBurnThisMotherDown_ActiveQuest_Dialogue
 {
-    msgbox(gText_LetsBurnThisMotherDown_YoureCloserToThe,MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("{PLAYER}, you're closer to the community then we are. Perhaps there's something you've learned, or could poke around to see if you can find traces of their new hideout."),MSGBOX_NPC,SPEAKER_OLIVER)
 end
 }
 
 script LetsBurnThisMotherDown_CompleteQuest_Dialogue
 {
-    msgbox(gText_LetsBurnThisMotherDown_ImStillShocked,MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("I'm still shocked they were using the inside of Arantraz. Absolutely insane."),MSGBOX_NPC,SPEAKER_OLIVER)
     end
 }
 
@@ -72,7 +72,7 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
 
     msgbox(format("We still need to find their new base of operations. Ever since we shut down NavalBase, we haven't been able to make heads or tails on where they're operating out of."),MSGBOX_NPC,SPEAKER_OLIVER)
 
-    msgbox(gText_LetsBurnThisMotherDown_YoureCloserToThe,,SPEAKER_OLIVER)
+    msgbox(format("{PLAYER}, you're closer to the community then we are. Perhaps there's something you've learned, or could poke around to see if you can find traces of their new hideout."),,SPEAKER_OLIVER)
 
     msgbox(format("(I need to talk to Kai… I think I can still save him. I need to get to Arantraz.)"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
 
@@ -89,7 +89,7 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
     msgbox(format("I think I can still help him. I need to get to Arantraz."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
     startquest(QUEST_LETSBURNTHISMOTHERDOWN)
     buffermapname(STR_VAR_1,MAP_ARANTRAZ)
-    msgbox(gText_YouHaveYourOrders_DoYouWantTo,MSGBOX_YESNO)
+    msgbox(format("Do you want to go to {STR_VAR_1}?"),MSGBOX_YESNO)
     if (var(VAR_RESULT))
     {
         fadeblackandsetremovewarpfadeflag
@@ -297,7 +297,7 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
        case FALSE_TIMELINE_NONE_COMPLETE:
         msgbox(format("I'm sorry. I really thought I could change their mind."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("You're young, and it ended well."),,SPEAKER_ADELAIDE)
-        msgbox(gText_LetsBurnThisMotherDown_ShuttingDown,,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
 
        case FALSE_TIMELINE_MAN_COMPLETE:
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
@@ -316,7 +316,7 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
 
        case FALSE_TIMELINE_MAN_HOW_COMPLETE:
         msgbox(format("Another job well done, {PLAYER}."),,SPEAKER_ADELAIDE)
-        msgbox(gText_LetsBurnThisMotherDown_ShuttingDown,,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
         msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
         msgbox(format("You and Charlotte have finally dismantled The Tide!"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
@@ -330,7 +330,7 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
         delay(30)
     }
 
-    msgbox(gText_LetsBurnThisMotherDown_ImStillShocked,,SPEAKER_OLIVER)
+    msgbox(format("I'm still shocked they were using the inside of Arantraz. Absolutely insane."),,SPEAKER_OLIVER)
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceUp)

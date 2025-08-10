@@ -12,20 +12,20 @@ script Quest_Restoretirabudinplace_Dialogue{
     lock
     goto_if_quest_complete(QUEST_RESTORETIRABUDINGYM,Quest_Restoretirabudinplace_CompletedQuest_Dialogue)
        setflag(FLAG_FACILITY_UNLOCK_BD)
-    msgbox(gText_Restoretirabudinplace_HeyPlayerIDont,MSGBOX_NPC,SPEAKER_BD)
-    msgbox(gText_Restoretirabudinplace_ImGoingTo,,SPEAKER_BD)
+    msgbox(format("Hey {PLAYER}.\p I don't think I want to battle today. Actually, I wanted to tell you something. I'm quitting as a Gym Leader."),MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("I've seen the work you've done with Imelda. It's impressive really. And now I'm certain... that what I did wasn't for the best. I'm so ashamed. And angry. And I think I need time to figure things out."),,SPEAKER_BD)
     closemessage
     applymovement(BD,Common_Movement_FacePlayer)
-    msgbox(gText_Restoretirabudinplace_IveActually,,SPEAKER_BD)
+    msgbox(format("I've actually been working on a similar system. I've been putting aside enough money from my SharpRise Capital paychecks that this place is ready to become a full fledged Battle Facility, effective immediately."),,SPEAKER_BD)
     completequest(QUEST_RESTORETIRABUDINGYM)
-    msgbox(gText_Restoretirabudinplace_SoIThink,MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("I'm done for now. But I'm not leaving the region like Ellen. I'll see you around."),MSGBOX_NPC,SPEAKER_BD)
     closemessage
     release
     end
 }
 
 script Quest_Restoretirabudinplace_CompletedQuest_Dialogue{
-    msgbox(gText_Restoretirabudinplace_SoIThink,MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("I'm done for now. But I'm not leaving the region like Ellen. I'll see you around."),MSGBOX_NPC,SPEAKER_BD)
     end
 }
 

@@ -27,7 +27,7 @@ script BeachBattle_BattleSetUp_Script
 script BeachBattle_CharlotteWalkToPlayer
 {
     lock
-        msgbox(gText_BeachBattle_HeyPlayer,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Hey, {PLAYER}!!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
         closemessage
 
         playse(SE_PIN)
@@ -53,15 +53,15 @@ script BeachBattle_Approach_Dialogue
 {
         setvar(VAR_BEACH_BATTLE_STATE,SAVE_CHARLOTTE_BEACH)
         setobjectxyperm(CHARLOTTE,10,24)
-        msgbox(gText_BeachBattle_ImHeadingNorth,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("I'm heading north for my last Badge. How's your challenge holding up?"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
 
         special(GetNumberOfBadges)
 
         switch (var(VAR_RESULT)) {
-            case 8: msgbox(gText_BeachBattle_OhShit,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE,TAIL_TALK,EMOTE_SHOCK)
+            case 8: msgbox(format("Oh shit! You beat me to eight badges - guess I underestimated you!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE,TAIL_TALK,EMOTE_SHOCK)
             case 7: goto(BeachBattle_SevenBadges_Dialogue)
-            case 6: msgbox(gText_BeachBattle_TwoLeft,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
-            case 5: msgbox(gText_BeachBattle_HmmOnlyFive,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+            case 6: msgbox(format("Two left, that's what I figured."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+            case 5: msgbox(format("Hmm, only five? Guessed you'd be further along by now!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
             case 4: goto(BeachBattle_FourBadges_Dialogue)
         }
         goto(BeachBattle_SaveProgress)
@@ -70,15 +70,15 @@ script BeachBattle_Approach_Dialogue
 
 script BeachBattle_SevenBadges_Dialogue
 {
-    msgbox(gText_BeachBattle_OhNiceLastOne,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE,TAIL_TALK,EMOTE_HAPPY)
+    msgbox(format("Oh nice, last one too!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE,TAIL_TALK,EMOTE_HAPPY)
         goto(BeachBattle_SaveProgress)
 }
 
 script BeachBattle_FourBadges_Dialogue
 {
-        msgbox(gText_BeachBattle_ImNotSureThatSlow,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("{PLAYER}, I'm not sure that slow and steady always win the race… you gotta pick it up!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_BeachBattle_IveBeenALittleDistracted,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("I've been a little… distracted! But I'll make it up for sure, don't worry."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         goto(BeachBattle_SaveProgress)
 }
 
@@ -92,7 +92,7 @@ script BeachBattle_SaveProgress
 script BeachBattle_StartBattle_Script
 {
     lock
-        msgbox(gText_BeachBattle_MyBrainIsScrambled,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("My brain is scrambled from running around all day. Let's see if I can beat you without breaking a sweat!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
         closemessage
         trainerbattle_no_intro(TRAINER_CHARLOTTE_BEACHBATTLE,gText_BeachBattle_ImLegitShook)
         closemessage
@@ -108,15 +108,15 @@ script BeachBattle_PostBattle_Dialogue
         playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
         setvar(VAR_BEACH_BATTLE_STATE,POST_BEACH_BATTLE)
 
-        msgbox(gText_BeachBattle_WellImNotSurprised,,SPEAKER_ALICIA)
+        msgbox(format("Well, I'm not surprised you've already got seven Badges, that was tough!"),,SPEAKER_ALICIA)
 
-        msgbox(gText_BeachBattle_UghIShouldBe,,SPEAKER_CHARLOTTE)
+        msgbox(format("Ugh, I should be stronger than that."),,SPEAKER_CHARLOTTE)
 
         if (flag(FLAG_BADGE05_GET)){
-            msgbox(gText_BeachBattle_IfItTakesATeam,,SPEAKER_CHARLOTTE,TAIL_WHISPER)
+            msgbox(format("If it takes a team as good as yours to beat Neriene, then I might need to rethink things…"),,SPEAKER_CHARLOTTE,TAIL_WHISPER)
         }
 
-    msgbox(gText_BeachBattle_NextTimeIllHave,,SPEAKER_CHARLOTTE)
+    msgbox(format("Next time, I'll have you figured out!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 

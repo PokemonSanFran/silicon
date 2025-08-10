@@ -22,7 +22,7 @@ script Quest_FreshwaterEvolution_CheckPartyAndQuest_Script{
 }
 
 script Quest_FreshwaterEvolution_AlreadyShiny_Dialogue{
-        msgbox(gText_Quest_FreshwaterEvolution_OhWaitYoure,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Oh wait, you're already shiny..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         closemessage
         call(Quest_FreshwaterEvolution_Recall_Script)
@@ -56,7 +56,7 @@ script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
         goto(Quest_FreshwaterEvolution_AlreadyShiny_Dialogue)
     }
 
-    msgbox(gText_Quest_FreshwaterEvolution_OkayLetsSee,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Okay let's see... come on {STR_VAR_1}, hop in the water!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceDown)
@@ -76,12 +76,12 @@ script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
     playmoncry(SPECIES_OCTILLERY, CRY_MODE_HIGH_PITCH)
     waitmoncry
     waitmovement(OCTILLERY)
-    msgbox(gText_Quest_FreshwaterEvolution_LooksVery,MSGBOX_DEFAULT)
+    msgbox(format("{STR_VAR_1} looks very distressed!"),MSGBOX_DEFAULT)
     closemessage
 
     call(Quest_FreshwaterEvolution_Recall_Script)
 
-    msgbox(gText_Quest_FreshwaterEvolution_TheColorChangedBut,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("The color changed, but I don't think its a shiny now..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     goto(Quest_FreshwaterEvolution_BystanderScene_Script)
 }
 
@@ -90,15 +90,15 @@ script Quest_FreshwaterEvolution_BystanderScene_Script{
     waitmovement(BYSTANDER)
     applymovement(PLAYER,Common_Movement_FaceUp)
 
-    msgbox(gText_Quest_FreshwaterEvolution_HahaAreYouTrying,MSGBOX_DEFAULT,SPEAKER_DEFAULT)
+    msgbox(format("Hahaha are you trying that Shiny Octillery trick from Buzzr?"),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
 
-    msgbox(gText_Quest_FreshwaterEvolution_YeahYouKnow,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Yeah, you know about that?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
 
-    msgbox(gText_Quest_FreshwaterEvolution_BeenSeeingIt,MSGBOX_DEFAULT,SPEAKER_DEFAULT)
-    msgbox(gText_Quest_FreshwaterEvolution_ThereIsSomething,MSGBOX_DEFAULT,SPEAKER_DEFAULT)
+    msgbox(format("Been seeing it a lot lately! Octopuses naturally change color when under stress, and they're seawater animals. Any ol' octopus would react that way. Poor thing, it'll probably be fine after chilling in your Pokeball for a bit."),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
+    msgbox(format("There is something weird about this spring though. I was training a Graveler here, and it suddenly evolved on its own! No Linking Cord or anything!"),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
 
-    msgbox(gText_Quest_FreshwaterEvolution_GoodToKnow,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Good to know..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
 
     closemessage

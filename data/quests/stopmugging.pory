@@ -41,7 +41,7 @@ script Quest_StopMugging_RunIntoPlayer_Dialogue{
 
     call(Quest_StopMugging_RevealObject_Script)
 
-    msgbox(gText_StopMugging_StopThem)
+    msgbox(format("Help! Stop them!"))
     closemessage
 
     applymovement(MUGGERA,Quest_StopMugging_SlamIntoPlayerA_Movement)
@@ -57,24 +57,24 @@ script Quest_StopMugging_RunIntoPlayer_Dialogue{
         goto(Quest_StopMugging_StartBattle_Script)
     }
 
-    msgbox(gText_StopMugging_TheyTook)
+    msgbox(format("They took my phone! Please help!"))
     closemessage
 
-    msgbox(gText_StopMugging_WhatTheHell)
+    msgbox(format("What the hell are you doing?"))
 
-    msgbox(gText_StopMugging_WeNeedThat)
+    msgbox(format("We need that phone!"))
 
-    msgbox(gText_StopMugging_YouNeedSomebodyElse)
+    msgbox(format("You NEED somebody else's phone?"))
 
-    msgbox(gText_StopMugging_YouDontUnderstand)
+    msgbox(format("You don't understand! Gimme that phone, quick!"))
 
-    msgbox(gText_StopMugging_YouTriedToMug)
+    msgbox(format("You tried to mug somebody and ran into me. What's to understand?"))
 
     goto(Quest_StopMugging_StartBattle_Script)
 }
 
 script Quest_StopMugging_StartBattle_Script{
-    msgbox(gText_StopMugging_WeDontHaveTimeFor)
+    msgbox(format("We don't have time for this!"))
     closemessage
 
     applymovement(MUGGERA,Common_Movement_WalkDown)
@@ -88,10 +88,10 @@ script Quest_StopMugging_PostBattle_Script{
     lock
 
     if (defeated(TRAINER_MUGGERA_MUGGERB)){
-        msgbox(gText_StopMugging_DamnThisGuy)
+        msgbox(format("Damn, you're not messing around..."))
         call(Quest_StopMugging_Complete_Dialogue)
     }else{
-        msgbox(gText_StopMugging_NowStayOut)
+        msgbox(format("Now stay out of our way!"))
         call(Quest_StopMugging_Complete_Dialogue)
         call(Quest_StopMugging_Heal_Dialogue)
     }
@@ -104,16 +104,16 @@ script Quest_StopMugging_Complete_Dialogue{
 
     applymovement(MUGGERA,Quest_StopMugging_LookAround_Movement)
     waitmovement(MUGGERA)
-    msgbox(gText_StopMugging_ShitIDroppedThePhone)
+    msgbox(format("Shit, I dropped the phone when I ran into them... and I can't find it now!"))
     closemessage
 
     applymovement(MUGGERB,Quest_StopMugging_LookAround_Movement)
     waitmovement(MUGGERB)
-    msgbox(gText_StopMugging_TheAssholeMust)
+    msgbox(format("The asshole must have grabbed it and ran away!"))
 
-    msgbox(gText_StopMugging_IThinkYoure)
+    msgbox(format("I think you're the assholes here."))
 
-    msgbox(gText_StopMugging_WellTry)
+    msgbox(format("We'll try something else man. Let's get out of here."))
     closemessage
 
     applymovement(MUGGERB,Quest_StopMugging_WalkAwayB_Movement)
@@ -125,7 +125,7 @@ script Quest_StopMugging_Complete_Dialogue{
 }
 
 script Quest_StopMugging_Heal_Dialogue{
-    msgbox(gText_StopMugging_ImGladIWas)
+    msgbox(format("I'm glad I was able to slow them down... but I need to heal now."))
 
     special(HealPlayerParty)
     special(ResetHealLocationToPerlaciaCity)

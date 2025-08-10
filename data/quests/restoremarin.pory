@@ -46,33 +46,33 @@ script Quest_Restoreespuleeoutskirts_BufferStrings_Part2_Script{
 }
 
 script Quest_Restoreespuleeoutskirts_StartQuest_Dialogue{
-        msgbox(gText_Restoreespuleeoutskirts_YourePlayer,,SPEAKER_IMELDA)
+        msgbox(format("You're {PLAYER} - Kai mentioned you'd be coming."),,SPEAKER_IMELDA)
         reveal(REVEAL_IMELDA)
 
-        msgbox(gText_Restoreespuleeoutskirts_YeahImHelping,,SPEAKER_ALICIA)
+        msgbox(format("Yeah, I'm helping them get their project off the ground."),,SPEAKER_ALICIA)
 
-        msgbox(gText_Restoreespuleeoutskirts_AreYouHelping,,SPEAKER_IMELDA)
+        msgbox(format("I meant what I said to Kai. I'll help get this off the ground, but we still need to figure out the next steps to taking down the whole League."),,SPEAKER_IMELDA)
 
-        msgbox(gText_Restoreespuleeoutskirts_IHearThat,,SPEAKER_ALICIA)
+        msgbox(format("Kai and I want to focus on doing the most good for Trainers in the region now."),,SPEAKER_ALICIA)
 
-        msgbox(gText_Restoreespuleeoutskirts_TheBestWay,,SPEAKER_IMELDA)
+        msgbox(format("I'm not interested in bandaid fixes. This new League is hurting people now, right?"),,SPEAKER_IMELDA)
 
-        msgbox(gText_Restoreespuleeoutskirts_RightBut,,SPEAKER_ALICIA)
+        msgbox(format("If you really believe that there's harm being done, then wouldn't you want start the healing as soon as possible? Kai has a plan right now, that we think that's going to help Trainers in the region today. We're going to make it happen, but it would mean so much to get you onboard."),,SPEAKER_ALICIA)
 
-        msgbox(gText_Restoreespuleeoutskirts_HmmI,,SPEAKER_IMELDA)
-        msgbox(gText_Restoreespuleeoutskirts_IHave,,SPEAKER_IMELDA)
+        msgbox(format("Hmm. That kid does seem driven. Let's see what I can do."),,SPEAKER_IMELDA)
+        msgbox(format("I want to help Trainers learn to adapt. When everything that Trainers trust are stripped away, how can they make the best of the hand they've been dealt?"),,SPEAKER_IMELDA)
 
-        msgbox(gText_Restoreespuleeoutskirts_LikeTrainer,,SPEAKER_ALICIA)
+        msgbox(format("Like the Trainers of Resido?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_Restoreespuleeoutskirts_OhIDidnt,,SPEAKER_IMELDA)
-        msgbox(gText_Restoreespuleeoutskirts_TheresABattle,,SPEAKER_IMELDA)
-        msgbox(gText_Restoreespuleeoutskirts_CanYouBring,,SPEAKER_IMELDA)
-        msgbox(gText_Restoreespuleeoutskirts_IFIWant,,SPEAKER_IMELDA)
+        msgbox(format("Oh! I didn't think of it like that. You're right."),,SPEAKER_IMELDA)
+        msgbox(format("There's a Battle Facility in Hoenn and Sinnoh that has a similar concept. A trainer's Pokémon is taken away from them, and they are forced to use rental Pokémon. How hard would that be for us to do...?"),,SPEAKER_IMELDA)
+        msgbox(format("Can you bring me two Pokémon? "),,SPEAKER_IMELDA)
+        msgbox(format("If I want to start my own Battle Factory, we'll need to streamline to teaching moves to Pokémon."),,SPEAKER_IMELDA)
         call(Quest_Restoreespuleeoutskirts_BufferStrings_Part1_Script)
-        msgbox(gText_Restoreespuleeoutskirts_WeNeed_A,,SPEAKER_IMELDA)
+        msgbox(format("We need a {STR_VAR_1} that knows {STR_VAR_2},"),,SPEAKER_IMELDA)
         call(Quest_Restoreespuleeoutskirts_BufferStrings_Part2_Script)
-        msgbox(gText_Restoreespuleeoutskirts_WeNeed_B,,SPEAKER_IMELDA)
-        msgbox(gText_Restoreespuleeoutskirts_ComeBack,,SPEAKER_IMELDA)
+        msgbox(format("and a {STR_VAR_1} that knows {STR_VAR_2}."),,SPEAKER_IMELDA)
+        msgbox(format("Come back when you've caught one."),,SPEAKER_IMELDA)
 
 
         startquest(QUEST_RESTOREESPULEEGYM)
@@ -101,7 +101,7 @@ script Quest_EspuleeOutskirts_ConstructMenu_Script{
 }
 
 script Quest_Restoreespuleeoutskirts_Active_Script{
-    msgbox(gText_Restoreespuleeoutskirts_WeNeedSomePretty,,SPEAKER_IMELDA)
+    msgbox(format("We need some pretty specific Pokémon if I'm going to get this off the ground. What do you have?"),,SPEAKER_IMELDA)
 
     call(Quest_EspuleeOutskirts_ConstructMenu_Script)
     dynmultistack(24,0,TRUE,2,TRUE,0,NULL)
@@ -169,7 +169,7 @@ script Quest_Restoreespuleeoutskirts_HandleCopperajah_Script{
 }
 
 script Quest_Restoreespuleeoutskirts_AskTakeMon_Dialogue{
-    msgbox(gText_Restoreespuleeoutskirts_AreYouSure,MSGBOX_YESNO,SPEAKER_IMELDA)
+    msgbox(format("You sure I can have this {STR_VAR_1}? I'm gonna keep it forever."),MSGBOX_YESNO,SPEAKER_IMELDA)
 
     if (var(VAR_RESULT) == NO){
         goto(Quest_Restoreespuleeoutskirts_Cancel_Dialogue)
@@ -179,14 +179,14 @@ script Quest_Restoreespuleeoutskirts_AskTakeMon_Dialogue{
 }
 
 script Quest_Restoreespuleeoutskirts_NotEnoughMons_Dialogue{
-    msgbox(gText_Restoreespuleeoutskirts_IsntThatYour,,SPEAKER_IMELDA)
+    msgbox(format("Isn't that your last Pokémon...?"),,SPEAKER_IMELDA)
     closemessage
     release
     end
 }
 
 script Quest_Restoreespuleeoutskirts_HandleProgress_Dialogue{
-    msgbox(gText_Restoreespuleeoutskirts_Excellent,,SPEAKER_IMELDA)
+    msgbox(format("Excellent! This is perfect."),,SPEAKER_IMELDA)
 
     specialvar(VAR_RESULT,Quest_Restoreespuleeoutskirts_CheckRemainingSubquests)
 
@@ -198,7 +198,7 @@ script Quest_Restoreespuleeoutskirts_HandleProgress_Dialogue{
 }
 
 script Quest_Restoreespuleeoutskirts_Cancel_Dialogue{
-        msgbox(gText_Restoreespuleeoutskirts_ComeBack,,SPEAKER_IMELDA)
+        msgbox(format("Come back when you've caught one."),,SPEAKER_IMELDA)
         closemessage
 release
 end
@@ -212,11 +212,11 @@ script Quest_Restoreespuleeoutskirts_Reward_Dialogue{
     questmenu(QUEST_MENU_SET_REWARD,QUEST_RESTOREESPULEEGYM)
     setvar(VAR_QUEST_RESTOREESPULEEGYM,SAVE_BEFORE_IMELDA_BATTLE)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_IAskedA,,SPEAKER_IMELDA)
+        msgbox(format("I asked a few others Trainer for similar things. I think after a few tests, we might have something going here! You should stop by and help us test it out."),,SPEAKER_IMELDA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_IAbsolutely,,SPEAKER_ALICIA)
+        msgbox(format("I absolutely will!"),,SPEAKER_ALICIA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_HellIKindaWanna,,SPEAKER_IMELDA)
+        msgbox(format("Hell, I kinda wanna see it for myself right now. Are you really all that?"),,SPEAKER_IMELDA)
 
 
         startmenu_savescreen
@@ -226,7 +226,7 @@ script Quest_Restoreespuleeoutskirts_Reward_Dialogue{
 
 script Quest_Restoreespuleeoutskirts_StartBattle_Script{
     lock
-        msgbox(gText_Quest_Restoreespuleeoutskirts_OkayChampion,,SPEAKER_IMELDA)
+        msgbox(format("Okay Champion, bring it on!"),,SPEAKER_IMELDA)
         trainerbattle_no_intro(TRAINER_IMELDA,gText_Quest_Restoreespuleeoutskirts_YoureTougherThan)
         closemessage
 
@@ -237,23 +237,23 @@ script Quest_Restoreespuleeoutskirts_PostBattle_Dialogue{
     lock
         setvar(VAR_QUEST_RESTOREESPULEEGYM,DEFEATED_IMELDA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_ManIfTrainersSeeYou,,SPEAKER_IMELDA)
+        msgbox(format("Man, if Trainers see you backing this and people already know how strong you are... we've got a shot at real legitimacy."),,SPEAKER_IMELDA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_IThinkYoureGiving,,SPEAKER_ALICIA)
+        msgbox(format("I think you're giving me too much credit! Believe it or not, SharpRise Capital's Kickstart problem was a huge part of the reason I was able to hone my skills this much."),,SPEAKER_ALICIA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_AndICantWait,,SPEAKER_IMELDA)
+        msgbox(format("And I can't wait to turn that power against those assholes. They're gonna collapse under their own weight, and then we can reinstate all the old gyms and go back to when times were good and I was running this joint!"),,SPEAKER_IMELDA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_IsThatYourGoal,,SPEAKER_ALICIA)
+        msgbox(format("Is that your goal? Just go to back to the past?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_YeahThingsWere,,SPEAKER_IMELDA)
+        msgbox(format("Yeah! Things were so much better before."),,SPEAKER_IMELDA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_YouCantGoBack,,SPEAKER_ALICIA)
+        msgbox(format("Imelda, you can't go back to the past. You've gotta stick to the reality we've got right now. I think what you're going to do here is going to make a real difference for Trainers, and that's awesome. But if you want the Trainers of the region to be the best they can be, I think we need to figure out a path forward... in the present. That's what Kai and I want to do."),,SPEAKER_ALICIA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_YouDontGet,,SPEAKER_IMELDA)
+        msgbox(format("You don't get it, {PLAYER}, you weren't here for before."),,SPEAKER_IMELDA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_IWasntHere,,SPEAKER_ALICIA)
+        msgbox(format("I wasn't here, but I'm here now. And while I'm new, I'm really starting to love it here and I want to help Trainers, and help people, just like you do. And we can do that, moving forward."),,SPEAKER_ALICIA)
 
-        msgbox(gText_Quest_Restoreespuleeoutskirts_YourHeartFeels,,SPEAKER_IMELDA)
+        msgbox(format("Your heart feels like its in the right place. I gotta get back to work. Let's at least get this test off the ground."),,SPEAKER_IMELDA)
 
         closemessage
 

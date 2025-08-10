@@ -9,9 +9,9 @@ script Quest_Rockcollector_Event_Script{
 }
 
 script Quest_Rockcollector_StartQuest_Dialogue{
-    msgbox(gText_Quest_Rockcollector_YoureBack)
-    msgbox(gText_Quest_Rockcollector_IHaveATiny)
-    msgbox(gText_Quest_Rockcollector_CanITrustYou)
+    msgbox(format("You're back! How's the trolley treating you?"))
+    msgbox(format("I have a tiny issue though... that promotion from before, where I gave you the stone? It's actually doing surprisingly well! But I'm running low on stones now. There's a secret spot where I usually get them from, but I sprained my ankle, so I can't go myself."))
+    msgbox(format("Can I trust you? Head down there and grab one of each stone, and bring them back to me. That should hold me over until my ankle heals..."))
     special(Quest_Rockcollector_CheckTakenStoneFlags)
     if (var(VAR_RESULT)){
         goto(Quest_Rockcollector_Secret_Dialogue)
@@ -22,14 +22,14 @@ script Quest_Rockcollector_StartQuest_Dialogue{
 
 script Quest_Rockcollector_Reveal_Dialogue{
     startquest(QUEST_ROCKCOLLECTOR)
-    msgbox(gText_Quest_Rockcollector_IfYouGoBehind)
+    msgbox(format("If you go behind the terminal in CurenoPort, you can get underground and there are stones down there already."))
     closemessage
     release
     end
 }
 
 script Quest_Rockcollector_Secret_Dialogue{
-    msgbox(gText_Quest_Rockcollector_YouveAlready,MSGBOX_YESNO)
+    msgbox(format("You've already been down there? Well, that's embarassing... I should hide the entrance better. Do you still have the stones? Can I have them instead?"),MSGBOX_YESNO)
     if (var(VAR_RESULT) == NO){
         startquest(QUEST_ROCKCOLLECTOR)
         goto(Quest_Rockcollector_Refuse_Dialogue)
@@ -40,7 +40,7 @@ script Quest_Rockcollector_Secret_Dialogue{
 }
 
 script Quest_Rockcollector_Active_Dialogue{
-    msgbox(gText_Quest_Rockcollector_AreYouSure,MSGBOX_YESNO)
+    msgbox(format("Did you bring me some Evolution Stones? Are you sure I can take them??"),MSGBOX_YESNO)
     if (var(VAR_RESULT) == NO){
         goto(Quest_Rockcollector_Refuse_Dialogue)
     }
@@ -54,7 +54,7 @@ script Quest_Rockcollector_Active_Dialogue{
 }
 
 script Quest_Rockcollector_Refuse_Dialogue{
-    msgbox(gText_Quest_Rockcollector_OhOkayWell)
+    msgbox(format("Oh okay, well let me know when you've got stones for me!"))
     closemessage
     release
     end
@@ -62,13 +62,13 @@ script Quest_Rockcollector_Refuse_Dialogue{
 
 script Quest_Rockcollector_Progress_Dialogue{
     switch (var(VAR_TEMP_1)){
-        case 0: msgbox(gText_Quest_Rockcollector_HowGoes)
-        case 1: msgbox(gText_Quest_Rockcollector_Awesome)
-        case 2: msgbox(gText_Quest_Rockcollector_WowTheseStones)
+        case 0: msgbox(format("Looks like you haven't managed to get down there and grab some stones!"))
+        case 1: msgbox(format("All right, great job finding this {STR_VAR_1}."))
+        case 2: msgbox(format("Wow, these stones are great!"))
     }
 
     if (var(VAR_TEMP_2) > 0){
-        msgbox(gText_Quest_Rockcollector_Huh)
+        msgbox(format("Huh, there's no dust on this stone. Did it really come from underground?"))
     }
     return
 }
@@ -77,10 +77,10 @@ script Quest_Rockcollector_GoToReward_Script{
     special(Quest_Rockcollector_CountRemainingSubquests)  
 
     if (var(VAR_RESULT) == 0){
-        msgbox(gText_Quest_Rockcollector_OkayIveGot)
+        msgbox(format("Okay, I've got one of each stone."))
         goto(Quest_Rockcollector_Reward_Dialogue)
     }elif(var(VAR_RESULT) < 10){
-        msgbox(gText_Quest_Rockcollector_OnlyXMore)
+        msgbox(format("I think you've got... {STR_VAR_1} to go!"))
     }
         closemessage
         release
@@ -88,7 +88,7 @@ script Quest_Rockcollector_GoToReward_Script{
 }
 
 script Quest_Rockcollector_Reward_Dialogue{
-    msgbox(gText_Quest_Rockcollector_ThankYouSoMuch)
+    msgbox(format("Thank you so much for your help! I'm not a Trainer, but somebody left this on the trolley recently. I guess you can use it!"))
     giveitem(ITEM_TM64)
     completequest(QUEST_ROCKCOLLECTOR)
     release
@@ -102,10 +102,10 @@ script Quest_Rockcollector_Complete_Dialogue{
     }
 
     switch (var(VAR_RESULT)){
-        case 0: msgbox(gText_Quest_Rockcollector_KeepOnRiding)
+        case 0: msgbox(format("Keep on riding those trolleys, {PLAYER}!"))
         case 1: 
                 setflag(FLAG_TEMP_1)
-                msgbox(gText_Quest_Rockcollector_YouKnowIf)
+                msgbox(format("You know, if you go back down there tomorrow, you might find more stones..."))
     }
     closemessage
     release

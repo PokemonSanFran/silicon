@@ -9,7 +9,7 @@ mapscripts LeaverraForest_MapScripts {
 }
 
 script LeaverraForest_ForestSign_Script{
-    msgbox(gText_LeaverraForest_RegionParkSign,MSGBOX_SIGN)
+    msgbox(format("LeaverraForest Regional Park"),MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
@@ -17,7 +17,7 @@ script LeaverraForest_ForestSign_Script{
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallForestProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         default:
             release
             end
@@ -25,7 +25,7 @@ script LeaverraForest_ForestSign_Script{
 }
 
 script LeaverraForest_HillSign_Script{
-   msgbox(gText_LeaverraForest_RegionParkSign,MSGBOX_SIGN)
+   msgbox(format("LeaverraForest Regional Park"),MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
@@ -33,7 +33,7 @@ script LeaverraForest_HillSign_Script{
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallHillProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         default:
             release
             end
@@ -41,7 +41,7 @@ script LeaverraForest_HillSign_Script{
 }
 
 script LeaverraForest_ShoreSign_Script{
-   msgbox(gText_LeaverraForest_RegionParkSign,MSGBOX_SIGN)
+   msgbox(format("LeaverraForest Regional Park"),MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
@@ -49,7 +49,7 @@ script LeaverraForest_ShoreSign_Script{
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallShoreProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(gText_InstallNatureProbes_ThereIsAProbe,MSGBOX_SIGN)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         default:
             release
             end

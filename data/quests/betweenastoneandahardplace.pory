@@ -12,24 +12,24 @@ script Quest_BetweenAStoneAndAHardPlace_Event_Script{
 }
 
 script Quest_BetweenAStoneAndAHardPlace_Active_Dialogue{
-    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_DidYouHear,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(format("Did you hear about the promotion we're doing? Ride the trolleys in Resido 10 times, and get a mega powerful stone for pushing the limits of your Pokemons power!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
     getgamestat(GAME_STAT_TROLLEY_RIDES, STR_VAR_1)
 
     switch(var(VAR_RESULT)){
         case 0:
-            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_YouShouldTry,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+            msgbox(format("You should try out the trolleys around the region. They're a great way to get around!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
         case 1:
         case 2:
         case 3:
-            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_AreYouNew,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+            msgbox(format("Are you new to the region? You should really give the trolleys a try!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
         case 4:
         case 5:
         case 6:
-            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_YoureARegular,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+            msgbox(format("You're a regular, {PLAYER}! Thanks for supporting the trolley system. Come back when you've done 10 rides!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
         case 7:
         case 8:
         case 9:
-            msgbox(gText_Quest_BetweenAStoneAndAHardPlace_OhWowOnly,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+            msgbox(format("Oh wow! {STR_VAR_1} rides! Excited to get your prize?"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
     }
 
     incrementgamestat(GAME_STAT_TROLLEY_RIDES)
@@ -38,8 +38,8 @@ script Quest_BetweenAStoneAndAHardPlace_Active_Dialogue{
 
 script Quest_BetweenAStoneAndAHardPlace_Reward_Dialogue{
     setflag(FLAG_TEMP_1)
-    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_GladToSeeYoureEnjoying,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
-    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_ForYourContinuedRidership,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(format("Glad to see you're enjoying the trolley system, {PLAYER}!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(format("For your continued ridership, we'd like to present you with a special evolutionary stones!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
 
     random(10)
     switch(var(VAR_RESULT)){
@@ -55,8 +55,8 @@ script Quest_BetweenAStoneAndAHardPlace_Reward_Dialogue{
         case 9: giveitem(ITEM_DAWN_STONE)
     }
 
-    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_AhhPleaseDont,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
-    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_Yeah,MSGBOX_NPC,SPEAKER_ALICIA)
+    msgbox(format("Aaah, I can tell you're disappointed. Please don't be mad... we had some Mega Stones, but then we ran out. We had to reword the ad to keep people coming in, but all of the Trainers have been so mad!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(format("...yeah. Not what I was expecting. But thanks, I guess."),MSGBOX_NPC,SPEAKER_ALICIA)
     completequest(QUEST_BETWEENASTONEANDAHARDPLACE)
     call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
     release
@@ -68,7 +68,7 @@ script Quest_BetweenAStoneAndAHardPlace_Complete_Dialogue{
     if (!flag(FLAG_TEMP_1) || (var(VAR_RESULT) > 4)){
         goto(Quest_Rockcollector_StartQuest_Dialogue)
     }
-    msgbox(gText_Quest_BetweenAStoneAndAHardPlace_WeShouldPivot,MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(format("We should pivot to a more honest advertising model. I don't think I can handle more angry messages on Buzzr!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
     end
 }
 

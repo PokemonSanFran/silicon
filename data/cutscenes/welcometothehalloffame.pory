@@ -5,7 +5,7 @@ const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
 
 script WelcomeToTheHallOfFame_PostBattle_Dialogue {
     startcutscene(JUMPPLAYER_WELCOMETOTHEHALLOFFAME)
-    msgbox(gText_WelcomeToTheHallOfFame_YourChampion)
+    msgbox(format("Resido! Your Champion! {PLAYER}!"))
         closemessage
         special(DoDomeConfetti)
         playse(SE_M_ENCORE2)
@@ -18,7 +18,7 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         applymovement(KAI,WelcomeToTheHallOfFame_WalkOutOfWay)
         waitmovement(ADELAIDE)
 
-        msgbox(gText_WelcomeToTheHallOfFame_ToTheHundreds,,SPEAKER_ADELAIDE)
+        msgbox(format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. "),,SPEAKER_ADELAIDE)
 
         closemessage
 
@@ -34,7 +34,7 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         TeleportCamera(9,6)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_WelcomeToTheHallOfFame_AndNowLetsCreate,,SPEAKER_ADELAIDE)
+        msgbox(format("And now, let's create history together. I am proud to present the first inductee to the SharpRise Capital Hall of Fame. Resido's Champion: {PLAYER}."),,SPEAKER_ADELAIDE)
 
         closemessage
 

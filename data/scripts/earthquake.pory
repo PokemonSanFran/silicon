@@ -29,7 +29,7 @@ script Earthquake_Natural_EventScript
     call(Earthquake_PlaySoundPlayerSurprise_EventScript)
     call(Earthquake_Natural_Aftershock)
     callnative(BufferRandomEarthquakeString)
-    msgbox(gText_Placeholder_Earthquake,MSGBOX_SIGN,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("{STR_VAR_1}"),MSGBOX_SIGN,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     release
 }

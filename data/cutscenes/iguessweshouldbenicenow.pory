@@ -53,17 +53,17 @@ script IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue {
     applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkToPlayer)
         waitmovement(0)
 
-    msgbox(gText_IGuessWeShouldBeNiceNow_Charl,,SPEAKER_ALICIA)
-    msgbox(gText_IGuessWeShouldBeNiceNow_ThereYouAre,,SPEAKER_CHARLOTTE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_OliverWasTellingMe,,SPEAKER_ALICIA)
-    msgbox(gText_IGuessWeShouldBeNiceNow_IGuessItDoesntMatter,,SPEAKER_CHARLOTTE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_DirectorsNote,,SPEAKER_ADELAIDE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_SoUnfortunately,,SPEAKER_CHARLOTTE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_Unfortunately,,SPEAKER_ALICIA)
-    msgbox(gText_IGuessWeShouldBeNiceNow_WorkingWithPeople,,SPEAKER_CHARLOTTE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_ThanksIGuess,,SPEAKER_ALICIA)
-    msgbox(gText_IGuessWeShouldBeNiceNow_YoureWelcome,,SPEAKER_CHARLOTTE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_PickYourBattles,,SPEAKER_ALICIA)
+    msgbox(format("Charl-"),,SPEAKER_ALICIA)
+    msgbox(format("There you are! Took you long enough."),,SPEAKER_CHARLOTTE)
+    msgbox(format("Oliver was telling me that we-"),,SPEAKER_ALICIA)
+    msgbox(format("I guess it doesn’t matter. I’ve been taking a look at the puzzle Armando set up and I figured out how this works. "),,SPEAKER_CHARLOTTE)
+    msgbox(format("Once the quest info is decided and completed, come back in and fill in dialogue. Charlotte will explain how she figured out the puzzle and how."),,SPEAKER_ADELAIDE)
+    msgbox(format("So, unfortunately, I’ll need your help to get through this."),,SPEAKER_CHARLOTTE)
+    msgbox(format("Unfortunately? That’s a little rude…."),,SPEAKER_ALICIA)
+    msgbox(format("Working with people is tedious and the results are mixed so I prefer to do things myself so then I know they’ll be done right, but if I don’t have a choice, you’re not a horrible option."),,SPEAKER_CHARLOTTE)
+    msgbox(format("…thanks. I guess?"),,SPEAKER_ALICIA)
+    msgbox(format("You’re welcome. Now go step on that panel over there and I’ll head through first. "),,SPEAKER_CHARLOTTE)
+    msgbox(format("Pick your battles, {PLAYER}, pick your battles"),,SPEAKER_ALICIA)
 
 
         setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,CHARLOTTE_EXPLAINED_PUZZLE)
@@ -126,11 +126,11 @@ script IGuessWeShouldBeNiceNow_SolvedPuzzleB {
         applymovement(PLAYER,IGuessWeShouldBeNiceNow_WalkRight)
         waitmovement(0)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_DirectorsNote2,,SPEAKER_ADELAIDE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_ThatWasAmazing,,SPEAKER_ALICIA)
-    msgbox(gText_IGuessWeShouldBeNiceNow_OfCourse,,SPEAKER_CHARLOTTE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_AnywayTherestheBook,,SPEAKER_ALICIA)
-    msgbox(gText_IGuessWeShouldBeNiceNow_ItsDefinitelyNot,,SPEAKER_CHARLOTTE)
+        msgbox(format("The girls complete the puzzle. Will likely need to update dialogue during puzzle later"),,SPEAKER_ADELAIDE)
+    msgbox(format("That was amazing, Charlotte!"),,SPEAKER_ALICIA)
+    msgbox(format("Of course. I’m happy you didn’t suck at finishing the puzzle"),,SPEAKER_CHARLOTTE)
+    msgbox(format("…anyway. There’s the book. Let’s grab it and get out of here."),,SPEAKER_ALICIA)
+    msgbox(format("It’s definitely not that easy. If I was a crusty old man bored out his mind in the middle of nowhere, I would definitely have something guarding this thing. "),,SPEAKER_CHARLOTTE)
 
 
 
@@ -139,7 +139,7 @@ script IGuessWeShouldBeNiceNow_SolvedPuzzleB {
         waitmovement(0)
 
 
-msgbox(gText_IGuessWeShouldBeNiceNow_Roar)
+msgbox(format("ROAR"))
 
 goto(IGuessWeShouldBeNiceNow_BossProtectBook_Script)
 }
@@ -153,10 +153,10 @@ script IGuessWeShouldBeNiceNow_BossProtectBook_Script {
         addobject(BOSSPKMNB)
         addobject(BOSSPKMNC)
 
-       msgbox(gText_IGuessWeShouldBeNiceNow_DirectorsNote3,,SPEAKER_ADELAIDE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_Bingo,,SPEAKER_CHARLOTTE)
-    msgbox(gText_IGuessWeShouldBeNiceNow_UhCharlotte,,SPEAKER_ALICIA)
-    msgbox(gText_IGuessWeShouldBeNiceNow_FineYouCanHelp,,SPEAKER_CHARLOTTE)
+       msgbox(format("Guard Pokemon appear in front of the book"),,SPEAKER_ADELAIDE)
+    msgbox(format("Bingo! Alright, let’s see what I can do here"),,SPEAKER_CHARLOTTE)
+    msgbox(format("Uh Charlotte? I’m right here!"),,SPEAKER_ALICIA)
+    msgbox(format("Fine, you can help. But don’t slow me down. "),,SPEAKER_CHARLOTTE)
                 applymovement(PLAYER,Common_Movement_WalkUp)
             waitmovement(0)
         startmenu_savescreen
@@ -204,19 +204,19 @@ script IGuessWeShouldBeNiceNow_ClearBossPokemon_Script {
 script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
     applymovement(CHARLOTTE,Common_Movement_FaceLeft)
     applymovement(PLAYER,Common_Movement_FaceRight)
-        msgbox(gText_IGuessWeShouldBeNiceNow_OkayImStarting,,SPEAKER_CHARLOTTE)
+        msgbox(format("Okay, I'm starting to understand the training now…A little."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_WhatAmIMissing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("What am I missing?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_ThosePuzzlesWerent,,SPEAKER_CHARLOTTE)
+        msgbox(format("Those puzzles weren't physically tough, but we had to think. And those battles… we couldn't brute force them, right?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_YeahIHadToThink,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Yeah, I had to think about a strategy."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_ExactlyYouHad,,SPEAKER_CHARLOTTE)
+        msgbox(format("Exactly. You had to think under pressure when you were already worn down."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_SoTheyreTraining,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("So they're training our mental toughness…?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_OrTryingAtLeast,,SPEAKER_CHARLOTTE)
+        msgbox(format("Or, trying at least. I'll grab this…"),,SPEAKER_CHARLOTTE)
                 closemessage
 
         applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_GetBook)
@@ -225,18 +225,18 @@ script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
         waitmovement(0)
         removeobject(4)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_SaysOnTheBack,,SPEAKER_CHARLOTTE)
+        msgbox(format("Says on the back cover, “Bring to the deepest part of LeaverraForest."),,SPEAKER_CHARLOTTE)
 
         applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_LookAround)
         waitmovement(0)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_WhewThatWasExhausting,MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        msgbox(format("Whew, that was exhausting. How about we crash at my place nearby in EspuleeOutskirts and then tackle LeaverraForest tomorrow?"),MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
         setvar(VAR_ESPULEE_OUTSKIRTS_STATE,ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED)
 
         if (var(VAR_RESULT) == YES) {
-            msgbox(gText_IGuessWeShouldBeNiceNow_GreatSeeYou)
+            msgbox(format("Great, see you in EspuleeOutskirts!"))
         } else {
-            msgbox(gText_IGuessWeShouldBeNiceNow_WellTheChallenges)
+            msgbox(format("Well, the challenges need both of us… and I'm tired. So I'm going to crash - you're welcome to try LeaverraForest by yourself though."))
         }
         closemessage
 
@@ -271,29 +271,29 @@ script IGuessWeShouldBeNiceNow_ExitCave_Script {
 script IGuessWeShouldBeNiceNow_End_Dialogue {
         setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_STUDYING)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_CoolPerfectTiming,,SPEAKER_CHARLOTTE)
+        msgbox(format("Cool, perfect timing."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_WhatTookYouSoLong,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("What took you so long? You're usually in front."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_ISpottedAnInteresting,,SPEAKER_CHARLOTTE)
+        msgbox(format("I spotted an interesting Pokémon while we were working on the puzzles, so I went back and caught it! It was actually my first time catching something."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_WaitWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Wait, what?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_AllOfMyPokemon,,SPEAKER_CHARLOTTE)
+        msgbox(format("All of my Pokémon are normally bred in Unova and sent to me. But I wanted to try raising one from scratch, just to see how it compares."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_IDidntKnow,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("(I didn't know you could DO that.) Oh, well… congrats!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_DaddyOwnsA,,SPEAKER_CHARLOTTE)
+        msgbox(format("Daddy owns a KomalaCabin out here. I called him earlier and had him kick out the people that were staying there, so it should be good for us now."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_WaitWhatIThought,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Wait what? I thought SharpRise Capital-"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_YeahDaddysPlace,,SPEAKER_CHARLOTTE)
+        msgbox(format("Yeah, Daddy's place is way nicer than some motel or whatever."),,SPEAKER_CHARLOTTE)
                 closemessage
 
         applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_GestureHouse)
         waitmovement(0)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_ImGonnaCrash,,SPEAKER_CHARLOTTE)
+        msgbox(format("I'm actually going to go study for the Championship... but the door will be open. Its on the north end of town."),,SPEAKER_CHARLOTTE)
                 closemessage
 
         applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkTowardsHouse_Movement)
@@ -349,21 +349,21 @@ script IGuessWeShouldBeNiceNow_CharlotteInteract_Script
 
 script IGuessWeShoudlBeNiceNow_Shorttermrental_Dialogue
 {
-	msgbox(gText_IGuessWeShouldBeNiceNow_YoureDistracting,,SPEAKER_CHARLOTTE,,EMOTE_ANGRY)
-	msgbox(gText_IGuessWeShouldBeNiceNow_YouMentioned,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-	msgbox(gText_IGuessWeShouldBeNiceNow_DaddyHiredAPI,MSGBOX_NPC,SPEAKER_CHARLOTTE)
-	msgbox(gText_IGuessWeShouldBeNiceNow_IWantToGetA,,SPEAKER_CHARLOTTE)
-	msgbox(gText_IGuessWeShouldBeNiceNow_DataOnAll,,SPEAKER_ALICIA,,EMOTE_SHOCK)
-    msgbox(gText_IGuessWeShouldBeNiceNow_TheresADifference,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-	msgbox(gText_IGuessWeShouldBeNiceNow_YeahThereWasAWholeTeam,,SPEAKER_CHARLOTTE)
-	msgbox(gText_IGuessWeShouldBeNiceNow_ThereWasNeverAny,,SPEAKER_CHARLOTTE)
-	msgbox(gText_IGuessWeShouldBeNiceNow_ThereAreSomeOnThat,,SPEAKER_CHARLOTTE)
+	msgbox(format("You're distracting me, {PLAYER}. What's up?"),,SPEAKER_CHARLOTTE,,EMOTE_ANGRY)
+	msgbox(format("You mentioned you were studying for the Championship. What do you mean by study?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+	msgbox(format("Daddy hired a private investgator who compiled information on the 16 Trainers that are going to be in the Championship."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+	msgbox(format("I want to get a head start on scoping everybody out, so I can plan my strategies out accordingly."),,SPEAKER_CHARLOTTE)
+	msgbox(format("Wait... your Dad hired somebody to spy on everybody else? Even me!?"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(format("Am I going to be battling against Charlotte? Or am I battling Charlotte, and her dad, and all their resources!?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+	msgbox(format("Of course! Except isn't one guy, it was a whole team of people. All of our League activity is publicly broadcast and public knowledge, so I figured its fair game."),,SPEAKER_CHARLOTTE)
+	msgbox(format("There was never any doubt that I was going to get to this point - now to just finish the job."),,SPEAKER_CHARLOTTE)
+	msgbox(format("The dossiers on the far side of the table are ones I'm done with. You can read them if you want."),,SPEAKER_CHARLOTTE)
 	closemessage
 	applymovement(CHARLOTTE,Common_Movement_FaceLeft)
 	waitmovement(CHARLOTTE)
 	delay(30)
 	applymovement(CHARLOTTE,Common_Movement_FaceUp)
-	msgbox(gText_IGuessWeShouldBeNiceNow_OhAndMe,,SPEAKER_CHARLOTTE)
+	msgbox(format("Oh, and the interviews that we did before the League started are playing on the TV are there, if you wanted to watch."),,SPEAKER_CHARLOTTE)
 	closemessage
 	applymovement(CHARLOTTE,Common_Movement_FaceLeft)
 	waitmovement(CHARLOTTE)
@@ -375,7 +375,7 @@ script IGuessWeShoudlBeNiceNow_Shorttermrental_Dialogue
 script IGuessWeShouldBeNiceNow_Interact_Dialogue
 {
 	lock
-	msgbox(gText_IGuessWeShouldBeNiceNow_TheyreFocused,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+	msgbox(format("Charlotte is completely focused on their studying. It's like I'm not even here!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
 	closemessage
 	release
 	end

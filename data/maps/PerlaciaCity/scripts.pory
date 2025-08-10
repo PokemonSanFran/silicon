@@ -24,7 +24,7 @@ mapscripts PerlaciaCity_MapScripts {
 script PerlaciaCity_Stan_Interact_Script{
     lock
         call(Quest_WallaceArmy_LoadStanSpeech_Script)
-        msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+        msgbox(format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough."),MSGBOX_NPC)
         call(Quest_WallaceArmy_PreBattleStan_Script)
 
         trainerbattle_single(TRAINER_PERLACIA_CITY_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,PerlaciaCity_Stan_PostBattle_Script)
@@ -37,9 +37,9 @@ script PerlaciaCity_Stan_PostBattle_Script{
         call(Quest_WallaceArmy_CheckCompletionRate_Script)
         questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
         if (!var(VAR_RESULT)){
-            msgbox(gText_WallaceArmy_PostBattlePlaceholder1,,SPEAKER_STAN_PERLACIA_CITY)
+            msgbox(format("PostBattlePlaceholder1"),,SPEAKER_STAN_PERLACIA_CITY)
         }else {
-            msgbox(gText_WallaceArmy_PostQuestPlaceholder1,,SPEAKER_STAN_PERLACIA_CITY)
+            msgbox(format("PostQuestPlaceholder1"),,SPEAKER_STAN_PERLACIA_CITY)
         }
 
     release

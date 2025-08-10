@@ -44,24 +44,24 @@ script FlyingBlind_Dialogue_ExplainKarl
     {
         return
     }
-    msgbox(gText_FlyingBlind_NotSoEasy,,SPEAKER_UNHOUSED,,EMOTE_LAUGH)
-    msgbox(gText_FlyingBlind_GuessingYouSaw,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(gText_FlyingBlind_NotJustYou,,SPEAKER_UNHOUSED)
-    msgbox(gText_FlyingBlind_Karl,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(gText_FlyingBlind_YouReallyBrandNew,,SPEAKER_UNHOUSED)
-    msgbox(gText_FlyingBlind_WaitTheFogHas,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(gText_FlyingBlind_NotVeryWell,,SPEAKER_UNHOUSED)
-    msgbox(gText_FlyingBlind_NoResponse,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Heh, not so easy out there, is it?"),,SPEAKER_UNHOUSED,,EMOTE_LAUGH)
+    msgbox(format("I'm guessing you saw earlier?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("It's not just you kid. Unless you've been here for a while, you've got no chance seeing through that thick ass fog. Karl don't take no prisoners."),,SPEAKER_UNHOUSED)
+    msgbox(format("Karl?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Damn, you really brand new here, huh? The fog's name is Karl."),,SPEAKER_UNHOUSED)
+    msgbox(format("Wait, the fog has - okay so how do transplants normally handle the fog?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Not very well, I reckon, hehehe."),,SPEAKER_UNHOUSED)
+    msgbox(format("..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     bufferitemname(STR_VAR_1,ITEM_GO_GOGGLES)
     buffermovename(STR_VAR_2,MOVE_DEFOG)
-    msgbox(gText_FlyingBlind_EverSinceYouPeople,,SPEAKER_UNHOUSED)
-    msgbox(gText_FlyingBlind_GottaFindSomebody,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(gText_FlyingBlind_ThankYouSoMuch,,SPEAKER_ALICIA)
+    msgbox(format("Ever since you people showed up, {STR_VAR_1} are always out of stock. They let you see through all this nonsense. It's too thick for a Pokémon using {STR_VAR_2}, but maybe you'll meet a local takes a liking to you and offers to lend you theirs. Karl don't come through every day though, so you could try to wait it out."),,SPEAKER_UNHOUSED)
+    msgbox(format("I've gotta find somebody that has {STR_VAR_1}, then. I don't have time to wait!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Thank you so much for your help."),,SPEAKER_ALICIA)
 }
 
 script FlyingBlind_Dialogue_LotsOfPeople
 {
-    msgbox(gText_FlyingBlind_LotsOfPeople,,SPEAKER_UNHOUSED)
+    msgbox(format("Lots of people come and go, but I don't think ol' Karl the Fog is going anywhere."),,SPEAKER_UNHOUSED)
 }
 
 text gText_FlyingBlind_NotSoEasy {

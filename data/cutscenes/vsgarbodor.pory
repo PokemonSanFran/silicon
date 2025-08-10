@@ -48,7 +48,7 @@ script VSGarbodor_Scouting_Dialogue {
     lock
         applymovement(PLAYER, Common_Movement_FaceRight)
         waitmovement(0)
-        msgbox(gText_VSGarbodor_IDidSomeScouting,,SPEAKER_CHARLOTTE)
+        msgbox(format("I did some scouting while waiting for you. Both sides have two Garbodor and two Trainers guarding ‘em. Do you care which side you take?"),,SPEAKER_CHARLOTTE)
         dynmultichoice(18,6,TRUE,3,0,NULL,
             "Left",
             "Right",
@@ -76,7 +76,7 @@ script VSGarbodor_ChooseSide_Script {
 
 script VSGarbodor_ChooseLeft_Script {
     setvar(VAR_INNER_CONSTRUCTION_SITE_STATE,PLAYER_LEFT_SIDE)
-        msgbox(gText_VSGarbodor_ThenIllTakeTheRight,,SPEAKER_CHARLOTTE)
+        msgbox(format("Then I'll take the right side. See you on the other side. Don't take too long!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
@@ -91,7 +91,7 @@ script VSGarbodor_ChooseLeft_Script {
 
 script VSGarbodor_ChooseRight_Script {
     setvar(VAR_INNER_CONSTRUCTION_SITE_STATE, PLAYER_RIGHT_SIDE)
-        msgbox(gText_VSGarbodor_CoolIWanted,,SPEAKER_CHARLOTTE)
+        msgbox(format("Cool, I wanted the left side anyway.  See you on the other side. Don't take too long!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
@@ -106,27 +106,27 @@ script VSGarbodor_ChooseRight_Script {
 
 script VSGarbodor_TheTideGrunt1_Battle_Script {
     trainerbattle_single(TRAINER_FAKEROCKET_A, gText_VSGarbodor_ScrewThisStadium, gText_VSGarbodor_DamnTheyWereRight, VSGarbodor_TheTideGrunt1_Battle_Script)
-        msgbox(gText_VSGarbodor_WelpIDidWhat, MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
+        msgbox(format("Welp, I did what I could! Good luck with that stinky shit."), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 
 script VSGarbodor_TheTideGrunt2_Battle_Script {
     trainerbattle_single(TRAINER_FAKEROCKET_B, gText_VSGarbodor_RightOnCue, gText_VSGarbodor_HmmIGuess, VSGarbodor_TheTideGrunt2_Battle_Script)
-        msgbox(gText_VSGarbodor_BeingBad, MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
+        msgbox(format("Being bad was fun for a day!"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 script VSGarbodor_TheTideGrunt3_Battle_Script {
     trainerbattle_single(TRAINER_FAKEROCKET_A, gText_VSGarbodor_IsTheName, gText_VSGarbodor_TheyDidntPrepare, VSGarbodor_TheTideGrunt3_Battle_Script)
-        msgbox(gText_VSGarbodor_OhThankGiratina, MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
+        msgbox(format("Oh thank Giratina, I can go back to the office now…"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 
 script VSGarbodor_TheTideGrunt4_Battle_Script {
     trainerbattle_single(TRAINER_FAKEROCKET_B, gText_VSGarbodor_LookAtYou, gText_VSGarbodor_ThatsRight, VSGarbodor_TheTideGrunt4_Battle_Script)
-        msgbox(gText_VSGarbodor_HaveFunCleaning, MSGBOX_AUTOCLOSE)
+        msgbox(format("Have fun cleaning up after us, kid."), MSGBOX_AUTOCLOSE)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
@@ -172,7 +172,7 @@ script VSGarbodor_CheckDefeated_Script {
 
 script VSGarbodor_PreventCrossingSides_Script {
     lock
-        msgbox(gText_VSGarbodor_FeelingLonely,,SPEAKER_CHARLOTTE)
+        msgbox(format("Feeling lonely over there? I got this side, you handle that side!"),,SPEAKER_CHARLOTTE)
         closemessage
 
 
@@ -225,13 +225,13 @@ startcutscene(JUMPPLAYER_VSGARBODOR)
 script VSGarbodor_DefeatedAll_Dialogue {
     setvar(VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR)
 
-        msgbox(gText_VSGarbodor_GodYouWereTaking,,SPEAKER_CHARLOTTE)
+        msgbox(format("God, you were taking forever. They don't teach efficiency in Orre, do they?"),,SPEAKER_CHARLOTTE)
         closemessage
 
 
         applymovement(CHARLOTTE, VSGarbodor_LookAround)
         waitmovement(0)
-        msgbox(gText_VSGarbodor_WhateverMineWereEasy,,SPEAKER_CHARLOTTE)
+        msgbox(format("Whatever. Mine were easy, they just both used Self-Destruct before I could really get a move in. I already texted Oliver, he said meet in front of the construction site."),,SPEAKER_CHARLOTTE)
         closemessage
 
 
@@ -274,26 +274,26 @@ script VSGarbodor_CleanUpPerpWalk {
 
 script VSGarbodor_Negotiating_Dialogue
 {
-    msgbox(gText_VSGarbodor_AsWeWereNegotiating,,SPEAKER_ADELAIDE)
+    msgbox(format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?"),,SPEAKER_ADELAIDE)
 
-        msgbox(gText_VSGarbodor_DoneLikeYouGuys,,SPEAKER_ALICIA)
+        msgbox(format("Done. Like you guys said, TheTide up to their shit as usual."),,SPEAKER_ALICIA)
 
-        msgbox(gText_VSGarbodor_ThankYouBoth,,SPEAKER_ADELAIDE)
-        msgbox(gText_VSGarbodor_YouHave,,SPEAKER_ADELAIDE)
+        msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_ADELAIDE)
+        msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_ADELAIDE)
         closemessage
         special(VSGarbodor_ChooseGemBasedOnStarter)
         giveitem(VAR_0x8003,1)
 
-        msgbox(gText_VSGarbodor_HowDid,,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
-        msgbox(gText_VSGarbodor_DidIMiss,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-        msgbox(gText_VSGarbodor_TheyreOnlyFound,,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
-        msgbox(gText_VSGarbodor_ConsiderIt,,SPEAKER_ADELAIDE)
-        msgbox(gText_VSGarbodor_IThink,,SPEAKER_ADELAIDE)
-        msgbox(gText_VSGarbodor_YeahImBeat, MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        msgbox(format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
+        msgbox(format("...Did I miss someting?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+        msgbox(format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
+        msgbox(format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!"),,SPEAKER_ADELAIDE)
+        msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_ADELAIDE)
+        msgbox(format("Yeah, I'm beat. Do you want a ride back to the Compound?"), MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
 
         if (var (VAR_RESULT) == NO) {
 
-            msgbox(gText_VSGarbodor_WeirdButOkay,,SPEAKER_CHARLOTTE)
+            msgbox(format("Weird, but okay. I'll see you around."),,SPEAKER_CHARLOTTE)
 
                 closemessage
                 call(VSGarbodor_FlyWithoutPlayer_Script)
@@ -301,7 +301,7 @@ script VSGarbodor_Negotiating_Dialogue
                 end
         } else {
 
-            msgbox(gText_VSGarbodor_LetsBounce,,SPEAKER_CHARLOTTE)
+            msgbox(format("Let's bounce."),,SPEAKER_CHARLOTTE)
 
                 closemessage
                 fadeblackandsetremovewarpfadeflag
@@ -341,9 +341,9 @@ script VSGarbodor_ReturnToTheCompound_Dialogue {
         }else{
             applymovement(PLAYER,Common_Movement_FaceUp)
                 waitmovement(0)
-                msgbox(gText_VSGarbodor_ImGonnaGet,,SPEAKER_CHARLOTTE)
+                msgbox(format("I'm gonna get some sleep. Good shit on finishing your Badges. Can't wait to kick your ass at the Championship… whenever that is."),,SPEAKER_CHARLOTTE)
 
-                msgbox(gText_VSGarbodor_HehWellSee,,SPEAKER_ALICIA)
+                msgbox(format("Heh, we'll see. Good night."),,SPEAKER_ALICIA)
 
                 closemessage
 

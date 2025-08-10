@@ -14,10 +14,10 @@ script Quest_DexCompletion_Interact_Script{
 }
 
 script Quest_DexCompletion_StartQuest_Dialogue{
-    msgbox(gText_DexCompletion_WeAreTheResearch)
-        msgbox(gText_DexCompletion_WeNormallyStudy)
-        msgbox(gText_DexCompletion_ButTheLastFewYears)
-        msgbox(gText_DexCompletion_YoureATrainer)
+    msgbox(format("we are the research people"))
+        msgbox(format("we normally study pokemon and their interactions in the region but"))
+        msgbox(format("the last few years havbe been rough. the league"))
+        msgbox(format("you're a trainer right can you help us? come back after you've completed at least 50% of the pokedex"))
 
         startquest(QUEST_DEXCOMPLETION)
         call(Quest_DexCompletion_MarkQuests_Script)
@@ -84,14 +84,14 @@ script Quest_DexCompletion_Active_Dialogue{
 }
 
 script Quest_DexCompletion_Sub50Progress_Dialogue{
-    msgbox(gText_DexCompletion_HowIsYourPokeDex,MSGBOX_NPC)
+    msgbox(format("how is your pokedex coming? 50% isn't too much, right"),MSGBOX_NPC)
         end
 }
 
 script Quest_DexCompletion_FirstReward_Dialogue{
-    msgbox(gText_DexCompletion_HowIsYourPokeDex)
-        msgbox(gText_DexCompletion_OhWow50)
-        msgbox(gText_DexCompletion_ThankYouSoMuch,MSGBOX_NPC)
+    msgbox(format("how is your pokedex coming? 50% isn't too much, right"))
+        msgbox(format("oh wow 50% you're awesome"))
+        msgbox(format("tysm take this"),MSGBOX_NPC)
 
         giveitem(ITEM_OVAL_CHARM,1)
         release
@@ -110,14 +110,14 @@ script Quest_DexCompletion_MarkReward_Script{
 
 script Quest_DexCompletion_Sub100Progress_Dialogue{
     call(Quest_DexCompletion_MarkReward_Script)
-    msgbox(gText_DexCompletion_HowIsYourPokeDex100,MSGBOX_NPC)
+    msgbox(format("how is your pokedex coming? are you done?"),MSGBOX_NPC)
     end
 }
 
 script Quest_DexCompletion_Reward_Dialogue{
-    msgbox(gText_DexCompletion_HowIsYourPokeDex100)
-        msgbox(gText_DexCompletion_OhWow100)
-        msgbox(gText_DexCompletion_ThisIsAmazing)
+    msgbox(format("how is your pokedex coming? are you done?"))
+        msgbox(format("oh wow 100% you fuckin did it"))
+        msgbox(format("this is amazing, here take this"))
         giveitem(ITEM_SHINY_CHARM,1)
         completequest(QUEST_DEXCOMPLETION)
         release
@@ -125,7 +125,7 @@ script Quest_DexCompletion_Reward_Dialogue{
 }
 
 script Quest_DexCompletion_Completed_Dialogue{
-    msgbox(gText_DexCompletion_HeyPlayer,MSGBOX_NPC)
+    msgbox(format("hey {PLAYER} welcome back"),MSGBOX_NPC)
     end
 }
 

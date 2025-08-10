@@ -31,7 +31,7 @@ script Prologue_SetUp_Script
 
 script Prologue_LostToMagnus_Script{
     setvar(VAR_PROLOGUE_STATE,WALKED_IN_CHAMBER)
-    msgbox(gText_Prologue_HelpModal)
+    msgbox(format("In the final build, this will be a modal explaining that you can teach your Pokémon different moves from the Summary Screen."))
     closemessage
     release
     end
@@ -39,9 +39,9 @@ script Prologue_LostToMagnus_Script{
 
 script Prologue_InteractMagnus_Script{
     lock
-        msgbox(gText_Prologue_YouMadeIt,MSGBOX_NPC,SPEAKER_MAGNUS)
-        msgbox(gText_Prologue_WeveBeenWatching,,SPEAKER_MAGNUS)
-        msgbox(gText_Prologue_YoureGoingToBe,,SPEAKER_MAGNUS)
+        msgbox(format("You made it, {PLAYER}. Welcome to your final battle."),MSGBOX_NPC,SPEAKER_MAGNUS)
+        msgbox(format("We've been watching your progress for a while now, and your battles against the other three were absolutely captivating."),,SPEAKER_MAGNUS)
+        msgbox(format("You're going to be a great Champion to carry on the legacy of Resido... if you can defeat me!"),,SPEAKER_MAGNUS)
         closemessage
         startmenu_savescreen
         setvar(VAR_PROLOGUE_STATE,LOST_TO_MAGNUS)
@@ -77,9 +77,9 @@ script Prologue_PostBattle_Script
     call(OrolandColiseum_Arena_OpenExit_Script)
     waitse
     playbgm(MUS_HALL_OF_FAME_ROOM,TRUE)
-    msgbox(gText_Prologue_AdamYouAre,,SPEAKER_MAGNUS,TAIL_SHOUT,EMOTE_HAPPY)
-    msgbox(gText_Prologue_AndPerhaps,,SPEAKER_MAGNUS,TAIL_WHISPER)
-    msgbox(gText_Prologue_WearThis,,SPEAKER_MAGNUS,,EMOTE_HAPPY)
+    msgbox(format("{PLAYER}! You are now the Resido Pokémon League Champion!"),,SPEAKER_MAGNUS,TAIL_SHOUT,EMOTE_HAPPY)
+    msgbox(format("And perhaps, you will be Resido's last true Champion."),,SPEAKER_MAGNUS,TAIL_WHISPER)
+    msgbox(format("Wear this title with as much as I did when I earned it! And now, for the Hall of Fame!"),,SPEAKER_MAGNUS,,EMOTE_HAPPY)
     closemessage
     applymovement(MAGNUS,Prologue_LeaveChamber_Movement)
     applymovement(PLAYER,Common_Movement_WalkUp4)
@@ -89,7 +89,7 @@ script Prologue_PostBattle_Script
     fadeblackandsetremovewarpfadeflag
     warpdoor(MAP_OROLAND_COLISEUM_HALL,9,9)
     endcutscene
-    msgbox(gText_Prologue_AFewDays)
+    msgbox(format("The next day...{PAUSE_UNTIL_PRESS}"))
     closemessage
     waitstate
 }
@@ -108,10 +108,10 @@ script Prologue_PostWarp_Hall_Dialgoue{
         lock
         applymovement(GUARD,Prologue_BlockDoor_Movement)
         applymovement(MAGNUS,Common_Movement_FaceLeft)
-        msgbox(gText_Prolouge_ItsNotAFull,,SPEAKER_MAGNUS)
+        msgbox(format("Its not the usual celebration, but of course, with the recent news, the budget has been slashed. But we've figured a small gathering with the Elite Four and Gym Leaders would be nice."),,SPEAKER_MAGNUS)
         closemessage
         applymovement(MAGNUS,Common_Movement_FaceDown)
-        msgbox(gText_Prologue_EllenHasA,,SPEAKER_MAGNUS)
+        msgbox(format("Ellen was waiting for us to arrive - they've got a speech prepared."),,SPEAKER_MAGNUS)
         closemessage
         applymovement(MAGNUS,Prologue_Magnus_WalkIntoPosition_Movement)
         waitmovement(MAGNUS)
@@ -126,21 +126,21 @@ script Prologue_Ellen_Speech_Dialogue{
         startcutscene(JUMPPLAYER_PROLOGUE_ANNOUNCEMENT)
         setvar(VAR_PROLOGUE_STATE,ELLEN_ANNOUNCE)
         call(Prologue_SetUpSeechCrowd_Script)
-        msgbox(gText_Prologue_ThankYouAll,,SPEAKER_ELLEN)
-        msgbox(gText_Prologue_FirstOfCourse,,SPEAKER_ELLEN)
-        msgbox(gText_Prologue_IRegretToInform,,SPEAKER_ELLEN)
+        msgbox(format("Thank you all for being here!"),,SPEAKER_ELLEN)
+        msgbox(format("First of course, congratulations to the newest Champion, {PLAYER}! Despite not being from here, you've excelled in our region's competitive climate, and we're honored to cement you into our Hall of Fame."),,SPEAKER_ELLEN)
+        msgbox(format("Of course, I regret to inform you all that effective immediately, I'll be stepping down as a member of the Elite Four."),,SPEAKER_ELLEN)
         closemessage
         call(Prologue_ExclaimCrowd_Script)
-        msgbox(gText_Prologue_IWillRetireAnd,,SPEAKER_ELLEN)
+        msgbox(format("I will be retiring my career as a Trainer, and soon after, I'll be leaving the region."),,SPEAKER_ELLEN)
         closemessage
         applymovement(ELLEN,Common_Movement_FaceRight)
-        msgbox(gText_Prologue_ICanSoClearlySee,,SPEAKER_ELLEN)
+        msgbox(format("There's no easy way to put this - I don't have any hope in the new League changes. I think this is beginning of a very dark road ahead of us - we have customs and traditions and culture built here, and they've let the money get in the way of that. For those of you that haven't given up, and are fighting the good fight, you have my deepest respect..."),,SPEAKER_ELLEN)
         closemessage
         applymovement(ELLEN,Common_Movement_FaceLeft)
-        msgbox(gText_Prologue_AndIFearWeAreFighting,,SPEAKER_ELLEN)
+        msgbox(format("but also my deepest sympathies. I fear this is a battle we've already lost, and it's only a matter of time before we've been stripped of everything... and I can't bear the thought of that."),,SPEAKER_ELLEN)
         closemessage
         applymovement(ELLEN,Common_Movement_FaceDown)
-        msgbox(gText_Prologue_GoodLuckToAll,,SPEAKER_ELLEN)
+        msgbox(format("Good luck to all of you."),,SPEAKER_ELLEN)
         closemessage
         applymovement(ELLEN,Prologue_Leaveroom_Movement)
         delay(30)
@@ -236,7 +236,7 @@ script Prologue_ExclaimCrowd_Script{
 script Prologue_IntroTime_Dialogue
 {
     lockall
-    msgbox(gText_Prologue_July31,MSGBOX_AUTOCLOSE)
+    msgbox(format("10 years ago..."),MSGBOX_AUTOCLOSE)
     closemessage
     warpsilent(MAP_OROLAND_COLISEUM_HALLWAY,5,12)
     waitstate
@@ -251,7 +251,7 @@ script Prologue_TimeSkip_Dialogue{
 
 script Prologue_BeginAdventure_Dialogue
 {
-    msgbox(gText_Prologue_OnceYouStep,MSGBOX_YESNO,SPEAKER_GUARD)
+    msgbox(format("Hey, are you ready to get out of here? Once you leave,I can't let you back in."),MSGBOX_YESNO,SPEAKER_GUARD)
     if (var(VAR_RESULT) == YES)
     {
         setvar(VAR_PROLOGUE_STATE,START_ADVENTURE)
@@ -267,7 +267,7 @@ script Prologue_BeginAdventure_Dialogue
 script Prologue_FirstTimeCharacterCustomize_Script
 {
     call(ThereCanOnlyBeOne_SetUpPlayer_Script)
-    msgbox(Prologue_HowDoesTheWorld_Text)
+    msgbox(format("How does the world see you? You can change this later."))
     closemessage
     fadescreen(FADE_TO_BLACK)
     callnative(CustomizeCharacterFromOverworld)
@@ -279,7 +279,7 @@ script Prologue_FirstTimeNameCharacter_Script
 {
     callnative(NamePlayerFromOverworld)
     waitstate
-    msgbox(Prologue_AreYouSure_Text,MSGBOX_YESNO)
+    msgbox(format("Are you sure your name is {PLAYER}? You cannot change this later."),MSGBOX_YESNO)
     if (var(VAR_RESULT) == NO)
     {
         goto(Prolouge_NewPlayerCreation_Script)
@@ -307,32 +307,32 @@ script Prolouge_NewPlayerCreation_Script
 }
 
 script Prologue_Tala_Dialogue{
-    msgbox(gText_Prologue_HowCouldThey,MSGBOX_AUTOCLOSE,SPEAKER_TALA,,EMOTE_SHOCK)
+    msgbox(format("How could they just up and leave? Just like that? No warning? No plan? What..."),MSGBOX_AUTOCLOSE,SPEAKER_TALA,,EMOTE_SHOCK)
     end
 }
 
 script Prologue_Armando_Dialogue{
-    msgbox(gText_Prologue_IKnewThey,MSGBOX_AUTOCLOSE,SPEAKER_ARMANDO,,EMOTE_SAD)
+    msgbox(format("I knew they were unhappy, but this is just as much of a shock to me as it is you guys.  But... Ellen was always about taking action. And I guess this was their best action."),MSGBOX_AUTOCLOSE,SPEAKER_ARMANDO,,EMOTE_SAD)
     end
 }
 
 script Prologue_Magnus_Dialogue{
-    msgbox(gText_Prologue_OneWhiffOf,MSGBOX_AUTOCLOSE,SPEAKER_MAGNUS,,EMOTE_ANGRY)
+    msgbox(format("One whiff of trouble and they leave? Just like that? Fine. Who needs them, we'll find another Elite Four member, won't we?"),MSGBOX_AUTOCLOSE,SPEAKER_MAGNUS,,EMOTE_ANGRY)
     end
 }
 
 script Prologue_Keiying_Dialogue{
-    msgbox(gText_Prologue_FirstBDThen,MSGBOX_AUTOCLOSE,SPEAKER_KEIYING)
+    msgbox(format("First BD sells out, now Ellen is quitting... perhaps I'm on the wrong side of history here."),MSGBOX_AUTOCLOSE,SPEAKER_KEIYING)
     end
 }
 
 script Prologue_Imelda_Dialogue{
-    msgbox(gText_Prologue_HeReallyWent,MSGBOX_AUTOCLOSE,SPEAKER_IMELDA,,EMOTE_ANGRY)
+    msgbox(format("What a sad party to send us off. To think, one person could destroy our legacies..."),MSGBOX_AUTOCLOSE,SPEAKER_IMELDA,,EMOTE_ANGRY)
     end
 }
 
 script Prologue_Doyle_Dialogue{
-    msgbox(gText_Prologue_ItsGonnaBeAYearAndThen,MSGBOX_AUTOCLOSE,SPEAKER_DOYLE)
+    msgbox(format("It's gonna be a year before they change their minds and are begging to go back to the way things were, no doubt! We got a good thing going for us, and we know what we're doing. We're Gym Leaders, after all!"),MSGBOX_AUTOCLOSE,SPEAKER_DOYLE)
     end
 }
 

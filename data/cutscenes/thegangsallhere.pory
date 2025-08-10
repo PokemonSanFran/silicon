@@ -77,12 +77,12 @@ script TheGangsAllHere_WhatBringsYou_Dialogue{
     lock
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,START_THE_GANGS_ALL_HERE)
     playbgm(MUS_RG_FOLLOW_ME,FALSE)
-    msgbox(gText_TheGangsAllHere_WhatBringsYou,,SPEAKER_OLIVER)
-    msgbox(gText_TheGangsAllHere_ToldMeToVisit,,SPEAKER_ALICIA)
-    msgbox(gText_TheGangsAllHere_IsThisWhereYouWork,,SPEAKER_ALICIA)
-    msgbox(gText_TheGangsAllHere_TheTowerYes,,SPEAKER_OLIVER)
-    msgbox(gText_TheGangsAllHere_IHaventBeen,,SPEAKER_OLIVER)
-    msgbox(gText_TheGangsAllHere_OfCourseNot,,SPEAKER_ALICIA)
+    msgbox(format("{PLAYER}! What brings you to League HQ?"),,SPEAKER_OLIVER)
+    msgbox(format("Commissioner Adelaide told me to visit after I got my third badge!"),,SPEAKER_ALICIA)
+    msgbox(format("Is this where you work?"),,SPEAKER_ALICIA)
+    msgbox(format("My office is on this floor, yeah! This is League Ops, and everybody here is solely dedicated to making sure the SharpRise Capital Pokemon League is a success."),,SPEAKER_OLIVER)
+    msgbox(format("I've an important delivery for the C.E.O., but the workers here in League Ops can be a little... rowdy. Do you mind if I tag along on your tour? I'll keep you in tip-top shape!"),,SPEAKER_OLIVER)
+    msgbox(format("Of course not!"),,SPEAKER_ALICIA)
 
     closemessage
     special(HealPlayerParty)
@@ -102,7 +102,7 @@ script TheGangsAllHere_WhatBringsYou_Dialogue{
 script TheGangsAllHere_OfficeIsntThatWay_Script{
     lockall
     startcutscene(JUMPPLAYER_THEGANGSALLHERE)
-    msgbox(gText_TheGangsAllHere_OfficeIsntThatWay,,SPEAKER_OLIVER)
+    msgbox(format("Hey {PLAYER}, the office isn't that way!"),,SPEAKER_OLIVER)
 
     closemessage
     applymovement(PLAYER,TheGangsAllHere_OfficeIsntThatWay_Movement)
@@ -123,7 +123,7 @@ script TheGangsAllHere_WalkHallway_Script{
 script TheGangsAllHere_ThisIsOffice_Script{
     lock
     faceplayer
-    msgbox(gText_TheGangsAllHere_ThisIsOffice,,SPEAKER_OLIVER)
+    msgbox(format("This is Adelaide's office. After you."),,SPEAKER_OLIVER)
     closemessage
 
     call(TheGangsAllHere_WalkHallway_Script)
@@ -139,11 +139,11 @@ script TheGangsAllHere_ComeOnIn_Dialogue{
     waitmovement(ADELAIDE)
     applymovement(ADELAIDE,TheGangsAllHere_AdelaideWalkToDoor_Movement)
 
-    msgbox(gText_TheGangsAllHere_ComeOnIn,,SPEAKER_ADELAIDE)
+    msgbox(format("{PLAYER}! Oliver! Come on in, I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_ADELAIDE)
     closemessage
 
 
-    msgbox(gText_TheGangsAllHere_AsYouAsked,,SPEAKER_OLIVER)
+    msgbox(format("As you asked, I have your package from Emrys."),,SPEAKER_OLIVER)
     closemessage
 
 
@@ -151,32 +151,32 @@ script TheGangsAllHere_ComeOnIn_Dialogue{
     applymovement(OLIVER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
 
-    msgbox(gText_TheGangsAllHere_IThoughtYouSaid,,SPEAKER_ALICIA)
+    msgbox(format("I thought you said you had a delivery for the C.E.O.?"),,SPEAKER_ALICIA)
 
-    msgbox(gText_TheGangsAllHere_IDidIsee,,SPEAKER_OLIVER)
+    msgbox(format("I did. I see Adelaide neglected to reveal her full title...?"),,SPEAKER_OLIVER)
 
     goto(TheGangsAllHere_NotIntentionally_Dialogue)
     end
 }
 
 script TheGangsAllHere_NotIntentionally_Dialogue{
-    msgbox(gText_TheGangsAllHere_NotIntentionally,,SPEAKER_ADELAIDE)
+    msgbox(format("Not intentionally! I was just so swept up in your battle!"),,SPEAKER_ADELAIDE)
     reveal(REVEAL_ADELAIDE)
 
     if(var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI){
-        msgbox(gText_TheGangsAllHere_PleaseTellMe)
+        msgbox(format("Oliver, please tell me you'll go back and watch Ramesh's highlight reel later, it was fantastic."))
 
-    msgbox(gText_TheGangsAllHere_IHeardWonderfulThings,,SPEAKER_OLIVER)
+    msgbox(format("I heard wonderful things on the way over here, but I'll be certain to observe later."),,SPEAKER_OLIVER)
     }
 
-    msgbox(gText_TheGangsAllHere_InAnyCase)
+    msgbox(format("In any case, your package, Adelaide."))
 
 
     applymovement(OLIVER,Common_Movement_WalkInPlaceDown)
     waitmovement(OLIVER)
 
     bufferitemname(STR_VAR_1,ITEM_DRAGONIUM_Z)
-    msgbox(gText_TheGangsAllHere_ImThrilledTheTiming,,SPEAKER_ADELAIDE)
+    msgbox(format("Ah, my {STR_VAR_1}, wonderful.\nI've also got something for you, {PLAYER}! Let me see your phone..."),,SPEAKER_ADELAIDE)
     closemessage
 
 
@@ -194,40 +194,40 @@ script TheGangsAllHere_GivePrestoApp_Script{
 }
 
 script TheGangsAllHere_GivePrestoApp_Dialogue{
-    msgbox(gText_TheGangsAllHere_PrestoDroneDelivery,,SPEAKER_ADELAIDE)
+    msgbox(format("As a member of the SharpRise family, I've just granted you special access to Presto's drone delivery service. If you select that app while you're outdoors, you can have items delievered to you instantly! I'm excited to see how you use our tools."),,SPEAKER_ADELAIDE)
 
     applymovement(OLIVER,Common_Movement_FacePlayer)
     waitmovement(OLIVER)
     applymovement(PLAYER,Common_Movement_FaceRight)
 
-    msgbox(gText_TheGangsAllHere_NotToPlaceAnyUndue,,SPEAKER_OLIVER)
+    msgbox(format("Not to place any undue pressure on you, but we personally reviewed all of the applicants to our little program. You were exceptionally popular among the team, so we're very excited to see you perform well!"),,SPEAKER_OLIVER)
 
-    msgbox(gText_TheGangsAllHere_OhWowThatMeans,,SPEAKER_ALICIA)
+    msgbox(format("Oh. Wow! That means a lot. I'll absolutely put it to use!"),,SPEAKER_ALICIA)
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceDown)
-    msgbox(gText_TheGangsAllHere_WeKnowButNoPressure,,SPEAKER_ADELAIDE)
+    msgbox(format("We always make sure our Trainers have an edge on the competition!"),,SPEAKER_ADELAIDE)
 
     goto(TheGangsAllHere_EndScene_Dialogue)
 }
 
 script TheGangsAllHere_EndScene_Dialogue{
-    msgbox(gText_TheGangsAllHere_TimeForNumber7)
+    msgbox(format("Time for my seventh Boomers coffee for the day. Shall we, Oliver?"))
     closemessage
 
 
     applymovement(OLIVER,Common_Movement_FaceDown)
 
-    msgbox(gText_TheGangsAllHere_WeShall,,SPEAKER_OLIVER)
+    msgbox(format("We shall."),,SPEAKER_OLIVER)
 
 
     applymovement(OLIVER,Common_Movement_FacePlayer)
     applymovement(PLAYER,Common_Movement_FaceRight)
 
-    msgbox(gText_TheGangsAllHere_FeelFreeToContinue,,SPEAKER_OLIVER)
+    msgbox(format("Feel free to continue your tour without us, {PLAYER}. Greatly appreciate your help in the battles. Hopefully supporting me wasn't too exhausting!"),,SPEAKER_OLIVER)
 
     if(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
-        msgbox(gText_TheGangsAllHere_AhAndIf)
+        msgbox(format("Ah, and if you haven't already visited Ramesh, go do so. They're on the Production Floor."))
     }
 
     closemessage

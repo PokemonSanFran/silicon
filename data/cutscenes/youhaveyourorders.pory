@@ -45,13 +45,13 @@ script YouHaveYourOrders_Interact_Keiying_Script
 
 script YouHaveYourOrders_ActiveQuest_Dialogue
 {
-    msgbox(gText_YouHaveYourOrders_ICouldGoShut,MSGBOX_NPC)
+    msgbox(format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create."),MSGBOX_NPC)
     end
 }
 
 script YouHaveYourOrders_CompleteQuest_Dialogue
 {
-    msgbox(gText_HowDisappointing_IAppreciate,MSGBOX_NPC)
+    msgbox(format("I appreciate you handling that, {PLAYER}."),MSGBOX_NPC)
     end
 }
 
@@ -131,14 +131,14 @@ script YouHaveYourOrders_Assignment_Dialogue
         applymovement(KEIYING,Common_Movement_FaceDown)
         waitmovement(0)
 
-      msgbox(gText_YouHaveYourOrders_ICouldGoShut,,SPEAKER_KEIYING)
+      msgbox(format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create."),,SPEAKER_KEIYING)
 
       msgbox(format("Hopefully, you can accomplish what I can't bring myself to do."),,SPEAKER_KEIYING)
 
         startquest(QUEST_HOWDISAPPOINTING)
 
         buffermapname(STR_VAR_1,MAP_HODOU_CITY)
-    msgbox(gText_YouHaveYourOrders_DoYouWantTo,MSGBOX_YESNO)
+    msgbox(format("Do you want to go to {STR_VAR_1}?"),MSGBOX_YESNO)
         endcutscene
         if (var(VAR_RESULT)){
         fadeblackandsetremovewarpfadeflag

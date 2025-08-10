@@ -19,7 +19,7 @@ script BreedingCenter_Script_StartMonManagement
     call(BreedingCenter_Dialogue_IntroPackage)
     if (!flag(FLAG_TEMP_11))
     {
-        msgbox(BreedingCenter_Text_WelcomeBack,,SPEAKER_BREEDINGPARENT)
+        msgbox(format("Welcome back to the Chasilla Breeding Center, {PLAYER}!"),,SPEAKER_BREEDINGPARENT)
         closemessage
     }
 
@@ -55,7 +55,7 @@ script BreedingCenter_Script_BuildCoreMenu
 
 script BreedingCenter_Dialogue_EggWaiting
 {
-    msgbox(BreedingCenter_Text_OurRecordsIndicate,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Our records indicate that you have an Egg available for pickup! Talk to our Egg manager outside."),,SPEAKER_BREEDINGPARENT)
     closemessage
     release
     end
@@ -66,7 +66,7 @@ script BreedingCenter_Script_HandleCoreMenu
     call(BreedingCenter_Script_AddNeverMindToMenu)
     call(BreedingCenter_Script_AddInfoToMenu)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, NULL)
-    msgbox(BreedingCenter_Text_WhatCanWe,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("What can we help you with today?"),,SPEAKER_BREEDINGPARENT)
 
     switch (var(VAR_RESULT))
     {
@@ -85,14 +85,14 @@ script BreedingCenter_Dialogue_IntroPackage
         return
     }
 
-    msgbox(BreedingCenter_Text_Welcome,,SPEAKER_BREEDINGPARENT)
-    msgbox(BreedingCenter_Text_SinceItsYour,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Welcome to the Chasilla Breeding Center! Our state of the art Pokémon breeding facilities are open to the public."),,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Since its your first visit, we have a welcome package for you!"),,SPEAKER_BREEDINGPARENT)
 
     call(BreedingCenter_Script_CheckSpaceAndErrorMessage)
-    msgbox(BreedingCenter_Text_HopefullyThisWelcomePackage,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Hopefully this welcome helps you breed the best Pokémon possible!"),,SPEAKER_BREEDINGPARENT)
     closemessage
     call(BreedingCenter_Script_GiveWelcomeKit)
-    msgbox(BreedingCenter_Text_IfYouNeedMoreInfo,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("If you need more info, any of the staff here is happy to help."),,SPEAKER_BREEDINGPARENT)
     goto(BreedingCenter_Script_StartMonManagement)
 }
 
@@ -101,7 +101,7 @@ script BreedingCenter_Script_CheckSpaceAndErrorMessage
     callnative(DoesPlayerHaveSpaceForWelcomeKit)
     if (var(VAR_RESULT) == FALSE)
     {
-        msgbox(BreedingCenter_Text_OurWelcomeKit,,SPEAKER_BREEDINGPARENT)
+        msgbox(format("Our welcome kit has a quite a bit in it, and your bag appears to be full. Come back once you've made some room!"),,SPEAKER_BREEDINGPARENT)
         closemessage
         end
     }
@@ -123,7 +123,7 @@ script BreedingCenter_Script_GiveWelcomeKit
 
 script BreedingCenter_Script_ShowNoMonsMenu
 {
-    msgbox(BreedingCenter_Text_AreYouReady,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Are you ready to get started?"),,SPEAKER_BREEDINGPARENT)
 
     dynmultichoice(0,0,FALSE,3,0,NULL,
         "Deposit",
@@ -142,7 +142,7 @@ script BreedingCenter_Script_ShowNoMonsMenu
 
 script BreedingCenter_Dialogue_NeverMind
 {
-    msgbox(BreedingCenter_Text_ChangedYourMind,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Changed your mind? You're always welcome back {PLAYER}."),,SPEAKER_BREEDINGPARENT)
     closemessage
     release
     end
@@ -150,7 +150,7 @@ script BreedingCenter_Dialogue_NeverMind
 
 script BreedingCenter_Dialogue_ExplainBreedingCenter
 {
-    msgbox(BreedingCenter_Text_IsAPlace,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Here, Pokémon Trainers of can leave up to two Pokémon for us to raise. If two compatible parents are left in our care, they will evantually create an Egg. Our state of the art breeding facilities allow you to edit the DNA of the unhatched Pokémon, allowing you to customize it to your liking. As a bonus, every step you take out there will give your Pokémon here one Experience Point. Unlike other regions, we only charge fees for when Eggs are picked up."),,SPEAKER_BREEDINGPARENT)
     goto(BreedingCenter_Script_HandleMainMenu)
 }
 
@@ -159,7 +159,7 @@ script BreedingCenter_Script_DepositMonAtDaycare
     specialvar(VAR_RESULT,CountPartyAliveNonEggMons)
     goto_if_lt(VAR_RESULT,2,BreedingCenter_Dialogue_NotEnoughMons)
 
-    msgbox(BreedingCenter_Text_WhichPokemonWouldYou,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Which Pokémon do you want to leave in our care?"),,SPEAKER_BREEDINGPARENT)
     closemessage
     fadescreen(FADE_TO_BLACK)
     special(ChooseSendDaycareMon)
@@ -169,7 +169,7 @@ script BreedingCenter_Script_DepositMonAtDaycare
     specialvar(VAR_0x8005,GetSelectedMonNicknameAndSpecies)
     waitse
     playmoncry(VAR_0x8005,CRY_MODE_NORMAL)
-    msgbox(BreedingCenter_Text_WellTakeGood,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("We'll take good care of {STR_VAR_1}!"),,SPEAKER_BREEDINGPARENT)
     waitmoncry
     special(StoreSelectedPokemonInDaycare)
     callnative(UpdateFollowingPokemon)
@@ -188,7 +188,7 @@ script BreedingCenter_Dialogue_AskDepositAgain
         return
     }
 
-    msgbox(BreedingCenter_Text_WouldYouLikeUsToRaiseAnother,MSGBOX_YESNO,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Would you like us to raise another Pokémon?"),MSGBOX_YESNO,SPEAKER_BREEDINGPARENT)
     if (var(VAR_RESULT) != YES)
     {
         return
@@ -202,18 +202,18 @@ script BreedingCenter_Dialogue_PostDepositMessage
     switch(var(VAR_RESULT))
     {
         default:
-            msgbox(BreedingCenter_Text_AlwaysHereToHelp,,SPEAKER_BREEDINGPARENT)
+            msgbox(format("We're always here to help."),,SPEAKER_BREEDINGPARENT)
         case DAYCARE_ONE_MON:
-            msgbox(BreedingCenter_Text_ComeBackIfYou,,SPEAKER_BREEDINGPARENT)
+            msgbox(format("When you've chosen another Pokémon to leave with us, we'll be here!"),,SPEAKER_BREEDINGPARENT)
         case DAYCARE_TWO_MONS:
-            msgbox(BreedingCenter_Text_YoullGetANotiifcation,,SPEAKER_BREEDINGPARENT)
+            msgbox(format("If your Pokémon are discovered with an Egg, you'll get a Notification on your phone."),,SPEAKER_BREEDINGPARENT)
     }
     call(BreedingCenter_Script_HandleMainMenu)
 }
 
 script BreedingCenter_Dialogue_NotEnoughMons
 {
-    msgbox(BreedingCenter_Text_YouDontSeemToHaveEnough,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("If I take a Pokémon from you, you won't have any healthy Pokémon left!"),,SPEAKER_BREEDINGPARENT)
     call(BreedingCenter_Script_HandleMainMenu)
 }
 
@@ -261,18 +261,18 @@ script BreedingCenter_Script_WithdrawMon
 	copyvar(VAR_0x8004, VAR_RESULT)
     call(BreedingCenter_Script_CheckRoomInformPlayer)
 	specialvar(VAR_RESULT, TakePokemonFromDaycare)
-    msgbox(BreedingCenter_Text_HeresYour,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Here's your {STR_VAR_1}!"),,SPEAKER_BREEDINGPARENT)
 	playmoncry(VAR_RESULT, CRY_MODE_NORMAL)
     if (var(VAR_0x8009) != MON_GIVEN_TO_PARTY)
     {
         bufferboxname(STR_VAR_1, VAR_PC_BOX_TO_SEND_MON)
         bufferspeciesname(STR_VAR_2, VAR_RESULT)
-        msgbox(BreedingCenter_Text_PlayerTookBackBox)
+        msgbox(format("{PLAYER} took {STR_VAR_2} from the Breeding Center stored it in {STR_VAR_1}."))
     }
     else
     {
         bufferspeciesname(STR_VAR_2, VAR_RESULT)
-        msgbox(BreedingCenter_Text_PlayerTookBack)
+        msgbox(format("{PLAYER} took {STR_VAR_2} from the Breeding Center and added it to their party."))
     }
     waitmoncry
     goto(BreedingCenter_Script_HandleMainMenu)
@@ -285,8 +285,8 @@ script BreedingCenter_Script_CheckRoomInformPlayer
     {
         return
     }
-    msgbox(BreedingCenter_Text_ItAppears,,SPEAKER_BREEDINGPARENT)
-    msgbox(BreedingCenter_Text_PleaseMake,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("It appears your party and storage boxes don't have room to take back your {STR_VAR_1}."),,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Please make room and come back!"),,SPEAKER_BREEDINGPARENT)
     goto(BreedingCenter_Script_HandleMainMenu)
 }
 
@@ -434,7 +434,7 @@ script BreedingCenter_Script_BuildEggMenu
         case DAYCARE_TWO_MONS:
             call(BreedingCenter_Script_AddCheckParentsToMenu)
     }
-    msgbox(BreedingCenter_Text_ImTheEgg,,SPEAKER_BREEDINGEGG)
+    msgbox(format("I'm the Egg Manager here!"),,SPEAKER_BREEDINGEGG)
     goto(BreedingCenter_Script_HandleEggManagement)
 }
 
@@ -452,7 +452,7 @@ script BreedingCenter_Script_HandleEggManagement
 {
     call(BreedingCenter_Script_AddNeverMindToMenu)
     call(BreedingCenter_Script_AddInfoToMenu)
-    msgbox(BreedingCenter_Text_WhatCanWe,,SPEAKER_BREEDINGEGG)
+    msgbox(format("What can we help you with today?"),,SPEAKER_BREEDINGEGG)
 
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, NULL)
     switch (var(VAR_RESULT))
@@ -469,13 +469,13 @@ script BreedingCenter_Dialogue_EggMenuNeverMind
     switch(var(VAR_RESULT))
     {
         case DAYCARE_NO_MONS:
-            msgbox(BreedingCenter_Text_TalkToMe,,SPEAKER_BREEDINGEGG)
+            msgbox(format("Talk to me once you've left a Pokémon with our Parent Manager."),,SPEAKER_BREEDINGEGG)
         case DAYCARE_ONE_MON:
-            msgbox(BreedingCenter_Text_HopefullyWeFind,,SPEAKER_BREEDINGEGG)
+            msgbox(format("Hopefully we'll find an Egg with your Pokemon soon."),,SPEAKER_BREEDINGEGG)
         case DAYCARE_TWO_MONS:
-            msgbox(BreedingCenter_Text_HopefullyWeFind,,SPEAKER_BREEDINGEGG)
+            msgbox(format("Hopefully we'll find an Egg with your Pokemon soon."),,SPEAKER_BREEDINGEGG)
         case DAYCARE_EGG_WAITING:
-            msgbox(BreedingCenter_Text_ComeBack,,SPEAKER_BREEDINGEGG)
+            msgbox(format("We'll hold onto this Egg until you come back. We might discover more!"),,SPEAKER_BREEDINGEGG)
     }
     closemessage
     release
@@ -485,21 +485,21 @@ script BreedingCenter_Dialogue_EggMenuNeverMind
 script BreedingCenter_Dialogue_InformPlayer
 {
     callnative(Script_AreEffortValuesEnabled)
-    msgbox(BreedingCenter_Text_ExplainEgg,,SPEAKER_BREEDINGEGG)
+    msgbox(format("You can leave up to two Pokémon with our attendant inside. If your Pokémon are compatible, we'll evantually discover them with an Egg, which you can pick up from me. We'll hold up to 10 Eggs for you."),,SPEAKER_BREEDINGEGG)
 
     bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
     bufferspeciesname(STR_VAR_3,SPECIES_MAGIKARP)
-    msgbox(BreedingCenter_Text_ExplainIncubatorPremise,,SPEAKER_BREEDINGEGG)
-    msgbox(BreedingCenter_Text_ExplainIncubatorStepsWhenTrue,,SPEAKER_BREEDINGEGG)
+    msgbox(format("If you are a {STR_VAR_2} Plan member, while your Egg is waiting to be picked up, we will store your Eggs in our proprietary incubator. If you are not a {STR_VAR_2} Plan member, we invite you to apply for a {STR_VAR_2} Plan membership."),,SPEAKER_BREEDINGEGG)
+    msgbox(format("While on the incubator, the kinetic energy you generate before you recieve the Egg will carry over towards hatching the Egg once you pick it up."),,SPEAKER_BREEDINGEGG)
     if (var(VAR_RESULT))
     {
-        msgbox(BreedingCenter_Text_ExplainEVPerksWhenTrue,,SPEAKER_BREEDINGEGG)
+        msgbox(format("The incubator also diffuses a specific vitamin solution through the Egg’s membrane, so your Pokémon’s Effort Values have been optimized. Of course, you can change them yourself too."),,SPEAKER_BREEDINGEGG)
     }
 
     callnative(Script_AreIndividualValuesDisabled)
     if (!var(VAR_RESULT))
     {
-        msgbox(BreedingCenter_Text_ExplainEggEdit,,SPEAKER_BREEDINGEGG)
+        msgbox(format("Finally, I specialize in DNA manipulation of unhatched Pokémon, and I can edit the Individual Values of those Eggs to your liking."),,SPEAKER_BREEDINGEGG)
     }
 
     callnative(BufferEggPrices)
@@ -508,20 +508,20 @@ script BreedingCenter_Dialogue_InformPlayer
 
     if (flag(FLAG_TIMELINE_TRUE))
     {
-        msgbox(BreedingCenter_Text_ExplainEggsFeesBronze,,SPEAKER_BREEDINGEGG)
+        msgbox(format("As a {STR_VAR_3} Plan member,  you are responsible for the full cost of our services. Your out of pocket cost to pick up an Egg is ¥{STR_VAR_1}."),,SPEAKER_BREEDINGEGG)
         if (!var(VAR_RESULT))
         {
             callnative(BufferStatPrices)
-            msgbox(BreedingCenter_Text_ExplainEggEditFeesBronze,,SPEAKER_BREEDINGEGG)
+            msgbox(format("As a {STR_VAR_3} Plan member, you are responsible for the full cost of our services. For every Individual Values you change, the cost is ¥{STR_VAR_1}."),,SPEAKER_BREEDINGEGG)
         }
     }
     else
     {
-        msgbox(BreedingCenter_Text_ExplainEggsFeesGold,,SPEAKER_BREEDINGEGG)
+        msgbox(format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. Your out of pocket cost to pick up an Egg is ¥{STR_VAR_1}."),,SPEAKER_BREEDINGEGG)
         if (!var(VAR_RESULT))
         {
             callnative(BufferStatPrices)
-            msgbox(BreedingCenter_Text_ExplainEggEditFeesGold,,SPEAKER_BREEDINGEGG)
+            msgbox(format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. If you use our gene editing services, the cost for every Individual Values you change is ¥{STR_VAR_1}."),,SPEAKER_BREEDINGEGG)
         }
     }
 
@@ -542,7 +542,7 @@ script BreedingCenter_Dialogue_DescribeMons
 
     if(var(VAR_RESULT) == DAYCARE_ONE_MON)
     {
-        msgbox(BreedingCenter_Text_OneMon,,SPEAKER_BREEDINGEGG)
+        msgbox(format("You left {STR_VAR_1} here. It's condition is stable, but without a partner, they won't generate an Egg."),,SPEAKER_BREEDINGEGG)
     }
     else
     {
@@ -559,13 +559,13 @@ script BreedingCenter_Dialogue_DescribeCompatibility
     switch(var(VAR_RESULT))
     {
         case PARENTS_INCOMPATIBLE:
-            msgbox(BreedingCenter_Text_ZeroCompat,,SPEAKER_BREEDINGEGG)
+            msgbox(format("You left {STR_VAR_1} and {STR_VAR_2} here. They have zero compatibility - we won't discover an Egg with them."),,SPEAKER_BREEDINGEGG)
         case PARENTS_LOW_COMPATIBILITY:
-            msgbox(BreedingCenter_Text_LowCompat,,SPEAKER_BREEDINGEGG)
+            msgbox(format("You left {STR_VAR_1} and {STR_VAR_2} here. They have low compatibility - it will take a while to discover an Egg."),,SPEAKER_BREEDINGEGG)
         case PARENTS_MED_COMPATIBILITY:
-            msgbox(BreedingCenter_Text_MediumCompat,,SPEAKER_BREEDINGEGG)
+            msgbox(format("You left {STR_VAR_1} and {STR_VAR_2} here. They have average compatibility - we'll discover an Egg soon enough."),,SPEAKER_BREEDINGEGG)
         case PARENTS_MAX_COMPATIBILITY:
-            msgbox(BreedingCenter_Text_HighCompat,,SPEAKER_BREEDINGEGG)
+            msgbox(format("You left {STR_VAR_1} and {STR_VAR_2} here. They have extremely high compatibility - we'll discover an Egg any second now!"),,SPEAKER_BREEDINGEGG)
     }
     goto(BreedingCenter_Script_BuildEggMenu)
 }
@@ -573,13 +573,13 @@ script BreedingCenter_Dialogue_DescribeCompatibility
 script BreedingCenter_Script_EggPickUpIntro
 {
     callnative(BufferUnhatchedMonEgg)
-    msgbox(BreedingCenter_Text_WeDiscoveredAMonEgg,,SPEAKER_BREEDINGEGG)
+    msgbox(format("We discovered an Egg with Pokémon you left with us. Our data suggests that it will hatch into a {STR_VAR_1}."),,SPEAKER_BREEDINGEGG)
     goto(BreedingCenter_Script_EggPickUpMenu)
 }
 
 script BreedingCenter_Script_EggPickUpMenu
 {
-    msgbox(BreedingCenter_Text_WhatWouldYouLikeTo,,SPEAKER_BREEDINGEGG)
+    msgbox(format("What would you like to do with it?"),,SPEAKER_BREEDINGEGG)
     call(BreedingCenter_Script_AddTakeToMenu)
     call(BreedingCenter_Script_AddSeeOrEditToMenu)
     call(BreedingCenter_Script_AddDiscardToMenu)
@@ -608,8 +608,8 @@ script BreedingCenter_Script_CheckSpaceForEgg
         return
     }
 
-    msgbox(BreedingCenter_Text_YouDontHaveSpace,,SPEAKER_BREEDINGEGG)
-    msgbox(BreedingCenter_Text_PleaseMake,,SPEAKER_BREEDINGEGG)
+    msgbox(format("It appears your party and storage boxes don't have room to take this Egg!"),,SPEAKER_BREEDINGEGG)
+    msgbox(format("Please make room and come back!"),,SPEAKER_BREEDINGEGG)
     closemessage
     release
     end
@@ -627,13 +627,13 @@ script BreedingCenter_Script_TakeEggSequence
     switch(var(VAR_RESULT))
     {
         case SILICON_DAYCARE_NO_DISCOUNT_YES_STATS:
-            msgbox(BreedingCenter_Text_WithoutTheSharpRiseDiscountEdit,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+            msgbox(format("Our records indicate that you are no longer a {STR_VAR_2} Plan member. Your plan has been downgraded to the {STR_VAR_3} Plan, which does not include any discounts. Your out of pocket cost to pick up this Egg is ¥{STR_VAR_1}, which includes the cost of the Individual Values you changed. Do you still want it?"),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
         case SILICON_DAYCARE_NO_DISCOUNT_NO_STATS:
-            msgbox(BreedingCenter_Text_WithoutTheSharpRiseDiscount,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+            msgbox(format("Our records indicate that you are no longer a {STR_VAR_2} Plan member. Your plan has been downgraded to the {STR_VAR_3} Plan, which does not include any discounts. Your out of pocket cost to pick up this Egg is ¥{STR_VAR_1}. Do you still want it?"),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
         case SILICON_DAYCARE_YES_DISCOUNT_YES_STATS:
-            msgbox(BreedingCenter_Text_ThanksToYourAffiliationWithEdit,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+            msgbox(format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. The out of pocket cost to pick up this Egg is ¥{STR_VAR_1}, which includes the cost of the Individual Values you changed. Do you still want it?"),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
         case SILICON_DAYCARE_YES_DISCOUNT_NO_STATS:
-            msgbox(BreedingCenter_Text_ThanksToYourAffiliationWith,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+            msgbox(format("As a valued {STR_VAR_2} Plan member, 99% of your fees are covered. Your out of pocket cost to pick up this Egg is ¥{STR_VAR_1}. Do you still want it?"),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
     }
 
     if(var(VAR_RESULT) == YES)
@@ -644,7 +644,7 @@ script BreedingCenter_Script_TakeEggSequence
         playse(SE_SHOP)
         waitse
         hidemoneybox
-        msgbox(BreedingCenter_Text_HeresYourEgg,,SPEAKER_BREEDINGEGG)
+        msgbox(format("Here's your Egg!"),,SPEAKER_BREEDINGEGG)
         goto(BreedingCenter_Script_GiveEggToPlayer)
     }
     else
@@ -664,11 +664,11 @@ script BreedingCenter_Script_GiveEggToPlayer
     if (var(VAR_0x8009) != MON_GIVEN_TO_PARTY)
     {
         bufferboxname(STR_VAR_2, VAR_PC_BOX_TO_SEND_MON)
-        msgbox(BreedingCenter_Text_PlayerTookEggBox)
+        msgbox(format("{PLAYER} stored the {STR_VAR_1} Egg in {STR_VAR_2}."))
     }
     else
     {
-        msgbox(BreedingCenter_Text_PlayerTookEgg)
+        msgbox(format("{PLAYER} added the {STR_VAR_1} Egg their party."))
     }
     closemessage
     waitfanfare
@@ -683,8 +683,8 @@ script BreedingCenter_Script_CheckPlayerMoney
         return
     }
 
-    msgbox(BreedingCenter_Text_YouDontHaveEnough,,SPEAKER_BREEDINGEGG)
-    msgbox(BreedingCenter_Text_ComeBack,,SPEAKER_BREEDINGEGG)
+    msgbox(format("You don't have enough funds right now."),,SPEAKER_BREEDINGEGG)
+    msgbox(format("We'll hold onto this Egg until you come back. We might discover more!"),,SPEAKER_BREEDINGEGG)
     hidemoneybox
     closemessage
     release
@@ -693,7 +693,7 @@ script BreedingCenter_Script_CheckPlayerMoney
 
 script BreedingCenter_Script_ViewEgg
 {
-    msgbox(BreedingCenter_Text_HeresWhatWillHatch,,SPEAKER_BREEDINGEGG)
+    msgbox(format("Here's what will hatch from the Egg."),,SPEAKER_BREEDINGEGG)
     closemessage
 
     fadescreen(FADE_TO_BLACK)
@@ -705,8 +705,8 @@ script BreedingCenter_Script_ViewEgg
 
 script BreedingCenter_Script_EditEgg
 {
-    msgbox(BreedingCenter_Text_HeresWhatWillHatch,,SPEAKER_BREEDINGEGG)
-    msgbox(BreedingCenter_Text_IfYouLikeYou,,SPEAKER_BREEDINGEGG)
+    msgbox(format("Here's what will hatch from the Egg."),,SPEAKER_BREEDINGEGG)
+    msgbox(format("If you like, you can change its Individual Values."),,SPEAKER_BREEDINGEGG)
     closemessage
     fadescreen(FADE_TO_BLACK)
     callnative(EditEggContents)
@@ -718,12 +718,12 @@ script BreedingCenter_Script_EditEgg
 script BreedingCenter_Script_AskResetEgg
 {
     callnative(BufferUnhatchedMonEgg)
-    msgbox(BreedingCenter_Text_DoYouWantToReset,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+    msgbox(format("Do you want to reset the changes you've made to the {STR_VAR_1} Egg?"),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
 
     if (var(VAR_RESULT) == YES)
     {
         callnative(ResetUnhatchedMonEgg)
-        msgbox(BreedingCenter_Text_WeveResetThe,,SPEAKER_BREEDINGEGG)
+        msgbox(format("Your {STR_VAR_1} Egg's Individual Values has been reset back to when it was first discovered."),,SPEAKER_BREEDINGEGG)
     }
     goto(BreedingCenter_Script_EggPickUpMenu)
 }
@@ -731,7 +731,7 @@ script BreedingCenter_Script_AskResetEgg
 script BreedingCenter_Script_AskDiscardEgg
 {
     callnative(BufferUnhatchedMonEgg)
-    msgbox(BreedingCenter_Text_AreYouCertainYouDon,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+    msgbox(format("Do you want to leave your {STR_VAR_1} Egg? We'll keep it, but won't be able to give it you later."),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
 
     if (var(VAR_RESULT) == YES)
     {
@@ -758,7 +758,7 @@ script BreedingCenter_Script_CheckRemainingEggs
 script BreedingCenter_Script_DeleteEgg
 {
     callnative(RemoveEggFromDaycare_Silicon)
-    msgbox(BreedingCenter_Text_ThankYouForContributingTo,,SPEAKER_BREEDINGEGG)
+    msgbox(format("Thank you for contributing to our research!"),,SPEAKER_BREEDINGEGG)
     goto(BreedingCenter_Script_CheckRemainingEggs)
 }
 
@@ -767,11 +767,11 @@ script BreedingCenter_Script_AskMoreEggs
     buffernumberstring(STR_VAR_1,VAR_0x8004)
     if (var(VAR_0x8004) == 1)
     {
-        msgbox(BreedingCenter_Text_YouHaveMoreEgg,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+        msgbox(format("You have {STR_VAR_1} more Egg with us. Do you want to discuss them now?"),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
     }
     else
     {
-        msgbox(BreedingCenter_Text_YouHaveMoreEggs,MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
+        msgbox(format("You have {STR_VAR_1} more Eggs with us. Do you want to discuss them now?"),MSGBOX_YESNO,SPEAKER_BREEDINGEGG)
     }
 
     if (var(VAR_RESULT) == YES)
@@ -786,7 +786,7 @@ script BreedingCenter_Script_AskMoreEggs
 
 script BreedingCenter_Dialogue_EggNeverMind
 {
-    msgbox(BreedingCenter_Text_ChangedYourMind,,SPEAKER_BREEDINGPARENT)
+    msgbox(format("Changed your mind? You're always welcome back {PLAYER}."),,SPEAKER_BREEDINGPARENT)
     closemessage
     release
     end
@@ -845,7 +845,7 @@ script BreedingCenter_Script_AskPlayerGene
         end
     }
 
-    msgbox(BreedingCenter_Text_WhichPokemonDoYouWant,,SPEAKER_BREEDINGGENE)
+    msgbox(format("Which one of your Pokémon should I work on?"),,SPEAKER_BREEDINGGENE)
     closemessage
 
     special(ChoosePartyMon)
@@ -853,7 +853,7 @@ script BreedingCenter_Script_AskPlayerGene
     goto_if_eq(VAR_0x8004,PARTY_NOTHING_CHOSEN,BreedingCenter_Dialogue_NeverMind)
 
     callnative(BufferMonNicknameOrEggName)
-    msgbox(BreedingCenter_Text_LetsGet,,SPEAKER_BREEDINGGENE)
+    msgbox(format("Let's help {STR_VAR_1} reach their full potential."),,SPEAKER_BREEDINGGENE)
     closemessage
     fadescreen(FADE_TO_BLACK)
     callnative(EditPokemonIndividualValues)
@@ -872,11 +872,11 @@ script BreedingCenter_Script_ChargeForStatChanges
     callnative(Script_GetGeneEditingCostCode)
     if (var(VAR_RESULT) == SILICON_DAYCARE_YES_DISCOUNT_YES_STATS)
     {
-        msgbox(BreedingCenter_Text_GeneEditYesDiscount,MSGBOX_YESNO,SPEAKER_BREEDINGGENE)
+        msgbox(format("Thanks to your affiliation with SharpRise, changing these Individual Values will cost ¥{STR_VAR_2}. Do you still want to do it?"),MSGBOX_YESNO,SPEAKER_BREEDINGGENE)
     }
     else
     {
-        msgbox(BreedingCenter_Text_GeneEditNoDiscount,MSGBOX_YESNO,SPEAKER_BREEDINGGENE)
+        msgbox(format("Without the SharpRise discount, changing these Individual Values will cost ¥{STR_VAR_2}. Do you still want to do it?"),MSGBOX_YESNO,SPEAKER_BREEDINGGENE)
     }
 
     if(var(VAR_RESULT) == YES)
@@ -892,7 +892,7 @@ script BreedingCenter_Script_ChargeForStatChanges
 
 script BreedingCenter_Dialogue_GeneNeverMind
 {
-    msgbox(BreedingCenter_Text_ChangedYourMind,,SPEAKER_BREEDINGGENE)
+    msgbox(format("Changed your mind? You're always welcome back {PLAYER}."),,SPEAKER_BREEDINGGENE)
     closemessage
     release
     end
@@ -906,7 +906,7 @@ script BreedingCenter_Script_RemoveFundsFinishGene
     waitse
     hidemoneybox
     callnative(FinalizeIndividualValueChanges)
-    msgbox(BreedingCenter_Text_YourChangesAreDone,,SPEAKER_BREEDINGEGG)
+    msgbox(format("Your changes are complete. Let me know if you want to change any more of your Pokémon."),,SPEAKER_BREEDINGEGG)
     closemessage
     release
     end
@@ -919,14 +919,14 @@ script BreedingCenter_Script_GeneEditCheckPlayerMoney
     {
         return
     }
-    msgbox(BreedingCenter_Text_YouDontHaveEnough,,SPEAKER_BREEDINGGENE)
+    msgbox(format("You don't have enough funds right now."),,SPEAKER_BREEDINGGENE)
     goto(BreedingCenter_Dialogue_RevertChanges)
 }
 
 script BreedingCenter_Dialogue_RevertChanges
 {
     hidemoneybox
-    msgbox(BreedingCenter_Text_IllRevertTheChanges,,SPEAKER_BREEDINGGENE)
+    msgbox(format("Understood. I'll revert your Pokémon back to its original state."),,SPEAKER_BREEDINGGENE)
     closemessage
     release
     end
@@ -936,7 +936,7 @@ script BreedingCenter_Script_StartGeneTherapy
 {
     lock
     faceplayer
-    msgbox(BreedingCenter_Text_GeneTherapyIntro,,SPEAKER_BREEDINGGENE)
+    msgbox(format("I specialize in Pokémon gene therapy. I help optimize a Pokemon’s Individual Values to make sure each Pokémon is performing at their peak potential."),,SPEAKER_BREEDINGGENE)
     goto(BreedingCenter_Script_AskPlayerGene)
     closemessage
     release

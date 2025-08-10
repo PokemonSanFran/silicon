@@ -56,13 +56,13 @@ script YouRealizeTheyreEvilRight_CallPlayer_Dialogue {
         startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_PHONE)
         setvar(VAR_ARANTRAZ_STATE,KAI_SUMMONED_ARANTRAZ)
         clearflag(FLAG_KAI_CALL_ARANTRAZ)
-        msgbox(gText_YouRealizeTheyreEvilRight_HolyShit,,SPEAKER_ALICIA)
+        msgbox(format("Holy shit. That was intense. Guess I need to think all this over, but something isn't adding up."),,SPEAKER_ALICIA)
 
         call(Common_EventScript_PhoneRinging)
         special(YouRealizeTheyreEvilRight_GetMapForCompletedRestoration)
-        msgbox(gText_YouRealizeTheyreEvilRight_AwesomeJobIn,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("Awesome job in {STR_VAR_1}. I heard all about it, and I'm so happy things are getting off the ground. I heard you got a phone call and disappeared. Everything okay?"),,SPEAKER_KAI_TIDE,,,PHONE_ON)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_TheyDontLove,,SPEAKER_ALICIA,,,PHONE_ON)
+        msgbox(format("SharpRise Capital called me. They don't love our project."),,SPEAKER_ALICIA,,,PHONE_ON)
 
         closemessage
 
@@ -70,24 +70,24 @@ script YouRealizeTheyreEvilRight_CallPlayer_Dialogue {
         delay(30)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_YouSeemSurprised,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("You seem surprised."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_YoureNot,,SPEAKER_ALICIA,,,PHONE_ON)
+        msgbox(format("You're not?"),,SPEAKER_ALICIA,,,PHONE_ON)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_IveBeenTrying,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("I've been trying to tell you the whole time, these guys are ruthless. Cruel, even. Good timing though, I think I can finally explain everything to you."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_WhatDoYouMean,,SPEAKER_ALICIA,,,PHONE_ON)
+        msgbox(format("What do you mean?"),,SPEAKER_ALICIA,,,PHONE_ON)
 
         questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HANG20)
         if (var(VAR_RESULT)){
-            msgbox(gText_YouRealizeTheyreEvilRight_YoullNeedToCross,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+            msgbox(format("I wanna show you but you'll need to cross some water to get here. You know how to use {STR_VAR_1}, right? No? You can learn pretty quickly at the Cresalta Vista beach, and then meet me on Arantraz."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
         } else {
-            msgbox(gText_YouRealizeTheyreEvilRight_IWannaShowYou,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+            msgbox(format("I wanna show you instead. Come to Arantraz."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
         }
     playse(SE_POKENAV_HANG_UP)
         waitse
 
-        msgbox(gText_YouRealizeTheyreEvilRight_IDontKnowIf,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("(I don't know if I can afford to get pulled any deeper into this…)"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
         closemessage
         call(TryAutoSave)
@@ -103,9 +103,9 @@ script YouRealizeTheyreEvilRight_PlayerLandedDialogue {
         waitse
         playse(SE_POKENAV_CALL)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_ImHereWhere,,SPEAKER_ALICIA,,,PHONE_ON)
+        msgbox(format("I'm here! Where are you?"),,SPEAKER_ALICIA,,,PHONE_ON)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_SwimAroundThe,,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("Come swim around the northeast side of the island! You'll see me."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
 
         closemessage
 
@@ -118,7 +118,7 @@ script YouRealizeTheyreEvilRight_PlayerLandedDialogue {
 script YouRealizeTheyreEvilRight_InteractKai {
     lock
         setvar(VAR_ARANTRAZ_STATE,PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT)
-        msgbox(gText_YouRealizeTheyreEvilRight_WelcomeToTheReal,MSGBOX_NPC,SPEAKER_KAI_TIDE)
+        msgbox(format("Welcome to the real Arantraz. I'm going down to the second level, but you should explore here first before coming straight down."),MSGBOX_NPC,SPEAKER_KAI_TIDE)
 
         closemessage
 
@@ -134,28 +134,28 @@ script YouRealizeTheyreEvilRight_InteractKai {
 
 script YouRealizeTheyreEvil_Ghost1_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_A, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost1_Battle_Script)
-        msgbox(gText_YouRealizeTheyreEvilRight_WhileArantraz,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        msgbox(format("While Arantraz was a prison, it was absolutely not a state of the art facility - rather, criminals deemed “dangerous” were thrown into Arantraz with little regard for health, rehabilitation, or even due process of law, with a preponderance of marginalized communities being locked away. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost2_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_B, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost2_Battle_Script)
-        msgbox(gText_YouRealizeTheyreEvilRight_AsThePrisonPopulation,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        msgbox(format("As the prison population grew, pressure mounted both internally and externally in order to demand a better quality of life for the prisoners.  The prison riot that started the occupation of the island came from an out of control guard killing an inmate for a minor violation. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost3_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_C, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost3_Battle_Script)
-        msgbox(gText_YouRealizeTheyreEvilRight_TheInmateWasAlso,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        msgbox(format("The inmate was also a member of Resido's indigenous population, killed on the land that was stolen from their ancestors. The occupation called for the dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land back to its original owners."),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost4_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_D, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost4_Battle_Script)
-        msgbox(gText_YouRealizeTheyreEvilRight_TheProtests,MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
+        msgbox(format("The protests gained national attention and seemed to be gathering interest, particularly with the help of Magnus's support, and pressure mounted on the government to comply. At the height of tension, an earthquake broke out, destroying a large portion of the prison and killing inmates and guards and effectively ending the occupation. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
@@ -190,12 +190,12 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         applymovement(PLAYER,YouRealizeTheyreEvilRight_WalkToGroup)
         waitmovement(0)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_TheChampionHasArrived,,SPEAKER_MAGNUS)
+        msgbox(format("The Champion has arrived! Great to meet you, I'm Magnus, and I'm the leader of the Resido Elite Four. Or, I was. Now I'm not really sure what I do."),,SPEAKER_MAGNUS)
         reveal(REVEAL_MAGNUS)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_NiceToMeetYou,,SPEAKER_ALICIA)
+        msgbox(format("Nice to meet you! …Kai, where are we?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_HasBeenUsing,,SPEAKER_KAI_TIDE)
+        msgbox(format("TheTide has been using Arantraz's abandoned prison as a training ground."),,SPEAKER_KAI_TIDE)
 
         closemessage
 
@@ -203,21 +203,21 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         applymovement(TALA,Common_Movement_ExclamationMark)
         applymovement(MAGNUS,Common_Movement_ExclamationMark)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_WowSuperResourceful,,SPEAKER_MAGNUS)
+        msgbox(format("Wow! Super resourceful. Genius, even."),,SPEAKER_MAGNUS)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_ICanFinallyProve,,SPEAKER_KAI_TIDE)
+        msgbox(format("I can finally prove that SharpRise Capital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_DidYouDragMe,,SPEAKER_ALICIA)
+        msgbox(format("Did you drag me out here to join a terrorist organization? Did you hear ANYTHING I said on the phone?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_YesWaitNo,,SPEAKER_KAI_TIDE)
+        msgbox(format("Yes! Wait, no… No, Yes!"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_DoesntDoAnythingForThis,,SPEAKER_ALICIA)
+        msgbox(format("TheTide doesn't do anything for this region. You're attacking innocent people, trying to destroy buildings - fuck, I absolutely should have turned you in!"),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_ICanProve,,SPEAKER_KAI_TIDE)
+        msgbox(format("{PLAYER}, listen! I can prove that none of that is true."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_How,,SPEAKER_ALICIA)
+        msgbox(format("How?!?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_Look,,SPEAKER_KAI_TIDE)
+        msgbox(format("Look."),,SPEAKER_KAI_TIDE)
 
         closemessage
 
@@ -225,20 +225,20 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         applymovement(MAGNUS,Common_Movement_FaceLeft)
         applymovement(TALA,Common_Movement_FaceUp)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_ThisIsOne,,SPEAKER_KAI_TIDE)
+        msgbox(format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_IHadToGo,,SPEAKER_ALICIA)
+        msgbox(format("Yeah. Charlotte and I had to go down there and defeat them and your goons."),,SPEAKER_ALICIA)
 
-        msgbox(YouRealizeTheyreEvilRight_IBetYouLlThinkDifferentlyAfter,,SPEAKER_KAI_TIDE)
+        msgbox(format("I bet you’ll think differently after you take a closer look at what it’s holding. "),,SPEAKER_KAI_TIDE)
 
-        msgbox(YouRealizeTheyreEvilRight_IReallyDoubtIt,,SPEAKER_ALICIA)
+        msgbox(format("I really doubt it."),,SPEAKER_ALICIA)
 		closemessage
 
 		applymovement(MAGNUS,Common_Movement_FaceLeft)
 		applymovement(PLAYER,Common_Movement_FaceRight)
 		waitmovement(PLAYER)
 
-        msgbox(YouRealizeTheyreEvilRight_PlayerIPromiseItWill,,SPEAKER_MAGNUS)
+        msgbox(format("{PLAYER}, I promise it will be worth your while. Would you just look?"),,SPEAKER_MAGNUS)
 
         fadescreen(FADE_TO_BLACK)
         callnative(ShowGarbodor)
@@ -248,49 +248,49 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
 
 script YouRealizeTheyreEvilRight_GemDiscovery_Dialogue
 {
-        msgbox(YouRealizeTheyreEvilRight_IsThatARock,,SPEAKER_ALICIA)
+        msgbox(format("Wait... is that really a Gem?"),,SPEAKER_ALICIA)
 
-        msgbox(YouRealizeTheyreEvilRight_CloseItsAGem,,SPEAKER_KAI_TIDE)
+        msgbox(format("A Normal Gem to be specific. You've heard of them?"),,SPEAKER_KAI_TIDE)
 
-        msgbox(YouRealizeTheyreEvilRight_WhatNoWayAdelaide,,SPEAKER_ALICIA)
+        msgbox(format("Adelaide gave me one of those after we stopped the SharpRise Stadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!"),,SPEAKER_ALICIA)
 
-        msgbox(YouRealizeTheyreEvilRight_IveHadTheOpportunityToSee,,SPEAKER_MAGNUS)
+        msgbox(format("I’ve had the opportunity to see Gems a few times in my career and I can attest that this one is very real."),,SPEAKER_MAGNUS)
 
-        msgbox(YouRealizeTheyreEvilRight_WhileIWasKeepingAnEye,,SPEAKER_KAI_TIDE)
+        msgbox(format("While I was keeping an eye on things during the SharpRise Stadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe SharpRise  left one of these Gems on it. They’re the only ones who have access to something like this in the region."),,SPEAKER_KAI_TIDE)
 
-        msgbox(YouRealizeTheyreEvilRight_AdelaideConfirmedThat,,SPEAKER_ALICIA)
+        msgbox(format("Adelaide confirmed that when she gave me my Gem. So the only way this Garbador could have one…"),,SPEAKER_ALICIA)
 
-    msgbox(gText_YouRealizeTheyreEvilRight_IsIf,,SPEAKER_TALA)
+    msgbox(format("Is if SharpRise Capital equipped it directly."),,SPEAKER_TALA)
     goto(YouRealizeTheyreEvilRight_Framing_Dialogue)
 }
 
 script YouRealizeTheyreEvilRight_Framing_Dialogue {
         setvar(VAR_ARANTRAZ_STATE,POST_YOU_REALIZE_THEYRE_EVIL_RIGHT)
-        msgbox(gText_YouRealizeTheyreEvilRight_HasBeenFramingYou,,SPEAKER_ALICIA)
+        msgbox(format("Kai… Are you saying SharpRise Capital has been framing you?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_WhyWould,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("That doesn't make sense for SharpRise - they've been so good to me!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_YouAlsoMetUp,,SPEAKER_KAI_TIDE)
+        msgbox(format("{PLAYER}, you also met up with TheTide in Oroland too, right?"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_ButAdaoraSaid,,SPEAKER_ALICIA)
+        msgbox(format("…yeah. But Adaora said that situation was super weird and was trying to track them down."),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_YeahNobodyKnows,,SPEAKER_KAI_TIDE)
+        msgbox(format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpRise Capital has been sending in agents to make us look shitty. Between that and whatever else SharpRise Capital is feeding you, I'm not surprised you feel the way you do."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_WhyWhyDoAll,,SPEAKER_ALICIA)
+        msgbox(format("Why? Why do all this to just to screw with you guys?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_WhatIsHe,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("What is he talking about? SharpRise has spent all this money reshaping the League - doesn't that benefit all Trainers?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney,,SPEAKER_KAI_TIDE)
+        msgbox(format("SharpRise Capital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities. And now that they've had a successful run at it, they're sinking their fingers into even more of Resido - they're not going to stop at some Pokemon League."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_CantArgueWithThat,,SPEAKER_TALA)
+        msgbox(format("Can't argue with that."),,SPEAKER_TALA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_TheirGoals,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Kei-Ying said that SharpRise's goal is to uplift the entire region. They've already managed to change my life with access to all these apps and services - why WOULD they stop with just us? They want to help everybody!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_IJoinedThe,,SPEAKER_KAI_TIDE)
+        msgbox(format("I joined the League Challenge to try to change things from the inside. But now I'm certain that we need external pressure in order to improve things for all of us."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_AndThatsWhyWere,,SPEAKER_TALA)
+        msgbox(format("And that's why we're all here."),,SPEAKER_TALA)
 
-        msgbox(gText_YouRealizeTheyreEvilRight_YepIThinkItsFinally,,SPEAKER_KAI_TIDE)
+        msgbox(format("Yep. I think it's finally time we all come together to expose SharpRise Capital for the assholes that they are, and start to take power back for the people."),,SPEAKER_KAI_TIDE)
 
         closemessage
         goto(YouRealizeTheyreEvilRight_InnerMonologue_Dialogue)
@@ -302,23 +302,23 @@ script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(0)
 
-    msgbox(gText_YouRealizeTheyreEvilRight_LookIKnowThis,,SPEAKER_KAI_TIDE)
+    msgbox(format("Look, I know this is a lot of information to take in. I know you're going to make the right decision..."),,SPEAKER_KAI_TIDE)
     closemessage
 
     fadescreen(FADE_TO_BLACK)
-    msgbox(gText_YouRealizeTheyreEvilRight_ShouldIJoin,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
-    msgbox(gText_YouRealizeTheyreEvilRight_JoiningThemMeansGoingDeeper,,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(gText_YouRealizeTheyreEvilRight_ButTheirCauseIsJust,,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(gText_YouRealizeTheyreEvilRight_ButAtWhatCost,,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(gText_YouRealizeTheyreEvilRight_CantDoIt,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-    msgbox(gText_YouRealizeTheyreEvilRight_MakingTheRightChoice,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Fighting against SharpRise Capital and the government and the government doesn't make any sense! There's no way this is the right path."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(format("They're just asking for trouble. The protests, the hacking, the riots... is that really what I want? Adaora says The Tide doesn't condone violence, but can I even believe her?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("They might think they're right. They do want to protect Resido and make a difference, but this isn't it."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("I've worked so hard to get this far. To become the Champion. I can make a difference as I am! Throwing it all away now doesn't make any sense."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Is The Tide just manipulating me, like they tried with the social media stunt?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     fadescreen(FADE_FROM_BLACK)
     goto(YouRealizeTheyreEvilRight_Confront_Dialogue)
 }
 
 script YouRealizeTheyreEvilRight_Confront_Dialogue{
-    msgbox(gText_YouRealizeTheyreEvilRight_SorryIfThisDisappointsYouAll,,SPEAKER_ALICIA)
+    msgbox(format("I'm sorry if this disappoints you all, but I won't compromise mysel - my values. I'm not going to join you."),,SPEAKER_ALICIA)
     closemessage
     playse(SE_PIN)
     applymovement(MAGNUS,Common_Movement_ExclamationMark)
@@ -327,16 +327,16 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
     waitmovement(KAI)
     applymovement(TALA,Common_Movement_FacePlayer)
     waitmovement(TALA)
-    msgbox(gText_YouRealizeTheyreEvilRight_WaitWhat,,SPEAKER_KAI_TIDE,,EMOTE_SHOCK)
-    msgbox(gText_YouRealizeTheyreEvilRight_WowWasWrong,,SPEAKER_TALA,TAIL_WHISPER,EMOTE_SAD)
-    msgbox(gText_YouRealizeTheyreEvilRight_DontYouUnderstand,,SPEAKER_KAI_TIDE,,EMOTE_ANGRY)
-    msgbox(gText_YouRealizeTheyreEvilRight_JustBecause,,SPEAKER_ALICIA,,EMOTE_ANGRY)
-    msgbox(gText_YouRealizeTheyreEvilRight_CouldntHackIt,,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_ANGRY)
-    msgbox(gText_YouRealizeTheyreEvilRight_TheyreNot,,SPEAKER_MAGNUS)
+    msgbox(format("Wait what? {PLAYER}, you're making a mistake!"),,SPEAKER_KAI_TIDE,,EMOTE_SHOCK)
+    msgbox(format("Wow... Armando was wrong about you after all."),,SPEAKER_TALA,TAIL_WHISPER,EMOTE_SAD)
+    msgbox(format("Don't you understand? You're being used, and they're not going to stop."),,SPEAKER_KAI_TIDE,,EMOTE_ANGRY)
+    msgbox(format("Just because you couldn't hack it doesn't mean the world is against you, Kai!"),,SPEAKER_ALICIA,,EMOTE_ANGRY)
+    msgbox(format("Couldn't hack it? I got second to you, and you had a HUGE head start!"),,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Kai, {PLAYER} will not get it. Its too late."),,SPEAKER_MAGNUS)
     closemessage
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(PLAYER)
-    msgbox(gText_YouRealizeTheyreEvilRight_TheresNothingToGet,,SPEAKER_ALICIA)
+    msgbox(format("I'm not giving up what I have because you guys think SharpRise Capital is some big bad. TheTide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it."),,SPEAKER_ALICIA)
     closemessage
     applymovement(PLAYER,Common_Movement_WalkDown)
         fadeblackandsetremovewarpfadeflag
@@ -349,7 +349,7 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
 script YouRealizeTheyreEvilRight_PreventPlayer_Script{
     if (!flag(FLAG_TIMELINE_TIMETRAVEL)){
         lock
-        msgbox(gText_YouRealizeTheyreEvilRight_ThisIsntWhere,,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("...This isn't where I'm supposed to be."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage
         applymovement(PLAYER,Common_Movement_WalkUp)
         waitmovement(PLAYER)
@@ -366,7 +366,7 @@ script YouRealizeTheyreEvilRight_CantSleep_Script{
 }
 
 script YouRealizeTheyreEvilRight_CantSleep_Dialogue {
-        msgbox(gText_YouRealizeTheyreEvilRight_IsStillWaiting,,SPEAKER_ALICIA)
+        msgbox(format("Kai is still waiting for me at Arantraz…"),,SPEAKER_ALICIA)
 
         closemessage
         release
@@ -382,15 +382,15 @@ script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
 
     if (flag(FLAG_TIMELINE_TIMETRAVEL)){
         lock
-            msgbox(gText_OkayLetsFixIt_WhatTheHell,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-            msgbox(gText_OkayLetsFixIt_WasThatReal,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-            msgbox(gText_OkayLetsFixIt_WhatIfIt,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
-            msgbox(gText_OkayLetsFixIt_IRememberI,,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("What the hell was that? That dream was… insane. What the hell did I eat?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+            msgbox(format("Was that real? I sided with SharpRise Capital and... made things worse? Yeah, that was worse. It was just a dream... but it felt so real!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+            msgbox(format("That regret felt so real though. I was so disappointed. I was so wrong. It was all wrong!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
+            msgbox(format("I remember I yelled at Kai. I told him he couldn't hack it. I called them thugs. And I left. I was disguisting. Is he still there now?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }else{
 
-        msgbox(gText_YouRealizeTheyreEvilRight_ICantBelieveIAlmost,,SPEAKER_ALICIA,TAIL_THOUGHT)
-            msgbox(gText_YouRealizeTheyreEvilRight_AndTheyWantToHelp,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
-            msgbox(gText_YouRealizeTheyreEvilRight_ImGoingToBeOn,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+        msgbox(format("I can't believe I almost fell for that stunt. Me? Siding with TheTide? After everything I've been through? And all that stuff, just because the battling is a little different?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("And they claim they want to do better for region? SharpRise Capital is making jobs! And bringing people like me! And stopping terrorists."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
+            msgbox(format("I'm going to be on the right side of history."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     }
 closemessage
         call(TryAutoSave)

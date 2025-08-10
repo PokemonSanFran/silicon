@@ -15,9 +15,9 @@ script Quest_HodouCityTunnels_HideTreasure_Script{
 script Quest_HodouCityTunnels_Event_Script{
     returnqueststate(QUEST_HODOUTUNNELS)
     switch(var(VAR_RESULT)){
-        case QUEST_MENU_COMPLETE_QUEST: msgbox(gText_Quest_HodouCityTunnels_ICannotThank,MSGBOX_NPC,SPEAKER_DEFAULT)
+        case QUEST_MENU_COMPLETE_QUEST: msgbox(format("I cannot thank you enough."),MSGBOX_NPC,SPEAKER_DEFAULT)
         case QUEST_MENU_SET_ACTIVE: goto(Quest_HodouCityTunnels_Active_Event_Script)
-        default: msgbox(gText_HodouCity_IMissTheOld,MSGBOX_NPC,SPEAKER_DEFAULT)
+        default: msgbox(format("I miss the old days. I get so nostalgic for my childhood...I loved growing up in these streets."),MSGBOX_NPC,SPEAKER_DEFAULT)
         }
             release
             end
@@ -34,9 +34,9 @@ script Quest_HodouCityTunnels_Active_Event_Script{
 
 script Quest_HodouCityTunnels_Intro_Dialogue{
     lock
-    msgbox(gText_Quest_HodouCityTunnels_OhoHowCanIHelp,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Oho, how can I help you, lad?"),MSGBOX_NPC,SPEAKER_DEFAULT)
 
-    msgbox(gText_Quest_HodouCityTunnels_IHeardOnlineThatYou,MSGBOX_NPC,SPEAKER_ALICIA)
+    msgbox(format("I heard there's a secret treasure hidden in this town. Do you know anything about that?"),MSGBOX_NPC,SPEAKER_ALICIA)
 
     addvar(VAR_QUEST_HODOUTUNNELS,1)
     goto(Quest_HodouCityTunnels_BadgeCheck_Dialogue)
@@ -49,7 +49,7 @@ script Quest_HodouCityTunnels_BadgeCheck_Dialogue{
     goto(Quest_HodouCityTunnels_RevealSecret_Dialogue)
     }
     else {
-        msgbox(gText_Quest_HodouCityTunnels_YoureNotStrongEnough,MSGBOX_NPC,SPEAKER_DEFAULT)
+        msgbox(format("You're not strong enough for this treasure. Come back after you've got 4 badges."),MSGBOX_NPC,SPEAKER_DEFAULT)
     }
     release
     end
@@ -57,7 +57,7 @@ script Quest_HodouCityTunnels_BadgeCheck_Dialogue{
 
 script Quest_HodouCityTunnels_RevealSecret_Dialogue{
     addvar(VAR_QUEST_HODOUTUNNELS,1)
-    msgbox(gText_Quest_HodouCityTunnels_HmmYouLookStrong,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Hmm, you look strong enough for the task."),MSGBOX_NPC,SPEAKER_DEFAULT)
     closemessage
 
     applymovement(ELDEST_OUTSIDE,Common_Movement_FaceAwayPlayer)
@@ -66,7 +66,7 @@ script Quest_HodouCityTunnels_RevealSecret_Dialogue{
 
     applymovement(ELDEST_OUTSIDE,Common_Movement_FacePlayer)
     waitmovement(ELDEST_OUTSIDE)
-    msgbox(gText_Quest_HodouCityTunnels_YouveHeardCorrectly,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("You've heard correctly. There are secret tunnels under the city, and hidden in them is a treasure greater than anybody knows. Of course, I'm too old to go get it now. Find it, and I'll split it with you. The entrance is guarded by a red scroll, but I don't remember where that is..."),MSGBOX_NPC,SPEAKER_DEFAULT)
     closemessage
     release
     end
@@ -76,7 +76,7 @@ script Quest_HodouCityTunnels_FirstScrollWarp_Script{
     lock
     call(HodouCity_Racisthouse_ScrollNoWarp_Dialogue)
 
-    msgbox(gText_Quest_HodouCityTunnels_WaitIsThis,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+    msgbox(format("Wait, is this the red scroll that guy was talking about...?"),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
 
 
     applymovement(PLAYER,Quest_HodouCityTunnels_PushScroll_Movement)
@@ -84,24 +84,24 @@ script Quest_HodouCityTunnels_FirstScrollWarp_Script{
     playse(SE_PIN)
     waitmovement(PLAYER)
 
-    msgbox(gText_Quest_HodouCityTunnels_TheresNoWall,MSGBOX_DEFAULT)
+    msgbox(format("There's no wall behind the scroll!"),MSGBOX_DEFAULT)
     addvar(VAR_QUEST_HODOUTUNNELS,1)
     goto(HodouCity_Racisthouse_ScrollWarp_Script)
 }
 
 script Quest_HodouCityTunnels_WaitingScroll_Dialogue{
-    msgbox(gText_Quest_HodouCityTunnels_HaveYou,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Have you had any luck finding the red scroll?"),MSGBOX_NPC,SPEAKER_DEFAULT)
     end
 }
 
 script Quest_HodouCityTunnels_Treasure_Script{
     lock
-    msgbox(gText_Quest_HodouCityTunnels_ThereIsAnOrnate,MSGBOX_DEFAULT)
+    msgbox(format("This is an ornate box on the ground. There is clearly something inside, but it is locked."),MSGBOX_DEFAULT)
 
-    msgbox(gText_Quest_HodouCityTunnels_ThisMustBe,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+    msgbox(format("This must be the treasure! Ugh, do I have to find a key too?"),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
 
 
-    msgbox(gText_Quest_HodouCityTunnels_ThatWontBe,MSGBOX_DEFAULT)
+    msgbox(format("That won't be neccesary."),MSGBOX_DEFAULT)
     closemessage
 
     clearflag(FLAG_TEMP_2)
@@ -121,12 +121,12 @@ script Quest_HodouCityTunnels_Treasure_Script{
     applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_WalkToPlayer_Movement)
     waitmovement(ELDEST_TUNNEL)
 
-    msgbox(gText_Quest_HodouCityTunnels_ThankYouFor,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Thank you for dealing with those thugs. I was able to follow you inside."),MSGBOX_NPC,SPEAKER_DEFAULT)
 
-    msgbox(gText_Quest_HodouCityTunnels_NoProblemThisBox,MSGBOX_NPC,SPEAKER_ALICIA)
+    msgbox(format("No problem. This box is locked though. We have to find the key."),MSGBOX_NPC,SPEAKER_ALICIA)
 
 
-    msgbox(gText_Quest_HodouCityTunnels_IMayHaveMislead,MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("I may have mislead you. I'm sorry."),MSGBOX_NPC,SPEAKER_DEFAULT)
     closemessage
 
     applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_TakeTreasure_Movement)
@@ -144,18 +144,18 @@ script Quest_HodouCityTunnels_Treasure_Script{
     applymovement(PLAYER,Common_Movement_ExclamationMark)
     waitmovement(PLAYER)
 
-    msgbox(gText_Quest_HodouCityTunnels_YouHad,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+    msgbox(format("You had the key the entire time?"),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
 
 
     applymovement(ELDEST_TUNNEL,Common_Movement_FaceLeft)
 
-    msgbox(gText_Quest_HodouCityTunnels_IUsedToLiveHere,MSGBOX_DEFAULT,SPEAKER_DEFAULT)
+    msgbox(format("I used to live here. I didn't dig this tunnel though - it was always here. I used it for storage away from my wife, haha! When I was drafted many years ago, I lost my home and while I was gone, I lost my family. When I returned, my home had been taken, and access to the tunnel was gone. My treasure is simple... photos of my family. Its all I have left of them."),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
     closemessage
 
     applymovement(ELDEST_TUNNEL,Common_Movement_FaceLeft)
     waitmovement(ELDEST_TUNNEL)
 
-    msgbox(gText_Quest_HodouCityTunnels_IAsked,MSGBOX_DEFAULT,SPEAKER_DEFAULT)
+    msgbox(format("I asked one of the children in town to post a story about hidden treasure, hoping somebody strong could help me get in here. I tried to reason with these thugs, but as you know, they don't like to listen. Your kindness will not be forgotten. Thank you so much, young Trainer."),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
     closemessage
     applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_LeaveTunnel_Movement)
     applymovement(PLAYER,Common_Movement_FaceDown)

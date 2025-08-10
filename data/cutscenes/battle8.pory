@@ -55,7 +55,7 @@ script Battle8_InteractKai
 
 script Battle8_ExplainAttraction_Dialogue
 {
-    msgbox(gText_Battle8_YouKnowIWasInGoodMood,MSGBOX_DEFAULT,SPEAKER_KAI)
+    msgbox(format("You know, I was in a good mood after breaking S Rank, and now all of a sudden…"),MSGBOX_DEFAULT,SPEAKER_KAI)
 
         if (var(VAR_TEMP_0) == 26){
             closemessage
@@ -63,13 +63,13 @@ script Battle8_ExplainAttraction_Dialogue
                 waitmovement(0)
         }
 
-    msgbox(gText_Battle8_GreatToSeeYouToo,,SPEAKER_ALICIA)
+    msgbox(format("Great to see you too. What rank thing are you talking about?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_Battle8_PrimaryAttraction,MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("One of the big attractions of Resido - the Seven Sisters Challenge. It used to be a lot more popular when 1v1 battles were a novelty- before the corporations declared it as the official League format."),MSGBOX_DEFAULT,SPEAKER_KAI)
 
-        msgbox(gText_Battle8_SoWhatsTheChallenge,,SPEAKER_ALICIA)
+        msgbox(format("So, what's the challenge? And how do you get an S Rank?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_Battle8_TheSistersAreExperts,MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("The sisters are experts in 1v1, and you've got to beat all of them, in a row, in as few turns as possible. I've heard a rumor that Magnus got an SS Rank once, but those guys are on a different level… but you're not even close to that."),MSGBOX_DEFAULT,SPEAKER_KAI)
         closemessage
 
         startmenu_savescreen
@@ -81,7 +81,7 @@ script Battle8_StartBattle_Script
 
     lock
         faceplayer
-        msgbox(gText_Battle8_YouTalkALot,,SPEAKER_ALICIA)
+        msgbox(format("You talk a lot of shit for somebody that's never beaten me."),,SPEAKER_ALICIA)
         closemessage
 
 
@@ -96,14 +96,14 @@ script Battle8_KaiDefeated_Dialogue
         setvar(VAR_BATTLE_8_STATE,DEFEATED_KAI_PINTILLONHOUSE)
         addvar(VAR_STORYLINE_STATE,1)
 
-        msgbox(gText_Battle8_YouKnowItDoesnt,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("You know, it doesn't have to be like this. I'm not out to get you."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-        msgbox(gText_Battle8_YeahThatsPart,MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("Yeah, that's part of the problem. Your ignorance of the situation and your skill almost makes it worse."),MSGBOX_DEFAULT,SPEAKER_KAI)
 
-        msgbox(gText_Battle8_WhatSituation,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("What situation? I'm just doing the Gym Challenge. Just like you."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-        msgbox(gText_Battle8_NotEngaging,MSGBOX_DEFAULT,SPEAKER_KAI)
-        msgbox(gText_Battle8_TheRegion,MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("You're collecting badges on this highly curated route, sure, but you're not engaging with the region - my home - beyond that."),MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("This region has rich with so much culture that you won't see unless you dig deeper. If you actually care, the Seven Sisters Challenge is a good start."),MSGBOX_DEFAULT,SPEAKER_KAI)
         closemessage
 
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)

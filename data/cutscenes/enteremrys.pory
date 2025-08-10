@@ -60,13 +60,13 @@ script Emrys_Event_Script {
 
 script EnterEmrys_MuseumArrangement_Dialogue {
     setvar(VAR_GYM_3_STATE,GYM_LEADER_ON_BATTLEFIELD)
-    msgbox(gText_EnterEmrys_IWasThinking, MSGBOX_NPC,SPEAKER_EMRYS)
+    msgbox(format("I was thinking about the arrangement of the museum. Museums tend to organize through etic categories, but I always wonder... how far off are we from their emic counterparts...? Sorry, I'm Emrys, Chief of the Perlacia City Gym!"), MSGBOX_NPC,SPEAKER_EMRYS)
     reveal(REVEAL_EMRYS)
     applymovement(EMRYS, EmrysLookAround_Movement)
     waitmovement(0)
-    msgbox(gText_EnterEmrys_HasYourVisit,,SPEAKER_EMRYS)
-        msgbox(gText_EnterEmrys_UhYup,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(gText_EnterEmrys_ICanHearTheOrre,,SPEAKER_EMRYS)
+    msgbox(format("Has your visit been a positive time investment? There was a ton of qualitative research into curating the best possible experience for both patrons and challengers."),,SPEAKER_EMRYS)
+        msgbox(format("Uh... yup. Yeah. It's cool."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("I can hear the Orre in you. Enchanting."),,SPEAKER_EMRYS)
     setvar(VAR_GYM_3_STATE,GYM_SAVE_BEFORE_LEADER)
         startmenu_savescreen
     goto(EnterEmrys_StartBattle_Script)
@@ -83,7 +83,7 @@ script EnterEmrys_Defeated_Script {
     setvar(VAR_EMRYS_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)
     call(WowYoureStrong_CheckCutsceneScript)
-    msgbox(gText_EnterEmrys_WowIllReallyNeed,,SPEAKER_EMRYS)
+    msgbox(format("Wow, I'll really need to re-think my tactical core values. Awesome battle, {PLAYER}!"),,SPEAKER_EMRYS)
     closemessage
     call(EnterEmrys_ExplainBuzzr_Dialogue)
     tweetfanfare(TWEET_GYM_PERLACIA_CITY_BADGE,MUS_OBTAIN_BADGE)
@@ -102,12 +102,12 @@ script EnterEmrys_ExplainBuzzr_Dialogue {
         return
     }
 
-    msgbox(gText_EnterEmrys_LetUsRecord,,SPEAKER_EMRYS)
-    msgbox(gText_EnterBelen_WhatsBuzzr,,SPEAKER_ALICIA)
-    msgbox(gText_EnterEmrys_NoWonderYouHavent,,SPEAKER_EMRYS)
-    msgbox(gText_EnterEmrys_BuzzrIs,,SPEAKER_EMRYS)
+    msgbox(format("Let us record this achievement for the masses on Buzzr to see!"),,SPEAKER_EMRYS)
+    msgbox(format("What's a tweet?"),,SPEAKER_ALICIA)
+    msgbox(format("No wonder you haven't properly accimlated!"),,SPEAKER_EMRYS)
+    msgbox(format("Buzzr is a medium by which one can tap into the zzeitgiest of the region - everybody can use their phones to write history! Your spoils of victory in Resido's Pokémon League are posts from the Gym Leader.When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_EMRYS)
     call(EnterBelen_DownloadBuzzr_Dialogue)
-    msgbox(gText_EnterEmrys_AndNowFor,,SPEAKER_EMRYS)
+    msgbox(format("And now, a record from the beginning of the {PLAYER} empire!"),,SPEAKER_EMRYS)
     closemessage
     return
 }
@@ -116,14 +116,14 @@ script EnterEmrys_PostBattle_Dialogue {
 	bufferitemname(STR_VAR_1,ITEM_TM03)
 	buffermovename(STR_VAR_2,MOVE_ICE_SHARD)
     setvar(VAR_GYM_3_STATE,GYM_EXPLAINED_BADGE_AND_TM)
-    msgbox(gText_EnterEmrys_ThatPositiveSanction, MSGBOX_NPC,SPEAKER_EMRYS)
+    msgbox(format("{STR_VAR_1} is like a shaman in your pocket and will teach {STR_VAR_2}."), MSGBOX_NPC,SPEAKER_EMRYS)
         closemessage
     releaseall
     end
 }
 
 script EnterEmrys_PostBattle_Dialogue2 {
-    msgbox(gText_EnterEmrys_WellNeedToBattle, MSGBOX_NPC,SPEAKER_EMRYS)
+    msgbox(format("We'll need to battle again in the future. I want to increase our data set - a sample size of one isn't enough for any conclusions about our relative skill levels!"), MSGBOX_NPC,SPEAKER_EMRYS)
         closemessage
     releaseall
     end

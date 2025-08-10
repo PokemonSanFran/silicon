@@ -21,17 +21,17 @@ script BeingChampionIsHard_PostTimeSkip {
         applymovement(PLAYER,BeingChampionIsHard_WalkToOliver)
         waitmovement(0)
 
-        msgbox(gText_BeingChampionIsHard_SighGoodMorning,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Good morning Oliver."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_BeingChampionIsHard_GoodMorningChampion,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("Good morning Champion {PLAYER}."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
 
-        msgbox(gText_BeingChampionIsHard_ItsAlmostBeenAMonth,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("You've been calling me that for a month since I won… doesn't that get old?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_BeingChampionIsHard_OfCourseNot,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("Of course not. You've earned it! Now on the docket for today…"),MSGBOX_DEFAULT,SPEAKER_OLIVER)
 
-        msgbox(gText_BeingChampionIsHard_PleaseLetItBe,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
+        msgbox(format("(Let it be an easy day. I swear it's been six interviews a day, an exhibition on every news network… being officially sponsored is great, but shit, I need a day off!)"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
 
-        msgbox(gText_BeingChampionIsHard_YouveActuallyGotNothing,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("You've actually got nothing."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
         closemessage
 
 
@@ -39,23 +39,23 @@ script BeingChampionIsHard_PostTimeSkip {
         applymovement(PLAYER,Common_Movement_ExclamationMark)
         waitmovement(0)
 
-        msgbox(gText_BeingChampionIsHard_YouWereStarting,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("You were starting to look a little ragged, and a few sponsors complained. So we're giving you a few days off."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
 
-        msgbox(gText_BeingChampionIsHard_YouCouldTell,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_SWEAT)
+        msgbox(format("You could tell?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_SWEAT)
 
-        msgbox(gText_BeingChampionIsHard_ThisIsOurFirst,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("It's fine. This is our first time doing it, so perhaps we haven't really figured out striking a balance yet. "),MSGBOX_DEFAULT,SPEAKER_OLIVER)
 
-        msgbox(gText_BeingChampionIsHard_WoWWhatToDo,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Wow, what to do with my days off…"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_BeingChampionIsHard_YouShouldGoTo,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("You should go to ZenzuIsland! The construction on NongyuBridge has finally been completed, and its a fun place to sightsee."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
 
-        msgbox(gText_BeingChampionIsHard_ThatsWhereTheyFilm,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("That's where they film movies, right?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_BeingChampionIsHard_ThereAlsoUsed,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("Correct. There also used to be a Gym there, but it's been decommissioned."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
 
-        msgbox(gText_BeingChampionIsHard_SoundsLikeItll,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_HAPPY)
+        msgbox(format("Sounds like it'll be cool. Thanks!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_HAPPY)
 
-        msgbox(gText_BeingChampionIsHard_ThePleasureIsAllOurs,MSGBOX_DEFAULT,SPEAKER_OLIVER)
+        msgbox(format("My pleasure. I'll be checking in, but don't hesitate to reach out."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
         closemessage
 
 

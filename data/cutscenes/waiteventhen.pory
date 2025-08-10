@@ -75,9 +75,9 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
         applymovement(MAGNUS,WaitEvenThen_WalkToSleepingD)
         waitmovement(MAGNUS)
 
-        msgbox(gText_WaitEvenThen_IFoundTheAccess,,SPEAKER_MAGNUS)
+        msgbox(format("I found the access commands. I think I can turn this off, but I’m certain that it's going to attack us when we do."),,SPEAKER_MAGNUS)
 
-        msgbox(gText_WaitEvenThen_AndICanHandle,,SPEAKER_KAI_TIDE)
+        msgbox(format("{PLAYER} and I can handle it. Let it rip!"),,SPEAKER_KAI_TIDE)
 
         closemessage
 
@@ -97,7 +97,7 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
         waitmoncry
         setvar(VAR_PARC_STATE,SAVE_BEFORE_DYNAMAX)
 
-        msgbox(gText_IGuessWeShouldBeNiceNow_Roar,MSGBOX_AUTOCLOSE)
+        msgbox(format("ROAR"),MSGBOX_AUTOCLOSE)
 
         setobjectxy(KAI,34,6)
         setobjectxyperm(KAI,34,6)
@@ -128,7 +128,7 @@ script WaitEvenThen_BossEncounter_Script {
                 goto(WaitEvenThen_ClearBossPokemon_Script)
     setwildbattle(SPECIES_EXCADRILL,70,ITEM_MUSCLE_BAND,SPECIES_NONE)
         playmoncry(SPECIES_EXCADRILL,CRY_MODE_ENCOUNTER)
-        msgbox(gText_IGuessWeShouldBeNiceNow_Roar,MSGBOX_AUTOCLOSE)
+        msgbox(format("ROAR"),MSGBOX_AUTOCLOSE)
         delay(40)
         waitmoncry
         setflag(FLAG_SYS_CTRL_OBJ_DELETE)
@@ -167,11 +167,11 @@ script WaitEvenThen_PostBossDialogue {
         applymovement(KAI,Common_Movement_FaceDown)
         applymovement(MAGNUS,Common_Movement_FaceDown)
 
-        msgbox(gText_WaitEvenThen_DamnAPowerSpot,,SPEAKER_KAI_TIDE)
+        msgbox(format("Damn, a Power Spot, all the way out here?"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_WaitEvenThen_AndTheGovernment,,SPEAKER_MAGNUS)
+        msgbox(format("Between SharpRise Capital and the government, I guess nothing is off limits."),,SPEAKER_MAGNUS)
 
-        msgbox(gText_WaitEvenThen_IllHaveSomeOther,,SPEAKER_ADAORA)
+        msgbox(format("I’ll have some other TheTide members clear out the rest of the trapped Pokémon… Let’s go back to HalaiIsland."),,SPEAKER_ADAORA)
 
         closemessage
 
@@ -182,7 +182,7 @@ script WaitEvenThen_PostBossDialogue {
         applymovement(KAI,Common_Movement_FaceLeft)
         applymovement(PLAYER,Common_Movement_FaceRight)
 
-        msgbox(gText_WaitEvenThen_ComingWithMe,MSGBOX_YESNO,,SPEAKER_KAI_TIDE)
+        msgbox(format("Coming with me, {PLAYER}?"),MSGBOX_YESNO,,SPEAKER_KAI_TIDE)
 
         closemessage
 
@@ -191,7 +191,7 @@ script WaitEvenThen_PostBossDialogue {
             warp(MAP_HALAI_ISLAND,255,34,13)
                 end
         }else {
-                msgbox(gText_WaitEvenThen_MeetUsIn,,SPEAKER_KAI_TIDE)
+                msgbox(format("Meet us in the center of town, okay?"),,SPEAKER_KAI_TIDE)
                 closemessage
 
                 applymovement(KAI,WaitEvenThen_WalkAwayFromPlayer)

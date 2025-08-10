@@ -6,7 +6,7 @@ const FLAG_HIDE_TALA = FLAG_TEMP_2
 script TheStorySoFar_ExplainExhibit_Dialogue {
     lock
         call(ResetArantrazExhibit_Script)
-        msgbox(gText_TheStorySoFar_WelcomeToExhibit,,SPEAKER_ATTENDANT)
+        msgbox(format("Welcome to the Arantraz Exhibit! If you're looking to learn about the island's history and culture, you'll need to complete our challenge! Across the island, there are six audio spots. Stepping on an audio spot will teach you some history, but you'll have the defeat the Trainer guarding it. If you can defeat all six Trainers without leaving the park, you'll win a prize! If you leave, you'll need to start the challenge over again."),,SPEAKER_ATTENDANT)
         closemessage
         applymovement(PLAYER,Common_Movement_WalkUp)
         waitmovement(PLAYER)
@@ -45,21 +45,21 @@ script TheStorySoFar_CheckNumberDefeated_Script {
         if (var(VAR_RESULT) > 5){
             goto(TheStorySoFar_AwardPlayer_Script)
         }
-        msgbox(gText_TheStorySoFar_YoureNotQuiteDone,,SPEAKER_ATTENDANT)
+        msgbox(format("You're not quite done."),,SPEAKER_ATTENDANT)
 
         switch (var(VAR_RESULT)) {
-            case 0: msgbox(gText_TheStorySoFar_YouNeedToDefeat6,,SPEAKER_ATTENDANT)
-            case 1: msgbox(gText_TheStorySoFar_YouNeedToDefeat5,,SPEAKER_ATTENDANT)
-            case 2: msgbox(gText_TheStorySoFar_YouNeedToDefeat4,,SPEAKER_ATTENDANT)
-            case 3: msgbox(gText_TheStorySoFar_YouNeedToDefeat3,,SPEAKER_ATTENDANT)
-            case 4: msgbox(gText_TheStorySoFar_YouNeedToDefeat2,,SPEAKER_ATTENDANT)
-            case 5: msgbox(gText_TheStorySoFar_YouNeedToDefeat1,,SPEAKER_ATTENDANT)
+            case 0: msgbox(format("You need to defeat six more staff members without leaving to complete the challenge."),,SPEAKER_ATTENDANT)
+            case 1: msgbox(format("You need to defeat five more staff members without leaving to complete the challenge."),,SPEAKER_ATTENDANT)
+            case 2: msgbox(format("You need to defeat four more staff members without leaving to complete the challenge."),,SPEAKER_ATTENDANT)
+            case 3: msgbox(format("You need to defeat three more staff members without leaving to complete the challenge."),,SPEAKER_ATTENDANT)
+            case 4: msgbox(format("You need to defeat two more staff members without leaving to complete the challenge."),,SPEAKER_ATTENDANT)
+            case 5: msgbox(format("You need to defeat one more staff member without leaving to complete the challenge."),,SPEAKER_ATTENDANT)
         }
 
     //If player is standing to leave, and not talking to the attendant
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
         if (var(VAR_TEMP_0) == 37 && var(VAR_TEMP_1) == 60){
-            msgbox(gText_TheStorySoFar_AreYouSure,MSGBOX_YESNO,SPEAKER_ATTENDANT)
+            msgbox(format("Are you sure you want to leave?"),MSGBOX_YESNO,SPEAKER_ATTENDANT)
                 if (var(VAR_RESULT) == NO) {
                     applymovement(PLAYER,Common_Movement_WalkUp)
                 } else {
@@ -76,7 +76,7 @@ script TheStorySoFar_CheckNumberDefeated_Script {
 script TheStorySoFar_AwardPlayer_Script {
         setvar(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_REWARD)
         setvar(VAR_ARANTRAZ_STATE,FIRST_ARRIVED_ARANTRAZ)
-        msgbox(gText_TheStorySoFar_ExcellentWork,,SPEAKER_ATTENDANT)
+        msgbox(format("Excellent work! For completing the challenge, here is your prize!"),,SPEAKER_ATTENDANT)
         giveitem(ITEM_MACHO_BRACE,1)
         closemessage
         goto(YoungPadawan_Intro_Dialogue)
@@ -86,7 +86,7 @@ script TheStorySoFar_AwardPlayer_Script {
 
 script TheStorySoFar_Congratulate_Dialogue {
     lock
-        msgbox(gText_TheStorySoFar_WeHopeYouReturn,,SPEAKER_ATTENDANT)
+        msgbox(format("Congratulations! We hope you return for more training!"),,SPEAKER_ATTENDANT)
         closemessage
         release
         end
@@ -94,14 +94,14 @@ script TheStorySoFar_Congratulate_Dialogue {
 
 script TheStorySoFar_StartBattle1_Script {
     trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_A,gText_TheStorySoFar_IHopeYouDont,gText_TheStorySoFar_SlowDown, TheStorySoFar_ReadSign1_Dialogue, NO_MUSIC)
-        msgbox(gText_TheStorySoFar_DontForgetToStop,MSGBOX_AUTOCLOSE,SPEAKER_MACK)
+        msgbox(format("Don't forget to stop and smell the adelaides."),MSGBOX_AUTOCLOSE,SPEAKER_MACK)
 }
 
 script TheStorySoFar_ReadSign1_Dialogue {
     special(CheckNumArantrazExhibitDefeated)
     startcutscene(JUMPPLAYER_THESTORYSOFAR_A)
-    msgbox(gText_TheStorySoFar_SpeakerStarted)
-    msgbox(gText_TheStorySoFar_OriginallyBuiltAsAPrison,MSGBOX_SIGN,,SPEAKER_SPEAKER)
+    msgbox(format("The speaker beneath your feet starting talking!"))
+    msgbox(format("Arantraz was originally built as a prison for Resido's most dangerous criminals. Arantraz Prison was nationally praised for its state of the art facilities, forward thinking approach to rehabilitation, and no escape attempts."),MSGBOX_SIGN,,SPEAKER_SPEAKER)
     call(TryAutoSave)
     endcutscene
 }
@@ -109,70 +109,70 @@ script TheStorySoFar_ReadSign1_Dialogue {
 
 script TheStorySoFar_StartBattle2_Script {
     trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_B,gText_TheStorySoFar_IThinkDefense,gText_TheStorySoFar_NotStrongEnough,TheStorySoFar_ReadSign2_Dialogue, NO_MUSIC)
-        msgbox(gText_TheStorySoFar_TheBestOffense,MSGBOX_AUTOCLOSE,SPEAKER_TYZONN)
+        msgbox(format("The best offense is the kind that gets stronger with time."),MSGBOX_AUTOCLOSE,SPEAKER_TYZONN)
 }
 
 script TheStorySoFar_ReadSign2_Dialogue {
     special(CheckNumArantrazExhibitDefeated)
     startcutscene(JUMPPLAYER_THESTORYSOFAR_B)
-    msgbox(gText_TheStorySoFar_SpeakerStarted)
-    msgbox(gText_TheStorySoFar_TheCriminalUnderbelly,MSGBOX_SIGN,SPEAKER_SPEAKER)
+    msgbox(format("The speaker beneath your feet starting talking!"))
+    msgbox(format("The Resido criminal underbelly, using agents within the prison, staged a prison riot. The agents took guards hostage, and demanded that the government turn the island over to the prisoners. This occupation lasted for years, and the demands of the prisoners grew more unreasonable as time went on."),MSGBOX_SIGN,SPEAKER_SPEAKER)
     call(TryAutoSave)
     endcutscene
 }
 
 script TheStorySoFar_StartBattle3_Script {
     trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_C,gText_TheStorySoFar_TheresSomethingSpecial,gText_TheStorySoFar_ImNotSpecial,TheStorySoFar_ReadSign3_Dialogue, NO_MUSIC)
-        msgbox(gText_TheStorySoFar_ItsHardToDoAnything,MSGBOX_AUTOCLOSE,SPEAKER_WILL2)
+        msgbox(format("It's hard to do anything meaningful on your own. We're made to work together!"),MSGBOX_AUTOCLOSE,SPEAKER_WILL2)
 }
 
 script TheStorySoFar_ReadSign3_Dialogue {
     special(CheckNumArantrazExhibitDefeated)
     startcutscene(JUMPPLAYER_THESTORYSOFAR_C)
-    msgbox(gText_TheStorySoFar_SpeakerStarted)
-    msgbox(gText_TheStorySoFar_ThePrisonersBeganToTurn,MSGBOX_SIGN,SPEAKER_SPEAKER)
+    msgbox(format("The speaker beneath your feet starting talking!"))
+    msgbox(format("The prisoners began to turn to the citizens of the region for support. One of their most vocal allies was Magnus, the strongest member of the Resido Elite Four. Magnus organized public rallies and marches, demanding for the release of the prisoners into society, citing the need for a different rehabilitation approach."),MSGBOX_SIGN,SPEAKER_SPEAKER)
     call(TryAutoSave)
     endcutscene
 }
 
 script TheStorySoFar_StartBattle4_Script {
     trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_D,gText_TheStorySoFar_PhysicallyDefensiveMasterpiece,gText_TheStorySoFar_ButLikeTheShip,TheStorySoFar_ReadSign4_Dialogue,NO_MUSIC)
-        msgbox(gText_TheStorySoFar_HumansWillAlwaysFind,MSGBOX_AUTOCLOSE,,SPEAKER_RONNY)
+        msgbox(format("Humans will always find a way to ruin perfection."),MSGBOX_AUTOCLOSE,,SPEAKER_RONNY)
 }
 
 script TheStorySoFar_ReadSign4_Dialogue {
     special(CheckNumArantrazExhibitDefeated)
     startcutscene(JUMPPLAYER_THESTORYSOFAR_D)
-    msgbox(gText_TheStorySoFar_SpeakerStarted)
-    msgbox(gText_TheStorySoFar_AsTensionsBetweenThePrisoners,MSGBOX_SIGN,SPEAKER_SPEAKER)
+    msgbox(format("The speaker beneath your feet starting talking!"))
+    msgbox(format("As tensions between the prisoners, their sympathizers, and the government reached a fever pitch, disaster suddenly struck. An unprecedented earthquake ripped through the eastern seaboard of the region, destroying the structure of the prison. Hundreds were injured, and many were killed."),MSGBOX_SIGN,SPEAKER_SPEAKER)
     call(TryAutoSave)
     endcutscene
 }
 
 script TheStorySoFar_StartBattle5_Script {
     trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_E,gText_TheStorySoFar_BrokenBonesHealEasily,gText_TheStorySoFar_SomePeopleNeverRecover,TheStorySoFar_ReadSign5_Dialogue,NO_MUSIC)
-        msgbox(gText_TheStorySoFar_MakingSureToTakeCare,MSGBOX_AUTOCLOSE,,SPEAKER_DAX)
+        msgbox(format("Making sure to take care of your soul is important!"),MSGBOX_AUTOCLOSE,,SPEAKER_DAX)
 }
 
 script TheStorySoFar_ReadSign5_Dialogue {
     special(CheckNumArantrazExhibitDefeated)
     startcutscene(JUMPPLAYER_THESTORYSOFAR_E)
-    msgbox(gText_TheStorySoFar_SpeakerStarted)
-    msgbox(gText_TheStorySoFar_TheNaturalDisasterLeft,MSGBOX_SIGN,SPEAKER_SPEAKER)
+    msgbox(format("The speaker beneath your feet starting talking!"))
+    msgbox(format("The natural disaster left the prisoners broken and defeated, and they quickly surrendered. The prisoners were charged with conspiracy and instigation, seperated, and sent to different prisons around the nation. Arantraz was shut down."),MSGBOX_SIGN,SPEAKER_SPEAKER)
     call(TryAutoSave)
     endcutscene
 }
 
 script TheStorySoFar_StartBattle6_Script {
     trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_F,gText_TheStorySoFar_HowToughAreYou,gText_TheStorySoFar_TurnsOutPrettyTough,TheStorySoFar_ReadSign6_Dialogue,NO_MUSIC)
-        msgbox(gText_TheStorySoFar_IHearVoicesStanding,MSGBOX_AUTOCLOSE,,SPEAKER_BRENNAN)
+        msgbox(format("Sometimes, I hear voices standing here all day."),MSGBOX_AUTOCLOSE,,SPEAKER_BRENNAN)
 }
 
 script TheStorySoFar_ReadSign6_Dialogue {
     special(CheckNumArantrazExhibitDefeated)
     startcutscene(JUMPPLAYER_THESTORYSOFAR_F)
-    msgbox(gText_TheStorySoFar_SpeakerStarted)
-    msgbox(gText_TheStorySoFar_ParksAndRecreation,MSGBOX_SIGN,SPEAKER_SPEAKER)
+    msgbox(format("The speaker beneath your feet starting talking!"))
+    msgbox(format("The Resido Parks and Recreation has dedicated this plaza to the guards who lost their lives in the disaster and the struggle that divided the region for so long. Late at night, some say you can hear their spirits, still fighting to this day to keep our region safe from criminals."),MSGBOX_SIGN,SPEAKER_SPEAKER)
     call(TryAutoSave)
     endcutscene
 }

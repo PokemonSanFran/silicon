@@ -100,18 +100,18 @@ script WhyAreYouHelpingThem_StartRaid {
     applymovement(8,WhyAreYouHelpingThem_PoliceRunIn)
     applymovement(9,WhyAreYouHelpingThem_PoliceRunIn)
     waitmovement(0)
-    msgbox(gText_WhyAreYouHelpingThem_StructuralBreach,MSGBOX_AUTOCLOSE,SPEAKER_SPEAKER)
+    msgbox(format("STRUCTURAL BREACH DETECTED. BASE IS NOW SHIFTING TO DEFENSE MODE. EVACUATE IMMEDIATELY."),MSGBOX_AUTOCLOSE,SPEAKER_SPEAKER)
     waitmovement(0)
 
-    msgbox(gText_WhyAreYouHelpingThem_DefenseMode,,SPEAKER_CHARLOTTE)
+    msgbox(format("“Defense mode” is pretty advanced for some abandoned buildings."),,SPEAKER_CHARLOTTE)
 
-    msgbox(gText_WhyAreYouHelpingThem_WeShouldRedefine,,SPEAKER_ALICIA)
+    msgbox(format("We should redefine abandoned…"),,SPEAKER_ALICIA)
 
-    msgbox(gText_WhyAreYouHelpingThem_LetsSplitUp,,SPEAKER_CHARLOTTE)
+    msgbox(format("Let's split up. I'm faster than you and can cut off the leaders before they escape."),,SPEAKER_CHARLOTTE)
 
-    msgbox(gText_WhyAreYouHelpingThem_WhaFineIllTry,,SPEAKER_ALICIA)
+    msgbox(format("wha - fine, I'll try to find the source of the hack and shut it down."),,SPEAKER_ALICIA)
 
-    msgbox(gText_WhyAreYouHelpingThem_SeeYa,,SPEAKER_CHARLOTTE)
+    msgbox(format("See ya."),,SPEAKER_CHARLOTTE)
 
     closemessage
 
@@ -133,7 +133,7 @@ script WhyAreYouHelpingThem_WitnessBattle {
         waitmovement(0)
         call(WhyAreYouHelpingThem_MoveObjectBoss_Script)
 
-        msgbox(gText_WhyAreYouHelpingThem_GoAfterIllHold,,SPEAKER_CHARLOTTE)
+        msgbox(format("Go after Alcmene! I'll hold this one off."),,SPEAKER_CHARLOTTE)
 
         closemessage
         release
@@ -146,14 +146,14 @@ script WhyAreYouHelpingThem_PreBattleBoss_Script {
         applymovement(ALCMENE,Common_Movement_FaceLeft)
         applymovement(PLAYER,WhyAreYouHelpingThem_ApproachAlcmene)
         waitmovement(0)
-        msgbox(gText_WhyAreYouHelpingThem_ItsAShameThatThe,,SPEAKER_ALCMENE)
+        msgbox(format("It's a shame that the cops have totally infiltrated our youth. "),,SPEAKER_ALCMENE)
 
         closemessage
 
         applymovement(ALCMENE,Common_Movement_WalkLeft)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_ButBeatingYou,,SPEAKER_ALCMENE)
+        msgbox(format("But beating you is going to be the best route out of here."),,SPEAKER_ALCMENE)
 
         closemessage
 
@@ -168,7 +168,7 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 
         if (defeated(TRAINER_ALCMENE)){
 
-                msgbox(gText_WhyAreYouHelpingThem_YoureIncredible,,SPEAKER_ALCMENE)
+                msgbox(format("You're incredible. Or a cheater. Can't quite tell. Either way, you can have this."),,SPEAKER_ALCMENE)
                 closemessage
 
                 applymovement(ALCMENE,Common_Movement_WalkInPlaceLeft)
@@ -177,10 +177,10 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 
         }else {
 
-                msgbox(gText_WhyAreYouHelpingThem_IDidntEvenTouch,,SPEAKER_ALICIA)
+                msgbox(format("…I didn't even touch them…"),,SPEAKER_ALICIA)
         }
 
-        msgbox(gText_WhyAreYouHelpingThem_ImSorryYouHad,,SPEAKER_ALCMENE)
+        msgbox(format("I'm sorry you have to experience this. I hope you eventually understand what's at stake here, {PLAYER}. Let me help you."),,SPEAKER_ALCMENE)
 
         closemessage
 
@@ -189,7 +189,7 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
         waitmovement(0)
         call(Common_EventScript_OutOfCenterPartyBypassHeal)
 
-        msgbox(gText_WhyAreYouHelpingThem_IHandledTheBrat,,SPEAKER_ADAORA)
+        msgbox(format("I handled the brat. I'm guessing you beat -"),,SPEAKER_ADAORA)
 
         closemessage
 
@@ -198,11 +198,11 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
         applymovement(ADAORA,WhyAreYouHelpingThem_ExclaimAndFacePlayer)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_DamnYouToo,,SPEAKER_ADAORA)
+        msgbox(format("Damn, you too, {PLAYER}?"),,SPEAKER_ADAORA)
 
-        msgbox(gText_WhyAreYouHelpingThem_WhatWasAllThatShit,,SPEAKER_ALICIA)
+        msgbox(format("What was all that shit you tried to tell me before?! What the hell is TheTide doing?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_WhyAreYouHelpingThem_WeveGotToHelp,,SPEAKER_ALCMENE)
+        msgbox(format("We've got to help more comrades escape. Another time."),,SPEAKER_ALCMENE)
 
         closemessage
 
@@ -230,13 +230,13 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
         applymovement(KAI,WhyAreYouHelpingThem_WalkOutOfHole)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_ThisPlaceIs,,SPEAKER_KAI_TIDE)
+        msgbox(format("This place is swarming with cops. You two need to get the hell out, right now. This goes straight out."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_WhyAreYouHelpingThem_WeCantLeavePeople,,SPEAKER_ALCMENE)
+        msgbox(format("We can't leave people behind. "),,SPEAKER_ALCMENE)
 
-        msgbox(gText_WhyAreYouHelpingThem_WeDontHaveTime,,SPEAKER_KAI_TIDE)
+        msgbox(format("We don't have time for this! If you get arrested, this all falls apart! You. Need. To. Go."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_WhyAreYouHelpingThem_IThinkTheyreRight,,SPEAKER_ADAORA)
+        msgbox(format("I think they're right."),,SPEAKER_ADAORA)
 
         closemessage
         applymovement(ALCMENE,WhyAreYouHelpingThem_WalkIntoHoleA)
@@ -249,7 +249,7 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
         applymovement(KAI,WhyAreYouHelpingThem_ApproachPlayer)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_YoureWorkingWith,,SPEAKER_ALICIA)
+        msgbox(format("You're working with TheTide too?!?"),,SPEAKER_ALICIA)
         closemessage
         startmenu_savescreen
         goto(WhyAreYouHelpingThem_StartBattle_Script)
@@ -262,7 +262,7 @@ script WhyAreYouHelpingThem_InteractBattle_Script {
 }
 
 script WhyAreYouHelpingThem_StartBattle_Script{
-    msgbox(gText_WhyAreYouHelpingThem_AlwaysHaveBeen,,SPEAKER_KAI_TIDE)
+    msgbox(format("Always have been."),,SPEAKER_KAI_TIDE)
     closemessage
     trainerbattle_no_intro(TRAINER_KAI_WHYAREYOUHELPINGTHEM,gText_WhyAreYouHelpingThem_AnotherVictory)
     goto(WhyAreYouHelpingThem_PostBattle_Dialogue)
@@ -272,11 +272,11 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue {
         startcutscene(JUMPPLAYER_WHYAREYOUHELPINGTHEM)
 
         setvar(VAR_NAVAL_BASE_STATE,DEFEATED_KAI_NAVAL_BASE)
-        msgbox(gText_WhyAreYouHelpingThem_TellsMeYoureAll,,SPEAKER_ALICIA)
+        msgbox(format("Adaora tells me you're all good guys… now all this shit? And you? None of this makes any sense!"),,SPEAKER_ALICIA)
 
-        msgbox(gText_WhyAreYouHelpingThem_WhyWouldIt,,SPEAKER_KAI_TIDE)
+        msgbox(format("Why would it? You don't see what your bosses are doing to Resido. You don't see what you're doing to Resido."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_WhyAreYouHelpingThem_Player,,SPEAKER_CHARLOTTE)
+        msgbox(format("{PLAYER}!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
@@ -291,9 +291,9 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue {
         applymovement(CHARLOTTE,WhyAreYouHelpingThem_RunToPlayer)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_IGotKnockedOut,,SPEAKER_CHARLOTTE)
+        msgbox(format("I got knocked out. Did you stop Alcmene?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_WhyAreYouHelpingThem_NoILostToo,,SPEAKER_ALICIA)
+        msgbox(format("No, I lost too."),,SPEAKER_ALICIA)
 
         closemessage
         setvar(VAR_HALAI_ISLAND_STATE,WHY_ARE_YOU_HELPING_THEM)
@@ -309,27 +309,27 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
         lock
         applymovement(PLAYER,Common_Movement_FaceUp)
 
-        msgbox(gText_WhyAreYouHelpingThem_GreatWorkInThere)
+        msgbox(format("Great work in there, team. Andre, what's the sitrep regarding TheTide leadership?"))
         closemessage
 
         applymovement(6,Common_Movement_WalkUp)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_WeSpottedAndTheir)
+        msgbox(format("We spotted Alcmene and their lieutenant escaping on Pokemon by using the move Fly. We were unable to track them given our resources."))
         closemessage
 
         applymovement(6,WhyAreYouHelpingThem_BackInFormation)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_AShameStillWeveShutDown)
+        msgbox(format("A shame. Still, we've shut down their primary base of operations, and we arrested a bunch of these shitheads. This was an absolute win!"))
         closemessage
 
         applymovement(4,Common_Movement_WalkDown)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_NotBadInThere)
+        msgbox(format("Not bad in there. Oliver wants you kids back at CuconuTown Compound."))
 
-        msgbox(gText_WhyAreYouHelpingThem_WannaCome,MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        msgbox(format("{PLAYER}, I'm gonna head over in a bit. Wanna come?"),MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
         endcutscene
 
         if (var(VAR_RESULT) == YES){
@@ -351,17 +351,17 @@ script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
         applymovement(PLAYER,WhyAreYouHelpingThem_WalkIntoHome)
         waitmovement(0)
 
-        msgbox(gText_WhyAreYouHelpingThem_WhatADay,,SPEAKER_OLIVER)
+        msgbox(format("What… a day. I know that was a lot of pressure, but from what I hear, you were both fantastic. Thank you."),,SPEAKER_OLIVER)
 
-        msgbox(gText_WhyAreYouHelpingThem_ItWasADay,,SPEAKER_ALICIA)
+        msgbox(format("…it was a day."),,SPEAKER_ALICIA)
 
-        msgbox(gText_WhyAreYouHelpingThem_GoodNewsWhileYouWere,,SPEAKER_OLIVER)
+        msgbox(format("Good news - while you were training in LeaverraForest, construction on SharpRise Stadium finished up. The Group Stage will start in 3 days. Hopefully, that's enough time to rest up and get ready."),,SPEAKER_OLIVER)
 
-        msgbox(gText_WhyAreYouHelpingThem_OhThatWasFast,,SPEAKER_CHARLOTTE)
+        msgbox(format("Oh, that was fast. How did you…"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_WhyAreYouHelpingThem_DontWorryAboutIt,,SPEAKER_OLIVER)
+        msgbox(format("Don't worry about it! You two just focus on winning! "),,SPEAKER_OLIVER)
 
-        msgbox(gText_WhyAreYouHelpingThem_NowIveGotALot,,SPEAKER_OLIVER)
+        msgbox(format("Now, I've got a lot of work to do between now and then. I'll see you both in a few days!"),,SPEAKER_OLIVER)
 
         closemessage
 
@@ -371,7 +371,7 @@ script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
         waitse
         removeobject(2)
 
-        msgbox(gText_WhyAreYouHelpingThem_WeveAllGot,,SPEAKER_CHARLOTTE)
+        msgbox(format("We've all got some work to do! I'll see you around, {PLAYER}."),,SPEAKER_CHARLOTTE)
 
         closemessage
 
@@ -387,7 +387,7 @@ script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
 }
 
 script WhyAreYouHelpingThem_StartChampionship_Dialogue {
-    msgbox(gText_WhyAreYouHelpingThem_AreYouReadyToBegin,MSGBOX_YESNO)
+    msgbox(format("Are you ready to begin the Championship?"),MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == NO){
             closemessage

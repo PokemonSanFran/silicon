@@ -19,7 +19,7 @@ mapscripts CresaltaVista_MapScripts {
 }
 
 script CresaltaVista_Biker_Interact_Script{
-    msgbox(gText_CresaltaVista_PlaceholderBiker,MSGBOX_NPC)
+    msgbox(format("i am a biker, and this is placeholder text."),MSGBOX_NPC)
 
     call(Quest_GetTheBand_CheckQuestAndBike_Script)
 

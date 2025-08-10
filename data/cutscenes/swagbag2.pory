@@ -22,11 +22,11 @@ script swagbag2_OliverWalkOutGym_Script {
 script swagbag2_Intro_Dialogue {
     startcutscene(JUMPPLAYER_SWAGBAG2)
     playbgm(MUS_RG_FOLLOW_ME, FALSE)
-    msgbox(gText_swagbag2_ItWasAPleasure,,SPEAKER_OLIVER)
+    msgbox(format("Hello {PLAYER}! It was a pleasure seeing you at the Spire yesterday. How are you liking east Resido?"),,SPEAKER_OLIVER)
 
-    msgbox(gText_swagbag2_ItsALot,,SPEAKER_ALICIA)
+    msgbox(format("...It's a lot. People are much less happy here than back on the mainland."),,SPEAKER_ALICIA)
 
-    msgbox(gText_swagbag2_SoundsLikeYouveRun,,SPEAKER_OLIVER)
+    msgbox(format("Ah, sounds like you've run into TheTide a few times. Don't mind them, they don't represent all of us, I promise."),,SPEAKER_OLIVER)
 
     applymovement(OLIVER, swagbag2_LookAwayAndBack)
     waitmovement(0)
@@ -40,19 +40,19 @@ script swagbag2_Intro_Dialogue {
 
 script swagbag2_DiscussCosts_Dialogue {
 
-    msgbox(gText_swagbag2_IAssumeYouveAlready,,SPEAKER_OLIVER)
+    msgbox(format("I assume you've already taken advantage of the Breeding Center in preparation for your battle with Kauna?"),,SPEAKER_OLIVER)
 
-    msgbox(gText_swagbag2_TheyWereVeryHelpful,,SPEAKER_ALICIA)
+    msgbox(format("Yes! They were very helpful in helping me prepare."),,SPEAKER_ALICIA)
 
-    msgbox(gText_swagbag2_TheBreedingCenterStaff,,SPEAKER_ALICIA)
+    msgbox(format("The Breeding Center staff mentioned some pretty high fees for using their services. How do ordinary Trainers afford it so they can take on Kauna too?"),,SPEAKER_ALICIA)
 
     bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
     bufferspeciesname(STR_VAR_3,SPECIES_MAGIKARP)
-    msgbox(gText_swagbag2_TheBreedingCenterOffers,,SPEAKER_OLIVER)
+    msgbox(format("The Breeding Center offers its {STR_VAR_3} Plan services to all, at a significantly cheaper cost than that of your {STR_VAR_2} Plan. The school is working on a program to subsidize the {STR_VAR_2} Plan for those involved in the League Challenge, they just... couldn't work out the details in time."),,SPEAKER_OLIVER)
 
-    msgbox(gText_swagbag2_ThatsTooBad,,SPEAKER_ALICIA)
+    msgbox(format("Hmm... that's too bad. But awesome that they're working on it!"),,SPEAKER_ALICIA)
 
-    msgbox(gText_swagbag2_HopefullyTheyllHaveIt,,SPEAKER_OLIVER)
+    msgbox(format("Yes, hopefully they'll have it all smoothed out in the next year or ten. Now, I've gotta run. Good luck in there!"),,SPEAKER_OLIVER)
 
 
     goto(swagbag2_Scene_End_Script)
@@ -60,11 +60,11 @@ script swagbag2_DiscussCosts_Dialogue {
 
 script swagbag2_BringToCenter_Dialogue {
 
-    msgbox(gText_swagbag2_HaveYouSeenThe,,SPEAKER_OLIVER)
+    msgbox(format("Have you seen the Chasilla Breeding Center? Truly state of the art."),,SPEAKER_OLIVER)
 
-    msgbox(gText_swagbag2_NoShouldI,,SPEAKER_ALICIA)
+    msgbox(format("No, should I?"),,SPEAKER_ALICIA)
 
-    msgbox(gText_swagbag2_IveGotAFewMinutes,,SPEAKER_OLIVER)
+    msgbox(format("I've got a few minutes, let me show you!"),,SPEAKER_OLIVER)
 
     closemessage
 
@@ -72,20 +72,20 @@ script swagbag2_BringToCenter_Dialogue {
     applymovement(PLAYER, swagbag2_PlayerWalkToCenter)
     waitmovement(0)
 
-    msgbox(gText_swagbag2_DontLetTheirDemeanor,,SPEAKER_OLIVER)
+    msgbox(format("Don't let their demeanor fool you - Kauna is actually one of the leading experts in Pokémon Breeding and Battling. His entire team is bred using this facility's Gold tier experience. Access to those same services is a perk of being under the SharpRise Capital umbrella."),,SPEAKER_OLIVER)
 
-    msgbox(gText_swagbag2_WowThatsAwesome,,SPEAKER_ALICIA)
+    msgbox(format("Wow, that's awesome!"),,SPEAKER_ALICIA)
 
-    msgbox(gText_swagbag2_YouShouldReallyTalk,,SPEAKER_OLIVER)
+    msgbox(format("You should really talk to the staff. They're obsessed with delighting Trainers like you, and I'm sure they're expecting you."),,SPEAKER_OLIVER)
 
-    msgbox(gText_swagbag2_IWillThanks,,SPEAKER_ALICIA)
+    msgbox(format("I will. Thanks for the tip!"),,SPEAKER_ALICIA)
 
-    msgbox(gText_swagbag2_HappyToHelp,,SPEAKER_OLIVER)
+    msgbox(format("Happy to help!"),,SPEAKER_OLIVER)
 
     applymovement(OLIVER, swagbag2_LookAwayAndBack)
     waitmovement(0)
 
-    msgbox(gText_swagbag2_NowIveGottaRun,,SPEAKER_OLIVER)
+    msgbox(format("Now, I've gotta run. Good luck in there!"),,SPEAKER_OLIVER)
 
 
     goto(swagbag2_Scene_End_Script)

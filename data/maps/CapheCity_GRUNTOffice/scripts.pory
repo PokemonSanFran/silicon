@@ -8,7 +8,7 @@ script CapheCity_TrolleyHQ_Manager_Quest_Script{
 }
 
 script CapheCity_TrolleyHQ_CounterWorker_Dialogue{
-    msgbox(gText_CapheCity_TrolleyHQ_DoYouHave,MSGBOX_NPC)
+    msgbox(format("Do you have any idea what it takes to make sure all the trolleys run on time? Especially when ridership is down..."),MSGBOX_NPC)
     end
 }
 
@@ -29,7 +29,7 @@ script CapheCity_TrolleyHQ_Interact_Clerk_Script{
 }
 
 script CapheCity_TrolleyHQ_Clerk_Dialogue{
-    msgbox(gText_CapheCity_TrolleyHQ_IHateHaving,MSGBOX_NPC,SPEAKER_ISIDORE)
+    msgbox(format("I hate having to leave the office to get food... but ordering Rapidoordash is so expensive!"),MSGBOX_NPC,SPEAKER_ISIDORE)
     end
 }
 

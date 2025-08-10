@@ -43,7 +43,7 @@ script Quest_ReturnDoll_Interact_Script {
 }
 
 script Quest_ReturnDoll_PostQuest_Script {
-	msgbox(gText_ReturnDoll_IHeardMommy, MSGBOX_NPC)
+	msgbox(format("I heard Mommy tell her friend we got priced out of our old neighborhood. What does priced out mean?"), MSGBOX_NPC)
 	end
 }
 
@@ -64,7 +64,7 @@ script Quest_ReturnDoll_CheckPlayerBag_Script
 
 script Quest_ReturnDoll_PlayerBagHasSpace_Script
 {
-	msgbox(gText_ReturnDoll_YouCanHave, MSGBOX_DEFAULT)
+	msgbox(format("You can have her headband! It matched her dress, but I want you to have it instead."), MSGBOX_DEFAULT)
 	closemessage
 	cueobjectplayer(LOSDOL)
 	giveitem(ITEM_CHOICE_BAND, 1)
@@ -73,7 +73,7 @@ script Quest_ReturnDoll_PlayerBagHasSpace_Script
 
 script Quest_ReturnDoll_PlayerBagFull_Script
 {
-	msgbox(gText_ReturnDoll_YourBagLooks, MSGBOX_NPC)
+	msgbox(format("YOU BAG IS FULL! Take some stuff out of your bag, I wanna give you something."), MSGBOX_NPC)
 }
 
 script Quest_ReturnDoll_DuringQuest_Script {
@@ -83,21 +83,21 @@ script Quest_ReturnDoll_DuringQuest_Script {
 		goto(Quest_ReturnDoll_PlayerHasDoll_Script)
 	}
 	else {
-		msgbox(gText_ReturnDoll_WhenImGrownUp, MSGBOX_NPC)
+		msgbox(format("When I'm a grown up like you, I'm going to go back and get my doll!"), MSGBOX_NPC)
 		end
 	}
 }
 
 script Quest_ReturnDoll_PlayerHasDoll_Script {
-	msgbox(gText_ReturnDoll_ThatsMyDoll, MSGBOX_NPC)
+	msgbox(format("That's my doll! MY DOLL! You found her! Thank you so much!"), MSGBOX_NPC)
 	removeitem(ITEM_LOST_DOLL, 1)
 	questmenu(QUEST_MENU_SET_REWARD, QUEST_RETURNDOLL)
     goto(Quest_ReturnDoll_CheckPlayerBag_Script)
 }
 
 script Quest_ReturnDoll_PreQuestScript {
-	msgbox(gText_ReturnDoll_DaddyAndI, MSGBOX_NPC)
-	msgbox(gText_ReturnDoll_WhenImGrownUp, MSGBOX_NPC)
+	msgbox(format("Daddy and I moved here from QiuVillage. I like it here, but I miss my doll."), MSGBOX_NPC)
+	msgbox(format("When I'm a grown up like you, I'm going to go back and get my doll!"), MSGBOX_NPC)
 	startquest(QUEST_RETURNDOLL)
     return
 }

@@ -61,7 +61,7 @@ script EnterAdaora_PreventPlayerProgress_Dialogue{
 
     applymovement(PLAYER,Common_Movement_FaceDown)
     waitmovement(PLAYER)
-    msgbox(gText_EnterAdaora_NoCutting,MSGBOX_DEFAULT,SPEAKER_RESIDENT_A)
+    msgbox(format("No cutting the line!"),MSGBOX_DEFAULT,SPEAKER_RESIDENT_A)
     closemessage
 
     applymovement(PLAYER,Common_Movement_WalkRight)
@@ -73,16 +73,16 @@ script EnterAdaora_PreventPlayerProgress_Dialogue{
 script EnterAdaora_Intro_Dialogue{
     lockall
         startcutscene(JUMPPLAYER_ENTERADAORA)
-        msgbox(gText_EnterAdaora_WhoTheHell,MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
-        msgbox(gText_EnterAdaora_NoSorry,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(gText_EnterAdaora_TryingToHelpEverybody,MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
-        msgbox(gText_EnterAdaora_ImNotInLine,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(gText_EnterAdaora_TryingToGet,MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_SHOUT,EMOTE_ANGRY)
-        msgbox(gText_EnterAdaora_WaitListen,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_SHOUT)
-                msgbox(gText_EnterAdaora_NoPunk,MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Woah, who the hell do you think you are?"),MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
+        msgbox(format("No sorry, I'm just trying to get through, are you able to -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                msgbox(format("Look, we're trying to help everybody here, and we're doing the best we can. You gotta get in line like everybody else."),MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
+        msgbox(format("I'm not in line, I'm trying to -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+                msgbox(format("Trying to get in front! I know! You follow the rules like everybody else, or you get nothing."),MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Wait, listen to me -"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_SHOUT)
+                msgbox(format("NO punk, YOU listen to ME. What the hell makes you think -"),MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_SHOUT,EMOTE_ANGRY)
         applymovement(ADAORA,Common_Movement_FaceDown)
         playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
-        msgbox(gText_EnterAdaora_HoldOn,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Siarl, hold on."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         closemessage
                 applymovement(ADAORA,EnterAdaora_AdaoraWalkToPlayer_Movement)
         waitmovement(ADAORA)
@@ -92,7 +92,7 @@ script EnterAdaora_Intro_Dialogue{
 }
 
 script EnterAdaora_Explain_Dialogue{
-        msgbox(gText_EnterAdaora_DidYouListen,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Siarl, did you listen to them?"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         closemessage
                 applymovement(SIARL,Common_Movement_FaceDown)
         waitmovement(SIARL)
@@ -100,13 +100,13 @@ script EnterAdaora_Explain_Dialogue{
         waitmovement(SIARL)
         applymovement(SIARL,Common_Movement_FaceRight)
         waitmovement(SIARL)
-        msgbox(gText_EnterAdaora_TryingToCut,MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
-        msgbox(gText_EnterAdaora_WhatYouHeard,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Yeah, they're trying to cut the line!"),MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
+        msgbox(format("Siarl, that's what you heard... but not what they said."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         applymovement(ADAORA,Common_Movement_FaceDown)
         waitmovement(ADAORA)
-        msgbox(gText_EnterAdaora_WhatProblem,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-        msgbox(gText_EnterAdaora_AsshatInterrupted,MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_ANGRY)
+        msgbox(format("Sorry. What seems to be the problem?"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Thanks. Before this asshat interrupted me, I was trying to explain that your line is blocking the road. Nobody can get through. Could you do something about that?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_ANGRY)
                 closemessage
         goto(EnterAdaora_Apology_Dialogue)
 }
@@ -114,24 +114,24 @@ script EnterAdaora_Explain_Dialogue{
 script EnterAdaora_Apology_Dialogue{
     applymovement(ADAORA,Common_Movement_FaceLeft)
         waitmovement(ADAORA)
-        msgbox(gText_EnterAdaora_ShouldntTheCones,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-                msgbox(gText_EnterAdaora_IForgotToSet,MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_WHISPER,EMOTE_SWEAT)
-        msgbox(gText_EnterAdaora_BeratedSomebody,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-                msgbox(gText_EnterAdaora_Sorry,MSGBOX_DEFAULT,SPEAKER_SIARL)
+        msgbox(format("Damn. Siarl, shouldn't the cones prevent that from happening?"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                msgbox(format("...I forgot to set up the cones."),MSGBOX_DEFAULT,SPEAKER_SIARL,TAIL_WHISPER,EMOTE_SWEAT)
+        msgbox(format("Oh? So, you screwed up, then berated somebody when they tried to ask you to fix it. Asshat sounds about right."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+                msgbox(format("...Sorry Adaora."),MSGBOX_DEFAULT,SPEAKER_SIARL)
         closemessage
         applymovement(ADAORA,Common_Movement_FaceDown)
         waitmovement(ADAORA)
-        msgbox(gText_EnterAdaora_WhatsYourName,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("What's your name? ...{PLAYER}."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         applymovement(ADAORA,Common_Movement_FaceLeft)
         waitmovement(ADAORA)
         applymovement(SIARL,Common_Movement_FaceDown)
         waitmovement(SIARL)
-        msgbox(gText_EnterAdaora_IGotHeated,,SPEAKER_SIARL)
-                msgbox(gText_EnterAdaora_DontRuin,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Sorry I got so heated {PLAYER}. It's been rough -"),,SPEAKER_SIARL)
+                msgbox(format("Siarl, don't ruin a perfectly good apology with an excuse. Where are the cones?"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         applymovement(SIARL,Common_Movement_FaceRight)
-        msgbox(gText_EnterAdaora_ShouldBeNear,,SPEAKER_SIARL)
+        msgbox(format("...they should be near the backstock pallet."),,SPEAKER_SIARL)
         closemessage
 
 
@@ -143,7 +143,7 @@ script EnterAdaora_Apology_Dialogue{
         waitmovement(SIARL)
 
 
-        msgbox(gText_EnterAdaora_NeedToWalk,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("I need to walk for a second. Let's walk, {PLAYER}."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         //Debug_Hop:
         //setobjectxy(ADAORA,4,25)
@@ -155,14 +155,14 @@ script EnterAdaora_Apology_Dialogue{
 }
 
 script EnterAdaora_ExplainHope_Dialogue{
-        msgbox(gText_EnterAdaora_WhatIsEverybody,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_EnterAdaora_Hope,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-        msgbox(gText_EnterAdaora_WaitHope,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_EnterAdaora_ICanGet,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-        msgbox(gText_EnterAdaora_ThatsAmazing,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_EnterAdaora_CityIsntSuperChill,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-        msgbox(gText_EnterAdaora_ButYoureHelping,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_EnterAdaora_YoureNotFromHere,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("What is everybody lining up for?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Hope."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Wait, hope?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Sorry, sometimes I get a little whimsical! One of the biggest challenges of being unhoused is access to food and sanitary supplies. My colleagues and I, set up around the city and hand out kits."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Oh wow, that's amazing! But why are you in an alleyway?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("The city isn't super chill with us, for complicated reasons. We move around a lot and choose unconventional locations in order to avoid the cops. It sucks, but it works."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Wait, but you're helping people! Why isn't the city supporting you?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Clearly, you're not from here, are you? I can't remember a point in my lifetime where the city helped people, {PLAYER}."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         //Debug_Cones:
         applymovement(ADAORA,EnterAdaora_PlaceConesA_Movement)
@@ -176,7 +176,7 @@ script EnterAdaora_ExplainHope_Dialogue{
         special(DrawWholeMapView)
         applymovement(ADAORA,EnterAdaora_PlaceConesC_Movement)
         waitmovement(ADAORA)
-        msgbox(gText_EnterAdaora_BetweenTheCones,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Yo, clear a path between the cones."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         call(EnterAdaora_MoveLine_Script)
         goto(EnterAdaora_GiveKeystone_Dialogue)
@@ -199,17 +199,17 @@ script EnterAdaora_MoveLine_Script{
 script EnterAdaora_GiveKeystone_Dialogue{
     applymovement(ADAORA,EnterAdaora_FacePlayer_Movement)
         waitmovement(ADAORA)
-        msgbox(gText_EnterAdaora_ThereYouGo,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-        msgbox(gText_EnterAdaora_AGym,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_EnterAdaora_WellGoodLuck,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("There you go. Sorry about all of that. What's in ToraTown?"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("A Gym! I'm taking part in the League Challenge."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Ah, well good luck. Actually... a League Challenger that isn't from here... let me see your phone.."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         closemessage
         fadescreen(FADE_TO_BLACK)
         call(EventScript_InstallGlassApp)
         fadescreen(FADE_FROM_BLACK)
-        msgbox(gText_EnterAdaora_IfYouHaveThat,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-        msgbox(gText_EnterAdaora_ThankYouSo,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_EnterAdaora_HopeThatMakes,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
-        msgbox(gText_EnterAdaora_IGottaGo,MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("That app lets you see the parties of all the Trainers you've fought and a list of the Trainers you have't fought."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Thank you so much! But how did you get all this data?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("SharpRise Capital has data on all the Trainers in the region, but hasn't released it anywhere publicly. We found their source and... made it available for all. I hear they're not super happy about it, which is probably why they didn't give it to you!"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Hope that makes up for the hassle. I gotta go back before Siarl cusses out another innocent victim. Stay safe out there."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         closemessage
         applymovement(ADAORA,EnterAdaora_WalkAway_Movement)
         waitmovement(ADAORA)
@@ -226,7 +226,7 @@ script EnterAdaora_GiveKeystone_Dialogue{
 }
 
 script EnterAdaora_GruntApologize_Dialogue {
-        msgbox(gText_EnterAdaora_SorryAgain,MSGBOX_NPC,SPEAKER_SIARL)
+        msgbox(format("Sorry again about before."),MSGBOX_NPC,SPEAKER_SIARL)
         end
 }
 

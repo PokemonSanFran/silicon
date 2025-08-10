@@ -35,8 +35,8 @@ script Chasilla_Gym_Attendant_Inform_Script
 {
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(PLAYER)
-    msgbox(gText_Chasilla_Gym_WelcomeTo)
-    msgbox(gText_Chasilla_Gym_ComeTalkToMe)
+    msgbox(format("Welcome to Chasilla Gym! We only battle with our freshly bred Pokémon."))
+    msgbox(format("Our Gym can be confusing - good luck in there, but come talk to me if you have any questions!"))
     closemessage
     release
     end
@@ -58,8 +58,8 @@ script Chasilla_Gym_Attendant_Interact_Script
 
 script Chasilla_Gym_Attendant_Intro_Dialogue
 {
-    msgbox(gText_Chasilla_Gym_WelcomeTo)
-    msgbox(gText_Chasilla_Gym_WeHaveState)
+    msgbox(format("Welcome to Chasilla Gym! We only battle with our freshly bred Pokémon."))
+    msgbox(format("In order to level the playing field, you can only battle with Pokémon that are capable of evolving, but have not yet begun evolving."))
     specialvar(VAR_RESULT, CheckPlayerLittleCupEligibility)
     if (var(VAR_RESULT) == FALSE)
     {
@@ -78,20 +78,20 @@ script Chasilla_Gym_Attendant_Intro_Dialogue
 
 script Chasilla_Gym_Attendant_Accept_NoDevolve_Dialogue
 {
-    msgbox(gText_Chasilla_Gym_OhItLooks)
+    msgbox(format("Oh, it looks like your party is already unevolved. You came prepared."))
 }
 
 script Chasilla_Gym_Attendant_Accept_Devolve_Dialogue
 {
     bufferspeciesname(STR_VAR_1, VAR_0x8005)
     bufferspeciesname(STR_VAR_2, VAR_0x8004)
-    msgbox(gText_Chasilla_Gym_ForExample)
+    msgbox(format("For example, your {STR_VAR_1} will turn into {STR_VAR_2} during battle."))
 }
 
 script Chasilla_Gym_Attendant_Refuse_Dialogue
 {
-    msgbox(gText_Chasilla_Gym_DoesntLook)
-    msgbox(gText_Chasilla_Gym_ComeBack)
+    msgbox(format("It doesn't look like any of the Pokémon in your party are related to evolution though."))
+    msgbox(format("Come back when you have some! We always suggest that Trainers use our state of the art breeding facilities. See you soon!"))
     closemessage
     goto(Chasilla_Gym_WarpOutside_Script)
 }
@@ -105,7 +105,7 @@ script Chasilla_Gym_WarpOutside_Script
 
 script Chasilla_Gym_Attendant_ExplainMenu_Dialogue
 {
-    msgbox(gText_Chasilla_Gym_DidYouWant)
+    msgbox(format("Did you want to ask about any other rules?"))
     call(Chasilla_Gym_Attendant_ExplainMenu_Script)
     call(Chasilla_Gym_Attendant_HandleMenu_Script)
 }
@@ -124,21 +124,21 @@ script Chasilla_Gym_Attendant_HandleMenu_Script
 {
     switch (var(VAR_RESULT))
     {
-        case 0: msgbox(gText_Chasilla_Gym_WillNotGain)
-        case 1: msgbox(gText_Chasilla_Gym_ForgetMoves)
-        case 2: msgbox(gText_Chasilla_Gym_NonEvolve)
+        case 0: msgbox(format("At the beginning of every battle in this Gym, your Pokémon will revert to its earliest evolution level and back to Level 5. They will not gain experience or effort values during battle."))
+        case 1: msgbox(format("If your Pokémon know a move that an earlier evolution cannot learn, they'll forget it during battle."))
+        case 2: msgbox(format("If you have a Pokémon in your party that is not related to evolution, it will disappear from your party."))
         default:
         case MULTI_B_PRESSED:
         goto(Chasilla_Gym_Attendant_GoodLuck_Dialogue)
     }
 
-    msgbox(gText_Chasilla_Gym_DontWorry)
+    msgbox(format("Don't worry! At the end of battle, all your Pokémon will go back to normal."))
     goto(Chasilla_Gym_Attendant_ExplainMenu_Dialogue)
 }
 
 script Chasilla_Gym_Attendant_GoodLuck_Dialogue
 {
-    msgbox(gText_Chasilla_Gym_ComeTalkToMe)
+    msgbox(format("Our Gym can be confusing - good luck in there, but come talk to me if you have any questions!"))
     closemessage
     release
     end
@@ -146,7 +146,7 @@ script Chasilla_Gym_Attendant_GoodLuck_Dialogue
 
 script Chasilla_Gym_Attendant_Victory_Script
 {
-    msgbox(gText_Chasilla_Gym_YouDidIt,MSGBOX_NPC)
+    msgbox(format("Congrats on the win, {PLAYER}!. I wonder how he battles when he's not here in the Gym..."),MSGBOX_NPC)
 }
 
 text gText_Chasilla_Gym_WelcomeTo

@@ -66,15 +66,15 @@ script WowYoureStrong_WalkToPlayer_Script
 
 script WowYoureStrong_Intro_Dialogue
 {
-    msgbox(gText_WowYoureStrong_WhatAShow,,SPEAKER_ADELAIDE)
+    msgbox(format("{PLAYER}! What a show! That was marvelous! Flying you in from Orre was absolutely worth it, for that battle alone."),,SPEAKER_ADELAIDE)
 
-    msgbox(gText_WowYoureStrong_OhUhThanksALot,,SPEAKER_ALICIA)
+    msgbox(format("Oh uh, thanks a lot, that's very nice. I'm guessing you work at SharpRise Capital…?"),,SPEAKER_ALICIA)
 
-    msgbox(gText_WowYoureStrong_WhereMyManners,,SPEAKER_ADELAIDE)
+    msgbox(format("Hah! Oh my, I'm sorry. Where are my manners? My name is Adelaide, and I'm the SharpRise Capital League Commissioner, appointed by our corporate sponsors, Buzzr, Presto, and Arriba."),,SPEAKER_ADELAIDE)
 
-    msgbox(gText_WowYoureStrong_ShouldHaveKnown,,SPEAKER_ALICIA)
+    msgbox(format("Oh! I guess I should have known that. Well um, thanks so much for the opportunity! I'm excited to be the region's next Champion."),,SPEAKER_ALICIA)
 
-    msgbox(gText_WowYoureStrong_DreamBig,,SPEAKER_ADELAIDE)
+    msgbox(format("Dream big {PLAYER}! That's the attitude we wanna see. We're big dreamers over at SharpRise Capital too. That's why we built the SharpRise  Spire! I wrote a stunning email introduction after it was completed... I'll have to forward it to you, it's really some of my best writing."),,SPEAKER_ADELAIDE)
 
     goto(WowYoureStrong_ShowTower_Script)
 }
@@ -89,7 +89,7 @@ script WowYoureStrong_ShowTower_Script
         bufferstring(STR_VAR_2,"this city")
     }
 
-    msgbox(gText_WowYoureStrong_YouShouldComeBy,,SPEAKER_ADELAIDE)
+    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the SharpRise Spire in {STR_VAR_2}."),,SPEAKER_ADELAIDE)
     closemessage
 
     if (var(VAR_RESULT) == MAP_PERLACIA_CITY)
@@ -121,7 +121,7 @@ script WowYoureStrong_TakeCameraFromTower_Script
 
 script WowYoureStrong_End_Dialouge
 {
-    msgbox(gText_WowYoureStrong_RunToMeeting,,SPEAKER_ADELAIDE)
+    msgbox(format("I have to run to a meeting. Again, excellent job in your Gym battle. I hope to see what else you can do!"),,SPEAKER_ADELAIDE)
 
     closemessage
     applymovement(ADELAIDE,WowYoureStrong_WalkToMeeting_Movement)
@@ -149,17 +149,17 @@ script WowYourStrong_RemoveAdelaide_Script
 
 script WowYourStrong_KaiConfrontation_Dialogue
 {
-    msgbox(gText_WowYoureStrong_IDontGetIt,,SPEAKER_KAI)
+    msgbox(format("I don't get it. Do all of you transplants just worship the ground these tycoons walk on?"),,SPEAKER_KAI)
 
     if (var(VAR_ROUTE10_STATE) == DEFEATED_KAI_ROUTE10)
     {
-        msgbox(gText_WowYoureStrong_YouAgain,,SPEAKER_ALICIA)
+        msgbox(format("You again? Are you following me? What is your deal?"),,SPEAKER_ALICIA)
     }
     else
     {
-        msgbox(gText_WowYoureStrong_WhatAreYouTalking,,SPEAKER_ALICIA)
+        msgbox(format("What are you talking about?"),,SPEAKER_ALICIA)
     }
-    msgbox(gText_WowYoureStrong_IJustCant,,SPEAKER_KAI)
+    msgbox(format("I just can't understand why you would willingly buy into a system that just makes these people more money. Do you think they need MORE money?"),,SPEAKER_KAI)
     closemessage
 
     applymovement(KAI,WowYoureStrong_WalkToMeeting_Movement)
@@ -168,11 +168,11 @@ script WowYourStrong_KaiConfrontation_Dialogue
 
     if (var(VAR_ROUTE10_STATE) == DEFEATED_KAI_ROUTE10)
     {
-        msgbox(gText_WowYoureStrong_IHopeThats,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+        msgbox(format("I hope that this isn't going to be a regular thing..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     }
     else
     {
-        msgbox(gText_WowYoureStrong_ThisRegionHasSome,,SPEAKER_ALICIA)
+        msgbox(format("The region has some... characters."),,SPEAKER_ALICIA)
     }
     closemessage
 

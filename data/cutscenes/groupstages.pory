@@ -39,7 +39,7 @@ script GroupStages_GreetBeforeStart_Dialogue {
         waitmovement(CHARLOTTE)
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
-        msgbox(gText_GroupStages_EasyPeasy,,SPEAKER_CHARLOTTE)
+        msgbox(format("Easy peasy! Good luck in there!"),,SPEAKER_CHARLOTTE)
         closemessage
         applymovement(CHARLOTTE,GroupStages_LeaveLockers)
         waitmovement(CHARLOTTE)
@@ -57,7 +57,7 @@ script GroupStages_GreetBeforeStart_Dialogue {
 script GroupStages_PreparePlayer_Script {
     lock
         faceplayer
-        msgbox(gText_GroupStages_OnceYouStart,MSGBOX_YESNO,SPEAKER_LEAGUE_STAFF_A)
+        msgbox(format("Once you start the Group Stage, there's no turning back. You must complete the group stage before you can leave again, and you must complete the tournament before you can leave SharpRise Stadium. Are you ready to continue?"),MSGBOX_YESNO,SPEAKER_LEAGUE_STAFF_A)
         closemessage
 
         if (var(VAR_RESULT) == YES){
@@ -109,12 +109,12 @@ script GroupStages_ChooseParty_Script {
 script GroupStages_RoundRobinMatch_Script {
     applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
-        msgbox(gText_GroupStages_Placeholder,,SPEAKER_ANNOUNCER,TAIL_SHOUT)
+        msgbox(format("this is placeholder text."),,SPEAKER_ANNOUNCER,TAIL_SHOUT)
         closemessage
         applymovement(PLAYER,Common_Movement_WalkRight)
         applymovement(ENTRANT,Common_Movement_WalkLeft)
         waitmovement(ENTRANT)
-        msgbox(gText_GroupStages_Placeholder,,SPEAKER_ACE_TRAINER_M)
+        msgbox(format("this is placeholder text."),,SPEAKER_ACE_TRAINER_M)
         closemessage
 
 //PSF TODO these trainers as well as the one before the kai fight should be a specifically themed team that Armando teaches you how to twart during the Enter The Master cutscene
@@ -138,13 +138,13 @@ script GroupStages_PostRoundRobinMatch_Script {
             goto(GroupStages_RoundRobinGroupComplete_Script)
         }
 
-    msgbox(gText_GroupStages_Placeholder,,SPEAKER_ANNOUNCER)
+    msgbox(format("this is placeholder text."),,SPEAKER_ANNOUNCER)
         closemessage
 
         applymovement(PLAYER,GroupStages_GetPlayerIntoPosition)
         applymovement(ENTRANT,GroupStages_WalkOffStage)
         waitmovement(ENTRANT)
-        msgbox(gText_GroupStages_Placeholder,,SPEAKER_ANNOUNCER)
+        msgbox(format("this is placeholder text."),,SPEAKER_ANNOUNCER)
         call(GroupStages_ChooseParty_Script)
 
         removeobject(ENTRANT)
@@ -159,7 +159,7 @@ script GroupStages_RoundRobinGroupComplete_Script {
         setvar(VAR_STORYLINE_STATE,STORY_GROUP_STATE_COMPLETE)
         applymovement(PLAYER,GroupStages_WalkToCenterStage)
         waitmovement(PLAYER)
-        msgbox(gText_GroupStages_Placeholder,SPEAKER_ANNOUNCER,TAIL_SHOUT,EMOTE_SHOCK)
+        msgbox(format("this is placeholder text."),SPEAKER_ANNOUNCER,TAIL_SHOUT,EMOTE_SHOCK)
         special(DoDomeConfetti)
         playse(SE_APPLAUSE)
         waitse

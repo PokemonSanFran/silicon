@@ -37,9 +37,9 @@ script YouRealizeWereEvilRight_PhoneCall_Dialogue {
         startcutscene(JUMPPLAYER_YOUREALIZEWEREEVILRIGHT)
         setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,PRE_YOU_REALIZE_WERE_EVIL_RIGHT)
         call(Common_EventScript_PhoneRinging)
-        msgbox(gText_YouRealizeWereEvilRight_SorryToBotherYou,,SPEAKER_OLIVER,,,PHONE_ON)
+        msgbox(format("Hello {PLAYER}! Sorry to bother you, but there is a slight situation here at SharpRise Spire. It's rather urgent. Please come to the second floor."),,SPEAKER_OLIVER,,,PHONE_ON)
 
-        msgbox(gText_YouRealizeWereEvilRight_YeahImOnMyWay,,SPEAKER_ALICIA,,,PHONE_ON)
+        msgbox(format("Yeah, I'm on my way over!"),,SPEAKER_ALICIA,,,PHONE_ON)
 
         closemessage
         fadeblackandsetremovewarpfadeflag
@@ -61,27 +61,27 @@ script YouRealizeWereEvilRight_Open_Dialogue {
         setflag(FLAG_KAI_CALL_ARANTRAZ)
         setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
 
-        msgbox(gText_YouRealizeWereEvilRight_WereEnamored,,SPEAKER_OLIVER)
+        msgbox(format("We're enamored with the work you're doing and that you've become a mainstay with the professional battling community. "),,SPEAKER_OLIVER)
 
-        msgbox(gText_YouRealizeWereEvilRight_ItsBeenSuperRewarding,,SPEAKER_ALICIA)
+        msgbox(format("It's been super rewarding!"),,SPEAKER_ALICIA)
 
-        msgbox(gText_YouRealizeWereEvilRight_HoweverTheNext,,SPEAKER_OLIVER)
+        msgbox(format("However, the next season of the Challenge is coming up, and we're slightly concerned with your activities and the perception that a SharpRise Capital sponsored Trainer is so intimately involved with the same structure that we sunset when we took over."),,SPEAKER_OLIVER)
 
-        msgbox(gText_YouRealizeWereEvilRight_ItWouldBeBetter,,SPEAKER_RAMESH)
+        msgbox(format("It would be better if you found other extracurricular activities instead. A popular way to give back is volunteering at a shelter, or perhaps helping the researchers in Chasilla complete the Pokédex."),,SPEAKER_RAMESH)
 
         closemessage
 
         applymovement(PLAYER,Common_Movement_FaceUp)
 
-        msgbox(gText_YouRealizeWereEvilRight_AreYouSayingIHave,,SPEAKER_ALICIA)
+        msgbox(format("Are you saying I have to stop with the project?"),,SPEAKER_ALICIA)
 
         closemessage
 
         applymovement(PLAYER,Common_Movement_FaceRight)
 
-        msgbox(gText_YouRealizeWereEvilRight_WereNotHere,,SPEAKER_OLIVER)
+        msgbox(format("We're not here to tell you exactly what to do. We would, however, need to strongly reconsider sponsoring a Trainer who was actively undermining our efforts to establish ourselves as the best and most legitimate route for Trainers looking to grow. We don't ever want to be in that situation, so you need to think very carefully about what projects you decide to dedicate yourself to."),,SPEAKER_OLIVER)
 
-        msgbox(gText_YouRealizeWereEvilRight_WaitI,,SPEAKER_ALICIA)
+        msgbox(format("Wait… I…"),,SPEAKER_ALICIA)
 
         closemessage
 
@@ -90,28 +90,28 @@ script YouRealizeWereEvilRight_Open_Dialogue {
         setobjectxy(KEIYING,21,29)
         setobjectxyperm(KEIYING,21,29)
 
-        msgbox(gText_YouRealizeWereEvilRight_ExcellentTiming,,SPEAKER_OLIVER)
+        msgbox(format("Excellent timing."),,SPEAKER_OLIVER)
 
         //One of the monitors changes to show The Tide members marching. PSF TODO
 
-        msgbox(gText_YouRealizeWereEvilRight_IThinkYourKindness,,SPEAKER_KEIYING)
+        msgbox(format("I think your kindness is being manipulated, {PLAYER}. Our data suggests that the very Gyms that you're turning into “community centers” are actually being used as recruitment and training hubs for The Tide."),,SPEAKER_KEIYING)
 
-        msgbox(gText_YouRealizeWereEvilRight_ShitUsedToBe,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Kai promised me The Tide was just there to help. Are you saying he lied to me?!"),SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_YouRealizeWereEvilRight_UsedToBeASmall,,SPEAKER_KEIYING)
+        msgbox(format("They can't be trusted, {PLAYER}. The Tide used to be a small problem, but you've witnessed them growing increasingly violent and dangerous. You were there during the violent protests near Chasilla, and also saw how they nearly destroyed Sharp Rise Arena. For the good of the region, and our plans, we need to shut them down for good. "),,SPEAKER_KEIYING)
 
         closemessage
 
         applymovement(OLIVER, YouRealizeWereEvilRight_MoveAwayFromTable)
         waitmovement(OLIVER)
 
-        msgbox(gText_YouRealizeWereEvilRight_HidingBehindTheirMask,,SPEAKER_OLIVER)
+        msgbox(format("Why do you think Alcmene hides behind a mask? It's because they know their operation is completely illegal!"),,SPEAKER_OLIVER)
 
-        msgbox(gText_YouRealizeWereEvilRight_WasActingInGoodFaith,,SPEAKER_OLIVER)
+        msgbox(format("Precisely. If The Tide was acting in good faith, they'd work with us, no masks, no subterfuge."),,SPEAKER_OLIVER)
 
-        msgbox(gText_YouRealizeWereEvilRight_TheLocalPolice,,SPEAKER_RAMESH)
+        msgbox(format("The local police have agreed to continue to work with us to eliminate The Tide. {PLAYER}, as you have before, we'd like you and Charlotte to work alongside us to finish them."),,SPEAKER_RAMESH)
 
-        msgbox(gText_YouRealizeWereEvilRight_IKnowThis,,SPEAKER_OLIVER)
+        msgbox(format("I know this is a lot to take in at once, {PLAYER}. I think you should go back to the Compound in PetarosaBorough, take a day, and think about this. You don't want to make any career ruining decisions in haste. When you're ready to help, just come back here tomorrow."),,SPEAKER_OLIVER)
 
         closemessage
         call(TryAutoSave)

@@ -11,7 +11,7 @@ script SharpriseStadium_Entrance_KeepPlayerInside_Script
     lock
     if (flag(FLAG_SHARPRISESTADIUM_TOURNAMENT_HAPPENING))
     {
-        msgbox(gText_GroupStages_OhRight,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+        msgbox(format("Oh right, I can't leave once the tournament has started..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
         closemessage
         applymovement(PLAYER,Common_Movement_WalkUp)
         waitmovement(0)

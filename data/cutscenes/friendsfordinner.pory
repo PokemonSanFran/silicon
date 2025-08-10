@@ -52,7 +52,7 @@ script FriendsForDinner_Intro_Dialogue {
     applymovement(KEIYING,Common_Movement_FaceRight)
     waitmovement(KEIYING)
 
-        msgbox(gText_FriendsForDinner_SorryToInterrupt,,SPEAKER_KEIYING)
+        msgbox(format("Sorry to interrupt - are you {PLAYER}?"),,SPEAKER_KEIYING)
 
         closemessage
 
@@ -62,16 +62,16 @@ script FriendsForDinner_Intro_Dialogue {
     applymovement(KEIYING,FriendsForDinner_KeiyingWalksToPlayer_Movement)
     waitmovement(KEIYING)
 
-        msgbox(gText_FriendsForDinner_YeahWhatsUp,,SPEAKER_ALICIA)
+        msgbox(format("Yeah, what's up?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_FriendsForDinner_GladIWasAbleToRun,,SPEAKER_KEIYING)
+        msgbox(format("Ah, Ramesh was right, glad I was able to run into you. I'm Keiying."),,SPEAKER_KEIYING)
 
-        msgbox(gText_FriendsForDinner_IGuessYouDoToo,,SPEAKER_ALICIA)
+        msgbox(format("Ramesh... they work for SharpRise Capital, right? So I guess you do too?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_FriendsForDinner_ChiefOperatingOfficer,,SPEAKER_KEIYING)
+        msgbox(format("Yes sorry, I'm the SharpRise Capital Chief Operating Officer, and Adelaide's right hand. It's a pleasure to meet you, we're all very impressed with you."),,SPEAKER_KEIYING)
         reveal(REVEAL_KEI_YING)
 
-        msgbox(gText_FriendsForDinner_IKeepHearingThat,,SPEAKER_ALICIA)
+        msgbox(format("Yeah, I keep hearing that! It's a little overwhelming."),,SPEAKER_ALICIA)
 
         goto(FriendsForDinner_BadgeJudge_Script)
 }
@@ -80,41 +80,41 @@ script FriendsForDinner_BadgeJudge_Script {
 
     special(GetNumberOfBadges)
         if (var(VAR_RESULT) == 8){
-            msgbox(gText_FriendsForDinner_FormallSharpriseCapitalongratulate,,SPEAKER_KEIYING)
+            msgbox(format("Well, you're certainly living up to your legend. Let me be the first to formally congratulate you on your qualification in the Championship!"),,SPEAKER_KEIYING)
         } else {
-            msgbox(gText_FriendsForDinner_CanBeAHandful,,SPEAKER_KEIYING)
+            msgbox(format("So far, you're certainly living up to your title! Congratulations on defeating Neriene, I know they can be... a handful."),,SPEAKER_KEIYING)
         }
         goto(FriendsForDinner_AcceptInvite_Dialogue)
 }
 
 script FriendsForDinner_AcceptInvite_Dialogue {
-        msgbox(gText_FriendsForDinner_ItsBeenAnInterestingRide,,SPEAKER_ALICIA)
-        msgbox(gText_FriendsForDinner_WaitDidntISeeYou,,SPEAKER_ALICIA)
+        msgbox(format("It's been an interesting ride, but I'm going to keep giving it my all. Thanks."),,SPEAKER_ALICIA)
+        msgbox(format("Wait, didn't I see you talking to Adaora in CurenoPort the other day?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_FriendsForDinner_WhereDidYou,,SPEAKER_KEIYING)
-        msgbox(gText_FriendsForDinner_IImagineYoureProbably,,SPEAKER_KEIYING)
+        msgbox(format("Where did you hear that name? You shouldn't repeat that around other members of SharpRise Capital. Besides, that couldn't have been me."),,SPEAKER_KEIYING)
+        msgbox(format("I imagine you're probably exhausted. Why don't you come over to my place for dinner? I bet you haven't had a home-cooked meal in a while, what do you say?"),,SPEAKER_KEIYING)
 
-        msgbox(gText_FriendsForDinner_ItHasBeenAWhile,,SPEAKER_ALICIA)
+        msgbox(format("Oh! You're right, it has been a while, are you sure that's fine on such short notice?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_FriendsForDinner_WontBeAnIssue,,SPEAKER_KEIYING)
+        msgbox(format("Won't be an issue at all! I'd love to really get to know the prodigy Trainer we're investing in. "),,SPEAKER_KEIYING)
 
         closemessage
 
         applymovement(KEIYING,Common_Movement_FaceLeft)
         waitmovement(0)
 
-        msgbox(gText_FriendsForDinner_WestOfHere,,SPEAKER_KEIYING)
+        msgbox(format("I live in PetarosaBorough, west of here. "),,SPEAKER_KEIYING)
 
         closemessage
 
         applymovement(KEIYING,Common_Movement_FacePlayer)
         waitmovement(0)
 
-        msgbox(gText_FriendsForDinner_MyHouseHas,,SPEAKER_KEIYING)
+        msgbox(format("My house has the teal shutters, it'll be easy to spot. My kids mentoned you love to eat {STR_VAR_1}, so we'll make sure you have that tonight."),,SPEAKER_KEIYING)
 
-        msgbox(gText_FriendsForDinner_IllSeeYouForDinner,,SPEAKER_KEIYING)
+        msgbox(format("I'll see you for dinner then?"),,SPEAKER_KEIYING)
 
-        msgbox(gText_FriendsForDinner_YesThanksAgain,,SPEAKER_ALICIA)
+        msgbox(format("Uh... yeah. Sounds good."),,SPEAKER_ALICIA)
 
         closemessage
 

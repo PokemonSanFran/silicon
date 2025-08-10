@@ -35,7 +35,7 @@ script SharpriseSpire_Top_Adelaide_Event_Script {
 
 script SharpriseSpire_Top_Bookshelf_Dialogue{
     lockall
-    msgbox(gText_SharpriseSpire_Top_Bookshelf_TheresABunch,MSGBOX_DEFAULT)
+    msgbox(format("There's a lot of books ranging a series of different topics, like  Company Management, System Design, Learning Esperanto."),MSGBOX_DEFAULT)
 
     questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING)
     if (var(VAR_RESULT)){

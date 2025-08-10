@@ -30,17 +30,17 @@ script OneDown_SetUpObject_Script {
 script OneDown_StartCutscene_Script {
         startcutscene(JUMPPLAYER_ONEDOWN)
     //PSF TODO Adaora should now begin using Alcmene's theme as her character theme instead of the generic The Tide one
-        msgbox(gText_OneDown_IJustGotFilled,,SPEAKER_ADAORA)
+        msgbox(format("I just got filled in… that was absolutely incredible!"),,SPEAKER_ADAORA)
 
-        msgbox(gText_OneDown_ThanksAndYouve,,SPEAKER_ALICIA)
+        msgbox(format("Thanks. And you've been an awesome leader too. These people love you."),,SPEAKER_ALICIA)
 
-        msgbox(gText_OneDown_IDidntThinkIHad,,SPEAKER_ADAORA)
+        msgbox(format("I didn't think I had it in me, to be honest. Ell- Alcmene knew better, I guess."),,SPEAKER_ADAORA)
 
         closemessage
 
         applymovement(ADAORA,Common_Movement_FaceRight)
 
-        msgbox(gText_OneDown_SoundsLikeWereBoth,,SPEAKER_MAGNUS)
+        msgbox(format("Sounds like we're both having excellent days! My talks with the region's council have been much more productive than I expected. I think we're actually making some damn progress! If we keep this up -"),,SPEAKER_MAGNUS)
 
         closemessage
         goto(OneDown_StartEarthquake_Script)
@@ -64,12 +64,12 @@ script OneDown_Finish_Dialogue {
 
         applymovement(MAGNUS,Common_Movement_FaceLeft)
 
-        msgbox(gText_OneDown_MyOldBones,,SPEAKER_MAGNUS)
+        msgbox(format("My old bones can't handle those quakes like I used to!"),,SPEAKER_MAGNUS)
         closemessage
 
         applymovement(ADAORA, Common_Movement_FaceUp)
 
-        msgbox(gText_OneDown_GetSomeRest,,SPEAKER_ADAORA)
+        msgbox(format("I know its been a long day, {PLAYER}, you should get some rest. You're still staying at Kai's place in HalaiIsland, right?"),,SPEAKER_ADAORA)
 
         closemessage
 

@@ -73,7 +73,7 @@ script Quest_GetTheBand_CheckQuestAndBike_Script{
 }
 
 script Quest_GetTheBand_Interact_BikerA_Dialogue{
-        msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+        msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
         call(Quest_GetTheBand_RemoveBikers_Script)
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
         call(Quest_GetTheBand_CheckProgress_Script)
@@ -83,7 +83,7 @@ script Quest_GetTheBand_Interact_BikerA_Dialogue{
 script Quest_GetTheBand_Interact_BikerB_Dialogue{
     specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
     if (var(VAR_TEMP_1) != 0){
-    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
     call(Quest_GetTheBand_RemoveBikers_Script)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
     call(Quest_GetTheBand_CheckProgress_Script)
@@ -93,7 +93,7 @@ script Quest_GetTheBand_Interact_BikerB_Dialogue{
 }
 
 script Quest_GetTheBand_Interact_BikerC_Dialogue{
-    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
     call(Quest_GetTheBand_RemoveBikers_Script)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
     call(Quest_GetTheBand_CheckProgress_Script)
@@ -101,7 +101,7 @@ script Quest_GetTheBand_Interact_BikerC_Dialogue{
 }
 
 script Quest_GetTheBand_Interact_BikerD_Dialogue{
-    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
     call(Quest_GetTheBand_RemoveBikers_Script)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
     call(Quest_GetTheBand_CheckProgress_Script)
@@ -109,7 +109,7 @@ script Quest_GetTheBand_Interact_BikerD_Dialogue{
 }
 
 script Quest_GetTheBand_Interact_BikerE_Dialogue{
-    msgbox(gText_GetTheBand_TheBikersSentYou,MSGBOX_NPC)
+    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
     call(Quest_GetTheBand_RemoveBikers_Script)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
     call(Quest_GetTheBand_CheckProgress_Script)
@@ -166,10 +166,10 @@ script Quest_GetTheBand_Interact_Tedore_Script{
 }
 
 script Quest_GetTheBand_StartQuest_Dialogue{
-    msgbox(gText_GetTheBand_WeBuiltOutTheHQ)
-    msgbox(gText_GetTheBand_KeepingInTouchIsHard)
-    msgbox(gText_GetTheBand_CanYouTellBikersYouMeet)
-    msgbox(gText_GetTheBand_YoullNeedBike)
+    msgbox(format(""))
+    msgbox(format(""))
+    msgbox(format(""))
+    msgbox(format(""))
     startquest(QUEST_GETTHEBANDBACKTOGETHER)
     release
     end
@@ -179,23 +179,23 @@ script Quest_GetTheBand_Active_Dialogue{
     call(Quest_GetTheBand_CheckProgress_Script)
 
     switch (var(VAR_TEMP_0)){
-        case 0: msgbox(gText_GetTheBand_AnyLuckOnYourBike,MSGBOX_NPC)
-        case 1: msgbox(gText_GetTheBand_OnePersonCameIn,MSGBOX_NPC)
+        case 0: msgbox(format(""),MSGBOX_NPC)
+        case 1: msgbox(format(""),MSGBOX_NPC)
         case 2: 
-        case 3: msgbox(gText_GetTheBand_TheyReallyStarting,MSGBOX_NPC)
-        case 4: msgbox(gText_GetTheBand_WowItsSoGreat,MSGBOX_NPC)
+        case 3: msgbox(format(""),MSGBOX_NPC)
+        case 4: msgbox(format(""),MSGBOX_NPC)
     }
     end
 }
 
 script Quest_GetTheBand_Reward_Dialogue{
-    msgbox(gText_GetTheBand_AllTheRooms)
-    msgbox(gText_GetTheBand_ItFeelsAwesomeToHelp)
-    msgbox(gText_GetTheBand_TakeThisUpgrade)
+    msgbox(format(""))
+    msgbox(format(""))
+    msgbox(format(""))
 
     giveitem(ITEM_UPGRADE,1)
 
-    msgbox(gText_GetTheBand_YourBikeGoesFaster,MSGBOX_NPC)
+    msgbox(format(""),MSGBOX_NPC)
 
     completequest(QUEST_GETTHEBANDBACKTOGETHER)
     release
@@ -203,7 +203,7 @@ script Quest_GetTheBand_Reward_Dialogue{
 }
 
 script Quest_GetTheBand_Completed_Dialogue{
-    msgbox(gText_GetTheBand_HowsTheUpgrade,MSGBOX_NPC)
+    msgbox(format(""),MSGBOX_NPC)
     end
 }
 

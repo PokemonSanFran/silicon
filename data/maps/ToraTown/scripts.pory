@@ -14,14 +14,14 @@ mapscripts ToraTown_MapScripts {
 }
 
 script ToraTown_FashionDesigner_Script{
-    msgbox(gText_ToraTown_ImAFashion,MSGBOX_NPC)
+    msgbox(format("I'm a fashion designer. I can't afford to travel to Sinnoh... but I love when their tourists come here! They're always wearing the latest styles and fashions, and so much of it doesn't translate when looking online."),MSGBOX_NPC)
         subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_2)
         call(Quest_HybridCulture_CheckSubquests_Script)
         end
 }
 
 script ToraTown_Biker_Interact_Script{
-    msgbox(gText_ToraTown_PlaceholderBiker,MSGBOX_NPC)
+    msgbox(format("i am a biker, and this is placeholder text."),MSGBOX_NPC)
 
     call(Quest_GetTheBand_CheckQuestAndBike_Script)
 

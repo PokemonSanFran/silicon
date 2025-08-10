@@ -19,7 +19,7 @@ script Quest_Persuasivepassenger_InteractLeader_Script{
         goto(Quest_Persuasivepassenger_Event_Script)
     }
 
-    msgbox(gText_Persuasivepassenger_WelcomeTo,MSGBOX_NPC)
+    msgbox(format("Welcome to the union of taxi drivers!"),MSGBOX_NPC)
     end
 }
 
@@ -31,11 +31,11 @@ script Quest_Persuasivepassenger_Event_Script{
 }
 
 script Quest_Persuasivepassenger_StartQuest_Script{
-    msgbox(gText_Persuasivepassenger_OhTheFamous)
-    msgbox(gText_Persuasivepassenger_IllGetRightTo)
-    msgbox(gText_Persuasivepassenger_JustLikeYouWorked)
-    msgbox(gText_Persuasivepassenger_WeveDoneSomeResearch)
-    msgbox(gText_Persuasivepassenger_CanYouSeeIfYou)
+    msgbox(format("Oh! The famous {PLAYER}."))
+    msgbox(format("I'll get right to it. We think the best way to fight Arriba is to thin out their numbers and get their drivers to join us."))
+    msgbox(format("Just like you worked with our driers to expand the fleet, we want you to work with arriba drivers to help them too."))
+    msgbox(format("We've done some research, and we've identfied some influential Arriba drivers, who are also going through some rough times. We're thinking if we can convince them that the taxi union is a better fit for them, they'll come over and bring others with them."))
+    msgbox(format("Can you see if you can help them out?"))
     startquest(QUEST_PERSUASIVEPASSENGER)
     goto(Quest_Persuasivepassenger_Active_Dialogue)
     release
@@ -46,18 +46,18 @@ script Quest_Persuasivepassenger_Active_Dialogue{
     specialvar(VAR_TEMP_1,Quest_Persuasivepassenger_CountRemainingSubquests)
     switch(var(VAR_TEMP_1)){
         case 3:
-            msgbox(gText_Persuasivepassenger_TheFirstDriver)
-            msgbox(gText_Debug_WarpArriba)
+            msgbox(format("The first driver tends to drive out of HalaiIsland. Try grabbing an User from there!"))
+            msgbox(format("but we haven't built the arriba menu yet, so we'll warp you now."))
         fadeblackandsetremovewarpfadeflag
             warp(MAP_ARRIBA_CAR_INTERIOR,1,3)
         case 2:
-            msgbox(gText_Persuasivepassenger_TheNextDriver)
-            msgbox(gText_Debug_WarpArriba)
+            msgbox(format("We've found a driver we can turn that drives out of TirabudinPlace. Head over there!"))
+            msgbox(format("but we haven't built the arriba menu yet, so we'll warp you now."))
         fadeblackandsetremovewarpfadeflag
             warp(MAP_ARRIBA_CAR_INTERIOR,10,3)
         default:
-            msgbox(gText_Persuasivepassenger_TheresAnother)
-            msgbox(gText_Debug_WarpArriba)
+            msgbox(format("There's another driver that came out of nowhere, but we're not certain we know where they drive out of... I guess we'll have to try a few different places!"))
+            msgbox(format("but we haven't built the arriba menu yet, so we'll warp you now."))
         fadeblackandsetremovewarpfadeflag
             warp(MAP_ARRIBA_CAR_INTERIOR,20,15)
     }
@@ -68,7 +68,7 @@ script Quest_Persuasivepassenger_Active_Dialogue{
 }
 
 script Quest_Persuasivepassenger_Reward_Dialogue{
-    msgbox(gText_Persuasivepassenger_WeveGotten,MSGBOX_NPC)
+    msgbox(format("We've gotten a ton of new members, and Arriba is slowing down! Thank you!"),MSGBOX_NPC)
     call(TryAutoSave)
     completequest(QUEST_PERSUASIVEPASSENGER)
     addvar(VAR_STORYLINE_STATE,1)
@@ -84,25 +84,25 @@ script Quest_Persuasivepassenger_Driver1_Event_Script{
     setvar(VAR_TEMP_1,5)
     lock
 
-    msgbox(gText_Persuasivepassenger_HeyKid,,SPEAKER_ARRIBA_DRIVER1)
-    msgbox(gText_Persuasivepassenger_HowsItGoing,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_JustPickingUp,,SPEAKER_ARRIBA_DRIVER1)
+    msgbox(format("Hey kid, how are you?"),,SPEAKER_ARRIBA_DRIVER1)
+    msgbox(format("Great, how's it going?"),,SPEAKER_ALICIA)
+    msgbox(format("Just trying to pick up some extra shifts, get in as many rides as I can."),,SPEAKER_ARRIBA_DRIVER1)
 
     specialvar(VAR_RESULT,Quest_Persuasivepassenger_CheckNeededItems)
     if (var(VAR_RESULT)){
         call(Quest_Persuasivepassenger_HasItems_Dialogue)
     }else{
-        msgbox(gText_Persuasivepassenger_MyKidIsSick,,SPEAKER_ARRIBA_DRIVER1)
-        msgbox(gText_Persuasivepassenger_OhIHope,,SPEAKER_ALICIA)
+        msgbox(format("My kid is sick with something fierce, so I'm trying to make some extra cash so we can buy some meds."),,SPEAKER_ARRIBA_DRIVER1)
+        msgbox(format("Oh! I hope they're okay..."),,SPEAKER_ALICIA)
         bufferitemnameplural(STR_VAR_1,ITEM_SITRUS_BERRY,3)
         bufferitemnameplural(STR_VAR_2,ITEM_HONEY,5)
-        msgbox(gText_Persuasivepassenger_MyMomUsed,,SPEAKER_ARRIBA_DRIVER1)
+        msgbox(format("You know, my mom used to make this insane medicine when I was little. It's hard to get the ingredients here, but I'd love to make it again... I think it was 3 {STR_VAR_1}, 5 {STR_VAR_2},"),,SPEAKER_ARRIBA_DRIVER1)
         bufferitemnameplural(STR_VAR_1,ITEM_WATMEL_BERRY,1)
         bufferitemnameplural(STR_VAR_2,ITEM_LEMONADE,2)
-        msgbox(gText_Persuasivepassenger_IngredentsTwo,,SPEAKER_ARRIBA_DRIVER1)
+        msgbox(format("1 {STR_VAR_1}, and 2 {STR_VAR_2}."),,SPEAKER_ARRIBA_DRIVER1)
         call(Quest_Persuasivepassenger_DebugDriver1)
     }
-    msgbox(gText_Persuasivepassenger_WereHere,,SPEAKER_ARRIBA_DRIVER1)
+    msgbox(format("Okay, we're here. Have a great day!"),,SPEAKER_ARRIBA_DRIVER1)
     closemessage
     //special(CompleteArribaDrive)
         fadeblackandsetremovewarpfadeflag
@@ -114,24 +114,24 @@ script Quest_Persuasivepassenger_DebugDriver1{
             additem(ITEM_HONEY,5)
             additem(ITEM_WATMEL_BERRY,1)
             additem(ITEM_LEMONADE,2)
-            msgbox(gText_Debug_GiveItems)
+            msgbox(format("your bag now has what he needs."))
 return
 }
 
 
 script Quest_Persuasivepassenger_HasItems_Dialogue{
-    msgbox(gText_Persuasivepassenger_ForYourSickKid,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_OhRightDidI,,SPEAKER_ARRIBA_DRIVER1)
-    msgbox(gText_Persuasivepassenger_GiveItems,MSGBOX_YESNO)
+    msgbox(format("For your sick kid, right?"),,SPEAKER_ALICIA)
+    msgbox(format("Oh right, did I ride with you the other day?"),,SPEAKER_ARRIBA_DRIVER1)
+    msgbox(format("Do you want to give the items to the driver?"),MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == YES){
             special(Quest_Persuasivepassenger_TakeNeededItems)
             subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_PERSUASIVEPASSENGER,SUB_QUEST_1)
-            msgbox(gText_Persuasivepassenger_IGotEverything,,SPEAKER_ALICIA)
-            msgbox(gText_Persuasivepassenger_PlayerGave,MSGBOX_AUTOCLOSE)
-            msgbox(gText_Persuasivepassenger_ThankYouSoMuch,,SPEAKER_ARRIBA_DRIVER1)
-            msgbox(gText_Persuasivepassenger_TheUnion,,SPEAKER_ALICIA)
-            msgbox(gText_Persuasivepassenger_ThatsTight,,SPEAKER_ARRIBA_DRIVER1)
+            msgbox(format("I got everything you mentioned. I'll leave it all back here for you."),,SPEAKER_ALICIA)
+            msgbox(format("{PLAYER} gave the items to the driver."),MSGBOX_AUTOCLOSE)
+            msgbox(format("...thank you so much! You're like an angel, where did you come from?"),,SPEAKER_ARRIBA_DRIVER1)
+            msgbox(format("Actually, the taxi union sent me. They're all about working together to help their fellow workers, and they heard some other drivers could use some help."),,SPEAKER_ALICIA)
+            msgbox(format("That's tight! Maybe I'll check them out after all. Driving for Arriba is intense."),,SPEAKER_ARRIBA_DRIVER1)
             closemessage
         }else{
             return
@@ -142,8 +142,8 @@ script Quest_Persuasivepassenger_HasItems_Dialogue{
 script Quest_Persuasivepassenger_Driver2_Event_Script{
     setvar(VAR_TEMP_1,5)
     lock
-    msgbox(gText_Persuasivepassenger_HowYaDoin,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_YouKnow,,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("How you doing?"),,SPEAKER_ALICIA)
+    msgbox(format("You know, just trying to get by!"),,SPEAKER_ARRIBA_DRIVER2)
 
     if (flag(FLAG_QUEST_PERSUASIVE_SIBLING)){
         goto(Quest_Persuasivepassenger_Driver2_FoundSibling_Dialogue)
@@ -153,58 +153,58 @@ script Quest_Persuasivepassenger_Driver2_Event_Script{
         goto(Quest_Persuasivepassenger_Driver2_DefeatedLandlord_Dialogue)
     }
 
-    msgbox(gText_Persuasivepassenger_MyBrothersLandlord,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_SoImTrying,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_WaitThreeTimes,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_YeahSoMyBrotherIsOut,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_ThanksForListening,,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("My brother's landlord jacked up his rent by some insane amount...like three times! So he's out on the street of MermerezaCity now."),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("So, I'm trying to pick some shifts"),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("Wait, three times the rent?!"),,SPEAKER_ALICIA)
+    msgbox(format("Yeah, so my brother is out on the streets... somewhere in the MermerezaCity."),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("Thanks for listening though, appreciate it."),,SPEAKER_ARRIBA_DRIVER2)
 
     goto(Quest_Persuasivepassenger_Driver2_End_Dialogue)
 }
 
 script Quest_Persuasivepassenger_Driver2_End_Dialogue{
-    msgbox(gText_Persuasivepassenger_WereAtTheSpot,,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("We are at the spot! Have a great one."),,SPEAKER_ARRIBA_DRIVER2)
         //special(CompleteArribaDrive)
         fadeblackandsetremovewarpfadeflag
         warp(MAP_HALAI_ISLAND,0)
 }
 
 script Quest_Persuasivepassenger_Driver2_DefeatedLandlord_Dialogue{
-    msgbox(gText_Persuasivepassenger_MyBrotherExLandlord,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_WellISawOnTheNews,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_ThatsNotWhat,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-    msgbox(gText_Persuasivepassenger_ImGonnaKeepWorking,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_ThanksForListening,,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("My brother's ex landlord raised his rents by three times...and it was pretty crazy."),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("Well, I saw on the news that he had a change of heart! He LOWERED by rent by a bigger amount than he raised it by, and then turned himself into the police for some drug stuff. Crazy!"),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("That's certainly better than I was expected!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("I'm gonna keep working these shifts until my brother is back home. I gotta head down to MermerezaCity and let him know, but I haven't had time..."),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("Thanks for listening though, appreciate it."),,SPEAKER_ARRIBA_DRIVER2)
     goto(Quest_Persuasivepassenger_Driver2_End_Dialogue)
 }
 
 script Quest_Persuasivepassenger_Driver2_FoundSibling_Dialogue{
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_PERSUASIVEPASSENGER,SUB_QUEST_2)
-    msgbox(gText_Persuasivepassenger_MyBrotherCalled,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_HeWasGoing,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_HeMentioned,,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(gText_Persuasivepassenger_OhIm,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_ThisIsMyLast,,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("My brother called me, and there was some awesome news!"),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("He heard about his apartment and was able to move back into his place."),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("He mentioned that the Taxi Union had gotten involved, I guess because that rent hike had messed with one of their own."),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("Oh yeah, I'm working with them a little too."),,SPEAKER_ALICIA)
+    msgbox(format("This is my last shift with Arriba... because I'm going to hit up the Taxi company tomorrow. If that's how they treat their people, there's somewhere I wanna be!"),,SPEAKER_ARRIBA_DRIVER2)
     goto(Quest_Persuasivepassenger_Driver2_End_Dialogue)
 }
 
 script Quest_Persuasivepassenger_Landlord_Battle_Script{
-    msgbox(gText_Persuasivepassenger_AreYouTripling,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_OfCourse,,SPEAKER_PERSUASIVE_LANDLORD)
-    msgbox(gText_Persuasivepassenger_WaitYoure,,SPEAKER_PERSUASIVE_LANDLORD)
-    msgbox(gText_Persuasivepassenger_YeahAnd,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_KidsAreSoft,,SPEAKER_PERSUASIVE_LANDLORD)
+    msgbox(format("Are you TRIPLING your rent?!?!"),,SPEAKER_ALICIA)
+    msgbox(format("Of course, that's market value! Why wouldn't I?"),,SPEAKER_PERSUASIVE_LANDLORD)
+    msgbox(format("Wait, you don't look familiar, you don't even live here!"),,SPEAKER_PERSUASIVE_LANDLORD)
+    msgbox(format("Yeah, and?"),,SPEAKER_ALICIA)
+    msgbox(format("You kids are all too soft and sticking your nose in where it sounds belong!"),,SPEAKER_PERSUASIVE_LANDLORD)
 
     trainerbattle_no_intro(TRAINER_PERSUASIVE_LANDLORD,gText_Persuasivepassenger_Wait)
     goto(Quest_Persuasivepassenger_PostBattle_Dialogue)
 }
 
 script Quest_Persuasivepassenger_PostBattle_Dialogue{
-    msgbox(gText_Persuasivepassenger_PleaseDontHurt,,SPEAKER_PERSUASIVE_LANDLORD)
-    msgbox(gText_Persuasivepassenger_IWasntPlanning,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-    msgbox(gText_Persuasivepassenger_IDontWantAnythingBut,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_OkayOkay,,SPEAKER_PERSUASIVE_LANDLORD)
-    msgbox(gText_Persuasivepassenger_LetsHope,,SPEAKER_ALICIA)
+    msgbox(format("Please, don't hurt me! I told Jimmy I'll have his money!"),,SPEAKER_PERSUASIVE_LANDLORD)
+    msgbox(format("I have no idea what he's talking about... but maybe I can abuse this."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("...you can keep your kneecaps in tact for now. And normally I don't care how you get the money. But you can't be screwing over innocent grandmas and people, okay? You bring that rent back down to where it was. Figure something else out. And get me my damn money."),,SPEAKER_ALICIA)
+    msgbox(format("Okay... okay!"),,SPEAKER_PERSUASIVE_LANDLORD)
+    msgbox(format("Let's hope that works..."),,SPEAKER_ALICIA)
     closemessage
 
     applymovement(VAR_LAST_TALKED,Quest_Persuasivepassenger_WalkAway_Movement)
@@ -217,13 +217,13 @@ script Quest_Persuasivepassenger_PostBattle_Dialogue{
 
 script Quest_Persuasivepassenger_Sibling_Dialogue{
     lockall
-    msgbox(gText_Persuasivepassenger_DidYouUsed,,SPEAKER_ALICIA,,EMOTE_SHOCK)
-    msgbox(gText_Persuasivepassenger_YeahHowDid,,SPEAKER_PERSUASIVE_SIBLING,,EMOTE_SHOCK)
-    msgbox(gText_Persuasivepassenger_IThinkThatGuy,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_WhatHowDo,,SPEAKER_PERSUASIVE_SIBLING)
-    msgbox(gText_Persuasivepassenger_IHeardTheTaxiUnion,,SPEAKER_ALICIA)
-    msgbox(gText_Persuasivepassenger_OhWowMySibling,,SPEAKER_PERSUASIVE_SIBLING)
-    msgbox(gText_Persuasivepassenger_ThanksForLetting,,SPEAKER_PERSUASIVE_SIBLING)
+    msgbox(format("Did you used to live in the apartments in HalaiIsland?"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(format("Yeah, how did you know?"),,SPEAKER_PERSUASIVE_SIBLING,,EMOTE_SHOCK)
+    msgbox(format("I think that guy... the landlord, had a change a heart. I think rents are going back down."),,SPEAKER_ALICIA)
+    msgbox(format("What? How do you know?"),,SPEAKER_PERSUASIVE_SIBLING)
+    msgbox(format("I heard the Taxi union got involved. Guess he crossed one of theirs, and they don't mess around."),,SPEAKER_ALICIA)
+    msgbox(format("Oh wow! My sibling drives for arriba. I should tell him!"),,SPEAKER_PERSUASIVE_SIBLING)
+    msgbox(format("Thanks for letting me know!"),,SPEAKER_PERSUASIVE_SIBLING)
     closemessage
     fadescreen(FADE_TO_BLACK)
     removeobject(VAR_LAST_TALKED)
@@ -236,10 +236,10 @@ script Quest_Persuasivepassenger_Driver3_Event_Script{
     setvar(VAR_TEMP_1,5)
     lock
     if(!flag(FLAG_QUEST_PERSUASIVE_PASSENGER_PLAYER_KIDNAPPED)){
-        msgbox(gText_Persuasivepassenger_HeyPlayer,,SPEAKER_ARRIBA_DRIVER3)
-        msgbox(gText_Persuasivepassenger_WhatTheHell,,SPEAKER_ALICIA)
+        msgbox(format("Hey {PLAYER}! We're going to go for a quick detour..."),,SPEAKER_ARRIBA_DRIVER3)
+        msgbox(format("What the hell do you mean by a detour?"),,SPEAKER_ALICIA)
     }else{
-        msgbox(gText_Persuasivepassenger_WaitASecondHowDid,,SPEAKER_ARRIBA_DRIVER3)
+        msgbox(format("Wait a second, how did you get out of that basement?!?"),,SPEAKER_ARRIBA_DRIVER3)
     }
     closemessage
         fadeblackandsetremovewarpfadeflag
@@ -259,9 +259,9 @@ script Quest_Persuasivepassenger_WokeUp_Dialogue{
     }
 
     if(flag(FLAG_QUEST_PERSUASIVE_PASSENGER_PLAYER_KIDNAPPED)){
-        msgbox(gText_Persuasivepassenger_OkayIGuess,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+        msgbox(format("Okay, I guess we're back here again..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     }else{
-        msgbox(gText_Persuasivepassenger_WhereAmI,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+        msgbox(format("Where am I...?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
         setflag(FLAG_QUEST_PERSUASIVE_PASSENGER_PLAYER_KIDNAPPED)
     }
 
@@ -272,14 +272,14 @@ script Quest_Persuasivepassenger_WokeUp_Dialogue{
 
 script Quest_Persuasivepassenger_Grunt1_Event_Script{
 	trainerbattle_single(TRAINER_ARRIBA_GRUNT1, gText_Persuasivepassenger_SoYouThink, gText_Persuasivepassenger_IGiveUp)
-	msgbox(gText_Persuasivepassenger_HonestlyIDont, MSGBOX_AUTOCLOSE)
+	msgbox(format("Honestly I don't know what's going on. They just told me to beat you up if you woke up."), MSGBOX_AUTOCLOSE)
 	end
 }
 
 script Quest_Persuasivepassenger_Grunt2_Event_Script{
     lock
-    msgbox(gText_Persuasivepassenger_WhoIsIn,,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
-    msgbox(gText_Persuasivepassenger_IfYoureHere,,SPEAKER_ARRIBA_GRUNT2,,EMOTE_SHOCK)
+    msgbox(format("Who is in charge here?!?!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("If you're here, that's means... uh oh."),,SPEAKER_ARRIBA_GRUNT2,,EMOTE_SHOCK)
     closemessage
     trainerbattle_no_intro(TRAINER_ARRIBA_GRUNT2,gText_Persuasivepassenger_IGottaTell)
     goto(Quest_Persuasivepassenger_DefeatedGrunt2_Script)
@@ -303,9 +303,9 @@ script Quest_Persuasivepassenger_Arriba_CEO_Dialogue{
         }
 
         setvar(VAR_QUEST_PERSUASIVE_PASSENGER_STATE,SAVED_BEFORE_ARRIBA_CEO)
-        msgbox(gText_Persuasivepassenger_SoYoure,MSGBOX_NPC,SPEAKER_ARRIBA_CEO)
-        msgbox(gText_Persuasivepassenger_WhatsTheDeal,,SPEAKER_ALICIA,,EMOTE_ANGRY)
-        msgbox(gText_Persuasivepassenger_WeDoThatMore,,SPEAKER_ARRIBA_CEO)
+        msgbox(format("So, you're {PLAYER}."),MSGBOX_NPC,SPEAKER_ARRIBA_CEO)
+        msgbox(format("What's the deal with the kidnapping?!"),,SPEAKER_ALICIA,,EMOTE_ANGRY)
+        msgbox(format("We do that more than you think..."),,SPEAKER_ARRIBA_CEO)
         lockall
         closemessage
         startmenu_savescreen
@@ -314,14 +314,14 @@ script Quest_Persuasivepassenger_Arriba_CEO_Dialogue{
 }
 
 script Quest_Persuasivepassenger_Arriba_CEO_Battle_Script{
-    msgbox(gText_Persuasivepassenger_TimeToPut,MSGBOX_NPC,SPEAKER_ARRIBA_CEO)
+    msgbox(format("Time to put this into overdrive."),MSGBOX_NPC,SPEAKER_ARRIBA_CEO)
     closemessage
     trainerbattle_no_intro(TRAINER_ARRIBA_CEO,gText_Persuasivepassenger_YoureTough)
     goto(Quest_Persuasivepassenger_Post_CEO_Battle_Script)
 }
 
 script Quest_Persuasivepassenger_PostRaid_Arriba_CEO_Dialogue{
-    msgbox(gText_Persuasivepassenger_IShouldHaveGuessed,MSGBOX_NPC,SPEAKER_ARRIBA_CEO)
+    msgbox(format("I should have guessed you'd be behind these... disruptions."),MSGBOX_NPC,SPEAKER_ARRIBA_CEO)
     lockall
     closemessage
     startmenu_savescreen
@@ -331,7 +331,7 @@ script Quest_Persuasivepassenger_PostRaid_Arriba_CEO_Dialogue{
 script Quest_Persuasivepassenger_Post_CEO_Battle_Script{
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_PERSUASIVEPASSENGER,SUB_QUEST_3)
     questmenu(QUEST_MENU_SET_REWARD,QUEST_PERSUASIVEPASSENGER)
-    msgbox(gText_Persuasivepassenger_WatchYourBack,MSGBOX_NPC)
+    msgbox(format("Watch your back..."),MSGBOX_NPC)
     fadescreen(FADE_TO_BLACK)
     removeobject(VAR_LAST_TALKED)
     fadescreen(FADE_FROM_BLACK)
@@ -340,7 +340,7 @@ script Quest_Persuasivepassenger_Post_CEO_Battle_Script{
 }
 
 script Quest_Persuasivepassenger_Complete_Dialogue{
-    msgbox(gText_Persuasivepassenger_ThanksAgain,MSGBOX_NPC)
+    msgbox(format("Thanks again!"),MSGBOX_NPC)
     end
 }
 

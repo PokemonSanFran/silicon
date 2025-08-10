@@ -27,11 +27,11 @@ script Quest_Breaktheinternet_EliteFour_Dialogue{
 
 script Quest_Breaktheinternet_SocialMediaReporter_Dialogue{
     setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER)
-    msgbox(gText_Breaktheinternet_SocialMediaIs,MSGBOX_NPC,SPEAKER_ISMAIL)
+    msgbox(format("Social media is getting out of control! I spend more of my day trying to verify wild claims than actually reporting on real news."),MSGBOX_NPC,SPEAKER_ISMAIL)
 
     call_if_quest_complete(QUEST_RABIESOUTBREAK,Quest_Breaktheinternet_Rabies_Dialogue)
 
-    msgbox(gText_Breaktheinternet_IWantTo,MSGBOX_DEFAULT,SPEAKER_ISMAIL)
+    msgbox(format("I want to try to investigate where all these claims are coming from, because I think its only going to get worse. You're a Trainer, right? Let's exchange contact info. Keep your eyes peeled on social media for any more bogus stories, and I'll hit you up once I find a good lead."),MSGBOX_DEFAULT,SPEAKER_ISMAIL)
     applymovement(PERLACIA_CITY_ISMAIL,Quest_Breaktheinternet_WalkInside)
     playse(SE_EXIT)
     waitmovement(PERLACIA_CITY_ISMAIL)
@@ -43,8 +43,8 @@ script Quest_Breaktheinternet_SocialMediaReporter_Dialogue{
 }
 
 script Quest_Breaktheinternet_Rabies_Dialogue{
-    msgbox(gText_Breaktheinternet_TotallyIHunted,MSGBOX_DEFAULT,,SPEAKER_ALICIA)
-    msgbox(gText_Breaktheinternet_OhRight,MSGBOX_DEFAULT,SPEAKER_ISMAIL)
+    msgbox(format("Totally! I hunted a bunch of Glameow in GlavezHill only for the whole story to be totally bogus."),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+    msgbox(format("Oh right, the rabies outbreak! So ridiculous."),MSGBOX_DEFAULT,SPEAKER_ISMAIL)
     return
 }
 
@@ -87,8 +87,8 @@ script Quest_Breaktheinternet_CountQuestsAndProgress_Script{
 
 script Quest_Breaktheinternet_CallPlayer_Dialogue{
     call(Common_EventScript_PhoneRinging)
-        msgbox(gText_Breaktheinternet_HeyPlayer,,SPEAKER_ISMAIL,,,PHONE_ON)
-        msgbox(gText_Breaktheinternet_YeahIllBe,,SPEAKER_ALICIA,,,PHONE_ON)
+        msgbox(format("Hey {PLAYER}, I've made some progress on where these stories are coming from. Can you come to the cafe in CuconuTown?"),,SPEAKER_ISMAIL,,,PHONE_ON)
+        msgbox(format("Yeah, I can be there!"),,SPEAKER_ALICIA,,,PHONE_ON)
         closemessage
         call(TryAutoSave)
         release
@@ -111,9 +111,9 @@ script Quest_Breaktheinternet_Ismail_Event_Script{
 }
 
 script Quest_Breaktheinternet_StartQuest_Script{
-        msgbox(gText_Breaktheinternet_OkayIGot,,SPEAKER_ISMAIL)
+        msgbox(format("Okay, I got a pretty good handle. These posts get tons of engagement regardless of their accuracy... they get clicks. And clicks mean ad dollars. But its dangerous! We need to stop these greedy people."),,SPEAKER_ISMAIL)
         startquest(QUEST_BREAKTHEINTERNET)
-        msgbox(gText_Breaktheinternet_IGotALead,,SPEAKER_ISMAIL)
+        msgbox(format("I got a lead in EspuleeOutskirts, that posts might be coming from there. Can you investigate?"),,SPEAKER_ISMAIL)
         closemessage
     call(TryAutoSave)
         release
@@ -131,11 +131,11 @@ script Quest_Breaktheinternet_DescribeQuest_Script{
 }
 
 script Quest_Breaktheinternet_Describe_FirstQuest_Dialogue{
-    msgbox(gText_Breaktheinternet_IGotALead,,SPEAKER_ISMAIL)
+    msgbox(format("I got a lead in EspuleeOutskirts, that posts might be coming from there. Can you investigate?"),,SPEAKER_ISMAIL)
 }
 
 script Quest_Breaktheinternet_Describe_SecondQuest_Dialogue{
-    msgbox(gText_Breaktheinternet_HeadOverTo,,SPEAKER_ISMAIL)
+    msgbox(format("Okay so EspuleeOutskirts was a start... head over to QiuVillage. I think that goes further down the rabbit hole."),,SPEAKER_ISMAIL)
 }
 
 script Quest_Breaktheinternet_EspuleeOutskirts_Script{
@@ -143,7 +143,7 @@ script Quest_Breaktheinternet_EspuleeOutskirts_Script{
         if (var(VAR_RESULT) != 3){
             return
         }
-    msgbox(gText_Breaktheinternet_BuzzrWhatAre)
+    msgbox(format("Buzzr, what are you talking about...? Heh, you got me.?"))
         trainerbattle_no_intro(TRAINER_BUZZR1,gText_Breaktheinternet_TheBoss)
     goto(Quest_Breaktheinternet_EspuleeOutskirts_PostBattle_Script)
 }
@@ -151,7 +151,7 @@ script Quest_Breaktheinternet_EspuleeOutskirts_Script{
 script Quest_Breaktheinternet_EspuleeOutskirts_PostBattle_Script{
     lock
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_1)
-        msgbox(gText_Breaktheinternet_YouShouldLay)
+        msgbox(format("You should lay low. Seriously."))
 		closemessage
         fadescreen(FADE_TO_BLACK)
         removeobject(VAR_LAST_TALKED)
@@ -164,7 +164,7 @@ script Quest_Breaktheinternet_QiuVillage_Script{
         if (var(VAR_RESULT) != 2){
             return
         }
-    msgbox(gText_Breaktheinternet_HaveYouSeen)
+    msgbox(format("Why would we stop? Have you seen the stock prices?"))
     trainerbattle_no_intro(TRAINER_BUZZR2,gText_Breaktheinternet_ImSoDead)
     goto(Quest_Breaktheinternet_QiuVillage_PostBattle_Script)
 }
@@ -172,7 +172,7 @@ script Quest_Breaktheinternet_QiuVillage_Script{
 script Quest_Breaktheinternet_QiuVillage_PostBattle_Script{
     lock
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_2)
-        msgbox(gText_Breaktheinternet_ImTellingYou)
+        msgbox(format("I'm telling you, you should skip town."))
 		closemessage
         fadescreen(FADE_TO_BLACK)
         removeobject(VAR_LAST_TALKED)
@@ -204,9 +204,9 @@ script Quest_Breaktheinternet_CallAfterFirst_Dialogue{
     lock
     call(Common_EventScript_PhoneRinging)
 
-    msgbox(gText_Breaktheinternet_AnyLuck,,SPEAKER_ISMAIL,,,PHONE_ON)
-    msgbox(gText_Breaktheinternet_IFought,,SPEAKER_ALICIA,,,PHONE_ON)
-    msgbox(gText_Breaktheinternet_HeadOverTo,,SPEAKER_ISMAIL,,,PHONE_ON)
+    msgbox(format("Any luck with that lead?"),,SPEAKER_ISMAIL,,,PHONE_ON)
+    msgbox(format("I fought somebody who seemed to know something, but they got away."),,SPEAKER_ALICIA,,,PHONE_ON)
+    msgbox(format("Okay so EspuleeOutskirts was a start... head over to QiuVillage. I think that goes further down the rabbit hole."),,SPEAKER_ISMAIL,,,PHONE_ON)
     closemessage
     playse(SE_POKENAV_HANG_UP)
     call(TryAutoSave)
@@ -218,9 +218,9 @@ script Quest_Breaktheinternet_CallAfterSecond_Dialogue{
     lock
     call(Common_EventScript_PhoneRinging)
 
-    msgbox(gText_Breaktheinternet_OhHiUh,,SPEAKER_ISMAIL,,,PHONE_ON)
-    msgbox(gText_Breaktheinternet_IBattledA,,SPEAKER_ALICIA,,,PHONE_ON)
-    msgbox(gText_Breaktheinternet_UhYesComeBack,,SPEAKER_ISMAIL,,,PHONE_ON)
+    msgbox(format("Oh hi uh {PLAYER}, yes. How you?"),,SPEAKER_ISMAIL,,,PHONE_ON)
+    msgbox(format("I battled another goon, but nothing to lead me back."),,SPEAKER_ALICIA,,,PHONE_ON)
+    msgbox(format("Yes uh, come to cafe. Thank you!"),,SPEAKER_ISMAIL,,,PHONE_ON)
     closemessage
     playse(SE_POKENAV_HANG_UP)
     call(TryAutoSave)
@@ -232,7 +232,7 @@ script Quest_Breaktheinternet_Note_Dialogue{
     questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_BREAKTHEINTERNET)
     if(var(VAR_RESULT)){
         lock
-        msgbox(gText_Breaktheinternet_ThereIsANote,MSGBOX_AUTOCLOSE)
+        msgbox(format("There is a note on the chair. The handwriting is atrocious.\pPetarosaBorough.Warehouse.Buzzr."),MSGBOX_AUTOCLOSE)
     }
     release
     end
@@ -286,24 +286,24 @@ script Quest_Breaktheinternet_WarehouseGuard_Script{
 
 script Quest_Breaktheinternet_EventScript_Grunt1{
     trainerbattle_single(TRAINER_BUZZR3,gText_Breaktheinternet_TheySaidYou,gText_Breaktheinternet_IHopeIDont,Quest_Breaktheinternet_EventScript_Grunt1Defeated)
-    msgbox(gText_Breaktheinternet_IGottaFind,MSGBOX_AUTOCLOSE)
+    msgbox(format("I gotta find a better gig..."),MSGBOX_AUTOCLOSE)
     end
 }
 
 script Quest_Breaktheinternet_EventScript_Grunt1Defeated{
-    msgbox(gText_Breaktheinternet_IGottaFind,MSGBOX_DEFAULT)
+    msgbox(format("I gotta find a better gig..."),MSGBOX_DEFAULT)
     release
     end
 }
 
 script Quest_Breaktheinternet_EventScript_Grunt2{
     trainerbattle_single(TRAINER_BUZZR4,gText_Breaktheinternet_Gotcha,gText_Breaktheinternet_ThisIsnt,Quest_Breaktheinternet_EventScript_Grunt2Defeated)
-    msgbox(gText_Breaktheinternet_OhNo,MSGBOX_AUTOCLOSE)
+    msgbox(format("Oh no!"),MSGBOX_AUTOCLOSE)
     end
 }
 
 script Quest_Breaktheinternet_EventScript_Grunt2Defeated{
-    msgbox(gText_Breaktheinternet_OhNo,MSGBOX_DEFAULT)
+    msgbox(format("Oh no!"),MSGBOX_DEFAULT)
     release
     end
 }
@@ -328,7 +328,7 @@ script Quest_Breaktheinternet_TriggerWave2Battle1_Script{
                 release
                 end
                 }
-    msgbox(gText_Breaktheinternet_StopRightThere)
+    msgbox(format("Stop right there!"))
     closemessage
     applymovement(PLAYER,Common_Movement_FaceRight)
     addobject(WAREHOUSE_GRUNT4)
@@ -336,7 +336,7 @@ script Quest_Breaktheinternet_TriggerWave2Battle1_Script{
     applymovement(WAREHOUSE_GRUNT4,Quest_Breaktheinternet_GruntsWalkToPlayer)
     applymovement(WAREHOUSE_GRUNT5,Quest_Breaktheinternet_GruntsWalkToPlayer)
     waitmovement(WAREHOUSE_GRUNT4)
-    msgbox(gText_Breaktheinternet_ThisIsTheEnd)
+    msgbox(format("This is the end for you."))
     trainerbattle_no_intro(TRAINER_BUZZR5,gText_Breaktheinternet_AreWeGoing)
     goto(Quest_Breaktheinternet_Wave2Battle2_Script)
     end
@@ -344,14 +344,14 @@ script Quest_Breaktheinternet_TriggerWave2Battle1_Script{
 
 script Quest_Breaktheinternet_Wave2Battle2_Script{
     lock
-    msgbox(gText_Breaktheinternet_IGotThis)
+    msgbox(format("I got this!"))
     trainerbattle_no_intro(TRAINER_BUZZR6,gText_Breaktheinternet_What)
     goto(Quest_Breaktheinternet_CompleteWave2_Script)
 }
 
 script Quest_Breaktheinternet_CompleteWave2_Script{
     lock
-    msgbox(gText_Breaktheinternet_OurBossIsMore)
+    msgbox(format("Our boss is tougher than us!"))
     fadescreen(FADE_TO_BLACK)
     removeobject(WAREHOUSE_GRUNT4)
     removeobject(WAREHOUSE_GRUNT5)
@@ -380,14 +380,14 @@ script Quest_Breaktheinternet_StartFinalCutscene_Dialogue{
 
     setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,SAVED_BEFORE_BUZZR_CEO)
     call(Quest_Breaktheinternet_SetPlayerPosition_Script)
-    msgbox(gText_Breaktheinternet_IsThat,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("Is that Ismail's Slurpuff?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     playmoncry(SPECIES_SLURPUFF,CRY_MODE_WEAK)
     waitse
-    msgbox(gText_Breaktheinternet_ItLooksAwful,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("It looks awful... it's clearly been beat up horribly."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
-    msgbox(gText_Breaktheinternet_OhSlurpuff,,SPEAKER_ISMAIL)
+    msgbox(format("Oh my {STR_VAR_1}!"),,SPEAKER_ISMAIL)
     closemessage
 playse(SE_PIN)
     applymovement(PLAYER,Common_Movement_ExclamationMark)
@@ -400,28 +400,28 @@ waitse
     addobject(WAREHOUSE_ISMAIL)
     applymovement(WAREHOUSE_ISMAIL,Quest_Breaktheinternet_IsmailWalkToPlayer)
     waitmovement(WAREHOUSE_ISMAIL)
-    msgbox(gText_Breaktheinternet_YouCame,,SPEAKER_ISMAIL)
+    msgbox(format("{PLAYER} you come!"),,SPEAKER_ISMAIL)
     closemessage
     applymovement(WAREHOUSE_SLURPUFF,Quest_Breaktheinternet_RunBehindPlayer)
     waitmovement(WAREHOUSE_SLURPUFF)
     playmoncry(SPECIES_SLURPUFF,CRY_MODE_ROAR_2)
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
-    msgbox(gText_Breaktheinternet_SlurpuffRan)
-    msgbox(gText_Breaktheinternet_OhDidItNotWork,,SPEAKER_ISMAIL)
+    msgbox(format("{STR_VAR_1} ran behind you. It looks scared."))
+    msgbox(format("Oh? You not fooled?"),,SPEAKER_ISMAIL)
     closemessage
 //PSF TODO figure out how to do the transform script like Castform in merrp's followers
     removeobject(WAREHOUSE_ISMAIL)
     setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_DITTO_DOLL)
     addobject(WAREHOUSE_ISMAIL)
     setobjectxy(WAREHOUSE_ISMAIL,3,8)
-    msgbox(gText_Breaktheinternet_GuesYoureSmarter,,SPEAKER_BUZZR_CEO)
+    msgbox(format("Guess you're smarter than we thought!"),,SPEAKER_BUZZR_CEO)
     closemessage
     addobject(WAREHOUSE_BUZZR_CEO)
     applymovement(WAREHOUSE_BUZZR_CEO,Quest_Breaktheinternet_CEOWalkToPlayer)
     waitmovement(WAREHOUSE_BUZZR_CEO)
     applymovement(PLAYER,Common_Movement_FaceDown)
     waitmovement(PLAYER)
-    msgbox(gText_Breaktheinternet_YouAppearToBe,,SPEAKER_BUZZR_CEO)
+    msgbox(format("You appear to be competent, but this is the end for you."),,SPEAKER_BUZZR_CEO)
     lockall
     closemessage
     startmenu_savescreen
@@ -435,16 +435,16 @@ script Quest_Breaktheinternet_CEO_Battle_Script{
 }
 
 script Quest_Breaktheinternet_PostRaid_Buzzr_CEO_Dialogue{
-    msgbox(gText_Persuasivepassenger_IShouldHaveGuessed,MSGBOX_NPC,SPEAKER_BUZZR_CEO)
+    msgbox(format("I should have guessed you'd be behind these... disruptions."),MSGBOX_NPC,SPEAKER_BUZZR_CEO)
     goto(Quest_Breaktheinternet_CEO_Battle_Script)
 }
 
 script Quest_Breaktheinternet_PostCEOBattle_Dialogue{
     lock
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_3)
-    msgbox(gText_Breaktheinternet_YouAreSomething,,SPEAKER_BUZZR_CEO)
-    msgbox(gText_Breaktheinternet_WhereIs,,SPEAKER_ALICIA)
-    msgbox(gText_Breaktheinternet_YourFriendWontBe,,SPEAKER_BUZZR_CEO)
+    msgbox(format("You are something..."),,SPEAKER_BUZZR_CEO)
+    msgbox(format("Where is Ismail?!?"),,SPEAKER_ALICIA)
+    msgbox(format("Your friend won't be an issue anymore. He learned his lesson."),,SPEAKER_BUZZR_CEO)
     closemessage
     fadescreen(FADE_TO_BLACK)
     removeobject(WAREHOUSE_BUZZR_CEO)
@@ -460,7 +460,7 @@ script Quest_Breaktheinternet_PostCEOBattle_Dialogue{
 script Quest_Breaktheinternet_GiveSlurpuff_Dialogue{
     lock
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
-        msgbox(gText_Breaktheinternet_ItLooksBeaten,MSGBOX_YESNO)
+        msgbox(format("{STR_VAR_1} looks horribly beaten and bruised. Will you take it with you?"),MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == NO){
             call(Breaktheinternet_LeaveGift_Script)
@@ -475,7 +475,7 @@ script Quest_Breaktheinternet_GiveSlurpuff_Dialogue{
 
 script Breaktheinternet_LeaveGift_Script {
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
-        msgbox(gText_Breaktheinternet_LooksSad)
+        msgbox(format("{STR_VAR_1} looks sad."))
         return
 }
 
@@ -515,7 +515,7 @@ script Breaktheinternet_RecievedGiftFanfare {
         removeobject(WAREHOUSE_SLURPUFF)
         playfanfare(MUS_OBTAIN_ITEM)
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
-        msgbox(gText_Breaktheinternet_PlayerTook)
+        msgbox(format("{PLAYER} took Ismail's {STR_VAR_1}!"))
         waitmessage
         waitfanfare
         bufferspeciesname(STR_VAR_1, SPECIES_SLURPUFF)

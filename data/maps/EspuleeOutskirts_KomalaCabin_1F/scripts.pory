@@ -18,8 +18,8 @@ script EspuleeOutskirts_Shorttermrental_CharlotteNotes_Script
 		releaseall
 		return
 	}
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_CharlotteSpread)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_IBetterNot,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+	msgbox(format("There are pieces of paper scattered across the table, organized into rows and columns, with sticky notes all over them. It's impossible to understand what is happening."))
+	msgbox(format("Charlotte has some organization system in place... I better not touch them."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
 	closemessage
 }
 
@@ -32,8 +32,8 @@ script EspuleeOutskirts_Shorttermrental_DossierTable_Script
 		return
 	}
 
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_DossierSpread)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_WhichOne)
+	msgbox(format("There is a stack of folders with a sticky note that says DONE on top."))
+	msgbox(format("Which folder do you want to read?"))
     dynmultichoice(1,1,TRUE,2,0,NULL,"Kai", "{PLAYER}", "Neither")
 
 	switch(var(VAR_RESULT))
@@ -49,7 +49,7 @@ script EspuleeOutskirts_Shorttermrental_DossierTable_Script
 script EspuleeOutskirts_Shorttermrental_WatchInterview_Script
 {
 	lock
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_ThereIsAn,MSGBOX_YESNO)
+	msgbox(format("There is an inteview with Charlotte playing on the television. Do you want to watch it?"),MSGBOX_YESNO)
 
 	if (var(VAR_RESULT) == YES)
 	{
@@ -86,7 +86,7 @@ script EspuleeOutskirts_Shorttermrental_ReadKaiDossier_Script
 	bufferspeciesname(STR_VAR_1,SPECIES_DRATINI)
 	msgbox(EspuleeOutskirts_Shorttermrental_KaiDossier)
 	bufferstring(STR_VAR_3,"Kai's")
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_TheRestOf)
+	msgbox(format("The rest of the pages are just extremely detailed notes for all of {STR_VAR_3} battles..."))
 }
 
 script EspuleeOutskirts_Shorttermrental_ReadPlayerDossier_Script
@@ -95,21 +95,21 @@ script EspuleeOutskirts_Shorttermrental_ReadPlayerDossier_Script
 	bufferstring(STR_VAR_2,gText_ThreeQuestionMarks) // PSF TODO Replace with strings from customization menu
 	msgbox(EspuleeOutskirts_Shorttermrental_PlayerDossier)
 	bufferstring(STR_VAR_3,"your")
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_TheRestOf)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_ThosePages)
+	msgbox(format("The rest of the pages are just extremely detailed notes for all of {STR_VAR_3} battles..."))
+	msgbox(format("Those pages have even more notes in the margins, and lots of highlighted lines. Charlotte is very intently studying you!"))
 
 }
 
 script EspuleeOutskirts_Shorttermrental_CharlotteInterview_Script
 {
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_TheLowerThird)
+	msgbox(format("The lower third of the screen shows some basic information about Charlotte."))
 	msgbox(gText_EspuleeOutskirts_Shortermrental_Data)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_IDontBelieve,,SPEAKER_CHARLOTTE)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_IWasAtThe,,SPEAKER_CHARLOTTE)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_EvenWhenDaddy,,SPEAKER_CHARLOTTE)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_IDontThinkI,,SPEAKER_CHARLOTTE)
-	msgbox(gText_EspuleeOutskirts_Shorttermrental_IHaveToBeTheBest,,SPEAKER_CHARLOTTE)
-	msgbox(gText_EspuleeOutskirts_Shortermrental_TheInterview)
+	msgbox(format("I don't believe in having an ace Pokémon that you always use. If your party isn't always adapting for the situation, you're just a bad Trainer. That being said... {EMOJI_HEART} I do have a soft spot for my Lapras. It was my first partner Pokémon, and its my preferred choice for Mega Evolution."),,SPEAKER_CHARLOTTE)
+	msgbox(format("I'm from the Unova region. I was at the top of my class at the Lemon Battle Academy, but I've always been interested in Pokémon battles."),,SPEAKER_CHARLOTTE)
+	msgbox(format("My daddy has also been supportive of my goals, and made sure I had access to the best tools available to make sure I could progress my battling career. I'm worked with some of the best teachers in the world and I'm ready to finally put everything I've learned together."),,SPEAKER_CHARLOTTE)
+	msgbox(format("I don't think where I come from had a huge hand in how I got here. I think there's some skill you're just naturally born with, but even moreso, I know I'm a hard worker. I push Pokémon to the limit, and I make sure I'm just as hard on myself - I'm no slacker!"),,SPEAKER_CHARLOTTE)
+	msgbox(format("I'm going to be the League Champion because I'm the best. Nobody is working harder than me, nobody is as smart as me, and nobody's Pokemon are as strong as mine. I've got the total pacakge!"),,SPEAKER_CHARLOTTE)
+	msgbox(format("The interview began playing again from the start."))
 }
 
 text gText_EspuleeOutskirts_Shorttermrental_ThereIsAn

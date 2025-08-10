@@ -13,7 +13,7 @@ script Finals_HideObject_Script {
 script Finals_PreparePlayer_Script {
     lock
     faceplayer
-    msgbox(gText_Finals_YourSemiFinal,MSGBOX_YESNO)
+    msgbox(format("Your Semifinal match is next. Are you ready?"),MSGBOX_YESNO)
     closemessage
         if (var(VAR_RESULT) == YES){
             call(GroupStages_MoveObjects_Script)
@@ -28,7 +28,7 @@ script Finals_StopPlayerLeaveLockers_Script {
     lock
     applymovement(CHARLOTTE,Common_Movement_FaceDown)
     waitmovement(0)
-    msgbox(gText_Finals_YourMatchIsUp,,SPEAKER_CHARLOTTE)
+    msgbox(format("Your match is up next! Where are you going?"),,SPEAKER_CHARLOTTE)
     closemessage
 
     applymovement(PLAYER,Common_Movement_WalkUp)
@@ -40,12 +40,12 @@ script Finals_StopPlayerLeaveLockers_Script {
 script Finals_StartSemifinals_Script {
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(0)
-        msgbox(gText_GroupStages_Placeholder)
+        msgbox(format("this is placeholder text."))
         closemessage
         applymovement(PLAYER,Common_Movement_WalkRight)
         applymovement(1,Common_Movement_WalkLeft)
         waitmovement(0)
-        msgbox(gText_GroupStages_Placeholder)
+        msgbox(format("this is placeholder text."))
         closemessage
         trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_SEMIFINALS,gText_GroupStages_Placeholder)
         setvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,PRE_BATTLE_5)
@@ -56,7 +56,7 @@ script Finals_StartSemifinals_Script {
 script Semifinal_Complete_Script{
         applymovement(PLAYER,GroupStages_WalkToCenterStage)
         waitmovement(PLAYER)
-        msgbox(gText_GroupStages_Placeholder)
+        msgbox(format("this is placeholder text."))
         special(DoDomeConfetti)
         playse(SE_APPLAUSE)
         waitse

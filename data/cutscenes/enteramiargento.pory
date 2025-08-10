@@ -19,31 +19,31 @@ script EnterAmiArgento_AskAboutGym_Dialogue {
 
         setvar(VAR_GYM_8_STATE,GYM_SAVE_BEFORE_LEADER)
         reveal(REVEAL_AMI)
-        msgbox(gText_EnterAmiArgento_SkatingAround,MSGBOX_NPC,SPEAKER_AMIARGENTO)
+        msgbox(format("Skating around the rink down there, you put on quite the show, {PLAYER}! What do you think of the place?"),MSGBOX_NPC,SPEAKER_AMIARGENTO)
 
-        msgbox(gText_EnterAmiArgento_ItsInteresting,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("It's… interesting?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_EnterAmiArgento_OhComeOn,,SPEAKER_AMIARGENTO)
+        msgbox(format("Oh come on, you won't hurt my feelings."),,SPEAKER_AMIARGENTO)
 
-        msgbox(gText_EnterAmiArgento_WeirdItsWeird,,SPEAKER_ALICIA)
+        msgbox(format("Weird. It's weird."),,SPEAKER_ALICIA)
 
-        msgbox(gText_EnterAmiArgento_IveAlwaysSaid,,SPEAKER_AMIARGENTO)
+        msgbox(format("Excellent! I've always said, “Be the strange you want to see in the world!” And I've busted my ass to make this place stranger than fiction… and better than art."),,SPEAKER_AMIARGENTO)
 
-        msgbox(gText_EnterAmiArgento_WhenIWasAwarded,,SPEAKER_AMIARGENTO)
+        msgbox(format("When I was awarded this Gym, I knew I had to keep pushing the boundaries. It's important to me to keep bending the rules, keep everybody guessing, thinking, racking their brains to figure me out…"),,SPEAKER_AMIARGENTO)
                 closemessage
         startmenu_savescreen
         goto(EnterAmiArgento_StartGymBattle_Script)
 }
 
 script EnterAmiArgento_FacePlayerBeforeBattle_Script {
-        msgbox(gText_EnterAmiArgento_ButTheyNeverWill,MSGBOX_NPC,,SPEAKER_AMIARGENTO)
+        msgbox(format("But they never will. Now let's see if you can handle the magic!"),MSGBOX_NPC,,SPEAKER_AMIARGENTO)
         closemessage
         trainerbattle_no_intro(TRAINER_AMIARGENTO,gText_EnterAmiArgento_AhIGotTooGreedy)
         goto(EnterAmiArgento_AmiArgentoDeafeated_Script)
 }
 
 script EnterAmiArgento_StartGymBattle_Script {
-        msgbox(gText_EnterAmiArgento_ButTheyNeverWill,,SPEAKER_AMIARGENTO)
+        msgbox(format("But they never will. Now let's see if you can handle the magic!"),,SPEAKER_AMIARGENTO)
         closemessage
                 trainerbattle_no_intro(TRAINER_AMIARGENTO,gText_EnterAmiArgento_AhIGotTooGreedy)
         goto(EnterAmiArgento_AmiArgentoDeafeated_Script)
@@ -68,14 +68,14 @@ script EnterAmiArgento_AmiArgentoDeafeated_Script {
 script EnterAmiArgento_PostGymBattle1_Dialogue {
     lock
         setvar(VAR_GYM_8_STATE,GYM_EXPLAINED_BADGE_AND_TM)
-        msgbox(gText_EnterAmiArgento_ThatTMwill,MSGBOX_NPC,,SPEAKER_AMIARGENTO)
+        msgbox(format("That TM will teach your Pokémon Psfgymattack8. I hope it's as useful for you as it has been for me!"),MSGBOX_NPC,,SPEAKER_AMIARGENTO)
         closemessage
                 release
         end
 }
 script EnterAmiArgento_PostGymBattle2_Dialogue {
     lock
-        msgbox(gText_EnterAmiArgento_IGetSoEmotional,MSGBOX_NPC,,SPEAKER_AMIARGENTO)
+        msgbox(format("I get so emotional every time I think of trainers walking out with my badge. Not because I'm upset… but I'm proud. Now go you magical bitch, conquer the world!"),MSGBOX_NPC,,SPEAKER_AMIARGENTO)
         closemessage
                 release
         end

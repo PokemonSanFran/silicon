@@ -14,7 +14,7 @@ script PopidoraPier_InteractFerryAttendant_Script
 {
     if (var(VAR_FERRY_STATE) < FERRY_ARANTRAZ_AVAILABLE)
     {
-        msgbox(gText_PreventPlayerFerry_ImSorryYou,MSGBOX_NPC)
+        msgbox(format("I'm sorry, you don't appear to have the correct ticket to board the Ferry to Arantraz."),MSGBOX_NPC)
         release
         end
     }

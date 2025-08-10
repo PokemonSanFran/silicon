@@ -56,13 +56,13 @@ script TirabudinPlace_Gym_BDRematch_Script{
 }
 
 script TirabudinPlace_Gym_PreRematch_Dialogue{
-    msgbox(gText_TirabudinPlace_Gym_PlayerAreYou,MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("{PLAYER}! So glad I don't have to hold back anymore... and I can break out the real good batches!"),MSGBOX_NPC,SPEAKER_BD)
     trainerbattle_no_intro(TRAINER_DRUG_BD,gText_TirabudinPlace_Gym_IShouldTryBattlingSober)
     goto(TirabudinPlace_Gym_PostRematch_Dialogue)
 }
 
 script TirabudinPlace_Gym_PostRematch_Dialogue{
-    msgbox(gText_TirabudinPlace_Gym_OohImBurned,MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("Oof, I'm burned out! Let's battle again tomorrow, okay?"),MSGBOX_NPC,SPEAKER_BD)
     closemessage
     release
     end

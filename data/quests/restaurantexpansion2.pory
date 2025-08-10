@@ -16,13 +16,13 @@ script Quest_Restaurantexpansion2_Leader_Interact_Script{
 }
 
 script Quest_Restaurantexpansion2_StartQuest{
-    msgbox(gText_Restaurantexpansion2_PlayerThings,MSGBOX_NPC,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion2_Awesome,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_IWantToTake,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion2_ActuallyIWasnt,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion2_LetMeGuess,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_YouDontHaveToGoBack,,SPEAKER_BELEN,,EMOTE_SWEAT)
-    msgbox(gText_Restaurantexpansion2_IfYouHappenToBattle,,SPEAKER_BELEN)
+    msgbox(format("{PLAYER}! Things have been coming together al dente!"),MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("I think that's good. Awesome!"),,SPEAKER_ALICIA)
+    msgbox(format("I think its time to elevate our offerings though."),,SPEAKER_BELEN)
+    msgbox(format("I wasn't throughout enough in my remastering of our ethos - I can serve more people now, so now the people of the region can enjoy it... but is this food really the soul if its not made BY the people? I want tohire some people that are native to Resido, but I need help sourcing the components..."),,SPEAKER_BELEN)
+    msgbox(format("Let me guess - you need me to send people from around the region who might have restaurant experience back to you?"),,SPEAKER_ALICIA)
+    msgbox(format("You don't have to go back and forth this time!"),,SPEAKER_BELEN,,EMOTE_SWEAT)
+    msgbox(format("And don't go out of your way either. If you battle or talk to somebody and they're from the restaurant industry, just send them to the back of house."),,SPEAKER_BELEN)
     startquest(QUEST_RESTAURANTEXPANSION2)
     end
 }
@@ -133,64 +133,64 @@ script Quest_Restaurantexpansion2_CancelIfNotActive_Script{
 //SPEAKER_AUGUSTE
 script Quest_Restaurantexpansion2_TrainerA_PostBattle_Script{
 	lock
-    msgbox(gText_Restaurantexpansion2_IWishBattling,,SPEAKER_AUGUSTE)
+    msgbox(format("I wish battling was as fun as being a hostess!"),,SPEAKER_AUGUSTE)
     call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_1)
     call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(gText_Restaurantexpansion2_WaitYouSaid,,SPEAKER_ALICIA,,EMOTE_SHOCK)
-    msgbox(gText_Restaurantexpansion2_NeedlesIsLooking,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_IllCheckItAge,,SPEAKER_AUGUSTE)
+    msgbox(format("Wait you said you were a hostess?"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(format("Needles is looking for poeple in the restaurant industry. Are you looking?"),,SPEAKER_ALICIA)
+    msgbox(format("I'll check it out! I'm out of work and this would be huge. Thanks!"),,SPEAKER_AUGUSTE)
     call(Quest_Restaurantexpansion2_RemoveStaff_Script)
     end
 }
 //SPEAKER_JULIA
 script Quest_Restaurantexpansion2_TrainerB_PostBattle_Script{
 	lock
-    msgbox(gText_Restaurantexpansion2_OutOfTheFryingPan,,SPEAKER_JULIA)
+    msgbox(format("Out of the frying pan... and out to dry."),,SPEAKER_JULIA)
     call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_2)
     call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(gText_Restaurantexpansion2_WaitDoAllChefs,,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(gText_Restaurantexpansion2_YoureAChefWhere,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_NowhereIGotLaid,,SPEAKER_JULIA)
-    msgbox(gText_Restaurantexpansion2_NeedlesNeeds,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_REally,,SPEAKER_JULIA)
+    msgbox(format("Wait, do all chefs talk only about food?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("You're a chef? Where do you work?"),,SPEAKER_ALICIA)
+    msgbox(format("Nowhere. I got laid off a few years ago, and trying to make it happen on my own has been... difficult."),,SPEAKER_JULIA)
+    msgbox(format("Needles is looking for a chef right now."),,SPEAKER_ALICIA)
+    msgbox(format("Really?!?! Working there would be a dream!"),,SPEAKER_JULIA)
     call(Quest_Restaurantexpansion2_RemoveStaff_Script)
     end
 }
 //SPEAKER_ALICE
 script Quest_Restaurantexpansion2_TrainerC_PostBattle_Script{
 	lock
-    msgbox(gText_Restaurantexpansion2_ILikeDoingThisBut,,SPEAKER_ALICE)
+    msgbox(format("I like doing this, but man, I wish I could make some more doing it. It's good work, but I got bills to pay!"),,SPEAKER_ALICE)
     call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_3)
     call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(gText_Restaurantexpansion2_IDontknowWhat,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_OhReally,,SPEAKER_ALICE)
+    msgbox(format("I don't know what they're paying, but Needles is looking for new people."),,SPEAKER_ALICIA)
+    msgbox(format("Oh really? I'll check it out."),,SPEAKER_ALICE)
     call(Quest_Restaurantexpansion2_RemoveStaff_Script)
     end
 }
 //SPEAKER_FERRAN
 script Quest_Restaurantexpansion2_TrainerD_PostBattle_Script{
 	lock
-    msgbox(gText_Restaurantexpansion2_IdBeBetterIf,,SPEAKER_FERRAN)
+    msgbox(format("I'd be better at battling if I had some extra cash for items..."),,SPEAKER_FERRAN)
     call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_4)
     call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(gText_Restaurantexpansion2_IfYouNeedAJob,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_SeriouslyIGottaGet,,SPEAKER_FERRAN)
+    msgbox(format("If you need a job, Needles is looking for new bodies."),,SPEAKER_ALICIA)
+    msgbox(format("Seriously? I gotta get down there!"),,SPEAKER_FERRAN)
     call(Quest_Restaurantexpansion2_RemoveStaff_Script)
     end
 }
 //define SPEAKER_ANTHONY
 script Quest_Restaurantexpansion2_TrainerE_PostBattle_Script{
 	lock
-    msgbox(gText_Restaurantexpansion2_ILoveWorkingInCafes,,SPEAKER_ANTHONY)
+    msgbox(format("I love working in cafes! I get to work with people, but I also get tons of snacks!"),,SPEAKER_ANTHONY)
     call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_5)
     call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(gText_Restaurantexpansion2_YouWantToEat,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion2_ICouldTryThat,,SPEAKER_ANTHONY)
+    msgbox(format("If you want to eat and work, you should check out Needles. They're hiring!"),,SPEAKER_ALICIA)
+    msgbox(format("I could try that! Thanks!"),,SPEAKER_ANTHONY)
     call(Quest_Restaurantexpansion2_RemoveStaff_Script)
     end
 }
@@ -234,10 +234,10 @@ script Quest_Restaurantexpansion2_CheckReward_Script{
 }
 
 script Quest_Restaurantexpansion2_Reward_Dialogue{
-    msgbox(gText_Restaurantexpansion2_PlayerTheseNewStaff,MSGBOX_NPC,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion2_TheyReallyGiveMyDish,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion2_TakeThis,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion2_IfYouEverWant,,SPEAKER_BELEN)
+    msgbox(format("{PLAYER}, these new staff are so great! Thank you for your help!"),MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("They really give my dish the acid that it needs to stand out!"),,SPEAKER_BELEN)
+    msgbox(format("Take this for all your help."),,SPEAKER_BELEN)
+    msgbox(format("If you're ever looking for a rematch, come see me at the Gym. I'd love to go all out against you!"),,SPEAKER_BELEN)
     closemessage
     applymovement(BELEN_MERMEREZA_CITY,Quest_Restaurantexpansion_WalkInside_Movement)
     setvar(VAR_BELEN_STATE,QUEST_2_COMPLETE)
@@ -252,8 +252,8 @@ script Quest_Restaurantexpansion2_Reward_Dialogue{
 
 script Quest_Restaurantexpansion2_Active_Dialogue{
     switch(var(VAR_RESULT)){
-        case 0: msgbox(gText_Restaurantexpansion2_HaveYouHadAny,MSGBOX_NPC,SPEAKER_BELEN)
-        default: msgbox(gText_Restaurantexpansion2_ITalkedToAFew,MSGBOX_NPC,SPEAKER_BELEN)
+        case 0: msgbox(format("Have you had any luck finding people out there?"),MSGBOX_NPC,SPEAKER_BELEN)
+        default: msgbox(format("I talked to a few people and they seem great. Keep up the seasoning!"),MSGBOX_NPC,SPEAKER_BELEN)
     }
     release
         end

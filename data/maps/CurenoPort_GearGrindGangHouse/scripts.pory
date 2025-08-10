@@ -49,8 +49,8 @@ script CurenoPort_GearGrindGangHouse_Dialogue_GuardsBlockDoor{
     applymovement(BIKER_D,CurenoPort_GearGrindGangHouse_Movement_GuardFromRight)
 
     waitmovement(BIKER_D)
-    msgbox(CurenoPort_GearGrindGangHouse_Text_BikersOnly,,SPEAKER_ANGELDELIVERYBIKERC)
-    msgbox(CurenoPort_GearGrindGangHouse_Text_YoullHaveToLeave,,SPEAKER_ANGELDELIVERYBIKERD)
+    msgbox(format("Gear Grind Gang only."),,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(format("You'll have to leave."),,SPEAKER_ANGELDELIVERYBIKERD)
     closemessage
     return
 }

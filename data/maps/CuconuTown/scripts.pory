@@ -25,7 +25,7 @@ script Champion_TurnPlayerAwayHome_Script
     }
 
     lockall
-    msgbox(gText_RemindPlayerNewHome)
+    msgbox(format("You don't live here anymore!"))
     closemessage
     applymovement(PLAYER,swagbag_WalkBackwards)
     waitmovement(0)

@@ -64,7 +64,7 @@ script Manhunt_Assignment_Dialogue {
         call(TryAutoSave)
         startquest(QUEST_MANHUNT)
         buffermapname(STR_VAR_1,MAP_PERLACIA_CITY)
-        msgbox(gText_YouHaveYourOrders_DoYouWantTo,MSGBOX_YESNO)
+        msgbox(format("Do you want to go to {STR_VAR_1}?"),MSGBOX_YESNO)
         if (var(VAR_RESULT))
         {
             fadeblackandsetremovewarpfadeflag

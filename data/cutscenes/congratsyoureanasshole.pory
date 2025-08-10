@@ -42,26 +42,26 @@ script CongratsYoureAnAsshole_Intro_Dialogue
 
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,START_FALSE_TIMELINE)
 
-    msgbox(gText_CongratsYoureanAsshole_WelcomeBack,MSGBOX_NPC,SPEAKER_OLIVER)
-    msgbox(gText_CongratsYoureanAsshole_YeahIWantToWork,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Welcome back, {PLAYER}! A good night’s sleep, I hope? Thought things over?"),MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("Yeah. I want to work with you guys and make sure the League’s next season is as successful as possible."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
-    msgbox(gText_CongratsYoureanAsshole_WedLikeYouTwoToSignal,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+    msgbox(format("We’d like you to signal boost that statement online as soon as it’s posted. A public condemnation from the most powerful Trainer will send a strong message."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
 
     applymovement(KEIYING,Common_Movement_WalkInPlaceLeft)
     waitmovement(KEIYING)
 
-    msgbox(gText_CongratsYoureanAsshole_TheresNoTurningBack,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+    msgbox(format("There’s no turning back from this- once the statement is out the region natives aren’t going to be so friendly to you. If there’s anything you need to do before sending the message, handle it now. Come back and talk to me when you’re ready."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
     closemessage
 }
 
 script CongratsYoureanAsshole_FalseTimelineSplit_Script
 {
     faceplayer
-    msgbox(gText_CongratsYoureanAsshole_WereGoingToSend,MSGBOX_YESNO,SPEAKER_KEIYING)
+    msgbox(format("We’re going to send this message out now. Ready?"),MSGBOX_YESNO,SPEAKER_KEIYING)
 
     if (var(VAR_RESULT) == NO)
     {
-        msgbox(gText_CongratsYoureanAsshole_OfCouseIfTheres,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+        msgbox(format("Of course. If there’s anything you need to do before then, handle it now. Come back and talk to me when you’re ready."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
         closemessage
         release
         end
@@ -78,9 +78,9 @@ script CongratsYoureanAsshole_FalseTimelineSplit_Script
         showtweet(TWEET_STORY_FALSETIMELINE)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_CongratsYoureanAsshole_ThankYouForThat,MSGBOX_DEFAULT,SPEAKER_RAMESH)
-        msgbox(gText_CongratsYoureanAsshole_ThingsWillTake,MSGBOX_DEFAULT,SPEAKER_KEIYING)
-        msgbox(gText_CongratsYoureanAsshole_ThatsTheSpirit,MSGBOX_DEFAULT,SPEAKER_KEIYING)
+        msgbox(format("Thank you for that… worldwide, our message is getting positive reception, but within the region, there is still some negativity."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
+        msgbox(format("Things will take time."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
+        msgbox(format("Oliver, Ramesh, and I all have different missions for you. Come talk to us our offices when you're ready."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
         closemessage
 
         fadescreen(FADE_TO_BLACK)

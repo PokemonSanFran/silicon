@@ -57,16 +57,16 @@ script Quest_Restaurantexpansion_Meetup_Dialogue{
     setvar(VAR_BELEN_STATE,CUTSCENE_COMPLETE)
     call(Quest_Restaurantexpansion_Startcutscene_Script)
     lock
-    msgbox(gText_Restaurantexpansion_HelloPlayer,MSGBOX_NPC,SPEAKER_BELEN,,EMOTE_HAPPY)
-    msgbox(gText_Restaurantexpansion_AreYouHere,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_IDidntEven,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_OhCome,,SPEAKER_BELEN)
+    msgbox(format("Hello {PLAYER}. What a delicious surprise!"),MSGBOX_NPC,SPEAKER_BELEN,,EMOTE_HAPPY)
+    msgbox(format("Are you here for the grand re-opening of the updated menu for Millenium Bakery?"),,SPEAKER_BELEN)
+    msgbox(format("I didn't even know that was a thing..."),,SPEAKER_ALICIA)
+    msgbox(format("Oh! Come on, we'll go together."),,SPEAKER_BELEN)
     closemessage
     call(Quest_Restaurantexpansion_StartWalk_Dialogue)
-    msgbox(gText_Restaurantexpansion_IfMyRestaurant,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_ITry,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_WhatDoMeanByElevate,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_TheBestCooksAndFreshest,,SPEAKER_BELEN)
+    msgbox(format("If my restaurant is going to be at the peak of Residoculinary culture, there's a lot of work happening in the front of house to make that happen. I have to make sure I understand region's preferred palettes, while also making sure I can continually elevate the plates that leave my line."),,SPEAKER_BELEN)
+    msgbox(format("I try to stay ahead of the tickets, one resturant opening at a time."),,SPEAKER_BELEN)
+    msgbox(format("What do you mean by elevate?"),,SPEAKER_ALICIA)
+    msgbox(format("I'm not just trying to plate up Residocuisine, I'm serving the best cuts of Residocuisine. Freshest ingredients from the ground, finest Kalosian chefs, with no expense spared. I want my food to be the definitive dining experience of Resido!"),,SPEAKER_BELEN)
     closemessage
     waitmovement(BELEN)
     applymovement(BELEN,Common_Movement_FaceRight)
@@ -75,28 +75,28 @@ script Quest_Restaurantexpansion_Meetup_Dialogue{
     waitmovement(JORIS)
     applymovement(BELEN,Common_Movement_FaceDown)
     applymovement(PLAYER,Common_Movement_FaceDown)
-    msgbox(gText_Restaurantexpansion_HeyManYouGot,,SPEAKER_JORIS)
-    msgbox(gText_Restaurantexpansion_SorryIDont,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_ItsCool,,SPEAKER_JORIS)
+    msgbox(format("Hey man, you got a couple dollars for food."),,SPEAKER_JORIS)
+    msgbox(format("Sorry, I don't have anything."),,SPEAKER_BELEN)
+    msgbox(format("Its cool. Come on, little man."),,SPEAKER_JORIS)
     closemessage
     applymovement(JORIS,Quest_Restaurantexpansion_WalkAway_Movement)
     applymovement(JORIS_KID,Quest_Restaurantexpansion_WalkAway_Movement)
     waitmovement(JORIS)
-    msgbox(gText_Restaurantexpansion_WaitHoldOn,,SPEAKER_BELEN,TAIL_SHOUT)
+    msgbox(format("Wait! Hold on."),,SPEAKER_BELEN,TAIL_SHOUT)
     closemessage
     playse(SE_PIN)
     applymovement(JORIS,Common_Movement_ExclamationMark)
     applymovement(BELEN,Quest_Restaurantexpansion_WalkAway_Movement)
     waitmovement(BELEN)
-    msgbox(gText_Restaurantexpansion_CanIActually,,SPEAKER_BELEN)
+    msgbox(format("Can I actually buy you dinner?"),,SPEAKER_BELEN)
     applymovement(JORIS_KID,Quest_Restaurantexpansion_Jump_Movement)
-    msgbox(gText_Restaurantexpansion_WaitReally,,SPEAKER_JORIS)
-    msgbox(gText_Restaurantexpansion_YeahThisPlaceJust,,SPEAKER_BELEN)
+    msgbox(format("Wait, really? That's awful nice man."),,SPEAKER_JORIS)
+    msgbox(format("This restaurant is experimenting with a blend of flavors tonight, and I want - hold on."),,SPEAKER_BELEN)
     closemessage
     call(Quest_Restaurantexpansion_GroupWalkDoor_Script)
     waitmovement(BELEN)
     applymovement(PLAYER,Common_Movement_FaceLeft)
-    msgbox(gText_Restaurantexpansion_PlayerComeTo,,SPEAKER_BELEN)
+    msgbox(format("{PLAYER}, we'll have to take a raincheck. Come see me in MermerezaCity soon!"),,SPEAKER_BELEN)
     closemessage
     call(Quest_Restaurantexpansion_GoIntoShop_Script)
     release
@@ -158,21 +158,21 @@ script Quest_Restaurantexpansion_Leader_Interact_Script{
 }
 
 script Quest_Restaurantexpansion_StartQuest{
-    msgbox(gText_Restaurantexpansion_PlayerSorryAbout,MSGBOX_NPC,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_NoProblemThat,,SPEAKER_ALICIA,,EMOTE_HAPPY)
-    msgbox(gText_Restaurantexpansion_TheyReallyOpened,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_HowCanI,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_ThatsWhy,,SPEAKER_BELEN)
+    msgbox(format("{PLAYER}, sorry about the restaurant in Oroland!"),MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("No problem! That was a really nice thing you did."),,SPEAKER_ALICIA,,EMOTE_HAPPY)
+    msgbox(format("They really expanded my palette."),,SPEAKER_BELEN)
+    msgbox(format("How can I serve the people of this region if the majority of the people can't afford our menu? That kid had never even heard of Cioppino. A good Cioppino? With Cloyster and Seaking? To die for!"),,SPEAKER_BELEN)
+    msgbox(format("That's why I'm making some changes. I'm reopening my restaurant, with a Pay What You Can model. Anybody can eat here and experience the best cuisine Residohas to offer."),,SPEAKER_BELEN)
 
-    msgbox(gText_Restaurantexpansion_Wow,,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(format("Wow! That's a huge change, congratulations!"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
 
-    msgbox(gText_Restaurantexpansion_IveBeenHardAtWork,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_MeICant,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-    msgbox(gText_Restaurantexpansion_NotCookingOutreach,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_IWantToWorkWith,,SPEAKER_BELEN)
+    msgbox(format("I've been hard at work adjusting the menu and suppliers to make sure it'll all work, but I'm ready for the next step in the recipe. That's where you come in!"),,SPEAKER_BELEN)
+    msgbox(format("Me? But I can't really cook..."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    msgbox(format("Not cooking. Outreach! You're a Trainer, and you've traveled around the region - you've met all the people that I wasn't serving before."),,SPEAKER_BELEN)
+    msgbox(format("Pokémon Centers are great places where people can gather, and the front of house there are all seen as members of their local communities. I want you to deliver meals to a few key nurses, and convince them to hang some flyers in their lobbies. What'd you say?"),,SPEAKER_BELEN)
 
-    msgbox(gText_Restaurantexpansion_KindaWeird,,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(gText_Restaurantexpansion_SureICan,,SPEAKER_ALICIA)
+    msgbox(format("Kinda weird to be advertising food I've never eaten... but its for a good cause."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Sure, I'm happy to help."),,SPEAKER_ALICIA)
     closemessage
 
     startquest(QUEST_RESTAURANTEXPANSION1)
@@ -183,12 +183,12 @@ script Quest_Restaurantexpansion_GiveFood_EspuleeOutskirts_Dialogue{
     lock
     bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub1_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(gText_Restaurantexpansion_FirstYoureGoing,MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("First, you're going to {STR_VAR_1}. A lot of my existing clients are there, and I want to whet their appetite for the grand re-opening."),MSGBOX_NPC,SPEAKER_BELEN)
     lock
     giveitem(ITEM_TEA,1)
-    msgbox(gText_Restaurantexpansion_WaitOnlyOne,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_OfCourse,,SPEAKER_BELEN)
-    msgbox(gText_Restaurantexpansion_IRegret,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
+    msgbox(format("Wait, I thought you wanted to do a couple different places?"),,SPEAKER_ALICIA)
+    msgbox(format("Yeah, but I'm cooking the meals one at a time! I can't have you dragging soggy food around the region like Rapidoordash! Deliver that one, and then come back to me for the next one."),,SPEAKER_BELEN)
+    msgbox(format("...I regret this now."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
     closemessage
     release
     end
@@ -197,10 +197,10 @@ script Quest_Restaurantexpansion_GiveFood_TirabudinPlace_Dialogue{
     lock
     bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub2_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(gText_Restaurantexpansion_NextIs,MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("Next on the menu is {STR_VAR_1}! Here you go."),MSGBOX_NPC,SPEAKER_BELEN)
     giveitem(ITEM_TEA,1)
-    msgbox(gText_Restaurantexpansion_HowAreYouPaying,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_WellMyClients,,SPEAKER_BELEN)
+    msgbox(format("Hey Belen, how are you paying for this new model?"),,SPEAKER_ALICIA)
+    msgbox(format("Well, my clients were in a top shelf price range - money was never an object. A lot of them won't notice if I double prices! I'll keep up the same service and excellent food... well, you get it."),,SPEAKER_BELEN)
     closemessage
     release
     end
@@ -209,10 +209,10 @@ script Quest_Restaurantexpansion_GiveFood_PerlaciaCity_Dialogue{
     lock
     bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub3_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(gText_Restaurantexpansion_NowGoTo,MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("Okay, now go to {STR_VAR_1}. Gotta get those techies that work downtown, you know?"),MSGBOX_NPC,SPEAKER_BELEN)
     giveitem(ITEM_TEA,1)
-    msgbox(gText_Restaurantexpansion_HowManyOf,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_JustOneMore,,SPEAKER_BELEN)
+    msgbox(format("How many of these are left?"),,SPEAKER_ALICIA)
+    msgbox(format("Just one more after this!"),,SPEAKER_BELEN)
     closemessage
     release
     end
@@ -221,9 +221,9 @@ script Quest_Restaurantexpansion_GiveFood_Chasilla_Dialogue{
     lock
     bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub4_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(gText_Restaurantexpansion_LastOne,MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("Last order for the night... {STR_VAR_1}! Students have to eat too, you know?"),MSGBOX_NPC,SPEAKER_BELEN)
     giveitem(ITEM_TEA,1)
-    msgbox(gText_Restaurantexpansion_ThisIsExhausting,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+    msgbox(format("This is exhausting... I feel like I'm working in their kitchen!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     closemessage
     release
     end
@@ -232,7 +232,7 @@ script Quest_Restaurantexpansion_GiveFood_Chasilla_Dialogue{
 script Quest_Restaurantexpansion_FoodCold_Dialogue{
     checkitem(ITEM_TEA,1)
         if (var(VAR_RESULT)){
-            msgbox(gText_Restaurantexpansion_GottaGoBeforeIt,MSGBOX_NPC,SPEAKER_BELEN,TAIL_SHOUT,EMOTE_ANGRY)
+            msgbox(format("Okay, head to {STR_VAR_1}! The food is dying in the window, and I need delivery on the fly!"),MSGBOX_NPC,SPEAKER_BELEN,TAIL_SHOUT,EMOTE_ANGRY)
             closemessage
             release
             end
@@ -254,9 +254,9 @@ script Quest_Restaurantexpansion_Active_Dialogue{
 }
 
 script Quest_Restaurantexpansion_Reward_Dialogue{
-    msgbox(gText_Restaurantexpansion_PlayerThisIs,MSGBOX_NPC,SPEAKER_BELEN,,EMOTE_HAPPY)
-    msgbox(gText_Restaurantexpansion_Itwasgood,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_NowToWorkOnHiring,,SPEAKER_BELEN)
+    msgbox(format("{PLAYER}, this is excellent work, three stars!"),MSGBOX_NPC,SPEAKER_BELEN,,EMOTE_HAPPY)
+    msgbox(format("It was good to help out."),,SPEAKER_ALICIA)
+    msgbox(format("Now to work on hiring..."),,SPEAKER_BELEN)
     closemessage
     applymovement(BELEN_MERMEREZA_CITY,Quest_Restaurantexpansion_WalkInside_Movement)
     setvar(VAR_BELEN_STATE,QUEST_1_COMPLETE)
@@ -293,16 +293,16 @@ script Quest_Restaurantexpansion_EspuleeOutskirts_Nurse_Dialogue{
 subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_1)
     removeitem(ITEM_TEA,1)
 
-    msgbox(gText_Restaurantexpansion_ActuallyQuestion,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_YesILove,,SPEAKER_NURSE)
-    msgbox(gText_Restaurantexpansion_TheyreLaunchingANew,,SPEAKER_ALICIA)
+    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+    msgbox(format("Yes, I absolutely love their Tauros Burrito!"),,SPEAKER_NURSE)
+    msgbox(format("They're launching a new menu, and sent over a meal for you to try. And if you like it..."),,SPEAKER_ALICIA)
     closemessage
     call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(gText_Restaurantexpansion_ThisIsDelicious,,SPEAKER_NURSE,,EMOTE_LOVE)
+    msgbox(format("This is delicious wow! I'll absolutely tell people about this. And yeah, you can hang that right there."),,SPEAKER_NURSE,,EMOTE_LOVE)
     closemessage
     applymovement(NURSE,Common_Movement_FaceDown)
     waitmovement(NURSE)
-    msgbox(gText_Restaurantexpansion_ThatWentWell,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("That went well!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     return
 }
@@ -319,13 +319,13 @@ script Quest_Restaurantexpansion_TirabudinPlace_NurseDialogue{
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_2)
     removeitem(ITEM_TEA,1)
 
-    msgbox(gText_Restaurantexpansion_ActuallyQuestion,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_NahThatsSomeRich,,SPEAKER_NURSE)
-    msgbox(gText_Restaurantexpansion_TheOwnerIsMoving,,SPEAKER_ALICIA)
+    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+    msgbox(format("Nah, that's some rich people food, you know?."),,SPEAKER_NURSE)
+    msgbox(format("The owner is moving to a Pay What You Can model, which is why I'm here! They want you to try some of their new menu items and see if you like..."),,SPEAKER_ALICIA)
     closemessage
     call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(gText_Restaurantexpansion_OkayThisIs,,SPEAKER_NURSE,,EMOTE_LOVE)
-    msgbox(gText_Restaurantexpansion_TwoDown,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Okay, this is pretty tight. And you said its cheaper now? Okay, I'll have to check it out soon. And yeah, that flyer right there is perfect."),,SPEAKER_NURSE,,EMOTE_LOVE)
+    msgbox(format("Two down!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     applymovement(NURSE,Common_Movement_FaceDown)
     closemessage
     return
@@ -343,13 +343,13 @@ script Quest_Restaurantexpansion_PerlaciaCity_Nurse_Dialogue{
 subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
     removeitem(ITEM_TEA,1)
 
-    msgbox(gText_Restaurantexpansion_ActuallyQuestion,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_NoIDontReally,,SPEAKER_NURSE)
-    msgbox(gText_Restaurantexpansion_TheyreChangingTheir,,SPEAKER_ALICIA)
+    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+    msgbox(format("No, they never had salads and that's really what I'm into right now!"),,SPEAKER_NURSE)
+    msgbox(format("They're changing up their menu and expanding their options. I brought some, free of charge for you to try..."),,SPEAKER_ALICIA)
     closemessage
     call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(gText_Restaurantexpansion_FancyOrNot,,SPEAKER_NURSE,,EMOTE_LOVE)
-    msgbox(gText_Restaurantexpansion_IDontThinkLeader,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("I don't know if its better than a salad, but its tasty for sure. I'll mention it to hungry Trainers. Put the flyers wherever you want!"),,SPEAKER_NURSE,,EMOTE_LOVE)
+    msgbox(format("I don't think Belen realizes what he's dealing with out here..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     applymovement(NURSE,Common_Movement_FaceDown)
     closemessage
     return
@@ -367,14 +367,14 @@ script Quest_Restaurantexpansion_Chasilla_Nurse_Dialogue{
 subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
     removeitem(ITEM_TEA,1)
 
-    msgbox(gText_Restaurantexpansion_ActuallyQuestion,,SPEAKER_ALICIA)
-    msgbox(gText_Restaurantexpansion_TheyDontHaveMy,,SPEAKER_NURSE)
-    msgbox(gText_Restaurantexpansion_TheyreAddingNew,,SPEAKER_ALICIA)
+    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+    msgbox(format("That place is too up tight, I just want somewhere casual I can eat between classes, you know?"),,SPEAKER_NURSE)
+    msgbox(format("They're doing a total makeover to be more relaxed, and I brought over a free meal! And I wanted to hand some posters..."),,SPEAKER_ALICIA)
     closemessage
     call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(gText_Restaurantexpansion_ChillVibes,,SPEAKER_NURSE)
+    msgbox(format("Chill vibes and good food? That's my kind of spot. I can talk this up all day. And yeah, right by the PC, good spot for that poster."),,SPEAKER_NURSE)
     bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Map)
-    msgbox(gText_Restaurantexpansion_TheLastOne,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("The last one! Time to head back to {STR_VAR_1}, finally."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     applymovement(NURSE,Common_Movement_FaceDown)
     closemessage
     return

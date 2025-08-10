@@ -21,7 +21,7 @@ script SharpriseSpire_Elevator_AttendantMissing_Dialogue {
             lock
                 applymovement(PLAYER,Common_Movement_FaceLeft)
                 waitmovement(0)
-                msgbox(gText_SharpriseSpire_Elevator_TheAttendantIsGone,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+                msgbox(format("The attendant is gone...but I don't think the elevator works without their keycard. Guess I have to take the stairs."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
                 closemessage
 
                 release

@@ -6,7 +6,7 @@ mapscripts Chasilla_University_MapScripts{
 script Chasilla_University_DisplayCase_Script{
     lock
     bufferitemname(STR_VAR_3,ITEM_COIN_CASE)
-    msgbox(gText_Chasilla_University_DisplayCase,MSGBOX_SIGN)
+    msgbox(format("The display case has a collection of medals, trophies, and photos."),MSGBOX_SIGN)
 
     switch(var(VAR_CHASILLA_AXE_STATE)){
         case AXE_UNTOUCHED: goto(Quest_StealTheAxe_AxeUntouched_Script)

@@ -31,7 +31,7 @@ script Taxi_Interact_Dialogue{
     call(Quest_Taxicabturnaround_CheckNextStage_Script)
 
     bufferstring(STR_VAR_1,"2000")
-    msgbox(gText_Taxi_ThanksForChoosing)
+    msgbox(format("Thanks for choosing Taxicab! The base fare is ¥{STR_VAR_1}, do you want a ride?"))
     //PSF TODO replace 2000 with base fare constant
     closemessage
     call(Taxi_ConstructMenu_Script)
@@ -58,7 +58,7 @@ script Taxi_ConstructMenu_Script{
 }
 
 script Taxi_Refuse_Dialogue{
-    msgbox(gText_Taxi_ChangedYourMind)
+    msgbox(format("Changed your mind? That's fine. We'll be here!"))
     closemessage
     release
     end
@@ -114,14 +114,14 @@ script Taxi_ConstructLocations_List{
 script Taxi_StartBattle_Dialogue{
     showmoneybox(0,0)
     special(Taxi_BufferDestinationMapName)
-    msgbox(gText_Taxi_HereWeAre)
-    msgbox(gText_Taxi_ItllCost)
-    msgbox(gText_Taxi_WhatDoYouMean)
+    msgbox(format("Okay kid, here's your stop, {STR_VAR_1}."))
+    msgbox(format("That'll be ¥{STR_VAR_2}."))
+    msgbox(format("Hey, just a minute there friend! You don't even have enough for the fare?! I come out to earn a living, don't I? So why you gotta tax me like this?"))
     closemessage
     hidemoneybox
     trainerbattle_no_intro(TRAINER_CABBIE_HALE,gText_Taxi_AintYouStrong)
     fadescreen(FADE_TO_BLACK)
-    msgbox(gText_Taxi_NowIWont)
+    msgbox(format("Now I won't make enough money to send back home to my family in Hoenn..."))
     closemessage
     return
 }

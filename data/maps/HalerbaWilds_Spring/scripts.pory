@@ -15,9 +15,9 @@ script HalerbaWilds_Spring_Bystander_Event_Script
 	switch (var(VAR_RESULT))
 	{
         case 4:
-			msgbox(gText_Quest_FreshwaterEvolution_IWonderWhat, MSGBOX_NPC)
+			msgbox(format("I wonder what other Pokemon will evolve here?"), MSGBOX_NPC)
 		default:
-			msgbox(gText_HalerbaWilds_Spring_ThisPlace, MSGBOX_NPC)
+			msgbox(format("Man, this place is absolutely beautiful!"), MSGBOX_NPC)
 	end
 }
 }

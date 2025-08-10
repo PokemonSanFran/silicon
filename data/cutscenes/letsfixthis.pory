@@ -16,13 +16,13 @@ script LetsFixThis_EliteVideo_Dialogue
 
         //PSF TODO should this be a video or just a series of tweets?
 
-        msgbox(gText_LetsFixThis_PeopleOf,,SPEAKER_ARMANDO)
+        msgbox(format("People of Resido, your Elite Four has returned! We could not continue to stand by and watch these corporations destroy our home for profits."),,SPEAKER_ARMANDO)
 
-        msgbox(gText_LetsFixThis_WeWillBeGiving,,SPEAKER_ELLEN)
+        msgbox(format("We will be giving our full support and efforts to assisting TheTide in their mission to help the people of this region, alongside Champion {PLAYER} and our hometown hero, Kai."),,SPEAKER_ELLEN)
 
-        msgbox(gText_LetsFixThis_WePrayTheGovernment,,SPEAKER_MAGNUS)
+        msgbox(format("We pray the government of Resido will open their eyes to the damage these companies have done… "),,SPEAKER_MAGNUS)
 
-        msgbox(gText_LetsFixThis_ButWeWillNot,,SPEAKER_TALA)
+        msgbox(format("…but we will not sit quietly and wait for salvation to come to us! We must join together to save ourselves and fight to restore the glory of Resido!"),,SPEAKER_TALA)
         closemessage
         fadescreen(FADE_FROM_BLACK)
 
@@ -39,19 +39,19 @@ script LetsFixThis_GetMessage_Dialogue
         waitse
         showtweet(TWEET_STORY_WAREHOUSE_RAVE)
 
-        msgbox(gText_LetsFixThis_OhLooksLike,,SPEAKER_KAI_TIDE)
+        msgbox(format("Oh, looks like we both got the same message… It's from The Tide Events account."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LetsFixThis_SoundsLikeIt,,SPEAKER_ALICIA)
+        msgbox(format("Sounds like it could be fun. You going to go?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_LetsFixThis_IMightGoALittle,,SPEAKER_KAI_TIDE)
+        msgbox(format("I might go a little later. I don’t love warehouse raves, but this is a special occasion, you know? Actually I wanna tell you about Adaora's new initiatives."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LetsFixThis_WhatreThey,,SPEAKER_ALICIA)
+        msgbox(format("What’re they up to?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_LetsFixThis_TheyWantAllHands,,SPEAKER_KAI_TIDE)
+        msgbox(format("They want all hands on deck at Arantraz. We’re converting it into a new base, and there’s gonna be a big meeting to talk about next steps."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LetsFixThis_GuessIShould,,SPEAKER_ALICIA)
+        msgbox(format("Guess I should go to that, right?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_LetsFixThis_ActuallyGivenHowMuch,,SPEAKER_KAI_TIDE)
+        msgbox(format("Actually, given how much work there is to get done, I don’t think it matters what you do first. I already said I’d head to Arantraz. Either way, I’ll see you later?"),,SPEAKER_KAI_TIDE)
 
         closemessage
 

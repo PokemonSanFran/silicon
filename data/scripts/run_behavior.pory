@@ -7,7 +7,7 @@ script EventScript_ToggleRunBehavior_Message{
         bufferstring(STR_VAR_2,gText_RunBehaviorRun)
         bufferstring(STR_VAR_1,gText_RunBehaviorWalk)
     }
-    msgbox(gText_YouWillRunWalk,MSGBOX_SIGN)
+    msgbox(format("Press {DPAD_UPDOWN} to {STR_VAR_1}.\NPress {DPAD_UPDOWN} while holding {B_BUTTON} to {STR_VAR_2}."),MSGBOX_SIGN)
     end
 }
 

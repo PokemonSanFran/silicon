@@ -22,7 +22,7 @@ script ExhibitionBattle_TimeSkip_Script {
     {
         special(HealPlayerParty)
         fadeblackandsetremovewarpfadeflag
-        msgbox(gText_ExhibitionBattle_TimeSkip,MSGBOX_AUTOCLOSE)
+        msgbox(format("A few weeks later..."),MSGBOX_AUTOCLOSE)
         warpsilent(MAP_SHARPRISE_STADIUM_SKYBOX,10,3)
         waitstate
     }
@@ -33,15 +33,15 @@ script ExhibitionBattle_PrepPlayer_Script {
         setvar(VAR_STORYLINE_STATE,STORY_SAVE_DIANTHA)
         applymovement(ADELAIDE, ExhibitionBattle_EncouragePlayer_Movement)
         waitmovement(0)
-        msgbox(gText_ExhibitionBattle_OkayTime,MSGBOX_YESNO,SPEAKER_OLIVER)
+        msgbox(format("Okay, time for your exhibition battle. Winning or losing doesn't matter… just give us a good show! Are you ready?"),MSGBOX_YESNO,SPEAKER_OLIVER)
 
         if (var(VAR_RESULT) == NO){
-            msgbox(gText_ExhibitionBattle_NervousStill,MSGBOX_AUTOCLOSE)
+            msgbox(format("Nervous still? No worries. Just head into the stadium when you're ready."),MSGBOX_AUTOCLOSE)
                                 end
         }
 
         fadeblackandsetremovewarpfadeflag
-        msgbox(gText_ExhibitionBattle_AndNow,MSGBOX_AUTOCLOSE)
+        msgbox(format("And now, the Resido Champion… {PLAYER}!!!"),MSGBOX_AUTOCLOSE)
         warpsilent(MAP_SHARPRISE_STADIUM_ARENA,1)
         waitstate
 }
@@ -49,7 +49,7 @@ script ExhibitionBattle_PrepPlayer_Script {
 script ExhibitionBattle_MoveFromDoor_Script {
     lock
         faceplayer
-        msgbox(gText_ExhibitionBattle_ForYourExhibition,MSGBOX_YESNO)
+        msgbox(format("Are you ready for your exhibition?"),MSGBOX_YESNO)
         closemessage
         if (var(VAR_RESULT) == YES)
         {
@@ -67,7 +67,7 @@ script ExhibitionBattle_BattleDiantha_Script {
         applymovement(PLAYER,WaitHeDidWhat_WalkToBattlefieldPosition)
         waitmovement(0)
 
-        msgbox(gText_ExhibitionBattle_CanTheGrand,MSGBOX_AUTOCLOSE)
+        msgbox(format("Can the Grand Duchess hold a candle to our superstar? Let's get the exhibition underway!"),MSGBOX_AUTOCLOSE)
 
         applymovement(DIANTHA,Common_Movement_WalkLeft)
         waitmovement(0)
@@ -75,7 +75,7 @@ script ExhibitionBattle_BattleDiantha_Script {
         trainerbattle_continue_after_lose(TRAINER_DIANTHA,gText_ExhibitionBattle_Incredible)
         special(HealPlayerParty)
         startcutscene(JUMPPLAYER_EXHIBITIONBATTLE)
-        msgbox(gText_ExhibitionBattle_WhatAnAmazing,MSGBOX_AUTOCLOSE)
+        msgbox(format("What an amazing show of skill from these elite Trainers! I'm so fired up for this League season, are you all ready?"),MSGBOX_AUTOCLOSE)
         setvar(VAR_STORYLINE_STATE,STORY_POST_DIANTHA)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,9,5)
@@ -91,13 +91,13 @@ script ExhibitionBattle_PostBattle_Dialogue
     waitmovement(0)
     setvar(VAR_STORYLINE_STATE,STORY_CONGRATULATED_BY_ADELAIDE)
 
-    msgbox(gText_ExhibitionBattle_ThatWasPositively,,SPEAKER_ADELAIDE)
+    msgbox(format("That was positively electric! Your best battle yet! Incredible! I couldn't have asked for a better kickoff."),,SPEAKER_ADELAIDE)
     if(!defeated(TRAINER_DIANTHA))
     {
-        msgbox(gText_ExhibitionBattle_IveNeverSeen,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+        msgbox(format("I've never seen anybody so excited to see me lose!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     }
 
-    msgbox(gText_ExhibitionBattle_ImConvinced,,SPEAKER_ADELAIDE)
+    msgbox(format("I'm convinced. This is going to be the best League season ever. The sponsors are excited, viewership is at an all-time high, and we're going to make it big! I'm getting emotional... perhaps I should capture this moment in an email!"),,SPEAKER_ADELAIDE)
     closemessage
     goto(ExhibitionBattle_Monologue)
 }
@@ -106,15 +106,15 @@ script ExhibitionBattle_Monologue
 {
     if(!defeated(TRAINER_DIANTHA))
     {
-    msgbox(gText_ExhibitionBattle_ThatCrowd,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("That crowd sounded so happy to see me lose."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
     else
     {
-    msgbox(gText_ExhibitionBattle_NobodyIn,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Nobody in the stands was excited for my win."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
 
-    msgbox(gText_ExhibitionBattle_IsThis,,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(gText_ExhibitionBattle_IDontKnow,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("I got what I wanted, but is this what being the Champion is supposed to be like? Making people unhappy?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Was this worth it? Was helping SharpRise Capital and fighting against these people the decision I should have made? Is being 'famous' worth it?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     call(TryAutoSave)
     endcutscene
@@ -127,38 +127,38 @@ script ExhibitionBattle_Charlotte_Dialogue
 
         if (var(VAR_TALKED_CHARLOTTE) > 0)
         {
-            msgbox(gText_ExhibitionBattle_IWonderIfThat,,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("I wonder if that development in CurenoPort has been committed yet…"),,SPEAKER_CHARLOTTE_SHARPRISE)
             return
         }
 
         setvar(VAR_TALKED_CHARLOTTE,1)
-        msgbox(gText_ExhibitionBattle_SickBattleOut,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("Sick battle out there. I'm hoping my facilities are as hype as that."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(gText_ExhibitionBattle_YeahIHeardALittle,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Yeah, I heard a little bit of that; what are you working on now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ExhibitionBattle_ImHeadingUpTheir,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("I'm heading up their community outreach program. We're going to set up a bunch of Battle Facilities all around the region."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(gText_ExhibitionBattle_IsntThat,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Isn't that…"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(gText_ExhibitionBattle_IveBeenWorkignWith,,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("I've been working with a developer who thinks we can convert some of the low-income housing into those facilities, meaning they'll be accessible all over the region! I can't wait to build more opportunities for Trainers. Being the Champion would have been cool, but this gig is amazing too."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(gText_ExhibitionBattle_IThinkYoureGonna,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("I think you're gonna do great."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 }
 
 script ExhibitionBattle_Ramesh_Dialogue {
         lock
-        msgbox(gText_ExhibitionBattle_IDidntSeeYour,MSGBOX_NPC,SPEAKER_RAMESH)
+        msgbox(format("I didn't see your match, but the dashboards show me that people worldwide were very excited."),MSGBOX_NPC,SPEAKER_RAMESH)
 
-        msgbox(gText_ExhibitionBattle_UhhThanks,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("…uhh, thanks?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ExhibitionBattle_UsingThose,,SPEAKER_RAMESH)
-        msgbox(gText_ExhibitionBattle_WithTheirEntireLeadership,,SPEAKER_RAMESH)
+        msgbox(format("And how fortunate that those... skills allowed you and Charlotte to bring down TheTide."),,SPEAKER_RAMESH)
+        msgbox(format("With their entire leadership core in custody, we now control the narrative. We're planning a social media campaign to show the people of the region the true dangers of collective organizations like TheTide and the Elite Four."),,SPEAKER_RAMESH)
 
-        msgbox(gText_ExhibitionBattle_WaitTheEliteFour,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Wait, the Elite Four has a whole organization?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_ExhibitionBattle_NotReallyItsASlight,,SPEAKER_RAMESH)
+        msgbox(format("Not really. It's a slight reinterpretation of reality, but the message is for the greater good! We're going to make a huge difference in shutting down copycat groups - you've been incredibly useful."),,SPEAKER_RAMESH)
 
-        msgbox(gText_ExhibitionBattle_NowUhYoureWelcome,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Wow uh, you're welcome."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
         release
         end

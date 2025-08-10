@@ -13,7 +13,7 @@ script LeaverraForest_Armando_Interact_Script {
     lock
     faceplayer
     switch (var(VAR_LEAVERRA_FOREST_STATE)){
-        case POST_HAVE_YOU_SEEN_THE_NEWS: msgbox(gText_HaveYouSeenTheNews_SoundsLikeYouve,,SPEAKER_ARMANDO)
+        case POST_HAVE_YOU_SEEN_THE_NEWS: msgbox(format("Sounds like you've been deputized, kid. Just make sure you don't end up a pawn, yeah? You've got real potential."),,SPEAKER_ARMANDO)
         default: call(EnterTheMaster_ExplainRobots_Dialogue)
             }
         closemessage

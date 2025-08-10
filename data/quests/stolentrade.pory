@@ -41,10 +41,10 @@ script Quest_StolenTrade_AskForTrade_Dialogue
 	copyvar(VAR_0x8009, VAR_RESULT)
     bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
     bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
-    msgbox(gText_StolenTrade_DoYouKnowHow,MSGBOX_NPC,SPEAKER_BRONSON)
-    msgbox(gText_StolenTrade_YeahYouTrade,,SPEAKER_ALICIA)
-    msgbox(gText_StolenTrade_ExactlyIWantTo,,SPEAKER_BRONSON)
-    msgbox(gText_StolenTrade_WillYouTrade,MSGBOX_YESNO,SPEAKER_BRONSON)
+    msgbox(format("Do you know how tradebacks work?"),MSGBOX_NPC,SPEAKER_BRONSON)
+    msgbox(format("Yeah, you trade Pokémon and then immediately trade them back, right?"),,SPEAKER_ALICIA)
+    msgbox(format("Exactly! I want to evolve my {STR_VAR_1}, which requires a trade."),,SPEAKER_BRONSON)
+    msgbox(format("Do you have a {STR_VAR_2}? Will you trade it for my {STR_VAR_1}? We can trade right back afterwards."),MSGBOX_YESNO,SPEAKER_BRONSON)
 
     if (var(VAR_RESULT) == YES)
     {
@@ -81,12 +81,12 @@ script Quest_StolenTrade_RunAfterTrade_Script
 {
     bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
     bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
-    msgbox(gText_StolenTrade_GottaGo,MSGBOX_NPC,SPEAKER_BRONSON)
+    msgbox(format("Okay, gotta go, bye!"),MSGBOX_NPC,SPEAKER_BRONSON)
     applymovement(PLAYER,Quest_StolenTrade_WatchRunAway_Movement)
     applymovement(NPC_STOLEN_TRADE_QIU,Quest_StolenTrade_RunAway_Movement)
     waitmovement(0)
     removeobject(NPC_STOLEN_TRADE_QIU)
-    msgbox(gText_StolenTrade_WaitWhat,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Wait, what? Come back! My {STR_VAR_2}!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     startquest(QUEST_STOLENTRADE)
     release
     end
@@ -94,7 +94,7 @@ script Quest_StolenTrade_RunAfterTrade_Script
 
 script Quest_StolenTrade_NoTrade_Script
 {
-    msgbox(gText_StolenTrade_NoBigDeal,,SPEAKER_BRONSON)
+    msgbox(format("No big deal. Let me know if you change your mind."),,SPEAKER_BRONSON)
     release
     end
 }
@@ -112,16 +112,16 @@ script Quest_StolenTrade_PostTrade_Dialogue{
         bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
 
-        msgbox(gText_StolenTrade_GimmeBackMy,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("Gimme back my {STR_VAR_2}!"),MSGBOX_NPC,SPEAKER_ALICIA)
 
         closemessage
 
         playse(SE_PIN)
         applymovement(NPC_STOLEN_TRADE_CURENO,Common_Movement_ExclamationMark)
         waitmovement(0)
-        msgbox(gText_StolenTrade_LookImSorryBut,MSGBOX_NPC,SPEAKER_BRONSON)
+        msgbox(format("Look I'm sorry but I gotta -"),MSGBOX_NPC,SPEAKER_BRONSON)
 
-        msgbox(gText_StolenTrade_IDontWannaHear,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("I don't wanna hear it! You stole from me, and you're not getting away again."),MSGBOX_NPC,SPEAKER_ALICIA)
 
         closemessage
         goto(Quest_StolenTrade_StartBattle_Script)
@@ -129,7 +129,7 @@ script Quest_StolenTrade_PostTrade_Dialogue{
 
 script Quest_StolenTrade_StartBattle_Script{
     lock
-        msgbox(gText_StolenTrade_ImKeepingThis,MSGBOX_DEFAULT,SPEAKER_BRONSON)
+        msgbox(format("...I'm keeping this {STR_VAR_2}!"),MSGBOX_DEFAULT,SPEAKER_BRONSON)
         closemessage
         trainerbattle_no_intro(TRAINER_STOLENTRADE_THIEF,gText_StolenTrade_YouDontUnderstand)
         goto(Quest_StolenTrade_PostBattle_Dialogue)
@@ -139,11 +139,11 @@ script Quest_StolenTrade_PostBattle_Dialogue {
     lock
         bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
-        msgbox(gText_StolenTrade_GiveItBack,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("Give it back! Now. "),MSGBOX_NPC,SPEAKER_ALICIA)
 
         closemessage
 
-        msgbox(gText_StolenTrade_OkayOkay,MSGBOX_NPC,SPEAKER_BRONSON)
+        msgbox(format("Okay okay..."),MSGBOX_NPC,SPEAKER_BRONSON)
         givemon(SPECIES_CONKELDURR,40,ITEM_NONE)
         completequest(QUEST_STOLENTRADE)
         release
@@ -154,9 +154,9 @@ script Quest_StolenTrade_QuestComplete_Dialogue {
     lock
         bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         bufferspeciesname(STR_VAR_2,SPECIES_CONKELDURR)
-        msgbox(gText_StolenTrade_YoureNotTakingBack,MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("You're not taking back your {STR_VAR_1}?"),MSGBOX_NPC,SPEAKER_ALICIA)
 
-        msgbox(gText_StolenTrade_NoIJustCaught,MSGBOX_NPC,SPEAKER_BRONSON)
+        msgbox(format("I just caught it to trade with sombody. The {STR_VAR_2} was to help me with construction. My boss is going to fire me unless I can double out work output in the next week, and I have bills to pay...."),MSGBOX_NPC,SPEAKER_BRONSON)
         closemessage
 }
 

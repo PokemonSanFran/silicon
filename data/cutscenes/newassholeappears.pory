@@ -43,11 +43,11 @@ script KaiAlpha_Event_Script{
 
 script NewAssholeAppears_Intro_Dialogue {
     setvar(VAR_ROUTE10_STATE,SAVED_BEFORE_KAI_ROUTE10)
-    msgbox(gText_NewAssholeAppears_YouLookFamiliar,,SPEAKER_KAI)
+    msgbox(format("You look familiar. You flew here to do the SharpRise Capital League Challenge, right?"),,SPEAKER_KAI)
     if (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > DEFEATED_THIRD_LEADER){
-        msgbox(gText_NewAssholeAppears_YeahYouHadSome,,SPEAKER_ALICIA)
+        msgbox(format("Yeah, you had some weird rant in Perlacia City the other day. I'm {PLAYER}, and yes, I'm doing the challenge."),,SPEAKER_ALICIA)
     }else{
-        msgbox(gText_NewAssholeAppears_JustStarted,,SPEAKER_ALICIA)
+        msgbox(format("Yeah! Just started not too long ago. Name's {PLAYER}."),,SPEAKER_ALICIA)
     }
     goto(NewAssholeAppears_BadgeJudge_Dialogue)
 }
@@ -57,12 +57,12 @@ script NewAssholeAppears_BadgeJudge_Dialogue {
     special(GetNumberOfBadges)
 
     switch (var(VAR_RESULT)){
-        case 0: msgbox(gText_NewAssholeAppears_NotDoingMuchGood,,SPEAKER_KAI)
-        case 1: msgbox(gText_NewAssholeAppears_ThoughtIRecognized,,SPEAKER_KAI)
-        default: msgbox(gText_NewAssholeAppears_ColonizersAreReallyGetting,,SPEAKER_KAI)
+        case 0: msgbox(format("Judging from your Badge count, the program isn't doing you much good."),,SPEAKER_KAI)
+        case 1: msgbox(format("...yeah I thought I recognized you. Guess you transplants aren't all a total joke!"),,SPEAKER_KAI)
+        default: msgbox(format("Yeah, I heard about your wins from the guys. The colonizers are really getting a head start, huh?"),,SPEAKER_KAI)
     }
 
-    msgbox(gText_NewAssholeAppears_WhatIsYourProblem,,SPEAKER_ALICIA)
+    msgbox(format("Woah, what the hell is your problem?"),,SPEAKER_ALICIA)
 
     lockall
     startmenu_savescreen
@@ -72,7 +72,7 @@ script NewAssholeAppears_BadgeJudge_Dialogue {
 script NewAssholeAppears_StartBattle_Script{
     lockall
     faceplayer
-    msgbox(gText_NewAssholeAppears_GoMindYourBusiness,,SPEAKER_KAI)
+    msgbox(format("Go mind your business in your own region."),,SPEAKER_KAI)
     closemessage
     trainerbattle_no_intro(TRAINER_KAI_NEWASSHOLEAPPEARS,gText_NewAssholeAppears_YoureTough)
     goto(NewAssholeAppears_PostBattle_Script)
@@ -82,14 +82,14 @@ script NewAssholeAppears_PostBattle_Script {
     lockall
     startcutscene(JUMPPLAYER_NEWASSHOLEAPPEARS)
     setvar(VAR_ROUTE10_STATE,DEFEATED_KAI_ROUTE10)
-    msgbox(gText_NewAssholeAppears_Whateveryournameis,,SPEAKER_ALICIA)
-    msgbox(gText_NewAssholeAppears_MyNameIsKai,,SPEAKER_KAI)
+    msgbox(format("Are you done being an ass, whateveryournameis?"),,SPEAKER_ALICIA)
+    msgbox(format("My name is Kai."),,SPEAKER_KAI)
     reveal(REVEAL_KAI)
-    msgbox(gText_NewAssholeAppears_EveryoneCater,,SPEAKER_KAI)
-    msgbox(gText_NewAssholeAppears_YouSoundCrazyPerson,,SPEAKER_ALICIA)
-    msgbox(gText_NewAssholeAppears_NotStupidJustIgnorant,,SPEAKER_KAI)
-    msgbox(gText_NewAssholeAppears_SeeYouAround,,SPEAKER_KAI)
-    msgbox(gText_NewAssholeAppears_IHopeNot,,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_ANGRY)
+    msgbox(format("Everyone's falling over themselves to cater to transplants like you. The rest of us who are actually a part of this community get left in the cold. But I wouldn't expect you to understand that."),,SPEAKER_KAI)
+    msgbox(format("You sound like a crazy person."),,SPEAKER_ALICIA)
+    msgbox(format("I'm not crazy, you're just ignorant. I shouldn't be mad at you. The ignorance isn't entirely your fault. "),,SPEAKER_KAI)
+    msgbox(format("See you around."),,SPEAKER_KAI)
+    msgbox(format("I hope not."),,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_ANGRY)
 
     closemessage
     goto(NewAssholeAppears_KaiExit_Script)

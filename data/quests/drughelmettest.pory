@@ -19,11 +19,11 @@ script Quest_DrugHelmetTest_Interact_Drughelmettester
 
 script Quest_DrugHelmetTest_Dialogue_StartQuest
 {
-    msgbox(DrugHelmetTest_Text_GymLeaderBD,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(DrugHelmetTest_Text_DoYouWanna,MSGBOX_YESNO,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Gym Leader BD and I have been cooking up something wild - a virtual reality helmet! It’ll really make your head spin, if you catch my drift."),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Do you wanna take it for a test run? We need more training data before it’s ready for the next phase."),MSGBOX_YESNO,SPEAKER_DRUG_HELMET_TESTER)
     if(var(VAR_RESULT)==NO)
     {
-        msgbox(DrugHelmetTest_Text_NoWorriesIf,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("No worries. If you want to dive in later, I’ll be here."),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     }
     else
     {
@@ -39,19 +39,19 @@ script Quest_DrugHelmetTest_Dialogue_StartQuest
 
 script Quest_DrugHelmetTest_Dialogue_Active
 {
-    msgbox(DrugHelmetTest_Text_YoureBackI,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(DrugHelmetTest_Text_IllManageI,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,0,EMOTE_SWEAT,0)
+    msgbox(format("You’re back! I hope you’re ready to tackle these head on."),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("I’ll manage, I was just a little disoriented."),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,0,EMOTE_SWEAT,0)
     waitmessage
     goto(Quest_DrugHelmetTest_Script_CheckDrugHelmetTestPhase)
 }
 
 script Quest_DrugHelmetTest_Script_RewardQuest
 {
-    msgbox(DrugHelmetTest_Text_ThanksForBeing,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Thanks for being our guinea pig! Here’s something for your trouble."),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
     checkitemspace(ITEM_QUEST_DRUGHELMETTEST_REWARD,5)
     if(!var(VAR_RESULT))
     {
-        msgbox(DrugHelmetTest_Text_SwingByOnce,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("Swing by once you’ve got some space. I have a reward with your name on it?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     }
     else
     {
@@ -66,10 +66,10 @@ script Quest_DrugHelmetTest_Script_RewardQuest
 script Quest_DrugHelmetTest_Dialogue_QuestIsComplete
 {
     goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitDrughelmettester)
-    msgbox(DrugHelmetTest_Text_YourDataRocked,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(DrugHelmetTest_Text_IWorkOnAV,,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(DrugHelmetTest_Text_BDCame,,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(DrugHelmetTest_Text_ILoveWorking,,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Your data rocked! Now, we’re going to pitch it to investors."),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("I work on audio visual effects for music festivals. It's all about using music and lights and videos to transport somebody's mind somewhere else."),,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("BD came to a show that I worked on and was really impressed with my work, and now I work with her. I also helped remodel their Gym!"),,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("I love working with BD, but I am interested to see where else I can apply my talents on an even bigger scale!"),,SPEAKER_DRUG_HELMET_TESTER)
     closemessage
     releaseall
     end
@@ -97,8 +97,8 @@ script Quest_DrugHelmetTest_Script_FirstTest
     lockall
     faceplayer
     special(SavePlayerParty)
-    msgbox(DrugHelmetTest_Text_YoureStrappedIn,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(DrugHelmetTest_Text_OkayLetsStart,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("You’re strapped in with the helmet. You won’t be able to see a thing until I flip the switch."),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Okay, let’s start with the first test on a low dosage. Your Pokémon might feel a bit off, but that’s just part of the ride."),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     waitmessage
     faceplayer
     locktarget
@@ -121,14 +121,14 @@ script Quest_DrugHelmetTest_Script_PostFirstTestBattle
     special(LoadPlayerParty)
     if(defeated(TRAINER_DRUGHELMETTESTER_1))
     {
-        msgbox(DrugHelmetTest_Text_SmoothSailingThrough,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("Smooth sailing through the first test!"),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
         setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_SECONDPHASE)
         goto(Quest_DrugHelmetTest_Script_SecondTest)
     }
     else
     {
     //PSF TODO make this text to be shown when player loses in battle, and change the battle to be a normal trainer battle where player will white out
-        msgbox(DrugHelmetTest_Text_DidWeJuice,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("Did we juice it up too much?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     }
     releaseall
     end
@@ -139,7 +139,7 @@ script Quest_DrugHelmetTest_Script_SecondTest
     lockall
     faceplayer
     cleartrainerflag(TRAINER_DRUGHELMETTESTER_2)
-    msgbox(DrugHelmetTest_Text_OkayNowIm,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Okay, now I’m going to turn up the intensity for round two."),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     waitmessage
     faceplayer
     locktarget
@@ -162,13 +162,13 @@ script Quest_DrugHelmetTest_Script_PostSecondTestBattle
     special(LoadPlayerParty)
     if(defeated(TRAINER_DRUGHELMETTESTER_2))
     {
-        msgbox(DrugHelmetTest_Text_WeAreNailing,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("We are nailing it!"),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
         setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_THIRDPHASE)
         goto(Quest_DrugHelmetTest_Script_ThirdTest)
     }
     else
     {
-        msgbox(DrugHelmetTest_Text_ShouldWeHave,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("Should we have taken it a little lower?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     }
     releaseall
     end
@@ -179,7 +179,7 @@ script Quest_DrugHelmetTest_Script_ThirdTest
     lockall
     faceplayer
     cleartrainerflag(TRAINER_DRUGHELMETTESTER_3)
-    msgbox(DrugHelmetTest_Text_BraceYourselfIm,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Brace yourself! I’m going to max out the dosage for the final test."),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     waitmessage
     faceplayer
     locktarget
@@ -201,15 +201,15 @@ script Quest_DrugHelmetTest_Script_PostThirdTestBattle
     special(LoadPlayerParty)
     if(defeated(TRAINER_DRUGHELMETTESTER_3))
     {
-        msgbox(DrugHelmetTest_Text_NailedIt,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("Nailed it!"),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
         questmenu(QUEST_MENU_SET_REWARD,QUEST_DRUGHELMETTEST)
-        msgbox(DrugHelmetTest_Text_ThatWasPerfect,MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
-        msgbox(DrugHelmetTest_Text_IveBeenBetter,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("That was perfect! You did great. How do you feel?"),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("I’ve been better. I’ll be fine."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         goto(Quest_DrugHelmetTest_Script_RewardQuest)
     }
     else
     {
-        msgbox(DrugHelmetTest_Text_DidIOverload,MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("Did I overload your circuit or the helmet’s?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     }
     releaseall
     end

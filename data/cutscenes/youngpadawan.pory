@@ -11,15 +11,15 @@ script YoungPadawan_Intro_Dialogue
 
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
-    msgbox(gText_YoungPadawan_WowYouLookTired,,SPEAKER_TALA)
+    msgbox(format("Wow, you look tired! Let me help."),,SPEAKER_TALA)
 
     call(Common_EventScript_OutOfCenterPartyHeal)
 
-    msgbox(gText_YoungPadawan_DidTheChallenge,,SPEAKER_TALA)
+    msgbox(format("Did the challenge kick your ass? Those kids are tough."),,SPEAKER_TALA)
 
-    msgbox(gText_YoungPadawan_ThankYou,,SPEAKER_ALICIA)
+    msgbox(format("Thank you!"),,SPEAKER_ALICIA)
 
-    msgbox(gText_YoungPadawan_DontMentionIt,,SPEAKER_TALA)
+    msgbox(format("Don't mention it."),,SPEAKER_TALA)
 
     closemessage
 
@@ -27,13 +27,13 @@ script YoungPadawan_Intro_Dialogue
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(TALA)
 
-    msgbox(gText_YoungPadawan_LearnALot,,SPEAKER_TALA)
+    msgbox(format("Learn a lot up there?"),,SPEAKER_TALA)
 
-    msgbox(gText_YoungPadawan_TheStoryOfTheIsland,,SPEAKER_ALICIA)
+    msgbox(format("The story of the island is crazy. And I didn't realize the earthquakes here could be that vicious."),,SPEAKER_ALICIA)
 
-    msgbox(gText_YoungPadawan_ThatQuakeWasOne,,SPEAKER_TALA)
+    msgbox(format("That quake was one for the history books! Shook me to my core."),,SPEAKER_TALA)
 
-    msgbox(gText_YoungPadawan_HistoryBooksAreCrazy,,SPEAKER_TALA)
+    msgbox(format("History books are crazy. Losers don't get a pre-release copy to leave their edits in the margins... the winners just say whatever they want, and everybody has to deal with it."),,SPEAKER_TALA)
 
     closemessage
 
@@ -42,16 +42,16 @@ script YoungPadawan_Intro_Dialogue
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
 
-    msgbox(gText_YoungPadawan_MakesYouWonder,,SPEAKER_TALA)
+    msgbox(format("Makes you wonder how committed to accuracy the winners are. Old geezers like me, who were around for the history in the making, have a responsibility to set the record straight. Gotta make sure the truth doesn't get lost, you know?"),,SPEAKER_TALA)
 
-    msgbox(gText_YoungPadawan_MakesSenseYeah,,SPEAKER_ALICIA)
+    msgbox(format("Makes sense, yeah. But the government doesn't have any reason to lie, which is a relief."),,SPEAKER_ALICIA)
 
     goto(YoungPadawan_StartBattle_Script)
 }
 
 script YoungPadawan_StartBattle_Script{
 
-        msgbox(gText_YoungPadawan_YouveGotAGoodSpirit,,SPEAKER_TALA)
+        msgbox(format("Hah! You got a good spirit. Let's see how long you can hold up against your elders!"),,SPEAKER_TALA)
 
         closemessage
         trainerbattle_continue_after_lose(TRAINER_TALA,gText_YoungPadawan_DontBeatYourselfUp)
@@ -59,11 +59,11 @@ script YoungPadawan_StartBattle_Script{
 }
 
 script YoungPadawan_Secret_Dialogue{
-    msgbox(gText_YoungPadawan_DidYouHack,,SPEAKER_TALA)
+    msgbox(format("Did you hack the Matrix? Maybe you got REAL lucky on a randomizer run? ... We're gonna pretend I won, okay?"),,SPEAKER_TALA)
 
-        msgbox(gText_YoungPadawan_GotItYouWon,,SPEAKER_ALICIA)
+        msgbox(format("Haha got it, you won."),,SPEAKER_ALICIA)
 
-        msgbox(gText_YoungPadawan_KeepItSecretToo,,SPEAKER_TALA)
+        msgbox(format("Keep it secret too. Here, take these."),,SPEAKER_TALA)
 
         closemessage
 
@@ -74,7 +74,7 @@ script YoungPadawan_Secret_Dialogue{
         additem(ITEM_POWER_WEIGHT,1)
         additem(ITEM_POWER_BELT,1)
         playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(gText_YoungPadawan_FullSet)
+        msgbox(format("{PLAYER} obtained a set of Power items!"))
         waitmessage
         waitfanfare
         return
@@ -83,7 +83,7 @@ script YoungPadawan_Secret_Dialogue{
 script YoungPadawan_NoZRing_Dialogue
 {
     bufferitemname(STR_VAR_1,ITEM_Z_POWER_RING)
-    msgbox(gText_YoungPadawan_AndISeeYou,,SPEAKER_TALA)
+    msgbox(format("And I see you don't have a {STR_VAR_1} yet! I don't have a spare one, but there's a new Alolan exhibit at the Perlacia Museum that could point you in the right direction."),,SPEAKER_TALA)
     return
 }
 
@@ -97,19 +97,19 @@ script YoungPadawan_PostBattle_Dialogue
     }
 
     bypass_healblock
-    msgbox(gText_YoungPadawan_KeepTraining,,SPEAKER_TALA)
+    msgbox(format("Keep training! Once you learn a little bit more about the world, let's battle again."),,SPEAKER_TALA)
     startcutscene(JUMPPLAYER_YOUNGPADAWAN)
     special(HealPlayerParty)
-    msgbox(gText_YoungPadawan_IveNeverBattled,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-    msgbox(gText_YoungPadawan_KeepTraining,,SPEAKER_TALA,,EMOTE_LAUGH)
-    msgbox(gText_YoungPadawan_YeahTotally,,SPEAKER_ALICIA)
+    msgbox(format("I've never battled anybody so strong!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("Keep training! Once you learn a little bit more about the world, let's battle again."),,SPEAKER_TALA,,EMOTE_LAUGH)
+    msgbox(format("Will do!"),,SPEAKER_ALICIA)
     call_if_quest_not_complete(QUEST_ALOHAFROMALOLA,YoungPadawan_NoZRing_Dialogue)
-    msgbox(gText_YoungPadawan_UntilThenHeres,,SPEAKER_TALA)
+    msgbox(format("Now that I'm getting a good look at you, you're not very well equipped at all! I've got an extra one of these you can use, lemme look through this bag..."),,SPEAKER_TALA)
     closemessage
     giveitem(ITEM_GO_GOGGLES,1)
     setvar(VAR_STORYLINE_STATE,STORY_COMPLETE_ARANTRAZ)
 
-    msgbox(gText_YoungPadawan_ThoseCanBeTough,,SPEAKER_TALA)
+    msgbox(format("I hear those can be tough to get if you're not from here. Good luck with the rest of your challenge, {PLAYER}."),,SPEAKER_TALA)
 
     closemessage
 

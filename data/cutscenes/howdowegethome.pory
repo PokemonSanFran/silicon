@@ -41,8 +41,8 @@ script HowDoWeGetHome_YellingDistance_Dialogue{
         locktarget
         startcutscene(JUMPPLAYER_HOWDOWEGETHOME)
 
-        msgbox(gText_HowDoWeGetHome_LookWeDontWant,,SPEAKER_JULIUS)
-        msgbox(gText_HowDoWeGetHome_OrJustLeave,,SPEAKER_MADISON)
+        msgbox(format("Are you telling me our kids can't play here?! This is the only park in town!"),,SPEAKER_JULIUS)
+        msgbox(format("All I'm saying is, this park isn't for... you. And I don't want my little angels playing with your loser kids!"),,SPEAKER_MADISON)
         closemessage
 
         applymovement(PLAYER,Common_Movement_WalkLeft)
@@ -53,8 +53,8 @@ script HowDoWeGetHome_YellingDistance_Dialogue{
         TeleportCamera(7,22)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(gText_HowDoWeGetHome_LosersYouWannaSay,,SPEAKER_JULIUS)
-        msgbox(gText_HowDoWeGetHome_YouThinkYouScareMe,,SPEAKER_MADISON)
+        msgbox(format("Losers? You wanna say that shit to my face?"),,SPEAKER_JULIUS)
+        msgbox(format("Absolutely. You think you scare me, pretty boy? I'll rearrange your face!"),,SPEAKER_MADISON)
         closemessage
         goto(HowDoWeGetHome_AdaoraGetsInvolved_Dialogue)
 }
@@ -64,15 +64,15 @@ script HowDoWeGetHome_AdaoraGetsInvolved_Dialogue {
         applymovement(ADAORA,Common_Movement_FaceLeft)
         waitmovement(ADAORA)
 
-        msgbox(gText_HowDoWeGetHome_YoChillOut,,SPEAKER_ADAORA)
+        msgbox(format("Hey!"),,SPEAKER_ADAORA)
 
         closemessage
 
         call(HowDoWeGetHome_AdaoraEntrance_Script)
-        msgbox(gText_HowDoWeGetHome_WereDoneWithThisBeef,,SPEAKER_ADAORA)
+        msgbox(format("This ends now. Lady, this park doesn't belong to you. These people are gonna play in it, just like you. These parks are for the public. Is that going to be a problem?"),,SPEAKER_ADAORA)
 
-        msgbox(gText_HowDoWeGetHome_ShouldntIMessYou,,SPEAKER_MADISON)
-        msgbox(gText_HowDoWeGetHome_TheWayYouThinkItIs,,SPEAKER_ADAORA)
+        msgbox(format("Yes it is a problem! Why the hell shouldn't I mess you up too?"),,SPEAKER_MADISON)
+        msgbox(format("That's not going to go the way you think it is."),,SPEAKER_ADAORA)
 
         goto(HowDoWeGetHome_CrowdRecgonizesAdaora_Dialogue)
 }
@@ -81,17 +81,17 @@ script HowDoWeGetHome_CrowdRecgonizesAdaora_Dialogue {
     applymovement(14,Common_Movement_FaceDown)
         applymovement(3,Common_Movement_FaceUp)
         applymovement(11,Common_Movement_FaceLeft)
-        msgbox(gText_HowDoWeGetHome_IThinkThats,,SPEAKER_STRANDED_A)
+        msgbox(format("I think that's Adaora, right? The The Tide Admin?"),,SPEAKER_STRANDED_A)
         applymovement(2,Common_Movement_FaceRight)
         applymovement(12,Common_Movement_FaceLeft)
         applymovement(4,Common_Movement_FaceRight)
         applymovement(10,Common_Movement_FaceLeft)
-        msgbox(gText_HowDoWeGetHome_BetterBackDown,,SPEAKER_RESIDENT_E)
+        msgbox(format("Yeah, Madison better back down."),,SPEAKER_RESIDENT_E)
         applymovement(5,Common_Movement_FaceDown)
-        msgbox(gText_HowDoWeGetHome_ThreeTrainersAtOnce,,SPEAKER_RESIDENT_F)
+        msgbox(format("Dude, I'm pretty sure they took down three trainers at once a few weeks ago."),,SPEAKER_RESIDENT_F)
         applymovement(13,Common_Movement_FaceDown)
         applymovement(9,Common_Movement_FaceUp)
-        msgbox(gText_HowDoWeGetHome_Worldstar,,SPEAKER_RESIDENT_B)
+        msgbox(format("Worldstarrrrrr!"),,SPEAKER_RESIDENT_B)
         closemessage
         goto(HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue)
 }
@@ -101,7 +101,7 @@ script HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue {
         waitmovement(0)
         applymovement(MADISON,Common_Movement_FaceDown)
         waitmovement(0)
-        msgbox(gText_HowDoWeGetHome_YouKnowWhatWhatever,,SPEAKER_MADISON)
+        msgbox(format("...Actually you know what, whatever."),,SPEAKER_MADISON)
         closemessage
         applymovement(MADISON,HowDoWeGetHome_Madison_LeaveFight_Movement)
         applymovement(PLAYER,HowDoWeGetHome_MoveOutOfWay_Movement)

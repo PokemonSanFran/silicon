@@ -19,9 +19,9 @@ script EspuleeOutskirts_EliteHome_PictureFrame_Dialogue {
         if (var(VAR_MASK_OFF_STATE)> GOT_MASK_OFF_CLUE_1){
             call(MaskOff_QuestK_Dialogue)
         } elif (var(VAR_LEAVERRA_FOREST_STATE) > LEAVERRA_FOREST_MAZE_COMPLETE){
-            msgbox(gText_EspuleeOutskirts_EliteHome_ADigitalPhoto,MSGBOX_AUTOCLOSE)
+            msgbox(format("A digital photo frame. The picture being displayed shows Armando with somebody at a ramen restaurant."),MSGBOX_AUTOCLOSE)
         } else {
-            msgbox(gText_EspuleeOutskirts_EliteHome_ADigitalPhoto_Unknown,MSGBOX_AUTOCLOSE)
+            msgbox(format("A digital photo frame. The picture being displayed shows two people together at a ramen restaurant."),MSGBOX_AUTOCLOSE)
         }
 
     release

@@ -108,7 +108,7 @@ script Restorezenzugym_ConstructMenu_Script{
 }
 
 script Restorezenzugym_Active_Script{
-        msgbox(Restorezenzugym_Text_DoYouHave,,SPEAKER_DOYLE)
+        msgbox(format("do you have any of the pieces?"),,SPEAKER_DOYLE)
 
         call(Restorezenzugym_ConstructMenu_Script)
         dynmultistack(24,0,TRUE,4,TRUE,0,NULL)
@@ -126,18 +126,18 @@ script Restorezenzugym_Active_Script{
 }
 
 script Restorezenzugym_Cancel_Dialogue{
-        msgbox(Restorezenzugym_Text_NothingWellThen,MSGBOX_NPC,SPEAKER_DOYLE)
+        msgbox(format("nothing well then what are you doing here"),MSGBOX_NPC,SPEAKER_DOYLE)
 
         end
 }
 
 script Restorezenzugym_ConfirmTake_Dialogue{
-        msgbox(Restorezenzugym_Text_HeyYouSure,MSGBOX_YESNO,SPEAKER_DOYLE)
+        msgbox(format("hey you sure you wanna give me your {STR_VAR_1}? i'm keeping it forever"),MSGBOX_YESNO,SPEAKER_DOYLE)
 
         if (var(VAR_RESULT) == NO){
             goto(Restorezenzugym_Cancel_Dialogue)
         }else{
-            msgbox(Restorezenzugym_Text_Thanks)
+            msgbox(format("thanks!"))
                 closemessage
                 return
         }
@@ -165,7 +165,7 @@ script Restorezenzugym_Handle_FlameOrb_Script{
                 goto(Restorezenzugym_HandleProgress_Dialogue)
         }
         else {
-                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+                msgbox(format("{STR_VAR_2}{STR_VAR_1}!"),,SPEAKER_DOYLE)
 
                 goto(Restorezenzugym_Active_Script)
         }
@@ -183,7 +183,7 @@ script Restorezenzugym_Handle_TR27_Script{
                 goto(Restorezenzugym_HandleProgress_Dialogue)
         }
         else {
-                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+                msgbox(format("{STR_VAR_2}{STR_VAR_1}!"),,SPEAKER_DOYLE)
 
                 goto(Restorezenzugym_Active_Script)
         }
@@ -200,7 +200,7 @@ script Restorezenzugym_Handle_PsychoShift_Script{
         if (!var(VAR_RESULT)){
             bufferstring(STR_VAR_1,gText_PokemonPsychoShift)
                 bufferstring(STR_VAR_2,"That isn't ")
-                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+                msgbox(format("{STR_VAR_2}{STR_VAR_1}!"),,SPEAKER_DOYLE)
                 closemessage
                 end
         }
@@ -229,7 +229,7 @@ script Restorezenzugym_Handle_EffectSpore_Script{
         if (!var(VAR_RESULT)){
             bufferstring(STR_VAR_1,gText_PokemonEffectSpore)
                 bufferstring(STR_VAR_2,"That isn't ")
-                msgbox(Restorezenzugym_Text_YouDontHave,,SPEAKER_DOYLE)
+                msgbox(format("{STR_VAR_2}{STR_VAR_1}!"),,SPEAKER_DOYLE)
                 closemessage
                 release
                 end
@@ -249,7 +249,7 @@ script Restorezenzugym_Handle_EffectSpore_Script{
 }
 
 script Restorezenzugym_NotEnoughMons_Dialogue{
-    msgbox(Restorezenzugym_Text_ThatsYourLast,,SPEAKER_DOYLE)
+    msgbox(format("That's your last Pokémon!"),,SPEAKER_DOYLE)
     closemessage
     release
     end
@@ -317,15 +317,15 @@ script RestoreZenzuIsland_Dialogue_RecruitDrughelmettester
 {
     lock
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_2)
-    msgbox(RestoreZenzuIsland_Text_DrughelmettesterYou,,SPEAKER_ALICIA)
-    msgbox(RestoreZenzuIsland_Text_YeahThat,,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(RestoreZenzuIsland_Text_DoyleThe,,SPEAKER_ALICIA)
+    msgbox(format("Drughelmettester, you said you work in audio visual work, right?"),,SPEAKER_ALICIA)
+    msgbox(format("Yeah, that's how BD and I first met."),,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Doyle, the old Gym Leader from Zenzu Island is looking to work with somebody like you."),,SPEAKER_ALICIA)
     closemessage
     fadescreen(FADE_TO_BLACK)
     delay(2)
     fadescreen(FADE_FROM_BLACK)
-    msgbox(RestoreZenzuIsland_Text_WoahA,,SPEAKER_DRUG_HELMET_TESTER)
-    msgbox(RestoreZenzuIsland_Text_ButMan,,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("Woah, a whole movie production? That's so much bigger than a rave or a Gym..."),,SPEAKER_DRUG_HELMET_TESTER)
+    msgbox(format("But man, my mind is already racing with the possibilities!"),,SPEAKER_DRUG_HELMET_TESTER)
     closemessage
     fadescreen(FADE_TO_BLACK)
     removeobject(DRUGHELMETTESTER_IRISNA)
@@ -338,14 +338,14 @@ script RestoreZenzuIsland_Dialogue_RecruitMonty
 {
     lock
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
-    msgbox(RestoreZenzuIsland_Text_HowMuch,,SPEAKER_PLAYER)
-    msgbox(RestoreZenzuIsland_Text_YouKnowIm,,SPEAKER_MONTY)
-    msgbox(RestoreZenzuIsland_Text_NoButIKnow,,SPEAKER_PLAYER,,EMOTE_LAUGH)
+    msgbox(format("Monty, you said you've made a bunch of money doing this, right?"),,SPEAKER_PLAYER)
+    msgbox(format("Hueh hue, I'm not gonna brag, but I've made a pretty penny seperating fools from their money!"),,SPEAKER_MONTY)
+    msgbox(format("No, but I know somebody that would want to work with you..."),,SPEAKER_PLAYER,,EMOTE_LAUGH)
     fadescreen(FADE_TO_BLACK)
     delay(2)
     fadescreen(FADE_FROM_BLACK)
-    msgbox(RestoreZenzuIsland_Text_FundraisingEh,,SPEAKER_MONTY)
-    msgbox(RestoreZenzuIsland_Text_ICanAtLeastTalk,,SPEAKER_MONTY)
+    msgbox(format("Fundraising, huh? And movies? I'm not sure if that's quite my vibe..."),,SPEAKER_MONTY)
+    msgbox(format("But maybe you can teach an ol' dog new tricks, hueh hue! I can at least talk to Doyle."),,SPEAKER_MONTY)
     closemessage
     fadescreen(FADE_TO_BLACK)
     removeobject(MONTY_CAPHE)

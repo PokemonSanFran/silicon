@@ -33,7 +33,7 @@ script BattleTower_EventScript_GetChallengeStatus{
 script BattleTower_EventScript_QuitWithoutSaving{
     lock
     faceplayer
-    msgbox(BattleTower_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT)
+    msgbox(format("Excuse me!\pYou didn't save before you quit your challenge last time.\pBecause of that, your challenge so far has been disqualified. Sorry!"), MSGBOX_DEFAULT)
     closemessage
     tower_set(TOWER_DATA_WIN_STREAK, 0)
     tower_set(TOWER_DATA_WIN_STREAK_ACTIVE, FALSE)
@@ -66,13 +66,13 @@ script BattleTower_EventScript_GiveRibbons{
     waitmessage
     playfanfare(MUS_OBTAIN_ITEM)
     waitfanfare
-    msgbox(BattleTower_Text_PutRibbonOnMons, MSGBOX_DEFAULT)
+    msgbox(format("{PLAYER} put the RIBBONS on the challenger POKéMON."), MSGBOX_DEFAULT)
     return
 }
 
 script BattleTower_EventScript_GiveBattlePoints{
     //PSF TODO needs a show BP box
-    msgbox(BattleTower_Text_AwardYouTheseBattlePoints, MSGBOX_DEFAULT)
+    msgbox(format("In recognition of your infinite talent, we award you these Battle Point(s)."), MSGBOX_DEFAULT)
     buffernumberstring(STR_VAR_1,10)
     givefrontierbattlepoints(10)
     msgbox(BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
@@ -80,7 +80,7 @@ script BattleTower_EventScript_GiveBattlePoints{
 }
 
 script BattleTower_EventScript_LookForwardToChallenge{
-    msgbox(BattleTower_Text_LookForwardToAnotherChallenge, MSGBOX_DEFAULT)
+    msgbox(format("We look forward to seeing you on another challenge!"), MSGBOX_DEFAULT)
     closemessage
     special(LoadPlayerPartyBattleFrontier)
     setvar(VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_END)
@@ -114,7 +114,7 @@ script BattleTower_EventScript_LostThanksForPlaying {
     message(BattleTower_Text_ThankYouForPlaying)
     waitmessage
     call(BattleTower_EventScript_AskSaveBattle2)
-    msgbox(BattleTower_Text_LookForwardToAnotherChallenge, MSGBOX_DEFAULT)
+    msgbox(format("We look forward to seeing you on another challenge!"), MSGBOX_DEFAULT)
     closemessage
     setvar(VAR_FACILITY_CHALLENGE_STATUS, CHALLENGE_STATUS_END)
     release
@@ -158,7 +158,7 @@ script BattleFrontier_EventScript_SaveBattle2{
     frontier_savebattle
     if (var(VAR_RESULT)){
         playse(SE_SAVE)
-        msgbox(BattleTower_Text_BattleRecordedOnPass, MSGBOX_DEFAULT)
+        msgbox(format("{PLAYER}'s battle result was recorded on the FRONTIER PASS."), MSGBOX_DEFAULT)
     }else{
         msgbox(BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved, MSGBOX_DEFAULT)
     }
@@ -195,10 +195,10 @@ script BattleTower_EventScript_Attendant{
 
 
     switch(var(VAR_LAST_TALKED)){
-        case ATTENDANT_SINGLES: msgbox(BattleTower_Text_WelcomSingleBattle, MSGBOX_DEFAULT)
-        case ATTENDANT_DOUBLES: msgbox(BattleTower_Text_WelcomeDoubleBattle, MSGBOX_DEFAULT)
-        case ATTENDANT_MULTIS: msgbox(BattleTower_Text_WelcomeMultiBattle, MSGBOX_DEFAULT)
-        case ATTENDANT_LINK_MULTIS: msgbox(BattleTower_Text_WelcomeLinkMultiBattle, MSGBOX_DEFAULT)
+        case ATTENDANT_SINGLES: msgbox(format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the SINGLE BATTLE ROOMS."), MSGBOX_DEFAULT)
+        case ATTENDANT_DOUBLES: msgbox(format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the DOUBLE BATTLE ROOMS."), MSGBOX_DEFAULT)
+        case ATTENDANT_MULTIS: msgbox(format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the MULTI BATTLE ROOMS."), MSGBOX_DEFAULT)
+        case ATTENDANT_LINK_MULTIS: msgbox(format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the LINK MULTI BATTLE ROOMS."), MSGBOX_DEFAULT)
     }
 
     goto(BattleTower_EventScript_AskEnterChallenge)
@@ -244,10 +244,10 @@ script BattleTower_EventScript_TryEnterChallenge{
     special(SavePlayerPartyBattleFrontier)
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     switch(var(VAR_LAST_TALKED)){
-        case ATTENDANT_SINGLES: msgbox(BattleTower_Text_SelectThreeMons, MSGBOX_DEFAULT)
-        case ATTENDANT_DOUBLES: msgbox(BattleTower_Text_PleaseSelectFourMons, MSGBOX_DEFAULT)
+        case ATTENDANT_SINGLES: msgbox(format("Now please select the three POKéMON that are to be entered."), MSGBOX_DEFAULT)
+        case ATTENDANT_DOUBLES: msgbox(format("Now please select the four POKéMON that are to be entered."), MSGBOX_DEFAULT)
         case ATTENDANT_MULTIS:
-        case ATTENDANT_LINK_MULTIS: msgbox(BattleTower_Text_PleaseSelectTwoMons, MSGBOX_DEFAULT)
+        case ATTENDANT_LINK_MULTIS: msgbox(format("Now please select the two POKéMON that are to be entered."), MSGBOX_DEFAULT)
     }
 
     fadescreen(FADE_TO_BLACK)
@@ -262,7 +262,7 @@ script BattleTower_EventScript_TryEnterChallenge{
     special(ChoosePartyForBattleFrontier)
     waitstate
     goto_if_eq(VAR_RESULT, 0, BattleTower_EventScript_LoadPartyCancelChallenge)
-    msgbox(BattleTower_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO)
+    msgbox(format("Before entering a BATTLE ROOM, your progress must be saved. Is that okay?"), MSGBOX_YESNO)
     switch(var(VAR_RESULT)){
         case NO: goto(BattleTower_EventScript_LoadPartyCancelChallenge)
         case YES: goto(BattleTower_EventScript_SaveBeforeChallenge)
@@ -388,14 +388,14 @@ script BattleTower_EventScript_AbortLinkDifferentSelections{
 }
 
 script BattleTower_EventScript_FriendDifferentSelection{
-    msgbox(BattleTower_Text_FriendChoseDifferentLvlMode, MSGBOX_DEFAULT)
-    msgbox(BattleTower_Text_ChooseDifferentMonsMatchLvlMode, MSGBOX_DEFAULT)
+    msgbox(format("Your friend has chosen a different battle level."), MSGBOX_DEFAULT)
+    msgbox(format("Please choose two POKéMON different from your friend's, match the level you wish to enter, and register again."), MSGBOX_DEFAULT)
     release
     end
 }
 
 script BattleTower_EventScript_AbortLinkIncorrectNumberOfPlayers{
-    msgbox(BattleTower_Text_LinkMultiOnlyForTwoPlayers, MSGBOX_DEFAULT)
+    msgbox(format("The LINK MULTI BATTLE ROOM challenge is only for two linked players."), MSGBOX_DEFAULT)
     special(CloseLink)
     msgbox(CableClub_Text_IncorrectNumberOfParticipants, MSGBOX_DEFAULT)
     release
@@ -406,12 +406,12 @@ script BattleTower_EventScript_AbortLink{
     special(CloseLink)
 
     switch (var(VAR_0x8005)){
-        case 0: msgbox(BattleTower_Text_FriendChoseDifferentLvlMode, MSGBOX_DEFAULT)
-        case 1: msgbox(BattleTower_Text_FriendAlsoSelectedMon, MSGBOX_DEFAULT)
-        case 2: msgbox(BattleTower_Text_FriendAlsoSelectedMons, MSGBOX_DEFAULT)
+        case 0: msgbox(format("Your friend has chosen a different battle level."), MSGBOX_DEFAULT)
+        case 1: msgbox(format("Your friend has also selected the POKéMON {STR_VAR_1}."), MSGBOX_DEFAULT)
+        case 2: msgbox(format("Your friend has also selected the POKéMON {STR_VAR_1} and {STR_VAR_2}."), MSGBOX_DEFAULT)
     }
 
-    msgbox(BattleTower_Text_ChooseDifferentMonsMatchLvlMode, MSGBOX_DEFAULT)
+    msgbox(format("Please choose two POKéMON different from your friend's, match the level you wish to enter, and register again."), MSGBOX_DEFAULT)
     release
     end
 }
@@ -438,13 +438,13 @@ script BattleTower_EventScript_LinkSuccessful{
 script BattleTower_EventScript_ExplainChallenge{
     switch(var(VAR_LAST_TALKED)){
         case ATTENDANT_SINGLES:
-            msgbox(BattleTower_Text_ExplainSinglesChallenge, MSGBOX_DEFAULT)
+            msgbox(format("The BATTLE TOWER's SINGLE BATTLE ROOMS are facilities for conducting SINGLE BATTLES with three POKéMON.\pThere are many SINGLE BATTLE ROOMS in the BATTLE TOWER for team battles.\pIn each of the SINGLE BATTLE ROOMS, seven TRAINERS await your challenge.\pIf you manage to defeat all seven, you will earn Battle Points.\pIf you want to interrupt your challenge, please save the game.\pIf you don't save before interrupting, you will be disqualified."), MSGBOX_DEFAULT)
         case ATTENDANT_DOUBLES:
-            msgbox(BattleTower_Text_ExplainDoublesChallenge, MSGBOX_DEFAULT)
+            msgbox(format("The BATTLE TOWER's DOUBLE BATTLE ROOMS are facilities for conducting DOUBLE BATTLES with four POKéMON.\pThere are many DOUBLE BATTLE ROOMS in the BATTLE TOWER for team battles.\pIn each of the DOUBLE BATTLE ROOMS, seven TRAINERS await your challenge.\pIf you manage to defeat all seven, you will earn Battle Points.\pIf you want to interrupt your challenge, please save the game.\pIf you don't save before interrupting, you will be disqualified."), MSGBOX_DEFAULT)
         case ATTENDANT_MULTIS:
-            msgbox(BattleTower_Text_ExplainMultisChallenge, MSGBOX_DEFAULT)
+            msgbox(format("The BATTLE TOWER's MULTI BATTLE ROOMS are facilities for conducting MULTI BATTLES.\pFor MULTI BATTLES, you must partner with a TRAINER in the TOWER and enter with two POKéMON each.\pInside the TOWER is a room named the BATTLE SALON where you may meet other TRAINERS.\pThere, you must find a TRAINER to act as your partner in MULTI BATTLES.\pOnce you have partnered up, you will be shown to a MULTI BATTLE ROOM.\pIn the MULTI BATTLE ROOM, seven tag teams await your challenge.\pIf you manage to defeat all seven teams, you will earn Battle Points.\pIf you want to interrupt your challenge, please save the game.\pIf you don't save before interrupting, you will be disqualified."), MSGBOX_DEFAULT)
         case ATTENDANT_LINK_MULTIS:
-            msgbox(BattleTower_Text_ExplainLinkMultisChallenge, MSGBOX_DEFAULT)
+            msgbox(format("The BATTLE TOWER's MULTI BATTLE ROOMS are facilities for conducting MULTI BATTLES with a friend.\pYou must link with your friend using Wireless Adapters or a Game Boy Advance Game Link cable.\pYou must partner with your friend and enter two different kinds of POKéMON.\pThere are many MULTI BATTLE ROOMS in the BATTLE TOWER for team battles.\pIn a MULTI BATTLE ROOM, seven tag teams await you and your friend to make a tag-team challenge.\pIf you manage to defeat all seven teams, you will earn Battle Points.\pPlease beware that unlike other ROOMS, you may not interrupt your challenge.\pOnce you start, you must battle seven MULTI BATTLES in a row nonstop."), MSGBOX_DEFAULT)
     }
 
     goto(BattleTower_EventScript_AskEnterChallenge)
@@ -490,17 +490,17 @@ script BattleTower_EventScript_NotEnoughValidMons{
 
     switch(var(VAR_0x8007)){
         case MODE_50_SINGLES:
-            msgbox(BattleTower_Text_NotEnoughValidMonsLv50Singles, MSGBOX_DEFAULT)
+            msgbox(format("Excuse me!\pYou don't have three eligible POKéMON.\pYou must have three different POKéMON of Level 50 or less to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready."), MSGBOX_DEFAULT)
         case MODE_50_DOUBLES:
-            msgbox(BattleTower_Text_NotEnoughValidMonsLv50Doubles, MSGBOX_DEFAULT)
+            msgbox(format("Excuse me!\pYou don't have four eligible POKéMON.\pYou must have four different POKéMON of Level 50 or less to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready."), MSGBOX_DEFAULT)
         case MODE_50_MULTIS:
-            msgbox(BattleTower_Text_NotEnoughValidMonsLv50Multis, MSGBOX_DEFAULT)
+            msgbox(format("Excuse me!\pYou don't have two eligible POKéMON.\pYou must have two different POKéMON of Level 50 or less to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready."), MSGBOX_DEFAULT)
         case MODE_OPEN_SINGLES:
-            msgbox(BattleTower_Text_NotEnoughValidMonsLvOpenSingles, MSGBOX_DEFAULT)
+            msgbox(format("Excuse me!\pYou don't have three eligible POKéMON.\pYou must have three different POKéMON to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready."), MSGBOX_DEFAULT)
         case MODE_OPEN_DOUBLES:
-            msgbox(BattleTower_Text_NotEnoughValidMonsLvOpenDoubles, MSGBOX_DEFAULT)
+            msgbox(format("Excuse me!\pYou don't have four eligible POKéMON.\pYou must have four different POKéMON to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready."), MSGBOX_DEFAULT)
         case MODE_OPEN_MULTIS:
-            msgbox(BattleTower_Text_NotEnoughValidMonsLvOpenMultis, MSGBOX_DEFAULT)
+            msgbox(format("Excuse me!\pYou don't have two eligible POKéMON.\pYou must have two different POKéMON to enter.\pThey also must be holding different kinds of items.\pEGGS{STR_VAR_1} ineligible.\pPlease come see me when you are ready."), MSGBOX_DEFAULT)
     }
 
     release
@@ -530,7 +530,7 @@ script BattleTower_EventScript_LoadPartyCancelChallenge{
 
 script BattleTower_EventScript_CancelChallenge{
     special(CloseLink)
-    msgbox(BattleTower_Text_LookForwardToAnotherChallenge, MSGBOX_DEFAULT)
+    msgbox(format("We look forward to seeing you on another challenge!"), MSGBOX_DEFAULT)
     release
     end
 }
@@ -570,7 +570,7 @@ script BattleTower_EventScript_ShowYouToBattleRoom{
             waitmessage
             delay(48)
         }else{
-            msgbox(BattleTower_Text_ShowYouToBattleRoom, MSGBOX_DEFAULT)
+            msgbox(format("Right this way to the {STR_VAR_1} Battle Room. Good luck!"), MSGBOX_DEFAULT)
         }
 
     call(BattleTower_EventScript_WalkToElevator)
@@ -661,7 +661,7 @@ script BattleTower_EventScript_GetPartySize{
 
 script BattleTower_EventScript_RulesBoard{
     lockall
-    msgbox(BattleTower_Text_RulesAreListed, MSGBOX_DEFAULT)
+    msgbox(format("The BATTLE TOWER rules are listed."), MSGBOX_DEFAULT)
     goto(BattleTower_EventScript_ReadRulesBoard)
     end
 }
@@ -672,13 +672,13 @@ script BattleTower_EventScript_ReadRulesBoard{
     multichoice(17, 2, MULTI_BATTLE_TOWER_RULES, FALSE)
     switch(var(VAR_RESULT)){
         case 0:
-            msgbox(BattleTower_Text_ExplainTowerRules, MSGBOX_DEFAULT)
+            msgbox(format("The BATTLE TOWER is a facility where four types of battles are waged-- SINGLE BATTLE, DOUBLE BATTLE, MULTI BATTLE, and LINK MULTI BATTLE.\pFor each of these types, there are separate BATTLE ROOMS.\pPlease speak with a guide offering the type of battle you wish to enter."), MSGBOX_DEFAULT)
         case 1:
-            msgbox(BattleTower_Text_ExplainMonRules, MSGBOX_DEFAULT)
+            msgbox(format("Depending on the BATTLE ROOM you are entering, you will be required to take a certain number of POKéMON.\pThe SINGLE BATTLE mode requires three POKéMON.\pThe DOUBLE BATTLE mode requires four, and the MULTI modes both require two."), MSGBOX_DEFAULT)
         case 2:
-            msgbox(BattleTower_Text_ExplainSalonRules, MSGBOX_DEFAULT)
+            msgbox(format("The BATTLE SALON is where you must find a partner to form a tag team for the MULTI BATTLE ROOM challenge.\pChoose the best partner for you by examining other TRAINERS' POKéMON and their moves.\pYou may choose a new tag partner after winning seven straight matches."), MSGBOX_DEFAULT)
         case 3:
-            msgbox(BattleTower_Text_ExplainMultiLinkRules, MSGBOX_DEFAULT)
+            msgbox(format("The LINK MULTI BATTLE Mode is for two friends to mount a challenge together.\pYou and your friend must be linked with Wireless Adapters or a GBA Game Link cable.\pYou must choose two POKéMON at the registration counter.\pThese POKéMON must be different from those of your friend.\pYou may not interrupt this challenge in the middle, unlike other modes."), MSGBOX_DEFAULT)
         case 4:
         case MULTI_B_PRESSED:
             releaseall

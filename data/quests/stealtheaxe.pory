@@ -44,25 +44,25 @@ script Quest_StealTheAxe_Event_Script{
 }
 
 script Quest_StealTheAxe_StartQuest_Dialogue{
-        msgbox(gText_StealTheAxe_PlayerGetToSee,,SPEAKER_NERIENE)
-        msgbox(gText_StealTheAxe_ShouldntYouBe,,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-        msgbox(gText_StealTheAxe_ThatsExactlyWhy,,SPEAKER_NERIENE)
-        msgbox(gText_StealTheAxe_IJustCameFromThe,,SPEAKER_NERIENE)
-        msgbox(gText_StealTheAxe_IKeepHearingAbout,,SPEAKER_NERIENE)
-        msgbox(gText_StealTheAxe_JustLikeEmrys,,SPEAKER_NERIENE,,EMOTE_ANGRY)
-        msgbox(gText_StealTheAxe_IStillDontKnow,,SPEAKER_NERIENE)
-        msgbox(gText_StealTheAxe_SomebodyWithMyCreds,,SPEAKER_NERIENE)
-        msgbox(gText_StealTheAxe_ButIfSomebody,,SPEAKER_NERIENE)
+        msgbox(format("{PLAYER}! Good to see you."),,SPEAKER_NERIENE)
+        msgbox(format("Shouldn't you be fighting some war or something?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+        msgbox(format("That's exactly why I'm here!"),,SPEAKER_NERIENE)
+        msgbox(format("I just came from Chasillauniversity. They've got a display for the {STR_VAR_3}, one of the prized possessions of their Athletic department."),,SPEAKER_NERIENE)
+        msgbox(format("I've heard rumors that this axe provides incredible power to the wielder!"),,SPEAKER_NERIENE)
+        msgbox(format("But just like Whtiney, they've got it sealed up in some glass case! Just the intelligence that had it in our active possesion would be a huge tactical advantage!"),,SPEAKER_NERIENE,,EMOTE_ANGRY)
+        msgbox(format("I still don't know what this tactical advantage is for..."),,SPEAKER_NERIENE)
+        msgbox(format("Somebody with my credentials can't be seen sneaking into Chasillauniversity at night, slipping past all the guards, and stealing the {STR_VAR_3} with almost zero security..."),,SPEAKER_NERIENE)
+        msgbox(format("But if somebody else did that, I would be willing to pay hansomely for it."),,SPEAKER_NERIENE)
         startquest(QUEST_STEALTHEAXE)
-        msgbox(gText_StealTheAxe_IllBeHere,,SPEAKER_NERIENE)
+        msgbox(format("I'll be here."),,SPEAKER_NERIENE)
         closemessage
         release
         end
 }
 
 script Quest_StealTheAxe_Active_Dialogue{
-    msgbox(gText_StealTheAxe_WhatsTheSitrep,MSGBOX_NPC,SPEAKER_NERIENE)
-    msgbox(gText_StealTheAxe_GainingATactical,,SPEAKER_NERIENE)
+    msgbox(format("What's the sitrep?"),MSGBOX_NPC,SPEAKER_NERIENE)
+    msgbox(format("My analysis tells me that the best strategic window to infilitate Chasillauniversity and get the {STR_VAR_3} is between 21:00 and 6:00."),,SPEAKER_NERIENE)
     closemessage
     release
     end
@@ -71,7 +71,7 @@ script Quest_StealTheAxe_Active_Dialogue{
 script Quest_StealTheAxe_Reward_Dialogue{
     playse(SE_PIN)
     applymovement(NERIENE,Common_Movement_ExclamationMark)
-    msgbox(gText_StealTheAxe_MissionComplete,,SPEAKER_NERIENE,TAIL_SHOUT,EMOTE_HAPPY)
+    msgbox(format("MermerezaCity complete!"),,SPEAKER_NERIENE,TAIL_SHOUT,EMOTE_HAPPY)
     goto(Quest_StealTheAxe_Conclusion_Dialogue)
 }
 
@@ -79,18 +79,18 @@ script Quest_StealTheAxe_Conclusion_Dialogue{
     applymovement(NERIENE,Common_Movement_FaceAwayPlayer)
     waitmovement(NERIENE)
     bufferspeciesname(STR_VAR_1,SPECIES_TOXAPEX)
-    msgbox(gText_StealTheAxe_NowLetsHave,,SPEAKER_NERIENE,TAIL_WHISPER)
+    msgbox(format("Now let's have my {STR_VAR_1} hold it..."),,SPEAKER_NERIENE,TAIL_WHISPER)
     closemessage
     playse(SE_PIN)
     applymovement(NERIENE,Common_Movement_ExclamationMark)
-    msgbox(gText_StealTheAxe_ItsNotDoing,,SPEAKER_NERIENE,TAIL_WHISPER,EMOTE_ANGRY)
-    msgbox(gText_StealTheAxe_StatsAreHoldingSteady,,SPEAKER_NERIENE,TAIL_WHISPER,EMOTE_ANGRY)
+    msgbox(format("...its not doing anything!"),,SPEAKER_NERIENE,TAIL_WHISPER,EMOTE_ANGRY)
+    msgbox(format("Stats are holding steady... mood hasn't changed. This isn't making any difference!"),,SPEAKER_NERIENE,TAIL_WHISPER,EMOTE_ANGRY)
     applymovement(NERIENE,Common_Movement_FacePlayer)
     waitmovement(NERIENE)
-    msgbox(gText_StealTheAxe_IGotSomeBadIntel,,SPEAKER_NERIENE)
+    msgbox(format("I got some bad intel out there. I think this thing is a hunk of junk. You can keep it. And as promised..."),,SPEAKER_NERIENE)
     closemessage
     call(Quest_StealTheAxe_HandleMoney_Script)
-    msgbox(gText_StealTheAxe_SeeYouOnTheBattlefield,,SPEAKER_NERIENE)
+    msgbox(format("See you on the battlefield solider."),,SPEAKER_NERIENE)
     applymovement(NERIENE,Quest_StealTheAxe_LeaveNavalBase_Movement)
     completequest(QUEST_STEALTHEAXE)
     removeobject(NERIENE)
@@ -129,12 +129,12 @@ script Quest_StealTheAxe_CheckItem_Script{
 
 script Quest_StealTheAxe_SecretComplete_Dialogue{
     setvar(VAR_TEMP_0,1)
-        msgbox(gText_StealTheAxe_PlayerGetToSee,,SPEAKER_NERIENE)
-        msgbox(gText_StealTheAxe_IsThatTheAxe,MSGBOX_YESNO,SPEAKER_NERIENE,,EMOTE_SHOCK)
+        msgbox(format("{PLAYER}! Good to see you."),,SPEAKER_NERIENE)
+        msgbox(format("Is that the {STR_VAR_3}? I would pay very handsomely if I could buy it from you, {PLAYER}."),MSGBOX_YESNO,SPEAKER_NERIENE,,EMOTE_SHOCK)
         if (var(VAR_RESULT)){
             goto(Quest_StealTheAxe_Conclusion_Dialogue)
         }else{
-            msgbox(gText_StealTheAxe_ISeeWhen,,SPEAKER_NERIENE)
+            msgbox(format("I see. When you change your mind, I'll be here."),,SPEAKER_NERIENE)
         }
     release
         end
@@ -161,17 +161,17 @@ script Quest_StealTheAxe_UnlockDoor_Script{
 script Quest_StealTheAxe_LockedDoor_Dialogue{
     returnqueststate(QUEST_STEALTHEAXE)
         if(var(VAR_RESULT) == QUEST_MENU_SET_ACTIVE){
-            msgbox(gText_StealTheAxe_IShould,,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("Hmm... I should come back tonight."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         }
     return
 }
 
 script Quest_StealTheAxe_AxeUntouched_Script{
-    msgbox(gText_StealTheAxe_TheAxe)
+    msgbox(format("The {STR_VAR_3} is sitting on a pedastal."))
 
     call(Quest_StealTheAxe_CheckIfNight_Script)
     if (var(VAR_TEMP_2) == 1){
-        msgbox(gText_StealTheAxe_TheDisplayCase,MSGBOX_YESNO)
+        msgbox(format("The glass on the display case isn't locked. Take the {STR_VAR_3}?"),MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == YES){
             goto(Quest_StealTheAxe_TakeAxe_Script)
@@ -183,12 +183,12 @@ script Quest_StealTheAxe_AxeUntouched_Script{
 }
 
 script Quest_StealTheAxe_AxeStolen_Dialogue{
-    msgbox(gText_StealTheAxe_YouTookTheAxe)
+    msgbox(format("You took the {STR_VAR_3}. Putting it back would be more trouble than its worth."))
 
     returnqueststate(QUEST_STEALTHEAXE)
 
     if (var(VAR_RESULT) == QUEST_MENU_COMPLETE_QUEST){
-        msgbox(gText_StealTheAxe_IWonderIf,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+        msgbox(format("Is there anybody else that cares about this thing?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
     }
     closemessage
     release
@@ -196,7 +196,7 @@ script Quest_StealTheAxe_AxeStolen_Dialogue{
 }
 
 script Quest_StealTheAxe_TurnedOverAxe_Dialogue{
-    msgbox(gText_StealTheAxe_TheAxeIsGoneBut,MSGBOX_SIGN)
+    msgbox(format("The {STR_VAR_3} is gone, but somebody else is enjoying it."),MSGBOX_SIGN)
 }
 
 script Quest_StealTheAxe_TakeAxe_Script{
@@ -205,9 +205,9 @@ script Quest_StealTheAxe_TakeAxe_Script{
 
         returnqueststate(QUEST_STEALTHEAXE)
         if (var(VAR_RESULT) == QUEST_MENU_SET_ACTIVE){
-            msgbox(gText_StealTheAxe_NowToBring,,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("Time to bring this thing back to Neriene for this...tactical advantage."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         }else{
-            msgbox(gText_StealTheAxe_HuhWhy,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+            msgbox(format("Huh. Why did I take this? No going back now..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
         }
         closemessage
         release
@@ -217,8 +217,8 @@ script Quest_StealTheAxe_TakeAxe_Script{
 script Quest_StealTheAxe_DiscussStolen_Dialogue{
     call(Chasilla_Leland_Story_Dialogue)
     lock
-    msgbox(gText_StealTheAxe_SomebodyStole,,SPEAKER_LELAND,TAIL_SHOUT,EMOTE_SHOCK)
-    msgbox(gText_StealTheAxe_IDontThinkI,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Did you hear though? Some stole the {STR_VAR_3}! I bet you it was those rotten kids from CuconuTown..."),,SPEAKER_LELAND,TAIL_SHOUT,EMOTE_SHOCK)
+    msgbox(format("I don't think I should say anything..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     release
     end
@@ -226,8 +226,8 @@ script Quest_StealTheAxe_DiscussStolen_Dialogue{
 
 script Quest_StealTheAxe_FirstAsk_Dialogue{
         call(Chasilla_Leland_Story_Dialogue)
-        msgbox(gText_StealTheAxe_SomebodyStole,,SPEAKER_LELAND,TAIL_SHOUT,EMOTE_SHOCK)
-        msgbox(gText_StealTheAxe_YouHaveIt,,SPEAKER_LELAND,,EMOTE_SHOCK)
+        msgbox(format("Did you hear though? Some stole the {STR_VAR_3}! I bet you it was those rotten kids from CuconuTown..."),,SPEAKER_LELAND,TAIL_SHOUT,EMOTE_SHOCK)
+        msgbox(format("You have it!?! Oh, its fantastic to see it so up close... you know, I've been collecting rare Pokemon for many years now, and I can see you're a Trainer."),,SPEAKER_LELAND,,EMOTE_SHOCK)
         setvar(VAR_CHASILLA_AXE_STATE,AXE_ASKED)
 }
 
@@ -236,12 +236,12 @@ script Quest_StealTheAxe_AskAxe_Dialogue{
     if (var(VAR_CHASILLA_AXE_STATE) == AXE_THROWN_AWAY){
         call(Quest_StealTheAxe_FirstAsk_Dialogue)
     }
-    msgbox(gText_StealTheAxe_IllTrade,MSGBOX_YESNO,SPEAKER_LELAND)
+    msgbox(format("I'll trade you a Shiny {STR_VAR_1} in exchange for {STR_VAR_3}, do we have a deal?"),MSGBOX_YESNO,SPEAKER_LELAND)
 
     if (var(VAR_RESULT) == YES){
         goto(Quest_StealTheAxe_Trade_Script)
     }else{
-        msgbox(gText_StealTheAxe_YouHaveNoIdea,,SPEAKER_LELAND,,EMOTE_SAD)
+        msgbox(format("You have no idea what that means to me..."),,SPEAKER_LELAND,,EMOTE_SAD)
     }
     closemessage
         release
@@ -273,7 +273,7 @@ script Quest_StealTheAxe_Trade_Script{
 }
 
 script Quest_StealTheAxe_HasAxe_Dialogue{
-    msgbox(gText_StealTheAxe_IllCherishThisTakeCare,MSGBOX_NPC,SPEAKER_LELAND,,EMOTE_HAPPY)
+    msgbox(format("I'll cherish this for many years. Take care of that {STR_VAR_2}."),MSGBOX_NPC,SPEAKER_LELAND,,EMOTE_HAPPY)
 }
 
 script Quest_StealTheAxe_SendGiftToParty_Script {
@@ -294,7 +294,7 @@ script Quest_StealTheAxe_SendGiftToPC_Script {
 script Quest_StealTheAxe_RecievedGiftFanfare {
     bufferspeciesname(STR_VAR_2,SPECIES_STUFFUL)
         playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(gText_Quest_StealTheAxe_ObtainedGift)
+        msgbox(format("{PLAYER} traded the {STR_VAR_3} for a Shiny {STR_VAR_2}."))
         waitmessage
         waitfanfare
         bufferspeciesname(STR_VAR_1, SPECIES_STUFFUL)

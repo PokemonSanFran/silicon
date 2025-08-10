@@ -26,12 +26,12 @@ const FAIL = 7
 const FLAG_CHALLENGE_FAINTED = FLAG_TEMP_1
 
 script Quest_Challengeof7Sisters_Welcome_Dialogue{
-    msgbox(gText_Challengeof7Sisters_WelcomeToTheSeven,MSGBOX_NPC,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("Welcome to the Seven Sisters Challenge!"),MSGBOX_NPC,SPEAKER_SEVENSISTERS_TINA)
         goto(Quest_Challengeof7Sisters_ChallengeMenu_Dialogue)
 }
 
 script Quest_Challengeof7Sisters_ChallengeMenu_Dialogue{
-    msgbox(gText_Challengeof7Sisters_AreYouReadyFor,,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("Are you ready for the toughest challenge in Resido?"),,SPEAKER_SEVENSISTERS_TINA)
     dynmultichoice(0,0,FALSE,3,0,NULL, "I challenge you!", "Info / Record", "Never mind.")
 
         switch (var(VAR_RESULT)){
@@ -79,20 +79,20 @@ script Quest_Challengeof7Sisters_Explain_Dialogue{
         if(var(VAR_RESULT)){
 
             call(Quest_Challengeof7Sisters_ConvertLastVars_Script)
-                msgbox(gText_Challengeof7Sisters_YourLastRecord,,SPEAKER_SEVENSISTERS_TINA)
+                msgbox(format("Your last record was {STR_VAR_1} turns, for an {STR_VAR_2} Rank."),,SPEAKER_SEVENSISTERS_TINA)
             call(Quest_Challengeof7Sisters_ConvertBestVars_Script)
-                msgbox(gText_Challengeof7Sisters_YourBestRecord,,SPEAKER_SEVENSISTERS_TINA)
-                msgbox(gText_Challengeof7Sisters_IThinkYouKnowHow,MSGBOX_YESNO,SPEAKER_SEVENSISTERS_TINA)
+                msgbox(format("Your best record is {STR_VAR_1} turns, for an {STR_VAR_2} Rank."),,SPEAKER_SEVENSISTERS_TINA)
+                msgbox(format("I think you know how this works. Shall we get started?"),MSGBOX_YESNO,SPEAKER_SEVENSISTERS_TINA)
                 if (var(VAR_RESULT) == YES){
                     goto(Quest_Challengeof7Sisters_StartChallenge_Dialogue)
                 }
         }
 
-    msgbox(gText_Challengeof7Sisters_YoullBattleTheSeven,,SPEAKER_SEVENSISTERS_TINA)
-        msgbox(gText_Challengeof7Sisters_YouCanOnlyBring,,SPEAKER_SEVENSISTERS_TINA)
-        msgbox(gText_Challengeof7Sisters_TheGoalIsToWin,,SPEAKER_SEVENSISTERS_TINA)
-        msgbox(gText_Challengeof7Sisters_IfYouWin,,SPEAKER_SEVENSISTERS_TINA)
-        msgbox(gText_Challengeof7Sisters_WouldYouLikeToPlay,MSGBOX_YESNO,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("You'll battle the seven of us amazing sisters, back to back."),,SPEAKER_SEVENSISTERS_TINA)
+        msgbox(format("You can only bring one Pokémon with you, and there's no breaks in between."),,SPEAKER_SEVENSISTERS_TINA)
+        msgbox(format("The goal is to win in as few turns as possible."),,SPEAKER_SEVENSISTERS_TINA)
+        msgbox(format("If you can beat all of us, you get a rank depending on how many turns it took over all 7 battles. The first time you achieve a rank, you get a prize!"),,SPEAKER_SEVENSISTERS_TINA)
+        msgbox(format("Would you like to play?"),MSGBOX_YESNO,SPEAKER_SEVENSISTERS_TINA)
 
         if (var(VAR_RESULT) == YES){
             goto(Quest_Challengeof7Sisters_StartChallenge_Dialogue)
@@ -102,7 +102,7 @@ script Quest_Challengeof7Sisters_Explain_Dialogue{
 }
 
 script Quest_Challengeof7Sisters_Cancel_Dialogue{
-    msgbox(gText_Challengeof7Sisters_HopeToHear,,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("Hope to hear from you soon!"),,SPEAKER_SEVENSISTERS_TINA)
         closemessage
         release
         end
@@ -111,7 +111,7 @@ script Quest_Challengeof7Sisters_Cancel_Dialogue{
 
 script Quest_Challengeof7Sisters_StartChallenge_Dialogue{
     call(Quest_Challengeof7Sisters_CheckPartySize_Script)
-        msgbox(gText_Challengeof7Sisters_LetsGetStarted,,SPEAKER_SEVENSISTERS_TINA)
+        msgbox(format("Let's get started then!"),,SPEAKER_SEVENSISTERS_TINA)
         closemessage
         setvar(VAR_QUEST_CHALLENGEOFTHE7SISTERS_CURRENT_RECORD, 0)
         call(Quest_Challengeof7Sisters_StartQuestIfNotStarted_Script)
@@ -128,7 +128,7 @@ script Quest_Challengeof7Sisters_CheckPartySize_Script{
 }
 
 script Quest_Challengeof7Sisters_PartyTooLarge_Dialogue{
-    msgbox(gText_Challengeof7Sisters_OhYourParty,,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("Oh wait a second... you have more than one Pokémon with you. Deposit the rest in the PC, and talk to me when you're ready!"),,SPEAKER_SEVENSISTERS_TINA)
         closemessage
         release
         end
@@ -153,7 +153,7 @@ script Quest_Challengeof7Sisters_StartQuestIfNotStarted_Script{
 }
 
 script Quest_Challengeof7Sisters_Battle1_Script{
-    msgbox(gText_Challengeof7Sisters_ImFirst,,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("I'm first up!"),,SPEAKER_SEVENSISTERS_TINA)
         closemessage
         applymovement(PLAYER,Common_Movement_WalkRight)
         applymovement(TINA,Common_Movement_WalkLeft)
@@ -173,7 +173,7 @@ script Quest_Challengeof7Sisters_SwapTinaForPaul_Script{
 
 script Quest_Challengeof7Sisters_Battle2_Script{
     call(Quest_Challengeof7Sisters_SwapTinaForPaul_Script)
-    msgbox(gText_Challengeof7Sisters_ImSecond,,SPEAKER_SEVENSISTERS_PAUL)
+    msgbox(format("I'm second!"),,SPEAKER_SEVENSISTERS_PAUL)
         closemessage
         trainerbattle_continue_after_lose(TRAINER_SEVENSISTERS_PAUL,gText_Challengeof7Sisters_IDidMyBest)
         call(Quest_Challengeof7Sisters_AssessBattleOutcome_Script)
@@ -190,7 +190,7 @@ script Quest_Challengeof7Sisters_SwapPaulForJonScript{
 
 script Quest_Challengeof7Sisters_Battle3_Script{
     call(Quest_Challengeof7Sisters_SwapPaulForJonScript)
-    msgbox(gText_Challengeof7Sisters_ImThird,,SPEAKER_SEVENSISTERS_JON)
+    msgbox(format("I'm third."),,SPEAKER_SEVENSISTERS_JON)
         closemessage
         trainerbattle_continue_after_lose(TRAINER_SEVENSISTERS_JON,gText_Challengeof7Sisters_IDidMyBest)
         call(Quest_Challengeof7Sisters_AssessBattleOutcome_Script)
@@ -207,7 +207,7 @@ script Quest_Challengeof7Sisters_SwapJonForBradleyScript{
 
 script Quest_Challengeof7Sisters_Battle4_Script{
     call(Quest_Challengeof7Sisters_SwapJonForBradleyScript)
-    msgbox(gText_Challengeof7Sisters_ImFourth,,SPEAKER_SEVENSISTERS_BRADLEY)
+    msgbox(format("Fourth is me!"),,SPEAKER_SEVENSISTERS_BRADLEY)
         closemessage
         trainerbattle_continue_after_lose(TRAINER_SEVENSISTERS_BRADLEY,gText_Challengeof7Sisters_IDidMyBest)
         call(Quest_Challengeof7Sisters_AssessBattleOutcome_Script)
@@ -224,7 +224,7 @@ script Quest_Challengeof7Sisters_SwapBradleyForJoScript{
 
 script Quest_Challengeof7Sisters_Battle5_Script{
     call(Quest_Challengeof7Sisters_SwapBradleyForJoScript)
-    msgbox(gText_Challengeof7Sisters_ImFifth,,SPEAKER_SEVENSISTERS_JO)
+    msgbox(format("Ready for fifth?"),,SPEAKER_SEVENSISTERS_JO)
         closemessage
         trainerbattle_continue_after_lose(TRAINER_SEVENSISTERS_JO,gText_Challengeof7Sisters_IDidMyBest)
         call(Quest_Challengeof7Sisters_AssessBattleOutcome_Script)
@@ -241,7 +241,7 @@ script Quest_Challengeof7Sisters_SwapJoForHannahScript{
 
 script Quest_Challengeof7Sisters_Battle6_Script{
     call(Quest_Challengeof7Sisters_SwapJoForHannahScript)
-    msgbox(gText_Challengeof7Sisters_ImSixth,,SPEAKER_SEVENSISTERS_HANNAH)
+    msgbox(format("Tired? This is sixth."),,SPEAKER_SEVENSISTERS_HANNAH)
         closemessage
         trainerbattle_continue_after_lose(TRAINER_SEVENSISTERS_HANNAH,gText_Challengeof7Sisters_IDidMyBest)
         call(Quest_Challengeof7Sisters_AssessBattleOutcome_Script)
@@ -257,7 +257,7 @@ script Quest_Challengeof7Sisters_SwapHannahForRachelScript{
 
 script Quest_Challengeof7Sisters_Battle7_Script{
     call(Quest_Challengeof7Sisters_SwapHannahForRachelScript)
-    msgbox(gText_Challengeof7Sisters_ImSeventh,,SPEAKER_SEVENSISTERS_RACHEL)
+    msgbox(format("Last one!"),,SPEAKER_SEVENSISTERS_RACHEL)
         closemessage
         trainerbattle_continue_after_lose(TRAINER_SEVENSISTERS_RACHEL,gText_Challengeof7Sisters_IDidMyBest)
         call(Quest_Challengeof7Sisters_AssessBattleOutcome_Script)
@@ -330,8 +330,8 @@ script Quest_Challengeof7Sisters_JudgePerformance_Script{
 }
 
 script Quest_Challengeof7Sisters_Failed_Dialogue{
-    msgbox(gText_Challengeof7Sisters_ImSorryButYouFainted,,SPEAKER_SEVENSISTERS_TINA)
-    msgbox(gText_Challengeof7Sisters_HopeToHear,,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("I'm sorry, but you fainted before you could beat all of us. Try again next time!"),,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("Hope to hear from you soon!"),,SPEAKER_SEVENSISTERS_TINA)
     closemessage
     release
     end
@@ -341,9 +341,9 @@ script Quest_Challengeof7Sisters_Completed_Dialogue{
     specialvar(VAR_0x8006,ConvertChallengeTurnsToRank)
     call(Quest_Challengeof7Sister_RankNumberToString_Script)
     buffernumberstring(STR_VAR_1,VAR_QUEST_CHALLENGEOFTHE7SISTERS_CURRENT_RECORD)
-    msgbox(gText_Challengeof7Sisters_CongratulationsYourStreak,,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("Congratulations! Your streak of {STR_VAR_1} got you the {STR_VAR_2} Rank!"),,SPEAKER_SEVENSISTERS_TINA)
     call(Quest_Challengeof7Sisters_GivePrizesAndComplete_Script)
-    msgbox(gText_Challengeof7Sisters_ItWasFun,,SPEAKER_SEVENSISTERS_TINA)
+    msgbox(format("It was fun to battle you! Maybe we'll battle again someday."),,SPEAKER_SEVENSISTERS_TINA)
     closemessage
     release
     end

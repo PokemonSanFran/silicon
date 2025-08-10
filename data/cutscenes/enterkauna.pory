@@ -15,20 +15,20 @@ script EnterKauna_Event_Script {
 }
 
 script EnterKauna_KaunaIntro_Dialogue {
-msgbox(gText_EnterKauna_SuhDude,MSGBOX_NPC,SPEAKER_KAUNA)
+msgbox(format("Suh dude. Name's Kauna. Sick job making it up here!"),MSGBOX_NPC,SPEAKER_KAUNA)
 reveal(REVEAL_KAUNA)
 
-msgbox(gText_EnterKauna_EvenBeenBattleResort,,SPEAKER_KAUNA)
+msgbox(format("Ever been to the Battle Resort?"),,SPEAKER_KAUNA)
 
-msgbox(gText_EnterKauna_No,,SPEAKER_ALICIA)
+msgbox(format("... no?"),,SPEAKER_ALICIA)
 
-msgbox(gText_EnterKauna_BruhYouveGotta,,SPEAKER_KAUNA)
+msgbox(format("Bruh, you've gotta go some day. Sickest place to breed Pokémon in the WORLD. And I've been to them all. The breeze in your hair, the sand in your tires, the faint smell of ocean... man that shit just hits, you know? Gets me all fired up!"),,SPEAKER_KAUNA)
 
-msgbox(gText_EnterKauna_OhUhSoundsCool,,SPEAKER_ALICIA)
+msgbox(format("Oh uh, sounds cool I guess..."),,SPEAKER_ALICIA)
 
-msgbox(gText_EnterKauna_ForRealISwear,,SPEAKER_KAUNA)
+msgbox(format("For real, I swear, the Eggs like... prefer the quiet environment or something. Like yeah, these Chasilla perks is hella crisp, but there's something about being out there, riding back and forth, that really does it for me. It's like... meditation or some shit, fasho. I be straight GIGGIN'."),,SPEAKER_KAUNA)
 
-msgbox(gText_EnterKauna_SoundsExciting,,SPEAKER_ALICIA)
+msgbox(format("Sounds exciting. Or relaxing? I can't really tell."),,SPEAKER_ALICIA)
 
     setvar(VAR_GYM_4_STATE, GYM_SAVE_BEFORE_LEADER)
 
@@ -40,7 +40,7 @@ script EnterKauna_StartGymBattle_Script
 {
     lock
     faceplayer
-    msgbox(gText_EnterKauna_HaHaNoYeah,,SPEAKER_KAUNA)
+    msgbox(format("Ha ha, no, yeah. All right, I know you didn't come here to talk about Eggs. You tryna scramble?"),,SPEAKER_KAUNA)
     closemessage
     special(PreparePartyForLittleCupBattle)
     trainerbattle_no_intro(TRAINER_KAUNA, gText_EnterKauna_ImNotTrippin)
@@ -56,7 +56,7 @@ script EnterKauna_KaunaDefeated_Script {
     setvar(VAR_CHASILLA_STATE,DEFEATED_KAUNA)
     setflag(FLAG_CONSTRUCTION_BREAKING_NEWS) //set up for A New Strike
     setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_KAUNA)
-    msgbox(gText_EnterKauna_ThatBattleWasHype,,SPEAKER_KAUNA)
+    msgbox(format("That battle was HYPE! I fuck with that skill, mad heavy. You earned this."),,SPEAKER_KAUNA)
     closemessage
     tweetfanfare(TWEET_GYM_CHASILLA_BADGE,MUS_OBTAIN_BADGE)
     giveitem(ITEM_TM17)
@@ -70,7 +70,7 @@ script EnterKauna_KaunaDefeated_Script {
 script EnterKauna_PostDefeat1_Dialogue {
     lock
     setvar(VAR_GYM_4_STATE,GYM_EXPLAINED_BADGE_AND_TM)
-    msgbox(gText_EnterKauna_KeepingTheBabiesSafe,MSGBOX_NPC,SPEAKER_KAUNA)
+    msgbox(format("Protect is for keeping the babies safe, like an eggshell! Just don't use it over and over and over again, ‘cause it gets real jank, real quick, like an eggshell."),MSGBOX_NPC,SPEAKER_KAUNA)
     closemessage
     release
     end
@@ -78,7 +78,7 @@ script EnterKauna_PostDefeat1_Dialogue {
 
 script EnterKauna_PostDefeat2_Dialogue {
     lock
-msgbox(gText_EnterKauna_HeadOutToHoenn,MSGBOX_NPC,SPEAKER_KAUNA)
+msgbox(format("I'm gonna head out to Hoenn and breed a whole new squad! I can't wait to fight you again, {PLAYER}."),MSGBOX_NPC,SPEAKER_KAUNA)
 
     closemessage
     release

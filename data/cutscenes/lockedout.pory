@@ -13,7 +13,7 @@ script LockedOut_PreventPlayer_Script
         waitmovement(0)
         playse(SE_FAILURE)
         waitse
-        msgbox(gText_LockedOut_AccessDenied,,SPEAKER_DOOR)
+        msgbox(format("Access denied."),,SPEAKER_DOOR)
         closemessage
 
         if (!flag(FLAG_LOCKEDOUT_PLAYED))
@@ -33,7 +33,7 @@ script LockedOut_PhoneCall_Dialogue
 {
         startcutscene(JUMPPLAYER_LOCKEDOUT)
     setflag(FLAG_LOCKEDOUT_PLAYED)
-        msgbox(gText_LockedOut_ShitWait,,SPEAKER_ALICIA)
+        msgbox(format("Shit wait, already?!"),,SPEAKER_ALICIA)
 
         closemessage
 
@@ -41,7 +41,7 @@ script LockedOut_PhoneCall_Dialogue
         waitmovement(0)
         playse(SE_FAILURE)
         waitse
-        msgbox(gText_LockedOut_AccessDenied,,SPEAKER_DOOR)
+        msgbox(format("Access denied."),,SPEAKER_DOOR)
         closemessage
 
         playse(SE_POKENAV_CALL)
@@ -51,13 +51,13 @@ script LockedOut_PhoneCall_Dialogue
         pokenavcall("This phone is ringing.")
         waitmessage
 
-        msgbox(gText_LockedOut_HeyIWasThinking,,SPEAKER_KAI_TIDE)
+        msgbox(format("Hey {PLAYER}, I was thinking…"),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LockedOut_ImLockedOut,,SPEAKER_ALICIA)
+        msgbox(format("I’m locked out!"),,SPEAKER_ALICIA)
 
-        msgbox(gText_LockedOut_ThatsActuallyWhy,,SPEAKER_KAI_TIDE)
+        msgbox(format("That’s actually why I called. I know you had a lot to lose with this, and I was right: SharpRise Capital is straight up going to disown you. If you need someplace to go, you can absolutely crash with me in HalaiIsland."),,SPEAKER_KAI_TIDE)
 
-        msgbox(gText_LockedOut_IActuallyHadnt,,SPEAKER_ALICIA)
+        msgbox(format("I actually hadn’t thought that far ahead… but thank you, a lot, Kai."),,SPEAKER_ALICIA)
         closemessage
 
 
@@ -70,7 +70,7 @@ script LockedOut_PhoneCall_Dialogue
 script LockedOut_WarpPlayer_Script
 {
 
-    msgbox(gText_LockedOut_DoYouWant,MSGBOX_YESNO)
+    msgbox(format("Do you want to go to Kai’s home?"),MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == YES){
             fadeblackandsetremovewarpfadeflag

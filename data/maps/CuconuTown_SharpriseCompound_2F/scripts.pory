@@ -35,7 +35,7 @@ script BedScript_SetNewTime_Script{
         case TIME_EVENING: bufferstring(STR_VAR_3,gText_BedScript_Evening)
         case TIME_NIGHT: bufferstring(STR_VAR_3,gText_BedScript_Night)
     }
-    msgbox(gText_BedScript_WhenShouldWake,,SPEAKER_ALICIA)
+    msgbox(format("{STR_VAR_3}\nI'll wake up again at..."),,SPEAKER_ALICIA)
 
     dynmultichoice(1,1,FALSE,3,0,NULL,gText_Morning, gText_Day, gText_Evening,gText_Night,"Not tired yet.")
     closemessage
