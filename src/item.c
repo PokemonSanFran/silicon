@@ -23,6 +23,7 @@
 #include "constants/hold_effects.h"
 #include "sprays.h" // siliconMerge
 #include "move.h" // siliconMerge
+#include "ui_inventory.h" // inventory
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -35,7 +36,10 @@ EWRAM_DATA struct ItemSlot gTmHmItemSlots[BAG_TMHM_COUNT] = {0}; //PSF technical
 #include "data/pokemon/item_effects.h"
 #include "data/items.h"
 
-static u16 GetBagItemQuantity(u16 *quantity)
+// Start inventory
+//static u16 GetBagItemQuantity(u16 *quantity)
+u16 GetBagItemQuantity(u16 *quantity)
+// End inventory
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;
 }
@@ -87,6 +91,34 @@ void DeserializeTmHmItemSlots(void)
 }
 //End PSF technicalmachine Branch
 
+// Start inventory
+void SetBagItemsPointers(void)
+{
+    gBagPockets[MEDICINE_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Medicine;
+    gBagPockets[MEDICINE_POCKET].capacity  = BAG_MEDICINE_COUNT;
+    gBagPockets[BALLS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_PokeBalls;
+    gBagPockets[BALLS_POCKET].capacity  = BAG_POKEBALLS_COUNT;
+    gBagPockets[BATTLE_ITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_BattleItems;
+    gBagPockets[BATTLE_ITEMS_POCKET].capacity  = BAG_BATTLE_ITEMS_COUNT;
+    gBagPockets[POWERUP_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_PowerUp;
+    gBagPockets[POWERUP_POCKET].capacity  = BAG_POWERUP_COUNT;
+    gBagPockets[BERRIES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
+    gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
+    gBagPockets[OTHER_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Other;
+    gBagPockets[OTHER_POCKET].capacity  = BAG_OTHER_COUNT;
+    gBagPockets[TMHM_POCKET].itemSlots = &gTmHmItemSlots[0];
+    gBagPockets[TMHM_POCKET].capacity = BAG_TMHM_COUNT;
+    gBagPockets[TREASURE_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Treasure;
+    gBagPockets[TREASURE_POCKET].capacity  = BAG_TREASURES_COUNT;
+    gBagPockets[Z_CRYSTALS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Z_Crystals;
+    gBagPockets[Z_CRYSTALS_POCKET].capacity  = BAG_Z_CRYSTALS_COUNT;
+    gBagPockets[MEGA_STONES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Mega_Stones;
+    gBagPockets[MEGA_STONES_POCKET].capacity  = BAG_MEGA_STONES_COUNT;
+    gBagPockets[KEYITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_KeyItems;
+    gBagPockets[KEYITEMS_POCKET].capacity = BAG_KEYITEMS_COUNT;
+}
+
+/*
 void SetBagItemsPointers(void)
 {
     gBagPockets[ITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Items;
@@ -105,6 +137,8 @@ void SetBagItemsPointers(void)
     gBagPockets[BERRIES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
     gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
 }
+*/
+// End inventory
 
 u8 *CopyItemName(u16 itemId, u8 *dst)
 {
@@ -371,6 +405,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
 {
     u16 i; // siliconMerge
     u16 totalQuantity = 0;
+    bool32 removedFromFavorites = FALSE; // inventory
 
     if (GetItemPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
         return FALSE;
@@ -422,7 +457,13 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
             }
 
             if (GetBagItemQuantity(&itemPocket->itemSlots[var].quantity) == 0)
+            // Start inventory
+            {
+                TryToRemoveFavoriteItem(pocket, var);
+                removedFromFavorites = TRUE;
                 itemPocket->itemSlots[var].itemId = ITEM_NONE;
+            }
+            // End inventory
 
             if (count == 0)
                 return TRUE;
@@ -445,7 +486,15 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
                 }
 
                 if (GetBagItemQuantity(&itemPocket->itemSlots[i].quantity) == 0)
+                // Start inventory
+                {
+                    if (!removedFromFavorites)
+                    {
+                        TryToRemoveFavoriteItem(pocket, var);
+                    }
                     itemPocket->itemSlots[i].itemId = ITEM_NONE;
+                }
+                // End inventory
 
                 if (count == 0)
                     return TRUE;

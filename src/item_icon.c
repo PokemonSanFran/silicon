@@ -9,6 +9,8 @@
 #include "sprite.h"
 #include "pokevial.h" // Pokevial Branch
 #include "constants/items.h"
+#include "palette.h" // inventory
+#include "window.h" // inventory
 
 // EWRAM vars
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
@@ -190,3 +192,18 @@ const u16 *GetItemIconPalette(u16 itemId)
 
     return gItemsInfo[itemId].iconPalette;
 }
+
+// Start inventory
+u8 BlitItemIconToWindow(u16 itemId, u8 windowId, u16 x, u16 y, void * paletteDest)
+{
+    if (!AllocItemIconTemporaryBuffers())
+        return 16;
+
+    LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+    BlitBitmapToWindow(windowId, gItemIcon4x4Buffer, x, y, 32, 32);
+    LoadPalette(GetItemIconPalette(itemId),BG_PLTT_ID(gWindows[windowId].window.paletteNum),PLTT_SIZE_4BPP);
+    FreeItemIconTemporaryBuffers();
+    return 0;
+}
+// End inventory

@@ -7,6 +7,11 @@
 #include "sprite.h"
 #include "data.h"
 #include "constants/pokemon_icon.h"
+// Start inventory
+#include "util.h"
+#include "constants/rgb.h"
+#include "constants/party_menu.h"
+// End inventory
 
 struct MonIconSpriteTemplate
 {
@@ -241,6 +246,59 @@ void LoadMonIconPalette(u16 species)
     if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
+
+// Start inventory
+u8 LoadMonIconPaletteWithAilment(u16 species, u32 personality, u32 ailment, u16 currentHP, u8 paletteNum)
+{
+    u8 palIndex;
+    u16 paletteIndex = (16 + paletteNum) * 16;
+
+    species = SanitizeSpeciesId(species);
+
+    if (gSpeciesInfo[species].iconSpriteFemale != NULL && IsPersonalityFemale(species, personality))
+        palIndex = gSpeciesInfo[species].iconPalIndexFemale;
+    else
+        palIndex = gSpeciesInfo[species].iconPalIndex;
+
+    LoadPalette(gMonIconPalettes[palIndex], paletteIndex, 32);
+
+    if(species == SPECIES_EGG){
+
+        return paletteNum;
+    }
+    else if(currentHP == 0){
+
+        BlendPalette(paletteIndex, 16, 6, RGB_BLACK);
+    }
+    else{
+        switch(ailment){
+            case AILMENT_BRN:
+                BlendPalette(paletteIndex, 16, 6, RGB_RED);
+                break;
+            case AILMENT_PRZ:
+                BlendPalette(paletteIndex, 16, 6, RGB_YELLOW);
+                break;
+            case AILMENT_FRZ:
+            case AILMENT_FRB:
+                BlendPalette(paletteIndex, 16, 6, RGB_BLUE);
+                break;
+            case AILMENT_PSN:
+                BlendPalette(paletteIndex, 16, 6, RGB_PURPLE);
+                break;
+            case AILMENT_SLP:
+                BlendPalette(paletteIndex, 16, 6, RGB_WHITE);
+                break;
+            default:
+                return paletteNum;
+                break;
+        }
+
+    }
+
+    CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
+    return paletteNum;
+}
+// End inventory
 
 void LoadMonIconPalettePersonality(u16 species, u32 personality)
 {

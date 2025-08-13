@@ -60,6 +60,7 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "ui_adventure_guide.h"
+#include "ui_inventory.h"
 
 //==========DEFINES==========//
 struct MenuResources
@@ -1440,6 +1441,18 @@ void Task_OpenPrestoStartMenu(u8 taskId)
     }
 }
 
+void Task_OpenNewInventoryMenu(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        StartMenu_Menu_FreeResources();
+        PlayRainStoppingSoundEffect();
+        CleanupOverworldWindowsAndTilemaps();
+        Inventory_Init(CB2_ReturnToUIMenu, INVENTORY_MODE_FIELD);
+        gMain.savedCallback = CB2_ReturnToUIMenu;
+    }
+}
+
 void ClearStartMenuDataBeforeExit(void)
 {
     sMenuDataPtr->isAppSelectedForMove = FALSE;
@@ -1644,7 +1657,7 @@ static void Task_MenuMain(u8 taskId)
                 case APP_BAG:
                     PlaySE(SE_SELECT);
                     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                    gTasks[taskId].func = Task_OpenBagFromStartMenu;
+                    gTasks[taskId].func = Task_OpenNewInventoryMenu;
                     break;
                 case APP_POKEDEX:
                     if(GetCurrentSignal() != 0){

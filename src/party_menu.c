@@ -66,6 +66,7 @@
 #include "text_window.h"
 #include "trade.h"
 #include "union_room.h"
+#include "ui_inventory.h" // inventory
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
@@ -3414,7 +3415,10 @@ static void CursorCb_Give(u8 taskId)
 static void CB2_SelectBagItemToGive(void)
 {
     if (InBattlePyramid() == FALSE)
-        GoToBagMenu(ITEMMENULOCATION_PARTY, POCKETS_COUNT, CB2_GiveHoldItem);
+        // Start inventory
+        Inventory_Init(CB2_GiveHoldItem, INVENTORY_MODE_GIVE_ITEM);
+        //GoToBagMenu(ITEMMENULOCATION_PARTY, POCKETS_COUNT, CB2_GiveHoldItem);
+        // End inventory
     else
         GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_PARTY, CB2_GiveHoldItem);
 }
@@ -4626,12 +4630,23 @@ void LoadPartyMenuAilmentGfx(void)
 
 void CB2_ShowPartyMenuForItemUse(void)
 {
-    MainCallback callback = CB2_ReturnToBagMenu;
+    // Start inventory
+    //MainCallback callback = CB2_ReturnToBagMenu;
+    MainCallback callback = CB2_ReturnToInventoryMenu;
+    // End inventory
     u8 partyLayout;
     u8 menuType;
     u8 i;
     u8 msgId;
     TaskFunc task;
+
+    // Start inventory
+    if(FlagGet(FLAG_SYS_USED_FROM_REGISTER_MENU))
+    {
+        FlagClear(FLAG_SYS_USED_FROM_REGISTER_MENU);
+        callback = CB2_ReturnToField;
+    }
+    // End inventory
 
     if (gMain.inBattle)
     {
@@ -6946,6 +6961,15 @@ void CB2_ChooseMonToGiveItem(void)
     gPartyMenu.bagItem = gSpecialVar_ItemId;
 }
 
+// Start inventory
+void CB2_ChooseMonToGiveItem_ReturnToNewInventory(void)
+{
+    MainCallback callback = CB2_ReturnToInventoryMenu;
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_GIVE_ITEM, FALSE, PARTY_MSG_GIVE_TO_WHICH_MON, Task_HandleChooseMonInput, callback);
+    gPartyMenu.bagItem = gSpecialVar_ItemId;
+}
+// End inventory
+
 static void TryGiveItemOrMailToSelectedMon(u8 taskId)
 {
     sPartyMenuItemId = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HELD_ITEM);
@@ -7363,7 +7387,10 @@ void OpenPartyMenuInBattle(u8 partyAction)
 
 void ChooseMonForInBattleItem(void)
 {
-    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_USE_ITEM, FALSE, PARTY_MSG_USE_ON_WHICH_MON, Task_HandleChooseMonInput, CB2_ReturnToBagMenu);
+    // Start inventory
+    //InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_USE_ITEM, FALSE, PARTY_MSG_USE_ON_WHICH_MON, Task_HandleChooseMonInput, CB2_ReturnToBagMenu);
+    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_USE_ITEM, FALSE, PARTY_MSG_USE_ON_WHICH_MON, Task_HandleChooseMonInput, CB2_ReturnToInventoryBattleMenu);
+    // End inventory
     ReshowBattleScreenDummy();
     UpdatePartyToBattleOrder();
 }

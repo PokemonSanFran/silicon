@@ -18,11 +18,20 @@ EventScript_ObtainItemMessage::
 
 EventScript_BufferPocketNameAndTryFanfare::
 	switch VAR_RESULT
-	case POCKET_ITEMS,      EventScript_BufferItemsPocket
+    // Start inventory
+	//case POCKET_ITEMS,      EventScript_BufferItemsPocket
 	case POCKET_KEY_ITEMS,  EventScript_BufferKeyItemsPocket
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
 	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
 	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
+    case POCKET_MEDICINE,     EventScript_BufferMedicinePocket
+    case POCKET_BATTLE_ITEMS, EventScript_BufferBattleItemsPocket
+    case POCKET_POWERUP,      EventScript_BufferBattleItemsPowerUp
+    case POCKET_OTHER,        EventScript_BufferBattleItemsOther
+    case POCKET_TREASURE,     EventScript_BufferTreasuresPocket
+    case POCKET_Z_CRYSTALS,   EventScript_BufferBattleItemsZCrystals
+    case POCKET_MEGA_STONES,  EventScript_BufferBattleItemsMegaStone
+    // End inventory
 	end
 
 EventScript_BufferItemsPocket::
@@ -49,6 +58,43 @@ EventScript_BufferBerriesPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_BERRIES
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
+
+// Start inventory
+EventScript_BufferMedicinePocket::
+    bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
+    call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    return
+
+EventScript_BufferBattleItemsPocket::
+    bufferstdstring STR_VAR_3, STDSTRING_BATTLEITEMS
+    call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    return
+
+EventScript_BufferBattleItemsOther::
+    bufferstdstring STR_VAR_3, STDSTRING_OTHER
+    call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    return
+
+EventScript_BufferBattleItemsZCrystals::
+    bufferstdstring STR_VAR_3, STDSTRING_Z_CRYSTALS
+    call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    return
+
+EventScript_BufferBattleItemsMegaStone::
+    bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONE
+    call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    return
+
+EventScript_BufferBattleItemsPowerUp::
+    bufferstdstring STR_VAR_3, STDSTRING_POWERUP
+    call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    return
+
+EventScript_BufferTreasuresPocket::
+    bufferstdstring STR_VAR_3, STDSTRING_TREASURES
+    call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    return
+// End inventory
 
 EventScript_ObtainedItem::
 	compare VAR_0x8001, TRUE

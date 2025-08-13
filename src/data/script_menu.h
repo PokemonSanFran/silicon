@@ -941,6 +941,15 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_ARENA] = gText_BattleArena,
     [STDSTRING_BATTLE_PIKE] = gText_BattlePike,
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
+    // Start inventory
+    [STDSTRING_MEDICINE]    = gText_Medicine,
+    [STDSTRING_BATTLEITEMS] = gText_BattleItems,
+    [STDSTRING_POWERUP]     = gText_PowerUp,
+    [STDSTRING_OTHER]       = gText_Other,
+    [STDSTRING_TREASURES]   = gText_Treasures,
+    [STDSTRING_Z_CRYSTALS]  = gText_Z_Crystals,
+    [STDSTRING_MEGA_STONE]  = gText_Mega_Stones,
+    // End inventory
 };
 
 static const u8 sLinkServicesMultichoiceIds[] =

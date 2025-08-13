@@ -2,6 +2,8 @@
 #define GUARD_ITEM_CONSTANTS_H
 
 // These constants are used in gItemsInfo
+// Start inventory
+/*
 #define POCKET_NONE        0
 #define POCKET_ITEMS       1
 #define POCKET_POKE_BALLS  2
@@ -15,6 +17,40 @@
 #define BERRIES_POCKET     3
 #define KEYITEMS_POCKET    4
 #define POCKETS_COUNT      5
+*/
+
+enum PocketList
+{
+    MEDICINE_POCKET,
+    BALLS_POCKET,
+    BATTLE_ITEMS_POCKET,
+    POWERUP_POCKET,
+    BERRIES_POCKET,
+    OTHER_POCKET,
+    TMHM_POCKET,
+    TREASURE_POCKET,
+    Z_CRYSTALS_POCKET,
+    MEGA_STONES_POCKET,
+    KEYITEMS_POCKET,
+    POCKETS_COUNT,
+};
+
+enum PocketEnum
+{
+    POCKET_NONE,
+    POCKET_MEDICINE,
+    POCKET_POKE_BALLS,
+    POCKET_BATTLE_ITEMS,
+    POCKET_POWERUP,
+    POCKET_BERRIES,
+    POCKET_OTHER,
+    POCKET_TM_HM,
+    POCKET_TREASURE,
+    POCKET_Z_CRYSTALS,
+    POCKET_MEGA_STONES,
+    POCKET_KEY_ITEMS,
+};
+// End inventory
 
 #define REPEL_LURE_MASK         (1 << 15)
 #define IS_LAST_USED_LURE(var)  (var & REPEL_LURE_MASK)

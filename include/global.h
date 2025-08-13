@@ -28,6 +28,11 @@
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
+// Start inventory
+#include "constants/item.h"
+#include "constants/inventory.h"
+#include "ui_inventory.h"
+// End inventory
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -308,6 +313,7 @@ struct SaveBlock3
     u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     u8 dexNavChain;
+    struct NewInventoryData InventoryData; // inventory
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
@@ -1150,11 +1156,24 @@ struct SaveBlock1
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
-    /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
-    /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
-    /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    // Start inventory
+    /*
+    struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    */
+    struct ItemSlot pcItems[PC_ITEMS_COUNT];
+    struct ItemSlot bagPocket_Medicine[BAG_MEDICINE_COUNT];
+    struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    struct ItemSlot bagPocket_BattleItems[BAG_BATTLE_ITEMS_COUNT];
+    struct ItemSlot bagPocket_PowerUp[BAG_POWERUP_COUNT];
+    struct ItemSlot bagPocket_Other[BAG_OTHER_COUNT];
+    struct ItemSlot bagPocket_Treasure[BAG_TREASURES_COUNT];
+    struct ItemSlot bagPocket_Z_Crystals[BAG_Z_CRYSTALS_COUNT];
+    struct ItemSlot bagPocket_Mega_Stones[BAG_MEGA_STONES_COUNT];
+    struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    // End inventory
     u8 bagPocket_TMHMOwnedFlags[NUM_TM_BYTES]; //allow for an amount of TMs/HMs dictated by the BAG_TMHM_COUNT constant // PSF technicalmachine Branch
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];

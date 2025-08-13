@@ -40,6 +40,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "ui_inventory.h"
 #include "vs_seeker.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
@@ -168,6 +169,9 @@ static void SetUpItemUseCallback(u8 taskId)
         type = gTasks[taskId].tEnigmaBerryType - 1;
     else
         type = GetItemType(gSpecialVar_ItemId) - 1;
+    // Start inventory
+    SetMainCallback2(sItemUseCallbacks[type]);
+    /*
     if (!InBattlePyramid())
     {
         gBagMenu->newScreenCallback = sItemUseCallbacks[type];
@@ -178,6 +182,8 @@ static void SetUpItemUseCallback(u8 taskId)
         gPyramidBagMenu->newScreenCallback = sItemUseCallbacks[type];
         CloseBattlePyramidBag(taskId);
     }
+    */
+    // End inventory
 }
 
 static void SetUpItemUseOnFieldCallback(u8 taskId)
@@ -1234,6 +1240,14 @@ static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
         CloseBattlePyramidBag(taskId);
     }
 }
+
+// Start inventory
+void ItemUseFromInventory_PartyMenu(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_BattleScript;
+    ItemUseInBattle_ShowPartyMenu(taskId);
+}
+// End inventory
 
 void ItemUseInBattle_PartyMenu(u8 taskId)
 {

@@ -242,3 +242,19 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
                                       b + (((data2->b - b) * coeff) >> 4));
     }
 }
+
+// Start inventory
+void CopyRGBIntoSlot(u8 paletteNum, u8 slot, s8 ColorRed, s8 ColorGreen, s8 ColorBlue, bool8 isSpritePalette)
+{
+    u16 palOffset, index;
+
+    if(isSpritePalette)
+        palOffset = ((paletteNum + 16) * 16);
+    else
+        palOffset = (paletteNum * 16);
+
+    index = palOffset + slot;
+
+    gPlttBufferFaded[index] = RGB(ColorRed, ColorGreen, ColorBlue);
+}
+// End inventory

@@ -30,6 +30,7 @@
 #include "task.h"
 #include "test_runner.h"
 #include "text.h"
+#include "ui_inventory.h" // inventory
 #include "util.h"
 #include "window.h"
 #include "line_break.h"
@@ -83,6 +84,7 @@ static void PlayerHandleLinkStandbyMsg(u32 battler);
 static void PlayerHandleResetActionMoveSelection(u32 battler);
 static void PlayerHandleEndLinkBattle(u32 battler);
 static void PlayerHandleBattleDebug(u32 battler);
+static void PlayerHandleNewInventoryMenu(u32 battler); // inventory
 static void PlayerHandleMidBattleEvolution(u32 battler); // midBattleEvolution
 
 static void PlayerBufferRunCommand(u32 battler);
@@ -338,6 +340,10 @@ static void HandleInputChooseAction(u32 battler)
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, 0);
             break;
         case 1: // Top right
+            // Start inventory
+            FreeAllWindowBuffers();
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            // End inventory
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
             break;
         case 2: // Bottom left
@@ -1659,7 +1665,10 @@ static void OpenBagAndChooseItem(u32 battler)
         gBattlerControllerFuncs[battler] = CompleteWhenChoseItem;
         ReshowBattleScreenDummy();
         FreeAllWindowBuffers();
-        CB2_BagMenuFromBattle();
+        // Start inventory
+        Inventory_Init(ReshowBattleScreenAfterMenu, INVENTORY_MODE_BATTLE);
+        //CB2_BagMenuFromBattle();
+        // End inventory
     }
 }
 

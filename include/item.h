@@ -88,6 +88,7 @@ u32 GetItemFlingPower(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
 void DeserializeTmHmItemSlots(void); // PSF technicalmachine Branch
+u16 GetBagItemQuantity(u16 *quantity); // inventory
 
 /* Expands to:
  * enum

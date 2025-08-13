@@ -177,6 +177,15 @@
 #define STDSTRING_BATTLE_ARENA     27
 #define STDSTRING_BATTLE_PIKE      28
 #define STDSTRING_BATTLE_PYRAMID   29
+// Start inventory
+#define STDSTRING_MEDICINE         30
+#define STDSTRING_BATTLEITEMS      31
+#define STDSTRING_POWERUP          32
+#define STDSTRING_OTHER            33
+#define STDSTRING_TREASURES        34
+#define STDSTRING_Z_CRYSTALS       35
+#define STDSTRING_MEGA_STONE       36
+// End inventory
 
 // Dynamic Multichoice Callbacks
 
