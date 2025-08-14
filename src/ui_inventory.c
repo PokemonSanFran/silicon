@@ -3003,7 +3003,6 @@ void Task_UseItem(u8 taskId){
 static void Task_ItemUseOnField(u8 taskId)
 {
     u16 itemId = gSpecialVar_ItemId = getCurrentSelectedItemIdx();
-    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
 
     if (GetItemFieldFunc(itemId))
     {
@@ -3034,7 +3033,6 @@ static void Task_ItemUseOnField(u8 taskId)
 
 void Task_CloseNewBagMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         // If ready for a new screen (e.g. party menu for giving an item) go to that screen
@@ -3050,7 +3048,6 @@ void Task_CloseNewBagMenu(u8 taskId)
 
 void Task_CloseNewBagMenu_Temp(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         // If ready for a new screen (e.g. party menu for giving an item) go to that screen

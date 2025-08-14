@@ -84,7 +84,6 @@ static void PlayerHandleLinkStandbyMsg(u32 battler);
 static void PlayerHandleResetActionMoveSelection(u32 battler);
 static void PlayerHandleEndLinkBattle(u32 battler);
 static void PlayerHandleBattleDebug(u32 battler);
-static void PlayerHandleNewInventoryMenu(u32 battler); // inventory
 static void PlayerHandleMidBattleEvolution(u32 battler); // midBattleEvolution
 
 static void PlayerBufferRunCommand(u32 battler);
