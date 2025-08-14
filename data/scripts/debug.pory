@@ -171,21 +171,10 @@ text Debug_EventScript_Text_DefensiveIVs
 
 script Debug_EventScript_Script_1
 {
-    callnative(CountItemsAndStuff)
 	end
 }
-movement DebugMovement2
-{
-    player_run_down * 6
-    player_run_right * 9
-    player_run_up * 6
-    player_run_left * 9
-    step_end
-}
-
 script Debug_EventScript_Script_2
 {
-    warp(MAP_BIRTH_ISLAND_HARBOR,0)
 	end
 }
 
