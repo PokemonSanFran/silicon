@@ -72,19 +72,19 @@
 // PSF TODO Update all of these values to match the max size of the pockets
 // PSF TODO update these with real ass values based on items in the game
 #define PC_ITEMS_COUNT 1 // siliconMerge
-#define BAG_ITEMS_COUNT 525 // siliconMerge
-#define BAG_KEYITEMS_COUNT 93  // siliconMerge
-#define BAG_POKEBALLS_COUNT 27 // siliconMerge
+#define BAG_ITEMS_COUNT 1 // inventory
+#define BAG_KEYITEMS_COUNT 102  // siliconMerge
+#define BAG_POKEBALLS_COUNT 36 // siliconMerge
 #define BAG_TMHM_COUNT NUM_TECHNICAL_MACHINES // PSF technicalmachine Branch
 #define BAG_BERRIES_COUNT 68 // siliconMerge
 // Start inventory
-#define BAG_MEDICINE_COUNT     100
-#define BAG_BATTLE_ITEMS_COUNT 100
-#define BAG_POWERUP_COUNT      100
-#define BAG_OTHER_COUNT        100
-#define BAG_TREASURES_COUNT    100
-#define BAG_Z_CRYSTALS_COUNT   100
-#define BAG_MEGA_STONES_COUNT  100
+#define BAG_MEDICINE_COUNT     44
+#define BAG_BATTLE_ITEMS_COUNT 172
+#define BAG_POWERUP_COUNT      144
+#define BAG_OTHER_COUNT        51
+#define BAG_TREASURES_COUNT    61
+#define BAG_Z_CRYSTALS_COUNT   35
+#define BAG_MEGA_STONES_COUNT  60
 // End inventory
 
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
