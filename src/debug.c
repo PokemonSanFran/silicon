@@ -4839,7 +4839,10 @@ void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)  // siliconMerge
 {
     u16 itemId;
 
+    // Start inventory
+    //for (itemId = ITEM_TM01; itemId <= ITEM_HM08; itemId++)
     for (itemId = FIRST_TM_INDEX; itemId <= LAST_TM_INDEX; itemId++)
+    // End inventory
     {
         if (CheckBagHasSpace(itemId, 1) && ItemIdToBattleMoveId(itemId) != MOVE_NONE)
             AddBagItem(itemId, 1);
