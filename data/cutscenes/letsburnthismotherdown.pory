@@ -253,14 +253,14 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
         case FALSE_TIMELINE_NONE_COMPLETE:
             msgbox(format("Does being terrorist mean we can attack people with Pokemon?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
             msgbox(format("Yes."),,SPEAKER_CHARLOTTE_SHARPRISE)
-            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like.),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like."),,SPEAKER_CHARLOTTE_SHARPRISE)
         case FALSE_TIMELINE_MAN_COMPLETE:
             msgbox(format("I've watched you threaten people, but attacking them head on? After they're defeated?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
             msgbox(format("All of those scrubs were nothing compared to Kai. I don't respect him... but even I can admit he's strong. We can't take any chances, especially after you let your guard down!"),,SPEAKER_CHARLOTTE_SHARPRISE)
         case FALSE_TIMELINE_HOW_COMPLETE:
             msgbox(format("I've seen the police attack The Tide... but Kai? He's a Trainer, like us! Are we supposed to attack him too?"),,SPEAKER_ALICIA)
             msgbox(format("Yes."),,SPEAKER_CHARLOTTE_SHARPRISE)
-            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like.),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like."),,SPEAKER_CHARLOTTE_SHARPRISE)
         case FALSE_TIMELINE_MAN_HOW_COMPLETE:
             msgbox(format("And as long as we defeat The Tide, the ends justify the means?"),,SPEAKER_ALICIA)
             msgbox(format("Yeah, no shit! None of these people can be trusted."),,SPEAKER_CHARLOTTE_SHARPRISE)
