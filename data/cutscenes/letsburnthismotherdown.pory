@@ -341,7 +341,7 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     applymovement(PLAYER,Common_Movement_FaceUp)
     applymovement(ADELAIDE,Common_Movement_FaceUp)
 
-    msgbox(format("Police Chief Bill sent me an email with their current plan - they're going to treat the entire island as a crime scene and see if they can find anything else regarding TheTide."),,SPEAKER_ADELAIDE)
+    msgbox(format("Police Chief Bill sent me an email with their current plan - they're going to treat the entire island as a crime scene and see if they can find anything else regarding The Tide."),,SPEAKER_ADELAIDE)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     if(var(VAR_RESULT) == FALSE_TIMELINE_HOW_COMPLETE)
