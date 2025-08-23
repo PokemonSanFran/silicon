@@ -110,6 +110,21 @@ script OkayLetsFixit_ReturnToPeak_Script {
         msgbox(format("Wait what - who are you? How are you -"),,SPEAKER_ALICIA)
 
 
+        //PSF TODO
+        // you have the rare chance to make the right decision this time.
+        // I can create a bridge from here to a point in the past where you can make the right decisiohn.
+        // if no pokemon with ribbon in boxes or party, skip right to "make the right decision"
+        // if there is less than two healthy pokemon in your party, stop here, jirachi says bring one more pokemon that is healthy
+        //But this bridge must be anchored on each end. you need to leave behind a Pokemon with the spirit of a Champion to anchor this end.
+        // pick a pokemon, refuse any pokemon without the champion ribbon
+        // This Pokemon does not have the spirit of a Champion.
+        // Once you cross the bridge, there is no coming back.
+        // This Pokemon will stay with here with me. It will never return to you, but it will be well taken care of. Are you certain?
+        // Alicia reacts strongly in opposition
+        // Jirachi: All actions have consequences. Are you ready?
+        // If no "we have nothing more to discuss until you are."
+        // Saying no will leave the conversation and start again at "rare chance"
+
         msgbox(format("I hope you make the right decision this time, {PLAYER}."),,SPEAKER_HIKO)
         closemessage
         playse(SE_ORB)
