@@ -216,11 +216,11 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     applymovement(KAI,LetsBurnThisMotherDown_WalkBackwards)
     waitmovement(0)
 
-    buffermovename(STR_VAR_1,MOVE_HYPER_BEAM)
+    buffermovename(STR_VAR_1,MOVE_ARMOR_CANNON)
     msgbox(format("{STR_VAR_1}!"),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 
-    playse(SE_M_HYPER_BEAM) //PSF TODO figure out what hyper beam looks like
+    playse(SE_M_HYPER_BEAM) //PSF TODO update to use armor cannon once that attack anim exists
     waitse
     fadescreen(FADE_TO_WHITE)
     applymovement(KAI,LetsBurnThisMotherDown_HitByHyperBeam)
@@ -241,28 +241,33 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
             msgbox(format("What the hell are you doing?!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         default:
-            msgbox(format("What the hell are you doing here?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+            msgbox(format("What the hell are you doing here? And did you just use {STR_VAR_1} on a person?!?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     }
 
-    msgbox(format("You two were always weirdly close, I noticed it back at the Championship. I was starting to think you double-crossed us, so I followed you. And then I took care of it."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("You two were always weirdly close, I noticed it back at the Championship. I was starting to think you double-crossed us, so I followed you. And then I handled the terrorist myself."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("We might disagree, but I would never call Kai a terrorist..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
     {
+        case FALSE_TIMELINE_NONE_COMPLETE:
+            msgbox(format("Does being terrorist mean we can attack people with Pokemon?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+            msgbox(format("Yes."),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like.),,SPEAKER_CHARLOTTE_SHARPRISE)
         case FALSE_TIMELINE_MAN_COMPLETE:
+            msgbox(format("I've watched you threaten people, but attacking them head on? After they're defeated?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+            msgbox(format("All of those scrubs were nothing compared to Kai. I don't respect him... but even I can admit he's strong. We can't take any chances, especially after you let your guard down!"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        case FALSE_TIMELINE_HOW_COMPLETE:
+            msgbox(format("I've seen the police attack The Tide... but Kai? He's a Trainer, like us! Are we supposed to attack him too?"),,SPEAKER_ALICIA)
+            msgbox(format("Yes."),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like.),,SPEAKER_CHARLOTTE_SHARPRISE)
         case FALSE_TIMELINE_MAN_HOW_COMPLETE:
-            msgbox(format("So endangering his life is taking care of it!?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
-            msgbox(format("We're supposed to exterminate The Tide. And I didn't think you were going to."),,SPEAKER_CHARLOTTE_SHARPRISE)
-            msgbox(format("No, I wasn't planning on attacking him after I already beat him."),,SPEAKER_ALICIA)
-            msgbox(format("Whatever."),,SPEAKER_CHARLOTTE_SHARPRISE)
-
-        default:
-            msgbox(format("No, I… he's not like the rest of The Tide. I thought we could work with him. I was wrong."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-            msgbox(format("Yeah, no shit! None of these people can be trusted. {PLAYER}, you could have gotten seriously hurt."),,SPEAKER_CHARLOTTE_SHARPRISE)
-            msgbox(format("I know, I know. I'm sorry."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+            msgbox(format("And as long as we defeat The Tide, the ends justify the means?"),,SPEAKER_ALICIA)
+            msgbox(format("Yeah, no shit! None of these people can be trusted."),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("Somehow, you ended up as the Resido League Champion. You need to start acting like it."),,SPEAKER_CHARLOTTE_SHARPRISE)
     }
 
-    msgbox(format("The cops should be right behind me. You can't be fucking up like this."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("The authorities should be right behind me."),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 
     clearflag(FLAG_HIDE_POLICE)
