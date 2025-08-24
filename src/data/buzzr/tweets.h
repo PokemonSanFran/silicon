@@ -479,7 +479,7 @@ const struct Tweet gTweets[] =
     {
         .userId = BUZZR_USER_SHARPRISECAPTIAL,
         .content = COMPOUND_STRING(
-                "The Tide's presence in Residomakes for a\n"
+                "The Tide's presence in Resido makes for a\n"
                 "worse region for all. Starting today, we'll be\n"
                 "working with the Police Dept. and\n"
                 "Champion {PLAYER} to put an end to\n"
