@@ -224,7 +224,7 @@ script Manhunt_Dudley_Battle_Script
         msgbox(format("Whoa wait hold on!"),,SPEAKER_DUDLEY)
 
         msgbox(format("Charlotte, should we maybe..."),,SPEAKER_ALICIA)
-        msgbox(format("What's wrong Champ, having trouble keeping up?",,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
+        msgbox(format("What's wrong Champ, having trouble keeping up?"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
         closemessage
         goto(Manhunt_StartBattle3_Script)
 }
@@ -294,11 +294,11 @@ script Manhunt_Matthew_Battle_Script {
         msgbox(format("Oh damn, looks like they were right."),,SPEAKER_MATTHEW)
         msgbox(format("Who's they?"),,SPEAKER_ALICIA)
         msgbox(format("Yeah, Alcmene told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
-        msgbox(format("Look, we don't have to fight, but you need to tell us -",,SPEAKER_ALICIA)
+        msgbox(format("Look, we don't have to fight, but you need to tell us -"),,SPEAKER_ALICIA)
         msgbox(format("Ignore {POSSESSIVE} good cop routine."),,SPEAKER_CHARLOTTE_SHARPRISE)
         msgbox(format("This isn't a bit - I'm serious!"),,SPEAKER_ALICIA,TAIL_SHOUT)
         msgbox(format("When dealing with terrorists, I prefer bad cop, worse cop."),,SPEAKER_CHARLOTTE_SHARPRISE)
-        msgbox(format("Guess which one I am?",,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
+        msgbox(format("Guess which one I am?"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
         closemessage
         goto(Manhunt_StartBattle4_Script)
 }
