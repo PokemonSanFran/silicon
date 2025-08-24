@@ -180,7 +180,7 @@ script Manhunt_StartBattle2_Script
 
         msgbox(format("The only thing I can think of is that they buy Balls in bulk from that Speciality Ball Shop…"),,SPEAKER_TEODORO)
 
-        msgbox(format("That's in IrisinaTown. Let's move."),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("That's in IrisinaTown. Let's move... Champ."),,SPEAKER_CHARLOTTE_SHARPRISE)
 // PSF TODO make sure all the NPCs here repeat themselves
 
         msgbox(format("God forbid some good people try to make some change without these tech cronies ruining it for everybody."),MSGBOX_AUTOCLOSE,SPEAKER_TEODORO)
@@ -221,7 +221,10 @@ script Manhunt_Dudley_Battle_Script
 
         msgbox(format("Don't bother your boss. After all, he's going to have to run the shop on his own after this."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Woah wait hold on!"),,SPEAKER_DUDLEY)
+        msgbox(format("Whoa wait hold on!"),,SPEAKER_DUDLEY)
+
+        msgbox(format("Charlotte, should we maybe..."),,SPEAKER_ALICIA)
+        msgbox(format("What's wrong Champ, having trouble keeping up?",,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
         closemessage
         goto(Manhunt_StartBattle3_Script)
 }
@@ -289,11 +292,13 @@ script Manhunt_Matthew_Battle_Script {
         applymovement(MATTHEW,Common_Movement_FacePlayer)
         waitmovement(MATTHEW)
         msgbox(format("Oh damn, looks like they were right."),,SPEAKER_MATTHEW)
-
         msgbox(format("Who's they?"),,SPEAKER_ALICIA)
-
-
         msgbox(format("Yeah, Alcmene told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
+        msgbox(format("Look, we don't have to fight, but you need to tell us -",,SPEAKER_ALICIA)
+        msgbox(format("Ignore {POSSESSIVE} good cop routine."),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("This isn't a bit - I'm serious!"),,SPEAKER_ALICIA,TAIL_SHOUT)
+        msgbox(format("When dealing with terrorists, I prefer bad cop, worse cop."),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("Guess which one I am?",,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
         closemessage
         goto(Manhunt_StartBattle4_Script)
 }
@@ -310,6 +315,7 @@ script Manhunt_StartBattle4_Script
         applymovement(MATTHEW,Common_Movement_FaceRight)
         waitmovement(MATTHEW)
         msgbox(format("a real piece of work."),,SPEAKER_MATTHEW)
+        msgbox(format("...You're lucky I was raised right, or I'd spit on you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
         closemessage
         applymovement(CHARLOTTE,Manhunt_LeaveRoute)
         waitmovement(0)
