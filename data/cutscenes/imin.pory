@@ -627,7 +627,7 @@ text gText_ImIn_EverythingAboutIsBullshit {
 }
 
 text gText_ImIn_Floor {
-    format("That warp panel goes to the skydeck. His real office is there.")
+    format("That warp panel goes to the skydeck. Her real office is there.")
 }
 
 text gText_ImIn_AllThatTraining {

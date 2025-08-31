@@ -172,3 +172,24 @@ script SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script{
     setflag(FLAG_HIDE_ADELAIDE)
     return
 }
+
+script LeagueOps_AdelaideComputer_Script
+{
+    lock
+    msgbox(format("There is an open email draft on Adelaide's screen."))
+    if (var(VAR_STORYLINE_STATE) >= STORY_WARP_TILE_ACCESSIBLE)
+    {
+        msgbox(format("I am disappointed in the Champion's recent behavior, as I know you are as well. Though, before {PLAYER} turned we extracted enough value from {SUBJECT} to cover our investment many times over so I consider this loss acceptable. PARC is now fully operational, The Tide is eliminated, and there is nothing that can sta"))
+    }
+    elif (var(VAR_STORYLINE_STATE) >= STORY_WON_FINALS)
+    {
+        msgbox(format("As predicted, our preferred candidate continues to succeed and show promise. We have begun Ramesh's second phase media tour and our approval ratings are slowly beginning to climb by using the Trainer as our public face.\nThey were instrumental in landing a blow against The Tide and we are making progress with reviving PARC."))
+    }
+    else
+    {
+        msgbox(format("We have identified two candidates from the Kickstart Program that we believe will be most malleable and guarentee our return on investment. There are no other League participants of note at this time."))
+    }
+    releaseall
+    end
+}
+
