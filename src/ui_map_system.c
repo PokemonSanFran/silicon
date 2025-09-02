@@ -201,19 +201,19 @@ static const struct WindowTemplate sTooltipWindowTemplate = {
     .baseBlock = 1 + 120
 };
 
-static const u32 sRegionMapTiles[] = INCBIN_U32("graphics/ui_menus/map_system/tiles.8bpp.lz");
-static const u32 sRegionMapTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/tiles.bin.lz");
+static const u32 sRegionMapTiles[] = INCBIN_U32("graphics/ui_menus/map_system/tiles.8bpp.smol");
+static const u32 sRegionMapTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/tiles.bin.smolTM");
 static const u16 sRegionMapPalette[] = INCBIN_U16("graphics/ui_menus/map_system/map_tileset.gbapal");
 
-static const u32 sBarsTiles[] = INCBIN_U32("graphics/ui_menus/map_system/bars.4bpp.lz");
-static const u32 sBarsTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/bars.bin.lz");
+static const u32 sBarsTiles[] = INCBIN_U32("graphics/ui_menus/map_system/bars.4bpp.smol");
+static const u32 sBarsTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/bars.bin.smolTM");
 static const u16 sBarsPalette[] = INCBIN_U16("graphics/ui_menus/map_system/bars.gbapal");
 
 static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/cursor_small.gbapal");
-static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp.lz");
+static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp.smol");
 
 static const u16 sRegionMapL2CursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/L2_cursor.gbapal");
-static const u32 sRegionMapCursorL2GfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp.lz");
+static const u32 sRegionMapCursorL2GfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp.smol");
 
 static const u8 sA_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/a_button.4bpp");
 static const u8 sB_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/b_button.4bpp");
@@ -873,21 +873,21 @@ static bool8 RegionMap_LoadGraphics(void)
     {
     case 0:
         ResetTempTileDataBuffers();
-        LZ77UnCompVram(sRegionMapTiles, (u16 *)BG_CHAR_ADDR(2));
+        DecompressDataWithHeaderVram(sRegionMapTiles, (u16 *)BG_CHAR_ADDR(2));
         sMenuDataPtr->gfxLoadState++;
         break;
     case 1:
-        LZ77UnCompVram(sRegionMapTilemap, (u16 *)BG_SCREEN_ADDR(28));
+        DecompressDataWithHeaderVram(sRegionMapTilemap, (u16 *)BG_SCREEN_ADDR(28));
         sMenuDataPtr->gfxLoadState++;
         LoadPalette(sRegionMapPalette, 0, 0x60);
         break;
     case 2:
         ResetTempTileDataBuffers();
-        LZ77UnCompVram(sBarsTiles, (u16 *)BG_CHAR_ADDR(1));
+        DecompressDataWithHeaderVram(sBarsTiles, (u16 *)BG_CHAR_ADDR(1));
         sMenuDataPtr->gfxLoadState++;
         break;
     case 3:
-        LZ77UnCompVram(sBarsTilemap, (u16 *)BG_SCREEN_ADDR(30));
+        DecompressDataWithHeaderVram(sBarsTilemap, (u16 *)BG_SCREEN_ADDR(30));
         sMenuDataPtr->gfxLoadState++;
         break;
     case 4:
@@ -897,8 +897,8 @@ static bool8 RegionMap_LoadGraphics(void)
         }
         break;
     case 5:
-        LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
-        LZ77UnCompWram(sRegionMapCursorL2GfxLZ, sRegionMap->cursorLargeImage);
+        DecompressDataWithHeaderWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
+        DecompressDataWithHeaderWram(sRegionMapCursorL2GfxLZ, sRegionMap->cursorLargeImage);
         sMenuDataPtr->gfxLoadState++;
         break;
     case 6:

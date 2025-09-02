@@ -9731,14 +9731,14 @@ BattleScript_FogIsTooDense::
 
 BattleScript_EmboldenedAttackedFromFog::
 	waitmessage B_WAIT_TIME_SHORTEST
-	cancelmultiturnmoves BS_TARGET
+	cancelmultiturnmoves 
 	adjustdamage
 	printstring STRINGID_EMBOLDENEDATTACKEDFROMFOG
 	waitmessage B_WAIT_TIME_LONG
 	effectivenesssound
 	hitanimation BS_TARGET
 	waitstate
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
 	resultmessage

@@ -181,19 +181,19 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 };
 
 static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
-static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_up.4bpp.lz");
-static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.lz");
-static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.lz");
-static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.lz");
+static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_up.4bpp.smol");
+static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.smol");
+static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.smol");
+static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.smol");
 
-static const u32 sTransBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.4bpp.lz");
-static const u32 sTransBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.bin.lz");
+static const u32 sTransBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.4bpp.smol");
+static const u32 sTransBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.bin.smolTM");
 
-static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.lz");
-static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.lz");
+static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.smol");
+static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.smolTM");
 
-static const u32 sMenuBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.4bpp.lz");
-static const u32 sMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.bin.lz");
+static const u32 sMenuBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.4bpp.smol");
+static const u32 sMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.bin.smolTM");
 
 static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
 static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");

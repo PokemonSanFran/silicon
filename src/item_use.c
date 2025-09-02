@@ -1233,7 +1233,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
     // Start siliconMerge
 		    break;
     case BALL_THROW_FIRST_POKEMON_CATCH:
-        if (!InBattlePyramid())
+        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
             DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_AlreadyCaughtMonInMap, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_AlreadyCaughtMonInMap, Task_CloseBattlePyramidBagMessage);

@@ -441,10 +441,10 @@
 
 #define FOREACH_HM(F) \
     F(CUT) \
-    /*
+    F(STRENGTH)
+/*
     F(FLY) \
     F(SURF) \
-    F(STRENGTH) \
     F(FLASH) \
     F(ROCK_SMASH) \
     F(WATERFALL) \
@@ -464,6 +464,12 @@
 #define ITEM_TM_SNATCH ITEM_TM01
 #define ITEM_TM_SECRET_POWER ITEM_TM01
 #define ITEM_TM_HAIL ITEM_TM01
+#define ITEM_HM_FLY ITEM_TM_FLY
+#define ITEM_HM_SURF ITEM_TM_SURF
+#define ITEM_HM_FLASH ITEM_TM01
+#define ITEM_HM_ROCK_SMASH ITEM_TM_ROCK_SMASH
+#define ITEM_HM_WATERFALL ITEM_TM_WATERFALL
+#define ITEM_HM_DIVE ITEM_TM_DIVE
 // End pokedexUpdate
 
 #endif

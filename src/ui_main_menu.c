@@ -190,14 +190,14 @@ static const u16 mainMenuPalettesWhite[] = INCBIN_U16("graphics/ui_menus/glass/p
 static const u16 mainMenuPalettesYellow[] = INCBIN_U16("graphics/ui_menus/glass/palettes/yellow.gbapal");
 static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
 
-static const u32 statsBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.4bpp.lz");
-static const u32 statsBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.bin.lz");
+static const u32 statsBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.4bpp.smol");
+static const u32 statsBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.bin.smolTM");
 
-static const u32 mainMenuLocationBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.lz");
-static const u32 mainMenuLocationBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.lz");
+static const u32 mainMenuLocationBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol");
+static const u32 mainMenuLocationBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM");
 
-static const u32 mainMenuContinueMenuBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.4bpp.lz");
-static const u32 mainMenuContinueMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.bin.lz");
+static const u32 mainMenuContinueMenuBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.4bpp.smol");
+static const u32 mainMenuContinueMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.bin.smolTM");
 
 static const u8 mainMenuContinueOptionBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/non-selector.4bpp");
 static const u8 mainMenuContinueSelectedBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/selector.4bpp");
@@ -209,10 +209,10 @@ static const u8 dayBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/sun.4bpp");
 static const u8 eveningBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/night.4bpp");
 static const u8 nightBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/night.4bpp");
 //PSF TODO replace with icons when Crim makes a set of four, right now we have two
-static const u32 mainMenuContinueCursor[] = INCBIN_U32("graphics/ui_menus/main_menu/cursor.4bpp.lz");
+static const u32 mainMenuContinueCursor[] = INCBIN_U32("graphics/ui_menus/main_menu/cursor.4bpp.smol");
 
-static const u32 sharpriseSprite[] = INCBIN_U32("graphics/ui_menus/main_menu/sharprise.4bpp.lz");
-static const u32 tideSprite[] = INCBIN_U32("graphics/ui_menus/main_menu/thetide.4bpp.lz");
+static const u32 sharpriseSprite[] = INCBIN_U32("graphics/ui_menus/main_menu/sharprise.4bpp.smol");
+static const u32 tideSprite[] = INCBIN_U32("graphics/ui_menus/main_menu/thetide.4bpp.smol");
 
 static const u8 sMainMenuWindowFontColors[][3] =
 {

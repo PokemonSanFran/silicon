@@ -91,8 +91,8 @@ static const u8 revealAnim12[] = INCBIN_U8("graphics/reveal/frame12.4bpp");
 static const u8 revealAnim13[] = INCBIN_U8("graphics/reveal/frame13.4bpp");
 
 static const u8 sVerified_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/verified.4bpp");
-static const u32 glassTrainerBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.4bpp.lz");
-static const u32 glassTrainerBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.bin.lz");
+static const u32 glassTrainerBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.4bpp.smol");
+static const u32 glassTrainerBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.bin.smolTM");
 
 static const u8* const sRevealAnimationLUT[] =
 {

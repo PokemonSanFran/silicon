@@ -75,10 +75,6 @@
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "save.h"
-#include "quests.h" // siliconMerge
-#include "story_jump.h" // siliconMerge
-#include "constants/story_jump.h"  // siliconMerge
-#include "ui_character_customization_menu.h" // playerCustom
 
 enum FollowerNPCCreateDebugMenu
 {
@@ -165,7 +161,6 @@ enum DebugBattleEnvironment
 
 #define DEBUG_MENU_WIDTH_MAIN 17
 #define DEBUG_MENU_HEIGHT_MAIN 9
-#define DEBUG_MENU_WIDTH_EXTRA_WIDE 20 // siliconMerge
 
 #define DEBUG_MENU_WIDTH_EXTRA 10
 #define DEBUG_MENU_HEIGHT_EXTRA 4
@@ -184,11 +179,6 @@ enum DebugBattleEnvironment
 #define DEBUG_NUMBER_DIGITS_VARIABLE_VALUE 5
 #define DEBUG_NUMBER_DIGITS_ITEMS 4
 #define DEBUG_NUMBER_DIGITS_ITEM_QUANTITY 3
-
-// Start siliconMerge
-#define DEBUG_NUMBER_DIGITS_QUESTS 3
-#define DEBUG_NUMBER_DIGITS_STATES 2
-// End siliconMerge
 
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
@@ -256,11 +246,6 @@ static void DebugAction_ToggleFlag(u8 taskId);
 
 static void DebugTask_HandleMenuInput_General(u8 taskId);
 
-// Start siliconMerge
-static void DebugAction_Util_SetQuest(u8 taskId);
-static void DebugAction_Util_WarpToQuest(u8 taskId);
-// End siliconMerge
-
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
 static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId);
@@ -282,10 +267,10 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
-// Start siliconMerge
+// Start technicalmachine Branch
 void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
 //static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
-// End siliconMerge
+// End technicalmachine Branch
 static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
 static void DebugAction_PCBag_ClearBag(u8 taskId);
@@ -356,7 +341,6 @@ static void DebugAction_BerryFunctions_Weeds(u8 taskId);
 static void DebugAction_Player_Name(u8 taskId);
 static void DebugAction_Player_Gender(u8 taskId);
 static void DebugAction_Player_Id(u8 taskId);
-static void DebugAction_Player_Customize(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -374,10 +358,6 @@ extern const u8 Debug_EventScript_Script_5[];
 extern const u8 Debug_EventScript_Script_6[];
 extern const u8 Debug_EventScript_Script_7[];
 extern const u8 Debug_EventScript_Script_8[];
-// Start siliconMerge
-extern const u8 Debug_EventScript_Script_9[];
-extern const u8 Debug_EventScript_Script_10[];
-// End siliconMerge
 extern const u8 DebugScript_DaycareMonsNotCompatible[];
 extern const u8 DebugScript_OneDaycareMons[];
 extern const u8 DebugScript_ZeroDaycareMons[];
@@ -553,14 +533,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_FollowerNPCMenu[] =
     { NULL }
 };
 
-// Start siliconMerge
-static const struct DebugMenuOption sDebugMenu_Quest[] =
-{
-    { COMPOUND_STRING("Set quest…"),       DebugAction_Util_Fly },
-    { COMPOUND_STRING("Warp to quest…"),   DebugAction_Util_Warp_Warp },
-};
-// End siliconMerge
-
 static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
 {
     { COMPOUND_STRING("Fly to map…"),       DebugAction_Util_Fly },
@@ -631,7 +603,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_Player[] =
 {
     { COMPOUND_STRING("Player name"),    DebugAction_Player_Name },
     { COMPOUND_STRING("Toggle gender"),  DebugAction_Player_Gender },
-    { COMPOUND_STRING("Customize…"),     DebugAction_Util_Customize },
     { COMPOUND_STRING("New Trainer ID"), DebugAction_Player_Id },
     { NULL }
 };
@@ -646,8 +617,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_Scripts[] =
     { COMPOUND_STRING("Script 6"), DebugAction_ExecuteScript, Debug_EventScript_Script_6 },
     { COMPOUND_STRING("Script 7"), DebugAction_ExecuteScript, Debug_EventScript_Script_7 },
     { COMPOUND_STRING("Script 8"), DebugAction_ExecuteScript, Debug_EventScript_Script_8 },
-    { COMPOUND_STRING("Script 9"), DebugAction_ExecuteScript, Debug_EventScript_Script_9 },
-    { COMPOUND_STRING("Script 10"), DebugAction_ExecuteScript, Debug_EventScript_Script_10 },
     { NULL }
 };
 
@@ -691,8 +660,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_Flags[] =
 
 static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
 {
-    { COMPOUND_STRING("Story Jump"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
-    { COMPOUND_STRING("Quest Debug"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
     { COMPOUND_STRING("Utilities…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
     { COMPOUND_STRING("PC/Bag…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_PCBag, },
     { COMPOUND_STRING("Party…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Party, },
@@ -725,19 +692,6 @@ static const struct WindowTemplate sDebugMenuWindowTemplateExtra =
     .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA - 1,
     .tilemapTop = 1,
     .width = DEBUG_MENU_WIDTH_EXTRA,
-// Start siliconMerge
-    .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
-    .paletteNum = 15,
-    .baseBlock = 1,
-};
-
-static const struct WindowTemplate sDebugMenuWindowTemplateExtra_Wide =
-{
-    .bg = 0,
-    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA_WIDE - 1,
-    .tilemapTop = 1,
-    .width = DEBUG_MENU_WIDTH_EXTRA_WIDE,
-// End siliconMerge
     .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
     .paletteNum = 15,
     .baseBlock = 1,
@@ -3209,10 +3163,10 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
     }
 }
 
-// Start siliconMerge
-void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
+// Start technicalmachine Branch
 //static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
-// End siliconMerge
+void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
+// End technicalmachine Branch
 {
     u16 index, itemId;
 

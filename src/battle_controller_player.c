@@ -169,7 +169,6 @@ void SetControllerToPlayer(u32 battler)
 
 //static void PlayerBufferExecCompleted(u32 battler) // quick_run
 void PlayerBufferExecCompleted(u32 battler)
-void PlayerBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = PlayerBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)

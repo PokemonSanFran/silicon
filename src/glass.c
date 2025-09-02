@@ -493,45 +493,45 @@ static const struct WindowTemplate sGlassWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 glassLocationCursorMap[] = INCBIN_U32("graphics/ui_menus/glass/location/cursor/map.4bpp.lz");
-static const u32 glassLocationArrowsBottom[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/bottom.4bpp.lz");
-static const u32 glassLocationArrowsTop[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/top.4bpp.lz");
-static const u32 glassLocationListBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/location/list/bg.4bpp.lz");
-static const u32 glassLocationListBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/location/list/bg.bin.lz");
-static const u32 glassLocationMapStatsMapboxTiles[] = INCBIN_U32("graphics/ui_menus/glass/location/mapStats/mapbox.4bpp.lz");
-static const u32 glassLocationMapStatsMapboxTilemap[] = INCBIN_U32("graphics/ui_menus/glass/location/mapStats/mapbox.bin.lz");
-static const u32 glassLocationBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/location/bg.4bpp.lz");
-static const u32 glassLocationBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/location/bg.bin.lz");
+static const u32 glassLocationCursorMap[] = INCBIN_U32("graphics/ui_menus/glass/location/cursor/map.4bpp.smol");
+static const u32 glassLocationArrowsBottom[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/bottom.4bpp.smol");
+static const u32 glassLocationArrowsTop[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/top.4bpp.smol");
+static const u32 glassLocationListBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/location/list/bg.4bpp.smol");
+static const u32 glassLocationListBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/location/list/bg.bin.smolTM");
+static const u32 glassLocationMapStatsMapboxTiles[] = INCBIN_U32("graphics/ui_menus/glass/location/mapStats/mapbox.4bpp.smol");
+static const u32 glassLocationMapStatsMapboxTilemap[] = INCBIN_U32("graphics/ui_menus/glass/location/mapStats/mapbox.bin.smolTM");
+static const u32 glassLocationBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/location/bg.4bpp.smol");
+static const u32 glassLocationBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/location/bg.bin.smolTM");
 
-static const u32 glassTrainerArrowsBottom[] = INCBIN_U32("graphics/ui_menus/glass/trainer/arrows/bottom.4bpp.lz");
-static const u32 glassTrainerArrowsTop[] = INCBIN_U32("graphics/ui_menus/glass/trainer/arrows/top.4bpp.lz");
-static const u32 glassTrainerCursorsMon[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/mon.4bpp.lz");
+static const u32 glassTrainerArrowsBottom[] = INCBIN_U32("graphics/ui_menus/glass/trainer/arrows/bottom.4bpp.smol");
+static const u32 glassTrainerArrowsTop[] = INCBIN_U32("graphics/ui_menus/glass/trainer/arrows/top.4bpp.smol");
+static const u32 glassTrainerCursorsMon[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/mon.4bpp.smol");
 
-static const u32 glassTrainerCursorsNameplate[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/nameplate.4bpp.lz");
+static const u32 glassTrainerCursorsNameplate[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/nameplate.4bpp.smol");
 
-static const u32 glassTrainerCursorTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/0.4bpp.lz");
-static const u32 glassTrainerCursorsRow0Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/0.bin.lz");
-static const u32 glassTrainerCursorsRow1Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/1.bin.lz");
-static const u32 glassTrainerCursorsRow2Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/2.bin.lz");
-static const u32 glassTrainerCursorsRow3Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/3.bin.lz");
-static const u32 glassTrainerCursorsRowTrainer[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/trainer.4bpp.lz");
-static const u32 glassTrainerListBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/list/bg.4bpp.lz");
-static const u32 glassTrainerListBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/list/bg.bin.lz");
-static const u32 glassTrainerBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.4bpp.lz");
-static const u32 glassTrainerBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.bin.lz");
+static const u32 glassTrainerCursorTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/0.4bpp.smol");
+static const u32 glassTrainerCursorsRow0Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/0.bin.smolTM");
+static const u32 glassTrainerCursorsRow1Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/1.bin.smolTM");
+static const u32 glassTrainerCursorsRow2Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/2.bin.smolTM");
+static const u32 glassTrainerCursorsRow3Tilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/3.bin.smolTM");
+static const u32 glassTrainerCursorsRowTrainer[] = INCBIN_U32("graphics/ui_menus/glass/trainer/cursors/row/trainer.4bpp.smol");
+static const u32 glassTrainerListBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/list/bg.4bpp.smol");
+static const u32 glassTrainerListBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/list/bg.bin.smolTM");
+static const u32 glassTrainerBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.4bpp.smol");
+static const u32 glassTrainerBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.bin.smolTM");
 
-static const u32 glassMarksBoss[] = INCBIN_U32("graphics/ui_menus/glass/marks/boss.4bpp.lz");
-static const u32 glassMarksBossComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/bossComplete.4bpp.lz");
-static const u32 glassMarksBossCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/bossCompleteHover.4bpp.lz");
-static const u32 glassMarksBossRematch[] = INCBIN_U32("graphics/ui_menus/glass/marks/bossRematch.4bpp.lz");
-static const u32 glassMarksGym[] = INCBIN_U32("graphics/ui_menus/glass/marks/gym.4bpp.lz");
-static const u32 glassMarksGymComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymComplete.4bpp.lz");
-static const u32 glassMarksGymCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymCompleteHover.4bpp.lz");
-static const u32 glassMarksGymRematch[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymRematch.4bpp.lz");
-static const u32 glassMarksRegularComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularComplete.4bpp.lz");
-static const u32 glassMarksRegularCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularCompleteHover.4bpp.lz");
-static const u32 glassMarksRegularRematchComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularRematchComplete.4bpp.lz");
-static const u32 glassMarksRegularRematchCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularRematchCompleteHover.4bpp.lz");
+static const u32 glassMarksBoss[] = INCBIN_U32("graphics/ui_menus/glass/marks/boss.4bpp.smol");
+static const u32 glassMarksBossComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/bossComplete.4bpp.smol");
+static const u32 glassMarksBossCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/bossCompleteHover.4bpp.smol");
+static const u32 glassMarksBossRematch[] = INCBIN_U32("graphics/ui_menus/glass/marks/bossRematch.4bpp.smol");
+static const u32 glassMarksGym[] = INCBIN_U32("graphics/ui_menus/glass/marks/gym.4bpp.smol");
+static const u32 glassMarksGymComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymComplete.4bpp.smol");
+static const u32 glassMarksGymCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymCompleteHover.4bpp.smol");
+static const u32 glassMarksGymRematch[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymRematch.4bpp.smol");
+static const u32 glassMarksRegularComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularComplete.4bpp.smol");
+static const u32 glassMarksRegularCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularCompleteHover.4bpp.smol");
+static const u32 glassMarksRegularRematchComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularRematchComplete.4bpp.smol");
+static const u32 glassMarksRegularRematchCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularRematchCompleteHover.4bpp.smol");
 
 static const u8 glassMarksRegularCompleteHoverBitmap[] = INCBIN_U8("graphics/ui_menus/glass/marks/regularCompleteHover.4bpp");
 

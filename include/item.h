@@ -669,7 +669,7 @@ void ClearBag(void);
 u16 CountTotalItemQuantityInBag(u16 itemId);
 bool32 AddPyramidBagItem(u16 itemId, u16 count);
 bool32 RemovePyramidBagItem(u16 itemId, u16 count);
-u32 ItemId_GetNativeItemGroup(u32 itemId);  // silconMerge
+u32 GetItemNativeGroup(u32 itemId); // siliconMerge
 const u8 *GetItemName(u16 itemId);
 u32 GetItemPrice(u16 itemId);
 const u8 *GetItemEffect(u32 itemId);

@@ -2510,12 +2510,6 @@
 	waitmessage B_WAIT_TIME_LONG
 	.endm
 
-	@ Will jump to script pointer if the specified battler has or has not fainted.
-	.macro jumpiffainted battler:req, value:req, ptr:req
-	getbattlerfainted \battler
-	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
-	.endm
-
 @ START OF PSF BATTLE SCRIPT MACROS
 	.macro getprizenativeitiem, jumpInstr:req
 	callnative BS_GetPrizeNativeItem

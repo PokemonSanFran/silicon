@@ -26737,5 +26737,5 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_Egg[] = INCBIN_U8("graphics/pokemon/egg/icon.4bpp");
 // Start fogBattle
 const u16 gMonPalette_Fog[] = INCBIN_U16("graphics/pokemon/fog/front.gbapal");
-const u32 gMonFrontPic_Fog[] = INCBIN_U32("graphics/pokemon/fog/front.4bpp.lz");
+const u32 gMonFrontPic_Fog[] = INCBIN_U32("graphics/pokemon/fog/front.4bpp.smol");
 // End fogBattle

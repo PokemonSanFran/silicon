@@ -208,11 +208,11 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sTMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.4bpp.lz");
-static const u32 sTMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.bin.lz");
+static const u32 sTMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.4bpp.smol");
+static const u32 sTMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.bin.smolTM");
 
-static const u32 sMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tiles.4bpp.lz");
-static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tiles.bin.lz");
+static const u32 sMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tiles.4bpp.smol");
+static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tiles.bin.smolTM");
 static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal");
 
 static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");

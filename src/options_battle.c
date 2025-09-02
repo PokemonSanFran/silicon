@@ -1173,7 +1173,7 @@ u32 GetBallToDisplay(void)
     else if (IsLastUsedBallOptionBest())
         return GetBestBallForBattle();
 
-    return gBagPockets[BALLS_POCKET].itemSlots[0].itemId;
+    return (gBagPockets[POCKET_POKE_BALLS].itemSlots[0].itemId);
 }
 
 static void SetLastUsedBallOnSaveblock(u16 ball)

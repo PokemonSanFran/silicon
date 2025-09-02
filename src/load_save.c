@@ -249,7 +249,7 @@ void CopyPartyAndObjectsFromSave(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();
-    DeserializeTmHmItemSlots(); //PSF technicalmachine Branch
+    //DeserializeTmHmItemSlots(); //PSF technicalmachine Branch
 }
 
 void LoadPlayerBag(void)

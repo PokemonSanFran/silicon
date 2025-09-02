@@ -153,7 +153,7 @@ void SetBagItemsPointers(void)
     gBagPockets[POCKET_POKE_BALLS].capacity = BAG_POKEBALLS_COUNT;
     gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
 
-    gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
+    // gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs; technicalmachine Branch
     gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
     gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
 
@@ -940,4 +940,9 @@ bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect)
     return holdEffect == HOLD_EFFECT_CHOICE_BAND
         || holdEffect == HOLD_EFFECT_CHOICE_SCARF
         || holdEffect == HOLD_EFFECT_CHOICE_SPECS;
+}
+
+u32 GetItemNativeGroup(u32 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].nativeItemGroup;
 }

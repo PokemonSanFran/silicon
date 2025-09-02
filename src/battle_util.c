@@ -1917,10 +1917,10 @@ void SetAtkCancellerForCalledMove(void)
 }
 
 // Start fogBattle
-static void CancellerFog(u32 *effect)
+static enum MoveCanceller CancellerFog(void)
 {
     if (!IsFogBattle())
-        return;
+        return MOVE_STEP_SUCCESS;
 
     gBattleScripting.battler = gBattlerAttacker;
     CancelMultiTurnMoves(gBattlerAttacker, SKY_DROP_ATTACKCANCELLER_CHECK);
@@ -1932,7 +1932,7 @@ static void CancellerFog(u32 *effect)
     else
     {
             gBattlerTarget = GetOppositeBattler(gBattlerAttacker);
-            struct DamageCalculationData damageCalcData;
+            struct DamageContext damageCalcData;
             damageCalcData.battlerAtk = gBattlerAttacker;
             damageCalcData.battlerDef = 0;
             damageCalcData.move = MOVE_NONE;
@@ -1940,12 +1940,12 @@ static void CancellerFog(u32 *effect)
             damageCalcData.isCrit = FALSE;
             damageCalcData.randomFactor = FALSE;
             damageCalcData.updateFlags = TRUE;
-            gBattleStruct->moveDamage[gBattlerTarget] = CalculateMoveDamage(&damageCalcData, 100);
+            gBattleStruct->moveDamage[gBattlerTarget] = CalculateMoveDamage(&damageCalcData);
         gBattlescriptCurrInstr = BattleScript_EmboldenedAttackedFromFog;
     }
 
     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-    *effect = 1;
+    return MOVE_STEP_BREAK;
 }
 // End fogBattle
 

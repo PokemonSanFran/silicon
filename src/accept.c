@@ -100,8 +100,8 @@ static const u16 acceptPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/y
 static const u16 acceptPalettesEmail[] = INCBIN_U16("graphics/accept/palettes/email.gbapal");
 static const u16 acceptPalettesText[] = INCBIN_U16("graphics/accept/palettes/text.gbapal");
 
-static const u32 desktopBgTiles[] = INCBIN_U32("graphics/accept/desktopbg.4bpp.lz");
-static const u32 desktopBgTilemap[] = INCBIN_U32("graphics/accept/desktopbg.bin.lz");
+static const u32 desktopBgTiles[] = INCBIN_U32("graphics/accept/desktopbg.4bpp.smol");
+static const u32 desktopBgTilemap[] = INCBIN_U32("graphics/accept/desktopbg.bin.smolTM");
 
 static const u8 windowAnim0[] = INCBIN_U8("graphics/accept/frame0.4bpp");
 static const u8 windowAnim1[] = INCBIN_U8("graphics/accept/frame1.4bpp");
@@ -115,8 +115,8 @@ static const u8 devAnim3[] = INCBIN_U8("graphics/accept/devFrame3.4bpp");
 
 static const u8 emailSelector[] = INCBIN_U8("graphics/accept/selector.4bpp");
 
-static const u32 desktopMouseSprite[] = INCBIN_U32("graphics/accept/mouse.4bpp.lz");
-static const u32 acceptScrollbar[] = INCBIN_U32("graphics/accept/scrollbar.4bpp.lz");
+static const u32 desktopMouseSprite[] = INCBIN_U32("graphics/accept/mouse.4bpp.smol");
+static const u32 acceptScrollbar[] = INCBIN_U32("graphics/accept/scrollbar.4bpp.smol");
 
 static const u8 sAcceptWindowFontColors[][3] =
 {
