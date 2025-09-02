@@ -696,3 +696,4 @@ gSpecials::
     def_special CheckPlayerLittleCupEligibility
     def_special PreparePartyForLittleCupBattle
 // End littlecup
+	def_special SetHiddenNature

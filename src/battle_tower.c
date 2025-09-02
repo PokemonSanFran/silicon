@@ -25,6 +25,7 @@
 #include "battle_factory.h"
 #include "constants/abilities.h"
 #include "constants/apprentice.h"
+#include "constants/battle_ai.h"
 #include "constants/battle_dome.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
@@ -1352,9 +1353,9 @@ u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
     }
 }
 
-u8 GetFrontierOpponentClass(u16 trainerId)
+enum TrainerClassID GetFrontierOpponentClass(u16 trainerId)
 {
-    u8 trainerClass = 0;
+    enum TrainerClassID trainerClass = 0;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
     SetFacilityPtrsGetLevel();
 
@@ -1933,7 +1934,7 @@ static void HandleSpecialTrainerBattleEnd(void)
     case SPECIAL_BATTLE_SECRET_BASE:
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            u16 itemBefore = GetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM);
+            u16 itemBefore = GetMonData(GetSavedPlayerPartyMon(i), MON_DATA_HELD_ITEM);
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
         }
         break;
@@ -1944,7 +1945,7 @@ static void HandleSpecialTrainerBattleEnd(void)
         for (i = 0; i < 3; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
-                gSaveBlock1Ptr->playerParty[i] = gPlayerParty[i];
+                SavePlayerPartyMon(i, &gPlayerParty[i]);
         }
         break;
     }
@@ -1999,7 +2000,7 @@ void DoSpecialTrainerBattle(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 itemBefore = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            SetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
+            SetMonData(GetSavedPlayerPartyMon(i), MON_DATA_HELD_ITEM, &itemBefore);
         }
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
@@ -2771,16 +2772,16 @@ static void AwardBattleTowerRibbons(void)
             ribbons[i].partyIndex = partyIndex;
             ribbons[i].count = 0;
             // Start siliconMerge
-            //if (!GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType))
+            //if (!GetMonData(GetSavedPlayerPartyMon(partyIndex), ribbonType))
             if (!GetMonData(&gSaveBlock1Ptr->playerPartyBattleFrontier[partyIndex], ribbonType))
             // End siliconMerge
             {
                 gSpecialVar_Result = TRUE;
             // Start siliconMerge
-                //SetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType, &gSpecialVar_Result);
+                //SetMonData(GetSavedPlayerPartyMon(partyIndex), ribbonType, &gSpecialVar_Result);
                 SetMonData(&gSaveBlock1Ptr->playerPartyBattleFrontier[partyIndex], ribbonType, &gSpecialVar_Result);
                 //ribbons[i].count = GetRibbonCount(&gSaveBlock1Ptr->playerParty[partyIndex]);
-                ribbons[i].count = GetRibbonCount(&gSaveBlock1Ptr->playerPartyBattleFrontier[partyIndex]);
+                ribbons[i].count = GetRibbonCount(GetSavedPlayerPartyMon(partyIndex));
             // End siliconMerge
             }
         }
@@ -2801,7 +2802,7 @@ static void AwardBattleTowerRibbons(void)
         if (ribbons[0].count > NUM_CUTIES_RIBBONS)
         {
             // Start siliconMerge
-            //TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerParty[ribbons[0].partyIndex], ribbonType);
+            //TryPutSpotTheCutiesOnAir(GetSavedPlayerPartyMon(ribbons[0].partyIndex), ribbonType);
             TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerPartyBattleFrontier[ribbons[0].partyIndex], ribbonType);
             // End siliconMerge
         }
@@ -2857,7 +2858,7 @@ u8 UNUSED GetEreaderTrainerFrontSpriteId(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
-u8 UNUSED GetEreaderTrainerClassId(void)
+enum TrainerClassID GetEreaderTrainerClassId(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];

@@ -38,6 +38,7 @@ bool8 FieldEffectCmd_loadgfx_callnative(u8 **script, u32 *val);
 bool8 FieldEffectCmd_loadtiles_callnative(u8 **script, u32 *val);
 bool8 FieldEffectCmd_loadfadedpal_callnative(u8 **script, u32 *val);
 void FieldCB_FallWarpExit(void);
+void HideFollowerForFieldEffect(void);
 void StartEscalatorWarp(u8 metatileBehavior, u8 priority);
 void StartLavaridgeGymB1FWarp(u8 priority);
 void StartLavaridgeGym1FWarp(u8 priority);
@@ -71,4 +72,5 @@ void Task_UseDive(u8);
 bool8 DiveFieldEffect_Init(struct Task *);
 bool8 DiveFieldEffect_TryWarp(struct Task *);
 // End qol_field_moves
+bool8 IsRockClimbActive(void);
 #endif // GUARD_FIELD_EFFECTS_H

@@ -470,6 +470,12 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     case CRY_MODE_WEAK:
         pitch = 15000;
         break;
+    case CRY_MODE_DYNAMAX:
+        length = 255;
+        release = 255;
+        pitch = 12150;
+        chorus = 200;
+        break;
     }
 
     SetPokemonCryVolume(volume);
@@ -481,13 +487,12 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
-    species = GetCryIdBySpecies(species);
+    enum PokemonCry cryId = GetCryIdBySpecies(species);
     ReturnDummyCryIfMuted(&species); // siliconMerge
-
-    if (species != CRY_NONE)
+    if (cryId != CRY_NONE)
     {
-        species--;
-        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);
+        cryId--;
+        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[cryId] : &gCryTable[cryId]);
     }
 }
 

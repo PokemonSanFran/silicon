@@ -441,6 +441,7 @@
 
 #define FOREACH_HM(F) \
     F(CUT) \
+    /*
     F(FLY) \
     F(SURF) \
     F(STRENGTH) \
@@ -448,6 +449,7 @@
     F(ROCK_SMASH) \
     F(WATERFALL) \
     F(DIVE)
+    */
 
 #define FOREACH_TMHM(F) \
     FOREACH_TM(F) \
