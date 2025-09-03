@@ -20,6 +20,8 @@
 #include "constants/moves.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
+#include "sprays.h" // siliconMerge
+#include "move.h" // siliconMerge
 
 #define DUMMY_PC_BAG_POCKET                 \
 {                                           \
@@ -153,7 +155,7 @@ void SetBagItemsPointers(void)
     gBagPockets[POCKET_POKE_BALLS].capacity = BAG_POKEBALLS_COUNT;
     gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
 
-    // gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs; technicalmachine Branch
+    gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
     gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
     gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
 
@@ -824,6 +826,14 @@ u32 GetItemHoldEffectParam(u32 itemId)
 
 const u8 *GetItemDescription(u16 itemId)
 {
+    // Start siliconMerge
+    if (IsInfiniteSprayAndLureLocked(itemId))
+        return sInfiniteSprayRepelDesc;
+
+    if (GetItemPocket(itemId) == POCKET_TM_HM)
+        return gMovesInfo[GetTMHMMoveId(GetItemTMHMIndex(itemId))].description;
+    // End siliconMerge
+
     return gItemsInfo[SanitizeItemId(itemId)].description;
 }
 

@@ -92,7 +92,7 @@
 #define BAG_ITEMS_COUNT 525 // siliconMerge
 #define BAG_KEYITEMS_COUNT 93  // siliconMerge
 #define BAG_POKEBALLS_COUNT 27 // siliconMerge
-#define BAG_TMHM_COUNT 475 // PSF technicalmachine Branch
+#define BAG_TMHM_COUNT 475 // siliconMerge
 #define BAG_BERRIES_COUNT 68 // siliconMerge
 
 // Number of facilities for Ranking Hall.

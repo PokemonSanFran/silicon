@@ -279,10 +279,10 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
-// Start technicalmachine Branch
+// Start siliconMerge
 void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
 //static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
-// End technicalmachine Branch
+// End siliconMerge
 static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
 static void DebugAction_PCBag_ClearBag(u8 taskId);
@@ -3331,10 +3331,10 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
     }
 }
 
-// Start technicalmachine Branch
+// Start siliconMerge
 //static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
 void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
-// End technicalmachine Branch
+// End siliconMerge
 {
     u16 index, itemId;
 

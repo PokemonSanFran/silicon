@@ -563,7 +563,6 @@ struct TmHmIndexKey
 extern const u8 gQuestionMarksItemName[];
 extern const struct Item gItemsInfo[];
 extern struct BagPocket gBagPockets[];
-extern struct ItemSlot gTmHmItemSlots[NUM_TECHNICAL_MACHINES];// PSF technicalmachine Branch
 extern const struct TmHmIndexKey gTMHMItemMoveIds[];
 
 #define UNPACK_ITEM_TO_TM_INDEX(_tm) case CAT(ITEM_TM_, _tm): return CAT(ENUM_TM_HM_, _tm) + 1;
@@ -685,7 +684,6 @@ u8 GetItemBattleUsage(u16 itemId);
 u32 GetItemSecondaryId(u32 itemId);
 u32 GetItemFlingPower(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
-void DeserializeTmHmItemSlots(void); // PSF technicalmachine Branch
 bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile volatile);
 u32 GetItemSellPrice(u32 itemId);
 bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect);

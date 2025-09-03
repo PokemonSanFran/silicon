@@ -140,7 +140,6 @@
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
-#define NUM_TM_BYTES ROUND_BITS_TO_BYTES(BAG_TMHM_COUNT) // PSF technicalmachine Branch
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
@@ -1138,10 +1137,7 @@ struct Bag
     struct ItemSlot items[BAG_ITEMS_COUNT];
     struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
     struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
-    // Start technicalmachine Branch
-    //struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
-    u8 bagPocket_TMHMOwnedFlags[NUM_TM_BYTES]; //allow for an amount of TMs/HMs dictated by the BAG_TMHM_COUNT constant
-    // End technicalmachine Branch
+    struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
     struct ItemSlot berries[BAG_BERRIES_COUNT];
 };
 

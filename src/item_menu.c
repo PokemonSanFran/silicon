@@ -952,7 +952,7 @@ static void GetItemNameFromPocket(u8 *dest, u16 itemId)
         {
             // Get TM number
             //ConvertIntToDecimalStringN(gStringVar1, GetItemTMHMIndex(itemId), STR_CONV_MODE_LEADING_ZEROS, 2);
-            ConvertIntToDecimalStringN(gStringVar1, GetItemTMHMIndex(itemId), STR_CONV_MODE_LEADING_ZEROS, 3); // PSF technicalmachine Branch
+            ConvertIntToDecimalStringN(gStringVar1, GetItemTMHMIndex(itemId), STR_CONV_MODE_LEADING_ZEROS, 3); // siliconMerge
             StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         }
         break;
