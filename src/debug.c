@@ -80,6 +80,9 @@
 #include "constants/story_jump.h"  // siliconMerge
 #include "ui_character_customization_menu.h" // playerCustom
 
+static const u8 sDebugText_QuestState[] =               _("Quest state: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}"); // siliconMerge
+static const u8 sDebugText_QuestID[] =                  _("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}"); // siliconMerge
+
 enum FollowerNPCCreateDebugMenu
 {
     DEBUG_FNPC_BRENDAN,
@@ -169,6 +172,8 @@ enum DebugBattleEnvironment
 #define DEBUG_MENU_WIDTH_EXTRA 10
 #define DEBUG_MENU_HEIGHT_EXTRA 4
 
+#define DEBUG_MENU_WIDTH_EXTRA_WIDE 20
+
 #define DEBUG_MENU_WIDTH_WEATHER 15
 #define DEBUG_MENU_HEIGHT_WEATHER 3
 
@@ -189,6 +194,9 @@ enum DebugBattleEnvironment
 
 #define DEBUG_MAX_MENU_ITEMS 20
 #define DEBUG_MAX_SUB_MENU_LEVELS 4
+
+#define DEBUG_NUMBER_DIGITS_QUESTS 3
+#define DEBUG_NUMBER_DIGITS_STATES 2
 
 // *******************************
 struct DebugMenuOption;
@@ -347,6 +355,11 @@ static void DebugAction_Player_Gender(u8 taskId);
 static void DebugAction_Player_Id(u8 taskId);
 
 static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoints storyPoint);
+static void DebugAction_Quest_Set(u8 taskId);
+static void DebugAction_Quest_Jump(u8 taskId);
+static void DebugAction_Quest(u8 taskId);
+static void DebugAction_Quest_SelectQuest(u8 taskId);
+static void DebugAction_Quest_SelectState(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -389,6 +402,8 @@ extern const u8 Debug_BerryPestsDisabled[];
 extern const u8 Debug_BerryWeedsDisabled[];
 
 extern const u8 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon[];
+
+extern const u8 Prologue_FirstTimeCharacterCustomize_Script[];
 
 #include "data/map_group_count.h"
 
@@ -610,6 +625,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Player[] =
     { COMPOUND_STRING("Player name"),    DebugAction_Player_Name },
     { COMPOUND_STRING("Toggle gender"),  DebugAction_Player_Gender },
     { COMPOUND_STRING("New Trainer ID"), DebugAction_Player_Id },
+    { COMPOUND_STRING("Customize"),      DebugAction_ExecuteScript, Prologue_FirstTimeCharacterCustomize_Script},
     { NULL }
 };
 
@@ -692,6 +708,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act1[] =
     {COMPOUND_STRING("SorryAboutMyFriends"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SORRYABOUTMYFRIENDS},
     {COMPOUND_STRING("TheStorySoFar"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THESTORYSOFAR_ALL},
     {COMPOUND_STRING("YoungPadawan"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUNGPADAWAN},
+    { NULL }
 };
 static const struct DebugMenuOption sDebugMenu_Actions_Act2[] =
 {
@@ -708,6 +725,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act2[] =
     {COMPOUND_STRING("EnterAmiArgento"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERAMIARGENTO},
     {COMPOUND_STRING("TheStrikeStrikesBack"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THESTRIKESTRIKESBACK},
     {COMPOUND_STRING("VSGarbodor"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_VSGARBODOR},
+    { NULL }
 };
 static const struct DebugMenuOption sDebugMenu_Actions_Act3[] =
 {
@@ -725,6 +743,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act3[] =
     {COMPOUND_STRING("Finals"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_FINALS},
     {COMPOUND_STRING("WaitHeDidWhat"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAITHEDIDWHAT},
     {COMPOUND_STRING("WelcometotheHallofFame"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WELCOMETOTHEHALLOFFAME},
+    { NULL }
 };
 static const struct DebugMenuOption sDebugMenu_Actions_Act4[] =
 {
@@ -735,6 +754,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act4[] =
     {COMPOUND_STRING("RestoreEspuleeOutskirts"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_RESTOREESPULEE_OUTSKIRTS},
     {COMPOUND_STRING("YouRealizeWereEvilRight"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUREALIZEWEREEVILRIGHT},
     {COMPOUND_STRING("YouRealizeTheyreEvilRight"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND},
+    { NULL }
 };
 static const struct DebugMenuOption sDebugMenu_Actions_Act5[] =
 {
@@ -746,6 +766,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act5[] =
     {COMPOUND_STRING("ExhibitionBattle"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_EXHIBITIONBATTLE},
     {COMPOUND_STRING("MaybeIFuckedUp"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MAYBEIFUCKEDUP},
     {COMPOUND_STRING("OkayLetsFixit"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_OKAYLETSFIXIT},
+    { NULL }
 };
 static const struct DebugMenuOption sDebugMenu_Actions_Act6[] =
 {
@@ -766,8 +787,8 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act6[] =
     {COMPOUND_STRING("ImIn"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_IMIN_POSTWARP},
     {COMPOUND_STRING("YouCantStopMe"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE},
     {COMPOUND_STRING("WeCanStopYouActually"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WECANSTOPYOUACTUALLY},
+    { NULL }
 };
-
 
 static const struct DebugMenuOption sDebugMenu_Actions_StoryJump[] =
 {
@@ -783,16 +804,15 @@ static const struct DebugMenuOption sDebugMenu_Actions_StoryJump[] =
 
 static const struct DebugMenuOption sDebugMenu_Actions_Quest[] =
 {
-    //{ COMPOUND_STRING("Set quest…"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_SetQuest, },
-    //{ COMPOUND_STRING("Warp to quest…"), DebugAction_OpenSubMenu, sDebugMenu_Actions_WarpToQuest, },
+    { COMPOUND_STRING("Set quest…"),     DebugAction_Quest_Set, },
+    { COMPOUND_STRING("Warp to quest…"), DebugAction_Quest_Jump, },
     { NULL }
 };
-
 
 static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
 {
     { COMPOUND_STRING("Story Jump…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_StoryJump, },
-    //{ COMPOUND_STRING("Quest…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Quest, },
+    { COMPOUND_STRING("Quest…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Quest, },
     { COMPOUND_STRING("Utilities…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
     { COMPOUND_STRING("PC/Bag…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_PCBag, },
     { COMPOUND_STRING("Party…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Party, },
@@ -825,6 +845,17 @@ static const struct WindowTemplate sDebugMenuWindowTemplateExtra =
     .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA - 1,
     .tilemapTop = 1,
     .width = DEBUG_MENU_WIDTH_EXTRA,
+    .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+
+static const struct WindowTemplate sDebugMenuWindowTemplateExtra_Wide =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_MENU_WIDTH_EXTRA_WIDE - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_MENU_WIDTH_EXTRA_WIDE,
     .height = 2 * DEBUG_MENU_HEIGHT_EXTRA,
     .paletteNum = 15,
     .baseBlock = 1,
@@ -3527,6 +3558,182 @@ static void DebugAction_DestroyFollowerNPC(u8 taskId)
 
 #undef tCurrentSong
 
+static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoints storyPoint)
+{
+    JumpPlayerToStoryPoint(storyPoint, JUMP_DEBUG);
+    WarpPlayerAfterVarSet();
+    Debug_DestroyMenu(taskId);
+}
+
+ // Start siliconMerge
+// *******************************
+// Quest Menu
+
+#define tQuestJump data[5]
+#define tQuestID data[6]
+
+static void DebugAction_Quest_Set(u8 taskId)
+{
+    gTasks[taskId].tQuestJump = FALSE;
+    DebugAction_Quest(taskId);
+}
+
+static void DebugAction_Quest_Jump(u8 taskId)
+{
+    gTasks[taskId].tQuestJump = TRUE;
+    DebugAction_Quest(taskId);
+}
+
+static void DebugAction_Quest(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra_Wide);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    // Display initial quest
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
+    QuestMenu_CopyQuestName(gStringVar1, 0);
+    StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+    StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+    AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+
+    gTasks[taskId].func = DebugAction_Quest_SelectQuest;
+    gTasks[taskId].tSubWindowId = windowId;
+    gTasks[taskId].tInput = 0;
+    gTasks[taskId].tDigit = 0;
+}
+
+static void DebugAction_Quest_SelectQuest(u8 taskId)
+{
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+
+        if (JOY_NEW(DPAD_UP))
+        {
+            gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput >= QUEST_COUNT)
+                gTasks[taskId].tInput = QUEST_COUNT - 1;
+        }
+        if (JOY_NEW(DPAD_DOWN))
+        {
+            gTasks[taskId].tInput -= sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput < 0)
+                gTasks[taskId].tInput = 0;
+        }
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            if (gTasks[taskId].tDigit > 0)
+                gTasks[taskId].tDigit -= 1;
+        }
+        if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (gTasks[taskId].tDigit < DEBUG_NUMBER_DIGITS_QUESTS - 1)
+                gTasks[taskId].tDigit += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        QuestMenu_CopyQuestName(gStringVar1, gTasks[taskId].tInput);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
+        StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].tQuestID = gTasks[taskId].tInput;
+        gTasks[taskId].tInput = 0;
+        gTasks[taskId].tDigit = 0;
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
+        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+
+        gTasks[taskId].func = DebugAction_Quest_SelectState;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+static void DebugAction_Quest_SelectState(u8 taskId)
+{
+    u32 questId = gTasks[taskId].tQuestID;
+
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+
+        if (JOY_NEW(DPAD_UP))
+        {
+            gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
+            u32 stateCount = GetMaxQuestState(questId);
+            if (gTasks[taskId].tInput >= stateCount)
+                gTasks[taskId].tInput = stateCount - 1;
+        }
+        if (JOY_NEW(DPAD_DOWN))
+        {
+            gTasks[taskId].tInput -= sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput < 0)
+                gTasks[taskId].tInput = 0;
+        }
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            if (gTasks[taskId].tDigit > 0)
+                gTasks[taskId].tDigit -= 1;
+        }
+        if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (gTasks[taskId].tDigit < DEBUG_NUMBER_DIGITS_STATES)
+                gTasks[taskId].tDigit += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
+        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+
+        if (gTasks[taskId].tQuestJump)
+            QuestMenu_JumpToQuestState(questId, gTasks[taskId].tInput);
+        else
+            QuestMenu_SetupQuestState(questId, gTasks[taskId].tInput);
+
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+#undef tQuestJump
+#undef tQuestID
+ // End siliconMerge
+
 #undef tMenuTaskId
 #undef tWindowId
 #undef tSubWindowId
@@ -4207,11 +4414,4 @@ void CheckEWRAMCounters(struct ScriptContext *ctx)
 {
     ConvertIntToDecimalStringN(gStringVar1, gFollowerSteps, STR_CONV_MODE_LEFT_ALIGN, 5);
     ConvertIntToDecimalStringN(gStringVar2, gChainFishingDexNavStreak, STR_CONV_MODE_LEFT_ALIGN, 5);
-}
-
-static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoints storyPoint)
-{
-    JumpPlayerToStoryPoint(storyPoint, JUMP_DEBUG);
-    WarpPlayerAfterVarSet();
-    Debug_DestroyMenu(taskId);
 }

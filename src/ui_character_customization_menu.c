@@ -906,7 +906,9 @@ static bool8 Menu_DoGfxSetup(void)
         }
         break;
     case 3:
+        DebugPrintf("try loadgraphics");
         Menu_LoadGraphics();
+        DebugPrintf("loadgraphics");
         gMain.state++;
         break;
     case 4:
@@ -936,6 +938,7 @@ static bool8 Menu_DoGfxSetup(void)
         SetMainCallback2(Menu_MainCB);
         return TRUE;
     }
+    DebugPrintf("state %d",gMain.state);
     return FALSE;
 }
 

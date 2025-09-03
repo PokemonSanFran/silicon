@@ -136,13 +136,7 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
-    lock
-    applymovement(OBJ_EVENT_ID_PLAYER,Common_Movement_FaceUp)
-    waitmovement(0)
-    spawnobject(graphicsId=OBJ_EVENT_GFX_ALCMENE,localId=3,x=11,y=9,movementType=MOVEMENT_TYPE_FACE_UP, elevation=3)
-    applymovement(3,DebugMovement2)
-    waitmovement(3)
-    removeobject(3)
+    callnative(CustomizeCharacterFromOverworld)
 	end
 }
 movement DebugMovement2
