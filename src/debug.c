@@ -75,6 +75,10 @@
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "save.h"
+#include "quests.h" // siliconMerge
+#include "story_jump.h" // siliconMerge
+#include "constants/story_jump.h"  // siliconMerge
+#include "ui_character_customization_menu.h" // playerCustom
 
 enum FollowerNPCCreateDebugMenu
 {
@@ -341,6 +345,8 @@ static void DebugAction_BerryFunctions_Weeds(u8 taskId);
 static void DebugAction_Player_Name(u8 taskId);
 static void DebugAction_Player_Gender(u8 taskId);
 static void DebugAction_Player_Id(u8 taskId);
+
+static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoints storyPoint);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -658,8 +664,135 @@ static const struct DebugMenuOption sDebugMenu_Actions_Flags[] =
     { NULL }
 };
 
+static const struct DebugMenuOption sDebugMenu_Actions_Act0[] =
+{
+    { COMPOUND_STRING("swagbag"),   DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SWAGBAG},
+    { COMPOUND_STRING("Ready Set I"),   DebugAction_Jump_JumpPlayerToStoryPoint,(void*) JUMPPLAYER_READYSETI},
+    { NULL }
+};
+
+static const struct DebugMenuOption sDebugMenu_Actions_Act1[] =
+{
+    {COMPOUND_STRING("EnterBelen"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERBELEN},
+    {COMPOUND_STRING("EnterShinzo"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERSHINZO},
+    {COMPOUND_STRING("EnterEmrys"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTEREMRYS},
+    {COMPOUND_STRING("NewAssholeAppears"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_NEWASSHOLEAPPEARS},
+    {COMPOUND_STRING("OldAssholeAppears"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_OLDASSHOLEAPPEARS},
+    {COMPOUND_STRING("GroupofAssholesAppears"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_GROUPOFASSHOLESAPPEARS},
+    {COMPOUND_STRING("WowYoureStrong"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WOWYOURESTRONG_PERLACIA_CITY},
+    {COMPOUND_STRING("TheGangsAllHere"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THEGANGSALLHERE},
+    {COMPOUND_STRING("AlwaysWatchingWazokwski"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ALWAYSWATCHINGWAZOKWSKI},
+    {COMPOUND_STRING("EnterAdaora"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERADAORA},
+    {COMPOUND_STRING("HowDoWeGetHome"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HOWDOWEGETHOME},
+    {COMPOUND_STRING("AaandWereBack"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_AAANDWEREBACK},
+    {COMPOUND_STRING("AssholesHome"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ASSHOLESHOME},
+    {COMPOUND_STRING("HousingProtest"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HOUSINGPROTEST},
+    {COMPOUND_STRING("swagbag2"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SWAGBAG2},
+    {COMPOUND_STRING("EnterKauna"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERKAUNA},
+    {COMPOUND_STRING("SorryAboutMyFriends"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SORRYABOUTMYFRIENDS},
+    {COMPOUND_STRING("TheStorySoFar"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THESTORYSOFAR_ALL},
+    {COMPOUND_STRING("YoungPadawan"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUNGPADAWAN},
+};
+static const struct DebugMenuOption sDebugMenu_Actions_Act2[] =
+{
+    {COMPOUND_STRING("WaitYouWentWhere"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAITYOUWENTWHERE},
+    {COMPOUND_STRING("EnterNeriene"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERNERIENE},
+    {COMPOUND_STRING("FriendsForDinner"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_FRIENDSFORDINNER},
+    {COMPOUND_STRING("Keiyingsraisondetre"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_KEIYINGSRAISONDETRE},
+    {COMPOUND_STRING("BeachBattle"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_BEACHBATTLE},
+    {COMPOUND_STRING("EnterDimu"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERDIMU},
+    {COMPOUND_STRING("ANewStrike"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ANEWSTRIKE},
+    {COMPOUND_STRING("AndWeMarchOn"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ANDWEMARCHON},
+    {COMPOUND_STRING("EnterBD"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERBD},
+    {COMPOUND_STRING("Battle8"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_BATTLE8},
+    {COMPOUND_STRING("EnterAmiArgento"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERAMIARGENTO},
+    {COMPOUND_STRING("TheStrikeStrikesBack"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THESTRIKESTRIKESBACK},
+    {COMPOUND_STRING("VSGarbodor"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_VSGARBODOR},
+};
+static const struct DebugMenuOption sDebugMenu_Actions_Act3[] =
+{
+    {COMPOUND_STRING("OffYouGo"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_OFFYOUGO_BRIDGE},
+    {COMPOUND_STRING("IGuessWeShouldBeNiceNow"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_IGUESSWESHOULDBENICENOW},
+    {COMPOUND_STRING("EntertheMaster"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERTHEMASTER},
+    {COMPOUND_STRING("HaveYouSeenTheNews"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HAVEYOUSEENTHENEWS},
+    {COMPOUND_STRING("WelcometotheWarRoom"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WELCOMETOTHEWARROOM},
+    {COMPOUND_STRING("SurvivalChance333"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SURVIVALCHANCE333},
+    {COMPOUND_STRING("WhyAreYouHelpingThem"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WHYAREYOUHELPINGTHEM},
+    {COMPOUND_STRING("WhyAreYouHelpingThemSleep"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WHYAREYOUHELPINGTHEMSLEEP},
+    {COMPOUND_STRING("HeresHowThisIsGoingToGo"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HERESHOWTHISISGOINGTOGO},
+    {COMPOUND_STRING("WhyDidntYouRatMeOut"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WHYDIDNTYOURATMEOUT},
+    {COMPOUND_STRING("GroupStages"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_GROUPSTAGES},
+    {COMPOUND_STRING("Finals"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_FINALS},
+    {COMPOUND_STRING("WaitHeDidWhat"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAITHEDIDWHAT},
+    {COMPOUND_STRING("WelcometotheHallofFame"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WELCOMETOTHEHALLOFFAME},
+};
+static const struct DebugMenuOption sDebugMenu_Actions_Act4[] =
+{
+    {COMPOUND_STRING("BeingChampionisHard"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_BEINGCHAMPIONISHARD},
+    {COMPOUND_STRING("LetsGrabLunch"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSGRABLUNCH},
+    {COMPOUND_STRING("RestoreHodouCity"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_RESTOREHODOU_CITY},
+    {COMPOUND_STRING("RestoreZenzuIsland"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_RESTOREZENZU_ISLAND},
+    {COMPOUND_STRING("RestoreEspuleeOutskirts"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_RESTOREESPULEE_OUTSKIRTS},
+    {COMPOUND_STRING("YouRealizeWereEvilRight"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUREALIZEWEREEVILRIGHT},
+    {COMPOUND_STRING("YouRealizeTheyreEvilRight"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND},
+};
+static const struct DebugMenuOption sDebugMenu_Actions_Act5[] =
+{
+    {COMPOUND_STRING("CongratsYoureanAsshole"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_CONGRATSYOUREANASSHOLE},
+    {COMPOUND_STRING("YouHaveYourOrders"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUHAVEYOURORDERS},
+    {COMPOUND_STRING("HowDisappointing"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HOWDISAPPOINTING_ARREST},
+    {COMPOUND_STRING("LetsBurnThisMotherDown"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSBURNTHISMOTHERDOWN},
+    {COMPOUND_STRING("Manhunt"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MANHUNT_ALCMENE},
+    {COMPOUND_STRING("ExhibitionBattle"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_EXHIBITIONBATTLE},
+    {COMPOUND_STRING("MaybeIFuckedUp"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MAYBEIFUCKEDUP},
+    {COMPOUND_STRING("OkayLetsFixit"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_OKAYLETSFIXIT},
+};
+static const struct DebugMenuOption sDebugMenu_Actions_Act6[] =
+{
+    {COMPOUND_STRING("LetsGettheBandBackTogether"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_AFTER},
+    {COMPOUND_STRING("MaskOff"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MASKOFF_ALCMENE},
+    {COMPOUND_STRING("LetsFixThis"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSFIXTHIS},
+    {COMPOUND_STRING("LockedOut"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LOCKEDOUT},
+    {COMPOUND_STRING("WarehouseRave"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAREHOUSERAVE},
+    {COMPOUND_STRING("SpeechSpeechSpeech"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SPEECHSPEECHSPEECH},
+    {COMPOUND_STRING("PersuasivePassenger"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_PERSUASIVEPASSENGER},
+    {COMPOUND_STRING("BreakTheInternet"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_BREAKTHEINTERNET},
+    {COMPOUND_STRING("WarehouseWarfare"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAREHOUSEWARFARE},
+    {COMPOUND_STRING("OneDown"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ONEDOWN},
+    {COMPOUND_STRING("Earthquake"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_EARTHQUAKE_OUTSIDE},
+    {COMPOUND_STRING("ThisIsntRandom"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THISISNTRANDOM_MON2},
+    {COMPOUND_STRING("WaitEvenThen"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAITEVENTHEN},
+    {COMPOUND_STRING("LetsFinishThis"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSFINISHTHIS},
+    {COMPOUND_STRING("ImIn"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_IMIN_POSTWARP},
+    {COMPOUND_STRING("YouCantStopMe"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE},
+    {COMPOUND_STRING("WeCanStopYouActually"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WECANSTOPYOUACTUALLY},
+};
+
+
+static const struct DebugMenuOption sDebugMenu_Actions_StoryJump[] =
+{
+    { COMPOUND_STRING("Act 0…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Act0, },
+    { COMPOUND_STRING("Act 1…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Act1, },
+    { COMPOUND_STRING("Act 2…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Act2, },
+    { COMPOUND_STRING("Act 3…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Act3, },
+    { COMPOUND_STRING("Act 4…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Act4, },
+    { COMPOUND_STRING("Act 5…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Act5, },
+    { COMPOUND_STRING("Act 6…"),      DebugAction_OpenSubMenu, sDebugMenu_Actions_Act6, },
+    { NULL }
+};
+
+static const struct DebugMenuOption sDebugMenu_Actions_Quest[] =
+{
+    //{ COMPOUND_STRING("Set quest…"),     DebugAction_OpenSubMenu, sDebugMenu_Actions_SetQuest, },
+    //{ COMPOUND_STRING("Warp to quest…"), DebugAction_OpenSubMenu, sDebugMenu_Actions_WarpToQuest, },
+    { NULL }
+};
+
+
 static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
 {
+    { COMPOUND_STRING("Story Jump…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_StoryJump, },
+    //{ COMPOUND_STRING("Quest…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Quest, },
     { COMPOUND_STRING("Utilities…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
     { COMPOUND_STRING("PC/Bag…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_PCBag, },
     { COMPOUND_STRING("Party…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Party, },
@@ -1128,6 +1261,10 @@ static void DebugTask_HandleMenuInput_General(u8 taskId)
             {
                 ((DebugFunc)option.actionParams)(taskId);
                 DebugAction_ToggleFlag(taskId);
+            }
+            else if (option.action == DebugAction_Jump_JumpPlayerToStoryPoint)
+            {
+                DebugAction_Jump_JumpPlayerToStoryPoint(taskId, (enum StoryJumpPoints)option.actionParams);
             }
             else
             {
@@ -4070,4 +4207,11 @@ void CheckEWRAMCounters(struct ScriptContext *ctx)
 {
     ConvertIntToDecimalStringN(gStringVar1, gFollowerSteps, STR_CONV_MODE_LEFT_ALIGN, 5);
     ConvertIntToDecimalStringN(gStringVar2, gChainFishingDexNavStreak, STR_CONV_MODE_LEFT_ALIGN, 5);
+}
+
+static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoints storyPoint)
+{
+    JumpPlayerToStoryPoint(storyPoint, JUMP_DEBUG);
+    WarpPlayerAfterVarSet();
+    Debug_DestroyMenu(taskId);
 }
