@@ -20080,6 +20080,115 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
         .secondaryId = MOVE_EXPLOSION,
     },
+    // PSF TODO replace these dummy items with real items
+    [1019] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1020] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1021] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1022] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1023] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1024] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1025] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1153] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [1154] =
+    {
+        .name = gQuestionMarksItemName,
+        .price = 0,
+        .description = sQuestionMarksDesc,
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_UNCATEGORIZED,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
     // End siliconMerge
 };
 
