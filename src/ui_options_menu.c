@@ -66,12 +66,11 @@ static EWRAM_DATA u8  currentScreenId = 0;
 static EWRAM_DATA u8  currentFirstOption = 0;
 static EWRAM_DATA bool8 areYouNotOnSettingsHub = FALSE;
 
-//static EWRAM_DATA u8 Temporal_Options_Preset_Settings[NUM_OF_PRESET_OPTIONS];       //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Game_Settings[NUM_OPTIONS_GAME_SETTINGS];     //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Battle_Settings[NUM_OPTIONS_BATTLE_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Music_Settings[NUM_OPTIONS_MUSIC_SETTINGS];   //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Visual_Settings[NUM_OPTIONS_VISUAL_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Random_Settings[NUM_OPTIONS_RANDOM_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Game_Settings[NUM_OPTIONS_GAME_SETTINGS];     //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Battle_Settings[NUM_OPTIONS_BATTLE_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Music_Settings[NUM_OPTIONS_MUSIC_SETTINGS];   //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Visual_Settings[NUM_OPTIONS_VISUAL_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Random_Settings[NUM_OPTIONS_RANDOM_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
 
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
@@ -397,12 +396,9 @@ static void Menu_FreeResources(void)
 {
     ShouldShowDiscardDialogue = FALSE;
     FreeAllSpritePalettes();
-    Free(sMenuDataPtr);
-    Free(Temporal_Options_Game_Settings);
-    Free(Temporal_Options_Battle_Settings);
-    Free(Temporal_Options_Music_Settings);
-    Free(Temporal_Options_Visual_Settings);
-    Free(Temporal_Options_Random_Settings);
+
+    if (sMenuDataPtr != NULL)
+        Free(sMenuDataPtr);
 
     for (u32 backgroundId = 0; backgroundId < MENU_BACKGROUND_COUNT; backgroundId++)
         Free(sBgTilemapBuffer[backgroundId]);
@@ -410,7 +406,6 @@ static void Menu_FreeResources(void)
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
-
 
 static void Task_MenuWaitFadeAndBail(u8 taskId)
 {
