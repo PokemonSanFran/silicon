@@ -523,14 +523,14 @@ static void DrawThirdRowNameplateTiles(u32 windowId, u32 nameplateWidth, u32 off
 {
     u32 index;
 
-    CopyToWindowPixelBuffer(windowId, (const void*)sNameplateLeftThirdRow, 0, NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET);
+    CopyToWindowPixelBuffer(windowId, sNameplateLeftThirdRow, 0, NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET);
 
     for (index = 0; index < nameplateTileWidth - 1; index++)
-        CopyToWindowPixelBuffer(windowId, (const void*)nameplateCenterThirdRowLUT[4], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
+        CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[4], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
 
-    CopyToWindowPixelBuffer(windowId, (const void*)nameplateCenterThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index++);
+    CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index++);
 
-    CopyToWindowPixelBuffer(windowId, (const void*)nameplateRightThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
+    CopyToWindowPixelBuffer(windowId, nameplateRightThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
 }
 
 static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker speaker)
@@ -538,7 +538,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
     u32 palnum, paltag;
     u32 spriteId = MAX_SPRITES;
     u32 SpriteTag = GFXTAG_SPEAKER_ICON;
-    struct CompressedSpriteSheet sSpriteSheet_Speaker_Icon;
+    struct SpriteSheet sSpriteSheet_Speaker_Icon;
     struct SpritePalette spritePalette;
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
@@ -553,7 +553,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
     sSpriteSheet_Speaker_Icon.data = sSpeakerData[speaker].speakerIcon;
     sSpriteSheet_Speaker_Icon.size = 2048;
     sSpriteSheet_Speaker_Icon.tag = SpriteTag;
-    LoadCompressedSpriteSheet(&sSpriteSheet_Speaker_Icon);
+    LoadSpriteSheet(&sSpriteSheet_Speaker_Icon);
 
     spritePalette.data = sSpeakerData[speaker].speakerPal;
     spritePalette.tag = paltag;
