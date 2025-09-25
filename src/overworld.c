@@ -65,7 +65,7 @@
 #include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
-#include "ui_start_menu.h" // siliconMerge
+#include "ui_old_start_menu.h" // siliconMerge
 #include "scanline_effect.h"
 #include "wild_encounter.h"
 #include "vs_seeker.h"

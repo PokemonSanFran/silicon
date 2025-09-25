@@ -41,7 +41,7 @@
 #include "constants/options_battle.h"
 #include "ui_options_menu.h"
 #include "options_music.h"
-#include "ui_start_menu.h"
+#include "ui_old_start_menu.h"
 #include "ui_main_menu.h"
 #include "new_game.h"
 

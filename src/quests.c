@@ -39,7 +39,7 @@
 #include "event_object_movement.h"
 #include "pokemon_icon.h"
 #include "quest_flavor_lookup.h"
-#include "ui_start_menu.h"
+#include "ui_old_start_menu.h"
 #include "field_weather.h"
 #include "field_screen_effect.h"
 #include "tv.h"

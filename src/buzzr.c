@@ -31,7 +31,7 @@
 #include "quests.h"
 #include "constants/quests.h"
 #include "script_menu.h"
-#include "ui_start_menu.h"
+#include "ui_old_start_menu.h"
 #include "field_weather.h"
 
 static void ResetQuestFanfareFlag(void);

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "ui_start_menu.h"
+#include "ui_old_start_menu.h"
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
@@ -333,36 +333,36 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 static const u32 sMenuTiles[]                       = INCBIN_U32("graphics/start_menu/tiles.4bpp.smol");
 static const u32 sMenuTilemap[]                     = INCBIN_U32("graphics/start_menu/tilemap.bin.smolTM");
 
-static const u16 sMenuPalette[]                     = INCBIN_U16("graphics/start_menu/palette.gbapal");
+static const u16 sMenuPalette[]                     = INCBIN_U16("graphics/old_start_menu/palette.gbapal");
 
-static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/start_menu/palettes/red.gbapal");
-static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/start_menu/palettes/black.gbapal");
-static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/start_menu/palettes/green.gbapal");
-static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/start_menu/palettes/blue.gbapal");
-static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/start_menu/palettes/platinum.gbapal");
-static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/start_menu/palettes/scarlet.gbapal");
-static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/start_menu/palettes/violet.gbapal");
-static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/start_menu/palettes/white.gbapal");
-static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/start_menu/palettes/yellow.gbapal");
+static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/old_start_menu/palettes/red.gbapal");
+static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/old_start_menu/palettes/black.gbapal");
+static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/old_start_menu/palettes/green.gbapal");
+static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/old_start_menu/palettes/blue.gbapal");
+static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/old_start_menu/palettes/platinum.gbapal");
+static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/old_start_menu/palettes/scarlet.gbapal");
+static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/old_start_menu/palettes/violet.gbapal");
+static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/old_start_menu/palettes/white.gbapal");
+static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/old_start_menu/palettes/yellow.gbapal");
 
-static const u8 sStartMenuCursor_Gfx[]              = INCBIN_U8("graphics/start_menu/menu_cursor.4bpp");
-static const u8 sStartMenuCursorMoveMode_Gfx[]      = INCBIN_U8("graphics/start_menu/menu_cursor_move.4bpp");
-static const u8 sStartMenuCursorMoveMode2_Gfx[]     = INCBIN_U8("graphics/start_menu/menu_cursor_move2.4bpp");
-static const u8 sStartMenuRowIcon_Gfx[]             = INCBIN_U8("graphics/start_menu/menu_row_icon.4bpp");
+static const u8 sStartMenuCursor_Gfx[]              = INCBIN_U8("graphics/old_start_menu/menu_cursor.4bpp");
+static const u8 sStartMenuCursorMoveMode_Gfx[]      = INCBIN_U8("graphics/old_start_menu/menu_cursor_move.4bpp");
+static const u8 sStartMenuCursorMoveMode2_Gfx[]     = INCBIN_U8("graphics/old_start_menu/menu_cursor_move2.4bpp");
+static const u8 sStartMenuRowIcon_Gfx[]             = INCBIN_U8("graphics/old_start_menu/menu_row_icon.4bpp");
 
 //HP Bar
-static const u8 sStartMenu_HPBar_Gfx[]              = INCBIN_U8("graphics/start_menu/hp_bar.4bpp");
-static const u8 sStartMenu_HPBar_Full_Gfx[]         = INCBIN_U8("graphics/start_menu/hp_bar_full.4bpp");
-static const u8 sStartMenu_HPBar_90_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_90_percent.4bpp");
-static const u8 sStartMenu_HPBar_80_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_80_percent.4bpp");
-static const u8 sStartMenu_HPBar_70_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_70_percent.4bpp");
-static const u8 sStartMenu_HPBar_60_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_60_percent.4bpp");
-static const u8 sStartMenu_HPBar_50_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_50_percent.4bpp");
-static const u8 sStartMenu_HPBar_40_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_40_percent.4bpp");
-static const u8 sStartMenu_HPBar_30_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_30_percent.4bpp");
-static const u8 sStartMenu_HPBar_20_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_20_percent.4bpp");
-static const u8 sStartMenu_HPBar_10_Percent_Gfx[]   = INCBIN_U8("graphics/start_menu/hp_bar_10_percent.4bpp");
-static const u8 sStartMenu_HPBar_Fainted_Gfx[]      = INCBIN_U8("graphics/start_menu/hp_bar_fainted.4bpp");
+static const u8 sStartMenu_HPBar_Gfx[]              = INCBIN_U8("graphics/old_start_menu/hp_bar.4bpp");
+static const u8 sStartMenu_HPBar_Full_Gfx[]         = INCBIN_U8("graphics/old_start_menu/hp_bar_full.4bpp");
+static const u8 sStartMenu_HPBar_90_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_90_percent.4bpp");
+static const u8 sStartMenu_HPBar_80_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_80_percent.4bpp");
+static const u8 sStartMenu_HPBar_70_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_70_percent.4bpp");
+static const u8 sStartMenu_HPBar_60_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_60_percent.4bpp");
+static const u8 sStartMenu_HPBar_50_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_50_percent.4bpp");
+static const u8 sStartMenu_HPBar_40_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_40_percent.4bpp");
+static const u8 sStartMenu_HPBar_30_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_30_percent.4bpp");
+static const u8 sStartMenu_HPBar_20_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_20_percent.4bpp");
+static const u8 sStartMenu_HPBar_10_Percent_Gfx[]   = INCBIN_U8("graphics/old_start_menu/hp_bar_10_percent.4bpp");
+static const u8 sStartMenu_HPBar_Fainted_Gfx[]      = INCBIN_U8("graphics/old_start_menu/hp_bar_fainted.4bpp");
 
 enum Colors
 {
@@ -816,36 +816,36 @@ static const u8 sText_HelpBar_SaveComplete[] = _("{START_BUTTON} Return to Overw
 static const u8 sText_HelpBar_OverworldSaveComplete[]  = _("{START_BUTTON} Return to Overworld");
 static const u8 sText_HelpBar_SaveOverwriteAsk[] = _("{START_BUTTON}+ {A_BUTTON} Overwrite Old Adventure {B_BUTTON} Cancel");
 
-static const u8 sStartMenuApp_Pokemon_Gfx[]  = INCBIN_U8("graphics/start_menu/app_pokemon.4bpp");
-static const u8 sStartMenuApp_Bag_Gfx[]      = INCBIN_U8("graphics/start_menu/app_bag.4bpp");
-static const u8 sStartMenuApp_Map_Gfx[]      = INCBIN_U8("graphics/start_menu/app_map.4bpp");
-static const u8 sStartMenuApp_Quest_Gfx[]    = INCBIN_U8("graphics/start_menu/app_quest.4bpp");
-static const u8 sStartMenuApp_Dexnav_Gfx[]   = INCBIN_U8("graphics/start_menu/app_dexnav.4bpp");
-static const u8 sStartMenuApp_Pokedex_Gfx[]  = INCBIN_U8("graphics/start_menu/app_pokedex.4bpp");
-static const u8 sStartMenuApp_Buzzr_Gfx[]    = INCBIN_U8("graphics/start_menu/app_buzzr.4bpp");
-static const u8 sStartMenuApp_Options_Gfx[]  = INCBIN_U8("graphics/start_menu/app_options.4bpp");
-static const u8 sStartMenuApp_Profile_Gfx[]  = INCBIN_U8("graphics/start_menu/app_profile.4bpp");
-static const u8 sStartMenuApp_Presto_Gfx[]   = INCBIN_U8("graphics/start_menu/app_presto.4bpp");
-static const u8 sStartMenuApp_Default_Gfx[]  = INCBIN_U8("graphics/start_menu/app_default.4bpp");
-static const u8 sStartMenuApp_Glass_Gfx[]  = INCBIN_U8("graphics/start_menu/app_glass.4bpp");
+static const u8 sStartMenuApp_Pokemon_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_pokemon.4bpp");
+static const u8 sStartMenuApp_Bag_Gfx[]      = INCBIN_U8("graphics/old_start_menu/app_bag.4bpp");
+static const u8 sStartMenuApp_Map_Gfx[]      = INCBIN_U8("graphics/old_start_menu/app_map.4bpp");
+static const u8 sStartMenuApp_Quest_Gfx[]    = INCBIN_U8("graphics/old_start_menu/app_quest.4bpp");
+static const u8 sStartMenuApp_Dexnav_Gfx[]   = INCBIN_U8("graphics/old_start_menu/app_dexnav.4bpp");
+static const u8 sStartMenuApp_Pokedex_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_pokedex.4bpp");
+static const u8 sStartMenuApp_Buzzr_Gfx[]    = INCBIN_U8("graphics/old_start_menu/app_buzzr.4bpp");
+static const u8 sStartMenuApp_Options_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_options.4bpp");
+static const u8 sStartMenuApp_Profile_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_profile.4bpp");
+static const u8 sStartMenuApp_Presto_Gfx[]   = INCBIN_U8("graphics/old_start_menu/app_presto.4bpp");
+static const u8 sStartMenuApp_Default_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_default.4bpp");
+static const u8 sStartMenuApp_Glass_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_glass.4bpp");
 
-static const u8 sStartMenuApp_Glass_Move_Mode_Gfx[]  = INCBIN_U8("graphics/start_menu/app_glass_move.4bpp");
-static const u8 sStartMenuApp_Pokemon_Move_Mode_Gfx[]  = INCBIN_U8("graphics/start_menu/app_pokemon_move.4bpp");
-static const u8 sStartMenuApp_Bag_Move_Mode_Gfx[]      = INCBIN_U8("graphics/start_menu/app_bag_move.4bpp");
-static const u8 sStartMenuApp_Map_Move_Mode_Gfx[]      = INCBIN_U8("graphics/start_menu/app_map_move.4bpp");
-static const u8 sStartMenuApp_Quest_Move_Mode_Gfx[]    = INCBIN_U8("graphics/start_menu/app_quest_move.4bpp");
-static const u8 sStartMenuApp_Dexnav_Move_Mode_Gfx[]   = INCBIN_U8("graphics/start_menu/app_dexnav_move.4bpp");
-static const u8 sStartMenuApp_Pokedex_Move_Mode_Gfx[]  = INCBIN_U8("graphics/start_menu/app_pokedex_move.4bpp");
-static const u8 sStartMenuApp_Buzzr_Move_Mode_Gfx[]  = INCBIN_U8("graphics/start_menu/app_buzzr_move.4bpp");
-static const u8 sStartMenuApp_Options_Move_Mode_Gfx[]  = INCBIN_U8("graphics/start_menu/app_options_move.4bpp");
-static const u8 sStartMenuApp_Profile_Move_Mode_Gfx[]  = INCBIN_U8("graphics/start_menu/app_profile_move.4bpp");
-static const u8 sStartMenuApp_Presto_Move_Mode_Gfx[]   = INCBIN_U8("graphics/start_menu/app_presto_move.4bpp");
-static const u8 sStartMenuApp_Default_Move_Mode_Gfx[]  = INCBIN_U8("graphics/start_menu/app_default_move.4bpp");
+static const u8 sStartMenuApp_Glass_Move_Mode_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_glass_move.4bpp");
+static const u8 sStartMenuApp_Pokemon_Move_Mode_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_pokemon_move.4bpp");
+static const u8 sStartMenuApp_Bag_Move_Mode_Gfx[]      = INCBIN_U8("graphics/old_start_menu/app_bag_move.4bpp");
+static const u8 sStartMenuApp_Map_Move_Mode_Gfx[]      = INCBIN_U8("graphics/old_start_menu/app_map_move.4bpp");
+static const u8 sStartMenuApp_Quest_Move_Mode_Gfx[]    = INCBIN_U8("graphics/old_start_menu/app_quest_move.4bpp");
+static const u8 sStartMenuApp_Dexnav_Move_Mode_Gfx[]   = INCBIN_U8("graphics/old_start_menu/app_dexnav_move.4bpp");
+static const u8 sStartMenuApp_Pokedex_Move_Mode_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_pokedex_move.4bpp");
+static const u8 sStartMenuApp_Buzzr_Move_Mode_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_buzzr_move.4bpp");
+static const u8 sStartMenuApp_Options_Move_Mode_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_options_move.4bpp");
+static const u8 sStartMenuApp_Profile_Move_Mode_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_profile_move.4bpp");
+static const u8 sStartMenuApp_Presto_Move_Mode_Gfx[]   = INCBIN_U8("graphics/old_start_menu/app_presto_move.4bpp");
+static const u8 sStartMenuApp_Default_Move_Mode_Gfx[]  = INCBIN_U8("graphics/old_start_menu/app_default_move.4bpp");
 
-static const u8 sStartMenuApp_Signal_0_Gfx[]  = INCBIN_U8("graphics/start_menu/signal_0.4bpp");
-static const u8 sStartMenuApp_Signal_1_Gfx[]  = INCBIN_U8("graphics/start_menu/signal_1.4bpp");
-static const u8 sStartMenuApp_Signal_2_Gfx[]  = INCBIN_U8("graphics/start_menu/signal_2.4bpp");
-static const u8 sStartMenuApp_Signal_3_Gfx[]  = INCBIN_U8("graphics/start_menu/signal_3.4bpp");
+static const u8 sStartMenuApp_Signal_0_Gfx[]  = INCBIN_U8("graphics/old_start_menu/signal_0.4bpp");
+static const u8 sStartMenuApp_Signal_1_Gfx[]  = INCBIN_U8("graphics/old_start_menu/signal_1.4bpp");
+static const u8 sStartMenuApp_Signal_2_Gfx[]  = INCBIN_U8("graphics/old_start_menu/signal_2.4bpp");
+static const u8 sStartMenuApp_Signal_3_Gfx[]  = INCBIN_U8("graphics/old_start_menu/signal_3.4bpp");
 
 static void StartMenu_DisplayPartyIcons(void)
 {

@@ -37,7 +37,7 @@
 #include "constants/battle.h"
 #include "pokemon_summary_screen.h"
 #include "dma3.h"
-#include "ui_start_menu.h"
+#include "ui_old_start_menu.h"
 #include "field_weather.h"
 #include "constants/reveal.h"
 #include "reveal.h"
