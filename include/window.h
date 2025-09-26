@@ -80,6 +80,7 @@ u32 CalculateNextWindowBaseblock(void); // siliconMerge
 
 extern struct Window gWindows[];
 extern void *gWindowBgTilemapBuffers[];
+extern const struct WindowTemplate gDummyWindowTemplate;
 
 //begin FRLG import
 
