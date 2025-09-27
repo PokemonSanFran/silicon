@@ -177,6 +177,8 @@ static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
 static void Task_StartMenu(u8);
 static void Task_CloseStartMenu(u8);
 
+static void SpriteCB_AppCursor(struct Sprite *);
+
 static void CB2_StartMenuSetup(void);
 static void CB2_StartMenu(void);
 static void VBlankCB_StartMenu(void);
@@ -186,15 +188,15 @@ static void SetupStartMenuGraphics(void);
 static void SetupStartMenuMainSprites(void);
 static void SetupStartMenuMainWindows(void);
 static void SetupStartMenuText(void);
-static void PrintStartMenuHelpTopText(u8 **strbuf);
-static void PrintStartMenuHelpBottomText(u8 **strbuf);
-static void PrintStartMenuTextboxText(u8 **strbuf);
-static void PrintStartMenuAppTitleText(u8 **strbuf);
+static void PrintStartMenuHelpTopText(u8 **);
+static void PrintStartMenuHelpBottomText(u8 **);
+static void PrintStartMenuTextboxText(u8 **);
+static void PrintStartMenuAppTitleText(u8 **);
 static inline void PrintStartMenuText(enum StartMenuMainWindows, u32, u32, u32, u32, u8 const *);
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols, u16);
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void);
 static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void);
-static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites app);
+static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites);
 static void FreeStartMenuResources(void);
 
 // ROM data
@@ -395,6 +397,68 @@ static const u8 *const sStartMenuModeAppNames[NUM_START_APPS] =
     [START_APP_ADVENTURES_GUIDE] = COMPOUND_STRING("Adventure's guide"),
 };
 
+//sprite
+static const struct OamData sStartMenuAppCursorOamData =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .objMode = ST_OAM_OBJ_NORMAL,
+};
+
+static const struct SpriteTemplate sStartMenuAppCursorSprite =
+{
+    .tileTag = START_TAG_APP_CURSOR,
+    .paletteTag = START_TAG_PALETTE,
+    .oam = &sStartMenuAppCursorOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_AppCursor,
+};
+
+static const struct OamData sStartMenuAppOamData =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .objMode = ST_OAM_OBJ_NORMAL,
+};
+
+static const union AnimCmd *const sStartMenuAppAnims[] =
+{
+    // first row
+    [START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PARTY * 4, 1), ANIMCMD_END },
+    [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BAG * 4, 1), ANIMCMD_END },
+    [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ARRIBA * 4, 1), ANIMCMD_END },
+    [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TODOS * 4, 1), ANIMCMD_END },
+    [START_APP_DEXNAV] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_DEXNAV * 4, 1), ANIMCMD_END },
+    [START_APP_POKEDEX] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_POKEDEX * 4, 1), ANIMCMD_END },
+    [START_APP_BUZZR] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BUZZR * 4, 1), ANIMCMD_END },
+    [START_APP_OPTIONS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_OPTIONS * 4, 1), ANIMCMD_END },
+
+    // second row
+    [START_APP_TRAINER_CARD] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TRAINER_CARD * 4, 1), ANIMCMD_END },
+    [START_APP_PRESTO] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PRESTO * 4, 1), ANIMCMD_END },
+    [START_APP_WAVES_OF_CHANGE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_WAVES_OF_CHANGE * 4, 1), ANIMCMD_END },
+    [START_APP_CUSTOMIZE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_CUSTOMIZE * 4, 1), ANIMCMD_END },
+    [START_APP_SAVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SAVE * 4, 1), ANIMCMD_END },
+    [START_APP_SURPRISE_TRADE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SURPRISE_TRADE * 4, 1), ANIMCMD_END },
+    [START_APP_GOOGLE_GLASS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_GOOGLE_GLASS * 4, 1), ANIMCMD_END },
+    [START_APP_ADVENTURES_GUIDE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ADVENTURES_GUIDE * 4, 1), ANIMCMD_END },
+
+    [NUM_START_APPS] = (const union AnimCmd[]){ ANIMCMD_FRAME(NUM_START_APPS * 4, 1), ANIMCMD_END },
+};
+
+static const struct SpriteTemplate sStartMenuAppSprite =
+{
+    .tileTag = START_TAG_APPS,
+    .paletteTag = START_TAG_PALETTE,
+    .oam = &sStartMenuAppOamData,
+    .anims = sStartMenuAppAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
 // code
 
 // tasks
@@ -481,6 +545,13 @@ static void Task_CloseStartMenu(u8 taskId)
         FreeStartMenuResources();
         DestroyTask(taskId);
     }
+}
+
+// sprite
+static void SpriteCB_AppCursor(struct Sprite *s)
+{
+    s->x2 = GET_APP_GRID_X(sStartMenuResourcesPtr->cursor.x);
+    s->y2 = GET_APP_GRID_Y(sStartMenuResourcesPtr->cursor.y);
 }
 
 // normal funcs
@@ -613,73 +684,6 @@ static void SetupStartMenuGraphics(void)
     LoadSpriteSheets(sStartMenuSpriteGraphics.sheets);
     LoadSpritePalette(&sStartMenuSpriteGraphics.palette);
 }
-
-static const struct OamData sStartMenuAppCursorOamData =
-{
-    .shape = SPRITE_SHAPE(32x32),
-    .size = SPRITE_SIZE(32x32),
-    .objMode = ST_OAM_OBJ_NORMAL,
-};
-
-static void SpriteCB_AppCursor(struct Sprite *s)
-{
-    s->x2 = GET_APP_GRID_X(sStartMenuResourcesPtr->cursor.x);
-    s->y2 = GET_APP_GRID_Y(sStartMenuResourcesPtr->cursor.y);
-}
-
-static const struct SpriteTemplate sStartMenuAppCursorSprite =
-{
-    .tileTag = START_TAG_APP_CURSOR,
-    .paletteTag = START_TAG_PALETTE,
-    .oam = &sStartMenuAppCursorOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_AppCursor,
-};
-
-static const struct OamData sStartMenuAppOamData =
-{
-    .shape = SPRITE_SHAPE(16x16),
-    .size = SPRITE_SIZE(16x16),
-    .objMode = ST_OAM_OBJ_NORMAL,
-};
-
-static const union AnimCmd *const sStartMenuAppAnims[] =
-{
-    // first row
-    [START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PARTY * 4, 1), ANIMCMD_END },
-    [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BAG * 4, 1), ANIMCMD_END },
-    [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ARRIBA * 4, 1), ANIMCMD_END },
-    [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TODOS * 4, 1), ANIMCMD_END },
-    [START_APP_DEXNAV] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_DEXNAV * 4, 1), ANIMCMD_END },
-    [START_APP_POKEDEX] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_POKEDEX * 4, 1), ANIMCMD_END },
-    [START_APP_BUZZR] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BUZZR * 4, 1), ANIMCMD_END },
-    [START_APP_OPTIONS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_OPTIONS * 4, 1), ANIMCMD_END },
-
-    // second row
-    [START_APP_TRAINER_CARD] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TRAINER_CARD * 4, 1), ANIMCMD_END },
-    [START_APP_PRESTO] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PRESTO * 4, 1), ANIMCMD_END },
-    [START_APP_WAVES_OF_CHANGE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_WAVES_OF_CHANGE * 4, 1), ANIMCMD_END },
-    [START_APP_CUSTOMIZE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_CUSTOMIZE * 4, 1), ANIMCMD_END },
-    [START_APP_SAVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SAVE * 4, 1), ANIMCMD_END },
-    [START_APP_SURPRISE_TRADE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SURPRISE_TRADE * 4, 1), ANIMCMD_END },
-    [START_APP_GOOGLE_GLASS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_GOOGLE_GLASS * 4, 1), ANIMCMD_END },
-    [START_APP_ADVENTURES_GUIDE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ADVENTURES_GUIDE * 4, 1), ANIMCMD_END },
-
-    [NUM_START_APPS] = (const union AnimCmd[]){ ANIMCMD_FRAME(NUM_START_APPS * 4, 1), ANIMCMD_END },
-};
-
-static const struct SpriteTemplate sStartMenuAppSprite =
-{
-    .tileTag = START_TAG_APPS,
-    .paletteTag = START_TAG_PALETTE,
-    .oam = &sStartMenuAppOamData,
-    .anims = sStartMenuAppAnims,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
-};
 
 static void SetupStartMenuMainSprites(void)
 {
