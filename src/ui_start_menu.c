@@ -32,6 +32,7 @@
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "region_map.h"
+#include "sprite.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
 #include "constants/items.h"
@@ -40,6 +41,33 @@
 #include "constants/rgb.h"
 
 // constants, structs
+
+// grid
+// inclusive
+#define MAX_APP_ROWS          7
+#define MAX_APP_COLUMNS       1
+
+#define NUM_START_MONS_TOTAL  (PARTY_SIZE + DAYCARE_MON_COUNT)
+
+// grid calc
+#define GET_APP_GRID_X(row) (22 * (row))
+#define GET_APP_GRID_Y(col) (19 * (col))
+
+// sprite tiles size
+#define START_MAIN_SPRITE_APP_CURSOR_SIZE    (16)
+#define START_MAIN_SPRITE_APPS_SIZE          (4 + 64) // both icons and bg
+#define START_MAIN_SPRITE_MON_PLATFORMS_SIZE (8)
+#define START_MAIN_SPRITE_STATUS_HPBARS_SIZE (6 + 15)
+
+// text window width
+#define TIME_WINDOW_WIDTH      10
+#define MAP_NAME_WINDOW_WIDTH  10
+
+// misc
+#define STRBUF_SIZE         64
+#define TILE_TO_PIXELS(t)   (t * 8)
+#define X_CENTER_ALIGN      (-1)
+#define Y_CENTER_ALIGN      1
 
 enum StartMenuBackgrounds
 {
@@ -57,6 +85,45 @@ enum StartMenuMainWindows
     START_MAIN_WIN_TEXTBOX,      // Quest Flavor, Save Confirmation
     START_MAIN_WIN_APP_TITLE,
     NUM_START_MAIN_WINDOWS
+};
+
+#define START_MAIN_WIN_HELP_WIDTH      (DISPLAY_TILE_WIDTH)
+#define START_MAIN_WIN_TEXTBOX_WIDTH   (DISPLAY_TILE_WIDTH - 2)
+#define START_MAIN_WIN_APP_TITLE_WIDTH (DISPLAY_TILE_WIDTH - 8)
+
+enum StartMenuMainSprites
+{
+    START_MAIN_SPRITE_APP_CURSOR,
+
+    START_MAIN_SPRITE_APP_ICONS,
+    START_MAIN_SPRITE_APP_ICONS_END = START_MAIN_SPRITE_APP_ICONS + NUM_START_APPS,
+
+    START_MAIN_SPRITE_APP_BGS,
+    START_MAIN_SPRITE_APP_BGS_END = START_MAIN_SPRITE_APP_BGS + NUM_START_APPS,
+
+    START_MAIN_SPRITE_MON_PLATFORMS = START_MAIN_SPRITE_APP_BGS_END,
+    START_MAIN_SPRITE_MON_PLATFORMS_END = START_MAIN_SPRITE_MON_PLATFORMS + NUM_START_MONS_TOTAL,
+
+    START_MAIN_SPRITE_STATUS_HPBARS = START_MAIN_SPRITE_MON_PLATFORMS_END,
+    START_MAIN_SPRITE_STATUS_HPBARS_END = START_MAIN_SPRITE_STATUS_HPBARS + PARTY_SIZE,
+
+    START_MAIN_SPRITE_MON_ICONS = START_MAIN_SPRITE_STATUS_HPBARS_END,
+    START_MAIN_SPRITE_MON_ICONS_END = START_MAIN_SPRITE_MON_ICONS + NUM_START_MONS_TOTAL,
+
+    START_MAIN_SPRITE_DAYCARE_ITEMS = START_MAIN_SPRITE_MON_ICONS_END, // affine
+    START_MAIN_SPRITE_DAYCARE_ITEMS_END = START_MAIN_SPRITE_DAYCARE_ITEMS + DAYCARE_MON_COUNT,
+
+    NUM_START_MAIN_SPRITES = START_MAIN_SPRITE_DAYCARE_ITEMS_END
+};
+
+enum StartMenuTags
+{
+    START_TAG_APP_CURSOR = 0x6969,
+    START_TAG_APPS,
+    START_TAG_MON_PLATFORMS,
+    START_TAG_STATUS_HPBARS,
+    START_TAG_PALETTE, // every UI elements so far only uses this palette
+    NUM_START_TAGS
 };
 
 enum StartMenuFontColors
@@ -87,17 +154,16 @@ enum StartMenuSetupSteps
     START_SETUP_RESET = 0,
     START_SETUP_BG,
     START_SETUP_GFX,
+    START_SETUP_SPRITE,
     START_SETUP_WIN,
     START_SETUP_TEXT,
     START_SETUP_FADE,
     START_SETUP_FINISH
 };
 
-#define STRBUF_SIZE 64
-#define TILE_TO_PIXELS(t) (t * 8)
-
 struct StartMenuResources
 {
+    u8 spriteIds[NUM_START_MAIN_SPRITES];
     struct UCoords8 cursor;
     enum StartMenuModes mode;
     MainCallback savedCB;
@@ -117,6 +183,7 @@ static void VBlankCB_StartMenu(void);
 
 static void SetupStartMenuBgs(void);
 static void SetupStartMenuGraphics(void);
+static void SetupStartMenuMainSprites(void);
 static void SetupStartMenuMainWindows(void);
 static void SetupStartMenuText(void);
 static void PrintStartMenuHelpTopText(u8 **strbuf);
@@ -127,8 +194,8 @@ static inline void PrintStartMenuText(enum StartMenuMainWindows, u32, u32, u32, 
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols, u16);
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void);
 static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void);
+static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites app);
 static void FreeStartMenuResources(void);
-static bool32 GetCurrentStartMenuMode(void);
 
 // ROM data
 static const struct BgTemplate sStartMenuBgs[NUM_START_BACKGROUNDS] =
@@ -170,7 +237,7 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
     {
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = DISPLAY_TILE_WIDTH,
+        .width = START_MAIN_WIN_HELP_WIDTH,
         .height = 2,
         .paletteNum = 15
     },
@@ -178,7 +245,7 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
     {
         .tilemapLeft = 1,
         .tilemapTop = 18,
-        .width = DISPLAY_TILE_WIDTH,
+        .width = START_MAIN_WIN_HELP_WIDTH,
         .height = 2,
         .paletteNum = 15
     },
@@ -186,7 +253,7 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
     {
         .tilemapLeft = 1,
         .tilemapTop = 2,
-        .width = 28,
+        .width = START_MAIN_WIN_TEXTBOX_WIDTH,
         .height = 5,
         .paletteNum = 15
     },
@@ -194,12 +261,15 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
     {
         .tilemapLeft = 4,
         .tilemapTop = 7,
-        .width = 22,
+        .width = START_MAIN_WIN_APP_TITLE_WIDTH,
         .height = 2,
         .paletteNum = 15
     },
     DUMMY_WIN_TEMPLATE
 };
+
+// universal palette
+static const u16 sStartMenuMainPalette[] = INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal");
 
 static const struct {
     const u32 *tiles;
@@ -213,7 +283,7 @@ static const struct {
     [START_BG_TEXT] =
     {
         // .tiles is handled by text window
-        .palette = { (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal"), 15 }
+        .palette = { sStartMenuMainPalette, 15 }
         // .tilemap is handled by text window
     },
     [START_BG_TEXTBOX] =
@@ -247,6 +317,36 @@ static const u16 *const sStartMenuWallpaperPalettes[VISUAL_OPTION_COLOR_COUNT] =
 // blit graphics
 static const u8 sStartMenuHelpSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/help_symbols.4bpp");
 static const u8 sStartMenuDaycareSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/daycare_symbols.4bpp");
+
+static const struct {
+    const struct SpriteSheet sheets[NUM_START_TAGS];
+    const struct SpritePalette palette;
+} sStartMenuSpriteGraphics =
+{
+    {
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/mon_status.4bpp", "graphics/ui_menus/start_menu/hp_bars.4bpp"),
+            TILE_OFFSET_4BPP(START_MAIN_SPRITE_STATUS_HPBARS_SIZE), START_TAG_STATUS_HPBARS
+        },
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/app_cursor.4bpp"),
+            TILE_OFFSET_4BPP(START_MAIN_SPRITE_APP_CURSOR_SIZE), START_TAG_APP_CURSOR
+        },
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/apps.4bpp"),
+            TILE_OFFSET_4BPP(START_MAIN_SPRITE_APPS_SIZE), START_TAG_APPS
+        },
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/mon_platform.4bpp"),
+            TILE_OFFSET_4BPP(START_MAIN_SPRITE_MON_PLATFORMS_SIZE), START_TAG_MON_PLATFORMS
+        },
+        { NULL }
+    },
+
+    { sStartMenuMainPalette, START_TAG_PALETTE }
+};
+
+// strings
 
 static const u8 *const sStartMenuTimeOfDayStrings[TIMES_OF_DAY_COUNT] =
 {
@@ -310,7 +410,7 @@ void Task_OpenStartMenu(u8 taskId)
 
 static void Task_StartMenu(u8 taskId)
 {
-    if (JOY_NEW(A_BUTTON | B_BUTTON))
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -319,19 +419,19 @@ static void Task_StartMenu(u8 taskId)
 
     bool32 dpadPressed = FALSE;
 
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
-        if (sStartMenuResourcesPtr->cursor.x > 0)
+        if (sStartMenuResourcesPtr->cursor.x)
             sStartMenuResourcesPtr->cursor.x--;
         else
-            sStartMenuResourcesPtr->cursor.x = 7;
+            sStartMenuResourcesPtr->cursor.x = MAX_APP_ROWS;
 
         dpadPressed = TRUE;
     }
 
-    if (JOY_NEW(DPAD_RIGHT))
+    if (JOY_NEW(DPAD_RIGHT | R_BUTTON))
     {
-        if (sStartMenuResourcesPtr->cursor.x < 7)
+        if (sStartMenuResourcesPtr->cursor.x < MAX_APP_ROWS)
             sStartMenuResourcesPtr->cursor.x++;
         else
             sStartMenuResourcesPtr->cursor.x = 0;
@@ -341,17 +441,17 @@ static void Task_StartMenu(u8 taskId)
 
     if (JOY_NEW(DPAD_UP))
     {
-        if (sStartMenuResourcesPtr->cursor.y > 0)
+        if (sStartMenuResourcesPtr->cursor.y)
             sStartMenuResourcesPtr->cursor.y--;
         else
-            sStartMenuResourcesPtr->cursor.y = 1;
+            sStartMenuResourcesPtr->cursor.y = MAX_APP_COLUMNS;
 
         dpadPressed = TRUE;
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
-        if (sStartMenuResourcesPtr->cursor.y < 1)
+        if (sStartMenuResourcesPtr->cursor.y < MAX_APP_COLUMNS)
             sStartMenuResourcesPtr->cursor.y++;
         else
             sStartMenuResourcesPtr->cursor.y = 0;
@@ -362,8 +462,8 @@ static void Task_StartMenu(u8 taskId)
     if (dpadPressed)
     {
         u8 *strbuf[2];
-        strbuf[0] = AllocZeroed(64);
-        strbuf[1] = AllocZeroed(64);
+        strbuf[0] = AllocZeroed(STRBUF_SIZE);
+        strbuf[1] = AllocZeroed(STRBUF_SIZE);
 
         PrintStartMenuAppTitleText(strbuf);
 
@@ -401,6 +501,8 @@ void OpenStartMenu(enum StartMenuModes mode)
     sStartMenuResourcesPtr->cursor = sStartMenuLastCursor;
     sStartMenuResourcesPtr->mode = mode;
     sStartMenuResourcesPtr->savedCB = cb;
+    for (enum StartMenuMainSprites sprite = 0; sprite < NUM_START_MAIN_SPRITES; sprite++)
+        sStartMenuResourcesPtr->spriteIds[sprite] = SPRITE_NONE;
 
     SetMainCallback2(CB2_StartMenuSetup);
 }
@@ -428,6 +530,9 @@ static void CB2_StartMenuSetup(void)
         break;
     case START_SETUP_GFX:
         SetupStartMenuGraphics();
+        break;
+    case START_SETUP_SPRITE:
+        SetupStartMenuMainSprites();
         break;
     case START_SETUP_WIN:
         SetupStartMenuMainWindows();
@@ -481,7 +586,7 @@ static void SetupStartMenuBgs(void)
         ShowBg(bg);
     }
 
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG3);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 9));
 }
 
@@ -505,6 +610,107 @@ static void SetupStartMenuGraphics(void)
     LoadPalette(sStartMenuWallpaperPalettes[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR]],
                 BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     FillPalette(RGB_RED, BG_PLTT_ID(0), PLTT_SIZEOF(1));
+    LoadSpriteSheets(sStartMenuSpriteGraphics.sheets);
+    LoadSpritePalette(&sStartMenuSpriteGraphics.palette);
+}
+
+static const struct OamData sStartMenuAppCursorOamData =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .objMode = ST_OAM_OBJ_NORMAL,
+};
+
+static void SpriteCB_AppCursor(struct Sprite *s)
+{
+    s->x2 = GET_APP_GRID_X(sStartMenuResourcesPtr->cursor.x);
+    s->y2 = GET_APP_GRID_Y(sStartMenuResourcesPtr->cursor.y);
+}
+
+static const struct SpriteTemplate sStartMenuAppCursorSprite =
+{
+    .tileTag = START_TAG_APP_CURSOR,
+    .paletteTag = START_TAG_PALETTE,
+    .oam = &sStartMenuAppCursorOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_AppCursor,
+};
+
+static const struct OamData sStartMenuAppOamData =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .objMode = ST_OAM_OBJ_NORMAL,
+};
+
+static const union AnimCmd *const sStartMenuAppAnims[] =
+{
+    // first row
+    [START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PARTY * 4, 1), ANIMCMD_END },
+    [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BAG * 4, 1), ANIMCMD_END },
+    [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ARRIBA * 4, 1), ANIMCMD_END },
+    [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TODOS * 4, 1), ANIMCMD_END },
+    [START_APP_DEXNAV] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_DEXNAV * 4, 1), ANIMCMD_END },
+    [START_APP_POKEDEX] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_POKEDEX * 4, 1), ANIMCMD_END },
+    [START_APP_BUZZR] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BUZZR * 4, 1), ANIMCMD_END },
+    [START_APP_OPTIONS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_OPTIONS * 4, 1), ANIMCMD_END },
+
+    // second row
+    [START_APP_TRAINER_CARD] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TRAINER_CARD * 4, 1), ANIMCMD_END },
+    [START_APP_PRESTO] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PRESTO * 4, 1), ANIMCMD_END },
+    [START_APP_WAVES_OF_CHANGE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_WAVES_OF_CHANGE * 4, 1), ANIMCMD_END },
+    [START_APP_CUSTOMIZE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_CUSTOMIZE * 4, 1), ANIMCMD_END },
+    [START_APP_SAVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SAVE * 4, 1), ANIMCMD_END },
+    [START_APP_SURPRISE_TRADE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SURPRISE_TRADE * 4, 1), ANIMCMD_END },
+    [START_APP_GOOGLE_GLASS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_GOOGLE_GLASS * 4, 1), ANIMCMD_END },
+    [START_APP_ADVENTURES_GUIDE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ADVENTURES_GUIDE * 4, 1), ANIMCMD_END },
+
+    [NUM_START_APPS] = (const union AnimCmd[]){ ANIMCMD_FRAME(NUM_START_APPS * 4, 1), ANIMCMD_END },
+};
+
+static const struct SpriteTemplate sStartMenuAppSprite =
+{
+    .tileTag = START_TAG_APPS,
+    .paletteTag = START_TAG_PALETTE,
+    .oam = &sStartMenuAppOamData,
+    .anims = sStartMenuAppAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static void SetupStartMenuMainSprites(void)
+{
+    u8 *spriteIds = sStartMenuResourcesPtr->spriteIds;
+    const struct SpriteTemplate *template = &sStartMenuAppCursorSprite;
+    struct Sprite *sprite = NULL;
+
+    spriteIds[START_MAIN_SPRITE_APP_CURSOR] = CreateSprite(template, 27 + 16, 64 + 16, 0);
+    sprite = &gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]];
+    sprite->x2 = GET_APP_GRID_X(sStartMenuResourcesPtr->cursor.x);
+    sprite->y2 = GET_APP_GRID_Y(sStartMenuResourcesPtr->cursor.y);
+
+    template = &sStartMenuAppSprite;
+    for (enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
+         aIcon < START_MAIN_SPRITE_APP_ICONS_END; aIcon++, aBg++)
+    {
+        enum StartMenuApps a = ConvertStartMenuMainSpriteIntoApp(aIcon);
+
+        spriteIds[aIcon] = CreateSprite(template, 35 + 8, 72 + 8, 1);
+        sprite = &gSprites[spriteIds[aIcon]];
+        StartSpriteAnim(sprite, a); // TODO richer interaction
+        sprite->x2 = GET_APP_GRID_X(a & MAX_APP_ROWS);
+        sprite->y2 = GET_APP_GRID_Y((a & (MAX_APP_ROWS + 1)) >> 3);
+
+        spriteIds[aBg] = CreateSprite(template, 35 + 8, 72 + 8, 3);
+        sprite = &gSprites[spriteIds[aBg]];
+        StartSpriteAnim(sprite, NUM_START_APPS);
+        sprite->x2 = GET_APP_GRID_X(a & MAX_APP_ROWS);
+        sprite->y2 = GET_APP_GRID_Y((a & (MAX_APP_ROWS + 1)) >> 3);
+        sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+    }
 }
 
 static void SetupStartMenuMainWindows(void)
@@ -551,7 +757,7 @@ static void SetupStartMenuText(void)
 
 static void PrintStartMenuHelpTopText(u8 **strbuf)
 {
-    u32 x = 0, y = 1;
+    u32 x = 0;
 
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_TOP, PIXEL_FILL(0));
 
@@ -572,10 +778,10 @@ static void PrintStartMenuHelpTopText(u8 **strbuf)
     StringAppend(strbuf[0], strbuf[1]);
 
     x += TILE_TO_PIXELS(2);
-    PrintStartMenuText(START_MAIN_WIN_HELP_TOP, FONT_SMALL, 10, x, y, strbuf[0]);
+    PrintStartMenuText(START_MAIN_WIN_HELP_TOP, FONT_SMALL, TIME_WINDOW_WIDTH, x, Y_CENTER_ALIGN, strbuf[0]);
 
     // MAP ICON
-    x += TILE_TO_PIXELS(10);
+    x += TILE_TO_PIXELS(TIME_WINDOW_WIDTH);
     BlitHelpSymbols(START_HELP_SYMBOL_MAP, x);
 
     // SPACING
@@ -586,7 +792,7 @@ static void PrintStartMenuHelpTopText(u8 **strbuf)
     StringAppend(strbuf[0], strbuf[1]);
 
     x += TILE_TO_PIXELS(1);
-    PrintStartMenuText(START_MAIN_WIN_HELP_TOP, FONT_SMALL, 10, x, y, strbuf[0]);
+    PrintStartMenuText(START_MAIN_WIN_HELP_TOP, FONT_SMALL, 10, x, Y_CENTER_ALIGN, strbuf[0]);
 
     // SIGNAL STRENGTH
     x = (DISPLAY_WIDTH - 24);
@@ -601,7 +807,8 @@ static void PrintStartMenuHelpBottomText(u8 **strbuf)
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
 
     // CONTROLS
-    PrintStartMenuText(START_MAIN_WIN_HELP_BOTTOM, FONT_SMALL, DISPLAY_TILE_WIDTH, 0, 1, sStartMenuModeControls[sStartMenuResourcesPtr->mode]);
+    PrintStartMenuText(START_MAIN_WIN_HELP_BOTTOM, FONT_SMALL, START_MAIN_WIN_HELP_WIDTH, 0, Y_CENTER_ALIGN,
+                       sStartMenuModeControls[sStartMenuResourcesPtr->mode]);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
 }
@@ -611,17 +818,18 @@ static void PrintStartMenuTextboxText(u8 **strbuf)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_TEXTBOX, PIXEL_FILL(0));
 
-    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL, DISPLAY_TILE_WIDTH - 2, 0, 0, sStartMenuModeTextboxes[sStartMenuResourcesPtr->mode]);
+    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0,
+                       sStartMenuModeTextboxes[sStartMenuResourcesPtr->mode]);
 
     CopyWindowToVram(START_MAIN_WIN_TEXTBOX, COPYWIN_FULL);
 }
 
-// TODO: richer interaction w/ move mode and apps in general
+// TODO: richer interaction w/ move mode
 static void PrintStartMenuAppTitleText(u8 **strbuf)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_APP_TITLE, PIXEL_FILL(0));
 
-    PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, DISPLAY_TILE_WIDTH - 8, 0xFF, 0,
+    PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0,
                        sStartMenuModeAppNames[sStartMenuResourcesPtr->cursor.x + (sStartMenuResourcesPtr->cursor.y * 8)]);
 
     CopyWindowToVram(START_MAIN_WIN_APP_TITLE, COPYWIN_FULL);
@@ -632,10 +840,11 @@ static inline void PrintStartMenuText(enum StartMenuMainWindows window, u32 font
     const u8 txtClr[] = {0, 1, 0}; // white
 
     font = GetFontIdToFit(str, font, 0, TILE_TO_PIXELS(desiredWidth));
-    if (x == 0xFF)
+    if (x == X_CENTER_ALIGN)
         x = GetStringCenterAlignXOffset(font, str, TILE_TO_PIXELS(desiredWidth));
 
-    AddTextPrinterParameterized4(window, font, x, y, 0, 0, txtClr, 0, str);
+    AddTextPrinterParameterized4(window, font, x, y, GetFontAttribute(font, FONTATTR_LETTER_SPACING),
+                                 GetFontAttribute(font, FONTATTR_LETTER_SPACING), txtClr, 0, str);
 }
 
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols sym, u16 x)
@@ -665,15 +874,32 @@ static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void)
     return START_HELP_SYMBOL_SIG_3;
 }
 
-static void FreeStartMenuResources(void)
+static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites app)
 {
-    TRY_FREE_AND_SET_NULL(sStartMenuResourcesPtr);
-    FreeAllWindowBuffers();
+    return app - 1;
 }
 
-static bool32 GetCurrentStartMenuMode(void)
+static void FreeStartMenuResources(void)
 {
-    return sStartMenuResourcesPtr->mode;
+    u8 *spriteIds = sStartMenuResourcesPtr->spriteIds;
+    struct Sprite *sprite;
+
+    for (enum StartMenuMainSprites i = 0; i < NUM_START_MAIN_SPRITES; i++)
+    {
+        if (spriteIds[i] == SPRITE_NONE)
+            continue;
+
+        sprite = &gSprites[spriteIds[i]];
+        DestroySprite(sprite);
+    }
+
+    for (enum StartMenuTags tag = START_TAG_APP_CURSOR; tag < NUM_START_TAGS; tag++)
+        FreeSpriteTilesByTag(tag);
+
+    FreeSpritePaletteByTag(START_TAG_PALETTE);
+
+    FreeAllWindowBuffers();
+    TRY_FREE_AND_SET_NULL(sStartMenuResourcesPtr);
 }
 
 void StartMenuCallnative(void)
