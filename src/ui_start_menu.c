@@ -34,6 +34,8 @@
 #include "region_map.h"
 #include "sprite.h"
 #include "pokemon_icon.h"
+#include "quests.h"
+#include "quest_flavor_lookup.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
 #include "constants/items.h"
@@ -193,10 +195,10 @@ static void SetupStartMenuMainSprites(void);
 static void SetupStartMenuMainAppSprites(void);
 static void SetupStartMenuMainWindows(void);
 static void SetupStartMenuText(void);
-static void PrintStartMenuHelpTopText(u8 **);
-static void PrintStartMenuHelpBottomText(u8 **);
-static void PrintStartMenuTextboxText(u8 **);
-static void PrintStartMenuAppTitleText(u8 **);
+static void PrintStartMenuHelpTopText(void);
+static void PrintStartMenuHelpBottomText(void);
+static void PrintStartMenuTextboxText(void);
+static void PrintStartMenuAppTitleText(void);
 static inline void PrintStartMenuText(enum StartMenuMainWindows, u32, u32, u32, u32, u8 const *);
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols, u16);
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void);
@@ -373,7 +375,7 @@ static const u8 *const sStartMenuModeControls[NUM_START_MODES] =
 
 static const u8 *const sStartMenuModeTextboxes[NUM_START_MODES] =
 {
-    [START_MODE_NORMAL] = COMPOUND_STRING("something something\nlorem ipsum\nblah blah"),
+    [START_MODE_NORMAL] = COMPOUND_STRING(" "),
     [START_MODE_MOVE] = COMPOUND_STRING("Move where?"),
     [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = COMPOUND_STRING("Would you like to save?"),
     [START_MODE_SAVE_FORCE] = COMPOUND_STRING("Saving...\nDo not turn off the power."),
@@ -529,16 +531,7 @@ static void Task_StartMenu(u8 taskId)
     }
 
     if (dpadPressed)
-    {
-        u8 *strbuf[2];
-        strbuf[0] = AllocZeroed(STRBUF_SIZE);
-        strbuf[1] = AllocZeroed(STRBUF_SIZE);
-
-        PrintStartMenuAppTitleText(strbuf);
-
-        Free(strbuf[0]);
-        Free(strbuf[1]);
-    }
+        PrintStartMenuAppTitleText();
 }
 
 static void Task_CloseStartMenu(u8 taskId)
@@ -760,23 +753,19 @@ static void SetupStartMenuMainWindows(void)
 
 static void SetupStartMenuText(void)
 {
+    PrintStartMenuHelpTopText();
+    PrintStartMenuHelpBottomText();
+    PrintStartMenuTextboxText();
+    PrintStartMenuAppTitleText();
+}
+
+static void PrintStartMenuHelpTopText(void)
+{
+    u32 x = 0;
     u8 *strbuf[2];
 
     strbuf[0] = AllocZeroed(STRBUF_SIZE);
     strbuf[1] = AllocZeroed(STRBUF_SIZE);
-
-    PrintStartMenuHelpTopText(strbuf);
-    PrintStartMenuHelpBottomText(strbuf);
-    PrintStartMenuTextboxText(strbuf);
-    PrintStartMenuAppTitleText(strbuf);
-
-    Free(strbuf[0]);
-    Free(strbuf[1]);
-}
-
-static void PrintStartMenuHelpTopText(u8 **strbuf)
-{
-    u32 x = 0;
 
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_TOP, PIXEL_FILL(0));
 
@@ -818,10 +807,12 @@ static void PrintStartMenuHelpTopText(u8 **strbuf)
     BlitHelpSymbols(ConvertCurrentSignalIntoHelpSymbol(), x);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_TOP, COPYWIN_FULL);
+    Free(strbuf[0]);
+    Free(strbuf[1]);
 }
 
 // TODO: richer interaction with save overwrite
-static void PrintStartMenuHelpBottomText(u8 **strbuf)
+static void PrintStartMenuHelpBottomText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
 
@@ -832,19 +823,48 @@ static void PrintStartMenuHelpBottomText(u8 **strbuf)
     CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
 }
 
+static u32 GetQuestFlavorForStartMenu(void)
+{
+    u32 i, questFlavor = QUEST_COUNT;
+
+    for (i = questFlavor; i > 0; i--)
+    {
+        if (QuestMenu_GetSetQuestState(i, FLAG_GET_ACTIVE))
+            questFlavor = i;
+    }
+
+    for (i = 0; i < QUEST_COUNT; i++)
+    {
+        if (QuestMenu_GetSetQuestState(i, FLAG_GET_FAVORITE)
+             && QuestMenu_GetSetQuestState(i, FLAG_GET_ACTIVE))
+            questFlavor = i;
+    }
+
+    return questFlavor;
+}
+
 // TODO: richer interaction
-static void PrintStartMenuTextboxText(u8 **strbuf)
+static void PrintStartMenuTextboxText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_TEXTBOX, PIXEL_FILL(0));
 
-    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0,
-                       sStartMenuModeTextboxes[sStartMenuDataPtr->mode]);
+    bool32 storyNotClear = (VarGet(VAR_STORYLINE_STATE) < STORY_CLEAR);
+    u32 questFlavor = GetQuestFlavorForStartMenu();
+
+    if (storyNotClear)
+        StringCopy(gStringVar1, GetQuestDesc_PlayersAdventure());
+    else if (questFlavor != QUEST_NONE)
+        QuestMenu_UpdateQuestDesc(questFlavor);
+    else
+        StringCopy(gStringVar1, sStartMenuModeTextboxes[sStartMenuDataPtr->mode]);
+
+    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
 
     CopyWindowToVram(START_MAIN_WIN_TEXTBOX, COPYWIN_FULL);
 }
 
 // TODO: richer interaction w/ move mode
-static void PrintStartMenuAppTitleText(u8 **strbuf)
+static void PrintStartMenuAppTitleText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_APP_TITLE, PIXEL_FILL(0));
 
