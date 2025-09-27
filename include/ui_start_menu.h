@@ -33,7 +33,7 @@ enum StartMenuApps
     START_APP_GOOGLE_GLASS,
     START_APP_ADVENTURES_GUIDE,
 
-    NUM_START_APPS
+    NUM_START_APPS // also used for the icon's bg sprite
 };
 
 void Task_OpenStartMenu(u8 taskId);

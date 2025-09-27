@@ -33,6 +33,7 @@
 #include "fake_rtc.h"
 #include "region_map.h"
 #include "sprite.h"
+#include "pokemon_icon.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
 #include "constants/items.h"
@@ -62,6 +63,9 @@
 // text window width
 #define TIME_WINDOW_WIDTH      10
 #define MAP_NAME_WINDOW_WIDTH  10
+
+// palette slots
+#define START_PAL_SLOT_TEXT    15
 
 // misc
 #define STRBUF_SIZE         64
@@ -161,7 +165,7 @@ enum StartMenuSetupSteps
     START_SETUP_FINISH
 };
 
-struct StartMenuResources
+struct StartMenuData
 {
     u8 spriteIds[NUM_START_MAIN_SPRITES];
     struct UCoords8 cursor;
@@ -170,7 +174,7 @@ struct StartMenuResources
 };
 
 // RAM data
-static EWRAM_DATA struct StartMenuResources *sStartMenuResourcesPtr = NULL;
+static EWRAM_DATA struct StartMenuData *sStartMenuDataPtr = NULL;
 static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
 
 // declarations
@@ -186,6 +190,7 @@ static void VBlankCB_StartMenu(void);
 static void SetupStartMenuBgs(void);
 static void SetupStartMenuGraphics(void);
 static void SetupStartMenuMainSprites(void);
+static void SetupStartMenuMainAppSprites(void);
 static void SetupStartMenuMainWindows(void);
 static void SetupStartMenuText(void);
 static void PrintStartMenuHelpTopText(u8 **);
@@ -197,7 +202,7 @@ static inline void BlitHelpSymbols(enum StartMenuHelpSymbols, u16);
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void);
 static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void);
 static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites);
-static void FreeStartMenuResources(void);
+static void FreeStartMenuData(void);
 
 // ROM data
 static const struct BgTemplate sStartMenuBgs[NUM_START_BACKGROUNDS] =
@@ -241,7 +246,7 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
         .tilemapTop = 0,
         .width = START_MAIN_WIN_HELP_WIDTH,
         .height = 2,
-        .paletteNum = 15
+        .paletteNum = START_PAL_SLOT_TEXT
     },
     [START_MAIN_WIN_HELP_BOTTOM] =
     {
@@ -249,7 +254,7 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
         .tilemapTop = 18,
         .width = START_MAIN_WIN_HELP_WIDTH,
         .height = 2,
-        .paletteNum = 15
+        .paletteNum = START_PAL_SLOT_TEXT
     },
     [START_MAIN_WIN_TEXTBOX] =
     {
@@ -257,7 +262,7 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
         .tilemapTop = 2,
         .width = START_MAIN_WIN_TEXTBOX_WIDTH,
         .height = 5,
-        .paletteNum = 15
+        .paletteNum = START_PAL_SLOT_TEXT
     },
     [START_MAIN_WIN_APP_TITLE] =
     {
@@ -265,7 +270,7 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
         .tilemapTop = 7,
         .width = START_MAIN_WIN_APP_TITLE_WIDTH,
         .height = 2,
-        .paletteNum = 15
+        .paletteNum = START_PAL_SLOT_TEXT
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -285,7 +290,7 @@ static const struct {
     [START_BG_TEXT] =
     {
         // .tiles is handled by text window
-        .palette = { sStartMenuMainPalette, 15 }
+        .palette = { sStartMenuMainPalette, START_PAL_SLOT_TEXT }
         // .tilemap is handled by text window
     },
     [START_BG_TEXTBOX] =
@@ -485,40 +490,40 @@ static void Task_StartMenu(u8 taskId)
 
     if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
-        if (sStartMenuResourcesPtr->cursor.x)
-            sStartMenuResourcesPtr->cursor.x--;
+        if (sStartMenuDataPtr->cursor.x)
+            sStartMenuDataPtr->cursor.x--;
         else
-            sStartMenuResourcesPtr->cursor.x = MAX_APP_ROWS;
+            sStartMenuDataPtr->cursor.x = MAX_APP_ROWS;
 
         dpadPressed = TRUE;
     }
 
     if (JOY_NEW(DPAD_RIGHT | R_BUTTON))
     {
-        if (sStartMenuResourcesPtr->cursor.x < MAX_APP_ROWS)
-            sStartMenuResourcesPtr->cursor.x++;
+        if (sStartMenuDataPtr->cursor.x < MAX_APP_ROWS)
+            sStartMenuDataPtr->cursor.x++;
         else
-            sStartMenuResourcesPtr->cursor.x = 0;
+            sStartMenuDataPtr->cursor.x = 0;
 
         dpadPressed = TRUE;
     }
 
     if (JOY_NEW(DPAD_UP))
     {
-        if (sStartMenuResourcesPtr->cursor.y)
-            sStartMenuResourcesPtr->cursor.y--;
+        if (sStartMenuDataPtr->cursor.y)
+            sStartMenuDataPtr->cursor.y--;
         else
-            sStartMenuResourcesPtr->cursor.y = MAX_APP_COLUMNS;
+            sStartMenuDataPtr->cursor.y = MAX_APP_COLUMNS;
 
         dpadPressed = TRUE;
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
-        if (sStartMenuResourcesPtr->cursor.y < MAX_APP_COLUMNS)
-            sStartMenuResourcesPtr->cursor.y++;
+        if (sStartMenuDataPtr->cursor.y < MAX_APP_COLUMNS)
+            sStartMenuDataPtr->cursor.y++;
         else
-            sStartMenuResourcesPtr->cursor.y = 0;
+            sStartMenuDataPtr->cursor.y = 0;
 
         dpadPressed = TRUE;
     }
@@ -540,9 +545,9 @@ static void Task_CloseStartMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        sStartMenuLastCursor = sStartMenuResourcesPtr->cursor;
-        SetMainCallback2(sStartMenuResourcesPtr->savedCB);
-        FreeStartMenuResources();
+        sStartMenuLastCursor = sStartMenuDataPtr->cursor;
+        SetMainCallback2(sStartMenuDataPtr->savedCB);
+        FreeStartMenuData();
         DestroyTask(taskId);
     }
 }
@@ -550,8 +555,8 @@ static void Task_CloseStartMenu(u8 taskId)
 // sprite
 static void SpriteCB_AppCursor(struct Sprite *s)
 {
-    s->x2 = GET_APP_GRID_X(sStartMenuResourcesPtr->cursor.x);
-    s->y2 = GET_APP_GRID_Y(sStartMenuResourcesPtr->cursor.y);
+    s->x2 = GET_APP_GRID_X(sStartMenuDataPtr->cursor.x);
+    s->y2 = GET_APP_GRID_Y(sStartMenuDataPtr->cursor.y);
 }
 
 // normal funcs
@@ -561,19 +566,19 @@ void OpenStartMenu(enum StartMenuModes mode)
     if (mode >= START_MODE_SAVE_SCRIPT && mode < NUM_START_MODES)
         cb = CB2_ReturnToFieldContinueScript;
 
-    sStartMenuResourcesPtr = AllocZeroed(sizeof(struct StartMenuResources));
-    if (!sStartMenuResourcesPtr)
+    sStartMenuDataPtr = AllocZeroed(sizeof(struct StartMenuData));
+    if (!sStartMenuDataPtr)
     {
         SetMainCallback2(cb);
         return;
     }
 
     // set anything that needs to be explicitly non-zero here
-    sStartMenuResourcesPtr->cursor = sStartMenuLastCursor;
-    sStartMenuResourcesPtr->mode = mode;
-    sStartMenuResourcesPtr->savedCB = cb;
+    sStartMenuDataPtr->cursor = sStartMenuLastCursor;
+    sStartMenuDataPtr->mode = mode;
+    sStartMenuDataPtr->savedCB = cb;
     for (enum StartMenuMainSprites sprite = 0; sprite < NUM_START_MAIN_SPRITES; sprite++)
-        sStartMenuResourcesPtr->spriteIds[sprite] = SPRITE_NONE;
+        sStartMenuDataPtr->spriteIds[sprite] = SPRITE_NONE;
 
     SetMainCallback2(CB2_StartMenuSetup);
 }
@@ -681,20 +686,30 @@ static void SetupStartMenuGraphics(void)
     LoadPalette(sStartMenuWallpaperPalettes[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR]],
                 BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     FillPalette(RGB_RED, BG_PLTT_ID(0), PLTT_SIZEOF(1));
+
+    // sprites
     LoadSpriteSheets(sStartMenuSpriteGraphics.sheets);
     LoadSpritePalette(&sStartMenuSpriteGraphics.palette);
+
+    // mon icons
+    TryLoadAllMonIconPalettesAtOffset(OBJ_PLTT_ID(2));
 }
 
 static void SetupStartMenuMainSprites(void)
 {
-    u8 *spriteIds = sStartMenuResourcesPtr->spriteIds;
+    SetupStartMenuMainAppSprites();
+}
+
+static void SetupStartMenuMainAppSprites(void)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
     const struct SpriteTemplate *template = &sStartMenuAppCursorSprite;
     struct Sprite *sprite = NULL;
 
     spriteIds[START_MAIN_SPRITE_APP_CURSOR] = CreateSprite(template, 27 + 16, 64 + 16, 0);
     sprite = &gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]];
-    sprite->x2 = GET_APP_GRID_X(sStartMenuResourcesPtr->cursor.x);
-    sprite->y2 = GET_APP_GRID_Y(sStartMenuResourcesPtr->cursor.y);
+    sprite->x2 = GET_APP_GRID_X(sStartMenuDataPtr->cursor.x);
+    sprite->y2 = GET_APP_GRID_Y(sStartMenuDataPtr->cursor.y);
 
     template = &sStartMenuAppSprite;
     for (enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
@@ -812,7 +827,7 @@ static void PrintStartMenuHelpBottomText(u8 **strbuf)
 
     // CONTROLS
     PrintStartMenuText(START_MAIN_WIN_HELP_BOTTOM, FONT_SMALL, START_MAIN_WIN_HELP_WIDTH, 0, Y_CENTER_ALIGN,
-                       sStartMenuModeControls[sStartMenuResourcesPtr->mode]);
+                       sStartMenuModeControls[sStartMenuDataPtr->mode]);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
 }
@@ -823,7 +838,7 @@ static void PrintStartMenuTextboxText(u8 **strbuf)
     FillWindowPixelBuffer(START_MAIN_WIN_TEXTBOX, PIXEL_FILL(0));
 
     PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0,
-                       sStartMenuModeTextboxes[sStartMenuResourcesPtr->mode]);
+                       sStartMenuModeTextboxes[sStartMenuDataPtr->mode]);
 
     CopyWindowToVram(START_MAIN_WIN_TEXTBOX, COPYWIN_FULL);
 }
@@ -834,7 +849,7 @@ static void PrintStartMenuAppTitleText(u8 **strbuf)
     FillWindowPixelBuffer(START_MAIN_WIN_APP_TITLE, PIXEL_FILL(0));
 
     PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0,
-                       sStartMenuModeAppNames[sStartMenuResourcesPtr->cursor.x + (sStartMenuResourcesPtr->cursor.y * 8)]);
+                       sStartMenuModeAppNames[sStartMenuDataPtr->cursor.x + (sStartMenuDataPtr->cursor.y * 8)]);
 
     CopyWindowToVram(START_MAIN_WIN_APP_TITLE, COPYWIN_FULL);
 }
@@ -883,9 +898,9 @@ static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSp
     return app - 1;
 }
 
-static void FreeStartMenuResources(void)
+static void FreeStartMenuData(void)
 {
-    u8 *spriteIds = sStartMenuResourcesPtr->spriteIds;
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
     struct Sprite *sprite;
 
     for (enum StartMenuMainSprites i = 0; i < NUM_START_MAIN_SPRITES; i++)
@@ -897,13 +912,12 @@ static void FreeStartMenuResources(void)
         DestroySprite(sprite);
     }
 
+    FreeSpritePaletteByTag(START_TAG_PALETTE);
     for (enum StartMenuTags tag = START_TAG_APP_CURSOR; tag < NUM_START_TAGS; tag++)
         FreeSpriteTilesByTag(tag);
 
-    FreeSpritePaletteByTag(START_TAG_PALETTE);
-
     FreeAllWindowBuffers();
-    TRY_FREE_AND_SET_NULL(sStartMenuResourcesPtr);
+    TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
 }
 
 void StartMenuCallnative(void)
