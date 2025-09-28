@@ -946,7 +946,7 @@ static void SetupStartMenuMainDaycareMonSprites(void)
 
         LoadMonIconPalette(species);
         spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] =
-            CreateMonIcon(species, SpriteCB_MonIcon, START_DAYCARE_MON_X + 16, 104 + 16, 0,
+            CreateMonIcon(species, SpriteCB_MonIcon, START_DAYCARE_MON_X + 16, 104 + 16, i * 2,
                           GetBoxMonData(mon, MON_DATA_PERSONALITY));
 
         sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i]];
@@ -959,11 +959,10 @@ static void SetupStartMenuMainDaycareMonSprites(void)
             sprite->hFlip = TRUE;
 
         spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i] =
-            CreateSprite(&sStartMenuMonPlatformSprite, START_DAYCARE_MON_X + 16, 129 + 8, 2);
+            CreateSprite(&sStartMenuMonPlatformSprite, START_DAYCARE_MON_X + 16, 129 + 8, 3);
 
         sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i]];
         StartSpriteAnim(sprite, TRUE);
-        sprite->subpriority = 2;
         sprite->x2 = GET_DAYCARE_GRID_X(i);
         // second mon has v and h flipped platform
         if (i)
@@ -993,7 +992,7 @@ static void SetupStartMenuMainDaycareMonSprites(void)
 
         LoadMonIconPalette(species);
         spriteIds[START_MAIN_SPRITE_EGG] =
-            CreateMonIconNoPersonality(species, SpriteCB_MonIcon, 191 + 16, 109 + 16, 0);
+            CreateMonIconNoPersonality(species, SpriteCB_MonIcon, 191 + 16, 109 + 16, 1);
         sprite = &gSprites[spriteIds[START_MAIN_SPRITE_EGG]];
         sprite->oam.priority = 1;
     }
@@ -1182,7 +1181,7 @@ static void PrintStartMenuEggInfo(void)
             }
 
             if (gender != MON_GENDERLESS)
-                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_M + gender, i * 24, (i * 4) + 2);
+                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_M + gender, i * 24, (i * 4) + 4);
         }
 
         if (totalEggs)
