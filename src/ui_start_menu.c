@@ -1101,7 +1101,8 @@ static u32 GetQuestFlavorForStartMenu(void)
 {
     u32 i, questFlavor = QUEST_COUNT;
 
-    for (i = questFlavor; --i > 0;)
+    // baffled this is the only way this loop works
+    for (i = questFlavor - 1; i-- > 0;)
     {
         if (QuestMenu_GetSetQuestState(i, FLAG_GET_ACTIVE))
             questFlavor = i;
@@ -1132,7 +1133,7 @@ static void PrintStartMenuTextboxText(void)
     else
         StringCopy(gStringVar1, sStartMenuModeTextboxes[sStartMenuDataPtr->mode]);
 
-    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
+    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL_NARROW, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
 
     CopyWindowToVram(START_MAIN_WIN_TEXTBOX, COPYWIN_FULL);
 }
