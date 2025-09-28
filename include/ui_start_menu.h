@@ -36,7 +36,7 @@ enum StartMenuApps
     NUM_START_APPS // also used for the icon's bg sprite
 };
 
-void Task_OpenStartMenu(u8 taskId);
 void OpenStartMenu(enum StartMenuModes mode);
+bool32 OpenNormalUIStartMenu(void);
 
 #endif // GUARD_UI_START_MENU_H

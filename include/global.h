@@ -20,6 +20,7 @@
 #include "constants/trainer_hill.h"
 // Start siliconMerge
 #include "constants/buzzr.h"
+#include "ui_start_menu.h"
 #include "ui_old_start_menu.h"
 #include "ui_options_menu.h"
 // End siliconMerge

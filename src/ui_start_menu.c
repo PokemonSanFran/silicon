@@ -39,6 +39,9 @@
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
 #include "siliconDaycare.h"
+#include "event_object_movement.h"
+#include "field_control_avatar.h"
+#include "field_player_avatar.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
 #include "ui_main_menu.h"
@@ -611,7 +614,7 @@ static const struct SpriteTemplate sStartMenuDaycareItemSprite =
 // code
 
 // tasks
-void Task_OpenStartMenu(u8 taskId)
+void Task_OpenUIStartMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -695,6 +698,29 @@ static void SpriteCB_AppCursor(struct Sprite *s)
 }
 
 // normal funcs
+bool32 OpenNormalUIStartMenu(void)
+{
+    if (gPlayerAvatar.preventStep)
+        return FALSE;
+
+    if (ArePlayerFieldControlsLocked())
+        return FALSE;
+
+    if (!IsOverworldLinkActive())
+    {
+        FreezeObjectEvents();
+        PlayerFreeze();
+        StopPlayerAvatar();
+    }
+
+    PlaySE(SE_WIN_OPEN);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_OpenUIStartMenu, 0);
+    LockPlayerFieldControls();
+
+    return TRUE;
+}
+
 void OpenStartMenu(enum StartMenuModes mode)
 {
     MainCallback cb = CB2_ReturnToField;
@@ -728,6 +754,8 @@ static void CB2_StartMenuSetup(void)
         FillPalette(RGB_BLACK, BG_PLTT_ID(0), PLTT_SIZEOF(512));
         ResetVramOamAndBgCntRegs();
         ResetAllBgsCoordinatesAndBgCntRegs();
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         ScanlineEffect_Stop();
@@ -1362,5 +1390,5 @@ static void FreeStartMenuData(void)
 void StartMenuCallnative(void)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_OpenStartMenu, 0);
+    CreateTask(Task_OpenUIStartMenu, 0);
 }
