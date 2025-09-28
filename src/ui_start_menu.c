@@ -635,7 +635,7 @@ static void Task_StartMenu(u8 taskId)
 
     bool32 dpadPressed = FALSE;
 
-    if (JOY_NEW(DPAD_LEFT | L_BUTTON))
+    if (JOY_NEW(DPAD_LEFT | L_BUTTON) || JOY_REPEAT(DPAD_LEFT | L_BUTTON))
     {
         if (sStartMenuDataPtr->cursor.x)
             sStartMenuDataPtr->cursor.x--;
@@ -645,7 +645,7 @@ static void Task_StartMenu(u8 taskId)
         dpadPressed = TRUE;
     }
 
-    if (JOY_NEW(DPAD_RIGHT | R_BUTTON))
+    if (JOY_NEW(DPAD_RIGHT | R_BUTTON) || JOY_REPEAT(DPAD_RIGHT | R_BUTTON))
     {
         if (sStartMenuDataPtr->cursor.x < MAX_APP_ROWS)
             sStartMenuDataPtr->cursor.x++;
@@ -655,7 +655,7 @@ static void Task_StartMenu(u8 taskId)
         dpadPressed = TRUE;
     }
 
-    if (JOY_NEW(DPAD_UP))
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
     {
         if (sStartMenuDataPtr->cursor.y)
             sStartMenuDataPtr->cursor.y--;
@@ -665,7 +665,7 @@ static void Task_StartMenu(u8 taskId)
         dpadPressed = TRUE;
     }
 
-    if (JOY_NEW(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
     {
         if (sStartMenuDataPtr->cursor.y < MAX_APP_COLUMNS)
             sStartMenuDataPtr->cursor.y++;
