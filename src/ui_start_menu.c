@@ -34,10 +34,12 @@
 #include "region_map.h"
 #include "sprite.h"
 #include "pokemon_icon.h"
+#include "util.h"
 #include "quests.h"
 #include "quest_flavor_lookup.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
+#include "ui_main_menu.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
 #include "constants/songs.h"
@@ -56,11 +58,15 @@
 #define GET_APP_GRID_X(row) (22 * (row))
 #define GET_APP_GRID_Y(col) (19 * (col))
 
+#define GET_MON_GRID_X(i) ((i) * 28)
+#define GET_MON_GRID_Y(i) ((i & 1) * 4)
+
+#define START_APP_BACKGROUNDS NUM_START_APPS
+
 // sprite tiles size
 #define START_MAIN_SPRITE_APP_CURSOR_SIZE    (16)
 #define START_MAIN_SPRITE_APPS_SIZE          (4 + 64) // both icons and bg
 #define START_MAIN_SPRITE_MON_PLATFORMS_SIZE (8)
-#define START_MAIN_SPRITE_STATUS_HPBARS_SIZE (6 + 15)
 
 // text window width
 #define TIME_WINDOW_WIDTH      10
@@ -99,7 +105,7 @@ enum StartMenuMainWindows
 
 enum StartMenuMainSprites
 {
-    START_MAIN_SPRITE_APP_CURSOR,
+    START_MAIN_SPRITE_APP_CURSOR = 0,
 
     START_MAIN_SPRITE_APP_ICONS,
     START_MAIN_SPRITE_APP_ICONS_END = START_MAIN_SPRITE_APP_ICONS + NUM_START_APPS,
@@ -110,10 +116,10 @@ enum StartMenuMainSprites
     START_MAIN_SPRITE_MON_PLATFORMS = START_MAIN_SPRITE_APP_BGS_END,
     START_MAIN_SPRITE_MON_PLATFORMS_END = START_MAIN_SPRITE_MON_PLATFORMS + NUM_START_MONS_TOTAL,
 
-    START_MAIN_SPRITE_STATUS_HPBARS = START_MAIN_SPRITE_MON_PLATFORMS_END,
-    START_MAIN_SPRITE_STATUS_HPBARS_END = START_MAIN_SPRITE_STATUS_HPBARS + PARTY_SIZE,
+    START_MAIN_SPRITE_MON_STATUS = START_MAIN_SPRITE_MON_PLATFORMS_END,
+    START_MAIN_SPRITE_MON_STATUS_END = START_MAIN_SPRITE_MON_STATUS + PARTY_SIZE,
 
-    START_MAIN_SPRITE_MON_ICONS = START_MAIN_SPRITE_STATUS_HPBARS_END,
+    START_MAIN_SPRITE_MON_ICONS = START_MAIN_SPRITE_MON_STATUS_END,
     START_MAIN_SPRITE_MON_ICONS_END = START_MAIN_SPRITE_MON_ICONS + NUM_START_MONS_TOTAL,
 
     START_MAIN_SPRITE_DAYCARE_ITEMS = START_MAIN_SPRITE_MON_ICONS_END, // affine
@@ -127,7 +133,6 @@ enum StartMenuTags
     START_TAG_APP_CURSOR = 0x6969,
     START_TAG_APPS,
     START_TAG_MON_PLATFORMS,
-    START_TAG_STATUS_HPBARS,
     START_TAG_PALETTE, // every UI elements so far only uses this palette
     NUM_START_TAGS
 };
@@ -141,18 +146,58 @@ enum StartMenuFontColors
 enum StartMenuHelpSymbols
 {
     // Time Of Day
-    START_HELP_SYMBOL_TOD_M,    // Morning
-    START_HELP_SYMBOL_TOD_D,    // Day
-    START_HELP_SYMBOL_TOD_E,    // Evening
-    START_HELP_SYMBOL_TOD_N,    // Night
+    START_HELP_SYMBOL_TOD_M = 0, // Morning
+    START_HELP_SYMBOL_TOD_D,     // Day
+    START_HELP_SYMBOL_TOD_E,     // Evening
+    START_HELP_SYMBOL_TOD_N,     // Night
+
     START_HELP_SYMBOL_MAP,
+
     // Internet Signal
     START_HELP_SYMBOL_SIG_3,
     START_HELP_SYMBOL_SIG_2,
     START_HELP_SYMBOL_SIG_1,
     START_HELP_SYMBOL_SIG_0A,
-    START_HELP_SYMBOL_SIG_0B,   // animation for no signal modal
+    START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
+
     NUM_START_HELP_SYMBOLS
+};
+
+enum StartMenuMonStatuses
+{
+    START_MON_STATUS_NONE = 0,
+    START_MON_STATUS_SLEEP,
+    START_MON_STATUS_POISON,
+    START_MON_STATUS_BURN,
+    START_MON_STATUS_FREEZE,
+    START_MON_STATUS_PARALYSIS,
+
+    NUM_START_MON_STATUS,
+
+    START_MON_STATUS_FROSTBITE = START_MON_STATUS_FREEZE,
+    START_MON_STATUS_FAINTED = NUM_START_MON_STATUS
+};
+
+enum StartMenuHpBarPercentage
+{
+    START_HP_BAR_PERCENTAGE_0 = 0,
+
+    // red
+    START_HP_BAR_PERCENTAGE_1,
+    START_HP_BAR_PERCENTAGE_2,
+
+    // yellow
+    START_HP_BAR_PERCENTAGE_3,
+    START_HP_BAR_PERCENTAGE_4,
+
+    // green
+    START_HP_BAR_PERCENTAGE_5,
+    START_HP_BAR_PERCENTAGE_6,
+    START_HP_BAR_PERCENTAGE_7,
+    START_HP_BAR_PERCENTAGE_8,
+    START_HP_BAR_PERCENTAGE_9,
+
+    NUM_START_HP_BAR_PERCENTAGES
 };
 
 enum StartMenuSetupSteps
@@ -182,17 +227,15 @@ static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
 // declarations
 static void Task_StartMenu(u8);
 static void Task_CloseStartMenu(u8);
-
 static void SpriteCB_AppCursor(struct Sprite *);
-
 static void CB2_StartMenuSetup(void);
 static void CB2_StartMenu(void);
 static void VBlankCB_StartMenu(void);
-
 static void SetupStartMenuBgs(void);
 static void SetupStartMenuGraphics(void);
 static void SetupStartMenuMainSprites(void);
 static void SetupStartMenuMainAppSprites(void);
+static void SetupStartMenuMainPartyMonSprites(void);
 static void SetupStartMenuMainWindows(void);
 static void SetupStartMenuText(void);
 static void PrintStartMenuHelpTopText(void);
@@ -203,6 +246,11 @@ static inline void PrintStartMenuText(enum StartMenuMainWindows, u32, u32, u32, 
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols, u16);
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void);
 static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void);
+static inline void InjectMonStatusGraphics(struct Sprite *, u32, u32);
+static inline enum StartMenuMonStatuses ConvertRawStatusIntoMonStatus(u32);
+static inline u32 ConvertPercentageIntoHpBarFrame(u32);
+static inline void *GetSpriteCallbackForIcon(u32, bool32);
+static inline u32 GetMonHealthPercentage(struct Pokemon *);
 static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites);
 static void FreeStartMenuData(void);
 
@@ -326,6 +374,9 @@ static const u16 *const sStartMenuWallpaperPalettes[VISUAL_OPTION_COLOR_COUNT] =
 // blit graphics
 static const u8 sStartMenuHelpSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/help_symbols.4bpp");
 static const u8 sStartMenuDaycareSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/daycare_symbols.4bpp");
+static const u8 sStartMenuMonStatusSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/mon_status.4bpp");
+static const u8 sStartMenuHpBarSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/hp_bar.4bpp");
+
 
 static const struct {
     const struct SpriteSheet sheets[NUM_START_TAGS];
@@ -333,10 +384,6 @@ static const struct {
 } sStartMenuSpriteGraphics =
 {
     {
-        {
-            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/mon_status.4bpp", "graphics/ui_menus/start_menu/hp_bars.4bpp"),
-            TILE_OFFSET_4BPP(START_MAIN_SPRITE_STATUS_HPBARS_SIZE), START_TAG_STATUS_HPBARS
-        },
         {
             (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/app_cursor.4bpp"),
             TILE_OFFSET_4BPP(START_MAIN_SPRITE_APP_CURSOR_SIZE), START_TAG_APP_CURSOR
@@ -409,7 +456,6 @@ static const struct OamData sStartMenuAppCursorOamData =
 {
     .shape = SPRITE_SHAPE(32x32),
     .size = SPRITE_SIZE(32x32),
-    .objMode = ST_OAM_OBJ_NORMAL,
 };
 
 static const struct SpriteTemplate sStartMenuAppCursorSprite =
@@ -427,32 +473,6 @@ static const struct OamData sStartMenuAppOamData =
 {
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
-    .objMode = ST_OAM_OBJ_NORMAL,
-};
-
-static const union AnimCmd *const sStartMenuAppAnims[] =
-{
-    // first row
-    [START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PARTY * 4, 1), ANIMCMD_END },
-    [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BAG * 4, 1), ANIMCMD_END },
-    [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ARRIBA * 4, 1), ANIMCMD_END },
-    [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TODOS * 4, 1), ANIMCMD_END },
-    [START_APP_DEXNAV] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_DEXNAV * 4, 1), ANIMCMD_END },
-    [START_APP_POKEDEX] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_POKEDEX * 4, 1), ANIMCMD_END },
-    [START_APP_BUZZR] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BUZZR * 4, 1), ANIMCMD_END },
-    [START_APP_OPTIONS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_OPTIONS * 4, 1), ANIMCMD_END },
-
-    // second row
-    [START_APP_TRAINER_CARD] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TRAINER_CARD * 4, 1), ANIMCMD_END },
-    [START_APP_PRESTO] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PRESTO * 4, 1), ANIMCMD_END },
-    [START_APP_WAVES_OF_CHANGE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_WAVES_OF_CHANGE * 4, 1), ANIMCMD_END },
-    [START_APP_CUSTOMIZE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_CUSTOMIZE * 4, 1), ANIMCMD_END },
-    [START_APP_SAVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SAVE * 4, 1), ANIMCMD_END },
-    [START_APP_SURPRISE_TRADE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SURPRISE_TRADE * 4, 1), ANIMCMD_END },
-    [START_APP_GOOGLE_GLASS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_GOOGLE_GLASS * 4, 1), ANIMCMD_END },
-    [START_APP_ADVENTURES_GUIDE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ADVENTURES_GUIDE * 4, 1), ANIMCMD_END },
-
-    [NUM_START_APPS] = (const union AnimCmd[]){ ANIMCMD_FRAME(NUM_START_APPS * 4, 1), ANIMCMD_END },
 };
 
 static const struct SpriteTemplate sStartMenuAppSprite =
@@ -460,8 +480,70 @@ static const struct SpriteTemplate sStartMenuAppSprite =
     .tileTag = START_TAG_APPS,
     .paletteTag = START_TAG_PALETTE,
     .oam = &sStartMenuAppOamData,
-    .anims = sStartMenuAppAnims,
+    .anims = (const union AnimCmd *const[]){
+        // first row
+        [START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PARTY * 4, 1), ANIMCMD_END },
+        [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BAG * 4, 1), ANIMCMD_END },
+        [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ARRIBA * 4, 1), ANIMCMD_END },
+        [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TODOS * 4, 1), ANIMCMD_END },
+        [START_APP_DEXNAV] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_DEXNAV * 4, 1), ANIMCMD_END },
+        [START_APP_POKEDEX] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_POKEDEX * 4, 1), ANIMCMD_END },
+        [START_APP_BUZZR] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BUZZR * 4, 1), ANIMCMD_END },
+        [START_APP_OPTIONS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_OPTIONS * 4, 1), ANIMCMD_END },
+
+        // second row
+        [START_APP_TRAINER_CARD] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TRAINER_CARD * 4, 1), ANIMCMD_END },
+        [START_APP_PRESTO] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PRESTO * 4, 1), ANIMCMD_END },
+        [START_APP_WAVES_OF_CHANGE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_WAVES_OF_CHANGE * 4, 1), ANIMCMD_END },
+        [START_APP_CUSTOMIZE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_CUSTOMIZE * 4, 1), ANIMCMD_END },
+        [START_APP_SAVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SAVE * 4, 1), ANIMCMD_END },
+        [START_APP_SURPRISE_TRADE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SURPRISE_TRADE * 4, 1), ANIMCMD_END },
+        [START_APP_GOOGLE_GLASS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_GOOGLE_GLASS * 4, 1), ANIMCMD_END },
+        [START_APP_ADVENTURES_GUIDE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ADVENTURES_GUIDE * 4, 1), ANIMCMD_END },
+
+        // app bg
+        [START_APP_BACKGROUNDS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BACKGROUNDS * 4, 1), ANIMCMD_END },
+    },
     .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sStartMenuMonPlatformOamData =
+{
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
+    .objMode = ST_OAM_OBJ_BLEND,
+    .priority = 1
+};
+
+static const struct SpriteTemplate sStartMenuMonPlatformSprite =
+{
+    .tileTag = START_TAG_MON_PLATFORMS,
+    .paletteTag = START_TAG_PALETTE,
+    .oam = &sStartMenuMonPlatformOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sStartMenuMonStatusOamData =
+{
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
+};
+
+static const u8 sBlankGfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
+static const struct SpriteFrameImage sStartMenuDummyFrames[] = { obj_frame_tiles(sBlankGfx) };
+
+static const struct SpriteTemplate sStartMenuMonStatusSprite =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = START_TAG_PALETTE,
+    .oam = &sStartMenuMonStatusOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = sStartMenuDummyFrames, // trust the process
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
@@ -683,14 +765,12 @@ static void SetupStartMenuGraphics(void)
     // sprites
     LoadSpriteSheets(sStartMenuSpriteGraphics.sheets);
     LoadSpritePalette(&sStartMenuSpriteGraphics.palette);
-
-    // mon icons
-    TryLoadAllMonIconPalettesAtOffset(OBJ_PLTT_ID(2));
 }
 
 static void SetupStartMenuMainSprites(void)
 {
     SetupStartMenuMainAppSprites();
+    SetupStartMenuMainPartyMonSprites();
 }
 
 static void SetupStartMenuMainAppSprites(void)
@@ -718,10 +798,56 @@ static void SetupStartMenuMainAppSprites(void)
 
         spriteIds[aBg] = CreateSprite(template, 35 + 8, 72 + 8, 3);
         sprite = &gSprites[spriteIds[aBg]];
-        StartSpriteAnim(sprite, NUM_START_APPS);
+        StartSpriteAnim(sprite, START_APP_BACKGROUNDS);
         sprite->x2 = GET_APP_GRID_X(a & MAX_APP_ROWS);
         sprite->y2 = GET_APP_GRID_Y((a & (MAX_APP_ROWS + 1)) >> 3);
         sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+    }
+}
+
+static void SetupStartMenuMainPartyMonSprites(void)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+    struct Pokemon *mon = gPlayerParty;
+    struct Sprite *sprite = NULL;
+    u32 species, healthPercentage, status;
+    bool32 isEgg;
+
+    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    {
+        species = GetMonData(&mon[i], MON_DATA_SPECIES_OR_EGG), healthPercentage = GetMonHealthPercentage(&mon[i]);
+        isEgg = (species == SPECIES_EGG);
+        species = ReturnTransformationIfConditionMet(&mon[i]);
+        status = GetMonData(&mon[i], MON_DATA_STATUS);
+
+        LoadMonIconPalette(species);
+        spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
+            CreateMonIcon(species, GetSpriteCallbackForIcon(healthPercentage, isEgg),
+                          1 + 16, 104 + 16, 0, GetMonData(&mon[i], MON_DATA_PERSONALITY));
+
+        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]];
+        sprite->subpriority = 3;
+        sprite->oam.priority = 0;
+        sprite->x2 = GET_MON_GRID_X(i);
+        sprite->y2 = GET_MON_GRID_Y(i);
+
+        spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + i] =
+            CreateSprite(&sStartMenuMonPlatformSprite, 1 + 16, 128 + 8, 2);
+
+        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + i]];
+        sprite->x2 = GET_MON_GRID_X(i);
+        sprite->y2 = GET_MON_GRID_Y(i);
+
+        if (isEgg)
+            continue;
+
+        spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
+            CreateSprite(&sStartMenuMonStatusSprite, ((status & STATUS1_ANY) ? 4 : 0) + 16, 130 + 4, 0);
+
+        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_STATUS + i]];
+        InjectMonStatusGraphics(sprite, status, healthPercentage);
+        sprite->x2 = GET_MON_GRID_X(i);
+        sprite->y2 = GET_MON_GRID_Y(i);
     }
 }
 
@@ -827,7 +953,7 @@ static u32 GetQuestFlavorForStartMenu(void)
 {
     u32 i, questFlavor = QUEST_COUNT;
 
-    for (i = questFlavor; i > 0; i--)
+    for (i = questFlavor; --i > 0;)
     {
         if (QuestMenu_GetSetQuestState(i, FLAG_GET_ACTIVE))
             questFlavor = i;
@@ -918,6 +1044,78 @@ static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSp
     return app - 1;
 }
 
+static inline u32 GetMonHealthPercentage(struct Pokemon *mon)
+{
+    if (!GetMonData(mon, MON_DATA_IS_EGG))
+        return ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon, MON_DATA_MAX_HP)));
+    else
+        return ((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].eggCycles));
+}
+
+static inline void *GetSpriteCallbackForIcon(u32 healthPercentage, bool32 isEgg)
+{
+    if (((healthPercentage > 20) && isEgg) || !healthPercentage)
+        return SpriteCallbackDummy;
+
+    return SpriteCB_MonIcon;
+}
+
+static inline u32 ConvertPercentageIntoHpBarFrame(u32 healthPercentage)
+{
+    // - 1 is required, otherwise we'll get NUM_START_HP_BAR_PERCENTAGES at full hp
+    enum StartMenuHpBarPercentage barHealthPercentage = (healthPercentage / 10) - 1;
+    u32 realFrame = barHealthPercentage * 8;
+
+    if (!healthPercentage)
+        realFrame = START_HP_BAR_PERCENTAGE_0 * 8;
+
+    if (!barHealthPercentage)
+        realFrame = START_HP_BAR_PERCENTAGE_1 * 8;
+
+    return realFrame;
+}
+
+static inline enum StartMenuMonStatuses ConvertRawStatusIntoMonStatus(u32 status)
+{
+    switch (status)
+    {
+    case STATUS1_NONE:
+        return START_MON_STATUS_NONE;
+    case STATUS1_SLEEP:
+        return START_MON_STATUS_SLEEP;
+    case STATUS1_POISON:
+        return START_MON_STATUS_POISON;
+    case STATUS1_BURN:
+        return START_MON_STATUS_BURN;
+    case STATUS1_FREEZE:
+    case STATUS1_FROSTBITE:
+        return START_MON_STATUS_FREEZE;
+    case STATUS1_PARALYSIS:
+        return START_MON_STATUS_PARALYSIS;
+    default:
+        return START_MON_STATUS_FAINTED;
+    }
+}
+
+static inline void InjectMonStatusGraphics(struct Sprite *sprite, u32 status, u32 healthPercentage)
+{
+    struct WindowTemplate template = { .width = 4, .height = 2, .paletteNum = START_PAL_SLOT_TEXT };
+    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum), window = AddWindow(&template);
+
+    if (!healthPercentage)
+        status = START_MON_STATUS_FAINTED;
+
+    BlitBitmapRectToWindow(window, sStartMenuMonStatusSymbols, ConvertRawStatusIntoMonStatus(status) * 8, 0,
+                           56, 8, 1, 0, 8, 8);
+    BlitBitmapRectToWindow(window, sStartMenuHpBarSymbols, 0, ConvertPercentageIntoHpBarFrame(healthPercentage),
+                           16, 80, 9, 0, 16, 8);
+
+    u8 *tileData = (u8 *)GetWindowAttribute(window, WINDOW_TILE_DATA);
+    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
+
+    RemoveWindow(window);
+}
+
 static void FreeStartMenuData(void)
 {
     u8 *spriteIds = sStartMenuDataPtr->spriteIds;
@@ -929,9 +1127,13 @@ static void FreeStartMenuData(void)
             continue;
 
         sprite = &gSprites[spriteIds[i]];
-        DestroySprite(sprite);
+        if (i >= START_MAIN_SPRITE_MON_ICONS && i < START_MAIN_SPRITE_MON_ICONS_END)
+            FreeAndDestroyMonIconSprite(sprite);
+        else
+            DestroySprite(sprite);
     }
 
+    FreeMonIconPalettes();
     FreeSpritePaletteByTag(START_TAG_PALETTE);
     for (enum StartMenuTags tag = START_TAG_APP_CURSOR; tag < NUM_START_TAGS; tag++)
         FreeSpriteTilesByTag(tag);
