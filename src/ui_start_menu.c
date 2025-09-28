@@ -37,6 +37,8 @@
 #include "util.h"
 #include "quests.h"
 #include "quest_flavor_lookup.h"
+#include "daycare.h"
+#include "siliconDaycare.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
 #include "ui_main_menu.h"
@@ -66,7 +68,7 @@
 // sprite tiles size
 #define START_MAIN_SPRITE_APP_CURSOR_SIZE    (16)
 #define START_MAIN_SPRITE_APPS_SIZE          (4 + 64) // both icons and bg
-#define START_MAIN_SPRITE_MON_PLATFORMS_SIZE (8)
+#define START_MAIN_SPRITE_MON_PLATFORMS_SIZE (16)
 
 // text window width
 #define TIME_WINDOW_WIDTH      10
@@ -96,12 +98,14 @@ enum StartMenuMainWindows
     START_MAIN_WIN_HELP_BOTTOM,  // Controls
     START_MAIN_WIN_TEXTBOX,      // Quest Flavor, Save Confirmation
     START_MAIN_WIN_APP_TITLE,
+    START_MAIN_WIN_EGG_INFO,
     NUM_START_MAIN_WINDOWS
 };
 
 #define START_MAIN_WIN_HELP_WIDTH      (DISPLAY_TILE_WIDTH)
 #define START_MAIN_WIN_TEXTBOX_WIDTH   (DISPLAY_TILE_WIDTH - 2)
 #define START_MAIN_WIN_APP_TITLE_WIDTH (DISPLAY_TILE_WIDTH - 8)
+#define START_MAIN_WIN_EGG_INFO_WIDTH  (4)
 
 enum StartMenuMainSprites
 {
@@ -125,7 +129,9 @@ enum StartMenuMainSprites
     START_MAIN_SPRITE_DAYCARE_ITEMS = START_MAIN_SPRITE_MON_ICONS_END, // affine
     START_MAIN_SPRITE_DAYCARE_ITEMS_END = START_MAIN_SPRITE_DAYCARE_ITEMS + DAYCARE_MON_COUNT,
 
-    NUM_START_MAIN_SPRITES = START_MAIN_SPRITE_DAYCARE_ITEMS_END
+    START_MAIN_SPRITE_EGG = START_MAIN_SPRITE_DAYCARE_ITEMS_END,
+
+    NUM_START_MAIN_SPRITES
 };
 
 enum StartMenuTags
@@ -134,7 +140,10 @@ enum StartMenuTags
     START_TAG_APPS,
     START_TAG_MON_PLATFORMS,
     START_TAG_PALETTE, // every UI elements so far only uses this palette
-    NUM_START_TAGS
+    NUM_START_TAGS,
+
+    // disconnected tags
+    START_TAG_ITEM
 };
 
 enum StartMenuFontColors
@@ -161,6 +170,24 @@ enum StartMenuHelpSymbols
     START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
 
     NUM_START_HELP_SYMBOLS
+};
+
+enum StartMenuEggInfoSymbols
+{
+    START_EGG_INFO_SYMBOL_x = 0,
+    START_EGG_INFO_SYMBOL_0,
+    START_EGG_INFO_SYMBOL_1,
+    START_EGG_INFO_SYMBOL_2,
+    START_EGG_INFO_SYMBOL_3,
+    START_EGG_INFO_SYMBOL_4,
+    START_EGG_INFO_SYMBOL_5,
+    START_EGG_INFO_SYMBOL_6,
+    START_EGG_INFO_SYMBOL_7,
+    START_EGG_INFO_SYMBOL_8,
+    START_EGG_INFO_SYMBOL_9,
+    START_EGG_INFO_SYMBOL_M,
+    START_EGG_INFO_SYMBOL_F,
+    NUM_START_EGG_INFO_SYMBOLS
 };
 
 enum StartMenuMonStatuses
@@ -236,14 +263,17 @@ static void SetupStartMenuGraphics(void);
 static void SetupStartMenuMainSprites(void);
 static void SetupStartMenuMainAppSprites(void);
 static void SetupStartMenuMainPartyMonSprites(void);
+static void SetupStartMenuMainDaycareMonSprites(void);
 static void SetupStartMenuMainWindows(void);
 static void SetupStartMenuText(void);
 static void PrintStartMenuHelpTopText(void);
 static void PrintStartMenuHelpBottomText(void);
 static void PrintStartMenuTextboxText(void);
 static void PrintStartMenuAppTitleText(void);
+static void PrintStartMenuEggInfo(void);
 static inline void PrintStartMenuText(enum StartMenuMainWindows, u32, u32, u32, u32, u8 const *);
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols, u16);
+static inline void BlitEggInfoSymbols(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void);
 static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void);
 static inline void InjectMonStatusGraphics(struct Sprite *, u32, u32);
@@ -319,6 +349,14 @@ static const struct WindowTemplate sStartMenuMainWindows[] =
         .tilemapLeft = 4,
         .tilemapTop = 7,
         .width = START_MAIN_WIN_APP_TITLE_WIDTH,
+        .height = 2,
+        .paletteNum = START_PAL_SLOT_TEXT
+    },
+    [START_MAIN_WIN_EGG_INFO] =
+    {
+        .tilemapLeft = 24,
+        .tilemapTop = 16,
+        .width = START_MAIN_WIN_EGG_INFO_WIDTH,
         .height = 2,
         .paletteNum = START_PAL_SLOT_TEXT
     },
@@ -522,7 +560,10 @@ static const struct SpriteTemplate sStartMenuMonPlatformSprite =
     .tileTag = START_TAG_MON_PLATFORMS,
     .paletteTag = START_TAG_PALETTE,
     .oam = &sStartMenuMonPlatformOamData,
-    .anims = gDummySpriteAnimTable,
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END }, // default
+        (const union AnimCmd[]){ ANIMCMD_FRAME(8, 1), ANIMCMD_END }, // daycare
+    },
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -546,6 +587,25 @@ static const struct SpriteTemplate sStartMenuMonStatusSprite =
     .images = sStartMenuDummyFrames, // trust the process
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sStartMenuDaycareItemOamData =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .affineMode = ST_OAM_AFFINE_NORMAL
+};
+
+static const struct SpriteTemplate sStartMenuDaycareItemSprite =
+{
+    // .tileTag and .paletteTag set seperately
+    .oam = &sStartMenuDaycareItemOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = (const union AffineAnimCmd *const[]){
+        [0] = (const union AffineAnimCmd[]){ AFFINEANIMCMD_FRAME(-96, -96, 0, 1), AFFINEANIMCMD_END },
+    },
+    .callback = SpriteCallbackDummy
 };
 
 // code
@@ -771,6 +831,7 @@ static void SetupStartMenuMainSprites(void)
 {
     SetupStartMenuMainAppSprites();
     SetupStartMenuMainPartyMonSprites();
+    SetupStartMenuMainDaycareMonSprites();
 }
 
 static void SetupStartMenuMainAppSprites(void)
@@ -813,6 +874,9 @@ static void SetupStartMenuMainPartyMonSprites(void)
     u32 species, healthPercentage, status;
     bool32 isEgg;
 
+    if (!gPlayerPartyCount)
+        return;
+
     for (u32 i = 0; i < gPlayerPartyCount; i++)
     {
         species = GetMonData(&mon[i], MON_DATA_SPECIES_OR_EGG), healthPercentage = GetMonHealthPercentage(&mon[i]);
@@ -851,6 +915,89 @@ static void SetupStartMenuMainPartyMonSprites(void)
     }
 }
 
+static void SetupStartMenuMainDaycareMonSprites(void)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
+    struct BoxPokemon *mon = NULL;
+    struct Sprite *sprite = NULL;
+    u32 i, species, item, totalEggs, totalMons = CountPokemonInDaycare(daycare);
+
+    if (!totalMons)
+        return;
+
+    for (i = 0, totalEggs = 0; i < SILICON_DAYCARE_EGG_MAX; i++)
+    {
+        if (GetBoxMonData(&daycare->daycareEgg[i].egg, MON_DATA_IS_EGG))
+            totalEggs++;
+    }
+
+    AllocItemIconTemporaryBuffers();
+
+    // no eggs here!!
+    for (i = 0; i < totalMons; i++)
+    {
+        #define GET_DAYCARE_GRID_X(i) (i * 32)
+        #define START_DAYCARE_MON_X 175
+
+        mon = &daycare->mons[i].mon;
+        species = GetBoxMonData(mon, MON_DATA_SPECIES);
+
+        LoadMonIconPalette(species);
+        spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] =
+            CreateMonIcon(species, SpriteCB_MonIcon, START_DAYCARE_MON_X + 16, 104 + 16, 0,
+                          GetBoxMonData(mon, MON_DATA_PERSONALITY));
+
+        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i]];
+        sprite->subpriority = 0;
+        sprite->oam.priority = 1;
+        sprite->x2 = GET_DAYCARE_GRID_X(i);
+        sprite->y2 = GET_MON_GRID_Y(i);
+        // first mon flips if there's two mons
+        if (!i && totalMons > 1)
+            sprite->hFlip = TRUE;
+
+        spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i] =
+            CreateSprite(&sStartMenuMonPlatformSprite, START_DAYCARE_MON_X + 16, 129 + 8, 2);
+
+        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i]];
+        StartSpriteAnim(sprite, TRUE);
+        sprite->subpriority = 2;
+        sprite->x2 = GET_DAYCARE_GRID_X(i);
+        // second mon has v and h flipped platform
+        if (i)
+        {
+            sprite->hFlip = TRUE;
+            sprite->vFlip = TRUE;
+        }
+
+        item = GetBoxMonData(mon, MON_DATA_HELD_ITEM);
+        if (item == ITEM_NONE || item >= ITEMS_COUNT)
+            continue;
+
+        spriteIds[START_MAIN_SPRITE_DAYCARE_ITEMS + i] =
+            AddCustomItemIconSprite(&sStartMenuDaycareItemSprite, START_TAG_ITEM + i, START_TAG_ITEM + i, item);
+
+        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_DAYCARE_ITEMS + i]];
+        sprite->x = (START_DAYCARE_MON_X - 8) + 16;
+        sprite->y = 118 + 16;
+        sprite->x2 = i * 52;
+        sprite->y2 = GET_MON_GRID_Y(i);
+    }
+
+    // eggs indicator
+    if (totalEggs)
+    {
+        species = SPECIES_EGG;
+
+        LoadMonIconPalette(species);
+        spriteIds[START_MAIN_SPRITE_EGG] =
+            CreateMonIconNoPersonality(species, SpriteCB_MonIcon, 191 + 16, 109 + 16, 0);
+        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_EGG]];
+        sprite->oam.priority = 1;
+    }
+}
+
 static void SetupStartMenuMainWindows(void)
 {
     enum StartMenuMainWindows window = 0;
@@ -883,6 +1030,7 @@ static void SetupStartMenuText(void)
     PrintStartMenuHelpBottomText();
     PrintStartMenuTextboxText();
     PrintStartMenuAppTitleText();
+    PrintStartMenuEggInfo();
 }
 
 static void PrintStartMenuHelpTopText(void)
@@ -1000,6 +1148,70 @@ static void PrintStartMenuAppTitleText(void)
     CopyWindowToVram(START_MAIN_WIN_APP_TITLE, COPYWIN_FULL);
 }
 
+static void PrintStartMenuEggInfo(void)
+{
+    FillWindowPixelBuffer(START_MAIN_WIN_EGG_INFO, PIXEL_FILL(0));
+
+    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
+    u32 totalMons = CountPokemonInDaycare(daycare);
+
+    if (totalMons)
+    {
+        u32 i, totalEggs;
+
+        for (i = 0, totalEggs = 0; i < SILICON_DAYCARE_EGG_MAX; i++)
+        {
+            if (GetBoxMonData(&daycare->daycareEgg[i].egg, MON_DATA_IS_EGG))
+                totalEggs++;
+        }
+
+        for (i = 0; i < totalMons; i++)
+        {
+            struct BoxPokemon *mon = &daycare->mons[i].mon;
+            u32 gender = GetBoxMonGender(mon);
+
+            switch(gender)
+            {
+            case MON_FEMALE:
+                gender = FEMALE;
+                break;
+            case MON_MALE:
+                gender = MALE;
+                break;
+            }
+
+            if (gender != MON_GENDERLESS)
+                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_M + gender, i * 24, (i * 4) + 2);
+        }
+
+        if (totalEggs)
+        {
+            u32 x, digit;
+
+            digit = totalEggs / 10;
+
+            if (digit < 1) // < 10
+                x = 12;
+            else
+                x = 9;
+
+            BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_x, x, 4);
+            if (digit < 1)
+            {
+                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_0 + totalEggs, x + 4, 4);
+            }
+            else
+            {
+                // NOTE if SILICON_DAYCARE_EGG_MAX is increased, this needs to be edited
+                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_1, x + 4, 4);
+                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_0, x + 8, 4);
+            }
+        }
+    }
+
+    CopyWindowToVram(START_MAIN_WIN_EGG_INFO, COPYWIN_FULL);
+}
+
 static inline void PrintStartMenuText(enum StartMenuMainWindows window, u32 font, u32 desiredWidth, u32 x, u32 y, u8 const *str)
 {
     const u8 txtClr[] = {0, 1, 0}; // white
@@ -1015,6 +1227,11 @@ static inline void PrintStartMenuText(enum StartMenuMainWindows window, u32 font
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols sym, u16 x)
 {
     BlitBitmapRectToWindow(START_MAIN_WIN_HELP_TOP, sStartMenuHelpSymbols, sym * 16, 0, 160, 16, x, 0, 16, 16);
+}
+
+static inline void BlitEggInfoSymbols(enum StartMenuEggInfoSymbols sym, u16 x, u16 y)
+{
+    BlitBitmapRectToWindow(START_MAIN_WIN_EGG_INFO, sStartMenuDaycareSymbols, sym * 8, 0, 104, 8, x, y, 8, 8);
 }
 
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void)
@@ -1118,15 +1335,13 @@ static inline void InjectMonStatusGraphics(struct Sprite *sprite, u32 status, u3
 
 static void FreeStartMenuData(void)
 {
-    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
-    struct Sprite *sprite;
-
     for (enum StartMenuMainSprites i = 0; i < NUM_START_MAIN_SPRITES; i++)
     {
+        u8 *spriteIds = sStartMenuDataPtr->spriteIds;
         if (spriteIds[i] == SPRITE_NONE)
             continue;
 
-        sprite = &gSprites[spriteIds[i]];
+        struct Sprite *sprite = &gSprites[spriteIds[i]];
         if (i >= START_MAIN_SPRITE_MON_ICONS && i < START_MAIN_SPRITE_MON_ICONS_END)
             FreeAndDestroyMonIconSprite(sprite);
         else
@@ -1138,6 +1353,7 @@ static void FreeStartMenuData(void)
     for (enum StartMenuTags tag = START_TAG_APP_CURSOR; tag < NUM_START_TAGS; tag++)
         FreeSpriteTilesByTag(tag);
 
+    FreeItemIconTemporaryBuffers();
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
 }
