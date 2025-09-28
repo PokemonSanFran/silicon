@@ -906,7 +906,8 @@ static void SetupStartMenuMainPartyMonSprites(void)
             continue;
 
         spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
-            CreateSprite(&sStartMenuMonStatusSprite, ((status & STATUS1_ANY) ? 4 : 0) + 16, 130 + 4, 0);
+            CreateSprite(&sStartMenuMonStatusSprite, (((status & STATUS1_ANY) || !healthPercentage) ? 4 : 0) + 16,
+                         130 + 4, 0);
 
         sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_STATUS + i]];
         InjectMonStatusGraphics(sprite, status, healthPercentage);
