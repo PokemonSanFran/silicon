@@ -281,7 +281,8 @@ static void CB2_StartMenuSetup(void);
 static void CB2_StartMenu(void);
 static void VBlankCB_StartMenu(void);
 
-static void HandleAppGridInputs(void);
+static void HandleAppGridNormalInputs(u8);
+static inline void HandleAppGridDirectionalInputs(void);
 static u32 GetAppGridCurrentRow(void);
 static u32 GetAppGridCurrentColumn(void);
 static u32 GetAppGridCurrentIndex(void);
@@ -678,14 +679,17 @@ void Task_OpenUIStartMenu(u8 taskId)
 
 static void Task_HandleStartMenuInput(u8 taskId)
 {
-    if (JOY_NEW(B_BUTTON))
+    enum StartMenuModes mode = sStartMenuDataPtr->mode;
+
+    switch (mode)
     {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_CloseStartMenu;
+    default:
+    case START_MODE_NORMAL:
+        HandleAppGridNormalInputs(taskId);
+        break;
     }
 
-    HandleAppGridInputs();
+    HandleAppGridDirectionalInputs();
 }
 
 static void Task_CloseStartMenu(u8 taskId)
@@ -964,7 +968,7 @@ static void ChangeAppGridCurrentRow(bool32 movingDown)
     PrintStartMenuAppTitleText();
 }
 
-static void HandleAppGridInputs(void)
+static inline void HandleAppGridDirectionalInputs(void)
 {
     if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
         ChangeAppGridCurrentRow(FALSE);
@@ -977,6 +981,17 @@ static void HandleAppGridInputs(void)
 
     if (JOY_NEW(DPAD_RIGHT | R_BUTTON) || JOY_REPEAT(DPAD_RIGHT | R_BUTTON))
         ChangeAppGridCurrentColumn(TRUE);
+}
+
+static void HandleAppGridNormalInputs(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_PC_OFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_CloseStartMenu;
+        return;
+    }
 }
 
 // helpers
