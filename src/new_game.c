@@ -110,6 +110,7 @@ static void SetDefaultOptions(void)
 {
     // Start bootSequence
     OptionMenu_ResetAllToDefault();
+    memset(gSaveBlock3Ptr->startMenuAppIndex, START_APP_NONE, NUM_START_APPS * sizeof(enum StartMenuApps));
     /*
 	gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;

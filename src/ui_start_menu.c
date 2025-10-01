@@ -52,11 +52,6 @@
 
 // constants, structs
 
-// grid
-// inclusive
-#define MAX_APP_ROWS          7
-#define MAX_APP_COLUMNS       1
-
 #define NUM_START_MONS_TOTAL  (PARTY_SIZE + DAYCARE_MON_COUNT)
 
 // grid calc
@@ -242,25 +237,55 @@ enum StartMenuSetupSteps
     START_SETUP_FINISH
 };
 
+// grid
+enum StartMenuAppRows {
+    START_APP_GRID_ROW_0,
+    START_APP_GRID_ROW_1,
+    START_APP_GRID_ROW_2,
+    START_APP_GRID_ROW_3,
+    START_APP_GRID_ROW_4,
+    START_APP_GRID_ROW_5,
+    START_APP_GRID_ROW_6,
+    START_APP_GRID_ROW_7,
+    NUM_START_APP_GRID_ROWS
+};
+
+enum StartMenuAppColumns {
+    START_APP_GRID_COLUMN_0,
+    START_APP_GRID_COLUMN_1,
+    NUM_START_APP_GRID_COLUMNS
+};
+
+#define MAX_APP_COLUMNS       2
+
 struct StartMenuData
 {
     u8 spriteIds[NUM_START_MAIN_SPRITES];
-    struct UCoords8 cursor;
     enum StartMenuModes mode;
+    enum StartMenuApps apps[NUM_START_APPS];
+    u8 numApps;
     MainCallback savedCB;
+    struct UCoords8 cursor;
 };
 
 // RAM data
 static EWRAM_DATA struct StartMenuData *sStartMenuDataPtr = NULL;
 static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
+static EWRAM_DATA u8 sStartMenuLastNumApps = 0;
 
 // declarations
-static void Task_StartMenu(u8);
+static void Task_HandleStartMenuInput(u8);
 static void Task_CloseStartMenu(u8);
 static void SpriteCB_AppCursor(struct Sprite *);
 static void CB2_StartMenuSetup(void);
 static void CB2_StartMenu(void);
 static void VBlankCB_StartMenu(void);
+
+static void HandleAppGridInputs(void);
+static u32 GetAppGridCurrentRow(void);
+static u32 GetAppGridCurrentColumn(void);
+static u32 GetAppGridCurrentIndex(void);
+
 static void SetupStartMenuBgs(void);
 static void SetupStartMenuGraphics(void);
 static void SetupStartMenuMainSprites(void);
@@ -284,7 +309,6 @@ static inline enum StartMenuMonStatuses ConvertRawStatusIntoMonStatus(u32);
 static inline u32 ConvertPercentageIntoHpBarFrame(u32);
 static inline void *GetSpriteCallbackForIcon(u32, bool32);
 static inline u32 GetMonHealthPercentage(struct Pokemon *);
-static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites);
 static void FreeStartMenuData(void);
 
 // ROM data
@@ -471,6 +495,8 @@ static const u8 *const sStartMenuModeTextboxes[NUM_START_MODES] =
 
 static const u8 *const sStartMenuModeAppNames[NUM_START_APPS] =
 {
+    [START_APP_NONE] = COMPOUND_STRING(" "),
+
     // first row
     [START_APP_PARTY] = COMPOUND_STRING("Party"),
     [START_APP_BAG] = COMPOUND_STRING("Bag"),
@@ -516,6 +542,7 @@ static const struct OamData sStartMenuAppOamData =
     .size = SPRITE_SIZE(16x16),
 };
 
+#define START_APP_FRAME(name) ((START_APP_ ## name - 1) * 4)
 static const struct SpriteTemplate sStartMenuAppSprite =
 {
     .tileTag = START_TAG_APPS,
@@ -523,27 +550,27 @@ static const struct SpriteTemplate sStartMenuAppSprite =
     .oam = &sStartMenuAppOamData,
     .anims = (const union AnimCmd *const[]){
         // first row
-        [START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PARTY * 4, 1), ANIMCMD_END },
-        [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BAG * 4, 1), ANIMCMD_END },
-        [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ARRIBA * 4, 1), ANIMCMD_END },
-        [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TODOS * 4, 1), ANIMCMD_END },
-        [START_APP_DEXNAV] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_DEXNAV * 4, 1), ANIMCMD_END },
-        [START_APP_POKEDEX] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_POKEDEX * 4, 1), ANIMCMD_END },
-        [START_APP_BUZZR] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BUZZR * 4, 1), ANIMCMD_END },
-        [START_APP_OPTIONS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_OPTIONS * 4, 1), ANIMCMD_END },
+        [0 ... START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(PARTY), 1), ANIMCMD_END },
+        [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(BAG), 1), ANIMCMD_END },
+        [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(ARRIBA), 1), ANIMCMD_END },
+        [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(TODOS), 1), ANIMCMD_END },
+        [START_APP_DEXNAV] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(DEXNAV), 1), ANIMCMD_END },
+        [START_APP_POKEDEX] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(POKEDEX), 1), ANIMCMD_END },
+        [START_APP_BUZZR] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(BUZZR), 1), ANIMCMD_END },
+        [START_APP_OPTIONS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(OPTIONS), 1), ANIMCMD_END },
 
         // second row
-        [START_APP_TRAINER_CARD] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_TRAINER_CARD * 4, 1), ANIMCMD_END },
-        [START_APP_PRESTO] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_PRESTO * 4, 1), ANIMCMD_END },
-        [START_APP_WAVES_OF_CHANGE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_WAVES_OF_CHANGE * 4, 1), ANIMCMD_END },
-        [START_APP_CUSTOMIZE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_CUSTOMIZE * 4, 1), ANIMCMD_END },
-        [START_APP_SAVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SAVE * 4, 1), ANIMCMD_END },
-        [START_APP_SURPRISE_TRADE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_SURPRISE_TRADE * 4, 1), ANIMCMD_END },
-        [START_APP_GOOGLE_GLASS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_GOOGLE_GLASS * 4, 1), ANIMCMD_END },
-        [START_APP_ADVENTURES_GUIDE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_ADVENTURES_GUIDE * 4, 1), ANIMCMD_END },
+        [START_APP_TRAINER_CARD] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(TRAINER_CARD), 1), ANIMCMD_END },
+        [START_APP_PRESTO] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(PRESTO), 1), ANIMCMD_END },
+        [START_APP_WAVES_OF_CHANGE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(WAVES_OF_CHANGE), 1), ANIMCMD_END },
+        [START_APP_CUSTOMIZE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(CUSTOMIZE), 1), ANIMCMD_END },
+        [START_APP_SAVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(SAVE), 1), ANIMCMD_END },
+        [START_APP_SURPRISE_TRADE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(SURPRISE_TRADE), 1), ANIMCMD_END },
+        [START_APP_GOOGLE_GLASS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(GOOGLE_GLASS), 1), ANIMCMD_END },
+        [START_APP_ADVENTURES_GUIDE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(ADVENTURES_GUIDE), 1), ANIMCMD_END },
 
         // app bg
-        [START_APP_BACKGROUNDS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_BACKGROUNDS * 4, 1), ANIMCMD_END },
+        [START_APP_BACKGROUNDS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(BACKGROUNDS), 1), ANIMCMD_END },
     },
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -611,6 +638,31 @@ static const struct SpriteTemplate sStartMenuDaycareItemSprite =
     .callback = SpriteCallbackDummy
 };
 
+// misc
+static const u16 sStartMenuInstalledApps[NUM_START_APPS] =
+{
+    // first row
+    [START_APP_PARTY]   = FLAG_SYS_APP_POKEMON_GET, // FLAG_SYS_APP_PROLOGUE_GET
+    [START_APP_BAG]     = FLAG_SYS_APP_BAG_GET, // FLAG_SYS_APP_PROLOGUE_GET
+    [START_APP_ARRIBA]  = FLAG_SYS_APP_MAP_GET, // FLAG_SYS_STARTER_APPS_GET
+    [START_APP_TODOS]   = FLAG_SYS_APP_QUEST_GET, // FLAG_SYS_STARTER_APPS_GET
+    [START_APP_DEXNAV]  = FLAG_SYS_APP_DEXNAV_GET, // Get later
+    [START_APP_POKEDEX] = FLAG_SYS_APP_POKEDEX_GET, // FLAG_SYS_STARTER_APPS_GET
+    [START_APP_BUZZR]   = FLAG_SYS_APP_BUZZR_GET, // After 1 badge
+    [START_APP_OPTIONS] = FLAG_SYS_APP_OPTIONS_GET, // FLAG_SYS_APP_PROLOGUE_GET
+
+    // second row
+    // TODO add flags missing from start menu v2
+    [START_APP_TRAINER_CARD]     = FLAG_SYS_APP_TRAINER_CARD_GET, // FLAG_SYS_STARTER_APPS_GET
+    [START_APP_PRESTO]           = FLAG_SYS_APP_PRESTO_GET, // After meeting YC CEO in office
+    [START_APP_WAVES_OF_CHANGE]  = FLAG_TEMP_1,
+    [START_APP_CUSTOMIZE]        = FLAG_TEMP_1,
+    [START_APP_SAVE]             = 0, // always there
+    [START_APP_SURPRISE_TRADE]   = FLAG_TEMP_1,
+    [START_APP_GOOGLE_GLASS]     = FLAG_TEMP_1,
+    [START_APP_ADVENTURES_GUIDE] = FLAG_TEMP_1,
+};
+
 // code
 
 // tasks
@@ -624,7 +676,7 @@ void Task_OpenUIStartMenu(u8 taskId)
     }
 }
 
-static void Task_StartMenu(u8 taskId)
+static void Task_HandleStartMenuInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
@@ -633,57 +685,13 @@ static void Task_StartMenu(u8 taskId)
         gTasks[taskId].func = Task_CloseStartMenu;
     }
 
-    bool32 dpadPressed = FALSE;
-
-    if (JOY_NEW(DPAD_LEFT | L_BUTTON) || JOY_REPEAT(DPAD_LEFT | L_BUTTON))
-    {
-        if (sStartMenuDataPtr->cursor.x)
-            sStartMenuDataPtr->cursor.x--;
-        else
-            sStartMenuDataPtr->cursor.x = MAX_APP_ROWS;
-
-        dpadPressed = TRUE;
-    }
-
-    if (JOY_NEW(DPAD_RIGHT | R_BUTTON) || JOY_REPEAT(DPAD_RIGHT | R_BUTTON))
-    {
-        if (sStartMenuDataPtr->cursor.x < MAX_APP_ROWS)
-            sStartMenuDataPtr->cursor.x++;
-        else
-            sStartMenuDataPtr->cursor.x = 0;
-
-        dpadPressed = TRUE;
-    }
-
-    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
-    {
-        if (sStartMenuDataPtr->cursor.y)
-            sStartMenuDataPtr->cursor.y--;
-        else
-            sStartMenuDataPtr->cursor.y = MAX_APP_COLUMNS;
-
-        dpadPressed = TRUE;
-    }
-
-    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
-    {
-        if (sStartMenuDataPtr->cursor.y < MAX_APP_COLUMNS)
-            sStartMenuDataPtr->cursor.y++;
-        else
-            sStartMenuDataPtr->cursor.y = 0;
-
-        dpadPressed = TRUE;
-    }
-
-    if (dpadPressed)
-        PrintStartMenuAppTitleText();
+    HandleAppGridInputs();
 }
 
 static void Task_CloseStartMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        sStartMenuLastCursor = sStartMenuDataPtr->cursor;
         SetMainCallback2(sStartMenuDataPtr->savedCB);
         FreeStartMenuData();
         DestroyTask(taskId);
@@ -693,8 +701,9 @@ static void Task_CloseStartMenu(u8 taskId)
 // sprite
 static void SpriteCB_AppCursor(struct Sprite *s)
 {
-    s->x2 = GET_APP_GRID_X(sStartMenuDataPtr->cursor.x);
-    s->y2 = GET_APP_GRID_Y(sStartMenuDataPtr->cursor.y);
+    // TODO
+    s->x2 = GET_APP_GRID_X(GetAppGridCurrentColumn());
+    s->y2 = GET_APP_GRID_Y(GetAppGridCurrentRow());
 }
 
 // normal funcs
@@ -735,11 +744,38 @@ void OpenStartMenu(enum StartMenuModes mode)
     }
 
     // set anything that needs to be explicitly non-zero here
-    sStartMenuDataPtr->cursor = sStartMenuLastCursor;
     sStartMenuDataPtr->mode = mode;
     sStartMenuDataPtr->savedCB = cb;
-    for (enum StartMenuMainSprites sprite = 0; sprite < NUM_START_MAIN_SPRITES; sprite++)
-        sStartMenuDataPtr->spriteIds[sprite] = SPRITE_NONE;
+    memset(sStartMenuDataPtr->spriteIds, SPRITE_NONE, NUM_START_MAIN_SPRITES * sizeof(u8));
+    memset(sStartMenuDataPtr->apps, START_APP_NONE, NUM_START_APPS * sizeof(enum StartMenuApps));
+
+    u32 i = 0, j = 0;
+    for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; i++, app++)
+    {
+        // either an app with a flag set OR an app with no requirements
+        // is welcomed
+        if ((sStartMenuInstalledApps[app] && FlagGet(sStartMenuInstalledApps[app]))
+             || !sStartMenuInstalledApps[app])
+        {
+            enum StartMenuApps trueApp = app;
+            if (gSaveBlock3Ptr->startMenuAppIndex[j])
+                trueApp = gSaveBlock3Ptr->startMenuAppIndex[j];
+
+            sStartMenuDataPtr->apps[j] = trueApp;
+            j++;
+        }
+    }
+
+    sStartMenuDataPtr->numApps = j;
+    sStartMenuDataPtr->cursor = sStartMenuLastCursor;
+
+    // reset cursor when there's new app(s) added to avoid cursor x,y freaking out
+    if (sStartMenuDataPtr->numApps > sStartMenuLastNumApps && sStartMenuLastNumApps != 0)
+    {
+        struct UCoords8 reset = {0, 0};
+        sStartMenuDataPtr->cursor = reset;
+        sStartMenuLastCursor = reset;
+    }
 
     SetMainCallback2(CB2_StartMenuSetup);
 }
@@ -784,7 +820,7 @@ static void CB2_StartMenuSetup(void)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case START_SETUP_FINISH:
-        CreateTask(Task_StartMenu, 0);
+        CreateTask(Task_HandleStartMenuInput, 0);
         SetVBlankCallback(VBlankCB_StartMenu);
         SetMainCallback2(CB2_StartMenu);
         return;
@@ -809,6 +845,138 @@ static void VBlankCB_StartMenu(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+}
+
+// grid system
+
+static u32 CalculateAppGridNumberOfRows(void)
+{
+    u32 numApps = sStartMenuDataPtr->numApps;
+    u32 rows = START_APP_GRID_COLUMN_1;
+
+    if (numApps >= NUM_START_APP_GRID_ROWS)
+        rows = NUM_START_APP_GRID_COLUMNS;
+
+    return rows - 1;
+}
+
+static u32 GetAppGridSizeForRow(u32 currentRow)
+{
+    u32 numApps = sStartMenuDataPtr->numApps;
+    u32 numRows = CalculateAppGridNumberOfRows();
+    u32 divisor = numApps % NUM_START_APP_GRID_ROWS;
+    u32 isLastRow = currentRow == numRows;
+
+    if (divisor && (numApps < NUM_START_APP_GRID_ROWS || isLastRow))
+        return divisor - 1;
+    else
+        return NUM_START_APP_GRID_ROWS - 1;
+}
+
+bool32 IsAppGridInputMovingRightOrDown(s32 delta)
+{
+    return (delta == 1);
+}
+
+static void SetAppGridXCursor(u32 x)
+{
+    sStartMenuDataPtr->cursor.x = x;
+}
+
+static void SetAppGridYCursor(u32 y)
+{
+    sStartMenuDataPtr->cursor.y = y;
+}
+
+static u32 GetAppGridCurrentRow(void)
+{
+    return sStartMenuDataPtr->cursor.y;
+}
+
+static u32 GetAppGridCurrentColumn(void)
+{
+    return sStartMenuDataPtr->cursor.x;
+}
+
+static u32 GetAppGridCurrentIndex(void)
+{
+    return GetAppGridCurrentColumn() + (GetAppGridCurrentRow() ? NUM_START_APP_GRID_ROWS : 0);
+}
+
+static void SanitizeAppGridXCursor(s32 delta)
+{
+    u32 column = GetAppGridCurrentColumn();
+    u32 row = GetAppGridCurrentRow();
+    u32 rowSize = GetAppGridSizeForRow(row);
+    bool32 cursorMovingRight = IsAppGridInputMovingRightOrDown(delta);
+    bool32 isLastColumn = (column == rowSize);
+
+    if (cursorMovingRight && isLastColumn)
+        SetAppGridXCursor(0);
+    else if (!cursorMovingRight && !column)
+        SetAppGridXCursor(rowSize);
+    else
+        SetAppGridXCursor(delta + column);
+}
+
+static void SanitizeAppGridYCursor(s32 delta)
+{
+    u32 row = sStartMenuDataPtr->cursor.y;
+    u32 rowSize = CalculateAppGridNumberOfRows();
+    bool32 cursorMovingDown = IsAppGridInputMovingRightOrDown(delta);
+    bool32 isLastColumn = (row == rowSize);
+
+    if (cursorMovingDown && isLastColumn)
+        SetAppGridYCursor(0);
+    else if (!cursorMovingDown && !row)
+        SetAppGridYCursor(START_APP_GRID_COLUMN_1);
+    else
+        SetAppGridYCursor(row + delta);
+}
+
+static void FixAppGridXCursor(void)
+{
+    u32 x = GetAppGridCurrentColumn();
+    u32 rowSize = GetAppGridSizeForRow(GetAppGridCurrentRow());
+
+    while (x > rowSize)
+        SetAppGridXCursor(--x);
+}
+
+static void ChangeAppGridCurrentColumn(bool32 movingRight)
+{
+    s32 delta = movingRight ? 1 : -1;
+
+    SanitizeAppGridXCursor(delta);
+
+    PlaySE(SE_CLICK);
+    PrintStartMenuAppTitleText();
+}
+
+static void ChangeAppGridCurrentRow(bool32 movingDown)
+{
+    s32 delta = movingDown ? 1 : -1;
+
+    SanitizeAppGridYCursor(delta);
+    FixAppGridXCursor();
+
+    PlaySE(SE_CLICK);
+    PrintStartMenuAppTitleText();
+}
+
+static void HandleAppGridInputs(void)
+{
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
+        ChangeAppGridCurrentRow(FALSE);
+
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
+        ChangeAppGridCurrentRow(TRUE);
+
+    if (JOY_NEW(DPAD_LEFT | L_BUTTON) || JOY_REPEAT(DPAD_LEFT | L_BUTTON))
+        ChangeAppGridCurrentColumn(FALSE);
+
+    if (JOY_NEW(DPAD_RIGHT | R_BUTTON) || JOY_REPEAT(DPAD_RIGHT | R_BUTTON))
+        ChangeAppGridCurrentColumn(TRUE);
 }
 
 // helpers
@@ -870,26 +1038,27 @@ static void SetupStartMenuMainAppSprites(void)
 
     spriteIds[START_MAIN_SPRITE_APP_CURSOR] = CreateSprite(template, 27 + 16, 64 + 16, 0);
     sprite = &gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]];
-    sprite->x2 = GET_APP_GRID_X(sStartMenuDataPtr->cursor.x);
-    sprite->y2 = GET_APP_GRID_Y(sStartMenuDataPtr->cursor.y);
+
+    sprite->x2 = GET_APP_GRID_X(GetAppGridCurrentColumn());
+    sprite->y2 = GET_APP_GRID_Y(GetAppGridCurrentRow());
 
     template = &sStartMenuAppSprite;
-    for (enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
-         aIcon < START_MAIN_SPRITE_APP_ICONS_END; aIcon++, aBg++)
+    enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
+    for (u32 i = 0; i < sStartMenuDataPtr->numApps; i++, aIcon++, aBg++)
     {
-        enum StartMenuApps a = ConvertStartMenuMainSpriteIntoApp(aIcon);
+        enum StartMenuApps a = sStartMenuDataPtr->apps[i];
 
         spriteIds[aIcon] = CreateSprite(template, 35 + 8, 72 + 8, 1);
         sprite = &gSprites[spriteIds[aIcon]];
-        StartSpriteAnim(sprite, a); // TODO richer interaction
-        sprite->x2 = GET_APP_GRID_X(a & MAX_APP_ROWS);
-        sprite->y2 = GET_APP_GRID_Y((a & (MAX_APP_ROWS + 1)) >> 3);
+        StartSpriteAnim(sprite, a);
+        sprite->x2 = GET_APP_GRID_X(i & (NUM_START_APP_GRID_ROWS - 1));
+        sprite->y2 = GET_APP_GRID_Y((i & NUM_START_APP_GRID_ROWS) >> 3);
 
         spriteIds[aBg] = CreateSprite(template, 35 + 8, 72 + 8, 3);
         sprite = &gSprites[spriteIds[aBg]];
         StartSpriteAnim(sprite, START_APP_BACKGROUNDS);
-        sprite->x2 = GET_APP_GRID_X(a & MAX_APP_ROWS);
-        sprite->y2 = GET_APP_GRID_Y((a & (MAX_APP_ROWS + 1)) >> 3);
+        sprite->x2 = GET_APP_GRID_X(i & (NUM_START_APP_GRID_ROWS - 1));
+        sprite->y2 = GET_APP_GRID_Y((i & NUM_START_APP_GRID_ROWS) >> 3);
         sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
@@ -950,21 +1119,21 @@ static void SetupStartMenuMainDaycareMonSprites(void)
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
     struct BoxPokemon *mon = NULL;
     struct Sprite *sprite = NULL;
-    u32 i, species, item, totalEggs, totalMons = CountPokemonInDaycare(daycare);
+    u32 i, species, item, numEggs, numMons = CountPokemonInDaycare(daycare);
 
-    if (!totalMons)
+    if (!numMons)
         return;
 
-    for (i = 0, totalEggs = 0; i < SILICON_DAYCARE_EGG_MAX; i++)
+    for (i = 0, numEggs = 0; i < SILICON_DAYCARE_EGG_MAX; i++)
     {
         if (GetBoxMonData(&daycare->daycareEgg[i].egg, MON_DATA_IS_EGG))
-            totalEggs++;
+            numEggs++;
     }
 
     AllocItemIconTemporaryBuffers();
 
     // no eggs here!!
-    for (i = 0; i < totalMons; i++)
+    for (i = 0; i < numMons; i++)
     {
         #define GET_DAYCARE_GRID_X(i) (i * 32)
         #define START_DAYCARE_MON_X 175
@@ -983,7 +1152,7 @@ static void SetupStartMenuMainDaycareMonSprites(void)
         sprite->x2 = GET_DAYCARE_GRID_X(i);
         sprite->y2 = GET_MON_GRID_Y(i);
         // first mon flips if there's two mons
-        if (!i && totalMons > 1)
+        if (!i && numMons > 1)
             sprite->hFlip = TRUE;
 
         spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i] =
@@ -1014,7 +1183,7 @@ static void SetupStartMenuMainDaycareMonSprites(void)
     }
 
     // eggs indicator
-    if (totalEggs)
+    if (numEggs)
     {
         species = SPECIES_EGG;
 
@@ -1171,8 +1340,12 @@ static void PrintStartMenuAppTitleText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_APP_TITLE, PIXEL_FILL(0));
 
+    enum StartMenuApps app = sStartMenuDataPtr->apps[GetAppGridCurrentIndex()];
+
+    DebugPrintf("id: %d, name: %S", app, sStartMenuModeAppNames[app]);
+
     PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0,
-                       sStartMenuModeAppNames[sStartMenuDataPtr->cursor.x + (sStartMenuDataPtr->cursor.y * 8)]);
+                       sStartMenuModeAppNames[app]);
 
     CopyWindowToVram(START_MAIN_WIN_APP_TITLE, COPYWIN_FULL);
 }
@@ -1182,19 +1355,19 @@ static void PrintStartMenuEggInfo(void)
     FillWindowPixelBuffer(START_MAIN_WIN_EGG_INFO, PIXEL_FILL(0));
 
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    u32 totalMons = CountPokemonInDaycare(daycare);
+    u32 numMons = CountPokemonInDaycare(daycare);
 
-    if (totalMons)
+    if (numMons)
     {
-        u32 i, totalEggs;
+        u32 i, numEggs;
 
-        for (i = 0, totalEggs = 0; i < SILICON_DAYCARE_EGG_MAX; i++)
+        for (i = 0, numEggs = 0; i < SILICON_DAYCARE_EGG_MAX; i++)
         {
             if (GetBoxMonData(&daycare->daycareEgg[i].egg, MON_DATA_IS_EGG))
-                totalEggs++;
+                numEggs++;
         }
 
-        for (i = 0; i < totalMons; i++)
+        for (i = 0; i < numMons; i++)
         {
             struct BoxPokemon *mon = &daycare->mons[i].mon;
             u32 gender = GetBoxMonGender(mon);
@@ -1213,11 +1386,11 @@ static void PrintStartMenuEggInfo(void)
                 BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_M + gender, i * 24, (i * 4) + 4);
         }
 
-        if (totalEggs)
+        if (numEggs)
         {
             u32 x, digit;
 
-            digit = totalEggs / 10;
+            digit = numEggs / 10;
 
             if (digit < 1) // < 10
                 x = 12;
@@ -1227,7 +1400,7 @@ static void PrintStartMenuEggInfo(void)
             BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_x, x, 4);
             if (digit < 1)
             {
-                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_0 + totalEggs, x + 4, 4);
+                BlitEggInfoSymbols(START_EGG_INFO_SYMBOL_0 + numEggs, x + 4, 4);
             }
             else
             {
@@ -1283,11 +1456,6 @@ static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void)
 {
     // TODO (for someone else): signal control stuff
     return START_HELP_SYMBOL_SIG_3;
-}
-
-static enum StartMenuApps ConvertStartMenuMainSpriteIntoApp(enum StartMenuMainSprites app)
-{
-    return app - 1;
 }
 
 static inline u32 GetMonHealthPercentage(struct Pokemon *mon)
@@ -1364,6 +1532,11 @@ static inline void InjectMonStatusGraphics(struct Sprite *sprite, u32 status, u3
 
 static void FreeStartMenuData(void)
 {
+    sStartMenuLastCursor = sStartMenuDataPtr->cursor;
+    sStartMenuLastNumApps = sStartMenuDataPtr->numApps;
+    for (u32 i = 0; i < sStartMenuDataPtr->numApps; i++)
+        gSaveBlock3Ptr->startMenuAppIndex[i] = sStartMenuDataPtr->apps[i];
+
     for (enum StartMenuMainSprites i = 0; i < NUM_START_MAIN_SPRITES; i++)
     {
         u8 *spriteIds = sStartMenuDataPtr->spriteIds;

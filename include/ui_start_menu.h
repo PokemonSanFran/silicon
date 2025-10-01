@@ -13,8 +13,10 @@ enum StartMenuModes
 
 enum StartMenuApps
 {
+    START_APP_NONE,
+
     // first row
-    START_APP_PARTY = 0,
+    START_APP_PARTY,
     START_APP_BAG,
     START_APP_ARRIBA,
     START_APP_TODOS,

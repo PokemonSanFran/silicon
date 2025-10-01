@@ -509,7 +509,8 @@ static s32 GetFirstEmptyIndexSlot(void)
     for(x = 0; x < NUM_TOTAL_APPS; x++)
     {
         u32 newIndexPosition = GetStaggeredIndexPosition(x);
-        if (gSaveBlock3Ptr->startMenuAppIndex[newIndexPosition] == APP_NONE)
+        enum AppsIds app = gSaveBlock3Ptr->startMenuAppIndex[newIndexPosition];
+        if (app == APP_NONE)
             return newIndexPosition;
     }
     return NO_SLOTS;
