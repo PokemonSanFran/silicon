@@ -262,7 +262,6 @@ struct StartMenuData
 {
     u8 spriteIds[NUM_START_MAIN_SPRITES];
     enum StartMenuModes mode;
-    enum StartMenuApps apps[NUM_START_APPS];
     u8 numApps;
     MainCallback savedCB;
     struct UCoords8 cursor;
@@ -271,7 +270,6 @@ struct StartMenuData
 // RAM data
 static EWRAM_DATA struct StartMenuData *sStartMenuDataPtr = NULL;
 static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
-static EWRAM_DATA u8 sStartMenuLastNumApps = 0;
 
 // declarations
 static void Task_HandleStartMenuInput(u8);
@@ -281,6 +279,15 @@ static void SpriteCB_AppCursor(struct Sprite *);
 static void CB2_StartMenuSetup(void);
 static void CB2_StartMenu(void);
 static void VBlankCB_StartMenu(void);
+
+static void PopulateStartMenuAppIndex(void);
+static void ResetStartMenuAppIndex(void);
+static void AddNewAppsToStartMenuAppIndex(void);
+static bool32 IsAppWithinAnIndex(enum StartMenuApps);
+static u32 GetFirstEmptyAppIndex(void);
+static bool32 IsAppUnlocked(enum StartMenuApps);
+static u32 CountCurrentNumberOfApps(void);
+static enum StartMenuApps GetCurrentAppFromIndex(u8);
 
 static void HandleAppGridNormalInputs(u8);
 static inline void HandleAppGridDirectionalInputs(void);
@@ -758,35 +765,11 @@ void OpenStartMenu(enum StartMenuModes mode)
     sStartMenuDataPtr->mode = mode;
     sStartMenuDataPtr->savedCB = cb;
     memset(sStartMenuDataPtr->spriteIds, SPRITE_NONE, NUM_START_MAIN_SPRITES * sizeof(u8));
-    memset(sStartMenuDataPtr->apps, START_APP_NONE, NUM_START_APPS * sizeof(enum StartMenuApps));
 
-    u32 i = 0, j = 0;
-    for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; i++, app++)
-    {
-        // either an app with a flag set OR an app with no requirements
-        // is welcomed
-        if ((sStartMenuInstalledApps[app] && FlagGet(sStartMenuInstalledApps[app]))
-             || !sStartMenuInstalledApps[app])
-        {
-            enum StartMenuApps trueApp = app;
-            if (gSaveBlock3Ptr->startMenuAppIndex[j])
-                trueApp = gSaveBlock3Ptr->startMenuAppIndex[j];
+    PopulateStartMenuAppIndex();
 
-            sStartMenuDataPtr->apps[j] = trueApp;
-            j++;
-        }
-    }
-
-    sStartMenuDataPtr->numApps = j;
+    sStartMenuDataPtr->numApps = CountCurrentNumberOfApps();
     sStartMenuDataPtr->cursor = sStartMenuLastCursor;
-
-    // reset cursor when there's new app(s) added to avoid cursor x,y freaking out
-    if (sStartMenuDataPtr->numApps > sStartMenuLastNumApps && sStartMenuLastNumApps != 0)
-    {
-        struct UCoords8 reset = {0, 0};
-        sStartMenuDataPtr->cursor = reset;
-        sStartMenuLastCursor = reset;
-    }
 
     SetMainCallback2(CB2_StartMenuSetup);
 }
@@ -856,6 +839,94 @@ static void VBlankCB_StartMenu(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+}
+
+// app allocation
+static void PopulateStartMenuAppIndex(void)
+{
+    if (CountCurrentNumberOfApps() < START_APP_GRID_ROW_2)
+        ResetStartMenuAppIndex();
+
+    AddNewAppsToStartMenuAppIndex();
+}
+
+static void ResetStartMenuAppIndex(void)
+{
+    memset(gSaveBlock3Ptr->startMenuAppIndex, 0, NUM_START_APPS * sizeof(u8));
+}
+
+static void AddNewAppsToStartMenuAppIndex(void)
+{
+    for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
+    {
+        if (IsAppUnlocked(app) && !IsAppWithinAnIndex(app))
+        {
+            u32 freeSlot = GetFirstEmptyAppIndex();
+            if (freeSlot >= NUM_START_APPS)
+                break;
+
+            gSaveBlock3Ptr->startMenuAppIndex[freeSlot] = app;
+        }
+    }
+}
+
+static bool32 IsAppWithinAnIndex(enum StartMenuApps appId)
+{
+    for (u32 idx = 0; idx < NUM_TOTAL_APPS; idx++)
+    {
+        if (gSaveBlock3Ptr->startMenuAppIndex[idx] == appId)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static u32 GetFirstEmptyAppIndex(void)
+{
+    for (u32 idx = 0; idx < NUM_START_APPS; idx++)
+    {
+        enum StartMenuApps app = gSaveBlock3Ptr->startMenuAppIndex[idx];
+        if (!app)
+            return idx;
+    }
+
+    return NUM_START_APPS;
+}
+
+static bool32 IsAppUnlocked(enum StartMenuApps app)
+{
+    if (!app || app >= NUM_START_APPS)
+        return FALSE;
+
+    return sStartMenuInstalledApps[app];
+}
+
+static u32 CountCurrentNumberOfApps(void)
+{
+    u32 count = 0;
+
+    for (enum StartMenuApps slotIndex = 0; slotIndex < NUM_TOTAL_APPS; slotIndex++)
+    {
+        if (IsAppWithinAnIndex(slotIndex))
+            count++;
+    }
+
+    return count;
+}
+
+static enum StartMenuApps GetCurrentAppFromIndex(u8 idx)
+{
+    enum StartMenuApps app;
+
+    if (idx >= NUM_TOTAL_APPS)
+        app = gSaveBlock3Ptr->startMenuAppIndex[idx % NUM_TOTAL_APPS];
+    else
+        app = gSaveBlock3Ptr->startMenuAppIndex[idx];
+
+    if (app >= NUM_START_APPS)
+        app = START_APP_NONE;
+
+    return app;
 }
 
 // grid system
@@ -1068,7 +1139,7 @@ static void SetupStartMenuMainAppSprites(void)
     enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
     for (u32 i = 0; i < sStartMenuDataPtr->numApps; i++, aIcon++, aBg++)
     {
-        enum StartMenuApps a = sStartMenuDataPtr->apps[i];
+        enum StartMenuApps a = GetCurrentAppFromIndex(i);
 
         spriteIds[aIcon] = CreateSprite(template, 35 + 8, 72 + 8, 1);
         sprite = &gSprites[spriteIds[aIcon]];
@@ -1362,7 +1433,7 @@ static void PrintStartMenuAppTitleText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_APP_TITLE, PIXEL_FILL(0));
 
-    enum StartMenuApps app = sStartMenuDataPtr->apps[GetAppGridCurrentIndex()];
+    enum StartMenuApps app = GetCurrentAppFromIndex(GetAppGridCurrentIndex());
 
     DebugPrintf("id: %d, name: %S", app, sStartMenuModeAppNames[app]);
 
@@ -1555,9 +1626,6 @@ static inline void InjectMonStatusGraphics(struct Sprite *sprite, u32 status, u3
 static void FreeStartMenuData(void)
 {
     sStartMenuLastCursor = sStartMenuDataPtr->cursor;
-    sStartMenuLastNumApps = sStartMenuDataPtr->numApps;
-    for (u32 i = 0; i < sStartMenuDataPtr->numApps; i++)
-        gSaveBlock3Ptr->startMenuAppIndex[i] = sStartMenuDataPtr->apps[i];
 
     for (enum StartMenuMainSprites i = 0; i < NUM_START_MAIN_SPRITES; i++)
     {
