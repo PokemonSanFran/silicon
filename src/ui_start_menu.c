@@ -275,6 +275,7 @@ static EWRAM_DATA u8 sStartMenuLastNumApps = 0;
 
 // declarations
 static void Task_HandleStartMenuInput(u8);
+static void Task_WaitForFadingInStartMenu(u8);
 static void Task_CloseStartMenu(u8);
 static void SpriteCB_AppCursor(struct Sprite *);
 static void CB2_StartMenuSetup(void);
@@ -677,6 +678,12 @@ void Task_OpenUIStartMenu(u8 taskId)
     }
 }
 
+static void Task_WaitForFadingInStartMenu(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        gTasks[taskId].func = Task_HandleStartMenuInput;
+}
+
 static void Task_HandleStartMenuInput(u8 taskId)
 {
     enum StartMenuModes mode = sStartMenuDataPtr->mode;
@@ -824,7 +831,7 @@ static void CB2_StartMenuSetup(void)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case START_SETUP_FINISH:
-        CreateTask(Task_HandleStartMenuInput, 0);
+        CreateTask(Task_WaitForFadingInStartMenu, 0);
         SetVBlankCallback(VBlankCB_StartMenu);
         SetMainCallback2(CB2_StartMenu);
         return;
