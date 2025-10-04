@@ -87,17 +87,24 @@ static const struct SiliconExpTestData sBelenTrainers =
     },
 };
 
-/*
 static const struct SiliconExpTestData sKai_NewassholeappearsTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_0,
     .targetLevel = LEVEL_CAP_VALUE_1,
     .trainerIds =
     {
+        TRAINER_0465BF77,
+        TRAINER_0467DF00,
+        TRAINER_04687C53,
+        TRAINER_048D5D99,
+        TRAINER_04E334E9,
+        TRAINER_04A59E40,
+        TRAINER_05BDEABF,
+        TRAINER_06400A0C,
+        TRAINER_070F6125,
         TRAINER_NONE
     },
 };
-*/
 
 static const struct SiliconExpTestData sShinzo_GymTrainers =
 {
@@ -108,6 +115,14 @@ static const struct SiliconExpTestData sShinzo_GymTrainers =
         TRAINER_031A849F,
         TRAINER_041FD20E,
         TRAINER_045FDD44,
+        TRAINER_068B06CE,
+        TRAINER_06BE2D1B,
+        TRAINER_06C68007,
+        TRAINER_06D2BD08,
+        TRAINER_07D063A5,
+        TRAINER_09AEC824,
+        TRAINER_09B7B6C8,
+        TRAINER_0A542D33,
         TRAINER_NONE
     },
 };
@@ -410,14 +425,13 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Belen")
 
     SiliconExpTest(&sBelenTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-/*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Newassholeappears")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
     SiliconExpTest(&sKai_NewassholeappearsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-*/
+
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Shinzo Gym")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;

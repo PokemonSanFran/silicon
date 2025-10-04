@@ -3835,8 +3835,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Astonish
 - Swift
 
-
-
 === TRAINER_026E91A6 ===
 Name: 026E91A6
 Pic: Cooltrainer M
@@ -4030,10 +4028,12 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Tora Town
+Battle Type: Single
 
 Murkrow @ Twisted Spoon
 Ability: Prankster
-Level: 25
+Level: 26
 EVs: 64 Atk/64 SpA
 Docile Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -4064,10 +4064,12 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Double 
 
 Foongus @ Shuca Berry
 Ability: Effect Spore
-Level: 24
+Level: 25
 EVs: 84 Def/40 SpD
 Quiet Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -4098,6 +4100,8 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Tora Town
+Battle Type: Single
 
 Mareanie @ Mystic Water
 Ability: Limber  
@@ -4110,7 +4114,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 Deino @ Never-Melt Ice  
 Ability: Hustle  
-Level: 25  
+Level: 26
 EVs: 64 Atk / 64 SpA  
 Mild Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
@@ -4121,141 +4125,585 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Single
 
-Spewpa
-Level: 1
+Misdreavus @ Quick Claw  
+Ability: Levitate  
+Level: 26
+EVs: 132 Spe  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Taunt  
+- Destiny Bond  
+- Shadow Sneak  
+
+Sharpedo  
+Ability: Speed Boost  
+Level: 25
+EVs: 132 Spe  
+Naive Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Destiny Bond  
+- Taunt  
+- Assurance  
+- Psychic Fangs  
 
 === TRAINER_0467DF00 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Double
 
-Spewpa
-Level: 1
+Miltank (F) @ Covert Cloak
+Ability: Thick Fat
+Level: 26
+EVs: 44 HP/48 Def/40 SpD
+Impish Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sandstorm
+- Rollout
+- Heal Bell
+
+Gligar @ Bright Powder
+Ability: Sand Veil
+Level: 23
+EVs: 132 HP
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Fury Cutter
+- Toxic
+- Knock Off
+- Rock Slide
+
+Chansey @ Smooth Rock
+Ability: Healer
+Level: 23
+EVs: 136 SpD
+Gentle Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sandstorm
+- Heal Pulse
+- Hyper Voice
 
 === TRAINER_04687C53 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Single
 
-Spewpa
-Level: 1
+Sliggoo @ Oran Berry
+Ability: Gooey
+Level: 26
+EVs: 136 Def
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Acid Spray
+- Chilling Water
+- Skitter Smack
 
 === TRAINER_048D5D99 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Single
 
-Spewpa
-Level: 1
+Aron @ Sitrus Berry
+Ability: Sturdy
+Level: 27
+EVs: 132 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Metal Burst
+- Curse
+- Harden
+
+Aron @ Focus Band
+Ability: Sturdy
+Level: 24
+EVs: 132 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Metal Burst
+- Curse
+- Endeavor
+- Sandstorm
 
 === TRAINER_04A59E40 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Single
 
-Spewpa
-Level: 1
+Floette (F) @ Lum Berry
+Ability: Flower Veil
+Level: 24
+EVs: 32 HP/104 Def
+Relaxed Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Wish
+- Baton Pass
+- Light Screen
+- Magical Leaf
+
+Kingler @ Mystic Water
+Ability: Shell Armor
+Level: 25
+EVs: 48 Atk/88 Spe
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Brick Break
+- Razor Shell
+- Night Slash
+
+Slowbro @ Mystic Water
+Ability: Regenerator
+Level: 24
+EVs: 136 SpA
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Avalanche
+- Psychic Noise
+- Muddy Water
+
 
 === TRAINER_04E334E9 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Double
 
-Spewpa
-Level: 1
+Remoraid @ Oran Berry  
+Ability: Moody  
+Level: 25
+EVs: 136 Atk  
+Lonely Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Substitute  
+- Protect  
+- Icy Wind  
+- Rock Blast  
 
-/*
-* PSF TODO stopped here
-*/
+Remoraid @ Oran Berry  
+Ability: Moody  
+Level: 25
+EVs: 136 SpA  
+Rash Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Substitute  
+- Protect  
+- Bullet Seed  
+- Chilling Water  
+
+Scovillain @ Oran Berry  
+Ability: Moody  
+Level: 24
+EVs: 16 HP / 32 Atk / 16 Def / 32 SpA / 16 SpD / 24 Spe  
+Quirky Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Substitute  
+- Protect  
+- Magical Leaf  
+- Temper Flare  
 
 === TRAINER_05BDEABF ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Double
 
-Spewpa
-Level: 1
+Capsakid @ Smooth Rock  
+Ability: Insomnia  
+Level: 23
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Sandstorm  
+- Leech Seed  
+- Substitute  
+- Protect  
+
+Foongus @ Sitrus Berry  
+Ability: Effect Spore  
+Level: 21
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Poison Powder  
+- Pollen Puff  
+- Protect  
+- Absorb  
+
+Golett @ Leftovers  
+Ability: Iron Fist  
+Level: 25
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Sandstorm  
+- Curse  
+- Knock Off  
+- Protect  
 
 === TRAINER_06400A0C ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Double
 
-Spewpa
-Level: 1
+Charjabug @ Eject Button  
+Ability: Battery  
+Level: 24
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Sticky Web  
+- Light Screen  
+- Electroweb  
+- Bug Bite  
+
+Lampent @ Cheri Berry  
+Ability: Flame Body  
+Level: 25
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Night Shade  
+- Ember  
+- Will-O-Wisp  
+
+Doublade  
+Ability: No Guard  
+Level: 26
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Shadow Sneak  
+- Shadow Claw  
+- Brutal Swing  
 
 === TRAINER_068B06CE ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route9
+Battle Type: Single
 
-Spewpa
-Level: 1
+Koffing  
+Ability: Neutralizing Gas  
+Level: 23
+EVs: 56 Atk / 72 Def  
+Relaxed Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Will-O-Wisp  
+- Sludge  
+- Body Slam  
+
+Vulpix @ Wide Lens  
+Ability: Flash Fire  
+Level: 23
+EVs: 136 Spe  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Inferno  
+- Baby-Doll Eyes  
+- Dig  
+- Hex  
+
+Granbull @ Flame Orb  
+Ability: Quick Feet  
+Level: 24
+EVs: 28 Atk / 108 SpD  
+Naughty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Fling  
+- Facade  
+- Protect  
+
+Magby @ Charcoal  
+Ability: Flame Body  
+Level: 25
+EVs: 80 Atk / 48 Spe  
+Lonely Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Will-O-Wisp  
+- Flame Wheel  
+- Low Kick  
+
 
 === TRAINER_06BE2D1B ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+Map Section: Route9
 
-Spewpa
-Level: 1
+Togetic @ Scope Lens
+Ability: Super Luck
+Level: 24
+EVs: 72 Def/64 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Ancient Power
+- Play Rough
+- Pounce
+- Follow Me
+
+Cubchoo
+Ability: Rattled
+Level: 22
+EVs: 92 Atk/44 Def
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Frost Breath
+- Dig
+
+Murkrow @ Scope Lens
+Ability: Super Luck
+Level: 25
+EVs: 92 Atk/36 Spe
+Docile Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Tailwind
+- Air Cutter
+- Snarl
+
+Ariados @ Scope Lens
+Ability: Sniper
+Level: 23
+Shiny: Yes
+EVs: 136 Atk
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Cross Poison
+- Night Slash
 
 === TRAINER_06C68007 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+Map Section: Route9
 
-Spewpa
-Level: 1
+Flaaffy @ Fairy Feather
+Ability: Static
+Level: 25
+EVs: 104 SpA/20 Spe
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Discharge
+- Dazzling Gleam
+
+Piloswine @ Expert Belt
+Ability: Oblivious
+Level: 25
+EVs: 96 Atk/32 SpD
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Bulldoze
+- Icy Wind
 
 === TRAINER_06D2BD08 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route9
+Battle Type: Double
 
-Spewpa
-Level: 1
+Spinda @ Mago Berry  
+Ability: Tangled Feet  
+Level: 27
+EVs: 36 HP / 96 SpA  
+Serious Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Icy Wind  
+- Psybeam  
+- Drain Punch  
+
+Linoone @ Blunder Policy  
+Ability: Quick Feet  
+Level: 25  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Icy Wind  
+- Body Slam  
+- Fury Swipes  
+
+Porygon  
+Ability: Download  
+Level: 27  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Icy Wind  
+- Tri Attack  
 
 === TRAINER_070F6125 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route10
+Battle Type: Single
 
-Spewpa
-Level: 1
+Mienfoo @ Salac Berry  
+Ability: Inner Focus  
+Level: 27  
+EVs: 20 HP / 116 Atk  
+Naughty Nature  
+- Endure  
+- Reversal  
+- Acrobatics  
+
+Hitmonlee @ Black Belt  
+Ability: Unburden  
+Level: 26  
+EVs: 116 Atk / 12 SpD  
+Lonely Nature  
+- Endure  
+- Reversal  
+- Vacuum Wave  
 
 === TRAINER_07D063A5 ===
-Name: Blank
+Name: 07D063A5 
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route9
+Battle Type: Single
 
-Spewpa
-Level: 1
+Squawkabilly
+Ability: Intimidate
+Level: 25
+EVs: 128 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Helping Hand
+- U-turn
+
+Squawkabilly-Blue @ Shed Shell
+Ability: Intimidate
+Level: 25
+EVs: 128 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Helping Hand
+- Air Slash
+
+Squawkabilly-White @ Red Card
+Ability: Intimidate
+Level: 25
+EVs: 128 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Helping Hand
+- Heat Wave
+
+Squawkabilly-Yellow @ Eject Button
+Ability: Intimidate
+Level: 25
+EVs: 128 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Helping Hand
+- Aerial Ace
 
 === TRAINER_09AEC824 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route9
+Battle Type: Single
 
-Spewpa
-Level: 1
+Drowzee  
+Ability: Inner Focus  
+Level: 26  
+EVs: 124 SpA  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Thunder Wave  
+- Night Shade  
+- Confusion  
+
+Pachirisu  
+Ability: Volt Absorb  
+Level: 22  
+EVs: 64 HP / 40 Def / 24 SpD  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bite  
+- Nuzzle  
+- Thunder Fang  
+
+Snivy  
+Ability: Overgrow  
+Level: 24  
+EVs: 120 Atk / 16 SpD  
+Lonely Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Petal Blizzard  
+- Glare  
+- Bullet Seed  
+
+Shiinotic  
+Ability: Effect Spore  
+Level: 24  
+EVs: 84 HP / 44 SpD  
+Calm Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Stun Spore  
+- Revival Blessing  
+- Draining Kiss  
+- Confuse Ray  
 
 === TRAINER_09B7B6C8 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route9
+Battle Type: Single
 
-Spewpa
-Level: 1
+Malamar @ Sitrus Berry  
+Ability: Contrary  
+Level: 23  
+EVs: 128 Spe  
+Naive Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Swagger  
+- Light Screen  
+- Acupressure  
+
+Ditto @ Choice Scarf  
+Ability: Imposter  
+Level: 29  
+EVs: 60 Atk / 72 SpA  
+Lonely Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
 
 === TRAINER_0A542D33 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route9
+Battle Type: Double
 
-Spewpa
-Level: 1
+Cleffa @ Mental Herb
+Ability: Cute Charm
+Level: 25
+EVs: 128 SpA
+Serious Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Helping Hand
+- Dazzling Gleam
+- Light Screen
+
+Clefairy (M) @ Mental Herb
+Ability: Cute Charm
+Level: 25
+EVs: 64 Def/64 SpD
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Helping Hand
+- Dazzling Gleam
+- Light Screen
+
+Clefable (F) @ Mental Herb
+Ability: Cute Charm
+Level: 25
+EVs: 128 SpA
+Serious Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Helping Hand
+- Dazzling Gleam
+- Light Screen
 
 === TRAINER_0A8B9F88 ===
 Name: Blank
