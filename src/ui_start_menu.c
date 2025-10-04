@@ -1724,9 +1724,3 @@ static void FreeStartMenuData(void)
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
 }
-
-void StartMenuCallnative(void)
-{
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_OpenUIStartMenu, 0);
-}
