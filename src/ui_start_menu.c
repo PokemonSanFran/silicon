@@ -315,7 +315,7 @@ static void SetupStartMenuMainWindows(void);
 static void SetupStartMenuText(void);
 static void PrintStartMenuHelpTopText(void);
 static void PrintStartMenuHelpBottomText(void);
-static void PrintStartMenuTextboxText(void);
+static void PrintStartMenuQuestFlavorText(void);
 static void PrintStartMenuAppTitleText(void);
 static void PrintStartMenuEggInfo(void);
 static inline void PrintStartMenuText(enum StartMenuMainWindows, u32, u32, u32, u32, u8 const *);
@@ -504,7 +504,7 @@ static const u8 *const sStartMenuModeControls[NUM_START_MODES] =
     [START_MODE_SAVE_FORCE]  = COMPOUND_STRING(""),
 };
 
-static const u8 *const sStartMenuModeTextboxes[NUM_START_MODES] =
+static const u8 *const sStartMenuModeQuestFlavors[NUM_START_MODES] =
 {
     [START_MODE_NORMAL] = COMPOUND_STRING(" "),
     [START_MODE_MOVE] = COMPOUND_STRING("Move where?"),
@@ -1376,7 +1376,7 @@ static void SetupStartMenuText(void)
 {
     PrintStartMenuHelpTopText();
     PrintStartMenuHelpBottomText();
-    PrintStartMenuTextboxText();
+    PrintStartMenuQuestFlavorText();
     PrintStartMenuAppTitleText();
     PrintStartMenuEggInfo();
 }
@@ -1466,21 +1466,37 @@ static u32 GetQuestFlavorForStartMenu(void)
     return questFlavor;
 }
 
-// TODO: richer interaction
-static void PrintStartMenuTextboxText(void)
+static void PrintStartMenuQuestFlavorText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_TEXTBOX, PIXEL_FILL(0));
 
-    bool32 storyNotClear = VarGet(VAR_STORYLINE_STATE) < STORY_CLEAR;
+    bool32 isStoryNotClear = !FlagGet(FLAG_SYS_GAME_CLEAR);
     u32 questFlavor = GetQuestFlavorForStartMenu();
+    u32 inactiveQuests = CountInactiveQuests();
 
-    StringCopy(gStringVar1, sStartMenuModeTextboxes[sStartMenuDataPtr->mode]);
-    if (storyNotClear)
+    if (isStoryNotClear)
+    {
         StringCopy(gStringVar1, GetQuestDesc_PlayersAdventure());
+    }
     else if (questFlavor != QUEST_NONE)
+    {
         QuestMenu_UpdateQuestDesc(questFlavor);
+    }
+    else if (inactiveQuests)
+    {
+        ConvertIntToDecimalStringN(gStringVar2, inactiveQuests, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("The Resido region has {STR_VAR_2} more task(s) for you!"));
+    }
+    else
+    {
+        StringCopy(gStringVar1, COMPOUND_STRING("You’ve completed everything. Enjoy Pokémon Silicon!"));
+    }
 
-    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL_NARROW, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
+    // prioritize mode flavor if other modes is active
+    if (sStartMenuDataPtr->mode != START_MODE_NORMAL)
+        StringCopy(gStringVar1, sStartMenuModeQuestFlavors[sStartMenuDataPtr->mode]);
+
+    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_NORMAL, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
 
     CopyWindowToVram(START_MAIN_WIN_TEXTBOX, COPYWIN_FULL);
 }

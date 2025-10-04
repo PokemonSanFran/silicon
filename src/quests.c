@@ -140,7 +140,6 @@ static u8 GenerateList(void);
 static void AssignCancelNameAndId(u8 numRow);
 
 static u32 CountUnlockedQuests(void);
-static u32 CountInactiveQuests(void);
 static u32 CountActiveQuests(void);
 static u32 CountRewardQuests(void);
 static u32 CountFavoriteQuests(void);
