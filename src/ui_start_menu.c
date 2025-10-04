@@ -59,6 +59,7 @@
 #include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/map_types.h"
 
 // constants, structs
 
@@ -170,12 +171,11 @@ enum StartMenuHelpSymbols
 
     START_HELP_SYMBOL_MAP,
 
-    // Internet Signal
-    START_HELP_SYMBOL_SIG_3,
-    START_HELP_SYMBOL_SIG_2,
-    START_HELP_SYMBOL_SIG_1,
-    START_HELP_SYMBOL_SIG_0A,
+    // Cellular Signal
     START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
+    START_HELP_SYMBOL_SIG_0A,
+    START_HELP_SYMBOL_SIG_1,
+    START_HELP_SYMBOL_SIG_2,
 
     NUM_START_HELP_SYMBOLS
 };
@@ -233,6 +233,15 @@ enum StartMenuHpBarPercentage
     START_HP_BAR_PERCENTAGE_9,
 
     NUM_START_HP_BAR_PERCENTAGES
+};
+
+enum StartMenuCellularSignals
+{
+    START_SIGNAL_NONE,
+    START_SIGNAL_OKAY,
+    START_SIGNAL_STRONG,
+
+    NUM_START_SIGNALS
 };
 
 enum StartMenuSetupSteps
@@ -703,6 +712,22 @@ static const u16 sStartMenuInstalledApps[NUM_START_APPS] =
     [START_APP_SURPRISE_TRADE]   = FLAG_SYS_STARTER_APPS_GET,
     [START_APP_GOOGLE_GLASS]     = FLAG_SYS_APP_GOOGLE_GLASS_GET,
     [START_APP_ADVENTURES_GUIDE] = 0, // always there
+};
+
+// misc
+
+static const enum StartMenuCellularSignals sStartSignalsByMapType[] =
+{
+    [MAP_TYPE_NONE] = START_SIGNAL_NONE,
+    [MAP_TYPE_TOWN] = START_SIGNAL_STRONG,
+    [MAP_TYPE_CITY] = START_SIGNAL_STRONG,
+    [MAP_TYPE_ROUTE] = START_SIGNAL_STRONG,
+    [MAP_TYPE_UNDERGROUND] = START_SIGNAL_NONE,
+    [MAP_TYPE_UNDERWATER] = START_SIGNAL_NONE,
+    [MAP_TYPE_OCEAN_ROUTE] = START_SIGNAL_OKAY,
+    [MAP_TYPE_UNKNOWN] = START_SIGNAL_NONE,
+    [MAP_TYPE_INDOOR] = START_SIGNAL_OKAY,
+    [MAP_TYPE_SECRET_BASE] = START_SIGNAL_OKAY,
 };
 
 // code
@@ -1596,7 +1621,7 @@ static inline void PrintStartMenuText(enum StartMenuMainWindows window, u32 font
 
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols sym, u16 x)
 {
-    BlitBitmapRectToWindow(START_MAIN_WIN_HELP_TOP, sStartMenuHelpSymbols, sym * 16, 0, 160, 16, x, 0, 16, 16);
+    BlitBitmapRectToWindow(START_MAIN_WIN_HELP_TOP, sStartMenuHelpSymbols, sym * 16, 0, 144, 16, x, 0, 16, 16);
 }
 
 static inline void BlitEggInfoSymbols(enum StartMenuEggInfoSymbols sym, u16 x, u16 y)
@@ -1622,8 +1647,12 @@ static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void)
 
 static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void)
 {
-    // TODO (for someone else): signal control stuff
-    return START_HELP_SYMBOL_SIG_3;
+    u32 mapType = GetCurrentMapType();
+
+    if (mapType > MAP_TYPE_SECRET_BASE)
+        mapType = (mapType % (MAP_TYPE_SECRET_BASE + 1));
+
+    return sStartSignalsByMapType[mapType] + START_HELP_SYMBOL_SIG_0A;
 }
 
 static inline u32 GetMonHealthPercentage(struct Pokemon *mon)
