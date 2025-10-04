@@ -402,6 +402,11 @@ void Task_OpenPokedexFromStartMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+void CB2_PokedexFromStartMenu(void)
+{
+    Pokedex_InitializeAndSaveCallback(CB2_ReturnToUIStartMenu);
+}
+
 static void Pokedex_ReturnFromAdventureGuide(void)
 {
     Pokedex_InitializeAndSaveCallback(gMain.savedCallback);
@@ -425,7 +430,7 @@ static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
         return;
     }
     firstOpen = TRUE;
-    SaveCallbackToPokedex(CB2_ReturnToUIMenu);
+    SaveCallbackToPokedex(CB2_ReturnToUIStartMenu);
     SetMainCallback2(Pokedex_SetupCallback);
 }
 

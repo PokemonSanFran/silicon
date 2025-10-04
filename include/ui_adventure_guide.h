@@ -4,6 +4,7 @@
 #include "main.h"
 
 void Task_OpenAdventureGuideFromStartMenu(u8 taskId);
+void CB2_AdventureGuideFromStartMenu(void);
 void Adventure_Guide_Init(MainCallback callback);
 bool8 shouldSkipGuide(u8 guideNum);
 void Task_OpenAdventureGuideFromMenu(u8 taskId);

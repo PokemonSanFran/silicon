@@ -2714,6 +2714,11 @@ void Task_QuestMenu_OpenFromStartMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+void CB2_QuestMenuFromStartMenu(void)
+{
+    QuestMenu_Init(CB2_ReturnToUIStartMenu);
+}
+
 void QuestMenu_CopyQuestName(u8 *dst, u8 questId)
 {
     StringCopy(dst, sSideQuests[questId].name);

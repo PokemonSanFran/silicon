@@ -592,7 +592,7 @@ void ResetBagScrollPositions(void)
 void CB2_BagMenuFromStartMenu(void)
 {
     // Start siliconMerge
-	GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToUIMenu);
+	GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToUIStartMenu);
 	//GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFieldWithOpenMenu);
 	// End siliconMerge
 }

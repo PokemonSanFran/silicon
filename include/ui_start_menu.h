@@ -40,5 +40,6 @@ enum StartMenuApps
 
 void OpenStartMenu(enum StartMenuModes mode);
 bool32 OpenNormalUIStartMenu(void);
+void CB2_ReturnToUIStartMenu(void);
 
 #endif // GUARD_UI_START_MENU_H

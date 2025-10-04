@@ -188,6 +188,11 @@ void Task_OpenPrestoFromStartMenu(u8 taskId)
     }
 }
 
+void CB2_PrestoFromStartMenu(void)
+{
+    Presto_Init(CB2_ReturnToUIStartMenu);
+}
+
 // This is our main initialization function if you want to call the menu from elsewhere
 void Presto_Init(MainCallback callback)
 {

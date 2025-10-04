@@ -1235,6 +1235,11 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
     }
 }
 
+void CB2_MapSystemFromStartMenu(void)
+{
+    MapSystem_Init(CB2_ReturnToUIStartMenu);
+}
+
 // This is our main initialization function if you want to call the menu from elsewhere
 void MapSystem_Init(MainCallback callback)
 {

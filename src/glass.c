@@ -600,6 +600,11 @@ void Task_OpenGlassFromStartMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+void CB2_GlassFromStartMenu(void)
+{
+    Glass_Init(CB2_ReturnToUIStartMenu, -1, -1, -1, -1, -1);
+}
+
 static void Glass_Init(MainCallback callback, s32 locationId, s32 row, s32 column, u16 locationRow, u16 locationScroll)
 {
     if (AllocateStructs())

@@ -354,6 +354,11 @@ void Task_OpenBuzzrFromStartMenu(u8 taskId)
     }
 }
 
+void CB2_BuzzrFromStartMenu(void)
+{
+    Buzzr_Init(CB2_ReturnToUIStartMenu);
+}
+
 static void ResetQuestFanfareFlag(void)
 {
     FlagClear(FLAG_QUEST_FANFARE);

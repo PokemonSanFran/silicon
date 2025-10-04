@@ -38,13 +38,23 @@
 #include "quests.h"
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
+#include "dexnav.h"
 #include "siliconDaycare.h"
 #include "event_object_movement.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
+#include "trainer_card.h"
+#include "frontier_pass.h"
+#include "buzzr.h"
+#include "glass.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
 #include "ui_main_menu.h"
+#include "ui_map_system.h"
+#include "ui_pokedex.h"
+#include "ui_character_customization_menu.h"
+#include "ui_adventure_guide.h"
+#include "ui_presto.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
 #include "constants/songs.h"
@@ -326,28 +336,28 @@ static const struct BgTemplate sStartMenuBgs[NUM_START_BACKGROUNDS] =
     {
         .bg = START_BG_TEXT,
         .charBaseIndex = 0,
-        .mapBaseIndex = 20,
+        .mapBaseIndex = 24,
         .screenSize = 2,
         .priority = 0
     },
     {
         .bg = START_BG_CAUTIONBOX,
         .charBaseIndex = 2,
-        .mapBaseIndex = 22,
+        .mapBaseIndex = 26,
         .screenSize = 1,
         .priority = 1
     },
     {
         .bg = START_BG_TEXTBOX,
         .charBaseIndex = 1,
-        .mapBaseIndex = 24,
+        .mapBaseIndex = 28,
         .screenSize = 2,
         .priority = 2
     },
     {
         .bg = START_BG_WALLPAPER,
         .charBaseIndex = 1,
-        .mapBaseIndex = 26,
+        .mapBaseIndex = 30,
         .screenSize = 2,
         .priority = 3
     },
@@ -524,7 +534,30 @@ static const u8 *const sStartMenuModeAppNames[NUM_START_APPS] =
     [START_APP_SAVE] = COMPOUND_STRING("Save"),
     [START_APP_SURPRISE_TRADE] = COMPOUND_STRING("Surprise Trade"),
     [START_APP_GOOGLE_GLASS] = COMPOUND_STRING("Google Glass"),
-    [START_APP_ADVENTURES_GUIDE] = COMPOUND_STRING("Adventure's guide"),
+    [START_APP_ADVENTURES_GUIDE] = COMPOUND_STRING("Adventure Guide"),
+};
+
+static const MainCallback sStartAppMenusPtr[NUM_START_APPS] =
+{
+    // first row
+    [START_APP_PARTY] = CB2_PartyMenuFromStartMenu,
+    [START_APP_BAG] = CB2_BagMenuFromStartMenu,
+    [START_APP_ARRIBA] = CB2_MapSystemFromStartMenu,
+    [START_APP_TODOS] = CB2_QuestMenuFromStartMenu,
+    [START_APP_DEXNAV] = CB2_DexNavFromStartMenu,
+    [START_APP_POKEDEX] = CB2_PokedexFromStartMenu,
+    [START_APP_BUZZR] = CB2_BuzzrFromStartMenu,
+    [START_APP_OPTIONS] = CB2_OptionsFromStartMenu,
+
+    // second row
+    [START_APP_TRAINER_CARD] = NULL, // TODO as vanilla's very borked to use
+    [START_APP_PRESTO] = CB2_PrestoFromStartMenu,
+    [START_APP_WAVES_OF_CHANGE] = NULL, // TODO
+    [START_APP_CUSTOMIZE] = CB2_CustomizationFromStartMenu,
+    [START_APP_SAVE] = NULL, // TODO
+    [START_APP_SURPRISE_TRADE] = NULL, // TODO
+    [START_APP_GOOGLE_GLASS] = CB2_GlassFromStartMenu,
+    [START_APP_ADVENTURES_GUIDE] = CB2_AdventureGuideFromStartMenu,
 };
 
 //sprite
@@ -774,6 +807,12 @@ void OpenStartMenu(enum StartMenuModes mode)
     SetMainCallback2(CB2_StartMenuSetup);
 }
 
+void CB2_ReturnToUIStartMenu(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    OpenStartMenu(START_MODE_NORMAL);
+}
+
 static void CB2_StartMenuSetup(void)
 {
     enum StartMenuSetupSteps steps = gMain.state;
@@ -781,12 +820,13 @@ static void CB2_StartMenuSetup(void)
     switch (steps)
     {
     case START_SETUP_RESET:
+        CpuFill16(0, (void *)VRAM, VRAM_SIZE);
         FillPalette(RGB_BLACK, BG_PLTT_ID(0), PLTT_SIZEOF(512));
         ResetVramOamAndBgCntRegs();
         ResetAllBgsCoordinatesAndBgCntRegs();
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        SetVBlankHBlankCallbacksToNull();
+        FieldClearVBlankHBlankCallbacks();
         ClearScheduledBgCopiesToVram();
         ScanlineEffect_Stop();
         FreeAllSpritePalettes();
@@ -1063,6 +1103,23 @@ static inline void HandleAppGridDirectionalInputs(void)
 
 static void HandleAppGridNormalInputs(u8 taskId)
 {
+    if (JOY_NEW(A_BUTTON))
+    {
+        enum StartMenuApps app = GetCurrentAppFromIndex(GetAppGridCurrentIndex());
+
+        if (!sStartAppMenusPtr[app] || !app)
+        {
+            PlaySE(SE_BOO);
+            return;
+        }
+
+        PlaySE(SE_SELECT);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        sStartMenuDataPtr->savedCB = sStartAppMenusPtr[app];
+        gTasks[taskId].func = Task_CloseStartMenu;
+        return;
+    }
+
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
@@ -1088,6 +1145,7 @@ static void SetupStartMenuBgs(void)
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 9));
+    EnableInterrupts(INTR_FLAG_VBLANK);
 }
 
 static void SetupStartMenuGraphics(void)
@@ -1413,15 +1471,14 @@ static void PrintStartMenuTextboxText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_TEXTBOX, PIXEL_FILL(0));
 
-    bool32 storyNotClear = (VarGet(VAR_STORYLINE_STATE) < STORY_CLEAR);
+    bool32 storyNotClear = VarGet(VAR_STORYLINE_STATE) < STORY_CLEAR;
     u32 questFlavor = GetQuestFlavorForStartMenu();
 
+    StringCopy(gStringVar1, sStartMenuModeTextboxes[sStartMenuDataPtr->mode]);
     if (storyNotClear)
         StringCopy(gStringVar1, GetQuestDesc_PlayersAdventure());
     else if (questFlavor != QUEST_NONE)
         QuestMenu_UpdateQuestDesc(questFlavor);
-    else
-        StringCopy(gStringVar1, sStartMenuModeTextboxes[sStartMenuDataPtr->mode]);
 
     PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL_NARROW, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
 

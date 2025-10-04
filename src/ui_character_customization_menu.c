@@ -409,6 +409,11 @@ void Task_OpenCharacterCustomizationMenuFromStartMenu(u8 taskId)
     }
 }
 
+void CB2_CustomizationFromStartMenu(void)
+{
+    Character_Customization_Menu_Init(CB2_ReturnToUIStartMenu);
+}
+
 void ResetCustomizationValuesData(void){
     u8 i;
 

@@ -236,6 +236,11 @@ void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+void CB2_AdventureGuideFromStartMenu(void)
+{
+    Adventure_Guide_Init(CB2_ReturnToUIStartMenu);
+}
+
 void OpenAdventureGuideFromScript(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);

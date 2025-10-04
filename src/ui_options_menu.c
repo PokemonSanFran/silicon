@@ -252,6 +252,11 @@ void Task_OpenOptionsMenuFromStartMenu(u8 taskId)
     }
 }
 
+void CB2_OptionsFromStartMenu(void)
+{
+    Options_Menu_Init(CB2_ReturnToUIStartMenu);
+}
+
 void CB2_InitUiOptionMenuFromDevLetter(void)
 {
     NewGameInitData();
