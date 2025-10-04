@@ -1525,7 +1525,7 @@ static void PrintStartMenuQuestFlavorText(void)
     if (sStartMenuDataPtr->mode != START_MODE_NORMAL)
         StringCopy(gStringVar1, sStartMenuModeQuestFlavors[sStartMenuDataPtr->mode]);
 
-    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_NORMAL, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
+    PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL_NARROW, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
 
     CopyWindowToVram(START_MAIN_WIN_TEXTBOX, COPYWIN_FULL);
 }
@@ -1616,7 +1616,7 @@ static inline void PrintStartMenuText(enum StartMenuMainWindows window, u32 font
         x = GetStringCenterAlignXOffset(font, str, TILE_TO_PIXELS(desiredWidth));
 
     AddTextPrinterParameterized4(window, font, x, y, GetFontAttribute(font, FONTATTR_LETTER_SPACING),
-                                 GetFontAttribute(font, FONTATTR_LETTER_SPACING), txtClr, 0, str);
+                                 GetFontAttribute(font, FONTATTR_LINE_SPACING), txtClr, 0, str);
 }
 
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols sym, u16 x)
