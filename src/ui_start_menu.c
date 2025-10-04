@@ -297,7 +297,7 @@ static bool32 IsAppWithinAnIndex(enum StartMenuApps);
 static u32 GetFirstEmptyAppIndex(void);
 static bool32 IsAppUnlocked(enum StartMenuApps);
 static u32 CountCurrentNumberOfApps(void);
-static enum StartMenuApps GetCurrentAppFromIndex(u8);
+static enum StartMenuApps GetAppFromIndex(u8);
 
 static void HandleAppGridNormalInputs(u8);
 static inline void HandleAppGridDirectionalInputs(void);
@@ -938,7 +938,11 @@ static bool32 IsAppUnlocked(enum StartMenuApps app)
     if (!app || app >= NUM_START_APPS)
         return FALSE;
 
-    return sStartMenuInstalledApps[app];
+    // apps that is always there e.g. save
+    if (!sStartMenuInstalledApps[app])
+        return TRUE;
+
+    return FlagGet(sStartMenuInstalledApps[app]);
 }
 
 static u32 CountCurrentNumberOfApps(void)
@@ -954,7 +958,7 @@ static u32 CountCurrentNumberOfApps(void)
     return count;
 }
 
-static enum StartMenuApps GetCurrentAppFromIndex(u8 idx)
+static enum StartMenuApps GetAppFromIndex(u8 idx)
 {
     enum StartMenuApps app;
 
@@ -1105,7 +1109,7 @@ static void HandleAppGridNormalInputs(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON))
     {
-        enum StartMenuApps app = GetCurrentAppFromIndex(GetAppGridCurrentIndex());
+        enum StartMenuApps app = GetAppFromIndex(GetAppGridCurrentIndex());
 
         if (!sStartAppMenusPtr[app] || !app)
         {
@@ -1197,7 +1201,7 @@ static void SetupStartMenuMainAppSprites(void)
     enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
     for (u32 i = 0; i < sStartMenuDataPtr->numApps; i++, aIcon++, aBg++)
     {
-        enum StartMenuApps a = GetCurrentAppFromIndex(i);
+        enum StartMenuApps a = GetAppFromIndex(i);
 
         spriteIds[aIcon] = CreateSprite(template, 35 + 8, 72 + 8, 1);
         sprite = &gSprites[spriteIds[aIcon]];
@@ -1506,9 +1510,7 @@ static void PrintStartMenuAppTitleText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_APP_TITLE, PIXEL_FILL(0));
 
-    enum StartMenuApps app = GetCurrentAppFromIndex(GetAppGridCurrentIndex());
-
-    DebugPrintf("id: %d, name: %S", app, sStartMenuModeAppNames[app]);
+    enum StartMenuApps app = GetAppFromIndex(GetAppGridCurrentIndex());
 
     PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0,
                        sStartMenuModeAppNames[app]);
