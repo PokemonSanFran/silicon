@@ -1128,7 +1128,7 @@ static void SanitizeAppGridYCursor(s32 delta)
     if (cursorMovingDown && isLastColumn)
         SetAppGridYCursor(0);
     else if (!cursorMovingDown && !row)
-        SetAppGridYCursor(START_APP_GRID_COLUMN_1);
+        SetAppGridYCursor(rowSize);
     else
         SetAppGridYCursor(row + delta);
 }
