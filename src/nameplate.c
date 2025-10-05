@@ -106,6 +106,7 @@ static const u32 sNameplateRightSecondRow5[] = INCBIN_U32("graphics/ui_menus/msg
 static const u32 sNameplateRightSecondRow6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow6.4bpp.smol");
 static const u32 sNameplateRightSecondRow7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow7.4bpp.smol");
 static const u32 sNameplateRightSecondRow8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow8.4bpp.smol");
+static const u32 sEmptyTile[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/emptyTile.4bpp.smol");
 static const u32 sNameplateRightThirdRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow0.4bpp.smol");
 static const u32 sNameplateRightThirdRow1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow1.4bpp.smol");
 static const u32 sNameplateRightThirdRow2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow2.4bpp.smol");
@@ -212,7 +213,7 @@ static const u32* const nameplateRightSecondRowLUT[] =
 
 static const u32* const nameplateRightThirdRowLUT[] =
 {
-    NULL,
+    sNameplateRightThirdRow0,
     sNameplateRightThirdRow1,
     sNameplateRightThirdRow2,
     sNameplateRightThirdRow3,
@@ -225,7 +226,7 @@ static const u32* const nameplateRightThirdRowLUT[] =
 
 static const u32* const nameplateRightTopLUT[] =
 {
-    NULL,
+    sEmptyTile,
     sNameplateRightTop1,
     sNameplateRightTop2,
     sNameplateRightTop3,
