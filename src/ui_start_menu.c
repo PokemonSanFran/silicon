@@ -43,6 +43,7 @@
 #include "event_object_movement.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
+#include "save.h"
 #include "trainer_card.h"
 #include "frontier_pass.h"
 #include "buzzr.h"
@@ -275,12 +276,24 @@ enum StartMenuAppColumns {
     NUM_START_APP_GRID_COLUMNS
 };
 
+enum StartMenuSaveResults
+{
+    START_SAVE_INACTIVE,
+    START_SAVE_IN_PROGRESS,
+    START_SAVE_OVERWRITE,
+    START_SAVE_SUCCESS,
+    START_SAVE_FAILURE,
+
+    NUM_START_SAVE_RESULTS
+};
+
 #define MAX_APP_COLUMNS       2
 
 struct StartMenuData
 {
     u8 spriteIds[NUM_START_MAIN_SPRITES];
     enum StartMenuModes mode;
+    enum StartMenuSaveResults saveRes;
     u8 numApps;
     MainCallback savedCB;
     struct UCoords8 cursor;
@@ -309,10 +322,13 @@ static u32 CountCurrentNumberOfApps(void);
 static enum StartMenuApps GetAppFromIndex(u8);
 
 static void HandleAppGridNormalInputs(u8);
+static void HandleAppGridSaveInputs(u8);
 static inline void HandleAppGridDirectionalInputs(void);
 static u32 GetAppGridCurrentRow(void);
 static u32 GetAppGridCurrentColumn(void);
 static u32 GetAppGridCurrentIndex(void);
+
+static void Task_BeginSave(u8);
 
 static void SetupStartMenuBgs(void);
 static void SetupStartMenuGraphics(void);
@@ -519,6 +535,22 @@ static const u8 *const sStartMenuModeQuestFlavors[NUM_START_MODES] =
     [START_MODE_MOVE] = COMPOUND_STRING("Move where?"),
     [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = COMPOUND_STRING("Would you like to save?"),
     [START_MODE_SAVE_FORCE] = COMPOUND_STRING("Saving...\nDo not turn off the power."),
+};
+
+static const u8 *const sStartMenuSaveResultControls[] =
+{
+    [START_SAVE_IN_PROGRESS] = COMPOUND_STRING(""),
+    [START_SAVE_OVERWRITE] = COMPOUND_STRING("{START_BUTTON} + {A_BUTTON} Overwrite"),
+    [START_SAVE_SUCCESS ... START_SAVE_FAILURE] = COMPOUND_STRING("Press any button to continue")
+};
+
+static const u8 *const sStartMenuSaveResultText[NUM_START_SAVE_RESULTS] =
+{
+    [START_SAVE_INACTIVE]    = COMPOUND_STRING(""),
+    [START_SAVE_IN_PROGRESS] = COMPOUND_STRING("Saving...\nDo not turn off the power."),
+    [START_SAVE_OVERWRITE]   = COMPOUND_STRING("START_SAVE_OVERWRITE"),
+    [START_SAVE_SUCCESS]     = COMPOUND_STRING("Saved the game."),
+    [START_SAVE_FAILURE]     = COMPOUND_STRING("There's a problem saving."),
 };
 
 static const u8 *const sStartMenuModeAppNames[NUM_START_APPS] =
@@ -759,9 +791,25 @@ static void Task_HandleStartMenuInput(u8 taskId)
     case START_MODE_NORMAL:
         HandleAppGridNormalInputs(taskId);
         break;
+    case START_MODE_SAVE_NORMAL:
+    case START_MODE_SAVE_SCRIPT:
+        HandleAppGridSaveInputs(taskId);
+        break;
+    case START_MODE_SAVE_FORCE:
+        gTasks[taskId].func = Task_BeginSave;
+        break;
     }
 
-    HandleAppGridDirectionalInputs();
+    if (mode != sStartMenuDataPtr->mode)
+    {
+        PrintStartMenuQuestFlavorText();
+        PrintStartMenuHelpBottomText();
+        return;
+    }
+
+    // normal and move modes
+    if (mode < START_MODE_SAVE_NORMAL)
+        HandleAppGridDirectionalInputs();
 }
 
 static void Task_CloseStartMenu(u8 taskId)
@@ -1136,16 +1184,29 @@ static void HandleAppGridNormalInputs(u8 taskId)
     {
         enum StartMenuApps app = GetAppFromIndex(GetAppGridCurrentIndex());
 
-        if (!sStartAppMenusPtr[app] || !app)
+        if ((app != START_APP_SAVE && !sStartAppMenusPtr[app]) || !app)
         {
             PlaySE(SE_BOO);
             return;
         }
 
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        sStartMenuDataPtr->savedCB = sStartAppMenusPtr[app];
-        gTasks[taskId].func = Task_CloseStartMenu;
+        if (app == START_APP_SAVE)
+        {
+            sStartMenuDataPtr->mode = START_MODE_SAVE_NORMAL;
+        }
+        else
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            sStartMenuDataPtr->savedCB = sStartAppMenusPtr[app];
+            gTasks[taskId].func = Task_CloseStartMenu;
+        }
+        return;
+    }
+
+    if (JOY_NEW(START_BUTTON))
+    {
+        sStartMenuDataPtr->mode = START_MODE_SAVE_NORMAL;
         return;
     }
 
@@ -1157,6 +1218,85 @@ static void HandleAppGridNormalInputs(u8 taskId)
         return;
     }
 }
+
+static void HandleAppGridSaveInputs(u8 taskId)
+{
+    if (JOY_NEW(START_BUTTON | A_BUTTON))
+    {
+        gTasks[taskId].func = Task_BeginSave;
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        sStartMenuDataPtr->mode = START_MODE_NORMAL;
+        return;
+    }
+}
+
+static inline void PlaySaveSE(void)
+{
+    switch(sStartMenuDataPtr->saveRes)
+    {
+    default:
+    case START_SAVE_SUCCESS:
+        PlaySE(SE_SAVE);
+        break;
+    case START_SAVE_FAILURE:
+        PlaySE(SE_BOO);
+        break;
+    }
+}
+
+#define tTimer data[0]
+
+static void Task_FinishSave(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    task->tTimer--;
+    if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
+    {
+        if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
+        {
+            PlaySE(SE_PC_OFF);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            task->func = Task_CloseStartMenu;
+        }
+        else
+        {
+            sStartMenuDataPtr->mode = START_MODE_NORMAL;
+            sStartMenuDataPtr->saveRes = START_SAVE_INACTIVE;
+            PrintStartMenuQuestFlavorText();
+            PrintStartMenuHelpBottomText();
+
+            task->func = Task_HandleStartMenuInput;
+        }
+    }
+}
+
+static void Task_BeginSave(u8 taskId)
+{
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
+
+    sStartMenuDataPtr->saveRes = START_SAVE_IN_PROGRESS;
+    PrintStartMenuQuestFlavorText();
+    PrintStartMenuHelpBottomText();
+
+    u8 saveStatus = TrySavingData(SAVE_NORMAL);
+    if (saveStatus == SAVE_STATUS_OK)
+        sStartMenuDataPtr->saveRes = START_SAVE_SUCCESS;
+    else
+        sStartMenuDataPtr->saveRes = START_SAVE_FAILURE;
+
+    PrintStartMenuQuestFlavorText();
+    PrintStartMenuHelpBottomText();
+
+    gTasks[taskId].tTimer = 60;
+    gTasks[taskId].func = Task_FinishSave;
+}
+
+#undef tTimer
 
 // helpers
 
@@ -1468,8 +1608,17 @@ static void PrintStartMenuHelpBottomText(void)
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
 
     // CONTROLS
-    PrintStartMenuText(START_MAIN_WIN_HELP_BOTTOM, FONT_SMALL, START_MAIN_WIN_HELP_WIDTH, 0, Y_CENTER_ALIGN,
-                       sStartMenuModeControls[sStartMenuDataPtr->mode]);
+    const u8 *str = sStartMenuModeControls[sStartMenuDataPtr->mode];
+
+    // SAVE RESULTS
+    if (sStartMenuDataPtr->saveRes)
+    {
+        str = sStartMenuSaveResultControls[sStartMenuDataPtr->saveRes];
+        if (!str)
+            str = sStartMenuSaveResultControls[START_SAVE_IN_PROGRESS];
+    }
+
+    PrintStartMenuText(START_MAIN_WIN_HELP_BOTTOM, FONT_SMALL, START_MAIN_WIN_HELP_WIDTH, 0, Y_CENTER_ALIGN, str);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
 }
@@ -1521,8 +1670,10 @@ static void PrintStartMenuQuestFlavorText(void)
         StringCopy(gStringVar1, COMPOUND_STRING("You’ve completed everything. Enjoy Pokémon Silicon!"));
     }
 
-    // prioritize mode flavor if other modes is active
-    if (sStartMenuDataPtr->mode != START_MODE_NORMAL)
+    // prioritize saving first, then prioritize mode flavor (if other modes is active)
+    if (sStartMenuDataPtr->saveRes != START_SAVE_INACTIVE)
+        StringCopy(gStringVar1, sStartMenuSaveResultText[sStartMenuDataPtr->saveRes]);
+    else if (sStartMenuDataPtr->mode != START_MODE_NORMAL)
         StringCopy(gStringVar1, sStartMenuModeQuestFlavors[sStartMenuDataPtr->mode]);
 
     PrintStartMenuText(START_MAIN_WIN_TEXTBOX, FONT_SMALL_NARROW, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
