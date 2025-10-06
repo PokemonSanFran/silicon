@@ -254,6 +254,16 @@ struct Pokevial
 };
 //End Pokevial Branch
 
+//Start Waypoint/MapSystem Branch
+struct Waypoint
+{
+    s16 xTile;
+    s16 yTile;
+    u8 currentDirection;
+    u8 currentState;
+};
+//End Waypoint/MapSystem Branch
+
 //Start buzzr Branch
 struct Buzzr
 {
@@ -297,6 +307,7 @@ struct SaveBlock3
     u16 mazeLayoutSeed;
     u16 mazeItemsSeed;
     u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
+    struct Waypoint waypoint; // Waypoint/MapSystem Branch
 // End siliconMerge
 #if OW_USE_FAKE_RTC
     struct SiiRtcInfo fakeRTC;
