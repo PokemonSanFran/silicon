@@ -80,6 +80,7 @@ static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 static EWRAM_DATA u8 *sBgTilemapBuffer[NUM_CUSTOMIZATION_BACKGROUNDS] = {NULL};
 
 //==========STATIC=DEFINES==========//
+static bool32 DebugShouldSkipBg(u32 bg);
 static void Menu_RunSetup(void);
 static bool8 Menu_DoGfxSetup(void);
 static bool8 Menu_InitBgs(void);
@@ -906,9 +907,7 @@ static bool8 Menu_DoGfxSetup(void)
         }
         break;
     case 3:
-        DebugPrintf("try loadgraphics");
         Menu_LoadGraphics();
-        DebugPrintf("loadgraphics");
         gMain.state++;
         break;
     case 4:
@@ -938,7 +937,6 @@ static bool8 Menu_DoGfxSetup(void)
         SetMainCallback2(Menu_MainCB);
         return TRUE;
     }
-    DebugPrintf("state %d",gMain.state);
     return FALSE;
 }
 
@@ -982,19 +980,6 @@ static bool8 Menu_InitBgs(void)
     HandleAndShowBgs();
 
 	return TRUE;
-}
-
-static bool32 DebugShouldSkipBg(u32 bg)
-{
-    bool32 skipBg[4] =
-    {
-        [0] = FALSE,
-        [1] = FALSE,
-        [2] = FALSE,
-        [3] = FALSE,
-    };
-
-    return skipBg[bg];
 }
 
 static bool32 AllocZeroedTilemapBuffers(void)
@@ -1089,6 +1074,24 @@ static const u32* const sOptionsTilemapLUT[] =
     [3] = siliconBgTilemap,
 };
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (sOptionsTilesLUT[backgroundId] == NULL || sOptionsTilemapLUT[backgroundId] == NULL);
+}
+
+static bool32 DebugShouldSkipBg(u32 bg)
+{
+    bool32 skipBg[4] =
+    {
+        [0] = FALSE,
+        [1] = FALSE,
+        [2] = FALSE,
+        [3] = FALSE,
+    };
+
+    return skipBg[bg];
+}
+
 static void Menu_LoadGraphics(void)
 {
     ResetTempTileDataBuffers();
@@ -1096,6 +1099,9 @@ static void Menu_LoadGraphics(void)
     for (enum CustomizeBackgrounds backgroundId = 0; backgroundId < NUM_CUSTOMIZATION_BACKGROUNDS; backgroundId++)
     {
         if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        if (AreTilesOrTilemapEmpty(backgroundId))
             continue;
 
         DecompressAndLoadBgGfxUsingHeap(backgroundId, sOptionsTilesLUT[backgroundId], 0, 0, 0);
