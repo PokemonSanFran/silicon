@@ -355,6 +355,10 @@ static const u32 *const questTilemap[BG_QUEST_COUNT] =
     [BG3_QUEST_BG_BACKGROUND] = sQuestMenuTilemap,
 };
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (questTiles[backgroundId] == NULL || questTilemap[backgroundId] == NULL);
+}
 
 //Strings used for the Quest Menu
 static const u8* const questHeaderStrings[QUEST_FILTER_COUNT][QUEST_SORT_COUNT] =
@@ -667,6 +671,9 @@ static void LoadGraphics(void)
 
     for(enum QuestBgs backgroundId = BG1_QUEST_BG_INDICATORS; backgroundId < BG_QUEST_COUNT; backgroundId++)
     {
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
         DecompressAndLoadBgGfxUsingHeap(backgroundId, questTiles[backgroundId],0,0,0);
         CopyToBgTilemapBuffer(backgroundId, questTilemap[backgroundId],0,0);
     }
