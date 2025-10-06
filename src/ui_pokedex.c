@@ -639,12 +639,20 @@ static void SetScheduleBgs(u32 backgroundId)
     ScheduleBgCopyTilemapToVram(backgroundId);
 }
 
+static bool8 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (GetRelevantTiles(backgroundId) == NULL || GetRelevantTilemap(backgroundId) == NULL);
+}
+
 static void LoadGraphics(void)
 {
     u32 backgroundId;
     ResetTempTileDataBuffers();
     for (backgroundId = BG0_POKEDEX_TEXT_CONTENT; backgroundId < BG_POKEDEX_COUNT; backgroundId++)
     {
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
         DecompressAndLoadBgGfxUsingHeap(backgroundId, GetRelevantTiles(backgroundId), 0, 0, 0);
         CopyToBgTilemapBuffer(backgroundId, GetRelevantTilemap(backgroundId),0,0);
     }
@@ -682,7 +690,7 @@ static const u32* GetRelevantTiles(u32 backgroundId)
     if (backgroundId == BG3_POKEDEX_BACKGROUND)
         return pokedexSpeciesListTiles;
     else
-        return 0;
+        return NULL;
 }
 
 static const u32* GetRelevantTilemap(u32 backgroundId)
@@ -716,7 +724,7 @@ static const u32* GetRelevantTilemap(u32 backgroundId)
     if (backgroundId == BG3_POKEDEX_BACKGROUND)
         return pokedexSpeciesListTilemap;
     else
-        return 0;
+        return NULL;
 }
 
 static void LoadPokedexPalettes(void)
