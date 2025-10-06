@@ -1190,7 +1190,6 @@ static const u32 GetNumContentLines(u16 tweetId)
         str++;
     }
 
-    Free((void*)str);
     return (count > TWEET_MIN_NUM_LINES) ? count : TWEET_MIN_NUM_LINES;
 }
 
