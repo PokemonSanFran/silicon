@@ -49,8 +49,6 @@ static bool32 Reveal_InitializeBackgrounds(void);
 static bool32 AllocZeroedTilemapBuffers(void);
 static void HandleAndShowBgs(void);
 static void SetScheduleBgs(u32 backgroundId);
-static const u32* Reveal_GetBgTiles(enum RevealBackgrounds backgroundId);
-static const u32* Reveal_GetBgTilemap(enum RevealBackgrounds backgroundId);
 static void LoadGraphics(void);
 static void LoadRevealPalettes(void);
 static void FreeResources(void);
@@ -570,6 +568,11 @@ bool32 IsScriptCalledFromOverworld(void)
     return (sRevealState->savedCallback == CB2_ReturnToFieldContinueScript);
 }
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (backgroundId == 0);
+}
+
 bool32 ShouldSkipBackground(enum RevealBackgrounds backgroundId)
 {
     if (backgroundId == BG0_REVEAL)
@@ -763,22 +766,6 @@ static void SetScheduleBgs(u32 backgroundId)
     ScheduleBgCopyTilemapToVram(backgroundId);
 }
 
-static const u32* Reveal_GetBgTiles(enum RevealBackgrounds backgroundId)
-{
-    if (!backgroundId)
-        return NULL;
-
-    return glassTrainerBgTiles;
-}
-
-static const u32* Reveal_GetBgTilemap(enum RevealBackgrounds backgroundId)
-{
-    if (!backgroundId)
-        return NULL;
-
-    return glassTrainerBgTilemap;
-}
-
 static void LoadGraphics(void)
 {
     enum RevealBackgrounds backgroundId;
@@ -790,8 +777,11 @@ static void LoadGraphics(void)
         if (ShouldSkipBackground(backgroundId))
             continue;
 
-        DecompressAndLoadBgGfxUsingHeap(backgroundId,Reveal_GetBgTiles(backgroundId), 0, 0, 0);
-        CopyToBgTilemapBuffer(backgroundId,Reveal_GetBgTilemap(backgroundId),0,0);
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
+        DecompressAndLoadBgGfxUsingHeap(backgroundId,glassTrainerBgTiles, 0, 0, 0);
+        CopyToBgTilemapBuffer(backgroundId,glassTrainerBgTilemap,0,0);
     }
     LoadRevealPalettes();
 }
