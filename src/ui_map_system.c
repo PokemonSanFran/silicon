@@ -1599,13 +1599,12 @@ static void SpriteCB_CursorMap_TrolleyModeLOC(struct Sprite *sprite)
 }
 
 
-void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets and creates sprites for the two Cursor types, Will be turning into compressed sprite sheet with normal loading. 
+void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets and creates sprites for the two Cursor types
 {
     u8 spriteId;
     u8 spriteIdLOC;
     struct SpriteTemplate template;
     struct SpritePalette palette;
-    struct SpriteSheet sheet;
 
     palette = sRegionMapCursorSpritePalette;
     template = sRegionMapCursorSpriteTemplate;
@@ -1708,8 +1707,8 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         {
             case MAP_MODE_DEFAULT:
             case MAP_MODE_TAXI:
-                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0x4c0);
-                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0xcc0);
+                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0x4c0 + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0xcc0 + (8 * TILE_SIZE_4BPP));
                 break;
             case MAP_MODE_FLY:
                 break;
