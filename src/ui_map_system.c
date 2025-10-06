@@ -122,8 +122,6 @@ struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined wi
     u8 warpCounter;
     u8 activeCursorState;
     u8 cursorFlipped;
-    u8 cursorSmallImage[0x100];
-    u8 cursorLargeImage[4096];
 };
 
 struct GrayPOI // Struct To Store Gray POI MapSec/Location/Shape for Loading Dynamically
@@ -350,6 +348,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .paletteNum = 15,   // palette index to use for text
         .baseBlock = 1 + (30 * 2) + (30 * 2) + (13 * 14),     // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE,
 };
 
 // Fake Window Template For Printing to the Tooltip Sprite
@@ -376,33 +375,33 @@ static const u8 sMenuWindowFontColors[][3] =
 //
 //  Graphics Pointers for RegionMap Geography, Roads, L2 Window, Sprites, Palettes, Etc
 //
-static const u32 sRegionGeographyTiles[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tiles.4bpp.lz");
-static const u32 sRegionGeographyTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tilemap.bin.lz");
+static const u32 sRegionGeographyTiles[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tiles.4bpp.smol");
+static const u32 sRegionGeographyTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tilemap.bin.smolTM");
 static const u16 sRegionGeographyPalette[] = INCBIN_U16("graphics/ui_menus/map_system/geography.gbapal");
 
-static const u32 sRegionTrolleyBackgroundTiles[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.4bpp.lz");
-static const u32 sRegionTrolleyBackgroundTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.bin.lz");
+static const u32 sRegionTrolleyBackgroundTiles[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.4bpp.smol");
+static const u32 sRegionTrolleyBackgroundTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.bin.smolTM");
 static const u16 sRegionTrolleyBackgroundPalette[] = INCBIN_U16("graphics/ui_menus/map_system/trolley_tiles.gbapal");
 
-static const u32 sRouteTiles[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.4bpp.lz");
-static const u32 sRouteTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.bin.lz");
+static const u32 sRouteTiles[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.4bpp.smol");
+static const u32 sRouteTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.bin.smolTM");
 static const u16 sRoutePalette[] = INCBIN_U16("graphics/ui_menus/map_system/route_tiles.gbapal");
 
-static const u32 sTrolleyRailTiles[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.4bpp.lz");
-static const u32 sTrolleyRailTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.bin.lz");
+static const u32 sTrolleyRailTiles[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.4bpp.smol");
+static const u32 sTrolleyRailTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.bin.smolTM");
 static const u16 sTrolleyRailPalette[] = INCBIN_U16("graphics/ui_menus/map_system/rail_tiles.gbapal");
 
-static const u32 sL2WindowTiles[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tiles.4bpp.lz");
-static const u32 sL2WindowTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tilemap.bin.lz");
+static const u32 sL2WindowTiles[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tiles.4bpp.smol");
+static const u32 sL2WindowTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tilemap.bin.smolTM");
 static const u16 sL2WindowPalette[] = INCBIN_U16("graphics/ui_menus/map_system/l2_window_tiles.gbapal");
 
 static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/cursor_small.gbapal");
-static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp.lz");
+static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp");
 
 static const u16 sRegionMapL2CursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/L2_cursor_test.gbapal");
-static const u32 sRegionMapCursorL2GfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp.lz");
-static const u32 sRegionMapCursorL2TaxiGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp.lz");
-static const u32 sRegionMapCursorL2FlyGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp.lz");
+static const u32 sRegionMapCursorL2GfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp");
+static const u32 sRegionMapCursorL2TaxiGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp");
+static const u32 sRegionMapCursorL2FlyGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp");
 
 static const u8 sA_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/a_button.4bpp");
 static const u8 sB_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/b_button.4bpp");
@@ -412,16 +411,16 @@ static const u8 sStart_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_sy
 static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/region_map/brendan_icon.gbapal");
 static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/brendan_icon.4bpp");
 
-static const u32 sGrayPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/gray_poi_sprites.4bpp.lz");
+static const u32 sGrayPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/gray_poi_sprites.4bpp");
 static const u16 sGrayPOI_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/gray_poi_sprites.gbapal");
 
-static const u32 sTrolleyPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_location_icon.4bpp.lz");
+static const u32 sTrolleyPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_location_icon.4bpp");
 static const u16 sTrolleyPOI_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/trolley_location_icon.gbapal");
 
-static const u32 sWayPoint_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/waypoint_icon.4bpp.lz");
+static const u32 sWayPoint_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/waypoint_icon.4bpp");
 static const u16 sWayPoint_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/waypoint_icon.gbapal");
 
-static const u32 sOwWaypointArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/ow_waypoint_arrow.4bpp.lz");
+static const u32 sOwWaypointArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/ow_waypoint_arrow.4bpp");
 static const u16 sOwWaypointArrow_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/ow_waypoint_arrow.gbapal");
 
 //
@@ -534,6 +533,33 @@ static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] =
 };
 
 
+#define TAG_L2_CURSOR 20101
+#define TAG_L1_CURSOR 20106
+
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxLZ = 
+{
+    .size = 64 * 64 * 2,
+    .data = sRegionMapCursorL2GfxLZ,
+    .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
+};
+
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfxLZ = 
+{
+    .size = 64 * 64 * 2,
+    .data = sRegionMapCursorL2TaxiGfxLZ,
+    .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
+};
+
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfxLZ = 
+{
+    .size = 16 * 16 * 2,
+    .data = sRegionMapCursorL2FlyGfxLZ,
+    .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
+};
+
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorSmallGfxLZ = {sRegionMapCursorSmallGfxLZ, 16 * 16 * 2, TAG_CURSOR};
+
+
 //
 //  Sprite Data for Pokeball Hand Sprite
 //
@@ -545,7 +571,7 @@ static const struct OamData sOamData_GrayPOI =
     .priority = 2,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_GrayPOI =
+static const struct SpriteSheet sSpriteSheet_GrayPOI =
 {
     .data = sGrayPOI_Gfx,
     .size = 32*32*6/2,
@@ -627,7 +653,7 @@ static const struct OamData sOamData_TrolleyPOI =
     .priority = 2,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_TrolleyPOI =
+static const struct SpriteSheet sSpriteSheet_TrolleyPOI =
 {
     .data = sTrolleyPOI_Gfx,
     .size = 8*8*2/2,
@@ -680,7 +706,7 @@ static const struct OamData sOamData_WayPoint =
     .priority = 1,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_WayPoint =
+static const struct SpriteSheet sSpriteSheet_WayPoint =
 {
     .data = sWayPoint_Gfx,
     .size = 16*16*2/2,
@@ -735,7 +761,7 @@ static const struct OamData sOamData_OwWaypointArrow =
     .priority = 0,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_OwWaypointArrow =
+static const struct SpriteSheet sSpriteSheet_OwWaypointArrow =
 {
     .data = sOwWaypointArrow_Gfx,
     .size = 32*32*14/2,
@@ -1256,19 +1282,19 @@ static void Task_MapSystemWaitFadeIn(u8 taskId)
 // Menu Turn Off Functions
 static void MapSystem_FreeResources(void)
 {
+    FreeRegionMapSprites();
+    FreeAllWindowBuffers();
     try_free(sMapSystem_DataPtr);
     try_free(sBg1TilemapBuffer);
     try_free(sRegionMap);
-    FreeRegionMapSprites();
-    FreeAllWindowBuffers();
 }
 
 static void Task_MapSystemWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sMapSystem_DataPtr->savedCallback);
         MapSystem_FreeResources();
+        SetMainCallback2(sMapSystem_DataPtr->savedCallback);
         DestroyTask(taskId);
     }
 }
@@ -1285,8 +1311,8 @@ static void Task_MapSystemTurnOff(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sMapSystem_DataPtr->savedCallback);
         MapSystem_FreeResources();
+        SetMainCallback2(sMapSystem_DataPtr->savedCallback);
         DestroyTask(taskId);
     }
 }
@@ -1312,11 +1338,15 @@ static bool8 MapSystem_DoGfxSetup(void)
         SetGpuReg(REG_OFFSET_BG3VOFS, 0);
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
+        DmaFill16(3, 0, VRAM, VRAM_SIZE);
+        DmaFill32(3, 0, OAM, OAM_SIZE);
+        DmaFill16(3, 0, PLTT, PLTT_SIZE);
         gMain.state++;
         break;
     case 1:
         ScanlineEffect_Stop();
         FreeAllSpritePalettes();
+        FreeAllWindowBuffers();
         ResetPaletteFade();
         ResetSpriteData();
         ResetTasks();
@@ -1452,68 +1482,56 @@ static bool8 RegionMap_LoadGraphics(void) // This function is the one that actua
     switch (sMapSystem_DataPtr->gfxLoadState)
     {
     case 0:
-        ResetTempTileDataBuffers();
         switch (sCurrentMapMode)
         {
             case MAP_MODE_TROLLEY:
                 LoadPalette(sRegionTrolleyBackgroundPalette, 32, 32);
-                LZ77UnCompVram(sRegionTrolleyBackgroundTiles, (u16 *)BG_CHAR_ADDR(2));
-                LZ77UnCompVram(sRegionTrolleyBackgroundTilemap, (u16 *)BG_SCREEN_ADDR(29));
+                DecompressDataWithHeaderVram(sRegionTrolleyBackgroundTiles, (void *)(BG_CHAR_ADDR(2)));
+                DecompressDataWithHeaderVram(sRegionTrolleyBackgroundTilemap, (u16 *)(BG_SCREEN_ADDR(29)));
                 break;
             default:
+                DecompressDataWithHeaderVram(sRegionGeographyTiles, (void*)(BG_CHAR_ADDR(2)));
+                DecompressDataWithHeaderVram(sRegionGeographyTilemap, (u16 *)(BG_SCREEN_ADDR(29)));
                 LoadPalette(sRegionGeographyPalette, 32, 32);
-                LZ77UnCompVram(sRegionGeographyTiles, (u16 *)BG_CHAR_ADDR(2));
-                LZ77UnCompVram(sRegionGeographyTilemap, (u16 *)BG_SCREEN_ADDR(29));
                 break;
         }
         sMapSystem_DataPtr->gfxLoadState++;
         break;
     case 1:
-        ResetTempTileDataBuffers();
+        if (FreeTempTileDataBuffersIfPossible())
+            break;
         switch (sCurrentMapMode)
         {
             case MAP_MODE_TROLLEY:
-                LZ77UnCompVram(sTrolleyRailTiles, (u16 *)BG_CHAR_ADDR(1));
-                LZ77UnCompVram(sTrolleyRailTilemap, (u16 *)BG_SCREEN_ADDR(30));
+                DecompressDataWithHeaderVram(sTrolleyRailTiles, (void *)(BG_CHAR_ADDR(1)));
+                DecompressDataWithHeaderVram(sTrolleyRailTilemap, (u16 *)(BG_SCREEN_ADDR(30)));
                 LoadPalette(sTrolleyRailPalette, 0, 32);
                 break;
             default:
-                LZ77UnCompVram(sRouteTiles, (u16 *)BG_CHAR_ADDR(1));
-                LZ77UnCompVram(sRouteTilemap, (u16 *)BG_SCREEN_ADDR(30));
+                DecompressDataWithHeaderVram(sRouteTiles, (void *)(BG_CHAR_ADDR(1)));
+                DecompressDataWithHeaderVram(sRouteTilemap, (u16 *)(BG_SCREEN_ADDR(30)));
                 LoadPalette(sRoutePalette, 0, 32);
                 break;
         }
         sMapSystem_DataPtr->gfxLoadState++;
         break;
     case 2:
+        if (FreeTempTileDataBuffersIfPossible())
+            break;
         switch (sCurrentMapMode)
         {
             case MAP_MODE_TROLLEY:
 
                 break;
             default:
-                ResetTempTileDataBuffers();
-                LZ77UnCompVram(sL2WindowTiles, (u16 *)BG_CHAR_ADDR(3));
-                LZ77UnCompVram(sL2WindowTilemap, (u16 *)BG_SCREEN_ADDR(25));
+                DecompressDataWithHeaderVram(sL2WindowTiles, (void *)(BG_CHAR_ADDR(3)));
+                DecompressDataWithHeaderVram(sL2WindowTilemap, (u16 *)(BG_SCREEN_ADDR(25)));
                 LoadPalette(sL2WindowPalette, 48, 32);
                 break;
         }
         sMapSystem_DataPtr->gfxLoadState++;
         break;
     case 3:
-        LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
-        switch (sCurrentMapMode)
-        {
-            case MAP_MODE_TROLLEY:
-                LZ77UnCompWram(sRegionMapCursorL2GfxLZ, sRegionMap->cursorLargeImage);
-                break;
-            case MAP_MODE_TAXI:
-                LZ77UnCompWram(sRegionMapCursorL2TaxiGfxLZ, sRegionMap->cursorLargeImage);
-                break;
-            case MAP_MODE_FLY:
-                LZ77UnCompWram(sRegionMapCursorL2FlyGfxLZ, sRegionMap->cursorLargeImage);
-                break;
-        }
         SetBgAttribute(1, BG_ATTR_WRAPAROUND, 1);
         SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
         sMapSystem_DataPtr->gfxLoadState = 0;
@@ -1591,19 +1609,17 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
 
     palette = sRegionMapCursorSpritePalette;
     template = sRegionMapCursorSpriteTemplate;
-    sheet.tag = tileTag;
     template.tileTag = tileTag;
     sRegionMap->cursorTileTag = tileTag;
     palette.tag = paletteTag;
     template.paletteTag = paletteTag;
     sRegionMap->cursorPaletteTag = paletteTag;
-    sheet.data = sRegionMap->cursorSmallImage;
-    sheet.size = sizeof(sRegionMap->cursorSmallImage);
     if (sCurrentMapMode == MAP_MODE_TROLLEY)
         template.callback = SpriteCB_CursorMap_TrolleyMode;
     else
         template.callback = SpriteCB_CursorMapFull;
-    LoadSpriteSheet(&sheet);
+
+    LoadSpriteSheet(&sSpriteSheet_RegionMapCursorSmallGfxLZ);
     LoadSpritePalette(&palette);
     spriteId = CreateSpriteAtEnd(&template, 0x38, 0x48, 0);
 
@@ -1611,19 +1627,33 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
     paletteTag = TAG_CURSOR_TOOLTIP_LOC_STATE;
     palette = sRegionMapL2CursorSpritePalette;
     template = sRegionMapL2CursorSpriteTemplate;
-    sheet.tag = tileTag;
     template.tileTag = tileTag;
     sRegionMap->cursorTileTag = tileTag;
     palette.tag = paletteTag;
     template.paletteTag = paletteTag;
     sRegionMap->cursorPaletteTag = paletteTag;
-    sheet.data = sRegionMap->cursorLargeImage;
-    sheet.size = sizeof(sRegionMap->cursorLargeImage);
+
     if (sCurrentMapMode == MAP_MODE_TROLLEY)
         template.callback = SpriteCB_CursorMap_TrolleyModeLOC;
     else
         template.callback = SpriteCB_CursorMapFullLOC;
-    LoadSpriteSheet(&sheet);
+
+    switch (sCurrentMapMode)
+    {
+        case MAP_MODE_TROLLEY:
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2GfxLZ);
+            break;
+        case MAP_MODE_TAXI:
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2TaxiGfxLZ);
+            break;
+        case MAP_MODE_FLY:
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2FlyGfxLZ);
+            break;
+        default:
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2GfxLZ);
+            break;
+    }
+
     LoadSpritePalette(&palette);
     spriteIdLOC = CreateSprite(&template, 0x38, 0x48, 0);
 
@@ -1679,7 +1709,7 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
             case MAP_MODE_DEFAULT:
             case MAP_MODE_TAXI:
                 PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0xcc0);
-                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0x4c0);
+                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0xcc0);
                 break;
             case MAP_MODE_FLY:
                 break;
@@ -1782,7 +1812,7 @@ static void SFTrySetPlayerIconBlink(void)
 //
 static void LoadWaypointGraphicsOnMapLoad(void)
 {
-    LoadCompressedSpriteSheet(&sSpriteSheet_WayPoint);
+    LoadSpriteSheet(&sSpriteSheet_WayPoint);
     LoadSpritePalette(&sSpritePal_WayPoint);
     if(gSaveBlock3Ptr->waypoint.currentState == 1)
         CreateWaypointSprite();
@@ -2000,7 +2030,7 @@ static void Task_DelayPrintOverworldWaypoint(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        LoadCompressedSpriteSheet(&sSpriteSheet_OwWaypointArrow);
+        LoadSpriteSheet(&sSpriteSheet_OwWaypointArrow);
         LoadSpritePalette(&sSpritePal_OwWaypointArrow);
         sOWWaypointArrow_SpriteId = SPRITE_NONE;
         gSaveBlock3Ptr->waypoint.currentDirection = CalculateWaypointDirection();
@@ -2044,7 +2074,7 @@ static void CreateGrayPOISprites(void)
     u16 i = 0;
     u16 x, y;
 
-    LoadCompressedSpriteSheet(&sSpriteSheet_GrayPOI);
+    LoadSpriteSheet(&sSpriteSheet_GrayPOI);
     LoadSpritePalette(&sSpritePal_GrayPOI);
 
     for(i=0; i < GRAY_POI_COUNT; i++)
@@ -2103,7 +2133,7 @@ static void CreateTrolleyPOISprites(void)
     u16 i = 0;
     u16 x, y;
 
-    LoadCompressedSpriteSheet(&sSpriteSheet_TrolleyPOI);
+    LoadSpriteSheet(&sSpriteSheet_TrolleyPOI);
     LoadSpritePalette(&sSpritePal_TrolleyPOI);
 
     for(i=0; i < TROLLEY_COUNT; i++)
