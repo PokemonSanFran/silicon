@@ -447,6 +447,11 @@ static bool32 Accept_InitializeBackgrounds(bool32 isFirst)
     return TRUE;
 }
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (sAcceptTilesLUT[backgroundId] == NULL || sAcceptTilesLUT[backgroundId] == NULL);
+}
+
 static bool32 DebugShouldSkipBg(u32 bg)
 {
     bool32 skipBg[BG_ACCEPT_COUNT] =
@@ -509,6 +514,9 @@ static void LoadGraphics(void)
     for (backgroundId = BG2_ACCEPT_BACKGROUND; backgroundId < BG_ACCEPT_COUNT; backgroundId++)
     {
         if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        if (AreTilesOrTilemapEmpty(backgroundId))
             continue;
 
         DecompressAndLoadBgGfxUsingHeap(backgroundId,sAcceptTilesLUT[backgroundId], 0, 0, 0);
