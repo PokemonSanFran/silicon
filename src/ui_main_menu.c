@@ -663,6 +663,11 @@ static bool32 MainMenu_InitializeBackgrounds(bool32 isFirst)
     return TRUE;
 }
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (sMainMenuTilesLUT[backgroundId] == NULL || sMainMenuTilemapLUT[backgroundId] == NULL);
+}
+
 static bool32 DebugShouldSkipBg(u32 bg)
 {
     bool32 skipBg[BG_MAINMENU_COUNT] =
@@ -739,6 +744,9 @@ static void LoadGraphics(void)
     for (backgroundId = BG0_MAINMENU_TEXT; backgroundId < BG_MAINMENU_COUNT; backgroundId++)
     {
         if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        if (AreTilesOrTilemapEmpty(backgroundId))
             continue;
 
         DecompressAndLoadBgGfxUsingHeap(backgroundId,sMainMenuTilesLUT[backgroundId], 0, 0, 0);
