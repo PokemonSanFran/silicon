@@ -1708,7 +1708,7 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         {
             case MAP_MODE_DEFAULT:
             case MAP_MODE_TAXI:
-                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0xcc0);
+                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0x4c0);
                 PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0xcc0);
                 break;
             case MAP_MODE_FLY:
