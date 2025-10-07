@@ -402,7 +402,7 @@ static void GenerateGameOverMessage(u32 windowId, u32 fontId, u8* dest)
     u32 windowWidth = (GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_SIZE_1BPP)- 0;
 
     StringCopy(dest,COMPOUND_STRING("You have no Pokémon in the party or the PC that can battle. Your adventure is over. Thanks for playing!{PAUSE_UNTIL_PRESS}"));
-    BreakStringAutomatic(dest, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
+    BreakStringNaive(dest, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
 }
 
 static bool8 PrintGameOverMessage(u8 taskId, u8 x, u8 y)

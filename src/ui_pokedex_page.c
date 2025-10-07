@@ -3836,8 +3836,7 @@ static void PageEvolution_PrintEvolutionDetails(void)
             break;
     }
 
-    // PSF TODO Replace uses of BreakStringAutomatic with BreakStringNaive once 1.13 drops
-    BreakStringAutomatic(string, windowWidth, screenLines, fontId, HIDE_SCROLL_PROMPT);
+    BreakStringNaive(string, windowWidth, screenLines, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,string);
     Free(string);
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -4002,7 +4001,7 @@ static void PageForms_PrintTransformationCriteria(enum PokedexPageEvolutionWindo
     StringCopy(gStringVar4,COMPOUND_STRING(""));
     StringExpandPlaceholders(gStringVar4,pokemonFormTable[ConvertSpeciesToFormTableEnum(PageForm_GetMonForFormList())][currentPosition].description);
 
-    BreakStringAutomatic(gStringVar4, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
+    BreakStringNaive(gStringVar4, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
 
     u32 x = 4, y = GetFontAttribute(fontId,FONTATTR_MAX_LETTER_HEIGHT);
 
@@ -4903,7 +4902,7 @@ static void PageInformation_PrintSpeciesFlavor(u32 species)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     StringCopy(gStringVar1,GetSpeciesPokedexDescription(species));
 
-    BreakStringAutomatic(gStringVar1, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
+    BreakStringNaive(gStringVar1, windowWidth, screenLines, fontId,HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }

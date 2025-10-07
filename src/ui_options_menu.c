@@ -2969,7 +2969,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         u32 fontId = FONT_OPTION_DESC;
         u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
         u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
-        BreakStringAutomatic(gStringVar1,OPTION_DESC_PIXEL_WIDTH,OPTION_DESC_LINES_COUNT,fontId, HIDE_SCROLL_PROMPT);
+        BreakStringNaive(gStringVar1,OPTION_DESC_PIXEL_WIDTH,OPTION_DESC_LINES_COUNT,fontId, HIDE_SCROLL_PROMPT);
         AddTextPrinterParameterized4(windowId, fontId, halfTile, 108, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
     }
 
