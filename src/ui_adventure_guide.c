@@ -225,19 +225,9 @@ static const u8 sMenuWindowFontColors[][3] =
 
 //==========FUNCTIONS==========//
 // UI loader template
-void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
-{
-    if (gPaletteFade.active)
-        return;
-
-    CleanupOverworldWindowsAndTilemaps();
-    VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES);
-    Adventure_Guide_Init(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
-}
-
 void CB2_AdventureGuideFromStartMenu(void)
 {
+    VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES);
     Adventure_Guide_Init(CB2_ReturnToUIStartMenu);
 }
 

@@ -30,7 +30,6 @@
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "ui_pokedex.h"
-#include "ui_old_start_menu.h"
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -388,18 +387,6 @@ const u8 sPokedexWindowFontColors[][3] =
 void SaveCallbackToPokedex(MainCallback callback)
 {
     sPokedexState->savedCallback = callback;
-}
-
-void Task_OpenPokedexFromStartMenu(u8 taskId)
-{
-    if (gPaletteFade.active)
-        return;
-
-    StartMenu_Menu_FreeResources();
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    Pokedex_InitializeAndSaveCallback(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
 }
 
 void CB2_PokedexFromStartMenu(void)

@@ -2090,6 +2090,5 @@ void SetCustomPlayerPalette(u16 *palette)
 void CB2_ReturnToCostumizationMenu(void)
 {
     FieldClearVBlankHBlankCallbacks();
-	Character_Customization_Menu_Init(CB2_ReturnToUIMenu);
+    Character_Customization_Menu_Init(CB2_ReturnToUIStartMenu);
 }
-

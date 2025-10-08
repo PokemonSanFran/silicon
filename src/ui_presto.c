@@ -4342,17 +4342,6 @@ static void Task_MenuTurnOff(u8 taskId)
     }
 }
 
-static void UNUSED Task_MenuBuy(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        Menu_FreeResources();
-        Presto_Init(CB2_ReturnToUIMenu);
-        gMain.savedCallback = CB2_ReturnToUIMenu;
-        DestroyTask(taskId);
-    }
-}
-
 static void buynewItem(u16 itemId, u8 quantity){
     u16 price = GetCurrentItemPrice(quantity, itemId, PRICE_FINAL);
     u8 i;

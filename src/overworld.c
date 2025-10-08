@@ -65,7 +65,6 @@
 #include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
-#include "ui_old_start_menu.h" // siliconMerge
 #include "scanline_effect.h"
 #include "wild_encounter.h"
 #include "vs_seeker.h"
@@ -2109,13 +2108,6 @@ void CB2_ReturnToFieldWithOpenMenu(void)
     CB2_ReturnToField();
 }
 
-// Start siliconMerge
-void CB2_ReturnToUIMenu(void)
-{
-    FieldClearVBlankHBlankCallbacks();
-	StartMenu_Menu_Init(CB2_ReturnToField, FALSE);
-}
-// End siliconMerge
 void CB2_ReturnToFieldContinueScript(void)
 {
     FieldClearVBlankHBlankCallbacks();

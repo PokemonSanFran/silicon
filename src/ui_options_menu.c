@@ -41,7 +41,6 @@
 #include "constants/options_battle.h"
 #include "ui_options_menu.h"
 #include "options_music.h"
-#include "ui_old_start_menu.h"
 #include "ui_main_menu.h"
 #include "new_game.h"
 
@@ -240,18 +239,6 @@ static const u8 sMenuWindowFontColors[][3] =
 
 //==========FUNCTIONS==========//
 // UI loader template
-void Task_OpenOptionsMenuFromStartMenu(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-		StartMenu_Menu_FreeResources();
-        PlayRainStoppingSoundEffect();
-        CleanupOverworldWindowsAndTilemaps();
-        Options_Menu_Init(CB2_ReturnToFieldWithOpenMenu);
-        DestroyTask(taskId);
-    }
-}
-
 void CB2_OptionsFromStartMenu(void)
 {
     Options_Menu_Init(CB2_ReturnToUIStartMenu);

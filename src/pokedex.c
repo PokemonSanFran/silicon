@@ -1879,7 +1879,7 @@ static void Task_ClosePokedex(u8 taskId)
         FreeWindowAndBgBuffers();
         DestroyTask(taskId);
         // Start siliconMerge
-		SetMainCallback2(CB2_ReturnToUIMenu);
+		SetMainCallback2(CB2_ReturnToUIStartMenu);
         //SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
 		// End siliconMerge
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);

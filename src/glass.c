@@ -37,7 +37,6 @@
 #include "constants/battle.h"
 #include "pokemon_summary_screen.h"
 #include "dma3.h"
-#include "ui_old_start_menu.h"
 #include "field_weather.h"
 #include "constants/reveal.h"
 #include "reveal.h"
@@ -586,18 +585,6 @@ void DebugSetTrainerStatus(void)
     FlagSet(TRAINER_FLAGS_START + TRAINER_TERRY);
     FlagSet(TRAINER_FLAGS_START + TRAINER_WYATT);
     FlagSet(TRAINER_FLAGS_START + TRAINER_MELINA);
-}
-
-void Task_OpenGlassFromStartMenu(u8 taskId)
-{
-    if (gPaletteFade.active)
-        return;
-
-    StartMenu_Menu_FreeResources();
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    Glass_Init(CB2_ReturnToUIMenu, -1, -1, -1, -1, -1);
-    DestroyTask(taskId);
 }
 
 void CB2_GlassFromStartMenu(void)

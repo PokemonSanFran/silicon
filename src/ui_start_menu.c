@@ -1051,7 +1051,7 @@ static u32 CountCurrentNumberOfApps(void)
 {
     u32 count = 0;
 
-    for (u32 i = 0; i < NUM_TOTAL_APPS; i++)
+    for (u32 i = 0; i < TOTAL_START_APPS; i++)
     {
         if (GetAppFromIndex(i))
             count++;

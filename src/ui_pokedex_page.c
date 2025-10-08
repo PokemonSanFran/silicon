@@ -30,7 +30,6 @@
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "ui_pokedex.h"
-#include "ui_old_start_menu.h"
 #include "rtc.h"
 #include "window.h"
 #include "constants/abilities.h"

@@ -39,7 +39,6 @@
 #include "event_object_movement.h"
 #include "pokemon_icon.h"
 #include "quest_flavor_lookup.h"
-#include "ui_old_start_menu.h"
 #include "field_weather.h"
 #include "field_screen_effect.h"
 #include "tv.h"
@@ -2699,18 +2698,6 @@ static void Task_QuestMenuTurnOff(u8 taskId)
         FreeResources();
         DestroyTask(taskId);
     }
-}
-
-void Task_QuestMenu_OpenFromStartMenu(u8 taskId)
-{
-    if (gPaletteFade.active)
-        return;
-
-    StartMenu_Menu_FreeResources();
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    QuestMenu_Init(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
 }
 
 void CB2_QuestMenuFromStartMenu(void)
