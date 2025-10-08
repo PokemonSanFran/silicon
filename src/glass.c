@@ -149,7 +149,6 @@ static void SortLocationsConqueredFirst(u32*, u32);
 static void AddSortedLocationsToList(u32*, u32, u32*, u32);
 static void PopulateListMenuWithSortedLocation(u32*, u32);
 
-static bool8 IsLocationVisited(u32);
 static bool8 IsBothLocationsLocked(u32*, u32, u32);
 static bool8 IsLocationStateVisible(u32);
 static bool8 IsLocationConquered(u32);
@@ -1549,7 +1548,7 @@ static void PopulateListMenuWithSortedLocation(u32* sortedLocationIndicies, u32 
         PopulateListMenuLocations(row, sortedLocationIndicies[row]);
 }
 
-static bool8 IsLocationVisited(u32 listNum)
+bool8 IsLocationVisited(u32 listNum)
 {
     return (FlagGet(gRegionMapEntries[listNum].visitedFlag));
 }
