@@ -76,8 +76,8 @@
 #define START_APP_BACKGROUNDS NUM_START_APPS
 
 // sprite tiles size
-#define START_MAIN_SPRITE_APP_CURSOR_SIZE    (16)
-#define START_MAIN_SPRITE_APPS_SIZE          (4 + 64) // both icons and bg
+#define START_MAIN_SPRITE_APP_CURSOR_SIZE    (32)
+#define START_MAIN_SPRITE_APPS_SIZE          (4 + 4 + 64) // both icons and bg
 #define START_MAIN_SPRITE_MON_PLATFORMS_SIZE (16)
 
 // text window width
@@ -122,10 +122,10 @@ enum StartMenuMainSprites
     START_MAIN_SPRITE_APP_CURSOR = 0,
 
     START_MAIN_SPRITE_APP_ICONS,
-    START_MAIN_SPRITE_APP_ICONS_END = START_MAIN_SPRITE_APP_ICONS + NUM_START_APPS,
+    START_MAIN_SPRITE_APP_ICONS_END = START_MAIN_SPRITE_APP_ICONS + TOTAL_START_APPS,
 
     START_MAIN_SPRITE_APP_BGS,
-    START_MAIN_SPRITE_APP_BGS_END = START_MAIN_SPRITE_APP_BGS + NUM_START_APPS,
+    START_MAIN_SPRITE_APP_BGS_END = START_MAIN_SPRITE_APP_BGS + TOTAL_START_APPS,
 
     START_MAIN_SPRITE_MON_PLATFORMS = START_MAIN_SPRITE_APP_BGS_END,
     START_MAIN_SPRITE_MON_PLATFORMS_END = START_MAIN_SPRITE_MON_PLATFORMS + NUM_START_MONS_TOTAL,
@@ -162,6 +162,14 @@ enum StartMenuFontColors
     NUM_START_FONT_COLORS
 };
 
+enum StartMenuCursorModes
+{
+    START_CURSOR_NORMAL,
+    START_CURSOR_MOVE,
+
+    NUM_START_CURSORS
+};
+
 enum StartMenuHelpSymbols
 {
     // Time Of Day
@@ -177,6 +185,8 @@ enum StartMenuHelpSymbols
     START_HELP_SYMBOL_SIG_0A,
     START_HELP_SYMBOL_SIG_1,
     START_HELP_SYMBOL_SIG_2,
+
+    START_HELP_SYMBOL_SWAP,
 
     NUM_START_HELP_SYMBOLS
 };
@@ -294,9 +304,9 @@ struct StartMenuData
     u8 spriteIds[NUM_START_MAIN_SPRITES];
     enum StartMenuModes mode;
     enum StartMenuSaveResults saveRes;
-    u8 numApps;
     MainCallback savedCB;
     struct UCoords8 cursor;
+    enum StartMenuApps movingAppIdx;
 };
 
 // RAM data
@@ -315,7 +325,7 @@ static void VBlankCB_StartMenu(void);
 static void PopulateStartMenuAppIndex(void);
 static void ResetStartMenuAppIndex(void);
 static void AddNewAppsToStartMenuAppIndex(void);
-static bool32 IsAppWithinAnIndex(enum StartMenuApps);
+static u32 IsAppWithinAnIndex(enum StartMenuApps);
 static u32 GetFirstEmptyAppIndex(void);
 static bool32 IsAppUnlocked(enum StartMenuApps);
 static u32 CountCurrentNumberOfApps(void);
@@ -323,6 +333,7 @@ static enum StartMenuApps GetAppFromIndex(u8);
 
 static void HandleAppGridNormalInputs(u8);
 static void HandleAppGridSaveInputs(u8);
+static void HandleAppGridMoveInputs(u8);
 static inline void HandleAppGridDirectionalInputs(void);
 static u32 GetAppGridCurrentRow(void);
 static u32 GetAppGridCurrentColumn(void);
@@ -345,6 +356,7 @@ static void PrintStartMenuAppTitleText(void);
 static void PrintStartMenuEggInfo(void);
 static inline void PrintStartMenuText(enum StartMenuMainWindows, u32, u32, u32, u32, u8 const *);
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols, u16);
+static inline void _BlitHelpSymbols(enum StartMenuHelpSymbols, u32, u16);
 static inline void BlitEggInfoSymbols(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols ConvertToDIntoHelpSymbol(void);
 static inline enum StartMenuHelpSymbols ConvertCurrentSignalIntoHelpSymbol(void);
@@ -555,7 +567,7 @@ static const u8 *const sStartMenuSaveResultText[NUM_START_SAVE_RESULTS] =
 
 static const u8 *const sStartMenuModeAppNames[NUM_START_APPS] =
 {
-    [START_APP_NONE] = COMPOUND_STRING(" "),
+    [START_APP_NONE] = COMPOUND_STRING("Free Space"),
 
     // first row
     [START_APP_PARTY] = COMPOUND_STRING("Party"),
@@ -613,7 +625,10 @@ static const struct SpriteTemplate sStartMenuAppCursorSprite =
     .tileTag = START_TAG_APP_CURSOR,
     .paletteTag = START_TAG_PALETTE,
     .oam = &sStartMenuAppCursorOamData,
-    .anims = gDummySpriteAnimTable,
+    .anims = (const union AnimCmd *const[]){
+        [START_CURSOR_NORMAL] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_CURSOR_NORMAL * 16), ANIMCMD_END },
+        [START_CURSOR_MOVE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_CURSOR_MOVE * 16), ANIMCMD_END },
+    },
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_AppCursor,
@@ -625,15 +640,18 @@ static const struct OamData sStartMenuAppOamData =
     .size = SPRITE_SIZE(16x16),
 };
 
-#define START_APP_FRAME(name) ((START_APP_ ## name - 1) * 4)
+#define START_APP_FRAME(name) (START_APP_ ## name * 4)
 static const struct SpriteTemplate sStartMenuAppSprite =
 {
     .tileTag = START_TAG_APPS,
     .paletteTag = START_TAG_PALETTE,
     .oam = &sStartMenuAppOamData,
     .anims = (const union AnimCmd *const[]){
+        // move mode
+        [START_APP_NONE] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(NONE), 1), ANIMCMD_END },
+
         // first row
-        [0 ... START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(PARTY), 1), ANIMCMD_END },
+        [START_APP_PARTY] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(PARTY), 1), ANIMCMD_END },
         [START_APP_BAG] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(BAG), 1), ANIMCMD_END },
         [START_APP_ARRIBA] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(ARRIBA), 1), ANIMCMD_END },
         [START_APP_TODOS] = (const union AnimCmd[]){ ANIMCMD_FRAME(START_APP_FRAME(TODOS), 1), ANIMCMD_END },
@@ -798,6 +816,9 @@ static void Task_HandleStartMenuInput(u8 taskId)
     case START_MODE_SAVE_FORCE:
         gTasks[taskId].func = Task_BeginSave;
         break;
+    case START_MODE_MOVE:
+        HandleAppGridMoveInputs(taskId);
+        break;
     }
 
     if (mode != sStartMenuDataPtr->mode)
@@ -874,7 +895,7 @@ void OpenStartMenu(enum StartMenuModes mode)
 
     PopulateStartMenuAppIndex();
 
-    sStartMenuDataPtr->numApps = CountCurrentNumberOfApps();
+    sStartMenuDataPtr->movingAppIdx = NUM_START_APPS;
     sStartMenuDataPtr->cursor = sStartMenuLastCursor;
 
     SetMainCallback2(CB2_StartMenuSetup);
@@ -965,14 +986,15 @@ static void PopulateStartMenuAppIndex(void)
 
 static void ResetStartMenuAppIndex(void)
 {
-    memset(gSaveBlock3Ptr->startMenuAppIndex, 0, NUM_START_APPS * sizeof(u8));
+    memset(gSaveBlock3Ptr->startMenuAppIndex, 0, TOTAL_START_APPS * sizeof(u8));
 }
 
 static void AddNewAppsToStartMenuAppIndex(void)
 {
-    for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
+    u32 i = 0;
+    for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++, i++)
     {
-        if (IsAppUnlocked(app) && !IsAppWithinAnIndex(app))
+        if (IsAppUnlocked(app) && IsAppWithinAnIndex(app) == NUM_START_APPS)
         {
             u32 freeSlot = GetFirstEmptyAppIndex();
             if (freeSlot >= NUM_START_APPS)
@@ -983,15 +1005,15 @@ static void AddNewAppsToStartMenuAppIndex(void)
     }
 }
 
-static bool32 IsAppWithinAnIndex(enum StartMenuApps appId)
+static u32 IsAppWithinAnIndex(enum StartMenuApps appId)
 {
-    for (u32 idx = 0; idx < NUM_TOTAL_APPS; idx++)
+    for (u32 idx = 0; idx < TOTAL_START_APPS; idx++)
     {
         if (gSaveBlock3Ptr->startMenuAppIndex[idx] == appId)
-            return TRUE;
+            return idx;
     }
 
-    return FALSE;
+    return NUM_START_APPS;
 }
 
 static u32 GetFirstEmptyAppIndex(void)
@@ -1022,9 +1044,9 @@ static u32 CountCurrentNumberOfApps(void)
 {
     u32 count = 0;
 
-    for (enum StartMenuApps slotIndex = 0; slotIndex < NUM_TOTAL_APPS; slotIndex++)
+    for (u32 i = 0; i < NUM_TOTAL_APPS; i++)
     {
-        if (IsAppWithinAnIndex(slotIndex))
+        if (GetAppFromIndex(i))
             count++;
     }
 
@@ -1033,43 +1055,19 @@ static u32 CountCurrentNumberOfApps(void)
 
 static enum StartMenuApps GetAppFromIndex(u8 idx)
 {
-    enum StartMenuApps app;
-
-    if (idx >= NUM_TOTAL_APPS)
-        app = gSaveBlock3Ptr->startMenuAppIndex[idx % NUM_TOTAL_APPS];
-    else
-        app = gSaveBlock3Ptr->startMenuAppIndex[idx];
-
-    if (app >= NUM_START_APPS)
-        app = START_APP_NONE;
-
-    return app;
+    return gSaveBlock3Ptr->startMenuAppIndex[idx];
 }
 
 // grid system
 
 static u32 CalculateAppGridNumberOfRows(void)
 {
-    u32 numApps = sStartMenuDataPtr->numApps;
-    u32 rows = START_APP_GRID_COLUMN_1;
-
-    if (numApps >= NUM_START_APP_GRID_ROWS)
-        rows = NUM_START_APP_GRID_COLUMNS;
-
-    return rows - 1;
+    return NUM_START_APP_GRID_COLUMNS - 1;
 }
 
 static u32 GetAppGridSizeForRow(u32 currentRow)
 {
-    u32 numApps = sStartMenuDataPtr->numApps;
-    u32 numRows = CalculateAppGridNumberOfRows();
-    u32 divisor = numApps % NUM_START_APP_GRID_ROWS;
-    u32 isLastRow = currentRow == numRows;
-
-    if (divisor && (numApps < NUM_START_APP_GRID_ROWS || isLastRow))
-        return divisor - 1;
-    else
-        return NUM_START_APP_GRID_ROWS - 1;
+    return NUM_START_APP_GRID_ROWS - 1;
 }
 
 bool32 IsAppGridInputMovingRightOrDown(s32 delta)
@@ -1178,6 +1176,42 @@ static inline void HandleAppGridDirectionalInputs(void)
         ChangeAppGridCurrentColumn(TRUE);
 }
 
+static void InitializeStartMenuMoveMode(void)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+    struct Sprite *s = NULL;
+
+    // change cursor mode
+    s = &gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]];
+    StartSpriteAnim(s, START_CURSOR_MOVE);
+    s->y -= 2;
+
+    // make the moved app moves with the cursor
+    s = &gSprites[spriteIds[START_MAIN_SPRITE_APP_ICONS + GetAppGridCurrentIndex()]];
+    s->callback = gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]].callback;
+    s->subpriority = 0;
+    s->y -= 2;
+    s->data[0] = TRUE;
+
+    // convert the moved app's bg to be an empty space
+    s = &gSprites[spriteIds[START_MAIN_SPRITE_APP_BGS + GetAppGridCurrentIndex()]];
+    StartSpriteAnim(s, START_APP_NONE);
+    s->oam.objMode = ST_OAM_OBJ_BLEND;
+
+    // activate invisible empty spaces, if any
+    for (u32 i = 0, idx = START_MAIN_SPRITE_APP_BGS; i < TOTAL_START_APPS; i++, idx++)
+    {
+        s = &gSprites[sStartMenuDataPtr->spriteIds[idx]];
+        if (s->invisible)
+            s->invisible = FALSE;
+    }
+
+    sStartMenuDataPtr->movingAppIdx = GetAppGridCurrentIndex();
+    sStartMenuDataPtr->mode = START_MODE_MOVE;
+
+    PrintStartMenuAppTitleText();
+}
+
 static void HandleAppGridNormalInputs(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON))
@@ -1207,6 +1241,18 @@ static void HandleAppGridNormalInputs(u8 taskId)
     if (JOY_NEW(START_BUTTON))
     {
         sStartMenuDataPtr->mode = START_MODE_SAVE_NORMAL;
+        return;
+    }
+
+    if (JOY_NEW(SELECT_BUTTON))
+    {
+        if (!GetAppFromIndex(GetAppGridCurrentIndex()))
+        {
+            PlaySE(SE_BOO);
+            return;
+        }
+
+        InitializeStartMenuMoveMode();
         return;
     }
 
@@ -1298,6 +1344,99 @@ static void Task_BeginSave(u8 taskId)
 
 #undef tTimer
 
+static void RestoreStartMenuNormalMode(void)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+    struct Sprite *s = NULL;
+
+    // change cursor mode
+    s = &gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]];
+    StartSpriteAnim(s, START_CURSOR_NORMAL);
+    s->y += 2;
+
+    // update app sprites and app grid
+    enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
+
+    for (u32 i = 0; i < TOTAL_START_APPS; i++, aIcon++, aBg++)
+    {
+        enum StartMenuApps a = GetAppFromIndex(i);
+
+        s = &gSprites[spriteIds[aIcon]];
+        StartSpriteAnim(s, a);
+        s->x2 = GET_APP_GRID_X(i & (NUM_START_APP_GRID_ROWS - 1));
+        s->y2 = GET_APP_GRID_Y((i & NUM_START_APP_GRID_ROWS) >> 3);
+        s->callback = SpriteCallbackDummy;
+        s->subpriority = 2;
+        if (s->data[0])
+        {
+            s->y += 2;
+            s->data[0] = FALSE;
+        }
+
+        if (a)
+            s->invisible = FALSE;
+        else
+            s->invisible = TRUE;
+
+        s = &gSprites[spriteIds[aBg]];
+        if (!a)
+            StartSpriteAnim(s, START_APP_NONE);
+        else
+            StartSpriteAnim(s, START_APP_BACKGROUNDS);
+
+        s->x2 = GET_APP_GRID_X(i & (NUM_START_APP_GRID_ROWS - 1));
+        s->y2 = GET_APP_GRID_Y((i & NUM_START_APP_GRID_ROWS) >> 3);
+        s->oam.objMode = ST_OAM_OBJ_BLEND;
+        if (a)
+            s->invisible = FALSE;
+        else
+            s->invisible = TRUE;
+    }
+
+    sStartMenuDataPtr->movingAppIdx = NUM_START_APPS;
+    sStartMenuDataPtr->mode = START_MODE_NORMAL;
+
+    PrintStartMenuAppTitleText();
+}
+
+static bool32 SwapApps(void)
+{
+    u32 idx1 = sStartMenuDataPtr->movingAppIdx;
+    u32 app1 = GetAppFromIndex(idx1);
+
+    u32 idx2 = GetAppGridCurrentIndex();
+    u32 app2 = GetAppFromIndex(idx2);
+
+    if (app1 == app2)
+        return FALSE;
+
+    gSaveBlock3Ptr->startMenuAppIndex[idx2] = app1;
+    gSaveBlock3Ptr->startMenuAppIndex[idx1] = app2;
+
+    return TRUE;
+}
+
+static void HandleAppGridMoveInputs(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        if (!SwapApps())
+        {
+            PlaySE(SE_BOO);
+            return;
+        }
+
+        RestoreStartMenuNormalMode();
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        RestoreStartMenuNormalMode();
+        return;
+    }
+}
+
 // helpers
 
 static void SetupStartMenuBgs(void)
@@ -1356,30 +1495,39 @@ static void SetupStartMenuMainAppSprites(void)
     const struct SpriteTemplate *template = &sStartMenuAppCursorSprite;
     struct Sprite *sprite = NULL;
 
-    spriteIds[START_MAIN_SPRITE_APP_CURSOR] = CreateSprite(template, 27 + 16, 64 + 16, 0);
+    spriteIds[START_MAIN_SPRITE_APP_CURSOR] = CreateSprite(template, 27 + 16, 64 + 16, 1);
     sprite = &gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]];
 
+    StartSpriteAnim(sprite, START_CURSOR_NORMAL);
     sprite->x2 = GET_APP_GRID_X(GetAppGridCurrentColumn());
     sprite->y2 = GET_APP_GRID_Y(GetAppGridCurrentRow());
 
     template = &sStartMenuAppSprite;
     enum StartMenuMainSprites aIcon = START_MAIN_SPRITE_APP_ICONS, aBg = START_MAIN_SPRITE_APP_BGS;
-    for (u32 i = 0; i < sStartMenuDataPtr->numApps; i++, aIcon++, aBg++)
+    for (u32 i = 0; i < TOTAL_START_APPS; i++, aIcon++, aBg++)
     {
         enum StartMenuApps a = GetAppFromIndex(i);
 
-        spriteIds[aIcon] = CreateSprite(template, 35 + 8, 72 + 8, 1);
+        spriteIds[aIcon] = CreateSprite(template, 35 + 8, 72 + 8, 2);
         sprite = &gSprites[spriteIds[aIcon]];
         StartSpriteAnim(sprite, a);
         sprite->x2 = GET_APP_GRID_X(i & (NUM_START_APP_GRID_ROWS - 1));
         sprite->y2 = GET_APP_GRID_Y((i & NUM_START_APP_GRID_ROWS) >> 3);
+        if (!a)
+            sprite->invisible = TRUE;
 
         spriteIds[aBg] = CreateSprite(template, 35 + 8, 72 + 8, 3);
         sprite = &gSprites[spriteIds[aBg]];
-        StartSpriteAnim(sprite, START_APP_BACKGROUNDS);
+        if (!a)
+            StartSpriteAnim(sprite, START_APP_NONE);
+        else
+            StartSpriteAnim(sprite, START_APP_BACKGROUNDS);
+
         sprite->x2 = GET_APP_GRID_X(i & (NUM_START_APP_GRID_ROWS - 1));
         sprite->y2 = GET_APP_GRID_Y((i & NUM_START_APP_GRID_ROWS) >> 3);
         sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+        if (!a)
+            sprite->invisible = TRUE;
     }
 }
 
@@ -1688,8 +1836,36 @@ static void PrintStartMenuAppTitleText(void)
 
     enum StartMenuApps app = GetAppFromIndex(GetAppGridCurrentIndex());
 
-    PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0,
-                       sStartMenuModeAppNames[app]);
+    const u8 *str = NULL;
+    if (sStartMenuDataPtr->mode == START_MODE_MOVE)
+    {
+        #define SWAP_APP_WIDTH 78
+
+        _BlitHelpSymbols(START_HELP_SYMBOL_SWAP, START_MAIN_WIN_APP_TITLE, (TILE_TO_PIXELS(START_MAIN_WIN_APP_TITLE_WIDTH) / 2) - 8);
+
+        str = sStartMenuModeAppNames[GetAppFromIndex(sStartMenuDataPtr->movingAppIdx)];
+        u32 x = GetStringCenterAlignXOffset(FONT_SMALL, str, SWAP_APP_WIDTH) + 2;
+        PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, SWAP_APP_WIDTH / 8, x, 0, str);
+
+        if (app == GetAppFromIndex(sStartMenuDataPtr->movingAppIdx))
+            str = sStartMenuModeAppNames[START_APP_NONE];
+        else
+            str = sStartMenuModeAppNames[app];
+
+        x = GetStringCenterAlignXOffset(FONT_SMALL, str, SWAP_APP_WIDTH) + SWAP_APP_WIDTH + 16;
+        PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, SWAP_APP_WIDTH / 8, x, 0, str);
+
+        #undef SWAP_APP_WIDTH
+    }
+    else
+    {
+        if (app)
+            str = sStartMenuModeAppNames[app];
+        else
+            str = gText_Blank; // blank as the app table has 'Free Space'
+
+        PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0, str);
+    }
 
     CopyWindowToVram(START_MAIN_WIN_APP_TITLE, COPYWIN_FULL);
 }
@@ -1770,9 +1946,14 @@ static inline void PrintStartMenuText(enum StartMenuMainWindows window, u32 font
                                  GetFontAttribute(font, FONTATTR_LINE_SPACING), txtClr, 0, str);
 }
 
+static inline void _BlitHelpSymbols(enum StartMenuHelpSymbols sym, u32 window, u16 x)
+{
+    BlitBitmapRectToWindow(window, sStartMenuHelpSymbols, sym * 16, 0, 160, 16, x, 0, 16, 16);
+}
+
 static inline void BlitHelpSymbols(enum StartMenuHelpSymbols sym, u16 x)
 {
-    BlitBitmapRectToWindow(START_MAIN_WIN_HELP_TOP, sStartMenuHelpSymbols, sym * 16, 0, 144, 16, x, 0, 16, 16);
+    _BlitHelpSymbols(sym, START_MAIN_WIN_HELP_TOP, x);
 }
 
 static inline void BlitEggInfoSymbols(enum StartMenuEggInfoSymbols sym, u16 x, u16 y)
