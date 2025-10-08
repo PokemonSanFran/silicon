@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "ui_map_system.h" // mapSystem
 #include "battle_controllers.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_interface.h"
@@ -4064,7 +4065,10 @@ static void CursorCb_FieldMove(u8 taskId)
                 }
                 break;
             case FIELD_MOVE_FLY:
-                gPartyMenu.exitCallback = CB2_OpenFlyMap;
+                // Start mapSystem
+                //gPartyMenu.exitCallback = CB2_OpenFlyMap;
+                gPartyMenu.exitCallback = CB2_OpenFlyMapSystemReturnToPartyMenu;
+                // End mapSystem
                 Task_ClosePartyMenu(taskId);
                 break;
             default:
