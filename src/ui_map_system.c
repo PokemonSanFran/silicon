@@ -553,7 +553,7 @@ static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfxLZ =
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfxLZ =
 {
-    .size = 16 * 16 * 2,
+    .size = 64 * 64 * 2,
     .data = sRegionMapCursorL2FlyGfxLZ,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
@@ -1194,6 +1194,33 @@ void Task_OpenFlyMapSystemFromPartyMenu(u8 taskId)
         MapSystem_Init(CB2_ReturnToUIMenu);
         DestroyTask(taskId);
     }
+}
+
+void CB2_OpenFlyMapSystem(MainCallback callback)
+{
+    if (!gPaletteFade.active)
+    {
+        sCurrentMapMode = MAP_MODE_FLY;
+        CleanupOverworldWindowsAndTilemaps();
+        MapSystem_Init(callback);
+    }
+}
+
+void CB2_OpenFlyMapSystemReturnToPartyMenu(void)
+{
+    CB2_OpenFlyMapSystem(CB2_ReturnToPartyMenuFromFlyMap);
+}
+
+#include "qol_field_moves.h"
+
+void CB2_OpenFlyMapSystemReturnToBag(void)
+{
+    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool);
+}
+
+void CB2_OpenFlyMapSystemReturnToField(void)
+{
+    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool);
 }
 
 void Task_OpenTaxiMapSystemFromScript(u8 taskId)
@@ -2298,6 +2325,9 @@ static void PrintHeaderWarpConfirmToWindow(void)
     StringAppend(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
     StringAppend(gStringVar1, sText_QuestionMark);
 
+    if (sCurrentMapMode == MAP_MODE_FLY)
+        return;
+
     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (24*8)+3, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
 
@@ -2729,7 +2759,15 @@ static u8 HandleAttemptWarpInput(void)
 
     if(sRegionMap->mapSecTypeHasVisited == LOCATION_VISITED)
     {
-        if(GetWarpPriceAtMapSecByMapType(mapSecId) > GetMoney(&gSaveBlock1Ptr->money))
+        u32 warpPrice = GetWarpPriceAtMapSecByMapType(mapSecId);
+
+        if (warpPrice == 0)
+        {
+            PlaySE(SE_SELECT);
+            sRegionMap->warpCounter = 0;
+            sRegionMap->inputCallback = HandleWarpCloseMenu;
+        }
+        else if(warpPrice > GetMoney(&gSaveBlock1Ptr->money))
         {
             sRegionMap->inputCallback = HandleWarpFailedNoCash;
             sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
