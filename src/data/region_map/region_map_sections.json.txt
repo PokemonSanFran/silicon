@@ -45,6 +45,11 @@ const struct RegionMapLocation gRegionMapEntries[] = {
 {% else %}
         .name = (const u8[])_(""),
 {% endif %}
+{% if existsIn(map_section, "visitedFlag") %}
+        .visitedFlag = {{ map_section.visitedFlag }},
+{% else %}
+        .visitedFlag = 0,
+{% endif %}
     },
 ## endfor
 };
