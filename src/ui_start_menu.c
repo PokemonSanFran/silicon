@@ -309,6 +309,13 @@ struct StartMenuData
     enum StartMenuApps movingAppIdx;
 };
 
+struct StartMenuAppData
+{
+    const u8 *name;
+    u16 unlockFlag;
+    MainCallback openCB; // opening function
+};
+
 // RAM data
 static EWRAM_DATA struct StartMenuData *sStartMenuDataPtr = NULL;
 static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
@@ -365,6 +372,7 @@ static inline enum StartMenuMonStatuses ConvertRawStatusIntoMonStatus(u32);
 static inline u32 ConvertPercentageIntoHpBarFrame(u32);
 static inline void *GetSpriteCallbackForIcon(u32, bool32);
 static inline u32 GetMonHealthPercentage(struct Pokemon *);
+static const struct StartMenuAppData *GetStartMenuAppData(enum StartMenuApps);
 static void FreeStartMenuData(void);
 
 // ROM data
@@ -498,7 +506,6 @@ static const u8 sStartMenuDaycareSymbols[] = INCBIN_U8("graphics/ui_menus/start_
 static const u8 sStartMenuMonStatusSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/mon_status.4bpp");
 static const u8 sStartMenuHpBarSymbols[] = INCBIN_U8("graphics/ui_menus/start_menu/hp_bar.4bpp");
 
-
 static const struct {
     const struct SpriteSheet sheets[NUM_START_TAGS];
     const struct SpritePalette palette;
@@ -563,54 +570,6 @@ static const u8 *const sStartMenuSaveResultText[NUM_START_SAVE_RESULTS] =
     [START_SAVE_OVERWRITE]   = COMPOUND_STRING("START_SAVE_OVERWRITE"),
     [START_SAVE_SUCCESS]     = COMPOUND_STRING("Saved the game."),
     [START_SAVE_FAILURE]     = COMPOUND_STRING("There's a problem saving."),
-};
-
-static const u8 *const sStartMenuModeAppNames[NUM_START_APPS] =
-{
-    [START_APP_NONE] = COMPOUND_STRING("Free Space"),
-
-    // first row
-    [START_APP_PARTY] = COMPOUND_STRING("Party"),
-    [START_APP_BAG] = COMPOUND_STRING("Bag"),
-    [START_APP_ARRIBA] = COMPOUND_STRING("Arriba"),
-    [START_APP_TODOS] = COMPOUND_STRING("Todos"),
-    [START_APP_DEXNAV] = COMPOUND_STRING("Dexnav"),
-    [START_APP_POKEDEX] = COMPOUND_STRING("Pokedex"),
-    [START_APP_BUZZR] = COMPOUND_STRING("Buzzr"),
-    [START_APP_OPTIONS] = COMPOUND_STRING("Options"),
-
-    // second row
-    [START_APP_TRAINER_CARD] = COMPOUND_STRING("Trainer Card"),
-    [START_APP_PRESTO] = COMPOUND_STRING("Presto"),
-    [START_APP_WAVES_OF_CHANGE] = COMPOUND_STRING("Waves of Change"),
-    [START_APP_CUSTOMIZE] = COMPOUND_STRING("Customize"),
-    [START_APP_SAVE] = COMPOUND_STRING("Save"),
-    [START_APP_SURPRISE_TRADE] = COMPOUND_STRING("Surprise Trade"),
-    [START_APP_GOOGLE_GLASS] = COMPOUND_STRING("Google Glass"),
-    [START_APP_ADVENTURES_GUIDE] = COMPOUND_STRING("Adventure Guide"),
-};
-
-static const MainCallback sStartAppMenusPtr[NUM_START_APPS] =
-{
-    // first row
-    [START_APP_PARTY] = CB2_PartyMenuFromStartMenu,
-    [START_APP_BAG] = CB2_BagMenuFromStartMenu,
-    [START_APP_ARRIBA] = CB2_MapSystemFromStartMenu,
-    [START_APP_TODOS] = CB2_QuestMenuFromStartMenu,
-    [START_APP_DEXNAV] = CB2_DexNavFromStartMenu,
-    [START_APP_POKEDEX] = CB2_PokedexFromStartMenu,
-    [START_APP_BUZZR] = CB2_BuzzrFromStartMenu,
-    [START_APP_OPTIONS] = CB2_OptionsFromStartMenu,
-
-    // second row
-    [START_APP_TRAINER_CARD] = NULL, // TODO as vanilla's very borked to use
-    [START_APP_PRESTO] = CB2_PrestoFromStartMenu,
-    [START_APP_WAVES_OF_CHANGE] = NULL, // TODO
-    [START_APP_CUSTOMIZE] = CB2_CustomizationFromStartMenu,
-    [START_APP_SAVE] = NULL, // TODO
-    [START_APP_SURPRISE_TRADE] = NULL, // TODO
-    [START_APP_GOOGLE_GLASS] = CB2_GlassFromStartMenu,
-    [START_APP_ADVENTURES_GUIDE] = CB2_AdventureGuideFromStartMenu,
 };
 
 //sprite
@@ -740,31 +699,81 @@ static const struct SpriteTemplate sStartMenuDaycareItemSprite =
 };
 
 // misc
-static const u16 sStartMenuInstalledApps[NUM_START_APPS] =
+static const struct StartMenuAppData sStartMenuApps[NUM_START_APPS] =
 {
+    [START_APP_NONE] =
+    {
+        COMPOUND_STRING("Free Space"), 0, NULL
+    },
+
     // first row
-    [START_APP_PARTY]   = FLAG_SYS_APP_POKEMON_GET, // FLAG_SYS_APP_PROLOGUE_GET
-    [START_APP_BAG]     = FLAG_SYS_APP_BAG_GET, // FLAG_SYS_APP_PROLOGUE_GET
-    [START_APP_ARRIBA]  = FLAG_SYS_APP_MAP_GET, // FLAG_SYS_STARTER_APPS_GET
-    [START_APP_TODOS]   = FLAG_SYS_APP_QUEST_GET, // FLAG_SYS_STARTER_APPS_GET
-    [START_APP_DEXNAV]  = FLAG_SYS_APP_DEXNAV_GET, // Get later
-    [START_APP_POKEDEX] = FLAG_SYS_APP_POKEDEX_GET, // FLAG_SYS_STARTER_APPS_GET
-    [START_APP_BUZZR]   = FLAG_SYS_APP_BUZZR_GET, // After 1 badge
-    [START_APP_OPTIONS] = 0, // always there
+    [START_APP_PARTY] =
+    {
+        COMPOUND_STRING("Party"), FLAG_SYS_APP_POKEMON_GET, CB2_PartyMenuFromStartMenu
+    },
+    [START_APP_BAG] =
+    {
+        COMPOUND_STRING("Bag"), FLAG_SYS_APP_BAG_GET, CB2_BagMenuFromStartMenu
+    },
+    [START_APP_ARRIBA] =
+    {
+        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu
+    },
+    [START_APP_TODOS] =
+    {
+        COMPOUND_STRING("Todos"), FLAG_SYS_APP_QUEST_GET, CB2_QuestMenuFromStartMenu
+    },
+    [START_APP_DEXNAV] =
+    {
+        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexNavFromStartMenu
+    },
+    [START_APP_POKEDEX] =
+    {
+        COMPOUND_STRING("Pokédex"), FLAG_SYS_APP_POKEDEX_GET, CB2_PokedexFromStartMenu
+    },
+    [START_APP_BUZZR] =
+    {
+        COMPOUND_STRING("Buzzr"), FLAG_SYS_APP_BUZZR_GET, CB2_BuzzrFromStartMenu
+    },
+    [START_APP_OPTIONS] =
+    {
+        COMPOUND_STRING("Options"), 0, CB2_OptionsFromStartMenu
+    },
 
     // second row
-    // TODO add flags missing from start menu v2
-    [START_APP_TRAINER_CARD]     = 0, // always there
-    [START_APP_PRESTO]           = FLAG_SYS_APP_PRESTO_GET, // After meeting YC CEO in office
-    [START_APP_WAVES_OF_CHANGE]  = FLAG_SYS_APP_WAVES_OF_CHANGE_GET,
-    [START_APP_CUSTOMIZE]        = FLAG_SYS_APP_QUEST_GET,
-    [START_APP_SAVE]             = 0, // always there
-    [START_APP_SURPRISE_TRADE]   = FLAG_SYS_STARTER_APPS_GET,
-    [START_APP_GOOGLE_GLASS]     = FLAG_SYS_APP_GOOGLE_GLASS_GET,
-    [START_APP_ADVENTURES_GUIDE] = 0, // always there
+    [START_APP_TRAINER_CARD] = // TODO investigate visual glitch w/ this guy
+    {
+        COMPOUND_STRING("Trainer Card"), 0, NULL
+    },
+    [START_APP_PRESTO] =
+    {
+        COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu
+    },
+    [START_APP_WAVES_OF_CHANGE] = // PSF TODO
+    {
+        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL
+    },
+    [START_APP_CUSTOMIZE] =
+    {
+        COMPOUND_STRING("Customize"), FLAG_SYS_APP_QUEST_GET, CB2_CustomizationFromStartMenu
+    },
+    [START_APP_SAVE] = // the "opening" function is baked in
+    {
+        COMPOUND_STRING("Save"), 0, NULL
+    },
+    [START_APP_SURPRISE_TRADE] = // PSF TODO
+    {
+        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, NULL
+    },
+    [START_APP_GOOGLE_GLASS] =
+    {
+        COMPOUND_STRING("Google Glass"), FLAG_SYS_APP_GOOGLE_GLASS_GET, CB2_GlassFromStartMenu
+    },
+    [START_APP_ADVENTURES_GUIDE] =
+    {
+        COMPOUND_STRING("Adventure Guide"), 0, CB2_AdventureGuideFromStartMenu
+    },
 };
-
-// misc
 
 static const enum StartMenuCellularSignals sStartSignalsByMapType[] =
 {
@@ -1040,11 +1049,13 @@ static bool32 IsAppUnlocked(enum StartMenuApps app)
     if (!app || app >= NUM_START_APPS)
         return FALSE;
 
+    const struct StartMenuAppData *data = GetStartMenuAppData(app);
+
     // apps that is always there e.g. save
-    if (!sStartMenuInstalledApps[app])
+    if (!data->unlockFlag)
         return TRUE;
 
-    return FlagGet(sStartMenuInstalledApps[app]);
+    return FlagGet(data->unlockFlag);
 }
 
 static u32 CountCurrentNumberOfApps(void)
@@ -1224,8 +1235,9 @@ static void HandleAppGridNormalInputs(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         enum StartMenuApps app = GetAppFromIndex(GetAppGridCurrentIndex());
+        const struct StartMenuAppData *data = GetStartMenuAppData(app);
 
-        if ((app != START_APP_SAVE && !sStartAppMenusPtr[app]) || !app)
+        if ((app != START_APP_SAVE && !data->openCB) || !app)
         {
             PlaySE(SE_BOO);
             return;
@@ -1239,7 +1251,7 @@ static void HandleAppGridNormalInputs(u8 taskId)
         else
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            sStartMenuDataPtr->savedCB = sStartAppMenusPtr[app];
+            sStartMenuDataPtr->savedCB = data->openCB;
             gTasks[taskId].func = Task_CloseStartMenu;
         }
         return;
@@ -1862,14 +1874,16 @@ static void PrintStartMenuAppTitleText(void)
 
         _BlitHelpSymbols(START_HELP_SYMBOL_SWAP, START_MAIN_WIN_APP_TITLE, (TILE_TO_PIXELS(START_MAIN_WIN_APP_TITLE_WIDTH) / 2) - 8);
 
-        str = sStartMenuModeAppNames[GetAppFromIndex(sStartMenuDataPtr->movingAppIdx)];
+        u32 movingApp = GetAppFromIndex(sStartMenuDataPtr->movingAppIdx);
+
+        str = GetStartMenuAppData(movingApp)->name;
         u32 x = GetStringCenterAlignXOffset(FONT_SMALL, str, SWAP_APP_WIDTH) + 2;
         PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, SWAP_APP_WIDTH / 8, x, 0, str);
 
-        if (app == GetAppFromIndex(sStartMenuDataPtr->movingAppIdx))
-            str = sStartMenuModeAppNames[START_APP_NONE];
+        if (app == movingApp)
+            str = GetStartMenuAppData(START_APP_NONE)->name;
         else
-            str = sStartMenuModeAppNames[app];
+            str = GetStartMenuAppData(app)->name;
 
         x = GetStringCenterAlignXOffset(FONT_SMALL, str, SWAP_APP_WIDTH) + SWAP_APP_WIDTH + 16;
         PrintStartMenuText(START_MAIN_WIN_APP_TITLE, FONT_SMALL, SWAP_APP_WIDTH / 8, x, 0, str);
@@ -1879,7 +1893,7 @@ static void PrintStartMenuAppTitleText(void)
     else
     {
         if (app)
-            str = sStartMenuModeAppNames[app];
+            str = GetStartMenuAppData(app)->name;
         else
             str = gText_Blank; // blank as the app table has 'Free Space'
 
@@ -2076,6 +2090,14 @@ static inline void InjectMonStatusGraphics(struct Sprite *sprite, u32 status, u3
     CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
 
     RemoveWindow(window);
+}
+
+static const struct StartMenuAppData *GetStartMenuAppData(enum StartMenuApps app)
+{
+    if (app >= NUM_START_APPS)
+        app = START_APP_NONE;
+
+    return &sStartMenuApps[app];
 }
 
 static void FreeStartMenuData(void)

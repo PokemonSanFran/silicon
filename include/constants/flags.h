@@ -1376,6 +1376,7 @@
 #define FLAG_SYS_APP_POKEDEX_GET                     (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_APP_QUEST_GET                       (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_APP_MAP_GET                         (SYSTEM_FLAGS + 0x1) // Silicon Flag
+#define FLAG_SYS_APP_SURPRISE_TRADE_GET              (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_STARTER_APPS_GET                    (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
 #define FLAG_SYS_APP_BUZZR_GET                       (SYSTEM_FLAGS + 0x3) // Silicon Flag
