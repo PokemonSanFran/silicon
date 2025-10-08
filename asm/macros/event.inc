@@ -2508,12 +2508,12 @@
 	.2byte \slot
 	.endm
 
-    @ Calls the start menu in Save Mode which only allows the player to save their game or not.
-    .macro startmenu_savescreen
-    fadescreen FADE_TO_BLACK
-    special ShowStartMenuSaveScreen
-    waitstate
-    .endm
+	@ Calls the start menu in Save Mode which only allows the player to save their game or not.
+	.macro startmenu_savescreen
+	fadescreen FADE_TO_BLACK
+	callnative StartMenu_ShowSaveScreen
+	waitstate
+	.endm
 
 	@ Writes the name of the specified ability to the specified buffer.
 	.macro bufferabilityname stringVarId:req, ability:req

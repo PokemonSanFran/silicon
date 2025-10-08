@@ -783,12 +783,19 @@ static const enum StartMenuCellularSignals sStartSignalsByMapType[] =
 // code
 
 // tasks
+#define tStartMode data[0]
+
 void Task_OpenUIStartMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        s16 *data = gTasks[taskId].data;
+        enum StartMenuModes mode = START_MODE_NORMAL;
         CleanupOverworldWindowsAndTilemaps();
-        OpenStartMenu(START_MODE_NORMAL);
+        if (tStartMode)
+            mode = tStartMode;
+
+        OpenStartMenu(mode);
         DestroyTask(taskId);
     }
 }
@@ -1275,7 +1282,17 @@ static void HandleAppGridSaveInputs(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
-        sStartMenuDataPtr->mode = START_MODE_NORMAL;
+        if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
+        {
+            PlaySE(SE_PC_OFF);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_CloseStartMenu;
+        }
+        else
+        {
+            sStartMenuDataPtr->mode = START_MODE_NORMAL;
+        }
+
         return;
     }
 }
@@ -2085,3 +2102,24 @@ static void FreeStartMenuData(void)
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
 }
+
+void StartMenu_ShowSaveScreen(void)
+{
+    enum StartMenuModes mode = START_MODE_SAVE_SCRIPT;
+
+    if (!IsOverworldLinkActive())
+    {
+        FreezeObjectEvents();
+        PlayerFreeze();
+        StopPlayerAvatar();
+    }
+
+    LockPlayerFieldControls();
+    if (FlagGet(FLAG_SHOULD_SKIP_CREDITS))
+        mode = START_MODE_SAVE_FORCE;
+
+    u32 taskId = CreateTask(Task_OpenUIStartMenu, 0);
+    gTasks[taskId].tStartMode = mode;
+}
+
+#undef tStartMode
