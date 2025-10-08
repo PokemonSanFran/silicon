@@ -618,6 +618,12 @@
       "map": "MAP_CHASILLA",
       "x": 0,
       "y": 10
+    },
+    {
+      "id": "HEAL_LOCATION_ROBINWILLTUNNEL",
+      "map": "MAP_ESPULEE_OUTSKIRTS",
+      "x": 5,
+      "y": 33
     }
   ]
 }
