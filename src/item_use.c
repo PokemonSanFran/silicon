@@ -51,6 +51,7 @@
 // Start qol_field_moves
 #include "qol_field_moves.h"
 #include "field_control_avatar.h"
+#include "ui_map_system.h" // mapSystem
 #include "region_map.h"
 #include "fldeff.h"
 // End qol_field_moves
@@ -1654,7 +1655,10 @@ void ItemUseOutOfBattle_FlyTool(u8 taskId)
 static void CB2_OpenFlyToolFromBag(void)
 {
     VarSet(VAR_FLY_TOOL_SOURCE,FLY_SOURCE_BAG);
-    CB2_OpenFlyMap();
+    // Start mapSystem
+    //CB2_OpenFlyMap();
+    CB2_OpenFlyMapSystemReturnToBag();
+    // End mapSystem
 }
 static void Task_OpenRegisteredFlyTool(u8 taskId)
 {
@@ -1662,7 +1666,10 @@ static void Task_OpenRegisteredFlyTool(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_OpenFlyMap);
+    // Start mapSystem
+        //SetMainCallback2(CB2_OpenFlyMap);
+    CB2_OpenFlyMapSystemReturnToField();
+    // End mapSystem
         DestroyTask(taskId);
     }
 }
