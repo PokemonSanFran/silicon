@@ -65,8 +65,8 @@
 #define WARP_UBER 0
 #define WARP_TAXI 1
 
-#define L2_WINDOW_RIGHT_SIDE_SHOWING    (62 * 8) 
-#define L2_WINDOW_LEFT_SIDE_SHOWING     (18 * 8) 
+#define L2_WINDOW_RIGHT_SIDE_SHOWING    (62 * 8)
+#define L2_WINDOW_LEFT_SIDE_SHOWING     (18 * 8)
 #define L2_WINDOW_HIDDEN                (32 * 8)
 
 #define GRAY_CITY_MAX_COUNT                 20
@@ -179,24 +179,24 @@ enum POIShape { // These are the possible Gray POI Shapes mapped to their Animat
 };
 
 enum GrayPOILocations { // Locations which have a gray POI sprite for them
-    GRAY_POI_MUIRWOODS,
-    GRAY_POI_MARIN,
-    GRAY_POI_BERKELY,
-    GRAY_POI_PRESIDIO,
-    GRAY_POI_PACIFICA,
-    GRAY_POI_JAPANTOWN,
-    GRAY_POI_CHINATOWN,
-    GRAY_POI_HAIGHTASHBURY,
-    GRAY_POI_SUNSET,
-    GRAY_POI_DOGPATCH,
-    GRAY_POI_SOUTHBAY,
-    GRAY_POI_GLDNGTEPARK,
-    GRAY_POI_ALAMADA,
-    GRAY_POI_OAKLAND,
-    GRAY_POI_CASTRO,
-    GRAY_POI_TENDERLOIN,
-    GRAY_POI_MISSION,
-    GRAY_POI_SOMA,
+    GRAY_POI_LEAVERRA_FOREST,
+    GRAY_POI_ESPULEE_OUTSKIRTS,
+    GRAY_POI_CHASILLA,
+    GRAY_POI_PETAROSA_BOROUGH,
+    GRAY_POI_CRESALTA_VISTA,
+    GRAY_POI_TORA_TOWN,
+    GRAY_POI_HODOU_CITY,
+    GRAY_POI_TIRABUDIN_PLACE,
+    GRAY_POI_QIU_VILLAGE,
+    GRAY_POI_CURENO_PORT,
+    GRAY_POI_CUCUNO_TOWN,
+    GRAY_POI_HALERBA_CITY,
+    GRAY_POI_HALAI_ISLAND,
+    GRAY_POI_OROLAND,
+    GRAY_POI_IRISINA_TOWN,
+    GRAY_POI_CAPHE_CITY,
+    GRAY_POI_MERMEREZA_CITY,
+    GRAY_POI_PERLACIA_CITY,
     GRAY_POI_COUNT,
 };
 
@@ -274,7 +274,7 @@ static const struct BgTemplate sMenuBgTemplates[] =
 {
     {
         .bg = 0, // Text Background
-        .charBaseIndex = 0, 
+        .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .screenSize = 0,
         .paletteMode = 0,
@@ -282,7 +282,7 @@ static const struct BgTemplate sMenuBgTemplates[] =
     },
     {
         .bg = 1, // L2 Window Bg
-        .charBaseIndex = 3, // These are overridden in the LoadGfx Function Because GameFreak look for BG_CHAR_ADDR - Might Change in the Future To Follow A More Typical UI Approach 
+        .charBaseIndex = 3, // These are overridden in the LoadGfx Function Because GameFreak look for BG_CHAR_ADDR - Might Change in the Future To Follow A More Typical UI Approach
         .mapBaseIndex = 25, // These are overridden in the LoadGfx Function Because GameFreak
         .screenSize = 3,
         .paletteMode = 0,
@@ -290,9 +290,9 @@ static const struct BgTemplate sMenuBgTemplates[] =
     },
     {
         .bg = 2, // Roads and Black Bars
-        .charBaseIndex = 1, // These are overridden in the LoadGfx Function Because GameFreak 
+        .charBaseIndex = 1, // These are overridden in the LoadGfx Function Because GameFreak
         .mapBaseIndex = 30, // These are overridden in the LoadGfx Function Because GameFreak
-        .screenSize = 0, 
+        .screenSize = 0,
         .paletteMode = 0,
         .priority = 2
     },
@@ -352,7 +352,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 };
 
 // Fake Window Template For Printing to the Tooltip Sprite
-static const struct WindowTemplate sTooltipWindowTemplate = 
+static const struct WindowTemplate sTooltipWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 0,
@@ -536,21 +536,21 @@ static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] =
 #define TAG_L2_CURSOR 20101
 #define TAG_L1_CURSOR 20106
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxLZ = 
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxLZ =
 {
     .size = 64 * 64 * 2,
     .data = sRegionMapCursorL2GfxLZ,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfxLZ = 
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfxLZ =
 {
     .size = 64 * 64 * 2,
     .data = sRegionMapCursorL2TaxiGfxLZ,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfxLZ = 
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfxLZ =
 {
     .size = 16 * 16 * 2,
     .data = sRegionMapCursorL2FlyGfxLZ,
@@ -847,7 +847,7 @@ static const union AnimCmd *const sSpriteAnimTable_OwWaypointArrow[] =
     sSpriteAnim_OWArrowWest,
     sSpriteAnim_OWArrowEast,
     sSpriteAnim_OWArrowSouthWest,
-    sSpriteAnim_OWArrowSouthEast,   
+    sSpriteAnim_OWArrowSouthEast,
     sSpriteAnim_OWArrowNorthWest,
     sSpriteAnim_OWArrowNorthEast,
     sSpriteAnim_OWArrowNoSignal,
@@ -865,7 +865,7 @@ static const struct SpriteTemplate sSpriteTemplate_OwWaypointArrowMap =
 };
 
 //
-//  Region Mapsec Tilemap - Holds the position of each mapsec relative to the actual physical regionmap layout. 
+//  Region Mapsec Tilemap - Holds the position of each mapsec relative to the actual physical regionmap layout.
 //
 static const u8 sRegionMap_MapSectionLayout[MAP_HEIGHT][MAP_WIDTH] = {
     {MAPSEC_NONE, MAPSEC_LEAVERRA_FOREST, MAPSEC_ROUTE100, MAPSEC_ROUTE100, MAPSEC_ROUTE100, MAPSEC_ROUTE100, MAPSEC_ESPULEE_OUTSKIRTS, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_ROUTE_E, MAPSEC_CHASILLA, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE},
@@ -973,16 +973,16 @@ static const u8 sMapHealLocations[MAPSEC_NONE] =
 // Trolley Data
 
 enum TrolleyLocations {
-    TROLLEY_DOGPATCH, // PINK
-    TROLLEY_CASTRO, // CENTER
-    TROLLEY_SUNSET, // RED
-    TROLLEY_HAIGHTASHBURY, // DARK GREEN
+    TROLLEY_CURENO_PORT, // PINK
+    TROLLEY_IRISINA_TOWN, // CENTER
+    TROLLEY_QIU_VILLAGE, // RED
+    TROLLEY_TIRABUDIN_PLACE, // DARK GREEN
     TROLLEY_PAINTED_LADIES, // LIGHT GREEN
-    TROLLEY_TENDERLOIN, // ORANGE
-    TROLLEY_MARIN, // YELLOW
+    TROLLEY_CAPHE_CITY, // ORANGE
+    TROLLEY_ESPULEE_OUTSKIRTS, // YELLOW
     TROLLEY_TRANSPYRAMID, // BLUE
     TROLLEY_TREASURE_ISLAND, // BLUE
-    TROLLEY_OAKLAND, // BLUE
+    TROLLEY_OROLAND, // BLUE
     TROLLEY_COUNT,
 };
 
@@ -1001,62 +1001,62 @@ struct TrolleyStop {
     struct NextTrolley nextTrolleyOptions;
 };
 
-static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] = 
+static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
 {
-    [TROLLEY_DOGPATCH] = {
+    [TROLLEY_CURENO_PORT] = {
         .trolleyMapSec = MAPSEC_CURENO_PORT,
         .trolleyCursorX = 16,
         .trolleyCursorY = 14,
         .trolleyLocationIconX = (14 * 8) + 1,
         .trolleyLocationIconY = (15 * 8),
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_SUNSET, 
-                                .moveRightStop = TROLLEY_TRANSPYRAMID, 
-                                .moveUpStop    = TROLLEY_CASTRO, 
-                                .moveDownStop  = TROLLEY_MARIN, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_QIU_VILLAGE,
+                                .moveRightStop = TROLLEY_TRANSPYRAMID,
+                                .moveUpStop    = TROLLEY_IRISINA_TOWN,
+                                .moveDownStop  = TROLLEY_ESPULEE_OUTSKIRTS,
+                            },
     },
 
-    [TROLLEY_CASTRO] = {
+    [TROLLEY_IRISINA_TOWN] = {
         .trolleyMapSec = MAPSEC_IRISINA_TOWN,
         .trolleyCursorX = 7,
         .trolleyCursorY = 13,
         .trolleyLocationIconX = (8 * 8) + 2,
         .trolleyLocationIconY = (13 * 8),
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_HAIGHTASHBURY, 
-                                .moveRightStop = TROLLEY_PAINTED_LADIES, 
-                                .moveUpStop    = TROLLEY_MARIN, 
-                                .moveDownStop  = TROLLEY_DOGPATCH, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_TIRABUDIN_PLACE,
+                                .moveRightStop = TROLLEY_PAINTED_LADIES,
+                                .moveUpStop    = TROLLEY_ESPULEE_OUTSKIRTS,
+                                .moveDownStop  = TROLLEY_CURENO_PORT,
+                            },
     },
 
-    [TROLLEY_SUNSET] = {
+    [TROLLEY_QIU_VILLAGE] = {
         .trolleyMapSec = MAPSEC_QIU_VILLAGE,
         .trolleyCursorX = 0,
         .trolleyCursorY = 12,
         .trolleyLocationIconX = (0 * 8) - 4,
         .trolleyLocationIconY = (11 * 8),
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_OAKLAND, 
-                                .moveRightStop = TROLLEY_HAIGHTASHBURY, 
-                                .moveUpStop    = TROLLEY_MARIN, 
-                                .moveDownStop  = TROLLEY_DOGPATCH, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_OROLAND,
+                                .moveRightStop = TROLLEY_TIRABUDIN_PLACE,
+                                .moveUpStop    = TROLLEY_ESPULEE_OUTSKIRTS,
+                                .moveDownStop  = TROLLEY_CURENO_PORT,
+                            },
     },
 
-    [TROLLEY_HAIGHTASHBURY] = {
+    [TROLLEY_TIRABUDIN_PLACE] = {
         .trolleyMapSec = MAPSEC_TIRABUDIN_PLACE,
         .trolleyCursorX = 6,
         .trolleyCursorY = 8,
         .trolleyLocationIconX = (4 * 8) + 2,
         .trolleyLocationIconY = (7 * 8),
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_SUNSET, 
-                                .moveRightStop = TROLLEY_MARIN, 
-                                .moveUpStop    = TROLLEY_MARIN, 
-                                .moveDownStop  = TROLLEY_CASTRO, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_QIU_VILLAGE,
+                                .moveRightStop = TROLLEY_ESPULEE_OUTSKIRTS,
+                                .moveUpStop    = TROLLEY_ESPULEE_OUTSKIRTS,
+                                .moveDownStop  = TROLLEY_IRISINA_TOWN,
+                            },
     },
 
     [TROLLEY_PAINTED_LADIES] = {
@@ -1066,39 +1066,39 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconX = (12 * 8) + 1,
         .trolleyLocationIconY = (9 * 8) - 1,
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_MARIN, 
-                                .moveRightStop = TROLLEY_TENDERLOIN, 
-                                .moveUpStop    = TROLLEY_MARIN, 
-                                .moveDownStop  = TROLLEY_CASTRO, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_ESPULEE_OUTSKIRTS,
+                                .moveRightStop = TROLLEY_CAPHE_CITY,
+                                .moveUpStop    = TROLLEY_ESPULEE_OUTSKIRTS,
+                                .moveDownStop  = TROLLEY_IRISINA_TOWN,
+                            },
     },
 
-    [TROLLEY_TENDERLOIN] = {
+    [TROLLEY_CAPHE_CITY] = {
         .trolleyMapSec = MAPSEC_CAPHE_CITY,
         .trolleyCursorX = 13,
         .trolleyCursorY = 8,
         .trolleyLocationIconX = (16 * 8) + 1,
         .trolleyLocationIconY = (9 * 8) - 1,
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_PAINTED_LADIES, 
-                                .moveRightStop = TROLLEY_TRANSPYRAMID, 
-                                .moveUpStop    = TROLLEY_MARIN, 
-                                .moveDownStop  = TROLLEY_CASTRO, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_PAINTED_LADIES,
+                                .moveRightStop = TROLLEY_TRANSPYRAMID,
+                                .moveUpStop    = TROLLEY_ESPULEE_OUTSKIRTS,
+                                .moveDownStop  = TROLLEY_IRISINA_TOWN,
+                            },
     },
 
-    [TROLLEY_MARIN] = {
+    [TROLLEY_ESPULEE_OUTSKIRTS] = {
         .trolleyMapSec = MAPSEC_ESPULEE_OUTSKIRTS,
         .trolleyCursorX = 6,
         .trolleyCursorY = 0,
         .trolleyLocationIconX = (4 * 8),
         .trolleyLocationIconY = (1 * 8) - 1,
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_HAIGHTASHBURY, 
-                                .moveRightStop = TROLLEY_PAINTED_LADIES, 
-                                .moveUpStop    = TROLLEY_DOGPATCH, 
-                                .moveDownStop  = TROLLEY_CASTRO, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_TIRABUDIN_PLACE,
+                                .moveRightStop = TROLLEY_PAINTED_LADIES,
+                                .moveUpStop    = TROLLEY_CURENO_PORT,
+                                .moveDownStop  = TROLLEY_IRISINA_TOWN,
+                            },
     },
 
     [TROLLEY_TRANSPYRAMID] = {
@@ -1108,11 +1108,11 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconX = (15 * 8),
         .trolleyLocationIconY = (4 * 8) - 2,
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_TENDERLOIN, 
-                                .moveRightStop = TROLLEY_TREASURE_ISLAND, 
-                                .moveUpStop    = TROLLEY_DOGPATCH, 
-                                .moveDownStop  = TROLLEY_CASTRO, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_CAPHE_CITY,
+                                .moveRightStop = TROLLEY_TREASURE_ISLAND,
+                                .moveUpStop    = TROLLEY_CURENO_PORT,
+                                .moveDownStop  = TROLLEY_IRISINA_TOWN,
+                            },
     },
 
     [TROLLEY_TREASURE_ISLAND] = {
@@ -1122,25 +1122,25 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconX = (17 * 8),
         .trolleyLocationIconY = (3 * 8) + 1,
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_TRANSPYRAMID, 
-                                .moveRightStop = TROLLEY_OAKLAND, 
-                                .moveUpStop    = TROLLEY_DOGPATCH, 
-                                .moveDownStop  = TROLLEY_TRANSPYRAMID, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_TRANSPYRAMID,
+                                .moveRightStop = TROLLEY_OROLAND,
+                                .moveUpStop    = TROLLEY_CURENO_PORT,
+                                .moveDownStop  = TROLLEY_TRANSPYRAMID,
+                            },
     },
 
-    [TROLLEY_OAKLAND] = {
+    [TROLLEY_OROLAND] = {
         .trolleyMapSec = MAPSEC_OROLAND,
         .trolleyCursorX = 23,
         .trolleyCursorY = 5,
         .trolleyLocationIconX = (25 * 8) + 1,
         .trolleyLocationIconY = (6 * 8),
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_TREASURE_ISLAND, 
-                                .moveRightStop = TROLLEY_SUNSET, 
-                                .moveUpStop    = TROLLEY_DOGPATCH, 
-                                .moveDownStop  = TROLLEY_TREASURE_ISLAND, 
-                            }, 
+                                .moveLeftStop  = TROLLEY_TREASURE_ISLAND,
+                                .moveRightStop = TROLLEY_QIU_VILLAGE,
+                                .moveUpStop    = TROLLEY_CURENO_PORT,
+                                .moveDownStop  = TROLLEY_TREASURE_ISLAND,
+                            },
     },
 
 };
@@ -1318,7 +1318,7 @@ static void Task_MapSystemTurnOff(u8 taskId)
 }
 
 
-//  Main Function for Setting all Graphics / VRAM / GPU related stuff, driving the loading of all 
+//  Main Function for Setting all Graphics / VRAM / GPU related stuff, driving the loading of all
 //          tilesets, tilemaps, spritesheets, etc and initializing the data for the region map
 static bool8 MapSystem_DoGfxSetup(void)
 {
@@ -1427,7 +1427,7 @@ static bool8 MapSystem_DoGfxSetup(void)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
-    default:       
+    default:
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         SetGpuReg(REG_OFFSET_BG1HOFS, L2_WINDOW_HIDDEN);
@@ -1470,7 +1470,7 @@ static void MapSystem_InitWindows(void)
     CopyWindowToVram(WINDOW_L2_RIGHT_SIDE_TEXT, 3);
 
     FillWindowPixelBuffer(WINDOW_L2_LEFT_SIDE_TEXT, 0);
-    PutWindowTilemap(WINDOW_L2_LEFT_SIDE_TEXT);    
+    PutWindowTilemap(WINDOW_L2_LEFT_SIDE_TEXT);
     CopyWindowToVram(WINDOW_L2_LEFT_SIDE_TEXT, 3);
 
     LoadUserWindowBorderGfx(WINDOW_HEADER_TEXT, 720, 14 * 16);
@@ -1580,7 +1580,7 @@ static void SpriteCB_CursorMap_TrolleyMode(struct Sprite *sprite)
 {
     sprite->x = 8 * sRegionMap->cursorPosX + 4 + 8;
     sprite->y = 8 * sRegionMap->cursorPosY + 4 + 16;
-    if (sMapSystem_DataPtr->currentTrolley == TROLLEY_CASTRO)
+    if (sMapSystem_DataPtr->currentTrolley == TROLLEY_IRISINA_TOWN)
     {
         sprite->x += 4;
         sprite->y -= 4;
@@ -1591,7 +1591,7 @@ static void SpriteCB_CursorMap_TrolleyModeLOC(struct Sprite *sprite)
 {
     sprite->x = 8 * sRegionMap->cursorPosX + 4 + 8;
     sprite->y = 8 * sRegionMap->cursorPosY + 4 + 8;
-    if (sMapSystem_DataPtr->currentTrolley == TROLLEY_CASTRO)
+    if (sMapSystem_DataPtr->currentTrolley == TROLLEY_IRISINA_TOWN)
     {
         sprite->x += 4;
         sprite->y -= 4;
@@ -1885,7 +1885,7 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
         if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) > 1)
         {
             direction = DIR_SOUTHWEST;
-        }  
+        }
         else if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) < -1)
         {
             direction = DIR_NORTHWEST;
@@ -1900,26 +1900,26 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
         if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) > 1)
         {
             direction = DIR_SOUTHEAST;
-        }    
+        }
         else if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) < -1)
         {
             direction = DIR_NORTHEAST;
-        }   
+        }
         else
         {
             direction = DIR_EAST;
-        }  
+        }
     }
     if(gSaveBlock3Ptr->waypoint.xTile == playerXTile) // Straight Up or Down
     {
         if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) > 0)
         {
             direction = DIR_SOUTH;
-        }   
+        }
         if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) < 0)
         {
             direction = DIR_NORTH;
-        }        
+        }
     }
 
     return direction;
@@ -1948,7 +1948,7 @@ void CreateOWWaypointArrowSprite(void)
     u16 x, y;
     x = 208;
     y = 32;
-    
+
     if(sOWWaypointArrow_SpriteId == SPRITE_NONE)
         sOWWaypointArrow_SpriteId = CreateSpriteAtEnd(&sSpriteTemplate_OwWaypointArrowMap, x, y, 0);
     gSprites[sOWWaypointArrow_SpriteId].invisible = FALSE;
@@ -1960,7 +1960,7 @@ void CreateOWWaypointArrowSprite(void)
 #define UPDATE_WAYPOINT_INTERVAL 16 // how many frames in between updates
 #define WAYPOINT_FOUND_DURATION ((60 * 3) + UPDATE_WAYPOINT_INTERVAL)
 static void SpriteCB_HandleOWWaypointArrow(struct Sprite *sprite)
-{   
+{
     if(sprite->data[4] == OWARROW_NO_SIGNAL_ANIM)
         return;
 
@@ -1969,9 +1969,9 @@ static void SpriteCB_HandleOWWaypointArrow(struct Sprite *sprite)
         gSaveBlock3Ptr->waypoint.currentDirection = CalculateWaypointDirection();
         StartSpriteAnim(sprite, gSaveBlock3Ptr->waypoint.currentDirection);
         sprite->data[0] = 0;
-        if(gSaveBlock3Ptr->waypoint.currentDirection == DIR_NONE)    
+        if(gSaveBlock3Ptr->waypoint.currentDirection == DIR_NONE)
         {
-            sprite->data[0] = UPDATE_WAYPOINT_INTERVAL + 1; // Jump to If Below Until Animation over 
+            sprite->data[0] = UPDATE_WAYPOINT_INTERVAL + 1; // Jump to If Below Until Animation over
             WaypointFound();
         }
     }
@@ -2043,29 +2043,24 @@ static void Task_DelayPrintOverworldWaypoint(u8 taskId)
 //
 static const struct GrayPOI sMapGrayPOILocations[GRAY_POI_COUNT] = // Stores All Positions for the gray city sprites and the mapsec to check for visited flag associated with them
 {
-    [GRAY_POI_MUIRWOODS]        = {MAPSEC_LEAVERRA_FOREST, 2, 0, POI_SMALL_SQUARE}, // Small Squares
-    [GRAY_POI_MARIN]            = {MAPSEC_ESPULEE_OUTSKIRTS, 7, 0, POI_SMALL_SQUARE},
-    [GRAY_POI_BERKELY]          = {MAPSEC_CHASILLA, 25, 0, POI_SMALL_SQUARE},
-    [GRAY_POI_PRESIDIO]         = {MAPSEC_PETAROSA_BOROUGH, 7, 4, POI_SMALL_SQUARE},
-    [GRAY_POI_PACIFICA]         = {MAPSEC_CRESALTA_VISTA, 1, 5, POI_SMALL_SQUARE},
-    [GRAY_POI_JAPANTOWN]        = {MAPSEC_TORA_TOWN, 12, 6, POI_SMALL_SQUARE},
-    [GRAY_POI_CHINATOWN]        = {MAPSEC_HODOU_CITY, 16, 6, POI_SMALL_SQUARE},
-    [GRAY_POI_HAIGHTASHBURY]    = {MAPSEC_TIRABUDIN_PLACE, 7, 8, POI_SMALL_SQUARE},
-    [GRAY_POI_SUNSET]           = {MAPSEC_QIU_VILLAGE, 1, 12, POI_SMALL_SQUARE},
-    [GRAY_POI_DOGPATCH]         = {MAPSEC_CURENO_PORT, 18, 14, POI_SMALL_SQUARE},
-    [GRAY_POI_SOUTHBAY]         = {MAPSEC_CURENO_PORT, 14, 15, POI_SMALL_SQUARE},
-
-    [GRAY_POI_GLDNGTEPARK]      = {MAPSEC_HALERBA_CITY, 3, 8, POI_LARGE_RECT}, // Small Squares
-
-    [GRAY_POI_ALAMADA]        = {MAPSEC_HALAI_ISLAND, 24, 10, POI_SMALL_RECT_CIRCLE}, // Small Rect With Circle
-
-    [GRAY_POI_OAKLAND]          = {MAPSEC_OROLAND, 24, 6, POI_LARGE_SQUARE}, // Large Squares
-    [GRAY_POI_CASTRO]           = {MAPSEC_IRISINA_TOWN, 9, 12, POI_LARGE_SQUARE},
-
-    [GRAY_POI_TENDERLOIN]       = {MAPSEC_CAPHE_CITY, 14, 7, POI_SMALL_VERT_RECT}, // Small Vertical Rect
-    [GRAY_POI_MISSION]          = {MAPSEC_MERMEREZA_CITY, 14, 11, POI_SMALL_VERT_RECT},
-
-    [GRAY_POI_SOMA]             = {MAPSEC_PERLACIA_CITY, 17, 10, POI_LARGE_SQUARE_CIRCLE}, // Large Square with Circle
+    [GRAY_POI_LEAVERRA_FOREST]   = {MAPSEC_LEAVERRA_FOREST, 2, 0, POI_SMALL_SQUARE}, // Small Squares
+    [GRAY_POI_ESPULEE_OUTSKIRTS] = {MAPSEC_ESPULEE_OUTSKIRTS, 7, 0, POI_SMALL_SQUARE},
+    [GRAY_POI_CHASILLA]          = {MAPSEC_CHASILLA, 25, 0, POI_SMALL_SQUARE},
+    [GRAY_POI_PETAROSA_BOROUGH]  = {MAPSEC_PETAROSA_BOROUGH, 7, 4, POI_SMALL_SQUARE},
+    [GRAY_POI_CRESALTA_VISTA]    = {MAPSEC_CRESALTA_VISTA, 1, 5, POI_SMALL_SQUARE},
+    [GRAY_POI_TORA_TOWN]         = {MAPSEC_TORA_TOWN, 12, 6, POI_SMALL_SQUARE},
+    [GRAY_POI_HODOU_CITY]        = {MAPSEC_HODOU_CITY, 16, 6, POI_SMALL_SQUARE},
+    [GRAY_POI_TIRABUDIN_PLACE]   = {MAPSEC_TIRABUDIN_PLACE, 7, 8, POI_SMALL_SQUARE},
+    [GRAY_POI_QIU_VILLAGE]       = {MAPSEC_QIU_VILLAGE, 1, 12, POI_SMALL_SQUARE},
+    [GRAY_POI_CURENO_PORT]       = {MAPSEC_CURENO_PORT, 18, 14, POI_SMALL_SQUARE},
+    [GRAY_POI_CUCUNO_TOWN]       = {MAPSEC_CUCONU_TOWN, 14, 15, POI_SMALL_SQUARE},
+    [GRAY_POI_HALERBA_CITY]      = {MAPSEC_HALERBA_CITY, 3, 8, POI_LARGE_RECT}, // Small Squares
+    [GRAY_POI_HALAI_ISLAND]      = {MAPSEC_HALAI_ISLAND, 24, 10, POI_SMALL_RECT_CIRCLE}, // Small Rect With Circle
+    [GRAY_POI_OROLAND]           = {MAPSEC_OROLAND, 24, 6, POI_LARGE_SQUARE}, // Large Squares
+    [GRAY_POI_IRISINA_TOWN]      = {MAPSEC_IRISINA_TOWN, 9, 12, POI_LARGE_SQUARE},
+    [GRAY_POI_CAPHE_CITY]        = {MAPSEC_CAPHE_CITY, 14, 7, POI_SMALL_VERT_RECT}, // Small Vertical Rect
+    [GRAY_POI_MERMEREZA_CITY]    = {MAPSEC_MERMEREZA_CITY, 14, 11, POI_SMALL_VERT_RECT},
+    [GRAY_POI_PERLACIA_CITY]     = {MAPSEC_PERLACIA_CITY, 17, 10, POI_LARGE_SQUARE_CIRCLE}, // Large Square with Circle
 };
 
 static void CreateGrayPOISprites(void)
@@ -2091,7 +2086,7 @@ static void CreateGrayPOISprites(void)
             sMapSystem_DataPtr->grayPOISpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_GrayPOIMap, x, y, 0);
         gSprites[sMapSystem_DataPtr->grayPOISpriteIds[i]].invisible = FALSE;
         StartSpriteAnim(&gSprites[sMapSystem_DataPtr->grayPOISpriteIds[i]], sMapGrayPOILocations[i].shapeOfPOI);
-    }   
+    }
     return;
 }
 
@@ -2137,7 +2132,7 @@ static void CreateTrolleyPOISprites(void)
 
     for(i=0; i < TROLLEY_COUNT; i++)
     {
-        if(i == TROLLEY_CASTRO)
+        if(i == TROLLEY_IRISINA_TOWN)
             continue;
 
         x = (SFTrolleyStops[i].trolleyLocationIconX) + 8;
@@ -2151,7 +2146,7 @@ static void CreateTrolleyPOISprites(void)
             StartSpriteAnim(&gSprites[sMapSystem_DataPtr->trolleyPOISpriteIds[i]], 0);
         else
             StartSpriteAnim(&gSprites[sMapSystem_DataPtr->trolleyPOISpriteIds[i]], 1);
-    }   
+    }
     return;
 }
 
@@ -2160,7 +2155,7 @@ static void DestroyTrolleyPOISprites(void)
 {
     u8 i = 0;
     for(i = 0; i < GRAY_POI_COUNT; i++)
-    {   
+    {
         if(sMapSystem_DataPtr->trolleyPOISpriteIds[i] != SPRITE_NONE)
             DestroySprite(&gSprites[sMapSystem_DataPtr->trolleyPOISpriteIds[i]]);
         sMapSystem_DataPtr->trolleyPOISpriteIds[i] = SPRITE_NONE;
@@ -2233,7 +2228,7 @@ static void PrintHeaderTitleToWindow()
 
                 StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
                 StringExpandPlaceholders(gStringVar4, sText_TaxiHasLocationStateHeader);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);                
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
             }
             else
             {
@@ -2251,7 +2246,7 @@ static void PrintHeaderTitleToWindow()
             {
                 StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
                 StringExpandPlaceholders(gStringVar4, sText_FlyHasLocationStateHeader);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);                
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
             }
             else
             {
@@ -2429,7 +2424,7 @@ static void ShowL2WindowBG(void)
     {
         SetGpuReg(REG_OFFSET_BG1HOFS, L2_WINDOW_RIGHT_SIDE_SHOWING);
         PrintL2WindowText(WINDOW_L2_RIGHT_SIDE_TEXT);
-    }    
+    }
     else
     {
         SetGpuReg(REG_OFFSET_BG1HOFS, L2_WINDOW_LEFT_SIDE_SHOWING);
@@ -2523,14 +2518,14 @@ static void Task_MapSystem_TrolleyMode_Warp(u8 taskId)
 static void Task_MapSystem_TrolleyMode_Main(u8 taskId)
 {
     if(JOY_NEW(A_BUTTON))
-    {   
+    {
         PlaySE(SE_SELECT);
         u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].trolleyMapSec);
         if(hasVisited == LOCATION_VISITED)
         {
             sRegionMap->warpCounter = 0;
             sRegionMap->mapSecId = SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].trolleyMapSec;
-            gTasks[taskId].func = Task_MapSystem_TrolleyMode_Warp;        
+            gTasks[taskId].func = Task_MapSystem_TrolleyMode_Warp;
         }
         return;
     }
@@ -2582,7 +2577,7 @@ static void Task_MapSystem_TrolleyMode_Main(u8 taskId)
 
 static void Task_MapSystem_DefaultMode_Main(u8 taskId)
 {
-    switch (sRegionMap->inputCallback()) // Modified From Vanilla's Setup the Main Task swaps out input callbacks and runs them instead of doing stuff itself, 
+    switch (sRegionMap->inputCallback()) // Modified From Vanilla's Setup the Main Task swaps out input callbacks and runs them instead of doing stuff itself,
     {                                     // Then it does stuff based on the output of those input functions. The system exists to deny input when the cursor is moving
         case MAP_INPUT_NONE:
         case MAP_INPUT_MOVE_START:
@@ -2593,12 +2588,12 @@ static void Task_MapSystem_DefaultMode_Main(u8 taskId)
             PrintHeaderTitleToWindow();
             break;
         case MAP_INPUT_START_BUTTON: // If Start Button Check to Enter / Exit L2 State
-            if ((!sRegionMap->inL2State) && CheckIfHoverLocationHasL2())  
+            if ((!sRegionMap->inL2State) && CheckIfHoverLocationHasL2())
             {
                 ShowL2WindowBG();
                 sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
                 sRegionMap->inL2State = TRUE;
-                
+
             }
             else if(sRegionMap->inL2State)
             {
@@ -3022,7 +3017,7 @@ static u8 CheckIfHoverLocationHasL2(void)
         return FALSE;
     if(sRegionMap->activeCursorState == CURSOR_SMALL_CURSOR_STATE)
         return FALSE;
-    
+
     return TRUE;
 }
 
@@ -3068,8 +3063,8 @@ static u8 *GetSFMapName(u8 *dest, u16 regionMapId, u16 padLength)
 
 //
 //  InitCurrentLocation - Determines Where the cursorPos for the Region Map Starts, Ripped From Vanilla
-//  
-static void InitMapBasedOnPlayerLocation(void) 
+//
+static void InitMapBasedOnPlayerLocation(void)
 {
     const struct MapHeader *mapHeader;
     u16 mapWidth;
