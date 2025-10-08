@@ -1565,6 +1565,8 @@ static void SetupStartMenuMainPartyMonSprites(void)
         isEgg = (species == SPECIES_EGG);
         species = ReturnTransformationIfConditionMet(&mon[i]);
         status = GetMonData(&mon[i], MON_DATA_STATUS);
+        if (!species || species >= NUM_SPECIES)
+            break;
 
         LoadMonIconPalette(species);
         spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
