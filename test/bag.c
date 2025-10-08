@@ -10,14 +10,14 @@ TEST("TMs and HMs are sorted correctly in the bag")
 {
     struct BagPocket *pocket = &gBagPockets[POCKET_TM_HM];
 
-    ASSUME(GetItemPocket(ITEM_HM07) == POCKET_TM_HM);
+    //ASSUME(GetItemPocket(ITEM_HM07) == POCKET_TM_HM); // Silicon does not have Hidden Machines
     ASSUME(GetItemPocket(ITEM_TM25) == POCKET_TM_HM);
     ASSUME(GetItemPocket(ITEM_TM14) == POCKET_TM_HM);
     ASSUME(GetItemPocket(ITEM_TM42) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_HM05) == POCKET_TM_HM);
+    //ASSUME(GetItemPocket(ITEM_HM05) == POCKET_TM_HM); // Silicon does not have Hidden Machines
     ASSUME(GetItemPocket(ITEM_TM05) == POCKET_TM_HM);
     ASSUME(GetItemPocket(ITEM_TM01) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_HM02) == POCKET_TM_HM);
+    //ASSUME(GetItemPocket(ITEM_HM02) == POCKET_TM_HM; // Silicon does not have Hidden Machines);
 
     /*
      * Note: I would add a test to make sure that TMs are sorted correctly by move name,
@@ -42,9 +42,13 @@ TEST("TMs and HMs are sorted correctly in the bag")
     EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_TM14);
     EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_TM25);
     EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_TM42);
+    /*
+     *
+    Silicon does not have Hidden Machines
     EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_HM02);
     EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_HM05);
     EXPECT_EQ(pocket->itemSlots[7].itemId, ITEM_HM07);
+    */
     EXPECT_EQ(pocket->itemSlots[8].itemId, ITEM_NONE);
 }
 
