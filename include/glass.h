@@ -16,6 +16,7 @@ bool32 IsTrainerDiscovered(u32);
 void SetTrainerDiscovered(u32);
 void CB2_ReturnToTrainerScreen(void);
 u32 GetOverworldSpriteFromTrainerId(enum ResidoTrainerIds);
+bool8 IsLocationVisited(u32 listNum);
 
 enum GlassTrainerSortModes
 {

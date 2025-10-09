@@ -7,7 +7,10 @@
 
 enum DifficultyLevel GetCurrentDifficultyLevel(void)
 {
-    return GetBattleDifficulty(); // siliconMerge
+    // Start siliconMerge
+    u32 difficulty = GetBattleDifficulty();
+    return difficulty; // siliconMerge
+    // End siliconMerge
 
     if (!B_VAR_DIFFICULTY)
         return DIFFICULTY_NORMAL;

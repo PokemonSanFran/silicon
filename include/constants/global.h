@@ -71,11 +71,6 @@
 #define POKE_NEWS_COUNT 16
 // PSF TODO Update all of these values to match the max size of the pockets
 #define PC_ITEMS_COUNT 1 // siliconMerge
-#define BAG_ITEMS_COUNT 525 // siliconMerge
-#define BAG_KEYITEMS_COUNT 93  // siliconMerge
-#define BAG_POKEBALLS_COUNT 27 // siliconMerge
-#define BAG_TMHM_COUNT NUM_TECHNICAL_MACHINES // PSF technicalmachine Branch
-#define BAG_BERRIES_COUNT 68 // siliconMerge
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 // Start siliconMerge
 //#define DECOR_MAX_SECRET_BASE 16
@@ -92,6 +87,13 @@
 #define SAVED_TRENDS_COUNT 5
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
+
+// Bag constants
+#define BAG_ITEMS_COUNT 525 // siliconMerge
+#define BAG_KEYITEMS_COUNT 93  // siliconMerge
+#define BAG_POKEBALLS_COUNT 27 // siliconMerge
+#define BAG_TMHM_COUNT 475 // siliconMerge
+#define BAG_BERRIES_COUNT 68 // siliconMerge
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.
