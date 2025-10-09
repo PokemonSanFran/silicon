@@ -118,6 +118,8 @@
 #define X_CENTER_ALIGN      (-1)
 #define Y_CENTER_ALIGN      1
 
+#define START_DEFAULT_TIMER 60
+
 enum StartMenuBackgrounds
 {
     START_BG_TEXT = 0,
@@ -320,11 +322,12 @@ enum StartMenuSaveResults
 struct StartMenuData
 {
     u8 spriteIds[NUM_START_MAIN_SPRITES];
-    enum StartMenuModes mode;
+    enum StartMenuModes mode, prevMode;
     enum StartMenuSaveResults saveRes;
     MainCallback savedCB;
     struct UCoords8 cursor;
     enum StartMenuApps movingAppIdx;
+    const u8 *customStr;
 };
 
 struct StartMenuAppData
@@ -332,6 +335,7 @@ struct StartMenuAppData
     const u8 *name;
     u16 unlockFlag;
     MainCallback openCB; // opening function
+    enum StartMenuCellularSignals reqSignal; // minimum strength
 };
 
 // RAM data
@@ -425,6 +429,11 @@ static inline s32 MonStatus_GetYIconCoord(u32);
 static void StartMoveMode_Init(void);
 static void StartMoveMode_Exit(void);
 static bool32 StartMoveMode_SwapApps(void);
+
+// cellular signals
+static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void);
+static void CellularSignal_StrengthError(u8);
+static void Task_CellularSignal_WaitForMessage(u8);
 
 static void StartMenu_Free(void);
 
@@ -625,7 +634,14 @@ static const u8 *const sStartMenuStrings_SaveResult[NUM_START_SAVE_RESULTS] =
     [START_SAVE_FAILURE]     = COMPOUND_STRING("There's a problem saving."),
 };
 
-//sprite
+static const u8 sStartMenuStrings_CellularSignalErrorString[] = _(
+    "Current signal is not enough for this app.\n"
+    "Please go somewhere else with better\n"
+    "signal.");
+static const u8 sStartMenuStrings_CellularSignalErrorControls[] = _(
+    "Press any button to continue");
+
+// sprite
 static const struct OamData sAppGrid_CursorOamData =
 {
     .shape = SPRITE_SHAPE(32x32),
@@ -769,7 +785,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_ARRIBA] =
     {
-        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu
+        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu, START_SIGNAL_OKAY
     },
     [START_APP_TODOS] =
     {
@@ -777,7 +793,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_DEXNAV] =
     {
-        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexNavFromStartMenu
+        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexNavFromStartMenu, START_SIGNAL_OKAY
     },
     [START_APP_POKEDEX] =
     {
@@ -785,7 +801,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_BUZZR] =
     {
-        COMPOUND_STRING("Buzzr"), FLAG_SYS_APP_BUZZR_GET, CB2_BuzzrFromStartMenu
+        COMPOUND_STRING("Buzzr"), FLAG_SYS_APP_BUZZR_GET, CB2_BuzzrFromStartMenu, START_SIGNAL_STRONG
     },
     [START_APP_OPTIONS] =
     {
@@ -799,11 +815,11 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_PRESTO] =
     {
-        COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu
+        COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu, START_SIGNAL_OKAY
     },
     [START_APP_WAVES_OF_CHANGE] = // PSF TODO
     {
-        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL
+        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL, START_SIGNAL_STRONG
     },
     [START_APP_CUSTOMIZE] =
     {
@@ -815,15 +831,15 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_SURPRISE_TRADE] = // PSF TODO
     {
-        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, NULL
+        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, NULL, START_SIGNAL_STRONG
     },
     [START_APP_GOOGLE_GLASS] =
     {
-        COMPOUND_STRING("Google Glass"), FLAG_SYS_APP_GOOGLE_GLASS_GET, CB2_GlassFromStartMenu
+        COMPOUND_STRING("Google Glass"), FLAG_SYS_APP_GOOGLE_GLASS_GET, CB2_GlassFromStartMenu, START_SIGNAL_OKAY
     },
     [START_APP_ADVENTURES_GUIDE] =
     {
-        COMPOUND_STRING("Adventure Guide"), 0, CB2_AdventureGuideFromStartMenu
+        COMPOUND_STRING("Adventure Guide"), 0, CB2_AdventureGuideFromStartMenu, START_SIGNAL_OKAY
     },
 };
 
@@ -857,6 +873,7 @@ void StartMenu_Init(enum StartMenuModes mode)
 
     // set anything that needs to be explicitly non-zero here
     sStartMenuDataPtr->mode = mode;
+    sStartMenuDataPtr->prevMode = NUM_START_MODES;
     sStartMenuDataPtr->savedCB = cb;
     memset(sStartMenuDataPtr->spriteIds, SPRITE_NONE, NUM_START_MAIN_SPRITES * sizeof(u8));
 
@@ -994,7 +1011,7 @@ static void Task_StartMenu_BeginSave(u8 taskId)
     StartPrint_QuestFlavorText();
     StartPrint_HelpBottomText();
 
-    gTasks[taskId].tTimer = 60;
+    gTasks[taskId].tTimer = START_DEFAULT_TIMER;
     gTasks[taskId].func = Task_StartMenu_FinishSave;
 }
 
@@ -1368,7 +1385,7 @@ static inline void StartPrint_Text(enum StartMenuMainWindows window, u32 font, u
         x = GetStringCenterAlignXOffset(font, str, TILE_TO_PIXELS(desiredWidth));
 
     AddTextPrinterParameterized4(window, font, x, y, GetFontAttribute(font, FONTATTR_LETTER_SPACING),
-                                 GetFontAttribute(font, FONTATTR_LINE_SPACING), txtClr, 0, str);
+                                 GetFontAttribute(font, FONTATTR_LINE_SPACING), txtClr, TEXT_SKIP_DRAW, str);
 }
 
 static void StartPrint_HelpTopText(void)
@@ -1439,6 +1456,12 @@ static void StartPrint_HelpBottomText(void)
             str = sStartMenuStrings_ControlBySaveResults[START_SAVE_IN_PROGRESS];
     }
 
+    if (sStartMenuDataPtr->customStr)
+    {
+        str = sStartMenuDataPtr->customStr;
+        sStartMenuDataPtr->customStr = NULL;
+    }
+
     StartPrint_Text(START_MAIN_WIN_HELP_BOTTOM, FONT_SMALL, START_MAIN_WIN_HELP_WIDTH, 0, Y_CENTER_ALIGN, str);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
@@ -1470,11 +1493,22 @@ static void StartPrint_QuestFlavorText(void)
         StringCopy(gStringVar1, COMPOUND_STRING("You’ve completed everything. Enjoy Pokémon Silicon!"));
     }
 
-    // prioritize saving first, then prioritize mode flavor (if other modes is active)
+    // prioritize system messages
+    enum StartMenuModes mode = sStartMenuDataPtr->mode;
+
+    if (sStartMenuDataPtr->customStr)
+    {
+        StringCopy(gStringVar1, sStartMenuDataPtr->customStr);
+        sStartMenuDataPtr->customStr = NULL;
+    }
     if (sStartMenuDataPtr->saveRes != START_SAVE_INACTIVE)
+    {
         StringCopy(gStringVar1, sStartMenuStrings_SaveResult[sStartMenuDataPtr->saveRes]);
-    else if (sStartMenuDataPtr->mode != START_MODE_NORMAL)
-        StringCopy(gStringVar1, sStartMenuStrings_QuestFlavors[sStartMenuDataPtr->mode]);
+    }
+    else if (mode != START_MODE_NORMAL)
+    {
+        StringCopy(gStringVar1, sStartMenuStrings_QuestFlavors[mode]);
+    }
 
     StartPrint_Text(START_MAIN_WIN_TEXTBOX, FONT_SMALL_NARROW, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
 
@@ -1706,9 +1740,15 @@ static void AppGrid_HandleNormalInputs(u8 taskId)
         enum StartMenuApps app = AppData_GetAppFromIndex(AppGrid_GetCurrentIndex());
         const struct StartMenuAppData *data = AppData_GetStruct(app);
 
-        if ((app != START_APP_SAVE && !data->openCB) || !app)
+        if (!app || (app != START_APP_SAVE && !data->openCB))
         {
             PlaySE(SE_BOO);
+            return;
+        }
+
+        if (data->reqSignal && CellularSignal_GetCurrentStrength() < data->reqSignal)
+        {
+            CellularSignal_StrengthError(taskId);
             return;
         }
 
@@ -1951,12 +1991,7 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(void)
 
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void)
 {
-    u32 mapType = GetCurrentMapType();
-
-    if (mapType > MAP_TYPE_SECRET_BASE)
-        mapType = (mapType % (MAP_TYPE_SECRET_BASE + 1));
-
-    return sCellularSignal_FilterByMapTypes[mapType] + START_HELP_SYMBOL_SIG_0A;
+    return START_HELP_SYMBOL_SIG_0A + CellularSignal_GetCurrentStrength();
 }
 
 
@@ -2157,6 +2192,53 @@ static bool32 StartMoveMode_SwapApps(void)
 
     return TRUE;
 }
+
+
+// cellular signals
+static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
+{
+    u32 mapType = GetCurrentMapType();
+
+    if (mapType > MAP_TYPE_SECRET_BASE)
+        mapType = (mapType % (MAP_TYPE_SECRET_BASE + 1));
+
+    return sCellularSignal_FilterByMapTypes[mapType];
+}
+
+
+// error handling
+static void CellularSignal_StrengthError(u8 taskId)
+{
+    PlaySE(SE_BOO);
+
+    sStartMenuDataPtr->customStr = sStartMenuStrings_CellularSignalErrorString;
+    StartPrint_QuestFlavorText();
+
+    sStartMenuDataPtr->customStr = sStartMenuStrings_CellularSignalErrorControls;
+    StartPrint_HelpBottomText();
+
+    gTasks[taskId].func = Task_CellularSignal_WaitForMessage;
+    gTasks[taskId].tTimer = START_DEFAULT_TIMER;
+}
+
+static void Task_CellularSignal_WaitForMessage(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    task->tTimer--;
+    if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
+    {
+        // reprint back
+        StartPrint_QuestFlavorText();
+        StartPrint_HelpBottomText();
+
+        task->func = Task_StartMenu_HandleInput;
+        task->tTimer = 0;
+
+        return;
+    }
+}
+
 
 static void StartMenu_Free(void)
 {

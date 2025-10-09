@@ -4,6 +4,7 @@
 enum StartMenuModes
 {
     START_MODE_NORMAL = 0,     // triggers in the overworld with START
+    START_MODE_ERROR,          // triggers only within NORMAL mode when encountering a problem
     START_MODE_MOVE,           // triggers only in NORMAL mode with SELECT
     START_MODE_SAVE_NORMAL,    // triggers only in NORMAL mode with START
     START_MODE_SAVE_SCRIPT,    // triggers in a script
