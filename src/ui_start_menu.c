@@ -407,8 +407,7 @@ static inline s32 AppGrid_GetYIconCoord(u32);
 static void SpriteCB_AppGrid_Cursor(struct Sprite *);
 
 // blit system
-static inline void _BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16);
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u16);
+static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16);
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(void);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
@@ -1383,7 +1382,7 @@ static void StartPrint_HelpTopText(void)
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_TOP, PIXEL_FILL(0));
 
     // TIME OF DAY ICON
-    BlitSymbol_Help(BlitSymbol_ConvertTimeToHelp(), x);
+    BlitSymbol_Help(BlitSymbol_ConvertTimeToHelp(), START_MAIN_WIN_HELP_TOP, x);
 
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
@@ -1403,7 +1402,7 @@ static void StartPrint_HelpTopText(void)
 
     // MAP ICON
     x += TILE_TO_PIXELS(TIME_WINDOW_WIDTH);
-    BlitSymbol_Help(START_HELP_SYMBOL_MAP, x);
+    BlitSymbol_Help(START_HELP_SYMBOL_MAP, START_MAIN_WIN_HELP_TOP, x);
 
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
@@ -1417,7 +1416,7 @@ static void StartPrint_HelpTopText(void)
 
     // SIGNAL STRENGTH
     x = (DISPLAY_WIDTH - 24);
-    BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), x);
+    BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), START_MAIN_WIN_HELP_TOP, x);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_TOP, COPYWIN_FULL);
     Free(strbuf[0]);
@@ -1491,7 +1490,7 @@ static void StartPrint_AppNameText(void)
     const u8 *str = NULL;
     if (sStartMenuDataPtr->mode == START_MODE_MOVE)
     {
-        _BlitSymbol_Help(START_HELP_SYMBOL_SWAP, START_MAIN_WIN_APP_TITLE, (TILE_TO_PIXELS(START_MAIN_WIN_APP_TITLE_WIDTH) / 2) - 8);
+        BlitSymbol_Help(START_HELP_SYMBOL_SWAP, START_MAIN_WIN_APP_TITLE, (TILE_TO_PIXELS(START_MAIN_WIN_APP_TITLE_WIDTH) / 2) - 8);
 
         u32 movingApp = AppData_GetAppFromIndex(sStartMenuDataPtr->movingAppIdx);
 
@@ -1924,14 +1923,9 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *s)
 }
 
 // blit system
-static inline void _BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x)
+static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x)
 {
     BlitBitmapRectToWindow(window, sStartMenuSymbols_Help, sym * 16, 0, 160, 16, x, 0, 16, 16);
-}
-
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u16 x)
-{
-    _BlitSymbol_Help(sym, START_MAIN_WIN_HELP_TOP, x);
 }
 
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols sym, u16 x, u16 y)
