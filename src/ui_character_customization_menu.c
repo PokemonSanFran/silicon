@@ -411,7 +411,7 @@ void Task_OpenCharacterCustomizationMenuFromStartMenu(u8 taskId)
 
 void CB2_CustomizationFromStartMenu(void)
 {
-    Character_Customization_Menu_Init(CB2_ReturnToUIStartMenu);
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
 }
 
 void ResetCustomizationValuesData(void){
@@ -2090,5 +2090,5 @@ void SetCustomPlayerPalette(u16 *palette)
 void CB2_ReturnToCostumizationMenu(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    Character_Customization_Menu_Init(CB2_ReturnToUIStartMenu);
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
 }

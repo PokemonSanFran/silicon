@@ -2511,7 +2511,7 @@
 	@ Calls the start menu in Save Mode which only allows the player to save their game or not.
 	.macro startmenu_savescreen
 	fadescreen FADE_TO_BLACK
-	callnative StartMenu_ShowSaveScreen
+	callnative StartMenu_OpenSaveMode
 	waitstate
 	.endm
 

@@ -241,7 +241,7 @@ static const u8 sMenuWindowFontColors[][3] =
 // UI loader template
 void CB2_OptionsFromStartMenu(void)
 {
-    Options_Menu_Init(CB2_ReturnToUIStartMenu);
+    Options_Menu_Init(CB2_StartMenu_ReturnToUI);
 }
 
 void CB2_InitUiOptionMenuFromDevLetter(void)

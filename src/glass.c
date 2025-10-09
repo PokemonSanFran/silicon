@@ -589,7 +589,7 @@ void DebugSetTrainerStatus(void)
 
 void CB2_GlassFromStartMenu(void)
 {
-    Glass_Init(CB2_ReturnToUIStartMenu, -1, -1, -1, -1, -1);
+    Glass_Init(CB2_StartMenu_ReturnToUI, -1, -1, -1, -1, -1);
 }
 
 static void Glass_Init(MainCallback callback, s32 locationId, s32 row, s32 column, u16 locationRow, u16 locationScroll)

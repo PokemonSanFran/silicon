@@ -343,7 +343,7 @@ const struct TweetBackground sTweetBgs[TWEET_BG_COUNT] =
 
 void CB2_BuzzrFromStartMenu(void)
 {
-    Buzzr_Init(CB2_ReturnToUIStartMenu);
+    Buzzr_Init(CB2_StartMenu_ReturnToUI);
 }
 
 static void ResetQuestFanfareFlag(void)

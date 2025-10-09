@@ -39,8 +39,9 @@ enum StartMenuApps
     TOTAL_START_APPS = (NUM_START_APPS - 1) // true size
 };
 
-void OpenStartMenu(enum StartMenuModes mode);
-bool32 OpenNormalUIStartMenu(void);
-void CB2_ReturnToUIStartMenu(void);
+void StartMenu_Init(enum StartMenuModes);
+void Task_StartMenu_Init(u8);
+bool32 StartMenu_OpenNormalMode(void);
+void CB2_StartMenu_ReturnToUI(void);
 
 #endif // GUARD_UI_START_MENU_H

@@ -1227,7 +1227,7 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
 void CB2_MapSystemFromStartMenu(void)
 
     sCurrentMapMode = MAP_MODE_DEFAULT;
-    MapSystem_Init(CB2_ReturnToUIStartMenu);
+    MapSystem_Init(CB2_StartMenu_ReturnToUI);
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere

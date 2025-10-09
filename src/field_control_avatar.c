@@ -317,7 +317,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
 
 // Start siliconMerge
-    if (input->pressedStartButton && OpenNormalUIStartMenu())
+    if (input->pressedStartButton && StartMenu_OpenNormalMode())
         return TRUE;
 // End siliconMerge
 
@@ -1399,7 +1399,7 @@ static void Task_OpenStartMenu(u8 taskId)
     if (ArePlayerFieldControlsLocked())
         return;
 
-    OpenNormalUIStartMenu();
+    StartMenu_OpenNormalMode();
 }
 
 bool32 IsDpadPushedToTurnOrMovePlayer(struct FieldInput *input)

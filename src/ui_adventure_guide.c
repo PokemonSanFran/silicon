@@ -228,7 +228,7 @@ static const u8 sMenuWindowFontColors[][3] =
 void CB2_AdventureGuideFromStartMenu(void)
 {
     VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES);
-    Adventure_Guide_Init(CB2_ReturnToUIStartMenu);
+    Adventure_Guide_Init(CB2_StartMenu_ReturnToUI);
 }
 
 void OpenAdventureGuideFromScript(void)

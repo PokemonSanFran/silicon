@@ -2702,7 +2702,7 @@ static void Task_QuestMenuTurnOff(u8 taskId)
 
 void CB2_QuestMenuFromStartMenu(void)
 {
-    QuestMenu_Init(CB2_ReturnToUIStartMenu);
+    QuestMenu_Init(CB2_StartMenu_ReturnToUI);
 }
 
 void QuestMenu_CopyQuestName(u8 *dst, u8 questId)
