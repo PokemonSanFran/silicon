@@ -43,7 +43,7 @@ test_rom:
 upload_to_catbox:
     stage: deploy
     image: ubuntu:latest
-  needs:
+    needs:
     - job: test_rom
       artifacts: true
     before_script:
