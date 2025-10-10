@@ -1,5 +1,5 @@
-#ifndef GUARD_UI_TEST_MENU_H
-#define GUARD_UI_TEST_MENU_H
+#ifndef GUARD_MAP_SYSTEM_MENU_H
+#define GUARD_MAP_SYSTEM_MENU_H
 
 #include "main.h"
 #include "bg.h"
@@ -20,4 +20,4 @@ void ClearWaypointData(void);
 void SetWaypointData(void);
 void CreateOverworldWaypointArrow(void);
 
-#endif // GUARD_UI_TEST_MENU_H
+#endif // GUARD_MAP_SYSTEM_MENU_H

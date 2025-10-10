@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ui_map_system.h"
+#include "tv.h"
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
@@ -25,6 +26,8 @@
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
+#include "quest_logic.h"
+#include "math.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -36,6 +39,7 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/map_types.h"
+#include "constants/ui_map_system.h"
 #include "trig.h"
 #include "secret_base.h"
 #include "region_map.h"
@@ -133,74 +137,6 @@ struct GrayPOI // Struct To Store Gray POI MapSec/Location/Shape for Loading Dyn
     u16 shapeOfPOI;
 };
 
-//==========ENUMS==========//
-enum LocationType {
-    LOCATION_NONE,
-    LOCATION_NOT_VISITED,
-    LOCATION_VISITED,
-};
-
-enum MapModes {
-    MAP_MODE_DEFAULT,
-    MAP_MODE_TAXI,
-    MAP_MODE_FLY,
-    MAP_MODE_TROLLEY,
-};
-
-enum WindowIds
-{
-    WINDOW_HEADER_TEXT,
-    WINDOW_FOOTER_TEXT,
-    WINDOW_L2_RIGHT_SIDE_TEXT,
-    WINDOW_L2_LEFT_SIDE_TEXT,
-};
-
-enum Colors
-{
-    FONT_BLACK,
-    FONT_WHITE,
-    FONT_RED,
-    FONT_BLUE,
-};
-
-enum {
-    TAG_CURSOR,
-    TAG_PLAYER_ICON,
-    TAG_FLY_ICON,
-    TAG_CURSOR_TOOLTIP_LOC_STATE,
-};
-
-enum POIShape { // These are the possible Gray POI Shapes mapped to their Animation Number for the GrayPOI sprite
-    POI_SMALL_SQUARE,
-    POI_LARGE_RECT,
-    POI_SMALL_RECT_CIRCLE,
-    POI_LARGE_SQUARE_CIRCLE,
-    POI_SMALL_VERT_RECT,
-    POI_LARGE_SQUARE,
-};
-
-enum GrayPOILocations { // Locations which have a gray POI sprite for them
-    GRAY_POI_LEAVERRA_FOREST,
-    GRAY_POI_ESPULEE_OUTSKIRTS,
-    GRAY_POI_CHASILLA,
-    GRAY_POI_PETAROSA_BOROUGH,
-    GRAY_POI_CRESALTA_VISTA,
-    GRAY_POI_TORA_TOWN,
-    GRAY_POI_HODOU_CITY,
-    GRAY_POI_TIRABUDIN_PLACE,
-    GRAY_POI_QIU_VILLAGE,
-    GRAY_POI_CURENO_PORT,
-    GRAY_POI_CUCUNO_TOWN,
-    GRAY_POI_HALERBA_CITY,
-    GRAY_POI_HALAI_ISLAND,
-    GRAY_POI_OROLAND,
-    GRAY_POI_IRISINA_TOWN,
-    GRAY_POI_CAPHE_CITY,
-    GRAY_POI_MERMEREZA_CITY,
-    GRAY_POI_PERLACIA_CITY,
-    GRAY_POI_COUNT,
-};
-
 //==========EWRAM==========//
 static EWRAM_DATA struct MapSystem_Resources *sMapSystem_DataPtr = NULL;
 static EWRAM_DATA struct SFRegionMap *sRegionMap = NULL;
@@ -252,6 +188,7 @@ static u8 HandleWarpFailedNoCash(void);
 static u8 HandleAttemptWarpInput(void);
 u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId);
 static u8 HandleWarpConfirmInput(void);
+static u8 HandleWarpTaxiCutscene(void);
 static u8 HandleWarpCloseMenu(void);
 
 static u8 CheckIfVisitedHoverLocation(void);
@@ -1223,6 +1160,12 @@ void CB2_OpenFlyMapSystemReturnToField(void)
     CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool);
 }
 
+void Script_OpenTaxi(void)
+{
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_OpenTaxiMapSystemFromScript,0);
+}
+
 void Task_OpenTaxiMapSystemFromScript(u8 taskId)
 {
     //s16 *data = gTasks[taskId].data;
@@ -1230,7 +1173,7 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_TAXI;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToUIMenu);
+        MapSystem_Init(CB2_ReturnToFieldContinueScript);
         DestroyTask(taskId);
     }
 }
@@ -2490,22 +2433,31 @@ static void PrintWarpPriceOnTooltip(u32 spriteId, u32 bgColor, u32 startTile) //
     RemoveWindow(windowId);
 }
 
-u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
+static u16 fareTable[MAP_MODE_COUNT][FARE_TYPE_COUNT] =
 {
-    switch (sCurrentMapMode)
-    {
-        case MAP_MODE_DEFAULT:
-            return 10;
-        case MAP_MODE_TROLLEY:
-            return 10;
-        case MAP_MODE_TAXI:
-            return 10;
-        case MAP_MODE_FLY:
-            return 0;
-    }
-    return 0;
+    [MAP_MODE_ARRIBA] = {FARE_BASE_ARRIBA, FARE_DISTANCE_ARRIBA},
+    [MAP_MODE_TAXI] = {FARE_BASE_TAXI, FARE_DISTANCE_TAXI},
+    [MAP_MODE_TROLLEY] = {FARE_BASE_TROLLEY, FARE_DISTANCE_TROLLEY},
+    [MAP_MODE_FLY] = {FARE_BASE_FLY, FARE_DISTANCE_FLY},
+};
+
+static u32 CalculateDistance(u32 nextLocation)
+{
+    const struct RegionMapLocation *curr = &gRegionMapEntries[gMapHeader.regionMapSectionId];
+    const struct RegionMapLocation *next = &gRegionMapEntries[nextLocation];
+
+    s32 dx = curr->x - next->x;
+    s32 dy = curr->y - next->y;
+    return (Sqrt(((dx * dx) + (dy * dy))));
 }
 
+u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
+{
+    u32 distance = CalculateDistance(mapSecId);
+    enum FareVariables type = sCurrentMapMode;
+
+    return (fareTable[type][FARE_BASE] + (distance * (fareTable[type][FARE_DISTANCE])));
+}
 
 //
 //  Main Control Flow For UI - Input Handling Tasks and Related Functions
@@ -2760,12 +2712,20 @@ static u8 HandleAttemptWarpInput(void)
     if(sRegionMap->mapSecTypeHasVisited == LOCATION_VISITED)
     {
         u32 warpPrice = GetWarpPriceAtMapSecByMapType(mapSecId);
+        VarSet(VAR_0x8005,warpPrice);
 
         if (warpPrice == 0)
         {
             PlaySE(SE_SELECT);
             sRegionMap->warpCounter = 0;
-            sRegionMap->inputCallback = HandleWarpCloseMenu;
+            sRegionMap->inputCallback = HandleWarpConfirmInput;
+        }
+        else if (warpPrice > GetMoney(&gSaveBlock1Ptr->money) && sCurrentMapMode == MAP_MODE_TAXI)
+        {
+            PlaySE(SE_SELECT);
+            sRegionMap->warpCounter = 0;
+            FlagClear(FLAG_TEMP_1);
+            sRegionMap->inputCallback = HandleWarpTaxiCutscene;
         }
         else if(warpPrice > GetMoney(&gSaveBlock1Ptr->money))
         {
@@ -2817,6 +2777,35 @@ static u8 HandleWarpConfirmInput(void)
             break;
     }
     return MAP_INPUT_NONE;
+}
+
+static u8 HandleWarpTaxiCutscene(void)
+{
+    switch(sRegionMap->warpCounter)
+    {
+        case 0:
+            VarSet(VAR_TAXI_DESTINATION,sRegionMap->mapSecId);
+            DebugPrintf("var is %d",VarGet(VAR_TAXI_DESTINATION));
+            sRegionMap->warpCounter = 1;
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                MapSystem_FreeResources();
+                ReturnToFieldFromRegionMapCheapTaxi();
+                sRegionMap->warpCounter = 2;
+            }
+            break;
+    }
+    return MAP_INPUT_NONE;
+}
+
+void WarpTaxiAfterCutscene(void)
+{
+    SetWarpDestinationToHealLocation(sMapHealLocations[VarGet(VAR_TAXI_DESTINATION)]);
+    WarpIntoMap();
+    SetMainCallback2(CB2_LoadMap);
 }
 
 static u8 HandleWarpCloseMenu(void)
@@ -3157,3 +3146,14 @@ void CalculatePlayerPositionInRegionMap(s16 *x_tile, s16 *y_tile, u16 *isIndoorO
     *x_tile = (s16) (gRegionMapEntries[mapSecId].x + x + MAPCURSOR_X_MIN);
     *y_tile = (s16) (gRegionMapEntries[mapSecId].y + y + MAPCURSOR_Y_MIN);
 }
+
+void Taxi_BufferDestinationMapName(void)
+{
+    GetMapNameGeneric(gStringVar1, VarGet(VAR_TAXI_DESTINATION));
+}
+
+void BufferTaxiBaseFare(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1,FARE_BASE_TAXI,STR_CONV_MODE_LEFT_ALIGN,CountDigits(FARE_BASE_TAXI));
+}
+

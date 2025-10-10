@@ -37,4 +37,5 @@ void DebugQuest_VSDeoxys(u8);
 void DebugQuest_RPS(u8);
 void DebugQuest_DrugHelmetTest(u8);
 void DebugQuest_RestoreTirabudinGym(u8);
+u32 exponent(u32 y, u32 x);
 #endif //GUARD_QUESTLOGIC_H

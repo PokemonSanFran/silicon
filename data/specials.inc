@@ -595,8 +595,6 @@ gSpecials::
     def_special Quest_Ultrawormholeresearch_BufferUltraBeastPokemonName
     def_special Quest_Ultrawormholeresearch_SetSubquestForUltraBeast
     def_special Quest_Ultrawormholeresearch_CountRemainingSubquests
-    def_special Taxi_CalculateFeeAndCharge
-    def_special Taxi_BufferDestinationMapName
     def_special Quest_Taxicabturnaround_IsSubquestComplete
     def_special Quest_Taxicabturnaround_CheckRequiredPokemon
     def_special Quest_Taxicabturnaround_MarkSubquestComplete
