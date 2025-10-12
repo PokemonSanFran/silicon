@@ -93,8 +93,8 @@ script ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue {
 
 script ImProbablyBetterThanYou_PreventPlayerLeaving_Script {
     lockall
-        msgbox(format("I should check out my room!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
-                closemessage
+        msgbox(format("I should check out my room!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        closemessage
         applymovement(PLAYER,Common_Movement_WalkUp)
         waitmovement(0)
         releaseall
@@ -104,10 +104,10 @@ script ImProbablyBetterThanYou_PreventPlayerLeaving_Script {
 script ImProbablyBetterThanYou_Annoyed_Dialogue {
     switch (var(VAR_TALKED_CHARLOTTE)) {
         case 1:
-            msgbox(format("Oh man, are you trying to do some bonding or something? Lemme finish this truffle burger first..."),MSGBOX_NPC,,SPEAKER_CHARLOTTE)
+            msgbox(format("Oh man, are you trying to do some bonding or something? Lemme finish this truffle burger first..."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
             addvar(VAR_TALKED_CHARLOTTE,1)
         case 2:
-            msgbox(format("Nom nom nom..."))
+            msgbox(format("Nom nom nom..."),,SPEAKER_CHARLOTTE)
         default:
             msgbox(format("Go check out your room!"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
             setvar(VAR_TALKED_CHARLOTTE,1)

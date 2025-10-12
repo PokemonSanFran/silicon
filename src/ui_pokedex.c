@@ -159,7 +159,7 @@ static u32 SpeciesData_GetCaptureIndicatorSpriteId(void);
 static void SpeciesGrid_PrintGrid(void);
 static void SpeciesGrid_PrintMonNumber(u32, u32, u32);
 static void SpeciesGrid_SetMonIconPriority(enum ParentsDisplayRows row, enum ParentsDisplayRows column, enum PokedexPages page);
-static void SpeciesGrid_SaveMonIconSpriteId(enum ParentsDisplayRows row, enum ParentsDisplayColumns column, u32 spriteId);
+static void SpeciesGrid_SaveMonIconSpriteId(enum ParentsDisplayRows row, u32 column, u32 spriteId);
 static u32 SpeciesGrid_GetOnScreenSpeciesId(enum SpeciesListRows row, enum SpeciesListColumns column);
 static void SpeciesGrid_SaveOnScreenSpeciesId(u32, u32, u32);
 static void SpeciesGrid_UpdateOnScreenSpeciesId(void);
@@ -167,8 +167,8 @@ static void SpeciesGrid_RemoveMonIcon(enum ParentsDisplayRows rowIndex, enum Spe
 
 static void SpeciesGrid_PrintCaptureIndicator(enum SpeciesListRows rowIndex, enum SpeciesListColumns columnIndex, u32 species);
 static void SpeciesGrid_LoadCaptureIndicatorSprite(void);
-static u32 SpeciesGrid_GetCaptureIndicatorSpriteId(enum ParentsDisplayRows row, enum SpeciesListColumns column);
-static void SpeciesGrid_SaveCaptureIndicatorSpriteId(enum ParentsDisplayRows row, enum SpeciesListColumns column, u32 spriteId);
+static u32 SpeciesGrid_GetCaptureIndicatorSpriteId(u32 row, u32 column);
+static void SpeciesGrid_SaveCaptureIndicatorSpriteId(u32 row, u32 column, u32 spriteId);
 static void SpeciesGrid_RemoveCaptureIndicator(enum ParentsDisplayRows rowIndex, enum SpeciesListColumns columnIndex);
 
 static void SpeciesMenu_InitalizeMenu(u32);
@@ -315,26 +315,26 @@ static const u8 sSpeciesListMenuFrameGfx[] = INCBIN_U8("graphics/pokedex/ui/spec
 static const u16 sTypePalettes[] = INCBIN_U16("graphics/types/types.gbapal");
 static const u16 pokedexPalettesText[] = INCBIN_U16("graphics/pokedex/ui/palettes/text.gbapal");
 
-static const u32 pokedexSpeciesListTiles[] = INCBIN_U32("graphics/pokedex/ui/species_list_screen.4bpp.lz");
-static const u32 pokedexSpeciesListTilemap[] = INCBIN_U32("graphics/pokedex/ui/species_list_screen.bin.lz");
-static const u32 pokedexFilterListTiles[] = INCBIN_U32("graphics/pokedex/ui/filter/filter_list_screen.4bpp.lz");
-static const u32 pokedexFilterListTilemap[] = INCBIN_U32("graphics/pokedex/ui/filter/filter_list_screen.bin.lz");
-static const u32 pokedexPageMovesTiles[] = INCBIN_U32("graphics/pokedex/ui/page/movesBgModifiedTiles.4bpp.lz");
-static const u32 pokedexPageMovesTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/movesBgModifiedTiles.bin.lz");
-static const u32 pokedexPageEvolutionTiles[] = INCBIN_U32("graphics/pokedex/ui/page/evoBgModifiedTiles.4bpp.lz");
-static const u32 pokedexPageEvolutionTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/evoBgModifiedTiles.bin.lz");
-static const u32 pokedexPageStatsTiles[] = INCBIN_U32("graphics/pokedex/ui/page/statsBgModifiedTiles.4bpp.lz");
-static const u32 pokedexPageStatsTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/statsBgModifiedTiles.bin.lz");
-static const u32 pokedexPageInformationTiles[] = INCBIN_U32("graphics/pokedex/ui/page/informationBgModifiedTiles.4bpp.lz");
-static const u32 pokedexPageInformationTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/informationBgModifiedTiles.bin.lz");
-static const u32 speciesListMonCursor[] = INCBIN_U32("graphics/pokedex/ui/species_list/mon.4bpp.lz");
-static const u32 speciesListScrollbar[] = INCBIN_U32("graphics/pokedex/ui/species_list/scrollbar.4bpp.lz");
-static const u32 pageScrollbar[] = INCBIN_U32("graphics/pokedex/ui/page/scrollbar.4bpp.lz");
-static const u32 speciesListCaptureIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/folder.4bpp.lz");
-static const u32 speciesListUncaughtIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/emptyfolder.4bpp.lz");
-static const u32 speciesListFileIcon[] = INCBIN_U32("graphics/pokedex/ui/species_list/file.4bpp.lz");
+static const u32 pokedexSpeciesListTiles[] = INCBIN_U32("graphics/pokedex/ui/species_list_screen.4bpp.smol");
+static const u32 pokedexSpeciesListTilemap[] = INCBIN_U32("graphics/pokedex/ui/species_list_screen.bin.smolTM");
+static const u32 pokedexFilterListTiles[] = INCBIN_U32("graphics/pokedex/ui/filter/filter_list_screen.4bpp.smol");
+static const u32 pokedexFilterListTilemap[] = INCBIN_U32("graphics/pokedex/ui/filter/filter_list_screen.bin.smolTM");
+static const u32 pokedexPageMovesTiles[] = INCBIN_U32("graphics/pokedex/ui/page/movesBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageMovesTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/movesBgModifiedTiles.bin.smolTM");
+static const u32 pokedexPageEvolutionTiles[] = INCBIN_U32("graphics/pokedex/ui/page/evoBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageEvolutionTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/evoBgModifiedTiles.bin.smolTM");
+static const u32 pokedexPageStatsTiles[] = INCBIN_U32("graphics/pokedex/ui/page/statsBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageStatsTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/statsBgModifiedTiles.bin.smolTM");
+static const u32 pokedexPageInformationTiles[] = INCBIN_U32("graphics/pokedex/ui/page/informationBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageInformationTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/informationBgModifiedTiles.bin.smolTM");
+static const u32 speciesListMonCursor[] = INCBIN_U32("graphics/pokedex/ui/species_list/mon.4bpp.smol");
+static const u32 speciesListScrollbar[] = INCBIN_U32("graphics/pokedex/ui/species_list/scrollbar.4bpp.smol");
+static const u32 pageScrollbar[] = INCBIN_U32("graphics/pokedex/ui/page/scrollbar.4bpp.smol");
+static const u32 speciesListCaptureIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/folder.4bpp.smol");
+static const u32 speciesListUncaughtIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/emptyfolder.4bpp.smol");
+static const u32 speciesListFileIcon[] = INCBIN_U32("graphics/pokedex/ui/species_list/file.4bpp.smol");
 static const u8 speciesListMenuCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/menu_cursor_bmp.4bpp");
-static const u32 sTypes_Gfx[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.lz");
+static const u32 sTypes_Gfx[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_Type13x11 =
 {
@@ -639,12 +639,20 @@ static void SetScheduleBgs(u32 backgroundId)
     ScheduleBgCopyTilemapToVram(backgroundId);
 }
 
+static bool8 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (GetRelevantTiles(backgroundId) == NULL || GetRelevantTilemap(backgroundId) == NULL);
+}
+
 static void LoadGraphics(void)
 {
     u32 backgroundId;
     ResetTempTileDataBuffers();
     for (backgroundId = BG0_POKEDEX_TEXT_CONTENT; backgroundId < BG_POKEDEX_COUNT; backgroundId++)
     {
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
         DecompressAndLoadBgGfxUsingHeap(backgroundId, GetRelevantTiles(backgroundId), 0, 0, 0);
         CopyToBgTilemapBuffer(backgroundId, GetRelevantTilemap(backgroundId),0,0);
     }
@@ -682,7 +690,7 @@ static const u32* GetRelevantTiles(u32 backgroundId)
     if (backgroundId == BG3_POKEDEX_BACKGROUND)
         return pokedexSpeciesListTiles;
     else
-        return 0;
+        return NULL;
 }
 
 static const u32* GetRelevantTilemap(u32 backgroundId)
@@ -716,7 +724,7 @@ static const u32* GetRelevantTilemap(u32 backgroundId)
     if (backgroundId == BG3_POKEDEX_BACKGROUND)
         return pokedexSpeciesListTilemap;
     else
-        return 0;
+        return NULL;
 }
 
 static void LoadPokedexPalettes(void)
@@ -1106,7 +1114,7 @@ u32 GetCurrentPage(void)
 
 void PrintMenuHeader(void)
 {
-    enum FilterPageWindows_Move windowId = POKEDEX_PAGE_WINDOW_HEADER;
+    enum PokedexPageWindows windowId = POKEDEX_PAGE_WINDOW_HEADER;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     PrintPageName();
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1968,7 +1976,7 @@ static void SpeciesData_PrintSpeciesNumAndDesc(u32 shownSpecies, u32* padding)
     end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1} {STR_VAR_2}"));
     //PSF TODO replace yen with octhorpe
 
-    BreakStringAutomatic(gStringVar3, POKEDEX_SPECIESLIST_DATA_WIDTH, 2, fontId, HIDE_SCROLL_PROMPT);
+    BreakStringNaive(gStringVar3, POKEDEX_SPECIESLIST_DATA_WIDTH, 2, fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, fontId, GetWindowAttribute(windowId, WINDOW_WIDTH));
     *padding = CalculateStringHeight(gStringVar3);
 
@@ -2400,12 +2408,12 @@ static void SpeciesGrid_SetMonIconPriority(enum ParentsDisplayRows row, enum Par
     gSprites[spriteId].oam.priority = priority;
 }
 
-u32 SpeciesGrid_GetMonIconSpriteId(enum ParentsDisplayRows row, enum ParentsDisplayColumns column)
+u32 SpeciesGrid_GetMonIconSpriteId(u32 row, u32 column)
 {
     return sPokedexGridResources->speciesGridMonSpriteIds[row][column];
 }
 
-static void SpeciesGrid_SaveMonIconSpriteId(enum ParentsDisplayRows row, enum ParentsDisplayColumns column, u32 spriteId)
+static void SpeciesGrid_SaveMonIconSpriteId(enum ParentsDisplayRows row, u32 column, u32 spriteId)
 {
     sPokedexGridResources->speciesGridMonSpriteIds[row][column] = spriteId;
 }
@@ -2501,12 +2509,12 @@ static void SpeciesGrid_LoadCaptureIndicatorSprite(void)
     LoadSpritePalette(&sPokedexInterfaceSpritePalette);
 }
 
-static u32 SpeciesGrid_GetCaptureIndicatorSpriteId(enum ParentsDisplayRows row, enum SpeciesListColumns column)
+static u32 SpeciesGrid_GetCaptureIndicatorSpriteId(u32 row, u32 column)
 {
     return sPokedexGridResources->speciesGridCaptureSpriteIds[row][column];
 }
 
-static void SpeciesGrid_SaveCaptureIndicatorSpriteId(enum ParentsDisplayRows row, enum SpeciesListColumns column, u32 spriteId)
+static void SpeciesGrid_SaveCaptureIndicatorSpriteId(u32 row, u32 column, u32 spriteId)
 {
     sPokedexGridResources->speciesGridCaptureSpriteIds[row][column] = spriteId;
 }
