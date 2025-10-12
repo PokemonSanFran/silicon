@@ -136,29 +136,37 @@ script SpeechSpeechSpeech_PositionPlayer_Script {
 script SpeechSpeechSpeech_Intro_Dialogue {
 
         msgbox(format("Thank you all for coming. For all your hard work. All your support. I have a few announcements for you all."),,SPEAKER_ALCMENE)
-        msgbox(format("First of all, I will be taking a leave of absence. Effectively immediately, Adaora will be leading TheTide. She has my full trust and support."),,SPEAKER_ALCMENE)
+        msgbox(format("First of all, I will be taking a leave of absence."),,SPEAKER_ALCMENE)
+	closemessage
 
-        closemessage
+	call(SpeechSpeechSpeech_CrowdLookAround_Script)
+        msgbox(format("Wait what?"),,SPEAKER_ROCKET_MEMBER_A,,EMOTE_SHOCK)
+	closemessage
 
-        call(SpeechSpeechSpeech_CrowdLookAround_Script)
+	msgbox(format("As our duly elected second in command, Adaora will succeed me as the Leader of The Tide for the remainder of this term."),,SPEAKER_ALCMENE)
+        msgbox(format("Given her track record of service to the cause, she has my full trust and support, and I know you all feel the same."),,SPEAKER_ALCMENE,,EMOTE_HAPPY)
+        msgbox(format("If there any objection, speak now!"),,SPEAKER_ALCMENE)
+	closemessage 
+	call(SpeechSpeechSpeech_CrowdLookAround_Script)
+        msgbox(format("Then it is so."),,SPEAKER_ALCMENE)
+	closemessage 
         call(SpeechSpeechSpeech_ResetFacing_Script)
 
         msgbox(format("Thank you for all you’ve done for us, Alcmene, I hope to live up to your example."),,SPEAKER_ADAORA)
 
         closemessage
 
-        turnvobject(13,DIR_WEST)
-        delay(16)
-        turnvobject(15,DIR_EAST)
-        msgbox(format("Wait what?"),SPEAKER_ROCKET_MEMBER_A)
-
         turnvobject(16,DIR_EAST)
         delay(16)
         turnvobject(18,DIR_EAST)
-        msgbox(format("Are they even qualified?"),SPEAKER_ROCKET_MEMBER_B)
+        msgbox(format("Can't wait to see what changes under Adaora! Are we finally going to start going on the offensive?"),SPEAKER_ROCKET_MEMBER_B,TAIL_WHISPER,EMOTE_SHOCK)
         closemessage
 
-        call(SpeechSpeechSpeech_ResetFacing_Script)
+        turnvobject(14,DIR_EAST)
+        delay(16)
+        turnvobject(12,DIR_WEST)
+        msgbox(format("How will The Tide feel with a public leader...?"),SPEAKER_ROCKET_MEMBER_B,TAIL_WHISPER,EMOTE_CONFUSE)
+        closemessage
 
         msgbox(format("Yes, Adaora has my full confidence, as well as the backing of…"),,SPEAKER_ALCMENE)
 
