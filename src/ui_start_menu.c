@@ -99,7 +99,11 @@
 #define START_PAL_SLOT_TEXT    15
 
 // task data
+
+// Task_StartMenu_Init
 #define tStartMode  data[0]
+
+// universal
 #define tTimer      data[3]
 
 // Task_StartSaveOverwrite_Load
@@ -107,7 +111,12 @@
 #define tSlideX     data[1]
 #define tWindowId   data[2]
 
+// Task_StartMenu_SlideIn/Out
+#define tSlideY     data[0]
+
 // sprite data
+
+// START_MAIN_SPRITE_APP_ICONS
 #define sMovingApp  data[0]
 
 // window widths
@@ -387,6 +396,8 @@ static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
 // tasks
 static void Task_StartMenu_HandleInput(u8);
 static void Task_StartMenu_WaitForFade(u8);
+static void Task_StartMenu_SlideIn(u8);
+static void Task_StartMenu_SlideOut(u8);
 static void Task_StartMenu_Exit(u8);
 
 // callbacks
@@ -1036,12 +1047,86 @@ static void Task_StartMenu_HandleInput(u8 taskId)
 
 static void Task_StartMenu_WaitForFade(u8 taskId)
 {
+    // faster fade
+    UpdatePaletteFade();
+    UpdatePaletteFade();
+    UpdatePaletteFade();
+
     if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_StartMenu_HandleInput;
+    {
+        struct Task *task = &gTasks[taskId];
+
+        task->func = Task_StartMenu_SlideIn;
+        task->tSlideY = -DISPLAY_HEIGHT;
+    }
+}
+
+static void Task_StartMenu_SlideIn(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    task->tSlideY += 16;
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->tSlideY);
+    // cautionbox is long, not tall
+    SetGpuReg(REG_OFFSET_BG2VOFS, task->tSlideY);
+    SetGpuReg(REG_OFFSET_BG3VOFS, task->tSlideY);
+
+    if (task->tSlideY >= 0)
+    {
+        for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
+        {
+            u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+            if (gSprites[spriteIds[i]].data[7])
+            {
+                gSprites[spriteIds[i]].invisible = FALSE;
+                gSprites[spriteIds[i]].data[7] = FALSE;
+            }
+        }
+
+        task->tSlideY = 0;
+        task->func = Task_StartMenu_HandleInput;
+    }
+}
+
+static void Task_StartMenu_SlideOut(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    if (task->tSlideY == 0)
+    {
+        for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
+        {
+             u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+             if (!gSprites[spriteIds[i]].invisible)
+             {
+                  gSprites[spriteIds[i]].invisible = TRUE;
+                  gSprites[spriteIds[i]].data[7] = TRUE;
+             }
+        }
+    }
+
+    task->tSlideY -= 16;
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->tSlideY);
+    // cautionbox is long, not tall
+    SetGpuReg(REG_OFFSET_BG2VOFS, task->tSlideY);
+    SetGpuReg(REG_OFFSET_BG3VOFS, task->tSlideY);
+
+    if (task->tSlideY == (-DISPLAY_HEIGHT))
+    {
+        task->tSlideY = 0;
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        task->func = Task_StartMenu_Exit;
+    }
 }
 
 static void Task_StartMenu_Exit(u8 taskId)
 {
+    // faster fade
+    UpdatePaletteFade();
+    UpdatePaletteFade();
+    UpdatePaletteFade();
+
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sStartMenuDataPtr->savedCB);
@@ -1100,6 +1185,9 @@ static void CB2_StartMenu_Setup(void)
         break;
     case START_SETUP_FINISH:
         CreateTask(Task_StartMenu_WaitForFade, 0);
+        SetGpuReg(REG_OFFSET_BG0VOFS, -DISPLAY_HEIGHT);
+        SetGpuReg(REG_OFFSET_BG2VOFS, -DISPLAY_HEIGHT);
+        SetGpuReg(REG_OFFSET_BG3VOFS, -DISPLAY_HEIGHT);
         SetVBlankCallback(VBlankCB_StartMenu_Idle);
         SetMainCallback2(CB2_StartMenu_Idle);
         return;
@@ -1168,7 +1256,7 @@ static void StartSetup_Graphics(void)
     // misc gfx that needs to be loaded manually
     LoadPalette(sStartMenu_WallpaperPalettes[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR]],
                 BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    FillPalette(RGB_RED, BG_PLTT_ID(0), PLTT_SIZEOF(1));
+    SetBackdropFromColor(RGB_BLACK);
 
     // sprites
     LoadSpriteSheets(sStartMenu_SpriteGraphics.sheets);
@@ -1180,6 +1268,17 @@ static void StartSetup_MainSprites(void)
     StartMainSprite_App();
     StartMainSprite_PartyMon();
     StartMainSprite_DaycareMon();
+
+    for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
+    {
+         u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+         if (!gSprites[spriteIds[i]].invisible)
+         {
+              gSprites[spriteIds[i]].invisible = TRUE;
+              gSprites[spriteIds[i]].data[7] = TRUE;
+         }
+    }
 }
 
 static void StartSetup_MainWindows(void)
@@ -1790,9 +1889,9 @@ static void AppGrid_HandleNormalInputs(u8 taskId)
         }
         else
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sStartMenuDataPtr->savedCB = data->openCB;
-            gTasks[taskId].func = Task_StartMenu_Exit;
+            gTasks[taskId].func = Task_StartMenu_SlideOut;
+            gTasks[taskId].tSlideY = 0;
         }
         return;
     }
@@ -1819,8 +1918,8 @@ static void AppGrid_HandleNormalInputs(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_StartMenu_Exit;
+        gTasks[taskId].func = Task_StartMenu_SlideOut;
+        gTasks[taskId].tSlideY = 0;
         return;
     }
 }
@@ -1842,8 +1941,8 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
         if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
         {
             PlaySE(SE_PC_OFF);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_StartMenu_Exit;
+            gTasks[taskId].func = Task_StartMenu_SlideOut;
+            gTasks[taskId].tSlideY = 0;
         }
         else
         {
@@ -2351,8 +2450,8 @@ static void Task_StartSaveMode_Exit(u8 taskId)
         if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
         {
             PlaySE(SE_PC_OFF);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            task->func = Task_StartMenu_Exit;
+            task->func = Task_StartMenu_SlideOut;
+            task->tSlideY = 0;
         }
         else
         {
