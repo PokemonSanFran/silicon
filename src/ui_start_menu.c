@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gba/flash_internal.h"
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
@@ -44,8 +45,11 @@
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "save.h"
+#include "load_save.h"
+#include "new_game.h"
 #include "trainer_card.h"
 #include "frontier_pass.h"
+#include "random.h"
 #include "buzzr.h"
 #include "glass.h"
 #include "ui_adventure_guide.h"
@@ -96,13 +100,22 @@
 
 // task data
 #define tStartMode  data[0]
-#define tTimer      data[0]
+#define tTimer      data[3]
+
+// Task_StartSaveOverwrite_Load
+#define tState      data[0]
+#define tSlideX     data[1]
+#define tWindowId   data[2]
+
+// sprite data
+#define sMovingApp  data[0]
 
 // window widths
 #define START_MAIN_WIN_HELP_WIDTH      (DISPLAY_TILE_WIDTH)
 #define START_MAIN_WIN_TEXTBOX_WIDTH   (DISPLAY_TILE_WIDTH - 2)
 #define START_MAIN_WIN_APP_TITLE_WIDTH (DISPLAY_TILE_WIDTH - 8)
 #define START_MAIN_WIN_EGG_INFO_WIDTH  (4)
+#define START_WIN_SAVE_OVERWRITE_WIDTH (DISPLAY_TILE_WIDTH - 2)
 
 #define SWAP_APP_WIDTH 78
 
@@ -119,6 +132,10 @@
 #define Y_CENTER_ALIGN      1
 
 #define START_DEFAULT_TIMER 60
+
+// save overwrite
+#define START_SAVE_OVERWRITE_X_FULLSCREEN   (-256)
+#define START_SAVE_OVERWRITE_X_CENTERSCREEN (-380)
 
 enum StartMenuBackgrounds
 {
@@ -289,6 +306,28 @@ enum StartMenuSetupSteps
     START_SETUP_FINISH
 };
 
+enum StartMenuSaveOverwriteSteps
+{
+    START_SAVE_OVERWRITE_INIT, // clear windows, hide/remove sprites, etc
+    START_SAVE_OVERWRITE_TILEMAP,
+    START_SAVE_OVERWRITE_SLIDE_IN,
+    START_SAVE_OVERWRITE_LOAD,
+    START_SAVE_OVERWRITE_CONFIRM,
+    START_SAVE_OVERWRITE_FLASH,
+    START_SAVE_OVERWRITE_EXIT,
+    START_SAVE_OVERWRITE_SLIDE_OUT,
+
+    START_SAVE_OVERWRITE_FINISH
+};
+
+enum StartMenuStrengthErrorSteps
+{
+    START_STRENGTH_ERROR_FLASH, // flash the signal icon
+    START_STRENGTH_ERROR_PRINT,
+
+    START_STRENGTH_ERROR_FINISH,
+};
+
 // grid
 enum StartMenuAppRows {
     START_APP_GRID_ROW_0,
@@ -328,6 +367,7 @@ struct StartMenuData
     struct UCoords8 cursor;
     enum StartMenuApps movingAppIdx;
     const u8 *customStr;
+    u16 tilemapBuf[BG_SCREEN_SIZE * 2];
 };
 
 struct StartMenuAppData
@@ -348,8 +388,6 @@ static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
 static void Task_StartMenu_HandleInput(u8);
 static void Task_StartMenu_WaitForFade(u8);
 static void Task_StartMenu_Exit(u8);
-static void Task_StartMenu_BeginSave(u8);
-static void Task_StartMenu_FinishSave(u8);
 
 // callbacks
 static void CB2_StartMenu_Setup(void);
@@ -375,6 +413,7 @@ static void StartPrint_HelpBottomText(void);
 static void StartPrint_QuestFlavorText(void);
 static void StartPrint_AppNameText(void);
 static void StartPrint_EggInfo(void);
+static void StartPrint_SaveOverwriteText(u8); // uses task data
 static u32 StartPrint_GetFirstActiveQuest(void);
 
 // app data
@@ -433,7 +472,13 @@ static bool32 StartMoveMode_SwapApps(void);
 // cellular signals
 static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void);
 static void CellularSignal_StrengthError(u8);
-static void Task_CellularSignal_WaitForMessage(u8);
+static void Task_StrengthError_Init(u8);
+
+// save mode functionalities
+static void Task_StartSaveMode_Init(u8);
+static void Task_StartSaveMode_Exit(u8);
+static void StartSaveOverwrite_Init(u8);
+static void Task_StartSaveOverwrite_Load(u8);
 
 static void StartMenu_Free(void);
 
@@ -452,7 +497,7 @@ static const struct BgTemplate sStartMenu_BackgroundTemplates[NUM_START_BACKGROU
         .charBaseIndex = 2,
         .mapBaseIndex = 26,
         .screenSize = 1,
-        .priority = 1
+        .priority = 2
     },
     {
         .bg = START_BG_TEXTBOX,
@@ -533,6 +578,11 @@ static const struct {
         // .tiles is handled by text window
         .palette = { sStartMenu_Palette, START_PAL_SLOT_TEXT }
         // .tilemap is handled by text window
+    },
+    [START_BG_CAUTIONBOX] =
+    {
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/save_overwrite_modal.4bpp.lz"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/save_overwrite_modal.bin"),
     },
     [START_BG_TEXTBOX] =
     {
@@ -620,7 +670,7 @@ static const u8 *const sStartMenuStrings_QuestFlavors[NUM_START_MODES] =
 
 static const u8 *const sStartMenuStrings_ControlBySaveResults[] =
 {
-    [START_SAVE_IN_PROGRESS] = COMPOUND_STRING(""),
+    [START_SAVE_INACTIVE ... START_SAVE_IN_PROGRESS] = COMPOUND_STRING(""),
     [START_SAVE_OVERWRITE] = COMPOUND_STRING("{START_BUTTON} + {A_BUTTON} Overwrite"),
     [START_SAVE_SUCCESS ... START_SAVE_FAILURE] = COMPOUND_STRING("Press any button to continue")
 };
@@ -628,8 +678,14 @@ static const u8 *const sStartMenuStrings_ControlBySaveResults[] =
 static const u8 *const sStartMenuStrings_SaveResult[NUM_START_SAVE_RESULTS] =
 {
     [START_SAVE_INACTIVE]    = COMPOUND_STRING(""),
-    [START_SAVE_IN_PROGRESS] = COMPOUND_STRING("Saving...\nDo not turn off the power."),
-    [START_SAVE_OVERWRITE]   = COMPOUND_STRING("START_SAVE_OVERWRITE"),
+    [START_SAVE_IN_PROGRESS] = COMPOUND_STRING("Saving...\n"
+                                               "Do not turn off the power."),
+
+    [START_SAVE_OVERWRITE]   = COMPOUND_STRING("If you continue, this will overwrite\n"
+                                               "the previously saved adventure and\n"
+                                               "its progress. This cannot be\n"
+                                               "recovered."),
+
     [START_SAVE_SUCCESS]     = COMPOUND_STRING("Saved the game."),
     [START_SAVE_FAILURE]     = COMPOUND_STRING("There's a problem saving."),
 };
@@ -959,7 +1015,7 @@ static void Task_StartMenu_HandleInput(u8 taskId)
         AppGrid_HandleSaveInputs(taskId);
         break;
     case START_MODE_SAVE_FORCE:
-        gTasks[taskId].func = Task_StartMenu_BeginSave;
+        gTasks[taskId].func = Task_StartSaveMode_Init;
         break;
     case START_MODE_MOVE:
         AppGrid_HandleMoveInputs(taskId);
@@ -991,52 +1047,6 @@ static void Task_StartMenu_Exit(u8 taskId)
         SetMainCallback2(sStartMenuDataPtr->savedCB);
         StartMenu_Free();
         DestroyTask(taskId);
-    }
-}
-
-static void Task_StartMenu_BeginSave(u8 taskId)
-{
-    IncrementGameStat(GAME_STAT_SAVED_GAME);
-
-    sStartMenuDataPtr->saveRes = START_SAVE_IN_PROGRESS;
-    StartPrint_QuestFlavorText();
-    StartPrint_HelpBottomText();
-
-    u8 saveStatus = TrySavingData(SAVE_NORMAL);
-    if (saveStatus == SAVE_STATUS_OK)
-        sStartMenuDataPtr->saveRes = START_SAVE_SUCCESS;
-    else
-        sStartMenuDataPtr->saveRes = START_SAVE_FAILURE;
-
-    StartPrint_QuestFlavorText();
-    StartPrint_HelpBottomText();
-
-    gTasks[taskId].tTimer = START_DEFAULT_TIMER;
-    gTasks[taskId].func = Task_StartMenu_FinishSave;
-}
-
-static void Task_StartMenu_FinishSave(u8 taskId)
-{
-    struct Task *task = &gTasks[taskId];
-
-    task->tTimer--;
-    if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
-    {
-        if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
-        {
-            PlaySE(SE_PC_OFF);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            task->func = Task_StartMenu_Exit;
-        }
-        else
-        {
-            sStartMenuDataPtr->mode = START_MODE_NORMAL;
-            sStartMenuDataPtr->saveRes = START_SAVE_INACTIVE;
-            StartPrint_QuestFlavorText();
-            StartPrint_HelpBottomText();
-
-            task->func = Task_StartMenu_HandleInput;
-        }
     }
 }
 
@@ -1122,6 +1132,7 @@ static void StartSetup_Bgs(void)
     InitBgsFromTemplates(0, sStartMenu_BackgroundTemplates, NELEMS(sStartMenu_BackgroundTemplates));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
 
+    SetBgTilemapBuffer(START_BG_CAUTIONBOX, sStartMenuDataPtr->tilemapBuf);
     for (enum StartMenuBackgrounds bg = 0; bg < NUM_START_BACKGROUNDS; bg++)
     {
         ScheduleBgCopyTilemapToVram(bg);
@@ -1146,7 +1157,12 @@ static void StartSetup_Graphics(void)
             LoadPalette(sStartMenu_BackgroundGraphics[bg].palette.data, BG_PLTT_ID(sStartMenu_BackgroundGraphics[bg].palette.slot), PLTT_SIZE_4BPP);
 
         if (sStartMenu_BackgroundGraphics[bg].tilemap)
+        {
+            if (bg == START_BG_CAUTIONBOX)
+                continue;
+
             LoadBgTilemap(bg, sStartMenu_BackgroundGraphics[bg].tilemap, BG_SCREEN_SIZE, 0);
+        }
     }
 
     // misc gfx that needs to be loaded manually
@@ -1617,6 +1633,20 @@ static void StartPrint_EggInfo(void)
     CopyWindowToVram(START_MAIN_WIN_EGG_INFO, COPYWIN_FULL);
 }
 
+static void StartPrint_SaveOverwriteText(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    // clear (w/ black)
+    FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+
+    // textbox
+    StringCopy(gStringVar1, sStartMenuStrings_SaveResult[sStartMenuDataPtr->saveRes]);
+    StartPrint_Text(tWindowId, FONT_SMALL_NARROW, START_WIN_SAVE_OVERWRITE_WIDTH, X_CENTER_ALIGN, 0, gStringVar1);
+
+    CopyWindowToVram(tWindowId, COPYWIN_FULL);
+}
+
 static u32 StartPrint_GetFirstActiveQuest(void)
 {
     u32 i, questId = QUEST_COUNT;
@@ -1755,6 +1785,7 @@ static void AppGrid_HandleNormalInputs(u8 taskId)
         PlaySE(SE_SELECT);
         if (app == START_APP_SAVE)
         {
+            sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
             sStartMenuDataPtr->mode = START_MODE_SAVE_NORMAL;
         }
         else
@@ -1768,6 +1799,7 @@ static void AppGrid_HandleNormalInputs(u8 taskId)
 
     if (JOY_NEW(START_BUTTON))
     {
+        sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
         sStartMenuDataPtr->mode = START_MODE_SAVE_NORMAL;
         return;
     }
@@ -1797,7 +1829,11 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
 {
     if (JOY_NEW(START_BUTTON | A_BUTTON))
     {
-        gTasks[taskId].func = Task_StartMenu_BeginSave;
+        if (gDifferentSaveFile && gSaveFileStatus != SAVE_STATUS_EMPTY)
+            StartSaveOverwrite_Init(taskId);
+        else
+            gTasks[taskId].func = Task_StartSaveMode_Init;
+
         return;
     }
 
@@ -1811,6 +1847,7 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
         }
         else
         {
+            sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
             sStartMenuDataPtr->mode = START_MODE_NORMAL;
         }
 
@@ -2100,7 +2137,7 @@ static void StartMoveMode_Init(void)
     s->callback = gSprites[spriteIds[START_MAIN_SPRITE_APP_CURSOR]].callback;
     s->subpriority = 0;
     s->y -= 2;
-    s->data[0] = TRUE;
+    s->sMovingApp = TRUE;
 
     // convert the moved app's bg to be an empty space
     s = &gSprites[spriteIds[START_MAIN_SPRITE_APP_BGS + AppGrid_GetCurrentIndex()]];
@@ -2116,6 +2153,7 @@ static void StartMoveMode_Init(void)
     }
 
     sStartMenuDataPtr->movingAppIdx = AppGrid_GetCurrentIndex();
+    sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
     sStartMenuDataPtr->mode = START_MODE_MOVE;
 
     StartPrint_AppNameText();
@@ -2144,10 +2182,10 @@ static void StartMoveMode_Exit(void)
         s->y2 = AppGrid_GetYIconCoord((i & NUM_START_APP_GRID_ROWS) >> 3);
         s->callback = SpriteCallbackDummy;
         s->subpriority = 2;
-        if (s->data[0])
+        if (s->sMovingApp)
         {
             s->y += 2;
-            s->data[0] = FALSE;
+            s->sMovingApp = FALSE;
         }
 
         if (a)
@@ -2171,7 +2209,7 @@ static void StartMoveMode_Exit(void)
     }
 
     sStartMenuDataPtr->movingAppIdx = NUM_START_APPS;
-    sStartMenuDataPtr->mode = START_MODE_NORMAL;
+    sStartMenuDataPtr->mode = sStartMenuDataPtr->prevMode;
 
     StartPrint_AppNameText();
 }
@@ -2211,32 +2249,338 @@ static void CellularSignal_StrengthError(u8 taskId)
 {
     PlaySE(SE_BOO);
 
-    sStartMenuDataPtr->customStr = sStartMenuStrings_CellularSignalErrorString;
-    StartPrint_QuestFlavorText();
-
-    sStartMenuDataPtr->customStr = sStartMenuStrings_CellularSignalErrorControls;
-    StartPrint_HelpBottomText();
-
-    gTasks[taskId].func = Task_CellularSignal_WaitForMessage;
-    gTasks[taskId].tTimer = START_DEFAULT_TIMER;
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].func = Task_StrengthError_Init;
 }
 
-static void Task_CellularSignal_WaitForMessage(u8 taskId)
+static void Task_StrengthError_Init(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    enum StartMenuStrengthErrorSteps steps = task->tState;
+
+    switch(steps)
+    {
+    case START_STRENGTH_ERROR_FLASH:
+        {
+            if (task->tTimer > 48)
+            {
+                task->tState++;
+                return;
+            }
+
+            u32 timerBitwise = (task->tTimer & 0xF);
+            u32 timerDivide = task->tTimer ? (task->tTimer / 0xF) : 0;
+            if (!timerBitwise)
+            {
+                BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), START_MAIN_WIN_HELP_TOP, (DISPLAY_WIDTH - 24));
+                if (!(timerDivide % 2))
+                {
+                    BlitSymbol_Help(START_HELP_SYMBOL_SIG_0B, START_MAIN_WIN_HELP_TOP, (DISPLAY_WIDTH - 24));
+                }
+
+                CopyWindowToVram(START_MAIN_WIN_HELP_TOP, COPYWIN_GFX);
+            }
+
+            task->tTimer++;
+            break;
+        }
+    case START_STRENGTH_ERROR_PRINT:
+        {
+            sStartMenuDataPtr->customStr = sStartMenuStrings_CellularSignalErrorString;
+            StartPrint_QuestFlavorText();
+
+            sStartMenuDataPtr->customStr = sStartMenuStrings_CellularSignalErrorControls;
+            StartPrint_HelpBottomText();
+
+            task->tTimer = START_DEFAULT_TIMER;
+            task->tState++;
+            break;
+        }
+    case START_STRENGTH_ERROR_FINISH:
+        {
+            task->tTimer--;
+            if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
+            {
+                // reprint back
+                StartPrint_QuestFlavorText();
+                StartPrint_HelpBottomText();
+
+                task->func = Task_StartMenu_HandleInput;
+                task->tTimer = 0;
+                task->tState = 0;
+
+                return;
+            }
+        }
+    default:
+        return;
+    }
+}
+
+
+// save mode functionalities
+static void Task_StartSaveMode_Init(u8 taskId)
+{
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
+
+    sStartMenuDataPtr->saveRes = START_SAVE_IN_PROGRESS;
+    StartPrint_QuestFlavorText();
+    StartPrint_HelpBottomText();
+
+    u8 saveStatus = TrySavingData(SAVE_NORMAL);
+    if (saveStatus == SAVE_STATUS_OK)
+        sStartMenuDataPtr->saveRes = START_SAVE_SUCCESS;
+    else
+        sStartMenuDataPtr->saveRes = START_SAVE_FAILURE;
+
+    StartPrint_QuestFlavorText();
+    StartPrint_HelpBottomText();
+
+    gTasks[taskId].tTimer = START_DEFAULT_TIMER;
+    gTasks[taskId].func = Task_StartSaveMode_Exit;
+}
+
+static void Task_StartSaveMode_Exit(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     task->tTimer--;
     if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
     {
-        // reprint back
-        StartPrint_QuestFlavorText();
-        StartPrint_HelpBottomText();
+        if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
+        {
+            PlaySE(SE_PC_OFF);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            task->func = Task_StartMenu_Exit;
+        }
+        else
+        {
+            sStartMenuDataPtr->mode = sStartMenuDataPtr->prevMode;
+            sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
+            sStartMenuDataPtr->saveRes = START_SAVE_INACTIVE;
+            StartPrint_QuestFlavorText();
+            StartPrint_HelpBottomText();
 
-        task->func = Task_StartMenu_HandleInput;
-        task->tTimer = 0;
-
-        return;
+            task->func = Task_StartMenu_HandleInput;
+        }
     }
+}
+
+static void StartSaveOverwrite_Init(u8 taskId)
+{
+    sStartMenuDataPtr->saveRes = START_SAVE_OVERWRITE;
+    gTasks[taskId].func = Task_StartSaveOverwrite_Load;
+    gTasks[taskId].tState = START_SAVE_OVERWRITE_INIT;
+}
+
+static void Task_StartSaveOverwrite_Load(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    enum StartMenuSaveOverwriteSteps state = tState;
+
+    switch(state)
+    {
+    case START_SAVE_OVERWRITE_INIT:
+        {
+            // clear main windows
+            for (enum StartMenuMainWindows i = START_MAIN_WIN_HELP_BOTTOM; i < NUM_START_MAIN_WINDOWS; i++)
+            {
+                FillWindowPixelBuffer(i, PIXEL_FILL(0));
+                CopyWindowToVram(i, COPYWIN_GFX);
+            }
+
+            // hide main sprites
+            for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
+            {
+                u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+                if (!gSprites[spriteIds[i]].invisible)
+                {
+                    gSprites[spriteIds[i]].invisible = TRUE;
+                    gSprites[spriteIds[i]].data[7] = TRUE;
+                }
+            }
+
+            // darken ui
+            BlendPalettes(PALETTES_BG & ~((1 << START_PAL_SLOT_TEXT)), 8, RGB_BLACK);
+
+            tState++;
+            break;
+        }
+    case START_SAVE_OVERWRITE_TILEMAP:
+        {
+            // load head half of the tilemap
+            CopyRectToBgTilemapBufferRect(START_BG_CAUTIONBOX, sStartMenu_BackgroundGraphics[START_BG_CAUTIONBOX].tilemap,
+                                       0, 32,
+                                      32, 64,
+                                      32,  0,
+                                      32, 32,
+                                      0, 0, START_PAL_SLOT_TEXT);
+            CopyBgTilemapBufferToVram(START_BG_CAUTIONBOX);
+
+            // prepare slide
+            tSlideX = 0;
+
+            tState++;
+        }
+    case START_SAVE_OVERWRITE_SLIDE_IN:
+        {
+            tSlideX -= 4;
+            SetGpuReg(REG_OFFSET_BG1HOFS, tSlideX);
+            if (tSlideX == START_SAVE_OVERWRITE_X_FULLSCREEN) // load tail half of the tilemap, then continue slide
+            {
+                CopyRectToBgTilemapBufferRect(START_BG_CAUTIONBOX, sStartMenu_BackgroundGraphics[START_BG_CAUTIONBOX].tilemap,
+                                           0,  0,
+                                          32, 64,
+                                           0,  0,
+                                          32, 32,
+                                          0, 0, START_PAL_SLOT_TEXT);
+                CopyBgTilemapBufferToVram(START_BG_CAUTIONBOX);
+            }
+
+            if (tSlideX == START_SAVE_OVERWRITE_X_CENTERSCREEN)
+            {
+                tSlideX = START_SAVE_OVERWRITE_X_CENTERSCREEN;
+
+                tState++;
+                return;
+            }
+            break;
+        }
+    case START_SAVE_OVERWRITE_LOAD:
+        {
+            // load custom window
+            struct WindowTemplate window = CreateWindowTemplate(START_BG_CAUTIONBOX, 17, 4, START_WIN_SAVE_OVERWRITE_WIDTH, 8, START_PAL_SLOT_TEXT, 57);
+            tWindowId = AddWindow(&window);
+            PutWindowTilemap(tWindowId);
+
+            // load text
+            StartPrint_SaveOverwriteText(taskId);
+            StartPrint_HelpBottomText();
+
+            tState++;
+            return;
+        }
+    case START_SAVE_OVERWRITE_CONFIRM:
+        {
+            if (JOY_NEW(B_BUTTON))
+            {
+                // unload window
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                CopyWindowToVram(tWindowId, COPYWIN_FULL);
+                FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
+                CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
+
+                tState = START_SAVE_OVERWRITE_SLIDE_OUT;
+                return;
+            }
+
+            if (JOY_NEW(A_BUTTON) && JOY_NEW(START_BUTTON))
+            {
+                tState = START_SAVE_OVERWRITE_FLASH;
+                return;
+            }
+
+            break;
+        }
+    case START_SAVE_OVERWRITE_FLASH:
+        {
+            IncrementGameStat(GAME_STAT_SAVED_GAME);
+
+            sStartMenuDataPtr->saveRes = START_SAVE_IN_PROGRESS;
+            StartPrint_SaveOverwriteText(taskId);
+            StartPrint_HelpBottomText();
+
+            u8 saveStatus = TrySavingData(SAVE_NORMAL);
+            if (saveStatus == SAVE_STATUS_OK)
+                sStartMenuDataPtr->saveRes = START_SAVE_SUCCESS;
+            else
+                sStartMenuDataPtr->saveRes = START_SAVE_FAILURE;
+
+            StartPrint_SaveOverwriteText(taskId);
+            StartPrint_HelpBottomText();
+
+            tTimer = START_DEFAULT_TIMER;
+            tState++;
+            break;
+        }
+    case START_SAVE_OVERWRITE_EXIT:
+        {
+            tTimer--;
+            if (!tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
+            {
+                // unload window
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                CopyWindowToVram(tWindowId, COPYWIN_FULL);
+                FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
+                CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
+
+                tTimer = 0;
+                tState++;
+            }
+
+            break;
+        }
+    case START_SAVE_OVERWRITE_SLIDE_OUT:
+        {
+            tSlideX -= 4;
+            SetGpuReg(REG_OFFSET_BG1HOFS, tSlideX);
+            if (tSlideX == (START_SAVE_OVERWRITE_X_FULLSCREEN * 2)) // unload head half of the tilemap
+            {
+                FillBgTilemapBufferRect(START_BG_CAUTIONBOX, 0, 32, 0, 32, 32, START_PAL_SLOT_TEXT);
+                CopyBgTilemapBufferToVram(START_BG_CAUTIONBOX);
+            }
+
+            if (tSlideX == (START_SAVE_OVERWRITE_X_FULLSCREEN * 3))
+            {
+                tSlideX = 0;
+
+                tState++;
+                return;
+            }
+            break;
+        }
+    case START_SAVE_OVERWRITE_FINISH:
+        {
+            RemoveWindow(tWindowId);
+            tWindowId = WINDOW_NONE;
+
+            // unload tail half of the tilemap
+            FillBgTilemapBufferRect(START_BG_CAUTIONBOX, 0, 0, 0, 32, 32, START_PAL_SLOT_TEXT);
+            CopyBgTilemapBufferToVram(START_BG_CAUTIONBOX);
+
+            // change mode back to normal
+            sStartMenuDataPtr->mode = sStartMenuDataPtr->prevMode;
+            sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
+            sStartMenuDataPtr->saveRes = START_SAVE_INACTIVE;
+
+            // undarken ui
+            BlendPalettes(PALETTES_BG & ~((1 << START_PAL_SLOT_TEXT)), 0, RGB_BLACK);
+
+            // reload everything
+            StartSetup_Text();
+
+            // show main sprites
+            for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
+            {
+                u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+                if (gSprites[spriteIds[i]].data[7])
+                {
+                    gSprites[spriteIds[i]].invisible = FALSE;
+                    gSprites[spriteIds[i]].data[7] = FALSE;
+                }
+            }
+
+            gTasks[taskId].func = Task_StartMenu_HandleInput;
+            return;
+        }
+
+    default:
+        break;
+    }
+
 }
 
 
@@ -2263,6 +2607,7 @@ static void StartMenu_Free(void)
         FreeSpriteTilesByTag(tag);
 
     FreeItemIconTemporaryBuffers();
+    UnsetBgTilemapBuffer(START_BG_CAUTIONBOX);
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
 }
