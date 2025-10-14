@@ -2,7 +2,7 @@
   "id": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F",
   "name": "CuconuTown_SharpriseCompound_1F",
   "layout": "LAYOUT_CUCONU_TOWN_COMPOUND_1F",
-  "music": "MUS_BIRCH_LAB",
+  "music": "MUS_CUCUNO_TOWN",
   "region_map_section": "MAPSEC_CUCONU_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
