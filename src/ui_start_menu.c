@@ -112,7 +112,7 @@
 // universal
 #define tTimer      data[3]
 
-// Task_StartSaveOverwrite_Load
+// Task_SaveOverwrite_Load
 #define tState      data[0]
 #define tSlideX     data[1]
 #define tWindowId   data[2]
@@ -401,7 +401,7 @@ struct StartMenuPreviousSave
     u16 partySpecies[PARTY_SIZE];
     struct WarpData location;
     u16 playTimeHours;
-    u8 playTimeMinutes, playTimeSeconds;
+    u8 playTimeMinutes;
 };
 
 // RAM data
@@ -509,10 +509,10 @@ static void CellularSignal_StrengthError(u8);
 static void Task_StrengthError_Init(u8);
 
 // save mode functionalities
-static void Task_StartSaveMode_Init(u8);
-static void Task_StartSaveMode_Exit(u8);
-static void StartSaveOverwrite_Init(u8);
-static void Task_StartSaveOverwrite_Load(u8);
+static void Task_SaveMode_Init(u8);
+static void Task_SaveMode_Exit(u8);
+static void SaveOverwrite_Init(u8);
+static void Task_SaveOverwrite_Load(u8);
 static void SaveOverwrite_LoadSprites(void);
 static void SaveOverwrite_DestroySprites(void);
 static inline s32 SaveOverwrite_GetXIconCoord(u32);
@@ -967,7 +967,7 @@ void StartMenu_Init(enum StartMenuModes mode)
 
     // set anything that needs to be explicitly non-zero here
     sStartMenuDataPtr->mode = mode;
-    sStartMenuDataPtr->prevMode = NUM_START_MODES;
+    sStartMenuDataPtr->prevMode = mode;
     sStartMenuDataPtr->savedCB = cb;
     memset(sStartMenuDataPtr->spriteIds, SPRITE_NONE, NUM_START_MAIN_SPRITES * sizeof(u8));
 
@@ -1042,7 +1042,6 @@ void StartMenu_HoldPreviousSave(void)
 
     sStartMenuPreviousSave.playTimeHours = gSaveBlock2Ptr->playTimeHours;
     sStartMenuPreviousSave.playTimeMinutes = gSaveBlock2Ptr->playTimeMinutes;
-    sStartMenuPreviousSave.playTimeSeconds = gSaveBlock2Ptr->playTimeSeconds;
 }
 
 
@@ -1078,7 +1077,7 @@ static void Task_StartMenu_HandleInput(u8 taskId)
         AppGrid_HandleSaveInputs(taskId);
         break;
     case START_MODE_SAVE_FORCE:
-        gTasks[taskId].func = Task_StartSaveMode_Init;
+        gTasks[taskId].func = Task_SaveMode_Init;
         break;
     case START_MODE_MOVE:
         AppGrid_HandleMoveInputs(taskId);
@@ -2027,11 +2026,11 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
     {
         if (gDifferentSaveFile && gSaveFileStatus != SAVE_STATUS_EMPTY)
         {
-            StartSaveOverwrite_Init(taskId);
+            SaveOverwrite_Init(taskId);
         }
         else
         {
-            gTasks[taskId].func = Task_StartSaveMode_Init;
+            gTasks[taskId].func = Task_SaveMode_Init;
         }
 
         return;
@@ -2559,7 +2558,7 @@ static void Task_StrengthError_Init(u8 taskId)
 
 
 // save mode functionalities
-static void Task_StartSaveMode_Init(u8 taskId)
+static void Task_SaveMode_Init(u8 taskId)
 {
     IncrementGameStat(GAME_STAT_SAVED_GAME);
 
@@ -2577,10 +2576,10 @@ static void Task_StartSaveMode_Init(u8 taskId)
     StartPrint_HelpBottomText();
 
     gTasks[taskId].tTimer = START_DEFAULT_TIMER;
-    gTasks[taskId].func = Task_StartSaveMode_Exit;
+    gTasks[taskId].func = Task_SaveMode_Exit;
 }
 
-static void Task_StartSaveMode_Exit(u8 taskId)
+static void Task_SaveMode_Exit(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -2606,14 +2605,14 @@ static void Task_StartSaveMode_Exit(u8 taskId)
     }
 }
 
-static void StartSaveOverwrite_Init(u8 taskId)
+static void SaveOverwrite_Init(u8 taskId)
 {
     sStartMenuDataPtr->saveRes = START_SAVE_OVERWRITE;
-    gTasks[taskId].func = Task_StartSaveOverwrite_Load;
+    gTasks[taskId].func = Task_SaveOverwrite_Load;
     gTasks[taskId].tState = START_SAVE_OVERWRITE_INIT;
 }
 
-static void Task_StartSaveOverwrite_Load(u8 taskId)
+static void Task_SaveOverwrite_Load(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     enum StartMenuSaveOverwriteSteps state = tState;
@@ -2836,6 +2835,7 @@ static void Task_StartSaveOverwrite_Load(u8 taskId)
                 }
             }
 
+
             gTasks[taskId].func = Task_StartMenu_HandleInput;
             return;
         }
@@ -2873,6 +2873,10 @@ static void SaveOverwrite_LoadSprites(void)
         u32 graphicsId = GetPlayerAvatarGraphicsByCustomValues(PLAYER_AVATAR_STATE_NORMAL, bodyType);
         spriteIds[START_MAIN_SPRITE_EGG] = CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, SAVE_OVERWRITE_PLAYER_X, SAVE_OVERWRITE_PLAYER_Y, 0);
         StartSpriteAnim(&gSprites[spriteIds[START_MAIN_SPRITE_EGG]], ANIM_STD_GO_SOUTH);
+
+        u32 slot = OBJ_PLTT_ID(gSprites[spriteIds[START_MAIN_SPRITE_EGG]].oam.paletteNum);
+        SetCustomPlayerPalette(&gPlttBufferUnfaded[slot], &sStartMenuPreviousSave.rgbValues, &sStartMenuPreviousSave.customValues);
+        SetCustomPlayerPalette(&gPlttBufferFaded[slot], &sStartMenuPreviousSave.rgbValues, &sStartMenuPreviousSave.customValues);
     }
 }
 
