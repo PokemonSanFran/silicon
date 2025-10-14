@@ -581,7 +581,7 @@ gSongTable::
     song mus_pascal_haightahbury_gym, 0, 0
     song mus_pascal_hall_of_fame, 0, 0
     song mus_pascal_how_dissapointing, 0, 0
-    song mus_pascal_japantown, 0, 0
+    song mus_tora_town, 0, 0
     song mus_pascal_marin, 0, 0
     song mus_pascal_master_dojo, 0, 0
     song mus_pascal_mission, 0, 0

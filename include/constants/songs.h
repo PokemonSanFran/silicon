@@ -511,7 +511,7 @@
 #define MUS_PASCAL_HAIGHTAHBURY_GYM         577
 #define MUS_PASCAL_HALL_OF_FAME             578
 #define MUS_PASCAL_HOW_DISSAPOINTING        579
-#define MUS_PASCAL_JAPANTOWN                580
+#define MUS_TORA_TOWN                580
 #define MUS_PASCAL_MARIN                    581
 #define MUS_PASCAL_MASTER_DOJO              582
 #define MUS_PASCAL_MISSION                  583
