@@ -458,6 +458,7 @@ static bool32 AppData_GetUnlockFlag(enum StartMenuApps);
 static u32 AppData_CountCurrentTotalApps(void);
 static enum StartMenuApps AppData_GetAppFromIndex(u8);
 static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps);
+static void AppData_SanitizeApps(void);
 
 // app grid
 static void AppGrid_HandleNormalInputs(u8);
@@ -619,12 +620,12 @@ static const struct {
     },
     [START_BG_CAUTIONBOX] =
     {
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/save_overwrite_modal.4bpp.lz"),
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/save_overwrite_modal.4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/save_overwrite_modal.bin"),
     },
     [START_BG_TEXTBOX] =
     {
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/tiles.4bpp.lz"),
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/tiles.4bpp.smol"),
         // .palette set by the visual color option
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/textbox.bin"),
     },
@@ -1663,7 +1664,7 @@ static void StartPrint_QuestFlavorText(void)
     else if (inactiveQuests)
     {
         ConvertIntToDecimalStringN(gStringVar2, inactiveQuests, STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("The Resido region has {STR_VAR_2} more task(s) for you!"));
+        StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("The Resido region has {STR_VAR_2} more\ntask(s) for you!"));
     }
     else
     {
@@ -1869,6 +1870,7 @@ static void AppData_Populate(void)
         AppData_Reset();
 
     AppData_InsertNewApps();
+    AppData_SanitizeApps();
 }
 
 static void AppData_Reset(void)
@@ -1878,9 +1880,7 @@ static void AppData_Reset(void)
 
 static void AppData_InsertNewApps(void)
 {
-    u32 i = 0;
-
-    for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++, i++)
+    for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
     {
         if (AppData_GetUnlockFlag(app) && AppData_GetIndexFromApp(app) == NUM_START_APPS)
         {
@@ -1954,6 +1954,16 @@ static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps app)
         app = START_APP_NONE;
 
     return &sStartMenu_AppData[app];
+}
+
+// check for invalid app data
+static void AppData_SanitizeApps(void)
+{
+    for (u32 i = 0; i < TOTAL_START_APPS; i++)
+    {
+        if (gSaveBlock3Ptr->startMenuAppIndex[i] >= TOTAL_START_APPS)
+            gSaveBlock3Ptr->startMenuAppIndex[i] = START_APP_NONE;
+    }
 }
 
 
@@ -2874,9 +2884,20 @@ static void SaveOverwrite_LoadSprites(void)
         spriteIds[START_MAIN_SPRITE_EGG] = CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, SAVE_OVERWRITE_PLAYER_X, SAVE_OVERWRITE_PLAYER_Y, 0);
         StartSpriteAnim(&gSprites[spriteIds[START_MAIN_SPRITE_EGG]], ANIM_STD_GO_SOUTH);
 
+        // reload palette because it can get tinted
+        // when loaded with CreateObjectGraphicsSprite
         u32 slot = OBJ_PLTT_ID(gSprites[spriteIds[START_MAIN_SPRITE_EGG]].oam.paletteNum);
-        SetCustomPlayerPalette(&gPlttBufferUnfaded[slot], &sStartMenuPreviousSave.rgbValues, &sStartMenuPreviousSave.customValues);
-        SetCustomPlayerPalette(&gPlttBufferFaded[slot], &sStartMenuPreviousSave.rgbValues, &sStartMenuPreviousSave.customValues);
+        if (bodyType != BODY_TYPE_CHAMPION)
+        {
+            SetCustomPlayerPalette(&gPlttBufferUnfaded[slot], &sStartMenuPreviousSave.rgbValues, &sStartMenuPreviousSave.customValues);
+            SetCustomPlayerPalette(&gPlttBufferFaded[slot], &sStartMenuPreviousSave.rgbValues, &sStartMenuPreviousSave.customValues);
+        }
+        else
+        {
+            const struct SpritePalette *pal = GetObjectEventSpritePaletteByTag(GetObjectEventGraphicsInfo(graphicsId)->paletteTag);
+            if (pal != NULL)
+                LoadPalette(pal->data, slot, PLTT_SIZE_4BPP);
+        }
     }
 }
 
