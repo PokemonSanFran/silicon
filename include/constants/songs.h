@@ -502,7 +502,7 @@
 #define MUS_PASCAL_BERNALHILL1              568
 #define MUS_PASCAL_BERNALHILL               569
 #define MUS_PASCAL_CHASECENTER              570
-#define MUS_PASCAL_CHINATOWN                571
+#define MUS_HODOU_CITY                      571
 #define MUS_PASCAL_DOGPATCH                 572
 #define MUS_PASCAL_ENCOUNTER_SOLICITOR      573
 #define MUS_PASCAL_FORT_POINT_GYM           574
@@ -511,7 +511,7 @@
 #define MUS_PASCAL_HAIGHTAHBURY_GYM         577
 #define MUS_PASCAL_HALL_OF_FAME             578
 #define MUS_PASCAL_HOW_DISSAPOINTING        579
-#define MUS_TORA_TOWN                580
+#define MUS_TORA_TOWN                       580
 #define MUS_PASCAL_MARIN                    581
 #define MUS_PASCAL_MASTER_DOJO              582
 #define MUS_PASCAL_MISSION                  583

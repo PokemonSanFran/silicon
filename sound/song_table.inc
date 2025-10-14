@@ -572,7 +572,7 @@ gSongTable::
     song mus_pascal_bernalhill1, 0, 0
     song mus_pascal_bernalhill, 0, 0
     song mus_pascal_chasecenter, 0, 0
-    song mus_pascal_chinatown, 0, 0
+    song mus_hodou_city, 0, 0
     song mus_pascal_dogpatch, 0, 0
     song mus_pascal_encounter_solicitor, 0, 0
     song mus_pascal_fort_point_gym, 0, 0
