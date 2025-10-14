@@ -275,12 +275,14 @@ static const u16* const sAcceptPalettesLUT[] =
 void ReadAcceptLetterFromOverworld(void)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    StartMenu_HoldPreviousSave();
     SetMainCallback2(CB2_GoToAccept);
 }
 
 void StartNewGameWithDevIntro(u8 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    StartMenu_HoldPreviousSave();
     SetMainCallback2(CB2_GoToDevIntro);
 }
 

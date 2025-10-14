@@ -83,6 +83,12 @@
 
 #define START_MON_STATUS_Y            (130 + 4)
 
+#define SAVE_OVERWRITE_PARTY_MON_X    (39 + 16)
+#define SAVE_OVERWRITE_PARTY_MON_Y    (94 + 16)
+
+#define SAVE_OVERWRITE_PLAYER_X       (9 + 16)
+#define SAVE_OVERWRITE_PLAYER_Y       (94 + 16)
+
 // bg
 #define START_APP_BACKGROUNDS NUM_START_APPS
 
@@ -387,9 +393,23 @@ struct StartMenuAppData
     enum StartMenuCellularSignals reqSignal; // minimum strength
 };
 
+struct StartMenuPreviousSave
+{
+    u8 playerName[PLAYER_NAME_LENGTH];
+    u8 customValues[NUM_CUSTOMIZATION_PARTS];
+    u8 rgbValues[NUM_CUSTOM_COLOR_OPTIONS][NUM_COLOR_OPTIONS];
+    u16 partySpecies[PARTY_SIZE];
+    struct WarpData location;
+    u16 playTimeHours;
+    u8 playTimeMinutes, playTimeSeconds;
+};
+
 // RAM data
 static EWRAM_DATA struct StartMenuData *sStartMenuDataPtr = NULL;
 static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
+
+// TODO figure out how save sector works to not waste EWRAM like this
+static EWRAM_DATA struct StartMenuPreviousSave sStartMenuPreviousSave = {};
 
 // declarations
 
@@ -426,6 +446,7 @@ static void StartPrint_AppNameText(void);
 static void StartPrint_EggInfo(void);
 static void StartPrint_SaveOverwriteText(u8); // uses task data
 static u32 StartPrint_GetFirstActiveQuest(void);
+static u32 StartPrint_ConvertStringLengthToPixels(u8 *, u32);
 
 // app data
 static void AppData_Populate(void);
@@ -461,10 +482,12 @@ static inline s32 AppGrid_GetYIconCoord(u32);
 static void SpriteCB_AppGrid_Cursor(struct Sprite *);
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16);
+static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols, u16, u16);
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(void);
+static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOfDay);
+static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
+static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void);
 
 // pokemon status
 static inline void MonStatus_InjectStatusGraphics(struct Sprite *, u32, u32);
@@ -490,6 +513,10 @@ static void Task_StartSaveMode_Init(u8);
 static void Task_StartSaveMode_Exit(u8);
 static void StartSaveOverwrite_Init(u8);
 static void Task_StartSaveOverwrite_Load(u8);
+static void SaveOverwrite_LoadSprites(void);
+static void SaveOverwrite_DestroySprites(void);
+static inline s32 SaveOverwrite_GetXIconCoord(u32);
+static inline s32 SaveOverwrite_GetYIconCoord(u32);
 
 static void StartMenu_Free(void);
 
@@ -994,6 +1021,31 @@ void StartMenu_OpenSaveMode(void)
     gTasks[taskId].tStartMode = mode;
 }
 
+void StartMenu_HoldPreviousSave(void)
+{
+    if (!gDifferentSaveFile && gSaveFileStatus == SAVE_STATUS_EMPTY)
+        return;
+
+    memset(&sStartMenuPreviousSave, 0, sizeof(struct StartMenuPreviousSave));
+
+    StringCopy(sStartMenuPreviousSave.playerName, gSaveBlock2Ptr->playerName);
+    memcpy(&sStartMenuPreviousSave.customValues, &gSaveBlock3Ptr->customizationValues, NUM_CUSTOMIZATION_PARTS * sizeof(u8));
+    memcpy(&sStartMenuPreviousSave.rgbValues, &gSaveBlock3Ptr->rgbValues, (NUM_CUSTOM_COLOR_OPTIONS * NUM_COLOR_OPTIONS) * sizeof(u8));
+
+    memset(sStartMenuPreviousSave.partySpecies, SPECIES_NONE, PARTY_SIZE * sizeof(u16));
+    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    {
+        sStartMenuPreviousSave.partySpecies[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+    }
+
+    memcpy(&sStartMenuPreviousSave.location, &gSaveBlock1Ptr->location, sizeof(struct WarpData));
+
+    sStartMenuPreviousSave.playTimeHours = gSaveBlock2Ptr->playTimeHours;
+    sStartMenuPreviousSave.playTimeMinutes = gSaveBlock2Ptr->playTimeMinutes;
+    sStartMenuPreviousSave.playTimeSeconds = gSaveBlock2Ptr->playTimeSeconds;
+}
+
+
 // tasks
 void Task_StartMenu_Init(u8 taskId)
 {
@@ -1269,7 +1321,8 @@ static void StartSetup_MainSprites(void)
     StartMainSprite_PartyMon();
     StartMainSprite_DaycareMon();
 
-    for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
+    u32 j = 0;
+    for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++, j++)
     {
          u8 *spriteIds = sStartMenuDataPtr->spriteIds;
 
@@ -1376,6 +1429,10 @@ static void StartMainSprite_PartyMon(void)
         isEgg = (species == SPECIES_EGG);
         species = ReturnTransformationIfConditionMet(&mon[i]);
         status = GetMonData(&mon[i], MON_DATA_STATUS);
+
+        if (spriteIds[START_MAIN_SPRITE_MON_ICONS + i] != SPRITE_NONE)
+            continue;
+
         if (!species || species >= NUM_SPECIES)
             break;
 
@@ -1397,7 +1454,7 @@ static void StartMainSprite_PartyMon(void)
         sprite->x2 = MonStatus_GetXIconCoord(i);
         sprite->y2 = MonStatus_GetYIconCoord(i);
 
-        if (isEgg)
+        if (isEgg || spriteIds[START_MAIN_SPRITE_MON_STATUS + i] != SPRITE_NONE)
             continue;
 
         spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
@@ -1435,6 +1492,9 @@ static void StartMainSprite_DaycareMon(void)
     {
         mon = &daycare->mons[i].mon;
         species = GetBoxMonData(mon, MON_DATA_SPECIES);
+
+        if (spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] != SPRITE_NONE)
+            continue;
 
         LoadMonIconPalette(species);
         spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] =
@@ -1482,6 +1542,9 @@ static void StartMainSprite_DaycareMon(void)
     {
         species = SPECIES_EGG;
 
+        if (spriteIds[START_MAIN_SPRITE_EGG] != SPRITE_NONE)
+            return;
+
         LoadMonIconPalette(species);
         spriteIds[START_MAIN_SPRITE_EGG] =
             CreateMonIconNoPersonality(species, SpriteCB_MonIcon, 191 + 16, 109 + 16, 1);
@@ -1514,7 +1577,7 @@ static void StartPrint_HelpTopText(void)
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_TOP, PIXEL_FILL(0));
 
     // TIME OF DAY ICON
-    BlitSymbol_Help(BlitSymbol_ConvertTimeToHelp(), START_MAIN_WIN_HELP_TOP, x);
+    BlitSymbol_Help(BlitSymbol_ConvertLocalTimeToHelp(), START_MAIN_WIN_HELP_TOP, x, 0);
 
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
@@ -1534,7 +1597,7 @@ static void StartPrint_HelpTopText(void)
 
     // MAP ICON
     x += TILE_TO_PIXELS(TIME_WINDOW_WIDTH);
-    BlitSymbol_Help(START_HELP_SYMBOL_MAP, START_MAIN_WIN_HELP_TOP, x);
+    BlitSymbol_Help(START_HELP_SYMBOL_MAP, START_MAIN_WIN_HELP_TOP, x, 0);
 
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
@@ -1548,7 +1611,7 @@ static void StartPrint_HelpTopText(void)
 
     // SIGNAL STRENGTH
     x = (DISPLAY_WIDTH - 24);
-    BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), START_MAIN_WIN_HELP_TOP, x);
+    BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), START_MAIN_WIN_HELP_TOP, x, 0);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_TOP, COPYWIN_FULL);
     Free(strbuf[0]);
@@ -1639,7 +1702,7 @@ static void StartPrint_AppNameText(void)
     const u8 *str = NULL;
     if (sStartMenuDataPtr->mode == START_MODE_MOVE)
     {
-        BlitSymbol_Help(START_HELP_SYMBOL_SWAP, START_MAIN_WIN_APP_TITLE, (TILE_TO_PIXELS(START_MAIN_WIN_APP_TITLE_WIDTH) / 2) - 8);
+        BlitSymbol_Help(START_HELP_SYMBOL_SWAP, START_MAIN_WIN_APP_TITLE, (TILE_TO_PIXELS(START_MAIN_WIN_APP_TITLE_WIDTH) / 2) - 8, 0);
 
         u32 movingApp = AppData_GetAppFromIndex(sStartMenuDataPtr->movingAppIdx);
 
@@ -1743,6 +1806,27 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
     StringCopy(gStringVar1, sStartMenuStrings_SaveResult[sStartMenuDataPtr->saveRes]);
     StartPrint_Text(tWindowId, FONT_SMALL_NARROW, START_WIN_SAVE_OVERWRITE_WIDTH, X_CENTER_ALIGN, 0, gStringVar1);
 
+    // player data
+    if (sStartMenuDataPtr->saveRes == START_SAVE_OVERWRITE)
+    {
+        struct StartMenuPreviousSave *prevSave = &sStartMenuPreviousSave;
+
+        StringCopy(gStringVar2, prevSave->playerName);
+        GetMapNameGeneric(gStringVar3,
+            Overworld_GetMapHeaderByGroupAndId(prevSave->location.mapGroup, prevSave->location.mapNum)->regionMapSectionId);
+        u8 *ptr = StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{STR_VAR_2} in {STR_VAR_3} at "));
+
+        ptr = ConvertIntToDecimalStringN(ptr, prevSave->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ptr = StringAppend(ptr, COMPOUND_STRING(":"));
+        ConvertIntToDecimalStringN(ptr, prevSave->playTimeMinutes, STR_CONV_MODE_LEFT_ALIGN, 2);
+
+        u32 x = 8;
+        StartPrint_Text(tWindowId, FONT_SMALL_NARROW, START_WIN_SAVE_OVERWRITE_WIDTH, x, TILE_TO_PIXELS(6), gStringVar1);
+
+        x += StartPrint_ConvertStringLengthToPixels(gStringVar1, FONT_SMALL_NARROW);
+        BlitSymbol_Help(BlitSymbol_ConvertTimeToHelp(BlitSymbol_GetTimeOfDayFromPlaytime()), tWindowId, x, TILE_TO_PIXELS(6));
+    }
+
     CopyWindowToVram(tWindowId, COPYWIN_FULL);
 }
 
@@ -1763,6 +1847,19 @@ static u32 StartPrint_GetFirstActiveQuest(void)
     }
 
     return questId;
+}
+
+static u32 StartPrint_ConvertStringLengthToPixels(u8 *str, u32 fontId)
+{
+    u32 totalPixels = 0, i = 0;
+
+    while (*str != EOS)
+    {
+        totalPixels += GetGlyphWidth(*str, FALSE, fontId);
+        str++, i++;
+    }
+
+    return totalPixels;
 }
 
 
@@ -1929,9 +2026,13 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
     if (JOY_NEW(START_BUTTON | A_BUTTON))
     {
         if (gDifferentSaveFile && gSaveFileStatus != SAVE_STATUS_EMPTY)
+        {
             StartSaveOverwrite_Init(taskId);
+        }
         else
+        {
             gTasks[taskId].func = Task_StartSaveMode_Init;
+        }
 
         return;
     }
@@ -2099,9 +2200,9 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *s)
 }
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x)
+static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
 {
-    BlitBitmapRectToWindow(window, sStartMenuSymbols_Help, sym * 16, 0, 160, 16, x, 0, 16, 16);
+    BlitBitmapRectToWindow(window, sStartMenuSymbols_Help, sym * 16, 0, 160, 16, x, y, 16, 16);
 }
 
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols sym, u16 x, u16 y)
@@ -2109,9 +2210,9 @@ static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols sym, u16 x, u
     BlitBitmapRectToWindow(START_MAIN_WIN_EGG_INFO, sStartMenuSymbols_EggInfo, sym * 8, 0, 104, 8, x, y, 8, 8);
 }
 
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(void)
+static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOfDay tod)
 {
-    switch (GetTimeOfDay())
+    switch (tod)
     {
     default:
     case TIME_MORNING:
@@ -2125,9 +2226,48 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(void)
     }
 }
 
+static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
+{
+    return BlitSymbol_ConvertTimeToHelp(GetTimeOfDay());
+}
+
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void)
 {
     return START_HELP_SYMBOL_SIG_0A + CellularSignal_GetCurrentStrength();
+}
+
+static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void)
+{
+    s32 hours, time;
+    struct StartMenuPreviousSave *prevSave = &sStartMenuPreviousSave;
+    hours = prevSave->playTimeHours;
+
+    if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
+    {
+        time = TIME_MORNING;
+    }
+    else if (IsBetweenHours(hours, MORNING_HOUR_MIDDLE, MORNING_HOUR_END)) // morning->day
+    {
+        time = TIME_MORNING;
+    }
+    else if (IsBetweenHours(hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END)) // evening
+    {
+        time = TIME_EVENING;
+    }
+    else if (IsBetweenHours(hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_BEGIN + 1)) // evening->night
+    {
+        time = TIME_NIGHT;
+    }
+    else if (IsBetweenHours(hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END)) // night
+    {
+        time = TIME_NIGHT;
+    }
+    else // day
+    {
+        time = TIME_DAY;
+    }
+
+    return time;
 }
 
 
@@ -2372,10 +2512,10 @@ static void Task_StrengthError_Init(u8 taskId)
             u32 timerDivide = task->tTimer ? (task->tTimer / 0xF) : 0;
             if (!timerBitwise)
             {
-                BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), START_MAIN_WIN_HELP_TOP, (DISPLAY_WIDTH - 24));
+                BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), START_MAIN_WIN_HELP_TOP, (DISPLAY_WIDTH - 24), 0);
                 if (!(timerDivide % 2))
                 {
-                    BlitSymbol_Help(START_HELP_SYMBOL_SIG_0B, START_MAIN_WIN_HELP_TOP, (DISPLAY_WIDTH - 24));
+                    BlitSymbol_Help(START_HELP_SYMBOL_SIG_0B, START_MAIN_WIN_HELP_TOP, (DISPLAY_WIDTH - 24), 0);
                 }
 
                 CopyWindowToVram(START_MAIN_WIN_HELP_TOP, COPYWIN_GFX);
@@ -2493,11 +2633,22 @@ static void Task_StartSaveOverwrite_Load(u8 taskId)
             for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
             {
                 u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+                struct Sprite *sprite = &gSprites[spriteIds[i]];
+                if (spriteIds[i] == SPRITE_NONE)
+                    continue;
 
-                if (!gSprites[spriteIds[i]].invisible)
+                if (!sprite->invisible)
                 {
-                    gSprites[spriteIds[i]].invisible = TRUE;
-                    gSprites[spriteIds[i]].data[7] = TRUE;
+                    sprite->invisible = TRUE;
+                    sprite->data[7] = TRUE;
+                }
+
+                // used for prev save mons
+                if ((i >= START_MAIN_SPRITE_MON_ICONS && i < START_MAIN_SPRITE_MON_ICONS_END)
+                    || i == START_MAIN_SPRITE_EGG)
+                {
+                    FreeAndDestroyMonIconSprite(sprite);
+                    spriteIds[i] = SPRITE_NONE;
                 }
             }
 
@@ -2558,6 +2709,9 @@ static void Task_StartSaveOverwrite_Load(u8 taskId)
             StartPrint_SaveOverwriteText(taskId);
             StartPrint_HelpBottomText();
 
+            // load sprites
+            SaveOverwrite_LoadSprites();
+
             tState++;
             return;
         }
@@ -2571,12 +2725,18 @@ static void Task_StartSaveOverwrite_Load(u8 taskId)
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
 
+                // unload sprites
+                SaveOverwrite_DestroySprites();
+
                 tState = START_SAVE_OVERWRITE_SLIDE_OUT;
                 return;
             }
 
             if (JOY_NEW(A_BUTTON) && JOY_NEW(START_BUTTON))
             {
+                // unload sprites
+                SaveOverwrite_DestroySprites();
+
                 tState = START_SAVE_OVERWRITE_FLASH;
                 return;
             }
@@ -2599,6 +2759,9 @@ static void Task_StartSaveOverwrite_Load(u8 taskId)
 
             StartPrint_SaveOverwriteText(taskId);
             StartPrint_HelpBottomText();
+
+            if (sStartMenuDataPtr->saveRes == START_SAVE_SUCCESS)
+                gDifferentSaveFile = FALSE;
 
             tTimer = START_DEFAULT_TIMER;
             tState++;
@@ -2659,6 +2822,7 @@ static void Task_StartSaveOverwrite_Load(u8 taskId)
 
             // reload everything
             StartSetup_Text();
+            StartMainSprite_PartyMon();
 
             // show main sprites
             for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
@@ -2682,6 +2846,68 @@ static void Task_StartSaveOverwrite_Load(u8 taskId)
 
 }
 
+static void SaveOverwrite_LoadSprites(void)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        u32 species = sStartMenuPreviousSave.partySpecies[i];
+
+        if (species == SPECIES_NONE)
+            break;
+
+        LoadMonIconPalette(species);
+        spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
+            CreateMonIconNoPersonality(species, SpriteCB_MonIcon, SAVE_OVERWRITE_PARTY_MON_X, SAVE_OVERWRITE_PARTY_MON_Y, 3);
+
+        struct Sprite *sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]];
+        sprite->oam.priority = 0;
+        sprite->x2 = SaveOverwrite_GetXIconCoord(i);
+        sprite->y2 = SaveOverwrite_GetYIconCoord(i);
+    }
+
+    if (spriteIds[START_MAIN_SPRITE_EGG] == SPRITE_NONE)
+    {
+        u8 bodyType = sStartMenuPreviousSave.customValues[CUSTOMIZATION_BODY_TYPE];
+        u32 graphicsId = GetPlayerAvatarGraphicsByCustomValues(PLAYER_AVATAR_STATE_NORMAL, bodyType);
+        spriteIds[START_MAIN_SPRITE_EGG] = CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, SAVE_OVERWRITE_PLAYER_X, SAVE_OVERWRITE_PLAYER_Y, 0);
+        StartSpriteAnim(&gSprites[spriteIds[START_MAIN_SPRITE_EGG]], ANIM_STD_GO_SOUTH);
+    }
+}
+
+static void SaveOverwrite_DestroySprites(void)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        u32 species = sStartMenuPreviousSave.partySpecies[i];
+
+        if (species == SPECIES_NONE || spriteIds[START_MAIN_SPRITE_MON_ICONS + i] == SPRITE_NONE)
+            break;
+
+        FreeAndDestroyMonIconSprite(&gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]]);
+        spriteIds[START_MAIN_SPRITE_MON_ICONS + i] = SPRITE_NONE;
+    }
+
+    if (spriteIds[START_MAIN_SPRITE_EGG] != SPRITE_NONE)
+    {
+        DestroySprite(&gSprites[spriteIds[START_MAIN_SPRITE_EGG]]);
+        spriteIds[START_MAIN_SPRITE_EGG] = SPRITE_NONE;
+    }
+}
+
+static inline s32 SaveOverwrite_GetXIconCoord(u32 i)
+{
+    return 32 * (i);
+}
+
+static inline s32 SaveOverwrite_GetYIconCoord(u32 i)
+{
+    return 0 * (i);
+}
+
 
 static void StartMenu_Free(void)
 {
@@ -2694,10 +2920,15 @@ static void StartMenu_Free(void)
             continue;
 
         struct Sprite *sprite = &gSprites[spriteIds[i]];
-        if (i >= START_MAIN_SPRITE_MON_ICONS && i < START_MAIN_SPRITE_MON_ICONS_END)
+        if ((i >= START_MAIN_SPRITE_MON_ICONS && i < START_MAIN_SPRITE_MON_ICONS_END)
+         || i == START_MAIN_SPRITE_EGG)
+        {
             FreeAndDestroyMonIconSprite(sprite);
+        }
         else
+        {
             DestroySprite(sprite);
+        }
     }
 
     FreeMonIconPalettes();
