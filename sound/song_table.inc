@@ -607,6 +607,19 @@ gSongTable::
     song mus_pascal_why_didnt_you_rat_me_out, 0, 0
     song mus_cucuno_town, 0, 0
     song mus_encounter_scientist, 0, 0
+    song mus_encounter_police_officer, 0, 0
+    song mus_encounter_construction_worker_firefighter_postal_worker_nurse_doctor_rail, 0, 0
+    song mus_encounter_martial_artist, 0, 0
+    song mus_encounter_casual_dude, 0, 0
+    song mus_encounter_backpacker_hiker, 0, 0
+    song mus_hall_of_fame_silicon, 0, 0
+    song mus_glavez_hill, 0, 0
+    song mus_sharprise_arena, 0, 0
+    song mus_pioca_bridge, 0, 0
+    song mus_popidora_pier, 0, 0
+    song mus_encounter_psychic, 0, 0
+    song mus_encounter_fisher, 0, 0
+    song mus_halai_island, 0, 0
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2

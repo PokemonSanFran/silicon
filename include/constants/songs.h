@@ -537,7 +537,20 @@
 #define MUS_PASCAL_WHY_DIDNT_YOU_RAT_ME_OUT 603
 #define MUS_CUCUNO_TOWN                     604
 #define MUS_ENCOUNTER_SCIENTIST             605
-#define END_MUS                             MUS_ENCOUNTER_SCIENTIST
+#define MUS_ENCOUNTER_POLICE_OFFICER        607
+#define MUS_ENCOUNTER_CONSTRUCTION_WORKER_FIREFIGHTER_POSTAL_WORKER_NURSE_DOCTOR_RAIL 608
+#define MUS_ENCOUNTER_MARTIAL_ARTIST 609
+#define MUS_ENCOUNTER_CASUAL_DUDE 610
+#define MUS_ENCOUNTER_BACKPACKER_HIKER 611
+#define MUS_HALL_OF_FAME_SILICON 612
+#define MUS_GLAVEZ_HILL 613
+#define MUS_SHARPRISE_ARENA 614
+#define MUS_PIOCA_BRIDGE 615
+#define MUS_POPIDORA_PIER 616
+#define MUS_ENCOUNTER_PSYCHIC 617
+#define MUS_ENCOUNTER_FISHER 618
+#define MUS_HALAI_ISLAND 619
+#define END_MUS                             MUS_HALAI_ISLAND
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
