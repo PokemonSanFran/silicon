@@ -110,12 +110,13 @@
 #define tStartMode  data[0]
 
 // universal
-#define tTimer      data[3]
+#define tTimer      data[15]
 
 // Task_SaveOverwrite_Load
 #define tState      data[0]
 #define tSlideX     data[1]
 #define tWindowId   data[2]
+#define tReturnToOW data[3]
 
 // Task_StartMenu_SlideIn/Out
 #define tSlideY     data[0]
@@ -694,8 +695,8 @@ static const u8 *const sStartMenuStrings_TimeOfDay[TIMES_OF_DAY_COUNT] =
 static const u8 *const sStartMenuStrings_ControlByModes[NUM_START_MODES] =
 {
     [START_MODE_NORMAL]      = COMPOUND_STRING("{A_BUTTON} Open {B_BUTTON} Return {SELECT_BUTTON} Reorder {START_BUTTON} Save"),
-    [START_MODE_MOVE]        = COMPOUND_STRING("{A_BUTTON} Place {B_BUTTON} Return to Menu"),
-    [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = COMPOUND_STRING("{START_BUTTON} Save {B_BUTTON} Cancel"),
+    [START_MODE_MOVE]        = COMPOUND_STRING("{A_BUTTON} Place {B_BUTTON} Return to Menu {SELECT_BUTTON} Reorder"),
+    [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = COMPOUND_STRING(" {B_BUTTON} Cancel {START_BUTTON} Save Adventure"),
     [START_MODE_SAVE_FORCE]  = COMPOUND_STRING(""),
 };
 
@@ -710,9 +711,11 @@ static const u8 *const sStartMenuStrings_QuestFlavors[NUM_START_MODES] =
 static const u8 *const sStartMenuStrings_ControlBySaveResults[] =
 {
     [START_SAVE_INACTIVE ... START_SAVE_IN_PROGRESS] = COMPOUND_STRING(""),
-    [START_SAVE_OVERWRITE] = COMPOUND_STRING("{START_BUTTON} + {A_BUTTON} Overwrite"),
-    [START_SAVE_SUCCESS ... START_SAVE_FAILURE] = COMPOUND_STRING("Press any button to continue")
+    [START_SAVE_OVERWRITE] = COMPOUND_STRING("{START_BUTTON} + {A_BUTTON} Overwrite")
 };
+
+static const u8 sStartMenuStrings_SaveResControlReturnMenu[] = _("{B_BUTTON} Return to Menu {START_BUTTON} Return to Overworld");
+static const u8 sStartMenuStrings_SaveResControlReturnOverworld[] = _("{B_BUTTON} Return to Overworld");
 
 static const u8 *const sStartMenuStrings_SaveResult[NUM_START_SAVE_RESULTS] =
 {
@@ -1146,6 +1149,7 @@ static void Task_StartMenu_SlideOut(u8 taskId)
     struct Task *task = &gTasks[taskId];
     if (task->tSlideY == 0)
     {
+        PlaySE(SE_PC_OFF);
         for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
         {
              u8 *spriteIds = sStartMenuDataPtr->spriteIds;
@@ -1423,48 +1427,50 @@ static void StartMainSprite_PartyMon(void)
     if (!gPlayerPartyCount)
         return;
 
-    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        species = GetMonData(&mon[i], MON_DATA_SPECIES_OR_EGG), healthPercentage = MonStatus_GetHealthPercentage(&mon[i]);
-        isEgg = (species == SPECIES_EGG);
-        species = ReturnTransformationIfConditionMet(&mon[i]);
-        status = GetMonData(&mon[i], MON_DATA_STATUS);
+        if (spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + i] == SPRITE_NONE)
+        {
+            // platform is always shown
+            spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + i] =
+                CreateSprite(&sMonStatus_PlatformSpriteTemplate, START_PARTY_MON_X, START_MON_PLATFORM_Y, 2);
 
-        if (spriteIds[START_MAIN_SPRITE_MON_ICONS + i] != SPRITE_NONE)
-            continue;
+           sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + i]];
+           sprite->x2 = MonStatus_GetXIconCoord(i);
+           sprite->y2 = MonStatus_GetYIconCoord(i);
+        }
 
-        if (!species || species >= NUM_SPECIES)
-            break;
+        species = GetMonData(&mon[i], MON_DATA_SPECIES_OR_EGG);
+        if (spriteIds[START_MAIN_SPRITE_MON_ICONS + i] == SPRITE_NONE && (species && species <= NUM_SPECIES))
+        {
+            healthPercentage = MonStatus_GetHealthPercentage(&mon[i]);
+            isEgg = (species == SPECIES_EGG);
+            species = ReturnTransformationIfConditionMet(&mon[i]);
+            status = GetMonData(&mon[i], MON_DATA_STATUS);
 
-        LoadMonIconPalette(species);
-        spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
-            CreateMonIcon(species, MonStatus_GetSpriteCB(healthPercentage, isEgg),
-                          START_PARTY_MON_X, START_PARTY_MON_Y, 0, GetMonData(&mon[i], MON_DATA_PERSONALITY));
+            LoadMonIconPalette(species);
+            spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
+                CreateMonIcon(species, MonStatus_GetSpriteCB(healthPercentage, isEgg),
+                              START_PARTY_MON_X, START_PARTY_MON_Y, 0, GetMonData(&mon[i], MON_DATA_PERSONALITY));
 
-        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]];
-        sprite->subpriority = 3;
-        sprite->oam.priority = 0;
-        sprite->x2 = MonStatus_GetXIconCoord(i);
-        sprite->y2 = MonStatus_GetYIconCoord(i);
+            sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]];
+            sprite->subpriority = 3;
+            sprite->oam.priority = 0;
+            sprite->x2 = MonStatus_GetXIconCoord(i);
+            sprite->y2 = MonStatus_GetYIconCoord(i);
 
-        spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + i] =
-            CreateSprite(&sMonStatus_PlatformSpriteTemplate, START_PARTY_MON_X, START_MON_PLATFORM_Y, 2);
+            if (!isEgg && spriteIds[START_MAIN_SPRITE_MON_STATUS + i] == SPRITE_NONE)
+            {
+                spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
+                    CreateSprite(&sMonStatus_SpriteTemplate, (((status & STATUS1_ANY) || !healthPercentage) ? 4 : 0) + 16,
+                                 START_MON_STATUS_Y, 0);
 
-        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + i]];
-        sprite->x2 = MonStatus_GetXIconCoord(i);
-        sprite->y2 = MonStatus_GetYIconCoord(i);
-
-        if (isEgg || spriteIds[START_MAIN_SPRITE_MON_STATUS + i] != SPRITE_NONE)
-            continue;
-
-        spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
-            CreateSprite(&sMonStatus_SpriteTemplate, (((status & STATUS1_ANY) || !healthPercentage) ? 4 : 0) + 16,
-                         START_MON_STATUS_Y, 0);
-
-        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_STATUS + i]];
-        MonStatus_InjectStatusGraphics(sprite, status, healthPercentage);
-        sprite->x2 = MonStatus_GetXIconCoord(i);
-        sprite->y2 = MonStatus_GetYIconCoord(i);
+                sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_STATUS + i]];
+                MonStatus_InjectStatusGraphics(sprite, status, healthPercentage);
+                sprite->x2 = MonStatus_GetXIconCoord(i);
+                sprite->y2 = MonStatus_GetYIconCoord(i);
+            }
+        }
     }
 }
 
@@ -1476,9 +1482,6 @@ static void StartMainSprite_DaycareMon(void)
     struct Sprite *sprite = NULL;
     u32 i, species, item, numEggs, numMons = CountPokemonInDaycare(daycare);
 
-    if (!numMons)
-        return;
-
     for (i = 0, numEggs = 0; i < SILICON_DAYCARE_EGG_MAX; i++)
     {
         if (GetBoxMonData(&daycare->daycareEgg[i].egg, MON_DATA_IS_EGG))
@@ -1488,53 +1491,56 @@ static void StartMainSprite_DaycareMon(void)
     AllocItemIconTemporaryBuffers();
 
     // no eggs here!!
-    for (i = 0; i < numMons; i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
+        if (spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i] == SPRITE_NONE)
+        {
+            spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i] =
+                CreateSprite(&sMonStatus_PlatformSpriteTemplate, START_DAYCARE_MON_X, START_DAYCARE_MON_PLATFORM_X, 3);
+
+            sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i]];
+            StartSpriteAnim(sprite, TRUE);
+            sprite->x2 = MonStatus_GetXDaycareIconCoord(i);
+            // second mon has v and h flipped platform
+            if (i)
+            {
+                sprite->hFlip = TRUE;
+                sprite->vFlip = TRUE;
+            }
+        }
+
         mon = &daycare->mons[i].mon;
         species = GetBoxMonData(mon, MON_DATA_SPECIES);
-
-        if (spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] != SPRITE_NONE)
-            continue;
-
-        LoadMonIconPalette(species);
-        spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] =
+        if ((species && species <= NUM_SPECIES) && spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] == SPRITE_NONE
+            && numMons)
+        {
+            LoadMonIconPalette(species);
+            spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i] =
             CreateMonIcon(species, SpriteCB_MonIcon, START_DAYCARE_MON_X, START_PARTY_MON_Y, i * 2,
                           GetBoxMonData(mon, MON_DATA_PERSONALITY));
 
-        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i]];
-        sprite->subpriority = 0;
-        sprite->oam.priority = 1;
-        sprite->x2 = MonStatus_GetXDaycareIconCoord(i);
-        sprite->y2 = MonStatus_GetYIconCoord(i);
-        // first mon flips if there's two mons
-        if (!i && numMons > 1)
-            sprite->hFlip = TRUE;
+            sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + PARTY_SIZE + i]];
+            sprite->subpriority = 0;
+            sprite->oam.priority = 1;
+            sprite->x2 = MonStatus_GetXDaycareIconCoord(i);
+            sprite->y2 = MonStatus_GetYIconCoord(i);
+            // first mon flips if there's two mons
+            if (!i && numMons > 1)
+                sprite->hFlip = TRUE;
 
-        spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i] =
-            CreateSprite(&sMonStatus_PlatformSpriteTemplate, START_DAYCARE_MON_X, START_DAYCARE_MON_PLATFORM_X, 3);
+            item = GetBoxMonData(mon, MON_DATA_HELD_ITEM);
+            if ((item && item < ITEMS_COUNT) && spriteIds[START_MAIN_SPRITE_DAYCARE_ITEMS + i] == SPRITE_NONE)
+            {
+                spriteIds[START_MAIN_SPRITE_DAYCARE_ITEMS + i] =
+                    AddCustomItemIconSprite(&sMonStatus_DaycareItemSpriteTemplate, START_TAG_ITEM + i, START_TAG_ITEM + i, item);
 
-        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_PLATFORMS + PARTY_SIZE + i]];
-        StartSpriteAnim(sprite, TRUE);
-        sprite->x2 = MonStatus_GetXDaycareIconCoord(i);
-        // second mon has v and h flipped platform
-        if (i)
-        {
-            sprite->hFlip = TRUE;
-            sprite->vFlip = TRUE;
+                sprite = &gSprites[spriteIds[START_MAIN_SPRITE_DAYCARE_ITEMS + i]];
+                sprite->x = (START_DAYCARE_MON_X - 8);
+                sprite->y = 118 + 16;
+                sprite->x2 = i * 52;
+                sprite->y2 = MonStatus_GetYIconCoord(i);
+            }
         }
-
-        item = GetBoxMonData(mon, MON_DATA_HELD_ITEM);
-        if (item == ITEM_NONE || item >= ITEMS_COUNT)
-            continue;
-
-        spriteIds[START_MAIN_SPRITE_DAYCARE_ITEMS + i] =
-            AddCustomItemIconSprite(&sMonStatus_DaycareItemSpriteTemplate, START_TAG_ITEM + i, START_TAG_ITEM + i, item);
-
-        sprite = &gSprites[spriteIds[START_MAIN_SPRITE_DAYCARE_ITEMS + i]];
-        sprite->x = (START_DAYCARE_MON_X - 8);
-        sprite->y = 118 + 16;
-        sprite->x2 = i * 52;
-        sprite->y2 = MonStatus_GetYIconCoord(i);
     }
 
     // eggs indicator
@@ -1632,6 +1638,14 @@ static void StartPrint_HelpBottomText(void)
         str = sStartMenuStrings_ControlBySaveResults[sStartMenuDataPtr->saveRes];
         if (!str)
             str = sStartMenuStrings_ControlBySaveResults[START_SAVE_IN_PROGRESS];
+
+        if (sStartMenuDataPtr->saveRes >= START_SAVE_SUCCESS)
+        {
+            if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
+                str = sStartMenuStrings_SaveResControlReturnOverworld;
+            else
+                str = sStartMenuStrings_SaveResControlReturnMenu;
+        }
     }
 
     if (sStartMenuDataPtr->customStr)
@@ -2023,7 +2037,6 @@ static void AppGrid_HandleNormalInputs(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_PC_OFF);
         gTasks[taskId].func = Task_StartMenu_SlideOut;
         gTasks[taskId].tSlideY = 0;
         return;
@@ -2050,7 +2063,6 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
     {
         if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
         {
-            PlaySE(SE_PC_OFF);
             gTasks[taskId].func = Task_StartMenu_SlideOut;
             gTasks[taskId].tSlideY = 0;
         }
@@ -2593,12 +2605,17 @@ static void Task_SaveMode_Exit(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
+    if (JOY_NEW(A_BUTTON | START_BUTTON))
+    {
+        task->func = Task_StartMenu_SlideOut;
+        task->tSlideY = 0;
+    }
+
     task->tTimer--;
-    if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
+    if (!task->tTimer || JOY_NEW(B_BUTTON))
     {
         if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
         {
-            PlaySE(SE_PC_OFF);
             task->func = Task_StartMenu_SlideOut;
             task->tSlideY = 0;
         }
@@ -2685,8 +2702,9 @@ static void Task_SaveOverwrite_Load(u8 taskId)
         }
     case START_SAVE_OVERWRITE_SLIDE_IN:
         {
-            tSlideX -= 4;
+            tSlideX -= 16;
             SetGpuReg(REG_OFFSET_BG1HOFS, tSlideX);
+
             if (tSlideX == START_SAVE_OVERWRITE_X_FULLSCREEN) // load tail half of the tilemap, then continue slide
             {
                 CopyRectToBgTilemapBufferRect(START_BG_CAUTIONBOX, sStartMenu_BackgroundGraphics[START_BG_CAUTIONBOX].tilemap,
@@ -2698,9 +2716,10 @@ static void Task_SaveOverwrite_Load(u8 taskId)
                 CopyBgTilemapBufferToVram(START_BG_CAUTIONBOX);
             }
 
-            if (tSlideX == START_SAVE_OVERWRITE_X_CENTERSCREEN)
+            if (tSlideX == (START_SAVE_OVERWRITE_X_CENTERSCREEN - 4))
             {
-                tSlideX = START_SAVE_OVERWRITE_X_CENTERSCREEN;
+                SetGpuReg(REG_OFFSET_BG1HOFS, tSlideX + 4);
+                tSlideX = START_SAVE_OVERWRITE_X_CENTERSCREEN - 4; // 376
 
                 tState++;
                 return;
@@ -2778,14 +2797,29 @@ static void Task_SaveOverwrite_Load(u8 taskId)
         }
     case START_SAVE_OVERWRITE_EXIT:
         {
-            tTimer--;
-            if (!tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
+            if (JOY_NEW(A_BUTTON | START_BUTTON))
             {
                 // unload window
                 FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
+                tReturnToOW = TRUE;
+
+                tTimer = 0;
+                tState++;
+            }
+
+            tTimer--;
+            if (!tTimer || JOY_NEW(B_BUTTON))
+            {
+                // unload window
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                CopyWindowToVram(tWindowId, COPYWIN_FULL);
+                FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
+                CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
+                if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
+                    tReturnToOW = TRUE;
 
                 tTimer = 0;
                 tState++;
@@ -2795,15 +2829,16 @@ static void Task_SaveOverwrite_Load(u8 taskId)
         }
     case START_SAVE_OVERWRITE_SLIDE_OUT:
         {
-            tSlideX -= 4;
+            tSlideX -= 16;
             SetGpuReg(REG_OFFSET_BG1HOFS, tSlideX);
+
             if (tSlideX == (START_SAVE_OVERWRITE_X_FULLSCREEN * 2)) // unload head half of the tilemap
             {
                 FillBgTilemapBufferRect(START_BG_CAUTIONBOX, 0, 32, 0, 32, 32, START_PAL_SLOT_TEXT);
                 CopyBgTilemapBufferToVram(START_BG_CAUTIONBOX);
             }
 
-            if (tSlideX == (START_SAVE_OVERWRITE_X_FULLSCREEN * 3))
+            if (tSlideX <= (START_SAVE_OVERWRITE_X_FULLSCREEN * 3))
             {
                 tSlideX = 0;
 
@@ -2821,32 +2856,40 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             FillBgTilemapBufferRect(START_BG_CAUTIONBOX, 0, 0, 0, 32, 32, START_PAL_SLOT_TEXT);
             CopyBgTilemapBufferToVram(START_BG_CAUTIONBOX);
 
-            // change mode back to normal
-            sStartMenuDataPtr->mode = sStartMenuDataPtr->prevMode;
-            sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
-            sStartMenuDataPtr->saveRes = START_SAVE_INACTIVE;
-
-            // undarken ui
-            BlendPalettes(PALETTES_BG & ~((1 << START_PAL_SLOT_TEXT)), 0, RGB_BLACK);
-
-            // reload everything
-            StartSetup_Text();
-            StartMainSprite_PartyMon();
-
-            // show main sprites
-            for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
+            if (tReturnToOW)
             {
-                u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+                gTasks[taskId].func = Task_StartMenu_SlideOut;
+                gTasks[taskId].tSlideY = 0;
+            }
+            else
+            {
+                // undarken ui
+                BlendPalettes(PALETTES_BG & ~((1 << START_PAL_SLOT_TEXT)), 0, RGB_BLACK);
 
-                if (gSprites[spriteIds[i]].data[7])
+                // change mode back to normal
+                sStartMenuDataPtr->mode = sStartMenuDataPtr->prevMode;
+                sStartMenuDataPtr->prevMode = sStartMenuDataPtr->mode;
+                sStartMenuDataPtr->saveRes = START_SAVE_INACTIVE;
+
+                // reload everything
+                StartSetup_Text();
+                StartMainSprite_PartyMon();
+
+                // show main sprites
+                for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
                 {
-                    gSprites[spriteIds[i]].invisible = FALSE;
-                    gSprites[spriteIds[i]].data[7] = FALSE;
+                    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+                    if (gSprites[spriteIds[i]].data[7])
+                    {
+                        gSprites[spriteIds[i]].invisible = FALSE;
+                        gSprites[spriteIds[i]].data[7] = FALSE;
+                    }
                 }
+
+                gTasks[taskId].func = Task_StartMenu_HandleInput;
             }
 
-
-            gTasks[taskId].func = Task_StartMenu_HandleInput;
             return;
         }
 
@@ -2864,8 +2907,8 @@ static void SaveOverwrite_LoadSprites(void)
     {
         u32 species = sStartMenuPreviousSave.partySpecies[i];
 
-        if (species == SPECIES_NONE)
-            break;
+        if (!species || species > NUM_SPECIES || spriteIds[START_MAIN_SPRITE_MON_ICONS + i] != SPRITE_NONE)
+            continue;
 
         LoadMonIconPalette(species);
         spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
@@ -2909,8 +2952,8 @@ static void SaveOverwrite_DestroySprites(void)
     {
         u32 species = sStartMenuPreviousSave.partySpecies[i];
 
-        if (species == SPECIES_NONE || spriteIds[START_MAIN_SPRITE_MON_ICONS + i] == SPRITE_NONE)
-            break;
+        if (!species || species > NUM_SPECIES || spriteIds[START_MAIN_SPRITE_MON_ICONS + i] == SPRITE_NONE)
+            continue;
 
         FreeAndDestroyMonIconSprite(&gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]]);
         spriteIds[START_MAIN_SPRITE_MON_ICONS + i] = SPRITE_NONE;
