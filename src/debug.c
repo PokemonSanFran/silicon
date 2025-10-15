@@ -5329,6 +5329,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_PASCAL_VS_ULTRA_BEASTS) \
     X(MUS_PASCAL_WHY_DIDNT_YOU_RAT_ME_OUT) \
     X(MUS_CUCUNO_TOWN) \
+    X(MUS_ENCOUNTER_SCIENTIST) \
     X(PH_TRAP_BLEND) \
     X(PH_TRAP_HELD) \
     X(PH_TRAP_SOLO) \
