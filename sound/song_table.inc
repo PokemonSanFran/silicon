@@ -577,6 +577,7 @@ gSongTable::
     song mus_encounter_psychic, 0, 0
     song mus_encounter_fisher, 0, 0
     song mus_halai_island, 0, 0
+    song mus_petarosa_borough, 0, 0
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2

@@ -5300,6 +5300,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_ENCOUNTER_PSYCHIC) \
     X(MUS_ENCOUNTER_FISHER) \
     X(MUS_HALAI_ISLAND) \
+    X(MUS_PETAROSA_BOROUGH) \
     X(PH_TRAP_BLEND) \
     X(PH_TRAP_HELD) \
     X(PH_TRAP_SOLO) \

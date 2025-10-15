@@ -501,8 +501,10 @@ enum
     MUS_ENCOUNTER_PSYCHIC,
     MUS_ENCOUNTER_FISHER,
     MUS_HALAI_ISLAND,
+    MUS_PETAROSA_BOROUGH,
+    MUS_LAST,
 };
-#define END_MUS MUS_HALAI_ISLAND
+#define END_MUS (MUS_LAST - 1)
 
 
 // Original JP names listed on right, along with any additional notes
