@@ -1042,35 +1042,6 @@ u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted)
 }
 
 // ***********************************************************************
-// Battle Settings: Points Summary
-// ***********************************************************************
-
-static u32 GetPointsSummaryOption(void)
-{
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_SUMMARY];
-}
-
-bool32 IsPointsSummaryOff(void)
-{
-    return (GetPointsSummaryOption() == BATTLE_OPTION_POINTS_SUMMARY_OFF);
-}
-
-bool32 IsPointsSummaryOn(void)
-{
-    return (GetPointsSummaryOption() != BATTLE_OPTION_POINTS_SUMMARY_OFF);
-}
-
-bool32 IsPointsSummaryFaint(void)
-{
-    return (GetPointsSummaryOption() != BATTLE_OPTION_POINTS_SUMMARY_FAINT);
-}
-
-bool32 IsPointsSummaryBattle(void)
-{
-    return (GetPointsSummaryOption() != BATTLE_OPTION_POINTS_SUMMARY_BATTLE);
-}
-
-// ***********************************************************************
 // Battle Settings: Mid Battle Evolution
 // ***********************************************************************
 
