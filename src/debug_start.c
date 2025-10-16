@@ -271,4 +271,5 @@ void DebugStart_NewGame(void)
 	gFieldCallback2 = NULL;
 	DoMapLoadLoop(&gMain.state);
 	SetFieldVBlankCallback();
+    gDifferentSaveFile = FALSE;
 }

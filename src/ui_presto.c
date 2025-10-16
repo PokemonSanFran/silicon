@@ -154,6 +154,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .paletteNum = 0,    // palette index to use for text
         .baseBlock = 1,     // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const u32 sMenuTiles[]       = INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol");

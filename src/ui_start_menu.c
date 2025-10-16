@@ -98,7 +98,7 @@
 #define START_MAIN_SPRITE_MON_PLATFORMS_SIZE (16)
 
 // text window width
-#define TIME_WINDOW_WIDTH      10
+#define TIME_WINDOW_WIDTH      13
 #define MAP_NAME_WINDOW_WIDTH  10
 
 // palette slots
@@ -147,7 +147,7 @@
 #define X_CENTER_ALIGN      (-1)
 #define Y_CENTER_ALIGN      1
 
-#define START_DEFAULT_TIMER 60
+#define START_DEFAULT_TIMER (60 * 3)
 
 // save overwrite
 #define START_SAVE_OVERWRITE_X_FULLSCREEN   (-256)
@@ -519,6 +519,7 @@ static void SaveOverwrite_LoadSprites(void);
 static void SaveOverwrite_DestroySprites(void);
 static inline s32 SaveOverwrite_GetXIconCoord(u32);
 static inline s32 SaveOverwrite_GetYIconCoord(u32);
+static inline u32 SaveMode_GetSaveSE(void);
 
 static void StartMenu_Free(void);
 
@@ -694,9 +695,9 @@ static const u8 *const sStartMenuStrings_TimeOfDay[TIMES_OF_DAY_COUNT] =
 
 static const u8 *const sStartMenuStrings_ControlByModes[NUM_START_MODES] =
 {
-    [START_MODE_NORMAL]      = COMPOUND_STRING("{A_BUTTON} Open {B_BUTTON} Return {SELECT_BUTTON} Reorder {START_BUTTON} Save"),
-    [START_MODE_MOVE]        = COMPOUND_STRING("{A_BUTTON} Place {B_BUTTON} Return to Menu {SELECT_BUTTON} Reorder"),
-    [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = COMPOUND_STRING(" {B_BUTTON} Cancel {START_BUTTON} Save Adventure"),
+    [START_MODE_NORMAL]      = COMPOUND_STRING("{A_BUTTON} Open {B_BUTTON} Return {SELECT_BUTTON} Move {START_BUTTON} Save"),
+    [START_MODE_MOVE]        = COMPOUND_STRING("{A_BUTTON} Place {B_BUTTON} Return to Menu {SELECT_BUTTON} Move"),
+    [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = COMPOUND_STRING("{START_BUTTON} Save Adventure {B_BUTTON} Cancel"),
     [START_MODE_SAVE_FORCE]  = COMPOUND_STRING(""),
 };
 
@@ -704,14 +705,14 @@ static const u8 *const sStartMenuStrings_QuestFlavors[NUM_START_MODES] =
 {
     [START_MODE_NORMAL] = COMPOUND_STRING(" "),
     [START_MODE_MOVE] = COMPOUND_STRING("Move where?"),
-    [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = COMPOUND_STRING("Would you like to save?"),
-    [START_MODE_SAVE_FORCE] = COMPOUND_STRING("Saving...\nDo not turn off the power."),
+    [START_MODE_SAVE_NORMAL ... START_MODE_SAVE_SCRIPT] = gText_SaveYourAdventure,
+    [START_MODE_SAVE_FORCE] = gText_NowSavingAdventure,
 };
 
 static const u8 *const sStartMenuStrings_ControlBySaveResults[] =
 {
     [START_SAVE_INACTIVE ... START_SAVE_IN_PROGRESS] = COMPOUND_STRING(""),
-    [START_SAVE_OVERWRITE] = COMPOUND_STRING("{START_BUTTON} + {A_BUTTON} Overwrite")
+    [START_SAVE_OVERWRITE] = gText_ConfirmOverwrite
 };
 
 static const u8 sStartMenuStrings_SaveResControlReturnMenu[] = _("{B_BUTTON} Return to Menu {START_BUTTON} Return to Overworld");
@@ -720,16 +721,10 @@ static const u8 sStartMenuStrings_SaveResControlReturnOverworld[] = _("{B_BUTTON
 static const u8 *const sStartMenuStrings_SaveResult[NUM_START_SAVE_RESULTS] =
 {
     [START_SAVE_INACTIVE]    = COMPOUND_STRING(""),
-    [START_SAVE_IN_PROGRESS] = COMPOUND_STRING("Saving...\n"
-                                               "Do not turn off the power."),
-
-    [START_SAVE_OVERWRITE]   = COMPOUND_STRING("If you continue, this will overwrite\n"
-                                               "the previously saved adventure and\n"
-                                               "its progress. This cannot be\n"
-                                               "recovered."),
-
-    [START_SAVE_SUCCESS]     = COMPOUND_STRING("Saved the game."),
-    [START_SAVE_FAILURE]     = COMPOUND_STRING("There's a problem saving."),
+    [START_SAVE_IN_PROGRESS] = gText_NowSavingAdventure,
+    [START_SAVE_OVERWRITE]   = gText_EraseOldAdventure,
+    [START_SAVE_SUCCESS]     = gText_YouSaved,
+    [START_SAVE_FAILURE]     = gText_ThereWasAnError,
 };
 
 static const u8 sStartMenuStrings_CellularSignalErrorString[] = _(
@@ -1027,19 +1022,24 @@ void StartMenu_OpenSaveMode(void)
 
 void StartMenu_HoldPreviousSave(void)
 {
-    if (!gDifferentSaveFile && gSaveFileStatus == SAVE_STATUS_EMPTY)
+    DebugPrintf("StartMenu_HoldPreviousSave");
+    if (!gDifferentSaveFile || gSaveFileStatus != SAVE_STATUS_OK)
         return;
 
     memset(&sStartMenuPreviousSave, 0, sizeof(struct StartMenuPreviousSave));
 
     StringCopy(sStartMenuPreviousSave.playerName, gSaveBlock2Ptr->playerName);
+    DebugPrintf("sStartMenuPreviousSave.playerName: %S", sStartMenuPreviousSave.playerName);
     memcpy(&sStartMenuPreviousSave.customValues, &gSaveBlock3Ptr->customizationValues, NUM_CUSTOMIZATION_PARTS * sizeof(u8));
+    DebugPrintf("sStartMenuPreviousSave.customValues: %d", sStartMenuPreviousSave.customValues);
     memcpy(&sStartMenuPreviousSave.rgbValues, &gSaveBlock3Ptr->rgbValues, (NUM_CUSTOM_COLOR_OPTIONS * NUM_COLOR_OPTIONS) * sizeof(u8));
+    DebugPrintf("sStartMenuPreviousSave.rgbValues: %d", sStartMenuPreviousSave.rgbValues);
 
     memset(sStartMenuPreviousSave.partySpecies, SPECIES_NONE, PARTY_SIZE * sizeof(u16));
     for (u32 i = 0; i < gPlayerPartyCount; i++)
     {
         sStartMenuPreviousSave.partySpecies[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        DebugPrintf("sStartMenuPreviousSave.partySpecies[%d]: %d", i, sStartMenuPreviousSave.partySpecies[i]);
     }
 
     memcpy(&sStartMenuPreviousSave.location, &gSaveBlock1Ptr->location, sizeof(struct WarpData));
@@ -1196,6 +1196,7 @@ static void Task_StartMenu_Exit(u8 taskId)
 void CB2_StartMenu_ReturnToUI(void)
 {
     FieldClearVBlankHBlankCallbacks();
+    FreeAllWindowBuffers();
     StartMenu_Init(START_MODE_NORMAL);
 }
 
@@ -1601,22 +1602,18 @@ static void StartPrint_HelpTopText(void)
     x += TILE_TO_PIXELS(2);
     StartPrint_Text(START_MAIN_WIN_HELP_TOP, FONT_SMALL, TIME_WINDOW_WIDTH, x, Y_CENTER_ALIGN, strbuf[0]);
 
-    // MAP ICON
-    x += TILE_TO_PIXELS(TIME_WINDOW_WIDTH);
-    BlitSymbol_Help(START_HELP_SYMBOL_MAP, START_MAIN_WIN_HELP_TOP, x, 0);
-
-    // SPACING
-    StringCopy(strbuf[0], COMPOUND_STRING(" "));
-
     // MAP NAME
-    GetMapName(strbuf[1], gMapHeader.regionMapSectionId, 0);
-    StringAppend(strbuf[0], strbuf[1]);
+    GetMapNameGeneric(strbuf[0], gMapHeader.regionMapSectionId);
 
-    x += TILE_TO_PIXELS(1);
+    x = GetStringRightAlignXOffset(FONT_SMALL, strbuf[0], TILE_TO_PIXELS(START_MAIN_WIN_HELP_WIDTH)) - 19;
     StartPrint_Text(START_MAIN_WIN_HELP_TOP, FONT_SMALL, 10, x, Y_CENTER_ALIGN, strbuf[0]);
 
+    // MAP ICON
+    x -= 16;
+    BlitSymbol_Help(START_HELP_SYMBOL_MAP, START_MAIN_WIN_HELP_TOP, x, 0);
+
     // SIGNAL STRENGTH
-    x = (DISPLAY_WIDTH - 24);
+    x = TILE_TO_PIXELS(START_MAIN_WIN_HELP_WIDTH) - 24;
     BlitSymbol_Help(BlitSymbol_ConvertSignalToHelp(), START_MAIN_WIN_HELP_TOP, x, 0);
 
     CopyWindowToVram(START_MAIN_WIN_HELP_TOP, COPYWIN_FULL);
@@ -1824,7 +1821,6 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
     if (sStartMenuDataPtr->saveRes == START_SAVE_OVERWRITE)
     {
         struct StartMenuPreviousSave *prevSave = &sStartMenuPreviousSave;
-
         StringCopy(gStringVar2, prevSave->playerName);
         GetMapNameGeneric(gStringVar3,
             Overworld_GetMapHeaderByGroupAndId(prevSave->location.mapGroup, prevSave->location.mapNum)->regionMapSectionId);
@@ -2047,7 +2043,7 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
 {
     if (JOY_NEW(START_BUTTON | A_BUTTON))
     {
-        if (gDifferentSaveFile && gSaveFileStatus != SAVE_STATUS_EMPTY)
+        if (gDifferentSaveFile && gSaveFileStatus == SAVE_STATUS_OK)
         {
             SaveOverwrite_Init(taskId);
         }
@@ -2078,7 +2074,7 @@ static void AppGrid_HandleSaveInputs(u8 taskId)
 
 static void AppGrid_HandleMoveInputs(u8 taskId)
 {
-    if (JOY_NEW(A_BUTTON))
+    if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
     {
         if (!StartMoveMode_SwapApps())
         {
@@ -2560,7 +2556,7 @@ static void Task_StrengthError_Init(u8 taskId)
     case START_STRENGTH_ERROR_FINISH:
         {
             task->tTimer--;
-            if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON))
+            if (!task->tTimer || JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON))
             {
                 // reprint back
                 StartPrint_QuestFlavorText();
@@ -2596,6 +2592,7 @@ static void Task_SaveMode_Init(u8 taskId)
 
     StartPrint_QuestFlavorText();
     StartPrint_HelpBottomText();
+    PlaySE(SaveMode_GetSaveSE());
 
     gTasks[taskId].tTimer = START_DEFAULT_TIMER;
     gTasks[taskId].func = Task_SaveMode_Exit;
@@ -2614,6 +2611,8 @@ static void Task_SaveMode_Exit(u8 taskId)
     task->tTimer--;
     if (!task->tTimer || JOY_NEW(B_BUTTON))
     {
+        task->tTimer = 0;
+
         if (sStartMenuDataPtr->mode >= START_MODE_SAVE_SCRIPT)
         {
             task->func = Task_StartMenu_SlideOut;
@@ -2787,6 +2786,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
 
             StartPrint_SaveOverwriteText(taskId);
             StartPrint_HelpBottomText();
+            PlaySE(SaveMode_GetSaveSE());
 
             if (sStartMenuDataPtr->saveRes == START_SAVE_SUCCESS)
                 gDifferentSaveFile = FALSE;
@@ -2974,6 +2974,14 @@ static inline s32 SaveOverwrite_GetXIconCoord(u32 i)
 static inline s32 SaveOverwrite_GetYIconCoord(u32 i)
 {
     return 0 * (i);
+}
+
+static inline u32 SaveMode_GetSaveSE(void)
+{
+    if (sStartMenuDataPtr->saveRes == START_SAVE_SUCCESS)
+        return SE_SAVE;
+    else
+        return SE_BOO;
 }
 
 
