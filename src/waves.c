@@ -261,3 +261,63 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     DUMMY_WIN_TEMPLATE
 };
 
+static const u8 *const Waves_GetTitle(enum GoalEnum goal)
+{
+    return sWavesInformation[goal].title;
+}
+
+static const u8 *const Waves_GetDesc(enum GoalEnum goal)
+{
+    return sWavesInformation[goal].desc;
+}
+
+static const u32* Waves_GetThumbnail(enum GoalEnum goal)
+{
+    return sWavesInformation[goal].thumbnail;
+}
+
+const u16* Waves_GetPalette(enum GoalEnum goalId)
+{
+        return sWavesInformation[goalId].palette;
+}
+
+const u32 Waves_GetGoal(enum GoalEnum goalId)
+{
+        return sWavesInformation[goalId].goal;
+}
+
+const enum SubQuestDefines Waves_GetRelatedSubQuest(enum GoalEnum goalId)
+{
+        return sWavesInformation[goalId].relatedSubQuest;
+}
+
+const enum QuestIdList Waves_GetRelatedQuest(enum GoalEnum goalId)
+{
+    return sWavesInformation[goalId].relatedQuest;
+}
+
+u8 Waves_GetPercentRaised(enum GoalEnum goalId, enum GoalAttributes attribute)
+{
+    return gSaveBlock3Ptr->wavesFunds[attribute];
+}
+
+u8 Waves_GetPlayerPercent(enum GoalEnum goalId)
+{
+    return Waves_GetPercentRaised(goalId, GOAL_PLAYER_PERCENT);
+}
+
+u8 Waves_GetPassivePercent(enum GoalEnum goalId)
+{
+    return Waves_GetPercentRaised(goalId, GOAL_PASSIVE_PERCENT);
+}
+
+u8 Waves_CalculateAmountRaised(enum GoalEnum goalId)
+{
+    u32 combinedPercent = Waves_GetPlayerPercent(goalId) + Waves_GetPassivePercent(goalId);
+    return (Waves_GetGoal(goalId) / combinedPercent);
+}
+
+u8 Waves_CalculateAmountRemaining(enum GoalEnum goalId, enum GoalAttributes attributes)
+{
+    return (Waves_GetGoal(goalId) - Waves_CalculateAmountRaised(goalId));
+};

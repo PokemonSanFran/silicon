@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_WAVES_H
 #define GUARD_CONSTANTS_WAVES_H
 
-enum
+enum GoalEnum
 {
     GOAL_NONE,
     GOAL_FOOD_SECURITY,
@@ -10,6 +10,13 @@ enum
     GOAL_CRIMINAL_REFORM,
     GOAL_LEGAL_DEFENSE,
     GOAL_COUNT,
+};
+
+enum GoalAttributes
+{
+    GOAL_PLAYER_PERCENT,
+    GOAL_PASSIVE_PERCENT,
+    GOAL_PERCENT_COUNT,
 };
 
 enum WavesBackgrounds
