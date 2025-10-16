@@ -52,9 +52,6 @@ static u32 NormalizeRawTrainerLevel(u32);
 // Battle Settings: Points Message
 static u32 GetPointsMessagesOption(void);
 
-// Battle Settings: Points Summary
-static u32 GetPointsSummaryOption(void);
-
 // Battle Settings: Mid Battle Evolution
 static u32 GetMidBattleEvolutionOption(void);
 
