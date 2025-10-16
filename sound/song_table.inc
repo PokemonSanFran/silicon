@@ -570,14 +570,15 @@ gSongTable::
     song mus_encounter_casual_dude, 0, 0
     song mus_encounter_backpacker_hiker, 0, 0
     song mus_hall_of_fame_silicon, 0, 0
-    song mus_glavez_hill, 0, 0
+    song mus_petarosa_borough, 0, 0
     song mus_sharprise_stadium, 0, 0
     song mus_pioca_bridge, 0, 0
     song mus_popidora_pier, 0, 0
     song mus_encounter_psychic, 0, 0
     song mus_encounter_fisher, 0, 0
     song mus_halai_island, 0, 0
-    song mus_petarosa_borough, 0, 0
+    song mus_glavez_hill, 0, 0
+    song mus_encounter_solicitor, 0, 0
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2
