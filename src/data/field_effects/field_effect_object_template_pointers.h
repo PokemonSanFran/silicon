@@ -41,6 +41,8 @@ extern const struct SpriteTemplate gFieldEffectObjectTemplate_BugTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SpotTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_CaveDust;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_Saving;// autoSave
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_RockClimbBlob;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_RockClimbDust;
 
 const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_SHADOW_S]              = &gFieldEffectObjectTemplate_ShadowSmall,
@@ -85,4 +87,6 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_TRACKS_BUG]            = &gFieldEffectObjectTemplate_BugTracks,
     [FLDEFFOBJ_CAVE_DUST]             = &gFieldEffectObjectTemplate_CaveDust,
     [FLDEFFOBJ_SAVING]                = &gFieldEffectObjectTemplate_Saving, // autoSave
+    [FLDEFFOBJ_ROCK_CLIMB_BLOB]       = &gFieldEffectObjectTemplate_RockClimbBlob,
+    [FLDEFFOBJ_ROCK_CLIMB_DUST]       = &gFieldEffectObjectTemplate_RockClimbDust,
 };

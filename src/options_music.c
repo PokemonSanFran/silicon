@@ -107,17 +107,9 @@ bool32 AreSoundEffectsMuted(void)
 // Music Settings: Mute Cries
 // ***********************************************************************
 
-static bool32 AreCriesMuted(void)
+bool32 AreCriesMuted(void)
 {
     return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_MUTE_CRIES];
-}
-
-void ReturnDummyCryIfMuted(u16* species)
-{
-    if (!AreCriesMuted())
-        return;
-
-    *species = CRY_NONE;
 }
 
 // ***********************************************************************

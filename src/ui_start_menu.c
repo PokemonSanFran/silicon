@@ -59,6 +59,7 @@
 #include "ui_main_menu.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
+#include "ui_adventure_guide.h"
 
 //==========DEFINES==========//
 struct MenuResources
@@ -329,8 +330,8 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sMenuTiles[]                       = INCBIN_U32("graphics/start_menu/tiles.4bpp.lz");
-static const u32 sMenuTilemap[]                     = INCBIN_U32("graphics/start_menu/tilemap.bin.lz");
+static const u32 sMenuTiles[]                       = INCBIN_U32("graphics/start_menu/tiles.4bpp.smol");
+static const u32 sMenuTilemap[]                     = INCBIN_U32("graphics/start_menu/tilemap.bin.smolTM");
 
 static const u16 sMenuPalette[]                     = INCBIN_U16("graphics/start_menu/palette.gbapal");
 
@@ -714,7 +715,7 @@ static bool8 Menu_LoadGraphics(void)
         case 1:
             if (FreeTempTileDataBuffersIfPossible() != TRUE)
             {
-                LZDecompressWram(sMenuTilemap, sBg1TilemapBuffer);
+                DecompressDataWithHeaderWram(sMenuTilemap, sBg1TilemapBuffer);
                 sMenuDataPtr->gfxLoadState++;
             }
             break;
@@ -1409,7 +1410,7 @@ void Task_OpenPokenavStartMenu(u8 taskId)
     {
 		PlayRainStoppingSoundEffect();
 		CleanupOverworldWindowsAndTilemaps();
-        CreateTask(Task_OpenMapSystemFromStartMenu, 0);
+        CreateTask(Task_OpenDefaultMapSystemFromStartMenu, 0);
     }
 }
 

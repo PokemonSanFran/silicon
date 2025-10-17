@@ -25,6 +25,7 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
+#include "constants/field_move.h"
 #include "constants/field_poison.h"
 #include "constants/field_specials.h"
 #include "constants/field_tasks.h"
@@ -80,6 +81,7 @@
 #include "constants/siliconDaycare.h" @ siliconDaycare 
 #include "constants/siliconStarter.h" @ siliconStarter
 #include "constants/rtc.h" @ siliconDNS
+#include "constants/ui_adventure_guide.h" @ adventureGuide
 @ End siliconMerge
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"

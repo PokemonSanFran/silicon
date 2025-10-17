@@ -321,7 +321,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_NORMAL,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_NORMAL,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_NORMAL,
@@ -334,7 +334,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_MACH_BIKE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_MACH_BIKE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_MACH_BIKE,
@@ -360,7 +360,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_SURFING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_SURFING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_SURFING,
@@ -373,7 +373,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_UNDERWATER,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_UNDERWATER,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_UNDERWATER,
@@ -386,7 +386,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_FIELD_MOVE,
@@ -399,7 +399,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_FISHING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_FISHING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_FISHING,
@@ -412,7 +412,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_WATERING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_WATERING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_WATERING,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_WATERING,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_WATERING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_WATERING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_WATERING,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_WATERING,
@@ -425,7 +425,7 @@ static const u16 sPlayerAvatarGfxIds[][NUM_ALL_BODY_TYPES] =
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
-        OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
+        OBJ_EVENT_GFX_SILICON_PLAYER_N3_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F2_FIELD_MOVE,
         OBJ_EVENT_GFX_SILICON_PLAYER_F3_FIELD_MOVE,
@@ -512,11 +512,11 @@ static const u16 sPlayerAvatarGfxToStateFlag[NUM_ALL_BODY_TYPES][5][2] =
     },
     [BODY_TYPE_N3] =
     {
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL,     PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE,  PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_ACRO_BIKE,  PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_SURFING,    PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_N3_NORMAL,     PLAYER_AVATAR_FLAG_ON_FOOT},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_N3_MACH_BIKE,  PLAYER_AVATAR_FLAG_MACH_BIKE},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_N3_ACRO_BIKE,  PLAYER_AVATAR_FLAG_ACRO_BIKE},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_N3_SURFING,    PLAYER_AVATAR_FLAG_SURFING},
+        {OBJ_EVENT_GFX_SILICON_PLAYER_N3_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
     },
     [BODY_TYPE_F1] =
     {
@@ -597,8 +597,16 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
             DoPlayerAvatarTransition();
             if (TryDoMetatileBehaviorForcedMovement() == 0)
             {
-                MovePlayerAvatarUsingKeypadInput(direction, newKeys, heldKeys);
-                PlayerAllowForcedMovementIfMovingSameDirection();
+                if (GetFollowerNPCData(FNPC_DATA_FORCED_MOVEMENT) != FALSE)
+                {
+                    gPlayerAvatar.preventStep = TRUE;
+                    CreateTask(Task_MoveNPCFollowerAfterForcedMovement, 1);
+                }
+                else
+                {
+                    MovePlayerAvatarUsingKeypadInput(direction, newKeys, heldKeys);
+                    PlayerAllowForcedMovementIfMovingSameDirection();
+                }
             }
         }
     }
@@ -731,7 +739,11 @@ static bool8 DoForcedMovement(u8 direction, void (*moveFunc)(u8))
         else
         {
             if (collision == COLLISION_LEDGE_JUMP)
+            {
+                SetFollowerNPCData(FNPC_DATA_FORCED_MOVEMENT, FALSE);
                 PlayerJumpLedge(direction);
+            }
+
             playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED_MOVE;
             playerAvatar->runningState = MOVING;
             return TRUE;
@@ -739,12 +751,11 @@ static bool8 DoForcedMovement(u8 direction, void (*moveFunc)(u8))
     }
     else
     {
+        if (PlayerHasFollowerNPC())
+            SetFollowerNPCData(FNPC_DATA_FORCED_MOVEMENT, TRUE);
+
         playerAvatar->runningState = MOVING;
         moveFunc(direction);
-        if (PlayerHasFollowerNPC()
-         && gObjectEvents[GetFollowerNPCObjectId()].invisible == FALSE
-         && FindTaskIdByFunc(Task_MoveNPCFollowerAfterForcedMovement) == TASK_NONE)
-            CreateTask(Task_MoveNPCFollowerAfterForcedMovement, 3);
         return TRUE;
     }
 }
@@ -1026,9 +1037,27 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         }
         else
         {
-            u8 adjustedCollision = collision - COLLISION_STOP_SURFING;
-            if (adjustedCollision > 3)
+            // Player collided with something. Certain collisions have special handling that precludes the normal collision effect.
+            // COLLISION_STOP_SURFING and COLLISION_PUSHED_BOULDER's effects are started by CheckForObjectEventCollision.
+            // COLLISION_LEDGE_JUMP's effect is handled further up in this function, so it will never reach this point.
+            // COLLISION_ROTATING_GATE is unusual however, this was probably included by mistake. When the player walks into a
+            // rotating gate that cannot rotate there is no additional handling, it's just a regular collision. Its exclusion here
+            // means that the player avatar won't update if they encounter this kind of collision. This has two noticeable effects:
+            // - Colliding with it head-on stops the player dead, rather than playing the walking animation and playing a bump sound effect
+            // - Colliding with it by changing direction won't turn the player avatar, their walking animation will just speed up.
+#ifdef BUGFIX
+            if (collision != COLLISION_STOP_SURFING
+             && collision != COLLISION_LEDGE_JUMP
+             && collision != COLLISION_PUSHED_BOULDER)
+#else
+            if (collision != COLLISION_STOP_SURFING
+             && collision != COLLISION_LEDGE_JUMP
+             && collision != COLLISION_PUSHED_BOULDER
+             && collision != COLLISION_ROTATING_GATE)
+#endif
+            {
                 PlayerNotOnBikeCollide(direction);
+            }
             return;
         }
     }
