@@ -1,93 +1,110 @@
 #include "global.h"
 #include "bg.h"
 #include "window.h"
+#include "scanline_effect.h"
+#include "dma3.h"
+#include "overworld.h"
+#include "event_data.h"
+#include "sound.h"
+#include "ui_main_menu.h"
+#include "field_weather.h"
+#include "options_visual.h"
+#include "malloc.h"
 #include "waves.h"
+#include "palette.h"
+#include "task.h"
+#include "ui_adventure_guide.h"
+#include "constants/ui_adventure_guide.h"
+#include "menu.h"
+#include "menu_helpers.h"
 #include "constants/quests.h"
+#include "constants/rgb.h"
 #include "constants/waves.h"
+#include "constants/songs.h"
+#include "data/waves.h"
 
-static struct WavesData sWavesInformation[GOAL_COUNT] =
-{
-    [GOAL_NONE] =
-    {
-        .title = COMPOUND_STRING("???"),
-        .desc = COMPOUND_STRING("???"),
-        .thumbnail = 0,
-        .palette = 0,
-        .goal = 100,
-        .relatedSubQuest = SUB_QUEST_6,
-        .relatedQuest = QUEST_NONE,
-    },
-    [GOAL_FOOD_SECURITY] =
-    {
-        .title = COMPOUND_STRING("Food Security"),
-        .desc = COMPOUND_STRING("Use the mutual aid fund to scale up and be less reliant on Needles, and use that to feed more people."),
-        .thumbnail = 0,
-        .palette = 0,
-        .goal = 400810,
-        .relatedSubQuest = SUB_QUEST_1,
-        .relatedQuest = QUEST_RESTAURANTEXPANSION2,
-    },
+static const u8 *const Waves_GetTitle(enum GoalEnum goal);
+static const u8 *const Waves_GetDesc(enum GoalEnum goal);
+static const u32* Waves_GetThumbnail(enum GoalEnum goal);
+const u16* Waves_GetPalette(enum GoalEnum goalId);
+const u32 Waves_GetGoal(enum GoalEnum goalId);
+const enum SubQuestDefines Waves_GetRelatedSubQuest(enum GoalEnum goalId);
+const enum QuestIdList Waves_GetRelatedQuest(enum GoalEnum goalId);
+u8 Waves_GetPercentRaised(enum GoalEnum goalId, enum GoalAttributes attribute);
+u8 Waves_GetPlayerPercent(enum GoalEnum goalId);
+u8 Waves_GetPassivePercent(enum GoalEnum goalId);
+u8 Waves_CalculateAmountRaised(enum GoalEnum goalId);
+u8 Waves_CalculateAmountRemaining(enum GoalEnum goalId, enum GoalAttributes attributes);
+static void Waves_VBlankCB(void);
+static void Waves_MainCB(void);
+static bool32 Waves_InitializeBackgrounds(void);
+static bool32 AllocZeroedTilemapBuffers(void);
+static void HandleAndShowBgs(void);
+static void SetScheduleBgs(enum WavesBackgrounds backgroundId);
+static bool8 AreTilesOrTilemapEmpty(enum WavesBackgrounds backgroundId);
+static void LoadGraphics(void);
+static void LoadWavesPalettes(void);
+static void PlaySoundStartFadeQuitApp(u8 taskId);
+static void Task_WaitFadeAndExitGracefully(u8 taskId);
+void Waves_FadescreenAndExitGracefully(void);
+static void FreeResources(void);
+static void FreeStructs(void);
+static void FreeBackgrounds(void);
+void Task_OpenPokedexFromStartMenu(u8 taskId);
+static void Waves_InitializeAndSaveCallback(MainCallback callback);
+void Waves_SetupCallback(void);
+static void Waves_InitWindows(void);
+static void Task_Waves_HandleCardInput(u8 taskId);
+static void Waves_OpenGoal(u8 taskId);
+static void Waves_ChangeColumn(s32 direction);
+static void Waves_ChangeRow(s32 direction);
+static void FreeSpritePalettesResetSpriteData(void);
+static bool32 AllocateStructs(void);
+static void Waves_ReturnFromAdventureGuide(void);
+static void ClearAllWindows(void);
+static void Waves_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 
-    [GOAL_HEALTHCARE] =
-    {
-        .title = COMPOUND_STRING("Healthcare"),
-        .desc = COMPOUND_STRING("Use the mutual aid fund to get a doctor working full time to provide healthcare to those who can't otherwise access it."),
-        .thumbnail = 0,
-        .palette = 0,
-        .goal = 64151,
-        .relatedSubQuest = SUB_QUEST_2,
-        .relatedQuest = QUEST_THEBOYWHOCRIESWITHWOLVES,
-    },
+static const u16 wavesPalettesDefault[] = INCBIN_U16("graphics/accept/palettes/default.gbapal");
+static const u16 wavesPalettesBlack[] = INCBIN_U16("graphics/accept/palettes/black.gbapal");
+static const u16 wavesPalettesBlue[] = INCBIN_U16("graphics/accept/palettes/blue.gbapal");
+static const u16 wavesPalettesGreen[] = INCBIN_U16("graphics/accept/palettes/green.gbapal");
+static const u16 wavesPalettesPlatinum[] = INCBIN_U16("graphics/accept/palettes/platinum.gbapal");
+static const u16 wavesPalettesRed[] = INCBIN_U16("graphics/accept/palettes/red.gbapal");
+static const u16 wavesPalettesScarlet[] = INCBIN_U16("graphics/accept/palettes/scarlet.gbapal");
+static const u16 wavesPalettesViolet[] = INCBIN_U16("graphics/accept/palettes/violet.gbapal");
+static const u16 wavesPalettesWhite[] = INCBIN_U16("graphics/accept/palettes/white.gbapal");
+static const u16 wavesPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/yellow.gbapal");
+static const u16 wavesPalettesText[] = INCBIN_U16("graphics/accept/palettes/text.gbapal");
 
-    [GOAL_SOCIAL_HOUSING] =
-    {
-        .title = COMPOUND_STRING("Social Housing"),
-        .desc = COMPOUND_STRING("Building and getting people into community-based housing and getting people off the streets."),
-        .thumbnail = 0,
-        .palette = 0,
-        .goal = 382525,
-        .relatedSubQuest = SUB_QUEST_3,
-        .relatedQuest = QUEST_NEIGHBORHOODCLEANUP3,
-    },
+static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol");
+static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM");
 
-    [GOAL_CRIMINAL_REFORM] =
-    {
-        .title = COMPOUND_STRING("Criminal Reform"),
-        .desc = COMPOUND_STRING("Build programs to help harm victims and those who cause harm reach a place of real healing and justice."),
-        .thumbnail = 0,
-        .palette = 0,
-        .goal = 122161,
-        .relatedSubQuest = SUB_QUEST_4,
-        .relatedQuest = QUEST_FINDTHEGUILTY,
-    },
-
-    [GOAL_LEGAL_DEFENSE] =
-    {
-        .title = COMPOUND_STRING("Legal Defense"),
-        .desc = COMPOUND_STRING("Getting people without the means or funds access to the legal system."),
-        .thumbnail = 0,
-        .palette = 0,
-        .goal = 30351,
-        .relatedSubQuest = SUB_QUEST_5,
-        .relatedQuest = QUEST_BUILDINGSCOPE,
-    },
-};
+EWRAM_DATA struct WavesState *sWavesState = NULL;
+static EWRAM_DATA u8 *sBgTilemapBuffer[BG_WAVES_COUNT] = {NULL};
+static bool8 firstOpen;
 
 static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
 {
-    [BG0_WAVES_BACKGROUND] =
+    [BG0_WAVES_TEXT] =
     {
-        .bg = BG0_WAVES_BACKGROUND,
-        .charBaseIndex = 2,
+        .bg = BG0_WAVES_TEXT,
+        .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .priority = 0,
     },
-    [BG1_WAVES_TEXT] =
+    [BG1_WAVES_INTERFACE] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .priority = 1,
+    },
+    [BG2_WAVES_CHOSEN_BACKGROUND] =
+    {
+        .bg = BG2_WAVES_CHOSEN_BACKGROUND,
         .charBaseIndex = 2,
-        .mapBaseIndex = 31,
-        .priority = 0,
+        .mapBaseIndex = 29,
+        .priority = 2,
     },
 };
 
@@ -95,7 +112,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
 {
     [WIN_WAVES_CARD_HEADER] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,
@@ -105,7 +122,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_1] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -115,7 +132,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_2] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -125,7 +142,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_3] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -135,7 +152,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_4] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -145,7 +162,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_5] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -155,7 +172,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_6] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -165,7 +182,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_GOAL_FOOTER] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = 30,
@@ -180,7 +197,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
 {
     [WIN_WAVES_GOAL_HEADER] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,
@@ -190,7 +207,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_TITLE] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 1,
         .tilemapTop = 3,
         .width = 12,
@@ -200,7 +217,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_DESC] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 0,
         .tilemapTop = 13,
         .width = 30,
@@ -210,7 +227,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_PLAYER] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 15,
         .tilemapTop = 5,
         .width = 13,
@@ -220,7 +237,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_PASSIVE] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 15,
         .tilemapTop = 7,
         .width = 13,
@@ -230,7 +247,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_TOTAL] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 15,
         .tilemapTop = 7,
         .width = 13,
@@ -240,7 +257,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_RAISED] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 14,
         .tilemapTop = 3,
         .width = 15,
@@ -250,7 +267,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_FOOTER] =
     {
-        .bg = BG1_WAVES_TEXT,
+        .bg = BG1_WAVES_INTERFACE,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = 30,
@@ -278,17 +295,17 @@ static const u32* Waves_GetThumbnail(enum GoalEnum goal)
 
 const u16* Waves_GetPalette(enum GoalEnum goalId)
 {
-        return sWavesInformation[goalId].palette;
+    return sWavesInformation[goalId].palette;
 }
 
 const u32 Waves_GetGoal(enum GoalEnum goalId)
 {
-        return sWavesInformation[goalId].goal;
+    return sWavesInformation[goalId].goal;
 }
 
 const enum SubQuestDefines Waves_GetRelatedSubQuest(enum GoalEnum goalId)
 {
-        return sWavesInformation[goalId].relatedSubQuest;
+    return sWavesInformation[goalId].relatedSubQuest;
 }
 
 const enum QuestIdList Waves_GetRelatedQuest(enum GoalEnum goalId)
@@ -321,3 +338,354 @@ u8 Waves_CalculateAmountRemaining(enum GoalEnum goalId, enum GoalAttributes attr
 {
     return (Waves_GetGoal(goalId) - Waves_CalculateAmountRaised(goalId));
 };
+
+static void Waves_VBlankCB(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static void Waves_MainCB(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    DoScheduledBgTilemapCopiesToVram();
+    UpdatePaletteFade();
+}
+
+static bool32 Waves_InitializeBackgrounds(void)
+{
+    ResetAllBgsCoordinates();
+
+    if(!AllocZeroedTilemapBuffers())
+        return FALSE;
+
+    HandleAndShowBgs();
+
+    return TRUE;
+}
+static bool32 AllocZeroedTilemapBuffers(void)
+{
+    enum WavesBackgrounds backgroundId;
+
+    for (backgroundId = 0; backgroundId < BG_WAVES_COUNT; backgroundId++)
+    {
+        sBgTilemapBuffer[backgroundId] = AllocZeroed(BG_SCREEN_SIZE);
+
+        if (sBgTilemapBuffer[backgroundId] == NULL)
+            return FALSE;
+
+        memset(sBgTilemapBuffer[backgroundId],0,BG_SCREEN_SIZE);
+    }
+    return TRUE;
+}
+
+static void HandleAndShowBgs(void)
+{
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, sWavesBgTemplates, NELEMS(sWavesBgTemplates));
+
+    for (enum WavesBackgrounds backgroundId = 0; backgroundId < BG_WAVES_COUNT; backgroundId++)
+    {
+        SetScheduleBgs(backgroundId);
+        ShowBg(backgroundId);
+    }
+}
+
+static void SetScheduleBgs(enum WavesBackgrounds backgroundId)
+{
+    SetBgTilemapBuffer(backgroundId, sBgTilemapBuffer[backgroundId]);
+    ScheduleBgCopyTilemapToVram(backgroundId);
+}
+
+static const u32* const sWavesTilesLUT[] =
+{
+    [0] = NULL,
+    [1] = NULL,
+    [2] = NULL,
+    [3] = siliconBgTiles,
+};
+
+static const u32* const sWavesTilemapLUT[] =
+{
+    [0] = NULL,
+    [1] = NULL,
+    [2] = NULL,
+    [3] = siliconBgTilemap,
+};
+
+static const u16* const sWavesPalettesLUT[] =
+{
+    [VISUAL_OPTION_COLOR_RED] = wavesPalettesRed,
+    [VISUAL_OPTION_COLOR_GREEN] = wavesPalettesGreen,
+    [VISUAL_OPTION_COLOR_BLUE] = wavesPalettesBlue,
+    [VISUAL_OPTION_COLOR_YELLOW] = wavesPalettesYellow,
+    [VISUAL_OPTION_COLOR_BLACK] = wavesPalettesBlack,
+    [VISUAL_OPTION_COLOR_WHITE] = wavesPalettesWhite,
+    [VISUAL_OPTION_COLOR_PLATINUM] = wavesPalettesPlatinum,
+    [VISUAL_OPTION_COLOR_SCARLET] = wavesPalettesScarlet,
+    [VISUAL_OPTION_COLOR_VIOLET] = wavesPalettesViolet,
+    [VISUAL_OPTION_COLOR_CUSTOM] = wavesPalettesDefault,
+    [VISUAL_OPTION_COLOR_COUNT] = wavesPalettesDefault,
+};
+
+static bool8 AreTilesOrTilemapEmpty(enum WavesBackgrounds backgroundId)
+{
+    return (sWavesTilesLUT[backgroundId] == NULL || sWavesTilesLUT[backgroundId] == NULL);
+}
+
+static void LoadGraphics(void)
+{
+    u32 backgroundId;
+    ResetTempTileDataBuffers();
+    for (backgroundId = BG0_WAVES_TEXT; backgroundId < BG_WAVES_COUNT; backgroundId++)
+    {
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
+        DecompressAndLoadBgGfxUsingHeap(backgroundId, sWavesTilesLUT[backgroundId], 0, 0, 0);
+        CopyToBgTilemapBuffer(backgroundId, sWavesTilemapLUT[backgroundId],0,0);
+    }
+    LoadWavesPalettes();
+}
+
+static void LoadWavesPalettes(void)
+{
+    LoadPalette(sWavesPalettesLUT[GetVisualColor()], WAVES_PALETTE_INTERFACE_SLOT, PLTT_SIZE_4BPP);
+    LoadPalette(wavesPalettesText, WAVES_PALETTE_TEXT_SLOT, PLTT_SIZE_4BPP);
+}
+
+static void ClearWindowCopyToVram(u32 windowId)
+{
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void PlaySoundStartFadeQuitApp(u8 taskId)
+{
+    PlaySE(SE_PC_OFF);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_WaitFadeAndExitGracefully;
+}
+
+static void Task_WaitFadeAndExitGracefully(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    SetMainCallback2(sWavesState->savedCallback);
+    FreeResources();
+    DestroyTask(taskId);
+}
+
+void Waves_FadescreenAndExitGracefully(void)
+{
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_WaitFadeAndExitGracefully,0);
+    SetVBlankCallback(Waves_VBlankCB);
+    SetMainCallback2(Waves_MainCB);
+}
+
+static void FreeResources(void)
+{
+    FreeSpritePalettesResetSpriteData();
+    FreeStructs();
+    FreeBackgrounds();
+    FreeAllWindowBuffers();
+}
+
+static void FreeStructs(void)
+{
+    if (sWavesState != NULL)
+        Free(sWavesState);
+}
+
+static void FreeBackgrounds(void)
+{
+    enum WavesBackgrounds backgroundId;
+
+    for (backgroundId = 0; backgroundId < BG_WAVES_COUNT; backgroundId++)
+        if (sBgTilemapBuffer[backgroundId] != NULL)
+            Free(sBgTilemapBuffer[backgroundId]);
+}
+
+void Task_OpenWavesFromStartMenu(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    StartMenu_Menu_FreeResources();
+    PlayRainStoppingSoundEffect();
+    CleanupOverworldWindowsAndTilemaps();
+    Waves_InitializeAndSaveCallback(CB2_ReturnToUIMenu);
+    DestroyTask(taskId);
+}
+
+static void Waves_InitializeAndSaveCallback(MainCallback callback)
+{
+    enum AdventureGuideList targetGuide = GUIDE_WAVES_OF_CHANGE;
+
+    if (!shouldSkipGuide(targetGuide))
+    {
+        VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN,targetGuide);
+        gMain.savedCallback = callback;
+        Adventure_Guide_Init(Waves_ReturnFromAdventureGuide);
+        return;
+    }
+
+    if (AllocateStructs())
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+    //SaveCallbackToPokedex(CB2_ReturnToUIMenu);
+    SetMainCallback2(Waves_SetupCallback);
+}
+
+
+void Waves_SetupCallback(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+            SetVBlankHBlankCallbacksToNull();
+            ClearScheduledBgCopiesToVram();
+            gMain.state++;
+            break;
+        case 1:
+            ScanlineEffect_Stop();
+            ResetPaletteFade();
+            ResetTasks();
+            FreeSpritePalettesResetSpriteData();
+            gMain.state++;
+            break;
+        case 2:
+            CreateTask(Task_Waves_HandleCardInput,0);
+            Waves_InitializeBackgroundsAndLoadBackgroundGraphics();
+            gMain.state++;
+            break;
+        case 3:
+            Waves_InitWindows();
+            gMain.state++;
+            break;
+        case 4:
+            gMain.state++;
+            break;
+        case 5:
+            gMain.state++;
+            break;
+        case 6:
+            ClearAllWindows();
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            //PrintMenuHeader(WIN_WAVES_CARD_HEADER);
+            //PrintHelpBar(WIN_WAVES_CARD_FOOTER);
+            if (firstOpen)
+                PlaySE(SE_PC_LOGIN);
+            gMain.state++;
+            break;
+        case 7:
+            firstOpen = FALSE;
+            SetVBlankCallback(Waves_VBlankCB);
+            SetMainCallback2(Waves_MainCB);
+            break;
+    }
+}
+
+static void Waves_InitWindows(void)
+{
+    InitWindows(sWavesGridWindows);
+    DeactivateAllTextPrinters();
+}
+
+static void Task_Waves_HandleCardInput(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON) || JOY_HELD(B_BUTTON))
+    {
+        Waves_FadescreenAndExitGracefully();
+    }
+
+    if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON) || JOY_HELD(A_BUTTON))
+    {
+        Waves_OpenGoal(taskId);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN) || JOY_HELD(DPAD_DOWN))
+    {
+        Waves_ChangeColumn(1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP) || JOY_HELD(DPAD_UP))
+    {
+        Waves_ChangeColumn(-1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT) || JOY_HELD(DPAD_LEFT))
+    {
+        Waves_ChangeRow(-1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT) || JOY_HELD(DPAD_RIGHT))
+    {
+        Waves_ChangeRow(1);
+        return;
+    }
+}
+
+static void Waves_OpenGoal(u8 taskId)
+{
+    return;
+}
+
+static void Waves_ChangeColumn(s32 direction)
+{
+    return;
+}
+
+static void Waves_ChangeRow(s32 direction)
+{
+    return;
+}
+
+static void FreeSpritePalettesResetSpriteData(void)
+{
+    ResetSpriteData();
+    FreeSpriteTileRanges();
+    FreeAllSpritePalettes();
+    ClearDma3Requests();
+}
+
+static bool32 AllocateStructs(void)
+{
+    sWavesState = AllocZeroed(sizeof(struct WavesState));
+
+    return (sWavesState == NULL
+           );
+}
+
+static void ClearAllWindows(void)
+{
+    for (enum AdventureWindows windowId = 0; windowId < WINDOW_ADVENTURE_COUNT; windowId++)
+        ClearWindowCopyToVram(windowId);
+}
+
+static void Waves_ReturnFromAdventureGuide(void)
+{
+    Waves_InitializeAndSaveCallback(gMain.savedCallback);
+}
+
+static void Waves_InitializeBackgroundsAndLoadBackgroundGraphics(void)
+{
+    if (Waves_InitializeBackgrounds())
+        LoadGraphics();
+    else
+        Waves_FadescreenAndExitGracefully();
+}
+

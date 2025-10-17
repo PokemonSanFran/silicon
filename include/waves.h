@@ -14,4 +14,9 @@ struct WavesData
     const enum QuestIdList relatedQuest;
 };
 
+struct WavesState
+{
+    void* savedCallback;
+};
+
 #endif // GUARD_WAVES_H
