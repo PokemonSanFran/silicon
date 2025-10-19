@@ -60,6 +60,7 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "ui_adventure_guide.h"
+#include "waves.h"
 
 //==========DEFINES==========//
 struct MenuResources
@@ -1711,7 +1712,8 @@ static void Task_MenuMain(u8 taskId)
                     if(GetCurrentSignal() != 0){
                         PlaySE(SE_SELECT);
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                        gTasks[taskId].func = Task_OpenPrestoStartMenu;
+                        //gTasks[taskId].func = Task_OpenPrestoStartMenu;
+                        gTasks[taskId].func = Task_OpenWavesFromStartMenu;
                     }
                     else{
                         PlaySE(SE_BOO);

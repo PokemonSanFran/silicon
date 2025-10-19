@@ -21,4 +21,13 @@ const struct AdventureGuideData AdventureGuideInfo[] =
             COMPOUND_STRING("When looking for a specific Pokémon to add to your party, the Pokédex's filter functionality allows for advanced searching and filtering to find the right Pokémon to solve any problem."),
         },
     },
+    [GUIDE_WAVES_OF_CHANGE] =
+    {
+        .title = COMPOUND_STRING("Waves of Change"),
+        .isAdvancedGuide = ADVENTURE_GUIDE_ADVANCED,
+        .description =
+        {
+            COMPOUND_STRING("Help contribute to the Mutual Aid Fund! You can donate to any of the five different causes. Citizens from all over Resido will also contribute to the fund!"),
+        },
+    },
 };

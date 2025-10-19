@@ -19,4 +19,6 @@ struct WavesState
     void* savedCallback;
 };
 
+void Task_OpenWavesFromStartMenu(u8 taskId);
+
 #endif // GUARD_WAVES_H

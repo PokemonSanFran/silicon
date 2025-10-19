@@ -50,7 +50,6 @@ void Waves_FadescreenAndExitGracefully(void);
 static void FreeResources(void);
 static void FreeStructs(void);
 static void FreeBackgrounds(void);
-void Task_OpenPokedexFromStartMenu(u8 taskId);
 static void Waves_InitializeAndSaveCallback(MainCallback callback);
 void Waves_SetupCallback(void);
 static void Waves_InitWindows(void);
@@ -76,12 +75,21 @@ static const u16 wavesPalettesWhite[] = INCBIN_U16("graphics/accept/palettes/whi
 static const u16 wavesPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/yellow.gbapal");
 static const u16 wavesPalettesText[] = INCBIN_U16("graphics/accept/palettes/text.gbapal");
 
-static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol");
-static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM");
+static const u32 wavesInterfaceTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.4bpp.smol");
+static const u32 wavesInterfaceTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.bin.smolTM");
+
+static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/bg.4bpp.smol");
+static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/bg.bin.smolTM");
 
 EWRAM_DATA struct WavesState *sWavesState = NULL;
 static EWRAM_DATA u8 *sBgTilemapBuffer[BG_WAVES_COUNT] = {NULL};
 static bool8 firstOpen;
+
+const u8 sWavesWindowFontColors[][3] =
+{
+    [WAVES_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
+    [WAVES_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
+};
 
 static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
 {
@@ -112,7 +120,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
 {
     [WIN_WAVES_CARD_HEADER] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,
@@ -122,7 +130,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_1] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -132,7 +140,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_2] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -142,7 +150,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_3] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -152,7 +160,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_4] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -162,7 +170,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_5] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -172,7 +180,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_CARD_6] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 8,
@@ -182,7 +190,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
     },
     [WIN_WAVES_GOAL_FOOTER] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = 30,
@@ -197,7 +205,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
 {
     [WIN_WAVES_GOAL_HEADER] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,
@@ -207,7 +215,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_TITLE] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 1,
         .tilemapTop = 3,
         .width = 12,
@@ -217,7 +225,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_DESC] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 13,
         .width = 30,
@@ -227,7 +235,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_PLAYER] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 15,
         .tilemapTop = 5,
         .width = 13,
@@ -237,7 +245,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_PASSIVE] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 15,
         .tilemapTop = 7,
         .width = 13,
@@ -247,7 +255,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_TOTAL] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 15,
         .tilemapTop = 7,
         .width = 13,
@@ -257,7 +265,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_RAISED] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 14,
         .tilemapTop = 3,
         .width = 15,
@@ -267,7 +275,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
     },
     [WIN_WAVES_GOAL_FOOTER] =
     {
-        .bg = BG1_WAVES_INTERFACE,
+        .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = 30,
@@ -402,18 +410,18 @@ static void SetScheduleBgs(enum WavesBackgrounds backgroundId)
 
 static const u32* const sWavesTilesLUT[] =
 {
-    [0] = NULL,
-    [1] = NULL,
-    [2] = NULL,
-    [3] = siliconBgTiles,
+    [BG0_WAVES_TEXT] = NULL,
+    [BG1_WAVES_INTERFACE] = wavesInterfaceTiles,
+    [BG2_WAVES_CHOSEN_BACKGROUND] = siliconBgTiles,
+    [BG3_WAVES_NOTHING] = NULL,
 };
 
 static const u32* const sWavesTilemapLUT[] =
 {
-    [0] = NULL,
-    [1] = NULL,
-    [2] = NULL,
-    [3] = siliconBgTilemap,
+    [BG0_WAVES_TEXT] = NULL,
+    [BG1_WAVES_INTERFACE] = wavesInterfaceTilemap,
+    [BG2_WAVES_CHOSEN_BACKGROUND] = siliconBgTilemap,
+    [BG3_WAVES_NOTHING] = NULL,
 };
 
 static const u16* const sWavesPalettesLUT[] =
@@ -442,8 +450,12 @@ static void LoadGraphics(void)
     ResetTempTileDataBuffers();
     for (backgroundId = BG0_WAVES_TEXT; backgroundId < BG_WAVES_COUNT; backgroundId++)
     {
+        DebugPrintf("before %d",backgroundId);
+
         if (AreTilesOrTilemapEmpty(backgroundId))
             continue;
+
+        DebugPrintf("after %d",backgroundId);
 
         DecompressAndLoadBgGfxUsingHeap(backgroundId, sWavesTilesLUT[backgroundId], 0, 0, 0);
         CopyToBgTilemapBuffer(backgroundId, sWavesTilemapLUT[backgroundId],0,0);
@@ -454,6 +466,7 @@ static void LoadGraphics(void)
 static void LoadWavesPalettes(void)
 {
     LoadPalette(sWavesPalettesLUT[GetVisualColor()], WAVES_PALETTE_INTERFACE_SLOT, PLTT_SIZE_4BPP);
+
     LoadPalette(wavesPalettesText, WAVES_PALETTE_TEXT_SLOT, PLTT_SIZE_4BPP);
 }
 
@@ -581,7 +594,7 @@ void Waves_SetupCallback(void)
         case 6:
             ClearAllWindows();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-            //PrintMenuHeader(WIN_WAVES_CARD_HEADER);
+            PrintMenuHeader(WIN_WAVES_CARD_HEADER);
             //PrintHelpBar(WIN_WAVES_CARD_FOOTER);
             if (firstOpen)
                 PlaySE(SE_PC_LOGIN);
@@ -689,3 +702,17 @@ static void Waves_InitializeBackgroundsAndLoadBackgroundGraphics(void)
         Waves_FadescreenAndExitGracefully();
 }
 
+static void Waves_PrintMenuHeader(enum WavesWindowsGrid windowId);
+{
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Waves_PrintHeaderText(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static void Waves_PrintHeaderText(enum WavesWindowsGrid windowId)
+{
+    u32 fontId = FONT_WAVES_TITLE;
+    u32 x = 4;
+    u32 y = 0;
+    AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
