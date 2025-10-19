@@ -109,6 +109,15 @@ def generate_encounters(map_name, display_name, json_file='src/data/wild_encount
                         f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\tphenomenon_mons\t"
                     )
 
+        # Rock Smash encounters
+        if 'rock_smash_mons' in encounter_data:
+            for mon in encounter_data['rock_smash_mons']['mons'][:20]:
+                if mon['species'] != 'SPECIES_NONE':
+                    species = format_species_name(mon['species'])
+                    output.append(
+                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\trock_smash_mons\t"
+                    )
+
     # Join all output lines
     output_text = '\n'.join(output)
     
