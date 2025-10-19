@@ -159,9 +159,9 @@ script EnterTheMaster_ClearingIntro_Dialogue
         applymovement(PLAYER,EnterTheMaster_ApproachArmando)
         waitmovement(0)
 
-        msgbox(format("Charlotte! {PLAYER}! Welcome to LeaverraForest. Excellent work so far!"),,SPEAKER_ARMANDO)
-
-        msgbox(format("Thanks. You're Armando?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+	msgbox(format("Charlotte and {PLAYER}! Welcome to the deepest part of Leaverra Forest."),,SPEAKER_ARMANDO)
+	msgbox(format("Geez, I forgot... they're still just a kid."),,SPEAKER_ARMANDO,TAIL_WHISPER,EMOTE_CONFUSE)
+        msgbox(format("Are you Armando?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 
         reveal(REVEAL_ARMANDO)
         msgbox(format("Yeah! And my notebook?"),,SPEAKER_ARMANDO)
