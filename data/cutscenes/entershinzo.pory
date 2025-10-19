@@ -3,29 +3,29 @@ const SHINZO = 1
 
 script EnterShinzo_ShinzoIntro_Dialogue
 {
-        setvar(VAR_GYM_2_STATE, GYM_SAVE_BEFORE_LEADER)
-        msgbox(format("Congratulations on reaching the summit, {PLAYER}! I'm Shinzo."),MSGBOX_NPC,SPEAKER_SHINZO)
-        reveal(REVEAL_SHINZO)
-                msgbox(format("Most Trainers are totally worn out when they reach me. Are you a foreigner?"),,SPEAKER_SHINZO)
-                msgbox(format("Yeah, from Orre."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("Ah yes. Many mountains, like Sinnoh. Sinnoh is a physically demanding region. The slopes, mountains, and marshes... Trainers have to train their bodies and minds alongside their Pokémon! "),,SPEAKER_SHINZO)
-        msgbox(format("But in Resido, everything is so flat and stale and uninspired... and pudgy. "),,SPEAKER_SHINZO)
-                msgbox(format("Flat? I hiked up a mountain just to get here!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-                closemessage
-                applymovement(SHINZO,Common_Movement_FaceAwayPlayer)
-        msgbox(format("And ToraTown... this cheap imitation. These people have no idea what Sinnoh is! They've bastardized our traditions and cultures. I'll show you how a true trainer from Sinnoh battles!"),,SPEAKER_SHINZO,TAIL_SHOUT)
-                applymovement(SHINZO,Common_Movement_FacePlayer)
-                closemessage
-        startmenu_savescreen
-        closemessage
-        goto(EnterShinzo_StartGymBattle_Script)
+	setvar(VAR_GYM_2_STATE, GYM_SAVE_BEFORE_LEADER)
+		msgbox(format("Congratulations on reaching the summit, {PLAYER}! I'm Shinzo."),MSGBOX_NPC,SPEAKER_SHINZO)
+		reveal(REVEAL_SHINZO)
+		msgbox(format("Most Trainers are totally worn out when they reach me. Are you a foreigner?"),,SPEAKER_SHINZO)
+		msgbox(format("Yeah, from Orre."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+		msgbox(format("Ah yes. Many mountains, like Sinnoh. Sinnoh is a physically demanding region. The slopes, mountains, and marshes... Trainers have to train their bodies and minds alongside their Pokémon! "),,SPEAKER_SHINZO)
+		msgbox(format("But in Resido, everything is so flat and stale and uninspired... and pudgy. "),,SPEAKER_SHINZO)
+		msgbox(format("Flat? I hiked up a mountain just to get here!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+		closemessage
+		applymovement(SHINZO,Common_Movement_FaceAwayPlayer)
+		msgbox(format("And ToraTown... this cheap imitation. These people have no idea what Sinnoh is! They've bastardized our traditions and cultures. Even my team has been ruined - I was forbidden from bringing half of my Pokemon from Sinnoh!"),,SPEAKER_SHINZO,TAIL_SHOUT,EMOTE_ANGRY)
+		applymovement(SHINZO,Common_Movement_FacePlayer)
+		closemessage
+		startmenu_savescreen
+		closemessage
+		goto(EnterShinzo_StartGymBattle_Script)
 }
 
 script EnterShinzo_StartGymBattle_Script
 {
     lock
     faceplayer
-    msgbox(format("En garde!"),,SPEAKER_SHINZO,TAIL_SHOUT)
+    msgbox(format("Trainers from Sinnoh can overcome anything, even running a team infested with mongrels!"),,SPEAKER_SHINZO,TAIL_SHOUT)
     closemessage
     trainerbattle_no_intro(TRAINER_SHINZO, gText_EnterShinzo_ItsAnHonorToLose)
     goto(EnterShinzo_ShinzoDefeated_Script)
