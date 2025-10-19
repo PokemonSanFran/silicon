@@ -47000,6 +47000,547 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_HODOU_CITY_TUNNEL",
+          "base_label": "gHodouCity_Tunnel_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLANG"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLANG"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLANG"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_KLINKLANG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HODOU_CITY_TUNNEL",
+          "base_label": "gHodouCity_Tunnel_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HODOU_CITY_TUNNEL",
+          "base_label": "gHodouCity_Tunnel_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HODOU_CITY_TUNNEL",
+          "base_label": "gHodouCity_Tunnel_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 75,
+                "species": "SPECIES_WOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 75,
+                "species": "SPECIES_SWOOBAT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEINO"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUSHARNA"
+              }
+            ]
+          }
         }
       ]
     },
