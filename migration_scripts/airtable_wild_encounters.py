@@ -79,7 +79,7 @@ def generate_encounters(map_name, display_name, json_file='src/data/wild_encount
                 if mon['species'] != 'SPECIES_NONE':
                     species = format_species_name(mon['species'])
                     output.append(
-                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\twater_mons\t{time_of_day}"
+                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\twater_mons\t"
                     )
 
         # Fishing encounters
@@ -88,7 +88,7 @@ def generate_encounters(map_name, display_name, json_file='src/data/wild_encount
                 if mon['species'] != 'SPECIES_NONE':
                     species = format_species_name(mon['species'])
                     output.append(
-                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\tfishing_mons\t{time_of_day}"
+                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\tfishing_mons\t"
                     )
 
         # Fly encounters
@@ -97,7 +97,16 @@ def generate_encounters(map_name, display_name, json_file='src/data/wild_encount
                 if mon['species'] != 'SPECIES_NONE':
                     species = format_species_name(mon['species'])
                     output.append(
-                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\tfly_mons\t{time_of_day}"
+                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\tfly_mons\t"
+                    )
+
+        # Phenomenon encounters
+        if 'phenomenon_mons' in encounter_data:
+            for mon in encounter_data['phenomenon_mons']['mons'][:20]:
+                if mon['species'] != 'SPECIES_NONE':
+                    species = format_species_name(mon['species'])
+                    output.append(
+                        f"{display_name}\t{species}\t{mon['min_level']}\t{mon['max_level']}\t5\tphenomenon_mons\t"
                     )
 
     # Join all output lines
