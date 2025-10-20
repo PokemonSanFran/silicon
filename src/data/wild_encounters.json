@@ -47541,6 +47541,547 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_IRISINA_TOWN",
+          "base_label": "gIrisinaTown_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GARDEVOIR"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GALLADE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_GRANBULL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_GRANBULL"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 36,
+                "max_level": 43,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_UNFEZANT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_UNFEZANT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_UNFEZANT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 42,
+                "species": "SPECIES_UNFEZANT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_IRISINA_TOWN",
+          "base_label": "gIrisinaTown_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GARDEVOIR"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GALLADE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNUBBULL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_GRANBULL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_GRANBULL"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_IRISINA_TOWN",
+          "base_label": "gIrisinaTown_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GARDEVOIR"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GALLADE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_MABOSSTIFF"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_MABOSSTIFF"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_IRISINA_TOWN",
+          "base_label": "gIrisinaTown_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 44,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GARDEVOIR"
+              },
+              {
+                "min_level": 45,
+                "max_level": 50,
+                "species": "SPECIES_GALLADE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MASCHIFF"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_MABOSSTIFF"
+              },
+              {
+                "min_level": 28,
+                "max_level": 35,
+                "species": "SPECIES_MABOSSTIFF"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              },
+              {
+                "min_level": 31,
+                "max_level": 36,
+                "species": "SPECIES_MIMIKYU"
+              }
+            ]
+          }
         }
       ]
     },
