@@ -115,7 +115,14 @@ struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined wi
     bool8 inL2State;
     u8 warpCounter;
     u8 activeCursorState;
-    u8 cursorFlipped;
+    u8 cursorAnimState;
+};
+
+enum CursorState {
+    CURSOR_UP,
+    CURSOR_DOWN,
+    CURSOR_RIGHT,
+    CURSOR_LEFT,
 };
 
 struct GrayPOI // Struct To Store Gray POI MapSec/Location/Shape for Loading Dynamically
@@ -152,6 +159,8 @@ static void SpriteCB_CursorMapFull(struct Sprite *sprite);
 static void SpriteCB_CursorMapFullLOC(struct Sprite *sprite);
 void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag);
 static void FreeRegionMapSprites(void);
+static void UpdateCursorPositionOnAnimChange();
+static void ResetCursorPositionBeforeAnimChange();
 
 static void InitMapBasedOnPlayerLocation(void);
 static u8 *GetSFMapName(u8 *dest, u16 regionMapId, u16 padLength);
@@ -418,10 +427,24 @@ static const union AnimCmd sRegionMapL2CursorAnim2[] =
     ANIMCMD_JUMP(0)
 };
 
+static const union AnimCmd sRegionMapL2CursorAnim3[] =
+{
+    ANIMCMD_FRAME(128, 1),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sRegionMapL2CursorAnim4[] =
+{
+    ANIMCMD_FRAME(192, 1),
+    ANIMCMD_JUMP(0)
+};
+
 static const union AnimCmd *const sRegionMapL2CursorAnimTable[] =
 {
     sRegionMapL2CursorAnim1,
-    sRegionMapL2CursorAnim2
+    sRegionMapL2CursorAnim2,
+    sRegionMapL2CursorAnim3,
+    sRegionMapL2CursorAnim4
 };
 
 static const struct SpritePalette sRegionMapL2CursorSpritePalette =
@@ -465,21 +488,21 @@ static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] =
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxLZ =
 {
-    .size = 64 * 64 * 2,
+    .size = 64 * 64 * 4,
     .data = sRegionMapCursorL2GfxLZ,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfxLZ =
 {
-    .size = 64 * 64 * 2,
+    .size = 64 * 64 * 4,
     .data = sRegionMapCursorL2TaxiGfxLZ,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfxLZ =
 {
-    .size = 64 * 64 * 2,
+    .size = 64 * 64 * 4,
     .data = sRegionMapCursorL2FlyGfxLZ,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
@@ -1612,17 +1635,38 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         sRegionMap->cursorSprite->y = 8 * sRegionMap->cursorPosY + 4;
         //StartSpriteAnim(sRegionMap->cursorSprite, 0);
 
-        if((sRegionMap->cursorPosY * 8 + 4) >= 80)
+        sRegionMap->cursorSpriteLOC->y += 42;
+
+
+        if((sRegionMap->cursorPosY * 8 + 4) < 40)
         {
-            StartSpriteAnim(sRegionMap->cursorSpriteLOC, 1);
-            sRegionMap->cursorSpriteLOC->y -= 10;
-            sRegionMap->cursorFlipped = TRUE;
+            StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_UP);
+            sRegionMap->cursorAnimState = CURSOR_UP;
+            UpdateCursorPositionOnAnimChange();
         }
-        else
+        else if((sRegionMap->cursorPosX * 8 + 4) >= 208)
         {
-            StartSpriteAnim(sRegionMap->cursorSpriteLOC, 0);
-            sRegionMap->cursorSpriteLOC->y += 16;
-            sRegionMap->cursorFlipped = FALSE;
+            StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_RIGHT);
+            sRegionMap->cursorAnimState = CURSOR_RIGHT;
+            UpdateCursorPositionOnAnimChange();
+        }
+        else if((sRegionMap->cursorPosX * 8 + 4) < 24)
+        {
+            StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_LEFT);
+            sRegionMap->cursorAnimState = CURSOR_LEFT;
+            UpdateCursorPositionOnAnimChange();
+        }
+        else if((sRegionMap->cursorPosY * 8 + 4) >= 80)
+        {
+            StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_DOWN);
+            sRegionMap->cursorAnimState = CURSOR_DOWN;
+            UpdateCursorPositionOnAnimChange();
+        }
+        else if((sRegionMap->cursorPosY * 8 + 4) < 80)
+        {
+            StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_UP);
+            sRegionMap->cursorAnimState = CURSOR_UP;
+            UpdateCursorPositionOnAnimChange();
         }
 
         if (sRegionMap->activeCursorState == CURSOR_TOOLTIP_LOC_STATE)
@@ -1648,14 +1692,59 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         {
             case MAP_MODE_DEFAULT:
             case MAP_MODE_TAXI:
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(2, 0xcc0 + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (0 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (1 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (2 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (3 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
                 break;
             case MAP_MODE_FLY:
                 break;
         }
+
     }
     return;
+}
+
+static void ResetCursorPositionBeforeAnimChange()
+{
+    switch(sRegionMap->cursorAnimState)
+    {
+        case CURSOR_DOWN:
+            sRegionMap->cursorSpriteLOC->y += 52;
+            break;
+        case CURSOR_UP:
+            sRegionMap->cursorSpriteLOC->y += 26;
+            break;
+        case CURSOR_RIGHT:
+            sRegionMap->cursorSpriteLOC->y += 44;
+            sRegionMap->cursorSpriteLOC->x += 22;
+            break;
+        case CURSOR_LEFT:
+            sRegionMap->cursorSpriteLOC->y += 44;
+            sRegionMap->cursorSpriteLOC->x -= 22;
+            break;
+    }
+}
+
+static void UpdateCursorPositionOnAnimChange()
+{
+    switch(sRegionMap->cursorAnimState)
+    {
+        case CURSOR_DOWN:
+            sRegionMap->cursorSpriteLOC->y -= 52;
+            break;
+        case CURSOR_UP:
+            sRegionMap->cursorSpriteLOC->y -= 26;
+            break;
+        case CURSOR_RIGHT:
+            sRegionMap->cursorSpriteLOC->y -= 44;
+            sRegionMap->cursorSpriteLOC->x -= 22;
+            break;
+        case CURSOR_LEFT:
+            sRegionMap->cursorSpriteLOC->y -= 44;
+            sRegionMap->cursorSpriteLOC->x += 22;
+            break;
+    }
 }
 
 static void UpdateRegionMapCursor(void) // Main Function That Updates the Position of the Cursor If Its Over A Known Location and If its Pointing Up or Down
@@ -1667,23 +1756,72 @@ static void UpdateRegionMapCursor(void) // Main Function That Updates the Positi
             sRegionMap->activeCursorState = CURSOR_TOOLTIP_LOC_STATE;
             sRegionMap->cursorSprite->invisible = TRUE;
             sRegionMap->cursorSpriteLOC->invisible = FALSE;
-
-        }
-        if((sRegionMap->cursorPosY * 8 + 4) >= 80 && sRegionMap->cursorFlipped == FALSE)
-        {
-            StartSpriteAnim(sRegionMap->cursorSpriteLOC, 1);
-            sRegionMap->cursorSpriteLOC->y -= 26;
-            sRegionMap->cursorFlipped = TRUE;
-        }
-        else if((sRegionMap->cursorPosY * 8 + 4) < 80 && sRegionMap->cursorFlipped == TRUE)
-        {
-            StartSpriteAnim(sRegionMap->cursorSpriteLOC, 0);
-            sRegionMap->cursorSpriteLOC->y += 26;
-            sRegionMap->cursorFlipped = FALSE;
         }
 
-        PrintWarpPriceOnTooltip(2, 0x4c0 + (8 * TILE_SIZE_4BPP));
-        PrintWarpPriceOnTooltip(2, 0xcc0 + (8 * TILE_SIZE_4BPP));
+        if((sRegionMap->cursorPosY * 8 + 4) < 40)
+        {
+            if(sRegionMap->cursorAnimState != CURSOR_UP)
+            {
+                StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_UP);
+                ResetCursorPositionBeforeAnimChange();
+                sRegionMap->cursorAnimState = CURSOR_UP;
+                UpdateCursorPositionOnAnimChange();
+            }
+        }
+        else if((sRegionMap->cursorPosX * 8 + 4) >= 208)
+        {
+            if(sRegionMap->cursorAnimState != CURSOR_RIGHT)
+            {
+                StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_RIGHT);
+                ResetCursorPositionBeforeAnimChange();
+                sRegionMap->cursorAnimState = CURSOR_RIGHT;
+                UpdateCursorPositionOnAnimChange();
+            }
+        }
+        else if((sRegionMap->cursorPosX * 8 + 4) < 24)
+        {
+            if(sRegionMap->cursorAnimState != CURSOR_LEFT)
+            {
+                StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_LEFT);
+                ResetCursorPositionBeforeAnimChange();
+                sRegionMap->cursorAnimState = CURSOR_LEFT;
+                UpdateCursorPositionOnAnimChange();
+            }
+        }
+        else if((sRegionMap->cursorPosY * 8 + 4) >= 80)
+        {
+            if(sRegionMap->cursorAnimState != CURSOR_DOWN)
+            {
+                StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_DOWN);
+                ResetCursorPositionBeforeAnimChange();
+                sRegionMap->cursorAnimState = CURSOR_DOWN;
+                UpdateCursorPositionOnAnimChange();
+            }
+        }
+        else if((sRegionMap->cursorPosY * 8 + 4) < 80)
+        {
+            if(sRegionMap->cursorAnimState != CURSOR_UP)
+            {
+                StartSpriteAnim(sRegionMap->cursorSpriteLOC, CURSOR_UP);
+                ResetCursorPositionBeforeAnimChange();
+                sRegionMap->cursorAnimState = CURSOR_UP;
+                UpdateCursorPositionOnAnimChange();
+            }
+        }
+        
+        switch (sCurrentMapMode)
+        {
+            case MAP_MODE_DEFAULT:
+            case MAP_MODE_TAXI:
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (0 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (1 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (2 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (3 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+                break;
+            case MAP_MODE_FLY:
+                break;
+        }
+
     }
     else
     {
