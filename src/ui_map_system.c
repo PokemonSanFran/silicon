@@ -97,7 +97,6 @@ struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined wi
 {
     u16 mapSecId;
     u8 mapSecTypeHasVisited;
-    u8 posWithinMapSec;
     u8 mapSecName[20];
     u8 (*inputCallback)(void);
     struct Sprite *cursorSprite;
@@ -105,24 +104,14 @@ struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined wi
     struct Sprite *playerIconSprite;
     u16 cursorPosX;
     u16 cursorPosY;
-    u16 cursorTileTag;
-    u16 cursorPaletteTag;
-    u16 cursorLOCTileTag;
-    u16 cursorLOCPaletteTag;
-    s16 scrollX;
-    s16 scrollY;
-    u16 playerIconTileTag;
-    u16 playerIconPaletteTag;
     u16 playerIconSpritePosX;
     u16 playerIconSpritePosY;
     u8 initStep;
     s8 cursorMovementFrameCounter;
     s8 cursorDeltaX;
     s8 cursorDeltaY;
-    bool8 needUpdateVideoRegs;
     bool8 blinkPlayerIcon;
     bool8 playerIsInCave;
-    u8 filler;
     bool8 inL2State;
     u8 warpCounter;
     u8 activeCursorState;
@@ -1564,10 +1553,9 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
     palette = sRegionMapCursorSpritePalette;
     template = sRegionMapCursorSpriteTemplate;
     template.tileTag = tileTag;
-    sRegionMap->cursorTileTag = tileTag;
     palette.tag = paletteTag;
     template.paletteTag = paletteTag;
-    sRegionMap->cursorPaletteTag = paletteTag;
+
     if (sCurrentMapMode == MAP_MODE_TROLLEY)
         template.callback = SpriteCB_CursorMap_TrolleyMode;
     else
@@ -1582,10 +1570,8 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
     palette = sRegionMapL2CursorSpritePalette;
     template = sRegionMapL2CursorSpriteTemplate;
     template.tileTag = tileTag;
-    sRegionMap->cursorTileTag = tileTag;
     palette.tag = paletteTag;
     template.paletteTag = paletteTag;
-    sRegionMap->cursorPaletteTag = paletteTag;
 
     if (sCurrentMapMode == MAP_MODE_TROLLEY)
         template.callback = SpriteCB_CursorMap_TrolleyModeLOC;
