@@ -194,7 +194,7 @@ static void WaypointFound(void);
 void ShowOWWaypointArrow(void);
 void HideOWWaypointArrow(void);
 
-static void PrintWarpPriceOnTooltip(u32 spriteId, u32 bgColor, u32 startTile);
+static void PrintWarpPriceOnTooltip(u32 bgColor, u32 startTile);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -1648,8 +1648,8 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         {
             case MAP_MODE_DEFAULT:
             case MAP_MODE_TAXI:
-                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0x4c0 + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(spriteIdLOC, 2, 0xcc0 + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0x4c0 + (8 * TILE_SIZE_4BPP));
+                PrintWarpPriceOnTooltip(2, 0xcc0 + (8 * TILE_SIZE_4BPP));
                 break;
             case MAP_MODE_FLY:
                 break;
@@ -1681,6 +1681,9 @@ static void UpdateRegionMapCursor(void) // Main Function That Updates the Positi
             sRegionMap->cursorSpriteLOC->y += 26;
             sRegionMap->cursorFlipped = FALSE;
         }
+
+        PrintWarpPriceOnTooltip(2, 0x4c0 + (8 * TILE_SIZE_4BPP));
+        PrintWarpPriceOnTooltip(2, 0xcc0 + (8 * TILE_SIZE_4BPP));
     }
     else
     {
@@ -2405,7 +2408,7 @@ static void WarpPriceTextIntoTooltipObject(void *dest, u8 *windowTileData, u32 w
     CpuCopy32(windowTileData + 256, dest, windowWidth * TILE_SIZE_4BPP);
 }
 
-static void PrintWarpPriceOnTooltip(u32 spriteId, u32 bgColor, u32 startTile) // 0xbc0 for one part of the tooltip
+static void PrintWarpPriceOnTooltip(u32 bgColor, u32 startTile) // 0xbc0 for one part of the tooltip
 {
     u8 *windowTileData;
     u32 windowId;
@@ -2698,7 +2701,7 @@ static u8 HandleAttemptWarpInput(void)
     if(sRegionMap->mapSecTypeHasVisited == LOCATION_VISITED)
     {
         u32 warpPrice = GetWarpPriceAtMapSecByMapType(mapSecId);
-        VarSet(VAR_0x8005,warpPrice);
+        VarSet(VAR_0x8005, warpPrice);
 
         if (warpPrice == 0)
         {
