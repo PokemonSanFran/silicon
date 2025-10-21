@@ -66,7 +66,7 @@
 #define CURSOR_TOOLTIP_LOC_STATE 1
 
 #define WARP_FAILED_PAUSE_END 0
-#define WARP_FAILED_PAUSE_START 100
+#define WARP_FAILED_PAUSE_START 32
 #define WARP_UBER 0
 #define WARP_TAXI 1
 
@@ -332,12 +332,14 @@ static const u32 sL2WindowTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/l
 static const u16 sL2WindowPalette[] = INCBIN_U16("graphics/ui_menus/map_system/l2_window_tiles.gbapal");
 
 static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/cursor_small.gbapal");
-static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp");
+static const u32 sRegionMapCursorSmallGfx[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp");
 
 static const u16 sRegionMapL2CursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/L2_cursor_test.gbapal");
-static const u32 sRegionMapCursorL2GfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp");
-static const u32 sRegionMapCursorL2TaxiGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp");
-static const u32 sRegionMapCursorL2FlyGfxLZ[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp");
+static const u32 sRegionMapCursorL2Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp");
+static const u32 sRegionMapCursorL2TaxiGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp");
+static const u32 sRegionMapCursorL2FlyGfx[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp");
+static const u32 sRegionMapCursorL2Error1Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_1.4bpp");
+static const u32 sRegionMapCursorL2Error2Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_2.4bpp");
 
 static const u8 sA_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/a_button.4bpp");
 static const u8 sB_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/b_button.4bpp");
@@ -486,28 +488,42 @@ static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] =
 #define TAG_L2_CURSOR 20101
 #define TAG_L1_CURSOR 20106
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxLZ =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2Gfx =
 {
     .size = 64 * 64 * 4,
-    .data = sRegionMapCursorL2GfxLZ,
+    .data = sRegionMapCursorL2Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfxLZ =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxError1 =
 {
     .size = 64 * 64 * 4,
-    .data = sRegionMapCursorL2TaxiGfxLZ,
+    .data = sRegionMapCursorL2Error1Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfxLZ =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxError2 =
 {
     .size = 64 * 64 * 4,
-    .data = sRegionMapCursorL2FlyGfxLZ,
+    .data = sRegionMapCursorL2Error2Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorSmallGfxLZ = {sRegionMapCursorSmallGfxLZ, 16 * 16 * 2, TAG_CURSOR};
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfx =
+{
+    .size = 64 * 64 * 4,
+    .data = sRegionMapCursorL2TaxiGfx,
+    .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
+};
+
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfx =
+{
+    .size = 64 * 64 * 4,
+    .data = sRegionMapCursorL2FlyGfx,
+    .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
+};
+
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorSmallGfx = {sRegionMapCursorSmallGfx, 16 * 16 * 2, TAG_CURSOR};
 
 
 //
@@ -1565,6 +1581,21 @@ static void SpriteCB_CursorMap_TrolleyModeLOC(struct Sprite *sprite)
     }
 }
 
+static void PrintWarpPriceOnTooltip_AllFrames(void)
+{
+    switch (sCurrentMapMode)
+    {
+        case MAP_MODE_DEFAULT:
+        case MAP_MODE_TAXI:
+            PrintWarpPriceOnTooltip(2, 0x4c0 + (0 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+            PrintWarpPriceOnTooltip(2, 0x4c0 + (1 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+            PrintWarpPriceOnTooltip(2, 0x4c0 + (2 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+            PrintWarpPriceOnTooltip(2, 0x4c0 + (3 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+            break;
+        case MAP_MODE_FLY:
+            break;
+    }
+}
 
 void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets and creates sprites for the two Cursor types
 {
@@ -1584,7 +1615,7 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
     else
         template.callback = SpriteCB_CursorMapFull;
 
-    LoadSpriteSheet(&sSpriteSheet_RegionMapCursorSmallGfxLZ);
+    LoadSpriteSheet(&sSpriteSheet_RegionMapCursorSmallGfx);
     LoadSpritePalette(&palette);
     spriteId = CreateSpriteAtEnd(&template, 0x38, 0x48, 0);
 
@@ -1604,16 +1635,16 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
     switch (sCurrentMapMode)
     {
         case MAP_MODE_TROLLEY:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2GfxLZ);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2Gfx);
             break;
         case MAP_MODE_TAXI:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2TaxiGfxLZ);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2TaxiGfx);
             break;
         case MAP_MODE_FLY:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2FlyGfxLZ);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2FlyGfx);
             break;
         default:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2GfxLZ);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2Gfx);
             break;
     }
 
@@ -1688,18 +1719,7 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         sRegionMap->cursorSpriteLOC->data[2] = (IndexOfSpritePaletteTag(TAG_CURSOR_TOOLTIP_LOC_STATE) << 4) + 0x101;
         sRegionMap->cursorSpriteLOC->data[3] = TRUE;
 
-        switch (sCurrentMapMode)
-        {
-            case MAP_MODE_DEFAULT:
-            case MAP_MODE_TAXI:
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (0 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (1 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (2 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (3 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                break;
-            case MAP_MODE_FLY:
-                break;
-        }
+        PrintWarpPriceOnTooltip_AllFrames();
 
     }
     return;
@@ -1809,18 +1829,7 @@ static void UpdateRegionMapCursor(void) // Main Function That Updates the Positi
             }
         }
         
-        switch (sCurrentMapMode)
-        {
-            case MAP_MODE_DEFAULT:
-            case MAP_MODE_TAXI:
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (0 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (1 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (2 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                PrintWarpPriceOnTooltip(2, 0x4c0 + (3 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-                break;
-            case MAP_MODE_FLY:
-                break;
-        }
+        PrintWarpPriceOnTooltip_AllFrames();
 
     }
     else
@@ -2956,6 +2965,34 @@ static u8 HandleWarpCloseMenu(void)
     return MAP_INPUT_NONE;
 }
 
+static void SwapFailedCursorGraphics()
+{
+    CpuCopy32(sRegionMapCursorL2Error2Gfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+    //PrintWarpPriceOnTooltip_AllFrames(); Uncomment To Have Price Printed on Error Message
+}
+
+static void SwapBackCursorGraphics()
+{
+    switch (sCurrentMapMode)
+    {
+        case MAP_MODE_TROLLEY:
+            CpuCopy32(sRegionMapCursorL2Gfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            break;
+        case MAP_MODE_TAXI:
+            CpuCopy32(sRegionMapCursorL2TaxiGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            break;
+        case MAP_MODE_FLY:
+            CpuCopy32(sRegionMapCursorL2FlyGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            break;
+        default:
+            CpuCopy32(sRegionMapCursorL2Gfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            break;
+    }
+
+    PrintWarpPriceOnTooltip_AllFrames();
+}
+
+
 static u8 HandleWarpFailedNoCash(void)
 {
     switch(sRegionMap->warpCounter)
@@ -2964,19 +3001,32 @@ static u8 HandleWarpFailedNoCash(void)
             PlaySE(SE_SELECT);
             StringCopy(sRegionMap->mapSecName, sText_NotEnoughMoney);
             PrintHeaderTitleToWindow();
-            sRegionMap->cursorSpriteLOC->invisible = TRUE;
+            //sRegionMap->cursorSpriteLOC->invisible = TRUE;
+            SwapFailedCursorGraphics();
             sRegionMap->warpCounter--;
             break;
         case WARP_FAILED_PAUSE_END:
-            sRegionMap->cursorSpriteLOC->invisible = FALSE;
+            //sRegionMap->cursorSpriteLOC->invisible = FALSE;
+            SwapBackCursorGraphics();
             sRegionMap->inputCallback = ProcessRegionMapInput_Full;
             GetSFMapName(sRegionMap->mapSecName, sRegionMap->mapSecId, MAP_NAME_LENGTH);
             PrintHeaderTitleToWindow();
-            break;
+            return MAP_INPUT_NONE;
         default:
             sRegionMap->warpCounter--;
             break;
     }
+
+    switch (sRegionMap->warpCounter % 8)
+    {
+        case 0:
+            sRegionMap->cursorSpriteLOC->x += 2;
+            break;
+        case 7:
+            sRegionMap->cursorSpriteLOC->x -= 2;
+            break;
+    }
+
     return MAP_INPUT_NONE;
 
 }
