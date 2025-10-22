@@ -8436,6 +8436,18 @@
       "secondary_tileset": "gTileset_PrettyPetalFlowerShop",
       "border_filepath": "data/layouts/HalerbaCity_GymA/border.bin",
       "blockdata_filepath": "data/layouts/HalerbaCity_GymA/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVAL_BASE_EXTERIOR",
+      "name": "NavalBaseExterior_Layout",
+      "width": 30,
+      "height": 30,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/NavalBaseExterior/border.bin",
+      "blockdata_filepath": "data/layouts/NavalBaseExterior/map.bin"
     }
   ]
 }

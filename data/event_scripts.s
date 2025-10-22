@@ -1655,3 +1655,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/HalerbaCity_GymB/scripts.inc"
 
 	.include "data/maps/HalerbaCity_GymA/scripts.inc"
+
+	.include "data/maps/NavalBaseExterior/scripts.inc"
