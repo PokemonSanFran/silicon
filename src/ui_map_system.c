@@ -190,7 +190,7 @@ static u8 HandleWarpTaxiCutscene(void);
 static u8 HandleWarpCloseMenu(void);
 
 static u8 CheckIfVisitedHoverLocation(void);
-static u8 CheckIfHoverLocationHasL2(void);
+static u8 CheckIfHoverLocationUnlocked(void);
 static void HideL2WindowBg(void);
 static void ShowL2WindowBG(void);
 static u8 CheckIfHoverLocationIsMapSecNone(void);
@@ -334,12 +334,12 @@ static const u16 sL2WindowPalette[] = INCBIN_U16("graphics/ui_menus/map_system/l
 static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/cursor_small.gbapal");
 static const u32 sRegionMapCursorSmallGfx[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp");
 
-static const u16 sRegionMapL2CursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/L2_cursor_test.gbapal");
-static const u32 sRegionMapCursorL2Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp");
-static const u32 sRegionMapCursorL2TaxiGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp");
-static const u32 sRegionMapCursorL2FlyGfx[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp");
-static const u32 sRegionMapCursorL2Error1Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_1.4bpp");
-static const u32 sRegionMapCursorL2Error2Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_2.4bpp");
+static const u16 sRegionMapCursorTooltipPal[] = INCBIN_U16("graphics/ui_menus/map_system/L2_cursor_test.gbapal");
+static const u32 sRegionMapCursorTooltipGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp");
+static const u32 sRegionMapCursorTooltipTaxiGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp");
+static const u32 sRegionMapCursorTooltipFlyGfx[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp");
+static const u32 sRegionMapCursorTooltipError1Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_1.4bpp");
+static const u32 sRegionMapCursorTooltipError2Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_2.4bpp");
 
 static const u8 sA_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/a_button.4bpp");
 static const u8 sB_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/b_button.4bpp");
@@ -410,57 +410,57 @@ static const struct SpriteTemplate sRegionMapCursorSpriteTemplate =
     .callback = SpriteCB_CursorMapFull
 };
 
-static const struct OamData sRegionMapL2CursorOam =
+static const struct OamData sRegionMapCursorTooltipOam =
 {
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64),
     .priority = 1
 };
 
-static const union AnimCmd sRegionMapL2CursorAnim1[] =
+static const union AnimCmd sRegionMapCursorTooltipAnim1[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sRegionMapL2CursorAnim2[] =
+static const union AnimCmd sRegionMapCursorTooltipAnim2[] =
 {
     ANIMCMD_FRAME(64, 1),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sRegionMapL2CursorAnim3[] =
+static const union AnimCmd sRegionMapCursorTooltipAnim3[] =
 {
     ANIMCMD_FRAME(128, 1),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sRegionMapL2CursorAnim4[] =
+static const union AnimCmd sRegionMapCursorTooltipAnim4[] =
 {
     ANIMCMD_FRAME(192, 1),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sRegionMapL2CursorAnimTable[] =
+static const union AnimCmd *const sRegionMapCursorTooltipAnimTable[] =
 {
-    sRegionMapL2CursorAnim1,
-    sRegionMapL2CursorAnim2,
-    sRegionMapL2CursorAnim3,
-    sRegionMapL2CursorAnim4
+    sRegionMapCursorTooltipAnim1,
+    sRegionMapCursorTooltipAnim2,
+    sRegionMapCursorTooltipAnim3,
+    sRegionMapCursorTooltipAnim4
 };
 
-static const struct SpritePalette sRegionMapL2CursorSpritePalette =
+static const struct SpritePalette sRegionMapCursorTooltipSpritePalette =
 {
-    .data = sRegionMapL2CursorPal,
+    .data = sRegionMapCursorTooltipPal,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE
 };
 
-static const struct SpriteTemplate sRegionMapL2CursorSpriteTemplate =
+static const struct SpriteTemplate sRegionMapCursorTooltipSpriteTemplate =
 {
     .tileTag = TAG_CURSOR_TOOLTIP_LOC_STATE,
     .paletteTag = TAG_CURSOR_TOOLTIP_LOC_STATE,
-    .oam = &sRegionMapL2CursorOam,
-    .anims = sRegionMapL2CursorAnimTable,
+    .oam = &sRegionMapCursorTooltipOam,
+    .anims = sRegionMapCursorTooltipAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_CursorMapFullLOC,
@@ -488,38 +488,38 @@ static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] =
 #define TAG_L2_CURSOR 20101
 #define TAG_L1_CURSOR 20106
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2Gfx =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorTooltipGfx =
 {
     .size = 64 * 64 * 4 / 2,
-    .data = sRegionMapCursorL2Gfx,
+    .data = sRegionMapCursorTooltipGfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxError1 =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorTooltipGfxError1 =
 {
     .size = 64 * 64 * 4 / 2,
-    .data = sRegionMapCursorL2Error1Gfx,
+    .data = sRegionMapCursorTooltipError1Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxError2 =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorTooltipGfxError2 =
 {
     .size = 64 * 64 * 4 / 2,
-    .data = sRegionMapCursorL2Error2Gfx,
+    .data = sRegionMapCursorTooltipError2Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfx =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorTooltipTaxiGfx =
 {
     .size = 64 * 64 * 4 / 2,
-    .data = sRegionMapCursorL2TaxiGfx,
+    .data = sRegionMapCursorTooltipTaxiGfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfx =
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorTooltipFlyGfx =
 {
     .size = 64 * 64 * 4 / 2,
-    .data = sRegionMapCursorL2FlyGfx,
+    .data = sRegionMapCursorTooltipFlyGfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
@@ -1621,8 +1621,8 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
 
     tileTag = TAG_CURSOR_TOOLTIP_LOC_STATE;
     paletteTag = TAG_CURSOR_TOOLTIP_LOC_STATE;
-    palette = sRegionMapL2CursorSpritePalette;
-    template = sRegionMapL2CursorSpriteTemplate;
+    palette = sRegionMapCursorTooltipSpritePalette;
+    template = sRegionMapCursorTooltipSpriteTemplate;
     template.tileTag = tileTag;
     palette.tag = paletteTag;
     template.paletteTag = paletteTag;
@@ -1635,16 +1635,16 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
     switch (sCurrentMapMode)
     {
         case MAP_MODE_TROLLEY:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2Gfx);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipGfx);
             break;
         case MAP_MODE_TAXI:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2TaxiGfx);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipTaxiGfx);
             break;
         case MAP_MODE_FLY:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2FlyGfx);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipFlyGfx);
             break;
         default:
-            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorL2Gfx);
+            LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipGfx);
             break;
     }
 
@@ -2310,7 +2310,7 @@ static void PrintHeaderTitleToWindow()
                 //AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
                 AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_TaxiBlankStateHeader);
             }
-            else if(CheckIfHoverLocationHasL2())
+            else if(CheckIfHoverLocationUnlocked())
             {
                 ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
                 StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
@@ -2332,7 +2332,7 @@ static void PrintHeaderTitleToWindow()
             {
                 AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_FlyBlankStateHeader);
             }
-            else if(CheckIfHoverLocationHasL2())
+            else if(CheckIfHoverLocationUnlocked())
             {
                 StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
                 StringExpandPlaceholders(gStringVar4, sText_FlyHasLocationStateHeader);
@@ -2609,6 +2609,7 @@ static void Task_MapSystem_TrolleyMode_Warp(u8 taskId)
         case 1:
             if (!gPaletteFade.active)
             {
+                IncrementGameStat(GAME_STAT_TROLLEY_RIDES);
                 MapSystem_FreeResources();
                 ReturnToFieldFromRegionMapWarpSelect();
                 sRegionMap->warpCounter = 2;
@@ -2690,7 +2691,7 @@ static void Task_MapSystem_DefaultMode_Main(u8 taskId)
             PrintHeaderTitleToWindow();
             break;
         case MAP_INPUT_START_BUTTON: // If Start Button Check to Enter / Exit L2 State
-            if ((!sRegionMap->inL2State) && CheckIfHoverLocationHasL2())
+            if ((!sRegionMap->inL2State) && CheckIfHoverLocationUnlocked() && CheckIfHoverLocationHasL2())
             {
                 ShowL2WindowBG();
                 sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
@@ -2966,7 +2967,7 @@ static u8 HandleWarpCloseMenu(void)
 
 static void SwapFailedCursorGraphics()
 {
-    CpuCopy32(sRegionMapCursorL2Error2Gfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+    CpuCopy32(sRegionMapCursorTooltipError2Gfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
     //PrintWarpPriceOnTooltip_AllFrames(); Uncomment To Have Price Printed on Error Message
 }
 
@@ -2975,16 +2976,16 @@ static void SwapBackCursorGraphics()
     switch (sCurrentMapMode)
     {
         case MAP_MODE_TROLLEY:
-            CpuCopy32(sRegionMapCursorL2Gfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            CpuCopy32(sRegionMapCursorTooltipGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
         case MAP_MODE_TAXI:
-            CpuCopy32(sRegionMapCursorL2TaxiGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            CpuCopy32(sRegionMapCursorTooltipTaxiGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
         case MAP_MODE_FLY:
-            CpuCopy32(sRegionMapCursorL2FlyGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            CpuCopy32(sRegionMapCursorTooltipFlyGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
         default:
-            CpuCopy32(sRegionMapCursorL2Gfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
+            CpuCopy32(sRegionMapCursorTooltipGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
     }
 
@@ -3047,11 +3048,19 @@ static u8 CheckIfVisitedHoverLocation(void)
     return (GetMapsecTypeHasVisited(sRegionMap->mapSecId) == LOCATION_VISITED);
 }
 
-static u8 CheckIfHoverLocationHasL2(void)
+static u8 CheckIfHoverLocationUnlocked(void)
 {
     if (sRegionMap->mapSecTypeHasVisited == LOCATION_NONE || sRegionMap->mapSecTypeHasVisited == LOCATION_NOT_VISITED)
         return FALSE;
     if(sRegionMap->activeCursorState == CURSOR_SMALL_CURSOR_STATE)
+        return FALSE;
+
+    return TRUE;
+}
+
+static u8 CheckIfHoverLocationHasL2(void)
+{
+    if (sRegionMap->mapSecId == MAPSEC_NONE)
         return FALSE;
 
     return TRUE;
