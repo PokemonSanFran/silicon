@@ -3470,3 +3470,18 @@
     call RunAdventureGuideScript
 	.endm
     @ End adventureGuide
+
+	@ Overworld Waypoint Macro - Hide Waypoint Sprite
+	.macro hidewaypoint
+	callnative HideOWWaypointArrow
+	.endm
+
+	@ Overworld Waypoint Macro - Show Waypoint Sprite
+	.macro showwaypoint
+	callnative ShowOWWaypointArrow
+	.endm
+
+	@ Overworld Waypoint Macro - Toggle Waypoint Sprite
+	.macro togglewaypoint
+	callnative ToggleOWWaypointArrow
+	.endm

@@ -191,6 +191,7 @@ static u8 HandleWarpCloseMenu(void);
 
 static u8 CheckIfVisitedHoverLocation(void);
 static u8 CheckIfHoverLocationUnlocked(void);
+static u8 CheckIfHoverLocationHasL2(void);
 static void HideL2WindowBg(void);
 static void ShowL2WindowBG(void);
 static u8 CheckIfHoverLocationIsMapSecNone(void);
@@ -2031,7 +2032,7 @@ static void HandleAttemptToPlaceWaypoint(void)
 }
 
 //
-//  Overworld Waypoint Error Functions
+//  Overworld Waypoint Arrow Functions
 //
 void CreateOWWaypointArrowSprite(void)
 {
@@ -2083,19 +2084,19 @@ static void WaypointFound(void)
 
 void ShowOWWaypointArrow(void)
 {
-    if(gSaveBlock3Ptr->waypoint.currentState == 1)
+    if(gSaveBlock3Ptr->waypoint.currentState == 1 && sOWWaypointArrow_SpriteId != SPRITE_NONE)
         gSprites[sOWWaypointArrow_SpriteId].invisible = FALSE;
 }
 
 void HideOWWaypointArrow(void)
 {
-    if(gSaveBlock3Ptr->waypoint.currentState == 1)
+    if(gSaveBlock3Ptr->waypoint.currentState == 1 && sOWWaypointArrow_SpriteId != SPRITE_NONE)
         gSprites[sOWWaypointArrow_SpriteId].invisible = TRUE;
 }
 
 void ToggleOWWaypointArrow(void)
 {
-    if(gSaveBlock3Ptr->waypoint.currentState == 1)
+    if(gSaveBlock3Ptr->waypoint.currentState == 1 && sOWWaypointArrow_SpriteId != SPRITE_NONE)
         gSprites[sOWWaypointArrow_SpriteId].invisible = !(gSprites[sOWWaypointArrow_SpriteId].invisible);
 }
 
