@@ -178,7 +178,5 @@
       "script": "LockedOut_PreventPlayer_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
