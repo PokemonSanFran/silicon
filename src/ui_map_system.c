@@ -490,40 +490,40 @@ static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] =
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2Gfx =
 {
-    .size = 64 * 64 * 4,
+    .size = 64 * 64 * 4 / 2,
     .data = sRegionMapCursorL2Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxError1 =
 {
-    .size = 64 * 64 * 4,
+    .size = 64 * 64 * 4 / 2,
     .data = sRegionMapCursorL2Error1Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2GfxError2 =
 {
-    .size = 64 * 64 * 4,
+    .size = 64 * 64 * 4 / 2,
     .data = sRegionMapCursorL2Error2Gfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2TaxiGfx =
 {
-    .size = 64 * 64 * 4,
+    .size = 64 * 64 * 4 / 2,
     .data = sRegionMapCursorL2TaxiGfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
 static const struct SpriteSheet sSpriteSheet_RegionMapCursorL2FlyGfx =
 {
-    .size = 64 * 64 * 4,
+    .size = 64 * 64 * 4 / 2,
     .data = sRegionMapCursorL2FlyGfx,
     .tag = TAG_CURSOR_TOOLTIP_LOC_STATE,
 };
 
-static const struct SpriteSheet sSpriteSheet_RegionMapCursorSmallGfx = {sRegionMapCursorSmallGfx, 16 * 16 * 2, TAG_CURSOR};
+static const struct SpriteSheet sSpriteSheet_RegionMapCursorSmallGfx = {sRegionMapCursorSmallGfx, 16 * 16 * 2 / 2, TAG_CURSOR};
 
 
 //
@@ -1587,10 +1587,10 @@ static void PrintWarpPriceOnTooltip_AllFrames(void)
     {
         case MAP_MODE_DEFAULT:
         case MAP_MODE_TAXI:
-            PrintWarpPriceOnTooltip(2, 0x4c0 + (0 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-            PrintWarpPriceOnTooltip(2, 0x4c0 + (1 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-            PrintWarpPriceOnTooltip(2, 0x4c0 + (2 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
-            PrintWarpPriceOnTooltip(2, 0x4c0 + (3 * (0xcc0 - 0x4c0)) + (8 * TILE_SIZE_4BPP));
+            PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (0 * 0x800) + (26 * TILE_SIZE_4BPP));
+            PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (1 * 0x800) + (26 * TILE_SIZE_4BPP));
+            PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (2 * 0x800) + (26 * TILE_SIZE_4BPP));
+            PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (3 * 0x800) + (26 * TILE_SIZE_4BPP));
             break;
         case MAP_MODE_FLY:
             break;
@@ -1720,7 +1720,6 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         sRegionMap->cursorSpriteLOC->data[3] = TRUE;
 
         PrintWarpPriceOnTooltip_AllFrames();
-
     }
     return;
 }
