@@ -22,6 +22,7 @@ void IncrementFogVariable(void);
 void SetFogVariableAfterLoss(void);
 bool32 ShouldWildBattleBeFog(void); // fogBattle
 u8* PrintUnknownLevel(u32 lvl, u32 battler, u8* text);
+u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void);
 
 bool32 ShouldAskUnhoused(void);
 const u8* ReturnBattleScriptCantUseItem(void);

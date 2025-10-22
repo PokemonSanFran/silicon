@@ -46,6 +46,7 @@
 #include "money.h"
 #include "field_effect.h"
 #include "constants/heal_locations.h"
+#include "quest_logic.h"
 
 /*
 
@@ -2839,6 +2840,15 @@ static u8 ProcessRegionMapInput_L2_State(void) // In L2 State Just Pass Along A/
     return input;
 }
 
+
+#define NO_EXCEPTION 99
+#define EXCEPTION_1 1
+#define EXCEPTION_2 2
+#define EXCEPTION_3 3
+
+#define PASSES_QUEST_EXCEPTION (questException == NO_EXCEPTION)
+#define QUEST_EXCEPTION_NO_PAY (questException == EXCEPTION_1)
+
 // Handle Warp Started Input and Control Functions - These Don't Pass on Input to Main and Just Handle it Themselves
 static u8 HandleAttemptWarpInput(void)
 {
@@ -2851,20 +2861,30 @@ static u8 HandleAttemptWarpInput(void)
         u32 warpPrice = GetWarpPriceAtMapSecByMapType(mapSecId);
         VarSet(VAR_0x8005, warpPrice);
 
-        if (warpPrice == 0)
+        u32 questException = NO_EXCEPTION;       
+        switch(sCurrentMapMode)
+        {
+            case MAP_MODE_DEFAULT:
+               questException = Quest_Persuasivepassenger_CheckQuestAndChooseDriver();
+               break;
+        }
+
+        //DebugPrintf("Quest Exception: %d", questException);
+
+        if ((warpPrice == 0) && PASSES_QUEST_EXCEPTION)
         {
             PlaySE(SE_SELECT);
             sRegionMap->warpCounter = 0;
             sRegionMap->inputCallback = HandleWarpConfirmInput;
         }
-        else if (warpPrice > GetMoney(&gSaveBlock1Ptr->money) && sCurrentMapMode == MAP_MODE_TAXI)
+        else if ((warpPrice > GetMoney(&gSaveBlock1Ptr->money)) && (sCurrentMapMode == MAP_MODE_TAXI))
         {
             PlaySE(SE_SELECT);
             sRegionMap->warpCounter = 0;
             FlagClear(FLAG_TEMP_1);
             sRegionMap->inputCallback = HandleWarpTaxiCutscene;
         }
-        else if(warpPrice > GetMoney(&gSaveBlock1Ptr->money))
+        else if((warpPrice > GetMoney(&gSaveBlock1Ptr->money)) && !QUEST_EXCEPTION_NO_PAY)
         {
             sRegionMap->inputCallback = HandleWarpFailedNoCash;
             sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
@@ -2890,15 +2910,23 @@ static u8 HandleWarpConfirmInput(void)
         case 0:
             PlaySE(SE_SELECT);
             PrintHeaderWarpConfirmToWindow();
-            //sRegionMap->cursorSpriteLOC->invisible = TRUE;
             sRegionMap->warpCounter = 1;
             break;
         case 1: // Handle Input
             if (JOY_NEW(A_BUTTON))
-            {
+            {   
+                u32 questException = NO_EXCEPTION;
+                switch(sCurrentMapMode)
+                {
+                    case MAP_MODE_DEFAULT:
+                        questException = Quest_Persuasivepassenger_CheckQuestAndChooseDriver();
+                        break;
+                }
+
                 sRegionMap->warpCounter = 0;
                 PlaySE(SE_SELECT);
-                RemoveMoney(&gSaveBlock1Ptr->money, GetWarpPriceAtMapSecByMapType(sRegionMap->mapSecId));
+                if (!QUEST_EXCEPTION_NO_PAY)
+                    RemoveMoney(&gSaveBlock1Ptr->money, GetWarpPriceAtMapSecByMapType(sRegionMap->mapSecId));
                 sRegionMap->inputCallback = HandleWarpCloseMenu;
             }
             if (JOY_NEW(B_BUTTON))
@@ -2945,12 +2973,45 @@ void WarpTaxiAfterCutscene(void)
     SetMainCallback2(CB2_LoadMap);
 }
 
+void WarpUberAfterQuestException(void)
+{
+    SetWarpDestinationToHealLocation(sMapHealLocations[VarGet(VAR_UBER_QUEST_EXCEPTION_DESTINATION)]);
+    WarpIntoMap();
+    SetMainCallback2(CB2_LoadMap);
+}
+
 static u8 HandleWarpCloseMenu(void)
 {
     switch(sRegionMap->warpCounter)
     {
         case 0:
-            SetWarpDestinationToHealLocation(sMapHealLocations[sRegionMap->mapSecId]);
+            u32 questException = NO_EXCEPTION;
+            switch(sCurrentMapMode)
+            {
+                case MAP_MODE_DEFAULT:
+                    questException = Quest_Persuasivepassenger_CheckQuestAndChooseDriver();
+                    break;
+            }
+
+            switch(questException)
+            {
+                case EXCEPTION_1:
+                    SetWarpDestination(MAP_GROUP(MAP_ARRIBA_CAR_INTERIOR), MAP_NUM(MAP_ARRIBA_CAR_INTERIOR), WARP_ID_NONE, 20, 15);
+                    VarSet(VAR_UBER_QUEST_EXCEPTION_DESTINATION, sRegionMap->mapSecId);
+                    break;
+                case EXCEPTION_2:
+                    SetWarpDestination(MAP_GROUP(MAP_ARRIBA_CAR_INTERIOR), MAP_NUM(MAP_ARRIBA_CAR_INTERIOR), WARP_ID_NONE, 10, 3);
+                    VarSet(VAR_UBER_QUEST_EXCEPTION_DESTINATION, sRegionMap->mapSecId);
+                    break;
+                case EXCEPTION_3:
+                    SetWarpDestination(MAP_GROUP(MAP_ARRIBA_CAR_INTERIOR), MAP_NUM(MAP_ARRIBA_CAR_INTERIOR), WARP_ID_NONE, 1, 3);
+                    VarSet(VAR_UBER_QUEST_EXCEPTION_DESTINATION, sRegionMap->mapSecId);
+                    break;
+                default:
+                    SetWarpDestinationToHealLocation(sMapHealLocations[sRegionMap->mapSecId]);
+                    break;
+            }
+
             sRegionMap->warpCounter = 1;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             break;
