@@ -49747,7 +49747,7 @@
                 "species": "SPECIES_TYMPOLE"
               },
               {
-                "min_level": 5,
+                "min_level": 20,
                 "max_level": 25,
                 "species": "SPECIES_TYMPOLE"
               },
@@ -50152,7 +50152,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_SCATTERBUG_MONSOON"
+                "species": "SPECIES_SCATTERBUG_FANCY"
               },
               {
                 "min_level": 15,
@@ -50261,7 +50261,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_SCATTERBUG_MONSOON"
+                "species": "SPECIES_SCATTERBUG_FANCY"
               },
               {
                 "min_level": 15,
