@@ -1996,12 +1996,13 @@ static void AppGrid_HandleNormalInputs(u8 taskId)
 
     if (JOY_NEW(SELECT_BUTTON))
     {
-        if (!AppData_GetAppFromIndex(AppGrid_GetCurrentIndex()))
+        if (!AppData_GetAppFromIndex(AppGrid_GetCurrentIndex())) // START_APP_NONE
         {
             PlaySE(SE_BOO);
             return;
         }
 
+        PlaySE(SE_SELECT);
         StartMoveMode_Init();
         return;
     }
@@ -2051,11 +2052,10 @@ static void AppGrid_HandleMoveInputs(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
     {
-        if (!StartMoveMode_SwapApps())
-        {
-            PlaySE(SE_BOO);
-            return;
-        }
+        if (StartMoveMode_SwapApps())
+            PlaySE(SE_SUCCESS);
+        else
+            PlaySE(SE_SELECT);
 
         StartMoveMode_Exit();
         return;
@@ -2063,6 +2063,7 @@ static void AppGrid_HandleMoveInputs(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
+        PlaySE(SE_SELECT);
         StartMoveMode_Exit();
         return;
     }
