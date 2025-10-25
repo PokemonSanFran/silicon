@@ -408,8 +408,6 @@ struct StartMenuPreviousSave
 // RAM data
 static EWRAM_DATA struct StartMenuData *sStartMenuDataPtr = NULL;
 static EWRAM_DATA struct UCoords8 sStartMenuLastCursor = {};
-
-// TODO figure out how save sector works to not waste EWRAM like this
 static EWRAM_DATA struct StartMenuPreviousSave sStartMenuPreviousSave = {};
 
 // declarations
@@ -902,7 +900,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
 
     // second row
-    [START_APP_TRAINER_CARD] = // TODO investigate visual glitch w/ this guy
+    [START_APP_TRAINER_CARD] = // PSF TODO vanilla trainer card is a lost cause
     {
         COMPOUND_STRING("Trainer Card"), 0, NULL
     },
@@ -910,7 +908,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     {
         COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu, START_SIGNAL_OKAY
     },
-    [START_APP_WAVES_OF_CHANGE] = // PSF TODO
+    [START_APP_WAVES_OF_CHANGE] = // PSF TODO ui
     {
         COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL, START_SIGNAL_STRONG
     },
@@ -922,7 +920,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     {
         COMPOUND_STRING("Save"), 0, NULL
     },
-    [START_APP_SURPRISE_TRADE] = // PSF TODO
+    [START_APP_SURPRISE_TRADE] = // PSF TODO ui
     {
         COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, NULL, START_SIGNAL_STRONG
     },
@@ -1621,7 +1619,6 @@ static void StartPrint_HelpTopText(void)
     Free(strbuf[1]);
 }
 
-// TODO: richer interaction with save overwrite
 static void StartPrint_HelpBottomText(void)
 {
     FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
