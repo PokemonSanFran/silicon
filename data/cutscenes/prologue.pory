@@ -267,6 +267,7 @@ script Prologue_BeginAdventure_Dialogue
 script Prologue_FirstTimeCharacterCustomize_Script
 {
     call(ThereCanOnlyBeOne_SetUpPlayer_Script)
+    playbgm(MUS_NAME_CHARACTER_OPTIONSFIRSTRUN_MYSTERYGIFT, FALSE)
     msgbox(Prologue_HowDoesTheWorld_Text)
     closemessage
     fadescreen(FADE_TO_BLACK)
