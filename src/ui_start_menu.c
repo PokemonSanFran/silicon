@@ -449,12 +449,10 @@ static u32 StartPrint_ConvertStringLengthToPixels(u8 *, u32);
 
 // app data
 static void AppData_Populate(void);
-static void AppData_Reset(void);
 static void AppData_InsertNewApps(void);
 static u32 AppData_GetIndexFromApp(enum StartMenuApps);
 static u32 AppData_GetFirstEmptyIndex(void);
 static bool32 AppData_GetUnlockFlag(enum StartMenuApps);
-static u32 AppData_CountCurrentTotalApps(void);
 static enum StartMenuApps AppData_GetAppFromIndex(u8);
 static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps);
 static void AppData_SanitizeApps(void);
@@ -1873,14 +1871,12 @@ static u32 StartPrint_ConvertStringLengthToPixels(u8 *str, u32 fontId)
 // app data
 static void AppData_Populate(void)
 {
-    if (AppData_CountCurrentTotalApps() < START_APP_GRID_ROW_2)
-        AppData_Reset();
-
+    AppData_SanitizeApps();
     AppData_InsertNewApps();
     AppData_SanitizeApps();
 }
 
-static void AppData_Reset(void)
+void StartMenu_ResetAppData(void)
 {
     memset(gSaveBlock3Ptr->startMenuAppIndex, START_APP_NONE, TOTAL_START_APPS * sizeof(u8));
 }
@@ -1935,19 +1931,6 @@ static bool32 AppData_GetUnlockFlag(enum StartMenuApps app)
         return TRUE;
 
     return FlagGet(data->unlockFlag);
-}
-
-static u32 AppData_CountCurrentTotalApps(void)
-{
-    u32 count = 0;
-
-    for (u32 i = 0; i < TOTAL_START_APPS; i++)
-    {
-        if (AppData_GetAppFromIndex(i))
-            count++;
-    }
-
-    return count;
 }
 
 static enum StartMenuApps AppData_GetAppFromIndex(u8 idx)

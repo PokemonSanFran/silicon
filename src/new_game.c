@@ -187,6 +187,7 @@ void NewGameInitData(void)
     }
 
     StartMenu_HoldPreviousSave();
+    StartMenu_ResetAppData();
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();

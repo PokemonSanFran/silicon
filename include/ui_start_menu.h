@@ -45,5 +45,6 @@ void Task_StartMenu_Init(u8);
 bool32 StartMenu_OpenNormalMode(void);
 void CB2_StartMenu_ReturnToUI(void);
 void StartMenu_HoldPreviousSave(void);
+void StartMenu_ResetAppData(void);
 
 #endif // GUARD_UI_START_MENU_H
