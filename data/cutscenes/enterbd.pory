@@ -146,7 +146,7 @@ script EnterBD_PostBattle_Script {
     setvar(VAR_GYM_7_STATE,GYM_DEFEATED_LEADER)
     setvar(VAR_BD_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)
-    tweetfanfare(TWEET_GYM_TIRABUDIN_PLACE_BADGE,MUS_OBTAIN_BADGE)
+    tweetfanfare(TWEET_GYM_TIRABUDIN_PLACE_BADGE,MUS_GET_BADGE)
     giveitem(ITEM_TM07)
     closemessage
     call(EnterBD_MoveBacktoDesk_Script)
