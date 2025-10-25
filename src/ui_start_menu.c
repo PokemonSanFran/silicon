@@ -1018,24 +1018,19 @@ void StartMenu_OpenSaveMode(void)
 
 void StartMenu_HoldPreviousSave(void)
 {
-    DebugPrintf("StartMenu_HoldPreviousSave");
     if (!gDifferentSaveFile || gSaveFileStatus != SAVE_STATUS_OK)
         return;
 
     memset(&sStartMenuPreviousSave, 0, sizeof(struct StartMenuPreviousSave));
 
     StringCopy(sStartMenuPreviousSave.playerName, gSaveBlock2Ptr->playerName);
-    DebugPrintf("sStartMenuPreviousSave.playerName: %S", sStartMenuPreviousSave.playerName);
     memcpy(&sStartMenuPreviousSave.customValues, &gSaveBlock3Ptr->customizationValues, NUM_CUSTOMIZATION_PARTS * sizeof(u8));
-    DebugPrintf("sStartMenuPreviousSave.customValues: %d", sStartMenuPreviousSave.customValues);
     memcpy(&sStartMenuPreviousSave.rgbValues, &gSaveBlock3Ptr->rgbValues, (NUM_CUSTOM_COLOR_OPTIONS * NUM_COLOR_OPTIONS) * sizeof(u8));
-    DebugPrintf("sStartMenuPreviousSave.rgbValues: %d", sStartMenuPreviousSave.rgbValues);
 
     memset(sStartMenuPreviousSave.partySpecies, SPECIES_NONE, PARTY_SIZE * sizeof(u16));
     for (u32 i = 0; i < gPlayerPartyCount; i++)
     {
         sStartMenuPreviousSave.partySpecies[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
-        DebugPrintf("sStartMenuPreviousSave.partySpecies[%d]: %d", i, sStartMenuPreviousSave.partySpecies[i]);
     }
 
     memcpy(&sStartMenuPreviousSave.location, &gSaveBlock1Ptr->location, sizeof(struct WarpData));
