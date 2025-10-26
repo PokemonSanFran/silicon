@@ -47,6 +47,7 @@
 #include "field_effect.h"
 #include "constants/heal_locations.h"
 #include "quest_logic.h"
+#include "heal_location.h"
 
 /*
 
@@ -219,7 +220,6 @@ void CreateOWWaypointArrowSprite(void);
 void DestroyOWWaypointArrowSprite(void);
 static void SpriteCB_HandleOWWaypointArrow(struct Sprite *sprite);
 static void Task_DelayPrintOverworldWaypoint(u8 taskId);
-static void WaypointFound(void);
 void ShowOWWaypointArrow(void);
 void HideOWWaypointArrow(void);
 void SetWaypointData(u16 waypointType, u16 healLocation);
@@ -2212,14 +2212,14 @@ void SetWaypointData(u16 waypointType, u16 healLocation)
     gSaveBlock3Ptr->waypoint.yTile = (s16) sRegionMap->cursorPosY;
     gSaveBlock3Ptr->waypoint.currentState = waypointType;
     gSaveBlock3Ptr->waypoint.healLocation = healLocation;
-    gSaveBlock3Ptr->waypoint.currentDirection = CalculateWaypointDirection();
+    gSaveBlock3Ptr->waypoint.currentDirection = DIR_NONE;
     gSaveBlock3Ptr->waypoint.mapSecId = sRegionMap->mapSecId;
     if (waypointType == WAYPOINT_L2)
         gSaveBlock3Ptr->waypoint.l2_id = sRegionMap->l2_selectionPlusScroll;
     // DebugPrintf("Direction to Waypoint: %d", CalculateWaypointDirection());
 }
 
-void ClearWaypointData(void)
+void ClearWaypointDataSave(void)
 {
     gSaveBlock3Ptr->waypoint.xTile = 0;
     gSaveBlock3Ptr->waypoint.yTile = 0;
@@ -2228,7 +2228,11 @@ void ClearWaypointData(void)
     gSaveBlock3Ptr->waypoint.healLocation = HEAL_LOCATION_NONE;
     gSaveBlock3Ptr->waypoint.mapSecId = MAPSEC_NONE;
     gSaveBlock3Ptr->waypoint.l2_id = 0xFF;
+}
 
+void ClearWaypointData(void)
+{
+    ClearWaypointDataSave();
     if(sMapSystem_DataPtr->waypointSpriteId != SPRITE_NONE || sMapSystem_DataPtr->waypointSpriteInL2Id != SPRITE_NONE)
         DestroyWaypointSprite();
 }
@@ -2239,8 +2243,81 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
     u16 isIndoorOrCave = FALSE;
     u8 direction = DIR_NONE;
     CalculatePlayerPositionInRegionMap(&playerXTile, &playerYTile, &isIndoorOrCave);
+
     if(isIndoorOrCave == TRUE)
         return OWARROW_NO_SIGNAL_ANIM;
+
+    if (gSaveBlock3Ptr->waypoint.currentState == WAYPOINT_L1) // Check Current Map For L1 Waypoint
+    {
+        if (gSaveBlock3Ptr->waypoint.healLocation == sMapHealLocations[gMapHeader.regionMapSectionId])
+        {
+            direction = DIR_NONE;
+            return direction;
+        }
+    }
+    
+    if (gSaveBlock3Ptr->waypoint.currentState == WAYPOINT_L2) // Check Current Map For L2 Waypoint
+    {
+        if (gSaveBlock3Ptr->waypoint.healLocation == L2_Info[gMapHeader.regionMapSectionId][gSaveBlock3Ptr->waypoint.l2_id].healLocation)
+        {
+            const struct HealLocation *healLocation = GetHealLocation(gSaveBlock3Ptr->waypoint.healLocation);
+            if (healLocation)
+            {
+                if (healLocation->x < gSaveBlock1Ptr->pos.x)
+                {
+                    if((healLocation->y - gSaveBlock1Ptr->pos.y) > 1)
+                    {
+                        direction = DIR_SOUTHWEST;
+                    }
+                    else if((healLocation->y - gSaveBlock1Ptr->pos.y) < -1)
+                    {
+                        direction = DIR_NORTHWEST;
+                    }
+                    else
+                    {
+                        direction = DIR_WEST;
+                    }
+                }
+                else if(healLocation->x > gSaveBlock1Ptr->pos.x) // Facing West
+                {
+                    if((healLocation->y - gSaveBlock1Ptr->pos.y) > 1)
+                    {
+                        direction = DIR_SOUTHEAST;
+                    }
+                    else if((healLocation->y - gSaveBlock1Ptr->pos.y) < -1)
+                    {
+                        direction = DIR_NORTHEAST;
+                    }
+                    else
+                    {
+                        direction = DIR_EAST;
+                    }
+                }
+                else if(healLocation->x == gSaveBlock1Ptr->pos.x) // Straight Up or Down
+                {
+                    if((healLocation->y - gSaveBlock1Ptr->pos.y) > 0)
+                    {
+                        direction = DIR_SOUTH;
+                    }
+                    else if((healLocation->y - gSaveBlock1Ptr->pos.y) < 0)
+                    {
+                        direction = DIR_NORTH;
+                    }
+                    else
+                    {
+                        direction = DIR_NONE;
+                        return direction;
+                    }
+                }
+                else
+                {
+                    direction = DIR_NONE;
+                    return direction;
+                }
+                return direction;
+            }
+        }
+    }
 
     if(gSaveBlock3Ptr->waypoint.xTile < playerXTile) // Facing East
     {
@@ -2257,6 +2334,7 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
             direction = DIR_WEST;
         }
     }
+
     if(gSaveBlock3Ptr->waypoint.xTile > playerXTile) // Facing West
     {
         if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) > 1)
@@ -2272,6 +2350,7 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
             direction = DIR_EAST;
         }
     }
+
     if(gSaveBlock3Ptr->waypoint.xTile == playerXTile) // Straight Up or Down
     {
         if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) > 0)
@@ -2345,7 +2424,7 @@ static void SpriteCB_HandleOWWaypointArrow(struct Sprite *sprite)
         if(gSaveBlock3Ptr->waypoint.currentDirection == DIR_NONE)
         {
             sprite->data[0] = UPDATE_WAYPOINT_INTERVAL + 1; // Jump to If Below Until Animation over
-            WaypointFound();
+            ClearWaypointDataSave();
         }
     }
     else if(sprite->data[0] > WAYPOINT_FOUND_DURATION)  // After found animatin finished remove the sprite
@@ -2356,13 +2435,6 @@ static void SpriteCB_HandleOWWaypointArrow(struct Sprite *sprite)
     sprite->data[0]++;
     return;
 };
-
-static void WaypointFound(void)
-{
-    gSaveBlock3Ptr->waypoint.xTile = 0;
-    gSaveBlock3Ptr->waypoint.yTile = 0;
-    gSaveBlock3Ptr->waypoint.currentState = WAYPOINT_NONE;
-}
 
 void ShowOWWaypointArrow(void)
 {

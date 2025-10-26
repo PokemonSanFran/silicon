@@ -17,5 +17,6 @@ void MapSystem_Init(MainCallback callback);
 void CalculatePlayerPositionInRegionMap(s16 *x_tile, s16 *y_tile, u16 *isIndoorOrCave);
 u8 CalculateWaypointDirection(void);
 void CreateOverworldWaypointArrow(void);
+void ClearWaypointDataSave(void);
 
 #endif // GUARD_MAP_SYSTEM_MENU_H
