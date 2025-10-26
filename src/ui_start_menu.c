@@ -131,7 +131,7 @@
 #define START_MAIN_WIN_TEXTBOX_WIDTH   (DISPLAY_TILE_WIDTH - 2)
 #define START_MAIN_WIN_APP_TITLE_WIDTH (DISPLAY_TILE_WIDTH - 8)
 #define START_MAIN_WIN_EGG_INFO_WIDTH  (4)
-#define START_WIN_SAVE_OVERWRITE_WIDTH (DISPLAY_TILE_WIDTH - 2)
+#define START_WIN_SAVE_OVERWRITE_WIDTH (DISPLAY_TILE_WIDTH - 1)
 
 #define SWAP_APP_WIDTH 78
 
@@ -1817,13 +1817,13 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
         u8 *ptr = StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{STR_VAR_2} in {STR_VAR_3} at "));
 
         ptr = ConvertIntToDecimalStringN(ptr, prevSave->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
-        ptr = StringAppend(ptr, COMPOUND_STRING(":"));
+        ptr = StringAppend(ptr, COMPOUND_STRING("{FONT_SMALL}:{FONT_SMALL_NARROW}"));
         ConvertIntToDecimalStringN(ptr, prevSave->playTimeMinutes, STR_CONV_MODE_LEFT_ALIGN, 2);
 
-        u32 x = 8;
+        u32 x = GetStringCenterAlignXOffset(FONT_SMALL_NARROW, gStringVar1, TILE_TO_PIXELS(START_WIN_SAVE_OVERWRITE_WIDTH)) - 8;
         StartPrint_Text(tWindowId, FONT_SMALL_NARROW, START_WIN_SAVE_OVERWRITE_WIDTH, x, TILE_TO_PIXELS(6), gStringVar1);
 
-        x += StartPrint_ConvertStringLengthToPixels(gStringVar1, FONT_SMALL_NARROW);
+        x += StartPrint_ConvertStringLengthToPixels(gStringVar1, FONT_SMALL_NARROW) - 24;
         BlitSymbol_Help(BlitSymbol_ConvertTimeToHelp(BlitSymbol_GetTimeOfDayFromPlaytime()), tWindowId, x, TILE_TO_PIXELS(6));
     }
 
@@ -1852,6 +1852,9 @@ static u32 StartPrint_GetFirstActiveQuest(void)
 static u32 StartPrint_ConvertStringLengthToPixels(u8 *str, u32 fontId)
 {
     u32 totalPixels = 0, i = 0;
+
+    StringExpandPlaceholders(gStringVar4, str);
+    str = gStringVar4;
 
     while (*str != EOS)
     {
