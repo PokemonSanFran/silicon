@@ -2250,58 +2250,61 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
             const struct HealLocation *healLocation = GetHealLocation(gSaveBlock3Ptr->waypoint.healLocation);
             if (healLocation)
             {
-                if (healLocation->x < gSaveBlock1Ptr->pos.x)
+                if((healLocation->mapNum == gSaveBlock1Ptr->location.mapNum) && (healLocation->mapGroup == gSaveBlock1Ptr->location.mapGroup))
                 {
-                    if((healLocation->y - gSaveBlock1Ptr->pos.y) > 1)
+                    if (healLocation->x < gSaveBlock1Ptr->pos.x)
                     {
-                        direction = DIR_SOUTHWEST;
+                        if((healLocation->y - gSaveBlock1Ptr->pos.y) > 1)
+                        {
+                            direction = DIR_SOUTHWEST;
+                        }
+                        else if((healLocation->y - gSaveBlock1Ptr->pos.y) < -1)
+                        {
+                            direction = DIR_NORTHWEST;
+                        }
+                        else
+                        {
+                            direction = DIR_WEST;
+                        }
                     }
-                    else if((healLocation->y - gSaveBlock1Ptr->pos.y) < -1)
+                    else if(healLocation->x > gSaveBlock1Ptr->pos.x) // Facing West
                     {
-                        direction = DIR_NORTHWEST;
+                        if((healLocation->y - gSaveBlock1Ptr->pos.y) > 1)
+                        {
+                            direction = DIR_SOUTHEAST;
+                        }
+                        else if((healLocation->y - gSaveBlock1Ptr->pos.y) < -1)
+                        {
+                            direction = DIR_NORTHEAST;
+                        }
+                        else
+                        {
+                            direction = DIR_EAST;
+                        }
                     }
-                    else
+                    else if(healLocation->x == gSaveBlock1Ptr->pos.x) // Straight Up or Down
                     {
-                        direction = DIR_WEST;
-                    }
-                }
-                else if(healLocation->x > gSaveBlock1Ptr->pos.x) // Facing West
-                {
-                    if((healLocation->y - gSaveBlock1Ptr->pos.y) > 1)
-                    {
-                        direction = DIR_SOUTHEAST;
-                    }
-                    else if((healLocation->y - gSaveBlock1Ptr->pos.y) < -1)
-                    {
-                        direction = DIR_NORTHEAST;
-                    }
-                    else
-                    {
-                        direction = DIR_EAST;
-                    }
-                }
-                else if(healLocation->x == gSaveBlock1Ptr->pos.x) // Straight Up or Down
-                {
-                    if((healLocation->y - gSaveBlock1Ptr->pos.y) > 0)
-                    {
-                        direction = DIR_SOUTH;
-                    }
-                    else if((healLocation->y - gSaveBlock1Ptr->pos.y) < 0)
-                    {
-                        direction = DIR_NORTH;
+                        if((healLocation->y - gSaveBlock1Ptr->pos.y) > 0)
+                        {
+                            direction = DIR_SOUTH;
+                        }
+                        else if((healLocation->y - gSaveBlock1Ptr->pos.y) < 0)
+                        {
+                            direction = DIR_NORTH;
+                        }
+                        else
+                        {
+                            direction = DIR_NONE;
+                            return direction;
+                        }
                     }
                     else
                     {
                         direction = DIR_NONE;
                         return direction;
                     }
-                }
-                else
-                {
-                    direction = DIR_NONE;
                     return direction;
                 }
-                return direction;
             }
         }
     }
