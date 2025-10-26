@@ -580,7 +580,7 @@ gSongTable::
     song mus_glavez_hill, 0, 0
     song mus_encounter_solicitor, 0, 0
     song mus_name_character_optionsFirstRun_mysteryGift, 0, 0
-    song mus_get_badge, 0, 0
+    song mus_get_badge, 1, 1
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2
