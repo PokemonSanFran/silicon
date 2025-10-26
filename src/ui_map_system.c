@@ -85,19 +85,11 @@
 })
 
 //==========STRUCTS==========//
-struct MapSystem_Resources
+struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined with MapSystem_Resources at some point but not required
 {
     MainCallback savedCallback;     // determines callback to run when we exit.
     u8 gfxLoadState;
-    u8 grayPOISpriteIds[GRAY_CITY_MAX_COUNT];
-    u8 trolleyPOISpriteIds[GRAY_CITY_MAX_COUNT];
-    u8 waypointSpriteId;
-    u8 waypointSpriteInL2Id;
-    u16 currentTrolley;
-};
 
-struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined with MapSystem_Resources at some point but not required
-{
     u16 mapSecId;
     u8 mapSecTypeHasVisited;
     u8 mapSecName[20];
@@ -124,6 +116,11 @@ struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined wi
     u8 l2_scroll_amount;
     u8 l2_arrowsTaskId;
     u16 l2_selectionPlusScroll; // used because List Arrow Sprites take a pointer and l2_selection + l2_scroll_amount can't be passed
+    u8 grayPOISpriteIds[GRAY_CITY_MAX_COUNT];
+    u8 trolleyPOISpriteIds[GRAY_CITY_MAX_COUNT];
+    u8 waypointSpriteId;
+    u8 waypointSpriteInL2Id;
+    u16 currentTrolley;
 };
 
 enum CursorState {
@@ -142,7 +139,6 @@ struct GrayPOI // Struct To Store Gray POI MapSec/Location/Shape for Loading Dyn
 };
 
 //==========EWRAM==========//
-static EWRAM_DATA struct MapSystem_Resources *sMapSystem_DataPtr = NULL;
 static EWRAM_DATA struct SFRegionMap *sRegionMap = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u16 sOWWaypointArrow_SpriteId = {0};
@@ -156,7 +152,7 @@ static bool8 MapSystem_InitBgs(void);
 static void MapSystem_FadeAndBail(void);
 static bool8 RegionMap_LoadGraphics(void);
 static void MapSystem_InitWindows(void);
-void InitSFRegionMapData(struct SFRegionMap *regionMap);
+void InitSFRegionMapData();
 static void PrintHeaderTitleToWindow();
 static void PrintTrolleyHeaderToWindow();
 static void Task_MapSystemWaitFadeIn(u8 taskId);
@@ -1393,33 +1389,15 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
 // This is our main initialization function if you want to call the menu from elsewhere
 void MapSystem_Init(MainCallback callback)
 {
-    u8 i = 0;
-
-    if ((sMapSystem_DataPtr = AllocZeroed(sizeof(struct MapSystem_Resources))) == NULL)
-    {
-        SetMainCallback2(callback);
-        return;
-    }
-
     if ((sRegionMap = AllocZeroed(sizeof(struct SFRegionMap))) == NULL)
     {
         SetMainCallback2(callback);
         return;
     }
 
-    sMapSystem_DataPtr->gfxLoadState = 0;
-    sMapSystem_DataPtr->savedCallback = callback;
-    sMapSystem_DataPtr->waypointSpriteId = SPRITE_NONE;
-    sMapSystem_DataPtr->waypointSpriteInL2Id = SPRITE_NONE;
-
-    for(i = 0; i < GRAY_POI_COUNT; i++)
-    {
-        sMapSystem_DataPtr->grayPOISpriteIds[i] = SPRITE_NONE;
-        sMapSystem_DataPtr->trolleyPOISpriteIds[i] = SPRITE_NONE;
-    }
-
-    sOWWaypointArrow_SpriteId = SPRITE_NONE;
-    sRegionMap->l2_selection = 0;
+    sRegionMap->savedCallback = callback;
+    
+    InitSFRegionMapData();
 
     SetMainCallback2(MapSystem_RunSetup);
 }
@@ -1455,9 +1433,8 @@ static void MapSystem_FreeResources(void)
 {
     FreeRegionMapSprites();
     FreeAllWindowBuffers();
-    try_free(sMapSystem_DataPtr);
-    try_free(sBg1TilemapBuffer);
     try_free(sRegionMap);
+    try_free(sBg1TilemapBuffer);
 }
 
 static void Task_MapSystemWaitFadeAndBail(u8 taskId)
@@ -1465,7 +1442,7 @@ static void Task_MapSystemWaitFadeAndBail(u8 taskId)
     if (!gPaletteFade.active)
     {
         MapSystem_FreeResources();
-        SetMainCallback2(sMapSystem_DataPtr->savedCallback);
+        SetMainCallback2(sRegionMap->savedCallback);
         DestroyTask(taskId);
     }
 }
@@ -1483,7 +1460,7 @@ static void Task_MapSystemTurnOff(u8 taskId)
     if (!gPaletteFade.active)
     {
         MapSystem_FreeResources();
-        SetMainCallback2(sMapSystem_DataPtr->savedCallback);
+        SetMainCallback2(sRegionMap->savedCallback);
         DestroyTask(taskId);
     }
 }
@@ -1531,7 +1508,7 @@ static bool8 MapSystem_DoGfxSetup(void)
         SetBgMode(0);
         if (MapSystem_InitBgs())
         {
-            sMapSystem_DataPtr->gfxLoadState = 0;
+            sRegionMap->gfxLoadState = 0;
             gMain.state++;
         }
         else
@@ -1542,7 +1519,6 @@ static bool8 MapSystem_DoGfxSetup(void)
         break;
     case 3:
         MapSystem_InitWindows();
-        InitSFRegionMapData(sRegionMap);
         gMain.state++;
         break;
     case 4:
@@ -1652,7 +1628,7 @@ static void MapSystem_InitWindows(void)
 
 static bool8 RegionMap_LoadGraphics(void) // This function is the one that actually loads the tiles and tilemaps for the backgrounds as well as more regionmap data loading for some reason (based on vanilla)
 {
-    switch (sMapSystem_DataPtr->gfxLoadState)
+    switch (sRegionMap->gfxLoadState)
     {
     case 0:
         switch (sCurrentMapMode)
@@ -1668,7 +1644,7 @@ static bool8 RegionMap_LoadGraphics(void) // This function is the one that actua
                 LoadPalette(sRegionGeographyPalette, 32, 32);
                 break;
         }
-        sMapSystem_DataPtr->gfxLoadState++;
+        sRegionMap->gfxLoadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible())
@@ -1686,7 +1662,7 @@ static bool8 RegionMap_LoadGraphics(void) // This function is the one that actua
                 LoadPalette(sRoutePalette, 0, 32);
                 break;
         }
-        sMapSystem_DataPtr->gfxLoadState++;
+        sRegionMap->gfxLoadState++;
         break;
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
@@ -1702,20 +1678,19 @@ static bool8 RegionMap_LoadGraphics(void) // This function is the one that actua
                 LoadPalette(sL2WindowPalette, 48, 32);
                 break;
         }
-        sMapSystem_DataPtr->gfxLoadState++;
+        sRegionMap->gfxLoadState++;
         break;
     case 3:
         SetBgAttribute(1, BG_ATTR_WRAPAROUND, 1);
         SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
-        sMapSystem_DataPtr->gfxLoadState = 0;
+        sRegionMap->gfxLoadState = 0;
         return TRUE;
     }
     return FALSE;
 }
 
-void InitSFRegionMapData(struct SFRegionMap *regionMap)
+void InitSFRegionMapData()
 {
-    sRegionMap = regionMap;
     sRegionMap->inL2State = FALSE;
     sRegionMap->inputCallback = ProcessRegionMapInput_Full;
     sRegionMap->cursorSprite = NULL;
@@ -1725,6 +1700,18 @@ void InitSFRegionMapData(struct SFRegionMap *regionMap)
     sRegionMap->playerIconSprite = NULL;
     sRegionMap->cursorMovementFrameCounter = 0;
     sRegionMap->blinkPlayerIcon = FALSE;
+    sRegionMap->gfxLoadState = 0;
+    sRegionMap->waypointSpriteId = SPRITE_NONE;
+    sRegionMap->waypointSpriteInL2Id = SPRITE_NONE;
+    sRegionMap->l2_selection = 0;
+
+    for(u8 i = 0; i < GRAY_POI_COUNT; i++)
+    {
+        sRegionMap->grayPOISpriteIds[i] = SPRITE_NONE;
+        sRegionMap->trolleyPOISpriteIds[i] = SPRITE_NONE;
+    }
+
+    sOWWaypointArrow_SpriteId = SPRITE_NONE;
     return;
 }
 
@@ -1755,7 +1742,7 @@ static void SpriteCB_CursorMap_TrolleyMode(struct Sprite *sprite)
 {
     sprite->x = 8 * sRegionMap->cursorPosX + 4 + 8;
     sprite->y = 8 * sRegionMap->cursorPosY + 4 + 16;
-    if (sMapSystem_DataPtr->currentTrolley == TROLLEY_IRISINA_TOWN)
+    if (sRegionMap->currentTrolley == TROLLEY_IRISINA_TOWN)
     {
         sprite->x += 4;
         sprite->y -= 4;
@@ -1766,7 +1753,7 @@ static void SpriteCB_CursorMap_TrolleyModeLOC(struct Sprite *sprite)
 {
     sprite->x = 8 * sRegionMap->cursorPosX + 4 + 8;
     sprite->y = 8 * sRegionMap->cursorPosY + 4 + 8;
-    if (sMapSystem_DataPtr->currentTrolley == TROLLEY_IRISINA_TOWN)
+    if (sRegionMap->currentTrolley == TROLLEY_IRISINA_TOWN)
     {
         sprite->x += 4;
         sprite->y -= 4;
@@ -2109,17 +2096,17 @@ static void CreateWaypointSprite(void)
     x = 8 * gSaveBlock3Ptr->waypoint.xTile + 4;
     y = 8 * gSaveBlock3Ptr->waypoint.yTile + 4;
 
-    if (sMapSystem_DataPtr->waypointSpriteId == SPRITE_NONE)
+    if (sRegionMap->waypointSpriteId == SPRITE_NONE)
     {
-       sMapSystem_DataPtr->waypointSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_WayPointMap, x, y, 0);
+       sRegionMap->waypointSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_WayPointMap, x, y, 0);
     }
     else
     {
-        gSprites[sMapSystem_DataPtr->waypointSpriteId].x = x;
-        gSprites[sMapSystem_DataPtr->waypointSpriteId].y = y;
+        gSprites[sRegionMap->waypointSpriteId].x = x;
+        gSprites[sRegionMap->waypointSpriteId].y = y;
     }
-    gSprites[sMapSystem_DataPtr->waypointSpriteId].invisible = FALSE;
-    StartSpriteAnim(&gSprites[sMapSystem_DataPtr->waypointSpriteId], 1);
+    gSprites[sRegionMap->waypointSpriteId].invisible = FALSE;
+    StartSpriteAnim(&gSprites[sRegionMap->waypointSpriteId], 1);
     return;
 }
 
@@ -2136,19 +2123,19 @@ static void CreateL2WaypointSprite(void)
         x = 64 + 32 - 10;
     }
 
-    if (sMapSystem_DataPtr->waypointSpriteInL2Id == SPRITE_NONE)
+    if (sRegionMap->waypointSpriteInL2Id == SPRITE_NONE)
     {
-       sMapSystem_DataPtr->waypointSpriteInL2Id = CreateSpriteAtEnd(&sSpriteTemplate_WayPointMapL2, x, y, 0);
+       sRegionMap->waypointSpriteInL2Id = CreateSpriteAtEnd(&sSpriteTemplate_WayPointMapL2, x, y, 0);
     }
     else
     {
-        gSprites[sMapSystem_DataPtr->waypointSpriteInL2Id].x = x;
-        gSprites[sMapSystem_DataPtr->waypointSpriteInL2Id].y = y;
+        gSprites[sRegionMap->waypointSpriteInL2Id].x = x;
+        gSprites[sRegionMap->waypointSpriteInL2Id].y = y;
     }
 
-    gSprites[sMapSystem_DataPtr->waypointSpriteInL2Id].oam.priority = 0;
-    gSprites[sMapSystem_DataPtr->waypointSpriteInL2Id].invisible = FALSE;
-    StartSpriteAnim(&gSprites[sMapSystem_DataPtr->waypointSpriteInL2Id], 2);
+    gSprites[sRegionMap->waypointSpriteInL2Id].oam.priority = 0;
+    gSprites[sRegionMap->waypointSpriteInL2Id].invisible = FALSE;
+    StartSpriteAnim(&gSprites[sRegionMap->waypointSpriteInL2Id], 2);
     return;
 }
 
@@ -2175,20 +2162,20 @@ static void L2WaypointSpriteCallback(struct Sprite *sprite)
 
 static void DestroyWaypointSprite(void)
 {
-    if (sMapSystem_DataPtr->waypointSpriteId != SPRITE_NONE)
-        DestroySprite(&gSprites[sMapSystem_DataPtr->waypointSpriteId]);
-    sMapSystem_DataPtr->waypointSpriteId = SPRITE_NONE;
+    if (sRegionMap->waypointSpriteId != SPRITE_NONE)
+        DestroySprite(&gSprites[sRegionMap->waypointSpriteId]);
+    sRegionMap->waypointSpriteId = SPRITE_NONE;
 
-    if (sMapSystem_DataPtr->waypointSpriteInL2Id != SPRITE_NONE)
-        DestroySprite(&gSprites[sMapSystem_DataPtr->waypointSpriteInL2Id]);
-    sMapSystem_DataPtr->waypointSpriteInL2Id = SPRITE_NONE;
+    if (sRegionMap->waypointSpriteInL2Id != SPRITE_NONE)
+        DestroySprite(&gSprites[sRegionMap->waypointSpriteInL2Id]);
+    sRegionMap->waypointSpriteInL2Id = SPRITE_NONE;
 }
 
 static void DestroyJustL2WaypointSprite(void)
 {
-    if (sMapSystem_DataPtr->waypointSpriteInL2Id != SPRITE_NONE)
-        DestroySprite(&gSprites[sMapSystem_DataPtr->waypointSpriteInL2Id]);
-    sMapSystem_DataPtr->waypointSpriteInL2Id = SPRITE_NONE;
+    if (sRegionMap->waypointSpriteInL2Id != SPRITE_NONE)
+        DestroySprite(&gSprites[sRegionMap->waypointSpriteInL2Id]);
+    sRegionMap->waypointSpriteInL2Id = SPRITE_NONE;
 }
 
 static u8 CheckIfOverCurrentWaypoint(void)
@@ -2233,7 +2220,7 @@ void ClearWaypointDataSave(void)
 void ClearWaypointData(void)
 {
     ClearWaypointDataSave();
-    if(sMapSystem_DataPtr->waypointSpriteId != SPRITE_NONE || sMapSystem_DataPtr->waypointSpriteInL2Id != SPRITE_NONE)
+    if(sRegionMap->waypointSpriteId != SPRITE_NONE || sRegionMap->waypointSpriteInL2Id != SPRITE_NONE)
         DestroyWaypointSprite();
 }
 
@@ -2528,10 +2515,10 @@ static void CreateGrayPOISprites(void)
         if(sMapGrayPOILocations[i].shapeOfPOI == POI_LARGE_RECT)
             x += 4; // Shift Over 4 Pixels For Large Rect, Offset for Some Reason
 
-        if (sMapSystem_DataPtr->grayPOISpriteIds[i] == SPRITE_NONE)
-            sMapSystem_DataPtr->grayPOISpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_GrayPOIMap, x, y, 0);
-        gSprites[sMapSystem_DataPtr->grayPOISpriteIds[i]].invisible = FALSE;
-        StartSpriteAnim(&gSprites[sMapSystem_DataPtr->grayPOISpriteIds[i]], sMapGrayPOILocations[i].shapeOfPOI);
+        if (sRegionMap->grayPOISpriteIds[i] == SPRITE_NONE)
+            sRegionMap->grayPOISpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_GrayPOIMap, x, y, 0);
+        gSprites[sRegionMap->grayPOISpriteIds[i]].invisible = FALSE;
+        StartSpriteAnim(&gSprites[sRegionMap->grayPOISpriteIds[i]], sMapGrayPOILocations[i].shapeOfPOI);
     }
     return;
 }
@@ -2542,9 +2529,9 @@ static void DestroyGrayPOISprites(void)
     u8 i = 0;
     for(i = 0; i < GRAY_POI_COUNT; i++)
     {
-        if(sMapSystem_DataPtr->grayPOISpriteIds[i] != SPRITE_NONE)
-            DestroySprite(&gSprites[sMapSystem_DataPtr->grayPOISpriteIds[i]]);
-        sMapSystem_DataPtr->grayPOISpriteIds[i] = SPRITE_NONE;
+        if(sRegionMap->grayPOISpriteIds[i] != SPRITE_NONE)
+            DestroySprite(&gSprites[sRegionMap->grayPOISpriteIds[i]]);
+        sRegionMap->grayPOISpriteIds[i] = SPRITE_NONE;
     }
 }
 
@@ -2585,14 +2572,14 @@ static void CreateTrolleyPOISprites(void)
         x = (SFTrolleyStops[i].trolleyLocationIconX) + 8;
         y = (SFTrolleyStops[i].trolleyLocationIconY) + 16;
 
-        if (sMapSystem_DataPtr->trolleyPOISpriteIds[i] == SPRITE_NONE)
-            sMapSystem_DataPtr->trolleyPOISpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_TrolleyPOIMap, x, y, 0);
+        if (sRegionMap->trolleyPOISpriteIds[i] == SPRITE_NONE)
+            sRegionMap->trolleyPOISpriteIds[i] = CreateSpriteAtEnd(&sSpriteTemplate_TrolleyPOIMap, x, y, 0);
 
-        gSprites[sMapSystem_DataPtr->trolleyPOISpriteIds[i]].invisible = FALSE;
+        gSprites[sRegionMap->trolleyPOISpriteIds[i]].invisible = FALSE;
         if(GetMapsecTypeHasVisited(SFTrolleyStops[i].trolleyMapSec) == LOCATION_VISITED)
-            StartSpriteAnim(&gSprites[sMapSystem_DataPtr->trolleyPOISpriteIds[i]], 0);
+            StartSpriteAnim(&gSprites[sRegionMap->trolleyPOISpriteIds[i]], 0);
         else
-            StartSpriteAnim(&gSprites[sMapSystem_DataPtr->trolleyPOISpriteIds[i]], 1);
+            StartSpriteAnim(&gSprites[sRegionMap->trolleyPOISpriteIds[i]], 1);
     }
     return;
 }
@@ -2603,9 +2590,9 @@ static void DestroyTrolleyPOISprites(void)
     u8 i = 0;
     for(i = 0; i < GRAY_POI_COUNT; i++)
     {
-        if(sMapSystem_DataPtr->trolleyPOISpriteIds[i] != SPRITE_NONE)
-            DestroySprite(&gSprites[sMapSystem_DataPtr->trolleyPOISpriteIds[i]]);
-        sMapSystem_DataPtr->trolleyPOISpriteIds[i] = SPRITE_NONE;
+        if(sRegionMap->trolleyPOISpriteIds[i] != SPRITE_NONE)
+            DestroySprite(&gSprites[sRegionMap->trolleyPOISpriteIds[i]]);
+        sRegionMap->trolleyPOISpriteIds[i] = SPRITE_NONE;
     }
 }
 
@@ -2790,7 +2777,7 @@ static const u8 sText_CanRideTheTrolley[]          = _("Take trolley to {STR_VAR
 static const u8 sText_CantRideTrolleyYet[]         = _("You cannot take the trolley here yet.");
 static void PrintTrolleyHeaderToWindow()
 {
-    GetSFMapName(gStringVar1, SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].trolleyMapSec, 0);
+    GetSFMapName(gStringVar1, SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec, 0);
     StringExpandPlaceholders(gStringVar2, sText_CanRideTheTrolley);
 
     // Clear Windows
@@ -2798,7 +2785,7 @@ static void PrintTrolleyHeaderToWindow()
     FillWindowPixelBuffer(WINDOW_FOOTER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     // Header Printing
-    u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].trolleyMapSec);
+    u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec);
     if(hasVisited == LOCATION_VISITED)
         AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
     else
@@ -3267,11 +3254,11 @@ static void Task_MapSystem_TrolleyMode_Main(u8 taskId)
     if(JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].trolleyMapSec);
+        u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec);
         if(hasVisited == LOCATION_VISITED)
         {
             sRegionMap->warpCounter = 0;
-            sRegionMap->mapSecId = SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].trolleyMapSec;
+            sRegionMap->mapSecId = SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec;
             gTasks[taskId].func = Task_MapSystem_TrolleyMode_Warp;
         }
         return;
@@ -3286,37 +3273,37 @@ static void Task_MapSystem_TrolleyMode_Main(u8 taskId)
     if(JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        u16 nextTrolley = SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].nextTrolleyOptions.moveUpStop;
+        u16 nextTrolley = SFTrolleyStops[sRegionMap->currentTrolley].nextTrolleyOptions.moveUpStop;
         sRegionMap->cursorPosX = SFTrolleyStops[nextTrolley].trolleyCursorX;
         sRegionMap->cursorPosY = SFTrolleyStops[nextTrolley].trolleyCursorY;
-        sMapSystem_DataPtr->currentTrolley = nextTrolley;
+        sRegionMap->currentTrolley = nextTrolley;
         PrintTrolleyHeaderToWindow();
     }
     if(JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        u16 nextTrolley = SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].nextTrolleyOptions.moveDownStop;
+        u16 nextTrolley = SFTrolleyStops[sRegionMap->currentTrolley].nextTrolleyOptions.moveDownStop;
         sRegionMap->cursorPosX = SFTrolleyStops[nextTrolley].trolleyCursorX;
         sRegionMap->cursorPosY = SFTrolleyStops[nextTrolley].trolleyCursorY;
-        sMapSystem_DataPtr->currentTrolley = nextTrolley;
+        sRegionMap->currentTrolley = nextTrolley;
         PrintTrolleyHeaderToWindow();
     }
     if(JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
-        u16 nextTrolley = SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].nextTrolleyOptions.moveLeftStop;
+        u16 nextTrolley = SFTrolleyStops[sRegionMap->currentTrolley].nextTrolleyOptions.moveLeftStop;
         sRegionMap->cursorPosX = SFTrolleyStops[nextTrolley].trolleyCursorX;
         sRegionMap->cursorPosY = SFTrolleyStops[nextTrolley].trolleyCursorY;
-        sMapSystem_DataPtr->currentTrolley = nextTrolley;
+        sRegionMap->currentTrolley = nextTrolley;
         PrintTrolleyHeaderToWindow();
     }
     if(JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
-        u16 nextTrolley = SFTrolleyStops[sMapSystem_DataPtr->currentTrolley].nextTrolleyOptions.moveRightStop;
+        u16 nextTrolley = SFTrolleyStops[sRegionMap->currentTrolley].nextTrolleyOptions.moveRightStop;
         sRegionMap->cursorPosX = SFTrolleyStops[nextTrolley].trolleyCursorX;
         sRegionMap->cursorPosY = SFTrolleyStops[nextTrolley].trolleyCursorY;
-        sMapSystem_DataPtr->currentTrolley = nextTrolley;
+        sRegionMap->currentTrolley = nextTrolley;
         PrintTrolleyHeaderToWindow();
     }
 }
