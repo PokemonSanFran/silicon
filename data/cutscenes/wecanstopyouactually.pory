@@ -262,6 +262,7 @@ script WeCanStopYouActaully_ArrestCutscene {
         msgbox(gText_WeCanStopYouActually_TheNextDay,MSGBOX_AUTOCLOSE)
         closemessage
         setflag(FLAG_SPAWN_INVISIBLE)
+        savebgm(MUS_SRC_GETTING_ARRESTED)
         warpsilent(MAP_ARANTRAZ,255,8,15)
 }
 
