@@ -162,6 +162,8 @@ const ARMANDO = 13
 const ADAORA = 14
 
 script WeCanStopYouActaully_ArrestCutscene {
+        setflag(FLAG_DONT_TRANSITION_MUSIC)
+        playbgm(MUS_SRC_GETTING_ARRESTED,FALSE)
         callnative(SetPostCreditsSceneWarpLocation)
         startcutscene(JUMPPLAYER_EPILOGUE)
         lockall
@@ -262,8 +264,10 @@ script WeCanStopYouActaully_ArrestCutscene {
         msgbox(gText_WeCanStopYouActually_TheNextDay,MSGBOX_AUTOCLOSE)
         closemessage
         setflag(FLAG_SPAWN_INVISIBLE)
-        savebgm(MUS_SRC_GETTING_ARRESTED)
         warpsilent(MAP_ARANTRAZ,255,8,15)
+        waitstate
+        release
+        end
 }
 
 

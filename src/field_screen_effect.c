@@ -303,7 +303,11 @@ static void SetUpWarpExitTask(void)
 
 void FieldCB_DefaultWarpExit(void)
 {
-    Overworld_PlaySpecialMapMusic();
+    // Start firstMusicUpdate
+    //Overworld_PlaySpecialMapMusic();
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
+        Overworld_PlaySpecialMapMusic();
+    // End firstMusicUpdate
     WarpFadeInScreen();
     SetUpWarpExitTask();
     FollowerNPC_WarpSetEnd();
