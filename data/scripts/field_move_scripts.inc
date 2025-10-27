@@ -8,6 +8,7 @@ EventScript_CutTree::
     goto_if_quest_inactive QUEST_WILDFIRERISK,EventScript_CheckTreeCantCut
     checkpartylearnknowsfieldmove MOVE_CUT
 	//goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
+	//checkfieldmove FIELD_MOVE_CUT, TRUE
 @ End qol_field_moves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	setfieldeffectargument 0, VAR_RESULT
@@ -79,6 +80,7 @@ EventScript_RockSmash::
     goto_if_eq VAR_RESULT, FALSE, EventScript_CantSmashRock
     checkpartylearnknowsfieldmove MOVE_ROCK_SMASH
 	//goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
+	//checkfieldmove FIELD_MOVE_ROCK_SMASH, TRUE
 @ End qol_field_moves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
 	setfieldeffectargument 0, VAR_RESULT
@@ -247,6 +249,8 @@ EventScript_StrengthBoulder::
     checkitem ITEM_STRENGTH_TOOL,1
     goto_if_eq VAR_RESULT, TRUE, EventScript_UseStrengthTool
     checkpartylearnknowsfieldmove MOVE_STRENGTH
+	//goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
+	//checkfieldmove FIELD_MOVE_STRENGTH, TRUE
 @ End qol_field_moves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
 	setfieldeffectargument 0, VAR_RESULT
@@ -313,6 +317,7 @@ EventScript_UseWaterfall::
     checkitem ITEM_WATERFALL_TOOL, 1
     goto_if_eq VAR_RESULT, TRUE, EventScript_UseWaterfallTool
     checkpartylearnknowsfieldmove MOVE_WATERFALL
+	//checkfieldmove FIELD_MOVE_WATERFALL
 @ End qol_field_moves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
@@ -356,6 +361,7 @@ EventScript_UseDive::
 	//checkpartymove MOVE_DIVE
     goto_if_quest_inactive QUEST_ALLTHATGLITTERSMIGHTBEGOLD, EventScript_CantDive
     call EventScript_CheckDiveToolAndParty
+	//checkfieldmove FIELD_MOVE_DIVE
 @ End qol_field_moves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
 	copyvar 0x8004 VAR_RESULT
@@ -386,6 +392,7 @@ EventScript_UseDiveUnderwater::
 @ Start qol_field_moves
 	//checkpartymove MOVE_DIVE
     call EventScript_CheckDiveToolAndParty
+	//checkfieldmove FIELD_MOVE_DIVE
 @ End qol_field_moves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
@@ -493,3 +500,36 @@ EventScript_UseDefog::
 	waitstate
 	releaseall
 	end
+
+EventScript_UseRockClimb::
+	lockall
+	checkfieldmove FIELD_MOVE_ROCK_CLIMB
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantRockClimb
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	msgbox Text_WantToRockClimb, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_EndRockClimb
+	msgbox Text_MonUsedRockClimb, MSGBOX_DEFAULT
+	closemessage
+	dofieldeffect FLDEFF_USE_ROCK_CLIMB
+	waitstate
+	goto EventScript_EndRockClimb
+	end
+
+EventScript_CantRockClimb::
+	msgbox Text_CantRockClimb, MSGBOX_DEFAULT
+
+EventScript_EndRockClimb::
+	releaseall
+	end
+
+Text_WantToRockClimb:
+    .string "The cliff is steep.\n"
+    .string "Would you like to use Rock Climb?$"
+
+Text_MonUsedRockClimb:
+    .string "{STR_VAR_1} used Rock Climb!$"
+
+Text_CantRockClimb:
+    .string "The cliff is steep.\n"
+    .string "A Pokémon may be able to climb it.$"

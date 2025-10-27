@@ -202,7 +202,7 @@ u32 SpeciesMenu_GetMenuPosition(void);
 void SpeciesGrid_CleanUp(u8 taskId);
 enum PokedexSortOrders SpeciesGrid_GetSort(void);
 const u16* SpeciesGrid_GetSortOrder(enum PokedexSortOrders);
-u32 SpeciesGrid_GetMonIconSpriteId(enum ParentsDisplayRows row, enum ParentsDisplayColumns column);
+u32 SpeciesGrid_GetMonIconSpriteId(u32 row, u32 column);
 u32 PageMoves_GetMonToDisplay(void);
 void PageMoves_BuildHeaderStringPlayCry(enum PokedexPages pageId);
 void PageEvolution_BuildHeaderStringPlayCry(enum PokedexPages pageId);

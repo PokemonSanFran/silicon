@@ -66,12 +66,11 @@ static EWRAM_DATA u8  currentScreenId = 0;
 static EWRAM_DATA u8  currentFirstOption = 0;
 static EWRAM_DATA bool8 areYouNotOnSettingsHub = FALSE;
 
-//static EWRAM_DATA u8 Temporal_Options_Preset_Settings[NUM_OF_PRESET_OPTIONS];       //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Game_Settings[NUM_OPTIONS_GAME_SETTINGS];     //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Battle_Settings[NUM_OPTIONS_BATTLE_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Music_Settings[NUM_OPTIONS_MUSIC_SETTINGS];   //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Visual_Settings[NUM_OPTIONS_VISUAL_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
-static EWRAM_DATA u8 Temporal_Options_Random_Settings[NUM_OPTIONS_RANDOM_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Game_Settings[NUM_OPTIONS_GAME_SETTINGS];     //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Battle_Settings[NUM_OPTIONS_BATTLE_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Music_Settings[NUM_OPTIONS_MUSIC_SETTINGS];   //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Visual_Settings[NUM_OPTIONS_VISUAL_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 Temporal_Options_Random_Settings[NUM_OPTIONS_RANDOM_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
 
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
@@ -208,11 +207,11 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sTMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.4bpp.lz");
-static const u32 sTMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.bin.lz");
+static const u32 sTMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.4bpp.smol");
+static const u32 sTMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.bin.smolTM");
 
-static const u32 sMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tiles.4bpp.lz");
-static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tiles.bin.lz");
+static const u32 sMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tiles.4bpp.smol");
+static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tiles.bin.smolTM");
 static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal");
 
 static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
@@ -397,12 +396,9 @@ static void Menu_FreeResources(void)
 {
     ShouldShowDiscardDialogue = FALSE;
     FreeAllSpritePalettes();
-    Free(sMenuDataPtr);
-    Free(Temporal_Options_Game_Settings);
-    Free(Temporal_Options_Battle_Settings);
-    Free(Temporal_Options_Music_Settings);
-    Free(Temporal_Options_Visual_Settings);
-    Free(Temporal_Options_Random_Settings);
+
+    if (sMenuDataPtr != NULL)
+        Free(sMenuDataPtr);
 
     for (u32 backgroundId = 0; backgroundId < MENU_BACKGROUND_COUNT; backgroundId++)
         Free(sBgTilemapBuffer[backgroundId]);
@@ -410,7 +406,6 @@ static void Menu_FreeResources(void)
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
-
 
 static void Task_MenuWaitFadeAndBail(u8 taskId)
 {
@@ -792,7 +787,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_DEFAULT,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_ON,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_BATTLE,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -828,7 +822,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_CHALLENGE,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_ON,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_BATTLE,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -864,7 +857,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_SPEEDRUN,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_OFF,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_OFF,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_OFF,
@@ -900,7 +892,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_NUZLOCKE,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_OFF,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_OFF,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -936,7 +927,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_KAIZO,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ACTIVE,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_OFF,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_OFF,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -1528,21 +1518,6 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("When a Pokémon gains Experience of Effort Values a message will NOT be displayed."),
         },
         .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_POINTS_SUMMARY] =
-    {
-        .title = COMPOUND_STRING("Points Summary"),
-        .options = {
-            COMPOUND_STRING("Faint"),
-            COMPOUND_STRING("Battle"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("When a that is not on the field Pokémon gains Experience or Effort Values, a message will be displayed after an opponent faints."),
-            COMPOUND_STRING("When a that is not on the field Pokémon gains Experience or Effort Values, a message will be displayed after the player wins the battle."),
-            COMPOUND_STRING("When a that is not on the field Pokémon gains Experience or Effort Values, a message will be NOT be displayed."),
-        },
-        .numOptions = BATTLE_OPTION_POINTS_SUMMARY_COUNT,
     },
     [BATTLE_OPTIONS_EXP_MULTIPLIER] =
     {
@@ -2974,7 +2949,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         u32 fontId = FONT_OPTION_DESC;
         u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
         u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
-        BreakStringAutomatic(gStringVar1,OPTION_DESC_PIXEL_WIDTH,OPTION_DESC_LINES_COUNT,fontId, HIDE_SCROLL_PROMPT);
+        BreakStringNaive(gStringVar1,OPTION_DESC_PIXEL_WIDTH,OPTION_DESC_LINES_COUNT,fontId, HIDE_SCROLL_PROMPT);
         AddTextPrinterParameterized4(windowId, fontId, halfTile, 108, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
     }
 

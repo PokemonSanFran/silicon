@@ -156,9 +156,9 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     },
 };
 
-static const u32 sMenuTiles[]       = INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.lz");
-static const u32 sMenuTilemap[]     = INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.lz");
-static const u32 sMenuTilemapBuy[]  = INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.lz");
+static const u32 sMenuTiles[]       = INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol");
+static const u32 sMenuTilemap[]     = INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.smolTM");
+static const u32 sMenuTilemapBuy[]  = INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM");
 static const u16 sMenuPalette[]     = INCBIN_U16("graphics/ui_menus/presto/palette.gbapal");
 
 enum Colors
@@ -399,13 +399,13 @@ static void SpriteCallback_DownArrowSmall(struct Sprite *sprite)
 
 // Buy Icon Sprite -------------------------------------------------------------------------------------------------------
 
-static const u32 gBattlePrestoBuyIcon_Gfx[]        = INCBIN_U32("graphics/ui_menus/presto/buyicon.4bpp.lz");
-static const u32 gBattlePrestoUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.lz");
-static const u32 gBattlePrestoUpArrowSmall_Gfx[]   = INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.lz");
-static const u32 gBattlePrestoDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.lz");
-static const u32 gBattlePrestoDownArrowSmall_Gfx[] = INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.lz");
-static const u32 gBattlePrestoLeftArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.lz");
-static const u32 gBattlePrestoRightArrow_Gfx[]     = INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.lz");
+static const u32 gBattlePrestoBuyIcon_Gfx[]        = INCBIN_U32("graphics/ui_menus/presto/buyicon.4bpp.smol");
+static const u32 gBattlePrestoUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.smol");
+static const u32 gBattlePrestoUpArrowSmall_Gfx[]   = INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.smol");
+static const u32 gBattlePrestoDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.smol");
+static const u32 gBattlePrestoDownArrowSmall_Gfx[] = INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.smol");
+static const u32 gBattlePrestoLeftArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.smol");
+static const u32 gBattlePrestoRightArrow_Gfx[]     = INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.smol");
 
 static const struct SpritePalette sPrestoInterfaceSpritePalette[] = {
     {sMenuPalette, PAL_UI_SPRITES},
@@ -700,11 +700,11 @@ static void Menu_ChangeTilemap(void)
 
     if(sMenuDataPtr->buyScreen){
         DisableAllItemIcons();
-        LZDecompressWram(sMenuTilemapBuy, sBg1TilemapBuffer);
+        DecompressDataWithHeaderWram(sMenuTilemapBuy, sBg1TilemapBuffer);
     }
     else{
         EnableAllItemIcons();
-        LZDecompressWram(sMenuTilemap, sBg1TilemapBuffer);
+        DecompressDataWithHeaderWram(sMenuTilemap, sBg1TilemapBuffer);
     }
 }
 
@@ -720,7 +720,7 @@ static bool8 Menu_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sMenuTilemap, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(sMenuTilemap, sBg1TilemapBuffer);
             sMenuDataPtr->gfxLoadState++;
         }
         break;
