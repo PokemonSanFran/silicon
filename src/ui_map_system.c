@@ -151,6 +151,7 @@ static bool8 MapSystem_DoGfxSetup(void);
 static bool8 MapSystem_InitBgs(void);
 static void MapSystem_FadeAndBail(void);
 static bool8 RegionMap_LoadGraphics(void);
+static bool8 GetMenuL2State(void);
 static void MapSystem_InitWindows(void);
 void InitSFRegionMapData();
 static void PrintHeaderTitleToWindow();
@@ -201,6 +202,7 @@ static void DestroyJustL2WaypointSprite(void);
 static u8 HandleWarpFailedNoCash(void);
 static u8 HandleAttemptWarpInput(void);
 u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId);
+static const u8 *GetHelpBarText(void);
 static u8 HandleWarpConfirmInput(void);
 static u8 HandleWarpTaxiCutscene(void);
 static u8 HandleWarpCloseMenu(void);
@@ -1023,18 +1025,18 @@ static const u16 sMapHealLocations[MAPSEC_NONE] =
 
 
 // L2 Data
-//   name	            x	y	map	
-//   Glavez Heights	    6	12	MAP_GLAVEZ_HILL	
-//   Pokemon Center	    17	4	MAP_GLAVEZ_HILL	
-//   Taxi Union	        6	3	MAP_GLAVEZ_HILL					
-//   Pokemon Center	    25	30	MAP_PERLACIA_CITY	
-//   Stadium	        31	39	MAP_PERLACIA_CITY	
-//   Startup	        4	36	MAP_PERLACIA_CITY	
-//   Perlacia Museum	27	23	MAP_PERLACIA_CITY	
-//   Boomers	        12	19	MAP_PERLACIA_CITY	
-//   Newspaper	        6	19	MAP_PERLACIA_CITY	
-//   Sanitation	        1	19	MAP_PERLACIA_CITY	
-//   Sharprise Spire	6	10	MAP_PERLACIA_CITY	
+//   name	            x	y	map
+//   Glavez Heights	    6	12	MAP_GLAVEZ_HILL
+//   Pokemon Center	    17	4	MAP_GLAVEZ_HILL
+//   Taxi Union	        6	3	MAP_GLAVEZ_HILL
+//   Pokemon Center	    25	30	MAP_PERLACIA_CITY
+//   Stadium	        31	39	MAP_PERLACIA_CITY
+//   Startup	        4	36	MAP_PERLACIA_CITY
+//   Perlacia Museum	27	23	MAP_PERLACIA_CITY
+//   Boomers	        12	19	MAP_PERLACIA_CITY
+//   Newspaper	        6	19	MAP_PERLACIA_CITY
+//   Sanitation	        1	19	MAP_PERLACIA_CITY
+//   Sharprise Spire	6	10	MAP_PERLACIA_CITY
 
 
 #define MAX_L2_COUNT 12
@@ -1044,9 +1046,9 @@ struct L2LocationData {
     u32 healLocation;
 };
 
-static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] = 
+static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] =
 {
-    [MAPSEC_GLAVEZ_HILL] = 
+    [MAPSEC_GLAVEZ_HILL] =
     {
         {
             .name = COMPOUND_STRING("Glavez Heights"),
@@ -1062,7 +1064,7 @@ static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] =
         },
     },
 
-    [MAPSEC_PERLACIA_CITY] = 
+    [MAPSEC_PERLACIA_CITY] =
     {
         {
             .name = COMPOUND_STRING("Pokemon Center"),
@@ -1396,7 +1398,7 @@ void MapSystem_Init(MainCallback callback)
     }
 
     sRegionMap->savedCallback = callback;
-    
+
     InitSFRegionMapData();
 
     SetMainCallback2(MapSystem_RunSetup);
@@ -1687,6 +1689,11 @@ static bool8 RegionMap_LoadGraphics(void) // This function is the one that actua
         return TRUE;
     }
     return FALSE;
+}
+
+static bool8 GetMenuL2State(void)
+{
+    return sRegionMap->inL2State;
 }
 
 void InitSFRegionMapData()
@@ -2006,7 +2013,7 @@ static void UpdateRegionMapCursor(void) // Main Function That Updates the Positi
                 UpdateCursorPositionOnAnimChange();
             }
         }
-        
+
         PrintWarpPriceOnTooltip_AllFrames();
 
     }
@@ -2143,7 +2150,7 @@ static void L2WaypointSpriteCallback(struct Sprite *sprite)
 {
     if (gSaveBlock3Ptr->waypoint.l2_id == 0xFF)
         return;
-    
+
     if (gSaveBlock3Ptr->waypoint.l2_id < sRegionMap->l2_scroll_amount)
     {
         sprite->invisible = TRUE;
@@ -2180,7 +2187,7 @@ static void DestroyJustL2WaypointSprite(void)
 
 static u8 CheckIfOverCurrentWaypoint(void)
 {
-    if(!sRegionMap->inL2State) // Default State
+    if(!GetMenuL2State())
     {
         if((gSaveBlock3Ptr->waypoint.xTile == sRegionMap->cursorPosX) && (gSaveBlock3Ptr->waypoint.yTile == sRegionMap->cursorPosY))
             return TRUE;
@@ -2242,7 +2249,7 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
             return direction;
         }
     }
-    
+
     if (gSaveBlock3Ptr->waypoint.currentState == WAYPOINT_L2) // Check Current Map For L2 Waypoint
     {
         if (gSaveBlock3Ptr->waypoint.healLocation == L2_Info[gMapHeader.regionMapSectionId][gSaveBlock3Ptr->waypoint.l2_id].healLocation)
@@ -2366,7 +2373,7 @@ static void HandleAttemptToPlaceWaypoint(void)
 
     if(!CheckIfHoverLocationIsMapSecNone())
     {
-        if(!sRegionMap->inL2State) // Default State
+        if(!GetMenuL2State())
         {
             SetWaypointData(WAYPOINT_L1, sMapHealLocations[sRegionMap->mapSecId]);
             CreateWaypointSprite();
@@ -2632,7 +2639,7 @@ static void PrintHeaderTitleToWindow()
         case MAP_MODE_TROLLEY:
         {
             // Header Printing
-            if(!sRegionMap->inL2State) // Default State
+            if(!GetMenuL2State())
             {
                 ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
                 StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
@@ -2694,40 +2701,13 @@ static void PrintHeaderTitleToWindow()
     }
 
     // Footer Printing
-    if(!sRegionMap->inL2State)  // Default State
-    {
-        AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, 16, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_A_Button_BarDef);
-        AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, (5*8)+4, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_B_Button_BarDef);
-        BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sA_ButtonGfx, 0, (1), 16, 16);
-        BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sB_ButtonGfx, (4*8)-4, (1), 16, 16);
 
-        switch (sCurrentMapMode)
-        {
-            case MAP_MODE_DEFAULT:
-                AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, (13*8) - 7, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Select_Button_BarDef);
-                AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, (21 * 8) - 7, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Start_Button_BarDef);
-                BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sSelect_ButtonGfx, (9*8) - 3, (1), 32, 16);
-                BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sStart_ButtonGfx, (16*8), (1), 32, 16);
-                break;
-        }
+    u32 fontId = FONT_NARROW;
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    StringCopy(gStringVar3,GetHelpBarText());
+    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
 
-    }
-    else // L2 State
-    {
-        AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, 16, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_A_Button_BarDef);
-        AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, (5*8)+4, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_B_Button_BarDef);
-        BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sA_ButtonGfx, 0, (1), 16, 16);
-        BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sB_ButtonGfx, (4*8)-4, (1), 16, 16);
-
-        switch (sCurrentMapMode)
-        {
-            case MAP_MODE_DEFAULT:
-                AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, (13*8) - 7, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Select_Button_BarDef);
-                BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sSelect_ButtonGfx, (9*8) - 3, (1), 32, 16);
-                break;
-        }
-
-    }
 
     // Load Windows
     PutWindowTilemap(WINDOW_HEADER_TEXT);
@@ -2735,6 +2715,26 @@ static void PrintHeaderTitleToWindow()
     PutWindowTilemap(WINDOW_FOOTER_TEXT);
     CopyWindowToVram(WINDOW_FOOTER_TEXT, 3);
     return;
+}
+
+static const u8 sText_HelpBar_NotL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
+static const u8 sText_HelpBar_NotL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
+static const u8 sText_HelpBar_IsL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
+static const u8 sText_HelpBar_IsL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
+
+static const u8 *GetHelpBarText(void)
+{
+    bool32 l2State = GetMenuL2State();
+    bool32 defaultMapMode = (sCurrentMapMode == MAP_MODE_DEFAULT);
+
+    if (!l2State && defaultMapMode)
+        return sText_HelpBar_NotL2IsDefault;
+    else if (!l2State && !defaultMapMode)
+        return sText_HelpBar_NotL2NotDefault;
+    else if (l2State && !defaultMapMode)
+        return sText_HelpBar_IsL2NotDefault;
+    else
+        return sText_HelpBar_IsL2IsDefault;
 }
 
 static void PrintHeaderWarpConfirmToWindow(void)
@@ -2748,7 +2748,7 @@ static void PrintHeaderWarpConfirmToWindow(void)
     StringExpandPlaceholders(gStringVar4, sText_Money_BarSmall);
     StringCopy(gStringVar1, sText_WarpConfirm);
 
-    if (!sRegionMap->inL2State)
+    if(!GetMenuL2State())
         StringAppend(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
     else
         StringAppend(gStringVar1, GetCurrentL2Name());
@@ -2763,11 +2763,11 @@ static void PrintHeaderWarpConfirmToWindow(void)
     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (24*8)+3, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
 
     // Footer Printing
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, 16, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_A_Button_BarDef);
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, (5*8)+4, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_B_Button_BarDef);
-
-    BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sA_ButtonGfx, 0, (1), 16, 16);
-    BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sB_ButtonGfx, (4*8)-4, (1), 16, 16);
+    u32 fontId = FONT_NARROW;
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    StringCopy(gStringVar3,GetHelpBarText());
+    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
 
     // Load Windows
     PutWindowTilemap(WINDOW_HEADER_TEXT);
@@ -2795,10 +2795,11 @@ static void PrintTrolleyHeaderToWindow()
         AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_CantRideTrolleyYet);
 
     // Footer Printing
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, 16, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_A_Button_BarDef);
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, 7, (5*8)+4, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_B_Button_BarDef);
-    BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sA_ButtonGfx, 0, (1), 16, 16);
-    BlitBitmapToWindow(WINDOW_FOOTER_TEXT, sB_ButtonGfx, (4*8)-4, (1), 16, 16);
+    u32 fontId = FONT_NARROW;
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    StringCopy(gStringVar3,GetHelpBarText());
+    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
 
     // Load Windows
     PutWindowTilemap(WINDOW_HEADER_TEXT);
@@ -2850,7 +2851,7 @@ static void PrintL2WindowText(u8 windowId)
         if (L2_Info[sRegionMap->mapSecId][i].healLocation == 0)
             continue;
 
-        y += L2_Y_DIFFERENCE;      
+        y += L2_Y_DIFFERENCE;
         str = L2_Info[sRegionMap->mapSecId][i].name;
 
         AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 1, 0, colorText2, 0xFF, str);
@@ -2987,7 +2988,7 @@ static void CreateL2SelectorSprites(void)
         sRegionMap->l2_selectorSpriteIds[1] = CreateSpriteAtEnd(&sSpriteTemplate_L2SelectorMap, x, y, 0);
 
     gSprites[sRegionMap->l2_selectorSpriteIds[1]].invisible = TRUE;
-    
+
     StartSpriteAnim(&gSprites[sRegionMap->l2_selectorSpriteIds[1]], 1);
     return;
 }
@@ -3009,7 +3010,7 @@ static void ShowL2Selector(u8 side)
 
     if(sRegionMap->l2_selectorSpriteIds[0] != SPRITE_NONE)
         gSprites[sRegionMap->l2_selectorSpriteIds[0]].invisible = FALSE;
-    
+
     if(sRegionMap->l2_selectorSpriteIds[1] != SPRITE_NONE)
         gSprites[sRegionMap->l2_selectorSpriteIds[1]].invisible = FALSE;
 
@@ -3057,14 +3058,14 @@ static void ShowL2Selector(u8 side)
 
         gSprites[sRegionMap->l2_selectorSpriteIds[1]].hFlip = TRUE;
     }
-    
+
 }
 
 static void HideL2Selector(void)
 {
     if(sRegionMap->l2_selectorSpriteIds[0] != SPRITE_NONE)
         gSprites[sRegionMap->l2_selectorSpriteIds[0]].invisible = TRUE;
-    
+
     if(sRegionMap->l2_selectorSpriteIds[1] != SPRITE_NONE)
         gSprites[sRegionMap->l2_selectorSpriteIds[1]].invisible = TRUE;
 
@@ -3152,7 +3153,7 @@ static u8 ProcessRegionMapInput_L2_State(void) // In L2 State Just Pass Along A/
         {
             sRegionMap->l2_selection += 1;
         }
-        
+
         ReprintL2WindowText();
         return input;
     }
@@ -3325,14 +3326,14 @@ static void Task_MapSystem_DefaultMode_Main(u8 taskId)
             PrintHeaderTitleToWindow();
             break;
         case MAP_INPUT_START_BUTTON: // If Start Button Check to Enter / Exit L2 State
-            if ((!sRegionMap->inL2State) && CheckIfHoverLocationUnlocked() && CheckIfHoverLocationHasL2())
+            if ((!GetMenuL2State()) && CheckIfHoverLocationUnlocked() && CheckIfHoverLocationHasL2())
             {
                 ShowL2WindowBG();
                 sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
                 sRegionMap->inL2State = TRUE;
 
             }
-            else if(sRegionMap->inL2State)
+            else if(GetMenuL2State())
             {
                 ClearL2WindowText();
                 HideL2WindowBg();
@@ -3479,7 +3480,7 @@ static u8 HandleAttemptWarpInput(void)
         u32 warpPrice = GetWarpPriceAtMapSecByMapType(mapSecId);
         VarSet(VAR_0x8005, warpPrice);
 
-        u32 questException = NO_EXCEPTION;       
+        u32 questException = NO_EXCEPTION;
         switch(sCurrentMapMode)
         {
             case MAP_MODE_DEFAULT:
@@ -3515,7 +3516,7 @@ static u8 HandleAttemptWarpInput(void)
     }
     else
     {
-        if (sRegionMap->inL2State)
+        if(GetMenuL2State())
             sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
         else
             sRegionMap->inputCallback = ProcessRegionMapInput_Full;
@@ -3535,7 +3536,7 @@ static u8 HandleWarpConfirmInput(void)
             break;
         case 1: // Handle Input
             if (JOY_NEW(A_BUTTON))
-            {   
+            {
                 u32 questException = NO_EXCEPTION;
                 switch(sCurrentMapMode)
                 {
@@ -3555,7 +3556,7 @@ static u8 HandleWarpConfirmInput(void)
                 PlaySE(SE_SELECT);
                 GetSFMapName(sRegionMap->mapSecName, sRegionMap->mapSecId, MAP_NAME_LENGTH);
                 PrintHeaderTitleToWindow();
-                if (sRegionMap->inL2State)
+                if(GetMenuL2State())
                     sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
                 else
                     sRegionMap->inputCallback = ProcessRegionMapInput_Full;
@@ -3608,7 +3609,7 @@ static u8 HandleWarpCloseMenu(void)
         case 0:
             u8 healLocation = sMapHealLocations[sRegionMap->mapSecId];
 
-            if (sRegionMap->inL2State)
+            if(GetMenuL2State())
             {
                 healLocation = GetCurrentL2HealLocation();
             }
@@ -3698,7 +3699,7 @@ static u8 HandleWarpFailedNoCash(void)
         case WARP_FAILED_PAUSE_END:
             //sRegionMap->cursorSpriteLOC->invisible = FALSE;
             SwapBackCursorGraphics();
-            if (sRegionMap->inL2State)
+            if(GetMenuL2State())
                 sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
             else
                 sRegionMap->inputCallback = ProcessRegionMapInput_Full;
