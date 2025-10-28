@@ -1304,7 +1304,7 @@
             "id": "MAPSEC_ROUTE2",
             "name": "Route2",
             "x": 17,
-            "y": 10,
+            "y": 11,
             "width": 1,
             "height": 3,
             "visitedFlag": "FLAG_VISITED_ROUTE2"
