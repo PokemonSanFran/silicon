@@ -90,4 +90,6 @@ enum GrayPOILocations { // Locations which have a gray POI sprite for them
 
 #define MAP_MODE_ARRIBA MAP_MODE_DEFAULT
 
+#define FONT_MAP_HELP_BAR FONT_NARROW
+
 #endif // GUARD_MAP_SYSTEM_CONSTANTS_MENU_H

@@ -155,6 +155,8 @@ static bool8 GetMenuL2State(void);
 static void MapSystem_InitWindows(void);
 void InitSFRegionMapData();
 static void PrintHeaderTitleToWindow();
+static void PrintMapFooter(bool32 confirmMode);
+static const u8 *GetHelpBarText(bool32 confirmMode);
 static void PrintTrolleyHeaderToWindow();
 static void Task_MapSystemWaitFadeIn(u8 taskId);
 static void Task_MapSystem_DefaultMode_Main(u8 taskId);
@@ -202,7 +204,6 @@ static void DestroyJustL2WaypointSprite(void);
 static u8 HandleWarpFailedNoCash(void);
 static u8 HandleAttemptWarpInput(void);
 u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId);
-static const u8 *GetHelpBarText(void);
 static u8 HandleWarpConfirmInput(void);
 static u8 HandleWarpTaxiCutscene(void);
 static u8 HandleWarpCloseMenu(void);
@@ -2609,13 +2610,14 @@ static void DestroyTrolleyPOISprites(void)
 //
 //  Begin Header / Footer Text Printing Functions
 //
+static const u8 sText_HelpBar_NotL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
+static const u8 sText_HelpBar_NotL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return");
+static const u8 sText_HelpBar_IsL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker");
+static const u8 sText_HelpBar_IsL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return");
+
 static const u8 sText_Money_Bar[]         = _("Money: ¥{STR_VAR_1}");
 static const u8 sText_Money_BarSmall[]         = _("¥{STR_VAR_1}");
 static const u8 sText_Money_BarSmall2[]         = _("¥{CLEAR 1}{STR_VAR_1}");
-static const u8 sText_A_Button_BarDef[]         = _("Go");
-static const u8 sText_B_Button_BarDef[]         = _("Cancel");
-static const u8 sText_Select_Button_BarDef[]         = _("Marker");
-static const u8 sText_Start_Button_BarDef[]         = _("Landmarks");
 static const u8 sText_NotEnoughMoney[]         = _("Not Enough ¥");
 static const u8 sText_WarpConfirm[]         = _("Do you want to go to ");
 static const u8 sText_QuestionMark[]         = _("?");
@@ -2701,13 +2703,7 @@ static void PrintHeaderTitleToWindow()
     }
 
     // Footer Printing
-
-    u32 fontId = FONT_NARROW;
-    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    StringCopy(gStringVar3,GetHelpBarText());
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
-
+    PrintMapFooter(FALSE);
 
     // Load Windows
     PutWindowTilemap(WINDOW_HEADER_TEXT);
@@ -2717,15 +2713,22 @@ static void PrintHeaderTitleToWindow()
     return;
 }
 
-static const u8 sText_HelpBar_NotL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
-static const u8 sText_HelpBar_NotL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
-static const u8 sText_HelpBar_IsL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
-static const u8 sText_HelpBar_IsL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
+static void PrintMapFooter(bool32 confirmMode)
+{
+    u32 fontId = FONT_MAP_HELP_BAR;
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    StringCopy(gStringVar3,GetHelpBarText(confirmMode));
+    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
+}
 
-static const u8 *GetHelpBarText(void)
+static const u8 *GetHelpBarText(bool32 confirmMode)
 {
     bool32 l2State = GetMenuL2State();
     bool32 defaultMapMode = (sCurrentMapMode == MAP_MODE_DEFAULT);
+
+    if (confirmMode)
+        return sText_HelpBar_NotL2NotDefault;
 
     if (!l2State && defaultMapMode)
         return sText_HelpBar_NotL2IsDefault;
@@ -2736,6 +2739,7 @@ static const u8 *GetHelpBarText(void)
     else
         return sText_HelpBar_IsL2IsDefault;
 }
+
 
 static void PrintHeaderWarpConfirmToWindow(void)
 {
@@ -2763,11 +2767,7 @@ static void PrintHeaderWarpConfirmToWindow(void)
     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (24*8)+3, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
 
     // Footer Printing
-    u32 fontId = FONT_NARROW;
-    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    StringCopy(gStringVar3,GetHelpBarText());
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
+    PrintMapFooter(TRUE);
 
     // Load Windows
     PutWindowTilemap(WINDOW_HEADER_TEXT);
@@ -2795,11 +2795,7 @@ static void PrintTrolleyHeaderToWindow()
         AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_CantRideTrolleyYet);
 
     // Footer Printing
-    u32 fontId = FONT_NARROW;
-    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    StringCopy(gStringVar3,GetHelpBarText());
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
+    PrintMapFooter(TRUE);
 
     // Load Windows
     PutWindowTilemap(WINDOW_HEADER_TEXT);
@@ -3225,6 +3221,9 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
 {
     u32 distance = CalculateDistance(mapSecId);
     enum FareVariables type = sCurrentMapMode;
+
+    if (!distance)
+        return 0;
 
     return (fareTable[type][FARE_BASE] + (distance * (fareTable[type][FARE_DISTANCE])));
 }
