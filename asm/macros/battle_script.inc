@@ -2555,6 +2555,11 @@
     .endm
     @ End Battle Settings: Nickname
 
+    .macro jumpifpointsmessageoff jumpInstr:req
+    callnative BS_JumpIfPointsMessagesOff
+    .4byte \jumpInstr
+    .endm
+
 @ END OF PSF BATTLE SCRIPT MACROS
 	.macro flushtextbox
 	printstring STRINGID_EMPTYSTRING3

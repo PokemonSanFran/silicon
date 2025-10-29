@@ -16905,6 +16905,15 @@ void BS_JumpIfForcedToNickname(void)
 }
 // End Battle Settings: Nickname
 
+void BS_JumpIfPointsMessagesOff(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+    if (!IsPointsMessagesOptionOn())
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_TryBoosterEnergy(void)
 {
     NATIVE_ARGS(u8 onFieldStatus);

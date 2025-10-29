@@ -5079,11 +5079,16 @@ BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER
 	pause B_WAIT_TIME_LONG
 	dofaintanimation BS_ATTACKER
+	jumpifpointsmessageoff BattleScript_FaintAttackerPointsOff
 	printstring STRINGID_ATTACKERFAINTED
+	flushtextbox
+	goto BattleScript_FaintAttackerEnd
+BattleScript_FaintAttackerPointsOff:
+	printstring STRINGID_ATTACKERFAINTED_NOBREAK
+BattleScript_FaintAttackerEnd:
 	cleareffectsonfaint BS_ATTACKER
 	trytoclearprimalweather
 	tryrevertweatherform
-	flushtextbox
 	waitanimation
 	tryactivatesoulheart
 	tryactivatereceiver BS_ATTACKER
@@ -5097,11 +5102,16 @@ BattleScript_FaintTarget::
 	playfaintcry BS_TARGET
 	pause B_WAIT_TIME_LONG
 	dofaintanimation BS_TARGET
+	jumpifpointsmessageoff BattleScript_BattleScript_FaintTargetPointsOff
 	printstring STRINGID_TARGETFAINTED
+	flushtextbox
+	goto BattleScript_FaintTargetEnd
+BattleScript_BattleScript_FaintTargetPointsOff:
+	printstring STRINGID_TARGETFAINTED_NOBREAK
+BattleScript_FaintTargetEnd:
 	cleareffectsonfaint BS_TARGET
 	trytoclearprimalweather
 	tryrevertweatherform
-	flushtextbox
 	waitanimation
 	tryactivatesoulheart
 	tryactivatereceiver BS_TARGET
