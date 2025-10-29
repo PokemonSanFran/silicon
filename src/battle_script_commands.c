@@ -4776,8 +4776,10 @@ static void Cmd_getexp(void)
                         stringId = PrintMonRecievedEffortAndExperience(expMonId,printBoosted);
                     // End printEVs
 
+// Start pointsMessage
                     if (stringId < STRINGID_COUNT)
                     {
+// End pointsMessage
                         if ((wasSentOut || holdEffect == HOLD_EFFECT_EXP_SHARE))
                         {
                         // Start printEVs
@@ -4794,7 +4796,9 @@ static void Cmd_getexp(void)
                             // End Battle Settings: Experience
                             gBattleStruct->teamGotExpMsgPrinted = TRUE;
                         }
+// Start pointsMessage
                     }
+// End pointsMessage
                     //MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species); // printEVs
                 }
                 gBattleScripting.getexpState++;
@@ -16905,6 +16909,7 @@ void BS_JumpIfForcedToNickname(void)
 }
 // End Battle Settings: Nickname
 
+// Start pointsMessage
 void BS_JumpIfPointsMessagesOff(void)
 {
     NATIVE_ARGS(const u8 *jumpInstr);
@@ -16913,6 +16918,7 @@ void BS_JumpIfPointsMessagesOff(void)
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
+// End pointsMessage
 
 void BS_TryBoosterEnergy(void)
 {

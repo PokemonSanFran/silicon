@@ -1019,7 +1019,6 @@ void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
 
 u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
 {
-    // PSF TODO: This returns 0 which is STRINGID_INTROMSG, which prints "Wild Poemon appeared!". When the option is off, the message is skipped entirely, with no delay. Right now, manually incrementing the switch case causes a delay, as if the message was there anyways.
     if (!IsPointsMessagesOptionOn())
         return STRINGID_COUNT;
 
@@ -1031,7 +1030,6 @@ u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
 
 u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted)
 {
-    // PSF TODO: This returns 0 which is STRINGID_INTROMSG, which prints "Wild Poemon appeared!". When the option is off, the message is skipped entirely, with no delay. Right now, manually incrementing the switch case causes a delay, as if the message was there anyways.
     if (!IsPointsMessagesOptionOn())
         return STRINGID_COUNT;
 
