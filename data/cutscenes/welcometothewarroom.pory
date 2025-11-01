@@ -99,6 +99,7 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
 {
     lock
     startcutscene(JUMPPLAYER_WELCOMETOTHEWARROOM)
+    playbgm(MUS_WELCOME_TO_THE_WAR_ROOM,TRUE)
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_WELCOME_TO_THE_WAR_ROOM)
     setvar(VAR_FERRYBUILDING_STATE,CHIEF_LEFT_WAR_ROOM)
 
@@ -197,6 +198,8 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
 
         msgbox(gText_WelcomeToTheWarRoom_ImGoingToHeadOver,MSGBOX_YESNO,SPEAKER_CHARLOTTE)
         endcutscene
+        savebgm(MUS_DUMMY)
+        fadedefaultbgm
 
         if (var(VAR_RESULT) == NO){
             msgbox(gText_WelcomeToTheWarRoom_OkayIllMeetYou,,SPEAKER_CHARLOTTE)
