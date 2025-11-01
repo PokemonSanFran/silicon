@@ -582,6 +582,7 @@ gSongTable::
     song mus_name_character_optionsFirstRun_mysteryGift, 0, 0
     song mus_get_badge, 1, 1
     song mus_src_getting_arrested, 0, 0
+    song mus_welcome_to_the_war_room, 0, 0
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2

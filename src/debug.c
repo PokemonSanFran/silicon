@@ -3976,6 +3976,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_NAME_CHARACTER_OPTIONSFIRSTRUN_MYSTERYGIFT) \
     X(MUS_GET_BADGE) \
     X(MUS_SRC_GETTING_ARRESTED) \
+    X(MUS_WELCOME_TO_THE_WAR_ROOM) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
