@@ -48,6 +48,7 @@
 #include "constants/heal_locations.h"
 #include "quest_logic.h"
 #include "heal_location.h"
+#include "map_preview_screen.h"
 
 /*
 
@@ -2471,6 +2472,10 @@ void CreateOverworldWaypointArrow(void)
 
 static void Task_DelayPrintOverworldWaypoint(u8 taskId)
 {
+    //if (FindTaskIdByFunc(Task_RunMapPreview_Script) != TASK_NONE)
+   if (ForestMapPreviewScreenIsRunning()) 
+        return;
+
     if (!gPaletteFade.active)
     {
         LoadSpriteSheet(&sSpriteSheet_OwWaypointArrow);
