@@ -73,7 +73,5 @@
       "script": "Battle8_FaceGoToPlayer"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
