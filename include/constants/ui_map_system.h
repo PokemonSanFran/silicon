@@ -32,10 +32,10 @@ enum WindowIds
 
 enum Colors
 {
-    FONT_BLACK,
-    FONT_WHITE,
-    FONT_RED,
-    FONT_BLUE,
+    FONT_MAP_BLACK,
+    FONT_MAP_WHITE,
+    FONT_MAP_RED,
+    FONT_MAP_BLUE,
 };
 
 enum {
@@ -82,8 +82,8 @@ enum GrayPOILocations { // Locations which have a gray POI sprite for them
 #define FARE_BASE_ARRIBA 300
 #define FARE_DISTANCE_ARRIBA 250
 
-#define FARE_BASE_TROLLEY 0
-#define FARE_DISTANCE_TROLLEY 20
+#define FARE_BASE_TROLLEY 5
+#define FARE_DISTANCE_TROLLEY 0
 
 #define FARE_BASE_FLY 0
 #define FARE_DISTANCE_FLY FARE_BASE_FLY
