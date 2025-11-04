@@ -323,10 +323,10 @@ static const struct WindowTemplate sTooltipWindowTemplate =
 
 static const u8 sMenuWindowFontColors[][3] =
 {
-    [FONT_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
-    [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_DARK_GRAY},
-    [FONT_RED]   = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
+    [FONT_MAP_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
+    [FONT_MAP_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_DARK_GRAY},
+    [FONT_MAP_RED]   = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
+    [FONT_MAP_BLUE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
 };
 
 
@@ -1321,6 +1321,12 @@ void Task_OpenDefaultMapSystemFromStartMenu(u8 taskId)
     }
 }
 
+void Script_OpenTrolley(void) 
+{     
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);     
+    CreateTask(Task_OpenTrolleyMapSystemFromStation,0);
+}
+
 void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
 {
     //s16 *data = gTasks[taskId].data;
@@ -1328,7 +1334,7 @@ void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_TROLLEY;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToUIMenu);
+        MapSystem_Init(CB2_ReturnToFieldContinueScript);
         DestroyTask(taskId);
     }
 }
@@ -2650,15 +2656,15 @@ static void PrintHeaderTitleToWindow()
             {
                 ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
                 StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sRegionMap->mapSecName);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sRegionMap->mapSecName);
             }
             else // L2 State
             {
                 ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
                 StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sRegionMap->mapSecName);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sRegionMap->mapSecName);
             }
             break;
         }
@@ -2668,22 +2674,22 @@ static void PrintHeaderTitleToWindow()
             {
                 //ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
                 //StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                //AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_TaxiBlankStateHeader);
+                //AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiBlankStateHeader);
             }
             else if(CheckIfHoverLocationUnlocked())
             {
                 ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
                 StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
 
                 StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
                 StringExpandPlaceholders(gStringVar4, sText_TaxiHasLocationStateHeader);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
             }
             else
             {
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_TaxiLockedStateHeader);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiLockedStateHeader);
             }
             break;
         }
@@ -2691,17 +2697,17 @@ static void PrintHeaderTitleToWindow()
         {
             if(CheckIfHoverLocationIsMapSecNone())
             {
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_FlyBlankStateHeader);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyBlankStateHeader);
             }
             else if(CheckIfHoverLocationUnlocked())
             {
                 StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
                 StringExpandPlaceholders(gStringVar4, sText_FlyHasLocationStateHeader);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
             }
             else
             {
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_FlyLockedStateHeader);
+                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyLockedStateHeader);
             }
             break;
         }
@@ -2724,7 +2730,7 @@ static void PrintMapFooter(bool32 confirmMode)
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     StringCopy(gStringVar3,GetHelpBarText(confirmMode));
-    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar3);
+    AddTextPrinterParameterized4(WINDOW_FOOTER_TEXT, fontId, 4, 1, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_MAP_WHITE], TEXT_SKIP_DRAW, gStringVar3);
 }
 
 static const u8 *GetHelpBarText(bool32 confirmMode)
@@ -2768,8 +2774,8 @@ static void PrintHeaderWarpConfirmToWindow(void)
     if (sCurrentMapMode == MAP_MODE_FLY)
         return;
 
-    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
-    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (24*8)+3, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
+    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar1);
+    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (24*8)+3, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
 
     // Footer Printing
     PrintMapFooter(TRUE);
@@ -2795,9 +2801,9 @@ static void PrintTrolleyHeaderToWindow()
     // Header Printing
     u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec);
     if(hasVisited == LOCATION_VISITED)
-        AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+        AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar2);
     else
-        AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_CantRideTrolleyYet);
+        AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_CantRideTrolleyYet);
 
     // Footer Printing
     PrintMapFooter(TRUE);
@@ -4043,3 +4049,8 @@ void BufferTaxiBaseFare(void)
     ConvertIntToDecimalStringN(gStringVar1,FARE_BASE_TAXI,STR_CONV_MODE_LEFT_ALIGN,CountDigits(FARE_BASE_TAXI));
 }
 
+void BufferTrolleyBaseFare(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1,FARE_BASE_TROLLEY,STR_CONV_MODE_LEFT_ALIGN,CountDigits(FARE_BASE_TROLLEY));
+}
+    
