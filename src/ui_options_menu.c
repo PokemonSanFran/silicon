@@ -787,7 +787,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_DEFAULT,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_ON,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_BATTLE,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -823,7 +822,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_CHALLENGE,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_ON,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_BATTLE,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -859,7 +857,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_SPEEDRUN,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_OFF,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_OFF,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_OFF,
@@ -895,7 +892,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_NUZLOCKE,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ALL,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_OFF,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_OFF,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -931,7 +927,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_PRESET]                 = BATTLE_PRESET_KAIZO,
             [BATTLE_OPTIONS_EXPERIENCE]             = BATTLE_OPTION_EXPERIENCE_ACTIVE,
             [BATTLE_OPTIONS_POINTS_MESSAGES]        = BATTLE_OPTION_POINTS_MESSAGES_OFF,
-            [BATTLE_OPTIONS_POINTS_SUMMARY]         = BATTLE_OPTION_POINTS_SUMMARY_OFF,
             [BATTLE_OPTIONS_EXP_MULTIPLIER]         = BATTLE_OPTION_MULTIPLIER_1,
             [BATTLE_OPTIONS_PLAYER_LEVEL]                  = BATTLE_OPTION_LEVEL_CAP,
             [BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_PARTY,
@@ -1523,21 +1518,6 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("When a Pokémon gains Experience of Effort Values a message will NOT be displayed."),
         },
         .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_POINTS_SUMMARY] =
-    {
-        .title = COMPOUND_STRING("Points Summary"),
-        .options = {
-            COMPOUND_STRING("Faint"),
-            COMPOUND_STRING("Battle"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("When a that is not on the field Pokémon gains Experience or Effort Values, a message will be displayed after an opponent faints."),
-            COMPOUND_STRING("When a that is not on the field Pokémon gains Experience or Effort Values, a message will be displayed after the player wins the battle."),
-            COMPOUND_STRING("When a that is not on the field Pokémon gains Experience or Effort Values, a message will be NOT be displayed."),
-        },
-        .numOptions = BATTLE_OPTION_POINTS_SUMMARY_COUNT,
     },
     [BATTLE_OPTIONS_EXP_MULTIPLIER] =
     {
