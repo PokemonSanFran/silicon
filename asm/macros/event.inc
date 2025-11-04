@@ -2678,6 +2678,7 @@
 	@ Start siliconMerge
     @ Marks the beginning of a cutscene and skips cutscne if GAME_OPTION_CUTSCENE_SKIP is enabled
     .macro startcutscene ID:req
+    hidewaypoint
     setvar VAR_CUTSCENE_SKIP, \ID
     specialvar VAR_RESULT,ShouldSkipCutscene
     compare VAR_RESULT, 0
@@ -2686,6 +2687,7 @@
 
     @ Resets VAR_CUTSCENE_SKIP to its default value
     .macro endcutscene
+    showwaypoint
     special ResetCutsceneStatus
     .endm
 
