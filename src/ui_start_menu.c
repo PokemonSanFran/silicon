@@ -1480,8 +1480,6 @@ static void StartMainSprite_DaycareMon(void)
             numEggs++;
     }
 
-    AllocItemIconTemporaryBuffers();
-
     // no eggs here!!
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
@@ -2982,6 +2980,12 @@ static void StartMenu_Free(void)
         }
         else
         {
+            if (sprite->oam.affineMode)
+            {
+                sprite->affineAnimPaused = TRUE;
+                FreeSpriteOamMatrix(sprite);
+            }
+
             DestroySprite(sprite);
         }
     }
@@ -2991,7 +2995,6 @@ static void StartMenu_Free(void)
     for (enum StartMenuTags tag = START_TAG_APP_CURSOR; tag < NUM_START_TAGS; tag++)
         FreeSpriteTilesByTag(tag);
 
-    FreeItemIconTemporaryBuffers();
     UnsetBgTilemapBuffer(START_BG_CAUTIONBOX);
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
