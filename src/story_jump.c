@@ -1741,6 +1741,7 @@ void JumpPlayerTo_WaitHeDidWhat(bool32 jumpType)
 
 void FlagsVarWarp_WelcometotheHallofFame()
 {
+    AwardPartyMonChampionRibbon();
     VarSet(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, NO_TOURNAMENT);
     VarSet(VAR_STORYLINE_STATE, STORY_WON_FINALS);
     FlagClear(FLAG_SHARPRISESTADIUM_TOURNAMENT_HAPPENING);
