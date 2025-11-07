@@ -430,6 +430,8 @@ static void StartSetup_Graphics(void);
 static void StartSetup_MainSprites(void);
 static void StartSetup_MainWindows(void);
 static void StartSetup_Text(void);
+static void StartSetup_MakeSpritesVisible(u32 spriteId);
+static void StartSetup_MakeSpritesInvisible(u32 spriteId);
 
 // main sprites
 static void StartMainSprite_App(void);
@@ -478,6 +480,7 @@ static inline s32 AppGrid_GetXIconCoord(u32);
 static inline s32 MonStatus_GetXDaycareIconCoord(u32);
 static inline s32 AppGrid_GetYIconCoord(u32);
 static void SpriteCB_AppGrid_Cursor(struct Sprite *);
+static void AppGrid_HandleCursorVisibility(enum StartMenuModes mode);
 
 // blit system
 static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
@@ -1056,7 +1059,6 @@ void Task_StartMenu_Init(u8 taskId)
     }
 }
 
-
 static void Task_StartMenu_HandleInput(u8 taskId)
 {
     enum StartMenuModes mode = sStartMenuDataPtr->mode;
@@ -1081,10 +1083,13 @@ static void Task_StartMenu_HandleInput(u8 taskId)
 
     if (mode != sStartMenuDataPtr->mode)
     {
+        StartPrint_AppNameText();
         StartPrint_QuestFlavorText();
         StartPrint_HelpBottomText();
         return;
     }
+
+    AppGrid_HandleCursorVisibility(mode);
 
     // normal and move modes
     if (mode < START_MODE_SAVE_NORMAL)
@@ -1107,6 +1112,19 @@ static void Task_StartMenu_WaitForFade(u8 taskId)
     }
 }
 
+static bool8 StartSetup_IsInSaveMode(void)
+{
+    switch (sStartMenuDataPtr->mode)
+    {
+        default:
+            return FALSE;
+        case START_MODE_SAVE_NORMAL:
+        case START_MODE_SAVE_SCRIPT:
+        case START_MODE_SAVE_FORCE:
+            return TRUE;
+    }
+}
+
 static void Task_StartMenu_SlideIn(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -1121,13 +1139,10 @@ static void Task_StartMenu_SlideIn(u8 taskId)
     {
         for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
         {
-            u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+            if (StartSetup_IsInSaveMode() && i == START_MAIN_SPRITE_APP_CURSOR)
+                continue;
 
-            if (gSprites[spriteIds[i]].data[7])
-            {
-                gSprites[spriteIds[i]].invisible = FALSE;
-                gSprites[spriteIds[i]].data[7] = FALSE;
-            }
+            StartSetup_MakeSpritesVisible(i);
         }
 
         task->tSlideY = 0;
@@ -1143,13 +1158,7 @@ static void Task_StartMenu_SlideOut(u8 taskId)
         PlaySE(SE_PC_OFF);
         for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
         {
-             u8 *spriteIds = sStartMenuDataPtr->spriteIds;
-
-             if (!gSprites[spriteIds[i]].invisible)
-             {
-                  gSprites[spriteIds[i]].invisible = TRUE;
-                  gSprites[spriteIds[i]].data[7] = TRUE;
-             }
+            StartSetup_MakeSpritesInvisible(i);
         }
     }
 
@@ -1723,6 +1732,9 @@ static void StartPrint_AppNameText(void)
             str = AppData_GetStruct(app)->name;
         else
             str = gText_Blank; // blank as the app table has 'Free Space'
+
+        if (StartSetup_IsInSaveMode())
+            str = gText_Blank;
 
         StartPrint_Text(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0, str);
     }
@@ -3003,4 +3015,31 @@ static void StartMenu_Free(void)
     UnsetBgTilemapBuffer(START_BG_CAUTIONBOX);
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
+}
+
+static void StartSetup_MakeSpritesVisible(u32 spriteId)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+    if (gSprites[spriteIds[spriteId]].data[7])
+    {
+        gSprites[spriteIds[spriteId]].invisible = FALSE;
+        gSprites[spriteIds[spriteId]].data[7] = FALSE;
+    }
+}
+
+static void StartSetup_MakeSpritesInvisible(u32 spriteId)
+{
+    u8 *spriteIds = sStartMenuDataPtr->spriteIds;
+
+    if (!gSprites[spriteIds[spriteId]].invisible)
+    {
+        gSprites[spriteIds[spriteId]].invisible = TRUE;
+        gSprites[spriteIds[spriteId]].data[7] = TRUE;
+    }
+}
+
+static void AppGrid_HandleCursorVisibility(enum StartMenuModes mode)
+{
+    gSprites[sStartMenuDataPtr->spriteIds[START_MAIN_SPRITE_APP_CURSOR]].invisible = StartSetup_IsInSaveMode();
 }
