@@ -1767,6 +1767,11 @@ u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
     // End playerCustom
 }
 
+u16 GetPlayerAvatarGraphicsByCustomValues(u8 state, u8 val)
+{
+    return sPlayerAvatarGfxIds[state][val];
+}
+
 u16 GetFRLGAvatarGraphicsIdByGender(u8 gender)
 {
     return sFRLGAvatarGfxIds[gender];
