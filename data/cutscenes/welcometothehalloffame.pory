@@ -42,6 +42,7 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         clearflag(FLAG_SHARPRISESTADIUM_TOURNAMENT_HAPPENING)
         setvar(VAR_STORYLINE_STATE,STORY_WON_FINALS)
         setflag(FLAG_IS_RESIDO_CHAMPION)
+		callnative(AwardPartyMonChampionRibbon)
         fadescreenspeed(FADE_TO_BLACK,24)
 
         bypass_healblock
