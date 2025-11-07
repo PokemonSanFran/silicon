@@ -898,7 +898,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
 
     // second row
-    [START_APP_TRAINER_CARD] = // PSF TODO vanilla trainer card is a lost cause
+    [START_APP_TRAINER_CARD] =
     {
         COMPOUND_STRING("Trainer Card"), 0, NULL
     },
@@ -912,7 +912,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_CUSTOMIZE] =
     {
-        COMPOUND_STRING("Customize"), FLAG_SYS_APP_QUEST_GET, CB2_CustomizationFromStartMenu
+        COMPOUND_STRING("Customize"), FLAG_SYS_B_DASH, CB2_CustomizationFromStartMenu
     },
     [START_APP_SAVE] = // the "opening" function is baked in
     {
@@ -1881,6 +1881,9 @@ static void AppData_InsertNewApps(void)
 {
     for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
     {
+        if (app == START_APP_TRAINER_CARD) //  PSF TODO Trainer Card disabled
+            continue;
+
         if (AppData_GetUnlockFlag(app) && AppData_GetIndexFromApp(app) == NUM_START_APPS)
         {
             u32 freeSlot = AppData_GetFirstEmptyIndex();
@@ -1931,7 +1934,9 @@ static bool32 AppData_GetUnlockFlag(enum StartMenuApps app)
 
 static enum StartMenuApps AppData_GetAppFromIndex(u8 idx)
 {
-    return gSaveBlock3Ptr->startMenuAppIndex[idx];
+    u32 app = gSaveBlock3Ptr->startMenuAppIndex[idx];
+
+    return (app == START_APP_TRAINER_CARD) ? START_APP_NONE : app; //  PSF TODO Trainer Card disabled
 }
 
 static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps app)
