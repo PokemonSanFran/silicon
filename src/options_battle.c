@@ -18,7 +18,6 @@
 
 // Battle Settings: Experience
 static u32 GetBattleExperienceOption(void);
-static bool32 IsMonInvalid(struct Pokemon);
 static bool32 IsMonMaxLevel(struct Pokemon);
 static void CalcAndSetNewExp(struct BoxPokemon *, struct Pokemon,u32);
 static u32 GetEVYield(u32, u16);
@@ -89,7 +88,7 @@ bool32 IsExperienceOptionAll(void)
     return (GetBattleExperienceOption() == BATTLE_OPTION_EXPERIENCE_ALL);
 }
 
-static bool32 IsMonInvalid(struct Pokemon tempMon)
+bool32 IsMonInvalid(struct Pokemon tempMon)
 {
     if (GetMonData(&tempMon,MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
         return TRUE;
