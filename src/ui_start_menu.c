@@ -1451,7 +1451,7 @@ static void StartMainSprite_PartyMon(void)
             sprite->x2 = MonStatus_GetXIconCoord(i);
             sprite->y2 = MonStatus_GetYIconCoord(i);
 
-            if (!isEgg && spriteIds[START_MAIN_SPRITE_MON_STATUS + i] == SPRITE_NONE)
+            if (spriteIds[START_MAIN_SPRITE_MON_STATUS + i] == SPRITE_NONE)
             {
                 spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
                     CreateSprite(&sMonStatus_SpriteTemplate, (((status & STATUS1_ANY) || !healthPercentage) ? 4 : 0) + 16,
