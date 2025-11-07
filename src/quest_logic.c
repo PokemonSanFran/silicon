@@ -40,8 +40,10 @@
 #include "field_specials.h"
 #include "battle_scripts.h"
 #include "quests.h"
+#include "options_battle.h"
 #include "constants/trainer_types.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 
 bool32 HasPlayerJoinedTheTide(void)
 {
@@ -2338,3 +2340,75 @@ void ShowGarbodor(void)
 
     ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
+
+// ***********************************************************************
+// Cutscene: Okay Let's Fix It
+// ***********************************************************************
+
+void AwardPartyMonChampionRibbon(void)
+{
+    bool8 giveRibbon = TRUE;
+
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (IsMonInvalid(gPlayerParty[slot]))
+            continue;
+
+        SetMonData(&gPlayerParty[slot],MON_DATA_CHAMPION_RIBBON,&giveRibbon);
+    }
+}
+
+static bool8 DoesMonHaveChampionRibbon(struct Pokemon pokemon)
+{
+    return (GetMonData(&pokemon,MON_DATA_CHAMPION_RIBBON));
+}
+
+static bool8 DoesPartyMonHaveChampionRibbon(void)
+{
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (IsMonInvalid(gPlayerParty[slot]))
+            continue;
+
+        if (DoesMonHaveChampionRibbon(gPlayerParty[slot]))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 DoesBoxMonHaveChampionRibbon(void)
+{
+    struct Pokemon tempMon;
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            BoxMonAtToMon(boxId, boxPosition, &tempMon);
+
+            if (IsMonInvalid(tempMon))
+                continue;
+
+            if (DoesMonHaveChampionRibbon(tempMon))
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static bool8 DoesAnyMonHaveChampionRibbon(void)
+{
+     return (DoesPartyMonHaveChampionRibbon() || DoesBoxMonHaveChampionRibbon());
+}
+
+void Script_CheckIfAnyMonHasChampionRibbon(void)
+{
+    gSpecialVar_Result = DoesAnyMonHaveChampionRibbon();
+}
+
+void Script_CheckIfChosenMonHasChampionRibbon(void)
+{
+    gSpecialVar_Result = DoesMonHaveChampionRibbon(gPlayerParty[gSpecialVar_0x8004]);
+}
+
