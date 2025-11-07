@@ -4776,23 +4776,29 @@ static void Cmd_getexp(void)
                         stringId = PrintMonRecievedEffortAndExperience(expMonId,printBoosted);
                     // End printEVs
 
-                    if (wasSentOut || holdEffect == HOLD_EFFECT_EXP_SHARE)
+// Start pointsMessage
+                    if (stringId < STRINGID_COUNT)
                     {
-                    // Start printEVs
-                        PrepareStringBattle(stringId, gBattleStruct->expGetterBattlerId);
-                        //PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
-                    // End printEVs
+// End pointsMessage
+                        if ((wasSentOut || holdEffect == HOLD_EFFECT_EXP_SHARE))
+                        {
+                        // Start printEVs
+                            PrepareStringBattle(stringId, gBattleStruct->expGetterBattlerId);
+                            //PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                        // End printEVs
+                        }
+                        else if (IsGen6ExpShareEnabled() && !gBattleStruct->teamGotExpMsgPrinted) // Print 'the rest of your team got exp' message once, when all of the sent-in mons were given experience
+                        {
+                            // Start Battle Settings: Experience
+                            //gLastUsedItem = ITEM_EXP_SHARE;
+                            //PrepareStringBattle(STRINGID_TEAMGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                            PrintExpShareMessage();
+                            // End Battle Settings: Experience
+                            gBattleStruct->teamGotExpMsgPrinted = TRUE;
+                        }
+// Start pointsMessage
                     }
-                    else if (IsGen6ExpShareEnabled() && !gBattleStruct->teamGotExpMsgPrinted) // Print 'the rest of your team got exp' message once, when all of the sent-in mons were given experience
-                    {
-                        // Start Battle Settings: Experience
-                        //gLastUsedItem = ITEM_EXP_SHARE;
-                        //PrepareStringBattle(STRINGID_TEAMGAINEDEXP, gBattleStruct->expGetterBattlerId);
-                        PrintExpShareMessage();
-                        // End Battle Settings: Experience
-                        gBattleStruct->teamGotExpMsgPrinted = TRUE;
-                    }
-
+// End pointsMessage
                     //MonGainEVs(&gPlayerParty[*expMonId], gBattleMons[gBattlerFainted].species); // printEVs
                 }
                 gBattleScripting.getexpState++;
@@ -16902,6 +16908,17 @@ void BS_JumpIfForcedToNickname(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 // End Battle Settings: Nickname
+
+// Start pointsMessage
+void BS_JumpIfPointsMessagesOff(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+    if (!IsPointsMessagesOptionOn())
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+// End pointsMessage
 
 void BS_TryBoosterEnergy(void)
 {

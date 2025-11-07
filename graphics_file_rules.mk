@@ -256,10 +256,13 @@ $(FONTGFXDIR)/short_narrow.latfont: $(FONTGFXDIR)/latin_short_narrow.png
 $(FONTGFXDIR)/short_narrower.latfont: $(FONTGFXDIR)/latin_short_narrower.png
 	$(GFX) $< $@
 
-# Start addCrimFont
-$(FONTGFXDIR)/outline.latfont: $(FONTGFXDIR)/outline.png
+## Start outlineFont
+$(FONTGFXDIR)/outlined.latfont: $(FONTGFXDIR)/latin_outlined.png
 	$(GFX) $< $@
-# End addCrimFont
+
+$(FONTGFXDIR)/outlined_narrow.latfont: $(FONTGFXDIR)/latin_outlined_narrow.png
+	$(GFX) $< $@
+## End outlineFont
 
 $(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png
 	$(GFX) $< $@
