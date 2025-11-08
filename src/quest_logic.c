@@ -2412,3 +2412,25 @@ void Script_CheckIfChosenMonHasChampionRibbon(void)
     gSpecialVar_Result = DoesMonHaveChampionRibbon(gPlayerParty[gSpecialVar_0x8004]);
 }
 
+static u8 DoesPlayerHaveOneOrTwoUsableMon(void)
+{
+    if (gPlayerPartyCount == 1)
+        return PLAYER_HAS_ONE_MON; 
+
+    u32 aliveCount = 0;
+
+    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
+         && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
+            aliveCount++;
+    }
+
+    return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
+}
+
+void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
+{
+    gSpecialVar_Result = DoesPlayerHaveOneOrTwoUsableMon();
+}
