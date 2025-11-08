@@ -98,6 +98,7 @@ script MaskOff_QuestG_Dialogue {
     }
     msgbox(format("Ellen gave a talk here once where she emphasized the importance of training your Pokémon against versions of themselves. She said that Pokemon need to know themselves in order to know their opponents. Never seen a book to back that up though..."),,SPEAKER_CRAIG)
     msgbox(format("Whatever she did worked though! She was all about manipulating the field to her advantage, it was awesome to watch, especially when she used her Stantler."),,SPEAKER_CRAIG)
+	msgbox(format("NOTE: Stantler are found on Route 98, normally you would use the Pokedex"),,SPEAKER_CRAIG) // PSF TODO
     msgbox(format("Whenever she left here, I never saw her taking the bus - she would just Fly away from the front steps!"),,SPEAKER_CRAIG)
     closemessage
     endcutscene
