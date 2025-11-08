@@ -93,6 +93,7 @@ script OkayLetsFixit_StartFlashback_Script
         delay(30)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_TORGEOT_CLIMB, 255, 17, 43)
+		waitstate
         end
 }
 
@@ -173,12 +174,13 @@ script OkayLetsFixit_AskConfirm_Script
 	msgbox(format("This Pokemon will stay here with me. It will be well taken care of, but it will never return to you."),,SPEAKER_HIKO)
 	closemessage
 	msgbox(format("Wait never? What do you mean?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
-	msgbox(format("I just have to give up {STR_VAR_1}, just like that?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
+	msgbox(format("I have to give up {STR_VAR_1}, just like that?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
 	msgbox(format("That's not fair!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
 	msgbox(format("All actions have consequences. Are you ready?"),MSGBOX_YESNO,SPEAKER_HIKO)
 
 	if (var(VAR_RESULT) == YES)
 	{
+		special(DeleteChosenPartyMon)
 		goto(OkayLetsFixit_StartTimeTravel_Script)
 	}
 	else
