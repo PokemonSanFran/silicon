@@ -377,7 +377,7 @@ script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
     fadescreen(FADE_FROM_BLACK)
     setvar(VAR_STORYLINE_STATE,STORY_MORNING_OF_TIMELINE_SPLIT)
 
-    applymovement(PLAYER,OkayLetsFixIt_PaceNightmare)
+    applymovement(PLAYER,OkayLetsFixit_PaceNightmare)
     waitmovement(0)
 
     if (flag(FLAG_TIMELINE_TIMETRAVEL)){
