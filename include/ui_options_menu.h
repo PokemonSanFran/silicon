@@ -5,6 +5,7 @@
 #include "constants/options_battle.h"
 
 void Task_OpenOptionsMenuFromStartMenu(u8 taskId);
+void CB2_OptionsFromStartMenu(void);
 void Options_Menu_Init(MainCallback callback);
 void CB2_InitUIOptionMenuFromMainMenu(void);
 void CB2_InitUiOptionMenuFromDevLetter(void);

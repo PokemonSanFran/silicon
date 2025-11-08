@@ -10,6 +10,7 @@
 void Glass_ResetSaveData(void);
 void SetTrainersDiscovered(void);
 void Task_OpenGlassFromStartMenu(u8);
+void CB2_GlassFromStartMenu(void);
 u32 Glass_OverworldReturnLocationStat(u32, u32);
 u32 GetTrainerType(u32);
 bool32 IsTrainerDiscovered(u32);

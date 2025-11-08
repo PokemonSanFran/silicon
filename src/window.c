@@ -17,7 +17,7 @@ EWRAM_DATA static u16 sWindowSize = 0;
 static u32 GetNumActiveWindowsOnBg(u32 bgId);
 static u32 GetNumActiveWindowsOnBg8Bit(u32 bgId);
 
-static const struct WindowTemplate sDummyWindowTemplate = DUMMY_WIN_TEMPLATE;
+const struct WindowTemplate gDummyWindowTemplate = DUMMY_WIN_TEMPLATE;
 
 static void DummyWindowBgTilemap(void)
 {
@@ -45,7 +45,7 @@ bool32 InitWindows(const struct WindowTemplate *templates)
 
     for (i = 0; i < WINDOWS_MAX; ++i)
     {
-        gWindows[i].window = sDummyWindowTemplate;
+        gWindows[i].window = gDummyWindowTemplate;
         gWindows[i].tileData = NULL;
     }
 
@@ -223,7 +223,7 @@ void RemoveWindow(u32 windowId)
     if (gWindowTileAutoAllocEnabled == TRUE)
         BgTileAllocOp(bgLayer, gWindows[windowId].window.baseBlock, gWindows[windowId].window.width * gWindows[windowId].window.height, 2);
 
-    gWindows[windowId].window = sDummyWindowTemplate;
+    gWindows[windowId].window = gDummyWindowTemplate;
 
     if (GetNumActiveWindowsOnBg(bgLayer) == 0)
     {

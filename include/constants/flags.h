@@ -1376,10 +1376,10 @@
 #define FLAG_SYS_APP_POKEDEX_GET                     (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_APP_QUEST_GET                       (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_APP_MAP_GET                         (SYSTEM_FLAGS + 0x1) // Silicon Flag
+#define FLAG_SYS_APP_SURPRISE_TRADE_GET              (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_STARTER_APPS_GET                    (SYSTEM_FLAGS + 0x1) // Silicon Flag
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
-#define FLAG_SYS_APP_DEXNAV_GET                      (SYSTEM_FLAGS + 0x2) // Silicon Flag
-#define FLAG_SYS_APP_BUZZR_GET                     (SYSTEM_FLAGS + 0x3) // Silicon Flag
+#define FLAG_SYS_APP_BUZZR_GET                       (SYSTEM_FLAGS + 0x3) // Silicon Flag
 #define FLAG_SYS_GAME_CLEAR                          (SYSTEM_FLAGS + 0x4)
 #define FLAG_SYS_CHAT_USED                           (SYSTEM_FLAGS + 0x5)
 #define FLAG_UNLOCKED_TRENDY_SAYINGS                 (SYSTEM_FLAGS + 0x6)
@@ -1452,8 +1452,8 @@
 #define FLAG_SYS_SAFARI_MODE                        (SYSTEM_FLAGS + 0x2C)
 #define FLAG_SYS_CRUISE_MODE                        (SYSTEM_FLAGS + 0x2D)
 
-#define FLAG_SYS_CUSTOMIZATION_DATA_INITIALIZED      (SYSTEM_FLAGS + 0x2E) // Silicon Flag
-#define FLAG_UNUSED_0x88F                           (SYSTEM_FLAGS + 0x2F) // Unused Flag
+#define FLAG_SYS_CUSTOMIZATION_DATA_INITIALIZED     (SYSTEM_FLAGS + 0x2E) // Silicon Flag
+#define FLAG_SYS_APP_DEXNAV_GET                     (SYSTEM_FLAGS + 0x2F) // Silicon Flag
 
 #define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30)
 #define FLAG_SYS_TV_WATCH                           (SYSTEM_FLAGS + 0x31)
@@ -1626,8 +1626,8 @@
 #define FLAG_VISITED_HALERBAWILDS_WEST                          (SYSTEM_FLAGS + 0xB4) // Silicon Flag
 #define FLAG_VISITED_HALERBAWILDS_EAST                          (SYSTEM_FLAGS + 0xB5) // Silicon Flag
 #define FLAG_VISITED_HALERBAWILDS_SOUTH                          (SYSTEM_FLAGS + 0xB6) // Silicon Flag
-#define FLAG_UNUSED_0x917                           (SYSTEM_FLAGS + 0xB7) // Unused Flag
-#define FLAG_UNUSED_0x918                           (SYSTEM_FLAGS + 0xB8) // Unused Flag
+#define FLAG_SYS_APP_WAVES_OF_CHANGE_GET            (SYSTEM_FLAGS + 0xB7) // Silicon Flag
+#define FLAG_SYS_APP_GOOGLE_GLASS_GET               (SYSTEM_FLAGS + 0xB8) // Silicon Flag
 #define FLAG_UNUSED_0x919                           (SYSTEM_FLAGS + 0xB9) // Unused Flag
 #define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag
 #define FLAG_UNUSED_0x91B                           (SYSTEM_FLAGS + 0xBB) // Unused Flag

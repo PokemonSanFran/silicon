@@ -295,7 +295,7 @@ struct SaveBlock3
     struct Glass glass; // google_glass
     u8 questData[QUEST_FLAGS_COUNT * QUEST_STATES];
     u8 subQuests[SUB_FLAGS_COUNT];
-    u8 startMenuAppIndex[NUM_TOTAL_APPS];
+    u8 startMenuAppIndex[TOTAL_START_APPS];
     u16 prestoBuyAgainItem[MAX_PRESTO_BUY_AGAIN_ITEMS];
     u16 lastUsedBall;
     bool8 hasSeenGuide[NUM_GUIDES];
