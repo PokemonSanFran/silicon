@@ -293,6 +293,7 @@
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_EARTHQUAKE_COUNT                             0x40D9
 #define VAR_REGISTER_BIRCH_STATE                         0x40DA
+#define VAR_TIME_TRAVEL_STATE                            0x40DA // PSF Var
 #define VAR_ROUTE10_STATE                                0x40DB // PSF Var
 #define VAR_ROBINWILLIAMSTUNNEL_STATE                                0x40DC // PSF Var
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
