@@ -37028,104 +37028,104 @@
             "encounter_rate": 0,
             "mons": [
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_BLUE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_BLUE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_BLUE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_BLUE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_BLUE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_GREEN"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_GREEN"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_GREEN"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_GREEN"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_GREEN"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_WHITE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_WHITE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_WHITE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_WHITE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_WHITE"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_YELLOW"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_YELLOW"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_YELLOW"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_YELLOW"
               },
               {
-                "min_level": 20,
+                "min_level": 18,
                 "max_level": 23,
-                "species": "SPECIES_DRILBUR"
+                "species": "SPECIES_SQUAWKABILLY_YELLOW"
               }
             ]
           }
@@ -54524,6 +54524,547 @@
                 "min_level": 45,
                 "max_level": 47,
                 "species": "SPECIES_KRICKETUNE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TIRABUDIN_PLACE",
+          "base_label": "gTirabudinPlace_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 0,
+            "mons": [
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 49,
+                "max_level": 52,
+                "species": "SPECIES_FARIGIRAF"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TIRABUDIN_PLACE",
+          "base_label": "gTirabudinPlace_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TIRABUDIN_PLACE",
+          "base_label": "gTirabudinPlace_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TIRABUDIN_PLACE",
+          "base_label": "gTirabudinPlace_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 45,
+                "max_level": 48,
+                "species": "SPECIES_GIRAFARIG"
               }
             ]
           }
