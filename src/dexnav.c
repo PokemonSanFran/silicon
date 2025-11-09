@@ -2358,6 +2358,11 @@ void Task_OpenDexNavFromStartMenu(u8 taskId)
     }
 }
 
+void CB2_DexNavFromStartMenu(void)
+{
+    DexNavGuiInit(CB2_StartMenu_ReturnToUI);
+}
+
 static void Task_DexNavWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)

@@ -517,4 +517,7 @@ const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, 
 u8 GetObjectEventIdByLocalId(u8); // cueobject
 bool8 PlayerIsUnderWaterfall(struct ObjectEvent *objectEvent);
 
+// startMenu
+const struct SpritePalette *GetObjectEventSpritePaletteByTag(u16 tag);
+
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

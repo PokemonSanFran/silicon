@@ -11703,3 +11703,12 @@ bool8 MovementAction_SurfStillRight_Step1(struct ObjectEvent *objectEvent, struc
     }
     return FALSE;
 }
+
+const struct SpritePalette *GetObjectEventSpritePaletteByTag(u16 tag)
+{
+    u32 idx = FindObjectEventPaletteIndexByTag(tag);
+    if (idx == 0xFF)
+        return NULL;
+
+    return &sObjectEventSpritePalettes[idx];
+}
