@@ -22,6 +22,11 @@
       "map": "MAP_WISHAAST_LAKE",
       "offset": -44,
       "direction": "right"
+    },
+    {
+      "map": "MAP_OROLAND_COLISEUM_OUTSIDE",
+      "offset": 16,
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -87,9 +92,7 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",

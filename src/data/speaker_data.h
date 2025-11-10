@@ -2103,4 +2103,20 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
+    [SPEAKER_ADAM_UNKNOWN] =
+    {
+      .name =_("???"),
+      .title= _("???"),
+      .gender = MALE,
+      .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
+      .speakerPal = sSpeakerPal_Ace_Trainer_M,
+    },
+    [SPEAKER_ADAM] =
+    {
+      .name =_("Champion"),
+      .title= _("Adam"),
+      .gender = MALE,
+      .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
+      .speakerPal = sSpeakerPal_Ace_Trainer_M,
+    },
 };

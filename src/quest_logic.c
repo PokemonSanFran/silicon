@@ -2434,3 +2434,111 @@ void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
 {
     gSpecialVar_Result = DoesPlayerHaveOneOrTwoUsableMon();
 }
+
+static bool32 IsMonEleanorSnom(struct Pokemon* pokemon)
+{
+    return (GetMonData(pokemon,MON_DATA_GIGANTAMAX_FACTOR) == TRUE);
+}
+
+static u32 IsEleanorSnomInParty(void)
+{
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (IsMonInvalid(gPlayerParty[slot]))
+            continue;
+
+        if (!IsMonEleanorSnom(&gPlayerParty[slot]))
+            continue;
+
+        return slot;
+    }
+    return PARTY_SIZE;
+}
+
+static UNUSED void Script_IsEleanorSnomInParty(void)
+{
+    gSpecialVar_Result = (IsEleanorSnomInParty() != PARTY_SIZE);
+}
+
+void DeleteEleanorSnom(void)
+{
+    u32 slot = IsEleanorSnomInParty();
+    if (slot == PARTY_SIZE)
+        return;
+
+    gSpecialVar_0x8004 = slot;
+    DeleteChosenPartyMon();
+    return;
+}
+
+void GenerateAndGiveEleanorSnom(void)
+{
+    enum NationalDexOrder nationalDexNum;
+    int sentToPc;
+    struct Pokemon mon;
+    u8 i;
+    u16 species     = SPECIES_SNOM;
+    u8 level        = 16; 
+
+    //Nature
+    u8 nature = Random() % NUM_NATURES;
+    CreateMonWithNature(&mon, species, level, USE_RANDOM_IVS, nature);
+
+    //Shininess
+    bool8 isShiny   = FALSE;
+    SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
+
+    // Gigantamax factor
+    u32 gmaxFactor = TRUE;
+    SetMonData(&mon, MON_DATA_GIGANTAMAX_FACTOR, &gmaxFactor);
+
+    // Dynamax Level
+    u32 dmaxLevel = 0;
+    SetMonData(&mon, MON_DATA_DYNAMAX_LEVEL, &dmaxLevel);
+
+    // tera type
+    u32 teraType = GetTeraTypeFromPersonality(&mon);
+    SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
+
+    u32 abilityNum;
+    do {
+        abilityNum = Random() % NUM_ABILITY_SLOTS;  // includes hidden abilities
+    } while (GetAbilityBySpecies(species, abilityNum) == ABILITY_NONE);
+
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
+
+    CalculateMonStats(&mon);
+
+    u8 trainerName[TRAINER_NAME_LENGTH + 1] = _("Eleanor");
+    u32 gender = FEMALE;
+    SetMonData(&mon, MON_DATA_OT_NAME, &trainerName);
+    SetMonData(&mon, MON_DATA_OT_GENDER, &gender);
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+            break;
+
+    if (i >= PARTY_SIZE)
+    {
+        sentToPc = CopyMonToPC(&mon);
+    }
+    else
+    {
+        sentToPc = MON_GIVEN_TO_PARTY;
+        CopyMon(&gPlayerParty[i], &mon, sizeof(mon));
+        gPlayerPartyCount = i + 1;
+    }
+
+    //Pokedex entry
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
+    switch(sentToPc)
+    {
+        case MON_GIVEN_TO_PARTY:
+        case MON_GIVEN_TO_PC:
+            GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
+            GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
+            break;
+        case MON_CANT_GIVE:
+            break;
+    }
+}
