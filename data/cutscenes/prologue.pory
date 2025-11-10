@@ -320,7 +320,7 @@ script Prologue_Tala_Dialogue{
 }
 
 script Prologue_Armando_Dialogue{
-    msgbox(format("I knew they were unhappy, but this is just as much of a shock to me as it is you guys.  But... Ellen was always about taking action. And I guess this was their best action."),MSGBOX_AUTOCLOSE,SPEAKER_ARMANDO,,EMOTE_SAD)
+    msgbox(format("...I don't get it. She wanted to fight. Why is she running?"),MSGBOX_AUTOCLOSE,SPEAKER_ARMANDO,,EMOTE_SAD)
     end
 }
 
@@ -330,7 +330,7 @@ script Prologue_Magnus_Dialogue{
 }
 
 script Prologue_Keiying_Dialogue{
-    msgbox(format("First BD sells out, now Ellen is quitting... perhaps I'm on the wrong side of history here."),MSGBOX_AUTOCLOSE,SPEAKER_KEIYING)
+    msgbox(format("First BD sells out, now Ellen is leaving... perhaps I'm on the wrong side of history here."),MSGBOX_AUTOCLOSE,SPEAKER_KEIYING)
     end
 }
 
