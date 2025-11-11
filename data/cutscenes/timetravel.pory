@@ -7,47 +7,62 @@ const FLAG_HIDE_EMRYS = FLAG_TEMP_5
 script TimeTravel_Script_HideObjects
 {
 	setflag(FLAG_HIDE_SNOM)
-
 	if (flag(FLAG_USING_WORMHOLE))
 	{
 		setflag(FLAG_HIDE_EMRYS)
+		if (var(VAR_TIME_TRAVEL_STATE) == TIME_TRAVEL_HAS_BATTLED_ONCE)
+		{
+			setobjectxyperm(LOCALID_ADAM,7,8)
+			setobjectxyperm(LOCALID_FRANK,6,11)
+			setobjectxyperm(LOCALID_ELEANOR,7,11)
+		}
 		return
 	}
-
 	setflag(FLAG_HIDE_ADAM)
 	setflag(FLAG_HIDE_FRANK)
 	setflag(FLAG_HIDE_ELEANOR)
 	return
 }
 
-script TimeTravel_Script_StartTravel
-{
-	setflag(FLAG_USING_WORMHOLE)
-	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_FIRST_WORMHOLE_USE)
-	warp(MAP_OROLAND_COLISEUM_OUTSIDE,WARP_ID_NONE,7,5)
-}
-
 script TimeTravel_Script_RoutePlayer
 {
-	if (!flag(FLAG_USING_WORMHOLE))
+	switch(var(VAR_TIME_TRAVEL_STATE))
+	{
+		case TIME_TRAVEL_FIRST_WORMHOLE_USE:
+			call(TimeTravel_Script_ResetIfNotWormhole)
+		case TIME_TRAVEL_HAS_BATTLED_ONCE:
+			call(TimeTravel_Script_ResetIfNotWormhole)
+		default: return
+	}
+}
+
+script TimeTravel_Script_ResetIfNotWormhole
+{
+	if (flag(FLAG_USING_WORMHOLE))
 	{
 		return
 	}
+	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_SACRIFICE_COMPLETE)
+}
 
+script TimeTravel_Script_StartTravel
+{
+	setflag(FLAG_USING_WORMHOLE)
 	checktrainerdiscovered(TRAINER_ADAM)
 	if (var(VAR_RESULT) == TRUE)
 	{
-		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_HAS_BATTLED_ONCE)
+		setvar(VAR_TIME_TRAVEL_STATE, TIME_TRAVEL_HAS_BATTLED_ONCE)
+		warp(MAP_OROLAND_COLISEUM_OUTSIDE,WARP_ID_NONE,7,7)
 	}
-	else 
+	else
 	{
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_FIRST_WORMHOLE_USE)
+		warp(MAP_OROLAND_COLISEUM_OUTSIDE,WARP_ID_NONE,7,5)
 	}
 }
 
 script TimeTravel_Script_BumpIntoChampion
 {
-	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_HAS_BATTLED_ONCE)
 	msgbox(format("...Where am I?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 	closemessage
 	applymovement(LOCALID_PLAYER,Common_Movement_FaceRight)
@@ -116,15 +131,28 @@ script TimeTravel_Script_BumpIntoChampion
 	applymovement(LOCALID_FRANK,moves(walk_up * 3))
 	applymovement(LOCALID_ELEANOR,moves(walk_up * 3))
 	waitmovement(LOCALID_FRANK)
-	msgbox(format("You know what? Maybe you need a lesson in paying attention to current events!"),,SPEAKER_ADAM)
+	goto(TimeTravel_Script_StartBattle)
+}
+
+script TimeTravel_Script_StartBattle
+{
+	if (var(VAR_TIME_TRAVEL_STATE) == TIME_TRAVEL_HAS_BATTLED_ONCE)
+	{
+		msgbox(format("Back for another lesson? Perfect, I'll be here all day."),,SPEAKER_ADAM)
+	}
+	else
+	{
+			msgbox(format("You know what? Maybe you need a lesson in paying attention to current events!"),,SPEAKER_ADAM)
+	}
 	closemessage
-	trainerbattle_no_intro(TRAINER_ADAM,format("They told me I would be invincible..."))
-	goto(TimeTravel_Script_PostBattle)
+		trainerbattle_no_intro(TRAINER_ADAM,format("They told me I would be invincible..."))
+		goto(TimeTravel_Script_PostBattle)
 }
 
 script TimeTravel_Script_PostBattle
 {
 	callnative(DeleteEleanorSnom)
+	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_COMPLETE)
 	msgbox(format("...how are you this strong?"),,SPEAKER_ADAM,TAIL_WHISPER,EMOTE_CONFUSE)
 	msgbox(format("She told me I would be... invincible!"),,SPEAKER_ADAM,,EMOTE_ANGRY)
 	msgbox(format("That if I repped them, I would never lose again!"),,SPEAKER_ADAM,,EMOTE_ANGRY)	
@@ -170,7 +198,17 @@ msgbox(format("You talk, you drink, you mingle, and finally, you leave the party
 	delay(8)
 	msgbox(format("Now go."),,SPEAKER_ELLEN_PAST)
 	closemessage
-	applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
+	goto(TimeTravel_Dialogue_ReturnToPresent)
+}
+
+script TimeTravel_Script_ResumeBattle
+{
+
+}
+
+script TimeTravel_Dialogue_ReturnToPresent
+{
+applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
 	waitmovement(LOCALID_ADAM)
 	removeobject(LOCALID_ADAM)
 	applymovement(LOCALID_ELEANOR,moves(face_left))
@@ -206,13 +244,9 @@ msgbox(format("You talk, you drink, you mingle, and finally, you leave the party
 	closemessage
 	msgbox(format("We'll meet again Armando! And for what its worth, you're part of the reason I'm as strong as I am."),,SPEAKER_ALICIA,,EMOTE_HAPPY)
 	closemessage
+	clearflag(FLAG_USING_WORMHOLE)
 	warp(MAP_SHARPRISE_SPIRE_LAB,0)
-}
-
-script TimeTravel_Script_ResumeBattle
-{
-}
-
-script TimeTravel_Dialogue_ReturnToPresent
-{
+	waitstate
+	release
+	end
 }

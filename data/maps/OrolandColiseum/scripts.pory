@@ -1,16 +1,15 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const EMRYS = 1
-const FLAG_HIDE_EMRYS = FLAG_TEMP_1
 
 mapscripts OrolandColiseum_MapScripts {
 
     MAP_SCRIPT_ON_TRANSITION {
+		call(TimeTravel_Script_RoutePlayer)
 		call(TimeTravel_Script_HideObjects)
         call(Quest_BuildingAnExhibit_HideLeader_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
 		VAR_TIME_TRAVEL_STATE, TIME_TRAVEL_FIRST_WORMHOLE_USE: TimeTravel_Script_BumpIntoChampion
-		VAR_TIME_TRAVEL_STATE, TIME_TRAVEL_HAS_BATTLED_ONCE: TimeTravel_Script_ResumeBattle
+		VAR_TIME_TRAVEL_STATE, TIME_TRAVEL_HAS_BATTLED_ONCE: TimeTravel_Script_StartBattle
         //FLAG_VISITED_OROLAND_COLISEUM, FALSE: Generic_Mappreview
 ]
 
