@@ -2119,4 +2119,20 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
       .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
       .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
-};
+    [SPEAKER_ELLEN_PAST] =
+    {
+      .name = _("Ellen"),
+      .title = _("Elite Four"),
+      .gender = FEMALE,
+      .speakerIcon = gSpeakerIcon_Karen,
+      .speakerPal = sSpeakerPal_Karen,
+    },
+    [SPEAKER_ARMANDO_PAST] =
+    {
+      .name =_("Armando"),
+      .title = _("Elite Four"),
+      .gender = MALE,
+      .speakerIcon = gSpeakerIcon_Bruno,
+      .speakerPal = sSpeakerPal_Bruno,
+    },
+  };
