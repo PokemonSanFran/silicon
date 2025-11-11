@@ -63,6 +63,7 @@ script TimeTravel_Script_StartTravel
 
 script TimeTravel_Script_BumpIntoChampion
 {
+	callnative(StoreElenaorMonSpecies)
 	msgbox(format("...Where am I?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 	closemessage
 	applymovement(LOCALID_PLAYER,Common_Movement_FaceRight)
@@ -81,18 +82,18 @@ script TimeTravel_Script_BumpIntoChampion
 	playse(SE_BALL_OPEN)
 	waitse
 	clearflag(FLAG_HIDE_SNOM)
+	callnative(BufferEleanorMonSprite)
 	addobject(LOCALID_SNOM)
-	playmoncry(SPECIES_SNOM, CRY_MODE_ENCOUNTER)
+	callnative(PlayEleanorMonCry)
 	waitmoncry
 
-	msgbox(format("Sno!"))
-	bufferspeciesname(STR_VAR_1,SPECIES_SNOM)
+	callnative(BufferEleanorMonName)
 	closemessage
-	playmoncry(SPECIES_SNOM, CRY_MODE_ENCOUNTER)
+	callnative(PlayEleanorMonCry)
 	applymovement(LOCALID_SNOM,FollowerHopFast)
 	waitmovement(LOCALID_SNOM)
 	applymovement(LOCALID_SNOM,moves(emote_heart))
-	playmoncry(SPECIES_SNOM, CRY_MODE_ENCOUNTER)
+	callnative(PlayEleanorMonCry)
 	waitmoncry
 	msgbox(format("{STR_VAR_1} looks excited!"))
 	closemessage	
@@ -151,8 +152,7 @@ script TimeTravel_Script_StartBattle
 
 script TimeTravel_Script_PostBattle
 {
-	callnative(DeleteEleanorSnom)
-	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_COMPLETE)
+	lock
 	msgbox(format("...how are you this strong?"),,SPEAKER_ADAM,TAIL_WHISPER,EMOTE_CONFUSE)
 	msgbox(format("She told me I would be... invincible!"),,SPEAKER_ADAM,,EMOTE_ANGRY)
 	msgbox(format("That if I repped them, I would never lose again!"),,SPEAKER_ADAM,,EMOTE_ANGRY)	
@@ -201,11 +201,6 @@ msgbox(format("You talk, you drink, you mingle, and finally, you leave the party
 	goto(TimeTravel_Dialogue_ReturnToPresent)
 }
 
-script TimeTravel_Script_ResumeBattle
-{
-
-}
-
 script TimeTravel_Dialogue_ReturnToPresent
 {
 applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
@@ -237,7 +232,7 @@ applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
 	msgbox(format("I'm sorry you had to deal with all of that. But I am surprised you were able to so expertly defeat Adam."),,SPEAKER_ARMANDO_PAST)
 	msgbox(format("Who are you?"),,SPEAKER_ARMANDO_PAST)
 	closemessage
-	bufferspeciesname(STR_VAR_1,SPECIES_SNOM)
+	callnative(BufferEleanorMonName)
 	playse(SE_POKENAV_CALL)
 	waitse
 	msgbox(format("{PLAYER}! Did you get seperated from that {STR_VAR_1}? The futher it gets from you, the weaker your connection gets! I have to pull you back!"),,SPEAKER_PANNEN,TAIL_SHOUT,EMOTE_SHOCK,PHONE_ON)
@@ -245,6 +240,8 @@ applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
 	msgbox(format("We'll meet again Armando! And for what its worth, you're part of the reason I'm as strong as I am."),,SPEAKER_ALICIA,,EMOTE_HAPPY)
 	closemessage
 	clearflag(FLAG_USING_WORMHOLE)
+	callnative(DeleteEleanorSnom)
+	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_COMPLETE)
 	warp(MAP_SHARPRISE_SPIRE_LAB,0)
 	waitstate
 	release

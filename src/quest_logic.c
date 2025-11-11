@@ -2435,6 +2435,10 @@ void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
     gSpecialVar_Result = DoesPlayerHaveOneOrTwoUsableMon();
 }
 
+// ***********************************************************************
+// Cutscene: Time Travel
+// ***********************************************************************
+
 static bool32 IsMonEleanorSnom(struct Pokemon* pokemon)
 {
     return (GetMonData(pokemon,MON_DATA_GIGANTAMAX_FACTOR) == TRUE);
@@ -2455,6 +2459,31 @@ static u32 IsEleanorSnomInParty(void)
     return PARTY_SIZE;
 }
 
+static u32 GetCurrentEleanorMonSpecies(void)
+{
+    u32 slot = IsEleanorSnomInParty();
+
+    if (slot == PARTY_SIZE)
+        return SPECIES_NONE;
+
+    return (GetMonData(&gPlayerParty[slot],MON_DATA_SPECIES));
+}
+
+void StoreElenaorMonSpecies(void)
+{
+    gSpecialVar_0x8009 = GetCurrentEleanorMonSpecies();
+}
+
+void PlayEleanorMonCry(void)
+{
+    PlayCry_Script(gSpecialVar_0x8009, CRY_MODE_ENCOUNTER);
+}
+
+void BufferEleanorMonName(void)
+{
+    StringCopy(gStringVar1, GetSpeciesName(gSpecialVar_0x8009));
+}
+
 static UNUSED void Script_IsEleanorSnomInParty(void)
 {
     gSpecialVar_Result = (IsEleanorSnomInParty() != PARTY_SIZE);
@@ -2473,51 +2502,43 @@ void DeleteEleanorSnom(void)
 
 void GenerateAndGiveEleanorSnom(void)
 {
-    enum NationalDexOrder nationalDexNum;
-    int sentToPc;
     struct Pokemon mon;
-    u8 i;
-    u16 species     = SPECIES_SNOM;
-    u8 level        = 16; 
+    u16 species = SPECIES_SNOM;
+    u8 level = 16; 
+    u32 personality = Random32();
+    u32 otId = 2308196752;
 
-    //Nature
-    u8 nature = Random() % NUM_NATURES;
-    CreateMonWithNature(&mon, species, level, USE_RANDOM_IVS, nature);
+    CreateMon(&mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
 
-    //Shininess
     bool8 isShiny   = FALSE;
     SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
 
-    // Gigantamax factor
     u32 gmaxFactor = TRUE;
     SetMonData(&mon, MON_DATA_GIGANTAMAX_FACTOR, &gmaxFactor);
 
-    // Dynamax Level
-    u32 dmaxLevel = 0;
-    SetMonData(&mon, MON_DATA_DYNAMAX_LEVEL, &dmaxLevel);
-
-    // tera type
-    u32 teraType = GetTeraTypeFromPersonality(&mon);
-    SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
-
     u32 abilityNum;
     do {
-        abilityNum = Random() % NUM_ABILITY_SLOTS;  // includes hidden abilities
+        abilityNum = Random() % (NUM_ABILITY_SLOTS - 1);
     } while (GetAbilityBySpecies(species, abilityNum) == ABILITY_NONE);
-
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
 
     CalculateMonStats(&mon);
 
     u8 trainerName[TRAINER_NAME_LENGTH + 1] = _("Eleanor");
     u32 gender = FEMALE;
+
     SetMonData(&mon, MON_DATA_OT_NAME, &trainerName);
     SetMonData(&mon, MON_DATA_OT_GENDER, &gender);
+    
+    u32 ball = BALL_DUSK;
+    SetMonData(&mon, MON_DATA_POKEBALL, &ball);
 
+    u8 i;
     for (i = 0; i < PARTY_SIZE; i++)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             break;
 
+    int sentToPc;
     if (i >= PARTY_SIZE)
     {
         sentToPc = CopyMonToPC(&mon);
@@ -2529,8 +2550,7 @@ void GenerateAndGiveEleanorSnom(void)
         gPlayerPartyCount = i + 1;
     }
 
-    //Pokedex entry
-    nationalDexNum = SpeciesToNationalPokedexNum(species);
+    enum NationalDexOrder nationalDexNum = SpeciesToNationalPokedexNum(species);
     switch(sentToPc)
     {
         case MON_GIVEN_TO_PARTY:
@@ -2541,4 +2561,9 @@ void GenerateAndGiveEleanorSnom(void)
         case MON_CANT_GIVE:
             break;
     }
+}
+
+void BufferEleanorMonSprite(void)
+{
+    VarSet(VAR_OBJ_GFX_ID_0,gSpecialVar_0x8009 + OBJ_EVENT_MON);
 }
