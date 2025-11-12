@@ -1,0 +1,119 @@
+script Rematches_Script_Ellen
+{
+	lock
+	switch(var(VAR_ELLEN_STATE))
+	{
+		case HAS_NOT_TALKED_TO_ELITE:
+			goto(Rematches_Dialogue_FirstEllenTalk)
+		case HAS_TALKED_TO_ELITE:
+			goto(Rematches_Script_AskEllenBattle)
+		case WON_ELITE_MON:
+			goto(Rematches_Dialogue_EllenOfferMon)
+		case TAKEN_ELITE_MON:
+			goto(Rematches_Script_AskEllenRematch)
+	}
+	release
+	end
+}
+
+script Rematches_Dialogue_FirstEllenTalk
+{
+	setvar(VAR_ELLEN_STATE,HAS_TALKED_TO_ELITE)
+	lock
+	faceplayer
+	msgbox(format("{PLAYER}."),,SPEAKER_ELLEN)
+	msgbox(format("This is the calmest I've been since we've met.\pI don't think I've formally thanked you for all your help.\pYour sacrifice.\pYour commitment.\pI was truly honored to fight by your side."),,SPEAKER_ELLEN)
+	msgbox(format("Now that I think about it... we've never battled before."),,SPEAKER_ELLEN)
+	msgbox(format("Huh? Didn't we battle twice?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+	msgbox(format("Actually, three times!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+	msgbox(format("You battled against Alcmene, yes.\pBut I would like to battle you as Ellen, a member of the Elite Four."),,SPEAKER_ELLEN)
+	goto(Rematches_Script_AskEllenBattle)
+}
+
+script Rematches_Script_AskEllenBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Are you ready to battle now?"),MSGBOX_YESNO,SPEAKER_ELLEN)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Come back when you're ready."),,SPEAKER_ELLEN)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Let's see if I remember this...\pI'm Ellen of the Resido Elite Four.\pTell me challenger, when the world is fighting against you, what do you do?\pGive up? Dig your heels in?\pAdapt?\pLet's test your resolve!"),,SPEAKER_ELLEN)
+	closemessage
+	trainerbattle_no_intro(TRAINER_ELLEN,format("{PLAYER}, your strength knows no bounds!"))
+	// PSF TODO create a cursed chain of if else statement to handle rematches
+	setflag(FLAG_DAILY_ELLEN_REMATCH)
+
+	if (var(VAR_ELLEN_STATE) == TAKEN_ELITE_MON)
+	{
+		goto(Rematches_Dialogue_EllenComeBack)
+	}
+	goto(Rematches_Dialogue_EllenOfferMon)
+}
+
+script Rematches_Dialogue_EllenMakeSpace
+{
+	msgbox(format("Come back when you have space in your party or Boxes for another Pokemon."),,SPEAKER_ELLEN)
+		closemessage
+		release
+		end
+}
+
+script Rematches_Dialogue_EllenExplainMon
+{
+	setvar(VAR_ELLEN_STATE,TAKEN_ELITE_MON)
+	callnative(BufferEleanorMonName)
+	buffermapname(STR_VAR_2,MAP_OROLAND_COLISEUM_OUTSIDE)
+	msgbox(format("I recently found this {STR_VAR_1}.\pI typically train Pokemon in places where they're from, where they feel at home.\pThis {STR_VAR_1} though...it seems particularly calm around {STR_VAR_2}.\pWhat's strange though - {STR_VAR_1} haven't been seen around there in about nine years."),,SPEAKER_ELLEN)
+	msgbox(format("It's possible that a Trainer caught this Pokemon 9 years ago and then abandoned it... but this Pokemon looks young.\pI have a different idea.\pI know some Pokemon can travel across time and space. I don't think {STR_VAR_1} can do that at will... but is it possible it was brought here?"),,SPEAKER_ELLEN)
+	msgbox(format("I think {STR_VAR_1} is from a different time. And I'm hoping if it stays with you, it'll be able to somehow get back home."),SPEAKER_ELLEN)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Dialogue_EllenOfferMon
+{
+	setvar(VAR_ELLEN_STATE,WON_ELITE_MON)
+	msgbox(format("That was delightful {PLAYER}. Thank you.\pYou're an accomplished and traveled Trainer... and perhaps you can help me."),,SPEAKER_ELLEN)
+	closemessage
+	callnative(GenerateAndGiveEleanorSnom)
+
+	switch(var(VAR_RESULT))
+	{
+		case MON_GIVEN_TO_PARTY: 
+			goto(Rematches_Dialogue_EllenExplainMon)
+		case MON_GIVEN_TO_PC:
+			goto(Rematches_Dialogue_EllenExplainMon)
+		default:
+			goto(Rematches_Dialogue_EllenMakeSpace)
+	}
+}
+
+script Rematches_Dialogue_EllenComeBack
+{
+	lock
+	msgbox(format("52 years of age really starts to impact you! I can really only do one intense battle a day.\pI'd love to battle again tomorrow!"),MSGBOX_NPC,SPEAKER_ELLEN,,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskEllenRematch
+{
+	if (flag(FLAG_DAILY_ELLEN_REMATCH))
+	{
+		goto(Rematches_Dialogue_EllenComeBack)
+	}
+	lock
+	faceplayer
+	msgbox(format("Good to see you again {PLAYER}. Resido is so lucky to have you."),,SPEAKER_ELLEN)
+	goto(Rematches_Script_AskEllenBattle)
+}

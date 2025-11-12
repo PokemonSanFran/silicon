@@ -76,6 +76,7 @@
 #define VAR_DEOXYS_ROCK_LEVEL                            0x4035
 #define VAR_PC_BOX_TO_SEND_MON                           0x4036
 #define VAR_ABNORMAL_WEATHER_LOCATION                    0x4037
+#define VAR_ELLEN_STATE                                  0x4037 // PSF Var
 #define VAR_ABNORMAL_WEATHER_STEP_COUNTER                0x4038
 #define VAR_SHOULD_END_ABNORMAL_WEATHER                  0x4039
 #define VAR_FARAWAY_ISLAND_STEP_COUNTER                  0x403A
