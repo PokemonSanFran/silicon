@@ -1160,17 +1160,6 @@ static void MapSystem_VBlankCB(void)
 }
 
 // UI Loading Functions
-void Task_OpenDefaultMapSystemFromStartMenu(u8 taskId)
-{
-    //s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
-    {
-        sCurrentMapMode = MAP_MODE_DEFAULT;
-        CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToUIMenu);
-        DestroyTask(taskId);
-    }
-}
 
 void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
 {
@@ -1179,7 +1168,7 @@ void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_TROLLEY;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToUIMenu);
+        MapSystem_Init(CB2_StartMenu_ReturnToUI);
         DestroyTask(taskId);
     }
 }
@@ -1191,7 +1180,7 @@ void Task_OpenFlyMapSystemFromPartyMenu(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_FLY;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToUIMenu);
+        MapSystem_Init(CB2_StartMenu_ReturnToUI);
         DestroyTask(taskId);
     }
 }
@@ -1230,9 +1219,15 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_TAXI;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToUIMenu);
+        MapSystem_Init(CB2_ReturnToFieldContinueScript);
         DestroyTask(taskId);
     }
+}
+
+void CB2_MapSystemFromStartMenu(void)
+{
+    sCurrentMapMode = MAP_MODE_DEFAULT;
+    MapSystem_Init(CB2_StartMenu_ReturnToUI);
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere

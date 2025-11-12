@@ -39,7 +39,6 @@
 #include "event_object_movement.h"
 #include "pokemon_icon.h"
 #include "quest_flavor_lookup.h"
-#include "ui_start_menu.h"
 #include "field_weather.h"
 #include "field_screen_effect.h"
 #include "tv.h"
@@ -140,7 +139,6 @@ static u8 GenerateList(void);
 static void AssignCancelNameAndId(u8 numRow);
 
 static u32 CountUnlockedQuests(void);
-static u32 CountInactiveQuests(void);
 static u32 CountActiveQuests(void);
 static u32 CountRewardQuests(void);
 static u32 CountFavoriteQuests(void);
@@ -2702,16 +2700,9 @@ static void Task_QuestMenuTurnOff(u8 taskId)
     }
 }
 
-void Task_QuestMenu_OpenFromStartMenu(u8 taskId)
+void CB2_QuestMenuFromStartMenu(void)
 {
-    if (gPaletteFade.active)
-        return;
-
-    StartMenu_Menu_FreeResources();
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    QuestMenu_Init(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
+    QuestMenu_Init(CB2_StartMenu_ReturnToUI);
 }
 
 void QuestMenu_CopyQuestName(u8 *dst, u8 questId)

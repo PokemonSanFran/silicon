@@ -233,6 +233,7 @@ void QuestMenu_Init(MainCallback callback);
 u8 QuestMenu_GetSetSubquestState(u8 quest, u8 caseId, u8 childQuest);
 u8 QuestMenu_GetSetQuestState(u8 quest, u8 caseId);
 void Task_QuestMenu_OpenFromStartMenu(u8);
+void CB2_QuestMenuFromStartMenu(void);
 void QuestMenu_CopyQuestName(u8 *dst, u8 questId);
 void QuestMenu_CopySubquestName(u8 *dst, u8 parentId, u8 childId);
 void QuestMenu_ResetMenuSaveData(void);
@@ -259,5 +260,6 @@ u32 CountCompletedQuests(void);
 enum QuestCases ReturnQuestState(enum QuestIdList questId);
 const u8 *GetQuestName(s32 questId);
 bool8 IsQuestInactiveState(s32 questId);
+u32 CountInactiveQuests(void);
 
 #endif // GUARD_QUESTS_H

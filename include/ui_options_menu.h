@@ -5,6 +5,7 @@
 #include "constants/options_battle.h"
 
 void Task_OpenOptionsMenuFromStartMenu(u8 taskId);
+void CB2_OptionsFromStartMenu(void);
 void Options_Menu_Init(MainCallback callback);
 void CB2_InitUIOptionMenuFromMainMenu(void);
 void CB2_InitUiOptionMenuFromDevLetter(void);
@@ -147,14 +148,6 @@ enum optionBattlePointsMessagesValues
 	BATTLE_OPTION_POINTS_MESSAGES_ON,
 	BATTLE_OPTION_POINTS_MESSAGES_OFF,
 	BATTLE_OPTION_POINTS_MESSAGE_COUNT,
-};
-
-enum optionBattlePointsSummary
-{
-	BATTLE_OPTION_POINTS_SUMMARY_FAINT,
-	BATTLE_OPTION_POINTS_SUMMARY_BATTLE,
-	BATTLE_OPTION_POINTS_SUMMARY_OFF,
-	BATTLE_OPTION_POINTS_SUMMARY_COUNT,
 };
 
 enum optionBattleMidBattleEvolutionValues
@@ -307,7 +300,6 @@ enum BattleOptionsID
     BATTLE_OPTIONS_PRESET,
     BATTLE_OPTIONS_EXPERIENCE,
 	BATTLE_OPTIONS_POINTS_MESSAGES,
-	BATTLE_OPTIONS_POINTS_SUMMARY,
     BATTLE_OPTIONS_EXP_MULTIPLIER,
     BATTLE_OPTIONS_PLAYER_LEVEL,
     BATTLE_OPTIONS_TRAINER_SCALING,
