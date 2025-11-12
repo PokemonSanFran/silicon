@@ -74,6 +74,7 @@ script Rematches_Dialogue_EllenExplainMon
 	msgbox(format("I recently found this {STR_VAR_1}.\pI typically train Pokemon in places where they're from, where they feel at home.\pThis {STR_VAR_1} though...it seems particularly calm around {STR_VAR_2}.\pWhat's strange though - {STR_VAR_1} haven't been seen around there in about nine years."),,SPEAKER_ELLEN)
 	msgbox(format("It's possible that a Trainer caught this Pokemon 9 years ago and then abandoned it... but this Pokemon looks young.\pI have a different idea.\pI know some Pokemon can travel across time and space. I don't think {STR_VAR_1} can do that at will... but is it possible it was brought here?"),,SPEAKER_ELLEN)
 	msgbox(format("I think {STR_VAR_1} is from a different time. And I'm hoping if it stays with you, it'll be able to somehow get back home."),SPEAKER_ELLEN)
+	msgbox(format("I hope it works out!"),,SPEAKER_ELLEN)
 	closemessage
 	release
 	end
@@ -89,12 +90,25 @@ script Rematches_Dialogue_EllenOfferMon
 	switch(var(VAR_RESULT))
 	{
 		case MON_GIVEN_TO_PARTY: 
-			goto(Rematches_Dialogue_EllenExplainMon)
+			call(Rematches_Script_ObtainedMon)
+			msgbox(format("{STR_VAR_1} was added to the party."))
 		case MON_GIVEN_TO_PC:
-			goto(Rematches_Dialogue_EllenExplainMon)
+			call(Rematches_Script_ObtainedMon)
+			call(Common_EventScript_TransferredToPC)
 		default:
 			goto(Rematches_Dialogue_EllenMakeSpace)
 	}
+	goto(Rematches_Dialogue_EllenExplainMon)
+}
+
+script Rematches_Script_ObtainedMon
+{
+	bufferspeciesname(STR_VAR_1,SPECIES_ELEANOR_GIFT)
+	playfanfare(MUS_OBTAIN_ITEM)
+	msgbox(format("{PLAYER} recieved a {STR_VAR_1} from Eleanor."))
+	waitmessage
+	waitfanfare
+	return
 }
 
 script Rematches_Dialogue_EllenComeBack
