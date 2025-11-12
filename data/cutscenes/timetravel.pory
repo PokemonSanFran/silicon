@@ -232,11 +232,11 @@ applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
 	msgbox(format("I'm sorry you had to deal with all of that. But I am surprised you were able to so expertly defeat Adam."),,SPEAKER_ARMANDO_PAST)
 	msgbox(format("Who are you?"),,SPEAKER_ARMANDO_PAST)
 	closemessage
+	call(Common_EventScript_PhoneRinging)
 	callnative(BufferEleanorMonName)
-	playse(SE_POKENAV_CALL)
-	waitse
-	msgbox(format("{PLAYER}! Did you get seperated from that {STR_VAR_1}? The futher it gets from you, the weaker your connection gets! I have to pull you back!"),,SPEAKER_PANNEN,TAIL_SHOUT,EMOTE_SHOCK,PHONE_ON)
+	msgbox(format("{PLAYER}! Did you get seperated from that {STR_VAR_1}? The futher it gets from you, the weaker your connection gets! I have to pull you back!"),,SPEAKER_MADRONE,TAIL_SHOUT,EMOTE_SHOCK,PHONE_ON)
 	closemessage
+	playse(SE_POKENAV_HANG_UP)
 	msgbox(format("We'll meet again Armando! And for what its worth, you're part of the reason I'm as strong as I am."),,SPEAKER_ALICIA,,EMOTE_HAPPY)
 	closemessage
 	clearflag(FLAG_USING_WORMHOLE)
@@ -246,4 +246,92 @@ applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
 	waitstate
 	release
 	end
+}
+
+script TimeTravel_CheckSnom_Script
+{
+	if (var(VAR_ELLEN_STATE) != TAKEN_ELITE_MON)
+	{
+		return
+	}
+
+
+	if (var(VAR_TIME_TRAVEL_STATE) > TIME_TRAVEL_COMPLETE)
+	{
+		return
+	}
+
+	specialvar(VAR_RESULT,Quest_Ultrawormholeresearch_CountRemainingSubquests)
+	if (var(VAR_RESULT) > 8)
+	{
+		return
+	}
+
+	callnative(BufferEleanorMonName)
+	callnative(Script_IsEleanorSnomInParty)
+	if (var(VAR_RESULT) == FALSE)
+	{
+		msgbox(format("I should bring Eleanor's {STR_VAR_1} to Madrone..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+		closemessage
+		return
+	}
+
+	switch (var(VAR_TIME_TRAVEL_STATE))
+	{
+		case TIME_TRAVEL_SACRIFICE_COMPLETE:
+			msgbox("Should I ask him about {STR_VAR_1}?",MSGBOX_YESNO,SPEAKER_ALICIA,TAIL_THOUGHT)
+			if (var(VAR_RESULT) == YES)
+			{
+				goto(TimeTravel_Dialogue_FirstTalkEllenMadrone)
+			}
+			else
+			{
+				closemessage
+				return
+			}
+		case TIME_TRAVEL_ASKED_ABOUT_SNOM:
+			goto(TimeTravel_Dialogue_OfferTravelMadrone)
+		case TIME_TRAVEL_FIRST_WORMHOLE_USE:
+			goto(TimeTravel_Dialogue_OfferTravelMadrone)
+		case TIME_TRAVEL_HAS_BATTLED_ONCE:
+			goto(TimeTravel_Dialogue_OfferTravelMadrone)
+		default:
+			return
+	}
+	return
+}
+
+script TimeTravel_Dialogue_FirstTalkEllenMadrone
+{
+	lock
+	msgbox(format("Professor, a friend gave me this Pokemon..."),,SPEAKER_ALICIA)
+	closemessage
+	playse(SE_PIN)
+	applymovement(LOCALID_MADRONE,moves(face_player,lock_facing_direction,jump_in_place_left,emote_exclamation_mark))
+	waitmovement(LOCALID_MADRONE)
+	waitse
+	msgbox(format("Yikes! I can feel the wormhole energy seeping off of it from here!"),,SPEAKER_MADRONE,,EMOTE_SHOCK)
+	msgbox(format("Wait, really? Is it not from here?"),,SPEAKER_ALICIA)
+	closemessage
+	applymovement(LOCALID_MADRONE,moves(face_up))
+	waitmovement(LOCALID_MADRONE)
+	playse(SE_ROTATING_GATE)
+	msgbox(format("'Here' is a tricky word. My readings tell me its from this dimension.\pBut beyond that? No idea.\pIf you're that curious, I can calibrate the machine to where that {STR_VAR_1} is from... or at least close."),,SPEAKER_MADRONE)
+	msgbox(format("You can only go if you have that {STR_VAR_1} with you... Using the portal with a target can get messy, so I'll warp you from here."),,SPEAKER_MADRONE)
+	closemessage
+	goto(TimeTravel_Dialogue_OfferTravelMadrone)
+}
+
+script TimeTravel_Dialogue_OfferTravelMadrone
+{
+	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_ASKED_ABOUT_SNOM)
+	msgbox(format("Do you want me to send you to when {STR_VAR_1} is from?"),MSGBOX_YESNO,SPEAKER_MADRONE)
+	if(var(VAR_RESULT) == NO)
+	{
+		msgbox(format("No? Come talk to me when you're ready."),,SPEAKER_MADRONE)
+		closemessage
+		release
+		end
+	}
+	goto(TimeTravel_Script_StartTravel)
 }

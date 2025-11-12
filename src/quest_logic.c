@@ -2484,7 +2484,7 @@ void BufferEleanorMonName(void)
     StringCopy(gStringVar1, GetSpeciesName(SPECIES_ELEANOR_GIFT));
 }
 
-static UNUSED void Script_IsEleanorSnomInParty(void)
+void Script_IsEleanorSnomInParty(void)
 {
     gSpecialVar_Result = (IsEleanorSnomInParty() != PARTY_SIZE);
 }
