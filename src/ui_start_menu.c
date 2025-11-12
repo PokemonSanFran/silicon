@@ -40,6 +40,7 @@
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
 #include "dexnav.h"
+#include "waves.h"
 #include "siliconDaycare.h"
 #include "event_object_movement.h"
 #include "field_control_avatar.h"
@@ -911,7 +912,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_WAVES_OF_CHANGE] = // PSF TODO ui
     {
-        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL, START_SIGNAL_STRONG
+        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, CB2_WavesFromStartMenu, START_SIGNAL_STRONG
     },
     [START_APP_CUSTOMIZE] =
     {

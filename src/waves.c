@@ -13,10 +13,12 @@
 #include "waves.h"
 #include "palette.h"
 #include "task.h"
+#include "string_util.h"
 #include "ui_adventure_guide.h"
 #include "constants/ui_adventure_guide.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "ui_start_menu.h"
 #include "constants/quests.h"
 #include "constants/rgb.h"
 #include "constants/waves.h"
@@ -62,6 +64,8 @@ static bool32 AllocateStructs(void);
 static void Waves_ReturnFromAdventureGuide(void);
 static void ClearAllWindows(void);
 static void Waves_InitializeBackgroundsAndLoadBackgroundGraphics(void);
+static void Waves_PrintMenuHeader(enum WavesWindowsGrid windowId);
+static void Waves_PrintHeaderText(enum WavesWindowsGrid windowId);
 
 static const u16 wavesPalettesDefault[] = INCBIN_U16("graphics/accept/palettes/default.gbapal");
 static const u16 wavesPalettesBlack[] = INCBIN_U16("graphics/accept/palettes/black.gbapal");
@@ -477,7 +481,7 @@ static void ClearWindowCopyToVram(u32 windowId)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void PlaySoundStartFadeQuitApp(u8 taskId)
+static UNUSED void PlaySoundStartFadeQuitApp(u8 taskId)
 {
     PlaySE(SE_PC_OFF);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -525,16 +529,9 @@ static void FreeBackgrounds(void)
             Free(sBgTilemapBuffer[backgroundId]);
 }
 
-void Task_OpenWavesFromStartMenu(u8 taskId)
+void CB2_WavesFromStartMenu(void)
 {
-    if (gPaletteFade.active)
-        return;
-
-    StartMenu_Menu_FreeResources();
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    Waves_InitializeAndSaveCallback(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
+    Waves_InitializeAndSaveCallback(CB2_StartMenu_ReturnToUI);
 }
 
 static void Waves_InitializeAndSaveCallback(MainCallback callback)
@@ -594,7 +591,7 @@ void Waves_SetupCallback(void)
         case 6:
             ClearAllWindows();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-            PrintMenuHeader(WIN_WAVES_CARD_HEADER);
+            Waves_PrintMenuHeader(WIN_WAVES_CARD_HEADER);
             //PrintHelpBar(WIN_WAVES_CARD_FOOTER);
             if (firstOpen)
                 PlaySE(SE_PC_LOGIN);
@@ -702,7 +699,7 @@ static void Waves_InitializeBackgroundsAndLoadBackgroundGraphics(void)
         Waves_FadescreenAndExitGracefully();
 }
 
-static void Waves_PrintMenuHeader(enum WavesWindowsGrid windowId);
+static void Waves_PrintMenuHeader(enum WavesWindowsGrid windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     Waves_PrintHeaderText(windowId);
@@ -714,5 +711,5 @@ static void Waves_PrintHeaderText(enum WavesWindowsGrid windowId)
     u32 fontId = FONT_WAVES_TITLE;
     u32 x = 4;
     u32 y = 0;
-    AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sWavesWindowFontColors[WAVES_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
