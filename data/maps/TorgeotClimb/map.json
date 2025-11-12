@@ -34,7 +34,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_KIRLIA",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(JIRACHI)",
       "x": 19,
       "y": 35,
       "elevation": 3,
