@@ -2481,7 +2481,7 @@ void PlayEleanorMonCry(void)
 
 void BufferEleanorMonName(void)
 {
-    StringCopy(gStringVar1, GetSpeciesName(gSpecialVar_0x8009));
+    StringCopy(gStringVar1, GetSpeciesName(SPECIES_ELEANOR_GIFT));
 }
 
 static UNUSED void Script_IsEleanorSnomInParty(void)
@@ -2503,7 +2503,7 @@ void DeleteEleanorSnom(void)
 void GenerateAndGiveEleanorSnom(void)
 {
     struct Pokemon mon;
-    u16 species = SPECIES_SNOM;
+    u16 species = SPECIES_ELEANOR_GIFT;
     u8 level = 16; 
     u32 personality = Random32();
     u32 otId = 2308196752;
@@ -2561,6 +2561,7 @@ void GenerateAndGiveEleanorSnom(void)
         case MON_CANT_GIVE:
             break;
     }
+    gSpecialVar_Result = sentToPc;
 }
 
 void BufferEleanorMonSprite(void)
