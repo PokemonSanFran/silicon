@@ -2,7 +2,6 @@
 //Quest_Ultrawormholeresearch_
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const MADRONE = 1
 const FLAG_HIDE_TOTEM = FLAG_TEMP_1A
 const FLAG_HIDE_ULTRA_BEAST = FLAG_TEMP_1A
 
@@ -58,7 +57,8 @@ script Quest_Ultrawormholeresearch_PlayerExplain_Dialogue{
     return
 }
 
-script Quest_Ultrawormholeresearch_Preventvoid_Script{
+script Quest_Ultrawormholeresearch_Preventvoid_Script
+{
     lock
     msgbox(format("I wouldn't go in there right now if I was you."),,SPEAKER_MADRONE)
     closemessage
@@ -99,7 +99,7 @@ script Quest_Ultrawormholeresearch_Reward_Dialogue{
 
 }
 script Quest_Ultrawormholeresearch_Active_Dialogue{
-
+	call(TimeTravel_CheckSnom_Script)
 }
 
 script Quest_Ultrawormholeresearch_ConstructMenu_Script{
@@ -324,41 +324,3 @@ script Quest_Ultrawormholeresearch_ResetUltraBeastVisbility{
     return
 }
 
-text gText_Ultrawormholeresearch_WaitEsperanto{
-    format("")
-}
-text gText_Ultrawormholeresearch_TakeTheBook{
-    format("")
-}
-text gText_Ultrawormholeresearch_TheBookcase{
-    format("")
-}
-text gText_Ultrawormholeresearch_Whatthehell{
-    format("")
-}
-
-text gText_Ultrawormholeresearch_IWouldntGo{
-    format("I wouldn't go in there right now if I was you.")
-}
-
-text gText_Ultrawormholeresearch_IDontThink{
-    format("I don't think you used the computer to set a warp location... if you walk up those stairs now, you're probably going to be warped into the endless void. Forever.")
-}
-
-text gText_Ultrawormholeresearch_WhichWormhole{
-    format("")
-}
-
-text gText_Ultrawormholeresearch_WarpHasBeenSet{
-    format("The portal has been set to {STR_VAR_1}.")
-}
-
-text gText_Ultrawormholeresearch_PlayerIs{
-    format("{PLAYER} is that you? Excellent, this is Professor Madrone.")
-}
-text gText_Ultrawormholeresearch_GreatJobCatching{
-    format("Excellent job catching that {STR_VAR_1}. I've already sampled its environment data from your Pokédex, and I was able to open another portal!")
-}
-text gText_Ultrawormholeresearch_WhenYouComeBack{
-    format("It's already set up on the computer for you.")
-}
