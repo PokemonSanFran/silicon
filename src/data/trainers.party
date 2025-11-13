@@ -3101,7 +3101,7 @@ Native: Yes
 
 Urshifu-Rapid-Strike @ Urshifunite Rapid
 Ability: Unseen Fist  
-Level: 88  
+Level: 50
 Ball: ITEM_MASTER_BALL
 Shiny: No
 Happiness: 1
@@ -3114,7 +3114,7 @@ Adamant Nature
 
 Pelipper @ Flying Gem  
 Ability: Drizzle  
-Level: 86    
+Level: 50
 Ball: ITEM_MASTER_BALL
 Shiny: No
 Happiness: 1
@@ -3128,7 +3128,7 @@ IVs: 0 Atk
 
 Toxicroak @ Black Sludge  
 Ability: Dry Skin  
-Level: 87  
+Level: 50
 Ball: ITEM_MASTER_BALL
 Shiny: No
 Happiness: 1
@@ -3141,7 +3141,7 @@ Adamant Nature
 
 Scizor @ Fightinium Z  
 Ability: Technician  
-Level: 86   
+Level: 50
 Ball: ITEM_MASTER_BALL
 Shiny: No
 Happiness: 1
@@ -3154,7 +3154,7 @@ Adamant Nature
 
 Pawmot @ Life Orb  
 Ability: Iron Fist  
-Level: 87  
+Level: 50
 Ball: ITEM_MASTER_BALL
 Shiny: No
 Happiness: 1
@@ -3167,7 +3167,7 @@ Jolly Nature
 
 Urshifu @ Focus Sash  
 Ability: Unseen Fist  
-Level: 88   
+Level: 50
 Ball: ITEM_MASTER_BALL
 Shiny: No
 Happiness: 1

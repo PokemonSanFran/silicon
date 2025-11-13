@@ -7217,7 +7217,7 @@
 #line 3103
             .ability = ABILITY_UNSEEN_FIST,
 #line 3104
-            .lvl = 88,
+            .lvl = 50,
 #line 3105
             .ball = ITEM_MASTER_BALL,
 #line 3107
@@ -7248,7 +7248,7 @@
 #line 3116
             .ability = ABILITY_DRIZZLE,
 #line 3117
-            .lvl = 86,
+            .lvl = 50,
 #line 3118
             .ball = ITEM_MASTER_BALL,
 #line 3120
@@ -7279,7 +7279,7 @@
 #line 3130
             .ability = ABILITY_DRY_SKIN,
 #line 3131
-            .lvl = 87,
+            .lvl = 50,
 #line 3132
             .ball = ITEM_MASTER_BALL,
 #line 3134
@@ -7310,7 +7310,7 @@
 #line 3143
             .ability = ABILITY_TECHNICIAN,
 #line 3144
-            .lvl = 86,
+            .lvl = 50,
 #line 3145
             .ball = ITEM_MASTER_BALL,
 #line 3147
@@ -7341,7 +7341,7 @@
 #line 3156
             .ability = ABILITY_IRON_FIST,
 #line 3157
-            .lvl = 87,
+            .lvl = 50,
 #line 3158
             .ball = ITEM_MASTER_BALL,
 #line 3160
@@ -7372,7 +7372,7 @@
 #line 3169
             .ability = ABILITY_UNSEEN_FIST,
 #line 3170
-            .lvl = 88,
+            .lvl = 50,
 #line 3171
             .ball = ITEM_MASTER_BALL,
 #line 3173
