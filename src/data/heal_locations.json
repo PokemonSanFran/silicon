@@ -624,6 +624,12 @@
       "map": "MAP_ESPULEE_OUTSKIRTS",
       "x": 5,
       "y": 33
+    },
+    {
+      "id": "HEAL_LOCATION_PERLACIA_MUSEUM",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 28,
+      "y": 24
     }
   ]
 }

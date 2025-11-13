@@ -1082,7 +1082,7 @@ static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] =
         },
         {
             .name = COMPOUND_STRING("Perlacia Museum"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY,
+            .healLocation = HEAL_LOCATION_PERLACIA_MUSEUM,
         },
         {
             .name = COMPOUND_STRING("Boomers"),
@@ -1321,9 +1321,9 @@ void Task_OpenDefaultMapSystemFromStartMenu(u8 taskId)
     }
 }
 
-void Script_OpenTrolley(void) 
-{     
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);     
+void Script_OpenTrolley(void)
+{
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_OpenTrolleyMapSystemFromStation,0);
 }
 
@@ -2479,7 +2479,7 @@ void CreateOverworldWaypointArrow(void)
 static void Task_DelayPrintOverworldWaypoint(u8 taskId)
 {
     //if (FindTaskIdByFunc(Task_RunMapPreview_Script) != TASK_NONE)
-   if (ForestMapPreviewScreenIsRunning()) 
+   if (ForestMapPreviewScreenIsRunning())
         return;
 
     if (!gPaletteFade.active)
@@ -4053,4 +4053,4 @@ void BufferTrolleyBaseFare(void)
 {
     ConvertIntToDecimalStringN(gStringVar1,FARE_BASE_TROLLEY,STR_CONV_MODE_LEFT_ALIGN,CountDigits(FARE_BASE_TROLLEY));
 }
-    
+
