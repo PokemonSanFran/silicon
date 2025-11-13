@@ -54,9 +54,14 @@ static bool32 IsSlideInitalizedOrPlayed(enum TrainerSlideType slideId);
 
 static const u8* const sTrainerSlides[DIFFICULTY_COUNT][TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
 {
-    [DIFFICULTY_NORMAL] =
-    {
-    },
+        //[DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_PLAYER_MEGA_EVOLUTION] = COMPOUND_STRING("Your bonds have always shone through. This is nothing we weren't prepared for!"),
+        //[DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_ENEMY_LANDS_FIRST_DOWN] = COMPOUND_STRING("No worthy tree is ever chopped with a single swing."),
+        [DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_PLAYER_LANDS_FIRST_CRITICAL_HIT] = COMPOUND_STRING("And we fight on still!"),
+        [DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_LAST_SWITCHIN] = COMPOUND_STRING("I rest my hopes in you, my friend, let's dig deep in our hearts."),
+        //[DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_PLAYER_MON_UNAFFECTED] = COMPOUND_STRING("Heh! Perhaps I'm going senile..."),
+        //[DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_ENEMY_Z_MOVE] = COMPOUND_STRING("Loathe as I am to say, this is a power I owe to SharpRise. Don't lose to it, now!"),
+        [DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_PLAYER_LANDS_FIRST_SUPER_EFFECTIVE_HIT] = COMPOUND_STRING("Well-spotted! We've taken many such hits before, however."),
+        //[DIFFICULTY_NORMAL][TRAINER_KEI_YING][TRAINER_SLIDE_PLAYER_LAST_SWITCHIN] = COMPOUND_STRING("Ever flowing like water...But not a single strike can be predictable..."),
 };
 
 static const u8* const sFrontierTrainerSlides[DIFFICULTY_COUNT][FRONTIER_TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
