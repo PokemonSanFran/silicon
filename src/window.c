@@ -3,6 +3,7 @@
 #include "malloc.h"
 #include "bg.h"
 #include "blit.h"
+#include "decompress.h"
 
 // This global is set to 0 and never changed.
 COMMON_DATA u8 gTransparentTileNumber = 0;
@@ -16,7 +17,7 @@ EWRAM_DATA static u16 sWindowSize = 0;
 static u32 GetNumActiveWindowsOnBg(u32 bgId);
 static u32 GetNumActiveWindowsOnBg8Bit(u32 bgId);
 
-static const struct WindowTemplate sDummyWindowTemplate = DUMMY_WIN_TEMPLATE;
+const struct WindowTemplate gDummyWindowTemplate = DUMMY_WIN_TEMPLATE;
 
 static void DummyWindowBgTilemap(void)
 {
@@ -44,7 +45,7 @@ bool32 InitWindows(const struct WindowTemplate *templates)
 
     for (i = 0; i < WINDOWS_MAX; ++i)
     {
-        gWindows[i].window = sDummyWindowTemplate;
+        gWindows[i].window = gDummyWindowTemplate;
         gWindows[i].tileData = NULL;
     }
 
@@ -222,7 +223,7 @@ void RemoveWindow(u32 windowId)
     if (gWindowTileAutoAllocEnabled == TRUE)
         BgTileAllocOp(bgLayer, gWindows[windowId].window.baseBlock, gWindows[windowId].window.width * gWindows[windowId].window.height, 2);
 
-    gWindows[windowId].window = sDummyWindowTemplate;
+    gWindows[windowId].window = gDummyWindowTemplate;
 
     if (GetNumActiveWindowsOnBg(bgLayer) == 0)
     {
@@ -457,7 +458,7 @@ void CopyToWindowPixelBuffer(u32 windowId, const void *src, u16 size, u16 tileOf
     if (size != 0)
         CpuCopy16(src, gWindows[windowId].tileData + (32 * tileOffset), size);
     else
-        LZ77UnCompWram(src, gWindows[windowId].tileData + (32 * tileOffset));
+        DecompressDataWithHeaderWram(src, gWindows[windowId].tileData + (32 * tileOffset));
 }
 
 // Sets all pixels within the window to the fillValue color.

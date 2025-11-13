@@ -10,12 +10,14 @@
 void Glass_ResetSaveData(void);
 void SetTrainersDiscovered(void);
 void Task_OpenGlassFromStartMenu(u8);
+void CB2_GlassFromStartMenu(void);
 u32 Glass_OverworldReturnLocationStat(u32, u32);
 u32 GetTrainerType(u32);
 bool32 IsTrainerDiscovered(u32);
 void SetTrainerDiscovered(u32);
 void CB2_ReturnToTrainerScreen(void);
 u32 GetOverworldSpriteFromTrainerId(enum ResidoTrainerIds);
+bool8 IsLocationVisited(u32 listNum);
 
 enum GlassTrainerSortModes
 {

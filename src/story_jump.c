@@ -786,6 +786,8 @@ void JumpPlayerTo_EnterBelen(bool32 jumpType)
 
 void FlagsVarWarp_EnterShinzo()
 {
+    FlagSet(FLAG_VISITED_CAPHE_CITY);
+    FlagSet(FLAG_SYS_APP_TRAINER_CARD_GET);
     FlagSet(FLAG_VISITED_TORA_TOWN);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
     ClearGymTrainers(GYM_SHINZO);
@@ -1194,6 +1196,7 @@ void FlagsVarWarp_YoungPadawan()
             STORY_COMPLETE_ARANTRAZ);
     VarSet(VAR_ARANTRAZ_STATE, BATTLED_TALA);
     VarSet(VAR_ARANTRAZ_EXHIBIT_STATE, ARANTRAZ_EXHIBIT_COMPLETE);
+    FlagSet(FLAG_VISITED_ARANTRAZ);
     SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,37,59);
 }
 
@@ -1948,6 +1951,7 @@ void FlagsVarWarp_YouHaveYourOrders()
 {
     QuestMenu_GetSetQuestState(QUEST_HOWDISAPPOINTING, FLAG_SET_UNLOCKED);
     QuestMenu_GetSetQuestState(QUEST_HOWDISAPPOINTING, FLAG_SET_ACTIVE);
+    FlagSet(FLAG_VISITED_HODOU_CITY);
     VarSet(VAR_HOWDISAPPOINTING_STATE, MISSION_ASSIGNED);
     SetWarpDestination(MAP_GROUP(MAP_HODOU_CITY), MAP_NUM(MAP_HODOU_CITY), NO_WARP_ID, 33, 8);
 }
