@@ -1218,6 +1218,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/dexnav.inc"
 @ Start siliconMerge
 ## SILICON COMMON
+.include "data/scripts/demo.inc"
 .include "data/scripts/overworld.inc"
 .include "data/scripts/earthquake.inc"
 .include "data/scripts/infinite_spray.inc"
