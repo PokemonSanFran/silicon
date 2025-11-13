@@ -9784,6 +9784,36 @@ BattleScript_ActionSelectionItemsCantBeUsedFog::
 	endselectionscript
 @ End fogBattle
 
+@ Start trainerExpTests
+BattleScript_EffectExpTest::
+	attackcanceler
+	attackstring
+	exptesthandler
+	setatkhptozero
+	attackanimation
+	waitanimation
+	tryfaintmon BS_ATTACKER
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectExpTestSetup::
+	attackcanceler
+	attackstring
+	exptestsetup
+	attackanimation
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectExpTestFinish::
+	attackcanceler
+	attackstring
+	exptestfinish
+	attackanimation
+	waitanimation
+	goto BattleScript_MoveEnd
+
+@ End trainerExpTests
+
+
 BattleScript_QuestionForfeitBattle::
 	printselectionstring STRINGID_QUESTIONFORFEITBATTLE
 	forfeityesnobox

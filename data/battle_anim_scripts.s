@@ -21149,6 +21149,11 @@ MatchaGotchaDoubleProjectile:
 	delay 3
 	return
 
+@ Start trainerExpTests
+gBattleAnimMove_TestMoves::
+	end
+@ End trainerExpTests
+
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
 gBattleAnimMove_None::
 gBattleAnimMove_MirrorMove::

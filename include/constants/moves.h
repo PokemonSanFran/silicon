@@ -910,7 +910,15 @@
 
 #define MOVES_COUNT_GEN9 848
 
-#define MOVES_COUNT         MOVES_COUNT_GEN9
+// Start trainerExpTests
+#define MOVE_EXP_TEST 848
+#define MOVE_EXP_TEST_SETUP 849
+#define MOVE_EXP_TEST_FINISH 850
+
+#define MOVES_COUNT_SILICON 851
+// End trainerExpTests
+
+#define MOVES_COUNT         MOVES_COUNT_SILICON
 
 // Z Moves
 #define MOVE_BREAKNECK_BLITZ (MOVES_COUNT + 0)
