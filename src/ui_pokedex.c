@@ -30,7 +30,6 @@
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "ui_pokedex.h"
-#include "ui_start_menu.h"
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -390,16 +389,9 @@ void SaveCallbackToPokedex(MainCallback callback)
     sPokedexState->savedCallback = callback;
 }
 
-void Task_OpenPokedexFromStartMenu(u8 taskId)
+void CB2_PokedexFromStartMenu(void)
 {
-    if (gPaletteFade.active)
-        return;
-
-    StartMenu_Menu_FreeResources();
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    Pokedex_InitializeAndSaveCallback(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
+    Pokedex_InitializeAndSaveCallback(CB2_StartMenu_ReturnToUI);
 }
 
 static void Pokedex_ReturnFromAdventureGuide(void)
@@ -425,7 +417,7 @@ static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
         return;
     }
     firstOpen = TRUE;
-    SaveCallbackToPokedex(CB2_ReturnToUIMenu);
+    SaveCallbackToPokedex(CB2_StartMenu_ReturnToUI);
     SetMainCallback2(Pokedex_SetupCallback);
 }
 

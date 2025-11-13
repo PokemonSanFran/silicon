@@ -18,5 +18,6 @@ void CalculatePlayerPositionInRegionMap(s16 *x_tile, s16 *y_tile, u16 *isIndoorO
 u8 CalculateWaypointDirection(void);
 void CreateOverworldWaypointArrow(void);
 void ClearWaypointDataSave(void);
+void CB2_MapSystemFromStartMenu(void);
 
 #endif // GUARD_MAP_SYSTEM_MENU_H

@@ -22,7 +22,7 @@
         {
             "id": 652627557,
             "title": "Trainer Tip: Automatic Win and Lose",
-            "description": "While looking at the \"Fight / Bag / Pokémon / Run\" menu...\n\n* Press <:dpad_up:1063558392498622594> and <:button_b:1063558341248430161> and then select a Move to automatically **WIN** a battle.\n* Press <:dpad_down:1063558352736633033> and <:button_b:1063558341248430161> and then select a Move to automatically **LOSE** a battle.\n\nThe game is designed so that the player loses their first battle against Tala and Alcmene.",
+            "description": "While looking at the \"Fight / Bag / Pokémon / Run\" menu...\n\n* Press <:dpad_up:1385105242949030028> and <:button_b:1385105256584839230> and then select a Move to automatically **WIN** a battle.\n* Press <:dpad_down:1385105257973158069> and <:button_b:1385105256584839230> and then select a Move to automatically **LOSE** a battle.\n\nThe game is designed so that the player loses their first battle against Tala and Alcmene.",
             "color": 2326507,
             "fields":
             []
@@ -30,7 +30,7 @@
         {
             "id": 10674342,
             "title": "Trainer Tip: Fresh Save",
-            "description": "To start a fresh save, press <:button_r:1063558345564377109> and <:button_select:1209505839455666197> from the Title Screen, and select a cutscene from the list.",
+            "description": "To start a fresh save, press <:button_r:1385105248036720651> and <:button_select:1385105249802653837> from the Title Screen, and select a cutscene from the list.",
             "color": 2162432,
             "fields":
             []
@@ -38,7 +38,7 @@
         {
             "id": 703434005,
             "title": "Trainer Tip: Story Jump",
-            "description": "To go forward to a specific point in the story, go to the overworld and press <:button_r:1063558345564377109> and <:button_start:1063558349926453378>. Select Story Jump, and then you can select an Act and Cutscene. You will be warped to directly AFTER this cutscene. \n\n⚠️ Attempting to go backwards will render the game unplayable.",
+            "description": "To go forward to a specific point in the story, go to the overworld and press <:button_r:1385105248036720651> and <:button_start:1385105251711062086>. Select Story Jump, and then you can select an Act and Cutscene. You will be warped to directly AFTER this cutscene. \n\n⚠️ Attempting to go backwards will render the game unplayable. \n\n⚠️ This is ONLY to be used if you have a fresh save and need to get to a specific point in the game.",
             "color": 16711680,
             "fields":
             []

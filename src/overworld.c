@@ -65,7 +65,6 @@
 #include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
-#include "ui_start_menu.h" // siliconMerge
 #include "scanline_effect.h"
 #include "wild_encounter.h"
 #include "vs_seeker.h"
@@ -1737,8 +1736,6 @@ const struct BlendSettings gTimeOfDayBlend[] =
 #define DEFAULT_WEIGHT 256
 #define TIME_BLEND_WEIGHT(begin, end) (DEFAULT_WEIGHT - (DEFAULT_WEIGHT * SAFE_DIV(((hours - begin) * MINUTES_PER_HOUR + minutes), ((end - begin) * MINUTES_PER_HOUR))))
 
-#define MORNING_HOUR_MIDDLE (MORNING_HOUR_BEGIN + ((MORNING_HOUR_END - MORNING_HOUR_BEGIN) / 2))
-
 void UpdateTimeOfDay(void)
 {
     s32 hours, minutes;
@@ -2110,13 +2107,6 @@ void CB2_ReturnToFieldWithOpenMenu(void)
     CB2_ReturnToField();
 }
 
-// Start siliconMerge
-void CB2_ReturnToUIMenu(void)
-{
-    FieldClearVBlankHBlankCallbacks();
-	StartMenu_Menu_Init(CB2_ReturnToField, FALSE);
-}
-// End siliconMerge
 void CB2_ReturnToFieldContinueScript(void)
 {
     FieldClearVBlankHBlankCallbacks();
