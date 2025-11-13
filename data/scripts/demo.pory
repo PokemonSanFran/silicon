@@ -1,0 +1,10 @@
+script DemoScriptBattle
+{
+    lock
+    faceplayer
+    msgbox(format("Oh my god. I'm so nervous... it's {PLAYER}!. {SUBJECT} always looks so cool. {POSSESSIVE} outfit is so on point!"),,SPEAKER_KEIYING,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("AYO! YOU TRYNA SCRAP?"),,SPEAKER_KEIYING,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+    startmenu_savescreen
+    trainerbattle_no_intro(TRAINER_KEI_YING,format("Even with all my years of experience I'm not enough for you! Good."))
+}
