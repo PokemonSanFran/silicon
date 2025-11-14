@@ -4823,7 +4823,7 @@ static void Cmd_getexp(void)
                 gBattleResources->beforeLvlUp->level             = currLvl;
                 gBattleResources->beforeLvlUp->learnMultipleMoves = FALSE;
 // Start trainerExpTests
-                if (TESTING && gBattleTurnCounter == 0)
+                if (TESTING && gSiliconExpTestState.isExpTest && gBattleTurnCounter == 0)
                 {
                     u32 expToReward;
                     if (gSiliconExpTestState.expTestExp == 0)
@@ -4844,7 +4844,7 @@ static void Cmd_getexp(void)
                     gSiliconExpTestState.isFinalTurn = FALSE;
                 }
 
-                if (TESTING && gSiliconExpTestState.isFinalTurn)
+                if (TESTING && gSiliconExpTestState.isExpTest && gSiliconExpTestState.isFinalTurn)
                 {
                     gBattleStruct->battlerExpReward = 0;
                 }

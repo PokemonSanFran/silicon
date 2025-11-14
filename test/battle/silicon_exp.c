@@ -14,6 +14,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
     u32 startLevel = max(GetLowestLevelStarter(),data->startLevel);
     u32 numTrainers = ExpTest_CountTrainers(data);
     gSiliconExpTestState.data = data;
+    gSiliconExpTestState.isExpTest = TRUE;
     u32 species = ExpTest_GetSlowestMonForBracket(startLevel, data->targetLevel);
     for (u32 i = 0; i < numTrainers; i++) {
         PARAMETRIZE { }
@@ -31,6 +32,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
         }
         TURN { MOVE(player, MOVE_EXP_TEST_FINISH); }
     } FINALLY {
+        gSiliconExpTestState.isExpTest = TRUE;
         u32 finalExp = gSiliconExpTestState.expTestExp;
         u32 targetFrontExp = ExpTest_GetTargetExp(species, data->targetLevel);
         u32 finalExpBack = gSiliconExpTestState.backExp;
