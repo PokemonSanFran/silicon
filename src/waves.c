@@ -75,6 +75,42 @@ static void Waves_PrintCardText(enum GoalEnum goalId);
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
 static void Waves_PrintCardMeter(enum GoalEnum goalId);
 
+static const u32* const meterLeftLUT[] =
+{
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar0.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar1.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar2.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar3.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar4.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar5.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar6.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar7.4bpp.smol"),
+};
+
+static const u32* const meterCenterLUT[] =
+{
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar0.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar1.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar2.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar3.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar4.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar5.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar6.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar7.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar8.4bpp.smol"),
+};
+
+static const u32* const meterRightLUT[] =
+{
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar0.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar1.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar2.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar3.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar4.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar5.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar6.4bpp.smol"),
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar7.4bpp.smol"),
+};
 
 static const u16 wavesPalettesDefault[] = INCBIN_U16("graphics/accept/palettes/default.gbapal");
 static const u16 wavesPalettesBlack[] = INCBIN_U16("graphics/accept/palettes/black.gbapal");
@@ -86,7 +122,7 @@ static const u16 wavesPalettesScarlet[] = INCBIN_U16("graphics/accept/palettes/s
 static const u16 wavesPalettesViolet[] = INCBIN_U16("graphics/accept/palettes/violet.gbapal");
 static const u16 wavesPalettesWhite[] = INCBIN_U16("graphics/accept/palettes/white.gbapal");
 static const u16 wavesPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/yellow.gbapal");
-static const u16 wavesPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
+static const u16 wavesPalettesText[] = INCBIN_U16("graphics/ui_menus/waves/palettes/text.gbapal");
 
 static const u32 wavesInterfaceTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.4bpp.smol");
 static const u32 wavesInterfaceTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.bin.smolTM");
@@ -740,7 +776,6 @@ static void Waves_PrintAllCards(void)
 {
     for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
     {
-        DebugPrintf("goal %d",goalId);
         Waves_PrintCard(goalId);
     }
 }
@@ -755,9 +790,24 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 {
 
 }
+
 static void Waves_PrintCardMeter(enum GoalEnum goalId)
 {
+    enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
+    u32 amount = Waves_GetPercentRaised(goalId);
 
+    meterCenterLUT
+
+    CopyToWindowPixelBuffer(windowId, meterCenterLUT[2], 0, NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET);
+
+    /*
+    for (index = 0; index < nameplateTileWidth - 1; index++)
+        CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[4], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
+
+    CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index++);
+
+    CopyToWindowPixelBuffer(windowId, nameplateRightThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
+    */
 }
 
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
@@ -784,7 +834,7 @@ static void Waves_PrintCardText(enum GoalEnum goalId)
     u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
 
     StringCopy(gStringVar3,Waves_GetTitle(goalId));
-    DebugPrintf("%S",gStringVar3);
-    DebugPrintf("windowId %d",windowId);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar3);
 }
+
+
