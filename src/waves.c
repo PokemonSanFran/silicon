@@ -403,12 +403,6 @@ static void HandleAndShowBgs(void)
 
     for (enum WavesBackgrounds backgroundId = 0; backgroundId < BG_WAVES_COUNT; backgroundId++)
     {
-        if (ShouldSkipBg(backgroundId));
-            continue;
-
-        //if (AreTilesOrTilemapEmpty(backgroundId))
-            //continue;
-
         SetScheduleBgs(backgroundId);
         ShowBg(backgroundId);
     }
@@ -454,13 +448,13 @@ static bool8 AreTilesOrTilemapEmpty(enum WavesBackgrounds backgroundId)
     return (sWavesTilesLUT[backgroundId] == NULL || sWavesTilesLUT[backgroundId] == NULL);
 }
 
-static bool8 ShouldSkipBg(enum WavesBackgrounds backgroundId)
+static bool8 UNUSED ShouldSkipBg(enum WavesBackgrounds backgroundId)
 {
-    if (backgroundId == BG2_WAVES_WALLPAPER)
-        return TRUE;
-
     if (backgroundId == BG1_WAVES_INTERFACE)
         return TRUE;
+    
+    if (backgroundId == BG0_WAVES_TEXT)
+        return FALSE;
 
     return FALSE;
 }
@@ -471,17 +465,8 @@ static void LoadGraphics(void)
     ResetTempTileDataBuffers();
     for (backgroundId = BG0_WAVES_TEXT; backgroundId < BG_WAVES_COUNT; backgroundId++)
     {
-        DebugPrintf("before %d",backgroundId);
-
-        if (ShouldSkipBg(backgroundId));
+        if (AreTilesOrTilemapEmpty(backgroundId))
             continue;
-
-        if (backgroundId == BG0_WAVES_TEXT)
-            continue;
-        //if (AreTilesOrTilemapEmpty(backgroundId))
-            //continue;
-
-        DebugPrintf("after %d",backgroundId);
 
         DecompressAndLoadBgGfxUsingHeap(backgroundId, sWavesTilesLUT[backgroundId], 0, 0, 0);
         CopyToBgTilemapBuffer(backgroundId, sWavesTilemapLUT[backgroundId],0,0);
