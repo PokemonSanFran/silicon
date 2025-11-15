@@ -74,7 +74,8 @@ enum WavesPaletteColors
     WAVES_PALETTE_COLOR_15,
 };
 
-enum WavesFontColors {
+enum WavesFontColors 
+{
   WAVES_FONT_COLOR_BLACK,
   WAVES_FONT_COLOR_WHITE,
 };
