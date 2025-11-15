@@ -44,6 +44,7 @@ static bool32 AllocZeroedTilemapBuffers(void);
 static void HandleAndShowBgs(void);
 static void SetScheduleBgs(enum WavesBackgrounds backgroundId);
 static bool8 AreTilesOrTilemapEmpty(enum WavesBackgrounds backgroundId);
+static bool8 ShouldSkipBg(enum WavesBackgrounds backgroundId);
 static void LoadGraphics(void);
 static void LoadWavesPalettes(void);
 static void PlaySoundStartFadeQuitApp(u8 taskId);
@@ -78,7 +79,7 @@ static const u16 wavesPalettesScarlet[] = INCBIN_U16("graphics/accept/palettes/s
 static const u16 wavesPalettesViolet[] = INCBIN_U16("graphics/accept/palettes/violet.gbapal");
 static const u16 wavesPalettesWhite[] = INCBIN_U16("graphics/accept/palettes/white.gbapal");
 static const u16 wavesPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/yellow.gbapal");
-static const u16 wavesPalettesText[] = INCBIN_U16("graphics/accept/palettes/text.gbapal");
+static const u16 wavesPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
 
 static const u32 wavesInterfaceTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.4bpp.smol");
 static const u32 wavesInterfaceTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.bin.smolTM");
@@ -108,15 +109,15 @@ static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
     [BG1_WAVES_INTERFACE] =
     {
         .bg = BG1_WAVES_INTERFACE,
-        .charBaseIndex = 1,
-        .mapBaseIndex = 30,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 25,
         .priority = 1,
     },
     [BG2_WAVES_WALLPAPER] =
     {
         .bg = BG2_WAVES_WALLPAPER,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 29,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 27,
         .priority = 2,
     },
 };
@@ -402,6 +403,9 @@ static void HandleAndShowBgs(void)
 
     for (enum WavesBackgrounds backgroundId = 0; backgroundId < BG_WAVES_COUNT; backgroundId++)
     {
+        if (ShouldSkipBg(backgroundId));
+            continue;
+
         //if (AreTilesOrTilemapEmpty(backgroundId))
             //continue;
 
@@ -421,7 +425,6 @@ static const u32* const sWavesTilesLUT[] =
     [BG0_WAVES_TEXT] = NULL,
     [BG1_WAVES_INTERFACE] = wavesInterfaceTiles,
     [BG2_WAVES_WALLPAPER] = siliconBgTiles,
-    [BG3_WAVES_NOTHING] = NULL,
 };
 
 static const u32* const sWavesTilemapLUT[] =
@@ -429,7 +432,6 @@ static const u32* const sWavesTilemapLUT[] =
     [BG0_WAVES_TEXT] = NULL,
     [BG1_WAVES_INTERFACE] = wavesInterfaceTilemap,
     [BG2_WAVES_WALLPAPER] = siliconBgTilemap,
-    [BG3_WAVES_NOTHING] = NULL,
 };
 
 static const u16* const sWavesPalettesLUT[] =
@@ -452,6 +454,17 @@ static bool8 AreTilesOrTilemapEmpty(enum WavesBackgrounds backgroundId)
     return (sWavesTilesLUT[backgroundId] == NULL || sWavesTilesLUT[backgroundId] == NULL);
 }
 
+static bool8 ShouldSkipBg(enum WavesBackgrounds backgroundId)
+{
+    if (backgroundId == BG2_WAVES_WALLPAPER)
+        return TRUE;
+
+    if (backgroundId == BG1_WAVES_INTERFACE)
+        return TRUE;
+
+    return FALSE;
+}
+
 static void LoadGraphics(void)
 {
     u32 backgroundId;
@@ -460,8 +473,13 @@ static void LoadGraphics(void)
     {
         DebugPrintf("before %d",backgroundId);
 
-        if (AreTilesOrTilemapEmpty(backgroundId))
+        if (ShouldSkipBg(backgroundId));
             continue;
+
+        if (backgroundId == BG0_WAVES_TEXT)
+            continue;
+        //if (AreTilesOrTilemapEmpty(backgroundId))
+            //continue;
 
         DebugPrintf("after %d",backgroundId);
 
