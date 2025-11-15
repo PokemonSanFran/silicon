@@ -49,9 +49,10 @@ static void LoadWavesPalettes(void);
 static void PlaySoundStartFadeQuitApp(u8 taskId);
 static void Task_WaitFadeAndExitGracefully(u8 taskId);
 void Waves_FadescreenAndExitGracefully(void);
-static void FreeResources(void);
-static void FreeStructs(void);
-static void FreeBackgrounds(void);
+static void Waves_FreeResources(void);
+static void Waves_FreeStructs(void);
+static void Waves_FreeBackgrounds(void);
+static void SaveCallbackToWaves(MainCallback callback);
 static void Waves_InitializeAndSaveCallback(MainCallback callback);
 void Waves_SetupCallback(void);
 static void Waves_InitWindows(void);
@@ -401,6 +402,9 @@ static void HandleAndShowBgs(void)
 
     for (enum WavesBackgrounds backgroundId = 0; backgroundId < BG_WAVES_COUNT; backgroundId++)
     {
+        //if (AreTilesOrTilemapEmpty(backgroundId))
+            //continue;
+
         SetScheduleBgs(backgroundId);
         ShowBg(backgroundId);
     }
@@ -481,7 +485,7 @@ static void ClearWindowCopyToVram(u32 windowId)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static UNUSED void PlaySoundStartFadeQuitApp(u8 taskId)
+static void PlaySoundStartFadeQuitApp(u8 taskId)
 {
     PlaySE(SE_PC_OFF);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -494,7 +498,7 @@ static void Task_WaitFadeAndExitGracefully(u8 taskId)
         return;
 
     SetMainCallback2(sWavesState->savedCallback);
-    FreeResources();
+    Waves_FreeResources();
     DestroyTask(taskId);
 }
 
@@ -506,21 +510,22 @@ void Waves_FadescreenAndExitGracefully(void)
     SetMainCallback2(Waves_MainCB);
 }
 
-static void FreeResources(void)
+static void Waves_FreeResources(void)
 {
     FreeSpritePalettesResetSpriteData();
-    FreeStructs();
-    FreeBackgrounds();
+    Waves_FreeStructs();
+    Waves_FreeBackgrounds();
     FreeAllWindowBuffers();
+    ResetSpriteData();
 }
 
-static void FreeStructs(void)
+static void Waves_FreeStructs(void)
 {
     if (sWavesState != NULL)
         Free(sWavesState);
 }
 
-static void FreeBackgrounds(void)
+static void Waves_FreeBackgrounds(void)
 {
     enum WavesBackgrounds backgroundId;
 
@@ -551,8 +556,13 @@ static void Waves_InitializeAndSaveCallback(MainCallback callback)
         SetMainCallback2(callback);
         return;
     }
-    //SaveCallbackToPokedex(CB2_ReturnToUIMenu);
+    SaveCallbackToWaves(callback);
     SetMainCallback2(Waves_SetupCallback);
+}
+
+static void SaveCallbackToWaves(MainCallback callback)
+{
+    sWavesState->savedCallback = callback;
 }
 
 
@@ -615,7 +625,7 @@ static void Task_Waves_HandleCardInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON) || JOY_HELD(B_BUTTON))
     {
-        Waves_FadescreenAndExitGracefully();
+        PlaySoundStartFadeQuitApp(taskId);
     }
 
     if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON) || JOY_HELD(A_BUTTON))
