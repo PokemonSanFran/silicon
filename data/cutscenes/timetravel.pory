@@ -81,7 +81,6 @@ script TimeTravel_Script_BumpIntoChampion
 	msgbox(format("{STR_VAR_1} looks excited!"))
 	closemessage	
 	delay(8)
-	applymovement(LOCALID_ADAM,moves(walk_up * 2))
 	applymovement(LOCALID_SNOM,moves(walk_fast_down * 3, lock_facing_direction))
 	waitmovement(LOCALID_SNOM)
 	playse(SE_BIKE_HOP)
@@ -91,6 +90,8 @@ script TimeTravel_Script_BumpIntoChampion
 	applymovement(LOCALID_PLAYER,moves(face_left))
 	msgbox(format("Wait - where are you going?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
 	closemessage
+	applymovement(LOCALID_ADAM,moves(face_up))
+	waitmovement(LOCALID_ADAM)
 	msgbox(format("Hey! Is that your poorly trained Pokemon running into me?"),,SPEAKER_ADAM_UNKNOWN,TAIL_SHOUT,EMOTE_ANGRY)
 	msgbox(format("Definately still in Resido, plenty of rude jerks..."),,SPEAKER_ALICIA,TAIL_WHISPER)
 	closemessage
@@ -112,9 +113,6 @@ script TimeTravel_Script_BumpIntoChampion
 	msgbox(format("Do you live under a rock? I'm Champion Adam - latest winner of the Resido Pokemon League!"),,SPEAKER_ADAM)
 	msgbox(format("...he didn't say SharpRise. So either I'm in a future where SharpRise doesn't own the League anymore, or..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
 	closemessage
-	applymovement(LOCALID_FRANK,moves(walk_up * 3))
-	applymovement(LOCALID_ELEANOR,moves(walk_up * 3))
-	waitmovement(LOCALID_FRANK)
 	goto(TimeTravel_Script_StartBattle)
 }
 
