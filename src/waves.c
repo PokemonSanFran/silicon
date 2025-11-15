@@ -112,9 +112,9 @@ static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
         .mapBaseIndex = 30,
         .priority = 1,
     },
-    [BG2_WAVES_CHOSEN_BACKGROUND] =
+    [BG2_WAVES_WALLPAPER] =
     {
-        .bg = BG2_WAVES_CHOSEN_BACKGROUND,
+        .bg = BG2_WAVES_WALLPAPER,
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .priority = 2,
@@ -420,7 +420,7 @@ static const u32* const sWavesTilesLUT[] =
 {
     [BG0_WAVES_TEXT] = NULL,
     [BG1_WAVES_INTERFACE] = wavesInterfaceTiles,
-    [BG2_WAVES_CHOSEN_BACKGROUND] = siliconBgTiles,
+    [BG2_WAVES_WALLPAPER] = siliconBgTiles,
     [BG3_WAVES_NOTHING] = NULL,
 };
 
@@ -428,7 +428,7 @@ static const u32* const sWavesTilemapLUT[] =
 {
     [BG0_WAVES_TEXT] = NULL,
     [BG1_WAVES_INTERFACE] = wavesInterfaceTilemap,
-    [BG2_WAVES_CHOSEN_BACKGROUND] = siliconBgTilemap,
+    [BG2_WAVES_WALLPAPER] = siliconBgTilemap,
     [BG3_WAVES_NOTHING] = NULL,
 };
 
