@@ -59,9 +59,20 @@ script TimeTravel_Script_BumpIntoChampion
 	closemessage
 	msgbox(format("Did the machine bring me to the right place?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 	closemessage
-
-	applymovement(LOCALID_PLAYER,Common_Movement_WalkInPlaceDown)
+	call(TimeTravel_Script_MoveCameraDown)
+	msgbox(format("Why are you guys asking all these questions?"),SPEAKER_ADAM,,EMOTE_CONFUSE)
+	msgbox(format("Aren't we suppsoed to be inside, celebrating?"),SPEAKER_ADAM)
+	msgbox(format("You're such a strong Trainer, Adam. We just want to understand more about your training methods!"),,SPEAKER_ARMANDO_PAST)
+	msgbox(format("Especially since you seemed to come out of nowhere..."),,SPEAKER_ELLEN_PAST)
+	msgbox(format("I'm just stronger than you guys, you know? Hard work means a lot, but some people just have generational talent!"),,SPEAKER_ADAM,EMOTE_LAUGH)
+	closemessage
+	msgbox(format("Huh?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+	closemessage
+	call(TimeTravel_Script_MoveCameraUp)
+	playse(SE_PIN)
+	applymovement(LOCALID_PLAYER,moves(face_down, emote_exclamation_mark))
 	waitmovement(LOCALID_PLAYER)
+	waitse
 	playse(SE_BALL_OPEN)
 	waitse
 	clearflag(FLAG_HIDE_SNOM)
@@ -78,7 +89,7 @@ script TimeTravel_Script_BumpIntoChampion
 	applymovement(LOCALID_SNOM,moves(emote_heart))
 	callnative(PlayEleanorMonCry)
 	waitmoncry
-	msgbox(format("{STR_VAR_1} looks excited!"))
+	msgbox(format("{STR_VAR_1} jumped out of its Ball!\n{STR_VAR_1} looks excited!"))
 	closemessage	
 	delay(8)
 	applymovement(LOCALID_SNOM,moves(walk_fast_down * 3, lock_facing_direction))
@@ -139,42 +150,35 @@ script TimeTravel_Script_PostBattle
 	msgbox(format("But I lost... to garbage like you?"),,SPEAKER_ADAM)
 	closemessage
 	delay(8)
-	msgbox(format("But nobody will ever believe I lost anyways! I'm invincible. I'm the Champion."),,SPEAKER_ADAM)
-	msgbox(format("I'm going to go back in that party. The party where all of the strongest Trainers in Resido are celebrating me!"),,SPEAKER_ADAM)
-	closemessage
 	waitmovement(LOCALID_ADAM)
-	special(SpawnCameraObject)
-	applymovement(LOCALID_CAMERA,moves(walk_down * 2))
-	waitmovement(LOCALID_CAMERA)
-	special(RemoveCameraObject)
+	call(TimeTravel_Script_MoveCameraDown)
 	delay(16)
 	applymovement(LOCALID_ADAM,moves(face_down))
 	playse(SE_PIN)
 	waitse
 	applymovement(LOCALID_ADAM,moves(emote_exclamation_mark))
 	waitmovement(LOCALID_ADAM)
-	msgbox(format("...Did you two see that battle?"),,SPEAKER_ADAM)
+	msgbox(format("...And you both saw that..."),,SPEAKER_ADAM)
 	msgbox(format("You said she. Are you talking about Adelaide?"),,SPEAKER_ARMANDO_PAST)
 	msgbox(format("Oh no... they're going to ruin me - "),,SPEAKER_ADAM)
 	closemessage
-	msgbox(format("We won't say a word."),,SPEAKER_ELLEN_PAST)
-	closemessage
-	playse(SE_PIN)
-	applymovement(LOCALID_ADAM,moves(emote_exclamation_mark))
-	applymovement(LOCALID_FRANK,moves(emote_exclamation_mark))
-	waitmovement(LOCALID_FRANK)
-	waitse
-	msgbox(format("With a condition."),,SPEAKER_ELLEN_PAST)
-	msgbox(format("You're going to go back inside."),,SPEAKER_ELLEN_PAST)
-msgbox(format("Magnus is going to bring you into the hall, and probably apologize that the party is smaller than normal."),,SPEAKER_ELLEN_PAST)
-msgbox(format("I'm going to give a speech. You're going to act totally normal."),,SPEAKER_ELLEN_PAST)
-msgbox(format("You talk, you drink, you mingle, and finally, you leave the party."),,SPEAKER_ELLEN_PAST)
+	msgbox(format("I'll give you the choice to save yourself."),,SPEAKER_ELLEN_PAST)
+	msgbox(format("If you want to maintain your illusion of the prodigy, undefeated Champion, you're going to go back inside to the party."),,SPEAKER_ELLEN_PAST)
+msgbox(format("You'll talk, you'll drink, you'll mingle, and finally, you'll leave the party."),,SPEAKER_ELLEN_PAST)
 	msgbox(format("And once you leave the party..."),,SPEAKER_ELLEN_PAST)
 	msgbox(format("you will never be seen in Resido again."),,SPEAKER_ELLEN_PAST)
-	msgbox(format("Disobey me... you will never have a career ever again."),,SPEAKER_ELLEN_PAST)
+	closemessage
+	playse(SE_PIN)
+	applymovement(LOCALID_FRANK,moves(emote_exclamation_mark))
+	applymovement(LOCALID_PLAYER,moves(emote_exclamation_mark))
+	waitse
+	waitmovement(LOCALID_PLAYER)
+	msgbox(format("Ellen..."),,SPEAKER_ARMANDO_PAST)
+	msgbox(format("Disobey me... and I will make sure to expose you."),,SPEAKER_ELLEN_PAST)
+	msgbox(format("..."),,SPEAKER_ADAM)
 	closemessage
 	delay(8)
-	msgbox(format("Now go."),,SPEAKER_ELLEN_PAST)
+	msgbox(format("Time's up, Champion."),,SPEAKER_ELLEN_PAST)
 	closemessage
 	goto(TimeTravel_Dialogue_ReturnToPresent)
 }
@@ -187,23 +191,20 @@ applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
 	applymovement(LOCALID_ELEANOR,moves(face_left))
 	applymovement(LOCALID_FRANK,moves(face_right))
 	waitmovement(LOCALID_FRANK)
-	msgbox(format("Okay Ellen, look -"),,SPEAKER_ARMANDO_PAST)
+	msgbox(format("I knew we were onto somethin -"),,SPEAKER_ARMANDO_PAST)
 	msgbox(format("He was a plant? Are you serious? We lost to that?!?"),,SPEAKER_ELLEN_PAST,TAIL_SHOUT,EMOTE_ANGRY)
 	msgbox(format("Turning BD against us.\pBuying our League.\pTaking us apart piece of piece.\pNone of that was enough? They weren't happy with owning it, so they had to INVENT a Golden Boy?"),,SPEAKER_ELLEN_PAST,TAIL_SHOUT,EMOTE_ANGRY)
 	msgbox(format("And we were so stupid!\pCompetitive integrity? Who cares!\pAs long as the PRODUCT looks good, right?"),,SPEAKER_ELLEN_PAST,TAIL_SHOUT,EMOTE_ANGRY)
 	msgbox(format("That's what it looks like but - "),,SPEAKER_ARMANDO_PAST)
-	msgbox(format("Armando, we have to fight now. We don't have a choice!"),,SPEAKER_ELLEN_PAST)
-	msgbox(format("Ellen, we don't have anything yet. Do you just want to do what Tala and Magnus did? What's the plan?"),,SPEAKER_ARMANDO_PAST)
-	msgbox(format("And you think its okay to just wait for our magical oppurtunity?\pLike some Mythical Pokemon is going to come along and help make it right? What's your plan?"),,SPEAKER_ELLEN_PAST)
-	msgbox(format("...I don't have one."),,SPEAKER_ARMANDO_PAST)
-	msgbox(format("I know."),,SPEAKER_ELLEN_PAST)
+	msgbox(format("Armando, we have to fight now. We don't have a choice! We heard it directly!"),,SPEAKER_ELLEN_PAST)
+	msgbox(format("Ellen, we don't have anything concrete.\pWe need more information!\pThis isn't Arantraz. You aren't going to be able to rally the region like Magnus did... that was decades ago. We have a much steeper hill to climb!\pWe need a plan."),,SPEAKER_ARMANDO_PAST)
+	msgbox(format("So what, we just wait around for our magical oppurtunity?\pLike some Mythical Pokemon is going to come along and give us the clear cut evidence?"),,SPEAKER_ELLEN_PAST)
+	msgbox(format("Look, I just want to lay down and look for a better oppurtunity to strike."),,SPEAKER_ARMANDO_PAST)
+	msgbox(format("Armando, the tides are shifting NOW, whether we act or not. I just want to make sure they flow in our direction."),,SPEAKER_ELLEN_PAST)
 	closemessage
 	applymovement(LOCALID_ELEANOR,moves(walk_down * 8))
 	waitmovement(LOCALID_ELEANOR)
-	special(SpawnCameraObject)
-	applymovement(LOCALID_CAMERA,moves(walk_up * 2))
-	waitmovement(LOCALID_CAMERA)
-	special(RemoveCameraObject)
+	call(TimeTravel_Script_MoveCameraUp)
 	applymovement(LOCALID_FRANK,moves(walk_up * 3, face_right))
 	waitmovement(LOCALID_FRANK)
 	applymovement(LOCALID_PLAYER,moves(face_left))
@@ -211,6 +212,8 @@ applymovement(LOCALID_ADAM,moves(walk_left*2,walk_down * 8))
 	msgbox(format("Who are you?"),,SPEAKER_ARMANDO_PAST)
 	closemessage
 	call(Common_EventScript_PhoneRinging)
+	waitbuttonpress
+	waitmessage
 	callnative(BufferEleanorMonName)
 	msgbox(format("{PLAYER}! Did you get seperated from that {STR_VAR_1}? The futher it gets from you, the weaker your connection gets! I have to pull you back!"),,SPEAKER_MADRONE,TAIL_SHOUT,EMOTE_SHOCK,PHONE_ON)
 	closemessage
@@ -310,4 +313,20 @@ script TimeTravel_Dialogue_OfferTravelMadrone
 		end
 	}
 	goto(TimeTravel_Script_StartTravel)
+}
+
+script TimeTravel_Script_MoveCameraDown
+{
+	special(SpawnCameraObject)
+	applymovement(LOCALID_CAMERA,moves(walk_down * 2))
+	waitmovement(LOCALID_CAMERA)
+	special(RemoveCameraObject)
+}
+
+script TimeTravel_Script_MoveCameraUp
+{
+	special(SpawnCameraObject)
+	applymovement(LOCALID_CAMERA,moves(walk_up * 2))
+	waitmovement(LOCALID_CAMERA)
+	special(RemoveCameraObject)
 }
