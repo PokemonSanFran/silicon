@@ -130,7 +130,7 @@ static const struct WindowTemplate sWavesGridWindows[] =
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
         .baseBlock = 1,
     },
     [WIN_WAVES_CARD_1] =
@@ -602,7 +602,7 @@ void Waves_SetupCallback(void)
             ClearAllWindows();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             Waves_PrintMenuHeader(WIN_WAVES_CARD_HEADER);
-            //PrintHelpBar(WIN_WAVES_CARD_FOOTER);
+            //Waves_PrintHelpBar(WIN_WAVES_CARD_FOOTER);
             if (firstOpen)
                 PlaySE(SE_PC_LOGIN);
             gMain.state++;
@@ -721,5 +721,6 @@ static void Waves_PrintHeaderText(enum WavesWindowsGrid windowId)
     u32 fontId = FONT_WAVES_TITLE;
     u32 x = 4;
     u32 y = 0;
+    StringCopy(gStringVar4,COMPOUND_STRING("Waves of Change"));
     AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sWavesWindowFontColors[WAVES_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
