@@ -5,17 +5,20 @@ const CAMERA = OBJ_EVENT_ID_CAMERA
 const FLAG_HIDE_HIKO = FLAG_TEMP_1
 const FLAG_HIDE_JIRACHI = FLAG_TEMP_2
 
-script OkayLetsFixit_Object_Visibility_Script{
-    setflag(FLAG_HIDE_JIRACHI)
+script OkayLetsFixit_Object_Visibility_Script
+{
+	setflag(FLAG_HIDE_JIRACHI)
 
-	switch(var(VAR_TIME_TRAVEL_STATE))
+	switch (var(VAR_TIME_TRAVEL_STATE))
 	{
-		case TIME_TRAVEL_START_CUTSCENE:
-			setflag(FLAG_HIDE_HIKO)
-		case TIME_TRAVEL_SACRIFICE_COMPLETE:
-			setflag(FLAG_HIDE_HIKO)
+		case TIME_TRAVEL_FIRST_RETURN:
+		case TIME_TRAVEL_ASK_PLAYER:
+			return
+		default:
+			nop
 	}
-    return
+
+	setflag(FLAG_HIDE_HIKO)
 }
 
 script OkayLetsFixit_ReachTop_Script 
