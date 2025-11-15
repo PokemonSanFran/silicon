@@ -68,6 +68,13 @@ static void ClearAllWindows(void);
 static void Waves_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static void Waves_PrintMenuHeader(enum WavesWindowsGrid windowId);
 static void Waves_PrintHeaderText(enum WavesWindowsGrid windowId);
+static void Waves_PrintAllCards(void);
+static void Waves_PrintCard(enum GoalEnum goalId);
+static void Waves_PrintCardHeader(enum GoalEnum goalId);
+static void Waves_PrintCardText(enum GoalEnum goalId);
+static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
+static void Waves_PrintCardMeter(enum GoalEnum goalId);
+
 
 static const u16 wavesPalettesDefault[] = INCBIN_U16("graphics/accept/palettes/default.gbapal");
 static const u16 wavesPalettesBlack[] = INCBIN_U16("graphics/accept/palettes/black.gbapal");
@@ -141,57 +148,57 @@ static const struct WindowTemplate sWavesGridWindows[] =
         .tilemapTop = 3,
         .width = 8,
         .height = 7,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
         .baseBlock = 1 + (30 * 2),
     },
     [WIN_WAVES_CARD_2] =
     {
         .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 2,
+        .tilemapLeft = 11,
         .tilemapTop = 3,
         .width = 8,
         .height = 7,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
         .baseBlock = 1 + (30 * 2) + (8 * 7),
     },
     [WIN_WAVES_CARD_3] =
     {
         .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 2,
+        .tilemapLeft = 20,
         .tilemapTop = 3,
         .width = 8,
         .height = 7,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
         .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7),
     },
     [WIN_WAVES_CARD_4] =
     {
         .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
-        .tilemapTop = 3,
+        .tilemapTop = 12,
         .width = 8,
         .height = 7,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
         .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7),
     },
     [WIN_WAVES_CARD_5] =
     {
         .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 2,
-        .tilemapTop = 3,
+        .tilemapLeft = 11,
+        .tilemapTop = 12,
         .width = 8,
         .height = 7,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
         .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
     },
     [WIN_WAVES_CARD_6] =
     {
         .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 2,
-        .tilemapTop = 3,
+        .tilemapLeft = 20,
+        .tilemapTop = 12,
         .width = 8,
         .height = 7,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
         .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
     },
     [WIN_WAVES_GOAL_FOOTER] =
@@ -605,6 +612,7 @@ void Waves_SetupCallback(void)
             ClearAllWindows();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             Waves_PrintMenuHeader(WIN_WAVES_CARD_HEADER);
+            Waves_PrintAllCards();
             //Waves_PrintHelpBar(WIN_WAVES_CARD_FOOTER);
             if (firstOpen)
                 PlaySE(SE_PC_LOGIN);
@@ -695,7 +703,7 @@ static bool32 AllocateStructs(void)
 
 static void ClearAllWindows(void)
 {
-    for (enum AdventureWindows windowId = 0; windowId < WINDOW_ADVENTURE_COUNT; windowId++)
+    for (enum WavesWindowsGrid windowId = 0; windowId < WIN_WAVES_CARD_COUNT; windowId++)
         ClearWindowCopyToVram(windowId);
 }
 
@@ -726,4 +734,57 @@ static void Waves_PrintHeaderText(enum WavesWindowsGrid windowId)
     u32 y = 0;
     StringCopy(gStringVar4,COMPOUND_STRING("Waves of Change"));
     AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sWavesWindowFontColors[WAVES_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static void Waves_PrintAllCards(void)
+{
+    for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
+    {
+        DebugPrintf("goal %d",goalId);
+        Waves_PrintCard(goalId);
+    }
+}
+
+static void Waves_PrintCard(enum GoalEnum goalId)
+{
+    Waves_PrintCardHeader(goalId);
+    Waves_PrintCardThumbnail(goalId);
+    Waves_PrintCardMeter(goalId);
+}
+static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
+{
+
+}
+static void Waves_PrintCardMeter(enum GoalEnum goalId)
+{
+
+}
+
+static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
+{
+    return (-1 * goalId) + 6;
+}
+
+static void Waves_PrintCardHeader(enum GoalEnum goalId)
+{
+    enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Waves_PrintCardText(goalId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static void Waves_PrintCardText(enum GoalEnum goalId)
+{
+    enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
+    u32 fontId = WAVES_FONT_CARD_HEADER;
+    u32 x = WAVES_HEADER_X;
+    u32 y = WAVES_HEADER_Y;
+    u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+
+    StringCopy(gStringVar3,Waves_GetTitle(goalId));
+    DebugPrintf("%S",gStringVar3);
+    DebugPrintf("windowId %d",windowId);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar3);
 }
