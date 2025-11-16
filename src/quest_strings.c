@@ -103,11 +103,6 @@ const u8 gText_Quest_RestaurantExpansion2_Desc[] =_("Description");
 const u8 gText_Quest_RestaurantExpansion2_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_RestaurantExpansion2_Map[] =_("MermerezaCity");
 
-const u8 gText_Quest_ArmandosTraining_Name[] = _("Armando's Training");
-const u8 gText_Quest_ArmandosTraining_Desc[] =_("Description");
-const u8 gText_Quest_ArmandosTraining_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_ArmandosTraining_Map[] =_("LeaverraForest");
-
 const u8 gText_Quest_CulturalPurity_Name[] = _("Cultural Purity");
 const u8 gText_Quest_CulturalPurity_Desc[] =_("Description");
 const u8 gText_Quest_CulturalPurity_DoneDesc[] =_("DoneDescription");
@@ -1126,19 +1121,6 @@ const u8 gText_Quest_Recruitlocalartists_Sub2_Map[] = _("N/A");
 const u8 gText_Quest_Recruitlocalartists_Sub3_Name[] = _("Name");
 const u8 gText_Quest_Recruitlocalartists_Sub3_Desc[] = _("Lorem Desc");
 const u8 gText_Quest_Recruitlocalartists_Sub3_Map[] = _("N/A");
-
-const u8 gText_Quest_ArmandosTraining_Sub1_Name[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub1_Desc[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub1_Map[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub2_Name[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub2_Desc[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub2_Map[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub3_Name[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub3_Desc[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub3_Map[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub4_Name[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub4_Desc[] = _("Lorem");
-const u8 gText_Quest_ArmandosTraining_Sub4_Map[] = _("Lorem");
 
 const u8 gText_Quest_Skilllibrary_Sub1_Name[] = _("14%");
 const u8 gText_Quest_Skilllibrary_Sub1_Desc[] = _("Sub Lorem");

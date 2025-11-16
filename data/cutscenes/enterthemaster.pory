@@ -27,7 +27,8 @@ script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script{
         case CHARLOTTE_ENTERED_LEAVERRA_FOREST:
         case POST_HAVE_YOU_SEEN_THE_NEWS: call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case LEAVERRA_FOREST_MAZE_COMPLETE:
-        case MET_ARMANDO:call(EnterTheMaster_Inner_Object_SetUp_Script)
+        case MET_ARMANDO:
+		call(EnterTheMaster_RepositionCharlotte_Script)
         case FINISHED_ARMANDO_PUZZLES: return
     }
     return
@@ -41,15 +42,9 @@ script EnterTheMaster_LeaverraForest_Inner_HideObjects_Script{
         return
 }
 
-script EnterTheMaster_Inner_Object_SetUp_Script {
-    setflag(FLAG_HIDE_OLIVER)
-        call_if_quest_active(QUEST_ARMANDOSTRAINING,EnterTheMaster_RepositionCharlotte_Script)
-        call_if_quest_complete(QUEST_ARMANDOSTRAINING,EnterTheMaster_HideCharlotte_Script)
-        return
-}
-
 script EnterTheMaster_RepositionCharlotte_Script
 {
+    setflag(FLAG_HIDE_OLIVER)
     setobjectxy(CHARLOTTE,2,5)
         setobjectxyperm(CHARLOTTE,2,5)
         turnobject(CHARLOTTE,DIR_NORTH)
@@ -272,7 +267,6 @@ script EnterTheMaster_ExplainRobots_Dialogue{
     msgbox(format("If you talk to them, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that are assigned to you."),MSGBOX_DEFAULT,SPEAKER_ARMANDO)
         msgbox(format("The first stage needed you to work together, but for this one, don't help each other."),,SPEAKER_ARMANDO)
         closemessage
-        goto_if_quest_not_active(QUEST_ARMANDOSTRAINING,Quest_Armandostraining_StartQuest_Script)
         call(TryAutoSave)
         endcutscene
         release
@@ -484,4 +478,196 @@ movement EnterTheMaster_Pace {
 movement EnterTheMaster_ApproachArmando {
     walk_up * 1
         step_end
+}
+
+script EnterTheMaster_StartQuest_Script{
+        msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
+        closemessage
+        applymovement(CHARLOTTE,EnterTheMaster_WalkToRobots)
+        fadescreen(FADE_TO_BLACK)
+        call(EnterTheMaster_RepositionCharlotte_Script)
+        fadescreen(FADE_FROM_BLACK)
+        end
+}
+
+script EnterTheMaster_Interact_Charlotte_Script{
+    lock
+    msgbox(format("Okay, what if I send out this Pokémon first..."),,SPEAKER_CHARLOTTE,TAIL_WHISPER)
+    release
+    end
+}
+
+script EnterTheMaster_GiveMons_Script{
+    //special(SavePlayerParty)
+    return
+}
+
+script EnterTheMaster_ChooseMons_Script{
+    //choose_mons
+    //special(ReducePlayerPartyToSelectedMons)
+    return
+}
+
+script EnterTheMaster_Battle_Setup_Script{
+    call(EnterTheMaster_GiveMons_Script)
+    call(EnterTheMaster_ChooseMons_Script)
+    return
+}
+
+script EnterTheMaster_Interact_Robot_Script{
+    lock
+    faceplayer
+    msgbox(format("Hello {PLAYER}. Which scenario would you like to run?"))
+
+    dynmultichoice(1,1,TRUE,4,0,NULL,
+        "Scenario 1",
+        "Scenario 2",
+        "Scenario 3",
+        "Scenario 4",
+        "Never mind.",
+    )
+
+    switch (var(VAR_RESULT)){
+        case 0:goto(EnterTheMaster_Battle_Robot1_Script)
+        case 1:goto(EnterTheMaster_Battle_Robot2_Script)
+        case 2:goto(EnterTheMaster_Battle_Robot3_Script)
+        case 3:goto(EnterTheMaster_Battle_Robot4_Script)
+    }
+    release
+    end
+}
+
+script EnterTheMaster_CheckTrainer_Script{
+    msgbox(format("You've already completed this puzzle. Are you going to try again?"),MSGBOX_YESNO,SPEAKER_OLIVER)
+
+    if (var(VAR_RESULT) == NO){
+        goto(EnterTheMaster_Interact_Robot_Script)
+    }
+    return
+}
+
+script EnterTheMaster_Battle_Robot1_Script{
+	if (defeated(TRAINER_ARMANDO_ROBOT_1))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+
+    setvar(VAR_TEMP_0,1)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_1,format("Robot 1 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
+}
+
+script EnterTheMaster_Battle_Robot2_Script{
+
+	if (defeated(TRAINER_ARMANDO_ROBOT_2))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+    setvar(VAR_TEMP_0,2)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_2,format("Robot 2 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
+}
+
+script EnterTheMaster_Battle_Robot3_Script{
+
+	if (defeated(TRAINER_ARMANDO_ROBOT_3))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+
+    setvar(VAR_TEMP_0,3)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_3,format("Robot 3 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
+}
+
+script EnterTheMaster_Battle_Robot4_Script{
+
+	if (defeated(TRAINER_ARMANDO_ROBOT_4))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+    setvar(VAR_TEMP_0,4)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_ARMANDO_ROBOT_4,format("Robot 4 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
+}
+
+script EnterTheMaster_CheckReward_Script
+{
+	if (!defeated(TRAINER_ARMANDO_ROBOT_1))
+	{
+		return
+	}
+	if (!defeated(TRAINER_ARMANDO_ROBOT_2))
+	{
+		return
+	}
+	if (!defeated(TRAINER_ARMANDO_ROBOT_3))
+	{
+		return
+	}
+	if (!defeated(TRAINER_ARMANDO_ROBOT_4))
+	{
+		return
+	}
+	goto(EnterTheMaster_CompleteQuest_Script)
+}
+
+script EnterTheMaster_Interact_CharlotteRobot_Script{
+    lock
+    msgbox(format("This robot is for Charlotte."),MSGBOX_AUTOCLOSE)
+    release
+    end
+}
+
+script EnterTheMaster_SetUpCompletion_Script{
+    fadescreen(FADE_TO_BLACK)
+    setobjectxy(CHARLOTTE,9,16)
+    setobjectxyperm(CHARLOTTE,9,16)
+    setobjectxy(PLAYER,10,16)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    TeleportCamera(10,16)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script EnterTheMaster_CompleteQuest_Script{
+    call(EnterTheMaster_SetUpCompletion_Script)
+    setvar(VAR_LEAVERRA_FOREST_STATE,FINISHED_ARMANDO_PUZZLES)
+    applymovement(ARMANDO,Common_Movement_FaceDown)
+    waitmovement(ARMANDO)
+    msgbox(format("Well, it's been quite a week. Impressed you were both able to clear those puzzles so quickly."),,SPEAKER_ARMANDO)
+    msgbox(format("A week?!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
+    msgbox(format("It feels like maybe a day at most!"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(format("Yeah, the forest has that effect on people..."),,SPEAKER_ARMANDO)
+    msgbox(format("Either way, good job. Go ahead and rest -"),,SPEAKER_ARMANDO)
+    closemessage
+    end
+}
+
+movement EnterTheMaster_WalkToRobots{
+    walk_up
+    walk_left * 5
+    walk_up * 6
+    step_end
+}
+
+movement EnterTheMaster_WalkAway{
+    walk_down * 2
+    step_end
 }

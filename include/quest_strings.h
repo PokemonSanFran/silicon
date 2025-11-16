@@ -103,11 +103,6 @@ extern const u8 gText_Quest_RestaurantExpansion2_Desc[];
 extern const u8 gText_Quest_RestaurantExpansion2_DoneDesc[];
 extern const u8 gText_Quest_RestaurantExpansion2_Map[];
 
-extern const u8 gText_Quest_ArmandosTraining_Name[];
-extern const u8 gText_Quest_ArmandosTraining_Desc[];
-extern const u8 gText_Quest_ArmandosTraining_DoneDesc[];
-extern const u8 gText_Quest_ArmandosTraining_Map[];
-
 extern const u8 gText_Quest_CulturalPurity_Name[];
 extern const u8 gText_Quest_CulturalPurity_Desc[];
 extern const u8 gText_Quest_CulturalPurity_DoneDesc[];
@@ -1154,19 +1149,6 @@ extern const u8 gText_Quest_Recruitlocalartists_Sub2_Map[];
 extern const u8 gText_Quest_Recruitlocalartists_Sub3_Name[];
 extern const u8 gText_Quest_Recruitlocalartists_Sub3_Desc[];
 extern const u8 gText_Quest_Recruitlocalartists_Sub3_Map[];
-
-extern const u8 gText_Quest_ArmandosTraining_Sub1_Name[];
-extern const u8 gText_Quest_ArmandosTraining_Sub1_Desc[];
-extern const u8 gText_Quest_ArmandosTraining_Sub1_Map[];
-extern const u8 gText_Quest_ArmandosTraining_Sub2_Name[];
-extern const u8 gText_Quest_ArmandosTraining_Sub2_Desc[];
-extern const u8 gText_Quest_ArmandosTraining_Sub2_Map[];
-extern const u8 gText_Quest_ArmandosTraining_Sub3_Name[];
-extern const u8 gText_Quest_ArmandosTraining_Sub3_Desc[];
-extern const u8 gText_Quest_ArmandosTraining_Sub3_Map[];
-extern const u8 gText_Quest_ArmandosTraining_Sub4_Name[];
-extern const u8 gText_Quest_ArmandosTraining_Sub4_Desc[];
-extern const u8 gText_Quest_ArmandosTraining_Sub4_Map[];
 
 extern const u8 gText_Quest_Skilllibrary_Sub1_Name[];
 extern const u8 gText_Quest_Skilllibrary_Sub1_Desc[];

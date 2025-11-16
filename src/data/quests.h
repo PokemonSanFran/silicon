@@ -1628,44 +1628,6 @@ static const struct SubQuest
             COMPOUND_STRING("Caught")
 	),
 };
-static const struct SubQuest sArmandosTraining_Sub[QUEST_RESTAURANTEXPANSION2_SUB_COUNT] = {
-	sub_quest(
-	        224,
-	        gText_Quest_ArmandosTraining_Sub1_Name,
-	        gText_Quest_ArmandosTraining_Sub1_Desc,
-	        gText_Quest_ArmandosTraining_Sub1_Map,
-	        OBJ_EVENT_GFX_LINK_RECEPTIONIST,
-	        QUEST_SPRITE_TYPE_OBJECT,
-	        COMPOUND_STRING("Recruited")
-	),
-	sub_quest(
-	        225,
-	        gText_Quest_ArmandosTraining_Sub2_Name,
-	        gText_Quest_ArmandosTraining_Sub2_Desc,
-	        gText_Quest_ArmandosTraining_Sub2_Map,
-	        OBJ_EVENT_GFX_MAN_4,
-	        QUEST_SPRITE_TYPE_OBJECT,
-	        COMPOUND_STRING("Recruited")
-	),
-	sub_quest(
-	        226,
-	        gText_Quest_ArmandosTraining_Sub3_Name,
-	        gText_Quest_ArmandosTraining_Sub3_Desc,
-	        gText_Quest_ArmandosTraining_Sub3_Map,
-	        OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M,
-	        QUEST_SPRITE_TYPE_OBJECT,
-	        COMPOUND_STRING("Recruited")
-	),
-	sub_quest(
-	        227,
-	        gText_Quest_ArmandosTraining_Sub4_Name,
-	        gText_Quest_ArmandosTraining_Sub4_Desc,
-	        gText_Quest_ArmandosTraining_Sub4_Map,
-	        OBJ_EVENT_GFX_TEALA,
-	        QUEST_SPRITE_TYPE_OBJECT,
-	        COMPOUND_STRING("Recruited")
-	),
-};
 ////////////////////////END SUBQUEST CUSTOMIZATION/////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -1917,17 +1879,6 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestaurantExpansion2_Sub,
         .numSubquests = QUEST_RESTAURANTEXPANSION2_SUB_COUNT
-    },
-    [QUEST_ARMANDOSTRAINING] =
-    {
-        .name = gText_Quest_ArmandosTraining_Name,
-        .desc = gText_Quest_ArmandosTraining_Desc,
-        .donedesc = gText_Quest_ArmandosTraining_DoneDesc,
-        .map = gText_Quest_ArmandosTraining_Map,
-        .sprite = OBJ_EVENT_GFX_ARMANDO,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
-        .subquests = sArmandosTraining_Sub,
-        .numSubquests = QUEST_ARMANDOSTRAINING_SUB_COUNT
     },
     [QUEST_CULTURALPURITY] =
     {

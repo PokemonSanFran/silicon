@@ -1381,7 +1381,6 @@ EventScript_VsSeekerChargingDone::
 .include "data/quests/restorezenzuisland.inc"
 .include "data/quests/restoremarin.inc"
 .include "data/quests/restoretirabudinplace.inc"
-.include "data/quests/armandostraining.inc"
 .include "data/quests/skilllibrary.inc"
 .include "data/quests/miniarcade.inc"
 .include "data/quests/mutualaidfund.inc"
