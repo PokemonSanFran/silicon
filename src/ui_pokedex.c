@@ -9,6 +9,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "frontier_pass.h"
+#include "gpu_regs.h"
 #include "gba/macro.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -452,7 +453,7 @@ void Pokedex_SetupCallback(void)
             break;
         case 1:
             ScanlineEffect_Stop();
-            //ResetGpuRegsAndBgs();
+            ResetGpuRegsAndBgs();
             ResetPaletteFade();
             ResetTasks();
             FreeSpritePalettesResetSpriteData();
