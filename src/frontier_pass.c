@@ -564,7 +564,10 @@ struct
     [FRONTIER_FACILITY_PYRAMID] = {gText_BattlePyramid2, gText_BattlePyramidDesc, 134,  41, MAP_INDICATOR_SQUARE},
 };
 
-static void ResetGpuRegsAndBgs(void)
+// Start pokedex
+void ResetGpuRegsAndBgs(void)
+//static void ResetGpuRegsAndBgs(void)
+// End pokedex
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_BG3CNT, 0);
