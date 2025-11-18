@@ -179,18 +179,17 @@ static void PlayCursorSound(bool32);
 static void HandleLocationStats(s32);
 static void PrintLocationStats(s32, u32);
 static u8 GetMapSectionFromTrainerId(u32);
-static void CountNumberTrainers(u32, u32*);
-static void HandleLocationStatsTotal(u32*);
-static void HandleLocationStatsDiscovered(u32*);
-static void HandleLocationStatsDefeated(u32*);
-static void IncrementLocationStat(u32, u32*);
-static void DecrementLocationStat(u32, u32*);
-static void PopulateLocationStats(u32*);
+static void CountNumberTrainers(u32, u8*);
+static void HandleLocationStatsTotal(u8*);
+static void HandleLocationStatsDiscovered(u8*);
+static void HandleLocationStatsDefeated(u8*);
+static void IncrementLocationStat(u32, u8*);
+static void DecrementLocationStat(u32, u8*);
 static void PrintLocationPercent(u32, u32, u32);
-static void PrintLocationTotal(u32, u32);
-static void PrintLocationDefeated(u32, u32);
-static void PrintLocationRemaining(u32, u32);
-static u8 GetLocationStat(u32);
+static void PrintLocationTotal(u32, u32, u32);
+static void PrintLocationDefeated(u32, u32, u32);
+static void PrintLocationRemaining(u32, u32, u32);
+static u8 GetLocationStat(u32,u32);
 
 static void HandleLocationInput(u32, u8, u32);
 
@@ -358,6 +357,7 @@ static void ResetTrainerMode(void);
 static void Glass_FreeResources(void);
 static void FreeGlassStructs(void);
 static void FreeGlassBackgrounds(void);
+static void InitAllLocationStats(void);
 
 struct GlassState
 {
@@ -365,14 +365,14 @@ struct GlassState
     u8 sortOrder;
     u16 chosenLocation;
     bool8 trainerMode;
-    u8 locationStats[GLASS_LOCATION_STAT_COUNT];
+    u8 locationStats[MAPSEC_COUNT][GLASS_LOCATION_STAT_COUNT];
     u8 mapCursorSpriteId;
 };
 
 struct GlassLists
 {
     u8 numListElements;
-    u16 LocationList[RESIDO_MAPSEC_END - RESIDO_MAPSEC_START];
+    u16 LocationList[RESIDO_MAPSEC_COUNT];
     u16 TrainerList[TRAINERS_COUNT];
     struct OnScreenRow onScreenRow[GLASS_TRAINER_MAX_SHOWED];
 };
@@ -642,6 +642,7 @@ static void Glass_SetupCB(void)
             gMain.state++;
             break;
         case 4:
+            InitAllLocationStats();
             AllocateResourcesForListMenu();
             gMain.state++;
             break;
@@ -1580,10 +1581,7 @@ static bool8 IsLocationConquered(u32 listNum)
 
 static u8 GetLocationPercent(u32 location)
 {
-    u32 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
-    CountNumberTrainers(location,statArray);
-    PopulateLocationStats(statArray);
-    return GetLocationStat(GLASS_LOCATION_RATE);
+    return GetLocationStat(location,GLASS_LOCATION_RATE);
 }
 
 static const u8 *GetLocationName(u32 listNum)
@@ -1789,16 +1787,11 @@ static void HandleLocationStats(s32 locationId)
 static void PrintLocationStats(s32 locationId, u32 windowId)
 {
     u32 fontId = FONT_GLASS_METRICS;
-    u32 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
-
-    PopulateLocationStats(statArray);
-    CountNumberTrainers(locationId, statArray);
-    PopulateLocationStats(statArray);
 
     PrintLocationPercent(locationId, windowId, fontId);
-    PrintLocationTotal(windowId, fontId);
-    PrintLocationDefeated(windowId, fontId);
-    PrintLocationRemaining(windowId, fontId);
+    PrintLocationTotal(locationId, windowId, fontId);
+    PrintLocationDefeated(locationId, windowId, fontId);
+    PrintLocationRemaining(locationId, windowId, fontId);
 }
 
 static u8 GetMapSectionFromTrainerId(u32 trainerId)
@@ -1806,9 +1799,19 @@ static u8 GetMapSectionFromTrainerId(u32 trainerId)
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].mapSec;
 }
 
-static void CountNumberTrainers(u32 map, u32* statArray)
+static void InitAllLocationStats(void)
+{
+    for (u32 locationId = RESIDO_MAPSEC_START; locationId < RESIDO_MAPSEC_END; locationId++)
+    {
+        memset(sGlassState->locationStats[locationId], 0, sizeof(sGlassState->locationStats[locationId]));
+        CountNumberTrainers(locationId, sGlassState->locationStats[locationId]);
+    }
+}
+
+static void CountNumberTrainers(u32 map, u8* statArray)
 {
     u32 i, numerator, denominator;
+    DebugPrintf("test");
 
     for(i = 0; i < TRAINERS_COUNT ; i++)
     {
@@ -1829,28 +1832,28 @@ static void CountNumberTrainers(u32 map, u32* statArray)
     statArray[GLASS_LOCATION_RATE] = (numerator / denominator);
 }
 
-static void HandleLocationStatsTotal(u32* statArray)
+static void HandleLocationStatsTotal(u8* statArray)
 {
     IncrementLocationStat(GLASS_LOCATION_TOTAL,statArray);
     IncrementLocationStat(GLASS_LOCATION_UNDEFEATED,statArray);
     IncrementLocationStat(GLASS_LOCATION_UNDISCOVERED,statArray);
 }
 
-static void HandleLocationStatsDiscovered(u32* statArray)
+static void HandleLocationStatsDiscovered(u8* statArray)
 {
     IncrementLocationStat(GLASS_LOCATION_DISCOVERED,statArray);
     DecrementLocationStat(GLASS_LOCATION_UNDISCOVERED,statArray);
     IncrementLocationStat(GLASS_LOCATION_INCOMPLETE,statArray);
 }
 
-static void HandleLocationStatsDefeated(u32* statArray)
+static void HandleLocationStatsDefeated(u8* statArray)
 {
     IncrementLocationStat(GLASS_LOCATION_DEFEATED,statArray);
     DecrementLocationStat(GLASS_LOCATION_UNDEFEATED,statArray);
     DecrementLocationStat(GLASS_LOCATION_INCOMPLETE,statArray);
 }
 
-static void IncrementLocationStat(u32 stat, u32* statArray)
+static void IncrementLocationStat(u32 stat, u8* statArray)
 {
     if (statArray[stat] >= UCHAR_MAX)
         return;
@@ -1858,7 +1861,7 @@ static void IncrementLocationStat(u32 stat, u32* statArray)
     statArray[stat]++;
 }
 
-static void DecrementLocationStat(u32 stat, u32* statArray)
+static void DecrementLocationStat(u32 stat, u8* statArray)
 {
     if (!statArray[stat])
         return;
@@ -1866,19 +1869,11 @@ static void DecrementLocationStat(u32 stat, u32* statArray)
     statArray[stat]--;
 }
 
-static void PopulateLocationStats(u32* statArray)
-{
-    u32 statIndex;
-
-    for (statIndex = 0; statIndex < GLASS_LOCATION_STAT_COUNT; statIndex++)
-        sGlassState->locationStats[statIndex] = statArray[statIndex];
-}
-
 static void PrintLocationPercent(u32 location, u32 windowId, u32 fontId)
 {
     u8 *percentString = Alloc(USER_MAX_LENGTH*2);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_RATE),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_RATE),STR_CONV_MODE_LEFT_ALIGN,3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
     StringCopy(gStringVar3,sText_Trainers);
     StringAppend(gStringVar3, gStringVar4);
@@ -1889,11 +1884,11 @@ static void PrintLocationPercent(u32 location, u32 windowId, u32 fontId)
     Free(percentString);
 }
 
-static void PrintLocationTotal(u32 windowId, u32 fontId)
+static void PrintLocationTotal(u32 location, u32 windowId, u32 fontId)
 {
     u8 *totalString = Alloc(13);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_TOTAL),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_TOTAL),STR_CONV_MODE_LEFT_ALIGN,3);
     StringExpandPlaceholders(gStringVar4, sText_Total);
     StringCopy(totalString, gStringVar4);
 
@@ -1902,11 +1897,11 @@ static void PrintLocationTotal(u32 windowId, u32 fontId)
     Free(totalString);
 }
 
-static void PrintLocationDefeated(u32 windowId, u32 fontId)
+static void PrintLocationDefeated(u32 location, u32 windowId, u32 fontId)
 {
     u8 *defeatedString = Alloc(13);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_DEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_DEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
     StringCopy(gStringVar3,sText_Completed);
     StringAppend(gStringVar3, gStringVar1);
     StringCopy(defeatedString, gStringVar3);
@@ -1916,11 +1911,11 @@ static void PrintLocationDefeated(u32 windowId, u32 fontId)
     Free(defeatedString);
 }
 
-static void PrintLocationRemaining(u32 windowId, u32 fontId)
+static void PrintLocationRemaining(u32 location, u32 windowId, u32 fontId)
 {
     u8 *remainingString = Alloc(13);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_UNDEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_UNDEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
     StringCopy(gStringVar3,sText_Remaining);
     StringAppend(gStringVar3, gStringVar1);
     StringCopy(remainingString, gStringVar3);
@@ -1930,9 +1925,9 @@ static void PrintLocationRemaining(u32 windowId, u32 fontId)
     Free(remainingString);
 }
 
-static u8 GetLocationStat(u32 stat)
+static u8 GetLocationStat(u32 location, u32 stat)
 {
-    return sGlassState->locationStats[stat];
+    return sGlassState->locationStats[location][stat];
 }
 
 static void HandleLocationInput(u32 input, u8 taskId, u32 entityId)
@@ -3475,7 +3470,7 @@ void Glass_ResetSaveData(void)
 
 u32 Glass_OverworldReturnLocationStat(u32 locationId, u32 stat)
 {
-    u32 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
+    u8 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
 
     locationId = (locationId >= MAPSEC_NONE) ? gMapHeader.regionMapSectionId : locationId;
     CountNumberTrainers(locationId, statArray);
@@ -3483,3 +3478,4 @@ u32 Glass_OverworldReturnLocationStat(u32 locationId, u32 stat)
     stat = (stat > GLASS_LOCATION_RATE) ? GLASS_LOCATION_RATE : stat;
     return statArray[stat];
 }
+
