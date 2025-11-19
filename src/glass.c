@@ -2208,7 +2208,7 @@ static void EmptyTrainerScreenRowSpriteIds(u32 row)
 
 static void EmptyAllTrainerScreenRowSpriteIds(void)
 {
-    for (u32 row = 0; row < GLASS_SCREEN_ROW_LAST; row++)
+    for (u32 row = 0; row < GLASS_TRAINER_MAX_SHOWED; row++)
         EmptyTrainerScreenRowSpriteIds(row);
 }
 
@@ -3228,18 +3228,19 @@ static void MoveSprites(u32 old, u32 new)
 static void MoveTrainerForNameplate(s32 offset)
 {
     u32 currentRow = GetCurrentCursorScreenRowPosition();
-    u32 spriteId;
-    u32 rowIndex, y;
 
-    for (rowIndex = 0; rowIndex < GLASS_TRAINER_MAX_SHOWED; rowIndex++)
+    for (u32 rowIndex = 0; rowIndex < GLASS_TRAINER_MAX_SHOWED; rowIndex++)
     {
-        spriteId = sGlassLists->onScreenRow[rowIndex].spriteId[PARTY_SIZE];
-        y = gSprites[spriteId].y;
+        u32 spriteId = sGlassLists->onScreenRow[currentRow].spriteId[PARTY_SIZE];
+        u32 y = gSprites[spriteId].y;
+
+        if (spriteId == SPRITE_NONE)
+            continue;
 
         if (rowIndex == currentRow)
             gSprites[spriteId].y = y - GLASS_TRAINER_NAMEPLATE_MOVEMENT;
         else
-            gSprites[spriteId].y = CalculateVerticalTrainerPosition(rowIndex);
+            gSprites[spriteId].y = CalculateVerticalTrainerPosition(currentRow);
     }
 }
 
