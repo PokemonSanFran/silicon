@@ -356,7 +356,9 @@ static void ResetTrainerMode(void);
 static void Glass_FreeResources(void);
 static void FreeGlassStructs(void);
 static void FreeGlassBackgrounds(void);
+
 static void InitAllLocationStats(void);
+static bool8 DoesLocationHaveDiscoveredTrainers(u32);
 
 struct GlassState
 {
@@ -1583,12 +1585,17 @@ static u8 GetLocationPercent(u32 location)
     return GetLocationStat(location,GLASS_LOCATION_RATE);
 }
 
+static bool8 DoesLocationHaveDiscoveredTrainers(u32 location)
+{
+    return (GetLocationStat(location,GLASS_LOCATION_DISCOVERED) != 0);
+}
+
 static const u8 *GetLocationName(u32 listNum)
 {
     if (!IsLocationVisited(listNum))
         return gText_ThreeQuestionMarks;
 
-    if (GetLocationStat(listNum,GLASS_LOCATION_DISCOVERED) == 0)
+    if (!DoesLocationHaveDiscoveredTrainers(listNum))
         return gText_ThreeQuestionMarks;
 
     return gRegionMapEntries[listNum].name;
@@ -1859,10 +1866,7 @@ static void CalculateLocationStats(u8* stats)
 static void CalculateAllLocationStats(void)
 {
     for (u32 mapSecId = RESIDO_MAPSEC_START; mapSecId < RESIDO_MAPSEC_END; mapSecId++)
-    {
         CalculateLocationStats(sGlassState->locationStats[mapSecId]);
-        DebugPrintf("%S has %d discovered",gRegionMapEntries[mapSecId].name,GetLocationStat(mapSecId,GLASS_LOCATION_DISCOVERED));
-    }
 }
 
 static void InitAllLocationStats(void)
@@ -1981,7 +1985,7 @@ static void HandleLocationInput(u32 input, u8 taskId, u32 entityId)
             PlaySoundStartFadeQuitApp(taskId);
             break;
         default:
-            if (IsLocationVisited(entityId))
+            if (IsLocationVisited(entityId) && DoesLocationHaveDiscoveredTrainers(entityId))
                 SwitchToTrainerMode(taskId);
             else
                 PlaySE(SE_BOO);
