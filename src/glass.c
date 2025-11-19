@@ -153,6 +153,7 @@ static bool8 IsLocationStateVisible(u32);
 static bool8 IsLocationConquered(u32);
 static u8 GetLocationPercent(u32);
 static const u8* GetLocationName(u32);
+static bool8 DoesLocationHaveDiscoveredTrainers(u32 location);
 
 static void PrintMenuHeader(void);
 static void HandleMenuHeader(void);
@@ -179,6 +180,7 @@ static void PlayCursorSound(bool32);
 static void HandleLocationStats(s32);
 static void PrintLocationStats(s32, u32);
 static u8 GetMapSectionFromTrainerId(u32);
+static void InitAllLocationStats(void);
 static void HandleLocationStatsTotal(u8*);
 static void HandleLocationStatsDiscovered(u8*);
 static void HandleLocationStatsDefeated(u8*);
@@ -344,6 +346,7 @@ static void PlayTrainerReveal(u8 taskId);
 static void Task_LoadReveal(u8 taskId);
 static void HandlePartyMonSelection(u32, u8);
 static void GoToPokemonSummary(u8);
+static struct Pokemon *Glass_GetTempParty(void);
 static void Task_LoadPokemonSummary(u8);
 
 static bool8 IsReturningFromOtherScreen(u32);
@@ -359,9 +362,6 @@ static void Glass_FreeResources(void);
 static void FreeGlassStructs(void);
 static void FreeGlassBackgrounds(void);
 
-static void InitAllLocationStats(void);
-static bool8 DoesLocationHaveDiscoveredTrainers(u32);
-
 struct GlassState
 {
     MainCallback savedCallback;
@@ -370,6 +370,7 @@ struct GlassState
     bool8 trainerMode;
     u8 locationStats[MAPSEC_COUNT][GLASS_LOCATION_STAT_COUNT];
     u8 mapCursorSpriteId;
+    struct Pokemon tempParty[PARTY_SIZE];
 };
 
 struct GlassLists
@@ -3404,20 +3405,26 @@ static void GoToPokemonSummary(u8 taskId)
     DestroyTask(taskId);
 }
 
+static struct Pokemon *Glass_GetTempParty(void)
+{
+    return (sGlassState == NULL) ? NULL : sGlassState->tempParty;
+}
+
 static void Task_LoadPokemonSummary(u8 taskId)
 {
-    u32 selectedMon, trainerId, partySize;
-
     if (gPaletteFade.active)
         return;
 
-    selectedMon = GetCurrentTrainerColumn();
-    trainerId = GetTrainerIdFromCurrentPosition();
-    partySize = CreateNPCTrainerPartyFromTrainer(gEnemyParty, &gTrainers[GetCurrentDifficultyLevel()][trainerId], TRUE, BATTLE_TYPE_TRAINER) - 1;
+    struct Pokemon *party = Glass_GetTempParty();
+
+    u32 selectedMon = GetCurrentTrainerColumn();
+    u32 trainerId = GetTrainerIdFromCurrentPosition();
+
+    u32 partySize = (CreateNPCTrainerPartyFromTrainer(party, &gTrainers[GetCurrentDifficultyLevel()][trainerId], TRUE, BATTLE_TYPE_TRAINER)) - 1;
 
     DestroyTask(taskId);
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gEnemyParty, selectedMon, partySize, CB2_ReturnToTrainerScreen);
     FreeAllWindowBuffers();
+    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, party, selectedMon, partySize, CB2_ReturnToTrainerScreen);
 }
 
 void CB2_ReturnToTrainerScreen(void)
@@ -3544,4 +3551,3 @@ u32 Glass_OverworldReturnLocationStat(u32 locationId, u32 stat)
 
     return statArray[stat];
 }
-
