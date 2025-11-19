@@ -179,7 +179,6 @@ static void PlayCursorSound(bool32);
 static void HandleLocationStats(s32);
 static void PrintLocationStats(s32, u32);
 static u8 GetMapSectionFromTrainerId(u32);
-static void CountNumberTrainers(u32, u8*);
 static void HandleLocationStatsTotal(u8*);
 static void HandleLocationStatsDiscovered(u8*);
 static void HandleLocationStatsDefeated(u8*);
@@ -1799,37 +1798,71 @@ static u8 GetMapSectionFromTrainerId(u32 trainerId)
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].mapSec;
 }
 
-static void InitAllLocationStats(void)
+static void ResetAllLocationStats(void)
 {
-    for (u32 locationId = RESIDO_MAPSEC_START; locationId < RESIDO_MAPSEC_END; locationId++)
-    {
-        memset(sGlassState->locationStats[locationId], 0, sizeof(sGlassState->locationStats[locationId]));
-        CountNumberTrainers(locationId, sGlassState->locationStats[locationId]);
-    }
+    for (u32 mapSecId = RESIDO_MAPSEC_START; mapSecId < RESIDO_MAPSEC_END; mapSecId++)
+        memset(sGlassState->locationStats[mapSecId], 0, sizeof(sGlassState->locationStats[mapSecId]));
 }
 
-static void CountNumberTrainers(u32 map, u8* statArray)
+static void CountAllTrainersAndAdjustStats(u32 checkedMap, u8 *outStats)
 {
-    u32 i, numerator, denominator;
-    DebugPrintf("test");
+    bool32 processAll = (checkedMap == MAPSEC_NONE);
 
-    for(i = 0; i < TRAINERS_COUNT ; i++)
+    if (processAll)
+        ResetAllLocationStats();
+
+    if ((processAll == FALSE) && (checkedMap < RESIDO_MAPSEC_START || checkedMap >= RESIDO_MAPSEC_END))
+        return;
+
+    for (u32 trainerId = 0; trainerId < TRAINERS_COUNT; trainerId++)
     {
-        if (GetMapSectionFromTrainerId(i) != map)
+        u32 mapSecId = GetMapSectionFromTrainerId(trainerId);
+
+        if (mapSecId < RESIDO_MAPSEC_START || mapSecId >= RESIDO_MAPSEC_END)
             continue;
+
+        if (!processAll && mapSecId != checkedMap)
+            continue;
+
+        u8 *statArray = processAll
+            ? sGlassState->locationStats[mapSecId]
+            : outStats;
 
         HandleLocationStatsTotal(statArray);
 
-        if (IsTrainerDiscovered(i))
+        if (IsTrainerDiscovered(trainerId))
             HandleLocationStatsDiscovered(statArray);
 
-        if (IsTrainerDefeated(i))
+        if (IsTrainerDefeated(trainerId))
             HandleLocationStatsDefeated(statArray);
     }
+}
 
-    numerator = (statArray[GLASS_LOCATION_DEFEATED] * 10000);
-    denominator = (statArray[GLASS_LOCATION_TOTAL] * 100);
-    statArray[GLASS_LOCATION_RATE] = (numerator / denominator);
+static void CalculateLocationStats(u8* stats)
+{
+    u32 total = stats[GLASS_LOCATION_TOTAL];
+
+    if (total == 0)
+    {
+        stats[GLASS_LOCATION_RATE] = 0;
+        return;
+    }
+
+    u32 numerator = (stats[GLASS_LOCATION_DEFEATED] * 10000);
+    u32 denominator = (total * 100);
+    stats[GLASS_LOCATION_RATE] = numerator / denominator;
+}
+
+static void CalculateAllLocationStats(void)
+{
+    for (u32 mapSecId = RESIDO_MAPSEC_START; mapSecId < RESIDO_MAPSEC_END; mapSecId++)
+        CalculateLocationStats(sGlassState->locationStats[mapSecId]);
+}
+
+static void InitAllLocationStats(void)
+{
+    CountAllTrainersAndAdjustStats(MAPSEC_NONE,NULL);
+    CalculateAllLocationStats();
 }
 
 static void HandleLocationStatsTotal(u8* statArray)
@@ -3470,12 +3503,14 @@ void Glass_ResetSaveData(void)
 
 u32 Glass_OverworldReturnLocationStat(u32 locationId, u32 stat)
 {
+    locationId = (locationId >= MAPSEC_NONE) ? gMapHeader.regionMapSectionId : locationId;
+    stat = (stat > GLASS_LOCATION_RATE) ? GLASS_LOCATION_RATE : stat;
+
     u8 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
 
-    locationId = (locationId >= MAPSEC_NONE) ? gMapHeader.regionMapSectionId : locationId;
-    CountNumberTrainers(locationId, statArray);
+    CountAllTrainersAndAdjustStats(locationId,statArray);
+    CalculateLocationStats(statArray);
 
-    stat = (stat > GLASS_LOCATION_RATE) ? GLASS_LOCATION_RATE : stat;
     return statArray[stat];
 }
 
