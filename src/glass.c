@@ -2198,9 +2198,7 @@ static void UpdatePartySizesAndPrintPartyForRow(u32 row)
 
 static void PrintAllParties(void)
 {
-    u32 rowIndex;
-
-    for (rowIndex = 0; rowIndex < GetNumberOfScreenRows(); rowIndex++)
+    for (u32 rowIndex = 0; rowIndex < GetNumberOfScreenRows() + 1; rowIndex++)
         PrintTrainerAndParty(rowIndex);
 }
 
