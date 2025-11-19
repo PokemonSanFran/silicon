@@ -620,6 +620,7 @@ static void Glass_SetupCB(void)
     {
         case 0:
             //DebugSetTrainerStatus(); // Used only for debugging
+            InitAllLocationStats();
             DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
             SetVBlankHBlankCallbacksToNull();
             ClearScheduledBgCopiesToVram();
@@ -641,7 +642,6 @@ static void Glass_SetupCB(void)
             gMain.state++;
             break;
         case 4:
-            InitAllLocationStats();
             AllocateResourcesForListMenu();
             gMain.state++;
             break;
@@ -1588,6 +1588,9 @@ static const u8 *GetLocationName(u32 listNum)
     if (!IsLocationVisited(listNum))
         return gText_ThreeQuestionMarks;
 
+    if (GetLocationStat(listNum,GLASS_LOCATION_DISCOVERED) == 0)
+        return gText_ThreeQuestionMarks;
+
     return gRegionMapEntries[listNum].name;
 }
 
@@ -1856,7 +1859,10 @@ static void CalculateLocationStats(u8* stats)
 static void CalculateAllLocationStats(void)
 {
     for (u32 mapSecId = RESIDO_MAPSEC_START; mapSecId < RESIDO_MAPSEC_END; mapSecId++)
+    {
         CalculateLocationStats(sGlassState->locationStats[mapSecId]);
+        DebugPrintf("%S has %d discovered",gRegionMapEntries[mapSecId].name,GetLocationStat(mapSecId,GLASS_LOCATION_DISCOVERED));
+    }
 }
 
 static void InitAllLocationStats(void)
