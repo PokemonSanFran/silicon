@@ -2153,6 +2153,7 @@ static void SortTrainerList(void)
 
 static void PopulateAndSortTrainerList(u32 map)
 {
+    EmptyTrainerList();
     PopulateTrainerList(map);
     SortTrainerList();
 }
@@ -2167,7 +2168,7 @@ static void CalcSetScreenRows(u32 numList, u32 currentRow)
         newRow = screenRow + rowIndex;
 
         if (newRow > (numList + 1))
-            newRow = 0;
+            newRow = GLASS_EMPTY_TRAINER_ROW;
 
         SetScreenRow(rowIndex, newRow);
     }
@@ -3018,6 +3019,9 @@ static u8 GetTrainerIdFromTrainerFromScreenRow(u32 screenRow)
 
 static u8 GetListPositionFromScreenRow(u32 screenRow)
 {
+    if (screenRow == GLASS_EMPTY_TRAINER_ROW)
+        return GetNumListElements();
+
     return sGlassLists->onScreenRow[screenRow].listPosition;
 }
 
@@ -3252,7 +3256,12 @@ static bool8 IsCurrentRowIsDefeatedTrainer(u32 row)
     if (GetCurrentCursorScreenRowPosition() != row)
         return FALSE;
 
-    if (!IsTrainerDefeated(GetTrainerIdFromTrainerFromScreenRow(row)))
+    u32 trainerId = GetTrainerIdFromTrainerFromScreenRow(row);
+
+    if (trainerId == TRAINER_NONE)
+        return FALSE;
+
+    if (!IsTrainerDefeated(trainerId))
         return FALSE;
 
     return TRUE;
