@@ -2778,7 +2778,7 @@
 	@ For the provided map section, returns the relevant Google Glass location stat to the specified variable.
     .macro glass mapId = MAPSEC_NONE, state = GLASS_LOCATION_RATE, destination = VAR_RESULT
 	.byte SCR_OP_GLASS
-    .byte \mapId
+    .2byte \mapId
     .byte \state
     .2byte \destination
 	.endm
