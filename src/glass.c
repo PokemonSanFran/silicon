@@ -218,6 +218,8 @@ static void UpdatePartySizes(void);
 static void UpdatePartySizesAndPrintAllParties();
 static void UpdatePartySizesAndPrintPartyForRow(u32);
 static void PrintAllParties(void);
+static void EmptyAllTrainerScreenRowSpriteIds(void);
+static void EmptyTrainerScreenRowSpriteIds(u32 row);
 
 static void InitalizeNameplateSpriteId(void);
 static void HandleTrainerName(void);
@@ -2187,6 +2189,7 @@ static void UpdatePartySizes(void)
 
 static void UpdatePartySizesAndPrintAllParties(void)
 {
+    EmptyAllTrainerScreenRowSpriteIds();
     UpdatePartySizes();
     PrintAllParties();
 }
@@ -2195,6 +2198,18 @@ static void UpdatePartySizesAndPrintPartyForRow(u32 row)
 {
     UpdatePartySizes();
     PrintTrainerAndParty(row);
+}
+
+static void EmptyTrainerScreenRowSpriteIds(u32 row)
+{
+    for (u32 column = 0; column < GLASS_TRAINER_COLUMN_COUNT; column++)
+        SetSpriteId(row,column,SPRITE_NONE);
+}
+
+static void EmptyAllTrainerScreenRowSpriteIds(void)
+{
+    for (u32 row = 0; row < GLASS_SCREEN_ROW_LAST; row++)
+        EmptyTrainerScreenRowSpriteIds(row);
 }
 
 static void PrintAllParties(void)
@@ -2998,10 +3013,8 @@ static void EmptyTrainerList(void)
 static void PrintTrainerAndParty(u32 screenRow)
 {
     u32 trainerId = GetTrainerIdFromTrainerFromScreenRow(screenRow);
-    u32 i = 0;
 
-    for (i = 0; i < GLASS_TRAINER_COLUMN_COUNT; i++)
-        SetSpriteId(screenRow,i,SPRITE_NONE);
+    EmptyTrainerScreenRowSpriteIds(screenRow);
 
     if (trainerId == TRAINER_NONE)
         return;
