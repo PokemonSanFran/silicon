@@ -1608,26 +1608,28 @@ static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
 static void Task_MenuMain(u8 taskId)
 {
     if(JOY_NEW(DPAD_DOWN) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
+    {
         PressedDownButton();
         PrintToWindow(FONT_CUSTOM_BLACK);
     }
 
     if(JOY_NEW(DPAD_UP) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
+    {
         PressedUpButton();
         PrintToWindow(FONT_CUSTOM_BLACK);
     }
 
     if(JOY_NEW(DPAD_RIGHT) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1))
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = 0;
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]++;
         }
-        else{
+        else
+        {
             if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1))
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = 0;
             else
@@ -1642,14 +1644,16 @@ static void Task_MenuMain(u8 taskId)
     }
 
     if(JOY_NEW(DPAD_LEFT) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == 0)
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1);
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]--;
         }
-        else{
+        else
+        {
             if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == 0)
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1);
             else
@@ -1664,33 +1668,43 @@ static void Task_MenuMain(u8 taskId)
     }
 
     if(JOY_NEW(A_BUTTON))
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
-            if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+
+        {
+            if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG)
+
+            {
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
             else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_BODY_TYPE &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_POSSESIVE_PRONOUN){
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_BODY_TYPE &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_POSSESIVE_PRONOUN)
+
+            {
                 PlaySE(SE_SELECT);
                 sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
                 sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
             }
             else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
-                (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
-                sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
-                sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN)){
-                    PlaySE(SE_SELECT);
-                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                    gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
+                    (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
+                     sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
+                     sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN))
+
+            {
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
             }
         }
-        else{
+        else
+
+        {
             PlaySE(SE_SELECT);
             sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
             sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
@@ -1700,17 +1714,20 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
-        if(!sMenuDataPtr->isCustomPaletteScren){
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(HasCustomizationDataBeenModified())
                 sMenuDataPtr->DrawnDialogue = !sMenuDataPtr->DrawnDialogue;
-            else{
+            else
+            {
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
         }
-        else{
+        else
+        {
             PlaySE(SE_SELECT);
             sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
             sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
@@ -1720,7 +1737,8 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(START_BUTTON))
     {
-        if(!sMenuDataPtr->isCustomPaletteScren){
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             PlaySE(SE_PC_OFF);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_MenuTurnOff;
@@ -1729,8 +1747,10 @@ static void Task_MenuMain(u8 taskId)
     }
 
     sMenuDataPtr->CurrentDirectionFrames++;
-    if(sMenuDataPtr->CurrentDirectionFrames % NUM_MOVEMENT_FRAMES == 0){
-        if(sMenuDataPtr->CurrentDirectionFrames > (NUM_SEQUENCES * NUM_MOVEMENT_FRAMES) - 1){
+    if(sMenuDataPtr->CurrentDirectionFrames % NUM_MOVEMENT_FRAMES == 0)
+    {
+        if(sMenuDataPtr->CurrentDirectionFrames > (NUM_SEQUENCES * NUM_MOVEMENT_FRAMES) - 1)
+        {
             sMenuDataPtr->CurrentDirectionFrames = 0;
         }
 
