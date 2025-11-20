@@ -1582,21 +1582,26 @@ static void Task_MenuTurnOff(u8 taskId)
 
 static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (gPaletteFade.active)
+        return;
+
+    u8 namingScreenTypes[] =
     {
-		Menu_FreeResources();
-        switch(sMenuDataPtr->cursorPlace){
-            case CUSTOMIZATION_SUBJECT_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_SUBJECT_PRONOUN, gSaveBlock3Ptr->playerSubjectPronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-            case CUSTOMIZATION_OBJECT_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_OBJECT_PRONOUN, gSaveBlock3Ptr->playerObjectPronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-            case CUSTOMIZATION_POSSESIVE_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_POSSESIVE_PRONOUN, gSaveBlock3Ptr->playerPosesivePronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-        }
-    }
+        [CUSTOMIZATION_SUBJECT_PRONOUN]   = NAMING_SCREEN_SUBJECT_PRONOUN,
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = NAMING_SCREEN_OBJECT_PRONOUN,
+        [CUSTOMIZATION_POSSESIVE_PRONOUN] = NAMING_SCREEN_POSSESIVE_PRONOUN,
+    };
+
+    u8* pronounBuffers[] =
+    {
+        [CUSTOMIZATION_SUBJECT_PRONOUN]   = gSaveBlock3Ptr->playerSubjectPronoun,
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = gSaveBlock3Ptr->playerObjectPronoun,
+        [CUSTOMIZATION_POSSESIVE_PRONOUN] = gSaveBlock3Ptr->playerPosesivePronoun,
+    };
+
+    u32 cursor = sMenuDataPtr->cursorPlace;
+    DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
+    Menu_FreeResources();
 }
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
