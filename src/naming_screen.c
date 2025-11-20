@@ -410,10 +410,7 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
         sNamingScreen->destBuffer = destBuffer;
         sNamingScreen->returnCallback = returnCallback;
 
-        // Start playerCustom
-        // if (templateNum == NAMING_SCREEN_PLAYER)
-        if (templateNum == NAMING_SCREEN_PLAYER || templateNum == NAMING_SCREEN_SUBJECT_PRONOUN || templateNum == NAMING_SCREEN_OBJECT_PRONOUN || templateNum == NAMING_SCREEN_POSSESIVE_PRONOUN)
-        // End playerCustom
+        if (templateNum == NAMING_SCREEN_PLAYER)
             StartTimer1();
 
         SetMainCallback2(CB2_LoadNamingScreen);
@@ -2164,7 +2161,7 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
 };
 
 static const u8 sText_EnterCode[] = _("Enter code:");
-static const struct NamingScreenTemplate sCodeScreenTemplate = 
+static const struct NamingScreenTemplate sCodeScreenTemplate =
 {
     .copyExistingString = FALSE,
     .maxChars = CODE_NAME_LENGTH,
