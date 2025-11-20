@@ -944,16 +944,21 @@ static bool8 Menu_DoGfxSetup(void)
     return FALSE;
 }
 
-#define try_free(ptr) ({        \
-    void ** ptr__ = (void **)&(ptr);   \
-    if (*ptr__ != NULL)                \
-        Free(*ptr__);                  \
-})
+static void FreeCustomizationBackgrounds(void)
+{
+    for (u32 backgroundId = 0; backgroundId < NUM_CUSTOMIZATION_BACKGROUNDS; backgroundId++)
+        if (sBgTilemapBuffer[backgroundId] != NULL)
+            Free(sBgTilemapBuffer[backgroundId]);
+}
 
 static void Menu_FreeResources(void)
 {
-    try_free(sMenuDataPtr);
+    FreeAllSpritePalettes();
+    if (sMenuDataPtr != NULL)
+        Free(sMenuDataPtr);
+    FreeCustomizationBackgrounds();
     FreeAllWindowBuffers();
+    ResetSpriteData();
 }
 
 
@@ -1670,10 +1675,8 @@ static void Task_MenuMain(u8 taskId)
     if(JOY_NEW(A_BUTTON))
     {
         if(!sMenuDataPtr->isCustomPaletteScren)
-
         {
             if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG)
-
             {
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -1685,7 +1688,6 @@ static void Task_MenuMain(u8 taskId)
                     sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
                     sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
                     sMenuDataPtr->cursorPlace != CUSTOMIZATION_POSSESIVE_PRONOUN)
-
             {
                 PlaySE(SE_SELECT);
                 sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
@@ -1695,7 +1697,6 @@ static void Task_MenuMain(u8 taskId)
                     (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
                      sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
                      sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN))
-
             {
                 PlaySE(SE_SELECT);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -1703,7 +1704,6 @@ static void Task_MenuMain(u8 taskId)
             }
         }
         else
-
         {
             PlaySE(SE_SELECT);
             sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
