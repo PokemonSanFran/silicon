@@ -961,7 +961,6 @@ static void Menu_FreeResources(void)
     ResetSpriteData();
 }
 
-
 static void Task_MenuWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -1605,6 +1604,7 @@ static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
     };
 
     u32 cursor = sMenuDataPtr->cursorPlace;
+    // PSF TODO it would be nice if after leaving this screen, the cursor returned you to where you were, but I'm fairly certain this requires a refactor
     DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
     Menu_FreeResources();
 }
