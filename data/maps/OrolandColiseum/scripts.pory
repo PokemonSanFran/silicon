@@ -3,12 +3,9 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 mapscripts OrolandColiseum_MapScripts {
 
     MAP_SCRIPT_ON_TRANSITION {
-		call(TimeTravel_Script_RoutePlayer)
-		call(TimeTravel_Script_HideObjects)
         call(Quest_BuildingAnExhibit_HideLeader_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
-		VAR_TIME_TRAVEL_STATE, TIME_TRAVEL_FIRST_WORMHOLE_USE: TimeTravel_Script_BumpIntoChampion
         //FLAG_VISITED_OROLAND_COLISEUM, FALSE: Generic_Mappreview
 ]
 

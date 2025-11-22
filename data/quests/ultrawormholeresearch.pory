@@ -99,7 +99,7 @@ script Quest_Ultrawormholeresearch_Reward_Dialogue{
 
 }
 script Quest_Ultrawormholeresearch_Active_Dialogue{
-	call(TimeTravel_CheckSnom_Script)
+    return
 }
 
 script Quest_Ultrawormholeresearch_ConstructMenu_Script{

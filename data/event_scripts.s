@@ -1316,7 +1316,6 @@ EventScript_VsSeekerChargingDone::
 .include "data/cutscenes/youcantstopme.inc"
 .include "data/cutscenes/wecanstopyouactually.inc"
 .include "data/cutscenes/epilogue.inc"
-.include "data/cutscenes/timetravel.inc"
 .include "data/cutscenes/rematches.inc"
 
 ## SILICON QUESTS

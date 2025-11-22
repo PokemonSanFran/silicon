@@ -1,24 +1,22 @@
 script Rematches_Script_Ellen
 {
-	lock
-	switch(var(VAR_ELLEN_STATE))
-	{
-		case HAS_NOT_TALKED_TO_ELITE:
-			goto(Rematches_Dialogue_FirstEllenTalk)
-		case HAS_TALKED_TO_ELITE:
-			goto(Rematches_Script_AskEllenBattle)
-		case WON_ELITE_MON:
-			goto(Rematches_Dialogue_EllenOfferMon)
-		case TAKEN_ELITE_MON:
-			goto(Rematches_Script_AskEllenRematch)
-	}
-	release
-	end
+    lock
+    if (!flag(FLAG_TALKED_TO_ELLEN_POSTGAME))
+    {
+        goto(Rematches_Dialogue_FirstEllenTalk)
+    }
+    elif (defeated(TRAINER_ELLEN))
+    {
+        goto(Rematches_Script_AskEllenRematch)
+    }
+    goto(Rematches_Script_AskEllenBattle)
+    release
+    end
 }
 
 script Rematches_Dialogue_FirstEllenTalk
 {
-	setvar(VAR_ELLEN_STATE,HAS_TALKED_TO_ELITE)
+    setflag(FLAG_TALKED_TO_ELLEN_POSTGAME)
 	lock
 	faceplayer
 	msgbox(format("{PLAYER}."),,SPEAKER_ELLEN)
@@ -50,65 +48,7 @@ script Rematches_Script_AskEllenBattle
 	trainerbattle_no_intro(TRAINER_ELLEN,format("{PLAYER}, your strength knows no bounds!"))
 	// PSF TODO create a cursed chain of if else statement to handle rematches
 	setflag(FLAG_DAILY_ELLEN_REMATCH)
-
-	if (var(VAR_ELLEN_STATE) == TAKEN_ELITE_MON)
-	{
-		goto(Rematches_Dialogue_EllenComeBack)
-	}
-	goto(Rematches_Dialogue_EllenOfferMon)
-}
-
-script Rematches_Dialogue_EllenMakeSpace
-{
-	msgbox(format("Come back when you have space in your party or Boxes for another Pokemon."),,SPEAKER_ELLEN)
-		closemessage
-		release
-		end
-}
-
-script Rematches_Dialogue_EllenExplainMon
-{
-	setvar(VAR_ELLEN_STATE,TAKEN_ELITE_MON)
-	callnative(BufferEleanorMonName)
-	buffermapname(STR_VAR_2,MAP_OROLAND_COLISEUM_OUTSIDE)
-	msgbox(format("I recently found this {STR_VAR_1}.\pI typically train Pokemon in places where they're from, where they feel at home.\pThis {STR_VAR_1} though...it seems particularly calm around {STR_VAR_2}.\pWhat's strange though - {STR_VAR_1} haven't been seen around there in about nine years."),,SPEAKER_ELLEN)
-	msgbox(format("It's possible that a Trainer caught this Pokemon 9 years ago and then abandoned it... but this Pokemon looks young.\pI have a different idea.\pI know some Pokemon can travel across time and space. I don't think {STR_VAR_1} can do that at will... but is it possible it was brought here?"),,SPEAKER_ELLEN)
-	msgbox(format("I think {STR_VAR_1} is from a different time. And I'm hoping if it stays with you, it'll be able to somehow get back home."),SPEAKER_ELLEN)
-	msgbox(format("I hope it works out!"),,SPEAKER_ELLEN)
-	closemessage
-	release
-	end
-}
-
-script Rematches_Dialogue_EllenOfferMon
-{
-	setvar(VAR_ELLEN_STATE,WON_ELITE_MON)
-	msgbox(format("That was delightful {PLAYER}. Thank you.\pYou're an accomplished and traveled Trainer... and perhaps you can help me."),,SPEAKER_ELLEN)
-	closemessage
-	callnative(GenerateAndGiveEleanorSnom)
-
-	switch(var(VAR_RESULT))
-	{
-		case MON_GIVEN_TO_PARTY: 
-			call(Rematches_Script_ObtainedMon)
-			msgbox(format("{STR_VAR_1} was added to the party."))
-		case MON_GIVEN_TO_PC:
-			call(Rematches_Script_ObtainedMon)
-			call(Common_EventScript_TransferredToPC)
-		default:
-			goto(Rematches_Dialogue_EllenMakeSpace)
-	}
-	goto(Rematches_Dialogue_EllenExplainMon)
-}
-
-script Rematches_Script_ObtainedMon
-{
-	bufferspeciesname(STR_VAR_1,SPECIES_ELEANOR_GIFT)
-	playfanfare(MUS_OBTAIN_ITEM)
-	msgbox(format("{PLAYER} recieved a {STR_VAR_1} from Eleanor."))
-	waitmessage
-	waitfanfare
-	return
+    goto(Rematches_Dialogue_EllenComeBack)
 }
 
 script Rematches_Dialogue_EllenComeBack
