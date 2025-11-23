@@ -91,6 +91,5 @@ enum WavesFontColors
 
 #define WAVES_HEADER_X               0
 #define WAVES_HEADER_Y               25
-#define TILE_TO_PIXELS(t)   (t ? t * 8 : 1)
 
 #endif // GUARD_CONSTANTS_WAVES_H

@@ -104,5 +104,6 @@
 #define PLTT_SIZE_8BPP PLTT_SIZEOF(256)
 
 #define PLTT_OFFSET_4BPP(n) ((n) * PLTT_SIZE_4BPP)
-
+#define TILE_TO_PIXELS(t)   (t ? t * 8 : 1)
+#define PIXELS_TO_TILES(p)  (p ? p / 8 : 1)
 #endif // GUARD_GBA_DEFINES_H
