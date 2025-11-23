@@ -86,8 +86,11 @@ enum WavesFontColors
 #define WAVES_PALETTE_TEXT_ID        15
 #define WAVES_PALETTE_TEXT_SLOT      BG_PLTT_ID(WAVES_PALETTE_TEXT_ID)
 #define WAVES_METER_FACTOR           15625
+#define WAVES_METER_CENTER_SECTIONS  6
+#define WAVES_METER_TILE_OFFSET      40
 
 #define WAVES_HEADER_X               0
-#define WAVES_HEADER_Y               22
+#define WAVES_HEADER_Y               25
+#define TILE_TO_PIXELS(t)   (t ? t * 8 : 1)
 
 #endif // GUARD_CONSTANTS_WAVES_H
