@@ -2,6 +2,7 @@
 #define GUARD_WAVES_H
 
 #include "constants/quests.h"
+#include "constants/waves.h"
 
 struct WavesData
 {
@@ -20,5 +21,6 @@ struct WavesState
 };
 
 void CB2_WavesFromStartMenu(void);
+void Waves_DoDailyPassiveIncrease(u32);
 
 #endif // GUARD_WAVES_H

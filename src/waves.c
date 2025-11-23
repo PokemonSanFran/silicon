@@ -2,6 +2,7 @@
 #include "bg.h"
 #include "window.h"
 #include "scanline_effect.h"
+#include "quest_logic.h"
 #include "dma3.h"
 #include "overworld.h"
 #include "event_data.h"
@@ -11,6 +12,7 @@
 #include "field_weather.h"
 #include "options_visual.h"
 #include "malloc.h"
+#include "random.h" 
 #include "waves.h"
 #include "palette.h"
 #include "task.h"
@@ -25,7 +27,6 @@
 #include "constants/waves.h"
 #include "constants/songs.h"
 #include "data/waves.h"
-#include "random.h" // DEBUG
 
 static void Debug_LoadUpGoals(void);
 static const u8 *const Waves_GetTitle(enum GoalEnum goal);
@@ -40,6 +41,8 @@ u8 Waves_GetPlayerPercent(enum GoalEnum goalId);
 u8 Waves_GetPassivePercent(enum GoalEnum goalId);
 u8 Waves_CalculateAmountRaised(enum GoalEnum goalId);
 u8 Waves_CalculateAmountRemaining(enum GoalEnum goalId, enum GoalAttributes attributes);
+static void Waves_AllPassiveIncrease(void);
+static void Waves_PassiveIncrease(enum GoalEnum goalId);
 static void Waves_VBlankCB(void);
 static void Waves_MainCB(void);
 static bool32 Waves_InitializeBackgrounds(void);
@@ -435,6 +438,18 @@ void Waves_SetPassivePercent(enum GoalEnum goalId, u32 amount)
     Waves_SetPercentRaised(goalId, GOAL_PASSIVE_PERCENT, amount);
 }
 
+static void Waves_IncreasePlayerPercent(enum GoalEnum goalId, u32 amount)
+{
+    u32 existing = Waves_GetPlayerPercent(goalId);
+    Waves_SetPlayerPercent(goalId,(existing+amount));
+}
+
+static void Waves_IncreasePassivePercent(enum GoalEnum goalId, u32 amount)
+{
+    u32 existing = Waves_GetPassivePercent(goalId);
+    Waves_SetPassivePercent(goalId,(existing+amount));
+}
+
 u8 Waves_GetPlayerPercent(enum GoalEnum goalId)
 {
     return Waves_GetPercentRaised(goalId, GOAL_PLAYER_PERCENT);
@@ -443,6 +458,43 @@ u8 Waves_GetPlayerPercent(enum GoalEnum goalId)
 u8 Waves_GetPassivePercent(enum GoalEnum goalId)
 {
     return Waves_GetPercentRaised(goalId, GOAL_PASSIVE_PERCENT);
+}
+
+void Waves_DoDailyPassiveIncrease(u32 daysSince)
+{
+    if (!QuestMenu_GetSetQuestState(QUEST_MUTUALAIDFUND, FLAG_GET_ACTIVE))
+        return;
+
+    if (QuestMenu_GetSetQuestState(QUEST_MUTUALAIDFUND, FLAG_GET_REWARD))
+        return;
+
+    if (QuestMenu_GetSetQuestState(QUEST_MUTUALAIDFUND, FLAG_GET_COMPLETED))
+        return;
+    
+    while (--daysSince != 0xFFFF)
+        Waves_AllPassiveIncrease();
+}
+
+static void Waves_AllPassiveIncrease(void)
+{
+    for (enum GoalEnum goalId = 0; goalId < GOAL_COUNT; goalId++)
+        Waves_PassiveIncrease(goalId);
+}
+
+static void Waves_PassiveIncrease(enum GoalEnum goalId)
+{
+    u32 maxPassive = (HasPlayerJoinedTheTide()) ? WAVES_PASSIVE_INCREASE_TRUE : WAVES_PASSIVE_INCREASE;
+    u32 percent[GOAL_PERCENT_COUNT] = 
+    {
+        Waves_GetPlayerPercent(goalId), 
+        Waves_GetPassivePercent(goalId)
+    };
+    u32 amount = (Random() % maxPassive) + percent[GOAL_PASSIVE_PERCENT];
+
+    if (amount > percent[GOAL_PLAYER_PERCENT])
+        return;
+
+    Waves_IncreasePassivePercent(goalId,amount);
 }
 
 u8 Waves_CalculatePercentRaised(enum GoalEnum goalId)
@@ -866,6 +918,9 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 
 static void Waves_PrintCardMeter(enum GoalEnum goalId)
 {
+    if (goalId == GOAL_NONE)
+        return;
+
     enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
     u32 amount = Waves_CalculatePercentRaised(goalId) * 10000;
 
@@ -925,7 +980,6 @@ static void Waves_PrintCardText(enum GoalEnum goalId)
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar3);
 }
-
 
 static void Debug_LoadUpGoals(void)
 {
