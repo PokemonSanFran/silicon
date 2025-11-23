@@ -69,6 +69,7 @@ static void Waves_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static void Waves_PrintMenuHeader(enum WavesWindowsGrid windowId);
 static void Waves_PrintHeaderText(enum WavesWindowsGrid windowId);
 static void Waves_PrintAllCards(void);
+static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId);
 static void Waves_PrintCard(enum GoalEnum goalId);
 static void Waves_PrintCardHeader(enum GoalEnum goalId);
 static void Waves_PrintCardText(enum GoalEnum goalId);
@@ -77,6 +78,7 @@ static void Waves_PrintCardMeter(enum GoalEnum goalId);
 
 static const u32* const meterLeftLUT[] =
 {
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar0.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar0.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar1.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar2.4bpp.smol"),
@@ -102,6 +104,7 @@ static const u32* const meterCenterLUT[] =
 
 static const u32* const meterRightLUT[] =
 {
+    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar0.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar0.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar1.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar2.4bpp.smol"),
@@ -385,10 +388,14 @@ u8 Waves_GetPassivePercent(enum GoalEnum goalId)
     return Waves_GetPercentRaised(goalId, GOAL_PASSIVE_PERCENT);
 }
 
+u8 Waves_CalculatePercentRaised(enum GoalEnum goalId)
+{
+    return (Waves_GetPlayerPercent(goalId) + Waves_GetPassivePercent(goalId));
+}
+
 u8 Waves_CalculateAmountRaised(enum GoalEnum goalId)
 {
-    u32 combinedPercent = Waves_GetPlayerPercent(goalId) + Waves_GetPassivePercent(goalId);
-    return (Waves_GetGoal(goalId) / combinedPercent);
+    return (Waves_GetGoal(goalId) / Waves_CalculatePercentRaised(goalId));
 }
 
 u8 Waves_CalculateAmountRemaining(enum GoalEnum goalId, enum GoalAttributes attributes)
@@ -783,31 +790,46 @@ static void Waves_PrintAllCards(void)
 static void Waves_PrintCard(enum GoalEnum goalId)
 {
     Waves_PrintCardHeader(goalId);
-    Waves_PrintCardThumbnail(goalId);
+    //Waves_PrintCardThumbnail(goalId);
     Waves_PrintCardMeter(goalId);
 }
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 {
-
+    //u32 windowId = ConvertGoalIdToWindowId(goalId);
+    Waves_GetThumbnail(goalId);
 }
 
 static void Waves_PrintCardMeter(enum GoalEnum goalId)
 {
     enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
-    u32 amount = Waves_GetPercentRaised(goalId);
+    u32 amount = Waves_CalculateAmountRaised(goalId) * 10000;
+    u32 factor = 0;
 
-    meterCenterLUT
+    while (factor < (ARRAY_COUNT(meterLeftLUT)-1) && amount >= WAVES_METER_FACTOR)    
+    {
+        factor++;
+        amount -= WAVES_METER_FACTOR;
+    }
+    CopyToWindowPixelBuffer(windowId, meterLeftLUT[factor], 0, 60);
 
-    CopyToWindowPixelBuffer(windowId, meterCenterLUT[2], 0, NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET);
+    for (u32 iteration = 0; iteration < 6; iteration++)
+    {
+        factor = 0;
+        while (factor < (ARRAY_COUNT(meterCenterLUT)-1) && amount >= WAVES_METER_FACTOR)
+        {
+            factor++;
+            amount -= WAVES_METER_FACTOR;
+        }
+        CopyToWindowPixelBuffer(windowId, meterCenterLUT[factor], 0, 60+((1+iteration)*60));
+    }
 
-    /*
-    for (index = 0; index < nameplateTileWidth - 1; index++)
-        CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[4], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
-
-    CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index++);
-
-    CopyToWindowPixelBuffer(windowId, nameplateRightThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
-    */
+    factor = 0;
+    while (factor < (ARRAY_COUNT(meterRightLUT)-1) && amount >= WAVES_METER_FACTOR)    
+    {
+        factor++;
+        amount -= WAVES_METER_FACTOR;
+    }
+    CopyToWindowPixelBuffer(windowId, meterRightLUT[factor], 0, 60+(6*60));
 }
 
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
