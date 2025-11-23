@@ -7,6 +7,7 @@
 #include "event_data.h"
 #include "sound.h"
 #include "ui_main_menu.h"
+#include "international_string_util.h"
 #include "field_weather.h"
 #include "options_visual.h"
 #include "malloc.h"
@@ -24,7 +25,9 @@
 #include "constants/waves.h"
 #include "constants/songs.h"
 #include "data/waves.h"
+#include "random.h" // DEBUG
 
+static void Debug_LoadUpGoals(void);
 static const u8 *const Waves_GetTitle(enum GoalEnum goal);
 static const u8 *const Waves_GetDesc(enum GoalEnum goal);
 static const u32* Waves_GetThumbnail(enum GoalEnum goal);
@@ -76,44 +79,83 @@ static void Waves_PrintCardText(enum GoalEnum goalId);
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
 static void Waves_PrintCardMeter(enum GoalEnum goalId);
 
-static const u32* const meterLeftLUT[] =
-{
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/leftGoalBar7.4bpp.smol"),
-};
+static const u32* const meterPassiveLeftLUT[] =
+    {
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar1.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar2.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar3.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar4.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar5.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar6.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar7.4bpp.smol"),
+    };
 
-static const u32* const meterCenterLUT[] =
-{
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar7.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/centerGoalBar8.4bpp.smol"),
-};
+static const u32* const meterPassiveCenterLUT[] =
+    {
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar1.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar2.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar3.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar4.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar5.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar6.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar7.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar8.4bpp.smol"),
+    };
 
-static const u32* const meterRightLUT[] =
-{
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/rightGoalBar7.4bpp.smol"),
-};
+static const u32* const meterPassiveRightLUT[] =
+    {
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar1.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar2.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar3.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar4.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar5.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar6.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar7.4bpp.smol"),
+    };
+
+static const u32* const meterPlayerLeftLUT[] =
+    {
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar1.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar2.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar3.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar4.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar5.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar6.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar7.4bpp.smol"),
+    };
+
+static const u32* const meterPlayerCenterLUT[] =
+    {
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar1.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar2.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar3.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar4.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar5.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar6.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar7.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar8.4bpp.smol"),
+    };
+
+static const u32* const meterPlayerRightLUT[] =
+    {
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar1.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar2.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar3.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar4.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar5.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar6.4bpp.smol"),
+        (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar7.4bpp.smol"),
+    };
 
 static const u16 wavesPalettesDefault[] = INCBIN_U16("graphics/accept/palettes/default.gbapal");
 static const u16 wavesPalettesBlack[] = INCBIN_U16("graphics/accept/palettes/black.gbapal");
@@ -138,205 +180,205 @@ static EWRAM_DATA u8 *sBgTilemapBuffer[BG_WAVES_COUNT] = {NULL};
 static bool8 firstOpen;
 
 const u8 sWavesWindowFontColors[][3] =
-{
-    [WAVES_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
-    [WAVES_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
-};
+    {
+        [WAVES_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
+        [WAVES_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
+    };
 
 static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
-{
-    [BG0_WAVES_TEXT] =
     {
-        .bg = BG0_WAVES_TEXT,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 31,
-        .priority = 0,
-    },
-    [BG1_WAVES_INTERFACE] =
-    {
-        .bg = BG1_WAVES_INTERFACE,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 25,
-        .priority = 1,
-    },
-    [BG2_WAVES_WALLPAPER] =
-    {
-        .bg = BG2_WAVES_WALLPAPER,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 27,
-        .priority = 2,
-    },
-};
+        [BG0_WAVES_TEXT] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .charBaseIndex = 0,
+            .mapBaseIndex = 31,
+            .priority = 0,
+        },
+        [BG1_WAVES_INTERFACE] =
+        {
+            .bg = BG1_WAVES_INTERFACE,
+            .charBaseIndex = 2,
+            .mapBaseIndex = 25,
+            .priority = 1,
+        },
+        [BG2_WAVES_WALLPAPER] =
+        {
+            .bg = BG2_WAVES_WALLPAPER,
+            .charBaseIndex = 3,
+            .mapBaseIndex = 27,
+            .priority = 2,
+        },
+    };
 
 static const struct WindowTemplate sWavesGridWindows[] =
-{
-    [WIN_WAVES_CARD_HEADER] =
     {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 30,
-        .height = 2,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1,
-    },
-    [WIN_WAVES_CARD_1] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 2,
-        .tilemapTop = 3,
-        .width = 8,
-        .height = 7,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2),
-    },
-    [WIN_WAVES_CARD_2] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 11,
-        .tilemapTop = 3,
-        .width = 8,
-        .height = 7,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7),
-    },
-    [WIN_WAVES_CARD_3] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 20,
-        .tilemapTop = 3,
-        .width = 8,
-        .height = 7,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7),
-    },
-    [WIN_WAVES_CARD_4] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 2,
-        .tilemapTop = 12,
-        .width = 8,
-        .height = 7,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7),
-    },
-    [WIN_WAVES_CARD_5] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 11,
-        .tilemapTop = 12,
-        .width = 8,
-        .height = 7,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
-    },
-    [WIN_WAVES_CARD_6] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 20,
-        .tilemapTop = 12,
-        .width = 8,
-        .height = 7,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
-    },
-    [WIN_WAVES_GOAL_FOOTER] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 18,
-        .width = 30,
-        .height = 2,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
-    },
-    DUMMY_WIN_TEMPLATE
-};
+        [WIN_WAVES_CARD_HEADER] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 0,
+            .tilemapTop = 0,
+            .width = 30,
+            .height = 2,
+            .paletteNum = WAVES_PALETTE_TEXT_ID,
+            .baseBlock = 1,
+        },
+        [WIN_WAVES_CARD_1] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 2,
+            .tilemapTop = 3,
+            .width = 8,
+            .height = 7,
+            .paletteNum = WAVES_PALETTE_TEXT_ID,
+            .baseBlock = 1 + (30 * 2),
+        },
+        [WIN_WAVES_CARD_2] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 11,
+            .tilemapTop = 3,
+            .width = 8,
+            .height = 7,
+            .paletteNum = WAVES_PALETTE_TEXT_ID,
+            .baseBlock = 1 + (30 * 2) + (8 * 7),
+        },
+        [WIN_WAVES_CARD_3] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 20,
+            .tilemapTop = 3,
+            .width = 8,
+            .height = 7,
+            .paletteNum = WAVES_PALETTE_TEXT_ID,
+            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7),
+        },
+        [WIN_WAVES_CARD_4] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 2,
+            .tilemapTop = 12,
+            .width = 8,
+            .height = 7,
+            .paletteNum = WAVES_PALETTE_TEXT_ID,
+            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7),
+        },
+        [WIN_WAVES_CARD_5] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 11,
+            .tilemapTop = 12,
+            .width = 8,
+            .height = 7,
+            .paletteNum = WAVES_PALETTE_TEXT_ID,
+            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
+        },
+        [WIN_WAVES_CARD_6] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 20,
+            .tilemapTop = 12,
+            .width = 8,
+            .height = 7,
+            .paletteNum = WAVES_PALETTE_TEXT_ID,
+            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
+        },
+        [WIN_WAVES_GOAL_FOOTER] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 0,
+            .tilemapTop = 18,
+            .width = 30,
+            .height = 2,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
+        },
+        DUMMY_WIN_TEMPLATE
+    };
 
 static const struct WindowTemplate sWavesGoalWindows[] =
-{
-    [WIN_WAVES_GOAL_HEADER] =
     {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 30,
-        .height = 2,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1,
-    },
-    [WIN_WAVES_GOAL_TITLE] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 1,
-        .tilemapTop = 3,
-        .width = 12,
-        .height = 2,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2),
-    },
-    [WIN_WAVES_GOAL_DESC] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 13,
-        .width = 30,
-        .height = 5,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2),
-    },
-    [WIN_WAVES_GOAL_PLAYER] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 15,
-        .tilemapTop = 5,
-        .width = 13,
-        .height = 1,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5),
-    },
-    [WIN_WAVES_GOAL_PASSIVE] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 15,
-        .tilemapTop = 7,
-        .width = 13,
-        .height = 1,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1),
-    },
-    [WIN_WAVES_GOAL_TOTAL] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 15,
-        .tilemapTop = 7,
-        .width = 13,
-        .height = 1,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1),
-    },
-    [WIN_WAVES_GOAL_RAISED] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 14,
-        .tilemapTop = 3,
-        .width = 15,
-        .height = 10,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1) + (15 * 7),
-    },
-    [WIN_WAVES_GOAL_FOOTER] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 18,
-        .width = 30,
-        .height = 2,
-        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1) + (15 * 7) + (15 * 10)
-    },
-    DUMMY_WIN_TEMPLATE
-};
+        [WIN_WAVES_GOAL_HEADER] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 0,
+            .tilemapTop = 0,
+            .width = 30,
+            .height = 2,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1,
+        },
+        [WIN_WAVES_GOAL_TITLE] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 1,
+            .tilemapTop = 3,
+            .width = 12,
+            .height = 2,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2),
+        },
+        [WIN_WAVES_GOAL_DESC] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 0,
+            .tilemapTop = 13,
+            .width = 30,
+            .height = 5,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2) + (12 * 2),
+        },
+        [WIN_WAVES_GOAL_PLAYER] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 15,
+            .tilemapTop = 5,
+            .width = 13,
+            .height = 1,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5),
+        },
+        [WIN_WAVES_GOAL_PASSIVE] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 15,
+            .tilemapTop = 7,
+            .width = 13,
+            .height = 1,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1),
+        },
+        [WIN_WAVES_GOAL_TOTAL] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 15,
+            .tilemapTop = 7,
+            .width = 13,
+            .height = 1,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1),
+        },
+        [WIN_WAVES_GOAL_RAISED] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 14,
+            .tilemapTop = 3,
+            .width = 15,
+            .height = 10,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1) + (15 * 7),
+        },
+        [WIN_WAVES_GOAL_FOOTER] =
+        {
+            .bg = BG0_WAVES_TEXT,
+            .tilemapLeft = 0,
+            .tilemapTop = 18,
+            .width = 30,
+            .height = 2,
+            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+            .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1) + (15 * 7) + (15 * 10)
+        },
+        DUMMY_WIN_TEMPLATE
+    };
 
 static const u8 *const Waves_GetTitle(enum GoalEnum goal)
 {
@@ -376,6 +418,21 @@ const enum QuestIdList Waves_GetRelatedQuest(enum GoalEnum goalId)
 u8 Waves_GetPercentRaised(enum GoalEnum goalId, enum GoalAttributes attribute)
 {
     return gSaveBlock3Ptr->wavesFunds[attribute];
+}
+
+static void Waves_SetPercentRaised(enum GoalEnum goalId, enum GoalAttributes attribute, u32 amount)
+{
+    gSaveBlock3Ptr->wavesFunds[attribute] = amount;
+}
+
+void Waves_SetPlayerPercent(enum GoalEnum goalId, u32 amount)
+{
+    Waves_SetPercentRaised(goalId, GOAL_PLAYER_PERCENT, amount);
+}
+
+void Waves_SetPassivePercent(enum GoalEnum goalId, u32 amount)
+{
+    Waves_SetPercentRaised(goalId, GOAL_PASSIVE_PERCENT, amount);
 }
 
 u8 Waves_GetPlayerPercent(enum GoalEnum goalId)
@@ -465,33 +522,33 @@ static void SetScheduleBgs(enum WavesBackgrounds backgroundId)
 }
 
 static const u32* const sWavesTilesLUT[] =
-{
-    [BG0_WAVES_TEXT] = NULL,
-    [BG1_WAVES_INTERFACE] = wavesInterfaceTiles,
-    [BG2_WAVES_WALLPAPER] = siliconBgTiles,
-};
+    {
+        [BG0_WAVES_TEXT] = NULL,
+        [BG1_WAVES_INTERFACE] = wavesInterfaceTiles,
+        [BG2_WAVES_WALLPAPER] = siliconBgTiles,
+    };
 
 static const u32* const sWavesTilemapLUT[] =
-{
-    [BG0_WAVES_TEXT] = NULL,
-    [BG1_WAVES_INTERFACE] = wavesInterfaceTilemap,
-    [BG2_WAVES_WALLPAPER] = siliconBgTilemap,
-};
+    {
+        [BG0_WAVES_TEXT] = NULL,
+        [BG1_WAVES_INTERFACE] = wavesInterfaceTilemap,
+        [BG2_WAVES_WALLPAPER] = siliconBgTilemap,
+    };
 
 static const u16* const sWavesPalettesLUT[] =
-{
-    [VISUAL_OPTION_COLOR_RED] = wavesPalettesRed,
-    [VISUAL_OPTION_COLOR_GREEN] = wavesPalettesGreen,
-    [VISUAL_OPTION_COLOR_BLUE] = wavesPalettesBlue,
-    [VISUAL_OPTION_COLOR_YELLOW] = wavesPalettesYellow,
-    [VISUAL_OPTION_COLOR_BLACK] = wavesPalettesBlack,
-    [VISUAL_OPTION_COLOR_WHITE] = wavesPalettesWhite,
-    [VISUAL_OPTION_COLOR_PLATINUM] = wavesPalettesPlatinum,
-    [VISUAL_OPTION_COLOR_SCARLET] = wavesPalettesScarlet,
-    [VISUAL_OPTION_COLOR_VIOLET] = wavesPalettesViolet,
-    [VISUAL_OPTION_COLOR_CUSTOM] = wavesPalettesDefault,
-    [VISUAL_OPTION_COLOR_COUNT] = wavesPalettesDefault,
-};
+    {
+        [VISUAL_OPTION_COLOR_RED] = wavesPalettesRed,
+        [VISUAL_OPTION_COLOR_GREEN] = wavesPalettesGreen,
+        [VISUAL_OPTION_COLOR_BLUE] = wavesPalettesBlue,
+        [VISUAL_OPTION_COLOR_YELLOW] = wavesPalettesYellow,
+        [VISUAL_OPTION_COLOR_BLACK] = wavesPalettesBlack,
+        [VISUAL_OPTION_COLOR_WHITE] = wavesPalettesWhite,
+        [VISUAL_OPTION_COLOR_PLATINUM] = wavesPalettesPlatinum,
+        [VISUAL_OPTION_COLOR_SCARLET] = wavesPalettesScarlet,
+        [VISUAL_OPTION_COLOR_VIOLET] = wavesPalettesViolet,
+        [VISUAL_OPTION_COLOR_CUSTOM] = wavesPalettesDefault,
+        [VISUAL_OPTION_COLOR_COUNT] = wavesPalettesDefault,
+    };
 
 static bool8 AreTilesOrTilemapEmpty(enum WavesBackgrounds backgroundId)
 {
@@ -502,7 +559,7 @@ static bool8 UNUSED ShouldSkipBg(enum WavesBackgrounds backgroundId)
 {
     if (backgroundId == BG1_WAVES_INTERFACE)
         return TRUE;
-    
+
     if (backgroundId == BG0_WAVES_TEXT)
         return FALSE;
 
@@ -624,6 +681,7 @@ void Waves_SetupCallback(void)
     switch (gMain.state)
     {
         case 0:
+            Debug_LoadUpGoals();
             DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
             SetVBlankHBlankCallbacksToNull();
             ClearScheduledBgCopiesToVram();
@@ -741,7 +799,7 @@ static bool32 AllocateStructs(void)
     sWavesState = AllocZeroed(sizeof(struct WavesState));
 
     return (sWavesState == NULL
-           );
+);
 }
 
 static void ClearAllWindows(void)
@@ -789,9 +847,16 @@ static void Waves_PrintAllCards(void)
 
 static void Waves_PrintCard(enum GoalEnum goalId)
 {
+    enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
     Waves_PrintCardHeader(goalId);
     //Waves_PrintCardThumbnail(goalId);
     Waves_PrintCardMeter(goalId);
+    //PutWindowRectTilemap(windowId, 0, 0, 8, 7);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 {
@@ -802,34 +867,38 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 static void Waves_PrintCardMeter(enum GoalEnum goalId)
 {
     enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
-    u32 amount = Waves_CalculateAmountRaised(goalId) * 10000;
-    u32 factor = 0;
+    u32 amount = Waves_CalculatePercentRaised(goalId) * 10000;
 
-    while (factor < (ARRAY_COUNT(meterLeftLUT)-1) && amount >= WAVES_METER_FACTOR)    
+    u32 factor = 0;
+    u32 size = sizeof(meterPlayerLeftLUT[factor]);
+    size = 0;
+    u32 offset = WAVES_METER_TILE_OFFSET;
+
+    while (factor < (ARRAY_COUNT(meterPlayerLeftLUT)-1) && amount >= WAVES_METER_FACTOR)    
     {
         factor++;
         amount -= WAVES_METER_FACTOR;
     }
-    CopyToWindowPixelBuffer(windowId, meterLeftLUT[factor], 0, 60);
+    CopyToWindowPixelBuffer(windowId,(const void*)meterPlayerLeftLUT[factor], size, offset++);
 
-    for (u32 iteration = 0; iteration < 6; iteration++)
+    for (u32 iteration = 0; iteration < WAVES_METER_CENTER_SECTIONS; iteration++)
     {
         factor = 0;
-        while (factor < (ARRAY_COUNT(meterCenterLUT)-1) && amount >= WAVES_METER_FACTOR)
+        while (factor < (ARRAY_COUNT(meterPlayerCenterLUT)-1) && amount >= WAVES_METER_FACTOR)
         {
             factor++;
             amount -= WAVES_METER_FACTOR;
         }
-        CopyToWindowPixelBuffer(windowId, meterCenterLUT[factor], 0, 60+((1+iteration)*60));
+        CopyToWindowPixelBuffer(windowId,(const void*)meterPlayerCenterLUT[factor], size, (offset + iteration));
     }
 
     factor = 0;
-    while (factor < (ARRAY_COUNT(meterRightLUT)-1) && amount >= WAVES_METER_FACTOR)    
+    while (factor < (ARRAY_COUNT(meterPlayerRightLUT)-1) && amount >= WAVES_METER_FACTOR)    
     {
         factor++;
         amount -= WAVES_METER_FACTOR;
     }
-    CopyToWindowPixelBuffer(windowId, meterRightLUT[factor], 0, 60+(6*60));
+    CopyToWindowPixelBuffer(windowId, meterPlayerRightLUT[factor], size, offset + WAVES_METER_CENTER_SECTIONS); 
 }
 
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
@@ -839,24 +908,31 @@ static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
 
 static void Waves_PrintCardHeader(enum GoalEnum goalId)
 {
-    enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
-
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     Waves_PrintCardText(goalId);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 static void Waves_PrintCardText(enum GoalEnum goalId)
 {
     enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
-    u32 fontId = WAVES_FONT_CARD_HEADER;
-    u32 x = WAVES_HEADER_X;
     u32 y = WAVES_HEADER_Y;
-    u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
-    u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
 
     StringCopy(gStringVar3,Waves_GetTitle(goalId));
+    u32 fontId = GetFontIdToFit(gStringVar3, WAVES_FONT_CARD_HEADER, 0, windowWidth);
+    u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+    u32 x = GetStringCenterAlignXOffset(fontId, gStringVar3, windowWidth);
+
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar3);
 }
 
 
+static void Debug_LoadUpGoals(void)
+{
+    for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
+    {
+        u32 amount = Random() % 50;
+        Waves_SetPlayerPercent(goalId, amount);
+        Waves_SetPassivePercent(goalId, amount);
+    }
+}
