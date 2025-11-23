@@ -2,7 +2,7 @@ static struct WavesData sWavesInformation[GOAL_COUNT] =
 {
     [GOAL_NONE] =
     {
-        .title = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Return"),
         .desc = COMPOUND_STRING("???"),
         .thumbnail = 0,
         .palette = 0,
