@@ -95,4 +95,15 @@ enum WavesFontColors
 #define WAVES_HEADER_X               0
 #define WAVES_HEADER_Y               25
 
+#define WAVES_THUMBNAIL_X_POSITION   20
+#define WAVES_THUMBNAIL_Y_POSITION   5
+#define WAVES_THUMBNAIL_X_PADDING   72
+#define WAVES_THUMBNAIL_Y_PADDING   70
+
+#define WAVES_PAL_SPRITE_TAG         188
+#define WAVES_SPRITE_TAG             179
+
+#define WAVES_COLUMN_COUNT          3
+#define WAVES_ROW_COUNT          2
+
 #endif // GUARD_CONSTANTS_WAVES_H

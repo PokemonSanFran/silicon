@@ -27,6 +27,7 @@
 #include "constants/waves.h"
 #include "constants/songs.h"
 #include "data/waves.h"
+#include "event_object_movement.h"
 
 static void Debug_LoadUpGoals(void);
 static const u8 *const Waves_GetTitle(enum GoalEnum goal);
@@ -183,10 +184,11 @@ static EWRAM_DATA u8 *sBgTilemapBuffer[BG_WAVES_COUNT] = {NULL};
 static bool8 firstOpen;
 
 const u8 sWavesWindowFontColors[][3] =
-    {
-        [WAVES_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
-        [WAVES_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
-    };
+{
+    [WAVES_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
+    [WAVES_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
+};
+
 
 static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
     {
@@ -904,16 +906,43 @@ static void Waves_PrintCard(enum GoalEnum goalId)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     Waves_PrintCardHeader(goalId);
-    //Waves_PrintCardThumbnail(goalId);
+    Waves_PrintCardThumbnail(goalId);
     Waves_PrintCardMeter(goalId);
-    //PutWindowRectTilemap(windowId, 0, 0, 8, 7);
 
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
+
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 {
-    //u32 windowId = ConvertGoalIdToWindowId(goalId);
-    Waves_GetThumbnail(goalId);
+    u32 x = WAVES_THUMBNAIL_X_POSITION + WAVES_THUMBNAIL_X_PADDING * (goalId % WAVES_COLUMN_COUNT);
+    u32 y = WAVES_THUMBNAIL_Y_POSITION + WAVES_THUMBNAIL_Y_PADDING * (goalId / WAVES_COLUMN_COUNT);
+    u32 spriteTag = (WAVES_SPRITE_TAG + goalId);
+
+    struct SpriteSheet sSpriteSheet_Thumbnail =
+    {
+        Waves_GetThumbnail(goalId),
+        2048,
+        spriteTag,
+    };
+
+    const struct SpritePalette sWavesSpritePalette =
+    {
+        .data = Waves_GetPalette(goalId),
+        .tag = WAVES_PAL_SPRITE_TAG,
+    };
+
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = (WAVES_SPRITE_TAG + goalId);
+    TempSpriteTemplate.paletteTag = WAVES_PAL_SPRITE_TAG;
+
+    LoadSpriteSheet(&sSpriteSheet_Thumbnail);
+    LoadSpritePalette(&sWavesSpritePalette);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(64x64);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(64x64);
+    gSprites[spriteId].data[1] = spriteTag;
 }
 
 static void Waves_PrintCardMeter(enum GoalEnum goalId)
