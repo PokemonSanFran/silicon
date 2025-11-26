@@ -18,9 +18,9 @@ struct StringList
 struct NewInventoryData
 {
     u8 numFavoriteItems[POCKETS_COUNT];
-    u8 itemIdx;
+    u16 itemIdx;
     u8 pocketNum;
-    u8 yFirstItem;
+    u16 yFirstItem;
     u16 registeredItem[NUM_REGISTER_ITEMS];
 };
 

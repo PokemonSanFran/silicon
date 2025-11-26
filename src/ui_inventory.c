@@ -94,13 +94,13 @@ struct MenuResources
 {
     u8 gfxLoadState;
 	u16 bgTilemapBuffers[NUM_INVENTORY_BACKGROUNDS][0x400];
-    u8 itemIdx;
+    u16 itemIdx;
     u16 itemIdxPickMode;
     u16 numItemsToToss;
     u8 currentSelectMode;
     u8 windowInfoNum;
     u8 spriteIDs[NUM_INVENTORY_SPRITES];
-    u8 numItems[NUM_INVENTORY_POCKETS];
+    u16 numItems[NUM_INVENTORY_POCKETS];
     u8 PartyPokemonIcon[PARTY_SIZE];
     u16 FavoritePocketItems[POCKETS_COUNT * MAX_INVENTORY_FAVORITE_ITEMS][NUM_FAVORITE_ITEMS_ARRAY_SIZE];
     u8 inventoryMode;
@@ -124,6 +124,7 @@ enum SelectModes
     INVENTORY_MESSAGE_SORTED_ITEMS_BY,
     INVENTORY_MESSAGE_CANT_USE_ITEM,
     INVENTORY_MESSAGE_CANT_TOSS_ITEM,
+    INVENTORY_MESSAGE_USED_ITEM,
 };
 
 #define NUM_TOSS_CONFIRMATION_OPTIONS 2
@@ -158,6 +159,9 @@ bool8 isCurrentItemFavorite(void);
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx);
 static u8 CreateRegisteredItemIcon(u8 slot);
 static void RemoveItemInSlot(u8 pocketId, u8 itemIdx);
+void ItemUseInBattle_UseTMHM(u8 taskId);
+void ItemUseOutOfBattle_Repel_New(u8 taskId);
+bool8 shouldShowRegisteredItems(void);
 
 //bag sort
 static void SortItemsInBag(u8 pocket, u8 type);
@@ -394,6 +398,12 @@ static bool8 Menu_DoGfxSetup(void)
         Free(*ptr__);                  \
 })
 
+bool8 shouldShowRegisteredItems(void){
+    bool8 UseRegisterGrid = (gSaveBlock3Ptr->InventoryData.pocketNum == KEYITEMS_POCKET || sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REGISTER);
+
+    return UseRegisterGrid;
+}
+
 static void Menu_UpdateTilemap(void)
 {
     try_free(sBg1TilemapBuffer);
@@ -411,8 +421,11 @@ static void Menu_UpdateTilemap(void)
     ShowBg(1);
     ShowBg(2);
 
-    if(gSaveBlock3Ptr->InventoryData.pocketNum == KEYITEMS_POCKET)
+    //INVENTORY_MODE_BATTLE, does not currently behaves correctly
+    if(shouldShowRegisteredItems()){
         LZDecompressWram(sMenuTilemap_KeyItems, sBg1TilemapBuffer);
+        //DebugPrintfLevel(MGBA_LOG_WARN, "Menu_UpdateTilemap pocket ID; %d", gSaveBlock3Ptr->InventoryData.pocketNum);
+    }
     else
         LZDecompressWram(sMenuTilemap, sBg1TilemapBuffer);
 }
@@ -420,8 +433,8 @@ static void Menu_UpdateTilemap(void)
 static void Menu_FreeResources(void)
 {
     //Resets Pocket Info too
-    gSaveBlock3Ptr->InventoryData.itemIdx = 0;
-    gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+    //gSaveBlock3Ptr->InventoryData.itemIdx = 0;
+    //gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
     //gSaveBlock3Ptr->InventoryData.pocketNum = 0;
 
     try_free(sMenuDataPtr);
@@ -517,7 +530,7 @@ static bool8 Menu_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            if(gSaveBlock3Ptr->InventoryData.pocketNum != KEYITEMS_POCKET)
+            if(!shouldShowRegisteredItems())
                 LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
             else
                 LZDecompressWram(sMenuTilemap_KeyItems, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
@@ -595,8 +608,7 @@ u16 getMaxItemsFromPocket(u8 pocket){
 }
 
 static void ForceReloadInventory(void){
-    u8 i, j, k;
-    u16 itemId, count, maxCount;
+    u16 i, j, k, itemId, count, maxCount;
     struct BagPocket *pocket;
 
     for(i = 0; i < NUM_INVENTORY_POCKETS - 1; i++){
@@ -658,6 +670,7 @@ enum BagSortOptions
 enum ItemSortType
 {
 	ITEM_TYPE_NONE,
+	ITEM_TYPE_REPEL,
 	ITEM_TYPE_FIELD_USE,
 	ITEM_TYPE_HEALTH_RECOVERY,
 	ITEM_TYPE_STATUS_RECOVERY,
@@ -739,12 +752,12 @@ static const u8 sBagMenuSortPokeBallsBerries[] =
 
 static const u16 sItemsByType[ITEMS_COUNT] =
 {
-    [ITEM_REPEL] = ITEM_TYPE_FIELD_USE,
-    [ITEM_SUPER_REPEL] = ITEM_TYPE_FIELD_USE,
-    [ITEM_MAX_REPEL] = ITEM_TYPE_FIELD_USE,
-    [ITEM_LURE] = ITEM_TYPE_FIELD_USE,
-    [ITEM_SUPER_LURE] = ITEM_TYPE_FIELD_USE,
-    [ITEM_MAX_LURE] = ITEM_TYPE_FIELD_USE,
+    [ITEM_REPEL] = ITEM_TYPE_REPEL,
+    [ITEM_SUPER_REPEL] = ITEM_TYPE_REPEL,
+    [ITEM_MAX_REPEL] = ITEM_TYPE_REPEL,
+    [ITEM_LURE] = ITEM_TYPE_REPEL,
+    [ITEM_SUPER_LURE] = ITEM_TYPE_REPEL,
+    [ITEM_MAX_LURE] = ITEM_TYPE_REPEL,
     [ITEM_HEART_SCALE] = ITEM_TYPE_FIELD_USE,
     [ITEM_BLACK_FLUTE] = ITEM_TYPE_FIELD_USE,
     [ITEM_WHITE_FLUTE] = ITEM_TYPE_FIELD_USE,
@@ -1496,7 +1509,7 @@ static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSl
 static void TrySortBag(void){
     u8 pocket = gSaveBlock3Ptr->InventoryData.pocketNum;
     u8 numFavorites = gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocket];
-    u8 numItems = sMenuDataPtr->numItems[pocket] - numFavorites;
+    u16 numItems = sMenuDataPtr->numItems[pocket] - numFavorites;
     //can't sort with 0 or 1 item in bag + Exit Button
     if (numItems <= 2)
         PlaySE(SE_FAILURE);
@@ -1521,7 +1534,7 @@ static void SpriteCallback_Inventory_UpArrow(struct Sprite *sprite)
 
 static void SpriteCallback_Inventory_DownArrow(struct Sprite *sprite)
 {
-    u8 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
     u8 val = sprite->data[0] + 128;
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
@@ -1685,7 +1698,7 @@ enum{
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
 {
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    if(pocketId == KEYITEMS_POCKET)
+    if(shouldShowRegisteredItems())
         sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
@@ -1746,7 +1759,7 @@ void SpriteCB_MonIconCropped(struct Sprite *sprite)
     u8 partyNum = sprite->data[0];
 
     //Disable them when in the key items pocket
-    if(pocketId == KEYITEMS_POCKET)
+    if(shouldShowRegisteredItems())
         sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
@@ -1903,8 +1916,7 @@ static void Inventory_LoadBackgroundPalette(void)
 
 static void SpriteCB_RegisteredItem_Icon_Callback(struct Sprite *sprite)
 {
-    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    if(pocketId != KEYITEMS_POCKET)
+    if(!shouldShowRegisteredItems())
         sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
@@ -2077,6 +2089,13 @@ static const u8 sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_IT
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
+    [ITEM_TYPE_REPEL] = {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
     //Ultra Ball
     [ITEM_TYPE_POKE_BALL] = {
         INVENTORY_ITEM_OPTION_GIVE,
@@ -2199,6 +2218,10 @@ static const u8 sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_IT
 
 static const u8 sInventory_PocketOptions_Battle[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
     [ITEM_TYPE_FIELD_USE] = {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_REPEL] = {
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
@@ -2346,6 +2369,7 @@ static const u8 sText_Help_Bar_Cant_Toss[]          = _("You can't toss this ite
 static const u8 sText_Help_Bar_SortItemsHow[]       = _("Sort items how? {DPAD_UPDOWN} Move {A_BUTTON} Choose");
 static const u8 sText_Help_Bar_RegisterHow[]        = _("Register to what direction? {DPAD_UPDOWN} Select {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_ItemsSorted[]        = _("Items sorted by {STR_VAR_1}! {A_BUTTON}{B_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Used_Item[]          = _("{PLAYER} used the {STR_VAR_1} {A_BUTTON}{B_BUTTON} Confirm");
 
 #define INVENTORY_TEST_ITEM ITEM_VENUSAURITE
 #define INVENTORY_CURSOR_SQUARES 10
@@ -2381,9 +2405,9 @@ static const s8 sInventory_TypeRGB[NUMBER_OF_MON_TYPES][INTERFACE_RGB_COLORS] = 
 
 static u16 getCurrentSelectedItemIdx(void){
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    u8 numitems = sMenuDataPtr->numItems[pocketId];
+    u16 numitems = sMenuDataPtr->numItems[pocketId];
     struct BagPocket *pocket = &gBagPockets[pocketId];
-    u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
+    u16 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
     u16 itemId  = pocket->itemSlots[itemIdx].itemId;
 
     if(pocketId == FAVORITE_ITEMS_POCKET)
@@ -2474,14 +2498,15 @@ static u8 getSelectedItemOptionNum(u8 num){
 static void PrintToWindow(u8 windowId, u8 colorIdx)
 {
     const u8 *desc;
-    u8 i, j, x, x2, y, y2, itemIdx, row, row2, currentStatus;
+    u16 i, j, x, x2, y, y2, itemIdx;
+    u8 row, row2, currentStatus;
     u8 font = FONT_NARROW;
     u8 fontItemNames = FONT_SMALL;
     u8 itemNameFontColor = FONT_WHITE;
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     struct BagPocket *pocket = &gBagPockets[pocketId];
     u16 itemId, itemNum, moveNum;
-    u8 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
     u8 numPocketOptions = getSelectedItemNumOptions();
     u16 paletteIndex = INTERFACE_PALETTE_NUM * 16;
 
@@ -2886,7 +2911,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         break;
     }
 
-    if(pocketId != KEYITEMS_POCKET){
+    if(!shouldShowRegisteredItems()){
         //Held Items & Status Icons
         for(i = 0; i < PARTY_SIZE; i++){
             currentStatus = GetAilmentFromStatus(GetMonData(&gPlayerParty[i], MON_DATA_STATUS));
@@ -2984,6 +3009,10 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
             StringCopy(gStringVar4, sText_Help_Bar_Cant_Toss);
         break;
+        case INVENTORY_MESSAGE_USED_ITEM:
+            CopyItemName(itemId, gStringVar1);
+            StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Used_Item);
+        break;
         default:
             if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD)
                 StringCopy(gStringVar4, sText_Help_Bar);
@@ -3024,7 +3053,7 @@ static void Task_MenuTurnOff(u8 taskId)
 }
 
 static void MoveItemToTop(void){
-    u8 i;
+    u16 i;
     u16 currentItemIdx, tempItem, tempItemIdx, tempItemQuantity;
     struct BagPocket *pocket = &gBagPockets[gSaveBlock3Ptr->InventoryData.pocketNum];
     bool8 moveItem = 0;
@@ -3035,8 +3064,8 @@ static void MoveItemToTop(void){
         moveItem = TRUE;
 
     if(moveItem){
-        u8 numCurrentItems = gSaveBlock3Ptr->InventoryData.itemIdx;
-        u8 numNextItem;
+        u16 numCurrentItems = gSaveBlock3Ptr->InventoryData.itemIdx;
+        u16 numNextItem;
 
         for(i = 0; i < numCurrentItems; i++){
             numNextItem = currentItemIdx - i;
@@ -3057,8 +3086,8 @@ static void MoveItemToTop(void){
 static void MoveUnfavoriteItem(void){
     u16 i, tempItem, tempItemIdx, tempItemQuantity;
     struct BagPocket *pocket = &gBagPockets[gSaveBlock3Ptr->InventoryData.pocketNum];
-    u8 currentItemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
-    u8 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] - 1;
+    u16 currentItemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
+    u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] - 1;
     u8 numFavorites = gSaveBlock3Ptr->InventoryData.numFavoriteItems[gSaveBlock3Ptr->InventoryData.pocketNum] - currentItemIdx - 1;
     bool8 moveItem = FALSE;
 
@@ -3066,7 +3095,7 @@ static void MoveUnfavoriteItem(void){
         moveItem = TRUE;
 
     if(moveItem){
-        u8 numNextItem;
+        u16 numNextItem;
 
         for(i = 0; i < numFavorites; i++){
             numNextItem = currentItemIdx + i;
@@ -3085,9 +3114,9 @@ static void MoveUnfavoriteItem(void){
 }
 
 static void PressedUpButton_Inventory(){
-    u8 numitems        = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
-    u8 halfScreen      = INVENTORY_MAX_ITEMS_SHOWN / 2;
-    u8 finalhalfScreen = numitems - halfScreen - 1;
+    u16 numitems        = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u16 halfScreen      = INVENTORY_MAX_ITEMS_SHOWN / 2;
+    u16 finalhalfScreen = numitems - halfScreen - 1;
 
     if(INVENTORY_MAX_ITEMS_SHOWN > numitems){
         //Disables Scrolling if there are less moves than the screen can show
@@ -3116,9 +3145,9 @@ static void PressedUpButton_Inventory(){
 }
 
 static void PressedDownButton_Inventory(){
-    u8 numitems        = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
-    u8 halfScreen      = INVENTORY_MAX_ITEMS_SHOWN / 2; // 4
-    u8 finalhalfScreen = numitems - halfScreen - 1;  // 10 - 4 = 6
+    u16 numitems        = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u16 halfScreen      = INVENTORY_MAX_ITEMS_SHOWN / 2; // 4
+    u16 finalhalfScreen = numitems - halfScreen - 1;  // 10 - 4 = 6
 
     if(INVENTORY_MAX_ITEMS_SHOWN > numitems){
         //Disables Scrolling if there are less moves than the screen can show
@@ -3194,10 +3223,18 @@ void Task_UseItem(u8 taskId){
     if (!gPaletteFade.active)
     {
         u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-        if (pocketId != BERRIES_POCKET)
-            GetItemFieldFunc(gSpecialVar_ItemId)(taskId);
-        else
-            ItemUseOutOfBattle_Berry(taskId);
+
+        switch(pocketId){
+            case BERRIES_POCKET:
+                ItemUseOutOfBattle_Berry(taskId);
+            break;
+            case TMHM_POCKET:
+                ItemUseInBattle_UseTMHM(taskId);
+            break;
+            default:
+                GetItemFieldFunc(gSpecialVar_ItemId)(taskId);
+            break;
+        }
 
         Menu_FreeResources_NoCallback();
         removeTransparentBackground();
@@ -3206,11 +3243,52 @@ void Task_UseItem(u8 taskId){
     }
 }
 
-#define INVENTORY_ITEM_USE_WORKING FALSE
+void ItemUseOutOfBattle_Repel_New(u8 taskId)
+{
+    u16 ItemId = gSpecialVar_ItemId;
+    u16 LastRepelUsed = VarGet(VAR_LAST_REPEL_LURE_USED);
+    u16 remainingSteps = VarGet(VAR_REPEL_STEP_COUNT);
+    bool8 isLure = FALSE;
+    bool8 lastItemWasLure = FALSE;
+    bool8 isUsable = TRUE;
+
+    switch(ItemId){
+        case ITEM_LURE:
+        case ITEM_SUPER_LURE:
+        case ITEM_MAX_LURE:
+            isLure = TRUE;
+        break;
+    }
+
+    switch(LastRepelUsed){
+        case ITEM_LURE:
+        case ITEM_SUPER_LURE:
+        case ITEM_MAX_LURE:
+            lastItemWasLure = TRUE;
+        break;
+    }
+
+    if(remainingSteps != 0 && isLure != lastItemWasLure)
+        isUsable = FALSE;
+
+    if (isUsable){
+        u16 steps = GetItemHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK;
+        remainingSteps += steps;
+        VarSet(VAR_LAST_REPEL_LURE_USED, ItemId);
+        VarSet(VAR_REPEL_STEP_COUNT, remainingSteps);
+        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_USED_ITEM;
+    }
+    else
+        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+
+    PrintToWindow(WINDOW_1, FONT_WHITE);
+    gTasks[taskId].func = Task_MenuMain;
+}
 
 static void Task_ItemUseOnField(u8 taskId)
 {
     u16 itemId = gSpecialVar_ItemId = getCurrentSelectedItemIdx();
+    u8 itemType = sItemsByType[itemId];
 
     if (GetItemFieldFunc(itemId))
     {
@@ -3223,6 +3301,9 @@ static void Task_ItemUseOnField(u8 taskId)
         {
             //There is no Pokemon
             sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+        }
+        else if(itemType == ITEM_TYPE_REPEL){
+            gTasks[taskId].func = ItemUseOutOfBattle_Repel_New;
         }
         else
         {
@@ -3312,10 +3393,10 @@ void ItemUseInBattle_PartyMenu_New(u8 taskId)
     ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
-void ItemUseInBattle_PartyMenuChooseMove_New(u8 taskId)
+void ItemUseInBattle_UseTMHM(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_BattleChooseMove;
-    ItemUseInBattle_ShowPartyMenu(taskId);
+    gItemUseCB = ItemUseCB_TMHM;
+    SetMainCallback2(CB2_ShowPartyMenuForItemUse);
 }
 
 static void Task_ItemUseOnBattle(u8 taskId)
@@ -3373,9 +3454,9 @@ bool8 isCurrentItemFavorite(void){
 }
 
 static void useItemWithOption(u8 taskId){
-    u8 currentOption = getSelectedItemOptionNum(sMenuDataPtr->itemIdxPickMode);
+    u16 currentOption = getSelectedItemOptionNum(sMenuDataPtr->itemIdxPickMode);
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
+    u16 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
     u8 importance = gItemsInfo[getCurrentSelectedItemIdx()].importance;
     u8 oldPocketId = pocketId;
     u16 ownedCount;
@@ -3463,6 +3544,7 @@ static void useItemWithOption(u8 taskId){
         case INVENTORY_ITEM_OPTION_REGISTER:
             sMenuDataPtr->itemIdxPickMode = 0;
             sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REGISTER;
+            Menu_UpdateTilemap();
         break;
         case INVENTORY_ITEM_OPTION_CANCEL:
             sMenuDataPtr->itemIdxPickMode = 0;
@@ -3568,6 +3650,8 @@ static void RegisterItemIntoDirection(u8 direction){
 
     for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++)
         CreateRegisteredItemIcon(i);
+
+    Menu_UpdateTilemap();
 }
 
 #define MAX_CURSOR_NUM_X    2
@@ -3576,7 +3660,7 @@ static void RegisterItemIntoDirection(u8 direction){
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
-    u8 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
     u8 numPress = 0;
 
     if (JOY_NEW(A_BUTTON)){
@@ -3618,6 +3702,7 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MESSAGE_CANT_USE_ITEM:
                 case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
                 case INVENTORY_MESSAGE_SORTED_ITEMS_BY:
+                case INVENTORY_MESSAGE_USED_ITEM:
                     sMenuDataPtr->itemIdxPickMode = 0;
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                 break;
