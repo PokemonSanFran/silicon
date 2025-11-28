@@ -93,7 +93,7 @@ enum{
 struct MenuResources
 {
     u8 gfxLoadState;
-	u16 bgTilemapBuffers[NUM_INVENTORY_BACKGROUNDS][0x400];
+	u16 bgTilemapBuffers[NUM_INVENTORY_BACKGROUNDS][0x800];
     u16 itemIdx;
     u16 itemIdxPickMode;
     u16 numItemsToToss;
@@ -162,6 +162,7 @@ static void RemoveItemInSlot(u8 pocketId, u8 itemIdx);
 void ItemUseInBattle_UseTMHM(u8 taskId);
 void ItemUseOutOfBattle_Repel_New(u8 taskId);
 bool8 shouldShowRegisteredItems(void);
+void ForceReloadInventory(void);
 
 //bag sort
 static void SortItemsInBag(u8 pocket, u8 type);
@@ -187,7 +188,8 @@ static const struct BgTemplate sMenuBgTemplates[] =
     {
         .bg = 1,    // this bg loads the UI tilemap
         .charBaseIndex = 3,
-        .mapBaseIndex = 30,
+        .mapBaseIndex = 29,
+        .screenSize = 2,
         .priority = 2
     },
     {
@@ -404,30 +406,16 @@ bool8 shouldShowRegisteredItems(void){
     return UseRegisterGrid;
 }
 
+#define Y_VALUE_REGISTERED (8 * 19) << 8
 static void Menu_UpdateTilemap(void)
 {
-    try_free(sBg1TilemapBuffer);
-    sBg1TilemapBuffer = NULL;
-
-    ResetAllBgsCoordinates();
-    sBg1TilemapBuffer = Alloc(0x800);
-
-    memset(sBg1TilemapBuffer, 0, 0x800);
-    ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sMenuBgTemplates, NELEMS(sMenuBgTemplates));
-    SetBgTilemapBuffer(1, sBg1TilemapBuffer);
-    ScheduleBgCopyTilemapToVram(1);
-    ShowBg(0);
-    ShowBg(1);
-    ShowBg(2);
-
-    //INVENTORY_MODE_BATTLE, does not currently behaves correctly
-    if(shouldShowRegisteredItems()){
-        LZDecompressWram(sMenuTilemap_KeyItems, sBg1TilemapBuffer);
-        //DebugPrintfLevel(MGBA_LOG_WARN, "Menu_UpdateTilemap pocket ID; %d", gSaveBlock3Ptr->InventoryData.pocketNum);
-    }
+    s32 value;
+    if(!shouldShowRegisteredItems())
+        value = ChangeBgY(INVENTORY_BG_NORMAL, 0, BG_COORD_SET);
     else
-        LZDecompressWram(sMenuTilemap, sBg1TilemapBuffer);
+        value = ChangeBgY(INVENTORY_BG_NORMAL, Y_VALUE_REGISTERED, BG_COORD_SET);
+
+    DebugPrintfLevel(MGBA_LOG_WARN, "Menu_UpdateTilemap value; %d", value);
 }
 
 static void Menu_FreeResources(void)
@@ -530,12 +518,9 @@ static bool8 Menu_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            if(!shouldShowRegisteredItems())
-                LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
-            else
-                LZDecompressWram(sMenuTilemap_KeyItems, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
-
+            LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
             LZDecompressWram(sBackgroundTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_TRANSPARENT]);
+            Menu_UpdateTilemap();
             sMenuDataPtr->gfxLoadState++;
         }
         break;
@@ -607,7 +592,7 @@ u16 getMaxItemsFromPocket(u8 pocket){
     return 0;
 }
 
-static void ForceReloadInventory(void){
+void ForceReloadInventory(void){
     u16 i, j, k, itemId, count, maxCount;
     struct BagPocket *pocket;
 
@@ -623,6 +608,9 @@ static void ForceReloadInventory(void){
 
         sMenuDataPtr->numItems[i] = j + 1; // +1 for the Exit Button
     }
+
+    //Check for Registered Items
+    RemoveEmptyRegisteredItems();
 
     //Favorite Pocket
     sMenuDataPtr->numItems[FAVORITE_ITEMS_POCKET] = 0;
@@ -3426,11 +3414,13 @@ static void Task_ItemUseOnBattle(u8 taskId)
 
 void CB2_ReturnToInventoryMenu(void)
 {
+    CleanupOverworldWindowsAndTilemaps();
     Inventory_Init(savedCallback, INVENTORY_MODE_FIELD);
 }
 
 void CB2_ReturnToInventoryBattleMenu(void)
 {
+    CleanupOverworldWindowsAndTilemaps();
     Inventory_Init(savedCallback, INVENTORY_MODE_BATTLE);
 }
 
@@ -3459,15 +3449,19 @@ static void useItemWithOption(u8 taskId){
     u16 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
     u8 importance = gItemsInfo[getCurrentSelectedItemIdx()].importance;
     u8 oldPocketId = pocketId;
-    u16 ownedCount;
+    u16 oldItemIdx = itemIdx;
+    u16 ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
     bool8 wasFavorite = FALSE;
 
     if(pocketId == FAVORITE_ITEMS_POCKET){
-        pocketId   = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET_INDEX];
-        itemIdx    = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET];
-        ownedCount = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_QUANTITY];
+        //getCurrentSelectedItemIdx();
+        pocketId   = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_POCKET];
+        itemIdx    = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_POCKET_INDEX];
+        ownedCount = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_QUANTITY];
         wasFavorite = TRUE;
     }
+
+    ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
 
     switch(currentOption){
         case INVENTORY_ITEM_OPTION_USE:
@@ -3499,6 +3493,7 @@ static void useItemWithOption(u8 taskId){
         case INVENTORY_ITEM_OPTION_FAVORITE:
         {
             bool8 isAlreadyFavorite = isCurrentItemFavorite();
+            //oldPocketId
             if(pocketId != FAVORITE_ITEMS_POCKET){
                 if(!isAlreadyFavorite){
                     //Favorite
@@ -3654,6 +3649,16 @@ static void RegisterItemIntoDirection(u8 direction){
     Menu_UpdateTilemap();
 }
 
+void RemoveEmptyRegisteredItems(void){
+    u8 i;
+
+    for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++){
+        u16 item = gSaveBlock3Ptr->InventoryData.registeredItem[i];
+        if(!CheckBagHasItem(item, 1))
+            gSaveBlock3Ptr->InventoryData.registeredItem[i] = ITEM_NONE;
+    }
+}
+
 #define MAX_CURSOR_NUM_X    2
 #define MAX_CURSOR_NUM_Y    8
 #define NUM_LR_CURSOR_MOVES 5
@@ -3695,6 +3700,7 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MODE_REGISTER:
                     sMenuDataPtr->itemIdxPickMode = 0;
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+                    Menu_UpdateTilemap();
                 break;
                 //Generic Messages
                 case INVENTORY_MODE_MOVE_ITEMS:
@@ -3746,6 +3752,7 @@ static void Task_MenuMain(u8 taskId)
             case INVENTORY_MODE_REGISTER:
                 sMenuDataPtr->itemIdxPickMode = 0;
                 sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+                Menu_UpdateTilemap();
             break;
             default:
                 sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;

@@ -8,6 +8,7 @@ void Inventory_Init(MainCallback callback, u8 mode);
 void TryToRemoveFavoriteItem(u8 pocketId, u8 itemIdx);
 void CB2_ReturnToInventoryMenu(void);
 void CB2_ReturnToInventoryBattleMenu(void);
+void RemoveEmptyRegisteredItems(void);
 
 struct StringList
 {

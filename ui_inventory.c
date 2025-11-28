@@ -184,6 +184,7 @@ static const struct BgTemplate sMenuBgTemplates[] =
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
         .priority = 2
+        .screenSize = 1,
     },
     {
         .bg = 2,

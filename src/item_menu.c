@@ -2338,6 +2338,7 @@ bool8 UseRegisteredKeyItemOnField(void)
     u8 numRegisteredItems = CountRegisteredItems();
     // End inventory
 
+    RemoveEmptyRegisteredItems();
 
     if (InUnionRoom() == TRUE || InBattlePyramid() || InBattlePike() || InMultiPartnerRoom() == TRUE)
         return FALSE;
