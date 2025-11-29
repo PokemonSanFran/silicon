@@ -22753,6 +22753,111 @@
                 "species": "SPECIES_NYMBLE"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -22860,6 +22965,111 @@
                 "min_level": 17,
                 "max_level": 21,
                 "species": "SPECIES_SIZZLIPEDE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -22971,6 +23181,111 @@
                 "species": "SPECIES_SIZZLIPEDE"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -23078,6 +23393,111 @@
                 "min_level": 23,
                 "max_level": 26,
                 "species": "SPECIES_CUTIEFLY"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -23189,6 +23609,111 @@
                 "species": "SPECIES_GRUBBIN"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -23296,6 +23821,111 @@
                 "min_level": 35,
                 "max_level": 35,
                 "species": "SPECIES_GRUBBIN"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -23407,6 +24037,111 @@
                 "species": "SPECIES_GRUBBIN"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
+              }
+            ]
           }
         },
         {
@@ -23514,6 +24249,111 @@
                 "min_level": 71,
                 "max_level": 73,
                 "species": "SPECIES_CUTIEFLY"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
               }
             ]
           }
@@ -23625,6 +24465,111 @@
                 "species": "SPECIES_SPINARAK"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -23732,6 +24677,111 @@
                 "min_level": 38,
                 "max_level": 42,
                 "species": "SPECIES_SEWADDLE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -23952,6 +25002,111 @@
                 "species": "SPECIES_SPINARAK"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 83,
+                "max_level": 84,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -24059,6 +25214,111 @@
                 "min_level": 18,
                 "max_level": 20,
                 "species": "SPECIES_KRICKETOT"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -24170,6 +25430,111 @@
                 "species": "SPECIES_SCYTHER"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -24277,6 +25642,111 @@
                 "min_level": 74,
                 "max_level": 76,
                 "species": "SPECIES_SIZZLIPEDE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -24388,6 +25858,111 @@
                 "species": "SPECIES_CUTIEFLY"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -24495,6 +26070,111 @@
                 "min_level": 24,
                 "max_level": 24,
                 "species": "SPECIES_CUTIEFLY"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -24606,6 +26286,111 @@
                 "species": "SPECIES_BLIPBUG"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -24713,6 +26498,111 @@
                 "min_level": 25,
                 "max_level": 29,
                 "species": "SPECIES_BLIPBUG"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
               }
             ]
           }
@@ -24824,6 +26714,111 @@
                 "species": "SPECIES_KRICKETOT"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -24931,6 +26926,111 @@
                 "min_level": 57,
                 "max_level": 58,
                 "species": "SPECIES_SCYTHER"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -25042,6 +27142,111 @@
                 "species": "SPECIES_KRICKETOT"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -25149,6 +27354,111 @@
                 "min_level": 58,
                 "max_level": 60,
                 "species": "SPECIES_SCYTHER"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -25260,6 +27570,111 @@
                 "species": "SPECIES_SEWADDLE"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 83,
+                "max_level": 84,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -25367,6 +27782,111 @@
                 "min_level": 65,
                 "max_level": 69,
                 "species": "SPECIES_KRICKETOT"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -25478,6 +27998,111 @@
                 "species": "SPECIES_GRUBBIN"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -25585,6 +28210,111 @@
                 "min_level": 46,
                 "max_level": 48,
                 "species": "SPECIES_SEWADDLE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -25696,6 +28426,111 @@
                 "species": "SPECIES_NYMBLE"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -25803,6 +28638,111 @@
                 "min_level": 38,
                 "max_level": 42,
                 "species": "SPECIES_BLIPBUG"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -25914,6 +28854,111 @@
                 "species": "SPECIES_BLIPBUG"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -26021,6 +29066,111 @@
                 "min_level": 32,
                 "max_level": 36,
                 "species": "SPECIES_KRICKETOT"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
               }
             ]
           }
@@ -26132,6 +29282,111 @@
                 "species": "SPECIES_CUTIEFLY"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -26239,6 +29494,111 @@
                 "min_level": 71,
                 "max_level": 73,
                 "species": "SPECIES_KRICKETOT"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
               }
             ]
           }
@@ -26350,6 +29710,111 @@
                 "species": "SPECIES_BLIPBUG"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
+              }
+            ]
           }
         },
         {
@@ -26457,6 +29922,111 @@
                 "min_level": 67,
                 "max_level": 71,
                 "species": "SPECIES_BLIPBUG"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
               }
             ]
           }
@@ -26568,6 +30138,111 @@
                 "species": "SPECIES_BLIPBUG"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 83,
+                "max_level": 84,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -26675,6 +30350,111 @@
                 "min_level": 22,
                 "max_level": 26,
                 "species": "SPECIES_BLIPBUG"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -26786,6 +30566,111 @@
                 "species": "SPECIES_BLIPBUG"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -26893,6 +30778,111 @@
                 "min_level": 44,
                 "max_level": 47,
                 "species": "SPECIES_PARAS"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -27004,6 +30994,111 @@
                 "species": "SPECIES_BLIPBUG"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 83,
+                "max_level": 84,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -27111,6 +31206,111 @@
                 "min_level": 31,
                 "max_level": 34,
                 "species": "SPECIES_SPINARAK"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
               }
             ]
           }
@@ -27222,6 +31422,111 @@
                 "species": "SPECIES_GRUBBIN"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 83,
+                "max_level": 84,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -27329,6 +31634,111 @@
                 "min_level": 17,
                 "max_level": 20,
                 "species": "SPECIES_NYMBLE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -27440,6 +31850,111 @@
                 "species": "SPECIES_CUTIEFLY"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -27547,6 +32062,111 @@
                 "min_level": 28,
                 "max_level": 32,
                 "species": "SPECIES_SEWADDLE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
               }
             ]
           }
@@ -27658,6 +32278,111 @@
                 "species": "SPECIES_NYMBLE"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -27765,6 +32490,111 @@
                 "min_level": 52,
                 "max_level": 53,
                 "species": "SPECIES_NYMBLE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -27985,6 +32815,111 @@
                 "species": "SPECIES_NYMBLE"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -28092,6 +33027,111 @@
                 "min_level": 77,
                 "max_level": 80,
                 "species": "SPECIES_KRICKETOT"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -28203,6 +33243,111 @@
                 "species": "SPECIES_LARVESTA"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -28310,6 +33455,111 @@
                 "min_level": 32,
                 "max_level": 32,
                 "species": "SPECIES_SIZZLIPEDE"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -28421,6 +33671,111 @@
                 "species": "SPECIES_PARAS"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -28528,6 +33883,111 @@
                 "min_level": 18,
                 "max_level": 20,
                 "species": "SPECIES_PARAS"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
               }
             ]
           }
@@ -28639,6 +34099,111 @@
                 "species": "SPECIES_SCYTHER"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
           }
         },
         {
@@ -28748,6 +34313,111 @@
                 "species": "SPECIES_LARVESTA"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
@@ -28855,6 +34525,111 @@
                 "min_level": 73,
                 "max_level": 76,
                 "species": "SPECIES_LARVESTA"
+              }
+            ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
@@ -29291,6 +35066,551 @@
                 "min_level": 62,
                 "max_level": 65,
                 "species": "SPECIES_PARAS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PIOCA_BRIDGE",
+          "base_label": "gPiocaBridge_Morning",
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 83,
+                "max_level": 84,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NAVAL_BASE_EXTERIOR",
+          "base_label": "gNavalBaseExterior_Morning",
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_BOMBIRDIER"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 81,
+                "species": "SPECIES_TOGEKISS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SHARPRISE_SPIRE_PARK",
+          "base_label": "gSharpriseSpire_Park",
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NONGYU_BRIDGE",
+          "base_label": "gNongyuBridge",
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_CORVIKNIGHT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 71,
+                "max_level": 75,
+                "species": "SPECIES_DRAGONITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_FORT_YOBU",
+          "base_label": "gFortYobu",
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_TOGETIC"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TOUCANNON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_NOIVERN"
               }
             ]
           }
