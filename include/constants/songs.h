@@ -1,8 +1,520 @@
 #ifndef GUARD_CONSTANTS_SONGS_H
 #define GUARD_CONSTANTS_SONGS_H
 
+enum
+{
+    MUS_DUMMY,
+    SE_USE_ITEM,
+    SE_PC_LOGIN,
+    SE_PC_OFF,
+    SE_PC_ON,
+    SE_SELECT,
+    SE_WIN_OPEN,
+    SE_WALL_HIT,
+    SE_DOOR,
+    SE_EXIT,
+    SE_LEDGE,
+    SE_BIKE_BELL,
+    SE_NOT_EFFECTIVE,
+    SE_EFFECTIVE,
+    SE_SUPER_EFFECTIVE,
+    SE_BALL_OPEN,
+    SE_FAINT,
+    SE_FLEE,
+    SE_SLIDING_DOOR,
+    SE_SHIP,
+    SE_BANG,
+    SE_PIN,
+    SE_BOO,
+    SE_BALL,
+    SE_CONTEST_PLACE,
+    SE_A,
+    SE_I,
+    SE_U,
+    SE_E,
+    SE_O,
+    SE_N,
+    SE_SUCCESS,
+    SE_FAILURE,
+    SE_EXP,
+    SE_BIKE_HOP,
+    SE_SWITCH,
+    SE_CLICK,
+    SE_FU_ZAKU,
+    SE_CONTEST_CONDITION_LOSE,
+    SE_LAVARIDGE_FALL_WARP,
+    SE_ICE_STAIRS,
+    SE_ICE_BREAK,
+    SE_ICE_CRACK,
+    SE_FALL,
+    SE_UNLOCK,
+    SE_WARP_IN,
+    SE_WARP_OUT,
+    SE_REPEL,
+    SE_ROTATING_GATE,
+    SE_TRUCK_MOVE,
+    SE_TRUCK_STOP,
+    SE_TRUCK_UNLOAD,
+    SE_TRUCK_DOOR,
+    SE_BERRY_BLENDER,
+    SE_CARD,
+    SE_SAVE,
+    SE_BALL_BOUNCE_1,
+    SE_BALL_BOUNCE_2,
+    SE_BALL_BOUNCE_3,
+    SE_BALL_BOUNCE_4,
+    SE_BALL_TRADE,
+    SE_BALL_THROW,
+    SE_NOTE_C,
+    SE_NOTE_D,
+    SE_NOTE_E,
+    SE_NOTE_F,
+    SE_NOTE_G,
+    SE_NOTE_A,
+    SE_NOTE_B,
+    SE_NOTE_C_HIGH,
+    SE_PUDDLE,
+    SE_BRIDGE_WALK,
+    SE_ITEMFINDER,
+    SE_DING_DONG,
+    SE_BALLOON_RED,
+    SE_BALLOON_BLUE,
+    SE_BALLOON_YELLOW,
+    SE_BREAKABLE_DOOR,
+    SE_MUD_BALL,
+    SE_FIELD_POISON,
+    SE_ESCALATOR,
+    SE_THUNDERSTORM,
+    SE_THUNDERSTORM_STOP,
+    SE_DOWNPOUR,
+    SE_DOWNPOUR_STOP,
+    SE_RAIN,
+    SE_RAIN_STOP,
+    SE_THUNDER,
+    SE_THUNDER2,
+    SE_ELEVATOR,
+    SE_LOW_HEALTH,
+    SE_EXP_MAX,
+    SE_ROULETTE_BALL,
+    SE_ROULETTE_BALL2,
+    SE_TAILLOW_WING_FLAP,
+    SE_SHOP,
+    SE_CONTEST_HEART,
+    SE_CONTEST_CURTAIN_RISE,
+    SE_CONTEST_CURTAIN_FALL,
+    SE_CONTEST_ICON_CHANGE,
+    SE_CONTEST_ICON_CLEAR,
+    SE_CONTEST_MONS_TURN,
+    SE_SHINY,
+    SE_INTRO_BLAST,
+    SE_MUGSHOT,
+    SE_APPLAUSE,
+    SE_VEND,
+    SE_ORB,
+    SE_DEX_SCROLL,
+    SE_DEX_PAGE,
+    SE_POKENAV_ON,
+    SE_POKENAV_OFF,
+    SE_DEX_SEARCH,
+    SE_EGG_HATCH,
+    SE_BALL_TRAY_ENTER,
+    SE_BALL_TRAY_BALL,
+    SE_BALL_TRAY_EXIT,
+    SE_GLASS_FLUTE,
+    SE_M_THUNDERBOLT,
+    SE_M_THUNDERBOLT2,
+    SE_M_HARDEN,
+    SE_M_NIGHTMARE,
+    SE_M_VITAL_THROW,
+    SE_M_VITAL_THROW2,
+    SE_M_BUBBLE,
+    SE_M_BUBBLE2,
+    SE_M_BUBBLE3,
+    SE_M_RAIN_DANCE,
+    SE_M_CUT,
+    SE_M_STRING_SHOT,
+    SE_M_STRING_SHOT2,
+    SE_M_ROCK_THROW,
+    SE_M_GUST,
+    SE_M_GUST2,
+    SE_M_DOUBLE_SLAP,
+    SE_M_DOUBLE_TEAM,
+    SE_M_RAZOR_WIND,
+    SE_M_ICY_WIND,
+    SE_M_THUNDER_WAVE,
+    SE_M_COMET_PUNCH,
+    SE_M_MEGA_KICK,
+    SE_M_MEGA_KICK2,
+    SE_M_CRABHAMMER,
+    SE_M_JUMP_KICK,
+    SE_M_FLAME_WHEEL,
+    SE_M_FLAME_WHEEL2,
+    SE_M_FLAMETHROWER,
+    SE_M_FIRE_PUNCH,
+    SE_M_TOXIC,
+    SE_M_SACRED_FIRE,
+    SE_M_SACRED_FIRE2,
+    SE_M_EMBER,
+    SE_M_TAKE_DOWN,
+    SE_M_BLIZZARD,
+    SE_M_BLIZZARD2,
+    SE_M_SCRATCH,
+    SE_M_VICEGRIP,
+    SE_M_WING_ATTACK,
+    SE_M_FLY,
+    SE_M_SAND_ATTACK,
+    SE_M_RAZOR_WIND2,
+    SE_M_BITE,
+    SE_M_HEADBUTT,
+    SE_M_SURF,
+    SE_M_HYDRO_PUMP,
+    SE_M_WHIRLPOOL,
+    SE_M_HORN_ATTACK,
+    SE_M_TAIL_WHIP,
+    SE_M_MIST,
+    SE_M_POISON_POWDER,
+    SE_M_BIND,
+    SE_M_DRAGON_RAGE,
+    SE_M_SING,
+    SE_M_PERISH_SONG,
+    SE_M_PAY_DAY,
+    SE_M_DIG,
+    SE_M_DIZZY_PUNCH,
+    SE_M_SELF_DESTRUCT,
+    SE_M_EXPLOSION,
+    SE_M_ABSORB_2,
+    SE_M_ABSORB,
+    SE_M_SCREECH,
+    SE_M_BUBBLE_BEAM,
+    SE_M_BUBBLE_BEAM2,
+    SE_M_SUPERSONIC,
+    SE_M_BELLY_DRUM,
+    SE_M_METRONOME,
+    SE_M_BONEMERANG,
+    SE_M_LICK,
+    SE_M_PSYBEAM,
+    SE_M_FAINT_ATTACK,
+    SE_M_SWORDS_DANCE,
+    SE_M_LEER,
+    SE_M_SWAGGER,
+    SE_M_SWAGGER2,
+    SE_M_HEAL_BELL,
+    SE_M_CONFUSE_RAY,
+    SE_M_SNORE,
+    SE_M_BRICK_BREAK,
+    SE_M_GIGA_DRAIN,
+    SE_M_PSYBEAM2,
+    SE_M_SOLAR_BEAM,
+    SE_M_PETAL_DANCE,
+    SE_M_TELEPORT,
+    SE_M_MINIMIZE,
+    SE_M_SKETCH,
+    SE_M_SWIFT,
+    SE_M_REFLECT,
+    SE_M_BARRIER,
+    SE_M_DETECT,
+    SE_M_LOCK_ON,
+    SE_M_MOONLIGHT,
+    SE_M_CHARM,
+    SE_M_CHARGE,
+    SE_M_STRENGTH,
+    SE_M_HYPER_BEAM,
+    SE_M_WATERFALL,
+    SE_M_REVERSAL,
+    SE_M_ACID_ARMOR,
+    SE_M_SANDSTORM,
+    SE_M_TRI_ATTACK,
+    SE_M_TRI_ATTACK2,
+    SE_M_ENCORE,
+    SE_M_ENCORE2,
+    SE_M_BATON_PASS,
+    SE_M_MILK_DRINK,
+    SE_M_ATTRACT,
+    SE_M_ATTRACT2,
+    SE_M_MORNING_SUN,
+    SE_M_FLATTER,
+    SE_M_SAND_TOMB,
+    SE_M_GRASSWHISTLE,
+    SE_M_SPIT_UP,
+    SE_M_DIVE,
+    SE_M_EARTHQUAKE,
+    SE_M_TWISTER,
+    SE_M_SWEET_SCENT,
+    SE_M_YAWN,
+    SE_M_SKY_UPPERCUT,
+    SE_M_STAT_INCREASE,
+    SE_M_HEAT_WAVE,
+    SE_M_UPROAR,
+    SE_M_HAIL,
+    SE_M_COSMIC_POWER,
+    SE_M_TEETER_DANCE,
+    SE_M_STAT_DECREASE,
+    SE_M_HAZE,
+    SE_M_HYPER_BEAM2,
+    SE_RG_DOOR,
+    SE_RG_CARD_FLIP,
+    SE_RG_CARD_FLIPPING,
+    SE_RG_CARD_OPEN,
+    SE_RG_BAG_CURSOR,
+    SE_RG_BAG_POCKET,
+    SE_RG_BALL_CLICK,
+    SE_RG_SHOP,
+    SE_RG_SS_ANNE_HORN,
+    SE_RG_HELP_OPEN,
+    SE_RG_HELP_CLOSE,
+    SE_RG_HELP_ERROR,
+    SE_RG_DEOXYS_MOVE,
+    SE_RG_POKE_JUMP_SUCCESS,
+    SE_RG_POKE_JUMP_FAILURE,
+    SE_POKENAV_CALL,
+    SE_POKENAV_HANG_UP,
+    SE_ARENA_TIMEUP1,
+    SE_ARENA_TIMEUP2,
+    SE_PIKE_CURTAIN_CLOSE,
+    SE_PIKE_CURTAIN_OPEN,
+    SE_SUDOWOODO_SHAKE,
+    END_SE = SE_SUDOWOODO_SHAKE,
+    START_MUS = 350,
+    MUS_LITTLEROOT_TEST = START_MUS,
+    MUS_GSC_ROUTE38,
+    MUS_CAUGHT,
+    MUS_VICTORY_WILD,
+    MUS_VICTORY_GYM_LEADER,
+    MUS_VICTORY_LEAGUE,
+    MUS_C_COMM_CENTER,
+    MUS_GSC_PEWTER,
+    MUS_C_VS_LEGEND_BEAST,
+    MUS_ROUTE101,
+    MUS_ROUTE110,
+    MUS_ROUTE120,
+    MUS_PETALBURG,
+    MUS_OLDALE,
+    MUS_GYM,
+    MUS_SURF,
+    MUS_PETALBURG_WOODS,
+    MUS_LEVEL_UP,
+    MUS_HEAL,
+    MUS_OBTAIN_BADGE,
+    MUS_OBTAIN_ITEM,
+    MUS_EVOLVED,
+    MUS_OBTAIN_TMHM,
+    MUS_LILYCOVE_MUSEUM,
+    MUS_ROUTE122,
+    MUS_OCEANIC_MUSEUM,
+    MUS_EVOLUTION_INTRO,
+    MUS_EVOLUTION,
+    MUS_MOVE_DELETED,
+    MUS_ENCOUNTER_GIRL,
+    MUS_ENCOUNTER_MALE,
+    MUS_ABANDONED_SHIP,
+    MUS_FORTREE,
+    MUS_BIRCH_LAB,
+    MUS_B_TOWER_RS,
+    MUS_ENCOUNTER_SWIMMER,
+    MUS_CAVE_OF_ORIGIN,
+    MUS_OBTAIN_BERRY,
+    MUS_AWAKEN_LEGEND,
+    MUS_SLOTS_JACKPOT,
+    MUS_SLOTS_WIN,
+    MUS_TOO_BAD,
+    MUS_ROULETTE,
+    MUS_LINK_CONTEST_P1,
+    MUS_LINK_CONTEST_P2,
+    MUS_LINK_CONTEST_P3,
+    MUS_LINK_CONTEST_P4,
+    MUS_ENCOUNTER_RICH,
+    MUS_VERDANTURF,
+    MUS_RUSTBORO,
+    MUS_POKE_CENTER,
+    MUS_ROUTE104,
+    MUS_ROUTE119,
+    MUS_CYCLING,
+    MUS_POKE_MART,
+    MUS_LITTLEROOT,
+    MUS_MT_CHIMNEY,
+    MUS_ENCOUNTER_FEMALE,
+    MUS_LILYCOVE,
+    MUS_DESERT,
+    MUS_HELP,
+    MUS_UNDERWATER,
+    MUS_VICTORY_TRAINER,
+    MUS_TITLE,
+    MUS_INTRO,
+    MUS_ENCOUNTER_MAY,
+    MUS_ENCOUNTER_INTENSE,
+    MUS_ENCOUNTER_COOL,
+    MUS_ROUTE113,
+    MUS_ENCOUNTER_AQUA,
+    MUS_FOLLOW_ME,
+    MUS_ENCOUNTER_BRENDAN,
+    MUS_EVER_GRANDE,
+    MUS_ENCOUNTER_SUSPICIOUS,
+    MUS_VICTORY_AQUA_MAGMA,
+    MUS_CABLE_CAR,
+    MUS_GAME_CORNER,
+    MUS_DEWFORD,
+    MUS_SAFARI_ZONE,
+    MUS_VICTORY_ROAD,
+    MUS_AQUA_MAGMA_HIDEOUT,
+    MUS_SAILING,
+    MUS_MT_PYRE,
+    MUS_SLATEPORT,
+    MUS_MT_PYRE_EXTERIOR,
+    MUS_SCHOOL,
+    MUS_HALL_OF_FAME,
+    MUS_FALLARBOR,
+    MUS_SEALED_CHAMBER,
+    MUS_CONTEST_WINNER,
+    MUS_CONTEST,
+    MUS_ENCOUNTER_MAGMA,
+    MUS_INTRO_BATTLE,
+    MUS_ABNORMAL_WEATHER,
+    MUS_WEATHER_GROUDON,
+    MUS_SOOTOPOLIS,
+    MUS_CONTEST_RESULTS,
+    MUS_HALL_OF_FAME_ROOM,
+    MUS_TRICK_HOUSE,
+    MUS_ENCOUNTER_TWINS,
+    MUS_ENCOUNTER_ELITE_FOUR,
+    MUS_ENCOUNTER_HIKER,
+    MUS_CONTEST_LOBBY,
+    MUS_ENCOUNTER_INTERVIEWER,
+    MUS_ENCOUNTER_CHAMPION,
+    MUS_CREDITS,
+    MUS_END,
+    MUS_B_FRONTIER,
+    MUS_B_ARENA,
+    MUS_OBTAIN_B_POINTS,
+    MUS_REGISTER_MATCH_CALL,
+    MUS_B_PYRAMID,
+    MUS_B_PYRAMID_TOP,
+    MUS_B_PALACE,
+    MUS_RAYQUAZA_APPEARS,
+    MUS_B_TOWER,
+    MUS_OBTAIN_SYMBOL,
+    MUS_B_DOME,
+    MUS_B_PIKE,
+    MUS_B_FACTORY,
+    MUS_VS_RAYQUAZA,
+    MUS_VS_FRONTIER_BRAIN,
+    MUS_VS_MEW,
+    MUS_B_DOME_LOBBY,
+    MUS_VS_WILD,
+    MUS_VS_AQUA_MAGMA,
+    MUS_VS_TRAINER,
+    MUS_VS_GYM_LEADER,
+    MUS_VS_CHAMPION,
+    MUS_VS_REGI,
+    MUS_VS_KYOGRE_GROUDON,
+    MUS_VS_RIVAL,
+    MUS_VS_ELITE_FOUR,
+    MUS_VS_AQUA_MAGMA_LEADER,
+    MUS_RG_FOLLOW_ME,
+    MUS_RG_GAME_CORNER,
+    MUS_RG_ROCKET_HIDEOUT,
+    MUS_RG_GYM,
+    MUS_RG_JIGGLYPUFF,
+    MUS_RG_INTRO_FIGHT,
+    MUS_RG_TITLE,
+    MUS_RG_CINNABAR,
+    MUS_RG_LAVENDER,
+    MUS_RG_HEAL,
+    MUS_RG_CYCLING,
+    MUS_RG_ENCOUNTER_ROCKET,
+    MUS_RG_ENCOUNTER_GIRL,
+    MUS_RG_ENCOUNTER_BOY,
+    MUS_RG_HALL_OF_FAME,
+    MUS_RG_VIRIDIAN_FOREST,
+    MUS_RG_MT_MOON,
+    MUS_RG_POKE_MANSION,
+    MUS_RG_CREDITS,
+    MUS_RG_ROUTE1,
+    MUS_RG_ROUTE24,
+    MUS_RG_ROUTE3,
+    MUS_RG_ROUTE11,
+    MUS_RG_VICTORY_ROAD,
+    MUS_RG_VS_GYM_LEADER,
+    MUS_RG_VS_TRAINER,
+    MUS_RG_VS_WILD,
+    MUS_RG_VS_CHAMPION,
+    MUS_RG_PALLET,
+    MUS_RG_OAK_LAB,
+    MUS_RG_OAK,
+    MUS_RG_POKE_CENTER,
+    MUS_RG_SS_ANNE,
+    MUS_RG_SURF,
+    MUS_RG_POKE_TOWER,
+    MUS_RG_SILPH,
+    MUS_RG_FUCHSIA,
+    MUS_RG_CELADON,
+    MUS_RG_VICTORY_TRAINER,
+    MUS_RG_VICTORY_WILD,
+    MUS_RG_VICTORY_GYM_LEADER,
+    MUS_RG_VERMILLION,
+    MUS_RG_PEWTER,
+    MUS_RG_ENCOUNTER_RIVAL,
+    MUS_RG_RIVAL_EXIT,
+    MUS_RG_DEX_RATING,
+    MUS_RG_OBTAIN_KEY_ITEM,
+    MUS_RG_CAUGHT_INTRO,
+    MUS_RG_PHOTO,
+    MUS_RG_GAME_FREAK,
+    MUS_RG_CAUGHT,
+    MUS_RG_NEW_GAME_INSTRUCT,
+    MUS_RG_NEW_GAME_INTRO,
+    MUS_RG_NEW_GAME_EXIT,
+    MUS_RG_POKE_JUMP,
+    MUS_RG_UNION_ROOM,
+    MUS_RG_NET_CENTER,
+    MUS_RG_MYSTERY_GIFT,
+    MUS_RG_BERRY_PICK,
+    MUS_RG_SEVII_CAVE,
+    MUS_RG_TEACHY_TV_SHOW,
+    MUS_RG_SEVII_ROUTE,
+    MUS_RG_SEVII_DUNGEON,
+    MUS_RG_SEVII_123,
+    MUS_RG_SEVII_45,
+    MUS_RG_SEVII_67,
+    MUS_RG_POKE_FLUTE,
+    MUS_RG_VS_DEOXYS,
+    MUS_RG_VS_MEWTWO,
+    MUS_RG_VS_LEGEND,
+    MUS_RG_ENCOUNTER_GYM_LEADER,
+    MUS_RG_ENCOUNTER_DEOXYS,
+    MUS_RG_TRAINER_TOWER,
+    MUS_RG_SLOW_PALLET,
+    MUS_RG_TEACHY_TV_MENU,
+    MUS_HODOU_CITY,
+    MUS_TORA_TOWN,
+    MUS_CUCUNO_TOWN,
+    MUS_ENCOUNTER_SCIENTIST,
+    MUS_ENCOUNTER_POLICE_OFFICER,
+    MUS_ENCOUNTER_CONSTRUCTION_WORKER_FIREFIGHTER_POSTAL_WORKER_NURSE_DOCTOR_RAIL,
+    MUS_ENCOUNTER_MARTIAL_ARTIST,
+    MUS_ENCOUNTER_CASUAL_DUDE,
+    MUS_ENCOUNTER_BACKPACKER_HIKER,
+    MUS_HALL_OF_FAME_SILICON,
+    MUS_PETAROSA_BOROUGH,
+    MUS_SHARPRISE_STADIUM,
+    MUS_PIOCA_BRIDGE,
+    MUS_POPIDORA_PIER,
+    MUS_ENCOUNTER_PSYCHIC,
+    MUS_ENCOUNTER_FISHER,
+    MUS_HALAI_ISLAND,
+    MUS_GLAVEZ_HILL,
+    MUS_ENCOUNTER_SOLICITOR,
+    MUS_NAME_CHARACTER_OPTIONSFIRSTRUN_MYSTERYGIFT,
+    MUS_GET_BADGE,
+    MUS_SRC_GETTING_ARRESTED,
+    MUS_WELCOME_TO_THE_WAR_ROOM,
+    MUS_LAST,
+};
+#define END_MUS (MUS_LAST - 1)
+
+
 // Original JP names listed on right, along with any additional notes
 
+/*
 #define MUS_DUMMY                   0 // MUS_DUMMY
 #define SE_USE_ITEM                 1 // SE_KAIFUKU
 #define SE_PC_LOGIN                 2 // SE_PC_LOGIN
@@ -490,61 +1002,122 @@
 #define MUS_RG_TRAINER_TOWER        556 // MUS_RG_T_TOWER
 #define MUS_RG_SLOW_PALLET          557 // MUS_RG_SLOWMASARA
 #define MUS_RG_TEACHY_TV_MENU       558 // MUS_RG_TVNOIZE
-#define END_MUS                     MUS_RG_TEACHY_TV_MENU
+#define MUS_PASCAL_ACCEPT_LETTER            559
+#define MUS_PASCAL_ALAMEDA                  560
+#define MUS_PASCAL_ALAMEDA_POST_EARTHQUAKE  561
+#define MUS_PASCAL_BATTLE_ARCADE            562
+#define MUS_PASCAL_BATTLE_ARCHER            563
+#define MUS_PASCAL_BATTLE_FACTORY           564
+#define MUS_PASCAL_BATTLE_FINALS            565
+#define MUS_PASCAL_BATTLE_TOWER             566
+#define MUS_PASCAL_BERKELEY                 567
+#define MUS_PASCAL_BERNALHILL1              568
+#define MUS_PASCAL_BERNALHILL               569
+#define MUS_PASCAL_CHASECENTER              570
+#define MUS_HODOU_CITY                      571
+#define MUS_PASCAL_DOGPATCH                 572
+#define MUS_PASCAL_ENCOUNTER_SOLICITOR      573
+#define MUS_PASCAL_FORT_POINT_GYM           574
+#define MUS_PASCAL_GLDGTEWILDS              575
+#define MUS_PASCAL_GOLDENGATE_PARK          576
+#define MUS_PASCAL_HAIGHTAHBURY_GYM         577
+#define MUS_PASCAL_HALL_OF_FAME             578
+#define MUS_PASCAL_HOW_DISSAPOINTING        579
+#define MUS_TORA_TOWN                       580
+#define MUS_PASCAL_MARIN                    581
+#define MUS_PASCAL_MASTER_DOJO              582
+#define MUS_PASCAL_MISSION                  583
+#define MUS_PASCAL_PACIFICA                 584
+#define MUS_PASCAL_POKEMON_CENTER           585
+#define MUS_PASCAL_ROSE_RAID                586
+#define MUS_PASCAL_ROUTE_13                 587
+#define MUS_PASCAL_ROUTE_14                 588
+#define MUS_PASCAL_ROUTE_17                 589
+#define MUS_PASCAL_ROUTE_5                  590
+#define MUS_PASCAL_ROUTE_62                 591
+#define MUS_PASCAL_ROUTE_8                  592
+#define MUS_PASCAL_ROUTE_9                  593
+#define MUS_PASCAL_SALESFORCETOWERPARK      594
+#define MUS_PASCAL_SALESFORCETOWER_RAID     595
+#define MUS_PASCAL_SAVE                     596
+#define MUS_PASCAL_SOMA                     597
+#define MUS_PASCAL_SUNSET                   598
+#define MUS_PASCAL_TREASURE_ISLAND          599
+#define MUS_PASCAL_TWIN_PEAKS               600
+#define MUS_PASCAL_VS_ELITE_FOUR            601
+#define MUS_PASCAL_VS_ULTRA_BEASTS          602
+#define MUS_PASCAL_WHY_DIDNT_YOU_RAT_ME_OUT 603
+#define MUS_CUCUNO_TOWN                     604
+#define MUS_ENCOUNTER_SCIENTIST             605
+#define MUS_ENCOUNTER_POLICE_OFFICER        606
+#define MUS_ENCOUNTER_CONSTRUCTION_WORKER_FIREFIGHTER_POSTAL_WORKER_NURSE_DOCTOR_RAIL 607
+#define MUS_ENCOUNTER_MARTIAL_ARTIST 608
+#define MUS_ENCOUNTER_CASUAL_DUDE 609
+#define MUS_ENCOUNTER_BACKPACKER_HIKER 610
+#define MUS_HALL_OF_FAME_SILICON 611
+#define MUS_GLAVEZ_HILL 612
+#define MUS_SHARPRISE_STADIUM 615
+#define MUS_PIOCA_BRIDGE 616
+#define MUS_POPIDORA_PIER 617
+#define MUS_ENCOUNTER_PSYCHIC 618
+#define MUS_ENCOUNTER_FISHER 619
+#define MUS_HALAI_ISLAND 620
+#define END_MUS                             MUS_HALAI_ISLAND
+*/
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
-#define PH_TRAP_BLEND               559
-#define PH_TRAP_HELD                560
-#define PH_TRAP_SOLO                561
-#define PH_FACE_BLEND               562
-#define PH_FACE_HELD                563
-#define PH_FACE_SOLO                564
-#define PH_CLOTH_BLEND              565
-#define PH_CLOTH_HELD               566
-#define PH_CLOTH_SOLO               567
-#define PH_DRESS_BLEND              568
-#define PH_DRESS_HELD               569
-#define PH_DRESS_SOLO               570
-#define PH_FLEECE_BLEND             571
-#define PH_FLEECE_HELD              572
-#define PH_FLEECE_SOLO              573
-#define PH_KIT_BLEND                574
-#define PH_KIT_HELD                 575
-#define PH_KIT_SOLO                 576
-#define PH_PRICE_BLEND              577
-#define PH_PRICE_HELD               578
-#define PH_PRICE_SOLO               579
-#define PH_LOT_BLEND                580
-#define PH_LOT_HELD                 581
-#define PH_LOT_SOLO                 582
-#define PH_GOAT_BLEND               583
-#define PH_GOAT_HELD                584
-#define PH_GOAT_SOLO                585
-#define PH_THOUGHT_BLEND            586
-#define PH_THOUGHT_HELD             587
-#define PH_THOUGHT_SOLO             588
-#define PH_CHOICE_BLEND             589
-#define PH_CHOICE_HELD              590
-#define PH_CHOICE_SOLO              591
-#define PH_MOUTH_BLEND              592
-#define PH_MOUTH_HELD               593
-#define PH_MOUTH_SOLO               594
-#define PH_FOOT_BLEND               595
-#define PH_FOOT_HELD                596
-#define PH_FOOT_SOLO                597
-#define PH_GOOSE_BLEND              598
-#define PH_GOOSE_HELD               599
-#define PH_GOOSE_SOLO               600
-#define PH_STRUT_BLEND              601
-#define PH_STRUT_HELD               602
-#define PH_STRUT_SOLO               603
-#define PH_CURE_BLEND               604
-#define PH_CURE_HELD                605
-#define PH_CURE_SOLO                606
-#define PH_NURSE_BLEND              607
-#define PH_NURSE_HELD               608
-#define PH_NURSE_SOLO               609
+#define PH_TRAP_BLEND               608
+#define PH_TRAP_HELD                609
+#define PH_TRAP_SOLO                610
+#define PH_FACE_BLEND               611
+#define PH_FACE_HELD                612
+#define PH_FACE_SOLO                613
+#define PH_CLOTH_BLEND              614
+#define PH_CLOTH_HELD               615
+#define PH_CLOTH_SOLO               616
+#define PH_DRESS_BLEND              617
+#define PH_DRESS_HELD               618
+#define PH_DRESS_SOLO               619
+#define PH_FLEECE_BLEND             620
+#define PH_FLEECE_HELD              621
+#define PH_FLEECE_SOLO              622
+#define PH_KIT_BLEND                623
+#define PH_KIT_HELD                 624
+#define PH_KIT_SOLO                 625
+#define PH_PRICE_BLEND              626
+#define PH_PRICE_HELD               627
+#define PH_PRICE_SOLO               628
+#define PH_LOT_BLEND                629
+#define PH_LOT_HELD                 630
+#define PH_LOT_SOLO                 631
+#define PH_GOAT_BLEND               632
+#define PH_GOAT_HELD                633
+#define PH_GOAT_SOLO                634
+#define PH_THOUGHT_BLEND            635
+#define PH_THOUGHT_HELD             636
+#define PH_THOUGHT_SOLO             637
+#define PH_CHOICE_BLEND             638
+#define PH_CHOICE_HELD              639
+#define PH_CHOICE_SOLO              640
+#define PH_MOUTH_BLEND              641
+#define PH_MOUTH_HELD               642
+#define PH_MOUTH_SOLO               643
+#define PH_FOOT_BLEND               644
+#define PH_FOOT_HELD                645
+#define PH_FOOT_SOLO                646
+#define PH_GOOSE_BLEND              647
+#define PH_GOOSE_HELD               648
+#define PH_GOOSE_SOLO               649
+#define PH_STRUT_BLEND              650
+#define PH_STRUT_HELD               651
+#define PH_STRUT_SOLO               652
+#define PH_CURE_BLEND               653
+#define PH_CURE_HELD                654
+#define PH_CURE_SOLO                655
+#define PH_NURSE_BLEND              656
+#define PH_NURSE_HELD               657
+#define PH_NURSE_SOLO               658
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

@@ -560,6 +560,29 @@ gSongTable::
 	song mus_rg_trainer_tower, 0, 0
 	song mus_rg_slow_pallet, 0, 0
 	song mus_rg_teachy_tv_menu, 0, 0
+    song mus_hodou_city, 0, 0
+    song mus_tora_town, 0, 0
+    song mus_cucuno_town, 0, 0
+    song mus_encounter_scientist, 0, 0
+    song mus_encounter_police_officer, 0, 0
+    song mus_encounter_construction_worker_firefighter_postal_worker_nurse_doctor_rail, 0, 0
+    song mus_encounter_martial_artist, 0, 0
+    song mus_encounter_casual_dude, 0, 0
+    song mus_encounter_backpacker_hiker, 0, 0
+    song mus_hall_of_fame_silicon, 0, 0
+    song mus_petarosa_borough, 0, 0
+    song mus_sharprise_stadium, 0, 0
+    song mus_pioca_bridge, 0, 0
+    song mus_popidora_pier, 0, 0
+    song mus_encounter_psychic, 0, 0
+    song mus_encounter_fisher, 0, 0
+    song mus_halai_island, 0, 0
+    song mus_glavez_hill, 0, 0
+    song mus_encounter_solicitor, 0, 0
+    song mus_name_character_optionsFirstRun_mysteryGift, 0, 0
+    song mus_get_badge, 1, 1
+    song mus_src_getting_arrested, 0, 0
+    song mus_welcome_to_the_war_room, 0, 0
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2

@@ -2,7 +2,7 @@
   "id": "MAP_CUCONU_TOWN",
   "name": "CuconuTown",
   "layout": "LAYOUT_CUCONU_TOWN",
-  "music": "MUS_RUSTBORO",
+  "music": "MUS_CUCUNO_TOWN",
   "region_map_section": "MAPSEC_CUCONU_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

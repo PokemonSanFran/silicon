@@ -2,7 +2,7 @@
   "id": "MAP_POPIDORA_PIER",
   "name": "PopidoraPier",
   "layout": "LAYOUT_POPIDORA_PIER",
-  "music": "MUS_SLATEPORT",
+  "music": "MUS_POPIDORA_PIER",
   "region_map_section": "MAPSEC_POPIDORA_PIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -199,7 +199,5 @@
       "script": "GroupOfAssholes_PostSaveTrigger_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

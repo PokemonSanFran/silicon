@@ -73,7 +73,7 @@ script EnterBelen_BelenDefeated_Script
     msgbox(gText_EnterBelen_ThatWasDelicious,,SPEAKER_BELEN)
     closemessage
     call(EnterBelen_ExplainBuzzr_Dialogue)
-    tweetfanfare(TWEET_GYM_MERMEREZA_CITY_BADGE,MUS_OBTAIN_BADGE)
+    tweetfanfare(TWEET_GYM_MERMEREZA_CITY_BADGE,MUS_GET_BADGE)
     giveitem(ITEM_TM01)
     msgbox(gText_EnterBelen_OhTheMeat,,SPEAKER_BELEN)
     closemessage

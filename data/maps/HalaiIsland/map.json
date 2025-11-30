@@ -2,7 +2,7 @@
   "id": "MAP_HALAI_ISLAND",
   "name": "HalaiIsland",
   "layout": "LAYOUT_HALAI_ISLAND",
-  "music": "MUS_RG_FUCHSIA",
+  "music": "MUS_HALAI_ISLAND",
   "region_map_section": "MAPSEC_HALAI_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -390,7 +390,5 @@
       "script": "CutePokemon_Script_DebugGiveMon"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

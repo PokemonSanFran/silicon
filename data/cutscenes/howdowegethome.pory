@@ -52,6 +52,7 @@ script HowDoWeGetHome_YellingDistance_Dialogue{
         turnobject(PLAYER,DIR_WEST)
         TeleportCamera(7,22)
         fadescreen(FADE_FROM_BLACK)
+        playbgm(MUS_WELCOME_TO_THE_WAR_ROOM,TRUE)
 
         msgbox(gText_HowDoWeGetHome_LosersYouWannaSay,,SPEAKER_JULIUS)
         msgbox(gText_HowDoWeGetHome_YouThinkYouScareMe,,SPEAKER_MADISON)
@@ -120,6 +121,8 @@ script HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue {
         fadescreen(FADE_FROM_BLACK)
         addvar(VAR_STORYLINE_STATE,1)
         setvar(VAR_TEMP_0,0)
+        savebgm(MUS_DUMMY)
+        fadedefaultbgm
         call(TryAutoSave)
         call(AaandWereBack_Monologue)
         releaseall

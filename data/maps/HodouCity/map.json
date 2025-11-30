@@ -2,7 +2,7 @@
   "id": "MAP_HODOU_CITY",
   "name": "HodouCity",
   "layout": "LAYOUT_HODOU_CITY",
-  "music": "MUS_DEWFORD",
+  "music": "MUS_HODOU_CITY",
   "region_map_section": "MAPSEC_HODOU_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
