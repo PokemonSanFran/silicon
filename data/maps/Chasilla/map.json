@@ -2,7 +2,7 @@
   "id": "MAP_CHASILLA",
   "name": "Chasilla",
   "layout": "LAYOUT_CHASILLA",
-  "music": "MUS_FALLARBOR",
+  "music": "MUS_PETAROSA_BOROUGH",
   "region_map_section": "MAPSEC_CHASILLA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -238,7 +238,5 @@
       "script": "swagbag2_OliverWalkOutGym_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

@@ -3,9 +3,11 @@ script DemoScriptBattle
 {
     lock
     faceplayer
-    msgbox(format("Oh my god. I'm so nervous... it's {PLAYER}!. {SUBJECT} always looks so cool. {POSSESSIVE} outfit is so on point!"),,SPEAKER_KEIYING,TAIL_THOUGHT,EMOTE_SHOCK)
-    msgbox(format("AYO! YOU TRYNA SCRAP?"),,SPEAKER_KEIYING,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Oh my god. I'm so nervous... it's {PLAYER}!.\n{POSSESSIVE} vibe is so effortlessly cool, and {SUBJECT} chose an outfit that perfectly matched {OBJECT} style."),SPEAKER_KEIYING,TAIL_THOUGHT,EMOTE_SHOCK)
+	msgbox(format("Hi there! I'm Kei-Ying, your opponent for this demo."),,SPEAKER_KEIYING,TAIL_SHOUT,EMOTE_LOVE)
     closemessage
+	reveal(REVEAL_KEI_YING)
+	msgbox(format("Let's battle!"),,SPEAKER_KEIYING,TAIL_SHOUT)
 	call(TryAutoSave)
     trainerbattle_no_intro(TRAINER_KEI_YING,format("Even with all my years of experience I'm not enough for you! Good."))
 }

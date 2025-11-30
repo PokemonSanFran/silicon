@@ -291,6 +291,7 @@ u32 GetTrainerBattleMusicFromOption(void)
 
 static u32 GetTrainerBattleMusic(u32 musicIndex)
 {
+    return MUS_RG_VS_DEOXYS;
     switch(musicIndex)
     {
         case MUSIC_PRESET_LGPE: return MUS_RG_VS_TRAINER;
