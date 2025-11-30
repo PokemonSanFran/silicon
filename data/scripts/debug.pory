@@ -139,6 +139,7 @@ script Debug_EventScript_Script_1
 	call(GiveDayCare)
 	end
 }
+
 script Debug_EventScript_Script_2
 {
 	end

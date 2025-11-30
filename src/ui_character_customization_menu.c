@@ -944,18 +944,22 @@ static bool8 Menu_DoGfxSetup(void)
     return FALSE;
 }
 
-#define try_free(ptr) ({        \
-    void ** ptr__ = (void **)&(ptr);   \
-    if (*ptr__ != NULL)                \
-        Free(*ptr__);                  \
-})
+static void FreeCustomizationBackgrounds(void)
+{
+    for (u32 backgroundId = 0; backgroundId < NUM_CUSTOMIZATION_BACKGROUNDS; backgroundId++)
+        if (sBgTilemapBuffer[backgroundId] != NULL)
+            Free(sBgTilemapBuffer[backgroundId]);
+}
 
 static void Menu_FreeResources(void)
 {
-    try_free(sMenuDataPtr);
+    FreeAllSpritePalettes();
+    if (sMenuDataPtr != NULL)
+        Free(sMenuDataPtr);
+    FreeCustomizationBackgrounds();
     FreeAllWindowBuffers();
+    ResetSpriteData();
 }
-
 
 static void Task_MenuWaitFadeAndBail(u8 taskId)
 {
@@ -1582,47 +1586,55 @@ static void Task_MenuTurnOff(u8 taskId)
 
 static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (gPaletteFade.active)
+        return;
+
+    u8 namingScreenTypes[] =
     {
-		Menu_FreeResources();
-        switch(sMenuDataPtr->cursorPlace){
-            case CUSTOMIZATION_SUBJECT_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_SUBJECT_PRONOUN, gSaveBlock3Ptr->playerSubjectPronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-            case CUSTOMIZATION_OBJECT_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_OBJECT_PRONOUN, gSaveBlock3Ptr->playerObjectPronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-            case CUSTOMIZATION_POSSESIVE_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_POSSESIVE_PRONOUN, gSaveBlock3Ptr->playerPosesivePronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-        }
-    }
+        [CUSTOMIZATION_SUBJECT_PRONOUN]   = NAMING_SCREEN_SUBJECT_PRONOUN,
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = NAMING_SCREEN_OBJECT_PRONOUN,
+        [CUSTOMIZATION_POSSESIVE_PRONOUN] = NAMING_SCREEN_POSSESIVE_PRONOUN,
+    };
+
+    u8* pronounBuffers[] =
+    {
+        [CUSTOMIZATION_SUBJECT_PRONOUN]   = gSaveBlock3Ptr->playerSubjectPronoun,
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = gSaveBlock3Ptr->playerObjectPronoun,
+        [CUSTOMIZATION_POSSESIVE_PRONOUN] = gSaveBlock3Ptr->playerPosesivePronoun,
+    };
+
+    u32 cursor = sMenuDataPtr->cursorPlace;
+    // PSF TODO it would be nice if after leaving this screen, the cursor returned you to where you were, but I'm fairly certain this requires a refactor
+    DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
+    Menu_FreeResources();
 }
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
     if(JOY_NEW(DPAD_DOWN) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
+    {
         PressedDownButton();
         PrintToWindow(FONT_CUSTOM_BLACK);
     }
 
     if(JOY_NEW(DPAD_UP) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
+    {
         PressedUpButton();
         PrintToWindow(FONT_CUSTOM_BLACK);
     }
 
     if(JOY_NEW(DPAD_RIGHT) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1))
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = 0;
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]++;
         }
-        else{
+        else
+        {
             if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1))
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = 0;
             else
@@ -1637,14 +1649,16 @@ static void Task_MenuMain(u8 taskId)
     }
 
     if(JOY_NEW(DPAD_LEFT) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == 0)
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1);
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]--;
         }
-        else{
+        else
+        {
             if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == 0)
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1);
             else
@@ -1659,33 +1673,38 @@ static void Task_MenuMain(u8 taskId)
     }
 
     if(JOY_NEW(A_BUTTON))
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
-            if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
+            if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG)
+            {
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
             else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_BODY_TYPE &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_POSSESIVE_PRONOUN){
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_BODY_TYPE &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_POSSESIVE_PRONOUN)
+            {
                 PlaySE(SE_SELECT);
                 sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
                 sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
             }
             else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
-                (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
-                sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
-                sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN)){
-                    PlaySE(SE_SELECT);
-                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                    gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
+                    (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
+                     sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
+                     sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN))
+            {
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
             }
         }
-        else{
+        else
+        {
             PlaySE(SE_SELECT);
             sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
             sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
@@ -1695,17 +1714,20 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
-        if(!sMenuDataPtr->isCustomPaletteScren){
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(HasCustomizationDataBeenModified())
                 sMenuDataPtr->DrawnDialogue = !sMenuDataPtr->DrawnDialogue;
-            else{
+            else
+            {
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
         }
-        else{
+        else
+        {
             PlaySE(SE_SELECT);
             sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
             sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
@@ -1715,7 +1737,8 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(START_BUTTON))
     {
-        if(!sMenuDataPtr->isCustomPaletteScren){
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             PlaySE(SE_PC_OFF);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_MenuTurnOff;
@@ -1724,8 +1747,10 @@ static void Task_MenuMain(u8 taskId)
     }
 
     sMenuDataPtr->CurrentDirectionFrames++;
-    if(sMenuDataPtr->CurrentDirectionFrames % NUM_MOVEMENT_FRAMES == 0){
-        if(sMenuDataPtr->CurrentDirectionFrames > (NUM_SEQUENCES * NUM_MOVEMENT_FRAMES) - 1){
+    if(sMenuDataPtr->CurrentDirectionFrames % NUM_MOVEMENT_FRAMES == 0)
+    {
+        if(sMenuDataPtr->CurrentDirectionFrames > (NUM_SEQUENCES * NUM_MOVEMENT_FRAMES) - 1)
+        {
             sMenuDataPtr->CurrentDirectionFrames = 0;
         }
 
