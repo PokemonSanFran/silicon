@@ -20,6 +20,7 @@
 #include "quest_logic.h" // siliconMerge
 #include "constants/form_change_types.h"
 #include "quest_logic.h" // siliconMerge
+#include "apricorn_tree.h"
 
 static void UpdatePerDay(struct Time *localTime);
 static void UpdatePerMinute(struct Time *localTime);
@@ -65,6 +66,7 @@ static void UpdatePerDay(struct Time *localTime)
         SetRandomLotteryNumber(daysSince);
         UpdateDaysPassedSinceFormChange(daysSince);
         Quest_CutePokemon_DailyEvent(daysSince); // siliconMerge
+        DailyResetApricornTrees();
         *days = localTime->days;
     }
 }

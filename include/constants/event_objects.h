@@ -306,11 +306,12 @@
 #define OBJ_EVENT_GFX_SILICON_PLAYER_N3_FIELD_MOVE 290
 #define OBJ_EVENT_GFX_SILICON_PLAYER_N3_FISHING    291
 #define OBJ_EVENT_GFX_SILICON_PLAYER_N3_WATERING   292
+#define OBJ_EVENT_GFX_APRICORN_TREE              293
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        293
+#define NUM_OBJ_EVENT_GFX                        294
 //#define NUM_OBJ_EVENT_GFX                        242
 
 

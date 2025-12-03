@@ -45,6 +45,7 @@ prefabs.json
 /silicon-*.png
 src/data/map_group_count.h
 include/constants/heal_locations.h
+include/constants/script_commands.h
 tools/trainerproc/trainerproc
 tags
 make.txt

@@ -310,7 +310,7 @@ void GenerateDummyPartyMembers(void)
     u16 moves[4] = {MOVE_SLEEP_POWDER,MOVE_NONE,MOVE_NONE,MOVE_NONE};
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        ScriptGiveMonParameterized(0,slot,SPECIES_SCYTHER,1,0,0,0,0,0,evs,ivs,moves,0,0,0);
+        ScriptGiveMonParameterized(0,slot,SPECIES_SCYTHER,1,0,0,0,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,0,0,0);
 
     CompactPartySlots();
 }
@@ -394,6 +394,7 @@ bool32 ShouldMonBeShiny(u32 personality, u32 trainerId)
 
 static void RollForShiny(u32 boxId, u32 monSlot)
 {
+    return;
     u32 tid = gSaveBlock2Ptr->playerTrainerId[0]
         | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
         | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
@@ -414,7 +415,7 @@ void GiveSiliconStarter(enum SiliconStarters slot)
             0, PARTY_SIZE, starter->species, starter->level, starter->item, starter->ball,
             starter->nature, starter->abilityNum, starter->gender,
             (u8 *)starter->evs, (u8 *)starter->ivs, (u16 *)starter->moves,
-            FALSE, FALSE, NUMBER_OF_MON_TYPES
+            SHINY_MODE_RANDOM, FALSE, NUMBER_OF_MON_TYPES, 0
             );
 
     SetStarterExp(boxSlot, slot, starter->species, starter->level, starter->nextExpPercent);
@@ -440,8 +441,8 @@ static void GiveDebugStarter(void)
         {MOVE_DRAIN_PUNCH,MOVE_BULLET_PUNCH,0,0}
     };
 
-    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_MUDKIP,22,ITEM_NONE,ITEM_CHERISH_BALL,NATURE_BOLD,2,MON_FEMALE,evs,ivs,moves[0],TRUE,0,NUMBER_OF_MON_TYPES);
-    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_PANGORO,22,ITEM_NONE,ITEM_BEAST_BALL,NATURE_ADAMANT,2,MON_MALE,evs,ivs,moves[1],FALSE,0,NUMBER_OF_MON_TYPES);
+    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_MUDKIP,22,ITEM_NONE,ITEM_CHERISH_BALL,NATURE_BOLD,2,MON_FEMALE,evs,ivs,moves[0],SHINY_MODE_RANDOM,0,NUMBER_OF_MON_TYPES,0);
+    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_PANGORO,22,ITEM_NONE,ITEM_BEAST_BALL,NATURE_ADAMANT,2,MON_MALE,evs,ivs,moves[1],SHINY_MODE_ALWAYS,0,NUMBER_OF_MON_TYPES,0);
 }
 
 void MoveStarterToParty(void)
