@@ -4710,6 +4710,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Single
+Map Section: Perlacia City
 
 Minior-Meteor @ Metronome  
 Ability: Shields Down  
@@ -4740,6 +4741,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
+Map Section: Perlacia City
 
 Pelipper @ Never-Melt Ice  
 Ability: Drizzle  
@@ -4790,6 +4792,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Single
+Map Section: Perlacia City
 
 Baltoy @ Eviolite  
 Ability: Levitate  
@@ -4829,6 +4832,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
+Map Section: Perlacia City
 
 Gorebyss @ Choice Scarf
 Ability: Swift Swim
@@ -4854,6 +4858,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Single
+Map Section: Perlacia City
 
 Aerodactyl @ Dragon Fang  
 Ability: Pressure  
@@ -4903,6 +4908,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Single
+Map Section: Perlacia City
 
 Tirtouga @ Rindo Berry  
 Ability: Solid Rock  
@@ -4942,6 +4948,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
+Map Section: Perlacia City
 
 Sigilyph @ Flame Orb  
 Ability: Magic Guard  
@@ -4990,6 +4997,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Single
+Map Section: Perlacia City
 
 Carvanha @ Choice Scarf  
 Ability: Rough Skin  
