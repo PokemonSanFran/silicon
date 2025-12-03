@@ -30869,6 +30869,216 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_MAREANIE"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_MAREANIE"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_MAREANIE"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_MAREANIE"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_TOXAPEX"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_TOXAPEX"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_CARVANHA"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_SHARPEDO"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_SHARPEDO"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_SHARPEDO"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_SHARPEDO"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_REMORAID"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_REMORAID"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_REMORAID"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_REMORAID"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_TENTACOOL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 79,
+                "species": "SPECIES_TENTACRUEL"
+              }
+            ]
           }
         },
         {
