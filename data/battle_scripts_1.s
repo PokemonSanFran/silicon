@@ -8855,6 +8855,7 @@ BattleScript_FogIsTooDense::
 	goto BattleScript_MoveEnd
 
 BattleScript_EmboldenedAttackedFromFog::
+@ PSF TODO before the attack, the name of the attack that WOULD be used, and I'm not sure why
 	waitmessage B_WAIT_TIME_SHORTEST
 	cancelmultiturnmoves 
 	adjustdamage
