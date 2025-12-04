@@ -1737,8 +1737,8 @@ void CalculateMonStats(struct Pokemon *mon)
         iv[i] = GetMonData(mon, MON_DATA_HP_IV + i);
         ev[i] = GetMonData(mon, MON_DATA_HP_EV + i);
         */
-        iv[i] = ShouldReturnPerfectValue(i,mon) ? MAX_PER_STAT_IVS : GetMonData(mon, MON_DATA_HP_IV + i, NULL);
-        ev[i] = (AreEffortValuesEnabled()) ? GetMonData(mon, MON_DATA_HP_EV + i, NULL) : 0;
+        iv[i] = AreIndividualValuesDisabled() ? MAX_PER_STAT_IVS : GetMonData(mon, MON_DATA_HP_IV + i);
+        ev[i] = (AreEffortValuesEnabled()) ? GetMonData(mon, MON_DATA_HP_EV + i) : 0;
         // End siliconDaycare
 
         if (hyperTrained[i])
