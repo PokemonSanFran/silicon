@@ -974,25 +974,25 @@ Debug_BoxFilledMessage_Text_0:
 Debug_EventScript_CheckEVs_Text_0:
 # 112 "data/scripts/debug.pory"
 	.string "ATK EVs: {STR_VAR_1}, SPATK EVs:\n"
-	.string "{STR_VAR_2}, SPEED EVs:\l"
+	.string "{STR_VAR_2}, SPEED EVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_EventScript_CheckEVs_Text_1:
 # 114 "data/scripts/debug.pory"
 	.string "HP EVs: {STR_VAR_1}, DEF EVs:\n"
-	.string "{STR_VAR_2}, SPDEF EVs:\l"
+	.string "{STR_VAR_2}, SPDEF EVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_EventScript_CheckIVs_Text_0:
 # 132 "data/scripts/debug.pory"
 	.string "ATK IVs: {STR_VAR_1}, SPATK IVs:\n"
-	.string "{STR_VAR_2}, SPEED IVs:\l"
+	.string "{STR_VAR_2}, SPEED IVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_EventScript_CheckIVs_Text_1:
 # 134 "data/scripts/debug.pory"
 	.string "HP IVs: {STR_VAR_1}, DEF IVs:\n"
-	.string "{STR_VAR_2}, SPDEF IVs:\l"
+	.string "{STR_VAR_2}, SPDEF IVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_CheckSaveBlock_Text_0:
@@ -1189,7 +1189,7 @@ Debug_EventScript_EWRAMCounters_Text_0:
 Debug_PrintFontTest_Text_0:
 # 602 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Angel Adept Blind Bodice Clique\n"
-	.string "Coast Dunce Docile Enact Eosin Furlong\l"
+	.string "Coast Dunce Docile Enact Eosin Furlong\n"
 	.string "Focal Gnome Gondola Human Hoist Inlet\l"
 	.string "Iodine Justin Jocose Knoll Koala Linden\l"
 	.string "Loads Milliner Modal Number Nodule\l"
@@ -1202,7 +1202,7 @@ Debug_PrintFontTest_Text_0:
 Debug_PrintFontTest_Text_1:
 # 603 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Angel angel adept for the nuance loads\n"
-	.string "of the arena cocoa and quaalude. Blind\l"
+	.string "of the arena cocoa and quaalude. Blind\n"
 	.string "blind bodice for the submit oboe of the\l"
 	.string "club snob and abbot. Clique clique\l"
 	.string "coast for the pouch loco of the franc\l"
@@ -1213,7 +1213,7 @@ Debug_PrintFontTest_Text_1:
 Debug_PrintFontTest_Text_2:
 # 604 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Enact enact eosin for the quench coed\n"
-	.string "of the pique canoe and bleep. Furlong\l"
+	.string "of the pique canoe and bleep. Furlong\n"
 	.string "furlong focal for the genuflect\l"
 	.string "profound of the motif aloof and offers.\l"
 	.string "Gnome gnome gondola for the impugn\l"
@@ -1225,7 +1225,7 @@ Debug_PrintFontTest_Text_2:
 Debug_PrintFontTest_Text_3:
 # 605 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Inlet inlet iodine for the quince\n"
-	.string "champion of the ennui scampi and\l"
+	.string "champion of the ennui scampi and\n"
 	.string "shiite. Justin justin jocose for the\l"
 	.string "djibouti sojourn of the oranj raj and\l"
 	.string "hajjis. Knoll knoll koala for the\l"
@@ -1237,7 +1237,7 @@ Debug_PrintFontTest_Text_3:
 Debug_PrintFontTest_Text_4:
 # 606 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Milliner milliner modal for the alumna\n"
-	.string "solomon of the album custom and\l"
+	.string "solomon of the album custom and\n"
 	.string "summon. Number number nodule for the\l"
 	.string "unmade economic of the shotgun bison\l"
 	.string "and tunnel. Onset onset oddball for the\l"
@@ -1249,7 +1249,7 @@ Debug_PrintFontTest_Text_4:
 Debug_PrintFontTest_Text_5:
 # 607 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Quanta quanta qophs for the inquest\n"
-	.string "sheqel of the cinq coq and suqqu. Rhone\l"
+	.string "sheqel of the cinq coq and suqqu. Rhone\n"
 	.string "rhone roman for the burnt porous of the\l"
 	.string "lemur clamor and carrot. Snout snout\l"
 	.string "sodium for the ensnare bosom of the\l"
@@ -1260,7 +1260,7 @@ Debug_PrintFontTest_Text_5:
 Debug_PrintFontTest_Text_6:
 # 608 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Uncle uncle udder for the dunes cloud\n"
-	.string "of the hindu thou and continuum. Vulcan\l"
+	.string "of the hindu thou and continuum. Vulcan\n"
 	.string "vulcan vocal for the alluvial ovoid of\l"
 	.string "the yugoslav chekhov and revved. Whale\l"
 	.string "whale woman for the meanwhile blowout\l"
@@ -1272,14 +1272,14 @@ Debug_PrintFontTest_Text_6:
 Debug_PrintFontTest_Text_7:
 # 609 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Yunnan yunnan young for the dynamo\n"
-	.string "coyote of the obloquy employ and\l"
+	.string "coyote of the obloquy employ and\n"
 	.string "sayyid. Zloty zloty zodiac for the gizmo\l"
 	.string "ozone of the franz laissez and buzzing.$"
 
 Debug_PrintFontTest_Text_8:
 # 610 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}42 × 138 = 5796.\n"
-	.string "Mr Jock, TV quiz PhD: bags 20% fewer\l"
+	.string "Mr Jock, TV quiz PhD: bags 20% fewer\n"
 	.string "lynx at a café; voilà, they're “worth”\l"
 	.string "♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11\l"
 	.string "Nintendo GBA can connect to a Nintendo\l"
@@ -1290,7 +1290,7 @@ Debug_PrintFontTest_Text_8:
 Debug_EventScript_TellTheTime_Text_0:
 # 636 "data/scripts/debug.pory"
 	.string "Time and date:\n"
-	.string "{STR_VAR_1},\l"
+	.string "{STR_VAR_1},\n"
 	.string "{STR_VAR_2}:{STR_VAR_3}$"
 
 Debug_EventScript_PrintTimeOfDay_Text_0:
