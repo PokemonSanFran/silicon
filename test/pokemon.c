@@ -488,6 +488,8 @@ TEST("Optimised SetMonData")
 TEST("CalculateMonStats")
 {
     ZeroPlayerPartyMons();
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED; // Battle Settings: Individual Values 
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EFFORT_VALUES] = BATTLE_OPTION_EFFORT_VALUES_ENABLED; // Battle Settings: Effort Values
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=ITEM_MASTER_BALL, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, teraType=TYPE_FIRE, dmaxLevel=7;
