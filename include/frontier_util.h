@@ -30,5 +30,6 @@ u8 PSF_GetPlayerSymbolCountForFacility(u8 facility);
 void PSF_GiveFacilitySymbol(void);
 // End siliconMerge
 void ClearEnemyPartyAfterChallenge(void);
+void ShowBattleFrontierCaughtBannedSpecies(void);
 
 #endif // GUARD_FRONTIER_UTIL_H

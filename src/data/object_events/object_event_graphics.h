@@ -587,3 +587,4 @@ const u16 gFieldEffectObjectPalette_CaveDust[] = INCBIN_U16("graphics/field_effe
 const u32 gFieldEffectObjectPic_Saving[]    = INCBIN_U32("graphics/field_effects/pics/saving.4bpp");
 const u16 gFieldEffectObjectPaletteSaving[] = INCBIN_U16("graphics/field_effects/palettes/saving.gbapal");
 // End autoSave
+const u32 gObjectEventPic_ApricornTree[] = INCBIN_U32("graphics/object_events/pics/misc/apricorn_tree.4bpp");

@@ -30,6 +30,7 @@ WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", s32 exp)
 {
     u8 level = 0;
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Level
 
     PARAMETRIZE { level = 5; }
     PARAMETRIZE { level = 10; }
@@ -75,6 +76,7 @@ WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", s32 exp)
 {
     u8 level = 0;
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Level
 
     PARAMETRIZE { level = 5; }
     PARAMETRIZE { level = 10; }

@@ -27,13 +27,13 @@ script RPS_Script_SaveAndDeleteParty
 script RPS_Script_GiveRiggedMon
 {
     call(RPS_Script_SaveAndDeleteParty)
-    givemon(species=SPECIES_HITMONCHAN,level=20,item=0,abilityNum=2,isShiny=TRUE,hpIv=7,atkIv=9,defIv=1,spAtkIv=9,spDefIv=3,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH)
+    givemon(species=SPECIES_HITMONCHAN,level=20,item=0,abilityNum=2,shinyMode=SHINY_MODE_ALWAYS,hpIv=7,atkIv=9,defIv=1,spAtkIv=9,spDefIv=3,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH)
 }
 
 script RPS_Script_GiveFairMon
 {
     call(RPS_Script_SaveAndDeleteParty)
-    givemon(species=SPECIES_HITMONCHAN,level=20,item=ITEM_PUNCHING_GLOVE,abilityNum=1,isShiny=TRUE,hpIv=31,atkIv=31,defIv=31,spAtkIv=31,spDefIv=31,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH,nature=NATURE_JOLLY,hpEv=16,atkEv=236,speedEv=248)
+    givemon(species=SPECIES_HITMONCHAN,level=20,item=ITEM_PUNCHING_GLOVE,abilityNum=1,shinyMode=SHINY_MODE_ALWAYS,hpIv=31,atkIv=31,defIv=31,spAtkIv=31,spDefIv=31,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH,nature=NATURE_JOLLY,hpEv=16,atkEv=236,speedEv=248)
 }
 
 script RPS_Script_ResetPlayer

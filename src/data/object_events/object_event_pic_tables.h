@@ -1665,3 +1665,7 @@ static const struct SpriteFrameImage sPicTable_Unknown[] = {
     obj_frame_tiles(gObjectEventPic_UnknownNormal),
 };
 // End silicon
+
+static const struct SpriteFrameImage sPicTable_ApricornTree[] = {
+    overworld_frame(gObjectEventPic_ApricornTree, 2, 2, 0),
+};
