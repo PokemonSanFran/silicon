@@ -956,3 +956,20 @@ u32 GetItemNativeGroup(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].nativeItemGroup;
 }
+
+// Start shopMenu
+enum ShopMenuCategories GetItemShopCategory(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].shop.category;
+}
+
+u32 GetItemShopCriteriaGoal(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].shop.criteriaGoal;
+}
+
+ShopCriteriaFunc GetItemShopCriteriaFunc(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].shop.criteriaFunc;
+}
+// End shopMenu

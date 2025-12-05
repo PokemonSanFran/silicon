@@ -3470,3 +3470,11 @@
     call RunAdventureGuideScript
 	.endm
     @ End adventureGuide
+
+	@ Start shopMenu
+	.macro openprestoterminal
+	fadescreen FADE_TO_BLACK
+	callnative OpenPrestoTerminalWithinScript
+	waitstate
+	.endm
+	@ End shopMenu

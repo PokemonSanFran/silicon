@@ -8,6 +8,7 @@
 #include "constants/tms_hms.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
+#include "ui_shop.h" // shopMenu
 
 /* Expands to:
  * enum
@@ -545,6 +546,13 @@ struct Item
     u8 nativeItemGroup; // silconMerge
     const u32 *iconPic;
     const u16 *iconPalette;
+    // Start shopMenu
+    struct {
+        enum ShopMenuCategories category;
+        u32 criteriaGoal;
+        ShopCriteriaFunc criteriaFunc;
+    } shop;
+    // End shopMenu
 };
 
 struct ALIGNED(2) BagPocket
@@ -687,5 +695,11 @@ u32 GetItemStatus1Mask(u16 itemId);
 bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile volatile);
 u32 GetItemSellPrice(u32 itemId);
 bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect);
+
+// Start shopMenu
+enum ShopMenuCategories GetItemShopCategory(u16 itemId);
+u32 GetItemShopCriteriaGoal(u16 itemId);
+ShopCriteriaFunc GetItemShopCriteriaFunc(u16 itemId);
+// End shopMenu
 
 #endif // GUARD_ITEM_H
