@@ -90,15 +90,6 @@ enum ShopMenuSetupSteps
     SHOP_SETUP_FINISH
 };
 
-enum ShopMenuGraphicsSteps
-{
-    SHOP_GRAPHICS_TILES,
-    SHOP_GRAPHICS_TILEMAP,
-    SHOP_GRAPHICS_PALETTE,
-
-    SHOP_GRAPHICS_FINISH
-};
-
 enum ShopMenuBackgrounds
 {
     SHOP_BG_WINDOW,
@@ -109,14 +100,14 @@ enum ShopMenuBackgrounds
 
 enum ShopMenuSprites
 {
-    SPRITE_BUY_ICON_ID,
-    SPRITE_UP_ARROW,
-    SPRITE_DOWN_ARROW,
-    SPRITE_LEFT_ARROW,
-    SPRITE_RIGHT_ARROW,
-    SPRITE_UP_ARROW_SMALL,
-    SPRITE_DOWN_ARROW_SMALL,
-    SPRITE_BUY_ITEM_ICON,
+    SHOP_SPRITE_BUY_ICON_ID,
+    SHOP_SPRITE_UP_ARROW,
+    SHOP_SPRITE_DOWN_ARROW,
+    SHOP_SPRITE_LEFT_ARROW,
+    SHOP_SPRITE_RIGHT_ARROW,
+    SHOP_SPRITE_UP_ARROW_SMALL,
+    SHOP_SPRITE_DOWN_ARROW_SMALL,
+    SHOP_SPRITE_BUY_ITEM_ICON,
 
     NUM_SHOP_SPRITES,
 };
@@ -124,13 +115,13 @@ enum ShopMenuSprites
 enum
 {
     TAG_PRESTO_INTERFACE = 0x4200,
-    GFXTAG_BUY_ICON = TAG_PRESTO_INTERFACE,
-    GFXTAG_UP_ARROW,
-    GFXTAG_DOWN_ARROW,
-    GFXTAG_LEFT_ARROW,
-    GFXTAG_RIGHT_ARROW,
-    GFXTAG_UP_ARROW_SMALL,
-    GFXTAG_DOWN_ARROW_SMALL,
+    TAG_BUY_ICON = TAG_PRESTO_INTERFACE,
+    TAG_UP_ARROW,
+    TAG_DOWN_ARROW,
+    TAG_LEFT_ARROW,
+    TAG_RIGHT_ARROW,
+    TAG_UP_ARROW_SMALL,
+    TAG_DOWN_ARROW_SMALL,
 };
 
 enum ShopMenuPrices
@@ -146,13 +137,22 @@ enum ShopMenuFontColors
     SHOP_FNTCLR_WHITE,
 };
 
+enum ShopMenuGraphicsType
+{
+    SHOP_GFX_TILES,
+    SHOP_GFX_TILEMAP,
+    SHOP_GFX_TILEMAP_BUY,
+    SHOP_GFX_PALETTE,
+
+    NUM_SHOP_GRAPHICS
+};
+
 // structs, typedefs
 
 struct ShopMenuData
 {
     enum ShopMenuTypes type;
     MainCallback savedCallback;
-    enum ShopMenuGraphicsSteps gfxSteps;
     u8 notEnoughMoneyWindow:1;
     u8 sortCategories:1;
     u8 buyScreen:1;
@@ -251,6 +251,8 @@ static inline void ShopPrint_Categories(void);
 static inline void ShopPrint_ItemPrice(void);
 static inline void ShopPrint_HelpBar(void);
 
+static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType);
+
 // const data
 static const struct BgTemplate sShopBgTemplates[NUM_SHOP_BGS] =
 {
@@ -285,23 +287,31 @@ static const struct WindowTemplate sShopWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sMenuTiles[]       = INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol");
-static const u32 sMenuTilemap[]     = INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.smolTM");
-static const u32 sMenuTilemapBuy[]  = INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM");
-static const u16 sMenuPalette[]     = INCBIN_U16("graphics/ui_menus/presto/palette.gbapal");
+static const struct {
+    const u32 *tiles;
+    const u32 *map, *mapBuy;
+    const u16 *palette;
+} sShopMenuGraphics[NUM_SHOP_TYPES] =
+{
+    [SHOP_TYPE_PRESTO_APP ... SHOP_TYPE_PRESTO_TERMINAL] =
+    {
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol"),
+        .map = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.smolTM"),
+        .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM"),
+        .palette = (const u16[])INCBIN_U16("graphics/ui_menus/presto/palette.gbapal"),
+    },
+};
 
 static const u8 sShopGfx_PrestoCategories[] = INCBIN_U8("graphics/ui_menus/presto/categories.4bpp");
 static const u8 sOrderWindow[]         = INCBIN_U8("graphics/ui_menus/presto/orderwindow.4bpp");
 static const u8 sItemSelector[]        = INCBIN_U8("graphics/ui_menus/presto/item_selector.4bpp");
 
-static const struct SpritePalette sPrestoInterfaceSpritePalette = { sMenuPalette, TAG_PRESTO_INTERFACE };
-
 static const struct ShopSprite sShopSprites[] =
 {
-    [SPRITE_BUY_ICON_ID] =
+    [SHOP_SPRITE_BUY_ICON_ID] =
     {
-        .idx = SPRITE_BUY_ICON_ID,
-        .tileTag = GFXTAG_BUY_ICON,
+        .idx = SHOP_SPRITE_BUY_ICON_ID,
+        .tileTag = TAG_BUY_ICON,
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/buyicon.4bpp.smol"),
         .cb = SpriteCB_BuyIcon,
         .priority = 1,
@@ -311,10 +321,10 @@ static const struct ShopSprite sShopSprites[] =
         .x = (TILE_TO_PIXELS(4) + 1) + 16,
         .y = (TILE_TO_PIXELS(4) + 7) + 8,
     },
-    [SPRITE_UP_ARROW] =
+    [SHOP_SPRITE_UP_ARROW] =
     {
-        .idx = SPRITE_UP_ARROW,
-        .tileTag = GFXTAG_UP_ARROW,
+        .idx = SHOP_SPRITE_UP_ARROW,
+        .tileTag = TAG_UP_ARROW,
         .spriteShape = SPRITE_SHAPE(32x16),
         .spriteSize = SPRITE_SIZE(32x16),
         .priority = 1,
@@ -324,10 +334,10 @@ static const struct ShopSprite sShopSprites[] =
         .x = SHOP_UP_ARROW_X,
         .y = SHOP_UP_ARROW_Y,
     },
-    [SPRITE_DOWN_ARROW] =
+    [SHOP_SPRITE_DOWN_ARROW] =
     {
-        .idx = SPRITE_DOWN_ARROW,
-        .tileTag = GFXTAG_DOWN_ARROW,
+        .idx = SHOP_SPRITE_DOWN_ARROW,
+        .tileTag = TAG_DOWN_ARROW,
         .spriteShape = SPRITE_SHAPE(32x16),
         .spriteSize = SPRITE_SIZE(32x16),
         .priority = 1,
@@ -337,10 +347,10 @@ static const struct ShopSprite sShopSprites[] =
         .x = SHOP_DOWN_ARROW_X,
         .y = SHOP_DOWN_ARROW_Y,
     },
-    [SPRITE_LEFT_ARROW] =
+    [SHOP_SPRITE_LEFT_ARROW] =
     {
-        .idx = SPRITE_LEFT_ARROW,
-        .tileTag = GFXTAG_LEFT_ARROW,
+        .idx = SHOP_SPRITE_LEFT_ARROW,
+        .tileTag = TAG_LEFT_ARROW,
         .spriteShape = SPRITE_SHAPE(8x16),
         .spriteSize = SPRITE_SIZE(8x16),
         .priority = 1,
@@ -350,10 +360,10 @@ static const struct ShopSprite sShopSprites[] =
         .x = SHOP_LEFT_ARROW_X,
         .y = SHOP_LEFT_ARROW_Y,
     },
-    [SPRITE_RIGHT_ARROW] =
+    [SHOP_SPRITE_RIGHT_ARROW] =
     {
-        .idx = SPRITE_RIGHT_ARROW,
-        .tileTag = GFXTAG_RIGHT_ARROW,
+        .idx = SHOP_SPRITE_RIGHT_ARROW,
+        .tileTag = TAG_RIGHT_ARROW,
         .spriteShape = SPRITE_SHAPE(8x16),
         .spriteSize = SPRITE_SIZE(8x16),
         .priority = 1,
@@ -363,10 +373,10 @@ static const struct ShopSprite sShopSprites[] =
         .x = SHOP_RIGHT_ARROW_X,
         .y = SHOP_RIGHT_ARROW_Y,
     },
-    [SPRITE_UP_ARROW_SMALL] =
+    [SHOP_SPRITE_UP_ARROW_SMALL] =
     {
-        .idx = SPRITE_UP_ARROW_SMALL,
-        .tileTag = GFXTAG_UP_ARROW_SMALL,
+        .idx = SHOP_SPRITE_UP_ARROW_SMALL,
+        .tileTag = TAG_UP_ARROW_SMALL,
         .spriteShape = SPRITE_SHAPE(16x8),
         .spriteSize = SPRITE_SIZE(16x8),
         .priority = 1,
@@ -376,10 +386,10 @@ static const struct ShopSprite sShopSprites[] =
         .x = TILE_TO_PIXELS(12) + 8,
         .y = (TILE_TO_PIXELS(11) + 2) + 4,
     },
-    [SPRITE_DOWN_ARROW_SMALL] =
+    [SHOP_SPRITE_DOWN_ARROW_SMALL] =
     {
-        .idx = SPRITE_DOWN_ARROW_SMALL,
-        .tileTag = GFXTAG_DOWN_ARROW_SMALL,
+        .idx = SHOP_SPRITE_DOWN_ARROW_SMALL,
+        .tileTag = TAG_DOWN_ARROW_SMALL,
         .spriteShape = SPRITE_SHAPE(16x8),
         .spriteSize = SPRITE_SIZE(16x8),
         .priority = 1,
@@ -552,9 +562,9 @@ static void ShopSetup_Backgrounds(void)
 static void ShopSetup_Graphics(void)
 {
     ResetTempTileDataBuffers();
-    DecompressAndCopyTileDataToVram(SHOP_BG_TILEMAP, sMenuTiles, 0, 0, 0);
-    DecompressDataWithHeaderWram(sMenuTilemap, sShopMenuDataPtr->tilemapBuf);
-    LoadPalette(sMenuPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    DecompressAndCopyTileDataToVram(SHOP_BG_TILEMAP, ShopGraphics_GetByType(SHOP_GFX_TILES), 0, 0, 0);
+    DecompressDataWithHeaderWram(ShopGraphics_GetByType(SHOP_GFX_TILEMAP), sShopMenuDataPtr->tilemapBuf);
+    LoadPalette(ShopGraphics_GetByType(SHOP_GFX_PALETTE), BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
 
 static void ShopSetup_Windows(void)
@@ -587,7 +597,7 @@ static void ShopHelper_UpdateFrontEnd(void)
     {
         u32 itemId = sShopMenuDataPtr->selectedItemId;
 
-        if (sShopMenuDataPtr->spriteIds[SPRITE_BUY_ITEM_ICON] == SPRITE_NONE)
+        if (sShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] == SPRITE_NONE)
         {
             x = 3, y = 6;
 
@@ -596,7 +606,7 @@ static void ShopHelper_UpdateFrontEnd(void)
 
             gSprites[spriteId].x2 = TILE_TO_PIXELS(x);
             gSprites[spriteId].y2 = TILE_TO_PIXELS(y);
-            sShopMenuDataPtr->spriteIds[SPRITE_BUY_ITEM_ICON] = spriteId;
+            sShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] = spriteId;
         }
 
         x = 1, y = 2;
@@ -1028,7 +1038,8 @@ static void ShopSprite_CreateGenericSprites(void)
             spriteTemplate.tileTag = template->tileTag;
         }
 
-        LoadSpritePalette(&sPrestoInterfaceSpritePalette);
+        struct SpritePalette palette = { ShopGraphics_GetByType(SHOP_GFX_PALETTE), TAG_PRESTO_INTERFACE };
+        LoadSpritePalette(&palette);
 
         struct OamData oamData = gDummyOamData;
 
@@ -1654,18 +1665,18 @@ static void ShopGrid_SwitchMode(void)
 
     if (sShopMenuDataPtr->buyScreen)
     {
-        DecompressDataWithHeaderWram(sMenuTilemapBuy, sShopMenuDataPtr->tilemapBuf);
+        DecompressDataWithHeaderWram(ShopGraphics_GetByType(SHOP_GFX_TILEMAP_BUY), sShopMenuDataPtr->tilemapBuf);
     }
     else
     {
-        if (sShopMenuDataPtr->spriteIds[SPRITE_BUY_ITEM_ICON] != SPRITE_NONE)
+        if (sShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] != SPRITE_NONE)
         {
-            gSprites[sShopMenuDataPtr->spriteIds[SPRITE_BUY_ITEM_ICON]].invisible = TRUE;
-            DestroySprite(&gSprites[sShopMenuDataPtr->spriteIds[SPRITE_BUY_ITEM_ICON]]);
-            sShopMenuDataPtr->spriteIds[SPRITE_BUY_ITEM_ICON] = SPRITE_NONE;
+            gSprites[sShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON]].invisible = TRUE;
+            DestroySprite(&gSprites[sShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON]]);
+            sShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] = SPRITE_NONE;
         }
 
-        DecompressDataWithHeaderWram(sMenuTilemap, sShopMenuDataPtr->tilemapBuf);
+        DecompressDataWithHeaderWram(ShopGraphics_GetByType(SHOP_GFX_TILEMAP), sShopMenuDataPtr->tilemapBuf);
     }
 
     ShopSprite_ToggleItemIconsVisibility();
@@ -1893,6 +1904,9 @@ static inline void ShopBlit_Categories(void)
 
 static inline void ShopBlit_SelectedItem(void)
 {
+    if (sShopMenuDataPtr->type == SHOP_TYPE_POKEMART)
+        return;
+
     u32 trueColIdx = sShopMenuDataPtr->currIdx.x - sShopMenuDataPtr->firstIdx.x;
     u32 x = (5 * trueColIdx) + 4, x2 = (2 * trueColIdx) + 2;
     u32 y = 4;
@@ -1985,6 +1999,24 @@ static inline void ShopPrint_HelpBar(void)
     }
 
     ShopPrint_AddTextPrinter(fontId, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, str);
+}
+
+static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType type)
+{
+    type %= NUM_SHOP_GRAPHICS;
+
+    switch (type)
+    {
+    default:
+    case SHOP_GFX_TILES:
+        return sShopMenuGraphics[sShopMenuDataPtr->type].tiles;
+    case SHOP_GFX_TILEMAP:
+        return sShopMenuGraphics[sShopMenuDataPtr->type].map;
+    case SHOP_GFX_TILEMAP_BUY:
+        return sShopMenuGraphics[sShopMenuDataPtr->type].mapBuy;
+    case SHOP_GFX_PALETTE:
+        return sShopMenuGraphics[sShopMenuDataPtr->type].palette;
+    }
 }
 
 // Available to purchase criterias in gItemsInfo.
