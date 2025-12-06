@@ -432,7 +432,7 @@ static const u8 sText_ItemNumber[]           = _("{STR_VAR_1} x{STR_VAR_2}");
 
 static const u8 sText_noEnoughMoney[]        = _("Your account has been declined for insufficient funds!");
 
-static const u8 *const Presto_Rows[NUM_SHOP_CATEGORIES] =
+static const u8 *const sShopCategoryNames[NUM_SHOP_CATEGORIES] =
 {
     [SHOP_CATEGORY_BUY_AGAIN]    = COMPOUND_STRING("Buy Again"),
     [SHOP_CATEGORY_RECOMMENDED]  = COMPOUND_STRING("Recommended"),
@@ -1940,13 +1940,13 @@ static inline void ShopPrint_Categories(void)
 
         if (!i)
         {
-            StringCopy(gStringVar1, Presto_Rows[ShopGrid_CategoryInRow(row)]);
+            StringCopy(gStringVar1, sShopCategoryNames[ShopGrid_CategoryInRow(row)]);
             StringCopy(gStringVar2, GetItemName(sShopMenuDataPtr->categoryItems[row][sShopMenuDataPtr->currIdx.x]));
             StringExpandPlaceholders(gStringVar4, sText_FirstRowName);
         }
         else
         {
-            StringCopy(gStringVar4, Presto_Rows[ShopGrid_CategoryInRow(row)]);
+            StringCopy(gStringVar4, sShopCategoryNames[ShopGrid_CategoryInRow(row)]);
         }
 
         ShopPrint_AddTextPrinter(FONT_SMALL_NARROW,
