@@ -3477,4 +3477,10 @@
 	callnative OpenPrestoTerminalWithinScript
 	waitstate
 	.endm
+
+	.macro openpokemart products:req
+	callnative OpenPokeMartWithinScript
+	.4byte \products
+	waitstate
+	.endm
 	@ End shopMenu

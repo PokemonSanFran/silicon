@@ -1,0 +1,212 @@
+#include "global.h"
+#include "ui_presto.h"
+#include "strings.h"
+#include "bg.h"
+#include "data.h"
+#include "decompress.h"
+#include "event_data.h"
+#include "field_weather.h"
+#include "gpu_regs.h"
+#include "graphics.h"
+#include "item.h"
+#include "item_icon.h"
+#include "item_menu.h"
+#include "item_menu_icons.h"
+#include "list_menu.h"
+#include "item_icon.h"
+#include "item_use.h"
+#include "international_string_util.h"
+#include "main.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "money.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "region_map.h"
+#include "random.h"
+#include "scanline_effect.h"
+#include "script.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
+#include "text_window.h"
+#include "trig.h"
+#include "overworld.h"
+#include "quests.h"
+#include "quest_logic.h"
+#include "event_data.h"
+#include "field_screen_effect.h"
+#include "ui_shop.h"
+#include "constants/items.h"
+#include "constants/field_weather.h"
+#include "constants/songs.h"
+#include "constants/rgb.h"
+#include "constants/items.h"
+#include "constants/party_menu.h"
+
+// constants
+enum PokeMartInputs
+{
+    MART_INPUT_BUY = 0,
+    MART_INPUT_SELL,
+    MART_INPUT_QUIT,
+
+    NUM_MART_INPUTS
+};
+
+// structs
+struct PokeMartData
+{
+    u8 windowId;
+    s8 input;
+};
+
+// ram
+static EWRAM_INIT struct PokeMartData sPokeMartData =
+{
+    .windowId = WINDOW_NONE,
+    .input = MART_INPUT_BUY,
+};
+
+// declarations
+static void MartInterface_Open(void);
+static void Task_MartInterface_Idle(u8);
+static void Task_MartInterface_HandleBuyOrSell(u8);
+static void Task_MartInterface_HandleQuit(u8);
+static void Task_MartInterface_FadeIntoMenu(u8);
+
+static void CB2_MartMenu_OpenBuyMenu(void);
+static void CB2_MartMenu_OpenSellMenu(void);
+
+static void CB2_MartReload_ReturnToField(void);
+static void FieldCB_MartReload_PrepareInterface(void);
+static void Task_MartReload_WaitForFade(u8);
+static void Task_MartReload_Finish(u8);
+
+// const data
+static const struct MenuAction sPokeMart_MenuActions[] =
+{
+    [MART_INPUT_BUY]  = { COMPOUND_STRING("Buy"),     { .void_u8 = Task_MartInterface_HandleBuyOrSell } },
+    [MART_INPUT_SELL] = { COMPOUND_STRING("Sell"),    { .void_u8 = Task_MartInterface_HandleBuyOrSell } },
+    [MART_INPUT_QUIT] = { COMPOUND_STRING("See ya!"), { .void_u8 = Task_MartInterface_HandleQuit } }
+};
+
+// code
+void OpenPokeMartWithinScript(struct ScriptContext *ctx)
+{
+    const u16 *products = (const u16 *)ScriptReadWord(ctx);
+
+    MartInterface_Open();
+}
+
+static void MartInterface_Open(void)
+{
+    LockPlayerFieldControls();
+
+    struct WindowTemplate winTemplate =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 1,
+        .width = GetMaxWidthInMenuTable(sPokeMart_MenuActions, ARRAY_COUNT(sPokeMart_MenuActions)),
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 0x8,
+    };
+
+    sPokeMartData.windowId = AddWindow(&winTemplate);
+
+    SetStandardWindowBorderStyle(sPokeMartData.windowId, FALSE);
+    PrintMenuTable(sPokeMartData.windowId, ARRAY_COUNT(sPokeMart_MenuActions), sPokeMart_MenuActions);
+    InitMenuInUpperLeftCornerNormal(sPokeMartData.windowId, ARRAY_COUNT(sPokeMart_MenuActions), sPokeMartData.input);
+    PutWindowTilemap(sPokeMartData.windowId);
+    CopyWindowToVram(sPokeMartData.windowId, COPYWIN_MAP);
+
+    CreateTask(Task_MartInterface_Idle, 0);
+}
+
+static void Task_MartInterface_Idle(u8 taskId)
+{
+    s8 input = Menu_ProcessInputNoWrap();
+
+    switch (input)
+    {
+    case MENU_NOTHING_CHOSEN:
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        Task_MartInterface_HandleQuit(taskId);
+        break;
+    default:
+        sPokeMartData.input = input;
+        sPokeMart_MenuActions[input].func.void_u8(taskId);
+        break;
+    }
+}
+
+static void Task_MartInterface_HandleBuyOrSell(u8 taskId)
+{
+    FadeScreen(FADE_TO_BLACK, 0);
+    gTasks[taskId].func = Task_MartInterface_FadeIntoMenu;
+}
+
+static void Task_MartInterface_HandleQuit(u8 taskId)
+{
+    ClearStdWindowAndFrameToTransparent(sPokeMartData.windowId, TRUE);
+    RemoveWindow(sPokeMartData.windowId);
+
+    UnlockPlayerFieldControls();
+    ScriptContext_Enable();
+
+    sPokeMartData.windowId = WINDOW_NONE;
+    sPokeMartData.input = MART_INPUT_BUY;
+
+    DestroyTask(taskId);
+}
+
+static void Task_MartInterface_FadeIntoMenu(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(sPokeMartData.input == MART_INPUT_BUY ? CB2_MartMenu_OpenBuyMenu : CB2_MartMenu_OpenSellMenu);
+        DestroyTask(taskId);
+    }
+}
+
+static void Task_MartReload_WaitForFade(u8 taskId)
+{
+    if (IsWeatherNotFadingIn())
+    {
+        DisplayItemMessageOnField(taskId, gText_AnythingElseICanHelp, Task_MartReload_Finish);
+    }
+}
+
+static void Task_MartReload_Finish(u8 taskId)
+{
+    MartInterface_Open();
+    DestroyTask(taskId);
+}
+
+static void CB2_MartMenu_OpenBuyMenu(void)
+{
+    ShopMenu_Init(SHOP_TYPE_POKEMART, CB2_MartReload_ReturnToField);
+}
+
+static void CB2_MartMenu_OpenSellMenu(void)
+{
+    GoToBagMenu(ITEMMENULOCATION_SHOP, POCKETS_COUNT, CB2_MartReload_ReturnToField);
+}
+
+static void CB2_MartReload_ReturnToField(void)
+{
+    gFieldCallback = FieldCB_MartReload_PrepareInterface;
+    SetMainCallback2(CB2_ReturnToField);
+}
+
+static void FieldCB_MartReload_PrepareInterface(void)
+{
+    FadeInFromBlack();
+    CreateTask(Task_MartReload_WaitForFade, 0);
+}
