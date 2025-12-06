@@ -41,6 +41,7 @@ void StopPlayerAvatar(void);
 void SetSpinStartFacingDir(u8 direction);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender);
+u16 GetPlayerAvatarGraphicsByCustomValues(u8 state, u8 val);
 void SetPlayerAvatarFieldMove(void);
 u16 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void SetPlayerAvatarStateMask(u8 flags);
@@ -65,9 +66,9 @@ bool32 IsPlayerSpinEntranceActive(void);
 bool32 IsPlayerSpinExitActive(void);
 void SetPlayerInvisibility(bool8 invisible);
 u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y);
-void StartFishing(u8 rod);
 void PlayerAvatarTransition_Surfing(struct ObjectEvent *); // qol_field_moves
 void ForcePlayerToPerformMovementAction(void); // qol_field_moves
+void SetPlayerAvatarFishing(u8 direction);
 bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u8 direction);
 //sideways stairs
 u8 GetRightSideStairsDirection(u8 direction);

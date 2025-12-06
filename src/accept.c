@@ -21,6 +21,7 @@
 #include "constants/accept.h"
 #include "menu_helpers.h"
 #include "dma3.h"
+#include "frontier_pass.h"
 #include "ui_options_menu.h"
 #include "options_visual.h"
 #include "pc_screen_effect.h"
@@ -34,7 +35,6 @@ struct AcceptState
 };
 
 static bool32 AllocateStructs(void);
-void ResetGpuRegsAndBgs(void);
 static void Accept_SetupCallback(void);
 static void FreeSpritePalettesResetSpriteData(void);
 static void InitializeBackgroundsAndLoadBackgroundGraphics(void);
@@ -100,8 +100,8 @@ static const u16 acceptPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/y
 static const u16 acceptPalettesEmail[] = INCBIN_U16("graphics/accept/palettes/email.gbapal");
 static const u16 acceptPalettesText[] = INCBIN_U16("graphics/accept/palettes/text.gbapal");
 
-static const u32 desktopBgTiles[] = INCBIN_U32("graphics/accept/desktopbg.4bpp.lz");
-static const u32 desktopBgTilemap[] = INCBIN_U32("graphics/accept/desktopbg.bin.lz");
+static const u32 desktopBgTiles[] = INCBIN_U32("graphics/accept/desktopbg.4bpp.smol");
+static const u32 desktopBgTilemap[] = INCBIN_U32("graphics/accept/desktopbg.bin.smolTM");
 
 static const u8 windowAnim0[] = INCBIN_U8("graphics/accept/frame0.4bpp");
 static const u8 windowAnim1[] = INCBIN_U8("graphics/accept/frame1.4bpp");
@@ -115,8 +115,8 @@ static const u8 devAnim3[] = INCBIN_U8("graphics/accept/devFrame3.4bpp");
 
 static const u8 emailSelector[] = INCBIN_U8("graphics/accept/selector.4bpp");
 
-static const u32 desktopMouseSprite[] = INCBIN_U32("graphics/accept/mouse.4bpp.lz");
-static const u32 acceptScrollbar[] = INCBIN_U32("graphics/accept/scrollbar.4bpp.lz");
+static const u32 desktopMouseSprite[] = INCBIN_U32("graphics/accept/mouse.4bpp.smol");
+static const u32 acceptScrollbar[] = INCBIN_U32("graphics/accept/scrollbar.4bpp.smol");
 
 static const u8 sAcceptWindowFontColors[][3] =
 {
@@ -304,35 +304,6 @@ void CB2_GoToDevIntro(void)
     SetDevMode(TRUE);
 }
 
-void ResetGpuRegsAndBgs(void)
-{
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
-    SetGpuReg(REG_OFFSET_BG3CNT, 0);
-    SetGpuReg(REG_OFFSET_BG2CNT, 0);
-    SetGpuReg(REG_OFFSET_BG1CNT, 0);
-    SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    ChangeBgX(0, 0, BG_COORD_SET);
-    ChangeBgY(0, 0, BG_COORD_SET);
-    ChangeBgX(1, 0, BG_COORD_SET);
-    ChangeBgY(1, 0, BG_COORD_SET);
-    ChangeBgX(2, 0, BG_COORD_SET);
-    ChangeBgY(2, 0, BG_COORD_SET);
-    ChangeBgX(3, 0, BG_COORD_SET);
-    ChangeBgY(3, 0, BG_COORD_SET);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    SetGpuReg(REG_OFFSET_BLDY, 0);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-    SetGpuReg(REG_OFFSET_WIN0H, 0);
-    SetGpuReg(REG_OFFSET_WIN0V, 0);
-    SetGpuReg(REG_OFFSET_WIN1H, 0);
-    SetGpuReg(REG_OFFSET_WIN1V, 0);
-    SetGpuReg(REG_OFFSET_WININ, 0);
-    SetGpuReg(REG_OFFSET_WINOUT, 0);
-    CpuFill16(0, (void *)VRAM, VRAM_SIZE);
-    CpuFill32(0, (void *)OAM, OAM_SIZE);
-}
-
 static bool32 AllocateStructs(void)
 {
     sAcceptState = AllocZeroed(sizeof(struct AcceptState));
@@ -447,6 +418,11 @@ static bool32 Accept_InitializeBackgrounds(bool32 isFirst)
     return TRUE;
 }
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (sAcceptTilesLUT[backgroundId] == NULL || sAcceptTilesLUT[backgroundId] == NULL);
+}
+
 static bool32 DebugShouldSkipBg(u32 bg)
 {
     bool32 skipBg[BG_ACCEPT_COUNT] =
@@ -509,6 +485,9 @@ static void LoadGraphics(void)
     for (backgroundId = BG2_ACCEPT_BACKGROUND; backgroundId < BG_ACCEPT_COUNT; backgroundId++)
     {
         if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        if (AreTilesOrTilemapEmpty(backgroundId))
             continue;
 
         DecompressAndLoadBgGfxUsingHeap(backgroundId,sAcceptTilesLUT[backgroundId], 0, 0, 0);

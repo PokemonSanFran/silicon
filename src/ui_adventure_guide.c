@@ -177,23 +177,21 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 1 + (26 * 2) + (26 * 14) + (30 * 2) + (30 * 16),
-    }
+    },
+    DUMMY_WIN_TEMPLATE,
 };
 
 static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
-static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_up.4bpp.lz");
-static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.lz");
-static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.lz");
-static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.lz");
+static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_up.4bpp.smol");
+static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.smol");
+static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.smol");
+static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.smol");
 
-static const u32 sTransBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.4bpp.lz");
-static const u32 sTransBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/transperant.bin.lz");
+static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.smol");
+static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.smolTM");
 
-static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.lz");
-static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.lz");
-
-static const u32 sMenuBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.4bpp.lz");
-static const u32 sMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.bin.lz");
+static const u32 sMenuBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.4bpp.smol");
+static const u32 sMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.bin.smolTM");
 
 static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
 static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");
@@ -227,15 +225,10 @@ static const u8 sMenuWindowFontColors[][3] =
 
 //==========FUNCTIONS==========//
 // UI loader template
-void Task_OpenAdventureGuideFromStartMenu(u8 taskId)
+void CB2_AdventureGuideFromStartMenu(void)
 {
-    if (gPaletteFade.active)
-        return;
-
-    CleanupOverworldWindowsAndTilemaps();
     VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN, NUM_GUIDES);
-    Adventure_Guide_Init(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
+    Adventure_Guide_Init(CB2_StartMenu_ReturnToUI);
 }
 
 void OpenAdventureGuideFromScript(void)
@@ -535,8 +528,8 @@ static void Menu_FreeResources(void)
     if (sMenuDataPtr != NULL)
         Free(sMenuDataPtr);
 
-    FreeAllWindowBuffers();
     FreeBackgrounds();
+    FreeAllWindowBuffers();
 }
 
 static void Task_MenuWaitFadeAndBail(u8 taskId)
@@ -561,9 +554,6 @@ static bool8 AllocZeroedTilemapBuffers(void)
     for (enum AdventureBackgrounds backgroundId = 0; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
     {
         sMenuDataPtr->bgTilemapBuffers[backgroundId] = AllocZeroed(BG_SCREEN_SIZE);
-
-        if (sMenuDataPtr->bgTilemapBuffers[backgroundId] == NULL)
-            return FALSE;
 
         if (sMenuDataPtr->bgTilemapBuffers[backgroundId] == NULL)
             return FALSE;
@@ -614,7 +604,7 @@ static bool8 Menu_InitBgs(void)
 static const u32* const sAdventureTilesLUT[] =
 {
     [BG0_ADVENTURE_GUIDE_TEXT] = NULL,
-    [BG1_ADVENTURE_GUIDE_LIST] = sTransBgTiles,
+    [BG1_ADVENTURE_GUIDE_LIST] = NULL,
     [BG2_ADVENTURE_LIST_BOXES] = sListBgTiles,
     [BG3_ADVENTURE_LIST_GENERIC] = sMenuBgTiles,
 };
@@ -622,17 +612,25 @@ static const u32* const sAdventureTilesLUT[] =
 static const u32* const sAdventureTilemapLUT[] =
 {
     [BG0_ADVENTURE_GUIDE_TEXT] = NULL,
-    [BG1_ADVENTURE_GUIDE_LIST] = sTransBgTilemap,
+    [BG1_ADVENTURE_GUIDE_LIST] = NULL,
     [BG2_ADVENTURE_LIST_BOXES] = sListBgTilemap,
     [BG3_ADVENTURE_LIST_GENERIC] = sMenuBgTilemap,
 };
+
+static bool8 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (sAdventureTilesLUT[backgroundId] == NULL || sAdventureTilemapLUT[backgroundId] == NULL);
+}
 
 static void Menu_LoadGraphics(void)
 {
     ResetTempTileDataBuffers();
 
-    for (enum AdventureBackgrounds backgroundId = BG1_ADVENTURE_GUIDE_LIST; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
+    for (enum AdventureBackgrounds backgroundId = BG0_ADVENTURE_GUIDE_TEXT; backgroundId < BG_ADVENTURE_GUIDE_COUNT; backgroundId++)
     {
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
         DecompressAndLoadBgGfxUsingHeap(backgroundId, sAdventureTilesLUT[backgroundId], 0, 0, 0);
         CopyToBgTilemapBuffer(backgroundId, sAdventureTilemapLUT[backgroundId],0,0);
     }

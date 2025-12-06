@@ -1,4 +1,3 @@
-//PSF TODO when the player first opens this, there should be a tutorial to play to explain features and functionality
 //PSF TODO If a player recives a 2nd quest via startquest and the player has still never opened the questlog and done the tutorial, force the tutorial
 #include "global.h"
 #include "strings.h"
@@ -39,7 +38,6 @@
 #include "event_object_movement.h"
 #include "pokemon_icon.h"
 #include "quest_flavor_lookup.h"
-#include "ui_start_menu.h"
 #include "field_weather.h"
 #include "field_screen_effect.h"
 #include "tv.h"
@@ -140,7 +138,6 @@ static u8 GenerateList(void);
 static void AssignCancelNameAndId(u8 numRow);
 
 static u32 CountUnlockedQuests(void);
-static u32 CountInactiveQuests(void);
 static u32 CountActiveQuests(void);
 static u32 CountRewardQuests(void);
 static u32 CountFavoriteQuests(void);
@@ -248,68 +245,68 @@ static void HandleMenuArrowSpriteVisibility(struct Sprite *sprite);
 static bool32 IsCursorOrPositionAtTop(u32);
 static bool32 IsCursorOrPositionAtBottom(u32);
 
-static const u32 questArrowsBottom[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/bottom.4bpp.lz");
-static const u32 questArrowsTop[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/top.4bpp.lz");
+static const u32 questArrowsBottom[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/bottom.4bpp.smol");
+static const u32 questArrowsTop[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/top.4bpp.smol");
 static const u16 questPalettesDefault[] = INCBIN_U16("graphics/ui_menus/glass/palettes/default.gbapal");
 
-static const u32 sCarveTile0[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve0.4bpp.lz");
-static const u32 sCarveTile1[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve1.4bpp.lz");
-static const u32 sCarveTile2[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve2.4bpp.lz");
-static const u32 sCarveTile3[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve3.4bpp.lz");
-static const u32 sCarveTile4[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve4.4bpp.lz");
-static const u32 sCarveTile5[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve5.4bpp.lz");
-static const u32 sCarveTile6[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve6.4bpp.lz");
-static const u32 sCarveTile7[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve7.4bpp.lz");
-static const u32 sCarveTile8[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve8.4bpp.lz");
-static const u32 sCarveTile9[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve9.4bpp.lz");
-static const u32 sCarveTile10[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve10.4bpp.lz");
-static const u32 sCarveTile11[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve11.4bpp.lz");
-static const u32 sCarveTile12[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve12.4bpp.lz");
-static const u32 sCarveTile13[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve13.4bpp.lz");
-static const u32 sCarveTile14[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve14.4bpp.lz");
-static const u32 sCarveTile15[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve15.4bpp.lz");
-static const u32 sCarveTile16[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve16.4bpp.lz");
-static const u32 sCarveTile17[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve17.4bpp.lz");
-static const u32 sCarveTile18[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve18.4bpp.lz");
-static const u32 sCarveTile19[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve19.4bpp.lz");
+static const u32 sCarveTile0[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve0.4bpp.smol");
+static const u32 sCarveTile1[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve1.4bpp.smol");
+static const u32 sCarveTile2[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve2.4bpp.smol");
+static const u32 sCarveTile3[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve3.4bpp.smol");
+static const u32 sCarveTile4[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve4.4bpp.smol");
+static const u32 sCarveTile5[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve5.4bpp.smol");
+static const u32 sCarveTile6[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve6.4bpp.smol");
+static const u32 sCarveTile7[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve7.4bpp.smol");
+static const u32 sCarveTile8[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve8.4bpp.smol");
+static const u32 sCarveTile9[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve9.4bpp.smol");
+static const u32 sCarveTile10[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve10.4bpp.smol");
+static const u32 sCarveTile11[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve11.4bpp.smol");
+static const u32 sCarveTile12[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve12.4bpp.smol");
+static const u32 sCarveTile13[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve13.4bpp.smol");
+static const u32 sCarveTile14[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve14.4bpp.smol");
+static const u32 sCarveTile15[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve15.4bpp.smol");
+static const u32 sCarveTile16[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve16.4bpp.smol");
+static const u32 sCarveTile17[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve17.4bpp.smol");
+static const u32 sCarveTile18[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve18.4bpp.smol");
+static const u32 sCarveTile19[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve19.4bpp.smol");
 
-static const u32 sCarvePlainTile0[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain0.4bpp.lz");
-static const u32 sCarvePlainTile1[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain1.4bpp.lz");
-static const u32 sCarvePlainTile2[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain2.4bpp.lz");
-static const u32 sCarvePlainTile3[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain3.4bpp.lz");
-static const u32 sCarvePlainTile4[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain4.4bpp.lz");
-static const u32 sCarvePlainTile5[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain5.4bpp.lz");
-static const u32 sCarvePlainTile6[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain6.4bpp.lz");
-static const u32 sCarvePlainTile7[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain7.4bpp.lz");
-static const u32 sCarvePlainTile8[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain8.4bpp.lz");
-static const u32 sCarvePlainTile9[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain9.4bpp.lz");
-static const u32 sCarvePlainTile10[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain10.4bpp.lz");
-static const u32 sCarvePlainTile11[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain11.4bpp.lz");
-static const u32 sCarvePlainTile12[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain12.4bpp.lz");
-static const u32 sCarvePlainTile13[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain13.4bpp.lz");
-static const u32 sCarvePlainTile14[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain14.4bpp.lz");
-static const u32 sCarvePlainTile15[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain15.4bpp.lz");
-static const u32 sCarvePlainTile16[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain16.4bpp.lz");
-static const u32 sCarvePlainTile17[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain17.4bpp.lz");
-static const u32 sCarvePlainTile18[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain18.4bpp.lz");
-static const u32 sCarvePlainTile19[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain19.4bpp.lz");
+static const u32 sCarvePlainTile0[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain0.4bpp.smol");
+static const u32 sCarvePlainTile1[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain1.4bpp.smol");
+static const u32 sCarvePlainTile2[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain2.4bpp.smol");
+static const u32 sCarvePlainTile3[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain3.4bpp.smol");
+static const u32 sCarvePlainTile4[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain4.4bpp.smol");
+static const u32 sCarvePlainTile5[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain5.4bpp.smol");
+static const u32 sCarvePlainTile6[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain6.4bpp.smol");
+static const u32 sCarvePlainTile7[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain7.4bpp.smol");
+static const u32 sCarvePlainTile8[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain8.4bpp.smol");
+static const u32 sCarvePlainTile9[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain9.4bpp.smol");
+static const u32 sCarvePlainTile10[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain10.4bpp.smol");
+static const u32 sCarvePlainTile11[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain11.4bpp.smol");
+static const u32 sCarvePlainTile12[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain12.4bpp.smol");
+static const u32 sCarvePlainTile13[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain13.4bpp.smol");
+static const u32 sCarvePlainTile14[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain14.4bpp.smol");
+static const u32 sCarvePlainTile15[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain15.4bpp.smol");
+static const u32 sCarvePlainTile16[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain16.4bpp.smol");
+static const u32 sCarvePlainTile17[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain17.4bpp.smol");
+static const u32 sCarvePlainTile18[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain18.4bpp.smol");
+static const u32 sCarvePlainTile19[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain19.4bpp.smol");
 
-static const u32 sCursorTile0[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile0.4bpp.lz");
-static const u32 sCursorTile1[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile1.4bpp.lz");
-static const u32 sCursorTile2[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile2.4bpp.lz");
-static const u32 sCursorTile3[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile3.4bpp.lz");
-static const u32 sCursorTile4[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile4.4bpp.lz");
-static const u32 sCursorTile5[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile5.4bpp.lz");
-static const u32 sCursorTile6[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile6.4bpp.lz");
-static const u32 sCursorTile7[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile7.4bpp.lz");
-static const u32 sCursorTile8[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile8.4bpp.lz");
-static const u32 sCursorTile9[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile9.4bpp.lz");
-static const u32 sCursorTile10[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile10.4bpp.lz");
-static const u32 sCursorTile11[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile11.4bpp.lz");
-static const u32 sCursorTile12[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile12.4bpp.lz");
-static const u32 sCursorTile13[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile13.4bpp.lz");
-static const u32 sCursorTile14[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile14.4bpp.lz");
-static const u32 sCursorTile15[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile15.4bpp.lz");
+static const u32 sCursorTile0[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile0.4bpp.smol");
+static const u32 sCursorTile1[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile1.4bpp.smol");
+static const u32 sCursorTile2[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile2.4bpp.smol");
+static const u32 sCursorTile3[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile3.4bpp.smol");
+static const u32 sCursorTile4[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile4.4bpp.smol");
+static const u32 sCursorTile5[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile5.4bpp.smol");
+static const u32 sCursorTile6[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile6.4bpp.smol");
+static const u32 sCursorTile7[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile7.4bpp.smol");
+static const u32 sCursorTile8[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile8.4bpp.smol");
+static const u32 sCursorTile9[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile9.4bpp.smol");
+static const u32 sCursorTile10[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile10.4bpp.smol");
+static const u32 sCursorTile11[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile11.4bpp.smol");
+static const u32 sCursorTile12[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile12.4bpp.smol");
+static const u32 sCursorTile13[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile13.4bpp.smol");
+static const u32 sCursorTile14[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile14.4bpp.smol");
+static const u32 sCursorTile15[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile15.4bpp.smol");
 
 static const u8 favoriteIndicatorBitmap[]  = INCBIN_U8("graphics/quest_menu/favoriteIndicator.4bpp");
 static const u8 subquestIndicatorBitmap[]  = INCBIN_U8("graphics/quest_menu/subquestIndicator.4bpp");
@@ -320,11 +317,11 @@ static const u8 locationBitmap[] = INCBIN_U8("graphics/quest_menu/location.4bpp"
 static const u8 carveBitmap[] = INCBIN_U8("graphics/quest_menu/carveBitmap.4bpp");
 
 // Tiles, palettes and tilemaps for the Quest Menu
-static const u32 sQuestMenuTiles[] = INCBIN_U32("graphics/quest_menu/menu.4bpp.lz");
-static const u32 sQuestMenuTilemap[] = INCBIN_U32("graphics/quest_menu/menu.bin.lz");
+static const u32 sQuestMenuTiles[] = INCBIN_U32("graphics/quest_menu/menu.4bpp.smol");
+static const u32 sQuestMenuTilemap[] = INCBIN_U32("graphics/quest_menu/menu.bin.smolTM");
 
-static const u32 sQuestListTiles[] = INCBIN_U32("graphics/quest_menu/list.4bpp.lz");
-static const u32 sQuestListTilemap[] = INCBIN_U32("graphics/quest_menu/list.bin.lz");
+static const u32 sQuestListTiles[] = INCBIN_U32("graphics/quest_menu/list.4bpp.smol");
+static const u32 sQuestListTilemap[] = INCBIN_U32("graphics/quest_menu/list.bin.smolTM");
 
 static const u16 sQuestMenuListPal[] = INCBIN_U16("graphics/quest_menu/palettes/list.gbapal");
 static const u16 sQuestMenuPalettesBlack[] = INCBIN_U16("graphics/quest_menu/palettes/black.gbapal");
@@ -355,6 +352,10 @@ static const u32 *const questTilemap[BG_QUEST_COUNT] =
     [BG3_QUEST_BG_BACKGROUND] = sQuestMenuTilemap,
 };
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (questTiles[backgroundId] == NULL || questTilemap[backgroundId] == NULL);
+}
 
 //Strings used for the Quest Menu
 static const u8* const questHeaderStrings[QUEST_FILTER_COUNT][QUEST_SORT_COUNT] =
@@ -667,6 +668,9 @@ static void LoadGraphics(void)
 
     for(enum QuestBgs backgroundId = BG1_QUEST_BG_INDICATORS; backgroundId < BG_QUEST_COUNT; backgroundId++)
     {
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
         DecompressAndLoadBgGfxUsingHeap(backgroundId, questTiles[backgroundId],0,0,0);
         CopyToBgTilemapBuffer(backgroundId, questTilemap[backgroundId],0,0);
     }
@@ -1904,6 +1908,7 @@ static void PrintAllQuestSprites(void)
 
 static void RemoveAllQuestSprites(void)
 {
+    //PSF TODO the menu will run out of palettes after 20 scrolls and I have no idea why.
     for (enum QuestMenuRows rowIndex = 0; rowIndex < QUEST_MENU_UX_ROW_COUNT; rowIndex++)
     {
         struct Sprite *sprite = &gSprites[GetQuestSpriteId(rowIndex)];
@@ -2695,16 +2700,9 @@ static void Task_QuestMenuTurnOff(u8 taskId)
     }
 }
 
-void Task_QuestMenu_OpenFromStartMenu(u8 taskId)
+void CB2_QuestMenuFromStartMenu(void)
 {
-    if (gPaletteFade.active)
-        return;
-
-    StartMenu_Menu_FreeResources();
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    QuestMenu_Init(CB2_ReturnToUIMenu);
-    DestroyTask(taskId);
+    QuestMenu_Init(CB2_StartMenu_ReturnToUI);
 }
 
 void QuestMenu_CopyQuestName(u8 *dst, u8 questId)

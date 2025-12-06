@@ -152,6 +152,7 @@ static const u8 *const sEggGroupTexts[] =
 static const u8 sText_MegaEvolution[] =_("Mega Evolution");
 
 void Task_OpenPokedexFromStartMenu(u8);
+void CB2_PokedexFromStartMenu(void);
 u32 ConvertSpeciesIdToResidoDex(u32 speciesId);
 u32 GetPokedexPercentage(void);
 bool32 SpeciesFilter_GetFilterChangeFlag(void);
@@ -202,7 +203,7 @@ u32 SpeciesMenu_GetMenuPosition(void);
 void SpeciesGrid_CleanUp(u8 taskId);
 enum PokedexSortOrders SpeciesGrid_GetSort(void);
 const u16* SpeciesGrid_GetSortOrder(enum PokedexSortOrders);
-u32 SpeciesGrid_GetMonIconSpriteId(enum ParentsDisplayRows row, enum ParentsDisplayColumns column);
+u32 SpeciesGrid_GetMonIconSpriteId(u32 row, u32 column);
 u32 PageMoves_GetMonToDisplay(void);
 void PageMoves_BuildHeaderStringPlayCry(enum PokedexPages pageId);
 void PageEvolution_BuildHeaderStringPlayCry(enum PokedexPages pageId);

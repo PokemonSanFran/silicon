@@ -1,17 +1,33 @@
 #ifndef GUARD_CONSTANTS_GLOBAL_H
 #define GUARD_CONSTANTS_GLOBAL_H
 
-#include "config/general.h"
-#include "config/battle.h"
-#include "config/debug.h"
-#include "config/item.h"
-#include "config/caps.h"
-#include "config/pokemon.h"
-#include "config/overworld.h"
-#include "config/dexnav.h"
-#include "config/summary_screen.h"
+// You can use the ENABLED_ON_RELEASE and DISABLED_ON_RELEASE macros to
+// control whether a feature is enabled or disabled when making a release build.
+//
+// For example, the overworld debug menu is enabled by default, but when using
+// `make release`, it will be automatically disabled.
+//
+// #define DEBUG_OVERWORLD_MENU DISABLED_ON_RELEASE
+#ifdef RELEASE
+#define ENABLED_ON_RELEASE TRUE
+#define DISABLED_ON_RELEASE FALSE
+#else
+#define ENABLED_ON_RELEASE FALSE
+#define DISABLED_ON_RELEASE TRUE
+#endif
+
 #include "config/ai.h"
+#include "config/battle.h"
+#include "config/caps.h"
+#include "config/contest.h"
+#include "config/debug.h"
+#include "config/dexnav.h"
 #include "config/follower_npc.h"
+#include "config/general.h"
+#include "config/item.h"
+#include "config/overworld.h"
+#include "config/pokemon.h"
+#include "config/summary_screen.h"
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
@@ -72,20 +88,6 @@
 // PSF TODO Update all of these values to match the max size of the pockets
 // PSF TODO update these with real ass values based on items in the game
 #define PC_ITEMS_COUNT 1 // siliconMerge
-#define BAG_ITEMS_COUNT 1 // inventory
-#define BAG_KEYITEMS_COUNT 102  // siliconMerge
-#define BAG_POKEBALLS_COUNT 36 // siliconMerge
-#define BAG_TMHM_COUNT NUM_TECHNICAL_MACHINES // PSF technicalmachine Branch
-#define BAG_BERRIES_COUNT 68 // siliconMerge
-// Start inventory
-#define BAG_MEDICINE_COUNT     44
-#define BAG_BATTLE_ITEMS_COUNT 172
-#define BAG_POWERUP_COUNT      144
-#define BAG_OTHER_COUNT        51
-#define BAG_TREASURES_COUNT    61
-#define BAG_Z_CRYSTALS_COUNT   35
-#define BAG_MEGA_STONES_COUNT  60
-// End inventory
 
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 // Start siliconMerge
@@ -103,6 +105,22 @@
 #define SAVED_TRENDS_COUNT 5
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
+
+// Bag constants
+#define BAG_ITEMS_COUNT 525 // siliconMerge
+#define BAG_KEYITEMS_COUNT 102  // siliconMerge
+#define BAG_POKEBALLS_COUNT 36 // siliconMerge
+#define BAG_TMHM_COUNT 435 // siliconMerge //PSF TODO make this not a magic number?
+#define BAG_BERRIES_COUNT 68 // siliconMerge
+// Start inventory
+#define BAG_MEDICINE_COUNT     44
+#define BAG_BATTLE_ITEMS_COUNT 172
+#define BAG_POWERUP_COUNT      144
+#define BAG_OTHER_COUNT        51
+#define BAG_TREASURES_COUNT    61
+#define BAG_Z_CRYSTALS_COUNT   35
+#define BAG_MEGA_STONES_COUNT  60
+// End inventory
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.
@@ -122,12 +140,14 @@
 #define ALL_MOVES_MASK ((1 << MAX_MON_MOVES) - 1)
 
 #define CONTESTANT_COUNT 4
-#define CONTEST_CATEGORY_COOL     0
-#define CONTEST_CATEGORY_BEAUTY   1
-#define CONTEST_CATEGORY_CUTE     2
-#define CONTEST_CATEGORY_SMART    3
-#define CONTEST_CATEGORY_TOUGH    4
-#define CONTEST_CATEGORIES_COUNT  5
+#define CONTEST_CATEGORY_COOL      0
+#define CONTEST_CATEGORY_BEAUTIFUL 1
+#define CONTEST_CATEGORY_BEAUTY    CONTEST_CATEGORY_BEAUTIFUL
+#define CONTEST_CATEGORY_CUTE      2
+#define CONTEST_CATEGORY_CLEVER    3
+#define CONTEST_CATEGORY_SMART     CONTEST_CATEGORY_CLEVER
+#define CONTEST_CATEGORY_TOUGH     4
+#define CONTEST_CATEGORIES_COUNT   5
 
 // string lengths
 #define ITEM_NAME_LENGTH 20
@@ -187,10 +207,10 @@ enum PlayerGender
 #define OPTIONS_BUTTON_MODE_L_MODE_COUNT 2
 // End siliconMerge
 
-#define OPTIONS_TEXT_SPEED_SLOW    0
-#define OPTIONS_TEXT_SPEED_MID     1
-#define OPTIONS_TEXT_SPEED_FAST    2
-#define OPTIONS_TEXT_SPEED_INSTANT 3 // siliconMerge
+#define OPTIONS_TEXT_SPEED_SLOW 0
+#define OPTIONS_TEXT_SPEED_MID 1
+#define OPTIONS_TEXT_SPEED_FAST 2
+#define OPTIONS_TEXT_SPEED_INSTANT 3
 
 #define OPTIONS_SOUND_MONO 0
 #define OPTIONS_SOUND_STEREO 1

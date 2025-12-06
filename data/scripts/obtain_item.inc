@@ -179,8 +179,8 @@ EventScript_PickUpItem::
 	waitfanfare
 	waitmessage
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
-	pyramid_inchallenge
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
+	pyramid_getlocation
+	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_FLOOR, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
 	return
@@ -251,6 +251,7 @@ EventScript_FoundHiddenItem::
 	end
 
 EventScript_PutHiddenItemInPocket::
+	callnative Script_ClearDowsingColor
 	delay 10
 	showitemdescription
 	waitmessage
@@ -261,6 +262,7 @@ EventScript_PutHiddenItemInPocket::
 	hideitemdescription
 	special TryPutTreasureInvestigatorsOnAir
 	special SetHiddenItemFlag
+	callnative Script_UpdateDowseState
 	releaseall
 	end
 

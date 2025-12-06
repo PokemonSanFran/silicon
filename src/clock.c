@@ -1,11 +1,15 @@
 #include "global.h"
+#include "berry.h"
 #include "clock.h"
+#include "dewford_trend.h"
 #include "event_data.h"
+#include "field_specials.h"
+#include "field_weather.h"
+#include "main.h"
+#include "lottery_corner.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "time_events.h"
-#include "field_specials.h"
-#include "lottery_corner.h"
-#include "dewford_trend.h"
 #include "tv.h"
 #include "field_weather.h"
 #include "berry.h"
@@ -16,6 +20,7 @@
 #include "quest_logic.h" // siliconMerge
 #include "constants/form_change_types.h"
 #include "quest_logic.h" // siliconMerge
+#include "apricorn_tree.h"
 
 static void UpdatePerDay(struct Time *localTime);
 static void UpdatePerMinute(struct Time *localTime);
@@ -61,6 +66,7 @@ static void UpdatePerDay(struct Time *localTime)
         SetRandomLotteryNumber(daysSince);
         UpdateDaysPassedSinceFormChange(daysSince);
         Quest_CutePokemon_DailyEvent(daysSince); // siliconMerge
+        DailyResetApricornTrees();
         *days = localTime->days;
     }
 }

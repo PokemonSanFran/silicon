@@ -34,17 +34,18 @@
 #include "overworld.h"
 #include "ui_options_menu.h"
 #include "util.h"
+#include "constants/inventory.h"
+#include "ui_inventory.h"
+#include "ui_options_menu.h"
 #include "event_data.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/party_menu.h"
-#include "constants/inventory.h"
-#include "ui_options_menu.h"
 
-#define FAVORITE_ITEMS_POCKET POCKETS_COUNT
-#define NUM_INVENTORY_POCKETS FAVORITE_ITEMS_POCKET + 1 //Favorite Pocket
+#define POCKET_FAVORITE_ITEMS POCKETS_COUNT
+#define NUM_INVENTORY_POCKETS POCKET_FAVORITE_ITEMS + 1 //Favorite Pocket
 #define MAX_INVENTORY_FAVORITE_ITEMS  5
 #define MAX_INVENTORY_ITEMS           255
 #define DISABLE_REGISTER_NON_KEY_ITEMS FALSE
@@ -165,7 +166,7 @@ bool8 shouldShowRegisteredItems(void);
 void ForceReloadInventory(void);
 
 //bag sort
-static void SortItemsInBag(u8 pocket, u8 type);
+static void SortItemsInInventory(u8 pocket, u8 type);
 static void MergeSort(struct ItemSlot* array, u32 low, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*));
 static void Merge(struct ItemSlot* array, u32 low, u32 mid, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*));
 static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
@@ -253,6 +254,10 @@ static const u8 sMenuWindowFontColors[][3] =
 
 //==========FUNCTIONS==========//
 // UI loader template
+void CB2_InventoryFromStartMenu(void)
+{
+    Inventory_Init(CB2_ReturnToFieldWithOpenMenu, INVENTORY_MODE_FIELD);
+}
 void Task_OpenInventoryFromStartMenu(u8 taskId)
 {
     //s16 *data = gTasks[taskId].data;
@@ -401,7 +406,7 @@ static bool8 Menu_DoGfxSetup(void)
 })
 
 bool8 shouldShowRegisteredItems(void){
-    bool8 UseRegisterGrid = (gSaveBlock3Ptr->InventoryData.pocketNum == KEYITEMS_POCKET || sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REGISTER);
+    bool8 UseRegisterGrid = (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS || sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REGISTER);
 
     return UseRegisterGrid;
 }
@@ -518,8 +523,8 @@ static bool8 Menu_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
-            LZDecompressWram(sBackgroundTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_TRANSPARENT]);
+            DecompressDataWithHeaderWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
+            DecompressDataWithHeaderWram(sBackgroundTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_TRANSPARENT]);
             Menu_UpdateTilemap();
             sMenuDataPtr->gfxLoadState++;
         }
@@ -551,40 +556,40 @@ static void Menu_InitWindows(void)
 
 u16 getMaxItemsFromPocket(u8 pocket){
     switch(pocket){
-        case MEDICINE_POCKET:
+        case POCKET_MEDICINE:
             return BAG_MEDICINE_COUNT;
         break;
-        case BALLS_POCKET:
+        case POCKET_POKE_BALLS:
             return BAG_POKEBALLS_COUNT;
         break;
-        case BATTLE_ITEMS_POCKET:
+        case POCKET_BATTLE_ITEMS:
             return BAG_BATTLE_ITEMS_COUNT;
         break;
-        case POWERUP_POCKET:
+        case POCKET_POWERUP:
             return BAG_POWERUP_COUNT;
         break;
-        case BERRIES_POCKET:
+        case POCKET_BERRIES:
             return BAG_BERRIES_COUNT;
         break;
-        case OTHER_POCKET:
+        case POCKET_OTHER:
             return BAG_OTHER_COUNT;
         break;
-        case TMHM_POCKET:
+        case POCKET_TM_HM:
             return BAG_TMHM_COUNT;
         break;
-        case TREASURE_POCKET:
+        case POCKET_TREASURE:
             return BAG_TREASURES_COUNT;
         break;
-        case Z_CRYSTALS_POCKET:
+        case POCKET_Z_CRYSTALS:
             return BAG_Z_CRYSTALS_COUNT;
         break;
-        case MEGA_STONES_POCKET:
+        case POCKET_MEGA_STONES:
             return BAG_MEGA_STONES_COUNT;
         break;
-        case KEYITEMS_POCKET:
+        case POCKET_KEY_ITEMS:
             return BAG_KEYITEMS_COUNT;
         break;
-        case FAVORITE_ITEMS_POCKET:
+        case POCKET_FAVORITE_ITEMS:
             return (MAX_INVENTORY_FAVORITE_ITEMS * POCKETS_COUNT);
         break;
     }
@@ -613,7 +618,7 @@ void ForceReloadInventory(void){
     RemoveEmptyRegisteredItems();
 
     //Favorite Pocket
-    sMenuDataPtr->numItems[FAVORITE_ITEMS_POCKET] = 0;
+    sMenuDataPtr->numItems[POCKET_FAVORITE_ITEMS] = 0;
 
     //Clears Favorite Pocket
     for(i = 0; i < (POCKETS_COUNT * MAX_INVENTORY_FAVORITE_ITEMS); i++){
@@ -629,77 +634,40 @@ void ForceReloadInventory(void){
         //Sets Favorite Pocket
         for(j = 0; j < MAX_INVENTORY_FAVORITE_ITEMS; j++){
             if(gSaveBlock3Ptr->InventoryData.numFavoriteItems[i] > j){
-                k = sMenuDataPtr->numItems[FAVORITE_ITEMS_POCKET];
+                k = sMenuDataPtr->numItems[POCKET_FAVORITE_ITEMS];
                 itemId = pocket->itemSlots[j].itemId;
                 count = CountTotalItemQuantityInBag(itemId);
                 sMenuDataPtr->FavoritePocketItems[k][FAVORITE_ITEM_ID]           = itemId; //ItemId
                 sMenuDataPtr->FavoritePocketItems[k][FAVORITE_ITEM_QUANTITY]     = count; //Count
                 sMenuDataPtr->FavoritePocketItems[k][FAVORITE_ITEM_POCKET_INDEX] = j; //Item Index
                 sMenuDataPtr->FavoritePocketItems[k][FAVORITE_ITEM_POCKET]       = i; //Original Pocket
-                sMenuDataPtr->numItems[FAVORITE_ITEMS_POCKET]++;
+                sMenuDataPtr->numItems[POCKET_FAVORITE_ITEMS]++;
             }
             else
                 break;
         }
     }
-    sMenuDataPtr->numItems[FAVORITE_ITEMS_POCKET]++; //Exit Button
+    sMenuDataPtr->numItems[POCKET_FAVORITE_ITEMS]++; //Exit Button
 }
 
 // Bag sorting
-enum BagSortOptions
+enum Silicon_BagSortOptions
 {
-    SORT_ALPHABETICALLY,
-    SORT_BY_TYPE,
-    SORT_BY_AMOUNT, //greatest -> least
-    SORT_CANCEL,
+    ITEM_SORT_ALPHABETICALLY,
+    ITEM_SORT_BY_TYPE,
+    ITEM_SORT_BY_AMOUNT, //greatest -> least
+    ITEM_SORT_CANCEL,
     NUM_SORT_OPTIONS
-};
-
-enum ItemSortType
-{
-	ITEM_TYPE_NONE,
-	ITEM_TYPE_REPEL,
-	ITEM_TYPE_FIELD_USE,
-	ITEM_TYPE_HEALTH_RECOVERY,
-	ITEM_TYPE_STATUS_RECOVERY,
-	ITEM_TYPE_PP_RECOVERY,
-	ITEM_TYPE_STAT_BOOST_DRINK,
-    ITEM_TYPE_MINT,
-	ITEM_TYPE_STAT_BOOST_FEATHER,
-	ITEM_TYPE_EVOLUTION_STONE,
-	ITEM_TYPE_EVOLUTION_ITEM,
-	ITEM_TYPE_BATTLE_ITEM,
-	ITEM_TYPE_FLUTE,
-	ITEM_TYPE_STAT_BOOST_HELD_ITEM,
-	ITEM_TYPE_HELD_ITEM,
-	ITEM_TYPE_GEM,
-	ITEM_TYPE_PLATE,
-	ITEM_TYPE_MEMORY,
-	ITEM_TYPE_DRIVE,
-	ITEM_TYPE_INCENSE,
-	ITEM_TYPE_MEGA_STONE,
-	ITEM_TYPE_Z_CRYSTAL,
-	ITEM_TYPE_NECTAR,
-	ITEM_TYPE_SELLABLE,
-	ITEM_TYPE_RELIC,
-	ITEM_TYPE_SHARD,
-	ITEM_TYPE_FOSSIL,
-	ITEM_TYPE_MAIL,
-	ITEM_TYPE_TMHM,
-	ITEM_TYPE_POKE_BALL,
-	ITEM_TYPE_UNUSABLE_KEY_ITEM,
-	ITEM_TYPE_KEY_ITEMS,
-	NUM_ITEMS_TYPES,
 };
 
 static const u8 sText_Toss_Yes[] = _("Yes");
 static const u8 sText_Toss_No[]  = _("No");
 
 static const struct StringList sSortTypeStrings[NUM_SORT_OPTIONS] = {
-    [SORT_ALPHABETICALLY] = { _("Name"),   },
-    [SORT_BY_TYPE]        = { _("Type"),   },
-    [SORT_BY_AMOUNT]      = { _("Amount"), },
-    [SORT_CANCEL]         = { _("Cancel"), },
+    [ITEM_SORT_ALPHABETICALLY] = { _("Name"),   },
+    [ITEM_SORT_BY_TYPE]        = { _("Type"),   },
+    [ITEM_SORT_BY_AMOUNT]      = { _("Amount"), },
+    [ITEM_SORT_CANCEL]         = { _("Cancel"), },
 };
 
 static const struct StringList sDirectionStrings[INVENTORY_REGISTER_NUM_DIRECTIONS + 1] = {
@@ -749,12 +717,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_HEART_SCALE] = ITEM_TYPE_FIELD_USE,
     [ITEM_BLACK_FLUTE] = ITEM_TYPE_FIELD_USE,
     [ITEM_WHITE_FLUTE] = ITEM_TYPE_FIELD_USE,
-
-    #if I_KEY_ESCAPE_ROPE >= GEN_8
-        [ITEM_ESCAPE_ROPE] = ITEM_TYPE_KEY_ITEMS,
-    #else
-        [ITEM_ESCAPE_ROPE] = ITEM_TYPE_FIELD_USE,
-    #endif
+    [ITEM_ESCAPE_ROPE] = ITEM_TYPE_KEY_ITEMS,
 
     [ITEM_POTION] = ITEM_TYPE_HEALTH_RECOVERY,
     [ITEM_FULL_RESTORE] = ITEM_TYPE_HEALTH_RECOVERY,
@@ -1328,7 +1291,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_GO_GOGGLES] = ITEM_TYPE_UNUSABLE_KEY_ITEM,
 };
 
-static void SortItemsInBag(u8 pocket, u8 type)
+static void SortItemsInInventory(u8 pocket, u8 type)
 {
     struct ItemSlot* itemMem;
     u16 itemAmount = getMaxItemsFromPocket(pocket);
@@ -1339,51 +1302,51 @@ static void SortItemsInBag(u8 pocket, u8 type)
 
     switch (pocket)
     {
-    case MEDICINE_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Medicine;
+    case POCKET_MEDICINE:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_Medicine;
         break;
-    case BALLS_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_PokeBalls;
+    case POCKET_POKE_BALLS:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_PokeBalls;
         break;
-    case BATTLE_ITEMS_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_BattleItems;
+    case POCKET_BATTLE_ITEMS:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_BattleItems;
     break;
-    case POWERUP_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_PowerUp;
+    case POCKET_POWERUP:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_PowerUp;
     break;
-    case BERRIES_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Berries;
+    case POCKET_BERRIES:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_Berries;
         break;
-    case OTHER_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Other;
+    case POCKET_OTHER:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_Other;
     break;
-    case TMHM_POCKET:
-        //itemMem = gSaveBlock1Ptr->bagPocket_TMHM;
+    case POCKET_TM_HM:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_TMsHMs;
         return;
     break;
-    case TREASURE_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Treasure;
+    case POCKET_TREASURE:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_Treasure;
     break;
-    case Z_CRYSTALS_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Z_Crystals;
+    case POCKET_Z_CRYSTALS:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_Z_Crystals;
     break;
-    case MEGA_STONES_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Mega_Stones;
+    case POCKET_MEGA_STONES:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_Mega_Stones;
     break;
-    case KEYITEMS_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_KeyItems;
+    case POCKET_KEY_ITEMS:
+        itemMem = gSaveBlock1Ptr->bag.bagPocket_KeyItems;
         break;
-    case FAVORITE_ITEMS_POCKET:
+    case POCKET_FAVORITE_ITEMS:
     default:
         return;
     }
 
     switch (type)
     {
-    case SORT_ALPHABETICALLY:
+    case ITEM_SORT_ALPHABETICALLY:
         MergeSort(itemMem, low, itemAmount - 1, CompareItemsAlphabetically);
         break;
-    case SORT_BY_AMOUNT:
+    case ITEM_SORT_BY_AMOUNT:
         MergeSort(itemMem, low, itemAmount - 1, CompareItemsByMost);
         break;
     default:
@@ -1464,8 +1427,8 @@ static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot
 
 static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
 {
-    u16 quantity1 = GetBagItemQuantity(&itemSlot1->quantity);
-    u16 quantity2 = GetBagItemQuantity(&itemSlot2->quantity);
+    u16 quantity1 = itemSlot1->quantity;
+    u16 quantity2 = itemSlot2->quantity;
 
     if (itemSlot1->itemId == ITEM_NONE)
         return 1;
@@ -1502,7 +1465,7 @@ static void TrySortBag(void){
     if (numItems <= 2)
         PlaySE(SE_FAILURE);
     else{
-        SortItemsInBag(pocket, sMenuDataPtr->itemIdxPickMode);
+        SortItemsInInventory(pocket, sMenuDataPtr->itemIdxPickMode);
         PlaySE(SE_SELECT);
     }
 }
@@ -1685,7 +1648,6 @@ enum{
 //Pokemon Icon Stuff
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
 {
-    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     if(shouldShowRegisteredItems())
         sprite->invisible = TRUE;
     else
@@ -1718,7 +1680,7 @@ static void StartMenu_DisplayPartyIcons(void)
 static bool8 canMonLearnCurrentTMHM(u8 partyIndex){
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
 
-    if(pocketId != TMHM_POCKET){
+    if(pocketId != POCKET_TM_HM){
         return TRUE;
     }
     else{
@@ -1743,7 +1705,6 @@ static bool8 canMonLearnCurrentTMHM(u8 partyIndex){
 
 void SpriteCB_MonIconCropped(struct Sprite *sprite)
 {
-    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u8 partyNum = sprite->data[0];
 
     //Disable them when in the key items pocket
@@ -2322,18 +2283,18 @@ static u8 getSelectedItemNumOptions(void){
 }
 
 static const struct StringList sInventory_TitleStrings[NUM_INVENTORY_POCKETS] = {
-    [MEDICINE_POCKET]       = { _("Medicine"),     },
-    [BALLS_POCKET]          = { _("Poké Balls"),   },
-    [BATTLE_ITEMS_POCKET]   = { _("Battle Items"), },
-    [POWERUP_POCKET]        = { _("Power Up"),     },
-    [BERRIES_POCKET]        = { _("Berries"),      },
-    [OTHER_POCKET]          = { _("Other Items"),  },
-    [TMHM_POCKET]           = { _("TMs & HMs"),    },
-    [TREASURE_POCKET]       = { _("Treasures"),    },
-    [Z_CRYSTALS_POCKET]     = { _("Z-Crystals"),   },
-    [MEGA_STONES_POCKET]    = { _("Mega Stones"),  },
-    [KEYITEMS_POCKET]       = { _("Key Items"),    },
-    [FAVORITE_ITEMS_POCKET] = { _("Favorite"),    },
+    [POCKET_MEDICINE]       = { _("Medicine"),     },
+    [POCKET_POKE_BALLS]          = { _("Poké Balls"),   },
+    [POCKET_BATTLE_ITEMS]   = { _("Battle Items"), },
+    [POCKET_POWERUP]        = { _("Power Up"),     },
+    [POCKET_BERRIES]        = { _("Berries"),      },
+    [POCKET_OTHER]          = { _("Other Items"),  },
+    [POCKET_TM_HM]           = { _("TMs & HMs"),    },
+    [POCKET_TREASURE]       = { _("Treasures"),    },
+    [POCKET_Z_CRYSTALS]     = { _("Z-Crystals"),   },
+    [POCKET_MEGA_STONES]    = { _("Mega Stones"),  },
+    [POCKET_KEY_ITEMS]       = { _("Key Items"),    },
+    [POCKET_FAVORITE_ITEMS] = { _("Favorite"),    },
 };
 
 static const u8 sInventory_Exit[]      = _("Exit");
@@ -2398,7 +2359,7 @@ static u16 getCurrentSelectedItemIdx(void){
     u16 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
     u16 itemId  = pocket->itemSlots[itemIdx].itemId;
 
-    if(pocketId == FAVORITE_ITEMS_POCKET)
+    if(pocketId == POCKET_FAVORITE_ITEMS)
         itemId = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_ID];
 
     if(itemIdx == numitems){
@@ -2459,7 +2420,7 @@ static u8 getItemType(u16 item){
 
 static u8 getItemOptionNum(u16 item, u8 num){
     u8 itemType = getItemType(item);
-    u8 currentPocket = gSaveBlock3Ptr->InventoryData.pocketNum;
+    //u8 currentPocket = gSaveBlock3Ptr->InventoryData.pocketNum;
     u8 option = INVENTORY_ITEM_OPTION_CANCEL;
 
     switch(sMenuDataPtr->inventoryMode){
@@ -2471,7 +2432,7 @@ static u8 getItemOptionNum(u16 item, u8 num){
         break;
     }
 
-    //if(currentPocket == FAVORITE_ITEMS_POCKET && option == INVENTORY_ITEM_OPTION_FAVORITE)
+    //if(currentPocket == POCKET_FAVORITE_ITEMS && option == INVENTORY_ITEM_OPTION_FAVORITE)
     //    option = INVENTORY_ITEM_OPTION_CANCEL;
 
     return option;
@@ -2527,14 +2488,14 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         itemIdx = gSaveBlock3Ptr->InventoryData.yFirstItem + i;
         itemId  = pocket->itemSlots[itemIdx].itemId;
 
-        if(pocketId == FAVORITE_ITEMS_POCKET)
+        if(pocketId == POCKET_FAVORITE_ITEMS)
             itemId = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_ID];
 
-        if((itemIdx + 1) <= gSaveBlock3Ptr->InventoryData.numFavoriteItems[gSaveBlock3Ptr->InventoryData.pocketNum] && pocketId != FAVORITE_ITEMS_POCKET)
+        if((itemIdx + 1) <= gSaveBlock3Ptr->InventoryData.numFavoriteItems[gSaveBlock3Ptr->InventoryData.pocketNum] && pocketId != POCKET_FAVORITE_ITEMS)
             BlitBitmapToWindow(windowId, gInventoryIcon_Pinned_Gfx, (x * 8) + x2 - 18, (y * 8) + y2 - 1 + 4, 16, 8);
 
         // Cursor
-        if(pocketId != TMHM_POCKET || itemId == ITEM_NONE){
+        if(pocketId != POCKET_TM_HM || itemId == ITEM_NONE){
             if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == i){
                 if(sMenuDataPtr->currentSelectMode != INVENTORY_MODE_MOVE_ITEMS){
                     BlitBitmapToWindow(windowId, sInventoryCursor_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
@@ -2671,14 +2632,14 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
         if(itemId != ITEM_NONE){
             // Item Name
-            if(pocketId != TMHM_POCKET){
+            if(pocketId != POCKET_TM_HM){
                 CopyItemName(itemId, gStringVar1);
                 AddTextPrinterParameterized4(windowId, fontItemNames, (x * 8) + x2 + 1, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar1);
 
                 // Item Num
-                itemNum = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+                itemNum = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
-                if(pocketId == FAVORITE_ITEMS_POCKET){
+                if(pocketId == POCKET_FAVORITE_ITEMS){
                     itemNum = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_QUANTITY];
                 }
 
@@ -2716,7 +2677,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
     if(gSaveBlock3Ptr->InventoryData.itemIdx < numitems - 1){
         itemId = getCurrentSelectedItemIdx();
-        if(pocketId != TMHM_POCKET){
+        if(pocketId != POCKET_TM_HM){
             desc = GetItemDescription(itemId);
             StringCopy(gStringVar1, desc);
 
@@ -3013,7 +2974,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
     AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
 
-    if(pocketId == TMHM_POCKET)
+    if(pocketId == POCKET_TM_HM)
         CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
     else
         LoadPalette(sMenuInterfacePalette, 16, 32);
@@ -3213,10 +3174,10 @@ void Task_UseItem(u8 taskId){
         u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
 
         switch(pocketId){
-            case BERRIES_POCKET:
+            case POCKET_BERRIES:
                 ItemUseOutOfBattle_Berry(taskId);
             break;
-            case TMHM_POCKET:
+            case POCKET_TM_HM:
                 ItemUseInBattle_UseTMHM(taskId);
             break;
             default:
@@ -3433,7 +3394,7 @@ void TryToRemoveFavoriteItem(u8 pocketId, u8 itemIdx){
 }
 
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx){
-    return (itemIdx < gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId]) || pocketId == FAVORITE_ITEMS_POCKET;
+    return (itemIdx < gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId]) || pocketId == POCKET_FAVORITE_ITEMS;
 }
 
 bool8 isCurrentItemFavorite(void){
@@ -3450,10 +3411,10 @@ static void useItemWithOption(u8 taskId){
     u8 importance = gItemsInfo[getCurrentSelectedItemIdx()].importance;
     u8 oldPocketId = pocketId;
     u16 oldItemIdx = itemIdx;
-    u16 ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+    u16 ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
     bool8 wasFavorite = FALSE;
 
-    if(pocketId == FAVORITE_ITEMS_POCKET){
+    if(pocketId == POCKET_FAVORITE_ITEMS){
         //getCurrentSelectedItemIdx();
         pocketId   = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_POCKET];
         itemIdx    = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_POCKET_INDEX];
@@ -3461,7 +3422,7 @@ static void useItemWithOption(u8 taskId){
         wasFavorite = TRUE;
     }
 
-    ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+    ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
     switch(currentOption){
         case INVENTORY_ITEM_OPTION_USE:
@@ -3474,7 +3435,7 @@ static void useItemWithOption(u8 taskId){
         {
             if(!importance){
                 if(!wasFavorite)
-                    ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+                    ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
                 sMenuDataPtr->numItemsToToss    = ownedCount - 1;
                 sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_HOW_MANY;
@@ -3494,7 +3455,7 @@ static void useItemWithOption(u8 taskId){
         {
             bool8 isAlreadyFavorite = isCurrentItemFavorite();
             //oldPocketId
-            if(pocketId != FAVORITE_ITEMS_POCKET){
+            if(pocketId != POCKET_FAVORITE_ITEMS){
                 if(!isAlreadyFavorite){
                     //Favorite
                     MoveItemToTop();
@@ -3519,7 +3480,7 @@ static void useItemWithOption(u8 taskId){
                     gSaveBlock3Ptr->InventoryData.itemIdx = 0;
                     gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
-                    if(oldPocketId != FAVORITE_ITEMS_POCKET){
+                    if(oldPocketId != POCKET_FAVORITE_ITEMS){
                         do{
                             if(gSaveBlock3Ptr->InventoryData.itemIdx == numItemsInPocket - 1)
                                 break;
@@ -3569,12 +3530,12 @@ static void RemoveInventoryItem(u8 pocketId, u8 itemIdx, u16 quanity){
     u16 ownedCount, item;
     bool8 removedItem;
 
-    if(pocketId == FAVORITE_ITEMS_POCKET){
+    if(pocketId == POCKET_FAVORITE_ITEMS){
         pocketId = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET];
         itemIdx  = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET_INDEX];
     }
 
-    ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+    ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
     item = getCurrentSelectedItemIdx();
     removedItem = (ownedCount == quanity);
 
@@ -3675,7 +3636,7 @@ static void Task_MenuMain(u8 taskId)
                     useItemWithOption(taskId);
                 break;
                 case INVENTORY_MODE_REORDER:
-                    if(sMenuDataPtr->itemIdxPickMode != SORT_CANCEL){
+                    if(sMenuDataPtr->itemIdxPickMode != ITEM_SORT_CANCEL){
                         TrySortBag();
                         //sMenuDataPtr->itemIdxPickMode = 0;
                         //sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_SORTED_ITEMS_BY;
@@ -3776,7 +3737,7 @@ static void Task_MenuMain(u8 taskId)
                 gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
                 PlaySE(SE_SELECT);
-                if(tempPocket == KEYITEMS_POCKET || gSaveBlock3Ptr->InventoryData.pocketNum == KEYITEMS_POCKET)
+                if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
                     Menu_UpdateTilemap();
                 PrintToWindow(WINDOW_1, FONT_WHITE);
             }
@@ -3789,7 +3750,7 @@ static void Task_MenuMain(u8 taskId)
             {
                 u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
                 u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
-                u16 ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+                u16 ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
                 if(sMenuDataPtr->numItemsToToss < ownedCount - 1)
                     sMenuDataPtr->numItemsToToss++;
@@ -3817,7 +3778,7 @@ static void Task_MenuMain(u8 taskId)
                 gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
                 PlaySE(SE_SELECT);
-                if(tempPocket == KEYITEMS_POCKET || gSaveBlock3Ptr->InventoryData.pocketNum == KEYITEMS_POCKET)
+                if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
                     Menu_UpdateTilemap();
                 PrintToWindow(WINDOW_1, FONT_WHITE);
             }
@@ -3832,12 +3793,12 @@ static void Task_MenuMain(u8 taskId)
                 u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
                 u16 ownedCount = 0;
 
-                if(pocketId == FAVORITE_ITEMS_POCKET){
+                if(pocketId == POCKET_FAVORITE_ITEMS){
                     pocketId  = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET];
                     itemIdx = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET_INDEX];
                 }
 
-                ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+                ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
                 if(sMenuDataPtr->numItemsToToss != 0)
                     sMenuDataPtr->numItemsToToss--;
@@ -3876,7 +3837,7 @@ static void Task_MenuMain(u8 taskId)
             {
                 u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
                 u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
-                u16 ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+                u16 ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
                 if(sMenuDataPtr->numItemsToToss < ownedCount - 1)
                     sMenuDataPtr->numItemsToToss++;
@@ -3934,12 +3895,12 @@ static void Task_MenuMain(u8 taskId)
                 u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
                 u16 ownedCount = 0;
 
-                if(pocketId == FAVORITE_ITEMS_POCKET){
+                if(pocketId == POCKET_FAVORITE_ITEMS){
                     pocketId  = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET];
                     itemIdx = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET_INDEX];
                 }
 
-                ownedCount = GetBagItemQuantity(&gBagPockets[pocketId].itemSlots[itemIdx].quantity);
+                ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
                 if(sMenuDataPtr->numItemsToToss != 0)
                     sMenuDataPtr->numItemsToToss--;

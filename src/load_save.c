@@ -25,26 +25,8 @@ static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 struct LoadedSaveData
 {
-    // Start inventory
-    // /*0x0000*/ struct ItemSlot items[BAG_ITEMS_COUNT];
-    // /*0x0078*/ struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
-    // /*0x00F0*/ struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
-    // /*0x0130*/ struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
-    // /*0x0230*/ struct ItemSlot berries[BAG_BERRIES_COUNT];
-    // /*0x02E8*/ struct Mail mail[MAIL_COUNT];
-    struct ItemSlot medicine[BAG_MEDICINE_COUNT];
-    struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
-    struct ItemSlot battleItems[BAG_BATTLE_ITEMS_COUNT];
-    struct ItemSlot powerUps[BAG_POWERUP_COUNT];
-    struct ItemSlot berries[BAG_BERRIES_COUNT];
-    struct ItemSlot otherItems[BAG_OTHER_COUNT];
-    struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
-    struct ItemSlot treasures[BAG_TREASURES_COUNT];
-    struct ItemSlot zCrystals[BAG_Z_CRYSTALS_COUNT];
-    struct ItemSlot megaStones[BAG_MEGA_STONES_COUNT];
-    struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
-    struct Mail     mail[MAIL_COUNT];
-    // End inventory
+ /*0x0000*/ struct Bag bag;
+ /*0x02E8*/ struct Mail mail[MAIL_COUNT];
 };
 
 // EWRAM DATA
@@ -187,23 +169,22 @@ void ClearContinueGameWarpStatus2(void)
 void SavePlayerParty(void)
 {
     int i;
-
-    gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
+    *GetSavedPlayerPartyCount() = gPlayerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
-        gSaveBlock1Ptr->playerParty[i] = gPlayerParty[i];
+        SavePlayerPartyMon(i, &gPlayerParty[i]);
 }
 
 void LoadPlayerParty(void)
 {
     int i;
 
-    gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
+    gPlayerPartyCount = *GetSavedPlayerPartyCount();
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
         u32 data;
-        gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
+        gPlayerParty[i] = *GetSavedPlayerPartyMon(i);
 
         // TODO: Turn this into a save migration once those are available.
         // At which point we can remove hp and status from Pokemon entirely.
@@ -268,131 +249,14 @@ void CopyPartyAndObjectsFromSave(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();
-    DeserializeTmHmItemSlots(); //PSF technicalmachine Branch
 }
 
-// Start inventory
 void LoadPlayerBag(void)
 {
     int i;
 
-
-    for (i = 0; i < BAG_MEDICINE_COUNT; i++)
-        gLoadedSaveData.medicine[i] = gSaveBlock1Ptr->bagPocket_Medicine[i];
-
-    for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
-        gLoadedSaveData.pokeBalls[i] = gSaveBlock1Ptr->bagPocket_PokeBalls[i];
-
-    for (i = 0; i < BAG_BATTLE_ITEMS_COUNT; i++)
-        gLoadedSaveData.battleItems[i] = gSaveBlock1Ptr->bagPocket_BattleItems[i];
-
-    for (i = 0; i < BAG_POWERUP_COUNT; i++)
-        gLoadedSaveData.powerUps[i] = gSaveBlock1Ptr->bagPocket_PowerUp[i];
-
-    for (i = 0; i < BAG_BERRIES_COUNT; i++)
-        gLoadedSaveData.berries[i] = gSaveBlock1Ptr->bagPocket_Berries[i];
-
-    for (i = 0; i < BAG_OTHER_COUNT; i++)
-        gLoadedSaveData.otherItems[i] = gSaveBlock1Ptr->bagPocket_Other[i];
-
-    for (i = 0; i < BAG_OTHER_COUNT; i++)
-        gLoadedSaveData.otherItems[i] = gSaveBlock1Ptr->bagPocket_Other[i];
-
-    for (i = 0; i < BAG_TMHM_COUNT; i++)
-        gLoadedSaveData.TMsHMs[i] = gTmHmItemSlots[i];
-
-    for (i = 0; i < BAG_TREASURES_COUNT; i++)
-        gLoadedSaveData.treasures[i] = gSaveBlock1Ptr->bagPocket_Treasure[i];
-
-    for (i = 0; i < BAG_Z_CRYSTALS_COUNT; i++)
-        gLoadedSaveData.zCrystals[i] = gSaveBlock1Ptr->bagPocket_Z_Crystals[i];
-
-    for (i = 0; i < BAG_MEGA_STONES_COUNT; i++)
-        gLoadedSaveData.megaStones[i] = gSaveBlock1Ptr->bagPocket_Mega_Stones[i];
-
-    for (i = 0; i < BAG_KEYITEMS_COUNT; i++)
-        gLoadedSaveData.keyItems[i] = gSaveBlock1Ptr->bagPocket_KeyItems[i];
-
-    for (i = 0; i < MAIL_COUNT; i++)
-        gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
-
-    gLastEncryptionKey = gSaveBlock2Ptr->encryptionKey;
-}
-
-void SavePlayerBag(void)
-{
-    int i;
-    u32 encryptionKeyBackup;
-
-
-    for (i = 0; i < BAG_MEDICINE_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Medicine[i] = gLoadedSaveData.medicine[i];
-
-    for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_PokeBalls[i] = gLoadedSaveData.pokeBalls[i];
-
-    for (i = 0; i < BAG_BATTLE_ITEMS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_BattleItems[i] = gLoadedSaveData.battleItems[i];
-
-    for (i = 0; i <  BAG_POWERUP_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_PowerUp[i] = gLoadedSaveData.powerUps[i];
-
-    for (i = 0; i < BAG_BERRIES_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Berries[i] = gLoadedSaveData.berries[i];
-
-    for (i = 0; i < BAG_OTHER_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Other[i] = gLoadedSaveData.otherItems[i];
-
-    for (i = 0; i < BAG_TMHM_COUNT; i++)
-        gTmHmItemSlots[i] = gLoadedSaveData.TMsHMs[i];
-
-
-    for (i = 0; i < BAG_TREASURES_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Treasure[i] = gLoadedSaveData.treasures[i];
-
-    for (i = 0; i < BAG_Z_CRYSTALS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Z_Crystals[i] = gLoadedSaveData.zCrystals[i];
-
-    for (i = 0; i < BAG_Z_CRYSTALS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Z_Crystals[i] = gLoadedSaveData.zCrystals[i];
-
-    for (i = 0; i < BAG_MEGA_STONES_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Mega_Stones[i] = gLoadedSaveData.megaStones[i];
-
-    for (i = 0; i < MAIL_COUNT; i++)
-        gSaveBlock1Ptr->mail[i] = gLoadedSaveData.mail[i];
-
-    encryptionKeyBackup = gSaveBlock2Ptr->encryptionKey;
-    gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
-    ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
-    gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup;
-}
-
-/*
-void LoadPlayerBag(void)
-{
-    int i;
-
-    // load player items.
-    for (i = 0; i < BAG_ITEMS_COUNT; i++)
-        gLoadedSaveData.items[i] = gSaveBlock1Ptr->bagPocket_Items[i];
-
-    // load player key items.
-    for (i = 0; i < BAG_KEYITEMS_COUNT; i++)
-        gLoadedSaveData.keyItems[i] = gSaveBlock1Ptr->bagPocket_KeyItems[i];
-
-    // load player pokeballs.
-    for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
-        gLoadedSaveData.pokeBalls[i] = gSaveBlock1Ptr->bagPocket_PokeBalls[i];
-
-    // load player TMs and HMs.
-    for (i = 0; i < BAG_TMHM_COUNT; i++)
-        gLoadedSaveData.TMsHMs[i] = gTmHmItemSlots[i]; //PSF technicalmachine Branch
-        //gLoadedSaveData.TMsHMs[i] = gSaveBlock1Ptr->bagPocket_TMHM[i];
-
-    // load player berries.
-    for (i = 0; i < BAG_BERRIES_COUNT; i++)
-        gLoadedSaveData.berries[i] = gSaveBlock1Ptr->bagPocket_Berries[i];
+    // load player bag.
+    memcpy(&gLoadedSaveData.bag, &gSaveBlock1Ptr->bag, sizeof(struct Bag));
 
     // load mail.
     for (i = 0; i < MAIL_COUNT; i++)
@@ -406,26 +270,8 @@ void SavePlayerBag(void)
     int i;
     u32 encryptionKeyBackup;
 
-    // save player items.
-    for (i = 0; i < BAG_ITEMS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Items[i] = gLoadedSaveData.items[i];
-
-    // save player key items.
-    for (i = 0; i < BAG_KEYITEMS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_KeyItems[i] = gLoadedSaveData.keyItems[i];
-
-    // save player pokeballs.
-    for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_PokeBalls[i] = gLoadedSaveData.pokeBalls[i];
-
-    // save player TMs and HMs.
-    for (i = 0; i < BAG_TMHM_COUNT; i++)
-        gTmHmItemSlots[i] = gLoadedSaveData.TMsHMs[i]; // PSF technicalmachine Branch
-        //gSaveBlock1Ptr->bagPocket_TMHM[i] = gLoadedSaveData.TMsHMs[i];
-
-    // save player berries.
-    for (i = 0; i < BAG_BERRIES_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Berries[i] = gLoadedSaveData.berries[i];
+    // save player bag.
+    memcpy(&gSaveBlock1Ptr->bag, &gLoadedSaveData.bag, sizeof(struct Bag));
 
     // save mail.
     for (i = 0; i < MAIL_COUNT; i++)
@@ -436,9 +282,6 @@ void SavePlayerBag(void)
     ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
     gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
 }
-*/
-
-// End inventory
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)
 {
@@ -455,7 +298,7 @@ void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey)
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
 {
     ApplyNewEncryptionKeyToGameStats(encryptionKey);
-    ApplyNewEncryptionKeyToBagItems_(encryptionKey);
+    ApplyNewEncryptionKeyToBagItems(encryptionKey);
     ApplyNewEncryptionKeyToBerryPowder(encryptionKey);
     ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);
     ApplyNewEncryptionKeyToHword(&gSaveBlock1Ptr->coins, encryptionKey);

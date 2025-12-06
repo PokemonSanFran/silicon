@@ -28,7 +28,6 @@
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "ui_pokedex.h"
-#include "ui_start_menu.h"
 #include "window.h"
 #include "constants/abilities.h"
 #include "constants/rgb.h"
@@ -86,7 +85,7 @@ static void SpeciesFilter_EditPage_GoToOptionInput(u8 taskId);
 static void SpeciesFilter_EditPage_PrintListFromLetter(void);
 static void SpeciesFilter_EditPage_PrintDescription(void);
 void SpeciesFilter_EditPage_PrintMoveAbilityCursor(enum FilterPageWindows_Move windowId, u32 fontId, u32 letterSpacing, u32 maxHeight);
-static void SpeciesFilter_EditPage_PrintMoveAbilityHelpBar(enum PokedexPageWindows windowId);
+static void SpeciesFilter_EditPage_PrintMoveAbilityHelpBar(u32 windowId);
 static void SpeciesFilter_EditPage_SetMode(enum FilterEditPageModes modeId);
 static void Task_SpeciesFilter_HandleAlphabetInput(u8);
 static void SpeciesFilter_SetUpAbilityFilterPage(enum PokedexFilterList);
@@ -360,8 +359,8 @@ static const u8 filterPageCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list
 static const u8 typeEditPageCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/type_edit_cursor_bmp.4bpp");
 static const u8 moveAbilityEditPageCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/moveability_edit_cursor_bmp.4bpp");
 static const u8 alphabetCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/alphabet_cursor_bmp.4bpp");
-static const u32 editPageFilterCheck[] = INCBIN_U32("graphics/pokedex/ui/filter/check.4bpp.lz");
-static const u32 sTypes_Gfx13x13[] = INCBIN_U32("graphics/ui_menus/types/13x13/types.4bpp.lz");
+static const u32 editPageFilterCheck[] = INCBIN_U32("graphics/pokedex/ui/filter/check.4bpp.smol");
+static const u32 sTypes_Gfx13x13[] = INCBIN_U32("graphics/ui_menus/types/13x13/types.4bpp.smol");
 static const u16 sTypePalettes[] = INCBIN_U16("graphics/types/types.gbapal");
 
 static const struct CompressedSpriteSheet sSpriteSheet_Type13x13 =
@@ -2754,7 +2753,7 @@ void SpeciesFilter_EditPage_PrintMoveAbilityCursor(enum FilterPageWindows_Move w
     BlitBitmapToWindow(windowId, moveAbilityEditPageCursor, x, y , width, height);
 }
 
-static void SpeciesFilter_EditPage_PrintMoveAbilityHelpBar(enum PokedexPageWindows windowId)
+static void SpeciesFilter_EditPage_PrintMoveAbilityHelpBar(u32 windowId)
 {
     u32 fontId = FONT_POKEDEX_HELP_BAR;
     u32 x = 4;

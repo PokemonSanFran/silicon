@@ -1431,6 +1431,53 @@ static const struct SpriteFrameImage sPicTable_siliconPlayerF1Fishing[] = {
     overworld_ascending_frames(gObjectEventPic_siliconPlayerF1Fishing, 4, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_siliconPlayerN3Normal[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerN3NormalRunning, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerN3MachBike[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerN3MachBike, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerN3AcroBike[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerN3AcroBike, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerN3Surfing[] = {
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 4),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 3),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Surfing, 4, 4, 5),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerN3Underwater[] = {
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 0),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 1),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 2),
+    overworld_frame(gObjectEventPic_siliconPlayerN3Underwater, 4, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerN3FieldMove[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerN3FieldMove, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_siliconPlayerN3Fishing[] = {
+    overworld_ascending_frames(gObjectEventPic_siliconPlayerN3Fishing, 4, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_siliconPlayerF3Normal[] = {
     overworld_ascending_frames(gObjectEventPic_siliconPlayerF3NormalRunning, 4, 4),
 };
@@ -1618,3 +1665,7 @@ static const struct SpriteFrameImage sPicTable_Unknown[] = {
     obj_frame_tiles(gObjectEventPic_UnknownNormal),
 };
 // End silicon
+
+static const struct SpriteFrameImage sPicTable_ApricornTree[] = {
+    overworld_frame(gObjectEventPic_ApricornTree, 2, 2, 0),
+};
