@@ -143,6 +143,7 @@ enum ShopMenuGraphicsType
     SHOP_GFX_TILEMAP,
     SHOP_GFX_TILEMAP_BUY,
     SHOP_GFX_PALETTE,
+    SHOP_GFX_CATEGORIES,
 
     NUM_SHOP_GRAPHICS
 };
@@ -291,6 +292,7 @@ static const struct {
     const u32 *tiles;
     const u32 *map, *mapBuy;
     const u16 *palette;
+    const u8 *categories;
 } sShopMenuGraphics[NUM_SHOP_TYPES] =
 {
     [SHOP_TYPE_PRESTO_APP ... SHOP_TYPE_PRESTO_TERMINAL] =
@@ -299,10 +301,18 @@ static const struct {
         .map = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.smolTM"),
         .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM"),
         .palette = (const u16[])INCBIN_U16("graphics/ui_menus/presto/palette.gbapal"),
+        .categories = (const u8[])INCBIN_U8("graphics/ui_menus/presto/categories.4bpp"),
+    },
+    [SHOP_TYPE_POKEMART] =
+    {
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.4bpp.smol"),
+        .map = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.bin.smolTM"),
+        .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.bin.smolTM"),
+        .palette = (const u16[])INCBIN_U16("graphics/ui_menus/mart/bg.gbapal"),
+        .categories = (const u8[])INCBIN_U8("graphics/ui_menus/mart/categories.4bpp"),
     },
 };
 
-static const u8 sShopGfx_PrestoCategories[] = INCBIN_U8("graphics/ui_menus/presto/categories.4bpp");
 static const u8 sOrderWindow[]         = INCBIN_U8("graphics/ui_menus/presto/orderwindow.4bpp");
 static const u8 sItemSelector[]        = INCBIN_U8("graphics/ui_menus/presto/item_selector.4bpp");
 
@@ -1876,7 +1886,7 @@ static void ShopBlit_Category(enum ShopMenuCategories category, u32 x, u32 y)
     if (category > NUM_SHOP_CATEGORIES)
         return;
 
-    BlitBitmapRectToWindow(SHOP_WINDOW_MAIN, sShopGfx_PrestoCategories,
+    BlitBitmapRectToWindow(SHOP_WINDOW_MAIN, ShopGraphics_GetByType(SHOP_GFX_CATEGORIES),
                             0, category * 24,
                             24, NUM_SHOP_CATEGORIES * 24,
                             x, y,
@@ -2008,6 +2018,8 @@ static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType type)
     switch (type)
     {
     default:
+        DebugPrintf("WARNING! case %d has no return value", type);
+        return NULL;
     case SHOP_GFX_TILES:
         return sShopMenuGraphics[sShopMenuDataPtr->type].tiles;
     case SHOP_GFX_TILEMAP:
@@ -2016,6 +2028,8 @@ static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType type)
         return sShopMenuGraphics[sShopMenuDataPtr->type].mapBuy;
     case SHOP_GFX_PALETTE:
         return sShopMenuGraphics[sShopMenuDataPtr->type].palette;
+    case SHOP_GFX_CATEGORIES:
+        return sShopMenuGraphics[sShopMenuDataPtr->type].categories;
     }
 }
 
