@@ -3977,6 +3977,8 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_GET_BADGE) \
     X(MUS_SRC_GETTING_ARRESTED) \
     X(MUS_WELCOME_TO_THE_WAR_ROOM) \
+    X(MUS_ESPULEE_OUTSKIRTS) \
+    X(MUS_ESPULEE_OUTSKIRTS_NIGHT) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
