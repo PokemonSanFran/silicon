@@ -17,7 +17,7 @@ enum Pocket
 
 enum Pocket
 {
-    POCKET_NONE,
+    //POCKET_NONE,
     POCKET_MEDICINE,
     POCKET_POKE_BALLS,
     POCKET_BATTLE_ITEMS,
