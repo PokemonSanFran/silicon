@@ -37012,79 +37012,64 @@
             "encounter_rate": 4,
             "mons": [
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_CURLY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_TATSUGIRI_DROOPY"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_NONE"
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_NONE"
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_NONE"
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "species": "SPECIES_TATSUGIRI_STRETCHY"
               },
               {
                 "min_level": 5,
