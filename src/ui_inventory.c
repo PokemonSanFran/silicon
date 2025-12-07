@@ -58,11 +58,12 @@ enum{
 	NUM_FAVORITE_ITEMS_ARRAY_SIZE,
 };
 
-enum{
-	INVENTORY_FRONT_BG,
+enum InventoryBackgrounds {
+	INVENTORY_BG_TEXT,
 	INVENTORY_BG_NORMAL,
-	INVENTORY_BG_TRANSPARENT,
-	NUM_INVENTORY_BACKGROUNDS,
+	INVENTORY_BG_SHADOWS,
+    INVENTORY_BG_WALLPAPER,
+	INVENTORY_BG_COUNT,
 };
 
 enum{
@@ -93,8 +94,6 @@ enum{
 //==========DEFINES==========//
 struct MenuResources
 {
-    u8 gfxLoadState;
-	u16 bgTilemapBuffers[NUM_INVENTORY_BACKGROUNDS][0x800];
     u16 itemIdx;
     u16 itemIdxPickMode;
     u16 numItemsToToss;
@@ -132,15 +131,22 @@ enum SelectModes
 
 //==========EWRAM==========//
 static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
+static u8 *bgTilemapBuffers[INVENTORY_BG_COUNT] = {NULL};
 static EWRAM_DATA MainCallback savedCallback = NULL; // determines callback to run when we exit. e.g. where do we want to go after closing the menu
 
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
 static bool8 Menu_DoGfxSetup(void);
 static bool8 Menu_InitBgs(void);
+static void HandleAndShowBgs(void);
+static void SetScheduleBgs(u32 backgroundId);
+static void SetBackgroundTransparency(void);
+static bool8 DebugShouldSkipBg(u32 bg);
+static bool8 AllocZeroedTilemapBuffers(void);
 static void Menu_FadeAndBail(void);
-static bool8 Menu_LoadGraphics(void);
+static void Menu_LoadGraphics(void);
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId);
+static void Menu_UpdateTilemap(void);
 static void Menu_InitWindows(void);
 static void PrintToWindow(u8 windowId, u8 colorIdx);
 static void Task_MenuWaitFadeIn(u8 taskId);
@@ -180,6 +186,7 @@ static void CreateDownArrowSprite(void);
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
 {
+        /*
     {
         .bg = 0,    // windows, etc
         .charBaseIndex = 0,
@@ -199,6 +206,31 @@ static const struct BgTemplate sMenuBgTemplates[] =
         .mapBaseIndex = 28,
         .priority = 3,
     }
+    */
+    {
+        .bg = INVENTORY_BG_TEXT,    // windows, etc
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .priority = 0,
+    },
+    {
+        .bg = INVENTORY_BG_NORMAL,    // this bg loads the UI tilemap
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .priority = 1,
+    },
+    {
+        .bg = INVENTORY_BG_SHADOWS,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 29,
+        .priority = 2,
+    },
+    {
+        .bg = INVENTORY_BG_WALLPAPER,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 27,
+        .priority = 2,
+    },
 };
 
 static const struct WindowTemplate sMenuWindowTemplates[] =
@@ -214,11 +246,6 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .baseBlock = 1,     // tile start in VRAM
     },
 };
-
-static const u32 sMenuTiles[]                    = INCBIN_U32("graphics/ui_menus/inventory/tiles.4bpp.lz");
-static const u32 sMenuTilemap[]                  = INCBIN_U32("graphics/ui_menus/inventory/tilemap.bin.lz");
-static const u32 sMenuTilemap_KeyItems[]         = INCBIN_U32("graphics/ui_menus/inventory/tilemap_key_items.bin.lz");
-static const u32 sBackgroundTilemap[]            = INCBIN_U32("graphics/ui_menus/inventory/bg_tilemap.bin.lz");
 
 static const u16 sMenuInterfacePalette[]         = INCBIN_U16("graphics/ui_menus/inventory/interface_palette.gbapal");
 static const u16 sMenuInterfacePalette_Sprites[] = INCBIN_U16("graphics/ui_menus/inventory/interface_palette_sprites.gbapal");
@@ -273,7 +300,6 @@ void Task_OpenInventoryFromStartMenu(u8 taskId)
 void InitializeInventoryData(void){
     u8 i;
 
-    sMenuDataPtr->gfxLoadState      = 0;
     sMenuDataPtr->itemIdxPickMode   = 0;
     sMenuDataPtr->numItemsToToss    = 0;
     sMenuDataPtr->windowInfoNum     = 0;
@@ -335,6 +361,7 @@ static bool8 Menu_DoGfxSetup(void)
 {
     u8 i;
 
+    DebugPrintf("state %d",gMain.state);
     switch (gMain.state)
     {
     case 0:
@@ -346,18 +373,15 @@ static bool8 Menu_DoGfxSetup(void)
         break;
     case 1:
         ScanlineEffect_Stop();
-        FreeAllSpritePalettes();
         ResetPaletteFade();
-        ResetSpriteData();
         ResetTasks();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
         gMain.state++;
         break;
     case 2:
         if (Menu_InitBgs())
-        {
-            sMenuDataPtr->gfxLoadState = 0;
             gMain.state++;
-        }
         else
         {
             Menu_FadeAndBail();
@@ -365,8 +389,8 @@ static bool8 Menu_DoGfxSetup(void)
         }
         break;
     case 3:
-        if (Menu_LoadGraphics() == TRUE)
-            gMain.state++;
+        Menu_LoadGraphics();
+        gMain.state++;
         break;
     case 4:
         LoadMessageBoxAndBorderGfx();
@@ -375,7 +399,6 @@ static bool8 Menu_DoGfxSetup(void)
         break;
     case 5:
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-
         CreateUpArrowSprite();
         CreateDownArrowSprite();
         StartMenu_DisplayPartyIcons();
@@ -411,18 +434,6 @@ bool8 shouldShowRegisteredItems(void){
     return UseRegisterGrid;
 }
 
-#define Y_VALUE_REGISTERED (8 * 19) << 8
-static void Menu_UpdateTilemap(void)
-{
-    s32 value;
-    if(!shouldShowRegisteredItems())
-        value = ChangeBgY(INVENTORY_BG_NORMAL, 0, BG_COORD_SET);
-    else
-        value = ChangeBgY(INVENTORY_BG_NORMAL, Y_VALUE_REGISTERED, BG_COORD_SET);
-
-    DebugPrintfLevel(MGBA_LOG_WARN, "Menu_UpdateTilemap value; %d", value);
-}
-
 static void Menu_FreeResources(void)
 {
     //Resets Pocket Info too
@@ -431,7 +442,7 @@ static void Menu_FreeResources(void)
     //gSaveBlock3Ptr->InventoryData.pocketNum = 0;
 
     try_free(sMenuDataPtr);
-    try_free(sBg1TilemapBuffer);
+    try_free(bgTilemapBuffers);
     try_free(savedCallback);
     FreeAllWindowBuffers();
 }
@@ -439,7 +450,7 @@ static void Menu_FreeResources(void)
 static void Menu_FreeResources_NoCallback(void)
 {
     try_free(sMenuDataPtr);
-    try_free(sBg1TilemapBuffer);
+    try_free(bgTilemapBuffers);
     FreeAllWindowBuffers();
 }
 
@@ -464,80 +475,169 @@ static void Menu_FadeAndBail(void)
 static bool8 Menu_InitBgs(void)
 {
     ResetAllBgsCoordinates();
-    ResetBgsAndClearDma3BusyFlags(0);
-    //Background 1
-    setNormalBackground();
+    if(!AllocZeroedTilemapBuffers())
+        return TRUE;
 
-    //Background 2 - Transparent
-    setTransparentBackground();
+    HandleAndShowBgs();
     return TRUE;
 }
 
-static void setNormalBackground(void){
+static bool8 DebugShouldSkipBg(u32 bg)
+{
+    bool32 skipBg[4] =
+    {
+        [0] = FALSE,
+        [1] = FALSE,
+        [2] = FALSE,
+        [3] = FALSE,
+    };
+
+    return skipBg[bg];
+}
+
+static bool8 AllocZeroedTilemapBuffers(void)
+{
+    for (enum InventoryBackgrounds backgroundId = 0; backgroundId < INVENTORY_BG_COUNT; backgroundId++)
+    {
+        if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        bgTilemapBuffers[backgroundId] = AllocZeroed(BG_SCREEN_SIZE);
+
+        if (bgTilemapBuffers[backgroundId] == NULL)
+            return FALSE;
+
+        memset(bgTilemapBuffers[backgroundId],0,BG_SCREEN_SIZE);
+    }
+    return TRUE;
+}
+
+static void HandleAndShowBgs(void)
+{
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, sMenuBgTemplates, INVENTORY_BG_COUNT);
+
+    for (enum InventoryBackgrounds backgroundId = 0; backgroundId < INVENTORY_BG_COUNT; backgroundId++)
+    {
+        if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        SetScheduleBgs(backgroundId);
+        ShowBg(backgroundId);
+    }
+    SetBackgroundTransparency();
+}
+
+static void SetScheduleBgs(u32 backgroundId)
+{
+    SetBgTilemapBuffer(backgroundId, bgTilemapBuffers[backgroundId]);
+    ScheduleBgCopyTilemapToVram(backgroundId);
+}
+
+static void SetBackgroundTransparency(void)
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(6, 6));
+    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
+    ShowBg(INVENTORY_BG_SHADOWS);
+}
+
+static void UNUSED setNormalBackground(void){
     SetBgAttribute(INVENTORY_BG_NORMAL, BG_ATTR_PRIORITY, INVENTORY_BG_NORMAL);
     InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
-    SetBgTilemapBuffer(INVENTORY_BG_NORMAL, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
+    //SetBgTilemapBuffer(INVENTORY_BG_NORMAL, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
     ScheduleBgCopyTilemapToVram(INVENTORY_BG_NORMAL);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    ShowBg(INVENTORY_FRONT_BG);
+    ShowBg(INVENTORY_BG_TEXT);
     ShowBg(INVENTORY_BG_NORMAL);
     ChangeBgX(INVENTORY_BG_NORMAL, 0, 0);
     ChangeBgY(INVENTORY_BG_NORMAL, 0, 0);
 }
 
-static void setTransparentBackground(void){
-    u8 strength = INVENTORY_TRANSPARENCY_STRENGTH;
-    SetBgTilemapBuffer(INVENTORY_BG_TRANSPARENT, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_TRANSPARENT]);
-    ScheduleBgCopyTilemapToVram(INVENTORY_BG_TRANSPARENT);
+static void UNUSED setTransparentBackground(void){
+    u8 strength = 6;
+    //SetBgTilemapBuffer(INVENTORY_BG_SHADOWS, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_SHADOWS]);
+    ScheduleBgCopyTilemapToVram(INVENTORY_BG_SHADOWS);
 
     //Transparency
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1); //Blend Background over the rest
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(strength, strength));
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 
-    ShowBg(INVENTORY_BG_TRANSPARENT);
-    ChangeBgX(INVENTORY_BG_TRANSPARENT, 0, 0);
-    ChangeBgY(INVENTORY_BG_TRANSPARENT, 0, 0);
+    ShowBg(INVENTORY_BG_SHADOWS);
+    ChangeBgX(INVENTORY_BG_SHADOWS, 0, 0);
+    ChangeBgY(INVENTORY_BG_SHADOWS, 0, 0);
 }
 
 static void removeTransparentBackground(){
-    SetBgAttribute(INVENTORY_BG_TRANSPARENT, BG_ATTR_PRIORITY, INVENTORY_BG_TRANSPARENT);
+    SetBgAttribute(INVENTORY_BG_SHADOWS, BG_ATTR_PRIORITY, INVENTORY_BG_SHADOWS);
     InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
-    SetBgTilemapBuffer(INVENTORY_BG_TRANSPARENT, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_TRANSPARENT]);
-    ScheduleBgCopyTilemapToVram(INVENTORY_BG_TRANSPARENT);
+    //SetBgTilemapBuffer(INVENTORY_BG_SHADOWS, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_SHADOWS]);
+    ScheduleBgCopyTilemapToVram(INVENTORY_BG_SHADOWS);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    ShowBg(INVENTORY_BG_TRANSPARENT);
+    ShowBg(INVENTORY_BG_SHADOWS);
 }
 
-static bool8 Menu_LoadGraphics(void)
+static const u32* const sInventoryTilesLUT[] =
 {
-    switch (sMenuDataPtr->gfxLoadState)
+    [INVENTORY_BG_TEXT] = NULL,
+    [INVENTORY_BG_NORMAL] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/textlayer.4bpp.smol"),
+    [INVENTORY_BG_SHADOWS] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/shadows.4bpp.smol"),
+    [INVENTORY_BG_WALLPAPER] = (const u32[])INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol"),
+};
+
+static const u32* const sInventoryTilemapLUT[] =
+{
+    [INVENTORY_BG_TEXT] = NULL,
+    [INVENTORY_BG_NORMAL] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/textlayer.bin.smolTM"),
+    [INVENTORY_BG_SHADOWS] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/shadows.bin.smolTM"),
+    [INVENTORY_BG_WALLPAPER] = (const u32[])INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM"),
+};
+
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (sInventoryTilesLUT[backgroundId] == NULL || sInventoryTilemapLUT[backgroundId] == NULL);
+}
+
+static void Menu_LoadGraphics(void)
+{
+    ResetTempTileDataBuffers();
+    DebugPrintf("ResetTempTileDataBuffers");
+
+    for (enum InventoryBackgrounds backgroundId = 0; backgroundId < INVENTORY_BG_COUNT; backgroundId++)
     {
-    case 0:
-        ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sMenuTiles, 0, 0, 0);
-        sMenuDataPtr->gfxLoadState++;
-        break;
-    case 1:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            DecompressDataWithHeaderWram(sMenuTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
-            DecompressDataWithHeaderWram(sBackgroundTilemap, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_TRANSPARENT]);
-            Menu_UpdateTilemap();
-            sMenuDataPtr->gfxLoadState++;
-        }
-        break;
-    case 2:
-        Inventory_LoadBackgroundPalette();
-        sMenuDataPtr->gfxLoadState++;
-        break;
-    default:
-        sMenuDataPtr->gfxLoadState = 0;
-        return TRUE;
+        DebugPrintf("background %d",backgroundId);
+        if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        DebugPrintf("did not skip %d",backgroundId);
+
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
+
+        DebugPrintf("not empty %d",backgroundId);
+
+        DecompressAndLoadBgGfxUsingHeap(backgroundId, sInventoryTilesLUT[backgroundId], 0, 0, 0);
+        DebugPrintf("background tiles %d loaded",backgroundId);
+        CopyToBgTilemapBuffer(backgroundId, sInventoryTilemapLUT[backgroundId],0,0);
+        DebugPrintf("background tilemap %d loaded",backgroundId);
     }
-    return FALSE;
+    Inventory_LoadBackgroundPalette();
+    Menu_UpdateTilemap();
+}
+
+#define Y_VALUE_REGISTERED (8 * 19) << 8
+static void Menu_UpdateTilemap(void)
+{
+    s32 value;
+    if(!shouldShowRegisteredItems())
+        value = ChangeBgY(INVENTORY_BG_NORMAL, 0, BG_COORD_SET);
+    else
+        value = ChangeBgY(INVENTORY_BG_NORMAL, Y_VALUE_REGISTERED, BG_COORD_SET);
+
+    DebugPrintfLevel(MGBA_LOG_WARN, "Menu_UpdateTilemap value; %d", value);
 }
 
 static void Menu_InitWindows(void)
