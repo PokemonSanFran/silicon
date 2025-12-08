@@ -154,9 +154,6 @@
 
 #define STRBUF_SIZE         64
 
-#define TILE_TO_PIXELS(t)   (t ? t * 8 : 1)
-#define PIXELS_TO_TILES(p)  (p ? p / 8 : 1)
-
 #define X_CENTER_ALIGN      (-1)
 #define Y_CENTER_ALIGN      1
 
