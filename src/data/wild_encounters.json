@@ -37431,6 +37431,216 @@
                 "species": "SPECIES_SEWADDLE"
               }
             ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_DRATINI"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_DRAGONAIR"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_DRAGONAIR"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_DRAGONAIR"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_DRAGONAIR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_GOOMY"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_SLIGGOO"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_SLIGGOO"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_SLIGGOO"
+              },
+              {
+                "min_level": 48,
+                "max_level": 51,
+                "species": "SPECIES_SLIGGOO"
+              }
+            ]
           }
         },
         {
