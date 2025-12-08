@@ -31498,102 +31498,102 @@
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_GYARADOS"
+                "species": "SPECIES_MALAMAR"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_GYARADOS"
+                "species": "SPECIES_MALAMAR"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_GYARADOS"
+                "species": "SPECIES_MALAMAR"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_GYARADOS"
+                "species": "SPECIES_MALAMAR"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_WINGULL"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_WINGULL"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_WINGULL"
+                "species": "SPECIES_INKAY"
               },
               {
                 "min_level": 71,
                 "max_level": 73,
-                "species": "SPECIES_WINGULL"
+                "species": "SPECIES_INKAY"
               }
             ]
           },
@@ -40100,7 +40100,7 @@
               },
               {
                 "min_level": 49,
-                "max_level": 55,
+                "max_level": 53,
                 "species": "SPECIES_CARRACOSTA"
               }
             ]
@@ -40109,103 +40109,103 @@
             "encounter_rate": 30,
             "mons": [
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 44,
-                "max_level": 48,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_LILEEP"
               },
               {
-                "min_level": 49,
-                "max_level": 53,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_CRADILY"
               },
               {
-                "min_level": 49,
-                "max_level": 53,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_CRADILY"
               },
               {
-                "min_level": 49,
-                "max_level": 53,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_CRADILY"
               },
               {
-                "min_level": 49,
-                "max_level": 55,
+                "min_level": 54,
+                "max_level": 54,
                 "species": "SPECIES_CRADILY"
               }
             ]
@@ -41256,27 +41256,27 @@
               {
                 "min_level": 64,
                 "max_level": 68,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_TENTACOOL"
               },
               {
                 "min_level": 64,
                 "max_level": 68,
-                "species": "SPECIES_MAGIKARP"
+                "species": "SPECIES_TENTACOOL"
               },
               {
-                "min_level": 64,
-                "max_level": 68,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 69,
+                "max_level": 73,
+                "species": "SPECIES_TENTACRUEL"
               },
               {
-                "min_level": 64,
-                "max_level": 68,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 69,
+                "max_level": 73,
+                "species": "SPECIES_TENTACRUEL"
               },
               {
-                "min_level": 64,
-                "max_level": 68,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 69,
+                "max_level": 73,
+                "species": "SPECIES_TENTACRUEL"
               }
             ]
           },
