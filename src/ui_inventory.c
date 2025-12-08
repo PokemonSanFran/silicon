@@ -106,9 +106,14 @@ struct MenuResources
     u8 inventoryMode;
 };
 
-enum WindowIds
+enum InventoryWindowIds
 {
-    WINDOW_1,
+    INVENTORY_WINDOW_HEADER,
+    INVENTORY_WINDOW_PARTY_DISPLAY,
+    INVENTORY_WINDOW_ITEM_LIST,
+    INVENTORY_WINDOW_DESC,
+    INVENTORY_WINDOW_FOOTER,
+    INVENTORY_WINDOW_COUNT,
 };
 
 enum SelectModes
@@ -148,7 +153,7 @@ static void Menu_LoadGraphics(void);
 static bool32 AreTilesOrTilemapEmpty(u32 backgroundId);
 static void Menu_UpdateTilemap(void);
 static void Menu_InitWindows(void);
-static void PrintToWindow(u8 windowId, u8 colorIdx);
+static void PrintToWindow(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void Inventory_LoadBackgroundPalette(void);
@@ -235,16 +240,57 @@ static const struct BgTemplate sMenuBgTemplates[] =
 
 static const struct WindowTemplate sMenuWindowTemplates[] =
 {
-    [WINDOW_1] =
+    [INVENTORY_WINDOW_HEADER] =
     {
-        .bg = 0,            // which bg to print text on
-        .tilemapLeft = 0,   // position from left (per 8 pixels)
-        .tilemapTop = 0,    // position from top (per 8 pixels)
-        .width = 30,        // width (per 8 pixels)
-        .height = 20,       // height (per 8 pixels)
-        .paletteNum = 1,    // palette index to use for text
-        .baseBlock = 1,     // tile start in VRAM
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = PIXELS_TO_TILES(0),
+        .tilemapTop = PIXELS_TO_TILES(0),
+        .width = PIXELS_TO_TILES(240),
+        .height = PIXELS_TO_TILES(16),
+        .paletteNum = 1,
+        .baseBlock = 1,
     },
+    [INVENTORY_WINDOW_PARTY_DISPLAY] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = PIXELS_TO_TILES(0),
+        .tilemapTop = PIXELS_TO_TILES(16),
+        .width = PIXELS_TO_TILES(64),
+        .height = PIXELS_TO_TILES(80),
+        .paletteNum = 1,
+        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)),
+    },
+    [INVENTORY_WINDOW_ITEM_LIST] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = PIXELS_TO_TILES(64),
+        .tilemapTop = PIXELS_TO_TILES(16),
+        .width = PIXELS_TO_TILES(176),
+        .height = PIXELS_TO_TILES(88),
+        .paletteNum = 1,
+        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14))
+    },
+    [INVENTORY_WINDOW_DESC] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = PIXELS_TO_TILES(0),
+        .tilemapTop = PIXELS_TO_TILES(104),
+        .width = PIXELS_TO_TILES(240),
+        .height = PIXELS_TO_TILES(40),
+        .paletteNum = 1,
+        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)),
+    },
+    [INVENTORY_WINDOW_FOOTER] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = PIXELS_TO_TILES(0),
+        .tilemapTop = PIXELS_TO_TILES(144),
+        .width = PIXELS_TO_TILES(240),
+        .height = PIXELS_TO_TILES(16),
+        .paletteNum = 1,
+        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(14)),
+    },
+    DUMMY_WIN_TEMPLATE,
 };
 
 static const u16 sMenuInterfacePalette[]         = INCBIN_U16("graphics/ui_menus/inventory/interface_palette.gbapal");
@@ -393,7 +439,6 @@ static bool8 Menu_DoGfxSetup(void)
         gMain.state++;
         break;
     case 4:
-        LoadMessageBoxAndBorderGfx();
         Menu_InitWindows();
         gMain.state++;
         break;
@@ -404,13 +449,12 @@ static bool8 Menu_DoGfxSetup(void)
         StartMenu_DisplayPartyIcons();
         for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++)
             CreateRegisteredItemIcon(i);
-
         LoadPalette(sMenuInterfacePalette, 16, 32);
-        PrintToWindow(WINDOW_1, FONT_WHITE);
         CreateTask(Task_MenuWaitFadeIn, 0);
         gMain.state++;
         break;
     case 6:
+        PrintToWindow();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
@@ -428,10 +472,9 @@ static bool8 Menu_DoGfxSetup(void)
         Free(*ptr__);                  \
 })
 
-bool8 shouldShowRegisteredItems(void){
-    bool8 UseRegisterGrid = (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS || sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REGISTER);
-
-    return UseRegisterGrid;
+bool8 shouldShowRegisteredItems(void)
+{
+    return (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS || sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REGISTER);
 }
 
 static void Menu_FreeResources(void)
@@ -644,14 +687,13 @@ static void Menu_InitWindows(void)
 {
     InitWindows(sMenuWindowTemplates);
     DeactivateAllTextPrinters();
-    ScheduleBgCopyTilemapToVram(0);
 
-    FillWindowPixelBuffer(WINDOW_1, 0);
-    LoadUserWindowBorderGfx(WINDOW_1, 720, 14 * 16);
-    PutWindowTilemap(WINDOW_1);
-    CopyWindowToVram(WINDOW_1, 3);
-
-    ScheduleBgCopyTilemapToVram(2);
+    for (enum InventoryWindowIds windowId = 0; windowId < INVENTORY_WINDOW_COUNT; windowId++)
+    {
+        FillWindowPixelBuffer(windowId, TEXT_COLOR_TRANSPARENT);
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
+    }
 }
 
 u16 getMaxItemsFromPocket(u8 pocket){
@@ -2544,9 +2586,10 @@ static u8 getSelectedItemOptionNum(u8 num){
 
 #define NUM_ITEMS_MAX_DIGITS 5
 
-static void PrintToWindow(u8 windowId, u8 colorIdx)
+static void PrintToWindow(void)
 {
     const u8 *desc;
+    u32 colorIdx = FONT_WHITE;
     u16 i, j, x, x2, y, y2, itemIdx;
     u8 row, row2, currentStatus;
     u8 font = FONT_NARROW;
@@ -2559,7 +2602,11 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     u8 numPocketOptions = getSelectedItemNumOptions();
     u16 paletteIndex = INTERFACE_PALETTE_NUM * 16;
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(INVENTORY_WINDOW_HEADER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(INVENTORY_WINDOW_PARTY_DISPLAY, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(INVENTORY_WINDOW_ITEM_LIST, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(INVENTORY_WINDOW_DESC, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(INVENTORY_WINDOW_FOOTER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     // Inventory Title
     x  = 2;
@@ -2567,15 +2614,15 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     y2 = 0;
     x2 = 0;
 
-    AddTextPrinterParameterized4(windowId, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sInventory_TitleStrings[pocketId].string);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_HEADER, font, (x * 8) + 4, (y * 8), 0, 0, sMenuWindowFontColors[colorIdx], 0xFF, sInventory_TitleStrings[pocketId].string);
 
     x  = x + 8;
     y2 = 4;
     for(i = 0; i < NUM_INVENTORY_POCKETS; i++){
         if(pocketId == i)
-            BlitBitmapToWindow(windowId, sInventoryPocketIcon1_Gfx, ((x + i) * 8) + x2, (y * 8) + y2, 8, 8);
+            BlitBitmapToWindow(INVENTORY_WINDOW_HEADER, sInventoryPocketIcon1_Gfx, ((x + i) * 8) + x2, (y * 8) + y2, 8, 8);
         else
-            BlitBitmapToWindow(windowId, sInventoryPocketIcon0_Gfx, ((x + i) * 8) + x2, (y * 8) + y2, 8, 8);
+            BlitBitmapToWindow(INVENTORY_WINDOW_HEADER, sInventoryPocketIcon0_Gfx, ((x + i) * 8) + x2, (y * 8) + y2, 8, 8);
     }
 
     // Item Names
@@ -2592,21 +2639,21 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             itemId = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_ID];
 
         if((itemIdx + 1) <= gSaveBlock3Ptr->InventoryData.numFavoriteItems[gSaveBlock3Ptr->InventoryData.pocketNum] && pocketId != POCKET_FAVORITE_ITEMS)
-            BlitBitmapToWindow(windowId, gInventoryIcon_Pinned_Gfx, (x * 8) + x2 - 18, (y * 8) + y2 - 1 + 4, 16, 8);
+            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gInventoryIcon_Pinned_Gfx, (x * 8) + x2 - 18, (y * 8) + y2 - 1 + 4, 16, 8);
 
         // Cursor
         if(pocketId != POCKET_TM_HM || itemId == ITEM_NONE){
             if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == i){
                 if(sMenuDataPtr->currentSelectMode != INVENTORY_MODE_MOVE_ITEMS){
-                    BlitBitmapToWindow(windowId, sInventoryCursor_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                     for(j = 1; j < INVENTORY_CURSOR_SQUARES; j++)
-                        BlitBitmapToWindow(windowId, sInventoryCursor2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
                 }
                 else{
-                    BlitBitmapToWindow(windowId, sInventoryCursor_Move_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor_Move_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                     for(j = 1; j < INVENTORY_CURSOR_SQUARES - 1; j++)
-                        BlitBitmapToWindow(windowId, sInventoryCursor2_Move_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    BlitBitmapToWindow(windowId, sInventoryCursor3_Move_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor2_Move_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor3_Move_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
                 }
             }
         }
@@ -2620,107 +2667,107 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
             switch(i){
                 case 0: //Type 1
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type1_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type1_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                     for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type1_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type1_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
 
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type1_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type1_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    break;
                 case 1: //Type 2
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type2_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type2_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                     for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type2_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type2_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
 
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type2_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type2_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    break;
                 case 2: //Type 3
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type3_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type3_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                     for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type3_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type3_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
 
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type3_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type3_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    break;
                 case 3: //Type 4
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type4_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type4_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                     for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type4_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type4_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
 
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type4_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type4_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    break;
                 case 4: //Type 5
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type5_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type5_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                     for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type5_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type5_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
 
-                    BlitBitmapToWindow(windowId, sInventoryTMHM_Type5_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type5_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    break;
             }
 
             if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == i)
-                BlitBitmapToWindow(windowId, sInventoryTMHM_Cursor_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Cursor_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
 
             if((gSaveBlock3Ptr->InventoryData.yFirstItem + i) != (numitems - 1)){
                 switch (moveType){
                     case TYPE_BUG:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Bug_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Bug_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_DARK:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Dark_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Dark_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_DRAGON:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Dragon_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Dragon_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_ELECTRIC:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Electric_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Electric_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_FIRE:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Fire_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Fire_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_FIGHTING:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Fighting_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Fighting_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_FLYING:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Flying_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Flying_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_GHOST:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Ghost_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Ghost_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_GRASS:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Grass_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Grass_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_GROUND:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Ground_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Ground_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_ICE:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Ice_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Ice_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_NORMAL:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Normal_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Normal_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_POISON:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Poison_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Poison_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_PSYCHIC:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Psychic_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Psychic_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_ROCK:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Rock_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Rock_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_STEEL:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Steel_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Steel_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_WATER:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Water_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Water_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                     case TYPE_FAIRY:
-                        BlitBitmapToWindow(windowId, sInventoryTMHM_Type_Fairy_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Fairy_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                        break;
                 }
             }
             /*else if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == i){
-                BlitBitmapToWindow(windowId, sInventoryCursor_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
                 for(j = 1; j < INVENTORY_CURSOR_SQUARES; j++)
-                    BlitBitmapToWindow(windowId, sInventoryCursor2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
             }*/
 
             ColorRed   = sInventory_TypeRGB[moveType][0];
@@ -2734,7 +2781,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             // Item Name
             if(pocketId != POCKET_TM_HM){
                 CopyItemName(itemId, gStringVar1);
-                AddTextPrinterParameterized4(windowId, fontItemNames, (x * 8) + x2 + 1, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, fontItemNames, (x * 8) + x2 + 1, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar1);
 
                 // Item Num
                 itemNum = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
@@ -2745,29 +2792,29 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
                 ConvertIntToDecimalStringN(gStringVar1, itemNum, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
                 StringExpandPlaceholders(gStringVar4, sText_Item_Num);
-                AddTextPrinterParameterized4(windowId, font, ((x + 15) * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, font, ((x + 15) * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar4);
 
                 //Registered Items
                 j = INVENTORY_CURSOR_SQUARES - 1;
                 if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_UP])
-                    BlitBitmapToWindow(windowId, sInventoryRegisterIndicator_Up_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Up_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
                 else if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_DOWN])
-                    BlitBitmapToWindow(windowId, sInventoryRegisterIndicator_Down_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Down_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
                 else if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_LEFT])
-                    BlitBitmapToWindow(windowId, sInventoryRegisterIndicator_Left_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Left_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
                 else if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_RIGHT])
-                    BlitBitmapToWindow(windowId, sInventoryRegisterIndicator_Right_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Right_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
             }
             else{
                 moveNum = GetItemSecondaryId(itemId);
                 CopyItemName(itemId, gStringVar1);
                 StringCopy(gStringVar2, gMovesInfo[moveNum].name);
                 StringExpandPlaceholders(gStringVar4, sInventory_TM_Name);
-                AddTextPrinterParameterized4(windowId, fontItemNames, (x * 8) + x2 + 2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, fontItemNames, (x * 8) + x2 + 2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar4);
             }
         }
         else{
-            AddTextPrinterParameterized4(windowId, fontItemNames, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, sInventory_Exit);
+            AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, fontItemNames, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, sInventory_Exit);
             break;
         }
 
@@ -2815,7 +2862,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             ConvertIntToDecimalStringN(gStringVar3, movePP,   STR_CONV_MODE_LEFT_ALIGN, 3);
 
             StringExpandPlaceholders(gStringVar4, sInventory_TM_Desc);
-            AddTextPrinterParameterized4(windowId, font, (x * 8) + x2 - 1, (y * 8) + y2, -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
+            AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2 - 1, (y * 8) + y2, -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
             StringCopy(gStringVar1, gMovesInfo[moveNum].description);
         }
     }
@@ -2829,7 +2876,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     x2 = 4;
     y  = 13;
     y2 = 0;
-    AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
 
     //Pick Menu
     switch(sMenuDataPtr->currentSelectMode){
@@ -2841,10 +2888,10 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
             for(i = 0; i < numPocketOptions; i++){
                 for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(windowId, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
 
                 if((numPocketOptions - (i + 1)) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(windowId, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
 
                 y = y - 2;
             }
@@ -2858,9 +2905,9 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
                 if(getSelectedItemOptionNum(i) == INVENTORY_ITEM_OPTION_FAVORITE && isCurrentItemFavorite())
                     StringCopy(gStringVar1, sInventory_Option_Unfavorite);
 
-                AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
             }
-        break;
+            break;
         case INVENTORY_MODE_REORDER:
             x  = 22;
             x2 = 0;
@@ -2869,10 +2916,10 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
             for(i = 0; i < NUM_SORT_OPTIONS; i++){
                 for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(windowId, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
 
                 if((NUM_SORT_OPTIONS - (i + 1)) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(windowId, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
 
                 y = y - 2;
             }
@@ -2882,9 +2929,9 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             x2 = 4;
             for(i = 0; i < NUM_SORT_OPTIONS; i++){
                 StringCopy(gStringVar1, sSortTypeStrings[i].string);
-                AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
             }
-        break;
+            break;
         case INVENTORY_MODE_REGISTER:
             /*x  = 22;
             x2 = 0;
@@ -2893,10 +2940,10 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
             for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS + 1; i++){
                 for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(windowId, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
 
                 if((INVENTORY_REGISTER_NUM_DIRECTIONS - i) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(windowId, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
 
                 y = y - 2;
             }
@@ -2906,9 +2953,9 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             x2 = 4;
             for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS + 1; i++){
                 StringCopy(gStringVar1, sDirectionStrings[i].string);
-                AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
             }*/
-        break;
+            break;
         case INVENTORY_MODE_TOSS_HOW_MANY:
             x  = 22;
             x2 = 0;
@@ -2916,16 +2963,16 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             y2 = 2;
 
             //for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-            //    BlitBitmapToWindow(windowId, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
+            //    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
 
-            BlitBitmapToWindow(windowId, sInventorySelectorCursorToss_Gfx, (x * 8), (y * 8) + y2, 64, 16);
+            BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursorToss_Gfx, (x * 8), (y * 8) + y2, 64, 16);
 
             ConvertIntToDecimalStringN(gStringVar1, sMenuDataPtr->numItemsToToss + 1, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
             x  = 23;
             x2 = GetStringCenterAlignXOffset(font, gStringVar1, (6 * 8));
 
-            AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
-        break;
+            AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
+            break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
             x  = 22;
             x2 = 0;
@@ -2934,10 +2981,10 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
             for(i = 0; i < NUM_TOSS_CONFIRMATION_OPTIONS; i++){
                 for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(windowId, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
 
                 if((NUM_TOSS_CONFIRMATION_OPTIONS - (i + 1)) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(windowId, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
 
                 y = y - 2;
             }
@@ -2949,15 +2996,15 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
                 switch(i){
                     case 0:
                         StringCopy(gStringVar1, sText_Toss_Yes);
-                    break;
+                        break;
                     case 1:
                         StringCopy(gStringVar1, sText_Toss_No);
-                    break;
+                        break;
                 }
 
-                AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
             }
-        break;
+            break;
     }
 
     if(!shouldShowRegisteredItems()){
@@ -2975,30 +3022,30 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
                 continue;
 
             if(GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) != ITEM_NONE)
-                BlitBitmapToWindow(windowId, gInventoryHeldItem_Gfx, (x * 8) + x2, (y * 8) + y2, 8, 8);
+                BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryHeldItem_Gfx, (x * 8) + x2, (y * 8) + y2, 8, 8);
 
             if(currentStatus != INVENTORY_STATUS_NONE){
                 switch(currentStatus){
                     case AILMENT_BRN:
-                        BlitBitmapToWindow(windowId, gInventoryStatus_Burn_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Burn_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
+                        break;
                     case AILMENT_PRZ:
-                        BlitBitmapToWindow(windowId, gInventoryStatus_Paralysis_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Paralysis_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
+                        break;
                     case AILMENT_FRZ:
                     case AILMENT_FRB:
-                        BlitBitmapToWindow(windowId, gInventoryStatus_Freeze_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Freeze_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
+                        break;
                     case AILMENT_PSN:
-                        BlitBitmapToWindow(windowId, gInventoryStatus_Poison_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Poison_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
+                        break;
                     case AILMENT_SLP:
-                        BlitBitmapToWindow(windowId, gInventoryStatus_Sleep_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                    break;
+                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Sleep_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
+                        break;
                 }
             }
 
-            BlitBitmapToWindow(windowId, GetBarGfx(GetHPEggCyclePercent(i)), ((x - GFX_STATUS_MINUS_X) * 8) + x2 + 4, (y * 8) + y2 + 7, 24, 8);
+            BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, GetBarGfx(GetHPEggCyclePercent(i)), ((x - GFX_STATUS_MINUS_X) * 8) + x2 + 4, (y * 8) + y2 + 7, 24, 8);
         }
     }
     else{
@@ -3007,7 +3054,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         x2 = 2;
         y2 = 5;
 
-        BlitBitmapToWindow(windowId, gInventoryRegisterArrows_Gfx, (x * 8) + x2, (y * 8) + y2, 24, 24);
+        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryRegisterArrows_Gfx, (x * 8) + x2, (y * 8) + y2, 24, 24);
     }
 
     //Help Bar Text
@@ -3018,50 +3065,50 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     switch(sMenuDataPtr->currentSelectMode){
         case INVENTORY_MODE_USE_OPTIONS:
             StringCopy(gStringVar4, sText_Help_Bar_Use);
-        break;
+            break;
         case INVENTORY_MODE_REORDER:
             StringCopy(gStringVar4, sText_Help_Bar_SortItemsHow);
-        break;
+            break;
         case INVENTORY_MODE_REGISTER:
             StringCopy(gStringVar4, sText_Help_Bar_RegisterHow);
-        break;
+            break;
         case INVENTORY_MODE_TOSS_HOW_MANY:
             StringCopy(gStringVar4, sText_Help_Bar_Toss);
-        break;
+            break;
         case INVENTORY_MODE_MOVE_ITEMS:
-        {
-            u16 quantity = pocket->itemSlots[gSaveBlock3Ptr->InventoryData.itemIdx].quantity;
+            {
+                u16 quantity = pocket->itemSlots[gSaveBlock3Ptr->InventoryData.itemIdx].quantity;
 
-            CopyItemNameHandlePlural(itemId, gStringVar1, quantity);
-            StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Move);
-        }
-        break;
+                CopyItemNameHandlePlural(itemId, gStringVar1, quantity);
+                StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Move);
+            }
+            break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
-        {
-            u16 quantity = sMenuDataPtr->numItemsToToss + 1;
+            {
+                u16 quantity = sMenuDataPtr->numItemsToToss + 1;
 
-            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
-            CopyItemNameHandlePlural(itemId, gStringVar2, quantity);
-            StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Toss_Confirmation);
-        }
-        break;
+                ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
+                CopyItemNameHandlePlural(itemId, gStringVar2, quantity);
+                StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Toss_Confirmation);
+            }
+            break;
         case INVENTORY_MESSAGE_SORTED_ITEMS_BY:
             StringCopy(gStringVar1, sSortTypeStrings[sMenuDataPtr->itemIdxPickMode].string);
             StringExpandPlaceholders(gStringVar4, sText_Help_Bar_ItemsSorted);
-        break;
+            break;
         case INVENTORY_MESSAGE_CANT_MOVE_FAVORITE:
             StringCopy(gStringVar4, sText_Help_Bar_Cant_Move_Favorite);
-        break;
+            break;
         case INVENTORY_MESSAGE_CANT_USE_ITEM:
             StringCopy(gStringVar4, sText_Help_Bar_Cant_Use);
-        break;
+            break;
         case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
             StringCopy(gStringVar4, sText_Help_Bar_Cant_Toss);
-        break;
+            break;
         case INVENTORY_MESSAGE_USED_ITEM:
             CopyItemName(itemId, gStringVar1);
             StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Used_Item);
-        break;
+            break;
         default:
             if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD)
                 StringCopy(gStringVar4, sText_Help_Bar);
@@ -3069,18 +3116,27 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
                 StringCopy(gStringVar4, sText_Help_Bar_Battle);
             else
                 StringCopy(gStringVar4, sText_Help_Bar_GiveItem);
-        break;
+            break;
     }
 
-    AddTextPrinterParameterized4(windowId, font, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
 
     if(pocketId == POCKET_TM_HM)
         CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
     else
         LoadPalette(sMenuInterfacePalette, 16, 32);
 
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    PutWindowTilemap(INVENTORY_WINDOW_HEADER);
+    PutWindowTilemap(INVENTORY_WINDOW_PARTY_DISPLAY);
+    PutWindowTilemap(INVENTORY_WINDOW_ITEM_LIST);
+    PutWindowTilemap(INVENTORY_WINDOW_DESC);
+    PutWindowTilemap(INVENTORY_WINDOW_FOOTER);
+
+    CopyWindowToVram(INVENTORY_WINDOW_HEADER ,COPYWIN_FULL);
+    CopyWindowToVram(INVENTORY_WINDOW_PARTY_DISPLAY ,COPYWIN_FULL);
+    CopyWindowToVram(INVENTORY_WINDOW_ITEM_LIST ,COPYWIN_FULL);
+    CopyWindowToVram(INVENTORY_WINDOW_DESC,COPYWIN_FULL);
+    CopyWindowToVram(INVENTORY_WINDOW_FOOTER ,COPYWIN_FULL);
 }
 
 static void Task_MenuWaitFadeIn(u8 taskId)
@@ -3330,7 +3386,7 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId)
     else
         sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
 
-    PrintToWindow(WINDOW_1, FONT_WHITE);
+    PrintToWindow();
     gTasks[taskId].func = Task_MenuMain;
 }
 
@@ -3798,14 +3854,14 @@ static void Task_MenuMain(u8 taskId)
             }
         }
 
-        PrintToWindow(WINDOW_1, FONT_WHITE);
+        PrintToWindow();
     }
 
     if (JOY_NEW(B_BUTTON))
     {
         switch(sMenuDataPtr->currentSelectMode){
             case INVENTORY_MODE_DEFAULT:
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_MenuTurnOff;
@@ -3817,7 +3873,7 @@ static void Task_MenuMain(u8 taskId)
             break;
             default:
                 sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             break;
         }
     }
@@ -3839,12 +3895,12 @@ static void Task_MenuMain(u8 taskId)
                 PlaySE(SE_SELECT);
                 if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
                     Menu_UpdateTilemap();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             }
             break;
             case INVENTORY_MODE_REGISTER:
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_RIGHT);
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             break;
             case INVENTORY_MODE_TOSS_HOW_MANY:
             {
@@ -3857,7 +3913,7 @@ static void Task_MenuMain(u8 taskId)
                 else
                     sMenuDataPtr->numItemsToToss = 0;
 
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             }
             break;
         }
@@ -3880,12 +3936,12 @@ static void Task_MenuMain(u8 taskId)
                 PlaySE(SE_SELECT);
                 if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
                     Menu_UpdateTilemap();
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             }
             break;
             case INVENTORY_MODE_REGISTER:
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_LEFT);
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             break;
             case INVENTORY_MODE_TOSS_HOW_MANY:
             {
@@ -3905,7 +3961,7 @@ static void Task_MenuMain(u8 taskId)
                 else
                     sMenuDataPtr->numItemsToToss = ownedCount - 1;
 
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             }
             break;
         }
@@ -3964,7 +4020,7 @@ static void Task_MenuMain(u8 taskId)
         }
 
         PlaySE(SE_SELECT);
-        PrintToWindow(WINDOW_1, FONT_WHITE);
+        PrintToWindow();
     }
 
     if ((JOY_NEW(DPAD_UP)) || (JOY_REPEAT(DPAD_UP))){
@@ -4027,7 +4083,7 @@ static void Task_MenuMain(u8 taskId)
         }
 
         PlaySE(SE_SELECT);
-        PrintToWindow(WINDOW_1, FONT_WHITE);
+        PrintToWindow();
     }
 
     if ((JOY_NEW(L_BUTTON))){
@@ -4042,7 +4098,7 @@ static void Task_MenuMain(u8 taskId)
                     numPress--;
                 }
                 while(numPress != 0);
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             break;
         }
     }
@@ -4059,7 +4115,7 @@ static void Task_MenuMain(u8 taskId)
                     numPress--;
                 }
                 while(numPress != 0);
-                PrintToWindow(WINDOW_1, FONT_WHITE);
+                PrintToWindow();
             break;
         }
     }
@@ -4071,7 +4127,7 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MODE_DEFAULT:
                     if(sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] > 2){
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REORDER;
-                        PrintToWindow(WINDOW_1, FONT_WHITE);
+                        PrintToWindow();
                     }
                 break;
             }
@@ -4095,7 +4151,7 @@ static void Task_MenuMain(u8 taskId)
                 PlaySE(SE_PC_OFF);
                 sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_MOVE_FAVORITE;
             }
-            PrintToWindow(WINDOW_1, FONT_WHITE);
+            PrintToWindow();
         }
     }
 }
