@@ -2,65 +2,19 @@
 #define GUARD_UI_SHOP_H
 
 #include "main.h"
+#include "constants/ui_shop.h"
 
-enum ShopMenuCategories
-{
-    SHOP_CATEGORY_BUY_AGAIN,
-    SHOP_CATEGORY_RECOMMENDED,
-    SHOP_CATEGORY_MEDICINE,
-    SHOP_CATEGORY_POKE_BALLS,
-    SHOP_CATEGORY_OTHER_ITEMS,
-    SHOP_CATEGORY_POWER_UPS,
-    SHOP_CATEGORY_BATTLE_ITEMS,
-    SHOP_CATEGORY_BERRIES,
-    SHOP_CATEGORY_TMS,
-    SHOP_CATEGORY_TREASURES,
-    SHOP_CATEGORY_MEGA_STONES,
-    SHOP_CATEGORY_Z_CRYSTALS,
+extern const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES];
+extern struct ShopMenuData *gShopMenuDataPtr;
 
-    NUM_SHOP_CATEGORIES,
-
-    // shortcuts
-
-    // Recommended/History items are dynamic categories.
-    SHOP_CATEGORY_STATIC_START = SHOP_CATEGORY_MEDICINE,
-
-    // Categories that can appear in the recommmended carousel.
-    SHOP_CATEGORY_DEFAULT_CAROUSEL_START = SHOP_CATEGORY_STATIC_START,
-    SHOP_CATEGORY_DEFAULT_CAROUSEL_END = SHOP_CATEGORY_BERRIES,
-
-    SHOP_CATEGORY_FIELD_CAROUSEL_START = SHOP_CATEGORY_POKE_BALLS,
-    SHOP_CATEGORY_FIELD_CAROUSEL_END = SHOP_CATEGORY_OTHER_ITEMS,
-};
-
-enum ShopMenuCarousels
-{
-    SHOP_CAROUSEL_NEED_TO_HEAL,
-    SHOP_CAROUSEL_TOURNAMENT_PREP,
-    SHOP_CAROUSEL_FOREST_EXPLORE,
-    SHOP_CAROUSEL_CAVE_EXPLORE,
-    SHOP_CAROUSEL_WATER_EXPLORE,
-    SHOP_CAROUSEL_ROUTE_EXPLORE,
-    SHOP_CAROUSEL_RANDOM,
-
-    NUM_SHOP_CAROUSELS,
-};
-
-enum ShopMenuTypes
-{
-    SHOP_TYPE_PRESTO_APP,
-    SHOP_TYPE_PRESTO_TERMINAL,
-    SHOP_TYPE_POKEMART,
-
-    NUM_SHOP_TYPES
-};
-
-#define WRITE_CRITERIA_GOAL_VAR(varId, varValue) ((varId << 16) | (varValue))
-#define READ_CRITERIA_GOAL_VAR_ID(criteria) ((criteria) >> 16)
-#define READ_CRITERIA_GOAL_VAR_VALUE(criteria) ((criteria) & 0xFFFF)
-
-typedef bool32 (*ShopCriteriaFunc)(u16);
-
-void ShopMenu_Init(enum ShopMenuTypes, MainCallback);
+void ShopMenu_Init(const struct ShopMenuConfigs *, const u16 *, MainCallback);
+enum ShopMenuCategories ShopGrid_CategoryInRow(u8);
+enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
+void ShopPrint_AddTextPrinter(u32, u32, u32, enum ShopMenuFontColors, const u8 *);
+const struct ShopMenuConfigs *ShopConfig_Get(void);
+u8 ShopConfig_GetTotalShownItems(void);
+u8 ShopConfig_GetTotalShownItemRows(void);
+u8 ShopConfig_GetTotalShownCategories(void);
+u8 ShopConfig_GetTotalShownItemsOnScreen(void);
 
 #endif // GUARD_UI_SHOP_H
