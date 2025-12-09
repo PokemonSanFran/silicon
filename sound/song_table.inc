@@ -585,6 +585,7 @@ gSongTable::
     song mus_welcome_to_the_war_room, 0, 0
     song mus_espulee_outskirts, 0, 0
     song mus_espulee_outskirts_night, 0, 0
+    song mus_accept_letter, 0, 0
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2

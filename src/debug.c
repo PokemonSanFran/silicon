@@ -3979,6 +3979,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_WELCOME_TO_THE_WAR_ROOM) \
     X(MUS_ESPULEE_OUTSKIRTS) \
     X(MUS_ESPULEE_OUTSKIRTS_NIGHT) \
+    X(MUS_ACCEPT_LETTER) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
