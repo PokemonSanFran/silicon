@@ -5534,7 +5534,7 @@ static void HandleEndTurn_BattleWon(void)
         CountDefeatedBackyard(); // siliconMerge
         CountDefeatedCresaltaVista(); // siliconMerge
         Quest_Wildfirerisk_CheckDefeatedMon(); // siliconMerge
-        CountDefeatedGlameow(); // siliconMerge
+        CountDefeatedRabiesMon(); // siliconMerge
         CountDefeatedGardenMons(); // siliconMerge
         gBattlescriptCurrInstr = BattleScript_PayDayMoneyAndPickUpItems;
     }
@@ -5606,31 +5606,6 @@ void CountDefeatedGardenMons(void){
     }
 
     VarSet(VAR_DEFEATED_GARDEN_POKEMON,defeatedGardenMonCount);
-}
-
-void CountDefeatedGlameow(void){
-    /*
-    Iterate every spot in the enemy's party
-    If one is Glameow AND you're in GlavezHill AND its not a Trainer battle, then increment the defeated Glameow count by one
-   If the Glameow count is > 9, AND the Rabies Outbreak quest is active  change the Rabies Outbreak quest to Reward state
-*/
-    u8 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT), i = 0;
-
-    for (i = 0;i < 6;i++)
-    {
-        s32 enemySpecies = GetMonData(&gEnemyParty[i],MON_DATA_SPECIES);
-
-        if (GetCurrentMap() == MAP_GLAVEZ_HILL && (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) && (enemySpecies == SPECIES_GLAMEOW)){
-            defeatedGlameowCount++;
-        }
-    }
-
-    if ((defeatedGlameowCount > 9) && QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_GET_ACTIVE)){
-        QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_SET_REWARD);
-        QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_REMOVE_ACTIVE);
-    }
-
-    VarSet(VAR_DEFEATED_GLAMEOW_COUNT,defeatedGlameowCount);
 }
 
 void CountDefeatedCresaltaVista(void){
