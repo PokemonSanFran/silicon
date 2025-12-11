@@ -83,6 +83,8 @@ enum PrestoShopTypes
     NUM_PRESTO_TYPES
 };
 
+static EWRAM_INIT u8 sPrestoItemIconSpriteId = SPRITE_NONE;
+
 static u32 PrestoPurchase_GetDroneFee(void);
 static u32 PrestoPurchase_GetItemPrice(u16, u16, enum PrestoPriceTypes);
 static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
@@ -148,8 +150,11 @@ static const struct ShopMenuConfigs sPrestoShopConfigs =
     .palette = (const u16[])INCBIN_U16("graphics/ui_menus/presto/palette.gbapal"),
     .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/presto/categories.4bpp"),
 
-    .categoryX = 0, .categoryY = 2,
-    .categoryX2 = 3, .categoryY2 = 0,
+    .categoryCoords = (const u8[]){
+        [SHOP_CATEGORY_COORD_X]   = TILE_TO_PIXELS(0) + 3,
+        [SHOP_CATEGORY_COORD_Y]   = TILE_TO_PIXELS(2) + 0,
+        [SHOP_CATEGORY_COORD_PAD] = TILE_TO_PIXELS(3) + 2,
+    },
 
     .itemIconX = 6, .itemIconY = 5,
     .itemIconX2 = 6, .itemIconY2 = 6,
@@ -300,11 +305,11 @@ static void PrestoHelper_UpdateFrontEnd(void)
 
     if (!gShopMenuDataPtr->buyScreen)
     {
-        if (gShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] != SPRITE_NONE)
+        if (sPrestoItemIconSpriteId != SPRITE_NONE)
         {
-            gSprites[gShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON]].invisible = TRUE;
-            DestroySprite(&gSprites[gShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON]]);
-            gShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] = SPRITE_NONE;
+            gSprites[sPrestoItemIconSpriteId].invisible = TRUE;
+            DestroySprite(&gSprites[sPrestoItemIconSpriteId]);
+            sPrestoItemIconSpriteId = SPRITE_NONE;
         }
 
         PrestoBlit_SelectedItem();
@@ -315,7 +320,7 @@ static void PrestoHelper_UpdateFrontEnd(void)
     {
         u32 itemId = gShopMenuDataPtr->selectedItemId;
 
-        if (gShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] == SPRITE_NONE)
+        if (sPrestoItemIconSpriteId == SPRITE_NONE)
         {
             x = 3, y = 6;
 
@@ -326,7 +331,7 @@ static void PrestoHelper_UpdateFrontEnd(void)
             gSprites[spriteId].y2 = TILE_TO_PIXELS(y);
             gSprites[spriteId].oam.priority = 0;
 
-            gShopMenuDataPtr->spriteIds[SHOP_SPRITE_BUY_ITEM_ICON] = spriteId;
+            sPrestoItemIconSpriteId = spriteId;
         }
 
         x = 1, y = 2;

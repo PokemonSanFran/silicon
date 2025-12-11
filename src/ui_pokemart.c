@@ -47,6 +47,21 @@
 #include "constants/party_menu.h"
 
 // constants
+#define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
+#define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
+
+#define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(3) + 3) + 4)
+#define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS(4) + 7) + 8)
+
+#define SHOP_RIGHT_ARROW_X ((TILE_TO_PIXELS(8) + 1) + 4)
+#define SHOP_RIGHT_ARROW_Y SHOP_LEFT_ARROW_Y
+
+#define SHOP_UP_ARROW_X    (TILE_TO_PIXELS(15) + 16)
+#define SHOP_UP_ARROW_Y    (TILE_TO_PIXELS(0) + 8)
+
+#define SHOP_DOWN_ARROW_X  SHOP_UP_ARROW_X
+#define SHOP_DOWN_ARROW_Y  ((TILE_TO_PIXELS(17) + 4) + 8)
+
 enum PokeMartInputs
 {
     MART_INPUT_BUY = 0,
@@ -72,20 +87,97 @@ static EWRAM_INIT struct PokeMartData sPokeMartData =
 
 // declarations
 static void MartInterface_Open(void);
+
 static void Task_MartInterface_Idle(u8);
 static void Task_MartInterface_HandleBuyOrSell(u8);
 static void Task_MartInterface_HandleQuit(u8);
 static void Task_MartInterface_FadeIntoMenu(u8);
-
-static void CB2_MartMenu_OpenBuyMenu(void);
-static void CB2_MartMenu_OpenSellMenu(void);
-
-static void CB2_MartReload_ReturnToField(void);
-static void FieldCB_MartReload_PrepareInterface(void);
 static void Task_MartReload_WaitForFade(u8);
 static void Task_MartReload_Finish(u8);
 
+static void CB2_MartMenu_OpenBuyMenu(void);
+static void CB2_MartMenu_OpenSellMenu(void);
+static void CB2_MartReload_ReturnToField(void);
+
+static void FieldCB_MartReload_PrepareInterface(void);
+
+static void MartHelper_UpdateFrontEnd(void);
+
+static u32 MartPurchase_GetTotalItemPrice(u16, u16);
+
 // const data
+static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
+{
+    [SHOP_SPRITE_BUY_ICON] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/cursor.4bpp.smol"),
+        .x = (TILE_TO_PIXELS(4) + 1) + 16,
+        .y = (TILE_TO_PIXELS(3) - 1) + 16,
+    },
+    [SHOP_SPRITE_UP_ARROW] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.smol"),
+        .x = SHOP_UP_ARROW_X,
+        .y = SHOP_UP_ARROW_Y,
+    },
+    [SHOP_SPRITE_DOWN_ARROW] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.smol"),
+        .x = SHOP_DOWN_ARROW_X,
+        .y = SHOP_DOWN_ARROW_Y,
+    },
+    [SHOP_SPRITE_LEFT_ARROW] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.smol"),
+        .x = SHOP_LEFT_ARROW_X,
+        .y = SHOP_LEFT_ARROW_Y,
+    },
+    [SHOP_SPRITE_RIGHT_ARROW] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.smol"),
+        .x = SHOP_RIGHT_ARROW_X,
+        .y = SHOP_RIGHT_ARROW_Y,
+    },
+    [SHOP_SPRITE_UP_ARROW_SMALL] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.smol"),
+        .x = TILE_TO_PIXELS(12) + 8,
+        .y = (TILE_TO_PIXELS(11) + 2) + 4,
+    },
+    [SHOP_SPRITE_DOWN_ARROW_SMALL] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.smol"),
+        .x = TILE_TO_PIXELS(12) + 8,
+        .y = (TILE_TO_PIXELS(13) + 6) + 4,
+    },
+};
+
+static const struct ShopMenuConfigs sPokeMartShopConfigs =
+{
+    .sprites = sPokeMartShopSprites,
+    .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.4bpp.smol"),
+    .map = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.bin.smolTM"),
+    .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.bin.smolTM"), // nothing happens
+    .palette = (const u16[])INCBIN_U16("graphics/ui_menus/mart/bg.gbapal"),
+    .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/mart/categories.4bpp"),
+
+    .categoryCoords = (const u8[]){
+        [SHOP_CATEGORY_COORD_X]   = TILE_TO_PIXELS(10) + 2,
+        [SHOP_CATEGORY_COORD_Y]   = TILE_TO_PIXELS(2) + 3,
+        [SHOP_CATEGORY_COORD_PAD] = TILE_TO_PIXELS(3) + 2,
+    },
+
+    .itemIconX = 14, .itemIconY = 0,
+    .itemIconX2 = 16, .itemIconY2 = 16,
+
+    .totalShownItems = 4,
+    .totalShownItemRows = 1,
+    .totalShownCategories = 3,
+
+    .handleFrontend = MartHelper_UpdateFrontEnd,
+    .handleTotalPrice = MartPurchase_GetTotalItemPrice,
+};
+
 static const struct MenuAction sPokeMart_MenuActions[] =
 {
     [MART_INPUT_BUY]  = { COMPOUND_STRING("Buy"),     { .void_u8 = Task_MartInterface_HandleBuyOrSell } },
@@ -191,7 +283,7 @@ static void Task_MartReload_Finish(u8 taskId)
 
 static void CB2_MartMenu_OpenBuyMenu(void)
 {
-    ShopMenu_Init(SHOP_TYPE_POKEMART, CB2_MartReload_ReturnToField);
+    ShopMenu_Init(&sPokeMartShopConfigs, NULL, CB2_MartReload_ReturnToField);
 }
 
 static void CB2_MartMenu_OpenSellMenu(void)
@@ -209,4 +301,14 @@ static void FieldCB_MartReload_PrepareInterface(void)
 {
     FadeInFromBlack();
     CreateTask(Task_MartReload_WaitForFade, 0);
+}
+
+static void MartHelper_UpdateFrontEnd(void)
+{
+
+}
+
+static u32 MartPurchase_GetTotalItemPrice(u16 itemId, u16 quantity)
+{
+    return (quantity + 1) * GetItemPrice(itemId);
 }

@@ -49,15 +49,6 @@ enum ShopMenuCarousels
     NUM_SHOP_CAROUSELS,
 };
 
-enum ShopMenuTypes
-{
-    SHOP_TYPE_PRESTO_APP,
-    SHOP_TYPE_PRESTO_TERMINAL,
-    SHOP_TYPE_POKEMART,
-
-    NUM_SHOP_TYPES
-};
-
 enum ShopMenuSprites
 {
     SHOP_SPRITE_BUY_ICON,
@@ -68,10 +59,7 @@ enum ShopMenuSprites
     SHOP_SPRITE_UP_ARROW_SMALL,
     SHOP_SPRITE_DOWN_ARROW_SMALL,
 
-    SHOP_SPRITE_BUY_ITEM_ICON, // dynamic
-
     NUM_SHOP_SPRITES,
-    NUM_STATIC_SHOP_SPRITES = SHOP_SPRITE_BUY_ITEM_ICON
 };
 
 enum ShopMenuSpriteTags
@@ -92,6 +80,13 @@ enum ShopMenuFontColors
     SHOP_FNTCLR_WHITE,
 };
 
+enum ShopMenuCategoryCoords
+{
+    SHOP_CATEGORY_COORD_X,
+    SHOP_CATEGORY_COORD_Y,
+    SHOP_CATEGORY_COORD_PAD
+};
+
 struct ShopSpriteConfigs
 {
     const u32 *gfx;
@@ -108,8 +103,7 @@ struct ShopMenuConfigs
     const u8 *categoryBlit;
 
     // starting points of sprites/blits on the screen.
-    u8 categoryX, categoryY;
-    u8 categoryX2, categoryY2;
+    const u8 *categoryCoords;
 
     u8 itemIconX, itemIconY;
     u8 itemIconX2, itemIconY2;
@@ -129,23 +123,33 @@ struct ShopMenuData
     const struct ShopMenuConfigs *configs;
     const u16 *products;
     MainCallback savedCallback;
+
     u8 notEnoughMoneyWindow:1;
     u8 sortCategories:1;
     u8 buyScreen:1;
     u8 buyWindow:1;
     u8 pad:4;
-    struct UCoords8 currIdx, firstIdx;
+
+    u8 currCategory, currItem;         // backend cursor
+    struct UCoords8 currIdx, firstIdx; // frontend cursor
+
     u16 itemQuantity;
     u16 maxItemQuantity;
-    u16 categoryItems[NUM_SHOP_CATEGORIES][NUM_SHOP_ITEMS_PER_CATEGORIES];
+    u16 selectedItemId;
+
     u16 recommendedItems[NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS];
+    u16 categoryItems[NUM_SHOP_CATEGORIES][NUM_SHOP_ITEMS_PER_CATEGORIES];
     u8 categoryNumItems[NUM_SHOP_CATEGORIES];
-    u32 selectedItemId;
-    enum ShopMenuCategories shownCategories[NUM_SHOP_CATEGORIES];
+
+    enum ShopMenuCategories categoryList[NUM_SHOP_CATEGORIES];
     u16 numCategories;
-    u8 spriteIds[NUM_SHOP_SPRITES];
-    u8 *itemIconIds;
+};
+
+struct ShopMenuStaticData
+{
     u8 *tilemapBuf;
+    u8 *itemIconIds;
+    u8 spriteIds[NUM_SHOP_SPRITES];
 };
 
 struct ShopSprite
