@@ -37435,6 +37435,438 @@
                 "species": "SPECIES_DRAGONITE"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_GLAVEZ_HEIGHTS",
+          "base_label": "gGlavezHeights_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_GLAVEZ_HEIGHTS",
+          "base_label": "gGlavezHeights_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_GLAVEZ_HEIGHTS",
+          "base_label": "gGlavezHeights_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 14,
+                "max_level": 17,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PURRLOIN"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 17,
+                "max_level": 20,
+                "species": "SPECIES_PANCHAM"
+              }
+            ]
           }
         },
         {
