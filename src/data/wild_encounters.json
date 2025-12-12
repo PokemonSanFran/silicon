@@ -24143,6 +24143,111 @@
         {
           "map": "MAP_CAPHE_CITY",
           "base_label": "gCapheCity_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              }
+            ]
+          },
           "berry_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -24350,6 +24455,333 @@
                 "min_level": 71,
                 "max_level": 75,
                 "species": "SPECIES_DRAGONITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY",
+          "base_label": "gCapheCity_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY",
+          "base_label": "gCapheCity_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY",
+          "base_label": "gCapheCity_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KOFFING"
               }
             ]
           }
@@ -39168,6 +39600,111 @@
         {
           "map": "MAP_CAPHE_COMMUNITY_GARDEN",
           "base_label": "gCapheCommunityGarden_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              }
+            ]
+          },
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -39585,6 +40122,333 @@
                 "min_level": 71,
                 "max_level": 75,
                 "species": "SPECIES_DRAGONITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_COMMUNITY_GARDEN",
+          "base_label": "gCapheCommunityGarden_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_COMMUNITY_GARDEN",
+          "base_label": "gCapheCommunityGarden_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_COMMUNITY_GARDEN",
+          "base_label": "gCapheCommunityGarden_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_TAILLOW"
               }
             ]
           }
