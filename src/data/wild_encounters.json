@@ -23824,6 +23824,111 @@
         {
           "map": "MAP_ROUTE9",
           "base_label": "gRoute9_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 25,
+                "species": "SPECIES_TRAPINCH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 25,
+                "species": "SPECIES_TRAPINCH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 25,
+                "species": "SPECIES_TRAPINCH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 25,
+                "species": "SPECIES_TRAPINCH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 25,
+                "species": "SPECIES_TRAPINCH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 25,
+                "species": "SPECIES_TRAPINCH"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              }
+            ]
+          },
           "rock_smash_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -24136,111 +24241,6 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
-              }
-            ]
-          },
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_SCRAGGY"
-              },
-              {
-                "min_level": 23,
-                "max_level": 25,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 25,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 25,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 25,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 25,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 25,
-                "species": "SPECIES_TRAPINCH"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_CAPSAKID"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_CAPSAKID"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_CAPSAKID"
-              },
-              {
-                "min_level": 25,
-                "max_level": 27,
-                "species": "SPECIES_CAPSAKID"
               }
             ]
           }
@@ -45156,6 +45156,111 @@
         {
           "map": "MAP_TORA_TOWN",
           "base_label": "gToraTown_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              }
+            ]
+          },
           "rock_smash_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -45468,6 +45573,333 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TORA_TOWN",
+          "base_label": "gToraTown_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TORA_TOWN",
+          "base_label": "gToraTown_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TORA_TOWN",
+          "base_label": "gToraTown_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_MIENFOO"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_CAPSAKID"
               }
             ]
           }
