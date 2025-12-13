@@ -25221,6 +25221,111 @@
         {
           "map": "MAP_ROUTE2",
           "base_label": "gRoute2_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              }
+            ]
+          },
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -25638,6 +25743,333 @@
                 "min_level": 71,
                 "max_level": 75,
                 "species": "SPECIES_DRAGONITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE2",
+          "base_label": "gRoute2_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE2",
+          "base_label": "gRoute2_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE2",
+          "base_label": "gRoute2_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_TRUBBISH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ZORUA"
               }
             ]
           }
@@ -38758,8 +39190,8 @@
                 "species": "SPECIES_GULPIN"
               },
               {
-                "min_level": 35,
-                "max_level": 35,
+                "min_level": 36,
+                "max_level": 36,
                 "species": "SPECIES_GULPIN"
               }
             ]
@@ -50089,7 +50521,112 @@
         },
         {
           "map": "MAP_SHARPRISE_SPIRE_PARK",
-          "base_label": "gSharpriseSpire_Park",
+          "base_label": "gSharpriseSpire_Park_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              }
+            ]
+          },
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -50402,6 +50939,333 @@
                 "min_level": 71,
                 "max_level": 75,
                 "species": "SPECIES_DRAGONITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SHARPRISE_SPIRE_PARK",
+          "base_label": "gSharpriseSpire_Park_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SHARPRISE_SPIRE_PARK",
+          "base_label": "gSharpriseSpire_Park_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SHARPRISE_SPIRE_PARK",
+          "base_label": "gSharpriseSpire_Park_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 30,
+                "species": "SPECIES_SKWOVET"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_SEEDOT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_ROOKIDEE"
               }
             ]
           }
