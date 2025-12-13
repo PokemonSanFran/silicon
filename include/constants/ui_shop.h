@@ -80,11 +80,18 @@ enum ShopMenuFontColors
     SHOP_FNTCLR_WHITE,
 };
 
-enum ShopMenuCategoryCoords
+enum ShopMenuCoords
 {
-    SHOP_CATEGORY_COORD_X,
-    SHOP_CATEGORY_COORD_Y,
-    SHOP_CATEGORY_COORD_PAD
+    SHOP_COORD_X,
+    SHOP_COORD_Y,
+    SHOP_COORD_PAD,
+    SHOP_COORD_PAD2
+};
+
+enum ShopMenuGridModes
+{
+    SHOP_GRID_HORIZONTAL,   // presto
+    SHOP_GRID_VERTICAL,     // pokemart
 };
 
 struct ShopSpriteConfigs
@@ -104,14 +111,13 @@ struct ShopMenuConfigs
 
     // starting points of sprites/blits on the screen.
     const u8 *categoryCoords;
+    const u8 *itemIconCoords;
 
-    u8 itemIconX, itemIconY;
-    u8 itemIconX2, itemIconY2;
-
-    // total sprites/blits shown on the screen.
+    // constants
     u8 totalShownItems;
     u8 totalShownItemRows; // combined with totalShownItems for the total grand of item icons.
     u8 totalShownCategories;
+    u8 gridMode;
 
     // functions that may be called in certain contexts.
     void (*handleFrontend)(void);      // what to do when refreshing the screen for e.g. show purchase menu
@@ -128,10 +134,16 @@ struct ShopMenuData
     u8 sortCategories:1;
     u8 buyScreen:1;
     u8 buyWindow:1;
-    u8 pad:4;
 
-    u8 currCategory, currItem;         // backend cursor
-    struct UCoords8 currIdx, firstIdx; // frontend cursor
+    u8 categoryIdx:4;
+    u8 firstCategory;
+    u8 itemIdx, firstItem;
+
+    // onscreen grid, does not include top-left paging
+    struct {
+        u8 row:4;
+        u8 col:4;
+    } gridIdx;
 
     u16 itemQuantity;
     u16 maxItemQuantity;

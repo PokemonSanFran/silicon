@@ -151,17 +151,22 @@ static const struct ShopMenuConfigs sPrestoShopConfigs =
     .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/presto/categories.4bpp"),
 
     .categoryCoords = (const u8[]){
-        [SHOP_CATEGORY_COORD_X]   = TILE_TO_PIXELS(0) + 3,
-        [SHOP_CATEGORY_COORD_Y]   = TILE_TO_PIXELS(2) + 0,
-        [SHOP_CATEGORY_COORD_PAD] = TILE_TO_PIXELS(3) + 2,
+        [SHOP_COORD_X]   = TILE_TO_PIXELS(0) + 3,
+        [SHOP_COORD_Y]   = TILE_TO_PIXELS(2) + 0,
+        [SHOP_COORD_PAD] = TILE_TO_PIXELS(3) + 2,
     },
 
-    .itemIconX = 6, .itemIconY = 5,
-    .itemIconX2 = 6, .itemIconY2 = 6,
+    .itemIconCoords = (const u8[]){
+        [SHOP_COORD_X]    = TILE_TO_PIXELS(6) + 6,
+        [SHOP_COORD_Y]    = TILE_TO_PIXELS(5) + 6,
+        [SHOP_COORD_PAD]  = TILE_TO_PIXELS(5) + 2,
+        [SHOP_COORD_PAD2] = TILE_TO_PIXELS(5) + 4,
+    },
 
     .totalShownItems = TOTAL_SHOWN_PRESTO_ITEMS_PER_CATEGORIES,
     .totalShownItemRows = TOTAL_SHOWN_PRESTO_ITEM_ROWS,
     .totalShownCategories = TOTAL_SHOWN_PRESTO_CATEGORIES,
+    .gridMode = SHOP_GRID_HORIZONTAL,
 
     .handleFrontend = PrestoHelper_UpdateFrontEnd,
     .handleTotalPrice = PrestoPurchase_GetTotalItemPrice,
@@ -238,7 +243,7 @@ static u32 PrestoPurchase_GetTotalItemPrice(u16 itemId, u16 quantity)
 
 static inline void PrestoBlit_SelectedItem(void)
 {
-    u32 trueColIdx = gShopMenuDataPtr->currIdx.x - gShopMenuDataPtr->firstIdx.x;
+    u32 trueColIdx = ShopGrid_GetGridXCursor();
     u32 x = (5 * trueColIdx) + 4, x2 = (2 * trueColIdx) + 2;
     u32 y = 4;
 
@@ -250,24 +255,16 @@ static inline void PrestoPrint_Categories(void)
 {
     u32 x = 4, y = 2;
 
-    u32 halfScreen = ShopConfig_GetTotalShownCategories() / 2;
-    u32 numCategories = gShopMenuDataPtr->numCategories - 1;
-    u32 finalHalfScreen = numCategories - halfScreen;
-
     for (u32 i = 0; i < ShopConfig_GetTotalShownItemRows(); i++)
     {
-        u32 trueRowIdx = gShopMenuDataPtr->currIdx.y;
-        if (gShopMenuDataPtr->currIdx.y > halfScreen && gShopMenuDataPtr->currIdx.y < finalHalfScreen)
-        {
-            trueRowIdx = gShopMenuDataPtr->firstIdx.y + halfScreen;
-        }
+        u32 trueRowIdx = ShopGrid_GetCurrentCategoryIndex();
 
         u32 row = (trueRowIdx + i) % gShopMenuDataPtr->numCategories;
 
         if (!i)
         {
             StringCopy(gStringVar1, gShopCategoryNames[ShopGrid_CategoryInRow(row)]);
-            StringCopy(gStringVar2, GetItemName(gShopMenuDataPtr->categoryItems[row][gShopMenuDataPtr->currIdx.x]));
+            StringCopy(gStringVar2, GetItemName(ShopInventory_GetItemIdFromGrid(row, ShopGrid_GetCurrentItemIndex())));
             StringExpandPlaceholders(gStringVar4, sText_FirstRowName);
         }
         else
@@ -286,7 +283,7 @@ static inline void PrestoPrint_Categories(void)
 static inline void PrestoPrint_ItemPrice(void)
 {
     u32 x = 20, y = 2;
-    u32 itemId = gShopMenuDataPtr->categoryItems[gShopMenuDataPtr->currIdx.y][gShopMenuDataPtr->currIdx.x];
+    u32 itemId = ShopInventory_GetChosenItemId();
     u32 price = GetItemPrice(itemId);
 
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Price: "));
@@ -324,7 +321,7 @@ static void PrestoHelper_UpdateFrontEnd(void)
         {
             x = 3, y = 6;
 
-            u32 selectedSpriteIdx = gShopMenuDataPtr->currIdx.x - gShopMenuDataPtr->firstIdx.x;
+            u32 selectedSpriteIdx = ShopGrid_GetGridXCursor();
             u32 spriteId = AddItemIconSprite(selectedSpriteIdx, selectedSpriteIdx, itemId);
 
             gSprites[spriteId].x2 = TILE_TO_PIXELS(x);

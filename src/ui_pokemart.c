@@ -162,17 +162,22 @@ static const struct ShopMenuConfigs sPokeMartShopConfigs =
     .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/mart/categories.4bpp"),
 
     .categoryCoords = (const u8[]){
-        [SHOP_CATEGORY_COORD_X]   = TILE_TO_PIXELS(10) + 2,
-        [SHOP_CATEGORY_COORD_Y]   = TILE_TO_PIXELS(2) + 3,
-        [SHOP_CATEGORY_COORD_PAD] = TILE_TO_PIXELS(3) + 2,
+        [SHOP_COORD_X]   = TILE_TO_PIXELS(10) + 2,
+        [SHOP_COORD_Y]   = TILE_TO_PIXELS(2) + 3,
+        [SHOP_COORD_PAD] = TILE_TO_PIXELS(3) + 2,
     },
 
-    .itemIconX = 14, .itemIconY = 0,
-    .itemIconX2 = 16, .itemIconY2 = 16,
+    .itemIconCoords = (const u8[]){
+        [SHOP_COORD_X]    = TILE_TO_PIXELS(14) + 16,
+        [SHOP_COORD_Y]    = TILE_TO_PIXELS(0) + 16,
+        [SHOP_COORD_PAD]  = TILE_TO_PIXELS(5) + 2,
+        [SHOP_COORD_PAD2] = TILE_TO_PIXELS(5) + 4,
+    },
 
     .totalShownItems = 4,
     .totalShownItemRows = 1,
     .totalShownCategories = 3,
+    .gridMode = SHOP_GRID_VERTICAL,
 
     .handleFrontend = MartHelper_UpdateFrontEnd,
     .handleTotalPrice = MartPurchase_GetTotalItemPrice,
