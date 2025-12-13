@@ -2542,7 +2542,6 @@ static void Inventory_PrintPartyDisplay_HeldItemStatus(void)
     {
         u32 currentStatus = GetAilmentFromStatus(GetMonData(&gPlayerParty[partyIndex], MON_DATA_STATUS));
         u32 row = partyIndex / 2;
-        u32 y2 = row * 2;
         u32 x = GFX_STATUS_MINUS_X + ((partyIndex % 2) * 32);
         u32 y = 8 + (row * 26);
 
@@ -2579,16 +2578,24 @@ static u32 Inventory_GetItemIdFromPocketIndex(u32 itemIndex, enum Pocket pocketI
     return (pocketId == POCKET_FAVORITE_ITEMS) ? (sMenuDataPtr->FavoritePocketItems[itemIndex][FAVORITE_ITEM_ID]) : pocket->itemSlots[itemIndex].itemId;
 }
 
+static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u32 itemListIndex)
+{
+    if (pocketId == POCKET_FAVORITE_ITEMS)
+        return;
+
+    itemIdx++;
+
+    if (itemIdx <= gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId])
+        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gInventoryIcon_Pinned_Gfx, 0, (itemListIndex * 17), 16, 8);
+}
+
 static void Inventory_PrintItemList(void)
 {
-    const u8 *desc;
-    u16 i, j, x, x2, y, y2, itemIdx;
-    u8 font = FONT_NARROW;
-    u8 fontItemNames = FONT_SMALL;
-    u8 itemNameFontColor = INVENTORY_FONT_WHITE;
-    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    u16 itemId, itemNum, moveNum;
-    u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u16 i, j, x, x2, y, y2;
+    u32 font = FONT_NARROW;
+    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u32 itemNum, moveNum;
+    u32 numitems = sMenuDataPtr->numItems[pocketId];
 
     FillWindowPixelBuffer(INVENTORY_WINDOW_ITEM_LIST, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     // Item Names
@@ -2599,11 +2606,11 @@ static void Inventory_PrintItemList(void)
 
     for(i = 0; i < INVENTORY_MAX_ITEMS_SHOWN; i++)
     {
-        itemIdx = gSaveBlock3Ptr->InventoryData.yFirstItem + i;
-        itemId = Inventory_GetItemIdFromPocketIndex(itemIdx,pocketId);
+        u32 itemIdx = gSaveBlock3Ptr->InventoryData.yFirstItem + i;
+        u32 itemId = Inventory_GetItemIdFromPocketIndex(itemIdx,pocketId);
 
-        if((itemIdx + 1) <= gSaveBlock3Ptr->InventoryData.numFavoriteItems[gSaveBlock3Ptr->InventoryData.pocketNum] && pocketId != POCKET_FAVORITE_ITEMS)
-            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gInventoryIcon_Pinned_Gfx, (x * 8) + x2 - 18, (y * 8) + y2 - 1 + 4, 16, 8);
+        Inventory_TryPrintFavoriteIcon(pocketId,itemIdx,i);
+
 
         // Cursor
         if(pocketId != POCKET_TM_HM || itemId == ITEM_NONE){
@@ -2745,7 +2752,7 @@ static void Inventory_PrintItemList(void)
             // Item Name
             if(pocketId != POCKET_TM_HM){
                 CopyItemName(itemId, gStringVar1);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, fontItemNames, (x * 8) + x2 + 1, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, INVENTORY_FONT_LIST, (x * 8) + x2 + 1, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar1);
 
                 // Item Num
                 itemNum = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
@@ -2756,7 +2763,7 @@ static void Inventory_PrintItemList(void)
 
                 ConvertIntToDecimalStringN(gStringVar1, itemNum, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
                 StringExpandPlaceholders(gStringVar4, sText_Item_Num);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, font, ((x + 15) * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, font, ((x + 15) * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar4);
 
                 //Registered Items
                 j = INVENTORY_CURSOR_SQUARES - 1;
@@ -2774,11 +2781,11 @@ static void Inventory_PrintItemList(void)
                 CopyItemName(itemId, gStringVar1);
                 StringCopy(gStringVar2, gMovesInfo[moveNum].name);
                 StringExpandPlaceholders(gStringVar4, sInventory_TM_Name);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, fontItemNames, (x * 8) + x2 + 2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, gStringVar4);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, INVENTORY_FONT_LIST, (x * 8) + x2 + 2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar4);
             }
         }
         else{
-            AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, fontItemNames, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[itemNameFontColor], 0xFF, sInventory_Exit);
+            AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, INVENTORY_FONT_LIST, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, sInventory_Exit);
             break;
         }
 
@@ -2786,11 +2793,12 @@ static void Inventory_PrintItemList(void)
         y2 = y2 + 1;
     }
 
-    if(gSaveBlock3Ptr->InventoryData.itemIdx < numitems - 1){
-        itemId = getCurrentSelectedItemIdx();
-        if(pocketId != POCKET_TM_HM){
-            desc = GetItemDescription(itemId);
-            StringCopy(gStringVar1, desc);
+    if(gSaveBlock3Ptr->InventoryData.itemIdx < numitems - 1)
+    {
+        u16 itemId = getCurrentSelectedItemIdx();
+        if(pocketId != POCKET_TM_HM)
+        {
+            StringCopy(gStringVar1, GetItemDescription(itemId));
 
             // Item Icon
             x  = 2;
@@ -2800,7 +2808,7 @@ static void Inventory_PrintItemList(void)
             ShowItemIcon(itemId, (x * 8) + x2, (y * 8) + y2);
         }
         else{
-            u8 power, accuracy, movePP;
+            u32 power, accuracy, movePP;
             moveNum = GetItemSecondaryId(itemId);
             FreeItemIconSprite();
 
@@ -2830,7 +2838,8 @@ static void Inventory_PrintItemList(void)
             StringCopy(gStringVar1, gMovesInfo[moveNum].description);
         }
     }
-    else{
+    else 
+{
         StringCopy(gStringVar1, sInventory_Exit_Desc);
         FreeItemIconSprite();
     }
