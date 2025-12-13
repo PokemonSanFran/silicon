@@ -179,8 +179,8 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = PIXELS_TO_TILES(240),
-        .height = PIXELS_TO_TILES(16),
+        .width = (240/8),
+        .height = (16/8),
         .paletteNum = 1,
         .baseBlock = 1,
     },
@@ -188,41 +188,41 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     {
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = PIXELS_TO_TILES(16),
-        .width = PIXELS_TO_TILES(64),
-        .height = PIXELS_TO_TILES(80),
+        .tilemapTop = (16/8),
+        .width = (64/8),
+        .height = (88/8),
         .paletteNum = 1,
-        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)),
+        .baseBlock = 1 + ((240/8) * (16/8)),
     },
     [INVENTORY_WINDOW_ITEM_LIST] =
     {
         .bg = INVENTORY_BG_TEXT,
-        .tilemapLeft = PIXELS_TO_TILES(64),
-        .tilemapTop = PIXELS_TO_TILES(16),
-        .width = PIXELS_TO_TILES(176),
-        .height = PIXELS_TO_TILES(88),
+        .tilemapLeft = (64/8),
+        .tilemapTop = (16/8),
+        .width = (176/8),
+        .height = (88/8),
         .paletteNum = 1,
-        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16))
+        .baseBlock = 1 + ((240/8) * (16/8)) + ((64/8) * (88/8))
     },
     [INVENTORY_WINDOW_DESC] =
     {
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = PIXELS_TO_TILES(104),
-        .width = PIXELS_TO_TILES(240),
-        .height = PIXELS_TO_TILES(40),
+        .tilemapTop = (104/8),
+        .width = (240/8),
+        .height = (40/8),
         .paletteNum = 1,
-        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)),
+        .baseBlock = 1 + ((240/8) * (16/8)) + ((64/8) * (88/8)) + ((240/8) * (40/8))
     },
     [INVENTORY_WINDOW_FOOTER] =
     {
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = PIXELS_TO_TILES(144),
-        .width = PIXELS_TO_TILES(240),
-        .height = PIXELS_TO_TILES(16),
+        .tilemapTop = (144/8),
+        .width = (240/8),
+        .height = (16/8),
         .paletteNum = 1,
-        .baseBlock = 1 + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)) + (PIXELS_TO_TILES(240) * PIXELS_TO_TILES(16)),
+        .baseBlock = 1 + ((240/8) * (16/8)) + ((64/8) * (88/8)) + ((176/8) * (88/8)) + ((240/8) * (40/8))
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -2523,61 +2523,51 @@ static void Inventory_PrintHeader(void)
     CopyWindowToVram(INVENTORY_WINDOW_HEADER ,COPYWIN_FULL);
 }
 
+static const u8* const sStatusIconGfxTable[] = 
+{
+    [AILMENT_NONE]   = NULL,
+    [AILMENT_PSN]    = gInventoryStatus_Poison_Gfx,
+    [AILMENT_PRZ]    = gInventoryStatus_Paralysis_Gfx,
+    [AILMENT_SLP]    = gInventoryStatus_Sleep_Gfx,
+    [AILMENT_FRZ]    = gInventoryStatus_Freeze_Gfx,
+    [AILMENT_BRN]    = gInventoryStatus_Burn_Gfx,
+    [AILMENT_PKRS]   = NULL,
+    [AILMENT_FNT]    = NULL,
+    [AILMENT_FRB]    = gInventoryStatus_Freeze_Gfx,
+};
+
+static void Inventory_PrintPartyDisplay_HeldItemStatus(void)
+{
+    for(u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        u32 currentStatus = GetAilmentFromStatus(GetMonData(&gPlayerParty[partyIndex], MON_DATA_STATUS));
+        u32 row = partyIndex / 2;
+        u32 y2 = row * 2;
+        u32 x = GFX_STATUS_MINUS_X + ((partyIndex % 2) * 32);
+        u32 y = 8 + (row * 26);
+
+        if(!IsMonNotEmpty(partyIndex))
+            continue;
+
+        if(GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM) != ITEM_NONE)
+            BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryHeldItem_Gfx, x, y, 8, 8);
+
+        if(currentStatus != AILMENT_NONE)
+            BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, sStatusIconGfxTable[currentStatus], (x - GFX_STATUS_MINUS_X), y,8,8);
+
+        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, GetBarGfx(GetHPEggCyclePercent(partyIndex)), (x - GFX_HP_MINUS_X),(y + GFX_HP_PLUS_Y), 24, 8);
+    }
+}
+
 static void Inventory_PrintPartyDisplay(void)
 {
-    u16 i, x, x2, y, y2;
-    u8 row, row2, currentStatus;
-
     FillWindowPixelBuffer(INVENTORY_WINDOW_PARTY_DISPLAY, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    if(!shouldShowRegisteredItems()){
-        //Held Items & Status Icons
-        for(i = 0; i < PARTY_SIZE; i++){
-            currentStatus = GetAilmentFromStatus(GetMonData(&gPlayerParty[i], MON_DATA_STATUS));
-            row = i / 2;
-            row2 = i % 2;
-            x = GFX_HELD_ITEM_X + (row2 * GFX_HELD_ITEM_X_EXTRA);
-            y = GFX_HELD_ITEM_Y + (row  * GFX_HELD_ITEM_Y_EXTRA);
-            x2 = 0;
-            y2 = row * 2;
 
-            if(!IsMonNotEmpty(i))
-                continue;
+    if (shouldShowRegisteredItems())
+        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryRegisterArrows_Gfx, 26, 29, INVENTORY_DPAD_WIDTH, INVENTORY_DPAD_HEIGHT);
+    else
+        Inventory_PrintPartyDisplay_HeldItemStatus();
 
-            if(GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) != ITEM_NONE)
-                BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryHeldItem_Gfx, (x * 8) + x2, (y * 8) + y2, 8, 8);
-
-            if(currentStatus != INVENTORY_STATUS_NONE){
-                switch(currentStatus){
-                    case AILMENT_BRN:
-                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Burn_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                        break;
-                    case AILMENT_PRZ:
-                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Paralysis_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                        break;
-                    case AILMENT_FRZ:
-                    case AILMENT_FRB:
-                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Freeze_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                        break;
-                    case AILMENT_PSN:
-                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Poison_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                        break;
-                    case AILMENT_SLP:
-                        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryStatus_Sleep_Gfx, ((x - GFX_STATUS_MINUS_X) * 8) + x2, (y * 8) + y2, 8, 8);
-                        break;
-                }
-            }
-
-            BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, GetBarGfx(GetHPEggCyclePercent(i)), ((x - GFX_STATUS_MINUS_X) * 8) + x2 + 4, (y * 8) + y2 + 7, 24, 8);
-        }
-    }
-    else{
-        x  = 3;
-        y  = 5;
-        x2 = 2;
-        y2 = 5;
-
-        BlitBitmapToWindow(INVENTORY_WINDOW_PARTY_DISPLAY, gInventoryRegisterArrows_Gfx, (x * 8) + x2, (y * 8) + y2, 24, 24);
-    }
     PutWindowTilemap(INVENTORY_WINDOW_PARTY_DISPLAY);
     CopyWindowToVram(INVENTORY_WINDOW_PARTY_DISPLAY ,COPYWIN_FULL);
 }
