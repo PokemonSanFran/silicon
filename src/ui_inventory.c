@@ -579,14 +579,25 @@ static void Menu_UpdateTilemap(void)
 
 static void Menu_InitWindows(void)
 {
-    InitWindows(sMenuWindowTemplates);
+    u32 baseBlock = 1;
+    enum InventoryWindowIds windowId = 0;
+    struct WindowTemplate template;
+    InitWindows(&gDummyWindowTemplate);
+    FreeAllWindowBuffers();
     DeactivateAllTextPrinters();
 
-    for (enum InventoryWindowIds windowId = 0; windowId < INVENTORY_WINDOW_COUNT; windowId++)
+    for (; windowId < INVENTORY_WINDOW_COUNT; windowId++)
     {
+        template = sMenuWindowTemplates[windowId];
+        template.bg = INVENTORY_BG_TEXT;
+        template.baseBlock = baseBlock;
+
+        AddWindow(&template);
         FillWindowPixelBuffer(windowId, TEXT_COLOR_TRANSPARENT);
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_FULL);
+
+        baseBlock += template.width * template.height;
     }
 }
 
