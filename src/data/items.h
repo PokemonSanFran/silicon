@@ -15781,57 +15781,62 @@ const struct Item gItemsInfo[] =
     // Start siliconMerge
     [ITEM_TM01] =
     {
-      .name = ITEM_NAME("TM 01"),
+      .name = ITEM_NAME("TM 001"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
       .pocket = POCKET_TM_HM,
       .type = ITEM_USE_PARTY_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+      .secondaryId = MOVE_GLARE,
     },
     [ITEM_TM02] =
     {
-      .name = ITEM_NAME("TM 02"),
+      .name = ITEM_NAME("TM 002"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
       .pocket = POCKET_TM_HM,
       .type = ITEM_USE_PARTY_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+      .secondaryId = MOVE_HARDEN,
     },
     [ITEM_TM03] =
     {
-      .name = ITEM_NAME("TM 03"),
+      .name = ITEM_NAME("TM 003"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
       .pocket = POCKET_TM_HM,
       .type = ITEM_USE_PARTY_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+      .secondaryId = MOVE_DOUBLE_TEAM,
     },
     [ITEM_TM04] =
     {
-      .name = ITEM_NAME("TM 04"),
+      .name = ITEM_NAME("TM 004"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
       .pocket = POCKET_TM_HM,
       .type = ITEM_USE_PARTY_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+      .secondaryId = MOVE_TAIL_WHIP,
     },
     [ITEM_TM05] =
     {
-      .name = ITEM_NAME("TM 05"),
+      .name = ITEM_NAME("TM 005"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
       .pocket = POCKET_TM_HM,
       .type = ITEM_USE_PARTY_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+      .secondaryId = MOVE_LEER,
     },
     [ITEM_TM06] =
     {
-      .name = ITEM_NAME("TM 06"),
+      .name = ITEM_NAME("TM 006"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15842,7 +15847,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM07] =
     {
-      .name = ITEM_NAME("TM 07"),
+      .name = ITEM_NAME("TM 007"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15853,7 +15858,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM08] =
     {
-      .name = ITEM_NAME("TM 08"),
+      .name = ITEM_NAME("TM 008"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15864,7 +15869,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM09] =
     {
-      .name = ITEM_NAME("TM 09"),
+      .name = ITEM_NAME("TM 009"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15875,7 +15880,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM10] =
     {
-      .name = ITEM_NAME("TM 10"),
+      .name = ITEM_NAME("TM 010"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15886,7 +15891,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM11] =
     {
-      .name = ITEM_NAME("TM 11"),
+      .name = ITEM_NAME("TM 011"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15897,7 +15902,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM12] =
     {
-      .name = ITEM_NAME("TM 12"),
+      .name = ITEM_NAME("TM 012"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15908,7 +15913,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM13] =
     {
-      .name = ITEM_NAME("TM 13"),
+      .name = ITEM_NAME("TM 013"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15919,7 +15924,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM14] =
     {
-      .name = ITEM_NAME("TM 14"),
+      .name = ITEM_NAME("TM 014"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15930,7 +15935,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM15] =
     {
-      .name = ITEM_NAME("TM 15"),
+      .name = ITEM_NAME("TM 015"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15941,7 +15946,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM16] =
     {
-      .name = ITEM_NAME("TM 16"),
+      .name = ITEM_NAME("TM 016"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15952,7 +15957,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM17] =
     {
-      .name = ITEM_NAME("TM 17"),
+      .name = ITEM_NAME("TM 017"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15963,7 +15968,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM18] =
     {
-      .name = ITEM_NAME("TM 18"),
+      .name = ITEM_NAME("TM 018"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15974,7 +15979,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM19] =
     {
-      .name = ITEM_NAME("TM 19"),
+      .name = ITEM_NAME("TM 019"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15985,7 +15990,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM20] =
     {
-      .name = ITEM_NAME("TM 20"),
+      .name = ITEM_NAME("TM 020"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -15996,7 +16001,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM21] =
     {
-      .name = ITEM_NAME("TM 21"),
+      .name = ITEM_NAME("TM 021"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16007,7 +16012,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM22] =
     {
-      .name = ITEM_NAME("TM 22"),
+      .name = ITEM_NAME("TM 022"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16018,7 +16023,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM23] =
     {
-      .name = ITEM_NAME("TM 23"),
+      .name = ITEM_NAME("TM 023"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16029,7 +16034,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM24] =
     {
-      .name = ITEM_NAME("TM 24"),
+      .name = ITEM_NAME("TM 024"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16040,7 +16045,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM25] =
     {
-      .name = ITEM_NAME("TM 25"),
+      .name = ITEM_NAME("TM 025"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16051,7 +16056,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM26] =
     {
-      .name = ITEM_NAME("TM 26"),
+      .name = ITEM_NAME("TM 026"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16062,7 +16067,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM27] =
     {
-      .name = ITEM_NAME("TM 27"),
+      .name = ITEM_NAME("TM 027"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16073,7 +16078,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM28] =
     {
-      .name = ITEM_NAME("TM 28"),
+      .name = ITEM_NAME("TM 028"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16084,7 +16089,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM29] =
     {
-      .name = ITEM_NAME("TM 29"),
+      .name = ITEM_NAME("TM 029"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16095,7 +16100,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM30] =
     {
-      .name = ITEM_NAME("TM 30"),
+      .name = ITEM_NAME("TM 030"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16106,7 +16111,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM31] =
     {
-      .name = ITEM_NAME("TM 31"),
+      .name = ITEM_NAME("TM 031"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16117,7 +16122,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM32] =
     {
-      .name = ITEM_NAME("TM 32"),
+      .name = ITEM_NAME("TM 032"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16128,7 +16133,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM33] =
     {
-      .name = ITEM_NAME("TM 33"),
+      .name = ITEM_NAME("TM 033"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16139,7 +16144,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM34] =
     {
-      .name = ITEM_NAME("TM 34"),
+      .name = ITEM_NAME("TM 034"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16150,7 +16155,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM35] =
     {
-      .name = ITEM_NAME("TM 35"),
+      .name = ITEM_NAME("TM 035"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16161,7 +16166,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM36] =
     {
-      .name = ITEM_NAME("TM 36"),
+      .name = ITEM_NAME("TM 036"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16172,7 +16177,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM37] =
     {
-      .name = ITEM_NAME("TM 37"),
+      .name = ITEM_NAME("TM 037"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16183,7 +16188,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM38] =
     {
-      .name = ITEM_NAME("TM 38"),
+      .name = ITEM_NAME("TM 038"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16194,7 +16199,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM39] =
     {
-      .name = ITEM_NAME("TM 39"),
+      .name = ITEM_NAME("TM 039"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16205,7 +16210,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM40] =
     {
-      .name = ITEM_NAME("TM 40"),
+      .name = ITEM_NAME("TM 040"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16216,7 +16221,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM41] =
     {
-      .name = ITEM_NAME("TM 41"),
+      .name = ITEM_NAME("TM 041"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16227,7 +16232,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM42] =
     {
-      .name = ITEM_NAME("TM 42"),
+      .name = ITEM_NAME("TM 042"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16238,7 +16243,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM43] =
     {
-      .name = ITEM_NAME("TM 43"),
+      .name = ITEM_NAME("TM 043"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16249,7 +16254,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM44] =
     {
-      .name = ITEM_NAME("TM 44"),
+      .name = ITEM_NAME("TM 044"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16260,7 +16265,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM45] =
     {
-      .name = ITEM_NAME("TM 45"),
+      .name = ITEM_NAME("TM 045"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16271,7 +16276,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM46] =
     {
-      .name = ITEM_NAME("TM 46"),
+      .name = ITEM_NAME("TM 046"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16282,7 +16287,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM47] =
     {
-      .name = ITEM_NAME("TM 47"),
+      .name = ITEM_NAME("TM 047"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16293,7 +16298,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM48] =
     {
-      .name = ITEM_NAME("TM 48"),
+      .name = ITEM_NAME("TM 048"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16304,7 +16309,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM49] =
     {
-      .name = ITEM_NAME("TM 49"),
+      .name = ITEM_NAME("TM 049"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16315,7 +16320,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM50] =
     {
-      .name = ITEM_NAME("TM 50"),
+      .name = ITEM_NAME("TM 050"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16326,7 +16331,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM51] =
     {
-      .name = ITEM_NAME("TM 51"),
+      .name = ITEM_NAME("TM 051"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16337,7 +16342,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM52] =
     {
-      .name = ITEM_NAME("TM 52"),
+      .name = ITEM_NAME("TM 052"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16348,7 +16353,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM53] =
     {
-      .name = ITEM_NAME("TM 53"),
+      .name = ITEM_NAME("TM 053"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16359,7 +16364,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM54] =
     {
-      .name = ITEM_NAME("TM 54"),
+      .name = ITEM_NAME("TM 054"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16370,7 +16375,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM55] =
     {
-      .name = ITEM_NAME("TM 55"),
+      .name = ITEM_NAME("TM 055"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16381,7 +16386,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM56] =
     {
-      .name = ITEM_NAME("TM 56"),
+      .name = ITEM_NAME("TM 056"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16392,7 +16397,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM57] =
     {
-      .name = ITEM_NAME("TM 57"),
+      .name = ITEM_NAME("TM 057"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16403,7 +16408,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM58] =
     {
-      .name = ITEM_NAME("TM 58"),
+      .name = ITEM_NAME("TM 058"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16414,7 +16419,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM59] =
     {
-      .name = ITEM_NAME("TM 59"),
+      .name = ITEM_NAME("TM 059"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16425,7 +16430,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM60] =
     {
-      .name = ITEM_NAME("TM 60"),
+      .name = ITEM_NAME("TM 060"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16436,7 +16441,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM61] =
     {
-      .name = ITEM_NAME("TM 61"),
+      .name = ITEM_NAME("TM 061"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16447,7 +16452,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM62] =
     {
-      .name = ITEM_NAME("TM 62"),
+      .name = ITEM_NAME("TM 062"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16458,7 +16463,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM63] =
     {
-      .name = ITEM_NAME("TM 63"),
+      .name = ITEM_NAME("TM 063"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16469,7 +16474,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM64] =
     {
-      .name = ITEM_NAME("TM 64"),
+      .name = ITEM_NAME("TM 064"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16480,7 +16485,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM65] =
     {
-      .name = ITEM_NAME("TM 65"),
+      .name = ITEM_NAME("TM 065"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16491,7 +16496,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM66] =
     {
-      .name = ITEM_NAME("TM 66"),
+      .name = ITEM_NAME("TM 066"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16502,7 +16507,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM67] =
     {
-      .name = ITEM_NAME("TM 67"),
+      .name = ITEM_NAME("TM 067"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16513,7 +16518,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM68] =
     {
-      .name = ITEM_NAME("TM 68"),
+      .name = ITEM_NAME("TM 068"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16524,7 +16529,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM69] =
     {
-      .name = ITEM_NAME("TM 69"),
+      .name = ITEM_NAME("TM 069"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16535,7 +16540,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM70] =
     {
-      .name = ITEM_NAME("TM 70"),
+      .name = ITEM_NAME("TM 070"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16546,7 +16551,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM71] =
     {
-      .name = ITEM_NAME("TM 71"),
+      .name = ITEM_NAME("TM 071"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16557,7 +16562,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM72] =
     {
-      .name = ITEM_NAME("TM 72"),
+      .name = ITEM_NAME("TM 072"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16568,7 +16573,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM73] =
     {
-      .name = ITEM_NAME("TM 73"),
+      .name = ITEM_NAME("TM 073"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16579,7 +16584,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM74] =
     {
-      .name = ITEM_NAME("TM 74"),
+      .name = ITEM_NAME("TM 074"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16590,7 +16595,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM75] =
     {
-      .name = ITEM_NAME("TM 75"),
+      .name = ITEM_NAME("TM 075"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16601,7 +16606,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM76] =
     {
-      .name = ITEM_NAME("TM 76"),
+      .name = ITEM_NAME("TM 076"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16612,7 +16617,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM77] =
     {
-      .name = ITEM_NAME("TM 77"),
+      .name = ITEM_NAME("TM 077"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16623,7 +16628,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM78] =
     {
-      .name = ITEM_NAME("TM 78"),
+      .name = ITEM_NAME("TM 078"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16634,7 +16639,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM79] =
     {
-      .name = ITEM_NAME("TM 79"),
+      .name = ITEM_NAME("TM 079"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16645,7 +16650,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM80] =
     {
-      .name = ITEM_NAME("TM 80"),
+      .name = ITEM_NAME("TM 080"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16656,7 +16661,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM81] =
     {
-      .name = ITEM_NAME("TM 81"),
+      .name = ITEM_NAME("TM 081"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16667,7 +16672,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM82] =
     {
-      .name = ITEM_NAME("TM 82"),
+      .name = ITEM_NAME("TM 082"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16678,7 +16683,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM83] =
     {
-      .name = ITEM_NAME("TM 83"),
+      .name = ITEM_NAME("TM 083"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16689,7 +16694,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM84] =
     {
-      .name = ITEM_NAME("TM 84"),
+      .name = ITEM_NAME("TM 084"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16700,7 +16705,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM85] =
     {
-      .name = ITEM_NAME("TM 85"),
+      .name = ITEM_NAME("TM 085"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16711,7 +16716,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM86] =
     {
-      .name = ITEM_NAME("TM 86"),
+      .name = ITEM_NAME("TM 086"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16722,7 +16727,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM87] =
     {
-      .name = ITEM_NAME("TM 87"),
+      .name = ITEM_NAME("TM 087"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16733,7 +16738,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM88] =
     {
-      .name = ITEM_NAME("TM 88"),
+      .name = ITEM_NAME("TM 088"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16744,7 +16749,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM89] =
     {
-      .name = ITEM_NAME("TM 89"),
+      .name = ITEM_NAME("TM 089"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16755,7 +16760,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM90] =
     {
-      .name = ITEM_NAME("TM 90"),
+      .name = ITEM_NAME("TM 090"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16766,7 +16771,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM91] =
     {
-      .name = ITEM_NAME("TM 91"),
+      .name = ITEM_NAME("TM 091"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16777,7 +16782,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM92] =
     {
-      .name = ITEM_NAME("TM 92"),
+      .name = ITEM_NAME("TM 092"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16788,7 +16793,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM93] =
     {
-      .name = ITEM_NAME("TM 93"),
+      .name = ITEM_NAME("TM 093"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16799,7 +16804,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM94] =
     {
-      .name = ITEM_NAME("TM 94"),
+      .name = ITEM_NAME("TM 094"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16810,7 +16815,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM95] =
     {
-      .name = ITEM_NAME("TM 95"),
+      .name = ITEM_NAME("TM 095"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16821,7 +16826,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM96] =
     {
-      .name = ITEM_NAME("TM 96"),
+      .name = ITEM_NAME("TM 096"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16832,7 +16837,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM97] =
     {
-      .name = ITEM_NAME("TM 97"),
+      .name = ITEM_NAME("TM 097"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16843,7 +16848,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM98] =
     {
-      .name = ITEM_NAME("TM 98"),
+      .name = ITEM_NAME("TM 098"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
@@ -16854,7 +16859,7 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_TM99] =
     {
-      .name = ITEM_NAME("TM 99"),
+      .name = ITEM_NAME("TM 099"),
       .price = 3000,
       .description = NULL,
       .importance = I_REUSABLE_TMS,
