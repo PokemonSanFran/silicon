@@ -128,7 +128,7 @@ static void CreateUpArrowSprite(void);
 static void CreateDownArrowSprite(void);
 
 //==========CONST=DATA==========//
-static const struct BgTemplate sMenuBgTemplates[] =
+static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
 {
     {
         .bg = INVENTORY_BG_TEXT,
@@ -139,19 +139,19 @@ static const struct BgTemplate sMenuBgTemplates[] =
     {
         .bg = INVENTORY_BG_NORMAL,
         .charBaseIndex = 1,
-        .mapBaseIndex = 30,
+        .mapBaseIndex = 29,
         .priority = 1,
     },
     {
         .bg = INVENTORY_BG_SHADOWS,
         .charBaseIndex = 2,
-        .mapBaseIndex = 29,
+        .mapBaseIndex = 27,
         .priority = 2,
     },
     {
         .bg = INVENTORY_BG_WALLPAPER,
         .charBaseIndex = 3,
-        .mapBaseIndex = 27,
+        .mapBaseIndex = 25,
         .priority = 2,
     },
 };
@@ -166,7 +166,6 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 30,
         .height = 2,
         .paletteNum = 1,
-        .baseBlock = 1,
     },
     [INVENTORY_WINDOW_PARTY_DISPLAY] =
     {
@@ -176,7 +175,6 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 8,
         .height = 11,
         .paletteNum = 1,
-        .baseBlock = 1 + (30*2),
     },
     [INVENTORY_WINDOW_ITEM_LIST] =
     {
@@ -186,17 +184,15 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 22,
         .height = 11,
         .paletteNum = 1,
-        .baseBlock = 1 + (30*2) + (8*11),
     },
     [INVENTORY_WINDOW_DESC] =
     {
         .bg = INVENTORY_BG_TEXT,
-        .tilemapLeft = 0,
+        .tilemapLeft = 6,
         .tilemapTop = 13,
-        .width = 30,
+        .width = 24,
         .height = 5,
         .paletteNum = 1,
-        .baseBlock = 1 + (30*2) + (8*11) + (22*11),
     },
     [INVENTORY_WINDOW_FOOTER] =
     {
@@ -206,8 +202,18 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 30,
         .height = 2,
         .paletteNum = 1,
-        .baseBlock = 1 + (30*2) + (8*11) + (22*11) + (30*5),
     },
+        /*
+    [INVENTORY_WINDOW_MENU] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = 23,
+        .tilemapTop = 9,
+        .width = 7,
+        .height = 9,
+        .paletteNum = 1,
+    },
+    */
     DUMMY_WIN_TEMPLATE,
 };
 
@@ -589,7 +595,6 @@ static void Menu_InitWindows(void)
     for (; windowId < INVENTORY_WINDOW_COUNT; windowId++)
     {
         template = sMenuWindowTemplates[windowId];
-        template.bg = INVENTORY_BG_TEXT;
         template.baseBlock = baseBlock;
 
         AddWindow(&template);
@@ -2708,19 +2713,12 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
 
 static void Inventory_PrintItemList(void)
 {
-    u16 i, x, x2, y, y2;
-    u32 font = FONT_NARROW;
     enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    u32 moveNum;
     u32 numitems = sMenuDataPtr->numItems[pocketId];
 
     FillWindowPixelBuffer(INVENTORY_WINDOW_ITEM_LIST, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    x  = 10;
-    y  = 2;
-    y2 = 0;
-    x2 = 2;
 
-    for(i = 0; i < INVENTORY_MAX_ITEMS_SHOWN; i++)
+    for(u32 i = 0; i < INVENTORY_MAX_ITEMS_SHOWN; i++)
     {
         u32 itemIdx = gSaveBlock3Ptr->InventoryData.yFirstItem + i;
         u32 itemId = Inventory_GetItemIdFromPocketIndex(itemIdx,pocketId);
@@ -2728,10 +2726,26 @@ static void Inventory_PrintItemList(void)
         Inventory_TryPrintFavoriteIcon(pocketId,itemIdx,i);
         Inventory_TryPrintListCursor(pocketId,i,itemId,itemIdx,numitems);
         Inventory_PrintItems(pocketId, itemId, itemIdx,i);
-
-        y = y + 2;
-        y2 = y2 + 1;
     }
+
+    PutWindowTilemap(INVENTORY_WINDOW_ITEM_LIST);
+    CopyWindowToVram(INVENTORY_WINDOW_ITEM_LIST ,COPYWIN_FULL);
+}
+
+static void Inventory_PrintDesc(void)
+{
+    u32 x, x2, y, y2;
+    u8 font = FONT_NARROW;
+    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u32 moveNum;
+    u32 numitems = sMenuDataPtr->numItems[pocketId];
+
+    FillWindowPixelBuffer(INVENTORY_WINDOW_DESC, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    // Item Description
+    x  = 0;
+    x2 = 4;
+    y  = 13;
+    y2 = 0;
 
     if(gSaveBlock3Ptr->InventoryData.itemIdx < numitems - 1)
     {
@@ -2783,25 +2797,11 @@ static void Inventory_PrintItemList(void)
         StringCopy(gStringVar1, sInventory_Exit_Desc);
         FreeItemIconSprite();
     }
-    PutWindowTilemap(INVENTORY_WINDOW_ITEM_LIST);
-    CopyWindowToVram(INVENTORY_WINDOW_ITEM_LIST ,COPYWIN_FULL);
-}
 
-static void Inventory_PrintDesc(void)
-{
-    u16 i, j, x, x2, y, y2;
-    u8 font = FONT_NARROW;
-    u8 numPocketOptions = getSelectedItemNumOptions();
-
-    FillWindowPixelBuffer(INVENTORY_WINDOW_DESC, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    // Item Description
-    x  = 6;
-    x2 = 4;
-    y  = 13;
-    y2 = 0;
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sMenuWindowFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, x,y, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_BLACK], TEXT_SKIP_DRAW, gStringVar1);
 
     //Pick Menu
+    /*
     switch(sMenuDataPtr->currentSelectMode){
         case INVENTORY_MODE_USE_OPTIONS:
             x  = 22;
@@ -2820,7 +2820,6 @@ static void Inventory_PrintDesc(void)
             }
 
             y = y + 2;
-            //x++;
             x2 = 4;
             for(i = 0; i < numPocketOptions; i++){
                 StringCopy(gStringVar1, sInventory_OptionStrings[getSelectedItemOptionNum(i)].string);
@@ -2848,7 +2847,6 @@ static void Inventory_PrintDesc(void)
             }
 
             y = y + 2;
-            //x++;
             x2 = 4;
             for(i = 0; i < NUM_SORT_OPTIONS; i++){
                 StringCopy(gStringVar1, sSortTypeStrings[i].string);
@@ -2856,37 +2854,12 @@ static void Inventory_PrintDesc(void)
             }
             break;
         case INVENTORY_MODE_REGISTER:
-            /*x  = 22;
-            x2 = 0;
-            y  = 16;
-            y2 = 2;
-
-            for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS + 1; i++){
-                for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
-
-                if((INVENTORY_REGISTER_NUM_DIRECTIONS - i) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
-
-                y = y - 2;
-            }
-
-            y = y + 2;
-            //x++;
-            x2 = 4;
-            for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS + 1; i++){
-                StringCopy(gStringVar1, sDirectionStrings[i].string);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
-            }*/
             break;
         case INVENTORY_MODE_TOSS_HOW_MANY:
             x  = 22;
             x2 = 0;
             y  = 16;
             y2 = 2;
-
-            //for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-            //    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
 
             BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursorToss_Gfx, (x * 8), (y * 8) + y2, 64, 16);
 
@@ -2929,13 +2902,16 @@ static void Inventory_PrintDesc(void)
             }
             break;
     }
+    */
     PutWindowTilemap(INVENTORY_WINDOW_DESC);
     CopyWindowToVram(INVENTORY_WINDOW_DESC,COPYWIN_FULL);
 }
 
 static void Inventory_PrintFooter(void)
 {
-    u16 x, x2, y, y2;
+    return;
+    u32 x = 4;
+    u32 y = 0;
     u8 font = FONT_NARROW;
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u32 itemIdx = getCurrentSelectedItemIdx();
@@ -2943,12 +2919,9 @@ static void Inventory_PrintFooter(void)
     u16 paletteIndex = INTERFACE_PALETTE_NUM * 16;
 
     FillWindowPixelBuffer(INVENTORY_WINDOW_FOOTER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    //Help Bar Text
-    x  = 0;
-    y  = 18;
-    x2 = 4;
-    y2 = 1;
-    switch(sMenuDataPtr->currentSelectMode){
+
+    switch(sMenuDataPtr->currentSelectMode)
+    {
         case INVENTORY_MODE_USE_OPTIONS:
             StringCopy(gStringVar4, sText_Help_Bar_Use);
             break;
@@ -3005,7 +2978,7 @@ static void Inventory_PrintFooter(void)
             break;
     }
 
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar4);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar4);
 
     if(pocketId == POCKET_TM_HM)
         CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
