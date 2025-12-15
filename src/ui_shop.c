@@ -439,8 +439,8 @@ static void ShopHelper_UpdateFrontEnd(void)
         ShopSprite_CreateItemSprites();
     }
 
-    ShopPrint_HelpBar();
     ShopConfig_Get()->handleFrontend();
+    ShopPrint_HelpBar();
 
     CopyWindowToVram(SHOP_WINDOW_MAIN, COPYWIN_GFX);
 
