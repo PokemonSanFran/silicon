@@ -36,6 +36,7 @@
 #include "util.h"
 #include "constants/inventory.h"
 #include "ui_inventory.h"
+#include "frontier_pass.h"
 #include "ui_options_menu.h"
 #include "event_data.h"
 #include "constants/items.h"
@@ -129,35 +130,14 @@ static void CreateDownArrowSprite(void);
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
 {
-        /*
     {
-        .bg = 0,    // windows, etc
-        .charBaseIndex = 0,
-        .mapBaseIndex = 31,
-        .priority = 1
-    },
-    {
-        .bg = 1,    // this bg loads the UI tilemap
-        .charBaseIndex = 3,
-        .mapBaseIndex = 29,
-        .screenSize = 2,
-        .priority = 2
-    },
-    {
-        .bg = 2,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 28,
-        .priority = 3,
-    }
-    */
-    {
-        .bg = INVENTORY_BG_TEXT,    // windows, etc
+        .bg = INVENTORY_BG_TEXT,
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .priority = 0,
     },
     {
-        .bg = INVENTORY_BG_NORMAL,    // this bg loads the UI tilemap
+        .bg = INVENTORY_BG_NORMAL,
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .priority = 1,
@@ -342,7 +322,7 @@ static bool8 Menu_DoGfxSetup(void)
         DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
-        ResetVramOamAndBgCntRegs();
+        ResetGpuRegsAndBgs(); 
         gMain.state++;
         break;
     case 1:
