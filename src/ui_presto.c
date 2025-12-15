@@ -91,6 +91,15 @@ static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
 
 static void PrestoHelper_UpdateFrontEnd(void);
 static enum PrestoShopTypes PrestoHelper_GetShopType(void);
+static void PrestoHelper_GridInput(s32, s32);
+
+static void SpriteCB_BuyIcon(struct Sprite *);
+static void SpriteCB_UpArrow(struct Sprite *);
+static void SpriteCB_DownArrow(struct Sprite *);
+static void SpriteCB_LeftArrow(struct Sprite *);
+static void SpriteCB_RightArrow(struct Sprite *);
+static void SpriteCB_UpArrowSmall(struct Sprite *);
+static void SpriteCB_DownArrowSmall(struct Sprite *);
 
 static const u8 sOrderWindow[]         = INCBIN_U8("graphics/ui_menus/presto/orderwindow.4bpp");
 static const u8 sItemSelector[]        = INCBIN_U8("graphics/ui_menus/presto/item_selector.4bpp");
@@ -102,42 +111,49 @@ static const struct ShopSpriteConfigs sPrestoShopSprites[] =
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/buyicon.4bpp.smol"),
         .x = (TILE_TO_PIXELS(4) + 1) + 16,
         .y = (TILE_TO_PIXELS(3) - 1) + 16,
+        .callback = SpriteCB_BuyIcon,
     },
     [SHOP_SPRITE_UP_ARROW] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.smol"),
         .x = SHOP_UP_ARROW_X,
         .y = SHOP_UP_ARROW_Y,
+        .callback = SpriteCB_UpArrow,
     },
     [SHOP_SPRITE_DOWN_ARROW] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.smol"),
         .x = SHOP_DOWN_ARROW_X,
         .y = SHOP_DOWN_ARROW_Y,
+        .callback = SpriteCB_DownArrow,
     },
     [SHOP_SPRITE_LEFT_ARROW] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.smol"),
         .x = SHOP_LEFT_ARROW_X,
         .y = SHOP_LEFT_ARROW_Y,
+        .callback = SpriteCB_LeftArrow,
     },
     [SHOP_SPRITE_RIGHT_ARROW] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.smol"),
         .x = SHOP_RIGHT_ARROW_X,
         .y = SHOP_RIGHT_ARROW_Y,
+        .callback = SpriteCB_RightArrow,
     },
     [SHOP_SPRITE_UP_ARROW_SMALL] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.smol"),
         .x = TILE_TO_PIXELS(12) + 8,
         .y = (TILE_TO_PIXELS(11) + 2) + 4,
+        .callback = SpriteCB_UpArrowSmall,
     },
     [SHOP_SPRITE_DOWN_ARROW_SMALL] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.smol"),
         .x = TILE_TO_PIXELS(12) + 8,
         .y = (TILE_TO_PIXELS(13) + 6) + 4,
+        .callback = SpriteCB_DownArrowSmall,
     },
 };
 
@@ -170,6 +186,7 @@ static const struct ShopMenuConfigs sPrestoShopConfigs =
 
     .handleFrontend = PrestoHelper_UpdateFrontEnd,
     .handleTotalPrice = PrestoPurchase_GetTotalItemPrice,
+    .handleGrid = PrestoHelper_GridInput,
 };
 
 static const u8 sText_FirstRowName[]      = _("{STR_VAR_1}: {STR_VAR_2}");
@@ -424,4 +441,189 @@ static enum PrestoShopTypes PrestoHelper_GetShopType(void)
     }
 
     return PRESTO_TYPE_APP;
+}
+
+static void PrestoHelper_GridInput(s32 vDelta, s32 hDelta)
+{
+    if (vDelta != 0)
+    {
+        bool32 additiveDelta = ShopGrid_IsAdditiveDelta(vDelta);
+
+        u32 trueIdx = ShopGrid_GetCurrentCategoryIndex();
+        u32 numItems = gShopMenuDataPtr->numCategories - 1;
+        u32 halfScreen = ShopConfig_GetTotalShownCategories() / 2;
+
+        bool32 scroll = (numItems + 1) > ShopConfig_GetTotalShownCategories();
+        u32 finalHalfScreen = numItems - halfScreen;
+
+        u32 gridIdx = ShopGrid_GetGridYCursor();
+
+        if (((trueIdx >= halfScreen && trueIdx < finalHalfScreen && additiveDelta)
+         || (trueIdx > halfScreen && trueIdx <= finalHalfScreen && !additiveDelta))
+         && scroll)
+        {
+            ShopGrid_SetCurrentCategoryIndex(trueIdx + vDelta);
+            ShopGrid_SetFirstCategoryIndex(ShopGrid_GetFirstCategoryIndex() + vDelta);
+            ShopGrid_SetGridYCursor(halfScreen);
+        }
+        else if (trueIdx >= numItems && additiveDelta)
+        {
+            ShopGrid_SetCurrentCategoryIndex(0);
+            ShopGrid_SetFirstCategoryIndex(0);
+            ShopGrid_SetGridYCursor(0);
+        }
+        else if (!trueIdx && !additiveDelta)
+        {
+            ShopGrid_SetCurrentCategoryIndex(numItems + vDelta);
+            if (scroll)
+                ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1) + vDelta);
+
+            ShopGrid_SetGridYCursor(ShopConfig_GetTotalShownItemRows() - 1);
+        }
+        else
+        {
+            ShopGrid_SetCurrentCategoryIndex(trueIdx + vDelta);
+            ShopGrid_SetGridYCursor(gridIdx + vDelta);
+        }
+
+        ShopGrid_ResetIndexes(SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID);
+
+        if (trueIdx != ShopGrid_GetCurrentCategoryIndex())
+        {
+            PlaySE(SE_SELECT);
+        }
+
+        DebugPrintf("firstIdx: %d", ShopGrid_GetFirstCategoryIndex());
+    }
+
+    if (hDelta != 0)
+    {
+        bool32 additiveDelta = ShopGrid_IsAdditiveDelta(hDelta);
+
+        u32 halfScreen = ShopConfig_GetTotalShownItems() / 2;
+        u32 categoryNumItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
+        u32 finalHalfScreen = categoryNumItems - halfScreen;
+
+        u32 gridIdx = ShopGrid_GetGridXCursor();
+        u32 trueIdx = ShopGrid_GetCurrentItemIndex();
+        u32 shownItems = ShopConfig_GetTotalShownItems() - 1;
+
+        if ((trueIdx >= halfScreen && trueIdx < finalHalfScreen && additiveDelta)
+         || (trueIdx > halfScreen && trueIdx <= finalHalfScreen && !additiveDelta))
+        {
+            ShopGrid_SetGridXCursor(halfScreen);
+            ShopGrid_SetCurrentItemIndex(trueIdx + hDelta);
+            ShopGrid_SetFirstItemIndex(ShopGrid_GetFirstItemIndex() + hDelta);
+        }
+        else if (trueIdx >= categoryNumItems && additiveDelta)
+        {
+            ShopGrid_SetGridXCursor(0);
+            ShopGrid_SetCurrentItemIndex(0);
+            ShopGrid_SetFirstItemIndex(0);
+        }
+        else if (!trueIdx && !additiveDelta)
+        {
+            ShopGrid_SetGridXCursor(shownItems);
+            ShopGrid_SetCurrentItemIndex(categoryNumItems);
+            if (categoryNumItems > shownItems)
+            {
+                ShopGrid_SetFirstItemIndex(categoryNumItems - shownItems);
+            }
+        }
+        else
+        {
+            ShopGrid_SetGridXCursor(gridIdx + hDelta);
+            ShopGrid_SetCurrentItemIndex(trueIdx + hDelta);
+        }
+
+        if (trueIdx != ShopGrid_GetCurrentItemIndex())
+        {
+            PlaySE(SE_SELECT);
+        }
+    }
+}
+
+static void SpriteCB_BuyIcon(struct Sprite *sprite)
+{
+    u32 xCursor = ShopGrid_GetGridXCursor();
+    u32 x = ShopConfig_GetTotalShownItems() * xCursor;
+    u32 x2 = 3 * xCursor;
+
+    if (xCursor)
+    {
+        x2 -= xCursor - 1;
+    }
+
+    sprite->x2 = TILE_TO_PIXELS(x) + x2;
+    sprite->invisible = (gShopMenuDataPtr->buyScreen);
+}
+
+static void SpriteCB_UpArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0];
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (gShopMenuDataPtr->buyScreen || !ShopGrid_GetGridYCursor());
+}
+
+static void SpriteCB_DownArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0] + 128;
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (gShopMenuDataPtr->buyScreen
+     || ShopGrid_GetGridYCursor() == ShopConfig_GetTotalShownCategories() - 1);
+}
+
+static void SpriteCB_LeftArrow(struct Sprite *sprite)
+{
+    u32 num = ShopGrid_GetGridXCursor();
+    u32 x = (5 * num);
+    u8 val = sprite->data[0] + 128;
+
+    sprite->x = sprite->data[1] + TILE_TO_PIXELS(x) + (2 * num);
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (gShopMenuDataPtr->buyScreen || !ShopGrid_GetGridXCursor());
+}
+
+static void SpriteCB_RightArrow(struct Sprite *sprite)
+{
+    u32 num = ShopGrid_GetGridXCursor();
+    u32 x = (5 * num);
+    u8 val = sprite->data[0];
+
+    sprite->x = sprite->data[1] + TILE_TO_PIXELS(x) + (2 * num);
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (gShopMenuDataPtr->buyScreen
+     || ShopGrid_GetGridXCursor() == ShopConfig_GetTotalShownItems() - 1);
+}
+
+static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0];
+
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+    sprite->invisible = (!gShopMenuDataPtr->buyScreen
+     || gShopMenuDataPtr->itemQuantity == (gShopMenuDataPtr->maxItemQuantity - 1)
+     || (gShopMenuDataPtr->itemQuantity == 0 && gShopMenuDataPtr->maxItemQuantity == 0)
+     || gShopMenuDataPtr->buyWindow);
+}
+
+static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0] + 128;
+
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (!gShopMenuDataPtr->buyScreen
+     || gShopMenuDataPtr->itemQuantity == 0
+     || gShopMenuDataPtr->buyWindow);
 }

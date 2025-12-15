@@ -2,6 +2,7 @@
 #define GUARD_UI_SHOP_H
 
 #include "main.h"
+#include "sprite.h"
 #include "constants/ui_shop.h"
 
 extern const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES];
@@ -16,6 +17,7 @@ u8 ShopConfig_GetTotalShownItems(void);
 u8 ShopConfig_GetTotalShownItemRows(void);
 u8 ShopConfig_GetTotalShownCategories(void);
 u8 ShopConfig_GetTotalShownItemsOnScreen(void);
+enum ShopMenuGridModes ShopConfig_GetGridMode(void);
 void ShopGrid_SetGridXCursor(u32);
 u32 ShopGrid_GetGridXCursor(void);
 void ShopGrid_SetGridYCursor(u32);
@@ -28,6 +30,8 @@ void ShopGrid_SetCurrentItemIndex(u32);
 void ShopGrid_SetFirstItemIndex(u32);
 u32 ShopGrid_GetCurrentItemIndex(void);
 u32 ShopGrid_GetFirstItemIndex(void);
+bool32 ShopGrid_IsAdditiveDelta(s32);
+void ShopGrid_ResetIndexes(u32);
 u32 ShopInventory_GetItemIdFromGrid(u32, u32);
 u32 ShopInventory_GetChosenItemId(void);
 

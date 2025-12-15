@@ -94,10 +94,22 @@ enum ShopMenuGridModes
     SHOP_GRID_VERTICAL,     // pokemart
 };
 
+enum ShopMenuResetIdxTypes
+{
+    SHOP_IDX_RESET_CATEGORY = (1 << 0),
+    SHOP_IDX_RESET_ITEM = (1 << 1),
+    SHOP_IDX_RESET_X_GRID = (1 << 2),
+    SHOP_IDX_RESET_Y_GRID = (1 << 3),
+    SHOP_IDX_RESET_ALL = (SHOP_IDX_RESET_CATEGORY | SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_Y_GRID)
+};
+
+typedef void (*ShopGridFunc)(s32, s32);
+
 struct ShopSpriteConfigs
 {
     const u32 *gfx;
     s16 x, y;
+    SpriteCallback callback;
 };
 
 struct ShopMenuConfigs
@@ -117,11 +129,13 @@ struct ShopMenuConfigs
     u8 totalShownItems;
     u8 totalShownItemRows; // combined with totalShownItems for the total grand of item icons.
     u8 totalShownCategories;
-    u8 gridMode;
+    u8 gridMode;           // no longer functions for actual grid, mostly useful for internal usage e.g. item icons.
 
     // functions that may be called in certain contexts.
     void (*handleFrontend)(void);      // what to do when refreshing the screen for e.g. show purchase menu
     u32 (*handleTotalPrice)(u16, u16); // what price to return for the backend. used for Presto App fee.
+    void (*handleGrid)(s32, s32);      // what to update when pressing the dpads
+    void (*handleLR)(s32);             // vertical grid only
 };
 
 struct ShopMenuData
@@ -172,7 +186,6 @@ struct ShopSprite
     u8 padding:4;
     u16 tileTag, size;
     u8 priority;
-    SpriteCallback cb;
 };
 
 #define WRITE_CRITERIA_GOAL_VAR(varId, varValue) ((varId << 16) | (varValue))
