@@ -6,6 +6,18 @@
 
 #define SHOP_WINDOW_MAIN 0
 
+enum ShopMenuBackgrounds
+{
+    SHOP_BG_WINDOW,
+
+    // if needed
+    SHOP_BG_EXTRA,
+
+    SHOP_BG_TILEMAP,
+
+    NUM_SHOP_BGS
+};
+
 enum ShopMenuCategories
 {
     SHOP_CATEGORY_BUY_AGAIN,

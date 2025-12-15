@@ -69,14 +69,6 @@ enum ShopMenuSetupSteps
     SHOP_SETUP_FINISH
 };
 
-enum ShopMenuBackgrounds
-{
-    SHOP_BG_WINDOW,
-    SHOP_BG_TILEMAP,
-
-    NUM_SHOP_BGS
-};
-
 enum ShopMenuGraphicsType
 {
     SHOP_GFX_TILES,
@@ -162,12 +154,19 @@ static const struct BgTemplate sShopBgTemplates[NUM_SHOP_BGS] =
         .mapBaseIndex = 31,
         .priority = 1
     },
+    [SHOP_BG_EXTRA] =
+    {
+        .bg = SHOP_BG_EXTRA,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 29,
+        .priority = 2
+    },
     [SHOP_BG_TILEMAP] =
     {
         .bg = SHOP_BG_TILEMAP,
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
-        .priority = 2
+        .priority = 3
     },
 };
 
@@ -367,6 +366,7 @@ static void CB2_ShopSetup(void)
         gMain.state++;
         break;
     case SHOP_SETUP_FINISH:
+        gMain.state = 0;
         SetVBlankCallback(VBlankCB_ShopMenu);
         SetMainCallback2(CB2_ShopMenu);
         return;
@@ -407,6 +407,7 @@ static void ShopSetup_Backgrounds(void)
     SetBgTilemapBuffer(SHOP_BG_TILEMAP, sShopMenuStaticDataPtr->tilemapBuf);
     ScheduleBgCopyTilemapToVram(SHOP_BG_TILEMAP);
     ShowBg(SHOP_BG_WINDOW);
+    ShowBg(SHOP_BG_EXTRA);
     ShowBg(SHOP_BG_TILEMAP);
 }
 
@@ -1265,7 +1266,7 @@ static void ShopGrid_SwitchMode(void)
     DecompressDataWithHeaderWram(
         ShopGraphics_GetByType(SHOP_GFX_TILEMAP + gShopMenuDataPtr->buyScreen), sShopMenuStaticDataPtr->tilemapBuf);
     ShopSprite_ToggleItemIconsVisibility();
-    ScheduleBgCopyTilemapToVram(1);
+    ScheduleBgCopyTilemapToVram(SHOP_BG_TILEMAP);
 }
 
 static void ShopGrid_VerticalInput(s32 delta)

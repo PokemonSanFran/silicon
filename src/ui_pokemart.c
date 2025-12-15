@@ -130,6 +130,8 @@ static void SpriteCB_UpArrowSmall(struct Sprite *);
 static void SpriteCB_DownArrowSmall(struct Sprite *);
 
 // const data
+static const u32 sPokeMart_ExtraTilemap[] = INCBIN_U32("graphics/ui_menus/mart/textbox.bin.smolTM");
+
 static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
 {
     [SHOP_SPRITE_BUY_ICON] =
@@ -348,7 +350,14 @@ static void FieldCB_MartReload_PrepareInterface(void)
 
 static void MartHelper_UpdateFrontEnd(void)
 {
+    if (gMain.state)
+    {
+        DecompressDataWithHeaderVram(sPokeMart_ExtraTilemap, (void *)BG_SCREEN_ADDR(29));
+    }
 
+    FillWindowPixelRect(SHOP_WINDOW_MAIN, PIXEL_FILL(15),
+                        TILE_TO_PIXELS(0), TILE_TO_PIXELS(18),
+                        DISPLAY_WIDTH, TILE_TO_PIXELS(16));
 }
 
 static void MartHelper_GridInput(s32 vDelta, s32 hDelta)
