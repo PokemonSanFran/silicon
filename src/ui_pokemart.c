@@ -141,14 +141,14 @@ static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
     },
     [SHOP_SPRITE_UP_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.smol"),
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_up.4bpp.smol"),
         .x = SHOP_UP_ARROW_X,
         .y = SHOP_UP_ARROW_Y,
         .callback = SpriteCB_UpArrow,
     },
     [SHOP_SPRITE_DOWN_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.smol"),
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_down.4bpp.smol"),
         .x = SHOP_DOWN_ARROW_X,
         .y = SHOP_DOWN_ARROW_Y,
         .callback = SpriteCB_DownArrow,
@@ -169,14 +169,14 @@ static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
     },
     [SHOP_SPRITE_UP_ARROW_SMALL] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.smol"),
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_up_small.4bpp.smol"),
         .x = TILE_TO_PIXELS(12) + 8,
         .y = (TILE_TO_PIXELS(11) + 2) + 4,
         .callback = SpriteCB_UpArrowSmall,
     },
     [SHOP_SPRITE_DOWN_ARROW_SMALL] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.smol"),
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_down_small.4bpp.smol"),
         .x = TILE_TO_PIXELS(12) + 8,
         .y = (TILE_TO_PIXELS(13) + 6) + 4,
         .callback = SpriteCB_DownArrowSmall,
