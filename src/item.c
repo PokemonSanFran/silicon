@@ -170,26 +170,47 @@ void SetBagItemsPointers(void)
 {
     gBagPockets[POCKET_MEDICINE].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Medicine;
     gBagPockets[POCKET_MEDICINE].capacity  = BAG_MEDICINE_COUNT;
+    gBagPockets[POCKET_MEDICINE].id = POCKET_MEDICINE;
+
     gBagPockets[POCKET_POKE_BALLS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_PokeBalls;
     gBagPockets[POCKET_POKE_BALLS].capacity  = BAG_POKEBALLS_COUNT;
+    gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
+
     gBagPockets[POCKET_BATTLE_ITEMS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_BattleItems;
     gBagPockets[POCKET_BATTLE_ITEMS].capacity  = BAG_BATTLE_ITEMS_COUNT;
+    gBagPockets[POCKET_BATTLE_ITEMS].id = POCKET_BATTLE_ITEMS;
+
     gBagPockets[POCKET_POWERUP].itemSlots = gSaveBlock1Ptr->bag.bagPocket_PowerUp;
     gBagPockets[POCKET_POWERUP].capacity  = BAG_POWERUP_COUNT;
+    gBagPockets[POCKET_POWERUP].id = POCKET_POWERUP;
+
     gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Berries;
     gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
+    gBagPockets[POCKET_BERRIES].id = POCKET_BERRIES;
+
     gBagPockets[POCKET_OTHER].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Other;
     gBagPockets[POCKET_OTHER].capacity  = BAG_OTHER_COUNT;
+    gBagPockets[POCKET_OTHER].id = POCKET_OTHER;
+
     gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.bagPocket_TMsHMs;
     gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
+    gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
+
     gBagPockets[POCKET_TREASURE].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Treasure;
     gBagPockets[POCKET_TREASURE].capacity  = BAG_TREASURES_COUNT;
+    gBagPockets[POCKET_TREASURE].id = POCKET_TREASURE;
+
     gBagPockets[POCKET_Z_CRYSTALS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Z_Crystals;
     gBagPockets[POCKET_Z_CRYSTALS].capacity  = BAG_Z_CRYSTALS_COUNT;
+    gBagPockets[POCKET_Z_CRYSTALS].id = POCKET_Z_CRYSTALS;
+
     gBagPockets[POCKET_MEGA_STONES].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Mega_Stones;
     gBagPockets[POCKET_MEGA_STONES].capacity  = BAG_MEGA_STONES_COUNT;
+    gBagPockets[POCKET_MEGA_STONES].id = POCKET_MEGA_STONES;
+
     gBagPockets[POCKET_KEY_ITEMS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_KeyItems;
     gBagPockets[POCKET_KEY_ITEMS].capacity = BAG_KEYITEMS_COUNT;
+    gBagPockets[POCKET_KEY_ITEMS].id = POCKET_KEY_ITEMS;
 }
 
 /*
