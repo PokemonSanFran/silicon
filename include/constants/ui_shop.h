@@ -76,8 +76,8 @@ enum ShopMenuSpriteTags
 
 enum ShopMenuFontColors
 {
-    SHOP_FNTCLR_BLACK,
-    SHOP_FNTCLR_WHITE,
+    SHOP_FNTCLR_PRIMARY,
+    SHOP_FNTCLR_SECONDARY,
 };
 
 enum ShopMenuCoords
@@ -120,6 +120,7 @@ struct ShopMenuConfigs
     const u32 *map, *mapBuy;
     const u16 *palette;
     const u8 *categoryBlit;
+    const u8 (*fontColors)[3];
 
     // starting points of sprites/blits on the screen.
     const u8 *categoryCoords;

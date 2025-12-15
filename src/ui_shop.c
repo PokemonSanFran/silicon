@@ -150,6 +150,7 @@ static inline void ShopPrint_HelpBar(void);
 static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType);
 
 static void ShopConfig_RunGridFunc(s32, s32);
+static const u8 *ShopConfig_GetFontColors(enum ShopMenuFontColors);
 
 // const data
 static const struct BgTemplate sShopBgTemplates[NUM_SHOP_BGS] =
@@ -263,7 +264,6 @@ static const struct SpriteTemplate sShopSpriteTemplate =
     .callback = SpriteCallbackDummy
 };
 
-
 static const u8 sText_Help_Bar[]          = _("{DPAD_UPDOWN} Rows {DPAD_LEFTRIGHT} Items {A_BUTTON} Buy {B_BUTTON} Exit {START_BUTTON} Sort Rows");
 static const u8 sText_Help_Bar_Buy[]      = _("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Buy Now {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Complete[] = _("{A_BUTTON} Buy More {B_BUTTON} Return {START_BUTTON} Exit");
@@ -284,12 +284,6 @@ const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES] =
     [SHOP_CATEGORY_TREASURES]    = COMPOUND_STRING("Treasures"),
     [SHOP_CATEGORY_MEGA_STONES]  = COMPOUND_STRING("Mega Stones"),
     [SHOP_CATEGORY_Z_CRYSTALS]   = COMPOUND_STRING("Z-Crystals"),
-};
-
-static const u8 sMenuWindowFontColors[][3] =
-{
-    [SHOP_FNTCLR_BLACK]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_TRANSPARENT},
-    [SHOP_FNTCLR_WHITE]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
 };
 
 // code
@@ -1508,7 +1502,7 @@ static inline void ShopBlit_Categories(void)
 
 void ShopPrint_AddTextPrinter(u32 fontId, u32 x, u32 y, enum ShopMenuFontColors color, const u8 *str)
 {
-    AddTextPrinterParameterized4(SHOP_WINDOW_MAIN, fontId, x, y, 0, 0, sMenuWindowFontColors[color], TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(SHOP_WINDOW_MAIN, fontId, x, y, 0, 0, ShopConfig_GetFontColors(color), TEXT_SKIP_DRAW, str);
 }
 
 static inline void ShopPrint_HelpBar(void)
@@ -1537,7 +1531,7 @@ static inline void ShopPrint_HelpBar(void)
         }
     }
 
-    ShopPrint_AddTextPrinter(fontId, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, str);
+    ShopPrint_AddTextPrinter(fontId, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, str);
 }
 
 static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType type)
@@ -1599,6 +1593,11 @@ static void ShopConfig_RunGridFunc(s32 vDelta, s32 hDelta)
     {
         ShopConfig_Get()->handleGrid(vDelta, hDelta);
     }
+}
+
+static const u8 *ShopConfig_GetFontColors(enum ShopMenuFontColors color)
+{
+    return ShopConfig_Get()->fontColors[color];
 }
 
 // Available to purchase criterias in gItemsInfo.

@@ -165,6 +165,10 @@ static const struct ShopMenuConfigs sPrestoShopConfigs =
     .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM"),
     .palette = (const u16[])INCBIN_U16("graphics/ui_menus/presto/palette.gbapal"),
     .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/presto/categories.4bpp"),
+    .fontColors = (const u8[][3]){
+        [SHOP_FNTCLR_PRIMARY]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_TRANSPARENT},
+        [SHOP_FNTCLR_SECONDARY]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
+    },
 
     .categoryCoords = (const u8[]){
         [SHOP_COORD_X]   = TILE_TO_PIXELS(0) + 3,
@@ -291,7 +295,7 @@ static inline void PrestoPrint_Categories(void)
 
         ShopPrint_AddTextPrinter(FONT_SMALL_NARROW,
                                 TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y) + (i * 4),
-                                SHOP_FNTCLR_WHITE, gStringVar4);
+                                SHOP_FNTCLR_SECONDARY, gStringVar4);
 
         y += 5;
     }
@@ -304,13 +308,13 @@ static inline void PrestoPrint_ItemPrice(void)
     u32 price = GetItemPrice(itemId);
 
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Price: "));
-    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, gStringVar4);
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
 
     u8 *strVar1 = StringCopy(gStringVar1, COMPOUND_STRING("¥ "));
     ConvertIntToDecimalStringN(strVar1, price, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     u32 fontId = GetFontIdToFit(gStringVar1, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(29));
 
-    ShopPrint_AddTextPrinter(fontId, TILE_TO_PIXELS(x) + GetStringWidth(FONT_SMALL_NARROW, gStringVar4, 0), TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, gStringVar1);
+    ShopPrint_AddTextPrinter(fontId, TILE_TO_PIXELS(x) + GetStringWidth(FONT_SMALL_NARROW, gStringVar4, 0), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar1);
 }
 
 static void PrestoHelper_UpdateFrontEnd(void)
@@ -353,22 +357,22 @@ static void PrestoHelper_UpdateFrontEnd(void)
         StringCopy(gStringVar1, GetItemName(itemId));
         ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 4);
         StringExpandPlaceholders(gStringVar4, sText_ItemNameOwned);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, gStringVar4);
+        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
 
         x = 25, y = 2;
         ConvertIntToDecimalStringN(gStringVar1, GetItemPrice(itemId), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
         StringExpandPlaceholders(gStringVar4, sText_ItemPrice);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, gStringVar4);
+        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
 
         // why is this one use FONT_SHORT_COPY_3
         x = 5, y = 4;
-        ShopPrint_AddTextPrinter(FONT_SHORT_COPY_3, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, GetItemDescription(itemId));
+        ShopPrint_AddTextPrinter(FONT_SHORT_COPY_3, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, GetItemDescription(itemId));
 
         x = 16, y = 10;
         quantity = (gShopMenuDataPtr->itemQuantity + 1) * GetItemPrice(itemId);
         ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
         StringExpandPlaceholders(gStringVar4, sText_ItemCost);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, gStringVar4);
+        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
 
         if (PrestoHelper_GetShopType() == PRESTO_TYPE_APP)
         {
@@ -377,25 +381,25 @@ static void PrestoHelper_UpdateFrontEnd(void)
 
             ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
             StringExpandPlaceholders(gStringVar4, sText_DroneFee);
-            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, gStringVar4);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
         }
 
         x = 16, y = PrestoHelper_GetShopType() == PRESTO_TYPE_APP ? 14 : 12;
         quantity = ShopConfig_Get()->handleTotalPrice(itemId, gShopMenuDataPtr->itemQuantity);
         ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
         StringExpandPlaceholders(gStringVar4, sText_OrderTotal);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, gStringVar4);
+        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
 
         x = 12, y = 12;
         quantity = gShopMenuDataPtr->itemQuantity + 1;
         ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 5);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, gStringVar1);
+        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar1);
 
         x = 1, y = 16, x2 = 4;
         GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
         StringCopy_PlayerName(gStringVar2, gSaveBlock2Ptr->playerName);
         StringExpandPlaceholders(gStringVar4, sText_DeliveryTo);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, gStringVar4);
+        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
 
         if (gShopMenuDataPtr->buyWindow)
         {
@@ -405,32 +409,32 @@ static void PrestoHelper_UpdateFrontEnd(void)
                 BlitBitmapToWindow(SHOP_WINDOW_MAIN, sOrderWindow, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), 152, 72);
 
                 x = 6, y = 5, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_OrderDelivered, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, sText_OrderDelivered);
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, sText_OrderDelivered);
 
                 y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_ThanksForBuying, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, sText_ThanksForBuying);
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_ThanksForBuying);
 
                 y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_YouGot, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, sText_YouGot);
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_YouGot);
 
                 y += 2;
                 StringCopy(gStringVar1, GetItemName(itemId));
                 ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 2);
                 StringExpandPlaceholders(gStringVar4, sText_ItemNumber);
                 x2 = GetStringCenterAlignXOffset(FONT_NARROW, gStringVar4, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_BLACK, gStringVar4);
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
             }
         }
     }
 
     x = 19, y = 0;
-    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, COMPOUND_STRING("Money: "));
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, COMPOUND_STRING("Money: "));
 
     u8 *strVar1 = StringCopy(gStringVar1, COMPOUND_STRING("¥ "));
     ConvertIntToDecimalStringN(strVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     x = GetStringRightAlignXOffset(FONT_SMALL_NARROW, gStringVar1, TILE_TO_PIXELS(29));
 
-    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, x, TILE_TO_PIXELS(y), SHOP_FNTCLR_WHITE, gStringVar1);
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, x, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar1);
 }
 
 static enum PrestoShopTypes PrestoHelper_GetShopType(void)

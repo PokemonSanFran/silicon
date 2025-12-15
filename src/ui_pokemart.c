@@ -191,6 +191,10 @@ static const struct ShopMenuConfigs sPokeMartShopConfigs =
     .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.bin.smolTM"), // nothing happens
     .palette = (const u16[])INCBIN_U16("graphics/ui_menus/mart/bg.gbapal"),
     .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/mart/categories.4bpp"),
+    .fontColors = (const u8[][3]){
+        [SHOP_FNTCLR_PRIMARY]    = {TEXT_COLOR_TRANSPARENT,  15,   TEXT_COLOR_TRANSPARENT},
+        [SHOP_FNTCLR_SECONDARY]  = {TEXT_COLOR_TRANSPARENT,   8,   TEXT_COLOR_TRANSPARENT},
+    },
 
     .categoryCoords = (const u8[]){
         [SHOP_COORD_X]   = TILE_TO_PIXELS(10) + 2,
