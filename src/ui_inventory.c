@@ -82,8 +82,9 @@ static void Menu_InitWindows(void);
 static void Inventory_PrintHeader(void);
 static void Inventory_PrintPartyDisplay(void);
 static u32 Inventory_GetItemIdFromPocketIndex(u32 itemIndex, enum Pocket pocketId);
-static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemListIndex, u32 itemId, u32 itemIndex, u32 numItems);
-static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u32 itemListIndex);
+static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenListIndex, u32 itemId, u32 itemIndex, u32 numItems);
+static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u32 itemScreenListIndex);
+static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex, u32 itemScreenListIndex);
 static void Inventory_PrintItemList(void);
 static void Inventory_PrintDesc(void);
 static void Inventory_PrintFooter(void);
@@ -182,8 +183,8 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = (240/8),
-        .height = (16/8),
+        .width = 30,
+        .height = 2,
         .paletteNum = 1,
         .baseBlock = 1,
     },
@@ -191,41 +192,41 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     {
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = (16/8),
-        .width = (64/8),
-        .height = (88/8),
+        .tilemapTop = 2,
+        .width = 8,
+        .height = 11,
         .paletteNum = 1,
-        .baseBlock = 1 + ((240/8) * (16/8)),
+        .baseBlock = 1 + (30*2),
     },
     [INVENTORY_WINDOW_ITEM_LIST] =
     {
         .bg = INVENTORY_BG_TEXT,
-        .tilemapLeft = (64/8),
-        .tilemapTop = (16/8),
-        .width = (176/8),
-        .height = (88/8),
+        .tilemapLeft = 8,
+        .tilemapTop = 2,
+        .width = 22,
+        .height = 11,
         .paletteNum = 1,
-        .baseBlock = 1 + ((240/8) * (16/8)) + ((64/8) * (88/8))
+        .baseBlock = 1 + (30*2) + (8*11),
     },
     [INVENTORY_WINDOW_DESC] =
     {
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = (104/8),
-        .width = (240/8),
-        .height = (40/8),
+        .tilemapTop = 13,
+        .width = 30,
+        .height = 5,
         .paletteNum = 1,
-        .baseBlock = 1 + ((240/8) * (16/8)) + ((64/8) * (88/8)) + ((240/8) * (40/8))
+        .baseBlock = 1 + (30*2) + (8*11) + (22*11),
     },
     [INVENTORY_WINDOW_FOOTER] =
     {
         .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = (144/8),
-        .width = (240/8),
-        .height = (16/8),
+        .tilemapTop = 18,
+        .width = 30,
+        .height = 2,
         .paletteNum = 1,
-        .baseBlock = 1 + ((240/8) * (16/8)) + ((64/8) * (88/8)) + ((176/8) * (88/8)) + ((240/8) * (40/8))
+        .baseBlock = 1 + (30*2) + (8*11) + (22*11) + (30*5),
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -248,7 +249,7 @@ static const u8 sMenuWindowFontColors[][3] =
 {
     [INVENTORY_FONT_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
     [INVENTORY_FONT_WHITE]   = {TEXT_COLOR_TRANSPARENT,  1,  TEXT_COLOR_TRANSPARENT},
-    [INVENTORY_FONT_WHITE_2] = {TEXT_COLOR_TRANSPARENT,  2,  TEXT_COLOR_TRANSPARENT},
+    [INVENTORY_FONT_OUTLINE_COLOR] = {TEXT_COLOR_TRANSPARENT,  2, 1},
     [INVENTORY_FONT_RED]     = {TEXT_COLOR_TRANSPARENT,  14, TEXT_COLOR_TRANSPARENT},
     [INVENTORY_FONT_BLUE]    = {TEXT_COLOR_TRANSPARENT,  4,  TEXT_COLOR_TRANSPARENT},
 };
@@ -2339,38 +2340,6 @@ static const u8 sText_Help_Bar_RegisterHow[]        = _("Register to what direct
 static const u8 sText_Help_Bar_ItemsSorted[]        = _("Items sorted by {STR_VAR_1}! {A_BUTTON}{B_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Used_Item[]          = _("{PLAYER} used the {STR_VAR_1} {A_BUTTON}{B_BUTTON} Confirm");
 
-
-
-
-
-
-
-
-
-
-
-static const s8 sInventory_TypeRGB[NUMBER_OF_MON_TYPES][INTERFACE_RGB_COLORS] = {
-    //[TYPE_NONE]     = {31, 31, 31},
-    [TYPE_NORMAL]   = {26, 26, 26},
-    [TYPE_FIRE]     = {31, 20, 4},
-    [TYPE_FIGHTING] = {30, 8,  12},
-    [TYPE_WATER]    = {12, 17, 31},
-    [TYPE_FLYING]   = {19, 25, 30},
-    [TYPE_GRASS]    = {10, 25, 7},
-    [TYPE_POISON]   = {22, 14, 27},
-    [TYPE_ELECTRIC] = {27, 26, 6},
-    [TYPE_ROCK]     = {28, 21, 9},
-    [TYPE_PSYCHIC]  = {28, 15, 28},
-    [TYPE_GROUND]   = {25, 24, 20},
-    [TYPE_ICE]      = {16, 27, 27},
-    [TYPE_BUG]      = {19, 28, 9},
-    [TYPE_DRAGON]   = {9,  12, 24},
-    [TYPE_GHOST]    = {16, 11, 21},
-    [TYPE_DARK]     = {10, 10, 12},
-    [TYPE_STEEL]    = {18, 20, 23},
-    [TYPE_FAIRY]    = {30, 22, 30},
-};
-
 static u16 getCurrentSelectedItemIdx(void){
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u16 numitems = sMenuDataPtr->numItems[pocketId];
@@ -2579,7 +2548,7 @@ static u32 Inventory_GetItemIdFromPocketIndex(u32 itemIndex, enum Pocket pocketI
     return (pocketId == POCKET_FAVORITE_ITEMS) ? (sMenuDataPtr->FavoritePocketItems[itemIndex][FAVORITE_ITEM_ID]) : pocket->itemSlots[itemIndex].itemId;
 }
 
-static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u32 itemListIndex)
+static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u32 itemScreenListIndex)
 {
     if (pocketId == POCKET_FAVORITE_ITEMS)
         return;
@@ -2587,159 +2556,174 @@ static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u3
     itemIdx++;
 
     if (itemIdx <= gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId])
-        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gInventoryIcon_Pinned_Gfx, 0, (itemListIndex * 17), 16, 8);
+        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gInventoryIcon_Pinned_Gfx, 0, (itemScreenListIndex * 17), 16, 8);
 }
 
-static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemListIndex, u32 itemId, u32 itemIndex, u32 numItems)
+struct TMHMGfxTable 
 {
-    u32 x  = 10;
-    u32 y  = 2;
-    u32 y2 = 0;
-    u32 x2 = 2;
+    const u8* left;
+    const u8* middle;
+    const u8* right;
+};
+
+static const struct TMHMGfxTable sTMHMGraphics[] = 
+{
+    [0] = {sInventoryTMHM_Type1_Gfx, sInventoryTMHM_Type1_2_Gfx, sInventoryTMHM_Type1_3_Gfx},
+    [1] = {sInventoryTMHM_Type2_Gfx, sInventoryTMHM_Type2_2_Gfx, sInventoryTMHM_Type2_3_Gfx},
+    [2] = {sInventoryTMHM_Type3_Gfx, sInventoryTMHM_Type3_2_Gfx, sInventoryTMHM_Type3_3_Gfx},
+    [3] = {sInventoryTMHM_Type4_Gfx, sInventoryTMHM_Type4_2_Gfx, sInventoryTMHM_Type4_3_Gfx},
+    [4] = {sInventoryTMHM_Type5_Gfx, sInventoryTMHM_Type5_2_Gfx, sInventoryTMHM_Type5_3_Gfx},
+};
+
+static const u8* sTypeGraphics[] = 
+{
+    [TYPE_NORMAL]   = sInventoryTMHM_Type_Normal_Gfx,
+    [TYPE_FIGHTING] = sInventoryTMHM_Type_Fighting_Gfx,
+    [TYPE_FLYING]   = sInventoryTMHM_Type_Flying_Gfx,
+    [TYPE_POISON]   = sInventoryTMHM_Type_Poison_Gfx,
+    [TYPE_GROUND]   = sInventoryTMHM_Type_Ground_Gfx,
+    [TYPE_ROCK]     = sInventoryTMHM_Type_Rock_Gfx,
+    [TYPE_BUG]      = sInventoryTMHM_Type_Bug_Gfx,
+    [TYPE_GHOST]    = sInventoryTMHM_Type_Ghost_Gfx,
+    [TYPE_STEEL]    = sInventoryTMHM_Type_Steel_Gfx,
+    [TYPE_FIRE]     = sInventoryTMHM_Type_Fire_Gfx,
+    [TYPE_WATER]    = sInventoryTMHM_Type_Water_Gfx,
+    [TYPE_GRASS]    = sInventoryTMHM_Type_Grass_Gfx,
+    [TYPE_ELECTRIC] = sInventoryTMHM_Type_Electric_Gfx,
+    [TYPE_PSYCHIC]  = sInventoryTMHM_Type_Psychic_Gfx,
+    [TYPE_ICE]      = sInventoryTMHM_Type_Ice_Gfx,
+    [TYPE_DRAGON]   = sInventoryTMHM_Type_Dragon_Gfx,
+    [TYPE_DARK]     = sInventoryTMHM_Type_Dark_Gfx,
+    [TYPE_FAIRY]    = sInventoryTMHM_Type_Fairy_Gfx,
+};
+
+static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenListIndex, u32 itemId, u32 itemIndex, u32 numItems)
+{
     u32 j = 0;
+    u32 buffer[] = {0,0,1,2,3};
+    u32 y = (itemScreenListIndex * 16) + buffer[itemScreenListIndex];
+    u32 x = 16;
 
     if(pocketId != POCKET_TM_HM || itemId == ITEM_NONE)
     {
-        if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == itemListIndex){
-            if(sMenuDataPtr->currentSelectMode != INVENTORY_MODE_MOVE_ITEMS){
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+        if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == itemScreenListIndex)
+        {
+            if(sMenuDataPtr->currentSelectMode != INVENTORY_MODE_MOVE_ITEMS)
+            {
+                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor_Gfx, x, y, 16, 16);
+
                 for(j = 1; j < INVENTORY_CURSOR_SQUARES; j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor2_Gfx, (x + (j * 16)), y, 16, 16);
             }
-            else{
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor_Move_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
+            else
+            {
+                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor_Move_Gfx, x, y, 16, 16);
+
                 for(j = 1; j < INVENTORY_CURSOR_SQUARES - 1; j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor2_Move_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor3_Move_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor2_Move_Gfx,(x + (j * 16)), y,  16, 16);
+
+                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryCursor3_Move_Gfx,(x + (j * 16)), y,  16, 16);
             }
         }
     }
     else
+    {
+        const struct TMHMGfxTable* gfx = &sTMHMGraphics[itemScreenListIndex];
+
+        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gfx->left, x, y, 16, 16);
+
+        for(j = 1; j < INVENTORY_CURSOR_SQUARES - 1; j++)
+            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gfx->middle,(x + (j * 16)), y,  16, 16);
+
+        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gfx->right,(x + (j * 16)), y,  16, 16);
+
+        x = 160;
+
+        if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == itemScreenListIndex)
+            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Cursor_Gfx, x, y, 16, 16);
+
+        u32 moveType = (itemIndex == (numItems - 1)) ? TYPE_NORMAL : gMovesInfo[GetItemSecondaryId(itemId)].type;
+        if((gSaveBlock3Ptr->InventoryData.yFirstItem + itemScreenListIndex) != (numItems - 1))
+            if (moveType != TYPE_NONE && moveType != TYPE_STELLAR)
+                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sTypeGraphics[moveType], x, y, 16, 16);
+
+        FillPalette(gTypesInfo[moveType].siliconRGBValue,INVENTORY_TMHM_PAL_COLOR_ADDRESS + itemScreenListIndex,2);
+    }
+}
+
+static const u8* sRegisteredIndicator[] = 
 {
-        //Palette Stuff
-        u8 ColorRed, ColorGreen, ColorBlue;
-        u8 moveType = gMovesInfo[GetItemSecondaryId(itemId)].type;
+    [INVENTORY_REGISTER_DIRECTION_LEFT]   = sInventoryRegisterIndicator_Left_Gfx,
+    [INVENTORY_REGISTER_DIRECTION_RIGHT]   = sInventoryRegisterIndicator_Right_Gfx,
+    [INVENTORY_REGISTER_DIRECTION_DOWN]   = sInventoryRegisterIndicator_Down_Gfx,
+    [INVENTORY_REGISTER_DIRECTION_UP]   = sInventoryRegisterIndicator_Up_Gfx,
+};
 
-        if(itemIndex == (numItems - 1))
-            moveType = TYPE_NORMAL;
+static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex, u32 itemScreenListIndex)
+{
+    u32 x  = 18;
+    u32 buffer[] = {0,0,1,2,3};
+    u32 y = (itemScreenListIndex * 16) + buffer[itemScreenListIndex];
+    u32 itemNum = 0;
+    u32 fontId = INVENTORY_FONT_LIST;
+    u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+    u32 windowId = INVENTORY_WINDOW_ITEM_LIST;
+    u32 itemListItemNameWidth = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH - 24;
+    u32 inventoryPadding = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH;
 
-        switch(itemListIndex){
-            case 0: //Type 1
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type1_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
-                for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type1_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
 
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type1_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
-            case 1: //Type 2
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type2_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
-                for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type2_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+    if(itemId != ITEM_NONE)
+    {
+        if(pocketId != POCKET_TM_HM)
+        {
+            CopyItemName(itemId, gStringVar1);
+            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar1);
 
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type2_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
-            case 2: //Type 3
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type3_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
-                for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type3_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+            if(pocketId == POCKET_FAVORITE_ITEMS)
+                itemNum = sMenuDataPtr->FavoritePocketItems[itemIndex][FAVORITE_ITEM_QUANTITY];
+            else
+                itemNum = CountTotalItemQuantityInBag(itemId);
 
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type3_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
-            case 3: //Type 4
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type4_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
-                for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type4_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+            ConvertIntToDecimalStringN(gStringVar1, itemNum, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("x{STR_VAR_1}"));
+            x = 4 + GetStringRightAlignXOffset(fontId,gStringVar4,itemListItemNameWidth);
+            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
 
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type4_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
-            case 4: //Type 5
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type5_Gfx, (x * 8) + x2 - 2, (y * 8) + y2 - 1, 16, 16);
-                for(j = 1; j < (INVENTORY_CURSOR_SQUARES - 1); j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type5_2_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
+            //Registered Items
 
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type5_3_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                break;
+            x = TILE_WIDTH + GetStringRightAlignXOffset(fontId,gStringVar4,inventoryPadding);
+            for (u32 direction = INVENTORY_REGISTER_DIRECTION_UP; direction < INVENTORY_REGISTER_NUM_DIRECTIONS; direction++)
+                if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[direction])
+                    BlitBitmapToWindow(windowId, sRegisteredIndicator[direction], x,y, 16, 16);
         }
-
-        if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == itemListIndex)
-            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Cursor_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-
-        if((gSaveBlock3Ptr->InventoryData.yFirstItem + itemListIndex) != (numItems - 1)){
-            switch (moveType){
-                case TYPE_BUG:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Bug_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_DARK:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Dark_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_DRAGON:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Dragon_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_ELECTRIC:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Electric_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_FIRE:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Fire_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_FIGHTING:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Fighting_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_FLYING:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Flying_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_GHOST:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Ghost_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_GRASS:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Grass_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_GROUND:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Ground_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_ICE:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Ice_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_NORMAL:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Normal_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_POISON:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Poison_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_PSYCHIC:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Psychic_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_ROCK:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Rock_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_STEEL:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Steel_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_WATER:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Water_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-                case TYPE_FAIRY:
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Type_Fairy_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                    break;
-            }
+        else 
+        {
+            CopyItemName(itemId, gStringVar1);
+            StringCopy(gStringVar2, gMovesInfo[GetItemSecondaryId(itemId)].name);
+            StringExpandPlaceholders(gStringVar4, sInventory_TM_Name);
+            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
         }
-        ColorRed   = sInventory_TypeRGB[moveType][0];
-        ColorGreen = sInventory_TypeRGB[moveType][1];
-        ColorBlue  = sInventory_TypeRGB[moveType][2];
+    }
+    else 
+    {
+        if (Inventory_GetItemIdFromPocketIndex((itemIndex-1),pocketId) == ITEM_NONE)
+            if (itemIndex != 0)
+                return;
 
-        CopyRGBIntoSlot(INTERFACE_PALETTE_NUM, INTERFACE_TMHM_COLOR_FIRST_SLOT + itemListIndex, ColorRed, ColorGreen, ColorBlue, FALSE);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, sInventory_Exit);
     }
 }
 
 static void Inventory_PrintItemList(void)
 {
-    u16 i, j, x, x2, y, y2;
+    u16 i, x, x2, y, y2;
     u32 font = FONT_NARROW;
     enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    u32 itemNum, moveNum;
+    u32 moveNum;
     u32 numitems = sMenuDataPtr->numItems[pocketId];
 
     FillWindowPixelBuffer(INVENTORY_WINDOW_ITEM_LIST, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    // Item Names
     x  = 10;
     y  = 2;
     y2 = 0;
@@ -2752,47 +2736,7 @@ static void Inventory_PrintItemList(void)
 
         Inventory_TryPrintFavoriteIcon(pocketId,itemIdx,i);
         Inventory_TryPrintListCursor(pocketId,i,itemId,itemIdx,numitems);
-
-        if(itemId != ITEM_NONE){
-            // Item Name
-            if(pocketId != POCKET_TM_HM){
-                CopyItemName(itemId, gStringVar1);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, INVENTORY_FONT_LIST, (x * 8) + x2 + 1, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar1);
-
-                // Item Num
-                itemNum = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
-
-                if(pocketId == POCKET_FAVORITE_ITEMS){
-                    itemNum = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_QUANTITY];
-                }
-
-                ConvertIntToDecimalStringN(gStringVar1, itemNum, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
-                StringExpandPlaceholders(gStringVar4, sText_Item_Num);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, font, ((x + 15) * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar4);
-
-                //Registered Items
-                j = INVENTORY_CURSOR_SQUARES - 1;
-                if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_UP])
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Up_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                else if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_DOWN])
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Down_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                else if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_LEFT])
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Left_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-                else if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[INVENTORY_REGISTER_DIRECTION_RIGHT])
-                    BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryRegisterIndicator_Right_Gfx, (x * 8) + x2 - 2 + (j * 16), (y * 8) + y2 - 1, 16, 16);
-            }
-            else{
-                moveNum = GetItemSecondaryId(itemId);
-                CopyItemName(itemId, gStringVar1);
-                StringCopy(gStringVar2, gMovesInfo[moveNum].name);
-                StringExpandPlaceholders(gStringVar4, sInventory_TM_Name);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, INVENTORY_FONT_LIST, (x * 8) + x2 + 2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar4);
-            }
-        }
-        else{
-            AddTextPrinterParameterized4(INVENTORY_WINDOW_ITEM_LIST, INVENTORY_FONT_LIST, (x * 8) + x2, (y * 8) + y2, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, sInventory_Exit);
-            break;
-        }
+        Inventory_PrintItems(pocketId, itemId, itemIdx,i);
 
         y = y + 2;
         y2 = y2 + 1;
@@ -3003,7 +2947,6 @@ static void Inventory_PrintFooter(void)
     u16 x, x2, y, y2;
     u8 font = FONT_NARROW;
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    struct BagPocket *pocket = &gBagPockets[pocketId];
     u32 itemIdx = getCurrentSelectedItemIdx();
     u32 itemId = Inventory_GetItemIdFromPocketIndex(itemIdx,pocketId);
     u16 paletteIndex = INTERFACE_PALETTE_NUM * 16;
@@ -3029,8 +2972,8 @@ static void Inventory_PrintFooter(void)
             break;
         case INVENTORY_MODE_MOVE_ITEMS:
             {
-                u16 quantity = pocket->itemSlots[gSaveBlock3Ptr->InventoryData.itemIdx].quantity;
 
+                u16 quantity = CountTotalItemQuantityInBag(itemId);
                 CopyItemNameHandlePlural(itemId, gStringVar1, quantity);
                 StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Move);
             }
