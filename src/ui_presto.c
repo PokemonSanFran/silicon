@@ -401,29 +401,33 @@ static void PrestoHelper_UpdateFrontEnd(void)
         StringExpandPlaceholders(gStringVar4, sText_DeliveryTo);
         ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
 
-        if (gShopMenuDataPtr->buyWindow)
+        if (gShopMenuDataPtr->buyWindow && !gShopMenuDataPtr->notEnoughMoneyWindow)
         {
-            if (!gShopMenuDataPtr->notEnoughMoneyWindow)
-            {
-                x = 5, y = 5;
-                BlitBitmapToWindow(SHOP_WINDOW_MAIN, sOrderWindow, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), 152, 72);
+            x = 5, y = 5;
+            BlitBitmapToWindow(SHOP_WINDOW_MAIN, sOrderWindow, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), 152, 72);
 
-                x = 6, y = 5, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_OrderDelivered, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, sText_OrderDelivered);
+            x = 6, y = 5, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_OrderDelivered, TILE_TO_PIXELS(16));
+            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, sText_OrderDelivered);
 
-                y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_ThanksForBuying, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_ThanksForBuying);
+            y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_ThanksForBuying, TILE_TO_PIXELS(16));
+            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_ThanksForBuying);
 
-                y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_YouGot, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_YouGot);
+            y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_YouGot, TILE_TO_PIXELS(16));
+            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_YouGot);
 
-                y += 2;
-                StringCopy(gStringVar1, GetItemName(itemId));
-                ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 2);
-                StringExpandPlaceholders(gStringVar4, sText_ItemNumber);
-                x2 = GetStringCenterAlignXOffset(FONT_NARROW, gStringVar4, TILE_TO_PIXELS(16));
-                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
-            }
+            y += 2;
+            StringCopy(gStringVar1, GetItemName(itemId));
+            ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 2);
+            StringExpandPlaceholders(gStringVar4, sText_ItemNumber);
+            x2 = GetStringCenterAlignXOffset(FONT_NARROW, gStringVar4, TILE_TO_PIXELS(16));
+            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+        }
+        else if (!gShopMenuDataPtr->buyWindow && gShopMenuDataPtr->notEnoughMoneyWindow)
+        {
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROWER,
+                                    TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18),
+                                    SHOP_FNTCLR_SECONDARY,
+                                    COMPOUND_STRING("Your account has been declined for insufficient funds!"));
         }
     }
 

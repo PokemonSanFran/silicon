@@ -267,8 +267,6 @@ static const u8 sText_Help_Bar[]          = _("{DPAD_UPDOWN} Rows {DPAD_LEFTRIGH
 static const u8 sText_Help_Bar_Buy[]      = _("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Buy Now {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Complete[] = _("{A_BUTTON} Buy More {B_BUTTON} Return {START_BUTTON} Exit");
 
-static const u8 sText_noEnoughMoney[]        = _("Your account has been declined for insufficient funds!");
-
 const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES] =
 {
     [SHOP_CATEGORY_BUY_AGAIN]    = COMPOUND_STRING("Buy Again"),
@@ -1522,8 +1520,7 @@ static inline void ShopPrint_HelpBar(void)
             }
             else
             {
-                str = sText_noEnoughMoney;
-                fontId = FONT_SMALL_NARROWER;
+                return; // let the shops do their own
             }
         }
         else
