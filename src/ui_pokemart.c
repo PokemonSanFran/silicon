@@ -370,11 +370,6 @@ static void MartHelper_GridInput(s32 vDelta, s32 hDelta)
     MartGrid_SetNumberOfRows(numItems / ShopConfig_GetTotalShownItems());
     u32 rowIdx = MartGrid_GetCurrentRow(), numRows = MartGrid_GetNumberOfRows();
 
-    if (!numRows)
-    {
-        numRows++;
-    }
-
     if (vDelta != 0)
     {
         bool32 additiveDelta = ShopGrid_IsAdditiveDelta(vDelta);
