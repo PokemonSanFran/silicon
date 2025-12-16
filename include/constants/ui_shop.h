@@ -11,6 +11,7 @@ enum ShopMenuBackgrounds
     SHOP_BG_WINDOW,
 
     // if needed
+    SHOP_BG_DESC,
     SHOP_BG_EXTRA,
 
     SHOP_BG_TILEMAP,

@@ -137,12 +137,9 @@ enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
 static void ShopBlit_Category(enum ShopMenuCategories, u32, u32);
 static inline void ShopBlit_Categories(void);
 
-static inline void ShopPrint_HelpBar(void);
-
 static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType);
 
 static void ShopConfig_RunGridFunc(s32, s32);
-static const u8 *ShopConfig_GetFontColors(enum ShopMenuFontColors);
 
 // const data
 static const struct BgTemplate sShopBgTemplates[NUM_SHOP_BGS] =
@@ -153,6 +150,13 @@ static const struct BgTemplate sShopBgTemplates[NUM_SHOP_BGS] =
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .priority = 1
+    },
+    [SHOP_BG_DESC] =
+    {
+        .bg = SHOP_BG_DESC,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 28,
+        .priority = 0
     },
     [SHOP_BG_EXTRA] =
     {
@@ -177,8 +181,8 @@ static const struct WindowTemplate sShopWindowTemplates[] =
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
-        .height = 20,
+        .width = DISPLAY_TILE_WIDTH,
+        .height = DISPLAY_TILE_HEIGHT,
         .paletteNum = 0,
         .baseBlock = 1,
     },
@@ -376,6 +380,7 @@ static void CB2_ShopSetup(void)
 
 static void CB2_ShopMenu(void)
 {
+    RunTextPrinters();
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -403,8 +408,11 @@ static void ShopSetup_Backgrounds(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sShopBgTemplates, NELEMS(sShopBgTemplates));
     SetBgTilemapBuffer(SHOP_BG_TILEMAP, sShopMenuStaticDataPtr->tilemapBuf);
+    ScheduleBgCopyTilemapToVram(SHOP_BG_DESC);
+    ScheduleBgCopyTilemapToVram(SHOP_BG_EXTRA);
     ScheduleBgCopyTilemapToVram(SHOP_BG_TILEMAP);
     ShowBg(SHOP_BG_WINDOW);
+    ShowBg(SHOP_BG_DESC);
     ShowBg(SHOP_BG_EXTRA);
     ShowBg(SHOP_BG_TILEMAP);
 }
@@ -421,7 +429,7 @@ static void ShopSetup_Windows(void)
 {
     InitWindows(sShopWindowTemplates);
     DeactivateAllTextPrinters();
-    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(SHOP_BG_WINDOW);
 
     FillWindowPixelBuffer(SHOP_WINDOW_MAIN, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     PutWindowTilemap(SHOP_WINDOW_MAIN);
@@ -438,9 +446,8 @@ static void ShopHelper_UpdateFrontEnd(void)
         ShopSprite_CreateItemSprites();
     }
 
-    ShopConfig_Get()->handleFrontend();
     ShopPrint_HelpBar();
-
+    ShopConfig_Get()->handleFrontend();
     CopyWindowToVram(SHOP_WINDOW_MAIN, COPYWIN_GFX);
 
     gShopMenuDataPtr->notEnoughMoneyWindow = FALSE;
@@ -683,6 +690,11 @@ static void ShopSprite_CreateGenericSprites(void)
         gSprites[spriteId].data[1] = configs->x;
         gSprites[spriteId].data[2] = configs->y;
     }
+}
+
+u32 ShopSprite_GetSpriteId(enum ShopMenuSprites id)
+{
+    return sShopMenuStaticDataPtr->spriteIds[id];
 }
 
 static void ShopSprite_CreateItemSprite(u16 itemId, u8 idx, u8 x, u8 y)
@@ -1504,7 +1516,7 @@ void ShopPrint_AddTextPrinter(u32 fontId, u32 x, u32 y, enum ShopMenuFontColors 
     AddTextPrinterParameterized4(SHOP_WINDOW_MAIN, fontId, x, y, 0, 0, ShopConfig_GetFontColors(color), TEXT_SKIP_DRAW, str);
 }
 
-static inline void ShopPrint_HelpBar(void)
+void ShopPrint_HelpBar(void)
 {
     u32 x = 0, y = 18;
     const u8 *str = sText_Help_Bar;
@@ -1593,7 +1605,7 @@ static void ShopConfig_RunGridFunc(s32 vDelta, s32 hDelta)
     }
 }
 
-static const u8 *ShopConfig_GetFontColors(enum ShopMenuFontColors color)
+const u8 *ShopConfig_GetFontColors(enum ShopMenuFontColors color)
 {
     return ShopConfig_Get()->fontColors[color];
 }

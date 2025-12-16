@@ -12,12 +12,14 @@ void ShopMenu_Init(const struct ShopMenuConfigs *, const u16 *, MainCallback);
 enum ShopMenuCategories ShopGrid_CategoryInRow(u8);
 enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
 void ShopPrint_AddTextPrinter(u32, u32, u32, enum ShopMenuFontColors, const u8 *);
+void ShopPrint_HelpBar(void);
 const struct ShopMenuConfigs *ShopConfig_Get(void);
 u8 ShopConfig_GetTotalShownItems(void);
 u8 ShopConfig_GetTotalShownItemRows(void);
 u8 ShopConfig_GetTotalShownCategories(void);
 u8 ShopConfig_GetTotalShownItemsOnScreen(void);
 enum ShopMenuGridModes ShopConfig_GetGridMode(void);
+const u8 *ShopConfig_GetFontColors(enum ShopMenuFontColors);
 void ShopGrid_SetGridXCursor(u32);
 u32 ShopGrid_GetGridXCursor(void);
 void ShopGrid_SetGridYCursor(u32);
@@ -34,5 +36,6 @@ bool32 ShopGrid_IsAdditiveDelta(s32);
 void ShopGrid_ResetIndexes(u32);
 u32 ShopInventory_GetItemIdFromGrid(u32, u32);
 u32 ShopInventory_GetChosenItemId(void);
+u32 ShopSprite_GetSpriteId(enum ShopMenuSprites);
 
 #endif // GUARD_UI_SHOP_H
