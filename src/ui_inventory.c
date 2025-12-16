@@ -19,6 +19,7 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "line_break.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon_icon.h"
@@ -138,7 +139,7 @@ static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
     },
     {
         .bg = INVENTORY_BG_NORMAL,
-        .charBaseIndex = 1,
+        .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .priority = 1,
     },
@@ -453,12 +454,16 @@ static bool8 AllocZeroedTilemapBuffers(void)
         if (DebugShouldSkipBg(backgroundId))
             continue;
 
-        bgTilemapBuffers[backgroundId] = AllocZeroed(BG_SCREEN_SIZE);
+        u32 size = BG_SCREEN_SIZE;
+        if (backgroundId > INVENTORY_BG_TEXT && backgroundId < INVENTORY_BG_WALLPAPER)
+            size *= 2;
+
+        bgTilemapBuffers[backgroundId] = AllocZeroed(size);
 
         if (bgTilemapBuffers[backgroundId] == NULL)
             return FALSE;
 
-        memset(bgTilemapBuffers[backgroundId],0,BG_SCREEN_SIZE);
+        memset(bgTilemapBuffers[backgroundId],0,size);
     }
     return TRUE;
 }
@@ -534,16 +539,16 @@ static void removeTransparentBackground(){
 static const u32* const sInventoryTilesLUT[] =
 {
     [INVENTORY_BG_TEXT] = NULL,
-    [INVENTORY_BG_NORMAL] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/textlayer.4bpp.smol"),
-    [INVENTORY_BG_SHADOWS] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/shadows.4bpp.smol"),
+    [INVENTORY_BG_NORMAL] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/tallmerge.4bpp.smol"),
+    [INVENTORY_BG_SHADOWS] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/tallmerge.4bpp.smol"),
     [INVENTORY_BG_WALLPAPER] = (const u32[])INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol"),
 };
 
 static const u32* const sInventoryTilemapLUT[] =
 {
     [INVENTORY_BG_TEXT] = NULL,
-    [INVENTORY_BG_NORMAL] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/textlayer.bin.smolTM"),
-    [INVENTORY_BG_SHADOWS] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/shadows.bin.smolTM"),
+    [INVENTORY_BG_NORMAL] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/tall_merge_textlayer.bin.smolTM"),
+    [INVENTORY_BG_SHADOWS] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/tall_merge_shadows.bin.smolTM"),
     [INVENTORY_BG_WALLPAPER] = (const u32[])INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM"),
 };
 
@@ -2735,7 +2740,9 @@ static void Inventory_PrintItemList(void)
 static void Inventory_PrintDesc(void)
 {
     u32 x, x2, y, y2;
-    u8 font = FONT_NARROW;
+    u32 font = FONT_NORMAL;
+    u32 lineSpacing = GetFontAttribute(font,FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
     enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u32 moveNum;
     u32 numitems = sMenuDataPtr->numItems[pocketId];
@@ -2798,7 +2805,11 @@ static void Inventory_PrintDesc(void)
         FreeItemIconSprite();
     }
 
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, x,y, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_BLACK], TEXT_SKIP_DRAW, gStringVar1);
+    y = 0;
+    u32 width = GetWindowAttribute(INVENTORY_WINDOW_DESC,WINDOW_WIDTH) * TILE_WIDTH - 4;
+    StripLineBreaks(gStringVar1);
+    BreakStringNaive(gStringVar1, width, 3, font, HIDE_SCROLL_PROMPT);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_BLACK], TEXT_SKIP_DRAW, gStringVar1);
 
     //Pick Menu
     /*
@@ -2909,10 +2920,11 @@ static void Inventory_PrintDesc(void)
 
 static void Inventory_PrintFooter(void)
 {
-    return;
     u32 x = 4;
     u32 y = 0;
-    u8 font = FONT_NARROW;
+    u32 font = FONT_NARROW;
+    u32 lineSpacing = GetFontAttribute(font,FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u32 itemIdx = getCurrentSelectedItemIdx();
     u32 itemId = Inventory_GetItemIdFromPocketIndex(itemIdx,pocketId);
@@ -2978,7 +2990,7 @@ static void Inventory_PrintFooter(void)
             break;
     }
 
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, 0, 0, sMenuWindowFontColors[INVENTORY_FONT_WHITE], 0xFF, gStringVar4);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 
     if(pocketId == POCKET_TM_HM)
         CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
