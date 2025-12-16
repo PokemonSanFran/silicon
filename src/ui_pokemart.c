@@ -53,8 +53,8 @@
 #define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(3) + 3) + 4)
 #define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS(4) + 7) + 8)
 
-#define SHOP_RIGHT_ARROW_X ((TILE_TO_PIXELS(8) + 1) + 4)
-#define SHOP_RIGHT_ARROW_Y SHOP_LEFT_ARROW_Y
+#define SHOP_RIGHT_ARROW_X ((TILE_TO_PIXELS(9) + 3) + 4)
+#define SHOP_RIGHT_ARROW_Y ((TILE_TO_PIXELS(3) - 1) + 8)
 
 #define SHOP_UP_ARROW_X    (TILE_TO_PIXELS(20) + 16)
 #define SHOP_UP_ARROW_Y    (TILE_TO_PIXELS(0) + 0)
@@ -121,6 +121,9 @@ static u32 MartGrid_GetCurrentRow(void);
 static void MartGrid_SetCurrentRow(u32);
 static u32 MartGrid_GetSizeOfCurrentRow(void);
 
+static void MartSprite_SetCategoryCursorCoord(u32);
+static u32 MartSprite_GetCategoryCursorCoord(void);
+
 static void SpriteCB_BuyIcon(struct Sprite *);
 static void SpriteCB_UpArrow(struct Sprite *);
 static void SpriteCB_DownArrow(struct Sprite *);
@@ -162,9 +165,9 @@ static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
         .y = SHOP_LEFT_ARROW_Y,
         .callback = SpriteCB_LeftArrow,
     },
-    [SHOP_SPRITE_RIGHT_ARROW] =
+    [SHOP_SPRITE_RIGHT_ARROW] = // used for category selector
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.smol"),
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_right.4bpp.smol"),
         .x = SHOP_RIGHT_ARROW_X,
         .y = SHOP_RIGHT_ARROW_Y,
         .callback = SpriteCB_RightArrow,
@@ -464,15 +467,18 @@ static void MartHelper_LRInput(s32 delta)
     {
         ShopGrid_SetCurrentCategoryIndex(trueIdx + delta);
         ShopGrid_SetFirstCategoryIndex(ShopGrid_GetFirstCategoryIndex() + delta);
+        MartSprite_SetCategoryCursorCoord(halfScreen);
     }
     else if (trueIdx >= numItems && additiveDelta)
     {
         ShopGrid_SetCurrentCategoryIndex(0);
         ShopGrid_SetFirstCategoryIndex(0);
+        MartSprite_SetCategoryCursorCoord(0);
     }
     else if (!trueIdx && !additiveDelta)
     {
         ShopGrid_SetCurrentCategoryIndex(numItems);
+        MartSprite_SetCategoryCursorCoord(ShopConfig_GetTotalShownItemRows() - 1);
         if (scroll)
         {
             ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1));
@@ -481,6 +487,7 @@ static void MartHelper_LRInput(s32 delta)
     else
     {
         ShopGrid_SetCurrentCategoryIndex(trueIdx + delta);
+        MartSprite_SetCategoryCursorCoord(MartSprite_GetCategoryCursorCoord() + delta);
     }
 
     ShopGrid_ResetIndexes(SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_Y_GRID);
@@ -534,6 +541,18 @@ static u32 MartGrid_GetSizeOfCurrentRow(void)
     }
 }
 
+static void MartSprite_SetCategoryCursorCoord(u32 y)
+{
+    struct Sprite *cursor = &gSprites[ShopSprite_GetSpriteId(SHOP_SPRITE_RIGHT_ARROW)];
+    cursor->data[0] = y;
+}
+
+static u32 MartSprite_GetCategoryCursorCoord(void)
+{
+    struct Sprite *cursor = &gSprites[ShopSprite_GetSpriteId(SHOP_SPRITE_RIGHT_ARROW)];
+    return cursor->data[0];
+}
+
 static void SpriteCB_BuyIcon(struct Sprite *sprite)
 {
     u32 xCursor = ShopGrid_GetGridXCursor(),
@@ -582,7 +601,10 @@ static void SpriteCB_LeftArrow(struct Sprite *sprite)
 
 static void SpriteCB_RightArrow(struct Sprite *sprite)
 {
-    sprite->invisible = TRUE;
+    u32 yIdx = sprite->data[0];
+
+    sprite->y2 = (yIdx * 26);
+    sprite->invisible = (gShopMenuDataPtr->buyScreen);
 }
 
 static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
