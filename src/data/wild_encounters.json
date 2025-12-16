@@ -27352,6 +27352,438 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_OROLAND",
+          "base_label": "gOroland_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_OROLAND",
+          "base_label": "gOroland_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_OROLAND",
+          "base_label": "gOroland_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              }
+            ]
           }
         },
         {
