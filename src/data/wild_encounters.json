@@ -26933,6 +26933,111 @@
         {
           "map": "MAP_OROLAND",
           "base_label": "gOroland_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 39,
+                "species": "SPECIES_GLAMEOW"
+              }
+            ]
+          },
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -27350,111 +27455,6 @@
                 "min_level": 77,
                 "max_level": 81,
                 "species": "SPECIES_TOGEKISS"
-              }
-            ]
-          },
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_VAROOM"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
-              },
-              {
-                "min_level": 39,
-                "max_level": 39,
-                "species": "SPECIES_GLAMEOW"
               }
             ]
           }
@@ -41877,6 +41877,111 @@
         {
           "map": "MAP_OROLAND_COLISEUM_OUTSIDE",
           "base_label": "gOrolandColiseum_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_DOUBLADE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_DOUBLADE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              }
+            ]
+          },
           "berry_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -42084,6 +42189,333 @@
                 "min_level": 77,
                 "max_level": 81,
                 "species": "SPECIES_TOGEKISS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_OROLAND_COLISEUM_OUTSIDE",
+          "base_label": "gOrolandColiseum_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_DOUBLADE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_DOUBLADE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_OROLAND_COLISEUM_OUTSIDE",
+          "base_label": "gOrolandColiseum_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_OROLAND_COLISEUM_OUTSIDE",
+          "base_label": "gOrolandColiseum_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 34,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GOLETT"
               }
             ]
           }
