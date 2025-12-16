@@ -472,10 +472,10 @@ static void MartHelper_LRInput(s32 delta)
     }
     else if (!trueIdx && !additiveDelta)
     {
-        ShopGrid_SetCurrentCategoryIndex(numItems + delta);
+        ShopGrid_SetCurrentCategoryIndex(numItems);
         if (scroll)
         {
-            ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1) + delta);
+            ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1));
         }
     }
     else
