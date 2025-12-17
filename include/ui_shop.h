@@ -38,5 +38,6 @@ u32 ShopGrid_GetYHalfScreen(void);
 u32 ShopInventory_GetItemIdFromGrid(u32, u32);
 u32 ShopInventory_GetChosenItemId(void);
 u32 ShopSprite_GetSpriteId(enum ShopMenuSprites);
+u32 ShopSprite_GetItemSpriteId(u32);
 
 #endif // GUARD_UI_SHOP_H

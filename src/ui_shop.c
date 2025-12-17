@@ -1,6 +1,7 @@
 #include "global.h"
 #include "ui_shop.h"
 #include "ui_presto.h"
+#include "ui_character_customization_menu.h"
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
@@ -361,7 +362,6 @@ static void CB2_ShopSetup(void)
         break;
     case SHOP_SETUP_FADE:
         CreateTask(Task_Shop_WaitFadeInAndGoIdle, 0);
-        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
@@ -395,7 +395,8 @@ static void VBlankCB_ShopMenu(void)
 
 static void ShopSetup_Backgrounds(void)
 {
-    ResetAllBgsCoordinates();
+    ResetVramOamAndBgCntRegs();
+    ResetAllBgsCoordinatesAndBgCntRegs();
     sShopMenuStaticDataPtr->tilemapBuf = AllocZeroed(BG_SCREEN_SIZE);
     if (!sShopMenuStaticDataPtr->tilemapBuf)
     {
@@ -404,6 +405,10 @@ static void ShopSetup_Backgrounds(void)
     }
 
     ResetBgsAndClearDma3BusyFlags(0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
     InitBgsFromTemplates(0, sShopBgTemplates, NELEMS(sShopBgTemplates));
     SetBgTilemapBuffer(SHOP_BG_TILEMAP, sShopMenuStaticDataPtr->tilemapBuf);
     ScheduleBgCopyTilemapToVram(SHOP_BG_DESC);
@@ -637,21 +642,31 @@ static void Task_Shop_Idle(u8 taskId)
     }
 }
 
+extern bool32 PokeMart_IsActive(void);
 static void ShopSprite_CreateGenericSprites(void)
 {
     for (u32 i = 0; i < NUM_SHOP_SPRITES; i++)
     {
+        u32 palTag = TAG_SHOP_MENU_UI;
+        bool32 usePlayerPal = PokeMart_IsActive() && i == SHOP_SPRITE_BUY_ICON;
+
+        if (usePlayerPal)
+        {
+            palTag = OBJ_EVENT_PAL_TAG_SILICON;
+        }
+
         const struct ShopSprite *template = &sShopSprites[i];
         const struct ShopSpriteConfigs *configs = &ShopConfig_Get()->sprites[i];
 
         struct SpriteTemplate spriteTemplate = sShopSpriteTemplate;
+        spriteTemplate.paletteTag = palTag;
 
         struct CompressedSpriteSheet sheet = { configs->gfx, template->size, template->tileTag };
 
         LoadCompressedSpriteSheet(&sheet);
         spriteTemplate.tileTag = template->tileTag;
 
-        struct SpritePalette palette = { ShopGraphics_GetByType(SHOP_GFX_PALETTE), TAG_SHOP_MENU_UI };
+        struct SpritePalette palette = { ShopGraphics_GetByType(SHOP_GFX_PALETTE), palTag };
         LoadSpritePalette(&palette);
 
         struct OamData oamData = gDummyOamData;
@@ -670,6 +685,10 @@ static void ShopSprite_CreateGenericSprites(void)
 
         u32 spriteId = CreateSprite(&spriteTemplate, configs->x, configs->y, template->priority);
         sShopMenuStaticDataPtr->spriteIds[template->idx] = spriteId;
+        if (usePlayerPal)
+        {
+            SetPlayerPalette(palTag, &gSprites[spriteId]);
+        }
 
         // store original x/y. useful for later.
         gSprites[spriteId].data[1] = configs->x;
@@ -680,6 +699,11 @@ static void ShopSprite_CreateGenericSprites(void)
 u32 ShopSprite_GetSpriteId(enum ShopMenuSprites id)
 {
     return sShopMenuStaticDataPtr->spriteIds[id];
+}
+
+u32 ShopSprite_GetItemSpriteId(u32 idx)
+{
+    return sShopMenuStaticDataPtr->itemIconIds[idx];
 }
 
 static void ShopSprite_CreateItemSprite(u16 itemId, u8 idx, u8 x, u8 y)
@@ -693,6 +717,10 @@ static void ShopSprite_CreateItemSprite(u16 itemId, u8 idx, u8 x, u8 y)
     gSprites[spriteId].x2 = x;
     gSprites[spriteId].y2 = y;
     gSprites[spriteId].oam.priority = 1;
+    if (PokeMart_IsActive() && idx >= ShopConfig_GetTotalShownItems())
+    {
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+    }
 
     sShopMenuStaticDataPtr->itemIconIds[spriteIdx] = spriteId;
 }
