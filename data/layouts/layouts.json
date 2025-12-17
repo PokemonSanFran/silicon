@@ -8448,6 +8448,30 @@
       "secondary_tileset": "gTileset_Facility",
       "border_filepath": "data/layouts/NavalBaseExterior/border.bin",
       "blockdata_filepath": "data/layouts/NavalBaseExterior/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHAPEL_OF_CHIMES_INTERIOR",
+      "name": "ChapelOfChimes_Interior_Layout",
+      "width": 20,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChapelOfChimes_Interior/border.bin",
+      "blockdata_filepath": "data/layouts/ChapelOfChimes_Interior/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHAPEL_OF_CHIMES_END",
+      "name": "ChapelOfChimes_End_Layout",
+      "width": 20,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ChapelOfChimes_End/border.bin",
+      "blockdata_filepath": "data/layouts/ChapelOfChimes_End/map.bin"
     }
   ]
 }

@@ -1657,3 +1657,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/HalerbaCity_GymA/scripts.inc"
 
 	.include "data/maps/NavalBaseExterior/scripts.inc"
+
+	.include "data/maps/ChapelOfChimes_Interior/scripts.inc"
+
+	.include "data/maps/ChapelOfChimes_End/scripts.inc"

@@ -763,7 +763,9 @@
     "MeteorFalls_StevensCave",
     "SharpriseStadium_Construction",
     "HalerbaWilds",
-    "HalerbaWilds_Spring"
+    "HalerbaWilds_Spring",
+    "ChapelOfChimes_Interior",
+    "ChapelOfChimes_End"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

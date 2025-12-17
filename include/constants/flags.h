@@ -1628,7 +1628,7 @@
 #define FLAG_VISITED_HALERBAWILDS_SOUTH                          (SYSTEM_FLAGS + 0xB6) // Silicon Flag
 #define FLAG_SYS_APP_WAVES_OF_CHANGE_GET            (SYSTEM_FLAGS + 0xB7) // Silicon Flag
 #define FLAG_SYS_APP_GOOGLE_GLASS_GET               (SYSTEM_FLAGS + 0xB8) // Silicon Flag
-#define FLAG_UNUSED_0x919                           (SYSTEM_FLAGS + 0xB9) // Unused Flag
+#define FLAG_VISITED_CHAPEL_CHIMES                  (SYSTEM_FLAGS + 0xB9) // Silicon Flag
 #define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag
 #define FLAG_UNUSED_0x91B                           (SYSTEM_FLAGS + 0xBB) // Unused Flag
 #define FLAG_UNUSED_0x91C                           (SYSTEM_FLAGS + 0xBC) // Unused Flag
