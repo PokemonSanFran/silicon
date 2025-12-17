@@ -37192,6 +37192,438 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_LUXIO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_LUXIO"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE98",
+          "base_label": "gRoute98_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_LUXIO"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_LUXIO"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE98",
+          "base_label": "gRoute98_NIght",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE98",
+          "base_label": "gRoute98_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_VAROOM"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_KRICKETOT"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_KRICKETUNE"
+              }
+            ]
           }
         },
         {
@@ -55465,6 +55897,878 @@
                 "min_level": 38,
                 "max_level": 38,
                 "species": "SPECIES_SHUCKLE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
+          "base_label": "gChapelOfChimes_Interior_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
+          "base_label": "gChapelOfChimes_Interior_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
+          "base_label": "gChapelOfChimes_Interior_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
+          "base_label": "gChapelOfChimes_Interior_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_YAMASK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_END",
+          "base_label": "gChapelOfChimes_End_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_END",
+          "base_label": "gChapelOfChimes_End_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_END",
+          "base_label": "gChapelOfChimes_End_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CHAPEL_OF_CHIMES_END",
+          "base_label": "gChapelOfChimes_End_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_MUSHARNA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 36,
+                "species": "SPECIES_KADABRA"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 35,
+                "species": "SPECIES_MISDREAVUS"
               }
             ]
           }
