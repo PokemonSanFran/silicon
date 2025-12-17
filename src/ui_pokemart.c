@@ -47,7 +47,7 @@
 #include "constants/party_menu.h"
 
 // constants
-#define MART_KEEPER_ICON    FALSE // PSF TODO disable/remove related code if we decide to deprecate this
+#define MART_KEEPER_ICON    TRUE // PSF TODO disable/remove related code if we decide to deprecate this
 
 #define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
 #define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
@@ -160,8 +160,13 @@ static void FieldCB_MartReload_PrepareInterface(void);
 
 static void MartHelper_UpdateFrontEnd(void);
 
+static void MartPrint_PlayersMoney(void);
+static void MartPrint_Category(void);
+static void MartPrint_ItemInfo(void);
+
 static u32 MartPurchase_GetTotalItemPrice(u16, u16);
 
+static void MartSprite_Init(void);
 static void MartSprite_SetCategoryArrowSpriteId(u32);
 static u32 MartSprite_GetCategoryArrowSpriteId(void);
 
@@ -417,10 +422,11 @@ static void Task_MartInterface_HandleQuit(u8 taskId)
     UnlockPlayerFieldControls();
     ScriptContext_Enable();
 
-    sPokeMartData.winId = WINDOW_NONE;
     #if MART_KEEPER_ICON == TRUE
     MartSprite_SetKeeperSpriteId(SPRITE_NONE);
     #endif
+
+    sPokeMartData.winId = WINDOW_NONE;
     MartSprite_SetCategoryArrowSpriteId(SPRITE_NONE);
     sPokeMartData.input = MART_INPUT_BUY;
     sPokeMartData.active = FALSE;
@@ -479,44 +485,11 @@ static void FieldCB_MartReload_PrepareInterface(void)
     CreateTask(Task_MartReload_WaitForFade, 0);
 }
 
-static inline void MartPrint_Category(void)
-{
-    const u8 *str = gShopCategoryNames[ShopGrid_CurrentCategoryRow()];
-    u32 fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(8));
-    u32 x = TILE_TO_PIXELS(1) + GetStringCenterAlignXOffset(fontId, str, TILE_TO_PIXELS(8));
-    u32 y = TILE_TO_PIXELS(2) - 3;
-
-    ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
-}
-
 static void MartHelper_UpdateFrontEnd(void)
 {
-    const u8 *str;
-    u32 fontId, x, y;
-
     if (gMain.state)
     {
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 0));
-
-        LoadCompressedSpriteSheet(&sPokeMart_CategoryArrowSpriteSheet);
-        MartSprite_SetCategoryArrowSpriteId(
-            CreateSprite(&sPokeMart_CategoryArrowSpriteTemplate, MART_CATEGORY_ARROW_X, MART_CATEGORY_ARROW_Y, 0));
-
-        #if MART_KEEPER_ICON == TRUE
-        LoadCompressedSpriteSheet(&sPokeMart_KeeperSpriteSheet);
-        LoadSpritePalette(&sPokeMart_KeeperSpritePalette);
-        MartSprite_SetKeeperSpriteId(CreateSprite(&sPokeMart_KeeperSpriteTemplate, MART_KEEPER_X, MART_KEEPER_Y, 0));
-
-        if (MartSprite_GetKeeperSpriteId() != SPRITE_NONE)
-        {
-            struct Sprite *keeper = &gSprites[MartSprite_GetKeeperSpriteId()];
-
-            keeper->sKeeper_StartingTileNum = keeper->oam.tileNum;
-            MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_WAIT);
-            MartSprite_SetKeeperAnim(MART_KEEPER_ANIM_IDLE);
-        }
-        #endif // MART_KEEPER_ICON
+        MartSprite_Init();
 
         struct WindowTemplate winTemp =
         {
@@ -540,51 +513,109 @@ static void MartHelper_UpdateFrontEnd(void)
     MartSprite_SetKeeperAnim(MART_KEEPER_ANIM_TALK);
     #endif // MART_KEEPER_ICON
 
-    str = COMPOUND_STRING("Money:");
-    fontId = FONT_SMALL_NARROW;
-    x = TILE_TO_PIXELS(1);
-    y = TILE_TO_PIXELS(0);
+    ShopPrint_HelpBar();
+    MartPrint_PlayersMoney();
+    MartPrint_Category();
+    MartPrint_ItemInfo();
+}
+
+static void MartPrint_PlayersMoney(void)
+{
+    const u8 *str = COMPOUND_STRING("Money:");
+    u32 fontId = FONT_SMALL_NARROW;
+    u32 x = TILE_TO_PIXELS(1);
+    u32 y = TILE_TO_PIXELS(0);
+
     ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
 
     ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("¥ {STR_VAR_1}"));
+
     str = gStringVar4;
-    fontId = FONT_SMALL_NARROW;
     x = TILE_TO_PIXELS(1) + GetStringRightAlignXOffset(fontId, str, TILE_TO_PIXELS(12));
     y = TILE_TO_PIXELS(0);
-    ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
 
+    ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
+}
+
+static void MartPrint_Category(void)
+{
+    const u8 *str = gShopCategoryNames[ShopGrid_CurrentCategoryRow()];
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(8));
+    u32 x = TILE_TO_PIXELS(1) + GetStringCenterAlignXOffset(fontId, str, TILE_TO_PIXELS(8));
+    u32 y = TILE_TO_PIXELS(2) - 3;
+
+    ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
+}
+
+static void MartPrint_ItemInfo(void)
+{
     u32 itemId = ShopInventory_GetChosenItemId();
+    const u8 *str = NULL;
+    u32 fontId, x, y, speed = (gMain.state || MART_KEEPER_ICON == FALSE) ? 0 : GetPlayerTextSpeedDelay();
 
     str = GetItemName(itemId);
     fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(8));
     x = TILE_TO_PIXELS(1) + GetStringCenterAlignXOffset(fontId, str, TILE_TO_PIXELS(8));
     y = TILE_TO_PIXELS(8) + 4;
+
     ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
 
     ConvertIntToDecimalStringN(gStringVar1, MartPurchase_GetTotalItemPrice(itemId, 0), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("¥ {STR_VAR_1}"));
+
     str = gStringVar4;
     fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(8));
     x = TILE_TO_PIXELS(1) + GetStringCenterAlignXOffset(fontId, str, TILE_TO_PIXELS(8));
     y += TILE_TO_PIXELS(1) + 4;
+
     ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
 
-    MartPrint_Category();
-    ShopPrint_HelpBar();
+    // don't print when shopkeeper's text is loaded
+    if (gShopMenuDataPtr->buyScreen)
+    {
+        return;
+    }
 
     FillWindowPixelBuffer(sPokeMartData.winId, PIXEL_FILL(0));
+
     str = GetItemDescription(itemId);
     fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(MART_DESC_WIN_WIDTH));
     x = TILE_TO_PIXELS(0);
     y = TILE_TO_PIXELS(0);
-    u32 speed = (gMain.state || MART_KEEPER_ICON == FALSE) ? 0 : GetPlayerTextSpeedDelay();
+
     AddTextPrinterParameterized4(sPokeMartData.winId, fontId, x, y, 0, 0, ShopConfig_GetFontColors(SHOP_FNTCLR_PRIMARY), speed, str);
 }
 
 static u32 MartPurchase_GetTotalItemPrice(u16 itemId, u16 quantity)
 {
     return (quantity + 1) * GetItemPrice(itemId);
+}
+
+static void MartSprite_Init(void)
+{
+    // enables darken coloring for item sprites
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 0));
+
+    LoadCompressedSpriteSheet(&sPokeMart_CategoryArrowSpriteSheet);
+    MartSprite_SetCategoryArrowSpriteId(
+        CreateSprite(&sPokeMart_CategoryArrowSpriteTemplate, MART_CATEGORY_ARROW_X, MART_CATEGORY_ARROW_Y, 0));
+
+    #if MART_KEEPER_ICON == TRUE
+    LoadCompressedSpriteSheet(&sPokeMart_KeeperSpriteSheet);
+    LoadSpritePalette(&sPokeMart_KeeperSpritePalette);
+    MartSprite_SetKeeperSpriteId(CreateSprite(&sPokeMart_KeeperSpriteTemplate, MART_KEEPER_X, MART_KEEPER_Y, 0));
+
+    if (MartSprite_GetKeeperSpriteId() != SPRITE_NONE)
+    {
+        struct Sprite *keeper = &gSprites[MartSprite_GetKeeperSpriteId()];
+
+        keeper->sKeeper_StartingTileNum = keeper->oam.tileNum;
+        MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_WAIT);
+        MartSprite_SetKeeperAnim(MART_KEEPER_ANIM_IDLE);
+    }
+    #endif // MART_KEEPER_ICON
 }
 
 static void MartSprite_SetCategoryArrowSpriteId(u32 spriteId)
