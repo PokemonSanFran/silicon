@@ -110,6 +110,16 @@ enum ShopMenuResetIdxTypes
     SHOP_IDX_RESET_ALL = (SHOP_IDX_RESET_CATEGORY | SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_Y_GRID)
 };
 
+enum ShopMenuModes
+{
+    SHOP_MODE_DEFAULT = 0,
+    SHOP_MODE_PURCHASE,
+    SHOP_MODE_SUCCESS,
+    SHOP_MODE_FAILURE,
+
+    NUM_SHOP_MODES
+};
+
 struct ShopSpriteConfigs
 {
     const u32 *gfx;
@@ -146,12 +156,9 @@ struct ShopMenuData
     const struct ShopMenuConfigs *configs;
     const u16 *products;
     MainCallback savedCallback;
+    enum ShopMenuModes mode;
 
-    u8 notEnoughMoneyWindow:1;
     u8 sortCategories:1;
-    u8 buyScreen:1;
-    u8 buyWindow:1;
-
     u8 categoryIdx:4;
     u8 firstCategory;
     u8 itemIdx, firstItem;

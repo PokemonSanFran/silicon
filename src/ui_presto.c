@@ -317,114 +317,128 @@ static inline void PrestoPrint_ItemPrice(void)
 static void PrestoHelper_UpdateFrontEnd(void)
 {
     u32 x, y, x2;
+    enum ShopMenuModes mode = ShopHelper_GetMode();
 
-    if (!gShopMenuDataPtr->buyScreen)
+    switch (mode)
     {
-        if (sPrestoItemIconSpriteId != SPRITE_NONE)
+    default:
+    case SHOP_MODE_DEFAULT:
         {
-            gSprites[sPrestoItemIconSpriteId].invisible = TRUE;
-            DestroySprite(&gSprites[sPrestoItemIconSpriteId]);
-            sPrestoItemIconSpriteId = SPRITE_NONE;
+            if (sPrestoItemIconSpriteId != SPRITE_NONE)
+            {
+                gSprites[sPrestoItemIconSpriteId].invisible = TRUE;
+                DestroySprite(&gSprites[sPrestoItemIconSpriteId]);
+                sPrestoItemIconSpriteId = SPRITE_NONE;
+            }
+
+            PrestoBlit_SelectedItem();
+            PrestoPrint_Categories();
+            PrestoPrint_ItemPrice();
+
+            break;
         }
-
-        PrestoBlit_SelectedItem();
-        PrestoPrint_Categories();
-        PrestoPrint_ItemPrice();
-    }
-    else
-    {
-        u32 itemId = gShopMenuDataPtr->selectedItemId;
-
-        if (sPrestoItemIconSpriteId == SPRITE_NONE)
+    case SHOP_MODE_PURCHASE ... SHOP_MODE_FAILURE:
         {
-            x = 3, y = 6;
+            u32 itemId = gShopMenuDataPtr->selectedItemId;
 
-            u32 selectedSpriteIdx = ShopGrid_GetGridXCursor();
-            u32 spriteId = AddItemIconSprite(selectedSpriteIdx, selectedSpriteIdx, itemId);
+            if (sPrestoItemIconSpriteId == SPRITE_NONE)
+            {
+                x = 3, y = 6;
 
-            gSprites[spriteId].x2 = TILE_TO_PIXELS(x);
-            gSprites[spriteId].y2 = TILE_TO_PIXELS(y);
-            gSprites[spriteId].oam.priority = 0;
+                u32 selectedSpriteIdx = ShopGrid_GetGridXCursor();
+                u32 spriteId = AddItemIconSprite(selectedSpriteIdx, selectedSpriteIdx, itemId);
 
-            sPrestoItemIconSpriteId = spriteId;
-        }
+                gSprites[spriteId].x2 = TILE_TO_PIXELS(x);
+                gSprites[spriteId].y2 = TILE_TO_PIXELS(y);
+                gSprites[spriteId].oam.priority = 0;
 
-        x = 1, y = 2;
-        u32 quantity = CountTotalItemQuantityInBag(itemId);
-        StringCopy(gStringVar1, GetItemName(itemId));
-        ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, sText_ItemNameOwned);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
+                sPrestoItemIconSpriteId = spriteId;
+            }
 
-        x = 25, y = 2;
-        ConvertIntToDecimalStringN(gStringVar1, GetItemPrice(itemId), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
-        StringExpandPlaceholders(gStringVar4, sText_ItemPrice);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
-
-        // why is this one use FONT_SHORT_COPY_3
-        x = 5, y = 4;
-        ShopPrint_AddTextPrinter(FONT_SHORT_COPY_3, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, GetItemDescription(itemId));
-
-        x = 16, y = 10;
-        quantity = (gShopMenuDataPtr->itemQuantity + 1) * GetItemPrice(itemId);
-        ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
-        StringExpandPlaceholders(gStringVar4, sText_ItemCost);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
-
-        if (PrestoHelper_GetShopType() == PRESTO_TYPE_APP)
-        {
-            x = 16, y = 12;
-            quantity = PrestoPurchase_GetItemPrice(itemId, gShopMenuDataPtr->itemQuantity, PRESTO_PRICE_DRONE);
-
-            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
-            StringExpandPlaceholders(gStringVar4, sText_DroneFee);
-            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
-        }
-
-        x = 16, y = PrestoHelper_GetShopType() == PRESTO_TYPE_APP ? 14 : 12;
-        quantity = ShopConfig_Get()->handleTotalPrice(itemId, gShopMenuDataPtr->itemQuantity);
-        ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
-        StringExpandPlaceholders(gStringVar4, sText_OrderTotal);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
-
-        x = 12, y = 12;
-        quantity = gShopMenuDataPtr->itemQuantity + 1;
-        ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 5);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar1);
-
-        x = 1, y = 16, x2 = 4;
-        GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
-        StringCopy_PlayerName(gStringVar2, gSaveBlock2Ptr->playerName);
-        StringExpandPlaceholders(gStringVar4, sText_DeliveryTo);
-        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
-
-        if (gShopMenuDataPtr->buyWindow && !gShopMenuDataPtr->notEnoughMoneyWindow)
-        {
-            x = 5, y = 5;
-            BlitBitmapToWindow(SHOP_WINDOW_MAIN, sOrderWindow, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), 152, 72);
-
-            x = 6, y = 5, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_OrderDelivered, TILE_TO_PIXELS(16));
-            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, sText_OrderDelivered);
-
-            y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_ThanksForBuying, TILE_TO_PIXELS(16));
-            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_ThanksForBuying);
-
-            y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_YouGot, TILE_TO_PIXELS(16));
-            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_YouGot);
-
-            y += 2;
+            x = 1, y = 2;
+            u32 quantity = CountTotalItemQuantityInBag(itemId);
             StringCopy(gStringVar1, GetItemName(itemId));
-            ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 2);
-            StringExpandPlaceholders(gStringVar4, sText_ItemNumber);
-            x2 = GetStringCenterAlignXOffset(FONT_NARROW, gStringVar4, TILE_TO_PIXELS(16));
-            ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
-        }
-        else if (!gShopMenuDataPtr->buyWindow && gShopMenuDataPtr->notEnoughMoneyWindow)
-        {
-            ShopPrint_AddTextPrinter(FONT_SMALL_NARROWER,
-                                    TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18),
-                                    SHOP_FNTCLR_SECONDARY,
-                                    COMPOUND_STRING("Your account has been declined for insufficient funds!"));
+            ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 4);
+            StringExpandPlaceholders(gStringVar4, sText_ItemNameOwned);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
+
+            x = 25, y = 2;
+            ConvertIntToDecimalStringN(gStringVar1, GetItemPrice(itemId), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+            StringExpandPlaceholders(gStringVar4, sText_ItemPrice);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
+
+            // why is this one use FONT_SHORT_COPY_3
+            x = 5, y = 4;
+            ShopPrint_AddTextPrinter(FONT_SHORT_COPY_3, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, GetItemDescription(itemId));
+
+            x = 16, y = 10;
+            quantity = (gShopMenuDataPtr->itemQuantity + 1) * GetItemPrice(itemId);
+            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+            StringExpandPlaceholders(gStringVar4, sText_ItemCost);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+
+            if (PrestoHelper_GetShopType() == PRESTO_TYPE_APP)
+            {
+                x = 16, y = 12;
+                quantity = PrestoPurchase_GetItemPrice(itemId, gShopMenuDataPtr->itemQuantity, PRESTO_PRICE_DRONE);
+
+                ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+                StringExpandPlaceholders(gStringVar4, sText_DroneFee);
+                ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+            }
+
+            x = 16, y = PrestoHelper_GetShopType() == PRESTO_TYPE_APP ? 14 : 12;
+            quantity = ShopConfig_Get()->handleTotalPrice(itemId, gShopMenuDataPtr->itemQuantity);
+            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+            StringExpandPlaceholders(gStringVar4, sText_OrderTotal);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+
+            x = 12, y = 12;
+            quantity = gShopMenuDataPtr->itemQuantity + 1;
+            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 5);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar1);
+
+            x = 1, y = 16, x2 = 4;
+            GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
+            StringCopy_PlayerName(gStringVar2, gSaveBlock2Ptr->playerName);
+            StringExpandPlaceholders(gStringVar4, sText_DeliveryTo);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+
+            // stop here if we're still purchase mode
+            if (mode == SHOP_MODE_PURCHASE)
+            {
+                break;
+            }
+            else if (mode == SHOP_MODE_SUCCESS)
+            {
+                x = 5, y = 5;
+                BlitBitmapToWindow(SHOP_WINDOW_MAIN, sOrderWindow, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), 152, 72);
+
+                x = 6, y = 5, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_OrderDelivered, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, sText_OrderDelivered);
+
+                y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_ThanksForBuying, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_ThanksForBuying);
+
+                y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_YouGot, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_YouGot);
+
+                y += 2;
+                StringCopy(gStringVar1, GetItemName(itemId));
+                ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 2);
+                StringExpandPlaceholders(gStringVar4, sText_ItemNumber);
+                x2 = GetStringCenterAlignXOffset(FONT_NARROW, gStringVar4, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+            }
+            else if (mode == SHOP_MODE_FAILURE)
+            {
+                ShopPrint_AddTextPrinter(FONT_SMALL_NARROWER,
+                                        TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18),
+                                        SHOP_FNTCLR_SECONDARY,
+                                        COMPOUND_STRING("Your account has been declined for insufficient funds!"));
+            }
+
+            break;
         }
     }
 
@@ -460,7 +474,7 @@ static void SpriteCB_BuyIcon(struct Sprite *sprite)
     }
 
     sprite->x2 = TILE_TO_PIXELS(x) + x2;
-    sprite->invisible = (gShopMenuDataPtr->buyScreen);
+    sprite->invisible = (ShopHelper_IsPurchaseMode());
 }
 
 static void SpriteCB_UpArrow(struct Sprite *sprite)
@@ -469,7 +483,7 @@ static void SpriteCB_UpArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen || !ShopGrid_GetGridYCursor());
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || !ShopGrid_GetGridYCursor());
 }
 
 static void SpriteCB_DownArrow(struct Sprite *sprite)
@@ -478,7 +492,7 @@ static void SpriteCB_DownArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
      || ShopGrid_GetGridYCursor() == ShopConfig_GetTotalShownCategories() - 1);
 }
 
@@ -492,7 +506,7 @@ static void SpriteCB_LeftArrow(struct Sprite *sprite)
     sprite->x2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen || !ShopGrid_GetGridXCursor());
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || !ShopGrid_GetGridXCursor());
 }
 
 static void SpriteCB_RightArrow(struct Sprite *sprite)
@@ -505,7 +519,7 @@ static void SpriteCB_RightArrow(struct Sprite *sprite)
     sprite->x2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
      || ShopGrid_GetGridXCursor() == ShopConfig_GetTotalShownItems() - 1);
 }
 
@@ -515,10 +529,9 @@ static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
 
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
-    sprite->invisible = (!gShopMenuDataPtr->buyScreen
+    sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
      || gShopMenuDataPtr->itemQuantity == (gShopMenuDataPtr->maxItemQuantity - 1)
-     || (gShopMenuDataPtr->itemQuantity == 0 && gShopMenuDataPtr->maxItemQuantity == 0)
-     || gShopMenuDataPtr->buyWindow);
+     || (gShopMenuDataPtr->itemQuantity == 0 && gShopMenuDataPtr->maxItemQuantity == 0));
 }
 
 static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
@@ -528,7 +541,6 @@ static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    sprite->invisible = (!gShopMenuDataPtr->buyScreen
-     || gShopMenuDataPtr->itemQuantity == 0
-     || gShopMenuDataPtr->buyWindow);
+    sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
+     || gShopMenuDataPtr->itemQuantity == 0);
 }

@@ -572,7 +572,7 @@ static void MartPrint_ItemInfo(void)
     ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
 
     // don't print when shopkeeper's text is loaded
-    if (gShopMenuDataPtr->buyScreen)
+    if (ShopHelper_IsPurchaseMode())
     {
         return;
     }
@@ -666,7 +666,7 @@ static void SpriteCB_UpArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen || !ShopGrid_GetGridYCursor());
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || !ShopGrid_GetGridYCursor());
 }
 
 static void SpriteCB_DownArrow(struct Sprite *sprite)
@@ -675,7 +675,7 @@ static void SpriteCB_DownArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
      || ShopGrid_GetGridYCursor() == ShopConfig_GetTotalShownCategories() - 1);
 }
 
@@ -690,7 +690,7 @@ static void SpriteCB_LeftArrow(struct Sprite *sprite)
     u32 shownItems = (ShopConfig_GetTotalShownItems() - 1);
     bool32 scroll = categoryNumItems > shownItems;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen || (scroll && ShopGrid_GetCurrentItemIndex() <= halfScreen));
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || (scroll && ShopGrid_GetCurrentItemIndex() <= halfScreen));
 }
 
 static void SpriteCB_RightArrow(struct Sprite *sprite)
@@ -705,7 +705,7 @@ static void SpriteCB_RightArrow(struct Sprite *sprite)
     u32 finalHalfScreen = categoryNumItems - (shownItems - halfScreen);
     bool32 scroll = categoryNumItems > shownItems;
 
-    sprite->invisible = (gShopMenuDataPtr->buyScreen || (scroll && ShopGrid_GetCurrentItemIndex() >= finalHalfScreen));
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || (scroll && ShopGrid_GetCurrentItemIndex() >= finalHalfScreen));
 }
 
 static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
@@ -714,10 +714,9 @@ static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
 
-    sprite->invisible = (!gShopMenuDataPtr->buyScreen
+    sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
      || gShopMenuDataPtr->itemQuantity == (gShopMenuDataPtr->maxItemQuantity - 1)
-     || (gShopMenuDataPtr->itemQuantity == 0 && gShopMenuDataPtr->maxItemQuantity == 0)
-     || gShopMenuDataPtr->buyWindow);
+     || (gShopMenuDataPtr->itemQuantity == 0 && gShopMenuDataPtr->maxItemQuantity == 0));
 }
 
 static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
@@ -726,9 +725,8 @@ static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
 
-    sprite->invisible = (!gShopMenuDataPtr->buyScreen
-     || gShopMenuDataPtr->itemQuantity == 0
-     || gShopMenuDataPtr->buyWindow);
+    sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
+     || gShopMenuDataPtr->itemQuantity == 0);
 }
 
 #if MART_KEEPER_ICON == TRUE
@@ -757,5 +755,5 @@ static void SpriteCB_CategoryArrow(struct Sprite *sprite)
     sprite->sArrow_SineValue += 8;
 
     sprite->y2 = ShopGrid_GetGridYCursor() * 26;
-    sprite->invisible = (gShopMenuDataPtr->buyScreen);
+    sprite->invisible = ShopHelper_IsProcessingPurchaseMode();
 }

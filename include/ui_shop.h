@@ -9,6 +9,11 @@ extern const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES];
 extern struct ShopMenuData *gShopMenuDataPtr;
 
 void ShopMenu_Init(const struct ShopMenuConfigs *, const u16 *, MainCallback);
+void ShopHelper_SetMode(enum ShopMenuModes);
+u32 ShopHelper_GetMode(void);
+bool32 ShopHelper_IsProcessingPurchaseMode(void);
+bool32 ShopHelper_IsPurchaseMode(void);
+bool32 ShopHelper_IsPurchaseDone(void);
 enum ShopMenuCategories ShopGrid_CategoryInRow(u8);
 enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
 void ShopPrint_AddTextPrinter(u32, u32, u32, enum ShopMenuFontColors, const u8 *);

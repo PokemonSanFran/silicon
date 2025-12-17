@@ -108,7 +108,7 @@ static void ShopSprite_CreateGenericSprites(void);
 static void ShopSprite_CreateItemSprite(u16, u8, u8, u8);
 static void ShopSprite_CreateItemSprites(void);
 static void ShopSprite_DestroyItemSprites(void);
-static void ShopSprite_ToggleItemIconsVisibility(void);
+static void ShopSprite_ToggleItemIconsVisibility(bool32);
 
 static void ShopInventory_InitCategoryLists(void);
 static void ShopInventory_InitRecommendedList(void);
@@ -128,7 +128,7 @@ static void ShopPurchase_CalculateMaxQuantity(void);
 static bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories);
 static void ShopPurchase_AddItem(u16, u16);
 
-static void ShopGrid_SwitchMode(void);
+static void ShopGrid_SwitchMode(enum ShopMenuModes);
 static void ShopGrid_VerticalInput(s32);
 static void ShopGrid_HorizontalInput(s32);
 static u32 ShopGrid_RowInCategory(enum ShopMenuCategories);
@@ -139,6 +139,8 @@ static void ShopBlit_Category(enum ShopMenuCategories, u32, u32);
 static inline void ShopBlit_Categories(void);
 
 static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType);
+
+extern bool32 PokeMart_IsActive(void);
 
 // const data
 static const struct BgTemplate sShopBgTemplates[NUM_SHOP_BGS] =
@@ -443,7 +445,7 @@ static void ShopHelper_UpdateFrontEnd(void)
 {
     FillWindowPixelBuffer(SHOP_WINDOW_MAIN, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    if (!gShopMenuDataPtr->buyScreen)
+    if (!ShopHelper_IsPurchaseMode() || PokeMart_IsActive())
     {
         ShopBlit_Categories();
         ShopSprite_CreateItemSprites();
@@ -452,8 +454,6 @@ static void ShopHelper_UpdateFrontEnd(void)
     ShopPrint_HelpBar();
     ShopConfig_Get()->handleFrontend();
     CopyWindowToVram(SHOP_WINDOW_MAIN, COPYWIN_GFX);
-
-    gShopMenuDataPtr->notEnoughMoneyWindow = FALSE;
 }
 
 static void ShopHelper_BailExit(void)
@@ -471,6 +471,31 @@ static void ShopHelper_FreeResources(void)
     TRY_FREE_AND_SET_NULL(sShopMenuStaticDataPtr);
     TRY_FREE_AND_SET_NULL(gShopMenuDataPtr);
     FreeAllWindowBuffers();
+}
+
+void ShopHelper_SetMode(enum ShopMenuModes mode)
+{
+    gShopMenuDataPtr->mode = mode;
+}
+
+u32 ShopHelper_GetMode(void)
+{
+    return gShopMenuDataPtr->mode;
+}
+
+bool32 ShopHelper_IsProcessingPurchaseMode(void)
+{
+    return gShopMenuDataPtr->mode == SHOP_MODE_PURCHASE;
+}
+
+bool32 ShopHelper_IsPurchaseMode(void)
+{
+    return gShopMenuDataPtr->mode >= SHOP_MODE_PURCHASE;
+}
+
+bool32 ShopHelper_IsPurchaseDone(void)
+{
+    return gShopMenuDataPtr->mode >= SHOP_MODE_SUCCESS;
 }
 
 static void Task_Shop_WaitFadeInAndGoIdle(u8 taskId)
@@ -493,92 +518,105 @@ static void Task_Shop_WaitFadeAndExit(u8 taskId)
 
 static void Task_Shop_Idle(u8 taskId)
 {
+    enum ShopMenuModes mode = ShopHelper_GetMode();
+
     if (JOY_NEW(B_BUTTON))
     {
-        if (!gShopMenuDataPtr->buyWindow)
+        switch (mode)
         {
-            if (gShopMenuDataPtr->buyScreen)
+        default:
+            break;
+        case SHOP_MODE_DEFAULT:
+            PlaySE(SE_PC_OFF);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_Shop_WaitFadeAndExit;
+            return;
+        case SHOP_MODE_PURCHASE:
             {
-                gShopMenuDataPtr->itemQuantity = 0;
                 PlaySE(SE_SELECT);
-                ShopGrid_SwitchMode();
+                gShopMenuDataPtr->itemQuantity = 0;
+                ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
+
                 if (ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
                 {
                     ShopInventory_InitCategoryLists();
                 }
 
-                ShopHelper_UpdateFrontEnd();
+                break;
             }
-            else
+        case SHOP_MODE_SUCCESS:
+        case SHOP_MODE_FAILURE:
             {
-                PlaySE(SE_PC_OFF);
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-                gTasks[taskId].func = Task_Shop_WaitFadeAndExit;
+                PlaySE(SE_SELECT);
+                gShopMenuDataPtr->itemQuantity = 0;
+                gShopMenuDataPtr->selectedItemId = ITEM_NONE;
+
+                if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
+                 || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
+                {
+                    ShopInventory_InitCategoryLists();
+                    ShopGrid_SetCurrentCategoryIndex(0);
+                    ShopGrid_SetGridXCursor(0);
+                }
+
+                ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
+                break;
             }
-
-            return;
         }
-        else
-        {
-            gShopMenuDataPtr->itemQuantity = 0;
-            gShopMenuDataPtr->buyWindow = FALSE;
 
-            if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
-             || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
-            {
-                ShopInventory_InitCategoryLists();
-                ShopGrid_SetCurrentCategoryIndex(0);
-                ShopGrid_SetGridXCursor(0);
-            }
-
-            gShopMenuDataPtr->selectedItemId = 0;
-            ShopGrid_SwitchMode();
-            PlaySE(SE_SELECT);
-
-            ShopHelper_UpdateFrontEnd();
-            return;
-        }
+        ShopHelper_UpdateFrontEnd();
+        return;
     }
 
     if (JOY_NEW(A_BUTTON))
     {
-        if (!gShopMenuDataPtr->buyScreen)
+        switch (mode)
         {
+        default:
+            break;
+        case SHOP_MODE_DEFAULT:
             PlaySE(SE_SELECT);
-            ShopGrid_SwitchMode();
-        }
-        else
-        {
-            if (gShopMenuDataPtr->buyWindow)
+            ShopGrid_SwitchMode(SHOP_MODE_PURCHASE);
+            break;
+        case SHOP_MODE_PURCHASE:
             {
-                gShopMenuDataPtr->buyWindow = FALSE;
+                if (GetMoney(&gSaveBlock1Ptr->money) >= ShopConfig_Get()->handleTotalPrice(gShopMenuDataPtr->selectedItemId, gShopMenuDataPtr->itemQuantity))
+                {
+                    PlaySE(SE_SHOP);
+                    ShopPurchase_AddItem(gShopMenuDataPtr->selectedItemId, gShopMenuDataPtr->itemQuantity);
+                }
+                else
+                {
+                    PlaySE(SE_FAILURE);
+                    ShopGrid_SwitchMode(SHOP_MODE_FAILURE);
+                }
+                break;
+            }
+        case SHOP_MODE_SUCCESS:
+            {
+                PlaySE(SE_SELECT);
                 gShopMenuDataPtr->itemQuantity = 0;
 
                 if (ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
                 {
-                    ShopGrid_SwitchMode();
+                    ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
                     if (gShopMenuDataPtr->selectedItemId == ITEM_NONE)
                     {
                         ShopGrid_SetCurrentItemIndex(0);
                         ShopGrid_SetGridYCursor(0);
                     }
-
-                    PlaySE(SE_SELECT);
-                }
-            }
-            else
-            {
-                if (GetMoney(&gSaveBlock1Ptr->money) >= ShopConfig_Get()->handleTotalPrice(gShopMenuDataPtr->selectedItemId, gShopMenuDataPtr->itemQuantity))
-                {
-                    ShopPurchase_AddItem(gShopMenuDataPtr->selectedItemId, gShopMenuDataPtr->itemQuantity);
-                    PlaySE(SE_SHOP);
                 }
                 else
                 {
-                    gShopMenuDataPtr->notEnoughMoneyWindow = TRUE;
-                    PlaySE(SE_FAILURE);
+                    ShopGrid_SwitchMode(SHOP_MODE_PURCHASE);
                 }
+
+                break;
             }
+        case SHOP_MODE_FAILURE:
+            PlaySE(SE_SELECT);
+            ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
+            break;
         }
 
         ShopHelper_UpdateFrontEnd();
@@ -587,33 +625,39 @@ static void Task_Shop_Idle(u8 taskId)
 
     if (JOY_NEW(START_BUTTON))
     {
-        if (!gShopMenuDataPtr->buyScreen && !gShopMenuDataPtr->buyWindow)
+        switch (mode)
         {
-            gShopMenuDataPtr->sortCategories ^= 1;
-            gShopMenuDataPtr->selectedItemId = 0;
-
-            PlaySE(SE_SELECT);
-            ShopGrid_ResetIndexes(SHOP_IDX_RESET_ALL);
-            ShopInventory_InitCategoryLists();
-            ShopHelper_UpdateFrontEnd();
-        }
-        else if (gShopMenuDataPtr->buyWindow)
-        {
+        default:
+            break;
+        case SHOP_MODE_DEFAULT:
+            {
+                PlaySE(SE_SELECT);
+                gShopMenuDataPtr->sortCategories ^= 1;
+                gShopMenuDataPtr->selectedItemId = 0;
+                ShopGrid_ResetIndexes(SHOP_IDX_RESET_ALL);
+                ShopInventory_InitCategoryLists();
+                ShopHelper_UpdateFrontEnd();
+                break;
+            }
+        case SHOP_MODE_SUCCESS:
             PlaySE(SE_PC_OFF);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_Shop_WaitFadeAndExit;
+            break;
         }
 
         return;
     }
 
     // return early for menu that does not need the dpad.
-    if (gShopMenuDataPtr->buyWindow)
+    if (ShopHelper_IsPurchaseDone())
     {
         return;
     }
 
-    u32 itemIdx = ShopGrid_GetCurrentItemIndex(), categoryIdx = ShopGrid_GetCurrentCategoryIndex();
+    u32 itemIdx = ShopGrid_GetCurrentItemIndex(),
+        categoryIdx = ShopGrid_GetCurrentCategoryIndex(),
+        itemQuantity = gShopMenuDataPtr->itemQuantity;
 
     if (JOY_NEW(DPAD_UP))
     {
@@ -636,13 +680,13 @@ static void Task_Shop_Idle(u8 taskId)
     }
 
     if (categoryIdx != ShopGrid_GetCurrentCategoryIndex()
-     || itemIdx != ShopGrid_GetCurrentItemIndex())
+     || itemIdx != ShopGrid_GetCurrentItemIndex()
+     || itemQuantity != gShopMenuDataPtr->itemQuantity)
     {
         ShopHelper_UpdateFrontEnd();
     }
 }
 
-extern bool32 PokeMart_IsActive(void);
 static void ShopSprite_CreateGenericSprites(void)
 {
     for (u32 i = 0; i < NUM_SHOP_SPRITES; i++)
@@ -769,14 +813,19 @@ static void ShopSprite_DestroyItemSprites(void)
     }
 }
 
-static void ShopSprite_ToggleItemIconsVisibility(void)
+static void ShopSprite_ToggleItemIconsVisibility(bool32 flag)
 {
+    if (PokeMart_IsActive())
+    {
+        return;
+    }
+
     for (u32 i = 0; i < ShopConfig_GetTotalShownItemsOnScreen(); i++)
     {
         u32 spriteId = sShopMenuStaticDataPtr->itemIconIds[i];
         if (spriteId != SPRITE_NONE)
         {
-            gSprites[spriteId].invisible ^= 1;
+            gSprites[spriteId].invisible = flag;
         }
     }
 }
@@ -1205,7 +1254,7 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
     RemoveMoney(&gSaveBlock1Ptr->money, price);
     AddBagItem(itemId, quantity + 1);
 
-    gShopMenuDataPtr->buyWindow = TRUE;
+    ShopGrid_SwitchMode(SHOP_MODE_SUCCESS);
 
     if (!ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
     {
@@ -1261,25 +1310,37 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
     }
 }
 
-static void ShopGrid_SwitchMode(void)
+static void ShopGrid_SwitchMode(enum ShopMenuModes mode)
 {
-    gShopMenuDataPtr->buyScreen ^= 1;
-    gShopMenuDataPtr->selectedItemId = ShopInventory_GetChosenItemId();
+    switch (mode)
+    {
+    default:
+        break;
+    case SHOP_MODE_DEFAULT:
+        ShopSprite_ToggleItemIconsVisibility(FALSE);
+        DecompressDataWithHeaderWram(
+            ShopGraphics_GetByType(SHOP_GFX_TILEMAP), sShopMenuStaticDataPtr->tilemapBuf);
+        break;
+    case SHOP_MODE_PURCHASE ... SHOP_MODE_FAILURE:
+        ShopSprite_ToggleItemIconsVisibility(TRUE);
+        DecompressDataWithHeaderWram(
+            ShopGraphics_GetByType(SHOP_GFX_TILEMAP_BUY), sShopMenuStaticDataPtr->tilemapBuf);
+        break;
+    }
 
+    gShopMenuDataPtr->selectedItemId = ShopInventory_GetChosenItemId();
     ShopPurchase_CalculateMaxQuantity();
-    DecompressDataWithHeaderWram(
-        ShopGraphics_GetByType(SHOP_GFX_TILEMAP + gShopMenuDataPtr->buyScreen), sShopMenuStaticDataPtr->tilemapBuf);
-    ShopSprite_ToggleItemIconsVisibility();
+    ShopHelper_SetMode(mode);
     ScheduleBgCopyTilemapToVram(SHOP_BG_TILEMAP);
 }
 
 static void ShopGrid_VerticalInput(s32 delta)
 {
     bool32 additiveDelta = ShopGrid_IsAdditiveDelta(delta);
-    u32 trueIdx = gShopMenuDataPtr->buyScreen ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
+    u32 trueIdx = ShopHelper_IsPurchaseMode() ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
     u32 bak = trueIdx;
 
-    if (!gShopMenuDataPtr->buyScreen)
+    if (!ShopHelper_IsPurchaseMode())
     {
         u32 numItems = gShopMenuDataPtr->numCategories - 1;
         u32 halfScreen = ShopGrid_GetYHalfScreen();
@@ -1343,7 +1404,7 @@ static void ShopGrid_VerticalInput(s32 delta)
         }
     }
 
-    trueIdx = gShopMenuDataPtr->buyScreen ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
+    trueIdx = ShopHelper_IsPurchaseMode() ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
     if (bak != trueIdx)
     {
         PlaySE(SE_SELECT);
@@ -1353,10 +1414,10 @@ static void ShopGrid_VerticalInput(s32 delta)
 static void ShopGrid_HorizontalInput(s32 delta)
 {
     bool32 additiveDelta = ShopGrid_IsAdditiveDelta(delta);
-    u32 trueIdx = gShopMenuDataPtr->buyScreen ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentItemIndex();
+    u32 trueIdx = ShopHelper_IsPurchaseMode() ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentItemIndex();
     u32 bak = trueIdx;
 
-    if (!gShopMenuDataPtr->buyScreen)
+    if (!ShopHelper_IsPurchaseMode())
     {
         u32 halfScreen = ShopGrid_GetXHalfScreen();
         u32 categoryNumItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
@@ -1431,7 +1492,7 @@ static void ShopGrid_HorizontalInput(s32 delta)
         }
     }
 
-    trueIdx = gShopMenuDataPtr->buyScreen ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentItemIndex();
+    trueIdx = ShopHelper_IsPurchaseMode() ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentItemIndex();
     if (trueIdx != bak)
     {
         PlaySE(SE_SELECT);
@@ -1608,30 +1669,25 @@ void ShopPrint_AddTextPrinter(u32 fontId, u32 x, u32 y, enum ShopMenuFontColors 
 
 void ShopPrint_HelpBar(void)
 {
-    u32 x = 0, y = 18;
-    const u8 *str = sText_Help_Bar;
-    u32 fontId = FONT_SMALL_NARROW;
+    const u8 *str = NULL;
 
-    if (gShopMenuDataPtr->buyScreen)
+    switch (ShopHelper_GetMode())
     {
-        if (!gShopMenuDataPtr->buyWindow)
-        {
-            if (!gShopMenuDataPtr->notEnoughMoneyWindow)
-            {
-                str = sText_Help_Bar_Buy;
-            }
-            else
-            {
-                return; // let the shops do their own
-            }
-        }
-        else
-        {
-            str = sText_Help_Bar_Complete;
-        }
+    default:
+    case SHOP_MODE_FAILURE:
+        return;
+    case SHOP_MODE_DEFAULT:
+        str = sText_Help_Bar;
+        break;
+    case SHOP_MODE_PURCHASE:
+        str = sText_Help_Bar_Buy;
+        break;
+    case SHOP_MODE_SUCCESS:
+        str = sText_Help_Bar_Complete;
+        break;
     }
 
-    ShopPrint_AddTextPrinter(fontId, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, str);
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18), SHOP_FNTCLR_SECONDARY, str);
 }
 
 static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType type)
