@@ -52,11 +52,11 @@
 #define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
 #define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
 
-#define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(3) + 3) + 4)
-#define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS(4) + 7) + 8)
+#define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(14) + 0) + 4)
+#define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS( 1) + 0) + 8)
 
-#define SHOP_RIGHT_ARROW_X ((TILE_TO_PIXELS(9) + 3) + 4)
-#define SHOP_RIGHT_ARROW_Y ((TILE_TO_PIXELS(3) - 1) + 8)
+#define SHOP_RIGHT_ARROW_X ((TILE_TO_PIXELS(29) + 0) + 4)
+#define SHOP_RIGHT_ARROW_Y SHOP_LEFT_ARROW_Y
 
 #define SHOP_UP_ARROW_X    (TILE_TO_PIXELS(20) + 16)
 #define SHOP_UP_ARROW_Y    (TILE_TO_PIXELS(0) + 0)
@@ -64,18 +64,16 @@
 #define SHOP_DOWN_ARROW_X  SHOP_UP_ARROW_X
 #define SHOP_DOWN_ARROW_Y  ((TILE_TO_PIXELS(11) + 4) + 8)
 
+#define MART_CATEGORY_ARROW_X ((TILE_TO_PIXELS(9) + 3) + 4)
+#define MART_CATEGORY_ARROW_Y ((TILE_TO_PIXELS(3) - 1) + 8)
+
 #define MART_KEEPER_X   ((TILE_TO_PIXELS(3) + 0) + 16)
 #define MART_KEEPER_Y   ((TILE_TO_PIXELS(4) + 2) + 16)
-
-#define TAG_MART_KEEPER    0x9999
 
 #define MART_DESC_WIN_WIDTH     (23)
 
 // SpriteCB_*Arrow
 #define sArrow_SineValue         data[0]
-
-// SpriteCB_RightArrow
-#define sRightArrow_CategoryYIdx data[3]
 
 #if MART_KEEPER_ICON == TRUE
 // SpriteCB_MartKeeper
@@ -91,6 +89,12 @@ enum PokeMartInputs
     MART_INPUT_QUIT,
 
     NUM_MART_INPUTS
+};
+
+enum PokeMartSpriteTags
+{
+    TAG_MART_KEEPER = 0x9999,
+    TAG_MART_CATEGORY_ARROW
 };
 
 #if MART_KEEPER_ICON == TRUE
@@ -118,18 +122,22 @@ enum PokeMartKeeperEmotes
 struct PokeMartData
 {
     s8 input;
-    u8 row, numRows;
     u8 winId;
-    u8 spriteId; // for shopkeeper
+    #if MART_KEEPER_ICON == TRUE
+    u8 keeperSpriteId;
+    #endif
+    u8 arrowSpriteId; // category sprite
 };
 
 // ram
 static EWRAM_INIT struct PokeMartData sPokeMartData =
 {
     .input = MART_INPUT_BUY,
-    .row = 0, .numRows = 0,
     .winId = WINDOW_NONE,
-    .spriteId = SPRITE_NONE,
+    #if MART_KEEPER_ICON == TRUE
+    .keeperSpriteId = SPRITE_NONE,
+    #endif
+    .arrowSpriteId = SPRITE_NONE,
 };
 
 // declarations
@@ -149,19 +157,11 @@ static void CB2_MartReload_ReturnToField(void);
 static void FieldCB_MartReload_PrepareInterface(void);
 
 static void MartHelper_UpdateFrontEnd(void);
-static void MartHelper_GridInput(s32, s32);
-static void MartHelper_LRInput(s32);
 
 static u32 MartPurchase_GetTotalItemPrice(u16, u16);
 
-static u32 MartGrid_GetNumberOfRows(void);
-static void MartGrid_SetNumberOfRows(u32);
-static u32 MartGrid_GetCurrentRow(void);
-static void MartGrid_SetCurrentRow(u32);
-static u32 MartGrid_GetSizeOfCurrentRow(void);
-
-static void MartSprite_SetCategoryCursorCoord(u32);
-static u32 MartSprite_GetCategoryCursorCoord(void);
+static void MartSprite_SetCategoryArrowSpriteId(u32);
+static u32 MartSprite_GetCategoryArrowSpriteId(void);
 
 #if MART_KEEPER_ICON == TRUE
 static void MartSprite_SetKeeperSpriteId(u32);
@@ -177,12 +177,35 @@ static void SpriteCB_LeftArrow(struct Sprite *);
 static void SpriteCB_RightArrow(struct Sprite *);
 static void SpriteCB_UpArrowSmall(struct Sprite *);
 static void SpriteCB_DownArrowSmall(struct Sprite *);
+static void SpriteCB_CategoryArrow(struct Sprite *);
 #if MART_KEEPER_ICON == TRUE
 static void SpriteCB_MartKeeper(struct Sprite *);
 #endif
 
 // const data
 static const u32 sPokeMart_ExtraTilemap[] = INCBIN_U32("graphics/ui_menus/mart/textbox.bin.smolTM");
+
+static const struct CompressedSpriteSheet sPokeMart_CategoryArrowSpriteSheet =
+{
+    (const u32[])INCBIN_U32("graphics/ui_menus/mart/category_arrow.4bpp.smol"),
+    ((8 * 16) / 2),
+    TAG_MART_CATEGORY_ARROW
+};
+
+static const struct SpriteTemplate sPokeMart_CategoryArrowSpriteTemplate =
+{
+    .tileTag = TAG_MART_CATEGORY_ARROW,
+    .paletteTag = TAG_SHOP_MENU_UI,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x16),
+        .size = SPRITE_SIZE(8x16),
+        .priority = 0,
+    },
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_CategoryArrow
+};
 
 #if MART_KEEPER_ICON == TRUE
 static const struct CompressedSpriteSheet sPokeMart_KeeperSpriteSheet =
@@ -250,7 +273,7 @@ static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
     },
     [SHOP_SPRITE_LEFT_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.smol"),
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_left.4bpp.smol"),
         .x = SHOP_LEFT_ARROW_X,
         .y = SHOP_LEFT_ARROW_Y,
         .callback = SpriteCB_LeftArrow,
@@ -307,12 +330,9 @@ static const struct ShopMenuConfigs sPokeMartShopConfigs =
     .totalShownItems = 4,
     .totalShownItemRows = 3,
     .totalShownCategories = 3,
-    .gridMode = SHOP_GRID_VERTICAL,
 
     .handleFrontend = MartHelper_UpdateFrontEnd,
     .handleTotalPrice = MartPurchase_GetTotalItemPrice,
-    .handleGrid = MartHelper_GridInput,
-    .handleLR = MartHelper_LRInput,
 };
 
 static const struct MenuAction sPokeMart_MenuActions[] =
@@ -392,8 +412,9 @@ static void Task_MartInterface_HandleQuit(u8 taskId)
     sPokeMartData.winId = WINDOW_NONE;
     #if MART_KEEPER_ICON == TRUE
     MartSprite_SetKeeperSpriteId(SPRITE_NONE);
-    sPokeMartData.input = MART_INPUT_BUY;
     #endif
+    MartSprite_SetCategoryArrowSpriteId(SPRITE_NONE);
+    sPokeMartData.input = MART_INPUT_BUY;
 
     DestroyTask(taskId);
 }
@@ -406,6 +427,7 @@ static void Task_MartInterface_FadeIntoMenu(u8 taskId)
         MartSprite_SetKeeperSpriteId(SPRITE_NONE);
         #endif
 
+        MartSprite_SetCategoryArrowSpriteId(SPRITE_NONE);
         sPokeMartData.winId = WINDOW_NONE;
         SetMainCallback2(sPokeMartData.input == MART_INPUT_BUY ? CB2_MartMenu_OpenBuyMenu : CB2_MartMenu_OpenSellMenu);
         DestroyTask(taskId);
@@ -455,6 +477,10 @@ static void MartHelper_UpdateFrontEnd(void)
 
     if (gMain.state)
     {
+        LoadCompressedSpriteSheet(&sPokeMart_CategoryArrowSpriteSheet);
+        MartSprite_SetCategoryArrowSpriteId(
+            CreateSprite(&sPokeMart_CategoryArrowSpriteTemplate, MART_CATEGORY_ARROW_X, MART_CATEGORY_ARROW_Y, 0));
+
         #if MART_KEEPER_ICON == TRUE
         LoadCompressedSpriteSheet(&sPokeMart_KeeperSpriteSheet);
         LoadSpritePalette(&sPokeMart_KeeperSpritePalette);
@@ -542,205 +568,30 @@ static void MartHelper_UpdateFrontEnd(void)
     AddTextPrinterParameterized4(sPokeMartData.winId, fontId, x, y, 0, 0, ShopConfig_GetFontColors(SHOP_FNTCLR_PRIMARY), speed, str);
 }
 
-static void MartHelper_GridInput(s32 vDelta, s32 hDelta)
-{
-    u32 trueIdx = ShopGrid_GetCurrentItemIndex();
-    u32 numItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
-    u32 xGridIdx = ShopGrid_GetGridXCursor(), yGridIdx = ShopGrid_GetGridYCursor();
-    bool32 scroll = (numItems + 1) > ShopConfig_GetTotalShownItemsOnScreen();
-
-    MartGrid_SetNumberOfRows(numItems / ShopConfig_GetTotalShownItems());
-    u32 rowIdx = MartGrid_GetCurrentRow(), numRows = MartGrid_GetNumberOfRows();
-
-    if (vDelta != 0)
-    {
-        bool32 additiveDelta = ShopGrid_IsAdditiveDelta(vDelta);
-        u32 halfScreen = ShopConfig_GetTotalShownItemRows() / 2;
-        u32 finalHalfScreen = numRows - halfScreen;
-
-        if (((rowIdx >= halfScreen && rowIdx < finalHalfScreen && additiveDelta)
-         || (rowIdx > halfScreen && rowIdx <= finalHalfScreen && !additiveDelta))
-         && scroll)
-        {
-            MartGrid_SetCurrentRow(rowIdx + vDelta);
-            ShopGrid_SetFirstItemIndex(ShopGrid_GetFirstItemIndex() + vDelta);
-            ShopGrid_SetGridYCursor(halfScreen);
-        }
-        else if (rowIdx >= numRows && additiveDelta)
-        {
-            MartGrid_SetCurrentRow(0);
-            ShopGrid_SetFirstItemIndex(0);
-            ShopGrid_SetGridYCursor(0);
-        }
-        else if (!rowIdx && !additiveDelta)
-        {
-            MartGrid_SetCurrentRow(numRows);
-            if (scroll)
-            {
-                ShopGrid_SetFirstItemIndex(numRows - (ShopConfig_GetTotalShownItemRows() - 1));
-            }
-
-            u32 endYCursor = ShopConfig_GetTotalShownItemRows() - 1;
-
-            if (numRows < endYCursor)
-                endYCursor = numRows;
-
-            ShopGrid_SetGridYCursor(endYCursor);
-        }
-        else
-        {
-            MartGrid_SetCurrentRow(rowIdx + vDelta);
-            ShopGrid_SetGridYCursor(yGridIdx + vDelta);
-        }
-    }
-
-    if (hDelta != 0)
-    {
-        bool32 additiveDelta = ShopGrid_IsAdditiveDelta(hDelta);
-        u32 shownItems = MartGrid_GetSizeOfCurrentRow();
-
-        if (xGridIdx >= shownItems && additiveDelta)
-        {
-            ShopGrid_SetGridXCursor(0);
-        }
-        else if (!xGridIdx && !additiveDelta)
-        {
-            ShopGrid_SetGridXCursor(shownItems);
-        }
-        else
-        {
-            ShopGrid_SetGridXCursor(xGridIdx + hDelta);
-        }
-    }
-
-    // CURRENT ITEM
-    xGridIdx = ShopGrid_GetGridXCursor(), yGridIdx = ShopGrid_GetGridYCursor(), rowIdx = MartGrid_GetCurrentRow();
-    ShopGrid_SetCurrentItemIndex((rowIdx * ShopConfig_GetTotalShownItems()) + xGridIdx);
-
-    // GLITCH ITEM FIXUP
-    while (!ShopInventory_GetChosenItemId() || ShopInventory_GetChosenItemId() >= ITEMS_COUNT)
-    {
-        ShopGrid_SetCurrentItemIndex(ShopGrid_GetCurrentItemIndex() - 1);
-        ShopGrid_SetGridXCursor(ShopGrid_GetGridXCursor() - 1);
-    }
-
-    if (trueIdx != ShopGrid_GetCurrentItemIndex())
-    {
-        PlaySE(SE_SELECT);
-    }
-}
-
-static void MartHelper_LRInput(s32 delta)
-{
-    u32 trueIdx = ShopGrid_GetCurrentCategoryIndex();
-    u32 numItems = gShopMenuDataPtr->numCategories - 1;
-    u32 halfScreen = ShopConfig_GetTotalShownCategories() / 2;
-    u32 finalHalfScreen = numItems - halfScreen;
-
-    bool32 additiveDelta = ShopGrid_IsAdditiveDelta(delta);
-    bool32 scroll = (numItems + 1) > ShopConfig_GetTotalShownCategories();
-
-    if (((trueIdx >= halfScreen && trueIdx < finalHalfScreen && additiveDelta)
-     || (trueIdx > halfScreen && trueIdx <= finalHalfScreen && !additiveDelta))
-     && scroll)
-    {
-        ShopGrid_SetCurrentCategoryIndex(trueIdx + delta);
-        ShopGrid_SetFirstCategoryIndex(ShopGrid_GetFirstCategoryIndex() + delta);
-        MartSprite_SetCategoryCursorCoord(halfScreen);
-    }
-    else if (trueIdx >= numItems && additiveDelta)
-    {
-        ShopGrid_SetCurrentCategoryIndex(0);
-        ShopGrid_SetFirstCategoryIndex(0);
-        MartSprite_SetCategoryCursorCoord(0);
-    }
-    else if (!trueIdx && !additiveDelta)
-    {
-        ShopGrid_SetCurrentCategoryIndex(numItems);
-        MartSprite_SetCategoryCursorCoord(ShopConfig_GetTotalShownItemRows() - 1);
-        if (scroll)
-        {
-            ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1));
-        }
-    }
-    else
-    {
-        ShopGrid_SetCurrentCategoryIndex(trueIdx + delta);
-        MartSprite_SetCategoryCursorCoord(MartSprite_GetCategoryCursorCoord() + delta);
-    }
-
-    ShopGrid_ResetIndexes(SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_Y_GRID);
-    MartGrid_SetCurrentRow(0);
-
-    if (trueIdx != ShopGrid_GetCurrentCategoryIndex())
-    {
-        PlaySE(SE_SUCCESS);
-    }
-}
-
 static u32 MartPurchase_GetTotalItemPrice(u16 itemId, u16 quantity)
 {
     return (quantity + 1) * GetItemPrice(itemId);
 }
 
-static u32 MartGrid_GetNumberOfRows(void)
+static void MartSprite_SetCategoryArrowSpriteId(u32 spriteId)
 {
-    return sPokeMartData.numRows;
+    sPokeMartData.arrowSpriteId = spriteId;
 }
 
-static void MartGrid_SetNumberOfRows(u32 value)
+static u32 MartSprite_GetCategoryArrowSpriteId(void)
 {
-    sPokeMartData.numRows = value;
-}
-
-static u32 MartGrid_GetCurrentRow(void)
-{
-    return sPokeMartData.row;
-}
-
-static void MartGrid_SetCurrentRow(u32 value)
-{
-    sPokeMartData.row = value;
-}
-
-static u32 MartGrid_GetSizeOfCurrentRow(void)
-{
-    bool32 isLastRow = (MartGrid_GetCurrentRow() == MartGrid_GetNumberOfRows());
-    u32 numItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()];
-    u32 shownItems = ShopConfig_GetTotalShownItems();
-    u32 divisor = (numItems % shownItems);
-
-    if (divisor && isLastRow)
-    {
-        return divisor - 1;
-    }
-    else
-    {
-        return shownItems - 1;
-    }
-}
-
-static void MartSprite_SetCategoryCursorCoord(u32 y)
-{
-    struct Sprite *cursor = &gSprites[ShopSprite_GetSpriteId(SHOP_SPRITE_RIGHT_ARROW)];
-    cursor->sRightArrow_CategoryYIdx = y;
-}
-
-static u32 MartSprite_GetCategoryCursorCoord(void)
-{
-    struct Sprite *cursor = &gSprites[ShopSprite_GetSpriteId(SHOP_SPRITE_RIGHT_ARROW)];
-    return cursor->sRightArrow_CategoryYIdx;
+    return sPokeMartData.arrowSpriteId;
 }
 
 #if MART_KEEPER_ICON == TRUE
 static void MartSprite_SetKeeperSpriteId(u32 spriteId)
 {
-    sPokeMartData.spriteId = spriteId;
+    sPokeMartData.keeperSpriteId = spriteId;
 }
 
 static u32 MartSprite_GetKeeperSpriteId(void)
 {
-    return sPokeMartData.spriteId;
+    return sPokeMartData.keeperSpriteId;
 }
 
 static void MartSprite_SetKeeperEmote(enum PokeMartKeeperEmotes emote)
@@ -760,14 +611,8 @@ static void MartSprite_SetKeeperAnim(enum PokeMartKeeperAnims anim)
 
 static void SpriteCB_BuyIcon(struct Sprite *sprite)
 {
-    u32 xCursor = ShopGrid_GetGridXCursor(),
-        yCursor = ShopGrid_GetGridYCursor();
-
-    u32 x = ShopConfig_GetTotalShownItems() * xCursor,
-        y = (ShopConfig_GetTotalShownItemRows() * yCursor) + yCursor;
-
-    sprite->x2 = TILE_TO_PIXELS(x);
-    sprite->y2 = TILE_TO_PIXELS(y);
+    u32 x2 = ShopConfig_GetTotalShownItems() * ShopGrid_GetGridXCursor();
+    sprite->x2 = TILE_TO_PIXELS(x2);
 }
 
 static void SpriteCB_UpArrow(struct Sprite *sprite)
@@ -776,12 +621,7 @@ static void SpriteCB_UpArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
 
-    u32 numItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()];
-    bool32 scroll = numItems > ShopConfig_GetTotalShownItemsOnScreen();
-
-    sprite->invisible = (gShopMenuDataPtr->buyScreen
-     || (scroll && sPokeMartData.row <= (ShopConfig_GetTotalShownItemRows() / 2))
-     || !scroll);
+    sprite->invisible = (gShopMenuDataPtr->buyScreen || !ShopGrid_GetGridYCursor());
 }
 
 static void SpriteCB_DownArrow(struct Sprite *sprite)
@@ -790,30 +630,37 @@ static void SpriteCB_DownArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
 
-    u32 finalHalfScreen = MartGrid_GetNumberOfRows() - (ShopConfig_GetTotalShownItemRows() / 2);
-    u32 numItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()];
-    bool32 scroll = numItems > ShopConfig_GetTotalShownItemsOnScreen();
-
     sprite->invisible = (gShopMenuDataPtr->buyScreen
-     || (scroll && sPokeMartData.row >= finalHalfScreen)
-     || !scroll);
+     || ShopGrid_GetGridYCursor() == ShopConfig_GetTotalShownCategories() - 1);
 }
 
 static void SpriteCB_LeftArrow(struct Sprite *sprite)
 {
-    sprite->invisible = TRUE;
+    u8 val = sprite->sArrow_SineValue + 128;
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->sArrow_SineValue += 8;
+
+    u32 halfScreen = ShopGrid_GetXHalfScreen();
+    u32 categoryNumItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
+    u32 shownItems = (ShopConfig_GetTotalShownItems() - 1);
+    bool32 scroll = categoryNumItems > shownItems;
+
+    sprite->invisible = (gShopMenuDataPtr->buyScreen || (scroll && ShopGrid_GetCurrentItemIndex() <= halfScreen));
 }
 
 static void SpriteCB_RightArrow(struct Sprite *sprite)
 {
-    u32 yIdx = sprite->sRightArrow_CategoryYIdx;
-
-    sprite->y2 = (yIdx * 26);
-    sprite->invisible = (gShopMenuDataPtr->buyScreen);
-
-    u8 val = sprite->sArrow_SineValue + 128;
+    u8 val = sprite->sArrow_SineValue;
     sprite->x2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
+
+    u32 halfScreen = ShopGrid_GetXHalfScreen();
+    u32 categoryNumItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
+    u32 shownItems = (ShopConfig_GetTotalShownItems() - 1);
+    u32 finalHalfScreen = categoryNumItems - (shownItems - halfScreen);
+    bool32 scroll = categoryNumItems > shownItems;
+
+    sprite->invisible = (gShopMenuDataPtr->buyScreen || (scroll && ShopGrid_GetCurrentItemIndex() >= finalHalfScreen));
 }
 
 static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
@@ -857,3 +704,13 @@ static void SpriteCB_MartKeeper(struct Sprite *sprite)
     }
 }
 #endif
+
+static void SpriteCB_CategoryArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->sArrow_SineValue + 128;
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->sArrow_SineValue += 8;
+
+    sprite->y2 = ShopGrid_GetGridYCursor() * 26;
+    sprite->invisible = (gShopMenuDataPtr->buyScreen);
+}

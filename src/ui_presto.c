@@ -91,7 +91,6 @@ static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
 
 static void PrestoHelper_UpdateFrontEnd(void);
 static enum PrestoShopTypes PrestoHelper_GetShopType(void);
-static void PrestoHelper_GridInput(s32, s32);
 
 static void SpriteCB_BuyIcon(struct Sprite *);
 static void SpriteCB_UpArrow(struct Sprite *);
@@ -186,11 +185,9 @@ static const struct ShopMenuConfigs sPrestoShopConfigs =
     .totalShownItems = TOTAL_SHOWN_PRESTO_ITEMS_PER_CATEGORIES,
     .totalShownItemRows = TOTAL_SHOWN_PRESTO_ITEM_ROWS,
     .totalShownCategories = TOTAL_SHOWN_PRESTO_CATEGORIES,
-    .gridMode = SHOP_GRID_HORIZONTAL,
 
     .handleFrontend = PrestoHelper_UpdateFrontEnd,
     .handleTotalPrice = PrestoPurchase_GetTotalItemPrice,
-    .handleGrid = PrestoHelper_GridInput,
 };
 
 static const u8 sText_FirstRowName[]      = _("{STR_VAR_1}: {STR_VAR_2}");
@@ -449,106 +446,6 @@ static enum PrestoShopTypes PrestoHelper_GetShopType(void)
     }
 
     return PRESTO_TYPE_APP;
-}
-
-static void PrestoHelper_GridInput(s32 vDelta, s32 hDelta)
-{
-    if (vDelta != 0)
-    {
-        bool32 additiveDelta = ShopGrid_IsAdditiveDelta(vDelta);
-
-        u32 trueIdx = ShopGrid_GetCurrentCategoryIndex();
-        u32 numItems = gShopMenuDataPtr->numCategories - 1;
-        u32 halfScreen = ShopConfig_GetTotalShownCategories() / 2;
-
-        bool32 scroll = (numItems + 1) > ShopConfig_GetTotalShownCategories();
-        u32 finalHalfScreen = numItems - halfScreen;
-
-        u32 gridIdx = ShopGrid_GetGridYCursor();
-
-        if (((trueIdx >= halfScreen && trueIdx < finalHalfScreen && additiveDelta)
-         || (trueIdx > halfScreen && trueIdx <= finalHalfScreen && !additiveDelta))
-         && scroll)
-        {
-            ShopGrid_SetCurrentCategoryIndex(trueIdx + vDelta);
-            ShopGrid_SetFirstCategoryIndex(ShopGrid_GetFirstCategoryIndex() + vDelta);
-            ShopGrid_SetGridYCursor(halfScreen);
-        }
-        else if (trueIdx >= numItems && additiveDelta)
-        {
-            ShopGrid_SetCurrentCategoryIndex(0);
-            ShopGrid_SetFirstCategoryIndex(0);
-            ShopGrid_SetGridYCursor(0);
-        }
-        else if (!trueIdx && !additiveDelta)
-        {
-            ShopGrid_SetCurrentCategoryIndex(numItems + vDelta);
-            if (scroll)
-                ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1) + vDelta);
-
-            ShopGrid_SetGridYCursor(ShopConfig_GetTotalShownItemRows() - 1);
-        }
-        else
-        {
-            ShopGrid_SetCurrentCategoryIndex(trueIdx + vDelta);
-            ShopGrid_SetGridYCursor(gridIdx + vDelta);
-        }
-
-        ShopGrid_ResetIndexes(SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID);
-
-        if (trueIdx != ShopGrid_GetCurrentCategoryIndex())
-        {
-            PlaySE(SE_SELECT);
-        }
-
-        DebugPrintf("firstIdx: %d", ShopGrid_GetFirstCategoryIndex());
-    }
-
-    if (hDelta != 0)
-    {
-        bool32 additiveDelta = ShopGrid_IsAdditiveDelta(hDelta);
-
-        u32 halfScreen = ShopConfig_GetTotalShownItems() / 2;
-        u32 categoryNumItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
-        u32 finalHalfScreen = categoryNumItems - halfScreen;
-
-        u32 gridIdx = ShopGrid_GetGridXCursor();
-        u32 trueIdx = ShopGrid_GetCurrentItemIndex();
-        u32 shownItems = ShopConfig_GetTotalShownItems() - 1;
-
-        if ((trueIdx >= halfScreen && trueIdx < finalHalfScreen && additiveDelta)
-         || (trueIdx > halfScreen && trueIdx <= finalHalfScreen && !additiveDelta))
-        {
-            ShopGrid_SetGridXCursor(halfScreen);
-            ShopGrid_SetCurrentItemIndex(trueIdx + hDelta);
-            ShopGrid_SetFirstItemIndex(ShopGrid_GetFirstItemIndex() + hDelta);
-        }
-        else if (trueIdx >= categoryNumItems && additiveDelta)
-        {
-            ShopGrid_SetGridXCursor(0);
-            ShopGrid_SetCurrentItemIndex(0);
-            ShopGrid_SetFirstItemIndex(0);
-        }
-        else if (!trueIdx && !additiveDelta)
-        {
-            ShopGrid_SetGridXCursor(shownItems);
-            ShopGrid_SetCurrentItemIndex(categoryNumItems);
-            if (categoryNumItems > shownItems)
-            {
-                ShopGrid_SetFirstItemIndex(categoryNumItems - shownItems);
-            }
-        }
-        else
-        {
-            ShopGrid_SetGridXCursor(gridIdx + hDelta);
-            ShopGrid_SetCurrentItemIndex(trueIdx + hDelta);
-        }
-
-        if (trueIdx != ShopGrid_GetCurrentItemIndex())
-        {
-            PlaySE(SE_SELECT);
-        }
-    }
 }
 
 static void SpriteCB_BuyIcon(struct Sprite *sprite)
