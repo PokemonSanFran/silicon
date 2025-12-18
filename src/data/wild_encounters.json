@@ -55678,6 +55678,111 @@
         {
           "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
           "base_label": "gCapheCity_PantryMaze_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              }
+            ]
+          },
           "rock_smash_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -55780,6 +55885,333 @@
                 "min_level": 42,
                 "max_level": 43,
                 "species": "SPECIES_SHUCKLE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
+          "base_label": "gCapheCity_PantryMaze_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
+          "base_label": "gCapheCity_PantryMaze_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_CAPHE_CITY_PANTRY_MAZE",
+          "base_label": "gCapheCity_PantryMaze_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_KLAWF"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SWALOT"
               }
             ]
           }
