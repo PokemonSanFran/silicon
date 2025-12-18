@@ -47440,6 +47440,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE22",
+          "base_label": "gRoute22_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE22",
+          "base_label": "gRoute22_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE22",
+          "base_label": "gRoute22_NIght",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_CUFANT"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_COPPERAJAH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_LOPUNNY"
+              }
+            ]
           }
         },
         {
