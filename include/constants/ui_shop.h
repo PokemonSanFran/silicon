@@ -86,6 +86,8 @@ enum ShopMenuSpriteTags
     TAG_SHOP_RIGHT_ARROW,
     TAG_SHOP_UP_ARROW_SMALL,
     TAG_SHOP_DOWN_ARROW_SMALL,
+
+    NUM_SHOP_TAGS
 };
 
 enum ShopMenuFontColors

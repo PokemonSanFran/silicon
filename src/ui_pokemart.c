@@ -868,7 +868,7 @@ static void SpriteCB_LeftArrow(struct Sprite *sprite)
     sprite->sArrow_SineValue += 8;
 
     u32 halfScreen = ShopGrid_GetXHalfScreen();
-    u32 categoryNumItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
+    u32 categoryNumItems = ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) - 1;
     u32 shownItems = (ShopConfig_GetTotalShownItems() - 1);
     bool32 scroll = categoryNumItems > shownItems;
 
@@ -882,7 +882,7 @@ static void SpriteCB_RightArrow(struct Sprite *sprite)
     sprite->sArrow_SineValue += 8;
 
     u32 halfScreen = ShopGrid_GetXHalfScreen();
-    u32 categoryNumItems = gShopMenuDataPtr->categoryNumItems[ShopGrid_GetCurrentCategoryIndex()] - 1;
+    u32 categoryNumItems = ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) - 1;
     u32 shownItems = (ShopConfig_GetTotalShownItems() - 1);
     u32 finalHalfScreen = categoryNumItems - (shownItems - halfScreen);
     bool32 scroll = categoryNumItems > shownItems;
