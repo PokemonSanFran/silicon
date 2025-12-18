@@ -872,7 +872,7 @@ static void SpriteCB_LeftArrow(struct Sprite *sprite)
     u32 shownItems = (ShopConfig_GetTotalShownItems() - 1);
     bool32 scroll = categoryNumItems > shownItems;
 
-    sprite->invisible = (ShopHelper_IsPurchaseMode() || (scroll && ShopGrid_GetCurrentItemIndex() <= halfScreen));
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || (scroll && ShopGrid_GetCurrentItemIndex() <= halfScreen) || categoryNumItems <= shownItems);
 }
 
 static void SpriteCB_RightArrow(struct Sprite *sprite)
@@ -887,7 +887,7 @@ static void SpriteCB_RightArrow(struct Sprite *sprite)
     u32 finalHalfScreen = categoryNumItems - (shownItems - halfScreen);
     bool32 scroll = categoryNumItems > shownItems;
 
-    sprite->invisible = (ShopHelper_IsPurchaseMode() || (scroll && ShopGrid_GetCurrentItemIndex() >= finalHalfScreen));
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || (scroll && ShopGrid_GetCurrentItemIndex() >= finalHalfScreen) || categoryNumItems <= shownItems);
 }
 
 static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
