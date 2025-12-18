@@ -271,6 +271,7 @@ static const struct SpriteTemplate sShopSpriteTemplate =
 static const u8 sText_Help_Bar[]          = _("{DPAD_UPDOWN} Rows {DPAD_LEFTRIGHT} Items {A_BUTTON} Buy {B_BUTTON} Exit {START_BUTTON} Sort Rows");
 static const u8 sText_Help_Bar_Buy[]      = _("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Buy Now {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Complete[] = _("{A_BUTTON} Buy More {B_BUTTON} Return {START_BUTTON} Exit");
+static const u8 sText_HelpBar_Failure[]   = _("{A_BUTTON}{B_BUTTON} Return to purchase");
 
 const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES] =
 {
@@ -1251,8 +1252,13 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
     u32 oldItem = 0;
     u32 bak = gSaveBlock3Ptr->shopBuyAgainItems[0];
 
+    quantity++;
     RemoveMoney(&gSaveBlock1Ptr->money, price);
-    AddBagItem(itemId, quantity + 1);
+    AddBagItem(itemId, quantity);
+    if (PokeMart_IsActive() && GetItemShopCategory(itemId) == SHOP_CATEGORY_POKE_BALLS && quantity >= 10)
+    {
+        AddBagItem(ITEM_PREMIER_BALL, quantity / 10);
+    }
 
     ShopGrid_SwitchMode(SHOP_MODE_SUCCESS);
 
@@ -1675,7 +1681,18 @@ void ShopPrint_HelpBar(void)
     {
     default:
     case SHOP_MODE_FAILURE:
-        return;
+        {
+            if (PokeMart_IsActive())
+            {
+                str = sText_HelpBar_Failure;
+            }
+            else
+            {
+                return;
+            }
+
+            break;
+        }
     case SHOP_MODE_DEFAULT:
         str = sText_Help_Bar;
         break;

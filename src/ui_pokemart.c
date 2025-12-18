@@ -47,7 +47,7 @@
 #include "constants/party_menu.h"
 
 // constants
-#define MART_KEEPER_ICON    TRUE // PSF TODO disable/remove related code if we decide to deprecate this
+#define MART_KEEPER_ICON    FALSE // PSF TODO disable/remove related code if we decide to deprecate this
 
 #define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
 #define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
@@ -118,9 +118,22 @@ enum PokeMartKeeperEmotes
 };
 #endif
 
+// unrelated to keeper sprite
+enum PokeMartKeeperDialogues
+{
+    MART_KEEPER_DIALOGUE_NONE,
+
+    MART_KEEPER_DIALOGUE_PURCHASE,
+    MART_KEEPER_DIALOGUE_SUCCESS,
+    MART_KEEPER_DIALOGUE_FAILURE,
+
+    NUM_MART_KEEPER_DIALOGUES
+};
+
 // structs
 struct PokeMartData
 {
+    enum PokeMartKeeperDialogues dialogue;
     u8 active:1;
     s8 input:7;
     u8 winId;
@@ -133,6 +146,7 @@ struct PokeMartData
 // ram
 static EWRAM_INIT struct PokeMartData sPokeMartData =
 {
+    .dialogue = MART_KEEPER_DIALOGUE_NONE,
     .active = FALSE,
     .input = MART_INPUT_BUY,
     .winId = WINDOW_NONE,
@@ -160,9 +174,12 @@ static void FieldCB_MartReload_PrepareInterface(void);
 
 static void MartHelper_UpdateFrontEnd(void);
 
+static void MartPrint_AddTextPrinter(u32, u32, u32, u32, const u8 *);
 static void MartPrint_PlayersMoney(void);
 static void MartPrint_Category(void);
 static void MartPrint_ItemInfo(void);
+static void MartPrint_KeeperDialogue(void);
+static void MartPrint_ItemQuantity(void);
 
 static u32 MartPurchase_GetTotalItemPrice(u16, u16);
 
@@ -238,14 +255,34 @@ static const struct SpriteTemplate sPokeMart_KeeperSpriteTemplate =
         .priority = 0,
     },
     .anims = (const union AnimCmd *const[]){
-        [MART_KEEPER_ANIM_IDLE] = (const union AnimCmd[]){
-            ANIMCMD_FRAME(MART_KEEPER_ANIM_IDLE * 16),
+        [MART_KEEPER_ANIM_IDLE + MART_KEEPER_EMOTE_NEUTRAL] = (const union AnimCmd[]){
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_IDLE + MART_KEEPER_EMOTE_NEUTRAL) * 16),
+            ANIMCMD_END
+        },
+        [MART_KEEPER_ANIM_TALK + MART_KEEPER_EMOTE_NEUTRAL] = (const union AnimCmd[]){
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_IDLE + MART_KEEPER_EMOTE_NEUTRAL) * 16, 5),
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_TALK + MART_KEEPER_EMOTE_NEUTRAL) * 16, 5),
+            ANIMCMD_JUMP(0)
+        },
+
+        [MART_KEEPER_ANIM_IDLE + (MART_KEEPER_EMOTE_WAIT * 2)] = (const union AnimCmd[]){
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_IDLE + (MART_KEEPER_EMOTE_WAIT * 2)) * 16),
+            ANIMCMD_END
+        },
+        [MART_KEEPER_ANIM_TALK + (MART_KEEPER_EMOTE_WAIT * 2)] = (const union AnimCmd[]){
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_IDLE + (MART_KEEPER_EMOTE_WAIT * 2)) * 16, 5),
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_TALK + (MART_KEEPER_EMOTE_WAIT * 2)) * 16, 5),
+            ANIMCMD_JUMP(0)
+        },
+
+        [MART_KEEPER_ANIM_IDLE + (MART_KEEPER_EMOTE_HAPPY * 2)] = (const union AnimCmd[]){
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_IDLE + (MART_KEEPER_EMOTE_HAPPY * 2)) * 16),
             ANIMCMD_END
         },
 
-        [MART_KEEPER_ANIM_TALK] = (const union AnimCmd[]){
-            ANIMCMD_FRAME(MART_KEEPER_ANIM_IDLE * 16, 5),
-            ANIMCMD_FRAME(MART_KEEPER_ANIM_TALK * 16, 5),
+        [MART_KEEPER_ANIM_TALK + (MART_KEEPER_EMOTE_HAPPY * 2)] = (const union AnimCmd[]){
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_IDLE + (MART_KEEPER_EMOTE_HAPPY * 2)) * 16, 5),
+            ANIMCMD_FRAME((MART_KEEPER_ANIM_TALK + (MART_KEEPER_EMOTE_HAPPY * 2)) * 16, 5),
             ANIMCMD_JUMP(0)
         },
     },
@@ -295,15 +332,15 @@ static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
     [SHOP_SPRITE_UP_ARROW_SMALL] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_up_small.4bpp.smol"),
-        .x = TILE_TO_PIXELS(12) + 8,
-        .y = (TILE_TO_PIXELS(11) + 2) + 4,
+        .x = (TILE_TO_PIXELS(26) + 4) + 8,
+        .y = (TILE_TO_PIXELS(12) + 4) + 4,
         .callback = SpriteCB_UpArrowSmall,
     },
     [SHOP_SPRITE_DOWN_ARROW_SMALL] =
     {
         .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_down_small.4bpp.smol"),
-        .x = TILE_TO_PIXELS(12) + 8,
-        .y = (TILE_TO_PIXELS(13) + 6) + 4,
+        .x = (TILE_TO_PIXELS(26) + 4) + 8,
+        .y = (TILE_TO_PIXELS(16) + 4) + 4,
         .callback = SpriteCB_DownArrowSmall,
     },
 };
@@ -347,6 +384,27 @@ static const struct MenuAction sPokeMart_MenuActions[] =
     [MART_INPUT_BUY]  = { COMPOUND_STRING("Buy"),     { .void_u8 = Task_MartInterface_HandleBuyOrSell } },
     [MART_INPUT_SELL] = { COMPOUND_STRING("Sell"),    { .void_u8 = Task_MartInterface_HandleBuyOrSell } },
     [MART_INPUT_QUIT] = { COMPOUND_STRING("See ya!"), { .void_u8 = Task_MartInterface_HandleQuit } }
+};
+
+// either {a} {Premier Ball} or {number} {Premier Balls}
+// appended to MART_KEEPER_DIALOGUE_SUCCESS.
+static const u8 sPokeMart_KeeperPremierBallDialogue[] = _("I'll throw in {STR_VAR_2} {STR_VAR_3} there, too.");
+
+static const u8 *const sPokeMart_KeeperDialogues[] =
+{
+    [MART_KEEPER_DIALOGUE_NONE] = COMPOUND_STRING("ERROR"),
+
+    [MART_KEEPER_DIALOGUE_PURCHASE] = COMPOUND_STRING(
+        "{STR_VAR_1}? Certainly. How many would you like?\n"
+        "Currently you owned {STR_VAR_2} in your inventory."),
+
+    [MART_KEEPER_DIALOGUE_SUCCESS] = COMPOUND_STRING(
+        "Here you go! Thank you very much.\n"
+        "{STR_VAR_1}"),
+
+    [MART_KEEPER_DIALOGUE_FAILURE] = COMPOUND_STRING(
+        "You don't have enough money to buy\n"
+        "{STR_VAR_1} {STR_VAR_2}!"),
 };
 
 // code
@@ -426,6 +484,7 @@ static void Task_MartInterface_HandleQuit(u8 taskId)
     MartSprite_SetKeeperSpriteId(SPRITE_NONE);
     #endif
 
+    sPokeMartData.dialogue = MART_KEEPER_DIALOGUE_NONE;
     sPokeMartData.winId = WINDOW_NONE;
     MartSprite_SetCategoryArrowSpriteId(SPRITE_NONE);
     sPokeMartData.input = MART_INPUT_BUY;
@@ -444,6 +503,7 @@ static void Task_MartInterface_FadeIntoMenu(u8 taskId)
 
         MartSprite_SetCategoryArrowSpriteId(SPRITE_NONE);
         sPokeMartData.winId = WINDOW_NONE;
+        sPokeMartData.dialogue = MART_KEEPER_DIALOGUE_NONE;
         SetMainCallback2(sPokeMartData.input == MART_INPUT_BUY ? CB2_MartMenu_OpenBuyMenu : CB2_MartMenu_OpenSellMenu);
         DestroyTask(taskId);
     }
@@ -509,14 +569,38 @@ static void MartHelper_UpdateFrontEnd(void)
         DecompressDataWithHeaderVram(sPokeMart_ExtraTilemap, (void *)BG_SCREEN_ADDR(29));
     }
 
-    #if MART_KEEPER_ICON == TRUE
-    MartSprite_SetKeeperAnim(MART_KEEPER_ANIM_TALK);
-    #endif // MART_KEEPER_ICON
-
     ShopPrint_HelpBar();
+
     MartPrint_PlayersMoney();
     MartPrint_Category();
     MartPrint_ItemInfo();
+
+    MartPrint_KeeperDialogue();
+    MartPrint_ItemQuantity();
+
+    #if MART_KEEPER_ICON == TRUE
+    switch (sPokeMartData.dialogue)
+    {
+    default:
+        MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_NEUTRAL);
+        break;
+    case MART_KEEPER_DIALOGUE_PURCHASE:
+    case MART_KEEPER_DIALOGUE_FAILURE:
+        MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_WAIT);
+        break;
+    case MART_KEEPER_DIALOGUE_SUCCESS:
+        MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_HAPPY);
+        break;
+    }
+
+    MartSprite_SetKeeperAnim(MART_KEEPER_ANIM_TALK);
+    #endif // MART_KEEPER_ICON
+}
+
+static void MartPrint_AddTextPrinter(u32 fontId, u32 x, u32 y, u32 speed, const u8 *str)
+{
+    FillWindowPixelBuffer(sPokeMartData.winId, PIXEL_FILL(0));
+    AddTextPrinterParameterized4(sPokeMartData.winId, fontId, x, y, 0, 0, ShopConfig_GetFontColors(SHOP_FNTCLR_PRIMARY), speed, str);
 }
 
 static void MartPrint_PlayersMoney(void)
@@ -577,14 +661,112 @@ static void MartPrint_ItemInfo(void)
         return;
     }
 
-    FillWindowPixelBuffer(sPokeMartData.winId, PIXEL_FILL(0));
-
     str = GetItemDescription(itemId);
     fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(MART_DESC_WIN_WIDTH));
     x = TILE_TO_PIXELS(0);
     y = TILE_TO_PIXELS(0);
 
-    AddTextPrinterParameterized4(sPokeMartData.winId, fontId, x, y, 0, 0, ShopConfig_GetFontColors(SHOP_FNTCLR_PRIMARY), speed, str);
+    MartPrint_AddTextPrinter(fontId, x, y, speed, str);
+}
+
+static enum PokeMartKeeperDialogues MartPrint_ConvertModeToDialogue(void)
+{
+    switch (ShopHelper_GetMode())
+    {
+    default:
+        return MART_KEEPER_DIALOGUE_NONE;
+    case SHOP_MODE_PURCHASE:
+        return MART_KEEPER_DIALOGUE_PURCHASE;
+    case SHOP_MODE_SUCCESS:
+        return MART_KEEPER_DIALOGUE_SUCCESS;
+    case SHOP_MODE_FAILURE:
+        return MART_KEEPER_DIALOGUE_FAILURE;
+    }
+}
+
+static void MartPrint_KeeperDialogue(void)
+{
+    u32 fontId, x = 0, y = 0, speed = (gMain.state || MART_KEEPER_ICON == FALSE) ? 0 : GetPlayerTextSpeedDelay();
+
+    if (!ShopHelper_IsPurchaseMode())
+    {
+        sPokeMartData.dialogue = MART_KEEPER_DIALOGUE_NONE;
+        return;
+    }
+    else
+    {
+        enum PokeMartKeeperDialogues dialogue = MartPrint_ConvertModeToDialogue();
+        u32 itemId = gShopMenuDataPtr->selectedItemId;
+        u32 ownedItems = CountTotalItemQuantityInBag(itemId);
+        u32 itemQuantity = gShopMenuDataPtr->itemQuantity + 1;
+
+        // don't reprint if we get the same dialogue
+        if (dialogue == sPokeMartData.dialogue)
+        {
+            return;
+        }
+
+        sPokeMartData.dialogue = dialogue;
+
+        switch (dialogue)
+        {
+        default:
+            break;
+        case MART_KEEPER_DIALOGUE_PURCHASE:
+            StringCopy(gStringVar1, GetItemName(itemId));
+            ConvertIntToDecimalStringN(gStringVar2, ownedItems, STR_CONV_MODE_LEFT_ALIGN, 4);
+            break;
+        case MART_KEEPER_DIALOGUE_SUCCESS:
+            {
+                StringCopy(gStringVar1, COMPOUND_STRING(" "));
+
+                if (GetItemShopCategory(itemId) == SHOP_CATEGORY_POKE_BALLS && itemQuantity >= 10)
+                {
+                    ConvertIntToDecimalStringN(gStringVar2, itemQuantity / 10, STR_CONV_MODE_LEFT_ALIGN, 4);
+                    StringCopy(gStringVar3, GetItemName(ITEM_PREMIER_BALL));
+                    StringExpandPlaceholders(gStringVar1, sPokeMart_KeeperPremierBallDialogue);
+                }
+
+                break;
+            }
+        case MART_KEEPER_DIALOGUE_FAILURE:
+            ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_LEFT_ALIGN, 4);
+            StringCopy(gStringVar2, GetItemName(itemId));
+            break;
+        }
+
+        StringExpandPlaceholders(gStringVar4, sPokeMart_KeeperDialogues[dialogue]);
+    }
+
+    fontId = GetFontIdToFit(gStringVar4, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(MART_DESC_WIN_WIDTH));
+    MartPrint_AddTextPrinter(fontId, x, y, speed, gStringVar4);
+}
+
+static void MartPrint_ItemQuantity(void)
+{
+    if (!ShopHelper_IsProcessingPurchaseMode())
+    {
+        return;
+    }
+
+    u32 fontId = FONT_SMALL_NARROW, x = 0, y = 0, quantity = 0;
+    u32 itemId = gShopMenuDataPtr->selectedItemId;
+
+    // ¥ {money}
+    quantity = ShopConfig_Get()->handleTotalPrice(itemId, gShopMenuDataPtr->itemQuantity);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥ {STR_VAR_1}"));
+    x = GetStringRightAlignXOffset(fontId, gStringVar3, TILE_TO_PIXELS(DISPLAY_TILE_WIDTH - 1));
+    y = TILE_TO_PIXELS(13) + 4;
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, x, y, SHOP_FNTCLR_PRIMARY, gStringVar3);
+
+    // x {num}
+    quantity = gShopMenuDataPtr->itemQuantity + 1;
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, 4);
+    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("x{STR_VAR_1}"));
+    x = GetStringRightAlignXOffset(fontId, gStringVar3, TILE_TO_PIXELS(DISPLAY_TILE_WIDTH - 1));
+    y += TILE_TO_PIXELS(1) + 1;
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, x, y, SHOP_FNTCLR_PRIMARY, gStringVar3);
 }
 
 static u32 MartPurchase_GetTotalItemPrice(u16 itemId, u16 quantity)
@@ -612,7 +794,7 @@ static void MartSprite_Init(void)
         struct Sprite *keeper = &gSprites[MartSprite_GetKeeperSpriteId()];
 
         keeper->sKeeper_StartingTileNum = keeper->oam.tileNum;
-        MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_WAIT);
+        MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_NEUTRAL);
         MartSprite_SetKeeperAnim(MART_KEEPER_ANIM_IDLE);
     }
     #endif // MART_KEEPER_ICON
@@ -643,14 +825,12 @@ static void MartSprite_SetKeeperEmote(enum PokeMartKeeperEmotes emote)
 {
     struct Sprite *keeper = &gSprites[MartSprite_GetKeeperSpriteId()];
     keeper->sKeeper_Emote = emote;
-    keeper->oam.tileNum = keeper->sKeeper_StartingTileNum + ((keeper->sKeeper_Emote * MART_KEEPER_TOTAL_ANIMS) * 16);
 }
 
 static void MartSprite_SetKeeperAnim(enum PokeMartKeeperAnims anim)
 {
     struct Sprite *keeper = &gSprites[MartSprite_GetKeeperSpriteId()];
     keeper->sKeeper_Anim = anim;
-    StartSpriteAnimIfDifferent(keeper, keeper->sKeeper_Anim);
 }
 #endif
 
@@ -658,6 +838,8 @@ static void SpriteCB_BuyIcon(struct Sprite *sprite)
 {
     u32 x2 = ShopConfig_GetTotalShownItems() * ShopGrid_GetGridXCursor();
     sprite->x2 = TILE_TO_PIXELS(x2);
+
+    sprite->invisible = ShopHelper_IsPurchaseMode();
 }
 
 static void SpriteCB_UpArrow(struct Sprite *sprite)
@@ -742,9 +924,10 @@ static void SpriteCB_MartKeeper(struct Sprite *sprite)
         if (!IsTextPrinterActive(sPokeMartData.winId))
         {
             sKeeper_Anim = MART_KEEPER_ANIM_IDLE;
-            StartSpriteAnim(sprite, sKeeper_Anim);
         }
     }
+
+    StartSpriteAnimIfDifferent(sprite, sKeeper_Anim + ((u16)sKeeper_Emote * 2));
 }
 #endif
 
@@ -755,5 +938,5 @@ static void SpriteCB_CategoryArrow(struct Sprite *sprite)
     sprite->sArrow_SineValue += 8;
 
     sprite->y2 = ShopGrid_GetGridYCursor() * 26;
-    sprite->invisible = ShopHelper_IsProcessingPurchaseMode();
+    sprite->invisible = ShopHelper_IsPurchaseMode();
 }
