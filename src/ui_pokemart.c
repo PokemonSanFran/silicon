@@ -627,7 +627,7 @@ static void MartPrint_Category(void)
     const u8 *str = gShopCategoryNames[ShopGrid_CurrentCategoryRow()];
     u32 fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(8));
     u32 x = TILE_TO_PIXELS(1) + GetStringCenterAlignXOffset(fontId, str, TILE_TO_PIXELS(8));
-    u32 y = TILE_TO_PIXELS(2) - 3;
+    u32 y = (TILE_TO_PIXELS(2) - 3) + SHOP_BG0_OFFSET;
 
     ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
 }
@@ -641,7 +641,7 @@ static void MartPrint_ItemInfo(void)
     str = GetItemName(itemId);
     fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(8));
     x = TILE_TO_PIXELS(1) + GetStringCenterAlignXOffset(fontId, str, TILE_TO_PIXELS(8));
-    y = TILE_TO_PIXELS(8) + 4;
+    y = (TILE_TO_PIXELS(8) + 4) + SHOP_BG0_OFFSET;
 
     ShopPrint_AddTextPrinter(fontId, x, y, SHOP_FNTCLR_PRIMARY, str);
 
@@ -757,7 +757,7 @@ static void MartPrint_ItemQuantity(void)
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥ {STR_VAR_1}"));
     x = GetStringRightAlignXOffset(fontId, gStringVar3, TILE_TO_PIXELS(DISPLAY_TILE_WIDTH - 1));
-    y = TILE_TO_PIXELS(13) + 4;
+    y = (TILE_TO_PIXELS(13) + 4) + SHOP_BG0_OFFSET;
     ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, x, y, SHOP_FNTCLR_PRIMARY, gStringVar3);
 
     // x {num}

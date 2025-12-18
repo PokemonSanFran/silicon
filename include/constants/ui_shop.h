@@ -5,6 +5,7 @@
 #define NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS 10
 
 #define SHOP_WINDOW_MAIN 0
+#define SHOP_BG0_OFFSET  2
 
 enum ShopMenuBackgrounds
 {

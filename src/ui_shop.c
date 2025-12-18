@@ -412,6 +412,8 @@ static void ShopSetup_Backgrounds(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, (SHOP_BG0_OFFSET * PokeMart_IsActive()));
+
     InitBgsFromTemplates(0, sShopBgTemplates, NELEMS(sShopBgTemplates));
     SetBgTilemapBuffer(SHOP_BG_TILEMAP, sShopMenuStaticDataPtr->tilemapBuf);
     ScheduleBgCopyTilemapToVram(SHOP_BG_DESC);
@@ -1701,7 +1703,8 @@ void ShopPrint_HelpBar(void)
         break;
     }
 
-    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18), SHOP_FNTCLR_SECONDARY, str);
+    u32 y = TILE_TO_PIXELS(18) + (SHOP_BG0_OFFSET * PokeMart_IsActive());
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(0) + 4, y, SHOP_FNTCLR_SECONDARY, str);
 }
 
 static const void *const ShopGraphics_GetByType(enum ShopMenuGraphicsType type)
