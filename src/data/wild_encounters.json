@@ -42955,6 +42955,111 @@
         {
           "map": "MAP_ARANTRAZ",
           "base_label": "gArantraz_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_KILOWATTREL"
+              }
+            ]
+          },
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -43477,6 +43582,224 @@
                 "min_level": 83,
                 "max_level": 84,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ARANTRAZ",
+          "base_label": "gArantraz_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_KILOWATTREL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ARANTRAZ",
+          "base_label": "gArantraz_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_HAWLUCHA"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ROOKIDEE"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_TAILLOW"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_WATTREL"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_CORVISQUIRE"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HOOTHOOT"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HOOTHOOT"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HOOTHOOT"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HOOTHOOT"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HOOTHOOT"
               }
             ]
           }
@@ -56227,111 +56550,6 @@
         {
           "map": "MAP_ROUTE_B",
           "base_label": "gRouteB_Morning",
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              },
-              {
-                "min_level": 38,
-                "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
-              }
-            ]
-          },
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -56434,6 +56652,111 @@
                 "min_level": 38,
                 "max_level": 39,
                 "species": "SPECIES_SWOOBAT"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_SHUCKLE"
               }
             ]
           }
