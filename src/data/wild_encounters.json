@@ -49681,6 +49681,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GOLURK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GOLURK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GOLURK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAMERUPT"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAMERUPT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11",
+          "base_label": "gRoute11_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_CAMERUPT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_CAMERUPT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11",
+          "base_label": "gRoute11_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 45,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAMERUPT"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAMERUPT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11",
+          "base_label": "gRoute11_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_VULPIX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_NINETALES"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GOLURK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GOLURK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GOLURK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_NUMEL"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAMERUPT"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAMERUPT"
+              }
+            ]
           }
         },
         {
