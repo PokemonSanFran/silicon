@@ -8,7 +8,7 @@
 #include "constants/tms_hms.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
-#include "ui_shop.h" // shopMenu
+#include "ui_shop_criterias.h" // shopMenu
 
 /* Expands to:
  * enum
@@ -547,11 +547,8 @@ struct Item
     const u32 *iconPic;
     const u16 *iconPalette;
     // Start shopMenu
-    struct {
-        enum ShopMenuCategories category;
-        u32 criteriaGoal;
-        ShopCriteriaFunc criteriaFunc;
-    } shop;
+    u32 criteriaGoal;
+    ShopCriteriaFunc criteriaFunc;
     // End shopMenu
 };
 

@@ -199,10 +199,4 @@ struct ShopSprite
     u8 priority;
 };
 
-#define WRITE_CRITERIA_GOAL_VAR(varId, varValue) ((varId << 16) | (varValue))
-#define READ_CRITERIA_GOAL_VAR_ID(criteria) ((criteria) >> 16)
-#define READ_CRITERIA_GOAL_VAR_VALUE(criteria) ((criteria) & 0xFFFF)
-
-typedef bool32 (*ShopCriteriaFunc)(u16);
-
 #endif // GUARD_CONSTANTS_UI_SHOP_H

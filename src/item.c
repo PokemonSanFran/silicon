@@ -22,6 +22,7 @@
 #include "constants/hold_effects.h"
 #include "sprays.h" // siliconMerge
 #include "move.h" // siliconMerge
+#include "ui_shop.h" // shopMenu
 
 #define DUMMY_PC_BAG_POCKET                 \
 {                                           \
@@ -958,18 +959,33 @@ u32 GetItemNativeGroup(u32 itemId)
 }
 
 // Start shopMenu
+
+// PSF TODO apply new bag pockets into each respective categories
 enum ShopMenuCategories GetItemShopCategory(u16 itemId)
 {
-    return gItemsInfo[SanitizeItemId(itemId)].shop.category;
+    switch (GetItemPocket(itemId))
+    {
+    default:
+    case POCKET_ITEMS:
+        return SHOP_CATEGORY_OTHER_ITEMS;
+    case POCKET_POKE_BALLS:
+        return SHOP_CATEGORY_POKE_BALLS;
+    case POCKET_TM_HM:
+        return SHOP_CATEGORY_TMS;
+    case POCKET_BERRIES:
+        return SHOP_CATEGORY_BERRIES;
+    case POCKET_KEY_ITEMS:
+        return SHOP_CATEGORY_OTHER_ITEMS;
+    }
 }
 
 u32 GetItemShopCriteriaGoal(u16 itemId)
 {
-    return gItemsInfo[SanitizeItemId(itemId)].shop.criteriaGoal;
+    return gItemsInfo[SanitizeItemId(itemId)].criteriaGoal;
 }
 
 ShopCriteriaFunc GetItemShopCriteriaFunc(u16 itemId)
 {
-    return gItemsInfo[SanitizeItemId(itemId)].shop.criteriaFunc;
+    return gItemsInfo[SanitizeItemId(itemId)].criteriaFunc;
 }
 // End shopMenu
