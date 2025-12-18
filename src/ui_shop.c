@@ -537,7 +537,6 @@ static void Task_Shop_Idle(u8 taskId)
                 PlaySE(SE_SELECT);
                 gShopMenuDataPtr->itemQuantity = 0;
                 ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
-
                 if (ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
                 {
                     ShopInventory_InitCategoryLists();
@@ -556,8 +555,7 @@ static void Task_Shop_Idle(u8 taskId)
                  || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
                 {
                     ShopInventory_InitCategoryLists();
-                    ShopGrid_SetCurrentCategoryIndex(0);
-                    ShopGrid_SetGridXCursor(0);
+                    ShopGrid_ResetIndexes(SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_ITEM);
                 }
 
                 ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
@@ -598,14 +596,11 @@ static void Task_Shop_Idle(u8 taskId)
                 PlaySE(SE_SELECT);
                 gShopMenuDataPtr->itemQuantity = 0;
 
-                if (ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
+                if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
+                 || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
                 {
                     ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
-                    if (gShopMenuDataPtr->selectedItemId == ITEM_NONE)
-                    {
-                        ShopGrid_SetCurrentItemIndex(0);
-                        ShopGrid_SetGridYCursor(0);
-                    }
+                    ShopGrid_ResetIndexes(SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_ITEM);
                 }
                 else
                 {
@@ -1297,12 +1292,6 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 
     ShopInventory_InitCategoryLists();
 
-    if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
-     || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
-    {
-        ShopGrid_ResetIndexes(SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_ITEM);
-    }
-
     // only adjust category index once!
     if (!bak)
     {
@@ -1313,6 +1302,12 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
         }
 
         ShopGrid_SetCurrentCategoryIndex(ShopGrid_GetCurrentCategoryIndex() + 1);
+    }
+
+    if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
+     || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
+    {
+        ShopGrid_ResetIndexes(SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID);
     }
 }
 
@@ -1430,9 +1425,11 @@ static void ShopGrid_HorizontalInput(s32 delta)
         u32 shownItems = ShopConfig_GetTotalShownItems() - 1;
         u32 finalHalfScreen = categoryNumItems - (shownItems - halfScreen);
         u32 gridIdx = ShopGrid_GetGridXCursor();
+        bool32 scroll = categoryNumItems > shownItems;
 
-        if ((trueIdx >= halfScreen && trueIdx < finalHalfScreen && additiveDelta)
+        if (((trueIdx >= halfScreen && trueIdx < finalHalfScreen && additiveDelta)
          || (trueIdx > halfScreen && trueIdx <= finalHalfScreen && !additiveDelta))
+         && scroll)
         {
             ShopGrid_SetGridXCursor(halfScreen);
             ShopGrid_SetCurrentItemIndex(trueIdx + delta);
@@ -1448,7 +1445,7 @@ static void ShopGrid_HorizontalInput(s32 delta)
         {
             ShopGrid_SetGridXCursor(shownItems);
             ShopGrid_SetCurrentItemIndex(categoryNumItems);
-            if (categoryNumItems > shownItems)
+            if (scroll)
             {
                 ShopGrid_SetFirstItemIndex(categoryNumItems - shownItems);
             }
