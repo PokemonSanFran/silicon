@@ -35811,6 +35811,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_CHARJABUG"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_CHARJABUG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HALERBA_WILDS",
+          "base_label": "gHalerbaWilds_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_GRUBBIN"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_CHARJABUG"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_CHARJABUG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HALERBA_WILDS",
+          "base_label": "gHalerbaWilds_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PIKIPEK"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PIKIPEK"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PIKIPEK"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_TOUCANNON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HALERBA_WILDS",
+          "base_label": "gHalerbaWilds_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_STEENEE"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_AXEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PIKIPEK"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PIKIPEK"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PIKIPEK"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_TRUMBEAK"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_TOUCANNON"
+              }
+            ]
           }
         },
         {
