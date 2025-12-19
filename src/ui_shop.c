@@ -291,7 +291,6 @@ const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES] =
 
 void ShopMenu_Init(const struct ShopMenuConfigs *configs, MainCallback callback)
 {
-    DebugPrintf("1. allocate");
     gShopMenuDataPtr = AllocZeroed(sizeof(struct ShopMenuData));
     if (!gShopMenuDataPtr)
     {
@@ -307,7 +306,6 @@ void ShopMenu_Init(const struct ShopMenuConfigs *configs, MainCallback callback)
         return;
     }
 
-    DebugPrintf("2. set");
     sShopMenuStaticDataPtr->shownItemsOnScreen = configs->totalShownItems * configs->totalShownItemRows;
     sShopMenuStaticDataPtr->itemIconIds = AllocZeroed(sShopMenuStaticDataPtr->shownItemsOnScreen);
     if (!sShopMenuStaticDataPtr->itemIconIds)
@@ -323,12 +321,9 @@ void ShopMenu_Init(const struct ShopMenuConfigs *configs, MainCallback callback)
     memset(sShopMenuStaticDataPtr->spriteIds, SPRITE_NONE, NUM_SHOP_SPRITES);
     memset(sShopMenuStaticDataPtr->itemIconIds, SPRITE_NONE, configs->totalShownItems * configs->totalShownItemRows);
 
-    DebugPrintf("3. items list");
     ShopInventory_InitCategoryLists();
-    DebugPrintf("4. recommended items");
     ShopInventory_InitRecommendedList();
 
-    DebugPrintf("6. begin setup");
     SetMainCallback2(CB2_ShopSetup);
 }
 
@@ -985,7 +980,6 @@ static void ShopInventory_InitRecommendedList(void)
         }
     }
 
-    DebugPrintf("5. reinit items");
     ShopInventory_InitCategoryLists();
 }
 
