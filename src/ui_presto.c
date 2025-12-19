@@ -599,7 +599,9 @@ static void SpriteCB_LeftArrow(struct Sprite *sprite)
     sprite->x2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    sprite->invisible = (ShopHelper_IsPurchaseMode() || !ShopGrid_GetGridXCursor());
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
+     || !ShopGrid_GetGridXCursor()
+     || ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) < 2);
 }
 
 static void SpriteCB_RightArrow(struct Sprite *sprite)
@@ -613,7 +615,9 @@ static void SpriteCB_RightArrow(struct Sprite *sprite)
     sprite->data[0] += 8;
 
     sprite->invisible = (ShopHelper_IsPurchaseMode()
-     || ShopGrid_GetGridXCursor() == ShopConfig_GetTotalShownItems() - 1);
+     || ShopGrid_GetGridXCursor() == ShopConfig_GetTotalShownItems() - 1
+     || ShopGrid_GetCurrentItemIndex() >= (ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) - 1)
+     || ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) < 2);
 }
 
 static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
