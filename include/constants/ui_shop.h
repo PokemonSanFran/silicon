@@ -152,6 +152,7 @@ struct ShopMenuConfigs
     // functions that may be called in certain contexts.
     void (*handleFrontend)(void);      // what to do when refreshing the screen for e.g. show purchase menu
     u32 (*handleTotalPrice)(u16, u16); // what price to return for the backend. used for Presto App fee.
+    u32 (*handleInitList)(void);       // what to do when initializing the products/items list.
 };
 
 struct ShopMenuData
@@ -188,6 +189,7 @@ struct ShopMenuStaticData
 {
     u8 *tilemapBuf;
     u8 *itemIconIds;
+    u8 shownItemsOnScreen;
     u8 spriteIds[NUM_SHOP_SPRITES];
 };
 

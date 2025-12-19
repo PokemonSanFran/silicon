@@ -133,6 +133,7 @@ enum PokeMartKeeperDialogues
 // structs
 struct PokeMartData
 {
+    const u16 *products;
     enum PokeMartKeeperDialogues dialogue;
     u8 active:1;
     s8 input:7;
@@ -173,6 +174,7 @@ static void CB2_MartReload_ReturnToField(void);
 static void FieldCB_MartReload_PrepareInterface(void);
 
 static void MartHelper_UpdateFrontEnd(void);
+static u32 MartHelper_InitItemsList(void);
 
 static void MartPrint_AddTextPrinter(u32, u32, u32, u32, const u8 *);
 static void MartPrint_PlayersMoney(void);
@@ -377,6 +379,7 @@ static const struct ShopMenuConfigs sPokeMartShopConfigs =
 
     .handleFrontend = MartHelper_UpdateFrontEnd,
     .handleTotalPrice = MartPurchase_GetTotalItemPrice,
+    .handleInitList = MartHelper_InitItemsList,
 };
 
 static const struct MenuAction sPokeMart_MenuActions[] =
@@ -416,7 +419,12 @@ bool32 PokeMart_IsActive(void)
 void OpenPokeMartWithinScript(struct ScriptContext *ctx)
 {
     const u16 *products = (const u16 *)ScriptReadWord(ctx);
+    if (!products)
+    {
+        return;
+    }
 
+    sPokeMartData.products = products;
     MartInterface_Open();
 }
 
@@ -525,7 +533,7 @@ static void Task_MartReload_Finish(u8 taskId)
 
 static void CB2_MartMenu_OpenBuyMenu(void)
 {
-    ShopMenu_Init(&sPokeMartShopConfigs, NULL, CB2_MartReload_ReturnToField);
+    ShopMenu_Init(&sPokeMartShopConfigs, CB2_MartReload_ReturnToField);
 }
 
 static void CB2_MartMenu_OpenSellMenu(void)
@@ -595,6 +603,99 @@ static void MartHelper_UpdateFrontEnd(void)
 
     MartSprite_SetKeeperAnim(MART_KEEPER_ANIM_TALK);
     #endif // MART_KEEPER_ICON
+}
+
+static u32 MartHelper_InitItemsList(void)
+{
+    enum ShopMenuCategories category = (gShopMenuDataPtr->sortCategories)
+                                     ? SHOP_CATEGORY_STATIC_START
+                                     : SHOP_CATEGORY_BUY_AGAIN;
+    u32 numCategories = 0;
+
+    for (u32 idx = 0; category < NUM_SHOP_CATEGORIES; category++)
+    {
+        category %= NUM_SHOP_CATEGORIES;
+
+        // Never accept Buy Again or Recommended categories when sorting.
+        // Or an already filled category (by looping back to Buy Again).
+        if ((gShopMenuDataPtr->sortCategories && category < SHOP_CATEGORY_STATIC_START)
+         || ShopInventory_GetCategoryNumItems(category) != 0)
+        {
+            break;
+        }
+
+        u32 numItems = ShopInventory_GetCategoryNumItems(idx);
+
+        if (category == SHOP_CATEGORY_BUY_AGAIN && gSaveBlock3Ptr->shopBuyAgainItems[0])
+        {
+            for (u32 itemId = 0; itemId < MAX_PRESTO_BUY_AGAIN_ITEMS; itemId++)
+            {
+                if (!gSaveBlock3Ptr->shopBuyAgainItems[itemId])
+                {
+                    break;
+                }
+
+                ShopInventory_SetItemIdToGrid(gSaveBlock3Ptr->shopBuyAgainItems[itemId], idx, numItems);
+                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
+            }
+        }
+        else if (category == SHOP_CATEGORY_RECOMMENDED)
+        {
+            continue;
+        }
+        else
+        {
+            u32 itemId = 0;
+            while (sPokeMartData.products[itemId] != ITEM_NONE)
+            {
+                // Continue to the next category if the current category is full.
+                if (numItems >= NUM_SHOP_ITEMS_PER_CATEGORIES)
+                {
+                    ShopInventory_SetCategoryNumItems(NUM_SHOP_ITEMS_PER_CATEGORIES, idx);
+                    break;
+                }
+
+                u32 product = sPokeMartData.products[itemId];
+
+                // Skip mismatching idx.
+                if (GetItemShopCategory(product) != category)
+                {
+                    itemId++;
+                    continue;
+                }
+
+                bool32 canBuy = TRUE;
+                ShopCriteriaFunc func = GetItemShopCriteriaFunc(product);
+
+                if (func != NULL)
+                {
+                    canBuy = func(product);
+                }
+
+                if (ShopPurchase_IsCategoryOneTimePurchase(category) && CountTotalItemQuantityInBag(product))
+                {
+                    canBuy = FALSE;
+                }
+
+                if (!GetItemPrice(product))
+                {
+                    canBuy = FALSE;
+                }
+
+                ShopInventory_SetItemIdToGrid(product, idx, numItems);
+                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
+                itemId++;
+            }
+        }
+
+        if (ShopInventory_GetCategoryNumItems(idx) != 0)
+        {
+            gShopMenuDataPtr->categoryList[numCategories] = category;
+            numCategories++, idx++;
+        }
+    }
+
+    return numCategories;
 }
 
 static void MartPrint_AddTextPrinter(u32 fontId, u32 x, u32 y, u32 speed, const u8 *str)
@@ -848,7 +949,9 @@ static void SpriteCB_UpArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->sArrow_SineValue += 8;
 
-    sprite->invisible = (ShopHelper_IsPurchaseMode() || !ShopGrid_GetGridYCursor());
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
+     || !ShopGrid_GetGridYCursor()
+     || gShopMenuDataPtr->numCategories <= ShopConfig_GetTotalShownItemRows());
 }
 
 static void SpriteCB_DownArrow(struct Sprite *sprite)
@@ -858,7 +961,8 @@ static void SpriteCB_DownArrow(struct Sprite *sprite)
     sprite->sArrow_SineValue += 8;
 
     sprite->invisible = (ShopHelper_IsPurchaseMode()
-     || ShopGrid_GetGridYCursor() == ShopConfig_GetTotalShownCategories() - 1);
+     || ShopGrid_GetGridYCursor() == ShopConfig_GetTotalShownCategories() - 1
+     || gShopMenuDataPtr->numCategories <= ShopConfig_GetTotalShownItemRows());
 }
 
 static void SpriteCB_LeftArrow(struct Sprite *sprite)

@@ -8,7 +8,7 @@
 extern const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES];
 extern struct ShopMenuData *gShopMenuDataPtr;
 
-void ShopMenu_Init(const struct ShopMenuConfigs *, const u16 *, MainCallback);
+void ShopMenu_Init(const struct ShopMenuConfigs *, MainCallback);
 void ShopHelper_SetMode(enum ShopMenuModes);
 u32 ShopHelper_GetMode(void);
 bool32 ShopHelper_IsProcessingPurchaseMode(void);
@@ -40,10 +40,12 @@ bool32 ShopGrid_IsAdditiveDelta(s32);
 void ShopGrid_ResetIndexes(u32);
 u32 ShopGrid_GetXHalfScreen(void);
 u32 ShopGrid_GetYHalfScreen(void);
+void ShopInventory_SetItemIdToGrid(u32, u32, u32);
 u32 ShopInventory_GetItemIdFromGrid(u32, u32);
 u32 ShopInventory_GetChosenItemId(void);
 void ShopInventory_SetCategoryNumItems(u32, u32);
 u32 ShopInventory_GetCategoryNumItems(u32);
+bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories);
 u32 ShopSprite_GetSpriteId(enum ShopMenuSprites);
 u32 ShopSprite_GetItemSpriteId(u32);
 

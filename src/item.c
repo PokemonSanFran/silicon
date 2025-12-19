@@ -966,6 +966,7 @@ enum ShopMenuCategories GetItemShopCategory(u16 itemId)
     switch (GetItemPocket(itemId))
     {
     default:
+        return NUM_SHOP_CATEGORIES;
     case POCKET_ITEMS:
         return SHOP_CATEGORY_OTHER_ITEMS;
     case POCKET_POKE_BALLS:
@@ -974,8 +975,6 @@ enum ShopMenuCategories GetItemShopCategory(u16 itemId)
         return SHOP_CATEGORY_TMS;
     case POCKET_BERRIES:
         return SHOP_CATEGORY_BERRIES;
-    case POCKET_KEY_ITEMS:
-        return SHOP_CATEGORY_OTHER_ITEMS;
     }
 }
 

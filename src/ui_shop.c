@@ -105,7 +105,7 @@ static void Task_Shop_WaitFadeAndExit(u8);
 static void Task_Shop_Idle(u8);
 
 static void ShopSprite_CreateGenericSprites(void);
-static void ShopSprite_CreateItemSprite(u16, u8, u8, u8);
+static void ShopSprite_CreateItemSprite(u16, u8, u8, u8, u8);
 static void ShopSprite_CreateItemSprites(void);
 static void ShopSprite_DestroyItemSprites(void);
 static void ShopSprite_ToggleItemIconsVisibility(bool32);
@@ -122,10 +122,8 @@ static bool32 ShopInventory_IsItemUsefulInForest(u16);
 static bool32 ShopInventory_IsItemUsefulInWater(u16);
 static bool32 ShopInventory_IsItemUsefulInCave(u16);
 static void ShopInventory_Reset(void);
-static void ShopInventory_SetItemIdToGrid(u32, u32, u32);
 
 static void ShopPurchase_CalculateMaxQuantity(void);
-static bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories);
 static void ShopPurchase_AddItem(u16, u16);
 
 static void ShopGrid_SwitchMode(enum ShopMenuModes);
@@ -291,8 +289,9 @@ const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES] =
 
 // code
 
-void ShopMenu_Init(const struct ShopMenuConfigs *configs, const u16 *products, MainCallback callback)
+void ShopMenu_Init(const struct ShopMenuConfigs *configs, MainCallback callback)
 {
+    DebugPrintf("1. allocate");
     gShopMenuDataPtr = AllocZeroed(sizeof(struct ShopMenuData));
     if (!gShopMenuDataPtr)
     {
@@ -308,7 +307,9 @@ void ShopMenu_Init(const struct ShopMenuConfigs *configs, const u16 *products, M
         return;
     }
 
-    sShopMenuStaticDataPtr->itemIconIds = AllocZeroed(configs->totalShownItems * configs->totalShownItemRows);
+    DebugPrintf("2. set");
+    sShopMenuStaticDataPtr->shownItemsOnScreen = configs->totalShownItems * configs->totalShownItemRows;
+    sShopMenuStaticDataPtr->itemIconIds = AllocZeroed(sShopMenuStaticDataPtr->shownItemsOnScreen);
     if (!sShopMenuStaticDataPtr->itemIconIds)
     {
         FREE_AND_SET_NULL(sShopMenuStaticDataPtr);
@@ -318,14 +319,16 @@ void ShopMenu_Init(const struct ShopMenuConfigs *configs, const u16 *products, M
     }
 
     gShopMenuDataPtr->configs = configs;
-    gShopMenuDataPtr->products = products;
     gShopMenuDataPtr->savedCallback = callback;
     memset(sShopMenuStaticDataPtr->spriteIds, SPRITE_NONE, NUM_SHOP_SPRITES);
     memset(sShopMenuStaticDataPtr->itemIconIds, SPRITE_NONE, configs->totalShownItems * configs->totalShownItemRows);
 
+    DebugPrintf("3. items list");
     ShopInventory_InitCategoryLists();
+    DebugPrintf("4. recommended items");
     ShopInventory_InitRecommendedList();
 
+    DebugPrintf("6. begin setup");
     SetMainCallback2(CB2_ShopSetup);
 }
 
@@ -768,23 +771,24 @@ u32 ShopSprite_GetItemSpriteId(u32 idx)
     return sShopMenuStaticDataPtr->itemIconIds[idx];
 }
 
-static void ShopSprite_CreateItemSprite(u16 itemId, u8 idx, u8 x, u8 y)
+static void ShopSprite_CreateItemSprite(u16 itemId, u8 row, u8 idx, u8 x, u8 y)
 {
     u32 spriteIdx = idx;
 
-    if (sShopMenuStaticDataPtr->itemIconIds[spriteIdx] != SPRITE_NONE)
+    if (sShopMenuStaticDataPtr->itemIconIds[spriteIdx] != SPRITE_NONE
+     || !itemId
+     || itemId >= ITEMS_COUNT)
+    {
         return;
+    }
 
     u32 spriteId = AddItemIconSprite(spriteIdx, spriteIdx, itemId);
     gSprites[spriteId].x2 = x;
     gSprites[spriteId].y2 = y;
     gSprites[spriteId].oam.priority = 1;
-    if (!itemId || itemId >= ITEMS_COUNT)
-    {
-        gSprites[spriteId].invisible = TRUE;
-    }
 
-    if (PokeMart_IsActive() && idx >= ShopConfig_GetTotalShownItems())
+    if (PokeMart_IsActive()
+     && ShopGrid_CategoryInRow(row) != ShopGrid_CurrentCategoryRow())
     {
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
     }
@@ -811,7 +815,12 @@ static void ShopSprite_CreateItemSprites(void)
                 idx += ShopGrid_GetFirstItemIndex();
             }
 
-            ShopSprite_CreateItemSprite(ShopInventory_GetItemIdFromGrid(row, idx), temp, x, y);
+            if (ShopInventory_GetItemIdFromGrid(row, idx) == ITEM_NONE)
+            {
+                continue;
+            }
+
+            ShopSprite_CreateItemSprite(ShopInventory_GetItemIdFromGrid(row, idx), row, temp, x, y);
 
             x += configs->itemIconCoords[SHOP_COORD_PAD];
             temp++, j++;
@@ -824,7 +833,7 @@ static void ShopSprite_CreateItemSprites(void)
 
 static void ShopSprite_DestroyItemSprites(void)
 {
-    for (u32 i = 0; i < ShopConfig_GetTotalShownItemsOnScreen(); i++)
+    for (u32 i = 0; i < sShopMenuStaticDataPtr->shownItemsOnScreen; i++)
     {
         if (sShopMenuStaticDataPtr->itemIconIds[i] != SPRITE_NONE)
         {
@@ -856,95 +865,17 @@ static void ShopSprite_ToggleItemIconsVisibility(bool32 flag)
 static void ShopInventory_InitCategoryLists(void)
 {
     ShopInventory_Reset();
-
-    enum ShopMenuCategories category = gShopMenuDataPtr->sortCategories ? SHOP_CATEGORY_STATIC_START : 0;
-    u32 numCategories = 0;
-
-    for (u32 idx = 0; category < NUM_SHOP_CATEGORIES; category++)
-    {
-        category %= NUM_SHOP_CATEGORIES;
-
-        // Never accept Buy Again or Recommended categories when sorting.
-        if (gShopMenuDataPtr->sortCategories && category < SHOP_CATEGORY_STATIC_START)
-        {
-            break;
-        }
-
-        for (u32 itemId = 0; itemId < ITEMS_COUNT; itemId++)
-        {
-            u32 numItems = ShopInventory_GetCategoryNumItems(idx);
-
-            // Continue to the next category if the current category is full.
-            if (numItems >= NUM_SHOP_ITEMS_PER_CATEGORIES)
-            {
-                ShopInventory_SetCategoryNumItems(NUM_SHOP_ITEMS_PER_CATEGORIES, idx);
-                break;
-            }
-
-            if (category == SHOP_CATEGORY_BUY_AGAIN && gSaveBlock3Ptr->shopBuyAgainItems[0])
-            {
-                if (itemId >= MAX_PRESTO_BUY_AGAIN_ITEMS
-                 || !gSaveBlock3Ptr->shopBuyAgainItems[itemId])
-                {
-                    break;
-                }
-
-                ShopInventory_SetItemIdToGrid(gSaveBlock3Ptr->shopBuyAgainItems[itemId], idx, numItems);
-                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-            }
-            else if (category == SHOP_CATEGORY_RECOMMENDED)
-            {
-                if (itemId >= NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS)
-                    break;
-
-                ShopInventory_SetItemIdToGrid(gShopMenuDataPtr->recommendedItems[itemId], idx, numItems);
-                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-            }
-            else if (category >= SHOP_CATEGORY_STATIC_START)
-            {
-                // Skip mismatching idx.
-                if (GetItemShopCategory(itemId) != category)
-                    continue;
-
-                bool32 canBuy = TRUE;
-                ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
-
-                if (func != NULL)
-                {
-                    canBuy = func(itemId);
-                }
-
-                if (ShopPurchase_IsCategoryOneTimePurchase(category) && CountTotalItemQuantityInBag(itemId))
-                {
-                    canBuy = FALSE;
-                }
-
-                if (!GetItemPrice(itemId))
-                {
-                    canBuy = FALSE;
-                }
-
-                if (canBuy)
-                {
-                    ShopInventory_SetItemIdToGrid(itemId, idx, numItems);
-                    ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-                }
-            }
-        }
-
-        if (ShopInventory_GetCategoryNumItems(idx) != 0)
-        {
-            gShopMenuDataPtr->categoryList[numCategories] = category;
-            numCategories++, idx++;
-        }
-    }
-
-    gShopMenuDataPtr->numCategories = numCategories;
+    gShopMenuDataPtr->numCategories = ShopConfig_Get()->handleInitList();
 }
 
 static void ShopInventory_InitRecommendedList(void)
 {
     enum ShopMenuCarousels carousel = ShopInventory_GetRecommendedCarousel();
+
+    if (PokeMart_IsActive())
+    {
+        return;
+    }
 
     for (u32 i = 0, randRow = 0, randItemNum = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS; i++)
     {
@@ -953,7 +884,7 @@ static void ShopInventory_InitRecommendedList(void)
         case SHOP_CAROUSEL_NEED_TO_HEAL:
             do
             {
-                randRow = ShopGrid_RowInCategory(SHOP_CATEGORY_MEDICINE);
+                randRow = ShopGrid_CategoryInRow(SHOP_CATEGORY_MEDICINE);
                 randItemNum = (Random() + i) % ShopInventory_GetCategoryNumItems(randRow);
                 if (!ShopInventory_IsItemRecommended(ShopInventory_GetItemIdFromGrid(randRow, randItemNum)))
                 {
@@ -1054,6 +985,7 @@ static void ShopInventory_InitRecommendedList(void)
         }
     }
 
+    DebugPrintf("5. reinit items");
     ShopInventory_InitCategoryLists();
 }
 
@@ -1249,7 +1181,7 @@ static void ShopInventory_Reset(void)
     memset(gShopMenuDataPtr->categoryItems, ITEM_NONE, (NUM_SHOP_CATEGORIES * NUM_SHOP_ITEMS_PER_CATEGORIES) * sizeof(u16));
 }
 
-static void ShopInventory_SetItemIdToGrid(u32 itemId, u32 category, u32 idx)
+void ShopInventory_SetItemIdToGrid(u32 itemId, u32 category, u32 idx)
 {
     gShopMenuDataPtr->categoryItems[category][idx] = itemId;
 }
@@ -1285,7 +1217,7 @@ static void ShopPurchase_CalculateMaxQuantity(void)
         gShopMenuDataPtr->maxItemQuantity = maxItemQuantity;
 }
 
-static bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories category)
+bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories category)
 {
     return (category == SHOP_CATEGORY_TMS
             || category == SHOP_CATEGORY_MEGA_STONES
@@ -1423,7 +1355,10 @@ static void ShopGrid_VerticalInput(s32 delta)
             if (scroll)
                 ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1));
 
-            ShopGrid_SetGridYCursor(ShopConfig_GetTotalShownItemRows() - 1);
+            if (numItems >= (ShopConfig_GetTotalShownItemRows() - 1))
+                ShopGrid_SetGridYCursor(ShopConfig_GetTotalShownItemRows() - 1);
+            else
+                ShopGrid_SetGridYCursor(numItems);
         }
         else
         {
@@ -1495,12 +1430,16 @@ static void ShopGrid_HorizontalInput(s32 delta)
         }
         else if (!trueIdx && !additiveDelta)
         {
-            ShopGrid_SetGridXCursor(shownItems);
             ShopGrid_SetCurrentItemIndex(categoryNumItems);
             if (scroll)
             {
                 ShopGrid_SetFirstItemIndex(categoryNumItems - shownItems);
             }
+
+            if (categoryNumItems >= shownItems)
+                ShopGrid_SetGridXCursor(shownItems);
+            else
+                ShopGrid_SetGridXCursor(categoryNumItems);
         }
         else
         {
@@ -1792,12 +1731,18 @@ u8 ShopConfig_GetTotalShownItems(void)
 
 u8 ShopConfig_GetTotalShownItemRows(void)
 {
-    return ShopConfig_Get()->totalShownItemRows;
+    if (gShopMenuDataPtr->numCategories < ShopConfig_Get()->totalShownItemRows)
+        return gShopMenuDataPtr->numCategories;
+    else
+        return ShopConfig_Get()->totalShownItemRows;
 }
 
 u8 ShopConfig_GetTotalShownCategories(void)
 {
-    return ShopConfig_Get()->totalShownCategories;
+    if (gShopMenuDataPtr->numCategories < ShopConfig_Get()->totalShownCategories)
+        return gShopMenuDataPtr->numCategories;
+    else
+        return ShopConfig_Get()->totalShownCategories;
 }
 
 u8 ShopConfig_GetTotalShownItemsOnScreen(void)

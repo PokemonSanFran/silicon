@@ -91,6 +91,7 @@ static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
 
 static void PrestoHelper_UpdateFrontEnd(void);
 static enum PrestoShopTypes PrestoHelper_GetShopType(void);
+static u32 PrestoHelper_InitItemsList(void);
 
 static void SpriteCB_BuyIcon(struct Sprite *);
 static void SpriteCB_UpArrow(struct Sprite *);
@@ -188,6 +189,7 @@ static const struct ShopMenuConfigs sPrestoShopConfigs =
 
     .handleFrontend = PrestoHelper_UpdateFrontEnd,
     .handleTotalPrice = PrestoPurchase_GetTotalItemPrice,
+    .handleInitList = PrestoHelper_InitItemsList,
 };
 
 static const u8 sText_FirstRowName[]      = _("{STR_VAR_1}: {STR_VAR_2}");
@@ -205,14 +207,14 @@ static const u8 sText_ItemNumber[]        = _("{STR_VAR_1} x{STR_VAR_2}");
 
 void CB2_PrestoFromStartMenu(void)
 {
-    ShopMenu_Init(&sPrestoShopConfigs, NULL, CB2_StartMenu_ReturnToUI);
+    ShopMenu_Init(&sPrestoShopConfigs, CB2_StartMenu_ReturnToUI);
 }
 
 static void Task_WaitFadeAndOpenPrestoTerminal(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        ShopMenu_Init(&sPrestoShopConfigs, NULL, CB2_ReturnToFieldContinueScript);
+        ShopMenu_Init(&sPrestoShopConfigs, CB2_ReturnToFieldContinueScript);
         DestroyTask(taskId);
     }
 }
@@ -461,6 +463,97 @@ static enum PrestoShopTypes PrestoHelper_GetShopType(void)
 
     return PRESTO_TYPE_APP;
 }
+
+static u32 PrestoHelper_InitItemsList(void)
+{
+    enum ShopMenuCategories category = (gShopMenuDataPtr->sortCategories)
+                                     ? SHOP_CATEGORY_STATIC_START
+                                     : SHOP_CATEGORY_BUY_AGAIN;
+    u32 numCategories = 0;
+
+    for (u32 idx = 0; category < NUM_SHOP_CATEGORIES; category++)
+    {
+        category %= NUM_SHOP_CATEGORIES;
+
+        // Never accept Buy Again or Recommended categories when sorting.
+        if ((gShopMenuDataPtr->sortCategories) && category < SHOP_CATEGORY_STATIC_START)
+        {
+            break;
+        }
+
+        for (u32 itemId = 0; itemId < ITEMS_COUNT; itemId++)
+        {
+            u32 numItems = ShopInventory_GetCategoryNumItems(idx);
+
+            // Continue to the next category if the current category is full.
+            if (numItems >= NUM_SHOP_ITEMS_PER_CATEGORIES)
+            {
+                ShopInventory_SetCategoryNumItems(NUM_SHOP_ITEMS_PER_CATEGORIES, idx);
+                break;
+            }
+
+            if (category == SHOP_CATEGORY_BUY_AGAIN && gSaveBlock3Ptr->shopBuyAgainItems[0])
+            {
+                if (itemId >= MAX_PRESTO_BUY_AGAIN_ITEMS
+                 || !gSaveBlock3Ptr->shopBuyAgainItems[itemId])
+                {
+                    break;
+                }
+
+                ShopInventory_SetItemIdToGrid(gSaveBlock3Ptr->shopBuyAgainItems[itemId], idx, numItems);
+                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
+            }
+            else if (category == SHOP_CATEGORY_RECOMMENDED && gShopMenuDataPtr->recommendedItems[0])
+            {
+                if (itemId >= NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS
+                 || !gShopMenuDataPtr->recommendedItems[itemId])
+                    break;
+
+                ShopInventory_SetItemIdToGrid(gShopMenuDataPtr->recommendedItems[itemId], idx, numItems);
+                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
+            }
+            else if (category >= SHOP_CATEGORY_STATIC_START)
+            {
+                // Skip mismatching idx.
+                if (GetItemShopCategory(itemId) != category)
+                    continue;
+
+                bool32 canBuy = TRUE;
+                ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
+
+                if (func != NULL)
+                {
+                    canBuy = func(itemId);
+                }
+
+                if (ShopPurchase_IsCategoryOneTimePurchase(category) && CountTotalItemQuantityInBag(itemId))
+                {
+                    canBuy = FALSE;
+                }
+
+                if (!GetItemPrice(itemId))
+                {
+                    canBuy = FALSE;
+                }
+
+                if (canBuy)
+                {
+                    ShopInventory_SetItemIdToGrid(itemId, idx, numItems);
+                    ShopInventory_SetCategoryNumItems(numItems + 1, idx);
+                }
+            }
+        }
+
+        if (ShopInventory_GetCategoryNumItems(idx) != 0)
+        {
+            gShopMenuDataPtr->categoryList[numCategories] = category;
+            numCategories++, idx++;
+        }
+    }
+
+    return numCategories;
+}
+
 
 static void SpriteCB_BuyIcon(struct Sprite *sprite)
 {
