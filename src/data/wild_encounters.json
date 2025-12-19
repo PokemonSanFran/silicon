@@ -34317,6 +34317,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_GARDEVOIR"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_GALLADE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PINTILLON_HOUSE_EXTERIOR",
+          "base_label": "gPintillonHouse_Exterior_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_GARDEVOIR"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_GALLADE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PINTILLON_HOUSE_EXTERIOR",
+          "base_label": "gPintillonHouse_Exterior_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_CLEFABLE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_CLEFABLE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PINTILLON_HOUSE_EXTERIOR",
+          "base_label": "gPintillonHouse_Exterior_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 55,
+                "max_level": 56,
+                "species": "SPECIES_CLEFFA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_CLEFABLE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_CLEFABLE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_LUXRAY"
+              }
+            ]
           }
         },
         {
