@@ -694,8 +694,12 @@ static u32 MartHelper_InitItemsList(void)
                     canBuy = FALSE;
                 }
 
-                ShopInventory_SetItemIdToGrid(product, idx, numItems);
-                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
+                if (canBuy)
+                {
+                    ShopInventory_SetItemIdToGrid(product, idx, numItems);
+                    ShopInventory_SetCategoryNumItems(numItems + 1, idx);
+                }
+
                 itemId++;
             }
         }
