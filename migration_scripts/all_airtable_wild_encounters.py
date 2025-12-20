@@ -10,12 +10,140 @@ def get_script_directory():
     return os.path.dirname(os.path.abspath(__file__))
 
 def format_species_name(species):
-    # Remove 'SPECIES_' prefix and convert to title case
-    species = species.replace('SPECIES_', '')
-    # Handle special cases with underscores
+    """Format species name with special handling for specific cases"""
+    # Remove 'SPECIES_' prefix
+    if species.startswith('SPECIES_'):
+        species = species[8:]
+    
+    # Special cases mapping
+    special_cases = {
+        # Standard special cases with punctuation and formatting
+        'MAUSHOLD': 'Maushold Family of Four',
+        'MAUSHOLD_THREE': 'Maushold Family of Three',
+        'MIME_JR': 'Mime Jr.',
+        'MIMIKYU': 'Mimikyu Disguised Form',
+        'MIMIKYU_BUSTED': 'Mimikyu Busted Form',
+        'MINIOR': 'Minior Meteor Form',
+        'MR_MIME': 'Mr. Mime',
+        'NIDORAN_F': 'Nidoran♀',
+        'NIDORAN_M': 'Nidoran♂',
+        'TYPE_NULL': 'Type: Null',
+        'SINISTEA': 'Sinistea Phony Form',
+        'SINISTEA_ANTIQUE': 'Sinistea Antique Form',
+        'POLTEAGEIST': 'Polteageist Phony Form',
+        'POLTEAGEIST_ANTIQUE': 'Polteageist Antique Form',
+        
+        # Palafin forms
+        'PALAFIN': 'Palafin Zero Form',
+        'PALAFIN_HERO': 'Palafin Hero Form',
+        
+        # Gimmighoul forms
+        'GIMMIGHOUL_ROAMING': 'Gimmighoul Roaming Form',
+        'GIMMIGHOUL_CHEST': 'Gimmighoul Chest Form',
+        
+        # Rotom forms
+        'ROTOM_WASH': 'Wash Rotom',
+        'ROTOM_MOW': 'Mow Rotom',
+        'ROTOM_HEAT': 'Heat Rotom',
+        'ROTOM_FROST': 'Frost Rotom',
+        'ROTOM_FAN': 'Fan Rotom',
+        
+        # Aegislash forms
+        'AEGISLASH_BLADE': 'Aegislash Blade Forme',
+        'AEGISLASH_SHIELD': 'Aegislash Shield Forme',
+        
+        # Silvally
+        'SILVALLY': 'Silvally Type: Normal',
+        
+        # Urshifu forms
+        'URSHIFU_RAPID_STRIKE': 'Urshifu Rapid Strike Style',
+        'URSHIFU_SINGLE_STRIKE': 'Urshifu Single Strike Style',
+    }
+    
+    # Check if it's a special case first
+    if species in special_cases:
+        return special_cases[species]
+    
+    # Handle pattern-based special cases
+    if species.startswith('MINIOR_CORE_'):
+        color = species[12:].capitalize()
+        return f'Minior {color} Core'
+    
+    if species.startswith('ORICORIO_'):
+        style = species[9:]  # Get the style part without converting case yet
+        if style == 'PAU':
+            return "Oricorio Pa'u Style"
+        elif style == 'POM_POM':
+            return 'Oricorio Pom-Pom Style'
+        elif style == 'BAILE':
+            return 'Oricorio Baile Style'
+        elif style == 'SENSU':
+            return 'Oricorio Sensu Style'
+        # Fallback for any other Oricorio forms
+        return f'Oricorio {style.replace("_", " ").title()} Style'
+    
+    if species.startswith('SCATTERBUG_'):
+        pattern = species[11:].replace('_', '-').lower()
+        if pattern == 'pokeball':
+            pattern = 'poke-ball'
+        return f'Scatterbug {pattern}'
+    
+    if species.startswith('SPEWPA_'):
+        pattern = species[7:].replace('_', '-').lower()
+        if pattern == 'pokeball':
+            pattern = 'poke-ball'
+        return f'Spewpa {pattern}'
+    
+    if species.startswith('VIVILLON_'):
+        pattern = species[9:].replace('_', ' ').title()
+        if 'Pokeball' in pattern:
+            pattern = pattern.replace('Pokeball', 'Poké Ball')
+        return f'Vivillon {pattern} Pattern'
+    
+    if species.startswith('SQUAWKABILLY_'):
+        color = species[13:].capitalize()
+        return f'Squawkabilly {color} Plumage'
+    
+    if species.startswith('TATSUGIRI_'):
+        form = species[10:].capitalize()
+        return f'Tatsugiri {form} Form'
+    
+    # Handle Flabébé/Floette/Florges forms
+    if species.startswith('FLABEBE'):
+        if species == 'FLABEBE':
+            return 'Flabébé Red Flower'
+        elif '_' in species:
+            color = species[8:].capitalize()  # Remove 'FLABEBE_'
+            return f'Flabébé {color} Flower'
+    
+    if species.startswith('FLOETTE_'):
+        color = species[8:].capitalize()
+        return f'Floette {color} Flower'
+    
+    if species.startswith('FLORGES_'):
+        color = species[8:].capitalize()
+        return f'Florges {color} Flower'
+    
+    # For all other species, apply standard formatting
     if '_' in species:
+        # Handle underscores by capitalizing each part
         parts = species.split('_')
-        return '_'.join([part.capitalize() for part in parts])
+        # Special handling for compound names
+        formatted_parts = []
+        for part in parts:
+            if part == 'JR':
+                formatted_parts.append('Jr.')
+            elif part == 'MR':
+                formatted_parts.append('Mr.')
+            elif part == 'MIME':
+                formatted_parts.append('Mime')
+            else:
+                formatted_parts.append(part.capitalize())
+        
+        # Join with space for most cases
+        return ' '.join(formatted_parts)
+    
+    # Single word species
     return species.capitalize()
 
 def copy_to_clipboard(text):
