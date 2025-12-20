@@ -48312,6 +48312,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5",
+          "base_label": "gRoute5_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5",
+          "base_label": "gRoute5_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5",
+          "base_label": "gRoute5_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GRUMPIG"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_FOONGUS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_AMOONGUSS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_DACHSBUN"
+              }
+            ]
           }
         },
         {
