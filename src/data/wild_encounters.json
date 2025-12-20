@@ -35400,6 +35400,111 @@
         {
           "map": "MAP_ROUTE14",
           "base_label": "gRoute14_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 58,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              }
+            ]
+          },
           "berry_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -35607,6 +35712,333 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14",
+          "base_label": "gRoute14_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 58,
+                "species": "SPECIES_GLIGAR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14",
+          "base_label": "gRoute14_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14",
+          "base_label": "gRoute14_NIght",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_PHANPY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_MEDICHAM"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_LUXRAY"
               }
             ]
           }
@@ -50037,6 +50469,111 @@
         {
           "map": "MAP_HALERBA_WILDS_SPRING",
           "base_label": "gHalerbaWilds_Spring_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
+              }
+            ]
+          },
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -50454,111 +50991,6 @@
                 "min_level": 52,
                 "max_level": 55,
                 "species": "SPECIES_GOODRA"
-              }
-            ]
-          },
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_SWALOT"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_HYPNO"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_HYPNO"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_HYPNO"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_HYPNO"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_HYPNO"
-              },
-              {
-                "min_level": 51,
-                "max_level": 54,
-                "species": "SPECIES_HYPNO"
-              },
-              {
-                "min_level": 52,
-                "max_level": 55,
-                "species": "SPECIES_TSAREENA"
-              },
-              {
-                "min_level": 52,
-                "max_level": 55,
-                "species": "SPECIES_TSAREENA"
-              },
-              {
-                "min_level": 52,
-                "max_level": 55,
-                "species": "SPECIES_TSAREENA"
-              },
-              {
-                "min_level": 52,
-                "max_level": 55,
-                "species": "SPECIES_TSAREENA"
               }
             ]
           }
