@@ -146,6 +146,7 @@ def format_species_name(species):
     # Single word species
     return species.capitalize()
 
+
 def copy_to_clipboard(text):
     system = platform.system()
     try:

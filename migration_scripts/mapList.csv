@@ -3,8 +3,10 @@ MAP_ARANTRAZ,Arantraz Exterior
 MAP_ARANTRAZ_HOSPITAL,Arantraz Hospital
 MAP_ARANTRAZ_MESS_HALL,Arantraz Mess Hall
 MAP_CAPHE_CITY,Caphe City
-MAP_CAPHE_CITY_PANTRY,Caphe Pantry Storage Room
+MAP_CAPHE_CITY_PANTRY_MAZE,Caphe Pantry Storage Room
 MAP_CAPHE_COMMUNITY_GARDEN,Caphe Community Garden
+MAP_CHAPEL_OF_CHIMES_INTERIOR,Chapel of Chimes Interior
+MAP_CHAPEL_OF_CHIMES_END,Chapel of Chimes End
 MAP_CHASILLA,Chasilla
 MAP_CHASILLA_BREEDING_CENTER,Chasilla Breeding Center
 MAP_CHASILLA_GYM,Chasilla Gym
@@ -18,6 +20,7 @@ MAP_CURENO_PORT_UNDERGROUND,Cureno Trolley Terminal Underground
 MAP_ESPULEE_OUTSKIRTS,Espulee Outskirts
 MAP_FORT_YOBU,Fort Yobu
 MAP_GLAVEZ_HILL,Glavez Hill
+MAP_GLAVEZ_HEIGHTS,Glavez Heights
 MAP_HALAI_ISLAND,Halai Island
 MAP_HALERBA_CITY,Halerba City
 MAP_HALERBA_CITY_GYM,Halerba Gym A
@@ -36,9 +39,10 @@ MAP_LANJING_TUNNEL_B2F,Lanjing Tunnel Basement 2
 MAP_LEAVERRA_FOREST,Leaverra Forest
 MAP_LEAVERRA_FOREST_INNER,Leaverra Forest Inner Clearing
 MAP_MERMEREZA_CITY,Mermereza City
-MAP_NAVAL_BASE,Naval Base Exterior
+MAP_NAVAL_BASE_EXTERIOR,Naval Base Exterior
 MAP_NONGYU_BRIDGE,Nongyu Bridge
 MAP_OROLAND,Oroland
+MAP_OROLAND_COLISEUM_OUTSIDE,Oroland Coliseum Exterior
 MAP_OROLAND_POKEMON_CENTER_1F,Oroland Coliseum Exterior
 MAP_PERLACIA_CITY,Perlacia City
 MAP_PETAROSA_BOROUGH,Petarosa Borough
