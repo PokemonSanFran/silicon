@@ -38,6 +38,7 @@
 #include "quest_logic.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
+#include "event_object_movement.h"
 #include "ui_shop.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
@@ -142,6 +143,7 @@ struct PokeMartData
     u8 keeperSpriteId;
     #endif
     u8 arrowSpriteId; // category sprite
+    u16 gfxId;
 };
 
 // ram
@@ -155,6 +157,7 @@ static EWRAM_INIT struct PokeMartData sPokeMartData =
     .keeperSpriteId = SPRITE_NONE,
     #endif
     .arrowSpriteId = SPRITE_NONE,
+    .gfxId = NUM_OBJ_EVENT_GFX,
 };
 
 // declarations
@@ -190,6 +193,9 @@ static void MartSprite_SetCategoryArrowSpriteId(u32);
 static u32 MartSprite_GetCategoryArrowSpriteId(void);
 
 #if MART_KEEPER_ICON == TRUE
+static u32 MartSprite_GetKeeperIndex(void);
+static const u32 *MartSprite_GetKeeperGfx(void);
+static const u16 *MartSprite_GetKeeperPal(void);
 static void MartSprite_SetKeeperSpriteId(u32);
 static u32 MartSprite_GetKeeperSpriteId(void);
 static void MartSprite_SetKeeperEmote(enum PokeMartKeeperEmotes);
@@ -234,17 +240,17 @@ static const struct SpriteTemplate sPokeMart_CategoryArrowSpriteTemplate =
 };
 
 #if MART_KEEPER_ICON == TRUE
-static const struct CompressedSpriteSheet sPokeMart_KeeperSpriteSheet =
+static const struct {
+    u32 gfxId;
+    const u32 *gfx;
+    const u16 *pal;
+} sPokeMart_KeeperGraphics[] =
 {
-    (const u32[])INCBIN_U32("graphics/ui_menus/mart/shopkeeper.4bpp.smol"),
-    (NUM_MART_KEEPER_EMOTES * MART_KEEPER_TOTAL_ANIMS) * ((32 * 32) / 2),
-    TAG_MART_KEEPER
-};
-
-static const struct SpritePalette sPokeMart_KeeperSpritePalette =
-{
-    (const u16[])INCBIN_U16("graphics/ui_menus/mart/shopkeeper.gbapal"),
-    TAG_MART_KEEPER
+    {
+        .gfxId = OBJ_EVENT_GFX_MART_EMPLOYEE,
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/shopkeeper.4bpp.smol"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/mart/shopkeeper.gbapal"),
+    },
 };
 
 static const struct SpriteTemplate sPokeMart_KeeperSpriteTemplate =
@@ -424,6 +430,11 @@ void OpenPokeMartWithinScript(struct ScriptContext *ctx)
         return;
     }
 
+    u32 objId = GetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked,
+                                                    gSaveBlock1Ptr->location.mapNum,
+                                                    gSaveBlock1Ptr->location.mapGroup);
+    u32 gfxId = gObjectEvents[objId].graphicsId;
+    sPokeMartData.gfxId = gfxId;
     sPokeMartData.products = products;
     MartInterface_Open();
 }
@@ -496,6 +507,7 @@ static void Task_MartInterface_HandleQuit(u8 taskId)
     sPokeMartData.winId = WINDOW_NONE;
     MartSprite_SetCategoryArrowSpriteId(SPRITE_NONE);
     sPokeMartData.input = MART_INPUT_BUY;
+    sPokeMartData.gfxId = NUM_OBJ_EVENT_GFX;
     sPokeMartData.active = FALSE;
 
     DestroyTask(taskId);
@@ -886,8 +898,20 @@ static void MartSprite_Init(void)
         CreateSprite(&sPokeMart_CategoryArrowSpriteTemplate, MART_CATEGORY_ARROW_X, MART_CATEGORY_ARROW_Y, 0));
 
     #if MART_KEEPER_ICON == TRUE
-    LoadCompressedSpriteSheet(&sPokeMart_KeeperSpriteSheet);
-    LoadSpritePalette(&sPokeMart_KeeperSpritePalette);
+    struct CompressedSpriteSheet sheet = {
+        MartSprite_GetKeeperGfx(),
+        (NUM_MART_KEEPER_EMOTES * MART_KEEPER_TOTAL_ANIMS) * ((32 * 32) / 2),
+        TAG_MART_KEEPER
+    };
+
+    struct SpritePalette palette = {
+        MartSprite_GetKeeperPal(),
+        TAG_MART_KEEPER
+    };
+
+    LoadCompressedSpriteSheet(&sheet);
+    LoadSpritePalette(&palette);
+
     MartSprite_SetKeeperSpriteId(CreateSprite(&sPokeMart_KeeperSpriteTemplate, MART_KEEPER_X, MART_KEEPER_Y, 0));
 
     if (MartSprite_GetKeeperSpriteId() != SPRITE_NONE)
@@ -912,6 +936,29 @@ static u32 MartSprite_GetCategoryArrowSpriteId(void)
 }
 
 #if MART_KEEPER_ICON == TRUE
+static u32 MartSprite_GetKeeperIndex(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sPokeMart_KeeperGraphics); i++)
+    {
+        if (sPokeMartData.gfxId == sPokeMart_KeeperGraphics[i].gfxId)
+        {
+            return i;
+        }
+    }
+
+    return 0;
+}
+
+static const u32 *MartSprite_GetKeeperGfx(void)
+{
+    return sPokeMart_KeeperGraphics[MartSprite_GetKeeperIndex()].gfx;
+}
+
+static const u16 *MartSprite_GetKeeperPal(void)
+{
+    return sPokeMart_KeeperGraphics[MartSprite_GetKeeperIndex()].pal;
+}
+
 static void MartSprite_SetKeeperSpriteId(u32 spriteId)
 {
     sPokeMartData.keeperSpriteId = spriteId;
