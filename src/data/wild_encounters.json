@@ -36671,7 +36671,7 @@
               },
               {
                 "min_level": 48,
-                "max_level": 48,
+                "max_level": 50,
                 "species": "SPECIES_PARAS"
               }
             ]
@@ -50036,7 +50036,7 @@
         },
         {
           "map": "MAP_HALERBA_WILDS_SPRING",
-          "base_label": "gHalerbaWilds_Spring",
+          "base_label": "gHalerbaWilds_Spring_Morning",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -50454,6 +50454,111 @@
                 "min_level": 52,
                 "max_level": 55,
                 "species": "SPECIES_GOODRA"
+              }
+            ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 54,
+                "species": "SPECIES_HYPNO"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 55,
+                "species": "SPECIES_TSAREENA"
               }
             ]
           }
