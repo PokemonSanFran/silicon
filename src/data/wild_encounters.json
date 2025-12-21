@@ -60639,6 +60639,543 @@
                 "species": "SPECIES_SHUCKLE"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_TYRANITAR"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LANJING_TUNNEL",
+          "base_label": "gLanjingTunnel_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LANJING_TUNNEL",
+          "base_label": "gLanjingTunnel_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LANJING_TUNNEL",
+          "base_label": "gLanjingTunnel_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 61,
+                "max_level": 64,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 58,
+                "max_level": 61,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 62,
+                "max_level": 65,
+                "species": "SPECIES_PUPITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONLEE"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_HITMONCHAN"
+              }
+            ]
           }
         },
         {
