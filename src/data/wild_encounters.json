@@ -62364,6 +62364,111 @@
         {
           "map": "MAP_HODOU_CITY_TUNNEL",
           "base_label": "gHodouCity_Tunnel_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              }
+            ]
+          },
           "rock_smash_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -62466,6 +62571,333 @@
                 "min_level": 73,
                 "max_level": 74,
                 "species": "SPECIES_SHUCKLE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HODOU_CITY_TUNNEL",
+          "base_label": "gHodouCity_Tunnel_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HODOU_CITY_TUNNEL",
+          "base_label": "gHodouCity_Tunnel_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HODOU_CITY_TUNNEL",
+          "base_label": "gHodouCity_Tunnel_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_SCRAFTY"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_LARVITAR"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
+              },
+              {
+                "min_level": 68,
+                "max_level": 71,
+                "species": "SPECIES_TYROGUE"
               }
             ]
           }
