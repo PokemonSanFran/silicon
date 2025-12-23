@@ -33327,24 +33327,24 @@
                 "species": "SPECIES_TYROGUE"
               },
               {
-                "min_level": 31,
-                "max_level": 35,
-                "species": "SPECIES_RIBOMBEE"
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_DOTTLER"
               },
               {
-                "min_level": 31,
-                "max_level": 35,
-                "species": "SPECIES_RIBOMBEE"
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_DOTTLER"
               },
               {
-                "min_level": 31,
-                "max_level": 35,
-                "species": "SPECIES_RIBOMBEE"
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_DOTTLER"
               },
               {
-                "min_level": 31,
-                "max_level": 35,
-                "species": "SPECIES_RIBOMBEE"
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_DOTTLER"
               },
               {
                 "min_level": 23,
@@ -51967,6 +51967,111 @@
         {
           "map": "MAP_ROUTE18",
           "base_label": "gRoute18_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_FLORGES_WHITE"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_FLORGES_WHITE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              }
+            ]
+          },
           "berry_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -52174,6 +52279,333 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE18",
+          "base_label": "gRoute18_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_FLORGES_WHITE"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_FLORGES_WHITE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE18",
+          "base_label": "gRoute18_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_FLORGES_WHITE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_FARIGIRAF"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE18",
+          "base_label": "gRoute18_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_PAU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_FLORGES_WHITE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLAAFFY"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 75,
+                "max_level": 77,
+                "species": "SPECIES_AMPHAROS"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_GIRAFARIG"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_FARIGIRAF"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_FARIGIRAF"
               }
             ]
           }
