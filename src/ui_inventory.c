@@ -59,13 +59,12 @@ struct MenuResources
     u8 PartyPokemonIcon[PARTY_SIZE];
     u16 FavoritePocketItems[POCKETS_COUNT * MAX_INVENTORY_FAVORITE_ITEMS][NUM_FAVORITE_ITEMS_ARRAY_SIZE];
     u8 inventoryMode;
-    enum InventoryWindowIds inventoryMenuWindowId;
 };
 
 struct InventoryListMenuStruct
 {
     struct WindowTemplate menuWindow;
-    u16 inventoryMenuWindowId;
+    enum InventoryWindowIds inventoryMenuWindowId;
     u8 menuItemsCount;
     u8 calcWidth;
     struct SpeciesMenu menuItems[INVENTORY_MODE_COUNT];
@@ -101,15 +100,13 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
 static void Inventory_PrintItemList(void);
 static void Inventory_PrintDesc(void);
 static void Inventory_PrintFooter(void);
-static void PrintToWindow(void);
+static void Inventory_PrintToAllWindows(void);
 static void FreeInventoryBackgrounds(void);
 static void Menu_FreeResources(void);
 static void Menu_FreeResourcesAndCallback(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void Inventory_LoadBackgroundPalette(void);
-static void setNormalBackground(void);
-static void setTransparentBackground(void);
 static void removeTransparentBackground(void);
 static void StartMenu_DisplayPartyIcons(void);
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y);
@@ -120,6 +117,7 @@ static u8 getItemOptionNum(u16 item, u8 num);
 static void ForceReloadInventory(void);
 bool8 isCurrentItemFavorite(void);
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx);
+static void useItemWithOption(u8 taskId);
 static u8 CreateRegisteredItemIcon(u8 slot);
 static void RemoveItemInSlot(u8 pocketId, u8 itemIdx);
 void ItemUseInBattle_UseTMHM(u8 taskId);
@@ -142,13 +140,13 @@ static void CreateDownArrowSprite(void);
 // Inventory Menu
 static void Inventory_InitalizeMenu(u32 species);
 static void Inventory_PopulateMenuItems(void);
-static u32 Inventory_GetMenuWidth(const u8* text);
 static u32 Inventory_GetMenuHeight(void);
 static void Inventory_CreateMenu(void);
 static void Inventory_PrintListMenuText(u32 windowId, u32 menuItemsCount);
 static void Inventory_DrawWindowFrame(u32 windowId);
 static void Inventory_PrintCursorAndText(u32 windowId, u32 menuItemsCount);
-static void Task_Inventory_HandleInput(u8 taskId);
+static void Task_Inventory_HandleMenuInput(u8 taskId);
+static void Inventory_HandleAButtonPress(u8 taskId);
 u32 Inventory_GetMenuPosition(void);
 static void Inventory_SetMenuPosition(u32 position);
 static void Inventory_ChangeMenuPosition(s32 direction);
@@ -167,7 +165,7 @@ static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
     {
         .bg = INVENTORY_BG_NORMAL,
         .charBaseIndex = 2,
-        .mapBaseIndex = 29,
+        .mapBaseIndex = 30,
         .priority = 1,
     },
     {
@@ -188,25 +186,27 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 {
     [INVENTORY_WINDOW_HEADER] =
     {
-        .bg = INVENTORY_BG_NORMAL,
+        .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
         .paletteNum = 1,
     },
+        /*
     [INVENTORY_WINDOW_PARTY_DISPLAY] =
     {
-        .bg = INVENTORY_BG_NORMAL,
+        .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 2,
         .width = 8,
         .height = 11,
         .paletteNum = 1,
     },
+    */
     [INVENTORY_WINDOW_ITEM_LIST] =
     {
-        .bg = INVENTORY_BG_NORMAL,
+        .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 8,
         .tilemapTop = 2,
         .width = 22,
@@ -215,7 +215,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     },
     [INVENTORY_WINDOW_DESC] =
     {
-        .bg = INVENTORY_BG_NORMAL,
+        .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 6,
         .tilemapTop = 13,
         .width = 24,
@@ -224,7 +224,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     },
     [INVENTORY_WINDOW_FOOTER] =
     {
-        .bg = INVENTORY_BG_NORMAL,
+        .bg = INVENTORY_BG_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = 30,
@@ -248,7 +248,7 @@ static const u16 sMenuPalette_Violet[]           = INCBIN_U16("graphics/ui_menus
 static const u16 sMenuPalette_White[]            = INCBIN_U16("graphics/ui_menus/inventory/palettes/white.gbapal");
 static const u16 sMenuPalette_Yellow[]           = INCBIN_U16("graphics/ui_menus/inventory/palettes/yellow.gbapal");
 
-static const u8 sMenuWindowFontColors[][3] =
+static const u8 sInventoryFontColors[][3] =
 {
     [INVENTORY_FONT_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
     [INVENTORY_FONT_WHITE]   = {TEXT_COLOR_TRANSPARENT,  1,  TEXT_COLOR_TRANSPARENT},
@@ -388,7 +388,7 @@ static bool8 Menu_DoGfxSetup(void)
         gMain.state++;
         break;
     case 6:
-        PrintToWindow();
+        Inventory_PrintToAllWindows();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
@@ -518,34 +518,6 @@ static void SetBackgroundTransparency(void)
     ShowBg(INVENTORY_BG_SHADOWS);
 }
 
-static void UNUSED setNormalBackground(void){
-    SetBgAttribute(INVENTORY_BG_NORMAL, BG_ATTR_PRIORITY, INVENTORY_BG_NORMAL);
-    InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
-    //SetBgTilemapBuffer(INVENTORY_BG_NORMAL, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_NORMAL]);
-    ScheduleBgCopyTilemapToVram(INVENTORY_BG_NORMAL);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    ShowBg(INVENTORY_BG_TEXT);
-    ShowBg(INVENTORY_BG_NORMAL);
-    ChangeBgX(INVENTORY_BG_NORMAL, 0, 0);
-    ChangeBgY(INVENTORY_BG_NORMAL, 0, 0);
-}
-
-static void UNUSED setTransparentBackground(void){
-    u8 strength = 6;
-    //SetBgTilemapBuffer(INVENTORY_BG_SHADOWS, sMenuDataPtr->bgTilemapBuffers[INVENTORY_BG_SHADOWS]);
-    ScheduleBgCopyTilemapToVram(INVENTORY_BG_SHADOWS);
-
-    //Transparency
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1); //Blend Background over the rest
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(strength, strength));
-    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
-
-    ShowBg(INVENTORY_BG_SHADOWS);
-    ChangeBgX(INVENTORY_BG_SHADOWS, 0, 0);
-    ChangeBgY(INVENTORY_BG_SHADOWS, 0, 0);
-}
-
 static void removeTransparentBackground(){
     SetBgAttribute(INVENTORY_BG_SHADOWS, BG_ATTR_PRIORITY, INVENTORY_BG_SHADOWS);
     InitBgsFromTemplates(0, sMenuBgTemplates, ARRAY_COUNT(sMenuBgTemplates));
@@ -599,6 +571,7 @@ static void Menu_LoadGraphics(void)
 
 static void Menu_UpdateTilemap(void)
 {
+    return;
     s32 value;
     if(!shouldShowRegisteredItems())
         value = ChangeBgY(INVENTORY_BG_NORMAL, 0, BG_COORD_SET);
@@ -619,9 +592,6 @@ static void Menu_InitWindows(void)
 
     for (; windowId < INVENTORY_WINDOW_COUNT; windowId++)
     {
-        if (windowId == INVENTORY_WINDOW_MENU)
-            continue;
-
         template = sMenuWindowTemplates[windowId];
         template.baseBlock = baseBlock;
 
@@ -634,8 +604,10 @@ static void Menu_InitWindows(void)
     }
 }
 
-u16 getMaxItemsFromPocket(u8 pocket){
-    switch(pocket){
+u16 getMaxItemsFromPocket(u8 pocket)
+{
+    switch(pocket)
+    {
         case POCKET_MEDICINE:
             return BAG_MEDICINE_COUNT;
         break;
@@ -2031,51 +2003,6 @@ static void ShowItemIcon(u16 itemId, u8 x, u8 y)
     }
 }
 
-//Hp Bar Stuff
-static const u8 sStartMenu_HPBar_Full_Gfx[]         = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_full.4bpp");
-static const u8 sStartMenu_HPBar_90_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_90_percent.4bpp");
-static const u8 sStartMenu_HPBar_80_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_80_percent.4bpp");
-static const u8 sStartMenu_HPBar_70_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_70_percent.4bpp");
-static const u8 sStartMenu_HPBar_60_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_60_percent.4bpp");
-static const u8 sStartMenu_HPBar_50_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_50_percent.4bpp");
-static const u8 sStartMenu_HPBar_40_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_40_percent.4bpp");
-static const u8 sStartMenu_HPBar_30_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_30_percent.4bpp");
-static const u8 sStartMenu_HPBar_20_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_20_percent.4bpp");
-static const u8 sStartMenu_HPBar_10_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_10_percent.4bpp");
-static const u8 sStartMenu_HPBar_Fainted_Gfx[]      = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_fainted.4bpp");
-
-static bool32 IsMonNotEmpty(u32 partyIndex)
-{
-    return (GetMonData(&gPlayerParty[partyIndex],MON_DATA_SPECIES_OR_EGG,NULL) != SPECIES_NONE);
-}
-
-static const u8 *GetBarGfx(u32 percent)
-{
-    u32 modifiedPercent = percent / 10;
-
-    const u8 *sStartMenu_HPBar_Fill_Gfx[] = {
-        sStartMenu_HPBar_Fainted_Gfx,
-        sStartMenu_HPBar_10_Percent_Gfx,
-        sStartMenu_HPBar_20_Percent_Gfx,
-        sStartMenu_HPBar_30_Percent_Gfx,
-        sStartMenu_HPBar_40_Percent_Gfx,
-        sStartMenu_HPBar_50_Percent_Gfx,
-        sStartMenu_HPBar_60_Percent_Gfx,
-        sStartMenu_HPBar_70_Percent_Gfx,
-        sStartMenu_HPBar_80_Percent_Gfx,
-        sStartMenu_HPBar_90_Percent_Gfx,
-        sStartMenu_HPBar_Full_Gfx,
-    };
-
-    if (percent == 0)
-        return sStartMenu_HPBar_Fill_Gfx[percent];
-
-    if (modifiedPercent == 0)
-        return sStartMenu_HPBar_Fill_Gfx[1];
-
-    return sStartMenu_HPBar_Fill_Gfx[modifiedPercent];
-}
-
 static const u8 sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
     [ITEM_TYPE_FIELD_USE] = {
         INVENTORY_ITEM_OPTION_USE,
@@ -2513,7 +2440,7 @@ static void Inventory_PrintHeader(void)
     u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
 
     FillWindowPixelBuffer(INVENTORY_WINDOW_HEADER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_HEADER, font, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, sInventory_TitleStrings[pocketId].string);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_HEADER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, sInventory_TitleStrings[pocketId].string);
     Inventory_PrintHeaderCursor(pocketId);
 
     PutWindowTilemap(INVENTORY_WINDOW_HEADER);
@@ -2533,8 +2460,55 @@ static const u8* const sStatusIconGfxTable[] =
     [AILMENT_FRB]    = gInventoryStatus_Freeze_Gfx,
 };
 
+//Hp Bar Stuff
+static const u8 sStartMenu_HPBar_Full_Gfx[]         = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_full.4bpp");
+static const u8 sStartMenu_HPBar_90_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_90_percent.4bpp");
+static const u8 sStartMenu_HPBar_80_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_80_percent.4bpp");
+static const u8 sStartMenu_HPBar_70_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_70_percent.4bpp");
+static const u8 sStartMenu_HPBar_60_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_60_percent.4bpp");
+static const u8 sStartMenu_HPBar_50_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_50_percent.4bpp");
+static const u8 sStartMenu_HPBar_40_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_40_percent.4bpp");
+static const u8 sStartMenu_HPBar_30_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_30_percent.4bpp");
+static const u8 sStartMenu_HPBar_20_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_20_percent.4bpp");
+static const u8 sStartMenu_HPBar_10_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_10_percent.4bpp");
+static const u8 sStartMenu_HPBar_Fainted_Gfx[]      = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_fainted.4bpp");
+
+static bool32 IsMonNotEmpty(u32 partyIndex)
+{
+    return (GetMonData(&gPlayerParty[partyIndex],MON_DATA_SPECIES_OR_EGG,NULL) != SPECIES_NONE);
+}
+
+static const u8 *GetBarGfx(u32 percent)
+{
+    u32 modifiedPercent = percent / 10;
+
+    const u8 *sStartMenu_HPBar_Fill_Gfx[] = {
+        sStartMenu_HPBar_Fainted_Gfx,
+        sStartMenu_HPBar_10_Percent_Gfx,
+        sStartMenu_HPBar_20_Percent_Gfx,
+        sStartMenu_HPBar_30_Percent_Gfx,
+        sStartMenu_HPBar_40_Percent_Gfx,
+        sStartMenu_HPBar_50_Percent_Gfx,
+        sStartMenu_HPBar_60_Percent_Gfx,
+        sStartMenu_HPBar_70_Percent_Gfx,
+        sStartMenu_HPBar_80_Percent_Gfx,
+        sStartMenu_HPBar_90_Percent_Gfx,
+        sStartMenu_HPBar_Full_Gfx,
+    };
+
+    if (percent == 0)
+        return sStartMenu_HPBar_Fill_Gfx[percent];
+
+    if (modifiedPercent == 0)
+        return sStartMenu_HPBar_Fill_Gfx[1];
+
+    return sStartMenu_HPBar_Fill_Gfx[modifiedPercent];
+}
+
+
 static void Inventory_PrintPartyDisplay_HeldItemStatus(void)
 {
+    return;
     for(u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
     {
         u32 currentStatus = GetAilmentFromStatus(GetMonData(&gPlayerParty[partyIndex], MON_DATA_STATUS));
@@ -2557,6 +2531,7 @@ static void Inventory_PrintPartyDisplay_HeldItemStatus(void)
 
 static void Inventory_PrintPartyDisplay(void)
 {
+    return;
     FillWindowPixelBuffer(INVENTORY_WINDOW_PARTY_DISPLAY, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     if (shouldShowRegisteredItems())
@@ -2705,7 +2680,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
         if(pocketId != POCKET_TM_HM)
         {
             CopyItemName(itemId, gStringVar1);
-            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar1);
+            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar1);
 
             if(pocketId == POCKET_FAVORITE_ITEMS)
                 itemNum = sMenuDataPtr->FavoritePocketItems[itemIndex][FAVORITE_ITEM_QUANTITY];
@@ -2715,7 +2690,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
             ConvertIntToDecimalStringN(gStringVar1, itemNum, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("x{STR_VAR_1}"));
             x = 4 + GetStringRightAlignXOffset(fontId,gStringVar4,itemListItemNameWidth);
-            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
+            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
 
             //Registered Items
 
@@ -2729,7 +2704,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
             CopyItemName(itemId, gStringVar1);
             StringCopy(gStringVar2, gMovesInfo[GetItemSecondaryId(itemId)].name);
             StringExpandPlaceholders(gStringVar4, sInventory_TM_Name);
-            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
+            AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
         }
     }
     else 
@@ -2738,7 +2713,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
             if (itemIndex != 0)
                 return;
 
-        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, sInventory_Exit);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, sInventory_Exit);
     }
 }
 
@@ -2821,7 +2796,7 @@ static void Inventory_PrintDesc(void)
             ConvertIntToDecimalStringN(gStringVar3, movePP,   STR_CONV_MODE_LEFT_ALIGN, 3);
 
             StringExpandPlaceholders(gStringVar4, sInventory_TM_Desc);
-            AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2 - 1, (y * 8) + y2, -4, -4, sMenuWindowFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar4);
+            AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2 - 1, (y * 8) + y2, -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar4);
             StringCopy(gStringVar1, gMovesInfo[moveNum].description);
         }
     }
@@ -2835,7 +2810,7 @@ static void Inventory_PrintDesc(void)
     u32 width = GetWindowAttribute(INVENTORY_WINDOW_DESC,WINDOW_WIDTH) * TILE_WIDTH - 4;
     StripLineBreaks(gStringVar1);
     BreakStringNaive(gStringVar1, width, 3, font, HIDE_SCROLL_PROMPT);
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_BLACK], TEXT_SKIP_DRAW, gStringVar1);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_BLACK], TEXT_SKIP_DRAW, gStringVar1);
 
     PutWindowTilemap(INVENTORY_WINDOW_DESC);
     CopyWindowToVram(INVENTORY_WINDOW_DESC,COPYWIN_FULL);
@@ -2852,16 +2827,33 @@ static void Inventory_OpenMenu(u8 taskId)
     Inventory_CreateMenu();
     PlaySE(SE_WIN_OPEN);
     DestroyTask(taskId);
-    CreateTask(Task_Inventory_HandleInput,0);
+    CreateTask(Task_Inventory_HandleMenuInput,0);
 }
 
 static void Inventory_RemoveMenu(u8 taskId)
 {
-    u32 windowId = sMenuDataPtr->inventoryMenuWindowId;
-    ClearStdWindowAndFrameToTransparent(windowId,TRUE);
-    RemoveWindow(windowId);
     PlaySE(SE_BALL);
+    u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
+    RemoveWindow(windowId);
+    Inventory_PrintToAllWindows();
+    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
     gTasks[taskId].func = Task_MenuMain;
+}
+
+static u32 Inventory_CalculateBaseblock(void)
+{
+    u32 lastWindow, baseBlock;
+
+    for (lastWindow = 0xFF; lastWindow > 0; lastWindow--)
+    {
+        baseBlock = gWindows[lastWindow].window.baseBlock;
+
+        if (baseBlock != 0)
+            break;
+    }
+    struct WindowTemplate template = gWindows[lastWindow].window;
+    baseBlock += (template.width * template.height);
+    return baseBlock;
 }
 
 static void Inventory_InitalizeMenu(u32 species)
@@ -2869,7 +2861,7 @@ static void Inventory_InitalizeMenu(u32 species)
     sInventoryListMenu->menuItemsCount = getSelectedItemNumOptions();
     sInventoryListMenu->menuWindow.bg = INVENTORY_BG_TEXT;
     sInventoryListMenu->menuWindow.paletteNum = 0;
-    sInventoryListMenu->menuWindow.baseBlock = 1;
+    sInventoryListMenu->menuWindow.baseBlock = Inventory_CalculateBaseblock();
     Inventory_PopulateMenuItems();
 }
 
@@ -2892,17 +2884,25 @@ static void Inventory_PopulateMenuItems(void)
 
 static u32 Inventory_GetMenuHeight(void)
 {
-    return sInventoryListMenu->menuItemsCount + 1;
+    u32 count = sInventoryListMenu->menuItemsCount;
+    u32 fontHeight = GetFontAttribute(INVENTORY_FONT_LIST,FONTATTR_MAX_LETTER_HEIGHT);
+    u32 height = count * fontHeight;
+
+    while ((height % TILE_WIDTH) != 0)
+        height++;
+
+    return (height / TILE_WIDTH);
 }
 
 static void Inventory_CreateMenu(void)
 {
     u32 windowId;
+    u32 footerHeight = GetWindowAttribute(INVENTORY_WINDOW_FOOTER,WINDOW_HEIGHT);
 
     sInventoryListMenu->menuWindow.width = sInventoryListMenu->calcWidth;
     sInventoryListMenu->menuWindow.height = Inventory_GetMenuHeight();
-    sInventoryListMenu->menuWindow.tilemapLeft = 22;
-    sInventoryListMenu->menuWindow.tilemapTop = 6;
+    sInventoryListMenu->menuWindow.tilemapLeft = (DISPLAY_TILE_WIDTH - sInventoryListMenu->menuWindow.width);
+    sInventoryListMenu->menuWindow.tilemapTop = ((DISPLAY_TILE_HEIGHT - footerHeight) - sInventoryListMenu->menuWindow.height);
 
     Inventory_SetMenuPosition(0);
     windowId = AddWindow(&sInventoryListMenu->menuWindow);
@@ -2914,7 +2914,7 @@ static void Inventory_CreateMenu(void)
 
 static void Inventory_PrintListMenuText(u32 windowId, u32 menuItemsCount)
 {
-    u32 x = 2;
+    u32 x = 5;
     u32 fontId = INVENTORY_FONT_MENU;
     u32 height = GetFontAttribute(fontId,FONTATTR_MAX_LETTER_HEIGHT);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
@@ -2924,7 +2924,7 @@ static void Inventory_PrintListMenuText(u32 windowId, u32 menuItemsCount)
     {
         u32 y = (optionIndex * height);
 
-        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_MENU], TEXT_SKIP_DRAW, sInventoryListMenu->menuItems[optionIndex].text);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_BLACK], TEXT_SKIP_DRAW, sInventoryListMenu->menuItems[optionIndex].text);
 
     }
     CopyWindowToVram(windowId,COPYWIN_GFX);
@@ -2932,7 +2932,7 @@ static void Inventory_PrintListMenuText(u32 windowId, u32 menuItemsCount)
 
 static void Inventory_DrawWindowFrame(u32 windowId)
 {
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(3));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
 }
 
@@ -2942,18 +2942,27 @@ static void Inventory_PrintCursorAndText(u32 windowId, u32 menuItemsCount)
     Inventory_PrintListMenuText(windowId,menuItemsCount);
 }
 
-static void Task_Inventory_HandleInput(u8 taskId)
+static void Task_Inventory_HandleMenuInput(u8 taskId)
 {
     if (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT))
         Inventory_ChangeMenuPosition(-1);
     else if (JOY_NEW(DPAD_DOWN) || JOY_NEW(DPAD_RIGHT))
         Inventory_ChangeMenuPosition(1);
     else if (JOY_NEW(A_BUTTON))
-    {
-        return;
-    }
+        Inventory_HandleAButtonPress(taskId);
     else if (JOY_NEW(B_BUTTON))
         Inventory_RemoveMenu(taskId);
+}
+
+static void Inventory_HandleAButtonPress(u8 taskId)
+{
+    if(sMenuDataPtr->inventoryMode != INVENTORY_MODE_FIELD && sMenuDataPtr->inventoryMode != INVENTORY_MODE_BATTLE)
+        return;
+
+    if (sMenuDataPtr->currentSelectMode !=  INVENTORY_MODE_USE_OPTIONS)
+        return;
+
+    useItemWithOption(taskId);
 }
 
 u32 Inventory_GetMenuPosition(void)
@@ -2981,7 +2990,7 @@ static void Inventory_ChangeMenuPosition(s32 direction)
 
     Inventory_SetMenuPosition(newPosition);
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(3));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     Inventory_PrintCursorAndText(windowId,sInventoryListMenu->menuItemsCount);
     PutWindowTilemap(windowId);
     PlaySE(SE_RG_BAG_CURSOR);
@@ -2989,7 +2998,7 @@ static void Inventory_ChangeMenuPosition(s32 direction)
 
 static void Inventory_PrintCursor(u32 windowId)
 {
-    u32 x = 1;
+    u32 x = 0;
     u32 y = Inventory_CalculateCursorYPosition();
 
     BlitBitmapToWindow(windowId, sInventoryListMenuCursor, x, y , 64, 16);
@@ -2997,7 +3006,7 @@ static void Inventory_PrintCursor(u32 windowId)
 
 static u32 Inventory_CalculateCursorYPosition(void)
 {
-    return (Inventory_GetMenuPosition() * (GetFontAttribute(INVENTORY_FONT_MENU,FONTATTR_MAX_LETTER_HEIGHT))+3);
+    return (Inventory_GetMenuPosition() * (GetFontAttribute(INVENTORY_FONT_MENU,FONTATTR_MAX_LETTER_HEIGHT)));
 }
 
 static void Inventory_PrintMenu(void)
@@ -3034,7 +3043,7 @@ static void Inventory_PrintMenu(void)
                 if(getSelectedItemOptionNum(i) == INVENTORY_ITEM_OPTION_FAVORITE && isCurrentItemFavorite())
                     StringCopy(gStringVar1, sInventory_Option_Unfavorite);
 
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
             }
             break;
         case INVENTORY_MODE_REORDER:
@@ -3057,7 +3066,7 @@ static void Inventory_PrintMenu(void)
             x2 = 4;
             for(i = 0; i < NUM_SORT_OPTIONS; i++){
                 StringCopy(gStringVar1, sSortTypeStrings[i].string);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
             }
             break;
         default:
@@ -3074,7 +3083,7 @@ static void Inventory_PrintMenu(void)
             x  = 23;
             x2 = GetStringCenterAlignXOffset(font, gStringVar1, (6 * 8));
 
-            AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sMenuWindowFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
+            AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
             break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
             x  = 22;
@@ -3105,7 +3114,7 @@ static void Inventory_PrintMenu(void)
                         break;
                 }
 
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sMenuWindowFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
+                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
             }
             break;
     }
@@ -3182,7 +3191,7 @@ static void Inventory_PrintFooter(void)
             break;
     }
 
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, letterSpacing, lineSpacing, sMenuWindowFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 
     if(pocketId == POCKET_TM_HM)
         CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
@@ -3193,7 +3202,7 @@ static void Inventory_PrintFooter(void)
     CopyWindowToVram(INVENTORY_WINDOW_FOOTER ,COPYWIN_FULL);
 }
 
-static void PrintToWindow(void)
+static void Inventory_PrintToAllWindows(void)
 {
     Inventory_PrintHeader();
     Inventory_PrintPartyDisplay();
@@ -3450,7 +3459,7 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId)
     else
         sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
 
-    PrintToWindow();
+    Inventory_PrintToAllWindows();
     gTasks[taskId].func = Task_MenuMain;
 }
 
@@ -3848,13 +3857,13 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD || sMenuDataPtr->inventoryMode == INVENTORY_MODE_BATTLE){
-            switch(sMenuDataPtr->currentSelectMode){
-                case INVENTORY_MODE_USE_OPTIONS:
-                    useItemWithOption(taskId);
-                    break;
+        if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD || sMenuDataPtr->inventoryMode == INVENTORY_MODE_BATTLE)
+        {
+            switch(sMenuDataPtr->currentSelectMode)
+            {
                 case INVENTORY_MODE_REORDER:
-                    if(sMenuDataPtr->itemIdxPickMode != ITEM_SORT_CANCEL){
+                    if(sMenuDataPtr->itemIdxPickMode != ITEM_SORT_CANCEL)
+                    {
                         TrySortBag();
                         //sMenuDataPtr->itemIdxPickMode = 0;
                         //sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_SORTED_ITEMS_BY;
@@ -3868,7 +3877,8 @@ static void Task_MenuMain(u8 taskId)
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_CONFIRMATION;
                     break;
                 case INVENTORY_MODE_TOSS_CONFIRMATION:
-                    if(sMenuDataPtr->itemIdxPickMode == 0){
+                    if(sMenuDataPtr->itemIdxPickMode == 0)
+                    {
                         //Confirmation
                         RemoveInventoryItem(gSaveBlock3Ptr->InventoryData.pocketNum, gSaveBlock3Ptr->InventoryData.itemIdx, sMenuDataPtr->numItemsToToss + 1);
                         ForceReloadInventory();
@@ -3892,38 +3902,44 @@ static void Task_MenuMain(u8 taskId)
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                     break;
                 default:
-                    if(gSaveBlock3Ptr->InventoryData.itemIdx >= numitems - 1){
+                    if(gSaveBlock3Ptr->InventoryData.itemIdx >= numitems - 1)
+                    {
                         gSpecialVar_ItemId = ITEM_NONE;
                         PlaySE(SE_PC_OFF);
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                         gTasks[taskId].func = Task_MenuTurnOff;
                     }
-                    else{
+                    else
+                    {
                         sMenuDataPtr->itemIdxPickMode = 0;
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_USE_OPTIONS;
                     }
                     break;
             }
         }
-        else if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM){
-            if(canItemBeHold(Inventory_GetItemIdCurrentlySelected())){
-                PlaySE(SE_SELECT);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                gTasks[taskId].func = Task_ReturnToPartyMenuToGiveItem;
+        else if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM)
+        {
+                if(canItemBeHold(Inventory_GetItemIdCurrentlySelected())){
+                    PlaySE(SE_SELECT);
+                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                    gTasks[taskId].func = Task_ReturnToPartyMenuToGiveItem;
             }
-            else{
+            else
+            {
                 PlaySE(SE_PC_OFF);
             }
         }
 
-        PrintToWindow();
+        Inventory_PrintToAllWindows();
+        Inventory_OpenMenu(taskId);
     }
 
     if (JOY_NEW(B_BUTTON))
     {
-        switch(sMenuDataPtr->currentSelectMode){
+        switch(sMenuDataPtr->currentSelectMode)
+        {
             case INVENTORY_MODE_DEFAULT:
-                PrintToWindow();
+                Inventory_PrintToAllWindows();
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_MenuTurnOff;
@@ -3935,7 +3951,8 @@ static void Task_MenuMain(u8 taskId)
                 break;
             default:
                 sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
-                PrintToWindow();
+                Inventory_RemoveMenu(taskId);
+                Inventory_PrintToAllWindows();
                 break;
         }
     }
@@ -3958,12 +3975,12 @@ static void Task_MenuMain(u8 taskId)
                     PlaySE(SE_SELECT);
                     if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
                         Menu_UpdateTilemap();
-                    PrintToWindow();
+                    Inventory_PrintToAllWindows();
                 }
                 break;
             case INVENTORY_MODE_REGISTER:
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_RIGHT);
-                PrintToWindow();
+                Inventory_PrintToAllWindows();
                 break;
             case INVENTORY_MODE_TOSS_HOW_MANY:
                 {
@@ -3976,7 +3993,7 @@ static void Task_MenuMain(u8 taskId)
                     else
                         sMenuDataPtr->numItemsToToss = 0;
 
-                    PrintToWindow();
+                    Inventory_PrintToAllWindows();
                 }
                 break;
         }
@@ -4000,12 +4017,12 @@ static void Task_MenuMain(u8 taskId)
                     PlaySE(SE_SELECT);
                     if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
                         Menu_UpdateTilemap();
-                    PrintToWindow();
+                    Inventory_PrintToAllWindows();
                 }
                 break;
             case INVENTORY_MODE_REGISTER:
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_LEFT);
-                PrintToWindow();
+                Inventory_PrintToAllWindows();
                 break;
             case INVENTORY_MODE_TOSS_HOW_MANY:
                 {
@@ -4025,7 +4042,7 @@ static void Task_MenuMain(u8 taskId)
                     else
                         sMenuDataPtr->numItemsToToss = ownedCount - 1;
 
-                    PrintToWindow();
+                    Inventory_PrintToAllWindows();
                 }
                 break;
         }
@@ -4085,14 +4102,15 @@ static void Task_MenuMain(u8 taskId)
         }
 
         PlaySE(SE_SELECT);
-        PrintToWindow();
+        Inventory_PrintToAllWindows();
     }
 
     if ((JOY_NEW(DPAD_UP)) || (JOY_REPEAT(DPAD_UP)))
     {
         u8 numPocketOptions;
 
-        switch(sMenuDataPtr->currentSelectMode){
+        switch(sMenuDataPtr->currentSelectMode)
+        {
             case INVENTORY_MODE_DEFAULT:
                 PressedUpButton_Inventory();
                 break;
@@ -4149,7 +4167,7 @@ static void Task_MenuMain(u8 taskId)
         }
 
         PlaySE(SE_SELECT);
-        PrintToWindow();
+        Inventory_PrintToAllWindows();
     }
 
     if ((JOY_NEW(L_BUTTON)))
@@ -4165,7 +4183,7 @@ static void Task_MenuMain(u8 taskId)
                     numPress--;
                 }
                 while(numPress != 0);
-                PrintToWindow();
+                Inventory_PrintToAllWindows();
                 break;
         }
     }
@@ -4183,7 +4201,7 @@ static void Task_MenuMain(u8 taskId)
                     numPress--;
                 }
                 while(numPress != 0);
-                PrintToWindow();
+                Inventory_PrintToAllWindows();
                 break;
         }
     }
@@ -4196,7 +4214,7 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MODE_DEFAULT:
                     if(sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] > 2){
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REORDER;
-                        PrintToWindow();
+                        Inventory_PrintToAllWindows();
                     }
                     break;
             }
@@ -4221,7 +4239,7 @@ static void Task_MenuMain(u8 taskId)
                 PlaySE(SE_PC_OFF);
                 sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_MOVE_FAVORITE;
             }
-            PrintToWindow();
+            Inventory_PrintToAllWindows();
         }
     }
 }
