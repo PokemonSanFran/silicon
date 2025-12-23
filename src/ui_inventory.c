@@ -114,12 +114,14 @@ static void SpriteCB_Species_Icon_Dummy(struct Sprite *);
 u8 UpdateMonIconFrameCropped(struct Sprite *sprite);
 static u16 Inventory_GetItemIdCurrentlySelected(void);
 static u8 getItemOptionNum(u16 item, u8 num);
+static u8 getSelectedItemOptionNum(u8 num);
 static void ForceReloadInventory(void);
 bool8 isCurrentItemFavorite(void);
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx);
-static void useItemWithOption(u8 taskId);
+static void Inventory_UseItem(u8 taskId);
 static u8 CreateRegisteredItemIcon(u8 slot);
 static void RemoveItemInSlot(u8 pocketId, u8 itemIdx);
+static void RemoveInventoryItem(u8 pocketId, u8 itemIdx, u16 quanity);
 void ItemUseInBattle_UseTMHM(u8 taskId);
 void ItemUseOutOfBattle_Repel_New(u8 taskId);
 bool8 shouldShowRegisteredItems(void);
@@ -2230,6 +2232,12 @@ static const u8 sInventory_PocketOptions_Battle[NUM_ITEMS_TYPES][NUM_INVENTORY_I
     },
 };
 
+static const u8 *const sInventory_TossConfirm[] =
+{
+    COMPOUND_STRING("No"),
+    COMPOUND_STRING("Yes"),
+};
+
 static const u8 *const sInventory_OptionStrings[] = 
 {
     [INVENTORY_ITEM_OPTION_USE]      = COMPOUND_STRING("Use"),
@@ -2252,7 +2260,11 @@ static u8 getNumInventoryOptions(u16 item){
 
     return NUM_INVENTORY_ITEM_OPTIONS;
 }
-static u8 getSelectedItemNumOptions(void){
+static u8 getSelectedItemNumOptions(void)
+{
+    if (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_TOSS_CONFIRMATION)
+        return NUM_TOSS_CONFIRMATION_OPTIONS;
+
     return getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
 }
 
@@ -2867,16 +2879,25 @@ static void Inventory_InitalizeMenu(u32 species)
 
 static void Inventory_PopulateMenuItems(void)
 {
-    u32 menuIndex = INVENTORY_ITEM_OPTION_CANCEL;
-    u32 i;
+    u32 menuIndex = (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_TOSS_CONFIRMATION) ? 0 : INVENTORY_ITEM_OPTION_CANCEL;
 
-    for (i = 0; i < sInventoryListMenu->menuItemsCount; i++)
+    for (u32 i = 0; i < sInventoryListMenu->menuItemsCount; i++)
     {
-        menuIndex = getSelectedItemOptionNum(i);
 
-        sInventoryListMenu->menuItems[i].text = sInventory_OptionStrings[menuIndex];
+        if (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_TOSS_CONFIRMATION)
+        {
+            menuIndex = i;
+            sInventoryListMenu->menuItems[i].text = sInventory_TossConfirm[menuIndex];
+            sInventoryListMenu->calcWidth = 4;
+        }
+        else
+        {
+            menuIndex = getSelectedItemOptionNum(i);
+            sInventoryListMenu->menuItems[i].text = sInventory_OptionStrings[menuIndex];
+            sInventoryListMenu->calcWidth = 8;
+        }
+
         sInventoryListMenu->menuItems[i].textId = menuIndex;
-        sInventoryListMenu->calcWidth = 8;
 
         menuIndex++;
     }
@@ -2959,10 +2980,22 @@ static void Inventory_HandleAButtonPress(u8 taskId)
     if(sMenuDataPtr->inventoryMode != INVENTORY_MODE_FIELD && sMenuDataPtr->inventoryMode != INVENTORY_MODE_BATTLE)
         return;
 
-    if (sMenuDataPtr->currentSelectMode !=  INVENTORY_MODE_USE_OPTIONS)
-        return;
-
-    useItemWithOption(taskId);
+    switch(sMenuDataPtr->currentSelectMode)
+    {
+        case INVENTORY_MODE_USE_OPTIONS:
+            Inventory_UseItem(taskId);
+            break;
+        case INVENTORY_MODE_TOSS_CONFIRMATION:
+            if (Inventory_GetMenuPosition() == 1)
+            {
+                RemoveInventoryItem(gSaveBlock3Ptr->InventoryData.pocketNum, gSaveBlock3Ptr->InventoryData.itemIdx, sMenuDataPtr->numItemsToToss + 1);
+                ForceReloadInventory();
+            }
+            Inventory_RemoveMenu(taskId);
+            Inventory_PrintToAllWindows();
+            sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+            break;
+    }
 }
 
 u32 Inventory_GetMenuPosition(void)
@@ -3633,8 +3666,9 @@ bool8 isCurrentItemFavorite(void){
     return isFavoriteItem(pocketId, itemIdx);
 }
 
-static void useItemWithOption(u8 taskId){
-    u16 currentOption = getSelectedItemOptionNum(sMenuDataPtr->itemIdxPickMode);
+static void Inventory_UseItem(u8 taskId){
+    //u16 currentOption = getSelectedItemOptionNum(sMenuDataPtr->itemIdxPickMode);
+    u16 currentOption = getSelectedItemOptionNum(Inventory_GetMenuPosition());
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u16 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
     u8 importance = gItemsInfo[Inventory_GetItemIdCurrentlySelected()].importance;
@@ -3662,6 +3696,7 @@ static void useItemWithOption(u8 taskId){
         break;
         case INVENTORY_ITEM_OPTION_TOSS:
         {
+            Inventory_RemoveMenu(taskId);
             if(!importance){
                 if(!wasFavorite)
                     ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
@@ -3673,6 +3708,7 @@ static void useItemWithOption(u8 taskId){
                 sMenuDataPtr->itemIdxPickMode = 0;
                 sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_TOSS_ITEM;
             }
+            Inventory_PrintToAllWindows();
         }
         break;
         case INVENTORY_ITEM_OPTION_GIVE:
@@ -3875,16 +3911,6 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MODE_TOSS_HOW_MANY:
                     sMenuDataPtr->itemIdxPickMode   = NUM_TOSS_CONFIRMATION_OPTIONS - 1;
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_CONFIRMATION;
-                    break;
-                case INVENTORY_MODE_TOSS_CONFIRMATION:
-                    if(sMenuDataPtr->itemIdxPickMode == 0)
-                    {
-                        //Confirmation
-                        RemoveInventoryItem(gSaveBlock3Ptr->InventoryData.pocketNum, gSaveBlock3Ptr->InventoryData.itemIdx, sMenuDataPtr->numItemsToToss + 1);
-                        ForceReloadInventory();
-                    }
-
-                    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                     break;
                 case INVENTORY_MODE_REGISTER:
                     sMenuDataPtr->itemIdxPickMode = 0;
