@@ -27789,6 +27789,111 @@
         {
           "map": "MAP_ROUTE99",
           "base_label": "gRoute99_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_FLABEBE_BLUE"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_FLABEBE_BLUE"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_FLABEBE_BLUE"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_SENSU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_SENSU"
+              },
+              {
+                "min_level": 75,
+                "max_level": 76,
+                "species": "SPECIES_ORICORIO_SENSU"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_STANTLER"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_RIBOMBEE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_RIBOMBEE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_RIBOMBEE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_RIBOMBEE"
+              },
+              {
+                "min_level": 74,
+                "max_level": 76,
+                "species": "SPECIES_RIBOMBEE"
+              }
+            ]
+          },
           "berry_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -27998,111 +28103,6 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
-          },
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_FLABEBE_BLUE"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_FLABEBE_BLUE"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_FLABEBE_BLUE"
-              },
-              {
-                "min_level": 75,
-                "max_level": 76,
-                "species": "SPECIES_ORICORIO_SENSU"
-              },
-              {
-                "min_level": 75,
-                "max_level": 76,
-                "species": "SPECIES_ORICORIO_SENSU"
-              },
-              {
-                "min_level": 75,
-                "max_level": 76,
-                "species": "SPECIES_ORICORIO_SENSU"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 71,
-                "max_level": 73,
-                "species": "SPECIES_STANTLER"
-              },
-              {
-                "min_level": 74,
-                "max_level": 76,
-                "species": "SPECIES_LINOONE"
-              },
-              {
-                "min_level": 74,
-                "max_level": 76,
-                "species": "SPECIES_LINOONE"
-              },
-              {
-                "min_level": 74,
-                "max_level": 76,
-                "species": "SPECIES_LINOONE"
-              },
-              {
-                "min_level": 74,
-                "max_level": 76,
-                "species": "SPECIES_LINOONE"
-              },
-              {
-                "min_level": 74,
-                "max_level": 76,
-                "species": "SPECIES_LINOONE"
-              }
-            ]
           }
         },
         {
@@ -28189,27 +28189,27 @@
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               }
             ]
           }
@@ -28298,27 +28298,27 @@
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               }
             ]
           }
@@ -28407,27 +28407,27 @@
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 74,
                 "max_level": 76,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_RIBOMBEE"
               }
             ]
           }
