@@ -65719,6 +65719,442 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ARANTRAZ_HOSPITAL",
+          "base_label": "gArantraz_Hospital_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ARANTRAZ_HOSPITAL",
+          "base_label": "gArantraz_Hospital_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ARANTRAZ_HOSPITAL",
+          "base_label": "gArantraz_Hospital_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 70,
+                "max_level": 73,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 70,
+                "max_level": 73,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_CHANDELURE"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ARANTRAZ_HOSPITAL",
+          "base_label": "gArantraz_Hospital_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_SPIRITOMB"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_YAMASK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 69,
+                "max_level": 72,
+                "species": "SPECIES_BRONZOR"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 66,
+                "max_level": 69,
+                "species": "SPECIES_LITWICK"
+              },
+              {
+                "min_level": 70,
+                "max_level": 73,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 70,
+                "max_level": 73,
+                "species": "SPECIES_LAMPENT"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_CHANDELURE"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              },
+              {
+                "min_level": 73,
+                "max_level": 76,
+                "species": "SPECIES_BRONZONG"
+              }
+            ]
+          }
         }
       ]
     },
