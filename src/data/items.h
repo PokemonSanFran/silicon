@@ -179,6 +179,7 @@ const struct Item gItemsInfo[] =
         "well on Fighting- and\n"
         "Fire-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWA,
@@ -194,6 +195,7 @@ const struct Item gItemsInfo[] =
         "well on Psychic- and\n"
         "Dark-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWB,
@@ -209,6 +211,7 @@ const struct Item gItemsInfo[] =
         "well on Rock- and\n"
         "Grass-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWC,
@@ -224,6 +227,7 @@ const struct Item gItemsInfo[] =
         "well on Steel- and\n"
         "Electric-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWD,
@@ -239,6 +243,7 @@ const struct Item gItemsInfo[] =
         "well on Ground- and\n"
         "Poison-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWE,
@@ -254,6 +259,7 @@ const struct Item gItemsInfo[] =
         "well on Flying- and\n"
         "Ice-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWF,
@@ -269,6 +275,7 @@ const struct Item gItemsInfo[] =
         "well on Fairy- and\n"
         "Dragon-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWG,
@@ -284,6 +291,7 @@ const struct Item gItemsInfo[] =
         "well on Ghost- and\n"
         "Normal-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEWH,
@@ -301,6 +309,7 @@ const struct Item gItemsInfo[] =
         "warped through\n"
         "space and time."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_STRANGE,
@@ -317,6 +326,7 @@ const struct Item gItemsInfo[] =
         "catching wild\n"
         "Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_POKE,
@@ -333,6 +343,7 @@ const struct Item gItemsInfo[] =
         "higher catch rate\n"
         "than a Poké Ball."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_GREAT,
@@ -349,6 +360,7 @@ const struct Item gItemsInfo[] =
         "a higher catch rate\n"
         "than a Great Ball."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_ULTRA,
@@ -365,6 +377,7 @@ const struct Item gItemsInfo[] =
         "catches a Pokémon\n"
         "without fail."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_MASTER,
@@ -381,6 +394,7 @@ const struct Item gItemsInfo[] =
         "in commemoration\n"
         "of some event."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_PREMIER,
@@ -397,6 +411,7 @@ const struct Item gItemsInfo[] =
         "that restores\n"
         "caught Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_HEAL,
@@ -413,6 +428,7 @@ const struct Item gItemsInfo[] =
         "well on Water- and\n"
         "Bug-type Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NET,
@@ -429,6 +445,7 @@ const struct Item gItemsInfo[] =
         "better on weaker\n"
         "Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_NEST,
@@ -445,6 +462,7 @@ const struct Item gItemsInfo[] =
         "better on Pokémon\n"
         "on the ocean floor."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_DIVE,
@@ -461,6 +479,7 @@ const struct Item gItemsInfo[] =
         "used in a\n"
         "dark place."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_DUSK,
@@ -477,6 +496,7 @@ const struct Item gItemsInfo[] =
         "power in battles\n"
         "taking many turns."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_TIMER,
@@ -493,6 +513,7 @@ const struct Item gItemsInfo[] =
         "used on the\n"
         "first turn."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_QUICK,
@@ -509,6 +530,7 @@ const struct Item gItemsInfo[] =
         "better on Pokémon\n"
         "caught before."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_REPEAT,
@@ -525,6 +547,7 @@ const struct Item gItemsInfo[] =
         "makes Pokémon\n"
         "more friendly."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_LUXURY,
@@ -541,6 +564,7 @@ const struct Item gItemsInfo[] =
         "well on lower\n"
         "level Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_LEVEL,
@@ -557,6 +581,7 @@ const struct Item gItemsInfo[] =
         "well on fished\n"
         "up Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_LURE,
@@ -573,6 +598,7 @@ const struct Item gItemsInfo[] =
         "well on Moon\n"
         "Stone users."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_MOON,
@@ -589,6 +615,7 @@ const struct Item gItemsInfo[] =
         "a Pokémon friendly\n"
         "when caught."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_FRIEND,
@@ -605,6 +632,7 @@ const struct Item gItemsInfo[] =
         "Pokémon of the\n"
         "opposite gender."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_LOVE,
@@ -621,6 +649,7 @@ const struct Item gItemsInfo[] =
         "very fast\n"
         "Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_FAST,
@@ -637,6 +666,7 @@ const struct Item gItemsInfo[] =
         "very heavy\n"
         "Pokémon."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_HEAVY,
@@ -658,6 +688,7 @@ const struct Item gItemsInfo[] =
       "the Entree Forest."),
 #endif
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_DREAM,
@@ -674,6 +705,7 @@ const struct Item gItemsInfo[] =
         "is used only in the\n"
         "Safari Zone."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_SAFARI,
@@ -690,6 +722,7 @@ const struct Item gItemsInfo[] =
         "used in the Bug-\n"
         "Catching Contest."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_SPORT,
@@ -705,6 +738,7 @@ const struct Item gItemsInfo[] =
         "A special Ball for\n"
         "the Pal Park."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_PARK,
@@ -720,6 +754,7 @@ const struct Item gItemsInfo[] =
         "A Ball designed to\n"
         "catch Ultra Beasts."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_BEAST,
@@ -736,6 +771,7 @@ const struct Item gItemsInfo[] =
         "in commemoration\n"
         "of some event."),
       .pocket = POCKET_POKE_BALLS,
+      .sortType = ITEM_TYPE_POKE_BALL,
       .type = ITEM_USE_BAG_MENU,
       .battleUsage = EFFECT_ITEM_THROW_BALL,
       .secondaryId = BALL_CHERISH,
