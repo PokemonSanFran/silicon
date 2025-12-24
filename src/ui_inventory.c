@@ -3787,9 +3787,14 @@ static void Inventory_UseItem(u8 taskId)
                     gSaveBlock3Ptr->InventoryData.itemIdx = 0;
                     gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
-                    if(oldPocketId != POCKET_FAVORITE_ITEMS){
-                        do{
+                    if(oldPocketId != POCKET_FAVORITE_ITEMS)
+                    {
+                        do
+                        {
                             if(gSaveBlock3Ptr->InventoryData.itemIdx == numItemsInPocket - 1)
+                                break;
+
+                            if (numPress == 0)
                                 break;
 
                             PressedDownButton_Inventory();
@@ -3797,7 +3802,6 @@ static void Inventory_UseItem(u8 taskId)
                         }
                         while(numPress != 0);
                     }
-
                     gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId]--;
                 }
             }
