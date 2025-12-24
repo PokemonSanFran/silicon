@@ -2252,9 +2252,8 @@ static const u8 *const sInventory_OptionStrings[] =
     [INVENTORY_ITEM_OPTION_FAVORITE] = COMPOUND_STRING("Favorite"),
     [INVENTORY_ITEM_OPTION_REGISTER] = COMPOUND_STRING("Register"),
     [INVENTORY_ITEM_OPTION_CANCEL]   = COMPOUND_STRING("Cancel"),
+    [INVENTORY_ITEM_OPTION_UNFAVORITE]   = COMPOUND_STRING("Unfavorite"),
 };
-
-static const u8 sInventory_Option_Unfavorite[] = _("Unfavorite");
 
 static u8 getNumInventoryOptions(u16 item){
     u8 i;
@@ -2898,8 +2897,15 @@ static void Inventory_PopulateMenuItems(void)
         else
         {
             menuIndex = getSelectedItemOptionNum(i);
+
+            if ((isCurrentItemFavorite()) && (menuIndex == INVENTORY_ITEM_OPTION_FAVORITE))
+                menuIndex = INVENTORY_ITEM_OPTION_UNFAVORITE;
+
             sInventoryListMenu->menuItems[i].text = sInventory_OptionStrings[menuIndex];
             sInventoryListMenu->calcWidth = 8;
+
+            if (menuIndex == INVENTORY_ITEM_OPTION_UNFAVORITE)
+                menuIndex = INVENTORY_ITEM_OPTION_FAVORITE;
         }
 
         sInventoryListMenu->menuItems[i].textId = menuIndex;
@@ -3135,31 +3141,6 @@ static void Inventory_PrintMenu(void)
     switch(sMenuDataPtr->currentSelectMode)
     {
         case INVENTORY_MODE_USE_OPTIONS:
-            x  = 22;
-            x2 = 0;
-            y  = 16;
-            y2 = 2;
-
-            for(i = 0; i < numPocketOptions; i++){
-                for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
-
-                if((numPocketOptions - (i + 1)) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
-
-                y = y - 2;
-            }
-
-            y = y + 2;
-            x2 = 4;
-            for(i = 0; i < numPocketOptions; i++){
-                StringCopy(gStringVar1, sInventory_OptionStrings[getSelectedItemOptionNum(i)]);
-
-                if(getSelectedItemOptionNum(i) == INVENTORY_ITEM_OPTION_FAVORITE && isCurrentItemFavorite())
-                    StringCopy(gStringVar1, sInventory_Option_Unfavorite);
-
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
-            }
             break;
         case INVENTORY_MODE_REORDER:
             x  = 22;
