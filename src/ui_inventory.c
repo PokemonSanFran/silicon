@@ -154,6 +154,11 @@ static void Inventory_SetMenuPosition(u32 position);
 static void Inventory_ChangeMenuPosition(s32 direction);
 static void Inventory_PrintCursor(u32 windowId);
 static u32 Inventory_CalculateCursorYPosition(void);
+static void Inventory_CreateTossMenu(u8 taskId);
+static void Inventory_PrintTossMenu(void);
+static void Inventory_RemoveTossMenu(u8 taskId);
+static void Task_Inventory_HandleTossInput(u8 taskId);
+static void Inventory_ChangeTossAmount(s32 direction);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
@@ -278,16 +283,14 @@ void Task_OpenInventoryFromStartMenu(u8 taskId)
 
 void InitializeInventoryData(void)
 {
-    u8 i;
-
     sMenuDataPtr->itemIdxPickMode   = 0;
     sMenuDataPtr->numItemsToToss    = 0;
     sMenuDataPtr->windowInfoNum     = 0;
 
-    for(i = 0; i < PARTY_SIZE; i++)
+    for(u32 i = 0; i < PARTY_SIZE; i++)
         sMenuDataPtr->PartyPokemonIcon[i] = 0xFF;
 
-    for(i = 0; i < NUM_INVENTORY_SPRITES; i++)
+    for(u32 i = 0; i < NUM_INVENTORY_SPRITES; i++)
         sMenuDataPtr->spriteIDs[i] = 0xFF;
 
     ForceReloadInventory();
@@ -2296,8 +2299,6 @@ static const u8 sText_Help_Bar_Battle[]             = _("{DPAD_LEFTRIGHT} Pocket
 static const u8 sText_Help_Bar_GiveItem[]           = _("{DPAD_LEFTRIGHT} Pockets {A_BUTTON} Pick {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Use[]                = _("{DPAD_UPDOWN} Options {A_BUTTON} Choose {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Move[]               = _("Move the {STR_VAR_1} where? {DPAD_UPDOWN} Move {A_BUTTON}{B_BUTTON} Confirm");
-static const u8 sText_Help_Bar_Toss[]               = _("Toss how many? {A_BUTTON} Choose {B_BUTTON} Cancel");
-static const u8 sText_Help_Bar_Toss_Confirmation[]  = _("Are you sure you want to toss {STR_VAR_1} {STR_VAR_2}?");
 static const u8 sText_Help_Bar_Cant_Move_Favorite[] = _("You can't move a favorite item {A_BUTTON}{B_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Cant_Use[]           = _("You can't use this item right now! {A_BUTTON}{B_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Cant_Toss[]          = _("You can't toss this item! {A_BUTTON}{B_BUTTON} Confirm");
@@ -2847,8 +2848,8 @@ static void Inventory_RemoveMenu(u8 taskId)
     PlaySE(SE_BALL);
     u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
     RemoveWindow(windowId);
-    Inventory_PrintToAllWindows();
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+    Inventory_PrintToAllWindows();
     gTasks[taskId].func = Task_MenuMain;
 }
 
@@ -2982,13 +2983,29 @@ static void Inventory_HandleAButtonPress(u8 taskId)
 
     switch(sMenuDataPtr->currentSelectMode)
     {
+        default:
+            break;
         case INVENTORY_MODE_USE_OPTIONS:
             Inventory_UseItem(taskId);
+            break;
+        case INVENTORY_MODE_TOSS_HOW_MANY:
+            if(sMenuDataPtr->numItemsToToss == 0)
+            {
+                sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+                sMenuDataPtr->itemIdxPickMode   = NUM_TOSS_CONFIRMATION_OPTIONS - 1;
+                Inventory_RemoveMenu(taskId);
+            }
+            else
+            {
+                sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_CONFIRMATION;
+                Inventory_PrintToAllWindows();
+                Inventory_OpenMenu(taskId);
+            }
             break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
             if (Inventory_GetMenuPosition() == 1)
             {
-                RemoveInventoryItem(gSaveBlock3Ptr->InventoryData.pocketNum, gSaveBlock3Ptr->InventoryData.itemIdx, sMenuDataPtr->numItemsToToss + 1);
+                RemoveInventoryItem(gSaveBlock3Ptr->InventoryData.pocketNum, gSaveBlock3Ptr->InventoryData.itemIdx, sMenuDataPtr->numItemsToToss);
                 ForceReloadInventory();
             }
             Inventory_RemoveMenu(taskId);
@@ -3042,13 +3059,74 @@ static u32 Inventory_CalculateCursorYPosition(void)
     return (Inventory_GetMenuPosition() * (GetFontAttribute(INVENTORY_FONT_MENU,FONTATTR_MAX_LETTER_HEIGHT)));
 }
 
+static void Inventory_PrintTossMenu(void)
+{
+    enum InventoryWindowIds windowId = INVENTORY_WINDOW_DESC;
+    u32 fontId = INVENTORY_FONT_LIST;
+    u32 x = 128;
+    u32 y = 24;
+
+    BlitBitmapToWindow(windowId, sInventorySelectorCursorToss_Gfx, x, y, 64, 16);
+    ConvertIntToDecimalStringN(gStringVar1, sMenuDataPtr->numItemsToToss, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
+    x += GetStringCenterAlignXOffset(fontId, gStringVar1, 64);
+    AddTextPrinterParameterized4(windowId, fontId,x,y,0,0, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar1);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId,COPYWIN_FULL);
+}
+
+static void Inventory_CreateTossMenu(u8 taskId)
+{
+    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_HOW_MANY;
+    Inventory_PrintFooter();
+    Inventory_PrintTossMenu();
+    PlaySE(SE_WIN_OPEN);
+    DestroyTask(taskId);
+    CreateTask(Task_Inventory_HandleTossInput,0);
+}
+
+static void Inventory_ChangeTossAmount(s32 direction)
+{
+    u32 ownedItems = CountTotalItemQuantityInBag(Inventory_GetItemIdCurrentlySelected());
+    s32 numItems = (sMenuDataPtr->numItemsToToss + direction);
+
+    if (numItems < 0)
+        numItems = ownedItems;
+
+    if (numItems >= ownedItems)
+        numItems = 0;
+
+    sMenuDataPtr->numItemsToToss = numItems;
+
+    //Inventory_PrintDesc();
+    Inventory_PrintTossMenu();
+    PlaySE(SE_SELECT);
+}
+
+static void Task_Inventory_HandleTossInput(u8 taskId)
+{
+    if (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT) || JOY_REPEAT(DPAD_UP))
+        Inventory_ChangeTossAmount(-1);
+    else if (JOY_NEW(DPAD_DOWN) || JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT) || JOY_REPEAT(DPAD_DOWN))
+        Inventory_ChangeTossAmount(1);
+    else if (JOY_NEW(A_BUTTON))
+        Inventory_HandleAButtonPress(taskId);
+    else if (JOY_NEW(B_BUTTON))
+        Inventory_RemoveTossMenu(taskId);
+}
+
+static void Inventory_RemoveTossMenu(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+    Inventory_PrintToAllWindows();
+    gTasks[taskId].func = Task_MenuMain;
+}
+
 static void Inventory_PrintMenu(void)
 {
     u32 x, x2, y, y2, j, i;
     u32 numPocketOptions = getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
     u32 font = INVENTORY_FONT_MENU;
-    if (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REGISTER)
-        return;
 
     switch(sMenuDataPtr->currentSelectMode)
     {
@@ -3103,20 +3181,6 @@ static void Inventory_PrintMenu(void)
             }
             break;
         default:
-            break;
-        case INVENTORY_MODE_TOSS_HOW_MANY:
-            x  = 22;
-            x2 = 0;
-            y  = 16;
-            y2 = 2;
-
-            BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursorToss_Gfx, (x * 8), (y * 8) + y2, 64, 16);
-
-            ConvertIntToDecimalStringN(gStringVar1, sMenuDataPtr->numItemsToToss + 1, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
-            x  = 23;
-            x2 = GetStringCenterAlignXOffset(font, gStringVar1, (6 * 8));
-
-            AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2, -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
             break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
             x  = 22;
@@ -3178,11 +3242,10 @@ static void Inventory_PrintFooter(void)
             StringCopy(gStringVar4, sText_Help_Bar_RegisterHow);
             break;
         case INVENTORY_MODE_TOSS_HOW_MANY:
-            StringCopy(gStringVar4, sText_Help_Bar_Toss);
+            StringCopy(gStringVar4, COMPOUND_STRING("Toss how many? {DPAD_LEFTRIGHT} Amount {A_BUTTON} Choose {B_BUTTON} Cancel"));
             break;
         case INVENTORY_MODE_MOVE_ITEMS:
             {
-
                 u16 quantity = CountTotalItemQuantityInBag(itemId);
                 CopyItemNameHandlePlural(itemId, gStringVar1, quantity);
                 StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Move);
@@ -3190,11 +3253,11 @@ static void Inventory_PrintFooter(void)
             break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
             {
-                u16 quantity = sMenuDataPtr->numItemsToToss + 1;
+                u16 quantity = sMenuDataPtr->numItemsToToss;
 
                 ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, NUM_ITEMS_MAX_DIGITS);
                 CopyItemNameHandlePlural(itemId, gStringVar2, quantity);
-                StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Toss_Confirmation);
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Are you sure you want to toss {STR_VAR_1} {STR_VAR_2}?"));
             }
             break;
         case INVENTORY_MESSAGE_SORTED_ITEMS_BY:
@@ -3241,7 +3304,7 @@ static void Inventory_PrintToAllWindows(void)
     Inventory_PrintPartyDisplay();
     Inventory_PrintItemList();
     Inventory_PrintDesc();
-    Inventory_PrintMenu();
+    //Inventory_PrintMenu();
     Inventory_PrintFooter();
 }
 
@@ -3666,7 +3729,8 @@ bool8 isCurrentItemFavorite(void){
     return isFavoriteItem(pocketId, itemIdx);
 }
 
-static void Inventory_UseItem(u8 taskId){
+static void Inventory_UseItem(u8 taskId)
+{
     //u16 currentOption = getSelectedItemOptionNum(sMenuDataPtr->itemIdxPickMode);
     u16 currentOption = getSelectedItemOptionNum(Inventory_GetMenuPosition());
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
@@ -3674,18 +3738,13 @@ static void Inventory_UseItem(u8 taskId){
     u8 importance = gItemsInfo[Inventory_GetItemIdCurrentlySelected()].importance;
     u8 oldPocketId = pocketId;
     u16 oldItemIdx = itemIdx;
-    u16 ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
-    bool8 wasFavorite = FALSE;
 
-    if(pocketId == POCKET_FAVORITE_ITEMS){
+    if(pocketId == POCKET_FAVORITE_ITEMS)
+    {
         //Inventory_GetItemIdCurrentlySelected();
         pocketId   = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_POCKET];
         itemIdx    = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_POCKET_INDEX];
-        ownedCount = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_QUANTITY];
-        wasFavorite = TRUE;
     }
-
-    ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
 
     switch(currentOption){
         case INVENTORY_ITEM_OPTION_USE:
@@ -3697,18 +3756,16 @@ static void Inventory_UseItem(u8 taskId){
         case INVENTORY_ITEM_OPTION_TOSS:
         {
             Inventory_RemoveMenu(taskId);
-            if(!importance){
-                if(!wasFavorite)
-                    ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
-
-                sMenuDataPtr->numItemsToToss    = ownedCount - 1;
-                sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_HOW_MANY;
+            if(!importance)
+            {
+                sMenuDataPtr-> numItemsToToss = CountTotalItemQuantityInBag(Inventory_GetItemIdCurrentlySelected());
+                Inventory_CreateTossMenu(taskId);
             }
             else{
                 sMenuDataPtr->itemIdxPickMode = 0;
                 sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_TOSS_ITEM;
+                Inventory_PrintToAllWindows();
             }
-            Inventory_PrintToAllWindows();
         }
         break;
         case INVENTORY_ITEM_OPTION_GIVE:
@@ -3909,8 +3966,6 @@ static void Task_MenuMain(u8 taskId)
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                     break;
                 case INVENTORY_MODE_TOSS_HOW_MANY:
-                    sMenuDataPtr->itemIdxPickMode   = NUM_TOSS_CONFIRMATION_OPTIONS - 1;
-                    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_CONFIRMATION;
                     break;
                 case INVENTORY_MODE_REGISTER:
                     sMenuDataPtr->itemIdxPickMode = 0;
@@ -4008,20 +4063,6 @@ static void Task_MenuMain(u8 taskId)
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_RIGHT);
                 Inventory_PrintToAllWindows();
                 break;
-            case INVENTORY_MODE_TOSS_HOW_MANY:
-                {
-                    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-                    u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
-                    u16 ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
-
-                    if(sMenuDataPtr->numItemsToToss < ownedCount - 1)
-                        sMenuDataPtr->numItemsToToss++;
-                    else
-                        sMenuDataPtr->numItemsToToss = 0;
-
-                    Inventory_PrintToAllWindows();
-                }
-                break;
         }
     }
 
@@ -4050,27 +4091,6 @@ static void Task_MenuMain(u8 taskId)
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_LEFT);
                 Inventory_PrintToAllWindows();
                 break;
-            case INVENTORY_MODE_TOSS_HOW_MANY:
-                {
-                    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-                    u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
-                    u16 ownedCount = 0;
-
-                    if(pocketId == POCKET_FAVORITE_ITEMS){
-                        pocketId  = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET];
-                        itemIdx = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET_INDEX];
-                    }
-
-                    ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
-
-                    if(sMenuDataPtr->numItemsToToss != 0)
-                        sMenuDataPtr->numItemsToToss--;
-                    else
-                        sMenuDataPtr->numItemsToToss = ownedCount - 1;
-
-                    Inventory_PrintToAllWindows();
-                }
-                break;
         }
     }
 
@@ -4096,18 +4116,6 @@ static void Task_MenuMain(u8 taskId)
                 break;
             case INVENTORY_MODE_REGISTER:
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_DOWN);
-                break;
-            case INVENTORY_MODE_TOSS_HOW_MANY:
-                {
-                    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-                    u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
-                    u16 ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
-
-                    if(sMenuDataPtr->numItemsToToss < ownedCount - 1)
-                        sMenuDataPtr->numItemsToToss++;
-                    else
-                        sMenuDataPtr->numItemsToToss = 0;
-                }
                 break;
             case INVENTORY_MODE_TOSS_CONFIRMATION:
                 numPocketOptions = NUM_TOSS_CONFIRMATION_OPTIONS;
@@ -4154,25 +4162,6 @@ static void Task_MenuMain(u8 taskId)
                 break;
             case INVENTORY_MODE_REGISTER:
                 RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_UP);
-                break;
-            case INVENTORY_MODE_TOSS_HOW_MANY:
-                {
-                    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-                    u8 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
-                    u16 ownedCount = 0;
-
-                    if(pocketId == POCKET_FAVORITE_ITEMS){
-                        pocketId  = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET];
-                        itemIdx = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET_INDEX];
-                    }
-
-                    ownedCount = gBagPockets[pocketId].itemSlots[itemIdx].quantity;
-
-                    if(sMenuDataPtr->numItemsToToss != 0)
-                        sMenuDataPtr->numItemsToToss--;
-                    else
-                        sMenuDataPtr->numItemsToToss = ownedCount - 1;
-                }
                 break;
             case INVENTORY_MODE_TOSS_CONFIRMATION:
                 numPocketOptions = NUM_TOSS_CONFIRMATION_OPTIONS;
