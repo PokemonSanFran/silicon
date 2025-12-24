@@ -120,6 +120,7 @@ bool8 isCurrentItemFavorite(void);
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx);
 static void Inventory_UseItem(u8 taskId);
 static u8 CreateRegisteredItemIcon(u8 slot);
+static void CreateAllRegisteredItemIcon(void);
 static void RemoveItemInSlot(u8 pocketId, u8 itemIdx);
 static void RemoveInventoryItem(u8 pocketId, u8 itemIdx, u16 quanity);
 void ItemUseInBattle_UseTMHM(u8 taskId);
@@ -1928,6 +1929,12 @@ static void FreeRegisteredItemIconSprite(u8 slot)
     }
 }
 
+static void CreateAllRegisteredItemIcon(void)
+{
+    for(u32 direction = 0; direction < INVENTORY_REGISTER_NUM_DIRECTIONS; direction++)
+        CreateRegisteredItemIcon(direction);
+}
+
 static u8 CreateRegisteredItemIcon(u8 slot)
 {
     u8 itemSpriteId = SPRITE_NONE;
@@ -3138,7 +3145,6 @@ static void Inventory_RemoveTossMenu(u8 taskId)
 static void Inventory_PrintMenu(void)
 {
     u32 x, x2, y, y2, j, i;
-    u32 numPocketOptions = getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
     u32 font = INVENTORY_FONT_MENU;
 
     switch(sMenuDataPtr->currentSelectMode)
@@ -3171,36 +3177,6 @@ static void Inventory_PrintMenu(void)
         default:
             break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
-            x  = 22;
-            x2 = 0;
-            y  = 16;
-            y2 = 2;
-
-            for(i = 0; i < NUM_TOSS_CONFIRMATION_OPTIONS; i++){
-                for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
-
-                if((NUM_TOSS_CONFIRMATION_OPTIONS - (i + 1)) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
-
-                y = y - 2;
-            }
-
-            y = y + 2;
-            //x++;
-            x2 = 4;
-            for(i = 0; i < NUM_TOSS_CONFIRMATION_OPTIONS; i++){
-                switch(i){
-                    case 0:
-                        StringCopy(gStringVar1, sText_Toss_Yes);
-                        break;
-                    case 1:
-                        StringCopy(gStringVar1, sText_Toss_No);
-                        break;
-                }
-
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
-            }
             break;
     }
 }
@@ -3819,7 +3795,7 @@ static void Inventory_UseItem(u8 taskId)
         break;
         case INVENTORY_ITEM_OPTION_CANCEL:
             sMenuDataPtr->itemIdxPickMode = 0;
-            sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+            Inventory_RemoveMenu(taskId);
         break;
     }
 }
@@ -3905,23 +3881,27 @@ static bool8 MoveItems(bool8 isUp){
     return moveItem;
 }
 
-static void RegisterItemIntoDirection(u8 direction){
-    u8 i;
-    u16 currentItem = Inventory_GetItemIdCurrentlySelected();
+static void RegisterItemIntoDirection(u8 direction)
+{
+    u32 currentItem = Inventory_GetItemIdCurrentlySelected();
 
-    for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++){
+    if(gSaveBlock3Ptr->InventoryData.registeredItem[direction] == currentItem)
+    {
+        gSaveBlock3Ptr->InventoryData.registeredItem[direction] = ITEM_NONE;
+        FreeRegisteredItemIconSprite(direction);
+        return;
+    }
+
+    for(u32 i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++)
         if(gSaveBlock3Ptr->InventoryData.registeredItem[i] == currentItem)
             gSaveBlock3Ptr->InventoryData.registeredItem[i] = ITEM_NONE;
-    }
 
     gSaveBlock3Ptr->InventoryData.registeredItem[direction] = currentItem;
 
     sMenuDataPtr->itemIdxPickMode = 0;
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
 
-    for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++)
-        CreateRegisteredItemIcon(i);
-
+    CreateAllRegisteredItemIcon();
     Menu_UpdateTilemap();
 }
 
@@ -3961,9 +3941,6 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MODE_TOSS_HOW_MANY:
                     break;
                 case INVENTORY_MODE_REGISTER:
-                    sMenuDataPtr->itemIdxPickMode = 0;
-                    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
-                    Menu_UpdateTilemap();
                     break;
                 //Generic Messages
                 case INVENTORY_MODE_MOVE_ITEMS:
@@ -4052,10 +4029,6 @@ static void Task_MenuMain(u8 taskId)
                     Inventory_PrintToAllWindows();
                 }
                 break;
-            case INVENTORY_MODE_REGISTER:
-                RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_RIGHT);
-                Inventory_PrintToAllWindows();
-                break;
         }
     }
 
@@ -4081,8 +4054,6 @@ static void Task_MenuMain(u8 taskId)
                 }
                 break;
             case INVENTORY_MODE_REGISTER:
-                RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_LEFT);
-                Inventory_PrintToAllWindows();
                 break;
         }
     }
@@ -4108,7 +4079,6 @@ static void Task_MenuMain(u8 taskId)
                     sMenuDataPtr->itemIdxPickMode = 0;
                 break;
             case INVENTORY_MODE_REGISTER:
-                RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_DOWN);
                 break;
             case INVENTORY_MODE_TOSS_CONFIRMATION:
                 numPocketOptions = NUM_TOSS_CONFIRMATION_OPTIONS;
@@ -4154,7 +4124,6 @@ static void Task_MenuMain(u8 taskId)
                     sMenuDataPtr->itemIdxPickMode = numPocketOptions - 1;
                 break;
             case INVENTORY_MODE_REGISTER:
-                RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_UP);
                 break;
             case INVENTORY_MODE_TOSS_CONFIRMATION:
                 numPocketOptions = NUM_TOSS_CONFIRMATION_OPTIONS;
