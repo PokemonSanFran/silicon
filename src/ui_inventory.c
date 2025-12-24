@@ -2627,8 +2627,7 @@ static const u8* sTypeGraphics[] =
 static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenListIndex, u32 itemId, u32 itemIndex, u32 numItems)
 {
     u32 j = 0;
-    u32 buffer[] = {0,0,1,2,3};
-    u32 y = (itemScreenListIndex * 16) + buffer[itemScreenListIndex];
+    u32 y = itemScreenListIndex * 16;
     u32 x = 16;
 
     if(pocketId != POCKET_TM_HM || itemId == ITEM_NONE)
@@ -2689,8 +2688,7 @@ static const u8* sRegisteredIndicator[] =
 static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex, u32 itemScreenListIndex)
 {
     u32 x  = 18;
-    u32 buffer[] = {0,0,1,2,3};
-    u32 y = (itemScreenListIndex * 16) + buffer[itemScreenListIndex];
+    u32 y = itemScreenListIndex * 16;
     u32 itemNum = 0;
     u32 fontId = INVENTORY_FONT_LIST;
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
