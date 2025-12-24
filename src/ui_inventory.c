@@ -286,6 +286,7 @@ void InitializeInventoryData(void)
     sMenuDataPtr->itemIdxPickMode   = 0;
     sMenuDataPtr->numItemsToToss    = 0;
     sMenuDataPtr->windowInfoNum     = 0;
+    sInventoryListMenu->inventoryMenuWindowId = WINDOW_NONE;
 
     for(u32 i = 0; i < PARTY_SIZE; i++)
         sMenuDataPtr->PartyPokemonIcon[i] = 0xFF;
@@ -2848,6 +2849,7 @@ static void Inventory_RemoveMenu(u8 taskId)
     PlaySE(SE_BALL);
     u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
     RemoveWindow(windowId);
+    sInventoryListMenu->inventoryMenuWindowId = WINDOW_NONE;
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
     Inventory_PrintToAllWindows();
     gTasks[taskId].func = Task_MenuMain;
@@ -3817,6 +3819,7 @@ static void Inventory_UseItem(u8 taskId)
                 }
             }
             ForceReloadInventory();
+            Inventory_RemoveMenu(taskId);
         }
         break;
         case INVENTORY_ITEM_OPTION_REGISTER:
