@@ -159,6 +159,9 @@ static void Inventory_PrintTossMenu(void);
 static void Inventory_RemoveTossMenu(u8 taskId);
 static void Task_Inventory_HandleTossInput(u8 taskId);
 static void Inventory_ChangeTossAmount(s32 direction);
+static void Inventory_HandleRegister(u8 taskId);
+static void Task_Inventory_HandleRegisterDirection(u8 taskId);
+static void Inventory_CancelFavorite(u8 taskId);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
@@ -3805,14 +3808,14 @@ static void Inventory_UseItem(u8 taskId)
                     gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId]--;
                 }
             }
-            ForceReloadInventory();
             Inventory_RemoveMenu(taskId);
+            ForceReloadInventory();
         }
         break;
         case INVENTORY_ITEM_OPTION_REGISTER:
             sMenuDataPtr->itemIdxPickMode = 0;
             sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REGISTER;
-            Menu_UpdateTilemap();
+            Inventory_HandleRegister(taskId);
         break;
         case INVENTORY_ITEM_OPTION_CANCEL:
             sMenuDataPtr->itemIdxPickMode = 0;
@@ -4247,4 +4250,53 @@ static void Task_MenuMain(u8 taskId)
             Inventory_PrintToAllWindows();
         }
     }
+}
+
+static void Inventory_HandleRegister(u8 taskId)
+{
+    Menu_UpdateTilemap();
+
+    u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
+    RemoveWindow(windowId);
+    sInventoryListMenu->inventoryMenuWindowId = WINDOW_NONE;
+    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REGISTER;
+    Inventory_PrintToAllWindows();
+    gTasks[taskId].func = Task_Inventory_HandleRegisterDirection;
+}
+
+static void Task_Inventory_HandleRegisterDirection(u8 taskId)
+{
+    if (JOY_NEW(DPAD_UP))
+    {
+        RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_UP);
+        Inventory_CancelFavorite(taskId);
+    }
+    else if (JOY_NEW(DPAD_DOWN))
+    {
+        RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_DOWN);
+        Inventory_CancelFavorite(taskId);
+    }
+    else if (JOY_NEW(DPAD_LEFT))
+    {
+        RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_LEFT);
+        Inventory_CancelFavorite(taskId);
+    }
+    else if (JOY_NEW(DPAD_RIGHT))
+    {
+        RegisterItemIntoDirection(INVENTORY_REGISTER_DIRECTION_RIGHT);
+        Inventory_CancelFavorite(taskId);
+    }
+    else if (JOY_NEW(JOY_EXCL_DPAD))
+    {
+        Inventory_CancelFavorite(taskId);
+    }
+}
+
+static void Inventory_CancelFavorite(u8 taskId)
+{
+    sMenuDataPtr->itemIdxPickMode = 0;
+    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+    Inventory_PrintToAllWindows();
+    Menu_UpdateTilemap();
+    gTasks[taskId].func = Task_MenuMain;
 }
