@@ -31002,6 +31002,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_TOEDSCRUEL"
+              }
+            ]
           }
         },
         {
@@ -33043,6 +33148,111 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 77,
+                "max_level": 79,
+                "species": "SPECIES_CENTISKORCH"
               }
             ]
           }
@@ -57007,6 +57217,111 @@
                 "min_level": 71,
                 "max_level": 75,
                 "species": "SPECIES_DRAGONITE"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_CERULEDGE"
               }
             ]
           }
