@@ -29932,6 +29932,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_SWAMPERT"
+              }
+            ]
           }
         },
         {
@@ -31765,7 +31870,7 @@
         },
         {
           "map": "MAP_GLAVEZ_HILL",
-          "base_label": "gGlavezHill_NIght",
+          "base_label": "gGlavezHill_Night",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -32411,7 +32516,7 @@
         },
         {
           "map": "MAP_ROUTE8",
-          "base_label": "gRoute8_NIght",
+          "base_label": "gRoute8_Night",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -34454,7 +34559,7 @@
         },
         {
           "map": "MAP_MERMEREZA_CITY",
-          "base_label": "gMermerezaCity_NIght",
+          "base_label": "gMermerezaCity_Night",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -38201,7 +38306,7 @@
         },
         {
           "map": "MAP_ROUTE14",
-          "base_label": "gRoute14_NIght",
+          "base_label": "gRoute14_Night",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -41835,7 +41940,7 @@
         },
         {
           "map": "MAP_ROUTE98",
-          "base_label": "gRoute98_NIght",
+          "base_label": "gRoute98_Night",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -42054,6 +42159,111 @@
         {
           "map": "MAP_QIU_VILLAGE",
           "base_label": "gQiuVillage_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 74,
+                "species": "SPECIES_CHANSEY"
+              }
+            ]
+          },
           "berry_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -42261,6 +42471,438 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              },
+              {
+                "min_level": 76,
+                "max_level": 77,
+                "species": "SPECIES_BLISSEY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_QIU_VILLAGE",
+          "base_label": "gQiuVillage_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 74,
+                "species": "SPECIES_CHANSEY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_QIU_VILLAGE",
+          "base_label": "gQiuVillage_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 74,
+                "species": "SPECIES_CHANSEY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_QIU_VILLAGE",
+          "base_label": "gQiuVillage_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 72,
+                "max_level": 73,
+                "species": "SPECIES_HAPPINY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 75,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 74,
+                "max_level": 74,
+                "species": "SPECIES_CHANSEY"
               }
             ]
           }
@@ -51449,7 +52091,7 @@
         },
         {
           "map": "MAP_CHASILLA",
-          "base_label": "gChasilla_NIght",
+          "base_label": "gChasilla_Night",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -52839,104 +53481,104 @@
             "encounter_rate": 1,
             "mons": [
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_HAXORUS"
               }
             ]
           }
@@ -53161,7 +53803,7 @@
         },
         {
           "map": "MAP_ROUTE22",
-          "base_label": "gRoute22_NIght",
+          "base_label": "gRoute22_Night",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
