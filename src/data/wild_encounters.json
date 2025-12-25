@@ -23068,6 +23068,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_WAJABI_LAKE",
+          "base_label": "gWajabiLake_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_WAJABI_LAKE",
+          "base_label": "gWajabiLake_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_WAJABI_LAKE",
+          "base_label": "gWajabiLake_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LOKIX"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_STUNKY"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_SKUNTANK"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 73,
+                "max_level": 77,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_LILLIGANT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              },
+              {
+                "min_level": 78,
+                "max_level": 82,
+                "species": "SPECIES_GREEDENT"
+              }
+            ]
           }
         },
         {
