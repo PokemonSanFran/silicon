@@ -29181,6 +29181,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_TORTERRA"
+              }
+            ]
           }
         },
         {
@@ -69451,6 +69556,111 @@
                 "min_level": 80,
                 "max_level": 81,
                 "species": "SPECIES_SHUCKLE"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_KLINKLANG"
               }
             ]
           }
