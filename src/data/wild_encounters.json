@@ -54118,6 +54118,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE20",
+          "base_label": "gRoute20_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE20",
+          "base_label": "gRoute20_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE20",
+          "base_label": "gRoute20_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_FLOETTE_YELLOW"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 82,
+                "max_level": 83,
+                "species": "SPECIES_ORICORIO_POM_POM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_NUZLEAF"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_HATENNA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTREM"
+              }
+            ]
           }
         },
         {
