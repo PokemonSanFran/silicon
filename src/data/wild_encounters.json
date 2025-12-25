@@ -58838,6 +58838,438 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TORGEOT_CLIMB",
+          "base_label": "gTorgeotClimb_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TORGEOT_CLIMB",
+          "base_label": "gTorgeotClimb_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TORGEOT_CLIMB",
+          "base_label": "gTorgeotClimb_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              }
+            ]
           }
         },
         {
