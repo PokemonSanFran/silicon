@@ -58524,6 +58524,111 @@
         {
           "map": "MAP_TORGEOT_CLIMB",
           "base_label": "gTorgeotClimb_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_MAGMORTAR"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 77,
+                "max_level": 80,
+                "species": "SPECIES_VOLCARONA"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_AGGRON"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_ANNIHILAPE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              },
+              {
+                "min_level": 78,
+                "max_level": 81,
+                "species": "SPECIES_HATTERENE"
+              }
+            ]
+          },
           "rock_smash_mons": {
             "encounter_rate": 20,
             "mons": [
@@ -58836,111 +58941,6 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
-              }
-            ]
-          },
-          "land_mons": {
-            "encounter_rate": 10,
-            "mons": [
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_ANNIHILAPE"
-              },
-              {
-                "min_level": 77,
-                "max_level": 80,
-                "species": "SPECIES_ARCHALUDON"
-              },
-              {
-                "min_level": 77,
-                "max_level": 80,
-                "species": "SPECIES_ARCHALUDON"
-              },
-              {
-                "min_level": 77,
-                "max_level": 80,
-                "species": "SPECIES_ARCHALUDON"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_ANNIHILAPE"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_MAGMORTAR"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_MAGMORTAR"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_MAGMORTAR"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_ANNIHILAPE"
-              },
-              {
-                "min_level": 77,
-                "max_level": 80,
-                "species": "SPECIES_VOLCARONA"
-              },
-              {
-                "min_level": 77,
-                "max_level": 80,
-                "species": "SPECIES_VOLCARONA"
-              },
-              {
-                "min_level": 77,
-                "max_level": 80,
-                "species": "SPECIES_VOLCARONA"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_ANNIHILAPE"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_AGGRON"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_AGGRON"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_AGGRON"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_ANNIHILAPE"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_HATTERENE"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_HATTERENE"
-              },
-              {
-                "min_level": 78,
-                "max_level": 81,
-                "species": "SPECIES_HATTERENE"
               }
             ]
           }
@@ -66895,6 +66895,438 @@
                 "min_level": 80,
                 "max_level": 81,
                 "species": "SPECIES_SHUCKLE"
+              }
+            ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SECRET_PATH",
+          "base_label": "gSecretPath_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SECRET_PATH",
+          "base_label": "gSecretPath_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SECRET_PATH",
+          "base_label": "gSecretPath_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 81,
+                "species": "SPECIES_ROTOM"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 75,
+                "max_level": 78,
+                "species": "SPECIES_GIMMIGHOUL"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 80,
+                "max_level": 83,
+                "species": "SPECIES_ALAKAZAM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
+              },
+              {
+                "min_level": 79,
+                "max_level": 82,
+                "species": "SPECIES_REVAVROOM"
               }
             ]
           }
