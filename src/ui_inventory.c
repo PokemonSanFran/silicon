@@ -559,6 +559,119 @@ static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
     return (sInventoryTilesLUT[backgroundId] == NULL || sInventoryTilemapLUT[backgroundId] == NULL);
 }
 
+static const struct {
+    const struct SpriteSheet sheets[NUM_ITEM_INVENTORY_TAGS];
+    const struct SpritePalette palette;
+} sInventory_SpriteGraphics =
+{
+    {
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/inventory/backgrounds/sprites/partyShadow.4bpp"),
+            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_SIZE), TAG_ITEM_INVENTORY_PLATFORMS
+        },
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/inventory/backgrounds/sprites/partyNormal.4bpp"),
+            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_NORMAL), TAG_ITEM_INVENTORY_PLATFORMS_NORMAL
+        },
+        { NULL }
+    },
+    { sMenuInterfacePalette_Sprites, TAG_ITEM_INVENTORY_SPRITE_PALETTE}
+};
+
+static const struct OamData sInventory_MonPlatformOamData  =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .objMode = ST_OAM_OBJ_BLEND,
+    .priority = 2
+};
+
+static const struct SpriteTemplate sMonStatus_PlatformSpriteTemplate =
+{
+    .tileTag = TAG_ITEM_INVENTORY_PLATFORMS,
+    .paletteTag = TAG_ITEM_INVENTORY_SPRITE_PALETTE,
+    .oam = &sInventory_MonPlatformOamData ,
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END }, 
+        (const union AnimCmd[]){ ANIMCMD_FRAME(16, 1), ANIMCMD_END },
+    },
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static void StartMainSprite_PartyMon(void)
+{
+    u8 *spriteIds = sMenuDataPtr->spriteIDs;
+    //struct Pokemon *mon = gPlayerParty;
+    struct Sprite *sprite = NULL;
+    //u32 species, healthPercentage, status;
+    //bool32 isEgg;
+    u32 x = 16;
+    u32 y = 32;
+
+    if (!gPlayerPartyCount)
+        return;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        if (spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + i] == SPRITE_NONE)
+        {
+            spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + i] =
+                CreateSprite(&sMonStatus_PlatformSpriteTemplate, 0, 0, 2);
+
+           sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + i]];
+           sprite->x2 = x;
+           sprite->y2 = y;
+        }
+
+        if ((i % 2) == 0)
+        {
+            x += 32;
+        }
+        else
+        {
+            x = 16;
+            y += 24;
+        }
+        StartSpriteAnim(sprite, 0);
+
+        /*
+        species = GetMonData(&mon[i], MON_DATA_SPECIES_OR_EGG);
+        if (spriteIds[START_MAIN_SPRITE_MON_ICONS + i] == SPRITE_NONE && (species && species <= NUM_SPECIES))
+        {
+            healthPercentage = MonStatus_GetHealthPercentage(&mon[i]);
+            isEgg = (species == SPECIES_EGG);
+            species = ReturnTransformationIfConditionMet(&mon[i]);
+            status = GetMonData(&mon[i], MON_DATA_STATUS);
+
+            LoadMonIconPalette(species);
+            spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
+                CreateMonIcon(species, MonStatus_GetSpriteCB(healthPercentage, isEgg),
+                              START_PARTY_MON_X, START_PARTY_MON_Y, 0, GetMonData(&mon[i], MON_DATA_PERSONALITY));
+
+            sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]];
+            sprite->subpriority = 3;
+            sprite->oam.priority = 0;
+            sprite->x2 = MonStatus_GetXIconCoord(i);
+            sprite->y2 = MonStatus_GetYIconCoord(i);
+
+            if (spriteIds[START_MAIN_SPRITE_MON_STATUS + i] == SPRITE_NONE)
+            {
+                spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
+                    CreateSprite(&sMonStatus_SpriteTemplate, (((status & STATUS1_ANY) || !healthPercentage) ? 4 : 0) + 16,
+                                 START_MON_STATUS_Y, 0);
+
+                sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_STATUS + i]];
+                MonStatus_InjectStatusGraphics(sprite, status, healthPercentage);
+                sprite->x2 = MonStatus_GetXIconCoord(i);
+                sprite->y2 = MonStatus_GetYIconCoord(i);
+            }
+        }
+        */
+    }
+}
+
 static void Menu_LoadGraphics(void)
 {
     ResetTempTileDataBuffers();
@@ -575,6 +688,8 @@ static void Menu_LoadGraphics(void)
         CopyToBgTilemapBuffer(backgroundId, sInventoryTilemapLUT[backgroundId],0,0);
     }
     Inventory_LoadBackgroundPalette();
+    LoadSpriteSheets(sInventory_SpriteGraphics.sheets);
+    LoadSpritePalette(&sInventory_SpriteGraphics.palette);
     Menu_UpdateTilemap();
 }
 
@@ -1691,6 +1806,7 @@ static void StartMenu_DisplayPartyIcons(void)
     u8 y = 3;
     u8 y2 = 0;
 
+    StartMainSprite_PartyMon();
     for(i = 0; i < PARTY_SIZE; i++){
         if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
             ShowSpeciesIcon(i, (x * 8), (y * 8) + y2);
@@ -1820,7 +1936,7 @@ u8 UpdateMonIconFrameCropped(struct Sprite *sprite)
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
-    u8 SpriteID = 0xFF;
+    u8 SpriteID = SPRITE_NONE;
     u32 percent = GetHPEggCyclePercent(slot);
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
