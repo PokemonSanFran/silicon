@@ -89,9 +89,12 @@ static bool8 AllocZeroedTilemapBuffers(void);
 static void Menu_FadeAndBail(void);
 static void Menu_LoadGraphics(void);
 static bool32 AreTilesOrTilemapEmpty(u32 backgroundId);
-static void Menu_UpdateTilemap(void);
+static void Inventory_AddItemPlatform(enum InventoryRegisterDirection direction);
+static void Inventory_AddAllItemPlatforms(void);
+static void SpriteCB_RegisteredItem_Icon_Callback(struct Sprite *sprite);
 static void Menu_InitWindows(void);
 static void Inventory_PrintHeader(void);
+static bool32 IsMonNotEmpty(u32 partyIndex);
 static void Inventory_PrintPartyDisplay(void);
 static u32 Inventory_GetItemIdFromPocketIndex(u32 itemIndex, enum Pocket pocketId);
 static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenListIndex, u32 itemId, u32 itemIndex, u32 numItems);
@@ -108,7 +111,7 @@ static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void Inventory_LoadBackgroundPalette(void);
 static void removeTransparentBackground(void);
-static void StartMenu_DisplayPartyIcons(void);
+static void Inventory_PartyDisplay(void);
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y);
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *);
 u8 UpdateMonIconFrameCropped(struct Sprite *sprite);
@@ -120,6 +123,7 @@ bool8 isCurrentItemFavorite(void);
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx);
 static void Inventory_UseItem(u8 taskId);
 static u8 CreateRegisteredItemIcon(u8 slot);
+static const u8 Inventory_GetItemCoordinates(u32 direction, u32 axis);
 static void CreateAllRegisteredItemIcon(void);
 static void RemoveItemInSlot(u8 pocketId, u8 itemIdx);
 static void RemoveInventoryItem(u8 pocketId, u8 itemIdx, u16 quanity);
@@ -350,8 +354,6 @@ static void Menu_VBlankCB(void)
 
 static bool8 Menu_DoGfxSetup(void)
 {
-    u8 i;
-
     switch (gMain.state)
     {
     case 0:
@@ -390,9 +392,7 @@ static bool8 Menu_DoGfxSetup(void)
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         CreateUpArrowSprite();
         CreateDownArrowSprite();
-        StartMenu_DisplayPartyIcons();
-        for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++)
-            CreateRegisteredItemIcon(i);
+        Inventory_PartyDisplay();
         LoadPalette(sMenuInterfacePalette, 16, 32);
         CreateTask(Task_MenuWaitFadeIn, 0);
         gMain.state++;
@@ -567,15 +567,41 @@ static const struct {
     {
         {
             (const u16[])INCBIN_U16("graphics/ui_menus/inventory/backgrounds/sprites/partyShadow.4bpp"),
-            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_SIZE), TAG_ITEM_INVENTORY_PLATFORMS
+            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_NORMAL_SIZE), TAG_ITEM_INVENTORY_PLATFORMS
         },
         {
             (const u16[])INCBIN_U16("graphics/ui_menus/inventory/backgrounds/sprites/partyNormal.4bpp"),
-            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_NORMAL), TAG_ITEM_INVENTORY_PLATFORMS_NORMAL
+            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_NORMAL_SIZE), TAG_ITEM_INVENTORY_PLATFORMS_NORMAL
+        },
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/inventory/backgrounds/sprites/itemPlatform.4bpp"),
+            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_ITEM_SIZE), TAG_ITEM_INVENTORY_PLATFORMS_ITEM
+        },
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/inventory/icons/register_arrows.4bpp"),
+            TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_ITEM_SIZE), TAG_ITEM_INVENTORY_PLATFORMS_COMPASS
         },
         { NULL }
     },
     { sMenuInterfacePalette_Sprites, TAG_ITEM_INVENTORY_SPRITE_PALETTE}
+};
+
+static const struct OamData sInventory_MonPlatformNormalOamData  =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .priority = 1
+};
+
+static const struct SpriteTemplate sInventory_CompassSpriteTemplate =
+{
+    .tileTag = TAG_ITEM_INVENTORY_PLATFORMS_COMPASS,
+    .paletteTag = TAG_ITEM_INVENTORY_SPRITE_PALETTE,
+    .oam = &sInventory_MonPlatformNormalOamData,
+    .images = NULL,
+    .anims = gDummySpriteAnimTable,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_RegisteredItem_Icon_Callback,
 };
 
 static const struct OamData sInventory_MonPlatformOamData  =
@@ -591,85 +617,134 @@ static const struct SpriteTemplate sMonStatus_PlatformSpriteTemplate =
     .tileTag = TAG_ITEM_INVENTORY_PLATFORMS,
     .paletteTag = TAG_ITEM_INVENTORY_SPRITE_PALETTE,
     .oam = &sInventory_MonPlatformOamData ,
-    .anims = (const union AnimCmd *const[]){
-        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END }, 
-        (const union AnimCmd[]){ ANIMCMD_FRAME(16, 1), ANIMCMD_END },
-    },
     .images = NULL,
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){ ANIMCMD_FRAME(16, 1), ANIMCMD_END },
+        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END }, 
+    },
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
+    .callback = SpriteCB_Species_Icon_Dummy,
 };
 
-static void StartMainSprite_PartyMon(void)
+static const struct SpriteTemplate sMonStatus_PlatformNormalSpriteTemplate =
+{
+    .tileTag = TAG_ITEM_INVENTORY_PLATFORMS_NORMAL,
+    .paletteTag = TAG_ITEM_INVENTORY_SPRITE_PALETTE,
+    .oam = &sInventory_MonPlatformNormalOamData ,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Species_Icon_Dummy,
+};
+
+static const struct OamData sInventory_ItemPlatformOamData  =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .objMode = ST_OAM_OBJ_BLEND,
+    .priority = 2
+};
+
+static const struct SpriteTemplate sItemPlatformSpriteTemplate =
+{
+    .tileTag = TAG_ITEM_INVENTORY_PLATFORMS_ITEM,
+    .paletteTag = TAG_ITEM_INVENTORY_SPRITE_PALETTE,
+    .oam = &sInventory_ItemPlatformOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_RegisteredItem_Icon_Callback,
+};
+
+static void Inventory_AddAllItemPlatforms(void)
+{
+    for (enum InventoryRegisterDirection direction = 0; direction < INVENTORY_REGISTER_NUM_DIRECTIONS; direction++)
+        Inventory_AddItemPlatform(direction);
+
+    u8 *spriteIds = sMenuDataPtr->spriteIDs;
+    struct Sprite *sprite = NULL;
+
+    if (spriteIds[INVENTORY_SPRITE_REGISTER_COMPASS] != SPRITE_NONE)
+        return;
+
+    spriteIds[INVENTORY_SPRITE_REGISTER_COMPASS] = CreateSprite(&sInventory_CompassSpriteTemplate,0,0,2);
+
+    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_REGISTER_COMPASS]];
+    sprite->x2 = REGISTERED_ITEM_COMPASS_X;
+    sprite->y2 = REGISTERED_ITEM_COMPASS_Y;
+}
+
+static void Inventory_AddItemPlatform(enum InventoryRegisterDirection direction)
 {
     u8 *spriteIds = sMenuDataPtr->spriteIDs;
-    //struct Pokemon *mon = gPlayerParty;
     struct Sprite *sprite = NULL;
-    //u32 species, healthPercentage, status;
-    //bool32 isEgg;
+
+    if (spriteIds[INVENTORY_SPRITE_ITEM_PLATFORM_1 + direction] != SPRITE_NONE)
+        return;
+
+    spriteIds[INVENTORY_SPRITE_ITEM_PLATFORM_1 + direction] = CreateSprite(&sItemPlatformSpriteTemplate,0,0,2);
+
+    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_ITEM_PLATFORM_1 + direction]];
+    sprite->x2 = Inventory_GetItemCoordinates(direction, AXIS_X);
+    sprite->y2 = Inventory_GetItemCoordinates(direction, AXIS_Y);
+}
+
+static void Inventory_AddMonPlatforms(bool32 firstColumn, u32 partyIndex, u32 x, u32 y)
+{
+    u8 *spriteIds = sMenuDataPtr->spriteIDs;
+    struct Sprite *sprite = NULL;
+
+    if (spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + partyIndex] != SPRITE_NONE)
+        return;
+
+    spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + partyIndex] = CreateSprite(&sMonStatus_PlatformSpriteTemplate, 0, 0, 2);
+
+    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + partyIndex]];
+    sprite->x2 = x;
+    sprite->y2 = y;
+
+    StartSpriteAnim(sprite, firstColumn);
+
+    if (spriteIds[INVENTORY_SPRITE_MON_PLATFORM_NORMAL_1 + partyIndex] != SPRITE_NONE)
+        return;
+
+    spriteIds[INVENTORY_SPRITE_MON_PLATFORM_NORMAL_1 + partyIndex] = CreateSprite(&sMonStatus_PlatformNormalSpriteTemplate, 0, 0, 1);
+
+    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_PLATFORM_NORMAL_1 + partyIndex]];
+    sprite->x2 = x - 1;
+    sprite->y2 = y + 2;
+}
+
+static void Inventory_PartyDisplay(void)
+{
     u32 x = 16;
     u32 y = 32;
 
     if (!gPlayerPartyCount)
         return;
 
-    for (u32 i = 0; i < PARTY_SIZE; i++)
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
     {
-        if (spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + i] == SPRITE_NONE)
-        {
-            spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + i] =
-                CreateSprite(&sMonStatus_PlatformSpriteTemplate, 0, 0, 2);
+        bool32 firstColumn = ((partyIndex % 2) == 0);
 
-           sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + i]];
-           sprite->x2 = x;
-           sprite->y2 = y;
-        }
+        ShowSpeciesIcon(partyIndex,x,y);
+        Inventory_AddMonPlatforms(firstColumn,partyIndex,x,y);
 
-        if ((i % 2) == 0)
+        if (firstColumn)
         {
             x += 32;
         }
         else
-        {
+    {
             x = 16;
-            y += 24;
+            y += 26;
+
+            if (partyIndex > 3)
+                y -= 2;
         }
-        StartSpriteAnim(sprite, 0);
-
-        /*
-        species = GetMonData(&mon[i], MON_DATA_SPECIES_OR_EGG);
-        if (spriteIds[START_MAIN_SPRITE_MON_ICONS + i] == SPRITE_NONE && (species && species <= NUM_SPECIES))
-        {
-            healthPercentage = MonStatus_GetHealthPercentage(&mon[i]);
-            isEgg = (species == SPECIES_EGG);
-            species = ReturnTransformationIfConditionMet(&mon[i]);
-            status = GetMonData(&mon[i], MON_DATA_STATUS);
-
-            LoadMonIconPalette(species);
-            spriteIds[START_MAIN_SPRITE_MON_ICONS + i] =
-                CreateMonIcon(species, MonStatus_GetSpriteCB(healthPercentage, isEgg),
-                              START_PARTY_MON_X, START_PARTY_MON_Y, 0, GetMonData(&mon[i], MON_DATA_PERSONALITY));
-
-            sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_ICONS + i]];
-            sprite->subpriority = 3;
-            sprite->oam.priority = 0;
-            sprite->x2 = MonStatus_GetXIconCoord(i);
-            sprite->y2 = MonStatus_GetYIconCoord(i);
-
-            if (spriteIds[START_MAIN_SPRITE_MON_STATUS + i] == SPRITE_NONE)
-            {
-                spriteIds[START_MAIN_SPRITE_MON_STATUS + i] =
-                    CreateSprite(&sMonStatus_SpriteTemplate, (((status & STATUS1_ANY) || !healthPercentage) ? 4 : 0) + 16,
-                                 START_MON_STATUS_Y, 0);
-
-                sprite = &gSprites[spriteIds[START_MAIN_SPRITE_MON_STATUS + i]];
-                MonStatus_InjectStatusGraphics(sprite, status, healthPercentage);
-                sprite->x2 = MonStatus_GetXIconCoord(i);
-                sprite->y2 = MonStatus_GetYIconCoord(i);
-            }
-        }
-        */
     }
+    Inventory_AddAllItemPlatforms();
+    CreateAllRegisteredItemIcon();
 }
 
 static void Menu_LoadGraphics(void)
@@ -690,20 +765,6 @@ static void Menu_LoadGraphics(void)
     Inventory_LoadBackgroundPalette();
     LoadSpriteSheets(sInventory_SpriteGraphics.sheets);
     LoadSpritePalette(&sInventory_SpriteGraphics.palette);
-    Menu_UpdateTilemap();
-}
-
-
-static void Menu_UpdateTilemap(void)
-{
-    return;
-    s32 value;
-    if(!shouldShowRegisteredItems())
-        value = ChangeBgY(INVENTORY_BG_NORMAL, 0, BG_COORD_SET);
-    else
-        value = ChangeBgY(INVENTORY_BG_NORMAL, Y_VALUE_REGISTERED, BG_COORD_SET);
-
-    DebugPrintfLevel(MGBA_LOG_WARN, "Menu_UpdateTilemap value; %d", value);
 }
 
 static void Menu_InitWindows(void)
@@ -1799,30 +1860,6 @@ static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
         sprite->invisible = FALSE;
 }
 
-static void StartMenu_DisplayPartyIcons(void)
-{
-    u8 i;
-    u8 x = 2;
-    u8 y = 3;
-    u8 y2 = 0;
-
-    StartMainSprite_PartyMon();
-    for(i = 0; i < PARTY_SIZE; i++){
-        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
-            ShowSpeciesIcon(i, (x * 8), (y * 8) + y2);
-
-        if(i % 2 == 0)
-            x = x + 4;
-        else{
-            y = y + 3;
-            y2 = y2 + 2;
-            x = 2;
-        }
-    }
-}
-
-
-
 static bool8 canMonLearnCurrentTMHM(u8 partyIndex){
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
 
@@ -1944,6 +1981,12 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
     bool32 isEgg = (species == SPECIES_EGG);
     u32 currentStatus = GetAilmentFromStatus(GetMonData(&gPlayerParty[slot], MON_DATA_STATUS));
     u8 palette = LoadMonIconPaletteWithAilment(species, personality, currentStatus, currentHP, slot + MON_STARTING_PALETTE_NUM);
+    sMenuDataPtr->PartyPokemonIcon[slot] = SpriteID;
+
+    if (!IsMonNotEmpty(slot))
+        return SpriteID;
+
+    y -= 8;
 
     SpriteID = CreateMonIcon(species, GetSpriteCallbackForIcon(percent, isEgg), x, y, 0, GetMonData(mon,MON_DATA_PERSONALITY));
 
@@ -2006,9 +2049,6 @@ static void Inventory_LoadBackgroundPalette(void)
     LoadPalette(sMenuInterfacePalette, 16, 32);
 }
 
-
-
-
 static void SpriteCB_RegisteredItem_Icon_Callback(struct Sprite *sprite)
 {
     if(!shouldShowRegisteredItems())
@@ -2016,18 +2056,6 @@ static void SpriteCB_RegisteredItem_Icon_Callback(struct Sprite *sprite)
     else
         sprite->invisible = FALSE;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 static void FreeRegisteredItemIconSprite(u8 slot)
 {
@@ -2045,6 +2073,17 @@ static void FreeRegisteredItemIconSprite(u8 slot)
     }
 }
 
+static const u8 sItemCoordinates[AXIS_COUNT][INVENTORY_REGISTER_NUM_DIRECTIONS] = 
+{
+    [AXIS_X] = {REGISTERED_ITEM_ICON_X_UP, REGISTERED_ITEM_ICON_X_RIGHT, REGISTERED_ITEM_ICON_X_DOWN, REGISTERED_ITEM_ICON_X_LEFT},
+    [AXIS_Y] = {REGISTERED_ITEM_ICON_Y_UP, REGISTERED_ITEM_ICON_Y_RIGHT, REGISTERED_ITEM_ICON_Y_DOWN, REGISTERED_ITEM_ICON_Y_LEFT},
+};
+
+static const u8 Inventory_GetItemCoordinates(u32 direction, u32 axis)
+{
+    return sItemCoordinates[axis][direction];
+}
+
 static void CreateAllRegisteredItemIcon(void)
 {
     for(u32 direction = 0; direction < INVENTORY_REGISTER_NUM_DIRECTIONS; direction++)
@@ -2057,29 +2096,8 @@ static u8 CreateRegisteredItemIcon(u8 slot)
     u8 tag = TAG_ITEM_INVENTORY_REGISTERED_ICON + slot;
     u8 *spriteId = &sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_REGISTERED_ITEM_UP + slot];
     u16 itemId = gSaveBlock3Ptr->InventoryData.registeredItem[slot];
-    u8 x, y;
 
     FreeRegisteredItemIconSprite(slot);
-
-    switch(slot){
-        default:
-        case INVENTORY_REGISTER_DIRECTION_UP:
-            x = REGISTERED_ITEM_ICON_X_UP;
-            y = REGISTERED_ITEM_ICON_Y_UP;
-        break;
-        case INVENTORY_REGISTER_DIRECTION_DOWN:
-            x = REGISTERED_ITEM_ICON_X_DOWN;
-            y = REGISTERED_ITEM_ICON_Y_DOWN;
-        break;
-        case INVENTORY_REGISTER_DIRECTION_LEFT:
-            x = REGISTERED_ITEM_ICON_X_LEFT;
-            y = REGISTERED_ITEM_ICON_Y_LEFT;
-        break;
-        case INVENTORY_REGISTER_DIRECTION_RIGHT:
-            x = REGISTERED_ITEM_ICON_X_RIGHT;
-            y = REGISTERED_ITEM_ICON_Y_RIGHT;
-        break;
-    }
 
     if (*spriteId == SPRITE_NONE && itemId != ITEM_NONE)
     {
@@ -2091,8 +2109,8 @@ static u8 CreateRegisteredItemIcon(u8 slot)
         if (itemSpriteId != MAX_SPRITES)
         {
             *spriteId = itemSpriteId;
-            gSprites[itemSpriteId].x2 = x;
-            gSprites[itemSpriteId].y2 = y;
+            gSprites[itemSpriteId].x2 = Inventory_GetItemCoordinates(slot, AXIS_X);
+            gSprites[itemSpriteId].y2 = Inventory_GetItemCoordinates(slot, AXIS_Y);
             gSprites[itemSpriteId].callback = SpriteCB_RegisteredItem_Icon_Callback;
         }
     }
@@ -2524,34 +2542,6 @@ static u8 getItemOptionNum(u16 item, u8 num){
 static u8 getSelectedItemOptionNum(u8 num){
     return getItemOptionNum(Inventory_GetItemIdCurrentlySelected(), num);
 }
-/*
-//PSF TODO convert to sprite usage
-static const struct OamData sInventoryCursor_OamData =
-{
-    .shape = SPRITE_SHAPE(8x8),
-    .size = SPRITE_SIZE(8x8),
-};
-
-static const struct SpriteTemplate sInventoryCursor_SpriteTemplate =
-{
-    .tileTag = INVENTORY_TAG_CURSOR,
-    .paletteTag = INVENTORY_TAG_PALETTE,
-    .oam = &sInventoryCursor_OamData,
-    .anims = (const union AnimCmd *const[])
-    {
-        [INVENTORY_CURSOR_OFF] = (const union AnimCmd[]){ ANIMCMD_FRAME(INVENTORY_CURSOR_OFF * 16), ANIMCMD_END },
-        [INVENTORY_CURSOR_ON] = (const union AnimCmd[]){ ANIMCMD_FRAME(INVENTORY_CURSOR_ON * 16), ANIMCMD_END },
-    },
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Inventory_Cursor,
-};
-
-static void Inventory_PrintHeaderCursor(void)
-{
-}
-*/
-
 static u32 Inventory_CalculateWidestBagPocketTitle(void)
 {
     u32 width = 0;
@@ -4016,7 +4006,6 @@ static void RegisterItemIntoDirection(u8 direction)
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
 
     CreateAllRegisteredItemIcon();
-    Menu_UpdateTilemap();
 }
 
 void RemoveEmptyRegisteredItems(void){
@@ -4112,7 +4101,6 @@ static void Task_MenuMain(u8 taskId)
             case INVENTORY_MODE_REGISTER:
                 sMenuDataPtr->itemIdxPickMode = 0;
                 sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
-                Menu_UpdateTilemap();
                 break;
             default:
                 sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
@@ -4127,9 +4115,8 @@ static void Task_MenuMain(u8 taskId)
         switch(sMenuDataPtr->currentSelectMode){
             case INVENTORY_MODE_DEFAULT:
                 {
-                    u8 tempPocket = gSaveBlock3Ptr->InventoryData.pocketNum;
-
                     if(gSaveBlock3Ptr->InventoryData.pocketNum >= NUM_INVENTORY_POCKETS - 1)
+
                         gSaveBlock3Ptr->InventoryData.pocketNum = 0;
                     else
                         gSaveBlock3Ptr->InventoryData.pocketNum++;
@@ -4138,8 +4125,6 @@ static void Task_MenuMain(u8 taskId)
                     gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
                     PlaySE(SE_SELECT);
-                    if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
-                        Menu_UpdateTilemap();
                     Inventory_PrintToAllWindows();
                 }
                 break;
@@ -4151,8 +4136,6 @@ static void Task_MenuMain(u8 taskId)
         switch(sMenuDataPtr->currentSelectMode){
             case INVENTORY_MODE_DEFAULT:
                 {
-                    u8 tempPocket = gSaveBlock3Ptr->InventoryData.pocketNum;
-
                     if(gSaveBlock3Ptr->InventoryData.pocketNum == 0)
                         gSaveBlock3Ptr->InventoryData.pocketNum = NUM_INVENTORY_POCKETS - 1;
                     else
@@ -4162,8 +4145,6 @@ static void Task_MenuMain(u8 taskId)
                     gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
                     PlaySE(SE_SELECT);
-                    if(tempPocket == POCKET_KEY_ITEMS || gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_KEY_ITEMS)
-                        Menu_UpdateTilemap();
                     Inventory_PrintToAllWindows();
                 }
                 break;
@@ -4337,8 +4318,6 @@ static void Task_MenuMain(u8 taskId)
 
 static void Inventory_HandleRegister(u8 taskId)
 {
-    Menu_UpdateTilemap();
-
     u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
     RemoveWindow(windowId);
     sInventoryListMenu->inventoryMenuWindowId = WINDOW_NONE;
@@ -4380,6 +4359,5 @@ static void Inventory_CancelFavorite(u8 taskId)
     sMenuDataPtr->itemIdxPickMode = 0;
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
     Inventory_PrintToAllWindows();
-    Menu_UpdateTilemap();
     gTasks[taskId].func = Task_MenuMain;
 }
