@@ -172,6 +172,9 @@ static void Inventory_ChangeTossAmount(s32 direction);
 static void Inventory_HandleRegister(u8 taskId);
 static void Task_Inventory_HandleRegisterDirection(u8 taskId);
 static void Inventory_CancelFavorite(u8 taskId);
+static bool8 Inventory_LastItemInMenu(void);
+static void Inventory_TurnOff(u8 taskId);
+static void Inventory_CancelFavorite(u8 taskId);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
@@ -1646,6 +1649,9 @@ static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot
 
 static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
 {
+    if (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+        return CompareItemsById(itemSlot1, itemSlot2);
+
     u32 quantity1 = itemSlot1->quantity;
     u32 quantity2 = itemSlot2->quantity;
 
@@ -1658,9 +1664,6 @@ static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSl
         return 1;
     else if (quantity1 > quantity2)
         return -1;
-
-    if (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
-        return CompareItemsById(itemSlot1, itemSlot2);
 
     return CompareItemsAlphabetically(itemSlot1, itemSlot2); //Items have same quantity so sort alphabetically
 }
@@ -2512,7 +2515,6 @@ static const struct StringList sInventory_TitleStrings[NUM_INVENTORY_POCKETS] = 
     [POCKET_FAVORITE_ITEMS] = { _("Favorite"),    },
 };
 
-static const u8 sInventory_Exit[]      = _("Exit");
 static const u8 sInventory_Exit_Desc[] = _("Close the Inventory");
 static const u8 sInventory_Nothing[]   = _("---");
 static const u8 sText_Item_Num[]       = _("x{STR_VAR_1}");
@@ -2680,6 +2682,9 @@ static u32 Inventory_GetItemIdFromPocketIndex(u32 itemIndex, enum Pocket pocketI
 {
     struct BagPocket *pocket = &gBagPockets[pocketId];
 
+    if(sMenuDataPtr->numItems[pocketId] == (itemIndex+1))
+        return ITEM_NONE;
+
     return (pocketId == POCKET_FAVORITE_ITEMS) ? (sMenuDataPtr->FavoritePocketItems[itemIndex][FAVORITE_ITEM_ID]) : pocket->itemSlots[itemIndex].itemId;
 }
 
@@ -2805,7 +2810,6 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
     u32 itemListItemNameWidth = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH - 24;
     u32 inventoryPadding = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH;
 
-
     if(itemId != ITEM_NONE)
     {
         if(pocketId != POCKET_TM_HM)
@@ -2844,7 +2848,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
             if (itemIndex != 0)
                 return;
 
-        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, sInventory_Exit);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, COMPOUND_STRING("Exit"));
     }
 }
 
@@ -4033,12 +4037,11 @@ static void Task_MenuMain(u8 taskId)
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                     break;
                 default:
-                    if(gSaveBlock3Ptr->InventoryData.itemIdx >= numitems - 1)
+                    if (Inventory_LastItemInMenu())
                     {
                         gSpecialVar_ItemId = ITEM_NONE;
-                        PlaySE(SE_PC_OFF);
-                        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                        gTasks[taskId].func = Task_MenuTurnOff;
+                        Inventory_TurnOff(taskId);
+                        return;
                     }
                     else
                     {
@@ -4071,9 +4074,7 @@ static void Task_MenuMain(u8 taskId)
         {
             case INVENTORY_MODE_DEFAULT:
                 Inventory_PrintToAllWindows();
-                PlaySE(SE_PC_OFF);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                gTasks[taskId].func = Task_MenuTurnOff;
+                Inventory_TurnOff(taskId);
                 break;
             case INVENTORY_MODE_REGISTER:
                 sMenuDataPtr->itemIdxPickMode = 0;
@@ -4338,4 +4339,20 @@ static void Inventory_CancelFavorite(u8 taskId)
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
     Inventory_PrintToAllWindows();
     gTasks[taskId].func = Task_MenuMain;
+}
+
+static bool8 Inventory_LastItemInMenu(void)
+{
+    u32 itemId = gSaveBlock3Ptr->InventoryData.itemIdx;
+    u32 numItems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u32 lastItemIndex = numItems - 1;
+
+    return (itemId >= lastItemIndex);
+}
+
+static void Inventory_TurnOff(u8 taskId)
+{
+    PlaySE(SE_PC_OFF);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_MenuTurnOff;
 }
