@@ -143,6 +143,7 @@ static void Merge(struct ItemSlot* array, u32 low, u32 mid, u32 high, s8 (*compa
 static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
 static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
 static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
+static s8 CompareItemsById(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
 
 //Sprites
 static void CreateUpArrowSprite(void);
@@ -884,13 +885,6 @@ void ForceReloadInventory(void){
 static const u8 sText_Toss_Yes[] = _("Yes");
 static const u8 sText_Toss_No[]  = _("No");
 
-static const struct StringList sSortTypeStrings[NUM_SORT_OPTIONS] = {
-    [ITEM_SORT_ALPHABETICALLY] = { _("Name"),   },
-    [ITEM_SORT_BY_TYPE]        = { _("Type"),   },
-    [ITEM_SORT_BY_AMOUNT]      = { _("Amount"), },
-    [ITEM_SORT_CANCEL]         = { _("Cancel"), },
-};
-
 static const struct StringList sDirectionStrings[INVENTORY_REGISTER_NUM_DIRECTIONS + 1] = {
     [INVENTORY_REGISTER_DIRECTION_UP]    = { _("Up"),     },
     [INVENTORY_REGISTER_DIRECTION_DOWN]  = { _("Down"),   },
@@ -1539,7 +1533,6 @@ static void SortItemsInInventory(u8 pocket, u8 type)
     break;
     case POCKET_TM_HM:
         itemMem = gSaveBlock1Ptr->bag.bagPocket_TMsHMs;
-        return;
     break;
     case POCKET_TREASURE:
         itemMem = gSaveBlock1Ptr->bag.bagPocket_Treasure;
@@ -1621,8 +1614,17 @@ static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot
     else if (item2 == ITEM_NONE)
         return -1;
 
-    name1 = GetItemName(item1);
-    name2 = GetItemName(item2);
+
+    if (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+    {
+        name1 = GetMoveName(GetItemSecondaryId(item1));
+        name2 = GetMoveName(GetItemSecondaryId(item2));
+    }
+    else 
+    {
+        name1 = GetItemName(item1);
+        name2 = GetItemName(item2);
+    }
 
     for (i = 0; ; ++i)
     {
@@ -1644,8 +1646,8 @@ static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot
 
 static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
 {
-    u16 quantity1 = itemSlot1->quantity;
-    u16 quantity2 = itemSlot2->quantity;
+    u32 quantity1 = itemSlot1->quantity;
+    u32 quantity2 = itemSlot2->quantity;
 
     if (itemSlot1->itemId == ITEM_NONE)
         return 1;
@@ -1657,24 +1659,58 @@ static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSl
     else if (quantity1 > quantity2)
         return -1;
 
+    if (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+        return CompareItemsById(itemSlot1, itemSlot2);
+
     return CompareItemsAlphabetically(itemSlot1, itemSlot2); //Items have same quantity so sort alphabetically
 }
 
 static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
 {
-    //Null items go last
-    u8 type1 = (itemSlot1->itemId == ITEM_NONE) ? 0xFF : sItemsByType[itemSlot1->itemId];
-    u8 type2 = (itemSlot2->itemId == ITEM_NONE) ? 0xFF : sItemsByType[itemSlot2->itemId];
+    u32 type1, type2;
+
+    if (itemSlot1->itemId == ITEM_NONE)
+        return 1;
+    else if (itemSlot2->itemId == ITEM_NONE)
+        return -1;
+
+    if (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+    {
+        type1 = GetMoveType(GetItemSecondaryId(itemSlot1->itemId));
+        type2 = GetMoveType(GetItemSecondaryId(itemSlot2->itemId));
+    }
+    else 
+    {
+        type1 = (itemSlot1->itemId == ITEM_NONE) ? 0xFF : sItemsByType[itemSlot1->itemId];
+        type2 = (itemSlot2->itemId == ITEM_NONE) ? 0xFF : sItemsByType[itemSlot2->itemId];
+    }
 
     if (type1 < type2)
         return -1;
     else if (type1 > type2)
         return 1;
 
+    if (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+        return CompareItemsById(itemSlot1, itemSlot2);
+
     return CompareItemsAlphabetically(itemSlot1, itemSlot2); //Items are of same type so sort alphabetically
 }
 
-static void TrySortBag(void){
+static s8 CompareItemsById(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
+{
+    u32 id1 = itemSlot1->itemId;
+    u32 id2 = itemSlot2->itemId;
+
+    if (id1 < id2)
+        return -1;
+    else if (id1 > id2)
+        return 1;
+
+    return CompareItemsAlphabetically(itemSlot1, itemSlot2); //Items are of same type so sort alphabetically
+}
+
+static void TrySortBag(void)
+{
     u8 pocket = gSaveBlock3Ptr->InventoryData.pocketNum;
     u8 numFavorites = gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocket];
     u16 numItems = sMenuDataPtr->numItems[pocket] - numFavorites;
@@ -2430,6 +2466,14 @@ static const u8 *const sInventory_OptionStrings[] =
     [INVENTORY_ITEM_OPTION_UNFAVORITE]   = COMPOUND_STRING("Unfavorite"),
 };
 
+static const u8 *const sSortTypeStrings[] = 
+{
+    [ITEM_SORT_ALPHABETICALLY] = COMPOUND_STRING("Name"),
+    [ITEM_SORT_BY_TYPE]        = COMPOUND_STRING("Type"),
+    [ITEM_SORT_BY_AMOUNT]      = COMPOUND_STRING("Amount"),
+    [ITEM_SORT_CANCEL]         = COMPOUND_STRING("Cancel"),
+};
+
 static u8 getNumInventoryOptions(u16 item){
     u8 i;
 
@@ -2442,10 +2486,15 @@ static u8 getNumInventoryOptions(u16 item){
 }
 static u8 getSelectedItemNumOptions(void)
 {
-    if (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_TOSS_CONFIRMATION)
-        return NUM_TOSS_CONFIRMATION_OPTIONS;
-
-    return getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
+    switch (sMenuDataPtr->currentSelectMode)
+    {
+        case INVENTORY_MODE_TOSS_CONFIRMATION:
+            return NUM_TOSS_CONFIRMATION_OPTIONS;
+        case INVENTORY_MODE_REORDER:
+            return NUM_SORT_OPTIONS;
+        default:
+            return getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
+    }
 }
 
 static const struct StringList sInventory_TitleStrings[NUM_INVENTORY_POCKETS] = {
@@ -2480,7 +2529,7 @@ static const u8 sText_Help_Bar_Cant_Move_Favorite[] = _("You can't move a favori
 static const u8 sText_Help_Bar_Cant_Use[]           = _("You can't use this item right now! {A_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Cant_Toss[]          = _("You can't toss this item! {A_BUTTON} Confirm");
 static const u8 sText_Help_Bar_SortItemsHow[]       = _("Sort items how? {DPAD_UPDOWN} Move {A_BUTTON} Choose");
-static const u8 sText_Help_Bar_RegisterHow[]        = _("Register to what direction? {DPAD_ANY} Select {B_BUTTON} Cancel");
+static const u8 sText_Help_Bar_RegisterHow[]        = _("Register to what direction? {DPAD_NONE} Select {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_ItemsSorted[]        = _("Items sorted by {STR_VAR_1}! {A_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Used_Item[]          = _("{PLAYER} used the {STR_VAR_1} {A_BUTTON} Confirm");
 
@@ -2961,6 +3010,12 @@ static void Inventory_PopulateMenuItems(void)
             sInventoryListMenu->menuItems[i].text = sInventory_TossConfirm[menuIndex];
             sInventoryListMenu->calcWidth = 4;
         }
+        else if (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REORDER)
+        {
+            menuIndex = i;
+            sInventoryListMenu->menuItems[i].text = sSortTypeStrings[menuIndex];
+            sInventoryListMenu->calcWidth = 6;
+        }
         else
         {
             menuIndex = getSelectedItemOptionNum(i);
@@ -3089,6 +3144,15 @@ static void Inventory_HandleAButtonPress(u8 taskId)
             Inventory_PrintToAllWindows();
             sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
             break;
+        case INVENTORY_MODE_REORDER:
+            sMenuDataPtr->itemIdxPickMode = Inventory_GetMenuPosition();
+            if(sMenuDataPtr->itemIdxPickMode != ITEM_SORT_CANCEL)
+                TrySortBag();
+
+            sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+            Inventory_RemoveMenu(taskId);
+            Inventory_PrintToAllWindows();
+            break;
     }
 }
 
@@ -3199,45 +3263,6 @@ static void Inventory_RemoveTossMenu(u8 taskId)
     gTasks[taskId].func = Task_MenuMain;
 }
 
-static void Inventory_PrintMenu(void)
-{
-    u32 x, x2, y, y2, j, i;
-    u32 font = INVENTORY_FONT_MENU;
-
-    switch(sMenuDataPtr->currentSelectMode)
-    {
-        case INVENTORY_MODE_USE_OPTIONS:
-            break;
-        case INVENTORY_MODE_REORDER:
-            x  = 22;
-            x2 = 0;
-            y  = 16;
-            y2 = 2;
-
-            for(i = 0; i < NUM_SORT_OPTIONS; i++){
-                for(j = 0; j < INVENTORY_PICK_MENU_SQUARES; j++)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventoryPickMenuTile_Gfx, (x * 8) + x2 + (j * 16), (y * 8) + y2, 16, 16);
-
-                if((NUM_SORT_OPTIONS - (i + 1)) == sMenuDataPtr->itemIdxPickMode)
-                    BlitBitmapToWindow(INVENTORY_WINDOW_DESC, sInventorySelectorCursor_Gfx, (x * 8), (y * 8) + y2, 64, 16);
-
-                y = y - 2;
-            }
-
-            y = y + 2;
-            x2 = 4;
-            for(i = 0; i < NUM_SORT_OPTIONS; i++){
-                StringCopy(gStringVar1, sSortTypeStrings[i].string);
-                AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2, (y * 8) + y2 + (i * 16), -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar1);
-            }
-            break;
-        default:
-            break;
-        case INVENTORY_MODE_TOSS_CONFIRMATION:
-            break;
-    }
-}
-
 static void Inventory_PrintFooter(void)
 {
     u32 x = 4;
@@ -3282,7 +3307,7 @@ static void Inventory_PrintFooter(void)
             }
             break;
         case INVENTORY_MESSAGE_SORTED_ITEMS_BY:
-            StringCopy(gStringVar1, sSortTypeStrings[sMenuDataPtr->itemIdxPickMode].string);
+            StringCopy(gStringVar1, sSortTypeStrings[sMenuDataPtr->itemIdxPickMode]);
             StringExpandPlaceholders(gStringVar4, sText_Help_Bar_ItemsSorted);
             break;
         case INVENTORY_MESSAGE_CANT_MOVE_FAVORITE:
@@ -3324,7 +3349,6 @@ static void Inventory_PrintToAllWindows(void)
     Inventory_PrintHeader();
     Inventory_PrintItemList();
     Inventory_PrintDesc();
-    //Inventory_PrintMenu();
     Inventory_PrintFooter();
 }
 
@@ -4240,6 +4264,7 @@ static void Task_MenuMain(u8 taskId)
                     if(sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] > 2){
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REORDER;
                         Inventory_PrintToAllWindows();
+                        Inventory_OpenMenu(taskId);
                     }
                     break;
             }
