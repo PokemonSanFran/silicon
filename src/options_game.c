@@ -88,6 +88,7 @@ bool32 PlayerNotOnBikeShouldWalk(u16 heldKeys)
             || ((!isBButtonHeld) && (optionRunValue == GAME_OPTION_RUN_MANUAL))
             || (!CanPlayerRun())
             || (FollowerNPCComingThroughDoor())
+            || (I_ORAS_DOWSING_FLAG != 0 && (I_ORAS_DOWSING_FLAG == 0 || FlagGet(I_ORAS_DOWSING_FLAG)))
            );
 }
 

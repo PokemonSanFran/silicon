@@ -143,7 +143,7 @@ static const struct WindowTemplate sPokedexPageMovesWindowTemplates[] =
         .tilemapTop =  2,
         .width = 11,
         .height =  10,
-        .paletteNum =  15,
+        .paletteNum =  POKEDEX_PALETTE_TEXT,
         .baseBlock =  211,
     },
     [PAGE_MOVES_WINDOW_MOVES_DESC]=
@@ -208,7 +208,7 @@ static const struct WindowTemplate sPokedexPageStatsWindowTemplates[] =
         .tilemapTop =  11,
         .width = 30,
         .height =  8,
-        .paletteNum =  15,
+        .paletteNum =  POKEDEX_PALETTE_TEXT,
         .baseBlock =  517,
     },
     [PAGE_STATS_WINDOW_FOOTER]=
@@ -263,7 +263,7 @@ static const struct WindowTemplate sPokedexPageEvolutionWindowTemplates[] =
         .tilemapTop =  12,
         .width = 30,
         .height =  6,
-        .paletteNum =  15,
+        .paletteNum =  POKEDEX_PALETTE_TEXT,
         .baseBlock =  365,
     },
     [PAGE_EVOLUTION_WINDOW_FOOTER]=
@@ -288,7 +288,7 @@ static const struct WindowTemplate sPokedexPageInformationWindowTemplates[] =
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = POKEDEX_PALETTE_TEXT,
         .baseBlock = 1,
     },
     [PAGE_INFORMATION_WINDOW_DATA] =
@@ -298,7 +298,7 @@ static const struct WindowTemplate sPokedexPageInformationWindowTemplates[] =
         .tilemapTop = 1,
         .width = 12,
         .height = 12,
-        .paletteNum = 15,
+        .paletteNum = POKEDEX_PALETTE_TEXT,
         .baseBlock = 61,
     },
     [PAGE_INFORMATION_WINDOW_SPRITES] =
@@ -308,7 +308,7 @@ static const struct WindowTemplate sPokedexPageInformationWindowTemplates[] =
         .tilemapTop = 1,
         .width = 18,
         .height = 12,
-        .paletteNum = 15,
+        .paletteNum = POKEDEX_PALETTE_TEXT,
         .baseBlock = 205,
     },
     [PAGE_INFORMATION_WINDOW_FLAVOR] =
@@ -318,7 +318,7 @@ static const struct WindowTemplate sPokedexPageInformationWindowTemplates[] =
         .tilemapTop = 13,
         .width = 30,
         .height = 5,
-        .paletteNum = 15,
+        .paletteNum = POKEDEX_PALETTE_TEXT,
         .baseBlock = 421,
     },
     [PAGE_INFORMATION_WINDOW_FOOTER] =
@@ -328,7 +328,7 @@ static const struct WindowTemplate sPokedexPageInformationWindowTemplates[] =
         .tilemapTop = 18,
         .width = 30,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = POKEDEX_PALETTE_TEXT,
         .baseBlock = 571,
     },
     DUMMY_WIN_TEMPLATE,
@@ -378,7 +378,7 @@ static const struct WindowTemplate sPokedexPageLocationWindowTemplates[] =
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = POKEDEX_PALETTE_TEXT,
         .baseBlock = 1,
     },
     [PAGE_LOCATION_WINDOW_FOOTER] =
@@ -388,7 +388,7 @@ static const struct WindowTemplate sPokedexPageLocationWindowTemplates[] =
         .tilemapTop = 18,
         .width = 30,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = POKEDEX_PALETTE_TEXT,
         .baseBlock = 61,
     },
     DUMMY_WIN_TEMPLATE,

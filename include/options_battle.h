@@ -13,7 +13,6 @@ u32 GetExperienceExpMultiplerValue(void);
 
 // Battle Settings: Individual Values
 bool32 AreIndividualValuesDisabled(void);
-bool32 ShouldReturnPerfectValue(bool32 stat, struct Pokemon *mon);
 
 // Battle Settings: Effort Values
 bool32 AreEffortValuesEnabled(void);

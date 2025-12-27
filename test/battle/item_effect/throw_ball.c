@@ -51,6 +51,60 @@ SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations")
     }
 }
 
+// https://files.catbox.moe/uha7mn.mp4 PSF TODO fix offset Brendan throw
+// There is a bug that I cannot consistently repro where the battle against keiying in the gym will always crash because both of his lead mons are in master balls
+DOUBLE_BATTLE_TEST("Ball Animations: Show all Doubles Ball animations")
+{
+    u16 ball = 0;
+    PARAMETRIZE { ball = BALL_STRANGE; }
+    PARAMETRIZE { ball = BALL_POKE; }
+    PARAMETRIZE { ball = BALL_GREAT; }
+    PARAMETRIZE { ball = BALL_ULTRA; }
+    PARAMETRIZE { ball = BALL_MASTER; }
+    PARAMETRIZE { ball = BALL_PREMIER; }
+    PARAMETRIZE { ball = BALL_HEAL; }
+    PARAMETRIZE { ball = BALL_NET; }
+    PARAMETRIZE { ball = BALL_NEST; }
+    PARAMETRIZE { ball = BALL_DIVE; }
+    PARAMETRIZE { ball = BALL_DUSK; }
+    PARAMETRIZE { ball = BALL_TIMER; }
+    PARAMETRIZE { ball = BALL_QUICK; }
+    PARAMETRIZE { ball = BALL_REPEAT; }
+    PARAMETRIZE { ball = BALL_LUXURY; }
+    PARAMETRIZE { ball = BALL_LEVEL; }
+    PARAMETRIZE { ball = BALL_LURE; }
+    PARAMETRIZE { ball = BALL_MOON; }
+    PARAMETRIZE { ball = BALL_FRIEND; }
+    PARAMETRIZE { ball = BALL_LOVE; }
+    PARAMETRIZE { ball = BALL_FAST; }
+    PARAMETRIZE { ball = BALL_HEAVY; }
+    PARAMETRIZE { ball = BALL_DREAM; }
+    PARAMETRIZE { ball = BALL_SAFARI; }
+    PARAMETRIZE { ball = BALL_SPORT; }
+    PARAMETRIZE { ball = BALL_PARK; }
+    PARAMETRIZE { ball = BALL_BEAST; }
+    PARAMETRIZE { ball = BALL_CHERISH; }
+    PARAMETRIZE { ball = BALL_NEWA;}
+    PARAMETRIZE { ball = BALL_NEWB;}
+    PARAMETRIZE { ball = BALL_NEWC;}
+    PARAMETRIZE { ball = BALL_NEWD;}
+    PARAMETRIZE { ball = BALL_NEWE;}
+    PARAMETRIZE { ball = BALL_NEWF;}
+    PARAMETRIZE { ball = BALL_NEWG;}
+    PARAMETRIZE { ball = BALL_NEWH;}
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Ball(ball); }
+        PLAYER(SPECIES_WOBBUFFET) { Ball(ball); }
+        OPPONENT(SPECIES_WOBBUFFET) {Ball(ball);}
+        OPPONENT(SPECIES_WOBBUFFET) {Ball(ball);}
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_HELPING_HAND); MOVE(opponentLeft, MOVE_HELPING_HAND); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HELPING_HAND, opponentLeft);
+        //SEND_IN_MESSAGE("Go! Wobbuffet and Wobbuffet!");
+    }
+}
+
 WILD_BATTLE_TEST("Ball Animations: Show all Ball catch animations")
 {
     u16 throw = 0;

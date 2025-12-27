@@ -76,6 +76,12 @@ script Debug_CheatStart
 	end
 }
 
+script Debug_VarsNotSetBattleConfigMessage
+{
+	message(format("Feature unavailable!\nPlease define a usable var in:\l'include/config/battle.h'!"))
+	goto(Debug_MessageEnd)
+}
+
 script Debug_FlagsNotSetOverworldConfigMessage
 {
 	message(format("Feature unavailable!\nPlease define a usable flag in:\l'include/config/overworld.h'!"))
@@ -136,21 +142,11 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
-    callnative(CustomizeCharacterFromOverworld)
 	end
-}
-movement DebugMovement2
-{
-    player_run_down * 6
-    player_run_right * 9
-    player_run_up * 6
-    player_run_left * 9
-    step_end
 }
 
 script Debug_EventScript_Script_2
 {
-    warp(MAP_BIRTH_ISLAND_HARBOR,0)
 	end
 }
 
@@ -413,6 +409,38 @@ script Debug_EventScript_SetHiddenNature
     special(SetHiddenNature)
     releaseall
     end
+}
+
+script Debug_EventScript_SetAbility
+{
+	special(ChoosePartyMon)
+	waitstate
+	callnative(DebugNative_GetAbilityNames)
+	dynmultipush(gStringVar1, 0)
+	dynmultipush(gStringVar2, 1)
+	dynmultipush(gStringVar3, 2)
+	dynmultistack(0, 0, FALSE, 3 FALSE, 0, NULL)
+	switch(var(VAR_RESULT))
+	{
+		case MULTI_B_PRESSED: goto(Debug_EventScript_SetAbilityClose)
+	}
+	special(SetAbility)
+	goto(Debug_EventScript_SetAbilityClose)
+}
+
+script Debug_EventScript_SetAbilityClose
+{
+	releaseall
+	end
+}
+
+script Debug_EventScript_SetFriendship
+{
+	special(ChoosePartyMon)
+	waitstate
+	callnative(DebugNative_Party_SetFriendship)
+	releaseall
+	end
 }
 
 script Debug_EventScript_InflictStatus1_Single_Poison

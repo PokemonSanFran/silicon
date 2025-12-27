@@ -1,4 +1,3 @@
-//PSF TODO when the player first opens this, there should be a tutorial to play to explain features and functionality
 //PSF TODO If a player recives a 2nd quest via startquest and the player has still never opened the questlog and done the tutorial, force the tutorial
 #include "global.h"
 #include "strings.h"
@@ -1909,6 +1908,7 @@ static void PrintAllQuestSprites(void)
 
 static void RemoveAllQuestSprites(void)
 {
+    //PSF TODO the menu will run out of palettes after 20 scrolls and I have no idea why.
     for (enum QuestMenuRows rowIndex = 0; rowIndex < QUEST_MENU_UX_ROW_COUNT; rowIndex++)
     {
         struct Sprite *sprite = &gSprites[GetQuestSpriteId(rowIndex)];
