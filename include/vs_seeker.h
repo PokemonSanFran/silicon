@@ -2,6 +2,7 @@
 #define GUARD_VS_SEEKER_H
 
 #include "global.h"
+#include "script.h"
 
 void Task_InitVsSeekerAndCheckForTrainersOnScreen(u8 taskId);
 bool8 UpdateVsSeekerStepCounter(void);
@@ -10,6 +11,7 @@ void ClearRematchMovementByTrainerId(void);
 u16 GetRematchTrainerIdVSSeeker(u16 trainerId);
 u16 GetTrainerFlagFromScript(const u8 *script); //rematch_action
 bool32 IsVsSeekerEnabled(void);
+void NativeVsSeekerRematchId(struct ScriptContext *ctx);
 
 #define VSSEEKER_RECHARGE_STEPS 100
 

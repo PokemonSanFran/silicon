@@ -3,5 +3,6 @@
 
 void ShowFrontierPass(void (*callback)(void));
 void CB2_ReshowFrontierPass(void);
+void ResetGpuRegsAndBgs(void); // pokedex
 
 #endif // GUARD_FRONTIER_PASS_H

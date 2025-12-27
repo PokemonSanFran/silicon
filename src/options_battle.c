@@ -279,6 +279,9 @@ void PrintExpShareMessage(void)
     if(HasAlreadyPrintedGotExpMsg())
         return;
 
+    if (!IsPointsMessagesOptionOn())
+        return;
+
     gBattleStruct->teamGotExpMsgPrinted = TRUE;
 
     if (!IsExperienceOptionAll())
@@ -310,14 +313,6 @@ bool32 AreIndividualValuesDisabled(void)
     return FALSE;
 #endif
     return !(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES]);
-}
-
-bool32 ShouldReturnPerfectValue(bool32 stat, struct Pokemon *mon)
-{
-    if (AreIndividualValuesDisabled())
-        return TRUE;
-
-    return (GetMonData(mon,MON_DATA_HYPER_TRAINED_HP + stat));
 }
 
 // ***********************************************************************
@@ -1016,9 +1011,8 @@ void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
 
 u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
 {
-    // PSF TODO: This returns 0 which is STRINGID_INTROMSG, which prints "Wild Poemon appeared!". When the option is off, the message is skipped entirely, with no delay. Right now, manually incrementing the switch case causes a delay, as if the message was there anyways.
     if (!IsPointsMessagesOptionOn())
-        return 0;
+        return STRINGID_COUNT;
 
     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, *expMonId);
     PREPARE_STRING_BUFFER(gBattleTextBuff2, (printBoosted == TRUE) ? STRINGID_ABOOSTED : STRINGID_EMPTYSTRING3);
@@ -1028,9 +1022,8 @@ u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
 
 u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted)
 {
-    // PSF TODO: This returns 0 which is STRINGID_INTROMSG, which prints "Wild Poemon appeared!". When the option is off, the message is skipped entirely, with no delay. Right now, manually incrementing the switch case causes a delay, as if the message was there anyways.
     if (!IsPointsMessagesOptionOn())
-        return 0;
+        return STRINGID_COUNT;
 
     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, *expMonId);
     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff2, 6, gBattleStruct->battlerExpReward);

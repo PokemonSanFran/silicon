@@ -2048,7 +2048,7 @@ void DebugQuest_CutePokemon_GiveMon(void)
     }
 
     for (u32 monIndex = 0; monIndex < numSidequests; monIndex++)
-        ScriptGiveMonParameterized(0,PARTY_SIZE,species[monIndex],50,ITEM_NONE,ITEM_POKE_BALL,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,FALSE,FALSE,NUMBER_OF_MON_TYPES);
+        ScriptGiveMonParameterized(0,PARTY_SIZE,species[monIndex],50,ITEM_NONE,ITEM_POKE_BALL,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
 }
 
 void DebugQuest_CutePokemon(u8 state)

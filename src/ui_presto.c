@@ -154,6 +154,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .paletteNum = 0,    // palette index to use for text
         .baseBlock = 1,     // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const u32 sMenuTiles[]       = INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol");
@@ -186,6 +187,11 @@ void Task_OpenPrestoFromStartMenu(u8 taskId)
         Presto_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
     }
+}
+
+void CB2_PrestoFromStartMenu(void)
+{
+    Presto_Init(CB2_StartMenu_ReturnToUI);
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere
@@ -4333,17 +4339,6 @@ static void Task_MenuTurnOff(u8 taskId)
     {
         Menu_FreeResources();
         SetMainCallback2(sMenuDataPtr->savedCallback);
-        DestroyTask(taskId);
-    }
-}
-
-static void UNUSED Task_MenuBuy(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        Menu_FreeResources();
-        Presto_Init(CB2_ReturnToUIMenu);
-        gMain.savedCallback = CB2_ReturnToUIMenu;
         DestroyTask(taskId);
     }
 }

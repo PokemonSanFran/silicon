@@ -1,18 +1,25 @@
 #include "global.h"
 #include "battle.h"
-#include "main.h"
+#include "blit.h"
+#include "dynamic_placeholder_text_util.h"
+#include "event_data.h"
+#include "field_name_box.h"
+#include "fonts.h"
 #include "m4a.h"
+#include "main.h"
+#include "menu.h"
 #include "palette.h"
 #include "sound.h"
-#include "constants/songs.h"
 #include "string_util.h"
-#include "window.h"
 #include "text.h"
 #include "blit.h"
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
 #include "fonts.h"
 #include "options_visual.h" // siliconMerge
+#include "window.h"
+#include "constants/songs.h"
+#include "constants/speaker_names.h"
 
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
@@ -28,7 +35,10 @@ static u16 FontFunc_Narrower(struct TextPrinter *);
 static u16 FontFunc_SmallNarrower(struct TextPrinter *);
 static u16 FontFunc_ShortNarrow(struct TextPrinter *);
 static u16 FontFunc_ShortNarrower(struct TextPrinter *);
-static u16 FontFunc_Outline(struct TextPrinter *); // addCrimFont
+// Start outlineFont
+static u16 FontFunc_Outlined(struct TextPrinter *textPrinter);
+static u16 FontFunc_OutlinedNarrow(struct TextPrinter *textPrinter);
+// End outlineFont
 static void DecompressGlyph_Small(u16, bool32);
 static void DecompressGlyph_Normal(u16, bool32);
 static void DecompressGlyph_Short(u16, bool32);
@@ -39,7 +49,10 @@ static void DecompressGlyph_Narrower(u16, bool32);
 static void DecompressGlyph_SmallNarrower(u16, bool32);
 static void DecompressGlyph_ShortNarrow(u16, bool32);
 static void DecompressGlyph_ShortNarrower(u16, bool32);
-static void DecompressGlyph_Outline(u16, bool32); // addCrimFont
+// Start outlineFont
+static void DecompressGlyph_Outlined(u16, bool32);
+static void DecompressGlyph_OutlinedNarrow(u16, bool32);
+// End outlineFont
 static u32 GetGlyphWidth_Small(u16, bool32);
 static u32 GetGlyphWidth_Normal(u16, bool32);
 static u32 GetGlyphWidth_Short(u16, bool32);
@@ -49,7 +62,10 @@ static u32 GetGlyphWidth_Narrower(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrower(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrower(u16, bool32);
-static u32 GetGlyphWidth_Outline(u16, bool32); // addCrimFont
+// Start outlineFont
+static u32 GetGlyphWidth_Outlined(u16, bool32);
+static u32 GetGlyphWidth_OutlinedNarrow(u16, bool32);
+// End outlineFont
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
 static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
@@ -89,12 +105,6 @@ static const u8 sDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_alt
 static const u8 sUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
 static const u8 sUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 static const u8 sDownArrowYCoords[] = { 0, 1, 2, 1 };
-static const u8 sWindowVerticalScrollSpeeds[] = {
-    [OPTIONS_TEXT_SPEED_SLOW] = 1,
-    [OPTIONS_TEXT_SPEED_MID] = 2,
-    [OPTIONS_TEXT_SPEED_FAST] = 4,
-    [OPTIONS_TEXT_SPEED_INSTANT] = 4, // siliconMerge
-};
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
 {
@@ -111,7 +121,10 @@ static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
     { FONT_SMALL_NARROWER, GetGlyphWidth_SmallNarrower },
     { FONT_SHORT_NARROW,   GetGlyphWidth_ShortNarrow },
     { FONT_SHORT_NARROWER, GetGlyphWidth_ShortNarrower },
-    { FONT_OUTLINE,        GetGlyphWidth_Outline }, // addCrimFont
+// Start outlineFont
+    { FONT_OUTLINED,       GetGlyphWidth_Outlined },
+    { FONT_OUTLINED_NARROW, GetGlyphWidth_OutlinedNarrow },
+// End outlineFont
 };
 
 struct
@@ -280,18 +293,30 @@ static const struct FontInfo sFontInfos[] =
         .bgColor = 1,
         .shadowColor = 3,
     },
-    // Start addCrimFont
-    [FONT_OUTLINE] = {
-        .fontFunction = FontFunc_Outline,
-        .maxLetterWidth = 12,
-        .maxLetterHeight = 14,
-        .letterSpacing = 0,
+    // Start outlineFont
+    [FONT_OUTLINED] =
+    {
+        .fontFunction = FontFunc_Outlined,
+        .maxLetterWidth = 11,
+        .maxLetterHeight = 15,
+        .letterSpacing = -1,
         .lineSpacing = 0,
         .fgColor = 2,
         .bgColor = 1,
         .shadowColor = 3,
     },
-    // End addCrimFont
+    [FONT_OUTLINED_NARROW] =
+    {
+        .fontFunction = FontFunc_OutlinedNarrow,
+        .maxLetterWidth = 11,
+        .maxLetterHeight = 15,
+        .letterSpacing = -1,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    // End outlineFont
 };
 
 static const u8 sMenuCursorDimensions[][2] =
@@ -310,7 +335,33 @@ static const u8 sMenuCursorDimensions[][2] =
     [FONT_SMALL_NARROWER] = { 8,   8 },
     [FONT_SHORT_NARROW]   = { 8,  14 },
     [FONT_SHORT_NARROWER] = { 8,  14 },
-    [FONT_OUTLINE]        = { 8,  14 },
+    [FONT_OUTLINED]       = {},
+    [FONT_OUTLINED_NARROW] = {},
+};
+
+// these three arrays are most for readability, ie instead of returning a magic number 8
+static const u8 sTextSpeedFrameDelays[] =
+{
+    [OPTIONS_TEXT_SPEED_SLOW]    = 8,
+    [OPTIONS_TEXT_SPEED_MID]     = 4,
+    [OPTIONS_TEXT_SPEED_FAST]    = 1,
+    [OPTIONS_TEXT_SPEED_INSTANT] = 1,
+};
+
+static const u8 sTextSpeedModifiers[] =
+{
+    [OPTIONS_TEXT_SPEED_SLOW]    = TEXT_SPEED_SLOW_MODIFIER,
+    [OPTIONS_TEXT_SPEED_MID]     = TEXT_SPEED_MEDIUM_MODIFIER,
+    [OPTIONS_TEXT_SPEED_FAST]    = TEXT_SPEED_FAST_MODIFIER,
+    [OPTIONS_TEXT_SPEED_INSTANT] = TEXT_SPEED_INSTANT_MODIFIER,
+};
+
+static const u8 sTextScrollSpeeds[] =
+{
+    [OPTIONS_TEXT_SPEED_SLOW]    = 1,
+    [OPTIONS_TEXT_SPEED_MID]     = 2,
+    [OPTIONS_TEXT_SPEED_FAST]    = 4,
+    [OPTIONS_TEXT_SPEED_INSTANT] = 6,
 };
 
 static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
@@ -318,6 +369,47 @@ static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwj
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
     gFonts = fonts;
+}
+
+u32 GetPlayerTextSpeed(void)
+{
+    if (gTextFlags.forceMidTextSpeed)
+        return OPTIONS_TEXT_SPEED_MID;
+
+    // Start siliconMerge
+    if (gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] > OPTIONS_TEXT_SPEED_INSTANT)
+        gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] = OPTIONS_TEXT_SPEED_FAST;
+    /*
+    if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_INSTANT)
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+    */
+    // End siliconMerge
+
+    if (FlagGet(FLAG_TEXT_SPEED_INSTANT) || TEXT_SPEED_INSTANT)
+        return OPTIONS_TEXT_SPEED_INSTANT;
+
+    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]; // siliconMerge
+    //return gSaveBlock2Ptr->optionsTextSpeed;
+}
+
+u32 GetPlayerTextSpeedDelay(void)
+{
+    return sTextSpeedFrameDelays[GetPlayerTextSpeed()];
+}
+
+u32 GetPlayerTextSpeedModifier(void)
+{
+    return sTextSpeedModifiers[GetPlayerTextSpeed()];
+}
+
+u32 GetPlayerTextScrollSpeed(void)
+{
+    return sTextScrollSpeeds[GetPlayerTextSpeed()];
+}
+
+bool32 IsPlayerTextSpeedInstant(void)
+{
+    return GetPlayerTextSpeed() == OPTIONS_TEXT_SPEED_INSTANT;
 }
 
 void DeactivateAllTextPrinters(void)
@@ -397,30 +489,41 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 
 void RunTextPrinters(void)
 {
-    int i;
-// Start siliconMerge
-u16 temp;
+    bool32 isInstantText = IsPlayerTextSpeedInstant();
+    u32 textRepeats = GetPlayerTextSpeedModifier();
+
+    if (gDisableTextPrinters)
+        return;
 
     do
     {
-        int numEmpty = 0;
-        for (i = 0; i < WINDOWS_MAX; ++i)
+        u32 numEmpty = 0;
+        for (u32 windowId = 0; windowId < WINDOWS_MAX; windowId++)
         {
-            if (sTextPrinters[i].active != 0)
+            if (sTextPrinters[windowId].active)
             {
-                temp = RenderFont(&sTextPrinters[i]);
-                switch (temp) {
-                    case 0:
-                        CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
-                        if (sTextPrinters[i].callback != 0)
-                            sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
+                for (u32 repeat = 0; repeat < textRepeats; repeat++)
+                {
+                    u32 renderState = RenderFont(&sTextPrinters[windowId]);
+                    switch (renderState)
+                    {
+                    case RENDER_PRINT:
+                        CopyWindowToVram(sTextPrinters[windowId].printerTemplate.windowId, COPYWIN_GFX);
+                        if (sTextPrinters[windowId].callback != NULL)
+                            sTextPrinters[windowId].callback(&sTextPrinters[windowId].printerTemplate, renderState);
                         break;
-                    case 3:
-                        if (sTextPrinters[i].callback != 0)
-                            sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
-                        return;
-                    case 1:
-                        sTextPrinters[i].active = 0;
+                    case RENDER_UPDATE:
+                        if (sTextPrinters[windowId].callback != NULL)
+                            sTextPrinters[windowId].callback(&sTextPrinters[windowId].printerTemplate, renderState);
+                        isInstantText = FALSE;
+                        break;
+                    case RENDER_FINISH:
+                        sTextPrinters[windowId].active = FALSE;
+                        isInstantText = FALSE;
+                        break;
+                    }
+
+                    if (!sTextPrinters[windowId].active)
                         break;
                 }
             }
@@ -429,34 +532,10 @@ u16 temp;
                 numEmpty++;
             }
         }
-        if(numEmpty == WINDOWS_MAX)
+
+        if (numEmpty == WINDOWS_MAX)
             return;
-	}while(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] == OPTIONS_TEXT_SPEED_INSTANT);
-/*
-    if (!gDisableTextPrinters)
-    {
-        for (i = 0; i < WINDOWS_MAX; ++i)
-        {
-            if (sTextPrinters[i].active)
-            {
-                u16 renderCmd = RenderFont(&sTextPrinters[i]);
-                switch (renderCmd)
-                {
-                case RENDER_PRINT:
-                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
-                case RENDER_UPDATE:
-                    if (sTextPrinters[i].callback != NULL)
-                        sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderCmd);
-                    break;
-                case RENDER_FINISH:
-                    sTextPrinters[i].active = FALSE;
-                    break;
-                }
-            }
-        }
-    }
-*/
-// End siliconMerge
+    } while (isInstantText);
 }
 
 bool32 IsTextPrinterActive(u8 id)
@@ -481,6 +560,13 @@ void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
     u32 temp;
 
     u16 *current = sFontHalfRowLookupTable;
+
+    if (fgColor == sLastTextFgColor
+     && bgColor == sLastTextBgColor
+     && shadowColor == sLastTextShadowColor)
+    {
+        return;
+    }
 
     sLastTextBgColor = bgColor;
     sLastTextFgColor = fgColor;
@@ -684,27 +770,35 @@ static u8 UNUSED GetLastTextColor(u8 colorType)
     }
 }
 
-inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *glyphPixels, s32 width, s32 height)
+inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 x0, u32 y0, u32 *glyphPixels, s32 width, s32 height)
 {
-    u32 xAdd, yAdd, pixelData, bits, toOrr, dummyX;
-    u8 *dst;
+    if (width <= 0)
+        return;
 
-    xAdd = j + width;
-    yAdd = i + height;
-    dummyX = j;
-    for (; i < yAdd; i++)
+    u32 widthMask = (1 << (width * 4)) - 1;
+
+    u32 shift0 = (x0 % 8) * 4, shift8 = 32 - shift0;
+
+    u32 *alignedWindowTilesX = (u32 *)(windowTiles + ((x0 / 8) * TILE_SIZE_4BPP));
+
+    u32 y1 = y0 + height;
+    for (u32 y = y0; y < y1; y++)
     {
-        pixelData = *glyphPixels++;
-        for (j = dummyX; j < xAdd; j++)
-        {
-            if ((toOrr = pixelData & 0xF))
-            {
-                dst = windowTiles + ((j / 8) * 32) + ((j % 8) / 2) + ((i / 8) * widthOffset) + ((i % 8) * 4);
-                bits = ((j & 1) * 4);
-                *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));
-            }
-            pixelData >>= 4;
-        }
+        u32 pixels = *glyphPixels++ & widthMask;
+
+        u32 mask = pixels;
+        mask = mask | (mask >> 2);
+        mask = mask | (mask >> 1);
+        mask = mask & 0x11111111;
+        mask = mask * 0xF;
+
+        u32 pixels0 = pixels << shift0, pixels8 = pixels >> shift8;
+        u32 mask0 = mask << shift0, mask8 = mask >> shift8;
+
+        u32 *alignedWindowTiles = (u32 *)((u8 *)alignedWindowTilesX + ((y / 8) * widthOffset) + ((y % 8) * 4));
+
+        alignedWindowTiles[0] = (alignedWindowTiles[0] & ~mask0) | pixels0;
+        alignedWindowTiles[8] = (alignedWindowTiles[8] & ~mask8) | pixels8;
     }
 }
 
@@ -932,19 +1026,31 @@ static u16 FontFunc_ShortNarrower(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-// Start addCrimFont
-static u16 FontFunc_Outline(struct TextPrinter *textPrinter)
+// Start outlineFont
+static u16 FontFunc_Outlined(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
     if (subStruct->hasFontIdBeenSet == FALSE)
     {
-        subStruct->fontId = FONT_OUTLINE;
+        subStruct->fontId = FONT_OUTLINED;
         subStruct->hasFontIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
-// End addCrimFont
+
+static u16 FontFunc_OutlinedNarrow(struct TextPrinter *textPrinter)
+{
+    struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
+
+    if (subStruct->hasFontIdBeenSet == FALSE)
+    {
+        subStruct->fontId = FONT_OUTLINED_NARROW;
+        subStruct->hasFontIdBeenSet = TRUE;
+    }
+    return RenderText(textPrinter);
+}
+// End outlineFont
 
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
 {
@@ -957,7 +1063,7 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
     else
     {
         subStruct->downArrowYPosIdx = 0;
-        subStruct->downArrowDelay = 0;
+        subStruct->utilityCounter = 0;
     }
 }
 
@@ -968,9 +1074,9 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
 
     if (gTextFlags.autoScroll == 0)
     {
-        if (subStruct->downArrowDelay != 0)
+        if (subStruct->utilityCounter != 0)
         {
-            subStruct->downArrowDelay--;
+            subStruct->utilityCounter--;
         }
         else
         {
@@ -1006,7 +1112,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 16);
             CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
 
-            subStruct->downArrowDelay = 8;
+            subStruct->utilityCounter = 8 * GetPlayerTextSpeedModifier();
             subStruct->downArrowYPosIdx++;
         }
     }
@@ -1110,7 +1216,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *
 
             BlitBitmapRectToWindow(windowId, arrowTiles, 0, sDownArrowYCoords[*yCoordIndex & 3], 8, 16, x, y - 2, 8, 16);
             CopyWindowToVram(windowId, COPYWIN_GFX);
-            *counter = 8;
+            *counter = 8 * GetPlayerTextSpeedModifier();
             ++*yCoordIndex;
         }
     }
@@ -1127,7 +1233,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     switch (textPrinter->state)
     {
     case RENDER_STATE_HANDLE_CHAR:
-        if (JOY_HELD(A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp)
+        if ((JOY_HELD(A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp) || IsPlayerTextSpeedInstant())
             textPrinter->delayCounter = 0;
 
         if (textPrinter->delayCounter && textPrinter->textSpeed)
@@ -1302,6 +1408,13 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_ENG:
                 textPrinter->japanese = FALSE;
                 return RENDER_REPEAT;
+            case EXT_CTRL_CODE_SPEAKER:
+                {
+                    enum SpeakerNames name = *textPrinter->printerTemplate.currentChar++;
+                    TrySpawnAndShowNamebox(gSpeakerNamesTable[name], NAME_BOX_BASE_TILE_NUM);
+
+                    return RENDER_REPEAT;
+                }
             }
             break;
         case CHAR_PROMPT_CLEAR:
@@ -1357,13 +1470,16 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         case FONT_SHORT_NARROWER:
             DecompressGlyph_ShortNarrower(currChar, textPrinter->japanese);
             break;
-            // Start addCrimFont
-        case FONT_OUTLINE:
-            DecompressGlyph_Outline(currChar, textPrinter->japanese);
-            break;
-            // End addCrimFont
         case FONT_BRAILLE:
             break;
+        // Start outlineFont
+        case FONT_OUTLINED:
+            DecompressGlyph_Outlined(currChar, textPrinter->japanese);
+            break;
+        case FONT_OUTLINED_NARROW:
+            DecompressGlyph_OutlinedNarrow(currChar, textPrinter->japanese);
+            break;
+        // End outlineFont
         }
 
         CopyGlyphToWindow(textPrinter);
@@ -1379,11 +1495,22 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             }
         }
         else
-        {
+            {
+                // Start outlineFont
+                // merge together each chars
+                if (textPrinter->printerTemplate.fontId == FONT_OUTLINED || textPrinter->printerTemplate.fontId == FONT_OUTLINED_NARROW)
+                {
+                    textPrinter->printerTemplate.currentX += gCurGlyph.width + (-1);
+                }
+                else
+                {
+                // End outlineFont
+
             if (textPrinter->japanese)
                 textPrinter->printerTemplate.currentX += (gCurGlyph.width + textPrinter->printerTemplate.letterSpacing);
             else
                 textPrinter->printerTemplate.currentX += gCurGlyph.width;
+                } // outlineFont
         }
         // Start siliconMerge
 		if (repeats == 2)
@@ -1421,6 +1548,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     case RENDER_STATE_SCROLL_START:
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
+            subStruct->utilityCounter = 0;
             TextPrinterClearDownArrow(textPrinter);
             textPrinter->scrollDistance = gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing;
             textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
@@ -1430,18 +1558,31 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     case RENDER_STATE_SCROLL:
         if (textPrinter->scrollDistance)
         {
-            int scrollSpeed = GetPlayerTextSpeed();
-            int speed = sWindowVerticalScrollSpeeds[scrollSpeed];
-            if (textPrinter->scrollDistance < speed)
+            u32 scrollSpeed = GetPlayerTextScrollSpeed();
+            u32 speedModifier = GetPlayerTextSpeedModifier();
+
+            if (subStruct->utilityCounter != 0)
+            {
+                subStruct->utilityCounter--;
+                return RENDER_UPDATE;
+            }
+
+            if (textPrinter->scrollDistance < scrollSpeed)
             {
                 ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance = 0;
             }
             else
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                textPrinter->scrollDistance -= speed;
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, scrollSpeed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                textPrinter->scrollDistance -= scrollSpeed;
             }
+
+            if (speedModifier > 1)
+                subStruct->utilityCounter = speedModifier;
+            else
+                subStruct->utilityCounter = 0;
+
             CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
         }
         else
@@ -1516,6 +1657,7 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 lett
             case EXT_CTRL_CODE_SKIP:
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
+            case EXT_CTRL_CODE_SPEAKER:
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
@@ -1594,7 +1736,10 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     if (func == NULL)
         return 0;
 
-    if (letterSpacing == -1)
+    // Start outlineFont
+    //if (letterSpacing == -1)
+    if (letterSpacing == -1 && (fontId != FONT_OUTLINED || fontId != FONT_OUTLINED_NARROW))
+    // End outlineFont
         localLetterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     else
         localLetterSpacing = letterSpacing;
@@ -1664,6 +1809,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_ESCAPE:
             case EXT_CTRL_CODE_SHIFT_RIGHT:
             case EXT_CTRL_CODE_SHIFT_DOWN:
+            case EXT_CTRL_CODE_SPEAKER:
                 ++str;
                 break;
             case EXT_CTRL_CODE_FONT:
@@ -1833,6 +1979,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
             case EXT_CTRL_CODE_SKIP:
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
+            case EXT_CTRL_CODE_SPEAKER:
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
@@ -2348,51 +2495,79 @@ static u32 GetGlyphWidth_ShortNarrower(u16 glyphId, bool32 isJapanese)
         return gFontShortNarrowerLatinGlyphWidths[glyphId];
 }
 
-// Start addCrimFont
-static void DecompressGlyph_Outline(u16 glyphId, bool32 isJapanese)
+// Start outlineFont
+static void DecompressGlyph_Outlined(u16 glyphId, bool32 isJapanese)
 {
     const u16 *glyphs;
 
-    if (isJapanese == TRUE)
+    glyphs = gFontOutlinedLatinGlyphs + (0x20 * glyphId);
+    gCurGlyph.width = gFontOutlinedLatinGlyphWidths[glyphId];
+
+    if (gCurGlyph.width <= 8)
     {
-        glyphs = gFontShortJapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+        DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
+        DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+    }
+    else
+    {
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
         DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);    // gCurGlyph + 0x20
-        DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);    // gCurGlyph + 0x60
-        gCurGlyph.width = gFontShortJapaneseGlyphWidths[glyphId];
-        gCurGlyph.height = 14;
+
+        DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+    }
+
+    gCurGlyph.height = 15;
+}
+
+static u32 GetGlyphWidth_Outlined(u16 glyphId, bool32 isJapanese)
+{
+    if (isJapanese == TRUE)
+        return 8;
+    else
+        return gFontOutlinedLatinGlyphWidths[glyphId];
+}
+
+static void DecompressGlyph_OutlinedNarrow(u16 glyphId, bool32 isJapanese)
+{
+    const u16 *glyphs;
+
+    glyphs = gFontOutlinedNarrowLatinGlyphs + (0x20 * glyphId);
+    gCurGlyph.width = gFontOutlinedNarrowLatinGlyphWidths[glyphId];
+
+    if (gCurGlyph.width <= 8)
+    {
+        DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
+        DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
     }
     else
     {
-        glyphs = gFontOutlineLatinGlyphs + (0x20 * glyphId);
-        gCurGlyph.width = gFontOutlineLatinGlyphWidths[glyphId];
+        DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
+        DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
 
-        if (gCurGlyph.width <= 8)
-        {
-            DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-        }
-        else
-        {
-            DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
-        }
-
-        gCurGlyph.height = 14;
+        DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
     }
+
+    gCurGlyph.height = 15;
 }
 
-static u32 GetGlyphWidth_Outline(u16 glyphId, bool32 isJapanese)
+static u32 GetGlyphWidth_OutlinedNarrow(u16 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
-        return gFontShortJapaneseGlyphWidths[glyphId];
+        return 8;
     else
-        return gFontOutlineLatinGlyphWidths[glyphId];
+        return gFontOutlinedNarrowLatinGlyphWidths[glyphId];
 }
-// End addCrimFont
+
+u32 GetOutlineFontIdToFit(const u8 *str, u32 widthPx)
+{
+    if (GetStringWidth(FONT_OUTLINED, str, -1) <= widthPx)
+        return FONT_OUTLINED;
+
+    return FONT_OUTLINED_NARROW;
+}
+// End outlineFont
 
 static const s8 sNarrowerFontIds[] =
 {
@@ -2405,7 +2580,10 @@ static const s8 sNarrowerFontIds[] =
     [FONT_BRAILLE] = -1,
     [FONT_NARROW] = FONT_NARROWER,
     [FONT_SMALL_NARROW] = FONT_SMALL_NARROWER,
-    [FONT_OUTLINE] = -1, // addCrimFont
+// Start outlineFont
+    [FONT_OUTLINED] = FONT_OUTLINED_NARROW, 
+    [FONT_OUTLINED_NARROW] = -1,
+// End outlineFont
     [FONT_BOLD] = -1,
     [FONT_NARROWER] = -1,
     [FONT_SMALL_NARROWER] = -1,

@@ -19,5 +19,6 @@ u8 CalculateWaypointDirection(void);
 void ClearWaypointData(void);
 void SetWaypointData(void);
 void CreateOverworldWaypointArrow(void);
+void CB2_MapSystemFromStartMenu(void);
 
 #endif // GUARD_UI_TEST_MENU_H
