@@ -501,7 +501,6 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
 static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void);
 
 // pokemon status
-static inline void MonStatus_InjectStatusGraphics(struct Sprite *, u32, u32);
 static inline enum StartMenuMonStatuses MonStatus_TranslateRawStatus(u32);
 static inline u32 MonStatus_ConvertPercentageIntoHpBarFrame(u32);
 static inline void *MonStatus_GetSpriteCB(u32, bool32);
@@ -2293,7 +2292,7 @@ static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void)
 
 
 // mon status
-static inline void MonStatus_InjectStatusGraphics(struct Sprite *sprite, u32 status, u32 healthPercentage)
+void MonStatus_InjectStatusGraphics(struct Sprite *sprite, u32 status, u32 healthPercentage)
 {
     struct WindowTemplate template = { .width = 4, .height = 2, .paletteNum = START_PAL_SLOT_TEXT };
     u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum), window = AddWindow(&template);
@@ -2321,6 +2320,7 @@ static inline enum StartMenuMonStatuses MonStatus_TranslateRawStatus(u32 status)
     case STATUS1_SLEEP:
         return START_MON_STATUS_SLEEP;
     case STATUS1_POISON:
+    case STATUS1_TOXIC_POISON:
         return START_MON_STATUS_POISON;
     case STATUS1_BURN:
         return START_MON_STATUS_BURN;
