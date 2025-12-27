@@ -2475,14 +2475,14 @@ static const u8 sText_Help_Bar[]                    = _("{DPAD_LEFTRIGHT} Pocket
 static const u8 sText_Help_Bar_Battle[]             = _("{DPAD_LEFTRIGHT} Pockets {A_BUTTON} Pick {B_BUTTON} Return");
 static const u8 sText_Help_Bar_GiveItem[]           = _("{DPAD_LEFTRIGHT} Pockets {A_BUTTON} Pick {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Use[]                = _("{DPAD_UPDOWN} Options {A_BUTTON} Choose {B_BUTTON} Cancel");
-static const u8 sText_Help_Bar_Move[]               = _("Move the {STR_VAR_1} where? {DPAD_UPDOWN} Move {A_BUTTON}{B_BUTTON} Confirm");
-static const u8 sText_Help_Bar_Cant_Move_Favorite[] = _("You can't move a favorite item {A_BUTTON}{B_BUTTON} Confirm");
-static const u8 sText_Help_Bar_Cant_Use[]           = _("You can't use this item right now! {A_BUTTON}{B_BUTTON} Confirm");
-static const u8 sText_Help_Bar_Cant_Toss[]          = _("You can't toss this item! {A_BUTTON}{B_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Move[]               = _("Move the {STR_VAR_1} where? {DPAD_UPDOWN} Move {A_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Cant_Move_Favorite[] = _("You can't move a favorite item! {A_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Cant_Use[]           = _("You can't use this item right now! {A_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Cant_Toss[]          = _("You can't toss this item! {A_BUTTON} Confirm");
 static const u8 sText_Help_Bar_SortItemsHow[]       = _("Sort items how? {DPAD_UPDOWN} Move {A_BUTTON} Choose");
-static const u8 sText_Help_Bar_RegisterHow[]        = _("Register to what direction? {DPAD_UPDOWN} Select {B_BUTTON} Cancel");
-static const u8 sText_Help_Bar_ItemsSorted[]        = _("Items sorted by {STR_VAR_1}! {A_BUTTON}{B_BUTTON} Confirm");
-static const u8 sText_Help_Bar_Used_Item[]          = _("{PLAYER} used the {STR_VAR_1} {A_BUTTON}{B_BUTTON} Confirm");
+static const u8 sText_Help_Bar_RegisterHow[]        = _("Register to what direction? {DPAD_ANY} Select {B_BUTTON} Cancel");
+static const u8 sText_Help_Bar_ItemsSorted[]        = _("Items sorted by {STR_VAR_1}! {A_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Used_Item[]          = _("{PLAYER} used the {STR_VAR_1} {A_BUTTON} Confirm");
 
 static u16 Inventory_GetItemIdCurrentlySelected(void){
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
