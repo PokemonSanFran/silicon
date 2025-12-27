@@ -153,6 +153,7 @@ static bool8 IsLocationStateVisible(u32);
 static bool8 IsLocationConquered(u32);
 static u8 GetLocationPercent(u32);
 static const u8* GetLocationName(u32);
+static bool8 DoesLocationHaveDiscoveredTrainers(u32 location);
 
 static void PrintMenuHeader(void);
 static void HandleMenuHeader(void);
@@ -179,18 +180,17 @@ static void PlayCursorSound(bool32);
 static void HandleLocationStats(s32);
 static void PrintLocationStats(s32, u32);
 static u8 GetMapSectionFromTrainerId(u32);
-static void CountNumberTrainers(u32, u32*);
-static void HandleLocationStatsTotal(u32*);
-static void HandleLocationStatsDiscovered(u32*);
-static void HandleLocationStatsDefeated(u32*);
-static void IncrementLocationStat(u32, u32*);
-static void DecrementLocationStat(u32, u32*);
-static void PopulateLocationStats(u32*);
+static void InitAllLocationStats(void);
+static void HandleLocationStatsTotal(u8*);
+static void HandleLocationStatsDiscovered(u8*);
+static void HandleLocationStatsDefeated(u8*);
+static void IncrementLocationStat(u32, u8*);
+static void DecrementLocationStat(u32, u8*);
 static void PrintLocationPercent(u32, u32, u32);
-static void PrintLocationTotal(u32, u32);
-static void PrintLocationDefeated(u32, u32);
-static void PrintLocationRemaining(u32, u32);
-static u8 GetLocationStat(u32);
+static void PrintLocationTotal(u32, u32, u32);
+static void PrintLocationDefeated(u32, u32, u32);
+static void PrintLocationRemaining(u32, u32, u32);
+static u8 GetLocationStat(u32,u32);
 
 static void HandleLocationInput(u32, u8, u32);
 
@@ -220,6 +220,8 @@ static void UpdatePartySizes(void);
 static void UpdatePartySizesAndPrintAllParties();
 static void UpdatePartySizesAndPrintPartyForRow(u32);
 static void PrintAllParties(void);
+static void EmptyAllTrainerScreenRowSpriteIds(void);
+static void EmptyTrainerScreenRowSpriteIds(u32 row);
 
 static void InitalizeNameplateSpriteId(void);
 static void HandleTrainerName(void);
@@ -344,6 +346,7 @@ static void PlayTrainerReveal(u8 taskId);
 static void Task_LoadReveal(u8 taskId);
 static void HandlePartyMonSelection(u32, u8);
 static void GoToPokemonSummary(u8);
+static struct Pokemon *Glass_GetTempParty(void);
 static void Task_LoadPokemonSummary(u8);
 
 static bool8 IsReturningFromOtherScreen(u32);
@@ -365,14 +368,15 @@ struct GlassState
     u8 sortOrder;
     u16 chosenLocation;
     bool8 trainerMode;
-    u8 locationStats[GLASS_LOCATION_STAT_COUNT];
+    u8 locationStats[MAPSEC_COUNT][GLASS_LOCATION_STAT_COUNT];
     u8 mapCursorSpriteId;
+    struct Pokemon tempParty[PARTY_SIZE];
 };
 
 struct GlassLists
 {
     u8 numListElements;
-    u16 LocationList[RESIDO_MAPSEC_END - RESIDO_MAPSEC_START];
+    u16 LocationList[RESIDO_MAPSEC_COUNT];
     u16 TrainerList[TRAINERS_COUNT];
     struct OnScreenRow onScreenRow[GLASS_TRAINER_MAX_SHOWED];
 };
@@ -526,6 +530,7 @@ static const u32 glassMarksGym[] = INCBIN_U32("graphics/ui_menus/glass/marks/gym
 static const u32 glassMarksGymComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymComplete.4bpp.smol");
 static const u32 glassMarksGymCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymCompleteHover.4bpp.smol");
 static const u32 glassMarksGymRematch[] = INCBIN_U32("graphics/ui_menus/glass/marks/gymRematch.4bpp.smol");
+// PSF TODO this sprite is broken on the trainer page - just this one, don't know why
 static const u32 glassMarksRegularComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularComplete.4bpp.smol");
 static const u32 glassMarksRegularCompleteHover[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularCompleteHover.4bpp.smol");
 static const u32 glassMarksRegularRematchComplete[] = INCBIN_U32("graphics/ui_menus/glass/marks/regularRematchComplete.4bpp.smol");
@@ -621,6 +626,7 @@ static void Glass_SetupCB(void)
     {
         case 0:
             //DebugSetTrainerStatus(); // Used only for debugging
+            InitAllLocationStats();
             DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
             SetVBlankHBlankCallbacksToNull();
             ClearScheduledBgCopiesToVram();
@@ -1580,15 +1586,20 @@ static bool8 IsLocationConquered(u32 listNum)
 
 static u8 GetLocationPercent(u32 location)
 {
-    u32 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
-    CountNumberTrainers(location,statArray);
-    PopulateLocationStats(statArray);
-    return GetLocationStat(GLASS_LOCATION_RATE);
+    return GetLocationStat(location,GLASS_LOCATION_RATE);
+}
+
+static bool8 DoesLocationHaveDiscoveredTrainers(u32 location)
+{
+    return (GetLocationStat(location,GLASS_LOCATION_DISCOVERED) != 0);
 }
 
 static const u8 *GetLocationName(u32 listNum)
 {
     if (!IsLocationVisited(listNum))
+        return gText_ThreeQuestionMarks;
+
+    if (!DoesLocationHaveDiscoveredTrainers(listNum))
         return gText_ThreeQuestionMarks;
 
     return gRegionMapEntries[listNum].name;
@@ -1789,16 +1800,11 @@ static void HandleLocationStats(s32 locationId)
 static void PrintLocationStats(s32 locationId, u32 windowId)
 {
     u32 fontId = FONT_GLASS_METRICS;
-    u32 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
-
-    PopulateLocationStats(statArray);
-    CountNumberTrainers(locationId, statArray);
-    PopulateLocationStats(statArray);
 
     PrintLocationPercent(locationId, windowId, fontId);
-    PrintLocationTotal(windowId, fontId);
-    PrintLocationDefeated(windowId, fontId);
-    PrintLocationRemaining(windowId, fontId);
+    PrintLocationTotal(locationId, windowId, fontId);
+    PrintLocationDefeated(locationId, windowId, fontId);
+    PrintLocationRemaining(locationId, windowId, fontId);
 }
 
 static u8 GetMapSectionFromTrainerId(u32 trainerId)
@@ -1806,51 +1812,95 @@ static u8 GetMapSectionFromTrainerId(u32 trainerId)
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].mapSec;
 }
 
-static void CountNumberTrainers(u32 map, u32* statArray)
+static void ResetAllLocationStats(void)
 {
-    u32 i, numerator, denominator;
+    for (u32 mapSecId = RESIDO_MAPSEC_START; mapSecId < RESIDO_MAPSEC_END; mapSecId++)
+        memset(sGlassState->locationStats[mapSecId], 0, sizeof(sGlassState->locationStats[mapSecId]));
+}
 
-    for(i = 0; i < TRAINERS_COUNT ; i++)
+static void CountAllTrainersAndAdjustStats(u32 checkedMap, u8 *outStats)
+{
+    bool32 processAll = (checkedMap == MAPSEC_NONE);
+
+    if (processAll)
+        ResetAllLocationStats();
+
+    if ((processAll == FALSE) && (checkedMap < RESIDO_MAPSEC_START || checkedMap >= RESIDO_MAPSEC_END))
+        return;
+
+    for (u32 trainerId = 0; trainerId < TRAINERS_COUNT; trainerId++)
     {
-        if (GetMapSectionFromTrainerId(i) != map)
+        u32 mapSecId = GetMapSectionFromTrainerId(trainerId);
+
+        if (mapSecId < RESIDO_MAPSEC_START || mapSecId >= RESIDO_MAPSEC_END)
             continue;
+
+        if (!processAll && mapSecId != checkedMap)
+            continue;
+
+        u8 *statArray = processAll
+            ? sGlassState->locationStats[mapSecId]
+            : outStats;
 
         HandleLocationStatsTotal(statArray);
 
-        if (IsTrainerDiscovered(i))
+        if (IsTrainerDiscovered(trainerId))
             HandleLocationStatsDiscovered(statArray);
 
-        if (IsTrainerDefeated(i))
+        if (IsTrainerDefeated(trainerId))
             HandleLocationStatsDefeated(statArray);
     }
-
-    numerator = (statArray[GLASS_LOCATION_DEFEATED] * 10000);
-    denominator = (statArray[GLASS_LOCATION_TOTAL] * 100);
-    statArray[GLASS_LOCATION_RATE] = (numerator / denominator);
 }
 
-static void HandleLocationStatsTotal(u32* statArray)
+static void CalculateLocationStats(u8* stats)
+{
+    u32 total = stats[GLASS_LOCATION_TOTAL];
+
+    if (total == 0)
+    {
+        stats[GLASS_LOCATION_RATE] = 0;
+        return;
+    }
+
+    u32 numerator = (stats[GLASS_LOCATION_DEFEATED] * 10000);
+    u32 denominator = (total * 100);
+    stats[GLASS_LOCATION_RATE] = numerator / denominator;
+}
+
+static void CalculateAllLocationStats(void)
+{
+    for (u32 mapSecId = RESIDO_MAPSEC_START; mapSecId < RESIDO_MAPSEC_END; mapSecId++)
+        CalculateLocationStats(sGlassState->locationStats[mapSecId]);
+}
+
+static void InitAllLocationStats(void)
+{
+    CountAllTrainersAndAdjustStats(MAPSEC_NONE,NULL);
+    CalculateAllLocationStats();
+}
+
+static void HandleLocationStatsTotal(u8* statArray)
 {
     IncrementLocationStat(GLASS_LOCATION_TOTAL,statArray);
     IncrementLocationStat(GLASS_LOCATION_UNDEFEATED,statArray);
     IncrementLocationStat(GLASS_LOCATION_UNDISCOVERED,statArray);
 }
 
-static void HandleLocationStatsDiscovered(u32* statArray)
+static void HandleLocationStatsDiscovered(u8* statArray)
 {
     IncrementLocationStat(GLASS_LOCATION_DISCOVERED,statArray);
     DecrementLocationStat(GLASS_LOCATION_UNDISCOVERED,statArray);
     IncrementLocationStat(GLASS_LOCATION_INCOMPLETE,statArray);
 }
 
-static void HandleLocationStatsDefeated(u32* statArray)
+static void HandleLocationStatsDefeated(u8* statArray)
 {
     IncrementLocationStat(GLASS_LOCATION_DEFEATED,statArray);
     DecrementLocationStat(GLASS_LOCATION_UNDEFEATED,statArray);
     DecrementLocationStat(GLASS_LOCATION_INCOMPLETE,statArray);
 }
 
-static void IncrementLocationStat(u32 stat, u32* statArray)
+static void IncrementLocationStat(u32 stat, u8* statArray)
 {
     if (statArray[stat] >= UCHAR_MAX)
         return;
@@ -1858,7 +1908,7 @@ static void IncrementLocationStat(u32 stat, u32* statArray)
     statArray[stat]++;
 }
 
-static void DecrementLocationStat(u32 stat, u32* statArray)
+static void DecrementLocationStat(u32 stat, u8* statArray)
 {
     if (!statArray[stat])
         return;
@@ -1866,19 +1916,11 @@ static void DecrementLocationStat(u32 stat, u32* statArray)
     statArray[stat]--;
 }
 
-static void PopulateLocationStats(u32* statArray)
-{
-    u32 statIndex;
-
-    for (statIndex = 0; statIndex < GLASS_LOCATION_STAT_COUNT; statIndex++)
-        sGlassState->locationStats[statIndex] = statArray[statIndex];
-}
-
 static void PrintLocationPercent(u32 location, u32 windowId, u32 fontId)
 {
     u8 *percentString = Alloc(USER_MAX_LENGTH*2);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_RATE),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_RATE),STR_CONV_MODE_LEFT_ALIGN,3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
     StringCopy(gStringVar3,sText_Trainers);
     StringAppend(gStringVar3, gStringVar4);
@@ -1889,11 +1931,11 @@ static void PrintLocationPercent(u32 location, u32 windowId, u32 fontId)
     Free(percentString);
 }
 
-static void PrintLocationTotal(u32 windowId, u32 fontId)
+static void PrintLocationTotal(u32 location, u32 windowId, u32 fontId)
 {
     u8 *totalString = Alloc(13);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_TOTAL),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_TOTAL),STR_CONV_MODE_LEFT_ALIGN,3);
     StringExpandPlaceholders(gStringVar4, sText_Total);
     StringCopy(totalString, gStringVar4);
 
@@ -1902,11 +1944,11 @@ static void PrintLocationTotal(u32 windowId, u32 fontId)
     Free(totalString);
 }
 
-static void PrintLocationDefeated(u32 windowId, u32 fontId)
+static void PrintLocationDefeated(u32 location, u32 windowId, u32 fontId)
 {
     u8 *defeatedString = Alloc(13);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_DEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_DEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
     StringCopy(gStringVar3,sText_Completed);
     StringAppend(gStringVar3, gStringVar1);
     StringCopy(defeatedString, gStringVar3);
@@ -1916,11 +1958,11 @@ static void PrintLocationDefeated(u32 windowId, u32 fontId)
     Free(defeatedString);
 }
 
-static void PrintLocationRemaining(u32 windowId, u32 fontId)
+static void PrintLocationRemaining(u32 location, u32 windowId, u32 fontId)
 {
     u8 *remainingString = Alloc(13);
 
-    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(GLASS_LOCATION_UNDEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
+    ConvertIntToDecimalStringN(gStringVar1,GetLocationStat(location,GLASS_LOCATION_UNDEFEATED),STR_CONV_MODE_LEFT_ALIGN,3);
     StringCopy(gStringVar3,sText_Remaining);
     StringAppend(gStringVar3, gStringVar1);
     StringCopy(remainingString, gStringVar3);
@@ -1930,9 +1972,9 @@ static void PrintLocationRemaining(u32 windowId, u32 fontId)
     Free(remainingString);
 }
 
-static u8 GetLocationStat(u32 stat)
+static u8 GetLocationStat(u32 location, u32 stat)
 {
-    return sGlassState->locationStats[stat];
+    return sGlassState->locationStats[location][stat];
 }
 
 static void HandleLocationInput(u32 input, u8 taskId, u32 entityId)
@@ -1947,7 +1989,7 @@ static void HandleLocationInput(u32 input, u8 taskId, u32 entityId)
             PlaySoundStartFadeQuitApp(taskId);
             break;
         default:
-            if (IsLocationVisited(entityId))
+            if (IsLocationVisited(entityId) && DoesLocationHaveDiscoveredTrainers(entityId))
                 SwitchToTrainerMode(taskId);
             else
                 PlaySE(SE_BOO);
@@ -2115,6 +2157,7 @@ static void SortTrainerList(void)
 
 static void PopulateAndSortTrainerList(u32 map)
 {
+    EmptyTrainerList();
     PopulateTrainerList(map);
     SortTrainerList();
 }
@@ -2129,7 +2172,7 @@ static void CalcSetScreenRows(u32 numList, u32 currentRow)
         newRow = screenRow + rowIndex;
 
         if (newRow > (numList + 1))
-            newRow = 0;
+            newRow = GLASS_EMPTY_TRAINER_ROW;
 
         SetScreenRow(rowIndex, newRow);
     }
@@ -2148,6 +2191,7 @@ static void UpdatePartySizes(void)
 
 static void UpdatePartySizesAndPrintAllParties(void)
 {
+    EmptyAllTrainerScreenRowSpriteIds();
     UpdatePartySizes();
     PrintAllParties();
 }
@@ -2158,11 +2202,21 @@ static void UpdatePartySizesAndPrintPartyForRow(u32 row)
     PrintTrainerAndParty(row);
 }
 
+static void EmptyTrainerScreenRowSpriteIds(u32 row)
+{
+    for (u32 column = 0; column < GLASS_TRAINER_COLUMN_COUNT; column++)
+        SetSpriteId(row,column,SPRITE_NONE);
+}
+
+static void EmptyAllTrainerScreenRowSpriteIds(void)
+{
+    for (u32 row = 0; row < GLASS_TRAINER_MAX_SHOWED; row++)
+        EmptyTrainerScreenRowSpriteIds(row);
+}
+
 static void PrintAllParties(void)
 {
-    u32 rowIndex;
-
-    for (rowIndex = 0; rowIndex < GetNumberOfScreenRows(); rowIndex++)
+    for (u32 rowIndex = 0; rowIndex < GetNumberOfScreenRows() + 1; rowIndex++)
         PrintTrainerAndParty(rowIndex);
 }
 
@@ -2961,10 +3015,8 @@ static void EmptyTrainerList(void)
 static void PrintTrainerAndParty(u32 screenRow)
 {
     u32 trainerId = GetTrainerIdFromTrainerFromScreenRow(screenRow);
-    u32 i = 0;
 
-    for (i = 0; i < GLASS_TRAINER_COLUMN_COUNT; i++)
-        SetSpriteId(screenRow,i,SPRITE_NONE);
+    EmptyTrainerScreenRowSpriteIds(screenRow);
 
     if (trainerId == TRAINER_NONE)
         return;
@@ -2982,6 +3034,9 @@ static u8 GetTrainerIdFromTrainerFromScreenRow(u32 screenRow)
 
 static u8 GetListPositionFromScreenRow(u32 screenRow)
 {
+    if (screenRow == GLASS_EMPTY_TRAINER_ROW)
+        return GetNumListElements();
+
     return sGlassLists->onScreenRow[screenRow].listPosition;
 }
 
@@ -3175,18 +3230,19 @@ static void MoveSprites(u32 old, u32 new)
 static void MoveTrainerForNameplate(s32 offset)
 {
     u32 currentRow = GetCurrentCursorScreenRowPosition();
-    u32 spriteId;
-    u32 rowIndex, y;
 
-    for (rowIndex = 0; rowIndex < GLASS_TRAINER_MAX_SHOWED; rowIndex++)
+    for (u32 rowIndex = 0; rowIndex < GLASS_TRAINER_MAX_SHOWED; rowIndex++)
     {
-        spriteId = sGlassLists->onScreenRow[rowIndex].spriteId[PARTY_SIZE];
-        y = gSprites[spriteId].y;
+        u32 spriteId = sGlassLists->onScreenRow[currentRow].spriteId[PARTY_SIZE];
+        u32 y = gSprites[spriteId].y;
+
+        if (spriteId == SPRITE_NONE)
+            continue;
 
         if (rowIndex == currentRow)
             gSprites[spriteId].y = y - GLASS_TRAINER_NAMEPLATE_MOVEMENT;
         else
-            gSprites[spriteId].y = CalculateVerticalTrainerPosition(rowIndex);
+            gSprites[spriteId].y = CalculateVerticalTrainerPosition(currentRow);
     }
 }
 
@@ -3216,7 +3272,12 @@ static bool8 IsCurrentRowIsDefeatedTrainer(u32 row)
     if (GetCurrentCursorScreenRowPosition() != row)
         return FALSE;
 
-    if (!IsTrainerDefeated(GetTrainerIdFromTrainerFromScreenRow(row)))
+    u32 trainerId = GetTrainerIdFromTrainerFromScreenRow(row);
+
+    if (trainerId == TRAINER_NONE)
+        return FALSE;
+
+    if (!IsTrainerDefeated(trainerId))
         return FALSE;
 
     return TRUE;
@@ -3345,20 +3406,26 @@ static void GoToPokemonSummary(u8 taskId)
     DestroyTask(taskId);
 }
 
+static struct Pokemon *Glass_GetTempParty(void)
+{
+    return (sGlassState == NULL) ? NULL : sGlassState->tempParty;
+}
+
 static void Task_LoadPokemonSummary(u8 taskId)
 {
-    u32 selectedMon, trainerId, partySize;
-
     if (gPaletteFade.active)
         return;
 
-    selectedMon = GetCurrentTrainerColumn();
-    trainerId = GetTrainerIdFromCurrentPosition();
-    partySize = CreateNPCTrainerPartyFromTrainer(gEnemyParty, &gTrainers[GetCurrentDifficultyLevel()][trainerId], TRUE, BATTLE_TYPE_TRAINER) - 1;
+    struct Pokemon *party = Glass_GetTempParty();
+
+    u32 selectedMon = GetCurrentTrainerColumn();
+    u32 trainerId = GetTrainerIdFromCurrentPosition();
+
+    u32 partySize = (CreateNPCTrainerPartyFromTrainer(party, &gTrainers[GetCurrentDifficultyLevel()][trainerId], TRUE, BATTLE_TYPE_TRAINER)) - 1;
 
     DestroyTask(taskId);
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gEnemyParty, selectedMon, partySize, CB2_ReturnToTrainerScreen);
     FreeAllWindowBuffers();
+    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, party, selectedMon, partySize, CB2_ReturnToTrainerScreen);
 }
 
 void CB2_ReturnToTrainerScreen(void)
@@ -3475,11 +3542,13 @@ void Glass_ResetSaveData(void)
 
 u32 Glass_OverworldReturnLocationStat(u32 locationId, u32 stat)
 {
-    u32 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
-
     locationId = (locationId >= MAPSEC_NONE) ? gMapHeader.regionMapSectionId : locationId;
-    CountNumberTrainers(locationId, statArray);
-
     stat = (stat > GLASS_LOCATION_RATE) ? GLASS_LOCATION_RATE : stat;
+
+    u8 statArray[GLASS_LOCATION_STAT_COUNT] = {0};
+
+    CountAllTrainersAndAdjustStats(locationId,statArray);
+    CalculateLocationStats(statArray);
+
     return statArray[stat];
 }
