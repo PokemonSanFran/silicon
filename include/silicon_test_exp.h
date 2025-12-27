@@ -21,7 +21,8 @@ struct SiliconExpTestState
     u32 numMons:3;
     u32 backExp:21;
     u32 useBackMon:1;
-    u32 unused:8;
+    u32 isExpTest:1;
+    u32 unused:7;
     const struct SiliconExpTestData *data;
 };
 

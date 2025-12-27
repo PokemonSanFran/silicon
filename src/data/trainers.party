@@ -238,7 +238,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Ancient Power
 - Water Pulse
 - Aurora Beam
-- Meteor Beam
+- Mud Shot
 
 Bronzor @ Leftovers
 Ability: Levitate
@@ -4711,65 +4711,325 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Minior-Meteor @ Metronome  
+Ability: Shields Down  
+Level: 35  
+EVs: 48 HP / 84 Spe  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Rollout  
+
+Spheal @ Eviolite  
+Ability: Thick Fat  
+Level: 36  
+EVs: 52 HP / 80 Atk  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Ice Ball  
+
+Anorith @ Passho Berry  
+Ability: Battle Armor  
+Level: 36  
+EVs: 52 HP / 80 Spe  
+Jolly Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Fury Cutter  
 
 === TRAINER_0A8FC005 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Pelipper @ Never-Melt Ice  
+Ability: Drizzle  
+Level: 35  
+EVs: 72 HP / 56 SpA  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Air Cutter  
+- Icy Wind  
+- Chilling Water  
+- Stockpile  
+
+Tyrunt @ Utility Umbrella  
+Ability: Sturdy  
+Level: 35  
+EVs: 40 HP / 88 SpD  
+Careful Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Ice Fang  
+- Thunder Fang  
+- Bite  
+- Bulldoze  
+
+Tentacool @ Leftovers  
+Ability: Rain Dish  
+Level: 35  
+EVs: 84 HP / 56 Def  
+Timid Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Whirlpool  
+- Toxic  
+- Acid Armor  
+- Protect  
+
+Gligar @ Snowball  
+Ability: Hyper Cutter  
+Level: 35  
+EVs: 56 Atk / 76 SpD  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Venoshock  
+- Aerial Ace  
+- Breaking Swipe  
+- Sand Tomb  
 
 === TRAINER_0AAB38A6 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Baltoy @ Eviolite  
+Ability: Levitate  
+Level: 35  
+EVs: 60 HP / 72 SpA  
+Bold Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Extrasensory  
+- Scorching Sands  
+- Hex  
+- Ancient Power  
+
+Klawf @ Air Balloon  
+Ability: Anger Shell  
+Level: 35  
+EVs: 48 HP / 88 SpD  
+Careful Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bulldoze  
+- Vise Grip  
+- Metal Claw  
+- Rock Throw  
+
+Koffing @ Assault Vest  
+Ability: Levitate  
+Level: 36  
+EVs: 44 SpA / 84 SpD  
+Sassy Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Sludge Bomb  
+- Body Slam  
+- Venoshock  
+- Gyro Ball  
 
 === TRAINER_0AF40D0B ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Gorebyss @ Choice Scarf
+Ability: Swift Swim
+Level: 36
+EVs: 128 SpD
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Surf
+
+Lileep @ Chople Berry
+Ability: Storm Drain
+Level: 36
+EVs: 52 HP/76 Def
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Earth Power
+- Giga Drain
+- Ancient Power
+- Recover
 
 === TRAINER_0B48C7D0 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Aerodactyl @ Dragon Fang  
+Ability: Pressure  
+Level: 33  
+EVs: 132 Spe  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Ice Fang  
+- Bite  
+- Dragon Breath  
+- Rock Blast  
+
+Silicobra @ Smooth Rock  
+Ability: Sand Spit  
+Level: 34  
+EVs: 124 SpD  
+Careful Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Sand Tomb  
+- Wrap  
+- Glare  
+
+Spiritomb @ Wide Lens  
+Ability: Pressure  
+Level: 35  
+EVs: 36 HP / 88 Def  
+Sassy Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Dream Eater  
+- Night Shade  
+- Hypnosis  
+- Confuse Ray  
+
+Donphan @ Hard Stone  
+Ability: Sand Veil  
+Level: 34  
+EVs: 124 SpD  
+Sassy Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Fire Fang  
+- Ice Fang  
+- Thunder Fang  
+- Rock Tomb  
 
 === TRAINER_0C0A9B2F ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Tirtouga @ Rindo Berry  
+Ability: Solid Rock  
+Level: 36  
+EVs: 32 Atk / 96 SpD  
+Brave Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Zen Headbutt  
+- Ancient Power  
+- Aqua Jet  
+- Stealth Rock  
+
+Shieldon @ Red Card  
+Ability: Sturdy  
+Level: 35  
+EVs: 48 HP / 80 Atk  
+Sassy Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Iron Head  
+- Power Gem  
+- Metal Burst  
+- Roar  
+
+Kleavor @ King's Rock  
+Ability: Swarm  
+Level: 36  
+EVs: 20 HP / 108 SpD  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Wing Attack  
+- Pounce  
+- Smack Down  
+- Double Hit  
 
 === TRAINER_0C543C80 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Sigilyph @ Flame Orb  
+Ability: Magic Guard  
+Level: 34  
+EVs: 52 HP / 80 Spe  
+Modest Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Air Cutter  
+- Confusion  
+- Psycho Shift  
+- Light Screen  
+
+Clefairy @ Eject Button  
+Ability: Friend Guard  
+Level: 37  
+EVs: 44 HP / 80 Def  
+Bold Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Follow Me  
+- Helping Hand  
+
+Trapinch @ Focus Sash  
+Ability: Arena Trap  
+Level: 33  
+EVs: 128 Atk  
+Brave Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bulldoze  
+- Rock Tomb  
+- Bite  
+- Bug Bite  
+
+Cofagrigus @ Sitrus Berry  
+Ability: Mummy  
+Level: 35  
+EVs: 124 SpD  
+Sassy Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Hex  
+- Will-O-Wisp  
+- Mean Look  
+- Curse  
 
 === TRAINER_0C95C833 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
+Map Section: Perlacia City
 
-Spewpa
-Level: 1
+Carvanha @ Choice Scarf  
+Ability: Rough Skin  
+Level: 36  
+EVs: 124 Spe  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Flip Turn  
+
+Arctozolt @ Salac Berry  
+Ability: Volt Absorb  
+Level: 35  
+EVs: 24 HP / 100 Spe  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Rock Tomb  
+- Icy Wind  
+- Electro Ball  
+- Thunder Wave  
+
+Torkoal @ Soft Sand  
+Ability: Shell Armor  
+Level: 35  
+EVs: 128 SpD  
+Careful Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Body Slam  
+- Flame Wheel  
+- Bulldoze  
+- Yawn  
 
 === TRAINER_0D416B2C ===
 Name: Blank
