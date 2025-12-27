@@ -393,5 +393,5 @@ static u32 GenerateSurpriseTradeBall(void)
 
 void ShowTradedMonReturnToStartMenu(void)
 {
-    ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_ReturnToUIMenu);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
 }

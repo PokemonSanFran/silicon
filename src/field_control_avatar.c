@@ -317,15 +317,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
 
 // Start siliconMerge
-    if (input->pressedStartButton && ShowUIStartMenu() == TRUE)
-    /*
-	if (input->pressedStartButton)
-    {
-        PlaySE(SE_WIN_OPEN);
-        ShowStartMenu();
-    }
-	*/
-
+    if (input->pressedStartButton && StartMenu_OpenNormalMode())
         return TRUE;
 // End siliconMerge
 
@@ -1407,9 +1399,7 @@ static void Task_OpenStartMenu(u8 taskId)
     if (ArePlayerFieldControlsLocked())
         return;
 
-    PlaySE(SE_WIN_OPEN);
-    ShowStartMenu();
-    DestroyTask(taskId);
+    StartMenu_OpenNormalMode();
 }
 
 bool32 IsDpadPushedToTurnOrMovePlayer(struct FieldInput *input)

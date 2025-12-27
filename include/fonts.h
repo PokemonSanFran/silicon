@@ -23,9 +23,11 @@ extern const u8 gFontShortNarrowLatinGlyphWidths[];
 extern const u16 gFontShortNarrowLatinGlyphs[];
 extern const u8 gFontShortNarrowerLatinGlyphWidths[];
 extern const u16 gFontShortNarrowerLatinGlyphs[];
-// Start addCrimFont
-extern const u8 gFontOutlineLatinGlyphWidths[];
-extern const u16 gFontOutlineLatinGlyphs[];
-// End addCrimFont
+// Start outlineFont
+extern const u16 gFontOutlinedLatinGlyphs[];
+extern const u8 gFontOutlinedLatinGlyphWidths[];
+extern const u16 gFontOutlinedNarrowLatinGlyphs[];
+extern const u8 gFontOutlinedNarrowLatinGlyphWidths[];
+// End outlineFont
 
 #endif // GUARD_FONTS_H

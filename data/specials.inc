@@ -626,7 +626,6 @@ gSpecials::
     def_special Quest_Brucelee_UpdateType
     def_special Quest_Brucelee_BufferTypeName
     def_special Quest_Brucelee_CheckIfPartyTypes
-    def_special ShowStartMenuSaveScreen
     def_special Quest_Restorezenzugym_CheckRemainingSubquests
     def_special Quest_Restoreespuleeoutskirts_CheckRemainingSubquests
     def_special Quest_Taxicabturnaround_LookUpQuestType
@@ -695,3 +694,6 @@ gSpecials::
     def_special PreparePartyForLittleCupBattle
 // End littlecup
 	def_special SetHiddenNature
+	def_special SetAbility
+	def_special ObjectEventInteractionGetApricornTreeData
+	def_special ObjectEventInteractionPickApricornTree

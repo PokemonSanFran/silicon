@@ -45,7 +45,7 @@ struct WindowTemplate
 struct Window
 {
     struct WindowTemplate window;
-    u8 *tileData;
+    ALIGNED(4) u8 *tileData;
 };
 
 bool32 InitWindows(const struct WindowTemplate *templates);
@@ -80,6 +80,7 @@ u32 CalculateNextWindowBaseblock(void); // siliconMerge
 
 extern struct Window gWindows[];
 extern void *gWindowBgTilemapBuffers[];
+extern const struct WindowTemplate gDummyWindowTemplate;
 
 //begin FRLG import
 

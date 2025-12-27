@@ -31,7 +31,6 @@
 #include "quests.h"
 #include "constants/quests.h"
 #include "script_menu.h"
-#include "ui_start_menu.h"
 #include "field_weather.h"
 
 static void ResetQuestFanfareFlag(void);
@@ -342,16 +341,9 @@ const struct TweetBackground sTweetBgs[TWEET_BG_COUNT] =
     },
 };
 
-void Task_OpenBuzzrFromStartMenu(u8 taskId)
+void CB2_BuzzrFromStartMenu(void)
 {
-    if (!gPaletteFade.active)
-    {
-        StartMenu_Menu_FreeResources();
-        PlayRainStoppingSoundEffect();
-        CleanupOverworldWindowsAndTilemaps();
-        Buzzr_Init(CB2_ReturnToUIMenu);
-        DestroyTask(taskId);
-    }
+    Buzzr_Init(CB2_StartMenu_ReturnToUI);
 }
 
 static void ResetQuestFanfareFlag(void)
