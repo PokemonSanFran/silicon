@@ -569,7 +569,7 @@ void GiveItems_Prologue_Intro(bool32 jumpType)
     AssignDefaultPlayerName();
 
     VarSet(B_LEVEL_CAP_VARIABLE,27);
-    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_CALYREX_ICE,100,ITEM_WHITE_HERB,ITEM_CHERISH_BALL,NATURE_ADAMANT,0,0,evs,ivs,moves,FALSE,FALSE,NUMBER_OF_MON_TYPES);
+    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_CALYREX_ICE,100,ITEM_WHITE_HERB,ITEM_CHERISH_BALL,NATURE_ADAMANT,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
 
     GivePlayerAllTechnicalMachines();
     GivePlayerHealingItems();

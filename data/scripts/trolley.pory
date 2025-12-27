@@ -3,7 +3,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 script StartTrolleySequence
 {
 	lock
-	hideobjectat(PLAYER,0)
+	hideplayer
 	checkmoney(FARE_BASE_TROLLEY)
 	if (var(VAR_RESULT))
 	{
@@ -34,7 +34,7 @@ script Trolley_AllowPlayer_Script
 script Trolley_MovePlayer_Script
 {
 	applymovement(PLAYER,Common_Movement_WalkDown)
-	showobjectat(PLAYER,0)
+	showplayer
 	waitmovement
 	release
 	end
