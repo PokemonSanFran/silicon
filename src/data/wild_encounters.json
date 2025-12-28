@@ -42661,6 +42661,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_MILTANK"
+              }
+            ]
           }
         },
         {
