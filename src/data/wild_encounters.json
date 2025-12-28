@@ -27185,24 +27185,24 @@
                 "species": "SPECIES_TRUBBISH"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
                 "min_level": 31,
@@ -27819,24 +27819,24 @@
                 "species": "SPECIES_TRUBBISH"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
                 "min_level": 31,
@@ -27928,24 +27928,24 @@
                 "species": "SPECIES_TRUBBISH"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
                 "min_level": 31,
@@ -28037,24 +28037,24 @@
                 "species": "SPECIES_TRUBBISH"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
-                "min_level": 35,
+                "min_level": 34,
                 "max_level": 36,
-                "species": "SPECIES_KLEFKI"
+                "species": "SPECIES_PANGORO"
               },
               {
                 "min_level": 31,
@@ -41670,9 +41670,9 @@
                 "species": "SPECIES_AXEW"
               },
               {
-                "min_level": 46,
-                "max_level": 48,
-                "species": "SPECIES_GRUBBIN"
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
               },
               {
                 "min_level": 46,
@@ -41916,103 +41916,103 @@
             "mons": [
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 52,
-                "max_level": 54,
-                "species": "SPECIES_VIKAVOLT"
+                "max_level": 53,
+                "species": "SPECIES_BOUFFALANT"
               }
             ]
           }
@@ -42094,9 +42094,9 @@
                 "species": "SPECIES_AXEW"
               },
               {
-                "min_level": 46,
-                "max_level": 48,
-                "species": "SPECIES_GRUBBIN"
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
               },
               {
                 "min_level": 46,
