@@ -40307,6 +40307,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SCIZOR"
+              }
+            ]
           }
         },
         {
