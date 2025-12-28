@@ -41910,6 +41910,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_VIKAVOLT"
+              }
+            ]
           }
         },
         {
@@ -50985,6 +51090,111 @@
                 "min_level": 77,
                 "max_level": 81,
                 "species": "SPECIES_TOGEKISS"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_AEGISLASH"
               }
             ]
           }
