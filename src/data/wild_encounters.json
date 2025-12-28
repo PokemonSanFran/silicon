@@ -37311,6 +37311,111 @@
                 "species": "SPECIES_DRAGONITE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_ORBEETLE"
+              }
+            ]
           }
         },
         {
