@@ -58360,6 +58360,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              },
+              {
+                "min_level": 82,
+                "max_level": 85,
+                "species": "SPECIES_SHIFTRY"
+              }
+            ]
           }
         },
         {
