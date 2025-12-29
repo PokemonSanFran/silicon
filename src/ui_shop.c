@@ -129,7 +129,6 @@ static void ShopPurchase_AddItem(u16, u16);
 static void ShopGrid_SwitchMode(enum ShopMenuModes);
 static void ShopGrid_VerticalInput(s32);
 static void ShopGrid_HorizontalInput(s32);
-static u32 ShopGrid_RowInCategory(enum ShopMenuCategories);
 enum ShopMenuCategories ShopGrid_CategoryInRow(u8);
 enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
 
@@ -865,6 +864,7 @@ static void ShopInventory_InitCategoryLists(void)
 
 static void ShopInventory_InitRecommendedList(void)
 {
+    return;
     enum ShopMenuCarousels carousel = ShopInventory_GetRecommendedCarousel();
 
     if (PokeMart_IsActive())
@@ -1170,7 +1170,9 @@ static bool32 ShopInventory_IsItemUsefulInCave(u16 itemId)
 
 static void ShopInventory_Reset(void)
 {
-    memset(gShopMenuDataPtr->categoryList, NUM_SHOP_CATEGORIES, NUM_SHOP_CATEGORIES * sizeof(enum ShopMenuCategories));
+    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++)
+        ShopInventory_SetCategoryNumItems(NUM_SHOP_CATEGORIES, categoryIndex);
+
     memset(gShopMenuDataPtr->categoryNumItems, 0, NUM_SHOP_CATEGORIES * sizeof(u8));
     memset(gShopMenuDataPtr->categoryItems, ITEM_NONE, (NUM_SHOP_CATEGORIES * NUM_SHOP_ITEMS_PER_CATEGORIES) * sizeof(u16));
 }
@@ -1492,7 +1494,7 @@ bool32 ShopGrid_IsAdditiveDelta(s32 delta)
     return (delta == 1);
 }
 
-static u32 ShopGrid_RowInCategory(enum ShopMenuCategories category)
+u32 ShopGrid_RowInCategory(enum ShopMenuCategories category)
 {
     for (u32 row = 0; row < gShopMenuDataPtr->numCategories; row++)
     {
