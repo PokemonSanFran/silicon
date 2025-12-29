@@ -55929,11 +55929,6 @@
                 "species": "SPECIES_AXEW"
               },
               {
-                "min_level": 50,
-                "max_level": 51,
-                "species": "SPECIES_AXEW"
-              },
-              {
                 "min_level": 52,
                 "max_level": 53,
                 "species": "SPECIES_FRAXURE"
@@ -55964,16 +55959,6 @@
                 "species": "SPECIES_CUFANT"
               },
               {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
                 "min_level": 54,
                 "max_level": 55,
                 "species": "SPECIES_COPPERAJAH"
@@ -56010,8 +55995,23 @@
               },
               {
                 "min_level": 54,
-                "max_level": 54,
-                "species": "SPECIES_LOPUNNY"
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
               }
             ]
           },
@@ -56563,11 +56563,6 @@
                 "species": "SPECIES_AXEW"
               },
               {
-                "min_level": 50,
-                "max_level": 51,
-                "species": "SPECIES_AXEW"
-              },
-              {
                 "min_level": 52,
                 "max_level": 53,
                 "species": "SPECIES_FRAXURE"
@@ -56598,16 +56593,6 @@
                 "species": "SPECIES_CUFANT"
               },
               {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
                 "min_level": 54,
                 "max_level": 55,
                 "species": "SPECIES_COPPERAJAH"
@@ -56644,8 +56629,23 @@
               },
               {
                 "min_level": 54,
-                "max_level": 54,
-                "species": "SPECIES_LOPUNNY"
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
               }
             ]
           }
@@ -56672,11 +56672,6 @@
                 "species": "SPECIES_AXEW"
               },
               {
-                "min_level": 50,
-                "max_level": 51,
-                "species": "SPECIES_AXEW"
-              },
-              {
                 "min_level": 52,
                 "max_level": 53,
                 "species": "SPECIES_FRAXURE"
@@ -56707,16 +56702,6 @@
                 "species": "SPECIES_CUFANT"
               },
               {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
                 "min_level": 54,
                 "max_level": 55,
                 "species": "SPECIES_COPPERAJAH"
@@ -56753,8 +56738,23 @@
               },
               {
                 "min_level": 54,
-                "max_level": 54,
-                "species": "SPECIES_LOPUNNY"
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
               }
             ]
           }
@@ -56781,11 +56781,6 @@
                 "species": "SPECIES_AXEW"
               },
               {
-                "min_level": 50,
-                "max_level": 51,
-                "species": "SPECIES_AXEW"
-              },
-              {
                 "min_level": 52,
                 "max_level": 53,
                 "species": "SPECIES_FRAXURE"
@@ -56816,16 +56811,6 @@
                 "species": "SPECIES_CUFANT"
               },
               {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
-                "min_level": 52,
-                "max_level": 53,
-                "species": "SPECIES_CUFANT"
-              },
-              {
                 "min_level": 54,
                 "max_level": 55,
                 "species": "SPECIES_COPPERAJAH"
@@ -56862,8 +56847,23 @@
               },
               {
                 "min_level": 54,
-                "max_level": 54,
-                "species": "SPECIES_LOPUNNY"
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_GRAFAIAI"
               }
             ]
           }
