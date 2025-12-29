@@ -84,6 +84,7 @@ enum PrestoShopTypes
 };
 
 static EWRAM_INIT u8 sPrestoItemIconSpriteId = SPRITE_NONE;
+extern bool32 PokeMart_IsActive(void);
 
 static u32 PrestoPurchase_GetDroneFee(void);
 static u32 PrestoPurchase_GetItemPrice(u16, u16, enum PrestoPriceTypes);
@@ -92,6 +93,7 @@ static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
 static void PrestoHelper_UpdateFrontEnd(void);
 static enum PrestoShopTypes PrestoHelper_GetShopType(void);
 static u32 PrestoHelper_InitItemsList(void);
+static bool8 PrestoHelper_ShouldReccomend(u32 itemId);
 
 static void SpriteCB_BuyIcon(struct Sprite *);
 static void SpriteCB_UpArrow(struct Sprite *);
@@ -464,96 +466,140 @@ static enum PrestoShopTypes PrestoHelper_GetShopType(void)
     return PRESTO_TYPE_APP;
 }
 
-static u32 PrestoHelper_InitItemsList(void)
+static u32 PrestoHelper_GetCategoryMap(u32 category)
 {
-    enum ShopMenuCategories category = (gShopMenuDataPtr->sortCategories)
-                                     ? SHOP_CATEGORY_STATIC_START
-                                     : SHOP_CATEGORY_BUY_AGAIN;
-    u32 numCategories = 0;
+    for (u32 listIndex = 0; listIndex < NUM_SHOP_CATEGORIES; listIndex++)
+        if (gShopMenuDataPtr->categoryList[listIndex] == category)
+            return listIndex;
 
-    for (u32 idx = 0; category < NUM_SHOP_CATEGORIES; category++)
+    for (u32 listIndex = 0; listIndex < NUM_SHOP_CATEGORIES; listIndex++)
     {
-        category %= NUM_SHOP_CATEGORIES;
-
-        // Never accept Buy Again or Recommended categories when sorting.
-        if ((gShopMenuDataPtr->sortCategories) && category < SHOP_CATEGORY_STATIC_START)
+        if (gShopMenuDataPtr->categoryList[listIndex] == NUM_SHOP_CATEGORIES)
         {
-            break;
-        }
-
-        for (u32 itemId = 0; itemId < ITEMS_COUNT; itemId++)
-        {
-            u32 numItems = ShopInventory_GetCategoryNumItems(idx);
-
-            // Continue to the next category if the current category is full.
-            if (numItems >= NUM_SHOP_ITEMS_PER_CATEGORIES)
-            {
-                ShopInventory_SetCategoryNumItems(NUM_SHOP_ITEMS_PER_CATEGORIES, idx);
-                break;
-            }
-
-            if (category == SHOP_CATEGORY_BUY_AGAIN && gSaveBlock3Ptr->shopBuyAgainItems[0])
-            {
-                if (itemId >= MAX_PRESTO_BUY_AGAIN_ITEMS
-                 || !gSaveBlock3Ptr->shopBuyAgainItems[itemId])
-                {
-                    break;
-                }
-
-                ShopInventory_SetItemIdToGrid(gSaveBlock3Ptr->shopBuyAgainItems[itemId], idx, numItems);
-                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-            }
-            else if (category == SHOP_CATEGORY_RECOMMENDED && gShopMenuDataPtr->recommendedItems[0])
-            {
-                if (itemId >= NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS
-                 || !gShopMenuDataPtr->recommendedItems[itemId])
-                    break;
-
-                ShopInventory_SetItemIdToGrid(gShopMenuDataPtr->recommendedItems[itemId], idx, numItems);
-                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-            }
-            else if (category >= SHOP_CATEGORY_STATIC_START)
-            {
-                // Skip mismatching idx.
-                if (GetItemShopCategory(itemId) != category)
-                    continue;
-
-                bool32 canBuy = TRUE;
-                ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
-
-                if (func != NULL)
-                {
-                    canBuy = func(itemId);
-                }
-
-                if (ShopPurchase_IsCategoryOneTimePurchase(category) && CountTotalItemQuantityInBag(itemId))
-                {
-                    canBuy = FALSE;
-                }
-
-                if (!GetItemPrice(itemId))
-                {
-                    canBuy = FALSE;
-                }
-
-                if (canBuy)
-                {
-                    ShopInventory_SetItemIdToGrid(itemId, idx, numItems);
-                    ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-                }
-            }
-        }
-
-        if (ShopInventory_GetCategoryNumItems(idx) != 0)
-        {
-            gShopMenuDataPtr->categoryList[numCategories] = category;
-            numCategories++, idx++;
+            gShopMenuDataPtr->categoryList[listIndex] = category;
+            return listIndex;
         }
     }
+    return NUM_SHOP_CATEGORIES;
+}
+
+static u32 PrestoHelper_InitItemsList(void)
+{
+    u32 numCategories = 0, numCandidates = 0;
+    u16 recommendedCandidates[ITEMS_COUNT] = {0};
+    u32 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
+
+    for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
+    {
+        u32 item = gSaveBlock3Ptr->shopBuyAgainItems[i];
+        if (!item) 
+            break;
+
+        u32 risingCategory = PrestoHelper_GetCategoryMap(SHOP_CATEGORY_BUY_AGAIN);
+        ShopInventory_SetItemIdToGrid(item, risingCategory, categoryCounts[SHOP_CATEGORY_BUY_AGAIN]);
+        categoryCounts[SHOP_CATEGORY_BUY_AGAIN]++;
+    }
+
+    for (u32 itemId = 0; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (itemId == ITEM_NONE) 
+            continue;
+
+        if (!GetItemPrice(itemId)) 
+            continue;
+
+        bool32 canBuy = TRUE;
+        ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
+        if (func != NULL)
+            canBuy = func(itemId);
+
+        if (!canBuy) 
+            continue;
+
+        u32 itemCat = GetItemShopCategory(itemId);
+
+        if (ShopPurchase_IsCategoryOneTimePurchase(itemCat) && CountTotalItemQuantityInBag(itemId))
+            continue;
+
+        if (PrestoHelper_ShouldReccomend(itemId))
+            recommendedCandidates[numCandidates++] = itemId;
+
+        if (numCandidates == 1)
+            PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
+
+        if (categoryCounts[itemCat] >= NUM_SHOP_ITEMS_PER_CATEGORIES)
+            continue;
+
+        u32 risingCategory = PrestoHelper_GetCategoryMap(itemCat);
+        DebugPrintf("%S is getting set to category %d in position %d",GetItemName(itemId),risingCategory,categoryCounts[itemCat]);
+        ShopInventory_SetItemIdToGrid(itemId, risingCategory, categoryCounts[itemCat]);
+        categoryCounts[itemCat]++;
+    }
+
+    u32 numRecSelected = 0;
+    for (u32 i = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS && numCandidates > 0; i++)
+    {
+        u32 randIdx = Random() % numCandidates;
+        u16 selectedItem = recommendedCandidates[randIdx];
+
+        gShopMenuDataPtr->recommendedItems[i] = selectedItem;
+
+        u32 risingCategory = PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
+        ShopInventory_SetItemIdToGrid(selectedItem, risingCategory, numRecSelected);
+        numRecSelected++;
+
+        DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
+
+        recommendedCandidates[randIdx] = recommendedCandidates[numCandidates - 1];
+        numCandidates--;
+        categoryCounts[SHOP_CATEGORY_RECOMMENDED] = numRecSelected;
+    }
+
+    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
+    {
+        if (categoryCounts[categoryIndex] == 0)
+            continue;
+
+        u32 risingCategory = PrestoHelper_GetCategoryMap(categoryIndex);
+        ShopInventory_SetCategoryNumItems(categoryCounts[categoryIndex], risingCategory);
+
+        if (ShopInventory_GetCategoryNumItems(risingCategory))
+            numCategories++;
+    }
+
+    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
+        DebugPrintf("row %d has category %d (%d items)",categoryIndex,gShopMenuDataPtr->categoryList[categoryIndex],ShopInventory_GetCategoryNumItems(categoryIndex));
 
     return numCategories;
 }
 
+static bool8 PrestoHelper_ShouldReccomend(u32 itemId)
+{
+    if (PokeMart_IsActive())
+        return FALSE;
+
+    enum ShopMenuCarousels carousel = ShopInventory_GetRecommendedCarousel();
+    enum ShopMenuCategories category = GetItemShopCategory(itemId);
+
+    switch (carousel)
+    {
+        case SHOP_CAROUSEL_NEED_TO_HEAL:
+            return (category == SHOP_CATEGORY_MEDICINE);
+        case SHOP_CAROUSEL_TOURNAMENT_PREP:
+            return ((category == SHOP_CATEGORY_BATTLE_ITEMS) || (category == SHOP_CATEGORY_TMS));
+        case SHOP_CAROUSEL_FOREST_EXPLORE:
+            return (ShopInventory_IsItemUsefulInForest(itemId));
+        case SHOP_CAROUSEL_CAVE_EXPLORE:
+            return (ShopInventory_IsItemUsefulInCave(itemId));
+        case SHOP_CAROUSEL_WATER_EXPLORE:
+            return (ShopInventory_IsItemUsefulInWater(itemId));
+        case SHOP_CAROUSEL_ROUTE_EXPLORE:
+        case SHOP_CAROUSEL_RANDOM:
+            return TRUE;
+        default:
+            return FALSE;
+    }
+}
 
 static void SpriteCB_BuyIcon(struct Sprite *sprite)
 {

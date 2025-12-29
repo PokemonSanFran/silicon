@@ -112,15 +112,11 @@ static void ShopSprite_ToggleItemIconsVisibility(bool32);
 
 static void ShopInventory_InitCategoryLists(void);
 static void ShopInventory_InitRecommendedList(void);
-static enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void);
 static u32 ShopInventory_IsItemRecommended(u16);
 static bool32 ShopInventory_IsPlayerWithinAForest(void);
 static bool32 ShopInventory_IsPlayerOnWater(void);
 static bool32 ShopInventory_IsPlayerWithinARoute(void);
 static bool32 ShopInventory_IsPlayerInsideACave(void);
-static bool32 ShopInventory_IsItemUsefulInForest(u16);
-static bool32 ShopInventory_IsItemUsefulInWater(u16);
-static bool32 ShopInventory_IsItemUsefulInCave(u16);
 static void ShopInventory_Reset(void);
 
 static void ShopPurchase_CalculateMaxQuantity(void);
@@ -131,6 +127,7 @@ static void ShopGrid_VerticalInput(s32);
 static void ShopGrid_HorizontalInput(s32);
 enum ShopMenuCategories ShopGrid_CategoryInRow(u8);
 enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
+static u32 ShopGrid_RowInCategory(enum ShopMenuCategories category);
 
 static void ShopBlit_Category(enum ShopMenuCategories, u32, u32);
 static inline void ShopBlit_Categories(void);
@@ -983,7 +980,7 @@ static void ShopInventory_InitRecommendedList(void)
     ShopInventory_InitCategoryLists();
 }
 
-static enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void)
+enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void)
 {
     if (VarGet(VAR_STORYLINE_STATE) > STORY_COMPLETED_NAVAL_BASE
      && VarGet(VAR_STORYLINE_STATE) < STORY_EXPLORE_ZENZU_ISLAND)
@@ -1120,7 +1117,7 @@ static bool32 ShopInventory_IsPlayerInsideACave(void)
         || (mapNum == MAP_NUM(MAP_PIOCA_BRIDGE) && mapGroup == MAP_GROUP(MAP_PIOCA_BRIDGE));
 }
 
-static bool32 ShopInventory_IsItemUsefulInForest(u16 itemId)
+bool32 ShopInventory_IsItemUsefulInForest(u16 itemId)
 {
     return (itemId == ITEM_REPEL
              || itemId == ITEM_SUPER_REPEL
@@ -1138,7 +1135,7 @@ static bool32 ShopInventory_IsItemUsefulInForest(u16 itemId)
              || itemId == ITEM_LUXURY_BALL);
 }
 
-static bool32 ShopInventory_IsItemUsefulInWater(u16 itemId)
+bool32 ShopInventory_IsItemUsefulInWater(u16 itemId)
 {
     return (itemId == ITEM_REPEL
              || itemId == ITEM_SUPER_REPEL
@@ -1154,7 +1151,7 @@ static bool32 ShopInventory_IsItemUsefulInWater(u16 itemId)
              || itemId == ITEM_LURE_BALL);
 }
 
-static bool32 ShopInventory_IsItemUsefulInCave(u16 itemId)
+bool32 ShopInventory_IsItemUsefulInCave(u16 itemId)
 {
     return (itemId == ITEM_REPEL
              || itemId == ITEM_SUPER_REPEL
@@ -1497,7 +1494,7 @@ bool32 ShopGrid_IsAdditiveDelta(s32 delta)
     return (delta == 1);
 }
 
-u32 ShopGrid_RowInCategory(enum ShopMenuCategories category)
+static u32 ShopGrid_RowInCategory(enum ShopMenuCategories category)
 {
     for (u32 row = 0; row < gShopMenuDataPtr->numCategories; row++)
     {

@@ -48,5 +48,9 @@ u32 ShopInventory_GetCategoryNumItems(u32);
 bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories);
 u32 ShopSprite_GetSpriteId(enum ShopMenuSprites);
 u32 ShopSprite_GetItemSpriteId(u32);
+enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void);
+bool32 ShopInventory_IsItemUsefulInForest(u16);
+bool32 ShopInventory_IsItemUsefulInWater(u16);
+bool32 ShopInventory_IsItemUsefulInCave(u16);
 
 #endif // GUARD_UI_SHOP_H
