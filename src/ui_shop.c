@@ -1171,7 +1171,10 @@ static bool32 ShopInventory_IsItemUsefulInCave(u16 itemId)
 static void ShopInventory_Reset(void)
 {
     for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++)
-        ShopInventory_SetCategoryNumItems(NUM_SHOP_CATEGORIES, categoryIndex);
+        gShopMenuDataPtr->categoryList[categoryIndex] = NUM_SHOP_CATEGORIES;
+
+    for (u32 itemIndex = 0; itemIndex < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS; itemIndex++)
+        gShopMenuDataPtr->recommendedItems[itemIndex] = ITEM_NONE;
 
     memset(gShopMenuDataPtr->categoryNumItems, 0, NUM_SHOP_CATEGORIES * sizeof(u8));
     memset(gShopMenuDataPtr->categoryItems, ITEM_NONE, (NUM_SHOP_CATEGORIES * NUM_SHOP_ITEMS_PER_CATEGORIES) * sizeof(u16));
