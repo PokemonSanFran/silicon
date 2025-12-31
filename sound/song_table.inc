@@ -565,6 +565,32 @@ gSongTable::
 	song mus_rg_trainer_tower, MUSIC_PLAYER_BGM, 0
 	song mus_rg_slow_pallet, MUSIC_PLAYER_BGM, 0
 	song mus_rg_teachy_tv_menu, MUSIC_PLAYER_BGM, 0
+    song mus_hodou_city, MUSIC_PLAYER_BGM, 0
+    song mus_tora_town, MUSIC_PLAYER_BGM, 0
+    song mus_cucuno_town, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_scientist, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_police_officer, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_construction_worker_firefighter_postal_worker_nurse_doctor_rail, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_martial_artist, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_casual_dude, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_backpacker_hiker, MUSIC_PLAYER_BGM, 0
+    song mus_hall_of_fame_silicon, MUSIC_PLAYER_BGM, 0
+    song mus_petarosa_borough, MUSIC_PLAYER_BGM, 0
+    song mus_sharprise_stadium, MUSIC_PLAYER_BGM, 0
+    song mus_pioca_bridge, MUSIC_PLAYER_BGM, 0
+    song mus_popidora_pier, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_psychic, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_fisher, MUSIC_PLAYER_BGM, 0
+    song mus_halai_island, MUSIC_PLAYER_BGM, 0
+    song mus_glavez_hill, MUSIC_PLAYER_BGM, 0
+    song mus_encounter_solicitor, MUSIC_PLAYER_BGM, 0
+    song mus_name_character_optionsFirstRun_mysteryGift, MUSIC_PLAYER_BGM, 0
+    song mus_get_badge, MUSIC_PLAYER_SE1, 1
+    song mus_src_getting_arrested, MUSIC_PLAYER_BGM, 0
+    song mus_welcome_to_the_war_room, MUSIC_PLAYER_BGM, 0
+    song mus_espulee_outskirts, MUSIC_PLAYER_BGM, 0
+    song mus_espulee_outskirts_night, MUSIC_PLAYER_BGM, 0
+    song mus_accept_letter, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2
