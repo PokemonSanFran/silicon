@@ -41382,6 +41382,111 @@
         {
           "map": "MAP_HALERBA_CITY",
           "base_label": "gHalerbaCity_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_PARASECT"
+              }
+            ]
+          },
           "berry_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -57424,14 +57529,14 @@
                 "species": "SPECIES_ORICORIO_PAU"
               },
               {
-                "min_level": 75,
+                "min_level": 72,
                 "max_level": 77,
-                "species": "SPECIES_FLORGES_WHITE"
+                "species": "SPECIES_FLOETTE_WHITE"
               },
               {
-                "min_level": 75,
-                "max_level": 77,
-                "species": "SPECIES_FLORGES_WHITE"
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLOETTE_WHITE"
               },
               {
                 "min_level": 74,
@@ -57743,14 +57848,14 @@
                 "species": "SPECIES_ORICORIO_PAU"
               },
               {
-                "min_level": 75,
+                "min_level": 72,
                 "max_level": 77,
-                "species": "SPECIES_FLORGES_WHITE"
+                "species": "SPECIES_FLOETTE_WHITE"
               },
               {
-                "min_level": 75,
-                "max_level": 77,
-                "species": "SPECIES_FLORGES_WHITE"
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLOETTE_WHITE"
               },
               {
                 "min_level": 74,
@@ -57847,9 +57952,9 @@
                 "species": "SPECIES_ORICORIO_PAU"
               },
               {
-                "min_level": 75,
-                "max_level": 77,
-                "species": "SPECIES_FLORGES_WHITE"
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLOETTE_WHITE"
               },
               {
                 "min_level": 74,
@@ -57956,9 +58061,9 @@
                 "species": "SPECIES_ORICORIO_PAU"
               },
               {
-                "min_level": 75,
-                "max_level": 77,
-                "species": "SPECIES_FLORGES_WHITE"
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FLOETTE_WHITE"
               },
               {
                 "min_level": 74,
