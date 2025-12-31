@@ -23,15 +23,17 @@ MAP_GLAVEZ_HILL,Glavez Hill
 MAP_GLAVEZ_HEIGHTS,Glavez Heights
 MAP_HALAI_ISLAND,Halai Island
 MAP_HALERBA_CITY,Halerba City
-MAP_HALERBA_CITY_GYM,Halerba Gym A
+MAP_HALERBA_CITY_GYM_A,Halerba Gym A
+MAP_HALERBA_CITY_GYM_B,Halerba Gym B
+MAP_HALERBA_CITY_GYM_C,Halerba Gym C
 MAP_HODOU_CITY,Hodou City
 MAP_HODOU_CITY_BACKROOM_A,Hodou Backroom A
 MAP_HODOU_CITY_BACKROOM_B,Hodou Backroom B
 MAP_HODOU_CITY_BACKROOM_C,Hodou Backroom C
 MAP_HODOU_CITY_BACKROOM_D,Hodou Backroom D
 MAP_HODOU_CITY_TUNNEL,Hodou Tunnels
-MAP_HALERBA_WILDS                            ,Halerba Wilds North
-MAP_HALERBA_WILDS_SPRING                     ,Halerba Spring
+MAP_HALERBA_WILDS,Halerba Wilds North
+MAP_HALERBA_WILDS_SPRING,Halerba Spring
 MAP_IRISINA_TOWN,Irisina Town
 MAP_LANJING_TUNNEL,Lanjing Tunnel Ground Floor
 MAP_LANJING_TUNNEL_B1F,Lanjing Tunnel Basement 1
