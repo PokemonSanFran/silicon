@@ -1336,8 +1336,7 @@ static void StartSetup_MainSprites(void)
     StartMainSprite_PartyMon();
     StartMainSprite_DaycareMon();
 
-    u32 j = 0;
-    for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++, j++)
+    for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
     {
          u8 *spriteIds = sStartMenuDataPtr->spriteIds;
 
