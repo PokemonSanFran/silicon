@@ -155,6 +155,7 @@ def format_species_name(species):
         # Aegislash variations
         'AEGISLASH_BLADE': 'Aegislash Blade Forme',
         'AEGISLASH_SHIELD': 'Aegislash Shield Forme',
+        'AEGISLASH': 'Aegislash Shield Forme',
         
         # Type variations
         'TYPE_NULL': 'Type: Null',
@@ -173,6 +174,7 @@ def format_species_name(species):
         # Gimmighoul variations
         'GIMMIGHOUL_ROAMING': 'Gimmighoul Roaming Form',
         'GIMMIGHOUL_CHEST': 'Gimmighoul Chest Form',
+        'GIMMIGHOUL': 'Gimmighoul Chest Form',
     }
     
     # Check if this is a special case

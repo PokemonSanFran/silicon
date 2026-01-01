@@ -40,6 +40,7 @@ def format_species_name(species):
         # Gimmighoul forms
         'GIMMIGHOUL_ROAMING': 'Gimmighoul Roaming Form',
         'GIMMIGHOUL_CHEST': 'Gimmighoul Chest Form',
+        'GIMMIGHOUL': 'Gimmighoul Chest Form',
         
         # Rotom forms
         'ROTOM_WASH': 'Wash Rotom',
@@ -51,6 +52,7 @@ def format_species_name(species):
         # Aegislash forms
         'AEGISLASH_BLADE': 'Aegislash Blade Forme',
         'AEGISLASH_SHIELD': 'Aegislash Shield Forme',
+        'AEGISLASH': 'Aegislash Shield Forme',
         
         # Silvally
         'SILVALLY': 'Silvally Type: Normal',
