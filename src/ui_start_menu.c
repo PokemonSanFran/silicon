@@ -1351,26 +1351,19 @@ static void StartSetup_MainSprites(void)
 
 static void StartSetup_MainWindows(void)
 {
-    enum StartMenuMainWindows window = 0;
-    struct WindowTemplate template;
-    u32 baseBlock = 1;
-
-    InitWindows(&gDummyWindowTemplate);
-    FreeAllWindowBuffers();
+    InitWindows(sStartMenu_MainWindowTemplates);
     DeactivateAllTextPrinters();
 
     // allocate baseBlocks
-    for (; window < NUM_START_MAIN_WINDOWS; window++)
+    u32 baseBlock = 1;
+    for (enum StartMenuMainWindows window = 0; window < NUM_START_MAIN_WINDOWS; window++)
     {
-        template = sStartMenu_MainWindowTemplates[window];
-        template.bg = START_BG_TEXT;
-        template.baseBlock = baseBlock;
-
-        AddWindow(&template);
+        SetWindowAttribute(window, WINDOW_BASE_BLOCK, baseBlock);
         FillWindowPixelBuffer(window, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
         PutWindowTilemap(window);
         CopyWindowToVram(window, COPYWIN_FULL);
 
+        struct WindowTemplate template = sStartMenu_MainWindowTemplates[window];
         baseBlock += template.width * template.height;
     }
 }
