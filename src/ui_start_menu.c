@@ -1297,10 +1297,19 @@ static void StartSetup_Graphics(void)
     for (enum StartMenuBackgrounds bg = 0; bg < NUM_START_BACKGROUNDS; bg++)
     {
         if (sStartMenu_BackgroundGraphics[bg].tiles)
-            DecompressAndLoadBgGfxUsingHeap(bg, sStartMenu_BackgroundGraphics[bg].tiles, 0, 0, 0);
+        {
+            DecompressDataWithHeaderVram(
+                    sStartMenu_BackgroundGraphics[bg].tiles,
+                    (void *)BG_CHAR_ADDR(GetBgAttribute(bg, BG_ATTR_CHARBASEINDEX)));
+        }
 
         if (sStartMenu_BackgroundGraphics[bg].palette.data)
-            LoadPalette(sStartMenu_BackgroundGraphics[bg].palette.data, BG_PLTT_ID(sStartMenu_BackgroundGraphics[bg].palette.slot), PLTT_SIZE_4BPP);
+        {
+            LoadPalette(
+                    sStartMenu_BackgroundGraphics[bg].palette.data,
+                    BG_PLTT_ID(sStartMenu_BackgroundGraphics[bg].palette.slot),
+                    PLTT_SIZE_4BPP);
+        }
 
         if (sStartMenu_BackgroundGraphics[bg].tilemap)
         {
