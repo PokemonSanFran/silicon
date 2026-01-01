@@ -315,8 +315,8 @@ enum StartMenuSetupSteps
     START_SETUP_RESET = 0,
     START_SETUP_BG,
     START_SETUP_GFX,
-    START_SETUP_SPRITE,
     START_SETUP_WIN,
+    START_SETUP_SPRITE,
     START_SETUP_TEXT,
     START_SETUP_FADE,
     START_SETUP_FINISH
@@ -1218,6 +1218,7 @@ static void CB2_StartMenu_Setup(void)
         ScanlineEffect_Stop();
         FreeAllSpritePalettes();
         ResetPaletteFade();
+        FreeAllWindowBuffers();
         ResetSpriteData();
         ResetTasks();
         break;
@@ -1286,11 +1287,11 @@ static void StartSetup_Bgs(void)
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 9));
-    EnableInterrupts(INTR_FLAG_VBLANK);
 }
 
 static void StartSetup_Graphics(void)
 {
+    FreeTempTileDataBuffersIfPossible();
     ResetTempTileDataBuffers();
 
     for (enum StartMenuBackgrounds bg = 0; bg < NUM_START_BACKGROUNDS; bg++)
@@ -3014,6 +3015,7 @@ static void StartMenu_Free(void)
 
     UnsetBgTilemapBuffer(START_BG_CAUTIONBOX);
     FreeAllWindowBuffers();
+    ResetSpriteData();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
 }
 
