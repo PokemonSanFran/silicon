@@ -31532,52 +31532,52 @@
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 38,
                 "max_level": 42,
-                "species": "SPECIES_SCATTERBUG_GARDEN"
+                "species": "SPECIES_SCATTERBUG_MODERN"
               },
               {
                 "min_level": 41,
@@ -31838,6 +31838,438 @@
                 "min_level": 48,
                 "max_level": 52,
                 "species": "SPECIES_SWAMPERT"
+              }
+            ]
+          },
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PETAROSA_BOROUGH",
+          "base_label": "gPetarosaBorough_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PETAROSA_BOROUGH",
+          "base_label": "gPetarosaBorough_Evening",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PETAROSA_BOROUGH",
+          "base_label": "gPetarosaBorough_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_TOGEPI"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 43,
+                "max_level": 47,
+                "species": "SPECIES_SPEWPA_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
+              },
+              {
+                "min_level": 48,
+                "max_level": 52,
+                "species": "SPECIES_VIVILLON_MODERN"
               }
             ]
           }
