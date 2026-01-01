@@ -276,6 +276,8 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                ScrCmd_variableremovemoney,                  requests_effects=1   @ 0xfa
 	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                 ScrCmd_variablecheckmoney,                   requests_effects=1   @ 0xfb
 	@ End siliconMerge
+	script_cmd_table_entry SCR_OP_HIDEFOLLOWER                  ScrCmd_hidefollower,                requests_effects=1  @ 0xfc
+
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

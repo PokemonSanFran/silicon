@@ -624,6 +624,8 @@ static inline u16 GetTMHMMoveId(enum TMHMIndex index)
     return gTMHMItemMoveIds[index].moveId;
 }
 
+enum TMHMItemId GetTMHMItemIdFromMoveId(u16 move);
+
 void BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot);
 struct ItemSlot BagPocket_GetSlotData(struct BagPocket *pocket, u32 pocketPos);
 
@@ -659,6 +661,7 @@ bool32 CheckBagHasSpace(u16 itemId, u16 count);
 u32 GetFreeSpaceForItemInBag(u16 itemId);
 bool32 AddBagItem(u16 itemId, u16 count);
 bool32 RemoveBagItem(u16 itemId, u16 count);
+void RemoveBagItemFromSlot(struct BagPocket *pocket, u16 slotId, u16 count);
 void ClearItemSlots(struct ItemSlot *itemSlots, u16 itemCount); // silconMerge
 u8 CountUsedPCItemSlots(void);
 bool32 CheckPCHasItem(u16 itemId, u16 count);
@@ -677,7 +680,7 @@ u32 GetItemNativeGroup(u32 itemId); // siliconMerge
 const u8 *GetItemName(u16 itemId);
 u32 GetItemPrice(u16 itemId);
 const u8 *GetItemEffect(u32 itemId);
-u32 GetItemHoldEffect(u32 itemId);
+enum HoldEffect GetItemHoldEffect(u32 itemId);
 u32 GetItemHoldEffectParam(u32 itemId);
 const u8 *GetItemDescription(u16 itemId);
 u8 GetItemImportance(u16 itemId);
@@ -691,7 +694,7 @@ u32 GetItemFlingPower(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile volatile);
 u32 GetItemSellPrice(u32 itemId);
-bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect);
+bool32 IsHoldEffectChoice(enum HoldEffect holdEffect);
 
 // Start shopMenu
 enum ShopMenuCategories GetItemShopCategory(u16 itemId);
