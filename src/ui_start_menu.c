@@ -325,8 +325,8 @@ enum StartMenuSetupSteps
     START_SETUP_RESET = 0,
     START_SETUP_BG,
     START_SETUP_GFX,
-    START_SETUP_SPRITE,
     START_SETUP_WIN,
+    START_SETUP_SPRITE,
     START_SETUP_TEXT,
     START_SETUP_FADE,
     START_SETUP_FINISH
@@ -1227,6 +1227,7 @@ static void CB2_StartMenu_Setup(void)
         ScanlineEffect_Stop();
         FreeAllSpritePalettes();
         ResetPaletteFade();
+        FreeAllWindowBuffers();
         ResetSpriteData();
         ResetTasks();
         break;
@@ -1295,20 +1296,29 @@ static void StartSetup_Bgs(void)
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 9));
-    EnableInterrupts(INTR_FLAG_VBLANK);
 }
 
 static void StartSetup_Graphics(void)
 {
+    FreeTempTileDataBuffersIfPossible();
     ResetTempTileDataBuffers();
 
     for (enum StartMenuBackgrounds bg = 0; bg < NUM_START_BACKGROUNDS; bg++)
     {
         if (sStartMenu_BackgroundGraphics[bg].tiles)
-            DecompressAndLoadBgGfxUsingHeap(bg, sStartMenu_BackgroundGraphics[bg].tiles, 0, 0, 0);
+        {
+            DecompressDataWithHeaderVram(
+                    sStartMenu_BackgroundGraphics[bg].tiles,
+                    (void *)BG_CHAR_ADDR(GetBgAttribute(bg, BG_ATTR_CHARBASEINDEX)));
+        }
 
         if (sStartMenu_BackgroundGraphics[bg].palette.data)
-            LoadPalette(sStartMenu_BackgroundGraphics[bg].palette.data, BG_PLTT_ID(sStartMenu_BackgroundGraphics[bg].palette.slot), PLTT_SIZE_4BPP);
+        {
+            LoadPalette(
+                    sStartMenu_BackgroundGraphics[bg].palette.data,
+                    BG_PLTT_ID(sStartMenu_BackgroundGraphics[bg].palette.slot),
+                    PLTT_SIZE_4BPP);
+        }
 
         if (sStartMenu_BackgroundGraphics[bg].tilemap)
         {
@@ -1335,8 +1345,7 @@ static void StartSetup_MainSprites(void)
     StartMainSprite_PartyMon();
     StartMainSprite_DaycareMon();
 
-    u32 j = 0;
-    for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++, j++)
+    for (u32 i = 0; i < NUM_START_MAIN_SPRITES; i++)
     {
          u8 *spriteIds = sStartMenuDataPtr->spriteIds;
 
@@ -1350,26 +1359,19 @@ static void StartSetup_MainSprites(void)
 
 static void StartSetup_MainWindows(void)
 {
-    enum StartMenuMainWindows window = 0;
-    struct WindowTemplate template;
-    u32 baseBlock = 1;
-
-    InitWindows(&gDummyWindowTemplate);
-    FreeAllWindowBuffers();
+    InitWindows(sStartMenu_MainWindowTemplates);
     DeactivateAllTextPrinters();
 
     // allocate baseBlocks
-    for (; window < NUM_START_MAIN_WINDOWS; window++)
+    u32 baseBlock = 1;
+    for (enum StartMenuMainWindows window = 0; window < NUM_START_MAIN_WINDOWS; window++)
     {
-        template = sStartMenu_MainWindowTemplates[window];
-        template.bg = START_BG_TEXT;
-        template.baseBlock = baseBlock;
-
-        AddWindow(&template);
+        SetWindowAttribute(window, WINDOW_BASE_BLOCK, baseBlock);
         FillWindowPixelBuffer(window, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
         PutWindowTilemap(window);
         CopyWindowToVram(window, COPYWIN_FULL);
 
+        struct WindowTemplate template = sStartMenu_MainWindowTemplates[window];
         baseBlock += template.width * template.height;
     }
 }
@@ -3024,6 +3026,7 @@ static void StartMenu_Free(void)
 
     UnsetBgTilemapBuffer(START_BG_CAUTIONBOX);
     FreeAllWindowBuffers();
+    ResetSpriteData();
     TRY_FREE_AND_SET_NULL(sStartMenuDataPtr);
 }
 
