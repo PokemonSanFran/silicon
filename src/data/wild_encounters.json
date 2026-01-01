@@ -75557,6 +75557,115 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ROUTE_D_UNDERWATER",
+          "base_label": "gRoute_D_Underwater_Morning",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 84,
+                "max_level": 84,
+                "species": "SPECIES_CLAMPERL"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_HUNTAIL"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_HUNTAIL"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_GOREBYSS"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_GOREBYSS"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_RELICANTH"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_RELICANTH"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_RELICANTH"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_RELICANTH"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_DHELMISE"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_DHELMISE"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_DHELMISE"
+              },
+              {
+                "min_level": 85,
+                "max_level": 85,
+                "species": "SPECIES_DHELMISE"
+              }
+            ]
+          }
         }
       ]
     },
