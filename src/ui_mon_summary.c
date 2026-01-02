@@ -142,7 +142,7 @@ static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_sum
 static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/blank.bin");
 static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/pages/tiles.gbapal");
 
-static const u8 sMonSummaryWindowFontColors[][3] =
+static const u8 sMonSummary_FontColors[][3] =
 {
     [MON_SUMMARY_FNTCLR_PRIMARY]   = { 0, 1, 4 },
     [MON_SUMMARY_FNTCLR_SECONDARY] = { 0, 1, 2 },
