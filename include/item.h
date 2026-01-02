@@ -697,6 +697,7 @@ u32 GetItemSellPrice(u32 itemId);
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect);
 
 // Start shopMenu
+enum ShopMenuCategories ConvertPocketToCategory(enum Pocket pocketId);
 enum ShopMenuCategories GetItemShopCategory(u16 itemId);
 u32 GetItemShopCriteriaGoal(u16 itemId);
 ShopCriteriaFunc GetItemShopCriteriaFunc(u16 itemId);

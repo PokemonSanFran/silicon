@@ -177,6 +177,7 @@ struct ShopMenuData
     u16 maxItemQuantity;
     u16 selectedItemId;
 
+    enum ShopMenuCarousels carouselType;
     u16 recommendedItems[NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS];
     u16 categoryItems[NUM_SHOP_CATEGORIES][NUM_SHOP_ITEMS_PER_CATEGORIES];
     u8 categoryNumItems[NUM_SHOP_CATEGORIES];

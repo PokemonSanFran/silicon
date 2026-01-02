@@ -93,7 +93,15 @@ static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
 static void PrestoHelper_UpdateFrontEnd(void);
 static enum PrestoShopTypes PrestoHelper_GetShopType(void);
 static u32 PrestoHelper_InitItemsList(void);
-static bool8 PrestoHelper_ShouldReccomend(u32 itemId);
+static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 itemId);
+static bool8 PrestoHelper_HandleHeal(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleTournament(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleForest(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleCave(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleWater(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleRoute(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleRandom(u32 itemId, enum ShopMenuCategories category);
+static void PrestoHelper_SetCarouselType(enum ShopMenuCarousels carousel);
 
 static void SpriteCB_BuyIcon(struct Sprite *);
 static void SpriteCB_UpArrow(struct Sprite *);
@@ -485,6 +493,7 @@ static u32 PrestoHelper_GetCategoryMap(u32 category)
 
 static u32 PrestoHelper_InitItemsList(void)
 {
+    //CycleCountStart();
     u32 numCategories = 0, numCandidates = 0;
     u16 recommendedCandidates[ITEMS_COUNT] = {0};
     u32 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
@@ -500,9 +509,11 @@ static u32 PrestoHelper_InitItemsList(void)
         categoryCounts[SHOP_CATEGORY_BUY_AGAIN]++;
     }
 
-    for (u32 itemId = 0; itemId < ITEMS_COUNT; itemId++)
+    for (u32 itemId = (ITEM_NONE + 1); itemId < ITEMS_COUNT; itemId++)
     {
-        if (itemId == ITEM_NONE) 
+        enum Pocket pocket = GetItemPocket(itemId);
+
+        if (pocket == POCKET_KEY_ITEMS)
             continue;
 
         if (!GetItemPrice(itemId)) 
@@ -516,12 +527,12 @@ static u32 PrestoHelper_InitItemsList(void)
         if (!canBuy) 
             continue;
 
-        u32 itemCat = GetItemShopCategory(itemId);
+        u32 itemCat = ConvertPocketToCategory(pocket);
 
         if (ShopPurchase_IsCategoryOneTimePurchase(itemCat) && CountTotalItemQuantityInBag(itemId))
             continue;
 
-        if (PrestoHelper_ShouldReccomend(itemId))
+        if (PrestoHelper_ShouldReccomend(itemCat, itemId))
             recommendedCandidates[numCandidates++] = itemId;
 
         if (numCandidates == 1)
@@ -531,7 +542,7 @@ static u32 PrestoHelper_InitItemsList(void)
             continue;
 
         u32 risingCategory = PrestoHelper_GetCategoryMap(itemCat);
-        DebugPrintf("%S is getting set to category %d in position %d",GetItemName(itemId),risingCategory,categoryCounts[itemCat]);
+        //DebugPrintf("%S is getting set to category %d in position %d",GetItemName(itemId),risingCategory,categoryCounts[itemCat]);
         ShopInventory_SetItemIdToGrid(itemId, risingCategory, categoryCounts[itemCat]);
         categoryCounts[itemCat]++;
     }
@@ -548,7 +559,7 @@ static u32 PrestoHelper_InitItemsList(void)
         ShopInventory_SetItemIdToGrid(selectedItem, risingCategory, numRecSelected);
         numRecSelected++;
 
-        DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
+        //DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
 
         recommendedCandidates[randIdx] = recommendedCandidates[numCandidates - 1];
         numCandidates--;
@@ -567,38 +578,104 @@ static u32 PrestoHelper_InitItemsList(void)
             numCategories++;
     }
 
+    /*
     for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
         DebugPrintf("row %d has category %d (%d items)",categoryIndex,gShopMenuDataPtr->categoryList[categoryIndex],ShopInventory_GetCategoryNumItems(categoryIndex));
+    */
 
+    //DebugPrintf("PrestoHelper_InitItemsList %d",CycleCountEnd());
     return numCategories;
 }
 
-static bool8 PrestoHelper_ShouldReccomend(u32 itemId)
+static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 itemId)
 {
     if (PokeMart_IsActive())
         return FALSE;
 
-    enum ShopMenuCarousels carousel = ShopInventory_GetRecommendedCarousel();
-    enum ShopMenuCategories category = GetItemShopCategory(itemId);
-
-    switch (carousel)
+    static bool8 (*const carouselHandlers[])(u32, enum ShopMenuCategories) =
     {
-        case SHOP_CAROUSEL_NEED_TO_HEAL:
-            return (category == SHOP_CATEGORY_MEDICINE);
-        case SHOP_CAROUSEL_TOURNAMENT_PREP:
-            return ((category == SHOP_CATEGORY_BATTLE_ITEMS) || (category == SHOP_CATEGORY_TMS));
-        case SHOP_CAROUSEL_FOREST_EXPLORE:
-            return (ShopInventory_IsItemUsefulInForest(itemId));
-        case SHOP_CAROUSEL_CAVE_EXPLORE:
-            return (ShopInventory_IsItemUsefulInCave(itemId));
-        case SHOP_CAROUSEL_WATER_EXPLORE:
-            return (ShopInventory_IsItemUsefulInWater(itemId));
-        case SHOP_CAROUSEL_ROUTE_EXPLORE:
-        case SHOP_CAROUSEL_RANDOM:
-            return TRUE;
-        default:
-            return FALSE;
-    }
+        [SHOP_CAROUSEL_NEED_TO_HEAL]       = PrestoHelper_HandleHeal,
+        [SHOP_CAROUSEL_TOURNAMENT_PREP]    = PrestoHelper_HandleTournament,
+        [SHOP_CAROUSEL_FOREST_EXPLORE]     = PrestoHelper_HandleForest,
+        [SHOP_CAROUSEL_CAVE_EXPLORE]       = PrestoHelper_HandleCave,
+        [SHOP_CAROUSEL_WATER_EXPLORE]      = PrestoHelper_HandleWater,
+        [SHOP_CAROUSEL_ROUTE_EXPLORE]      = PrestoHelper_HandleRoute,
+        [SHOP_CAROUSEL_RANDOM]             = PrestoHelper_HandleRandom
+    };
+
+    enum ShopMenuCarousels carousel = PrestoHelper_GetCarouselType();
+    if (carouselHandlers[carousel] != NULL)
+        return carouselHandlers[carousel](itemId, category);
+    
+    return FALSE;
+}
+
+static bool8 PrestoHelper_HandleHeal(u32 itemId, enum ShopMenuCategories category)
+{
+    return (category == SHOP_CATEGORY_MEDICINE);
+}
+
+static bool8 PrestoHelper_HandleTournament(u32 itemId, enum ShopMenuCategories category)
+{
+    return (category == SHOP_CATEGORY_BATTLE_ITEMS || category == SHOP_CATEGORY_TMS);
+}
+
+static bool8 PrestoHelper_HandleForest(u32 itemId, enum ShopMenuCategories category)
+{
+    return (itemId == ITEM_REPEL
+             || itemId == ITEM_SUPER_REPEL
+             || itemId == ITEM_MAX_REPEL
+             || itemId == ITEM_LURE
+             || itemId == ITEM_SUPER_LURE
+             || itemId == ITEM_MAX_LURE
+             || itemId == ITEM_POKE_BALL
+             || itemId == ITEM_GREAT_BALL
+             || itemId == ITEM_ULTRA_BALL
+             || itemId == ITEM_HEAL_BALL
+             || itemId == ITEM_TIMER_BALL
+             || itemId == ITEM_QUICK_BALL
+             || itemId == ITEM_REPEAT_BALL
+             || itemId == ITEM_LUXURY_BALL);
+}
+
+static bool8 PrestoHelper_HandleCave(u32 itemId, enum ShopMenuCategories category)
+{
+    return (itemId == ITEM_REPEL
+             || itemId == ITEM_SUPER_REPEL
+             || itemId == ITEM_MAX_REPEL
+             || itemId == ITEM_LURE
+             || itemId == ITEM_SUPER_LURE
+             || itemId == ITEM_MAX_LURE
+             || itemId == ITEM_POKE_BALL
+             || itemId == ITEM_GREAT_BALL
+             || itemId == ITEM_ULTRA_BALL
+             || itemId == ITEM_DUSK_BALL);
+}
+
+static bool8 PrestoHelper_HandleWater(u32 itemId, enum ShopMenuCategories category)
+{
+    return (itemId == ITEM_REPEL
+             || itemId == ITEM_SUPER_REPEL
+             || itemId == ITEM_MAX_REPEL
+             || itemId == ITEM_LURE
+             || itemId == ITEM_SUPER_LURE
+             || itemId == ITEM_MAX_LURE
+             || itemId == ITEM_POKE_BALL
+             || itemId == ITEM_GREAT_BALL
+             || itemId == ITEM_ULTRA_BALL
+             || itemId == ITEM_NET_BALL
+             || itemId == ITEM_DIVE_BALL
+             || itemId == ITEM_LURE_BALL);
+}
+
+static bool8 PrestoHelper_HandleRoute(u32 itemId, enum ShopMenuCategories category)
+{
+    return TRUE;
+}
+
+static bool8 PrestoHelper_HandleRandom(u32 itemId, enum ShopMenuCategories category)
+{
+    return TRUE;
 }
 
 static void SpriteCB_BuyIcon(struct Sprite *sprite)
@@ -686,4 +763,24 @@ static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
 
     sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
      || gShopMenuDataPtr->itemQuantity == 0);
+}
+
+void PrestoHelper_DetermineCarousel(void)
+{
+    PrestoHelper_SetCarouselType(NUM_SHOP_CAROUSELS);
+
+    if (PokeMart_IsActive())
+        return;
+
+    PrestoHelper_SetCarouselType(ShopInventory_GetRecommendedCarousel());
+}
+
+enum ShopMenuCarousels PrestoHelper_GetCarouselType(void)
+{
+    return gShopMenuDataPtr->carouselType;
+}
+
+static void PrestoHelper_SetCarouselType(enum ShopMenuCarousels carousel)
+{
+    gShopMenuDataPtr->carouselType = carousel;
 }

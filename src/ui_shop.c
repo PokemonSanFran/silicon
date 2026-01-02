@@ -111,7 +111,6 @@ static void ShopSprite_DestroyItemSprites(void);
 static void ShopSprite_ToggleItemIconsVisibility(bool32);
 
 static void ShopInventory_InitCategoryLists(void);
-static void ShopInventory_InitRecommendedList(void);
 static u32 ShopInventory_IsItemRecommended(u16);
 static bool32 ShopInventory_IsPlayerWithinAForest(void);
 static bool32 ShopInventory_IsPlayerOnWater(void);
@@ -318,7 +317,6 @@ void ShopMenu_Init(const struct ShopMenuConfigs *configs, MainCallback callback)
     memset(sShopMenuStaticDataPtr->itemIconIds, SPRITE_NONE, configs->totalShownItems * configs->totalShownItemRows);
 
     ShopInventory_InitCategoryLists();
-    ShopInventory_InitRecommendedList();
 
     SetMainCallback2(CB2_ShopSetup);
 }
@@ -355,6 +353,7 @@ static void CB2_ShopSetup(void)
     case SHOP_SETUP_FRONT_END:
         ShopSprite_CreateGenericSprites();
         ShopHelper_UpdateFrontEnd();
+        PrestoHelper_DetermineCarousel();
         gMain.state++;
         break;
     case SHOP_SETUP_FADE:
@@ -859,127 +858,6 @@ static void ShopInventory_InitCategoryLists(void)
     gShopMenuDataPtr->numCategories = ShopConfig_Get()->handleInitList();
 }
 
-static void ShopInventory_InitRecommendedList(void)
-{
-    return;
-    enum ShopMenuCarousels carousel = ShopInventory_GetRecommendedCarousel();
-
-    if (PokeMart_IsActive())
-    {
-        return;
-    }
-
-    for (u32 i = 0, randRow = 0, randItemNum = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS; i++)
-    {
-        switch (carousel)
-        {
-        case SHOP_CAROUSEL_NEED_TO_HEAL:
-            do
-            {
-                randRow = ShopGrid_CategoryInRow(SHOP_CATEGORY_MEDICINE);
-                randItemNum = (Random() + i) % ShopInventory_GetCategoryNumItems(randRow);
-                if (!ShopInventory_IsItemRecommended(ShopInventory_GetItemIdFromGrid(randRow, randItemNum)))
-                {
-                    gShopMenuDataPtr->recommendedItems[i] = ShopInventory_GetItemIdFromGrid(randRow, randItemNum);
-                }
-            }
-            while (gShopMenuDataPtr->recommendedItems[i] == ITEM_NONE);
-            break;
-        case SHOP_CAROUSEL_TOURNAMENT_PREP:
-            do
-            {
-                randRow = ShopGrid_CategoryInRow((Random() % 2) ? SHOP_CATEGORY_BATTLE_ITEMS : SHOP_CATEGORY_TMS);
-                randItemNum = (Random() + i) % ShopInventory_GetCategoryNumItems(randRow);
-
-                if (!ShopInventory_IsItemRecommended(ShopInventory_GetItemIdFromGrid(randRow, randItemNum)))
-                {
-                    gShopMenuDataPtr->recommendedItems[i] = ShopInventory_GetItemIdFromGrid(randRow, randItemNum);
-                }
-            }
-            while (gShopMenuDataPtr->recommendedItems[i] == ITEM_NONE);
-            break;
-        case SHOP_CAROUSEL_ROUTE_EXPLORE:
-        case SHOP_CAROUSEL_FOREST_EXPLORE:
-            do
-            {
-                randRow = (Random() % SHOP_CATEGORY_FIELD_CAROUSEL_END);
-                // Prevent non-field rows.
-                if (randRow < SHOP_CATEGORY_FIELD_CAROUSEL_START)
-                    randRow += SHOP_CATEGORY_FIELD_CAROUSEL_START;
-
-                randRow = ShopGrid_CategoryInRow(randRow);
-                randItemNum = (Random() + i) % ShopInventory_GetCategoryNumItems(randRow);
-
-                if (ShopInventory_IsItemUsefulInForest(ShopInventory_GetItemIdFromGrid(randRow, randItemNum))
-                 && !ShopInventory_IsItemRecommended(ShopInventory_GetItemIdFromGrid(randRow, randItemNum)))
-                {
-                    gShopMenuDataPtr->recommendedItems[i] = ShopInventory_GetItemIdFromGrid(randRow, randItemNum);
-                }
-            }
-            while (gShopMenuDataPtr->recommendedItems[i] == ITEM_NONE);
-            break;
-        case SHOP_CAROUSEL_WATER_EXPLORE:
-            do
-            {
-                randRow = (Random() % SHOP_CATEGORY_FIELD_CAROUSEL_END);
-                // Prevent non-field rows.
-                if (randRow < SHOP_CATEGORY_FIELD_CAROUSEL_START)
-                    randRow += SHOP_CATEGORY_FIELD_CAROUSEL_START;
-
-                randRow = ShopGrid_CategoryInRow(randRow);
-                randItemNum = (Random() + i) % ShopInventory_GetCategoryNumItems(randRow);
-
-                if (ShopInventory_IsItemUsefulInWater(ShopInventory_GetItemIdFromGrid(randRow, randItemNum))
-                 && !ShopInventory_IsItemRecommended(ShopInventory_GetItemIdFromGrid(randRow, randItemNum)))
-                {
-                    gShopMenuDataPtr->recommendedItems[i] = ShopInventory_GetItemIdFromGrid(randRow, randItemNum);
-                }
-            }
-            while (gShopMenuDataPtr->recommendedItems[i] == ITEM_NONE);
-            break;
-        case SHOP_CAROUSEL_CAVE_EXPLORE:
-            do
-            {
-                randRow = (Random() % SHOP_CATEGORY_FIELD_CAROUSEL_END);
-                // Prevent non-field rows.
-                if (randRow < SHOP_CATEGORY_FIELD_CAROUSEL_START)
-                    randRow += SHOP_CATEGORY_FIELD_CAROUSEL_START;
-
-                randRow = ShopGrid_CategoryInRow(randRow);
-                randItemNum = (Random() + i) % ShopInventory_GetCategoryNumItems(randRow);
-
-                if (ShopInventory_IsItemUsefulInCave(ShopInventory_GetItemIdFromGrid(randRow, randItemNum))
-                 && !ShopInventory_IsItemRecommended(ShopInventory_GetItemIdFromGrid(randRow, randItemNum)))
-                {
-                    gShopMenuDataPtr->recommendedItems[i] = ShopInventory_GetItemIdFromGrid(randRow, randItemNum);
-                }
-            }
-            while (gShopMenuDataPtr->recommendedItems[i] == ITEM_NONE);
-            break;
-        default:
-            do
-            {
-                randRow = (Random() % SHOP_CATEGORY_DEFAULT_CAROUSEL_END);
-                // Prevent Recommended/Buy Again row.
-                if (randRow < SHOP_CATEGORY_DEFAULT_CAROUSEL_START)
-                    randRow += SHOP_CATEGORY_DEFAULT_CAROUSEL_START;
-
-                randRow = ShopGrid_CategoryInRow(randRow);
-                randItemNum = (Random() + i) % ShopInventory_GetCategoryNumItems(randRow);
-
-                if (!ShopInventory_IsItemRecommended(ShopInventory_GetItemIdFromGrid(randRow, randItemNum)))
-                {
-                    gShopMenuDataPtr->recommendedItems[i] = ShopInventory_GetItemIdFromGrid(randRow, randItemNum);
-                }
-            }
-            while (gShopMenuDataPtr->recommendedItems[i] == ITEM_NONE);
-            break;
-        }
-    }
-
-    ShopInventory_InitCategoryLists();
-}
-
 enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void)
 {
     if (VarGet(VAR_STORYLINE_STATE) > STORY_COMPLETED_NAVAL_BASE
@@ -1033,19 +911,6 @@ enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void)
     }
 
     return SHOP_CAROUSEL_RANDOM;
-}
-
-static u32 ShopInventory_IsItemRecommended(u16 itemId)
-{
-    u32 ret = 0;
-
-    for (u32 i = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS; i++)
-    {
-        if (gShopMenuDataPtr->recommendedItems[i] == itemId)
-            ret++;
-    }
-
-    return ret;
 }
 
 // PSF TODO should these be determined by map type (e.g. MAP_TYPE_ROUTE) instead?
@@ -1115,54 +980,6 @@ static bool32 ShopInventory_IsPlayerInsideACave(void)
 
     return (mapNum == MAP_NUM(MAP_ARANTRAZ) && mapGroup == MAP_GROUP(MAP_ARANTRAZ))
         || (mapNum == MAP_NUM(MAP_PIOCA_BRIDGE) && mapGroup == MAP_GROUP(MAP_PIOCA_BRIDGE));
-}
-
-bool32 ShopInventory_IsItemUsefulInForest(u16 itemId)
-{
-    return (itemId == ITEM_REPEL
-             || itemId == ITEM_SUPER_REPEL
-             || itemId == ITEM_MAX_REPEL
-             || itemId == ITEM_LURE
-             || itemId == ITEM_SUPER_LURE
-             || itemId == ITEM_MAX_LURE
-             || itemId == ITEM_POKE_BALL
-             || itemId == ITEM_GREAT_BALL
-             || itemId == ITEM_ULTRA_BALL
-             || itemId == ITEM_HEAL_BALL
-             || itemId == ITEM_TIMER_BALL
-             || itemId == ITEM_QUICK_BALL
-             || itemId == ITEM_REPEAT_BALL
-             || itemId == ITEM_LUXURY_BALL);
-}
-
-bool32 ShopInventory_IsItemUsefulInWater(u16 itemId)
-{
-    return (itemId == ITEM_REPEL
-             || itemId == ITEM_SUPER_REPEL
-             || itemId == ITEM_MAX_REPEL
-             || itemId == ITEM_LURE
-             || itemId == ITEM_SUPER_LURE
-             || itemId == ITEM_MAX_LURE
-             || itemId == ITEM_POKE_BALL
-             || itemId == ITEM_GREAT_BALL
-             || itemId == ITEM_ULTRA_BALL
-             || itemId == ITEM_NET_BALL
-             || itemId == ITEM_DIVE_BALL
-             || itemId == ITEM_LURE_BALL);
-}
-
-bool32 ShopInventory_IsItemUsefulInCave(u16 itemId)
-{
-    return (itemId == ITEM_REPEL
-             || itemId == ITEM_SUPER_REPEL
-             || itemId == ITEM_MAX_REPEL
-             || itemId == ITEM_LURE
-             || itemId == ITEM_SUPER_LURE
-             || itemId == ITEM_MAX_LURE
-             || itemId == ITEM_POKE_BALL
-             || itemId == ITEM_GREAT_BALL
-             || itemId == ITEM_ULTRA_BALL
-             || itemId == ITEM_DUSK_BALL);
 }
 
 static void ShopInventory_Reset(void)
