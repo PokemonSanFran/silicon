@@ -96,7 +96,6 @@ static const struct WindowTemplate sMonSummary_MainWindows[] =
         .width = 10,
         .height = 2,
         .paletteNum = 0,
-        .baseBlock = 1
     },
 
     // MON_SUMMARY_MAIN_WIN_DYNAMIC uses AddWindow
@@ -258,9 +257,15 @@ static void SummarySetup_Windows(void)
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
 
-    FillWindowPixelBuffer(MON_SUMMARY_MAIN_WIN_HEADER, PIXEL_FILL(0));
-    PutWindowTilemap(MON_SUMMARY_MAIN_WIN_HEADER);
-    CopyWindowToVram(MON_SUMMARY_MAIN_WIN_HEADER, COPYWIN_FULL);
+    for (u32 i = 0, baseBlock = 1; i < NUM_MON_SUMMARY_MAIN_WINS; i++)
+    {
+        SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+        PutWindowTilemap(i);
+        CopyWindowToVram(i, COPYWIN_FULL);
+
+        baseBlock += sMonSummary_MainWindows[i].width * sMonSummary_MainWindows[i].height;
+    }
 
     SummaryPage_LoadDynamicWindows();
 }
