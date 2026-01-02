@@ -73275,6 +73275,111 @@
                 "species": "SPECIES_SHUCKLE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_SCOVILLAIN"
+              }
+            ]
           }
         },
         {
