@@ -69,30 +69,31 @@ enum __attribute__((packed)) MonSummaryPageSlots
 #define TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS 5
 #define MON_SUMMARY_DYNAMIC_WIN_DUMMY { .id = WINDOW_NONE }
 
-enum __attribute__((packed)) MonSummaryMainWindowIds
+// appears regardless of which page
+enum __attribute__((packed)) MonSummaryMainWindows
 {
-    MON_SUMMARY_MAIN_WIN_HEADER,  // appears regardless of which page
+    MON_SUMMARY_MAIN_WIN_HEADER,
     NUM_MON_SUMMARY_MAIN_WINS,
     // the rest is dynamic
 };
 
 // dynamic windows
-enum __attribute__((packed)) MonSummaryInfosWindowIds
+enum __attribute__((packed)) MonSummaryInfosWindows
 {
     MON_SUMMARY_INFOS_WIN_TEST,
 };
 
-enum __attribute__((packed)) MonSummaryStatsWindowIds
+enum __attribute__((packed)) MonSummaryStatsWindows
 {
     MON_SUMMARY_STATS_WIN_TEST,
 };
 
-enum __attribute__((packed)) MonSummaryMovesWindowIds
+enum __attribute__((packed)) MonSummaryMovesWindows
 {
     MON_SUMMARY_MOVES_WIN_TEST,
 };
 
-enum MonSummaryFontColorIds
+enum MonSummaryFontColors
 {
     MON_SUMMARY_FNTCLR_PRIMARY,     // everything else w/ FONT_OUTLINED(_NARROW)
     MON_SUMMARY_FNTCLR_SECONDARY,   // help bar
