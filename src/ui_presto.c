@@ -491,7 +491,7 @@ static u32 PrestoHelper_GetCategoryMap(u32 category)
     return NUM_SHOP_CATEGORIES;
 }
 
-static void PrestoHelper_ProcessBuyAgainItems(u32* categoryCounts)
+static void PrestoHelper_ProcessBuyAgainItems(u16* categoryCounts)
 {
     for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
     {
@@ -505,12 +505,34 @@ static void PrestoHelper_ProcessBuyAgainItems(u32* categoryCounts)
     }
 }
 
+static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16* recommendedCandidates, u16* categoryCounts)
+{
+    u32 numRecSelected = 0;
+    for (u32 i = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS && numCandidates > 0; i++)
+    {
+        u32 randIdx = Random() % numCandidates;
+        u16 selectedItem = recommendedCandidates[randIdx];
+
+        gShopMenuDataPtr->recommendedItems[i] = selectedItem;
+
+        u32 risingCategory = PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
+        ShopInventory_SetItemIdToGrid(selectedItem, risingCategory, numRecSelected);
+        numRecSelected++;
+
+        //DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
+
+        recommendedCandidates[randIdx] = recommendedCandidates[numCandidates - 1];
+        numCandidates--;
+        categoryCounts[SHOP_CATEGORY_RECOMMENDED] = numRecSelected;
+    }
+}
+
 static u32 PrestoHelper_InitItemsList(void)
 {
     //CycleCountStart();
     u32 numCategories = 0, numCandidates = 0;
     u16 recommendedCandidates[ITEMS_COUNT] = {0};
-    u32 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
+    u16 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
 
     PrestoHelper_ProcessBuyAgainItems(categoryCounts);
 
@@ -551,26 +573,8 @@ static u32 PrestoHelper_InitItemsList(void)
         ShopInventory_SetItemIdToGrid(itemId, risingCategory, categoryCounts[itemCat]);
         categoryCounts[itemCat]++;
     }
-
-    u32 numRecSelected = 0;
-    for (u32 i = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS && numCandidates > 0; i++)
-    {
-        u32 randIdx = Random() % numCandidates;
-        u16 selectedItem = recommendedCandidates[randIdx];
-
-        gShopMenuDataPtr->recommendedItems[i] = selectedItem;
-
-        u32 risingCategory = PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
-        ShopInventory_SetItemIdToGrid(selectedItem, risingCategory, numRecSelected);
-        numRecSelected++;
-
-        //DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
-
-        recommendedCandidates[randIdx] = recommendedCandidates[numCandidates - 1];
-        numCandidates--;
-        categoryCounts[SHOP_CATEGORY_RECOMMENDED] = numRecSelected;
-    }
-
+    
+    PrestoHelper_ProcessReccomendedItems(numCandidates,recommendedCandidates,categoryCounts);
     for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
     {
         if (categoryCounts[categoryIndex] == 0)
