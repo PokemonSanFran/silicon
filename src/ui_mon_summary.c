@@ -58,6 +58,7 @@ static u32 SummaryPage_GetDynamicWindowBaseBlock(u32);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void SummaryPage_LoadDynamicWindows(void);
+static void SummaryPage_UnloadDynamicWindows(void);
 static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(void);
 
@@ -540,10 +541,11 @@ static void SummaryPage_UnloadDynamicWindows(void)
 
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         ClearWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_GFX);
         RemoveWindow(windowId);
         SummaryPage_SetWindowId(i, WINDOW_NONE);
     }
+
+    ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
 }
 
 static void SummaryPage_LoadTilemap(void)
