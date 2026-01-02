@@ -491,13 +491,8 @@ static u32 PrestoHelper_GetCategoryMap(u32 category)
     return NUM_SHOP_CATEGORIES;
 }
 
-static u32 PrestoHelper_InitItemsList(void)
+static void PrestoHelper_ProcessBuyAgainItems(u32* categoryCounts)
 {
-    //CycleCountStart();
-    u32 numCategories = 0, numCandidates = 0;
-    u16 recommendedCandidates[ITEMS_COUNT] = {0};
-    u32 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
-
     for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
     {
         u32 item = gSaveBlock3Ptr->shopBuyAgainItems[i];
@@ -508,6 +503,16 @@ static u32 PrestoHelper_InitItemsList(void)
         ShopInventory_SetItemIdToGrid(item, risingCategory, categoryCounts[SHOP_CATEGORY_BUY_AGAIN]);
         categoryCounts[SHOP_CATEGORY_BUY_AGAIN]++;
     }
+}
+
+static u32 PrestoHelper_InitItemsList(void)
+{
+    //CycleCountStart();
+    u32 numCategories = 0, numCandidates = 0;
+    u16 recommendedCandidates[ITEMS_COUNT] = {0};
+    u32 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
+
+    PrestoHelper_ProcessBuyAgainItems(categoryCounts);
 
     for (u32 itemId = (ITEM_NONE + 1); itemId < ITEMS_COUNT; itemId++)
     {
