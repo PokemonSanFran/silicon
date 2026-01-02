@@ -62,6 +62,8 @@ static void SummaryPage_UnloadDynamicWindows(void);
 static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(void);
 
+static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
+
 // const data
 static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
 {
@@ -564,4 +566,10 @@ static void SummaryPage_Reload(void)
     SummaryPage_UnloadDynamicWindows();
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
+}
+
+// dynamic windows handles the id on its own
+static void SummaryPrint_AddText(u32 windowId, u32 fontId, u32 x, u32 y, enum MonSummaryFontColors color, const u8 *str)
+{
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, sMonSummary_FontColors[color], TEXT_SKIP_DRAW, str);
 }
