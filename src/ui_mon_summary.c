@@ -39,6 +39,8 @@ static void SummarySetup_Windows(void);
 static void CB2_SummarySetup(void);
 static void Task_SummarySetup_WaitFade(u8);
 
+static void SummaryInput_UpdatePage(s32);
+static bool32 SummaryInput_IsInputAdditive(s32);
 static void SummaryInput_RunSpecificHandler(u8);
 static void Task_SummaryInput_Handle(u8);
 static void Task_SummaryInput_HandleInfos(u8);
@@ -58,8 +60,6 @@ static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void SummaryPage_LoadDynamicWindows(void);
 static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(void);
-static void SummaryPage_UpdateValue(s32);
-static bool32 SummaryPage_IsInputAdditive(s32);
 
 // const data
 static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
@@ -320,6 +320,27 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
     }
 }
 
+static void SummaryInput_UpdatePage(s32 delta)
+{
+    enum MonSummaryPages page = SummaryPage_GetValue();
+    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
+    u32 count = NUM_MON_SUMMARY_PAGES - 1;
+
+    if ((!page && !additiveDelta) || (page == count && additiveDelta))
+    {
+        return;
+    }
+
+    PlaySE(SE_CLICK);
+    SummaryPage_SetValue(page + delta);
+    SummaryPage_Reload();
+}
+
+static bool32 SummaryInput_IsInputAdditive(s32 delta)
+{
+    return delta == 1;
+}
+
 // page-specific _or_ mode-specific (e.g. MON_SUMMARY_MODE_IV_TRAIN)
 // TODO mode-specific handler
 static void SummaryInput_RunSpecificHandler(u8 taskId)
@@ -342,13 +363,13 @@ static void Task_SummaryInput_Handle(u8 taskId)
 
     if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
-        SummaryPage_UpdateValue(-1);
+        SummaryInput_UpdatePage(-1);
         return;
     }
 
     if (JOY_NEW(DPAD_RIGHT | R_BUTTON))
     {
-        SummaryPage_UpdateValue(1);
+        SummaryInput_UpdatePage(1);
         return;
     }
 
@@ -545,25 +566,4 @@ static void SummaryPage_Reload(void)
     SummaryPage_UnloadDynamicWindows();
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
-}
-
-static void SummaryPage_UpdateValue(s32 delta)
-{
-    enum MonSummaryPages page = SummaryPage_GetValue();
-    bool32 additiveDelta = SummaryPage_IsInputAdditive(delta);
-    u32 count = NUM_MON_SUMMARY_PAGES - 1;
-
-    if ((!page && !additiveDelta) || (page == count && additiveDelta))
-    {
-        return;
-    }
-
-    PlaySE(SE_CLICK);
-    SummaryPage_SetValue(page + delta);
-    SummaryPage_Reload();
-}
-
-static bool32 SummaryPage_IsInputAdditive(s32 delta)
-{
-    return delta == 1;
 }
