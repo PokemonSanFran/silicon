@@ -86,7 +86,7 @@ static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUND
     },
 };
 
-static const struct WindowTemplate sMonSummary_StaticWindows[] =
+static const struct WindowTemplate sMonSummary_MainWindows[] =
 {
     [MON_SUMMARY_MAIN_WIN_HEADER] =
     {
@@ -254,7 +254,7 @@ static void SummarySetup_Graphics(void)
 
 static void SummarySetup_Windows(void)
 {
-    InitWindows(sMonSummary_StaticWindows);
+    InitWindows(sMonSummary_MainWindows);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
 
@@ -472,7 +472,7 @@ static u32 SummaryPage_GetDynamicWindowBaseBlock(u32 windowId)
     // add static window baseBlock
     for (u32 i = 0; i < NUM_MON_SUMMARY_MAIN_WINS; i++)
     {
-        template = sMonSummary_StaticWindows[i];
+        template = sMonSummary_MainWindows[i];
         if (template.bg == gDummyWindowTemplate.bg) break;
 
         baseBlock += template.width * template.height;
