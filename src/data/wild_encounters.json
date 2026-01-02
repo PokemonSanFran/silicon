@@ -77591,6 +77591,111 @@
                 "species": "SPECIES_YAMASK"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 38,
+                "species": "SPECIES_MISMAGIUS"
+              }
+            ]
           }
         },
         {
@@ -78025,6 +78130,111 @@
                 "min_level": 32,
                 "max_level": 35,
                 "species": "SPECIES_MISDREAVUS"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_COFAGRIGUS"
               }
             ]
           }
