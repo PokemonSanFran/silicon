@@ -75112,6 +75112,111 @@
                 "species": "SPECIES_SHUCKLE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              },
+              {
+                "min_level": 65,
+                "max_level": 68,
+                "species": "SPECIES_ARCHALUDON"
+              }
+            ]
           }
         },
         {
@@ -75651,6 +75756,111 @@
                 "min_level": 66,
                 "max_level": 67,
                 "species": "SPECIES_SHUCKLE"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_HAXORUS"
               }
             ]
           }
