@@ -78778,6 +78778,111 @@
                 "species": "SPECIES_BRONZONG"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              },
+              {
+                "min_level": 74,
+                "max_level": 77,
+                "species": "SPECIES_DUSKNOIR"
+              }
+            ]
           }
         },
         {
