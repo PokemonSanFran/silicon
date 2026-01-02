@@ -81,17 +81,27 @@ enum __attribute__((packed)) MonSummaryMainWindows
 enum __attribute__((packed)) MonSummaryInfosWindows
 {
     MON_SUMMARY_INFOS_WIN_TEST,
+
+    NUM_MON_SUMMARY_INFOS_WINDOWS
 };
 
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
     MON_SUMMARY_STATS_WIN_TEST,
+
+    NUM_MON_SUMMARY_STATS_WINDOWS
 };
 
 enum __attribute__((packed)) MonSummaryMovesWindows
 {
     MON_SUMMARY_MOVES_WIN_TEST,
+
+    NUM_MON_SUMMARY_MOVES_WINDOWS
 };
+
+STATIC_ASSERT(NUM_MON_SUMMARY_INFOS_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS, InfoPageDynamicWindowExceedsMaxNumber);
+STATIC_ASSERT(NUM_MON_SUMMARY_STATS_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS, StatPageDynamicWindowExceedsMaxNumber);
+STATIC_ASSERT(NUM_MON_SUMMARY_MOVES_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS, MovePageDynamicWindowExceedsMaxNumber);
 
 enum MonSummaryFontColors
 {
