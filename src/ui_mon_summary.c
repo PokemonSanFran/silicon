@@ -550,19 +550,12 @@ static void SummaryPage_UnloadDynamicWindows(void)
 
 static void SummaryPage_LoadTilemap(void)
 {
-    u32 slot = SummaryPage_GetPageSlot();
-    enum MonSummaryBackgrounds nextBg = MON_SUMMARY_BG_PAGE_1 + slot, prevBg = MON_SUMMARY_BG_PAGE_1 + (slot ^ 1);
+    enum MonSummaryBackgrounds nextBg = MON_SUMMARY_BG_PAGE_1;
 
-    SetBgAttribute(nextBg, BG_ATTR_PRIORITY, 1);
-    SetBgAttribute(prevBg, BG_ATTR_PRIORITY, 2);
-
-    FillBgTilemapBufferRect_Palette0(nextBg, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     CopyToBgTilemapBuffer(nextBg, SummaryPage_GetTilemap(SummaryPage_GetValue()), 0, 0);
-    SetGpuReg(slot ? REG_OFFSET_BG2HOFS : REG_OFFSET_BG1HOFS, 8);
+    SetGpuReg(REG_OFFSET_BG1HOFS, 8);
     CopyBgTilemapBufferToVram(nextBg);
 
-    ShowBg(nextBg);
-    ShowBg(prevBg);
     SummaryPage_TogglePageSlot();
 }
 
