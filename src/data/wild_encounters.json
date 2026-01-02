@@ -73925,6 +73925,111 @@
                 "species": "SPECIES_SHUCKLE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              },
+              {
+                "min_level": 72,
+                "max_level": 75,
+                "species": "SPECIES_DONPHAN"
+              }
+            ]
           }
         },
         {
