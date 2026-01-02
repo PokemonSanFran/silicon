@@ -316,6 +316,7 @@ void ShopMenu_Init(const struct ShopMenuConfigs *configs, MainCallback callback)
     memset(sShopMenuStaticDataPtr->spriteIds, SPRITE_NONE, NUM_SHOP_SPRITES);
     memset(sShopMenuStaticDataPtr->itemIconIds, SPRITE_NONE, configs->totalShownItems * configs->totalShownItemRows);
 
+    PrestoHelper_DetermineCarousel();
     ShopInventory_InitCategoryLists();
 
     SetMainCallback2(CB2_ShopSetup);
@@ -353,7 +354,6 @@ static void CB2_ShopSetup(void)
     case SHOP_SETUP_FRONT_END:
         ShopSprite_CreateGenericSprites();
         ShopHelper_UpdateFrontEnd();
-        PrestoHelper_DetermineCarousel();
         gMain.state++;
         break;
     case SHOP_SETUP_FADE:
