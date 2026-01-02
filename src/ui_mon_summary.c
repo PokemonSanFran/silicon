@@ -277,8 +277,6 @@ static void CB2_SummarySetup(void)
     switch (steps)
     {
     case MON_SUMMARY_SETUP_RESET:
-        DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
-        FillPalette(RGB_BLACK, BG_PLTT_ID(0), PLTT_SIZEOF(512));
         ResetVramOamAndBgCntRegs();
         ResetAllBgsCoordinatesAndBgCntRegs();
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
