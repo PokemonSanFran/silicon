@@ -526,6 +526,22 @@ static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16* recomme
         categoryCounts[SHOP_CATEGORY_RECOMMENDED] = numRecSelected;
     }
 }
+static u32 PrestoHelper_ProcessCategoryCounts(u32 numCategories, u16* categoryCounts)
+{
+    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
+    {
+        if (categoryCounts[categoryIndex] == 0)
+            continue;
+
+        u32 risingCategory = PrestoHelper_GetCategoryMap(categoryIndex);
+        ShopInventory_SetCategoryNumItems(categoryCounts[categoryIndex], risingCategory);
+
+        if (ShopInventory_GetCategoryNumItems(risingCategory))
+            numCategories++;
+    }
+
+    return numCategories;
+}
 
 static u32 PrestoHelper_InitItemsList(void)
 {
@@ -575,17 +591,7 @@ static u32 PrestoHelper_InitItemsList(void)
     }
     
     PrestoHelper_ProcessReccomendedItems(numCandidates,recommendedCandidates,categoryCounts);
-    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
-    {
-        if (categoryCounts[categoryIndex] == 0)
-            continue;
-
-        u32 risingCategory = PrestoHelper_GetCategoryMap(categoryIndex);
-        ShopInventory_SetCategoryNumItems(categoryCounts[categoryIndex], risingCategory);
-
-        if (ShopInventory_GetCategoryNumItems(risingCategory))
-            numCategories++;
-    }
+    return PrestoHelper_ProcessCategoryCounts(numCategories, categoryCounts);
 
     /*
     for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
@@ -593,7 +599,6 @@ static u32 PrestoHelper_InitItemsList(void)
     */
 
     //DebugPrintf("PrestoHelper_InitItemsList %d",CycleCountEnd());
-    return numCategories;
 }
 
 static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 itemId)
