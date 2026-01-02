@@ -63,6 +63,7 @@ static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(void);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
+static void SummaryPrint_HelpBar(void);
 
 // const data
 static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
@@ -97,6 +98,16 @@ static const struct WindowTemplate sMonSummary_MainWindows[] =
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 10,
+        .height = 2,
+        .paletteNum = 0,
+    },
+
+    [MON_SUMMARY_MAIN_WIN_HELP_BAR] =
+    {
+        .bg = MON_SUMMARY_BG_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 18,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 2,
         .paletteNum = 0,
     },
@@ -144,10 +155,11 @@ static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_sum
 static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/blank.bin");
 static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/pages/tiles.gbapal");
 
-static const u8 sMonSummary_FontColors[][3] =
+static const u8 sMonSummary_FontColors[NUM_MON_SUMMARY_FNTCLRS][3] =
 {
-    [MON_SUMMARY_FNTCLR_PRIMARY]   = { 0, 1, 4 },
-    [MON_SUMMARY_FNTCLR_SECONDARY] = { 0, 1, 2 },
+    [MON_SUMMARY_FNTCLR_INTERFACE] = { 0, 1, 2 },
+    [MON_SUMMARY_FNTCLR_TEXTBOX]   = { 0, 2, 0 },
+    [MON_SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
 
 // code
@@ -271,6 +283,7 @@ static void SummarySetup_Windows(void)
     }
 
     SummaryPage_LoadDynamicWindows();
+    SummaryPrint_HelpBar();
 }
 
 static void CB2_SummarySetup(void)
@@ -566,10 +579,17 @@ static void SummaryPage_Reload(void)
     SummaryPage_UnloadDynamicWindows();
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
+    SummaryPrint_HelpBar();
 }
 
 // dynamic windows handles the id on its own
 static void SummaryPrint_AddText(u32 windowId, u32 fontId, u32 x, u32 y, enum MonSummaryFontColors color, const u8 *str)
 {
     AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, sMonSummary_FontColors[color], TEXT_SKIP_DRAW, str);
+}
+
+// TODO actual helping bar
+static void SummaryPrint_HelpBar(void)
+{
+    SummaryPrint_AddText(MON_SUMMARY_MAIN_WIN_HELP_BAR, FONT_NORMAL, 10, 1, MON_SUMMARY_FNTCLR_HELP_BAR, COMPOUND_STRING("test!"));
 }

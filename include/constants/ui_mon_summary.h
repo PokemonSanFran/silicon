@@ -73,6 +73,8 @@ enum __attribute__((packed)) MonSummaryPageSlots
 enum __attribute__((packed)) MonSummaryMainWindows
 {
     MON_SUMMARY_MAIN_WIN_HEADER,
+    MON_SUMMARY_MAIN_WIN_HELP_BAR,
+
     NUM_MON_SUMMARY_MAIN_WINS,
     // the rest is dynamic
 };
@@ -105,8 +107,9 @@ STATIC_ASSERT(NUM_MON_SUMMARY_MOVES_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS,
 
 enum MonSummaryFontColors
 {
-    MON_SUMMARY_FNTCLR_PRIMARY,     // everything else w/ FONT_OUTLINED(_NARROW)
-    MON_SUMMARY_FNTCLR_SECONDARY,   // help bar
+    MON_SUMMARY_FNTCLR_INTERFACE,
+    MON_SUMMARY_FNTCLR_TEXTBOX,
+    MON_SUMMARY_FNTCLR_HELP_BAR,
 
     NUM_MON_SUMMARY_FNTCLRS
 };
