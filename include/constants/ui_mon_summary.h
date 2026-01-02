@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_UI_MON_SUMMARY_H
 #define GUARD_CONSTANTS_UI_MON_SUMMARY_H
 
+#include "task.h"
+
 enum __attribute__((packed)) MonSummaryModes
 {
     MON_SUMMARY_MODE_DEFAULT,
@@ -49,10 +51,9 @@ enum MonSummaryBackgrounds
     MON_SUMMARY_BG_TEXT,
 
     // switch between pages on each horizontal dpad presses.
+    // there is no animation atm but it is meant to futureproof.
     MON_SUMMARY_BG_PAGE_1,
     MON_SUMMARY_BG_PAGE_2,
-
-    MON_SUMMARY_BG_STATIC, // mostly help bar and background
 
     NUM_MON_SUMMARY_BACKGROUNDS
 };
@@ -66,29 +67,27 @@ enum __attribute__((packed)) MonSummaryPageSlots
 };
 
 #define TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS 5
-#define MON_SUMMARY_DYNAMIC_WIN_DUMMY { .windowId = WINDOW_NONE }
+#define MON_SUMMARY_DYNAMIC_WIN_DUMMY { .id = WINDOW_NONE }
 
 enum __attribute__((packed)) MonSummaryMainWindowIds
 {
     MON_SUMMARY_MAIN_WIN_HEADER,  // appears regardless of which page
-    MON_SUMMARY_MAIN_WIN_DYNAMIC, // content is page-dependent
-
-    NUM_MON_SUMMARY_WINS = MON_SUMMARY_MAIN_WIN_DYNAMIC + TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS,
-    NUM_MON_SUMMARY_MAIN_WINS = MON_SUMMARY_MAIN_WIN_DYNAMIC,
+    NUM_MON_SUMMARY_MAIN_WINS,
+    // the rest is dynamic
 };
 
 // dynamic windows
-enum MonSummaryInfosWindowIds
+enum __attribute__((packed)) MonSummaryInfosWindowIds
 {
     MON_SUMMARY_INFOS_WIN_TEST,
 };
 
-enum MonSummaryStatsWindowIds
+enum __attribute__((packed)) MonSummaryStatsWindowIds
 {
     MON_SUMMARY_STATS_WIN_TEST,
 };
 
-enum MonSummaryMovesWindowIds
+enum __attribute__((packed)) MonSummaryMovesWindowIds
 {
     MON_SUMMARY_MOVES_WIN_TEST,
 };
@@ -101,12 +100,18 @@ enum MonSummaryFontColorIds
     NUM_MON_SUMMARY_FNTCLRS
 };
 
+// task/sprite data
+#define tSpecificInputPress     data[15]
+
+// structs
 struct MonSummaryResources
 {
     MainCallback savedCallback;
     u8 *tilemapBufs[NUM_MON_SUMMARY_BG_PAGE_SLOTS];
+    u8 windowIds[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
 
     bool32 pageSlot:1; // only referred for tilemapBufs shenanigans
+    u32 pad:31;
 
     // set when opening, usually help determines where to get a mon info.
     enum MonSummaryModes mode;
@@ -114,6 +119,21 @@ struct MonSummaryResources
     // set when pressing horizontal dpads, determines what information to
     // load that the player wants.
     enum MonSummaryPages page;
+};
+
+struct MonSummaryDynamicWindow
+{
+    u8 id;
+    u8 left, top;
+    u8 width, height;
+};
+
+// not to be confused with infos page!
+struct MonSummaryPageInfo
+{
+    struct MonSummaryDynamicWindow windows[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
+    const u32 *tilemap;
+    TaskFunc input;
 };
 
 #endif // GUARD_CONSTANTS_UI_MON_SUMMARY_H

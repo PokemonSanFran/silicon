@@ -39,13 +39,27 @@ static void SummarySetup_Windows(void);
 static void CB2_SummarySetup(void);
 static void Task_SummarySetup_WaitFade(u8);
 
+static void SummaryInput_RunSpecificHandler(u8);
+static void Task_SummaryInput_Handle(u8);
+static void Task_SummaryInput_HandleInfos(u8);
+
 static void SummaryPage_SetValue(enum MonSummaryPages);
 static enum MonSummaryPages SummaryPage_GetValue(void);
+static u32 SummaryPage_SanitizeWindowId(u32);
+static void SummaryPage_SetWindowId(u32, u32);
+static u8 SummaryPage_GetWindowId(u32);
+static void SummaryPage_TogglePageSlot(void);
+static u32 SummaryPage_GetPageSlot(void);
+static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages);
+static struct WindowTemplate SummaryPage_FillDynamicWindowTemplate(enum MonSummaryPages, u32);
+static u32 SummaryPage_GetDynamicWindowBaseBlock(u32);
+static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
+static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
+static void SummaryPage_LoadDynamicWindows(void);
 static void SummaryPage_LoadTilemap(void);
-
-static void PageInput_RunSpecificHandler(u8);
-static void Task_PageInput_Handle(u8);
-static void Task_PageInput_HandleInfos(u8);
+static void SummaryPage_Reload(void);
+static void SummaryPage_UpdateValue(s32);
+static bool32 SummaryPage_IsInputAdditive(s32);
 
 // const data
 static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
@@ -70,12 +84,6 @@ static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUND
         .screenSize = 1,
         .priority = 1
     },
-    {
-        .bg = MON_SUMMARY_BG_STATIC,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 30,
-        .priority = 3
-    },
 };
 
 static const struct WindowTemplate sMonSummary_StaticWindows[] =
@@ -96,58 +104,48 @@ static const struct WindowTemplate sMonSummary_StaticWindows[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct {
-    u8 windowId;
-    u8 left;
-    u8 top;
-    u8 width;
-    u8 height;
-} sMonSummary_DynamicWindows[NUM_MON_SUMMARY_PAGES][TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS] =
+static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAGES] =
 {
     [MON_SUMMARY_PAGE_INFOS] =
     {
+        .windows =
         {
-            .windowId = MON_SUMMARY_INFOS_WIN_TEST,
-            .left = 15, .top = 11,
-            .width = 14, .height = 2
+            {
+                .id = MON_SUMMARY_INFOS_WIN_TEST,
+                .left = 15, .top = 11,
+                .width = 14, .height = 2
+            },
+            MON_SUMMARY_DYNAMIC_WIN_DUMMY
         },
-        MON_SUMMARY_DYNAMIC_WIN_DUMMY
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
+        .input = Task_SummaryInput_HandleInfos
     },
-    // TODO reference needed windows from actual assets on gdrive
     [MON_SUMMARY_PAGE_STATS] =
     {
-        MON_SUMMARY_DYNAMIC_WIN_DUMMY
+        .windows =
+        {
+            MON_SUMMARY_DYNAMIC_WIN_DUMMY
+        },
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
     },
     [MON_SUMMARY_PAGE_MOVES] =
     {
-        MON_SUMMARY_DYNAMIC_WIN_DUMMY
+        .windows =
+        {
+            MON_SUMMARY_DYNAMIC_WIN_DUMMY
+        },
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),
     },
 };
 
-// MUDSKIP TODO use actual assets from gdrive
-static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_summary/tiles.4bpp.smol");
-static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_summary/bg.bin.smolTM");
-static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/tiles.gbapal");
-
-static const u32 *const sMonSummary_TilemapByPages[NUM_MON_SUMMARY_PAGES] =
-{
-    [MON_SUMMARY_PAGE_INFOS] = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/infos.bin.smolTM"),
-    /*
-    [MON_SUMMARY_PAGE_STATS] = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/stats.bin.smolTM"),
-    [MON_SUMMARY_PAGE_MOVES] = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/moves.bin.smolTM"),
-    */
-};
+static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/tiles.4bpp.smol");
+static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/blank.bin");
+static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/pages/tiles.gbapal");
 
 static const u8 sMonSummaryWindowFontColors[][3] =
 {
     [MON_SUMMARY_FNTCLR_PRIMARY]   = { 0, 1, 4 },
     [MON_SUMMARY_FNTCLR_SECONDARY] = { 0, 1, 2 },
-};
-
-static const TaskFunc sMonSummary_InputByPages[NUM_MON_SUMMARY_PAGES] =
-{
-    [MON_SUMMARY_PAGE_INFOS] = Task_PageInput_HandleInfos
-    // TODO other inputs
 };
 
 // code
@@ -171,6 +169,7 @@ static void MonSummary_Init(enum MonSummaryModes mode, MainCallback callback)
     sMonSummaryResourcesPtr->savedCallback = callback;
     sMonSummaryResourcesPtr->mode = mode;
     SummaryPage_SetValue(MON_SUMMARY_PAGE_INFOS);
+    memset(sMonSummaryResourcesPtr->windowIds, WINDOW_NONE, ARRAY_COUNT(sMonSummaryResourcesPtr->windowIds));
 
     SetMainCallback2(CB2_SummarySetup);
 }
@@ -244,12 +243,10 @@ static void SummarySetup_Backgrounds(void)
 
 static void SummarySetup_Graphics(void)
 {
+    FreeTempTileDataBuffersIfPossible();
     ResetTempTileDataBuffers();
-    DecompressAndCopyTileDataToVram(MON_SUMMARY_BG_STATIC, sMonSummary_MainTiles, 0, 0, 0);
 
-    void *addr = (void *)BG_SCREEN_ADDR(GetBgAttribute(MON_SUMMARY_BG_STATIC, BG_ATTR_MAPBASEINDEX));
-    DecompressDataWithHeaderVram(sMonSummary_MainTilemap, addr);
-
+    DecompressAndCopyTileDataToVram(MON_SUMMARY_BG_PAGE_1, sMonSummary_MainTiles, 0, 0, 0);
     LoadPalette(sMonSummary_MainPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 
     SummaryPage_LoadTilemap();
@@ -264,6 +261,8 @@ static void SummarySetup_Windows(void)
     FillWindowPixelBuffer(MON_SUMMARY_MAIN_WIN_HEADER, PIXEL_FILL(0));
     PutWindowTilemap(MON_SUMMARY_MAIN_WIN_HEADER);
     CopyWindowToVram(MON_SUMMARY_MAIN_WIN_HEADER, COPYWIN_FULL);
+
+    SummaryPage_LoadDynamicWindows();
 }
 
 static void CB2_SummarySetup(void)
@@ -317,7 +316,61 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_PageInput_Handle;
+        gTasks[taskId].func = Task_SummaryInput_Handle;
+    }
+}
+
+// page-specific _or_ mode-specific (e.g. MON_SUMMARY_MODE_IV_TRAIN)
+// TODO mode-specific handler
+static void SummaryInput_RunSpecificHandler(u8 taskId)
+{
+    TaskFunc func = SummaryPage_GetInputFunc(SummaryPage_GetValue());
+
+    func(taskId);
+}
+
+static void Task_SummaryInput_Handle(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    SummaryInput_RunSpecificHandler(taskId);
+    if (tSpecificInputPress)
+    {
+        tSpecificInputPress = FALSE;
+        return;
+    }
+
+    if (JOY_NEW(DPAD_LEFT | L_BUTTON))
+    {
+        SummaryPage_UpdateValue(-1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_RIGHT | R_BUTTON))
+    {
+        SummaryPage_UpdateValue(1);
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_PC_OFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+        return;
+    }
+}
+
+static void Task_SummaryInput_HandleInfos(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        DebugPrintf("current page: %d", SummaryPage_GetValue());
+        tSpecificInputPress = TRUE;
+        return;
     }
 }
 
@@ -331,9 +384,24 @@ static enum MonSummaryPages SummaryPage_GetValue(void)
     return sMonSummaryResourcesPtr->page;
 }
 
-static void SummaryPage_SetPageSlot(u32 slot)
+static u32 SummaryPage_SanitizeWindowId(u32 id)
 {
-    sMonSummaryResourcesPtr->pageSlot = slot;
+    return id % TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS;
+}
+
+static void SummaryPage_SetWindowId(u32 id, u32 value)
+{
+    sMonSummaryResourcesPtr->windowIds[SummaryPage_SanitizeWindowId(id)] = value;
+}
+
+static u8 SummaryPage_GetWindowId(u32 id)
+{
+    return sMonSummaryResourcesPtr->windowIds[SummaryPage_SanitizeWindowId(id)];
+}
+
+static void SummaryPage_TogglePageSlot(void)
+{
+    sMonSummaryResourcesPtr->pageSlot ^= 1;
 }
 
 static u32 SummaryPage_GetPageSlot(void)
@@ -341,56 +409,161 @@ static u32 SummaryPage_GetPageSlot(void)
     return sMonSummaryResourcesPtr->pageSlot;
 }
 
+static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages page)
+{
+    if (page >= NUM_MON_SUMMARY_PAGES) return NULL;
+
+    return &sMonSummary_PagesInfo[page];
+}
+
+// translates .window struct onto a proper WindowTemplate
+// since every page has its own enums, we'll use u32 instead.
+// unless there's a better way to do this other than union.
+static struct WindowTemplate SummaryPage_FillDynamicWindowTemplate(enum MonSummaryPages page, u32 windowId)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+    windowId = SummaryPage_SanitizeWindowId(windowId);
+
+    if (!info
+     || info->windows[windowId].id == WINDOW_NONE
+     || info->windows[windowId].id != windowId)
+    {
+        return (struct WindowTemplate)DUMMY_WIN_TEMPLATE;
+    }
+
+    const struct MonSummaryDynamicWindow *window = &info->windows[windowId];
+
+    return (struct WindowTemplate){
+        .bg = MON_SUMMARY_BG_TEXT,
+        .tilemapLeft = window->left, .tilemapTop = window->top,
+        .width = window->width, .height = window->width,
+        .paletteNum = 0,
+        .baseBlock = SummaryPage_GetDynamicWindowBaseBlock(windowId)
+    };
+}
+
+static u32 SummaryPage_GetDynamicWindowBaseBlock(u32 windowId)
+{
+    windowId = SummaryPage_SanitizeWindowId(windowId);
+    u32 baseBlock = 1;
+    struct WindowTemplate template;
+
+    // add static window baseBlock
+    for (u32 i = 0; i < NUM_MON_SUMMARY_MAIN_WINS; i++)
+    {
+        template = sMonSummary_StaticWindows[i];
+        if (template.bg == gDummyWindowTemplate.bg) break;
+
+        baseBlock += template.width * template.height;
+    }
+
+    // if this is the very first window, just return default baseBlock
+    if (!windowId) return baseBlock;
+
+    // add dynamic window baseBlock
+    for (u32 i = 0; i < windowId; i++)
+    {
+        template = SummaryPage_FillDynamicWindowTemplate(SummaryPage_GetValue(), i);
+        if (template.bg == gDummyWindowTemplate.bg) break;
+
+        baseBlock += template.width * template.height;
+    }
+
+    return baseBlock;
+}
+
+static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages page)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+
+    if (!info || !info->tilemap) return sMonSummary_MainTilemap;
+
+    return info->tilemap;
+}
+
+static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages page)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+
+    if (!info || !info->input) return TaskDummy;
+
+    return info->input;
+}
+
+static void SummaryPage_LoadDynamicWindows(void)
+{
+    for (u32 i = 0; i < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS; i++)
+    {
+        struct WindowTemplate template = SummaryPage_FillDynamicWindowTemplate(SummaryPage_GetValue(), i);
+        if (template.bg == 0xFF) break;
+
+        SummaryPage_SetWindowId(i, AddWindow(&template));
+        u32 windowId = SummaryPage_GetWindowId(i);
+        if (windowId == WINDOW_NONE) break;
+
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
+    }
+}
+
+static void SummaryPage_UnloadDynamicWindows(void)
+{
+    for (u32 i = 0; i < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS; i++)
+    {
+        u32 windowId = SummaryPage_GetWindowId(i);
+        if (windowId == WINDOW_NONE) break;
+
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        ClearWindowTilemap(windowId);
+        CopyWindowToVram(windowId, COPYWIN_GFX);
+        RemoveWindow(windowId);
+        SummaryPage_SetWindowId(i, WINDOW_NONE);
+    }
+}
+
 static void SummaryPage_LoadTilemap(void)
 {
     u32 slot = SummaryPage_GetPageSlot();
-    enum MonSummaryBackgrounds bg = MON_SUMMARY_BG_PAGE_1 + slot;
-    u32 reg = slot ? REG_OFFSET_BG2HOFS : REG_OFFSET_BG1HOFS;
+    enum MonSummaryBackgrounds nextBg = MON_SUMMARY_BG_PAGE_1 + slot, prevBg = MON_SUMMARY_BG_PAGE_1 + (slot ^ 1);
 
-    if (gMain.state)
-    {
-        SetGpuReg(reg, -8);
-    }
-    else
-    {
-        SetGpuReg(reg, DISPLAY_WIDTH);
-    }
+    SetBgAttribute(nextBg, BG_ATTR_PRIORITY, 1);
+    SetBgAttribute(prevBg, BG_ATTR_PRIORITY, 2);
 
-    FillBgTilemapBufferRect_Palette0(bg, 0, 0, 0, DISPLAY_TILE_WIDTH * 2, DISPLAY_TILE_HEIGHT);
-    CopyToBgTilemapBuffer(bg, sMonSummary_TilemapByPages[SummaryPage_GetValue()], 0, 0);
-    CopyBgTilemapBufferToVram(bg);
+    FillBgTilemapBufferRect_Palette0(nextBg, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+    CopyToBgTilemapBuffer(nextBg, SummaryPage_GetTilemap(SummaryPage_GetValue()), 0, 0);
+    SetGpuReg(slot ? REG_OFFSET_BG2HOFS : REG_OFFSET_BG1HOFS, 8);
+    CopyBgTilemapBufferToVram(nextBg);
 
-    SummaryPage_SetPageSlot(slot ^ 1);
+    ShowBg(nextBg);
+    ShowBg(prevBg);
+    SummaryPage_TogglePageSlot();
 }
 
-// page-specific _or_ mode-specific (e.g. MON_SUMMARY_MODE_IV_TRAIN)
-static void PageInput_RunSpecificHandler(u8 taskId)
+static void SummaryPage_Reload(void)
 {
-    TaskFunc func = sMonSummary_InputByPages[SummaryPage_GetValue()];
-
-    if (func)
-    {
-        func(taskId);
-    }
+    SummaryPage_UnloadDynamicWindows();
+    SummaryPage_LoadTilemap();
+    SummaryPage_LoadDynamicWindows();
 }
 
-static void Task_PageInput_Handle(u8 taskId)
+static void SummaryPage_UpdateValue(s32 delta)
 {
-    PageInput_RunSpecificHandler(taskId);
+    enum MonSummaryPages page = SummaryPage_GetValue();
+    bool32 additiveDelta = SummaryPage_IsInputAdditive(delta);
+    u32 count = NUM_MON_SUMMARY_PAGES - 1;
 
-    if (JOY_NEW(B_BUTTON))
+    if ((!page && !additiveDelta) || (page == count && additiveDelta))
     {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+        return;
     }
+
+    PlaySE(SE_CLICK);
+    SummaryPage_SetValue(page + delta);
+    SummaryPage_Reload();
 }
 
-static void Task_PageInput_HandleInfos(u8 taskId)
+static bool32 SummaryPage_IsInputAdditive(s32 delta)
 {
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        DebugPrintf("current page: %d", SummaryPage_GetValue());
-    }
+    return delta == 1;
 }
