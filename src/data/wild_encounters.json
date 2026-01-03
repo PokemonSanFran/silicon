@@ -25517,6 +25517,111 @@
                 "species": "SPECIES_DRAGONITE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              },
+              {
+                "min_level": 14,
+                "max_level": 18,
+                "species": "SPECIES_PAWMI"
+              }
+            ]
           }
         },
         {
