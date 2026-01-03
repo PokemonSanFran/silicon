@@ -47,6 +47,9 @@ static void SummaryInput_RunSpecificHandler(u8);
 static void Task_SummaryInput_Handle(u8);
 static void Task_SummaryInput_HandleInfos(u8);
 
+static void SummaryMode_SetValue(enum MonSummaryModes);
+static enum MonSummaryModes SummaryMode_GetValue(void);
+
 static void SummaryPage_SetValue(enum MonSummaryPages);
 static enum MonSummaryPages SummaryPage_GetValue(void);
 static u32 SummaryPage_SanitizeWindowId(u32);
@@ -189,7 +192,7 @@ static void MonSummary_Init(enum MonSummaryModes mode, MainCallback callback)
     }
 
     sMonSummaryResourcesPtr->savedCallback = callback;
-    sMonSummaryResourcesPtr->mode = mode;
+    SummaryMode_SetValue(mode);
     SummaryPage_SetValue(MON_SUMMARY_PAGE_INFOS);
     memset(sMonSummaryResourcesPtr->windowIds, WINDOW_NONE, ARRAY_COUNT(sMonSummaryResourcesPtr->windowIds));
 
@@ -424,6 +427,16 @@ static void Task_SummaryInput_HandleInfos(u8 taskId)
         tSpecificInputPress = TRUE;
         return;
     }
+}
+
+static void SummaryMode_SetValue(enum MonSummaryModes mode)
+{
+    sMonSummaryResourcesPtr->mode = mode;
+}
+
+static enum MonSummaryModes SummaryMode_GetValue(void)
+{
+    return sMonSummaryResourcesPtr->mode;
 }
 
 static void SummaryPage_SetValue(enum MonSummaryPages page)
