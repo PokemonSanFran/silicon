@@ -3,6 +3,12 @@
 
 #include "task.h"
 
+// macros
+#ifndef TILE_TO_PIXELS
+#define TILE_TO_PIXELS(t)   ((t) ? (t * 8) : 0)
+#define PIXELS_TO_TILES(p)  ((p) ? (p / 8) : 0)
+#endif
+
 enum __attribute__((packed)) MonSummaryModes
 {
     MON_SUMMARY_MODE_DEFAULT,
