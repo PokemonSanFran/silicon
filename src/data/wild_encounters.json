@@ -26268,6 +26268,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CENTISKORCH"
+              }
+            ]
           }
         },
         {
