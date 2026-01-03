@@ -290,6 +290,8 @@ static void SummarySetup_Windows(void)
 
     SummaryPage_LoadDynamicWindows();
     SummaryPrint_HelpBar();
+
+    ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
 }
 
 static void CB2_SummarySetup(void)
@@ -592,7 +594,15 @@ static void SummaryPage_Reload(void)
     SummaryPage_UnloadDynamicWindows();
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
+
+    for (u32 i = 0; i < ARRAY_COUNT(sMonSummary_MainWindows); i++)
+    {
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+    }
+
     SummaryPrint_HelpBar();
+
+    ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
 }
 
 // dynamic windows handles the id on its own
@@ -616,4 +626,5 @@ static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32 windo
 static void SummaryPrint_HelpBar(void)
 {
     SummaryPrint_AddText(MON_SUMMARY_MAIN_WIN_HELP_BAR, FONT_NORMAL, 10, 1, MON_SUMMARY_FNTCLR_HELP_BAR, COMPOUND_STRING("test!"));
+    CopyWindowToVram(MON_SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
 }
