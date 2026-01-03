@@ -52711,6 +52711,111 @@
                 "species": "SPECIES_DRAGONITE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 31,
+                "species": "SPECIES_DOTTLER"
+              }
+            ]
           }
         },
         {
