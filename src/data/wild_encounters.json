@@ -72625,6 +72625,111 @@
                 "species": "SPECIES_DRAGONITE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_SIGILYPH"
+              }
+            ]
           }
         },
         {
