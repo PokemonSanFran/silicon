@@ -29,7 +29,6 @@
 static EWRAM_DATA struct MonSummaryResources *sMonSummaryResourcesPtr = NULL;
 
 // declarations
-static void MonSummary_Init(enum MonSummaryModes, MainCallback);
 static void MonSummary_FreeResources(void);
 static void CB2_MonSummary(void);
 static void VBlankCB_MonSummary(void);
@@ -42,6 +41,10 @@ static void CB2_SummarySetup(void);
 static void Task_SummarySetup_WaitFade(u8);
 
 static void SummaryInput_UpdatePage(s32);
+static void SummaryInput_SetIndex(u32);
+static u32 SummaryInput_GetIndex(void);
+static void SummaryInput_SetTotalIndex(u32);
+static u32 SummaryInput_GetTotalIndex(void);
 static bool32 SummaryInput_IsInputAdditive(s32);
 static void SummaryInput_RunSpecificHandler(u8);
 static void Task_SummaryInput_Handle(u8);
@@ -176,24 +179,47 @@ static const u8 sMonSummary_FontColors[NUM_MON_SUMMARY_FNTCLRS][3] =
 // code
 void MonSummary_OpenDefault(void)
 {
-    MonSummary_Init(MON_SUMMARY_MODE_DEFAULT, CB2_ReturnToFieldContinueScript);
+    MonSummary_Init(
+        &(const struct MonSummaryConfigs){
+            .mode = MON_SUMMARY_MODE_DEFAULT,
+            .mons = gPlayerParty,
+            .currIdx = 0, .totalIdx = gPlayerPartyCount - 1,
+            .arg.value = 0
+        },
+        CB2_ReturnToFieldContinueScript);
 }
 
-static void MonSummary_Init(enum MonSummaryModes mode, MainCallback callback)
+void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callback)
 {
     sMonSummaryResourcesPtr = AllocZeroed(sizeof(struct MonSummaryResources));
 
     if (!sMonSummaryResourcesPtr
-     || mode >= NUM_MON_SUMMARY_MODES)
+     || !config
+     || config->mode >= NUM_MON_SUMMARY_MODES)
     {
         TRY_FREE_AND_SET_NULL(sMonSummaryResourcesPtr);
         SetMainCallback2(callback);
         return;
     }
 
+    enum MonSummaryPages page = MON_SUMMARY_PAGE_INFOS;
+
+    switch (config->mode)
+    {
+    default:
+        break;
+    case MON_SUMMARY_MODE_BOX:
+        sMonSummaryResourcesPtr->useBoxMon = TRUE;
+        break;
+    }
+
     sMonSummaryResourcesPtr->savedCallback = callback;
-    SummaryMode_SetValue(mode);
-    SummaryPage_SetValue(MON_SUMMARY_PAGE_INFOS);
+    sMonSummaryResourcesPtr->list.mons = config->mons;
+
+    SummaryInput_SetIndex(config->currIdx);
+    SummaryInput_SetTotalIndex(config->totalIdx);
+    SummaryPage_SetValue(page);
+    SummaryMode_SetValue(config->mode);
     memset(sMonSummaryResourcesPtr->windowIds, WINDOW_NONE, ARRAY_COUNT(sMonSummaryResourcesPtr->windowIds));
 
     SetMainCallback2(CB2_SummarySetup);
@@ -368,6 +394,26 @@ static void SummaryInput_UpdatePage(s32 delta)
     PlaySE(SE_CLICK);
     SummaryPage_SetValue(page + delta);
     SummaryPage_Reload();
+}
+
+static void SummaryInput_SetIndex(u32 index)
+{
+    sMonSummaryResourcesPtr->currIdx = index;
+}
+
+static u32 SummaryInput_GetIndex(void)
+{
+    return sMonSummaryResourcesPtr->currIdx;
+}
+
+static void SummaryInput_SetTotalIndex(u32 index)
+{
+    sMonSummaryResourcesPtr->totalIdx = index;
+}
+
+static u32 SummaryInput_GetTotalIndex(void)
+{
+    return sMonSummaryResourcesPtr->totalIdx;
 }
 
 static bool32 SummaryInput_IsInputAdditive(s32 delta)

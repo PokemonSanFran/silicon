@@ -2,22 +2,13 @@
 #define GUARD_CONSTANTS_UI_MON_SUMMARY_H
 
 #include "task.h"
+#include "ui_mon_summary.h"
 
 // macros
 #ifndef TILE_TO_PIXELS
 #define TILE_TO_PIXELS(t)   ((t) ? (t * 8) : 0)
 #define PIXELS_TO_TILES(p)  ((p) ? (p / 8) : 0)
 #endif
-
-enum __attribute__((packed)) MonSummaryModes
-{
-    MON_SUMMARY_MODE_DEFAULT,
-    MON_SUMMARY_MODE_BOX,
-    MON_SUMMARY_MODE_BATTLE,
-    MON_SUMMARY_MODE_IV_TRAIN,
-
-    NUM_MON_SUMMARY_MODES
-};
 
 enum __attribute__((packed)) MonSummaryPages
 {
@@ -131,7 +122,10 @@ struct MonSummaryResources
     u8 windowIds[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
 
     bool32 pageSlot:1; // only referred for tilemapBufs shenanigans
-    u32 pad:31;
+    u32 currIdx:8; // also used as the vertical "cursor" for switching between each available mon(s)
+    u32 totalIdx:8;
+    u32 useBoxMon:1;
+    u32 pad:14;
 
     // set when opening, usually help determines where to get a mon info.
     enum MonSummaryModes mode;
@@ -139,6 +133,13 @@ struct MonSummaryResources
     // set when pressing horizontal dpads, determines what information to
     // load that the player wants.
     enum MonSummaryPages page;
+
+    union {
+        struct Pokemon *mons;
+        struct BoxPokemon *boxMons;
+    } list;
+    struct Pokemon *mon;
+    struct MonSummary summary;
 };
 
 struct MonSummaryDynamicWindow
