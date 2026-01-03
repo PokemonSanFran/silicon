@@ -48,7 +48,6 @@ static u32 SummaryInput_GetIndex(void);
 static void SummaryInput_SetTotalIndex(u32);
 static u32 SummaryInput_GetTotalIndex(void);
 static bool32 SummaryInput_IsInputAdditive(s32);
-static void Task_SummaryInput_DefaultInput(u8);
 static void Task_SummaryInput_InfosInput(u8);
 
 static void SummaryMon_SetStruct(void);
@@ -57,6 +56,8 @@ static void SummaryMon_CopyCurrentRawMon(void);
 
 static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
+static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
+static void Task_SummaryMode_DefaultInput(u8);
 
 static void SummaryPage_SetValue(enum MonSummaryPages);
 static enum MonSummaryPages SummaryPage_GetValue(void);
@@ -130,6 +131,11 @@ static const struct WindowTemplate sMonSummary_MainWindows[] =
     // MON_SUMMARY_MAIN_WIN_DYNAMIC uses AddWindow
 
     DUMMY_WIN_TEMPLATE
+};
+
+static const TaskFunc sSummaryMode_InputFuncs[NUM_MON_SUMMARY_MODES] =
+{
+    [MON_SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
 };
 
 static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAGES] =
@@ -384,7 +390,7 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_SummaryInput_DefaultInput;
+        gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
     }
 }
 
@@ -453,7 +459,7 @@ static bool32 SummaryInput_IsInputAdditive(s32 delta)
     return delta == 1;
 }
 
-static void Task_SummaryInput_DefaultInput(u8 taskId)
+static void Task_SummaryMode_DefaultInput(u8 taskId)
 {
     if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
@@ -507,7 +513,7 @@ static void Task_SummaryInput_InfosInput(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        gTasks[taskId].func = Task_SummaryInput_DefaultInput;
+        gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
         return;
     }
 }
@@ -607,6 +613,14 @@ static void SummaryMode_SetValue(enum MonSummaryModes mode)
 static enum MonSummaryModes SummaryMode_GetValue(void)
 {
     return sMonSummaryResourcesPtr->mode;
+}
+
+static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes mode)
+{
+    TaskFunc func = sSummaryMode_InputFuncs[mode];
+    if (!func) return TaskDummy;
+
+    return func;
 }
 
 static void SummaryPage_SetValue(enum MonSummaryPages page)
