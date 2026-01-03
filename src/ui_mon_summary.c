@@ -64,6 +64,7 @@ static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(void);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
+static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
 static void SummaryPrint_HelpBar(void);
 
 // const data
@@ -283,7 +284,8 @@ static void SummarySetup_Windows(void)
         PutWindowTilemap(i);
         CopyWindowToVram(i, COPYWIN_FULL);
 
-        baseBlock += sMonSummary_MainWindows[i].width * sMonSummary_MainWindows[i].height;
+        const struct WindowTemplate *template = SummaryPrint_GetMainWindowTemplate(i);
+        baseBlock += template->width * template->height;
     }
 
     SummaryPage_LoadDynamicWindows();
@@ -498,15 +500,14 @@ static u32 SummaryPage_GetDynamicWindowBaseBlock(u32 windowId)
 {
     windowId = SummaryPage_SanitizeWindowId(windowId);
     u32 baseBlock = 1;
-    struct WindowTemplate template;
 
     // add static window baseBlock
     for (u32 i = 0; i < NUM_MON_SUMMARY_MAIN_WINS; i++)
     {
-        template = sMonSummary_MainWindows[i];
-        if (template.bg == gDummyWindowTemplate.bg) break;
+        const struct WindowTemplate *template = SummaryPrint_GetMainWindowTemplate(i);
+        if (template->bg == gDummyWindowTemplate.bg) break;
 
-        baseBlock += template.width * template.height;
+        baseBlock += template->width * template->height;
     }
 
     // if this is the very first window, just return default baseBlock
@@ -515,7 +516,7 @@ static u32 SummaryPage_GetDynamicWindowBaseBlock(u32 windowId)
     // add dynamic window baseBlock
     for (u32 i = 0; i < windowId; i++)
     {
-        template = SummaryPage_FillDynamicWindowTemplate(SummaryPage_GetValue(), i);
+        struct WindowTemplate template = SummaryPage_FillDynamicWindowTemplate(SummaryPage_GetValue(), i);
         if (template.bg == gDummyWindowTemplate.bg) break;
 
         baseBlock += template.width * template.height;
@@ -547,7 +548,7 @@ static void SummaryPage_LoadDynamicWindows(void)
     for (u32 i = 0; i < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS; i++)
     {
         struct WindowTemplate template = SummaryPage_FillDynamicWindowTemplate(SummaryPage_GetValue(), i);
-        if (template.bg == 0xFF) break;
+        if (template.bg == gDummyWindowTemplate.bg) break;
 
         SummaryPage_SetWindowId(i, AddWindow(&template));
         u32 windowId = SummaryPage_GetWindowId(i);
@@ -598,6 +599,17 @@ static void SummaryPage_Reload(void)
 static void SummaryPrint_AddText(u32 windowId, u32 fontId, u32 x, u32 y, enum MonSummaryFontColors color, const u8 *str)
 {
     AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, sMonSummary_FontColors[color], TEXT_SKIP_DRAW, str);
+}
+
+static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32 windowId)
+{
+    if (windowId >= ARRAY_COUNT(sMonSummary_MainWindows)
+     || windowId >= NUM_MON_SUMMARY_MAIN_WINS)
+    {
+        return &gDummyWindowTemplate;
+    }
+
+    return &sMonSummary_MainWindows[windowId];
 }
 
 // TODO actual helping bar
