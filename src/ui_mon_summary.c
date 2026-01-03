@@ -365,8 +365,8 @@ static void CB2_SummarySetup(void)
         SetMainCallback2(CB2_MonSummary);
         return;
     default:
-        DebugPrintf("WARNING infinite loop at: %d", steps);
-        return;
+        DebugPrintf("WARNING unused step at: %d", steps);
+        break;
     }
 
     gMain.state++;
