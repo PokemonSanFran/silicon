@@ -66290,6 +66290,111 @@
                 "species": "SPECIES_DRAGONITE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_THIEVUL"
+              }
+            ]
           }
         },
         {
