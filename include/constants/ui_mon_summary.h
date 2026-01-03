@@ -36,6 +36,7 @@ enum __attribute__((packed)) MonSummaryMovesSubMode
 enum MonSummarySetupSteps
 {
     MON_SUMMARY_SETUP_RESET,
+    MON_SUMMARY_SETUP_MONDATA,
     MON_SUMMARY_SETUP_BACKGROUNDS,
     MON_SUMMARY_SETUP_GRAPHICS,
     MON_SUMMARY_SETUP_WINDOWS,
@@ -115,6 +116,61 @@ enum MonSummaryFontColors
 #define tSpecificInputPress     data[15]
 
 // structs
+
+// contains MonData of the current pokemon (list.mons/boxMons[currId])
+// that are often needed for the interface, to avoid too many GetMonData
+struct MonSummary
+{
+    u16 species;
+    u16 species2;
+    u8 isEgg:1;
+    u8 isShiny:1;
+    u8 padding:6;
+    u8 level;
+    u8 ribbonCount;
+    u8 ailment;
+    u8 abilityNum;
+    metloc_u8_t metLocation;
+    u8 metLevel;
+    u8 metGame;
+    u32 pid;
+    u32 exp;
+    u16 moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
+    u16 currentHP;
+    u16 maxHP;
+    u16 atk;
+    u16 def;
+    u16 spAtk;
+    u16 spDef;
+    u16 spd;
+    u16 item;
+    u16 friendship;
+    u8 trainerGender;
+    u8 nature;
+    u8 ppBonuses;
+    u8 sanity;
+    u8 trainerName[17];
+    u32 trainerID;
+    enum Type teraType;
+    u8 mintNature;
+
+    u32 hpIVs:5;
+    u32 atkIVs:5;
+    u32 defIVs:5;
+    u32 spAtkIVs:5;
+    u32 spDefIVs:5;
+    u32 spdIVs:5;
+    u32 pad2:2;
+
+    u8 hpEVs;
+    u8 atkEVs;
+    u8 defEVs;
+    u8 spAtkEVs;
+    u8 spDefEVs;
+    u8 spdEVs;
+};
+
 struct MonSummaryResources
 {
     MainCallback savedCallback;

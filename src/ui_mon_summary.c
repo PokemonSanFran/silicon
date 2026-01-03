@@ -20,6 +20,7 @@
 #include "data.h"
 #include "pokedex.h"
 #include "strings.h"
+#include "party_menu.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -41,6 +42,7 @@ static void CB2_SummarySetup(void);
 static void Task_SummarySetup_WaitFade(u8);
 
 static void SummaryInput_UpdatePage(s32);
+static void SummaryInput_UpdateMon(s32);
 static void SummaryInput_SetIndex(u32);
 static u32 SummaryInput_GetIndex(void);
 static void SummaryInput_SetTotalIndex(u32);
@@ -49,6 +51,10 @@ static bool32 SummaryInput_IsInputAdditive(s32);
 static void SummaryInput_RunSpecificHandler(u8);
 static void Task_SummaryInput_Handle(u8);
 static void Task_SummaryInput_HandleInfos(u8);
+
+static void SummaryMon_SetStruct(void);
+static struct MonSummary *SummaryMon_GetStruct(void);
+static void SummaryMon_CopyCurrentRawMon(void);
 
 static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
@@ -347,6 +353,9 @@ static void CB2_SummarySetup(void)
         ResetSpriteData();
         ResetTasks();
         break;
+    case MON_SUMMARY_SETUP_MONDATA:
+        SummaryMon_SetStruct();
+        break;
     case MON_SUMMARY_SETUP_BACKGROUNDS:
         SummarySetup_Backgrounds();
         break;
@@ -383,8 +392,8 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
 static void SummaryInput_UpdatePage(s32 delta)
 {
     enum MonSummaryPages page = SummaryPage_GetValue();
-    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
     u32 count = NUM_MON_SUMMARY_PAGES - 1;
+    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
 
     if ((!page && !additiveDelta) || (page == count && additiveDelta))
     {
@@ -393,6 +402,30 @@ static void SummaryInput_UpdatePage(s32 delta)
 
     PlaySE(SE_CLICK);
     SummaryPage_SetValue(page + delta);
+    SummaryPage_Reload();
+}
+
+static void SummaryInput_UpdateMon(s32 delta)
+{
+    u32 idx = SummaryInput_GetIndex();
+    u32 count = SummaryInput_GetTotalIndex();
+    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
+
+    if (!idx && !additiveDelta)
+    {
+        SummaryInput_SetIndex(count);
+    }
+    else if (idx == count && additiveDelta)
+    {
+        SummaryInput_SetIndex(0);
+    }
+    else
+    {
+        SummaryInput_SetIndex(idx + delta);
+    }
+
+    PlaySE(SE_CLICK);
+    SummaryMon_SetStruct();
     SummaryPage_Reload();
 }
 
@@ -453,6 +486,18 @@ static void Task_SummaryInput_Handle(u8 taskId)
         return;
     }
 
+    if (JOY_NEW(DPAD_UP) && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
+    {
+        SummaryInput_UpdateMon(-1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_DOWN) && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
+    {
+        SummaryInput_UpdateMon(1);
+        return;
+    }
+
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
@@ -472,6 +517,93 @@ static void Task_SummaryInput_HandleInfos(u8 taskId)
         DebugPrintf("current page: %d", SummaryPage_GetValue());
         tSpecificInputPress = TRUE;
         return;
+    }
+}
+
+static void SummaryMon_SetStruct(void)
+{
+    SummaryMon_CopyCurrentRawMon();
+
+    struct MonSummaryResources *res = sMonSummaryResourcesPtr;
+    struct Pokemon *mon = res->mon;
+
+    res->summary.species = GetMonData(mon, MON_DATA_SPECIES);
+    res->summary.species2 = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    res->summary.exp = GetMonData(mon, MON_DATA_EXP);
+    res->summary.level = GetMonData(mon, MON_DATA_LEVEL);
+    res->summary.abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
+    res->summary.item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    res->summary.pid = GetMonData(mon, MON_DATA_PERSONALITY);
+    res->summary.sanity = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
+
+    if (res->summary.sanity)
+        res->summary.isEgg = TRUE;
+    else
+        res->summary.isEgg = GetMonData(mon, MON_DATA_IS_EGG);
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        res->summary.moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
+        res->summary.pp[i] = GetMonData(mon, MON_DATA_PP1 + i);
+    }
+
+    res->summary.ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    res->summary.nature = GetNature(mon);
+    res->summary.mintNature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
+    res->summary.currentHP = GetMonData(mon, MON_DATA_HP);
+    res->summary.maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    res->summary.atk = GetMonData(mon, MON_DATA_ATK);
+    res->summary.def = GetMonData(mon, MON_DATA_DEF);
+    res->summary.spAtk = GetMonData(mon, MON_DATA_SPATK);
+    res->summary.spDef = GetMonData(mon, MON_DATA_SPDEF);
+    res->summary.spd = GetMonData(mon, MON_DATA_SPEED);
+
+    GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
+    ConvertInternationalString(res->summary.trainerName, GetMonData(mon, MON_DATA_LANGUAGE));
+    res->summary.ailment = GetMonAilment(mon);
+    res->summary.trainerGender = GetMonData(mon, MON_DATA_OT_GENDER);
+    res->summary.trainerID = GetMonData(mon, MON_DATA_OT_ID);
+    res->summary.metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
+    res->summary.metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
+    res->summary.metGame = GetMonData(mon, MON_DATA_MET_GAME);
+    res->summary.friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+
+    res->summary.ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
+    res->summary.teraType = GetMonData(mon, MON_DATA_TERA_TYPE);
+    res->summary.isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+
+    res->summary.hpIVs = GetMonData(mon, MON_DATA_HP_IV);
+    res->summary.atkIVs = GetMonData(mon, MON_DATA_ATK_IV);
+    res->summary.defIVs = GetMonData(mon, MON_DATA_DEF_IV);
+    res->summary.spAtkIVs = GetMonData(mon, MON_DATA_SPATK_IV);
+    res->summary.spDefIVs = GetMonData(mon, MON_DATA_SPDEF_IV);
+    res->summary.spdIVs = GetMonData(mon, MON_DATA_SPEED_IV);
+
+    res->summary.hpEVs = GetMonData(mon, MON_DATA_HP_EV);
+    res->summary.atkEVs = GetMonData(mon, MON_DATA_ATK_EV);
+    res->summary.defEVs = GetMonData(mon, MON_DATA_DEF_EV);
+    res->summary.spAtkEVs = GetMonData(mon, MON_DATA_SPATK_EV);
+    res->summary.spDefEVs = GetMonData(mon, MON_DATA_SPDEF_EV);
+    res->summary.spdEVs = GetMonData(mon, MON_DATA_SPEED_EV);
+}
+
+static struct MonSummary *SummaryMon_GetStruct(void)
+{
+    return &sMonSummaryResourcesPtr->summary;
+}
+
+static void SummaryMon_CopyCurrentRawMon(void)
+{
+    struct MonSummaryResources *res = sMonSummaryResourcesPtr;
+
+    if (sMonSummaryResourcesPtr->useBoxMon)
+    {
+        struct BoxPokemon *boxMon = &res->list.boxMons[res->currIdx];
+        BoxMonToMon(boxMon, res->mon);
+    }
+    else
+    {
+        res->mon = &res->list.mons[res->currIdx];
     }
 }
 
