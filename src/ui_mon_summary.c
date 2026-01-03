@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "gpu_regs.h"
 #include "string_util.h"
+#include "international_string_util.h"
 #include "decompress.h"
 #include "scanline_effect.h"
 #include "sound.h"
@@ -18,6 +19,7 @@
 #include "graphics.h"
 #include "data.h"
 #include "pokedex.h"
+#include "strings.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -65,6 +67,8 @@ static void SummaryPage_Reload(void);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
+static void SummaryPrint_Header(void);
+static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_HelpBar(void);
 
 // const data
@@ -97,11 +101,10 @@ static const struct WindowTemplate sMonSummary_MainWindows[] =
     [MON_SUMMARY_MAIN_WIN_HEADER] =
     {
         .bg = MON_SUMMARY_BG_TEXT,
-        .tilemapLeft = 0,
+        .tilemapLeft = 23,
         .tilemapTop = 0,
-        .width = 10,
-        .height = 2,
-        .paletteNum = 0,
+        .width = 4,
+        .height = 4,
     },
 
     [MON_SUMMARY_MAIN_WIN_HELP_BAR] =
@@ -111,7 +114,6 @@ static const struct WindowTemplate sMonSummary_MainWindows[] =
         .tilemapTop = 18,
         .width = DISPLAY_TILE_WIDTH,
         .height = 2,
-        .paletteNum = 0,
     },
 
     // MON_SUMMARY_MAIN_WIN_DYNAMIC uses AddWindow
@@ -157,6 +159,7 @@ static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAG
 };
 
 static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/tiles.4bpp.smol");
+static const u8 sMonSummary_PageTabsGfx[] = INCBIN_U8("graphics/ui_menus/mon_summary/page_tabs.4bpp");
 static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/blank.bin");
 static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/pages/tiles.gbapal");
 
@@ -289,6 +292,7 @@ static void SummarySetup_Windows(void)
     }
 
     SummaryPage_LoadDynamicWindows();
+    SummaryPrint_Header();
     SummaryPrint_HelpBar();
 
     ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
@@ -600,6 +604,7 @@ static void SummaryPage_Reload(void)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
 
+    SummaryPrint_Header();
     SummaryPrint_HelpBar();
 
     ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
@@ -620,6 +625,34 @@ static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32 windo
     }
 
     return &sMonSummary_MainWindows[windowId];
+}
+
+static void SummaryPrint_Header(void)
+{
+    // blit
+    u32 winId = MON_SUMMARY_MAIN_WIN_HEADER;
+    SummaryPrint_BlitPageTabs(winId, 1, 4);
+
+    // title
+    const u8 *str = SummaryPage_GetName(SummaryPage_GetValue());
+    u32 width = TILE_TO_PIXELS(SummaryPrint_GetMainWindowTemplate(winId)->width);
+
+    u32 fontId = GetOutlineFontIdToFit(str, width);
+    u32 x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, str, width, -1);
+
+    SummaryPrint_AddText(winId, fontId, x, 16, MON_SUMMARY_FNTCLR_INTERFACE, str);
+    CopyWindowToVram(winId, COPYWIN_GFX);
+}
+
+static void SummaryPrint_BlitPageTabs(u32 windowId, u32 x, u32 y)
+{
+    for (enum MonSummaryPages page = 0; page < NUM_MON_SUMMARY_PAGES; page++)
+    {
+        bool32 selected = page == SummaryPage_GetValue();
+
+        BlitBitmapRectToWindow(windowId, sMonSummary_PageTabsGfx, selected * 8, 0, 16, 8, x, y, 8, 8);
+        x += 11;
+    }
 }
 
 // TODO actual helping bar
