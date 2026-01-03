@@ -39980,6 +39980,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              },
+              {
+                "min_level": 57,
+                "max_level": 58,
+                "species": "SPECIES_ARBOLIVA"
+              }
+            ]
           }
         },
         {
@@ -67370,6 +67475,111 @@
                 "min_level": 77,
                 "max_level": 79,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_MUDBRAY"
               }
             ]
           }
