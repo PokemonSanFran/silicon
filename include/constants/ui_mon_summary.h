@@ -151,6 +151,7 @@ struct MonSummaryDynamicWindow
 // not to be confused with infos page!
 struct MonSummaryPageInfo
 {
+    const u8 *name;
     struct MonSummaryDynamicWindow windows[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
     const u32 *tilemap;
     TaskFunc input;

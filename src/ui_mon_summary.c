@@ -53,6 +53,7 @@ static u8 SummaryPage_GetWindowId(u32);
 static void SummaryPage_TogglePageSlot(void);
 static u32 SummaryPage_GetPageSlot(void);
 static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages);
+static const u8 *SummaryPage_GetName(enum MonSummaryPages);
 static struct WindowTemplate SummaryPage_FillDynamicWindowTemplate(enum MonSummaryPages, u32);
 static u32 SummaryPage_GetDynamicWindowBaseBlock(u32);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
@@ -121,6 +122,7 @@ static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAG
 {
     [MON_SUMMARY_PAGE_INFOS] =
     {
+        .name = COMPOUND_STRING("Info"),
         .windows =
         {
             {
@@ -135,6 +137,7 @@ static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAG
     },
     [MON_SUMMARY_PAGE_STATS] =
     {
+        .name = COMPOUND_STRING("Stats"),
         .windows =
         {
             MON_SUMMARY_DYNAMIC_WIN_DUMMY
@@ -143,6 +146,7 @@ static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAG
     },
     [MON_SUMMARY_PAGE_MOVES] =
     {
+        .name = COMPOUND_STRING("Moves"),
         .windows =
         {
             MON_SUMMARY_DYNAMIC_WIN_DUMMY
@@ -454,6 +458,14 @@ static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages
     if (page >= NUM_MON_SUMMARY_PAGES) return NULL;
 
     return &sMonSummary_PagesInfo[page];
+}
+
+static const u8 *SummaryPage_GetName(enum MonSummaryPages page)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+    if (!info || !info->name) return gText_EmptyString2;
+
+    return info->name;
 }
 
 // translates .window struct onto a proper WindowTemplate
