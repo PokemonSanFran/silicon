@@ -410,7 +410,7 @@ static void Task_ExitDoor(u8 taskId)
             objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->tState = 2;
-
+            // Start shrinkPlayer
             u32 playerObjId = gPlayerAvatar.objectEventId;
             struct Sprite *sprite = &gSprites[gObjectEvents[playerObjId].spriteId];
             sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -420,6 +420,7 @@ static void Task_ExitDoor(u8 taskId)
             u32 newTaskId = CreateTask(Task_DestroyEventObjSpriteMatrixOnAffineAnimCompletion, 0xFF);
             if (newTaskId != 0xFF)
                 gTasks[newTaskId].data[0] = playerObjId;
+            // End shrinkPlayer
         }
         break;
     case 2:
@@ -828,12 +829,14 @@ void Task_DoDoorWarp(u8 taskId)
                 ObjectEventSetHeldMovement(&gObjectEvents[followerObjId], newState);
             }
 
+            // Start shrinkPlayer
             struct Sprite *sprite = &gSprites[gObjectEvents[playerObjId].spriteId];
             sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
             sprite->affineAnims = sSpriteAffineAnimTable_ShrinkPlayerAtDoor;
             CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
             InitSpriteAffineAnim(sprite);
 
+            // End shrinkPlayer
             task->tState = DOORWARP_HIDE_PLAYER;
         }
         break;
@@ -859,11 +862,13 @@ void Task_DoDoorWarp(u8 taskId)
             ObjectEventClearHeldMovementIfActive(&gObjectEvents[followerObjId]);
             ObjectEventSetHeldMovement(&gObjectEvents[followerObjId], MOVEMENT_ACTION_WALK_NORMAL_UP);
 
+            // Start shrinkPlayer
             struct Sprite *sprite = &gSprites[gObjectEvents[followerObjId].spriteId];
             sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
             sprite->affineAnims = sSpriteAffineAnimTable_ShrinkPlayerAtDoor;
             CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
             InitSpriteAffineAnim(sprite);
+            // End shrinkPlayer
         }
 
         TryFadeOutOldMapMusic();

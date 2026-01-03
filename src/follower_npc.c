@@ -626,8 +626,10 @@ static void Task_ReallowPlayerMovement(u8 taskId)
 
 // Task data.
 #define tDoorTask           data[1]
+// Start shrinkPlayer
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_GrowPlayerFromDoor[];
 extern void Task_DestroyEventObjSpriteMatrixOnAffineAnimCompletion(u8 taskId);
+// End shrinkPlayer
 
 static void Task_FollowerNPCOutOfDoor(u8 taskId)
 {
@@ -668,6 +670,7 @@ static void Task_FollowerNPCOutOfDoor(u8 taskId)
             follower->heldMovementActive = FALSE;
             ObjectEventSetHeldMovement(follower, MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->tState = CLOSE_DOOR;
+            // Start shrinkPlayer
 
             struct Sprite *sprite = &gSprites[follower->spriteId];
             sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -677,6 +680,7 @@ static void Task_FollowerNPCOutOfDoor(u8 taskId)
             u32 newTaskId = CreateTask(Task_DestroyEventObjSpriteMatrixOnAffineAnimCompletion, 0xFF);
             if (newTaskId != 0xFF)
                 gTasks[newTaskId].data[0] = OBJ_EVENT_ID_FOLLOWER;
+            // End shrinkPlayer
         }
         break;
     case CLOSE_DOOR:
