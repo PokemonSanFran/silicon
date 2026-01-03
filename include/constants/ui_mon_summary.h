@@ -112,9 +112,6 @@ enum MonSummaryFontColors
     NUM_MON_SUMMARY_FNTCLRS
 };
 
-// task/sprite data
-#define tSpecificInputPress     data[15]
-
 // structs
 
 // contains MonData of the current pokemon (list.mons/boxMons[currId])

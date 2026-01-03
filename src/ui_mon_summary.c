@@ -48,9 +48,8 @@ static u32 SummaryInput_GetIndex(void);
 static void SummaryInput_SetTotalIndex(u32);
 static u32 SummaryInput_GetTotalIndex(void);
 static bool32 SummaryInput_IsInputAdditive(s32);
-static void SummaryInput_RunSpecificHandler(u8);
-static void Task_SummaryInput_Handle(u8);
-static void Task_SummaryInput_HandleInfos(u8);
+static void Task_SummaryInput_DefaultInput(u8);
+static void Task_SummaryInput_InfosInput(u8);
 
 static void SummaryMon_SetStruct(void);
 static struct MonSummary *SummaryMon_GetStruct(void);
@@ -148,7 +147,7 @@ static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAG
             MON_SUMMARY_DYNAMIC_WIN_DUMMY
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
-        .input = Task_SummaryInput_HandleInfos
+        .input = Task_SummaryInput_InfosInput
     },
     [MON_SUMMARY_PAGE_STATS] =
     {
@@ -385,7 +384,7 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_SummaryInput_Handle;
+        gTasks[taskId].func = Task_SummaryInput_DefaultInput;
     }
 }
 
@@ -454,26 +453,8 @@ static bool32 SummaryInput_IsInputAdditive(s32 delta)
     return delta == 1;
 }
 
-// page-specific _or_ mode-specific (e.g. MON_SUMMARY_MODE_IV_TRAIN)
-// TODO mode-specific handler
-static void SummaryInput_RunSpecificHandler(u8 taskId)
+static void Task_SummaryInput_DefaultInput(u8 taskId)
 {
-    TaskFunc func = SummaryPage_GetInputFunc(SummaryPage_GetValue());
-
-    func(taskId);
-}
-
-static void Task_SummaryInput_Handle(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    SummaryInput_RunSpecificHandler(taskId);
-    if (tSpecificInputPress)
-    {
-        tSpecificInputPress = FALSE;
-        return;
-    }
-
     if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
         SummaryInput_UpdatePage(-1);
@@ -486,15 +467,23 @@ static void Task_SummaryInput_Handle(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(DPAD_UP) && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
+    if (JOY_NEW(DPAD_UP)
+     && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
     {
         SummaryInput_UpdateMon(-1);
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN) && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
+    if (JOY_NEW(DPAD_DOWN)
+     && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
     {
         SummaryInput_UpdateMon(1);
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        gTasks[taskId].func = SummaryPage_GetInputFunc(SummaryPage_GetValue());
         return;
     }
 
@@ -507,15 +496,18 @@ static void Task_SummaryInput_Handle(u8 taskId)
     }
 }
 
-static void Task_SummaryInput_HandleInfos(u8 taskId)
+static void Task_SummaryInput_InfosInput(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        DebugPrintf("current page: %d", SummaryPage_GetValue());
-        tSpecificInputPress = TRUE;
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].func = Task_SummaryInput_DefaultInput;
         return;
     }
 }
