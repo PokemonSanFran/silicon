@@ -27,7 +27,7 @@
 #include "constants/songs.h"
 
 // ram
-static EWRAM_DATA struct MonSummaryResources *sMonSummaryResourcesPtr = NULL;
+static EWRAM_DATA struct MonSummaryResources *sMonSummaryDataPtr = NULL;
 
 // declarations
 static void MonSummary_FreeResources(void);
@@ -202,13 +202,13 @@ void MonSummary_OpenDefault(void)
 
 void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callback)
 {
-    sMonSummaryResourcesPtr = AllocZeroed(sizeof(struct MonSummaryResources));
+    sMonSummaryDataPtr = AllocZeroed(sizeof(struct MonSummaryResources));
 
-    if (!sMonSummaryResourcesPtr
+    if (!sMonSummaryDataPtr
      || !config
      || config->mode >= NUM_MON_SUMMARY_MODES)
     {
-        TRY_FREE_AND_SET_NULL(sMonSummaryResourcesPtr);
+        TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
         SetMainCallback2(callback);
         return;
     }
@@ -220,27 +220,27 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
     default:
         break;
     case MON_SUMMARY_MODE_BOX:
-        sMonSummaryResourcesPtr->useBoxMon = TRUE;
+        sMonSummaryDataPtr->useBoxMon = TRUE;
         break;
     }
 
-    sMonSummaryResourcesPtr->savedCallback = callback;
-    sMonSummaryResourcesPtr->list.mons = config->mons;
+    sMonSummaryDataPtr->savedCallback = callback;
+    sMonSummaryDataPtr->list.mons = config->mons;
 
     SummaryInput_SetIndex(config->currIdx);
     SummaryInput_SetTotalIndex(config->totalIdx);
     SummaryPage_SetValue(page);
     SummaryMode_SetValue(config->mode);
-    memset(sMonSummaryResourcesPtr->windowIds, WINDOW_NONE, ARRAY_COUNT(sMonSummaryResourcesPtr->windowIds));
+    memset(sMonSummaryDataPtr->windowIds, WINDOW_NONE, ARRAY_COUNT(sMonSummaryDataPtr->windowIds));
 
     SetMainCallback2(CB2_SummarySetup);
 }
 
 static void MonSummary_FreeResources(void)
 {
-    TRY_FREE_AND_SET_NULL(sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
-    TRY_FREE_AND_SET_NULL(sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
-    TRY_FREE_AND_SET_NULL(sMonSummaryResourcesPtr);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
@@ -265,7 +265,7 @@ static void Task_MonSummary_WaitFadeAndExit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        MainCallback cb = sMonSummaryResourcesPtr->savedCallback;
+        MainCallback cb = sMonSummaryDataPtr->savedCallback;
 
         SetMainCallback2(cb);
         MonSummary_FreeResources();
@@ -277,11 +277,11 @@ static void SummarySetup_Backgrounds(void)
 {
     u32 tilemapSize = BG_SCREEN_SIZE * 2;
 
-    sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1] = AllocZeroed(tilemapSize);
-    sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2] = AllocZeroed(tilemapSize);
+    sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1] = AllocZeroed(tilemapSize);
+    sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2] = AllocZeroed(tilemapSize);
 
-    if (!sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]
-     || !sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2])
+    if (!sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]
+     || !sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2])
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         CreateTask(Task_MonSummary_WaitFadeAndExit, 0);
@@ -293,8 +293,8 @@ static void SummarySetup_Backgrounds(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sSummarySetup_BgTemplates, NELEMS(sSummarySetup_BgTemplates));
 
-    SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_1, sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
-    SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_2, sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
+    SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
+    SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_2, sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
 
     for (enum MonSummaryBackgrounds bg = 0; bg < NUM_MON_SUMMARY_BACKGROUNDS; bg++)
     {
@@ -436,22 +436,22 @@ static void SummaryInput_UpdateMon(s32 delta)
 
 static void SummaryInput_SetIndex(u32 index)
 {
-    sMonSummaryResourcesPtr->currIdx = index;
+    sMonSummaryDataPtr->currIdx = index;
 }
 
 static u32 SummaryInput_GetIndex(void)
 {
-    return sMonSummaryResourcesPtr->currIdx;
+    return sMonSummaryDataPtr->currIdx;
 }
 
 static void SummaryInput_SetTotalIndex(u32 index)
 {
-    sMonSummaryResourcesPtr->totalIdx = index;
+    sMonSummaryDataPtr->totalIdx = index;
 }
 
 static u32 SummaryInput_GetTotalIndex(void)
 {
-    return sMonSummaryResourcesPtr->totalIdx;
+    return sMonSummaryDataPtr->totalIdx;
 }
 
 static bool32 SummaryInput_IsInputAdditive(s32 delta)
@@ -522,7 +522,7 @@ static void SummaryMon_SetStruct(void)
 {
     SummaryMon_CopyCurrentRawMon();
 
-    struct MonSummaryResources *res = sMonSummaryResourcesPtr;
+    struct MonSummaryResources *res = sMonSummaryDataPtr;
     struct Pokemon *mon = res->mon;
 
     res->summary.species = GetMonData(mon, MON_DATA_SPECIES);
@@ -587,14 +587,14 @@ static void SummaryMon_SetStruct(void)
 
 static struct MonSummary *SummaryMon_GetStruct(void)
 {
-    return &sMonSummaryResourcesPtr->summary;
+    return &sMonSummaryDataPtr->summary;
 }
 
 static void SummaryMon_CopyCurrentRawMon(void)
 {
-    struct MonSummaryResources *res = sMonSummaryResourcesPtr;
+    struct MonSummaryResources *res = sMonSummaryDataPtr;
 
-    if (sMonSummaryResourcesPtr->useBoxMon)
+    if (sMonSummaryDataPtr->useBoxMon)
     {
         struct BoxPokemon *boxMon = &res->list.boxMons[res->currIdx];
         BoxMonToMon(boxMon, res->mon);
@@ -607,12 +607,12 @@ static void SummaryMon_CopyCurrentRawMon(void)
 
 static void SummaryMode_SetValue(enum MonSummaryModes mode)
 {
-    sMonSummaryResourcesPtr->mode = mode;
+    sMonSummaryDataPtr->mode = mode;
 }
 
 static enum MonSummaryModes SummaryMode_GetValue(void)
 {
-    return sMonSummaryResourcesPtr->mode;
+    return sMonSummaryDataPtr->mode;
 }
 
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes mode)
@@ -625,12 +625,12 @@ static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes mode)
 
 static void SummaryPage_SetValue(enum MonSummaryPages page)
 {
-    sMonSummaryResourcesPtr->page = page;
+    sMonSummaryDataPtr->page = page;
 }
 
 static enum MonSummaryPages SummaryPage_GetValue(void)
 {
-    return sMonSummaryResourcesPtr->page;
+    return sMonSummaryDataPtr->page;
 }
 
 static u32 SummaryPage_SanitizeWindowId(u32 id)
@@ -640,22 +640,22 @@ static u32 SummaryPage_SanitizeWindowId(u32 id)
 
 static void SummaryPage_SetWindowId(u32 id, u32 value)
 {
-    sMonSummaryResourcesPtr->windowIds[SummaryPage_SanitizeWindowId(id)] = value;
+    sMonSummaryDataPtr->windowIds[SummaryPage_SanitizeWindowId(id)] = value;
 }
 
 static u8 SummaryPage_GetWindowId(u32 id)
 {
-    return sMonSummaryResourcesPtr->windowIds[SummaryPage_SanitizeWindowId(id)];
+    return sMonSummaryDataPtr->windowIds[SummaryPage_SanitizeWindowId(id)];
 }
 
 static void SummaryPage_TogglePageSlot(void)
 {
-    sMonSummaryResourcesPtr->pageSlot ^= 1;
+    sMonSummaryDataPtr->pageSlot ^= 1;
 }
 
 static u32 SummaryPage_GetPageSlot(void)
 {
-    return sMonSummaryResourcesPtr->pageSlot;
+    return sMonSummaryDataPtr->pageSlot;
 }
 
 static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages page)
