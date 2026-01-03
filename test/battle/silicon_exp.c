@@ -32,7 +32,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
         }
         TURN { MOVE(player, MOVE_EXP_TEST_FINISH); }
     } FINALLY {
-        gSiliconExpTestState.isExpTest = TRUE;
+        gSiliconExpTestState.isExpTest = FALSE;
         u32 finalExp = gSiliconExpTestState.expTestExp;
         u32 targetFrontExp = ExpTest_GetTargetExp(species, data->targetLevel);
         u32 finalExpBack = gSiliconExpTestState.backExp;
