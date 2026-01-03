@@ -64,7 +64,7 @@ script Ferry_Attendant_EnterShip_Script
     }
     waitmovement(PLAYER)
     delay(30)
-    hideobjectat(PLAYER,0)
+	hideplayer
     call(Common_EventScript_FerryDepart)
     return
 }

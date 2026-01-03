@@ -5,6 +5,7 @@
 #include "constants/options_battle.h"
 
 void Task_OpenOptionsMenuFromStartMenu(u8 taskId);
+void CB2_OptionsFromStartMenu(void);
 void Options_Menu_Init(MainCallback callback);
 void CB2_InitUIOptionMenuFromMainMenu(void);
 void CB2_InitUiOptionMenuFromDevLetter(void);
@@ -149,14 +150,6 @@ enum optionBattlePointsMessagesValues
 	BATTLE_OPTION_POINTS_MESSAGE_COUNT,
 };
 
-enum optionBattlePointsSummary
-{
-	BATTLE_OPTION_POINTS_SUMMARY_FAINT,
-	BATTLE_OPTION_POINTS_SUMMARY_BATTLE,
-	BATTLE_OPTION_POINTS_SUMMARY_OFF,
-	BATTLE_OPTION_POINTS_SUMMARY_COUNT,
-};
-
 enum optionBattleMidBattleEvolutionValues
 {
 	BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON,
@@ -298,6 +291,7 @@ enum GameOptionsID
     GAME_OPTIONS_PUZZLES,
     GAME_OPTIONS_ITEM_SORT,
     GAME_OPTIONS_CUTSCENE,
+    GAME_OPTIONS_SKIP_GUIDES,
     NUM_OPTIONS_GAME_SETTINGS,
 };
 
@@ -306,7 +300,6 @@ enum BattleOptionsID
     BATTLE_OPTIONS_PRESET,
     BATTLE_OPTIONS_EXPERIENCE,
 	BATTLE_OPTIONS_POINTS_MESSAGES,
-	BATTLE_OPTIONS_POINTS_SUMMARY,
     BATTLE_OPTIONS_EXP_MULTIPLIER,
     BATTLE_OPTIONS_PLAYER_LEVEL,
     BATTLE_OPTIONS_TRAINER_SCALING,
@@ -472,6 +465,14 @@ enum optionLRButtonMode
     GAME_OPTION_LR_MODE,
     GAME_OPTION_LA_MODE,
     GAME_OPTION_L_MODE_COUNT,
+};
+
+enum optionsGameGuideValues
+{
+    GAME_OPTION_GUIDE_SKIP_OFF,
+    GAME_OPTION_GUIDE_SKIP_GENERAL,
+    GAME_OPTION_GUIDE_SKIP_ALL,
+    GAME_OPTION_GUIDE_SKIP_COUNT,
 };
 
 #define NUM_MAX_SETTINGS NUM_OPTIONS_BATTLE_SETTINGS

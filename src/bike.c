@@ -5,9 +5,9 @@
 #include "fieldmap.h"
 #include "field_specials.h"
 #include "metatile_behavior.h"
+#include "oras_dowse.h"
 #include "overworld.h"
 #include "sound.h"
-#include "constants/map_types.h"
 #include "constants/songs.h"
 #include "options_music.h" // siliconMerge
 
@@ -1005,6 +1005,7 @@ void GetOnOffBike(u8 transitionFlags)
     }
     else
     {
+        EndORASDowsing();
         SetPlayerAvatarTransitionFlags(transitionFlags);
 // Start siliconMerge
         Overworld_SetSavedMusic(GetBikeMusicFromOption());

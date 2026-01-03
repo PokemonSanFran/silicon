@@ -258,6 +258,13 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2FieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Underwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Fishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking;
@@ -290,6 +297,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Storyteller
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Giddy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan1;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] =           &gObjectEventGraphicsInfo_BrendanNormal,
@@ -555,6 +563,13 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF2Underwater,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF2FieldMove,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF2Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N3_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerN3Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N3_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerN3MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N3_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerN3AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N3_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerN3Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerN3Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerN3FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerN3Fishing,
     [OBJ_EVENT_GFX_KAI] =                      &gObjectEventGraphicsInfo_KaiNormal,
     [OBJ_EVENT_GFX_UNKNOWN] =                  &gObjectEventGraphicsInfo_UnknownNormal,
     [OBJ_EVENT_GFX_ADAORA] =                   &gObjectEventGraphicsInfo_AdaoraWalking,
@@ -576,6 +591,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_KAI_FIELD_MOVE] =           &gObjectEventGraphicsInfo_KaiFieldMove,
     // End silicon
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
+    [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

@@ -674,11 +674,7 @@
     },
     {
       "id": "MAPSEC_INSIDE_OF_TRUCK",
-      "name": "INSIDE OF TRUCK",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "INSIDE OF TRUCK"
     },
     {
       "id": "MAPSEC_SKY_PILLAR",
@@ -690,26 +686,10 @@
     },
     {
       "id": "MAPSEC_SECRET_BASE",
-      "name": "SECRET BASE",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "SECRET BASE"
     },
     {
-      "id": "MAPSEC_DYNAMIC",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_SPECIAL_AREA",
-      "name": "SPECIAL AREA",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_DYNAMIC"
     },
     {
       "id": "MAPSEC_AQUA_HIDEOUT",
@@ -737,19 +717,11 @@
     },
     {
       "id": "MAPSEC_BIRTH_ISLAND",
-      "name": "BIRTH ISLAND",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "BIRTH ISLAND"
     },
     {
       "id": "MAPSEC_FARAWAY_ISLAND",
-      "name": "FARAWAY ISLAND",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "FARAWAY ISLAND"
     },
     {
       "id": "MAPSEC_ARTISAN_CAVE",
@@ -761,27 +733,15 @@
     },
     {
       "id": "MAPSEC_MARINE_CAVE",
-      "name": "MARINE CAVE",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "MARINE CAVE"
     },
     {
       "id": "MAPSEC_UNDERWATER_MARINE_CAVE",
-      "name": "UNDERWATER",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "UNDERWATER"
     },
     {
       "id": "MAPSEC_TERRA_CAVE",
-      "name": "TERRA CAVE",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "TERRA CAVE"
     },
     {
       "id": "MAPSEC_UNDERWATER_105",
@@ -825,11 +785,7 @@
     },
     {
       "id": "MAPSEC_NAVEL_ROCK",
-      "name": "NAVEL ROCK",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "name": "NAVEL ROCK"
     },
     {
       "id": "MAPSEC_TRAINER_HILL",
@@ -851,8 +807,8 @@
     {
       "id": "MAPSEC_HALERBA_CITY",
       "name": "HalerbaCity",
-      "x": 7,
-      "y": 3,
+      "x": 3,
+      "y": 8,
       "width": 3,
       "height": 2,
       "visitedFlag": "FLAG_VISITED_HALERBA_CITY"
@@ -878,8 +834,8 @@
     {
       "id": "MAPSEC_IRISINA_TOWN",
       "name": "IrisinaTown",
-      "x": 0,
-      "y": 0,
+      "x": 8,
+      "y": 12,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_IRISINA_TOWN"
@@ -915,7 +871,7 @@
       "id": "MAPSEC_OROLAND",
       "name": "Oroland",
       "x": 23,
-      "y": 6,
+      "y": 4,
       "width": 2,
       "height": 2,
       "visitedFlag": "FLAG_VISITED_OROLAND"
@@ -987,7 +943,7 @@
       "id": "MAPSEC_HALAI_ISLAND",
       "name": "HalaiIsland",
       "x": 23,
-      "y": 11,
+      "y": 10,
       "width": 2,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_HALAI_ISLAND"
@@ -1013,8 +969,8 @@
     {
       "id": "MAPSEC_NAVAL_BASE",
       "name": "NavalBase",
-      "x": 23,
-      "y": 11,
+      "x": 24,
+      "y": 10,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_NAVAL_BASE"
@@ -1103,8 +1059,8 @@
     {
       "id": "MAPSEC_POPIDORA_PIER",
       "name": "PopidoraPier",
-      "x": 0,
-      "y": 0,
+      "x": 16,
+      "y": 3,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_POPIDORA_PIER"
@@ -1112,8 +1068,8 @@
     {
       "id": "MAPSEC_SHARPRISESTADIUM",
       "name": "SharpriseStadium",
-      "x": 0,
-      "y": 0,
+      "x": 18,
+      "y": 10,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_SHARPRISESTADIUM"
@@ -1202,7 +1158,7 @@
     {
       "id": "MAPSEC_ROUTE11",
       "name": "Route11",
-      "x": 10,
+      "x": 11,
       "y": 4,
       "width": 3,
       "height": 1,
@@ -1229,8 +1185,8 @@
     {
       "id": "MAPSEC_ROUTE18",
       "name": "Route18",
-      "x": 2,
-      "y": 10,
+      "x": 4,
+      "y": 8,
       "width": 1,
       "height": 3,
       "visitedFlag": "FLAG_VISITED_ROUTE18"
@@ -1239,7 +1195,7 @@
       "id": "MAPSEC_ROUTE4",
       "name": "Route4",
       "x": 17,
-      "y": 5,
+      "y": 6,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_ROUTE4"
@@ -1328,8 +1284,8 @@
     {
       "id": "MAPSEC_ROUTE_C",
       "name": "RouteC",
-      "x": 0,
-      "y": 0,
+      "x": 22,
+      "y": 7,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_ROUTE_C"
@@ -1347,7 +1303,7 @@
       "id": "MAPSEC_ROUTE2",
       "name": "Route2",
       "x": 17,
-      "y": 11,
+      "y": 10,
       "width": 1,
       "height": 3,
       "visitedFlag": "FLAG_VISITED_ROUTE2"
@@ -1355,8 +1311,8 @@
     {
       "id": "MAPSEC_SECRET_PATH",
       "name": "SecretPath",
-      "x": 0,
-      "y": 0,
+      "x": 19,
+      "y": 6,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_SECRET_PATH"
@@ -1364,8 +1320,8 @@
     {
       "id": "MAPSEC_NONGYU_BRIDGE",
       "name": "NongyuBridge",
-      "x": 0,
-      "y": 0,
+      "x": 20,
+      "y": 5,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_NONGYU_BRIDGE"
@@ -1428,7 +1384,7 @@
       "id": "MAPSEC_ROUTE98",
       "name": "Route98",
       "x": 26,
-      "y": 4,
+      "y": 5,
       "width": 1,
       "height": 2,
       "visitedFlag": "FLAG_VISITED_ROUTE98"
@@ -1437,7 +1393,7 @@
       "id": "MAPSEC_ROUTE99",
       "name": "Route99",
       "x": 24,
-      "y": 1,
+      "y": 0,
       "width": 1,
       "height": 4,
       "visitedFlag": "FLAG_VISITED_ROUTE99"
@@ -1455,7 +1411,7 @@
       "id": "MAPSEC_ROUTE_B",
       "name": "RouteB",
       "x": 24,
-      "y": 8,
+      "y": 7,
       "width": 1,
       "height": 3,
       "visitedFlag": "FLAG_VISITED_ROUTE_B"
@@ -1463,7 +1419,7 @@
     {
       "id": "MAPSEC_ROUTE_E",
       "name": "RouteE",
-      "x": 7,
+      "x": 10,
       "y": 0,
       "width": 17,
       "height": 1,
@@ -1490,8 +1446,8 @@
     {
       "id": "MAPSEC_PARC",
       "name": "PARC",
-      "x": 0,
-      "y": 0,
+      "x": 20,
+      "y": 6,
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_PARC"

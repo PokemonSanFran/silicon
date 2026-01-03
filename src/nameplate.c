@@ -68,62 +68,63 @@ static const u8 sMsgbox_Tail_Talk[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/
 static const u8 sMsgbox_Tail_Thought[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/tail_thought.4bpp");
 static const u8 sMsgbox_Tail_Whisper[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/tail_whisper.4bpp");
 
-static const u32 sMessageBoxLeftTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxLeftTop.4bpp.lz");
-static const u32 sMessageBoxCenterTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxCenterTop.4bpp.lz");
-static const u32 sMessageBoxRightTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxRightTop.4bpp.lz");
-static const u32 sNameplateCenterBottom[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom.4bpp.lz");
-static const u32 sNameplateCenterBottom1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom1.4bpp.lz");
-static const u32 sNameplateCenterBottom2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom2.4bpp.lz");
-static const u32 sNameplateCenterBottom3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom3.4bpp.lz");
-static const u32 sNameplateCenterSecondRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterSecondRow.4bpp.lz");
-static const u32 sNameplateCenterSecondRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterSecondRow0.4bpp.lz");
-static const u32 sNameplateCenterThirdRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterThirdRow.4bpp.lz");
-static const u32 sNameplateCenterThirdRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterThirdRow0.4bpp.lz");
-static const u32 sNameplateCenterTop0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterTop.4bpp.lz");
-static const u32 sNameplateCenterTop1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterTop1.4bpp.lz");
-static const u32 sNameplateCenterTop2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterTop2.4bpp.lz");
-static const u32 sNameplateLeftBottom[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftBottom.4bpp.lz");
-static const u32 sNameplateLeftCenter[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftCenter.4bpp.lz");
-static const u32 sNameplateLeftSecondRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftSecondRow.4bpp.lz");
-static const u32 sNameplateLeftThirdRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftThirdRow.4bpp.lz");
-static const u32 sNameplateLeftTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftTop.4bpp.lz");
-static const u32 sNameplateRightBottom[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom.4bpp.lz");
-static const u32 sNameplateRightBottom0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom0.4bpp.lz");
-static const u32 sNameplateRightBottom1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom1.4bpp.lz");
-static const u32 sNameplateRightBottom2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom2.4bpp.lz");
-static const u32 sNameplateRightBottom3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom3.4bpp.lz");
-static const u32 sNameplateRightBottom4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom4.4bpp.lz");
-static const u32 sNameplateRightBottom5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom5.4bpp.lz");
-static const u32 sNameplateRightBottom6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom6.4bpp.lz");
-static const u32 sNameplateRightBottom7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom7.4bpp.lz");
-static const u32 sNameplateRightBottom8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom8.4bpp.lz");
-static const u32 sNameplateRightSecondRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow0.4bpp.lz");
-static const u32 sNameplateRightSecondRow1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow1.4bpp.lz");
-static const u32 sNameplateRightSecondRow2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow2.4bpp.lz");
-static const u32 sNameplateRightSecondRow3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow3.4bpp.lz");
-static const u32 sNameplateRightSecondRow4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow4.4bpp.lz");
-static const u32 sNameplateRightSecondRow5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow5.4bpp.lz");
-static const u32 sNameplateRightSecondRow6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow6.4bpp.lz");
-static const u32 sNameplateRightSecondRow7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow7.4bpp.lz");
-static const u32 sNameplateRightSecondRow8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow8.4bpp.lz");
-static const u32 sNameplateRightThirdRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow0.4bpp.lz");
-static const u32 sNameplateRightThirdRow1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow1.4bpp.lz");
-static const u32 sNameplateRightThirdRow2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow2.4bpp.lz");
-static const u32 sNameplateRightThirdRow3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow3.4bpp.lz");
-static const u32 sNameplateRightThirdRow4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow4.4bpp.lz");
-static const u32 sNameplateRightThirdRow5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow5.4bpp.lz");
-static const u32 sNameplateRightThirdRow6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow6.4bpp.lz");
-static const u32 sNameplateRightThirdRow7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow7.4bpp.lz");
-static const u32 sNameplateRightThirdRow8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow8.4bpp.lz");
-static const u32 sNameplateRightTop0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop0.4bpp.lz");
-static const u32 sNameplateRightTop1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop1.4bpp.lz");
-static const u32 sNameplateRightTop2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop2.4bpp.lz");
-static const u32 sNameplateRightTop3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop3.4bpp.lz");
-static const u32 sNameplateRightTop4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop4.4bpp.lz");
-static const u32 sNameplateRightTop5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop5.4bpp.lz");
-static const u32 sNameplateRightTop6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop6.4bpp.lz");
-static const u32 sNameplateRightTop7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop7.4bpp.lz");
-static const u32 sNameplateRightTop8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop8.4bpp.lz");
+static const u32 sMessageBoxLeftTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxLeftTop.4bpp.smol");
+static const u32 sMessageBoxCenterTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxCenterTop.4bpp.smol");
+static const u32 sMessageBoxRightTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxRightTop.4bpp.smol");
+static const u32 sNameplateCenterBottom[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom.4bpp.smol");
+static const u32 sNameplateCenterBottom1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom1.4bpp.smol");
+static const u32 sNameplateCenterBottom2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom2.4bpp.smol");
+static const u32 sNameplateCenterBottom3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterBottom3.4bpp.smol");
+static const u32 sNameplateCenterSecondRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterSecondRow.4bpp.smol");
+static const u32 sNameplateCenterSecondRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterSecondRow0.4bpp.smol");
+static const u32 sNameplateCenterThirdRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterThirdRow.4bpp.smol");
+static const u32 sNameplateCenterThirdRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterThirdRow0.4bpp.smol");
+static const u32 sNameplateCenterTop0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterTop.4bpp.smol");
+static const u32 sNameplateCenterTop1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterTop1.4bpp.smol");
+static const u32 sNameplateCenterTop2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateCenterTop2.4bpp.smol");
+static const u32 sNameplateLeftBottom[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftBottom.4bpp.smol");
+static const u32 sNameplateLeftCenter[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftCenter.4bpp.smol");
+static const u32 sNameplateLeftSecondRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftSecondRow.4bpp.smol");
+static const u32 sNameplateLeftThirdRow[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftThirdRow.4bpp.smol");
+static const u32 sNameplateLeftTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateLeftTop.4bpp.smol");
+static const u32 sNameplateRightBottom[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom.4bpp.smol");
+static const u32 sNameplateRightBottom0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom0.4bpp.smol");
+static const u32 sNameplateRightBottom1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom1.4bpp.smol");
+static const u32 sNameplateRightBottom2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom2.4bpp.smol");
+static const u32 sNameplateRightBottom3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom3.4bpp.smol");
+static const u32 sNameplateRightBottom4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom4.4bpp.smol");
+static const u32 sNameplateRightBottom5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom5.4bpp.smol");
+static const u32 sNameplateRightBottom6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom6.4bpp.smol");
+static const u32 sNameplateRightBottom7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom7.4bpp.smol");
+static const u32 sNameplateRightBottom8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightBottom8.4bpp.smol");
+static const u32 sNameplateRightSecondRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow0.4bpp.smol");
+static const u32 sNameplateRightSecondRow1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow1.4bpp.smol");
+static const u32 sNameplateRightSecondRow2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow2.4bpp.smol");
+static const u32 sNameplateRightSecondRow3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow3.4bpp.smol");
+static const u32 sNameplateRightSecondRow4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow4.4bpp.smol");
+static const u32 sNameplateRightSecondRow5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow5.4bpp.smol");
+static const u32 sNameplateRightSecondRow6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow6.4bpp.smol");
+static const u32 sNameplateRightSecondRow7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow7.4bpp.smol");
+static const u32 sNameplateRightSecondRow8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightSecondRow8.4bpp.smol");
+static const u32 sEmptyTile[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/emptyTile.4bpp.smol");
+static const u32 sNameplateRightThirdRow0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow0.4bpp.smol");
+static const u32 sNameplateRightThirdRow1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow1.4bpp.smol");
+static const u32 sNameplateRightThirdRow2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow2.4bpp.smol");
+static const u32 sNameplateRightThirdRow3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow3.4bpp.smol");
+static const u32 sNameplateRightThirdRow4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow4.4bpp.smol");
+static const u32 sNameplateRightThirdRow5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow5.4bpp.smol");
+static const u32 sNameplateRightThirdRow6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow6.4bpp.smol");
+static const u32 sNameplateRightThirdRow7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow7.4bpp.smol");
+static const u32 sNameplateRightThirdRow8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightThirdRow8.4bpp.smol");
+static const u32 sNameplateRightTop0[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop0.4bpp.smol");
+static const u32 sNameplateRightTop1[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop1.4bpp.smol");
+static const u32 sNameplateRightTop2[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop2.4bpp.smol");
+static const u32 sNameplateRightTop3[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop3.4bpp.smol");
+static const u32 sNameplateRightTop4[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop4.4bpp.smol");
+static const u32 sNameplateRightTop5[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop5.4bpp.smol");
+static const u32 sNameplateRightTop6[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop6.4bpp.smol");
+static const u32 sNameplateRightTop7[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop7.4bpp.smol");
+static const u32 sNameplateRightTop8[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/nameplateRightTop8.4bpp.smol");
 
 static const u16* const genderNameplatePaletteLUT[] =
 {
@@ -212,7 +213,7 @@ static const u32* const nameplateRightSecondRowLUT[] =
 
 static const u32* const nameplateRightThirdRowLUT[] =
 {
-    NULL,
+    sNameplateRightThirdRow0,
     sNameplateRightThirdRow1,
     sNameplateRightThirdRow2,
     sNameplateRightThirdRow3,
@@ -225,7 +226,7 @@ static const u32* const nameplateRightThirdRowLUT[] =
 
 static const u32* const nameplateRightTopLUT[] =
 {
-    NULL,
+    sEmptyTile,
     sNameplateRightTop1,
     sNameplateRightTop2,
     sNameplateRightTop3,
@@ -523,14 +524,14 @@ static void DrawThirdRowNameplateTiles(u32 windowId, u32 nameplateWidth, u32 off
 {
     u32 index;
 
-    CopyToWindowPixelBuffer(windowId, (const void*)sNameplateLeftThirdRow, 0, NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET);
+    CopyToWindowPixelBuffer(windowId, sNameplateLeftThirdRow, 0, NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET);
 
     for (index = 0; index < nameplateTileWidth - 1; index++)
-        CopyToWindowPixelBuffer(windowId, (const void*)nameplateCenterThirdRowLUT[4], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
+        CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[4], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
 
-    CopyToWindowPixelBuffer(windowId, (const void*)nameplateCenterThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index++);
+    CopyToWindowPixelBuffer(windowId, nameplateCenterThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index++);
 
-    CopyToWindowPixelBuffer(windowId, (const void*)nameplateRightThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
+    CopyToWindowPixelBuffer(windowId, nameplateRightThirdRowLUT[offset], 0, NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET+ index);
 }
 
 static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker speaker)
@@ -538,7 +539,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
     u32 palnum, paltag;
     u32 spriteId = MAX_SPRITES;
     u32 SpriteTag = GFXTAG_SPEAKER_ICON;
-    struct CompressedSpriteSheet sSpriteSheet_Speaker_Icon;
+    struct SpriteSheet sSpriteSheet_Speaker_Icon;
     struct SpritePalette spritePalette;
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
@@ -553,7 +554,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
     sSpriteSheet_Speaker_Icon.data = sSpeakerData[speaker].speakerIcon;
     sSpriteSheet_Speaker_Icon.size = 2048;
     sSpriteSheet_Speaker_Icon.tag = SpriteTag;
-    LoadCompressedSpriteSheet(&sSpriteSheet_Speaker_Icon);
+    LoadSpriteSheet(&sSpriteSheet_Speaker_Icon);
 
     spritePalette.data = sSpeakerData[speaker].speakerPal;
     spritePalette.tag = paltag;

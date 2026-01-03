@@ -27,16 +27,25 @@ build_rom:
 test_rom:
   stage: test
   image: ubuntu:latest
+  needs:
+    - job: build_rom
+      artifacts: true
   before_script:
     - apt update && apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go make git cmake libelf-dev
   script:
     - make -j$(nproc) > /dev/null
     - make -j$(nproc) check
+  artifacts:
+    paths:
+      - silicon.gba
+    expire_in: 5 minutes
 
 upload_to_catbox:
     stage: deploy
     image: ubuntu:latest
-    needs: ["test_rom"]
+    needs:
+    - job: test_rom
+      artifacts: true
     before_script:
       - apt update && apt install -y git gettext curl jq
     script:

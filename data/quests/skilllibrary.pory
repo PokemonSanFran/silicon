@@ -62,9 +62,12 @@ script Quest_Skilllibrary_CopyTM_Script{
     msgbox(gText_Skilllibrary_OkayDone)
     applymovement(PERSON,Quest_Skilllibrary_ReturnToPlayer)
     waitmovement(PERSON)
-    if (var(VAR_QUEST_SKILLLIBRARY_TM_COUNT) == NUM_TECHNICAL_MACHINES){
+
+    if (var(VAR_QUEST_SKILLLIBRARY_TM_COUNT) == 435){
+// PSF TODO change magic number to NUM_TECHNICAL_MACHINES or write a new function for this
         goto(Quest_Skilllibrary_Reward_Dialogue)
     }
+
     msgbox(gText_Skilllibrary_IThinkThere)
     closemessage
     release

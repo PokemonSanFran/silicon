@@ -74,7 +74,7 @@ static u32 GenerateItemsGroupAndRandomlyChooseItem(u32 firstIndex, u32 lastIndex
     u32 itemsInGroup[NATIVE_ITEM_GROUP_SIZE_MAX] = {0};
 
     for(itemIndex = firstIndex; itemIndex <= lastIndex; itemIndex++)
-        if (ItemId_GetNativeItemGroup(itemIndex) == itemGroup)
+        if (GetItemNativeGroup(itemIndex) == itemGroup)
             itemsInGroup[numItems++] = itemIndex;
 
     return itemsInGroup[Random() % numItems];

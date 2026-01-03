@@ -76,37 +76,28 @@ script Debug_CheatStart
 	end
 }
 
-script Debug_FlagsNotSetOverworldConfigMessage
+script Debug_VarsNotSetBattleConfigMessage
 {
-	message(Debug_FlagsNotSetOverworldConfigMessage_Text)
+	message(format("Feature unavailable!\nPlease define a usable var in:\l'include/config/battle.h'!"))
 	goto(Debug_MessageEnd)
 }
 
-text Debug_FlagsNotSetOverworldConfigMessage_Text
+script Debug_FlagsNotSetOverworldConfigMessage
 {
-	format("Feature unavailable!\nPlease define a usable flag in:\l'include/config/overworld.h'!")
+	message(format("Feature unavailable!\nPlease define a usable flag in:\l'include/config/overworld.h'!"))
+	goto(Debug_MessageEnd)
 }
 
 script Debug_FlagsNotSetBattleConfigMessage
 {
-	message(Debug_FlagsNotSetBattleConfigMessage_Text)
+	message(format("Feature unavailable!\nPlease define a usable flag in:\l'include/config/battle.h'!"))
 	goto(Debug_MessageEnd)
-}
-
-text Debug_FlagsNotSetBattleConfigMessage_Text
-{
-	format("Feature unavailable!\nPlease define a usable flag in:\l'include/config/battle.h'!")
 }
 
 script Debug_BoxFilledMessage
 {
-	message(Debug_BoxFilledMessage_Text)
+	message(format("Storage boxes filled!"))
 	goto(Debug_MessageEnd)
-}
-
-text Debug_BoxFilledMessage_Text
-{
-	format("Storage boxes filled!")
 }
 
 script Debug_EventScript_CheckEVs
@@ -118,9 +109,9 @@ script Debug_EventScript_CheckEVs
 	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEVs_End)
 	callnative(Script_GetChosenMonOffensiveEVs)
-	msgbox(Debug_EventScript_Text_OffensiveEVs, MSGBOX_DEFAULT)
+	msgbox(format("ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
 	callnative(Script_GetChosenMonDefensiveEVs)
-	msgbox(Debug_EventScript_Text_DefensiveEVs, MSGBOX_DEFAULT)
+	msgbox(format("HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
     goto(Debug_EventScript_CheckEVs_End)
 }
 
@@ -138,9 +129,9 @@ script Debug_EventScript_CheckIVs
 	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIVs_End)
 	callnative(Script_GetChosenMonOffensiveIVs)
-	msgbox(Debug_EventScript_Text_OffensiveIVs, MSGBOX_DEFAULT)
+	msgbox(format("ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
 	callnative(Script_GetChosenMonDefensiveIVs)
-	msgbox(Debug_EventScript_Text_DefensiveIVs, MSGBOX_DEFAULT)
+	msgbox(format("HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
 }
 
 script Debug_EventScript_CheckIVs_End
@@ -149,39 +140,9 @@ script Debug_EventScript_CheckIVs_End
 	end
 }
 
-text Debug_EventScript_Text_OffensiveEVs
-{
-	format("ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}")
-}
-
-text Debug_EventScript_Text_DefensiveEVs
-{
-	format("HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}")
-}
-
-text Debug_EventScript_Text_OffensiveIVs
-{
-	format("ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}")
-}
-
-text Debug_EventScript_Text_DefensiveIVs
-{
-	format("HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}")
-}
-
 script Debug_EventScript_Script_1
 {
-	setflag(FLAG_BADGE01_GET)
-	setflag(FLAG_BADGE02_GET)
-	setflag(FLAG_BADGE03_GET)
-	setflag(FLAG_BADGE04_GET)
-	setflag(FLAG_BADGE05_GET)
-	setflag(FLAG_BADGE06_GET)
-	setflag(FLAG_BADGE07_GET)
-	setflag(FLAG_BADGE08_GET)
-    givemon(SPECIES_WEEDLE,6,0)
-    trainerbattle_no_intro(TRAINER_BELEN,Debug_FlagsNotSetOverworldConfigMessage_Text)
-    end
+	end
 }
 
 script Debug_EventScript_Script_2
@@ -232,48 +193,23 @@ script Debug_EventScript_Script_10
 script Debug_CheckSaveBlock
 {
 	callnative(CheckSaveBlock1Size)
-	msgbox(Debug_SaveBlock1Size, MSGBOX_DEFAULT)
+	msgbox(format("SaveBlock1 size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b."), MSGBOX_DEFAULT)
 	callnative(CheckSaveBlock2Size)
-	msgbox(Debug_SaveBlock2Size, MSGBOX_DEFAULT)
+	msgbox(format("SaveBlock2 size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b."), MSGBOX_DEFAULT)
 	callnative(CheckSaveBlock3Size)
-	msgbox(Debug_SaveBlock3Size, MSGBOX_DEFAULT)
+	msgbox(format("SaveBlock3 size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b."), MSGBOX_DEFAULT)
 	callnative(CheckPokemonStorageSize)
-	msgbox(Debug_PokemonStorageSize, MSGBOX_DEFAULT)
+	msgbox(format("{PKMN}Storage size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b."), MSGBOX_DEFAULT)
 	release
 	end
-}
-
-text Debug_SaveBlock1Size
-{
-	format("SaveBlock1 size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b.")
-}
-
-text Debug_SaveBlock2Size
-{
-	format("SaveBlock2 size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b.")
-}
-
-text Debug_SaveBlock3Size
-{
-	format("SaveBlock3 size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b.")
-}
-
-text Debug_PokemonStorageSize
-{
-	format("{PKMN}Storage size: {STR_VAR_1}b/{STR_VAR_2}b.\nFree space: {STR_VAR_3}b.")
 }
 
 script Debug_CheckROMSpace
 {
 	callnative(CheckROMSize)
-	msgbox(Debug_ROMSize, MSGBOX_DEFAULT)
+	msgbox(format("ROM size: {STR_VAR_1}MB/32MB.\nFree space: {STR_VAR_2}MB."), MSGBOX_DEFAULT)
 	release
 	end
-}
-
-text Debug_ROMSize
-{
-	format("ROM size: {STR_VAR_1}MB/32MB.\nFree space: {STR_VAR_2}MB.")
 }
 
 script Debug_HatchAnEgg
@@ -297,72 +233,61 @@ script Debug_HatchAnEgg_End
 
 script Debug_NoPokemon
 {
-	msgbox(DebugScript_Text_EmptyParty, MSGBOX_DEFAULT)
+	msgbox(format("You have no Pokémon nor Eggs."), MSGBOX_DEFAULT)
 	releaseall
 	end
 }
 
 script DebugScript_HatchAnEgg_CantForceHatch
 {
-	msgbox(DebugScript_HatchAnEgg_Text_NotAnEgg, MSGBOX_DEFAULT)
+	msgbox(format("That's not a Pokémon Egg."), MSGBOX_DEFAULT)
 	releaseall
 	end
 }
 
-text DebugScript_Text_EmptyParty
-{
-	format("You have no Pokémon nor Eggs.")
-}
-
-text DebugScript_HatchAnEgg_Text_NotAnEgg
-{
-	format("That's not a Pokémon Egg.")
-}
-
 script DebugScript_ZeroDaycareMons
 {
-	msgbox(DebugText_DaycareNoPokemon, MSGBOX_DEFAULT)
+	msgbox(format("You have no Pokémon at Daycare."), MSGBOX_DEFAULT)
 	releaseall
 	end
 }
 
 script DebugScript_OneDaycareMons
 {
-	msgbox(DebugText_DaycareOnePokemon, MSGBOX_DEFAULT)
+	msgbox(format("You have only one Pokémon at Daycare."), MSGBOX_DEFAULT)
 	releaseall
 	end
 }
 
 script DebugScript_DaycareMonsNotCompatible
 {
-	msgbox(DebugText_DaycarePokemonNotCompatible, MSGBOX_DEFAULT)
+	msgbox(format("Your Pokémon at Daycare can't\nhave babies together!"), MSGBOX_DEFAULT)
 	releaseall
 	end
 }
 
-text DebugText_DaycareNoPokemon
-{
-	format("You have no Pokémon at Daycare.")
-}
-text DebugText_DaycareOnePokemon
-{
-	format("You have only one Pokémon at Daycare.")
-}
-text DebugText_DaycarePokemonNotCompatible
-{
-	format("Your Pokémon at Daycare can't\nhave babies together!")
-}
 script Debug_ShowExpansionVersion
 {
 	callnative(BufferExpansionVersion)
-	msgbox(Debug_ExpansionVersion, MSGBOX_DEFAULT)
+	msgbox(format("pokeemerald-expansion {STR_VAR_1}"), MSGBOX_DEFAULT)
 	release
 	end
 }
 
-text Debug_ExpansionVersion
+script Debug_Follower_NPC_Not_Enabled
 {
-	format("pokeemerald-expansion {STR_VAR_1}")
+    msgbox(format("Feature unavailable.\nSet FNPC_ENABLE_NPC_FOLLOWERS to\lTRUE in 'include/config/follower_npc.h'."),MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Debug_Follower_NPC_Event_Script
+{
+    lock
+    facefollowernpc
+    msgbox(format("This is a Follower NPC test."),MSGBOX_DEFAULT)
+    releaseall
+    end
 }
 
 script Debug_EventScript_Steven_Multi
@@ -374,26 +299,16 @@ script Debug_EventScript_Steven_Multi
 
 script Debug_BerryPestsDisabled
 {
-	msgbox(DebugText_BerryPestsDisabled, MSGBOX_DEFAULT)
+	msgbox(format("OW_BERRY_PESTS is disabled.\nUnable to force pests onto berry trees."), MSGBOX_DEFAULT)
 	release
 	end
-}
-
-text DebugText_BerryPestsDisabled
-{
-	format("OW_BERRY_PESTS is disabled.\nUnable to force pests onto berry trees.")
 }
 
 script Debug_BerryWeedsDisabled
 {
-	msgbox(DebugText_BerryWeedsDisabled, MSGBOX_DEFAULT)
+	msgbox(format("OW_BERRY_WEEDS is disabled.\nUnable to force weeds onto berry trees."), MSGBOX_DEFAULT)
 	release
 	end
-}
-
-text DebugText_BerryWeedsDisabled
-{
-	format("OW_BERRY_WEEDS is disabled.\nUnable to force weeds onto berry trees.")
 }
 
 #endif
@@ -403,9 +318,9 @@ script Debug_EventScript_InflictStatus1
 	lockall
 	getpartysize
 	goto_if_eq(VAR_RESULT, 0, Debug_NoPokemon)
-	dynmultipush(Debug_EventScript_InflictStatus1_Text_Single, 0)
-	dynmultipush(Debug_EventScript_InflictStatus1_Text_PartyWide, 1)
-	dynmultipush(Debug_EventScript_InflictStatus1_Text_Close, 2)
+	dynmultipush(format("Single"), 0)
+	dynmultipush(format("Party-wide"), 1)
+	dynmultipush(format("Close"), 2)
 	dynmultistack(0, 0, FALSE, 3, FALSE, 0, NULL)
 	switch(var(VAR_RESULT))
 	{
@@ -415,6 +330,7 @@ script Debug_EventScript_InflictStatus1
 	goto(Debug_EventScript_InflictStatus1_Close)
 	}
 }
+
 
 script Debug_EventScript_InflictStatus1_Close
 {
@@ -448,6 +364,81 @@ script Debug_EventScript_InflictStatus1_Single
 	case 6: goto(Debug_EventScript_InflictStatus1_Close)
 	case MULTI_B_PRESSED: goto(Debug_EventScript_InflictStatus1_Close)
 	}
+	releaseall
+	end
+}
+
+script Debug_EventScript_SetHiddenNature
+{
+    special(ChoosePartyMon)
+    waitstate
+    goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close)
+    specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
+    goto_if_eq(VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close)
+    dynmultipush(format("Hardy"), 0)
+    dynmultipush(format("Lonely"), 1)
+    dynmultipush(format("Brave"), 2)
+    dynmultipush(format("Adamant"), 3)
+    dynmultipush(format("Naughty"), 4)
+    dynmultipush(format("Bold"), 5)
+    dynmultipush(format("Docile"), 6)
+    dynmultipush(format("Relaxed"), 7)
+    dynmultipush(format("Impish"), 8)
+    dynmultipush(format("Lax"), 9)
+    dynmultipush(format("Timid"), 10)
+    dynmultipush(format("Hasty"), 11)
+    dynmultipush(format("Serious"), 12)
+    dynmultipush(format("Jolly"), 13)
+    dynmultipush(format("Naive"), 14)
+    dynmultipush(format("Modest"), 15)
+    dynmultipush(format("Mild"), 16)
+    dynmultipush(format("Quiet"), 17)
+    dynmultipush(format("Bashful"), 18)
+    dynmultipush(format("Rash"), 19)
+    dynmultipush(format("Calm"), 20)
+    dynmultipush(format("Gentle"), 21)
+    dynmultipush(format("Sassy"), 22)
+    dynmultipush(format("Careful"), 23)
+    dynmultipush(format("Quirky"), 24)
+    dynmultistack(0, 0, TRUE, 7, FALSE, 0, NULL)
+
+    switch(var(VAR_RESULT))
+    {
+        case MULTI_B_PRESSED: goto(Debug_EventScript_InflictStatus1_Close)
+    }
+    special(SetHiddenNature)
+    releaseall
+    end
+}
+
+script Debug_EventScript_SetAbility
+{
+	special(ChoosePartyMon)
+	waitstate
+	callnative(DebugNative_GetAbilityNames)
+	dynmultipush(gStringVar1, 0)
+	dynmultipush(gStringVar2, 1)
+	dynmultipush(gStringVar3, 2)
+	dynmultistack(0, 0, FALSE, 3 FALSE, 0, NULL)
+	switch(var(VAR_RESULT))
+	{
+		case MULTI_B_PRESSED: goto(Debug_EventScript_SetAbilityClose)
+	}
+	special(SetAbility)
+	goto(Debug_EventScript_SetAbilityClose)
+}
+
+script Debug_EventScript_SetAbilityClose
+{
+	releaseall
+	end
+}
+
+script Debug_EventScript_SetFriendship
+{
+	special(ChoosePartyMon)
+	waitstate
+	callnative(DebugNative_Party_SetFriendship)
 	releaseall
 	end
 }
@@ -561,16 +552,6 @@ script Debug_EventScript_InflictStatus1_Party_Frostbite
 	end
 }
 
-text Debug_EventScript_InflictStatus1_Text_Single
-{
-    format("Single")
-}
-
-text Debug_EventScript_InflictStatus1_Text_PartyWide
-{
-    format("Party-wide")
-}
-
 text Debug_EventScript_InflictStatus1_Text_Close
 {
     format("Close")
@@ -606,34 +587,30 @@ text Debug_EventScript_InflictStatus1_Text_Frostbite
     format("Frostbite")
 }
 
+
+
 script Debug_EventScript_EWRAMCounters
 {
     callnative(CheckEWRAMCounters)
-    msgbox(Debug_EventScript_EWRAMCounters_Text,MSGBOX_DEFAULT)
+    msgbox(format("Follower Steps: {STR_VAR_1}.\nFishing Chain: {STR_VAR_2}."),MSGBOX_DEFAULT)
     release
     end
 }
 
-text Debug_EventScript_EWRAMCounters_Text
-{
-    format("Follower Steps: {STR_VAR_1}.\nFishing Chain: {STR_VAR_2}.")
-}
-
 script Debug_PrintFontTest
 {
-    msgbox(Debug_EventScript_FontTest_Text_1, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_2, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_3, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_4, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_5, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_6, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_7, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_8, MSGBOX_DEFAULT)
-    msgbox(Debug_EventScript_FontTest_Text_9, MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Angel Adept Blind Bodice Clique\nCoast Dunce Docile Enact Eosin Furlong Focal Gnome Gondola Human Hoist Inlet Iodine Justin Jocose Knoll Koala Linden Loads Milliner Modal Number Nodule Onset Oddball Pneumo Poncho Quanta Qophs Rhone Roman Snout Sodium Tundra Tocsin Uncle Udder Vulcan Vocal Whale Woman Xmas Xenon Yunnan Young Zloty Zodiac."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Angel angel adept for the nuance loads\nof the arena cocoa and quaalude. Blind blind bodice for the submit oboe of the club snob and abbot. Clique clique coast for the pouch loco of the franc assoc and accede. Dunce dunce docile for the loudness mastodon of the loud statehood and huddle."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Enact enact eosin for the quench coed\nof the pique canoe and bleep. Furlong furlong focal for the genuflect profound of the motif aloof and offers. Gnome gnome gondola for the impugn logos of the unplug analog and smuggle. Human human hoist for the buddhist alcohol of the riyadh caliph and bathhouse."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Inlet inlet iodine for the quince\nchampion of the ennui scampi and shiite. Justin justin jocose for the djibouti sojourn of the oranj raj and hajjis. Knoll knoll koala for the banknote lookout of the dybbuk outlook and trekked. Linden linden loads for the ulna monolog of the consul menthol and shallot."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Milliner milliner modal for the alumna\nsolomon of the album custom and summon. Number number nodule for the unmade economic of the shotgun bison and tunnel. Onset onset oddball for the abandon podium of the antiquo tempo and moonlit. Pneumo pneumo poncho for the dauphin opossum of the holdup bishop and supplies."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Quanta quanta qophs for the inquest\nsheqel of the cinq coq and suqqu. Rhone rhone roman for the burnt porous of the lemur clamor and carrot. Snout snout sodium for the ensnare bosom of the genus pathos and missing. Tundra tundra tocsin for the nutmeg isotope of the peasant ingot and ottoman."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Uncle uncle udder for the dunes cloud\nof the hindu thou and continuum. Vulcan vulcan vocal for the alluvial ovoid of the yugoslav chekhov and revved. Whale whale woman for the meanwhile blowout of the forepaw meadow and glowworm. Xmas xmas xenon for the bauxite doxology of the tableaux equinox and exxon."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}Yunnan yunnan young for the dynamo\ncoyote of the obloquy employ and sayyid. Zloty zloty zodiac for the gizmo ozone of the franz laissez and buzzing."), MSGBOX_DEFAULT)
+    msgbox(format("{FONT_SMALL_NARROWER}42 × 138 = 5796.\nMr Jock, TV quiz PhD: bags 20% fewer lynx at a café; voilà, they're “worth” ♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11 Nintendo GBA can connect to a Nintendo GameCube console! He claimed-though I don't believe him-to have done so in an eyes-shut state…?"), MSGBOX_DEFAULT)
     releaseall
     end
 }
-
 
 script Debug_EventScript_FontTest
 {
@@ -653,66 +630,10 @@ script Debug_EventScript_FontTest
     //   end
 }
 
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_1
-{
-    format("{FONT_SMALL_NARROWER}Angel Adept Blind Bodice Clique\nCoast Dunce Docile Enact Eosin Furlong Focal Gnome Gondola Human Hoist Inlet Iodine Justin Jocose Knoll Koala Linden Loads Milliner Modal Number Nodule Onset Oddball Pneumo Poncho Quanta Qophs Rhone Roman Snout Sodium Tundra Tocsin Uncle Udder Vulcan Vocal Whale Woman Xmas Xenon Yunnan Young Zloty Zodiac.")
-}
-
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_2
-{
-    format("{FONT_SMALL_NARROWER}Angel angel adept for the nuance loads\nof the arena cocoa and quaalude. Blind blind bodice for the submit oboe of the club snob and abbot. Clique clique coast for the pouch loco of the franc assoc and accede. Dunce dunce docile for the loudness mastodon of the loud statehood and huddle.")
-}
-
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_3
-{
-    format("{FONT_SMALL_NARROWER}Enact enact eosin for the quench coed\nof the pique canoe and bleep. Furlong furlong focal for the genuflect profound of the motif aloof and offers. Gnome gnome gondola for the impugn logos of the unplug analog and smuggle. Human human hoist for the buddhist alcohol of the riyadh caliph and bathhouse.")
-}
-
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_4
-{
-    format("{FONT_SMALL_NARROWER}Inlet inlet iodine for the quince\nchampion of the ennui scampi and shiite. Justin justin jocose for the djibouti sojourn of the oranj raj and hajjis. Knoll knoll koala for the banknote lookout of the dybbuk outlook and trekked. Linden linden loads for the ulna monolog of the consul menthol and shallot.")
-}
-
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_5
-{
-    format("{FONT_SMALL_NARROWER}Milliner milliner modal for the alumna\nsolomon of the album custom and summon. Number number nodule for the unmade economic of the shotgun bison and tunnel. Onset onset oddball for the abandon podium of the antiquo tempo and moonlit. Pneumo pneumo poncho for the dauphin opossum of the holdup bishop and supplies.")
-}
-
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_6
-{
-    format("{FONT_SMALL_NARROWER}Quanta quanta qophs for the inquest\nsheqel of the cinq coq and suqqu. Rhone rhone roman for the burnt porous of the lemur clamor and carrot. Snout snout sodium for the ensnare bosom of the genus pathos and missing. Tundra tundra tocsin for the nutmeg isotope of the peasant ingot and ottoman.")
-}
-
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_7
-{
-    format("{FONT_SMALL_NARROWER}Uncle uncle udder for the dunes cloud\nof the hindu thou and continuum. Vulcan vulcan vocal for the alluvial ovoid of the yugoslav chekhov and revved. Whale whale woman for the meanwhile blowout of the forepaw meadow and glowworm. Xmas xmas xenon for the bauxite doxology of the tableaux equinox and exxon.")
-}
-
-// Edit this to test your font
-text Debug_EventScript_FontTest_Text_8
-{
-    format("{FONT_SMALL_NARROWER}Yunnan yunnan young for the dynamo\ncoyote of the obloquy employ and sayyid. Zloty zloty zodiac for the gizmo ozone of the franz laissez and buzzing.")
-}
-
-// Special thanks to Nintendo for this nice pangram to test other glyphs
-// Edit this to test your font
-
-text Debug_EventScript_FontTest_Text_9
-{
-    format("{FONT_SMALL_NARROWER}42 × 138 = 5796.\nMr Jock, TV quiz PhD: bags 20% fewer lynx at a café; voilà, they're “worth” ♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11 Nintendo GBA can connect to a Nintendo GameCube console! He claimed-though I don't believe him-to have done so in an eyes-shut state…?")
-}
-
 script Debug_EventScript_TellTheTime
 {
     callnative(DebugMenu_CalculateTime)
-    msgbox(Debug_EventScript_TellTheTime_Text_0, MSGBOX_DEFAULT)
+    msgbox(format("Time and date:\n{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3}"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
@@ -721,7 +642,7 @@ script Debug_EventScript_TellTheTime
 script Debug_EventScript_PrintTimeOfDay
 {
     callnative(DebugMenu_CalculateTimeOfDay)
-    msgbox(DebugEventScript_PrintWeekday_Text_0, MSGBOX_DEFAULT)
+    msgbox(format("Time of day: {STR_VAR_1}"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
@@ -729,24 +650,9 @@ script Debug_EventScript_PrintTimeOfDay
 
 script Debug_EventScript_FakeRTCNotEnabled
 {
-    msgbox(Debug_EventScript_FakeRTCNotEnabled_Text_0, MSGBOX_DEFAULT)
+    msgbox(format("You currently do not have Fake RTC\nenabled. Please enable it in include/\lconfig/overworld.h"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     return
-}
-
-text Debug_EventScript_FakeRTCNotEnabled_Text_0
-{
-    format("You currently do not have Fake RTC\nenabled. Please enable it in include/\lconfig/overworld.h")
-}
-
-text Debug_EventScript_TellTheTime_Text_0
-{
-    format("Time and date:\n{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3}")
-}
-
-text DebugEventScript_PrintWeekday_Text_0
-{
-    format("Time of day: {STR_VAR_1}")
 }
 

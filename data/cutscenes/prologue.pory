@@ -264,15 +264,23 @@ script Prologue_BeginAdventure_Dialogue
     end
 }
 
-script Prologue_FirstTimeCharacterCustomize_Script
+script Prologue_FirstTimeCharacterCustomize_Dialogue
 {
     call(ThereCanOnlyBeOne_SetUpPlayer_Script)
     msgbox(Prologue_HowDoesTheWorld_Text)
     closemessage
+    call(Prologue_FirstTimeCharacterCustomize_Script)
+}
+
+script Prologue_FirstTimeCharacterCustomize_Script
+{
     fadescreen(FADE_TO_BLACK)
     callnative(CustomizeCharacterFromOverworld)
     waitstate
-    setvar(VAR_FIRSTRUNEXPERIENCE,CHARACTER_CREATED)
+    if (var(VAR_FIRSTRUNEXPERIENCE) < CHARACTER_CREATED)
+    {
+        setvar(VAR_FIRSTRUNEXPERIENCE,CHARACTER_CREATED)
+    }
 }
 
 script Prologue_FirstTimeNameCharacter_Script
@@ -300,7 +308,7 @@ script Prologue_FirstTimeReadAcceptLetter_Script
 script Prolouge_NewPlayerCreation_Script
 {
     lock
-    goto_if_lt(VAR_FIRSTRUNEXPERIENCE,CHARACTER_CREATED,Prologue_FirstTimeCharacterCustomize_Script)
+    goto_if_lt(VAR_FIRSTRUNEXPERIENCE,CHARACTER_CREATED,Prologue_FirstTimeCharacterCustomize_Dialogue)
     goto_if_lt(VAR_FIRSTRUNEXPERIENCE,CHARACTER_NAMED,Prologue_FirstTimeNameCharacter_Script)
     goto_if_lt(VAR_FIRSTRUNEXPERIENCE,HAS_READ_LETTER,Prologue_FirstTimeReadAcceptLetter_Script)
     goto(ThereCanOnlyBeOne_Player_Monologue)

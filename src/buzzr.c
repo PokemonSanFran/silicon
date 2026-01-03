@@ -31,7 +31,6 @@
 #include "quests.h"
 #include "constants/quests.h"
 #include "script_menu.h"
-#include "ui_start_menu.h"
 #include "field_weather.h"
 
 static void ResetQuestFanfareFlag(void);
@@ -270,14 +269,14 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .baseBlock = 1
 };
 
-static const u32 sLogomarkAllTilemap[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.bin.lz");
+static const u32 sLogomarkAllTilemap[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.bin.smolTM");
 
-static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.4bpp.lz");
-static const u32 sLogomarkPlayerTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPlayer.4bpp.lz");
-static const u32 sLogomarkPrivateTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPrivate.4bpp.lz");
-static const u32 sLogomarkQuestTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkQuest.4bpp.lz");
-static const u32 sLogomarkUnreadTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkUnread.4bpp.lz");
-static const u32 sLogomarkVerifiedTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkVerified.4bpp.lz");
+static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.4bpp.smol");
+static const u32 sLogomarkPlayerTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPlayer.4bpp.smol");
+static const u32 sLogomarkPrivateTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPrivate.4bpp.smol");
+static const u32 sLogomarkQuestTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkQuest.4bpp.smol");
+static const u32 sLogomarkUnreadTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkUnread.4bpp.smol");
+static const u32 sLogomarkVerifiedTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkVerified.4bpp.smol");
 
 static const u16 sLogomarkAllPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/logomarkAll.gbapal");
 
@@ -287,20 +286,20 @@ static const u8 sMetrics_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/metrics_long
 static const u8 sUnread_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/unread.4bpp");
 static const u8 sPicture_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/picture.4bpp");
 
-const u32 sTweetBgTilemap3[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.bin.lz");
-const u32 sTweetBgTilemap4[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/1.bin.lz");
-const u32 sTweetBgTilemap5[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/2.bin.lz");
-const u32 sTweetBgTilemap6[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/3.bin.lz");
-const u32 sTweetBgTilemap7[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/4.bin.lz");
-const u32 sTweetBgTilemap8[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/5.bin.lz");
+const u32 sTweetBgTilemap3[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.bin.smolTM");
+const u32 sTweetBgTilemap4[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/1.bin.smolTM");
+const u32 sTweetBgTilemap5[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/2.bin.smolTM");
+const u32 sTweetBgTilemap6[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/3.bin.smolTM");
+const u32 sTweetBgTilemap7[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/4.bin.smolTM");
+const u32 sTweetBgTilemap8[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/5.bin.smolTM");
 
 const u16 sTweetBgPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/backgrounds/0.gbapal");
 
-const u32 sTweetBgTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.4bpp.lz");
+const u32 sTweetBgTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.4bpp.smol");
 
-static const u32 BuzzrUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/buzzr/up_arrow.4bpp.lz");
-static const u32 BuzzrDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/down_arrow.4bpp.lz");
-static const u32 BuzzrCursor_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/cursor.4bpp.lz");
+static const u32 BuzzrUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/buzzr/up_arrow.4bpp.smol");
+static const u32 BuzzrDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/down_arrow.4bpp.smol");
+static const u32 BuzzrCursor_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/cursor.4bpp.smol");
 
 enum FontColors
 {
@@ -342,16 +341,9 @@ const struct TweetBackground sTweetBgs[TWEET_BG_COUNT] =
     },
 };
 
-void Task_OpenBuzzrFromStartMenu(u8 taskId)
+void CB2_BuzzrFromStartMenu(void)
 {
-    if (!gPaletteFade.active)
-    {
-        StartMenu_Menu_FreeResources();
-        PlayRainStoppingSoundEffect();
-        CleanupOverworldWindowsAndTilemaps();
-        Buzzr_Init(CB2_ReturnToUIMenu);
-        DestroyTask(taskId);
-    }
+    Buzzr_Init(CB2_StartMenu_ReturnToUI);
 }
 
 static void ResetQuestFanfareFlag(void)
@@ -1037,7 +1029,7 @@ static bool8 LoadGraphics(void)
         case 1:
             if (FreeTempTileDataBuffersIfPossible() != TRUE)
             {
-                LZDecompressWram(sTilemap, sBg2TilemapBuffer);
+                DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
                 sBuzzrState->loadState++;
             }
             break;
@@ -1190,7 +1182,6 @@ static const u32 GetNumContentLines(u16 tweetId)
         str++;
     }
 
-    Free((void*)str);
     return (count > TWEET_MIN_NUM_LINES) ? count : TWEET_MIN_NUM_LINES;
 }
 
@@ -1269,7 +1260,7 @@ static void UNUSED HandleTweetBackground(u16 selectedTweet, u32 verticalOffset)
     const u32 *bgTilemap = sTweetBgTilemap3;
     const u16 *bgPalette = sTweetBgPalette;
 
-    LZ77UnCompWram(sTweetBgTilemap3, sBg1TilemapBuffer);
+    DecompressDataWithHeaderWram(sTweetBgTilemap3, sBg1TilemapBuffer);
     CopyToBgTilemapBufferRect(BG1_BACKGROUND_TWEETS, sBg1TilemapBuffer, 18, 6, 10, 10);
     CopyBgTilemapBufferToVram(1);
     ScheduleBgCopyTilemapToVram(BG1_BACKGROUND_TWEETS);
@@ -1570,7 +1561,7 @@ static void LoadBackground(void)
     const u16 *sPalette = GetRelevantPalette();
 
     DecompressAndLoadBgGfxUsingHeap(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
-    LZDecompressWram(sTilemap, sBg2TilemapBuffer);
+    DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
     LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     ShowBg(BG2_BACKGROUND_UI);
 }

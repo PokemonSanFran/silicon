@@ -184,7 +184,7 @@ u8 GetWalkInPlaceFasterMovementAction(u32);
 u8 GetWalkInPlaceFastMovementAction(u32);
 u8 GetWalkInPlaceNormalMovementAction(u32);
 u8 GetWalkInPlaceSlowMovementAction(u32);
-u8 GetCollisionAtCoords(struct ObjectEvent *, s16 x, s16 y, u32 dir);
+u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir);
 u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, bool32 addCoords);
 void MoveCoords(u8 direction, s16 *x, s16 *y);
 bool8 ObjectEventIsHeldMovementActive(struct ObjectEvent *objectEvent);
@@ -516,5 +516,8 @@ bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *, stru
 const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8); //rematch_action
 u8 GetObjectEventIdByLocalId(u8); // cueobject
 bool8 PlayerIsUnderWaterfall(struct ObjectEvent *objectEvent);
+
+const struct SpritePalette *GetObjectEventSpritePaletteByTag(u16 tag); // startMenu
+u8 GetObjectEventApricornTreeId(u8 objectEventId);
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

@@ -7,6 +7,7 @@
 extern u8 gTweetOverworldWindowId;
 
 void Task_OpenBuzzrFromStartMenu(u8 taskId);
+void CB2_BuzzrFromStartMenu(void);
 void LoadPictureFromOverworld(void);
 const u32* GetPictureTiles(u16 tweetId);
 bool32 Buzzr_IsTweetRead(u16 tweetId);

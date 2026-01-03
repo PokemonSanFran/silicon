@@ -169,7 +169,10 @@
 	.endm
 
 	@ Copies the value of source into destination.
-	.macro copyvar destination:req, source:req
+	.macro copyvar destination:req, source:req, warn=TRUE
+	.if \warn && !((\source >= VARS_START && \source <= VARS_END) || (\source >= SPECIAL_VARS_START && \source <= SPECIAL_VARS_END))
+	.warning "copyvar with a value that is not a VAR_ constant; did you mean setvar instead?"
+	.endif
 	.byte SCR_OP_COPYVAR
 	.2byte \destination
 	.2byte \source
@@ -684,11 +687,27 @@
 	map \map
 	.endm
 
+	@ Set the player object's invisibility to FALSE.
+	.macro showplayer
+	.byte SCR_OP_SHOWOBJECTAT
+	.2byte LOCALID_PLAYER
+	.byte 0 @ map group
+	.byte 0 @ map num
+	.endm
+
 	@ Sets the specified object's invisibility to TRUE.
 	.macro hideobjectat localId:req, map:req
 	.byte SCR_OP_HIDEOBJECTAT
 	.2byte \localId
 	map \map
+	.endm
+
+	@ Set the player object's invisibility to TRUE.
+	.macro hideplayer
+	.byte SCR_OP_HIDEOBJECTAT
+	.2byte LOCALID_PLAYER
+	.byte 0 @ map group
+	.byte 0 @ map num
 	.endm
 
 	@ Turns the currently selected object (if there is one) to face the player.
@@ -736,11 +755,11 @@
 	@ When used with an event script, you can also pass in an optional flag to disable music
 	.macro trainerbattle_single trainer:req, intro_text:req, lose_text:req, event_script=FALSE, music=TRUE
 	.if \event_script == FALSE
-	trainerbattle TRAINER_BATTLE_SINGLE, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_SINGLE, LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.elseif \music == TRUE
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, LOCALID_NONE, \trainer, \intro_text, \lose_text, \event_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.else
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, LOCALID_NONE, \trainer, \intro_text, \lose_text, \event_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.endif
 	.endm
 
@@ -749,27 +768,27 @@
 	@ and an optional event script. When used with an event script you can pass in an optional flag to disable music
 	.macro trainerbattle_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req, event_script=FALSE, music=TRUE
 	.if \event_script == FALSE
-	trainerbattle TRAINER_BATTLE_DOUBLE, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_DOUBLE, LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE
 	.elseif \music == TRUE
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, LOCALID_NONE, \trainer, \intro_text, \lose_text, \event_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE
 	.else
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, FALSE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, LOCALID_NONE, \trainer, \intro_text, \lose_text, \event_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, FALSE, FALSE, FALSE
 	.endif
 	.endm
 
 	@ Starts a rematch battle. Takes a trainer, intro text and loss text
 	.macro trainerbattle_rematch trainer:req, intro_text:req, lose_text:req
-	trainerbattle TRAINER_BATTLE_REMATCH, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, TRUE
+	trainerbattle TRAINER_BATTLE_REMATCH, LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, TRUE
 	.endm
 
 	@ Starts a rematch double battle. Takes a trainer, intro text, loss text, and text for when you have too few pokemon
 	.macro trainerbattle_rematch_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req
-	trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, OBJ_ID_NONE, \trainer, \intro_text, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, FALSE, TRUE, FALSE, TRUE
+	trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, FALSE, TRUE, FALSE, TRUE
 	.endm
 
 	@ Starts a trainer battle, skipping intro text. Takes a trainer and loss text
 	.macro trainerbattle_no_intro trainer:req, lose_text:req
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, OBJ_ID_NONE, \trainer, NULL, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.endm
 
     @ Start siliconMerge
@@ -995,7 +1014,7 @@
 
 	@ Gives the player a Pokémon of the specified species and level, and allows to customize extra parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
-	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, gmaxFactor, teraType, dmaxLevel
+	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, teraType, dmaxLevel
 	callnative ScrCmd_createmon, requests_effects=1
 	.byte 0
 	.byte PARTY_SIZE @ assign to first empty slot
@@ -1023,7 +1042,7 @@
 	.ifnb \move2; .set givemon_flags, givemon_flags | (1 << 18); .endif
 	.ifnb \move3; .set givemon_flags, givemon_flags | (1 << 19); .endif
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
-	.ifnb \isShiny; .set givemon_flags, givemon_flags | (1 << 21); .endif
+	.ifnb \shinyMode; .set givemon_flags, givemon_flags | (1 << 21); .endif
 	.ifnb \gmaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
 	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.ifnb \dmaxLevel; .set givemon_flags, givemon_flags | (1 << 24); .endif
@@ -1049,7 +1068,7 @@
 	.ifnb \move2; .2byte \move2; .endif
 	.ifnb \move3; .2byte \move3; .endif
 	.ifnb \move4; .2byte \move4; .endif
-	.ifnb \isShiny; .2byte \isShiny; .endif
+	.ifnb \shinyMode; .2byte \shinyMode; .endif
 	.ifnb \gmaxFactor; .2byte \gmaxFactor; .endif
 	.ifnb \teraType; .2byte \teraType; .endif
 	.ifnb \dmaxLevel; .2byte \dmaxLevel; .endif
@@ -1057,7 +1076,7 @@
 
 	@ creates a mon for a given party and slot
 	@ otherwise
-	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, gmaxFactor, teraType, dmaxLevel
+	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, teraType, dmaxLevel
 	callnative ScrCmd_createmon, requests_effects=1
 	.byte \side	 @ 0 - player, 1 - opponent
 	.byte \slot	 @ 0-5
@@ -1085,7 +1104,7 @@
 	.ifnb \move2; .set givemon_flags, givemon_flags | (1 << 18); .endif
 	.ifnb \move3; .set givemon_flags, givemon_flags | (1 << 19); .endif
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
-	.ifnb \isShiny; .set givemon_flags, givemon_flags | (1 << 21); .endif
+	.ifnb \shinyMode; .set givemon_flags, givemon_flags | (1 << 21); .endif
 	.ifnb \gmaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
 	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.ifnb \dmaxLevel; .set givemon_flags, givemon_flags | (1 << 24); .endif
@@ -1111,7 +1130,7 @@
 	.ifnb \move2; .2byte \move2; .endif
 	.ifnb \move3; .2byte \move3; .endif
 	.ifnb \move4; .2byte \move4; .endif
-	.ifnb \isShiny; .2byte \isShiny; .endif
+	.ifnb \shinyMode; .2byte \shinyMode; .endif
 	.ifnb \gmaxFactor; .2byte \gmaxFactor; .endif
 	.ifnb \teraType; .2byte \teraType; .endif
 	.ifnb \dmaxLevel; .2byte \dmaxLevel; .endif
@@ -1134,12 +1153,13 @@
 	.2byte \move
 	.endm
 
-	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
+	@ Checks if at least one Pokemon in the player's party knows the specified field move and if the field move is unlocked. If so, VAR_RESULT is set to the
 	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
 	@ VAR_0x8004 is also set to this Pokemon's species.
-	.macro checkpartymove move:req
-	.byte SCR_OP_CHECKPARTYMOVE
-	.2byte \move
+	.macro checkfieldmove fieldMove:req, checkUnlocked=FALSE
+	.byte SCR_OP_CHECKFIELDMOVE
+	.byte \fieldMove
+	.byte \checkUnlocked
 	.endm
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
@@ -2017,6 +2037,7 @@
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made.
 	@ Lists of options are provided in argv.
 	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	@ For a simple menu supply DYN_MULTICHOICE_CB_NONE in callbacks.
 	.macro dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, initialSelected:req, callbacks:req argv:vararg
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, FALSE, \initialSelected, \callbacks, \argv
 	.endm
@@ -2322,7 +2343,7 @@
 	setvar VAR_0x8000, \evoMethod
 	setvar VAR_0x8001, \canStopEvo
 	setvar VAR_0x8002, \tryMultiple
-	special TrySpecialOverworldEvo
+	special TrySpecialScriptEvolution
 	.endm
 
     @ Start quests
@@ -2506,12 +2527,12 @@
 	.2byte \slot
 	.endm
 
-    @ Calls the start menu in Save Mode which only allows the player to save their game or not.
-    .macro startmenu_savescreen
-    fadescreen FADE_TO_BLACK
-    special ShowStartMenuSaveScreen
-    waitstate
-    .endm
+	@ Calls the start menu in Save Mode which only allows the player to save their game or not.
+	.macro startmenu_savescreen
+	fadescreen FADE_TO_BLACK
+	callnative StartMenu_OpenSaveMode
+	waitstate
+	.endm
 
 	@ Writes the name of the specified ability to the specified buffer.
 	.macro bufferabilityname stringVarId:req, ability:req
@@ -2776,7 +2797,7 @@
 	@ For the provided map section, returns the relevant Google Glass location stat to the specified variable.
     .macro glass mapId = MAPSEC_NONE, state = GLASS_LOCATION_RATE, destination = VAR_RESULT
 	.byte SCR_OP_GLASS
-    .byte \mapId
+    .2byte \mapId
     .byte \state
     .2byte \destination
 	.endm
@@ -3012,6 +3033,11 @@
 	@ can be used in conjunection with createmon to set up a wild battle with 2 player mons vs. 1 enemy mon
 	.macro setwilddoubleflag
 	callnative ScriptSetDoubleBattleFlag, requests_effects=1
+	.endm
+
+	@ Stop using the ORAS dowsing machine.
+	.macro stoporasdowsing
+	callnative EndORASDowsing
 	.endm
 
 	@ ============================ @
@@ -3263,7 +3289,7 @@
 
 	@ Hides any follower Pokémon if present, putting them into their Poké Ball; by default waits for their movement to finish.
 	.macro hidefollower wait=1
-	callnative ScrFunc_hidefollower
+	.byte SCR_OP_HIDEFOLLOWER
 	.2byte \wait
 	.endm
 
@@ -3378,7 +3404,7 @@
 
 @ Follower NPCs
 
-	@ Sets an NPC up to follow the player.
+	@ Sets an existing NPC up to follow the player.
 	@ Follower flags are defined in include/constants/follower_npc.h
 	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
 	.macro setfollowernpc localId:req, flags:req, script=0, battlePartner=0
@@ -3403,6 +3429,19 @@
         1:
 	.else
 		.error "setfollowernpc unavailable with FNPC_ENABLE_NPC_FOLLOWERS defined as FALSE"
+	.endif
+	.endm
+
+	@ Creates a new follower NPC with the specified graphics id.
+	.macro createfollowernpc gfx:req, flags:req, script=0, battlePartner=0
+	.if FNPC_ENABLE_NPC_FOLLOWERS
+		callnative ScriptCreateFollowerNPC
+		.2byte \gfx
+		.2byte \flags
+		.4byte \script
+		.2byte \battlePartner
+	.else
+		.error "createfollowernpc unavailable with FNPC_ENABLE_NPC_FOLLOWERS defined as FALSE"
 	.endif
 	.endm
 
@@ -3447,4 +3486,43 @@
 	.macro changefollowerbattler battlePartner:req
 	callnative ScriptChangeFollowerNPCBattlePartner
 	.2byte \battlePartner
+	.endm
+
+    @ Start adventureGuide
+	.macro openadventureguide guide:req
+    setvar VAR_ADVENTURE_GUIDE_TO_OPEN, \guide
+    call RunAdventureGuideScript
+	.endm
+    @ End adventureGuide
+
+	@ Manually buffer a string as the speaker's name for namebox.
+	@ The next shown message/msgbox will include a namebox, if the provided string is not NULL.
+	@ An SP_NAME_* constant can also be used, it'll take the name from gSpeakerNamesTable instead.
+	.macro setspeaker name:req
+	callnative SetSpeaker
+	.4byte \name
+	.endm
+
+@ VS Seeker
+	.macro vsseeker_rematchid rematchId:req
+	callnative NativeVsSeekerRematchId, requests_effects=1
+	.2byte \rematchId
+	.endm
+
+	@ Sets the move relearner state
+	.macro setmoverelearnerstate state:req
+	callnative ScrCmd_setmoverelearnerstate, requests_effects=1
+	.2byte \state
+	.endm
+
+	@ Retrieves the move relearner state and stores it in the specified var
+	.macro getmoverelearnerstate varId:req
+	callnative ScrCmd_getmoverelearnerstate, requests_effects=1
+	.4byte \varId
+	.endm
+
+	@ Execute script if bag has TMs and/or HMs
+	.macro istmrelearneractive destination:req
+	callnative ScrCmd_istmrelearneractive, requests_effects=1
+	.4byte \destination
 	.endm

@@ -13,6 +13,9 @@
 *.8bpp
 *.gbapal
 *.lz
+*.smol
+*.fastSmol
+*.smolTM
 *.rl
 *.latfont
 *.hwjpnfont
@@ -39,7 +42,10 @@ prefabs.json
 *.sym
 *.js
 /pokeemerald-*.png
+/silicon-*.png
 src/data/map_group_count.h
+include/constants/heal_locations.h
+include/constants/script_commands.h
 tools/trainerproc/trainerproc
 tags
 make.txt
@@ -57,6 +63,12 @@ misc/log.txt
 *.sw*
 *.sv*
 *.vim
+src/data/battle_partners.h
+src/data/trainers.h
+src/data/debug_trainers.h
+test/battle/trainer_control.h
+tools/compresSmol/compresSmol
+tools/compresSmol/compresSmolTilemap
 *.Identifier
 *.smol
 *.fastSmol

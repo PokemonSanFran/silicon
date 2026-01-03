@@ -45,17 +45,17 @@ static void Task_DoQuestOverworldSlide(u8 taskId);
 
 static const u16 questOverworldPalette[] = INCBIN_U16("graphics/quest_menu/palettes/questOverworld.gbapal");
 
-static const u32 sQuestOverworldA[] = INCBIN_U32("graphics/quest_menu/ow/tileA.4bpp.lz");
-static const u32 sQuestOverworldB[] = INCBIN_U32("graphics/quest_menu/ow/tileB.4bpp.lz");
-static const u32 sQuestOverworldC[] = INCBIN_U32("graphics/quest_menu/ow/tileC.4bpp.lz");
-static const u32 sQuestOverworldD[] = INCBIN_U32("graphics/quest_menu/ow/tileD.4bpp.lz");
-static const u32 sQuestOverworldE[] = INCBIN_U32("graphics/quest_menu/ow/tileE.4bpp.lz");
-static const u32 sQuestOverworldF[] = INCBIN_U32("graphics/quest_menu/ow/tileF.4bpp.lz");
-static const u32 sQuestOverworldG[] = INCBIN_U32("graphics/quest_menu/ow/tileG.4bpp.lz");
-static const u32 sQuestOverworldH[] = INCBIN_U32("graphics/quest_menu/ow/tileH.4bpp.lz");
-static const u32 sQuestOverworldI[] = INCBIN_U32("graphics/quest_menu/ow/tileI.4bpp.lz");
+static const u32 sQuestOverworldA[] = INCBIN_U32("graphics/quest_menu/ow/tileA.4bpp.smol");
+static const u32 sQuestOverworldB[] = INCBIN_U32("graphics/quest_menu/ow/tileB.4bpp.smol");
+static const u32 sQuestOverworldC[] = INCBIN_U32("graphics/quest_menu/ow/tileC.4bpp.smol");
+static const u32 sQuestOverworldD[] = INCBIN_U32("graphics/quest_menu/ow/tileD.4bpp.smol");
+static const u32 sQuestOverworldE[] = INCBIN_U32("graphics/quest_menu/ow/tileE.4bpp.smol");
+static const u32 sQuestOverworldF[] = INCBIN_U32("graphics/quest_menu/ow/tileF.4bpp.smol");
+static const u32 sQuestOverworldG[] = INCBIN_U32("graphics/quest_menu/ow/tileG.4bpp.smol");
+static const u32 sQuestOverworldH[] = INCBIN_U32("graphics/quest_menu/ow/tileH.4bpp.smol");
+static const u32 sQuestOverworldI[] = INCBIN_U32("graphics/quest_menu/ow/tileI.4bpp.smol");
 
-const u32 gQuestIcon_Gfx[] = INCBIN_U32("graphics/quest_menu/ow/pokeball_sheet.4bpp.lz");
+const u32 gQuestIcon_Gfx[] = INCBIN_U32("graphics/quest_menu/ow/pokeball_sheet.4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_QuestIcon[] =
 {

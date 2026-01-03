@@ -32,7 +32,7 @@ u32 GetChampionBattleMusicFromOption(void);
 bool32 IsMusicMuted(void);
 bool32 AreFanfaresMuted(void);
 bool32 AreSoundEffectsMuted(void);
-void ReturnDummyCryIfMuted(u16*);
+bool32 AreCriesMuted(void);
 void ReturnDummyMusicIfMuted(u16*);
 
 #endif // GUARD_OPTIONS_MUSIC_H

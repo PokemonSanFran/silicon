@@ -5,6 +5,7 @@ EventScript_UseSurf::
     goto_if_eq VAR_RESULT, TRUE, EventScript_UseSurfTool
     goto_if_quest_inactive QUEST_HANG20, EventScript_EndUseSurf
     checkpartylearnknowsfieldmove MOVE_SURF
+	//checkfieldmove FIELD_MOVE_SURF
 @ End qol_field_moves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_EndUseSurf
 	bufferpartymonnick STR_VAR_1, VAR_RESULT

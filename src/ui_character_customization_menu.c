@@ -80,6 +80,7 @@ static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 static EWRAM_DATA u8 *sBgTilemapBuffer[NUM_CUSTOMIZATION_BACKGROUNDS] = {NULL};
 
 //==========STATIC=DEFINES==========//
+static bool32 DebugShouldSkipBg(u32 bg);
 static void Menu_RunSetup(void);
 static bool8 Menu_DoGfxSetup(void);
 static bool8 Menu_InitBgs(void);
@@ -95,7 +96,6 @@ static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void RecolorPlayerCharacters(u8 palnum);
 void CB2_ReturnToCostumizationMenu(void);
-void SetCustomPlayerPalette(u16 *palette);
 
 static void CreateTrainerFrontSprite(void);
 static void CreateTrainerBackSprite(void);
@@ -177,14 +177,14 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.lz");
-static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.lz");
+static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol");
+static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM");
 
-static const u32 shadowBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.4bpp.lz");
-static const u32 shadowBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.bin.lz");
+static const u32 shadowBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.4bpp.smol");
+static const u32 shadowBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.bin.smolTM");
 
-static const u32 boxesBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.4bpp.lz");
-static const u32 boxesBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.bin.lz");
+static const u32 boxesBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.4bpp.smol");
+static const u32 boxesBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.bin.smolTM");
 
 static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal");
 static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
@@ -205,10 +205,10 @@ static const u8 sMenuWindowFontColors[][3] =
 
 
 
-static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/character_customization/up_arrow.4bpp.lz");
-static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/down_arrow.4bpp.lz");
-static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/left_arrow.4bpp.lz");
-static const u32 sCustomizationMenuRightArrow_Gfx[]     = INCBIN_U32("graphics/ui_menus/character_customization/right_arrow.4bpp.lz");
+static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/character_customization/up_arrow.4bpp.smol");
+static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/down_arrow.4bpp.smol");
+static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/left_arrow.4bpp.smol");
+static const u32 sCustomizationMenuRightArrow_Gfx[]     = INCBIN_U32("graphics/ui_menus/character_customization/right_arrow.4bpp.smol");
 
 static void SpriteCallback_UpArrow(struct Sprite *sprite)
 {
@@ -408,6 +408,11 @@ void Task_OpenCharacterCustomizationMenuFromStartMenu(u8 taskId)
     }
 }
 
+void CB2_CustomizationFromStartMenu(void)
+{
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
+}
+
 void ResetCustomizationValuesData(void){
     u8 i;
 
@@ -602,8 +607,8 @@ static void Menu_VBlankCB(void)
 static void RecolorPlayerCharacters(u8 palnum)
 {
     u32 slot = OBJ_PLTT_ID(palnum);
-    SetCustomPlayerPalette(&gPlttBufferUnfaded[slot]);
-    SetCustomPlayerPalette(&gPlttBufferFaded[slot]);
+    SetCustomPlayerPalette(&gPlttBufferUnfaded[slot], &gSaveBlock3Ptr->rgbValues, &gSaveBlock3Ptr->customizationValues);
+    SetCustomPlayerPalette(&gPlttBufferFaded[slot], &gSaveBlock3Ptr->rgbValues, &gSaveBlock3Ptr->customizationValues);
 }
 
 u8 const sPlayerAnimList[NUM_SEQUENCES] = {
@@ -939,18 +944,22 @@ static bool8 Menu_DoGfxSetup(void)
     return FALSE;
 }
 
-#define try_free(ptr) ({        \
-    void ** ptr__ = (void **)&(ptr);   \
-    if (*ptr__ != NULL)                \
-        Free(*ptr__);                  \
-})
+static void FreeCustomizationBackgrounds(void)
+{
+    for (u32 backgroundId = 0; backgroundId < NUM_CUSTOMIZATION_BACKGROUNDS; backgroundId++)
+        if (sBgTilemapBuffer[backgroundId] != NULL)
+            Free(sBgTilemapBuffer[backgroundId]);
+}
 
 static void Menu_FreeResources(void)
 {
-    try_free(sMenuDataPtr);
+    FreeAllSpritePalettes();
+    if (sMenuDataPtr != NULL)
+        Free(sMenuDataPtr);
+    FreeCustomizationBackgrounds();
     FreeAllWindowBuffers();
+    ResetSpriteData();
 }
-
 
 static void Task_MenuWaitFadeAndBail(u8 taskId)
 {
@@ -979,19 +988,6 @@ static bool8 Menu_InitBgs(void)
     HandleAndShowBgs();
 
 	return TRUE;
-}
-
-static bool32 DebugShouldSkipBg(u32 bg)
-{
-    bool32 skipBg[4] =
-    {
-        [0] = FALSE,
-        [1] = FALSE,
-        [2] = FALSE,
-        [3] = FALSE,
-    };
-
-    return skipBg[bg];
 }
 
 static bool32 AllocZeroedTilemapBuffers(void)
@@ -1086,6 +1082,24 @@ static const u32* const sOptionsTilemapLUT[] =
     [3] = siliconBgTilemap,
 };
 
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
+{
+    return (sOptionsTilesLUT[backgroundId] == NULL || sOptionsTilemapLUT[backgroundId] == NULL);
+}
+
+static bool32 DebugShouldSkipBg(u32 bg)
+{
+    bool32 skipBg[4] =
+    {
+        [0] = FALSE,
+        [1] = FALSE,
+        [2] = FALSE,
+        [3] = FALSE,
+    };
+
+    return skipBg[bg];
+}
+
 static void Menu_LoadGraphics(void)
 {
     ResetTempTileDataBuffers();
@@ -1093,6 +1107,9 @@ static void Menu_LoadGraphics(void)
     for (enum CustomizeBackgrounds backgroundId = 0; backgroundId < NUM_CUSTOMIZATION_BACKGROUNDS; backgroundId++)
     {
         if (DebugShouldSkipBg(backgroundId))
+            continue;
+
+        if (AreTilesOrTilemapEmpty(backgroundId))
             continue;
 
         DecompressAndLoadBgGfxUsingHeap(backgroundId, sOptionsTilesLUT[backgroundId], 0, 0, 0);
@@ -1569,47 +1586,55 @@ static void Task_MenuTurnOff(u8 taskId)
 
 static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (gPaletteFade.active)
+        return;
+
+    u8 namingScreenTypes[] =
     {
-		Menu_FreeResources();
-        switch(sMenuDataPtr->cursorPlace){
-            case CUSTOMIZATION_SUBJECT_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_SUBJECT_PRONOUN, gSaveBlock3Ptr->playerSubjectPronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-            case CUSTOMIZATION_OBJECT_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_OBJECT_PRONOUN, gSaveBlock3Ptr->playerObjectPronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-            case CUSTOMIZATION_POSSESIVE_PRONOUN:
-                DoNamingScreen(NAMING_SCREEN_POSSESIVE_PRONOUN, gSaveBlock3Ptr->playerPosesivePronoun, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
-            break;
-        }
-    }
+        [CUSTOMIZATION_SUBJECT_PRONOUN]   = NAMING_SCREEN_SUBJECT_PRONOUN,
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = NAMING_SCREEN_OBJECT_PRONOUN,
+        [CUSTOMIZATION_POSSESIVE_PRONOUN] = NAMING_SCREEN_POSSESIVE_PRONOUN,
+    };
+
+    u8* pronounBuffers[] =
+    {
+        [CUSTOMIZATION_SUBJECT_PRONOUN]   = gSaveBlock3Ptr->playerSubjectPronoun,
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = gSaveBlock3Ptr->playerObjectPronoun,
+        [CUSTOMIZATION_POSSESIVE_PRONOUN] = gSaveBlock3Ptr->playerPosesivePronoun,
+    };
+
+    u32 cursor = sMenuDataPtr->cursorPlace;
+    // PSF TODO it would be nice if after leaving this screen, the cursor returned you to where you were, but I'm fairly certain this requires a refactor
+    DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
+    Menu_FreeResources();
 }
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
     if(JOY_NEW(DPAD_DOWN) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
+    {
         PressedDownButton();
         PrintToWindow(FONT_CUSTOM_BLACK);
     }
 
     if(JOY_NEW(DPAD_UP) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
+    {
         PressedUpButton();
         PrintToWindow(FONT_CUSTOM_BLACK);
     }
 
     if(JOY_NEW(DPAD_RIGHT) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1))
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = 0;
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]++;
         }
-        else{
+        else
+        {
             if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1))
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = 0;
             else
@@ -1624,14 +1649,16 @@ static void Task_MenuMain(u8 taskId)
     }
 
     if(JOY_NEW(DPAD_LEFT) && sMenuDataPtr->DrawnDialogue != DRAWN_DIALOGUE_LEAVE_DIALOG)
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == 0)
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] = (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1);
             else
                 gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace]--;
         }
-        else{
+        else
+        {
             if(gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] == 0)
                 gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][sMenuDataPtr->cursorPlaceInCustomPaletteScren] = (Custom_Color_Options[sMenuDataPtr->cursorPlaceInCustomPaletteScren].numOptions - 1);
             else
@@ -1646,33 +1673,38 @@ static void Task_MenuMain(u8 taskId)
     }
 
     if(JOY_NEW(A_BUTTON))
-	{
-        if(!sMenuDataPtr->isCustomPaletteScren){
-            if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG){
+    {
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
+            if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG)
+            {
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
             else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_BODY_TYPE &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
-               sMenuDataPtr->cursorPlace != CUSTOMIZATION_POSSESIVE_PRONOUN){
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_BODY_TYPE &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_OBJECT_PRONOUN &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_SUBJECT_PRONOUN &&
+                    sMenuDataPtr->cursorPlace != CUSTOMIZATION_POSSESIVE_PRONOUN)
+            {
                 PlaySE(SE_SELECT);
                 sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
                 sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
             }
             else if(gSaveBlock3Ptr->customizationValues[sMenuDataPtr->cursorPlace] == (Customization_Options[sMenuDataPtr->cursorPlace].numOptions - 1) &&
-                (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
-                sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
-                sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN)){
-                    PlaySE(SE_SELECT);
-                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                    gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
+                    (sMenuDataPtr->cursorPlace == CUSTOMIZATION_OBJECT_PRONOUN ||
+                     sMenuDataPtr->cursorPlace == CUSTOMIZATION_SUBJECT_PRONOUN ||
+                     sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN))
+            {
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
             }
         }
-        else{
+        else
+        {
             PlaySE(SE_SELECT);
             sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
             sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
@@ -1682,17 +1714,20 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
-        if(!sMenuDataPtr->isCustomPaletteScren){
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             if(HasCustomizationDataBeenModified())
                 sMenuDataPtr->DrawnDialogue = !sMenuDataPtr->DrawnDialogue;
-            else{
+            else
+            {
                 PlaySE(SE_PC_OFF);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
         }
-        else{
+        else
+        {
             PlaySE(SE_SELECT);
             sMenuDataPtr->isCustomPaletteScren = !sMenuDataPtr->isCustomPaletteScren;
             sMenuDataPtr->cursorPlaceInCustomPaletteScren = 0;
@@ -1702,7 +1737,8 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(START_BUTTON))
     {
-        if(!sMenuDataPtr->isCustomPaletteScren){
+        if(!sMenuDataPtr->isCustomPaletteScren)
+        {
             PlaySE(SE_PC_OFF);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_MenuTurnOff;
@@ -1711,8 +1747,10 @@ static void Task_MenuMain(u8 taskId)
     }
 
     sMenuDataPtr->CurrentDirectionFrames++;
-    if(sMenuDataPtr->CurrentDirectionFrames % NUM_MOVEMENT_FRAMES == 0){
-        if(sMenuDataPtr->CurrentDirectionFrames > (NUM_SEQUENCES * NUM_MOVEMENT_FRAMES) - 1){
+    if(sMenuDataPtr->CurrentDirectionFrames % NUM_MOVEMENT_FRAMES == 0)
+    {
+        if(sMenuDataPtr->CurrentDirectionFrames > (NUM_SEQUENCES * NUM_MOVEMENT_FRAMES) - 1)
+        {
             sMenuDataPtr->CurrentDirectionFrames = 0;
         }
 
@@ -1829,7 +1867,7 @@ static const u16 sOutfitColorList[] =
     [OUTFIT_COLOR_SILVER] = RGB2GBA(168,176,168),
 };
 
-void SetCustomPlayerPalette(u16 *palette)
+void SetCustomPlayerPalette(u16 *palette, u8 (*rgbValues)[NUM_CUSTOM_COLOR_OPTIONS][NUM_COLOR_OPTIONS], u8 (*customizationValues)[NUM_CUSTOMIZATION_PARTS])
 {
     s32 r, g, b, i;
     u8 tone = Q_8_8(0.6);
@@ -1838,28 +1876,28 @@ void SetCustomPlayerPalette(u16 *palette)
     bool8 disableCustomPrimaryColor = FALSE;
     bool8 disableCustomSecondaryColor = FALSE;
     //Skin
-    u8 rToneSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_RED];
-    u8 gToneSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_GREEN];
-    u8 bTonSkin = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_BLUE];
+    u8 rToneSkin = (*rgbValues)[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_RED];
+    u8 gToneSkin = (*rgbValues)[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonSkin = (*rgbValues)[CUSTOMIZATION_SKIN_COLOR][OPTION_COLOR_BLUE];
     //Hair
-    u8 rToneHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_RED];
-    u8 gToneHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_GREEN];
-    u8 bTonHair = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_BLUE];
+    u8 rToneHair = (*rgbValues)[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_RED];
+    u8 gToneHair = (*rgbValues)[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonHair = (*rgbValues)[CUSTOMIZATION_HAIR_COLOR][OPTION_COLOR_BLUE];
     //Primary
-    u8 rTonePrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_RED];
-    u8 gTonePrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_GREEN];
-    u8 bTonPrimary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_BLUE];
+    u8 rTonePrimary = (*rgbValues)[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_RED];
+    u8 gTonePrimary = (*rgbValues)[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonPrimary = (*rgbValues)[CUSTOMIZATION_PRIMARY_COLOR][OPTION_COLOR_BLUE];
     //Secondary
-    u8 rToneSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_RED];
-    u8 gToneSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_GREEN];
-    u8 bTonSecondary = gSaveBlock3Ptr->rgbValues[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_BLUE];
+    u8 rToneSecondary = (*rgbValues)[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_RED];
+    u8 gToneSecondary = (*rgbValues)[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_GREEN];
+    u8 bTonSecondary = (*rgbValues)[CUSTOMIZATION_SECONDARY_COLOR][OPTION_COLOR_BLUE];
 
 
     //Skin
-    if(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SKIN_COLOR] != NUM_SKIN_COLOR - 1){
-        rToneSkin = GET_R(sSkinColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SKIN_COLOR]]);
-        gToneSkin = GET_G(sSkinColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SKIN_COLOR]]);
-        bTonSkin = GET_B(sSkinColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SKIN_COLOR]]);
+    if((*customizationValues)[CUSTOMIZATION_SKIN_COLOR] != NUM_SKIN_COLOR - 1){
+        rToneSkin = GET_R(sSkinColorList[(*customizationValues)[CUSTOMIZATION_SKIN_COLOR]]);
+        gToneSkin = GET_G(sSkinColorList[(*customizationValues)[CUSTOMIZATION_SKIN_COLOR]]);
+        bTonSkin = GET_B(sSkinColorList[(*customizationValues)[CUSTOMIZATION_SKIN_COLOR]]);
     }
     else{
         rToneSkin = rToneSkin*2 + 5;
@@ -1869,10 +1907,10 @@ void SetCustomPlayerPalette(u16 *palette)
     //disableCustomSkinColor = TRUE;
 
     //Hair Color
-    if(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR] != NUM_HAIR_COLOR - 1){
-        rToneHair = GET_R(sHairColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR]]);
-        gToneHair = GET_G(sHairColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR]]);
-        bTonHair = GET_B(sHairColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR]]);
+    if((*customizationValues)[CUSTOMIZATION_HAIR_COLOR] != NUM_HAIR_COLOR - 1){
+        rToneHair = GET_R(sHairColorList[(*customizationValues)[CUSTOMIZATION_HAIR_COLOR]]);
+        gToneHair = GET_G(sHairColorList[(*customizationValues)[CUSTOMIZATION_HAIR_COLOR]]);
+        bTonHair = GET_B(sHairColorList[(*customizationValues)[CUSTOMIZATION_HAIR_COLOR]]);
     }
     else{
         rToneHair = (rToneHair * 2) + 5;
@@ -1882,10 +1920,10 @@ void SetCustomPlayerPalette(u16 *palette)
     //disableCustomHairColor = TRUE;
 
     //Outfit Color - Primary Color
-    if(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_PRIMARY_COLOR] != NUM_PRIMARY_COLOR - 1){
-                rTonePrimary = GET_R(sOutfitColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_PRIMARY_COLOR]]);
-        gTonePrimary = GET_G(sOutfitColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_PRIMARY_COLOR]]);
-        bTonPrimary = GET_B(sOutfitColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_PRIMARY_COLOR]]);
+    if((*customizationValues)[CUSTOMIZATION_PRIMARY_COLOR] != NUM_PRIMARY_COLOR - 1){
+                rTonePrimary = GET_R(sOutfitColorList[(*customizationValues)[CUSTOMIZATION_PRIMARY_COLOR]]);
+        gTonePrimary = GET_G(sOutfitColorList[(*customizationValues)[CUSTOMIZATION_PRIMARY_COLOR]]);
+        bTonPrimary = GET_B(sOutfitColorList[(*customizationValues)[CUSTOMIZATION_PRIMARY_COLOR]]);
 
     }
     else{
@@ -1897,10 +1935,10 @@ void SetCustomPlayerPalette(u16 *palette)
     //disableCustomPrimaryColor = TRUE;
 
     //Outfit Color - Primary Color
-    if(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SECONDARY_COLOR] != NUM_PRIMARY_COLOR - 1){
-                rToneSecondary = GET_R(sOutfitColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SECONDARY_COLOR]]);
-        gToneSecondary = GET_G(sOutfitColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SECONDARY_COLOR]]);
-        bTonSecondary = GET_B(sOutfitColorList[gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SECONDARY_COLOR]]);
+    if((*customizationValues)[CUSTOMIZATION_SECONDARY_COLOR] != NUM_PRIMARY_COLOR - 1){
+                rToneSecondary = GET_R(sOutfitColorList[(*customizationValues)[CUSTOMIZATION_SECONDARY_COLOR]]);
+        gToneSecondary = GET_G(sOutfitColorList[(*customizationValues)[CUSTOMIZATION_SECONDARY_COLOR]]);
+        bTonSecondary = GET_B(sOutfitColorList[(*customizationValues)[CUSTOMIZATION_SECONDARY_COLOR]]);
 
     }
     else{
@@ -2076,6 +2114,5 @@ void SetCustomPlayerPalette(u16 *palette)
 void CB2_ReturnToCostumizationMenu(void)
 {
     FieldClearVBlankHBlankCallbacks();
-	Character_Customization_Menu_Init(CB2_ReturnToUIMenu);
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
 }
-

@@ -286,6 +286,8 @@ const u32 gObjectEventPic_CustapBerryTree[] = INCBIN_U32("graphics/object_events
 const u32 gObjectEventPic_JabocaBerryTree[] = INCBIN_U32("graphics/object_events/pics/berry_trees/jaboca.4bpp");
 const u32 gObjectEventPic_RowapBerryTree[] = INCBIN_U32("graphics/object_events/pics/berry_trees/rowap.4bpp");
 const u32 gFieldEffectObjectPic_SurfBlob[] = INCBIN_U32("graphics/field_effects/pics/surf_blob.4bpp");
+const u32 gFieldEffectObjectPic_RockClimbBlob[] = INCBIN_U32("graphics/field_effects/pics/rock_climb_blob.4bpp");
+const u32 gFieldEffectObjectPic_RockClimbDust[] = INCBIN_U32("graphics/field_effects/pics/rock_climb_dust.4bpp");
 const u32 gObjectEventPic_QuintyPlump[] = INCBIN_U32("graphics/object_events/pics/people/quinty_plump.4bpp");
 const u16 gObjectEventPal_QuintyPlump[] = INCBIN_U16("graphics/object_events/palettes/quinty_plump.gbapal");
 const u16 gObjectEventPal_QuintyPlumpReflection[] = INCBIN_U16("graphics/object_events/palettes/quinty_plump_reflection.gbapal");
@@ -330,6 +332,7 @@ const u32 gFieldEffectObjectPic_MountainDisguise[] = INCBIN_U32("graphics/field_
 const u32 gFieldEffectObjectPic_SandDisguisePlaceholder[] = INCBIN_U32("graphics/field_effects/pics/sand_disguise_placeholder.4bpp");
 const u32 gFieldEffectObjectPic_HotSpringsWater[] = INCBIN_U32("graphics/field_effects/pics/hot_springs_water.4bpp");
 const u16 gFieldEffectPal_Ash[] = INCBIN_U16("graphics/field_effects/palettes/ash.gbapal");
+const u16 gFieldEffectPal_DustCloud[] = INCBIN_U16("graphics/field_effects/palettes/big_dust.gbapal");
 const u32 gFieldEffectObjectPic_AshPuff[] = INCBIN_U32("graphics/field_effects/pics/ash_puff.4bpp");
 const u32 gFieldEffectObjectPic_AshLaunch[] = INCBIN_U32("graphics/field_effects/pics/ash_launch.4bpp");
 const u32 gFieldEffectObjectPic_Bubbles[] = INCBIN_U32("graphics/field_effects/pics/bubbles.4bpp");
@@ -412,6 +415,17 @@ const u32 gObjectEventPic_siliconPlayerF2Fishing[] = INCBIN_U32("graphics/object
 const u32 gObjectEventPic_siliconPlayerF2Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/watering.4bpp");
 const u32 gObjectEventPic_siliconPlayerF2Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
 const u32 gObjectEventPic_siliconPlayerF2Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/underwater.4bpp");
+
+const u32 gObjectEventPic_siliconPlayerN3NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/n3/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerN3Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/underwater.4bpp");
+
 
 const u32 gObjectEventPic_KaiNormal[] = INCBIN_U32("graphics/object_events/pics/people/kai/walking.4bpp", "graphics/object_events/pics/people/kai/running.4bpp");
 const u16 gObjectEventPal_KaiNormal[] = INCBIN_U16("graphics/object_events/palettes/kai.gbapal");
@@ -573,3 +587,4 @@ const u16 gFieldEffectObjectPalette_CaveDust[] = INCBIN_U16("graphics/field_effe
 const u32 gFieldEffectObjectPic_Saving[]    = INCBIN_U32("graphics/field_effects/pics/saving.4bpp");
 const u16 gFieldEffectObjectPaletteSaving[] = INCBIN_U16("graphics/field_effects/palettes/saving.gbapal");
 // End autoSave
+const u32 gObjectEventPic_ApricornTree[] = INCBIN_U32("graphics/object_events/pics/misc/apricorn_tree.4bpp");
