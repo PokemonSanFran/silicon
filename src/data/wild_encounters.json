@@ -39439,6 +39439,111 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              },
+              {
+                "min_level": 33,
+                "max_level": 37,
+                "species": "SPECIES_BARRASKEWDA"
+              }
+            ]
           }
         },
         {
