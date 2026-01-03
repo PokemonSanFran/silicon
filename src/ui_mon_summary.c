@@ -84,7 +84,7 @@ static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_HelpBar(void);
 
 // const data
-static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
+static const struct BgTemplate sSummarySetup_BgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
 {
     {
         .bg = MON_SUMMARY_BG_TEXT,
@@ -108,7 +108,7 @@ static const struct BgTemplate sMonSummaryBgTemplates[NUM_MON_SUMMARY_BACKGROUND
     },
 };
 
-static const struct WindowTemplate sMonSummary_MainWindows[] =
+static const struct WindowTemplate sSummarySetup_MainWindows[NUM_MON_SUMMARY_MAIN_WINDOWS + 1] =
 {
     [MON_SUMMARY_MAIN_WIN_HEADER] =
     {
@@ -138,7 +138,7 @@ static const TaskFunc sSummaryMode_InputFuncs[NUM_MON_SUMMARY_MODES] =
     [MON_SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
 };
 
-static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAGES] =
+static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_MON_SUMMARY_PAGES] =
 {
     [MON_SUMMARY_PAGE_INFOS] =
     {
@@ -176,11 +176,11 @@ static const struct MonSummaryPageInfo sMonSummary_PagesInfo[NUM_MON_SUMMARY_PAG
 };
 
 static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/tiles.4bpp.smol");
-static const u8 sMonSummary_PageTabsGfx[] = INCBIN_U8("graphics/ui_menus/mon_summary/page_tabs.4bpp");
 static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/blank.bin");
 static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/pages/tiles.gbapal");
 
-static const u8 sMonSummary_FontColors[NUM_MON_SUMMARY_FNTCLRS][3] =
+static const u8 sSummaryPrint_PageTabsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/page_tabs.4bpp");
+static const u8 sSummaryPrint_FontColors[NUM_MON_SUMMARY_FNTCLRS][3] =
 {
     [MON_SUMMARY_FNTCLR_INTERFACE] = { 0, 1, 2 },
     [MON_SUMMARY_FNTCLR_TEXTBOX]   = { 0, 2, 0 },
@@ -291,7 +291,7 @@ static void SummarySetup_Backgrounds(void)
     }
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sMonSummaryBgTemplates, NELEMS(sMonSummaryBgTemplates));
+    InitBgsFromTemplates(0, sSummarySetup_BgTemplates, NELEMS(sSummarySetup_BgTemplates));
 
     SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_1, sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
     SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_2, sMonSummaryResourcesPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
@@ -316,11 +316,11 @@ static void SummarySetup_Graphics(void)
 
 static void SummarySetup_Windows(void)
 {
-    InitWindows(sMonSummary_MainWindows);
+    InitWindows(sSummarySetup_MainWindows);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
 
-    for (u32 i = 0, baseBlock = 1; i < NUM_MON_SUMMARY_MAIN_WINS; i++)
+    for (u32 i = 0, baseBlock = 1; i < NUM_MON_SUMMARY_MAIN_WINDOWS; i++)
     {
         SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -662,7 +662,7 @@ static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages
 {
     if (page >= NUM_MON_SUMMARY_PAGES) return NULL;
 
-    return &sMonSummary_PagesInfo[page];
+    return &sSummaryPage_Info[page];
 }
 
 static const u8 *SummaryPage_GetName(enum MonSummaryPages page)
@@ -705,7 +705,7 @@ static u32 SummaryPage_GetDynamicWindowBaseBlock(u32 windowId)
     u32 baseBlock = 1;
 
     // add static window baseBlock
-    for (u32 i = 0; i < NUM_MON_SUMMARY_MAIN_WINS; i++)
+    for (u32 i = 0; i < NUM_MON_SUMMARY_MAIN_WINDOWS; i++)
     {
         const struct WindowTemplate *template = SummaryPrint_GetMainWindowTemplate(i);
         if (template->bg == gDummyWindowTemplate.bg) break;
@@ -796,7 +796,7 @@ static void SummaryPage_Reload(void)
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
 
-    for (u32 i = 0; i < ARRAY_COUNT(sMonSummary_MainWindows); i++)
+    for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainWindows); i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
@@ -810,18 +810,18 @@ static void SummaryPage_Reload(void)
 // dynamic windows handles the id on its own
 static void SummaryPrint_AddText(u32 windowId, u32 fontId, u32 x, u32 y, enum MonSummaryFontColors color, const u8 *str)
 {
-    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, sMonSummary_FontColors[color], TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, sSummaryPrint_FontColors[color], TEXT_SKIP_DRAW, str);
 }
 
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32 windowId)
 {
-    if (windowId >= ARRAY_COUNT(sMonSummary_MainWindows)
-     || windowId >= NUM_MON_SUMMARY_MAIN_WINS)
+    if (windowId >= ARRAY_COUNT(sSummarySetup_MainWindows)
+     || windowId >= NUM_MON_SUMMARY_MAIN_WINDOWS)
     {
         return &gDummyWindowTemplate;
     }
 
-    return &sMonSummary_MainWindows[windowId];
+    return &sSummarySetup_MainWindows[windowId];
 }
 
 static void SummaryPrint_Header(void)
@@ -847,7 +847,7 @@ static void SummaryPrint_BlitPageTabs(u32 windowId, u32 x, u32 y)
     {
         bool32 selected = page == SummaryPage_GetValue();
 
-        BlitBitmapRectToWindow(windowId, sMonSummary_PageTabsGfx, selected * 8, 0, 16, 8, x, y, 8, 8);
+        BlitBitmapRectToWindow(windowId, sSummaryPrint_PageTabsBlit, selected * 8, 0, 16, 8, x, y, 8, 8);
         x += 11;
     }
 }

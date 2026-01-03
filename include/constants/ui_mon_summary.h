@@ -73,7 +73,7 @@ enum __attribute__((packed)) MonSummaryMainWindows
     MON_SUMMARY_MAIN_WIN_HEADER,    // refers to the page's name and tab blit
     MON_SUMMARY_MAIN_WIN_HELP_BAR,  // refers to control scheme of specific page/mode
 
-    NUM_MON_SUMMARY_MAIN_WINS,
+    NUM_MON_SUMMARY_MAIN_WINDOWS,
     // the rest is dynamic
 };
 
