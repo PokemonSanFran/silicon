@@ -71333,6 +71333,111 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_VIKAVOLT"
+              }
+            ]
           }
         },
         {
