@@ -1787,8 +1787,17 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 else
                 {
                     lineWidth += glyphWidth;
-                    if (isJapanese && str[1] != EOS)
-                        lineWidth += localLetterSpacing;
+                    // Start outlineFont
+                    //if (isJapanese && str[1] != EOS)
+                    //    lineWidth += localLetterSpacing;
+                    if (str[1] != EOS)
+                    {
+                        if (isJapanese)
+                            lineWidth += localLetterSpacing;
+                        else if (fontId == FONT_OUTLINED || fontId == FONT_OUTLINED_NARROW)
+                            lineWidth--;
+                    }
+                    // End outlineFont
                 }
             }
             bufferPointer = 0;
@@ -1863,8 +1872,17 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             else
             {
                 lineWidth += glyphWidth;
-                if (isJapanese && str[1] != EOS)
-                    lineWidth += localLetterSpacing;
+                // Start outlineFont
+                //if (isJapanese && str[1] != EOS)
+                //    lineWidth += localLetterSpacing;
+                if (str[1] != EOS)
+                {
+                    if (isJapanese)
+                        lineWidth += localLetterSpacing;
+                    else if (fontId == FONT_OUTLINED || fontId == FONT_OUTLINED_NARROW)
+                        lineWidth--;
+                }
+                // End outlineFont
             }
             break;
         case CHAR_PROMPT_SCROLL:
@@ -1881,13 +1899,32 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             else
             {
                 lineWidth += glyphWidth;
-                if (isJapanese && str[1] != EOS)
-                    lineWidth += localLetterSpacing;
+                // Start outlineFont
+                //if (isJapanese && str[1] != EOS)
+                //    lineWidth += localLetterSpacing;
+                if (str[1] != EOS)
+                {
+                    if (isJapanese)
+                        lineWidth += localLetterSpacing;
+                    else if (fontId == FONT_OUTLINED || fontId == FONT_OUTLINED_NARROW)
+                        lineWidth--;
+                }
+                // End outlineFont
             }
             break;
         }
         ++str;
     }
+
+    // Start outlineFont
+    // decrement the last character width as well
+    if (fontId == FONT_OUTLINED || fontId == FONT_OUTLINED_NARROW)
+    {
+        lineWidth--;
+        if (width)
+            width--;
+    }
+    // End outlineFont
 
     if (lineWidth > width)
         return lineWidth;
