@@ -1498,7 +1498,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             {
                 // Start outlineFont
                 // merge together each chars
-                if (textPrinter->printerTemplate.fontId == FONT_OUTLINED || textPrinter->printerTemplate.fontId == FONT_OUTLINED_NARROW)
+                if ((textPrinter->printerTemplate.fontId == FONT_OUTLINED || textPrinter->printerTemplate.fontId == FONT_OUTLINED_NARROW)
+                 && (currChar != CHAR_SPACE || currChar != CHAR_SPACER))
                 {
                     textPrinter->printerTemplate.currentX += gCurGlyph.width + (-1);
                 }
