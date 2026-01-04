@@ -1009,9 +1009,4 @@ ShopCriteriaFunc GetItemShopCriteriaFunc(u16 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].criteriaFunc;
 }
 
-u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, u16 itemId)
-{
-    return BagPocket_CountTotalItemQuantity(&gBagPockets[pocket], itemId);
-}
-
 // End shopMenu

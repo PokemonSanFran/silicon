@@ -557,29 +557,46 @@ static u32 PrestoHelper_InitItemsList(void)
     for (u32 itemId = (ITEM_NONE + 1); itemId < ITEMS_COUNT; itemId++)
     {
         CycleCountStart(); // DEBUG
+        if (!GetItemPrice(itemId)) 
+        {
+            DebugPrintf("GetItemPrice   %d",CycleCountEnd()); // DEBUG
+            continue;
+        }
+        else 
+        {
+            DebugPrintf("GetItemPrice   %d",CycleCountEnd()); // DEBUG
+        }
+
+        CycleCountStart(); // DEBUG
         enum Pocket pocket = GetItemPocket(itemId);
-        DebugPrintf("GetItemPocket	%d",CycleCountEnd()); // DEBUG
+        DebugPrintf("GetItemPocket  %d",CycleCountEnd()); // DEBUG
 
         CycleCountStart(); // DEBUG
         if (pocket == POCKET_KEY_ITEMS)
         {
-            DebugPrintf("pocket == POCKET_KEY_ITEMS	%d",CycleCountEnd()); // DEBUG
+            DebugPrintf("pocket == POCKET_KEY_ITEMS %d",CycleCountEnd()); // DEBUG
             continue;
         }
         else 
         {
-            DebugPrintf("pocket == POCKET_KEY_ITEMS	%d",CycleCountEnd()); // DEBUG
+            DebugPrintf("pocket == POCKET_KEY_ITEMS %d",CycleCountEnd()); // DEBUG
         }
 
         CycleCountStart(); // DEBUG
-        if (!GetItemPrice(itemId)) 
+        u32 itemCat = ConvertPocketToCategory(pocket);
+        DebugPrintf("ConvertPocketToCategory    %d",CycleCountEnd()); // DEBUG
+
+        bool32 oneTime = FALSE;
+        CycleCountStart(); // DEBUG
+        if (ShopPurchase_IsCategoryOneTimePurchase(itemCat))
         {
-            DebugPrintf("GetItemPrice	%d",CycleCountEnd()); // DEBUG
+            oneTime = TRUE;
+            DebugPrintf("ShopPurchase_IsCategoryOneTimePurchase %d",CycleCountEnd()); // DEBUG
             continue;
         }
         else 
         {
-            DebugPrintf("GetItemPrice	%d",CycleCountEnd()); // DEBUG
+            DebugPrintf("ShopPurchase_IsCategoryOneTimePurchase %d",CycleCountEnd()); // DEBUG
         }
 
         CycleCountStart(); // DEBUG
@@ -587,35 +604,23 @@ static u32 PrestoHelper_InitItemsList(void)
         ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
         if (func != NULL)
             canBuy = func(itemId);
-        DebugPrintf("GetItemShopCriteriaFunc	%d",CycleCountEnd()); // DEBUG
+        DebugPrintf("GetItemShopCriteriaFunc    %d",CycleCountEnd()); // DEBUG
 
         if (!canBuy) 
             continue;
 
         CycleCountStart(); // DEBUG
-        u32 itemCat = ConvertPocketToCategory(pocket);
-        DebugPrintf("ConvertPocketToCategory	%d",CycleCountEnd()); // DEBUG
-
-        CycleCountStart(); // DEBUG
-        if (ShopPurchase_IsCategoryOneTimePurchase(itemCat))
+        if (oneTime)
         {
-            DebugPrintf("ShopPurchase_IsCategoryOneTimePurchase	%d",CycleCountEnd()); // DEBUG
-            continue;
-        }
-        else 
-        {
-            DebugPrintf("ShopPurchase_IsCategoryOneTimePurchase	%d",CycleCountEnd()); // DEBUG
-        }
-
-        CycleCountStart(); // DEBUG
-        if (CountTotalItemQuantityInBagWithPocket(pocket, itemId))
-        {
-            DebugPrintf("CountTotalItemQuantityInBagWithPocket	%d",CycleCountEnd()); // DEBUG
-            continue;
-        }
-        else 
-        {
-            DebugPrintf("CountTotalItemQuantityInBagWithPocket	%d",CycleCountEnd()); // DEBUG
+            if (CountTotalItemQuantityInBag(itemId))
+            {
+                DebugPrintf("CountTotalItemQuantityInBagWithPocket  %d",CycleCountEnd()); // DEBUG
+                continue;
+            }
+            else 
+            {
+                DebugPrintf("CountTotalItemQuantityInBagWithPocket  %d",CycleCountEnd()); // DEBUG
+            }
         }
 
         CycleCountStart(); // DEBUG
@@ -631,12 +636,12 @@ static u32 PrestoHelper_InitItemsList(void)
         CycleCountStart(); // DEBUG
         if (categoryCounts[itemCat] >= NUM_SHOP_ITEMS_PER_CATEGORIES)
         {
-            DebugPrintf("PrestoHelper_ProcessReccomendedItems	%d",CycleCountEnd()); // DEBUG
+            DebugPrintf("NUM_SHOP_ITEMS_PER_CATEGORIES	%d",CycleCountEnd()); // DEBUG
             continue;
         }
         else 
         {
-            DebugPrintf("PrestoHelper_ProcessReccomendedItems	%d",CycleCountEnd()); // DEBUG
+            DebugPrintf("NUM_SHOP_ITEMS_PER_CATEGORIES	%d",CycleCountEnd()); // DEBUG
         }
 
         CycleCountStart(); // DEBUG
