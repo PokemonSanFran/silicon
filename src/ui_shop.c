@@ -261,7 +261,7 @@ static const struct SpriteTemplate sShopSpriteTemplate =
     .callback = SpriteCallbackDummy
 };
 
-static const u8 sText_Help_Bar[]          = _("{DPAD_UPDOWN} Rows {DPAD_LEFTRIGHT} Items {A_BUTTON} Buy {B_BUTTON} Exit {START_BUTTON} Sort Rows");
+static const u8 sText_Help_Bar[]          = _("{DPAD_UPDOWN} Rows {DPAD_LEFTRIGHT} Items {A_BUTTON} Buy {B_BUTTON} Exit");
 static const u8 sText_Help_Bar_Buy[]      = _("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Buy Now {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Complete[] = _("{A_BUTTON} Buy More {B_BUTTON} Return {START_BUTTON} Exit");
 static const u8 sText_HelpBar_Failure[]   = _("{A_BUTTON}{B_BUTTON} Return to purchase");
@@ -643,6 +643,7 @@ static void Task_Shop_Idle(u8 taskId)
         {
         default:
             break;
+                /*
         case SHOP_MODE_DEFAULT:
             {
                 PlaySE(SE_SELECT);
@@ -653,6 +654,7 @@ static void Task_Shop_Idle(u8 taskId)
                 ShopHelper_UpdateFrontEnd();
                 break;
             }
+            */
         case SHOP_MODE_SUCCESS:
             PlaySE(SE_PC_OFF);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
