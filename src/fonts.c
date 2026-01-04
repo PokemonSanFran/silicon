@@ -606,6 +606,7 @@ ALIGNED(4) const u8 gFontOutlinedLatinGlyphWidths[] = {
     [PLACEHOLDER_BEGIN] = 3,
     [CHAR_NEWLINE] = 3,
     [EOS] = 3,
+    [CHAR_EXTRA_SYMBOL_START | CHAR_EMOJI_HEART] = 10,
     /*
     [CHAR_UP_ARROW_2] = 12,
     [CHAR_LV_2] = 10,
@@ -804,7 +805,7 @@ ALIGNED(4) const u8 gFontOutlinedNarrowLatinGlyphWidths[] = {
     [CHAR_Q] = 5,
     [CHAR_R] = 5,
     [CHAR_S] = 5,
-    [CHAR_T] = 5,
+    [CHAR_T] = 6,
     [CHAR_U] = 5,
     [CHAR_V] = 5,
     [CHAR_W] = 5,
@@ -852,6 +853,7 @@ ALIGNED(4) const u8 gFontOutlinedNarrowLatinGlyphWidths[] = {
     [PLACEHOLDER_BEGIN] = 3,
     [CHAR_NEWLINE] = 3,
     [EOS] = 3,
+    [CHAR_EXTRA_SYMBOL_START | CHAR_EMOJI_HEART] = 10,
     /*
     [CHAR_UP_ARROW_2] = 12,
     [CHAR_LV_2] = 10,
