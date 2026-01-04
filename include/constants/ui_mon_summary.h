@@ -80,10 +80,21 @@ enum __attribute__((packed)) MonSummaryMainWindows
 // dynamic windows
 enum __attribute__((packed)) MonSummaryInfosWindows
 {
-    MON_SUMMARY_INFOS_WIN_TEST,
+    MON_SUMMARY_INFOS_WIN_HEADER,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
 
     NUM_MON_SUMMARY_INFOS_WINDOWS
 };
+
+// starting positions
+#define MON_SUMMARY_INFOS_HEADER_X      (7)     // type:
+#define MON_SUMMARY_INFOS_HEADER_X2     (42)    // elec
+#define MON_SUMMARY_INFOS_HEADER_X3     (85)    // fght
+
+#define MON_SUMMARY_INFOS_HEADER_Y      (0)     // type:
+#define MON_SUMMARY_INFOS_HEADER_Y2     (16)    // ot:
+#define MON_SUMMARY_INFOS_HEADER_Y3     (32)    // id:
+#define MON_SUMMARY_INFOS_HEADER_Y4     (48)    // exp:
+#define MON_SUMMARY_INFOS_HEADER_Y5     (64)    // <nature> <fav flavor>
 
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
