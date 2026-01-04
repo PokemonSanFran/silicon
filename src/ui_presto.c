@@ -543,129 +543,76 @@ static u32 PrestoHelper_ProcessCategoryCounts(u32 numCategories, u16* categoryCo
     return numCategories;
 }
 
+enum ShopMenuCategories PrestoHelper_CanItemBeListed(enum Pocket pocket, u32 itemId)
+{
+    if (pocket == POCKET_KEY_ITEMS)
+        return NUM_SHOP_CATEGORIES;
+
+    ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
+    if (func && !func(itemId))
+        return NUM_SHOP_CATEGORIES;
+
+    enum ShopMenuCategories itemCat = ConvertPocketToCategory(pocket);
+    if (ShopPurchase_IsCategoryOneTimePurchase(itemCat))
+        if (CountTotalItemQuantityInBagWithPocket(pocket, itemId))
+            return NUM_SHOP_CATEGORIES;
+
+    return itemCat;
+}
+
+static void PrestoHelper_ReccomendItem(enum ShopMenuCategories itemCat, u32 itemId, u16* recommendedCandidates, u32* numCandidates)
+{
+    if (PrestoHelper_ShouldReccomend(itemCat, itemId) == FALSE)
+        return;
+
+    recommendedCandidates[(*numCandidates)++] = itemId;
+
+    if (*numCandidates != 1)
+        return;
+
+    PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
+}
+
+static void PrestoHelper_TryAddItemToGrid(u32 itemId, enum ShopMenuCategories itemCat, u16* categoryCounts)
+{
+    if (categoryCounts[itemCat] >= NUM_SHOP_ITEMS_PER_CATEGORIES)
+        return;
+
+    ShopInventory_SetItemIdToGrid(itemId, PrestoHelper_GetCategoryMap(itemCat), categoryCounts[itemCat]);
+    categoryCounts[itemCat]++;
+    //DebugPrintf("%S is getting set to category 	%d in position 	%d",GetItemName(itemId),risingCategory,categoryCounts[itemCat]);
+}
+
 static u32 PrestoHelper_InitItemsList(void)
 {
-    //CycleCountStart();
     u32 numCategories = 0, numCandidates = 0;
     u16 recommendedCandidates[ITEMS_COUNT] = {0};
     u16 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
 
-    CycleCountStart(); // DEBUG
     PrestoHelper_ProcessBuyAgainItems(categoryCounts);
-    DebugPrintf("PrestoHelper_ProcessBuyAgainItems	%d",CycleCountEnd()); // DEBUG
 
     for (u32 itemId = (ITEM_NONE + 1); itemId < ITEMS_COUNT; itemId++)
     {
-        CycleCountStart(); // DEBUG
         if (!GetItemPrice(itemId)) 
-        {
-            DebugPrintf("GetItemPrice   %d",CycleCountEnd()); // DEBUG
             continue;
-        }
-        else 
-        {
-            DebugPrintf("GetItemPrice   %d",CycleCountEnd()); // DEBUG
-        }
 
-        CycleCountStart(); // DEBUG
         enum Pocket pocket = GetItemPocket(itemId);
-        DebugPrintf("GetItemPocket  %d",CycleCountEnd()); // DEBUG
+        enum ShopMenuCategories itemCat = PrestoHelper_CanItemBeListed(pocket, itemId);
 
-        CycleCountStart(); // DEBUG
-        if (pocket == POCKET_KEY_ITEMS)
-        {
-            DebugPrintf("pocket == POCKET_KEY_ITEMS %d",CycleCountEnd()); // DEBUG
-            continue;
-        }
-        else 
-        {
-            DebugPrintf("pocket == POCKET_KEY_ITEMS %d",CycleCountEnd()); // DEBUG
-        }
-
-        CycleCountStart(); // DEBUG
-        u32 itemCat = ConvertPocketToCategory(pocket);
-        DebugPrintf("ConvertPocketToCategory    %d",CycleCountEnd()); // DEBUG
-
-        bool32 oneTime = FALSE;
-        CycleCountStart(); // DEBUG
-        if (ShopPurchase_IsCategoryOneTimePurchase(itemCat))
-        {
-            oneTime = TRUE;
-            DebugPrintf("ShopPurchase_IsCategoryOneTimePurchase %d",CycleCountEnd()); // DEBUG
-            continue;
-        }
-        else 
-        {
-            DebugPrintf("ShopPurchase_IsCategoryOneTimePurchase %d",CycleCountEnd()); // DEBUG
-        }
-
-        CycleCountStart(); // DEBUG
-        bool32 canBuy = TRUE;
-        ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
-        if (func != NULL)
-            canBuy = func(itemId);
-        DebugPrintf("GetItemShopCriteriaFunc    %d",CycleCountEnd()); // DEBUG
-
-        if (!canBuy) 
+        if (itemCat == NUM_SHOP_CATEGORIES)
             continue;
 
-        CycleCountStart(); // DEBUG
-        if (oneTime)
-        {
-            if (CountTotalItemQuantityInBag(itemId))
-            {
-                DebugPrintf("CountTotalItemQuantityInBagWithPocket  %d",CycleCountEnd()); // DEBUG
-                continue;
-            }
-            else 
-            {
-                DebugPrintf("CountTotalItemQuantityInBagWithPocket  %d",CycleCountEnd()); // DEBUG
-            }
-        }
-
-        CycleCountStart(); // DEBUG
-        if (PrestoHelper_ShouldReccomend(itemCat, itemId))
-            recommendedCandidates[numCandidates++] = itemId;
-        DebugPrintf("PrestoHelper_ShouldReccomend	%d",CycleCountEnd()); // DEBUG
-
-        CycleCountStart(); // DEBUG
-        if (numCandidates == 1)
-            PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
-        DebugPrintf("PrestoHelper_GetCategoryMap	%d",CycleCountEnd()); // DEBUG
-
-        CycleCountStart(); // DEBUG
-        if (categoryCounts[itemCat] >= NUM_SHOP_ITEMS_PER_CATEGORIES)
-        {
-            DebugPrintf("NUM_SHOP_ITEMS_PER_CATEGORIES	%d",CycleCountEnd()); // DEBUG
-            continue;
-        }
-        else 
-        {
-            DebugPrintf("NUM_SHOP_ITEMS_PER_CATEGORIES	%d",CycleCountEnd()); // DEBUG
-        }
-
-        CycleCountStart(); // DEBUG
-        u32 risingCategory = PrestoHelper_GetCategoryMap(itemCat);
-        DebugPrintf("PrestoHelper_GetCategoryMap	%d",CycleCountEnd()); // DEBUG
-        //DebugPrintf("%S is getting set to category 	%d in position 	%d",GetItemName(itemId),risingCategory,categoryCounts[itemCat]);
-
-        CycleCountStart(); // DEBUG
-        ShopInventory_SetItemIdToGrid(itemId, risingCategory, categoryCounts[itemCat]);
-        categoryCounts[itemCat]++;
-        DebugPrintf("ShopInventory_SetItemIdToGrid	%d",CycleCountEnd()); // DEBUG
+        PrestoHelper_ReccomendItem(itemCat, itemId, recommendedCandidates, &numCandidates);
+        PrestoHelper_TryAddItemToGrid(itemId, itemCat, categoryCounts);
     }
 
-    CycleCountStart(); // DEBUG
     PrestoHelper_ProcessReccomendedItems(numCandidates,recommendedCandidates,categoryCounts);
-    DebugPrintf("PrestoHelper_ProcessReccomendedItems	%d",CycleCountEnd()); // DEBUG
     return PrestoHelper_ProcessCategoryCounts(numCategories, categoryCounts);
 
     /*
     for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
         DebugPrintf("row 	%d has category 	%d (	%d items)",categoryIndex,gShopMenuDataPtr->categoryList[categoryIndex],ShopInventory_GetCategoryNumItems(categoryIndex));
     */
-
-    //DebugPrintf("PrestoHelper_InitItemsList   	%d",CycleCountEnd());
 }
 
 static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 itemId)
