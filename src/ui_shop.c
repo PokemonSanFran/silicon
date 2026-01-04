@@ -552,10 +552,13 @@ static void Task_Shop_Idle(u8 taskId)
                 PlaySE(SE_SELECT);
                 gShopMenuDataPtr->itemQuantity = 0;
                 ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
+                /*
+                 * PSF TODO figure out why this was here in the first place
                 if (ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
                 {
                     ShopInventory_InitCategoryLists();
                 }
+                */
 
                 break;
             }
