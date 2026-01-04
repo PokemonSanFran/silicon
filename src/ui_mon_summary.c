@@ -560,7 +560,7 @@ static void SummaryMon_SetStruct(void)
     ConvertInternationalString(res->summary.trainerName, GetMonData(mon, MON_DATA_LANGUAGE));
     res->summary.ailment = GetMonAilment(mon);
     res->summary.trainerGender = GetMonData(mon, MON_DATA_OT_GENDER);
-    res->summary.trainerID = GetMonData(mon, MON_DATA_OT_ID);
+    res->summary.trainerId = GetMonData(mon, MON_DATA_OT_ID);
     res->summary.metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
     res->summary.metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
     res->summary.metGame = GetMonData(mon, MON_DATA_MET_GAME);

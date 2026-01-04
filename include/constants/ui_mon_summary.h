@@ -148,7 +148,7 @@ struct MonSummary
     u8 ppBonuses;
     u8 sanity;
     u8 trainerName[17];
-    u32 trainerID;
+    u32 trainerId;
     enum Type teraType;
     u8 mintNature;
 
