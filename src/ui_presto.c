@@ -628,6 +628,7 @@ static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 
         [SHOP_CAROUSEL_CAVE_EXPLORE]       = PrestoHelper_HandleCave,
         [SHOP_CAROUSEL_WATER_EXPLORE]      = PrestoHelper_HandleWater,
         [SHOP_CAROUSEL_ROUTE_EXPLORE]      = PrestoHelper_HandleRoute,
+        [SHOP_CAROUSEL_HIGH_CASH]          = PrestoHelper_HandleCash,
         [SHOP_CAROUSEL_RANDOM]             = PrestoHelper_HandleRandom
     };
 
@@ -635,6 +636,11 @@ static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 
     if (carouselHandlers[carousel] != NULL)
         return carouselHandlers[carousel](itemId, category);
     
+    return FALSE;
+}
+
+static bool8 PrestoHelper_HandleCash(u32 itemId, enum ShopMenuCategories category)
+{
     return FALSE;
 }
 
@@ -812,3 +818,4 @@ static void PrestoHelper_SetCarouselType(enum ShopMenuCarousels carousel)
 {
     gShopMenuDataPtr->carouselType = carousel;
 }
+
