@@ -674,6 +674,7 @@ void MoveItemSlotInPocket(enum Pocket pocketId, u32 from, u32 to);
 void MoveItemSlotInPC(struct ItemSlot *itemSlots, u32 from, u32 to);
 void ClearBag(void);
 u16 CountTotalItemQuantityInBag(u16 itemId);
+u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, u16 itemId);
 bool32 AddPyramidBagItem(u16 itemId, u16 count);
 bool32 RemovePyramidBagItem(u16 itemId, u16 count);
 u32 GetItemNativeGroup(u32 itemId); // siliconMerge
