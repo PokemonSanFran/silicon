@@ -57,6 +57,7 @@ static void SummaryMon_CopyCurrentRawMon(void);
 static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
+static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
 static void Task_SummaryMode_DefaultInput(u8);
 
 static void SummaryPage_SetValue(enum MonSummaryPages);
@@ -82,6 +83,8 @@ static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
 static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_HelpBar(void);
+
+static void DummyPage_HandleFrontEnd(void);
 
 // const data
 static const struct BgTemplate sSummarySetup_BgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
@@ -153,7 +156,8 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_MON_SUMMARY_PAGES] 
             MON_SUMMARY_DYNAMIC_WIN_DUMMY
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
-        .input = Task_SummaryInput_InfosInput
+        .input = Task_SummaryInput_InfosInput,
+        .handleFrontEnd = InfosPage_HandleFrontEnd,
     },
     [MON_SUMMARY_PAGE_STATS] =
     {
@@ -334,6 +338,9 @@ static void SummarySetup_Windows(void)
     SummaryPage_LoadDynamicWindows();
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
+
+    void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+    func();
 
     ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
 }
@@ -746,6 +753,15 @@ static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages page)
     return info->input;
 }
 
+static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages page)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+
+    if (!info || !info->handleFrontEnd) return DummyPage_HandleFrontEnd;
+
+    return info->handleFrontEnd;
+}
+
 static void SummaryPage_LoadDynamicWindows(void)
 {
     for (u32 i = 0; i < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS; i++)
@@ -804,6 +820,9 @@ static void SummaryPage_Reload(void)
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
 
+    void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+    func();
+
     ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
 }
 
@@ -857,4 +876,9 @@ static void SummaryPrint_HelpBar(void)
 {
     SummaryPrint_AddText(MON_SUMMARY_MAIN_WIN_HELP_BAR, FONT_NORMAL, 10, 1, MON_SUMMARY_FNTCLR_HELP_BAR, COMPOUND_STRING("test!"));
     CopyWindowToVram(MON_SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
+}
+
+static void DummyPage_HandleFrontEnd(void)
+{
+
 }

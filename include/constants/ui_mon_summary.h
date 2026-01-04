@@ -209,6 +209,7 @@ struct MonSummaryPageInfo
     struct MonSummaryDynamicWindow windows[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
     const u32 *tilemap;
     TaskFunc input;
+    void (*handleFrontEnd)(void);
 };
 
 #endif // GUARD_CONSTANTS_UI_MON_SUMMARY_H
