@@ -346,7 +346,6 @@ static void SummarySetup_Windows(void)
         SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-        CopyWindowToVram(i, COPYWIN_FULL);
 
         const struct WindowTemplate *template = SummaryPrint_GetMainWindowTemplate(i);
         baseBlock += template->width * template->height;
@@ -792,7 +791,6 @@ static void SummaryPage_LoadDynamicWindows(void)
 
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_FULL);
     }
 }
 
