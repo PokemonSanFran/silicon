@@ -480,7 +480,14 @@ static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, u16 itemId,
 
 bool32 RemoveBagItem(u16 itemId, u16 count)
 {
-    if (GetItemPocket(itemId) >= POCKETS_COUNT || itemId == ITEM_NONE)
+    // Start inventory
+    enum Pocket pocket = GetItemPocket(itemId);
+
+    if (isCurrentItemFavorite())
+        gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocket]--;
+    //if (GetItemPocket(itemId) >= POCKETS_COUNT || itemId == ITEM_NONE)
+    if (pocket >= POCKETS_COUNT || itemId == ITEM_NONE)
+    // End inventory
         return FALSE;
 
     // check Battle Pyramid Bag

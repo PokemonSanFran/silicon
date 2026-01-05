@@ -8,6 +8,7 @@ void CB2_ReturnToInventoryMenu(void);
 void CB2_ReturnToInventoryBattleMenu(void);
 void RemoveEmptyRegisteredItems(void);
 void CB2_InventoryFromStartMenu(void);
+bool8 isCurrentItemFavorite(void);
 
 struct StringList
 {

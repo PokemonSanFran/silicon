@@ -123,7 +123,6 @@ static u16 Inventory_GetItemIdCurrentlySelected(void);
 static u8 getItemOptionNum(u16 item, u8 num);
 static u8 getSelectedItemOptionNum(u8 num);
 static void ForceReloadInventory(void);
-bool8 isCurrentItemFavorite(void);
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx);
 static void Inventory_UseItem(u8 taskId);
 static u8 CreateRegisteredItemIcon(u8 slot);
