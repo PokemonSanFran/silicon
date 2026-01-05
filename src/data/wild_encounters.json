@@ -49053,17 +49053,17 @@
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 37,
@@ -49291,6 +49291,111 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 36,
+                "species": "SPECIES_MEDITITE"
+              }
+            ]
           }
         },
         {
@@ -49372,17 +49477,17 @@
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 37,
@@ -49481,17 +49586,17 @@
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 37,
@@ -49590,17 +49695,17 @@
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 32,
                 "max_level": 36,
-                "species": "SPECIES_KRICKETOT"
+                "species": "SPECIES_MEDITITE"
               },
               {
                 "min_level": 37,
