@@ -42217,6 +42217,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_SERVINE"
+              }
+            ]
           }
         },
         {
