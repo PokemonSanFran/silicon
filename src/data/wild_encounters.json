@@ -61554,6 +61554,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_MAREEP"
+              }
+            ]
           }
         },
         {
