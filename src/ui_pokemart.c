@@ -6,6 +6,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "field_weather.h"
+#include "field_message_box.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "item.h"
@@ -168,7 +169,6 @@ static void Task_MartInterface_HandleBuyOrSell(u8);
 static void Task_MartInterface_HandleQuit(u8);
 static void Task_MartInterface_FadeIntoMenu(u8);
 static void Task_MartReload_WaitForFade(u8);
-static void Task_MartReload_Finish(u8);
 
 static void CB2_MartMenu_OpenBuyMenu(void);
 static void CB2_MartMenu_OpenSellMenu(void);
@@ -533,14 +533,12 @@ static void Task_MartReload_WaitForFade(u8 taskId)
 {
     if (IsWeatherNotFadingIn())
     {
-        DisplayItemMessageOnField(taskId, gText_AnythingElseICanHelp, Task_MartReload_Finish);
+        if (ShowFieldMessage(gText_CanIHelpWithAnythingElse));
+        {
+            MartInterface_Open();
+            DestroyTask(taskId);
+        }
     }
-}
-
-static void Task_MartReload_Finish(u8 taskId)
-{
-    MartInterface_Open();
-    DestroyTask(taskId);
 }
 
 static void CB2_MartMenu_OpenBuyMenu(void)
@@ -934,7 +932,7 @@ static void MartSprite_SetCategoryArrowSpriteId(u32 spriteId)
     sPokeMartData.arrowSpriteId = spriteId;
 }
 
-static u32 MartSprite_GetCategoryArrowSpriteId(void)
+static u32 UNUSED MartSprite_GetCategoryArrowSpriteId(void)
 {
     return sPokeMartData.arrowSpriteId;
 }
