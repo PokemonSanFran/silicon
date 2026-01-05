@@ -142,11 +142,26 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
+	openpokemart(TestMart)
+	closemessage
 	end
+}
+
+mart TestMart
+{
+	ITEM_HYPER_POTION
+	ITEM_POKE_BALL
+	ITEM_ULTRA_BALL
+	ITEM_MAX_POTION
+	ITEM_FULL_RESTORE
+	ITEM_FULL_HEAL
+	ITEM_REVIVE
+	ITEM_MAX_REPEL
 }
 
 script Debug_EventScript_Script_2
 {
+	openprestoterminal
 	end
 }
 
