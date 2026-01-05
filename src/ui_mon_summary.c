@@ -237,7 +237,7 @@ static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_s
 static const u8 sSummaryPrint_PageTabsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/page_tabs.4bpp");
 static const u8 sSummaryPrint_FontColors[NUM_MON_SUMMARY_FNTCLRS][3] =
 {
-    [MON_SUMMARY_FNTCLR_INTERFACE] = { 0, 1, 2 },
+    [MON_SUMMARY_FNTCLR_INTERFACE] = { 0, 2, 1 },
     [MON_SUMMARY_FNTCLR_TEXTBOX]   = { 0, 2, 0 },
     [MON_SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
