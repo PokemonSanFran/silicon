@@ -45326,6 +45326,111 @@
                 "species": "SPECIES_NOIVERN"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 52,
+                "species": "SPECIES_CROAGUNK"
+              }
+            ]
           }
         },
         {
