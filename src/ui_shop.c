@@ -111,7 +111,6 @@ static void ShopSprite_DestroyItemSprites(void);
 static void ShopSprite_ToggleItemIconsVisibility(bool32);
 
 static void ShopInventory_InitCategoryLists(void);
-static u32 ShopInventory_IsItemRecommended(u16);
 static bool32 ShopInventory_IsPlayerWithinAForest(void);
 static bool32 ShopInventory_IsPlayerOnWater(void);
 static bool32 ShopInventory_IsPlayerWithinARoute(void);
