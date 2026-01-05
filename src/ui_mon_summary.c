@@ -38,6 +38,7 @@ static void Task_MonSummary_WaitFadeAndExit(u8);
 
 static void SummarySetup_Backgrounds(void);
 static void SummarySetup_Graphics(void);
+static void SummarySetup_Sprites(void);
 static void SummarySetup_Windows(void);
 static void CB2_SummarySetup(void);
 static void Task_SummarySetup_WaitFade(u8);
@@ -73,11 +74,17 @@ static const u8 *SummaryPage_GetName(enum MonSummaryPages);
 static struct WindowTemplate SummaryPage_FillDynamicWindowTemplate(enum MonSummaryPages, u32);
 static u32 SummaryPage_GetDynamicWindowBaseBlock(u32);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
+static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void SummaryPage_LoadDynamicWindows(void);
 static void SummaryPage_UnloadDynamicWindows(void);
 static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(void);
+
+static void SummarySprite_SetSpriteId(u8, u8);
+static u8 SummarySprite_GetSpriteId(u8);
+static const struct MonSummarySprite *SummarySprite_GetMainStruct(enum MonSummaryMainSprites);
+static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
@@ -144,6 +151,21 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_MON_SUMMARY_MAI
     DUMMY_WIN_TEMPLATE
 };
 
+static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_MON_SUMMARY_MAIN_SPRITES] =
+{
+    {
+        .id = MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
+        .oam = &(const struct OamData){
+            .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16),
+            .priority = 0
+        },
+        .tileTag = TAG_SUMMARY_SHINY_SYMBOL,
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/shiny_symbol.4bpp.smol"),
+        .anims = gDummySpriteAnimTable,
+        .callback = SpriteCB_SummarySprite_ShinySymbol
+    },
+};
+
 static const TaskFunc sSummaryMode_InputFuncs[NUM_MON_SUMMARY_MODES] =
 {
     [MON_SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
@@ -164,6 +186,10 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_MON_SUMMARY_PAGES] 
             MON_SUMMARY_DYNAMIC_WIN_DUMMY
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
+        .mainSpriteCoords =
+        {
+            [MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL] = { MON_SUMMARY_INFOS_HEADER_SHINY_X, MON_SUMMARY_INFOS_HEADER_SHINY_Y },
+        },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
     },
@@ -313,6 +339,7 @@ static void SummarySetup_Backgrounds(void)
 
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sSummarySetup_BgTemplates, NELEMS(sSummarySetup_BgTemplates));
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
 
     SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
     SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_2, sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
@@ -332,7 +359,34 @@ static void SummarySetup_Graphics(void)
     DecompressAndCopyTileDataToVram(MON_SUMMARY_BG_PAGE_1, sMonSummary_MainTiles, 0, 0, 0);
     LoadPalette(sMonSummary_MainPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 
+    LoadSpritePalette(&(const struct SpritePalette){
+        .data = sMonSummary_MainPalette,
+        .tag = TAG_SUMMARY_UNIVERSAL_PAL
+    });
+
     SummaryPage_LoadTilemap();
+}
+
+static void SummarySetup_Sprites(void)
+{
+    for (enum MonSummaryMainSprites i = 0; i < NUM_MON_SUMMARY_MAIN_SPRITES; i++)
+    {
+        const struct MonSummarySprite *config = SummarySprite_GetMainStruct(i);
+        struct SpriteTemplate template =
+        {
+            .tileTag = config->tileTag,
+            .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+            .oam = config->oam,
+            .anims = config->anims,
+            .images = &(struct SpriteFrameImage){ config->gfx },
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = config->callback,
+        };
+
+        LoadCompressedSpriteSheetByTemplate(&template, 0);
+        SummarySprite_SetSpriteId(config->id,
+            CreateSprite(&template, 0, 0, 0));
+    }
 }
 
 static void SummarySetup_Windows(void)
@@ -390,10 +444,14 @@ static void CB2_SummarySetup(void)
     case MON_SUMMARY_SETUP_GRAPHICS:
         SummarySetup_Graphics();
         break;
+    case MON_SUMMARY_SETUP_SPRITES:
+        SummarySetup_Sprites();
+        break;
     case MON_SUMMARY_SETUP_WINDOWS:
         SummarySetup_Windows();
         break;
     case MON_SUMMARY_SETUP_FADE:
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         CreateTask(Task_SummarySetup_WaitFade, 0);
         break;
@@ -760,6 +818,15 @@ static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages page)
     return info->tilemap;
 }
 
+static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages page, enum MonSummaryMainSprites sprite)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+
+    if (!info) return (struct Coords8){ DISPLAY_WIDTH, DISPLAY_HEIGHT };
+
+    return info->mainSpriteCoords[sprite];
+}
+
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
@@ -839,6 +906,32 @@ static void SummaryPage_Reload(void)
     func();
 
     ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
+}
+
+static void SummarySprite_SetSpriteId(u8 id, u8 value)
+{
+    sMonSummaryDataPtr->spriteIds[id] = value;
+}
+
+static u8 SummarySprite_GetSpriteId(u8 id)
+{
+    return sMonSummaryDataPtr->spriteIds[id];
+}
+
+static const struct MonSummarySprite *SummarySprite_GetMainStruct(enum MonSummaryMainSprites sprite)
+{
+    return &sSummarySetup_MainSprites[sprite];
+}
+
+static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
+{
+    struct Coords8 coords = SummaryPage_GetMainSpriteCoords(
+        SummaryPage_GetValue(), MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL);
+
+    if (sprite->x == coords.x && sprite->y == coords.y) return;
+
+    sprite->x = coords.x;
+    sprite->y = coords.y;
 }
 
 // dynamic windows handles the id on its own

@@ -39,6 +39,7 @@ enum MonSummarySetupSteps
     MON_SUMMARY_SETUP_MONDATA,
     MON_SUMMARY_SETUP_BACKGROUNDS,
     MON_SUMMARY_SETUP_GRAPHICS,
+    MON_SUMMARY_SETUP_SPRITES,
     MON_SUMMARY_SETUP_WINDOWS,
     MON_SUMMARY_SETUP_FADE,
     MON_SUMMARY_SETUP_FINISH
@@ -86,6 +87,10 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 };
 
 // starting positions
+#define MON_SUMMARY_INFOS_HEADER_SHINY_X    (92 + 8)
+
+#define MON_SUMMARY_INFOS_HEADER_SHINY_Y    (18 + 8)
+
 #define MON_SUMMARY_INFOS_SUMMARY_X      (7)     // type:
 #define MON_SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
 #define MON_SUMMARY_INFOS_SUMMARY_X3     (85)    // fght
@@ -117,10 +122,30 @@ STATIC_ASSERT(NUM_MON_SUMMARY_MOVES_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS,
 enum MonSummaryFontColors
 {
     MON_SUMMARY_FNTCLR_INTERFACE,
+    MON_SUMMARY_FNTCLR_HEADER,
+    MON_SUMMARY_FNTCLR_MALE,
+    MON_SUMMARY_FNTCLR_FEMALE,
     MON_SUMMARY_FNTCLR_TEXTBOX,
     MON_SUMMARY_FNTCLR_HELP_BAR,
 
     NUM_MON_SUMMARY_FNTCLRS
+};
+
+enum MonSummaryMainSprites
+{
+    MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
+
+    NUM_MON_SUMMARY_MAIN_SPRITES
+};
+
+#define MON_SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
+#define TOTAL_MON_SUMMARY_DYNAMIC_SPRITES 5
+
+// assorted tags for both main and dynamic sprites
+enum MonSummarySpriteTags
+{
+    TAG_SUMMARY_UNIVERSAL_PAL = 0x9999,
+    TAG_SUMMARY_SHINY_SYMBOL,
 };
 
 // structs
@@ -184,6 +209,7 @@ struct MonSummaryResources
     MainCallback savedCallback;
     u8 *tilemapBufs[NUM_MON_SUMMARY_BG_PAGE_SLOTS];
     u8 windowIds[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
+    u8 spriteIds[NUM_MON_SUMMARY_MAIN_SPRITES + TOTAL_MON_SUMMARY_DYNAMIC_SPRITES];
 
     bool32 pageSlot:1; // only referred for tilemapBufs shenanigans
     u32 currIdx:8; // also used as the vertical "cursor" for switching between each available mon(s)
@@ -213,12 +239,24 @@ struct MonSummaryDynamicWindow
     u8 width, height;
 };
 
+// x/y position is set manually by wrapper functions
+struct MonSummarySprite
+{
+    u8 id;
+    u16 tileTag;
+    const u32 *gfx;
+    const struct OamData *oam;
+    const union AnimCmd *const *anims;
+    SpriteCallback callback;
+};
+
 // not to be confused with infos page!
 struct MonSummaryPageInfo
 {
     const u8 *name;
     struct MonSummaryDynamicWindow windows[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
     const u32 *tilemap;
+    struct Coords8 mainSpriteCoords[NUM_MON_SUMMARY_MAIN_SPRITES];
     TaskFunc input;
     void (*handleFrontEnd)(void);
 };
