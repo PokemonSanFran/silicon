@@ -64332,6 +64332,111 @@
                 "species": "SPECIES_FARIGIRAF"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 72,
+                "max_level": 74,
+                "species": "SPECIES_FRAXURE"
+              }
+            ]
           }
         },
         {
