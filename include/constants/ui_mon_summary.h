@@ -97,11 +97,11 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 #define MON_SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
 #define MON_SUMMARY_INFOS_SUMMARY_X3     (85)    // fght
 
-#define MON_SUMMARY_INFOS_SUMMARY_Y      (0)     // type:
-#define MON_SUMMARY_INFOS_SUMMARY_Y2     (16)    // ot:
-#define MON_SUMMARY_INFOS_SUMMARY_Y3     (32)    // id:
-#define MON_SUMMARY_INFOS_SUMMARY_Y4     (48)    // exp:
-#define MON_SUMMARY_INFOS_SUMMARY_Y5     (64)    // <nature> <fav flavor>
+#define MON_SUMMARY_INFOS_SUMMARY_Y      (1)     // type:
+#define MON_SUMMARY_INFOS_SUMMARY_Y2     (17)    // ot:
+#define MON_SUMMARY_INFOS_SUMMARY_Y3     (33)    // id:
+#define MON_SUMMARY_INFOS_SUMMARY_Y4     (49)    // exp:
+#define MON_SUMMARY_INFOS_SUMMARY_Y5     (65)    // <nature> <fav flavor>
 
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
