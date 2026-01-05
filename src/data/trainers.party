@@ -5034,57 +5034,290 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
-Spewpa
-Level: 1
+Wattrel @ Eviolite  
+Ability: Wind Power  
+Level: 43  
+EVs: 60 SpA / 80 Spe  
+Timid Nature  
+- Discharge  
+- U-turn  
+- Tailwind  
+
+Hitmonlee @ Cell Battery  
+Ability: Limber  
+Level: 43  
+EVs: 80 Atk / 60 Spe  
+Hasty Nature  
+- Blaze Kick  
+- Sucker Punch  
+- Low Sweep  
+- Fake Out  
+
+Dragonair @ Toxic Orb  
+Ability: Marvel Scale  
+Level: 42  
+EVs: 60 HP / 80 SpD  
+Lonely Nature  
+- Body Slam  
+- Water Pulse  
+- Breaking Swipe  
+- Light Screen  
+
+Donphan @ Iapapa Berry  
+Ability: Sturdy  
+Level: 43  
+EVs: 80 Atk / 60 SpD  
+Careful Nature  
+- Stomping Tantrum  
+- Knock Off  
+- Fire Fang  
+- Counter  
 
 === TRAINER_0D4BA0F1 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
 
-Spewpa
-Level: 1
+Barraskewda @ Rocky Helmet  
+Ability: Propeller Tail  
+Level: 43  
+EVs: 40 Def / 100 SpD  
+Impish Nature  
+- Dive  
+- Drill Run  
+- Bite  
+- Aqua Jet  
+
+Cramorant @ Mystic Water  
+Ability: Gulp Missile  
+Level: 44  
+EVs: 40 Def / 100 Spe  
+Hasty Nature  
+- Surf  
+- Dive  
+- Drill Peck  
+- Stockpile  
+
+Pawmot @ Punching Glove  
+Ability: Volt Absorb  
+Level: 44  
+EVs: 40 SpD / 100 Spe  
+Naive Nature  
+- Thunder Punch  
+- Ice Punch  
+- Brick Break  
+- Upper Hand  
 
 === TRAINER_0DA021EF ===
-Name: Blank
-Pic: Cooltrainer M
+Name: Billy
+Pic: Bird Keeper
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
 
-Spewpa
-Level: 1
+Squawkabilly-Blue @ Wacan Berry  
+Ability: Intimidate  
+Level: 43  
+EVs: 80 Def / 60 SpD  
+Careful Nature  
+- Take Down  
+- Fly  
+- U-turn  
+- Parting Shot  
+
+Squawkabilly @ Flame Orb  
+Ability: Guts  
+Level: 44  
+EVs: 60 HP / 80 Spe  
+Jolly Nature  
+- Facade  
+- Lash Out  
+- Dual Wingbeat  
+- Torment  
+
+Squawkabilly-Yellow @ Wide Lens  
+Ability: Hustle  
+Level: 43  
+EVs: 60 Atk / 80 Spe  
+Adamant Nature  
+- Foul Play  
+- Aerial Ace  
+- Quick Attack  
+- Roost  
+
+Squawkabilly-White @ Life Orb  
+Ability: Sheer Force  
+Level: 44  
+EVs: 60 SpA / 80 Spe  
+Jolly Nature  
+- Hurricane  
+- Heat Wave  
+- Pounce  
+- Mimic  
 
 === TRAINER_0E19F1A8 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
-Spewpa
-Level: 1
+Hitmonchan @ Adrenaline Orb  
+Ability: Keen Eye  
+Level: 44  
+EVs: 80 Atk / 60 Spe  
+Jolly Nature  
+- Drain Punch  
+- Thunder Punch  
+- Ice Punch  
+- Bullet Punch  
+
+Fletchinder @ Focus Sash  
+Ability: Gale Wings  
+Level: 45  
+EVs: 60 Atk / 80 Spe  
+Adamant Nature  
+- Fly  
+- Steel Wing  
+- Fire Spin  
+- Tailwind  
+
+Shiftry @ Power Herb  
+Ability: Wind Rider  
+Level: 44  
+EVs: 80 Def / 60 SpD  
+Jolly Nature  
+- Solar Blade  
+- Thief  
+- Aerial Ace  
+- Fake Out  
+
+Noivern @ Yache Berry  
+Ability: Infiltrator  
+Level: 44  
+EVs: 80 Def / 60 SpD  
+Timid Nature  
+- Dragon Pulse  
+- Psychic Noise  
+- Air Cutter  
+- Tailwind  
 
 === TRAINER_0E42221A ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
 
-Spewpa
-Level: 1
+Scyther @ Weakness Policy  
+Ability: Technician  
+Level: 46  
+EVs: 140 Def  
+Jolly Nature  
+- Bug Bite  
+- Trailblaze  
+- Dual Wingbeat  
+- Double Team  
+
+Swoobat @ Maranga Berry  
+Ability: Simple  
+Level: 44  
+EVs: 60 Def / 80 SpD  
+Bold Nature  
+- Stored Power  
+- Calm Mind  
+
+Greedent @ Ganlon Berry  
+Ability: Cheek Pouch  
+Level: 45  
+EVs: 80 Atk / 60 Def  
+- Body Press  
+- Body Slam  
+- Seed Bomb  
+- Stuff Cheeks  
 
 === TRAINER_0ED24EF1 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Single
 
-Spewpa
-Level: 1
+Gliscor @ Yache Berry  
+Ability: Hyper Cutter  
+Level: 45  
+EVs: 60 Atk / 80 Spe  
+Jolly Nature  
+- Rock Slide  
+- Bulldoze  
+- Fire Fang  
+- Toxic Spikes  
+
+Shuckle @ Leftovers  
+Ability: Sturdy  
+Level: 46  
+EVs: 80 Def / 60 SpD  
+Sassy Nature  
+- Knock Off  
+- Infestation  
+- Wrap  
+- Protect  
+
+Kingler @ Assault Vest  
+Ability: Sheer Force  
+Level: 45  
+EVs: 60 Def / 80 SpD  
+Adamant Nature  
+- Liquidation  
+- Night Slash  
+- Metal Claw  
+- Hammer Arm  
 
 === TRAINER_0F03CF8D ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
-Spewpa
-Level: 1
+Pidgeot @ Scope Lens  
+Ability: Keen Eye  
+Level: 46  
+EVs: 80 Atk / 60 SpA  
+Hasty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Dual Wingbeat  
+- Steel Wing  
+- Tailwind  
+- Uproar  
+
+Bombirdier @ Charti Berry  
+Ability: Rocky Payload  
+Level: 45  
+EVs: 80 Atk / 60 SpD  
+Adamant Nature  
+- Foul Play  
+- Rock Slide  
+- Acrobatics  
+- Feather Dance  
+
+Oricorio @ Absorb Bulb  
+Ability: Dancer  
+Level: 45  
+EVs: 60 SpA / 80 SpD  
+Naive Nature  
+- Revelation Dance  
+- Acrobatics  
+- Swords Dance  
+- Tailwind  
+
+Noctowl @ Wide Lens  
+Ability: Keen Eye  
+Level: 45  
+EVs: 100 Def / 40 Spe  
+Timid Nature  
+- Dream Eater  
+- Air Slash  
+- Psybeam  
+- Hypnosis  
 
 === TRAINER_0F3D8011 ===
 Name: Blank
