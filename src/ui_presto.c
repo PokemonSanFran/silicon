@@ -100,6 +100,7 @@ static bool8 PrestoHelper_HandleForest(u32 itemId, enum ShopMenuCategories categ
 static bool8 PrestoHelper_HandleCave(u32 itemId, enum ShopMenuCategories category);
 static bool8 PrestoHelper_HandleWater(u32 itemId, enum ShopMenuCategories category);
 static bool8 PrestoHelper_HandleRoute(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleCash(u32 itemId, enum ShopMenuCategories category);
 static bool8 PrestoHelper_HandleRandom(u32 itemId, enum ShopMenuCategories category);
 static void PrestoHelper_SetCarouselType(enum ShopMenuCarousels carousel);
 
