@@ -39,8 +39,8 @@ enum MonSummarySetupSteps
     MON_SUMMARY_SETUP_MONDATA,
     MON_SUMMARY_SETUP_BACKGROUNDS,
     MON_SUMMARY_SETUP_GRAPHICS,
-    MON_SUMMARY_SETUP_SPRITES,
     MON_SUMMARY_SETUP_WINDOWS,
+    MON_SUMMARY_SETUP_SPRITES,
     MON_SUMMARY_SETUP_FADE,
     MON_SUMMARY_SETUP_FINISH
 };
@@ -88,8 +88,10 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 
 // starting positions
 #define MON_SUMMARY_INFOS_HEADER_SHINY_X    (92 + 8)
+#define MON_SUMMARY_INFOS_HEADER_HP_BAR_X   (66 + 32)
 
 #define MON_SUMMARY_INFOS_HEADER_SHINY_Y    (18 + 8)
+#define MON_SUMMARY_INFOS_HEADER_HP_BAR_Y   (28 + 16)
 
 #define MON_SUMMARY_INFOS_SUMMARY_X      (7)     // type:
 #define MON_SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
@@ -134,6 +136,7 @@ enum MonSummaryFontColors
 enum MonSummaryMainSprites
 {
     MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
+    MON_SUMMARY_MAIN_SPRITE_HP_BAR,
 
     NUM_MON_SUMMARY_MAIN_SPRITES
 };
@@ -146,6 +149,16 @@ enum MonSummarySpriteTags
 {
     TAG_SUMMARY_UNIVERSAL_PAL = 0x9999,
     TAG_SUMMARY_SHINY_SYMBOL,
+    TAG_SUMMARY_HP_BAR,
+};
+
+enum MonSummaryHpBarColors
+{
+    MON_SUMMARY_HP_BAR_CLR_RED,
+    MON_SUMMARY_HP_BAR_CLR_YELLOW,
+    MON_SUMMARY_HP_BAR_CLR_GREEN,
+
+    NUM_MON_SUMMARY_HP_BAR_CLRS
 };
 
 // structs

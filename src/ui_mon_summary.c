@@ -84,7 +84,9 @@ static void SummaryPage_Reload(void);
 static void SummarySprite_SetSpriteId(u8, u8);
 static u8 SummarySprite_GetSpriteId(u8);
 static const struct MonSummarySprite *SummarySprite_GetMainStruct(enum MonSummaryMainSprites);
+static void SummarySprite_InjectHpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
+static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
@@ -164,7 +166,21 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_MON_SUMMARY_M
         .anims = gDummySpriteAnimTable,
         .callback = SpriteCB_SummarySprite_ShinySymbol
     },
+    {
+        .id = MON_SUMMARY_MAIN_SPRITE_HP_BAR,
+        .oam = &(const struct OamData){
+            .shape = SPRITE_SHAPE(64x32), .size = SPRITE_SIZE(64x32),
+            .priority = 0
+        },
+        .tileTag = TAG_SUMMARY_HP_BAR,
+        .gfx = gBlankGfxCompressed,
+        .anims = gDummySpriteAnimTable,
+        .callback = SpriteCB_SummarySprite_HpBar
+    },
 };
+
+static const u8 sSummarySprite_HpBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/hp_bar.4bpp");
+static const u16 sSummarySprite_HpBarColors[] = INCBIN_U16("graphics/ui_menus/mon_summary/hp_bar_states.gbapal");
 
 static const TaskFunc sSummaryMode_InputFuncs[NUM_MON_SUMMARY_MODES] =
 {
@@ -189,6 +205,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_MON_SUMMARY_PAGES] 
         .mainSpriteCoords =
         {
             [MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL] = { MON_SUMMARY_INFOS_HEADER_SHINY_X, MON_SUMMARY_INFOS_HEADER_SHINY_Y },
+            [MON_SUMMARY_MAIN_SPRITE_HP_BAR]       = { MON_SUMMARY_INFOS_HEADER_HP_BAR_X, MON_SUMMARY_INFOS_HEADER_HP_BAR_Y },
         },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
@@ -372,6 +389,7 @@ static void SummarySetup_Sprites(void)
     for (enum MonSummaryMainSprites i = 0; i < NUM_MON_SUMMARY_MAIN_SPRITES; i++)
     {
         const struct MonSummarySprite *config = SummarySprite_GetMainStruct(i);
+        struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
         struct SpriteTemplate template =
         {
             .tileTag = config->tileTag,
@@ -385,7 +403,7 @@ static void SummarySetup_Sprites(void)
 
         LoadCompressedSpriteSheetByTemplate(&template, 0);
         SummarySprite_SetSpriteId(config->id,
-            CreateSprite(&template, 0, 0, 0));
+            CreateSprite(&template, coords.x, coords.y, 0));
     }
 }
 
@@ -444,11 +462,11 @@ static void CB2_SummarySetup(void)
     case MON_SUMMARY_SETUP_GRAPHICS:
         SummarySetup_Graphics();
         break;
-    case MON_SUMMARY_SETUP_SPRITES:
-        SummarySetup_Sprites();
-        break;
     case MON_SUMMARY_SETUP_WINDOWS:
         SummarySetup_Windows();
+        break;
+    case MON_SUMMARY_SETUP_SPRITES:
+        SummarySetup_Sprites();
         break;
     case MON_SUMMARY_SETUP_FADE:
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
@@ -890,13 +908,22 @@ static void SummaryPage_LoadTilemap(void)
 
 static void SummaryPage_Reload(void)
 {
+    for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainWindows); i++)
+    {
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+    }
+
     SummaryPage_UnloadDynamicWindows();
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
 
-    for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainWindows); i++)
+    for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
     {
-        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+        struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
+        u32 spriteId = SummarySprite_GetSpriteId(i);
+
+        gSprites[spriteId].x = coords.x;
+        gSprites[spriteId].y = coords.y;
     }
 
     SummaryPrint_Header();
@@ -923,15 +950,54 @@ static const struct MonSummarySprite *SummarySprite_GetMainStruct(enum MonSummar
     return &sSummarySetup_MainSprites[sprite];
 }
 
+static void SummarySprite_InjectHpBar(struct Sprite *sprite)
+{
+    struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
+    u32 windowId = AddWindow(&template);
+
+    BlitBitmapToWindow(windowId, sSummarySprite_HpBarBlit,
+        0, 0,
+        TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
+
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 currHp = mon->currentHP;
+    u32 maxHp = mon->maxHP;
+
+    u32 hpPercentage = (currHp * 100) / maxHp;
+    enum MonSummaryHpBarColors color = hpPercentage / 33;
+    if (color > MON_SUMMARY_HP_BAR_CLR_GREEN) color = MON_SUMMARY_HP_BAR_CLR_GREEN;
+
+    LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
+
+    ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_LEFT_ALIGN, 4);
+    ConvertUIntToDecimalStringN(gStringVar2, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}/{STR_VAR_2}"));
+
+    u32 width = TILE_TO_PIXELS(7) - 1; // 55
+    u32 fontId = GetOutlineFontIdToFit(gStringVar4, width);
+    u32 x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar4, width, -1);
+    SummaryPrint_AddText(windowId, fontId, x, 0, MON_SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+
+    u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
+    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
+
+    RemoveWindow(windowId);
+}
+
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
 {
-    struct Coords8 coords = SummaryPage_GetMainSpriteCoords(
-        SummaryPage_GetValue(), MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL);
+    sprite->invisible = SummaryMon_GetStruct()->isShiny ^ 1;
+}
 
-    if (sprite->x == coords.x && sprite->y == coords.y) return;
+static void SpriteCB_SummarySprite_HpBar(struct Sprite *sprite)
+{
+    u32 maxHp = SummaryMon_GetStruct()->maxHP;
 
-    sprite->x = coords.x;
-    sprite->y = coords.y;
+    if (maxHp == sprite->data[0]) return;
+
+    SummarySprite_InjectHpBar(sprite);
+    sprite->data[0] = maxHp;
 }
 
 // dynamic windows handles the id on its own
