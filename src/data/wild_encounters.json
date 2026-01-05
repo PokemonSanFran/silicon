@@ -30758,6 +30758,111 @@
                 "species": "SPECIES_TOGEKISS"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              },
+              {
+                "min_level": 71,
+                "max_level": 73,
+                "species": "SPECIES_NICKIT"
+              }
+            ]
           }
         },
         {
