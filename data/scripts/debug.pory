@@ -142,17 +142,17 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
-		callnative(ClearBag)
+	callnative(ClearBag)
 	additem(ITEM_X_ATTACK,1)
-additem(ITEM_CHERI_BERRY,1)
-additem(ITEM_ESCAPE_ROPE,1)
-additem(ITEM_SUPER_POTION,1)
-additem(ITEM_VENUSAURITE,1)
-additem(ITEM_BLACK_FLUTE,1)
-additem(ITEM_POKE_BALL,1)
-additem(ITEM_ZINC,1)
-additem(ITEM_TINY_MUSHROOM,1)
-additem(ITEM_FIRIUM_Z,1)
+	additem(ITEM_CHERI_BERRY,1)
+	additem(ITEM_ESCAPE_ROPE,1)
+	additem(ITEM_SUPER_POTION,1)
+	additem(ITEM_VENUSAURITE,1)
+	additem(ITEM_BLACK_FLUTE,1)
+	additem(ITEM_POKE_BALL,1)
+	additem(ITEM_ZINC,1)
+	additem(ITEM_TINY_MUSHROOM,1)
+	additem(ITEM_FIRIUM_Z,1)
 	end
 }
 
