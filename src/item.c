@@ -466,8 +466,10 @@ static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, u16 itemId,
         {
             if (tempPocketSlotQuantities[itemRemoveIndex] > 0)
                 BagPocket_SetSlotItemIdAndCount(pocket, itemRemoveIndex, itemId, tempPocketSlotQuantities[itemRemoveIndex] - 1);
+            /*
             if ((tempPocketSlotQuantities[itemRemoveIndex] - 1) == 0)
                 TryToRemoveFavoriteItem(pocket->id, itemId);
+             */
         }
     }
 

@@ -3757,6 +3757,7 @@ void CB2_ReturnToInventoryBattleMenu(void)
     Inventory_Init(inventorySavedCallback, INVENTORY_MODE_BATTLE);
 }
 
+            /*
 void TryToRemoveFavoriteItem(u8 pocketId, u8 itemIdx){
     if(isFavoriteItem(pocketId, itemIdx)){
         gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId]--;
@@ -3764,6 +3765,7 @@ void TryToRemoveFavoriteItem(u8 pocketId, u8 itemIdx){
 
     ForceReloadInventory();
 }
+             */
 
 bool8 isFavoriteItem(u8 pocketId, u8 itemIdx){
     return (itemIdx < gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId]) || pocketId == POCKET_FAVORITE_ITEMS;
