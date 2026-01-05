@@ -390,7 +390,5 @@
       "script": "CutePokemon_Script_DebugGiveMon"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
