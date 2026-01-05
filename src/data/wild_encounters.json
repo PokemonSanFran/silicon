@@ -44680,6 +44680,111 @@
                 "species": "SPECIES_DRAGONITE"
               }
             ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              },
+              {
+                "min_level": 70,
+                "max_level": 74,
+                "species": "SPECIES_PURUGLY"
+              }
+            ]
           }
         },
         {
