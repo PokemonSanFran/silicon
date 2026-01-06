@@ -1883,25 +1883,28 @@ static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
 }
 
 static bool8 canMonLearnCurrentTMHM(u8 partyIndex){
-    u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
+    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u16 itemId = Inventory_GetItemIdCurrentlySelected();
+    enum Pocket itemPocket = GetItemPocket(itemId);
 
-    if(pocketId != POCKET_TM_HM){
+    if(pocketId != POCKET_TM_HM && itemPocket != POCKET_TM_HM)
+    {
         return TRUE;
     }
-    else{
+    else
+    {
         struct Pokemon *mon = &gPlayerParty[partyIndex];
-        u16 itemId = Inventory_GetItemIdCurrentlySelected();
         u16 move = ItemIdToBattleMoveId(itemId);
 
         switch(CanTeachMove(mon, move)){
             case CANNOT_LEARN_MOVE_IS_EGG:
             case CANNOT_LEARN_MOVE:
                 return FALSE;
-            break;
+                break;
             case CAN_LEARN_MOVE:
             case ALREADY_KNOWS_MOVE:
                 return TRUE;
-            break;
+                break;
         }
     }
 
@@ -2814,10 +2817,11 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
     u32 windowId = INVENTORY_WINDOW_ITEM_LIST;
     u32 itemListItemNameWidth = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH - 24;
     u32 inventoryPadding = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH;
+    enum Pocket itemPocket = GetItemPocket(itemId);
 
     if(itemId != ITEM_NONE)
     {
-        if(pocketId != POCKET_TM_HM)
+        if(pocketId != POCKET_TM_HM && itemPocket != POCKET_TM_HM)
         {
             CopyItemName(itemId, gStringVar1);
             AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar1);
@@ -2859,6 +2863,9 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
 
 static void Inventory_PrintItemList(void)
 {
+    //PSF TODO the TM pocket has a blit background with dynamically changning palette colors
+    // This needs to be updated to just print a sprite on the far right of the row with the type icon, which sits on top of the blit cursor
+    // This also needs to be done for TMs in the favorites pocket
     enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u32 numitems = sMenuDataPtr->numItems[pocketId];
 
@@ -2898,7 +2905,8 @@ static void Inventory_PrintDesc(void)
     if(gSaveBlock3Ptr->InventoryData.itemIdx < numitems - 1)
     {
         u16 itemId = Inventory_GetItemIdCurrentlySelected();
-        if(pocketId != POCKET_TM_HM)
+        enum Pocket itemPocket = GetItemPocket(itemId);
+        if(pocketId != POCKET_TM_HM && itemPocket != POCKET_TM_HM)
         {
             StringCopy(gStringVar1, GetItemDescription(itemId));
 
