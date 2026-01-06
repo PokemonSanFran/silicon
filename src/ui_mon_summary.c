@@ -1,6 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "battle_main.h"
+#include "battle_anim.h"
 #include "bg.h"
 #include "window.h"
 #include "sprite.h"
@@ -22,10 +23,12 @@
 #include "pokedex.h"
 #include "strings.h"
 #include "party_menu.h"
+#include "tv.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/party_menu.h"
 
 // ram
 static EWRAM_DATA struct MonSummaryResources *sMonSummaryDataPtr = NULL;
@@ -92,11 +95,16 @@ static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, 
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
 static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
+static void SummaryPrint_BlitStatusSymbol(u32, u32, u32);
 static void SummaryPrint_HelpBar(void);
 
 static void DummyPage_HandleFrontEnd(void);
 
 static void InfosPage_HandleFrontEnd(void);
+static void InfosPage_HandleHeader(void);
+static void InfosPageHeader_PrintMonNameGender(struct MonSummary *);
+static void InfosPageHeader_PrintLevel(struct MonSummary *);
+static void InfosPageHeader_BlitStatusSymbol(struct MonSummary *);
 static void InfosPage_HandleSummary(void);
 static void InfosPageSummary_PrintMonTyping(struct MonSummary *);
 static void InfosPageSummary_PrintTrainerInfo(struct MonSummary *);
@@ -195,6 +203,11 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_MON_SUMMARY_PAGES] 
         .windows =
         {
             {
+                .id = MON_SUMMARY_INFOS_WIN_HEADER,
+                .left = 8, .top = 0,
+                .width = 9, .height = 4
+            },
+            {
                 .id = MON_SUMMARY_INFOS_WIN_SUMMARY,
                 .left = 15, .top = 4,
                 .width = 15, .height = 10
@@ -235,9 +248,12 @@ static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_s
 static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/pages/tiles.gbapal");
 
 static const u8 sSummaryPrint_PageTabsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/page_tabs.4bpp");
+static const u8 sSummaryPrint_StatusSymbolsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/status_symbols.4bpp");
 static const u8 sSummaryPrint_FontColors[NUM_MON_SUMMARY_FNTCLRS][3] =
 {
     [MON_SUMMARY_FNTCLR_INTERFACE] = { 0, 2, 1 },
+    [MON_SUMMARY_FNTCLR_MALE]      = { 0, 2, 15 },
+    [MON_SUMMARY_FNTCLR_FEMALE]    = { 0, 2, 12 },
     [MON_SUMMARY_FNTCLR_TEXTBOX]   = { 0, 2, 0 },
     [MON_SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
@@ -682,6 +698,9 @@ static void SummaryMon_SetStruct(void)
     res->summary.spAtkEVs = GetMonData(mon, MON_DATA_SPATK_EV);
     res->summary.spDefEVs = GetMonData(mon, MON_DATA_SPDEF_EV);
     res->summary.spdEVs = GetMonData(mon, MON_DATA_SPEED_EV);
+
+    GetMonNickname(mon, res->summary.nickname);
+    res->summary.gender = GetMonGender(mon);
 }
 
 static struct MonSummary *SummaryMon_GetStruct(void)
@@ -1045,6 +1064,15 @@ static void SummaryPrint_BlitPageTabs(u32 windowId, u32 x, u32 y)
     }
 }
 
+static void SummaryPrint_BlitStatusSymbol(u32 windowId, u32 x, u32 y)
+{
+    u32 ailment = SummaryMon_GetStruct()->ailment;
+    if (ailment == AILMENT_NONE) return;
+    ailment--;
+
+    BlitBitmapRectToWindow(windowId, sSummaryPrint_StatusSymbolsBlit, 0, ailment * 8, 24, 64, x, y, 24, 8);
+}
+
 // TODO actual helping bar
 static void SummaryPrint_HelpBar(void)
 {
@@ -1059,7 +1087,68 @@ static void DummyPage_HandleFrontEnd(void)
 
 static void InfosPage_HandleFrontEnd(void)
 {
+    InfosPage_HandleHeader();
     InfosPage_HandleSummary();
+}
+
+static void InfosPage_HandleHeader(void)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+
+    InfosPageHeader_PrintMonNameGender(mon);
+    InfosPageHeader_PrintLevel(mon);
+    InfosPageHeader_BlitStatusSymbol(mon);
+
+    CopyWindowToVram(SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER), COPYWIN_GFX);
+}
+
+static void InfosPageHeader_PrintMonNameGender(struct MonSummary *mon)
+{
+    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER);
+    u32 fontId = FONT_OUTLINED;
+    u32 x = MON_SUMMARY_INFOS_HEADER_X, x2 = MON_SUMMARY_INFOS_HEADER_GENDER_X;
+    u32 winWidth = WindowWidthPx(windowId);
+
+    // <name>
+    const u8 *str = mon->nickname;
+    fontId = GetOutlineFontIdToFit(str, (winWidth - x) + (winWidth - x2));
+
+    SummaryPrint_AddText(windowId, fontId, x, MON_SUMMARY_INFOS_HEADER_Y, MON_SUMMARY_FNTCLR_INTERFACE, str);
+
+    // <gender> (if necessary)
+    u32 species = mon->species2, gender = mon->gender;
+    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
+     || gender == MON_GENDERLESS)
+    {
+        return;
+    }
+
+    u32 femaleMon = gender == MON_FEMALE;
+    enum MonSummaryFontColors color = MON_SUMMARY_FNTCLR_MALE + femaleMon;
+
+    fontId = FONT_OUTLINED;
+    str = femaleMon ? gText_FemaleSymbol : gText_MaleSymbol;
+
+    SummaryPrint_AddText(windowId, fontId, x2, MON_SUMMARY_INFOS_HEADER_Y, color, str);
+}
+
+static void InfosPageHeader_PrintLevel(struct MonSummary *mon)
+{
+    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER);
+    u32 fontId = FONT_OUTLINED;
+
+    ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
+
+    SummaryPrint_AddText(windowId, fontId,
+        MON_SUMMARY_INFOS_HEADER_X, MON_SUMMARY_INFOS_HEADER_Y2,
+        MON_SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+}
+
+static void InfosPageHeader_BlitStatusSymbol(struct MonSummary *mon)
+{
+    SummaryPrint_BlitStatusSymbol(SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER),
+        MON_SUMMARY_INFOS_HEADER_STATUS_X, MON_SUMMARY_INFOS_HEADER_STATUS_Y);
 }
 
 static void InfosPage_HandleSummary(void)
@@ -1142,7 +1231,7 @@ static void InfosPageSummary_PrintNeededExperience(struct MonSummary *mon)
     }
 
     ConvertUIntToDecimalStringN(gStringVar1, exp, STR_CONV_MODE_LEFT_ALIGN, 7);
-    ConvertUIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertUIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} to {LV} {STR_VAR_2}"));
 
     SummaryPrint_AddText(windowId, fontId,

@@ -81,17 +81,24 @@ enum __attribute__((packed)) MonSummaryMainWindows
 // dynamic windows
 enum __attribute__((packed)) MonSummaryInfosWindows
 {
+    MON_SUMMARY_INFOS_WIN_HEADER,    // typically contains nick/species name, gender, level, and status ailment/pokerus
     MON_SUMMARY_INFOS_WIN_SUMMARY,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
 
     NUM_MON_SUMMARY_INFOS_WINDOWS
 };
 
 // starting positions
+#define MON_SUMMARY_INFOS_HEADER_X          (2)     // <name> / Lv<level>
+#define MON_SUMMARY_INFOS_HEADER_GENDER_X   (65)    // <gender>
 #define MON_SUMMARY_INFOS_HEADER_SHINY_X    (92 + 8)
 #define MON_SUMMARY_INFOS_HEADER_HP_BAR_X   (66 + 32)
+#define MON_SUMMARY_INFOS_HEADER_STATUS_X   (42)
 
+#define MON_SUMMARY_INFOS_HEADER_Y          (1)     // <name> <gender>
+#define MON_SUMMARY_INFOS_HEADER_Y2         (14)    // Lv<level>
 #define MON_SUMMARY_INFOS_HEADER_SHINY_Y    (18 + 8)
 #define MON_SUMMARY_INFOS_HEADER_HP_BAR_Y   (28 + 16)
+#define MON_SUMMARY_INFOS_HEADER_STATUS_Y   (19)
 
 #define MON_SUMMARY_INFOS_SUMMARY_X      (7)     // type:
 #define MON_SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
@@ -214,6 +221,9 @@ struct MonSummary
     u8 spAtkEVs;
     u8 spDefEVs;
     u8 spdEVs;
+
+    u8 gender;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
 };
 
 struct MonSummaryResources
