@@ -74,19 +74,21 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 };
 
 // starting positions
-#define SUMMARY_INFOS_HEADER_X          (2)     // <name> / Lv<level>
-#define SUMMARY_INFOS_HEADER_GENDER_X   (65)    // <gender>
-#define SUMMARY_INFOS_HEADER_SHINY_X    (92 + 8)
-#define SUMMARY_INFOS_HEADER_STATUS_X   (42)
-#define SUMMARY_INFOS_HEADER_HP_BAR_X   (66 + 32)
-#define SUMMARY_INFOS_HEADER_EXP_BAR_X  (67)
+#define SUMMARY_INFOS_HEADER_X                  (2)     // <name> / Lv<level>
+#define SUMMARY_INFOS_HEADER_GENDER_X           (65)    // <gender>
+#define SUMMARY_INFOS_HEADER_SHINY_X            (92 + 8)
+#define SUMMARY_INFOS_HEADER_STATUS_X           (42)
+#define SUMMARY_INFOS_HEADER_HP_BAR_X           (66 + 32)
+#define SUMMARY_INFOS_HEADER_EXP_BAR_X          (67)
+#define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X   (79)
 
-#define SUMMARY_INFOS_HEADER_Y          (1)     // <name> <gender>
-#define SUMMARY_INFOS_HEADER_Y2         (14)    // Lv<level>
-#define SUMMARY_INFOS_HEADER_SHINY_Y    (18 + 8)
-#define SUMMARY_INFOS_HEADER_STATUS_Y   (19)
-#define SUMMARY_INFOS_HEADER_HP_BAR_Y   (28 + 16)
-#define SUMMARY_INFOS_HEADER_EXP_BAR_Y  (44)
+#define SUMMARY_INFOS_HEADER_Y                  (1)     // <name> <gender>
+#define SUMMARY_INFOS_HEADER_Y2                 (14)    // Lv<level>
+#define SUMMARY_INFOS_HEADER_SHINY_Y            (18 + 8)
+#define SUMMARY_INFOS_HEADER_STATUS_Y           (19)
+#define SUMMARY_INFOS_HEADER_HP_BAR_Y           (28 + 16)
+#define SUMMARY_INFOS_HEADER_EXP_BAR_Y          (44)
+#define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y   (51)
 
 #define SUMMARY_INFOS_SUMMARY_X      (7)     // type:
 #define SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
@@ -132,6 +134,7 @@ enum MonSummaryMainSprites
     SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
     SUMMARY_MAIN_SPRITE_HP_BAR,
     SUMMARY_MAIN_SPRITE_EXP_BAR,
+    SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR,
 
     NUM_SUMMARY_MAIN_SPRITES
 };
@@ -146,6 +149,7 @@ enum MonSummarySpriteTags
     TAG_SUMMARY_SHINY_SYMBOL,
     TAG_SUMMARY_HP_BAR,
     TAG_SUMMARY_EXP_BAR,
+    TAG_SUMMARY_FRIENDSHIP_BAR,
 };
 
 enum MonSummaryHpBarColors

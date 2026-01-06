@@ -89,9 +89,11 @@ static u8 SummarySprite_GetSpriteId(u8);
 static const struct MonSummarySprite *SummarySprite_GetMainStruct(enum MonSummaryMainSprites);
 static void SummarySprite_InjectHpBar(struct Sprite *);
 static void SummarySprite_InjectExpBar(struct Sprite *);
+static void SummarySprite_InjectFriendshipBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
+static void SpriteCB_SummarySprite_FriendshipBar(struct Sprite *);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
@@ -216,11 +218,41 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_SUMMARY_MAIN_
         .anims = gDummySpriteAnimTable,
         .callback = SpriteCB_SummarySprite_ExpBar
     },
+    {
+        .id = SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR,
+        .subsprites = (const struct SubspriteTable[]){
+            {
+                .subspriteCount = 2,
+                .subsprites = (const struct Subsprite[]){
+                    {
+                        .x = 0, .y = 0,
+                        .shape = SPRITE_SHAPE(32x8), .size = SPRITE_SIZE(32x8),
+                        .tileOffset = 0
+                    },
+                    {
+                        .x = 32, .y = 0,
+                        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
+                        .tileOffset = 4
+                    },
+                },
+            },
+            { 0 },
+        },
+        .oam = &(const struct OamData){
+            .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(64x32),
+            .priority = 0
+        },
+        .tileTag = TAG_SUMMARY_FRIENDSHIP_BAR,
+        .gfx = gBlankGfxCompressed,
+        .anims = gDummySpriteAnimTable,
+        .callback = SpriteCB_SummarySprite_FriendshipBar
+    },
 };
 
 static const u8 sSummarySprite_HpBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/hp_bar.4bpp");
 static const u16 sSummarySprite_HpBarColors[] = INCBIN_U16("graphics/ui_menus/mon_summary/hp_bar_states.gbapal");
 static const u8 sSummarySprite_ExpBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/exp_bar.4bpp");
+static const u8 sSummarySprite_FriendshipBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/friendship_bar.4bpp");
 
 static const TaskFunc sSummaryMode_InputFuncs[NUM_SUMMARY_MODES] =
 {
@@ -252,6 +284,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MAIN_SPRITE_SHINY_SYMBOL] = { SUMMARY_INFOS_HEADER_SHINY_X,    SUMMARY_INFOS_HEADER_SHINY_Y },
             [SUMMARY_MAIN_SPRITE_HP_BAR]       = { SUMMARY_INFOS_HEADER_HP_BAR_X,   SUMMARY_INFOS_HEADER_HP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_EXP_BAR]      = { SUMMARY_INFOS_HEADER_EXP_BAR_X,  SUMMARY_INFOS_HEADER_EXP_BAR_Y },
+            [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X, SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y },
         },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
@@ -1074,6 +1107,29 @@ static void SummarySprite_InjectExpBar(struct Sprite *sprite)
     RemoveWindow(windowId);
 }
 
+static void SummarySprite_InjectFriendshipBar(struct Sprite *sprite)
+{
+    struct WindowTemplate template = { .width = 5, .height  = 1 }; // 48x8, uses subsprite
+    u32 windowId = AddWindow(&template);
+
+    BlitBitmapToWindow(windowId, sSummarySprite_FriendshipBarBlit,
+        0, 0,
+        TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
+
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 friendship = mon->friendship;
+    u32 percentage = (friendship * 100) / MAX_FRIENDSHIP;
+    u32 width = percentage / 4; // 25 pixels
+
+    FillWindowPixelRect(windowId, PIXEL_FILL(12), 0, 2, width, 4);
+
+    u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
+    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
+
+    RemoveWindow(windowId);
+}
+
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
 {
     sprite->invisible = SummaryMon_GetStruct()->isShiny ^ 1;
@@ -1096,6 +1152,16 @@ static void SpriteCB_SummarySprite_ExpBar(struct Sprite *sprite)
     if (index == sprite->sMonIndex) return;
 
     SummarySprite_InjectExpBar(sprite);
+    sprite->sMonIndex = index;
+}
+
+static void SpriteCB_SummarySprite_FriendshipBar(struct Sprite *sprite)
+{
+    u32 index = SummaryInput_GetIndex();
+
+    if (index == sprite->sMonIndex) return;
+
+    SummarySprite_InjectFriendshipBar(sprite);
     sprite->sMonIndex = index;
 }
 
