@@ -2960,7 +2960,7 @@ static void Inventory_OpenMenu(u8 taskId)
 {
      u32 itemId = Inventory_GetItemIdCurrentlySelected();
 
-    if (itemId == ITEM_NONE)
+    if (itemId == ITEM_NONE && sMenuDataPtr->currentSelectMode != INVENTORY_MODE_REORDER)
         return;
 
     Inventory_InitalizeMenu(itemId);
@@ -4223,6 +4223,7 @@ static void Task_MenuMain(u8 taskId)
         switch(sMenuDataPtr->currentSelectMode){
             case INVENTORY_MODE_DEFAULT:
                 numPress = NUM_LR_CURSOR_MOVES;
+                PlaySE(SE_SELECT);
                 do
                 {
                     if(gSaveBlock3Ptr->InventoryData.itemIdx == 0)
@@ -4242,6 +4243,7 @@ static void Task_MenuMain(u8 taskId)
         switch(sMenuDataPtr->currentSelectMode){
             case INVENTORY_MODE_DEFAULT:
                 numPress = NUM_LR_CURSOR_MOVES;
+                PlaySE(SE_SELECT);
                 do{
                     if(gSaveBlock3Ptr->InventoryData.itemIdx == numitems - 1)
                         break;
@@ -4328,6 +4330,12 @@ static void Inventory_EnterMoveMode(u8 taskId)
 {
     if(sMenuDataPtr->inventoryMode != INVENTORY_MODE_FIELD)
         return;
+
+    if (Inventory_LastItemInMenu())
+    {
+        PlaySE(SE_PC_OFF);
+        return;
+    }
 
     if (isCurrentItemFavorite())
     {
