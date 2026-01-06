@@ -58,6 +58,7 @@ enum __attribute__((packed)) MonSummaryPageSlots
 enum __attribute__((packed)) MonSummaryMainWindows
 {
     SUMMARY_MAIN_WIN_HEADER,    // refers to the page's name and tab blit
+    SUMMARY_MAIN_WIN_TEXT_BOX,  // refers to text descriptions of certain fields e.g. ability, held item, etc
     SUMMARY_MAIN_WIN_HELP_BAR,  // refers to control scheme of specific page/mode
 
     NUM_SUMMARY_MAIN_WINDOWS,
@@ -104,10 +105,12 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 #define SUMMARY_INFOS_MISC_MON_MARKINGS_X   (55)
 #define SUMMARY_INFOS_MISC_ITEM_NAME_X      (32)
 #define SUMMARY_INFOS_MISC_ABILITY_NAME_X   (6)
+#define SUMMARY_INFOS_MISC_TEXT_BOX_X       (7)
 
 #define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (0)
 #define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (7)
 #define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (23)
+#define SUMMARY_INFOS_MISC_TEXT_BOX_Y       (1)
 
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
@@ -284,8 +287,10 @@ struct MonSummaryPageInfo
     struct MonSummaryDynamicWindow windows[TOTAL_SUMMARY_DYNAMIC_WINDOWS];
     const u32 *tilemap;
     struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
+    struct UCoords8 textBoxCoords;
     TaskFunc input;
     void (*handleFrontEnd)(void);
+    void (*handleTextBox)(void);
 };
 
 #endif // GUARD_CONSTANTS_UI_MON_SUMMARY_H

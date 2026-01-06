@@ -26,6 +26,7 @@
 #include "party_menu.h"
 #include "tv.h"
 #include "item.h"
+#include "region_map.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -80,6 +81,7 @@ static struct WindowTemplate SummaryPage_FillDynamicWindowTemplate(enum MonSumma
 static u32 SummaryPage_GetDynamicWindowBaseBlock(u32);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
 static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
+static struct UCoords8 SummaryPage_GetTextBoxCoords(enum MonSummaryPages);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void SummaryPage_LoadDynamicWindows(void);
 static void SummaryPage_UnloadDynamicWindows(void);
@@ -103,11 +105,13 @@ static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_BlitStatusSymbol(u32, u32, u32);
 static void SummaryPrint_BlitMonMarkings(u32, u32, u32);
+static void SummaryPrint_TextBox(void);
 static void SummaryPrint_HelpBar(void);
 
-static void DummyPage_HandleFrontEnd(void);
+static void DummyPage_Handle(void);
 
 static void InfosPage_HandleFrontEnd(void);
+static void InfosPage_HandleTextBox(void);
 static void InfosPage_HandleHeader(void);
 static void InfosPageHeader_PrintMonNameGender(struct MonSummary *);
 static void InfosPageHeader_PrintLevel(struct MonSummary *);
@@ -156,6 +160,15 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WI
         .tilemapTop = 0,
         .width = 4,
         .height = 4,
+    },
+
+    [SUMMARY_MAIN_WIN_TEXT_BOX] =
+    {
+        .bg = SUMMARY_BG_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 14,
+        .width = DISPLAY_TILE_WIDTH,
+        .height = 4
     },
 
     [SUMMARY_MAIN_WIN_HELP_BAR] =
@@ -298,8 +311,10 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MAIN_SPRITE_EXP_BAR]      = { SUMMARY_INFOS_HEADER_EXP_BAR_X,  SUMMARY_INFOS_HEADER_EXP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X, SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y },
         },
+        .textBoxCoords = { SUMMARY_INFOS_MISC_TEXT_BOX_X, SUMMARY_INFOS_MISC_TEXT_BOX_Y },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
+        .handleTextBox = InfosPage_HandleTextBox,
     },
     [SUMMARY_PAGE_STATS] =
     {
@@ -529,6 +544,7 @@ static void SummarySetup_Windows(void)
     func();
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
+    SummaryPrint_TextBox();
 
     ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
@@ -952,6 +968,15 @@ static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages page,
     return info->mainSpriteCoords[sprite];
 }
 
+static struct UCoords8 SummaryPage_GetTextBoxCoords(enum MonSummaryPages page)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+
+    if (!info) return (struct UCoords8){ 0, 0 };
+
+    return info->textBoxCoords;
+}
+
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
@@ -965,9 +990,18 @@ static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
 
-    if (!info || !info->handleFrontEnd) return DummyPage_HandleFrontEnd;
+    if (!info || !info->handleFrontEnd) return DummyPage_Handle;
 
     return info->handleFrontEnd;
+}
+
+static void *SummaryPage_GetHandleTextBoxFunc(enum MonSummaryPages page)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+
+    if (!info || !info->handleFrontEnd) return DummyPage_Handle;
+
+    return info->handleTextBox;
 }
 
 static void SummaryPage_LoadDynamicWindows(void)
@@ -1038,6 +1072,7 @@ static void SummaryPage_Reload(void)
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
+    SummaryPrint_TextBox();
 
     ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
@@ -1241,6 +1276,20 @@ static void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
         48, 8);
 }
 
+static void SummaryPrint_TextBox(void)
+{
+    struct UCoords8 coords = SummaryPage_GetTextBoxCoords(SummaryPage_GetValue());
+
+    void (*handleTextBox)(void) = SummaryPage_GetHandleTextBoxFunc(SummaryPage_GetValue());
+    handleTextBox();
+
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_TEXT_BOX, FONT_NORMAL,
+        coords.x, coords.y,
+        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+
+    CopyWindowToVram(SUMMARY_MAIN_WIN_TEXT_BOX, COPYWIN_GFX);
+}
+
 // TODO actual helping bar
 static void SummaryPrint_HelpBar(void)
 {
@@ -1248,9 +1297,9 @@ static void SummaryPrint_HelpBar(void)
     CopyWindowToVram(SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
 }
 
-static void DummyPage_HandleFrontEnd(void)
+static void DummyPage_Handle(void)
 {
-
+    StringCopy(gStringVar4, COMPOUND_STRING(" "));
 }
 
 static void InfosPage_HandleFrontEnd(void)
@@ -1258,6 +1307,15 @@ static void InfosPage_HandleFrontEnd(void)
     InfosPage_HandleHeader();
     InfosPage_HandleSummary();
     InfosPage_HandleMisc();
+}
+
+static void InfosPage_HandleTextBox(void)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+
+    ConvertUIntToDecimalStringN(gStringVar1, mon->metLevel, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
+    GetMapName(gStringVar2, mon->metLocation, 0);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
 }
 
 static void InfosPage_HandleHeader(void)
