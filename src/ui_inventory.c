@@ -4059,7 +4059,7 @@ static void Task_MenuMain(u8 taskId)
                         return;
                     }
                     else
-                {
+                    {
                         sMenuDataPtr->itemIdxPickMode = 0;
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_USE_OPTIONS;
                     }
@@ -4081,6 +4081,7 @@ static void Task_MenuMain(u8 taskId)
 
         Inventory_PrintToAllWindows();
         Inventory_OpenMenu(taskId);
+        return;
     }
 
     if (JOY_NEW(B_BUTTON))
