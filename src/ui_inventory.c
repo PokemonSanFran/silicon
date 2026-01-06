@@ -170,10 +170,16 @@ static void Task_Inventory_HandleTossInput(u8 taskId);
 static void Inventory_ChangeTossAmount(s32 direction);
 static void Inventory_HandleRegister(u8 taskId);
 static void Task_Inventory_HandleRegisterDirection(u8 taskId);
+static void Inventory_EnterMoveMode(u8 taskId);
+static void Task_Inventory_HandleCantMoveInput(u8 taskId);
+static void Inventory_MoveMode_HandleMovement(bool32 isUp);
+static void Inventory_MoveMode_HandleMoveUp(u8 taskId);
+static void Inventory_MoveMode_HandleMoveDown(u8 taskId);
+static void Inventory_MoveMode_CancelMove(u8 taskId);
+static void Task_Inventory_HandleMoveInput(u8 taskId);
 static void Inventory_CancelFavorite(u8 taskId);
 static bool8 Inventory_LastItemInMenu(void);
 static void Inventory_TurnOff(u8 taskId);
-static void Inventory_CancelFavorite(u8 taskId);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
@@ -4028,7 +4034,6 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MODE_REGISTER:
                     break;
                 //Generic Messages
-                case INVENTORY_MODE_MOVE_ITEMS:
                 case INVENTORY_MESSAGE_CANT_MOVE_FAVORITE:
                 case INVENTORY_MESSAGE_CANT_USE_ITEM:
                 case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
@@ -4045,7 +4050,7 @@ static void Task_MenuMain(u8 taskId)
                         return;
                     }
                     else
-                    {
+                {
                         sMenuDataPtr->itemIdxPickMode = 0;
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_USE_OPTIONS;
                     }
@@ -4054,13 +4059,13 @@ static void Task_MenuMain(u8 taskId)
         }
         else if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM)
         {
-                if(canItemBeHold(Inventory_GetItemIdCurrentlySelected())){
-                    PlaySE(SE_SELECT);
-                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                    gTasks[taskId].func = Task_ReturnToPartyMenuToGiveItem;
+            if(canItemBeHold(Inventory_GetItemIdCurrentlySelected())){
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Task_ReturnToPartyMenuToGiveItem;
             }
             else
-            {
+        {
                 PlaySE(SE_PC_OFF);
             }
         }
@@ -4140,10 +4145,6 @@ static void Task_MenuMain(u8 taskId)
             case INVENTORY_MODE_DEFAULT:
                 PressedDownButton_Inventory();
                 break;
-            case INVENTORY_MODE_MOVE_ITEMS:
-                if(MoveItems(FALSE))
-                    PressedDownButton_Inventory();
-                break;
             case INVENTORY_MODE_REORDER:
                 numPocketOptions = NUM_SORT_OPTIONS;
 
@@ -4184,10 +4185,6 @@ static void Task_MenuMain(u8 taskId)
         {
             case INVENTORY_MODE_DEFAULT:
                 PressedUpButton_Inventory();
-                break;
-            case INVENTORY_MODE_MOVE_ITEMS:
-                if(MoveItems(TRUE))
-                    PressedUpButton_Inventory();
                 break;
             case INVENTORY_MODE_REORDER:
                 numPocketOptions = NUM_SORT_OPTIONS;
@@ -4273,26 +4270,9 @@ static void Task_MenuMain(u8 taskId)
         }
     }
 
-    if ((JOY_NEW(SELECT_BUTTON)))
+    if (JOY_NEW(SELECT_BUTTON))
     {
-        //You can only Sort Items in the default inventory mode
-        if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD){
-            if(!isCurrentItemFavorite()){
-                switch(sMenuDataPtr->currentSelectMode){
-                    case INVENTORY_MODE_MOVE_ITEMS:
-                        sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
-                        break;
-                    case INVENTORY_MODE_DEFAULT:
-                        sMenuDataPtr->currentSelectMode = INVENTORY_MODE_MOVE_ITEMS;
-                        break;
-                }
-            }
-            else{
-                PlaySE(SE_PC_OFF);
-                sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_MOVE_FAVORITE;
-            }
-            Inventory_PrintToAllWindows();
-        }
+        Inventory_EnterMoveMode(taskId);
     }
 }
 
@@ -4332,6 +4312,84 @@ static void Task_Inventory_HandleRegisterDirection(u8 taskId)
     {
         Inventory_CancelFavorite(taskId);
     }
+}
+
+static void Task_Inventory_HandleCantMoveInput(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON) || JOY_NEW(A_BUTTON))
+    {
+        //Inventory_PrintFooter();
+        Inventory_MoveMode_CancelMove(taskId);
+    }
+}
+
+static void Inventory_EnterMoveMode(u8 taskId)
+{
+    if(sMenuDataPtr->inventoryMode != INVENTORY_MODE_FIELD)
+        return;
+
+    if (isCurrentItemFavorite())
+    {
+        PlaySE(SE_PC_OFF);
+        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_MOVE_FAVORITE;
+        Inventory_PrintToAllWindows();
+        gTasks[taskId].func = Task_Inventory_HandleCantMoveInput;
+        return;
+    }
+        
+    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_MOVE_ITEMS;
+    Inventory_PrintFooter();
+    Inventory_PrintItemList();
+    PlaySE(SE_WIN_OPEN);
+    gTasks[taskId].func = Task_Inventory_HandleMoveInput;
+}
+
+static void Inventory_MoveMode_HandleMovement(bool32 isUp)
+{
+    if (!MoveItems(isUp))
+    {
+        PlaySE(SE_FAILURE);
+        return;
+    }
+
+    if (isUp == TRUE)
+        PressedUpButton_Inventory();
+    else
+        PressedDownButton_Inventory();
+
+    PlaySE(SE_SELECT);
+    Inventory_PrintItemList();
+    Inventory_PrintDesc();
+    return;
+}
+
+static void Inventory_MoveMode_HandleMoveUp(u8 taskId)
+{
+    Inventory_MoveMode_HandleMovement(TRUE);
+}
+
+static void Inventory_MoveMode_HandleMoveDown(u8 taskId)
+{
+    Inventory_MoveMode_HandleMovement(FALSE);
+}
+
+static void Inventory_MoveMode_CancelMove(u8 taskId)
+{
+    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+    ForceReloadInventory();
+    Inventory_PrintToAllWindows();
+    PlaySE(SE_SELECT);
+    gTasks[taskId].func = Task_MenuMain;
+}
+
+static void Task_Inventory_HandleMoveInput(u8 taskId)
+{
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
+        Inventory_MoveMode_HandleMoveUp(taskId);
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
+        Inventory_MoveMode_HandleMoveDown(taskId);
+    else if (JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON) || JOY_NEW(A_BUTTON))
+        Inventory_MoveMode_CancelMove(taskId);
 }
 
 static void Inventory_CancelFavorite(u8 taskId)
