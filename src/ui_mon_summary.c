@@ -3,6 +3,7 @@
 #include "battle_main.h"
 #include "battle_anim.h"
 #include "bg.h"
+#include "pokemon.h"
 #include "window.h"
 #include "sprite.h"
 #include "gpu_regs.h"
@@ -24,6 +25,7 @@
 #include "strings.h"
 #include "party_menu.h"
 #include "tv.h"
+#include "item.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -100,6 +102,7 @@ static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
 static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_BlitStatusSymbol(u32, u32, u32);
+static void SummaryPrint_BlitMonMarkings(u32, u32, u32);
 static void SummaryPrint_HelpBar(void);
 
 static void DummyPage_HandleFrontEnd(void);
@@ -114,6 +117,10 @@ static void InfosPageSummary_PrintMonTyping(struct MonSummary *);
 static void InfosPageSummary_PrintTrainerInfo(struct MonSummary *);
 static void InfosPageSummary_PrintNeededExperience(struct MonSummary *);
 static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *);
+static void InfosPage_HandleMisc(void);
+static void InfosPageMisc_BlitMonMarkings(struct MonSummary *);
+static void InfosPageMisc_PrintItemName(struct MonSummary *);
+static void InfosPageMisc_PrintAbilityName(struct MonSummary *);
 
 // const data
 static const struct BgTemplate sSummarySetup_BgTemplates[NUM_SUMMARY_BACKGROUNDS] =
@@ -276,6 +283,11 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
                 .left = 15, .top = 4,
                 .width = 15, .height = 10
             },
+            {
+                .id = SUMMARY_INFOS_WIN_MISC,
+                .left = 0, .top = 9,
+                .width = 13, .height = 5
+            },
             SUMMARY_DYNAMIC_WIN_DUMMY
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
@@ -315,12 +327,12 @@ static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_s
 
 static const u8 sSummaryPrint_PageTabsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/page_tabs.4bpp");
 static const u8 sSummaryPrint_StatusSymbolsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/status_symbols.4bpp");
+static const u8 sSummaryPrint_MonMarkingsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/mon_markings.4bpp");
 static const u8 sSummaryPrint_FontColors[NUM_SUMMARY_FNTCLRS][3] =
 {
     [SUMMARY_FNTCLR_INTERFACE] = { 0, 2, 1 },
     [SUMMARY_FNTCLR_MALE]      = { 0, 2, 15 },
     [SUMMARY_FNTCLR_FEMALE]    = { 0, 2, 12 },
-    [SUMMARY_FNTCLR_TEXTBOX]   = { 0, 2, 0 },
     [SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
 
@@ -776,6 +788,7 @@ static void SummaryMon_SetStruct(void)
 
     GetMonNickname(mon, res->summary.nickname);
     res->summary.gender = GetMonGender(mon);
+    res->summary.markings = GetMonData(mon, MON_DATA_MARKINGS);
 }
 
 static struct MonSummary *SummaryMon_GetStruct(void)
@@ -1219,6 +1232,15 @@ static void SummaryPrint_BlitStatusSymbol(u32 windowId, u32 x, u32 y)
     BlitBitmapRectToWindow(windowId, sSummaryPrint_StatusSymbolsBlit, 0, ailment * 8, 24, 64, x, y, 24, 8);
 }
 
+static void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
+{
+    BlitBitmapRectToWindow(windowId, sSummaryPrint_MonMarkingsBlit,
+        0, SummaryMon_GetStruct()->markings * 8,
+        48, 128,
+        x, y,
+        48, 8);
+}
+
 // TODO actual helping bar
 static void SummaryPrint_HelpBar(void)
 {
@@ -1235,6 +1257,7 @@ static void InfosPage_HandleFrontEnd(void)
 {
     InfosPage_HandleHeader();
     InfosPage_HandleSummary();
+    InfosPage_HandleMisc();
 }
 
 static void InfosPage_HandleHeader(void)
@@ -1409,4 +1432,47 @@ static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *mon)
     SummaryPrint_AddText(windowId, fontId,
         SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y5,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+}
+
+static void InfosPage_HandleMisc(void)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+
+    InfosPageMisc_BlitMonMarkings(mon);
+    InfosPageMisc_PrintItemName(mon);
+    InfosPageMisc_PrintAbilityName(mon);
+
+    CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC), COPYWIN_GFX);
+}
+
+static void InfosPageMisc_BlitMonMarkings(struct MonSummary *mon)
+{
+    SummaryPrint_BlitMonMarkings(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC),
+        SUMMARY_INFOS_MISC_MON_MARKINGS_X, SUMMARY_INFOS_MISC_MON_MARKINGS_Y);
+}
+
+static void InfosPageMisc_PrintItemName(struct MonSummary *mon)
+{
+    u32 itemId = mon->item;
+    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
+
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC);
+    u32 fontId = FONT_OUTLINED;
+
+    SummaryPrint_AddText(windowId, fontId,
+        SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y,
+        SUMMARY_FNTCLR_INTERFACE, GetItemName(itemId));
+}
+
+static void InfosPageMisc_PrintAbilityName(struct MonSummary *mon)
+{
+    u32 abilityNum = mon->abilityNum;
+    enum Ability ability = GetSpeciesAbility(mon->species, abilityNum);
+
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC);
+    u32 fontId = FONT_OUTLINED;
+
+    SummaryPrint_AddText(windowId, fontId,
+        SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
+        SUMMARY_FNTCLR_INTERFACE, GetAbilityName(ability));
 }

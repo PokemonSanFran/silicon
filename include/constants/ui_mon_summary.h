@@ -69,6 +69,7 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 {
     SUMMARY_INFOS_WIN_HEADER,    // typically contains nick/species name, gender, level, and status ailment/pokerus
     SUMMARY_INFOS_WIN_SUMMARY,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
+    SUMMARY_INFOS_WIN_MISC,      // typically contains held item, ability, and box shapes
 
     NUM_SUMMARY_INFOS_WINDOWS
 };
@@ -100,6 +101,14 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 #define SUMMARY_INFOS_SUMMARY_Y4     (49)    // exp:
 #define SUMMARY_INFOS_SUMMARY_Y5     (65)    // <nature> <fav flavor>
 
+#define SUMMARY_INFOS_MISC_MON_MARKINGS_X   (55)
+#define SUMMARY_INFOS_MISC_ITEM_NAME_X      (32)
+#define SUMMARY_INFOS_MISC_ABILITY_NAME_X   (6)
+
+#define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (0)
+#define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (7)
+#define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (23)
+
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
     SUMMARY_STATS_WIN_TEST,
@@ -123,7 +132,6 @@ enum MonSummaryFontColors
     SUMMARY_FNTCLR_INTERFACE,
     SUMMARY_FNTCLR_MALE,
     SUMMARY_FNTCLR_FEMALE,
-    SUMMARY_FNTCLR_TEXTBOX,
     SUMMARY_FNTCLR_HELP_BAR,
 
     NUM_SUMMARY_FNTCLRS
@@ -174,7 +182,8 @@ struct MonSummary
     u8 isEgg:1;
     u8 isShiny:1;
     u8 abilityNum:1;
-    u8 padding:5;
+    u8 markings:4;
+    u8 padding:1;
     u8 level;
     u8 ribbonCount;
     u8 ailment;
