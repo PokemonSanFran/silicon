@@ -110,7 +110,7 @@
 #define BAG_ITEMS_COUNT 525 // siliconMerge
 #define BAG_KEYITEMS_COUNT 102  // siliconMerge
 #define BAG_POKEBALLS_COUNT 36 // siliconMerge
-#define BAG_TMHM_COUNT 435 // siliconMerge //PSF TODO make this not a magic number?
+#define BAG_TMHM_COUNT 436 // siliconMerge //PSF TODO make this not a magic number?
 #define BAG_BERRIES_COUNT 68 // siliconMerge
 // Start inventory
 #define BAG_MEDICINE_COUNT     44

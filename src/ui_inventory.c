@@ -4223,7 +4223,8 @@ static void Task_MenuMain(u8 taskId)
         switch(sMenuDataPtr->currentSelectMode){
             case INVENTORY_MODE_DEFAULT:
                 numPress = NUM_LR_CURSOR_MOVES;
-                do{
+                do
+                {
                     if(gSaveBlock3Ptr->InventoryData.itemIdx == 0)
                         break;
 
