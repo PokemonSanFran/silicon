@@ -512,6 +512,7 @@ static void SummarySetup_Windows(void)
     InitWindows(sSummarySetup_MainWindows);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
+    SummaryPage_LoadDynamicWindows();
 
     for (u32 i = 0, baseBlock = 1; i < NUM_SUMMARY_MAIN_WINDOWS; i++)
     {
@@ -523,12 +524,11 @@ static void SummarySetup_Windows(void)
         baseBlock += template->width * template->height;
     }
 
-    SummaryPage_LoadDynamicWindows();
+    void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+
+    func();
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
-
-    void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
-    func();
 
     ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
@@ -899,7 +899,7 @@ static struct WindowTemplate SummaryPage_FillDynamicWindowTemplate(enum MonSumma
     return (struct WindowTemplate){
         .bg = SUMMARY_BG_TEXT,
         .tilemapLeft = window->left, .tilemapTop = window->top,
-        .width = window->width, .height = window->width,
+        .width = window->width, .height = window->height,
         .paletteNum = 0,
         .baseBlock = SummaryPage_GetDynamicWindowBaseBlock(windowId)
     };
@@ -993,13 +993,10 @@ static void SummaryPage_UnloadDynamicWindows(void)
         u32 windowId = SummaryPage_GetWindowId(i);
         if (windowId == WINDOW_NONE) break;
 
-        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         ClearWindowTilemap(windowId);
         RemoveWindow(windowId);
         SummaryPage_SetWindowId(i, WINDOW_NONE);
     }
-
-    ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
 
 static void SummaryPage_LoadTilemap(void)
@@ -1015,14 +1012,20 @@ static void SummaryPage_LoadTilemap(void)
 
 static void SummaryPage_Reload(void)
 {
-    for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainWindows); i++)
-    {
-        FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    }
+    FillBgTilemapBufferRect_Palette0(SUMMARY_BG_TEXT, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
 
     SummaryPage_UnloadDynamicWindows();
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
+
+    void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+    func();
+
+    for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainWindows); i++)
+    {
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+        PutWindowTilemap(i);
+    }
 
     for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
     {
@@ -1035,9 +1038,6 @@ static void SummaryPage_Reload(void)
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
-
-    void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
-    func();
 
     ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
