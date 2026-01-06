@@ -421,6 +421,11 @@ static void SummarySetup_Sprites(void)
         SummarySprite_SetSpriteId(config->id,
             CreateSprite(&template, coords.x, coords.y, 0));
         gSprites[SummarySprite_GetSpriteId(config->id)].sMonIndex = -1;
+
+        if (config->subsprites)
+        {
+            SetSubspriteTables(&gSprites[SummarySprite_GetSpriteId(config->id)], config->subsprites);
+        }
     }
 }
 

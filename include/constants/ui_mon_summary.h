@@ -254,6 +254,7 @@ struct MonSummarySprite
     u8 id;
     u16 tileTag;
     const u32 *gfx;
+    const struct SubspriteTable *subsprites;
     const struct OamData *oam;
     const union AnimCmd *const *anims;
     SpriteCallback callback;
