@@ -292,6 +292,7 @@ struct MonSummaryPageInfo
     TaskFunc input;
     void (*handleFrontEnd)(void);
     void (*handleTextBox)(void);
+    void (*handleHelpBar)(void);
 };
 
 #endif // GUARD_CONSTANTS_UI_MON_SUMMARY_H
