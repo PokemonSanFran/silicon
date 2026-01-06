@@ -3878,6 +3878,7 @@ static void Inventory_UseItem(u8 taskId)
             Inventory_RemoveMenu(taskId);
             ForceReloadInventory();
             Inventory_PrintItemList();
+            Inventory_PrintDesc();
         }
         break;
         case INVENTORY_ITEM_OPTION_REGISTER:
