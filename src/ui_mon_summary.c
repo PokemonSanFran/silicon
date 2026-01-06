@@ -420,6 +420,7 @@ static void SummarySetup_Sprites(void)
         LoadCompressedSpriteSheetByTemplate(&template, 0);
         SummarySprite_SetSpriteId(config->id,
             CreateSprite(&template, coords.x, coords.y, 0));
+        gSprites[SummarySprite_GetSpriteId(config->id)].sMonIndex = -1;
     }
 }
 
@@ -1014,12 +1015,12 @@ static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
 
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *sprite)
 {
-    u32 maxHp = SummaryMon_GetStruct()->maxHP;
+    u32 index = SummaryInput_GetIndex();
 
-    if (maxHp == sprite->data[0]) return;
+    if (index == sprite->sMonIndex) return;
 
     SummarySprite_InjectHpBar(sprite);
-    sprite->data[0] = maxHp;
+    sprite->sMonIndex = index;
 }
 
 // dynamic windows handles the id on its own

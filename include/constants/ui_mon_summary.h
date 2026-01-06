@@ -153,6 +153,8 @@ enum MonSummaryHpBarColors
     NUM_SUMMARY_HP_BAR_CLRS
 };
 
+#define sMonIndex       data[0]
+
 // structs
 
 // contains MonData of the current pokemon (list.mons/boxMons[currId])
