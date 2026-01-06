@@ -112,23 +112,23 @@ static void InfosPageSummary_PrintNeededExperience(struct MonSummary *);
 static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *);
 
 // const data
-static const struct BgTemplate sSummarySetup_BgTemplates[NUM_MON_SUMMARY_BACKGROUNDS] =
+static const struct BgTemplate sSummarySetup_BgTemplates[NUM_SUMMARY_BACKGROUNDS] =
 {
     {
-        .bg = MON_SUMMARY_BG_TEXT,
+        .bg = SUMMARY_BG_TEXT,
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .priority = 0
     },
     {
-        .bg = MON_SUMMARY_BG_PAGE_1,
+        .bg = SUMMARY_BG_PAGE_1,
         .charBaseIndex = 2,
         .mapBaseIndex = 28,
         .screenSize = 1,
         .priority = 1
     },
     {
-        .bg = MON_SUMMARY_BG_PAGE_2,
+        .bg = SUMMARY_BG_PAGE_2,
         .charBaseIndex = 2,
         .mapBaseIndex = 26,
         .screenSize = 1,
@@ -136,35 +136,35 @@ static const struct BgTemplate sSummarySetup_BgTemplates[NUM_MON_SUMMARY_BACKGRO
     },
 };
 
-static const struct WindowTemplate sSummarySetup_MainWindows[NUM_MON_SUMMARY_MAIN_WINDOWS + 1] =
+static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WINDOWS + 1] =
 {
-    [MON_SUMMARY_MAIN_WIN_HEADER] =
+    [SUMMARY_MAIN_WIN_HEADER] =
     {
-        .bg = MON_SUMMARY_BG_TEXT,
+        .bg = SUMMARY_BG_TEXT,
         .tilemapLeft = 23,
         .tilemapTop = 0,
         .width = 4,
         .height = 4,
     },
 
-    [MON_SUMMARY_MAIN_WIN_HELP_BAR] =
+    [SUMMARY_MAIN_WIN_HELP_BAR] =
     {
-        .bg = MON_SUMMARY_BG_TEXT,
+        .bg = SUMMARY_BG_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = DISPLAY_TILE_WIDTH,
         .height = 2,
     },
 
-    // MON_SUMMARY_MAIN_WIN_DYNAMIC uses AddWindow
+    // SUMMARY_MAIN_WIN_DYNAMIC uses AddWindow
 
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_MON_SUMMARY_MAIN_SPRITES] =
+static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_SUMMARY_MAIN_SPRITES] =
 {
     {
-        .id = MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
+        .id = SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
         .oam = &(const struct OamData){
             .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16),
             .priority = 0
@@ -175,7 +175,7 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_MON_SUMMARY_M
         .callback = SpriteCB_SummarySprite_ShinySymbol
     },
     {
-        .id = MON_SUMMARY_MAIN_SPRITE_HP_BAR,
+        .id = SUMMARY_MAIN_SPRITE_HP_BAR,
         .oam = &(const struct OamData){
             .shape = SPRITE_SHAPE(64x32), .size = SPRITE_SIZE(64x32),
             .priority = 0
@@ -190,54 +190,54 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_MON_SUMMARY_M
 static const u8 sSummarySprite_HpBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/hp_bar.4bpp");
 static const u16 sSummarySprite_HpBarColors[] = INCBIN_U16("graphics/ui_menus/mon_summary/hp_bar_states.gbapal");
 
-static const TaskFunc sSummaryMode_InputFuncs[NUM_MON_SUMMARY_MODES] =
+static const TaskFunc sSummaryMode_InputFuncs[NUM_SUMMARY_MODES] =
 {
-    [MON_SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
+    [SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
 };
 
-static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_MON_SUMMARY_PAGES] =
+static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
 {
-    [MON_SUMMARY_PAGE_INFOS] =
+    [SUMMARY_PAGE_INFOS] =
     {
         .name = COMPOUND_STRING("Info"),
         .windows =
         {
             {
-                .id = MON_SUMMARY_INFOS_WIN_HEADER,
+                .id = SUMMARY_INFOS_WIN_HEADER,
                 .left = 8, .top = 0,
                 .width = 9, .height = 4
             },
             {
-                .id = MON_SUMMARY_INFOS_WIN_SUMMARY,
+                .id = SUMMARY_INFOS_WIN_SUMMARY,
                 .left = 15, .top = 4,
                 .width = 15, .height = 10
             },
-            MON_SUMMARY_DYNAMIC_WIN_DUMMY
+            SUMMARY_DYNAMIC_WIN_DUMMY
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
         .mainSpriteCoords =
         {
-            [MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL] = { MON_SUMMARY_INFOS_HEADER_SHINY_X, MON_SUMMARY_INFOS_HEADER_SHINY_Y },
-            [MON_SUMMARY_MAIN_SPRITE_HP_BAR]       = { MON_SUMMARY_INFOS_HEADER_HP_BAR_X, MON_SUMMARY_INFOS_HEADER_HP_BAR_Y },
+            [SUMMARY_MAIN_SPRITE_SHINY_SYMBOL] = { SUMMARY_INFOS_HEADER_SHINY_X,    SUMMARY_INFOS_HEADER_SHINY_Y },
+            [SUMMARY_MAIN_SPRITE_HP_BAR]       = { SUMMARY_INFOS_HEADER_HP_BAR_X,   SUMMARY_INFOS_HEADER_HP_BAR_Y },
         },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
     },
-    [MON_SUMMARY_PAGE_STATS] =
+    [SUMMARY_PAGE_STATS] =
     {
         .name = COMPOUND_STRING("Stats"),
         .windows =
         {
-            MON_SUMMARY_DYNAMIC_WIN_DUMMY
+            SUMMARY_DYNAMIC_WIN_DUMMY
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
     },
-    [MON_SUMMARY_PAGE_MOVES] =
+    [SUMMARY_PAGE_MOVES] =
     {
         .name = COMPOUND_STRING("Moves"),
         .windows =
         {
-            MON_SUMMARY_DYNAMIC_WIN_DUMMY
+            SUMMARY_DYNAMIC_WIN_DUMMY
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),
     },
@@ -249,13 +249,13 @@ static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_s
 
 static const u8 sSummaryPrint_PageTabsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/page_tabs.4bpp");
 static const u8 sSummaryPrint_StatusSymbolsBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/status_symbols.4bpp");
-static const u8 sSummaryPrint_FontColors[NUM_MON_SUMMARY_FNTCLRS][3] =
+static const u8 sSummaryPrint_FontColors[NUM_SUMMARY_FNTCLRS][3] =
 {
-    [MON_SUMMARY_FNTCLR_INTERFACE] = { 0, 2, 1 },
-    [MON_SUMMARY_FNTCLR_MALE]      = { 0, 2, 15 },
-    [MON_SUMMARY_FNTCLR_FEMALE]    = { 0, 2, 12 },
-    [MON_SUMMARY_FNTCLR_TEXTBOX]   = { 0, 2, 0 },
-    [MON_SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
+    [SUMMARY_FNTCLR_INTERFACE] = { 0, 2, 1 },
+    [SUMMARY_FNTCLR_MALE]      = { 0, 2, 15 },
+    [SUMMARY_FNTCLR_FEMALE]    = { 0, 2, 12 },
+    [SUMMARY_FNTCLR_TEXTBOX]   = { 0, 2, 0 },
+    [SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
 
 static const u8 *const sInfosPageSummary_BerryFlavorNames[FLAVOR_COUNT] =
@@ -272,7 +272,7 @@ void MonSummary_OpenDefault(void)
 {
     MonSummary_Init(
         &(const struct MonSummaryConfigs){
-            .mode = MON_SUMMARY_MODE_DEFAULT,
+            .mode = SUMMARY_MODE_DEFAULT,
             .mons = gPlayerParty,
             .currIdx = 0, .totalIdx = gPlayerPartyCount - 1,
             .arg.value = 0
@@ -286,20 +286,20 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
 
     if (!sMonSummaryDataPtr
      || !config
-     || config->mode >= NUM_MON_SUMMARY_MODES)
+     || config->mode >= NUM_SUMMARY_MODES)
     {
         TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
         SetMainCallback2(callback);
         return;
     }
 
-    enum MonSummaryPages page = MON_SUMMARY_PAGE_INFOS;
+    enum MonSummaryPages page = SUMMARY_PAGE_INFOS;
 
     switch (config->mode)
     {
     default:
         break;
-    case MON_SUMMARY_MODE_BOX:
+    case SUMMARY_MODE_BOX:
         sMonSummaryDataPtr->useBoxMon = TRUE;
         break;
     }
@@ -318,8 +318,8 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
 
 static void MonSummary_FreeResources(void)
 {
-    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
-    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1]);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2]);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
     FreeAllWindowBuffers();
     ResetSpriteData();
@@ -357,11 +357,11 @@ static void SummarySetup_Backgrounds(void)
 {
     u32 tilemapSize = BG_SCREEN_SIZE * 2;
 
-    sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1] = AllocZeroed(tilemapSize);
-    sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2] = AllocZeroed(tilemapSize);
+    sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1] = AllocZeroed(tilemapSize);
+    sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2] = AllocZeroed(tilemapSize);
 
-    if (!sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]
-     || !sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2])
+    if (!sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1]
+     || !sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2])
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         CreateTask(Task_MonSummary_WaitFadeAndExit, 0);
@@ -374,10 +374,10 @@ static void SummarySetup_Backgrounds(void)
     InitBgsFromTemplates(0, sSummarySetup_BgTemplates, NELEMS(sSummarySetup_BgTemplates));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
 
-    SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_1]);
-    SetBgTilemapBuffer(MON_SUMMARY_BG_PAGE_2, sMonSummaryDataPtr->tilemapBufs[MON_SUMMARY_BG_PAGE_SLOT_2]);
+    SetBgTilemapBuffer(SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1]);
+    SetBgTilemapBuffer(SUMMARY_BG_PAGE_2, sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2]);
 
-    for (enum MonSummaryBackgrounds bg = 0; bg < NUM_MON_SUMMARY_BACKGROUNDS; bg++)
+    for (enum MonSummaryBackgrounds bg = 0; bg < NUM_SUMMARY_BACKGROUNDS; bg++)
     {
         ScheduleBgCopyTilemapToVram(bg);
         ShowBg(bg);
@@ -389,7 +389,7 @@ static void SummarySetup_Graphics(void)
     FreeTempTileDataBuffersIfPossible();
     ResetTempTileDataBuffers();
 
-    DecompressAndCopyTileDataToVram(MON_SUMMARY_BG_PAGE_1, sMonSummary_MainTiles, 0, 0, 0);
+    DecompressAndCopyTileDataToVram(SUMMARY_BG_PAGE_1, sMonSummary_MainTiles, 0, 0, 0);
     LoadPalette(sMonSummary_MainPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 
     LoadSpritePalette(&(const struct SpritePalette){
@@ -402,7 +402,7 @@ static void SummarySetup_Graphics(void)
 
 static void SummarySetup_Sprites(void)
 {
-    for (enum MonSummaryMainSprites i = 0; i < NUM_MON_SUMMARY_MAIN_SPRITES; i++)
+    for (enum MonSummaryMainSprites i = 0; i < NUM_SUMMARY_MAIN_SPRITES; i++)
     {
         const struct MonSummarySprite *config = SummarySprite_GetMainStruct(i);
         struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
@@ -429,7 +429,7 @@ static void SummarySetup_Windows(void)
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
 
-    for (u32 i = 0, baseBlock = 1; i < NUM_MON_SUMMARY_MAIN_WINDOWS; i++)
+    for (u32 i = 0, baseBlock = 1; i < NUM_SUMMARY_MAIN_WINDOWS; i++)
     {
         SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -446,7 +446,7 @@ static void SummarySetup_Windows(void)
     void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     func();
 
-    ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
+    ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
 
 static void CB2_SummarySetup(void)
@@ -455,7 +455,7 @@ static void CB2_SummarySetup(void)
 
     switch (steps)
     {
-    case MON_SUMMARY_SETUP_RESET:
+    case SUMMARY_SETUP_RESET:
         ResetVramOamAndBgCntRegs();
         ResetAllBgsCoordinatesAndBgCntRegs();
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -469,27 +469,27 @@ static void CB2_SummarySetup(void)
         ResetSpriteData();
         ResetTasks();
         break;
-    case MON_SUMMARY_SETUP_MONDATA:
+    case SUMMARY_SETUP_MONDATA:
         SummaryMon_SetStruct();
         break;
-    case MON_SUMMARY_SETUP_BACKGROUNDS:
+    case SUMMARY_SETUP_BACKGROUNDS:
         SummarySetup_Backgrounds();
         break;
-    case MON_SUMMARY_SETUP_GRAPHICS:
+    case SUMMARY_SETUP_GRAPHICS:
         SummarySetup_Graphics();
         break;
-    case MON_SUMMARY_SETUP_WINDOWS:
+    case SUMMARY_SETUP_WINDOWS:
         SummarySetup_Windows();
         break;
-    case MON_SUMMARY_SETUP_SPRITES:
+    case SUMMARY_SETUP_SPRITES:
         SummarySetup_Sprites();
         break;
-    case MON_SUMMARY_SETUP_FADE:
+    case SUMMARY_SETUP_FADE:
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         CreateTask(Task_SummarySetup_WaitFade, 0);
         break;
-    case MON_SUMMARY_SETUP_FINISH:
+    case SUMMARY_SETUP_FINISH:
         SetVBlankCallback(VBlankCB_MonSummary);
         SetMainCallback2(CB2_MonSummary);
         return;
@@ -512,7 +512,7 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
 static void SummaryInput_UpdatePage(s32 delta)
 {
     enum MonSummaryPages page = SummaryPage_GetValue();
-    u32 count = NUM_MON_SUMMARY_PAGES - 1;
+    u32 count = NUM_SUMMARY_PAGES - 1;
     bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
 
     if ((!page && !additiveDelta) || (page == count && additiveDelta))
@@ -589,14 +589,14 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     }
 
     if (JOY_NEW(DPAD_UP)
-     && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
+     && SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
     {
         SummaryInput_UpdateMon(-1);
         return;
     }
 
     if (JOY_NEW(DPAD_DOWN)
-     && SummaryPage_GetValue() == MON_SUMMARY_PAGE_INFOS)
+     && SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
     {
         SummaryInput_UpdateMon(1);
         return;
@@ -646,13 +646,17 @@ static void SummaryMon_SetStruct(void)
     res->summary.level = GetMonData(mon, MON_DATA_LEVEL);
     res->summary.abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
     res->summary.item = GetMonData(mon, MON_DATA_HELD_ITEM);
-    res->summary.pid = GetMonData(mon, MON_DATA_PERSONALITY);
+    res->summary.personality = GetMonData(mon, MON_DATA_PERSONALITY);
     res->summary.sanity = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
 
     if (res->summary.sanity)
+    {
         res->summary.isEgg = TRUE;
+    }
     else
+    {
         res->summary.isEgg = GetMonData(mon, MON_DATA_IS_EGG);
+    }
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -663,8 +667,8 @@ static void SummaryMon_SetStruct(void)
     res->summary.ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     res->summary.nature = GetNature(mon);
     res->summary.mintNature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
-    res->summary.currentHP = GetMonData(mon, MON_DATA_HP);
-    res->summary.maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    res->summary.currHp = GetMonData(mon, MON_DATA_HP);
+    res->summary.maxHp = GetMonData(mon, MON_DATA_MAX_HP);
     res->summary.atk = GetMonData(mon, MON_DATA_ATK);
     res->summary.def = GetMonData(mon, MON_DATA_DEF);
     res->summary.spAtk = GetMonData(mon, MON_DATA_SPATK);
@@ -682,7 +686,6 @@ static void SummaryMon_SetStruct(void)
     res->summary.friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
 
     res->summary.ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
-    res->summary.teraType = GetMonData(mon, MON_DATA_TERA_TYPE);
     res->summary.isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
     res->summary.hpIVs = GetMonData(mon, MON_DATA_HP_IV);
@@ -753,7 +756,7 @@ static enum MonSummaryPages SummaryPage_GetValue(void)
 
 static u32 SummaryPage_SanitizeWindowId(u32 id)
 {
-    return id % TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS;
+    return id % TOTAL_SUMMARY_DYNAMIC_WINDOWS;
 }
 
 static void SummaryPage_SetWindowId(u32 id, u32 value)
@@ -778,7 +781,7 @@ static u32 SummaryPage_GetPageSlot(void)
 
 static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages page)
 {
-    if (page >= NUM_MON_SUMMARY_PAGES) return NULL;
+    if (page >= NUM_SUMMARY_PAGES) return NULL;
 
     return &sSummaryPage_Info[page];
 }
@@ -809,7 +812,7 @@ static struct WindowTemplate SummaryPage_FillDynamicWindowTemplate(enum MonSumma
     const struct MonSummaryDynamicWindow *window = &info->windows[windowId];
 
     return (struct WindowTemplate){
-        .bg = MON_SUMMARY_BG_TEXT,
+        .bg = SUMMARY_BG_TEXT,
         .tilemapLeft = window->left, .tilemapTop = window->top,
         .width = window->width, .height = window->width,
         .paletteNum = 0,
@@ -823,7 +826,7 @@ static u32 SummaryPage_GetDynamicWindowBaseBlock(u32 windowId)
     u32 baseBlock = 1;
 
     // add static window baseBlock
-    for (u32 i = 0; i < NUM_MON_SUMMARY_MAIN_WINDOWS; i++)
+    for (u32 i = 0; i < NUM_SUMMARY_MAIN_WINDOWS; i++)
     {
         const struct WindowTemplate *template = SummaryPrint_GetMainWindowTemplate(i);
         if (template->bg == gDummyWindowTemplate.bg) break;
@@ -884,7 +887,7 @@ static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages page)
 
 static void SummaryPage_LoadDynamicWindows(void)
 {
-    for (u32 i = 0; i < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS; i++)
+    for (u32 i = 0; i < TOTAL_SUMMARY_DYNAMIC_WINDOWS; i++)
     {
         struct WindowTemplate template = SummaryPage_FillDynamicWindowTemplate(SummaryPage_GetValue(), i);
         if (template.bg == gDummyWindowTemplate.bg) break;
@@ -900,7 +903,7 @@ static void SummaryPage_LoadDynamicWindows(void)
 
 static void SummaryPage_UnloadDynamicWindows(void)
 {
-    for (u32 i = 0; i < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS; i++)
+    for (u32 i = 0; i < TOTAL_SUMMARY_DYNAMIC_WINDOWS; i++)
     {
         u32 windowId = SummaryPage_GetWindowId(i);
         if (windowId == WINDOW_NONE) break;
@@ -911,12 +914,12 @@ static void SummaryPage_UnloadDynamicWindows(void)
         SummaryPage_SetWindowId(i, WINDOW_NONE);
     }
 
-    ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
+    ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
 
 static void SummaryPage_LoadTilemap(void)
 {
-    enum MonSummaryBackgrounds nextBg = MON_SUMMARY_BG_PAGE_1;
+    enum MonSummaryBackgrounds nextBg = SUMMARY_BG_PAGE_1;
 
     CopyToBgTilemapBuffer(nextBg, SummaryPage_GetTilemap(SummaryPage_GetValue()), 0, 0);
     SetGpuReg(REG_OFFSET_BG1HOFS, 8);
@@ -951,7 +954,7 @@ static void SummaryPage_Reload(void)
     void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     func();
 
-    ScheduleBgCopyTilemapToVram(MON_SUMMARY_BG_TEXT);
+    ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
 
 static void SummarySprite_SetSpriteId(u8 id, u8 value)
@@ -979,12 +982,12 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
         TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
 
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 currHp = mon->currentHP;
-    u32 maxHp = mon->maxHP;
+    u32 currHp = mon->currHp;
+    u32 maxHp = mon->maxHp;
 
     u32 hpPercentage = (currHp * 100) / maxHp;
     enum MonSummaryHpBarColors color = hpPercentage / 33;
-    if (color > MON_SUMMARY_HP_BAR_CLR_GREEN) color = MON_SUMMARY_HP_BAR_CLR_GREEN;
+    if (color > SUMMARY_HP_BAR_CLR_GREEN) color = SUMMARY_HP_BAR_CLR_GREEN;
 
     LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
 
@@ -995,7 +998,7 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
     u32 width = TILE_TO_PIXELS(7) - 1; // 55
     u32 fontId = GetOutlineFontIdToFit(gStringVar4, width);
     u32 x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar4, width, -1);
-    SummaryPrint_AddText(windowId, fontId, x, 0, MON_SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 
     u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
@@ -1028,7 +1031,7 @@ static void SummaryPrint_AddText(u32 windowId, u32 fontId, u32 x, u32 y, enum Mo
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32 windowId)
 {
     if (windowId >= ARRAY_COUNT(sSummarySetup_MainWindows)
-     || windowId >= NUM_MON_SUMMARY_MAIN_WINDOWS)
+     || windowId >= NUM_SUMMARY_MAIN_WINDOWS)
     {
         return &gDummyWindowTemplate;
     }
@@ -1039,7 +1042,7 @@ static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32 windo
 static void SummaryPrint_Header(void)
 {
     // blit
-    u32 winId = MON_SUMMARY_MAIN_WIN_HEADER;
+    u32 winId = SUMMARY_MAIN_WIN_HEADER;
     SummaryPrint_BlitPageTabs(winId, 1, 4);
 
     // title
@@ -1049,13 +1052,13 @@ static void SummaryPrint_Header(void)
     u32 fontId = GetOutlineFontIdToFit(str, width);
     u32 x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, str, width, -1);
 
-    SummaryPrint_AddText(winId, fontId, x, 16, MON_SUMMARY_FNTCLR_INTERFACE, str);
+    SummaryPrint_AddText(winId, fontId, x, 16, SUMMARY_FNTCLR_INTERFACE, str);
     CopyWindowToVram(winId, COPYWIN_GFX);
 }
 
 static void SummaryPrint_BlitPageTabs(u32 windowId, u32 x, u32 y)
 {
-    for (enum MonSummaryPages page = 0; page < NUM_MON_SUMMARY_PAGES; page++)
+    for (enum MonSummaryPages page = 0; page < NUM_SUMMARY_PAGES; page++)
     {
         bool32 selected = page == SummaryPage_GetValue();
 
@@ -1076,8 +1079,8 @@ static void SummaryPrint_BlitStatusSymbol(u32 windowId, u32 x, u32 y)
 // TODO actual helping bar
 static void SummaryPrint_HelpBar(void)
 {
-    SummaryPrint_AddText(MON_SUMMARY_MAIN_WIN_HELP_BAR, FONT_NORMAL, 10, 1, MON_SUMMARY_FNTCLR_HELP_BAR, COMPOUND_STRING("test!"));
-    CopyWindowToVram(MON_SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_HELP_BAR, FONT_NORMAL, 10, 1, SUMMARY_FNTCLR_HELP_BAR, COMPOUND_STRING("test!"));
+    CopyWindowToVram(SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
 }
 
 static void DummyPage_HandleFrontEnd(void)
@@ -1099,21 +1102,21 @@ static void InfosPage_HandleHeader(void)
     InfosPageHeader_PrintLevel(mon);
     InfosPageHeader_BlitStatusSymbol(mon);
 
-    CopyWindowToVram(SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER), COPYWIN_GFX);
+    CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER), COPYWIN_GFX);
 }
 
 static void InfosPageHeader_PrintMonNameGender(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER);
     u32 fontId = FONT_OUTLINED;
-    u32 x = MON_SUMMARY_INFOS_HEADER_X, x2 = MON_SUMMARY_INFOS_HEADER_GENDER_X;
+    u32 x = SUMMARY_INFOS_HEADER_X, x2 = SUMMARY_INFOS_HEADER_GENDER_X;
     u32 winWidth = WindowWidthPx(windowId);
 
     // <name>
     const u8 *str = mon->nickname;
     fontId = GetOutlineFontIdToFit(str, (winWidth - x) + (winWidth - x2));
 
-    SummaryPrint_AddText(windowId, fontId, x, MON_SUMMARY_INFOS_HEADER_Y, MON_SUMMARY_FNTCLR_INTERFACE, str);
+    SummaryPrint_AddText(windowId, fontId, x, SUMMARY_INFOS_HEADER_Y, SUMMARY_FNTCLR_INTERFACE, str);
 
     // <gender> (if necessary)
     u32 species = mon->species2, gender = mon->gender;
@@ -1124,31 +1127,31 @@ static void InfosPageHeader_PrintMonNameGender(struct MonSummary *mon)
     }
 
     u32 femaleMon = gender == MON_FEMALE;
-    enum MonSummaryFontColors color = MON_SUMMARY_FNTCLR_MALE + femaleMon;
+    enum MonSummaryFontColors color = SUMMARY_FNTCLR_MALE + femaleMon;
 
     fontId = FONT_OUTLINED;
     str = femaleMon ? gText_FemaleSymbol : gText_MaleSymbol;
 
-    SummaryPrint_AddText(windowId, fontId, x2, MON_SUMMARY_INFOS_HEADER_Y, color, str);
+    SummaryPrint_AddText(windowId, fontId, x2, SUMMARY_INFOS_HEADER_Y, color, str);
 }
 
 static void InfosPageHeader_PrintLevel(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER);
     u32 fontId = FONT_OUTLINED;
 
     ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
 
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_HEADER_X, MON_SUMMARY_INFOS_HEADER_Y2,
-        MON_SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+        SUMMARY_INFOS_HEADER_X, SUMMARY_INFOS_HEADER_Y2,
+        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
 static void InfosPageHeader_BlitStatusSymbol(struct MonSummary *mon)
 {
-    SummaryPrint_BlitStatusSymbol(SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_HEADER),
-        MON_SUMMARY_INFOS_HEADER_STATUS_X, MON_SUMMARY_INFOS_HEADER_STATUS_Y);
+    SummaryPrint_BlitStatusSymbol(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER),
+        SUMMARY_INFOS_HEADER_STATUS_X, SUMMARY_INFOS_HEADER_STATUS_Y);
 }
 
 static void InfosPage_HandleSummary(void)
@@ -1160,65 +1163,65 @@ static void InfosPage_HandleSummary(void)
     InfosPageSummary_PrintNeededExperience(mon);
     InfosPageSummary_PrintMiscMonInfo(mon);
 
-    CopyWindowToVram(SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_SUMMARY), COPYWIN_GFX);
+    CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY), COPYWIN_GFX);
 }
 
 static void InfosPageSummary_PrintMonTyping(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
     u32 fontId = FONT_OUTLINED;
 
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X, MON_SUMMARY_INFOS_SUMMARY_Y,
-        MON_SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Type:"));
+        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y,
+        SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Type:"));
 
     u32 species = mon->species;
     enum Type types[2] = { GetSpeciesType(species, 0), GetSpeciesType(species, 1) };
 
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X2, MON_SUMMARY_INFOS_SUMMARY_Y,
-        MON_SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[0]].shortName);
+        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y,
+        SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[0]].shortName);
 
     if (types[1] != types[0])
     {
         SummaryPrint_AddText(windowId, fontId,
-            MON_SUMMARY_INFOS_SUMMARY_X3, MON_SUMMARY_INFOS_SUMMARY_Y,
-            MON_SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[1]].shortName);
+            SUMMARY_INFOS_SUMMARY_X3, SUMMARY_INFOS_SUMMARY_Y,
+            SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[1]].shortName);
     }
 }
 
 static void InfosPageSummary_PrintTrainerInfo(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
     u32 fontId = FONT_OUTLINED;
 
     // OT: <trainer name>
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X, MON_SUMMARY_INFOS_SUMMARY_Y2,
-        MON_SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("OT:"));
+        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y2,
+        SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("OT:"));
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X2, MON_SUMMARY_INFOS_SUMMARY_Y2,
-        MON_SUMMARY_FNTCLR_INTERFACE, mon->trainerName);
+        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y2,
+        SUMMARY_FNTCLR_INTERFACE, mon->trainerName);
 
     // ID: <numbers>
     ConvertIntToDecimalStringN(gStringVar1, (u16)mon->trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X, MON_SUMMARY_INFOS_SUMMARY_Y3,
-        MON_SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("ID:"));
+        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y3,
+        SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("ID:"));
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X2, MON_SUMMARY_INFOS_SUMMARY_Y3,
-        MON_SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y3,
+        SUMMARY_FNTCLR_INTERFACE, gStringVar1);
 }
 
 static void InfosPageSummary_PrintNeededExperience(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
     u32 fontId = FONT_OUTLINED;
 
     // EXP: <numbers> to Lv <next level>
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X, MON_SUMMARY_INFOS_SUMMARY_Y4,
-        MON_SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("EXP:"));
+        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y4,
+        SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("EXP:"));
 
     u32 species = mon->species;
     u32 level = mon->level;
@@ -1235,20 +1238,20 @@ static void InfosPageSummary_PrintNeededExperience(struct MonSummary *mon)
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} to {LV} {STR_VAR_2}"));
 
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X2, MON_SUMMARY_INFOS_SUMMARY_Y4,
-        MON_SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y4,
+        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
 // <nature> nature <fav flavor> combined, will be called more often
 static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(MON_SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
     u32 winWidth = WindowWidthPx(windowId);
     u32 fontId = FONT_OUTLINED;
 
     FillWindowPixelRect(windowId, PIXEL_FILL(0),
-        MON_SUMMARY_INFOS_SUMMARY_X, MON_SUMMARY_INFOS_SUMMARY_Y5,
-        winWidth - MON_SUMMARY_INFOS_SUMMARY_X, 16);
+        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y5,
+        winWidth - SUMMARY_INFOS_SUMMARY_X, 16);
 
     // TODO implement menu blink
     StringCopy(gStringVar1, gNaturesInfo[mon->nature].name);
@@ -1261,6 +1264,6 @@ static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *mon)
     fontId = GetOutlineFontIdToFit(gStringVar4, winWidth);
 
     SummaryPrint_AddText(windowId, fontId,
-        MON_SUMMARY_INFOS_SUMMARY_X, MON_SUMMARY_INFOS_SUMMARY_Y5,
-        MON_SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y5,
+        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }

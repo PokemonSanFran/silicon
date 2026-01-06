@@ -12,143 +12,129 @@
 
 enum __attribute__((packed)) MonSummaryPages
 {
-    MON_SUMMARY_PAGE_INFOS,
-    MON_SUMMARY_PAGE_STATS,
-    MON_SUMMARY_PAGE_MOVES,
+    SUMMARY_PAGE_INFOS,
+    SUMMARY_PAGE_STATS,
+    SUMMARY_PAGE_MOVES,
 
-    NUM_MON_SUMMARY_PAGES
-};
-
-enum __attribute__((packed)) MonSummaryStatsSubMode
-{
-    MON_SUMMARY_STATS_MODE_EV_TRAIN,
-
-    NUM_MON_SUMMARY_STATS_MODES
-};
-
-enum __attribute__((packed)) MonSummaryMovesSubMode
-{
-    MON_SUMMARY_MOVES_ARRANGE,
-
-    NUM_MON_SUMMARY_MOVES_MODES
+    NUM_SUMMARY_PAGES
 };
 
 enum MonSummarySetupSteps
 {
-    MON_SUMMARY_SETUP_RESET,
-    MON_SUMMARY_SETUP_MONDATA,
-    MON_SUMMARY_SETUP_BACKGROUNDS,
-    MON_SUMMARY_SETUP_GRAPHICS,
-    MON_SUMMARY_SETUP_WINDOWS,
-    MON_SUMMARY_SETUP_SPRITES,
-    MON_SUMMARY_SETUP_FADE,
-    MON_SUMMARY_SETUP_FINISH
+    SUMMARY_SETUP_RESET,
+    SUMMARY_SETUP_MONDATA,
+    SUMMARY_SETUP_BACKGROUNDS,
+    SUMMARY_SETUP_GRAPHICS,
+    SUMMARY_SETUP_WINDOWS,
+    SUMMARY_SETUP_SPRITES,
+    SUMMARY_SETUP_FADE,
+    SUMMARY_SETUP_FINISH
 };
 
 enum MonSummaryBackgrounds
 {
-    MON_SUMMARY_BG_TEXT,
+    SUMMARY_BG_TEXT,
 
     // switch between pages on each horizontal dpad presses.
     // there is no animation atm but it is meant to futureproof.
-    MON_SUMMARY_BG_PAGE_1,
-    MON_SUMMARY_BG_PAGE_2,
+    SUMMARY_BG_PAGE_1,
+    SUMMARY_BG_PAGE_2,
 
-    NUM_MON_SUMMARY_BACKGROUNDS
+    NUM_SUMMARY_BACKGROUNDS
 };
 
 enum __attribute__((packed)) MonSummaryPageSlots
 {
-    MON_SUMMARY_BG_PAGE_SLOT_1,
-    MON_SUMMARY_BG_PAGE_SLOT_2,
+    SUMMARY_BG_PAGE_SLOT_1,
+    SUMMARY_BG_PAGE_SLOT_2,
 
-    NUM_MON_SUMMARY_BG_PAGE_SLOTS
+    NUM_SUMMARY_BG_PAGE_SLOTS
 };
 
-#define TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS 5
-#define MON_SUMMARY_DYNAMIC_WIN_DUMMY { .id = WINDOW_NONE }
+#define TOTAL_SUMMARY_DYNAMIC_WINDOWS 5
+#define SUMMARY_DYNAMIC_WIN_DUMMY { .id = WINDOW_NONE }
 
 // appears regardless of which page
 enum __attribute__((packed)) MonSummaryMainWindows
 {
-    MON_SUMMARY_MAIN_WIN_HEADER,    // refers to the page's name and tab blit
-    MON_SUMMARY_MAIN_WIN_HELP_BAR,  // refers to control scheme of specific page/mode
+    SUMMARY_MAIN_WIN_HEADER,    // refers to the page's name and tab blit
+    SUMMARY_MAIN_WIN_HELP_BAR,  // refers to control scheme of specific page/mode
 
-    NUM_MON_SUMMARY_MAIN_WINDOWS,
+    NUM_SUMMARY_MAIN_WINDOWS,
     // the rest is dynamic
 };
 
 // dynamic windows
 enum __attribute__((packed)) MonSummaryInfosWindows
 {
-    MON_SUMMARY_INFOS_WIN_HEADER,    // typically contains nick/species name, gender, level, and status ailment/pokerus
-    MON_SUMMARY_INFOS_WIN_SUMMARY,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
+    SUMMARY_INFOS_WIN_HEADER,    // typically contains nick/species name, gender, level, and status ailment/pokerus
+    SUMMARY_INFOS_WIN_SUMMARY,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
 
-    NUM_MON_SUMMARY_INFOS_WINDOWS
+    NUM_SUMMARY_INFOS_WINDOWS
 };
 
 // starting positions
-#define MON_SUMMARY_INFOS_HEADER_X          (2)     // <name> / Lv<level>
-#define MON_SUMMARY_INFOS_HEADER_GENDER_X   (65)    // <gender>
-#define MON_SUMMARY_INFOS_HEADER_SHINY_X    (92 + 8)
-#define MON_SUMMARY_INFOS_HEADER_HP_BAR_X   (66 + 32)
-#define MON_SUMMARY_INFOS_HEADER_STATUS_X   (42)
+#define SUMMARY_INFOS_HEADER_X          (2)     // <name> / Lv<level>
+#define SUMMARY_INFOS_HEADER_GENDER_X   (65)    // <gender>
+#define SUMMARY_INFOS_HEADER_SHINY_X    (92 + 8)
+#define SUMMARY_INFOS_HEADER_STATUS_X   (42)
+#define SUMMARY_INFOS_HEADER_HP_BAR_X   (66 + 32)
 
-#define MON_SUMMARY_INFOS_HEADER_Y          (1)     // <name> <gender>
-#define MON_SUMMARY_INFOS_HEADER_Y2         (14)    // Lv<level>
-#define MON_SUMMARY_INFOS_HEADER_SHINY_Y    (18 + 8)
-#define MON_SUMMARY_INFOS_HEADER_HP_BAR_Y   (28 + 16)
-#define MON_SUMMARY_INFOS_HEADER_STATUS_Y   (19)
+#define SUMMARY_INFOS_HEADER_Y          (1)     // <name> <gender>
+#define SUMMARY_INFOS_HEADER_Y2         (14)    // Lv<level>
+#define SUMMARY_INFOS_HEADER_SHINY_Y    (18 + 8)
+#define SUMMARY_INFOS_HEADER_STATUS_Y   (19)
+#define SUMMARY_INFOS_HEADER_HP_BAR_Y   (28 + 16)
 
-#define MON_SUMMARY_INFOS_SUMMARY_X      (7)     // type:
-#define MON_SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
-#define MON_SUMMARY_INFOS_SUMMARY_X3     (85)    // fght
+#define SUMMARY_INFOS_SUMMARY_X      (7)     // type:
+#define SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
+#define SUMMARY_INFOS_SUMMARY_X3     (85)    // fght
 
-#define MON_SUMMARY_INFOS_SUMMARY_Y      (1)     // type:
-#define MON_SUMMARY_INFOS_SUMMARY_Y2     (17)    // ot:
-#define MON_SUMMARY_INFOS_SUMMARY_Y3     (33)    // id:
-#define MON_SUMMARY_INFOS_SUMMARY_Y4     (49)    // exp:
-#define MON_SUMMARY_INFOS_SUMMARY_Y5     (65)    // <nature> <fav flavor>
+#define SUMMARY_INFOS_SUMMARY_Y      (1)     // type:
+#define SUMMARY_INFOS_SUMMARY_Y2     (17)    // ot:
+#define SUMMARY_INFOS_SUMMARY_Y3     (33)    // id:
+#define SUMMARY_INFOS_SUMMARY_Y4     (49)    // exp:
+#define SUMMARY_INFOS_SUMMARY_Y5     (65)    // <nature> <fav flavor>
 
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
-    MON_SUMMARY_STATS_WIN_TEST,
+    SUMMARY_STATS_WIN_TEST,
 
-    NUM_MON_SUMMARY_STATS_WINDOWS
+    NUM_SUMMARY_STATS_WINDOWS
 };
 
 enum __attribute__((packed)) MonSummaryMovesWindows
 {
-    MON_SUMMARY_MOVES_WIN_TEST,
+    SUMMARY_MOVES_WIN_TEST,
 
-    NUM_MON_SUMMARY_MOVES_WINDOWS
+    NUM_SUMMARY_MOVES_WINDOWS
 };
 
-STATIC_ASSERT(NUM_MON_SUMMARY_INFOS_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS, InfoPageDynamicWindowExceedsMaxNumber);
-STATIC_ASSERT(NUM_MON_SUMMARY_STATS_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS, StatPageDynamicWindowExceedsMaxNumber);
-STATIC_ASSERT(NUM_MON_SUMMARY_MOVES_WINDOWS < TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS, MovePageDynamicWindowExceedsMaxNumber);
+STATIC_ASSERT(NUM_SUMMARY_INFOS_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, InfoPageDynamicWindowExceedsMaxNumber);
+STATIC_ASSERT(NUM_SUMMARY_STATS_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, StatPageDynamicWindowExceedsMaxNumber);
+STATIC_ASSERT(NUM_SUMMARY_MOVES_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, MovePageDynamicWindowExceedsMaxNumber);
 
 enum MonSummaryFontColors
 {
-    MON_SUMMARY_FNTCLR_INTERFACE,
-    MON_SUMMARY_FNTCLR_MALE,
-    MON_SUMMARY_FNTCLR_FEMALE,
-    MON_SUMMARY_FNTCLR_TEXTBOX,
-    MON_SUMMARY_FNTCLR_HELP_BAR,
+    SUMMARY_FNTCLR_INTERFACE,
+    SUMMARY_FNTCLR_MALE,
+    SUMMARY_FNTCLR_FEMALE,
+    SUMMARY_FNTCLR_TEXTBOX,
+    SUMMARY_FNTCLR_HELP_BAR,
 
-    NUM_MON_SUMMARY_FNTCLRS
+    NUM_SUMMARY_FNTCLRS
 };
 
 enum MonSummaryMainSprites
 {
-    MON_SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
-    MON_SUMMARY_MAIN_SPRITE_HP_BAR,
+    SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
+    SUMMARY_MAIN_SPRITE_HP_BAR,
 
-    NUM_MON_SUMMARY_MAIN_SPRITES
+    NUM_SUMMARY_MAIN_SPRITES
 };
 
-#define MON_SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
-#define TOTAL_MON_SUMMARY_DYNAMIC_SPRITES 5
+#define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
+#define TOTAL_SUMMARY_DYNAMIC_SPRITES 5
 
 // assorted tags for both main and dynamic sprites
 enum MonSummarySpriteTags
@@ -160,11 +146,11 @@ enum MonSummarySpriteTags
 
 enum MonSummaryHpBarColors
 {
-    MON_SUMMARY_HP_BAR_CLR_RED,
-    MON_SUMMARY_HP_BAR_CLR_YELLOW,
-    MON_SUMMARY_HP_BAR_CLR_GREEN,
+    SUMMARY_HP_BAR_CLR_RED,
+    SUMMARY_HP_BAR_CLR_YELLOW,
+    SUMMARY_HP_BAR_CLR_GREEN,
 
-    NUM_MON_SUMMARY_HP_BAR_CLRS
+    NUM_SUMMARY_HP_BAR_CLRS
 };
 
 // structs
@@ -177,20 +163,20 @@ struct MonSummary
     u16 species2;
     u8 isEgg:1;
     u8 isShiny:1;
-    u8 padding:6;
+    u8 abilityNum:1;
+    u8 padding:5;
     u8 level;
     u8 ribbonCount;
     u8 ailment;
-    u8 abilityNum;
     metloc_u8_t metLocation;
     u8 metLevel;
     u8 metGame;
-    u32 pid;
+    u32 personality;
     u32 exp;
     u16 moves[MAX_MON_MOVES];
     u8 pp[MAX_MON_MOVES];
-    u16 currentHP;
-    u16 maxHP;
+    u16 currHp;
+    u16 maxHp;
     u16 atk;
     u16 def;
     u16 spAtk;
@@ -204,7 +190,6 @@ struct MonSummary
     u8 sanity;
     u8 trainerName[17];
     u32 trainerId;
-    enum Type teraType;
     u8 mintNature;
 
     u32 hpIVs:5;
@@ -229,9 +214,9 @@ struct MonSummary
 struct MonSummaryResources
 {
     MainCallback savedCallback;
-    u8 *tilemapBufs[NUM_MON_SUMMARY_BG_PAGE_SLOTS];
-    u8 windowIds[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
-    u8 spriteIds[NUM_MON_SUMMARY_MAIN_SPRITES + TOTAL_MON_SUMMARY_DYNAMIC_SPRITES];
+    u8 *tilemapBufs[NUM_SUMMARY_BG_PAGE_SLOTS];
+    u8 windowIds[TOTAL_SUMMARY_DYNAMIC_WINDOWS];
+    u8 spriteIds[NUM_SUMMARY_MAIN_SPRITES + TOTAL_SUMMARY_DYNAMIC_SPRITES];
 
     bool32 pageSlot:1; // only referred for tilemapBufs shenanigans
     u32 currIdx:8; // also used as the vertical "cursor" for switching between each available mon(s)
@@ -276,9 +261,9 @@ struct MonSummarySprite
 struct MonSummaryPageInfo
 {
     const u8 *name;
-    struct MonSummaryDynamicWindow windows[TOTAL_MON_SUMMARY_DYNAMIC_WINDOWS];
+    struct MonSummaryDynamicWindow windows[TOTAL_SUMMARY_DYNAMIC_WINDOWS];
     const u32 *tilemap;
-    struct Coords8 mainSpriteCoords[NUM_MON_SUMMARY_MAIN_SPRITES];
+    struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     TaskFunc input;
     void (*handleFrontEnd)(void);
 };

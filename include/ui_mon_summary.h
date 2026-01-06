@@ -4,12 +4,12 @@
 // needs to be put here for future uses
 enum __attribute__((packed)) MonSummaryModes
 {
-    MON_SUMMARY_MODE_DEFAULT,
-    MON_SUMMARY_MODE_BOX,
-    MON_SUMMARY_MODE_BATTLE,
-    MON_SUMMARY_MODE_IV_TRAIN,
+    SUMMARY_MODE_DEFAULT,
+    SUMMARY_MODE_BOX,
+    SUMMARY_MODE_BATTLE,
+    SUMMARY_MODE_IV_TRAIN,
 
-    NUM_MON_SUMMARY_MODES
+    NUM_SUMMARY_MODES
 };
 
 struct MonSummaryConfigs
