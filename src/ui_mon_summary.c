@@ -91,9 +91,10 @@ static struct UCoords8 SummaryPage_GetTextBoxCoords(enum MonSummaryPages);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void SummaryPage_LoadDynamicWindows(void);
 static void SummaryPage_UnloadDynamicWindows(void);
+static void SummaryPage_ReloadDynamicWindows(void);
 static void SummaryPage_UnloadDynamicSprites(void);
 static void SummaryPage_LoadTilemap(void);
-static void SummaryPage_Reload(void);
+static void SummaryPage_Reload(enum MonSummaryReloadModes);
 
 static void SummarySprite_SetSpriteId(u8, u8);
 static u8 SummarySprite_GetSpriteId(u8);
@@ -423,7 +424,7 @@ static void SummaryInput_UpdatePage(s32 delta)
 
     PlaySE(SE_CLICK);
     SummaryPage_SetValue(page + delta);
-    SummaryPage_Reload();
+    SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
 }
 
 static void SummaryInput_UpdateMon(s32 delta)
@@ -446,8 +447,7 @@ static void SummaryInput_UpdateMon(s32 delta)
     }
 
     PlaySE(SE_CLICK);
-    SummaryMon_SetStruct();
-    SummaryPage_Reload();
+    SummaryPage_Reload(SUMMARY_RELOAD_MON);
 }
 
 static void SummaryInput_SetIndex(u32 index)
@@ -517,7 +517,7 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         SummaryInput_SetSubMode(TRUE);
-        SummaryPage_Reload();
+        SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
         gTasks[taskId].func = SummaryPage_GetInputFunc(SummaryPage_GetValue());
         return;
     }
@@ -543,7 +543,7 @@ static void Task_SummaryInput_InfosInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         SummaryInput_SetSubMode(FALSE);
-        SummaryPage_Reload();
+        SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
         return;
     }
@@ -858,6 +858,19 @@ static void SummaryPage_UnloadDynamicWindows(void)
     }
 }
 
+// akin to above but without removing the window
+static void SummaryPage_ReloadDynamicWindows(void)
+{
+    for (u32 i = 0; i < TOTAL_SUMMARY_DYNAMIC_WINDOWS; i++)
+    {
+        u32 windowId = SummaryPage_GetWindowId(i);
+        if (windowId == WINDOW_NONE) break;
+
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        PutWindowTilemap(windowId);
+    }
+}
+
 static void SummaryPage_UnloadDynamicSprites(void)
 {
     for (u32 i = 0; i < TOTAL_SUMMARY_DYNAMIC_SPRITES; i++)
@@ -879,17 +892,39 @@ static void SummaryPage_LoadTilemap(void)
     CopyBgTilemapBufferToVram(nextBg);
 }
 
-static void SummaryPage_Reload(void)
+static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 {
     SummaryPage_TogglePageSlot();
     FillBgTilemapBufferRect_Palette0(SUMMARY_BG_TEXT, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
 
-    SummarySprite_CreateMonSprite();
-    SummaryPage_UnloadDynamicWindows();
-    SummaryPage_UnloadDynamicSprites();
-    SummaryPage_LoadTilemap();
-    SummaryPage_LoadDynamicWindows();
+    switch (mode)
+    {
+    default:
+        break;
+    case SUMMARY_RELOAD_MON:
+        SummaryMon_SetStruct();
+        SummarySprite_CreateMonSprite();
+        SummaryPage_ReloadDynamicWindows();
+        break;
+    case SUMMARY_RELOAD_PAGE:
+        {
+            for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
+            {
+                struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
+                u32 spriteId = SummarySprite_GetSpriteId(i);
 
+                gSprites[spriteId].x = coords.x;
+                gSprites[spriteId].y = coords.y;
+            }
+
+            SummaryPage_LoadTilemap();
+            SummaryPage_UnloadDynamicWindows();
+            SummaryPage_LoadDynamicWindows();
+            break;
+        }
+    }
+
+    SummaryPage_UnloadDynamicSprites();
     void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     func();
 
@@ -897,15 +932,6 @@ static void SummaryPage_Reload(void)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-    }
-
-    for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
-    {
-        struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
-        u32 spriteId = SummarySprite_GetSpriteId(i);
-
-        gSprites[spriteId].x = coords.x;
-        gSprites[spriteId].y = coords.y;
     }
 
     SummaryPrint_Header();

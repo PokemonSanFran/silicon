@@ -190,6 +190,15 @@ enum MonSummaryFontColors
     NUM_SUMMARY_FNTCLRS
 };
 
+enum __attribute__((packed)) MonSummaryReloadModes
+{
+    SUMMARY_RELOAD_NONE,
+    SUMMARY_RELOAD_MON,
+    SUMMARY_RELOAD_PAGE,
+
+    NUM_SUMMARY_RELOADS
+};
+
 // structs
 
 // contains MonData of the current pokemon (list.mons/boxMons[currId])
