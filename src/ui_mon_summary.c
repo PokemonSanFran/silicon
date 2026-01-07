@@ -112,6 +112,7 @@ static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_FriendshipBar(struct Sprite *);
+static void SpriteCB_SummarySprite_Pokemon(struct Sprite *);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
@@ -404,9 +405,10 @@ static void CB2_SummarySetup(void)
 
 static void Task_SummarySetup_WaitFade(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gPaletteFade.active && ++gTasks[taskId].data[0] >= 5)
     {
         SummarySprite_PlayPokemonCry();
+        gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
     }
 }
@@ -522,7 +524,7 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(B_BUTTON))
+    if (JOY_NEW(B_BUTTON) && IsCryFinished())
     {
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -903,6 +905,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         break;
     case SUMMARY_RELOAD_MON:
         SummaryMon_SetStruct();
+        SummarySprite_PlayPokemonCry();
         SummarySprite_CreateMonSprite();
         SummaryPage_ReloadDynamicWindows();
         break;
@@ -1074,15 +1077,10 @@ static void SummarySprite_CreateMonSprite(void)
 
     FreeSpriteOamMatrix(sprite);
     sprite->oam.priority = 0;
-    sprite->callback = SpriteCallbackDummy;
+    sprite->callback = SpriteCB_SummarySprite_Pokemon;
     sprite->hFlip = IsMonSpriteNotFlipped(SummaryMon_GetStruct()->species2);
     sprite->oam.paletteNum = SummarySprite_GetPokemonPaletteSlot();
     sprite->invisible = FALSE;
-
-    if (!gPaletteFade.active)
-    {
-        SummarySprite_PlayPokemonCry();
-    }
 }
 
 // switch between buffers
@@ -1163,6 +1161,15 @@ static void SpriteCB_SummarySprite_FriendshipBar(struct Sprite *sprite)
 
     SummarySprite_InjectFriendshipBar(sprite);
     sprite->sMonIndex = index;
+}
+
+static void SpriteCB_SummarySprite_Pokemon(struct Sprite *sprite)
+{
+    if (!gPaletteFade.active)
+    {
+        SummarySprite_PlayPokemonCry();
+        sprite->callback = SpriteCallbackDummy;
+    }
 }
 
 // dynamic windows handles the id on its own
