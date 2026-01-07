@@ -65,7 +65,45 @@ enum __attribute__((packed)) MonSummaryMainWindows
     // the rest is dynamic
 };
 
-// dynamic windows
+#define TOTAL_SUMMARY_DYNAMIC_SPRITES 5
+#define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
+
+enum MonSummaryMainSprites
+{
+    SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
+    SUMMARY_MAIN_SPRITE_HP_BAR,
+    SUMMARY_MAIN_SPRITE_EXP_BAR,
+    SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR,
+
+    // uses its own function to be spawned
+    SUMMARY_MAIN_SPRITE_POKEMON,
+
+    NUM_SUMMARY_MAIN_SPRITES
+};
+
+// assorted tags for both main and dynamic sprites
+enum MonSummarySpriteTags
+{
+    TAG_SUMMARY_UNIVERSAL_PAL = 0x9999,
+    TAG_SUMMARY_SHINY_SYMBOL,
+    TAG_SUMMARY_HP_BAR,
+    TAG_SUMMARY_EXP_BAR,
+    TAG_SUMMARY_FRIENDSHIP_BAR,
+    TAG_SUMMARY_POKEMON_SLOT_1,
+    TAG_SUMMARY_POKEMON_SLOT_2,
+};
+
+enum MonSummaryHpBarColors
+{
+    SUMMARY_HP_BAR_CLR_RED,
+    SUMMARY_HP_BAR_CLR_YELLOW,
+    SUMMARY_HP_BAR_CLR_GREEN,
+
+    NUM_SUMMARY_HP_BAR_CLRS
+};
+
+#define sMonIndex       data[0]
+
 enum __attribute__((packed)) MonSummaryInfosWindows
 {
     SUMMARY_INFOS_WIN_HEADER,    // typically contains nick/species name, gender, level, and status ailment/pokerus
@@ -139,45 +177,6 @@ enum MonSummaryFontColors
 
     NUM_SUMMARY_FNTCLRS
 };
-
-enum MonSummaryMainSprites
-{
-    SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,
-    SUMMARY_MAIN_SPRITE_HP_BAR,
-    SUMMARY_MAIN_SPRITE_EXP_BAR,
-    SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR,
-
-    // uses its own function to be spawned
-    SUMMARY_MAIN_SPRITE_POKEMON,
-
-    NUM_SUMMARY_MAIN_SPRITES
-};
-
-#define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
-#define TOTAL_SUMMARY_DYNAMIC_SPRITES 5
-
-// assorted tags for both main and dynamic sprites
-enum MonSummarySpriteTags
-{
-    TAG_SUMMARY_UNIVERSAL_PAL = 0x9999,
-    TAG_SUMMARY_SHINY_SYMBOL,
-    TAG_SUMMARY_HP_BAR,
-    TAG_SUMMARY_EXP_BAR,
-    TAG_SUMMARY_FRIENDSHIP_BAR,
-    TAG_SUMMARY_POKEMON_SLOT_1,
-    TAG_SUMMARY_POKEMON_SLOT_2,
-};
-
-enum MonSummaryHpBarColors
-{
-    SUMMARY_HP_BAR_CLR_RED,
-    SUMMARY_HP_BAR_CLR_YELLOW,
-    SUMMARY_HP_BAR_CLR_GREEN,
-
-    NUM_SUMMARY_HP_BAR_CLRS
-};
-
-#define sMonIndex       data[0]
 
 // structs
 

@@ -90,11 +90,14 @@ static struct UCoords8 SummaryPage_GetTextBoxCoords(enum MonSummaryPages);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void SummaryPage_LoadDynamicWindows(void);
 static void SummaryPage_UnloadDynamicWindows(void);
+static void SummaryPage_UnloadDynamicSprites(void);
 static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(void);
 
 static void SummarySprite_SetSpriteId(u8, u8);
 static u8 SummarySprite_GetSpriteId(u8);
+static void SummarySprite_SetDynamicSpriteId(u8, u8);
+static u8 SummarySprite_GetDynamicSpriteId(u8);
 static const struct MonSummarySprite *SummarySprite_GetMainStruct(u32);
 static void SummarySprite_InjectHpBar(struct Sprite *);
 static void SummarySprite_InjectExpBar(struct Sprite *);
@@ -853,6 +856,18 @@ static void SummaryPage_UnloadDynamicWindows(void)
     }
 }
 
+static void SummaryPage_UnloadDynamicSprites(void)
+{
+    for (u32 i = 0; i < TOTAL_SUMMARY_DYNAMIC_SPRITES; i++)
+    {
+        u32 spriteId = SummarySprite_GetDynamicSpriteId(i);
+        if (spriteId == SPRITE_NONE) break;
+
+        DestroySpriteAndFreeResources(&gSprites[spriteId]);
+        SummarySprite_SetDynamicSpriteId(i, SPRITE_NONE);
+    }
+}
+
 static void SummaryPage_LoadTilemap(void)
 {
     enum MonSummaryBackgrounds nextBg = SUMMARY_BG_PAGE_1;
@@ -869,6 +884,7 @@ static void SummaryPage_Reload(void)
 
     SummarySprite_CreateMonSprite();
     SummaryPage_UnloadDynamicWindows();
+    SummaryPage_UnloadDynamicSprites();
     SummaryPage_LoadTilemap();
     SummaryPage_LoadDynamicWindows();
 
@@ -905,6 +921,16 @@ static void SummarySprite_SetSpriteId(u8 id, u8 value)
 static u8 SummarySprite_GetSpriteId(u8 id)
 {
     return sMonSummaryDataPtr->spriteIds[id];
+}
+
+static void SummarySprite_SetDynamicSpriteId(u8 id, u8 value)
+{
+    sMonSummaryDataPtr->spriteIds[id + NUM_SUMMARY_MAIN_SPRITES] = value;
+}
+
+static u8 SummarySprite_GetDynamicSpriteId(u8 id)
+{
+    return sMonSummaryDataPtr->spriteIds[id + NUM_SUMMARY_MAIN_SPRITES];
 }
 
 static const struct MonSummarySprite *SummarySprite_GetMainStruct(u32 idx)
