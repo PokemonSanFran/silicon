@@ -185,8 +185,8 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
 
 static void MonSummary_FreeResources(void)
 {
-    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1]);
-    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2]);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2]);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
     FreeAllWindowBuffers();
     ResetSpriteData();
@@ -224,11 +224,11 @@ static void SummarySetup_Backgrounds(void)
 {
     u32 tilemapSize = BG_SCREEN_SIZE * 2;
 
-    sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1] = AllocZeroed(tilemapSize);
-    sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2] = AllocZeroed(tilemapSize);
+    sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1] = AllocZeroed(tilemapSize);
+    sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2] = AllocZeroed(tilemapSize);
 
-    if (!sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1]
-     || !sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2])
+    if (!sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]
+     || !sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2])
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         CreateTask(Task_MonSummary_WaitFadeAndExit, 0);
@@ -241,8 +241,8 @@ static void SummarySetup_Backgrounds(void)
     InitBgsFromTemplates(0, sSummarySetup_BgTemplates, NELEMS(sSummarySetup_BgTemplates));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
 
-    SetBgTilemapBuffer(SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_1]);
-    SetBgTilemapBuffer(SUMMARY_BG_PAGE_2, sMonSummaryDataPtr->tilemapBufs[SUMMARY_BG_PAGE_SLOT_2]);
+    SetBgTilemapBuffer(SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]);
+    SetBgTilemapBuffer(SUMMARY_BG_PAGE_2, sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2]);
 
     for (enum MonSummaryBackgrounds bg = 0; bg < NUM_SUMMARY_BACKGROUNDS; bg++)
     {
@@ -838,8 +838,6 @@ static void SummaryPage_LoadTilemap(void)
     CopyToBgTilemapBuffer(nextBg, SummaryPage_GetTilemap(SummaryPage_GetValue()), 0, 0);
     SetGpuReg(REG_OFFSET_BG1HOFS, 8);
     CopyBgTilemapBufferToVram(nextBg);
-
-    SummaryPage_TogglePageSlot();
 }
 
 static void SummaryPage_Reload(void)
@@ -873,6 +871,7 @@ static void SummaryPage_Reload(void)
     SummaryPrint_TextBox();
 
     ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
+    SummaryPage_TogglePageSlot();
 }
 
 static void SummarySprite_SetSpriteId(u8 id, u8 value)

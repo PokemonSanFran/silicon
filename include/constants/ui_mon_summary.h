@@ -45,10 +45,10 @@ enum MonSummaryBackgrounds
 
 enum __attribute__((packed)) MonSummaryPageSlots
 {
-    SUMMARY_BG_PAGE_SLOT_1,
-    SUMMARY_BG_PAGE_SLOT_2,
+    SUMMARY_PAGE_SLOT_1,
+    SUMMARY_PAGE_SLOT_2,
 
-    NUM_SUMMARY_BG_PAGE_SLOTS
+    NUM_SUMMARY_PAGE_SLOTS
 };
 
 #define TOTAL_SUMMARY_DYNAMIC_WINDOWS 5
@@ -236,7 +236,7 @@ struct MonSummary
 struct MonSummaryResources
 {
     MainCallback savedCallback;
-    u8 *tilemapBufs[NUM_SUMMARY_BG_PAGE_SLOTS];
+    u8 *tilemapBufs[NUM_SUMMARY_PAGE_SLOTS];
     u8 windowIds[TOTAL_SUMMARY_DYNAMIC_WINDOWS];
     u8 spriteIds[NUM_SUMMARY_MAIN_SPRITES + TOTAL_SUMMARY_DYNAMIC_SPRITES];
 
