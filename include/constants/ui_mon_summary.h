@@ -147,6 +147,9 @@ enum MonSummaryMainSprites
     SUMMARY_MAIN_SPRITE_EXP_BAR,
     SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR,
 
+    // uses its own function to be spawned
+    SUMMARY_MAIN_SPRITE_POKEMON,
+
     NUM_SUMMARY_MAIN_SPRITES
 };
 
@@ -161,6 +164,8 @@ enum MonSummarySpriteTags
     TAG_SUMMARY_HP_BAR,
     TAG_SUMMARY_EXP_BAR,
     TAG_SUMMARY_FRIENDSHIP_BAR,
+    TAG_SUMMARY_POKEMON_SLOT_1,
+    TAG_SUMMARY_POKEMON_SLOT_2,
 };
 
 enum MonSummaryHpBarColors
