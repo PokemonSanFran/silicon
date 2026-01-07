@@ -56,7 +56,7 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WI
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct MonSummarySprite sSummarySetup_MainSprites[NUM_SUMMARY_MAIN_SPRITES] =
+static const struct MonSummarySprite sSummarySetup_MainSprites[] =
 {
     {
         .id = SUMMARY_MAIN_SPRITE_SHINY_SYMBOL,

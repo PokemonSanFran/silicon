@@ -94,7 +94,7 @@ static void SummaryPage_Reload(void);
 
 static void SummarySprite_SetSpriteId(u8, u8);
 static u8 SummarySprite_GetSpriteId(u8);
-static const struct MonSummarySprite *SummarySprite_GetMainStruct(enum MonSummaryMainSprites);
+static const struct MonSummarySprite *SummarySprite_GetMainStruct(u32);
 static void SummarySprite_InjectHpBar(struct Sprite *);
 static void SummarySprite_InjectExpBar(struct Sprite *);
 static void SummarySprite_InjectFriendshipBar(struct Sprite *);
@@ -179,6 +179,7 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
     SummaryPage_SetValue(page);
     SummaryMode_SetValue(config->mode);
     memset(sMonSummaryDataPtr->windowIds, WINDOW_NONE, ARRAY_COUNT(sMonSummaryDataPtr->windowIds));
+    memset(sMonSummaryDataPtr->spriteIds, SPRITE_NONE, ARRAY_COUNT(sMonSummaryDataPtr->spriteIds));
 
     SetMainCallback2(CB2_SummarySetup);
 }
@@ -269,10 +270,10 @@ static void SummarySetup_Graphics(void)
 
 static void SummarySetup_Sprites(void)
 {
-    for (enum MonSummaryMainSprites i = 0; i < NUM_SUMMARY_MAIN_SPRITES; i++)
+    for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
     {
         const struct MonSummarySprite *config = SummarySprite_GetMainStruct(i);
-        struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
+        struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), config->id);
         struct SpriteTemplate template =
         {
             .tileTag = config->tileTag,
@@ -884,9 +885,9 @@ static u8 SummarySprite_GetSpriteId(u8 id)
     return sMonSummaryDataPtr->spriteIds[id];
 }
 
-static const struct MonSummarySprite *SummarySprite_GetMainStruct(enum MonSummaryMainSprites sprite)
+static const struct MonSummarySprite *SummarySprite_GetMainStruct(u32 idx)
 {
-    return &sSummarySetup_MainSprites[sprite];
+    return &sSummarySetup_MainSprites[idx];
 }
 
 static void SummarySprite_InjectHpBar(struct Sprite *sprite)
