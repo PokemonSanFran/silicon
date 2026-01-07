@@ -29,6 +29,7 @@
 #include "region_map.h"
 #include "color_variation.h"
 #include "item_icon.h"
+#include "pokeball.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -142,6 +143,7 @@ static void InfosPageMisc_BlitMonMarkings(struct MonSummary *);
 static void InfosPageMisc_PrintItemName(struct MonSummary *);
 static void InfosPageMisc_PrintAbilityName(struct MonSummary *);
 static void InfosPageMisc_ShowHeldItem(struct MonSummary *);
+static void InfosPageMisc_ShowPokeBall(struct MonSummary *);
 
 // const data
 #include "data/ui_mon_summary.h"
@@ -623,6 +625,7 @@ static void SummaryMon_SetStruct(void)
     GetMonNickname(mon, res->summary.nickname);
     res->summary.gender = GetMonGender(mon);
     res->summary.markings = GetMonData(mon, MON_DATA_MARKINGS);
+    res->summary.ball = GetMonData(mon, MON_DATA_POKEBALL);
 }
 
 static struct MonSummary *SummaryMon_GetStruct(void)
@@ -1473,6 +1476,7 @@ static void InfosPage_HandleMisc(void)
     InfosPageMisc_PrintItemName(mon);
     InfosPageMisc_PrintAbilityName(mon);
     InfosPageMisc_ShowHeldItem(mon);
+    InfosPageMisc_ShowPokeBall(mon);
 
     CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC), COPYWIN_GFX);
 }
@@ -1520,4 +1524,18 @@ static void InfosPageMisc_ShowHeldItem(struct MonSummary *mon)
     gSprites[spriteId].y = SUMMARY_INFOS_MISC_HELD_ITEM_Y;
 
     SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_HELD_ITEM, spriteId);
+}
+
+static void InfosPageMisc_ShowPokeBall(struct MonSummary *mon)
+{
+    enum PokeBall ball = mon->ball;
+
+    LoadBallGfx(ball);
+
+    u32 spriteId = CreateSprite(&gBallSpriteTemplates[ball],
+        SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y, 0);
+
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].oam.priority = 0;
+    SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_POKE_BALL, spriteId);
 }

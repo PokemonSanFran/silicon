@@ -155,12 +155,14 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_INFOS_MISC_ABILITY_NAME_X   (6)
 #define SUMMARY_INFOS_MISC_TEXT_BOX_X       (7)
 #define SUMMARY_INFOS_MISC_HELD_ITEM_X      (1 + 16)
+#define SUMMARY_INFOS_MISC_POKE_BALL_X      (32 + 8)
 
 #define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (0)
 #define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (7)
 #define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (23)
 #define SUMMARY_INFOS_MISC_TEXT_BOX_Y       (1)
 #define SUMMARY_INFOS_MISC_HELD_ITEM_Y      (67 + 16)
+#define SUMMARY_INFOS_MISC_POKE_BALL_Y      (64 + 8)
 
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
@@ -256,6 +258,7 @@ struct MonSummary
 
     u8 gender;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
+    enum PokeBall ball;
 };
 
 struct MonSummaryResources
