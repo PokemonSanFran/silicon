@@ -28,6 +28,7 @@
 #include "item.h"
 #include "region_map.h"
 #include "color_variation.h"
+#include "item_icon.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -138,6 +139,7 @@ static void InfosPage_HandleMisc(void);
 static void InfosPageMisc_BlitMonMarkings(struct MonSummary *);
 static void InfosPageMisc_PrintItemName(struct MonSummary *);
 static void InfosPageMisc_PrintAbilityName(struct MonSummary *);
+static void InfosPageMisc_ShowHeldItem(struct MonSummary *);
 
 // const data
 #include "data/ui_mon_summary.h"
@@ -1437,6 +1439,7 @@ static void InfosPage_HandleMisc(void)
     InfosPageMisc_BlitMonMarkings(mon);
     InfosPageMisc_PrintItemName(mon);
     InfosPageMisc_PrintAbilityName(mon);
+    InfosPageMisc_ShowHeldItem(mon);
 
     CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC), COPYWIN_GFX);
 }
@@ -1471,4 +1474,17 @@ static void InfosPageMisc_PrintAbilityName(struct MonSummary *mon)
     SummaryPrint_AddText(windowId, fontId,
         SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
         SUMMARY_FNTCLR_INTERFACE, GetAbilityName(ability));
+}
+
+static void InfosPageMisc_ShowHeldItem(struct MonSummary *mon)
+{
+    u32 itemId = mon->item, spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_INFOS_SPRITE_HELD_ITEM);
+
+    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
+
+    spriteId = AddItemIconSprite(TAG_SUMMARY_HELD_ITEM, TAG_SUMMARY_HELD_ITEM, itemId);
+    gSprites[spriteId].x = SUMMARY_INFOS_MISC_HELD_ITEM_X;
+    gSprites[spriteId].y = SUMMARY_INFOS_MISC_HELD_ITEM_Y;
+
+    SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_HELD_ITEM, spriteId);
 }

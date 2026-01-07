@@ -91,6 +91,7 @@ enum MonSummarySpriteTags
     TAG_SUMMARY_FRIENDSHIP_BAR,
     TAG_SUMMARY_POKEMON_SLOT_1,
     TAG_SUMMARY_POKEMON_SLOT_2,
+    TAG_SUMMARY_HELD_ITEM,
 };
 
 enum MonSummaryHpBarColors
@@ -111,6 +112,15 @@ enum __attribute__((packed)) MonSummaryInfosWindows
     SUMMARY_INFOS_WIN_MISC,      // typically contains held item, ability, and box shapes
 
     NUM_SUMMARY_INFOS_WINDOWS
+};
+
+enum __attribute__((packed)) MonSummaryInfosSprites
+{
+    SUMMARY_INFOS_SPRITE_HELD_ITEM,
+    SUMMARY_INFOS_SPRITE_POKE_BALL,
+    SUMMARY_INFOS_SPRITE_DESC_CURSOR, // for switching between ability and held item description for the textbox
+
+    NUM_SUMMARY_INFOS_SPRITES
 };
 
 // starting positions
@@ -144,11 +154,13 @@ enum __attribute__((packed)) MonSummaryInfosWindows
 #define SUMMARY_INFOS_MISC_ITEM_NAME_X      (32)
 #define SUMMARY_INFOS_MISC_ABILITY_NAME_X   (6)
 #define SUMMARY_INFOS_MISC_TEXT_BOX_X       (7)
+#define SUMMARY_INFOS_MISC_HELD_ITEM_X      (1 + 16)
 
 #define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (0)
 #define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (7)
 #define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (23)
 #define SUMMARY_INFOS_MISC_TEXT_BOX_Y       (1)
+#define SUMMARY_INFOS_MISC_HELD_ITEM_Y      (67 + 16)
 
 enum __attribute__((packed)) MonSummaryStatsWindows
 {
