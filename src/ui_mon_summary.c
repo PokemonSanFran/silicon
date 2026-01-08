@@ -66,6 +66,7 @@ static void Task_SummaryInput_InfosInput(u8);
 static void SummaryMon_SetStruct(void);
 static struct MonSummary *SummaryMon_GetStruct(void);
 static void SummaryMon_CopyCurrentRawMon(void);
+static void SummaryMon_GetNatureFlavors(u8 *);
 
 static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
@@ -137,7 +138,7 @@ static void InfosPage_HandleGeneral(void);
 static void InfosPageGeneral_PrintMonTyping(struct MonSummary *);
 static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *);
 static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *);
-static void InfosPageGeneral_PrintMiscMonInfo(struct MonSummary *);
+static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *);
 static void InfosPage_HandleMisc(void);
 static void InfosPageMisc_BlitMonMarkings(struct MonSummary *);
 static void InfosPageMisc_PrintItemName(struct MonSummary *);
@@ -626,6 +627,7 @@ static void SummaryMon_SetStruct(void)
     res->summary.gender = GetMonGender(mon);
     res->summary.markings = GetMonData(mon, MON_DATA_MARKINGS);
     res->summary.ball = GetMonData(mon, MON_DATA_POKEBALL);
+    SummaryMon_GetNatureFlavors(res->summary.flavors);
 }
 
 static struct MonSummary *SummaryMon_GetStruct(void)
@@ -645,6 +647,23 @@ static void SummaryMon_CopyCurrentRawMon(void)
     else
     {
         res->mon = &res->list.mons[res->currIdx];
+    }
+}
+
+static void SummaryMon_GetNatureFlavors(u8 *flavors)
+{
+    struct Pokemon *mon = sMonSummaryDataPtr->mon;
+
+    memset(flavors, FLAVOR_COUNT, sizeof(u8) * 2);
+
+    for (u32 i = 0; i < FLAVOR_COUNT; i++)
+    {
+        s8 flavor = GetMonFlavorRelation(mon, i);
+
+        if (flavor != 0)
+        {
+            flavors[SUMMARY_MON_LIKED_FLAVOR + (flavor == -1)] = i;
+        }
     }
 }
 
@@ -1368,7 +1387,7 @@ static void InfosPage_HandleGeneral(void)
     InfosPageGeneral_PrintMonTyping(mon);
     InfosPageGeneral_PrintTrainerInfo(mon);
     InfosPageGeneral_PrintNeededExperience(mon);
-    InfosPageGeneral_PrintMiscMonInfo(mon);
+    InfosPageGeneral_PrintNatureInfo(mon);
 
     CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_GENERAL), COPYWIN_GFX);
 }
@@ -1450,7 +1469,7 @@ static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *mon)
 }
 
 // <nature> nature <fav flavor> combined, will be called more often
-static void InfosPageGeneral_PrintMiscMonInfo(struct MonSummary *mon)
+static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
 {
     u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_GENERAL);
     u32 winWidth = WindowWidthPx(windowId);
@@ -1462,8 +1481,15 @@ static void InfosPageGeneral_PrintMiscMonInfo(struct MonSummary *mon)
 
     // TODO implement menu blink
     StringCopy(gStringVar1, gNaturesInfo[mon->nature].name);
-    StringCopy(gStringVar2, COMPOUND_STRING("{EMOJI_HEART} "));
-    StringAppend(gStringVar2, sInfosPageGeneral_BerryFlavorNames[FLAVOR_SPICY]);
+    if (mon->flavors[0] != FLAVOR_COUNT && mon->flavors[1] != FLAVOR_COUNT)
+    {
+        StringCopy(gStringVar2, COMPOUND_STRING("{EMOJI_HEART} "));
+        StringAppend(gStringVar2, sInfosPageGeneral_BerryFlavorNames[mon->flavors[SUMMARY_MON_LIKED_FLAVOR]]);
+    }
+    else
+    {
+        StringCopy(gStringVar2, COMPOUND_STRING(" "));
+    }
 
     const u8 *strTemplate = COMPOUND_STRING("{STR_VAR_1} Nature {STR_VAR_2}");
 

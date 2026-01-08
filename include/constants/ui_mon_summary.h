@@ -211,6 +211,10 @@ enum __attribute__((packed)) MonSummaryReloadModes
     NUM_SUMMARY_RELOADS
 };
 
+#define SUMMARY_MON_LIKED_FLAVOR    0
+#define SUMMARY_MON_DISLIKED_FLAVOR 1
+#define TOTAL_MON_NATURE_FLAVORS    2
+
 // structs
 
 // contains MonData of the current pokemon (list.mons/boxMons[currId])
@@ -269,6 +273,7 @@ struct MonSummary
     u8 gender;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     enum PokeBall ball;
+    u8 flavors[TOTAL_MON_NATURE_FLAVORS];
 };
 
 struct MonSummaryResources
