@@ -120,7 +120,7 @@ static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
 static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_BlitStatusSymbol(u32, u32, u32);
-static void SummaryPrint_BlitMonMarkings(u32, u32, u32);
+static UNUSED void SummaryPrint_BlitMonMarkings(u32, u32, u32);
 static void SummaryPrint_TextBox(void);
 static void SummaryPrint_HelpBar(void);
 
@@ -1236,7 +1236,7 @@ static void SummaryPrint_BlitStatusSymbol(u32 windowId, u32 x, u32 y)
     BlitBitmapRectToWindow(windowId, sSummaryPrint_StatusSymbolsBlit, 0, ailment * 8, 24, 64, x, y, 24, 8);
 }
 
-static void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
+static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
 {
     BlitBitmapRectToWindow(windowId, sSummaryPrint_MonMarkingsBlit,
         0, SummaryMon_GetStruct()->markings * 8,
@@ -1490,8 +1490,7 @@ static void InfosPage_HandleMisc(void)
 
 static void InfosPageMisc_BlitMonMarkings(struct MonSummary *mon)
 {
-    SummaryPrint_BlitMonMarkings(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC),
-        SUMMARY_INFOS_MISC_MON_MARKINGS_X, SUMMARY_INFOS_MISC_MON_MARKINGS_Y);
+    // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
 }
 
 static void InfosPageMisc_PrintItemName(struct MonSummary *mon)
