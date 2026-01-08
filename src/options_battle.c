@@ -314,14 +314,6 @@ bool32 AreIndividualValuesDisabled(void)
     return !(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES]);
 }
 
-bool32 ShouldReturnPerfectValue(bool32 stat, struct Pokemon *mon)
-{
-    if (AreIndividualValuesDisabled())
-        return TRUE;
-
-    return (GetMonData(mon,MON_DATA_HYPER_TRAINED_HP + stat));
-}
-
 // ***********************************************************************
 // Battle Settings: Effort Values
 // ***********************************************************************

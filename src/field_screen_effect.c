@@ -24,6 +24,7 @@
 #include "mirage_tower.h"
 #include "metatile_behavior.h"
 #include "palette.h"
+#include "oras_dowse.h"
 #include "overworld.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -74,6 +75,45 @@ static const struct ScanlineEffectParams sFlashEffectParams =
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
     1
 };
+
+// Start shrinkPlayer
+static const union AffineAnimCmd sSpriteAffineAnim_ShrinkPlayerAtDoor[] =
+{
+    AFFINEANIMCMD_FRAME(-4, -4, 0, 60),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_GrowPlayerFromDoor[] =
+{
+    AFFINEANIMCMD_FRAME(196, 196, 0, 0),
+    AFFINEANIMCMD_FRAME(4, 4, 0, 15),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_ShrinkPlayerAtDoor[] =
+{
+    sSpriteAffineAnim_ShrinkPlayerAtDoor,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_GrowPlayerFromDoor[] =
+{
+    sSpriteAffineAnim_GrowPlayerFromDoor,
+};
+
+void Task_DestroyEventObjSpriteMatrixOnAffineAnimCompletion(u8 taskId)
+{
+    struct Sprite *sprite = &gSprites[gObjectEvents[gTasks[taskId].data[0]].spriteId];
+
+    if (sprite->affineAnimEnded)
+    {
+        FreeSpriteOamMatrix(sprite);
+        sprite->affineAnims = gDummySpriteAffineAnimTable;
+        sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+        CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+        DestroyTask(taskId);
+    }
+}
+// End shrinkPlayer
 
 // code
 static void FillPalBufferWhite(void)
@@ -370,6 +410,17 @@ static void Task_ExitDoor(u8 taskId)
             objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->tState = 2;
+            // Start shrinkPlayer
+            u32 playerObjId = gPlayerAvatar.objectEventId;
+            struct Sprite *sprite = &gSprites[gObjectEvents[playerObjId].spriteId];
+            sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+            sprite->affineAnims = gSpriteAffineAnimTable_GrowPlayerFromDoor;
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+            InitSpriteAffineAnim(sprite);
+            u32 newTaskId = CreateTask(Task_DestroyEventObjSpriteMatrixOnAffineAnimCompletion, 0xFF);
+            if (newTaskId != 0xFF)
+                gTasks[newTaskId].data[0] = playerObjId;
+            // End shrinkPlayer
         }
         break;
     case 2:
@@ -699,6 +750,7 @@ void Task_WarpAndLoadMap(u8 taskId)
     case 0:
         FreezeObjectEvents();
         LockPlayerFieldControls();
+        EndORASDowsing();
         task->tState++;
         break;
     case 1:
@@ -760,6 +812,7 @@ void Task_DoDoorWarp(u8 taskId)
             ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);
         }
         task->tDoorTask = FieldAnimateDoorOpen(*x, *y - 1);
+        EndORASDowsing();
         task->tState = DOORWARP_START_WALK_UP;
         break;
     case DOORWARP_START_WALK_UP:
@@ -776,6 +829,14 @@ void Task_DoDoorWarp(u8 taskId)
                 ObjectEventSetHeldMovement(&gObjectEvents[followerObjId], newState);
             }
 
+            // Start shrinkPlayer
+            struct Sprite *sprite = &gSprites[gObjectEvents[playerObjId].spriteId];
+            sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+            sprite->affineAnims = sSpriteAffineAnimTable_ShrinkPlayerAtDoor;
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+            InitSpriteAffineAnim(sprite);
+
+            // End shrinkPlayer
             task->tState = DOORWARP_HIDE_PLAYER;
         }
         break;
@@ -800,6 +861,14 @@ void Task_DoDoorWarp(u8 taskId)
         {
             ObjectEventClearHeldMovementIfActive(&gObjectEvents[followerObjId]);
             ObjectEventSetHeldMovement(&gObjectEvents[followerObjId], MOVEMENT_ACTION_WALK_NORMAL_UP);
+
+            // Start shrinkPlayer
+            struct Sprite *sprite = &gSprites[gObjectEvents[followerObjId].spriteId];
+            sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+            sprite->affineAnims = sSpriteAffineAnimTable_ShrinkPlayerAtDoor;
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+            InitSpriteAffineAnim(sprite);
+            // End shrinkPlayer
         }
 
         TryFadeOutOldMapMusic();
