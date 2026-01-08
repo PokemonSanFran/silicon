@@ -159,6 +159,9 @@ BerryTree_EventScript_SetAdverbPoor::
 
 @ VAR_0x8006 here is the number of berries
 BerryTree_EventScript_CheckBerryFullyGrown::
+// Start wildEncounters
+	call BerryTree_EventScript_CheckForPests
+// End wildEncounters
 	buffernumberstring STR_VAR_2, VAR_0x8006
 	lock
 	faceplayer
@@ -478,5 +481,8 @@ BerryTree_EventScript_EncounterPests::
 	return
 
 BerryTree_Text_APokemonAppeared:
-	.string "A Pokémon appeared!$"
+    .string "You found a wild Pokemon!\p"
+    .string "...\p"
+    .string "The wild Pokémon attacked!$"
+	//.string "A Pokémon appeared!$"
 .endif
