@@ -133,11 +133,11 @@ static void InfosPage_HandleHeader(void);
 static void InfosPageHeader_PrintMonNameGender(struct MonSummary *);
 static void InfosPageHeader_PrintLevel(struct MonSummary *);
 static void InfosPageHeader_BlitStatusSymbol(struct MonSummary *);
-static void InfosPage_HandleSummary(void);
-static void InfosPageSummary_PrintMonTyping(struct MonSummary *);
-static void InfosPageSummary_PrintTrainerInfo(struct MonSummary *);
-static void InfosPageSummary_PrintNeededExperience(struct MonSummary *);
-static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *);
+static void InfosPage_HandleGeneral(void);
+static void InfosPageGeneral_PrintMonTyping(struct MonSummary *);
+static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *);
+static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *);
+static void InfosPageGeneral_PrintMiscMonInfo(struct MonSummary *);
 static void InfosPage_HandleMisc(void);
 static void InfosPageMisc_BlitMonMarkings(struct MonSummary *);
 static void InfosPageMisc_PrintItemName(struct MonSummary *);
@@ -1276,7 +1276,7 @@ static void DummyPage_Handle(void)
 static void InfosPage_HandleFrontEnd(void)
 {
     InfosPage_HandleHeader();
-    InfosPage_HandleSummary();
+    InfosPage_HandleGeneral();
     InfosPage_HandleMisc();
 }
 
@@ -1361,21 +1361,21 @@ static void InfosPageHeader_BlitStatusSymbol(struct MonSummary *mon)
         SUMMARY_INFOS_HEADER_STATUS_X, SUMMARY_INFOS_HEADER_STATUS_Y);
 }
 
-static void InfosPage_HandleSummary(void)
+static void InfosPage_HandleGeneral(void)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
 
-    InfosPageSummary_PrintMonTyping(mon);
-    InfosPageSummary_PrintTrainerInfo(mon);
-    InfosPageSummary_PrintNeededExperience(mon);
-    InfosPageSummary_PrintMiscMonInfo(mon);
+    InfosPageGeneral_PrintMonTyping(mon);
+    InfosPageGeneral_PrintTrainerInfo(mon);
+    InfosPageGeneral_PrintNeededExperience(mon);
+    InfosPageGeneral_PrintMiscMonInfo(mon);
 
-    CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY), COPYWIN_GFX);
+    CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_GENERAL), COPYWIN_GFX);
 }
 
-static void InfosPageSummary_PrintMonTyping(struct MonSummary *mon)
+static void InfosPageGeneral_PrintMonTyping(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_GENERAL);
     u32 fontId = FONT_OUTLINED;
 
     SummaryPrint_AddText(windowId, fontId,
@@ -1397,9 +1397,9 @@ static void InfosPageSummary_PrintMonTyping(struct MonSummary *mon)
     }
 }
 
-static void InfosPageSummary_PrintTrainerInfo(struct MonSummary *mon)
+static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_GENERAL);
     u32 fontId = FONT_OUTLINED;
 
     // OT: <trainer name>
@@ -1420,9 +1420,9 @@ static void InfosPageSummary_PrintTrainerInfo(struct MonSummary *mon)
         SUMMARY_FNTCLR_INTERFACE, gStringVar1);
 }
 
-static void InfosPageSummary_PrintNeededExperience(struct MonSummary *mon)
+static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_GENERAL);
     u32 fontId = FONT_OUTLINED;
 
     // EXP: <numbers> to Lv <next level>
@@ -1450,9 +1450,9 @@ static void InfosPageSummary_PrintNeededExperience(struct MonSummary *mon)
 }
 
 // <nature> nature <fav flavor> combined, will be called more often
-static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *mon)
+static void InfosPageGeneral_PrintMiscMonInfo(struct MonSummary *mon)
 {
-    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_SUMMARY);
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_GENERAL);
     u32 winWidth = WindowWidthPx(windowId);
     u32 fontId = FONT_OUTLINED;
 
@@ -1463,7 +1463,7 @@ static void InfosPageSummary_PrintMiscMonInfo(struct MonSummary *mon)
     // TODO implement menu blink
     StringCopy(gStringVar1, gNaturesInfo[mon->nature].name);
     StringCopy(gStringVar2, COMPOUND_STRING("{EMOJI_HEART} "));
-    StringAppend(gStringVar2, sInfosPageSummary_BerryFlavorNames[FLAVOR_SPICY]);
+    StringAppend(gStringVar2, sInfosPageGeneral_BerryFlavorNames[FLAVOR_SPICY]);
 
     const u8 *strTemplate = COMPOUND_STRING("{STR_VAR_1} Nature {STR_VAR_2}");
 

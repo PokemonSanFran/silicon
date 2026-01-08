@@ -114,8 +114,8 @@ enum MonSummaryHpBarColors
 enum __attribute__((packed)) MonSummaryInfosWindows
 {
     SUMMARY_INFOS_WIN_HEADER,    // typically contains nick/species name, gender, level, and status ailment/pokerus
-    SUMMARY_INFOS_WIN_SUMMARY,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
-    SUMMARY_INFOS_WIN_MISC,      // typically contains held item, ability, and box shapes
+    SUMMARY_INFOS_WIN_GENERAL,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
+    SUMMARY_INFOS_WIN_MISC,      // typically contains held item, ability, and markings
 
     NUM_SUMMARY_INFOS_WINDOWS
 };

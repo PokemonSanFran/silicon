@@ -163,7 +163,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
                 .width = 9, .height = 4
             },
             {
-                .id = SUMMARY_INFOS_WIN_SUMMARY,
+                .id = SUMMARY_INFOS_WIN_GENERAL,
                 .left = 15, .top = 4,
                 .width = 15, .height = 10
             },
@@ -223,7 +223,7 @@ static const u8 sSummaryPrint_FontColors[NUM_SUMMARY_FNTCLRS][3] =
     [SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
 
-static const u8 *const sInfosPageSummary_BerryFlavorNames[FLAVOR_COUNT] =
+static const u8 *const sInfosPageGeneral_BerryFlavorNames[FLAVOR_COUNT] =
 {
     [FLAVOR_SPICY]  = COMPOUND_STRING("Spicy"),
     [FLAVOR_DRY]    = COMPOUND_STRING("Dry"),
