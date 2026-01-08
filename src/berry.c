@@ -20,6 +20,7 @@
 #include "constants/weather.h"
 #include "field_weather.h"
 // End autoWater
+#include "wild_encounter.h" // wildEncounters
 
 static u16 BerryTypeToItemId(u16 berry);
 static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree);
@@ -2446,7 +2447,10 @@ static void SetTreeMutations(u8 id, u8 berry)
 
 static u16 GetBerryPestSpecies(u8 berryId)
 {
+    return GenerateBerryMon();
 #if OW_BERRY_PESTS == TRUE
+    // Start wildEncounters
+    // End wildEncounters
     const struct Berry *berry = GetBerryInfo(berryId);
     switch(berry->color)
     {

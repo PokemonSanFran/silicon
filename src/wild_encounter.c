@@ -1350,3 +1350,11 @@ bool32 MapHasNoEncounterData(void)
 {
     return (GetCurrentMapWildMonHeaderId() == HEADER_NONE);
 }
+
+u16 GenerateBerryMon(void)
+{
+    u32 header = GetCurrentMapWildMonHeaderId();
+    u32 wildMonIndex = ChooseWildMonIndex_Silicon();
+    const struct WildPokemonInfo *wildMonInfo = gWildMonHeaders[header].encounterTypes[GetTimeOfDayForEncounters(header, WILD_AREA_BERRY_TREES)].berryMonsInfo;
+    return wildMonInfo->wildPokemon[wildMonIndex].species;
+}
