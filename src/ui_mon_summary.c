@@ -407,10 +407,10 @@ static void CB2_SummarySetup(void)
 
 static void Task_SummarySetup_WaitFade(u8 taskId)
 {
-    if (!gPaletteFade.active && ++gTasks[taskId].data[0] >= 5)
+    if (!gPaletteFade.active && ++gTasks[taskId].tDelay >= 5)
     {
         SummarySprite_PlayPokemonCry();
-        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].tDelay = 0;
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
     }
 }
@@ -881,9 +881,16 @@ static void SummaryPage_UnloadDynamicSprites(void)
     for (u32 i = 0; i < TOTAL_SUMMARY_DYNAMIC_SPRITES; i++)
     {
         u32 spriteId = SummarySprite_GetDynamicSpriteId(i);
-        if (spriteId == SPRITE_NONE) break;
+        if (spriteId == SPRITE_NONE) continue;
 
+        struct Sprite *sprite = &gSprites[spriteId];
+        u32 tileTag = (u16)sprite->sTileTag, paletteTag = (u16)sprite->sPaletteTag;
+
+        FreeSpriteOamMatrix(sprite);
         DestroySpriteAndFreeResources(&gSprites[spriteId]);
+        FreeSpriteTilesByTag(tileTag);
+        FreeSpritePaletteByTag(paletteTag);
+
         SummarySprite_SetDynamicSpriteId(i, SPRITE_NONE);
     }
 }
@@ -931,8 +938,8 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
     }
 
     SummaryPage_UnloadDynamicSprites();
-    void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
-    func();
+    void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+    handleFrontEnd();
 
     for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainWindows); i++)
     {
@@ -1515,27 +1522,35 @@ static void InfosPageMisc_PrintAbilityName(struct MonSummary *mon)
 
 static void InfosPageMisc_ShowHeldItem(struct MonSummary *mon)
 {
-    u32 itemId = mon->item, spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_INFOS_SPRITE_HELD_ITEM);
+    u32 itemId = mon->item, spriteId;
 
     if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
 
     spriteId = AddItemIconSprite(TAG_SUMMARY_HELD_ITEM, TAG_SUMMARY_HELD_ITEM, itemId);
+
     gSprites[spriteId].x = SUMMARY_INFOS_MISC_HELD_ITEM_X;
     gSprites[spriteId].y = SUMMARY_INFOS_MISC_HELD_ITEM_Y;
+    gSprites[spriteId].sTileTag = TAG_SUMMARY_HELD_ITEM;
+    gSprites[spriteId].sPaletteTag = TAG_SUMMARY_HELD_ITEM;
 
     SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_HELD_ITEM, spriteId);
 }
 
 static void InfosPageMisc_ShowPokeBall(struct MonSummary *mon)
 {
+    u32 spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_INFOS_SPRITE_POKE_BALL);
+
     enum PokeBall ball = mon->ball;
 
     LoadBallGfx(ball);
 
-    u32 spriteId = CreateSprite(&gBallSpriteTemplates[ball],
+    spriteId = CreateSprite(&gBallSpriteTemplates[ball],
         SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y, 0);
 
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].sTileTag = gBallSpriteTemplates[ball].tileTag;
+    gSprites[spriteId].sPaletteTag = gBallSpriteTemplates[ball].paletteTag;
+
     SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_POKE_BALL, spriteId);
 }

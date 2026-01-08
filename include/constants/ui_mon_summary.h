@@ -84,7 +84,7 @@ enum MonSummaryMainSprites
 // assorted tags for both main and dynamic sprites
 enum MonSummarySpriteTags
 {
-    TAG_SUMMARY_UNIVERSAL_PAL = 0x9999,
+    TAG_SUMMARY_UNIVERSAL_PAL = 0x4000,
     TAG_SUMMARY_SHINY_SYMBOL,
     TAG_SUMMARY_HP_BAR,
     TAG_SUMMARY_EXP_BAR,
@@ -92,6 +92,7 @@ enum MonSummarySpriteTags
     TAG_SUMMARY_POKEMON_SLOT_1,
     TAG_SUMMARY_POKEMON_SLOT_2,
     TAG_SUMMARY_HELD_ITEM,
+    TAG_SUMMARY_POKE_BALL,
 };
 
 enum MonSummaryHpBarColors
@@ -103,7 +104,12 @@ enum MonSummaryHpBarColors
     NUM_SUMMARY_HP_BAR_CLRS
 };
 
+#define tDelay          data[0]
+
 #define sMonIndex       data[0]
+
+#define sTileTag        data[0]
+#define sPaletteTag     data[1]
 
 enum __attribute__((packed)) MonSummaryInfosWindows
 {
@@ -181,6 +187,10 @@ enum __attribute__((packed)) MonSummaryMovesWindows
 STATIC_ASSERT(NUM_SUMMARY_INFOS_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, InfoPageDynamicWindowExceedsMaxNumber);
 STATIC_ASSERT(NUM_SUMMARY_STATS_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, StatPageDynamicWindowExceedsMaxNumber);
 STATIC_ASSERT(NUM_SUMMARY_MOVES_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, MovePageDynamicWindowExceedsMaxNumber);
+
+STATIC_ASSERT(NUM_SUMMARY_INFOS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, InfoPageDynamicSpriteExceedsMaxNumber);
+//STATIC_ASSERT(NUM_SUMMARY_STATS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, StatPageDynamicSpriteExceedsMaxNumber);
+//STATIC_ASSERT(NUM_SUMMARY_MOVES_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, MovePageDynamicSpriteExceedsMaxNumber);
 
 enum MonSummaryFontColors
 {
