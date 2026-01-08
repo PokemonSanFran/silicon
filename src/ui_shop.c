@@ -1182,13 +1182,7 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
     // only adjust category index once!
     if (!bak)
     {
-        u32 halfScreen = ShopGrid_GetYHalfScreen();
-        if (ShopGrid_GetCurrentCategoryIndex() > halfScreen)
-        {
-            ShopGrid_SetFirstCategoryIndex(ShopGrid_GetFirstCategoryIndex() + 1);
-        }
-
-        ShopGrid_SetCurrentCategoryIndex(ShopGrid_GetCurrentCategoryIndex() + 1);
+        ShopGrid_VerticalInput(DOWN_PRESS);
     }
 
     if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
@@ -1225,10 +1219,11 @@ static void ShopGrid_SwitchMode(enum ShopMenuModes mode)
 static void ShopGrid_VerticalInput(s32 delta)
 {
     bool32 additiveDelta = ShopGrid_IsAdditiveDelta(delta);
-    u32 trueIdx = ShopHelper_IsPurchaseMode() ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
+    bool32 purchaseMode = ShopHelper_IsProcessingPurchaseMode();
+    u32 trueIdx = purchaseMode ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
     u32 bak = trueIdx;
 
-    if (!ShopHelper_IsPurchaseMode())
+    if (!purchaseMode)
     {
         u32 numItems = gShopMenuDataPtr->numCategories - 1;
         u32 halfScreen = ShopGrid_GetYHalfScreen();
@@ -1269,7 +1264,10 @@ static void ShopGrid_VerticalInput(s32 delta)
             ShopGrid_SetGridYCursor(gridIdx + delta);
         }
 
-        ShopGrid_ResetIndexes(SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID);
+        if (!ShopHelper_IsPurchaseDone())
+        {
+            ShopGrid_ResetIndexes(SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID);
+        }
     }
     else
     {
@@ -1295,8 +1293,8 @@ static void ShopGrid_VerticalInput(s32 delta)
         }
     }
 
-    trueIdx = ShopHelper_IsPurchaseMode() ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
-    if (bak != trueIdx)
+    trueIdx = purchaseMode ? gShopMenuDataPtr->itemQuantity : ShopGrid_GetCurrentCategoryIndex();
+    if (bak != trueIdx && !ShopHelper_IsPurchaseDone())
     {
         PlaySE(SE_SELECT);
     }
