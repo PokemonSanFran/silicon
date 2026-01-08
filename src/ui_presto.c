@@ -475,40 +475,10 @@ static enum PrestoShopTypes PrestoHelper_GetShopType(void)
     return PRESTO_TYPE_APP;
 }
 
-static u32 PrestoHelper_GetCategoryMap(u32 category)
-{
-    for (u32 listIndex = 0; listIndex < NUM_SHOP_CATEGORIES; listIndex++)
-        if (gShopMenuDataPtr->categoryList[listIndex] == category)
-            return listIndex;
-
-    for (u32 listIndex = 0; listIndex < NUM_SHOP_CATEGORIES; listIndex++)
-    {
-        if (gShopMenuDataPtr->categoryList[listIndex] == NUM_SHOP_CATEGORIES)
-        {
-            gShopMenuDataPtr->categoryList[listIndex] = category;
-            return listIndex;
-        }
-    }
-    return NUM_SHOP_CATEGORIES;
-}
-
-static void PrestoHelper_ProcessBuyAgainItems(u16* categoryCounts)
-{
-    for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
-    {
-        u32 item = gSaveBlock3Ptr->shopBuyAgainItems[i];
-        if (!item) 
-            break;
-
-        u32 risingCategory = PrestoHelper_GetCategoryMap(SHOP_CATEGORY_BUY_AGAIN);
-        ShopInventory_SetItemIdToGrid(item, risingCategory, categoryCounts[SHOP_CATEGORY_BUY_AGAIN]);
-        categoryCounts[SHOP_CATEGORY_BUY_AGAIN]++;
-    }
-}
-
-static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16* recommendedCandidates, u16* categoryCounts)
+static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16 *recommendedCandidates, u8 *categoryCounts)
 {
     u32 numRecSelected = 0;
+
     for (u32 i = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS && numCandidates > 0; i++)
     {
         u32 randIdx = Random() % numCandidates;
@@ -516,49 +486,16 @@ static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16* recomme
 
         gShopMenuDataPtr->recommendedItems[i] = selectedItem;
 
-        u32 risingCategory = PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
+        u32 risingCategory = ShopInventory_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
         ShopInventory_SetItemIdToGrid(selectedItem, risingCategory, numRecSelected);
         numRecSelected++;
 
-        //DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
+        // DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
 
         recommendedCandidates[randIdx] = recommendedCandidates[numCandidates - 1];
         numCandidates--;
         categoryCounts[SHOP_CATEGORY_RECOMMENDED] = numRecSelected;
     }
-}
-static u32 PrestoHelper_ProcessCategoryCounts(u32 numCategories, u16* categoryCounts)
-{
-    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
-    {
-        if (categoryCounts[categoryIndex] == 0)
-            continue;
-
-        u32 risingCategory = PrestoHelper_GetCategoryMap(categoryIndex);
-        ShopInventory_SetCategoryNumItems(categoryCounts[categoryIndex], risingCategory);
-
-        if (ShopInventory_GetCategoryNumItems(risingCategory))
-            numCategories++;
-    }
-
-    return numCategories;
-}
-
-enum ShopMenuCategories PrestoHelper_CanItemBeListed(enum Pocket pocket, u32 itemId)
-{
-    if (pocket == POCKET_KEY_ITEMS)
-        return NUM_SHOP_CATEGORIES;
-
-    ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
-    if (func && !func(itemId))
-        return NUM_SHOP_CATEGORIES;
-
-    enum ShopMenuCategories itemCat = ConvertPocketToCategory(pocket);
-    if (ShopPurchase_IsCategoryOneTimePurchase(itemCat))
-        if (CountTotalItemQuantityInBagWithPocket(pocket, itemId))
-            return NUM_SHOP_CATEGORIES;
-
-    return itemCat;
 }
 
 static void PrestoHelper_ReccomendItem(enum ShopMenuCategories itemCat, u32 itemId, u16* recommendedCandidates, u32* numCandidates)
@@ -571,44 +508,34 @@ static void PrestoHelper_ReccomendItem(enum ShopMenuCategories itemCat, u32 item
     if (*numCandidates != 1)
         return;
 
-    PrestoHelper_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
-}
-
-static void PrestoHelper_TryAddItemToGrid(u32 itemId, enum ShopMenuCategories itemCat, u16* categoryCounts)
-{
-    if (categoryCounts[itemCat] >= NUM_SHOP_ITEMS_PER_CATEGORIES)
-        return;
-
-    ShopInventory_SetItemIdToGrid(itemId, PrestoHelper_GetCategoryMap(itemCat), categoryCounts[itemCat]);
-    categoryCounts[itemCat]++;
-    //DebugPrintf("%S is getting set to category 	%d in position 	%d",GetItemName(itemId),risingCategory,categoryCounts[itemCat]);
+    ShopInventory_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
 }
 
 static u32 PrestoHelper_InitItemsList(void)
 {
-    u32 numCategories = 0, numCandidates = 0;
+    u32 numCandidates = 0;
     u16 recommendedCandidates[ITEMS_COUNT] = {0};
-    u16 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
+    u8 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
 
-    PrestoHelper_ProcessBuyAgainItems(categoryCounts);
+    ShopInventory_ProcessBuyAgainItems(categoryCounts);
 
     for (u32 itemId = (ITEM_NONE + 1); itemId < ITEMS_COUNT; itemId++)
     {
-        if (!GetItemPrice(itemId)) 
+        if (!GetItemPrice(itemId))
             continue;
 
         enum Pocket pocket = GetItemPocket(itemId);
-        enum ShopMenuCategories itemCat = PrestoHelper_CanItemBeListed(pocket, itemId);
+        enum ShopMenuCategories itemCat = ShopInventory_CanItemBeListed(itemId, pocket);
 
         if (itemCat == NUM_SHOP_CATEGORIES)
             continue;
 
         PrestoHelper_ReccomendItem(itemCat, itemId, recommendedCandidates, &numCandidates);
-        PrestoHelper_TryAddItemToGrid(itemId, itemCat, categoryCounts);
+        ShopInventory_TryAddItemToList(itemId, itemCat, categoryCounts);
     }
 
-    PrestoHelper_ProcessReccomendedItems(numCandidates,recommendedCandidates,categoryCounts);
-    return PrestoHelper_ProcessCategoryCounts(numCategories, categoryCounts);
+    PrestoHelper_ProcessReccomendedItems(numCandidates, recommendedCandidates, categoryCounts);
+    return ShopInventory_ProcessCategoryCounts(categoryCounts);
 
     /*
     for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 

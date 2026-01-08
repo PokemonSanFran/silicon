@@ -617,99 +617,28 @@ static void MartHelper_UpdateFrontEnd(void)
 
 static u32 MartHelper_InitItemsList(void)
 {
-    enum ShopMenuCategories category = (gShopMenuDataPtr->sortCategories)
-                                     ? SHOP_CATEGORY_STATIC_START
-                                     : SHOP_CATEGORY_BUY_AGAIN;
-    u32 numCategories = 0;
+    u8 numItems[NUM_SHOP_CATEGORIES] = {0};
+    u32 i = 0;
 
-    for (u32 idx = 0; category < NUM_SHOP_CATEGORIES; category++)
+    ShopInventory_ProcessBuyAgainItems(numItems);
+
+    while (sPokeMartData.products[i++] != ITEM_NONE)
     {
-        category %= NUM_SHOP_CATEGORIES;
+        u32 itemId = sPokeMartData.products[i];
 
-        // Never accept Buy Again or Recommended categories when sorting.
-        // Or an already filled category (by looping back to Buy Again).
-        if ((gShopMenuDataPtr->sortCategories && category < SHOP_CATEGORY_STATIC_START)
-         || ShopInventory_GetCategoryNumItems(category) != 0)
-        {
-            break;
-        }
-
-        u32 numItems = ShopInventory_GetCategoryNumItems(idx);
-
-        if (category == SHOP_CATEGORY_BUY_AGAIN && gSaveBlock3Ptr->shopBuyAgainItems[0])
-        {
-            for (u32 itemId = 0; itemId < MAX_PRESTO_BUY_AGAIN_ITEMS; itemId++)
-            {
-                if (!gSaveBlock3Ptr->shopBuyAgainItems[itemId])
-                {
-                    break;
-                }
-
-                ShopInventory_SetItemIdToGrid(gSaveBlock3Ptr->shopBuyAgainItems[itemId], idx, numItems);
-                ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-            }
-        }
-        else if (category == SHOP_CATEGORY_RECOMMENDED)
-        {
+        if (!GetItemPrice(itemId))
             continue;
-        }
-        else
-        {
-            u32 itemId = 0;
-            while (sPokeMartData.products[itemId] != ITEM_NONE)
-            {
-                // Continue to the next category if the current category is full.
-                if (numItems >= NUM_SHOP_ITEMS_PER_CATEGORIES)
-                {
-                    ShopInventory_SetCategoryNumItems(NUM_SHOP_ITEMS_PER_CATEGORIES, idx);
-                    break;
-                }
 
-                u32 product = sPokeMartData.products[itemId];
+        enum Pocket pocket = GetItemPocket(itemId);
+        enum ShopMenuCategories category = ShopInventory_CanItemBeListed(itemId, pocket);
 
-                // Skip mismatching idx.
-                if (GetItemShopCategory(product) != category)
-                {
-                    itemId++;
-                    continue;
-                }
+        if (category == NUM_SHOP_CATEGORIES)
+            continue;
 
-                bool32 canBuy = TRUE;
-                ShopCriteriaFunc func = GetItemShopCriteriaFunc(product);
-
-                if (func != NULL)
-                {
-                    canBuy = func(product);
-                }
-
-                if (ShopPurchase_IsCategoryOneTimePurchase(category) && CountTotalItemQuantityInBag(product))
-                {
-                    canBuy = FALSE;
-                }
-
-                if (!GetItemPrice(product))
-                {
-                    canBuy = FALSE;
-                }
-
-                if (canBuy)
-                {
-                    ShopInventory_SetItemIdToGrid(product, idx, numItems);
-                    ShopInventory_SetCategoryNumItems(numItems + 1, idx);
-                }
-
-                itemId++;
-            }
-        }
-
-        if (ShopInventory_GetCategoryNumItems(idx) != 0)
-        {
-            gShopMenuDataPtr->categoryList[numCategories] = category;
-            numCategories++, idx++;
-        }
+        ShopInventory_TryAddItemToList(itemId, GetItemShopCategory(itemId), numItems);
     }
 
-    return numCategories;
+    return ShopInventory_ProcessCategoryCounts(numItems);
 }
 
 static void MartPrint_AddTextPrinter(u32 fontId, u32 x, u32 y, u32 speed, const u8 *str)

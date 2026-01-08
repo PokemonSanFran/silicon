@@ -2,8 +2,8 @@
 #define GUARD_UI_SHOP_H
 
 #include "main.h"
-#include "sprite.h"
 #include "constants/ui_shop.h"
+#include "constants/item.h"
 
 extern const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES];
 extern struct ShopMenuData *gShopMenuDataPtr;
@@ -14,6 +14,7 @@ u32 ShopHelper_GetMode(void);
 bool32 ShopHelper_IsProcessingPurchaseMode(void);
 bool32 ShopHelper_IsPurchaseMode(void);
 bool32 ShopHelper_IsPurchaseDone(void);
+u32 ShopGrid_RowInCategory(enum ShopMenuCategories);
 enum ShopMenuCategories ShopGrid_CategoryInRow(u8);
 enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
 void ShopPrint_AddTextPrinter(u32, u32, u32, enum ShopMenuFontColors, const u8 *);
@@ -52,5 +53,10 @@ enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void);
 bool32 ShopInventory_IsItemUsefulInForest(u16);
 bool32 ShopInventory_IsItemUsefulInWater(u16);
 bool32 ShopInventory_IsItemUsefulInCave(u16);
+enum ShopMenuCategories ShopInventory_CanItemBeListed(u32, enum Pocket);
+void ShopInventory_ProcessBuyAgainItems(u8 *);
+void ShopInventory_TryAddItemToList(u32, enum ShopMenuCategories, u8 *);
+u32 ShopInventory_GetCategoryMap(enum ShopMenuCategories);
+u32 ShopInventory_ProcessCategoryCounts(u8 *);
 
 #endif // GUARD_UI_SHOP_H

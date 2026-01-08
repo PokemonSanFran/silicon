@@ -123,9 +123,6 @@ static void ShopPurchase_AddItem(u16, u16);
 static void ShopGrid_SwitchMode(enum ShopMenuModes);
 static void ShopGrid_VerticalInput(s32);
 static void ShopGrid_HorizontalInput(s32);
-enum ShopMenuCategories ShopGrid_CategoryInRow(u8);
-enum ShopMenuCategories ShopGrid_CurrentCategoryRow(void);
-static u32 ShopGrid_RowInCategory(enum ShopMenuCategories category);
 
 static void ShopBlit_Category(enum ShopMenuCategories, u32, u32);
 static inline void ShopBlit_Categories(void);
@@ -1034,6 +1031,95 @@ static void ShopPurchase_CalculateMaxQuantity(void)
         gShopMenuDataPtr->maxItemQuantity = maxItemQuantity;
 }
 
+enum ShopMenuCategories ShopInventory_CanItemBeListed(u32 itemId, enum Pocket pocket)
+{
+    if (pocket == POCKET_KEY_ITEMS)
+        return NUM_SHOP_CATEGORIES;
+
+    ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
+    if (func && !func(itemId))
+        return NUM_SHOP_CATEGORIES;
+
+    enum ShopMenuCategories itemCat = ConvertPocketToCategory(pocket);
+    if (ShopPurchase_IsCategoryOneTimePurchase(itemCat)
+     && CountTotalItemQuantityInBagWithPocket(pocket, itemId))
+    {
+        return NUM_SHOP_CATEGORIES;
+    }
+
+    return itemCat;
+}
+
+void ShopInventory_ProcessBuyAgainItems(u8 *categoryCounts)
+{
+    for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
+    {
+        u32 item = gSaveBlock3Ptr->shopBuyAgainItems[i];
+        if (!item)
+            break;
+
+        u32 risingCategory = ShopInventory_GetCategoryMap(SHOP_CATEGORY_BUY_AGAIN);
+        ShopInventory_SetItemIdToGrid(item, risingCategory, categoryCounts[SHOP_CATEGORY_BUY_AGAIN]);
+        categoryCounts[SHOP_CATEGORY_BUY_AGAIN]++;
+    }
+}
+
+void ShopInventory_TryAddItemToList(u32 itemId, enum ShopMenuCategories category, u8 *numItems)
+{
+    if (numItems[category] >= NUM_SHOP_ITEMS_PER_CATEGORIES)
+        return;
+
+    u32 risingCategory = ShopInventory_GetCategoryMap(category);
+
+    ShopInventory_SetItemIdToGrid(itemId, risingCategory, numItems[category]);
+    numItems[category]++;
+
+    //DebugPrintf("%S is getting set to category 	%d in position 	%d", GetItemName(itemId), risingCategory, numItems[category]);
+}
+
+u32 ShopInventory_GetCategoryMap(enum ShopMenuCategories category)
+{
+    for (u32 listIndex = 0; listIndex < NUM_SHOP_CATEGORIES; listIndex++)
+    {
+        if (gShopMenuDataPtr->categoryList[listIndex] == category)
+            return listIndex;
+    }
+
+    for (u32 listIndex = 0; listIndex < NUM_SHOP_CATEGORIES; listIndex++)
+    {
+        if (gShopMenuDataPtr->categoryList[listIndex] == NUM_SHOP_CATEGORIES)
+        {
+            gShopMenuDataPtr->categoryList[listIndex] = category;
+            return listIndex;
+        }
+    }
+
+    return NUM_SHOP_CATEGORIES;
+}
+
+u32 ShopInventory_ProcessCategoryCounts(u8 *categoryCounts)
+{
+    u32 numCategories = 0;
+
+    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++)
+    {
+        if (categoryCounts[categoryIndex] == 0)
+        {
+            continue;
+        }
+
+        u32 risingCategory = ShopInventory_GetCategoryMap(categoryIndex);
+        ShopInventory_SetCategoryNumItems(categoryCounts[categoryIndex], risingCategory);
+
+        if (ShopInventory_GetCategoryNumItems(risingCategory))
+        {
+            numCategories++;
+        }
+    }
+
+    return numCategories;
+}
+
 bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories category)
 {
     return (category == SHOP_CATEGORY_TMS
@@ -1315,7 +1401,7 @@ bool32 ShopGrid_IsAdditiveDelta(s32 delta)
     return (delta == 1);
 }
 
-static u32 ShopGrid_RowInCategory(enum ShopMenuCategories category)
+u32 ShopGrid_RowInCategory(enum ShopMenuCategories category)
 {
     for (u32 row = 0; row < gShopMenuDataPtr->numCategories; row++)
     {
