@@ -481,7 +481,8 @@ BerryTree_EventScript_EncounterPests::
 	return
 
 BerryTree_Text_APokemonAppeared:
-    .string "You found a wild Pokemon!\p"
+    .string "There is a wild Pokemon eating the\n"
+    .string "{STR_VAR_1}!\p"
     .string "...\p"
     .string "The wild Pokémon attacked!$"
 	//.string "A Pokémon appeared!$"
