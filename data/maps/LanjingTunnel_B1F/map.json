@@ -10,7 +10,7 @@
   "allow_cycling": true,
   "allow_escaping": true,
   "allow_running": true,
-  "show_map_name": true,
+  "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
@@ -100,6 +100,13 @@
       "elevation": 0,
       "dest_map": "MAP_LANJING_TUNNEL",
       "dest_warp_id": "2"
+    },
+    {
+      "x": 13,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_LANJING_TUNNEL_B2F",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
