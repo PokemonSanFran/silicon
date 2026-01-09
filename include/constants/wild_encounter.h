@@ -63,6 +63,7 @@ enum WildPokemonArea {
     WILD_AREA_FISHING,
     WILD_AREA_HIDDEN,
     WILD_AREA_BERRY_TREES, // wildEncounters
+    WILD_AREA_FLY_MONS,   // wildEncounters
     WILD_AREA_PHENOMENON, // phenomenon
 };
 // End fogBattle

@@ -1351,10 +1351,10 @@ bool32 MapHasNoEncounterData(void)
     return (GetCurrentMapWildMonHeaderId() == HEADER_NONE);
 }
 
-u16 GenerateBerryMon(void)
+u16 TryGenerateFlyMon(void)
 {
     u32 header = GetCurrentMapWildMonHeaderId();
     u32 wildMonIndex = ChooseWildMonIndex_Silicon();
-    const struct WildPokemonInfo *wildMonInfo = gWildMonHeaders[header].encounterTypes[GetTimeOfDayForEncounters(header, WILD_AREA_BERRY_TREES)].berryMonsInfo;
+    const struct WildPokemonInfo *wildMonInfo = gWildMonHeaders[header].encounterTypes[GetTimeOfDayForEncounters(header, WILD_AREA_FLY_MONS)].flyMonsInfo;
     return wildMonInfo->wildPokemon[wildMonIndex].species;
 }
