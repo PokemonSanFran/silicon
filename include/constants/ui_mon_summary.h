@@ -138,15 +138,15 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_INFOS_HEADER_EXP_BAR_Y          (44)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y   (51)
 
-#define SUMMARY_INFOS_SUMMARY_X      (TILE_TO_PIXELS(15) + 7)     // type:
-#define SUMMARY_INFOS_SUMMARY_X2     (TILE_TO_PIXELS(15) + 42)    // elec
-#define SUMMARY_INFOS_SUMMARY_X3     (TILE_TO_PIXELS(15) + 85)    // fght
+#define SUMMARY_INFOS_GENERAL_X      (TILE_TO_PIXELS(15) + 7)     // type:
+#define SUMMARY_INFOS_GENERAL_X2     (TILE_TO_PIXELS(15) + 42)    // elec
+#define SUMMARY_INFOS_GENERAL_X3     (TILE_TO_PIXELS(15) + 85)    // fght
 
-#define SUMMARY_INFOS_SUMMARY_Y      (TILE_TO_PIXELS( 4) + 1)     // type:
-#define SUMMARY_INFOS_SUMMARY_Y2     (TILE_TO_PIXELS( 4) + 17)    // ot:
-#define SUMMARY_INFOS_SUMMARY_Y3     (TILE_TO_PIXELS( 4) + 33)    // id:
-#define SUMMARY_INFOS_SUMMARY_Y4     (TILE_TO_PIXELS( 4) + 49)    // exp:
-#define SUMMARY_INFOS_SUMMARY_Y5     (TILE_TO_PIXELS( 4) + 65)    // <nature> <fav flavor>
+#define SUMMARY_INFOS_GENERAL_Y      (TILE_TO_PIXELS( 4) + 1)     // type:
+#define SUMMARY_INFOS_GENERAL_Y2     (TILE_TO_PIXELS( 4) + 17)    // ot:
+#define SUMMARY_INFOS_GENERAL_Y3     (TILE_TO_PIXELS( 4) + 33)    // id:
+#define SUMMARY_INFOS_GENERAL_Y4     (TILE_TO_PIXELS( 4) + 49)    // exp:
+#define SUMMARY_INFOS_GENERAL_Y5     (TILE_TO_PIXELS( 4) + 65)    // <nature> <fav flavor>
 
 #define SUMMARY_INFOS_MISC_MON_MARKINGS_X   (55)
 #define SUMMARY_INFOS_MISC_ITEM_NAME_X      (32)

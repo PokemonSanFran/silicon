@@ -1324,20 +1324,20 @@ static void InfosPageGeneral_PrintMonTyping(struct MonSummary *mon)
     u32 fontId = FONT_OUTLINED;
 
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y,
+        SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y,
         SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Type:"));
 
     u32 species = mon->species;
     enum Type types[2] = { GetSpeciesType(species, 0), GetSpeciesType(species, 1) };
 
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y,
+        SUMMARY_INFOS_GENERAL_X2, SUMMARY_INFOS_GENERAL_Y,
         SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[0]].shortName);
 
     if (types[1] != types[0])
     {
         SummaryPrint_AddText(windowId, fontId,
-            SUMMARY_INFOS_SUMMARY_X3, SUMMARY_INFOS_SUMMARY_Y,
+            SUMMARY_INFOS_GENERAL_X3, SUMMARY_INFOS_GENERAL_Y,
             SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[1]].shortName);
     }
 }
@@ -1349,19 +1349,19 @@ static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *mon)
 
     // OT: <trainer name>
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y2,
+        SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y2,
         SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("OT:"));
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y2,
+        SUMMARY_INFOS_GENERAL_X2, SUMMARY_INFOS_GENERAL_Y2,
         SUMMARY_FNTCLR_INTERFACE, mon->trainerName);
 
     // ID: <numbers>
     ConvertIntToDecimalStringN(gStringVar1, (u16)mon->trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y3,
+        SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y3,
         SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("ID:"));
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y3,
+        SUMMARY_INFOS_GENERAL_X2, SUMMARY_INFOS_GENERAL_Y3,
         SUMMARY_FNTCLR_INTERFACE, gStringVar1);
 }
 
@@ -1372,7 +1372,7 @@ static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *mon)
 
     // EXP: <numbers> to Lv <next level>
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y4,
+        SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y4,
         SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("EXP:"));
 
     u32 species = mon->species;
@@ -1390,7 +1390,7 @@ static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *mon)
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} to {LV} {STR_VAR_2}"));
 
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X2, SUMMARY_INFOS_SUMMARY_Y4,
+        SUMMARY_INFOS_GENERAL_X2, SUMMARY_INFOS_GENERAL_Y4,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
@@ -1419,7 +1419,7 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
     fontId = GetOutlineFontIdToFit(gStringVar4, winWidth);
 
     SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_SUMMARY_X, SUMMARY_INFOS_SUMMARY_Y5,
+        SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y5,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
