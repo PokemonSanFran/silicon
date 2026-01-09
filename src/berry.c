@@ -2274,7 +2274,7 @@ bool8 ObjectEventInteractionBerryHasWeed(void)
     return gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].weeds;
 }
 
-bool8 ObjectEventInteractionBerryasPests(void)
+bool8 ObjectEventInteractionBerryHasPests(void)
 {
     // Start wildEncounters
     /*

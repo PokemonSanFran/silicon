@@ -482,6 +482,14 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
             wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].phenomenonMonsInfo;
             break;
             // End phenomenon
+            // Start wildEncounters
+        case WILD_AREA_BERRY_TREES:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].berryMonsInfo;
+            break;
+        case WILD_AREA_FLY_MONS:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
+            break;
+            // End wildEncounters
         }
     }
 
