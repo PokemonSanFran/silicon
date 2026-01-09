@@ -33,7 +33,8 @@ enum MonSummarySetupSteps
 
 enum MonSummaryBackgrounds
 {
-    SUMMARY_BG_TEXT,
+    SUMMARY_BG_TEXT,        // universal
+    SUMMARY_BG_PAGE_TEXT,   // page-only
 
     // switch between pages on each horizontal dpad presses.
     // there is no animation atm but it is meant to futureproof.
@@ -51,15 +52,13 @@ enum __attribute__((packed)) MonSummaryPageSlots
     NUM_SUMMARY_PAGE_SLOTS
 };
 
-#define TOTAL_SUMMARY_DYNAMIC_WINDOWS 5
-#define SUMMARY_DYNAMIC_WIN_DUMMY { .id = WINDOW_NONE }
-
 // appears regardless of which page
 enum __attribute__((packed)) MonSummaryMainWindows
 {
     SUMMARY_MAIN_WIN_HEADER,    // refers to the page's name and tab blit
     SUMMARY_MAIN_WIN_TEXT_BOX,  // refers to text descriptions of certain fields e.g. ability, held item, etc
     SUMMARY_MAIN_WIN_HELP_BAR,  // refers to control scheme of specific page/mode
+    SUMMARY_MAIN_WIN_PAGE_TEXT,
 
     NUM_SUMMARY_MAIN_WINDOWS,
     // the rest is dynamic
@@ -111,15 +110,6 @@ enum MonSummaryHpBarColors
 #define sTileTag        data[0]
 #define sPaletteTag     data[1]
 
-enum __attribute__((packed)) MonSummaryInfosWindows
-{
-    SUMMARY_INFOS_WIN_HEADER,    // typically contains nick/species name, gender, level, and status ailment/pokerus
-    SUMMARY_INFOS_WIN_GENERAL,   // typically contains typing, trainer info, exp, and nature/fav berry flavor
-    SUMMARY_INFOS_WIN_MISC,      // typically contains held item, ability, and markings
-
-    NUM_SUMMARY_INFOS_WINDOWS
-};
-
 enum __attribute__((packed)) MonSummaryInfosSprites
 {
     SUMMARY_INFOS_SPRITE_HELD_ITEM,
@@ -130,10 +120,10 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 };
 
 // starting positions
-#define SUMMARY_INFOS_HEADER_NAME_X             (2)
-#define SUMMARY_INFOS_HEADER_GENDER_X           (65)
+#define SUMMARY_INFOS_HEADER_NAME_X             (TILE_TO_PIXELS(8) + 2)
+#define SUMMARY_INFOS_HEADER_GENDER_X           (TILE_TO_PIXELS(8) + 65)
 #define SUMMARY_INFOS_HEADER_LEVEL_X            SUMMARY_INFOS_HEADER_NAME_X
-#define SUMMARY_INFOS_HEADER_STATUS_X           (42)
+#define SUMMARY_INFOS_HEADER_STATUS_X           (TILE_TO_PIXELS(8) + 42)
 #define SUMMARY_INFOS_HEADER_SHINY_X            (92 + 8)
 #define SUMMARY_INFOS_HEADER_HP_BAR_X           (66 + 32)
 #define SUMMARY_INFOS_HEADER_EXP_BAR_X          (67)
@@ -148,15 +138,15 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_INFOS_HEADER_EXP_BAR_Y          (44)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y   (51)
 
-#define SUMMARY_INFOS_SUMMARY_X      (7)     // type:
-#define SUMMARY_INFOS_SUMMARY_X2     (42)    // elec
-#define SUMMARY_INFOS_SUMMARY_X3     (85)    // fght
+#define SUMMARY_INFOS_SUMMARY_X      (TILE_TO_PIXELS(15) + 7)     // type:
+#define SUMMARY_INFOS_SUMMARY_X2     (TILE_TO_PIXELS(15) + 42)    // elec
+#define SUMMARY_INFOS_SUMMARY_X3     (TILE_TO_PIXELS(15) + 85)    // fght
 
-#define SUMMARY_INFOS_SUMMARY_Y      (1)     // type:
-#define SUMMARY_INFOS_SUMMARY_Y2     (17)    // ot:
-#define SUMMARY_INFOS_SUMMARY_Y3     (33)    // id:
-#define SUMMARY_INFOS_SUMMARY_Y4     (49)    // exp:
-#define SUMMARY_INFOS_SUMMARY_Y5     (65)    // <nature> <fav flavor>
+#define SUMMARY_INFOS_SUMMARY_Y      (TILE_TO_PIXELS( 4) + 1)     // type:
+#define SUMMARY_INFOS_SUMMARY_Y2     (TILE_TO_PIXELS( 4) + 17)    // ot:
+#define SUMMARY_INFOS_SUMMARY_Y3     (TILE_TO_PIXELS( 4) + 33)    // id:
+#define SUMMARY_INFOS_SUMMARY_Y4     (TILE_TO_PIXELS( 4) + 49)    // exp:
+#define SUMMARY_INFOS_SUMMARY_Y5     (TILE_TO_PIXELS( 4) + 65)    // <nature> <fav flavor>
 
 #define SUMMARY_INFOS_MISC_MON_MARKINGS_X   (55)
 #define SUMMARY_INFOS_MISC_ITEM_NAME_X      (32)
@@ -165,30 +155,12 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_INFOS_MISC_HELD_ITEM_X      (1 + 16)
 #define SUMMARY_INFOS_MISC_POKE_BALL_X      (32 + 8)
 
-#define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (0)
-#define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (7)
-#define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (23)
+#define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (TILE_TO_PIXELS(9) + 0)
+#define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (TILE_TO_PIXELS(9) + 7)
+#define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (TILE_TO_PIXELS(9) + 23)
 #define SUMMARY_INFOS_MISC_TEXT_BOX_Y       (1)
 #define SUMMARY_INFOS_MISC_HELD_ITEM_Y      (67 + 16)
 #define SUMMARY_INFOS_MISC_POKE_BALL_Y      (64 + 8)
-
-enum __attribute__((packed)) MonSummaryStatsWindows
-{
-    SUMMARY_STATS_WIN_TEST,
-
-    NUM_SUMMARY_STATS_WINDOWS
-};
-
-enum __attribute__((packed)) MonSummaryMovesWindows
-{
-    SUMMARY_MOVES_WIN_TEST,
-
-    NUM_SUMMARY_MOVES_WINDOWS
-};
-
-STATIC_ASSERT(NUM_SUMMARY_INFOS_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, InfoPageDynamicWindowExceedsMaxNumber);
-STATIC_ASSERT(NUM_SUMMARY_STATS_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, StatPageDynamicWindowExceedsMaxNumber);
-STATIC_ASSERT(NUM_SUMMARY_MOVES_WINDOWS < TOTAL_SUMMARY_DYNAMIC_WINDOWS, MovePageDynamicWindowExceedsMaxNumber);
 
 STATIC_ASSERT(NUM_SUMMARY_INFOS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, InfoPageDynamicSpriteExceedsMaxNumber);
 //STATIC_ASSERT(NUM_SUMMARY_STATS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, StatPageDynamicSpriteExceedsMaxNumber);
@@ -282,7 +254,6 @@ struct MonSummaryResources
 {
     MainCallback savedCallback;
     u8 *tilemapBufs[NUM_SUMMARY_PAGE_SLOTS];
-    u8 windowIds[TOTAL_SUMMARY_DYNAMIC_WINDOWS];
     u8 spriteIds[NUM_SUMMARY_MAIN_SPRITES + TOTAL_SUMMARY_DYNAMIC_SPRITES];
 
     bool32 pageSlot:1; // only referred for tilemapBufs shenanigans
@@ -330,7 +301,6 @@ struct MonSummarySprite
 struct MonSummaryPageInfo
 {
     const u8 *name;
-    struct MonSummaryDynamicWindow windows[TOTAL_SUMMARY_DYNAMIC_WINDOWS];
     const u32 *tilemap;
     struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     struct UCoords8 textBoxCoords;

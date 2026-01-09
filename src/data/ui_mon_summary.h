@@ -7,6 +7,12 @@ static const struct BgTemplate sSummarySetup_BgTemplates[NUM_SUMMARY_BACKGROUNDS
         .priority = 0
     },
     {
+        .bg = SUMMARY_BG_PAGE_TEXT,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 25,
+        .priority = 0
+    },
+    {
         .bg = SUMMARY_BG_PAGE_1,
         .charBaseIndex = 2,
         .mapBaseIndex = 28,
@@ -49,6 +55,15 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WI
         .tilemapTop = 18,
         .width = DISPLAY_TILE_WIDTH,
         .height = 2,
+    },
+
+    [SUMMARY_MAIN_WIN_PAGE_TEXT] =
+    {
+        .bg = SUMMARY_BG_PAGE_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = DISPLAY_TILE_WIDTH,
+        .height = DISPLAY_TILE_HEIGHT,
     },
 
     // SUMMARY_MAIN_WIN_DYNAMIC uses AddWindow
@@ -155,25 +170,6 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     [SUMMARY_PAGE_INFOS] =
     {
         .name = COMPOUND_STRING("Info"),
-        .windows =
-        {
-            {
-                .id = SUMMARY_INFOS_WIN_HEADER,
-                .left = 8, .top = 0,
-                .width = 9, .height = 4
-            },
-            {
-                .id = SUMMARY_INFOS_WIN_GENERAL,
-                .left = 15, .top = 4,
-                .width = 15, .height = 10
-            },
-            {
-                .id = SUMMARY_INFOS_WIN_MISC,
-                .left = 0, .top = 9,
-                .width = 13, .height = 5
-            },
-            SUMMARY_DYNAMIC_WIN_DUMMY
-        },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
         .mainSpriteCoords =
         {
@@ -191,19 +187,11 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     [SUMMARY_PAGE_STATS] =
     {
         .name = COMPOUND_STRING("Stats"),
-        .windows =
-        {
-            SUMMARY_DYNAMIC_WIN_DUMMY
-        },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
     },
     [SUMMARY_PAGE_MOVES] =
     {
         .name = COMPOUND_STRING("Moves"),
-        .windows =
-        {
-            SUMMARY_DYNAMIC_WIN_DUMMY
-        },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),
     },
 };
