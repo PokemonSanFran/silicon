@@ -114,15 +114,15 @@ static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, 
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
 static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
-static void SummaryPrint_BlitStatusSymbol(u32, u32, u32);
+static void SummaryPrint_BlitStatusSymbol(u32, u32);
 static UNUSED void SummaryPrint_BlitMonMarkings(u32, u32, u32);
 static void SummaryPrint_TextBox(void);
 static void SummaryPrint_HelpBar(void);
-static void SummaryPrint_MonName(u32, u32, u32, u32);
-static void SummaryPrint_MonGender(u32, u32, u32);
-static void SummaryPrint_MonLevel(u32, u32, u32);
-static void SummaryPrint_MonHeldItem(u32, u32, u32, u32);
-static void SummaryPrint_MonAbility(u32, u32, u32, u32);
+static void SummaryPrint_MonName(u32, u32, u32);
+static void SummaryPrint_MonGender(u32, u32);
+static void SummaryPrint_MonLevel(u32, u32);
+static void SummaryPrint_MonHeldItem(u32, u32, u32);
+static void SummaryPrint_MonAbility(u32, u32, u32);
 
 static void DummyPage_Handle(void);
 
@@ -1153,13 +1153,18 @@ static void SummaryPrint_BlitPageTabs(u32 windowId, u32 x, u32 y)
     }
 }
 
-static void SummaryPrint_BlitStatusSymbol(u32 windowId, u32 x, u32 y)
+static void SummaryPrint_BlitStatusSymbol(u32 x, u32 y)
 {
     u32 ailment = SummaryMon_GetStruct()->ailment;
     if (ailment == AILMENT_NONE) return;
     ailment--;
 
-    BlitBitmapRectToWindow(windowId, sSummaryPrint_StatusSymbolsBlit, 0, ailment * 8, 24, 64, x, y, 24, 8);
+    BlitBitmapRectToWindow(SUMMARY_MAIN_WIN_PAGE_TEXT,
+        sSummaryPrint_StatusSymbolsBlit,
+        0, ailment * 8,
+        24, 64,
+        x, y,
+        24, 8);
 }
 
 static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
@@ -1190,17 +1195,17 @@ static void SummaryPrint_HelpBar(void)
     CopyWindowToVram(SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
 }
 
-static void SummaryPrint_MonName(u32 windowId, u32 x, u32 y, u32 maxWidth)
+static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)
 {
     // TODO blink
     struct MonSummary *mon = SummaryMon_GetStruct();
     const u8 *str = mon->nickname;
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
 
-    SummaryPrint_AddText(windowId, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
 }
 
-static void SummaryPrint_MonGender(u32 windowId, u32 x, u32 y)
+static void SummaryPrint_MonGender(u32 x, u32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 species = mon->species2, gender = mon->gender;
@@ -1215,20 +1220,20 @@ static void SummaryPrint_MonGender(u32 windowId, u32 x, u32 y)
     enum MonSummaryFontColors color = SUMMARY_FNTCLR_MALE + femaleMon;
     const u8 *str = femaleMon ? gText_FemaleSymbol : gText_MaleSymbol;
 
-    SummaryPrint_AddText(windowId, FONT_OUTLINED, x, y, color, str);
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED, x, y, color, str);
 }
 
-static void SummaryPrint_MonLevel(u32 windowId, u32 x, u32 y)
+static void SummaryPrint_MonLevel(u32 x, u32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
 
     ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
 
-    SummaryPrint_AddText(windowId, FONT_OUTLINED, x, y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED, x, y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
-static void SummaryPrint_MonHeldItem(u32 windowId, u32 x, u32 y, u32 maxWidth)
+static void SummaryPrint_MonHeldItem(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 itemId = mon->item;
@@ -1238,19 +1243,19 @@ static void SummaryPrint_MonHeldItem(u32 windowId, u32 x, u32 y, u32 maxWidth)
     const u8 *str = GetItemName(itemId);
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
 
-    SummaryPrint_AddText(windowId, fontId,
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId,
         SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y,
         SUMMARY_FNTCLR_INTERFACE, str);
 }
 
-static void SummaryPrint_MonAbility(u32 windowId, u32 x, u32 y, u32 maxWidth)
+static void SummaryPrint_MonAbility(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     enum Ability ability = GetSpeciesAbility(mon->species, mon->abilityNum);
     const u8 *str = GetAbilityName(ability);
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
 
-    SummaryPrint_AddText(windowId, fontId,
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId,
         SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
         SUMMARY_FNTCLR_INTERFACE, str);
 }
@@ -1293,19 +1298,10 @@ static void InfosPage_HandleHelpBar(void)
 
 static void InfosPage_HandleHeader(void)
 {
-    u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
-    u32 winWidth = TILE_TO_PIXELS(8) - 2; // 62
-
-    SummaryPrint_MonName(windowId,
-        SUMMARY_INFOS_HEADER_NAME_X, SUMMARY_INFOS_HEADER_NAME_Y, winWidth);
-
-    SummaryPrint_MonGender(windowId, SUMMARY_INFOS_HEADER_GENDER_X, SUMMARY_INFOS_HEADER_GENDER_Y);
-
-    SummaryPrint_MonLevel(windowId,
-        SUMMARY_INFOS_HEADER_LEVEL_X, SUMMARY_INFOS_HEADER_LEVEL_Y);
-
-    SummaryPrint_BlitStatusSymbol(windowId,
-        SUMMARY_INFOS_HEADER_STATUS_X, SUMMARY_INFOS_HEADER_STATUS_Y);
+    SummaryPrint_MonName(SUMMARY_INFOS_HEADER_NAME_X, SUMMARY_INFOS_HEADER_NAME_Y, TILE_TO_PIXELS(8) - 2);
+    SummaryPrint_MonGender(SUMMARY_INFOS_HEADER_GENDER_X, SUMMARY_INFOS_HEADER_GENDER_Y);
+    SummaryPrint_MonLevel(SUMMARY_INFOS_HEADER_LEVEL_X, SUMMARY_INFOS_HEADER_LEVEL_Y);
+    SummaryPrint_BlitStatusSymbol(SUMMARY_INFOS_HEADER_STATUS_X, SUMMARY_INFOS_HEADER_STATUS_Y);
 }
 
 static void InfosPage_HandleGeneral(void)
@@ -1425,17 +1421,10 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
 
 static void InfosPage_HandleMisc(void)
 {
-    u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
-
     // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
 
-    SummaryPrint_MonHeldItem(windowId,
-        SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y,
-        TILE_TO_PIXELS(8));
-
-    SummaryPrint_MonAbility(windowId,
-        SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
-        TILE_TO_PIXELS(10));
+    SummaryPrint_MonHeldItem(SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y, TILE_TO_PIXELS(8));
+    SummaryPrint_MonAbility(SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y, TILE_TO_PIXELS(10));
 
     SummarySprite_MonHeldItem(SUMMARY_INFOS_SPRITE_HELD_ITEM,
         SUMMARY_INFOS_MISC_HELD_ITEM_X, SUMMARY_INFOS_MISC_HELD_ITEM_Y);
