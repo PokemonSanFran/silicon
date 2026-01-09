@@ -110,6 +110,8 @@ static void SummarySprite_CreateMonSprite(void);
 static void SummarySprite_InjectPokemon(void);
 static u32 SummarySprite_GetPokemonPaletteSlot(void);
 static void SummarySprite_PlayPokemonCry(void);
+static void SummarySprite_MonHeldItem(u32, s32, s32);
+static void SummarySprite_MonPokeBall(u32, s32, s32);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
@@ -124,6 +126,11 @@ static void SummaryPrint_BlitStatusSymbol(u32, u32, u32);
 static UNUSED void SummaryPrint_BlitMonMarkings(u32, u32, u32);
 static void SummaryPrint_TextBox(void);
 static void SummaryPrint_HelpBar(void);
+static void SummaryPrint_MonName(u32, u32, u32, u32);
+static void SummaryPrint_MonGender(u32, u32, u32);
+static void SummaryPrint_MonLevel(u32, u32, u32);
+static void SummaryPrint_MonHeldItem(u32, u32, u32, u32);
+static void SummaryPrint_MonAbility(u32, u32, u32, u32);
 
 static void DummyPage_Handle(void);
 
@@ -131,20 +138,12 @@ static void InfosPage_HandleFrontEnd(void);
 static void InfosPage_HandleTextBox(void);
 static void InfosPage_HandleHelpBar(void);
 static void InfosPage_HandleHeader(void);
-static void InfosPageHeader_PrintMonNameGender(struct MonSummary *);
-static void InfosPageHeader_PrintLevel(struct MonSummary *);
-static void InfosPageHeader_BlitStatusSymbol(struct MonSummary *);
 static void InfosPage_HandleGeneral(void);
 static void InfosPageGeneral_PrintMonTyping(struct MonSummary *);
 static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *);
 static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *);
 static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *);
 static void InfosPage_HandleMisc(void);
-static void InfosPageMisc_BlitMonMarkings(struct MonSummary *);
-static void InfosPageMisc_PrintItemName(struct MonSummary *);
-static void InfosPageMisc_PrintAbilityName(struct MonSummary *);
-static void InfosPageMisc_ShowHeldItem(struct MonSummary *);
-static void InfosPageMisc_ShowPokeBall(struct MonSummary *);
 
 // const data
 #include "data/ui_mon_summary.h"
@@ -926,7 +925,6 @@ static void SummaryPage_LoadTilemap(void)
 static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 {
     SummaryPage_TogglePageSlot();
-    FillBgTilemapBufferRect_Palette0(SUMMARY_BG_TEXT, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
 
     switch (mode)
     {
@@ -1157,6 +1155,39 @@ static void SummarySprite_PlayPokemonCry(void)
     PlayCry_ByMode(mon->species2, 0, cryMode);
 }
 
+static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 itemId = mon->item, spriteId;
+
+    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
+
+    spriteId = AddItemIconSprite(TAG_SUMMARY_HELD_ITEM, TAG_SUMMARY_HELD_ITEM, itemId);
+
+    gSprites[spriteId].x = x;
+    gSprites[spriteId].y = y;
+    gSprites[spriteId].sTileTag = TAG_SUMMARY_HELD_ITEM;
+    gSprites[spriteId].sPaletteTag = TAG_SUMMARY_HELD_ITEM;
+
+    SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+}
+
+static void SummarySprite_MonPokeBall(u32 spriteArrId, s32 x, s32 y)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    enum PokeBall ball = mon->ball;
+
+    LoadBallGfx(ball);
+    u32 spriteId = CreateSprite(&gBallSpriteTemplates[ball], x, y, 0);
+
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].sTileTag = gBallSpriteTemplates[ball].tileTag;
+    gSprites[spriteId].sPaletteTag = gBallSpriteTemplates[ball].paletteTag;
+
+    SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+}
+
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
 {
     sprite->invisible = SummaryMon_GetStruct()->isShiny ^ 1;
@@ -1257,11 +1288,7 @@ static void SummaryPrint_BlitStatusSymbol(u32 windowId, u32 x, u32 y)
 
 static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
 {
-    BlitBitmapRectToWindow(windowId, sSummaryPrint_MonMarkingsBlit,
-        0, SummaryMon_GetStruct()->markings * 8,
-        48, 128,
-        x, y,
-        48, 8);
+
 }
 
 static void SummaryPrint_TextBox(void)
@@ -1285,6 +1312,73 @@ static void SummaryPrint_HelpBar(void)
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_HELP_BAR, FONT_SMALL, 10, 1, SUMMARY_FNTCLR_HELP_BAR, gStringVar4);
     CopyWindowToVram(SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
+}
+
+static void SummaryPrint_MonName(u32 windowId, u32 x, u32 y, u32 maxWidth)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 fontId = FONT_OUTLINED;
+
+    // TODO blink
+    const u8 *str = mon->nickname;
+    fontId = GetOutlineFontIdToFit(str, maxWidth);
+
+    SummaryPrint_AddText(windowId, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
+}
+
+static void SummaryPrint_MonGender(u32 windowId, u32 x, u32 y)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 species = mon->species2, gender = mon->gender;
+
+    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
+     || gender == MON_GENDERLESS)
+    {
+        return;
+    }
+
+    u32 femaleMon = gender == MON_FEMALE;
+    enum MonSummaryFontColors color = SUMMARY_FNTCLR_MALE + femaleMon;
+    const u8 *str = femaleMon ? gText_FemaleSymbol : gText_MaleSymbol;
+
+    SummaryPrint_AddText(windowId, FONT_OUTLINED, x, y, color, str);
+}
+
+static void SummaryPrint_MonLevel(u32 windowId, u32 x, u32 y)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+
+    ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
+
+    SummaryPrint_AddText(windowId, FONT_OUTLINED, x, y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+}
+
+static void SummaryPrint_MonHeldItem(u32 windowId, u32 x, u32 y, u32 maxWidth)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 itemId = mon->item;
+
+    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
+
+    const u8 *str = GetItemName(itemId);
+    u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
+
+    SummaryPrint_AddText(windowId, fontId,
+        SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y,
+        SUMMARY_FNTCLR_INTERFACE, str);
+}
+
+static void SummaryPrint_MonAbility(u32 windowId, u32 x, u32 y, u32 maxWidth)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    enum Ability ability = GetSpeciesAbility(mon->species, mon->abilityNum);
+    const u8 *str = GetAbilityName(ability);
+    u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
+
+    SummaryPrint_AddText(windowId, fontId,
+        SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
+        SUMMARY_FNTCLR_INTERFACE, str);
 }
 
 static void DummyPage_Handle(void)
@@ -1322,62 +1416,21 @@ static void InfosPage_HandleHelpBar(void)
 
 static void InfosPage_HandleHeader(void)
 {
-    struct MonSummary *mon = SummaryMon_GetStruct();
-
-    InfosPageHeader_PrintMonNameGender(mon);
-    InfosPageHeader_PrintLevel(mon);
-    InfosPageHeader_BlitStatusSymbol(mon);
-
-    CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER), COPYWIN_GFX);
-}
-
-static void InfosPageHeader_PrintMonNameGender(struct MonSummary *mon)
-{
     u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER);
-    u32 fontId = FONT_OUTLINED;
-    u32 x = SUMMARY_INFOS_HEADER_X, x2 = SUMMARY_INFOS_HEADER_GENDER_X;
-    u32 winWidth = WindowWidthPx(windowId);
+    u32 winWidth = TILE_TO_PIXELS(8) - 2; // 62
 
-    // <name>
-    const u8 *str = mon->nickname;
-    fontId = GetOutlineFontIdToFit(str, (winWidth - x) + (winWidth - x2));
+    SummaryPrint_MonName(windowId,
+        SUMMARY_INFOS_HEADER_NAME_X, SUMMARY_INFOS_HEADER_NAME_Y, winWidth);
 
-    SummaryPrint_AddText(windowId, fontId, x, SUMMARY_INFOS_HEADER_Y, SUMMARY_FNTCLR_INTERFACE, str);
+    SummaryPrint_MonGender(windowId, SUMMARY_INFOS_HEADER_GENDER_X, SUMMARY_INFOS_HEADER_GENDER_Y);
 
-    // <gender> (if necessary)
-    u32 species = mon->species2, gender = mon->gender;
-    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
-     || gender == MON_GENDERLESS)
-    {
-        return;
-    }
+    SummaryPrint_MonLevel(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER),
+        SUMMARY_INFOS_HEADER_LEVEL_X, SUMMARY_INFOS_HEADER_LEVEL_Y);
 
-    u32 femaleMon = gender == MON_FEMALE;
-    enum MonSummaryFontColors color = SUMMARY_FNTCLR_MALE + femaleMon;
-
-    fontId = FONT_OUTLINED;
-    str = femaleMon ? gText_FemaleSymbol : gText_MaleSymbol;
-
-    SummaryPrint_AddText(windowId, fontId, x2, SUMMARY_INFOS_HEADER_Y, color, str);
-}
-
-static void InfosPageHeader_PrintLevel(struct MonSummary *mon)
-{
-    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER);
-    u32 fontId = FONT_OUTLINED;
-
-    ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
-
-    SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_HEADER_X, SUMMARY_INFOS_HEADER_Y2,
-        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
-}
-
-static void InfosPageHeader_BlitStatusSymbol(struct MonSummary *mon)
-{
     SummaryPrint_BlitStatusSymbol(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER),
         SUMMARY_INFOS_HEADER_STATUS_X, SUMMARY_INFOS_HEADER_STATUS_Y);
+
+    CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_HEADER), COPYWIN_GFX);
 }
 
 static void InfosPage_HandleGeneral(void)
@@ -1503,79 +1556,23 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
 
 static void InfosPage_HandleMisc(void)
 {
-    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC);
 
-    InfosPageMisc_BlitMonMarkings(mon);
-    InfosPageMisc_PrintItemName(mon);
-    InfosPageMisc_PrintAbilityName(mon);
-    InfosPageMisc_ShowHeldItem(mon);
-    InfosPageMisc_ShowPokeBall(mon);
+    // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
+
+    SummaryPrint_MonHeldItem(windowId,
+        SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y,
+        TILE_TO_PIXELS(8));
+
+    SummaryPrint_MonAbility(windowId,
+        SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
+        TILE_TO_PIXELS(10));
+
+    SummarySprite_MonHeldItem(SUMMARY_INFOS_SPRITE_HELD_ITEM,
+        SUMMARY_INFOS_MISC_HELD_ITEM_X, SUMMARY_INFOS_MISC_HELD_ITEM_Y);
+
+    SummarySprite_MonPokeBall(SUMMARY_INFOS_SPRITE_POKE_BALL,
+        SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y);
 
     CopyWindowToVram(SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC), COPYWIN_GFX);
-}
-
-static void InfosPageMisc_BlitMonMarkings(struct MonSummary *mon)
-{
-    // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
-}
-
-static void InfosPageMisc_PrintItemName(struct MonSummary *mon)
-{
-    u32 itemId = mon->item;
-    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
-
-    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC);
-    u32 fontId = FONT_OUTLINED;
-
-    SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y,
-        SUMMARY_FNTCLR_INTERFACE, GetItemName(itemId));
-}
-
-static void InfosPageMisc_PrintAbilityName(struct MonSummary *mon)
-{
-    u32 abilityNum = mon->abilityNum;
-    enum Ability ability = GetSpeciesAbility(mon->species, abilityNum);
-
-    u32 windowId = SummaryPage_GetWindowId(SUMMARY_INFOS_WIN_MISC);
-    u32 fontId = FONT_OUTLINED;
-
-    SummaryPrint_AddText(windowId, fontId,
-        SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
-        SUMMARY_FNTCLR_INTERFACE, GetAbilityName(ability));
-}
-
-static void InfosPageMisc_ShowHeldItem(struct MonSummary *mon)
-{
-    u32 itemId = mon->item, spriteId;
-
-    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
-
-    spriteId = AddItemIconSprite(TAG_SUMMARY_HELD_ITEM, TAG_SUMMARY_HELD_ITEM, itemId);
-
-    gSprites[spriteId].x = SUMMARY_INFOS_MISC_HELD_ITEM_X;
-    gSprites[spriteId].y = SUMMARY_INFOS_MISC_HELD_ITEM_Y;
-    gSprites[spriteId].sTileTag = TAG_SUMMARY_HELD_ITEM;
-    gSprites[spriteId].sPaletteTag = TAG_SUMMARY_HELD_ITEM;
-
-    SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_HELD_ITEM, spriteId);
-}
-
-static void InfosPageMisc_ShowPokeBall(struct MonSummary *mon)
-{
-    u32 spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_INFOS_SPRITE_POKE_BALL);
-
-    enum PokeBall ball = mon->ball;
-
-    LoadBallGfx(ball);
-
-    spriteId = CreateSprite(&gBallSpriteTemplates[ball],
-        SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y, 0);
-
-    gSprites[spriteId].callback = SpriteCallbackDummy;
-    gSprites[spriteId].oam.priority = 0;
-    gSprites[spriteId].sTileTag = gBallSpriteTemplates[ball].tileTag;
-    gSprites[spriteId].sPaletteTag = gBallSpriteTemplates[ball].paletteTag;
-
-    SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_POKE_BALL, spriteId);
 }

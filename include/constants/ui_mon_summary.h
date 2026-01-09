@@ -130,18 +130,20 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 };
 
 // starting positions
-#define SUMMARY_INFOS_HEADER_X                  (2)     // <name> / Lv<level>
-#define SUMMARY_INFOS_HEADER_GENDER_X           (65)    // <gender>
-#define SUMMARY_INFOS_HEADER_SHINY_X            (92 + 8)
+#define SUMMARY_INFOS_HEADER_NAME_X             (2)
+#define SUMMARY_INFOS_HEADER_GENDER_X           (65)
+#define SUMMARY_INFOS_HEADER_LEVEL_X            SUMMARY_INFOS_HEADER_NAME_X
 #define SUMMARY_INFOS_HEADER_STATUS_X           (42)
+#define SUMMARY_INFOS_HEADER_SHINY_X            (92 + 8)
 #define SUMMARY_INFOS_HEADER_HP_BAR_X           (66 + 32)
 #define SUMMARY_INFOS_HEADER_EXP_BAR_X          (67)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X   (79)
 
-#define SUMMARY_INFOS_HEADER_Y                  (1)     // <name> <gender>
-#define SUMMARY_INFOS_HEADER_Y2                 (14)    // Lv<level>
-#define SUMMARY_INFOS_HEADER_SHINY_Y            (18 + 8)
+#define SUMMARY_INFOS_HEADER_NAME_Y             (1)
+#define SUMMARY_INFOS_HEADER_GENDER_Y           SUMMARY_INFOS_HEADER_NAME_Y
+#define SUMMARY_INFOS_HEADER_LEVEL_Y            (14)
 #define SUMMARY_INFOS_HEADER_STATUS_Y           (19)
+#define SUMMARY_INFOS_HEADER_SHINY_Y            (18 + 8)
 #define SUMMARY_INFOS_HEADER_HP_BAR_Y           (28 + 16)
 #define SUMMARY_INFOS_HEADER_EXP_BAR_Y          (44)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y   (51)
