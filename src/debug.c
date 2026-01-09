@@ -4028,6 +4028,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_ROUTE4_ROUTE2_NIGHT) \
     X(MUS_CHASILLA_NIGHT) \
     X(MUS_LEATHER_DADDY) \
+    X(MUS_PERLACIA_GYM) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
