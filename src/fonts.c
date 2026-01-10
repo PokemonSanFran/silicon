@@ -607,6 +607,7 @@ ALIGNED(4) const u8 gFontOutlinedLatinGlyphWidths[] = {
     [CHAR_NEWLINE] = 3,
     [EOS] = 3,
     [CHAR_EXTRA_SYMBOL_START | CHAR_EMOJI_HEART] = 10,
+    [CHAR_EXTRA_SYMBOL_START | CHAR_BIG_MULT_X] = 9,
     /*
     [CHAR_UP_ARROW_2] = 12,
     [CHAR_LV_2] = 10,
@@ -682,7 +683,6 @@ ALIGNED(4) const u8 gFontOutlinedLatinGlyphWidths[] = {
     [ROUND_RIGHT_PAREN] = 10,
     [CIRCLE_DOT] = 10,
     [TRIANGLE] = 10,
-    [BIG_MULT_X] = 10,
     //[OCTOTHORPE] = 12,
     */
 };

@@ -209,6 +209,7 @@
 #define CHAR_ID            0x07
 #define CHAR_NO            0x08
 #define CHAR_UNDERSCORE    0x09
+#define CHAR_BIG_MULT_X    0x17 // monSummary
 #define CHAR_EMOJI_HEART   0xE7 // monSummary
 
 #define EXT_CTRL_CODE_COLOR                  0x01
