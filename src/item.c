@@ -955,6 +955,13 @@ ItemUseFunc GetItemFieldFunc(u16 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
+// Start inventory
+enum ItemSortType GetItemSortType(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].sortType;
+}
+// End inventory
+
 // Returns an item's battle effect script ID.
 u8 GetItemBattleUsage(u16 itemId)
 {
