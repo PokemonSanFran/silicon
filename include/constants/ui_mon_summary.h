@@ -91,6 +91,9 @@ enum MonSummarySpriteTags
     TAG_SUMMARY_POKEMON_SLOT_2,
     TAG_SUMMARY_HELD_ITEM,
     TAG_SUMMARY_POKE_BALL,
+    TAG_SUMMARY_TYPES, // tileTag
+    TAG_SUMMARY_TYPE_1, // paletteTag
+    TAG_SUMMARY_TYPE_2, //
 };
 
 enum MonSummaryHpBarColors
@@ -196,6 +199,8 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 enum MonSummaryStatsSprites
 {
     SUMMARY_STATS_SPRITE_HELD_ITEM,
+    SUMMARY_STATS_SPRITE_TYPE_1,
+    SUMMARY_STATS_SPRITE_TYPE_2,
 
     NUM_SUMMARY_STATS_SPRITES
 };

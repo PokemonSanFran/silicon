@@ -13,6 +13,9 @@ TYPES13x11GFXDIR := graphics/ui_menus/types/13x11
 TYPES13x13GFXDIR := graphics/ui_menus/types/13x13
 TYPES15x14GFXDIR := graphics/ui_menus/types/15x14
 # End pokedex
+# Start monSummary
+TYPES11x9GFXDIR := graphics/ui_menus/types/11x9
+# End monSummary
 RAYQUAZAGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
@@ -427,6 +430,12 @@ $(TYPES13x13GFXDIR)/types.4bpp: $(types:%=$(TYPES13x13GFXDIR)/%.4bpp)
 $(TYPES15x14GFXDIR)/types.4bpp: $(types:%=$(TYPES15x14GFXDIR)/%.4bpp)
 	@cat $^ >$@
 # End pokedex
+
+# Start monSummary
+$(TYPES11x9GFXDIR)/types.4bpp: $(types:%=$(TYPES11x9GFXDIR)/%.4bpp)
+	@cat $^ >$@
+# End monSummary
+
 graphics/bag/menu.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 

@@ -104,6 +104,8 @@ static u32 SummarySprite_GetPokemonPaletteSlot(void);
 static void SummarySprite_PlayPokemonCry(void);
 static void SummarySprite_MonHeldItem(u32, s32, s32);
 static void SummarySprite_MonPokeBall(u32, s32, s32);
+static void SummarySprite_MonTypes(u32, s32, s32);
+static u32 SummarySprite_GetTypePaletteTag(enum Type);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
@@ -286,6 +288,13 @@ static void SummarySetup_Graphics(void)
         .data = sMonSummary_MainPalette,
         .tag = TAG_SUMMARY_UNIVERSAL_PAL
     });
+
+    LoadCompressedSpriteSheet(&sStatsPageHeader_TypeSpriteSheet);
+    LoadSpritePalettes(sStatsPageHeader_TypeSpritePalettes);
+
+    // ensure neither of these gets overwritten by other sprite palettes
+    AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_1);
+    AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_2);
 
     SummaryPage_LoadTilemap();
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_1);
@@ -974,12 +983,6 @@ static void SummarySprite_CreateMonSprite(void)
     {
         DestroySpriteAndFreeResources(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)]);
     }
-    else
-    {
-        // ensure neither of these gets overwritten by other sprite palettes
-        AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_1);
-        AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_2);
-    }
 
     u32 coord = SummaryPage_GetValue() == SUMMARY_PAGE_INFOS ? 32 : 16;
 
@@ -1091,6 +1094,43 @@ static void SummarySprite_MonPokeBall(u32 spriteArrId, s32 x, s32 y)
     gSprites[spriteId].sPaletteTag = gBallSpriteTemplates[ball].paletteTag;
 
     SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+}
+
+static void SummarySprite_MonTypes(u32 spriteArrId, s32 x, s32 y)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    enum Type types[2] = { GetSpeciesType(mon->species, 0), GetSpeciesType(mon->species, 1) };
+
+    u32 tag = SummarySprite_GetTypePaletteTag(types[0]);
+    struct SpriteTemplate template = sStatsPageHeader_TypeSpriteTemplate;
+
+    template.paletteTag = tag;
+    u32 spriteId = CreateSprite(&template, x, y, 0);
+
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].oam.priority = 0;
+
+    SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+    StartSpriteAnim(&gSprites[spriteId], types[0]);
+
+    if (types[1] == types[0]) return;
+
+    x += 12;
+    tag = SummarySprite_GetTypePaletteTag(types[1]);
+
+    template.paletteTag = tag;
+    spriteId = CreateSprite(&template, x, y, 0);
+
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].oam.priority = 0;
+
+    SummarySprite_SetDynamicSpriteId(spriteArrId + 1, spriteId);
+    StartSpriteAnim(&gSprites[spriteId], types[1]);
+}
+
+static u32 SummarySprite_GetTypePaletteTag(enum Type type)
+{
+    return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
 }
 
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
@@ -1520,6 +1560,7 @@ static void StatsPage_HandleHeader(void)
     SummaryPrint_MonName(SUMMARY_STATS_HEADER_NAME_X, SUMMARY_STATS_HEADER_Y, TILE_TO_PIXELS(8));
     SummaryPrint_MonGender(SUMMARY_STATS_HEADER_GENDER_X, SUMMARY_STATS_HEADER_Y);
     SummaryPrint_MonLevel(SUMMARY_STATS_HEADER_LEVEL_X, SUMMARY_STATS_HEADER_Y);
+    SummarySprite_MonTypes(SUMMARY_STATS_SPRITE_TYPE_1, 88 + 8, 20 + 8);
 }
 
 // thanks middle speed..
