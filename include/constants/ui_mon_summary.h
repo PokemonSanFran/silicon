@@ -56,7 +56,6 @@ enum __attribute__((packed)) MonSummaryPageSlots
 enum __attribute__((packed)) MonSummaryMainWindows
 {
     SUMMARY_MAIN_WIN_HEADER,    // refers to the page's name and tab blit
-    SUMMARY_MAIN_WIN_TEXT_BOX,  // refers to text descriptions of certain fields e.g. ability, held item, etc
     SUMMARY_MAIN_WIN_HELP_BAR,  // refers to control scheme of specific page/mode
     SUMMARY_MAIN_WIN_PAGE_TEXT,
 
@@ -158,7 +157,7 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (TILE_TO_PIXELS(9) + 0)
 #define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (TILE_TO_PIXELS(9) + 7)
 #define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (TILE_TO_PIXELS(9) + 23)
-#define SUMMARY_INFOS_MISC_TEXT_BOX_Y       (1)
+#define SUMMARY_INFOS_MISC_TEXT_BOX_Y       (TILE_TO_PIXELS(14) + 1)
 #define SUMMARY_INFOS_MISC_HELD_ITEM_Y      (67 + 16)
 #define SUMMARY_INFOS_MISC_POKE_BALL_Y      (64 + 8)
 

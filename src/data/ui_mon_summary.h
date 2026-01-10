@@ -39,15 +39,6 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WI
         .height = 4,
     },
 
-    [SUMMARY_MAIN_WIN_TEXT_BOX] =
-    {
-        .bg = SUMMARY_BG_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 14,
-        .width = DISPLAY_TILE_WIDTH,
-        .height = 4
-    },
-
     [SUMMARY_MAIN_WIN_HELP_BAR] =
     {
         .bg = SUMMARY_BG_TEXT,

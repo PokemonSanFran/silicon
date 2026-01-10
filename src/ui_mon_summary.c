@@ -339,12 +339,12 @@ static void SummarySetup_Windows(void)
 
     void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     func();
-    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
     SummaryPrint_TextBox();
 
+    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
 }
 
@@ -827,6 +827,8 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         break;
     case SUMMARY_RELOAD_PAGE:
         {
+            HideBg(SUMMARY_BG_PAGE_TEXT);
+
             for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
             {
                 struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
@@ -845,14 +847,15 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 
     void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     handleFrontEnd();
-    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
+    SummaryPrint_TextBox();
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
-    SummaryPrint_TextBox();
-
     CopyBgTilemapBufferToVram(SUMMARY_BG_TEXT);
+
+    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
+    ShowBg(SUMMARY_BG_PAGE_TEXT);
 }
 
 static void SummarySprite_SetSpriteId(u8 id, u8 value)
@@ -1187,11 +1190,9 @@ static void SummaryPrint_TextBox(void)
     void (*handleTextBox)(void) = SummaryPage_GetHandleTextBoxFunc(SummaryPage_GetValue());
     handleTextBox();
 
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_TEXT_BOX, FONT_NORMAL,
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL,
         coords.x, coords.y,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
-
-    CopyWindowToVram(SUMMARY_MAIN_WIN_TEXT_BOX, COPYWIN_GFX);
 }
 
 static void SummaryPrint_HelpBar(void)
