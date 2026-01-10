@@ -1271,12 +1271,11 @@ static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
-    u32 x = TILE_TO_PIXELS(16) + 1;
 
     if (flag & SUMMARY_STATS_FLAG_NAME)
     {
         enum MonSummaryFontColors color = SUMMARY_FNTCLR_NEU_STAT;
-        u32 x2 = x - (TILE_TO_PIXELS(1) + 1);
+        u32 x2 = SUMMARY_STATS_GENERAL_NATURE_X;
 
         if (statIdx == gNaturesInfo[mon->nature].statUp)
         {
@@ -1289,39 +1288,46 @@ static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
             SummaryPrint_AddText(windowId, FONT_OUTLINED, x2, y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("-"));
         }
 
-        SummaryPrint_AddText(windowId, FONT_OUTLINED, x, y, color, sStatsPageGeneral_StatsNames[statIdx]);
+        SummaryPrint_AddText(windowId, FONT_OUTLINED,
+            SUMMARY_STATS_GENERAL_NAME_X, y,
+            color, sStatsPageGeneral_StatsNames[statIdx]);
     }
 
-    u32 centerAlign;
-
-    x += 39;
     if (flag & SUMMARY_STATS_FLAG_EVS)
     {
         u32 ev = mon->evs[statIdx];
 
         ConvertUIntToDecimalStringN(gStringVar1, ev, STR_CONV_MODE_LEFT_ALIGN, 3);
-        centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, TILE_TO_PIXELS(2), -1);
-        SummaryPrint_AddText(windowId, FONT_OUTLINED, x + centerAlign, y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+        u32 centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED,
+                                gStringVar1, TILE_TO_PIXELS(2), -1);
+
+        SummaryPrint_AddText(windowId, FONT_OUTLINED,
+            SUMMARY_STATS_GENERAL_EVS_X + centerAlign, y,
+            SUMMARY_FNTCLR_INTERFACE, gStringVar1);
     }
 
-    x += 29;
     if (flag & SUMMARY_STATS_FLAG_IVS)
     {
         u32 iv = mon->ivs[statIdx];
 
         ConvertUIntToDecimalStringN(gStringVar1, iv, STR_CONV_MODE_LEFT_ALIGN, 2);
-        centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, 11, -1);
-        SummaryPrint_AddText(windowId, FONT_OUTLINED, x + centerAlign, y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+        u32 centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, 11, -1);
+
+        SummaryPrint_AddText(windowId, FONT_OUTLINED,
+            SUMMARY_STATS_GENERAL_IVS_X + centerAlign, y,
+            SUMMARY_FNTCLR_INTERFACE, gStringVar1);
     }
 
-    x += 19;
     if (flag & SUMMARY_STATS_FLAG_STATS)
     {
         u32 stat = mon->stats[statIdx];
 
         ConvertUIntToDecimalStringN(gStringVar1, stat, STR_CONV_MODE_LEFT_ALIGN, 4);
-        centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, TILE_TO_PIXELS(3) - 3, -1);
-        SummaryPrint_AddText(windowId, FONT_OUTLINED, x + centerAlign, y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+        u32 centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, TILE_TO_PIXELS(3) - 3, -1);
+
+        SummaryPrint_AddText(windowId, FONT_OUTLINED,
+            SUMMARY_STATS_GENERAL_STATS_X + centerAlign, y,
+            SUMMARY_FNTCLR_INTERFACE, gStringVar1);
     }
 }
 
