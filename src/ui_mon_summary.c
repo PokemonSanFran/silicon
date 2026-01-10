@@ -141,6 +141,8 @@ static void InfosPage_HandleMisc(void);
 static void StatsPage_HandleFrontEnd(void);
 static void StatsPage_HandleHeader(void);
 static void StatsPage_HandleGeneral(void);
+static void StatsPage_HandleMisc(void);
+static void StatsPageMisc_MonTotalEVs(void);
 
 // const data
 #include "data/ui_mon_summary.h"
@@ -1250,9 +1252,7 @@ static void SummaryPrint_MonHeldItem(u32 x, u32 y, u32 maxWidth)
     const u8 *str = GetItemName(itemId);
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
 
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId,
-        SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y,
-        SUMMARY_FNTCLR_INTERFACE, str);
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
 }
 
 static void SummaryPrint_MonAbility(u32 x, u32 y, u32 maxWidth)
@@ -1262,9 +1262,7 @@ static void SummaryPrint_MonAbility(u32 x, u32 y, u32 maxWidth)
     const u8 *str = GetAbilityName(ability);
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
 
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId,
-        SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y,
-        SUMMARY_FNTCLR_INTERFACE, str);
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
 }
 
 static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
@@ -1505,6 +1503,7 @@ static void StatsPage_HandleFrontEnd(void)
 {
     StatsPage_HandleHeader();
     StatsPage_HandleGeneral();
+    StatsPage_HandleMisc();
 }
 
 static void StatsPage_HandleHeader(void)
@@ -1534,4 +1533,38 @@ static void StatsPage_HandleGeneral(void)
 
     y += TILE_TO_PIXELS(2);
     SummaryPrint_MonStat(STAT_SPEED, SUMMARY_STATS_FLAG_ALL, y);
+}
+
+static void StatsPage_HandleMisc(void)
+{
+    StatsPageMisc_MonTotalEVs();
+
+    SummaryPrint_MonHeldItem(
+        SUMMARY_STATS_MISC_ITEM_NAME_X, SUMMARY_STATS_MISC_ITEM_NAME_Y,
+        TILE_TO_PIXELS(8));
+
+    SummaryPrint_MonAbility(
+        SUMMARY_STATS_MISC_ABILITY_NAME_X, SUMMARY_STATS_MISC_ABILITY_NAME_Y,
+        TILE_TO_PIXELS(8));
+
+    SummarySprite_MonHeldItem(SUMMARY_INFOS_SPRITE_HELD_ITEM,
+        SUMMARY_STATS_MISC_HELD_ITEM_X, SUMMARY_STATS_MISC_HELD_ITEM_Y);
+}
+
+static void StatsPageMisc_MonTotalEVs(void)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 usedEVs = 0;
+
+    for (enum Stat statIdx = 0; statIdx < NUM_STATS; statIdx++)
+    {
+        usedEVs += mon->evs[statIdx];
+    }
+
+    ConvertUIntToDecimalStringN(gStringVar1, usedEVs, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/510"));
+
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED,
+        SUMMARY_STATS_MISC_TOTAL_EVS_X, SUMMARY_STATS_MISC_TOTAL_EVS_Y,
+        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
