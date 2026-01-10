@@ -1549,6 +1549,8 @@ static void StatsPage_HandleGeneral(void)
 
 static void StatsPage_HandleMisc(void)
 {
+    // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
+
     StatsPageMisc_MonTotalEVs();
 
     SummaryPrint_MonHeldItem(
@@ -1561,6 +1563,10 @@ static void StatsPage_HandleMisc(void)
 
     SummarySprite_MonHeldItem(SUMMARY_INFOS_SPRITE_HELD_ITEM,
         SUMMARY_STATS_MISC_HELD_ITEM_X, SUMMARY_STATS_MISC_HELD_ITEM_Y);
+
+    SummaryPrint_MonAbilityDesc(
+        SUMMARY_STATS_MISC_TEXT_BOX_X, SUMMARY_STATS_MISC_TEXT_BOX_Y,
+        TILE_TO_PIXELS(23));
 }
 
 static void StatsPageMisc_MonTotalEVs(void)
