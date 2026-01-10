@@ -1,6 +1,7 @@
 #ifndef GUARD_ITEM_H
 #define GUARD_ITEM_H
 
+#include "item.h"
 #include "constants/item.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
@@ -525,7 +526,6 @@ enum PACKED ItemSortType
     ITEM_TYPE_TMHM,
     ITEM_TYPE_REPEL,
     ITEM_TYPE_KEY_ITEMS,
-    ITEM_TYPE_MINT,
     ITEM_TYPE_STAT_BOOST_HELD_ITEM,
     ITEM_TYPE_UNUSABLE_KEY_ITEM,
     NUM_ITEMS_TYPES,
@@ -700,5 +700,6 @@ u32 GetItemStatus1Mask(u16 itemId);
 bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile volatile);
 u32 GetItemSellPrice(u32 itemId);
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect);
+enum ItemSortType GetItemSortType(u16 itemId); // inventory
 
 #endif // GUARD_ITEM_H
