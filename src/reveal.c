@@ -8,6 +8,7 @@
 #include "event_object_movement.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
+#include "line_break.h"
 #include "gpu_regs.h"
 #include "malloc.h"
 #include "menu_helpers.h"
@@ -269,159 +270,159 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_RED,
         .buzzrId = BUZZR_USER_ALICIA,
         .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Alicia\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Alicia's bio line\n- This is the character's second bio line"),
+        .bio = COMPOUND_STRING("- AliciaXXX\n- XXX"),
         .accentColor = RGB(16,8,30),
     },
     [REVEAL_CHARLOTTE] =
     {
         .trainerId = TRAINER_CHARLOTTE_OLDASSHOLEAPPEARS,
-        .buzzrId = BUZZR_USER_CHARLOTTE,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Charlotte\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Charlotte's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_CHARLOTTE, 
+        .quote = COMPOUND_STRING("You and I are in entirely seperate tiers."),
+        .bio = COMPOUND_STRING("- Her hair, dress, makeup... all perfect.\n- Is she always smirking?"),
         .accentColor = RGB(6,10,30),
     },
     [REVEAL_OLIVER] =
     {
         .trainerId = TRAINER_OLIVER,
-        .buzzrId = BUZZR_USER_OLIVER,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Oliver\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Oliver's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_OLIVER, 
+        .quote = COMPOUND_STRING("I help bring the best out of Resido through SharpRise Captial."),
+        .bio = COMPOUND_STRING("- Oliver is a workholic - they never stop!\n- Despite his job, he isn't good with tech."),
         .accentColor = RGB(21,1,24),
     },
     [REVEAL_BELEN] =
     {
         .trainerId = TRAINER_BELEN,
-        .buzzrId = BUZZR_USER_BELEN,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Belen\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Belen's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_BELEN, 
+        .quote = COMPOUND_STRING("I'll only serve the best food and battle strategy."),
+        .bio = COMPOUND_STRING("- She looks back at the kitchen between words.\n- She smells strongly of food... but its good!"),
         .accentColor = RGB(9,7,29),
     },
     [REVEAL_KAI] =
     {
         .trainerId = TRAINER_KAI_NEWASSHOLEAPPEARS,
-        .buzzrId = BUZZR_USER_KAI,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Kai\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Kai's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_KAI, 
+        .quote = COMPOUND_STRING("I'm taking Resido back - this is my home!"),
+        .bio = COMPOUND_STRING("- He hasn't broken eye contact with me once.\n- Despite his attitude, his Pokemon seem to love him."),
         .accentColor = RGB(28,14,9),
     },
     [REVEAL_SHINZO] =
     {
         .trainerId = TRAINER_SHINZO,
-        .buzzrId = BUZZR_USER_SHINZO,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Shinzo\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Shinzo's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_SHINZO, 
+        .quote = COMPOUND_STRING("I'll show you the full strength of the Sinnoh Elite!"),
+        .bio = COMPOUND_STRING("- He always looks annoyed...\n- His outfit is incredible... was it custom made?"),
         .accentColor = RGB(8,20,12),
     },
     [REVEAL_EMRYS] =
     {
         .trainerId = TRAINER_EMRYS,
-        .buzzrId = BUZZR_USER_EMRYS,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Emrys\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Emrys's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_EMRYS, 
+        .quote = COMPOUND_STRING("Perlacia Museum will be an institute for culture, history, and battles!"),
+        .bio = COMPOUND_STRING("- It's so hard to understand what they're saying...\n- ???"), // PSF TODO I need another idea here help
         .accentColor = RGB(14,19,31),
     },
     [REVEAL_RAMESH] =
     {
         .trainerId = TRAINER_RAMESH_IMIN,
-        .buzzrId = BUZZR_USER_RAMESH,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Ramesh\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Ramesh's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_RAMESH, 
+        .quote = COMPOUND_STRING("Security, Marketing, Production - there's nothing I can't execute."),
+        .bio = COMPOUND_STRING("- Ramesh looks bored when talking to me.\n - He's holding multiple phones."),
         .accentColor = RGB(27,30,4),
     },
     [REVEAL_ADELAIDE] =
     {
         .trainerId = TRAINER_ADELAIDE_A,
-        .buzzrId = BUZZR_USER_ADELAIDE,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Adelaide\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Adelaide's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_ADELAIDE, 
+        .quote = COMPOUND_STRING("The SharpRise Captial League will be the world's most pretigious!"),
+        .bio = COMPOUND_STRING("- She talks about email so much!\n- Her earrings are the SharpRise logo."),
         .accentColor = RGB(20,9,20),
     },
     [REVEAL_KAUNA] =
     {
         .trainerId = TRAINER_KAUNA,
-        .buzzrId = BUZZR_USER_KAUNA,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Kauna\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Kauna's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_KAUNA, 
+        .quote = COMPOUND_STRING("My babies are hella tough - don't underestimate us!"),
+        .bio = COMPOUND_STRING("- He hasn't put that egg down since I got here.\n- He's all wet. Did he just get out of the water?"),
         .accentColor = RGB(25,14,6),
     },
     [REVEAL_ADAORA] =
     {
         .trainerId = TRAINER_ADAORA_HOWDISAPPOINTING,
-        .buzzrId = BUZZR_USER_ADAORA,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Adaora\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Adaora's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_ADAORA, 
+        .quote = COMPOUND_STRING("The ocean's tide is unforgiving, swift, and powerful... and so are we!"),
+        .bio = COMPOUND_STRING("- She seems extremely passionate about everything.\n- People seem afraid of her..."),
         .accentColor = RGB(22,15,17),
     },
     [REVEAL_NERIENE] =
     {
         .trainerId = TRAINER_NERIENE,
-        .buzzrId = BUZZR_USER_NERIENE,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Neriene\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Neriene's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_NERIENE, 
+        .quote = COMPOUND_STRING("My party is as strong as this Fort - impenetrable!"), 
+        .bio = COMPOUND_STRING("- I know its windy up here, but why is she yelling?\n- What is she hiding in her pockets...?"),
         .accentColor = RGB(1,22,6),
     },
     [REVEAL_KEI_YING] =
     {
         .trainerId = TRAINER_KEI_YING_WAREHOUSE_RAVE,
-        .buzzrId = BUZZR_USER_KEI_YING,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Kei_Ying\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Kei_Ying's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_KEI_YING, 
+        .quote = COMPOUND_STRING("Life is too short for regret.\nJust do your best."),
+        .bio = COMPOUND_STRING("- He's giving off big dad energy...\n- He's less intense than the other SRC executives."),
         .accentColor = RGB(13,14,17),
     },
     [REVEAL_DIMU] =
     {
         .trainerId = TRAINER_DIMU,
-        .buzzrId = BUZZR_USER_DIMU,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Dimu\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Dimu's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_DIMU, 
+        .quote = COMPOUND_STRING("I speak for nature, because nobody else will."),
+        .bio = COMPOUND_STRING("- She seems mad... did I step on the wrong plants?\n- Whenever she shifts her weight, the grass moves with her..."),
         .accentColor = RGB(8,14,26),
     },
     [REVEAL_TALA] =
     {
         .trainerId = TRAINER_TALA,
-        .buzzrId = BUZZR_USER_TALA,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Tala\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Tala's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_TALA, 
+        .quote = COMPOUND_STRING("The wind carries me to where I need to be."),
+        .bio = COMPOUND_STRING("- There's always a light breeze behind her.\n- Her cane is shaped like a Xatu!"),
         .accentColor = RGB(23,7,12),
     },
     [REVEAL_BD] =
     {
         .trainerId = TRAINER_BD,
-        .buzzrId = BUZZR_USER_BD,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Bd\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Bd's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_BD, 
+        .quote = COMPOUND_STRING("I'm battling on another plane of existence!"),
+        .bio = COMPOUND_STRING("- She hasn't made eye contact once.\n- The floor is covered with equipment. It's a hazard!"),
         .accentColor = RGB(9,21,4),
     },
     [REVEAL_AMI] =
     {
         .trainerId = TRAINER_AMIARGENTO,
-        .buzzrId = BUZZR_USER_AMI,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Ami\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Ami's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_AMI, 
+        .quote = COMPOUND_STRING("I love taking an idea and flipping it on its head entirely."),
+        .bio = COMPOUND_STRING("- Her aura feels like time slows down around her... \n- Does her outfit sparkle? Or is that the lights?"),
         .accentColor = RGB(22,22,9),
     },
     [REVEAL_ALCMENE] =
     {
         .trainerId = TRAINER_ALCMENE,
         .buzzrId = BUZZR_USER_ALCMENE,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Alcmene\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Alcmene's bio line\n- This is the character's second bio line"),
+        .quote = COMPOUND_STRING("The Tide will defend Resido against all who threaten its citizens."),
+        .bio = COMPOUND_STRING("- It's impossible to discern their gender from their voice. \n- They look like they're floating!"),
         .accentColor = RGB(16,2,16),
     },
     [REVEAL_ARMANDO] =
     {
         .trainerId = TRAINER_ARMANDO,
-        .buzzrId = BUZZR_USER_ARMANDO,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Armando\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Armando's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_ARMANDO, 
+        .quote = COMPOUND_STRING("I can make a Trainer out of anybody."),
+        .bio = COMPOUND_STRING("- He's so intense, the air around him is hot!\n- He seems incredibly comfortable."),
         .accentColor = RGB(27,9,7),
     },
     [REVEAL_MAGNUS] =
     {
         .trainerId = TRAINER_MAGNUS_PROLOGUE,
-        .buzzrId = BUZZR_USER_MAGNUS,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Magnus\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Magnus's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_MAGNUS, 
+        .quote = COMPOUND_STRING("I amplify the voices of all of Resido!"),
+        .bio = COMPOUND_STRING("- He's incredibly tall!\n- All of his accessories all have a hint of gold."),
         .accentColor = RGB(18,26,28),
     },
     [REVEAL_DOYLE] =
@@ -429,7 +430,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_DOYLE_ZENZU_ISLAND,
         .buzzrId = BUZZR_USER_DOYLE,
         .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Doyle\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Doyle's bio line\n- This is the character's second bio line"),
+        .bio = COMPOUND_STRING("- DoyleXXX\n- XXX"),
         .accentColor = RGB(16,4,5),
     },
     [REVEAL_IMELDA] =
@@ -437,15 +438,15 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_IMELDA,
         .buzzrId = BUZZR_USER_IMELDA,
         .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Imelda\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Imelda's bio line\n- This is the character's second bio line"),
+        .bio = COMPOUND_STRING("- ImeldaXXX\n- XXX"),
         .accentColor = RGB(28,25,30),
     },
     [REVEAL_ELLEN] =
     {
         .trainerId = TRAINER_ELLEN,
-        .buzzrId = BUZZR_USER_ELLEN,
-        .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Ellen\nto add flavor”"),
-        .bio = COMPOUND_STRING("- This is Ellen's bio line\n- This is the character's second bio line"),
+        .buzzrId = BUZZR_USER_ELLEN, 
+        .quote = COMPOUND_STRING("Those with power have an obligation to do good."),
+        .bio = COMPOUND_STRING("- Somehow, Ellen is shorter than Alcmene.\n- Where did the Alcmene outfit go?"),
         .accentColor = RGB(28,25,30),
     },
 };
@@ -927,6 +928,7 @@ static void PrintRevealContent(u32 timer, enum RevealIds revealId, enum RevealWi
             end = StringCopy(gStringVar3, GetTrainerNameFromId(GetRevealTrainerId(revealId)));
             break;
         case REVEAL_WINDOW_QUOTE:
+            windowWidth -= TILE_WIDTH;
             end = StringCopy(gStringVar3, GetRevealQuote(revealId));
             break;
         case REVEAL_WINDOW_USERNAME:
@@ -941,6 +943,7 @@ static void PrintRevealContent(u32 timer, enum RevealIds revealId, enum RevealWi
             end = StringCopy(gStringVar3,GetRevealBio(revealId));
             break;
     }
+    BreakStringNaive(gStringVar3, windowWidth, 4, config->fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, config->fontId, windowWidth);
     AddTextPrinterParameterized4(windowId, config->fontId, config->x, config->y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar3);
     CopyWindowToVram(windowId, COPYWIN_GFX);

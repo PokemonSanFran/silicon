@@ -7,27 +7,27 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_KAI] =
     {
-        .username = _("Kai"),
+        .username = _("ResidoReal"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ADAORA] =
     {
-        .username = _("Adaora"),
+        .username = _("TideAdaora"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CHARLOTTE] =
     {
-        .username = _("Charlotte"),
+        .username = _("Rank14Life"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ARMANDO] =
     {
-        .username = _("Armando"),
+        .username = _("ArmandoEliteFour"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_OLIVER] =
     {
-        .username =_("Oliver"),
+        .username =_("Oliver72w12h"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JEANIE] =
@@ -72,7 +72,7 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_SHINZO] =
     {
-        .username = _("SinnohStrong"),
+        .username = _("SinnohShinzo"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_RAMESH] =
@@ -82,32 +82,32 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_EMRYS] =
     {
-        .username = _("TheCollector"),
+        .username = _("PerlaciaCollector"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_KAUNA] =
     {
-        .username = _("kaunaaaaaaaaa"),
+        .username = _("PapaPua"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NERIENE] =
     {
-        .username = _("TheMightyNeriene"),
+        .username = _("NoRetreatNeriene"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TALA] =
     {
-        .username =_("Tala"),
+        .username =_("WindRiderTala"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MAGNUS] =
     {
-        .username =_("Magnus"),
+        .username =_("DJMagnus"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DIMU] =
     {
-        .username = _("PlantsPlants_29"),
+        .username = _("SolarpunkSolider"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BD] =
@@ -117,12 +117,12 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_ALCMENE] =
     {
-        .username = _("Alcmene"),
+        .username = _("TheTide"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_AMI] =
     {
-        .username = _("TheRealAmiArgento"),
+        .username = _("ami_argento"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GRUNT] =
@@ -152,12 +152,12 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_ELLEN] =
     {
-        .username = _("Ellen"),
+        .username = _("EllenEliteFour"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KEI_YING] =
     {
-        .username = _("Keiying"),
+        .username = _("BlameItOnFather"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_FERNANDA] =
@@ -977,7 +977,7 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_ADELAIDE] =
     {
-        .username = _("ChbreasGawp"),
+        .username = _("PathToThePeak"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CELESTA] =
