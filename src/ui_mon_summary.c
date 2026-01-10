@@ -72,7 +72,7 @@ static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
 static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
-static void *SummaryPage_GetHandleHelpBarFunc(enum MonSummaryPages);
+static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages);
 static void Task_SummaryMode_DefaultInput(u8);
 
 static void SummaryPage_SetValue(enum MonSummaryPages);
@@ -120,13 +120,13 @@ static void SummaryPrint_MonName(u32, u32, u32);
 static void SummaryPrint_MonGender(u32, u32);
 static void SummaryPrint_MonLevel(u32, u32);
 static void SummaryPrint_MonHeldItem(u32, u32, u32);
-static void SummaryPrint_MonAbility(u32, u32, u32);
+static void SummaryPrint_MonAbilityName(u32, u32, u32);
+static void SummaryPrint_MonAbilityDesc(u32, u32, u32);
 static void SummaryPrint_MonStat(enum Stat, u32, u32);
 
 static void DummyPage_Handle(void);
 
 static void InfosPage_HandleFrontEnd(void);
-static void InfosPage_HandleHelpBar(void);
 static void InfosPage_HandleHeader(void);
 static void InfosPage_HandleGeneral(void);
 static void InfosPageGeneral_PrintMonTyping(struct MonSummary *);
@@ -757,13 +757,13 @@ static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages page)
     return info->handleFrontEnd;
 }
 
-static void *SummaryPage_GetHandleHelpBarFunc(enum MonSummaryPages page)
+static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
 
-    if (!info || !info->handleHelpBar) return DummyPage_Handle;
+    if (!info || !info->helpBar[0] || !info->helpBar[1]) return gText_EmptyString2;
 
-    return info->handleHelpBar;
+    return info->helpBar[SummaryInput_IsWithinSubMode()];
 }
 
 static void SummaryPage_UnloadDynamicSprites(void)
@@ -1210,10 +1210,10 @@ static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
 
 static void SummaryPrint_HelpBar(void)
 {
-    void (*handleHelpBar)(void) = SummaryPage_GetHandleHelpBarFunc(SummaryPage_GetValue());
-    handleHelpBar();
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_HELP_BAR, FONT_SMALL,
+        10, 1,
+        SUMMARY_FNTCLR_HELP_BAR, SummaryPage_GetHelpBarText(SummaryPage_GetValue()));
 
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_HELP_BAR, FONT_SMALL, 10, 1, SUMMARY_FNTCLR_HELP_BAR, gStringVar4);
     CopyWindowToVram(SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
 }
 
@@ -1352,18 +1352,6 @@ static void InfosPage_HandleFrontEnd(void)
     InfosPage_HandleHeader();
     InfosPage_HandleGeneral();
     InfosPage_HandleMisc();
-}
-
-static void InfosPage_HandleHelpBar(void)
-{
-    if (SummaryInput_IsWithinSubMode())
-    {
-        StringCopy(gStringVar4, COMPOUND_STRING("{DPAD_NONE}Cycle {B_BUTTON} Cancel"));
-    }
-    else
-    {
-        StringCopy(gStringVar4, COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"));
-    }
 }
 
 static void InfosPage_HandleHeader(void)

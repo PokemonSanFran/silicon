@@ -336,11 +336,11 @@ struct MonSummarySprite
 struct MonSummaryPageInfo
 {
     const u8 *name;
+    const u8 *const helpBar[2];
     const u32 *tilemap;
     struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     TaskFunc input;
     void (*handleFrontEnd)(void);
-    void (*handleHelpBar)(void);
 };
 
 #endif // GUARD_CONSTANTS_UI_MON_SUMMARY_H

@@ -161,6 +161,10 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     [SUMMARY_PAGE_INFOS] =
     {
         .name = COMPOUND_STRING("Info"),
+        .helpBar = {
+            [0] = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
+            [1] = COMPOUND_STRING("{DPAD_NONE}Cycle {B_BUTTON} Cancel"),
+        },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
         .mainSpriteCoords =
         {
@@ -171,7 +175,6 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
         },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
-        .handleHelpBar = InfosPage_HandleHelpBar,
     },
     [SUMMARY_PAGE_STATS] =
     {
