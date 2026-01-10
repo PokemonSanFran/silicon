@@ -1268,12 +1268,22 @@ static void SummaryPrint_MonHeldItem(u32 x, u32 y, u32 maxWidth)
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
 }
 
-static void SummaryPrint_MonAbility(u32 x, u32 y, u32 maxWidth)
+static void SummaryPrint_MonAbilityName(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     enum Ability ability = GetSpeciesAbility(mon->species, mon->abilityNum);
     const u8 *str = GetAbilityName(ability);
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
+
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
+}
+
+static void SummaryPrint_MonAbilityDesc(u32 x, u32 y, u32 maxWidth)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    enum Ability ability = GetSpeciesAbility(mon->species2, mon->abilityNum);
+    const u8 *str = GetAbilityDesc(ability);
+    u32 fontId = GetFontIdToFit(str, FONT_NORMAL, 0, maxWidth);
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
 }
@@ -1545,7 +1555,7 @@ static void StatsPage_HandleMisc(void)
         SUMMARY_STATS_MISC_ITEM_NAME_X, SUMMARY_STATS_MISC_ITEM_NAME_Y,
         TILE_TO_PIXELS(8));
 
-    SummaryPrint_MonAbility(
+    SummaryPrint_MonAbilityName(
         SUMMARY_STATS_MISC_ABILITY_NAME_X, SUMMARY_STATS_MISC_ABILITY_NAME_Y,
         TILE_TO_PIXELS(8));
 
