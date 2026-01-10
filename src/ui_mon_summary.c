@@ -582,12 +582,12 @@ static void SummaryMon_SetStruct(void)
     res->summary.nature = GetNature(mon);
     res->summary.mintNature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
     res->summary.currHp = GetMonData(mon, MON_DATA_HP);
-    res->summary.maxHp = GetMonData(mon, MON_DATA_MAX_HP);
-    res->summary.atk = GetMonData(mon, MON_DATA_ATK);
-    res->summary.def = GetMonData(mon, MON_DATA_DEF);
-    res->summary.spAtk = GetMonData(mon, MON_DATA_SPATK);
-    res->summary.spDef = GetMonData(mon, MON_DATA_SPDEF);
-    res->summary.spd = GetMonData(mon, MON_DATA_SPEED);
+    res->summary.stats[STAT_HP] = GetMonData(mon, MON_DATA_MAX_HP);
+    res->summary.stats[STAT_ATK] = GetMonData(mon, MON_DATA_ATK);
+    res->summary.stats[STAT_DEF] = GetMonData(mon, MON_DATA_DEF);
+    res->summary.stats[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
+    res->summary.stats[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
+    res->summary.stats[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
 
     GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
     ConvertInternationalString(res->summary.trainerName, GetMonData(mon, MON_DATA_LANGUAGE));
@@ -602,19 +602,19 @@ static void SummaryMon_SetStruct(void)
     res->summary.ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
     res->summary.isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-    res->summary.hpIVs = GetMonData(mon, MON_DATA_HP_IV);
-    res->summary.atkIVs = GetMonData(mon, MON_DATA_ATK_IV);
-    res->summary.defIVs = GetMonData(mon, MON_DATA_DEF_IV);
-    res->summary.spAtkIVs = GetMonData(mon, MON_DATA_SPATK_IV);
-    res->summary.spDefIVs = GetMonData(mon, MON_DATA_SPDEF_IV);
-    res->summary.spdIVs = GetMonData(mon, MON_DATA_SPEED_IV);
+    res->summary.ivs[STAT_HP] = GetMonData(mon, MON_DATA_HP_IV);
+    res->summary.ivs[STAT_ATK] = GetMonData(mon, MON_DATA_ATK_IV);
+    res->summary.ivs[STAT_DEF] = GetMonData(mon, MON_DATA_DEF_IV);
+    res->summary.ivs[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK_IV);
+    res->summary.ivs[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF_IV);
+    res->summary.ivs[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED_IV);
 
-    res->summary.hpEVs = GetMonData(mon, MON_DATA_HP_EV);
-    res->summary.atkEVs = GetMonData(mon, MON_DATA_ATK_EV);
-    res->summary.defEVs = GetMonData(mon, MON_DATA_DEF_EV);
-    res->summary.spAtkEVs = GetMonData(mon, MON_DATA_SPATK_EV);
-    res->summary.spDefEVs = GetMonData(mon, MON_DATA_SPDEF_EV);
-    res->summary.spdEVs = GetMonData(mon, MON_DATA_SPEED_EV);
+    res->summary.evs[STAT_HP] = GetMonData(mon, MON_DATA_HP_EV);
+    res->summary.evs[STAT_ATK] = GetMonData(mon, MON_DATA_ATK_EV);
+    res->summary.evs[STAT_DEF] = GetMonData(mon, MON_DATA_DEF_EV);
+    res->summary.evs[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK_EV);
+    res->summary.evs[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF_EV);
+    res->summary.evs[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED_EV);
 
     GetMonNickname(mon, res->summary.nickname);
     res->summary.gender = GetMonGender(mon);
@@ -889,7 +889,7 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
 
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 currHp = mon->currHp;
-    u32 maxHp = mon->maxHp;
+    u32 maxHp = mon->stats[STAT_HP];
 
     u32 hpPercentage = (currHp * 100) / maxHp;
     enum MonSummaryHpBarColors color = hpPercentage / 33;

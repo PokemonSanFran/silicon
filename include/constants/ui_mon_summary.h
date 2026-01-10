@@ -219,12 +219,7 @@ struct MonSummary
     u16 moves[MAX_MON_MOVES];
     u8 pp[MAX_MON_MOVES];
     u16 currHp;
-    u16 maxHp;
-    u16 atk;
-    u16 def;
-    u16 spAtk;
-    u16 spDef;
-    u16 spd;
+    u16 stats[NUM_STATS];
     u16 item;
     u16 friendship;
     u8 trainerGender;
@@ -235,21 +230,8 @@ struct MonSummary
     u32 trainerId;
     u8 mintNature;
 
-    u32 hpIVs:5;
-    u32 atkIVs:5;
-    u32 defIVs:5;
-    u32 spAtkIVs:5;
-    u32 spDefIVs:5;
-    u32 spdIVs:5;
-    u32 pad2:2;
-
-    u8 hpEVs;
-    u8 atkEVs;
-    u8 defEVs;
-    u8 spAtkEVs;
-    u8 spDefEVs;
-    u8 spdEVs;
-
+    u8 ivs[NUM_STATS];
+    u8 evs[NUM_STATS];
     u8 gender;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     enum PokeBall ball;
