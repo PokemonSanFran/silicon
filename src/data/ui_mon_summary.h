@@ -188,6 +188,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Stats"),
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
+        .handleFrontEnd = StatsPage_HandleFrontEnd,
     },
     [SUMMARY_PAGE_MOVES] =
     {

@@ -137,6 +137,9 @@ static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *);
 static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *);
 static void InfosPage_HandleMisc(void);
 
+static void StatsPage_HandleFrontEnd(void);
+static void StatsPage_HandleHeader(void);
+
 // const data
 #include "data/ui_mon_summary.h"
 
@@ -1431,4 +1434,16 @@ static void InfosPage_HandleMisc(void)
 
     SummarySprite_MonPokeBall(SUMMARY_INFOS_SPRITE_POKE_BALL,
         SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y);
+}
+
+static void StatsPage_HandleFrontEnd(void)
+{
+    StatsPage_HandleHeader();
+}
+
+static void StatsPage_HandleHeader(void)
+{
+    SummaryPrint_MonName(SUMMARY_STATS_HEADER_NAME_X, SUMMARY_STATS_HEADER_Y, TILE_TO_PIXELS(8));
+    SummaryPrint_MonGender(SUMMARY_STATS_HEADER_GENDER_X, SUMMARY_STATS_HEADER_Y);
+    SummaryPrint_MonLevel(SUMMARY_STATS_HEADER_LEVEL_X, SUMMARY_STATS_HEADER_Y);
 }
