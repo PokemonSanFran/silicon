@@ -333,8 +333,9 @@ static void SummarySetup_Windows(void)
     }
 
     void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
-
     func();
+    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
+
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
     SummaryPrint_TextBox();
@@ -836,8 +837,10 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
     }
 
     SummaryPage_UnloadDynamicSprites();
+
     void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     handleFrontEnd();
+    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
@@ -1263,7 +1266,6 @@ static void SummaryPrint_MonAbility(u32 x, u32 y, u32 maxWidth)
 static void DummyPage_Handle(void)
 {
     StringCopy(gStringVar4, COMPOUND_STRING(" "));
-    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
 }
 
 static void InfosPage_HandleFrontEnd(void)
@@ -1271,8 +1273,6 @@ static void InfosPage_HandleFrontEnd(void)
     InfosPage_HandleHeader();
     InfosPage_HandleGeneral();
     InfosPage_HandleMisc();
-
-    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
 }
 
 static void InfosPage_HandleTextBox(void)
