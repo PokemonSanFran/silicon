@@ -287,6 +287,7 @@ static void SummarySetup_Graphics(void)
     });
 
     SummaryPage_LoadTilemap();
+    CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_1);
 }
 
 static void SummarySetup_Sprites(void)
@@ -500,14 +501,14 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     }
 
     if (JOY_NEW(DPAD_UP)
-     && SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
+     && SummaryPage_GetValue() != SUMMARY_PAGE_MOVES)
     {
         SummaryInput_UpdateMon(-1);
         return;
     }
 
     if (JOY_NEW(DPAD_DOWN)
-     && SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
+     && SummaryPage_GetValue() != SUMMARY_PAGE_MOVES)
     {
         SummaryInput_UpdateMon(1);
         return;
@@ -803,7 +804,6 @@ static void SummaryPage_LoadTilemap(void)
 
     CopyToBgTilemapBuffer(nextBg, SummaryPage_GetTilemap(SummaryPage_GetValue()), 0, 0);
     SetGpuReg(REG_OFFSET_BG2HOFS, 8);
-    CopyBgTilemapBufferToVram(nextBg);
 }
 
 static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
@@ -827,8 +827,6 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         break;
     case SUMMARY_RELOAD_PAGE:
         {
-            HideBg(SUMMARY_BG_PAGE_TEXT);
-
             for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
             {
                 struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
@@ -855,7 +853,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 
     CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
-    ShowBg(SUMMARY_BG_PAGE_TEXT);
+    CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_1);
 }
 
 static void SummarySprite_SetSpriteId(u8 id, u8 value)
