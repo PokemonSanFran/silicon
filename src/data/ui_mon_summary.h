@@ -169,10 +169,8 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MAIN_SPRITE_EXP_BAR]      = { SUMMARY_INFOS_HEADER_EXP_BAR_X,  SUMMARY_INFOS_HEADER_EXP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X, SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y },
         },
-        .textBoxCoords = { SUMMARY_INFOS_MISC_TEXT_BOX_X, SUMMARY_INFOS_MISC_TEXT_BOX_Y },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
-        .handleTextBox = InfosPage_HandleTextBox,
         .handleHelpBar = InfosPage_HandleHelpBar,
     },
     [SUMMARY_PAGE_STATS] =

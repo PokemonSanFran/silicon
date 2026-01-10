@@ -338,10 +338,8 @@ struct MonSummaryPageInfo
     const u8 *name;
     const u32 *tilemap;
     struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
-    struct UCoords8 textBoxCoords;
     TaskFunc input;
     void (*handleFrontEnd)(void);
-    void (*handleTextBox)(void);
     void (*handleHelpBar)(void);
 };
 

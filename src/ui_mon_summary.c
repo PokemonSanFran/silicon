@@ -72,7 +72,6 @@ static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
 static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
-static void *SummaryPage_GetHandleTextBoxFunc(enum MonSummaryPages);
 static void *SummaryPage_GetHandleHelpBarFunc(enum MonSummaryPages);
 static void Task_SummaryMode_DefaultInput(u8);
 
@@ -84,7 +83,6 @@ static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages
 static const u8 *SummaryPage_GetName(enum MonSummaryPages);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
 static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
-static struct UCoords8 SummaryPage_GetTextBoxCoords(enum MonSummaryPages);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void SummaryPage_UnloadDynamicSprites(void);
 static void SummaryPage_LoadTilemap(void);
@@ -117,7 +115,6 @@ static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_BlitStatusSymbol(u32, u32);
 static UNUSED void SummaryPrint_BlitMonMarkings(u32, u32, u32);
-static void SummaryPrint_TextBox(void);
 static void SummaryPrint_HelpBar(void);
 static void SummaryPrint_MonName(u32, u32, u32);
 static void SummaryPrint_MonGender(u32, u32);
@@ -129,7 +126,6 @@ static void SummaryPrint_MonStat(enum Stat, u32, u32);
 static void DummyPage_Handle(void);
 
 static void InfosPage_HandleFrontEnd(void);
-static void InfosPage_HandleTextBox(void);
 static void InfosPage_HandleHelpBar(void);
 static void InfosPage_HandleHeader(void);
 static void InfosPage_HandleGeneral(void);
@@ -353,7 +349,6 @@ static void SummarySetup_Windows(void)
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
-    SummaryPrint_TextBox();
 
     CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(SUMMARY_BG_TEXT);
@@ -744,15 +739,6 @@ static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages page,
     return info->mainSpriteCoords[sprite];
 }
 
-static struct UCoords8 SummaryPage_GetTextBoxCoords(enum MonSummaryPages page)
-{
-    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
-
-    if (!info) return (struct UCoords8){ 0, 0 };
-
-    return info->textBoxCoords;
-}
-
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
@@ -769,15 +755,6 @@ static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages page)
     if (!info || !info->handleFrontEnd) return DummyPage_Handle;
 
     return info->handleFrontEnd;
-}
-
-static void *SummaryPage_GetHandleTextBoxFunc(enum MonSummaryPages page)
-{
-    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
-
-    if (!info || !info->handleTextBox) return DummyPage_Handle;
-
-    return info->handleTextBox;
 }
 
 static void *SummaryPage_GetHandleHelpBarFunc(enum MonSummaryPages page)
@@ -855,7 +832,6 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 
     void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     handleFrontEnd();
-    SummaryPrint_TextBox();
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
@@ -1232,18 +1208,6 @@ static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
 
 }
 
-static void SummaryPrint_TextBox(void)
-{
-    struct UCoords8 coords = SummaryPage_GetTextBoxCoords(SummaryPage_GetValue());
-
-    void (*handleTextBox)(void) = SummaryPage_GetHandleTextBoxFunc(SummaryPage_GetValue());
-    handleTextBox();
-
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL,
-        coords.x, coords.y,
-        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
-}
-
 static void SummaryPrint_HelpBar(void)
 {
     void (*handleHelpBar)(void) = SummaryPage_GetHandleHelpBarFunc(SummaryPage_GetValue());
@@ -1390,15 +1354,6 @@ static void InfosPage_HandleFrontEnd(void)
     InfosPage_HandleMisc();
 }
 
-static void InfosPage_HandleTextBox(void)
-{
-    struct MonSummary *mon = SummaryMon_GetStruct();
-
-    ConvertUIntToDecimalStringN(gStringVar1, mon->metLevel, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
-    GetMapName(gStringVar2, mon->metLocation, 0);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
-}
-
 static void InfosPage_HandleHelpBar(void)
 {
     if (SummaryInput_IsWithinSubMode())
@@ -1539,13 +1494,22 @@ static void InfosPage_HandleMisc(void)
     // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
 
     SummaryPrint_MonHeldItem(SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y, TILE_TO_PIXELS(8));
-    SummaryPrint_MonAbility(SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y, TILE_TO_PIXELS(10));
+    SummaryPrint_MonAbilityName(SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y, TILE_TO_PIXELS(10));
 
     SummarySprite_MonHeldItem(SUMMARY_INFOS_SPRITE_HELD_ITEM,
         SUMMARY_INFOS_MISC_HELD_ITEM_X, SUMMARY_INFOS_MISC_HELD_ITEM_Y);
 
     SummarySprite_MonPokeBall(SUMMARY_INFOS_SPRITE_POKE_BALL,
         SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y);
+
+    struct MonSummary *mon = SummaryMon_GetStruct();
+
+    ConvertUIntToDecimalStringN(gStringVar1, mon->metLevel, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
+    GetMapName(gStringVar2, mon->metLocation, 0);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL,
+        SUMMARY_INFOS_MISC_TEXT_BOX_X, SUMMARY_INFOS_MISC_TEXT_BOX_Y,
+        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
 static void StatsPage_HandleFrontEnd(void)
