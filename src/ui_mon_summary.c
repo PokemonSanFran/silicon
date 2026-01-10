@@ -60,6 +60,8 @@ static void SummaryInput_SetTotalIndex(u32);
 static u32 SummaryInput_GetTotalIndex(void);
 static void SummaryInput_SetSubMode(bool32);
 static bool32 SummaryInput_IsWithinSubMode(void);
+static void SummaryInput_SetUpdateText(bool32);
+static bool32 SummaryInput_GetUpdateText(void);
 static bool32 SummaryInput_IsInputAdditive(s32);
 static void Task_SummaryInput_InfosInput(u8);
 
@@ -72,6 +74,7 @@ static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
 static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
+static void *SummaryPage_GetHandleUpdateTextFunc(enum MonSummaryPages);
 static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages);
 static void Task_SummaryMode_DefaultInput(u8);
 
@@ -127,6 +130,7 @@ static void SummaryPrint_MonStat(enum Stat, u32, u32);
 static void DummyPage_Handle(void);
 
 static void InfosPage_HandleFrontEnd(void);
+static void InfosPage_HandleUpdateText(void);
 static void InfosPage_HandleHeader(void);
 static void InfosPage_HandleGeneral(void);
 static void InfosPageGeneral_PrintMonTyping(struct MonSummary *);
@@ -486,6 +490,16 @@ static bool32 SummaryInput_IsWithinSubMode(void)
     return sMonSummaryDataPtr->subMode;
 }
 
+static void SummaryInput_SetUpdateText(bool32 flag)
+{
+    sMonSummaryDataPtr->updateText = flag;
+}
+
+static bool32 SummaryInput_GetUpdateText(void)
+{
+    return sMonSummaryDataPtr->updateText;
+}
+
 static bool32 SummaryInput_IsInputAdditive(s32 delta)
 {
     return delta == 1;
@@ -493,6 +507,16 @@ static bool32 SummaryInput_IsInputAdditive(s32 delta)
 
 static void Task_SummaryMode_DefaultInput(u8 taskId)
 {
+    if ((++gTasks[taskId].tUpdateText % 600) == 0)
+    {
+        SummaryInput_SetUpdateText(SummaryInput_GetUpdateText() ^ 1);
+        void (*updateTextFunc)(void) = SummaryPage_GetHandleUpdateTextFunc(SummaryPage_GetValue());
+        updateTextFunc();
+        CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
+
+        return;
+    }
+
     if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
         SummaryInput_UpdatePage(-1);
@@ -757,6 +781,15 @@ static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages page)
     return info->handleFrontEnd;
 }
 
+static void *SummaryPage_GetHandleUpdateTextFunc(enum MonSummaryPages page)
+{
+    const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+
+    if (!info || !info->handleUpdateText) return DummyPage_Handle;
+
+    return info->handleUpdateText;
+}
+
 static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
@@ -796,6 +829,7 @@ static void SummaryPage_LoadTilemap(void)
 static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 {
     SummaryPage_TogglePageSlot();
+    SummaryInput_SetUpdateText(FALSE);
 
     for (u32 i = 0; i < NUM_SUMMARY_MAIN_WINDOWS; i++)
     {
@@ -1221,10 +1255,14 @@ static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)
 {
     // TODO blink
     struct MonSummary *mon = SummaryMon_GetStruct();
-    const u8 *str = mon->nickname;
+    const u8 *str = SummaryInput_GetUpdateText() ? GetSpeciesName(mon->species2) : mon->nickname;
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
+    u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
 
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), x, y, maxWidth, 16);
+    PutWindowTilemap(windowId);
+
+    SummaryPrint_AddText(windowId, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
 }
 
 static void SummaryPrint_MonGender(u32 x, u32 y)
@@ -1364,6 +1402,12 @@ static void InfosPage_HandleFrontEnd(void)
     InfosPage_HandleMisc();
 }
 
+static void InfosPage_HandleUpdateText(void)
+{
+    SummaryPrint_MonName(SUMMARY_INFOS_HEADER_NAME_X, SUMMARY_INFOS_HEADER_NAME_Y, TILE_TO_PIXELS(8) - 2);
+    InfosPageGeneral_PrintNatureInfo(SummaryMon_GetStruct());
+}
+
 static void InfosPage_HandleHeader(void)
 {
     SummaryPrint_MonName(SUMMARY_INFOS_HEADER_NAME_X, SUMMARY_INFOS_HEADER_NAME_Y, TILE_TO_PIXELS(8) - 2);
@@ -1469,8 +1513,16 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
     StringCopy(gStringVar1, gNaturesInfo[mon->nature].name);
     if (mon->flavors[0] != FLAVOR_COUNT && mon->flavors[1] != FLAVOR_COUNT)
     {
-        StringCopy(gStringVar2, COMPOUND_STRING("{EMOJI_HEART} "));
-        StringAppend(gStringVar2, sInfosPageGeneral_BerryFlavorNames[mon->flavors[SUMMARY_MON_LIKED_FLAVOR]]);
+        if (SummaryInput_GetUpdateText())
+        {
+            StringCopy(gStringVar2, COMPOUND_STRING("{BIG_MULT_X} "));
+            StringAppend(gStringVar2, sInfosPageGeneral_BerryFlavorNames[mon->flavors[SUMMARY_MON_DISLIKED_FLAVOR]]);
+        }
+        else
+        {
+            StringCopy(gStringVar2, COMPOUND_STRING("{EMOJI_HEART} "));
+            StringAppend(gStringVar2, sInfosPageGeneral_BerryFlavorNames[mon->flavors[SUMMARY_MON_LIKED_FLAVOR]]);
+        }
     }
     else
     {
@@ -1481,6 +1533,9 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
 
     StringExpandPlaceholders(gStringVar4, strTemplate);
     fontId = GetOutlineFontIdToFit(gStringVar4, winWidth);
+
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y5, winWidth, 16);
+    PutWindowTilemap(windowId);
 
     SummaryPrint_AddText(windowId, fontId,
         SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y5,

@@ -106,6 +106,7 @@ enum MonSummaryHpBarColors
 };
 
 #define tDelay          data[0]
+#define tUpdateText     data[15]
 
 #define sMonIndex       data[0]
 
@@ -298,7 +299,8 @@ struct MonSummaryResources
     u32 totalIdx:8;
     u32 useBoxMon:1;
     u32 subMode:1; // mode within current page
-    u32 pad:13;
+    u32 updateText:1;
+    u32 pad:12;
 
     // set when opening, usually help determines where to get a mon info.
     enum MonSummaryModes mode;
@@ -343,6 +345,7 @@ struct MonSummaryPageInfo
     struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     TaskFunc input;
     void (*handleFrontEnd)(void);
+    void (*handleUpdateText)(void); // only updates certain parts of the page's interface
 };
 
 #endif // GUARD_CONSTANTS_UI_MON_SUMMARY_H

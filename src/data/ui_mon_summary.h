@@ -175,6 +175,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
         },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
+        .handleUpdateText = InfosPage_HandleUpdateText,
     },
     [SUMMARY_PAGE_STATS] =
     {
