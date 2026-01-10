@@ -123,6 +123,7 @@ static void SummaryPrint_MonGender(u32, u32);
 static void SummaryPrint_MonLevel(u32, u32);
 static void SummaryPrint_MonHeldItem(u32, u32, u32);
 static void SummaryPrint_MonAbility(u32, u32, u32);
+static void SummaryPrint_MonStat(enum Stat, u32, u32);
 
 static void DummyPage_Handle(void);
 
@@ -139,6 +140,7 @@ static void InfosPage_HandleMisc(void);
 
 static void StatsPage_HandleFrontEnd(void);
 static void StatsPage_HandleHeader(void);
+static void StatsPage_HandleGeneral(void);
 
 // const data
 #include "data/ui_mon_summary.h"
@@ -1266,6 +1268,64 @@ static void SummaryPrint_MonAbility(u32 x, u32 y, u32 maxWidth)
         SUMMARY_FNTCLR_INTERFACE, str);
 }
 
+static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
+    u32 x = TILE_TO_PIXELS(16) + 1;
+
+    if (flag & SUMMARY_STATS_FLAG_NAME)
+    {
+        enum MonSummaryFontColors color = SUMMARY_FNTCLR_NEU_STAT;
+        u32 x2 = x - (TILE_TO_PIXELS(1) + 1);
+
+        if (statIdx == gNaturesInfo[mon->nature].statUp)
+        {
+            color = SUMMARY_FNTCLR_POS_STAT;
+            SummaryPrint_AddText(windowId, FONT_OUTLINED, x2, y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("+"));
+        }
+        else if (statIdx == gNaturesInfo[mon->nature].statDown)
+        {
+            color = SUMMARY_FNTCLR_NEG_STAT;
+            SummaryPrint_AddText(windowId, FONT_OUTLINED, x2, y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("-"));
+        }
+
+        SummaryPrint_AddText(windowId, FONT_OUTLINED, x, y, color, sStatsPageGeneral_StatsNames[statIdx]);
+    }
+
+    u32 centerAlign;
+
+    x += 39;
+    if (flag & SUMMARY_STATS_FLAG_EVS)
+    {
+        u32 ev = mon->evs[statIdx];
+
+        ConvertUIntToDecimalStringN(gStringVar1, ev, STR_CONV_MODE_LEFT_ALIGN, 3);
+        centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, TILE_TO_PIXELS(2), -1);
+        SummaryPrint_AddText(windowId, FONT_OUTLINED, x + centerAlign, y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+    }
+
+    x += 29;
+    if (flag & SUMMARY_STATS_FLAG_IVS)
+    {
+        u32 iv = mon->ivs[statIdx];
+
+        ConvertUIntToDecimalStringN(gStringVar1, iv, STR_CONV_MODE_LEFT_ALIGN, 2);
+        centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, 11, -1);
+        SummaryPrint_AddText(windowId, FONT_OUTLINED, x + centerAlign, y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+    }
+
+    x += 19;
+    if (flag & SUMMARY_STATS_FLAG_STATS)
+    {
+        u32 stat = mon->stats[statIdx];
+
+        ConvertUIntToDecimalStringN(gStringVar1, stat, STR_CONV_MODE_LEFT_ALIGN, 4);
+        centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, TILE_TO_PIXELS(3) - 3, -1);
+        SummaryPrint_AddText(windowId, FONT_OUTLINED, x + centerAlign, y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+    }
+}
+
 static void DummyPage_Handle(void)
 {
     StringCopy(gStringVar4, COMPOUND_STRING(" "));
@@ -1439,6 +1499,7 @@ static void InfosPage_HandleMisc(void)
 static void StatsPage_HandleFrontEnd(void)
 {
     StatsPage_HandleHeader();
+    StatsPage_HandleGeneral();
 }
 
 static void StatsPage_HandleHeader(void)
@@ -1446,4 +1507,26 @@ static void StatsPage_HandleHeader(void)
     SummaryPrint_MonName(SUMMARY_STATS_HEADER_NAME_X, SUMMARY_STATS_HEADER_Y, TILE_TO_PIXELS(8));
     SummaryPrint_MonGender(SUMMARY_STATS_HEADER_GENDER_X, SUMMARY_STATS_HEADER_Y);
     SummaryPrint_MonLevel(SUMMARY_STATS_HEADER_LEVEL_X, SUMMARY_STATS_HEADER_Y);
+}
+
+// thanks middle speed..
+static void StatsPage_HandleGeneral(void)
+{
+    u32 y = TILE_TO_PIXELS(4) + 1;
+    SummaryPrint_MonStat(STAT_HP,    SUMMARY_STATS_FLAG_ALL, y);
+
+    y += TILE_TO_PIXELS(2);
+    SummaryPrint_MonStat(STAT_ATK,   SUMMARY_STATS_FLAG_ALL, y);
+
+    y += TILE_TO_PIXELS(2);
+    SummaryPrint_MonStat(STAT_DEF,   SUMMARY_STATS_FLAG_ALL, y);
+
+    y += TILE_TO_PIXELS(2);
+    SummaryPrint_MonStat(STAT_SPATK, SUMMARY_STATS_FLAG_ALL, y);
+
+    y += TILE_TO_PIXELS(2);
+    SummaryPrint_MonStat(STAT_SPDEF, SUMMARY_STATS_FLAG_ALL, y);
+
+    y += TILE_TO_PIXELS(2);
+    SummaryPrint_MonStat(STAT_SPEED, SUMMARY_STATS_FLAG_ALL, y);
 }

@@ -207,8 +207,8 @@ static const u8 sSummaryPrint_MonMarkingsBlit[] = INCBIN_U8("graphics/ui_menus/m
 static const u8 sSummaryPrint_FontColors[NUM_SUMMARY_FNTCLRS][3] =
 {
     [SUMMARY_FNTCLR_INTERFACE] = { 0, 2, 1 },
-    [SUMMARY_FNTCLR_MALE]      = { 0, 2, 15 },
-    [SUMMARY_FNTCLR_FEMALE]    = { 0, 2, 12 },
+    [SUMMARY_FNTCLR_MALE]      = { 0, 2, 15 }, // SUMMARY_FNTCLR_NEG_STAT
+    [SUMMARY_FNTCLR_FEMALE]    = { 0, 2, 12 }, // SUMMARY_FNTCLR_POS_STAT
     [SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
 
@@ -219,4 +219,14 @@ static const u8 *const sInfosPageGeneral_BerryFlavorNames[FLAVOR_COUNT] =
     [FLAVOR_SWEET]  = COMPOUND_STRING("Sweet"),
     [FLAVOR_BITTER] = COMPOUND_STRING("Bitter"),
     [FLAVOR_SOUR]   = COMPOUND_STRING("Sour"),
+};
+
+static const u8 *const sStatsPageGeneral_StatsNames[NUM_STATS] =
+{
+    [STAT_HP]    = COMPOUND_STRING("HP"),
+    [STAT_ATK]   = COMPOUND_STRING("ATK"),
+    [STAT_DEF]   = COMPOUND_STRING("DEF"),
+    [STAT_SPATK] = COMPOUND_STRING("SPATK"),
+    [STAT_SPDEF] = COMPOUND_STRING("SPDEF"),
+    [STAT_SPEED] = COMPOUND_STRING("SPD"),
 };

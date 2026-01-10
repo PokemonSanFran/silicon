@@ -179,7 +179,11 @@ enum MonSummaryFontColors
     SUMMARY_FNTCLR_FEMALE,
     SUMMARY_FNTCLR_HELP_BAR,
 
-    NUM_SUMMARY_FNTCLRS
+    NUM_SUMMARY_FNTCLRS,
+
+    SUMMARY_FNTCLR_NEU_STAT = SUMMARY_FNTCLR_INTERFACE, // neutral/no boost
+    SUMMARY_FNTCLR_POS_STAT = SUMMARY_FNTCLR_FEMALE,    // positive boost
+    SUMMARY_FNTCLR_NEG_STAT = SUMMARY_FNTCLR_MALE,      // negative boost
 };
 
 enum __attribute__((packed)) MonSummaryReloadModes
@@ -194,6 +198,12 @@ enum __attribute__((packed)) MonSummaryReloadModes
 #define SUMMARY_MON_LIKED_FLAVOR    0
 #define SUMMARY_MON_DISLIKED_FLAVOR 1
 #define TOTAL_MON_NATURE_FLAVORS    2
+
+#define SUMMARY_STATS_FLAG_NAME  (1 << 0) // HP
+#define SUMMARY_STATS_FLAG_EVS   (1 << 1) // XXX
+#define SUMMARY_STATS_FLAG_IVS   (1 << 2) // XX
+#define SUMMARY_STATS_FLAG_STATS (1 << 3) // XXXX
+#define SUMMARY_STATS_FLAG_ALL   (SUMMARY_STATS_FLAG_NAME | SUMMARY_STATS_FLAG_EVS | SUMMARY_STATS_FLAG_IVS | SUMMARY_STATS_FLAG_STATS)
 
 // structs
 
