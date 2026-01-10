@@ -108,7 +108,6 @@ static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_FriendshipBar(struct Sprite *);
-static void SpriteCB_SummarySprite_Pokemon(struct Sprite *);
 
 static void SummaryPrint_AddText(u32, u32, u32, u32, enum MonSummaryFontColors, const u8 *);
 static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
@@ -825,7 +824,6 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
     case SUMMARY_RELOAD_MON:
         SummaryMon_SetStruct();
         SummarySprite_PlayPokemonCry();
-        SummarySprite_CreateMonSprite();
         break;
     case SUMMARY_RELOAD_PAGE:
         {
@@ -843,6 +841,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         }
     }
 
+    SummarySprite_CreateMonSprite();
     SummaryPage_UnloadDynamicSprites();
 
     void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
@@ -982,18 +981,21 @@ static void SummarySprite_CreateMonSprite(void)
         AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_2);
     }
 
+    u32 coord = SummaryPage_GetValue() == SUMMARY_PAGE_INFOS ? 32 : 16;
+
     SummarySprite_InjectPokemon();
     SummarySprite_SetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON,
-        CreateSprite(&gMultiuseSpriteTemplate, 32, 32, 0));
+        CreateSprite(&gMultiuseSpriteTemplate, coord, coord, 0));
 
     u32 mainSpriteId = SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON);
     struct Sprite *sprite = &gSprites[mainSpriteId];
 
     FreeSpriteOamMatrix(sprite);
     sprite->oam.priority = 0;
-    sprite->callback = SpriteCB_SummarySprite_Pokemon;
+    sprite->callback = SpriteCallbackDummy;
     sprite->hFlip = IsMonSpriteNotFlipped(SummaryMon_GetStruct()->species2);
     sprite->oam.paletteNum = SummarySprite_GetPokemonPaletteSlot();
+
     sprite->invisible = FALSE;
 }
 
@@ -1013,16 +1015,32 @@ static void SummarySprite_InjectPokemon(void)
         gfx = MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT);
     }
 
-    HandleLoadSpecialPokePic(TRUE, gfx, mon->species2, mon->personality);
-
     u32 index = SummarySprite_GetPokemonPaletteSlot();
-    LoadPalette(
-        GetMonSpritePalFromSpeciesAndPersonality(mon->species, mon->isShiny, mon->personality),
-        OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-    UniquePalette(OBJ_PLTT_ID(index), &sMonSummaryDataPtr->mon->box);
-    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZEOF(16));
+    CpuFill32(0, gfx, 512);
+
+    if (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
+    {
+        HandleLoadSpecialPokePic(TRUE, gfx, mon->species2, mon->personality);
+
+        LoadPalette(
+            GetMonSpritePalFromSpeciesAndPersonality(mon->species, mon->isShiny, mon->personality),
+            OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        UniquePalette(OBJ_PLTT_ID(index), &sMonSummaryDataPtr->mon->box);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZEOF(16));
+
+    }
+    else
+    {
+        CpuCopy32(GetMonIconTiles(mon->species2, mon->personality), gfx, 512);
+        LoadPalette(GetValidMonIconPalettePtr(mon->species2), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+    }
 
     SetMultiuseSpriteTemplateToPokemon(TAG_NONE, position);
+
+    if (SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
+    {
+        gMultiuseSpriteTemplate.oam = &sSummaryPage_MonIconOam;
+    }
 }
 
 static u32 SummarySprite_GetPokemonPaletteSlot(void)
@@ -1108,15 +1126,6 @@ static void SpriteCB_SummarySprite_FriendshipBar(struct Sprite *sprite)
 
     SummarySprite_InjectFriendshipBar(sprite);
     sprite->sMonIndex = index;
-}
-
-static void SpriteCB_SummarySprite_Pokemon(struct Sprite *sprite)
-{
-    if (!gPaletteFade.active)
-    {
-        SummarySprite_PlayPokemonCry();
-        sprite->callback = SpriteCallbackDummy;
-    }
 }
 
 // dynamic windows handles the id on its own
