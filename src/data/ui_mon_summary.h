@@ -179,6 +179,13 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Stats"),
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
+        .mainSpriteCoords =
+        {
+            [SUMMARY_MAIN_SPRITE_SHINY_SYMBOL]   = { SUMMARY_STATS_HEADER_SHINY_X,    SUMMARY_STATS_HEADER_SHINY_Y },
+            [SUMMARY_MAIN_SPRITE_HP_BAR]         = { SUMMARY_STATS_HEADER_HP_BAR_X,   SUMMARY_STATS_HEADER_HP_BAR_Y },
+            [SUMMARY_MAIN_SPRITE_EXP_BAR]        = { SUMMARY_STATS_HEADER_EXP_BAR_X,  SUMMARY_STATS_HEADER_EXP_BAR_Y },
+            [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X, SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_Y },
+        },
         .handleFrontEnd = StatsPage_HandleFrontEnd,
     },
     [SUMMARY_PAGE_MOVES] =
