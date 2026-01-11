@@ -65,6 +65,7 @@ static bool32 SummaryInput_GetUpdateText(void);
 static bool32 SummaryInput_IsInputAdditive(s32);
 static void Task_SummaryInput_InfosInput(u8);
 static void Task_SummaryInput_StatsInput(u8);
+static void Task_SummaryInput_MovesInput(u8);
 
 static void SummaryMon_SetStruct(void);
 static struct MonSummary *SummaryMon_GetStruct(void);
@@ -598,6 +599,24 @@ static void Task_SummaryInput_InfosInput(u8 taskId)
 }
 
 static void Task_SummaryInput_StatsInput(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        SummaryInput_SetSubMode(FALSE);
+        SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+        gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
+        return;
+    }
+}
+
+static void Task_SummaryInput_MovesInput(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON))
     {

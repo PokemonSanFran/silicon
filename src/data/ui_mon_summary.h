@@ -213,6 +213,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MAIN_SPRITE_EXP_BAR]        = { SUMMARY_MOVES_HEADER_EXP_BAR_X,        SUMMARY_MOVES_HEADER_EXP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_MOVES_HEADER_FRIENDSHIP_BAR_X, SUMMARY_MOVES_HEADER_FRIENDSHIP_BAR_Y },
         },
+        .input = Task_SummaryInput_MovesInput,
         .handleFrontEnd = MovesPage_HandleFrontEnd,
         .handleUpdateText = MovesPage_HandleUpdateText,
     },
