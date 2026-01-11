@@ -542,15 +542,13 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(DPAD_UP)
-     && SummaryPage_GetValue() != SUMMARY_PAGE_MOVES)
+    if (JOY_NEW(DPAD_UP))
     {
         SummaryInput_UpdateMon(-1);
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN)
-     && SummaryPage_GetValue() != SUMMARY_PAGE_MOVES)
+    if (JOY_NEW(DPAD_DOWN))
     {
         SummaryInput_UpdateMon(1);
         return;
