@@ -3747,8 +3747,8 @@ void RemoveEmptyRegisteredItems(void){
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
-    u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
-    u8 numPress = 0;
+    u32 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u32 numPress = 0;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -3760,18 +3760,17 @@ static void Task_MenuMain(u8 taskId)
                     if(sMenuDataPtr->itemIdxPickMode != ITEM_SORT_CANCEL)
                     {
                         TrySortBag();
-                        //sMenuDataPtr->itemIdxPickMode = 0;
-                        //sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_SORTED_ITEMS_BY;
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                     }
                     else
-                    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+                    {
+                        sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+                    }
                     break;
                 case INVENTORY_MODE_TOSS_HOW_MANY:
-                    break;
                 case INVENTORY_MODE_REGISTER:
                     break;
-                //Generic Messages
+                    //Generic Messages
                 case INVENTORY_MESSAGE_CANT_MOVE_FAVORITE:
                 case INVENTORY_MESSAGE_CANT_USE_ITEM:
                 case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
@@ -3797,13 +3796,14 @@ static void Task_MenuMain(u8 taskId)
         }
         else if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM)
         {
-            if(canItemBeHold(Inventory_GetItemIdCurrentlySelected())){
+            if(canItemBeHold(Inventory_GetItemIdCurrentlySelected()))
+            {
                 PlaySE(SE_SELECT);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_ReturnToPartyMenuToGiveItem;
             }
             else
-        {
+            {
                 PlaySE(SE_PC_OFF);
             }
         }
@@ -3835,181 +3835,113 @@ static void Task_MenuMain(u8 taskId)
 
     if ((JOY_NEW(DPAD_RIGHT)) || (JOY_REPEAT(DPAD_RIGHT)))
     {
-        switch(sMenuDataPtr->currentSelectMode){
-            case INVENTORY_MODE_DEFAULT:
-                {
-                    if(gSaveBlock3Ptr->InventoryData.pocketNum >= NUM_INVENTORY_POCKETS - 1)
+        if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
+            return;
 
-                        gSaveBlock3Ptr->InventoryData.pocketNum = 0;
-                    else
-                        gSaveBlock3Ptr->InventoryData.pocketNum++;
+        if(gSaveBlock3Ptr->InventoryData.pocketNum >= NUM_INVENTORY_POCKETS - 1)
 
-                    gSaveBlock3Ptr->InventoryData.itemIdx = 0;
-                    gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+            gSaveBlock3Ptr->InventoryData.pocketNum = 0;
+        else
+            gSaveBlock3Ptr->InventoryData.pocketNum++;
 
-                    PlaySE(SE_SELECT);
-                    Inventory_PrintToAllWindows();
-                }
-                break;
-        }
+        gSaveBlock3Ptr->InventoryData.itemIdx = 0;
+        gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+
+        PlaySE(SE_SELECT);
+        Inventory_PrintToAllWindows();
     }
 
     if ((JOY_NEW(DPAD_LEFT)) || (JOY_REPEAT(DPAD_LEFT)))
     {
-        switch(sMenuDataPtr->currentSelectMode){
-            case INVENTORY_MODE_DEFAULT:
-                {
-                    if(gSaveBlock3Ptr->InventoryData.pocketNum == 0)
-                        gSaveBlock3Ptr->InventoryData.pocketNum = NUM_INVENTORY_POCKETS - 1;
-                    else
-                        gSaveBlock3Ptr->InventoryData.pocketNum--;
+        if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
+            return;
 
-                    gSaveBlock3Ptr->InventoryData.itemIdx = 0;
-                    gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+        if(gSaveBlock3Ptr->InventoryData.pocketNum == 0)
+            gSaveBlock3Ptr->InventoryData.pocketNum = NUM_INVENTORY_POCKETS - 1;
+        else
+            gSaveBlock3Ptr->InventoryData.pocketNum--;
 
-                    PlaySE(SE_SELECT);
-                    Inventory_PrintToAllWindows();
-                }
-                break;
-            case INVENTORY_MODE_REGISTER:
-                break;
-        }
+        gSaveBlock3Ptr->InventoryData.itemIdx = 0;
+        gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+
+        PlaySE(SE_SELECT);
+        Inventory_PrintToAllWindows();
     }
 
     if ((JOY_NEW(DPAD_DOWN)) || (JOY_REPEAT(DPAD_DOWN)))
     {
-        u8 numPocketOptions;
+        if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
+            return;
 
-        switch(sMenuDataPtr->currentSelectMode){
-            case INVENTORY_MODE_DEFAULT:
-                PressedDownButton_Inventory();
-                break;
-            case INVENTORY_MODE_REORDER:
-                numPocketOptions = NUM_SORT_OPTIONS;
-
-                if(sMenuDataPtr->itemIdxPickMode < numPocketOptions - 1)
-                    sMenuDataPtr->itemIdxPickMode++;
-                else
-                    sMenuDataPtr->itemIdxPickMode = 0;
-                break;
-            case INVENTORY_MODE_REGISTER:
-                break;
-            case INVENTORY_MODE_TOSS_CONFIRMATION:
-                numPocketOptions = NUM_TOSS_CONFIRMATION_OPTIONS;
-
-                if(sMenuDataPtr->itemIdxPickMode < numPocketOptions - 1)
-                    sMenuDataPtr->itemIdxPickMode++;
-                else
-                    sMenuDataPtr->itemIdxPickMode = 0;
-                break;
-            case INVENTORY_MODE_USE_OPTIONS:
-                numPocketOptions = getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
-
-                if(sMenuDataPtr->itemIdxPickMode < numPocketOptions - 1)
-                    sMenuDataPtr->itemIdxPickMode++;
-                else
-                    sMenuDataPtr->itemIdxPickMode = 0;
-                break;
-        }
-
+        PressedDownButton_Inventory();
         PlaySE(SE_SELECT);
         Inventory_PrintToAllWindows();
     }
 
     if ((JOY_NEW(DPAD_UP)) || (JOY_REPEAT(DPAD_UP)))
     {
-        u8 numPocketOptions;
+        if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
+            return;
 
-        switch(sMenuDataPtr->currentSelectMode)
-        {
-            case INVENTORY_MODE_DEFAULT:
-                PressedUpButton_Inventory();
-                break;
-            case INVENTORY_MODE_REORDER:
-                numPocketOptions = NUM_SORT_OPTIONS;
-
-                if(sMenuDataPtr->itemIdxPickMode != 0)
-                    sMenuDataPtr->itemIdxPickMode--;
-                else
-                    sMenuDataPtr->itemIdxPickMode = numPocketOptions - 1;
-                break;
-            case INVENTORY_MODE_REGISTER:
-                break;
-            case INVENTORY_MODE_TOSS_CONFIRMATION:
-                numPocketOptions = NUM_TOSS_CONFIRMATION_OPTIONS;
-
-                if(sMenuDataPtr->itemIdxPickMode != 0)
-                    sMenuDataPtr->itemIdxPickMode--;
-                else
-                    sMenuDataPtr->itemIdxPickMode = numPocketOptions - 1;
-                break;
-            case INVENTORY_MODE_USE_OPTIONS:
-                numPocketOptions = getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
-
-                if(sMenuDataPtr->itemIdxPickMode != 0)
-                    sMenuDataPtr->itemIdxPickMode--;
-                else
-                    sMenuDataPtr->itemIdxPickMode = numPocketOptions - 1;
-                break;
-        }
-
+        PressedUpButton_Inventory();
         PlaySE(SE_SELECT);
         Inventory_PrintToAllWindows();
     }
 
     if ((JOY_NEW(L_BUTTON)))
     {
-        switch(sMenuDataPtr->currentSelectMode){
-            case INVENTORY_MODE_DEFAULT:
-                numPress = NUM_LR_CURSOR_MOVES;
-                PlaySE(SE_SELECT);
-                do
-                {
-                    if(gSaveBlock3Ptr->InventoryData.itemIdx == 0)
-                        break;
+        if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
+            return;
 
-                    PressedUpButton_Inventory();
-                    numPress--;
-                }
-                while(numPress != 0);
-                Inventory_PrintToAllWindows();
+        numPress = NUM_LR_CURSOR_MOVES;
+        PlaySE(SE_SELECT);
+        do
+        {
+            if(gSaveBlock3Ptr->InventoryData.itemIdx == 0)
                 break;
+
+            PressedUpButton_Inventory();
+            numPress--;
         }
+        while(numPress != 0);
+        Inventory_PrintToAllWindows();
     }
 
     if ((JOY_NEW(R_BUTTON)))
     {
-        switch(sMenuDataPtr->currentSelectMode){
-            case INVENTORY_MODE_DEFAULT:
-                numPress = NUM_LR_CURSOR_MOVES;
-                PlaySE(SE_SELECT);
-                do{
-                    if(gSaveBlock3Ptr->InventoryData.itemIdx == numitems - 1)
-                        break;
+        if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
+            return;
 
-                    PressedDownButton_Inventory();
-                    numPress--;
-                }
-                while(numPress != 0);
-                Inventory_PrintToAllWindows();
+        numPress = NUM_LR_CURSOR_MOVES;
+        PlaySE(SE_SELECT);
+        do
+        {
+            if(gSaveBlock3Ptr->InventoryData.itemIdx == 0)
                 break;
+
+            PressedDownButton_Inventory();
+            numPress--;
         }
+        while(numPress != 0);
+        Inventory_PrintToAllWindows();
     }
+
 
     if ((JOY_NEW(START_BUTTON)))
     {
         //You can only Sort Items in the default inventory mode
-        if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD){
-            switch(sMenuDataPtr->currentSelectMode){
-                case INVENTORY_MODE_DEFAULT:
-                    if(sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] > 2){
-                        sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REORDER;
-                        Inventory_PrintToAllWindows();
-                        Inventory_OpenMenu(taskId);
-                    }
-                    break;
-            }
-        }
+        if(sMenuDataPtr->inventoryMode != INVENTORY_MODE_FIELD)
+            return;
+
+        if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
+            return;
+
+        if(sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] <= 1)
+            return;
+
+        sMenuDataPtr->currentSelectMode = INVENTORY_MODE_REORDER;
+        Inventory_PrintToAllWindows();
+        Inventory_OpenMenu(taskId);
     }
 
     if (JOY_NEW(SELECT_BUTTON))
