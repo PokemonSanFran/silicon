@@ -183,6 +183,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
         .helpBar = {
             [0] = COMPOUND_STRING("{A_BUTTON} Edit {B_BUTTON} Exit"),
             [1] = COMPOUND_STRING("{DPAD_NONE} Navigate {A_BUTTON} Select {B_BUTTON} Cancel"),
+            [2] = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Confirm {B_BUTTON} Cancel"),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
         .mainSpriteCoords =

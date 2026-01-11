@@ -246,6 +246,8 @@ enum __attribute__((packed)) MonSummaryReloadModes
 #define SUMMARY_STATS_FLAG_STATS (1 << 3) // XXXX
 #define SUMMARY_STATS_FLAG_ALL   (SUMMARY_STATS_FLAG_NAME | SUMMARY_STATS_FLAG_EVS | SUMMARY_STATS_FLAG_IVS | SUMMARY_STATS_FLAG_STATS)
 
+#define SUMMARY_SUB_MENU_DEPTH   (4) // infos page has 1, stats page has 2, and moves page has 3
+
 // structs
 
 // contains MonData of the current pokemon (list.mons/boxMons[currId])
@@ -299,9 +301,9 @@ struct MonSummaryResources
     u32 currIdx:8; // also used as the vertical "cursor" for switching between each available mon(s)
     u32 totalIdx:8;
     u32 useBoxMon:1;
-    u32 subMode:1; // mode within current page
+    u32 subMode:2; // mode within current page
     u32 updateText:1;
-    u32 pad:12;
+    u32 pad:11;
 
     // set when opening, usually help determines where to get a mon info.
     enum MonSummaryModes mode;
@@ -342,7 +344,7 @@ struct MonSummarySprite
 struct MonSummaryPageInfo
 {
     const u8 *name;
-    const u8 *const helpBar[2];
+    const u8 *const helpBar[SUMMARY_SUB_MENU_DEPTH];
     const u32 *tilemap;
     struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     TaskFunc input;

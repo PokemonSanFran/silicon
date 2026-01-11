@@ -801,7 +801,11 @@ static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
 
-    if (!info || !info->helpBar[0] || !info->helpBar[1]) return gText_EmptyString2;
+    if (!info || !info->helpBar[0]
+     || !info->helpBar[1] || !info->helpBar[2])
+    {
+        return gText_EmptyString2;
+    }
 
     return info->helpBar[SummaryInput_IsWithinSubMode()];
 }
