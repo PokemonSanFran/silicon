@@ -2431,7 +2431,7 @@ const struct Item gItemsInfo[] =
         "Pokémon for 100\n"
         "steps."),
       .pocket = POCKET_OTHER,
-      .sortType = ITEM_TYPE_FIELD_USE,
+      .sortType = ITEM_TYPE_REPEL,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_Repel,
       .flingPower = 30,
@@ -2449,7 +2449,7 @@ const struct Item gItemsInfo[] =
         "Pokémon for 200\n"
         "steps."),
       .pocket = POCKET_OTHER,
-      .sortType = ITEM_TYPE_FIELD_USE,
+      .sortType = ITEM_TYPE_REPEL,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_Repel,
       .flingPower = 30,
@@ -2467,7 +2467,7 @@ const struct Item gItemsInfo[] =
         "Pokémon for 250\n"
         "steps."),
       .pocket = POCKET_OTHER,
-      .sortType = ITEM_TYPE_FIELD_USE,
+      .sortType = ITEM_TYPE_REPEL,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_Repel,
       .flingPower = 30,
@@ -2485,7 +2485,7 @@ const struct Item gItemsInfo[] =
         "likely to appear\n"
         "for 100 steps."),
       .pocket = POCKET_OTHER,
-      .sortType = ITEM_TYPE_FIELD_USE,
+      .sortType = ITEM_TYPE_REPEL,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_Lure,
       .secondaryId = 0,
@@ -2504,7 +2504,7 @@ const struct Item gItemsInfo[] =
         "likely to appear\n"
         "for 200 steps."),
       .pocket = POCKET_OTHER,
-      .sortType = ITEM_TYPE_FIELD_USE,
+      .sortType = ITEM_TYPE_REPEL,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_Lure,
       .secondaryId = 0,
@@ -2523,7 +2523,7 @@ const struct Item gItemsInfo[] =
         "likely to appear\n"
         "for 250 steps."),
       .pocket = POCKET_OTHER,
-      .sortType = ITEM_TYPE_FIELD_USE,
+      .sortType = ITEM_TYPE_REPEL,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_Lure,
       .secondaryId = 0,
