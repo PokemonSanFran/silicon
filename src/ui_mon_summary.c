@@ -154,6 +154,7 @@ static void StatsPageMisc_MonTotalEVs(void);
 static void MovesPage_HandleFrontEnd(void);
 static void MovesPage_HandleUpdateText(void);
 static void MovesPage_HandleHeader(void);
+static void MovesPage_HandleGeneral(void);
 
 // const data
 #include "data/ui_mon_summary.h"
@@ -1755,6 +1756,7 @@ static void StatsPageMisc_MonTotalEVs(void)
 static void MovesPage_HandleFrontEnd(void)
 {
     MovesPage_HandleHeader();
+    MovesPage_HandleGeneral();
 }
 
 static void MovesPage_HandleUpdateText(void)
@@ -1768,4 +1770,14 @@ static void MovesPage_HandleHeader(void)
     SummaryPrint_MonGender(SUMMARY_MOVES_HEADER_GENDER_X, SUMMARY_MOVES_HEADER_Y);
     SummaryPrint_MonLevel(SUMMARY_MOVES_HEADER_LEVEL_X, SUMMARY_MOVES_HEADER_Y);
     SummarySprite_MonTypes(SUMMARY_MOVES_SPRITE_TYPE_1, 88 + 8, 20 + 8);
+}
+
+static void MovesPage_HandleGeneral(void)
+{
+    for (u32 i = 0, x = 139, y = 34; i < MAX_MON_MOVES; i++, y += 16)
+    {
+        SummarySprite_MonMove(i, x, y);
+        SummaryPrint_MoveName(i, x + 5, y);
+        SummaryPrint_BlitMoveType(i, 223, y);
+    }
 }
