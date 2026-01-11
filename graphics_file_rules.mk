@@ -15,6 +15,7 @@ TYPES15x14GFXDIR := graphics/ui_menus/types/15x14
 # End pokedex
 # Start monSummary
 TYPES11x9GFXDIR := graphics/ui_menus/types/11x9
+TYPES128x16GFXDIR := graphics/ui_menus/types/128x16
 # End monSummary
 RAYQUAZAGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
@@ -433,6 +434,12 @@ $(TYPES15x14GFXDIR)/types.4bpp: $(types:%=$(TYPES15x14GFXDIR)/%.4bpp)
 
 # Start monSummary
 $(TYPES11x9GFXDIR)/types.4bpp: $(types:%=$(TYPES11x9GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(types:%=$(TYPES128x16GFXDIR)/%.4bpp): %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(TYPES128x16GFXDIR)/types.4bpp: $(types:%=$(TYPES128x16GFXDIR)/%.4bpp)
 	@cat $^ >$@
 # End monSummary
 

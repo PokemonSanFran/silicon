@@ -109,6 +109,7 @@ static u32 SummarySprite_GetHeldItemTag(void);
 static void SummarySprite_MonPokeBall(u32, s32, s32);
 static void SummarySprite_MonTypes(u32, s32, s32);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
+static void SummarySprite_MonMove(u32, s32, s32);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
@@ -128,6 +129,8 @@ static void SummaryPrint_MonHeldItem(u32, u32, u32);
 static void SummaryPrint_MonAbilityName(u32, u32, u32);
 static void SummaryPrint_MonAbilityDesc(u32, u32, u32);
 static void SummaryPrint_MonStat(enum Stat, u32, u32);
+static void SummaryPrint_MoveName(u32, u32, u32);
+static void SummaryPrint_BlitMoveType(u32, u32, u32);
 
 static void DummyPage_Handle(void);
 
@@ -1194,6 +1197,25 @@ static u32 SummarySprite_GetTypePaletteTag(enum Type type)
     return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
 }
 
+static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
+{
+    idx %= MAX_MON_MOVES;
+
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 move = mon->moves[idx];
+    enum Type type = GetMoveType(move);
+
+    if (move == MOVE_NONE || move >= MOVES_COUNT) return;
+
+    u32 spriteId = CreateSprite(&sMovesPageGeneral_MoveBarSpriteTemplate, x, y, 2);
+
+    gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(type));
+    SetSubspriteTables(&gSprites[spriteId], sMovesPageGeneral_MoveBarSubspriteTable);
+    StartSpriteAnim(&gSprites[spriteId], type);
+
+    SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);
+}
+
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
 {
     sprite->invisible = SummaryMon_GetStruct()->isShiny ^ 1;
@@ -1439,6 +1461,38 @@ static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
             SUMMARY_STATS_GENERAL_STATS_X + centerAlign, y,
             SUMMARY_FNTCLR_INTERFACE, gStringVar1);
     }
+}
+
+static void SummaryPrint_MoveName(u32 idx, u32 x, u32 y)
+{
+    idx %= MAX_MON_MOVES;
+
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 move = mon->moves[idx];
+
+    if (move == MOVE_NONE || move >= MOVES_COUNT) return;
+
+    const u8 *str = GetMoveName(move);
+    u32 fontId = GetOutlineFontIdToFit(str, TILE_TO_PIXELS(10));
+
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
+}
+
+static void SummaryPrint_BlitMoveType(u32 idx, u32 x, u32 y)
+{
+    idx %= MAX_MON_MOVES;
+
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 move = mon->moves[idx];
+
+    if (move == MOVE_NONE || move >= MOVES_COUNT) return;
+
+    enum Type type = GetMoveType(move);
+    BlitBitmapRectToWindow(SUMMARY_MAIN_WIN_PAGE_TEXT, sMovesPageGeneral_MoveTypeGfx,
+        0, type * 16,
+        16, 16 * NUMBER_OF_MON_TYPES,
+        x, y,
+        16, 16);
 }
 
 static void DummyPage_Handle(void)

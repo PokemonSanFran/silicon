@@ -17,14 +17,14 @@ static const struct BgTemplate sSummarySetup_BgTemplates[NUM_SUMMARY_BACKGROUNDS
         .charBaseIndex = 2,
         .mapBaseIndex = 28,
         .screenSize = 1,
-        .priority = 1
+        .priority = 2
     },
     {
         .bg = SUMMARY_BG_PAGE_2,
         .charBaseIndex = 2,
         .mapBaseIndex = 26,
         .screenSize = 1,
-        .priority = 1
+        .priority = 2
     },
 };
 
@@ -323,4 +323,86 @@ static const u8 *const sStatsPageGeneral_StatsNames[NUM_STATS] =
     [STAT_SPATK] = COMPOUND_STRING("SPATK"),
     [STAT_SPDEF] = COMPOUND_STRING("SPDEF"),
     [STAT_SPEED] = COMPOUND_STRING("SPD"),
+};
+
+static const u8 sMovesPageGeneral_MoveBarGfx[] = INCBIN_U8("graphics/ui_menus/types/128x16/types.4bpp");
+static const u8 sMovesPageGeneral_MoveTypeGfx[] = INCBIN_U8("graphics/ui_menus/mon_summary/move_type_icons.4bpp");
+
+static const struct SpriteTemplate sMovesPageGeneral_MoveBarSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
+        .priority = 2,
+    },
+    .anims = (const union AnimCmd *const[]){
+        #define TYPE_ANIM(type) [TYPE_ ##type] = (const union AnimCmd[]){ ANIMCMD_FRAME(TYPE_ ##type, 1), ANIMCMD_END }
+        TYPE_ANIM(NONE),
+        TYPE_ANIM(NORMAL),
+        TYPE_ANIM(FIGHTING),
+        TYPE_ANIM(FLYING),
+        TYPE_ANIM(POISON),
+        TYPE_ANIM(GROUND),
+        TYPE_ANIM(ROCK),
+        TYPE_ANIM(BUG),
+        TYPE_ANIM(GHOST),
+        TYPE_ANIM(STEEL),
+        TYPE_ANIM(MYSTERY),
+        TYPE_ANIM(FIRE),
+        TYPE_ANIM(WATER),
+        TYPE_ANIM(GRASS),
+        TYPE_ANIM(ELECTRIC),
+        TYPE_ANIM(PSYCHIC),
+        TYPE_ANIM(ICE),
+        TYPE_ANIM(DRAGON),
+        TYPE_ANIM(DARK),
+        TYPE_ANIM(FAIRY),
+        TYPE_ANIM(STELLAR),
+        #undef TYPE_ANIM
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = sMovesPageGeneral_MoveBarGfx,
+        .size = (128 * 16) / 2,
+        .relativeFrames = TRUE
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct Subsprite sMovesPageGeneral_MoveBarSubsprites[] =
+{
+    {
+        .x = 0, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = 32, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 8,
+        .priority = 1
+    },
+    {
+        .x = 64, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 16,
+        .priority = 1
+    },
+    {
+        .x = 96, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 24,
+        .priority = 1
+    },
+};
+
+static const struct SubspriteTable sMovesPageGeneral_MoveBarSubspriteTable[] =
+{
+    {
+        .subspriteCount = ARRAY_COUNT(sMovesPageGeneral_MoveBarSubsprites),
+        .subsprites = sMovesPageGeneral_MoveBarSubsprites
+    },
+    { 0, NULL }
 };

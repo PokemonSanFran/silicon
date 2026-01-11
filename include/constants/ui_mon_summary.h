@@ -63,7 +63,7 @@ enum __attribute__((packed)) MonSummaryMainWindows
     // the rest is dynamic
 };
 
-#define TOTAL_SUMMARY_DYNAMIC_SPRITES 5
+#define TOTAL_SUMMARY_DYNAMIC_SPRITES 7
 #define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
 
 enum MonSummaryMainSprites
@@ -212,6 +212,10 @@ enum MonSummaryMovesSprites
 {
     SUMMARY_MOVES_SPRITE_TYPE_1,
     SUMMARY_MOVES_SPRITE_TYPE_2,
+    SUMMARY_MOVES_SPRITE_MOVE_1,
+    SUMMARY_MOVES_SPRITE_MOVE_2,
+    SUMMARY_MOVES_SPRITE_MOVE_3,
+    SUMMARY_MOVES_SPRITE_MOVE_4,
 
     NUM_SUMMARY_MOVES_SPRITES
 };
