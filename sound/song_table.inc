@@ -596,6 +596,7 @@ gSongTable::
     song mus_chasilla_night, MUSIC_PLAYER_BGM, 0
     song mus_leather_daddy, MUSIC_PLAYER_BGM, 0
     song mus_perlacia_gym, MUSIC_PLAYER_BGM, 0
+    song mus_tora_gym, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2
