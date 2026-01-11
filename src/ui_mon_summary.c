@@ -860,7 +860,7 @@ static void SummaryPage_UnloadDynamicSprites(void)
         u32 tileTag = (u16)sprite->sTileTag, paletteTag = (u16)sprite->sPaletteTag;
 
         FreeSpriteOamMatrix(sprite);
-        DestroySpriteAndFreeResources(&gSprites[spriteId]);
+        DestroySprite(&gSprites[spriteId]);
         FreeSpriteTilesByTag(tileTag);
         FreeSpritePaletteByTag(paletteTag);
 
@@ -1125,9 +1125,9 @@ static void SummarySprite_PlayPokemonCry(void)
 static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 itemId = mon->item, spriteId;
+    u32 itemId = mon->item, spriteId = SummarySprite_GetDynamicSpriteId(spriteArrId);
 
-    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
+    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT || spriteId != SPRITE_NONE) return;
 
     DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
     CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
@@ -1159,6 +1159,8 @@ static void SummarySprite_MonPokeBall(u32 spriteArrId, s32 x, s32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     enum PokeBall ball = mon->ball;
+
+    if (SummarySprite_GetDynamicSpriteId(spriteArrId) != SPRITE_NONE) return;
 
     LoadBallGfx(ball);
     u32 spriteId = CreateSprite(&gBallSpriteTemplates[ball], x, y, 0);
