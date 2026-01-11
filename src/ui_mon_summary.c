@@ -104,6 +104,7 @@ static void SummarySprite_InjectPokemon(void);
 static u32 SummarySprite_GetPokemonPaletteSlot(void);
 static void SummarySprite_PlayPokemonCry(void);
 static void SummarySprite_MonHeldItem(u32, s32, s32);
+static u32 SummarySprite_GetHeldItemTag(void);
 static void SummarySprite_MonPokeBall(u32, s32, s32);
 static void SummarySprite_MonTypes(u32, s32, s32);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
@@ -214,6 +215,7 @@ static void MonSummary_FreeResources(void)
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2]);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
+    FreeItemIconTemporaryBuffers();
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
@@ -296,6 +298,10 @@ static void SummarySetup_Graphics(void)
     // ensure neither of these gets overwritten by other sprite palettes
     AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_1);
     AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_2);
+    AllocSpritePalette(TAG_SUMMARY_HELD_ITEM_1);
+    AllocSpritePalette(TAG_SUMMARY_HELD_ITEM_2);
+
+    AllocItemIconTemporaryBuffers();
 
     SummaryPage_LoadTilemap();
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_1);
@@ -1081,14 +1087,30 @@ static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
 
     if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
 
-    spriteId = AddItemIconSprite(TAG_SUMMARY_HELD_ITEM, TAG_SUMMARY_HELD_ITEM, itemId);
+    DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
 
-    gSprites[spriteId].x = x;
-    gSprites[spriteId].y = y;
-    gSprites[spriteId].sTileTag = TAG_SUMMARY_HELD_ITEM;
-    gSprites[spriteId].sPaletteTag = TAG_SUMMARY_HELD_ITEM;
+    u32 tag = SummarySprite_GetHeldItemTag();
+
+    LoadPalette(GetItemIconPalette(itemId), OBJ_PLTT_ID(IndexOfSpritePaletteTag(tag)), PLTT_SIZE_4BPP);
+
+    sMonSummaryDataPtr->heldItemImage.data = gItemIcon4x4Buffer;
+    sMonSummaryDataPtr->heldItemImage.relativeFrames = TRUE;
+    sMonSummaryDataPtr->heldItemImage.size = TILE_OFFSET_4BPP(16);
+
+    struct SpriteTemplate template = gItemIconSpriteTemplate;
+    template.tileTag = TAG_NONE;
+    template.images = &sMonSummaryDataPtr->heldItemImage;
+    template.paletteTag = tag;
+
+    spriteId = CreateSprite(&template, x, y, 0);
 
     SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+}
+
+static u32 SummarySprite_GetHeldItemTag(void)
+{
+    return TAG_SUMMARY_HELD_ITEM_1 + SummaryPage_GetPageSlot();
 }
 
 static void SummarySprite_MonPokeBall(u32 spriteArrId, s32 x, s32 y)

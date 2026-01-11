@@ -89,7 +89,8 @@ enum MonSummarySpriteTags
     TAG_SUMMARY_FRIENDSHIP_BAR,
     TAG_SUMMARY_POKEMON_SLOT_1,
     TAG_SUMMARY_POKEMON_SLOT_2,
-    TAG_SUMMARY_HELD_ITEM,
+    TAG_SUMMARY_HELD_ITEM_1,
+    TAG_SUMMARY_HELD_ITEM_2,
     TAG_SUMMARY_POKE_BALL,
     TAG_SUMMARY_TYPES, // tileTag
     TAG_SUMMARY_TYPE_1, // paletteTag
@@ -315,6 +316,7 @@ struct MonSummaryResources
     } list;
     struct Pokemon *mon;
     struct MonSummary summary;
+    struct SpriteFrameImage heldItemImage;
 };
 
 struct MonSummaryDynamicWindow
