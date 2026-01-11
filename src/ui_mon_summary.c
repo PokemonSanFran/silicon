@@ -1221,7 +1221,7 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     u32 spriteId = CreateSprite(&sMovesPageGeneral_MoveBarSpriteTemplate, x, y, 2);
 
     gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(type));
-    SetSubspriteTables(&gSprites[spriteId], sMovesPageGeneral_MoveBarSubspriteTable);
+    SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
     StartSpriteAnim(&gSprites[spriteId], type);
 
     SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);

@@ -151,6 +151,43 @@ static const u16 sSummarySprite_HpBarColors[] = INCBIN_U16("graphics/ui_menus/mo
 static const u8 sSummarySprite_ExpBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/exp_bar.4bpp");
 static const u8 sSummarySprite_FriendshipBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/friendship_bar.4bpp");
 
+static const struct Subsprite sSummarySprite_128x16Subsprites[] =
+{
+    {
+        .x = 0, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = 32, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 8,
+        .priority = 1
+    },
+    {
+        .x = 64, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 16,
+        .priority = 1
+    },
+    {
+        .x = 96, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 24,
+        .priority = 1
+    },
+};
+
+static const struct SubspriteTable sSummarySprite_128x16SubspriteTable[] =
+{
+    {
+        .subspriteCount = ARRAY_COUNT(sSummarySprite_128x16Subsprites),
+        .subsprites = sSummarySprite_128x16Subsprites
+    },
+    { 0, NULL }
+};
+
 static const TaskFunc sSummaryMode_InputFuncs[NUM_SUMMARY_MODES] =
 {
     [SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
@@ -369,41 +406,4 @@ static const struct SpriteTemplate sMovesPageGeneral_MoveBarSpriteTemplate =
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
-};
-
-static const struct Subsprite sMovesPageGeneral_MoveBarSubsprites[] =
-{
-    {
-        .x = 0, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 0,
-        .priority = 1
-    },
-    {
-        .x = 32, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 8,
-        .priority = 1
-    },
-    {
-        .x = 64, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 16,
-        .priority = 1
-    },
-    {
-        .x = 96, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 24,
-        .priority = 1
-    },
-};
-
-static const struct SubspriteTable sMovesPageGeneral_MoveBarSubspriteTable[] =
-{
-    {
-        .subspriteCount = ARRAY_COUNT(sMovesPageGeneral_MoveBarSubsprites),
-        .subsprites = sMovesPageGeneral_MoveBarSubsprites
-    },
-    { 0, NULL }
 };
