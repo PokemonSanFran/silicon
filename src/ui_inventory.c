@@ -363,7 +363,7 @@ static bool8 Menu_DoGfxSetup(void)
         DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
-        ResetGpuRegsAndBgs(); 
+        ResetGpuRegsAndBgs();
         gMain.state++;
         break;
     case 1:
@@ -641,7 +641,7 @@ static const struct SpriteTemplate sMonStatus_PlatformSpriteTemplate =
     .images = NULL,
     .anims = (const union AnimCmd *const[]){
         (const union AnimCmd[]){ ANIMCMD_FRAME(16, 1), ANIMCMD_END },
-        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END }, 
+        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END },
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Species_Icon_Dummy,
@@ -1041,7 +1041,7 @@ static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot
         name1 = GetMoveName(GetItemSecondaryId(item1));
         name2 = GetMoveName(GetItemSecondaryId(item2));
     }
-    else 
+    else
     {
         name1 = GetItemName(item1);
         name2 = GetItemName(item2);
@@ -1100,7 +1100,7 @@ static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSl
         type1 = GetMoveType(GetItemSecondaryId(itemSlot1->itemId));
         type2 = GetMoveType(GetItemSecondaryId(itemSlot2->itemId));
     }
-    else 
+    else
     {
         type1 = (itemSlot1->itemId == ITEM_NONE) ? 0xFF : GetItemSortType(itemSlot1->itemId);
         type2 = (itemSlot2->itemId == ITEM_NONE) ? 0xFF : GetItemSortType(itemSlot2->itemId);
@@ -1564,7 +1564,7 @@ static void FreeRegisteredItemIconSprite(u8 slot)
     }
 }
 
-static const u8 sItemCoordinates[AXIS_COUNT][INVENTORY_REGISTER_NUM_DIRECTIONS] = 
+static const u8 sItemCoordinates[AXIS_COUNT][INVENTORY_REGISTER_NUM_DIRECTIONS] =
 {
     [AXIS_X] = {REGISTERED_ITEM_ICON_X_UP, REGISTERED_ITEM_ICON_X_RIGHT, REGISTERED_ITEM_ICON_X_DOWN, REGISTERED_ITEM_ICON_X_LEFT},
     [AXIS_Y] = {REGISTERED_ITEM_ICON_Y_UP, REGISTERED_ITEM_ICON_Y_RIGHT, REGISTERED_ITEM_ICON_Y_DOWN, REGISTERED_ITEM_ICON_Y_LEFT},
@@ -1646,228 +1646,570 @@ static void ShowItemIcon(u16 itemId, u8 x, u8 y)
     }
 }
 
-static const ItemSortType sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
-    [ITEM_TYPE_FIELD_USE] = {
+static const enum InventoryItemOptions sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] =
+{
+    [ITEM_TYPE_UNCATEGORIZED] =
+    {
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_FIELD_USE] =
+    {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_GIVE,
         INVENTORY_ITEM_OPTION_TOSS,
         INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    [ITEM_TYPE_REPEL] = {
+    [ITEM_TYPE_LEVEL_UP_ITEM] =
+    {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_GIVE,
         INVENTORY_ITEM_OPTION_TOSS,
         INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Ultra Ball
-    [ITEM_TYPE_POKE_BALL] = {
+    [ITEM_TYPE_HEALTH_RECOVERY] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_STATUS_RECOVERY] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_PP_RECOVERY] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_NATURE_MINT] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_STAT_BOOST_DRINK] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_STAT_BOOST_FEATHER] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_STAT_BOOST_MOCHI] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_BATTLE_ITEM] =
+    {
         INVENTORY_ITEM_OPTION_GIVE,
         INVENTORY_ITEM_OPTION_TOSS,
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Mach Bike
-    [ITEM_TYPE_KEY_ITEMS] = {
+
+    [ITEM_TYPE_FLUTE] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_X_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_AUX_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_EVOLUTION_STONE] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_EVOLUTION_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_SPECIAL_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_MEGA_STONE] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_Z_CRYSTAL] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_TERA_SHARD] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_TYPE_BOOST_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_CONTEST_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_EV_BOOST_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_GEM] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_PLATE] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_MEMORY] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_DRIVE] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_INCENSE] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_NECTAR] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_GROWTH] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_SHARD] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_SELLABLE] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_RELIC] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_FOSSIL] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_MAIL] =
+    {
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_POKE_BALL] =
+    {
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+
+    [ITEM_TYPE_TMHM] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_REPEL] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_GIVE,
+        INVENTORY_ITEM_OPTION_TOSS,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_KEY_ITEMS] =
+    {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Flutes
-    [ITEM_TYPE_FLUTE] = {
-        INVENTORY_ITEM_OPTION_USE,
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_TOSS,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        #if DISABLE_REGISTER_NON_KEY_ITEMS != TRUE
-            INVENTORY_ITEM_OPTION_REGISTER,
-        #endif
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Oran Berry
-    [ITEM_TYPE_HEALTH_RECOVERY] = {
-        INVENTORY_ITEM_OPTION_USE,
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_TOSS,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        #if DISABLE_REGISTER_NON_KEY_ITEMS != TRUE
-            INVENTORY_ITEM_OPTION_REGISTER,
-        #endif
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Fire Stone
-    [ITEM_TYPE_EVOLUTION_STONE] = {
-        INVENTORY_ITEM_OPTION_USE,
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_TOSS,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        #if DISABLE_REGISTER_NON_KEY_ITEMS != TRUE
-            INVENTORY_ITEM_OPTION_REGISTER,
-        #endif
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Elixir
-    [ITEM_TYPE_PP_RECOVERY] = {
-        INVENTORY_ITEM_OPTION_USE,
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_TOSS,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        #if DISABLE_REGISTER_NON_KEY_ITEMS != TRUE
-            INVENTORY_ITEM_OPTION_REGISTER,
-        #endif
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Full Heal
-    [ITEM_TYPE_STATUS_RECOVERY] = {
-        INVENTORY_ITEM_OPTION_USE,
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_TOSS,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        #if DISABLE_REGISTER_NON_KEY_ITEMS != TRUE
-            INVENTORY_ITEM_OPTION_REGISTER,
-        #endif
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    // Generic TMHM
-    [ITEM_TYPE_TMHM] = {
-        INVENTORY_ITEM_OPTION_USE,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Blazikenite
-    [ITEM_TYPE_MEGA_STONE] = {
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Focus Sash
-    [ITEM_TYPE_HELD_ITEM] = {
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Poke Doll
-    [ITEM_TYPE_BATTLE_ITEM] = {
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Bugnium Z
-    [ITEM_TYPE_Z_CRYSTAL] = {
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Scanner
-    [ITEM_TYPE_UNUSABLE_KEY_ITEM] = {
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    // Magmarizer
-    [ITEM_TYPE_EVOLUTION_ITEM] = {
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_TOSS,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    // Unusable Item
-    [ITEM_TYPE_SELLABLE] = {
-        INVENTORY_ITEM_OPTION_GIVE,
-        INVENTORY_ITEM_OPTION_TOSS,
+    [ITEM_TYPE_UNUSABLE_KEY_ITEM] =
+    {
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
 };
 
-static const ItemSortType sInventory_PocketOptions_Battle[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
-    [ITEM_TYPE_FIELD_USE] = {
-        INVENTORY_ITEM_OPTION_FAVORITE,
+static const enum InventoryItemOptions sInventory_PocketOptions_Battle[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] =
+{
+    [ITEM_TYPE_UNCATEGORIZED] =
+    {
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    [ITEM_TYPE_REPEL] = {
+    [ITEM_TYPE_FIELD_USE] =
+    {
         INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Ultra Ball
-    [ITEM_TYPE_POKE_BALL] = {
+    [ITEM_TYPE_LEVEL_UP_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_HEALTH_RECOVERY] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_STATUS_RECOVERY] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_PP_RECOVERY] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_NATURE_MINT] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_STAT_BOOST_DRINK] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_STAT_BOOST_FEATHER] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+
+    },
+    [ITEM_TYPE_STAT_BOOST_MOCHI] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+
+    },
+    [ITEM_TYPE_BATTLE_ITEM] =
+    {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Mach Bike
-    [ITEM_TYPE_KEY_ITEMS] = {
+    [ITEM_TYPE_FLUTE] =
+    {
+        INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Oran Berry
-    [ITEM_TYPE_HEALTH_RECOVERY] = {
+    [ITEM_TYPE_X_ITEM] =
+    {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    // Water Stone
-    [ITEM_TYPE_EVOLUTION_STONE] = {
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Flutes
-    [ITEM_TYPE_FLUTE] = {
+    [ITEM_TYPE_AUX_ITEM] =
+    {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Elixir
-    [ITEM_TYPE_PP_RECOVERY] = {
+    [ITEM_TYPE_EVOLUTION_STONE] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_EVOLUTION_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_SPECIAL_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_MEGA_STONE] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_Z_CRYSTAL] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_TERA_SHARD] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_TYPE_BOOST_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_CONTEST_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_EV_BOOST_HELD_ITEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_GEM] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_PLATE] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+
+    },
+    [ITEM_TYPE_MEMORY] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_DRIVE] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_INCENSE] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_NECTAR] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_GROWTH] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_SHARD] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_SELLABLE] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_RELIC] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_FOSSIL] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_MAIL] =
+    {
+        INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_CANCEL,
+    },
+    [ITEM_TYPE_POKE_BALL] =
+    {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Full Heal
-    [ITEM_TYPE_STATUS_RECOVERY] = {
-        INVENTORY_ITEM_OPTION_USE,
+    [ITEM_TYPE_TMHM] =
+    {
         INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    // Generic TMHM
-    [ITEM_TYPE_TMHM] = {
+    [ITEM_TYPE_REPEL] =
+    {
         INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Blazikenite
-    [ITEM_TYPE_MEGA_STONE] = {
+    [ITEM_TYPE_KEY_ITEMS] =
+    {
         INVENTORY_ITEM_OPTION_FAVORITE,
+        INVENTORY_ITEM_OPTION_REGISTER,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
-    //Focus Sash
-    [ITEM_TYPE_HELD_ITEM] = {
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Poke Doll
-    [ITEM_TYPE_BATTLE_ITEM] = {
-        INVENTORY_ITEM_OPTION_USE,
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Bugnium Z
-    [ITEM_TYPE_Z_CRYSTAL] = {
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    //Scanner
-    [ITEM_TYPE_UNUSABLE_KEY_ITEM] = {
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    // Unusable Item
-    [ITEM_TYPE_SELLABLE] = {
-        INVENTORY_ITEM_OPTION_FAVORITE,
-        INVENTORY_ITEM_OPTION_CANCEL,
-    },
-    // Magmarizer
-    [ITEM_TYPE_EVOLUTION_ITEM] = {
+    [ITEM_TYPE_UNUSABLE_KEY_ITEM] =
+    {
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
     },
@@ -1879,7 +2221,7 @@ static const u8 *const sInventory_TossConfirm[] =
     COMPOUND_STRING("Yes"),
 };
 
-static const u8 *const sInventory_OptionStrings[] = 
+static const u8 *const sInventory_OptionStrings[] =
 {
     [INVENTORY_ITEM_OPTION_USE]      = COMPOUND_STRING("Use"),
     [INVENTORY_ITEM_OPTION_GIVE]     = COMPOUND_STRING("Give"),
@@ -1890,7 +2232,7 @@ static const u8 *const sInventory_OptionStrings[] =
     [INVENTORY_ITEM_OPTION_UNFAVORITE]   = COMPOUND_STRING("Unfavorite"),
 };
 
-static const u8 *const sSortTypeStrings[] = 
+static const u8 *const sSortTypeStrings[] =
 {
     [ITEM_SORT_ALPHABETICALLY] = COMPOUND_STRING("Name"),
     [ITEM_SORT_BY_TYPE]        = COMPOUND_STRING("Type"),
@@ -2094,14 +2436,14 @@ static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u3
         BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gInventoryIcon_Pinned_Gfx, 0, (itemScreenListIndex * 17), 16, 8);
 }
 
-struct TMHMGfxTable 
+struct TMHMGfxTable
 {
     const u8* left;
     const u8* middle;
     const u8* right;
 };
 
-static const struct TMHMGfxTable sTMHMGraphics[] = 
+static const struct TMHMGfxTable sTMHMGraphics[] =
 {
     [0] = {sInventoryTMHM_Type1_Gfx, sInventoryTMHM_Type1_2_Gfx, sInventoryTMHM_Type1_3_Gfx},
     [1] = {sInventoryTMHM_Type2_Gfx, sInventoryTMHM_Type2_2_Gfx, sInventoryTMHM_Type2_3_Gfx},
@@ -2110,7 +2452,7 @@ static const struct TMHMGfxTable sTMHMGraphics[] =
     [4] = {sInventoryTMHM_Type5_Gfx, sInventoryTMHM_Type5_2_Gfx, sInventoryTMHM_Type5_3_Gfx},
 };
 
-static const u8* sTypeGraphics[] = 
+static const u8* sTypeGraphics[] =
 {
     [TYPE_NORMAL]   = sInventoryTMHM_Type_Normal_Gfx,
     [TYPE_FIGHTING] = sInventoryTMHM_Type_Fighting_Gfx,
@@ -2185,7 +2527,7 @@ static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenLis
     }
 }
 
-static const u8* sRegisteredIndicator[] = 
+static const u8* sRegisteredIndicator[] =
 {
     [INVENTORY_REGISTER_DIRECTION_LEFT]   = sInventoryRegisterIndicator_Left_Gfx,
     [INVENTORY_REGISTER_DIRECTION_RIGHT]   = sInventoryRegisterIndicator_Right_Gfx,
@@ -2230,7 +2572,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
                 if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[direction])
                     BlitBitmapToWindow(windowId, sRegisteredIndicator[direction], x,y, 16, 16);
         }
-        else 
+        else
         {
             CopyItemName(itemId, gStringVar1);
             StringCopy(gStringVar2, gMovesInfo[GetItemSecondaryId(itemId)].name);
@@ -2238,7 +2580,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
             AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
         }
     }
-    else 
+    else
     {
         if (Inventory_GetItemIdFromPocketIndex((itemIndex-1),pocketId) == ITEM_NONE)
             if (itemIndex != 0)
@@ -2335,7 +2677,7 @@ static void Inventory_PrintDesc(void)
             StringCopy(gStringVar1, gMovesInfo[moveNum].description);
         }
     }
-    else 
+    else
 {
         StringCopy(gStringVar1, sInventory_Exit_Desc);
         FreeItemIconSprite();
@@ -3742,7 +4084,7 @@ static void Inventory_EnterMoveMode(u8 taskId)
         gTasks[taskId].func = Task_Inventory_HandleCantMoveInput;
         return;
     }
-        
+
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_MOVE_ITEMS;
     Inventory_PrintFooter();
     Inventory_PrintItemList();
