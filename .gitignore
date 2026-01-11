@@ -74,3 +74,6 @@ tools/compresSmol/compresSmolTilemap
 *.fastSmol
 *.smolTM
 __pycache__
+compile_commands.json
+.cache
+.ccls-cache
