@@ -16,6 +16,7 @@ TYPES15x14GFXDIR := graphics/ui_menus/types/15x14
 # Start monSummary
 TYPES11x9GFXDIR := graphics/ui_menus/types/11x9
 TYPES128x16GFXDIR := graphics/ui_menus/types/128x16
+MONSUMMARYGFXDIR := graphics/ui_menus/mon_summary
 # End monSummary
 RAYQUAZAGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
@@ -441,6 +442,9 @@ $(types:%=$(TYPES128x16GFXDIR)/%.4bpp): %.4bpp: %.png
 
 $(TYPES128x16GFXDIR)/types.4bpp: $(types:%=$(TYPES128x16GFXDIR)/%.4bpp)
 	@cat $^ >$@
+
+$(MONSUMMARYGFXDIR)/infos/cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
 # End monSummary
 
 graphics/bag/menu.4bpp: %.4bpp: %.png

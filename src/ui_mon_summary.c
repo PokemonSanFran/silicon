@@ -145,6 +145,10 @@ static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *);
 static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *);
 static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *);
 static void InfosPage_HandleMisc(void);
+static void InfosPageMisc_PrintTextBox(void);
+static void InfosPageMisc_TrySpawnDescCursor(void);
+static void SpriteCB_InfosPageMisc_Cursor(struct Sprite *);
+static void SpriteCB_InfosPageMisc_ScrollIndicator(struct Sprite *);
 
 static void StatsPage_HandleFrontEnd(void);
 static void StatsPage_HandleUpdateText(void);
@@ -574,9 +578,20 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
 
 static void Task_SummaryInput_InfosInput(u8 taskId)
 {
-    if (JOY_NEW(A_BUTTON))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT | DPAD_UP | DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
+        sMonSummaryDataPtr->arg.infosDescState ^= 1;
+
+        FillWindowPixelBuffer(SUMMARY_MAIN_WIN_PAGE_TEXT, PIXEL_FILL(0));
+        PutWindowTilemap(SUMMARY_MAIN_WIN_PAGE_TEXT);
+
+        void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+        handleFrontEnd();
+
+        CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
+        CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
+
         return;
     }
 
@@ -585,6 +600,7 @@ static void Task_SummaryInput_InfosInput(u8 taskId)
         PlaySE(SE_SELECT);
         SummaryInput_SetSubMode(FALSE);
         SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+        sMonSummaryDataPtr->arg.value = 0;
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
         return;
     }
@@ -1684,14 +1700,84 @@ static void InfosPage_HandleMisc(void)
     SummarySprite_MonPokeBall(SUMMARY_INFOS_SPRITE_POKE_BALL,
         SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y);
 
-    struct MonSummary *mon = SummaryMon_GetStruct();
 
-    ConvertUIntToDecimalStringN(gStringVar1, mon->metLevel, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
-    GetMapName(gStringVar2, mon->metLocation, 0);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL,
-        SUMMARY_INFOS_MISC_TEXT_BOX_X, SUMMARY_INFOS_MISC_TEXT_BOX_Y,
-        SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+    InfosPageMisc_PrintTextBox();
+    InfosPageMisc_TrySpawnDescCursor();
+}
+
+static void InfosPageMisc_PrintTextBox(void)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 x = SUMMARY_INFOS_MISC_TEXT_BOX_X, y = SUMMARY_INFOS_MISC_TEXT_BOX_Y;
+    enum MonSummaryFontColors color = SUMMARY_FNTCLR_INTERFACE;
+    u32 maxWidth = TILE_TO_PIXELS(23);
+
+    if (!SummaryInput_IsWithinSubMode())
+    {
+        ConvertUIntToDecimalStringN(gStringVar1, mon->metLevel, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
+        GetMapName(gStringVar2, mon->metLocation, 0);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
+        SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL, x, y, color, gStringVar4);
+    }
+    else
+    {
+        if (sMonSummaryDataPtr->arg.infosDescState)
+        {
+            // PSF TODO item descriptions are still RSE-styled as of writing
+
+            u32 itemId = mon->item;
+            const u8 *str = GetItemDescription(itemId);
+
+            if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
+
+            u32 fontId = GetFontIdToFit(str, FONT_NORMAL, 0, maxWidth);
+            SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, color, str);
+        }
+        else
+        {
+            SummaryPrint_MonAbilityDesc(SUMMARY_INFOS_MISC_TEXT_BOX_X, SUMMARY_INFOS_MISC_TEXT_BOX_Y, TILE_TO_PIXELS(23));
+        }
+    }
+}
+
+static void InfosPageMisc_TrySpawnDescCursor(void)
+{
+    u32 spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_INFOS_SPRITE_DESC_CURSOR);
+
+    if (spriteId != SPRITE_NONE) return;
+
+    spriteId = CreateSprite(&sInfosPageMisc_CursorSpriteTemplate,
+        SUMMARY_INFOS_MISC_DESC_CURSOR_X, SUMMARY_INFOS_MISC_DESC_CURSOR_Y, 0);
+
+    SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+    SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_DESC_CURSOR, spriteId);
+
+    spriteId = CreateSprite(&sInfosPageMisc_ScrollIndicatorSpriteTemplate,
+        SUMMARY_INFOS_MISC_SCROLL_INDICATOR_X, SUMMARY_INFOS_MISC_SCROLL_INDICATOR_Y, 0);
+
+    SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_SCROLL_INDICATOR, spriteId);
+}
+
+static void SpriteCB_InfosPageMisc_Cursor(struct Sprite *sprite)
+{
+    sprite->invisible = !SummaryInput_IsWithinSubMode();
+    if (sprite->invisible) return;
+
+    u32 state = sMonSummaryDataPtr->arg.infosDescState;
+
+    sprite->y2 = -(state * 16);
+    StartSpriteAnimIfDifferent(sprite, state);
+}
+
+static void SpriteCB_InfosPageMisc_ScrollIndicator(struct Sprite *sprite)
+{
+    sprite->invisible = !SummaryInput_IsWithinSubMode();
+    if (sprite->invisible) return;
+
+    u32 state = sMonSummaryDataPtr->arg.infosDescState;
+
+    sprite->x2 = state * 8;
+    sprite->y2 = -(state * 16);
 }
 
 static void StatsPage_HandleFrontEnd(void)

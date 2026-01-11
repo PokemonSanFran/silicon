@@ -294,6 +294,58 @@ static const u8 *const sInfosPageGeneral_BerryFlavorNames[FLAVOR_COUNT] =
     [FLAVOR_SOUR]   = COMPOUND_STRING("Sour"),
 };
 
+static const struct SpriteTemplate sInfosPageMisc_CursorSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .priority = 1
+    },
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0, 30),
+            ANIMCMD_END
+        },
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(1, 30),
+            ANIMCMD_END
+        },
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/infos/cursor.4bpp"),
+        .relativeFrames = TRUE,
+        .size = (128 * 16) / 2
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_InfosPageMisc_Cursor
+};
+
+static const struct SpriteTemplate sInfosPageMisc_ScrollIndicatorSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16),
+        .priority = 1
+    },
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0, 30),
+            ANIMCMD_FRAME(1, 30),
+            ANIMCMD_JUMP(0)
+        },
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/infos/scroll_indicator.4bpp"),
+        .relativeFrames = TRUE,
+        .size = (16 * 16) / 2
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_InfosPageMisc_ScrollIndicator
+};
+
 // 11x9
 static const struct SpriteTemplate sStatsPageHeader_TypeSpriteTemplate =
 {

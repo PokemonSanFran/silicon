@@ -82,7 +82,7 @@ enum MonSummaryMainSprites
 // assorted tags for both main and dynamic sprites
 enum MonSummarySpriteTags
 {
-    TAG_SUMMARY_UNIVERSAL_PAL = 0x4000,
+    TAG_SUMMARY_UNIVERSAL_PAL = 0x1000,
     TAG_SUMMARY_SHINY_SYMBOL,
     TAG_SUMMARY_HP_BAR,
     TAG_SUMMARY_EXP_BAR,
@@ -118,7 +118,8 @@ enum MonSummaryInfosSprites
 {
     SUMMARY_INFOS_SPRITE_HELD_ITEM,
     SUMMARY_INFOS_SPRITE_POKE_BALL,
-    SUMMARY_INFOS_SPRITE_DESC_CURSOR, // for switching between ability and held item description for the textbox
+    SUMMARY_INFOS_SPRITE_DESC_CURSOR,       // for switching between ability and held item description for the textbox
+    SUMMARY_INFOS_SPRITE_SCROLL_INDICATOR,  // this is a seperate sprite from above to achieve smoother animation
 
     NUM_SUMMARY_INFOS_SPRITES
 };
@@ -151,19 +152,23 @@ enum MonSummaryInfosSprites
 #define SUMMARY_INFOS_GENERAL_Y4     (TILE_TO_PIXELS( 4) + 49)    // exp:
 #define SUMMARY_INFOS_GENERAL_Y5     (TILE_TO_PIXELS( 4) + 65)    // <nature> <fav flavor>
 
-#define SUMMARY_INFOS_MISC_MON_MARKINGS_X   (55)
-#define SUMMARY_INFOS_MISC_ITEM_NAME_X      (32)
-#define SUMMARY_INFOS_MISC_ABILITY_NAME_X   (6)
-#define SUMMARY_INFOS_MISC_TEXT_BOX_X       (7)
-#define SUMMARY_INFOS_MISC_HELD_ITEM_X      (1 + 16)
-#define SUMMARY_INFOS_MISC_POKE_BALL_X      (32 + 8)
+#define SUMMARY_INFOS_MISC_MON_MARKINGS_X       (55)
+#define SUMMARY_INFOS_MISC_ITEM_NAME_X          (32)
+#define SUMMARY_INFOS_MISC_ABILITY_NAME_X       (6)
+#define SUMMARY_INFOS_MISC_TEXT_BOX_X           (7)
+#define SUMMARY_INFOS_MISC_HELD_ITEM_X          (1 + 16)
+#define SUMMARY_INFOS_MISC_POKE_BALL_X          (32 + 8)
+#define SUMMARY_INFOS_MISC_DESC_CURSOR_X        (0)
+#define SUMMARY_INFOS_MISC_SCROLL_INDICATOR_X   (95 + 8)
 
-#define SUMMARY_INFOS_MISC_MON_MARKINGS_Y   (TILE_TO_PIXELS(9) + 0)
-#define SUMMARY_INFOS_MISC_ITEM_NAME_Y      (TILE_TO_PIXELS(9) + 7)
-#define SUMMARY_INFOS_MISC_ABILITY_NAME_Y   (TILE_TO_PIXELS(9) + 23)
-#define SUMMARY_INFOS_MISC_TEXT_BOX_Y       (TILE_TO_PIXELS(14) + 1)
-#define SUMMARY_INFOS_MISC_HELD_ITEM_Y      (67 + 16)
-#define SUMMARY_INFOS_MISC_POKE_BALL_Y      (64 + 8)
+#define SUMMARY_INFOS_MISC_MON_MARKINGS_Y       (TILE_TO_PIXELS(9) + 0)
+#define SUMMARY_INFOS_MISC_ITEM_NAME_Y          (TILE_TO_PIXELS(9) + 7)
+#define SUMMARY_INFOS_MISC_ABILITY_NAME_Y       (TILE_TO_PIXELS(9) + 23)
+#define SUMMARY_INFOS_MISC_TEXT_BOX_Y           (TILE_TO_PIXELS(14) + 1)
+#define SUMMARY_INFOS_MISC_HELD_ITEM_Y          (67 + 16)
+#define SUMMARY_INFOS_MISC_POKE_BALL_Y          (64 + 8)
+#define SUMMARY_INFOS_MISC_DESC_CURSOR_Y        (96)
+#define SUMMARY_INFOS_MISC_SCROLL_INDICATOR_Y   (SUMMARY_INFOS_MISC_DESC_CURSOR_Y + 8)
 
 enum MonSummaryStatsSprites
 {
@@ -345,6 +350,11 @@ struct MonSummaryResources
     struct Pokemon *mon;
     struct MonSummary summary;
     struct SpriteFrameImage heldItemImage;
+
+    union {
+        u32 value;
+        u32 infosDescState;
+    } arg;
 };
 
 struct MonSummaryDynamicWindow
