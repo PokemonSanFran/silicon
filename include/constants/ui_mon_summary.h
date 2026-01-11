@@ -114,7 +114,7 @@ enum MonSummaryHpBarColors
 #define sTileTag        data[0]
 #define sPaletteTag     data[1]
 
-enum __attribute__((packed)) MonSummaryInfosSprites
+enum MonSummaryInfosSprites
 {
     SUMMARY_INFOS_SPRITE_HELD_ITEM,
     SUMMARY_INFOS_SPRITE_POKE_BALL,
@@ -123,7 +123,6 @@ enum __attribute__((packed)) MonSummaryInfosSprites
     NUM_SUMMARY_INFOS_SPRITES
 };
 
-// starting positions
 #define SUMMARY_INFOS_HEADER_NAME_X             (TILE_TO_PIXELS(8) + 2)
 #define SUMMARY_INFOS_HEADER_GENDER_X           (TILE_TO_PIXELS(8) + 65)
 #define SUMMARY_INFOS_HEADER_LEVEL_X            SUMMARY_INFOS_HEADER_NAME_X
@@ -166,6 +165,15 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_INFOS_MISC_HELD_ITEM_Y      (67 + 16)
 #define SUMMARY_INFOS_MISC_POKE_BALL_Y      (64 + 8)
 
+enum MonSummaryStatsSprites
+{
+    SUMMARY_STATS_SPRITE_HELD_ITEM,
+    SUMMARY_STATS_SPRITE_TYPE_1,
+    SUMMARY_STATS_SPRITE_TYPE_2,
+
+    NUM_SUMMARY_STATS_SPRITES
+};
+
 #define SUMMARY_STATS_HEADER_NAME_X             (TILE_TO_PIXELS(4))
 #define SUMMARY_STATS_HEADER_GENDER_X           (TILE_TO_PIXELS(4) + (TILE_TO_PIXELS(8) + 2))
 #define SUMMARY_STATS_HEADER_LEVEL_X            (TILE_TO_PIXELS(4) + TILE_TO_PIXELS(10))
@@ -200,10 +208,18 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_STATS_MISC_TEXT_BOX_Y       (TILE_TO_PIXELS(16) + 1)
 #define SUMMARY_STATS_MISC_HELD_ITEM_Y      (SUMMARY_INFOS_MISC_HELD_ITEM_Y + 1)
 
+enum MonSummaryMovesSprites
+{
+    SUMMARY_MOVES_SPRITE_TYPE_1,
+    SUMMARY_MOVES_SPRITE_TYPE_2,
+
+    NUM_SUMMARY_MOVES_SPRITES
+};
+
 // identical to Stats page
 #define SUMMARY_MOVES_HEADER_NAME_X                SUMMARY_STATS_HEADER_NAME_X
 #define SUMMARY_MOVES_HEADER_GENDER_X              SUMMARY_STATS_HEADER_GENDER_X
-#define SUMMARY_MOVES_HEADER_LEVEL_X               SUMMARY_STATS_HEADER_LEVELX
+#define SUMMARY_MOVES_HEADER_LEVEL_X               SUMMARY_STATS_HEADER_LEVEL_X
 #define SUMMARY_MOVES_HEADER_SHINY_X               SUMMARY_STATS_HEADER_SHINY_X
 #define SUMMARY_MOVES_HEADER_HP_BAR_X              SUMMARY_STATS_HEADER_HP_BAR_X
 #define SUMMARY_MOVES_HEADER_EXP_BAR_X             SUMMARY_STATS_HEADER_EXP_BAR_X
@@ -215,18 +231,9 @@ enum __attribute__((packed)) MonSummaryInfosSprites
 #define SUMMARY_MOVES_HEADER_EXP_BAR_Y             SUMMARY_STATS_HEADER_EXP_BAR_Y
 #define SUMMARY_MOVES_HEADER_FRIENDSHIP_BAR_Y      SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_Y
 
-enum MonSummaryStatsSprites
-{
-    SUMMARY_STATS_SPRITE_HELD_ITEM,
-    SUMMARY_STATS_SPRITE_TYPE_1,
-    SUMMARY_STATS_SPRITE_TYPE_2,
-
-    NUM_SUMMARY_STATS_SPRITES
-};
-
 STATIC_ASSERT(NUM_SUMMARY_INFOS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, InfoPageDynamicSpriteExceedsMaxNumber);
 STATIC_ASSERT(NUM_SUMMARY_STATS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, StatPageDynamicSpriteExceedsMaxNumber);
-//STATIC_ASSERT(NUM_SUMMARY_MOVES_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, MovePageDynamicSpriteExceedsMaxNumber);
+STATIC_ASSERT(NUM_SUMMARY_MOVES_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, MovePageDynamicSpriteExceedsMaxNumber);
 
 enum MonSummaryFontColors
 {

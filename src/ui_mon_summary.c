@@ -148,6 +148,10 @@ static void StatsPage_HandleGeneral(void);
 static void StatsPage_HandleMisc(void);
 static void StatsPageMisc_MonTotalEVs(void);
 
+static void MovesPage_HandleFrontEnd(void);
+static void MovesPage_HandleUpdateText(void);
+static void MovesPage_HandleHeader(void);
+
 // const data
 #include "data/ui_mon_summary.h"
 
@@ -1692,4 +1696,22 @@ static void StatsPageMisc_MonTotalEVs(void)
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED,
         SUMMARY_STATS_MISC_TOTAL_EVS_X, SUMMARY_STATS_MISC_TOTAL_EVS_Y,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+}
+
+static void MovesPage_HandleFrontEnd(void)
+{
+    MovesPage_HandleHeader();
+}
+
+static void MovesPage_HandleUpdateText(void)
+{
+    SummaryPrint_MonName(SUMMARY_MOVES_HEADER_NAME_X, SUMMARY_MOVES_HEADER_Y, TILE_TO_PIXELS(8));
+}
+
+static void MovesPage_HandleHeader(void)
+{
+    SummaryPrint_MonName(SUMMARY_MOVES_HEADER_NAME_X, SUMMARY_MOVES_HEADER_Y, TILE_TO_PIXELS(8));
+    SummaryPrint_MonGender(SUMMARY_MOVES_HEADER_GENDER_X, SUMMARY_MOVES_HEADER_Y);
+    SummaryPrint_MonLevel(SUMMARY_MOVES_HEADER_LEVEL_X, SUMMARY_MOVES_HEADER_Y);
+    SummarySprite_MonTypes(SUMMARY_MOVES_SPRITE_TYPE_1, 88 + 8, 20 + 8);
 }
