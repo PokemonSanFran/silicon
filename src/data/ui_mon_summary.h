@@ -193,6 +193,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X, SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_Y },
         },
         .handleFrontEnd = StatsPage_HandleFrontEnd,
+        .handleUpdateText = StatsPage_HandleUpdateText,
     },
     [SUMMARY_PAGE_MOVES] =
     {

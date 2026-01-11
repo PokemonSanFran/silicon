@@ -140,6 +140,7 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *);
 static void InfosPage_HandleMisc(void);
 
 static void StatsPage_HandleFrontEnd(void);
+static void StatsPage_HandleUpdateText(void);
 static void StatsPage_HandleHeader(void);
 static void StatsPage_HandleGeneral(void);
 static void StatsPage_HandleMisc(void);
@@ -1570,6 +1571,11 @@ static void StatsPage_HandleFrontEnd(void)
     StatsPage_HandleHeader();
     StatsPage_HandleGeneral();
     StatsPage_HandleMisc();
+}
+
+static void StatsPage_HandleUpdateText(void)
+{
+    SummaryPrint_MonName(SUMMARY_STATS_HEADER_NAME_X, SUMMARY_STATS_HEADER_Y, TILE_TO_PIXELS(8));
 }
 
 static void StatsPage_HandleHeader(void)
