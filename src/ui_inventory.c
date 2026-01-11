@@ -1646,7 +1646,7 @@ static void ShowItemIcon(u16 itemId, u8 x, u8 y)
     }
 }
 
-static const u8 sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
+static const ItemSortType sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
     [ITEM_TYPE_FIELD_USE] = {
         INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_GIVE,
@@ -1781,7 +1781,7 @@ static const u8 sInventory_PocketOptions_Field[NUM_ITEMS_TYPES][NUM_INVENTORY_IT
     },
 };
 
-static const u8 sInventory_PocketOptions_Battle[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
+static const ItemSortType sInventory_PocketOptions_Battle[NUM_ITEMS_TYPES][NUM_INVENTORY_ITEM_OPTIONS] = {
     [ITEM_TYPE_FIELD_USE] = {
         INVENTORY_ITEM_OPTION_FAVORITE,
         INVENTORY_ITEM_OPTION_CANCEL,
@@ -2250,8 +2250,6 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
 
 static void Inventory_PrintItemList(void)
 {
-    for (u32 item = 0; item < ITEMS_COUNT; item++)
-        DebugPrintf("%S | type %d",GetItemName(item),GetItemSortType(item));
     //PSF TODO the TM pocket has a blit background with dynamically changning palette colors
     // This needs to be updated to just print a sprite on the far right of the row with the type icon, which sits on top of the blit cursor
     // This also needs to be done for TMs in the favorites pocket
