@@ -132,6 +132,7 @@ static void SummaryPrint_MonAbilityDesc(u32, u32, u32);
 static void SummaryPrint_MonStat(enum Stat, u32, u32);
 static void SummaryPrint_MoveName(u32, u32, u32);
 static void SummaryPrint_BlitMoveType(u32, u32, u32);
+static void Task_SummaryPrint_UpdateText(u8);
 
 static void DummyPage_Handle(void);
 
@@ -432,6 +433,7 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
 {
     if (!gPaletteFade.active && ++gTasks[taskId].tDelay >= 5)
     {
+        CreateTask(Task_SummaryPrint_UpdateText, 10);
         SummarySprite_PlayPokemonCry();
         gTasks[taskId].tDelay = 0;
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
@@ -524,16 +526,6 @@ static bool32 SummaryInput_IsInputAdditive(s32 delta)
 
 static void Task_SummaryMode_DefaultInput(u8 taskId)
 {
-    if ((++gTasks[taskId].tUpdateText % 600) == 0)
-    {
-        SummaryInput_SetUpdateText(SummaryInput_GetUpdateText() ^ 1);
-        void (*updateTextFunc)(void) = SummaryPage_GetHandleUpdateTextFunc(SummaryPage_GetValue());
-        updateTextFunc();
-        CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
-
-        return;
-    }
-
     if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
         SummaryInput_UpdatePage(-1);
@@ -887,7 +879,6 @@ static void SummaryPage_LoadTilemap(void)
 static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 {
     SummaryPage_TogglePageSlot();
-    SummaryInput_SetUpdateText(FALSE);
 
     for (u32 i = 0; i < NUM_SUMMARY_MAIN_WINDOWS; i++)
     {
@@ -1512,6 +1503,19 @@ static void SummaryPrint_BlitMoveType(u32 idx, u32 x, u32 y)
         16, 16 * NUMBER_OF_MON_TYPES,
         x, y,
         16, 16);
+}
+
+static void Task_SummaryPrint_UpdateText(u8 taskId)
+{
+    if ((++gTasks[taskId].tUpdateText % 600) == 0)
+    {
+        SummaryInput_SetUpdateText(SummaryInput_GetUpdateText() ^ 1);
+        void (*updateTextFunc)(void) = SummaryPage_GetHandleUpdateTextFunc(SummaryPage_GetValue());
+        updateTextFunc();
+        CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
+
+        return;
+    }
 }
 
 static void DummyPage_Handle(void)
