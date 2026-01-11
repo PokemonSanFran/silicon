@@ -1327,7 +1327,6 @@ static void SummaryPrint_HelpBar(void)
 
 static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)
 {
-    // TODO blink
     struct MonSummary *mon = SummaryMon_GetStruct();
     const u8 *str = SummaryInput_GetUpdateText() ? GetSpeciesName(mon->species2) : mon->nickname;
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
@@ -1615,7 +1614,6 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
     u32 winWidth = WindowWidthPx(windowId);
     u32 fontId = FONT_OUTLINED;
 
-    // TODO implement menu blink
     StringCopy(gStringVar1, gNaturesInfo[mon->nature].name);
     if (mon->flavors[0] != FLAVOR_COUNT && mon->flavors[1] != FLAVOR_COUNT)
     {
