@@ -3153,8 +3153,8 @@ const struct Item gItemsInfo[] =
         "Sweet honey that\n"
         "attracts wild\n"
         "Pokémon when used."),
-      .pocket = POCKET_TREASURE,
-      .sortType = ITEM_TYPE_STATUS_RECOVERY,
+      .pocket = POCKET_OTHER,
+      .sortType = ITEM_TYPE_FIELD_USE,
       .type = ITEM_USE_FIELD,
       .fieldUseFunc = ItemUseOutOfBattle_Honey,
       .flingPower = 30,
@@ -8397,7 +8397,7 @@ const struct Item gItemsInfo[] =
         "A hold item that\n"
         "raises Cool in\n"
         "Contests."),
-      .pocket = POCKET_BATTLE_ITEMS,
+      .pocket = POCKET_OTHER,
       .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8415,7 +8415,7 @@ const struct Item gItemsInfo[] =
         "A hold item that\n"
         "raises Beauty in\n"
         "Contests."),
-      .pocket = POCKET_BATTLE_ITEMS,
+      .pocket = POCKET_OTHER,
       .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8433,7 +8433,7 @@ const struct Item gItemsInfo[] =
         "A hold item that\n"
         "raises Cute in\n"
         "Contests."),
-      .pocket = POCKET_BATTLE_ITEMS,
+      .pocket = POCKET_OTHER,
       .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8451,7 +8451,7 @@ const struct Item gItemsInfo[] =
         "A hold item that\n"
         "raises Smart in\n"
         "Contests."),
-      .pocket = POCKET_BATTLE_ITEMS,
+      .pocket = POCKET_OTHER,
       .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8469,7 +8469,7 @@ const struct Item gItemsInfo[] =
         "A hold item that\n"
         "raises Tough in\n"
         "Contests."),
-      .pocket = POCKET_BATTLE_ITEMS,
+      .pocket = POCKET_OTHER,
       .sortType = ITEM_TYPE_CONTEST_HELD_ITEM,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -14972,6 +14972,8 @@ const struct Item gItemsInfo[] =
       .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
       .flingPower = 30,
       .sortType = ITEM_TYPE_STAT_BOOST_MOCHI,
+      .iconPic = gItemIcon_QuestionMark,
+      .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANNEN_JOURNAL_PAGE_1] =
     {
