@@ -9,7 +9,6 @@
 #include "malloc.h"
 #include "event_data.h"
 #include "string_util.h"
-#include "random.h"
 #include "constants/nameplate.h"
 #include "map_name_popup.h"
 #include "data/speaker_data.h"
@@ -299,6 +298,8 @@ static void FreeNameplateStrings(void)
 
 void DrawNameplate(void)
 {
+    RandomizeNameplate();
+
     enum NameplateSpeaker speaker = LoadDynamicSpeaker();
     enum NameplateEmotes emote = VarGet(VAR_MSGBOX_EMOTE);
     enum NameplateTail tail = VarGet(VAR_MSGBOX_TAIL);
@@ -315,7 +316,6 @@ void DrawNameplate(void)
     u32 nameplateWidth = CalculateNameplateWidth(nameWidth, titleWidth);
     u32 offset = CalculateNameplateOffset(nameplateWidth);
     u32 nameplateTileWidth = CalculateNameplateTileWidth(nameplateWidth);
-
 
     if (speaker != SPEAKER_DEFAULT)
     {
@@ -342,6 +342,7 @@ void DrawNameplate(void)
     ClearNameplateVariables();
 }
 
+#include "random.h"
 void RandomizeNameplate(void)
 {
     VarSet(VAR_MSGBOX_EMOTE,EMOTE_CONFUSE);
