@@ -581,14 +581,7 @@ static void Task_SummaryInput_InfosInput(u8 taskId)
         PlaySE(SE_SELECT);
         sMonSummaryDataPtr->arg.infosDescState ^= 1;
 
-        FillWindowPixelBuffer(SUMMARY_MAIN_WIN_PAGE_TEXT, PIXEL_FILL(0));
-        PutWindowTilemap(SUMMARY_MAIN_WIN_PAGE_TEXT);
-
-        void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
-        handleFrontEnd();
-
-        CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
-        CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
+        SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
 
         return;
     }
@@ -903,6 +896,8 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         PutWindowTilemap(i);
     }
 
+    void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+
     switch (mode)
     {
     default:
@@ -925,20 +920,29 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
             SummaryPage_LoadTilemap();
             break;
         }
+    case SUMMARY_RELOAD_FRONT_END:
+        {
+            FillWindowPixelBuffer(SUMMARY_MAIN_WIN_PAGE_TEXT, PIXEL_FILL(0));
+            PutWindowTilemap(SUMMARY_MAIN_WIN_PAGE_TEXT);
+
+            handleFrontEnd();
+
+            CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_FULL);
+
+            return;
+        }
     }
 
     SummarySprite_CreateMonSprite();
     SummaryPage_UnloadDynamicSprites();
 
-    void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     handleFrontEnd();
 
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
     CopyBgTilemapBufferToVram(SUMMARY_BG_TEXT);
 
-    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
-    CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
+    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_FULL);
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_1);
 }
 

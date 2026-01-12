@@ -271,6 +271,7 @@ enum __attribute__((packed)) MonSummaryReloadModes
     SUMMARY_RELOAD_NONE,
     SUMMARY_RELOAD_MON,
     SUMMARY_RELOAD_PAGE,
+    SUMMARY_RELOAD_FRONT_END,
 
     NUM_SUMMARY_RELOADS
 };
