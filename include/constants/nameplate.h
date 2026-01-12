@@ -290,6 +290,7 @@ enum NameplatePhone
 
 #define PHONE_WIDTH                                    16
 #define PHONE_HEIGHT                                   16
+#define PHONE_MARGIN                                   2
 
 #define PHONE_LEFT_MARGIN                              34
 #define PHONE_Y                                        12
