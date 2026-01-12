@@ -291,8 +291,8 @@ enum NameplatePhone
 #define PHONE_WIDTH                                    16
 #define PHONE_HEIGHT                                   16
 
-#define PHONE_LEFT_MARGIN                              32
-#define PHONE_Y                                        14
+#define PHONE_LEFT_MARGIN                              34
+#define PHONE_Y                                        12
 
 #define EMOTES_WIDTH                                   48
 #define EMOTES_HEIGHT                                  32
@@ -310,10 +310,11 @@ enum NameplatePhone
 #define TAILS_RIGHT_PADDING                            3
 #define TAILS_SIZE                                     TILE_OFFSET_4BPP((TAILS_WIDTH * TAILS_HEIGHT)/(TILE_WIDTH * TILE_HEIGHT))
 
-#define SPEAKER_NAME_LENGTH                            20
+#define SPEAKER_NAME_LENGTH                            30
 #define SPEAKER_NAME_X                                 4
 #define SPEAKER_NAME_Y                                 12
 #define SPEAKER_TITLE_Y                                1
+#define MAX_TITLE_LENGTH                               68 // PSF TODO write automated test to catch the correct length
 
 #define GFXTAG_SPEAKER_ICON                            10019
 #define SPEAKER_ICON_PAL_NUM                           5

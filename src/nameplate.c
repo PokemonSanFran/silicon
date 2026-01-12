@@ -408,20 +408,14 @@ static u32 CalculateNameplateTileWidth(u32 nameplateWidth)
 
 static u32 CalculateNameplateWidth(u32 nameWidth, u32 titleWidth)
 {
-    u32 shorter = (nameWidth < titleWidth) ? nameWidth : titleWidth;
-    u32 longer = (nameWidth > titleWidth) ? nameWidth : titleWidth;
-    u32 defaultLength = (GetStringWidth(FONT_SPEAKER_NAME, COMPOUND_STRING("???"), GetFontAttribute(FONT_SPEAKER_NAME, FONTATTR_LETTER_SPACING)));
+    u32 width = 0;
 
-    if (shorter == defaultLength)
-        shorter = longer;
-
-    u32 shortMax = shorter + SPEAKER_ICON_SHORTER_LEFT_PADDING;
-    u32 longMax = longer + SPEAKER_ICON_LONGER_LEFT_PADDING;
-
-    if (longMax > shortMax)
-        return longMax;
+    if (titleWidth > nameWidth)
+        width = (30 + titleWidth);
     else
-        return shortMax;
+        width = (35 + nameWidth);
+
+    return max(width,MAX_TITLE_LENGTH);
 }
 
 static void DrawTopMessageBoxTiles(u32 windowId, u32 stringWidth, u32 offset, u32 nameplateTileWidth)
