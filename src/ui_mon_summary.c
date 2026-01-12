@@ -958,8 +958,9 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
     SummaryPrint_HelpBar();
     CopyBgTilemapBufferToVram(SUMMARY_BG_TEXT);
 
-    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_FULL);
+    CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_1);
+    CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
 }
 
 static void SummarySprite_SetSpriteId(u8 id, u8 value)
