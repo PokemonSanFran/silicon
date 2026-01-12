@@ -1751,15 +1751,19 @@ static void InfosPageMisc_TrySpawnDescCursor(void)
 
     if (spriteId != SPRITE_NONE) return;
 
+    LoadCompressedSpriteSheetByTemplate(&sInfosPageMisc_CursorSpriteTemplate, 0);
     spriteId = CreateSprite(&sInfosPageMisc_CursorSpriteTemplate,
         SUMMARY_INFOS_MISC_DESC_CURSOR_X, SUMMARY_INFOS_MISC_DESC_CURSOR_Y, 0);
 
+    gSprites[spriteId].sTileTag = sInfosPageMisc_CursorSpriteTemplate.tileTag;
     SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
     SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_DESC_CURSOR, spriteId);
 
+    LoadCompressedSpriteSheetByTemplate(&sInfosPageMisc_ScrollIndicatorSpriteTemplate, 0);
     spriteId = CreateSprite(&sInfosPageMisc_ScrollIndicatorSpriteTemplate,
         SUMMARY_INFOS_MISC_SCROLL_INDICATOR_X, SUMMARY_INFOS_MISC_SCROLL_INDICATOR_Y, 0);
 
+    gSprites[spriteId].sTileTag = sInfosPageMisc_ScrollIndicatorSpriteTemplate.tileTag;
     SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_SCROLL_INDICATOR, spriteId);
 }
 

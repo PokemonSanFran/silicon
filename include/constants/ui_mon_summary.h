@@ -95,6 +95,9 @@ enum MonSummarySpriteTags
     TAG_SUMMARY_TYPES, // tileTag
     TAG_SUMMARY_TYPE_1, // paletteTag
     TAG_SUMMARY_TYPE_2, //
+    // sub menu can have at least 2 cursor sprites
+    TAG_SUMMARY_CURSOR_1,
+    TAG_SUMMARY_CURSOR_2,
 };
 
 enum MonSummaryHpBarColors
