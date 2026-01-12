@@ -156,6 +156,9 @@ static void StatsPage_HandleHeader(void);
 static void StatsPage_HandleGeneral(void);
 static void StatsPage_HandleMisc(void);
 static void StatsPageMisc_MonTotalEVs(void);
+static void StatsPageMisc_TrySpawnCursors(void);
+static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *);
+static void SpriteCB_StatsPageMisc_ValueCursor(struct Sprite *);
 
 static void MovesPage_HandleFrontEnd(void);
 static void MovesPage_HandleUpdateText(void);
@@ -1851,6 +1854,8 @@ static void StatsPage_HandleMisc(void)
     SummaryPrint_MonAbilityDesc(
         SUMMARY_STATS_MISC_TEXT_BOX_X, SUMMARY_STATS_MISC_TEXT_BOX_Y,
         TILE_TO_PIXELS(23));
+
+    StatsPageMisc_TrySpawnCursors();
 }
 
 static void StatsPageMisc_MonTotalEVs(void)
@@ -1869,6 +1874,41 @@ static void StatsPageMisc_MonTotalEVs(void)
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED,
         SUMMARY_STATS_MISC_TOTAL_EVS_X, SUMMARY_STATS_MISC_TOTAL_EVS_Y,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+}
+
+static void StatsPageMisc_TrySpawnCursors(void)
+{
+    u32 spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR);
+
+    if (spriteId != SPRITE_NONE) return;
+
+    LoadCompressedSpriteSheetByTemplate(&sStatsPageMisc_StatCursorSpriteTemplate, 0);
+    spriteId = CreateSprite(&sStatsPageMisc_StatCursorSpriteTemplate, 126, 34, 3);
+
+    gSprites[spriteId].sTileTag = sStatsPageMisc_StatCursorSpriteTemplate.tileTag;
+    SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+    SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR, spriteId);
+
+    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_VALUE_CURSOR);
+    if (spriteId != SPRITE_NONE) return;
+
+    LoadCompressedSpriteSheetByTemplate(&sStatsPageMisc_ValueCursorSpriteTemplate, 0);
+    spriteId = CreateSprite(&sStatsPageMisc_ValueCursorSpriteTemplate, 160 + 16, 25 + 32, 0);
+
+    gSprites[spriteId].sTileTag = sStatsPageMisc_ValueCursorSpriteTemplate.tileTag;
+    SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_VALUE_CURSOR, spriteId);
+}
+
+static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
+{
+    sprite->invisible = !SummaryInput_IsWithinSubMode();
+    if (sprite->invisible) return;
+}
+
+static void SpriteCB_StatsPageMisc_ValueCursor(struct Sprite *sprite)
+{
+    sprite->invisible = !SummaryInput_IsWithinSubMode();
+    if (sprite->invisible) return;
 }
 
 static void MovesPage_HandleFrontEnd(void)

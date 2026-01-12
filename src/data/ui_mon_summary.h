@@ -411,6 +411,46 @@ static const u8 *const sStatsPageGeneral_StatsNames[NUM_STATS] =
     [STAT_SPEED] = COMPOUND_STRING("SPD"),
 };
 
+static const struct SpriteTemplate sStatsPageMisc_StatCursorSpriteTemplate =
+{
+    .tileTag = TAG_SUMMARY_CURSOR_1,
+    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .priority = 1
+    },
+    .anims = gDummySpriteAnimTable,
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/stats/stat_cursor.4bpp.smol"),
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_StatsPageMisc_StatCursor
+};
+
+static const struct SpriteTemplate sStatsPageMisc_ValueCursorSpriteTemplate =
+{
+    .tileTag = TAG_SUMMARY_CURSOR_2,
+    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(32x64),
+        .size = SPRITE_SIZE(32x64),
+        .priority = 1
+    },
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0, 30),
+            ANIMCMD_FRAME(32, 30),
+            ANIMCMD_JUMP(0)
+        }
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/stats/value_cursor.4bpp.smol"),
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_StatsPageMisc_ValueCursor
+};
+
 static const u8 sMovesPageGeneral_MoveBarGfx[] = INCBIN_U8("graphics/ui_menus/types/128x16/types.4bpp");
 static const u8 sMovesPageGeneral_MoveTypeGfx[] = INCBIN_U8("graphics/ui_menus/mon_summary/move_type_icons.4bpp");
 
