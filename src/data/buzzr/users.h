@@ -107,7 +107,7 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_DIMU] =
     {
-        .username = _("SolarpunkSolider"),
+        .username = _("SolarpunkSoldier"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BD] =

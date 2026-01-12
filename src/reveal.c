@@ -262,7 +262,6 @@ const struct RevealPrintConfig sRevealPrintConfigs[REVEAL_WINDOW_COUNT] =
     }
 };
 
-
 const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
 {
     [REVEAL_ALICIA] =
@@ -276,31 +275,31 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_CHARLOTTE] =
     {
         .trainerId = TRAINER_CHARLOTTE_OLDASSHOLEAPPEARS,
-        .buzzrId = BUZZR_USER_CHARLOTTE, 
-        .quote = COMPOUND_STRING("You and I are in entirely seperate tiers."),
+        .buzzrId = BUZZR_USER_CHARLOTTE,
+        .quote = COMPOUND_STRING("You and I are in entirely separate tiers."),
         .bio = COMPOUND_STRING("- Her hair, dress, makeup... all perfect.\n- Is she always smirking?"),
         .accentColor = RGB(6,10,30),
     },
     [REVEAL_OLIVER] =
     {
         .trainerId = TRAINER_OLIVER,
-        .buzzrId = BUZZR_USER_OLIVER, 
+        .buzzrId = BUZZR_USER_OLIVER,
         .quote = COMPOUND_STRING("I help bring the best out of Resido through SharpRise Captial."),
-        .bio = COMPOUND_STRING("- Oliver is a workholic - they never stop!\n- Despite his job, he isn't good with tech."),
+        .bio = COMPOUND_STRING("- Oliver is a workaholic - they never stop!\n- Despite his job, he isn't good with tech."),
         .accentColor = RGB(21,1,24),
     },
     [REVEAL_BELEN] =
     {
         .trainerId = TRAINER_BELEN,
-        .buzzrId = BUZZR_USER_BELEN, 
+        .buzzrId = BUZZR_USER_BELEN,
         .quote = COMPOUND_STRING("I'll only serve the best food and battle strategy."),
-        .bio = COMPOUND_STRING("- She looks back at the kitchen between words.\n- She smells strongly of food... but its good!"),
+        .bio = COMPOUND_STRING("- She looks back at the kitchen between words.\n- She smells strongly of food... but it's good!"),
         .accentColor = RGB(9,7,29),
     },
     [REVEAL_KAI] =
     {
         .trainerId = TRAINER_KAI_NEWASSHOLEAPPEARS,
-        .buzzrId = BUZZR_USER_KAI, 
+        .buzzrId = BUZZR_USER_KAI,
         .quote = COMPOUND_STRING("I'm taking Resido back - this is my home!"),
         .bio = COMPOUND_STRING("- He hasn't broken eye contact with me once.\n- Despite his attitude, his Pokemon seem to love him."),
         .accentColor = RGB(28,14,9),
@@ -308,7 +307,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_SHINZO] =
     {
         .trainerId = TRAINER_SHINZO,
-        .buzzrId = BUZZR_USER_SHINZO, 
+        .buzzrId = BUZZR_USER_SHINZO,
         .quote = COMPOUND_STRING("I'll show you the full strength of the Sinnoh Elite!"),
         .bio = COMPOUND_STRING("- He always looks annoyed...\n- His outfit is incredible... was it custom made?"),
         .accentColor = RGB(8,20,12),
@@ -316,7 +315,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_EMRYS] =
     {
         .trainerId = TRAINER_EMRYS,
-        .buzzrId = BUZZR_USER_EMRYS, 
+        .buzzrId = BUZZR_USER_EMRYS,
         .quote = COMPOUND_STRING("Perlacia Museum will be an institute for culture, history, and battles!"),
         .bio = COMPOUND_STRING("- It's so hard to understand what they're saying...\n- ???"), // PSF TODO I need another idea here help
         .accentColor = RGB(14,19,31),
@@ -324,7 +323,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_RAMESH] =
     {
         .trainerId = TRAINER_RAMESH_IMIN,
-        .buzzrId = BUZZR_USER_RAMESH, 
+        .buzzrId = BUZZR_USER_RAMESH,
         .quote = COMPOUND_STRING("Security, Marketing, Production - there's nothing I can't execute."),
         .bio = COMPOUND_STRING("- Ramesh looks bored when talking to me.\n - He's holding multiple phones."),
         .accentColor = RGB(27,30,4),
@@ -332,15 +331,15 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_ADELAIDE] =
     {
         .trainerId = TRAINER_ADELAIDE_A,
-        .buzzrId = BUZZR_USER_ADELAIDE, 
-        .quote = COMPOUND_STRING("The SharpRise Captial League will be the world's most pretigious!"),
+        .buzzrId = BUZZR_USER_ADELAIDE,
+        .quote = COMPOUND_STRING("The SharpRise Capital League will be the world's most prestigious!"),
         .bio = COMPOUND_STRING("- She talks about email so much!\n- Her earrings are the SharpRise logo."),
         .accentColor = RGB(20,9,20),
     },
     [REVEAL_KAUNA] =
     {
         .trainerId = TRAINER_KAUNA,
-        .buzzrId = BUZZR_USER_KAUNA, 
+        .buzzrId = BUZZR_USER_KAUNA,
         .quote = COMPOUND_STRING("My babies are hella tough - don't underestimate us!"),
         .bio = COMPOUND_STRING("- He hasn't put that egg down since I got here.\n- He's all wet. Did he just get out of the water?"),
         .accentColor = RGB(25,14,6),
@@ -348,7 +347,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_ADAORA] =
     {
         .trainerId = TRAINER_ADAORA_HOWDISAPPOINTING,
-        .buzzrId = BUZZR_USER_ADAORA, 
+        .buzzrId = BUZZR_USER_ADAORA,
         .quote = COMPOUND_STRING("The ocean's tide is unforgiving, swift, and powerful... and so are we!"),
         .bio = COMPOUND_STRING("- She seems extremely passionate about everything.\n- People seem afraid of her..."),
         .accentColor = RGB(22,15,17),
@@ -356,15 +355,15 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_NERIENE] =
     {
         .trainerId = TRAINER_NERIENE,
-        .buzzrId = BUZZR_USER_NERIENE, 
-        .quote = COMPOUND_STRING("My party is as strong as this Fort - impenetrable!"), 
+        .buzzrId = BUZZR_USER_NERIENE,
+        .quote = COMPOUND_STRING("My party is as strong as this Fort - impenetrable!"),
         .bio = COMPOUND_STRING("- I know its windy up here, but why is she yelling?\n- What is she hiding in her pockets...?"),
         .accentColor = RGB(1,22,6),
     },
     [REVEAL_KEI_YING] =
     {
         .trainerId = TRAINER_KEI_YING_WAREHOUSE_RAVE,
-        .buzzrId = BUZZR_USER_KEI_YING, 
+        .buzzrId = BUZZR_USER_KEI_YING,
         .quote = COMPOUND_STRING("Life is too short for regret.\nJust do your best."),
         .bio = COMPOUND_STRING("- He's giving off big dad energy...\n- He's less intense than the other SRC executives."),
         .accentColor = RGB(13,14,17),
@@ -372,7 +371,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_DIMU] =
     {
         .trainerId = TRAINER_DIMU,
-        .buzzrId = BUZZR_USER_DIMU, 
+        .buzzrId = BUZZR_USER_DIMU,
         .quote = COMPOUND_STRING("I speak for nature, because nobody else will."),
         .bio = COMPOUND_STRING("- She seems mad... did I step on the wrong plants?\n- Whenever she shifts her weight, the grass moves with her..."),
         .accentColor = RGB(8,14,26),
@@ -380,7 +379,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_TALA] =
     {
         .trainerId = TRAINER_TALA,
-        .buzzrId = BUZZR_USER_TALA, 
+        .buzzrId = BUZZR_USER_TALA,
         .quote = COMPOUND_STRING("The wind carries me to where I need to be."),
         .bio = COMPOUND_STRING("- There's always a light breeze behind her.\n- Her cane is shaped like a Xatu!"),
         .accentColor = RGB(23,7,12),
@@ -388,7 +387,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_BD] =
     {
         .trainerId = TRAINER_BD,
-        .buzzrId = BUZZR_USER_BD, 
+        .buzzrId = BUZZR_USER_BD,
         .quote = COMPOUND_STRING("I'm battling on another plane of existence!"),
         .bio = COMPOUND_STRING("- She hasn't made eye contact once.\n- The floor is covered with equipment. It's a hazard!"),
         .accentColor = RGB(9,21,4),
@@ -396,7 +395,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_AMI] =
     {
         .trainerId = TRAINER_AMIARGENTO,
-        .buzzrId = BUZZR_USER_AMI, 
+        .buzzrId = BUZZR_USER_AMI,
         .quote = COMPOUND_STRING("I love taking an idea and flipping it on its head entirely."),
         .bio = COMPOUND_STRING("- Her aura feels like time slows down around her... \n- Does her outfit sparkle? Or is that the lights?"),
         .accentColor = RGB(22,22,9),
@@ -412,7 +411,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_ARMANDO] =
     {
         .trainerId = TRAINER_ARMANDO,
-        .buzzrId = BUZZR_USER_ARMANDO, 
+        .buzzrId = BUZZR_USER_ARMANDO,
         .quote = COMPOUND_STRING("I can make a Trainer out of anybody."),
         .bio = COMPOUND_STRING("- He's so intense, the air around him is hot!\n- He seems incredibly comfortable."),
         .accentColor = RGB(27,9,7),
@@ -420,7 +419,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_MAGNUS] =
     {
         .trainerId = TRAINER_MAGNUS_PROLOGUE,
-        .buzzrId = BUZZR_USER_MAGNUS, 
+        .buzzrId = BUZZR_USER_MAGNUS,
         .quote = COMPOUND_STRING("I amplify the voices of all of Resido!"),
         .bio = COMPOUND_STRING("- He's incredibly tall!\n- All of his accessories all have a hint of gold."),
         .accentColor = RGB(18,26,28),
@@ -444,7 +443,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_ELLEN] =
     {
         .trainerId = TRAINER_ELLEN,
-        .buzzrId = BUZZR_USER_ELLEN, 
+        .buzzrId = BUZZR_USER_ELLEN,
         .quote = COMPOUND_STRING("Those with power have an obligation to do good."),
         .bio = COMPOUND_STRING("- Somehow, Ellen is shorter than Alcmene.\n- Where did the Alcmene outfit go?"),
         .accentColor = RGB(28,25,30),
