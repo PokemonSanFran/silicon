@@ -6,11 +6,11 @@
     - Head
     - Phone
     - Nameplate
-- Nameplate colors: 
-Boy: 4c88da Main, 445aae Shading
-Girl: fb6657 Main, c93c50 Shading
-NB one: 716b6b Main, 268872 Shading
-Sign: aba9a8 Main, 716b6b Shading
+DONE - Nameplate colors: 
+    Boy: 4c88da Main, 445aae Shading
+    Girl: fb6657 Main, c93c50 Shading
+    NB one: 716b6b Main, 268872 Shading
+    Sign: aba9a8 Main, 716b6b Shading
 
 # New Spacing Rules
 - If title is longer than name, nameplate width is 2px + title width + 28px

@@ -50,6 +50,7 @@ static const u16 gMessageBox_Pal[] = INCBIN_U16("graphics/ui_menus/msgbox/messag
 static const u16 gNameplateMale[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateMale.gbapal");
 static const u16 gNameplateFemale[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateFemale.gbapal");
 static const u16 gNameplateNonbinary[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateNonbinary.gbapal");
+static const u16 gNameplateSign[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateSign.gbapal");
 static const u8 sMsgbox_Phone_On[] = INCBIN_U8("graphics/ui_menus/msgbox/phone/phone_on.4bpp");
 
 static const u8 sMsgbox_Emote_Angry[]   = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_angry.4bpp");
@@ -131,6 +132,7 @@ static const u16* const genderNameplatePaletteLUT[] =
     gNameplateFemale,
     gMessageBox_Pal,
     gNameplateNonbinary,
+    gNameplateSign,
     gMessageBox_Pal,
 };
 
@@ -324,9 +326,9 @@ void DrawNameplate(void)
         DrawSecondRowNameplateTiles(windowId, nameplateWidth, offset, nameplateTileWidth);
         DrawThirdRowNameplateTiles(windowId, nameplateWidth, offset, nameplateTileWidth);
 
-        CreateSpeakerIconSprite(nameplateWidth, speaker);
         AddNameplateTail(windowId, nameplateWidth, tail);
         AddNameplatePhone(windowId, nameplateWidth, onPhone);
+        CreateSpeakerIconSprite(nameplateWidth, speaker);
         AddNameplateEmote(windowId, nameplateWidth, emote);
 
         PrintSpeakerTitle(windowId, speaker);
@@ -371,13 +373,12 @@ static void DestroyExistingWindow(void)
 
 u32 CreateNameplateWindow(void)
 {
-    u32 windowId;
     enum PlayerGender gender = GetSpeakerGender();
     struct WindowTemplate nameplateTemplate;
 
     SetWindowTemplateFields(&nameplateTemplate, 0, WINDOW_TILELEFT, WINDOW_TILETOP,DISPLAY_TILE_WIDTH, MSGBOX_TILE_HEIGHT, MUGSHOT_PALETTE_NUM, NAMEPLATE_WINDOW_TEMPLATE);
     sMugshotWindow = AddWindow(&nameplateTemplate);
-    windowId = sMugshotWindow;
+    u32 windowId = sMugshotWindow;
     LoadPalette(genderNameplatePaletteLUT[gender],BG_PLTT_ID(MUGSHOT_PALETTE_NUM),PLTT_SIZE_4BPP);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -411,8 +412,7 @@ u32 GetSpeakerNameWidth(u32 speaker)
 
 static enum PlayerGender GetSpeakerGender(void)
 {
-    enum NameplateSpeaker speaker = VarGet(VAR_MSGBOX_SPEAKER);
-    return sSpeakerData[speaker].gender;
+    return sSpeakerData[VarGet(VAR_MSGBOX_SPEAKER)].gender;
 }
 
 u32 GetSpeakerTitleWidth(u32 speaker)

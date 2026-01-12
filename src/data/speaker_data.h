@@ -219,7 +219,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Domimic"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Test,
         .speakerPal = sSpeakerPal_Test,
         //.speakerIcon = gSpeakerIcon_Super_Nerd,
@@ -229,7 +229,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("NPC"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
@@ -245,7 +245,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Blaine"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
@@ -253,7 +253,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Brock"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Brock,
         .speakerPal = sSpeakerPal_Brock,
     },
@@ -261,7 +261,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Bruno"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bruno,
         .speakerPal = sSpeakerPal_Bruno,
     },
@@ -269,7 +269,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Bug Catcher"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
@@ -301,7 +301,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Elm"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Elm,
         .speakerPal = sSpeakerPal_Elm,
     },
@@ -309,7 +309,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Erika"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -325,7 +325,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Fisherman"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
@@ -333,7 +333,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Alcmene"),
         .title = _("Tide Leader"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Alcmene,
         .speakerPal = sSpeakerPal_Alcmene,
     },
@@ -341,7 +341,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("???"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Alcmene,
         .speakerPal = sSpeakerPal_Alcmene,
     },
@@ -349,7 +349,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Girl"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
@@ -357,7 +357,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Green"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
@@ -365,7 +365,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Janine"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Janine,
         .speakerPal = sSpeakerPal_Janine,
     },
@@ -373,7 +373,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Karen"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Karen,
         .speakerPal = sSpeakerPal_Karen,
     },
@@ -381,7 +381,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Kid"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
@@ -405,7 +405,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Kurt"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kurt,
         .speakerPal = sSpeakerPal_Kurt,
     },
@@ -413,7 +413,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Lance"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lance,
         .speakerPal = sSpeakerPal_Lance,
     },
@@ -421,7 +421,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Lt.Surge"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lt_Surge,
         .speakerPal = sSpeakerPal_Lt_Surge,
     },
@@ -429,7 +429,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Man"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -437,7 +437,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Misty"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
     },
@@ -453,7 +453,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Old Man"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
@@ -461,7 +461,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Policeman"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
@@ -477,7 +477,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Red"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Red,
         .speakerPal = sSpeakerPal_Red,
     },
@@ -485,7 +485,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Rocket Grunt"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
@@ -493,7 +493,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Rocket Grunt"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
@@ -509,7 +509,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Silver"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Silver,
         .speakerPal = sSpeakerPal_Silver,
     },
@@ -517,7 +517,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Steven"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Steven,
         .speakerPal = sSpeakerPal_Steven,
     },
@@ -525,7 +525,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Swimmer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
@@ -541,7 +541,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Will"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Will,
         .speakerPal = sSpeakerPal_Will,
     },
@@ -549,7 +549,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Woman"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -557,7 +557,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Youngster"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Youngster,
         .speakerPal = sSpeakerPal_Youngster,
     },
@@ -565,7 +565,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Firebreather"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -573,7 +573,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Beauty"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Beauty,
         .speakerPal = sSpeakerPal_Beauty,
     },
@@ -581,7 +581,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Bird Keeper"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bird_Keeper,
         .speakerPal = sSpeakerPal_Bird_Keeper,
     },
@@ -589,7 +589,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Black Belt"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
@@ -597,7 +597,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Eusine"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Eusine,
         .speakerPal = sSpeakerPal_Eusine,
     },
@@ -605,7 +605,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Proton"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Proton,
         .speakerPal = sSpeakerPal_Proton,
     },
@@ -613,7 +613,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Petrel"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,
     },
@@ -653,7 +653,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Collector"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
@@ -661,7 +661,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Bill"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
@@ -669,7 +669,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Boarder"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Boarder,
         .speakerPal = sSpeakerPal_Boarder,
     },
@@ -677,7 +677,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Juggler"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Juggler,
         .speakerPal = sSpeakerPal_Juggler,
     },
@@ -685,7 +685,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Kimono Girl"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kimono_Girl,
         .speakerPal = sSpeakerPal_Kimono_Girl,
     },
@@ -693,7 +693,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Lass"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
@@ -701,7 +701,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Medium"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium,
         .speakerPal = sSpeakerPal_Medium,
     },
@@ -709,7 +709,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Medium"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
@@ -717,7 +717,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Poke Maniac"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
@@ -725,7 +725,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Sage"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Sage,
         .speakerPal = sSpeakerPal_Sage,
     },
@@ -733,7 +733,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Super Nerd"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
@@ -741,7 +741,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ace Trainer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
@@ -749,7 +749,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ace Trainer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
@@ -757,7 +757,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Li"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
@@ -765,7 +765,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Aroma Lady"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Aroma_Lady,
         .speakerPal = sSpeakerPal_Aroma_Lady,
     },
@@ -773,7 +773,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Battle Girl"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
@@ -781,7 +781,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Mom"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Mom,
         .speakerPal = sSpeakerPal_Mom,
     },
@@ -789,7 +789,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Waiter"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Waiter,
         .speakerPal = sSpeakerPal_Waiter,
     },
@@ -797,7 +797,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("News"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
@@ -805,7 +805,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("{PLAYER}"),
         .title = _("{PKMN} Trainer"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Mom,
         .speakerPal = sSpeakerPal_Mom,
     },
@@ -829,7 +829,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("G.R.U.N.T."),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
@@ -837,7 +837,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Marketing Staff"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
@@ -845,7 +845,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Announcer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
@@ -861,7 +861,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Crowd Member"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
@@ -869,7 +869,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Crowd Member"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
@@ -877,7 +877,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Crowd Member"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
@@ -885,7 +885,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Crowd Member"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -893,7 +893,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Rupert"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
@@ -909,7 +909,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Resident"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
@@ -917,7 +917,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Resident"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
@@ -925,7 +925,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Resident"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
@@ -933,7 +933,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Resident"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -941,7 +941,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Siarl"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
@@ -957,7 +957,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Dagmar"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
@@ -965,7 +965,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Gurl"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -973,7 +973,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("League Staff"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
@@ -981,7 +981,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("David"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Waiter,
         .speakerPal = sSpeakerPal_Waiter,
     },
@@ -989,7 +989,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Ishan"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
@@ -997,7 +997,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("TheTide Member"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
@@ -1005,7 +1005,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("TheTide Member"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
@@ -1021,7 +1021,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Vitomir"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
@@ -1029,7 +1029,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Rabia"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
@@ -1037,7 +1037,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Landlord"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Juggler,
         .speakerPal = sSpeakerPal_Juggler,
     },
@@ -1045,7 +1045,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Protestor"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Aroma_Lady,
         .speakerPal = sSpeakerPal_Aroma_Lady,
     },
@@ -1053,7 +1053,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Protestor"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Beauty,
         .speakerPal = sSpeakerPal_Beauty,
     },
@@ -1061,7 +1061,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Protestor"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
@@ -1069,7 +1069,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Protestor"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
@@ -1077,7 +1077,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Julius"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1085,7 +1085,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Madison"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -1093,7 +1093,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Stranded Citizen"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
@@ -1101,7 +1101,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Stranded Citizen"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -1109,7 +1109,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Resident"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
@@ -1117,7 +1117,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Resident"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
@@ -1141,7 +1141,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Aleksander"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
@@ -1149,7 +1149,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Summer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
@@ -1157,7 +1157,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Maid"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -1165,7 +1165,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("News"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
@@ -1173,7 +1173,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Arnav"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
@@ -1181,7 +1181,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Techie"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
@@ -1189,7 +1189,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Chief"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
@@ -1213,7 +1213,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Door"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
     },
@@ -1221,7 +1221,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Teodoro"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1229,7 +1229,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Dudley"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
@@ -1237,7 +1237,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Cherie"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium,
         .speakerPal = sSpeakerPal_Medium,
     },
@@ -1245,7 +1245,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Matthew"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
@@ -1253,7 +1253,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Fanny"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
@@ -1261,7 +1261,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Craig"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
@@ -1269,7 +1269,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Antone"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Boarder,
         .speakerPal = sSpeakerPal_Boarder,
     },
@@ -1277,7 +1277,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ori"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Woman,
         .speakerPal = sSpeakerPal_Old_Woman,
     },
@@ -1285,7 +1285,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Hiko"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
@@ -1293,7 +1293,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Police"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
@@ -1301,7 +1301,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Mack"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
@@ -1309,7 +1309,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Tyzonn"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
@@ -1317,7 +1317,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Will"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
@@ -1325,7 +1325,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ronny"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
@@ -1333,7 +1333,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Dax"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1341,7 +1341,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Brennan"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
@@ -1349,7 +1349,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Exhibit Attendant"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
@@ -1357,7 +1357,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Speaker"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
@@ -1365,7 +1365,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ghost"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
@@ -1373,7 +1373,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ismail"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1381,7 +1381,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Sergey"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
@@ -1389,7 +1389,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Reporter"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1397,7 +1397,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Wallace Stan"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1405,7 +1405,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Trolley Guy"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1413,7 +1413,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Hester"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
@@ -1421,7 +1421,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Sharp Rise Staff"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -1429,7 +1429,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Tonalli"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -1437,7 +1437,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Drummer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
@@ -1445,7 +1445,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Drummer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -1453,7 +1453,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Drummer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
@@ -1461,7 +1461,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Liidia"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
@@ -1469,7 +1469,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Rainer"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -1477,7 +1477,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Bronson"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lt_Surge,
         .speakerPal = sSpeakerPal_Lt_Surge,
     },
@@ -1485,7 +1485,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Shashi"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -1493,7 +1493,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Leah"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -1501,7 +1501,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Guard"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
@@ -1509,7 +1509,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Shopkeeper"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
@@ -1517,7 +1517,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Elior"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
@@ -1525,7 +1525,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Leland"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
@@ -1533,7 +1533,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ambrogio"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -1541,7 +1541,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Joris"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -1549,7 +1549,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Nurse"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
@@ -1557,7 +1557,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Auguste"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
@@ -1565,7 +1565,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Julia"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
@@ -1573,7 +1573,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Alice"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
@@ -1581,7 +1581,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Ferran"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
@@ -1589,7 +1589,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Anthony"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
@@ -1597,7 +1597,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Tina"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
@@ -1606,7 +1606,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Paul"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kurt,
         .speakerPal = sSpeakerPal_Kurt,
     },
@@ -1615,7 +1615,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Jon"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
@@ -1624,7 +1624,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Bradley"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
@@ -1633,7 +1633,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Jo"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bird_Keeper,
         .speakerPal = sSpeakerPal_Bird_Keeper,
     },
@@ -1642,7 +1642,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Hannah"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
@@ -1651,7 +1651,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Rachel"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
@@ -1659,7 +1659,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Katharina"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Aroma_Lady,
         .speakerPal = sSpeakerPal_Aroma_Lady,
     },
@@ -1667,7 +1667,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Officiant"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Woman,
         .speakerPal = sSpeakerPal_Old_Woman,
     },
@@ -1675,7 +1675,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Helen"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
@@ -1683,7 +1683,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Rusty"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
@@ -1691,7 +1691,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Willow"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -1699,7 +1699,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Griff"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Youngster,
         .speakerPal = sSpeakerPal_Youngster,
     },
@@ -1707,7 +1707,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Luna"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
@@ -1715,7 +1715,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Max"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bird_Keeper,
         .speakerPal = sSpeakerPal_Bird_Keeper,
     },
@@ -1723,7 +1723,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("B-Boy Blaze"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,
     },
@@ -1731,7 +1731,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Krumpin' Kiki"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
@@ -1739,7 +1739,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Electric EJ"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
@@ -1747,7 +1747,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Waite"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
@@ -1755,7 +1755,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Debra"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
@@ -1763,7 +1763,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Waldron"),
         .title = _("IT Employee"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
@@ -1771,7 +1771,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Isidore"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
@@ -1779,7 +1779,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Filip"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,
     },
@@ -1787,7 +1787,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Gertrude"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -1795,7 +1795,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Khaleel"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
@@ -1803,7 +1803,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Kitvol"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
@@ -1811,7 +1811,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Nancy"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kurt,
         .speakerPal = sSpeakerPal_Kurt,
     },
@@ -1819,7 +1819,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Pannen"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
@@ -1827,7 +1827,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Professor Madrone"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Elm,
         .speakerPal = sSpeakerPal_Elm,
     },
@@ -1835,7 +1835,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Buzzr CEO"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
@@ -1843,7 +1843,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Presto CEO"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Steven,
         .speakerPal = sSpeakerPal_Steven,
     },
@@ -1851,7 +1851,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Arriba Driver 1"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Brock,
         .speakerPal = sSpeakerPal_Brock,
     },
@@ -1859,7 +1859,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Arriba Driver 2"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -1867,7 +1867,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Arriba Driver 3"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Boarder,
         .speakerPal = sSpeakerPal_Boarder,
     },
@@ -1875,7 +1875,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Landlord"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
@@ -1883,7 +1883,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Sibling"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
@@ -1891,7 +1891,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Arriba Grunt 1"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
@@ -1899,7 +1899,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Arriba Grunt 2"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
@@ -1907,7 +1907,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Arriba CEO"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
@@ -1915,7 +1915,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Gym Attendant"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Shinzo,
         .speakerPal = sSpeakerPal_Shinzo,
     },
@@ -1923,7 +1923,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Improv 1"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium,
         .speakerPal = sSpeakerPal_Medium,
     },
@@ -1931,7 +1931,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Improv 2"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
@@ -1939,7 +1939,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Improv 3"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Beauty,
         .speakerPal = sSpeakerPal_Beauty,
     },
@@ -1947,7 +1947,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Chris"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
@@ -1955,7 +1955,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Lee Pyron"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
@@ -1963,7 +1963,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Prof Trachy"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
@@ -1971,7 +1971,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Drughelmettester"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
@@ -1979,7 +1979,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Vsdeoguy"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
@@ -1987,7 +1987,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Vsdeoresearcher"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
@@ -1995,7 +1995,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("AngeldeliverybikerA"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
@@ -2003,7 +2003,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("AngeldeliverybikerB"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
@@ -2011,7 +2011,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("AngeldeliverybikerC"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
@@ -2019,7 +2019,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("AngeldeliverybikerD"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
@@ -2027,7 +2027,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = _("Melissa"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -2035,7 +2035,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Old Woman"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -2043,7 +2043,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Stan"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -2051,7 +2051,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Stan"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -2059,7 +2059,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Stan"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -2067,7 +2067,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Stan"),
         .title = _("???"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
@@ -2091,7 +2091,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Gene"),
         .title= _("Stat Manager"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
@@ -2099,7 +2099,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name =_("Parkranger"),
         .title= _("Park Ranger"),
-        .gender = NON_BINARY,
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
