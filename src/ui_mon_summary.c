@@ -338,12 +338,25 @@ static void SummarySetup_Sprites(void)
             .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
             .oam = config->oam,
             .anims = config->anims,
-            .images = &(struct SpriteFrameImage){ config->gfx },
+            .images = NULL,
             .affineAnims = gDummySpriteAffineAnimTable,
             .callback = config->callback,
         };
 
-        LoadCompressedSpriteSheetByTemplate(&template, 0);
+        struct CompressedSpriteSheet sheet = { .tag = config->tileTag };
+
+        if (IsCompressedData(config->gfx))
+        {
+            sheet.data = config->gfx;
+            sheet.size = GetDecompressedDataSize(config->gfx);
+        }
+        else
+        {
+            sheet.data = gBlankGfxCompressed;
+            sheet.size = config->size;
+        }
+
+        LoadCompressedSpriteSheet(&sheet);
         SummarySprite_SetSpriteId(config->id,
             CreateSprite(&template, coords.x, coords.y, 0));
         gSprites[SummarySprite_GetSpriteId(config->id)].sMonIndex = -1;
@@ -979,9 +992,8 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
     struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
     u32 windowId = AddWindow(&template);
 
-    BlitBitmapToWindow(windowId, sSummarySprite_HpBarBlit,
-        0, 0,
-        TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
+    const u8 *blit = SummarySprite_GetMainStruct(SUMMARY_MAIN_SPRITE_HP_BAR)->gfx;
+    BlitBitmapToWindow(windowId, blit, 0, 0, TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
 
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 currHp = mon->currHp;
@@ -1016,9 +1028,8 @@ static void SummarySprite_InjectExpBar(struct Sprite *sprite)
     struct WindowTemplate template = { .width = 8, .height  = 1 }; // 64x8, uses subsprite
     u32 windowId = AddWindow(&template);
 
-    BlitBitmapToWindow(windowId, sSummarySprite_ExpBarBlit,
-        0, 0,
-        TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
+    const u8 *blit = SummarySprite_GetMainStruct(SUMMARY_MAIN_SPRITE_EXP_BAR)->gfx;
+    BlitBitmapToWindow(windowId, blit, 0, 0, TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
 
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 maxExp = gExperienceTables[gSpeciesInfo[mon->species].growthRate][mon->level];
@@ -1042,9 +1053,8 @@ static void SummarySprite_InjectFriendshipBar(struct Sprite *sprite)
     struct WindowTemplate template = { .width = 5, .height  = 1 }; // 48x8, uses subsprite
     u32 windowId = AddWindow(&template);
 
-    BlitBitmapToWindow(windowId, sSummarySprite_FriendshipBarBlit,
-        0, 0,
-        TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
+    const u8 *blit = SummarySprite_GetMainStruct(SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR)->gfx;
+    BlitBitmapToWindow(windowId, blit, 0, 0, TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
 
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 friendship = mon->friendship;

@@ -383,7 +383,8 @@ struct MonSummarySprite
 {
     u8 id;
     u16 tileTag;
-    const u32 *gfx;
+    const void *gfx;
+    u32 size; // only matters for blitted sprites
     const struct SubspriteTable *subsprites;
     const struct OamData *oam;
     const union AnimCmd *const *anims;

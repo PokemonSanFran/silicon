@@ -82,7 +82,8 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[] =
             .priority = 0
         },
         .tileTag = TAG_SUMMARY_HP_BAR,
-        .gfx = gBlankGfxCompressed,
+        .gfx = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/hp_bar.4bpp"),
+        .size = (64 * 32) / 2,
         .anims = gDummySpriteAnimTable,
         .callback = SpriteCB_SummarySprite_HpBar
     },
@@ -111,7 +112,8 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[] =
             .priority = 0
         },
         .tileTag = TAG_SUMMARY_EXP_BAR,
-        .gfx = gBlankGfxCompressed,
+        .gfx = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/exp_bar.4bpp"),
+        .size = (64 * 8) / 2,
         .anims = gDummySpriteAnimTable,
         .callback = SpriteCB_SummarySprite_ExpBar
     },
@@ -140,16 +142,14 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[] =
             .priority = 0
         },
         .tileTag = TAG_SUMMARY_FRIENDSHIP_BAR,
-        .gfx = gBlankGfxCompressed,
+        .gfx = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/friendship_bar.4bpp"),
+        .size = (48 * 8) / 2,
         .anims = gDummySpriteAnimTable,
         .callback = SpriteCB_SummarySprite_FriendshipBar
     },
 };
 
-static const u8 sSummarySprite_HpBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/hp_bar.4bpp");
 static const u16 sSummarySprite_HpBarColors[] = INCBIN_U16("graphics/ui_menus/mon_summary/hp_bar_states.gbapal");
-static const u8 sSummarySprite_ExpBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/exp_bar.4bpp");
-static const u8 sSummarySprite_FriendshipBarBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/friendship_bar.4bpp");
 
 static const struct Subsprite sSummarySprite_128x16Subsprites[] =
 {
