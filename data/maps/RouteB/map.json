@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE_B",
   "name": "RouteB",
   "layout": "LAYOUT_ROUTE_B",
-  "music": "MUS_GSC_ROUTE38",
+  "music": "MUS_ROUTE_OCEAN_SILICON",
   "region_map_section": "MAPSEC_ROUTE_B",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -48,9 +48,7 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",

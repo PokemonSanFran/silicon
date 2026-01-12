@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE_C",
   "name": "RouteC",
   "layout": "LAYOUT_ROUTE_C",
-  "music": "MUS_RG_SURF",
+  "music": "MUS_ROUTE_OCEAN_SILICON",
   "region_map_section": "MAPSEC_ROUTE_C",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE_D",
   "name": "RouteD",
   "layout": "LAYOUT_ROUTE_D",
-  "music": "MUS_ROUTE122",
+  "music": "MUS_ROUTE_OCEAN_SILICON",
   "region_map_section": "MAPSEC_ROUTE_D",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -79,9 +79,7 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
