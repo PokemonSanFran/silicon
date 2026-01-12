@@ -34,7 +34,7 @@ static void DrawTopMessageBoxTiles(u32, u32, u32, u32);
 static void DrawSecondRowNameplateTiles(u32, u32, u32, u32);
 static void DrawThirdRowNameplateTiles(u32, u32, u32, u32);
 static void DrawTopNameplateTiles(u32, u32, u32, u32);
-static u32 GetSpeakerNameWidth(u32 speaker);
+static u32 GetSpeakerNameWidth(u32 speaker, u32 phone);
 static u32 GetSpeakerTitleWidth(u32 speaker);
 static void PlaceNameplateOnTilemap(u32 windowId);
 static void PrintSpeakerName(u32 windowId, enum NameplateSpeaker speaker);
@@ -280,7 +280,7 @@ void DrawNameplate(void)
     DestroyExistingWindow();
     u32 windowId = CreateNameplateWindow();
 
-    u32 nameWidth = GetSpeakerNameWidth(speaker);
+    u32 nameWidth = GetSpeakerNameWidth(speaker,onPhone);
     u32 titleWidth = GetSpeakerTitleWidth(speaker);
     u32 nameplateWidth = CalculateNameplateWidth(nameWidth, titleWidth);
     u32 offset = CalculateNameplateOffset(nameplateWidth);
@@ -365,19 +365,21 @@ static void BufferSpeakerName(u32 speaker)
     StringExpandPlaceholders(nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME],sSpeakerData[speaker].name);
 }
 
-u32 GetSpeakerNameWidth(u32 speaker)
+u32 GetSpeakerNameWidth(u32 speaker, u32 phone)
 {
+    u32 phoneMargin = (phone) ? PHONE_MARGIN : 0;
     u32 letterSpacing = GetFontAttribute(FONT_SPEAKER_NAME, FONTATTR_LETTER_SPACING);
     u32 defaultLength = (GetStringWidth(FONT_SPEAKER_NAME, COMPOUND_STRING("???"), letterSpacing));
+
     BufferSpeakerName(speaker);
 
     if (speaker == SPEAKER_DEFAULT || speaker >= NUM_SPEAKERS)
-        return defaultLength;
+        return (defaultLength + phoneMargin);
 
     if (sSpeakerData[speaker].name[0] == '\0')
-        return defaultLength;
+        return (defaultLength + phoneMargin);
 
-    return GetStringWidth(FONT_SPEAKER_NAME, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME], letterSpacing);
+    return (phoneMargin + GetStringWidth(FONT_SPEAKER_NAME, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME], letterSpacing));
 }
 
 static enum PlayerGender GetSpeakerGender(void)
