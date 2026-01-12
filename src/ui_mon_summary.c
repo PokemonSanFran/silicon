@@ -58,7 +58,7 @@ static void SummaryInput_SetIndex(u32);
 static u32 SummaryInput_GetIndex(void);
 static void SummaryInput_SetTotalIndex(u32);
 static u32 SummaryInput_GetTotalIndex(void);
-static void SummaryInput_SetSubMode(bool32);
+static void SummaryInput_SetSubMode(u32);
 static bool32 SummaryInput_IsWithinSubMode(void);
 static void SummaryInput_SetUpdateText(bool32);
 static bool32 SummaryInput_GetUpdateText(void);
@@ -503,7 +503,7 @@ static u32 SummaryInput_GetTotalIndex(void)
     return sMonSummaryDataPtr->totalIdx;
 }
 
-static void SummaryInput_SetSubMode(bool32 flag)
+static void SummaryInput_SetSubMode(u32 flag)
 {
     sMonSummaryDataPtr->subMode = flag;
 }
@@ -596,10 +596,13 @@ static void Task_SummaryInput_InfosInput(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        SummaryInput_SetSubMode(FALSE);
-        SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
         sMonSummaryDataPtr->arg.value = 0;
+
+        SummaryInput_SetSubMode(SUMMARY_INFOS_SUB_MODE_NONE);
+        SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
+
         return;
     }
 }
