@@ -1765,11 +1765,9 @@ static void InfosPageMisc_TrySpawnDescCursor(void)
 
     if (spriteId != SPRITE_NONE) return;
 
-    LoadCompressedSpriteSheetByTemplate(&sInfosPageMisc_CursorSpriteTemplate, 0);
     spriteId = CreateSprite(&sInfosPageMisc_CursorSpriteTemplate,
         SUMMARY_INFOS_MISC_DESC_CURSOR_X, SUMMARY_INFOS_MISC_DESC_CURSOR_Y, 0);
 
-    gSprites[spriteId].sTileTag = sInfosPageMisc_CursorSpriteTemplate.tileTag;
     SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
     SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_DESC_CURSOR, spriteId);
 
@@ -1889,21 +1887,19 @@ static void StatsPageMisc_MonTotalEVs(void)
 
 static void StatsPageMisc_TrySpawnCursors(void)
 {
-    u32 spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR);
+    u32 spriteId;
 
+    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR);
     if (spriteId != SPRITE_NONE) return;
 
-    LoadCompressedSpriteSheetByTemplate(&sStatsPageMisc_StatCursorSpriteTemplate, 0);
     spriteId = CreateSprite(&sStatsPageMisc_StatCursorSpriteTemplate, 126, 34, 3);
 
-    gSprites[spriteId].sTileTag = sStatsPageMisc_StatCursorSpriteTemplate.tileTag;
     SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
     SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR, spriteId);
 
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_VALUE_CURSOR);
     if (spriteId != SPRITE_NONE) return;
 
-    LoadCompressedSpriteSheetByTemplate(&sStatsPageMisc_ValueCursorSpriteTemplate, 0);
     spriteId = CreateSprite(&sStatsPageMisc_ValueCursorSpriteTemplate, 160 + 16, 25 + 32, 0);
 
     gSprites[spriteId].sTileTag = sStatsPageMisc_ValueCursorSpriteTemplate.tileTag;
