@@ -267,7 +267,7 @@ static void FreeNameplateStrings(void)
 
 void DrawNameplate(void)
 {
-    RandomizeNameplate();
+    //RandomizeNameplate();
 
     enum NameplateSpeaker speaker = LoadDynamicSpeaker();
     enum NameplateEmotes emote = VarGet(VAR_MSGBOX_EMOTE);
@@ -311,6 +311,7 @@ void DrawNameplate(void)
     ClearNameplateVariables();
 }
 
+/*
 #include "random.h"
 void RandomizeNameplate(void)
 {
@@ -326,6 +327,7 @@ void RandomizeNameplate(void)
     VarSet(VAR_MSGBOX_SPEAKER,0);
     VarSet(VAR_MSGBOX_SPEAKER,Random() % NUM_SPEAKERS);
 }
+*/
 
 static void DestroyExistingWindow(void)
 {
