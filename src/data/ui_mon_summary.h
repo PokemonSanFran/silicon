@@ -454,29 +454,29 @@ static const struct SpriteTemplate sStatsPageMisc_StatCursorSpriteTemplate =
     .callback = SpriteCB_StatsPageMisc_StatCursor
 };
 
-static const struct SpriteTemplate sStatsPageMisc_ValueCursorSpriteTemplate =
+static const struct SpriteTemplate sStatsPageMisc_ArrowSpriteTemplate =
 {
     .tileTag = TAG_NONE,
     .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
     .oam = &(const struct OamData){
-        .shape = SPRITE_SHAPE(32x64),
-        .size = SPRITE_SIZE(32x64),
-        .priority = 1
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .priority = 0
     },
     .anims = (const union AnimCmd *const[]){
         (const union AnimCmd[]){
             ANIMCMD_FRAME(0, 30),
             ANIMCMD_FRAME(1, 30),
             ANIMCMD_JUMP(0)
-        }
+        },
     },
     .images = &(const struct SpriteFrameImage){
-        .data = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/stats/value_cursor.4bpp"),
+        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/stats/arrow.4bpp"),
         .relativeFrames = TRUE,
-        .size = (32 * 64) / 2
+        .size = (16 * 8) / 2
     },
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_StatsPageMisc_ValueCursor
+    .callback = SpriteCallbackDummy
 };
 
 static const u8 sMovesPageGeneral_MoveBarGfx[] = INCBIN_U8("graphics/ui_menus/types/128x16/types.4bpp");

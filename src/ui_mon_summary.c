@@ -160,7 +160,8 @@ static void StatsPage_HandleMisc(void);
 static void StatsPageMisc_MonTotalEVs(void);
 static void StatsPageMisc_TrySpawnCursors(void);
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *);
-static void SpriteCB_StatsPageMisc_ValueCursor(struct Sprite *);
+static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *);
+static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *);
 
 static void MovesPage_HandleFrontEnd(void);
 static void MovesPage_HandleUpdateText(void);
@@ -1911,13 +1912,24 @@ static void StatsPageMisc_TrySpawnCursors(void)
     SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
     SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR, spriteId);
 
-    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_VALUE_CURSOR);
+
+    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW);
     if (spriteId != SPRITE_NONE) return;
 
-    spriteId = CreateSprite(&sStatsPageMisc_ValueCursorSpriteTemplate, 160 + 16, 25 + 32, 0);
+    spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, 167 + 8, 26 + 4, 0);
 
-    gSprites[spriteId].sTileTag = sStatsPageMisc_ValueCursorSpriteTemplate.tileTag;
-    SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_VALUE_CURSOR, spriteId);
+    gSprites[spriteId].callback = SpriteCB_StatsPageMisc_UpArrow;
+    SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW, spriteId);
+
+
+    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_DOWN_ARROW);
+    if (spriteId != SPRITE_NONE) return;
+
+    spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, 167 + 8, 49 + 4, 0);
+
+    gSprites[spriteId].vFlip = TRUE;
+    gSprites[spriteId].callback = SpriteCB_StatsPageMisc_DownArrow;
+    SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_DOWN_ARROW, spriteId);
 }
 
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
@@ -1928,10 +1940,20 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
     StartSpriteAnimIfDifferent(sprite, sMonSummaryDataPtr->arg.value);
 }
 
-static void SpriteCB_StatsPageMisc_ValueCursor(struct Sprite *sprite)
+static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
 {
-    sprite->invisible = !SummaryInput_IsWithinSubMode();
+    sprite->invisible = sMonSummaryDataPtr->arg.value < 1;
     if (sprite->invisible) return;
+
+    sprite->x2 = (sMonSummaryDataPtr->arg.value - 1) * 26;
+}
+
+static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
+{
+    sprite->invisible = sMonSummaryDataPtr->arg.value < 1;
+    if (sprite->invisible) return;
+
+    sprite->x2 = (sMonSummaryDataPtr->arg.value - 1) * 26;
 }
 
 static void MovesPage_HandleFrontEnd(void)
