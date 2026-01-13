@@ -111,6 +111,7 @@ static void SummarySprite_MonPokeBall(u32, s32, s32);
 static void SummarySprite_MonTypes(u32, s32, s32);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
 static void SummarySprite_MonMove(u32, s32, s32);
+static struct MonSpritesGfxManager *SummarySprite_GetGfxManager(void);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
@@ -185,13 +186,11 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
 {
     sMonSummaryDataPtr = AllocZeroed(sizeof(struct MonSummaryResources));
 
-    if (!gMonSpritesGfxPtr)
-    {
-        CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
-    }
+    struct MonSpritesGfxManager *gfxMan = CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
 
     if (!sMonSummaryDataPtr
      || !config
+     || !gfxMan
      || config->mode >= NUM_SUMMARY_MODES)
     {
         DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
@@ -199,6 +198,8 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
         SetMainCallback2(callback);
         return;
     }
+
+    sMonSummaryDataPtr->gfxMan = gfxMan;
 
     enum MonSummaryPages page = SUMMARY_PAGE_INFOS;
 
@@ -225,11 +226,7 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
 
 static void MonSummary_FreeResources(void)
 {
-    if (!gMonSpritesGfxPtr)
-    {
-        DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
-    }
-
+    DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2]);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
@@ -1099,18 +1096,9 @@ static void SummarySprite_CreateMonSprite(void)
 // switch between buffers
 static void SummarySprite_InjectPokemon(void)
 {
-    u32 position = B_POSITION_OPPONENT_LEFT;
+    u32 position = SUMMARY_GFX_MAN_MON; // B_POSITION_OPPONENT_LEFT
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u8 *gfx = NULL;
-
-    if (gMain.inBattle || gMonSpritesGfxPtr != NULL)
-    {
-        gfx = gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT];
-    }
-    else
-    {
-        gfx = MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT);
-    }
+    u8 *gfx = MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, position);
 
     u32 index = SummarySprite_GetPokemonPaletteSlot();
     CpuFill32(0, gfx, 512);
@@ -1262,6 +1250,11 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     StartSpriteAnim(&gSprites[spriteId], type);
 
     SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);
+}
+
+static struct MonSpritesGfxManager *SummarySprite_GetGfxManager(void)
+{
+    return sMonSummaryDataPtr->gfxMan;
 }
 
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)

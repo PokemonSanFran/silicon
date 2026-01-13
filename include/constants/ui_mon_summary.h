@@ -293,6 +293,11 @@ enum __attribute__((packed)) MonSummaryReloadModes
 
 #define SUMMARY_SUB_MENU_DEPTH   (4) // infos page has 1, stats page has 2, and moves page has 3
 
+enum MonSummaryGfxManagerIdx
+{
+    SUMMARY_GFX_MAN_MON = B_POSITION_OPPONENT_LEFT,
+};
+
 // structs
 
 // contains MonData of the current pokemon (list.mons/boxMons[currId])
@@ -338,6 +343,7 @@ struct MonSummary
 
 struct MonSummaryResources
 {
+    struct MonSpritesGfxManager *gfxMan;
     MainCallback savedCallback;
     u8 *tilemapBufs[NUM_SUMMARY_PAGE_SLOTS];
     u8 spriteIds[NUM_SUMMARY_MAIN_SPRITES + TOTAL_SUMMARY_DYNAMIC_SPRITES];
