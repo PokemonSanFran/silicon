@@ -110,6 +110,7 @@ static u32 SummarySprite_GetHeldItemTag(void);
 static void SummarySprite_MonPokeBall(u32, s32, s32);
 static void SummarySprite_MonTypes(u32, s32, s32);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
+static void SummarySprite_PrepareMonMovesGfx(void);
 static void SummarySprite_MonMove(u32, s32, s32);
 static struct MonSpritesGfxManager *SummarySprite_GetGfxManager(void);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
@@ -1233,6 +1234,26 @@ static u32 SummarySprite_GetTypePaletteTag(enum Type type)
     return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
 }
 
+static void SummarySprite_PrepareMonMovesGfx(void)
+{
+    u16 *moves = SummaryMon_GetStruct()->moves;
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u32 tileNum = GetMoveType(moves[i]) * 32;
+        CpuCopy32(sMovesPageGeneral_MoveBarGfx + TILE_OFFSET_4BPP(tileNum), (void *)sMonSummaryDataPtr->moveBarGfx[i], TILE_OFFSET_4BPP(32));
+    }
+
+    struct MonSpritesGfxManager *gfxMan = SummarySprite_GetGfxManager();
+    enum MonSummaryGfxManagerIdx idx = SUMMARY_GFX_MAN_MOVE_BAR;
+
+    gfxMan->frameImages[idx] = *sMovesPageGeneral_MoveBarSpriteTemplate.images;
+    gfxMan->frameImages[idx].data = sMonSummaryDataPtr->moveBarGfx;
+
+    gfxMan->templates[idx] = sMovesPageGeneral_MoveBarSpriteTemplate;
+    gfxMan->templates[idx].images = (const struct SpriteFrameImage *)gfxMan->frameImages;
+}
+
 static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
 {
     idx %= MAX_MON_MOVES;
@@ -1243,11 +1264,11 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
 
     if (move == MOVE_NONE || move >= MOVES_COUNT) return;
 
-    u32 spriteId = CreateSprite(&sMovesPageGeneral_MoveBarSpriteTemplate, x, y, 2);
+    u32 spriteId = CreateSprite(&SummarySprite_GetGfxManager()->templates[SUMMARY_GFX_MAN_MOVE_BAR], x, y, 2);
 
     gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(type));
     SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
-    StartSpriteAnim(&gSprites[spriteId], type);
+    StartSpriteAnim(&gSprites[spriteId], idx);
 
     SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);
 }
@@ -1932,6 +1953,8 @@ static void MovesPage_HandleHeader(void)
 
 static void MovesPage_HandleGeneral(void)
 {
+    SummarySprite_PrepareMonMovesGfx();
+
     for (u32 i = 0, x = 139, y = 34; i < MAX_MON_MOVES; i++, y += 16)
     {
         SummarySprite_MonMove(i, x, y);

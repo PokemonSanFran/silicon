@@ -295,6 +295,7 @@ enum __attribute__((packed)) MonSummaryReloadModes
 
 enum MonSummaryGfxManagerIdx
 {
+    SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_PLAYER_LEFT,
     SUMMARY_GFX_MAN_MON = B_POSITION_OPPONENT_LEFT,
 };
 
@@ -344,6 +345,7 @@ struct MonSummary
 struct MonSummaryResources
 {
     struct MonSpritesGfxManager *gfxMan;
+    u8 moveBarGfx[MAX_MON_MOVES][0x400];
     MainCallback savedCallback;
     u8 *tilemapBufs[NUM_SUMMARY_PAGE_SLOTS];
     u8 spriteIds[NUM_SUMMARY_MAIN_SPRITES + TOTAL_SUMMARY_DYNAMIC_SPRITES];
