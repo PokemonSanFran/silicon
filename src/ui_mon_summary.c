@@ -1924,6 +1924,8 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
 {
     sprite->invisible = !SummaryInput_IsWithinSubMode();
     if (sprite->invisible) return;
+
+    StartSpriteAnimIfDifferent(sprite, sMonSummaryDataPtr->arg.value);
 }
 
 static void SpriteCB_StatsPageMisc_ValueCursor(struct Sprite *sprite)

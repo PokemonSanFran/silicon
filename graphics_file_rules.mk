@@ -445,6 +445,9 @@ $(TYPES128x16GFXDIR)/types.4bpp: $(types:%=$(TYPES128x16GFXDIR)/%.4bpp)
 
 $(MONSUMMARYGFXDIR)/infos/cursor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/stats/stat_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
 # End monSummary
 
 graphics/bag/menu.4bpp: %.4bpp: %.png

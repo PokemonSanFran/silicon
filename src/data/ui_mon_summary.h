@@ -422,8 +422,6 @@ static const u8 *const sStatsPageGeneral_StatsNames[NUM_STATS] =
     [STAT_SPEED] = COMPOUND_STRING("SPD"),
 };
 
-static const u8 sStatsPageMisc_StatCursorGfx[] = INCBIN_U8("graphics/ui_menus/mon_summary/stats/stat_cursor.4bpp");
-
 static const struct SpriteTemplate sStatsPageMisc_StatCursorSpriteTemplate =
 {
     .tileTag = TAG_NONE,
@@ -431,13 +429,26 @@ static const struct SpriteTemplate sStatsPageMisc_StatCursorSpriteTemplate =
     .oam = &(const struct OamData){
         .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .priority = 1
+        .priority = 0
     },
-    .anims = sSummarySprite_FrameImageAnimTemplate,
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0),
+            ANIMCMD_END
+        },
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(1),
+            ANIMCMD_END
+        },
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(2),
+            ANIMCMD_END
+        },
+    },
     .images = &(const struct SpriteFrameImage){
-        .data = sStatsPageMisc_StatCursorGfx,
+        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/stats/stat_cursor.4bpp"),
+        .relativeFrames = TRUE,
         .size = (128 * 16) / 2,
-        .relativeFrames = TRUE
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_StatsPageMisc_StatCursor
