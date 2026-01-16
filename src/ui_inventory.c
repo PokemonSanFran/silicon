@@ -3307,6 +3307,13 @@ void Task_UseItem(u8 taskId){
     }
 }
 
+static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message){
+    sMenuDataPtr->currentSelectMode = message;
+    sMenuDataPtr->itemIdxPickMode = 0;
+    Inventory_PrintToAllWindows();
+    gTasks[taskId].func = Task_MenuMain;
+}
+
 void ItemUseOutOfBattle_Repel_New(u8 taskId)
 {
     u16 ItemId = gSpecialVar_ItemId;
@@ -3338,6 +3345,7 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId)
     if (isUsable){
         u16 steps = GetItemHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK;
         remainingSteps += steps;
+        PlaySE(SE_REPEL);
         VarSet(VAR_LAST_REPEL_LURE_USED, ItemId);
         VarSet(VAR_REPEL_STEP_COUNT, remainingSteps);
         sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_USED_ITEM;
@@ -3345,8 +3353,20 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId)
     else
         sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
 
+    sMenuDataPtr->itemIdxPickMode = 0;
     Inventory_PrintToAllWindows();
     gTasks[taskId].func = Task_MenuMain;
+}
+
+static bool8 CanUseSpecificItem(u16 item){
+    switch(item){
+        case ITEM_ESCAPE_ROPE:
+            if(!CanUseDigOrEscapeRopeOnCurMap())
+                return FALSE;
+        break;
+    }
+
+    return TRUE;
 }
 
 static void Task_ItemUseOnField(u8 taskId)
@@ -3354,17 +3374,17 @@ static void Task_ItemUseOnField(u8 taskId)
     u16 itemId = gSpecialVar_ItemId = Inventory_GetItemIdCurrentlySelected();
     enum ItemSortType itemType = GetItemSortType(itemId);
 
-    if (GetItemFieldFunc(itemId))
+    if (GetItemFieldFunc(itemId) && CanUseSpecificItem(itemId))
     {
         if (!IsPlayerAllowedToUseHealingItems(itemId, TRUE, FALSE, TRUE))
         {
             //Can't use item
-            sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+            Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
         }
         else if (CalculatePlayerPartyCount() == 0 && GetItemType(itemId) == ITEM_USE_PARTY_MENU)
         {
             //There is no Pokemon
-            sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+            Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
         }
         else if(itemType == ITEM_TYPE_REPEL){
             gTasks[taskId].func = ItemUseOutOfBattle_Repel_New;
@@ -3377,8 +3397,7 @@ static void Task_ItemUseOnField(u8 taskId)
         }
     }
     else{
-        //Can't use item
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
     }
 
     sMenuDataPtr->itemIdxPickMode = 0;
@@ -3752,6 +3771,7 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
+        bool8 shouldOpenMenu = TRUE;
         if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD || sMenuDataPtr->inventoryMode == INVENTORY_MODE_BATTLE)
         {
             switch(sMenuDataPtr->currentSelectMode)
@@ -3778,6 +3798,7 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MESSAGE_USED_ITEM:
                     sMenuDataPtr->itemIdxPickMode = 0;
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+                    shouldOpenMenu = FALSE;
                     break;
                 default:
                     if (Inventory_LastItemInMenu())
@@ -3791,7 +3812,7 @@ static void Task_MenuMain(u8 taskId)
                         sMenuDataPtr->itemIdxPickMode = 0;
                         sMenuDataPtr->currentSelectMode = INVENTORY_MODE_USE_OPTIONS;
                     }
-                    break;
+                break;
             }
         }
         else if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM)
@@ -3809,7 +3830,8 @@ static void Task_MenuMain(u8 taskId)
         }
 
         Inventory_PrintToAllWindows();
-        Inventory_OpenMenu(taskId);
+        if(shouldOpenMenu)
+            Inventory_OpenMenu(taskId);
         return;
     }
 
