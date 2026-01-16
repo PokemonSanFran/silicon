@@ -324,7 +324,6 @@ struct MonSummary
     u16 moves[MAX_MON_MOVES];
     u8 pp[MAX_MON_MOVES];
     u16 currHp;
-    u16 stats[NUM_STATS];
     u16 item;
     u16 friendship;
     u8 trainerGender;
@@ -335,8 +334,7 @@ struct MonSummary
     u32 trainerId;
     u8 mintNature;
 
-    u8 ivs[NUM_STATS];
-    u8 evs[NUM_STATS];
+    u16 totalValues[NUM_SUMMARY_TOTAL_VALUES];
     u8 gender;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     enum PokeBall ball;
@@ -370,7 +368,7 @@ struct MonSummaryResources
         struct Pokemon *mons;
         struct BoxPokemon *boxMons;
     } list;
-    struct Pokemon *mon;
+    struct Pokemon mon;
     struct MonSummary summary;
     struct SpriteFrameImage heldItemImage;
 

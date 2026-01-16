@@ -656,7 +656,7 @@ static void SummaryMon_SetStruct(void)
     SummaryMon_CopyCurrentRawMon();
 
     struct MonSummaryResources *res = sMonSummaryDataPtr;
-    struct Pokemon *mon = res->mon;
+    struct Pokemon *mon = &res->mon;
 
     res->summary.species = GetMonData(mon, MON_DATA_SPECIES);
     res->summary.species2 = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
@@ -686,12 +686,6 @@ static void SummaryMon_SetStruct(void)
     res->summary.nature = GetNature(mon);
     res->summary.mintNature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
     res->summary.currHp = GetMonData(mon, MON_DATA_HP);
-    res->summary.stats[STAT_HP] = GetMonData(mon, MON_DATA_MAX_HP);
-    res->summary.stats[STAT_ATK] = GetMonData(mon, MON_DATA_ATK);
-    res->summary.stats[STAT_DEF] = GetMonData(mon, MON_DATA_DEF);
-    res->summary.stats[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
-    res->summary.stats[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
-    res->summary.stats[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
 
     GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
     ConvertInternationalString(res->summary.trainerName, GetMonData(mon, MON_DATA_LANGUAGE));
@@ -706,19 +700,14 @@ static void SummaryMon_SetStruct(void)
     res->summary.ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
     res->summary.isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-    res->summary.ivs[STAT_HP] = GetMonData(mon, MON_DATA_HP_IV);
-    res->summary.ivs[STAT_ATK] = GetMonData(mon, MON_DATA_ATK_IV);
-    res->summary.ivs[STAT_DEF] = GetMonData(mon, MON_DATA_DEF_IV);
-    res->summary.ivs[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK_IV);
-    res->summary.ivs[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF_IV);
-    res->summary.ivs[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED_IV);
+    res->summary.totalValues[SUMMARY_TOTAL_IVS] = 0;
 
-    res->summary.evs[STAT_HP] = GetMonData(mon, MON_DATA_HP_EV);
-    res->summary.evs[STAT_ATK] = GetMonData(mon, MON_DATA_ATK_EV);
-    res->summary.evs[STAT_DEF] = GetMonData(mon, MON_DATA_DEF_EV);
-    res->summary.evs[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK_EV);
-    res->summary.evs[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF_EV);
-    res->summary.evs[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED_EV);
+    for (enum Stat i = 0; i < NUM_STATS; i++)
+    {
+        res->summary.totalValues[SUMMARY_TOTAL_IVS] += GetMonData(mon, MON_DATA_HP_IV + i);
+    }
+
+    res->summary.totalValues[SUMMARY_TOTAL_EVS] = GetMonEVCount(mon);
 
     GetMonNickname(mon, res->summary.nickname);
     res->summary.gender = GetMonGender(mon);
@@ -739,17 +728,17 @@ static void SummaryMon_CopyCurrentRawMon(void)
     if (sMonSummaryDataPtr->useBoxMon)
     {
         struct BoxPokemon *boxMon = &res->list.boxMons[res->currIdx];
-        BoxMonToMon(boxMon, res->mon);
+        BoxMonToMon(boxMon, &res->mon);
     }
     else
     {
-        res->mon = &res->list.mons[res->currIdx];
+        res->mon = res->list.mons[res->currIdx];
     }
 }
 
 static void SummaryMon_GetNatureFlavors(u8 *flavors)
 {
-    struct Pokemon *mon = sMonSummaryDataPtr->mon;
+    struct Pokemon *mon = &sMonSummaryDataPtr->mon;
 
     memset(flavors, FLAVOR_COUNT, sizeof(u8) * 2);
 
@@ -997,7 +986,7 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
 
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 currHp = mon->currHp;
-    u32 maxHp = mon->stats[STAT_HP];
+    u32 maxHp = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP);
 
     u32 hpPercentage = (currHp * 100) / maxHp;
     enum MonSummaryHpBarColors color = hpPercentage / 33;
@@ -1112,7 +1101,7 @@ static void SummarySprite_InjectPokemon(void)
         LoadPalette(
             GetMonSpritePalFromSpeciesAndPersonality(mon->species, mon->isShiny, mon->personality),
             OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-        UniquePalette(OBJ_PLTT_ID(index), &sMonSummaryDataPtr->mon->box);
+        UniquePalette(OBJ_PLTT_ID(index), &sMonSummaryDataPtr->mon.box);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZEOF(16));
 
     }
@@ -1142,7 +1131,7 @@ static void SummarySprite_PlayPokemonCry(void)
     if (mon->isEgg) return;
 
     u32 cryMode =
-        ShouldPlayNormalMonCry(sMonSummaryDataPtr->mon) ? CRY_MODE_NORMAL : CRY_MODE_WEAK;
+        ShouldPlayNormalMonCry(&sMonSummaryDataPtr->mon) ? CRY_MODE_NORMAL : CRY_MODE_WEAK;
 
     PlayCry_ByMode(mon->species2, 0, cryMode);
 }
@@ -1489,7 +1478,7 @@ static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
 
     if (flag & SUMMARY_STATS_FLAG_EVS)
     {
-        u32 ev = mon->evs[statIdx];
+        u32 ev = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_EV + statIdx);
 
         ConvertUIntToDecimalStringN(gStringVar1, ev, STR_CONV_MODE_LEFT_ALIGN, 3);
         u32 centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED,
@@ -1502,7 +1491,7 @@ static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
 
     if (flag & SUMMARY_STATS_FLAG_IVS)
     {
-        u32 iv = mon->ivs[statIdx];
+        u32 iv = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_IV + statIdx);
 
         ConvertUIntToDecimalStringN(gStringVar1, iv, STR_CONV_MODE_LEFT_ALIGN, 2);
         u32 centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, 11, -1);
@@ -1514,7 +1503,7 @@ static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
 
     if (flag & SUMMARY_STATS_FLAG_STATS)
     {
-        u32 stat = mon->stats[statIdx];
+        u32 stat = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP + statIdx);
 
         ConvertUIntToDecimalStringN(gStringVar1, stat, STR_CONV_MODE_LEFT_ALIGN, 4);
         u32 centerAlign = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_OUTLINED, gStringVar1, TILE_TO_PIXELS(3) - 3, -1);
@@ -1889,11 +1878,12 @@ static void StatsPageMisc_MonTotalEVs(void)
 
     for (enum Stat statIdx = 0; statIdx < NUM_STATS; statIdx++)
     {
-        usedEVs += mon->evs[statIdx];
+        usedEVs += GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_EV + statIdx);
     }
 
     ConvertUIntToDecimalStringN(gStringVar1, usedEVs, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/510"));
+    ConvertUIntToDecimalStringN(gStringVar2, mon->totalValues[SUMMARY_TOTAL_EVS], STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/{STR_VAR_2}"));
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED,
         SUMMARY_STATS_MISC_TOTAL_EVS_X, SUMMARY_STATS_MISC_TOTAL_EVS_Y,
