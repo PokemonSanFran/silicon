@@ -900,6 +900,9 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         PutWindowTilemap(i);
     }
 
+    SummaryPrint_Header();
+    SummaryPrint_HelpBar();
+
     void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
 
     switch (mode)
@@ -931,8 +934,9 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 
             handleFrontEnd();
 
-            CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_FULL);
-
+            CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
+            CopyBgTilemapBufferToVram(SUMMARY_BG_TEXT);
+            CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
             return;
         }
     }
@@ -942,11 +946,8 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 
     handleFrontEnd();
 
-    SummaryPrint_Header();
-    SummaryPrint_HelpBar();
-    CopyBgTilemapBufferToVram(SUMMARY_BG_TEXT);
-
     CopyWindowToVram(SUMMARY_MAIN_WIN_PAGE_TEXT, COPYWIN_GFX);
+    CopyBgTilemapBufferToVram(SUMMARY_BG_TEXT);
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_1);
     CopyBgTilemapBufferToVram(SUMMARY_BG_PAGE_TEXT);
 }
