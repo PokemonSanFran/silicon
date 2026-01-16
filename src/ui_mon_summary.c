@@ -639,7 +639,6 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             break;
         }
 
-        PlaySE(SE_SELECT);
         return;
     }
 
@@ -657,7 +656,6 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             break;
         }
 
-        PlaySE(SE_SELECT);
         return;
     }
 
@@ -672,7 +670,6 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             break;
         }
 
-        PlaySE(SE_SELECT);
         return;
     }
 
@@ -687,7 +684,6 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             break;
         }
 
-        PlaySE(SE_SELECT);
         return;
     }
 
@@ -702,7 +698,6 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             break;
         }
 
-        PlaySE(SE_SELECT);
         return;
     }
 
@@ -717,7 +712,6 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             break;
         }
 
-        PlaySE(SE_SELECT);
         return;
     }
 
@@ -2162,6 +2156,11 @@ static void StatsPageMisc_UpdateCurrentRowEVs(s32 delta)
     SetMonData(&sMonSummaryDataPtr->mon, trueRow, &evs);
     CalculateMonStats(&sMonSummaryDataPtr->mon);
     SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+
+    if (availableEvs != StatsPageMisc_CalculateAvailableEVs())
+    {
+        PlaySE(SE_SELECT);
+    }
 }
 
 // only "useable" when within the evs changing mode
