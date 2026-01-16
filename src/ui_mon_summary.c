@@ -540,7 +540,7 @@ static bool32 SummaryInput_GetUpdateText(void)
 
 static bool32 SummaryInput_IsInputAdditive(s32 delta)
 {
-    return delta == 1;
+    return delta >= 1;
 }
 
 static void Task_SummaryMode_DefaultInput(u8 taskId)
