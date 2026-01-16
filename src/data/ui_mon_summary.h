@@ -207,7 +207,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     [SUMMARY_PAGE_INFOS] =
     {
         .name = COMPOUND_STRING("Info"),
-        .helpBar = {
+        .helpBar = (const u8 *const[NUM_SUMMARY_INFOS_SUB_MODES]){
             [SUMMARY_INFOS_SUB_MODE_NONE]           = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
             [SUMMARY_INFOS_SUB_MODE_DESC_SWITCH]    = COMPOUND_STRING("{DPAD_NONE} Cycle {B_BUTTON} Cancel"),
         },
@@ -226,7 +226,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     [SUMMARY_PAGE_STATS] =
     {
         .name = COMPOUND_STRING("Stats"),
-        .helpBar = {
+        .helpBar = (const u8 *const[NUM_SUMMARY_STATS_SUB_MODES]){
             [SUMMARY_STATS_SUB_MODE_NONE]           = COMPOUND_STRING("{A_BUTTON} Edit {B_BUTTON} Exit"),
             [SUMMARY_STATS_SUB_MODE_SELECT_ROW]     = COMPOUND_STRING("{DPAD_UPDOWN} Navigate {A_BUTTON} Select {B_BUTTON} Cancel"),
             [SUMMARY_STATS_SUB_MODE_ADJUST_VALUE]   = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +10/-10 {L_BUTTON} Min {R_BUTTON} Max {B_BUTTON} Cancel"),
@@ -247,7 +247,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     [SUMMARY_PAGE_MOVES] =
     {
         .name = COMPOUND_STRING("Moves"),
-        .helpBar = {
+        .helpBar = (const u8 *const[]){
             [0] = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Exit"),
             [1] = COMPOUND_STRING("{A_BUTTON} Select {B_BUTTON} Cancel"),
             [2] = COMPOUND_STRING("{DPAD_UPDOWN} Move {A_BUTTON} Confirm {B_BUTTON} Cancel"),

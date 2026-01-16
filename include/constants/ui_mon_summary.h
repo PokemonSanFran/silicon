@@ -427,7 +427,7 @@ struct MonSummarySprite
 struct MonSummaryPageInfo
 {
     const u8 *name;
-    const u8 *const helpBar[SUMMARY_SUB_MENU_DEPTH];
+    const u8 *const *helpBar;
     const u32 *tilemap;
     struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     TaskFunc input;
