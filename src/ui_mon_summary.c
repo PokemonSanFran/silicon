@@ -1978,7 +1978,7 @@ static void StatsPage_HandleHeader(void)
     SummaryPrint_MonName(SUMMARY_STATS_HEADER_NAME_X, SUMMARY_STATS_HEADER_Y, TILE_TO_PIXELS(8));
     SummaryPrint_MonGender(SUMMARY_STATS_HEADER_GENDER_X, SUMMARY_STATS_HEADER_Y);
     SummaryPrint_MonLevel(SUMMARY_STATS_HEADER_LEVEL_X, SUMMARY_STATS_HEADER_Y);
-    SummarySprite_MonTypes(SUMMARY_STATS_SPRITE_TYPE_1, 88 + 8, 20 + 8);
+    SummarySprite_MonTypes(SUMMARY_STATS_SPRITE_TYPE_1, SUMMARY_STATS_HEADER_TYPINGS_X, SUMMARY_STATS_HEADER_TYPINGS_Y);
 }
 
 // thanks middle speed..
@@ -2064,7 +2064,7 @@ static void StatsPageMisc_TrySpawnCursors(void)
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sStatsPageMisc_StatCursorSpriteTemplate, 126, 34, 3);
+        spriteId = CreateSprite(&sStatsPageMisc_StatCursorSpriteTemplate, SUMMARY_STATS_MISC_CURSOR_X, SUMMARY_STATS_MISC_CURSOR_Y, 3);
 
         SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR, spriteId);
@@ -2073,7 +2073,7 @@ static void StatsPageMisc_TrySpawnCursors(void)
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, 167 + 8, 26 + 4, 0);
+        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, SUMMARY_STATS_MISC_UP_ARROW_X, SUMMARY_STATS_MISC_UP_ARROW_Y, 0);
 
         gSprites[spriteId].callback = SpriteCB_StatsPageMisc_UpArrow;
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW, spriteId);
@@ -2082,7 +2082,7 @@ static void StatsPageMisc_TrySpawnCursors(void)
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_DOWN_ARROW);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, 167 + 8, 49 + 4, 0);
+        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, SUMMARY_STATS_MISC_DOWN_ARROW_X, SUMMARY_STATS_MISC_DOWN_ARROW_Y, 0);
 
         gSprites[spriteId].vFlip = TRUE;
         gSprites[spriteId].callback = SpriteCB_StatsPageMisc_DownArrow;
@@ -2236,17 +2236,17 @@ static void MovesPage_HandleHeader(void)
     SummaryPrint_MonName(SUMMARY_MOVES_HEADER_NAME_X, SUMMARY_MOVES_HEADER_Y, TILE_TO_PIXELS(8));
     SummaryPrint_MonGender(SUMMARY_MOVES_HEADER_GENDER_X, SUMMARY_MOVES_HEADER_Y);
     SummaryPrint_MonLevel(SUMMARY_MOVES_HEADER_LEVEL_X, SUMMARY_MOVES_HEADER_Y);
-    SummarySprite_MonTypes(SUMMARY_MOVES_SPRITE_TYPE_1, 88 + 8, 20 + 8);
+    SummarySprite_MonTypes(SUMMARY_MOVES_SPRITE_TYPE_1, SUMMARY_MOVES_HEADER_TYPINGS_X, SUMMARY_MOVES_HEADER_TYPINGS_Y);
 }
 
 static void MovesPage_HandleGeneral(void)
 {
     SummarySprite_PrepareMonMovesGfx();
 
-    for (u32 i = 0, x = 139, y = 34; i < MAX_MON_MOVES; i++, y += 16)
+    for (u32 i = 0, y = SUMMARY_MOVES_GENERAL_Y; i < MAX_MON_MOVES; i++, y += TILE_TO_PIXELS(2))
     {
-        SummarySprite_MonMove(i, x, y);
-        SummaryPrint_MoveName(i, x + 5, y);
-        SummaryPrint_BlitMoveType(i, 223, y);
+        SummarySprite_MonMove(i, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, y);
+        SummaryPrint_MoveName(i, SUMMARY_MOVES_GENERAL_NAME_X, y);
+        SummaryPrint_BlitMoveType(i, SUMMARY_MOVES_GENERAL_ICON_BLIT_X, y);
     }
 }
