@@ -292,8 +292,6 @@ enum __attribute__((packed)) MonSummaryReloadModes
 #define SUMMARY_STATS_FLAG_STATS (1 << 3) // XXXX
 #define SUMMARY_STATS_FLAG_ALL   (SUMMARY_STATS_FLAG_NAME | SUMMARY_STATS_FLAG_EVS | SUMMARY_STATS_FLAG_IVS | SUMMARY_STATS_FLAG_STATS)
 
-#define SUMMARY_SUB_MENU_DEPTH   (4) // infos page has 1, stats page has 2, and moves page has 3
-
 enum MonSummaryGfxManagerIdx
 {
     SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_PLAYER_LEFT,
