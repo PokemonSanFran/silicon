@@ -1141,27 +1141,30 @@ static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 itemId = mon->item, spriteId = SummarySprite_GetDynamicSpriteId(spriteArrId);
 
-    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT || spriteId != SPRITE_NONE) return;
+    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
 
-    DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
-    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+    if (spriteId == SPRITE_NONE)
+    {
+        DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+        CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
 
-    u32 tag = SummarySprite_GetHeldItemTag();
+        u32 tag = SummarySprite_GetHeldItemTag();
 
-    LoadPalette(GetItemIconPalette(itemId), OBJ_PLTT_ID(IndexOfSpritePaletteTag(tag)), PLTT_SIZE_4BPP);
+        LoadPalette(GetItemIconPalette(itemId), OBJ_PLTT_ID(IndexOfSpritePaletteTag(tag)), PLTT_SIZE_4BPP);
 
-    sMonSummaryDataPtr->heldItemImage.data = gItemIcon4x4Buffer;
-    sMonSummaryDataPtr->heldItemImage.relativeFrames = TRUE;
-    sMonSummaryDataPtr->heldItemImage.size = TILE_OFFSET_4BPP(16);
+        sMonSummaryDataPtr->heldItemImage.data = gItemIcon4x4Buffer;
+        sMonSummaryDataPtr->heldItemImage.relativeFrames = TRUE;
+        sMonSummaryDataPtr->heldItemImage.size = TILE_OFFSET_4BPP(16);
 
-    struct SpriteTemplate template = gItemIconSpriteTemplate;
-    template.tileTag = TAG_NONE;
-    template.images = &sMonSummaryDataPtr->heldItemImage;
-    template.paletteTag = tag;
+        struct SpriteTemplate template = gItemIconSpriteTemplate;
+        template.tileTag = TAG_NONE;
+        template.images = &sMonSummaryDataPtr->heldItemImage;
+        template.paletteTag = tag;
 
-    spriteId = CreateSprite(&template, x, y, 0);
+        spriteId = CreateSprite(&template, x, y, 0);
 
-    SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+        SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+    }
 }
 
 static u32 SummarySprite_GetHeldItemTag(void)
@@ -1191,32 +1194,38 @@ static void SummarySprite_MonTypes(u32 spriteArrId, s32 x, s32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     enum Type types[2] = { GetSpeciesType(mon->species, 0), GetSpeciesType(mon->species, 1) };
-
     u32 tag = SummarySprite_GetTypePaletteTag(types[0]);
     struct SpriteTemplate template = sStatsPageHeader_TypeSpriteTemplate;
+    u32 spriteId = 0;
 
-    template.paletteTag = tag;
-    u32 spriteId = CreateSprite(&template, x, y, 0);
+    if (SummarySprite_GetDynamicSpriteId(spriteArrId) == SPRITE_NONE)
+    {
+        template.paletteTag = tag;
+        spriteId = CreateSprite(&template, x, y, 0);
 
-    gSprites[spriteId].callback = SpriteCallbackDummy;
-    gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].callback = SpriteCallbackDummy;
+        gSprites[spriteId].oam.priority = 0;
 
-    SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
-    StartSpriteAnim(&gSprites[spriteId], types[0]);
+        SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
+        StartSpriteAnim(&gSprites[spriteId], types[0]);
+    }
 
     if (types[1] == types[0]) return;
 
-    x += 12;
-    tag = SummarySprite_GetTypePaletteTag(types[1]);
+    if (SummarySprite_GetDynamicSpriteId(spriteArrId + 1) == SPRITE_NONE)
+    {
+        x += 12;
+        tag = SummarySprite_GetTypePaletteTag(types[1]);
 
-    template.paletteTag = tag;
-    spriteId = CreateSprite(&template, x, y, 0);
+        template.paletteTag = tag;
+        spriteId = CreateSprite(&template, x, y, 0);
 
-    gSprites[spriteId].callback = SpriteCallbackDummy;
-    gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].callback = SpriteCallbackDummy;
+        gSprites[spriteId].oam.priority = 0;
 
-    SummarySprite_SetDynamicSpriteId(spriteArrId + 1, spriteId);
-    StartSpriteAnim(&gSprites[spriteId], types[1]);
+        SummarySprite_SetDynamicSpriteId(spriteArrId + 1, spriteId);
+        StartSpriteAnim(&gSprites[spriteId], types[1]);
+    }
 }
 
 static u32 SummarySprite_GetTypePaletteTag(enum Type type)
