@@ -227,9 +227,10 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Stats"),
         .helpBar = {
-            [0] = COMPOUND_STRING("{A_BUTTON} Edit {B_BUTTON} Exit"),
-            [1] = COMPOUND_STRING("{DPAD_NONE} Navigate {A_BUTTON} Select {B_BUTTON} Cancel"),
-            [2] = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Confirm {B_BUTTON} Cancel"),
+            [SUMMARY_STATS_SUB_MODE_NONE]           = COMPOUND_STRING("{A_BUTTON} Edit {B_BUTTON} Exit"),
+            [SUMMARY_STATS_SUB_MODE_SELECT_ROW]     = COMPOUND_STRING("{DPAD_UPDOWN} Navigate {A_BUTTON} Select {B_BUTTON} Cancel"),
+            [SUMMARY_STATS_SUB_MODE_ADJUST_VALUE]   = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +10/-10 {L_BUTTON} Min {R_BUTTON} Max {B_BUTTON} Cancel"),
+            [SUMMARY_STATS_SUB_MODE_ERROR]          = COMPOUND_STRING("Press any buttons to continue."),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
         .mainSpriteCoords =
@@ -477,6 +478,28 @@ static const struct SpriteTemplate sStatsPageMisc_ArrowSpriteTemplate =
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
+};
+
+static const u8 sStatsPageMisc_MonDataValuesOrders[][NUM_STATS] =
+{
+    [SUMMARY_TOTAL_EVS] =
+    {
+        MON_DATA_HP_EV,
+        MON_DATA_ATK_EV,
+        MON_DATA_DEF_EV,
+        MON_DATA_SPATK_EV,
+        MON_DATA_SPDEF_EV,
+        MON_DATA_SPEED_EV,
+    },
+    [SUMMARY_TOTAL_IVS] =
+    {
+        MON_DATA_HP_IV,
+        MON_DATA_ATK_IV,
+        MON_DATA_DEF_IV,
+        MON_DATA_SPATK_IV,
+        MON_DATA_SPDEF_IV,
+        MON_DATA_SPEED_IV,
+    }
 };
 
 static const u8 sMovesPageGeneral_MoveBarGfx[] = INCBIN_U8("graphics/ui_menus/types/128x16/types.4bpp");

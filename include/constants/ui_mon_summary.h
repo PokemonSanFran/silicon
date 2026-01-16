@@ -193,6 +193,27 @@ enum MonSummaryStatsSprites
     NUM_SUMMARY_STATS_SPRITES
 };
 
+enum MonSummaryStatsSubModes
+{
+    SUMMARY_STATS_SUB_MODE_NONE,
+    SUMMARY_STATS_SUB_MODE_SELECT_ROW,
+    SUMMARY_STATS_SUB_MODE_ADJUST_VALUE,
+    SUMMARY_STATS_SUB_MODE_ERROR,
+
+    NUM_SUMMARY_STATS_SUB_MODES
+};
+
+enum MonSummaryTotalValues
+{
+    SUMMARY_TOTAL_EVS,
+    SUMMARY_TOTAL_IVS,
+
+    NUM_SUMMARY_TOTAL_VALUES
+};
+
+#define SUMMARY_STATS_MIN_EVS   (0xFFFE)
+#define SUMMARY_STATS_MAX_EVS   (0xFFFF)
+
 #define SUMMARY_STATS_HEADER_NAME_X             (TILE_TO_PIXELS(4))
 #define SUMMARY_STATS_HEADER_GENDER_X           (TILE_TO_PIXELS(4) + (TILE_TO_PIXELS(8) + 2))
 #define SUMMARY_STATS_HEADER_LEVEL_X            (TILE_TO_PIXELS(4) + TILE_TO_PIXELS(10))
@@ -373,6 +394,12 @@ struct MonSummaryResources
     union {
         u32 value;
         u32 infosDescState;
+        struct PACKED {
+            u32 row:3;
+            u32 totalEvs:10;
+            u32 subMode:2;
+            u32 pad:17;
+        } stats;
     } arg;
 };
 
