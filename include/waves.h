@@ -18,6 +18,10 @@ struct WavesData
 struct WavesState
 {
     void* savedCallback;
+    enum WavesCursorPosition position;
+    enum WavesMode mode;
+    u8 donatePosition;
+    bool8 confirmPosition;
 };
 
 void CB2_WavesFromStartMenu(void);

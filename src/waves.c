@@ -12,7 +12,7 @@
 #include "field_weather.h"
 #include "options_visual.h"
 #include "malloc.h"
-#include "random.h" 
+#include "random.h"
 #include "waves.h"
 #include "palette.h"
 #include "task.h"
@@ -64,7 +64,10 @@ static void SaveCallbackToWaves(MainCallback callback);
 static void Waves_InitializeAndSaveCallback(MainCallback callback);
 void Waves_SetupCallback(void);
 static void Waves_InitWindows(void);
-static void Task_Waves_HandleCardInput(u8 taskId);
+static void Task_HandleInput(u8 taskId);
+static void DetailPage_HandleInput(u8 taskId);
+static void Donate_HandleInput(u8 taskId);
+static void Confirm_HandleInput(u8 taskId);
 static void Waves_OpenGoal(u8 taskId);
 static void Waves_ChangeColumn(s32 direction);
 static void Waves_ChangeRow(s32 direction);
@@ -79,9 +82,23 @@ static void Waves_PrintAllCards(void);
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId);
 static void Waves_PrintCard(enum GoalEnum goalId);
 static void Waves_PrintCardHeader(enum GoalEnum goalId);
+static enum GoalEnum GetGoalFromCurrentPosition(void);
 static void Waves_PrintCardText(enum GoalEnum goalId);
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
+static void SpriteCB_MoveGoalCursor(struct Sprite *sprite);
+static void Waves_PrintCursor(void);
 static void Waves_PrintCardMeter(enum GoalEnum goalId);
+static void SetCursorPosition(enum WavesCursorPosition position);
+static enum WavesCursorPosition GetCursorPosition(void);
+static void ResetCursorPosition(void);
+static void SetDonatePosition(u32 position);
+static u32 GetDonatePosition(void);
+static void ResetDonatePosition(void);
+static void SetConfirmPosition(bool32 position);
+static u32 GetConfirmPosition(void);
+static void ResetConfirmPosition(void);
+static enum WavesMode Waves_GetMode(void);
+static void Waves_SetMode(enum WavesMode mode);
 
 static const u32* const meterPassiveLeftLUT[] =
     {
@@ -179,8 +196,8 @@ static const u32 wavesInterfaceTilemap[] = INCBIN_U32("graphics/ui_menus/waves/b
 static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/bg.4bpp.smol");
 static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/bg.bin.smolTM");
 
-EWRAM_DATA struct WavesState *sWavesState = NULL;
-static EWRAM_DATA u8 *sBgTilemapBuffer[BG_WAVES_COUNT] = {NULL};
+struct WavesState *sWavesState = NULL;
+static u8 *sBgTilemapBuffer[BG_WAVES_COUNT] = {NULL};
 static bool8 firstOpen;
 
 const u8 sWavesWindowFontColors[][3] =
@@ -472,7 +489,7 @@ void Waves_DoDailyPassiveIncrease(u32 daysSince)
 
     if (QuestMenu_GetSetQuestState(QUEST_MUTUALAIDFUND, FLAG_GET_COMPLETED))
         return;
-    
+
     while (--daysSince != 0xFFFF)
         Waves_AllPassiveIncrease();
 }
@@ -486,9 +503,9 @@ static void Waves_AllPassiveIncrease(void)
 static void Waves_PassiveIncrease(enum GoalEnum goalId)
 {
     u32 maxPassive = (HasPlayerJoinedTheTide()) ? WAVES_PASSIVE_INCREASE_TRUE : WAVES_PASSIVE_INCREASE;
-    u32 percent[GOAL_PERCENT_COUNT] = 
+    u32 percent[GOAL_PERCENT_COUNT] =
     {
-        Waves_GetPlayerPercent(goalId), 
+        Waves_GetPlayerPercent(goalId),
         Waves_GetPassivePercent(goalId)
     };
     u32 amount = (Random() % maxPassive) + percent[GOAL_PASSIVE_PERCENT];
@@ -749,7 +766,7 @@ void Waves_SetupCallback(void)
             gMain.state++;
             break;
         case 2:
-            CreateTask(Task_Waves_HandleCardInput,0);
+            CreateTask(Task_HandleInput,0);
             Waves_InitializeBackgroundsAndLoadBackgroundGraphics();
             gMain.state++;
             break;
@@ -768,6 +785,7 @@ void Waves_SetupCallback(void)
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             Waves_PrintMenuHeader(WIN_WAVES_CARD_HEADER);
             Waves_PrintAllCards();
+            Waves_PrintCursor();
             //Waves_PrintHelpBar(WIN_WAVES_CARD_FOOTER);
             if (firstOpen)
                 PlaySE(SE_PC_LOGIN);
@@ -787,57 +805,102 @@ static void Waves_InitWindows(void)
     DeactivateAllTextPrinters();
 }
 
-static void Task_Waves_HandleCardInput(u8 taskId)
+static void LandingPage_HandleInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON) || JOY_HELD(B_BUTTON))
     {
         PlaySoundStartFadeQuitApp(taskId);
     }
 
-    if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON) || JOY_HELD(A_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON) )
     {
         Waves_OpenGoal(taskId);
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN) || JOY_HELD(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN) )
     {
-        Waves_ChangeColumn(1);
+        Waves_ChangeRow(1);
         return;
     }
 
-    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP) || JOY_HELD(DPAD_UP))
-    {
-        Waves_ChangeColumn(-1);
-        return;
-    }
-
-    if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT) || JOY_HELD(DPAD_LEFT))
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP) )
     {
         Waves_ChangeRow(-1);
         return;
     }
 
-    if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT) || JOY_HELD(DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT) )
     {
-        Waves_ChangeRow(1);
+        Waves_ChangeColumn(-1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT) )
+    {
+        Waves_ChangeColumn(1);
         return;
     }
 }
 
 static void Waves_OpenGoal(u8 taskId)
 {
-    return;
+    enum GoalEnum goalId = GetGoalFromCurrentPosition();
+
+    if (goalId == GOAL_NONE)
+    {
+        PlaySoundStartFadeQuitApp(taskId);
+        return;
+    }
+
+    Waves_SetGoal(WAVES_MODE_GOAL_DETAIL);
 }
 
 static void Waves_ChangeColumn(s32 direction)
 {
-    return;
+    enum WavesCursorPosition originalCurrent = GetCursorPosition();
+    u32 newPosition = originalCurrent + direction;
+
+    if ((originalCurrent == WAVES_CURSOR_0) && (direction == -1))
+        newPosition = WAVES_CURSOR_2;
+
+    if ((originalCurrent == WAVES_CURSOR_3) && (direction == -1))
+        newPosition = WAVES_CURSOR_5;
+
+    if ((originalCurrent == WAVES_CURSOR_2) && (direction == 1))
+        newPosition = WAVES_CURSOR_0;
+
+    if ((originalCurrent == WAVES_CURSOR_5) && (direction == 1))
+        newPosition = WAVES_CURSOR_3;
+
+    SetCursorPosition(newPosition);
 }
 
 static void Waves_ChangeRow(s32 direction)
 {
-    return;
+    direction *= (WAVES_CURSOR_COUNT / 2);
+    enum WavesCursorPosition originalCurrent = GetCursorPosition();
+    u32 newPosition = originalCurrent + direction;
+
+    if ((originalCurrent == WAVES_CURSOR_0) && (direction == -3))
+        newPosition = WAVES_CURSOR_3;
+
+    if ((originalCurrent == WAVES_CURSOR_2) && (direction == -3))
+        newPosition = WAVES_CURSOR_5;
+
+    if ((originalCurrent == WAVES_CURSOR_3) && (direction == 3))
+        newPosition = WAVES_CURSOR_0;
+
+    if ((originalCurrent == WAVES_CURSOR_5) && (direction == 3))
+        newPosition = WAVES_CURSOR_2;
+
+    if ((originalCurrent == WAVES_CURSOR_1) && (direction == -3))
+        newPosition = WAVES_CURSOR_4;
+
+    if ((originalCurrent == WAVES_CURSOR_4) && (direction == 3))
+        newPosition = WAVES_CURSOR_1;
+
+    SetCursorPosition(newPosition);
 }
 
 static void FreeSpritePalettesResetSpriteData(void)
@@ -928,21 +991,58 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
     const struct SpritePalette sWavesSpritePalette =
     {
         .data = Waves_GetPalette(goalId),
+        .tag = WAVES_PAL_ICON_SPRITE_TAG,
+    };
+
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = spriteTag;
+    TempSpriteTemplate.paletteTag = WAVES_PAL_ICON_SPRITE_TAG;
+
+    LoadSpriteSheet(&sSpriteSheet_Thumbnail);
+    LoadSpritePalette(&sWavesSpritePalette);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(64x64);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(64x64);
+}
+
+static void SpriteCB_MoveGoalCursor(struct Sprite *sprite)
+{
+    enum WavesCursorPosition position = GetCursorPosition();
+    sprite->x2 = WAVES_THUMBNAIL_X_POSITION + WAVES_THUMBNAIL_X_PADDING * (position % WAVES_COLUMN_COUNT);
+    sprite->y2 = WAVES_THUMBNAIL_Y_POSITION + WAVES_THUMBNAIL_Y_PADDING * (position / WAVES_COLUMN_COUNT);
+}
+
+static void Waves_PrintCursor(void)
+{
+    u32 spriteTag = (WAVES_SPRITE_TAG + WAVES_SPRITE_TAG_CURSOR);
+
+    struct SpriteSheet sSpriteSheet_Cursor =
+    {
+        (const u16[])INCBIN_U16("graphics/ui_menus/waves/assets/cursor.4bpp"),
+        (64 * 64 / 2),
+        spriteTag,
+    };
+
+    const struct SpritePalette sWavesSpritePalette =
+    {
+        .data = (const u16[])INCBIN_U16("graphics/ui_menus/waves/palettes/sprite.gbapal"),
         .tag = WAVES_PAL_SPRITE_TAG,
     };
 
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
-    TempSpriteTemplate.tileTag = (WAVES_SPRITE_TAG + goalId);
+    TempSpriteTemplate.tileTag = spriteTag;
     TempSpriteTemplate.paletteTag = WAVES_PAL_SPRITE_TAG;
+    TempSpriteTemplate.callback = SpriteCB_MoveGoalCursor,
 
-    LoadSpriteSheet(&sSpriteSheet_Thumbnail);
+        LoadSpriteSheet(&sSpriteSheet_Cursor);
     LoadSpritePalette(&sWavesSpritePalette);
-    u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, 0, 0, 0);
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(64x64);
     gSprites[spriteId].oam.size = SPRITE_SIZE(64x64);
-    gSprites[spriteId].data[1] = spriteTag;
 }
 
 static void Waves_PrintCardMeter(enum GoalEnum goalId)
@@ -958,7 +1058,7 @@ static void Waves_PrintCardMeter(enum GoalEnum goalId)
     size = 0;
     u32 offset = WAVES_METER_TILE_OFFSET;
 
-    while (factor < (ARRAY_COUNT(meterPlayerLeftLUT)-1) && amount >= WAVES_METER_FACTOR)    
+    while (factor < (ARRAY_COUNT(meterPlayerLeftLUT)-1) && amount >= WAVES_METER_FACTOR)
     {
         factor++;
         amount -= WAVES_METER_FACTOR;
@@ -977,17 +1077,23 @@ static void Waves_PrintCardMeter(enum GoalEnum goalId)
     }
 
     factor = 0;
-    while (factor < (ARRAY_COUNT(meterPlayerRightLUT)-1) && amount >= WAVES_METER_FACTOR)    
+    while (factor < (ARRAY_COUNT(meterPlayerRightLUT)-1) && amount >= WAVES_METER_FACTOR)
     {
         factor++;
         amount -= WAVES_METER_FACTOR;
     }
-    CopyToWindowPixelBuffer(windowId, meterPlayerRightLUT[factor], size, offset + WAVES_METER_CENTER_SECTIONS); 
+    CopyToWindowPixelBuffer(windowId, meterPlayerRightLUT[factor], size, offset + WAVES_METER_CENTER_SECTIONS);
 }
 
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
 {
     return (-1 * goalId) + 6;
+}
+
+static enum GoalEnum GetGoalFromCurrentPosition(void)
+{
+    enum WavesCursorPosition position = GetCursorPosition();
+    return (-1 * position) + 5;
 }
 
 static void Waves_PrintCardHeader(enum GoalEnum goalId)
@@ -1014,8 +1120,98 @@ static void Debug_LoadUpGoals(void)
 {
     for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
     {
-        u32 amount = Random() % 50;
-        Waves_SetPlayerPercent(goalId, amount);
-        Waves_SetPassivePercent(goalId, amount);
+        u32 amount1 = Random() % 50;
+        u32 amount2 = Random() % 50;
+        Waves_SetPlayerPercent(goalId, amount1);
+        Waves_SetPassivePercent(goalId, amount2);
     }
+}
+
+static void SetCursorPosition(enum WavesCursorPosition position)
+{
+    sWavesState->position = position;
+}
+
+static enum WavesCursorPosition GetCursorPosition(void)
+{
+    return sWavesState->position;
+}
+
+static void ResetCursorPosition(void)
+{
+    SetCursorPosition(0);
+}
+
+static void SetDonatePosition(u32 position)
+{
+    sWavesState->donatePosition = position;
+}
+
+static u32 GetDonatePosition(void)
+{
+    return sWavesState->donatePosition;
+}
+
+static void ResetDonatePosition(void)
+{
+    SetDonatePosition(0);
+}
+
+static void SetConfirmPosition(bool32 position)
+{
+    sWavesState->confirmPosition = position;
+}
+
+static u32 GetConfirmPosition(void)
+{
+    return sWavesState->confirmPosition;
+}
+
+static void ResetConfirmPosition(void)
+{
+    SetConfirmPosition(0);
+}
+
+static enum WavesMode Waves_GetMode(void)
+{
+    return sWavesState->mode;
+}
+
+static void Waves_SetMode(enum WavesMode mode)
+{
+    sWavesState->mode = mode;
+}
+
+static void Task_HandleInput(u8 taskId)
+{
+    switch (Waves_GetMode())
+    {
+        default:
+            break;
+        case WAVES_MODE_LANDING_PAGE:
+            LandingPage_HandleInput(taskId);
+            break;
+        case WAVES_MODE_GOAL_DETAIL:
+            DetailPage_HandleInput(taskId);
+            break;
+        case WAVES_MODE_GOAL_DONATE_AMOUNT:
+            Donate_HandleInput(taskId);
+            break;
+        case WAVES_MODE_GOAL_CONFIRM_AMOUNT:
+            Confirm_HandleInput(taskId);
+            break;
+    }
+}
+
+static void DetailPage_HandleInput(u8 taskId)
+{
+    return;
+}
+static void Donate_HandleInput(u8 taskId)
+{
+    return;
+}
+static void Confirm_HandleInput(u8 taskId)
+{
+    return;
 }
