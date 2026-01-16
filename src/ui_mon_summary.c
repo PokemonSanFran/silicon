@@ -59,7 +59,7 @@ static u32 SummaryInput_GetIndex(void);
 static void SummaryInput_SetTotalIndex(u32);
 static u32 SummaryInput_GetTotalIndex(void);
 static void SummaryInput_SetSubMode(u32);
-static bool32 SummaryInput_IsWithinSubMode(void);
+static u32 SummaryInput_IsWithinSubMode(void);
 static void SummaryInput_SetUpdateText(bool32);
 static bool32 SummaryInput_GetUpdateText(void);
 static bool32 SummaryInput_IsInputAdditive(s32);
@@ -523,7 +523,7 @@ static void SummaryInput_SetSubMode(u32 flag)
     sMonSummaryDataPtr->subMode = flag;
 }
 
-static bool32 SummaryInput_IsWithinSubMode(void)
+static u32 SummaryInput_IsWithinSubMode(void)
 {
     return sMonSummaryDataPtr->subMode;
 }

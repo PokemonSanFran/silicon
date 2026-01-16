@@ -353,9 +353,9 @@ struct MonSummaryResources
     u32 currIdx:8; // also used as the vertical "cursor" for switching between each available mon(s)
     u32 totalIdx:8;
     u32 useBoxMon:1;
-    u32 subMode:2; // mode within current page
+    u32 subMode:8; // mode within current page
     u32 updateText:1;
-    u32 pad:11;
+    u32 pad:5;
 
     // set when opening, usually help determines where to get a mon info.
     enum MonSummaryModes mode;
