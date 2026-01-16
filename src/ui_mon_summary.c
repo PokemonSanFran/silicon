@@ -1454,7 +1454,7 @@ static void SummaryPrint_MonAbilityDesc(u32 x, u32 y, u32 maxWidth)
     struct MonSummary *mon = SummaryMon_GetStruct();
     enum Ability ability = GetSpeciesAbility(mon->species2, mon->abilityNum);
     const u8 *str = GetAbilityDesc(ability);
-    u32 fontId = GetFontIdToFit(str, FONT_NORMAL, 0, maxWidth);
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, maxWidth);
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
 }
@@ -1731,7 +1731,6 @@ static void InfosPage_HandleMisc(void)
 
     SummarySprite_MonPokeBall(SUMMARY_INFOS_SPRITE_POKE_BALL,
         SUMMARY_INFOS_MISC_POKE_BALL_X, SUMMARY_INFOS_MISC_POKE_BALL_Y);
-
 
     InfosPageMisc_PrintTextBox();
     InfosPageMisc_TrySpawnDescCursor();
