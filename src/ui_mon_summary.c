@@ -32,6 +32,7 @@
 #include "color_variation.h"
 #include "item_icon.h"
 #include "pokeball.h"
+#include "line_break.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -1896,7 +1897,6 @@ static void InfosPageMisc_PrintTextBox(void)
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 x = SUMMARY_INFOS_MISC_TEXT_BOX_X, y = SUMMARY_INFOS_MISC_TEXT_BOX_Y;
     enum MonSummaryFontColors color = SUMMARY_FNTCLR_INTERFACE;
-    u32 maxWidth = TILE_TO_PIXELS(23);
 
     if (!SummaryInput_IsWithinSubMode())
     {
@@ -1907,21 +1907,25 @@ static void InfosPageMisc_PrintTextBox(void)
     }
     else
     {
+        u32 maxWidth = TILE_TO_PIXELS(23);
+
         if (sMonSummaryDataPtr->arg.infosDescState)
         {
-            // PSF TODO item descriptions are still RSE-styled as of writing
-
             u32 itemId = mon->item;
-            const u8 *str = GetItemDescription(itemId);
+            u32 fontId = FONT_NORMAL;
 
             if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
 
-            u32 fontId = GetFontIdToFit(str, FONT_NORMAL, 0, maxWidth);
-            SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, color, str);
+            StringCopy(gStringVar4, GetItemDescription(itemId));
+
+            StripLineBreaks(gStringVar4);
+            BreakStringAutomatic(gStringVar4, maxWidth, 3, fontId, HIDE_SCROLL_PROMPT);
+
+            SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
         }
         else
         {
-            SummaryPrint_MonAbilityDesc(SUMMARY_INFOS_MISC_TEXT_BOX_X, SUMMARY_INFOS_MISC_TEXT_BOX_Y, TILE_TO_PIXELS(23));
+            SummaryPrint_MonAbilityDesc(SUMMARY_INFOS_MISC_TEXT_BOX_X, SUMMARY_INFOS_MISC_TEXT_BOX_Y, maxWidth);
         }
     }
 }
