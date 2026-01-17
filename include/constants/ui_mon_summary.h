@@ -58,10 +58,13 @@ enum __attribute__((packed)) MonSummaryMainWindows
     SUMMARY_MAIN_WIN_HEADER,    // refers to the page's name and tab blit
     SUMMARY_MAIN_WIN_HELP_BAR,  // refers to control scheme of specific page/mode
     SUMMARY_MAIN_WIN_PAGE_TEXT,
+    SUMMARY_MAIN_WIN_TEXT_BOX,  // mostly used for errors
 
     NUM_SUMMARY_MAIN_WINDOWS,
-    // the rest is dynamic
 };
+
+#define SUMMARY_TEXT_BOX_BASE_TILE  (0x400 - 18)
+#define SUMMARY_TEXT_BOX_PALETTE    (1)
 
 #define TOTAL_SUMMARY_DYNAMIC_SPRITES 7
 #define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
@@ -236,7 +239,8 @@ enum MonSummaryTotalValues
 #define SUMMARY_STATS_GENERAL_STATS_X  (SUMMARY_STATS_GENERAL_IVS_X  + 19)
 #define SUMMARY_STATS_GENERAL_NATURE_X (SUMMARY_STATS_GENERAL_NAME_X - (TILE_TO_PIXELS(1) + 1)) // boost
 
-#define SUMMARY_STATS_GENERAL_Y        (TILE_TO_PIXELS(4) + 1)
+#define SUMMARY_STATS_GENERAL_Y             (TILE_TO_PIXELS(4) + 4)
+#define SUMMARY_STATS_GENERAL_ADDITIVE_Y    (TILE_TO_PIXELS(2) + 3)
 
 #define SUMMARY_STATS_MISC_TOTAL_EVS_X      (TILE_TO_PIXELS(4) + 1)
 #define SUMMARY_STATS_MISC_ITEM_NAME_X      (TILE_TO_PIXELS(4) - 2)
@@ -252,9 +256,9 @@ enum MonSummaryTotalValues
 #define SUMMARY_STATS_MISC_ABILITY_NAME_Y   (TILE_TO_PIXELS(14) - 2)
 #define SUMMARY_STATS_MISC_TEXT_BOX_Y       (TILE_TO_PIXELS(16) + 1)
 #define SUMMARY_STATS_MISC_HELD_ITEM_Y      (SUMMARY_INFOS_MISC_HELD_ITEM_Y + 1)
-#define SUMMARY_STATS_MISC_CURSOR_Y         (34)
-#define SUMMARY_STATS_MISC_UP_ARROW_Y       (26 + 4)
-#define SUMMARY_STATS_MISC_DOWN_ARROW_Y     (49 + 4)
+#define SUMMARY_STATS_MISC_CURSOR_Y         (37)
+#define SUMMARY_STATS_MISC_UP_ARROW_Y       (30 + 4)
+#define SUMMARY_STATS_MISC_DOWN_ARROW_Y     (51 + 4)
 
 enum MonSummaryMovesSprites
 {
@@ -301,6 +305,7 @@ enum MonSummaryFontColors
     SUMMARY_FNTCLR_MALE,
     SUMMARY_FNTCLR_FEMALE,
     SUMMARY_FNTCLR_HELP_BAR,
+    SUMMARY_FNTCLR_TEXT_BOX,
 
     NUM_SUMMARY_FNTCLRS,
 

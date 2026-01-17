@@ -57,7 +57,15 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WI
         .height = DISPLAY_TILE_HEIGHT,
     },
 
-    // SUMMARY_MAIN_WIN_DYNAMIC uses AddWindow
+    [SUMMARY_MAIN_WIN_TEXT_BOX] =
+    {
+        .bg = SUMMARY_BG_TEXT,
+        .tilemapLeft = 1,
+        .tilemapTop = 11,
+        .width = DISPLAY_TILE_WIDTH - 2,
+        .height = 6,
+        .paletteNum = SUMMARY_TEXT_BOX_PALETTE
+    },
 
     DUMMY_WIN_TEMPLATE
 };
@@ -293,6 +301,7 @@ static const u8 sSummaryPrint_FontColors[NUM_SUMMARY_FNTCLRS][3] =
     [SUMMARY_FNTCLR_MALE]      = { 0, 2, 15 }, // SUMMARY_FNTCLR_NEG_STAT
     [SUMMARY_FNTCLR_FEMALE]    = { 0, 2, 12 }, // SUMMARY_FNTCLR_POS_STAT
     [SUMMARY_FNTCLR_HELP_BAR]  = { 0, 1, 0 },
+    [SUMMARY_FNTCLR_TEXT_BOX]  = { 1, 2, 3 },
 };
 
 static const u8 *const sInfosPageGeneral_BerryFlavorNames[FLAVOR_COUNT] =

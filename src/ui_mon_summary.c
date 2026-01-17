@@ -2,6 +2,7 @@
 #include "main.h"
 #include "battle_main.h"
 #include "battle_anim.h"
+#include "text.h"
 #include "bg.h"
 #include "pokemon.h"
 #include "window.h"
@@ -17,6 +18,7 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "text_window.h"
 #include "overworld.h"
 #include "pokemon_icon.h"
 #include "graphics.h"
@@ -125,6 +127,7 @@ static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_BlitStatusSymbol(u32, u32);
 static UNUSED void SummaryPrint_BlitMonMarkings(u32, u32, u32);
 static void SummaryPrint_HelpBar(void);
+static void SummaryPrint_TextBox(const u8 *);
 static void SummaryPrint_MonName(u32, u32, u32);
 static void SummaryPrint_MonGender(u32, u32);
 static void SummaryPrint_MonLevel(u32, u32);
@@ -391,6 +394,7 @@ static void SummarySetup_Windows(void)
         baseBlock += template->width * template->height;
     }
 
+    LoadMessageBoxGfx(SUMMARY_MAIN_WIN_TEXT_BOX, SUMMARY_TEXT_BOX_BASE_TILE, BG_PLTT_ID(SUMMARY_TEXT_BOX_PALETTE));
     void (*func)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
     func();
 
@@ -1041,6 +1045,8 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         PutWindowTilemap(i);
     }
 
+    ClearDialogWindowAndFrameToTransparent(SUMMARY_MAIN_WIN_TEXT_BOX, FALSE);
+
     SummaryPrint_Header();
     SummaryPrint_HelpBar();
 
@@ -1527,6 +1533,13 @@ static void SummaryPrint_HelpBar(void)
     CopyWindowToVram(SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
 }
 
+static void SummaryPrint_TextBox(const u8 *str)
+{
+    DrawDialogFrameWithCustomTileAndPalette(SUMMARY_MAIN_WIN_TEXT_BOX, FALSE, SUMMARY_TEXT_BOX_BASE_TILE, SUMMARY_TEXT_BOX_PALETTE);
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_TEXT_BOX, FONT_NORMAL, 0, 1, SUMMARY_FNTCLR_TEXT_BOX, str);
+    CopyWindowToVram(SUMMARY_MAIN_WIN_TEXT_BOX, COPYWIN_GFX);
+}
+
 static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
@@ -1978,22 +1991,22 @@ static void StatsPage_HandleHeader(void)
 // thanks middle speed..
 static void StatsPage_HandleGeneral(void)
 {
-    u32 y = TILE_TO_PIXELS(4) + 1;
+    u32 y = SUMMARY_STATS_GENERAL_Y;
     SummaryPrint_MonStat(STAT_HP,    SUMMARY_STATS_FLAG_ALL, y);
 
-    y += TILE_TO_PIXELS(2);
+    y += SUMMARY_STATS_GENERAL_ADDITIVE_Y;
     SummaryPrint_MonStat(STAT_ATK,   SUMMARY_STATS_FLAG_ALL, y);
 
-    y += TILE_TO_PIXELS(2);
+    y += SUMMARY_STATS_GENERAL_ADDITIVE_Y;
     SummaryPrint_MonStat(STAT_DEF,   SUMMARY_STATS_FLAG_ALL, y);
 
-    y += TILE_TO_PIXELS(2);
+    y += SUMMARY_STATS_GENERAL_ADDITIVE_Y;
     SummaryPrint_MonStat(STAT_SPATK, SUMMARY_STATS_FLAG_ALL, y);
 
-    y += TILE_TO_PIXELS(2);
+    y += SUMMARY_STATS_GENERAL_ADDITIVE_Y;
     SummaryPrint_MonStat(STAT_SPDEF, SUMMARY_STATS_FLAG_ALL, y);
 
-    y += TILE_TO_PIXELS(2);
+    y += SUMMARY_STATS_GENERAL_ADDITIVE_Y;
     SummaryPrint_MonStat(STAT_SPEED, SUMMARY_STATS_FLAG_ALL, y);
 }
 
@@ -2017,16 +2030,8 @@ static void StatsPage_HandleMisc(void)
     if (SummaryInput_IsWithinSubMode() == SUMMARY_STATS_SUB_MODE_ERROR)
     {
         ConvertUIntToDecimalStringN(gStringVar1, StatsPageMisc_CalculateAvailableEVs(), STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You still have {STR_VAR_1} Effort Values! Assign them to a stat."));
-        SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, GetFontIdToFit(gStringVar4, FONT_SMALL, 0, TILE_TO_PIXELS(23)),
-            SUMMARY_STATS_MISC_TEXT_BOX_X, SUMMARY_STATS_MISC_TEXT_BOX_Y,
-            SUMMARY_FNTCLR_INTERFACE, gStringVar4);
-    }
-    else
-    {
-        SummaryPrint_MonAbilityDesc(
-            SUMMARY_STATS_MISC_TEXT_BOX_X, SUMMARY_STATS_MISC_TEXT_BOX_Y,
-            TILE_TO_PIXELS(23));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You still have {STR_VAR_1} Effort Values!\nAssign them to a stat."));
+        SummaryPrint_TextBox(gStringVar4);
     }
 
     StatsPageMisc_TrySpawnCursors();
@@ -2195,7 +2200,7 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
     sprite->invisible = subMode < SUMMARY_STATS_SUB_MODE_SELECT_ROW;
     if (sprite->invisible) return;
 
-    sprite->y2 = 16 * sMonSummaryDataPtr->arg.stats.row;
+    sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
     StartSpriteAnimIfDifferent(sprite, subMode == SUMMARY_STATS_SUB_MODE_ADJUST_VALUE);
 }
 
@@ -2206,7 +2211,7 @@ static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
     if (notAdjustValue) return;
 
     sprite->invisible = !StatsPageMisc_CalculateAvailableEVs();
-    sprite->y2 = sMonSummaryDataPtr->arg.stats.row * 16;
+    sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
 static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
@@ -2216,7 +2221,7 @@ static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
     if (notAdjustValue) return;
 
     sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[SUMMARY_TOTAL_EVS][StatsPageMisc_GetRow()]);
-    sprite->y2 = sMonSummaryDataPtr->arg.stats.row * 16;
+    sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
 static void MovesPage_HandleFrontEnd(void)
