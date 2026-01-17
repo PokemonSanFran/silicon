@@ -369,6 +369,7 @@ static void SummarySetup_Sprites(void)
         SummarySprite_SetSpriteId(config->id,
             CreateSprite(&template, coords.x, coords.y, 0));
         gSprites[SummarySprite_GetSpriteId(config->id)].sMonIndex = -1;
+        gSprites[SummarySprite_GetSpriteId(config->id)].invisible = (coords.x == 0 && coords.y == 0);
 
         if (config->subsprites)
         {
@@ -1070,6 +1071,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
 
                 gSprites[spriteId].x = coords.x;
                 gSprites[spriteId].y = coords.y;
+                gSprites[spriteId].invisible = (coords.x == 0 && coords.y == 0);
             }
 
             SummaryPage_LoadTilemap();
