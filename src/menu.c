@@ -754,6 +754,8 @@ static void UNUSED DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, 
 
 static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
+    // start monSummary
+    /*
     FillBgTilemapBufferRect(bg,
                             sTileNum + 1,
                             tilemapLeft - 2,
@@ -845,6 +847,27 @@ static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemap
                             1,
                             1,
                             sPaletteNum);
+    */
+    //Top Left
+    FillBgTilemapBufferRect(bg, sTileNum + 14, tilemapLeft - 1, tilemapTop - 1, 1, 1, sPaletteNum);
+    //Top Bar
+    FillBgTilemapBufferRect(bg, sTileNum + 15, tilemapLeft, tilemapTop - 1, width, 1, sPaletteNum);
+    //Top Right
+    FillBgTilemapBufferRect(bg, sTileNum + 16, tilemapLeft + width, tilemapTop - 1, 1, 1, sPaletteNum);
+
+    //Left Bar
+    FillBgTilemapBufferRect(bg, sTileNum + 5, tilemapLeft - 1, tilemapTop, 1, 1, sPaletteNum);
+    FillBgTilemapBufferRect(bg, sTileNum + 7, tilemapLeft - 1, tilemapTop + 1, 1, height - 1, sPaletteNum);
+    //Right Bar
+    FillBgTilemapBufferRect(bg, sTileNum + 6, tilemapLeft + width, tilemapTop, 1, 1, sPaletteNum);
+    FillBgTilemapBufferRect(bg, sTileNum + 10, tilemapLeft + width, tilemapTop + 1, 1, height - 1, sPaletteNum);
+    //Bottom Left
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 11), tilemapLeft - 1, tilemapTop + height, 1, 1, sPaletteNum);
+    //Bottom Bar
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 12), tilemapLeft, tilemapTop + height, width, 1, sPaletteNum);
+    //Bottom Right
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 13), tilemapLeft + width, tilemapTop + height, 1, 1, sPaletteNum);
+    // end monSummary
 }
 
 void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
