@@ -68,6 +68,7 @@ static void Task_HandleInput(u8 taskId);
 static void DetailPage_HandleInput(u8 taskId);
 static void Donate_HandleInput(u8 taskId);
 static void Confirm_HandleInput(u8 taskId);
+static void Waves_ReturnToLanding(u8 taskId);
 static void Waves_OpenGoal(u8 taskId);
 static void Waves_ChangeColumn(s32 direction);
 static void Waves_ChangeRow(s32 direction);
@@ -86,6 +87,7 @@ static enum GoalEnum GetGoalFromCurrentPosition(void);
 static void Waves_PrintCardText(enum GoalEnum goalId);
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
 static void SpriteCB_MoveGoalCursor(struct Sprite *sprite);
+static void SpriteCB_HideThumbnails(struct Sprite *sprite);
 static void Waves_PrintCursor(void);
 static void Waves_PrintCardMeter(enum GoalEnum goalId);
 static void SetCursorPosition(enum WavesCursorPosition position);
@@ -216,16 +218,23 @@ static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
             .mapBaseIndex = 31,
             .priority = 0,
         },
-        [BG1_WAVES_INTERFACE] =
+        [BG1_WAVES_LANDING] =
         {
-            .bg = BG1_WAVES_INTERFACE,
+            .bg = BG1_WAVES_LANDING,
             .charBaseIndex = 2,
             .mapBaseIndex = 25,
             .priority = 1,
         },
-        [BG2_WAVES_WALLPAPER] =
+        [BG2_WAVES_DETAIL] =
         {
-            .bg = BG2_WAVES_WALLPAPER,
+            .bg = BG2_WAVES_DETAIL,
+            .charBaseIndex = 1,
+            .mapBaseIndex = 23,
+            .priority = 1,
+        },
+        [BG3_WAVES_WALLPAPER] =
+        {
+            .bg = BG3_WAVES_WALLPAPER,
             .charBaseIndex = 3,
             .mapBaseIndex = 27,
             .priority = 2,
@@ -233,89 +242,89 @@ static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
     };
 
 static const struct WindowTemplate sWavesGridWindows[] =
+{
+    [WIN_WAVES_CARD_HEADER] =
     {
-        [WIN_WAVES_CARD_HEADER] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 0,
-            .tilemapTop = 0,
-            .width = 30,
-            .height = 2,
-            .paletteNum = WAVES_PALETTE_TEXT_ID,
-            .baseBlock = 1,
-        },
-        [WIN_WAVES_CARD_1] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 2,
-            .tilemapTop = 3,
-            .width = 8,
-            .height = 7,
-            .paletteNum = WAVES_PALETTE_TEXT_ID,
-            .baseBlock = 1 + (30 * 2),
-        },
-        [WIN_WAVES_CARD_2] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 11,
-            .tilemapTop = 3,
-            .width = 8,
-            .height = 7,
-            .paletteNum = WAVES_PALETTE_TEXT_ID,
-            .baseBlock = 1 + (30 * 2) + (8 * 7),
-        },
-        [WIN_WAVES_CARD_3] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 20,
-            .tilemapTop = 3,
-            .width = 8,
-            .height = 7,
-            .paletteNum = WAVES_PALETTE_TEXT_ID,
-            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7),
-        },
-        [WIN_WAVES_CARD_4] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 2,
-            .tilemapTop = 12,
-            .width = 8,
-            .height = 7,
-            .paletteNum = WAVES_PALETTE_TEXT_ID,
-            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7),
-        },
-        [WIN_WAVES_CARD_5] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 11,
-            .tilemapTop = 12,
-            .width = 8,
-            .height = 7,
-            .paletteNum = WAVES_PALETTE_TEXT_ID,
-            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
-        },
-        [WIN_WAVES_CARD_6] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 20,
-            .tilemapTop = 12,
-            .width = 8,
-            .height = 7,
-            .paletteNum = WAVES_PALETTE_TEXT_ID,
-            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
-        },
-        [WIN_WAVES_GOAL_FOOTER] =
-        {
-            .bg = BG0_WAVES_TEXT,
-            .tilemapLeft = 0,
-            .tilemapTop = 18,
-            .width = 30,
-            .height = 2,
-            .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-            .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
-        },
-        DUMMY_WIN_TEMPLATE
-    };
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .baseBlock = 1,
+    },
+    [WIN_WAVES_CARD_1] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,
+        .width = 8,
+        .height = 7,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .baseBlock = 1 + (30 * 2),
+    },
+    [WIN_WAVES_CARD_2] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 11,
+        .tilemapTop = 3,
+        .width = 8,
+        .height = 7,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .baseBlock = 1 + (30 * 2) + (8 * 7),
+    },
+    [WIN_WAVES_CARD_3] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 20,
+        .tilemapTop = 3,
+        .width = 8,
+        .height = 7,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7),
+    },
+    [WIN_WAVES_CARD_4] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 2,
+        .tilemapTop = 12,
+        .width = 8,
+        .height = 7,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7),
+    },
+    [WIN_WAVES_CARD_5] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 11,
+        .tilemapTop = 12,
+        .width = 8,
+        .height = 7,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
+    },
+    [WIN_WAVES_CARD_6] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 20,
+        .tilemapTop = 12,
+        .width = 8,
+        .height = 7,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
+    },
+    [WIN_WAVES_GOAL_FOOTER] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 18,
+        .width = 30,
+        .height = 2,
+        .paletteNum = WAVES_PALETTE_INTERFACE_ID,
+        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
+    },
+    DUMMY_WIN_TEMPLATE
+};
 
 static const struct WindowTemplate sWavesGoalWindows[] =
     {
@@ -595,15 +604,15 @@ static void SetScheduleBgs(enum WavesBackgrounds backgroundId)
 static const u32* const sWavesTilesLUT[] =
     {
         [BG0_WAVES_TEXT] = NULL,
-        [BG1_WAVES_INTERFACE] = wavesInterfaceTiles,
-        [BG2_WAVES_WALLPAPER] = siliconBgTiles,
+        [BG1_WAVES_LANDING] = wavesInterfaceTiles,
+        [BG3_WAVES_WALLPAPER] = siliconBgTiles,
     };
 
 static const u32* const sWavesTilemapLUT[] =
     {
         [BG0_WAVES_TEXT] = NULL,
-        [BG1_WAVES_INTERFACE] = wavesInterfaceTilemap,
-        [BG2_WAVES_WALLPAPER] = siliconBgTilemap,
+        [BG1_WAVES_LANDING] = wavesInterfaceTilemap,
+        [BG3_WAVES_WALLPAPER] = siliconBgTilemap,
     };
 
 static const u16* const sWavesPalettesLUT[] =
@@ -628,7 +637,7 @@ static bool8 AreTilesOrTilemapEmpty(enum WavesBackgrounds backgroundId)
 
 static bool8 UNUSED ShouldSkipBg(enum WavesBackgrounds backgroundId)
 {
-    if (backgroundId == BG1_WAVES_INTERFACE)
+    if (backgroundId == BG1_WAVES_LANDING)
         return TRUE;
 
     if (backgroundId == BG0_WAVES_TEXT)
@@ -807,9 +816,10 @@ static void Waves_InitWindows(void)
 
 static void LandingPage_HandleInput(u8 taskId)
 {
-    if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON) || JOY_HELD(B_BUTTON))
+    if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON) )
     {
         PlaySoundStartFadeQuitApp(taskId);
+        return;
     }
 
     if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON) )
@@ -852,8 +862,10 @@ static void Waves_OpenGoal(u8 taskId)
         PlaySoundStartFadeQuitApp(taskId);
         return;
     }
+    Waves_SetMode(WAVES_MODE_GOAL_DETAIL);
 
-    Waves_SetGoal(WAVES_MODE_GOAL_DETAIL);
+    ClearAllWindows();
+    FreeAllWindowBuffers();
 }
 
 static void Waves_ChangeColumn(s32 direction)
@@ -998,6 +1010,7 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 
     TempSpriteTemplate.tileTag = spriteTag;
     TempSpriteTemplate.paletteTag = WAVES_PAL_ICON_SPRITE_TAG;
+    TempSpriteTemplate.callback = SpriteCB_HideThumbnails,
 
     LoadSpriteSheet(&sSpriteSheet_Thumbnail);
     LoadSpritePalette(&sWavesSpritePalette);
@@ -1012,6 +1025,13 @@ static void SpriteCB_MoveGoalCursor(struct Sprite *sprite)
     enum WavesCursorPosition position = GetCursorPosition();
     sprite->x2 = WAVES_THUMBNAIL_X_POSITION + WAVES_THUMBNAIL_X_PADDING * (position % WAVES_COLUMN_COUNT);
     sprite->y2 = WAVES_THUMBNAIL_Y_POSITION + WAVES_THUMBNAIL_Y_PADDING * (position / WAVES_COLUMN_COUNT);
+
+    sprite->invisible = (Waves_GetMode() != WAVES_MODE_LANDING_PAGE);
+}
+
+static void SpriteCB_HideThumbnails(struct Sprite *sprite)
+{
+    sprite->invisible = (Waves_GetMode() != WAVES_MODE_LANDING_PAGE);
 }
 
 static void Waves_PrintCursor(void)
@@ -1205,7 +1225,11 @@ static void Task_HandleInput(u8 taskId)
 
 static void DetailPage_HandleInput(u8 taskId)
 {
-    return;
+    if (JOY_NEW(B_BUTTON))
+    {
+        Waves_ReturnToLanding(taskId);
+        return;
+    }
 }
 static void Donate_HandleInput(u8 taskId)
 {
@@ -1214,4 +1238,10 @@ static void Donate_HandleInput(u8 taskId)
 static void Confirm_HandleInput(u8 taskId)
 {
     return;
+}
+
+static void Waves_ReturnToLanding(u8 taskId)
+{
+    enum GoalEnum goalId = GetGoalFromCurrentPosition();
+    Waves_SetMode(WAVES_MODE_LANDING_PAGE);
 }

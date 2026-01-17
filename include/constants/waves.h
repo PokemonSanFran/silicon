@@ -42,8 +42,9 @@ enum GoalAttributes
 enum WavesBackgrounds
 {
     BG0_WAVES_TEXT,
-    BG1_WAVES_INTERFACE,
-    BG2_WAVES_WALLPAPER,
+    BG1_WAVES_LANDING,
+    BG2_WAVES_DETAIL,
+    BG3_WAVES_WALLPAPER,
     BG_WAVES_COUNT,
 };
 
