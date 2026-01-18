@@ -451,6 +451,9 @@ $(MONSUMMARYGFXDIR)/stats/stat_cursor.4bpp: %.4bpp: %.png
 
 $(MONSUMMARYGFXDIR)/moves/slot_cursor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/moves/option_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
 # End monSummary
 
 graphics/bag/menu.4bpp: %.4bpp: %.png

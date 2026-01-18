@@ -256,9 +256,9 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Moves"),
         .helpBar = (const u8 *const[]){
-            [0] = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Exit"),
-            [1] = COMPOUND_STRING("{A_BUTTON} Select {B_BUTTON} Cancel"),
-            [2] = COMPOUND_STRING("{DPAD_UPDOWN} Move {A_BUTTON} Confirm {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_NONE] = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
+            [SUMMARY_MOVES_SUB_MODE_DETAILS] = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_OPTIONS] = COMPOUND_STRING("{DPAD_UPDOWN} Move {A_BUTTON} Select {B_BUTTON} Cancel"),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),
         .mainSpriteCoords =
@@ -535,12 +535,33 @@ static const struct SpriteTemplate sMovesPageGeneral_MoveBarSpriteTemplate =
     .callback = SpriteCallbackDummy
 };
 
+static const struct {
+    const u8 *name, *desc;
+} sMovesPageMisc_OptionInfo[] =
+{
+    {
+        .name = COMPOUND_STRING("Inspect"),
+        .desc = COMPOUND_STRING("Check details of this move.")
+    },
+    {
+        .name = COMPOUND_STRING("Learn Moves"),
+        .desc = COMPOUND_STRING("Replace this move with another move.")
+    },
+    {
+        .name = COMPOUND_STRING("Reorder Moves"),
+        .desc = COMPOUND_STRING("Swap this move with other move.")
+    },
+    {
+        .name = COMPOUND_STRING("Forget Move"),
+        .desc = COMPOUND_STRING("Remove this move from the moveset.")
+    },
+};
+
 static const u16 *const sMovesPageMisc_MenuTilemaps[] =
 {
     [SUMMARY_MOVES_SUB_MODE_NONE]    = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
     [SUMMARY_MOVES_SUB_MODE_DETAILS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
     [SUMMARY_MOVES_SUB_MODE_OPTIONS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin"),
-    [SUMMARY_MOVES_SUB_MODE_REORDER] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
 };
 
 static const struct SpriteTemplate sMovesPageMisc_ArrowsSpriteTemplate =
@@ -583,4 +604,22 @@ static const struct SpriteTemplate sMovesPageMisc_SlotCursorSpriteTemplate =
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_MovesPageMisc_SlotCursor
+};
+
+static const struct SpriteTemplate sMovesPageMisc_OptionCursorSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
+        .priority = 2,
+    },
+    .anims = sSummarySprite_FrameImageAnimTemplate,
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/moves/option_cursor.4bpp"),
+        .size = (128 * 16) / 2,
+        .relativeFrames = TRUE
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_MovesPageMisc_OptionCursor
 };
