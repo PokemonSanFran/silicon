@@ -66,7 +66,7 @@ enum __attribute__((packed)) MonSummaryMainWindows
 #define SUMMARY_TEXT_BOX_BASE_TILE  (0x400 - 18)
 #define SUMMARY_TEXT_BOX_PALETTE    (1)
 
-#define TOTAL_SUMMARY_DYNAMIC_SPRITES 10
+#define TOTAL_SUMMARY_DYNAMIC_SPRITES 12
 #define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
 
 enum MonSummaryMainSprites
@@ -270,6 +270,7 @@ enum MonSummaryMovesSprites
     SUMMARY_MOVES_SPRITE_MOVE_4,
 
     SUMMARY_MOVES_SPRITE_SLOT_CURSOR,
+    SUMMARY_MOVES_SPRITE_NEW_SLOT_CURSOR,
     SUMMARY_MOVES_SPRITE_OPTION_CURSOR,
     SUMMARY_MOVES_SPRITE_ARROWS,
 
@@ -280,7 +281,9 @@ enum MonSummaryMovesSubModes
 {
     SUMMARY_MOVES_SUB_MODE_NONE,
     SUMMARY_MOVES_SUB_MODE_DETAILS,
+
     SUMMARY_MOVES_SUB_MODE_OPTIONS,
+    SUMMARY_MOVES_SUB_MODE_REORDER,
 
     NUM_SUMMARY_MOVES_SUB_MODES
 };
@@ -466,7 +469,8 @@ struct MonSummaryResources
         struct PACKED {
             u32 slotIdx:2;
             u32 optionIdx:2;
-            u32 pad:28;
+            u32 newSlotIdx:2; // reorder
+            u32 pad:26;
         } moves;
     } arg;
 };

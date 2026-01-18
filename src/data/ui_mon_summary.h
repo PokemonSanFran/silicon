@@ -256,9 +256,10 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Moves"),
         .helpBar = (const u8 *const[]){
-            [SUMMARY_MOVES_SUB_MODE_NONE] = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
-            [SUMMARY_MOVES_SUB_MODE_DETAILS] = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Cancel"),
-            [SUMMARY_MOVES_SUB_MODE_OPTIONS] = COMPOUND_STRING("{DPAD_UPDOWN} Move {A_BUTTON} Select {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_NONE]       = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
+            [SUMMARY_MOVES_SUB_MODE_DETAILS]    = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_OPTIONS]    = COMPOUND_STRING("{DPAD_UPDOWN} Move {A_BUTTON} Select {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_REORDER]    = COMPOUND_STRING("{A_BUTTON} Swap Moves {B_BUTTON} Cancel"),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),
         .mainSpriteCoords =
@@ -557,11 +558,14 @@ static const struct {
     },
 };
 
+static const u8 sMovesPageMisc_ReorderOption_SwitchWhichMove[] = _("Switch with which move?");
+
+static const u16 sMovesPageMisc_OptionMenuTilemap[] = INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin");
 static const u16 *const sMovesPageMisc_MenuTilemaps[] =
 {
-    [SUMMARY_MOVES_SUB_MODE_NONE]    = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
-    [SUMMARY_MOVES_SUB_MODE_DETAILS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
-    [SUMMARY_MOVES_SUB_MODE_OPTIONS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin"),
+    [SUMMARY_MOVES_SUB_MODE_NONE]                                      = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
+    [SUMMARY_MOVES_SUB_MODE_DETAILS]                                   = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
+    [SUMMARY_MOVES_SUB_MODE_OPTIONS ... SUMMARY_MOVES_SUB_MODE_REORDER] = sMovesPageMisc_OptionMenuTilemap,
 };
 
 static const struct SpriteTemplate sMovesPageMisc_ArrowsSpriteTemplate =

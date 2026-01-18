@@ -190,9 +190,13 @@ static void MovesPageMisc_SetSlotIndex(u32);
 static u32 MovesPageMisc_GetSlotIndex(void);
 static void MovesPageMisc_SetOptionIndex(u32);
 static u32 MovesPageMisc_GetOptionIndex(void);
+static void MovesPageMisc_SetNewSlotIndex(u32);
+static u32 MovesPageMisc_GetNewSlotIndex(void);
 static u32 MovesPageMisc_GetMaxIndex(void);
+static void MovesPageMisc_SwapMoves(void);
 static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *);
 static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *);
+static void SpriteCB_MovesPageMisc_NewSlotCursor(struct Sprite *);
 static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *);
 
 // const data
@@ -807,11 +811,14 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         {
         default:
             break;
-        case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
+        case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        case SUMMARY_MOVES_SUB_MODE_REORDER:
             MovesPageMisc_UpdateIndex(1);
             break;
         }
+
+        return;
     }
 
     if (JOY_NEW(DPAD_UP))
@@ -820,11 +827,14 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         {
         default:
             break;
-        case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
+        case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        case SUMMARY_MOVES_SUB_MODE_REORDER:
             MovesPageMisc_UpdateIndex(-1);
             break;
         }
+
+        return;
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -839,6 +849,14 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
             Task_SummaryInput_MovesOptionInput(taskId);
             break;
+        case SUMMARY_MOVES_SUB_MODE_REORDER:
+            MovesPageMisc_SwapMoves();
+            SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
+            MovesPageMisc_SetSlotIndex(MovesPageMisc_GetNewSlotIndex());
+            MovesPageMisc_SetNewSlotIndex(0);
+            SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+            PlaySE(SE_SUCCESS);
+            return;
         }
 
         SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
@@ -850,6 +868,9 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
     {
         switch (subMode)
         {
+        case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+            MovesPageMisc_SetOptionIndex(0);
+            // fallthrough
         default:
             SummaryInput_SetSubMode(subMode - 1);
             break;
@@ -857,6 +878,9 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             sMonSummaryDataPtr->arg.value = 0;
             SummaryInput_SetSubMode(FALSE);
             gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
+            break;
+        case SUMMARY_MOVES_SUB_MODE_REORDER:
+            SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
             break;
         }
 
@@ -876,8 +900,10 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_DETAILS);
         break;
     case SUMMARY_MOVES_OPTION_LEARN:
+        // add move_reminder feature here
         break;
     case SUMMARY_MOVES_OPTION_REORDER:
+        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
         break;
     case SUMMARY_MOVES_OPTION_FORGET:
         break;
@@ -2373,7 +2399,7 @@ static void MovesPage_HandleMisc(void)
     case SUMMARY_MOVES_SUB_MODE_DETAILS:
         MovesPageMisc_PrintDetails(SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()]);
         break;
-    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS ... SUMMARY_MOVES_SUB_MODE_REORDER:
         MovsPageMisc_PrintOptions();
         break;
     }
@@ -2446,6 +2472,9 @@ static void MovesPageMisc_PrintDescription(void)
     case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         str = sMovesPageMisc_OptionInfo[MovesPageMisc_GetOptionIndex()].desc;
         break;
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
+        str = sMovesPageMisc_ReorderOption_SwitchWhichMove;
+        break;
     }
 
     StringCopy(gStringVar4, str);
@@ -2467,6 +2496,16 @@ static void MovesPageMisc_TrySpawnCursors(void)
 
         SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
         SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_SLOT_CURSOR, spriteId);
+    }
+
+    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_NEW_SLOT_CURSOR);
+    if (spriteId == SPRITE_NONE)
+    {
+        spriteId = CreateSprite(&sMovesPageMisc_SlotCursorSpriteTemplate, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, SUMMARY_MOVES_GENERAL_Y, 0);
+
+        gSprites[spriteId].callback = SpriteCB_MovesPageMisc_NewSlotCursor;
+        SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+        SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_NEW_SLOT_CURSOR, spriteId);
     }
 
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_OPTION_CURSOR);
@@ -2513,18 +2552,40 @@ static void MovesPageMisc_UpdateIndex(s32 delta)
 
 static void MovesPageMisc_SetIndex(u32 idx)
 {
-    if (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_OPTIONS)
-        MovesPageMisc_SetOptionIndex(idx);
-    else
+    switch (SummaryInput_IsWithinSubMode())
+    {
+    default:
+        break;
+    case SUMMARY_MOVES_SUB_MODE_DETAILS:
         MovesPageMisc_SetSlotIndex(idx);
+        break;
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        MovesPageMisc_SetOptionIndex(idx);
+        break;
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
+        MovesPageMisc_SetNewSlotIndex(idx);
+        break;
+    }
 }
 
 static u32 MovesPageMisc_GetIndex(void)
 {
-    if (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_OPTIONS)
-        return MovesPageMisc_GetOptionIndex();
-    else
+    switch (SummaryInput_IsWithinSubMode())
+    {
+    default:
+        break;
+    case SUMMARY_MOVES_SUB_MODE_DETAILS:
         return MovesPageMisc_GetSlotIndex();
+        break;
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        return MovesPageMisc_GetOptionIndex();
+        break;
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
+        return MovesPageMisc_GetNewSlotIndex();
+        break;
+    }
+
+    return 0;
 }
 
 static void MovesPageMisc_SetSlotIndex(u32 idx)
@@ -2547,9 +2608,52 @@ static u32 MovesPageMisc_GetOptionIndex(void)
     return sMonSummaryDataPtr->arg.moves.optionIdx;
 }
 
+static void MovesPageMisc_SetNewSlotIndex(u32 idx)
+{
+    sMonSummaryDataPtr->arg.moves.newSlotIdx = idx;
+}
+
+static u32 MovesPageMisc_GetNewSlotIndex(void)
+{
+    return sMonSummaryDataPtr->arg.moves.newSlotIdx;
+}
+
 static u32 MovesPageMisc_GetMaxIndex(void)
 {
     return (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_OPTIONS ? MAX_MON_MOVES : SummaryMon_GetStruct()->totalMoves) - 1;
+}
+
+// TODO do a bag menu-like swapping instead
+static void MovesPageMisc_SwapMoves(void)
+{
+    u32 firstSlotIdx = MovesPageMisc_GetSlotIndex();
+    u32 secondSlotIdx = MovesPageMisc_GetNewSlotIndex();
+
+    struct Pokemon *mon = &sMonSummaryDataPtr->mon;
+    struct MonSummary *summary = SummaryMon_GetStruct();
+
+    u32 firstMove = summary->moves[firstSlotIdx];
+    u32 secondMove = summary->moves[secondSlotIdx];
+    u32 firstPp = summary->pp[firstSlotIdx];
+    u32 secondPp = summary->pp[secondSlotIdx];
+    u32 ppBonuses = summary->ppBonuses;
+
+    u8 firstPpUpMask = gPPUpGetMask[firstSlotIdx];
+    u8 firstPpBonus = (ppBonuses & firstPpUpMask) >> (firstSlotIdx * 2);
+    u8 secondPpUpMask = gPPUpGetMask[secondSlotIdx];
+    u8 secondPpBonus = (ppBonuses & secondPpUpMask) >> (secondSlotIdx * 2);
+    ppBonuses &= ~firstPpUpMask;
+    ppBonuses &= ~secondPpUpMask;
+    ppBonuses |= (firstPpBonus << (secondSlotIdx * 2)) + (secondPpBonus << (firstSlotIdx * 2));
+
+    SetMonData(mon, MON_DATA_MOVE1 + firstSlotIdx, &secondMove);
+    SetMonData(mon, MON_DATA_MOVE1 + secondSlotIdx, &firstMove);
+    SetMonData(mon, MON_DATA_PP1 + firstSlotIdx, &secondPp);
+    SetMonData(mon, MON_DATA_PP1 + secondSlotIdx, &firstPp);
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+
+    CopyMon(&sMonSummaryDataPtr->list.mons[sMonSummaryDataPtr->currIdx], &sMonSummaryDataPtr->mon, sizeof(struct Pokemon));
+    SummaryMon_SetStruct();
 }
 
 static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *sprite)
@@ -2575,11 +2679,21 @@ static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *sprite)
     sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetSlotIndex();
 }
 
+static void SpriteCB_MovesPageMisc_NewSlotCursor(struct Sprite *sprite)
+{
+    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
+
+    sprite->invisible = subMode != SUMMARY_MOVES_SUB_MODE_REORDER;
+    if (sprite->invisible) return;
+
+    sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetNewSlotIndex();
+}
+
 static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *sprite)
 {
     enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
 
-    sprite->invisible = subMode != SUMMARY_MOVES_SUB_MODE_OPTIONS;
+    sprite->invisible = subMode < SUMMARY_MOVES_SUB_MODE_OPTIONS;
     if (sprite->invisible) return;
 
     sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetOptionIndex();
