@@ -66,7 +66,7 @@ enum __attribute__((packed)) MonSummaryMainWindows
 #define SUMMARY_TEXT_BOX_BASE_TILE  (0x400 - 18)
 #define SUMMARY_TEXT_BOX_PALETTE    (1)
 
-#define TOTAL_SUMMARY_DYNAMIC_SPRITES 7
+#define TOTAL_SUMMARY_DYNAMIC_SPRITES 10
 #define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
 
 enum MonSummaryMainSprites
@@ -269,7 +269,20 @@ enum MonSummaryMovesSprites
     SUMMARY_MOVES_SPRITE_MOVE_3,
     SUMMARY_MOVES_SPRITE_MOVE_4,
 
+    SUMMARY_MOVES_SPRITE_SLOT_CURSOR,
+    SUMMARY_MOVES_SPRITE_ARROWS,
+
     NUM_SUMMARY_MOVES_SPRITES
+};
+
+enum MonSummaryMovesSubModes
+{
+    SUMMARY_MOVES_SUB_MODE_NONE,
+    SUMMARY_MOVES_SUB_MODE_DETAILS,
+    SUMMARY_MOVES_SUB_MODE_OPTIONS,
+    SUMMARY_MOVES_SUB_MODE_REORDER,
+
+    NUM_SUMMARY_MOVES_SUB_MODES
 };
 
 // identical to Stats page
@@ -292,8 +305,23 @@ enum MonSummaryMovesSprites
 #define SUMMARY_MOVES_GENERAL_SPRITE_BAR_X         (139)
 #define SUMMARY_MOVES_GENERAL_NAME_X               (SUMMARY_MOVES_GENERAL_SPRITE_BAR_X + 5)
 #define SUMMARY_MOVES_GENERAL_ICON_BLIT_X          (223)
+#define SUMMARY_MOVES_GENERAL_ARROWS_X             (124 + 8)
 
 #define SUMMARY_MOVES_GENERAL_Y                    (34)
+#define SUMMARY_MOVES_GENERAL_ARROWS_Y             (SUMMARY_MOVES_GENERAL_Y + 8)
+#define SUMMARY_MOVES_GENERAL_ADDITIVE_Y           (TILE_TO_PIXELS(2))
+
+#define SUMMARY_MOVES_MISC_NAME_X           (TILE_TO_PIXELS(5) + 3)
+#define SUMMARY_MOVES_MISC_VALUE_X          (TILE_TO_PIXELS(9) + 2)
+#define SUMMARY_MOVES_MISC_CATEGORY_X       (3)
+#define SUMMARY_MOVES_MISC_DESCRIPTION_X    (TILE_TO_PIXELS(1))
+#define SUMMARY_MOVES_MISC_VALUE_TEXT_WIDTH (TILE_TO_PIXELS(3) + 2)
+
+#define SUMMARY_MOVES_MISC_POWER_Y          (TILE_TO_PIXELS(4) + 2)
+#define SUMMARY_MOVES_MISC_ACCURACY_Y       (TILE_TO_PIXELS(6) + 2)
+#define SUMMARY_MOVES_MISC_PP_Y             (TILE_TO_PIXELS(8) + 2)
+#define SUMMARY_MOVES_MISC_CATEGORY_Y       (TILE_TO_PIXELS(10))
+#define SUMMARY_MOVES_MISC_DESCRIPTION_Y    (TILE_TO_PIXELS(13))
 
 STATIC_ASSERT(NUM_SUMMARY_INFOS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, InfoPageDynamicSpriteExceedsMaxNumber);
 STATIC_ASSERT(NUM_SUMMARY_STATS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, StatPageDynamicSpriteExceedsMaxNumber);
@@ -374,6 +402,7 @@ struct MonSummary
     u32 trainerId;
     u8 mintNature;
 
+    u8 totalMoves;
     u16 totalValues[NUM_SUMMARY_TOTAL_VALUES];
     u8 gender;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -421,6 +450,10 @@ struct MonSummaryResources
             u32 subMode:2;
             u32 pad:17;
         } stats;
+        struct PACKED {
+            u32 slotIdx:2;
+            u32 pad:30;
+        } moves;
     } arg;
 };
 

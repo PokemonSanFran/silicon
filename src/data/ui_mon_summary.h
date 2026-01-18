@@ -265,8 +265,6 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
         {
             [SUMMARY_MAIN_SPRITE_SHINY_SYMBOL]   = { SUMMARY_MOVES_HEADER_SHINY_X,          SUMMARY_MOVES_HEADER_SHINY_Y },
             [SUMMARY_MAIN_SPRITE_HP_BAR]         = { SUMMARY_MOVES_HEADER_HP_BAR_X,         SUMMARY_MOVES_HEADER_HP_BAR_Y },
-            [SUMMARY_MAIN_SPRITE_EXP_BAR]        = { SUMMARY_MOVES_HEADER_EXP_BAR_X,        SUMMARY_MOVES_HEADER_EXP_BAR_Y },
-            [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_MOVES_HEADER_FRIENDSHIP_BAR_X, SUMMARY_MOVES_HEADER_FRIENDSHIP_BAR_Y },
         },
         .input = Task_SummaryInput_MovesInput,
         .handleFrontEnd = MovesPage_HandleFrontEnd,
@@ -535,4 +533,54 @@ static const struct SpriteTemplate sMovesPageGeneral_MoveBarSpriteTemplate =
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
+};
+
+static const u16 *const sMovesPageMisc_MenuTilemaps[] =
+{
+    [SUMMARY_MOVES_SUB_MODE_NONE]    = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
+    [SUMMARY_MOVES_SUB_MODE_DETAILS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
+    [SUMMARY_MOVES_SUB_MODE_OPTIONS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin"),
+    [SUMMARY_MOVES_SUB_MODE_REORDER] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
+};
+
+static const struct SpriteTemplate sMovesPageMisc_ArrowsSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16),
+        .priority = 1
+    },
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0, 30),
+            ANIMCMD_FRAME(1, 30),
+            ANIMCMD_JUMP(0)
+        },
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/moves/arrows.4bpp"),
+        .size = (16 * 16) / 2,
+        .relativeFrames = TRUE,
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_MovesPageMisc_Arrows
+};
+
+static const struct SpriteTemplate sMovesPageMisc_SlotCursorSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
+        .priority = 2,
+    },
+    .anims = sSummarySprite_FrameImageAnimTemplate,
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/moves/slot_cursor.4bpp"),
+        .size = (128 * 16) / 2,
+        .relativeFrames = TRUE
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_MovesPageMisc_SlotCursor
 };

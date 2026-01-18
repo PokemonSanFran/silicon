@@ -177,6 +177,14 @@ static void MovesPage_HandleFrontEnd(void);
 static void MovesPage_HandleUpdateText(void);
 static void MovesPage_HandleHeader(void);
 static void MovesPage_HandleGeneral(void);
+static void MovesPage_HandleMisc(void);
+static void MovesPageMisc_PrintDetails(u32);
+static void MovesPageMisc_TrySpawnCursors(void);
+static void MovesPageMisc_UpdateSlotIndex(s32);
+static void MovesPageMisc_SetSlotIndex(u32);
+static u32 MovesPageMisc_GetSlotIndex(void);
+static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *);
+static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *);
 
 // const data
 #include "data/ui_mon_summary.h"
@@ -782,6 +790,32 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
 
 static void Task_SummaryInput_MovesInput(u8 taskId)
 {
+    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
+
+    if (JOY_NEW(DPAD_DOWN))
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_MOVES_SUB_MODE_DETAILS:
+            MovesPageMisc_UpdateSlotIndex(1);
+            break;
+        }
+    }
+
+    if (JOY_NEW(DPAD_UP))
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_MOVES_SUB_MODE_DETAILS:
+            MovesPageMisc_UpdateSlotIndex(-1);
+            break;
+        }
+    }
+
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -791,6 +825,7 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
+        sMonSummaryDataPtr->arg.value = 0;
         SummaryInput_SetSubMode(FALSE);
         SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
@@ -823,10 +858,17 @@ static void SummaryMon_SetStruct(void)
         res->summary.isEgg = GetMonData(mon, MON_DATA_IS_EGG);
     }
 
+    res->summary.totalMoves = 0;
+
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
         res->summary.moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
         res->summary.pp[i] = GetMonData(mon, MON_DATA_PP1 + i);
+
+        if (res->summary.moves[i] > MOVE_NONE && res->summary.moves[i] < MOVES_COUNT)
+        {
+            res->summary.totalMoves++;
+        }
     }
 
     res->summary.ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
@@ -2235,6 +2277,7 @@ static void MovesPage_HandleFrontEnd(void)
 {
     MovesPage_HandleHeader();
     MovesPage_HandleGeneral();
+    MovesPage_HandleMisc();
 }
 
 static void MovesPage_HandleUpdateText(void)
@@ -2254,10 +2297,152 @@ static void MovesPage_HandleGeneral(void)
 {
     SummarySprite_PrepareMonMovesGfx();
 
-    for (u32 i = 0, y = SUMMARY_MOVES_GENERAL_Y; i < MAX_MON_MOVES; i++, y += TILE_TO_PIXELS(2))
+    for (u32 i = 0, y = SUMMARY_MOVES_GENERAL_Y; i < MAX_MON_MOVES; i++, y += SUMMARY_MOVES_GENERAL_ADDITIVE_Y)
     {
         SummarySprite_MonMove(i, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, y);
         SummaryPrint_MoveName(i, SUMMARY_MOVES_GENERAL_NAME_X, y);
         SummaryPrint_BlitMoveType(i, SUMMARY_MOVES_GENERAL_ICON_BLIT_X, y);
     }
+}
+
+static void MovesPage_HandleMisc(void)
+{
+    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
+
+    MovesPageMisc_TrySpawnCursors();
+    CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[subMode], 1, 4, 16, 8);
+
+    if (!SummaryInput_IsWithinSubMode()) return;
+
+    switch (subMode)
+    {
+    default:
+        break;
+    case SUMMARY_MOVES_SUB_MODE_DETAILS:
+        MovesPageMisc_PrintDetails(SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()]);
+        break;
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        break;
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
+        break;
+    }
+}
+
+static void MovesPageMisc_PrintDetails(u32 move)
+{
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
+    u32 fontId = FONT_OUTLINED;
+    u32 x, val;
+
+    val = GetMovePower(move);
+    if (val)
+        ConvertUIntToDecimalStringN(gStringVar1, val, STR_CONV_MODE_LEFT_ALIGN, 3);
+    else
+        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+
+    x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, SUMMARY_MOVES_MISC_VALUE_TEXT_WIDTH, -1);
+    SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_NAME_X, SUMMARY_MOVES_MISC_POWER_Y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Pwr:"));
+    SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_VALUE_X + x, SUMMARY_MOVES_MISC_POWER_Y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+
+    val = GetMoveAccuracy(move);
+    if (val)
+        ConvertUIntToDecimalStringN(gStringVar1, val, STR_CONV_MODE_LEFT_ALIGN, 3);
+    else
+        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+
+    x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, SUMMARY_MOVES_MISC_VALUE_TEXT_WIDTH, -1);
+    SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_NAME_X, SUMMARY_MOVES_MISC_ACCURACY_Y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Acc:"));
+    SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_VALUE_X + x, SUMMARY_MOVES_MISC_ACCURACY_Y, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+
+    ConvertUIntToDecimalStringN(gStringVar1, mon->pp[MovesPageMisc_GetSlotIndex()], STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertUIntToDecimalStringN(gStringVar2,
+        CalculatePPWithBonus(move, mon->ppBonuses, MovesPageMisc_GetSlotIndex()), STR_CONV_MODE_LEFT_ALIGN, 2);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}/{STR_VAR_2}"));
+    x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar4, 26, -1);
+    SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_NAME_X, SUMMARY_MOVES_MISC_PP_Y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("PP:"));
+    SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_VALUE_X + x, SUMMARY_MOVES_MISC_PP_Y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+
+    SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_CATEGORY_X, SUMMARY_MOVES_MISC_CATEGORY_Y, SUMMARY_FNTCLR_INTERFACE, GetMoveCategoryName(move));
+
+    StringCopy(gStringVar4, GetMoveDescription(move));
+    StripLineBreaks(gStringVar4);
+    BreakStringAutomatic(gStringVar4, TILE_TO_PIXELS(28), 3, fontId, HIDE_SCROLL_PROMPT);
+    SummaryPrint_AddText(windowId, FONT_NORMAL, SUMMARY_MOVES_MISC_DESCRIPTION_X, SUMMARY_MOVES_MISC_DESCRIPTION_Y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+}
+
+static void MovesPageMisc_TrySpawnCursors(void)
+{
+    u32 spriteId;
+
+    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_SLOT_CURSOR);
+    if (spriteId == SPRITE_NONE)
+    {
+        spriteId = CreateSprite(&sMovesPageMisc_SlotCursorSpriteTemplate, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, SUMMARY_MOVES_GENERAL_Y, 0);
+
+        SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+        SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_SLOT_CURSOR, spriteId);
+    }
+
+    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_ARROWS);
+    if (spriteId == SPRITE_NONE)
+    {
+        spriteId = CreateSprite(&sMovesPageMisc_ArrowsSpriteTemplate, SUMMARY_MOVES_GENERAL_ARROWS_X, SUMMARY_MOVES_GENERAL_ARROWS_Y, 0);
+        SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_ARROWS, spriteId);
+    }
+}
+
+static void MovesPageMisc_UpdateSlotIndex(s32 delta)
+{
+    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
+    u32 currVal = MovesPageMisc_GetSlotIndex(), maxVal = SummaryMon_GetStruct()->totalMoves - 1;
+
+    if (!additiveDelta && !currVal)
+    {
+        MovesPageMisc_SetSlotIndex(maxVal);
+    }
+    else if (additiveDelta && currVal == maxVal)
+    {
+        MovesPageMisc_SetSlotIndex(0);
+    }
+    else
+    {
+        MovesPageMisc_SetSlotIndex(currVal + delta);
+    }
+
+    if (currVal != StatsPageMisc_GetRow())
+    {
+        PlaySE(SE_SELECT);
+        SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+    }
+}
+
+static void MovesPageMisc_SetSlotIndex(u32 idx)
+{
+    sMonSummaryDataPtr->arg.moves.slotIdx = idx;
+}
+
+static u32 MovesPageMisc_GetSlotIndex(void)
+{
+    return sMonSummaryDataPtr->arg.moves.slotIdx;
+}
+
+static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *sprite)
+{
+    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
+
+    sprite->invisible = !subMode;
+    if (sprite->invisible) return;
+
+    sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetSlotIndex();
+}
+
+static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *sprite)
+{
+    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
+
+    sprite->invisible = !subMode;
+    if (sprite->invisible) return;
+
+    sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetSlotIndex();
 }
