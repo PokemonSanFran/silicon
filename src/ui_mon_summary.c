@@ -1412,7 +1412,8 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     u32 move = mon->moves[idx];
     enum Type type = GetMoveType(move);
 
-    if (move == MOVE_NONE || move >= MOVES_COUNT) return;
+    if (move == MOVE_NONE || move >= MOVES_COUNT
+     || SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx) != SPRITE_NONE) return;
 
     u32 spriteId = CreateSprite(&SummarySprite_GetGfxManager()->templates[SUMMARY_GFX_MAN_MOVE_BAR], x, y, 2);
 
