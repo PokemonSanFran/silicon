@@ -2458,7 +2458,7 @@ static void MovesPageMisc_TrySpawnCursors(void)
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_OPTION_CURSOR);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sMovesPageMisc_OptionCursorSpriteTemplate, 10, 32, 0);
+        spriteId = CreateSprite(&sMovesPageMisc_OptionCursorSpriteTemplate, SUMMARY_MOVES_MISC_OPTION_CURSOR_X, SUMMARY_MOVES_MISC_OPTION_Y, 0);
 
         SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
         SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_OPTION_CURSOR, spriteId);
