@@ -181,6 +181,7 @@ static void MovesPage_HandleGeneral(void);
 static void MovesPage_HandleMisc(void);
 static void MovesPageMisc_PrintDetails(u32);
 static void MovsPageMisc_PrintOptions(void);
+static void MovesPageMisc_PrintDescription(void);
 static void MovesPageMisc_TrySpawnCursors(void);
 static void MovesPageMisc_UpdateIndex(s32);
 static void MovesPageMisc_SetIndex(u32);
@@ -2376,6 +2377,8 @@ static void MovesPage_HandleMisc(void)
         MovsPageMisc_PrintOptions();
         break;
     }
+
+    MovesPageMisc_PrintDescription();
 }
 
 static void MovesPageMisc_PrintDetails(u32 move)
@@ -2414,11 +2417,6 @@ static void MovesPageMisc_PrintDetails(u32 move)
     SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_VALUE_X + x, SUMMARY_MOVES_MISC_PP_Y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 
     SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_CATEGORY_X, SUMMARY_MOVES_MISC_CATEGORY_Y, SUMMARY_FNTCLR_INTERFACE, GetMoveCategoryName(move));
-
-    StringCopy(gStringVar4, GetMoveDescription(move));
-    StripLineBreaks(gStringVar4);
-    BreakStringAutomatic(gStringVar4, TILE_TO_PIXELS(28), 3, FONT_NORMAL, HIDE_SCROLL_PROMPT);
-    SummaryPrint_AddText(windowId, FONT_NORMAL, SUMMARY_MOVES_MISC_DESCRIPTION_X, SUMMARY_MOVES_MISC_DESCRIPTION_Y, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
 static void MovsPageMisc_PrintOptions(void)
@@ -2431,12 +2429,28 @@ static void MovsPageMisc_PrintOptions(void)
             SUMMARY_MOVES_MISC_OPTION_X, SUMMARY_MOVES_MISC_OPTION_Y + (SUMMARY_MOVES_GENERAL_ADDITIVE_Y * i),
             SUMMARY_FNTCLR_INTERFACE, sMovesPageMisc_OptionInfo[i].name);
     }
+}
 
-    fontId = FONT_NORMAL;
-    StringCopy(gStringVar4, sMovesPageMisc_OptionInfo[MovesPageMisc_GetOptionIndex()].desc);
+static void MovesPageMisc_PrintDescription(void)
+{
+    u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT, fontId = FONT_NORMAL;
+    const u8 *str = gText_EmptyString2;
+
+    switch (SummaryInput_IsWithinSubMode())
+    {
+    default:
+        break;
+    case SUMMARY_MOVES_SUB_MODE_DETAILS:
+        str = GetMoveDescription(SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()]);
+        break;
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        str = sMovesPageMisc_OptionInfo[MovesPageMisc_GetOptionIndex()].desc;
+        break;
+    }
+
+    StringCopy(gStringVar4, str);
     StripLineBreaks(gStringVar4);
     BreakStringAutomatic(gStringVar4, TILE_TO_PIXELS(28), 3, fontId, HIDE_SCROLL_PROMPT);
-
     SummaryPrint_AddText(windowId, fontId,
         SUMMARY_MOVES_MISC_DESCRIPTION_X, SUMMARY_MOVES_MISC_DESCRIPTION_Y,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
