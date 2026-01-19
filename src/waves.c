@@ -71,6 +71,7 @@ static void DetailPage_HandleInput(u8 taskId);
 static void Donate_HandleInput(u8 taskId);
 static void NotEnough_HandleInput(u8 taskId);
 static void Waves_OpenGoal(u8 taskId);
+static void Task_WaitForFadeAndSwitch(u8 taskId);
 static void Waves_GoToPage(enum WavesMode mode);
 static void Waves_SetUpPageContent(void);
 static void Waves_ChangeColumn(s32 direction);
@@ -874,7 +875,23 @@ static void Waves_OpenGoal(u8 taskId)
         PlaySoundStartFadeQuitApp(taskId);
         return;
     }
-    Waves_GoToPage(WAVES_MODE_GOAL_DETAIL);
+
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+    gTasks[taskId].data[0] = Waves_GetMode();
+    gTasks[taskId].func = Task_WaitForFadeAndSwitch;
+}
+
+static void Task_WaitForFadeAndSwitch(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    enum WavesMode currentMode = gTasks[taskId].data[0];
+    enum WavesMode targetMode = (currentMode == WAVES_MODE_GOAL_DETAIL) ? WAVES_MODE_LANDING_PAGE : WAVES_MODE_GOAL_DETAIL;
+
+    Waves_GoToPage(targetMode);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
+    gTasks[taskId].func = Task_HandleInput;
 }
 
 static void Waves_GoToPage(enum WavesMode mode)
@@ -1329,7 +1346,9 @@ static void DetailPage_HandleInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
-        Waves_GoToPage(WAVES_MODE_LANDING_PAGE);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+        gTasks[taskId].data[0] = Waves_GetMode();
+        gTasks[taskId].func = Task_WaitForFadeAndSwitch;
         return;
     }
 }
