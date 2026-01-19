@@ -70,8 +70,10 @@ static void Task_HandleInput(u8 taskId);
 static void DetailPage_HandleInput(u8 taskId);
 static void Donate_HandleInput(u8 taskId);
 static void NotEnough_HandleInput(u8 taskId);
-static void Waves_ReturnToLanding(u8 taskId);
 static void Waves_OpenGoal(u8 taskId);
+static void Waves_GoToPage(enum WavesMode mode);
+static void Waves_CleanUpOldWindows(void);
+static void Waves_SetUpPageContent(void);
 static void Waves_ChangeColumn(s32 direction);
 static void Waves_ChangeRow(s32 direction);
 static void FreeSpritePalettesResetSpriteData(void);
@@ -85,6 +87,7 @@ static void Waves_DisplayMenuFooter(u32 windowId);
 static void Waves_PrintHeaderText(u32 windowId, enum GoalEnum goalId);
 static void Waves_PrintFooterText(u32 windowId);
 static void Waves_PrintAllCards(void);
+static void Waves_PrintLandingPage(void);
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId);
 static void Waves_PrintCard(enum GoalEnum goalId);
 static void Waves_PrintCardHeader(enum GoalEnum goalId);
@@ -104,14 +107,12 @@ static void ResetDonatePosition(void);
 static enum WavesMode Waves_GetMode(void);
 static void Waves_SetMode(enum WavesMode mode);
 static void Waves_DisplayGoalDesc(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_DisplayGoalPage(void);
+static void Waves_DisplayGoalPage(enum GoalEnum goalId);
 static void Waves_DisplayGoalProgress(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_DisplayGoalTitle(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_PrintGoalDescText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_PrintGoalTitleText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 
 static const u32* const meterPassiveLeftLUT[] =
@@ -236,21 +237,21 @@ static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
     {
         .bg = BG1_WAVES_LANDING,
         .charBaseIndex = 1,
-        .mapBaseIndex = 30,
+        .mapBaseIndex = 29,
         .priority = 1,
     },
     [BG2_WAVES_DETAIL] =
     {
         .bg = BG2_WAVES_DETAIL,
         .charBaseIndex = 2,
-        .mapBaseIndex = 29,
+        .mapBaseIndex = 28,
         .priority = 1,
     },
     [BG3_WAVES_WALLPAPER] =
     {
         .bg = BG3_WAVES_WALLPAPER,
         .charBaseIndex = 3,
-        .mapBaseIndex = 28,
+        .mapBaseIndex = 27,
         .priority = 2,
     },
 };
@@ -265,7 +266,6 @@ static const struct WindowTemplate sWavesGridWindows[] =
         .width = 30,
         .height = 2,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1,
     },
     [WIN_WAVES_CARD_1] =
     {
@@ -275,7 +275,6 @@ static const struct WindowTemplate sWavesGridWindows[] =
         .width = 8,
         .height = 7,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2),
     },
     [WIN_WAVES_CARD_2] =
     {
@@ -285,7 +284,6 @@ static const struct WindowTemplate sWavesGridWindows[] =
         .width = 8,
         .height = 7,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7),
     },
     [WIN_WAVES_CARD_3] =
     {
@@ -295,39 +293,35 @@ static const struct WindowTemplate sWavesGridWindows[] =
         .width = 8,
         .height = 7,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7),
     },
     [WIN_WAVES_CARD_4] =
     {
         .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 2,
-        .tilemapTop = 12,
+        .tilemapTop = 11,
         .width = 8,
         .height = 7,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7),
     },
     [WIN_WAVES_CARD_5] =
     {
         .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 11,
-        .tilemapTop = 12,
+        .tilemapTop = 11,
         .width = 8,
         .height = 7,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
     },
     [WIN_WAVES_CARD_6] =
     {
         .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 20,
-        .tilemapTop = 12,
+        .tilemapTop = 11,
         .width = 8,
         .height = 7,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
     },
-    [WIN_WAVES_GOAL_FOOTER] =
+    [WIN_WAVES_CARD_FOOTER] =
     {
         .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 0,
@@ -335,7 +329,6 @@ static const struct WindowTemplate sWavesGridWindows[] =
         .width = 30,
         .height = 2,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7) + (8 * 7),
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -350,17 +343,6 @@ static const struct WindowTemplate sWavesGoalWindows[] =
         .width = 30,
         .height = 2,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1,
-    },
-    [WIN_WAVES_GOAL_TITLE] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 1,
-        .tilemapTop = 3,
-        .width = 12,
-        .height = 2,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2),
     },
     [WIN_WAVES_GOAL_DESC] =
     {
@@ -370,47 +352,42 @@ static const struct WindowTemplate sWavesGoalWindows[] =
         .width = 30,
         .height = 5,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2),
-    },
-    [WIN_WAVES_GOAL_PLAYER] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 15,
-        .tilemapTop = 5,
-        .width = 13,
-        .height = 1,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5),
-    },
-    [WIN_WAVES_GOAL_PASSIVE] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 15,
-        .tilemapTop = 7,
-        .width = 13,
-        .height = 1,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1),
-    },
-    [WIN_WAVES_GOAL_TOTAL] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 15,
-        .tilemapTop = 7,
-        .width = 13,
-        .height = 1,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1),
     },
     [WIN_WAVES_GOAL_RAISED] =
     {
         .bg = BG0_WAVES_TEXT,
         .tilemapLeft = 14,
-        .tilemapTop = 3,
+        .tilemapTop = 2,
         .width = 15,
-        .height = 10,
+        .height = 3,
         .paletteNum = WAVES_PALETTE_INTERFACE_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1) + (13 * 1),
+    },
+    [WIN_WAVES_GOAL_PLAYER] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 14,
+        .tilemapTop = 5,
+        .width = 15,
+        .height = 2,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+    },
+    [WIN_WAVES_GOAL_PASSIVE] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 14,
+        .tilemapTop = 7,
+        .width = 15,
+        .height = 2,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
+    },
+    [WIN_WAVES_GOAL_TOTAL] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 14,
+        .tilemapTop = 9,
+        .width = 15,
+        .height = 2,
+        .paletteNum = WAVES_PALETTE_TEXT_ID,
     },
     [WIN_WAVES_GOAL_FOOTER] =
     {
@@ -420,7 +397,6 @@ static const struct WindowTemplate sWavesGoalWindows[] =
         .width = 30,
         .height = 2,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
-        .baseBlock = 1 + (30 * 2) + (12 * 2) + (30 * 5) + (13 * 1) + (13 * 1) + (13 * 1) + (15 * 10),
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -794,32 +770,21 @@ void Waves_SetupCallback(void)
         case 2:
             CreateTask(Task_HandleInput,0);
             Waves_InitializeBackgroundsAndLoadBackgroundGraphics();
-            Waves_ChooseBackgroundBasedOnMode();
             gMain.state++;
             break;
         case 3:
-            Waves_InitWindows();
+            Waves_PrintCursor();
             gMain.state++;
             break;
         case 4:
+            Waves_SetMode(WAVES_MODE_LANDING_PAGE);
+            Waves_SetUpPageContent();
             gMain.state++;
             break;
         case 5:
-            gMain.state++;
-            break;
-        case 6:
-            ClearAllWindows();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-            Waves_PrintMenuHeader(WIN_WAVES_CARD_HEADER,GOAL_COUNT);
-            Waves_PrintAllCards();
-            Waves_PrintCursor();
-            Waves_DisplayMenuFooter(WIN_WAVES_CARD_FOOTER);
-            //Waves_PrintHelpBar(WIN_WAVES_CARD_FOOTER);
             if (firstOpen)
                 PlaySE(SE_PC_LOGIN);
-            gMain.state++;
-            break;
-        case 7:
             firstOpen = FALSE;
             SetVBlankCallback(Waves_VBlankCB);
             SetMainCallback2(Waves_MainCB);
@@ -827,11 +792,36 @@ void Waves_SetupCallback(void)
     }
 }
 
+static void Waves_DisplayPageContent(void)
+{
+    bool32 isLandingPage = (Waves_GetMode() == WAVES_MODE_LANDING_PAGE);
+    if (isLandingPage == TRUE)
+        Waves_PrintLandingPage();
+    else
+        Waves_DisplayGoalPage(GetGoalFromCurrentPosition());
+}
+
 static void Waves_InitWindows(void)
 {
-    const struct WindowTemplate *templates = (Waves_GetMode() == WAVES_MODE_LANDING_PAGE) ? sWavesGridWindows : sWavesGoalWindows;
+    bool32 isLandingPage = (Waves_GetMode() == WAVES_MODE_LANDING_PAGE);
+    const struct WindowTemplate *templates = isLandingPage ? sWavesGridWindows : sWavesGoalWindows;
 
     InitWindows(templates);
+
+    u32 arrayCount = isLandingPage ? (ARRAY_COUNT(sWavesGridWindows) - 1) : (ARRAY_COUNT(sWavesGoalWindows) - 1);
+
+    u32 baseBlock = 1;
+    u32 tiles = 0;
+    for (u32 windowId = 0; windowId < arrayCount; windowId++)
+    {
+        SetWindowAttribute(windowId, WINDOW_BASE_BLOCK, baseBlock);
+        ClearWindowCopyToVram(windowId);
+        baseBlock += (templates[windowId].width * templates[windowId].height);
+
+        tiles += (templates[windowId].width * templates[windowId].height);
+        DebugPrintf("there are %d tiles allocated",tiles);
+    }
+
     DeactivateAllTextPrinters();
 }
 
@@ -883,13 +873,28 @@ static void Waves_OpenGoal(u8 taskId)
         PlaySoundStartFadeQuitApp(taskId);
         return;
     }
+    Waves_GoToPage(WAVES_MODE_GOAL_DETAIL);
+}
 
-    Waves_SetMode(WAVES_MODE_GOAL_DETAIL);
+static void Waves_GoToPage(enum WavesMode mode)
+{
+    Waves_CleanUpOldWindows();
+    Waves_SetMode(mode);
+    Waves_SetUpPageContent();
+}
+
+static void Waves_SetUpPageContent(void)
+{
     Waves_ChooseBackgroundBasedOnMode();
-    FreeAllWindowBuffers();
     Waves_InitWindows();
     ClearAllWindows();
-    Waves_DisplayGoalPage();
+    Waves_DisplayPageContent();
+}
+
+static void Waves_CleanUpOldWindows(void)
+{
+    //ClearAllWindows();
+    FreeAllWindowBuffers();
 }
 
 static void Waves_ChangeColumn(s32 direction)
@@ -957,7 +962,10 @@ static bool32 AllocateStructs(void)
 
 static void ClearAllWindows(void)
 {
-    for (enum WavesWindowsGrid windowId = 0; windowId < WIN_WAVES_CARD_COUNT; windowId++)
+    bool32 isLandingPage = (Waves_GetMode() == WAVES_MODE_LANDING_PAGE);
+    u32 arrayCount = isLandingPage ? ARRAY_COUNT(sWavesGridWindows) - 1 : ARRAY_COUNT(sWavesGoalWindows) - 1;
+
+    for (enum WavesWindowsGrid windowId = 0; windowId < arrayCount; windowId++)
         ClearWindowCopyToVram(windowId);
 }
 
@@ -1039,7 +1047,7 @@ static void Waves_PrintFooterText(u32 windowId)
     {
         default:
         case WAVES_MODE_LANDING_PAGE:
-            StringCopy(gStringVar4,COMPOUND_STRING("{DPAD_LEFTRIGHT} Choose Goal {A_BUTTON} See Goal Info {B_BUTTON} Return"));
+            StringCopy(gStringVar4,COMPOUND_STRING("{DPAD_NONE} Choose Goal {A_BUTTON} See Goal Info {B_BUTTON} Return"));
             break;
         case WAVES_MODE_GOAL_DETAIL:
             StringCopy(gStringVar4,COMPOUND_STRING("{A_BUTTON} Donate To Goal {B_BUTTON} Return"));
@@ -1055,12 +1063,17 @@ static void Waves_PrintFooterText(u32 windowId)
     AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sWavesWindowFontColors[WAVES_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
+static void Waves_PrintLandingPage(void)
+{
+    Waves_PrintMenuHeader(WIN_WAVES_CARD_HEADER,GOAL_COUNT);
+    Waves_PrintAllCards();
+    Waves_DisplayMenuFooter(WIN_WAVES_CARD_FOOTER);
+}
+
 static void Waves_PrintAllCards(void)
 {
     for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
-    {
         Waves_PrintCard(goalId);
-    }
 }
 
 static void Waves_PrintCard(enum GoalEnum goalId)
@@ -1167,6 +1180,9 @@ static void Waves_PrintCardMeter(enum GoalEnum goalId)
     size = 0;
     u32 offset = WAVES_METER_TILE_OFFSET;
 
+    if (goalId < GOAL_SOCIAL_HOUSING)
+        offset += TILE_WIDTH;
+
     while (factor < (ARRAY_COUNT(meterPlayerLeftLUT)-1) && amount >= WAVES_METER_FACTOR)
     {
         factor++;
@@ -1214,6 +1230,10 @@ static void Waves_PrintCardText(enum GoalEnum goalId)
 {
     enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
     u32 y = WAVES_HEADER_Y;
+
+    if (goalId < GOAL_SOCIAL_HOUSING)
+        y += TILE_WIDTH;
+
     u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
 
     StringCopy(gStringVar3,Waves_GetTitle(goalId));
@@ -1301,7 +1321,7 @@ static void DetailPage_HandleInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
-        Waves_ReturnToLanding(taskId);
+        Waves_GoToPage(WAVES_MODE_LANDING_PAGE);
         return;
     }
 }
@@ -1314,27 +1334,12 @@ static void NotEnough_HandleInput(u8 taskId)
     return;
 }
 
-static void Waves_ReturnToLanding(u8 taskId)
+static void Waves_DisplayGoalPage(enum GoalEnum goalId)
 {
-    Waves_SetMode(WAVES_MODE_LANDING_PAGE);
-}
-
-static void Waves_DisplayGoalPage(void)
-{
-    enum GoalEnum goalId = GetGoalFromCurrentPosition();
     Waves_PrintMenuHeader(WIN_WAVES_GOAL_HEADER, goalId);
-    Waves_DisplayGoalTitle(WIN_WAVES_GOAL_TITLE,goalId);
     Waves_DisplayGoalDesc(WIN_WAVES_GOAL_DESC,goalId);
     Waves_DisplayGoalProgress(WIN_WAVES_GOAL_RAISED,goalId);
     Waves_DisplayMenuFooter(WIN_WAVES_GOAL_FOOTER);
-    return;
-}
-
-static void Waves_DisplayGoalTitle(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
-{
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalTitleText(windowId,goalId);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 static void Waves_DisplayGoalProgress(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
@@ -1372,18 +1377,19 @@ static void Waves_PrintGoalDescText(enum WavesWindowsGoal windowId, enum GoalEnu
     u32 fontId = FONT_WAVES_DESC;
     u32 x = 4;
     u32 y = 0;
-    u32 windowWidth = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH;
-    u32 windowHeight = GetWindowAttribute(windowId,WINDOW_HEIGHT) * TILE_HEIGHT;
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
+    u32 windowHeight = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_HEIGHT));
     u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
     u32 screenLines = windowHeight / letterHeight;
 
     u8 *end = StringCopy(gStringVar4,Waves_GetDesc(goalId));
-    PrependFontIdToFit(gStringVar4, end, fontId, windowWidth);
     BreakStringNaive(gStringVar4,windowWidth,screenLines,fontId,HIDE_SCROLL_PROMPT);
+    PrependFontIdToFit(gStringVar4, end, fontId, windowWidth);
+
     AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
+static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
 {
     return;
 }
@@ -1392,13 +1398,8 @@ static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, enum GoalE
 {
     return;
 }
+static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
 
-static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
-{
-    return;
-}
-
-static void Waves_PrintGoalTitleText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
 {
     return;
 }
@@ -1407,3 +1408,4 @@ static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, enum GoalEn
 {
     return;
 }
+

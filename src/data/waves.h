@@ -13,7 +13,7 @@ static struct WavesData sWavesInformation[GOAL_COUNT] =
     [GOAL_FOOD_SECURITY] =
     {
         .title = COMPOUND_STRING("Food Security"),
-        .desc = COMPOUND_STRING("Use the mutual aid fund to scale up and be less reliant on Needles, and use that to feed more people."),
+        .desc = COMPOUND_STRING("Use the mutual aid fund to scale up and be less reliant on charity, and use that to feed more people."),
         .thumbnail = (const u32[]) INCBIN_U32("graphics/ui_menus/waves/assets/small.4bpp"),
         .palette = (const u16[]) INCBIN_U16("graphics/ui_menus/waves/palettes/sprite.gbapal"),
         .goal = 400810,
