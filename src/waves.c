@@ -93,6 +93,7 @@ static void Waves_PrintCard(enum GoalEnum goalId);
 static void Waves_PrintCardHeader(enum GoalEnum goalId);
 static enum GoalEnum GetGoalFromCurrentPosition(void);
 static void Waves_PrintCardText(enum GoalEnum goalId);
+static void Waves_PrintAllCardThumbnails(void);
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
 static void SpriteCB_MoveGoalCursor(struct Sprite *sprite);
 static void SpriteCB_HideThumbnails(struct Sprite *sprite);
@@ -236,7 +237,7 @@ static const struct BgTemplate sWavesBgTemplates[BG_WAVES_COUNT] =
     [BG1_WAVES_LANDING] =
     {
         .bg = BG1_WAVES_LANDING,
-        .charBaseIndex = 1,
+        .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .priority = 1,
     },
@@ -778,6 +779,7 @@ void Waves_SetupCallback(void)
             break;
         case 4:
             Waves_SetMode(WAVES_MODE_LANDING_PAGE);
+            Waves_PrintAllCardThumbnails();
             Waves_SetUpPageContent();
             gMain.state++;
             break;
@@ -1083,10 +1085,15 @@ static void Waves_PrintCard(enum GoalEnum goalId)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     Waves_PrintCardHeader(goalId);
-    Waves_PrintCardThumbnail(goalId);
     Waves_PrintCardMeter(goalId);
 
     CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void Waves_PrintAllCardThumbnails(void)
+{
+    for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
+        Waves_PrintCardThumbnail(goalId);
 }
 
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
