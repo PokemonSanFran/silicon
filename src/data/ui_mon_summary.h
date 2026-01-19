@@ -542,23 +542,23 @@ static const struct {
 {
     {
         .name = COMPOUND_STRING("Inspect"),
-        .desc = COMPOUND_STRING("Check details of this move.")
+        .desc = COMPOUND_STRING("Check the details of this move.")
     },
     {
         .name = COMPOUND_STRING("Learn Moves"),
-        .desc = COMPOUND_STRING("Replace this move with another move.")
+        .desc = COMPOUND_STRING("Replace this move with another move within the Pokémon's learnset.")
     },
     {
         .name = COMPOUND_STRING("Reorder Moves"),
-        .desc = COMPOUND_STRING("Swap this move with other move.")
+        .desc = COMPOUND_STRING("Swap this move with another move within this Pokémon's moveset.")
     },
     {
         .name = COMPOUND_STRING("Forget Move"),
-        .desc = COMPOUND_STRING("Remove this move from the moveset.")
+        .desc = COMPOUND_STRING("Remove this move from the Pokémon's moveset.")
     },
 };
 
-static const u8 sMovesPageMisc_ReorderOption_SwitchWhichMove[] = _("Switch with which move?");
+static const u8 sMovesPageMisc_ReorderOption_SwitchWhichMove[] = _("Swap with which move?");
 
 static const u16 *const sMovesPageMisc_MenuTilemaps[] =
 {
