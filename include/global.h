@@ -314,7 +314,7 @@ struct SaveBlock3
     u16 mazeItemsSeed;
     u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
     struct Waypoint waypoint; // Waypoint/MapSystem Branch
-    u8 wavesFunds[GOAL_PERCENT_COUNT];
+    u8 wavesFunds[GOAL_PERCENT_COUNT][GOAL_COUNT];
 // End siliconMerge
 #if OW_USE_FAKE_RTC
     struct SiiRtcInfo fakeRTC;

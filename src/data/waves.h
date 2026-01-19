@@ -29,7 +29,7 @@ static struct WavesData sWavesInformation[GOAL_COUNT] =
         .image = (const u32[]) INCBIN_U32("graphics/ui_menus/waves/assets/full_healthcare.4bpp"),
         .palette = (const u16[]) INCBIN_U16("graphics/ui_menus/waves/palettes/pal_thumbnail_healthcare.gbapal"),
         .fullPalette = (const u16[]) INCBIN_U16("graphics/ui_menus/waves/palettes/pal_full_healthcare.gbapal"),
-        .goal = 64151,
+        .goal = 64153,
         .relatedSubQuest = SUB_QUEST_2,
         .relatedQuest = QUEST_THEBOYWHOCRIESWITHWOLVES,
     },
