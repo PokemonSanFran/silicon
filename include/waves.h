@@ -9,7 +9,9 @@ struct WavesData
     const u8* const title;
     const u8* const desc;
     const u32* thumbnail;
+    const u32* image;
     const u16* palette;
+    const u16* fullPalette;
     const u32 goal;
     const enum SubQuestDefines relatedSubQuest;
     const enum QuestIdList relatedQuest;

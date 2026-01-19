@@ -35,7 +35,9 @@ static void Debug_LoadUpGoals(void);
 static const u8 *const Waves_GetTitle(enum GoalEnum goal);
 static const u8 *const Waves_GetDesc(enum GoalEnum goal);
 static const u32* Waves_GetThumbnail(enum GoalEnum goal);
+static const u32* Waves_GetImage(enum GoalEnum goal);
 const u16* Waves_GetPalette(enum GoalEnum goalId);
+const u16* Waves_GetFullPalette(enum GoalEnum goalId);
 const u32 Waves_GetGoal(enum GoalEnum goalId);
 const enum SubQuestDefines Waves_GetRelatedSubQuest(enum GoalEnum goalId);
 const enum QuestIdList Waves_GetRelatedQuest(enum GoalEnum goalId);
@@ -95,6 +97,7 @@ static enum GoalEnum GetGoalFromCurrentPosition(void);
 static void Waves_PrintCardText(enum GoalEnum goalId);
 static void Waves_PrintAllCardThumbnails(void);
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
+
 static void SpriteCB_MoveGoalCursor(struct Sprite *sprite);
 static void SpriteCB_HideThumbnails(struct Sprite *sprite);
 static void Waves_PrintCursor(void);
@@ -119,6 +122,9 @@ static void Waves_MakeGoalSpritesInvisible(void);
 static void Waves_SaveSpriteId(enum WavesMode mode, enum GoalEnum goal, u32 id);
 static u32 Waves_GetSpriteId(enum WavesMode mode, enum GoalEnum goal);
 static void Waves_ResetAllSpriteIds(void);
+static void Waves_DrawGoalImage(void);
+static void Waves_PrintGoalImage(u32 windowId);
+static void Waves_LoadFullImagePalette(enum GoalEnum goalId);
 
 static const u32* const meterPassiveLeftLUT[] =
 {
@@ -349,6 +355,15 @@ static const struct WindowTemplate sWavesGoalWindows[] =
         .height = 2,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
     },
+    [WIN_WAVES_GOAL_IMAGE] =
+    {
+        .bg = BG0_WAVES_TEXT,
+        .tilemapLeft = 1,
+        .tilemapTop = 2,
+        .width = 12,
+        .height = 10,
+        .paletteNum = WAVES_PALETTE_FULL_ID,
+    },
     [WIN_WAVES_GOAL_DESC] =
     {
         .bg = BG0_WAVES_TEXT,
@@ -421,9 +436,19 @@ static const u32* Waves_GetThumbnail(enum GoalEnum goal)
     return sWavesInformation[goal].thumbnail;
 }
 
+static const u32* Waves_GetImage(enum GoalEnum goal)
+{
+    return sWavesInformation[goal].image;
+}
+
 const u16* Waves_GetPalette(enum GoalEnum goalId)
 {
     return sWavesInformation[goalId].palette;
+}
+
+const u16* Waves_GetFullPalette(enum GoalEnum goalId)
+{
+    return sWavesInformation[goalId].fullPalette;
 }
 
 const u32 Waves_GetGoal(enum GoalEnum goalId)
@@ -806,6 +831,8 @@ static void Waves_DisplayPageContent(void)
         Waves_PrintLandingPage();
     else
         Waves_DisplayGoalPage(GetGoalFromCurrentPosition());
+
+    Waves_DrawGoalImage();
 }
 
 static void Waves_InitWindows(void)
@@ -1134,7 +1161,7 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
     TempSpriteTemplate.paletteTag = WAVES_PAL_ICON_SPRITE_TAG;
     TempSpriteTemplate.callback = SpriteCB_HideThumbnails,
 
-        LoadSpriteSheet(&sSpriteSheet_Thumbnail);
+    LoadSpriteSheet(&sSpriteSheet_Thumbnail);
     LoadSpritePalette(&sWavesSpritePalette);
     u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
     gSprites[spriteId].oam.priority = 1;
@@ -1427,7 +1454,6 @@ static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, enum GoalE
     return;
 }
 static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
-
 {
     return;
 }
@@ -1442,10 +1468,7 @@ static void Waves_MakeGoalSpritesInvisible(void)
     enum WavesMode mode = Waves_GetMode();
 
     for (enum GoalEnum goal = 0; goal < GOAL_COUNT; goal++)
-    {
-        u32 spriteId = Waves_GetSpriteId(mode,goal);
-        gSprites[spriteId].invisible = TRUE;
-    }
+        gSprites[Waves_GetSpriteId(mode,goal)].invisible = TRUE;
 }
 
 static void Waves_SaveSpriteId(enum WavesMode mode, enum GoalEnum goal, u32 id)
@@ -1463,5 +1486,34 @@ static void Waves_ResetAllSpriteIds(void)
     for (enum WavesMode mode = 0; mode < WAVES_MODE_MAIN_COUNT; mode++)
         for (enum GoalEnum goal = 0; goal < GOAL_COUNT; goal++)
             Waves_SaveSpriteId(mode,goal,SPRITE_NONE);
+}
+
+static void Waves_DrawGoalImage(void)
+{
+    enum WavesMode mode = Waves_GetMode();
+    if (mode == WAVES_MODE_LANDING_PAGE)
+        return;
+
+    enum WavesWindowsGoal windowId = WIN_WAVES_GOAL_IMAGE;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Waves_PrintGoalImage(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void Waves_PrintGoalImage(u32 windowId)
+{
+    enum GoalEnum goal = GetGoalFromCurrentPosition();
+    Waves_LoadFullImagePalette(goal);
+    u32 width = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_WIDTH));
+    u32 height = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_HEIGHT));
+    u32 size = width * height / 2;
+
+    CopyToWindowPixelBuffer(windowId,Waves_GetImage(goal), size,0);
+}
+
+static void Waves_LoadFullImagePalette(enum GoalEnum goalId)
+{
+    const u16* palette = Waves_GetFullPalette(goalId);
+    LoadPalette(palette, WAVES_PALETTE_FULL_SLOT, PLTT_SIZE_4BPP);
 }
 
