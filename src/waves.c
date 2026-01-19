@@ -112,12 +112,13 @@ static enum WavesMode Waves_GetMode(void);
 static void Waves_SetMode(enum WavesMode mode);
 static void Waves_DisplayGoalDesc(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_DisplayGoalPage(enum GoalEnum goalId);
+static void Waves_CalculateMoneyAmounts(struct MoneyStruct *moneyStruct);
 static void Waves_DisplayGoalProgress(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_PrintGoalDescText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
+static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
+static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
+static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
+static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
 static void Waves_MakeGoalSpritesInvisible(void);
 static void Waves_SaveSpriteId(enum WavesMode mode, enum GoalEnum goal, u32 id);
 static u32 Waves_GetSpriteId(enum WavesMode mode, enum GoalEnum goal);
@@ -1132,15 +1133,17 @@ static void Waves_PrintCard(enum GoalEnum goalId)
 
 static void Waves_PrintAllCardThumbnails(void)
 {
-    for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
+    for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; (goalId != GOAL_NONE); goalId--)
         Waves_PrintCardThumbnail(goalId);
 }
 
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
 {
-    u32 x = WAVES_THUMBNAIL_X_POSITION + WAVES_THUMBNAIL_X_PADDING * (goalId % WAVES_COLUMN_COUNT);
-    u32 y = WAVES_THUMBNAIL_Y_POSITION + WAVES_THUMBNAIL_Y_PADDING * (goalId / WAVES_COLUMN_COUNT);
+    u32 goalPosition = (GOAL_COUNT - goalId) - 1;
+    u32 x = WAVES_THUMBNAIL_X_POSITION + WAVES_THUMBNAIL_X_PADDING * (goalPosition % WAVES_COLUMN_COUNT);
+    u32 y = WAVES_THUMBNAIL_Y_POSITION + WAVES_THUMBNAIL_Y_PADDING * (goalPosition / WAVES_COLUMN_COUNT);
     u32 spriteTag = (WAVES_SPRITE_TAG + goalId);
+    u32 palTag = WAVES_PAL_ICON_SPRITE_TAG + goalId;
 
     struct SpriteSheet sSpriteSheet_Thumbnail =
     {
@@ -1152,13 +1155,13 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
     const struct SpritePalette sWavesSpritePalette =
     {
         .data = Waves_GetPalette(goalId),
-        .tag = WAVES_PAL_ICON_SPRITE_TAG,
+        .tag = palTag,
     };
 
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     TempSpriteTemplate.tileTag = spriteTag;
-    TempSpriteTemplate.paletteTag = WAVES_PAL_ICON_SPRITE_TAG;
+    TempSpriteTemplate.paletteTag = palTag;
     TempSpriteTemplate.callback = SpriteCB_HideThumbnails,
 
     LoadSpriteSheet(&sSpriteSheet_Thumbnail);
@@ -1398,23 +1401,26 @@ static void Waves_DisplayGoalPage(enum GoalEnum goalId)
 
 static void Waves_DisplayGoalProgress(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
 {
+    struct MoneyStruct moneyStruct = {0};
+    Waves_CalculateMoneyAmounts(&moneyStruct);
+
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalRaisedText(windowId,goalId);
+    Waves_PrintGoalRaisedText(windowId,&moneyStruct);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalPlayerText(windowId,goalId);
+    Waves_PrintGoalPlayerText(windowId,&moneyStruct);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalPassiveText(windowId,goalId);
+    Waves_PrintGoalPassiveText(windowId,&moneyStruct);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalTotalText(windowId,goalId);
+    Waves_PrintGoalTotalText(windowId,&moneyStruct);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 }
@@ -1444,21 +1450,31 @@ static void Waves_PrintGoalDescText(enum WavesWindowsGoal windowId, enum GoalEnu
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
+static void Waves_CalculateMoneyAmounts(struct MoneyStruct *moneyStruct)
+{
+    enum GoalEnum goal = GetGoalFromCurrentPosition();
+    moneyStruct->playerPercent =  Waves_GetPlayerPercent(goal);
+    moneyStruct->passivePercent =  Waves_GetPassivePercent(goal);
+    moneyStruct->goal = Waves_GetGoal(goal);
+    moneyStruct->playerCash =  moneyStruct->playerPercent * moneyStruct->goal;
+    moneyStruct->passiveCash =  moneyStruct->passivePercent * moneyStruct->goal;
+}
+
+static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
 {
     return;
 }
 
-static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
+static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
 {
     return;
 }
-static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
+static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
 {
     return;
 }
 
-static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
+static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
 {
     return;
 }

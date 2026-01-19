@@ -27,6 +27,15 @@ struct WavesState
     u8 cursorSpriteId;
 };
 
+struct MoneyStruct
+{
+    u32 playerCash;
+    u32 passiveCash;
+    u8 playerPercent;
+    u8 passivePercent;
+    u32 goal;
+};
+
 void CB2_WavesFromStartMenu(void);
 void Waves_DoDailyPassiveIncrease(u32);
 
