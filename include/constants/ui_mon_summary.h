@@ -470,7 +470,8 @@ struct MonSummaryResources
             u32 slotIdx:2;
             u32 optionIdx:2;
             u32 newSlotIdx:2; // reorder
-            u32 pad:26;
+            u32 subMode:8;    // backup for reorder
+            u32 pad:18;
         } moves;
     } arg;
 };

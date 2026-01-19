@@ -560,12 +560,12 @@ static const struct {
 
 static const u8 sMovesPageMisc_ReorderOption_SwitchWhichMove[] = _("Switch with which move?");
 
-static const u16 sMovesPageMisc_OptionMenuTilemap[] = INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin");
 static const u16 *const sMovesPageMisc_MenuTilemaps[] =
 {
-    [SUMMARY_MOVES_SUB_MODE_NONE]                                      = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
-    [SUMMARY_MOVES_SUB_MODE_DETAILS]                                   = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
-    [SUMMARY_MOVES_SUB_MODE_OPTIONS ... SUMMARY_MOVES_SUB_MODE_REORDER] = sMovesPageMisc_OptionMenuTilemap,
+    [SUMMARY_MOVES_SUB_MODE_NONE]    = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
+    [SUMMARY_MOVES_SUB_MODE_DETAILS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
+    [SUMMARY_MOVES_SUB_MODE_OPTIONS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin"),
+    [SUMMARY_MOVES_SUB_MODE_REORDER] = NULL
 };
 
 static const struct SpriteTemplate sMovesPageMisc_ArrowsSpriteTemplate =

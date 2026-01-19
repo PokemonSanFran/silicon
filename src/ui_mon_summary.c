@@ -851,9 +851,10 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             break;
         case SUMMARY_MOVES_SUB_MODE_REORDER:
             MovesPageMisc_SwapMoves();
-            SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
             MovesPageMisc_SetSlotIndex(MovesPageMisc_GetNewSlotIndex());
             MovesPageMisc_SetNewSlotIndex(0);
+            SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
+            sMonSummaryDataPtr->arg.moves.subMode = 0;
             SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
             PlaySE(SE_SUCCESS);
             return;
@@ -880,7 +881,25 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
             break;
         case SUMMARY_MOVES_SUB_MODE_REORDER:
-            SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
+            SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
+            break;
+        }
+
+        SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+        PlaySE(SE_SELECT);
+        return;
+    }
+
+    if (JOY_NEW(SELECT_BUTTON))
+    {
+        switch (subMode)
+        {
+        default:
+            return;
+        case SUMMARY_MOVES_SUB_MODE_DETAILS:
+            sMonSummaryDataPtr->arg.moves.subMode = SUMMARY_MOVES_SUB_MODE_DETAILS;
+            MovesPageMisc_SetNewSlotIndex(MovesPageMisc_GetSlotIndex());
+            SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
             break;
         }
 
@@ -903,6 +922,8 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
         // add move_reminder feature here
         break;
     case SUMMARY_MOVES_OPTION_REORDER:
+        MovesPageMisc_SetNewSlotIndex(MovesPageMisc_GetSlotIndex());
+        sMonSummaryDataPtr->arg.moves.subMode = SUMMARY_MOVES_SUB_MODE_OPTIONS;
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
         break;
     case SUMMARY_MOVES_OPTION_FORGET:
@@ -2388,7 +2409,11 @@ static void MovesPage_HandleMisc(void)
     enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
 
     MovesPageMisc_TrySpawnCursors();
-    CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[subMode], 1, 4, 16, 8);
+
+    if (sMovesPageMisc_MenuTilemaps[subMode] != NULL)
+        CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[subMode], 1, 4, 16, 8);
+    else
+        CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[0], 1, 4, 16, 8);
 
     if (!SummaryInput_IsWithinSubMode()) return;
 
@@ -2399,7 +2424,7 @@ static void MovesPage_HandleMisc(void)
     case SUMMARY_MOVES_SUB_MODE_DETAILS:
         MovesPageMisc_PrintDetails(SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()]);
         break;
-    case SUMMARY_MOVES_SUB_MODE_OPTIONS ... SUMMARY_MOVES_SUB_MODE_REORDER:
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         MovsPageMisc_PrintOptions();
         break;
     }
@@ -2693,7 +2718,7 @@ static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *sprite)
 {
     enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
 
-    sprite->invisible = subMode < SUMMARY_MOVES_SUB_MODE_OPTIONS;
+    sprite->invisible = subMode != SUMMARY_MOVES_SUB_MODE_OPTIONS;
     if (sprite->invisible) return;
 
     sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetOptionIndex();
