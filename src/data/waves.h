@@ -13,7 +13,7 @@ static struct WavesData sWavesInformation[GOAL_COUNT] =
     [GOAL_FOOD_SECURITY] =
     {
         .title = COMPOUND_STRING("Food Security"),
-        .desc = COMPOUND_STRING("Use the mutual aid fund to scale up and be less reliant on charity, and use that to feed more people."),
+        .desc = COMPOUND_STRING("Scale up existing food programs, be less reliant on charity, and feed more people."),
         .thumbnail = (const u32[]) INCBIN_U32("graphics/ui_menus/waves/assets/small.4bpp"),
         .palette = (const u16[]) INCBIN_U16("graphics/ui_menus/waves/palettes/sprite.gbapal"),
         .goal = 400810,
@@ -24,7 +24,7 @@ static struct WavesData sWavesInformation[GOAL_COUNT] =
     [GOAL_HEALTHCARE] =
     {
         .title = COMPOUND_STRING("Healthcare"),
-        .desc = COMPOUND_STRING("Use the mutual aid fund to get a doctor working full time to provide healthcare to those who can't otherwise access it."),
+        .desc = COMPOUND_STRING("Fund a doctor that provides healthcare to those who can't otherwise access it."),
         .thumbnail = (const u32[]) INCBIN_U32("graphics/ui_menus/waves/assets/small.4bpp"),
         .palette = (const u16[]) INCBIN_U16("graphics/ui_menus/waves/palettes/sprite.gbapal"),
         .goal = 64151,
@@ -46,7 +46,7 @@ static struct WavesData sWavesInformation[GOAL_COUNT] =
     [GOAL_CRIMINAL_REFORM] =
     {
         .title = COMPOUND_STRING("Criminal Reform"),
-        .desc = COMPOUND_STRING("Build programs to help harm victims and those who cause harm reach a place of real healing and justice."),
+        .desc = COMPOUND_STRING("Develop programs to help victims and perpetrators of harm reach real healing and justice."),
         .thumbnail = (const u32[]) INCBIN_U32("graphics/ui_menus/waves/assets/small.4bpp"),
         .palette = (const u16[]) INCBIN_U16("graphics/ui_menus/waves/palettes/sprite.gbapal"),
         .goal = 122161,

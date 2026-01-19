@@ -21,6 +21,8 @@ struct WavesState
     enum WavesCursorPosition position;
     enum WavesMode mode;
     u8 donatePosition;
+    u8 spriteId[WAVES_MODE_MAIN_COUNT][GOAL_COUNT];
+    u8 cursorSpriteId;
 };
 
 void CB2_WavesFromStartMenu(void);
