@@ -19,7 +19,7 @@
 
 `questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING) `TRUE`
 
-### Adelaide Not Arrested
+### Lucrezia Not Arrested
 
 `VAR_STORYLINE_STATE` >= STORY_CLEAR`
 
@@ -232,15 +232,15 @@ A variable to track the the quest.
 ## `MAP_SHARPRISESPIRE_TOP`
 
 ### Interact with Bookshelf and Grotto Quest Incomplete
-* Game describes a list of books on Adelaide's bookshelf, including a title about learning Esperanto
+* Game describes a list of books on Lucrezia's bookshelf, including a title about learning Esperanto
 
-### Interact with Bookshelf and Adelaide Not Arrested
-* Game describes a list of books on Adelaide's bookshelf, including a title about learning Esperanto
+### Interact with Bookshelf and Lucrezia Not Arrested
+* Game describes a list of books on Lucrezia's bookshelf, including a title about learning Esperanto
 * Player exclaims that they're not here to read
 
 ### Interact with Bookshelf and Grotto Quest Complete
 `VAR_QUEST_ULTRAWORMHOLE_RESEARCH` is set to `HAS_UNLOCKED`.
-* Game describes a list of books on Adelaide's bookshelf, including a title about learning Esperanto
+* Game describes a list of books on Lucrezia's bookshelf, including a title about learning Esperanto
 * Player reacts to seeing a book about Esperanto and wonders if that was the same language Professormadrone's notes were in
 * PLAYER pulled on the spine of the book, but it didn't budge.
 * The bookshelf slid back in the wall!
@@ -254,7 +254,7 @@ Screen fades from black.
 
 ### Interact with Professormadrone and Quest Inactive
 **NOTE FOR FUDJ**: I would love to figure out how to cut this down or moves parts of it somewhere else. It just feels really long.
-* Professormadrone asks if Adelaide sent you, is surprised to see anybody
+* Professormadrone asks if Lucrezia sent you, is surprised to see anybody
 * Player explain that Adeliade was arrested and asks if Professormadrone is working with them too
 * Professormadrone mutters about as long as the lights are still on
 * Professormadrone welcomes the Player to the the Sharprise Wormhole Research Facility
@@ -316,7 +316,7 @@ Player faces north.
 * Professormadrone is surprised the Player has heard of the language and chuckles to themselves
 Professormadrone runs ten metatiles south.
 Play `SE_BEEP`.
-* Professormadrone says all of their work is written in Esperanto, but Adelaide asked them to keep backups in a common language - the player should be able to read the computers in the lab now
+* Professormadrone says all of their work is written in Esperanto, but Lucrezia asked them to keep backups in a common language - the player should be able to read the computers in the lab now
 * Professormadrone says the rest should be self explanatory, they worked very hard on making the interface user friendly.
 
 ### Interact with Professormadrone and Quest Active and Has Demoed Machine
@@ -351,7 +351,7 @@ Quest complete.
 * Player asks if Professormadrone ever leaves
 * Professormadrone explains that they're a Faller - somebody that has come across the bounds of time and space through an Ultra Wormhole and lost their memories
 * Professormadrone has forgotten everything about their personal life, but remembered everything about their research
-* Professormadrone says when they landed here, they landed in Adelaide's office, and the two have been collaborating ever since
+* Professormadrone says when they landed here, they landed in Lucrezia's office, and the two have been collaborating ever since
 * Sharprise funds Professormadrone's research without question and has only had one restriction they can't communicate with anybody outside of Sharprise due to the highly dangerous nature of their work
 * Professormadrone realizes the trade is insane, but Professormadrone doesn't have a life to go back to, and they're truly happy here, able to work on their research without distractions
 * Player thinks that Professormadrone's fall through the Ultra Wormhole may have scrambled more than their memory
@@ -420,7 +420,7 @@ Unstablepannenspouse faces the Player.
 * Player remarks that doesn't understand what Unstablepannenspouse is talking about
 
 # Summary & Notes
-Player returns to Adelaide's office and interacts with a bookshelf, which has a book about Esperanto on it. The Player recognizes the language from working with Pannen, and attemps to pick up the book, which triggers a secret staircase behind the bookshelf. Player goes down the bookcase which leads to a secret lab under the Salesforce Tower where they meet Pannen again, who has no memory of the player and is significantly older. Pannen attempts to use a new technology where Pokémon are brought from other dimensions into Resido, and asks Player to go throughout the region and capture them. In exchange, Pannen will help transport the Player to dimensions where they can battle and capture the Ultra Beasts. After unlocking all of the dimensions, Pannen gifts the Player with a Type:Null. 
+Player returns to Lucrezia's office and interacts with a bookshelf, which has a book about Esperanto on it. The Player recognizes the language from working with Pannen, and attemps to pick up the book, which triggers a secret staircase behind the bookshelf. Player goes down the bookcase which leads to a secret lab under the Salesforce Tower where they meet Pannen again, who has no memory of the player and is significantly older. Pannen attempts to use a new technology where Pokémon are brought from other dimensions into Resido, and asks Player to go throughout the region and capture them. In exchange, Pannen will help transport the Player to dimensions where they can battle and capture the Ultra Beasts. After unlocking all of the dimensions, Pannen gifts the Player with a Type:Null. 
 
 The alternate dimensions are palette swapped versions of the routes where the totems are found. These dimensions have no encounters, no humans, and some of them have a puzzle on the route that must be solved before getting to the Ultra Beast. For example, if Totem Kingler unlock Buzzwole and is found on Route 1, the Buzzwole dimension is an alternate Route 1.
 

@@ -95,18 +95,18 @@ This cutscene only plays if the players to cross into western Residowithout gogg
 * Alicia defeats the Gym Leader of PerlaciaCity, Emrys.
 
 ## Wow You're Strong
-* When Alicia leaves the PerlaciaCity Gym, they are approached by the League Commissioner, Adelaide.
-* Adelaide exclaims about Alicia's exciting match against Emrys, and claims they're a big fan.
-* Adelaide invites Alicia to visit the League Ops department within the SharpriseSpire.
+* When Alicia leaves the PerlaciaCity Gym, they are approached by the League Commissioner, Lucrezia.
+* Lucrezia exclaims about Alicia's exciting match against Emrys, and claims they're a big fan.
+* Lucrezia invites Alicia to visit the League Ops department within the SharpriseSpire.
 
 ## The Gangs All Here
 Access to this cutscene is blocked until after "Wow You're Strong".
 * Alicia arrives on the League Ops floor of the SharpriseSpire.
 * Oliver spots Alicia. Oliver is in the tower to deliver a package to the CEO.
 * Oliver reveals they have no battle ability, but most of the Trainers on League Ops do, and they can get rowdy at times.
-* Alicia escorts Oliver through the floor, getting to Adelaide's office.
-* Oliver delivers the package to Adelaide. Adelaide reveals the package was actually something he got for the trainers who visit them, and gives Alicia the VS Seeker.
-* Oliver reveals that Adelaide is also the CEO of SharpriseCapital, and takes on the title of League Commissioner as well.
+* Alicia escorts Oliver through the floor, getting to Lucrezia's office.
+* Oliver delivers the package to Lucrezia. Lucrezia reveals the package was actually something he got for the trainers who visit them, and gives Alicia the VS Seeker.
+* Oliver reveals that Lucrezia is also the CEO of SharpriseCapital, and takes on the title of League Commissioner as well.
 
 ## Always Watching Wazowski
 Access to this cutscene is blocked until after "Wow You're Strong".
@@ -177,7 +177,7 @@ All the cutscenes in Act 1.4 occur in the order listed here.
 	* Arantraz was a prison for Resido's most dangerous criminals, known for its advanced facilities and successful rehabilitation programs. 
 	* However, the criminal underworld staged a prison riot, taking guards hostage and demanding control of the island. 
 	* The prisoners turned to the citizens for support, and Magnus, a member of the Resido Elite Four, became a vocal ally. 
-	* As tensions adelaide, a devastating earthquake struck the region, destroying the prison and causing the prisoners to surrender. 
+	* As tensions lucrezia, a devastating earthquake struck the region, destroying the prison and causing the prisoners to surrender. 
 	* They were charged and sent to different prisons, while Arantraz was shut down. 
 	* The plaza was dedicated to the guards who lost their lives in the disaster, and some claim their spirits still haunt the area.
 * Alicia defeats all the Trainers and get a prize.
@@ -217,8 +217,8 @@ Access to this cutscene is blocked until after "You Look Tired".
 * Alicia enters Keiying's mansion.
 * Keiying's excited children run up to Alicia, asking for autographs and excited questions.
 * Keiying apologizes for their excitement, noting that Alicia is already getting famous within the region.
-* Keiying invites the Alicia to have some wine, and Keiying talks about the goals of Adelaide and SharpriseCapital within the region.
-* Keiying shares that Adelaide is a brilliant business person who saw potential in the league and brought in corporate sponsors like Presto, Arriba, and Facebook. 
+* Keiying invites the Alicia to have some wine, and Keiying talks about the goals of Lucrezia and SharpriseCapital within the region.
+* Keiying shares that Lucrezia is a brilliant business person who saw potential in the league and brought in corporate sponsors like Presto, Arriba, and Facebook. 
 * Keiying also talks about the economic impact of the league and its contribution to revenue generation in the Kanto region, and wanting to emulate that in Resido.
 * Keiying and SharpriseCapital believe that their work will bring even greater prosperity to the region, so they can lift everybody up.
 * A bell rings, dinner is served.
@@ -281,8 +281,8 @@ This cutscene plays after the player has defeated 5 Gym Leaders AND has walked 1
 All the cutscenes in Act 2.2 occur in the order listed here.
 
 ## The Strike Strikes Back
-* Alicia gets a call from Adelaide who congratulates them on getting all defeating all eight Gym Leaders.
-* Adelaide asks the player to come to Route2, where the SharpriseStadium Construction site is.
+* Alicia gets a call from Lucrezia who congratulates them on getting all defeating all eight Gym Leaders.
+* Lucrezia asks the player to come to Route2, where the SharpriseStadium Construction site is.
 * As Alicia arrives, Oliver and Charlotte are there, waiting for Alicia.
 * Oliver begins to explain the situation, when a masked and hooded figure appears before the crowd, flanked by TheTide member.
 * They introduce themselves as Alcmene, and are the leader of TheTide.
@@ -333,13 +333,13 @@ All the cutscenes in Act 3.3 occur in the order listed here.
 ## Have You Seen The News?
 * Near the end of the duo's training, Oliver arrives to see Charlotte and Alicia.
 * There is no service in LeaverraForest, so none of them were aware that TheTide has taken over the social media accounts of SharpriseCapital and are blasting the Internet with anti-League propaganda.
-* Adelaide has sent Oliver to retrieve Charlotte and Alicia and ask for their help in stopping the hack.
+* Lucrezia has sent Oliver to retrieve Charlotte and Alicia and ask for their help in stopping the hack.
 * Alicia, Charlotte and Oliver go to the SharpriseSpire.
 
 ## Welcome to the War Room.
-* In a conference room in the SharpriseSpire, two SharpriseCapital engineers explain the situation to Oliver, Adelaide, Charlotte, Alicia, and the Police Chief.
+* In a conference room in the SharpriseSpire, two SharpriseCapital engineers explain the situation to Oliver, Lucrezia, Charlotte, Alicia, and the Police Chief.
 * The Police Chief claims they knows where TheTide is operating out of. Their goal is to storm their HQ and shut things down that way.
-* Adelaide heard about Charlotte and Alicia's work on the Garbodor, and want the Trainers to help with the raid.
+* Lucrezia heard about Charlotte and Alicia's work on the Garbodor, and want the Trainers to help with the raid.
 * The Police Chief, annoyed with the idea of children helping with a police raid, walks out, telling the pair to meet him at the ferry.
 
 ## Survival Chance = 33.3%
@@ -369,8 +369,8 @@ All the cutscenes in Act 3.4 occur in the order listed here.
 ## Here's How This Is Going To Go....
 * The 16 trainers in the Championship are in the locker room at SharpriseStadium. 
     * Among the Trainers include Kai, Charlotte, and Alicia. 
-* Adelaide and Oliver are explaining how the Championship works to the Trainers.
-* Adelaide finishes the explanation (Round Robin -> Single Elimination) and tells the Trainers they'll start in a few minutes.
+* Lucrezia and Oliver are explaining how the Championship works to the Trainers.
+* Lucrezia finishes the explanation (Round Robin -> Single Elimination) and tells the Trainers they'll start in a few minutes.
 
 ## Why Didn't You Rat Me Out?
 * Alicia goes to leave the room to get some fresh air, but Kai stops them and asks to talk.
@@ -396,7 +396,7 @@ All the cutscenes in Act 3.4 occur in the order listed here.
 * Alicia battles Kai and wins.
 
 ## Welcome to the Hall of Fame.
-* Adelaide comes onto the stage and welcomes Alicia to the Hall of Fame.
+* Lucrezia comes onto the stage and welcomes Alicia to the Hall of Fame.
 * Credits roll.
 
 # ACT 4.1
@@ -636,21 +636,21 @@ This cutscene plays after the player solves the riddle in the cryptic message, w
 * Tala is outside the SharpriseSpire, ready to start a protest to distract security.
 * The team breaks into Ramesh's house, figures out the code to the door, and are able to use the warp panel to go directly into SharpriseCapital's offices.
 * The group splits up and begins ascending the tower.
-* Alicia reaches Adelaide's office in League Ops, but Charlotte is sitting in Adelaide's chair instead.
-* Alicia defeats Charlotte and demands to know where Adelaide is. Charlotte reveals a secret set of stairs that goes up to the observation deck.
+* Alicia reaches Lucrezia's office in League Ops, but Charlotte is sitting in Lucrezia's chair instead.
+* Alicia defeats Charlotte and demands to know where Lucrezia is. Charlotte reveals a secret set of stairs that goes up to the observation deck.
 
 ## You Can't Stop Me!
-* Adelaide is answering emails on the observation desk and is annoyed with Alicia's intrusion.
-* They begin to drop the mask a little, stating that Alicia is just an obstacle, and Adelaide will have to deal with them.
-* Alicia defeats Adelaide in battle.
-* Adelaide gets angry and begins to berate Alicia, but the TV behind them turns on.
+* Lucrezia is answering emails on the observation desk and is annoyed with Alicia's intrusion.
+* They begin to drop the mask a little, stating that Alicia is just an obstacle, and Lucrezia will have to deal with them.
+* Alicia defeats Lucrezia in battle.
+* Lucrezia gets angry and begins to berate Alicia, but the TV behind them turns on.
 
 ## We Can Stop You, Actually.
 * The TV shows Keiying on a live stream, admitting to their and SharpriseCapital's crimes.
-* Adelaide has a meltdown, turning off the TV and calling for security.
-* Alicia informs Adelaide that they defeated everybody on the way up - nobody is coming to save Adelaide.
-* Adelaide attacks Alicia again with another set of six Pokémon, but is still defeated.
-* The police come and arrest Adelaide as they have another meltdown.
+* Lucrezia has a meltdown, turning off the TV and calling for security.
+* Alicia informs Lucrezia that they defeated everybody on the way up - nobody is coming to save Lucrezia.
+* Lucrezia attacks Alicia again with another set of six Pokémon, but is still defeated.
+* The police come and arrest Lucrezia as they have another meltdown.
 
 ## Epilogue
 * SharpriseCapital's members are prep walked out of the building.

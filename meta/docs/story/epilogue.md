@@ -1,4 +1,4 @@
-licia defeats Adelaide. A cutscene plays where Adelaide is taken away from the police, followed by the rest of the C-Suite of Sharprise Captial. Player watches the Elite Four leaves the Spire.
+licia defeats Lucrezia. A cutscene plays where Lucrezia is taken away from the police, followed by the rest of the C-Suite of Sharprise Captial. Player watches the Elite Four leaves the Spire.
 > 
 > The player is asked if they want to save.
 > 
@@ -6,7 +6,7 @@ licia defeats Adelaide. A cutscene plays where Adelaide is taken away from the p
 > 
 > Kai is standing on Arantraz, looking out at ocean like the edgelord he is. Tala approaches from the south, telling Kai that this spot is where she usually relaxes when she feels accomplished. She asks if Kai proud of the work they've done.
 > 
-> Kai laughs and asks if Tala is serious. Kai exclaims that the new Sharprise CEO is just another corporate suit, who might not be an outright murderer, but certainly isn't going to do anything meaningful. Tala asks if Kai expected Player beating Adelaide to be the end of Sharprise, and the company would just quitely go away. Kai realizes that he wasn't sure what he was expecting, but hoped that they had done more.
+> Kai laughs and asks if Tala is serious. Kai exclaims that the new Sharprise CEO is just another corporate suit, who might not be an outright murderer, but certainly isn't going to do anything meaningful. Tala asks if Kai expected Player beating Lucrezia to be the end of Sharprise, and the company would just quitely go away. Kai realizes that he wasn't sure what he was expecting, but hoped that they had done more.
 > 
 > Tala remarks that Alicia is a fantastic example of the The Tide doing more. Alicia came to the region totally in support of Sharprise, and Kai managed to redirect Alicia's talents towards actually helping and rebuilding the region - and by continuing that work, they're going to keep doing that for other Trainers.
 
