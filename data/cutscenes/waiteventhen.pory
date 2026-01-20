@@ -207,38 +207,6 @@ script WaitEvenThen_PostBossDialogue {
         end
 }
 
-text gText_WaitEvenThen_IFoundTheAccess {
-    format("I found the access commands. I think I can turn this off, but I’m certain that it's going to attack us when we do.")
-}
-
-text gText_WaitEvenThen_AndICanHandle {
-    format("{PLAYER} and I can handle it. Let it rip!")
-}
-
-text gText_WaitEvenThen_Yerrrraaaa {
-    format("Yerrrraaaaaa!")
-}
-
-text gText_WaitEvenThen_DamnAPowerSpot {
-    format("Damn, a Power Spot, all the way out here?")
-}
-
-text gText_WaitEvenThen_AndTheGovernment {
-    format("Between SharpRise Capital and the government, I guess nothing is off limits.")
-}
-
-text gText_WaitEvenThen_IllHaveSomeOther {
-    format("I’ll have some other TheTide members clear out the rest of the trapped Pokémon… Let’s go back to HalaiIsland.")
-}
-
-text gText_WaitEvenThen_ComingWithMe {
-    format("Coming with me, {PLAYER}?")
-}
-
-text gText_WaitEvenThen_MeetUsIn {
-    format("Meet us in the center of town, okay?")
-}
-
 movement WaitEvenThen_WalkToSleepingA {
     walk_right * 6
         walk_down * 2

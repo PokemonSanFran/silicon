@@ -157,7 +157,7 @@ script WhyAreYouHelpingThem_PreBattleBoss_Script {
 
         closemessage
 
-        trainerbattle_continue_after_lose(TRAINER_ALCMENE,gText_WhyAreYouHelpingThem_WaitAMinute)
+        trainerbattle_continue_after_lose(TRAINER_ALCMENE,format("Wait a minute…"))
         goto(WhyAreYouHelpingThem_PostBattleBoss_Dialogue)
 }
 
@@ -264,7 +264,7 @@ script WhyAreYouHelpingThem_InteractBattle_Script {
 script WhyAreYouHelpingThem_StartBattle_Script{
     msgbox(format("Always have been."),,SPEAKER_KAI_TIDE)
     closemessage
-    trainerbattle_no_intro(TRAINER_KAI_WHYAREYOUHELPINGTHEM,gText_WhyAreYouHelpingThem_AnotherVictory)
+    trainerbattle_no_intro(TRAINER_KAI_WHYAREYOUHELPINGTHEM,format("Another victory for the establishment.")) //PSF TODO EMOTE sigh
     goto(WhyAreYouHelpingThem_PostBattle_Dialogue)
 }
 
@@ -397,174 +397,6 @@ script WhyAreYouHelpingThem_StartChampionship_Dialogue {
                 fadescreen(FADE_TO_BLACK)
                 warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,9,6)
         }
-}
-
-text gText_WhyAreYouHelpingThem_StructuralBreach {
-    format("STRUCTURAL BREACH DETECTED. BASE IS NOW SHIFTING TO DEFENSE MODE. EVACUATE IMMEDIATELY.")
-}
-
-text gText_WhyAreYouHelpingThem_DefenseMode {
-    format("“Defense mode” is pretty advanced for some abandoned buildings.")
-}
-
-text gText_WhyAreYouHelpingThem_WeShouldRedefine {
-    format("We should redefine abandoned…")
-}
-
-text gText_WhyAreYouHelpingThem_LetsSplitUp {
-    format("Let's split up. I'm faster than you and can cut off the leaders before they escape.")
-}
-
-text gText_WhyAreYouHelpingThem_WhaFineIllTry {
-    format("wha - fine, I'll try to find the source of the hack and shut it down.")
-}
-
-text gText_WhyAreYouHelpingThem_SeeYa {
-    format("See ya.")
-}
-
-text gText_WhyAreYouHelpingThem_GoAfterIllHold {
-    format("Go after Alcmene! I'll hold this one off.")
-}
-
-text gText_WhyAreYouHelpingThem_ItsAShameThatThe {
-    format("It's a shame that the cops have totally infiltrated our youth. ")
-}
-
-text gText_WhyAreYouHelpingThem_ButBeatingYou {
-    format("But beating you is going to be the best route out of here.")
-}
-
-text gText_WhyAreYouHelpingThem_WaitAMinute {
-    format("Wait a minute…")
-}
-
-text gText_WhyAreYouHelpingThem_YoureIncredible {
-    format("You're incredible. Or a cheater. Can't quite tell. Either way, you can have this.")
-}
-
-text gText_WhyAreYouHelpingThem_IDidntEvenTouch {
-    format("…I didn't even touch them…")
-}
-
-text gText_WhyAreYouHelpingThem_ImSorryYouHad {
-    format("I'm sorry you have to experience this. I hope you eventually understand what's at stake here, {PLAYER}. Let me help you.")
-}
-
-text gText_WhyAreYouHelpingThem_IHandledTheBrat {
-    format("I handled the brat. I'm guessing you beat -")
-}
-
-text gText_WhyAreYouHelpingThem_DamnYouToo {
-    format("Damn, you too, {PLAYER}?")
-}
-
-text gText_WhyAreYouHelpingThem_WhatWasAllThatShit {
-    format("What was all that shit you tried to tell me before?! What the hell is TheTide doing?")
-}
-
-text gText_WhyAreYouHelpingThem_WeveGotToHelp {
-    format("We've got to help more comrades escape. Another time.")
-}
-
-text gText_WhyAreYouHelpingThem_ThisPlaceIs {
-    format("This place is swarming with cops. You two need to get the hell out, right now. This goes straight out.")
-}
-
-text gText_WhyAreYouHelpingThem_WeCantLeavePeople {
-    format("We can't leave people behind. ")
-}
-
-text gText_WhyAreYouHelpingThem_WeDontHaveTime {
-    format("We don't have time for this! If you get arrested, this all falls apart! You. Need. To. Go.")
-}
-
-text gText_WhyAreYouHelpingThem_IThinkTheyreRight {
-    format("I think they're right.")
-}
-
-text gText_WhyAreYouHelpingThem_YoureWorkingWith {
-    format("You're working with TheTide too?!?")
-}
-
-text gText_WhyAreYouHelpingThem_AlwaysHaveBeen {
-    format("Always have been.")
-}
-
-text gText_WhyAreYouHelpingThem_AnotherVictory {
-    format("Another victory for the establishment.") //PSF TODO EMOTE sigh
-}
-
-text gText_WhyAreYouHelpingThem_TellsMeYoureAll {
-    format("Adaora tells me you're all good guys… now all this shit? And you? None of this makes any sense!")
-}
-
-text gText_WhyAreYouHelpingThem_WhyWouldIt {
-    format("Why would it? You don't see what your bosses are doing to Resido. You don't see what you're doing to Resido.")
-}
-
-text gText_WhyAreYouHelpingThem_Player {
-    format("{PLAYER}!")
-}
-
-text gText_WhyAreYouHelpingThem_IGotKnockedOut {
-    format("I got knocked out. Did you stop Alcmene?")
-}
-
-text gText_WhyAreYouHelpingThem_NoILostToo {
-    format("No, I lost too.")
-}
-
-text gText_WhyAreYouHelpingThem_GreatWorkInThere {
-    format("Great work in there, team. Andre, what's the sitrep regarding TheTide leadership?")
-}
-
-text gText_WhyAreYouHelpingThem_WeSpottedAndTheir {
-    format("We spotted Alcmene and their lieutenant escaping on Pokemon by using the move Fly. We were unable to track them given our resources.")
-}
-
-text gText_WhyAreYouHelpingThem_AShameStillWeveShutDown {
-    format("A shame. Still, we've shut down their primary base of operations, and we arrested a bunch of these shitheads. This was an absolute win!")
-}
-
-text gText_WhyAreYouHelpingThem_NotBadInThere {
-    format("Not bad in there. Oliver wants you kids back at CuconuTown Compound.")
-}
-
-text gText_WhyAreYouHelpingThem_WhatADay {
-    format("What… a day. I know that was a lot of pressure, but from what I hear, you were both fantastic. Thank you.")
-}
-
-text gText_WhyAreYouHelpingThem_ItWasADay {
-    format("…it was a day.")
-}
-
-text gText_WhyAreYouHelpingThem_GoodNewsWhileYouWere {
-    format("Good news - while you were training in LeaverraForest, construction on SharpRise Stadium finished up. The Group Stage will start in 3 days. Hopefully, that's enough time to rest up and get ready.")
-}
-
-text gText_WhyAreYouHelpingThem_OhThatWasFast {
-    format("Oh, that was fast. How did you…")
-}
-
-text gText_WhyAreYouHelpingThem_DontWorryAboutIt {
-    format("Don't worry about it! You two just focus on winning! ")
-}
-
-text gText_WhyAreYouHelpingThem_NowIveGotALot {
-    format("Now, I've got a lot of work to do between now and then. I'll see you both in a few days!")
-}
-
-text gText_WhyAreYouHelpingThem_WeveAllGot {
-    format("We've all got some work to do! I'll see you around, {PLAYER}.")
-}
-
-text gText_WhyAreYouHelpingThem_AreYouReadyToBegin {
-    format("Are you ready to begin the Championship?")
-}
-
-text gText_WhyAreYouHelpingThem_WannaCome{
-    format("{PLAYER}, I'm gonna head over in a bit. Wanna come?")
 }
 
 movement WhyAreYouHelpingThem_PoliceRunIn {

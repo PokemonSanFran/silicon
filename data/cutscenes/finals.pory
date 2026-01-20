@@ -47,7 +47,7 @@ script Finals_StartSemifinals_Script {
         waitmovement(0)
         msgbox(format("this is placeholder text."))
         closemessage
-        trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_SEMIFINALS,gText_GroupStages_Placeholder)
+        trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_SEMIFINALS,format(""))
         setvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,PRE_BATTLE_5)
         setvar(VAR_STORYLINE_STATE,STORY_SEMIFINAL_COMPLETE)
         call(Semifinal_Complete_Script)
@@ -64,10 +64,3 @@ script Semifinal_Complete_Script{
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,10,3)
 }
 
-text gText_Finals_YourSemiFinal {
-    format("Your Semifinal match is next. Are you ready?")
-}
-
-text gText_Finals_YourMatchIsUp {
-    format("Your match is up next! Where are you going?")
-}

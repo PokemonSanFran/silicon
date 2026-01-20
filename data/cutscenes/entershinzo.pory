@@ -27,7 +27,7 @@ script EnterShinzo_StartGymBattle_Script
     faceplayer
     msgbox(format("Trainers from Sinnoh can overcome anything, even running a team infested with mongrels!"),,SPEAKER_SHINZO,TAIL_SHOUT)
     closemessage
-    trainerbattle_no_intro(TRAINER_SHINZO, gText_EnterShinzo_ItsAnHonorToLose)
+    trainerbattle_no_intro(TRAINER_SHINZO, format("It's an honor to lose to you."))
     goto(EnterShinzo_ShinzoDefeated_Script)
 }
 
@@ -87,81 +87,3 @@ script EnterShinzo_PostDefeat2_Dialogue {
         end
 }
 
-text gText_EnterShinzo_ReachingTheSummit {
-	format("Congratulations on reaching the summit, {PLAYER}! I'm Shinzo.")
-}
-
-text gText_EnterShinzo_TotallyWornOut {
-	format("Most Trainers are totally worn out when they reach me. Are you a foreigner?")
-}
-
-text gText_EnterShinzo_YeahFromOrre {
-	format("Yeah, from Orre.")
-}
-
-text gText_EnterShinzo_ManyMountainsLikeSinnoh {
-	format("Ah yes. Many mountains, like Sinnoh. Sinnoh is a physically demanding region. The slopes, mountains, and marshes... Trainers have to train their bodies and minds alongside their Pokémon! ")
-}
-
-text gText_EnterShinzo_EverythingIsSoFlat {
-	format("But in Resido, everything is so flat and stale and uninspired... and pudgy. ")
-}
-
-text gText_EnterShinzo_HikedUpAMountain {
-	format("Flat? I hiked up a mountain just to get here!")
-}
-
-text gText_EnterShinzo_ThisCheapImitation {
-	format("And ToraTown... this cheap imitation. These people have no idea what Sinnoh is! They've bastardized our traditions and cultures. I'll show you how a true trainer from Sinnoh battles!")
-}
-
-text gText_EnterShinzo_EnGarde {
-	format("En garde!")
-}
-
-text gText_EnterShinzo_MyHeartIsRacing {
-	format("My heart is racing!")
-}
-
-text gText_EnterShinzo_ImNotFinishedYet {
-	format("I'm not finished yet. I've got this!")
-}
-
-text gText_EnterShinzo_Sinnoh1Orre0 {
-	format("Sinnoh 1, Orre 0!")
-}
-
-text gText_EnterShinzo_ItsAnHonorToLose {
-	format("It's an honor to lose to you.")
-}
-
-text gText_EnterShinzo_ExploitedMyMistakes {
-	format("Thank you, {PLAYER}. You exploited my mistakes amazingly. I hope you're proud!")
-}
-
-text gText_EnterShinzo_BadgeGet{
-	format("You received the ShinzoBadge Badge!")
-}
-text gText_EnterShinzo_TradedPokemonUpTo {
-	format("Traded Pokémon up to Level Psfgymlevel2 will recognize your ShinzoBadge Badge and the skill it represents. That TM teaches Psfgymattacknum2, which does exactly what it sounds like!")
-}
-
-text gText_EnterShinzo_NextTimeWeBattle {
-	format("Next time we battle, I'll be better. I won't let you, or the Sinnoh people, down!")
-}
-
-text gText_EnterShinzo_YouveEarned {
-    format("You've earned a tweet from me!")
-}
-
-text gText_EnterShinzo_NeverExperienced {
-    format("You've never experienced Buzzr? Maybe you're lucky...")
-}
-
-text gText_EnterShinzo_BuzzrIs {
-    format("Buzzr lets you send messages and post updates... its good for keeping up with what regular people think. In this region's Pokémon League, you don't get Badges like back home... instead we post about it on Buzzr. When all the leaders have posted about you, you've qualified for the Championship.")
-}
-
-text gText_EnterShinzo_IsThisYourAccount{
-    format("Okay, is this your account...?")
-}

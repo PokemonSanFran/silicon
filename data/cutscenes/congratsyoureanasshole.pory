@@ -95,56 +95,6 @@ script CongratsYoureanAsshole_FalseTimelineSplit_Script
     }
 }
 
-text gText_CongratsYoureanAsshole_WelcomeBack
-{
-	format("Welcome back, {PLAYER}! A good night’s sleep, I hope? Thought things over?")
-}
-
-text gText_CongratsYoureanAsshole_YeahIWantToWork
-{
-	format("Yeah. I want to work with you guys and make sure the League’s next season is as successful as possible.")
-}
-
-text gText_CongratsYoureanAsshole_WevePreparedAStatement
-{
-	format("We’ve prepared a statement reinforcing our commitment to ending TheTide’s operations. We want them to know we’re officially working with the police and that their days are numbered.")
-}
-
-text gText_CongratsYoureanAsshole_WedLikeYouTwoToSignal
-{
-	format("We’d like you to signal boost that statement online as soon as it’s posted. A public condemnation from the most powerful Trainer will send a strong message.")
-	}
-
-text gText_CongratsYoureanAsshole_TheresNoTurningBack
-{
-	format("There’s no turning back from this- once the statement is out the region natives aren’t going to be so friendly to you. If there’s anything you need to do before sending the message, handle it now. Come back and talk to me when you’re ready.")
-}
-
-text gText_CongratsYoureanAsshole_WereGoingToSend
-{
-	format("We’re going to send this message out now. Ready?")
-}
-
-text gText_CongratsYoureanAsshole_OfCouseIfTheres
-{
-	format("Of course. If there’s anything you need to do before then, handle it now. Come back and talk to me when you’re ready.")
-}
-
-text gText_CongratsYoureanAsshole_ThankYouForThat
-{
-	format("Thank you for that… worldwide, our message is getting positive reception, but within the region, there is still some negativity.")
-}
-
-text gText_CongratsYoureanAsshole_ThingsWillTake
-{
-	format("Things will take time.")
-}
-
-text gText_CongratsYoureanAsshole_ThatsTheSpirit
-{
-	format("Oliver, Ramesh, and I all have different missions for you. Come talk to us our offices when you're ready.")
-}
-
 movement CongratsYoureanAsshole_WalkTowardsPlayer
 {
     walk_up * 4

@@ -16,6 +16,3 @@ script ANewStrike_PlayerSelf_Dialogue {
         end
 }
 
-text gText_ANewStrike_OhDamn {
-    format("Oh damn. SharpRise can't delay the Championship. That's the whole reason we're here!")
-}

@@ -99,7 +99,7 @@ script WeCanStopYouActually_StartBossBattle_Script {
 
         closemessage
 
-        trainerbattle_no_intro(TRAINER_ADELAIDE_B,gText_WeCanStopYouActually_Nonono)
+        trainerbattle_no_intro(TRAINER_ADELAIDE_B,format("Nonononononono…"))
         setvar(VAR_TOWER_RAID_STATE,DEFEATED_SECOND_ADELAIDE)
 }
 
@@ -265,83 +265,6 @@ script WeCanStopYouActaully_ArrestCutscene {
         warpsilent(MAP_ARANTRAZ,255,8,15)
 }
 
-
-text gText_WeCanStopYouActually_SoWhatsYourPlan {
-    format("So, what’s your plan, beat me up and try to expose me? Nobody is going to believe the terrorists that stormed our office building. There's not even a paper trail - do you know how hard it was, not sending a SINGLE email about this? You’re all going to get arrested, the money will keep flowing in, and life is going to keep moving on.")
-}
-
-text gText_WeCanStopYouActually_PhoneIsRinging{
-    format("Adelaide's phone is ringing.") //PSF TODO EMOTE beep
-}
-
-text gText_WeCanStopYouActually_ThatsTheAuthorities {
-    format("That’s the authorities, probably here to pick you up.")
-}
-
-text gText_WeCanStopYouActually_OhNo {
-    format("…oh no.")
-}
-
-text gText_WeCanStopYouActually_IAmChiefOperatingOfficer {
-    format("I am Keiying, the SharpRise Capital Chief Operating Officer. This is my confession. Two days ago, SharpRise Capital triggered a machine that is responsible for the devastating earthquake on HalaiIsland. We did it to flush out and destroy …")
-}
-
-text gText_WeCanStopYouActually_WaitTheHell {
-    format("WHAT THE HELL ARE THEY DOING?")
-}
-
-text gText_WeCanStopYouActually_FindThem {
-    format("FIND THEM! SHUT THAT DOWN!")
-}
-
-text gText_WeCanStopYouActually_IDontCare {
-    format("I don’t care WHERE THEY ARE JUST END THIS SHIT! I thought they were MISSING! HOW DID THIS HAPPEN?")
-}
-
-text gText_WeCanStopYouActually_TheyToldYou {
-    format("YOU! They told you! That’s how you found out! And now if they confess… they don’t have to take it from you.")
-}
-
-text gText_WeCanStopYouActually_I {
-    format(" I - ")
-}
-
-text gText_WeCanStopYouActually_Security {
-    format("CHARLOTTE! RAMESH! SECURITY!")
-}
-
-text gText_WeCanStopYouActually_WeAlreadyBeatThem {
-    format("We already beat them. You’re alone.")
-}
-
-
-text gText_WeCanStopYouActually_ImNotGoingToPrison {
-    format("…I’m not going to prison. I’m NOT GOING TO JAIL…")
-}
-
-text gText_WeCanStopYouActually_AndIllFrigginKill {
-    format("And I’ll FRIGGIN’ KILL YOU!")
-}
-
-text gText_WeCanStopYouActually_Nonono {
-    format("Nonononononono…")
-}
-
-text gText_WeCanStopYouActually_YoureUnderArrest {
-    format("Adelaide, you’re under arrest!")
-}
-
-text gText_WeCanStopYouActually_ForWhat {
-    format("For what? Using the tools YOUR BOSSES gave me? We’re all going down together! You’re all toast!")
-}
-
-text gText_WeCanStopYouActually_TheNextDay {
-    format("A few months later...")
-}
-
-text gText_WeCanStopYouActually_AndTomorrowStarts {
-    format("And tomorrow starts the beginning of the second season of SharpRise Capital’s Championship League! Trainers from all over Resido will be battling all over to find out who will be this season’s Champ. The new SharpRise Capital CEO released a statement yesterday, showing their excitement for this new chapter in SharpRise Capital history. SharpRise Capital’s entire executive team were all charged with conspiracy and murder, and are currently waiting trial. The previous Champion, {PLAYER}, was unavailable for comment.")
-}
 
 movement WeCanStopYouActually_RunToDesk {
     walk_up

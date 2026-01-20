@@ -71,55 +71,6 @@ script LetsFixThis_GetMessage_Dialogue
         end
 }
 
-text gText_LetsFixThis_PeopleOf
-{
-    format("People of Resido, your Elite Four has returned! We could not continue to stand by and watch these corporations destroy our home for profits.")
-}
-text gText_LetsFixThis_WeWillBeGiving
-{
-    format("We will be giving our full support and efforts to assisting TheTide in their mission to help the people of this region, alongside Champion {PLAYER} and our hometown hero, Kai.")
-}
-text gText_LetsFixThis_WePrayTheGovernment
-{
-    format("We pray the government of Resido will open their eyes to the damage these companies have done… ")
-}
-text gText_LetsFixThis_ButWeWillNot
-{
-    format("…but we will not sit quietly and wait for salvation to come to us! We must join together to save ourselves and fight to restore the glory of Resido!")
-}
-text gText_LetsFixThis_OhLooksLike
-{
-    format("Oh, looks like we both got the same message… It's from The Tide Events account.")
-}
-text gText_LetsFixThis_ComeCelebrate
-{
-    format("“Come celebrate the return of the Elite Four! Tonight, in the CurenoPort Packing District. Follow the music to the center warehouse!”")
-}
-text gText_LetsFixThis_SoundsLikeIt
-{
-    format("Sounds like it could be fun. You going to go?")
-}
-text gText_LetsFixThis_IMightGoALittle
-{
-    format("I might go a little later. I don’t love warehouse raves, but this is a special occasion, you know? Actually I wanna tell you about Adaora's new initiatives.")
-}
-text gText_LetsFixThis_WhatreThey
-{
-    format("What’re they up to?")
-}
-text gText_LetsFixThis_TheyWantAllHands
-{
-    format("They want all hands on deck at Arantraz. We’re converting it into a new base, and there’s gonna be a big meeting to talk about next steps.")
-}
-text gText_LetsFixThis_GuessIShould
-{
-    format("Guess I should go to that, right?")
-}
-text gText_LetsFixThis_ActuallyGivenHowMuch
-{
-    format("Actually, given how much work there is to get done, I don’t think it matters what you do first. I already said I’d head to Arantraz. Either way, I’ll see you later?")
-}
-
 movement LetFixThis_WalkOutHouse
 {
     walk_right

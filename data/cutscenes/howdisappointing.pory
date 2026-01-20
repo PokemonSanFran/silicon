@@ -342,6 +342,8 @@ script HowDisappointing_ArrestScene_Dialogue
     msgbox(format("All right officers, {PLAYER} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA) // PSF TODO Replace PLAYER with OBJECT pronoun
     bufferspeciesname(STR_VAR_1,SPECIES_MIGHTYENA)
     buffermovename(STR_VAR_2,MOVE_TAKE_DOWN)
+    //PSF TODO Luxray uses Shock Wave first time
+    //PSF TODO Mightyena uses Take Down against Adaora
     msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),,SPEAKER_POLICEMAN)
     closemessage
     //PSF TODO Adaora is knocked down, need animation here
@@ -481,8 +483,8 @@ script HowDisappointing_GiveNextDirection_Script
 script HowDisappointing_GruntABattle_Script
 {
     lock
-    msgbox(gText_Blank,MSGBOX_NPC,SPEAKER_GRUNT)
-    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT1,gText_Blank)
+    msgbox(format(""),MSGBOX_NPC,SPEAKER_GRUNT)
+    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT1,format(""))
     goto(HowDisappointing_GruntA_Arrest_Script)
 }
 
@@ -511,8 +513,8 @@ script HowDisappointing_GruntA_Arrest_Script
 script HowDisappointing_GruntBBattle_Script
 {
     lock
-    msgbox(gText_Blank,MSGBOX_NPC,SPEAKER_GRUNT)
-    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT2,gText_Blank)
+    msgbox(format(""),MSGBOX_NPC,SPEAKER_GRUNT)
+    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT2,format(""))
     goto(HowDisappointing_GruntB_Arrest_Script)
 }
 
@@ -561,18 +563,6 @@ script HowDisappointing_GruntB_Arrest_Script
     fadescreen(FADE_FROM_BLACK)
     release
     end
-}
-
-text gText_HowDisappointing_PokemonUse
-{
-    //PSF TODO Luxray uses Shock Wave first time
-    //PSF TODO Mightyena uses Take Down against Adaora
-    format("{STR_VAR_1}, use {STR_VAR_2}!")
-}
-
-text gText_HowDisappointing_IAppreciate
-{
-    format("I appreciate you handling that, {PLAYER}.")
 }
 
 movement HowDisappointing_WalkIntoFormationNorthLeft_Movement
@@ -726,7 +716,3 @@ movement HowDisappointing_LeaveRoomB
     step_end
 }
 
-text gText_HowDisappointing_TheyWereAttacking
-{
-    format("They were attacking members of the The Tide directly, even though they were coming quietly.")
-}

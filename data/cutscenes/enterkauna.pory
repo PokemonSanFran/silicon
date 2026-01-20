@@ -43,7 +43,7 @@ script EnterKauna_StartGymBattle_Script
     msgbox(format("Ha ha, no, yeah. All right, I know you didn't come here to talk about Eggs. You tryna scramble?"),,SPEAKER_KAUNA)
     closemessage
     special(PreparePartyForLittleCupBattle)
-    trainerbattle_no_intro(TRAINER_KAUNA, gText_EnterKauna_ImNotTrippin)
+    trainerbattle_no_intro(TRAINER_KAUNA, format("I'm not trippin' - that was hella tight. Harder than a 15-minute egg."))
     goto(EnterKauna_KaunaDefeated_Script)
 }
 
@@ -85,67 +85,3 @@ msgbox(format("I'm gonna head out to Hoenn and breed a whole new squad! I can't 
     end
 }
 
-text gText_EnterKauna_SuhDude {
-        format("Suh dude. Name's Kauna. Sick job making it up here!")
-}
-
-text gText_EnterKauna_EvenBeenBattleResort {
-        format("Ever been to the Battle Resort?")
-}
-
-text gText_EnterKauna_No {
-        format("... no?")
-}
-
-text gText_EnterKauna_BruhYouveGotta {
-        format("Bruh, you've gotta go some day. Sickest place to breed Pokémon in the WORLD. And I've been to them all. The breeze in your hair, the sand in your tires, the faint smell of ocean... man that shit just hits, you know? Gets me all fired up!")
-}
-
-text gText_EnterKauna_OhUhSoundsCool
-{
-    format("Oh uh, sounds cool I guess...")
-}
-
-text gText_EnterKauna_ForRealISwear {
-        format("For real, I swear, the Eggs like... prefer the quiet environment or something. Like yeah, these Chasilla perks is hella crisp, but there's something about being out there, riding back and forth, that really does it for me. It's like... meditation or some shit, fasho. I be straight GIGGIN'.")
-}
-
-text gText_EnterKauna_SoundsExciting {
-        format("Sounds exciting. Or relaxing? I can't really tell.")
-}
-
-text gText_EnterKauna_HaHaNoYeah {
-        format("Ha ha, no, yeah. All right, I know you didn't come here to talk about Eggs. You tryna scramble?")
-}
-
-text gText_EnterKauna_DamnSonYouHit {
-        format("Damn son, you hit hard!")
-}
-
-text gText_EnterKauna_AightTimeToRep {
-        format("Aight, time to rep Chasilla strong!")
-}
-
-text gText_EnterKauna_YourSquadIsHella {
-        format("Your squad is hella over easy.")
-}
-
-text gText_EnterKauna_ImNotTrippin {
-        format("I'm not trippin' - that was hella tight. Harder than a 15-minute egg.")
-}
-
-text gText_EnterKauna_ThatBattleWasHype {
-        format("That battle was HYPE! I fuck with that skill, mad heavy. You earned this.")
-}
-
-text gText_EnterKauna_KeepingTheBabiesSafe {
-        format("Protect is for keeping the babies safe, like an eggshell! Just don't use it over and over and over again, ‘cause it gets real jank, real quick, like an eggshell.")
-}
-
-text gText_EnterKauna_HeadOutToHoenn {
-        format("I'm gonna head out to Hoenn and breed a whole new squad! I can't wait to fight you again, {PLAYER}.")
-}
-
-text gText_EnterKauna_BadgeGet{
-	format("You received the KaunaBadge Badge!")
-}

@@ -78,35 +78,6 @@ script LockedOut_WarpPlayer_Script
         }
 }
 
-text gText_LockedOut_AccessDenied
-{
-    format("Access denied.")
-}
-text gText_LockedOut_ShitWait
-{
-    format("Shit wait, already?!")
-}
-text gText_LockedOut_HeyIWasThinking
-{
-    format("Hey {PLAYER}, I was thinking…")
-}
-text gText_LockedOut_ImLockedOut
-{
-    format("I’m locked out!")
-}
-text gText_LockedOut_ThatsActuallyWhy
-{
-    format("That’s actually why I called. I know you had a lot to lose with this, and I was right: SharpRise Capital is straight up going to disown you. If you need someplace to go, you can absolutely crash with me in HalaiIsland.")
-}
-text gText_LockedOut_IActuallyHadnt
-{
-    format("I actually hadn’t thought that far ahead… but thank you, a lot, Kai.")
-}
-text gText_LockedOut_DoYouWant
-{
-    format("Do you want to go to Kai’s home?")
-}
-
 movement LockedOut_DoorLocked
 {
     face_up

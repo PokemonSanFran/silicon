@@ -51,7 +51,7 @@ script AssholesHome_StartBattle_Script{
         msgbox(format("Just curious if you're ready for the next Gym Leader."),MSGBOX_DEFAULT,SPEAKER_KAI)
         msgbox(format("I doubt you're going to be able to accurately judge that."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
-        trainerbattle_no_intro(TRAINER_KAI_ASSHOLEHOME,gText_AssholesHome_ThrowsTheirMoney)
+        trainerbattle_no_intro(TRAINER_KAI_ASSHOLEHOME,format("SharpRise Capital throws their money around, and the strong get stronger..."))
         goto(AssholesHome_PostBattle_Dialogue)
 }
 
@@ -93,72 +93,3 @@ movement AssholesHome_WalkAway_Movement {
         step_end
 }
 
-text gText_AssholesHome_JudgingFromSwarm {
-    format("Judging from the swarm of transplants at Jim's this today, I'm guessing the ferry is fixed.")
-}
-
-text gText_AssholesHome_ReallyHopingLastTime {
-    format("I was hoping I wouldn't have to deal with you again. What's Jim's?") //PSF TODO EMOTE sigh
-}
-
-text gText_AssholesHome_NopeThisIs {
-    format("Halai Island is my home, and also home to to Jim's, the best boba shop in the region!") //PSF TODO rename Jim's
-}
-
-text gText_AssholesHome_IGuessIf
-{
-    format("But if they're getting some business, maybe you transplants aren't completely useless!")
-}
-
-text gText_AssholesHome_WhatDoYou
-{
-    format("What do you want this time?")
-}
-
-text gText_AssholesHome_JustCurious {
-    format("Just curious if you're ready for the next Gym Leader.")
-}
-
-text gText_AssholesHome_IDoubtYoureGoing {
-    format("I doubt you're going to be able to accurately judge that.")
-}
-
-text gText_AssholesHome_NotAgain {
-    format("Not again!")
-}
-
-text gText_AssholesHome_GuessYouReally {
-    format("Guess you really worked for those Badges!")
-}
-
-text gText_AssholesHome_GuessICanJudge {
-    format("Guess I can judge. You're not ready for Kauna.")
-}
-
-text gText_AssholesHome_ThrowsTheirMoney {
-    format("SharpRise Capital throws their money around, and the strong get stronger...")
-}
-
-text gText_AssholesHome_SoMuchForThe {
-    format("So much for the home-court advantage. gg... {PLAYER}, right?")
-}
-
-text gText_AssholesHome_NameInsteadOf {
-    format("Oh wow, a name instead of an insult.")
-}
-
-text gText_AssholesHome_ILikeBeingPushed {
-    format("I like being pushed to my limits like that. You're stronger than the rest of them, that's for sure. See you around.")
-}
-
-text gText_AssholesHome_ISawThatYoure {
-    format("Wait! I saw that you're participating in the League Challenge like the rest of us. After all the insults and endless complaints about it, what am I missing?")
-}
-
-text gText_AssholesHome_YoureRightItsHypocritical {
-    format("You're right, it's hypocritical. But I'm tired of fighting a system from the outside. I'm going to try and change it from the inside out. I'm excited to be able to beat you along the way.")
-}
-
-text gText_AssholesHome_WhatAWeirdKid {
-    format("(What a weird kid...)")
-}

@@ -365,16 +365,6 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     end
 }
 
-text gText_LetsBurnThisMotherDown_YoureCloserToThe
-{
-    format("{PLAYER}, you're closer to the community then we are. Perhaps there's something you've learned, or could poke around to see if you can find traces of their new hideout.")
-}
-
-text gText_LetsBurnThisMotherDown_ImStillShocked
-{
-    format("I'm still shocked they were using the inside of Arantraz. Absolutely insane.")
-}
-
 movement LetsBurnThisMotherDown_WalkTowardsPlayer
 {
     walk_down * 3
@@ -431,7 +421,3 @@ movement LetsBurnThisMotherDown_LeaveRoom
     walk_down * 6
 }
 
-text gText_LetsBurnThisMotherDown_ShuttingDown
-{
-    format("Shutting down their new base before it even gets off the ground is a major win!")
-}

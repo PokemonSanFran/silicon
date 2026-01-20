@@ -135,7 +135,7 @@ script EnterPsf7leader_ExplainLab_Dialogue {
 script EnterBD_StartBattle_Script {
     msgbox(format("I don't know the rules… but I'm sure they won't stop me either way."),,SPEAKER_BD)
     closemessage
-        trainerbattle_no_intro(TRAINER_BD, gText_EnterBD_UghIThinkThisBatch)
+        trainerbattle_no_intro(TRAINER_BD,format("Ugh, I think this batch makes me too nauseous…"))
     goto(EnterBD_PostBattle_Script)
 }
 
@@ -184,50 +184,6 @@ script EnterBD_PostDefeat2_Dialogue {
     closemessage
         release
     end
-}
-
-text gText_EnterBD_StupidParade {
-    format("stupid fucking parade…")
-}
-
-text gText_EnterBD_TheyJustDontUnderstand {
-    format("They just don't understand… SharpRise was going to own this place, one way or another. We were never going to win. I made sure that Tirabudin Gym kept its Gym! And what, I'm a traitor because I kept my job? Got paid?")
-}
-
-text gText_EnterBD_HeyYouSeemBusy {
-    format("Hey, you seem busy, but are you BD?")
-}
-
-text gText_EnterBD_ShitShitShit {
-    format("! Shit. Shit shit shit hi, are you a challenger? Hold on yeah, hold on. NOPE, not doing this sober, hold on… Lemme just…")
-}
-
-text gText_EnterBD_SoBackHere {
-    format("So back here, I experiment with new synthetic drugs. Always trying to get an edge, you know? Let's see if I can battle under the influence of MGB-07.")
-}
-
-text gText_EnterBD_WaitDoesTheLeague {
-    format("Wait, does the League let you battle under the influence like that?")
-}
-
-text gText_EnterBD_IDontKnow {
-    format("I don't know the rules… but I'm sure they won't stop me either way.")
-}
-
-text gText_EnterBD_UghIThinkThisBatch {
-    format("Ugh, I think this batch makes me too nauseous…")
-}
-
-text gText_EnterBD_TMAreLikeDrugs {
-    format("TMs are like drugs, right? They alter your brain chemistry and let you see stuff you'd never see otherwise… that one will teach Psfgymattack7.")
-}
-
-text gText_EnterBD_LetsSee {
-    format("Let's see if I can bang out MGB-08 while I'm riding this high…")
-}
-
-text gText_EnterBD_BadgeGet {
-    format("You received the BDBadge Badge!")
 }
 
 movement EnterBD_PaceLeftFrontOfDesk {

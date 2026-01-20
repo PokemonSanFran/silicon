@@ -59,7 +59,7 @@ script YouCantStopMe_LastChance_Dialogue {
 
         msgbox(format("People on HalaiIsland died, Oliver! We can’t fix that."),,SPEAKER_ALICIA)
 
-        msgbox(format("Look, it's unfortunate that there was some collateral damage, but it’s for the better! The region will be better! We’re going to usher in a new age!"),,SPEAKER_OLIVER)
+        msgbox(format("Look, it's unfortunate that there was some collateral damage, but it’s for the better! The region will be better! We’re going to usher in a new age!"),,SPEAKER_OLIVER) //PSF TODO EMOTE sigh
 
         msgbox(format("Do you all really think you did the right thing? Don’t you get that this is insane?!"),,SPEAKER_ALICIA)
 
@@ -149,97 +149,9 @@ script YouCantStopMe_StartBossBattle_Script {
         closemessage
 
 
-        trainerbattle_no_intro(TRAINER_ADELAIDE_A,gText_YouCantStopMe_WowGuessWeShould)
+        trainerbattle_no_intro(TRAINER_ADELAIDE_A,format("Wow! Guess we should have taken you out sooner, huh?"))
         setvar(VAR_TOWER_RAID_STATE,DEFEATED_FIRST_ADELAIDE)
         startcutscene(JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE)
-}
-
-text gText_YouCantStopMe_Wait {
-    format("{PLAYER}! Wait!")
-}
-
-text gText_YouCantStopMe_PleaseItIsntToo {
-    format("Please! It isn’t too late to fix things.")
-}
-
-text gText_YouCantStopMe_PeopleOnDied {
-    format("People on HalaiIsland died, Oliver! We can’t fix that.")
-}
-
-text gText_YouCantStopMe_YesItsUnforuntate {
-    format("Look, it's unfortunate that there was some collateral damage, but it’s for the better! The region will be better! We’re going to usher in a new age!") //PSF TODO EMOTE sigh
-}
-
-text gText_YouCantStopMe_DoYouReally {
-    format("Do you all really think you did the right thing? Don’t you get that this is insane?!")
-}
-
-text gText_YouCantStopMe_IKnowYouWant {
-    format("I know you want to help people. But we are too! Look at the jobs we create - ")
-}
-
-text gText_YouCantStopMe_LookAtTheJobs {
-    format("Look at the jobs you’ve destroyed! The families! Careers! While you watch from your towers and skyboxes, I was out there with people. You have no idea how they live.")
-}
-
-text gText_YouCantStopMe_WeveWorkedVeryHard {
-    format("We’ve worked very hard to get where we are. We’ve earned every penny and we deserve to have a good life!")
-}
-
-text gText_YouCantStopMe_EverybodyDeservesAGoodLife {
-    format("Everybody deserves a good life. But since you weren’t aware - the people I’ve met in Resido are hard-working. And suffering. Because of things you did. You’re all hurting people! All to pump some stats and make more money that you don’t even need! What makes you more deserving than them?")
-}
-
-text gText_YouCantStopMe_TheyreNotMurderers {
-    format("They’re not murderers. You are. I just beat everybody on the way up here, including Charlotte. I don’t want to hurt you too.")
-}
-
-text gText_YouCantStopMe_DotDotDot {
-    format("…")
-}
-
-text gText_YouCantStopMe_IThoughtSo {
-    format("I thought so.")
-}
-
-text gText_YouCantStopMe_WhatDoYouWant {
-    format("What do you want? I'm working on an important email.") //PSF TODO EMOTE sigh
-}
-
-text gText_YouCantStopMe_OneMassCasualty {
-    format("One mass casualty event wasn’t enough?! Ruining a region!? Becoming a multi-billionaire? What else do you want?")
-}
-
-text gText_YouCantStopMe_HahIThinkMass {
-    format("Hah! I think mass casualty is a little dramatic, don’t you think? A few people died. They shouldn’t have aligned themselves with terrorists. They were getting in the way of shareholder profits, which is why I have work to do, actually…")
-}
-
-text gText_YouCantStopMe_DidYouEverCare {
-    format("Did you ever care about any of this?")
-}
-
-text gText_YouCantStopMe_ImNotJustifying {
-    format("I’m not justifying myself to some kid, and I don’t need to either.")
-}
-
-text gText_YouCantStopMe_YouReallyDontGive {
-    format("You really don’t give a shit.")
-}
-
-text gText_YouCantStopMe_NopeIDoWish {
-    format("Nope! I do wish you had just played your role though. Charlotte isn’t as… charming as you, so we’ve gotta keep them behind the scenes, you know? Gotta find a new kid, I guess.")
-}
-
-text gText_YouCantStopMe_JustAGlorified {
-    format("I was just a glorified PR puppet for you?!")
-}
-
-text gText_YouCantStopMe_YouWere {
-    format("You were. Now you’re annoying. Soon to be dead.")
-}
-
-text gText_YouCantStopMe_WowGuessWeShould {
-    format("Wow! Guess we should have taken you out sooner, huh?")
 }
 
 movement YouCantStopMe_LeaveFloor_Movement{

@@ -118,7 +118,7 @@ script WarehouseRave_Battle_Script
 {
     lock
         msgbox(format("Prepare to fight for your life!"),,SPEAKER_KEIYING)
-        trainerbattle_no_intro(TRAINER_KEI_YING_WAREHOUSE_RAVE,gText_WarehouseRave_YesTheyllBelieve)
+        trainerbattle_no_intro(TRAINER_KEI_YING_WAREHOUSE_RAVE,format("Yes… they'll believe I was overpowered by the Champion…"))
         closemessage
 
         goto(WarehouseRave_PostBattle_Script)
@@ -214,135 +214,6 @@ script WarehouseRave_OutsideWarehouse_Dialogue
 }
 
 // Kai walks off screen. The player regains control.
-text gText_WarehouseRave_IsThisPlace
-{
-    format("…is this place empty?")
-}
-
-text gText_WarehouseRave_WhatTheHell
-{
-    format("What the hell is going on?! ")
-}
-
-text gText_WarehouseRave_ImSorryWeHad
-{
-    format("I'm sorry we had to trick you, {PLAYER}.")
-}
-
-text gText_WarehouseRave_WhyAmITrapped
-{
-    format("Why am I trapped here?!")
-}
-
-text gText_WarehouseRave_HasBeenPredicting
-{
-    format("SharpRise Capital has been predicting this for a while now, unfortunately. We've always had a few plans in case your empathy became unmanageable.")
-}
-
-text gText_WarehouseRave_SoIDecideTo
-{
-    format("So I decide to help people and you trap me in a warehouse?")
-}
-
-text gText_WarehouseRave_HasInstructed
-{
-    format("SharpRise Capital has instructed me to neutralize this new threat.")
-}
-
-text gText_WarehouseRave_PrepareToFight
-{
-    format("Prepare to fight for your life!")
-}
-
-text gText_WarehouseRave_YesTheyllBelieve
-{
-    format("Yes… they'll believe I was overpowered by the Champion…")
-}
-
-text gText_WarehouseRave_IFailedToKill
-{
-    format("Once I report back my failure, you'll officially become SharpRise Capital enemy number one. Be careful out there, {PLAYER}.")
-}
-
-text gText_WarehouseRave_WaitWhyAreYou
-{
-    format("Wait, why are you helping me?")
-}
-
-text gText_WarehouseRave_PhoneIsRinging
-{
-    format("Kei-ying's phone is ringing.")
-}
-
-text gText_WarehouseRave_Now
-{
-    format("That's them calling for an update... we don't have time. You need to go!")
-}
-
-text gText_WarehouseRave_WhenIGotHere
-{
-    format("When I got here the front door was locked, and then the side blew open! What the hell happened?")
-}
-
-text gText_WarehouseRave_ItWasATrap
-{
-    format("It was a trap. Keiying tried to take me out! But… ")
-}
-
-text gText_WarehouseRave_HolyShitThatWas
-{
-    format("That was fast! SharpRise Capital attacking you directly, already?")
-}
-
-text gText_WarehouseRave_TheBattleFelt
-{
-    format("The battle felt like they were trying to lose.")
-}
-
-text gText_WarehouseRave_AndThenHeToldMe
-{
-    format("And then he told me to get out of here. He didn't call for backup or anything.")
-}
-
-text gText_WarehouseRave_ThatDoesntMake
-{
-    format("That doesn't make any sense. You think that creep regrets selling us out?")
-}
-
-text gText_WarehouseRave_WhatDoYouMean
-{
-    format("What do you mean?")
-}
-
-text gText_WarehouseRave_CameToTown
-{
-    format("He's like BD - once SharpRise Capital came to town, he jumped ship. He was playing both sides for a while, both working on SharpRise Capital's board and running the Gym in HodouCity.")
-}
-
-text gText_WarehouseRave_MaybeItIsGuilt
-{
-    format("Maybe it is guilt. So weird.")
-}
-
-text gText_WarehouseRave_WhateverImGlad
-{
-    format("Whatever. I'm glad you're okay, even if the reasoning is weird.")
-}
-
-text gText_WarehouseRave_ImHeadingIntoTheCity
-{
-    format("I'm heading into the city to start to get to work on our assignments. I'm so psyched about finally starting to chip away at these assholes, you know?")
-}
-
-text gText_WarehouseRave_GladYouDidnt
-{
-    format("Glad you didn't need me though! Damn, fighting the top brass now, you're still getting stronger. I'll see you at Arantraz.")
-}
-
-text gText_WarehouseRave_IllSeeYou
-{
-    format("I'll see you around.")
-}
 
 movement WarehouseRave_WalkOutShadows
 {

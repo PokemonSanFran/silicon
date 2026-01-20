@@ -105,27 +105,27 @@ script VSGarbodor_ChooseRight_Script {
 }
 
 script VSGarbodor_TheTideGrunt1_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_A, gText_VSGarbodor_ScrewThisStadium, gText_VSGarbodor_DamnTheyWereRight, VSGarbodor_TheTideGrunt1_Battle_Script)
+    trainerbattle_single(TRAINER_FAKEROCKET_A, format("Heh, we're TheTide! Screw this stadium and screw SharpRise Capital!"), format("Damn, they were right, you're strong…"), VSGarbodor_TheTideGrunt1_Battle_Script)
         msgbox(format("Welp, I did what I could! Good luck with that stinky shit."), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 
 script VSGarbodor_TheTideGrunt2_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_B, gText_VSGarbodor_RightOnCue, gText_VSGarbodor_HmmIGuess, VSGarbodor_TheTideGrunt2_Battle_Script)
+    trainerbattle_single(TRAINER_FAKEROCKET_B, format("Right on cue, here come the heroes…"), format("Hmm, I guess I get to be the bad guy today!"), VSGarbodor_TheTideGrunt2_Battle_Script)
         msgbox(format("Being bad was fun for a day!"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 script VSGarbodor_TheTideGrunt3_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_A, gText_VSGarbodor_IsTheName, gText_VSGarbodor_TheyDidntPrepare, VSGarbodor_TheTideGrunt3_Battle_Script)
+    trainerbattle_single(TRAINER_FAKEROCKET_A, format("The Tide is the name, and shutting this shit down is our game!"), format("They didn't prepare us for this!"), VSGarbodor_TheTideGrunt3_Battle_Script)
         msgbox(format("Oh thank Giratina, I can go back to the office now…"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 
 script VSGarbodor_TheTideGrunt4_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_B, gText_VSGarbodor_LookAtYou, gText_VSGarbodor_ThatsRight, VSGarbodor_TheTideGrunt4_Battle_Script)
+    trainerbattle_single(TRAINER_FAKEROCKET_B, format("Look at you, thinking you're making any difference!"), format("That's right, dance puppets!"), VSGarbodor_TheTideGrunt4_Battle_Script)
         msgbox(format("Have fun cleaning up after us, kid."), MSGBOX_AUTOCLOSE)
         goto(VSGarbodor_RemoveGrunt)
         end
@@ -421,135 +421,3 @@ movement VSGarbodor_WalkUpstairs {
         step_end
 }
 
-text gText_VSGarbodor_IDidSomeScouting {
-    format("I did some scouting while waiting for you. Both sides have two Garbodor and two Trainers guarding ‘em. Do you care which side you take?")
-}
-
-text gText_VSGarbodor_ThenIllTakeTheRight {
-    format("Then I'll take the right side. See you on the other side. Don't take too long!")
-}
-
-text gText_VSGarbodor_CoolIWanted {
-    format("Cool, I wanted the left side anyway.  See you on the other side. Don't take too long!")
-}
-
-text gText_VSGarbodor_ScrewThisStadium {
-    format("Heh, we're TheTide! Screw this stadium and screw SharpRise Capital!")
-}
-
-text gText_VSGarbodor_IsTheName {
-    format("TheTide is the name, and shutting this shit down is our game!")
-}
-
-text gText_VSGarbodor_DamnTheyWereRight {
-    format("Damn, they were right, you're strong…")
-}
-
-text gText_VSGarbodor_TheyDidntPrepare {
-    format("They didn't prepare us for this!")
-}
-
-text gText_VSGarbodor_WelpIDidWhat {
-    format("Welp, I did what I could! Good luck with that stinky shit.")
-}
-
-text gText_VSGarbodor_OhThankGiratina {
-    format("Oh thank Giratina, I can go back to the office now…")
-}
-
-text gText_VSGarbodor_RightOnCue {
-    format("Right on cue, here come the heroes…")
-}
-
-text gText_VSGarbodor_LookAtYou {
-    format("Look at you, thinking you're making any difference!")
-}
-
-text gText_VSGarbodor_HmmIGuess {
-    format("Hmm, I guess I get to be the bad guy today!")
-}
-
-text gText_VSGarbodor_ThatsRight {
-    format("That's right, dance puppets!")
-}
-
-text gText_VSGarbodor_BeingBad {
-    format("Being bad was fun for a day!")
-}
-
-text gText_VSGarbodor_HaveFunCleaning {
-    format("Have fun cleaning up after us, kid.")
-}
-
-text gText_VSGarbodor_FeelingLonely {
-    format("Feeling lonely over there? I got this side, you handle that side!")
-}
-
-text gText_VSGarbodor_GodYouWereTaking {
-    format("God, you were taking forever. They don't teach efficiency in Orre, do they?")
-}
-
-text gText_VSGarbodor_WhateverMineWereEasy {
-    format("Whatever. Mine were easy, they just both used Self-Destruct before I could really get a move in. I already texted Oliver, he said meet in front of the construction site.")
-}
-
-text gText_VSGarbodor_AsWeWereNegotiating {
-    format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?")
-}
-
-text gText_VSGarbodor_DoneLikeYouGuys {
-    format("Done. Like you guys said, TheTide up to their shit as usual.")
-}
-
-text gText_VSGarbodor_ThankYouBoth {
-    format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship.")
-}
-
-text gText_VSGarbodor_YouHave
-{
-    format("To show my appreciation, I have these for you.")
-}
-
-text gText_VSGarbodor_HowDid
-{
-    format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!")
-}
-
-text gText_VSGarbodor_DidIMiss
-{
-    format("...Did I miss someting?")
-}
-
-text gText_VSGarbodor_TheyreOnlyFound
-{
-    format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!")
-}
-
-text gText_VSGarbodor_ConsiderIt
-{
-    format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!")
-}
-
-text gText_VSGarbodor_IThink{
-    format("Now, I think you two should head back to the Compound and get some rest.")
-}
-
-text gText_VSGarbodor_YeahImBeat {
-    format("Yeah, I'm beat. Do you want a ride back to the Compound?")
-}
-
-text gText_VSGarbodor_WeirdButOkay {
-    format("Weird, but okay. I'll see you around.")
-}
-
-text gText_VSGarbodor_LetsBounce {
-    format("Let's bounce.")
-}
-
-text gText_VSGarbodor_ImGonnaGet {
-    format("I'm gonna get some sleep. Good shit on finishing your Badges. Can't wait to kick your ass at the Championship… whenever that is.")
-}
-
-text gText_VSGarbodor_HehWellSee {
-    format("Heh, we'll see. Good night.")
-}

@@ -73,7 +73,7 @@ script EnterEmrys_MuseumArrangement_Dialogue {
 }
 
 script EnterEmrys_StartBattle_Script {
-    trainerbattle_single(TRAINER_EMRYS, gText_EnterEmrys_LetsSeeHow, gText_EnterEmrys_IfThisBattle, EnterEmrys_Defeated_Script, NO_MUSIC)
+    trainerbattle_single(TRAINER_EMRYS, format("Let's see how your socialization impacted your battling ability!"),format("If this battle is any indication, your assimilation is going perfectly!"),EnterEmrys_Defeated_Script, NO_MUSIC)
 }
 
 script EnterEmrys_Defeated_Script {
@@ -145,56 +145,4 @@ movement EmrysLookAround_Movement {
     delay_16
     face_left
     step_end
-}
-
-text gText_EnterEmrys_IWasThinking {
-    format("I was thinking about the arrangement of the museum. Museums tend to organize through etic categories, but I always wonder... how far off are we from their emic counterparts...? Sorry, I'm Emrys, Chief of the Perlacia City Gym!")
-}
-text gText_EnterEmrys_HasYourVisit {
-    format("Has your visit been a positive time investment? There was a ton of qualitative research into curating the best possible experience for both patrons and challengers.")
-}
-text gText_EnterEmrys_UhYup {
-    format("Uh... yup. Yeah. It's cool.")
-}
-text gText_EnterEmrys_ICanHearTheOrre {
-    format("I can hear the Orre in you. Enchanting.")
-}
-text gText_EnterEmrys_LetsSeeHow {
-    format("Let's see how your socialization impacted your battling ability!")
-}
-text gText_EnterEmrys_TimeToPay {
-    format("Time to pay your tribute.")
-}
-text gText_EnterEmrys_IfThisBattle {
-    format("If this battle is any indication, your assimilation is going perfectly!")
-}
-text gText_EnterEmrys_YouRecieved {
-    format("You recieved the EmrysBadge Badge!")
-}
-
-text gText_EnterEmrys_WowIllReallyNeed {
-    format("Wow, I'll really need to re-think my tactical core values. Awesome battle, {PLAYER}!")
-}
-
-text gText_EnterEmrys_ThatPositiveSanction {
-    format("{STR_VAR_1} is like a shaman in your pocket and will teach {STR_VAR_2}.")
-}
-text gText_EnterEmrys_WellNeedToBattle {
-    format("We'll need to battle again in the future. I want to increase our data set - a sample size of one isn't enough for any conclusions about our relative skill levels!")
-}
-
-text gText_EnterEmrys_LetUsRecord {
-    format("Let us record this achievement for the masses on Buzzr to see!")
-}
-
-text gText_EnterEmrys_NoWonderYouHavent {
-    format("No wonder you haven't properly accimlated!")
-}
-
-text gText_EnterEmrys_BuzzrIs {
-    format("Buzzr is a medium by which one can tap into the zzeitgiest of the region - everybody can use their phones to write history! Your spoils of victory in Resido's Pokémon League are posts from the Gym Leader.When all the leaders have posted about you, you've qualified for the Championship.")
-}
-
-text gText_EnterEmrys_AndNowFor {
-    format("And now, a record from the beginning of the {PLAYER} empire!")
 }

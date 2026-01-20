@@ -21,8 +21,7 @@ script BeingChampionIsHard_PostTimeSkip {
         applymovement(PLAYER,BeingChampionIsHard_WalkToOliver)
         waitmovement(0)
 
-        msgbox(format("Good morning Oliver."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
+        msgbox(format("Good morning Oliver."),MSGBOX_DEFAULT,SPEAKER_ALICIA) //PSF TODO EMOTE sigh
         msgbox(format("Good morning Champion {PLAYER}."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
 
         msgbox(format("You've been calling me that for a month since I won… doesn't that get old?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -69,55 +68,6 @@ script BeingChampionIsHard_PostTimeSkip {
         releaseall
         end
 
-}
-
-text gText_BeingChampionIsHard_OneMonthLater {
-    format("One month later…")
-}
-text gText_BeingChampionIsHard_SighGoodMorning {
-    format("Good morning Oliver.") //PSF TODO EMOTE sigh
-}
-text gText_BeingChampionIsHard_GoodMorningChampion {
-    format("Good morning Champion {PLAYER}.")
-}
-text gText_BeingChampionIsHard_ItsAlmostBeenAMonth {
-    format("You've been calling me that for a month since I won… doesn't that get old?")
-}
-text gText_BeingChampionIsHard_OfCourseNot {
-    format("Of course not. You've earned it! Now on the docket for today…")
-}
-text gText_BeingChampionIsHard_PleaseLetItBe {
-    format("(Let it be an easy day. I swear it's been six interviews a day, an exhibition on every news network… being officially sponsored is great, but shit, I need a day off!)")
-}
-text gText_BeingChampionIsHard_YouveActuallyGotNothing {
-    format("You've actually got nothing.")
-}
-text gText_BeingChampionIsHard_YouWereStarting {
-    format("You were starting to look a little ragged, and a few sponsors complained. So we're giving you a few days off.")
-}
-text gText_BeingChampionIsHard_YouCouldTell {
-    format("You could tell?")
-}
-text gText_BeingChampionIsHard_ThisIsOurFirst {
-    format("It's fine. This is our first time doing it, so perhaps we haven't really figured out striking a balance yet. ")
-}
-text gText_BeingChampionIsHard_WoWWhatToDo {
-    format("Wow, what to do with my days off…")
-}
-text gText_BeingChampionIsHard_YouShouldGoTo {
-    format("You should go to ZenzuIsland! The construction on NongyuBridge has finally been completed, and its a fun place to sightsee.")
-}
-text gText_BeingChampionIsHard_ThatsWhereTheyFilm {
-    format("That's where they film movies, right?")
-}
-text gText_BeingChampionIsHard_ThereAlsoUsed {
-    format("Correct. There also used to be a Gym there, but it's been decommissioned.")
-}
-text gText_BeingChampionIsHard_SoundsLikeItll {
-    format("Sounds like it'll be cool. Thanks!")
-}
-text gText_BeingChampionIsHard_ThePleasureIsAllOurs {
-    format("My pleasure. I'll be checking in, but don't hesitate to reach out.")
 }
 
 movement BeingChampionIsHard_WalkToOliver {

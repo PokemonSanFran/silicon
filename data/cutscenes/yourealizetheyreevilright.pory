@@ -14,7 +14,6 @@ const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
 const FLAG_HIDE_ELLEN = FLAG_TEMP_8
 const FLAG_HIDE_ARIANNA = FLAG_TEMP_9
 
-//gText_YouRealizeTheyreEvilRight_
 //YouRealizeTheyreEvilRight_
 
 script YouRealizeTheyreEvilRight_HideObject_Script {
@@ -133,28 +132,28 @@ script YouRealizeTheyreEvilRight_InteractKai {
 }
 
 script YouRealizeTheyreEvil_Ghost1_Battle_Script{
-    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_A, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost1_Battle_Script)
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_A, format("..."), format("..."), YouRealizeTheyreEvil_Ghost1_Battle_Script)
         msgbox(format("While Arantraz was a prison, it was absolutely not a state of the art facility - rather, criminals deemed “dangerous” were thrown into Arantraz with little regard for health, rehabilitation, or even due process of law, with a preponderance of marginalized communities being locked away. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost2_Battle_Script{
-    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_B, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost2_Battle_Script)
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_B, format("..."), format("..."), YouRealizeTheyreEvil_Ghost2_Battle_Script)
         msgbox(format("As the prison population grew, pressure mounted both internally and externally in order to demand a better quality of life for the prisoners.  The prison riot that started the occupation of the island came from an out of control guard killing an inmate for a minor violation. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost3_Battle_Script{
-    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_C, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost3_Battle_Script)
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_C, format("..."), format("..."), YouRealizeTheyreEvil_Ghost3_Battle_Script)
         msgbox(format("The inmate was also a member of Resido's indigenous population, killed on the land that was stolen from their ancestors. The occupation called for the dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land back to its original owners."),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost4_Battle_Script{
-    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_D, gText_YouRealizeTheyreEvilRight_DotDotDot, gText_YouRealizeTheyreEvilRight_DotDotDot, YouRealizeTheyreEvil_Ghost4_Battle_Script)
+    trainerbattle_single(TRAINER_ARANTRAZ_GHOST_D, format("..."), format("..."), YouRealizeTheyreEvil_Ghost4_Battle_Script)
         msgbox(format("The protests gained national attention and seemed to be gathering interest, particularly with the help of Magnus's support, and pressure mounted on the government to comply. At the height of tension, an earthquake broke out, destroying a large portion of the prison and killing inmates and guards and effectively ending the occupation. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
         goto(YouRealizeTheyreEvilRight_RemoveGhost)
         end
@@ -396,281 +395,6 @@ closemessage
         call(TryAutoSave)
     release
     end
-}
-
-text gText_YouRealizeTheyreEvilRight_HolyShit {
-format("Holy shit. That was intense. Guess I need to think all this over, but something isn't adding up.")
-}
-text gText_YouRealizeTheyreEvilRight_AwesomeJobIn {
-format("Awesome job in {STR_VAR_1}. I heard all about it, and I'm so happy things are getting off the ground. I heard you got a phone call and disappeared. Everything okay?")
-}
-text gText_YouRealizeTheyreEvilRight_TheyDontLove {
-format("SharpRise Capital called me. They don't love our project.")
-}
-text gText_YouRealizeTheyreEvilRight_YouSeemSurprised {
-format("You seem surprised.")
-}
-text gText_YouRealizeTheyreEvilRight_YoureNot {
-format("You're not?")
-}
-text gText_YouRealizeTheyreEvilRight_IveBeenTrying {
-format("I've been trying to tell you the whole time, these guys are ruthless. Cruel, even. Good timing though, I think I can finally explain everything to you.")
-}
-text gText_YouRealizeTheyreEvilRight_WhatDoYouMean {
-format("What do you mean?")
-}
-text gText_YouRealizeTheyreEvilRight_IWannaShowYou {
-format("I wanna show you instead. Come to Arantraz.")
-}
-text gText_YouRealizeTheyreEvilRight_YoullNeedToCross {
-format("I wanna show you but you'll need to cross some water to get here. You know how to use {STR_VAR_1}, right? No? You can learn pretty quickly at the Cresalta Vista beach, and then meet me on Arantraz.")
-}
-text gText_YouRealizeTheyreEvilRight_IDontKnowIf {
-format("(I don't know if I can afford to get pulled any deeper into this…)")
-}
-text gText_YouRealizeTheyreEvilRight_ImHereWhere {
-format("I'm here! Where are you?")
-}
-text gText_YouRealizeTheyreEvilRight_SwimAroundThe {
-format("Come swim around the northeast side of the island! You'll see me.")
-}
-text gText_YouRealizeTheyreEvilRight_WelcomeToTheReal {
-format("Welcome to the real Arantraz. I'm going down to the second level, but you should explore here first before coming straight down.")
-}
-text gText_YouRealizeTheyreEvilRight_DotDotDot {
-format("…")
-}
-text gText_YouRealizeTheyreEvilRight_WhileArantraz {
-format("While Arantraz was a prison, it was absolutely not a state of the art facility - rather, criminals deemed “dangerous” were thrown into Arantraz with little regard for health, rehabilitation, or even due process of law, with a preponderance of marginalized communities being locked away. ")
-}
-text gText_YouRealizeTheyreEvilRight_AsThePrisonPopulation {
-format("As the prison population grew, pressure mounted both internally and externally in order to demand a better quality of life for the prisoners.  The prison riot that started the occupation of the island came from an out of control guard killing an inmate for a minor violation. ")
-}
-text gText_YouRealizeTheyreEvilRight_TheInmateWasAlso {
-format("The inmate was also a member of Resido's indigenous population, killed on the land that was stolen from their ancestors. The occupation called for the dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land back to its original owners.")
-}
-text gText_YouRealizeTheyreEvilRight_TheProtests {
-format("The protests gained national attention and seemed to be gathering interest, particularly with the help of Magnus's support, and pressure mounted on the government to comply. At the height of tension, an earthquake broke out, destroying a large portion of the prison and killing inmates and guards and effectively ending the occupation. ")
-}
-text gText_YouRealizeTheyreEvilRight_TheChampionHasArrived {
-format("The Champion has arrived! Great to meet you, I'm Magnus, and I'm the leader of the Resido Elite Four. Or, I was. Now I'm not really sure what I do.")
-}
-text gText_YouRealizeTheyreEvilRight_NiceToMeetYou {
-format("Nice to meet you! …Kai, where are we?")
-}
-text gText_YouRealizeTheyreEvilRight_HasBeenUsing {
-format("TheTide has been using Arantraz's abandoned prison as a training ground.")
-}
-text gText_YouRealizeTheyreEvilRight_WowSuperResourceful {
-format("Wow! Super resourceful. Genius, even.")
-}
-text gText_YouRealizeTheyreEvilRight_ICanFinallyProve {
-format("I can finally prove that SharpRise Capital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit.")
-}
-text gText_YouRealizeTheyreEvilRight_DidYouDragMe {
-format("Did you drag me out here to join a terrorist organization? Did you hear ANYTHING I said on the phone?")
-}
-text gText_YouRealizeTheyreEvilRight_YesWaitNo {
-format("Yes! Wait, no… No, Yes!")
-}
-text gText_YouRealizeTheyreEvilRight_DoesntDoAnythingForThis {
-format("TheTide doesn't do anything for this region. You're attacking innocent people, trying to destroy buildings - fuck, I absolutely should have turned you in!")
-}
-text gText_YouRealizeTheyreEvilRight_ICanProve {
-format("{PLAYER}, listen! I can prove that none of that is true.")
-}
-text gText_YouRealizeTheyreEvilRight_How {
-format("How?!?")
-}
-text gText_YouRealizeTheyreEvilRight_Look {
-format("Look.")
-}
-text gText_YouRealizeTheyreEvilRight_ThisIsOne {
-format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?")
-}
-text gText_YouRealizeTheyreEvilRight_IHadToGo {
-format("Yeah. Charlotte and I had to go down there and defeat them and your goons.")
-}
-
-text YouRealizeTheyreEvilRight_IBetYouLlThinkDifferentlyAfter
-{
-    format("I bet you’ll think differently after you take a closer look at what it’s holding. ") // Kai
-}
-
-text YouRealizeTheyreEvilRight_IReallyDoubtIt
-{
-    format("I really doubt it.") // Alicia
-}
-
-text YouRealizeTheyreEvilRight_PlayerIPromiseItWill
-{
-    format("{PLAYER}, I promise it will be worth your while. Would you just look?") // Magnus
-}
-
-text YouRealizeTheyreEvilRight_Huh
-{
-    format("Huh.") // Alicia
-}
-
-text YouRealizeTheyreEvilRight_IsThatARock
-{
-    format("Wait... is that really a Gem?") // Alicia
-}
-
-text YouRealizeTheyreEvilRight_CloseItsAGem
-{
-    format("A Normal Gem to be specific. You've heard of them?") // Kai
-}
-
-text YouRealizeTheyreEvilRight_WhatNoWayAdelaide
-{
-    format("Adelaide gave me one of those after we stopped the SharpRise Stadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!") // Alicia
-}
-
-text YouRealizeTheyreEvilRight_IveHadTheOpportunityToSee
-{
-    format("I’ve had the opportunity to see Gems a few times in my career and I can attest that this one is very real.") // Magnus
-}
-
-text YouRealizeTheyreEvilRight_WhileIWasKeepingAnEye
-{
-    format("While I was keeping an eye on things during the SharpRise Stadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe SharpRise  left one of these Gems on it. They’re the only ones who have access to something like this in the region.") // Kai
-}
-
-text YouRealizeTheyreEvilRight_AdelaideConfirmedThat
-{
-    format("Adelaide confirmed that when she gave me my Gem. So the only way this Garbador could have one…") // Alicia
-}
-
-text gText_YouRealizeTheyreEvilRight_IsIf
-{
-    format("Is if SharpRise Capital equipped it directly.")
-}
-
-text gText_YouRealizeTheyreEvilRight_HasBeenFramingYou {
-format("Kai… Are you saying SharpRise Capital has been framing you?")
-}
-
-text gText_YouRealizeTheyreEvilRight_WhyWould {
-    format("That doesn't make sense for SharpRise - they've been so good to me!")
-}
-
-text gText_YouRealizeTheyreEvilRight_YouAlsoMetUp {
-format("{PLAYER}, you also met up with TheTide in Oroland too, right?")
-}
-text gText_YouRealizeTheyreEvilRight_ButAdaoraSaid {
-format("…yeah. But Adaora said that situation was super weird and was trying to track them down.")
-}
-text gText_YouRealizeTheyreEvilRight_YeahNobodyKnows {
-format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpRise Capital has been sending in agents to make us look shitty. Between that and whatever else SharpRise Capital is feeding you, I'm not surprised you feel the way you do.")
-}
-
-text gText_YouRealizeTheyreEvilRight_WhyWhyDoAll {
-format("Why? Why do all this to just to screw with you guys?")
-}
-
-text gText_YouRealizeTheyreEvilRight_WhatIsHe {
-    format("What is he talking about? SharpRise has spent all this money reshaping the League - doesn't that benefit all Trainers?")
-}
-
-text gText_YouRealizeTheyreEvilRight_ExistsToMakeMoney {
-format("SharpRise Capital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities. And now that they've had a successful run at it, they're sinking their fingers into even more of Resido - they're not going to stop at some Pokemon League.")
-}
-
-text gText_YouRealizeTheyreEvilRight_TheirGoals{
-    format("Kei-Ying said that SharpRise's goal is to uplift the entire region. They've already managed to change my life with access to all these apps and services - why WOULD they stop with just us? They want to help everybody!")
-}
-
-text gText_YouRealizeTheyreEvilRight_CantArgueWithThat {
-format("Can't argue with that.")
-}
-text gText_YouRealizeTheyreEvilRight_IJoinedThe {
-format("I joined the League Challenge to try to change things from the inside. But now I'm certain that we need external pressure in order to improve things for all of us.")
-}
-text gText_YouRealizeTheyreEvilRight_AndThatsWhyWere {
-format("And that's why we're all here.")
-}
-text gText_YouRealizeTheyreEvilRight_YepIThinkItsFinally {
-format("Yep. I think it's finally time we all come together to expose SharpRise Capital for the assholes that they are, and start to take power back for the people.")
-}
-text gText_YouRealizeTheyreEvilRight_LookIKnowThis {
-format("Look, I know this is a lot of information to take in. I know you're going to make the right decision...")
-}
-text gText_YouRealizeTheyreEvilRight_ShouldIJoin{
-	format("Fighting against SharpRise Capital and the government and the government doesn't make any sense! There's no way this is the right path.")
-}
-text gText_YouRealizeTheyreEvilRight_JoiningThemMeansGoingDeeper{
-	format("They're just asking for trouble. The protests, the hacking, the riots... is that really what I want? Adaora says The Tide doesn't condone violence, but can I even believe her?")
-}
-
-text gText_YouRealizeTheyreEvilRight_ButTheirCauseIsJust{
-    format("They might think they're right. They do want to protect Resido and make a difference, but this isn't it.")
-}
-
-text gText_YouRealizeTheyreEvilRight_ButAtWhatCost{
-	format("I've worked so hard to get this far. To become the Champion. I can make a difference as I am! Throwing it all away now doesn't make any sense.")
-}
-
-text gText_YouRealizeTheyreEvilRight_CantDoIt{
-	format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Is The Tide just manipulating me, like they tried with the social media stunt?")
-}
-text gText_YouRealizeTheyreEvilRight_MakingTheRightChoice{
-	format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice.")
-}
-text gText_YouRealizeTheyreEvilRight_SorryIfThisDisappointsYouAll{
-	format("I'm sorry if this disappoints you all, but I won't compromise mysel - my values. I'm not going to join you.")
-}
-text gText_YouRealizeTheyreEvilRight_WaitWhat{
-    format("Wait what? {PLAYER}, you're making a mistake!")
-}
-text gText_YouRealizeTheyreEvilRight_WowWasWrong{
-    format("Wow... Armando was wrong about you after all.")
-}
-text gText_YouRealizeTheyreEvilRight_DontYouUnderstand{
-    format("Don't you understand? You're being used, and they're not going to stop.")
-}
-text gText_YouRealizeTheyreEvilRight_JustBecause{
-    format("Just because you couldn't hack it doesn't mean the world is against you, Kai!")
-}
-text gText_YouRealizeTheyreEvilRight_CouldntHackIt{
-    format("Couldn't hack it? I got second to you, and you had a HUGE head start!")
-}
-text gText_YouRealizeTheyreEvilRight_TheyreNot{
-    format("Kai, {PLAYER} will not get it. Its too late.")
-}
-//PSF TODO Replace PLAYER with OBJECT pronoun
-text gText_YouRealizeTheyreEvilRight_TheresNothingToGet{
-    format("I'm not giving up what I have because you guys think SharpRise Capital is some big bad. TheTide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it.")
-}
-text gText_YouRealizeTheyreEvilRight_ThisGarbodor {
-format("Hey, this Garbodor seems to have taken a liking to you, and you seem to understand it pretty well. Do you want it?")
-}
-text gText_YouRealizeTheyreEvilRight_TakeGoodCare {
-format("Take good care of it.")
-}
-text gText_YouRealizeTheyreEvilRight_ThatsFineIll {
-format("That's fine, I'll find a good home for it.")
-}
-text gText_YouRealizeTheyreEvilRight_IsStillWaiting {
-format("Kai is still waiting for me at Arantraz…")
-}
-text gText_YouRealizeTheyreEvilRight_DoYouWantToGo {
-format("Do you want to go to bed?")
-}
-text gText_YouRealizeTheyreEvilRight_ICantBelieveIAlmost {
-format("I can't believe I almost fell for that stunt. Me? Siding with TheTide? After everything I've been through? And all that stuff, just because the battling is a little different?")
-}
-text gText_YouRealizeTheyreEvilRight_AndTheyWantToHelp{
-format("And they claim they want to do better for region? SharpRise Capital is making jobs! And bringing people like me! And stopping terrorists.")
-}
-text gText_YouRealizeTheyreEvilRight_ImGoingToBeOn{
-format("I'm going to be on the right side of history.")
-}
-text gText_YouRealizeTheyreEvilRight_ObtainedGift {
-format("{PLAYER} was given the {STR_VAR_2}.")
-}
-text gText_YouRealizeTheyreEvilRight_ThisIsntWhere{
-    format("...This isn't where I'm supposed to be.")
 }
 
 movement YouRealizeTheyreEvilRight_StepBackward {

@@ -29,6 +29,7 @@ script ImProbablyBetterThanYou_StandingOutside_Dialogue {
         startcutscene(JUMPPLAYER_IMPROBABLYBETTERTHANYOU)
         setvar(VAR_PLAYER_HOME_STATE,HAS_NOT_MET_CHARLOTTE)
         msgbox(format("Let's do this."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+			//PSF TODO add asterisk to font, look at SKiLpVg.png and find best treatment for actions (color? bracket?)
         // PSF TODO Cutscnee skip crashes when used here
         closemessage
         call(ImProbablyBetterThanYou_MovePlayerInside_Script)
@@ -115,75 +116,6 @@ script ImProbablyBetterThanYou_Annoyed_Dialogue {
         closemessage
         applymovement(CHARLOTTE,ImProbablyBetterThanYou_GoBackToFood)
             waitmovement(0)
-}
-
-text gText_ImProbablyBetterThanYou_DeepBreath {
-    format("Let's do this.")
-    //PSF TODO add asterisk to font, look at SKiLpVg.png and find best treatment for actions (color? bracket?)
-}
-
-text gText_ImProbablyBetterThanYou_YouMustBe{
-    format("You must be {PLAYER}! I'm the other trainer in the Kickstart program, Charlotte.")
-}
-
-text gText_ImProbablyBetterThanYou_WelcomeToTheMost{
-    format("Welcome to the most boring place in the Resido region... CuconuTown.")
-}
-
-text gText_ImProbablyBetterThanYou_KindaShabbyHuh {
-    format("This place is kinda shabby, huh? I thought SharpRise Capital was pulling out all the stops for us, but there's not a butler in sight! And no private tennis courts! Not that I ever play, but it's the principle of the thing...")
-}
-
-text gText_ImProbablyBetterThanYou_OhYeahUh {
-    format("Oh yeah uh, it's too bad...")
-}
-
-text gText_ImProbablyBetterThanYou_ThisHouseIsFriggin {
-    format("This house is friggin' huge! Bigger than anywhere I've ever stayed, that's for sure...")
-}
-
-text gText_ImProbablyBetterThanYou_MyFlightWasEarlierToday {
-    format("My flight was earlier today, so I've just been waiting around.")
-}
-
-text gText_ImProbablyBetterThanYou_IOrderedSomeFoodToo {
-    format("I ordered some food too - Rapidoordash is the same here as it is back in Unova, and my Mom's card is still on the account! I'm sure she gets... points or something, right?")
-}
-
-text gText_ImProbablyBetterThanYou_WhereAreYouFrom {
-    format("Where are you from?")
-}
-
-text gText_ImProbablyBetterThanYou_AgateVillageOrre {
-    format("Agate Village, Orre. You?")
-}
-
-text gText_ImProbablyBetterThanYou_UndellaTownUnova {
-    format("Undella Town, Unova. Agate, right? I don't think I've heard of it... oh well. Probably just as boring as Undella. SO GLAD to be out of there!")
-}
-
-text gText_ImProbablyBetterThanYou_IKnowOurOrientation {
-    format("I know our orientation is supposed to start soon, or something like that. I took the bedroom on the left, so the one to the right is yours. I tried to take the good one because I got here first...")
-}
-
-text gText_ImProbablyBetterThanYou_ButBothRooms {
-format("but both rooms are exactly the same! Let's chill after you unpack.")
-}
-
-text gText_ImProbablyBetterThanYou_GoCheckOutYourRoom {
-    format("Go check out your room!")
-}
-
-text gText_ImProbablyBetterThanYou_OhManAreYouTrying {
-    format("Oh man, are you trying to do some bonding or something? Lemme finish this truffle burger first...")
-}
-
-text gText_ImProbablyBetterThanYou_NomNomNom {
-    format("Nom nom nom...")
-}
-
-text gText_ImProbablyBetterThanYou_IShouldCheckOut {
-    format("I should check out my room!")
 }
 
 movement ImProbablyBetterThanYou_WalkToPlayer {

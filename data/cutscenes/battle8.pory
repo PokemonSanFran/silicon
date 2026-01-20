@@ -85,7 +85,7 @@ script Battle8_StartBattle_Script
         closemessage
 
 
-        trainerbattle_no_intro(TRAINER_KAI_BATTLE8,gText_Battle8_MaybeINeed)
+        trainerbattle_no_intro(TRAINER_KAI_BATTLE8,format("Maybe I need to get an SS Rank to keep up with you…"))
         goto(Battle8_KaiDefeated_Dialogue)
 }
 
@@ -122,66 +122,6 @@ script Battle8_KaiDefeated_Dialogue
         endcutscene
         release
         end
-}
-
-text gText_Battle8_YouKnowIWasInGoodMood
-{
-    format("You know, I was in a good mood after breaking S Rank, and now all of a sudden…")
-}
-
-text gText_Battle8_GreatToSeeYouToo
-{
-    format("Great to see you too. What rank thing are you talking about?")
-}
-
-text gText_Battle8_PrimaryAttraction
-{
-    format("One of the big attractions of Resido - the Seven Sisters Challenge. It used to be a lot more popular when 1v1 battles were a novelty- before the corporations declared it as the official League format.")
-}
-
-text gText_Battle8_SoWhatsTheChallenge
-{
-    format("So, what's the challenge? And how do you get an S Rank?")
-}
-
-text gText_Battle8_TheSistersAreExperts
-{
-    format("The sisters are experts in 1v1, and you've got to beat all of them, in a row, in as few turns as possible. I've heard a rumor that Magnus got an SS Rank once, but those guys are on a different level… but you're not even close to that.")
-}
-
-text gText_Battle8_YouTalkALot
-{
-    format("You talk a lot of shit for somebody that's never beaten me.")
-}
-
-text gText_Battle8_MaybeINeed
-{
-    format("Maybe I need to get an SS Rank to keep up with you…")
-}
-
-text gText_Battle8_YouKnowItDoesnt
-{
-    format("You know, it doesn't have to be like this. I'm not out to get you.")
-}
-
-text gText_Battle8_YeahThatsPart
-{
-    format("Yeah, that's part of the problem. Your ignorance of the situation and your skill almost makes it worse.")
-}
-
-text gText_Battle8_WhatSituation
-{
-    format("What situation? I'm just doing the Gym Challenge. Just like you.")
-}
-
-text gText_Battle8_NotEngaging
-{
-    format("You're collecting badges on this highly curated route, sure, but you're not engaging with the region - my home - beyond that.")
-}
-
-text gText_Battle8_TheRegion
-{
-    format("This region has rich with so much culture that you won't see unless you dig deeper. If you actually care, the Seven Sisters Challenge is a good start.")
 }
 
 movement Battle8_WalkOutOfHouse

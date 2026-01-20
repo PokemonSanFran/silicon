@@ -1,4 +1,3 @@
-//gText_Prologue_
 //Prologue_
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
@@ -45,7 +44,7 @@ script Prologue_InteractMagnus_Script{
         closemessage
         startmenu_savescreen
         setvar(VAR_PROLOGUE_STATE,LOST_TO_MAGNUS)
-        trainerbattle_no_intro(TRAINER_MAGNUS_PROLOGUE,gText_Prologue_Fantastic)
+        trainerbattle_no_intro(TRAINER_MAGNUS_PROLOGUE,format("Fantastic work, {PLAYER}."))
         goto(Prologue_PostBattle_Script)
         release
         end
@@ -368,103 +367,3 @@ movement Prologue_Leaveroom_Movement{
         walk_down * 5
         step_end
 }
-
-text gText_Prologue_July31{
-    format("10 years ago...")
-}
-
-text gText_Prologue_AFewDays{
-    format("The next day...{PAUSE_UNTIL_PRESS}")
-}
-
-text gText_Prologue_HelpModal{
-    format("In the final build, this will be a modal explaining that you can teach your Pokémon different moves from the Summary Screen.")
-}
-
-text gText_Prologue_YouMadeIt{
-    format("You made it, {PLAYER}. Welcome to your final battle.")
-}
-text gText_Prologue_WeveBeenWatching{
-    format("We've been watching your progress for a while now, and your battles against the other three were absolutely captivating.")
-}
-text gText_Prologue_YoureGoingToBe{
-    format("You're going to be a great Champion to carry on the legacy of Resido... if you can defeat me!")
-}
-text gText_Prologue_Fantastic{
-    format("Fantastic work, {PLAYER}.")
-}
-text gText_Prologue_AdamYouAre{
-    format("{PLAYER}! You are now the Resido Pokémon League Champion!")
-}
-text gText_Prologue_AndPerhaps{
-    format("And perhaps, you will be Resido's last true Champion.")
-}
-text gText_Prologue_WearThis{
-    format("Wear this title with as much as I did when I earned it! And now, for the Hall of Fame!")
-}
-text gText_Prolouge_ItsNotAFull{
-    format("Its not the usual celebration, but of course, with the recent news, the budget has been slashed. But we've figured a small gathering with the Elite Four and Gym Leaders would be nice.")
-}
-text gText_Prologue_EllenHasA{
-    format("Ellen was waiting for us to arrive - they've got a speech prepared.")
-}
-
-text gText_Prologue_ThankYouAll{
-    format("Thank you all for being here!")
-}
-
-text gText_Prologue_FirstOfCourse{
-    format("First of course, congratulations to the newest Champion, {PLAYER}! Despite not being from here, you've excelled in our region's competitive climate, and we're honored to cement you into our Hall of Fame.")
-}
-text gText_Prologue_IRegretToInform{
-    format("Of course, I regret to inform you all that effective immediately, I'll be stepping down as a member of the Elite Four.")
-}
-text gText_Prologue_IWillRetireAnd{
-    format("I will be retiring my career as a Trainer, and soon after, I'll be leaving the region.")
-}
-text gText_Prologue_ICanSoClearlySee{
-    format("There's no easy way to put this - I don't have any hope in the new League changes. I think this is beginning of a very dark road ahead of us - we have customs and traditions and culture built here, and they've let the money get in the way of that. For those of you that haven't given up, and are fighting the good fight, you have my deepest respect...")
-}
-text gText_Prologue_AndIFearWeAreFighting{
-    format("but also my deepest sympathies. I fear this is a battle we've already lost, and it's only a matter of time before we've been stripped of everything... and I can't bear the thought of that.")
-}
-text gText_Prologue_GoodLuckToAll{
-    format("Good luck to all of you.")
-}
-text gText_Prologue_HowCouldThey{
-    format("How could they just up and leave? Just like that? No warning? No plan? What...")
-}
-text gText_Prologue_IKnewThey{
-    format("I knew they were unhappy, but this is just as much of a shock to me as it is you guys.  But... Ellen was always about taking action. And I guess this was their best action.")
-}
-text gText_Prologue_OneWhiffOf{
-    format("One whiff of trouble and they leave? Just like that? Fine. Who needs them, we'll find another Elite Four member, won't we?")
-}
-text gText_Prologue_FirstBDThen{
-    format("First BD sells out, now Ellen is quitting... perhaps I'm on the wrong side of history here.")
-}
-
-text gText_Prologue_HeReallyWent{
-    format("What a sad party to send us off. To think, one person could destroy our legacies...")
-}
-
-text gText_Prologue_ItsGonnaBeAYearAndThen{
-    format("It's gonna be a year before they change their minds and are begging to go back to the way things were, no doubt! We got a good thing going for us, and we know what we're doing. We're Gym Leaders, after all!")
-}
-text gText_Prologue_YesTheyJust{
-    format("Yes, they just... left! Walked out and quit, just like that! What now?")
-}
-text gText_Prologue_OnceYouStep{
-    format("Hey, are you ready to get out of here? Once you leave,I can't let you back in.")
-}
-
-text Prologue_AreYouSure_Text
-{
-    format("Are you sure your name is {PLAYER}? You cannot change this later.")
-}
-
-text Prologue_HowDoesTheWorld_Text
-{
-    format("How does the world see you? You can change this later.")
-}
-

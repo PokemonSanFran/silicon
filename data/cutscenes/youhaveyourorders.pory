@@ -164,13 +164,3 @@ movement YouHaveYourOrders_PaceInOffice {
     face_player
 }
 
-
-text gText_YouHaveYourOrders_ICouldGoShut
-{
-    format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create.")
-}
-
-text gText_YouHaveYourOrders_DoYouWantTo
-{
-    format("Do you want to go to {STR_VAR_1}?")
-}

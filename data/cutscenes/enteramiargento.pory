@@ -38,14 +38,14 @@ script EnterAmiArgento_AskAboutGym_Dialogue {
 script EnterAmiArgento_FacePlayerBeforeBattle_Script {
         msgbox(format("But they never will. Now let's see if you can handle the magic!"),MSGBOX_NPC,,SPEAKER_AMIARGENTO)
         closemessage
-        trainerbattle_no_intro(TRAINER_AMIARGENTO,gText_EnterAmiArgento_AhIGotTooGreedy)
+        trainerbattle_no_intro(TRAINER_AMIARGENTO,format("Ah, I got too greedy and tried to have it all!"))
         goto(EnterAmiArgento_AmiArgentoDeafeated_Script)
 }
 
 script EnterAmiArgento_StartGymBattle_Script {
         msgbox(format("But they never will. Now let's see if you can handle the magic!"),,SPEAKER_AMIARGENTO)
         closemessage
-                trainerbattle_no_intro(TRAINER_AMIARGENTO,gText_EnterAmiArgento_AhIGotTooGreedy)
+                trainerbattle_no_intro(TRAINER_AMIARGENTO,format("Ah, I got too greedy and tried to have it all!"))
         goto(EnterAmiArgento_AmiArgentoDeafeated_Script)
 }
 
@@ -81,45 +81,3 @@ script EnterAmiArgento_PostGymBattle2_Dialogue {
         end
 }
 
-text gText_EnterAmiArgento_SkatingAround {
-            format("Skating around the rink down there, you put on quite the show, {PLAYER}! What do you think of the place?")
-        }
-
-text gText_EnterAmiArgento_ItsInteresting {
-            format("It's… interesting?")
-        }
-
-text gText_EnterAmiArgento_OhComeOn {
-            format("Oh come on, you won't hurt my feelings.")
-        }
-
-text gText_EnterAmiArgento_WeirdItsWeird {
-            format("Weird. It's weird.")
-        }
-
-text gText_EnterAmiArgento_IveAlwaysSaid {
-            format("Excellent! I've always said, “Be the strange you want to see in the world!” And I've busted my ass to make this place stranger than fiction… and better than art.")
-        }
-
-text gText_EnterAmiArgento_WhenIWasAwarded {
-            format("When I was awarded this Gym, I knew I had to keep pushing the boundaries. It's important to me to keep bending the rules, keep everybody guessing, thinking, racking their brains to figure me out…")
-        }
-
-text gText_EnterAmiArgento_ButTheyNeverWill {
-            format("But they never will. Now let's see if you can handle the magic!")
-        }
-
-text gText_EnterAmiArgento_AhIGotTooGreedy {
-            format("Ah, I got too greedy and tried to have it all!")
-        }
-
-text gText_EnterAmiArgento_ThatTMwill {
-            format("That TM will teach your Pokémon Psfgymattack8. I hope it's as useful for you as it has been for me!")
-        }
-
-text gText_EnterAmiArgento_IGetSoEmotional {
-            format("I get so emotional every time I think of trainers walking out with my badge. Not because I'm upset… but I'm proud. Now go you magical bitch, conquer the world!")
-        }
-text gText_EnterAmiArgento_BadgeGet {
-    format("You received the AmiArgentoBadge Badge!")
-}

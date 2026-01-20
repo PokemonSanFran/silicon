@@ -91,58 +91,6 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
 }
 
 
-text gText_WaitYouWentWhere_WelcomeBackFrom {
-    format("Ah {PLAYER}, welcome back from Chasilla! I hear you defeated Kauna, as expected from you.")
-}
-
-text gText_WaitYouWentWhere_YeahThanksFor {
-    format("Yeah, thanks for your help. Where are you going?")
-}
-
-text gText_WaitYouWentWhere_YeahNoProblem {
-    format("Haha, it's no problem, really.")
-}
-
-text gText_WaitYouWentWhere_IHaveSomeBusiness {
-    format("I have some business to attend to in CapheCity. Let's walk together. What's interested you the most about Resido?")
-}
-
-text gText_WaitYouWentWhere_IActuallyJustGot {
-    format("Hmm... Actually, I thought Arantraz was really fascinating.")
-}
-
-text gText_WaitYouWentWhere_ThePassWeGave {
-    format("The pass we gave you doesn't let you go there…")
-}
-
-text gText_WaitYouWentWhere_GaveMeAPass {
-    format("Yeah, a The Tide member gave me a pass as an apology. It's complicated.")
-}
-
-text gText_WaitYouWentWhere_WhatAPainIn {
-    format("Uh, The Tide, what a pain in my ass. They're a bunch of anarchists that side with criminals. As you've seen, they make a lot of noise and cause trouble for regular people.")
-}
-
-text gText_WaitYouWentWhere_YeahIveSeenThem {
-    format("Yeah, I've seen them around. What's the deal with the Elite Four? Resido used to have one?")
-}
-
-text gText_WaitYouWentWhere_YesBeforeWeRevamped {
-    format("Yes, before we revamped their League structure. They used to be the strongest Trainers in Resido, but we hope that trainers like you and Charlotte will be able to outshine them soon. Ugh, and finally, we're done dealing with Double Battles… what a mess.")
-}
-
-text gText_WaitYouWentWhere_OrreHasALot {
-    format("Orre has a lot of double battles! They're not that bad.")
-}
-
-text gText_WaitYouWentWhere_NoOffense {
-    format("No offense - I'm sure they're fine, but certainly not fit for a world-class League!")
-}
-
-text gText_WaitYouWentWhere_GoingThisWay {
-    format("Well, time to hike this miserable hill. I'll save you the hassle.  Stay out of trouble, okay?")
-}
-
 movement WaitYouWentWhere_PlayerFromSouth {
     walk_right
         walk_up

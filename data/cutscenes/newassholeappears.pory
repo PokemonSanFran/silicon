@@ -74,7 +74,7 @@ script NewAssholeAppears_StartBattle_Script{
     faceplayer
     msgbox(format("Go mind your business in your own region."),,SPEAKER_KAI)
     closemessage
-    trainerbattle_no_intro(TRAINER_KAI_NEWASSHOLEAPPEARS,gText_NewAssholeAppears_YoureTough)
+    trainerbattle_no_intro(TRAINER_KAI_NEWASSHOLEAPPEARS,format("...you're tough."))
     goto(NewAssholeAppears_PostBattle_Script)
 }
 
@@ -113,70 +113,6 @@ script NewAssholeAppears_KaiExit_Script{
     call(AaandWereBack_Monologue)
     releaseall
     end
-}
-
-text gText_NewAssholeAppears_YouLookFamiliar {
-    format("You look familiar. You flew here to do the SharpRise Capital League Challenge, right?")
-}
-
-text gText_NewAssholeAppears_YeahYouHadSome{
-    format("Yeah, you had some weird rant in Perlacia City the other day. I'm {PLAYER}, and yes, I'm doing the challenge.")
-}
-
-text gText_NewAssholeAppears_JustStarted {
-    format("Yeah! Just started not too long ago. Name's {PLAYER}.")
-}
-
-text gText_NewAssholeAppears_NotDoingMuchGood {
-    format("Judging from your Badge count, the program isn't doing you much good.")
-}
-
-text gText_NewAssholeAppears_ThoughtIRecognized {
-    format("...yeah I thought I recognized you. Guess you transplants aren't all a total joke!")
-}
-
-text gText_NewAssholeAppears_ColonizersAreReallyGetting {
-    format("Yeah, I heard about your wins from the guys. The colonizers are really getting a head start, huh?")
-}
-
-text gText_NewAssholeAppears_WhatIsYourProblem {
-    format("Woah, what the hell is your problem?")
-}
-
-text gText_NewAssholeAppears_GoMindYourBusiness {
-    format("Go mind your business in your own region.")
-}
-
-text gText_NewAssholeAppears_YoureTough {
-    format("...you're tough.")
-}
-
-text gText_NewAssholeAppears_Whateveryournameis {
-    format("Are you done being an ass, whateveryournameis?")
-}
-
-text gText_NewAssholeAppears_MyNameIsKai {
-    format("My name is Kai.")
-}
-
-text gText_NewAssholeAppears_EveryoneCater {
-    format("Everyone's falling over themselves to cater to transplants like you. The rest of us who are actually a part of this community get left in the cold. But I wouldn't expect you to understand that.")
-}
-
-text gText_NewAssholeAppears_YouSoundCrazyPerson {
-    format("You sound like a crazy person.")
-}
-
-text gText_NewAssholeAppears_NotStupidJustIgnorant {
-    format("I'm not crazy, you're just ignorant. I shouldn't be mad at you. The ignorance isn't entirely your fault. ")
-}
-
-text gText_NewAssholeAppears_SeeYouAround {
-    format("See you around.")
-}
-
-text gText_NewAssholeAppears_IHopeNot {
-    format("I hope not.")
 }
 
 movement NewAssholeAppears_X0_WalkToPlayer_Movement {

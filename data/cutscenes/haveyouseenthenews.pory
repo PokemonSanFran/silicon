@@ -57,36 +57,6 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
     }
 }
 
-text gText_HaveYouSeenTheNews_Wheeze{
-    format("{PLAYER}... Charlotte... We need.. oh I'm so out of breath...")
-}
-
-text gText_HaveYouSeenTheNews_WaitHowDidYou{
-    format("Oliver? How did you get so deep in here? You can't battle worth shit!")
-}
-
-text gText_HaveYouSeenTheNews_WedLikeYourHelp {
-    format("Never mind that... okay. We'd like your help again.")
-}
-text gText_HaveYouSeenTheNews_ShitWhatDid {
-    format("Shit, what did TheTide do now?")
-}
-text gText_HaveYouSeenTheNews_YoureStartingToSound {
-    format("You're starting to sound like a native… they've completely infiltrated our social media platforms. Adelaide was impressed with your work at SharpRise Stadium, and thinks you two might be able to help.")
-}
-text gText_HaveYouSeenTheNews_HowAreWeGoing {
-    format("How are we going to help? Sounds a little above us.")
-}
-text gText_HaveYouSeenTheNews_NoTimeToExplain {
-    format("No time to explain! We're heading to SharpRise Spire right now. Do you want to ride in our Arriba, {PLAYER}?")
-}
-text gText_HaveYouSeenTheNews_FineButDontDawdle {
-    format("Fine, but don't dawdle. Come to the second floor.")
-}
-text gText_HaveYouSeenTheNews_SoundsLikeYouve {
-    format("Sounds like you've been deputized, kid. Just make sure you don't end up a pawn, yeah? You've got real potential.")
-}
-
 movement HaveYouSeenTheNews_LeaveClearingA {
     walk_down * 3
     step_end

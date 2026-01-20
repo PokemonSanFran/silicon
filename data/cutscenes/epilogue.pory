@@ -53,7 +53,7 @@ script Epilogue_Script_TalaApproachesKai
     walk_up * 5
     ))
     waitmovement(TALA)
-    msgbox(text=Epilogue_Text_YouKnowThis,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You know, this is usually where I stand when I'm feeling particularly accomplished, or proud."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     closemessage
     applymovement(KAI,
     moves(
@@ -73,46 +73,46 @@ script Epilogue_Script_TalaApproachesKai
 
 script Epilogue_Dialogue_ConversationAboutProgress
 {
-    msgbox(text=Epilogue_Text_AreYouFeeling,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_AreYou,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_LAUGH)
-    msgbox(text=Epilogue_Text_TheNewSharprise,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
-    msgbox(text=Epilogue_Text_HesJustAnother,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
-    msgbox(text=Epilogue_Text_SharpRiseCapitalAnd,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_WereYouExpecting,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SWEAT)
-    msgbox(text=Epilogue_Text_IGuessI,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_PlayerIsA,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SHOCK)
-    msgbox(text=Epilogue_Text_AndLookAt,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_YouManagedTo,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
-    msgbox(text=Epilogue_Text_ThatBringingMore,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_PlayerIsOne,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
-    msgbox(text=Epilogue_Text_ShesGreatBut,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestOne,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestTwo,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestThree,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestFour,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestFive,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_YouMightBe,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_YoureDiscountingAll,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
-    msgbox(text=Epilogue_Text_ListQuestOne,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestTwo,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestThree,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestFour,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ListQuestFive,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("Are you feeling proud of all the work you've done?"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("Are you serious? "),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_LAUGH)
+    msgbox(text=format("The new Sharprise CEO... have you heard about him?"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=format("He's just another corporate suit! Sure, he's not a murderer like Adelaide, but all of his apologies and promises to turn over a new leaf are completely hollow."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=format("Sharprise Capital and all of its slimy tentacles are going to keep making Resido worse. "),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("Were you expecting {PLAYER} to defeat Adelaide and that would be the end of Sharprise? It's going to take a lot more than one team of corrupt executives to make Sharprise"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SWEAT)
+    msgbox(text=format("I guess I wasn't really sure what would happen, but I wish we had done more."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("{PLAYER} is a perfect example of you and The Tide's hard work. {PLAYER} was brought to this region BY Sharprise, completely in support of them."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SHOCK)
+    msgbox(text=format("And look at her now!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You managed to redirect their fame and talent into actually helping and rebuilding the region. "),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
+    msgbox(text=format("THAT, bringing more people to your cause - that's the real work."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("{PLAYER} is one Trainer!"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=format("She's great, but there's so much more work to be done today!"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest one..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest two..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest three..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest four..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest five!"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You might be right, Kai, but..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You're discounting all the work you, {PLAYER} and The Tide HAVE done!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
+    msgbox(text=format("List finished quest one..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List finished quest two..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List finished quest three..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List finished quest four..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List finished quest five!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     closemessage
     applymovement(TALA,moves(
         face_up
     ))
-    msgbox(text=Epilogue_Text_IveBeenAt,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_TheStruggleTo,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_MyJobThe,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_YouShouldBe,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_YouCanStill,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ItProbablyWont,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=Epilogue_Text_ButItsYour,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("I've been at this longer than you've been alive."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("The struggle to do more will alwys exist."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("My job... The Tide's job... is to inspire and empower the next generation to keep moving forward."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You should be proud of what you've done, Kai. "),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You can still appreciate that there is much to be done."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("It probably won't all be done in your lifetime!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("But its your job to plant berries that only your grandchildren will be able to harvest."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     applymovement(KAI,moves(
         face_up
     ))
-    msgbox(text=Epilogue_Text_ThanksTala,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("...Thanks Tala."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     closemessage
     goto(Epilogue_Script_ShowTweetLeaveMap)
 }
@@ -150,123 +150,3 @@ script Epilogue_Script_WarpToKai
     end
 }
 
-text Epilogue_Text_YouKnowThis
-{
-	format("You know, this is usually where I stand when I'm feeling particularly accomplished, or proud.")
-}
-text Epilogue_Text_AreYouFeeling
-{
-	format("Are you feeling proud of all the work you've done?")
-}
-text Epilogue_Text_AreYou
-{
-	format("Are you serious? ")
-}
-text Epilogue_Text_TheNewSharprise
-{
-	format("The new Sharprise CEO... have you heard about him?")
-}
-text Epilogue_Text_HesJustAnother
-{
-	format("He's just another corporate suit! Sure, he's not a murderer like Adelaide, but all of his apologies and promises to turn over a new leaf are completely hollow.")
-}
-text Epilogue_Text_SharpRiseCapitalAnd
-{
-	format("Sharprise Capital and all of its slimy tentacles are going to keep making Resido worse. ")
-}
-text Epilogue_Text_WereYouExpecting
-{
-	format("Were you expecting {PLAYER} to defeat Adelaide and that would be the end of Sharprise? It's going to take a lot more than one team of corrupt executives to make Sharprise disappear!")
-}
-text Epilogue_Text_IGuessI
-{
-	format("I guess I wasn't really sure what would happen, but I wish we had done more.")
-}
-text Epilogue_Text_PlayerIsA
-{
-	format("{PLAYER} is a perfect example of you and The Tide's hard work. {PLAYER} was brought to this region BY Sharprise, completely in support of them.")
-}
-text Epilogue_Text_AndLookAt
-{
-	format("And look at her now!")
-}
-text Epilogue_Text_YouManagedTo
-{
-	format("You managed to redirect their fame and talent into actually helping and rebuilding the region. ")
-}
-text Epilogue_Text_ThatBringingMore
-{
-	format("THAT, bringing more people to your cause - that's the real work.")
-}
-text Epilogue_Text_PlayerIsOne
-{
-	format("{PLAYER} is one Trainer!")
-}
-text Epilogue_Text_ShesGreatBut
-{
-	format("She's great, but there's so much more work to be done today!")
-}
-text Epilogue_Text_ListQuestOne
-{
-	format("List quest one...")
-}
-text Epilogue_Text_ListQuestTwo
-{
-	format("List quest two...")
-}
-text Epilogue_Text_ListQuestThree
-{
-	format("List quest three...")
-}
-text Epilogue_Text_ListQuestFour
-{
-	format("List quest four...")
-}
-text Epilogue_Text_ListQuestFive
-{
-	format("List quest five!")
-}
-text Epilogue_Text_YouMightBe
-{
-	format("You might be right, Kai, but...")
-}
-text Epilogue_Text_YoureDiscountingAll
-{
-	format("You're discounting all the work you, {PLAYER} and The Tide HAVE done!")
-}
-text Epilogue_Text_IveBeenAt
-{
-	format("I've been at this longer than you've been alive.")
-}
-text Epilogue_Text_TheStruggleTo
-{
-	format("The struggle to do more will alwys exist.")
-}
-text Epilogue_Text_MyJobThe
-{
-	format("My job... The Tide's job... is to inspire and empower the next generation to keep moving forward.")
-}
-text Epilogue_Text_YouShouldBe
-{
-	format("You should be proud of what you've done, Kai. ")
-}
-text Epilogue_Text_YouCanStill
-{
-	format("You can still appreciate that there is much to be done.")
-}
-text Epilogue_Text_ItProbablyWont
-{
-	format("It probably won't all be done in your lifetime!")
-}
-text Epilogue_Text_ButItsYour
-{
-	format("But its your job to plant berries that only your grandchildren will be able to harvest.")
-}
-text Epilogue_Text_ThanksTala
-{
-	format("...Thanks Tala.")
-}
-text Epilogue_Text_WeveGotMore
-{
-	format("We've got more work to do! Let's get at it.")
-}

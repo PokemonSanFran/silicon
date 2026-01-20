@@ -94,7 +94,7 @@ script BeachBattle_StartBattle_Script
     lock
         msgbox(format("My brain is scrambled from running around all day. Let's see if I can beat you without breaking a sweat!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
         closemessage
-        trainerbattle_no_intro(TRAINER_CHARLOTTE_BEACHBATTLE,gText_BeachBattle_ImLegitShook)
+        trainerbattle_no_intro(TRAINER_CHARLOTTE_BEACHBATTLE,format("I'm legit shook. You're even stronger than I thought!"))
         closemessage
 
         goto(BeachBattle_PostBattle_Dialogue)
@@ -128,76 +128,6 @@ script BeachBattle_PostBattle_Dialogue
         endcutscene
         release
         end
-}
-
-text gText_BeachBattle_HeyPlayer
-{
-    format("Hey, {PLAYER}!!")
-}
-
-text gText_BeachBattle_ImHeadingNorth
-{
-    format("I'm heading north for my last Badge. How's your challenge holding up?")
-}
-
-text gText_BeachBattle_OhShit
-{
-    format("Oh shit! You beat me to eight badges - guess I underestimated you!")
-}
-
-text gText_BeachBattle_OhNiceLastOne
-{
-    format("Oh nice, last one too!")
-}
-
-text gText_BeachBattle_TwoLeft
-{
-    format("Two left, that's what I figured.")
-}
-
-text gText_BeachBattle_HmmOnlyFive
-{
-    format("Hmm, only five? Guessed you'd be further along by now!")
-}
-
-text gText_BeachBattle_ImNotSureThatSlow
-{
-    format("{PLAYER}, I'm not sure that slow and steady always win the race… you gotta pick it up!")
-}
-
-text gText_BeachBattle_IveBeenALittleDistracted
-{
-    format("I've been a little… distracted! But I'll make it up for sure, don't worry.")
-}
-
-text gText_BeachBattle_MyBrainIsScrambled
-{
-    format("My brain is scrambled from running around all day. Let's see if I can beat you without breaking a sweat!")
-}
-
-text gText_BeachBattle_ImLegitShook
-{
-    format("I'm legit shook. You're even stronger than I thought!")
-}
-
-text gText_BeachBattle_WellImNotSurprised
-{
-    format("Well, I'm not surprised you've already got seven Badges, that was tough!")
-}
-
-text gText_BeachBattle_UghIShouldBe
-{
-    format("Ugh, I should be stronger than that.")
-}
-
-text gText_BeachBattle_IfItTakesATeam
-{
-    format("If it takes a team as good as yours to beat Neriene, then I might need to rethink things…")
-}
-
-text gText_BeachBattle_NextTimeIllHave
-{
-    format("Next time, I'll have you figured out!")
 }
 
 movement BeachBattle_ExclaimAndTurn

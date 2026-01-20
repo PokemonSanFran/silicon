@@ -120,9 +120,9 @@ script GroupStages_RoundRobinMatch_Script {
 //PSF TODO these trainers as well as the one before the kai fight should be a specifically themed team that Armando teaches you how to twart during the Enter The Master cutscene
 
         switch (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE)){
-            case PRE_BATTLE_1: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_A,gText_GroupStages_Placeholder)
-            case PRE_BATTLE_2: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_B,gText_GroupStages_Placeholder)
-            case PRE_BATTLE_3: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_C,gText_GroupStages_Placeholder)
+            case PRE_BATTLE_1: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_A,format(""))
+            case PRE_BATTLE_2: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_B,format(""))
+            case PRE_BATTLE_3: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_C,format(""))
         }
 
     goto(GroupStages_PostRoundRobinMatch_Script)
@@ -167,26 +167,6 @@ script GroupStages_RoundRobinGroupComplete_Script {
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,10,3)
 }
 
-
-text gText_GroupStages_EasyPeasy {
-    format("Easy peasy! Good luck in there!")
-}
-
-text gText_GroupStages_Placeholder{
-    format("this is placeholder text.")
-}
-
-text gText_GroupStages_OnceYouStart {
-    format("Once you start the Group Stage, there's no turning back. You must complete the group stage before you can leave again, and you must complete the tournament before you can leave SharpRise Stadium. Are you ready to continue?")
-}
-
-text gText_GroupStages_PlayerReturnToArena {
-    format("Paging competitor {PLAYER}. {PLAYER}. Please return to the arena for your scheduled match.")
-}
-
-text gText_GroupStages_OhRight {
-    format("Oh right, I can't leave once the tournament has started...")
-}
 
 movement GroupStages_WalkToPlayer {
     walk_down * 6

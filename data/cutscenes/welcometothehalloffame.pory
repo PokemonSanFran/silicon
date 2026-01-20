@@ -60,16 +60,6 @@ script WelcometotheHallofFame_GameClear_Script{
 
 //PSF TODO add reference to emails here, maybe pitch the whole crowd on email notifications?
 
-text gText_WelcomeToTheHallOfFame_YourChampion {
-    format("Resido! Your Champion! {PLAYER}!")
-}
-text gText_WelcomeToTheHallOfFame_ToTheHundreds {
-    format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. ")
-}
-text gText_WelcomeToTheHallOfFame_AndNowLetsCreate {
-    format("And now, let's create history together. I am proud to present the first inductee to the SharpRise Capital Hall of Fame. Resido's Champion: {PLAYER}.")
-}
-
 movement WelcomeToTheHallOfFame_MoveAdelaideToPodium {
     walk_left * 4
         walk_up * 3

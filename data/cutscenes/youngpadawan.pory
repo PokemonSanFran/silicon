@@ -54,7 +54,7 @@ script YoungPadawan_StartBattle_Script{
         msgbox(format("Hah! You got a good spirit. Let's see how long you can hold up against your elders!"),,SPEAKER_TALA)
 
         closemessage
-        trainerbattle_continue_after_lose(TRAINER_TALA,gText_YoungPadawan_DontBeatYourselfUp)
+        trainerbattle_continue_after_lose(TRAINER_TALA,format("...how?!"))
         goto(YoungPadawan_PostBattle_Dialogue)
 }
 
@@ -123,108 +123,6 @@ script YoungPadawan_PostBattle_Dialogue
     endcutscene
     release
     end
-}
-
-text gText_YoungPadawan_WowYouLookTired {
-    format("Wow, you look tired! Let me help.")
-}
-
-text gText_YoungPadawan_DidTheChallenge {
-    format("Did the challenge kick your ass? Those kids are tough.")
-}
-
-text gText_YoungPadawan_ThankYou {
-    format("Thank you!")
-}
-
-text gText_YoungPadawan_DontMentionIt {
-    format("Don't mention it.")
-}
-
-text gText_YoungPadawan_LearnALot {
-    format("Learn a lot up there?")
-}
-
-text gText_YoungPadawan_TheStoryOfTheIsland {
-    format("The story of the island is crazy. And I didn't realize the earthquakes here could be that vicious.")
-}
-
-text gText_YoungPadawan_ThatQuakeWasOne {
-    format("That quake was one for the history books! Shook me to my core.")
-}
-
-text gText_YoungPadawan_HistoryBooksAreCrazy {
-    format("History books are crazy. Losers don't get a pre-release copy to leave their edits in the margins... the winners just say whatever they want, and everybody has to deal with it.")
-}
-
-text gText_YoungPadawan_MakesYouWonder {
-    format("Makes you wonder how committed to accuracy the winners are. Old geezers like me, who were around for the history in the making, have a responsibility to set the record straight. Gotta make sure the truth doesn't get lost, you know?")
-}
-
-text gText_YoungPadawan_MakesSenseYeah {
-    format("Makes sense, yeah. But the government doesn't have any reason to lie, which is a relief.")
-}
-
-text gText_YoungPadawan_YouveGotAGoodSpirit {
-    format("Hah! You got a good spirit. Let's see how long you can hold up against your elders!")
-}
-
-text gText_YoungPadawan_DidIUnderestimate {
-    format("Did I underestimate you?")
-}
-
-text gText_YoungPadawan_KidYoureSomethingElse {
-    format("Kid, you're something else! But it ends here.")
-}
-
-text gText_YoungPadawan_DontBeatYourselfUp {
-    format("Heh, don't beat yourself up. I got at least 50 years on ya.")
-}
-
-text gText_YoungPadawan_ThisAintHowItWas {
-    format("This ain't how it was supposed to go!")
-}
-
-text gText_YoungPadawan_DidYouHack
-{
-    format("Did you hack the Matrix? Maybe you got REAL lucky on a randomizer run? ... We're gonna pretend I won, okay?")
-}
-
-text gText_YoungPadawan_GotItYouWon {
-    format("Haha got it, you won.")
-}
-
-text gText_YoungPadawan_KeepItSecretToo {
-    format("Keep it secret too. Here, take these.")
-}
-
-text gText_YoungPadawan_KeepTraining {
-    format("Keep training! Once you learn a little bit more about the world, let's battle again.")
-}
-
-text gText_YoungPadawan_AndISeeYou
-{
-    format("And I see you don't have a {STR_VAR_1} yet! I don't have a spare one, but there's a new Alolan exhibit at the Perlacia Museum that could point you in the right direction.")
-}
-
-text gText_YoungPadawan_IveNeverBattled {
-    format("I've never battled anybody so strong!")
-}
-
-text gText_YoungPadawan_YeahTotally {
-    format("Will do!")
-}
-
-text gText_YoungPadawan_UntilThenHeres {
-    format("Now that I'm getting a good look at you, you're not very well equipped at all! I've got an extra one of these you can use, lemme look through this bag...")
-}
-
-text gText_YoungPadawan_ThoseCanBeTough {
-    format("I hear those can be tough to get if you're not from here. Good luck with the rest of your challenge, {PLAYER}.")
-}
-
-text gText_YoungPadawan_FullSet{
-	format("{PLAYER} obtained a set of Power items!")
 }
 
 movement YoungPadawan_ApproachFromIsland_Movement {

@@ -87,7 +87,7 @@ script SurvivalChance333_Battle_Script {
         closemessage
         choose_mons
         goto_if_eq(VAR_RESULT,0,SurvivalChance333_Battle_Script)
-        multi_2_vs_1(TRAINER_POLICECHIEF,gText_SurvivalChance333_Hmph,PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_POLICECHIEF,format("Hmph!"),PARTNER_STEVEN)
         goto(SurvivalChance333_PostBattle_Script)
 }
 
@@ -255,92 +255,6 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script {
         endcutscene
         release
         end
-}
-
-text gText_SurvivalChance333_HeresThe {
-    format("Here's the fuckin' plan. We're gonna -")
-}
-
-text gText_SurvivalChance333_IsSomethingWrong {
-    format("Is something wrong Chief?")
-}
-
-text gText_SurvivalChance333_ISpent15Years {
-    format("First off, I spent 15 years in the military, dedicated my life to tactical warfare and I've never run a failed operation… and now somehow I'm doing the dirty work for some tech bros.")
-
-}
-text gText_SurvivalChance333_Next{
-    format("Next, I've got the same tech bros who won a contract for 'special defense operations in the public interest' telling me how to do my job...")
-}
-text gText_SurvivalChance333_Cherry{
-    format("And the cherry on top: I have to babysit two hotshots from nowhere as I try to infiltrate a terrorist organization.")
-}
-
-text gText_SurvivalChance333_WoahWerePlentyTough {
-    format("Woah, we're plenty tough! You don't need to babysit us!")
-}
-
-text gText_SurvivalChance333_IThinkCharlotteMissed{
-    format("I think Charlotte missed the point and only heard that last part...")
-}
-
-text gText_SurvivalChance333_RightKidsWithZero {
-    format("Right, kids with zero operations experience who battled some foot soldiers and Garbador are supposedly tactical masterminds?")
-}
-
-text gText_SurvivalChance333_HeyWeDidntAsk {
-    format("Hey, we didn't ask to be here! ")
-}
-
-text gText_SurvivalChance333_AndIDidntAsk {
-    format("And I didn't ask for you. But here we are.")
-}
-
-text gText_SurvivalChance333_IllProveIt {
-    format("I'll prove it then. Battle me.")
-}
-
-text gText_SurvivalChance333_WontEvenBeAFair {
-    format("Won't even be a fair fight. I could take both of you at the same time, with my eyes closed.")
-}
-
-text gText_SurvivalChance333_Hmph {
-    format("Hmph!")
-}
-
-text gText_SurvivalChance333_DoYouGetItNow {
-    format("Do you get it now? We're the real deal.")
-}
-
-text gText_SurvivalChance333_YoureAPairOfKids {
-    format("…look. You're a pair of kids that are in way over your heads, with absolutely no place in a police raid. But I'm stuck with you, and you're both obviously tough as all hell. Let's make the most of it.")
-
-}
-text gText_SurvivalChance333_SoThatsThePlan {
-    format("So that's the plan. Any questions?")
-}
-text gText_SurvivalChance333_NoSir {
-    format("NO sir.")
-}
-
-text gText_SurvivalChance333_LetsGetThisParty {
-    format("Let's get this party started.")
-}
-
-text gText_SurvivalChance333_ThoseRoutesFrozen {
-    format("Those routes frozen over seals off a water escape…")
-}
-
-text gText_SurvivalChance333_MeltingTheBedrock {
-    format("Melting the bedrock prevents an underground escape…")
-}
-
-text gText_SurvivalChance333_TheyllBlowTheWall {
-    format("They'll blow the wall, and we'll dive in!")
-}
-
-text gText_SurvivalChance333_Showtime {
-    format("Showtime!")
 }
 
 movement SurvivalChance333_WalkToChief {

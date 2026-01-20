@@ -82,7 +82,7 @@ script OldAssholeAppears_StartBattle_Script
 {
     msgbox(format("Now, let's see how far behind you are!"),,SPEAKER_CHARLOTTE)
     closemessage
-    trainerbattle_no_intro(TRAINER_CHARLOTTE_OLDASSHOLEAPPEARS, gText_OldAssholeAppers_ImStartingToQuestion)
+    trainerbattle_no_intro(TRAINER_CHARLOTTE_OLDASSHOLEAPPEARS, format("I'm starting to question all those years at the private battle academy..."))
     goto(OldAssholeAppears_PostBattle_Script)
 }
 
@@ -130,66 +130,6 @@ script OldAssholeAppears_CharlotteExit_Script
     call(AaandWereBack_Monologue)
     releaseall
     end
-}
-
-text gText_OldAssholeAppears_StandingOnVolcano {
-    format("You know, we're probably standing on a volcano, {PLAYER}.")
-}
-
-text gText_OldAssholeAppears_ImSorryWhat {
-    format("I'm sorry, what?")
-}
-
-text gText_OldAssholeAppears_RegionCloseFaultline {
-    format("Or, what used to be one at least. Turns out this region is close to a tectonic faultline, which when they shift, make a bunch of tiny volcanoes, all over the place. It's kind of magical when you think about it, huh?")
-}
-
-text gText_OldAssholeAppears_DontKnowMagical {
-    format("I don't know about magical, but it's pretty neat, yeah!")
-}
-
-text gText_OldAssholeAppears_IHaveSomething {
-    format("Tell you what - I do have something magical for you, but you'll have to beat me for it first!")
-}
-
-text gText_OldAssholeAppears_DaddyShippedFullRestores {
-    format("That reminds me, Daddy shipped over way too many Full Restores and Max Elixirs, so I'll heal you up too.")
-}
-
-text gText_OldAssholeAppears_HowFarBehind {
-    format("Now, let's see how far behind you are!")
-}
-
-text gText_OldAssholeAppers_ImStartingToQuestion {
-    format("I'm starting to question all those years at the private battle academy...")
-}
-
-text gText_OldAssholeAppears_TakingThisAllSeriously {
-    format("Good to see you're taking this all seriously, {PLAYER}! My rival should be strong to keep me sharp! Well, true to my word...")
-}
-
-text gText_OldAssholeAppears_FamiliarWith {
-    format("Are you familiar with Arriba?")
-}
-
-text gText_OldAssholeAppears_ThoughtSo {
-    format("Thought so. They're everywhere, right?")
-}
-
-text gText_OldAssholeAppears_LetsYouCallARide {
-    format("Don't have it in Orre? Arriba lets you call a ride from anywhere to anywhere else that you've been.")
-}
-
-text gText_OldAssholeAppears_LetsYouUse {
-    format("That card lets you use Arriba for free! I went to the SharpRise Spire, and the League Commissioner gave me these for being the first Challenger to visit! It also lets you use the Subway System for free, but I think I'll stick to Arriba. Less homeless people to deal with, you know?")
-}
-
-text gText_OldAssholeAppears_YouveBeenSuperNice {
-    format("Oh, okay... thanks!")
-}
-
-text gText_OldAssholeAppears_NowWereEven {
-    format("Now we're even after I ditched breakfast. All right, time to go challenge the FortYobu Gym. So glad Daddy sent me these Go-Goggles, because they're impossible to find new. And like hell I'm gonna get one from the locals...")
 }
 
 movement OldAssholeAppears_CharlotteEntrance

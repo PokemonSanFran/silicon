@@ -140,33 +140,6 @@ releaseall
 end
 }
 
-text gText_HeresHowThisIsGoingToGo_CongratulationsOnAll {
-	format("Congratulations on all of your hard work! Welcome to the first stage of the Resido League Championship!")
-}
-
-text gText_HeresHowThisIsGoingToGo_WooYay {
-	format("Woo! Yay!")
-}
-
-text gText_HeresHowThisIsGoingToGo_ImSureNone {
-	format("I'm sure none of you read the information email -")
-}
-
-text gText_HeresHowThisIsGoingToGo_WaitIDid {
-	format("Wait, I did! Did nobody else?")
-	}
-text gText_HeresHowThisIsGoingToGo_DotDotDot {
-	format("…")
-}
-
-text gText_HeresHowThisIsGoingToGo_SoIllGoOver {
-	format("So here's the simple explanation: Win five battles in a row, and you'll be the Champion! If you want the more detailed version, you can view the rules on the monitor to my right.")
-}
-
-text gText_HeresHowThisIsGoingToGo_YourGroupsAnd {
-	format("Your groups, and the eventual final bracket, can also be seen on the monitor. We'll be starting with Group A in two hours. Good luck.")
-}
-
 movement HeresHowThisIsGoingToGo_LeaveLockersA {
     walk_right * 5
     walk_down * 3

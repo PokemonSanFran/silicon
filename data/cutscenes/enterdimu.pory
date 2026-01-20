@@ -30,7 +30,8 @@ script EnterDimu_Intro_Dialogue {
 
 script EnterDimu_StartGymBattle_Script {
 
-        trainerbattle_single(TRAINER_DIMU,gText_EnterDimu_LetsSeeHowCareful,gText_EnterDimu_WrongSoil,EnterDimu_PostGymBattle_Script, NO_MUSIC)
+        trainerbattle_single(TRAINER_DIMU,format("Let's see how careful and diligent you've been in your cultivation."),    format("Wrong soil? Should I try partial shade?"),EnterDimu_PostGymBattle_Script, NO_MUSIC)
+
 }
 
 script EnterDimu_PostGymBattle_Script {
@@ -66,34 +67,3 @@ script EnterDimu_PostGymBattle2_Dialogue {
         end
 }
 
-text gText_EnterDimu_WatchYourStep{
-    format("Watch your step, there are thousands of different seeds under your feet. It was an incredible amount of work to get all these micro-climates in perfect working order…")
-}
-
-text gText_EnterDimu_GrowingAGarden{
-    format("Growing a garden is much like raising a team of Pokémon - they require constant care and attention, and even the slightest miscalculation can ruin the entire crop.")
-}
-
-text gText_EnterDimu_ItsEasyToDestroy{
-    format("It's easy to destroy a flower bed with poor planning, but luckily, Pokémon are more resilient. ")
-}
-
-text gText_EnterDimu_LetsSeeHowCareful{
-    format("Let's see how careful and diligent you've been in your cultivation.")
-}
-
-text gText_EnterDimu_WrongSoil{
-    format("Wrong soil? Should I try partial shade?")
-}
-
-text gText_EnterDimu_ThatTechnicalMachineWill{
-    format("That Technical Machine will plant a seed in your Pokémon's mind, allowing them to use the move Psfgymattack6.")
-}
-
-text gText_EnterDimu_AfterAGoodHaircut{
-    format("After a good haircut and when I'm done repotting everybody, I'll have to get them some battle exposure against you!")
-}
-
-text gText_EnterDimu_BadgeGet {
-    format("You received the DimuBadge Badge!")
-}

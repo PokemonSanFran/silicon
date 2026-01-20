@@ -194,19 +194,21 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
 
 script HousingProtest_StartBattle_Script {
     lockall
-    msgbox(format("Pfft, fine with me. Turtonator, Flamethrower!"),,SPEAKER_VITOMIR)
-    closemessage
-    trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET, gText_HousingProtest_ThisIsNotHowThis)
-    goto(HousingProtest_PostBattle_Dialogue)
+	goto(HousingScript_StartActualBattle_Script)
 }
 
 script HousingProtest_StartBattle_PostSave_Script {
     locktarget
     setobjectnewmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
     setobjectnewmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
-    msgbox(format("Pfft, fine with me. Turtonator, Flamethrower!"), MSGBOX_NPC,SPEAKER_RABIA)
+	goto(HousingScript_StartActualBattle_Script)
+}
+
+script HousingScript_StartActualBattle_Script
+{
+    msgbox(format("Pfft, fine with me. Turtonator, Flamethrower!"),,SPEAKER_VITOMIR)
     closemessage
-    trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET, gText_HousingProtest_ThisIsNotHowThis)
+    trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET,format("Shit... this is not how this was supposed to go down."))
     goto(HousingProtest_PostBattle_Dialogue)
 }
 
@@ -281,154 +283,6 @@ script HousingProtest_InteractLandlord_Dialogue {
         msgbox(format("I guess so?"),,SPEAKER_LANDLORD)
     msgbox(format("What about the police?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("I'm sure they would have stopped it, but these protests are getting more and more common. The police can't be everywhere at once!"),,SPEAKER_LANDLORD)
-}
-
-text gText_HousingProtest_RichAndRude {
-    format("Hey you! Rich and rude! We don't like your attitude!")
-}
-
-text gText_HousingProtest_YoureNoGood {
-    format("Hey you! You're no good! Treat the people like you should!")
-}
-
-text gText_HousingProtest_EverybodySoAngry {
-    format("Why is everybody so angry?")
-}
-
-text gText_HousingProtest_ArentGoingToStand {
-    format("We aren't going to stand for this any longer!")
-}
-
-text gText_HousingProtest_CantKeepPushing {
-    format("You can't keep pushing us out!")
-}
-
-text gText_HousingProtest_DeserveToLive {
-    format("We deserve to live here too!")
-}
-
-text gText_HousingProtest_WeCanComeTo {
-    format("I'm sure we can come to some understanding here, please...")
-}
-
-text gText_HousingProtest_OnlyThingWereUnderstanding {
-    format("The only thing we're understanding is that you need to leave, and take your fancy apartments with you!")
-}
-
-text gText_HousingProtest_AreYouTrying {
-    format("Are you trying to intimidate me? I'm just doing my job. Don't make me call the police!")
-}
-
-text gText_HousingProtest_TheyCantArrest {
-    format("They can't arrest of all us, right?")
-}
-
-text gText_HousingProtest_AintGonnaBeNothing {
-    format("Ain't gonna be nothing to defend when we done...")
-}
-
-text gText_HousingProtest_PeopleCantStayHere {
-    format("If we, the people of Oroland can't stay here, nobody can. Let's bring it down!")
-}
-
-text gText_HousingProtest_Yeah {
-    format("Yeah!")
-}
-
-text gText_HousingProtest_LetsDoThis {
-    format("Let's do this!")
-}
-
-text gText_HousingProtest_ScrewThese {
-    format("Screw these developers!")
-}
-
-text gText_HousingProtest_ToTryReason {
-    format("Look, I'm just the super. I don't own this building, but I am responsible for making sure you don't trash it. I'm trying to reason with you and you're threatening me?")
-}
-
-text gText_HousingProtest_AintAThreat {
-    format("I don't care if you're the landlord or working for the landlord, and I promise if you don't get out of the way, we're gonna have a problem.")
-}
-
-text gText_HousingProtest_CutItOut {
-    format("Cut it out!")
-}
-
-text gText_HousingProtest_EveryTimeISee {
-    format("Every time I see you guys, you're attacking innocent people. Don't you have something more productive to do?")
-}
-
-text gText_HousingProtest_TheseClowns {
-    format("Innocent? These clowns?! Damn, you transplants really got it twisted.")
-}
-
-text gText_HousingProtest_ThisAintYourBusiness {
-    format("This ain't your business. You should un-involve yourself.")
-}
-
-text gText_HousingProtest_OhGod {
-    format("Oh god... they're going to kill me!")
-}
-
-text gText_HousingProtest_ICanTakeBoth {
-    format("I can take both of you. Leave him alone, or you're going through me.")
-}
-
-text gText_HousingProtest_FineWithMe {
-    format("Pfft, fine with me. Turtonator, Flamethrower!")
-}
-
-text gText_HousingProtest_GoPoundSand {
-    format("Go pound sand, and stay out of TheTide's way.")
-}
-
-text gText_HousingProtest_ThisIsNotHowThis {
-    format("Shit... this is not how this was supposed to go down.")
-}
-
-text gText_HousingProtest_YouProudNow {
-    format("You proud now? C'mon Vitomir.")
-}
-
-text gText_HousingProtest_KeepOnLicking {
-    format("Keep on licking those boots, fam. Dumbass...")
-}
-
-text gText_HousingProtest_HasATendency {
-    format("Thank you very much. You're right, TheTide has a tendency to pick on the defenseless like me.")
-}
-
-text gText_HousingProtest_WhyWereProtesting {
-    format("Why were people protesting?")
-}
-
-text gText_HousingProtest_EntitledToLiveAnyWhere {
-    format("Some of the citizens of Oroland feel that they are... entitled to live anywhere within their city limits.")
-}
-
-text gText_HousingProtest_SubjectToTheSameRent {
-    format("I don't get why they don't think they're subject to the same rent rules and regulations as the rest of us.")
-}
-
-text gText_HousingProtest_SoPeopleWereComing {
-    format("So people were coming to take over the building?")
-}
-
-text gText_HousingProtest_IGuessSo {
-    format("I guess so?")
-}
-
-text gText_HousingProtest_WhatAboutThePolice {
-    format("What about the police?")
-}
-
-text gText_HousingProtest_MoreAndMoreCommon {
-    format("I'm sure they would have stopped it, but these protests are getting more and more common. The police can't be everywhere at once!")
-}
-
-text gText_HousingProtest_ShouldHireThatSecurity {
-    format("I don't get paid enough to be the super and security...")
 }
 
 movement HousingProtest_WalkPlayer1Left {

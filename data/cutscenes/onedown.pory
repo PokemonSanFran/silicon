@@ -84,30 +84,6 @@ script OneDown_Finish_Dialogue {
         end
 }
 
-text gText_OneDown_IJustGotFilled {
-    format("I just got filled in… that was absolutely incredible!")
-}
-
-text gText_OneDown_ThanksAndYouve {
-    format("Thanks. And you've been an awesome leader too. These people love you.")
-}
-
-text gText_OneDown_IDidntThinkIHad {
-    format("I didn't think I had it in me, to be honest. Ell- Alcmene knew better, I guess.")
-}
-
-text gText_OneDown_SoundsLikeWereBoth {
-    format("Sounds like we're both having excellent days! My talks with the region's council have been much more productive than I expected. I think we're actually making some damn progress! If we keep this up -")
-}
-
-text gText_OneDown_MyOldBones {
-    format("My old bones can't handle those quakes like I used to!")
-}
-
-text gText_OneDown_GetSomeRest {
-    format("I know its been a long day, {PLAYER}, you should get some rest. You're still staying at Kai's place in HalaiIsland, right?")
-}
-
 movement OneDown_WalkToPlayer {
     walk_up * 7
         walk_right

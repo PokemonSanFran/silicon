@@ -193,100 +193,10 @@ script WaitHeDidWhat_StartBattle_Script{
         applymovement(1,Common_Movement_WalkLeft)
         waitmovement(0)
         msgbox(format("I'll beat you... for Resido!"),,SPEAKER_KAI,TAIL_SHOUT)
-        trainerbattle_no_intro(TRAINER_KAI_FINALS,gText_WaitHeDidWhat_SoClose)
+        trainerbattle_no_intro(TRAINER_KAI_FINALS,format("…so close."))
         closemessage
 
         goto(WelcomeToTheHallOfFame_PostBattle_Dialogue)
-}
-
-text gText_WaitHeDidWhat_AreYouReady {
-    format("Are you ready to battle for the Championship?")
-}
-
-text gText_WaitHeDidWhat_CongratsComeOnUp {
-    format("Congrats on making it to the Finals! Come to the Skybox to watch Charlotte's battle!")
-}
-
-text gText_WaitHeDidWhat_GoodShitDownThere {
-    format("Good shit down there! Time to crush this Kai kid. See you in the Finals!")
-}
-
-text gText_WaitHeDidWhat_InAStunningUpset {
-    format("In a stunning upset, the hometown hero, Kai defeats Charlotte and moves onto the Finals! What a wild match!")
-}
-
-text gText_WaitHeDidWhat_HolyShit {
-    format("(...holy shit!)")
-}
-
-text gText_WaitHeDidWhat_WellTakeAQuick {
-    format("We'll take a quick break, and when we come back... your Championship match! Kai VS {PLAYER}, for all the marbles!")
-}
-
-text gText_WaitHeDidWhat_MakeSureYouGive {
-    format("I sent you a motivational email to get you ready for this match! Did you get it?")
-}
-
-text gText_WaitHeDidWhat_WhatEmail {
-    format("I don't know what email he's talking about... I don't even use my email.")
-}
-
-text gText_WaitHeDidWhat_GoodLuck {
-    format("Good luck, {PLAYER}.")
-}
-
-text gText_WaitHeDidWhat_ILostToThat {
-    format("I lost to that absolute garbage Trainer? What happened? He must have cheated... right!?")
-}
-
-text gText_WaitHeDidWhat_GetTheFuck {
-    format("Get the fuck away from me!")
-}
-
-text gText_WaitHeDidWhat_HowCouldThisHappen {
-    format("How could this happen? Now I have to win another match just to get THIRD?!?")
-}
-
-text gText_WaitHeDidWhat_AbsoluteBullshit {
-    format("Absolute bullshit. Argh I cannot believe this shit…")
-}
-
-text gText_WaitHeDidWhat_DaddyINeed
-{
-    format("...I executed our plan perfectly! It's not my fault Daddy - he must have tricked me! Fix this now, Daddy!\p...\pWhat do you mean you're working on it? What are you going to do!?")
-}
-
-text gText_WaitHeDidWhat_IDontThinkYouCan {
-    format("{PLAYER}, I don't think you can beat me when I have home court advantage!")
-}
-
-text gText_WaitHeDidWhat_YouMightBeAbleToOutspend
-{
-    format("You and Charlotte and SharpRise might be able to outspend me, but you can't outwork me and my Pokémon!")
-}
-
-text gText_WaitHeDidWhat_ImGoingToBe
-{
-    format("I'm going to be the Resido Champion!")
-}
-
-
-text gText_WaitHeDidWhat_ImReallyHappy {
-    format("Kai, I'm super proud of you. I'm even happy you've gotten this far!")
-}
-
-text gText_WaitHeDidWhat_ButIveNeverLost
-{
-    format("But I've got an undefeated winning streak against you, and that isn't changing now.")
-}
-
-
-text gText_WaitHeDidWhat_ForResido {
-    format("I'll beat you... for Resido!")
-}
-
-text gText_WaitHeDidWhat_SoClose {
-    format("…so close.")
 }
 
 movement WaitHeDidWhat_GetOutOfWay {
