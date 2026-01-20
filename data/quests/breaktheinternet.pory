@@ -31,7 +31,7 @@ script Quest_Breaktheinternet_SocialMediaReporter_Dialogue{
     call_if_quest_complete(QUEST_RABIESOUTBREAK,Quest_Breaktheinternet_Rabies_Dialogue)
 
     msgbox(format("I want to try to investigate where all these claims are coming from, because I think its only going to get worse. You're a Trainer, right? Let's exchange contact info. Keep your eyes peeled on social media for any more bogus stories, and I'll hit you up once I find a good lead."),MSGBOX_DEFAULT,SPEAKER_ISMAIL)
-    applymovement(PERLACIA_CITY_ISMAIL,Quest_Breaktheinternet_WalkInside)
+    applymovement(PERLACIA_CITY_ISMAIL, moves(walk_left, walk_up, step_end))
     playse(SE_EXIT)
     waitmovement(PERLACIA_CITY_ISMAIL)
     removeobject(PERLACIA_CITY_ISMAIL)
@@ -54,12 +54,6 @@ script Buzzr_HideReporter_Script
         {
             setflag(FLAG_HIDE_ISMAIL_PERLACIA)
         }
-}
-
-movement Quest_Breaktheinternet_WalkInside{
-    walk_left
-    walk_up
-    step_end
 }
 
 script Quest_Breaktheinternet_CountQuestsAndProgress_Script{
@@ -234,12 +228,10 @@ script Quest_Breaktheinternet_Warehouse_Enemy_Visibility_Script{
     }
 }
 
-
 script Quest_Breaktheinternet_Slurpuff_Visibility_Script{
     setflag(FLAG_HIDE_WAREHOUSE_SLURPUFF)
     return
 }
-
 
 script Quest_Breaktheinternet_Warehouse_Grunts_Visibility_Script{
     setflag(FLAG_HIDE_GRUNTS)
@@ -379,15 +371,15 @@ playse(SE_PIN)
     applymovement(WAREHOUSE_SLURPUFF,Common_Movement_ExclamationMark)
 waitse
     applymovement(PLAYER,Common_Movement_FaceRight)
-    applymovement(WAREHOUSE_SLURPUFF,Quest_Breaktheinternet_SlurpuffMoveToSee)
+    applymovement(WAREHOUSE_SLURPUFF, moves(walk_down, walk_right, step_end))
     waitmovement(PLAYER)
     setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_REPORTER_M)
     addobject(WAREHOUSE_ISMAIL)
-    applymovement(WAREHOUSE_ISMAIL,Quest_Breaktheinternet_IsmailWalkToPlayer)
+    applymovement(WAREHOUSE_ISMAIL, moves(walk_left * 7, step_end))
     waitmovement(WAREHOUSE_ISMAIL)
     msgbox(format("{PLAYER} you come!"),,SPEAKER_ISMAIL)
     closemessage
-    applymovement(WAREHOUSE_SLURPUFF,Quest_Breaktheinternet_RunBehindPlayer)
+    applymovement(WAREHOUSE_SLURPUFF, moves(walk_left, walk_up, face_right, step_end))
     waitmovement(WAREHOUSE_SLURPUFF)
     playmoncry(SPECIES_SLURPUFF,CRY_MODE_ROAR_2)
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
@@ -402,7 +394,7 @@ waitse
     msgbox(format("Guess you're smarter than we thought!"),,SPEAKER_BUZZR_CEO)
     closemessage
     addobject(WAREHOUSE_BUZZR_CEO)
-    applymovement(WAREHOUSE_BUZZR_CEO,Quest_Breaktheinternet_CEOWalkToPlayer)
+    applymovement(WAREHOUSE_BUZZR_CEO, moves(walk_left * 8, face_up))
     waitmovement(WAREHOUSE_BUZZR_CEO)
     applymovement(PLAYER,Common_Movement_FaceDown)
     waitmovement(PLAYER)
@@ -510,24 +502,5 @@ script Breaktheinternet_RecievedGiftFanfare {
 movement Quest_Breaktheinternet_GruntsWalkToPlayer{
     walk_left * 7
     step_end
-}
-movement Quest_Breaktheinternet_SlurpuffMoveToSee{
-    walk_down
-    walk_right
-    step_end
-}
-movement Quest_Breaktheinternet_IsmailWalkToPlayer{
-    walk_left * 7
-    step_end
-}
-movement Quest_Breaktheinternet_RunBehindPlayer{
-    walk_left
-    walk_up
-    face_right
-    step_end
-}
-movement Quest_Breaktheinternet_CEOWalkToPlayer{
-    walk_left * 8
-    face_up
 }
 

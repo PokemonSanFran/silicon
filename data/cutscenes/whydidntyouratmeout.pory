@@ -30,9 +30,9 @@ script WhyDidntYouRatMeOut_StopPlayerLeaving {
 
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
         if (var(VAR_TEMP_0) == 9){
-            applymovement(KAI,WhyDidntYouRatMeOut_WalkToPlayerLeft)
+            applymovement(KAI, moves(walk_down, walk_right * 5, walk_down, step_end))
         }else {
-            applymovement(KAI,WhyDidntYouRatMeOut_WalkToPlayerRight)
+            applymovement(KAI, moves(walk_down, walk_right * 6, walk_down, step_end))
         }
     waitmovement(0)
 
@@ -46,8 +46,8 @@ script WhyDidntYouRatMeOut_StopPlayerLeaving {
 }
 
 script WhyDidntYouRatMeOut_ConversationInStands {
-        applymovement(PLAYER,WhyDidntYouRatMeOut_WalkSlowlyUpStairsLeft)
-        applymovement(1,WhyDidntYouRatMeOut_WalkSlowlyUpStairsRight)
+        applymovement(PLAYER, moves(walk_slow_up * 6, face_right, step_end))
+        applymovement(1, moves(walk_slow_up * 6, face_left, step_end))
 
         msgbox(format("What do you want?"),,SPEAKER_ALICIA)
 
@@ -70,7 +70,7 @@ script WhyDidntYouRatMeOut_ConversationInStands {
         msgbox(format("Wait shit -"),,SPEAKER_KAI_TIDE)
         closemessage
 
-        applymovement(1,WhyDidntYouRatMeOut_WalkBackward)
+        applymovement(1, moves(lock_facing_direction, walk_right, unlock_facing_direction, step_end))
         waitmovement(0)
 
         msgbox(format("No, calm down. It's just... this is your home. And you obviously care about it. And I think that's what gives me pause with TheTide. I see people trying to do good things, and trying to help people... and then I see TheTide with all their bullshit, and it makes me wonder “How can they possibly support that?”"),,SPEAKER_ALICIA)
@@ -109,8 +109,8 @@ script WhyDidntYouRatMeOut_ConversationInStands {
 
         clearflag(FLAG_TEMP_2)
         addobject(2)
-        applymovement(1,WhyDidntYouRatMeOut_LeaveStands)
-        applymovement(2,WhyDidntYouRatMeOut_EnterStands)
+        applymovement(1, moves(walk_down * 6, step_end))
+        applymovement(2, moves(walk_up * 3, walk_right, walk_up * 3, face_left, step_end))
         waitmovement(0)
         removeobject(1)
 
@@ -158,7 +158,7 @@ script WhyDidntYouRatMeOut_WatchCharlotteMatches {
 
     call(WhyDidntYouRatMeOut_LookAround)
 
-    applymovement(7,WhyDidntYouRatMeOut_WalkUpToPlayer)
+    applymovement(7, moves(walk_up * 3, face_left, step_end))
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(0)
 
@@ -172,52 +172,3 @@ script WhyDidntYouRatMeOut_WatchCharlotteMatches {
     end
 }
 
-movement WhyDidntYouRatMeOut_WalkToPlayerLeft {
-    walk_down
-        walk_right * 5
-        walk_down
-        step_end
-}
-
-movement WhyDidntYouRatMeOut_WalkToPlayerRight {
-    walk_down
-        walk_right * 6
-        walk_down
-        step_end
-}
-
-movement WhyDidntYouRatMeOut_WalkSlowlyUpStairsRight {
-    walk_slow_up * 6
-        face_left
-        step_end
-}
-movement WhyDidntYouRatMeOut_WalkSlowlyUpStairsLeft {
-    walk_slow_up * 6
-        face_right
-        step_end
-}
-
-movement WhyDidntYouRatMeOut_WalkBackward {
-    lock_facing_direction
-        walk_right
-        unlock_facing_direction
-        step_end
-}
-
-movement WhyDidntYouRatMeOut_LeaveStands {
-    walk_down * 6
-        step_end
-}
-movement WhyDidntYouRatMeOut_EnterStands {
-    walk_up * 3
-        walk_right
-        walk_up * 3
-        face_left
-        step_end
-}
-
-movement WhyDidntYouRatMeOut_WalkUpToPlayer {
-    walk_up * 3
-    face_left
-    step_end
-}

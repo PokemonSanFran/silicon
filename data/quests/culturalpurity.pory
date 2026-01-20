@@ -65,7 +65,7 @@ script Quest_CulturalPurity_QuestStart_Dialogue{
     msgbox(format("{PLAYER} Hello!"),,SPEAKER_SHINZO)
     msgbox(format("i read online about a group of people in hodoucity who have stayed tru"),,SPEAKER_SHINZO)
     msgbox(format("they said start at the center... what does that mean?"),,SPEAKER_SHINZO)
-    applymovement(SHINZO,Quest_CulturalPurity_LeaderWalkAway_Movement)
+    applymovement(SHINZO, moves(walk_down * 6, step_end))
     waitmovement(SHINZO)
     removeobject(SHINZO)
     startquest(QUEST_CULTURALPURITY)
@@ -133,7 +133,6 @@ script Quest_CulturalPurity_BackroomB_Interact_Script{
     if (var(VAR_TEMP_0) == 2){
         msgbox(format("wait i know the password"),,SPEAKER_ALICIA)
 
-
         msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_2,1)
     }
@@ -150,7 +149,6 @@ script Quest_CulturalPurity_BackroomC_Interact_Script{
     if (var(VAR_TEMP_0) == 3){
         msgbox(format("wait i know the password"),,SPEAKER_ALICIA,,SPEAKER_ALICIA)
 
-
         msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_4,1)
     }
@@ -166,7 +164,6 @@ script Quest_CulturalPurity_BackroomD_Interact_Script{
 
     if (var(VAR_TEMP_0) == 4){
         msgbox(format("wait i know the password"),,SPEAKER_ALICIA,,SPEAKER_ALICIA)
-
 
         msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_6,1)
@@ -228,16 +225,13 @@ script Quest_CulturalPurity_MakeBackupVisible_Script{
 script Quest_CulturalPurity_ShinzoJoin_Dialogue{
         msgbox(format("i figured it out!"),,SPEAKER_SHINZO)
 
-
         call(Quest_CulturalPurity_MakeShinzoVisible_Script)
-        applymovement(SHINZO,Quest_CulturalPurity_ShinzoWalkToGuard_Movement)
+        applymovement(SHINZO, moves(walk_down * 2, walk_right * 5))
         waitmovement(SHINZO)
 
         msgbox(format("i have the code word, but need all the tiles"),,SPEAKER_SHINZO)
 
-
         msgbox(format("yep got em here"),,SPEAKER_ALICIA)
-
 
         msgbox(format("let me see your tiles."),,SPEAKER_DEFAULT)
 
@@ -262,7 +256,7 @@ script Quest_CulturalPurity_BackupWalkOut_Script{
     opendoor(15,18)
     waitdooranim
     call(Quest_CulturalPurity_MakeBackupVisible_Script)
-    applymovement(BACKUP,Quest_CulturalPurity_BackupWalkOutside_Movement)
+    applymovement(BACKUP, moves(walk_down, walk_left, face_down, step_end))
     waitmovement(BACKUP)
     closedoor(15,18)
     applymovement(SHINZO,Common_Movement_FaceUp)
@@ -280,12 +274,12 @@ script Quest_CulturalPurity_Battle_Script{
 script Quest_CulturalPurity_PostBattle_Script{
     msgbox(format("wow welcome inside"),,SPEAKER_DEFAULT)
     closemessage
-    applymovement(GUARD,Quest_CulturalPurity_StepAside_Movement)
+    applymovement(GUARD, moves(lock_facing_direction, walk_right, step_end))
     waitmovement(GUARD)
 
     opendoor(15,18)
-    applymovement(SHINZO,Quest_CulturalPurity_WalkInside_Movement)
-    applymovement(PLAYER,Quest_CulturalPurity_FollowShinzo_Movement)
+    applymovement(SHINZO, moves(walk_right, walk_up * 2, step_end))
+    applymovement(PLAYER, moves(walk_up * 2, step_end))
     waitmovement(PLAYER)
     fadeblackandsetremovewarpfadeflag
     warp(MAP_HODOU_CITY_RACISTHOUSE,0)
@@ -301,7 +295,7 @@ script Quest_CulturalPurity_InsideClubhouse_Dialogue{
             end
         }
 
-    applymovement(SHINZO_2,Quest_CulturalPurity_WalkToPlayer_Movement)
+    applymovement(SHINZO_2, moves(walk_left, walk_down, step_end))
     waitmovement(SHINZO_2)
     msgbox(format("never mind. they're just nationalists."),,SPEAKER_SHINZO)
 
@@ -310,7 +304,7 @@ script Quest_CulturalPurity_InsideClubhouse_Dialogue{
     msgbox(format("i have some thinking to do."),,SPEAKER_SHINZO)
 
     closemessage
-    applymovement(SHINZO_2,Quest_CulturalPurity_LeaveClubhouse_Movement)
+    applymovement(SHINZO_2, moves(walk_left, walk_down, step_end))
     waitmovement(SHINZO_2)
     playse(SE_EXIT)
     removeobject(SHINZO_2)
@@ -319,46 +313,6 @@ script Quest_CulturalPurity_InsideClubhouse_Dialogue{
     completequest(QUEST_CULTURALPURITY)
     release
     end
-}
-movement Quest_CulturalPurity_LeaderWalkAway_Movement{
-    walk_down * 6
-    step_end
-}
-
-movement Quest_CulturalPurity_ShinzoWalkToGuard_Movement{
-    walk_down * 2
-    walk_right * 5
-}
-
-movement Quest_CulturalPurity_BackupWalkOutside_Movement{
-    walk_down
-    walk_left
-    face_down
-    step_end
-}
-movement Quest_CulturalPurity_StepAside_Movement{
-    lock_facing_direction
-    walk_right
-    step_end
-}
-movement Quest_CulturalPurity_WalkInside_Movement{
-    walk_right
-    walk_up * 2
-    step_end
-}
-movement Quest_CulturalPurity_FollowShinzo_Movement{
-    walk_up * 2
-    step_end
-}
-movement Quest_CulturalPurity_WalkToPlayer_Movement{
-    walk_left
-    walk_down
-    step_end
-}
-movement Quest_CulturalPurity_LeaveClubhouse_Movement{
-    walk_left
-    walk_down
-    step_end
 }
 
 text gText_CulturalPurity_OneOfUs{

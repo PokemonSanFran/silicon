@@ -12,9 +12,6 @@ MAP_SCRIPT_ON_FRAME_TABLE [
                 FLAG_VISITED_HALERBAWILDS, FALSE: Generic_Mappreview
 ]
 
-
-
-
 }
 script HalerbaWilds_EventScript_BlackbeltF{
     trainerbattle_single(TRAINER_BLACKBELT_F,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)

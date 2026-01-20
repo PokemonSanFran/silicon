@@ -37,7 +37,7 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         closemessage
 
-        applymovement(ADELAIDE,WeCanStopYouActually_RunToDesk)
+        applymovement(ADELAIDE, moves(walk_up, step_end))
         waitmovement(ADELAIDE)
         playse(SE_PC_LOGIN)
         special(TurnOnTVScreen)
@@ -52,7 +52,6 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         msgbox(format("WHAT THE HELL ARE THEY DOING?"),,SPEAKER_ADELAIDE)
 
-
         playse(SE_POKENAV_CALL)
         waitse
         msgbox(format("Adelaide's phone is ringing."))
@@ -63,7 +62,7 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         closemessage
 
-        applymovement(ADELAIDE,WeCanStopYouActually_RageRun)
+        applymovement(ADELAIDE, moves(walk_faster_left, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right, face_down, step_end))
         waitmovement(ADELAIDE)
 
         msgbox(format("YOU! They told you! That’s how you found out! And now if they confess… they don’t have to take it from you."),,SPEAKER_ADELAIDE)
@@ -117,9 +116,9 @@ script WeCanStopYouActually_Arrest_Dialogue {
         msgbox(format("Adelaide, you’re under arrest!"))
         closemessage
 
-        applymovement(POLICE_A,WeCanStopYouActually_ArrestWalkInA)
-        applymovement(POLICE_B,WeCanStopYouActually_ArrestWalkInB)
-        applymovement(PLAYER,WeCanStopYouActually_ArrestWalkInC)
+        applymovement(POLICE_A, moves(walk_right * 7, walk_up * 2, face_right, step_end))
+        applymovement(POLICE_B, moves(walk_right * 9, walk_up * 3, face_left, step_end))
+        applymovement(PLAYER, moves(walk_right * 2, face_left, step_end))
 
         waitmovement(POLICE_B)
 
@@ -171,7 +170,7 @@ script WeCanStopYouActaully_ArrestCutscene {
         applymovement(GRUNTC,WeCanStopYouActually_MarchRight)
         applymovement(ADAORA,WeCanStopYouActually_MarchLeft)
         waitmovement(ADAORA)
-        applymovement(PLAYER,WeCanStopYouActually_StepAside)
+        applymovement(PLAYER, moves(walk_right, face_left, step_end))
         waitmovement(PLAYER)
         delay(8)
 
@@ -254,7 +253,6 @@ script WeCanStopYouActaully_ArrestCutscene {
         removeobject(ARMANDO)
         removeobject(ELLEN)
 
-
         applymovement(PLAYER,Common_Movement_FaceDown)
         waitmovement(0)
 
@@ -263,43 +261,6 @@ script WeCanStopYouActaully_ArrestCutscene {
         closemessage
         setflag(FLAG_SPAWN_INVISIBLE)
         warpsilent(MAP_ARANTRAZ,255,8,15)
-}
-
-
-movement WeCanStopYouActually_RunToDesk {
-    walk_up
-        step_end
-}
-
-movement WeCanStopYouActually_RageRun {
-    walk_faster_left
-        walk_faster_right * 2
-        walk_faster_left * 2
-        walk_faster_right * 2
-        walk_faster_left * 2
-        walk_faster_right
-        face_down
-        step_end
-}
-
-movement WeCanStopYouActually_ArrestWalkInA {
-    walk_right * 7
-        walk_up * 2
-        face_right
-        step_end
-}
-
-movement WeCanStopYouActually_ArrestWalkInB {
-    walk_right * 9
-        walk_up * 3
-        face_left
-        step_end
-}
-
-movement WeCanStopYouActually_ArrestWalkInC {
-    walk_right * 2
-        face_left
-        step_end
 }
 
 movement WeCanStopYouActually_MarchLeft {
@@ -320,12 +281,6 @@ movement WeCanStopYouActually_MarchRight {
 movement WeCanStopYouActually_WalkOutOfBuilding {
         walk_down * 4
         walk_right * 9
-        step_end
-}
-
-movement WeCanStopYouActually_StepAside {
-    walk_right
-        face_left
         step_end
 }
 

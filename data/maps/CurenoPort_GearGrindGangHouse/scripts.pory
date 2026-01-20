@@ -45,8 +45,8 @@ script CurenoPort_GearGrindGangHouse_Script_CheckAcceptance
 }
 
 script CurenoPort_GearGrindGangHouse_Dialogue_GuardsBlockDoor{
-    applymovement(BIKER_C,CurenoPort_GearGrindGangHouse_Movement_GuardFromLeft)
-    applymovement(BIKER_D,CurenoPort_GearGrindGangHouse_Movement_GuardFromRight)
+    applymovement(BIKER_C, moves(face_left, face_right, face_up, face_down, step_end))
+    applymovement(BIKER_D, moves(face_left, face_right, face_up, face_down, step_end))
 
     waitmovement(BIKER_D)
     msgbox(format("Gear Grind Gang only."),,SPEAKER_ANGELDELIVERYBIKERC)
@@ -74,18 +74,3 @@ text CurenoPort_GearGrindGangHouse_Text_YoullHaveToLeave
     format("You'll have to leave.")
 }
 
-movement CurenoPort_GearGrindGangHouse_Movement_GuardFromLeft {
-    face_left
-    face_right
-    face_up
-    face_down
-    step_end
-}
-
-movement CurenoPort_GearGrindGangHouse_Movement_GuardFromRight {
-    face_left
-    face_right
-    face_up
-    face_down
-    step_end
-}

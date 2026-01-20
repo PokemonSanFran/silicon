@@ -80,7 +80,7 @@ script Prologue_PostBattle_Script
     msgbox(format("And perhaps, you will be Resido's last true Champion."),,SPEAKER_MAGNUS,TAIL_WHISPER)
     msgbox(format("Wear this title with as much as I did when I earned it! And now, for the Hall of Fame!"),,SPEAKER_MAGNUS,,EMOTE_HAPPY)
     closemessage
-    applymovement(MAGNUS,Prologue_LeaveChamber_Movement)
+    applymovement(MAGNUS, moves(walk_up * 3, step_end))
     applymovement(PLAYER,Common_Movement_WalkUp4)
     waitmovement(MAGNUS)
     removeobject(MAGNUS)
@@ -105,14 +105,14 @@ script Prologue_PostWarp_Hall_Dialgoue{
         applymovement(PLAYER,Common_Movement_WalkUp)
         waitmovement(PLAYER)
         lock
-        applymovement(GUARD,Prologue_BlockDoor_Movement)
+        applymovement(GUARD, moves(lock_facing_direction, walk_right, unlock_facing_direction, step_end))
         applymovement(MAGNUS,Common_Movement_FaceLeft)
         msgbox(format("Its not the usual celebration, but of course, with the recent news, the budget has been slashed. But we've figured a small gathering with the Elite Four and Gym Leaders would be nice."),,SPEAKER_MAGNUS)
         closemessage
         applymovement(MAGNUS,Common_Movement_FaceDown)
         msgbox(format("Ellen was waiting for us to arrive - they've got a speech prepared."),,SPEAKER_MAGNUS)
         closemessage
-        applymovement(MAGNUS,Prologue_Magnus_WalkIntoPosition_Movement)
+        applymovement(MAGNUS, moves(walk_up, walk_left, walk_up, step_end))
         waitmovement(MAGNUS)
         call(Prologue_PostWarp_PositionObjects_Script)
         call(TryAutoSave)
@@ -141,7 +141,7 @@ script Prologue_Ellen_Speech_Dialogue{
         applymovement(ELLEN,Common_Movement_FaceDown)
         msgbox(format("Good luck to all of you."),,SPEAKER_ELLEN)
         closemessage
-        applymovement(ELLEN,Prologue_Leaveroom_Movement)
+        applymovement(ELLEN, moves(walk_right, walk_down * 5, step_end))
         delay(30)
         endcutscene
         fadescreen(FADE_TO_BLACK)
@@ -343,27 +343,3 @@ script Prologue_Doyle_Dialogue{
     end
 }
 
-movement Prologue_LeaveChamber_Movement{
-    walk_up * 3
-        step_end
-}
-
-movement Prologue_BlockDoor_Movement{
-    lock_facing_direction
-        walk_right
-    unlock_facing_direction
-        step_end
-}
-
-movement Prologue_Magnus_WalkIntoPosition_Movement{
-    walk_up
-        walk_left
-        walk_up
-        step_end
-}
-
-movement Prologue_Leaveroom_Movement{
-    walk_right
-        walk_down * 5
-        step_end
-}

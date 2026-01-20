@@ -9,7 +9,7 @@ script LockedOut_PreventPlayer_Script
                 end
         }
 
-    applymovement(PLAYER,LockedOut_DoorLocked)
+    applymovement(PLAYER, moves(face_up, lock_facing_direction, walk_down, unlock_facing_direction, step_end))
         waitmovement(0)
         playse(SE_FAILURE)
         waitse
@@ -37,7 +37,7 @@ script LockedOut_PhoneCall_Dialogue
 
         closemessage
 
-        applymovement(PLAYER,LockedOut_TryDoorAgain)
+        applymovement(PLAYER, moves(walk_up, delay_8, lock_facing_direction, walk_down, unlock_facing_direction, step_end))
         waitmovement(0)
         playse(SE_FAILURE)
         waitse
@@ -60,7 +60,6 @@ script LockedOut_PhoneCall_Dialogue
         msgbox(format("I actually hadn’t thought that far ahead… but thank you, a lot, Kai."),,SPEAKER_ALICIA)
         closemessage
 
-
         playse(SE_POKENAV_HANG_UP)
         waitse
         endcutscene
@@ -78,21 +77,3 @@ script LockedOut_WarpPlayer_Script
         }
 }
 
-movement LockedOut_DoorLocked
-{
-    face_up
-        lock_facing_direction
-        walk_down
-        unlock_facing_direction
-        step_end
-}
-
-movement LockedOut_TryDoorAgain
-{
-    walk_up
-        delay_8
-        lock_facing_direction
-        walk_down
-        unlock_facing_direction
-        step_end
-}

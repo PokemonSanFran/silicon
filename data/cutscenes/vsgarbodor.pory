@@ -12,7 +12,6 @@ const POLICE_B = 10
 const ADELAIDE = 11
 const ORI = 12
 
-
 const FLAG_HIDE_CHARLOTTE_COMPOUND = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER_COMPOUND = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
@@ -80,9 +79,9 @@ script VSGarbodor_ChooseLeft_Script {
 
         closemessage
 
-        applymovement(CHARLOTTE, VSGarbodor_WalkFurtherRight)
+        applymovement(CHARLOTTE, moves(walk_up * 8, walk_right * 8, step_end))
         delay(60)
-        applymovement(PLAYER, VSGarbodor_WalkTowardsLeftSide)
+        applymovement(PLAYER, moves(walk_up * 8, walk_left * 2, step_end))
         waitmovement(0)
         removeobject(CHARLOTTE)
         release
@@ -95,9 +94,9 @@ script VSGarbodor_ChooseRight_Script {
 
         closemessage
 
-        applymovement(CHARLOTTE, VSGarbodor_WalkFurtherLeft)
+        applymovement(CHARLOTTE, moves(walk_up * 15, walk_left * 8, step_end))
         delay(60)
-        applymovement(PLAYER, VSGarbodor_WalkTowardsRightSide)
+        applymovement(PLAYER, moves(walk_up * 8, walk_right * 2, step_end))
         waitmovement(0)
         removeobject(CHARLOTTE)
         release
@@ -175,7 +174,6 @@ script VSGarbodor_PreventCrossingSides_Script {
         msgbox(format("Feeling lonely over there? I got this side, you handle that side!"),,SPEAKER_CHARLOTTE)
         closemessage
 
-
         if (var (VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_RIGHT_SIDE) {
             applymovement(PLAYER, Common_Movement_WalkRight)
         } else {
@@ -199,23 +197,23 @@ startcutscene(JUMPPLAYER_VSGARBODOR)
                 if (var (VAR_TEMP_1) > 9) {
                     setobjectxy(CHARLOTTE, 11, 12)
                         copyobjectxytoperm(CHARLOTTE)
-                        applymovement(CHARLOTTE, CharlotteApproachSW)
+                        applymovement(CHARLOTTE, moves(walk_left * 6, step_end))
                 } else {
                     setobjectxy(CHARLOTTE, 13, 6)
                         copyobjectxytoperm(CHARLOTTE)
-                        applymovement(CHARLOTTE, CharlotteApproachNW)
+                        applymovement(CHARLOTTE, moves(walk_left * 6, step_end))
                 }
         } else {
             if (var (VAR_TEMP_1) > 9) {
                 applymovement(PLAYER, Common_Movement_FaceUp)
                     setobjectxy(CHARLOTTE, 22, 4)
                     copyobjectxytoperm(CHARLOTTE)
-                    applymovement(CHARLOTTE, CharlotteApproachSE)
+                    applymovement(CHARLOTTE, moves(walk_down * 6, step_end))
             } else {
                 applymovement(PLAYER, Common_Movement_FaceLeft)
                     setobjectxy(CHARLOTTE, 10, 6)
                     copyobjectxytoperm(CHARLOTTE)
-                    applymovement(CHARLOTTE, CharlotteApproachNE)
+                    applymovement(CHARLOTTE, moves(walk_right * 7, step_end))
             }
         }
     waitmovement(0)
@@ -228,18 +226,15 @@ script VSGarbodor_DefeatedAll_Dialogue {
         msgbox(format("God, you were taking forever. They don't teach efficiency in Orre, do they?"),,SPEAKER_CHARLOTTE)
         closemessage
 
-
-        applymovement(CHARLOTTE, VSGarbodor_LookAround)
+        applymovement(CHARLOTTE, moves(face_up, delay_16, face_left, delay_16, face_right, delay_16, step_end))
         waitmovement(0)
         msgbox(format("Whatever. Mine were easy, they just both used Self-Destruct before I could really get a move in. I already texted Oliver, he said meet in front of the construction site."),,SPEAKER_CHARLOTTE)
         closemessage
-
 
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_ROUTE2, 255, 20, 22)
         delay(100)
 }
-
 
 script VSGarbodor_Arrest_Script {
     setvar(VAR_CONSTRUCTION_STRIKE_STATE,THETIDE_ARRESTED)
@@ -347,7 +342,7 @@ script VSGarbodor_ReturnToTheCompound_Dialogue {
 
                 closemessage
 
-                applymovement(CHARLOTTE, VSGarbodor_WalkUpstairs)
+                applymovement(CHARLOTTE, moves(walk_up, step_end))
                 waitmovement(0)
                 playse(SE_EXIT)
                 waitse
@@ -361,63 +356,8 @@ script VSGarbodor_ReturnToTheCompound_Dialogue {
         }
 }
 
-movement VSGarbodor_WalkTowardsLeftSide {
-    walk_up * 8
-        walk_left * 2
-        step_end
-}
-
-movement VSGarbodor_WalkFurtherLeft {
-    walk_up * 15
-        walk_left * 8
-        step_end
-}
-
-movement VSGarbodor_WalkFurtherRight {
-    walk_up * 8
-        walk_right * 8
-        step_end
-}
-
-movement VSGarbodor_WalkTowardsRightSide {
-    walk_up * 8
-        walk_right * 2
-        step_end
-}
-
-movement VSGarbodor_LookAround {
-    face_up
-        delay_16
-        face_left
-        delay_16
-        face_right
-        delay_16
-        step_end
-}
-movement CharlotteApproachSW {
-    walk_left * 6
-        step_end
-}
-movement CharlotteApproachNW {
-    walk_left * 6
-        step_end
-}
-movement CharlotteApproachSE {
-    walk_down * 6
-        step_end
-}
-movement CharlotteApproachNE {
-    walk_right * 7
-        step_end
-}
-
 movement VSGarbodor_PerpWalk {
     walk_left * 15
-        step_end
-}
-
-movement VSGarbodor_WalkUpstairs {
-    walk_up
         step_end
 }
 

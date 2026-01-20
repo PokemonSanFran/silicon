@@ -60,7 +60,7 @@ script LetsFixThis_GetMessage_Dialogue
         setvar(VAR_WAREHOUSE_RAVE_STATE,GOT_RAVE_MESSAGE)
         setflag(FLAG_LOCKEDOUT_PLAYED)
 
-        applymovement(KAI,LetFixThis_WalkOutHouse)
+        applymovement(KAI, moves(walk_right, walk_up * 3, step_end))
         waitmovement(KAI)
         playse(SE_EXIT)
         waitse
@@ -71,9 +71,3 @@ script LetsFixThis_GetMessage_Dialogue
         end
 }
 
-movement LetFixThis_WalkOutHouse
-{
-    walk_right
-        walk_up * 3
-        step_end
-}

@@ -76,7 +76,7 @@ script RPS_Dialogue_StartQuest
     msgbox(format("Hueh heuh heuh, don't worry, you'll taste victory soon enough MontyOpp. Just come back when your pockets are a little heavier."),MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
     call (RPS_Script_MontyOppLeaveScreen)
     waitmovement(MONTY_CAPHE)
-    applymovement (MONTY_CAPHE, RPS_Movement_MontyFacePlayer)
+    applymovement(MONTY_CAPHE, moves(face_player, step_end))
     msgbox(format("Heyo! You there! New around these parts?"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
     msgbox(format("Who, me?"),MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
     msgbox(format("Hueh heuh heuh, yeah you!"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
@@ -243,7 +243,6 @@ script RPS_Dialogue_CannotAffordWager
     end
 }
 
-
 script RPS_Script_JudgeWagerBattleOutcome
 {
     call(RPS_Script_ResetPlayer)
@@ -299,7 +298,7 @@ script RPS_Dialogue_DenyFirstWagerBattle
 
 script RPS_Script_MontyOppLeaveScreen
 {
-    applymovement(MONTYOPP, Movement_Monty_OppRunOutScreen)
+    applymovement(MONTYOPP, moves(face_up, walk_fast_up *2, walk_fast_left *3, walk_fast_up *4, step_end))
     waitmovement(MONTYOPP)
     removeobject(MONTYOPP)
     return
@@ -404,17 +403,3 @@ movement Monty_Opp_Left
     step_end
 }
 
-movement Movement_Monty_OppRunOutScreen
-{
-    face_up
-    walk_fast_up *2
-    walk_fast_left *3
-    walk_fast_up *4
-    step_end
-}
-
-movement RPS_Movement_MontyFacePlayer
-{
-   face_player
-   step_end
-}

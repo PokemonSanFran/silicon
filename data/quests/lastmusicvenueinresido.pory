@@ -43,7 +43,6 @@ script Quest_LastMusicVenue_StartQuest_Script{
 
     msgbox(format("Why is that?"),MSGBOX_NPC,SPEAKER_ALICIA)
 
-
     msgbox(format("Its a vicious cycle. The League keeps buying up concert venues to turn into arenas for their crazy new League. The local musicians don't have venues to perform in, so they stop. The remaining venues can't book new musicians because they've all quit. So when the League wants to buy another property... we jump at the chance."),MSGBOX_NPC,SPEAKER_DEFAULT)
     msgbox(format("You're young, do you know any music artists looking for a venue? Even just one or two would be huge."),MSGBOX_NPC,SPEAKER_DEFAULT)
 
@@ -54,8 +53,6 @@ script Quest_LastMusicVenue_StartQuest_Script{
     }else{
         msgbox(format("I'll keep my eyes peeled as I travel!"),MSGBOX_NPC,SPEAKER_ALICIA)
     }
-
-
 
     startquest(QUEST_LASTMUSICVENUEINRESIDO)
     release
@@ -72,7 +69,6 @@ script Quest_LastMusicVenue_Active_Dialogue{
         msgbox(format("I'm still looking for somebody! But you're right, it's hard..."),MSGBOX_NPC,SPEAKER_ALICIA)
     }
 
-
     release
     end
 }
@@ -80,11 +76,9 @@ script Quest_LastMusicVenue_Active_Dialogue{
 script Quest_LastMusicVenue_InformDrummers_Dialogue{
     msgbox(format("Have you guys seen the Masonic venue?"),,SPEAKER_ALICIA)
 
-
     msgbox(format("Nah, what's that?"),,SPEAKER_TONALLI)
 
     msgbox(format("You need to get down there! They're really looking for musicians and I think you'd be a good fit."),,SPEAKER_ALICIA)
-
 
     msgbox(format("This could be our shot yo!"),,SPEAKER_DRUMMER_B)
     closemessage

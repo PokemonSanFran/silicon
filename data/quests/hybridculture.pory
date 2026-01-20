@@ -60,9 +60,7 @@ script Quest_HybridCulture_StartQuest_Dialogue{
     msgbox(format("Hey, thanks again for your help in HodouCity. That was a rough situation, but was a wake up call. That's not anything like what I want to be."),MSGBOX_NPC,SPEAKER_SHINZO)
     msgbox(format("I think I need to learn more about the culture of Resido."),MSGBOX_NPC,SPEAKER_SHINZO)
 
-
     msgbox(format("Have you started with just ToraTown? Maybe find the best parts of your culture and see how they're represented here."),MSGBOX_NPC,SPEAKER_ALICIA)
-
 
     msgbox(format("I haven't yet. But perhaps that's a good idea."),MSGBOX_NPC,SPEAKER_SHINZO)
     msgbox(format("Can you help with that? You're a traveling Trainer, so you'll see more of ToraTown than I will. What are the great parts of ToraTown culture?"),MSGBOX_NPC,SPEAKER_SHINZO)
@@ -81,7 +79,6 @@ script Quest_HybridCulture_Reward_Dialogue{
     msgbox(format("Oh! What did you learn?"),MSGBOX_NPC,SPEAKER_SHINZO)
     closemessage
 
-
     fadescreen(FADE_TO_BLACK)
     msgbox(format("{PLAYER} explained what they learned about ToraTown's food, traditions, and fashion."))
     closemessage
@@ -89,7 +86,6 @@ script Quest_HybridCulture_Reward_Dialogue{
 
     msgbox(format("Thank you. In a way, it is beautiful to see my country appreciated in this new way. I'm glad the people here love my culture as much I do. Please, take this!"),MSGBOX_NPC,SPEAKER_SHINZO)
     closemessage
-
 
     call(Quest_HybridCulture_GiveReward_Script)
 
@@ -108,8 +104,7 @@ script Quest_HybridCulture_Complete_Dialogue{
     msgbox(format("I think for now, I'll go back to my Gym. Now that you're stronger, I'd love to battle you again!"),MSGBOX_NPC,SPEAKER_SHINZO)
     closemessage
 
-
-    applymovement(SHINZO,Quest_HybridCulture_WalkBackIntoGym_Movement)
+    applymovement(SHINZO, moves(walk_down, walk_right * 2, face_up, step_end))
     waitmovement(SHINZO)
     opendoor(17,6)
     waitdooranim
@@ -123,9 +118,3 @@ script Quest_HybridCulture_Complete_Dialogue{
     end
 }
 
-movement Quest_HybridCulture_WalkBackIntoGym_Movement{
-    walk_down
-    walk_right * 2
-    face_up
-    step_end
-}

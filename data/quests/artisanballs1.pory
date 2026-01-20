@@ -122,7 +122,6 @@ script Quest_ArtisanBalls1_GiveFirstSet {
 	return
 }
 
-
 script Quest_ArtisanBalls1_Active_Dialogue {
 
     msgbox(format("How is progress going?"), MSGBOX_NPC,SPEAKER_SERGEY)
@@ -240,7 +239,6 @@ script Quest_ArtisanBalls2_CheckActiveAndHide_Script{
 	return
 }
 
-
 script Quest_ArtisanBalls2_CheckTrainerA_Script{
 	call(Quest_ArtisanBalls2_CheckActiveAndHide_Script)
 	subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_ARTISANBALLS2, SUB_QUEST_1)
@@ -270,7 +268,6 @@ script Quest_ArtisanBalls2_ShopQuestChoiceChoosePrompt_Script{
     }
     return
 }
-
 
 script Quest_ArtisanBalls2_ShopQuestChoice_Script {
 	//PSF TODO  this should not be a yes or no question, it should be "I want to shop" or "I want to hear the latest"
@@ -371,18 +368,15 @@ script Quest_ArtisanBalls2_During_ProgressCheck_Script {
 	}
 }
 
-
 script Quest_ArtisanBalls2_Start_Dialogue {
 	msgbox(format("Things are going well, and I think I'm ready to expand."), MSGBOX_NPC,SPEAKER_SERGEY)
 
 	msgbox(format("That's amazing! Congrats Sergey!"), MSGBOX_NPC,SPEAKER_ALICIA)
 
-
 	msgbox(format("I need help though. There's a lot of work to do, so I'm going to need to hire people... I think I need an office manager, customer service rep, and a marketing manger. Could you help me find some people? I want to hire people that really use and understand my products. There's gotta be Trainers out there that are using my Balls, right?"), MSGBOX_NPC,SPEAKER_SERGEY)
 	startquest(QUEST_ARTISANBALLS2)
 	end
 }
-
 
 script Quest_ArtisanBalls2_Active_Dialogue {
     setvar(VAR_TEMP_0,0)
@@ -407,11 +401,9 @@ script Quest_ArtisanBalls2_TrainerA_PostBattle_Script{
 
 	msgbox(format("Where did you get those PokéBalls?"), MSGBOX_NPC,SPEAKER_ALICIA)
 
-
 	msgbox(format("My girlfriend got them for me as a present! I guess there's some craft seller making them."), MSGBOX_NPC,SPEAKER_SERGEY)
 
 	msgbox(format("You mentioned Office Management, right? The guy who made those balls is actually looking to hire somebody for that. You should talk to him, he's in ToraTown."), MSGBOX_NPC,SPEAKER_ALICIA)
-
 
 	msgbox(format("Wait, really? I absolutely need a new gig, and that sounds amazing! Thank you so much."), MSGBOX_NPC,SPEAKER_SERGEY)
 
@@ -438,7 +430,6 @@ script Quest_ArtisanBalls2_TrainerB_PostBattle_Script{
 
 	msgbox(format("You said you were into branding, right? The guy who made those balls is actually looking to hire somebody for that. You should talk to him, he's in ToraTown."), MSGBOX_NPC,SPEAKER_ALICIA)
 
-
 	msgbox(format("Oh man, what? I gotta get over there right now!"), MSGBOX_NPC,SPEAKER_SERGEY)
 
 	fadescreen(FADE_TO_BLACK)
@@ -460,11 +451,9 @@ script Quest_ArtisanBalls2_TrainerC_PostBattle_Script{
 
 	msgbox(format("Where did you get those PokéBalls?"), MSGBOX_NPC,SPEAKER_ALICIA)
 
-
 	msgbox(format("I met the vendor a local business trade show!"), MSGBOX_NPC,SPEAKER_SERGEY)
 
 	msgbox(format("If you like helping people, the guy who made those Balls is looking for a customer service rep. You should go to ToraTown and talk to him!"), MSGBOX_NPC,SPEAKER_ALICIA)
-
 
 	msgbox(format("That would be amazing! I'll head over there now."), MSGBOX_NPC,SPEAKER_SERGEY)
 
@@ -595,18 +584,17 @@ script Quest_ArtisanBalls3_Reward_Cutscene{
     }
 
     lock
-    applymovement(SILPH,Quest_ArtisanBalls3_LeaveRoom_Movement)
+    applymovement(SILPH, moves(walk_down, walk_right, walk_down, step_end))
     waitmovement(SILPH)
     playse(SE_EXIT)
     removeobject(SILPH)
 
-    applymovement(SERGEY,Quest_ArtisanBalls3_RunToDoor_Movement)
+    applymovement(SERGEY, moves(walk_faster_down * 2, walk_faster_right, walk_faster_down, face_right, jump_in_place_right * 2, step_end))
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(SERGEY)
 
     msgbox(format("Did you hear that?!?!?"),MSGBOX_DEFAULT)
     msgbox(format("No, but it sounds like something good!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
 
     msgbox(format("They want to acquire us! We're getting a huge buyout, and we get to keep working at Silph as part of their new craft division! This was all thanks to you, {PLAYER}. I couldn't have asked for more. They gave us this to celebrate the acquisition, but I want you to have it."),MSGBOX_DEFAULT)
     call(Quest_ArtisanBalls3_GiveReward_Script)
@@ -690,17 +678,3 @@ text Quest_ArtisanBalls1_CraftBallList{
     "$"
 }
 
-movement Quest_ArtisanBalls3_LeaveRoom_Movement{
-    walk_down
-    walk_right
-    walk_down
-    step_end
-}
-movement Quest_ArtisanBalls3_RunToDoor_Movement{
-    walk_faster_down * 2
-    walk_faster_right
-    walk_faster_down
-    face_right
-    jump_in_place_right * 2
-    step_end
-}

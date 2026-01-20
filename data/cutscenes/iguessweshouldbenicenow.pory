@@ -50,7 +50,7 @@ script IGuessWeShouldBeNiceNow_CharlotteInteract_Event_Script {
 script IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue {
     lock
     applymovement(PLAYER,Common_Movement_FaceRight)
-    applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkToPlayer)
+    applymovement(CHARLOTTE, moves(walk_down, face_left, step_end))
         waitmovement(0)
 
     msgbox(format("Charl-"),,SPEAKER_ALICIA)
@@ -64,7 +64,6 @@ script IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue {
     msgbox(format("…thanks. I guess?"),,SPEAKER_ALICIA)
     msgbox(format("You’re welcome. Now go step on that panel over there and I’ll head through first. "),,SPEAKER_CHARLOTTE)
     msgbox(format("Pick your battles, {PLAYER}, pick your battles"),,SPEAKER_ALICIA)
-
 
         setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,CHARLOTTE_EXPLAINED_PUZZLE)
         goto (IGuessWeShouldBeNiceNow_AskPlayer_Script)
@@ -88,7 +87,7 @@ script IGuessWeShouldBeNiceNow_StartPuzzle_Script {
         setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,PUZZLE_1_UNSOLVED)
         lock
                 closemessage
-        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkIntoMaze)
+        applymovement(CHARLOTTE, moves(walk_up, walk_left, walk_up * 3, walk_right * 8, step_end))
         waitmovement(0)
             setobjectxy(CHARLOTTE,15,19)
             setobjectxyperm(CHARLOTTE,15,19)
@@ -123,7 +122,7 @@ script IGuessWeShouldBeNiceNow_SolvedPuzzleB {
         setobjectxyperm(CHARLOTTE,9,12)
         special(ReturnCameraToPlayer)
         fadescreen(FADE_FROM_BLACK)
-        applymovement(PLAYER,IGuessWeShouldBeNiceNow_WalkRight)
+        applymovement(PLAYER, moves(walk_right * 4, step_end))
         waitmovement(0)
 
         msgbox(format("The girls complete the puzzle. Will likely need to update dialogue during puzzle later"),,SPEAKER_ADELAIDE)
@@ -132,12 +131,9 @@ script IGuessWeShouldBeNiceNow_SolvedPuzzleB {
     msgbox(format("…anyway. There’s the book. Let’s grab it and get out of here."),,SPEAKER_ALICIA)
     msgbox(format("It’s definitely not that easy. If I was a crusty old man bored out his mind in the middle of nowhere, I would definitely have something guarding this thing. "),,SPEAKER_CHARLOTTE)
 
-
-
-        applymovement(PLAYER,IGuessWeShouldBeNiceNow_ApproachBookB)
-        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_ApproachBookA)
+        applymovement(PLAYER, moves(walk_up * 5, walk_left, face_up, step_end))
+        applymovement(CHARLOTTE, moves(walk_left, walk_up * 5, face_up, step_end))
         waitmovement(0)
-
 
 msgbox(format("ROAR"))
 
@@ -219,7 +215,7 @@ script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
         msgbox(format("Or, trying at least. I'll grab this…"),,SPEAKER_CHARLOTTE)
                 closemessage
 
-        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_GetBook)
+        applymovement(CHARLOTTE, moves(walk_up * 2, walk_in_place_faster_up, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(0)
@@ -227,7 +223,7 @@ script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
 
         msgbox(format("Says on the back cover, “Bring to the deepest part of LeaverraForest."),,SPEAKER_CHARLOTTE)
 
-        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_LookAround)
+        applymovement(CHARLOTTE, moves(face_left, delay_16, delay_16, delay_16, face_right, delay_16, delay_16, delay_16, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("Whew, that was exhausting. How about we crash at my place nearby in EspuleeOutskirts and then tackle LeaverraForest tomorrow?"),MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
@@ -240,8 +236,7 @@ script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
         }
         closemessage
 
-
-        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_LeaveCave)
+        applymovement(CHARLOTTE, moves(walk_down * 7, step_end))
         waitmovement(0)
         removeobject(CHARLOTTE)
         call(TryAutoSave)
@@ -263,7 +258,7 @@ script IGuessWeShouldBeNiceNow_ExitCave_Script {
     clearflag(FLAG_TEMP_3)
     addobject(CHARLOTTE)
     applymovement(PLAYER,Common_Movement_WalkRight)
-    applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkOutCave)
+    applymovement(CHARLOTTE, moves(walk_down * 2, walk_right * 2, walk_up, face_left, step_end))
     waitmovement(0)
     goto(IGuessWeShouldBeNiceNow_End_Dialogue)
 }
@@ -290,13 +285,13 @@ script IGuessWeShouldBeNiceNow_End_Dialogue {
         msgbox(format("Yeah, Daddy's place is way nicer than some motel or whatever."),,SPEAKER_CHARLOTTE)
                 closemessage
 
-        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_GestureHouse)
+        applymovement(CHARLOTTE, moves(face_right, delay_16, delay_16, face_left, step_end))
         waitmovement(0)
 
         msgbox(format("I'm actually going to go study for the Championship... but the door will be open. Its on the north end of town."),,SPEAKER_CHARLOTTE)
                 closemessage
 
-        applymovement(CHARLOTTE,IGuessWeShouldBeNiceNow_WalkTowardsHouse_Movement)
+        applymovement(CHARLOTTE, moves(walk_right * 3, walk_up * 6, step_end))
         waitmovement(CHARLOTTE)
         removeobject(CHARLOTTE)
 
@@ -324,7 +319,6 @@ script IGuessWeShouldBeNiceNow_CharlotteRentalVisibility_Script
 	{
 		setflag(FLAG_HIDE_CHARLOTTE)
 	}
-
 
 	if (var(VAR_LEAVERRA_FOREST_STATE) > 0)
 	{
@@ -398,76 +392,3 @@ script IGuessWeShouldBeNiceNow_AdvanceTimeCondition_Script
 	}
 }
 
-movement IGuessWeShouldBeNiceNow_WalkToPlayer {
-    walk_down
-        face_left
-        step_end
-}
-movement IGuessWeShouldBeNiceNow_WalkIntoMaze {
-    walk_up
-        walk_left
-        walk_up * 3
-        walk_right * 8
-        step_end
-}
-movement IGuessWeShouldBeNiceNow_ApproachBookA {
-        walk_left
-        walk_up * 5
-        face_up
-        step_end
-}
-movement IGuessWeShouldBeNiceNow_ApproachBookB {
-        walk_up * 5
-        walk_left
-        face_up
-        step_end
-}
-
-movement IGuessWeShouldBeNiceNow_WalkRight {
-    walk_right * 4
-    step_end
-}
-
-movement IGuessWeShouldBeNiceNow_GetBook {
-    walk_up * 2
-    walk_in_place_faster_up
-	step_end
-}
-movement IGuessWeShouldBeNiceNow_LookAround {
-    face_left
-    delay_16
-    delay_16
-    delay_16
-    face_right
-    delay_16
-    delay_16
-    delay_16
-    face_down
-	step_end
-}
-movement IGuessWeShouldBeNiceNow_LeaveCave {
-    walk_down * 7
-	step_end
-}
-
-movement IGuessWeShouldBeNiceNow_WalkOutCave {
-    walk_down * 2
-    walk_right * 2
-    walk_up
-    face_left
-    step_end
-}
-
-movement IGuessWeShouldBeNiceNow_GestureHouse {
-    face_right
-    delay_16
-    delay_16
-    face_left
-    step_end
-}
-
-movement IGuessWeShouldBeNiceNow_WalkTowardsHouse_Movement {
-    walk_right * 3
-    walk_up * 6
-    step_end
-}

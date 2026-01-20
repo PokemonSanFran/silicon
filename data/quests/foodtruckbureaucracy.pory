@@ -70,7 +70,6 @@ script Quest_Foodtruckbureaucracy_DOT_Active_Dialogue{
     }
 }
 
-
 script Quest_Foodtruckbureaucracy_Food_WaitingForFix_Dialogue{
     msgbox(format("You hear anything from that Sanitation Department?"),MSGBOX_NPC,SPEAKER_WAITE)
     end
@@ -160,7 +159,6 @@ script Quest_Foodtruckbureaucracy_DOT_RestateDeal_Dialogue{
     msgbox(format("Happy to help! Enjoy the new trolley stop."),MSGBOX_NPC,SPEAKER_ISIDORE)
     end
 }
-
 
 script Quest_Foodtruckbureaucracy_Reward_Dialogue{
     msgbox(format("You just missed them! Some inspector came through, looked around once, and just give me an A+! This is even better than I was hoping for, thanks a ton! Take this."),MSGBOX_NPC,SPEAKER_WAITE)

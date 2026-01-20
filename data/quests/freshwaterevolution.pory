@@ -60,7 +60,7 @@ script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceDown)
-    applymovement(OCTILLERY,Quest_FreshwaterEvolution_JumpIntoWater_Movement)
+    applymovement(OCTILLERY, moves(face_down, delay_16, jump_2_down, step_end))
     waitmovement(OCTILLERY)
     hideobjectat(OCTILLERY, MAP_HALERBA_WILDS_SPRING)
     delay(120)
@@ -71,7 +71,7 @@ script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
     waitse
 
     showobjectat(OCTILLERY, MAP_HALERBA_WILDS_SPRING)
-    applymovement(OCTILLERY,Quest_FreshwaterEvolution_JumpOutWater_Movement)
+    applymovement(OCTILLERY, moves(jump_in_place_up, jump_2_up, face_right, jump_in_place_right * 2, step_end))
     applymovement(PLAYER,Common_Movement_FaceLeft)
     playmoncry(SPECIES_OCTILLERY, CRY_MODE_HIGH_PITCH)
     waitmoncry
@@ -86,7 +86,7 @@ script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
 }
 
 script Quest_FreshwaterEvolution_BystanderScene_Script{
-    applymovement(BYSTANDER,Quest_FreshwaterEvolution_WalkToPlayer_Movement)
+    applymovement(BYSTANDER, moves(walk_right * 2, face_down, step_end))
     waitmovement(BYSTANDER)
     applymovement(PLAYER,Common_Movement_FaceUp)
 
@@ -94,12 +94,10 @@ script Quest_FreshwaterEvolution_BystanderScene_Script{
 
     msgbox(format("Yeah, you know about that?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-
     msgbox(format("Been seeing it a lot lately! Octopuses naturally change color when under stress, and they're seawater animals. Any ol' octopus would react that way. Poor thing, it'll probably be fine after chilling in your Pokeball for a bit."),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
     msgbox(format("There is something weird about this spring though. I was training a Graveler here, and it suddenly evolved on its own! No Linking Cord or anything!"),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
 
     msgbox(format("Good to know..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
 
     closemessage
     completequest(QUEST_FRESHWATEREVOLUTION)
@@ -113,23 +111,4 @@ script Quest_FreshwaterEvolution_Recall_Script{
     waitse
     removeobject(OCTILLERY)
     }
-
-movement Quest_FreshwaterEvolution_JumpIntoWater_Movement{
-    face_down
-    delay_16
-    jump_2_down
-    step_end
-}
-movement Quest_FreshwaterEvolution_JumpOutWater_Movement{
-    jump_in_place_up
-    jump_2_up
-    face_right
-    jump_in_place_right * 2
-    step_end
-}
-movement Quest_FreshwaterEvolution_WalkToPlayer_Movement{
-    walk_right * 2
-    face_down
-    step_end
-}
 

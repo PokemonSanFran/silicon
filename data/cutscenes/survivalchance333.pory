@@ -22,7 +22,7 @@ script SurvivalChance333_MovePlayerIntoPosition {
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) != 12){
-            applymovement(PLAYER, SurvivalChance333_WalkToChief)
+            applymovement(PLAYER, moves(walk_right, walk_up * 2, step_end))
                 waitmovement(0)
         }
 }
@@ -60,7 +60,6 @@ script SurvivalChance333_ExplainPlan_Dialogue {
 
         msgbox(format("Is something wrong Chief?"),,SPEAKER_ALICIA)
 
-
         msgbox(format("First off, I spent 15 years in the military, dedicated my life to tactical warfare and I've never run a failed operation… and now somehow I'm doing the dirty work for some tech bros."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
         msgbox(format("Next, I've got the same tech bros who won a contract for 'special defense operations in the public interest' telling me how to do my job..."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
         msgbox(format("And the cherry on top: I have to babysit two hotshots from nowhere as I try to infiltrate a terrorist organization."),,SPEAKER_CHIEF,TAIL_SHOUT,EMOTE_ANGRY)
@@ -72,7 +71,6 @@ script SurvivalChance333_ExplainPlan_Dialogue {
         msgbox(format("Right, kids with zero operations experience who battled some foot soldiers and Garbador are supposedly tactical masterminds?"),,SPEAKER_CHIEF)
 
         msgbox(format("Hey, we didn't ask to be here! "),,SPEAKER_ALICIA)
-
 
         msgbox(format("And I didn't ask for you. But here we are."),,SPEAKER_CHIEF)
         msgbox(format("I'll prove it then. Battle me."),,SPEAKER_CHARLOTTE)
@@ -95,7 +93,6 @@ script SurvivalChance333_PostBattle_Script {
     startcutscene(JUMPPLAYER_SURVIVALCHANCE333)
     setvar(VAR_FERRYBUILDING_STATE,DEFEATED_SURVIVAL_CHANCE_BATTLE)
         msgbox(format("Do you get it now? We're the real deal."),,SPEAKER_CHARLOTTE)
-
 
         msgbox(format("…look. You're a pair of kids that are in way over your heads, with absolutely no place in a police raid. But I'm stuck with you, and you're both obviously tough as all hell. Let's make the most of it."),,SPEAKER_CHIEF)
         closemessage
@@ -236,7 +233,7 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script {
         closemessage
 
         applymovement(4,SurvivalChance333_RunInsideA)
-        applymovement(5,SurvivalChance333_RunInsideB)
+        applymovement(5, moves(walk_right, walk_up, step_end))
         applymovement(6,SurvivalChance333_RunInsideA)
         applymovement(7,SurvivalChance333_RunInsideC)
         applymovement(8,SurvivalChance333_RunInsideC)
@@ -257,12 +254,6 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script {
         end
 }
 
-movement SurvivalChance333_WalkToChief {
-    walk_right
-        walk_up * 2
-        step_end
-}
-
 movement SurvivalChance333_GiveTM{
     walk_down * 2
         face_left
@@ -279,11 +270,7 @@ movement SurvivalChance333_RunInsideA {
     walk_up
         step_end
 }
-movement SurvivalChance333_RunInsideB {
-    walk_right
-        walk_up
-        step_end
-}
+
 movement SurvivalChance333_RunInsideC {
     walk_left
         walk_up

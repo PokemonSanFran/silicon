@@ -15,7 +15,6 @@ const PERLACIA_CITY_NURSE= 2
 const CHASILLA_NURSE= 3
 const ALL_NURSE = 4
 
-
 script Quest_Restaurantexpansion_HideObjects_Script{
     setflag(FLAG_HIDE_JORIS)
 
@@ -89,7 +88,7 @@ script Quest_Restaurantexpansion_Meetup_Dialogue{
     applymovement(BELEN,Quest_Restaurantexpansion_WalkAway_Movement)
     waitmovement(BELEN)
     msgbox(format("Can I actually buy you dinner?"),,SPEAKER_BELEN)
-    applymovement(JORIS_KID,Quest_Restaurantexpansion_Jump_Movement)
+    applymovement(JORIS_KID, moves(jump_in_place_up, step_end))
     msgbox(format("Wait, really? That's awful nice man."),,SPEAKER_JORIS)
     msgbox(format("This restaurant is experimenting with a blend of flavors tonight, and I want - hold on."),,SPEAKER_BELEN)
     closemessage
@@ -123,7 +122,7 @@ script Quest_Restaurantexpansion_JorisWalkToPlayer_Script{
 }
 
 script Quest_Restaurantexpansion_GroupWalkDoor_Script{
-    applymovement(BELEN,Quest_Restaurantexpansion_ReturnToDoorAndLook_Movement)
+    applymovement(BELEN, moves(walk_up * 2, face_player, step_end))
     applymovement(JORIS,Quest_Restaurantexpansion_ReturnToDoor_Movement)
     applymovement(JORIS_KID,Quest_Restaurantexpansion_ReturnToDoor_Movement)
     return
@@ -132,9 +131,9 @@ script Quest_Restaurantexpansion_GroupWalkDoor_Script{
 script Quest_Restaurantexpansion_GoIntoShop_Script{
     opendoor(2,18)
     waitdooranim
-    applymovement(BELEN,Quest_Restaurantexpansion_GoInside_A_Movement)
-    applymovement(JORIS,Quest_Restaurantexpansion_GoInside_B_Movement)
-    applymovement(JORIS_KID,Quest_Restaurantexpansion_GoInside_C_Movement)
+    applymovement(BELEN, moves(walk_up, step_end))
+    applymovement(JORIS, moves(walk_up * 2, step_end))
+    applymovement(JORIS_KID, moves(walk_left, walk_up * 2, step_end))
     waitmovement(BELEN)
     waitmovement(JORIS)
     waitmovement(JORIS_KID)
@@ -239,7 +238,6 @@ script Quest_Restaurantexpansion_FoodCold_Dialogue{
         }
     return
 }
-
 
 script Quest_Restaurantexpansion_Active_Dialogue{
     lock
@@ -485,32 +483,12 @@ movement Quest_Restaurantexpansion_WalkAway_Movement{
     walk_down * 2
     step_end
 }
-movement Quest_Restaurantexpansion_Jump_Movement{
-    jump_in_place_up
-    step_end
-}
-movement Quest_Restaurantexpansion_ReturnToDoorAndLook_Movement{
-    walk_up * 2
-    face_player
-    step_end
-}
+
 movement Quest_Restaurantexpansion_ReturnToDoor_Movement{
     walk_up * 2
     step_end
 }
-movement Quest_Restaurantexpansion_GoInside_A_Movement{
-    walk_up
-    step_end
-}
-movement Quest_Restaurantexpansion_GoInside_B_Movement{
-    walk_up * 2
-    step_end
-}
-movement Quest_Restaurantexpansion_GoInside_C_Movement{
-    walk_left
-    walk_up * 2
-    step_end
-}
+
 movement Quest_Restaurantexpansion_WalkInside_Movement{
     walk_left * 8
     step_end

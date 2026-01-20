@@ -30,7 +30,6 @@ script Quest_Warehousewarfare_Welcome_Dialogue{
     end
 }
 
-
 script Quest_Warehousewarfare_Active_Dialogue{
 
     lock

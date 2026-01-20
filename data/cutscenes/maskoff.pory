@@ -188,7 +188,7 @@ script MaskOff_PostBattle_Dialogue
 
 script MaskOff_End_Dialogue
 {
-    applymovement(ALCMENE,MaskOff_WalkOffScreen)
+    applymovement(ALCMENE, moves(walk_up * 7, step_end))
     waitmovement(ALCMENE)
     removeobject(ALCMENE)
     call(TryAutoSave)
@@ -197,7 +197,3 @@ script MaskOff_End_Dialogue
     end
 }
 
-movement MaskOff_WalkOffScreen {
-    walk_up * 7
-    step_end
-}

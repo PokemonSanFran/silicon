@@ -80,8 +80,7 @@ script YouCantStopMe_LastChance_Dialogue {
         msgbox(format("I thought so."),,SPEAKER_ALICIA)
         closemessage
 
-
-        applymovement(OLIVER,YouCantStopMe_LeaveFloor_Movement)
+        applymovement(OLIVER, moves(walk_left, walk_up * 6, step_end))
         waitmovement(OLIVER)
         playse(SE_EXIT)
         waitse
@@ -136,7 +135,7 @@ script YouCantStopMe_Confront_Dialogue {
         }
 
         applymovement(ADELAIDE,Common_Movement_WalkDown)
-        applymovement(PLAYER,YouCantStopMe_WalkBackwards_Movement)
+        applymovement(PLAYER, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
         waitmovement(ADELAIDE)
         waitmovement(PLAYER)
 
@@ -148,21 +147,8 @@ script YouCantStopMe_StartBossBattle_Script {
         msgbox(format("You were. Now you’re annoying. Soon to be dead."),MSGBOX_NPC,SPEAKER_ADELAIDE)
         closemessage
 
-
         trainerbattle_no_intro(TRAINER_ADELAIDE_A,format("Wow! Guess we should have taken you out sooner, huh?"))
         setvar(VAR_TOWER_RAID_STATE,DEFEATED_FIRST_ADELAIDE)
         startcutscene(JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE)
 }
 
-movement YouCantStopMe_LeaveFloor_Movement{
-    walk_left
-        walk_up * 6
-        step_end
-}
-
-movement YouCantStopMe_WalkBackwards_Movement{
-    lock_facing_direction
-        walk_down
-        unlock_facing_direction
-        step_end
-}

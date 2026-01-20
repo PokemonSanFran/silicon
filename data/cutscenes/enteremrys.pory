@@ -38,7 +38,7 @@ script EnterEmrys_WalkToBattlefield_Script {
     playse(SE_PIN)
     applymovement(EMRYS, Common_Movement_ExclamationMark)
     waitmovement(0)
-    applymovement(EMRYS, EnterEmrys_WalkToBattlefield_Movement)
+    applymovement(EMRYS, moves(walk_right * 9, walk_down, face_left, step_end))
     waitmovement(0)
     releaseall
     end
@@ -62,7 +62,7 @@ script EnterEmrys_MuseumArrangement_Dialogue {
     setvar(VAR_GYM_3_STATE,GYM_LEADER_ON_BATTLEFIELD)
     msgbox(format("I was thinking about the arrangement of the museum. Museums tend to organize through etic categories, but I always wonder... how far off are we from their emic counterparts...? Sorry, I'm Emrys, Chief of the Perlacia City Gym!"), MSGBOX_NPC,SPEAKER_EMRYS)
     reveal(REVEAL_EMRYS)
-    applymovement(EMRYS, EmrysLookAround_Movement)
+    applymovement(EMRYS, moves(face_up, delay_16, face_down, delay_16, face_right, delay_16, face_left, step_end))
     waitmovement(0)
     msgbox(format("Has your visit been a positive time investment? There was a ton of qualitative research into curating the best possible experience for both patrons and challengers."),,SPEAKER_EMRYS)
         msgbox(format("Uh... yup. Yeah. It's cool."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -129,20 +129,3 @@ script EnterEmrys_PostBattle_Dialogue2 {
     end
 }
 
-movement EnterEmrys_WalkToBattlefield_Movement {
-    walk_right * 9
-    walk_down
-    face_left
-    step_end
-}
-
-movement EmrysLookAround_Movement {
-    face_up
-    delay_16
-    face_down
-    delay_16
-    face_right
-    delay_16
-    face_left
-    step_end
-}

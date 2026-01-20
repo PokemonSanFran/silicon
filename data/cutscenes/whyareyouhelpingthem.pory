@@ -129,7 +129,7 @@ script WhyAreYouHelpingThem_StartRaid {
 script WhyAreYouHelpingThem_WitnessBattle {
     setvar(VAR_NAVAL_BASE_STATE,CHASE_ALCMENE)
         lock
-        applymovement(ALCMENE,WhyAreYouHelpingThem_FleeTheBattle)
+        applymovement(ALCMENE, moves(walk_up * 4, step_end))
         waitmovement(0)
         call(WhyAreYouHelpingThem_MoveObjectBoss_Script)
 
@@ -140,11 +140,10 @@ script WhyAreYouHelpingThem_WitnessBattle {
         end
 }
 
-
 script WhyAreYouHelpingThem_PreBattleBoss_Script {
     lock
         applymovement(ALCMENE,Common_Movement_FaceLeft)
-        applymovement(PLAYER,WhyAreYouHelpingThem_ApproachAlcmene)
+        applymovement(PLAYER, moves(walk_up * 2, walk_right * 4, step_end))
         waitmovement(0)
         msgbox(format("It's a shame that the cops have totally infiltrated our youth. "),,SPEAKER_ALCMENE)
 
@@ -184,8 +183,8 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 
         closemessage
 
-        applymovement(ADAORA,WhyAreYouHelpingThem_WalkPastPlayer)
-        applymovement(ALCMENE,WhyAreYouHelpingThem_HealAndFaceAdmin)
+        applymovement(ADAORA, moves(walk_up * 4, walk_right * 5, walk_up, step_end))
+        applymovement(ALCMENE, moves(walk_in_place_slow_left, delay_16, delay_16, face_down, step_end))
         waitmovement(0)
         call(Common_EventScript_OutOfCenterPartyBypassHeal)
 
@@ -195,7 +194,7 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 
         playse(SE_PIN)
         waitse
-        applymovement(ADAORA,WhyAreYouHelpingThem_ExclaimAndFacePlayer)
+        applymovement(ADAORA, moves(emote_exclamation_mark, face_left, step_end))
         waitmovement(0)
 
         msgbox(format("Damn, you too, {PLAYER}?"),,SPEAKER_ADAORA)
@@ -227,7 +226,7 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
         playse(SE_EXIT)
         waitse
         addobject(KAI)
-        applymovement(KAI,WhyAreYouHelpingThem_WalkOutOfHole)
+        applymovement(KAI, moves(walk_down, walk_left * 3, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("This place is swarming with cops. You two need to get the hell out, right now. This goes straight out."),,SPEAKER_KAI_TIDE)
@@ -239,14 +238,14 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
         msgbox(format("I think they're right."),,SPEAKER_ADAORA)
 
         closemessage
-        applymovement(ALCMENE,WhyAreYouHelpingThem_WalkIntoHoleA)
-        applymovement(ADAORA,WhyAreYouHelpingThem_WalkIntoHoleB)
+        applymovement(ALCMENE, moves(walk_right * 3, walk_up * 2, step_end))
+        applymovement(ADAORA, moves(walk_right * 3, walk_up * 3, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
         removeobject(ADAORA)
         removeobject(ALCMENE)
-        applymovement(KAI,WhyAreYouHelpingThem_ApproachPlayer)
+        applymovement(KAI, moves(walk_down, walk_left * 3, step_end))
         waitmovement(0)
 
         msgbox(format("You're working with TheTide too?!?"),,SPEAKER_ALICIA)
@@ -281,14 +280,14 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue {
         closemessage
 
         applymovement(PLAYER,Common_Movement_FaceLeft)
-        applymovement(KAI,WhyAreYouHelpingThem_WalkIntoHoleC)
+        applymovement(KAI, moves(walk_right * 6, walk_up * 2, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
         removeobject(KAI)
         setobjectxyperm(CHARLOTTE,1,8)
         addobject(CHARLOTTE)
-        applymovement(CHARLOTTE,WhyAreYouHelpingThem_RunToPlayer)
+        applymovement(CHARLOTTE, moves(walk_up * 5, walk_right * 3, step_end))
         waitmovement(0)
 
         msgbox(format("I got knocked out. Did you stop Alcmene?"),,SPEAKER_CHARLOTTE)
@@ -300,7 +299,6 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue {
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_HALAI_ISLAND,255,26,6)
 }
-
 
 script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
         setvar(VAR_HALAI_ISLAND_STATE,SLEPT_AFTER_RAID) //advance HalaiIsland forward to clean up raid damage
@@ -318,7 +316,7 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
         msgbox(format("We spotted Alcmene and their lieutenant escaping on Pokemon by using the move Fly. We were unable to track them given our resources."))
         closemessage
 
-        applymovement(6,WhyAreYouHelpingThem_BackInFormation)
+        applymovement(6, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
         waitmovement(0)
 
         msgbox(format("A shame. Still, we've shut down their primary base of operations, and we arrested a bunch of these shitheads. This was an absolute win!"))
@@ -348,7 +346,7 @@ script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
         lock
         startcutscene(JUMPPLAYER_WHYAREYOUHELPINGTHEM)
         setvar(VAR_PLAYER_HOME_STATE,NEXT_DAY_CHAMPIONSHIP)
-        applymovement(PLAYER,WhyAreYouHelpingThem_WalkIntoHome)
+        applymovement(PLAYER, moves(walk_up * 3, step_end))
         waitmovement(0)
 
         msgbox(format("What… a day. I know that was a lot of pressure, but from what I hear, you were both fantastic. Thank you."),,SPEAKER_OLIVER)
@@ -365,7 +363,7 @@ script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
 
         closemessage
 
-        applymovement(2,WhyAreYouHelpingThem_LeaveCompoundA)
+        applymovement(2, moves(walk_right, walk_down * 4, walk_left, walk_in_place_down, face_down, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
@@ -375,8 +373,7 @@ script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
 
         closemessage
 
-
-        applymovement(CHARLOTTE,WhyAreYouHelpingThem_LeaveCompoundB)
+        applymovement(CHARLOTTE, moves(walk_down * 3, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
@@ -404,57 +401,8 @@ movement WhyAreYouHelpingThem_PoliceRunIn {
         step_end
 }
 
-movement WhyAreYouHelpingThem_FleeTheBattle {
-    walk_up * 4
-        step_end
-}
-
-movement WhyAreYouHelpingThem_ApproachAlcmene {
-    walk_up * 2
-        walk_right * 4
-        step_end
-}
-
-movement WhyAreYouHelpingThem_WalkPastPlayer {
-        walk_up * 4
-    walk_right * 5
-        walk_up
-        step_end
-}
-
 movement WhyAreYouHelpingThem_BeginEscape {
     walk_right * 3
-        step_end
-}
-
-movement WhyAreYouHelpingThem_ExclaimAndFacePlayer {
-    emote_exclamation_mark
-        face_left
-        step_end
-}
-
-movement WhyAreYouHelpingThem_WalkOutOfHole {
-    walk_down
-        walk_left * 3
-        face_down
-        step_end
-}
-
-movement WhyAreYouHelpingThem_WalkIntoHoleA {
-    walk_right * 3
-        walk_up * 2
-        step_end
-}
-
-movement WhyAreYouHelpingThem_WalkIntoHoleB {
-    walk_right * 3
-        walk_up * 3
-        step_end
-}
-
-movement WhyAreYouHelpingThem_WalkIntoHoleC {
-    walk_right * 6
-        walk_up * 2
         step_end
 }
 
@@ -464,54 +412,9 @@ movement WhyAreYouHelpingThem_ApproachBossAndPlayer {
         step_end
 }
 
-movement WhyAreYouHelpingThem_HealAndFaceAdmin {
-    walk_in_place_slow_left
-        delay_16
-        delay_16
-        face_down
-        step_end
-}
-
-movement WhyAreYouHelpingThem_ApproachPlayer {
-    walk_down
-        walk_left * 3
-        step_end
-}
-
-movement WhyAreYouHelpingThem_RunToPlayer {
-    walk_up * 5
-        walk_right * 3
-        step_end
-}
-
-movement WhyAreYouHelpingThem_BackInFormation {
-    lock_facing_direction
-        walk_down
-        unlock_facing_direction
-        step_end
-}
-
 movement WhyAreYouHelpingThem_WalkToPlayerFormation {
     walk_right
         walk_down
         step_end
 }
 
-movement WhyAreYouHelpingThem_WalkIntoHome {
-    walk_up * 3
-        step_end
-}
-
-movement WhyAreYouHelpingThem_LeaveCompoundA {
-    walk_right
-        walk_down * 4
-        walk_left
-        walk_in_place_down
-        face_down
-        step_end
-}
-
-movement WhyAreYouHelpingThem_LeaveCompoundB {
-    walk_down * 3
-        step_end
-}

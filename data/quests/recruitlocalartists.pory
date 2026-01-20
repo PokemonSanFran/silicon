@@ -141,7 +141,7 @@ script Quest_Recruitlocalartists_StartQuest_Dialogue{
     msgbox(format("The locals love them too. I want to figure out how SharpRise Capital can work with these artists to create a marketing campaign that really resonates with the people. Can you help me track down the artists? Come to the Production Studio in the SharpRise Spire once you've found them."))
     closemessage
 
-    applymovement(RAMESH_MERMEREZA_CITY,Quest_Recruitlocalartists_LeaveMission_Movement)
+    applymovement(RAMESH_MERMEREZA_CITY, moves(walk_right * 2, walk_up * 9, step_end))
     startquest(QUEST_RECRUITLOCALARTISTS)
     fadescreen(FADE_TO_BLACK)
     removeobject(RAMESH_MERMEREZA_CITY)
@@ -164,7 +164,7 @@ script Quest_Recruitlocalartists_Second_Dialogue{
         clearflag(FLAG_HIDE_SMEARGLE)
         addobject(SMEARGLE)
         setobjectxy(SMEARGLE,36,2)
-        applymovement(SMEARGLE,Quest_Recruitlocalartists_RunPastScreen_Movement)
+        applymovement(SMEARGLE, moves(walk_fast_left * 2, walk_fast_down * 3, walk_fast_left * 9, face_up, step_end))
         msgbox(format("I saw one of those mural painters once. I'll tell you a secret... they're Pokémon!"))
         closemessage
         waitmovement(SMEARGLE)
@@ -293,16 +293,3 @@ text gText_Recruitlocalartists_HelloPlayer{
     format("Hello {PLAYER}. We haven't formerly met yet, but I'm Ramesh, VP of Marketing for SharpRise Capital. We've always been very impressed with your work.")
 }
 
-movement Quest_Recruitlocalartists_RunPastScreen_Movement{
-    walk_fast_left * 2
-        walk_fast_down * 3
-        walk_fast_left * 9
-        face_up
-        step_end
-}
-
-movement Quest_Recruitlocalartists_LeaveMission_Movement{
-    walk_right * 2
-    walk_up * 9
-    step_end
-}

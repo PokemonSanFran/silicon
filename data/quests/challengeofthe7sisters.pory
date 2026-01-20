@@ -107,7 +107,6 @@ script Quest_Challengeof7Sisters_Cancel_Dialogue{
         end
 }
 
-
 script Quest_Challengeof7Sisters_StartChallenge_Dialogue{
     call(Quest_Challengeof7Sisters_CheckPartySize_Script)
         msgbox(format("Let's get started then!"),,SPEAKER_SEVENSISTERS_TINA)
@@ -134,8 +133,8 @@ script Quest_Challengeof7Sisters_PartyTooLarge_Dialogue{
 }
 
 script Quest_Challengeof7Sisters_WalkToBattlefield_Script{
-    applymovement(TINA,Quest_Challengeof7Sisters_TinaToBattlefield_Movement)
-        applymovement(PLAYER,Quest_Challengeof7Sisters_PlayerToBattlefield_Movement)
+    applymovement(TINA, moves(walk_left * 1, walk_down * 2, face_left, step_end))
+        applymovement(PLAYER, moves(walk_left * 6, walk_down * 2, face_right, step_end))
         waitmovement(PLAYER)
         return
 }
@@ -163,9 +162,9 @@ script Quest_Challengeof7Sisters_Battle1_Script{
 }
 
 script Quest_Challengeof7Sisters_SwapTinaForPaul_Script{
-    applymovement(TINA,Quest_Challengeof7Sisters_TinaFromBattlefield_Movement)
+    applymovement(TINA, moves(walk_right * 2, walk_down * 2, face_up))
         delay(8)
-        applymovement(PAUL,Quest_Challengeof7Sisters_PaulToBattlefield_Movement)
+        applymovement(PAUL, moves(walk_up * 2, walk_left, step_end))
         waitmovement(PAUL)
         return
 }
@@ -180,9 +179,9 @@ script Quest_Challengeof7Sisters_Battle2_Script{
 }
 
 script Quest_Challengeof7Sisters_SwapPaulForJonScript{
-    applymovement(PAUL,Quest_Challengeof7Sisters_PaulFromBattlefield_Movement)
+    applymovement(PAUL, moves(walk_right, walk_down * 2, face_up))
         delay(8)
-        applymovement(JON,Quest_Challengeof7Sisters_JonToBattlefield_Movement)
+        applymovement(JON, moves(walk_up * 2, face_left, step_end))
         waitmovement(JON)
 
 }
@@ -197,9 +196,9 @@ script Quest_Challengeof7Sisters_Battle3_Script{
 }
 
 script Quest_Challengeof7Sisters_SwapJonForBradleyScript{
-    applymovement(JON,Quest_Challengeof7Sisters_JonFromBattlefield_Movement)
+    applymovement(JON, moves(walk_down * 2, face_up, step_end))
         delay(8)
-        applymovement(BRADLEY,Quest_Challengeof7Sisters_BradleyToBattlefield_Movement)
+        applymovement(BRADLEY, moves(walk_up * 2, face_left, step_end))
         waitmovement(BRADLEY)
 
 }
@@ -214,9 +213,9 @@ script Quest_Challengeof7Sisters_Battle4_Script{
 }
 
 script Quest_Challengeof7Sisters_SwapBradleyForJoScript{
-    applymovement(BRADLEY,Quest_Challengeof7Sisters_BradleyFromBattlefield_Movement)
+    applymovement(BRADLEY, moves(walk_down * 2, face_up, step_end))
         delay(8)
-        applymovement(JO,Quest_Challengeof7Sisters_JoToBattlefield_Movement)
+        applymovement(JO, moves(walk_up, walk_right, walk_up, face_left, step_end))
         waitmovement(JO)
 
 }
@@ -231,9 +230,9 @@ script Quest_Challengeof7Sisters_Battle5_Script{
 }
 
 script Quest_Challengeof7Sisters_SwapJoForHannahScript{
-    applymovement(JO,Quest_Challengeof7Sisters_JoFromBattlefield_Movement)
+    applymovement(JO, moves(walk_down, walk_left, walk_down, face_up, step_end))
         delay(8)
-        applymovement(HANNAH,Quest_Challengeof7Sisters_HannahToBattlefield_Movement)
+        applymovement(HANNAH, moves(walk_up, walk_right * 3, walk_up, face_left, step_end))
         waitmovement(HANNAH)
 
 }
@@ -248,9 +247,9 @@ script Quest_Challengeof7Sisters_Battle6_Script{
 }
 
 script Quest_Challengeof7Sisters_SwapHannahForRachelScript{
-    applymovement(HANNAH,Quest_Challengeof7Sisters_HannahFromBattlefield_Movement)
+    applymovement(HANNAH, moves(walk_down, walk_left * 3, walk_down, face_up, step_end))
         delay(8)
-        applymovement(RACHEL,Quest_Challengeof7Sisters_RachelToBattlefield_Movement)
+        applymovement(RACHEL, moves(walk_up, walk_right * 3, walk_up, walk_right, face_left, step_end))
         waitmovement(RACHEL)
 }
 
@@ -309,7 +308,6 @@ script Quest_Challengeof7Sisters_ChallengeOver_Dialogue{
     call(Quest_Challengeof7Sisters_WarpEverybodyBackToPlace_Script)
     goto(Quest_Challengeof7Sisters_JudgePerformance_Script)
 }
-
 
 script Quest_Challengeof7Sisters_JudgePerformance_Script{
     lock
@@ -452,98 +450,6 @@ script Quest_Challengeof7Sisters_CompleteQuestIfNotCompleted_Script{
             completequest(QUEST_CHALLENGEOFTHE7SISTERS)
         }
     return
-}
-
-movement Quest_Challengeof7Sisters_PlayerToBattlefield_Movement{
-    walk_left * 6
-        walk_down * 2
-        face_right
-        step_end
-}
-movement Quest_Challengeof7Sisters_TinaToBattlefield_Movement{
-        walk_left * 1
-        walk_down * 2
-        face_left
-        step_end
-}
-movement Quest_Challengeof7Sisters_TinaFromBattlefield_Movement{
-        walk_right * 2
-        walk_down * 2
-        face_up
-}
-movement Quest_Challengeof7Sisters_PaulToBattlefield_Movement{
-        walk_up * 2
-        walk_left
-        step_end
-}
-movement Quest_Challengeof7Sisters_PaulFromBattlefield_Movement{
-        walk_right
-        walk_down * 2
-        face_up
-}
-movement Quest_Challengeof7Sisters_JonToBattlefield_Movement{
-    walk_up * 2
-        face_left
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_JonFromBattlefield_Movement{
-        walk_down * 2
-        face_up
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_BradleyToBattlefield_Movement{
-    walk_up * 2
-        face_left
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_BradleyFromBattlefield_Movement{
-    walk_down * 2
-        face_up
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_JoToBattlefield_Movement{
-    walk_up
-        walk_right
-        walk_up
-        face_left
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_JoFromBattlefield_Movement{
-    walk_down
-        walk_left
-        walk_down
-        face_up
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_HannahToBattlefield_Movement{
-    walk_up
-        walk_right * 3
-        walk_up
-        face_left
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_HannahFromBattlefield_Movement{
-    walk_down
-        walk_left * 3
-        walk_down
-        face_up
-        step_end
-}
-
-movement Quest_Challengeof7Sisters_RachelToBattlefield_Movement{
-    walk_up
-        walk_right * 3
-        walk_up
-        walk_right
-        face_left
-        step_end
 }
 
 movement Quest_Challengeof7Sisters_RachelFromBattlefield_Movement{

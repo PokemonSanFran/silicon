@@ -16,7 +16,7 @@ script AssholesHome_WalkToPlayer_Script {
         applymovement(PLAYER,Common_Movement_ExclamationMark)
         playse(SE_PIN)
         playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-        applymovement(KAI,AssholesHomes_WalkToPlayer_Movement)
+        applymovement(KAI, moves(walk_down * 2, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceUp)
         goto(AssholesHome_Kai_Dialogue)
@@ -70,7 +70,7 @@ script AssholesHome_PostBattle_Dialogue {
                 msgbox(format("(What a weird kid...)"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         }
         closemessage
-        applymovement(KAI,AssholesHome_WalkAway_Movement)
+        applymovement(KAI, moves(walk_up * 4, step_end))
         waitmovement(0)
         fadedefaultbgm
         removeobject(KAI)
@@ -81,15 +81,5 @@ script AssholesHome_PostBattle_Dialogue {
         end
 }
 
-movement AssholesHomes_WalkToPlayer_Movement {
-    walk_down * 2
-        step_end
-}
-
 // PSF TODO make sure Kai is visible at all times
-
-movement AssholesHome_WalkAway_Movement {
-    walk_up * 4
-        step_end
-}
 

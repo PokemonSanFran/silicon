@@ -121,7 +121,6 @@ script ImIn_MoveObject_BeforeWarp_Script {
         waitmovement(MAGNUS)
 }
 
-
 script ImIn_CheckPlayer_Script {
     lock
 
@@ -142,7 +141,7 @@ script ImIn_StartHouseBreak_Script
         call(ImIn_CutsceneSetup_OutsideHouse_Script)
         fadescreen(FADE_FROM_BLACK)
 
-        applymovement(PLAYER,ImIn_ApproachHouse)
+        applymovement(PLAYER, moves(walk_up, step_end))
         waitmovement(PLAYER)
 
         applymovement(ARMANDO,Common_Movement_FaceDown)
@@ -154,7 +153,7 @@ script ImIn_StartHouseBreak_Script
         msgbox(format("We're in position at CapheCity. Ready to mobilize this diversion when you are."),,SPEAKER_ADAORA,,,PHONE_ON)
         closemessage
 
-        applymovement(KAI,ImIn_WalkAroundHouse)
+        applymovement(KAI, moves(walk_right, walk_down * 5, step_end))
         waitmovement(KAI)
 
         applymovement(TALA,Common_Movement_FaceRight)
@@ -169,7 +168,7 @@ script ImIn_StartHouseBreak_Script
         msgbox(format("Let's move then!"),,SPEAKER_TALA)
         closemessage
 
-        applymovement(KAI,ImIn_WalkToSideDoor)
+        applymovement(KAI, moves(walk_up * 4, face_down, step_end))
         waitmovement(KAI)
 
         call(ImIn_ReleaseFromBall_Script)
@@ -178,17 +177,17 @@ script ImIn_StartHouseBreak_Script
                 closemessage
 
         playse(SE_M_BRICK_BREAK)
-        applymovement(PKMNA,ImIn_AttackHouse)
+        applymovement(PKMNA, moves(lock_facing_direction, walk_left, walk_right, step_end))
         waitse
         waitmovement(PKMNA)
         call(ImIn_DestroyWall_Script)
 
-        applymovement(PKMNA,ImIn_WalkIntoHouseA)
-        applymovement(TALA,ImIn_WalkIntoHouseB)
-        applymovement(MAGNUS,ImIn_WalkIntoHouseC)
-        applymovement(ARMANDO,ImIn_WalkIntoHouseD)
-        applymovement(ELLEN,ImIn_WalkIntoHouseE)
-        applymovement(KAI,ImIn_WalkIntoHouseF)
+        applymovement(PKMNA, moves(walk_left, step_end))
+        applymovement(TALA, moves(walk_right * 5, walk_up * 4, walk_left, step_end))
+        applymovement(MAGNUS, moves(walk_right, walk_up * 4, walk_left, step_end))
+        applymovement(ARMANDO, moves(walk_right * 4, walk_up * 3, walk_left, step_end))
+        applymovement(ELLEN, moves(walk_up * 4, walk_left, step_end))
+        applymovement(KAI, moves(walk_down, walk_left, step_end))
 
         playse(SE_EXIT)
         playse(SE_EXIT)
@@ -301,7 +300,7 @@ script ImIn_EnterCorrectCode_Script
         waitmovement(TALA)
         removeobject(TALA)
         playse(SE_WARP_OUT)
-        applymovement(ARMANDO,ImIn_WalkToWarpFromLeft)
+        applymovement(ARMANDO, moves(walk_up, walk_right, step_end))
         waitmovement(ARMANDO)
         removeobject(ARMANDO)
         playse(SE_WARP_OUT)
@@ -313,7 +312,7 @@ script ImIn_EnterCorrectCode_Script
         waitmovement(MAGNUS)
         removeobject(MAGNUS)
         playse(SE_WARP_OUT)
-        applymovement(KAI,ImIn_WalkToWarpFromRight)
+        applymovement(KAI, moves(walk_up, walk_left, step_end))
         waitmovement(KAI)
         removeobject(KAI)
         playse(SE_WARP_OUT)
@@ -395,7 +394,7 @@ script ImIn_PreventPlayerProgress_Script {
         msgbox(format("Adelaide's office is on Floor 10."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
 
-        applymovement(PLAYER,ImIn_WalkAwayStairs)
+        applymovement(PLAYER, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
         waitmovement(PLAYER)
         release
         end
@@ -406,7 +405,7 @@ script ImIn_OfficeReveal_Dialogue{
         setvar(VAR_TOWER_RAID_STATE,SAVE_CHARLOTTE_SHARPRISESPIRE)
         playbgm(MUS_ENCOUNTER_MAY,TRUE)
 
-        applymovement(PLAYER,ImIn_ApproachDesk_Movement)
+        applymovement(PLAYER, moves(walk_down * 4, step_end))
         waitmovement(PLAYER)
 
         msgbox(format("Do you like my new office?"),,SPEAKER_CHARLOTTE_SHARPRISE)
@@ -427,7 +426,7 @@ script ImIn_OfficeReveal_Dialogue{
         msgbox(format("Daddy won't be able to buy your way out of this one."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
-        applymovement(CHARLOTTE,ImIn_WalkFromDesk_Movement)
+        applymovement(CHARLOTTE, moves(walk_right, walk_up * 3, face_left, step_end))
         waitmovement(CHARLOTTE)
         applymovement(PLAYER,Common_Movement_FaceRight)
 
@@ -494,82 +493,8 @@ script ImIn_InteractCharlotte_Event_Script {
         end
 }
 
-movement ImIn_ApproachHouse {
-    walk_up
-        step_end
-}
-
-movement ImIn_WalkAroundHouse {
-    walk_right
-        walk_down * 5
-        step_end
-}
-
-movement ImIn_WalkToSideDoor {
-    walk_up * 4
-        face_down
-        step_end
-}
-
-movement ImIn_AttackHouse {
-    lock_facing_direction
-        walk_left
-        walk_right
-        step_end
-}
-
-movement ImIn_WalkIntoHouseA {
-    walk_left
-        step_end
-}
-
-movement ImIn_WalkIntoHouseB {
-    walk_right * 5
-        walk_up * 4
-        walk_left
-        step_end
-}
-
-movement ImIn_WalkIntoHouseC {
-    walk_right
-        walk_up * 4
-        walk_left
-        step_end
-}
-
-movement ImIn_WalkIntoHouseD {
-    walk_right * 4
-        walk_up * 3
-        walk_left
-        step_end
-}
-
-movement ImIn_WalkIntoHouseE {
-    walk_up * 4
-        walk_left
-        step_end
-}
-
-movement ImIn_WalkIntoHouseF {
-    walk_down
-        walk_left
-        step_end
-}
-
 movement ImIn_SpreadOutHouse {
     walk_down * 6
-        step_end
-}
-
-movement ImIn_WalkToWarpFromLeft {
-    walk_up
-        walk_right
-        step_end
-}
-
-movement ImIn_WalkToWarpFromRight {
-    walk_up
-        walk_left
         step_end
 }
 
@@ -602,21 +527,3 @@ movement ImIn_WalkAwayFromWarpE {
         step_end
 }
 
-movement ImIn_WalkAwayStairs {
-    lock_facing_direction
-        walk_down
-        unlock_facing_direction
-        step_end
-}
-
-movement ImIn_ApproachDesk_Movement{
-        walk_down * 4
-        step_end
-}
-
-movement ImIn_WalkFromDesk_Movement{
-    walk_right
-        walk_up * 3
-        face_left
-        step_end
-}

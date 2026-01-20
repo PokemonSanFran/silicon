@@ -12,7 +12,7 @@ script swagbag2_OliverWalkOutGym_Script {
     clearflag(FLAG_TEMP_1)
     addobject(OLIVER)
     applymovement(OLIVER, Common_Movement_WalkDown)
-    applymovement(PLAYER, swagbag2_GetOutOfWay)
+    applymovement(PLAYER, moves(walk_down, face_up, step_end))
     waitmovement(0)
     closedoor(10, 8)
     waitdooranim
@@ -54,7 +54,6 @@ script swagbag2_DiscussCosts_Dialogue {
 
     msgbox(format("Yes, hopefully they'll have it all smoothed out in the next year or ten. Now, I've gotta run. Good luck in there!"),,SPEAKER_OLIVER)
 
-
     goto(swagbag2_Scene_End_Script)
 }
 
@@ -68,8 +67,8 @@ script swagbag2_BringToCenter_Dialogue {
 
     closemessage
 
-    applymovement(OLIVER, swagbag2_WalkToCenter)
-    applymovement(PLAYER, swagbag2_PlayerWalkToCenter)
+    applymovement(OLIVER, moves(walk_left * 5, walk_down * 4, walk_left * 2, face_down, step_end))
+    applymovement(PLAYER, moves(walk_left * 5, walk_down * 4, walk_left * 2, face_up, step_end))
     waitmovement(0)
 
     msgbox(format("Don't let their demeanor fool you - Kauna is actually one of the leading experts in Pokémon Breeding and Battling. His entire team is bred using this facility's Gold tier experience. Access to those same services is a perk of being under the SharpRise Capital umbrella."),,SPEAKER_OLIVER)
@@ -87,15 +86,14 @@ script swagbag2_BringToCenter_Dialogue {
 
     msgbox(format("Now, I've gotta run. Good luck in there!"),,SPEAKER_OLIVER)
 
-
     goto(swagbag2_Scene_End_Script)
 }
 
 script swagbag2_Scene_End_Script {
     setvar(VAR_CHASILLA_STATE, SWAGBAG_2_COMPLETE)
     closemessage
-    applymovement(PLAYER, swagbag2_LetOliverLeave)
-    applymovement(OLIVER, swagbag2_LeaveCity)
+    applymovement(PLAYER, moves(walk_right, walk_up, walk_left, face_up, step_end))
+    applymovement(OLIVER, moves(walk_down * 7, step_end))
     waitmovement(0)
     removeobject(OLIVER)
     fadedefaultbgm
@@ -103,12 +101,6 @@ script swagbag2_Scene_End_Script {
     call(TryAutoSave)
     endcutscene
     end
-}
-
-movement swagbag2_GetOutOfWay {
-    walk_down
-    face_up
-    step_end
 }
 
 movement swagbag2_LookAwayAndBack {
@@ -119,31 +111,3 @@ movement swagbag2_LookAwayAndBack {
     step_end
 }
 
-movement swagbag2_LeaveCity {
-    walk_down * 7
-    step_end
-}
-
-movement swagbag2_WalkToCenter {
-    walk_left * 5
-    walk_down * 4
-    walk_left * 2
-    face_down
-    step_end
-}
-
-movement swagbag2_PlayerWalkToCenter {
-    walk_left * 5
-    walk_down * 4
-    walk_left * 2
-    face_up
-    step_end
-}
-
-movement swagbag2_LetOliverLeave {
-    walk_right
-    walk_up
-    walk_left
-    face_up
-    step_end
-}

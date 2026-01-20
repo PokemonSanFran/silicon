@@ -76,15 +76,15 @@ script AngelDelivery_Script_BikerALeaves
         switch(var(VAR_TEMP_1))
         {
             case DIR_NORTH:
-                applymovement(BIKER_A, Quest_AngelDelivery_Movement_BikerAWalksAway_North_1)
+                applymovement(BIKER_A, moves(walk_slow_right * 2, step_end))
                 turnobject(PLAYER, DIR_EAST)
                 waitmovement(0)
-                applymovement(BIKER_A, Quest_AngelDelivery_Movement_BikerAWalksAway_North_2)
+                applymovement(BIKER_A, moves(walk_slow_down * 7, step_end))
                 turnobject(PLAYER, DIR_SOUTH)
             case DIR_SOUTH:
             case DIR_EAST:
             case DIR_WEST:
-                applymovement(BIKER_A, Quest_AngelDelivery_Movement_BikerAWalksAway)
+                applymovement(BIKER_A, moves(walk_slow_down * 6, step_end))
                 turnobject(PLAYER, DIR_SOUTH)
         }
     waitmovement(PLAYER)
@@ -149,8 +149,8 @@ script AngelDelivery_Script_InteractBikerB
 
 script AngelDelivery_Dialogue_PreBattle
 {
-    applymovement(BIKER_C, AngelDelivery_Movement_MoveBikerC)
-    applymovement(BIKER_D, AngelDelivery_Movement_MoveBikerD)
+    applymovement(BIKER_C, moves(walk_right, face_down, step_end))
+    applymovement(BIKER_D, moves(walk_left, face_down, step_end))
     waitmovement(0)
     call(AngelDelivery_Dialogue_FirstTime)
     msgbox(format("And now for the final stage of your onboarding…"),,SPEAKER_ANGELDELIVERYBIKERC)
@@ -181,7 +181,7 @@ script AngelDelivery_Script_CircleBikers
 {
     applymovement(BIKER_C, Quest_AngelDelivery_BikersCDWalkToTheCenter)
     applymovement(BIKER_D, Quest_AngelDelivery_BikersCDWalkToTheCenter)
-    applymovement(PLAYER, Quest_AngelDelivery_PlayerWalksToTheCenter)
+    applymovement(PLAYER, moves(walk_up * 3, step_end))
     waitmovement(0)
     delay(15)
     applymovement(BIKER_C, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
@@ -198,8 +198,8 @@ script AngelDelivery_Script_CircleBikers
     msgbox(format("Has this chain ever been lubed?"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
     msgbox(format("And gotta hook up the nitro…"),,SPEAKER_ANGELDELIVERYBIKERD, TAIL_WHISPER)
     closemessage
-    applymovement(BIKER_C, AngelDelivery_Movement_BikerCCirclesAroundThePlayer_End)
-    applymovement(BIKER_D, AngelDelivery_Movement_BikerDCirclesAroundThePlayer_End)
+    applymovement(BIKER_C, moves(walk_left, walk_down * 2, walk_right * 2, walk_up * 2, walk_left, face_down, step_end))
+    applymovement(BIKER_D, moves(walk_left * 2, walk_down * 2, walk_right * 2, walk_up * 2, face_down, step_end))
     applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
     waitmovement(0)
     closemessage
@@ -220,41 +220,9 @@ script AngelDelivery_Script_PostBattle
     end
 }
 
-movement Quest_AngelDelivery_Movement_BikerAWalksAway_North_1 {
-    walk_slow_right * 2
-    step_end
-}
-
-movement Quest_AngelDelivery_Movement_BikerAWalksAway_North_2 {
-    walk_slow_down * 7
-    step_end
-}
-
-movement Quest_AngelDelivery_Movement_BikerAWalksAway {
-    walk_slow_down * 6
-    step_end
-}
-
-movement AngelDelivery_Movement_MoveBikerC {
-    walk_right
-    face_down
-    step_end
-}
-
-movement AngelDelivery_Movement_MoveBikerD {
-    walk_left
-    face_down
-    step_end
-}
-
 movement Quest_AngelDelivery_BikersCDWalkToTheCenter {
     walk_up * 3
     face_down
-    step_end
-}
-
-movement Quest_AngelDelivery_PlayerWalksToTheCenter {
-    walk_up * 3
     step_end
 }
 
@@ -274,25 +242,6 @@ movement AngelDelivery_Movement_BikerDCirclesAroundThePlayer {
     walk_right * 2
     walk_up * 2
     face_left
-    step_end
-}
-
-movement AngelDelivery_Movement_BikerCCirclesAroundThePlayer_End {
-    walk_left
-    walk_down * 2
-    walk_right * 2
-    walk_up * 2
-    walk_left
-    face_down
-    step_end
-}
-
-movement AngelDelivery_Movement_BikerDCirclesAroundThePlayer_End {
-    walk_left * 2
-    walk_down * 2
-    walk_right * 2
-    walk_up * 2
-    face_down
     step_end
 }
 

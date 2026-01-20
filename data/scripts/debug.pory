@@ -331,7 +331,6 @@ script Debug_EventScript_InflictStatus1
 	}
 }
 
-
 script Debug_EventScript_InflictStatus1_Close
 {
 	releaseall
@@ -586,8 +585,6 @@ text Debug_EventScript_InflictStatus1_Text_Frostbite
 {
     format("Frostbite")
 }
-
-
 
 script Debug_EventScript_EWRAMCounters
 {

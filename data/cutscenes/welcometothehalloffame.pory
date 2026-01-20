@@ -14,8 +14,8 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
 
         clearflag(FLAG_HIDE_ADELAIDE)
         addobject(ADELAIDE)
-        applymovement(ADELAIDE,WelcomeToTheHallOfFame_MoveAdelaideToPodium)
-        applymovement(KAI,WelcomeToTheHallOfFame_WalkOutOfWay)
+        applymovement(ADELAIDE, moves(walk_left * 4, walk_up * 3, walk_left * 6, step_end))
+        applymovement(KAI, moves(walk_right, walk_up, face_down, step_end))
         waitmovement(ADELAIDE)
 
         msgbox(format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. "),,SPEAKER_ADELAIDE)
@@ -60,16 +60,3 @@ script WelcometotheHallofFame_GameClear_Script{
 
 //PSF TODO add reference to emails here, maybe pitch the whole crowd on email notifications?
 
-movement WelcomeToTheHallOfFame_MoveAdelaideToPodium {
-    walk_left * 4
-        walk_up * 3
-        walk_left * 6
-        step_end
-}
-
-movement WelcomeToTheHallOfFame_WalkOutOfWay {
-    walk_right
-        walk_up
-        face_down
-        step_end
-}

@@ -146,7 +146,7 @@ script Quest_Redomugging_StealPhone_Dialogue{
     msgbox(format("Oh man, this is so juicy! Okay, I gotta run to the restroom, but don't go anywhere,okay?"))
     closemessage
 
-    applymovement(VICTIM,Quest_Redomugging_LeaveRoom_Movement)
+    applymovement(VICTIM, moves(walk_left * 8, step_end))
     dofieldeffectsparkle(12,14,0)
     waitfieldeffect(FLDEFF_SPARKLE)
     delay(10)
@@ -226,7 +226,7 @@ script Quest_Redomugging_Reward_Dialogue{
     msgbox(format("Awesome, we'll give this to our guys and see if they stop this story from getting out."))
     closemessage
 
-    applymovement(MUGGER_B_ARANTRAZ,Quest_Redomugging_WalkOffScreen_Movement)
+    applymovement(MUGGER_B_ARANTRAZ, moves(walk_up * 7, step_end))
     completequest(QUEST_REDOMUGGING)
     waitmovement(MUGGER_B_ARANTRAZ)
     removeobject(MUGGER_B_ARANTRAZ)
@@ -339,11 +339,4 @@ text gText_Redomugging_AwesomeWellGive{
 text gText_Redomugging_EvenBetterThan{
     format("Even better than we expected - our guys were able to use that phone to wipe out all that guys shitty work. That interview about you is also gone, no worries.")
 }
-movement Quest_Redomugging_LeaveRoom_Movement{
-    walk_left * 8
-    step_end
-}
-movement Quest_Redomugging_WalkOffScreen_Movement{
-    walk_up * 7
-    step_end
-}
+

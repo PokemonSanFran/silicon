@@ -30,7 +30,6 @@ script YouHaveYourOrders_ObjectSetUp_Script
         setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_DOWN)
 }
 
-
 script YouHaveYourOrders_Interact_Keiying_Script
 {
   returnqueststate(QUEST_HOWDISAPPOINTING)
@@ -77,7 +76,7 @@ script YouHaveYourOrders_Assignment_Dialogue
       }
     closemessage
 
-    applymovement(KEIYING,YouHaveYourOrders_PaceInOffice)
+    applymovement(KEIYING, moves(walk_left * 2, walk_right * 2, walk_left * 2, walk_right * 2, face_player))
     waitmovement(0)
 
     msgbox(format("Law enforcement has confirmed the old Gyms have been repurposed as TheTide recruitment and training centers.The city has loaned us enough officers to perform three simultaneous raids."),,SPEAKER_KEIYING)
@@ -154,13 +153,5 @@ script YouHaveYourOrders_GymQuestionDialogue{
     msgbox(format("What about TirabudinPlace?"),,SPEAKER_ALICIA)
     msgbox(format("Our intelligence tells us that we'll be able to take that one with a smaller team."),,SPEAKER_KEIYING)
     return
-}
-
-movement YouHaveYourOrders_PaceInOffice {
-    walk_left * 2
-    walk_right * 2
-    walk_left * 2
-    walk_right * 2
-    face_player
 }
 

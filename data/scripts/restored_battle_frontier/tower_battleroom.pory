@@ -14,7 +14,7 @@ const VAR_CURRENT_BATTLE_NUM = VAR_TEMP_E
 
 script TirabudinPlace_Gym_Battle_Room_EventScript_EnterRoom{
     setvar(VAR_TEMP_0, 1)
-    applymovement(OBJ_EVENT_ID_PLAYER, TirabudinPlace_Gym_Battle_Room_Movement_PlayerEnter)
+    applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up * 3, face_right, step_end))
     waitmovement(0)
 
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
@@ -34,7 +34,7 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_EnterRoom{
 script TirabudinPlace_Gym_Battle_Room_EventScript_OpponentEnter{
     special(PSF_SetNextTowerOpponent)
     addobject(OPPONENT)
-    applymovement(OPPONENT, TirabudinPlace_Gym_Battle_Room_Movement_OpponentEnter)
+    applymovement(OPPONENT, moves(walk_down * 4, face_left, step_end))
     waitmovement(0)
 
     call(TirabudinPlace_Gym_Battle_Room_PlayBattleIntro_Dialogue)
@@ -142,7 +142,7 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_DefeatedOpponent{
 
     applymovement(ATTENDANT_1, TirabudinPlace_Gym_Battle_Room_Movement_AttendantApproachPlayer)
     applymovement(OBJ_EVENT_ID_PLAYER, TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceAttendant)
-    applymovement(OPPONENT, TirabudinPlace_Gym_Battle_Room_Movement_OpponentExit)
+    applymovement(OPPONENT, moves(walk_up * 4, step_end))
     waitmovement(OPPONENT)
     removeobject(OPPONENT)
 
@@ -228,14 +228,13 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_AskRetireChallenge{
 script TirabudinPlace_Gym_Battle_Room_EventScript_ContinueChallenge{
     closemessage
 
-    applymovement(OBJ_EVENT_ID_PLAYER, TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceBattle)
+    applymovement(OBJ_EVENT_ID_PLAYER, moves(face_right, step_end))
     waitmovement(0)
-    applymovement(ATTENDANT_1, TirabudinPlace_Gym_Battle_Room_Movement_AttendantReturnToPos)
+    applymovement(ATTENDANT_1, moves(walk_left * 2, face_right, step_end))
     waitmovement(0)
 
     goto(TirabudinPlace_Gym_Battle_Room_EventScript_OpponentEnter)
 }
-
 
 script TirabudinPlace_Gym_Battle_Room_EventScript_PauseChallenge{
     message(TirabudinPlace_Gym_Battle_Room_Text_SavingPleaseWait)
@@ -285,41 +284,13 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_DoTowerBattle{
     return
 }
 
-movement TirabudinPlace_Gym_Battle_Room_Movement_PlayerEnter{
-    walk_up * 3
-    face_right
-    step_end
-}
-
 movement TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceAttendant{
     face_left
         step_end
 }
 
-movement TirabudinPlace_Gym_Battle_Room_Movement_PlayerFaceBattle{
-    face_right
-        step_end
-}
-
-movement TirabudinPlace_Gym_Battle_Room_Movement_OpponentEnter{
-    walk_down * 4
-        face_left
-        step_end
-}
-
-movement TirabudinPlace_Gym_Battle_Room_Movement_OpponentExit{
-    walk_up * 4
-        step_end
-}
-
 movement TirabudinPlace_Gym_Battle_Room_Movement_AttendantApproachPlayer{
     walk_right * 2
-    step_end
-}
-
-movement TirabudinPlace_Gym_Battle_Room_Movement_AttendantReturnToPos{
-    walk_left * 2
-    face_right
     step_end
 }
 

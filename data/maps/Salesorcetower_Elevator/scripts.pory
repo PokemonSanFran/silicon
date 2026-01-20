@@ -61,7 +61,6 @@ script SharpriseSpire_ElevatorAttendant_PickFloor_Script{
         }
 }
 
-
 script SharpriseSpire_ElevatorAttendant_Script {
     lock
         faceplayer

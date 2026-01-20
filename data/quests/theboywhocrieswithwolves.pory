@@ -79,7 +79,7 @@ script Quest_Theboywhocriedwithwolves_Interact_Ambrogio_Script{
 }
 
 script Quest_Theboywhocriedwithwolves_StartQuest_Dialogue{
-    applymovement(AMBROGIO,Quest_Theboywhocriedwithwolves_LookAround_Movement)
+    applymovement(AMBROGIO, moves(face_left, delay_16, walk_in_place_right, delay_16, walk_in_place_left, step_end))
     msgbox(format("Man, what am I going to do now?"),,SPEAKER_AMBROGIO,,EMOTE_SAD)
     waitmovement(AMBROGIO)
     msgbox(format("Hey there."),MSGBOX_NPC,SPEAKER_AMBROGIO)
@@ -134,7 +134,7 @@ script Quest_Theboywhocriedwithwolves_Reward_Dialogue{
     msgbox(format("I can heal Pokemon by just touching them. I thought I'd be able to continue my practice here in Residobut... my peers here didn't appreciate my gift as much. Their jealousy meant they wouldn't associated with me at all, and without reccomendations, I can't get jobs... and now I'm here."),,SPEAKER_AMBROGIO)
     msgbox(format("My point was, I'm a healer! If I see you around the region, I'll try to help you."),,SPEAKER_AMBROGIO)
     closemessage
-    applymovement(AMBROGIO,Quest_Theboywhocriedwithwolves_Ambrogio_LeaveScene_Movement)
+    applymovement(AMBROGIO, moves(walk_up * 3, step_end))
     fadescreen(FADE_TO_BLACK)
     delay(16)
     removeobject(VAR_LAST_TALKED)
@@ -144,19 +144,6 @@ script Quest_Theboywhocriedwithwolves_Reward_Dialogue{
     end
 }
 
-movement Quest_Theboywhocriedwithwolves_Ambrogio_LeaveScene_Movement{
-    walk_up * 3
-    step_end
-}
-
-movement Quest_Theboywhocriedwithwolves_LookAround_Movement{
-    face_left
-    delay_16
-    walk_in_place_right
-    delay_16
-    walk_in_place_left
-    step_end
-}
 text gText_Theboywhocriedwithwolves_Manwhatami{
     format("Man, what am I going to do now?")
 }

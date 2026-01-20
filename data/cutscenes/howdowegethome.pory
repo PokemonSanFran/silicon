@@ -103,8 +103,8 @@ script HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue {
         waitmovement(0)
         msgbox(format("...Actually you know what, whatever."),,SPEAKER_MADISON)
         closemessage
-        applymovement(MADISON,HowDoWeGetHome_Madison_LeaveFight_Movement)
-        applymovement(PLAYER,HowDoWeGetHome_MoveOutOfWay_Movement)
+        applymovement(MADISON, moves(walk_down * 2, walk_right * 13, step_end))
+        applymovement(PLAYER, moves(walk_left, walk_down, face_up, step_end))
         delay(120)
         applymovement(ADAORA,Common_Movement_LookAround)
         waitmovement(ADAORA)
@@ -141,7 +141,7 @@ script HowDoWeGetHome_AdaoraEntrance_Script{
         applymovement(4,HowDoWeGetHome_ExclaimUp)
         applymovement(12,HowDoWeGetHome_ExclaimUp)
         applymovement(10,HowDoWeGetHome_ExclaimUp)
-        applymovement(ADAORA,HowDoWeGetHome_WalkIntoFight_Movement)
+        applymovement(ADAORA, moves(walk_left * 5, face_up, step_end))
         waitmovement(0)
         applymovement(MADISON,Common_Movement_FaceDown)
         applymovement(JULIUS,Common_Movement_FaceDown)
@@ -176,13 +176,6 @@ script HowDoWeGetHome_SetCrowdMovementType_Script{
     setobjectmovementtype(JULIUS,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
 }
 
-movement HowDoWeGetHome_WalkIntoFight_Movement
-{
-    walk_left * 5
-        face_up
-        step_end
-}
-
 movement HowDoWeGetHome_ExclaimDown
 {
     emote_exclamation_mark
@@ -206,13 +199,6 @@ movement HowDoWeGetHome_LeaveFight_Movement
     step_end
 }
 
-movement HowDoWeGetHome_Madison_LeaveFight_Movement
-{
-    walk_down * 2
-    walk_right * 13
-    step_end
-}
-
 movement HowDoWeGetHome_MovePlayerOffPath_South
 {
     walk_right
@@ -227,10 +213,3 @@ movement HowDoWeGetHome_MovePlayerOffPath_North
     step_end
 }
 
-movement HowDoWeGetHome_MoveOutOfWay_Movement
-{
-    walk_left
-    walk_down
-    face_up
-    step_end
-}

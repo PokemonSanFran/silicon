@@ -193,7 +193,6 @@ script BattleTower_EventScript_Attendant{
         clearflag(FLAG_CHOSEN_RESTORED_MULTI_BATTLE_NPC_PARTNER)
     }
 
-
     switch(var(VAR_LAST_TALKED)){
         case ATTENDANT_SINGLES: msgbox(format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the SINGLE BATTLE ROOMS."), MSGBOX_DEFAULT)
         case ATTENDANT_DOUBLES: msgbox(format("Where the talents of TRAINERS are put to the test!\pWelcome to the BATTLE TOWER!\pI am your guide to the DOUBLE BATTLE ROOMS."), MSGBOX_DEFAULT)
@@ -581,39 +580,19 @@ script BattleTower_EventScript_WalkToElevator{
     closemessage
     call(BattleTower_EventScript_SetAttendantTalkedTo)
     call(BattleTower_EventScript_GetDoorXCoord)
-    applymovement(VAR_LAST_TALKED, BattleTower_StepAside_Movement)
-    applymovement(OBJ_EVENT_ID_PLAYER, BattleTower_Movement_WalkToElevator)
+    applymovement(VAR_LAST_TALKED, moves(walk_right, face_left, step_end))
+    applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up, walk_up, walk_up, step_end))
     waitmovement(0)
     opendoor(VAR_0x8004, 1)
     waitdooranim
-    applymovement(OBJ_EVENT_ID_PLAYER, BattleTower_Movement_PlayerEnterElevator)
+    applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up, walk_up, set_invisible, step_end))
     waitmovement(0)
     closedoor(VAR_0x8004, 1)
     waitdooranim
     return
 }
 
-movement BattleTower_StepAside_Movement{
-    walk_right
-    face_left
-    step_end
-}
-
-movement BattleTower_Movement_WalkToElevator{
-    walk_up
-    walk_up
-    walk_up
-    step_end
-}
-
 movement BattleTower_Movement_AttendantEnterElevator{
-    walk_up
-    set_invisible
-    step_end
-}
-
-movement BattleTower_Movement_PlayerEnterElevator{
-    walk_up
     walk_up
     set_invisible
     step_end

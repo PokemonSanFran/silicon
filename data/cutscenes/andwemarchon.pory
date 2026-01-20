@@ -47,7 +47,7 @@ script AndWeMarchOn_MoveCameraToParade_Script {
 script AndWeMarchOn_StartParadeMovement_Script {
     lock
         startcutscene(JUMPPLAYER_ANDWEMARCHON)
-        applymovement(PLAYER, AndWeMarchOn_WatchParade_Movement)
+        applymovement(PLAYER, moves(face_down, step_end))
         waitmovement(0)
         fadescreen(FADE_TO_BLACK)
         call(AndWeMarchOn_MoveCameraToParade_Script)
@@ -55,7 +55,7 @@ script AndWeMarchOn_StartParadeMovement_Script {
         setobjectxy(PARADE_FLOAT_A, 26, 10)
         fadescreen(FADE_FROM_BLACK)
 
-        applymovement(CAMERA, AndWeMarchOn_PanCameraParadeStop_Movement)
+        applymovement(CAMERA, moves(walk_right * 14, step_end))
         applymovement(TALA, AndWeMarchOn_ParadeProcession_Movement)
         applymovement(PARADE_FLOAT_A, AndWeMarchOn_ParadeProcession_Movement)
         applymovement(PARADE_FLOAT_B, AndWeMarchOn_ParadeProcession_Movement)
@@ -82,7 +82,7 @@ script AndWeMarchOn_Opening_Dialogue {
     applymovement(TALA, AndWeMarchOn_LookAroundCrowd_Movement)
         waitmovement(0)
         playse(SE_APPLAUSE)
-        applymovement(TALA, AndWeMarchOn_WalkToFloatCenter_Movement)
+        applymovement(TALA, moves(walk_right, walk_right, walk_down, face_right, step_end))
         waitmovement(0)
 
         msgbox(format("Resido!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
@@ -99,7 +99,7 @@ script AndWeMarchOn_Opening_Dialogue {
         playse(SE_APPLAUSE)
         waitse
 
-        applymovement(TALA, AndWeMarchOn_PaceBackForth_Movement)
+        applymovement(TALA, moves(walk_up * 2, delay_16, walk_down * 4, delay_16, walk_up * 2, step_end))
         waitmovement(0)
         goto(AndWeMarchOn_InviteOntoStage_Dialogue)
 }
@@ -108,7 +108,7 @@ script AndWeMarchOn_InviteOntoStage_Dialogue {
         msgbox(format("We have a special guest for you all today! Rupert, please come up to the stage!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
         closemessage
 
-        applymovement(RUPERT, AndWeMarchOn_WalkOntoStage_Movement)
+        applymovement(RUPERT, moves(walk_up * 3, face_left, step_end))
         waitmovement(0)
 
         msgbox(format("Rupert here is the winner of the MermerezaCity Preparatory School graduation tournament! NORMALLY, the winner gets a scholarship from the Resido League. But our new corporate overlords have decided that growing the in-region talent isn't a budget priority!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
@@ -130,7 +130,7 @@ script AndWeMarchOn_StartCutsceneBattle_Script {
         msgbox(format("Yeah!"),MSGBOX_DEFAULT,SPEAKER_CROWD_A)
         closemessage
 
-        applymovement(TALA, AndWeMarchOn_WalkToLeftSide_Movement)
+        applymovement(TALA, moves(walk_left, face_right, step_end))
         applymovement(RUPERT, AndWeMarchOn_LookAroundCrowd_Movement)
         waitmovement(0)
         applymovement(RUPERT, Common_Movement_FaceLeft)
@@ -146,7 +146,7 @@ script AndWeMarchOn_StartCutsceneBattle_Script {
 }
 script AndWeMarchOn_CutsceneBattleScript {
 
-        applymovement(CAMERA,AndWeMarchOn_CenterBattleFrame_Movement)
+        applymovement(CAMERA, moves(walk_right * 3, walk_down, step_end))
         playse(SE_BALL_OPEN)
         playse(SE_BALL_OPEN)
         waitse
@@ -213,7 +213,7 @@ script AndWeMarchOn_PostBattle_Dialogue {
         removeobject(PKMN2)
         removeobject(PKMN3)
         removeobject(PKMN4)
-        applymovement(RUPERT, AndWeMarchOn_WalkOffStage_Movement)
+        applymovement(RUPERT, moves(walk_down * 3, face_up, step_end))
         waitmovement(0)
         goto(AndWeMarchOn_PostBattleSpeech_Dialogue)
 }
@@ -226,13 +226,13 @@ script AndWeMarchOn_PostBattleSpeech_Dialogue {
         playse(SE_APPLAUSE) //PSF TODO: change to booing sound
         waitse
 
-        applymovement(TALA, AndWeMarchOn_WalkToSouthStage_Movement)
+        applymovement(TALA, moves(walk_right * 3, step_end))
         waitmovement(0)
 
         msgbox(format("Oh, it's not all bad, is it? Yeah, our beloved elected officials sold our League to the highest bidder. And yeah, they've bulldozed all of our traditions and replaced them with some soulless husk of a League. AND YEAH, they pushed our entire battling community out and replaced them with highly paid drones that couldn't battle their way out of a paper bag…."),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
         closemessage
 
-        applymovement(TALA, AndWeMarchOn_WalkToNorthStage_Movement)
+        applymovement(TALA, moves(walk_left * 6, step_end))
         waitmovement(0)
 
         msgbox(format("Boo!"),MSGBOX_DEFAULT,SPEAKER_CROWD_B)
@@ -252,7 +252,7 @@ script AndWeMarchOn_PostBattleSpeech_Dialogue {
         msgbox(format("…just not the way we would have hoped."),MSGBOX_DEFAULT,SPEAKER_TALA)
         closemessage
 
-        applymovement(TALA, AndWeMarchOn_GoBackToCenter_Movement)
+        applymovement(TALA, moves(walk_right * 3, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("We've got a responsibility here. The profit motive can not… WILL NOT erase our history. It lives on in our hearts. In our stories Our legends. And no corporation, SharpRise Capital or otherwise, can take that away from us!"),MSGBOX_DEFAULT,SPEAKER_TALA)
@@ -283,16 +283,6 @@ script AndWeMarchOn_ParadeEnd_Script {
         end
 }
 
-movement AndWeMarchOn_WatchParade_Movement{
-    face_down
-        step_end
-}
-
-movement AndWeMarchOn_PanCameraParadeStop_Movement{
-    walk_right * 14
-    step_end
-}
-
 movement AndWeMarchOn_ParadeProcession_Movement{
     walk_right * 12
     step_end
@@ -310,61 +300,16 @@ movement AndWeMarchOn_LookAroundCrowd_Movement{
         delay_16
         step_end
 }
-movement AndWeMarchOn_WalkToFloatCenter_Movement{
-    walk_right
-        walk_right
-        walk_down
-        face_right
-        step_end
-}
-movement AndWeMarchOn_PaceBackForth_Movement{
-    walk_up * 2
-        delay_16
-        walk_down * 4
-        delay_16
-        walk_up * 2
-        step_end
-}
-movement AndWeMarchOn_WalkOntoStage_Movement{
-    walk_up * 3
-        face_left
-        step_end
-}
-movement AndWeMarchOn_WalkToLeftSide_Movement{
-    walk_left
-        face_right
-        step_end
-}
+
 movement AndWeMarchOn_Attack_Movement{
     walk_fast_right
         walk_fast_right
         step_end
 }
-movement AndWeMarchOn_WalkOffStage_Movement{
-    walk_down * 3
-        face_up
-        step_end
-}
-movement AndWeMarchOn_WalkToSouthStage_Movement{
-    walk_right * 3
-        step_end
-}
-movement AndWeMarchOn_WalkToNorthStage_Movement{
-    walk_left * 6
-        step_end
-}
-movement AndWeMarchOn_GoBackToCenter_Movement{
-    walk_right * 3
-        face_down
-        step_end
-}
+
 movement AndWeMarchOn_WalkCameraToParade_Movement{
     walk_left * 16
         walk_down * 2
         step_end
 }
-movement AndWeMarchOn_CenterBattleFrame_Movement{
-    walk_right * 3
-    walk_down
-    step_end
-}
+

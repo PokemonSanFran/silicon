@@ -64,7 +64,6 @@ script EnterAmiArgento_AmiArgentoDeafeated_Script {
     end
 }
 
-
 script EnterAmiArgento_PostGymBattle1_Dialogue {
     lock
         setvar(VAR_GYM_8_STATE,GYM_EXPLAINED_BADGE_AND_TM)

@@ -15,7 +15,6 @@ mapscripts CresaltaVista_MapScripts {
                 FLAG_VISITED_CRESALTA_VISTA, FALSE: Generic_Mappreview
     ]
 
-
 }
 
 script CresaltaVista_Biker_Interact_Script{

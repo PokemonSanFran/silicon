@@ -47,7 +47,6 @@ script YouRealizeWereEvilRight_PhoneCall_Dialogue {
 waitstate
 }
 
-
 script YouRealizeWereEvilRight_Open_Dialogue {
     lockall
         setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_YOU_REALIZE_WERE_EVIL_RIGHT)
@@ -85,7 +84,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         closemessage
 
-        applymovement(KEIYING,YouRealizeWereEvilRight_WalkToTable)
+        applymovement(KEIYING, moves(walk_up * 3, walk_right, walk_up * 3, face_left))
         waitmovement(KEIYING)
         setobjectxy(KEIYING,21,29)
         setobjectxyperm(KEIYING,21,29)
@@ -102,7 +101,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         closemessage
 
-        applymovement(OLIVER, YouRealizeWereEvilRight_MoveAwayFromTable)
+        applymovement(OLIVER, moves(walk_left, walk_up, walk_down * 2, walk_up, face_right))
         waitmovement(OLIVER)
 
         msgbox(format("Why do you think Alcmene hides behind a mask? It's because they know their operation is completely illegal!"),,SPEAKER_OLIVER)
@@ -118,17 +117,3 @@ script YouRealizeWereEvilRight_Open_Dialogue {
         endcutscene
 }
 
-movement YouRealizeWereEvilRight_WalkToTable {
-    walk_up * 3
-        walk_right
-        walk_up * 3
-        face_left
-}
-
-movement YouRealizeWereEvilRight_MoveAwayFromTable {
-        walk_left
-        walk_up
-        walk_down * 2
-        walk_up
-        face_right
-}

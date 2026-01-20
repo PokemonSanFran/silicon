@@ -47,11 +47,11 @@ script GroupOfAssholesAppears_PlayerToDavid_Script
 
     if (var(VAR_TEMP_1) > 76)
     {
-        applymovement(PLAYER,GroupOfAssholesAppears_WalkFromEast_Movement)
+        applymovement(PLAYER, moves(walk_left * 2, walk_down * 2, walk_left * 3, walk_up, step_end))
     }
     else
     {
-        applymovement(PLAYER,GroupOfAssholesAppears_WalkFromWest_Movement)
+        applymovement(PLAYER, moves(walk_up, walk_right * 5, walk_up * 1, step_end))
     }
     waitmovement(0)
 }
@@ -114,12 +114,12 @@ script GroupOfAssholesAppears_GroupLeaves_Dialogue {
         msgbox(format("Pfft, looks like the League sent by some enforcers to clear us out. Lame as hell."),SPEAKER_ROCKET_MEMBER_B)
         msgbox(format("You both make me sick. Leave our people alone! *spits*"),SPEAKER_ISHAN)
         closemessage
-        applymovement(GRUNT1,GroupOfAssholesAppears_LeavePopidoraPier_Slot1_Movement)
-        applymovement(GRUNT2,GroupOfAssholesAppears_LeavePopidoraPier_Slot2_Movement)
-        applymovement(GRUNT3,GroupOfAssholesAppears_LeavePopidoraPier_Slot3_Movement)
-        applymovement(GRUNT4,GroupOfAssholesAppears_LeavePopidoraPier_Slot4_Movement)
-        applymovement(GRUNT5,GroupOfAssholesAppears_LeavePopidoraPier_Slot5_Movement)
-        applymovement(GRUNT6,GroupOfAssholesAppears_LeavePopidoraPier_Slot6_Movement)
+        applymovement(GRUNT1, moves(walk_down * 2, walk_left * 3, walk_down * 3, walk_left * 3, step_end))
+        applymovement(GRUNT2, moves(walk_down, walk_left * 3, walk_down * 3, walk_left * 3, step_end))
+        applymovement(GRUNT3, moves(walk_down, walk_left * 4, walk_down * 3, walk_left * 3, step_end))
+        applymovement(GRUNT4, moves(walk_down, walk_left * 6, walk_down * 3, walk_left * 3, step_end))
+        applymovement(GRUNT5, moves(walk_down, walk_left * 7, walk_down * 3, walk_left * 3, step_end))
+        applymovement(GRUNT6, moves(walk_down * 2, walk_left * 7, walk_down * 3, walk_left * 3, step_end))
         waitmovement(0)
         removeobject(GRUNT1)
         removeobject(GRUNT2)
@@ -184,60 +184,3 @@ movement GroupOfAssholesAppears_LookAround_Movement {
         step_end
 }
 
-movement GroupOfAssholesAppears_WalkFromEast_Movement {
-    walk_left * 2
-        walk_down * 2
-        walk_left * 3
-        walk_up
-        step_end
-}
-
-movement GroupOfAssholesAppears_WalkFromWest_Movement {
-    walk_up
-        walk_right * 5
-        walk_up * 1
-        step_end
-}
-
-movement GroupOfAssholesAppears_LeavePopidoraPier_Slot1_Movement {
-    walk_down * 2
-        walk_left * 3
-        walk_down * 3
-        walk_left * 3
-        step_end
-}
-movement GroupOfAssholesAppears_LeavePopidoraPier_Slot2_Movement {
-    walk_down
-        walk_left * 3
-        walk_down * 3
-        walk_left * 3
-        step_end
-}
-movement GroupOfAssholesAppears_LeavePopidoraPier_Slot3_Movement {
-    walk_down
-        walk_left * 4
-        walk_down * 3
-        walk_left * 3
-        step_end
-}
-movement GroupOfAssholesAppears_LeavePopidoraPier_Slot4_Movement {
-    walk_down
-        walk_left * 6
-        walk_down * 3
-        walk_left * 3
-        step_end
-}
-movement GroupOfAssholesAppears_LeavePopidoraPier_Slot5_Movement {
-    walk_down
-        walk_left * 7
-        walk_down * 3
-        walk_left * 3
-        step_end
-}
-movement GroupOfAssholesAppears_LeavePopidoraPier_Slot6_Movement {
-    walk_down * 2
-        walk_left * 7
-        walk_down * 3
-        walk_left * 3
-        step_end
-}

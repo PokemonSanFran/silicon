@@ -79,7 +79,7 @@ script Quest_ShutDownMedicineMan_Reward_Dialogue{
         call(Quest_ShutDownMedicineMan_HandleMoney_Script)
         opendoor(28,15)
         waitdooranim
-        applymovement(BUSINESS_MAN,Quest_ShutDownMedicineMan_WalkInside_Movement)
+        applymovement(BUSINESS_MAN, moves(walk_left, walk_up, step_end))
         waitmovement(BUSINESS_MAN)
         removeobject(BUSINESS_MAN)
         playse(SE_EXIT)
@@ -121,8 +121,4 @@ text gText_ShutDownMedicineMan_OhMyGodYes{
 text gText_ShutDownMedicineMan_GoodWork{
     format("good work. got just the proof i needed. here's your payment.")
 }
-movement Quest_ShutDownMedicineMan_WalkInside_Movement{
-    walk_left
-        walk_up
-        step_end
-}
+

@@ -105,19 +105,16 @@ script HeresHowThisIsGoingToGo_ExplainLeagueDialogue {
 
 msgbox(format("Congratulations on all of your hard work! Welcome to the first stage of the Resido League Championship!"),,SPEAKER_ADELAIDE)
 
-
 msgbox(format("Woo! Yay!"))
 
 msgbox(format("I'm sure none of you read the information email -"),,SPEAKER_ADELAIDE)
 
 msgbox(format("Wait, I did! Did nobody else?"),,SPEAKER_CHARLOTTE)
 
-
 msgbox(format("…"))
 
 msgbox(format("So here's the simple explanation: Win five battles in a row, and you'll be the Champion! If you want the more detailed version, you can view the rules on the monitor to my right."),,SPEAKER_ADELAIDE)
 closemessage
-
 
 applymovement(ADELAIDE,Common_Movement_FaceLeft)
 msgbox(format("Your groups, and the eventual final bracket, can also be seen on the monitor. We'll be starting with Group A in two hours. Good luck."),,SPEAKER_ADELAIDE)
@@ -132,7 +129,7 @@ removeobject(ADELAIDE)
 removeobject(OLIVER)
 call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
 fadescreen(FADE_FROM_BLACK)
-applymovement(KAI,HeresHowThisIsGoingToGo_GoToBracket)
+applymovement(KAI, moves(walk_down, walk_left * 7, walk_up * 2, step_end))
 waitmovement(KAI)
     call(TryAutoSave)
 endcutscene
@@ -154,9 +151,4 @@ movement HeresHowThisIsGoingToGo_LeaveLockersB {
     walk_down * 2
     step_end
 }
-movement HeresHowThisIsGoingToGo_GoToBracket {
-    walk_down
-    walk_left * 7
-    walk_up * 2
-    step_end
-}
+

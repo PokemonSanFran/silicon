@@ -9,7 +9,6 @@ const SOLAR_LADY = 2
 const LEAD_STAN = 3
 const FLAG_HIDE_LEAD_STAN = FLAG_TEMP_1
 
-
 script Quest_WallaceArmy_HideObject_Script{
     setflag(FLAG_HIDE_LEAD_STAN)
 }
@@ -51,11 +50,9 @@ script Quest_WallaceArmy_QuestStart_Dialogue{
 
         msgbox(format("The League didn't send me! Why did you think so?"),,SPEAKER_ALICIA)
 
-
         msgbox(format("We're EspuleeOutskirts Solar. We were working with the League to provide solar power for their fancy new statement. They had it all buttoned up, they signed a deal, and then a lawyer pulled a fast one and pulled out of the deal right after I got the materials and staff together. They said some shit about a better option. But I'm absolutely screwed! So I went online and wrote a nasty post about them... and the next thing I know, some kids called the 'Wallace Army' are blowing up my phone, leaving bad reviews, and attacking my servers. We can't even get online! The League sent them!"),,SPEAKER_SHASHI)
 
         msgbox(format("...You think the League sent Wallace stans after you?"),,SPEAKER_ALICIA)
-
 
         msgbox(format("Look, I don't even know what a stan is, but I do know that I haven't been able to log into all morning. I can't get any work done like this! My newphew is a computer guy and he told me the attacks are coming from specific spots in the region... but I don't even know where to start!"),,SPEAKER_SHASHI)
         startquest(QUEST_WALLACEARMY)
@@ -113,7 +110,7 @@ script Quest_WallaceArmy_Reward_Cutscene{
         end
    }
 
-    applymovement(SOLAR_CEO,Quest_WallaceArmy_ExclaimAndWalkToPlayer_Movement)
+    applymovement(SOLAR_CEO, moves(emote_exclamation_mark, walk_fast_right * 2, walk_fast_down * 2, step_end))
     waitmovement(SOLAR_CEO)
 
     msgbox(format("We're back up! I don't know what you did,but I can access my systems again!"),,SPEAKER_SHASHI)
@@ -181,7 +178,7 @@ script Quest_WallaceArmy_PostBattle_Script{
     waitmessage
     closemessage
 
-    applymovement(LEAD_STAN,Quest_WallaceArmy_WalkOut_Movement)
+    applymovement(LEAD_STAN, moves(walk_right * 2, walk_down * 2, step_end))
     waitmovement(LEAD_STAN)
     playse(SE_EXIT)
     waitse
@@ -224,7 +221,6 @@ script Quest_WallaceArmy_LeadStanAppearance_Script{
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
     fadescreen(FADE_FROM_BLACK)
 }
-
 
 script Quest_WallaceArmy_ListRemainingLocations_Script{
     //PSF TODO write a C special to handle this list - she lists out all the cities where there are still stans, and I should use StringAppend / Copy to modifiy this string on the fly
@@ -305,20 +301,9 @@ script Quest_WallaceArmy_CheckCompletionRate_Script{
     }
 }
 
-movement Quest_WallaceArmy_ExclaimAndWalkToPlayer_Movement{
-    emote_exclamation_mark
-    walk_fast_right * 2
-    walk_fast_down * 2
-    step_end
-}
 movement Quest_WallaceArmy_ExclaimAndFaceNorth_Movement{
     emote_exclamation_mark
     face_up
-    step_end
-}
-movement Quest_WallaceArmy_WalkOut_Movement{
-    walk_right * 2
-    walk_down * 2
     step_end
 }
 

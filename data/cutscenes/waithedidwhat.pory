@@ -53,9 +53,9 @@ script WaitHeDidWhat_MovePlayerPostSave_Script {
 script WaitHeDidWhat_RivalsGoToMatch_Script {
     lock
         startcutscene(JUMPPLAYER_WAITHEDIDWHAT)
-        applymovement(5,WaitHeDidWhat_StepAside)
+        applymovement(5, moves(lock_facing_direction, walk_right, delay_16, delay_16, delay_16, delay_16, delay_16, walk_left, step_end))
         applymovement(PLAYER,WaitHeDidWhat_GetOutOfWay)
-        applymovement(KAI,WaitHeDidWhat_WalkToArena)
+        applymovement(KAI, moves(walk_up * 4, delay_16, step_end))
         opendoor(10,1)
         waitdooranim
         waitmovement(0)
@@ -93,7 +93,7 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
         applymovement(PLAYER,WaitHeDidWhat_GetOutOfWay)
         opendoor(9,1)
         waitdooranim
-        applymovement(8,WaitHeDidWhat_WalkToElevator)
+        applymovement(8, moves(walk_up * 2, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         removeobject(8)
@@ -117,11 +117,10 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
 
         msgbox(format("(...holy shit!)"),,SPEAKER_ALICIA)
 
-
         msgbox(format("We'll take a quick break, and when we come back... your Championship match! Kai VS {PLAYER}, for all the marbles!"))
         closemessage
 
-        applymovement(5, WaitHeDidWhat_EncouragePlayer)
+        applymovement(5, moves(walk_down, walk_right * 2, step_end))
         applymovement(7, Common_Movement_WalkLeft)
         waitmovement(0)
 
@@ -130,7 +129,6 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
         msgbox(format("I sent you a motivational email to get you ready for this match! Did you get it?"),,SPEAKER_ADELAIDE)
         msgbox(format("I don't know what email he's talking about... I don't even use my email."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
         closemessage
-
 
         applymovement(PLAYER, Common_Movement_FaceRight)
         waitmovement(0)
@@ -152,7 +150,6 @@ script WaitHeDidWhat_CharlotteMeltdown_Dialogue {
             case 3:msgbox(format("Absolute bullshit. Argh I cannot believe this shit…"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY)
             case 4:msgbox(format("...I executed our plan perfectly! It's not my fault Daddy - he must have tricked me! Fix this now, Daddy!\p...\pWhat do you mean you're working on it? What are you going to do!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD,PHONE_ON)
         }
-
 
         closemessage
 }
@@ -205,17 +202,6 @@ movement WaitHeDidWhat_GetOutOfWay {
         step_end
 }
 
-movement WaitHeDidWhat_WalkToElevator {
-    walk_up * 2
-        step_end
-}
-
-movement WaitHeDidWhat_EncouragePlayer {
-    walk_down
-        walk_right * 2
-        step_end
-}
-
 movement WaitHeDidWhat_WalkToBattlefieldPosition {
     walk_left * 13
         walk_up * 3
@@ -223,20 +209,3 @@ movement WaitHeDidWhat_WalkToBattlefieldPosition {
         step_end
 }
 
-movement WaitHeDidWhat_StepAside {
-    lock_facing_direction
-        walk_right
-        delay_16
-        delay_16
-        delay_16
-        delay_16
-        delay_16
-        walk_left
-        step_end
-}
-
-movement WaitHeDidWhat_WalkToArena {
-    walk_up * 4
-        delay_16
-        step_end
-}

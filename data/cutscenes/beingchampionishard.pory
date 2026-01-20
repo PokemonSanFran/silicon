@@ -18,7 +18,7 @@ script BeingChampionIsHard_TimeSkip
 script BeingChampionIsHard_PostTimeSkip {
         playse(SE_EXIT)
         waitse
-        applymovement(PLAYER,BeingChampionIsHard_WalkToOliver)
+        applymovement(PLAYER, moves(walk_down * 5, walk_left * 4, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("Good morning Oliver."),MSGBOX_DEFAULT,SPEAKER_ALICIA) //PSF TODO EMOTE sigh
@@ -32,7 +32,6 @@ script BeingChampionIsHard_PostTimeSkip {
 
         msgbox(format("You've actually got nothing."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
         closemessage
-
 
         playse(SE_PIN)
         applymovement(PLAYER,Common_Movement_ExclamationMark)
@@ -57,7 +56,6 @@ script BeingChampionIsHard_PostTimeSkip {
         msgbox(format("My pleasure. I'll be checking in, but don't hesitate to reach out."),MSGBOX_DEFAULT,SPEAKER_OLIVER)
         closemessage
 
-
         applymovement(OLIVER,Common_Movement_WalkInPlaceDown)
         waitmovement(0)
         playse(SE_EXIT)
@@ -68,13 +66,6 @@ script BeingChampionIsHard_PostTimeSkip {
         releaseall
         end
 
-}
-
-movement BeingChampionIsHard_WalkToOliver {
-    walk_down * 5
-        walk_left * 4
-        face_down
-        step_end
 }
 
 // PSF TODO once dialogue is written for ALL NPCs, find places to update the dialog once the player becomes the champion. We want to convey that Alicia is TRULY famous now and commands respect but also how much more involved Sharprise is in their day to day life. this isn't seen as blanket bad or good, just a thing that is happening that people respond with in their own way

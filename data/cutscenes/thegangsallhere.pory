@@ -57,16 +57,16 @@ script TheGangsAllHere_OliverAppearStairs_Script{
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
     if (var(VAR_TEMP_0) == 16){
-        applymovement(PLAYER,TheGangsAllHere_StepAsideOliver_Movement)
+        applymovement(PLAYER, moves(walk_down, walk_right, face_left, step_end))
         waitmovement(PLAYER)
         call(TheGangsAllHere_MoveOliverToStairs_Script)
-        applymovement(OLIVER,TheGangsAllHere_WalkStairs_FacePlayer_Movement)
+        applymovement(OLIVER, moves(walk_down * 2, emote_exclamation_mark, face_right, step_end))
         waitmovement(OLIVER)
     }else{
         call(TheGangsAllHere_MoveOliverToStairs_Script)
         playse(SE_PIN)
         applymovement(PLAYER,Common_Movement_FaceLeft)
-        applymovement(OLIVER,TheGangAllHere_WalkStairsToElevator_Movement)
+        applymovement(OLIVER, moves(walk_down, walk_right * 2, step_end))
         waitmovement(OLIVER)
     }
 
@@ -86,7 +86,7 @@ script TheGangsAllHere_WhatBringsYou_Dialogue{
 
     closemessage
     special(HealPlayerParty)
-    applymovement(OLIVER,FollowMe_Movement)
+    applymovement(OLIVER, moves(walk_left, walk_down * 20, step_end))
     waitmovement(OLIVER)
     setobjectxy(OLIVER,6,46)
     setobjectxyperm(OLIVER,6,46)
@@ -105,7 +105,7 @@ script TheGangsAllHere_OfficeIsntThatWay_Script{
     msgbox(format("Hey {PLAYER}, the office isn't that way!"),,SPEAKER_OLIVER)
 
     closemessage
-    applymovement(PLAYER,TheGangsAllHere_OfficeIsntThatWay_Movement)
+    applymovement(PLAYER, moves(walk_down, step_end))
 }
 
 script TheGangsAllHere_WalkHallway_Script{
@@ -137,15 +137,13 @@ script TheGangsAllHere_ComeOnIn_Dialogue{
 
     applymovement(ADELAIDE,Common_Movement_ExclamationMark)
     waitmovement(ADELAIDE)
-    applymovement(ADELAIDE,TheGangsAllHere_AdelaideWalkToDoor_Movement)
+    applymovement(ADELAIDE, moves(walk_right * 2, walk_up * 3, walk_left, face_up, step_end))
 
     msgbox(format("{PLAYER}! Oliver! Come on in, I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_ADELAIDE)
     closemessage
 
-
     msgbox(format("As you asked, I have your package from Emrys."),,SPEAKER_OLIVER)
     closemessage
-
 
     applymovement(PLAYER,Common_Movement_FaceRight)
     applymovement(OLIVER,Common_Movement_FaceLeft)
@@ -171,7 +169,6 @@ script TheGangsAllHere_NotIntentionally_Dialogue{
 
     msgbox(format("In any case, your package, Adelaide."))
 
-
     applymovement(OLIVER,Common_Movement_WalkInPlaceDown)
     waitmovement(OLIVER)
 
@@ -179,14 +176,13 @@ script TheGangsAllHere_NotIntentionally_Dialogue{
     msgbox(format("Ah, my {STR_VAR_1}, wonderful.\nI've also got something for you, {PLAYER}! Let me see your phone..."),,SPEAKER_ADELAIDE)
     closemessage
 
-
     goto(TheGangsAllHere_GivePrestoApp_Script)
     end
 }
 
 script TheGangsAllHere_GivePrestoApp_Script{
     applymovement(PLAYER,Common_Movement_FaceDown)
-    applymovement(ADELAIDE,TheGangsAllHere_GivePackageToPlayerChar_Movement)
+    applymovement(ADELAIDE, moves(walk_left, face_up, walk_in_place_up, step_end))
     waitmovement(ADELAIDE)
     call(EventScript_InstallPrestoApp)
     goto(TheGangsAllHere_GivePrestoApp_Dialogue)
@@ -215,11 +211,9 @@ script TheGangsAllHere_EndScene_Dialogue{
     msgbox(format("Time for my seventh Boomers coffee for the day. Shall we, Oliver?"))
     closemessage
 
-
     applymovement(OLIVER,Common_Movement_FaceDown)
 
     msgbox(format("We shall."),,SPEAKER_OLIVER)
-
 
     applymovement(OLIVER,Common_Movement_FacePlayer)
     applymovement(PLAYER,Common_Movement_FaceRight)
@@ -232,9 +226,9 @@ script TheGangsAllHere_EndScene_Dialogue{
 
     closemessage
 
-    applymovement(PLAYER,TheGangsAllHere_WatchPairLeave_Movement)
-    applymovement(ADELAIDE,TheGangsAllHere_AdelaideWalkOut_Movement)
-    applymovement(OLIVER,TheGangsAllHere_OliverWalkOut_Movement)
+    applymovement(PLAYER, moves(delay_16 * 2, face_up, step_end))
+    applymovement(ADELAIDE, moves(walk_right, walk_up * 8, step_end))
+    applymovement(OLIVER, moves(walk_up * 8, step_end))
     waitmovement(OLIVER)
     fadedefaultbgm
     removeobject(ADELAIDE)
@@ -252,67 +246,9 @@ movement TheGangsAllHere_OliverWalkToPlayer_Movement{
     face_right
     step_end
 }
-movement TheGangsAllHere_OfficeIsntThatWay_Movement{
-    walk_down
-    step_end
-}
+
 movement TheGangsAllHere_ThisIsOffice_Movement{
     walk_right * 3
     step_end
 }
 
-movement TheGangsAllHere_AdelaideWalkToDoor_Movement{
-    walk_right * 2
-    walk_up * 3
-    walk_left
-    face_up
-    step_end
-}
-
-movement TheGangsAllHere_GivePackageToPlayerChar_Movement{
-    walk_left
-    face_up
-    walk_in_place_up
-    step_end
-}
-
-movement TheGangsAllHere_WatchPairLeave_Movement{
-    delay_16 * 2
-    face_up
-    step_end
-}
-
-movement TheGangsAllHere_AdelaideWalkOut_Movement{
-    walk_right
-    walk_up * 8
-    step_end
-}
-
-movement TheGangsAllHere_OliverWalkOut_Movement{
-    walk_up * 8
-    step_end
-}
-movement FollowMe_Movement{
-    walk_left
-    walk_down * 20
-    step_end
-}
-
-movement TheGangsAllHere_StepAsideOliver_Movement{
-    walk_down
-    walk_right
-    face_left
-    step_end
-}
-movement TheGangsAllHere_WalkStairs_FacePlayer_Movement{
-    walk_down * 2
-    emote_exclamation_mark
-    face_right
-    step_end
-}
-
-movement TheGangAllHere_WalkStairsToElevator_Movement{
-    walk_down
-    walk_right * 2
-    step_end
-}

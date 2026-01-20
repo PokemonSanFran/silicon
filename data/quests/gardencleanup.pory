@@ -85,7 +85,7 @@ script Quest_GardenCleanUp_Reward_Cutscene{
     faceplayer
         msgbox(format("oh my god youre done?"))
 
-        applymovement(MARIA_A,Quest_GardenCleanUp_RunToGarden_Movement)
+        applymovement(MARIA_A, moves(walk_faster_down * 6, step_end))
         waitmovement(MARIA_A)
         removeobject(MARIA_A)
         completequest(QUEST_GARDENCLEANUP)
@@ -97,7 +97,3 @@ script Quest_GardenCleanUp_Complete_Dialogue{
         end
 }
 
-movement Quest_GardenCleanUp_RunToGarden_Movement{
-    walk_faster_down * 6
-        step_end
-}

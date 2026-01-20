@@ -37,7 +37,6 @@ script Vsdeoxys_Script_HideVsdeoguyMinior
     setflag(FLAG_HIDE_VSDEOGUY)
 }
 
-
 script Vsdeoxys_Script_InteractVsdeoguy
 {
     lockall
@@ -184,7 +183,6 @@ script Vsdeoxys_Dialogue_ReturnToOverworldWithoutCapturingMinior
     end
 }
 
-
 script Vsdeoxys_Script_CaughtMinior
 {
     removeobject(MINIOR)
@@ -198,7 +196,7 @@ script Vsdeoxys_Script_ReturnToOverworldAfterCapturingMinior
     waitmessage
     call(Vsdeoxys_Script_RunToPlayerAfterMiniorCatch)
     msgbox(format("You caught it!\nWe’ve got proof now!\nMeet me at Haelba Research!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
-    applymovement(VSDEOGUY,Vsdeoxys_Movement_VsdeoguyRunOnScreen)
+    applymovement(VSDEOGUY, moves(face_right, walk_fast_right * 8))
     waitmovement(VSDEOGUY)
     removeobject(VSDEOGUY)
     releaseall
@@ -217,7 +215,7 @@ script Vsdeoxys_Script_RunToPlayerAfterMiniorCatch
     case DIR_NORTH:
         applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth)
         waitmovement(VSDEOGUY)
-        applymovement(PLAYER,Vsdeoxys_Movement_Player_TurnRightToFaceVsdeoguy)
+        applymovement(PLAYER, moves(face_right, step_end))
         break
     case DIR_WEST:
         applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth)
@@ -225,7 +223,7 @@ script Vsdeoxys_Script_RunToPlayerAfterMiniorCatch
         applymovement(PLAYER,Common_Movement_FaceDown)
         break
     case DIR_EAST:
-        applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingEast)
+        applymovement(VSDEOGUY, moves(walk_fast_left * 9, face_player))
         waitmovement(VSDEOGUY)
         applymovement(PLAYER,Common_Movement_FaceDown)
         break
@@ -266,25 +264,25 @@ script Vsdeoxys_Dialogue_DiscussMiniorResearch
     waitmovement(PLAYER)
     msgbox(format("This time it's real! I have proof. We caught it. You gotta see it for yourself."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     msgbox(format("See what? That you -"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToPlayer)
+    applymovement(VSDEORESEARCHER, moves(walk_right, walk_down, face_right, step_end))
     waitmovement(VSDEORESEARCHER)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     msgbox(format("Are you {PLAYER}? I’ve seen the livestreams for the League. How did Deoxysg- "),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     msgbox(format("That’s how I know it’s legit! This Trainer is tough as nails, saw it with my own eyes!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherTurnUpAndDown)
+    applymovement(VSDEORESEARCHER, moves(face_up, delay_16, face_right, step_end))
     waitmovement(VSDEORESEARCHER)
     msgbox(format("Okay! Let’s take a look at your Pokédex. Come with me."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER,Common_Movement_WalkUp)
     waitmovement(VSDEORESEARCHER)
-    applymovement(PLAYER,Vsdeoxys_Movement_PlayerAlignWithVsdeoguy)
+    applymovement(PLAYER, moves(walk_right, walk_up, step_end))
     waitmovement(PLAYER)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToBackOfRoom)
-    applymovement(VSDEOGUY_HALERBARESEARCH,Vsdeoxys_Movement_VsdeoguyWalkToBackOfRoom)
-    applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkToBackOfRoom)
+    applymovement(VSDEORESEARCHER, moves(walk_up * 7, walk_right, face_down, step_end))
+    applymovement(VSDEOGUY_HALERBARESEARCH, moves(walk_up * 6, step_end))
+    applymovement(PLAYER, moves(walk_up*6, step_end))
     waitmovement(PLAYER)
     msgbox(format("You know how my bosses are. I can’t have too many people in the lab. I’ll come back in a second."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkTowardsComputer)
-    applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkTowardsComputer)
+    applymovement(VSDEORESEARCHER, moves(walk_right * 4, walk_up * 1, face_right, step_end))
+    applymovement(PLAYER, moves(walk_right * 4, walk_up * 2, face_left, step_end))
     waitmovement(PLAYER)
     msgbox(format("Okay, I battled this -"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
     msgbox(format("Trust me, I know. They told you it was a Deoxys escaped from Hoenn or something, didn't they?"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
@@ -293,15 +291,15 @@ msgbox(format("How did you know?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,
     msgbox(format("How did they trick you into helping them? All of the Trainers that could capture this thing are usually off doing literally anything else."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
 msgbox(format("I was invest -"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
     msgbox(format("You know what? Doesn’t matter. But I can’t have this guy bursting into here every month with some nonsense. So I need you to just stay here, and I think we can get them out of our hair once and for all."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToVsdeoguy)
+    applymovement(VSDEORESEARCHER, moves(walk_down * 2, walk_left * 3, step_end))
     waitmovement(VSDEORESEARCHER)
     applymovement(VSDEOGUY_HALERBARESEARCH,Common_Movement_FaceRight)
     waitmovement(VSDEOGUY_HALERBARESEARCH)
-    applymovement(VSDEOGUY_HALERBARESEARCH,Vsdeoxys_Script_VsdeoguyRunOffScreen)
+    applymovement(VSDEOGUY_HALERBARESEARCH, moves(delay_16, delay_16, emote_exclamation_mark, delay_2, walk_down * 7, step_end))
     waitmovement(VSDEOGUY_HALERBARESEARCH)
     removeobject(VSDEOGUY_HALERBARESEARCH)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkRightToPlayer)
-    applymovement(PLAYER,Vsdeoxys_Movement_PlayerWalkToVsdeoresearcher)
+    applymovement(VSDEORESEARCHER, moves(walk_right * 3, step_end))
+    applymovement(PLAYER, moves(walk_down * 2, face_left, step_end))
     waitmovement(PLAYER)
 msgbox(format("…what happened?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
     msgbox(format("I told him that I thought you were a government spy, here to retrieve what was rightfully yours."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
@@ -310,15 +308,15 @@ msgbox(format("Wait what?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_S
     msgbox(format("I told them they were absolutely onto something, you had the real deal, but they needed to delete Buzzr from their phone and told them they needed the first ticket to Fiore, where nobody could track them down."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     msgbox(format("Wait, he’s just abandoning everything and leaving?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
     msgbox(format("They’ve got nothing to leave behind, I promise. They’ve got no life outside of hunting this thing. Man, I’m so glad that’s over!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkOffScreen)
+    applymovement(VSDEORESEARCHER, moves(face_left, walk_left * 7, walk_down * 2, walk_left * 2, step_end))
     waitmovement(VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherComesBack)
+    applymovement(VSDEORESEARCHER, moves(face_right, walk_right * 2, walk_up * 2, walk_right * 7, step_end))
     waitmovement(VSDEORESEARCHER)
     msgbox(format("Seriously, you have no idea how much time and energy you’ve saved us. Thank you so much for playing along."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     msgbox(format("You were smashing those meteors using your Pokémon,right? You can use this instead."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     giveitem(ITEM_ROCKSMASH_TOOL)
     call(Vsdeoxys_Script_BufferDescribeRockSmashTool)
-    applymovement(VSDEORESEARCHER,Vsdeoxys_Movement_VsdeoresearcherWalkToTheirComputer)
+    applymovement(VSDEORESEARCHER, moves(walk_left * 6, walk_down * 6, face_left, step_end))
     waitmovement(VSDEORESEARCHER)
     call(Vsdeoxys_Script_QuestComplete)
     end
@@ -360,141 +358,9 @@ script Vsdeoxys_Dialogue_VsdeoresearcherInteract
     end
 }
 
-movement Vsdeoxys_Movement_Player_TurnRightToFaceVsdeoguy
-{
-    face_right
-    step_end
-}
-
 movement Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth
 {
     walk_fast_left * 7
     face_player
 }
 
-movement Vsdeoxys_Movement_VsdeoguyRunOnScreen
-{
-    face_right
-    walk_fast_right * 8
-}
-
-movement Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingEast
-{
-    walk_fast_left * 9
-    face_player
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherWalkToPlayer
-{
-    walk_right
-    walk_down
-    face_right
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherTurnUpAndDown
-{
-    face_up
-    delay_16
-    face_right
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherWalkToBackOfRoom
-{
-    walk_up * 7
-    walk_right
-    face_down
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoguyWalkToBackOfRoom
-{
-    walk_up * 6
-    step_end
-}
-
-movement Vsdeoxys_Movement_PlayerAlignWithVsdeoguy
-{
-    walk_right
-    walk_up
-    step_end
-}
-
-movement Vsdeoxys_Movement_PlayerWalkToBackOfRoom
-{
-    walk_up*6
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherWalkTowardsComputer
-{
-    walk_right * 4
-    walk_up * 1
-    face_right
-    step_end
-}
-
-movement Vsdeoxys_Movement_PlayerWalkTowardsComputer
-{
-    walk_right * 4
-    walk_up * 2
-    face_left
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherWalkToVsdeoguy
-{
-    walk_down * 2
-    walk_left * 3
-    step_end
-}
-
-movement Vsdeoxys_Script_VsdeoguyRunOffScreen
-{
-    delay_16
-    delay_16
-    emote_exclamation_mark
-    delay_2
-    walk_down * 7
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherWalkRightToPlayer
-{
-    walk_right * 3
-    step_end
-}
-
-movement Vsdeoxys_Movement_PlayerWalkToVsdeoresearcher
-{
-    walk_down * 2
-    face_left
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherWalkOffScreen
-{
-    face_left
-    walk_left * 7
-    walk_down * 2
-    walk_left * 2
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherComesBack
-{
-    face_right
-    walk_right * 2
-    walk_up * 2
-    walk_right * 7
-    step_end
-}
-
-movement Vsdeoxys_Movement_VsdeoresearcherWalkToTheirComputer
-{
-    walk_left * 6
-    walk_down * 6
-    face_left
-    step_end
-}

@@ -30,14 +30,14 @@ script Swagbag_WelcomeToResido_Dialogue {
     playbgm(MUS_RG_FOLLOW_ME,TRUE)
     applymovement(OLIVER,Common_Movement_ExclamationMark)
     waitmovement(0)
-    applymovement(OLIVER,swagbag_GreetPlayer)
+    applymovement(OLIVER, moves(face_up, walk_up, delay_16, step_end))
     msgbox(format("{PLAYER}! Welcome to Resido! How was your flight?"),,SPEAKER_OLIVER)
     reveal(REVEAL_OLIVER)
     msgbox(format("Great! The fancy car pickup from the airport was a surprise, but everything was super smooth, thanks!"),,SPEAKER_ALICIA)
     msgbox(format("Excellent. You've already seen the house, so we can skip the tour... I have some presents!"),,SPEAKER_OLIVER)
 
         closemessage
-        applymovement(CHARLOTTE,swagbag_TurnFaceOliver_Movement)
+        applymovement(CHARLOTTE, moves(walk_up * 2, face_down, step_end))
         waitmovement(CHARLOTTE)
         goto(Swagbag_LeagueStipend_Dialogue)
         end
@@ -74,7 +74,7 @@ script Swagbag_WhenCanWeStart_Dialogue {
         msgbox(format("...fine. I'll explore the city a bit! Maybe I'll see you around, {PLAYER}."),,SPEAKER_CHARLOTTE)
         closemessage
 
-        applymovement(CHARLOTTE,swagbag_LeaveCompound)
+        applymovement(CHARLOTTE, moves(walk_down * 7, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         removeobject(CHARLOTTE)
@@ -86,7 +86,7 @@ script Swagbag_DontLeaveCuconuTown_Dialogue {
         msgbox(format("Got it. Thanks for all the help, Oliver! I'm still so stoked for the opportunity and the Challenge!"),,SPEAKER_ALICIA)
         closemessage
 
-        applymovement(OLIVER,swagbag_WalkToLaptop)
+        applymovement(OLIVER, moves(walk_down * 3, walk_right, step_end))
         waitmovement(0)
         fadedefaultbgm
         startquest(QUEST_PLAYERSADVENTURE)
@@ -113,30 +113,6 @@ script swagbag_PreventPlayerLeavingCuconuTown_Event_Script {
     waitmovement(0)
     releaseall
     end
-}
-
-movement swagbag_TurnFaceOliver_Movement{
-    walk_up * 2
-    face_down
-    step_end
-}
-
-movement swagbag_GreetPlayer {
-    face_up
-        walk_up
-        delay_16
-        step_end
-}
-
-movement swagbag_LeaveCompound {
-        walk_down * 7
-        step_end
-}
-
-movement swagbag_WalkToLaptop {
-        walk_down * 3
-        walk_right
-        step_end
 }
 
 movement swagbag_WalkBackwards {

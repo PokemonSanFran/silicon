@@ -28,7 +28,6 @@ script Quest_Manofmanyhats_Liidia_Fisherman_Visibility_Script{
     return
 }
 
-
 script Quest_Manofmanyhats_Liidia_Waiter_Dialogue{
     addvar(VAR_QUEST_MANOFMANYHATS,1)
     msgbox(format("They didn't teach me how to work the boba machine..."),,SPEAKER_LIIDIA,,EMOTE_SWEAT)
@@ -62,7 +61,7 @@ script Quest_Manofmanyhats_Liidia_Fisherman_Dialogue{
 
 script Quest_Manofmanyhats_StartQuest_Dialogue{
     playse(SE_PIN)
-    applymovement(LIIDIA,Quest_Manofmanyhats_LiidiaExclaimandTurn_Movement)
+    applymovement(LIIDIA, moves(emote_exclamation_mark, delay_16, face_player, step_end))
     waitse
     lock
     msgbox(format("Oh... you're {PLAYER}. Thanks again for your... help."),MSGBOX_NPC,SPEAKER_LIIDIA)
@@ -137,9 +136,3 @@ script Quest_Manofmanyhats_CheckDoorLock_Script{
     }
 }
 
-movement Quest_Manofmanyhats_LiidiaExclaimandTurn_Movement{
-    emote_exclamation_mark
-    delay_16
-    face_player
-    step_end
-}

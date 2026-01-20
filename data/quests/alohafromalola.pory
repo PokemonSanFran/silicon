@@ -188,7 +188,7 @@ script Quest_Alohafromalola_PostBattle_Script{
         msgbox(format("{PLAYER} obtained a Z-Power Ring and a Z-Crystal!"))
         msgbox(format("And now for some Alolan libations!"),,SPEAKER_EMRYS,,EMOTE_SWEAT)
         closemessage
-        applymovement(EMRYS,Quest_Alohafromalola_WalkToExhibit_Movement)
+        applymovement(EMRYS, moves(walk_up * 7, step_end))
         fadescreen(FADE_TO_BLACK)
         delay(15)
         removeobject(EMRYS)
@@ -198,10 +198,5 @@ script Quest_Alohafromalola_PostBattle_Script{
         completequest(QUEST_ALOHAFROMALOLA)
         release
         end
-}
-
-movement Quest_Alohafromalola_WalkToExhibit_Movement{
-    walk_up * 7
-        step_end
 }
 

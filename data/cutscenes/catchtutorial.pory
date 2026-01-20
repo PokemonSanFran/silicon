@@ -31,7 +31,7 @@ script CatchTutorial_ProfIntro_Script
     playbgm(MUS_FOLLOW_ME,0)
     playse(SE_PIN)
     applymovement(PROF,Common_Movement_ExclamationMark)
-    applymovement(PROF,CatchTutorial_WalkToPlayer_Movement)
+    applymovement(PROF, moves(walk_left))
     waitmovement(PROF)
 
     msgbox(format("Hey there!"),,SPEAKER_PROF_TRACHY)
@@ -151,7 +151,4 @@ script CatchTutorial_RefuseCatching_Script
     msgbox(format("No problem!"),,SPEAKER_PROF_TRACHY)
     goto(CatchTutorial_End_Script)
 }
-movement CatchTutorial_WalkToPlayer_Movement
-{
-	walk_left
-}
+

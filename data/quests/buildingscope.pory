@@ -135,16 +135,13 @@ script Quest_BuildingScope_PostBattle_Dialogue{
     lock
     msgbox(format("nobody is trying to hurt you"),,SPEAKER_ALICIA)
 
-
     msgbox(format("throwing shit through the windows? what the hell is that?"),,SPEAKER_DEFAULT)
 
     msgbox(format("somebody asked me to help clear out some aggressive pokemon. we had no idea there were people in here"),,SPEAKER_ALICIA)
 
-
     msgbox(format("uh huh. pokemon? really?"),,SPEAKER_DEFAULT)
 
     msgbox(format("look, the guy I was helping seemed super nice. he doesn't seem like the kind of guy to attack people. let me go talk to him and clear it up"),,SPEAKER_ALICIA)
-
 
     msgbox(format("not like we got anywhere to go"),,SPEAKER_DEFAULT)
     closemessage
@@ -157,11 +154,9 @@ script Quest_BuildingScope_PostBattle_Dialogue{
 script Quest_BuildingScope_Reward_Dialogue{
     msgbox(format("I got inside no problem, but there were no pokemon, just some people living there!"),,SPEAKER_ALICIA)
 
-
     msgbox(format("wait people? like actual humans? not some beasts?"),,SPEAKER_SHARPRISECAPITAL_STAFF)
 
     msgbox(format("yeah! they're living there because they have nowhere else to go"),,SPEAKER_ALICIA)
-
 
     msgbox(format("oh wow well we can't have that. i suppose we're effectiely taking their home away, but I'll work with the team to find a better place for them. everybody wins!"),,SPEAKER_SHARPRISECAPITAL_STAFF)
     msgbox(format("i'll send somebody over right now. thank you for subduing the ani - those people. what a misunderstanding! and this is for you..."),,SPEAKER_SHARPRISECAPITAL_STAFF)

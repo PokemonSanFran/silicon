@@ -118,7 +118,6 @@ script Quest_Persuasivepassenger_DebugDriver1{
 return
 }
 
-
 script Quest_Persuasivepassenger_HasItems_Dialogue{
     msgbox(format("For your sick kid, right?"),,SPEAKER_ALICIA)
     msgbox(format("Oh right, did I ride with you the other day?"),,SPEAKER_ARRIBA_DRIVER1)
@@ -207,7 +206,7 @@ script Quest_Persuasivepassenger_PostBattle_Dialogue{
     msgbox(format("Let's hope that works..."),,SPEAKER_ALICIA)
     closemessage
 
-    applymovement(VAR_LAST_TALKED,Quest_Persuasivepassenger_WalkAway_Movement)
+    applymovement(VAR_LAST_TALKED, moves(walk_left, step_end))
     fadescreen(FADE_TO_BLACK)
     removeobject(VAR_LAST_TALKED)
     fadescreen(FADE_FROM_BLACK)
@@ -287,7 +286,7 @@ script Quest_Persuasivepassenger_Grunt2_Event_Script{
 
 script Quest_Persuasivepassenger_DefeatedGrunt2_Script{
     lock
-    applymovement(GRUNT2,Quest_Persuasivepassenger_RunUpstairs_Movement)
+    applymovement(GRUNT2, moves(walk_faster_up, step_end))
     playse(SE_EXIT)
     waitmovement(GRUNT2)
     removeobject(GRUNT2)
@@ -342,16 +341,6 @@ script Quest_Persuasivepassenger_Post_CEO_Battle_Script{
 script Quest_Persuasivepassenger_Complete_Dialogue{
     msgbox(format("Thanks again!"),MSGBOX_NPC)
     end
-}
-
-movement Quest_Persuasivepassenger_WalkAway_Movement{
-    walk_left
-    step_end
-}
-
-movement Quest_Persuasivepassenger_RunUpstairs_Movement{
-    walk_faster_up
-    step_end
 }
 
 text gText_Persuasivepassenger_WelcomeTo{

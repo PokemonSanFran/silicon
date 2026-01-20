@@ -58,7 +58,7 @@ script WowYoureStrong_WalkToPlayer_Script
     playbgm(MUS_RG_ENCOUNTER_DEOXYS,TRUE)
     applymovement(ADELAIDE,Common_Movement_ExclamationMark)
     waitmovement(ADELAIDE)
-    applymovement(ADELAIDE,WowYoureStrong_WalkToPlayer_Movement)
+    applymovement(ADELAIDE, moves(walk_up, walk_right * 5, face_up, step_end))
     waitmovement(ADELAIDE)
     setobjectxyperm(ADELAIDE,28,25)
     goto(WowYoureStrong_Intro_Dialogue)
@@ -105,7 +105,7 @@ script WowYoureStrong_MoveCameraToTower_Script
     TeleportCamera(7,14)
     special(SpawnCameraObject)
     fadescreen(FADE_FROM_BLACK)
-    applymovement(CAMERA,WowYoureStrong_PanCameraUp_Movement)
+    applymovement(CAMERA, moves(walk_up * 9, step_end))
     return
 }
 
@@ -128,7 +128,7 @@ script WowYoureStrong_End_Dialouge
     if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_KAI_ROUTE10)
     {
         delay(30)
-        applymovement(KAI,WowYoureStrong_KaiToPlayer_Movement)
+        applymovement(KAI, moves(walk_up * 2, walk_right * 2, face_up, step_end))
     }
     fadedefaultbgm
 
@@ -181,27 +181,8 @@ script WowYourStrong_KaiConfrontation_Dialogue
     goto(WowYourStrong_RemoveAdelaide_Script)
 }
 
-movement WowYoureStrong_WalkToPlayer_Movement {
-    walk_up
-    walk_right * 5
-    face_up
-    step_end
-}
-
-movement WowYoureStrong_PanCameraUp_Movement{
-    walk_up * 9
-        step_end
-}
-
 movement WowYoureStrong_WalkToMeeting_Movement {
     walk_left * 8
-    step_end
-}
-
-movement WowYoureStrong_KaiToPlayer_Movement{
-    walk_up * 2
-    walk_right * 2
-    face_up
     step_end
 }
 

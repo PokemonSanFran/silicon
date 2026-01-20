@@ -83,7 +83,6 @@ script Quest_Allthatglittersmightbegold_Active_Dialogue{
         warpsilent(MAP_ROUTE_D_UNDERWATER,42,19)
 }
 
-
 script Quest_Allthatglittersmightbegold_CoreEncounter_Script{
         call(Quest_Allthatglittersmightbegold_StartSparkle_Script)
     startmenu_savescreen

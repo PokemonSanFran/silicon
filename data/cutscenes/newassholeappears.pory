@@ -18,17 +18,17 @@ script NewAssholeAppears_WalkToPlayer_Script {
     waitmovement(0)
 
     switch(var(VAR_TEMP_0)){
-        case 0: applymovement(KAI,NewAssholeAppears_X0_WalkToPlayer_Movement)
-        case 1: applymovement(KAI,NewAssholeAppears_X1_WalkToPlayer_Movement)
-        case 2: applymovement(KAI,NewAssholeAppears_X2_WalkToPlayer_Movement)
-        case 3: applymovement(KAI,NewAssholeAppears_X3_WalkToPlayer_Movement)
-        case 4: applymovement(KAI,NewAssholeAppears_X4_WalkToPlayer_Movement)
+        case 0: applymovement(KAI, moves(walk_left * 4, step_end))
+        case 1: applymovement(KAI, moves(walk_left * 3, step_end))
+        case 2: applymovement(KAI, moves(walk_left * 2, step_end))
+        case 3: applymovement(KAI, moves(walk_left * 1, step_end))
+        case 4: applymovement(KAI, moves(step_end))
     }
     waitmovement(0)
 
     switch(var(VAR_TEMP_1)){
-        case 2: applymovement(KAI,NewAssholeAppears_Y2_WalkToPlayer_Movement)
-        case 6: applymovement(KAI,NewAssholeAppears_Y6_WalkToPlayer_Movement)
+        case 2: applymovement(KAI, moves(walk_up, step_end))
+        case 6: applymovement(KAI, moves(walk_down, step_end))
     }
     waitmovement(0)
     goto(KaiAlpha_Event_Script)
@@ -99,8 +99,8 @@ script NewAssholeAppears_KaiExit_Script{
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
     switch(var(VAR_TEMP_1)){
-        case 2: applymovement(KAI,NewAssholeAppears_KaiWalkAwaySouth_Movement)
-        case 6: applymovement(KAI,NewAssholeAppears_KaiWalkAwayNorth_Movement)
+        case 2: applymovement(KAI, moves(walk_down * 8, step_end))
+        case 6: applymovement(KAI, moves(walk_up * 8, step_end))
     }
     endcutscene
 	fadescreen(FADE_TO_BLACK)
@@ -115,40 +115,3 @@ script NewAssholeAppears_KaiExit_Script{
     end
 }
 
-movement NewAssholeAppears_X0_WalkToPlayer_Movement {
-    walk_left * 4
-    step_end
-}
-movement NewAssholeAppears_X1_WalkToPlayer_Movement {
-    walk_left * 3
-    step_end
-}
-movement NewAssholeAppears_X2_WalkToPlayer_Movement {
-    walk_left * 2
-    step_end
-}
-movement NewAssholeAppears_X3_WalkToPlayer_Movement {
-    walk_left * 1
-    step_end
-}
-movement NewAssholeAppears_X4_WalkToPlayer_Movement {
-    step_end
-}
-movement NewAssholeAppears_Y2_WalkToPlayer_Movement {
-    walk_up
-    step_end
-}
-movement NewAssholeAppears_Y6_WalkToPlayer_Movement {
-    walk_down
-    step_end
-}
-
-movement NewAssholeAppears_KaiWalkAwayNorth_Movement {
-    walk_up * 8
-    step_end
-}
-
-movement NewAssholeAppears_KaiWalkAwaySouth_Movement {
-    walk_down * 8
-    step_end
-}

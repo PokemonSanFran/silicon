@@ -186,7 +186,7 @@ script TheStrikeStrikesBack_Intro_Dialogue {
 
                 applymovement(OLIVER,TheStrikeStrikesBack_WalkOutFrame)
                 waitmovement(0)
-                applymovement(CHARLOTTE,TheStrikeStrikesBack_GoToPlayer)
+                applymovement(CHARLOTTE, moves(walk_left, face_up, step_end))
                 waitmovement(0)
 
                 msgbox(format("{PLAYER}, I'll be in there when you're ready."),,SPEAKER_CHARLOTTE)
@@ -201,7 +201,6 @@ script TheStrikeStrikesBack_Intro_Dialogue {
                 end
         }
 }
-
 
 movement TheStrikeStrikesBack_FaceNorth {
     emote_exclamation_mark
@@ -223,11 +222,6 @@ movement TurnInivisible {
 }
 movement TurnVisible {
     set_visible
-        step_end
-}
-movement TheStrikeStrikesBack_GoToPlayer {
-    walk_left
-        face_up
         step_end
 }
 

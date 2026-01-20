@@ -16,7 +16,7 @@ script MaybeIFuckedUp_Dialogue
     startcutscene(JUMPPLAYER_MAYBEIFUCKEDUP)
     setvar(VAR_STORYLINE_STATE,STORY_RECIEVED_BAMBOO_STAR)
 
-    applymovement(ORI,MaybeIFuckedUp_WalkToPlayer)
+    applymovement(ORI, moves(walk_down * 3, walk_right * 3, face_up, step_end))
     waitmovement(0)
     msgbox(format("Excuse me!."),,SPEAKER_ORI)
     closemessage
@@ -25,11 +25,9 @@ script MaybeIFuckedUp_Dialogue
 
     msgbox(format("Oh hi!"),,SPEAKER_ALICIA)
 
-
     msgbox(format("It’s good to meet you, Champion {PLAYER}. You’ve had quite an impact since you arrived here, don’t you think?"),,SPEAKER_ORI)
 
     msgbox(format("Not what I had planned when I first came here... worse, actually."),,SPEAKER_ALICIA)
-
 
     msgbox(format("Your decisions have had a great impact… but not everything is always permanent. Take this."),,SPEAKER_ORI)
     giveitem(ITEM_WISH_TAG,1)
@@ -38,12 +36,11 @@ script MaybeIFuckedUp_Dialogue
 
     msgbox(format("Uh… okay? Thanks, I guess."),,SPEAKER_ALICIA)
 
-
     msgbox(format("Of course, my child."),,SPEAKER_ORI)
     closemessage
 
-    applymovement(PLAYER,MaybeIFuckedUp_WatchOriWalk)
-    applymovement(ORI,MaybeIFuckedUp_WalkOffScreen)
+    applymovement(PLAYER, moves(delay_16, delay_16, delay_16, face_right, step_end))
+    applymovement(ORI, moves(walk_right * 8, step_end))
     waitmovement(ORI)
     removeobject(ORI)
 
@@ -68,22 +65,3 @@ script MaybeIFuckedUp_Dialogue
     end
 }
 
-movement MaybeIFuckedUp_WalkToPlayer {
-    walk_down * 3
-    walk_right * 3
-    face_up
-    step_end
-}
-
-movement MaybeIFuckedUp_WalkOffScreen {
-    walk_right * 8
-    step_end
-}
-
-movement MaybeIFuckedUp_WatchOriWalk {
-    delay_16
-    delay_16
-    delay_16
-    face_right
-    step_end
-}

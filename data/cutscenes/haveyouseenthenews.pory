@@ -42,7 +42,7 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
         closemessage
 
         applymovement(OLIVER, Common_Movement_WalkDown)
-        applymovement(CHARLOTTE, HaveYouSeenTheNews_LeaveClearingB)
+        applymovement(CHARLOTTE, moves(walk_down * 2, step_end))
         waitmovement(0)
             playse(SE_EXIT)
         waitse
@@ -61,7 +61,4 @@ movement HaveYouSeenTheNews_LeaveClearingA {
     walk_down * 3
     step_end
 }
-movement HaveYouSeenTheNews_LeaveClearingB {
-    walk_down * 2
-    step_end
-}
+

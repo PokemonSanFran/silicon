@@ -42,7 +42,7 @@ script OldAssholeAppears_MoveCharlotteIntoPosition_Script
 script OldAssholeAppears_MoveCharlotteToPlayer
 {
     playbgm(MUS_ENCOUNTER_BRENDAN, TRUE)
-    applymovement(CHARLOTTE,OldAssholeAppears_CharlotteEntrance)
+    applymovement(CHARLOTTE, moves(walk_right * 7))
     waitmovement(CHARLOTTE)
 }
 
@@ -120,7 +120,7 @@ script OldAssholeAppears_CharlotteExit_Script
     setvar(VAR_ANBEH_BEND_STATE,DEFEATED_CHARLOTTE_LOMBARD)
     addvar(VAR_STORYLINE_STATE,1)
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    applymovement(CHARLOTTE, OldAssholeAppears_CharlotteExit_Movement)
+    applymovement(CHARLOTTE, moves(walk_left * 6, walk_down * 2, walk_left * 3, step_end))
     waitmovement(0)
     fadedefaultbgm
     removeobject(CHARLOTTE)
@@ -130,11 +130,6 @@ script OldAssholeAppears_CharlotteExit_Script
     call(AaandWereBack_Monologue)
     releaseall
     end
-}
-
-movement OldAssholeAppears_CharlotteEntrance
-{
-    walk_right * 7
 }
 
 movement OldAssholeAppears_WalkNorthtoCharlotte_Movement {
@@ -150,9 +145,3 @@ movement OldAssholeAppears_WalkWesttoCharlotte_Movement {
     step_end
 }
 
-movement OldAssholeAppears_CharlotteExit_Movement {
-    walk_left * 6
-    walk_down * 2
-    walk_left * 3
-    step_end
-}

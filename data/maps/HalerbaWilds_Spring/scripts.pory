@@ -7,7 +7,6 @@ mapscripts HalerbaWilds_Spring_MapScripts{
 //PSF TODO write evo method so that the spring bypasses most other evo methods
 // https://docs.google.com/spreadsheets/d/1TLIOdydz6I1bkhSNhv9f0xoqBBbGmTYaUuTgLqXkwJQ/edit#gid=0
 
-
 script HalerbaWilds_Spring_Bystander_Event_Script
 {
 	returnqueststate(QUEST_FRESHWATEREVOLUTION)

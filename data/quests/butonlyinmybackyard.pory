@@ -28,7 +28,6 @@ script Quest_ButOnlyIn_HideNimby_Script{
     return
 }
 
-
 script Quest_ButOnlyIn_Interact_Gunda_Script{
     lock
     faceplayer

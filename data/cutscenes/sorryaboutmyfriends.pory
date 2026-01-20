@@ -23,7 +23,7 @@ script SorryAboutMyFriends_Intro_Dialogue {
     startcutscene(JUMPPLAYER_SORRYABOUTMYFRIENDS)
         playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
 
-        applymovement(ADAORA,SorryAboutMyFriends_WalkToPlayer_Movement)
+        applymovement(ADAORA, moves(emote_exclamation_mark, walk_left * 3, walk_up, step_end))
         waitmovement(ADAORA)
 
         msgbox(format("{PLAYER}. How goes your Gym Challenge?"),,SPEAKER_ADAORA)
@@ -58,7 +58,6 @@ script SorryAboutMyFriends_Intro_Dialogue {
 
         msgbox(format("The world needs more compassion like yours, {PLAYER}. If we could just take the time to learn about each other... actually, I have a good learning opportunity for you. Let me see your phone."),,SPEAKER_ADAORA)
         closemessage
-
 
         goto(SorryAboutMyFriends_GiveTicket_Script)
 }
@@ -97,8 +96,7 @@ script SorryAboutMyFriends_GiveTicket_Script {
         msgbox(format("Thank you {PLAYER}. Enjoy Arantraz."),,SPEAKER_ADAORA)
         closemessage
 
-
-        applymovement(ADAORA,SorryAboutMyFriends_WalkSouth)
+        applymovement(ADAORA, moves(walk_down * 6, step_end))
         waitmovement(ADAORA)
         removeobject(ADAORA)
         fadedefaultbgm
@@ -108,14 +106,3 @@ script SorryAboutMyFriends_GiveTicket_Script {
         end
 }
 
-movement SorryAboutMyFriends_WalkSouth {
-    walk_down * 6
-        step_end
-}
-
-movement SorryAboutMyFriends_WalkToPlayer_Movement{
-    emote_exclamation_mark
-        walk_left * 3
-        walk_up
-        step_end
-}

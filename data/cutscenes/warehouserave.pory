@@ -66,13 +66,11 @@ script WarehouseRave_LockDoors_Script
         waitse
 }
 
-
 script WarehouseRave_Intro_Dialogue
 {
     lock
         msgbox(format("…is this place empty?"),,SPEAKER_ALICIA)
         closemessage
-
 
         call(WarehouseRave_LockDoors_Script)
         playse(SE_PIN)
@@ -82,10 +80,9 @@ script WarehouseRave_Intro_Dialogue
         msgbox(format("What the hell is going on?! "),,SPEAKER_ALICIA)
         closemessage
 
-
         clearflag(FLAG_HIDE_KEIYING)
         addobject(KEIYING)
-        applymovement(KEIYING,WarehouseRave_WalkOutShadows)
+        applymovement(KEIYING, moves(walk_right * 4, step_end))
         waitmovement(0)
 
         msgbox(format("I'm sorry we had to trick you, {PLAYER}."),,SPEAKER_KEIYING)
@@ -101,7 +98,7 @@ script WarehouseRave_Intro_Dialogue
         closemessage
 
         setvar(VAR_WAREHOUSE_RAVE_STATE,SAVE_KEIYING_WAREHOUSE)
-        applymovement(PLAYER,WarehouseRave_WalkToBattle)
+        applymovement(PLAYER, moves(walk_up * 2, walk_left * 2, step_end))
         waitmovement(0)
         startmenu_savescreen
         goto(WarehouseRave_Battle_Script)
@@ -141,7 +138,7 @@ script WarehouseRave_PostBattle_Script
 
         closemessage
 
-        applymovement(PLAYER,WarehouseRave_RunOutTheWarehouse)
+        applymovement(PLAYER, moves(player_run_right * 3, player_run_up * 3, step_end))
         waitmovement(0)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_CURENO_PORT,4)
@@ -150,13 +147,13 @@ script WarehouseRave_PostBattle_Script
 script WarehouseRave_OutsideWarehouse_Dialogue
 {
     lock
-        applymovement(PLAYER,WarehouseRave_ExitWarehouse)
+        applymovement(PLAYER, moves(face_up, step_end))
         waitmovement(0)
         playse(SE_PIN)
         waitse
         applymovement(KAI,Common_Movement_ExclamationMark)
         waitmovement(0)
-        applymovement(KAI,WarehouseRave_RunToPlayer)
+        applymovement(KAI, moves(player_run_up * 6, walk_left, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceRight)
 
@@ -201,8 +198,7 @@ script WarehouseRave_OutsideWarehouse_Dialogue
         }
     closemessage
 
-
-        applymovement(KAI,WarehouseRave_LeaveCity)
+        applymovement(KAI, moves(walk_up * 6, step_end))
         waitmovement(0)
         removeobject(KAI)
 
@@ -215,41 +211,3 @@ script WarehouseRave_OutsideWarehouse_Dialogue
 
 // Kai walks off screen. The player regains control.
 
-movement WarehouseRave_WalkOutShadows
-{
-    walk_right * 4
-        step_end
-}
-
-movement WarehouseRave_WalkToBattle
-{
-    walk_up * 2
-        walk_left * 2
-        step_end
-}
-
-movement WarehouseRave_RunOutTheWarehouse
-{
-    player_run_right * 3
-        player_run_up * 3
-        step_end
-}
-
-movement WarehouseRave_ExitWarehouse
-{
-    face_up
-        step_end
-}
-
-movement WarehouseRave_RunToPlayer
-{
-    player_run_up * 6
-        walk_left
-        step_end
-}
-
-movement WarehouseRave_LeaveCity
-{
-    walk_up * 6
-        step_end
-}

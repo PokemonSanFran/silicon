@@ -103,12 +103,11 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
     setvar(VAR_FERRYBUILDING_STATE,CHIEF_LEFT_WAR_ROOM)
 
     call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
-        applymovement(ADELAIDE,WelcomeToTheWarRoom_Pace_Movement)
+        applymovement(ADELAIDE, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("I read the summary email, but I want to hear the whole story."),,SPEAKER_ADELAIDE)
         closemessage
-
 
         call(WelcomeToTheWarRoom_FaceSpeakerArnav)
 
@@ -133,7 +132,6 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         msgbox(format("Everybody understand what they're doing?"),,SPEAKER_ADELAIDE)
         closemessage
 
-
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
         msgbox(format("We've already outlined a battle plan. Kids, you're gonna come with me and take the ferry."),,SPEAKER_CHIEF)
 
@@ -141,21 +139,18 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         msgbox(format("Why can't we just Fly over?"),,SPEAKER_CHARLOTTE)
         closemessage
 
-
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
         msgbox(format("Glad to hear I'm answering to kids now! We're splitting up our force into cells to avoid detection and increase agility. "),,SPEAKER_CHIEF)
-
 
         call(WelcomeToTheWarRoom_FaceSpeakerCharlotte)
         msgbox(format("…got it Chief."),,SPEAKER_CHARLOTTE)
         closemessage
 
-
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
         msgbox(format("Great. We'll start the operation as soon as you're ready. Meet me outside NavalBase."),,SPEAKER_CHIEF)
         closemessage
 
-        applymovement(CHIEF,WelcomeToTheWarRoom_ChiefLeaveRoom_Movement)
+        applymovement(CHIEF, moves(walk_right, walk_down * 4, walk_left * 2, walk_down * 3, step_end))
         delay(30)
         fadescreen(FADE_TO_BLACK)
         removeobject(CHIEF)
@@ -165,10 +160,9 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         msgbox(format("Charlotte, {PLAYER}, don't let the chief's attitude get in the way. You've all got orders, so let's get to it."),,SPEAKER_ADELAIDE)
         closemessage
 
-        applymovement(ARNAV,WelcomeToTheWarRoom_LeaveRight_Movement)
-        applymovement(TECHIE,WelcomeToTheWarRoom_LeaveLeft_Movement)
-        applymovement(ADELAIDE,WelcomeToTheWarRoom_AdelaideLeaveRoom_Movement)
-
+        applymovement(ARNAV, moves(walk_right, walk_down * 5, step_end))
+        applymovement(TECHIE, moves(walk_left, walk_down * 5, step_end))
+        applymovement(ADELAIDE, moves(walk_right * 3, walk_down * 5, step_end))
 
         delay(30)
         fadescreen(FADE_TO_BLACK)
@@ -177,7 +171,7 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         removeobject(TECHIE)
         fadescreen(FADE_FROM_BLACK)
 
-        applymovement(OLIVER,WelcomeToTheWarRoom_AddressTrainers_Movement)
+        applymovement(OLIVER, moves(walk_left, walk_down, face_right, step_end))
         applymovement(CHARLOTTE,Common_Movement_FaceLeft)
         applymovement(PLAYER,Common_Movement_FaceLeft)
         waitmovement(OLIVER)
@@ -185,8 +179,7 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         msgbox(format("Thanks again you two. Be careful out there!"),,SPEAKER_OLIVER)
         closemessage
 
-
-        applymovement(OLIVER,WelcomeToTheWarRoom_OliverLeaveRoom_Movement)
+        applymovement(OLIVER, moves(walk_down * 4, walk_right * 3, walk_down * 3, step_end))
         delay(30)
         fadescreen(FADE_TO_BLACK)
         removeobject(OLIVER)
@@ -202,7 +195,7 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
             msgbox(format("Okay, I'll meet you over there."),,SPEAKER_CHARLOTTE)
             closemessage
 
-            applymovement(CHARLOTTE,WelcomeToTheWarRoom_CharlotteLeaveRoom_Movement)
+            applymovement(CHARLOTTE, moves(walk_left, walk_down * 4, step_end))
             fadescreen(FADE_TO_BLACK)
             removeobject(CHARLOTTE)
             fadescreen(FADE_FROM_BLACK)
@@ -216,50 +209,3 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         }
 }
 
-movement WelcomeToTheWarRoom_Pace_Movement {
-    walk_left * 2
-    walk_right *2
-    walk_left * 2
-    walk_right *2
-    face_down
-    step_end
-}
-movement WelcomeToTheWarRoom_ChiefLeaveRoom_Movement {
-    walk_right
-    walk_down * 4
-    walk_left * 2
-    walk_down * 3
-    step_end
-}
-movement WelcomeToTheWarRoom_LeaveLeft_Movement{
-    walk_left
-    walk_down * 5
-    step_end
-}
-movement WelcomeToTheWarRoom_LeaveRight_Movement{
-    walk_right
-    walk_down * 5
-    step_end
-}
-movement WelcomeToTheWarRoom_AddressTrainers_Movement {
-    walk_left
-    walk_down
-    face_right
-    step_end
-}
-movement WelcomeToTheWarRoom_AdelaideLeaveRoom_Movement{
-    walk_right * 3
-    walk_down * 5
-    step_end
-}
-movement WelcomeToTheWarRoom_OliverLeaveRoom_Movement {
-    walk_down * 4
-    walk_right * 3
-    walk_down * 3
-    step_end
-}
-movement WelcomeToTheWarRoom_CharlotteLeaveRoom_Movement {
-    walk_left
-    walk_down * 4
-    step_end
-}

@@ -91,7 +91,7 @@ script Quest_StealTheAxe_Conclusion_Dialogue{
     closemessage
     call(Quest_StealTheAxe_HandleMoney_Script)
     msgbox(format("See you on the battlefield solider."),,SPEAKER_NERIENE)
-    applymovement(NERIENE,Quest_StealTheAxe_LeaveNavalBase_Movement)
+    applymovement(NERIENE, moves(walk_up * 6, step_end))
     completequest(QUEST_STEALTHEAXE)
     removeobject(NERIENE)
     setvar(VAR_NERIENE_STATE,QUEST_1_COMPLETE)
@@ -300,7 +300,3 @@ script Quest_StealTheAxe_RecievedGiftFanfare {
         bufferspeciesname(STR_VAR_1, SPECIES_STUFFUL)
 }
 
-movement Quest_StealTheAxe_LeaveNavalBase_Movement{
-    walk_up * 6
-    step_end
-}

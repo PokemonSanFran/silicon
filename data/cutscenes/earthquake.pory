@@ -77,26 +77,26 @@ script Earthquake_ThatNight_Dialogue
     msgbox(format("Oh no!"),MSGBOX_DEFAULT,SPEAKER_RESIDENT_A,TAIL_SHOUT)
     closemessage
 
-    applymovement(PLAYER,Earthquake_WalkOutOfBed)
+    applymovement(PLAYER, moves(walk_right, step_end))
 
     msgbox(format("Help me!"),MSGBOX_DEFAULT,SPEAKER_RESIDENT_B,TAIL_SHOUT,EMOTE_SHOCK)
 
     msgbox(format("I'm fine. Do you hear people screaming?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 
-    applymovement(KAI_HOUSE,Earthquake_WalkToWall)
+    applymovement(KAI_HOUSE, moves(walk_up * 2, step_end))
     waitmovement(KAI_HOUSE)
 
     msgbox(format("The power's dead. This… isn't good."),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
     closemessage
 
-    applymovement(KAI_HOUSE,Earthquake_RunOutside)
+    applymovement(KAI_HOUSE, moves(player_run_right, player_run_up, step_end))
     waitmovement(KAI_HOUSE)
     playse(SE_EXIT)
     waitse
     removeobject(KAI_HOUSE)
 
-    applymovement(PLAYER,Earthquake_RunFromBedOutside)
+    applymovement(PLAYER, moves(player_run_right * 5, player_run_up * 3, step_end))
     waitmovement(PLAYER)
 
     setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
@@ -114,7 +114,7 @@ script Earthquake_ShowDestroyedCity_Script {
         special(SpawnCameraObject)
         fadescreenswapbuffers(FADE_FROM_BLACK)
 
-        applymovement(CAMERA,Earthquake_PanCameraDown)
+        applymovement(CAMERA, moves(walk_down * 10, step_end))
         waitmovement(CAMERA)
 
         fadescreenswapbuffers(FADE_TO_BLACK)
@@ -122,7 +122,7 @@ script Earthquake_ShowDestroyedCity_Script {
         special(SpawnCameraObject)
         fadescreenswapbuffers(FADE_FROM_BLACK)
 
-        applymovement(CAMERA,Earthquake_PanCameraUp)
+        applymovement(CAMERA, moves(walk_up * 10, step_end))
         waitmovement(CAMERA)
 
         fadescreenswapbuffers(FADE_TO_BLACK)
@@ -139,7 +139,7 @@ script Earthquake_StartRescue_Dialogue {
 
         addobject(ADAORA)
 
-        applymovement(ADAORA,Earthquake_WalkToPair)
+        applymovement(ADAORA, moves(walk_right * 5, walk_down * 2, walk_right * 3, face_up, step_end))
         waitmovement(ADAORA)
 
         msgbox(format("Oh, you're okay!"),MSGBOX_DEFAULT,SPEAKER_ADAORA)
@@ -155,8 +155,8 @@ script Earthquake_StartRescue_Dialogue {
         msgbox(format("Of course. Let's meet back in the town center in a bit."),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
         closemessage
 
-        applymovement(KAI,Earthquake_WalkAwayA)
-        applymovement(ADAORA,Earthquake_WalkAwayB)
+        applymovement(KAI, moves(walk_left, walk_up * 6, step_end))
+        applymovement(ADAORA, moves(walk_left * 2, walk_up * 7, step_end))
         waitmovement(KAI)
         waitmovement(ADAORA)
         removeobject(KAI)
@@ -169,7 +169,6 @@ script Earthquake_StartRescue_Dialogue {
         release
         end
 }
-
 
 script Earthquake_PostRescue_Dialogue {
     lock
@@ -185,7 +184,7 @@ script Earthquake_PostRescue_Dialogue {
         msgbox(format("We've managed to re-establish cell communications. The authorities claim they're on their way… Who knows how useful they'll actually be. Ina reports that our ranks suffered heavy casualties in the quake. Mark says our supply caches were also hit hard."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
                 closemessage
 
-        applymovement(ADAORA,Earthquake_Pace)
+        applymovement(ADAORA, moves(walk_right, walk_up * 2, walk_down * 2, walk_up * 2, walk_down * 2, step_end))
         waitmovement(ADAORA)
 
         msgbox(format("I really don't know how TheTide is going to hold up under this stress."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
@@ -281,69 +280,8 @@ script Earthquake_AskPlayerWarp_Script {
         end
 }
 
-movement Earthquake_WalkToWall {
-    walk_up * 2
-        step_end
-}
-
-movement Earthquake_RunOutside {
-    player_run_right
-        player_run_up
-        step_end
-}
-
-movement Earthquake_RunFromBedOutside {
-    player_run_right * 5
-        player_run_up * 3
-        step_end
-}
-
-movement Earthquake_WalkOutOfBed {
-    walk_right
-        step_end
-}
-
-movement Earthquake_PanCameraDown {
-    walk_down * 10
-        step_end
-}
-
-movement Earthquake_PanCameraUp {
-    walk_up * 10
-        step_end
-}
-
 movement Earthquake_PanCameraLeft {
     walk_left * 10
-        step_end
-}
-
-movement Earthquake_WalkToPair {
-    walk_right * 5
-        walk_down * 2
-        walk_right * 3
-        face_up
-        step_end
-}
-
-movement Earthquake_WalkAwayA {
-    walk_left
-        walk_up * 6
-        step_end
-}
-
-movement Earthquake_WalkAwayB {
-    walk_left * 2
-        walk_up * 7
-        step_end
-}
-
-movement Earthquake_Pace {
-    walk_right
-        walk_up * 2
-        walk_down * 2
-        walk_up * 2
-        walk_down * 2
         step_end
 }
 

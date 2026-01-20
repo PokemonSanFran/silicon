@@ -151,7 +151,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
         startcutscene(JUMPPLAYER_ENTERTHEMASTER)
     setvar(VAR_LEAVERRA_FOREST_STATE,MET_ARMANDO)
 
-        applymovement(PLAYER,EnterTheMaster_ApproachArmando)
+        applymovement(PLAYER, moves(walk_up * 1, step_end))
         waitmovement(0)
 
 	msgbox(format("Charlotte and {PLAYER}! Welcome to the deepest part of Leaverra Forest."),,SPEAKER_ARMANDO)
@@ -163,7 +163,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
         closemessage
 
         applymovement(ARMANDO,Common_Movement_FaceLeft)
-        applymovement(CHARLOTTE,EnterTheMaster_GiveNotebook)
+        applymovement(CHARLOTTE, moves(walk_up, face_right, delay_16, walk_in_place_slow_right, step_end))
         waitmovement(0)
 
 		bufferspeciesname(STR_VAR_1,SPECIES_HYDREIGON)
@@ -177,10 +177,10 @@ script EnterTheMaster_ClearingIntro_Dialogue
 
         call(EnterTheMaster_StartEarthquake_Script)
 
-        applymovement(CHARLOTTE,EnterTheMaster_StandNextToPlayer)
+        applymovement(CHARLOTTE, moves(walk_down, face_up, step_end))
         waitmovement(0)
 
-        applymovement(ARMANDO,EnterTheMaster_Pace)
+        applymovement(ARMANDO, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("Are either of you familiar with the Scott's Trainer Theory?"),,SPEAKER_ARMANDO)
@@ -243,7 +243,6 @@ script EnterTheMaster_StartEarthquake_Script
     closemessage
 }
 
-
 script EnterTheMaster_MegaEvolution_Dialogue
 {
     specialvar(VAR_0x8004,GetPartySlotIfMonCanMegaEvolve)
@@ -278,38 +277,10 @@ movement EnterTheMaster_WalkIntoWoods {
         step_end
 }
 
-movement EnterTheMaster_GiveNotebook {
-    walk_up
-        face_right
-        delay_16
-        walk_in_place_slow_right
-        step_end
-}
-
-movement EnterTheMaster_StandNextToPlayer {
-    walk_down
-        face_up
-        step_end
-}
-
-movement EnterTheMaster_Pace {
-    walk_left * 2
-        walk_right *2
-        walk_left * 2
-        walk_right *2
-        face_down
-        step_end
-}
-
-movement EnterTheMaster_ApproachArmando {
-    walk_up * 1
-        step_end
-}
-
 script EnterTheMaster_StartQuest_Script{
         msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
         closemessage
-        applymovement(CHARLOTTE,EnterTheMaster_WalkToRobots)
+        applymovement(CHARLOTTE, moves(walk_up, walk_left * 5, walk_up * 6, step_end))
         fadescreen(FADE_TO_BLACK)
         call(EnterTheMaster_RepositionCharlotte_Script)
         fadescreen(FADE_FROM_BLACK)
@@ -484,13 +455,6 @@ script EnterTheMaster_CompleteQuest_Script{
     msgbox(format("Either way, good job. Go ahead and rest -"),,SPEAKER_ARMANDO)
     closemessage
     end
-}
-
-movement EnterTheMaster_WalkToRobots{
-    walk_up
-    walk_left * 5
-    walk_up * 6
-    step_end
 }
 
 movement EnterTheMaster_WalkAway{

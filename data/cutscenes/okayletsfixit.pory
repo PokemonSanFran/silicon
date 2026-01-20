@@ -34,7 +34,7 @@ script OkayLetsFixit_ReachTop_Script
     lock
         //startcutscene(JUMPPLAYER_OKAYLETSFIXIT)
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_START_CUTSCENE)
-        applymovement(PLAYER, OkayLetsFixit_WalkToPeak)
+        applymovement(PLAYER, moves(walk_up * 4, walk_left * 7, step_end))
         waitmovement(PLAYER)
         bufferitemname(STR_VAR_1,ITEM_WISH_TAG)
         msgbox(format("The {STR_VAR_1} is glowing!"))
@@ -53,16 +53,14 @@ script OkayLetsFixit_ReachTop_Script
         msgbox(format("Ah {PLAYER}, I'm glad you came. I'm Hiko."),,SPEAKER_HIKO)
         closemessage
 
-        applymovement(PLAYER, OkayLetsFixit_LookAround)
+        applymovement(PLAYER, moves(lock_facing_direction, walk_right, unlock_facing_direction, face_up, delay_16, face_down, delay_16, face_left, step_end))
         waitmovement(0)
 
         msgbox(format("What… where… did you come from?! What the hell is going on?"),,SPEAKER_ALICIA)
 
-
         msgbox(format("Have you realized the error in your ways?"),,SPEAKER_HIKO)
 
         msgbox(format("In coming here? Yeah, I think - "),,SPEAKER_ALICIA)
-
 
         msgbox(format("Let's look back."),,SPEAKER_HIKO)
         closemessage
@@ -77,7 +75,6 @@ script OkayLetsFixit_StartFlashback_Script
     lock
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_FIRST_RETURN)
         msgbox(format("This was the night I decided to help SharpRise Capital."),,SPEAKER_ALICIA)
-
 
         applymovement(HIKO, Common_Movement_FaceLeft)
         waitmovement(HIKO)
@@ -195,10 +192,10 @@ script OkayLetsFixit_AskConfirm_Script
 script OkayLetsFixit_StartTimeTravel_Script
 {
 	closemessage
-	applymovement(PLAYER, OkayLetsFixit_WatchCliffWalk)
-	applymovement(HIKO, OkayLetsFixit_WalkOffCliff)
+	applymovement(PLAYER, moves(delay_16 * 5, face_up, walk_right, walk_up * 4, step_end))
+	applymovement(HIKO, moves(walk_up, walk_right * 3, walk_up * 7, step_end))
 	special(SpawnCameraObject)
-	applymovement(CAMERA, OkayLetsFixit_PanCamera)
+	applymovement(CAMERA, moves(walk_right, walk_up * 6, step_end))
 	waitmovement(CAMERA)
 	waitmovement(HIKO)
 	waitmovement(PLAYER)
@@ -239,45 +236,6 @@ script OkayLetsFixit_TimelineReset_Script {
         //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_HOWDISAPPOINTING)
         //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_LETSBURNTHISMOTHERDOWN)
         //PSF TODO need to write text for the true timeline for when these quests are completed
-}
-
-movement OkayLetsFixit_WalkToPeak {
-    walk_up * 4
-        walk_left * 7
-        step_end
-}
-
-movement OkayLetsFixit_LookAround {
-    lock_facing_direction
-        walk_right
-        unlock_facing_direction
-        face_up
-        delay_16
-        face_down
-        delay_16
-        face_left
-        step_end
-}
-
-movement OkayLetsFixit_WalkOffCliff {
-    walk_up
-        walk_right * 3
-        walk_up * 7
-        step_end
-}
-
-movement OkayLetsFixit_PanCamera {
-    walk_right
-        walk_up * 6
-        step_end
-}
-
-movement OkayLetsFixit_WatchCliffWalk {
-    delay_16 * 5
-        face_up
-        walk_right
-        walk_up * 4
-        step_end
 }
 
 movement OkayLetsFixit_PaceNightmare {

@@ -82,8 +82,8 @@ script Quest_StolenTrade_RunAfterTrade_Script
     bufferspeciesname(STR_VAR_1,SPECIES_SWIRLIX)
     bufferspeciesname(STR_VAR_2,SPECIES_GURDURR)
     msgbox(format("Okay, gotta go, bye!"),MSGBOX_NPC,SPEAKER_BRONSON)
-    applymovement(PLAYER,Quest_StolenTrade_WatchRunAway_Movement)
-    applymovement(NPC_STOLEN_TRADE_QIU,Quest_StolenTrade_RunAway_Movement)
+    applymovement(PLAYER, moves(delay_4, face_right, delay_4 * 5, face_up, delay_4 * 2, step_end))
+    applymovement(NPC_STOLEN_TRADE_QIU, moves(walk_faster_right * 6, walk_faster_up * 4, step_end))
     waitmovement(0)
     removeobject(NPC_STOLEN_TRADE_QIU)
     msgbox(format("Wait, what? Come back! My {STR_VAR_2}!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -158,21 +158,6 @@ script Quest_StolenTrade_QuestComplete_Dialogue {
 
         msgbox(format("I just caught it to trade with sombody. The {STR_VAR_2} was to help me with construction. My boss is going to fire me unless I can double out work output in the next week, and I have bills to pay...."),MSGBOX_NPC,SPEAKER_BRONSON)
         closemessage
-}
-
-movement Quest_StolenTrade_WatchRunAway_Movement{
-    delay_4
-    face_right
-    delay_4 * 5
-    face_up
-    delay_4 * 2
-    step_end
-}
-
-movement Quest_StolenTrade_RunAway_Movement{
-    walk_faster_right * 6
-    walk_faster_up * 4
-    step_end
 }
 
 text gText_StolenTrade_DoYouKnowHow{

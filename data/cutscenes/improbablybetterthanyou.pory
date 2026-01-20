@@ -46,7 +46,7 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
         playse(SE_PIN)
         applymovement(CHARLOTTE,Common_Movement_ExclamationMark)
         waitmovement(0)
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_WalkToPlayer)
+        applymovement(CHARLOTTE, moves(walk_right, walk_down, step_end))
         waitmovement(0)
         msgbox(format("You must be {PLAYER}! I'm the other trainer in the Kickstart program, Charlotte."),,SPEAKER_CHARLOTTE)
         reveal(REVEAL_CHARLOTTE)
@@ -57,7 +57,7 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
 }
 
 script ImProbablyBetterThanYou_KindaShabby_Dialogue {
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_LookAround)
+        applymovement(CHARLOTTE, moves(face_left, delay_16, delay_16, face_right, delay_16, delay_16, face_down, delay_16, delay_16, step_end))
         waitmovement(0)
         msgbox(format("This place is kinda shabby, huh? I thought SharpRise Capital was pulling out all the stops for us, but there's not a butler in sight! And no private tennis courts! Not that I ever play, but it's the principle of the thing..."),,SPEAKER_CHARLOTTE)
         closemessage
@@ -79,11 +79,11 @@ script ImProbablyBetterThanYou_FoodAndWhereYouFrom_Dialogue {
 
 script ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue {
         msgbox(format("I know our orientation is supposed to start soon, or something like that. I took the bedroom on the left, so the one to the right is yours. I tried to take the good one because I got here first..."),,SPEAKER_CHARLOTTE)
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_GestureUpstairs)
+        applymovement(CHARLOTTE, moves(face_up, delay_16, delay_16, face_down, step_end))
         waitmovement(0)
         msgbox(format("but both rooms are exactly the same! Let's chill after you unpack."),,SPEAKER_CHARLOTTE,,EMOTE_LAUGH)
                 closemessage
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_WalkToCouch)
+        applymovement(CHARLOTTE, moves(walk_up, walk_left, step_end))
         waitmovement(0)
         fadedefaultbgm
         endcutscene
@@ -114,44 +114,7 @@ script ImProbablyBetterThanYou_Annoyed_Dialogue {
             setvar(VAR_TALKED_CHARLOTTE,1)
     }
         closemessage
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_GoBackToFood)
+        applymovement(CHARLOTTE, moves(face_original_direction, step_end))
             waitmovement(0)
 }
 
-movement ImProbablyBetterThanYou_WalkToPlayer {
-    walk_right
-        walk_down
-        step_end
-}
-
-movement ImProbablyBetterThanYou_WalkToCouch {
-    walk_up
-        walk_left
-        step_end
-}
-
-movement ImProbablyBetterThanYou_LookAround{
-    face_left
-        delay_16
-        delay_16
-        face_right
-        delay_16
-        delay_16
-        face_down
-        delay_16
-        delay_16
-        step_end
-}
-
-movement ImProbablyBetterThanYou_GestureUpstairs {
-    face_up
-        delay_16
-        delay_16
-        face_down
-        step_end
-}
-
-movement ImProbablyBetterThanYou_GoBackToFood {
-    face_original_direction
-    step_end
-}

@@ -178,13 +178,13 @@ script SpeechSpeechSpeech_StartTransformation_Script {
 
         clearflag(FLAG_HIDE_ARMANDO)
         special(SpawnCameraObject)
-        applymovement(CAMERA,SpeechSpeechSpeech_PanCameraUp)
-        applymovement(ALCMENE,SpeechSpeechSpeech_WalkBackstage)
+        applymovement(CAMERA, moves(walk_up * 4, step_end))
+        applymovement(ALCMENE, moves(walk_up * 3, step_end))
         waitmovement(CAMERA)
         delay(32)
-        applymovement(ALCMENE,SpeechSpeechSpeech_StartSpin)
+        applymovement(ALCMENE, moves(face_left, face_down, face_right, face_up, face_left, face_down, face_right, face_up, step_end))
         waitmovement(ALCMENE)
-        applymovement(ELLEN,SpeechSpeechSpeech_FinishSpin)
+        applymovement(ELLEN, moves(face_left, face_down, face_right, face_up, step_end))
         waitmovement(ALCMENE)
         removeobject(ALCMENE)
         clearflag(FLAG_HIDE_ELLEN)
@@ -195,8 +195,8 @@ script SpeechSpeechSpeech_StartTransformation_Script {
         applymovement(MAGNUS,SpeechSpeechSpeech_WalkOutElite)
         applymovement(ARMANDO,SpeechSpeechSpeech_WalkOutElite)
         applymovement(ELLEN,SpeechSpeechSpeech_WalkOutElite)
-        applymovement(ADAORA,SpeechSpeechSpeech_StepAside)
-        applymovement(CAMERA,SpeechSpeechSpeech_PanCameraDown)
+        applymovement(ADAORA, moves(lock_facing_direction, walk_right * 2, unlock_facing_direction, step_end))
+        applymovement(CAMERA, moves(walk_down * 3, step_end))
         waitmovement(CAMERA)
 
         special(RemoveCameraObject)
@@ -285,7 +285,6 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         applymovement(TALA,SpeechSpeechSpeech_WalkBackwards)
         waitmovement(TALA)
 
-
         //Tala steps back.
 
         msgbox(format("And I’ll be handling negotiations with the government, and operations here. Adaora will be giving each of you assignments under one of the Elite Four members, so listen up. "),,SPEAKER_MAGNUS)
@@ -299,7 +298,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         callnative(DestroyVirtualObjects)
         call(SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script)
 
-        applymovement(KAI,SpeechSpeechSpeech_WalkToPlayer)
+        applymovement(KAI, moves(walk_left, face_down, step_end))
         fadescreen(FADE_FROM_BLACK)
         waitmovement(KAI)
 
@@ -322,7 +321,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         closemessage
 
-        applymovement(KAI,SpeechSpeechSpeech_LeaveScreen)
+        applymovement(KAI, moves(walk_left * 7, step_end))
         waitmovement(KAI)
         removeobject(KAI)
     call(TryAutoSave)
@@ -332,30 +331,8 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
 }
 
-movement SpeechSpeechSpeech_PanCameraUp {
-    walk_up * 4
-    step_end
-}
-
-movement SpeechSpeechSpeech_WalkBackstage{
-    walk_up * 3
-	step_end
-}
-
 movement SpeechSpeechSpeech_WalkOutElite{
     walk_down * 2
-	step_end
-}
-
-movement SpeechSpeechSpeech_PanCameraDown {
-    walk_down * 3
-    step_end
-}
-
-movement SpeechSpeechSpeech_StepAside{
-    lock_facing_direction
-    walk_right * 2
-    unlock_facing_direction
 	step_end
 }
 
@@ -364,37 +341,6 @@ movement SpeechSpeechSpeech_WalkBackwards{
     walk_up
     unlock_facing_direction
 	step_end
-}
-
-movement SpeechSpeechSpeech_WalkToPlayer{
-    walk_left
-    face_down
-	step_end
-}
-
-movement SpeechSpeechSpeech_LeaveScreen{
-    walk_left * 7
-	step_end
-}
-
-movement SpeechSpeechSpeech_StartSpin {
-    face_left
-    face_down
-    face_right
-    face_up
-    face_left
-    face_down
-    face_right
-    face_up
-    step_end
-}
-
-movement SpeechSpeechSpeech_FinishSpin {
-    face_left
-    face_down
-    face_right
-    face_up
-    step_end
 }
 
 movement SpeechSpeechSpeech_LookAround {

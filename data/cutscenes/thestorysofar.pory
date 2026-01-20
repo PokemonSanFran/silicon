@@ -2,7 +2,6 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const ATTENDANT = 8
 const FLAG_HIDE_TALA = FLAG_TEMP_2
 
-
 script TheStorySoFar_ExplainExhibit_Dialogue {
     lock
         call(ResetArantrazExhibit_Script)
@@ -105,7 +104,6 @@ script TheStorySoFar_ReadSign1_Dialogue {
     call(TryAutoSave)
     endcutscene
 }
-
 
 script TheStorySoFar_StartBattle2_Script {
     trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_B,gText_TheStorySoFar_IThinkDefense,gText_TheStorySoFar_NotStrongEnough,TheStorySoFar_ReadSign2_Dialogue, NO_MUSIC)

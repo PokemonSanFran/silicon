@@ -111,9 +111,8 @@ script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
 
         msgbox(format("Try the newspaper in Perlacia City, they did an interview with Ellen right before she disappeared.  I’m gonna make some moves too."),,SPEAKER_KAI)
 
-
         closemessage
-        applymovement(KAI,LetsGettheBandBackTogether_WalkOffScreen)
+        applymovement(KAI, moves(walk_left * 2, walk_down * 2, step_end))
         waitmovement(KAI)
         playse(SE_EXIT)
         waitse
@@ -125,8 +124,3 @@ script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
 
 }
 
-movement LetsGettheBandBackTogether_WalkOffScreen {
-    walk_left * 2
-        walk_down * 2
-        step_end
-}

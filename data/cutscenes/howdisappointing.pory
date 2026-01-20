@@ -188,11 +188,9 @@ msgbox(format("Oh, and Champion?"))
 
 msgbox(format("Yeah?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-
 msgbox(format("Try to not let the leaders go this time, okay?"))
 
 msgbox(format("…yeah."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
 
 msgbox(format("Hehehehehe."))
 closemessage
@@ -225,14 +223,14 @@ script HowDisappointing_RaidMovement_Script
     opendoor(5,8)
     waitdooranim
 
-    applymovement(CHIEF,HowDisappointing_RunIntoGymD)
+    applymovement(CHIEF, moves(walk_up, step_end))
     waitmovement(CHIEF)
     playse(SE_EXIT)
     removeobject(CHIEF)
 
-    applymovement(POLICEA,HowDisappointing_RunIntoGymA)
-    applymovement(POLICEB,HowDisappointing_RunIntoGymB)
-    applymovement(POLICE_MON,HowDisappointing_RunIntoGymC)
+    applymovement(POLICEA, moves(walk_up, walk_right * 2, walk_up, step_end))
+    applymovement(POLICEB, moves(walk_up, walk_right, walk_up, step_end))
+    applymovement(POLICE_MON, moves(walk_up, walk_left, walk_up, step_end))
     waitmovement(POLICEB)
     playse(SE_EXIT)
     playse(SE_EXIT)
@@ -254,19 +252,19 @@ script HowDisappointing_RaidMovement_Script
     call(HowDisappointing_ClearRocketFlags_Script)
     playse(SE_EXIT)
     addobject(GRUNTA)
-    applymovement(GRUNTA,HowDisappointing_EscapeA)
+    applymovement(GRUNTA, moves(delay_16, walk_down * 3, face_left, emote_exclamation_mark, walk_up * 4, walk_right * 2, walk_faster_right* 4, step_end))
     waitmovement(GRUNTA)
 
     playse(SE_EXIT)
     waitse
     addobject(GRUNTB)
-    applymovement(GRUNTB,HowDisappointing_EscapeB)
+    applymovement(GRUNTB, moves(delay_16, walk_faster_down * 3, walk_faster_left * 9, walk_faster_down * 6, step_end))
     waitmovement(GRUNTB)
 
     playse(SE_EXIT)
     waitse
     addobject(ADAORA)
-    applymovement(ADAORA,HowDisappointing_Escape)
+    applymovement(ADAORA, moves(delay_16, walk_faster_down * 3, walk_faster_right * 3, walk_faster_down * 4, walk_faster_right * 4, walk_faster_right * 5, step_end))
     waitmovement(0)
 
     playse(SE_PIN)
@@ -347,7 +345,7 @@ script HowDisappointing_ArrestScene_Dialogue
     msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),,SPEAKER_POLICEMAN)
     closemessage
     //PSF TODO Adaora is knocked down, need animation here
-    applymovement(POLICE_MON,HowDisappointing_UseTakeDown_Movement)
+    applymovement(POLICE_MON, moves(lock_facing_direction, walk_faster_down, walk_up, step_end))
     delay(8)
     applymovement(ADAORA,HowDisappointing_FallDown_Movement)
     waitmovement(ADAORA)
@@ -434,7 +432,6 @@ script HowDisappointing_DebriefAfterManhuntHowDisappointing_Dialogue
 
     msgbox(format("I know this doesn't look good. And, in my opinion, the police WERE a little too rough, but when you look at how much chaos and harm The Tide have caused in the region, taking them out as quickly and efficiently as possible is the right thing to do right? Take it from someone who's been in your shoes - doing the right thing will test your resolve. But we have to push forward if we really want to help the region!"),,SPEAKER_KEIYING)
 }
-
 
 script HowDisappointing_Debrief_Dialogue
 {
@@ -535,7 +532,7 @@ script HowDisappointing_GruntB_Arrest_Script
 
     msgbox(format("Screw this, I'm outta here!"),MSGBOX_DEFAULT,SPEAKER_GRUNT,TAIL_SHOUT,EMOTE_ANGRY)
     closemessage
-    applymovement(GRUNTB,HowDisappointing_RunAway_Movement1)
+    applymovement(GRUNTB, moves(walk_faster_right * 5, face_up, face_down, step_end))
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(PLAYER)
     waitmovement(POLICEA)
@@ -600,67 +597,6 @@ movement HowDisappointing_WalkToPlayer
     step_end
 }
 
-movement HowDisappointing_RunIntoGymA
-{
-    walk_up
-    walk_right * 2
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_RunIntoGymB
-{
-    walk_up
-    walk_right
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_RunIntoGymC
-{
-    walk_up
-    walk_left
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_RunIntoGymD
-{
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_Escape
-{
-    delay_16
-    walk_faster_down * 3
-    walk_faster_right * 3
-    walk_faster_down * 4
-    walk_faster_right * 4
-    walk_faster_right * 5
-    step_end
-}
-
-movement HowDisappointing_EscapeA
-{
-    delay_16
-    walk_down * 3
-    face_left
-    emote_exclamation_mark
-    walk_up * 4
-    walk_right * 2
-    walk_faster_right* 4
-    step_end
-}
-movement HowDisappointing_EscapeB
-{
-    delay_16
-    walk_faster_down * 3
-    walk_faster_left * 9
-    walk_faster_down * 6
-    step_end
-}
-
 movement HowDisappointing_WalkUp5_Movement
 {
 	walk_up
@@ -671,25 +607,9 @@ movement HowDisappointing_WalkUp5_Movement
 	step_end
 }
 
-movement HowDisappointing_RunAway_Movement1
-{
-    walk_faster_right * 5
-    face_up
-    face_down
-    step_end
-}
-
 movement HowDisappointing_WalkToArrest
 {
     walk_down * 5
-    step_end
-}
-
-movement HowDisappointing_UseTakeDown_Movement
-{
-    lock_facing_direction
-    walk_faster_down
-    walk_up
     step_end
 }
 

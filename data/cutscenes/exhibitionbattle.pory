@@ -31,7 +31,7 @@ script ExhibitionBattle_TimeSkip_Script {
 script ExhibitionBattle_PrepPlayer_Script {
     lock
         setvar(VAR_STORYLINE_STATE,STORY_SAVE_DIANTHA)
-        applymovement(ADELAIDE, ExhibitionBattle_EncouragePlayer_Movement)
+        applymovement(ADELAIDE, moves(walk_right * 5, walk_up, step_end))
         waitmovement(0)
         msgbox(format("Okay, time for your exhibition battle. Winning or losing doesn't matter… just give us a good show! Are you ready?"),MSGBOX_YESNO,SPEAKER_OLIVER)
 
@@ -162,10 +162,5 @@ script ExhibitionBattle_Ramesh_Dialogue {
                 closemessage
         release
         end
-}
-movement ExhibitionBattle_EncouragePlayer_Movement{
-    walk_right * 5
-    walk_up
-    step_end
 }
 

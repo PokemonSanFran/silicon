@@ -74,7 +74,6 @@ script Quest_Restoreespuleeoutskirts_StartQuest_Dialogue{
         msgbox(format("and a {STR_VAR_1} that knows {STR_VAR_2}."),,SPEAKER_IMELDA)
         msgbox(format("Come back when you've caught one."),,SPEAKER_IMELDA)
 
-
         startquest(QUEST_RESTOREESPULEEGYM)
         call(Quest_Restoreespuleeoutskirts_Debug_Script)
         //PSF TODO remove when encounters exist
@@ -218,7 +217,6 @@ script Quest_Restoreespuleeoutskirts_Reward_Dialogue{
 
         msgbox(format("Hell, I kinda wanna see it for myself right now. Are you really all that?"),,SPEAKER_IMELDA)
 
-
         startmenu_savescreen
 
         goto(Quest_Restoreespuleeoutskirts_StartBattle_Script)
@@ -333,93 +331,57 @@ text gText_Restoreespuleeoutskirts_Excellent{
     format("Excellent! This is perfect.")
 }
 
-
-
 text gText_Quest_Restoreespuleeoutskirts_IAskedA{
     format("I asked a few others Trainer for similar things. I think after a few tests, we might have something going here! You should stop by and help us test it out.")
 }
-
-
 
 text gText_Quest_Restoreespuleeoutskirts_IAbsolutely{
     format("I absolutely will!")
 }
 
-
-
-
 text gText_Quest_Restoreespuleeoutskirts_HellIKindaWanna{
     format("Hell, I kinda wanna see it for myself right now. Are you really all that?")
 }
-
-
-
 
 text gText_Quest_Restoreespuleeoutskirts_OkayChampion{
     format("Okay Champion, bring it on!")
 }
 
-
-
-
 text gText_Quest_Restoreespuleeoutskirts_YoureTougherThan{
     format("You're tougher than expected!")
 }
-
-
-
 
 text gText_Quest_Restoreespuleeoutskirts_ManIfTrainersSeeYou{
     format("Man, if Trainers see you backing this and people already know how strong you are... we've got a shot at real legitimacy.")
 }
 
-
-
 text gText_Quest_Restoreespuleeoutskirts_IThinkYoureGiving{
     format("I think you're giving me too much credit! Believe it or not, SharpRise Capital's Kickstart problem was a huge part of the reason I was able to hone my skills this much.")
 }
-
-
-
 
 text gText_Quest_Restoreespuleeoutskirts_AndICantWait{
     format("And I can't wait to turn that power against those assholes. They're gonna collapse under their own weight, and then we can reinstate all the old gyms and go back to when times were good and I was running this joint!")
 }
 
-
-
 text gText_Quest_Restoreespuleeoutskirts_IsThatYourGoal{
     format("Is that your goal? Just go to back to the past?")
 }
-
-
-
 
 text gText_Quest_Restoreespuleeoutskirts_YeahThingsWere{
     format("Yeah! Things were so much better before.")
 }
 
-
-
 text gText_Quest_Restoreespuleeoutskirts_YouCantGoBack{
     format("Imelda, you can't go back to the past. You've gotta stick to the reality we've got right now. I think what you're going to do here is going to make a real difference for Trainers, and that's awesome. But if you want the Trainers of the region to be the best they can be, I think we need to figure out a path forward... in the present. That's what Kai and I want to do.")
 }
-
-
-
 
 text gText_Quest_Restoreespuleeoutskirts_YouDontGet{
     format("You don't get it, {PLAYER}, you weren't here for before.")
 }
 
-
-
 text gText_Quest_Restoreespuleeoutskirts_IWasntHere{
     format("I wasn't here, but I'm here now. And while I'm new, I'm really starting to love it here and I want to help Trainers, and help people, just like you do. And we can do that, moving forward.")
 }
-
-
-
 
 text gText_Quest_Restoreespuleeoutskirts_YourHeartFeels{
     format("Your heart feels like its in the right place. I gotta get back to work. Let's at least get this test off the ground.")

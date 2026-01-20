@@ -4,7 +4,6 @@ mapscripts Chasilla_BreedingCenter_MapScripts
 {
 }
 
-
 script BreedingCenter_Script_SignifyEggReady
 {
     if (flag(FLAG_PENDING_DAYCARE_EGG)) {
@@ -254,7 +253,6 @@ script BreedingCenter_Script_AddDepositToMenu
 {
     dynmultipush("Deposit",2)
 }
-
 
 script BreedingCenter_Script_WithdrawMon
 {
@@ -1057,7 +1055,6 @@ text BreedingCenter_Text_AreYouCertainYouDon
 {
     format("Do you want to leave your {STR_VAR_1} Egg? We'll keep it, but won't be able to give it you later.")
 }
-
 
 text BreedingCenter_Text_DoYouWantToReset
 {

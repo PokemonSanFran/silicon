@@ -19,7 +19,6 @@ mapscripts Route2_MapScripts {
     ]
 }
 
-
 script Route2_ConstructionVisibility_Script {
     switch (var(VAR_CONSTRUCTION_STRIKE_STATE)){
         case STRIKE_NOT_STARTED: call(TheStrikeStrikesBack_HideObject_Script)

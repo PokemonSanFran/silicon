@@ -69,10 +69,10 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
     lock
         call(WaitEvenThen_ObjectSetUp_Script)
 
-        applymovement(PLAYER,WaitEvenThen_WalkToSleepingA)
-        applymovement(KAI,WaitEvenThen_WalkToSleepingB)
-        applymovement(ADAORA,WaitEvenThen_WalkToSleepingC)
-        applymovement(MAGNUS,WaitEvenThen_WalkToSleepingD)
+        applymovement(PLAYER, moves(walk_right * 6, walk_down * 2, walk_right * 2, face_up, step_end))
+        applymovement(KAI, moves(walk_right * 6, walk_down, walk_right * 3, face_up, step_end))
+        applymovement(ADAORA, moves(walk_right * 7, walk_down * 3, walk_right * 2, face_up, step_end))
+        applymovement(MAGNUS, moves(walk_right * 7, walk_down * 2, walk_right * 3, face_up, step_end))
         waitmovement(MAGNUS)
 
         msgbox(format("I found the access commands. I think I can turn this off, but I’m certain that it's going to attack us when we do."),,SPEAKER_MAGNUS)
@@ -81,7 +81,7 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
 
         closemessage
 
-        applymovement(MAGNUS,WaitEvenThen_WalkToComputer)
+        applymovement(MAGNUS, moves(walk_right, walk_up, walk_right * 2, walk_up * 2, walk_right * 2, face_up, step_end))
         waitmovement(MAGNUS)
 
         playse(SE_PC_LOGIN)
@@ -175,8 +175,8 @@ script WaitEvenThen_PostBossDialogue {
 
         closemessage
 
-        applymovement(MAGNUS,WaitEvenThen_LeaveLabA)
-        applymovement(ADAORA,WaitEvenThen_LeaveLabB)
+        applymovement(MAGNUS, moves(walk_down * 2, walk_left * 14, step_end))
+        applymovement(ADAORA, moves(walk_left * 6, walk_up * 3, walk_left * 4, step_end))
         waitmovement(ADAORA)
 
         applymovement(KAI,Common_Movement_FaceLeft)
@@ -194,7 +194,7 @@ script WaitEvenThen_PostBossDialogue {
                 msgbox(format("Meet us in the center of town, okay?"),,SPEAKER_KAI_TIDE)
                 closemessage
 
-                applymovement(KAI,WaitEvenThen_WalkAwayFromPlayer)
+                applymovement(KAI, moves(walk_up, walk_left * 9, step_end))
                 waitmovement(KAI)
 
                 removeobject(KAI)
@@ -207,63 +207,3 @@ script WaitEvenThen_PostBossDialogue {
         end
 }
 
-movement WaitEvenThen_WalkToSleepingA {
-    walk_right * 6
-        walk_down * 2
-        walk_right * 2
-        face_up
-        step_end
-}
-
-movement WaitEvenThen_WalkToSleepingB {
-    walk_right * 6
-        walk_down
-        walk_right * 3
-        face_up
-        step_end
-}
-
-movement WaitEvenThen_WalkToSleepingC {
-    walk_right * 7
-        walk_down * 3
-        walk_right * 2
-        face_up
-        step_end
-}
-
-movement WaitEvenThen_WalkToSleepingD {
-    walk_right * 7
-        walk_down * 2
-        walk_right * 3
-        face_up
-        step_end
-}
-
-movement WaitEvenThen_WalkToComputer {
-    walk_right
-        walk_up
-        walk_right * 2
-        walk_up * 2
-        walk_right * 2
-        face_up
-        step_end
-}
-
-movement WaitEvenThen_LeaveLabA {
-    walk_down * 2
-        walk_left * 14
-        step_end
-}
-
-movement WaitEvenThen_LeaveLabB {
-    walk_left * 6
-        walk_up * 3
-        walk_left * 4
-        step_end
-}
-
-movement WaitEvenThen_WalkAwayFromPlayer {
-    walk_up
-        walk_left * 9
-        step_end
-}

@@ -22,7 +22,7 @@ script Quest_Wildfirerisk_StartQuest_Dialogue{
     waitmovement(FILIP)
     msgbox(format("Man, what are we going to do this year... I'm so nervous I could puke..."),,SPEAKER_FILIP,TAIL_WHISPER,EMOTE_SAD)
     closemessage
-    applymovement(FILIP,Quest_Wildfirerisk_LookAroundPanic_Movement)
+    applymovement(FILIP, moves(delay_16, face_left, delay_8, face_right, delay_16, face_left, delay_8, face_right, delay_16, face_player, step_end))
     waitmovement(FILIP)
     msgbox(format("Hey, you alright?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
     applymovement(FILIP,Common_Movement_FacePlayer)
@@ -129,19 +129,6 @@ script Quest_Wildfirerisk_Complete_Dialogue{
     end
 }
 
-movement Quest_Wildfirerisk_LookAroundPanic_Movement{
-    delay_16
-    face_left
-    delay_8
-    face_right
-    delay_16
-    face_left
-    delay_8
-    face_right
-    delay_16
-    face_player
-    step_end
-}
 text gText_Wildfirerisk_NowThat{
     format("Now that I think about it, I'm pretty sure I've already defeated that many Pokémon.")
 }
@@ -204,7 +191,6 @@ text gText_Wildfirerisk_Wow80ProgressYourDedication{
 text gText_Wildfirerisk_YoureAlmostThere90Progress{
 	format("You're almost there, 90% progress. We're so grateful for your help in protecting the region from the threat of wildfires.")
 }
-
 
 text gText_Wildfirerisk_YourPokemonYourEffortsWillHelpKeep{
     format("Congratulations on KO'ing 100 Fire-type, 100 Flying-type, and 100 Electric-type Pokémon. Your efforts will help keep the region safe. As a reward, here's a rare Pokémon that you can add to your collection.")

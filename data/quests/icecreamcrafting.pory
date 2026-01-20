@@ -49,9 +49,9 @@ script Quest_SmoothieCrafting_TakeBerries_Dialogue{
         call(Quest_SmoothieCrafting_TakeBerries_Script)
         giveitem(ITEM_SHERBET_SURPRISE,6)
 
-        applymovement(PATRON,Quest_SmoothieCrafting_ToCounter_Movement)
+        applymovement(PATRON, moves(walk_faster_up, walk_fast_left * 4, face_up, step_end))
         waitmovement(PATRON)
-        applymovement(CASHIER,Quest_SmoothieCrafting_StepRight_Movement)
+        applymovement(CASHIER, moves(lock_facing_direction, walk_right, step_end))
         waitmovement(CASHIER)
 
         msgbox(format("What the hell are you serving us? What is going on?"))
@@ -61,14 +61,14 @@ script Quest_SmoothieCrafting_TakeBerries_Dialogue{
         msgbox(format("...I can't believe this shit! I wanted to toughen my team up! Ugh!"))
         closemessage
 
-        applymovement(PATRON,Quest_SmoothieCrafting_BackToSeat_Movement)
+        applymovement(PATRON, moves(walk_right * 4, walk_down, step_end))
         waitmovement(PATRON)
         call(Quest_SmoothieCrafting_RemovePokemon_Script)
-        applymovement(PATRON,Quest_SmoothieCrafting_LeaveShop_Movement)
+        applymovement(PATRON, moves(walk_down * 3, walk_left * 4, face_down, step_end))
         waitmovement(PATRON)
         playse(SE_EXIT)
         removeobject(PATRON)
-        applymovement(CASHIER,Quest_SmoothieCrafting_SlideBack_Movement)
+        applymovement(CASHIER, moves(lock_facing_direction, walk_left, step_end))
         waitmovement(CASHIER)
         release
         completequest(QUEST_SMOOTHIECRAFTING)
@@ -95,34 +95,5 @@ script Quest_SmoothieCrafting_CheckBerries_Script{
             questmenu(QUEST_MENU_SET_REWARD,QUEST_SMOOTHIECRAFTING)
         }
     return
-}
-
-
-movement Quest_SmoothieCrafting_ToCounter_Movement{
-    walk_faster_up
-        walk_fast_left * 4
-        face_up
-        step_end
-}
-movement Quest_SmoothieCrafting_StepRight_Movement{
-    lock_facing_direction
-        walk_right
-        step_end
-}
-movement Quest_SmoothieCrafting_BackToSeat_Movement{
-        walk_right * 4
-        walk_down
-        step_end
-}
-movement Quest_SmoothieCrafting_LeaveShop_Movement{
-    walk_down * 3
-    walk_left * 4
-    face_down
-        step_end
-}
-movement Quest_SmoothieCrafting_SlideBack_Movement{
-    lock_facing_direction
-    walk_left
-    step_end
 }
 

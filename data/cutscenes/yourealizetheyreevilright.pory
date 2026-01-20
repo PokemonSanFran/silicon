@@ -170,7 +170,7 @@ script YouRealizeTheyreEvilRight_RemoveGhost {
 }
 
 script YouRealizeTheyreEvil_ReleaseGarbodor_Script {
-    applymovement(KAI,YouRealizeTheyreEvilRight_StepBackward)
+    applymovement(KAI, moves(lock_facing_direction, walk_up, walk_in_place_down, unlock_facing_direction, step_end))
         waitmovement(0)
 
         playse(SE_BALL_OPEN)
@@ -186,7 +186,7 @@ script YouRealizeTheyreEvil_ReleaseGarbodor_Script {
 script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
     lock
         startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND)
-        applymovement(PLAYER,YouRealizeTheyreEvilRight_WalkToGroup)
+        applymovement(PLAYER, moves(walk_right * 2, walk_up, step_end))
         waitmovement(0)
 
         msgbox(format("The Champion has arrived! Great to meet you, I'm Magnus, and I'm the leader of the Resido Elite Four. Or, I was. Now I'm not really sure what I do."),,SPEAKER_MAGNUS)
@@ -296,7 +296,7 @@ script YouRealizeTheyreEvilRight_Framing_Dialogue {
 }
 
 script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
-    applymovement(KAI,YouRealizeTheyreEvilRight_WalkAroundToPlayer)
+    applymovement(KAI, moves(walk_left, walk_down * 2, face_right, step_end))
     waitmovement(0)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(0)
@@ -376,7 +376,7 @@ script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
     fadescreen(FADE_FROM_BLACK)
     setvar(VAR_STORYLINE_STATE,STORY_MORNING_OF_TIMELINE_SPLIT)
 
-    applymovement(PLAYER,OkayLetsFixit_PaceNightmare)
+    applymovement(PLAYER, moves(walk_down, walk_left * 2, walk_right * 2, step_end))
     waitmovement(0)
 
     if (flag(FLAG_TIMELINE_TIMETRAVEL)){
@@ -395,27 +395,6 @@ closemessage
         call(TryAutoSave)
     release
     end
-}
-
-movement YouRealizeTheyreEvilRight_StepBackward {
-lock_facing_direction
-    walk_up
-    walk_in_place_down
-    unlock_facing_direction
-    step_end
-}
-
-movement YouRealizeTheyreEvilRight_WalkToGroup {
-walk_right * 2
-    walk_up
-    step_end
-}
-
-movement YouRealizeTheyreEvilRight_WalkAroundToPlayer {
-walk_left
-    walk_down * 2
-    face_right
-    step_end
 }
 
 movement YouRealizeTheyreEvilRight_ShowAffection {

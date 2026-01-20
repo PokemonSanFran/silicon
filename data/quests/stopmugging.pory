@@ -44,13 +44,13 @@ script Quest_StopMugging_RunIntoPlayer_Dialogue{
     msgbox(format("Help! Stop them!"))
     closemessage
 
-    applymovement(MUGGERA,Quest_StopMugging_SlamIntoPlayerA_Movement)
-    applymovement(MUGGERB,Quest_StopMugging_SlamIntoPlayerB_Movement)
+    applymovement(MUGGERA, moves(walk_faster_down * 6, lock_facing_direction, jump_2_up, delay_16, delay_16, walk_down, unlock_facing_direction, step_end))
+    applymovement(MUGGERB, moves(walk_faster_left, walk_faster_down * 6, face_right, step_end))
     waitmovement(MUGGERB)
-    applymovement(PLAYER,Quest_StopMugging_FlyBackwards_Movement)
+    applymovement(PLAYER, moves(face_up, lock_facing_direction, jump_2_down, walk_up, unlock_facing_direction, step_end))
     waitmovement(PLAYER)
     delay(30)
-    applymovement(VICTIM,Quest_StopMugging_CatchUp_Movement)
+    applymovement(VICTIM, moves(walk_left, walk_fast_down * 5, step_end))
     waitmovement(VICTIM)
 
     if (defeated(TRAINER_MUGGERA_MUGGERB)){
@@ -116,8 +116,8 @@ script Quest_StopMugging_Complete_Dialogue{
     msgbox(format("We'll try something else man. Let's get out of here."))
     closemessage
 
-    applymovement(MUGGERB,Quest_StopMugging_WalkAwayB_Movement)
-    applymovement(MUGGERA,Quest_StopMugging_WalkAwayA_Movement)
+    applymovement(MUGGERB, moves(walk_down * 7, step_end))
+    applymovement(MUGGERA, moves(walk_right, walk_down * 7, step_end))
     waitmovement(MUGGERA)
     removeobject(MUGGERA)
     removeobject(MUGGERB)
@@ -199,35 +199,6 @@ text gText_StopMugging_ImGladIWas{
 format("I'm glad I was able to slow them down... but I need to heal now.")
 }
 
-movement Quest_StopMugging_SlamIntoPlayerA_Movement{
-    walk_faster_down * 6
-    lock_facing_direction
-    jump_2_up
-    delay_16
-    delay_16
-    walk_down
-    unlock_facing_direction
-    step_end
-}
-movement Quest_StopMugging_SlamIntoPlayerB_Movement{
-    walk_faster_left
-    walk_faster_down * 6
-    face_right
-    step_end
-}
-movement Quest_StopMugging_FlyBackwards_Movement{
-    face_up
-    lock_facing_direction
-    jump_2_down
-    walk_up
-    unlock_facing_direction
-    step_end
-}
-movement Quest_StopMugging_CatchUp_Movement{
-    walk_left
-    walk_fast_down * 5
-    step_end
-}
 movement Quest_StopMugging_LookAround_Movement{
     face_left
     delay_16
@@ -238,12 +209,4 @@ movement Quest_StopMugging_LookAround_Movement{
     face_down
     step_end
 }
-movement Quest_StopMugging_WalkAwayB_Movement{
-    walk_down * 7
-    step_end
-}
-movement Quest_StopMugging_WalkAwayA_Movement{
-    walk_right
-    walk_down * 7
-    step_end
-}
+

@@ -28,7 +28,6 @@ script EnterAdaora_SetConeTiles_Script {
     return
 }
 
-
 script EnterAdaora_InteractSiarl_Script {
         if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
 {
@@ -84,7 +83,7 @@ script EnterAdaora_Intro_Dialogue{
         playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
         msgbox(format("Siarl, hold on."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         closemessage
-                applymovement(ADAORA,EnterAdaora_AdaoraWalkToPlayer_Movement)
+                applymovement(ADAORA, moves(walk_down * 3, face_left, step_end))
         waitmovement(ADAORA)
         applymovement(SIARL,Common_Movement_FaceRight)
         waitmovement(SIARL)
@@ -134,22 +133,20 @@ script EnterAdaora_Apology_Dialogue{
         msgbox(format("...they should be near the backstock pallet."),,SPEAKER_SIARL)
         closemessage
 
-
-        applymovement(ADAORA,EnterAdaora_HopOverTable_Movement)
+        applymovement(ADAORA, moves(walk_up * 4, delay_16, walk_down * 4, jump_2_down, face_left, step_end))
         waitmovement(ADAORA)
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
         applymovement(SIARL,Common_Movement_FaceDown)
         waitmovement(SIARL)
 
-
         msgbox(format("I need to walk for a second. Let's walk, {PLAYER}."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         //Debug_Hop:
         //setobjectxy(ADAORA,4,25)
 
-        applymovement(ADAORA,EnterAdaora_WalkToLine_Movement)
-        applymovement(PLAYER,EnterAdaora_PlayerWalkToLine_Movement)
+        applymovement(ADAORA, moves(walk_down * 14, face_left, face_player, step_end))
+        applymovement(PLAYER, moves(walk_right, walk_down * 13, step_end))
         //goto(Debug_Cones)
         goto(EnterAdaora_ExplainHope_Dialogue)
 }
@@ -165,16 +162,16 @@ script EnterAdaora_ExplainHope_Dialogue{
         msgbox(format("Clearly, you're not from here, are you? I can't remember a point in my lifetime where the city helped people, {PLAYER}."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
         //Debug_Cones:
-        applymovement(ADAORA,EnterAdaora_PlaceConesA_Movement)
+        applymovement(ADAORA, moves(walk_right, walk_up * 2, face_left, walk_in_place_left, step_end))
         waitmovement(ADAORA)
             setmetatile(4,37,0x344,TRUE)
         special(DrawWholeMapView)
-        applymovement(PLAYER,EnterAdaora_WatchPlaceCones_Movement)
-        applymovement(ADAORA,EnterAdaora_PlaceConesB_Movement)
+        applymovement(PLAYER, moves(face_right, face_up, delay_16 * 2, face_down, step_end))
+        applymovement(ADAORA, moves(walk_down * 6, face_left, walk_in_place_left, step_end))
         waitmovement(ADAORA)
             setmetatile(4,43,0x344,TRUE)
         special(DrawWholeMapView)
-        applymovement(ADAORA,EnterAdaora_PlaceConesC_Movement)
+        applymovement(ADAORA, moves(walk_up * 4, face_left, step_end))
         waitmovement(ADAORA)
         msgbox(format("Yo, clear a path between the cones."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
@@ -197,7 +194,7 @@ script EnterAdaora_MoveLine_Script{
 }
 
 script EnterAdaora_GiveKeystone_Dialogue{
-    applymovement(ADAORA,EnterAdaora_FacePlayer_Movement)
+    applymovement(ADAORA, moves(walk_left, face_up, step_end))
         waitmovement(ADAORA)
         msgbox(format("There you go. Sorry about all of that. What's in ToraTown?"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         msgbox(format("A Gym! I'm taking part in the League Challenge."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -211,7 +208,7 @@ script EnterAdaora_GiveKeystone_Dialogue{
         msgbox(format("SharpRise Capital has data on all the Trainers in the region, but hasn't released it anywhere publicly. We found their source and... made it available for all. I hear they're not super happy about it, which is probably why they didn't give it to you!"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         msgbox(format("Hope that makes up for the hassle. I gotta go back before Siarl cusses out another innocent victim. Stay safe out there."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         closemessage
-        applymovement(ADAORA,EnterAdaora_WalkAway_Movement)
+        applymovement(ADAORA, moves(walk_right, walk_up * 7, step_end))
         waitmovement(ADAORA)
         removeobject(ADAORA)
         fadedefaultbgm
@@ -230,56 +227,6 @@ script EnterAdaora_GruntApologize_Dialogue {
         end
 }
 
-movement EnterAdaora_AdaoraWalkToPlayer_Movement {
-    walk_down * 3
-    face_left
-    step_end
-}
-movement EnterAdaora_HopOverTable_Movement {
-    walk_up * 4
-        delay_16
-        walk_down * 4
-        jump_2_down
-        face_left
-        step_end
-}
-movement EnterAdaora_WalkToLine_Movement {
-        walk_down * 14
-        face_left
-        face_player
-        step_end
-}
-movement EnterAdaora_PlayerWalkToLine_Movement {
-        walk_right
-        walk_down * 13
-        step_end
-}
-movement EnterAdaora_WatchPlaceCones_Movement {
-        face_right
-        face_up
-        delay_16 * 2
-        face_down
-        step_end
-}
-
-movement EnterAdaora_PlaceConesA_Movement {
-        walk_right
-        walk_up * 2
-        face_left
-        walk_in_place_left
-        step_end
-}
-movement EnterAdaora_PlaceConesB_Movement {
-        walk_down * 6
-        face_left
-        walk_in_place_left
-        step_end
-}
-movement EnterAdaora_PlaceConesC_Movement {
-        walk_up * 4
-        face_left
-    step_end
-}
 movement EnterAdaora_MoveLine1_Movement {
     emote_exclamation_mark
         walk_down * 5
@@ -309,16 +256,6 @@ movement EnterAdaora_MoveLine3_Movement {
         walk_down * 3
         walk_left
         face_up
-        step_end
-}
-movement EnterAdaora_FacePlayer_Movement{
-    walk_left
-    face_up
-    step_end
-}
-movement EnterAdaora_WalkAway_Movement {
-    walk_right
-        walk_up * 7
         step_end
 }
 

@@ -25,7 +25,6 @@ script OffYouGo_WarpPlayer_Script{
     return
 }
 
-
 script OffYouGo_WakeUp_Dialogue {
     //PSF TODO alter clock so that the screen stays black
         startcutscene(JUMPPLAYER_OFFYOUGO_PHONE)
@@ -107,7 +106,7 @@ script OffYouGo_WelcomeParty_Dialogue {
         applymovement(CHARLOTTE,Common_Movement_FaceUp)
         waitmovement(CHARLOTTE)
         applymovement(OLIVER, Common_Movement_FaceUp)
-        applymovement(CHARLOTTE,OffYouGo_WalkNorth)
+        applymovement(CHARLOTTE, moves(walk_up * 4, step_end))
         waitmovement(CHARLOTTE)
         playse(SE_EXIT)
         waitse
@@ -142,10 +141,5 @@ script OffYouGo_InteractOliver_Event_Script {
         closemessage
         releaseall
         end
-}
-
-movement OffYouGo_WalkNorth {
-    walk_up * 4
-        step_end
 }
 

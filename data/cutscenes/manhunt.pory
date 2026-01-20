@@ -82,25 +82,21 @@ script Manhunt_Cherie_Battle_Script {
         waitse
         clearflag(FLAG_HIDE_CHARLOTTE)
         addobject(CHARLOTTE)
-        applymovement(CHARLOTTE,Manhunt_WalkInNewspaper)
+        applymovement(CHARLOTTE, moves(walk_down * 3, walk_left * 3, walk_down * 2, step_end))
 
         msgbox(format("Hey, we're trying to find Alcmene, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
-
 
         msgbox(format("Yeah, I wrote the TheTide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Alcmene… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
 
         msgbox(format("Blessed? TheTide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-
         msgbox(format("…wait. You're that {PLAYER} kid, aren't you? "),,SPEAKER_CHERIE)
 
         msgbox(format("That's us."),,SPEAKER_ALICIA)
 
-
         msgbox(format("I should have recognized you two sooner. What're you doing snooping around here? Haven't you two helped enough? "),,SPEAKER_CHERIE)
 
         msgbox(format("Hey, we just want to talk!"),,SPEAKER_ALICIA)
-
 
         msgbox(format("As a matter of fact, get the hell out of here. Everything you two do is just hurting the region and lining the pockets of people who don't even care. Get out!"),,SPEAKER_CHERIE)
         closemessage
@@ -115,19 +111,16 @@ script Manhunt_StartBattle1_Script
         startcutscene(JUMPPLAYER_MANHUNT_NEWS)
         msgbox(format("Start talking. Who's Alcmene behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-
         msgbox(format("Alcmene? I swear, I don't know who she is. Nobody does. I'm a reporter… I wouldn't keep that a secret."),,SPEAKER_CHERIE)
 
         msgbox(format("I KNOW you know some shit."),,SPEAKER_CHARLOTTE_SHARPRISE)
-
 
         msgbox(format("The only lead I have is a consulting firm in MermerezaCity… there's money flowing between there and TheTide, or, at least there was. I never figured out what was going on though."),,SPEAKER_CHERIE)
 
         msgbox(format("That's a start…"),,SPEAKER_ALICIA)
 
-
         msgbox(format("Now please… leave us alone."),MSGBOX_AUTOCLOSE,SPEAKER_CHERIE)
-        applymovement(CHARLOTTE,Manhunt_LeaveNewspaper)
+        applymovement(CHARLOTTE, moves(walk_up * 2, walk_right * 3, walk_up * 3, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
@@ -145,16 +138,14 @@ script Manhunt_Teodoro_Battle_Script {
         waitse
         clearflag(FLAG_HIDE_CHARLOTTE)
         addobject(CHARLOTTE)
-        applymovement(CHARLOTTE,Manhunt_WalkIntoConsulting)
+        applymovement(CHARLOTTE, moves(walk_up * 2, jump_2_up, face_right, step_end))
         msgbox(format("What are some kids doing here?"),MSGBOX_NPC,SPEAKER_TEODORO)
 
         msgbox(format("You gonna make this easy? Or are you gonna keep protecting TheTide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-
         msgbox(format("TheTide? What the hell are you talking about? "),,SPEAKER_TEODORO)
 
         msgbox(format("We know you're working with TheTide, and we need to find their leader."),,SPEAKER_ALICIA)
-
 
         msgbox(format("Yeah, I did some work for them a while back. What about it? Gonna rat us out to your bosses?"),,SPEAKER_TEODORO)
         closemessage
@@ -184,7 +175,7 @@ script Manhunt_StartBattle2_Script
 // PSF TODO make sure all the NPCs here repeat themselves
 
         msgbox(format("God forbid some good people try to make some change without these tech cronies ruining it for everybody."),MSGBOX_AUTOCLOSE,SPEAKER_TEODORO)
-        applymovement(CHARLOTTE,Manhunt_LeaveConsulting)
+        applymovement(CHARLOTTE, moves(walk_down, jump_down, walk_down * 2, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
@@ -206,8 +197,8 @@ script Manhunt_Dudley_Battle_Script
         waitse
         clearflag(FLAG_HIDE_CHARLOTTE)
         addobject(CHARLOTTE)
-        applymovement(CHARLOTTE,Manhunt_WalkIntoBallShop)
-        applymovement(1,Manhunt_ExclaimAndTurn)
+        applymovement(CHARLOTTE, moves(walk_down * 2, walk_left * 2, walk_down, step_end))
+        applymovement(1, moves(emote_exclamation_mark, face_up, delay_16, faceplayer, step_end))
 
         msgbox(format("How can I help - "),MSGBOX_NPC,SPEAKER_DUDLEY)
 
@@ -263,7 +254,7 @@ script Manhunt_StartBattle3_Script
 
         msgbox(format("One time they had them delivered to Route98! That's all I know! Please don't hurt me…"),,SPEAKER_DUDLEY,EMOTE_SAD)
         closemessage
-        applymovement(CHARLOTTE,Manhunt_LeaveBallShop)
+        applymovement(CHARLOTTE, moves(walk_left * 2, walk_down * 4, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
@@ -287,7 +278,7 @@ script Manhunt_Matthew_Battle_Script {
         clearflag(FLAG_HIDE_CHARLOTTE)
         addobject(CHARLOTTE)
         call(Manhunt_TransformTreestoTallGrass)
-        applymovement(CHARLOTTE,Manhunt_WalkOntoRoute)
+        applymovement(CHARLOTTE, moves(walk_up * 7, step_end))
         waitmovement(0)
         applymovement(MATTHEW,Common_Movement_FacePlayer)
         waitmovement(MATTHEW)
@@ -317,7 +308,7 @@ script Manhunt_StartBattle4_Script
         msgbox(format("a real piece of work."),,SPEAKER_MATTHEW)
         msgbox(format("...You're lucky I was raised right, or I'd spit on you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
         closemessage
-        applymovement(CHARLOTTE,Manhunt_LeaveRoute)
+        applymovement(CHARLOTTE, moves(walk_left * 7, walk_up * 6, step_end))
         waitmovement(0)
         removeobject(CHARLOTTE)
         call(TryAutoSave)
@@ -361,7 +352,7 @@ script Manhunt_Encounter_Alcmene_Dialogue {
         clearflag(FLAG_HIDE_CHARLOTTE)
         addobject(CHARLOTTE)
 
-        applymovement(CHARLOTTE,Manhunt_ApproachAtLake)
+        applymovement(CHARLOTTE, moves(walk_up * 6, step_end))
         waitmovement(0)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
@@ -452,70 +443,5 @@ script Manhunt_MissionComplete_Dialogue {
     release
     call(ExhibitionBattle_TimeSkip_Script)
     end
-}
-
-movement Manhunt_WalkInNewspaper {
-    walk_down * 3
-    walk_left * 3
-    walk_down * 2
-    step_end
-}
-
-movement Manhunt_LeaveNewspaper {
-    walk_up * 2
-    walk_right * 3
-    walk_up * 3
-    step_end
-}
-
-movement Manhunt_WalkIntoConsulting {
-    walk_up * 2
-    jump_2_up
-    face_right
-    step_end
-}
-
-movement Manhunt_LeaveConsulting {
-    walk_down
-    jump_down
-    walk_down * 2
-    step_end
-}
-
-movement Manhunt_WalkIntoBallShop {
-    walk_down * 2
-    walk_left * 2
-    walk_down
-    step_end
-}
-
-movement Manhunt_ExclaimAndTurn {
-    emote_exclamation_mark
-    face_up
-    delay_16
-    faceplayer
-    step_end
-}
-
-movement Manhunt_LeaveBallShop {
-    walk_left * 2
-    walk_down * 4
-    step_end
-}
-
-movement Manhunt_WalkOntoRoute {
-    walk_up * 7
-    step_end
-}
-
-movement Manhunt_LeaveRoute {
-    walk_left * 7
-    walk_up * 6
-    step_end
-}
-
-movement Manhunt_ApproachAtLake {
-    walk_up * 6
-    step_end
 }
 

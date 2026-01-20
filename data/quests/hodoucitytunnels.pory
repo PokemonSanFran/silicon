@@ -78,8 +78,7 @@ script Quest_HodouCityTunnels_FirstScrollWarp_Script{
 
     msgbox(format("Wait, is this the red scroll that guy was talking about...?"),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
 
-
-    applymovement(PLAYER,Quest_HodouCityTunnels_PushScroll_Movement)
+    applymovement(PLAYER, moves(walk_in_place_up, emote_exclamation_mark, step_end))
     delay(4)
     playse(SE_PIN)
     waitmovement(PLAYER)
@@ -100,7 +99,6 @@ script Quest_HodouCityTunnels_Treasure_Script{
 
     msgbox(format("This must be the treasure! Ugh, do I have to find a key too?"),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
 
-
     msgbox(format("That won't be neccesary."),MSGBOX_DEFAULT)
     closemessage
 
@@ -112,25 +110,24 @@ script Quest_HodouCityTunnels_Treasure_Script{
     waitmovement(PLAYER)
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
     if (var(VAR_TEMP_0) != 6){
-        applymovement(PLAYER,Quest_HodouCityTunnels_MoveToTreasureFront_Movement)
+        applymovement(PLAYER, moves(walk_down, walk_right, step_end))
         waitmovement(PLAYER)
     }
     applymovement(PLAYER,Common_Movement_FaceDown)
     waitse
 
-    applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_WalkToPlayer_Movement)
+    applymovement(ELDEST_TUNNEL, moves(walk_up * 6, step_end))
     waitmovement(ELDEST_TUNNEL)
 
     msgbox(format("Thank you for dealing with those thugs. I was able to follow you inside."),MSGBOX_NPC,SPEAKER_DEFAULT)
 
     msgbox(format("No problem. This box is locked though. We have to find the key."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-
     msgbox(format("I may have mislead you. I'm sorry."),MSGBOX_NPC,SPEAKER_DEFAULT)
     closemessage
 
-    applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_TakeTreasure_Movement)
-    applymovement(PLAYER,Quest_HodouCityTunnels_MoveWhileTreasure_Movement)
+    applymovement(ELDEST_TUNNEL, moves(walk_up, walk_in_place_up, step_end))
+    applymovement(PLAYER, moves(walk_left, face_right, step_end))
     delay(16)
     delay(16)
     removeobject(TREASURE)
@@ -146,7 +143,6 @@ script Quest_HodouCityTunnels_Treasure_Script{
 
     msgbox(format("You had the key the entire time?"),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
 
-
     applymovement(ELDEST_TUNNEL,Common_Movement_FaceLeft)
 
     msgbox(format("I used to live here. I didn't dig this tunnel though - it was always here. I used it for storage away from my wife, haha! When I was drafted many years ago, I lost my home and while I was gone, I lost my family. When I returned, my home had been taken, and access to the tunnel was gone. My treasure is simple... photos of my family. Its all I have left of them."),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
@@ -157,7 +153,7 @@ script Quest_HodouCityTunnels_Treasure_Script{
 
     msgbox(format("I asked one of the children in town to post a story about hidden treasure, hoping somebody strong could help me get in here. I tried to reason with these thugs, but as you know, they don't like to listen. Your kindness will not be forgotten. Thank you so much, young Trainer."),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
     closemessage
-    applymovement(ELDEST_TUNNEL,Quest_HodouCityTunnels_LeaveTunnel_Movement)
+    applymovement(ELDEST_TUNNEL, moves(walk_down * 6, step_end))
     applymovement(PLAYER,Common_Movement_FaceDown)
     waitmovement(ELDEST_TUNNEL)
     removeobject(ELDEST_TUNNEL)
@@ -167,31 +163,3 @@ script Quest_HodouCityTunnels_Treasure_Script{
     end
 }
 
-movement Quest_HodouCityTunnels_PushScroll_Movement{
-    walk_in_place_up
-    emote_exclamation_mark
-    step_end
-}
-movement Quest_HodouCityTunnels_LeaveTunnel_Movement{
-    walk_down * 6
-    step_end
-}
-movement Quest_HodouCityTunnels_TakeTreasure_Movement{
-    walk_up
-    walk_in_place_up
-    step_end
-}
-movement Quest_HodouCityTunnels_WalkToPlayer_Movement{
-    walk_up * 6
-    step_end
-}
-movement Quest_HodouCityTunnels_MoveToTreasureFront_Movement{
-    walk_down
-    walk_right
-    step_end
-}
-movement Quest_HodouCityTunnels_MoveWhileTreasure_Movement{
-    walk_left
-    face_right
-    step_end
-}

@@ -13,7 +13,6 @@ script Battle8_StartBattle_ObjectSetUp_Script
     setobjectxy(KAI,19,16)
 }
 
-
 script Battle8_FaceGoToPlayer
 {
     lock
@@ -59,7 +58,7 @@ script Battle8_ExplainAttraction_Dialogue
 
         if (var(VAR_TEMP_0) == 26){
             closemessage
-                applymovement(KAI,Battle8_WalkToPlayer)
+                applymovement(KAI, moves(walk_right * 6, step_end))
                 waitmovement(0)
         }
 
@@ -83,7 +82,6 @@ script Battle8_StartBattle_Script
         faceplayer
         msgbox(format("You talk a lot of shit for somebody that's never beaten me."),,SPEAKER_ALICIA)
         closemessage
-
 
         trainerbattle_no_intro(TRAINER_KAI_BATTLE8,format("Maybe I need to get an SS Rank to keep up with you…"))
         goto(Battle8_KaiDefeated_Dialogue)
@@ -114,7 +112,7 @@ script Battle8_KaiDefeated_Dialogue
                 applymovement(PLAYER,Common_Movement_FaceUp)
         }
 
-    applymovement(KAI,Battle8_WalkToTheWest)
+    applymovement(KAI, moves(walk_left * 8, step_end))
         waitmovement(0)
         removeobject(KAI)
         fadedefaultbgm
@@ -134,16 +132,7 @@ movement Battle8_GetOutOfWay
     walk_right
         step_end
 }
-movement Battle8_WalkToPlayer
-{
-    walk_right * 6
-        step_end
-}
-movement Battle8_WalkToTheWest
-{
-    walk_left * 8
-        step_end
-}
+
 movement Battle8_ExclaimAndTurn_Movement
 {
     emote_exclamation_mark

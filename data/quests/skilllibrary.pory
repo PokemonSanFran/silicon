@@ -53,14 +53,14 @@ script Quest_Skilllibrary_NothingYet_Dialogue{
 }
 
 script Quest_Skilllibrary_CopyTM_Script{
-    applymovement(PERSON,Quest_Skilllibrary_WalkToMachine_Movement)
+    applymovement(PERSON, moves(walk_right * 2, face_up, delay_8, walk_in_place_up, step_end))
     waitmovement(PERSON)
     playse(SE_PC_LOGIN)
     waitse
-    applymovement(PERSON,Quest_Skilllibrary_PresentToPlayer_Movement)
+    applymovement(PERSON, moves(walk_in_place_down, step_end))
     waitmovement(PERSON)
     msgbox(format("Okay, done!"))
-    applymovement(PERSON,Quest_Skilllibrary_ReturnToPlayer)
+    applymovement(PERSON, moves(walk_left * 2, face_down, walk_in_place_down, step_end))
     waitmovement(PERSON)
 
     if (var(VAR_QUEST_SKILLLIBRARY_TM_COUNT) == 435){
@@ -90,23 +90,7 @@ script Quest_Skilllibrary_Completed_Dialogue{
     msgbox(format("Thanks again."),MSGBOX_NPC)
     end
 }
-movement Quest_Skilllibrary_WalkToMachine_Movement{
-    walk_right * 2
-    face_up
-    delay_8
-    walk_in_place_up
-	step_end
-}
-movement Quest_Skilllibrary_PresentToPlayer_Movement{
-    walk_in_place_down
-	step_end
-}
-movement Quest_Skilllibrary_ReturnToPlayer{
-    walk_left * 2
-    face_down
-    walk_in_place_down
-	step_end
-}
+
 text gText_Skilllibrary_WereBuilding{
 	format("We're building a library for Trainers! But without books.There are tons of Trainers that aren't competing in the League Challenge!")
 }

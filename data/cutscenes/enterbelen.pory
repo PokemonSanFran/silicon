@@ -28,16 +28,16 @@ script EnterBelen_PutMeatInOven_Dialogue {
 script EnterBelen_DetermineMovementToBattlefield_Script {
   getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
   if (var (VAR_TEMP_1) == 2) {
-    applymovement(BELEN, EnterBelen_WalkSouthToBattlefield)
+    applymovement(BELEN, moves(walk_down * 3, walk_left * 2, face_left, step_end))
 
     if (var (VAR_TEMP_0) == 7) {
-      applymovement(PLAYER, EnterBelen_PlayerWalkToBattlefieldFromLeft)
+      applymovement(PLAYER, moves(delay_16, delay_16, delay_16, walk_left * 4, walk_down * 3, face_right, step_end))
     } else {
-      applymovement(PLAYER, EnterBelen_PlayerWalkToBattlefieldFromRight)
+      applymovement(PLAYER, moves(delay_16, delay_16, delay_16, walk_left * 6, walk_down * 3, face_right, step_end))
     }
   } else {
-    applymovement(BELEN, EnterBelen_WalkWestToBattlefield)
-    applymovement(PLAYER, EnterBelen_PlayerWalkToBattlefieldFromDown)
+    applymovement(BELEN, moves(walk_left * 2, walk_down * 3, face_left, step_end))
+    applymovement(PLAYER, moves(delay_16, delay_16, delay_16, walk_left * 5, walk_down * 2, face_right, step_end))
   }
   waitmovement(0)
 }
@@ -116,9 +116,9 @@ script EnterBelen_DetermineMovementBackToStove_Script {
   getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
 
   if (var (VAR_TEMP_0) == 7) {
-    applymovement(BELEN, EnterBelen_WalkNorthBackToStove)
+    applymovement(BELEN, moves(emote_exclamation_mark, walk_up * 3, walk_right * 3, walk_right, face_up, walk_left, face_up, step_end))
   } else {
-    applymovement(BELEN, EnterBelen_WalkEastBackToStove)
+    applymovement(BELEN, moves(emote_exclamation_mark, walk_right * 3, walk_up * 3, walk_right, face_up, walk_left, face_up, step_end))
   }
 }
 
@@ -141,70 +141,5 @@ script EnterBelen_PostDefeat2_Dialogue {
     closemessage
   releaseall
   end
-}
-
-movement EnterBelen_WalkSouthToBattlefield {
-  walk_down * 3
-  walk_left * 2
-  face_left
-  step_end
-}
-
-movement EnterBelen_WalkWestToBattlefield {
-  walk_left * 2
-  walk_down * 3
-  face_left
-  step_end
-}
-movement EnterBelen_PlayerWalkToBattlefieldFromLeft {
-  delay_16
-  delay_16
-  delay_16
-  walk_left * 4
-  walk_down * 3
-  face_right
-  step_end
-}
-
-movement EnterBelen_PlayerWalkToBattlefieldFromDown {
-  delay_16
-  delay_16
-  delay_16
-  walk_left * 5
-  walk_down * 2
-  face_right
-  step_end
-}
-
-movement EnterBelen_PlayerWalkToBattlefieldFromRight {
-  delay_16
-  delay_16
-  delay_16
-  walk_left * 6
-  walk_down * 3
-  face_right
-  step_end
-}
-
-movement EnterBelen_WalkEastBackToStove {
-  emote_exclamation_mark
-  walk_right * 3
-  walk_up * 3
-  walk_right
-  face_up
-  walk_left
-  face_up
-  step_end
-}
-
-movement EnterBelen_WalkNorthBackToStove {
-  emote_exclamation_mark
-  walk_up * 3
-  walk_right * 3
-  walk_right
-  face_up
-  walk_left
-  face_up
-  step_end
 }
 

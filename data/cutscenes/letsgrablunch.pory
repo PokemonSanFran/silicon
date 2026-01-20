@@ -26,7 +26,7 @@ script LetsGrabLunch_StartConversation_Dialogue {
         addobject(KAI)
         playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
         applymovement(PLAYER,Common_Movement_FaceRight)
-        applymovement(KAI,LetsGrabLunch_WalkUpToPlayer)
+        applymovement(KAI, moves(walk_left * 7, step_end))
         waitmovement(0)
 
         msgbox(format("Huh. What are you doing here? Shouldn't you be busy?"),,SPEAKER_KAI)
@@ -53,7 +53,6 @@ script LetsGrabLunch_StartBattle_Script {
     lockall
         msgbox(format("But let's see how robbed I really was!"),,SPEAKER_KAI)
         closemessage
-
 
         trainerbattle_no_intro(TRAINER_KAI_LETSGRABLUNCH,format("Nah, not robbed at all. You're legit as fuck."))
         goto(LetsGrabLunch_PostBattle_Dialogue)
@@ -155,7 +154,6 @@ script LetsGrabLunch_ShowGymList_Dialogue{
         }
 }
 
-
 script LetsGrabLunch_CloseMenu{
 
     closemessage
@@ -235,7 +233,3 @@ script LetsGrabLunch_IncrementCount_Script{
         return
 }
 
-movement LetsGrabLunch_WalkUpToPlayer {
-    walk_left * 7
-        step_end
-}

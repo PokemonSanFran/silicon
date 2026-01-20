@@ -35,7 +35,7 @@ script Quest_Hiddengrottomapping_StartQuest_Dialogue{
     }
 
     lock
-    applymovement(PANNEN,Quest_Hiddengrottomapping_WalkToPlayer_Movement)
+    applymovement(PANNEN, moves(walk_down * 5, step_end))
     waitmovement(PANNEN)
     msgbox(format("Why hello there! Wasn't expecting to see another Trainer in here."),,SPEAKER_PANNEN)
     applymovement(PANNEN,Common_Movement_FaceUp)
@@ -44,7 +44,7 @@ script Quest_Hiddengrottomapping_StartQuest_Dialogue{
     waitmovement(PANNEN)
     msgbox(format("But nobody knows why they make them! That's what I research."),,SPEAKER_PANNEN)
     msgbox(format("I see you've got a phone, and if you're a Trainer, you're tracking battle data, right? Keep traveling the region. I think there are five different types of Hidden Grotto biomes in Resido... once you've been to them all, come to my house in HalerbaCity! I'll extract the data from your phone."),,SPEAKER_PANNEN)
-    applymovement(PANNEN,Quest_Hiddengrottomapping_LeaveGrotto_Movement)
+    applymovement(PANNEN, moves(walk_right, walk_down, step_end))
     fadescreen(FADE_TO_BLACK)
     startquest(QUEST_HIDDENGROTTOMAPPING)
     removeobject(PANNEN)
@@ -73,17 +73,6 @@ script Quest_Hiddengrottomapping_Reward_Dialogue{
     startquest(QUEST_HIDDENGROTTOMAPPING)
     closemessage
     end
-}
-
-movement Quest_Hiddengrottomapping_WalkToPlayer_Movement{
-    walk_down * 5
-    step_end
-}
-
-movement Quest_Hiddengrottomapping_LeaveGrotto_Movement{
-    walk_right
-    walk_down
-    step_end
 }
 
 script Quest_Hiddengrottomapping_Event_Script{
@@ -150,10 +139,10 @@ script Quest_Hiddengrottomapping_Reward_Script{
 script Quest_Hiddengrottomapping_TakeJournalPage_Script{
     msgbox(format("Oh! You have a page from his journal!"),,SPEAKER_NANCY)
     closemessage
-    applymovement(WIFE,Quest_Hiddengrottomapping_WalkToWall)
+    applymovement(WIFE, moves(walk_right * 2, walk_up * 2, face_down, step_end))
     waitmovement(WIFE)
     call(Quest_Hiddengrottomapping_CountSubquestsReward_Script)
-    applymovement(WIFE,Quest_Hiddengrottomapping_WalkToTable)
+    applymovement(WIFE, moves(walk_down * 2, walk_left * 2, face_down, step_end))
     waitmovement(WIFE)
     msgbox(format("I've translated the page for you, you can read it on the wall. Let me know if you make more progress!"),,SPEAKER_NANCY)
     closemessage
@@ -185,19 +174,5 @@ script Quest_Hiddengrottomapping_RemoveJournalPage3_Script{
             setflag(FLAG_HIDE_JOURNAL)
         }
     return
-}
-
-movement Quest_Hiddengrottomapping_WalkToWall{
-    walk_right * 2
-    walk_up * 2
-    face_down
-    step_end
-}
-
-movement Quest_Hiddengrottomapping_WalkToTable{
-    walk_down * 2
-    walk_left * 2
-    face_down
-    step_end
 }
 

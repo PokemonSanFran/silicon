@@ -69,14 +69,14 @@ script ThisIsntRandom_UnlockDoor_Dialogue
 
         closemessage
 
-        applymovement(KAI,ThisIsRandom_WalkDownStairsA)
+        applymovement(KAI, moves(walk_up * 2, walk_right, step_end))
         playse(SE_EXIT)
         waitse
 
-        applymovement(MAGNUS,ThisIsRandom_WalkDownStairsC)
+        applymovement(MAGNUS, moves(walk_up * 2, walk_left, step_end))
         playse(SE_EXIT)
         waitse
-        applymovement(ADAORA,ThisIsRandom_WalkDownStairsB)
+        applymovement(ADAORA, moves(walk_right, walk_up * 2, walk_left, step_end))
         playse(SE_EXIT)
         waitse
         waitmovement(ADAORA)
@@ -111,7 +111,7 @@ script ThisIsntRandom_UndergroundDoor_Dialogue
 
         closemessage
 
-        applymovement(MAGNUS,ThisIsntRandom_WalkToKeypad)
+        applymovement(MAGNUS, moves(walk_right * 4, walk_up, step_end))
         waitmovement(MAGNUS)
 
         playse(SE_DING_DONG)
@@ -128,7 +128,6 @@ script ThisIsntRandom_UndergroundDoor_Dialogue
         applymovement(MAGNUS,Common_Movement_FaceLeft)
         waitmovement(MAGNUS)
 
-
         msgbox(format("The second set of numbers was the door code."),,SPEAKER_MAGNUS)
 
         closemessage
@@ -143,9 +142,9 @@ script ThisIsntRandom_UndergroundDoor_Dialogue
 
         closemessage
 
-        applymovement(MAGNUS,ThisIsntRandom_WalkDownHallwayA)
-        applymovement(ADAORA,ThisIsntRandom_WalkDownHallwayB)
-        applymovement(KAI,ThisIsntRandom_WalkDownHallwayC)
+        applymovement(MAGNUS, moves(walk_right * 15, step_end))
+        applymovement(ADAORA, moves(walk_right * 20, step_end))
+        applymovement(KAI, moves(walk_down, walk_right * 18, step_end))
         waitmovement(KAI)
 
         setflag(FLAG_HIDE_SEARCH)
@@ -180,9 +179,9 @@ script ThisIsntRandom_WalkIntoLab_Dialogue
 
         closemessage
 
-        applymovement(KAI,ThisIsntRandom_WalkIntoLabA)
-        applymovement(MAGNUS,ThisIsntRandom_WalkIntoLabB)
-        applymovement(ADAORA,ThisIsntRandom_WalkIntoLabC)
+        applymovement(KAI, moves(walk_down, walk_left * 5, walk_left * 4, step_end))
+        applymovement(MAGNUS, moves(delay_16, walk_right * 7, delay_16, delay_16, step_end))
+        applymovement(ADAORA, moves(walk_down, walk_left * 4, face_down, delay_16, walk_down, walk_left * 4, step_end))
 
         waitmovement(ADAORA)
 
@@ -230,7 +229,6 @@ script ThisIsntRandom_StopProgress_Script
             case 0: msgbox(format("That Pokemon looks likes its in pain..."),,SPEAKER_ALICIA)
             case 1: msgbox(format("I wonder if I can help that Pokemon..."),,SPEAKER_ALICIA)
         }
-
 
     closemessage
 
@@ -346,7 +344,6 @@ script ThisIsntRandom_DefeatedSecond_Script
 
         msgbox(format("Wait... but they targeted HalaiIsland. Why attack innocent people?"),,SPEAKER_KAI_TIDE)
 
-
         msgbox(format("…Let’s keep going."),,SPEAKER_ADAORA)
 
         closemessage
@@ -356,64 +353,3 @@ script ThisIsntRandom_DefeatedSecond_Script
         end
 }
 
-movement ThisIsRandom_WalkDownStairsA {
-    walk_up * 2
-        walk_right
-        step_end
-}
-movement ThisIsRandom_WalkDownStairsB {
-    walk_right
-        walk_up * 2
-        walk_left
-        step_end
-}
-movement ThisIsRandom_WalkDownStairsC {
-    walk_up * 2
-        walk_left
-        step_end
-}
-
-movement ThisIsntRandom_WalkToKeypad {
-    walk_right * 4
-        walk_up
-        step_end
-}
-
-movement ThisIsntRandom_WalkDownHallwayA {
-    walk_right * 15
-        step_end
-}
-movement ThisIsntRandom_WalkDownHallwayB {
-    walk_right * 20
-        step_end
-}
-movement ThisIsntRandom_WalkDownHallwayC {
-    walk_down
-        walk_right * 18
-        step_end
-}
-
-movement ThisIsntRandom_WalkIntoLabA {
-    walk_down
-        walk_left * 5
-        walk_left * 4
-        step_end
-}
-
-movement ThisIsntRandom_WalkIntoLabB {
-    delay_16
-        walk_right * 7
-        delay_16
-        delay_16
-        step_end
-}
-
-movement ThisIsntRandom_WalkIntoLabC {
-    walk_down
-        walk_left * 4
-        face_down
-        delay_16
-        walk_down
-        walk_left * 4
-        step_end
-}

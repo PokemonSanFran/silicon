@@ -215,7 +215,6 @@ script Quest_Ultrawormholeresearch_StartTotemBattle_Script{
     end
 }
 
-
 script Quest_Ultrawormholeresearch_CaughtTotem_Script{
     special(Quest_Ultrawormholeresearch_SetDefeatedTotemFlag)
     //goto(Common_EventScript_RemoveStaticPokemon)

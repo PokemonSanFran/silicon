@@ -106,13 +106,13 @@ script LetsFinishThis_StartPlanning_Dialogue {
         closemessage
 
         applymovement(PLAYER, Common_Movement_FaceDown)
-        applymovement(ELLEN, LetsFinishThis_WalkToPlayer)
+        applymovement(ELLEN, moves(walk_right, face_up, step_end))
         waitmovement(ELLEN)
 
         msgbox(format("We’re onto something. You should go prepare! Once we start, I don’t think there’s any turning back. Meet us outside Ramesh’s house in QiuVillage."),,SPEAKER_ELLEN)
         closemessage
 
-        applymovement(ELLEN, LetsFinishThis_WalkAway)
+        applymovement(ELLEN, moves(walk_left, face_up, step_end))
         waitmovement(ELLEN)
 
         setvar(VAR_STORYLINE_STATE,STORY_BEFORE_RAMESH_BREAKIN)
@@ -124,14 +124,3 @@ script LetsFinishThis_StartPlanning_Dialogue {
         end
 }
 
-movement LetsFinishThis_WalkToPlayer {
-    walk_right
-        face_up
-        step_end
-}
-
-movement LetsFinishThis_WalkAway {
-    walk_left
-        face_up
-        step_end
-}

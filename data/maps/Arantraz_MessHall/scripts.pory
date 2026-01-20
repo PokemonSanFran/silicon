@@ -48,7 +48,6 @@ script Arantraz_MessHall_Tala_Event_Script {
     end
 }
 
-
 script Arantraz_MessHall_Magnus_Event_Script {
     lock
 
@@ -62,7 +61,6 @@ script Arantraz_MessHall_Magnus_Event_Script {
     release
     end
 }
-
 
 script Arantraz_MessHall_Armando_Event_Script {
     lock

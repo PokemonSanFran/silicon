@@ -32,14 +32,13 @@ script FriendsForDinner_WalkToKeiying_Script {
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         switch(var(VAR_TEMP_0)){
-            case 7: applymovement(PLAYER,FriendsForDinner_WalkFrom7)
-            case 8: applymovement(PLAYER,FriendsForDinner_WalkFrom8)
-            case 9: applymovement(PLAYER,FriendsForDinner_WalkFrom9)
-            case 10: applymovement(PLAYER,FriendsForDinner_WalkFrom10)
+            case 7: applymovement(PLAYER, moves(walk_up, face_left, step_end))
+            case 8: applymovement(PLAYER, moves(walk_up * 2, walk_left, step_end))
+            case 9: applymovement(PLAYER, moves(walk_up * 3, walk_left * 2, step_end))
+            case 10: applymovement(PLAYER, moves(walk_up * 4, walk_left * 3, step_end))
         }
     waitmovement(0)
 }
-
 
 script FriendsForDinner_Intro_Dialogue {
     //PSF TODO change this str_var the player's favorite food, which is defined in the character creation process
@@ -59,7 +58,7 @@ script FriendsForDinner_Intro_Dialogue {
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
 
-    applymovement(KEIYING,FriendsForDinner_KeiyingWalksToPlayer_Movement)
+    applymovement(KEIYING, moves(walk_right * 3, step_end))
     waitmovement(KEIYING)
 
         msgbox(format("Yeah, what's up?"),,SPEAKER_ALICIA)
@@ -133,48 +132,9 @@ script FriendsForDinner_WalkAway_Script {
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) == 6){
-            applymovement(KEIYING,FriendsForDinner_WalkAwayFrom6)
+            applymovement(KEIYING, moves(walk_right, walk_down * 6, step_end))
         } else {
-            applymovement(KEIYING,FriendsForDinner_WalkAwayFrom7)
+            applymovement(KEIYING, moves(walk_down * 6, step_end))
         }
 }
 
-movement FriendsForDinner_WalkFrom7 {
-    walk_up
-        face_left
-        step_end
-}
-
-movement FriendsForDinner_WalkFrom8 {
-    walk_up * 2
-        walk_left
-        step_end
-}
-
-movement FriendsForDinner_WalkFrom9 {
-    walk_up * 3
-        walk_left * 2
-        step_end
-}
-
-movement FriendsForDinner_WalkFrom10 {
-    walk_up * 4
-        walk_left * 3
-        step_end
-}
-
-movement FriendsForDinner_WalkAwayFrom6 {
-    walk_right
-        walk_down * 6
-        step_end
-}
-
-movement FriendsForDinner_WalkAwayFrom7 {
-    walk_down * 6
-        step_end
-}
-
-movement FriendsForDinner_KeiyingWalksToPlayer_Movement{
-    walk_right * 3
-    step_end
-}

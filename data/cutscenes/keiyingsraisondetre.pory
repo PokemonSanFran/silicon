@@ -36,13 +36,13 @@ script KeiyingRaisonDetre_KidsMeetPlayer_Dialogue {
         msgbox(format("…Alek, you're a freak."),,SPEAKER_SUMMER)
         closemessage
 
-        applymovement(ALEKSANDER, KeiyingRaisonDetre_RunAroundPlayer)
+        applymovement(ALEKSANDER, moves(jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, face_left, step_end))
 
         msgbox(format("Aren't you excited Summer?! Maybe they'll sign your {PLAYER} shirt! "),,SPEAKER_ALEKSANDER)
         msgbox(format("…shut up!"),,SPEAKER_SUMMER)
         msgbox(format("Oh oh oh, show us how you took down Belen! Can we see some battle moves? Oh come on yes, let's battle, right now, yeah yeah yeah!"),,SPEAKER_ALEKSANDER)
         msgbox(format("All right, all right, calm down. I told you you'd have to stifle your excitement, didn't I?"),,SPEAKER_KEIYING)
-        applymovement(KEIYING, KeiyingRaisonDetre_WalkIntoFoyer)
+        applymovement(KEIYING, moves(walk_down * 4, step_end))
         msgbox(format("You don't want to scare {PLAYER} away, do you?"),,SPEAKER_KEIYING)
         msgbox(format("No no no! Oh, I'm gonna go get all my League stuff, I'll be right back!"),,SPEAKER_ALEKSANDER)
         closemessage
@@ -62,7 +62,7 @@ script KeiyingRaisonDetre_KidsMeetPlayer_Dialogue {
 }
 
 script KeiyingRaisonDetre_CityDiscussion_Dialogue {
-    applymovement(PLAYER, KeiyingRaisonDetre_WalkFromEntrance)
+    applymovement(PLAYER, moves(walk_up, walk_left * 2, walk_up, step_end))
         waitmovement(0)
         msgbox(format("Your house is beautiful. Actually, the entire city is beautiful."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
@@ -79,12 +79,12 @@ script KeiyingRaisonDetre_CityDiscussion_Dialogue {
         msgbox(format("I completely understand, trust me. When I worked in HodouCity, it wasn't this bad, but despite my best efforts, things have gotten worse."),,SPEAKER_KEIYING)
         closemessage
 
-        applymovement(KEIYING, KeiyingRaisonDetre_WalkTowardsLiving)
+        applymovement(KEIYING, moves(walk_up, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("Come, let's talk."),,SPEAKER_KEIYING)
         closemessage
-        applymovement(KEIYING, KeiyingRaisonDetre_WalkToDining)
+        applymovement(KEIYING, moves(walk_left * 8, step_end))
         waitmovement(0)
         setobjectxy(KEIYING, 3, 4)
         setobjectxyperm(KEIYING, 3, 4)
@@ -155,7 +155,7 @@ script KeiyingRaisonDetre_Wine_Dialogue {
 
         msgbox(format("Ah, let's eat!"),,SPEAKER_KEIYING)
         closemessage
-        applymovement(KEIYING, WalkToDiningRoom)
+        applymovement(KEIYING, moves(walk_down * 6, step_end))
         waitmovement(0)
         release
         setobjectxy(KEIYING, 37, 5)
@@ -170,9 +170,9 @@ script KeiyingRaisonDetre_StartDinner_Script {
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
 
         if (var (VAR_TEMP_0) == 36) {
-            applymovement(PLAYER, WalkToTableFromLeft)
+            applymovement(PLAYER, moves(walk_up, walk_right * 9, walk_up * 4, face_left, step_end))
         } else {
-            applymovement(PLAYER, WalkToTableFromRight)
+            applymovement(PLAYER, moves(walk_up, walk_right * 8, walk_up * 4, face_left, step_end))
         }
     waitmovement(0)
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
@@ -198,7 +198,7 @@ script KeiyingRaisonDetre_DinnerConversation_Dialogue {
         special(TeleportCamera)
         special(DrawWholeMapView)
         fadescreen(FADE_FROM_BLACK)
-        applymovement(CAMERA, KeiyingRaisonDetre_PanCamera)
+        applymovement(CAMERA, moves(walk_slow_right * 6, step_end))
         msgbox(format("Is it true your dad is Red from Pallet Town?"),,SPEAKER_ALEKSANDER)
         closemessage
         msgbox(format("How many badges did you have in Orre?"),,SPEAKER_ALEKSANDER)
@@ -223,7 +223,7 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
 
     msgbox(format("Sorry, that's my phone and I need to take that."),,SPEAKER_KEIYING)
         closemessage
-        applymovement(KEIYING, KeiyingRaisonDetre_StepAwayFromTable)
+        applymovement(KEIYING, moves(walk_left, step_end))
         waitmovement(0)
         applymovement(KEIYING, Common_Movement_FaceLeft)
         waitmovement(0)
@@ -235,7 +235,7 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
         msgbox(format("Oh, that would be great, thanks!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
         closemessage
 
-        applymovement(KEIYING, KeiyingRaisonDetre_KissKids)
+        applymovement(KEIYING, moves(walk_down * 3, walk_right * 5, walk_up, walk_in_place_slow_left, delay_16, walk_in_place_slow_right, delay_16, walk_down, walk_left * 6, step_end))
         waitmovement(0)
 
         msgbox(format("Wait, I thought that hallway just goes upstairs?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -249,7 +249,7 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
 
         msgbox(format("I don't know why they bother. Our parents are never even home. They're trying so hard to save the world, they're totally ignoring the one right in front of them.\NI wish he would go back to being a Gym Leader!"),,SPEAKER_SUMMER)
         closemessage
-        applymovement(SUMMER, KeiyingRaisonDetre_LeaveDiningRoom)
+        applymovement(SUMMER, moves(walk_down, walk_left * 5, step_end))
         waitmovement(0)
         fadescreen(FADE_TO_BLACK)
         removeobject(SUMMER)
@@ -275,7 +275,7 @@ script KeiyingRaisonDetre_NewsStory_Script {
         msgbox(format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing TheTide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour."),,SPEAKER_NEWS)
         closemessage
         special(TurnOffTVScreen)
-        applymovement(4, WalkToThePlayer)
+        applymovement(4, moves(walk_right, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("Is there anything else I can get you, Lord {PLAYER}?"),,SPEAKER_MAID)
@@ -286,7 +286,7 @@ script KeiyingRaisonDetre_NewsStory_Script {
 
         msgbox(format("I'm sorry. My… son is in the ICU after the riots last night. TheTide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_MAID)
         closemessage
-        applymovement(CRYING_MAID, KeiyingRaisonDetre_LeaveDiningRoomCrying)
+        applymovement(CRYING_MAID, moves(walk_up * 2, walk_faster_left * 8))
         waitmovement(0)
         removeobject(CRYING_MAID)
         removeobject(KEIYING)
@@ -315,110 +315,8 @@ movement KeiyingRaisonDetre_ComeDownStairs {
         step_end
 }
 
-movement KeiyingRaisonDetre_RunAroundPlayer {
-    jump_2_left
-        jump_2_right
-        jump_2_left
-        jump_2_right
-        jump_2_left
-        jump_2_right
-        jump_2_left
-        jump_2_right
-        jump_2_left
-        jump_2_right
-        jump_2_left
-        jump_2_right
-        jump_2_left
-        jump_2_right
-        face_left
-        step_end
-}
-
-movement KeiyingRaisonDetre_WalkIntoFoyer {
-    walk_down * 4
-        step_end
-}
-
 movement KeiyingRaisonDetre_RunUpstairs {
     walk_up * 7
         step_end
 }
 
-movement KeiyingRaisonDetre_WalkFromEntrance {
-    walk_up
-        walk_left * 2
-        walk_up
-        step_end
-}
-
-movement KeiyingRaisonDetre_WalkTowardsLiving {
-    walk_up
-        face_down
-        step_end
-}
-
-movement KeiyingRaisonDetre_WalkToDining {
-    walk_left * 8
-        step_end
-}
-
-movement WalkToDiningRoom {
-    walk_down * 6
-        step_end
-}
-
-movement WalkToTableFromLeft {
-    walk_up
-        walk_right * 9
-        walk_up * 4
-        face_left
-        step_end
-}
-
-movement WalkToTableFromRight {
-    walk_up
-        walk_right * 8
-        walk_up * 4
-        face_left
-        step_end
-}
-
-movement KeiyingRaisonDetre_PanCamera {
-    walk_slow_right * 6
-        step_end
-}
-
-movement KeiyingRaisonDetre_StepAwayFromTable {
-    walk_left
-        step_end
-}
-
-movement KeiyingRaisonDetre_KissKids {
-    walk_down * 3
-        walk_right * 5
-        walk_up
-        walk_in_place_slow_left
-        delay_16
-        walk_in_place_slow_right
-        delay_16
-        walk_down
-        walk_left * 6
-        step_end
-}
-
-movement KeiyingRaisonDetre_LeaveDiningRoom {
-    walk_down
-        walk_left * 5
-        step_end
-}
-
-movement WalkToThePlayer {
-    walk_right
-        face_down
-        step_end
-}
-
-movement KeiyingRaisonDetre_LeaveDiningRoomCrying {
-    walk_up * 2
-        walk_faster_left * 8
-}

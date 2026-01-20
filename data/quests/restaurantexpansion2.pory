@@ -34,13 +34,11 @@ script Quest_Restaurantexpansion2_HideEmployees_Script{
             setflag(FLAG_HIDE_HOSTESS)
         }
 
-
     subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_2)
         if (!var(VAR_RESULT))
         {
             setflag(FLAG_HIDE_CHEF)
         }
-
 
     subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_3)
         if (!var(VAR_RESULT))
@@ -48,13 +46,11 @@ script Quest_Restaurantexpansion2_HideEmployees_Script{
             setflag(FLAG_HIDE_JAINTOR)
         }
 
-
     subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_4)
         if (!var(VAR_RESULT))
         {
             setflag(FLAG_HIDE_BUSSER)
         }
-
 
     subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_5)
         if (!var(VAR_RESULT))
@@ -108,7 +104,6 @@ script Quest_Restaurantexpansion2_HideStaffE_Script{
         }
     return
 }
-
 
 script Quest_Restaurantexpansion2_RemoveStaff_Script{
     closemessage

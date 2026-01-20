@@ -151,7 +151,6 @@ script Quest_Inversehallucinogenic_PostBattle_Script{
     fadescreen(FADE_FROM_BLACK)
     msgbox(format("Ugh man, I don't feel so good. What a wild trip! Thanks for your help testing, I'll review the footage later. Here, take this!"),,SPEAKER_BD)
 
-
     giveitem(ITEM_TM42)
     msgbox(format("Hopefully I wasn't too chatty... I have a lot of work before I test that variant again. Come back another day, though, maybe we can rematch again."),,SPEAKER_BD)
     completequest(QUEST_INVERSEHALLUCINOGENIC)

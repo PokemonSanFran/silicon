@@ -35,13 +35,13 @@ script GroupStages_Skybox_ObjectSetup_Script {
 script GroupStages_GreetBeforeStart_Dialogue {
     lock
         playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
-        applymovement(CHARLOTTE,GroupStages_WalkToPlayer)
+        applymovement(CHARLOTTE, moves(walk_down * 6, face_left, step_end))
         waitmovement(CHARLOTTE)
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
         msgbox(format("Easy peasy! Good luck in there!"),,SPEAKER_CHARLOTTE)
         closemessage
-        applymovement(CHARLOTTE,GroupStages_LeaveLockers)
+        applymovement(CHARLOTTE, moves(walk_in_place_down, step_end))
         waitmovement(CHARLOTTE)
         playse(SE_EXIT)
         waitse
@@ -88,9 +88,9 @@ script GroupStages_MoveObjects_Script {
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         switch(var(VAR_TEMP_0)){
-            case 9:applymovement(PLAYER,GroupStages_PlayerLeaveLockers_Left)
-            case 10: applymovement(PLAYER,GroupStages_PlayerLeaveLockers)
-            case 11:applymovement(PLAYER,GroupStages_PlayerLeaveLockers_Right)
+            case 9:applymovement(PLAYER, moves(walk_right, walk_up, step_end))
+            case 10: applymovement(PLAYER, moves(walk_up * 2, step_end))
+            case 11:applymovement(PLAYER, moves(walk_left, walk_up, step_end))
         }
 
     waitmovement(PLAYER)
@@ -141,8 +141,8 @@ script GroupStages_PostRoundRobinMatch_Script {
     msgbox(format("this is placeholder text."),,SPEAKER_ANNOUNCER)
         closemessage
 
-        applymovement(PLAYER,GroupStages_GetPlayerIntoPosition)
-        applymovement(ENTRANT,GroupStages_WalkOffStage)
+        applymovement(PLAYER, moves(walk_left, face_right, step_end))
+        applymovement(ENTRANT, moves(walk_right * 2, step_end))
         waitmovement(ENTRANT)
         msgbox(format("this is placeholder text."),,SPEAKER_ANNOUNCER)
         call(GroupStages_ChooseParty_Script)
@@ -154,7 +154,6 @@ script GroupStages_PostRoundRobinMatch_Script {
         goto(GroupStages_RoundRobinMatch_Script)
 }
 
-
 script GroupStages_RoundRobinGroupComplete_Script {
         setvar(VAR_STORYLINE_STATE,STORY_GROUP_STATE_COMPLETE)
         applymovement(PLAYER,GroupStages_WalkToCenterStage)
@@ -165,46 +164,6 @@ script GroupStages_RoundRobinGroupComplete_Script {
         waitse
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,10,3)
-}
-
-
-movement GroupStages_WalkToPlayer {
-    walk_down * 6
-        face_left
-        step_end
-}
-
-movement GroupStages_LeaveLockers {
-    walk_in_place_down
-        step_end
-}
-
-movement GroupStages_PlayerLeaveLockers {
-    walk_up * 2
-        step_end
-}
-
-movement GroupStages_PlayerLeaveLockers_Left {
-    walk_right
-        walk_up
-        step_end
-}
-
-movement GroupStages_PlayerLeaveLockers_Right {
-    walk_left
-        walk_up
-        step_end
-}
-
-movement GroupStages_WalkOffStage {
-    walk_right * 2
-        step_end
-}
-
-movement GroupStages_GetPlayerIntoPosition {
-    walk_left
-        face_right
-        step_end
 }
 
 movement GroupStages_WalkToCenterStage {

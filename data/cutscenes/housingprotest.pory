@@ -133,7 +133,7 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     waitmovement(0)
     msgbox(format("The only thing we're understanding is that you need to leave, and take your fancy apartments with you!"),,SPEAKER_RABIA)
     closemessage
-    applymovement(LANDLORD, HousingProtest_BackUp)
+    applymovement(LANDLORD, moves(lock_facing_direction, walk_slow_up, delay_16, unlock_facing_direction, step_end))
     waitmovement(0)
     msgbox(format("Are you trying to intimidate me? I'm just doing my job. Don't make me call the police!"),,SPEAKER_LANDLORD)
     msgbox(format("They can't arrest of all us, right?"),,SPEAKER_RABIA)
@@ -176,8 +176,8 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     msgbox(format("I don't care if you're the landlord or working for the landlord, and I promise if you don't get out of the way, we're gonna have a problem."),,SPEAKER_VITOMIR)
     msgbox(format("Cut it out!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
-    applymovement(PLAYER, HousingProtest_DefendLandlord)
-    applymovement(LANDLORD, HousingProtest_StepAside)
+    applymovement(PLAYER, moves(walk_left * 3, face_down, step_end))
+    applymovement(LANDLORD, moves(walk_left, face_down, step_end))
     waitmovement(0)
     msgbox(format("Every time I see you guys, you're attacking innocent people. Don't you have something more productive to do?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("Innocent? These clowns?! Damn, you transplants really got it twisted."),,SPEAKER_RABIA)
@@ -307,26 +307,6 @@ movement HousingProtest_WalkPlayer4Left {
 
 movement HousingProtest_ApproachLandlord {
     walk_up * 4
-    step_end
-}
-
-movement HousingProtest_BackUp {
-    lock_facing_direction
-    walk_slow_up
-    delay_16
-    unlock_facing_direction
-    step_end
-}
-
-movement HousingProtest_DefendLandlord {
-    walk_left * 3
-    face_down
-    step_end
-}
-
-movement HousingProtest_StepAside {
-    walk_left
-    face_down
     step_end
 }
 

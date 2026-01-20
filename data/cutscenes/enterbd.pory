@@ -27,13 +27,13 @@ script EnterBD_MumbleToSelf_Dialogue {
     setvar(VAR_GYM_7_STATE, GYM_SAVE_BEFORE_LEADER)
     msgbox(format("stupid fucking parade…"),,SPEAKER_BD,TAIL_WHISPER)
     closemessage
-        applymovement(BD, EnterBD_PaceLeftFrontOfDesk)
+        applymovement(BD, moves(walk_right * 3, face_up, step_end))
     waitmovement(0)
 
     msgbox(format("They just don't understand… SharpRise was going to own this place, one way or another. We were never going to win. I made sure that Tirabudin Gym kept its Gym! And what, I'm a traitor because I kept my job? Got paid?"),,SPEAKER_BD,TAIL_WHISPER)
     closemessage
 
-    applymovement(BD, EnterBD_PaceRightFrontOfDesk)
+    applymovement(BD, moves(walk_left * 3, face_up, step_end))
     waitmovement(0)
 
     msgbox(format("Hey, you seem busy, but are you BD?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -48,7 +48,7 @@ script EnterBD_MumbleToSelf_Dialogue {
     msgbox(format("! Shit. Shit shit shit hi, are you a challenger? Hold on yeah, hold on. NOPE, not doing this sober, hold on… Lemme just…"), MSGBOX_NPC,SPEAKER_BD)
     closemessage
 
-    applymovement(BD, EnterBD_TakeDrugs)
+    applymovement(BD, moves(walk_left, walk_in_place_slow_up, delay_16, walk_down, walk_right, step_end))
     waitmovement(BD)
     applymovement(PLAYER,Common_Movement_WalkLeft)
     waitmovement(PLAYER)
@@ -88,39 +88,39 @@ script EnterBD_CalculateMovement_Script {
 
 script EnterBD_PlayerPosition8 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom8)
+    applymovement(PLAYER, moves(walk_left * 1, walk_down * 4, step_end))
 }
 script EnterBD_PlayerPosition9 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom9)
+    applymovement(PLAYER, moves(walk_left * 2, walk_down * 3, step_end))
 }
 script EnterBD_PlayerPosition10 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom10)
+    applymovement(PLAYER, moves(walk_left * 3, walk_down * 3, step_end))
 }
 script EnterBD_PlayerPosition11 {
-    applymovement(BD, EnterBD_BD_WalkAroundToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom11)
+    applymovement(BD, moves(walk_left * 3, walk_down * 3, walk_left, step_end))
+    applymovement(PLAYER, moves(walk_left * 4, walk_down * 3, step_end))
 }
 script EnterBD_PlayerPosition12 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom12)
+    applymovement(PLAYER, moves(walk_left * 5, walk_down * 3, step_end))
 }
 script EnterBD_PlayerPosition13 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom13)
+    applymovement(PLAYER, moves(walk_left * 6, walk_down * 3, step_end))
 }
 script EnterBD_PlayerPosition14 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom14)
+    applymovement(PLAYER, moves(walk_left * 7, walk_down * 3, step_end))
 }
 script EnterBD_PlayerPosition15 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom15)
+    applymovement(PLAYER, moves(walk_left * 8, walk_down * 3, step_end))
 }
 script EnterBD_PlayerPosition16 {
     applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, EnterBD_MovePlayerFrom16)
+    applymovement(PLAYER, moves(walk_left * 9, walk_down * 3, step_end))
 }
 
 script EnterPsf7leader_ExplainLab_Dialogue {
@@ -161,9 +161,9 @@ script EnterBD_MoveBacktoDesk_Script {
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
 
     if (var (VAR_TEMP_0) != 12) {
-        applymovement(BD, EnterBD_WalkBackToDesk)
+        applymovement(BD, moves(walk_right * 4, walk_up * 4, step_end))
     } else {
-        applymovement(BD, EnterBD_WalkAroundBackToDesk)
+        applymovement(BD, moves(walk_up * 4, walk_right * 4, face_up, step_end))
     }
 }
 
@@ -186,93 +186,10 @@ script EnterBD_PostDefeat2_Dialogue {
     end
 }
 
-movement EnterBD_PaceLeftFrontOfDesk {
-    walk_right * 3
-    face_up
-    step_end
-}
-
-movement EnterBD_PaceRightFrontOfDesk {
-    walk_left * 3
-    face_up
-    step_end
-}
-
-movement EnterBD_TakeDrugs {
-    walk_left
-    walk_in_place_slow_up
-    delay_16
-    walk_down
-    walk_right
-    step_end
-}
-
 movement EnterBD_BD_WalkToBattlefield {
     walk_left * 2
     walk_down * 4
     face_left
     step_end
 }
-movement EnterBD_MovePlayerFrom8 {
-    walk_left * 1
-    walk_down * 4
-    step_end
-}
-movement EnterBD_MovePlayerFrom9 {
-    walk_left * 2
-    walk_down * 3
-    step_end
-}
-movement EnterBD_MovePlayerFrom10 {
-    walk_left * 3
-    walk_down * 3
-    step_end
-}
-movement EnterBD_MovePlayerFrom11 {
-    walk_left * 4
-    walk_down * 3
-    step_end
-}
-movement EnterBD_MovePlayerFrom12 {
-    walk_left * 5
-    walk_down * 3
-    step_end
-}
-movement EnterBD_MovePlayerFrom13 {
-    walk_left * 6
-    walk_down * 3
-    step_end
-}
-movement EnterBD_MovePlayerFrom14 {
-    walk_left * 7
-    walk_down * 3
-    step_end
-}
-movement EnterBD_MovePlayerFrom15 {
-    walk_left * 8
-    walk_down * 3
-    step_end
-}
-movement EnterBD_MovePlayerFrom16 {
-    walk_left * 9
-    walk_down * 3
-    step_end
-}
-movement EnterBD_BD_WalkAroundToBattlefield {
-    walk_left * 3
-    walk_down * 3
-    walk_left
-    step_end
-}
-movement EnterBD_WalkBackToDesk {
-    walk_right * 4
-    walk_up * 4
-    step_end
-}
 
-movement EnterBD_WalkAroundBackToDesk {
-    walk_up * 4
-    walk_right * 4
-    face_up
-    step_end
-}

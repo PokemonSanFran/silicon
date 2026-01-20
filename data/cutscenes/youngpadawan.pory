@@ -6,7 +6,7 @@ script YoungPadawan_Intro_Dialogue
     lock
     spawnobject(graphicsId=OBJ_EVENT_GFX_SIDNEY,localId=TALA,x=28,y=60,movementType=MOVEMENT_TYPE_FACE_UP, elevation=3)
     playbgm(MUS_ENCOUNTER_ELITE_FOUR,TRUE)
-    applymovement(TALA,YoungPadawan_ApproachFromIsland_Movement)
+    applymovement(TALA, moves(walk_right * 8, step_end))
     waitmovement(TALA)
 
     applymovement(PLAYER,Common_Movement_FaceLeft)
@@ -23,7 +23,7 @@ script YoungPadawan_Intro_Dialogue
 
     closemessage
 
-    applymovement(TALA,YoungPadawan_LookAtOcean_Movement)
+    applymovement(TALA, moves(walk_up * 3, walk_right * 2, step_end))
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(TALA)
 
@@ -37,7 +37,7 @@ script YoungPadawan_Intro_Dialogue
 
     closemessage
 
-    applymovement(TALA,YoungPadawan_WalkBackToPlayer_Movement)
+    applymovement(TALA, moves(walk_left * 2, walk_down * 3, face_right, step_end))
     waitmovement(TALA)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
@@ -113,7 +113,7 @@ script YoungPadawan_PostBattle_Dialogue
 
     closemessage
 
-    applymovement(TALA,YoungPadawan_WalkUpStairs_Movement)
+    applymovement(TALA, moves(walk_up * 7, step_end))
     waitmovement(TALA)
     fadedefaultbgm
     removeobject(TALA)
@@ -125,28 +125,10 @@ script YoungPadawan_PostBattle_Dialogue
     end
 }
 
-movement YoungPadawan_ApproachFromIsland_Movement {
-        walk_right * 8
-        step_end
-}
 movement YoungPadawan_StepDownWalkBeside_Movement {
 
     walk_down
         face_left
         step_end
 }
-movement YoungPadawan_LookAtOcean_Movement {
-        walk_up * 3
-        walk_right * 2
-        step_end
-}
-movement YoungPadawan_WalkBackToPlayer_Movement {
-        walk_left * 2
-        walk_down * 3
-        face_right
-        step_end
-}
-movement YoungPadawan_WalkUpStairs_Movement {
-    walk_up * 7
-        step_end
-}
+

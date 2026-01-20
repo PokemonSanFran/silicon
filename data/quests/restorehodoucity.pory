@@ -172,7 +172,6 @@ script Quest_Restorehodoucity_HideBlackbelt_Route7_Script{
     return
 }
 
-
 script Quest_Restorehodoucity_HideBlackbelt_Route14_Script{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
         if (var(VAR_RESULT)){
@@ -225,7 +224,7 @@ script Quest_Restorehodoucity_PewfatWalkInside_Script{
         delay(30)
         opendoor(22,3)
         applymovement(KEVIN_HODOU_CITY,Common_Movement_WalkUp)
-        applymovement(ZAC_HODOU_CITY,Quest_Restorehodoucity_WalkInside_Movement)
+        applymovement(ZAC_HODOU_CITY, moves(walk_right, walk_up, step_end))
         waitmovement(ZAC_HODOU_CITY)
         playse(SE_EXIT)
         waitse
@@ -347,7 +346,6 @@ script Quest_Restorehodoucity_Kevin_WaitingBlackbelt_Dialogue{
     msgbox(format("Did you find all the black belts? I think they're on Route 8, Route 1, Gldgtewilds, Route 12, Route 72, Route 17, and Route 43."),MSGBOX_AUTOCLOSE)
 }
 
-
 script Quest_Restorehodoucity_Waiting_DialogueA_Script{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
     release
@@ -458,11 +456,6 @@ script Quest_Restorehodoucity_Kevin_Complete_Dialogue{
 }
 script Quest_Restorehodoucity_James_Complete_Dialogue{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-}
-movement Quest_Restorehodoucity_WalkInside_Movement{
-    walk_right
-        walk_up
-        step_end
 }
 
 movement Quest_Restorehodoucity_ExclaimLookDown_Movement{

@@ -246,7 +246,7 @@ script Quest_BuildingAnExhibit_Reward_Dialogue{
     msgbox(format("I'll see you around"))
     closemessage
 
-    applymovement(EMRYS,Quest_BuildingAnExhibit_WalkAway_Movement)
+    applymovement(EMRYS, moves(walk_right * 6, step_end))
     waitmovement(EMRYS)
     removeobject(EMRYS)
     setvar(VAR_EMRYS_STATE, QUEST_2_COMPLETE)
@@ -256,7 +256,3 @@ script Quest_BuildingAnExhibit_Reward_Dialogue{
     end
 }
 
-movement Quest_BuildingAnExhibit_WalkAway_Movement{
-    walk_right * 6
-    step_end
-}

@@ -24,7 +24,6 @@ const FLAG_HIDE_CHARLOTTE_ARANTRAZ = FLAG_TEMP_6
 const FLAG_HIDE_POLICE = FLAG_TEMP_7
 const FLAG_HIDE_KAI_ARANTRAZ = FLAG_TEMP_5
 
-
 script LetsBurnThisMotherDown_ObjectShow_Script
 {
     clearflag(FLAG_HIDE_KAI_ARANTRAZ)
@@ -123,7 +122,7 @@ script LetsBurnThisMotherDown_ConfrontPlayer
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
 
     applymovement(PLAYER,Common_Movement_WalkUp)
-    applymovement(KAI,LetsBurnThisMotherDown_WalkTowardsPlayer)
+    applymovement(KAI, moves(walk_down * 3))
     waitmovement(0)
 
     msgbox(format("You chose the wrong side {PLAYER}!"),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
@@ -183,7 +182,7 @@ script LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script
 
     if (var(VAR_TEMP_0) != 1)
     {
-        applymovement(PLAYER,LetsBurnThisMotherDown_WalkFromRight)
+        applymovement(PLAYER, moves(walk_down, walk_left, face_up))
     }
     elif (var(VAR_TEMP_1) == 9)
     {
@@ -191,7 +190,7 @@ script LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script
     }
     else
     {
-        applymovement(PLAYER,LetsBurnThisMotherDown_WalkFromUp)
+        applymovement(PLAYER, moves(walk_right, walk_down * 2, walk_left, face_up))
     }
     waitmovement(0)
 }
@@ -213,7 +212,7 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     setvar(VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_KAI_ARANTRAZ)
     questmenu(QUEST_MENU_SET_REWARD,QUEST_LETSBURNTHISMOTHERDOWN)
 
-    applymovement(KAI,LetsBurnThisMotherDown_WalkBackwards)
+    applymovement(KAI, moves(lock_facing_direction, walk_up, unlock_facing_direction))
     waitmovement(0)
 
     buffermovename(STR_VAR_1,MOVE_ARMOR_CANNON)
@@ -223,14 +222,14 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     playse(SE_M_HYPER_BEAM) //PSF TODO update to use armor cannon once that attack anim exists
     waitse
     fadescreen(FADE_TO_WHITE)
-    applymovement(KAI,LetsBurnThisMotherDown_HitByHyperBeam)
+    applymovement(KAI, moves(walk_up, walk_right))
     waitmovement(0)
     fadescreen(FADE_FROM_WHITE)
 
     clearflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
     addobject(CHARLOTTE_ARANTRAZ)
     playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
-    applymovement(6,LetsBurnThisMotherDown_Attack)
+    applymovement(6, moves(walk_down * 4))
     waitmovement(0)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
@@ -273,8 +272,8 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     clearflag(FLAG_HIDE_POLICE)
     addobject(POLICE_A)
     addobject(POLICE_B)
-    applymovement(POLICE_A,LetsBurnThisMotherDown_ArrestA)
-    applymovement(POLICE_B,LetsBurnThisMotherDown_ArrestB)
+    applymovement(POLICE_A, moves(walk_down))
+    applymovement(POLICE_B, moves(walk_down, walk_left, walk_down, face_right))
     waitmovement(0)
 
     fadedefaultbgm
@@ -353,7 +352,7 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
 
     closemessage
     addvar(VAR_STORYLINE_STATE,1)
-    applymovement(ADELAIDE,LetsBurnThisMotherDown_LeaveRoom)
+    applymovement(ADELAIDE, moves(walk_down * 6))
     waitmovement(ADELAIDE)
     call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
     completequest(QUEST_LETSBURNTHISMOTHERDOWN)
@@ -363,61 +362,5 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     release
     call(ExhibitionBattle_TimeSkip_Script)
     end
-}
-
-movement LetsBurnThisMotherDown_WalkTowardsPlayer
-{
-    walk_down * 3
-}
-
-movement LetsBurnThisMotherDown_WalkBackwards
-{
-    lock_facing_direction
-    walk_up
-    unlock_facing_direction
-}
-
-movement LetsBurnThisMotherDown_HitByHyperBeam
-{
-    walk_up
-    walk_right
-}
-
-movement LetsBurnThisMotherDown_Attack
-{
-    walk_down * 4
-}
-
-movement LetsBurnThisMotherDown_ArrestA
-{
-    walk_down
-}
-
-movement LetsBurnThisMotherDown_ArrestB
-{
-    walk_down
-    walk_left
-    walk_down
-    face_right
-}
-
-movement LetsBurnThisMotherDown_WalkFromRight
-{
-    walk_down
-    walk_left
-    face_up
-}
-
-movement LetsBurnThisMotherDown_WalkFromUp
-{
-    walk_right
-    walk_down * 2
-    walk_left
-    face_up
-}
-
-movement LetsBurnThisMotherDown_LeaveRoom
-{
-    walk_down * 6
 }
 

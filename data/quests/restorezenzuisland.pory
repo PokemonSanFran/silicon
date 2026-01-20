@@ -72,7 +72,6 @@ script Restorezenzugym_PostBattle_Dialogue{
 
         msgbox(gText_ExpandedPlaceholder_Empty,,SPEAKER_DOYLE)
 
-
         startquest(QUEST_RESTOREZENZUGYM)
         call(Quest_Restorezenzugym_Debug_Script)
 }

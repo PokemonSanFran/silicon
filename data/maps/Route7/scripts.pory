@@ -4,7 +4,6 @@ mapscripts Route7_MapScripts{
     }
 }
 
-
 script Route7_EventScript_BlackbeltC{
     trainerbattle_single(TRAINER_BLACKBELT_C,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
 

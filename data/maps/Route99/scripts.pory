@@ -9,7 +9,6 @@ mapscripts Route99_MapScripts {
     }
 }
 
-
 script Route99_MapScripts_OnResume {
         if (defeated(TRAINER_HOUSINGPROTEST_ROCKET)){
             goto(HousingProtest_CleanUp_Script)

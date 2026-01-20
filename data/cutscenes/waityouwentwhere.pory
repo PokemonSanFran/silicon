@@ -38,9 +38,9 @@ script WaitYouWentWhere_PlayerSetUp_Script {
 
         //If player is not standing on the right side, move player there
         if (var(VAR_TEMP_1) == 1){
-            applymovement(PLAYER, WaitYouWentWhere_PlayerFromSouth)
+            applymovement(PLAYER, moves(walk_right, walk_up, face_left, step_end))
         } elif (var(VAR_TEMP_0) == 40){
-            applymovement(PLAYER, WaitYouWentWhere_PlayerFromWest)
+            applymovement(PLAYER, moves(walk_down, walk_right * 2, walk_up, face_left, step_end))
         }
 }
 
@@ -54,12 +54,11 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
         msgbox(format("I have some business to attend to in CapheCity. Let's walk together. What's interested you the most about Resido?"),,SPEAKER_OLIVER)
         closemessage
 
-
         call(WaitYouWentWhere_PlayerSetUp_Script)
         waitmovement(0)
 
-        applymovement(PLAYER,Player_WaitYouWentWhere_WalkWest)
-        applymovement(OLIVER,Oliver_WaitYouWentWhere_WalkWest)
+        applymovement(PLAYER, moves(walk_left * 41, step_end))
+        applymovement(OLIVER, moves(walk_left * 41, face_right, step_end))
 
         msgbox(format("Hmm... Actually, I thought Arantraz was really fascinating."),,SPEAKER_ALICIA)
 
@@ -81,7 +80,7 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
 
         closemessage
 
-        applymovement(OLIVER,WaitYouWentWhere_WalkUpHill)
+        applymovement(OLIVER, moves(walk_left * 5, walk_up, walk_left * 5, walk_up, walk_left * 6, step_end))
         waitmovement(0)
         removeobject(OLIVER)
         endcutscene
@@ -90,40 +89,6 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
         end
 }
 
-
-movement WaitYouWentWhere_PlayerFromSouth {
-    walk_right
-        walk_up
-        face_left
-        step_end
-}
-
-movement WaitYouWentWhere_PlayerFromWest {
-    walk_down
-        walk_right * 2
-        walk_up
-        face_left
-        step_end
-}
-
-movement Player_WaitYouWentWhere_WalkWest {
-    walk_left * 41
-        step_end
-}
-movement Oliver_WaitYouWentWhere_WalkWest {
-    walk_left * 41
-        face_right
-        step_end
-}
-
-movement WaitYouWentWhere_WalkUpHill {
-    walk_left * 5
-        walk_up
-        walk_left * 5
-        walk_up
-        walk_left * 6
-        step_end
-}
 movement WaitYouWentWhere_WalkSouth{
     walk_down * 10
         step_end

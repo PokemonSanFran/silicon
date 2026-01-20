@@ -73,7 +73,7 @@ script Quest_IBelieveICanFly_Reward_Dialogue{
 script Quest_IBelieveICanFly_Gertrude_LeaveOutside_Script{
     opendoor(37,31)
     waitdooranim
-    applymovement(GERTRUDE,Quest_IBelieveICanFly_WalkInside_Movement)
+    applymovement(GERTRUDE, moves(walk_up, step_end))
     waitmovement(GERTRUDE)
     playse(SE_EXIT)
     removeobject(GERTRUDE)
@@ -81,10 +81,5 @@ script Quest_IBelieveICanFly_Gertrude_LeaveOutside_Script{
     closedoor(37,31)
     waitdooranim
     return
-}
-
-movement Quest_IBelieveICanFly_WalkInside_Movement{
-    walk_up
-    step_end
 }
 
