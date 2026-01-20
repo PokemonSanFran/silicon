@@ -195,7 +195,7 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerN3[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerF1[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerF2[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_SiliconPlayerF3[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Kai[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Baiya[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Adaora[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Bd[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Belen[];

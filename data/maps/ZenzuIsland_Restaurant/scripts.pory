@@ -1,13 +1,13 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 3
+const BAIYA = 3
 
 mapscripts ZenzuIsland_Restaurant_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(LetsGrabLunch_HideKai_Inside_Script)
+        call(LetsGrabLunch_HideBaiya_Inside_Script)
         call(Quest_Manofmanyhats_Liidia_Waiter_Visibility_Script)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_STORYLINE_STATE, STORY_POST_BATTLE_KAI_ZENZU_ISLAND: LetsGrabLunch_DinerBooth_Dialogue
+        VAR_STORYLINE_STATE, STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND: LetsGrabLunch_DinerBooth_Dialogue
     ]
 }

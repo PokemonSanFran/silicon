@@ -8,7 +8,7 @@ mapscripts CuconuTown_SharpriseCompound_2F_MapScripts {
 
 script CuconuTown_Compound_2F_Bed_Script {
     lock
-        //If has not visited Arantraz after being called there by Kai, prevent player from sleeping
+        //If has not visited Arantraz after being called there by Baiya, prevent player from sleeping
         call(YouRealizeTheyreEvilRight_CantSleep_Script)
 
         //Heal Player

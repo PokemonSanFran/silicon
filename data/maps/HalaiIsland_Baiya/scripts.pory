@@ -1,12 +1,12 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-mapscripts HalaiIsland_Kai_MapScripts {
+mapscripts HalaiIsland_Baiya_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(HalaiIsland_Kai_OnTransition)
+        call(HalaiIsland_Baiya_OnTransition)
     }
 }
 
-script HalaiIsland_Kai_OnTransition {
+script HalaiIsland_Baiya_OnTransition {
     switch (var(VAR_STORYLINE_STATE))
     {
         default: call(LetsFixThis_HideObjectHouse_Script)

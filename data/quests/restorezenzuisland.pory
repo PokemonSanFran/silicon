@@ -16,7 +16,7 @@ const FLAG_HIDE_DRUGHELMETTESTER_IRISNA = FLAG_TEMP_3
 script Restorezenzugym_HideDoyle_Outside_Script{
     setvar(VAR_TEMP_0,0)
 
-        if (var(VAR_STORYLINE_STATE) < STORY_KAI_EXPLAIN_RESTORATION){
+        if (var(VAR_STORYLINE_STATE) < STORY_BAIYA_EXPLAIN_RESTORATION){
             addvar(VAR_TEMP_0,1)
         }
 

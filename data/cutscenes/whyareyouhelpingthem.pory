@@ -2,21 +2,21 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const ADAORA = 2
 const VIGRIM = 3
-const KAI = 4
+const BAIYA = 4
 const PKMNA = 5
 const PKMNB = 6
 const FLAG_HIDE_POLICE = FLAG_TEMP_1
 const FLAG_HIDE_VIGRIM_ADAORA = FLAG_TEMP_2
-const FLAG_HIDE_KAI = FLAG_TEMP_3
+const FLAG_HIDE_BAIYA = FLAG_TEMP_3
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_4
 
 script WhyAreYouHelpingThem_HideObject_Script {
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
 }
 
 script WhyAreYouHelpingThem_ObjectCleanUp_Script {
     setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
     setflag(FLAG_HIDE_VIGRIM_ADAORA)
     setflag(FLAG_HIDE_POLICE)
 }
@@ -24,7 +24,7 @@ script WhyAreYouHelpingThem_ObjectCleanUp_Script {
 script WhyAreYouHelpingThem_MoveObject_Script {
     setobjectxy(CHARLOTTE,2,16)
     setobjectxyperm(CHARLOTTE,2,16)
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
     setflag(FLAG_HIDE_POLICE)
 }
 
@@ -52,9 +52,9 @@ script WhyAreYouHelpingThem_BlowHoleWall {
 script WhyAreYouHelpingThem_ObjectSetUpPostSave_Script {
     setflag(FLAG_HIDE_POLICE)
     setflag(FLAG_HIDE_VIGRIM_ADAORA)
-    setobjectxy(KAI,6,3)
-    setobjectxyperm(KAI,6,3)
-    turnobject(KAI,DIR_WEST)
+    setobjectxy(BAIYA,6,3)
+    setobjectxyperm(BAIYA,6,3)
+    turnobject(BAIYA,DIR_WEST)
     setobjectxy(CHARLOTTE,2,16)
     setobjectxyperm(CHARLOTTE,2,16)
     return
@@ -62,7 +62,7 @@ script WhyAreYouHelpingThem_ObjectSetUpPostSave_Script {
 
 script WhyAreYouHelpingThem_ObjectDebriefSetUp_Script {
     setflag(FLAG_HIDE_POLICE)
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
     setflag(FLAG_HIDE_CHARLOTTE)
     setobjectxyperm(4,26,4)
     setobjectxyperm(5,25,6)
@@ -75,7 +75,7 @@ script WhyAreYouHelpingThem_ObjectDebriefSetUp_Script {
 script WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script {
     clearflag(FLAG_HIDE_POLICE)
     clearflag(FLAG_HIDE_VIGRIM_ADAORA)
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
 
     setobjectxy(1,6,6)
     setobjectxy(2,6,5)
@@ -161,7 +161,7 @@ script WhyAreYouHelpingThem_PreBattleBoss_Script {
 }
 
 script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
-        setvar(VAR_NAVAL_BASE_STATE,SAVE_KAI_NAVAL_BASE)
+        setvar(VAR_NAVAL_BASE_STATE,SAVE_BAIYA_NAVAL_BASE)
         addobject(ADAORA)
         call(WhyAreYouHelpingThem_MoveObjectAdaora_Script)
 
@@ -222,18 +222,18 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
         special(ShakeCamera)
         waitstate
         call(WhyAreYouHelpingThem_BlowHoleWall)
-        clearflag(FLAG_HIDE_KAI)
+        clearflag(FLAG_HIDE_BAIYA)
         playse(SE_EXIT)
         waitse
-        addobject(KAI)
-        applymovement(KAI, moves(walk_down, walk_left * 3, face_down, step_end))
+        addobject(BAIYA)
+        applymovement(BAIYA, moves(walk_down, walk_left * 3, face_down, step_end))
         waitmovement(0)
 
-        msgbox(format("This place is swarming with cops. You two need to get the hell out, right now. This goes straight out."),,SPEAKER_KAI_TIDE)
+        msgbox(format("This place is swarming with cops. You two need to get the hell out, right now. This goes straight out."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("We can't leave people behind. "),,SPEAKER_VIGRIM)
 
-        msgbox(format("We don't have time for this! If you get arrested, this all falls apart! You. Need. To. Go."),,SPEAKER_KAI_TIDE)
+        msgbox(format("We don't have time for this! If you get arrested, this all falls apart! You. Need. To. Go."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("I think they're right."),,SPEAKER_ADAORA)
 
@@ -245,7 +245,7 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
         waitse
         removeobject(ADAORA)
         removeobject(VIGRIM)
-        applymovement(KAI, moves(walk_down, walk_left * 3, step_end))
+        applymovement(BAIYA, moves(walk_down, walk_left * 3, step_end))
         waitmovement(0)
 
         msgbox(format("You're working with TheTide too?!?"),,SPEAKER_ALICIA)
@@ -261,30 +261,30 @@ script WhyAreYouHelpingThem_InteractBattle_Script {
 }
 
 script WhyAreYouHelpingThem_StartBattle_Script{
-    msgbox(format("Always have been."),,SPEAKER_KAI_TIDE)
+    msgbox(format("Always have been."),,SPEAKER_BAIYA_TIDE)
     closemessage
-    trainerbattle_no_intro(TRAINER_KAI_WHYAREYOUHELPINGTHEM,format("Another victory for the establishment.")) //PSF TODO EMOTE sigh
+    trainerbattle_no_intro(TRAINER_BAIYA_WHYAREYOUHELPINGTHEM,format("Another victory for the establishment.")) //PSF TODO EMOTE sigh
     goto(WhyAreYouHelpingThem_PostBattle_Dialogue)
 }
 
 script WhyAreYouHelpingThem_PostBattle_Dialogue {
         startcutscene(JUMPPLAYER_WHYAREYOUHELPINGTHEM)
 
-        setvar(VAR_NAVAL_BASE_STATE,DEFEATED_KAI_NAVAL_BASE)
+        setvar(VAR_NAVAL_BASE_STATE,DEFEATED_BAIYA_NAVAL_BASE)
         msgbox(format("Adaora tells me you're all good guys… now all this shit? And you? None of this makes any sense!"),,SPEAKER_ALICIA)
 
-        msgbox(format("Why would it? You don't see what your bosses are doing to Resido. You don't see what you're doing to Resido."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Why would it? You don't see what your bosses are doing to Resido. You don't see what you're doing to Resido."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("{PLAYER}!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
         applymovement(PLAYER,Common_Movement_FaceLeft)
-        applymovement(KAI, moves(walk_right * 6, walk_up * 2, step_end))
+        applymovement(BAIYA, moves(walk_right * 6, walk_up * 2, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
-        removeobject(KAI)
+        removeobject(BAIYA)
         setobjectxyperm(CHARLOTTE,1,8)
         addobject(CHARLOTTE)
         applymovement(CHARLOTTE, moves(walk_up * 5, walk_right * 3, step_end))

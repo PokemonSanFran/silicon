@@ -20,7 +20,7 @@ mapscripts SharpriseStadium_Lockers_MapScripts {
 script SharpriseStadium_Lockers_MapScripts_OnTransition {
     switch (var(VAR_STORYLINE_STATE)){
         case STORY_START_CHAMPIONSHIP: call(HeresHowThisIsGoingToGo_ObjectSetUp_Script)
-        case STORY_CHAMPIONSHIP_EXPLAINED: call(HeresHowThisIsGoingToGo_ShowKaiandCharlotte)
+        case STORY_CHAMPIONSHIP_EXPLAINED: call(HeresHowThisIsGoingToGo_ShowBaiyaandCharlotte)
         case STORY_CHARLOTTE_WON_GROUP: call(GroupStages_Lockers_ObjectSetUp_Script)
         case STORY_READY_GROUP_STAGE: call(GroupStages_Lockers_ObjectCleanUp_Script)
         case STORY_GROUP_STATE_COMPLETE: call(Finals_HideObject_Script)

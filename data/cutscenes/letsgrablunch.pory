@@ -1,43 +1,43 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
-const FLAG_HIDE_KAI = FLAG_TEMP_2
+const BAIYA = 1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_2
 
 //PSF TODO if the player starts these quests and then goes to the false timeline, it needs to be impossible to finish them until you're back in the true timeline
 
 //the quest log should also reflect this
 
-script LetsGrabLunch_HideKai_Outside_Script{
-    if (var(VAR_STORYLINE_STATE) != STORY_SAVE_KAI_ZENZU_ISLAND){
-        setflag(FLAG_HIDE_KAI)
+script LetsGrabLunch_HideBaiya_Outside_Script{
+    if (var(VAR_STORYLINE_STATE) != STORY_SAVE_BAIYA_ZENZU_ISLAND){
+        setflag(FLAG_HIDE_BAIYA)
     }
     return
 }
-script LetsGrabLunch_HideKai_Inside_Script{
-    if (var(VAR_STORYLINE_STATE) != STORY_POST_BATTLE_KAI_ZENZU_ISLAND && var(VAR_STORYLINE_STATE) != STORY_KAI_EXPLAIN_RESTORATION){
-        setflag(FLAG_HIDE_KAI)
+script LetsGrabLunch_HideBaiya_Inside_Script{
+    if (var(VAR_STORYLINE_STATE) != STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND && var(VAR_STORYLINE_STATE) != STORY_BAIYA_EXPLAIN_RESTORATION){
+        setflag(FLAG_HIDE_BAIYA)
     }
     return
 }
 
 script LetsGrabLunch_StartConversation_Dialogue {
     lockall
-        setvar(VAR_STORYLINE_STATE,STORY_SAVE_KAI_ZENZU_ISLAND)
+        setvar(VAR_STORYLINE_STATE,STORY_SAVE_BAIYA_ZENZU_ISLAND)
         clearflag(FLAG_TEMP_1)
-        addobject(KAI)
+        addobject(BAIYA)
         playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
         applymovement(PLAYER,Common_Movement_FaceRight)
-        applymovement(KAI, moves(walk_left * 7, step_end))
+        applymovement(BAIYA, moves(walk_left * 7, step_end))
         waitmovement(0)
 
-        msgbox(format("Huh. What are you doing here? Shouldn't you be busy?"),,SPEAKER_KAI)
+        msgbox(format("Huh. What are you doing here? Shouldn't you be busy?"),,SPEAKER_BAIYA)
 
         msgbox(format("Taking a break. I haven't had a chance to relax since I last saw you."),,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah, being SharpRise Capital's official lapdog must be exhausting! Bummer."),,SPEAKER_KAI)
+        msgbox(format("Yeah, being SharpRise Capital's official lapdog must be exhausting! Bummer."),,SPEAKER_BAIYA)
 
         msgbox(format("This again? And besides, I know you've been busy too. Resido loves their “hometown hero robbed of championship” narrative."),,SPEAKER_ALICIA)
 
-        msgbox(format("Hey, you beat me fair and square… but the extra popularity can't hurt."),,SPEAKER_KAI)
+        msgbox(format("Hey, you beat me fair and square… but the extra popularity can't hurt."),,SPEAKER_BAIYA)
 
         startmenu_savescreen
         goto(LetsGrabLunch_StartBattle_Script)
@@ -51,24 +51,24 @@ script LetsGrabLunch_InteractBattle_Script {
 
 script LetsGrabLunch_StartBattle_Script {
     lockall
-        msgbox(format("But let's see how robbed I really was!"),,SPEAKER_KAI)
+        msgbox(format("But let's see how robbed I really was!"),,SPEAKER_BAIYA)
         closemessage
 
-        trainerbattle_no_intro(TRAINER_KAI_LETSGRABLUNCH,format("Nah, not robbed at all. You're legit as fuck."))
+        trainerbattle_no_intro(TRAINER_BAIYA_LETSGRABLUNCH,format("Nah, not robbed at all. You're legit as fuck."))
         goto(LetsGrabLunch_PostBattle_Dialogue)
 }
 
 script LetsGrabLunch_PostBattle_Dialogue {
         startcutscene(JUMPPLAYER_LETSGRABLUNCH)
-    setvar(VAR_STORYLINE_STATE,STORY_POST_BATTLE_KAI_ZENZU_ISLAND)
+    setvar(VAR_STORYLINE_STATE,STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND)
 
         msgbox(format("Good game. I see you finally got the hang of Mega Evolution."),,SPEAKER_ALICIA)
 
-        msgbox(format("Of course! My team and I are going to use whatever tools we can to take down your bosses. As a matter of fact… I'm working on a project."),,SPEAKER_KAI)
+        msgbox(format("Of course! My team and I are going to use whatever tools we can to take down your bosses. As a matter of fact… I'm working on a project."),,SPEAKER_BAIYA)
 
         msgbox(format("Haven't you had enough run-ins with the police already?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Nah, this is cool, I swear. Actually, you said you're on break? Cool, we're grabbing lunch at Jim's. My treat."),,SPEAKER_KAI)
+        msgbox(format("Nah, this is cool, I swear. Actually, you said you're on break? Cool, we're grabbing lunch at Jim's. My treat."),,SPEAKER_BAIYA)
 
         closemessage
         fadedefaultbgm
@@ -80,62 +80,62 @@ script LetsGrabLunch_PostBattle_Dialogue {
 
 script LetsGrabLunch_DinerBooth_Dialogue {
     lockall
-        setvar(VAR_STORYLINE_STATE,STORY_KAI_EXPLAIN_RESTORATION)
+        setvar(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION)
         applymovement(PLAYER,Common_Movement_FaceUp)
         msgbox(format("Okay, let's hear about your pyramid scheme."),,SPEAKER_ALICIA)
 
-        msgbox(format("I want to create training centers all over Resido, to help more Trainers get a real start, kind of like what SharpRise Capital gave you. I wanna use the legacy Gyms, like the one you saw earlier today, as those hubs."),,SPEAKER_KAI)
+        msgbox(format("I want to create training centers all over Resido, to help more Trainers get a real start, kind of like what SharpRise Capital gave you. I wanna use the legacy Gyms, like the one you saw earlier today, as those hubs."),,SPEAKER_BAIYA)
 
         msgbox(format("Isn't there a Gym in Kanto like this? They lost their spot in the offical League, but those people are still training and taking challengers."),,SPEAKER_ALICIA)
 
-        msgbox(format("This will be better than that. That dojo in Saffron City is content being an also-ran with no real legitimacy. What I'm talking about is a revival by the people, for the people. We don't need a corporation telling us what counts and what doesn't. We can decide that on our own."),,SPEAKER_KAI)
+        msgbox(format("This will be better than that. That dojo in Saffron City is content being an also-ran with no real legitimacy. What I'm talking about is a revival by the people, for the people. We don't need a corporation telling us what counts and what doesn't. We can decide that on our own."),,SPEAKER_BAIYA)
 
         msgbox(format("Huh. That's actually a pretty cool idea."),,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah! I tried to talk to Imelda and Doyle, but they didn't take it nearly as well as you did."),,SPEAKER_KAI)
+        msgbox(format("Yeah! I tried to talk to Imelda and Doyle, but they didn't take it nearly as well as you did."),,SPEAKER_BAIYA)
 
         msgbox(format("Who…?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Oh, the old Leaders of the ZenzuIsland and EspuleeOutskirts Gyms. If we can revive those Gyms and strengthen our Trainers, then Trainers from other regions will want to come here, battle us, and help stimulate the region… without any interference from SharpRise Capital."),,SPEAKER_KAI)
+        msgbox(format("Oh, the old Leaders of the ZenzuIsland and EspuleeOutskirts Gyms. If we can revive those Gyms and strengthen our Trainers, then Trainers from other regions will want to come here, battle us, and help stimulate the region… without any interference from SharpRise Capital."),,SPEAKER_BAIYA)
 
         msgbox(format("You know, they're not as bad as you think. I still don't understand your problem with them."),,SPEAKER_ALICIA)
 
-        msgbox(format("I know you don't. It's hard to sit down and explain, but I'm working on it. But maybe it doesn't matter.  Is that what TheTide got wrong? Rather than try to defeat a negative force, maybe we need to focus on being a stronger positive force."),,SPEAKER_KAI)
+        msgbox(format("I know you don't. It's hard to sit down and explain, but I'm working on it. But maybe it doesn't matter.  Is that what TheTide got wrong? Rather than try to defeat a negative force, maybe we need to focus on being a stronger positive force."),,SPEAKER_BAIYA)
 
         msgbox(format("Hmm. Never thought about it like that."),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
         msgbox(format("Yeah, this sounds really cool! Way better than I expected."),,SPEAKER_ALICIA)
 
-        msgbox(format("It would be such a boon if the Champion was helping too… and hopefully working on this will help you understand what things used to be like before SharpRise Capital showed up."),,SPEAKER_KAI)
+        msgbox(format("It would be such a boon if the Champion was helping too… and hopefully working on this will help you understand what things used to be like before SharpRise Capital showed up."),,SPEAKER_BAIYA)
 
         msgbox(format("How can I help?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Hmm. Can you try talking to Imelda or Doyle? Or maybe visit HodouCity's Gym and see what we can do? Yeah, any of those are good starts, since BD is a lost cause..."),,SPEAKER_KAI)
+        msgbox(format("Hmm. Can you try talking to Imelda or Doyle? Or maybe visit HodouCity's Gym and see what we can do? Yeah, any of those are good starts, since BD is a lost cause..."),,SPEAKER_BAIYA)
 
         msgbox(format("What are you going to do?"),,SPEAKER_ALICIA)
 
-        msgbox(format("I'm going to bring the idea to TheTide too. I think it's something everybody can rally behind, right?"),,SPEAKER_KAI)
+        msgbox(format("I'm going to bring the idea to TheTide too. I think it's something everybody can rally behind, right?"),,SPEAKER_BAIYA)
 
-        msgbox(format("Kai, I don't think I can help you if you're working with TheTide."),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Baiya, I don't think I can help you if you're working with TheTide."),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(format("{PLAYER}, ignore what you think about TheTide for a second - you've seen the good that they've doing in the region, and their ability to work WITH the local communinities is what we need to make this successful. This isn't about companies or teams right now - I just want to help Trainers with the influence that I have."),,SPEAKER_KAI)
+        msgbox(format("{PLAYER}, ignore what you think about TheTide for a second - you've seen the good that they've doing in the region, and their ability to work WITH the local communinities is what we need to make this successful. This isn't about companies or teams right now - I just want to help Trainers with the influence that I have."),,SPEAKER_BAIYA)
 
         msgbox(format("This isn't going to be a repeat of SharpRise Stadium, right?"),,SPEAKER_ALICIA)
-        msgbox(format("You have my absolute word."),,SPEAKER_KAI)
+        msgbox(format("You have my absolute word."),,SPEAKER_BAIYA)
         call(TryAutoSave)
         endcutscene
         closemessage
         end
 }
 
-script LetsGrabLunch_InteractKaiDiner_Dialogue {
-       setflag(FLAG_FACILITY_UNLOCK_KAI)
-    msgbox(format("I'm just planning out my pitch to TheTide."),,SPEAKER_KAI)
+script LetsGrabLunch_InteractBaiyaDiner_Dialogue {
+       setflag(FLAG_FACILITY_UNLOCK_BAIYA)
+    msgbox(format("I'm just planning out my pitch to TheTide."),,SPEAKER_BAIYA)
     goto(LetsGrabLunch_ShowGymList_Dialogue)
 }
 
 script LetsGrabLunch_ShowGymList_Dialogue{
-    msgbox(format("What are you up to? Have you decided which place you'll hit up first?"),,SPEAKER_KAI,,EMOTE_CONFUSE)
+    msgbox(format("What are you up to? Have you decided which place you'll hit up first?"),,SPEAKER_BAIYA,,EMOTE_CONFUSE)
 
     dynmultichoice(1,1,FALSE,3,0,NULL,
         "HodouCity",
@@ -162,7 +162,7 @@ script LetsGrabLunch_CloseMenu{
 }
 
 script LetsGrabLunch_HodouCity {
-    msgbox(format("The Leader of that Gym more or less disappeared after SharpRise Capital shut it down. I know some of his Gym Trainers are still around… but I'm not sure where. "),,SPEAKER_KAI)
+    msgbox(format("The Leader of that Gym more or less disappeared after SharpRise Capital shut it down. I know some of his Gym Trainers are still around… but I'm not sure where. "),,SPEAKER_BAIYA)
 
         msgbox(format("Do you want to go to HodouCity?"),MSGBOX_YESNO)
 
@@ -177,7 +177,7 @@ script LetsGrabLunch_HodouCity {
         }
 }
 script LetsGrabLunch_EspuleeOutskirts {
-    msgbox(format("Imelda was a little receptive to my idea. They said it was a “good first step”, but wouldn't sign on unless I had a plan for dismantling the entire SharpRise Capital League, which in their eyes, is a “total failure for our Trainers”."),,SPEAKER_KAI)
+    msgbox(format("Imelda was a little receptive to my idea. They said it was a “good first step”, but wouldn't sign on unless I had a plan for dismantling the entire SharpRise Capital League, which in their eyes, is a “total failure for our Trainers”."),,SPEAKER_BAIYA)
 
         msgbox(format("Do you want to go to EspuleeOutskirts?"),MSGBOX_YESNO)
         if (var(VAR_RESULT) == NO){
@@ -191,11 +191,11 @@ script LetsGrabLunch_EspuleeOutskirts {
         }
 }
 script LetsGrabLunch_ZenzuIsland {
-    msgbox(format("Doyle seemed to be interested in the idea of building... something that existed outside of the SharpRise League structure, but he doesn't think I'm thinking big enough. It's part of why he doesn't support The Tide either - they don't think big enough. He thinks he'd be better off going to another region where 'people can actually get things done'."),,SPEAKER_KAI)
+    msgbox(format("Doyle seemed to be interested in the idea of building... something that existed outside of the SharpRise League structure, but he doesn't think I'm thinking big enough. It's part of why he doesn't support The Tide either - they don't think big enough. He thinks he'd be better off going to another region where 'people can actually get things done'."),,SPEAKER_BAIYA)
 
         msgbox(format("Very realistic, I see."),,SPEAKER_ALICIA)
 
-        msgbox(format("They're… intense."),,SPEAKER_KAI)
+        msgbox(format("They're… intense."),,SPEAKER_BAIYA)
 
         msgbox(format("Do you want to go to ZenzuIsland?"),MSGBOX_YESNO)
         if (var(VAR_RESULT) == NO){
@@ -210,7 +210,7 @@ script LetsGrabLunch_ZenzuIsland {
 }
 
 script LetsGrabLunch_TirabudinPlace{
-    msgbox(format("You know, I'd love to reform that Gym and take it away from BD... but they're a snake. There's no reasonining with them, they've fully turned."),,SPEAKER_KAI,,EMOTE_ANGRY)
+    msgbox(format("You know, I'd love to reform that Gym and take it away from BD... but they're a snake. There's no reasonining with them, they've fully turned."),,SPEAKER_BAIYA,,EMOTE_ANGRY)
     closemessage
     goto(LetsGrabLunch_ShowGymList_Dialogue)
 }
@@ -223,7 +223,7 @@ script LetsGrabLunch_CheckRestorationProgress_Script{
         call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,LetsGrabLunch_IncrementCount_Script)
         call_if_quest_complete(QUEST_RESTOREZENZUGYM,LetsGrabLunch_IncrementCount_Script)
 
-        if (var(VAR_TEMP_0) > 0 && var(VAR_STORYLINE_STATE) == STORY_KAI_EXPLAIN_RESTORATION){
+        if (var(VAR_TEMP_0) > 0 && var(VAR_STORYLINE_STATE) == STORY_BAIYA_EXPLAIN_RESTORATION){
             setvar(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE)
         }
 }

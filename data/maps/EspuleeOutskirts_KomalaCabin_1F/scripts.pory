@@ -34,11 +34,11 @@ script EspuleeOutskirts_Shorttermrental_DossierTable_Script
 
 	msgbox(format("There is a stack of folders with a sticky note that says DONE on top."))
 	msgbox(format("Which folder do you want to read?"))
-    dynmultichoice(1,1,TRUE,2,0,NULL,"Kai", "{PLAYER}", "Neither")
+    dynmultichoice(1,1,TRUE,2,0,NULL,"Baiya", "{PLAYER}", "Neither")
 
 	switch(var(VAR_RESULT))
 	{
-		case 0: call(EspuleeOutskirts_Shorttermrental_ReadKaiDossier_Script)
+		case 0: call(EspuleeOutskirts_Shorttermrental_ReadBaiyaDossier_Script)
 		case 1: call(EspuleeOutskirts_Shorttermrental_ReadPlayerDossier_Script)
 	}
 			closemessage
@@ -81,11 +81,11 @@ text gText_EspuleeOutskirts_Shorttermrental_WhichOne
 	format("Which folder do you want to read?")
 }
 
-script EspuleeOutskirts_Shorttermrental_ReadKaiDossier_Script
+script EspuleeOutskirts_Shorttermrental_ReadBaiyaDossier_Script
 {
 	bufferspeciesname(STR_VAR_1,SPECIES_DRATINI)
-	msgbox(EspuleeOutskirts_Shorttermrental_KaiDossier)
-	bufferstring(STR_VAR_3,"Kai's")
+	msgbox(EspuleeOutskirts_Shorttermrental_BaiyaDossier)
+	bufferstring(STR_VAR_3,"Baiya's")
 	msgbox(format("The rest of the pages are just extremely detailed notes for all of {STR_VAR_3} battles..."))
 }
 
@@ -127,10 +127,10 @@ text gText_EspuleeOutskirts_Shorttermrental_ThosePages
 	format("Those pages have even more notes in the margins, and lots of highlighted lines. Charlotte is very intently studying you!")
 }
 
-text EspuleeOutskirts_Shorttermrental_KaiDossier
+text EspuleeOutskirts_Shorttermrental_BaiyaDossier
 {
 	format(
-		"Kai\N"
+		"Baiya\N"
 		"Pronouns: He/Him\N"
 		"Origin: Halai Island\N"
 		"Age: 23, Born April 19 1996\N"

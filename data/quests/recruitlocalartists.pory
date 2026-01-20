@@ -19,7 +19,7 @@ script Quest_Recruitlocalartists_Ramesh_Visibility_Script{
             addvar(VAR_TEMP_0,1)
         }
 
-    if (var(VAR_STORYLINE_STATE) > STORY_KAI_EXPLAIN_RESTORATION && (var(VAR_STORYLINE_STATE) != STORY_RECIEVED_BAMBOO_STAR)){
+    if (var(VAR_STORYLINE_STATE) > STORY_BAIYA_EXPLAIN_RESTORATION && (var(VAR_STORYLINE_STATE) != STORY_RECIEVED_BAMBOO_STAR)){
         addvar(VAR_TEMP_0,1)
     }
 

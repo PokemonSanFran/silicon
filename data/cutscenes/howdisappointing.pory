@@ -303,8 +303,8 @@ script HowDisappointing_Interfact_Adaora_Script
       msgbox(format("We're not done until The Tide is finished, and we both know that."),,SPEAKER_ALICIA)
   }
 
-    msgbox(format("I know how you want to it end. Kai told me all about your meltdown. It doesn't matter how you try to spin this - this problem just won't go away."),,SPEAKER_ADAORA)
-    msgbox(format("Kai doesn't know what he's talking about. None of you do!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("I know how you want to it end. Baiya told me all about your meltdown. It doesn't matter how you try to spin this - this problem just won't go away."),,SPEAKER_ADAORA)
+    msgbox(format("Baiya doesn't know what he's talking about. None of you do!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("We all know that these companies don’t care about you. Champion? You're a tool for them. Why is this that so hard to see?"),,SPEAKER_ADAORA)
     msgbox(format("I'm done talking. You can come quietly, or I can make you."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     startmenu_savescreen

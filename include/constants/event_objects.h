@@ -247,7 +247,7 @@
 #define OBJ_EVENT_GFX_OW_MON                     240
 #define OBJ_EVENT_GFX_LIGHT_SPRITE               241
 // Start silicon
-#define OBJ_EVENT_GFX_KAI                          242
+#define OBJ_EVENT_GFX_BAIYA                          242
 #define OBJ_EVENT_GFX_UNKNOWN                      243
 #define OBJ_EVENT_GFX_ADAORA                       244
 #define OBJ_EVENT_GFX_VIGRIM                      245
@@ -262,9 +262,9 @@
 #define OBJ_EVENT_GFX_MAGNUS                       254
 #define OBJ_EVENT_GFX_NERIENE                      255
 #define OBJ_EVENT_GFX_SHINZO                       256
-#define OBJ_EVENT_GFX_KAI_FAINTED                  257
+#define OBJ_EVENT_GFX_BAIYA_FAINTED                  257
 #define OBJ_EVENT_GFX_ADAORA_FAINTED               258
-#define OBJ_EVENT_GFX_KAI_FIELD_MOVE               259
+#define OBJ_EVENT_GFX_BAIYA_FIELD_MOVE               259
 #define OBJ_EVENT_GFX_KAUNA_SURFING                260
 #define OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL     261
 #define OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE  262
@@ -442,7 +442,7 @@
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1124
 // Start silicon
-#define OBJ_EVENT_PAL_TAG_KAI 0x1125
+#define OBJ_EVENT_PAL_TAG_BAIYA 0x1125
 #define OBJ_EVENT_PAL_TAG_UNKNOWN 0x1126
 #define OBJ_EVENT_PAL_TAG_ADAORA 0x1127
 #define OBJ_EVENT_PAL_TAG_VIGRIM 0x1128

@@ -1,5 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
+const BAIYA = 1
 const ADAORA = 2
 const MAGNUS = 3
 
@@ -38,9 +38,9 @@ script ThisIsntRandom_ObjectSetUp_Script
 
         clearflag(FLAG_HIDE_SEARCH)
 
-        addobject(KAI)
-        setobjectxy(KAI,12,19)
-        applymovement(KAI,Common_Movement_FaceUp)
+        addobject(BAIYA)
+        setobjectxy(BAIYA,12,19)
+        applymovement(BAIYA,Common_Movement_FaceUp)
 
         addobject(ADAORA)
         setobjectxy(ADAORA,13,19)
@@ -62,14 +62,14 @@ script ThisIsntRandom_UnlockDoor_Dialogue
 
         playse(SE_PIN)
         waitse
-        applymovement(KAI,Common_Movement_ExclamationMark)
+        applymovement(BAIYA,Common_Movement_ExclamationMark)
         waitmovement(0)
 
         msgbox(format("Oh,  “TM15” is literally the 15th Technical Machine! I feel pretty dumb, but damn good work."),,SPEAKER_ADAORA)
 
         closemessage
 
-        applymovement(KAI, moves(walk_up * 2, walk_right, step_end))
+        applymovement(BAIYA, moves(walk_up * 2, walk_right, step_end))
         playse(SE_EXIT)
         waitse
 
@@ -82,7 +82,7 @@ script ThisIsntRandom_UnlockDoor_Dialogue
         waitmovement(ADAORA)
 
         removeobject(ADAORA)
-        removeobject(KAI)
+        removeobject(BAIYA)
         removeobject(MAGNUS)
 
         applymovement(PLAYER,Common_Movement_WalkUp)
@@ -136,7 +136,7 @@ script ThisIsntRandom_UndergroundDoor_Dialogue
 
         msgbox(format("So… is Keiying actually trying to help us?"),,SPEAKER_ALICIA)
 
-        msgbox(format("About to find out. Let’s rage!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("About to find out. Let’s rage!"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Hmm. If we’re all going, we should be okay. Let’s see."),,SPEAKER_ADAORA)
 
@@ -144,13 +144,13 @@ script ThisIsntRandom_UndergroundDoor_Dialogue
 
         applymovement(MAGNUS, moves(walk_right * 15, step_end))
         applymovement(ADAORA, moves(walk_right * 20, step_end))
-        applymovement(KAI, moves(walk_down, walk_right * 18, step_end))
-        waitmovement(KAI)
+        applymovement(BAIYA, moves(walk_down, walk_right * 18, step_end))
+        waitmovement(BAIYA)
 
         setflag(FLAG_HIDE_SEARCH)
         removeobject(MAGNUS)
         removeobject(ADAORA)
-        removeobject(KAI)
+        removeobject(BAIYA)
 
         setvar(VAR_PARC_STATE,MAGNUS_UNLOCKED_DOOR)
         call(TryAutoSave)
@@ -163,7 +163,7 @@ script ThisIsntRandom_WalkIntoLab_Dialogue
     lock
         setvar(VAR_PARC_STATE,TEAM_INSIDE_LAB)
 
-        msgbox(format("Looks old as hell. And empty. Let’s split up and see what we turn up."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Looks old as hell. And empty. Let’s split up and see what we turn up."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Take these."),,SPEAKER_ADAORA)
 
@@ -175,18 +175,18 @@ script ThisIsntRandom_WalkIntoLab_Dialogue
 
         msgbox(format("To stay in touch in case we find anything. "),,SPEAKER_ADAORA)
 
-        msgbox(format("Yup!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Yup!"),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
-        applymovement(KAI, moves(walk_down, walk_left * 5, walk_left * 4, step_end))
+        applymovement(BAIYA, moves(walk_down, walk_left * 5, walk_left * 4, step_end))
         applymovement(MAGNUS, moves(delay_16, walk_right * 7, delay_16, delay_16, step_end))
         applymovement(ADAORA, moves(walk_down, walk_left * 4, face_down, delay_16, walk_down, walk_left * 4, step_end))
 
         waitmovement(ADAORA)
 
         removeobject(ADAORA)
-        removeobject(KAI)
+        removeobject(BAIYA)
         removeobject(MAGNUS)
 
         call(TryAutoSave)
@@ -291,15 +291,15 @@ script ThisIsntRandom_DefeatedFirst_Script
 
         msgbox(format("Yeah, I was able to set the poor thing free though."),,SPEAKER_ADAORA)
 
-        msgbox(format("I got attacked, but yeah, I dealt with it. I found some documentation too - this place is called the Infinity Energy Amplification Center. The goal was to use Water and Electric-type Pokémon to help combat fires and power outages."),,SPEAKER_KAI_TIDE)
+        msgbox(format("I got attacked, but yeah, I dealt with it. I found some documentation too - this place is called the Infinity Energy Amplification Center. The goal was to use Water and Electric-type Pokémon to help combat fires and power outages."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Both huge problems in our area…"),,SPEAKER_ADAORA)
 
-        msgbox(format("Right! Looks like they wanted to extract the energy from Pokémon, beef it up, and direct it to locations all over the region. Testing went well, but the extraction was painful and traumatic for the Pokémon, so they shut it down… 50 years ago."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Right! Looks like they wanted to extract the energy from Pokémon, beef it up, and direct it to locations all over the region. Testing went well, but the extraction was painful and traumatic for the Pokémon, so they shut it down… 50 years ago."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("But all of these machines are on! These Pokémon are suffering now!"),,SPEAKER_ADAORA)
 
-        msgbox(format("I’m just telling you what I’m reading!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("I’m just telling you what I’m reading!"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Let’s keep looking, and freeing more Pokémon then."),,SPEAKER_MAGNUS)
 
@@ -323,17 +323,17 @@ script ThisIsntRandom_DefeatedSecond_Script
 
         msgbox(format("Those monsters. They were trying to kill us."),,SPEAKER_MAGNUS)
 
-        msgbox(format("What? Are those dates special?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("What? Are those dates special?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("The second date is the end of the Arantraz riots. What types of Pokémon did you guys fight down here?"),,SPEAKER_ADAORA)
 
-        msgbox(format("Silicobra, Graveler, Larvitar…"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Silicobra, Graveler, Larvitar…"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Numel, Piloswine, Nidoking…"),,SPEAKER_MAGNUS)
 
         msgbox(format("They’re all Ground-type Pokémon."),,SPEAKER_ALICIA)
 
-        msgbox(format("So what?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("So what?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("The documentation called out specific types of Pokémon are used for specific problems."),,SPEAKER_ADAORA)
 
@@ -342,7 +342,7 @@ script ThisIsntRandom_DefeatedSecond_Script
         msgbox(format("Oh no. I didn’t recognize the earlier names, but the activities in the last few days… their access signature is Lucrezia."),,SPEAKER_ADAORA)
         msgbox(format("Oh... this table has more columns. You can see specific location names! MermerezaCity, PerlaciaCity, HodouCity... and then a bunch in a row on Arantraz... and the last one is HalaiIsland."),,SPEAKER_MAGNUS)
 
-        msgbox(format("Wait... but they targeted HalaiIsland. Why attack innocent people?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Wait... but they targeted HalaiIsland. Why attack innocent people?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("…Let’s keep going."),,SPEAKER_ADAORA)
 

@@ -1,10 +1,10 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
+const BAIYA = 1
 
 script LetsGettheBandBackTogether_HideObject_Script {
     if (var(VAR_STORYLINE_STATE) == STORY_MORNING_OF_TIMELINE_SPLIT)
     {
-        //If player has slept after being pitched by Kai, Arantraz should be empty except for Kai
+        //If player has slept after being pitched by Baiya, Arantraz should be empty except for Baiya
         setflag(FLAG_TEMP_2)
     }
     setflag(FLAG_TEMP_5)
@@ -42,30 +42,30 @@ script LetsGettheBandBackTogether_MeetInBasement_Script
     startcutscene(JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_BEFORE)
     playse(SE_PIN)
     waitse
-    applymovement(KAI,Common_Movement_ExclamationMark)
-    waitmovement(KAI)
-    msgbox(format("I didn’t think you were coming back."),MSGBOX_NPC,SPEAKER_KAI,,EMOTE_SHOCK)
+    applymovement(BAIYA,Common_Movement_ExclamationMark)
+    waitmovement(BAIYA)
+    msgbox(format("I didn’t think you were coming back."),MSGBOX_NPC,SPEAKER_BAIYA,,EMOTE_SHOCK)
 
     msgbox(format("I had an insane dream last night, which really helped. I'm sorry about what I said yesterday. I was wrong. You can hack it. And SharpRise Capital... they're actually monsters."),,SPEAKER_ALICIA)
-    msgbox(format("Damn, you did more thinking than I thought."),,SPEAKER_KAI)
+    msgbox(format("Damn, you did more thinking than I thought."),,SPEAKER_BAIYA)
     msgbox(format("You have no idea how insane that dream was... but I'm serious. I'm here to help."),,SPEAKER_ALICIA,,EMOTE_SWEAT)
 
-    msgbox(format("I really think with you and the Elite Four here, we’ve got a fighting chance. You serious?"),,SPEAKER_KAI)
+    msgbox(format("I really think with you and the Elite Four here, we’ve got a fighting chance. You serious?"),,SPEAKER_BAIYA)
 
     msgbox(format("Wait, the entire Elite Four?"),,SPEAKER_ALICIA)
 
-    msgbox(format("Okay, kinda. That’s actually the next step. Tala and Magnus convinced Frank to work with us too, but we’ve gotta find Eleanor if we really want to present a united front."),,SPEAKER_KAI)
+    msgbox(format("Okay, kinda. That’s actually the next step. Tala and Magnus convinced Frank to work with us too, but we’ve gotta find Eleanor if we really want to present a united front."),,SPEAKER_BAIYA)
 
     msgbox(format("What am I missing? Can’t we just call them or something?"),,SPEAKER_ALICIA)
 
-    msgbox(format("Eleanor hasn’t been heard from ever since SharpRise Capital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore."),,SPEAKER_KAI)
+    msgbox(format("Eleanor hasn’t been heard from ever since SharpRise Capital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore."),,SPEAKER_BAIYA)
 
-    msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_KAI)
-    msgbox(format("We should start rallying the people behind our cause. You’re the champ, after all, let’s put that clout to work."),,SPEAKER_KAI)
+    msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_BAIYA)
+    msgbox(format("We should start rallying the people behind our cause. You’re the champ, after all, let’s put that clout to work."),,SPEAKER_BAIYA)
 
     msgbox(format("Oh, yeah, of course. What were you thinking?"),,SPEAKER_ALICIA)
 
-    msgbox(format("I’ll write up a post and you can share it. Once you do, though, SharpRise Capital is probably gonna cut you off, so if there are any perks you wanna use before you lose access you should do it now. Let me know when you’re good to go."),,SPEAKER_KAI)
+    msgbox(format("I’ll write up a post and you can share it. Once you do, though, SharpRise Capital is probably gonna cut you off, so if there are any perks you wanna use before you lose access you should do it now. Let me know when you’re good to go."),,SPEAKER_BAIYA)
     setvar(VAR_ARANTRAZ_STATE,LAST_CHANCE_TRUE_TIMELINE_START)
 
     closemessage
@@ -78,11 +78,11 @@ script LetsGettheBandBackTogether_MeetInBasement_Script
 script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
     lock
         faceplayer
-        msgbox(format("Ready to go live?"),MSGBOX_YESNO,,SPEAKER_KAI)
+        msgbox(format("Ready to go live?"),MSGBOX_YESNO,,SPEAKER_BAIYA)
 
         if (var(VAR_RESULT) == NO){
 
-            msgbox(format("Yeah, I get it. Nervous?"),,SPEAKER_KAI)
+            msgbox(format("Yeah, I get it. Nervous?"),,SPEAKER_BAIYA)
 
                 closemessage
                 release
@@ -95,28 +95,28 @@ script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
         setflag(FLAG_TIMELINE_TRUE)
         setvar(VAR_MASK_OFF_STATE,ASSIGNED_MASK_OFF)
 
-        msgbox(format("Yes!"),,SPEAKER_KAI)
+        msgbox(format("Yes!"),,SPEAKER_BAIYA)
 
         closemessage
 
         fadescreen(FADE_TO_BLACK)
         //PSF TODO Replace with Buzzr message
-        msgbox(format("We’re sick of SharpRise Capital’s shit. We’re tired of the lies, the attacks, and the greed. Let’s take back our region, together."),,SPEAKER_KAI,TAIL_SHOUT,PHONE_ON)
+        msgbox(format("We’re sick of SharpRise Capital’s shit. We’re tired of the lies, the attacks, and the greed. Let’s take back our region, together."),,SPEAKER_BAIYA,TAIL_SHOUT,PHONE_ON)
         closemessage
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_KAI)
+        msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_BAIYA)
 
         msgbox(format("Where do I even start?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Try the newspaper in Perlacia City, they did an interview with Eleanor right before she disappeared.  I’m gonna make some moves too."),,SPEAKER_KAI)
+        msgbox(format("Try the newspaper in Perlacia City, they did an interview with Eleanor right before she disappeared.  I’m gonna make some moves too."),,SPEAKER_BAIYA)
 
         closemessage
-        applymovement(KAI, moves(walk_left * 2, walk_down * 2, step_end))
-        waitmovement(KAI)
+        applymovement(BAIYA, moves(walk_left * 2, walk_down * 2, step_end))
+        waitmovement(BAIYA)
         playse(SE_EXIT)
         waitse
-        removeobject(KAI)
+        removeobject(BAIYA)
         call(TryAutoSave)
         endcutscene
         release

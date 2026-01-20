@@ -1572,18 +1572,18 @@ static const struct SpriteFrameImage sPicTable_siliconPlayerF2Fishing[] = {
     overworld_ascending_frames(gObjectEventPic_siliconPlayerF2Fishing, 4, 4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaiNormal[] = {
-    overworld_ascending_frames(gObjectEventPic_KaiNormal,4,4),
+const struct SpriteFrameImage gObjectEventPicTable_BaiyaNormal[] = {
+    overworld_ascending_frames(gObjectEventPic_BaiyaNormal,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaiFainted[] =
+const struct SpriteFrameImage gObjectEventPicTable_BaiyaFainted[] =
 {
-    obj_frame_tiles(gObjectEventPic_KaiFainted),
+    obj_frame_tiles(gObjectEventPic_BaiyaFainted),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaiFieldMove[] =
+const struct SpriteFrameImage gObjectEventPicTable_BaiyaFieldMove[] =
 {
-    overworld_ascending_frames(gObjectEventPic_KaiFieldMove, 4, 4),
+    overworld_ascending_frames(gObjectEventPic_BaiyaFieldMove, 4, 4),
 };
 
 const struct SpriteFrameImage gObjectEventPicTable_AdaoraFainted[] =

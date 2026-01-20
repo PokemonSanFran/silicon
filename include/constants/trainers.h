@@ -109,7 +109,7 @@
 #define TRAINER_PIC_RS_BRENDAN            91
 #define TRAINER_PIC_RS_MAY                92
 // Start silicon
-#define TRAINER_PIC_KAI                   93
+#define TRAINER_PIC_BAIYA                   93
 #define TRAINER_PIC_ADAORA                94
 #define TRAINER_PIC_VIGRIM               95
 #define TRAINER_PIC_BD                    96
@@ -154,7 +154,7 @@
 #define TRAINER_BACK_PIC_WALLY                  6
 #define TRAINER_BACK_PIC_STEVEN                 7
 // Start silicon
-#define TRAINER_BACK_PIC_KAI                   8
+#define TRAINER_BACK_PIC_BAIYA                   8
 #define TRAINER_BACK_PIC_ADAORA                9
 #define TRAINER_BACK_PIC_BD                    10
 #define TRAINER_BACK_PIC_BELEN                 11

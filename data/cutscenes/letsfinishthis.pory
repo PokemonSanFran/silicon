@@ -1,6 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CAMERA = OBJ_EVENT_ID_CAMERA
-const KAI = 3
+const BAIYA = 3
 const ADAORA = 13
 const TALA = 15
 const MAGNUS = 16
@@ -9,13 +9,13 @@ const ELEANOR = 18
 
 const FLAG_HIDE_POLICE = FLAG_TEMP_2
 const FLAG_HIDE_ELITE = FLAG_TEMP_4
-const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 const FLAG_HIDE_ADAORA = FLAG_TEMP_3
 
 script LetsFinishThis_ObjectHide_Script{
     setflag(FLAG_HIDE_POLICE)
     setflag(FLAG_HIDE_ELITE)
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
     setflag(FLAG_HIDE_ADAORA)
     return
 }
@@ -26,8 +26,8 @@ script LetsFinishThis_ObjectSetUp_Script {
         setobjectxy(ADAORA,32,12)
         setobjectxyperm(ADAORA,32,12)
 
-        setobjectxy(KAI,33,12)
-        setobjectxyperm(KAI,33,12)
+        setobjectxy(BAIYA,33,12)
+        setobjectxyperm(BAIYA,33,12)
 }
 
 script LetsFinishThis_MovePlayer_Script {
@@ -56,15 +56,15 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("Perfectly sane. It worked on Arantraz didn’t it? There’s no peaceful path forward. Do you all get it now? They’re poised to kill!"),,SPEAKER_ELEANOR)
 
-        msgbox(format("But they weren’t always, were they?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("But they weren’t always, were they?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("SharpRise Capital has always been ruthless! Killing is… new though."),,SPEAKER_ADAORA)
 
-        msgbox(format("That’s what I mean. We spun up this awesome program, we attacked the operations of their corporate partners, our message is really getting out there! I think they’re nervous."),,SPEAKER_KAI_TIDE)
+        msgbox(format("That’s what I mean. We spun up this awesome program, we attacked the operations of their corporate partners, our message is really getting out there! I think they’re nervous."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Perhaps desperate."),,SPEAKER_FRANK)
 
-        msgbox(format("Maybe now it's the time to really bring the fight to them!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Maybe now it's the time to really bring the fight to them!"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Now might be the time. We’ve explored every other path."),,SPEAKER_MAGNUS)
 
@@ -74,11 +74,11 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("They came for the Kings and missed. This may be our only chance to fight back."),,SPEAKER_ELEANOR)
 
-        msgbox(format("So, break into SharpRise Spire, force a confession from Lucrezia, broadcast it using their equipment and public sentiment will come crashing down. Right?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("So, break into SharpRise Spire, force a confession from Lucrezia, broadcast it using their equipment and public sentiment will come crashing down. Right?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("A public confession would force the government to take action."),,SPEAKER_FRANK)
 
-        msgbox(format("I was being sarcastic!"),,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_SHOCK)
+        msgbox(format("I was being sarcastic!"),,SPEAKER_BAIYA_TIDE,TAIL_SHOUT,EMOTE_SHOCK)
 
         msgbox(format("The hardest part of that plan is actually just getting to Lucrezia. The rest of that is fairly plausible, given we survive."),,SPEAKER_ELEANOR)
 

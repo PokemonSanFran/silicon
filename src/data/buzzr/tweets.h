@@ -14,7 +14,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_RABIES] =
     {
-        .userId = BUZZR_USER_KAI,
+        .userId = BUZZR_USER_BAIYA,
         .content = COMPOUND_STRING(
             "My cousin told me there's a mass rabies\n"
             "outbreak in Glavez Hill! Feral Glameow are\n"
@@ -32,7 +32,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_STORY_EPILOGUE] =
     {
-        .userId = BUZZR_USER_KAI,
+        .userId = BUZZR_USER_BAIYA,
         .content = COMPOUND_STRING(
             "We've got more work to do!\n"
             "Let's get at it."

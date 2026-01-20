@@ -529,7 +529,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
     // Start silicon
     {gObjectEventPal_siliconPlayer,         OBJ_EVENT_PAL_TAG_SILICON},
-    {gObjectEventPal_KaiNormal,             OBJ_EVENT_PAL_TAG_KAI},
+    {gObjectEventPal_BaiyaNormal,             OBJ_EVENT_PAL_TAG_BAIYA},
     {gObjectEventPal_UnknownNormal,         OBJ_EVENT_PAL_TAG_UNKNOWN},
     {gObjectEventPal_AdaoraWalking,         OBJ_EVENT_PAL_TAG_ADAORA},
     {gObjectEventPal_VigrimWalking,        OBJ_EVENT_PAL_TAG_VIGRIM},

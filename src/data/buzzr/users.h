@@ -5,7 +5,7 @@ const struct Users gBuzzrUsers[] =
         .username = _("{PLAYER}"),
         .isVerified = FALSE,
     },
-    [BUZZR_USER_KAI] =
+    [BUZZR_USER_BAIYA] =
     {
         .username = _("ResidoReal"),
         .isVerified = TRUE,

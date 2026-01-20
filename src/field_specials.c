@@ -412,7 +412,7 @@ bool32 ShouldDoScottFortreeCall(void)
 {
 // Start siliconMerge
     //This function runs 10 steps after "You Realize We're Evil" plays
-    if (VarGet(VAR_STORYLINE_STATE) == STORY_POST_YOU_REALIZE_WERE_EVIL && FlagGet(FLAG_KAI_CALL_ARANTRAZ))
+    if (VarGet(VAR_STORYLINE_STATE) == STORY_POST_YOU_REALIZE_WERE_EVIL && FlagGet(FLAG_BAIYA_CALL_ARANTRAZ))
     //if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
 // End siliconMerge
     {
@@ -422,7 +422,7 @@ bool32 ShouldDoScottFortreeCall(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
-            if (++(*GetVarPointer(VAR_KAI_CALL_ARANTRAZ_STEP_COUNTER)) < 10) // siliconMerge
+            if (++(*GetVarPointer(VAR_BAIYA_CALL_ARANTRAZ_STEP_COUNTER)) < 10) // siliconMerge
                 return FALSE;
             break;
         default:

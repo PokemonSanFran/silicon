@@ -1,18 +1,18 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 10
+const BAIYA = 10
 const TALA = 9
 
 const FLAG_HIDE_TALA = FLAG_TEMP_1
-const FLAG_HIDE_KAI = FLAG_TEMP_2
+const FLAG_HIDE_BAIYA = FLAG_TEMP_2
 
-script Epilogue_Script_AddKai
+script Epilogue_Script_AddBaiya
 {
     if (var(VAR_STORYLINE_STATE) != STORY_EPILOGUE)
     {
         return
     }
 
-    spawnobject(graphicsId=OBJ_EVENT_GFX_KAI,localId=KAI,x=8,y=13,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
+    spawnobject(graphicsId=OBJ_EVENT_GFX_BAIYA,localId=BAIYA,x=8,y=13,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
 //PSF TODO need to pair a new song for this scenario
 }
 
@@ -34,7 +34,7 @@ script Epilogue_Script_ObjectVisibility
         return
     }
 
-    call(Epilogue_Script_AddKai)
+    call(Epilogue_Script_AddBaiya)
     call(Epilogue_Script_ControlPlayerVisibility)
 }
 
@@ -44,7 +44,7 @@ script Epilogue_Script_SetPostGameValues
     setvar(VAR_STORYLINE_STATE,STORY_CLEAR)
 }
 
-script Epilogue_Script_TalaApproachesKai
+script Epilogue_Script_TalaApproachesBaiya
 {
     call(Epilogue_Script_SetPostGameValues)
     playbgm(MUS_ENCOUNTER_INTENSE,TRUE)
@@ -55,7 +55,7 @@ script Epilogue_Script_TalaApproachesKai
     waitmovement(TALA)
     msgbox(text=format("You know, this is usually where I stand when I'm feeling particularly accomplished, or proud."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     closemessage
-    applymovement(KAI,
+    applymovement(BAIYA,
     moves(
         face_down
         delay_8
@@ -74,24 +74,24 @@ script Epilogue_Script_TalaApproachesKai
 script Epilogue_Dialogue_ConversationAboutProgress
 {
     msgbox(text=format("Are you feeling proud of all the work you've done?"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("Are you serious? "),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_LAUGH)
-    msgbox(text=format("The new Sharprise CEO... have you heard about him?"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
-    msgbox(text=format("He's just another corporate suit! Sure, he's not a murderer like Lucrezia, but all of his apologies and promises to turn over a new leaf are completely hollow."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
-    msgbox(text=format("Sharprise Capital and all of its slimy tentacles are going to keep making Resido worse. "),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("Are you serious? "),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_LAUGH)
+    msgbox(text=format("The new Sharprise CEO... have you heard about him?"),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=format("He's just another corporate suit! Sure, he's not a murderer like Lucrezia, but all of his apologies and promises to turn over a new leaf are completely hollow."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=format("Sharprise Capital and all of its slimy tentacles are going to keep making Resido worse. "),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("Were you expecting {PLAYER} to defeat Lucrezia and that would be the end of Sharprise? It's going to take a lot more than one team of corrupt executives to make Sharprise"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SWEAT)
-    msgbox(text=format("I guess I wasn't really sure what would happen, but I wish we had done more."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("I guess I wasn't really sure what would happen, but I wish we had done more."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("{PLAYER} is a perfect example of you and The Tide's hard work. {PLAYER} was brought to this region BY Sharprise, completely in support of them."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_SHOCK)
     msgbox(text=format("And look at her now!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("You managed to redirect their fame and talent into actually helping and rebuilding the region. "),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
     msgbox(text=format("THAT, bringing more people to your cause - that's the real work."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("{PLAYER} is one Trainer!"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
-    msgbox(text=format("She's great, but there's so much more work to be done today!"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("List unfinished quest one..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("List unfinished quest two..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("List unfinished quest three..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("List unfinished quest four..."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("List unfinished quest five!"),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("You might be right, Kai, but..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("{PLAYER} is one Trainer!"),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    msgbox(text=format("She's great, but there's so much more work to be done today!"),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest one..."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest two..."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest three..."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest four..."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("List unfinished quest five!"),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You might be right, Baiya, but..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("You're discounting all the work you, {PLAYER} and The Tide HAVE done!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_HAPPY)
     msgbox(text=format("List finished quest one..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("List finished quest two..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
@@ -105,14 +105,14 @@ script Epilogue_Dialogue_ConversationAboutProgress
     msgbox(text=format("I've been at this longer than you've been alive."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("The struggle to do more will alwys exist."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("My job... The Tide's job... is to inspire and empower the next generation to keep moving forward."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    msgbox(text=format("You should be proud of what you've done, Kai. "),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("You should be proud of what you've done, Baiya. "),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("You can still appreciate that there is much to be done."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("It probably won't all be done in your lifetime!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("But its your job to plant berries that only your grandchildren will be able to harvest."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    applymovement(KAI,moves(
+    applymovement(BAIYA,moves(
         face_up
     ))
-    msgbox(text=format("...Thanks Tala."),speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    msgbox(text=format("...Thanks Tala."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     closemessage
     goto(Epilogue_Script_ShowTweetLeaveMap)
 }
@@ -139,11 +139,11 @@ script Epilogue_Script_GoToCredits
     end
 }
 
-script Epilogue_Script_WarpToKai
+script Epilogue_Script_WarpToBaiya
 {
     marktweetread(TWEET_STORY_EPILOGUE)
     fadeblackandsetremovewarpfadeflag
-    warpsilent(MAP_HALAI_ISLAND_KAI,0)
+    warpsilent(MAP_HALAI_ISLAND_BAIYA,0)
     waitstate
     release
     end

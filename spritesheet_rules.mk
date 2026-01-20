@@ -5031,7 +5031,7 @@ $(OBJEVENTGFXDIR)/people/siliconPlayer/f2/fishing.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/siliconPlayer/f2/underwater.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/kai/walking.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/baiya/walking.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/adaora/fainted.4bpp: %.4bpp: %.png
@@ -5067,10 +5067,10 @@ $(OBJEVENTGFXDIR)/people/emrys.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/imelda.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/kai/running.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/baiya/running.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/kai/fieldMove.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/baiya/fieldMove.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/kauna/surfing.4bpp: %.4bpp: %.png

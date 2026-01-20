@@ -1,12 +1,12 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 3
+const BAIYA = 3
 
-const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 const FLAG_HIDE_ADAORA = FLAG_TEMP_3
 const FLAG_HIDE_ELITE4 = FLAG_TEMP_4
 
 script AssholesHome_HideObject_Script {
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
     setflag(FLAG_HIDE_ADAORA)
     setflag(FLAG_HIDE_ELITE4)
 }
@@ -16,29 +16,29 @@ script AssholesHome_WalkToPlayer_Script {
         applymovement(PLAYER,Common_Movement_ExclamationMark)
         playse(SE_PIN)
         playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-        applymovement(KAI, moves(walk_down * 2, step_end))
+        applymovement(BAIYA, moves(walk_down * 2, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceUp)
-        goto(AssholesHome_Kai_Dialogue)
+        goto(AssholesHome_Baiya_Dialogue)
 }
 
 script AssholesHome_BattleEvent_Script {
         lock
         faceplayer
     switch(var(VAR_HALAI_ISLAND_STATE)) {
-        case HAS_NOT_ENCOUNTERED_KAI: goto(AssholesHome_Kai_Dialogue)
-        case SAVE_KAI_HALAI_ISLAND: goto(AssholesHome_StartBattle_Script)
+        case HAS_NOT_ENCOUNTERED_BAIYA: goto(AssholesHome_Baiya_Dialogue)
+        case SAVE_BAIYA_HALAI_ISLAND: goto(AssholesHome_StartBattle_Script)
     }
 }
 
-script AssholesHome_Kai_Dialogue {
-        setvar(VAR_HALAI_ISLAND_STATE,SAVE_KAI_HALAI_ISLAND)
-        msgbox(format("Judging from the swarm of transplants at Jim's this today, I'm guessing the ferry is fixed."),,SPEAKER_KAI)
+script AssholesHome_Baiya_Dialogue {
+        setvar(VAR_HALAI_ISLAND_STATE,SAVE_BAIYA_HALAI_ISLAND)
+        msgbox(format("Judging from the swarm of transplants at Jim's this today, I'm guessing the ferry is fixed."),,SPEAKER_BAIYA)
         msgbox(format("I was hoping I wouldn't have to deal with you again. What's Jim's?"),,SPEAKER_ALICIA)
-        msgbox(format("Halai Island is my home, and also home to to Jim's, the best boba shop in the region!"),,SPEAKER_KAI)
+        msgbox(format("Halai Island is my home, and also home to to Jim's, the best boba shop in the region!"),,SPEAKER_BAIYA)
         closemessage
 
-        msgbox(format("But if they're getting some business, maybe you transplants aren't completely useless!"),,SPEAKER_KAI,EMOTE_LAUGH)
+        msgbox(format("But if they're getting some business, maybe you transplants aren't completely useless!"),,SPEAKER_BAIYA,EMOTE_LAUGH)
         msgbox(format("What do you want this time?"),,SPEAKER_ALICIA)
         closemessage
         startmenu_savescreen
@@ -48,32 +48,32 @@ script AssholesHome_Kai_Dialogue {
 
 script AssholesHome_StartBattle_Script{
     lockall
-        msgbox(format("Just curious if you're ready for the next Gym Leader."),MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("Just curious if you're ready for the next Gym Leader."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
         msgbox(format("I doubt you're going to be able to accurately judge that."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
-        trainerbattle_no_intro(TRAINER_KAI_ASSHOLEHOME,format("SharpRise Capital throws their money around, and the strong get stronger..."))
+        trainerbattle_no_intro(TRAINER_BAIYA_ASSHOLEHOME,format("SharpRise Capital throws their money around, and the strong get stronger..."))
         goto(AssholesHome_PostBattle_Dialogue)
 }
 
 script AssholesHome_PostBattle_Dialogue {
     lockall
         startcutscene(JUMPPLAYER_ASSHOLESHOME)
-        setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_KAI_HALAI_ISLAND)
-        setvar(VAR_HALAI_ISLAND_STATE,DEFEATED_KAI_HALAI_ISLAND)
-        msgbox(format("So much for the home-court advantage. gg... {PLAYER}, right?"),MSGBOX_DEFAULT,SPEAKER_KAI)
+        setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_BAIYA_HALAI_ISLAND)
+        setvar(VAR_HALAI_ISLAND_STATE,DEFEATED_BAIYA_HALAI_ISLAND)
+        msgbox(format("So much for the home-court advantage. gg... {PLAYER}, right?"),MSGBOX_DEFAULT,SPEAKER_BAIYA)
         msgbox(format("Oh wow, a name instead of an insult."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("I like being pushed to my limits like that. You're stronger than the rest of them, that's for sure. See you around."),MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("I like being pushed to my limits like that. You're stronger than the rest of them, that's for sure. See you around."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
 
         if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI){
                 msgbox(format("Wait! I saw that you're participating in the League Challenge like the rest of us. After all the insults and endless complaints about it, what am I missing?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(format("You're right, it's hypocritical. But I'm tired of fighting a system from the outside. I'm going to try and change it from the inside out. I'm excited to be able to beat you along the way."),MSGBOX_DEFAULT,SPEAKER_KAI)
+                msgbox(format("You're right, it's hypocritical. But I'm tired of fighting a system from the outside. I'm going to try and change it from the inside out. I'm excited to be able to beat you along the way."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
                 msgbox(format("(What a weird kid...)"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         }
         closemessage
-        applymovement(KAI, moves(walk_up * 4, step_end))
+        applymovement(BAIYA, moves(walk_up * 4, step_end))
         waitmovement(0)
         fadedefaultbgm
-        removeobject(KAI)
+        removeobject(BAIYA)
         call(TryAutoSave)
         endcutscene
         release
@@ -81,5 +81,5 @@ script AssholesHome_PostBattle_Dialogue {
         end
 }
 
-// PSF TODO make sure Kai is visible at all times
+// PSF TODO make sure Baiya is visible at all times
 

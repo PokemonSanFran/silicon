@@ -1,8 +1,8 @@
 const LUCREZIA = VAR_LAST_TALKED
-const KAI = VAR_0x8006
+const BAIYA = VAR_0x8006
 const CAMERA = OBJ_EVENT_ID_CAMERA
 const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1E
-const FLAG_HIDE_KAI = FLAG_TEMP_1F
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1F
 
 script WowYourStrong_AssignObjectId_Script
 {
@@ -11,13 +11,13 @@ script WowYourStrong_AssignObjectId_Script
     {
         case MAP_TORA_TOWN:
             setvar(LUCREZIA,6)
-            setvar(KAI,7)
+            setvar(BAIYA,7)
         case MAP_PERLACIA_CITY:
             setvar(LUCREZIA,1)
-            setvar(KAI,9)
+            setvar(BAIYA,9)
         case MAP_MERMEREZA_CITY:
             setvar(LUCREZIA,10)
-            setvar(KAI,11)
+            setvar(BAIYA,11)
     }
     return
 }
@@ -28,12 +28,12 @@ script WowYoureStrong_HideObject_Script
     if(var(VAR_RESULT)!= 3 || (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > DEFEATED_THIRD_LEADER))
     {
         setflag(FLAG_HIDE_LUCREZIA)
-        setflag(FLAG_HIDE_KAI)
+        setflag(FLAG_HIDE_BAIYA)
     }
 
-    if (var(VAR_ROUTE10_STATE) == SAVED_BEFORE_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) == SAVED_BEFORE_BAIYA_ROUTE10)
     {
-        setflag(FLAG_HIDE_KAI)
+        setflag(FLAG_HIDE_BAIYA)
     }
 }
 
@@ -125,16 +125,16 @@ script WowYoureStrong_End_Dialouge
 
     closemessage
     applymovement(LUCREZIA,WowYoureStrong_WalkToMeeting_Movement)
-    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_BAIYA_ROUTE10)
     {
         delay(30)
-        applymovement(KAI, moves(walk_up * 2, walk_right * 2, face_up, step_end))
+        applymovement(BAIYA, moves(walk_up * 2, walk_right * 2, face_up, step_end))
     }
     fadedefaultbgm
 
-    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_BAIYA_ROUTE10)
     {
-        goto(WowYourStrong_KaiConfrontation_Dialogue)
+        goto(WowYourStrong_BaiyaConfrontation_Dialogue)
     }
     goto(WowYourStrong_RemoveLucrezia_Script)
 }
@@ -147,11 +147,11 @@ script WowYourStrong_RemoveLucrezia_Script
     end
 }
 
-script WowYourStrong_KaiConfrontation_Dialogue
+script WowYourStrong_BaiyaConfrontation_Dialogue
 {
-    msgbox(format("I don't get it. Do all of you transplants just worship the ground these tycoons walk on?"),,SPEAKER_KAI)
+    msgbox(format("I don't get it. Do all of you transplants just worship the ground these tycoons walk on?"),,SPEAKER_BAIYA)
 
-    if (var(VAR_ROUTE10_STATE) == DEFEATED_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) == DEFEATED_BAIYA_ROUTE10)
     {
         msgbox(format("You again? Are you following me? What is your deal?"),,SPEAKER_ALICIA)
     }
@@ -159,14 +159,14 @@ script WowYourStrong_KaiConfrontation_Dialogue
     {
         msgbox(format("What are you talking about?"),,SPEAKER_ALICIA)
     }
-    msgbox(format("I just can't understand why you would willingly buy into a system that just makes these people more money. Do you think they need MORE money?"),,SPEAKER_KAI)
+    msgbox(format("I just can't understand why you would willingly buy into a system that just makes these people more money. Do you think they need MORE money?"),,SPEAKER_BAIYA)
     closemessage
 
-    applymovement(KAI,WowYoureStrong_WalkToMeeting_Movement)
-    waitmovement(KAI)
-    removeobject(KAI)
+    applymovement(BAIYA,WowYoureStrong_WalkToMeeting_Movement)
+    waitmovement(BAIYA)
+    removeobject(BAIYA)
 
-    if (var(VAR_ROUTE10_STATE) == DEFEATED_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) == DEFEATED_BAIYA_ROUTE10)
     {
         msgbox(format("I hope that this isn't going to be a regular thing..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     }

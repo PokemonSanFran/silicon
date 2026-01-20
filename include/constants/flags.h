@@ -63,7 +63,7 @@
 #define FLAG_UNHOUSED_REQUEST 0x31 // Silicon Flag
 #define FLAG_QUEST_PERSUASIVE_SIBLING    0x32 // Silicon Flag
 #define FLAG_CONSTRUCTION_BREAKING_NEWS    0x33 // Silicon Flag
-#define FLAG_KAI_CALL_ARANTRAZ    0x34 // Silicon Flag
+#define FLAG_BAIYA_CALL_ARANTRAZ    0x34 // Silicon Flag
 #define FLAG_RECIEVED_LEFTOVERS    0x35 // Silicon Flag
 #define FLAG_QUEST_PERSUASIVE_PASSENGER_PLAYER_KIDNAPPED    0x36 // Silicon Flag
 #define FLAG_EDUCATED_FOG_ROUTE11 0x37 // Silicon Flag
@@ -734,7 +734,7 @@
 #define FLAG_FACILITY_UNLOCK_EMRYS  0x299 // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_MAGNUS  0x29A // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_BD  0x29B // Silicon Flag
-#define FLAG_FACILITY_UNLOCK_KAI  0x29C // Silicon Flag
+#define FLAG_FACILITY_UNLOCK_BAIYA  0x29C // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_NERIENE  0x29D // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_FRANK  0x29E // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_SHINZO  0x29F // Silicon Flag

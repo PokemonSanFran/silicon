@@ -4,7 +4,7 @@ const TALA = 1
 const MAGNUS = 2
 const FRANK = 3
 const ELEANOR = 4
-const KAI = 5
+const BAIYA = 5
 const PKMNA = 6
 const FLAG_HIDE_RAID = FLAG_TEMP_1
 const FLAG_HIDE_PKMN = FLAG_TEMP_2
@@ -77,7 +77,7 @@ script ImIn_CutsceneSetup_OutsideHouse_Script {
         addobject(MAGNUS)
         addobject(FRANK)
         addobject(ELEANOR)
-        addobject(KAI)
+        addobject(BAIYA)
 }
 
 script ImIn_ReleaseFromBall_Script {
@@ -94,7 +94,7 @@ script ImIn_ObjectSetUp_InsideHouse_Script {
         setobjectxyperm(MAGNUS,16,3)
         setobjectxyperm(FRANK,17,4)
         setobjectxyperm(ELEANOR,18,5)
-        setobjectxyperm(KAI,19,3)
+        setobjectxyperm(BAIYA,19,3)
 }
 
 script ImIn_MoveObject_BeforeWarp_Script {
@@ -102,12 +102,12 @@ script ImIn_MoveObject_BeforeWarp_Script {
         addobject(MAGNUS)
         addobject(FRANK)
         addobject(ELEANOR)
-        addobject(KAI)
+        addobject(BAIYA)
 
         setobjectxy(TALA,10,3)
         setobjectxy(FRANK,10,4)
         setobjectxy(ELEANOR,12,3)
-        setobjectxy(KAI,12,4)
+        setobjectxy(BAIYA,12,4)
         setobjectxy(MAGNUS,11,2)
 
         setobjectxy(PLAYER,11,4)
@@ -117,7 +117,7 @@ script ImIn_MoveObject_BeforeWarp_Script {
         applymovement(FRANK,Common_Movement_FaceRight)
         applymovement(ELEANOR,Common_Movement_FaceLeft)
         applymovement(MAGNUS,Common_Movement_FaceDown)
-        applymovement(KAI,Common_Movement_FaceLeft)
+        applymovement(BAIYA,Common_Movement_FaceLeft)
         waitmovement(MAGNUS)
 }
 
@@ -153,8 +153,8 @@ script ImIn_StartHouseBreak_Script
         msgbox(format("We're in position at CapheCity. Ready to mobilize this diversion when you are."),,SPEAKER_ADAORA,,,PHONE_ON)
         closemessage
 
-        applymovement(KAI, moves(walk_right, walk_down * 5, step_end))
-        waitmovement(KAI)
+        applymovement(BAIYA, moves(walk_right, walk_down * 5, step_end))
+        waitmovement(BAIYA)
 
         applymovement(TALA,Common_Movement_FaceRight)
         applymovement(MAGNUS,Common_Movement_FaceRight)
@@ -163,17 +163,17 @@ script ImIn_StartHouseBreak_Script
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
 
-        msgbox(format("The side door will definitely work, didn't see an alarm either."),,SPEAKER_KAI_TIDE)
+        msgbox(format("The side door will definitely work, didn't see an alarm either."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Let's move then!"),,SPEAKER_TALA)
         closemessage
 
-        applymovement(KAI, moves(walk_up * 4, face_down, step_end))
-        waitmovement(KAI)
+        applymovement(BAIYA, moves(walk_up * 4, face_down, step_end))
+        waitmovement(BAIYA)
 
         call(ImIn_ReleaseFromBall_Script)
 
-        msgbox(format("Brick Break sure comes in handy when most houses are made of the stuff."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Brick Break sure comes in handy when most houses are made of the stuff."),,SPEAKER_BAIYA_TIDE)
                 closemessage
 
         playse(SE_M_BRICK_BREAK)
@@ -187,7 +187,7 @@ script ImIn_StartHouseBreak_Script
         applymovement(MAGNUS, moves(walk_right, walk_up * 4, walk_left, step_end))
         applymovement(FRANK, moves(walk_right * 4, walk_up * 3, walk_left, step_end))
         applymovement(ELEANOR, moves(walk_up * 4, walk_left, step_end))
-        applymovement(KAI, moves(walk_down, walk_left, step_end))
+        applymovement(BAIYA, moves(walk_down, walk_left, step_end))
 
         playse(SE_EXIT)
         playse(SE_EXIT)
@@ -203,7 +203,7 @@ script ImIn_StartHouseBreak_Script
         removeobject(MAGNUS)
         removeobject(FRANK)
         removeobject(ELEANOR)
-        removeobject(KAI)
+        removeobject(BAIYA)
         call(TryAutoSave)
         endcutscene
         release
@@ -227,20 +227,20 @@ script Imin_BeginHouseSearch_Script
         applymovement(MAGNUS,ImIn_SpreadOutHouse)
         applymovement(FRANK,ImIn_SpreadOutHouse)
         applymovement(ELEANOR,ImIn_SpreadOutHouse)
-        applymovement(KAI,ImIn_SpreadOutHouse)
-        waitmovement(KAI)
+        applymovement(BAIYA,ImIn_SpreadOutHouse)
+        waitmovement(BAIYA)
 
         setobjectxy(TALA,2,7)
         setobjectxy(MAGNUS,18,9)
         setobjectxy(FRANK,10,11)
         setobjectxy(ELEANOR,15,17)
-        setobjectxy(KAI,3,13)
+        setobjectxy(BAIYA,3,13)
 
         setobjectxyperm(TALA,2,7)
         setobjectxyperm(MAGNUS,18,9)
         setobjectxyperm(FRANK,10,11)
         setobjectxyperm(ELEANOR,15,17)
-        setobjectxyperm(KAI,3,13)
+        setobjectxyperm(BAIYA,3,13)
 
         release
         end
@@ -254,7 +254,7 @@ script ImIn_FindLockedDoor_Script
 
         msgbox(format("I found a door with an electronic lock! It takes six digits."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("Guess we're all looking for any numbers that seem important. No way it's just their birthday, right?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Guess we're all looking for any numbers that seem important. No way it's just their birthday, right?"),,SPEAKER_BAIYA_TIDE)
                 closemessage
 
         release
@@ -312,9 +312,9 @@ script ImIn_EnterCorrectCode_Script
         waitmovement(MAGNUS)
         removeobject(MAGNUS)
         playse(SE_WARP_OUT)
-        applymovement(KAI, moves(walk_up, walk_left, step_end))
-        waitmovement(KAI)
-        removeobject(KAI)
+        applymovement(BAIYA, moves(walk_up, walk_left, step_end))
+        waitmovement(BAIYA)
+        removeobject(BAIYA)
         playse(SE_WARP_OUT)
 
         setvar(VAR_STORYLINE_STATE,STORY_WARP_TILE_ACCESSIBLE)
@@ -328,7 +328,7 @@ const TALA_B = 3
 const MAGNUS_B = 4
 const FRANK_B = 5
 const ELEANOR_B = 6
-const KAI_B = 7
+const BAIYA_B = 7
 
 script ImIn_MakeRaidPartyVisible_Script
 {
@@ -365,7 +365,7 @@ script ImIn_PostWarpSplit_Dialogue
 
         applymovement(TALA_B,ImIn_WalkAwayFromWarpC)
         applymovement(ELEANOR_B,ImIn_WalkAwayFromWarpC)
-        applymovement(KAI_B,ImIn_WalkAwayFromWarpC)
+        applymovement(BAIYA_B,ImIn_WalkAwayFromWarpC)
         delay(30)
 
         fadescreen(FADE_TO_BLACK)
@@ -373,7 +373,7 @@ script ImIn_PostWarpSplit_Dialogue
         removeobject(MAGNUS_B)
         removeobject(FRANK_B)
         removeobject(ELEANOR_B)
-        removeobject(KAI_B)
+        removeobject(BAIYA_B)
         fadescreen(FADE_FROM_BLACK)
         call(TryAutoSave)
         endcutscene
@@ -437,7 +437,7 @@ script ImIn_OfficeReveal_Dialogue{
 script ImIn_StartCharlotteBattle_Script {
 
     lock
-        msgbox(format("If you and Kai are dead, do you think I get to be Champion instead?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("If you and Baiya are dead, do you think I get to be Champion instead?"),,SPEAKER_CHARLOTTE_SHARPRISE)
         closemessage
 
         trainerbattle_no_intro(TRAINER_CHARLOTTE_IMIN,format("How does this keep happening?!?!?"))

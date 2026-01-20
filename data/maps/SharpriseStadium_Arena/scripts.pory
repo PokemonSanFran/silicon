@@ -61,7 +61,7 @@ script SharpriseStadium_Arena_MapScripts_OnTransition {
         case 2: setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_ROOFTOP_SALE_WOMAN)
         case 3: setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_CAMPER)
         case 4: setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_GAMEBOY_KID)
-        case 5: setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_KAI)
+        case 5: setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_BAIYA)
     }
 
 }

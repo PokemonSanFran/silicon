@@ -324,9 +324,9 @@ script Manhunt_ReactAdaoraArrest_Dialogue
     return
 }
 
-script Manhunt_ReactAdaoraKaiArrest_Dialogue
+script Manhunt_ReactAdaoraBaiyaArrest_Dialogue
 {
-    bufferstring(STR_VAR_1,"Adaora and Kai")
+    bufferstring(STR_VAR_1,"Adaora and Baiya")
     call(Manhunt_React_Dialogue)
     return
 }
@@ -363,7 +363,7 @@ script Manhunt_Encounter_Vigrim_Dialogue {
             msgbox(format("Stop hurting people. I'm here."),MSGBOX_NPC,SPEAKER_VIGRIM)
 
         case FALSE_TIMELINE_HOW_BURN_COMPLETE:
-            call(Manhunt_ReactAdaoraKaiArrest_Dialogue)
+            call(Manhunt_ReactAdaoraBaiyaArrest_Dialogue)
 
         case FALSE_TIMELINE_HOW_COMPLETE:
             call(Manhunt_ReactAdaoraArrest_Dialogue)

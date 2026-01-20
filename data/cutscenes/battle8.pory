@@ -1,22 +1,22 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
-const FLAG_HIDE_KAI = FLAG_TEMP_1
+const BAIYA = 1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 
 script Battle8_SetUpObject_Script
 {
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
 }
 
 script Battle8_StartBattle_ObjectSetUp_Script
 {
-    setobjectxyperm(KAI,19,16)
-    setobjectxy(KAI,19,16)
+    setobjectxyperm(BAIYA,19,16)
+    setobjectxy(BAIYA,19,16)
 }
 
 script Battle8_FaceGoToPlayer
 {
     lock
-    setvar(VAR_BATTLE_8_STATE,SAVE_KAI_PINTILLONHOUSE)
+    setvar(VAR_BATTLE_8_STATE,SAVE_BAIYA_PINTILLONHOUSE)
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
 
     playse(SE_PIN)
@@ -24,25 +24,25 @@ script Battle8_FaceGoToPlayer
     if (var(VAR_TEMP_0) == 17)
     {
         applymovement(PLAYER,Common_Movement_FaceRight)
-        applymovement(KAI,Battle8_ExclaimAndTurn_Movement)
-        waitmovement(KAI)
-        applymovement(KAI,Common_Movement_WalkLeft)
+        applymovement(BAIYA,Battle8_ExclaimAndTurn_Movement)
+        waitmovement(BAIYA)
+        applymovement(BAIYA,Common_Movement_WalkLeft)
     }
     else
     {
         applymovement(PLAYER,Common_Movement_FaceLeft)
-        applymovement(KAI,Battle8_ExclaimAndTurn_Movement)
-        waitmovement(KAI)
-        applymovement(KAI,Common_Movement_WalkRight)
+        applymovement(BAIYA,Battle8_ExclaimAndTurn_Movement)
+        waitmovement(BAIYA)
+        applymovement(BAIYA,Common_Movement_WalkRight)
     }
-    waitmovement(KAI)
+    waitmovement(BAIYA)
     goto(Battle8_ExplainAttraction_Dialogue)
 }
 
-script Battle8_InteractKai
+script Battle8_InteractBaiya
 {
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-    if (var(VAR_BATTLE_8_STATE) == NOT_INTERACTED_KAI)
+    if (var(VAR_BATTLE_8_STATE) == NOT_INTERACTED_BAIYA)
     {
        call(Battle8_ExplainAttraction_Dialogue)
     }
@@ -54,21 +54,21 @@ script Battle8_InteractKai
 
 script Battle8_ExplainAttraction_Dialogue
 {
-    msgbox(format("You know, I was in a good mood after breaking S Rank, and now all of a sudden…"),MSGBOX_DEFAULT,SPEAKER_KAI)
+    msgbox(format("You know, I was in a good mood after breaking S Rank, and now all of a sudden…"),MSGBOX_DEFAULT,SPEAKER_BAIYA)
 
         if (var(VAR_TEMP_0) == 26){
             closemessage
-                applymovement(KAI, moves(walk_right * 6, step_end))
+                applymovement(BAIYA, moves(walk_right * 6, step_end))
                 waitmovement(0)
         }
 
     msgbox(format("Great to see you too. What rank thing are you talking about?"),,SPEAKER_ALICIA)
 
-        msgbox(format("One of the big attractions of Resido - the Seven Sisters Challenge. It used to be a lot more popular when 1v1 battles were a novelty- before the corporations declared it as the official League format."),MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("One of the big attractions of Resido - the Seven Sisters Challenge. It used to be a lot more popular when 1v1 battles were a novelty- before the corporations declared it as the official League format."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
 
         msgbox(format("So, what's the challenge? And how do you get an S Rank?"),,SPEAKER_ALICIA)
 
-        msgbox(format("The sisters are experts in 1v1, and you've got to beat all of them, in a row, in as few turns as possible. I've heard a rumor that Magnus got an SS Rank once, but those guys are on a different level… but you're not even close to that."),MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("The sisters are experts in 1v1, and you've got to beat all of them, in a row, in as few turns as possible. I've heard a rumor that Magnus got an SS Rank once, but those guys are on a different level… but you're not even close to that."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
         closemessage
 
         startmenu_savescreen
@@ -83,25 +83,25 @@ script Battle8_StartBattle_Script
         msgbox(format("You talk a lot of shit for somebody that's never beaten me."),,SPEAKER_ALICIA)
         closemessage
 
-        trainerbattle_no_intro(TRAINER_KAI_BATTLE8,format("Maybe I need to get an SS Rank to keep up with you…"))
-        goto(Battle8_KaiDefeated_Dialogue)
+        trainerbattle_no_intro(TRAINER_BAIYA_BATTLE8,format("Maybe I need to get an SS Rank to keep up with you…"))
+        goto(Battle8_BaiyaDefeated_Dialogue)
 }
 
-script Battle8_KaiDefeated_Dialogue
+script Battle8_BaiyaDefeated_Dialogue
 {
     lock
         startcutscene(JUMPPLAYER_BATTLE8)
-        setvar(VAR_BATTLE_8_STATE,DEFEATED_KAI_PINTILLONHOUSE)
+        setvar(VAR_BATTLE_8_STATE,DEFEATED_BAIYA_PINTILLONHOUSE)
         addvar(VAR_STORYLINE_STATE,1)
 
         msgbox(format("You know, it doesn't have to be like this. I'm not out to get you."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah, that's part of the problem. Your ignorance of the situation and your skill almost makes it worse."),MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("Yeah, that's part of the problem. Your ignorance of the situation and your skill almost makes it worse."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
 
         msgbox(format("What situation? I'm just doing the Gym Challenge. Just like you."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-        msgbox(format("You're collecting badges on this highly curated route, sure, but you're not engaging with the region - my home - beyond that."),MSGBOX_DEFAULT,SPEAKER_KAI)
-        msgbox(format("This region has rich with so much culture that you won't see unless you dig deeper. If you actually care, the Seven Sisters Challenge is a good start."),MSGBOX_DEFAULT,SPEAKER_KAI)
+        msgbox(format("You're collecting badges on this highly curated route, sure, but you're not engaging with the region - my home - beyond that."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
+        msgbox(format("This region has rich with so much culture that you won't see unless you dig deeper. If you actually care, the Seven Sisters Challenge is a good start."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
         closemessage
 
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
@@ -112,9 +112,9 @@ script Battle8_KaiDefeated_Dialogue
                 applymovement(PLAYER,Common_Movement_FaceUp)
         }
 
-    applymovement(KAI, moves(walk_left * 8, step_end))
+    applymovement(BAIYA, moves(walk_left * 8, step_end))
         waitmovement(0)
-        removeobject(KAI)
+        removeobject(BAIYA)
         fadedefaultbgm
         call(TryAutoSave)
         endcutscene

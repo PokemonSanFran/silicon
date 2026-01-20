@@ -1444,7 +1444,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/maps/GlavezHill_Taxiunion/scripts.inc"
 .include "data/maps/Gldntepark_Helebra_Research/scripts.inc"
 .include "data/maps/HalaiIsland/scripts.inc"
-.include "data/maps/HalaiIsland_Kai/scripts.inc"
+.include "data/maps/HalaiIsland_Baiya/scripts.inc"
 .include "data/maps/HalaiIsland_PokemonCenter_1F/scripts.inc"
 .include "data/maps/HalaiIsland_PostEarthquake/scripts.inc"
 .include "data/maps/HalerbaCity/scripts.inc"

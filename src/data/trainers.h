@@ -462,14 +462,14 @@
         },
     },
 #line 270
-    [DIFFICULTY_NORMAL][TRAINER_KAI_NEWASSHOLEAPPEARS] =
+    [DIFFICULTY_NORMAL][TRAINER_BAIYA_NEWASSHOLEAPPEARS] =
     {
 #line 271
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 273
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 272
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 0,
 #line 275
@@ -479,15 +479,15 @@
 #line 274
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 276
-        .characterRevealId = REVEAL_KAI,
+        .characterRevealId = REVEAL_BAIYA,
 #line 278
         .trainerType = GLASS_TRAINER_TYPE_BOSS,
 #line 279
-        .objectEventGraphicsId = OBJ_EVENT_GFX_KAI,
+        .objectEventGraphicsId = OBJ_EVENT_GFX_BAIYA,
 #line 280
         .mapSec = MAPSEC_ROUTE10,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -759,14 +759,14 @@
         },
     },
 #line 396
-    [DIFFICULTY_NORMAL][TRAINER_KAI_ASSHOLEHOME] =
+    [DIFFICULTY_NORMAL][TRAINER_BAIYA_ASSHOLEHOME] =
     {
 #line 397
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 399
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 398
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 0,
 #line 401
@@ -774,7 +774,7 @@
 #line 400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -2026,14 +2026,14 @@
         },
     },
 #line 932
-    [DIFFICULTY_NORMAL][TRAINER_KAI_BATTLE8] =
+    [DIFFICULTY_NORMAL][TRAINER_BAIYA_BATTLE8] =
     {
 #line 933
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 935
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 934
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 0,
 #line 937
@@ -2041,7 +2041,7 @@
 #line 936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -2617,14 +2617,14 @@
         },
     },
 #line 1177
-    [DIFFICULTY_NORMAL][TRAINER_KAI_WHYAREYOUHELPINGTHEM] =
+    [DIFFICULTY_NORMAL][TRAINER_BAIYA_WHYAREYOUHELPINGTHEM] =
     {
 #line 1178
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 1180
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 1179
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 0,
 #line 1182
@@ -2632,7 +2632,7 @@
 #line 1181
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -3254,20 +3254,20 @@
         },
     },
 #line 1438
-    [DIFFICULTY_NORMAL][TRAINER_KAI_FINALS] =
+    [DIFFICULTY_NORMAL][TRAINER_BAIYA_FINALS] =
     {
 #line 1439
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 1441
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 1440
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 0,
 #line 1442
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -3459,14 +3459,14 @@
         },
     },
 #line 1523
-    [DIFFICULTY_NORMAL][TRAINER_KAI_LETSGRABLUNCH] =
+    [DIFFICULTY_NORMAL][TRAINER_BAIYA_LETSGRABLUNCH] =
     {
 #line 1524
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 1526
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 1525
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 0,
 #line 1528
@@ -3474,7 +3474,7 @@
 #line 1527
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -4246,14 +4246,14 @@
         },
     },
 #line 1862
-    [DIFFICULTY_NORMAL][TRAINER_KAI_LETSBURNTHISMOTHERDOWN] =
+    [DIFFICULTY_NORMAL][TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN] =
     {
 #line 1863
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 1865
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 1864
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 0,
 #line 1867
@@ -4261,7 +4261,7 @@
 #line 1866
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {

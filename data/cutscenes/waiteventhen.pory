@@ -1,5 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
+const BAIYA = 1
 const ADAORA = 2
 const MAGNUS = 3
 const PKMNC = 6
@@ -23,15 +23,15 @@ script WaitEvenThen_BossSetUp_Script {
 
         addobject(ADAORA)
         addobject(MAGNUS)
-        addobject(KAI)
+        addobject(BAIYA)
 
         setobjectmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_UP)
         setobjectxyperm(MAGNUS,39,4)
         setobjectxy(MAGNUS,39,4)
 
-        setobjectmovementtype(KAI,MOVEMENT_TYPE_FACE_UP)
-        setobjectxy(KAI,34,6)
-        setobjectxyperm(KAI,34,6)
+        setobjectmovementtype(BAIYA,MOVEMENT_TYPE_FACE_UP)
+        setobjectxy(BAIYA,34,6)
+        setobjectxyperm(BAIYA,34,6)
 
         setobjectmovementtype(ADAORA,MOVEMENT_TYPE_FACE_UP)
         setobjectxy(ADAORA,33,7)
@@ -50,9 +50,9 @@ script WaitEvenThen_ObjectSetUp_Script {
 
         clearflag(FLAG_HIDE_SEARCH)
 
-        addobject(KAI)
-        setobjectxy(KAI,25,5)
-        applymovement(KAI,Common_Movement_FaceRight)
+        addobject(BAIYA)
+        setobjectxy(BAIYA,25,5)
+        applymovement(BAIYA,Common_Movement_FaceRight)
 
         addobject(ADAORA)
         setobjectxy(ADAORA,24,4)
@@ -70,14 +70,14 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
         call(WaitEvenThen_ObjectSetUp_Script)
 
         applymovement(PLAYER, moves(walk_right * 6, walk_down * 2, walk_right * 2, face_up, step_end))
-        applymovement(KAI, moves(walk_right * 6, walk_down, walk_right * 3, face_up, step_end))
+        applymovement(BAIYA, moves(walk_right * 6, walk_down, walk_right * 3, face_up, step_end))
         applymovement(ADAORA, moves(walk_right * 7, walk_down * 3, walk_right * 2, face_up, step_end))
         applymovement(MAGNUS, moves(walk_right * 7, walk_down * 2, walk_right * 3, face_up, step_end))
         waitmovement(MAGNUS)
 
         msgbox(format("I found the access commands. I think I can turn this off, but I’m certain that it's going to attack us when we do."),,SPEAKER_MAGNUS)
 
-        msgbox(format("{PLAYER} and I can handle it. Let it rip!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("{PLAYER} and I can handle it. Let it rip!"),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -99,8 +99,8 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
 
         msgbox(format("ROAR"),MSGBOX_AUTOCLOSE)
 
-        setobjectxy(KAI,34,6)
-        setobjectxyperm(KAI,34,6)
+        setobjectxy(BAIYA,34,6)
+        setobjectxyperm(BAIYA,34,6)
         setobjectxy(ADAORA,33,7)
         setobjectxyperm(ADAORA,33,7)
         setobjectxyperm(MAGNUS,39,4)
@@ -164,10 +164,10 @@ script WaitEvenThen_PostBossDialogue {
         setvar(VAR_HALAI_ISLAND_STATE,POST_THIS_ISNT_RANDOM)
 
         applymovement(PLAYER,Common_Movement_FaceDown)
-        applymovement(KAI,Common_Movement_FaceDown)
+        applymovement(BAIYA,Common_Movement_FaceDown)
         applymovement(MAGNUS,Common_Movement_FaceDown)
 
-        msgbox(format("Damn, a Power Spot, all the way out here?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Damn, a Power Spot, all the way out here?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Between SharpRise Capital and the government, I guess nothing is off limits."),,SPEAKER_MAGNUS)
 
@@ -179,10 +179,10 @@ script WaitEvenThen_PostBossDialogue {
         applymovement(ADAORA, moves(walk_left * 6, walk_up * 3, walk_left * 4, step_end))
         waitmovement(ADAORA)
 
-        applymovement(KAI,Common_Movement_FaceLeft)
+        applymovement(BAIYA,Common_Movement_FaceLeft)
         applymovement(PLAYER,Common_Movement_FaceRight)
 
-        msgbox(format("Coming with me, {PLAYER}?"),MSGBOX_YESNO,,SPEAKER_KAI_TIDE)
+        msgbox(format("Coming with me, {PLAYER}?"),MSGBOX_YESNO,,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -191,13 +191,13 @@ script WaitEvenThen_PostBossDialogue {
             warp(MAP_HALAI_ISLAND,255,34,13)
                 end
         }else {
-                msgbox(format("Meet us in the center of town, okay?"),,SPEAKER_KAI_TIDE)
+                msgbox(format("Meet us in the center of town, okay?"),,SPEAKER_BAIYA_TIDE)
                 closemessage
 
-                applymovement(KAI, moves(walk_up, walk_left * 9, step_end))
-                waitmovement(KAI)
+                applymovement(BAIYA, moves(walk_up, walk_left * 9, step_end))
+                waitmovement(BAIYA)
 
-                removeobject(KAI)
+                removeobject(BAIYA)
                 removeobject(MAGNUS)
                 removeobject(ADAORA)
         }

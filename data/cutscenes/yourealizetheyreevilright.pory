@@ -1,11 +1,11 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
+const BAIYA = 1
 const MAGNUS = 2
 const TALA = 3
 const GARBODOR = 4
-const KAI_OUTSIDE = 10
+const BAIYA_OUTSIDE = 10
 
-const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 const FLAG_HIDE_ELITES_1 = FLAG_TEMP_2
 const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
 const FLAG_HIDE_FRANK = FLAG_TEMP_5
@@ -17,8 +17,8 @@ const FLAG_HIDE_ARIANNA = FLAG_TEMP_9
 //YouRealizeTheyreEvilRight_
 
 script YouRealizeTheyreEvilRight_HideObject_Script {
-    if (var(VAR_ARANTRAZ_STATE) != KAI_SUMMONED_ARANTRAZ && var(VAR_ARANTRAZ_STATE) != POST_ARRIVE_ARANTRAZ){
-        setflag(FLAG_HIDE_KAI)
+    if (var(VAR_ARANTRAZ_STATE) != BAIYA_SUMMONED_ARANTRAZ && var(VAR_ARANTRAZ_STATE) != POST_ARRIVE_ARANTRAZ){
+        setflag(FLAG_HIDE_BAIYA)
     }
     return
 }
@@ -29,7 +29,7 @@ script YouRealizeTheyreEvilRight_HideGarbodor_Script {
 }
 
 script YouRealizeTheyreEvilRight_HideBasement_Script {
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
     setflag(FLAG_HIDE_ELITES_1)
     setflag(FLAG_HIDE_GARBODOR)
     setflag(FLAG_HIDE_FRANK)
@@ -53,13 +53,13 @@ script YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script {
 script YouRealizeTheyreEvilRight_CallPlayer_Dialogue {
     lock
         startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_PHONE)
-        setvar(VAR_ARANTRAZ_STATE,KAI_SUMMONED_ARANTRAZ)
-        clearflag(FLAG_KAI_CALL_ARANTRAZ)
+        setvar(VAR_ARANTRAZ_STATE,BAIYA_SUMMONED_ARANTRAZ)
+        clearflag(FLAG_BAIYA_CALL_ARANTRAZ)
         msgbox(format("Holy shit. That was intense. Guess I need to think all this over, but something isn't adding up."),,SPEAKER_ALICIA)
 
         call(Common_EventScript_PhoneRinging)
         special(YouRealizeTheyreEvilRight_GetMapForCompletedRestoration)
-        msgbox(format("Awesome job in {STR_VAR_1}. I heard all about it, and I'm so happy things are getting off the ground. I heard you got a phone call and disappeared. Everything okay?"),,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("Awesome job in {STR_VAR_1}. I heard all about it, and I'm so happy things are getting off the ground. I heard you got a phone call and disappeared. Everything okay?"),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
 
         msgbox(format("SharpRise Capital called me. They don't love our project."),,SPEAKER_ALICIA,,,PHONE_ON)
 
@@ -69,19 +69,19 @@ script YouRealizeTheyreEvilRight_CallPlayer_Dialogue {
         delay(30)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(format("You seem surprised."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("You seem surprised."),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
 
         msgbox(format("You're not?"),,SPEAKER_ALICIA,,,PHONE_ON)
 
-        msgbox(format("I've been trying to tell you the whole time, these guys are ruthless. Cruel, even. Good timing though, I think I can finally explain everything to you."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("I've been trying to tell you the whole time, these guys are ruthless. Cruel, even. Good timing though, I think I can finally explain everything to you."),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
 
         msgbox(format("What do you mean?"),,SPEAKER_ALICIA,,,PHONE_ON)
 
         questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HANG20)
         if (var(VAR_RESULT)){
-            msgbox(format("I wanna show you but you'll need to cross some water to get here. You know how to use {STR_VAR_1}, right? No? You can learn pretty quickly at the Cresalta Vista beach, and then meet me on Arantraz."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
+            msgbox(format("I wanna show you but you'll need to cross some water to get here. You know how to use {STR_VAR_1}, right? No? You can learn pretty quickly at the Cresalta Vista beach, and then meet me on Arantraz."),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
         } else {
-            msgbox(format("I wanna show you instead. Come to Arantraz."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
+            msgbox(format("I wanna show you instead. Come to Arantraz."),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
         }
     playse(SE_POKENAV_HANG_UP)
         waitse
@@ -104,7 +104,7 @@ script YouRealizeTheyreEvilRight_PlayerLandedDialogue {
 
         msgbox(format("I'm here! Where are you?"),,SPEAKER_ALICIA,,,PHONE_ON)
 
-        msgbox(format("Come swim around the northeast side of the island! You'll see me."),,SPEAKER_KAI_TIDE,,,PHONE_ON)
+        msgbox(format("Come swim around the northeast side of the island! You'll see me."),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
 
         closemessage
 
@@ -114,18 +114,18 @@ script YouRealizeTheyreEvilRight_PlayerLandedDialogue {
         end
 }
 
-script YouRealizeTheyreEvilRight_InteractKai {
+script YouRealizeTheyreEvilRight_InteractBaiya {
     lock
         setvar(VAR_ARANTRAZ_STATE,PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT)
-        msgbox(format("Welcome to the real Arantraz. I'm going down to the second level, but you should explore here first before coming straight down."),MSGBOX_NPC,SPEAKER_KAI_TIDE)
+        msgbox(format("Welcome to the real Arantraz. I'm going down to the second level, but you should explore here first before coming straight down."),MSGBOX_NPC,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
-        applymovement(KAI_OUTSIDE,Common_Movement_WalkUp)
+        applymovement(BAIYA_OUTSIDE,Common_Movement_WalkUp)
         waitmovement(0)
         playse(SE_EXIT)
         waitse
-        removeobject(KAI_OUTSIDE)
+        removeobject(BAIYA_OUTSIDE)
         call(TryAutoSave)
         release
         end
@@ -170,7 +170,7 @@ script YouRealizeTheyreEvilRight_RemoveGhost {
 }
 
 script YouRealizeTheyreEvil_ReleaseGarbodor_Script {
-    applymovement(KAI, moves(lock_facing_direction, walk_up, walk_in_place_down, unlock_facing_direction, step_end))
+    applymovement(BAIYA, moves(lock_facing_direction, walk_up, walk_in_place_down, unlock_facing_direction, step_end))
         waitmovement(0)
 
         playse(SE_BALL_OPEN)
@@ -192,9 +192,9 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         msgbox(format("The Champion has arrived! Great to meet you, I'm Magnus, and I'm the leader of the Resido Elite Four. Or, I was. Now I'm not really sure what I do."),,SPEAKER_MAGNUS)
         reveal(REVEAL_MAGNUS)
 
-        msgbox(format("Nice to meet you! …Kai, where are we?"),,SPEAKER_ALICIA)
+        msgbox(format("Nice to meet you! …Baiya, where are we?"),,SPEAKER_ALICIA)
 
-        msgbox(format("TheTide has been using Arantraz's abandoned prison as a training ground."),,SPEAKER_KAI_TIDE)
+        msgbox(format("TheTide has been using Arantraz's abandoned prison as a training ground."),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -204,19 +204,19 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
 
         msgbox(format("Wow! Super resourceful. Genius, even."),,SPEAKER_MAGNUS)
 
-        msgbox(format("I can finally prove that SharpRise Capital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit."),,SPEAKER_KAI_TIDE)
+        msgbox(format("I can finally prove that SharpRise Capital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Did you drag me out here to join a terrorist organization? Did you hear ANYTHING I said on the phone?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Yes! Wait, no… No, Yes!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Yes! Wait, no… No, Yes!"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("TheTide doesn't do anything for this region. You're attacking innocent people, trying to destroy buildings - fuck, I absolutely should have turned you in!"),,SPEAKER_ALICIA)
 
-        msgbox(format("{PLAYER}, listen! I can prove that none of that is true."),,SPEAKER_KAI_TIDE)
+        msgbox(format("{PLAYER}, listen! I can prove that none of that is true."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("How?!?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Look."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Look."),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -224,11 +224,11 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         applymovement(MAGNUS,Common_Movement_FaceLeft)
         applymovement(TALA,Common_Movement_FaceUp)
 
-        msgbox(format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Yeah. Charlotte and I had to go down there and defeat them and your goons."),,SPEAKER_ALICIA)
 
-        msgbox(format("I bet you’ll think differently after you take a closer look at what it’s holding. "),,SPEAKER_KAI_TIDE)
+        msgbox(format("I bet you’ll think differently after you take a closer look at what it’s holding. "),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("I really doubt it."),,SPEAKER_ALICIA)
 		closemessage
@@ -249,13 +249,13 @@ script YouRealizeTheyreEvilRight_GemDiscovery_Dialogue
 {
         msgbox(format("Wait... is that really a Gem?"),,SPEAKER_ALICIA)
 
-        msgbox(format("A Normal Gem to be specific. You've heard of them?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("A Normal Gem to be specific. You've heard of them?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Lucrezia gave me one of those after we stopped the SharpRise Stadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!"),,SPEAKER_ALICIA)
 
         msgbox(format("I’ve had the opportunity to see Gems a few times in my career and I can attest that this one is very real."),,SPEAKER_MAGNUS)
 
-        msgbox(format("While I was keeping an eye on things during the SharpRise Stadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe SharpRise  left one of these Gems on it. They’re the only ones who have access to something like this in the region."),,SPEAKER_KAI_TIDE)
+        msgbox(format("While I was keeping an eye on things during the SharpRise Stadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe SharpRise  left one of these Gems on it. They’re the only ones who have access to something like this in the region."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Lucrezia confirmed that when she gave me my Gem. So the only way this Garbador could have one…"),,SPEAKER_ALICIA)
 
@@ -265,43 +265,43 @@ script YouRealizeTheyreEvilRight_GemDiscovery_Dialogue
 
 script YouRealizeTheyreEvilRight_Framing_Dialogue {
         setvar(VAR_ARANTRAZ_STATE,POST_YOU_REALIZE_THEYRE_EVIL_RIGHT)
-        msgbox(format("Kai… Are you saying SharpRise Capital has been framing you?"),,SPEAKER_ALICIA)
+        msgbox(format("Baiya… Are you saying SharpRise Capital has been framing you?"),,SPEAKER_ALICIA)
 
         msgbox(format("That doesn't make sense for SharpRise - they've been so good to me!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(format("{PLAYER}, you also met up with TheTide in Oroland too, right?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("{PLAYER}, you also met up with TheTide in Oroland too, right?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("…yeah. But Adaora said that situation was super weird and was trying to track them down."),,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpRise Capital has been sending in agents to make us look shitty. Between that and whatever else SharpRise Capital is feeding you, I'm not surprised you feel the way you do."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Yeah, nobody knows who they are or where they came from. Based off from what you just said, SharpRise Capital has been sending in agents to make us look shitty. Between that and whatever else SharpRise Capital is feeding you, I'm not surprised you feel the way you do."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Why? Why do all this to just to screw with you guys?"),,SPEAKER_ALICIA)
 
         msgbox(format("What is he talking about? SharpRise has spent all this money reshaping the League - doesn't that benefit all Trainers?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(format("SharpRise Capital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities. And now that they've had a successful run at it, they're sinking their fingers into even more of Resido - they're not going to stop at some Pokemon League."),,SPEAKER_KAI_TIDE)
+        msgbox(format("SharpRise Capital exists to make money. They don't care about you. Or us. Or the region. You weren't here when they first bought the League. They were ruthless. Fired thousands of people, dismantled and reshaped communities. And now that they've had a successful run at it, they're sinking their fingers into even more of Resido - they're not going to stop at some Pokemon League."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Can't argue with that."),,SPEAKER_TALA)
 
         msgbox(format("Kei-Ying said that SharpRise's goal is to uplift the entire region. They've already managed to change my life with access to all these apps and services - why WOULD they stop with just us? They want to help everybody!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(format("I joined the League Challenge to try to change things from the inside. But now I'm certain that we need external pressure in order to improve things for all of us."),,SPEAKER_KAI_TIDE)
+        msgbox(format("I joined the League Challenge to try to change things from the inside. But now I'm certain that we need external pressure in order to improve things for all of us."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("And that's why we're all here."),,SPEAKER_TALA)
 
-        msgbox(format("Yep. I think it's finally time we all come together to expose SharpRise Capital for the assholes that they are, and start to take power back for the people."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Yep. I think it's finally time we all come together to expose SharpRise Capital for the assholes that they are, and start to take power back for the people."),,SPEAKER_BAIYA_TIDE)
 
         closemessage
         goto(YouRealizeTheyreEvilRight_InnerMonologue_Dialogue)
 }
 
 script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
-    applymovement(KAI, moves(walk_left, walk_down * 2, face_right, step_end))
+    applymovement(BAIYA, moves(walk_left, walk_down * 2, face_right, step_end))
     waitmovement(0)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(0)
 
-    msgbox(format("Look, I know this is a lot of information to take in. I know you're going to make the right decision..."),,SPEAKER_KAI_TIDE)
+    msgbox(format("Look, I know this is a lot of information to take in. I know you're going to make the right decision..."),,SPEAKER_BAIYA_TIDE)
     closemessage
 
     fadescreen(FADE_TO_BLACK)
@@ -309,7 +309,7 @@ script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
     msgbox(format("They're just asking for trouble. The protests, the hacking, the riots... is that really what I want? Adaora says The Tide doesn't condone violence, but can I even believe her?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("They might think they're right. They do want to protect Resido and make a difference, but this isn't it."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("I've worked so hard to get this far. To become the Champion. I can make a difference as I am! Throwing it all away now doesn't make any sense."),,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Kai even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Is The Tide just manipulating me, like they tried with the social media stunt?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Baiya even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Is The Tide just manipulating me, like they tried with the social media stunt?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     msgbox(format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     fadescreen(FADE_FROM_BLACK)
@@ -322,16 +322,16 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
     playse(SE_PIN)
     applymovement(MAGNUS,Common_Movement_ExclamationMark)
     applymovement(TALA,Common_Movement_ExclamationMark)
-    applymovement(KAI,Common_Movement_ExclamationMark)
-    waitmovement(KAI)
+    applymovement(BAIYA,Common_Movement_ExclamationMark)
+    waitmovement(BAIYA)
     applymovement(TALA,Common_Movement_FacePlayer)
     waitmovement(TALA)
-    msgbox(format("Wait what? {PLAYER}, you're making a mistake!"),,SPEAKER_KAI_TIDE,,EMOTE_SHOCK)
+    msgbox(format("Wait what? {PLAYER}, you're making a mistake!"),,SPEAKER_BAIYA_TIDE,,EMOTE_SHOCK)
     msgbox(format("Wow... Frank was wrong about you after all."),,SPEAKER_TALA,TAIL_WHISPER,EMOTE_SAD)
-    msgbox(format("Don't you understand? You're being used, and they're not going to stop."),,SPEAKER_KAI_TIDE,,EMOTE_ANGRY)
-    msgbox(format("Just because you couldn't hack it doesn't mean the world is against you, Kai!"),,SPEAKER_ALICIA,,EMOTE_ANGRY)
-    msgbox(format("Couldn't hack it? I got second to you, and you had a HUGE head start!"),,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_ANGRY)
-    msgbox(format("Kai, {PLAYER} will not get it. Its too late."),,SPEAKER_MAGNUS)
+    msgbox(format("Don't you understand? You're being used, and they're not going to stop."),,SPEAKER_BAIYA_TIDE,,EMOTE_ANGRY)
+    msgbox(format("Just because you couldn't hack it doesn't mean the world is against you, Baiya!"),,SPEAKER_ALICIA,,EMOTE_ANGRY)
+    msgbox(format("Couldn't hack it? I got second to you, and you had a HUGE head start!"),,SPEAKER_BAIYA_TIDE,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Baiya, {PLAYER} will not get it. Its too late."),,SPEAKER_MAGNUS)
     closemessage
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(PLAYER)
@@ -365,7 +365,7 @@ script YouRealizeTheyreEvilRight_CantSleep_Script{
 }
 
 script YouRealizeTheyreEvilRight_CantSleep_Dialogue {
-        msgbox(format("Kai is still waiting for me at Arantraz…"),,SPEAKER_ALICIA)
+        msgbox(format("Baiya is still waiting for me at Arantraz…"),,SPEAKER_ALICIA)
 
         closemessage
         release
@@ -384,7 +384,7 @@ script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
             msgbox(format("What the hell was that? That dream was… insane. What the hell did I eat?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
             msgbox(format("Was that real? I sided with SharpRise Capital and... made things worse? Yeah, that was worse. It was just a dream... but it felt so real!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
             msgbox(format("That regret felt so real though. I was so disappointed. I was so wrong. It was all wrong!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
-            msgbox(format("I remember I yelled at Kai. I told him he couldn't hack it. I called them thugs. And I left. I was disguisting. Is he still there now?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("I remember I yelled at Baiya. I told him he couldn't hack it. I called them thugs. And I left. I was disguisting. Is he still there now?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }else{
 
         msgbox(format("I can't believe I almost fell for that stunt. Me? Siding with TheTide? After everything I've been through? And all that stuff, just because the battling is a little different?"),,SPEAKER_ALICIA,TAIL_THOUGHT)

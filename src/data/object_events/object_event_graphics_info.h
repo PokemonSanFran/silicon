@@ -5205,9 +5205,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Fis
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaNormal = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_KAI,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BAIYA,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -5220,7 +5220,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal = {
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_BrendanMayNormal,
-    .images = gObjectEventPicTable_KaiNormal,
+    .images = gObjectEventPicTable_BaiyaNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -5243,9 +5243,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal = {
     .compressed = FALSE,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFainted = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFainted = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_KAI,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BAIYA,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -5258,13 +5258,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFainted = {
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = gObjectEventPicTable_KaiFainted,
+    .images = gObjectEventPicTable_BaiyaFainted,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFieldMove = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFieldMove = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_KAI,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BAIYA,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -5277,7 +5277,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFieldMove = {
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_FieldMove,
-    .images = gObjectEventPicTable_KaiFieldMove,
+    .images = gObjectEventPicTable_BaiyaFieldMove,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

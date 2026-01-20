@@ -296,10 +296,10 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .bio = COMPOUND_STRING("- She looks back at the kitchen between words.\n- She smells strongly of food... but it's good!"),
         .accentColor = RGB(9,7,29),
     },
-    [REVEAL_KAI] =
+    [REVEAL_BAIYA] =
     {
-        .trainerId = TRAINER_KAI_NEWASSHOLEAPPEARS,
-        .buzzrId = BUZZR_USER_KAI,
+        .trainerId = TRAINER_BAIYA_NEWASSHOLEAPPEARS,
+        .buzzrId = BUZZR_USER_BAIYA,
         .quote = COMPOUND_STRING("I'm taking Resido back - this is my home!"),
         .bio = COMPOUND_STRING("- He hasn't broken eye contact with me once.\n- Despite his attitude, his Pokemon seem to love him."),
         .accentColor = RGB(28,14,9),

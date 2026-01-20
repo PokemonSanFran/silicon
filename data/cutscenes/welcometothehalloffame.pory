@@ -1,5 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
+const BAIYA = 1
 const LUCREZIA = 2
 const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
 
@@ -15,7 +15,7 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         clearflag(FLAG_HIDE_LUCREZIA)
         addobject(LUCREZIA)
         applymovement(LUCREZIA, moves(walk_left * 4, walk_up * 3, walk_left * 6, step_end))
-        applymovement(KAI, moves(walk_right, walk_up, face_down, step_end))
+        applymovement(BAIYA, moves(walk_right, walk_up, face_down, step_end))
         waitmovement(LUCREZIA)
 
         msgbox(format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. "),,SPEAKER_LUCREZIA)
@@ -26,9 +26,9 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
         fadescreen(FADE_TO_BLACK)
         setobjectxy(PLAYER,9,6)
-        setobjectxy(KAI,8,7)
+        setobjectxy(BAIYA,8,7)
         setobjectxy(LUCREZIA,7,7)
-        turnobject(KAI,DIR_SOUTH)
+        turnobject(BAIYA,DIR_SOUTH)
         turnobject(LUCREZIA,DIR_SOUTH)
         turnobject(PLAYER,DIR_SOUTH)
         TeleportCamera(9,6)

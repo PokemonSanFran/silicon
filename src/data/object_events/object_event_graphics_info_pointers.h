@@ -265,7 +265,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3FieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Underwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Fishing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigrimWalking;
@@ -281,9 +281,9 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KeiyingWalk
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagnusWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NerieneWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ShinzoWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFainted;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFainted;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraFainted;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFieldMove;
 // End silicon
 // Begin pokemon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
@@ -570,7 +570,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerN3Underwater,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerN3FieldMove,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerN3Fishing,
-    [OBJ_EVENT_GFX_KAI] =                      &gObjectEventGraphicsInfo_KaiNormal,
+    [OBJ_EVENT_GFX_BAIYA] =                      &gObjectEventGraphicsInfo_BaiyaNormal,
     [OBJ_EVENT_GFX_UNKNOWN] =                  &gObjectEventGraphicsInfo_UnknownNormal,
     [OBJ_EVENT_GFX_ADAORA] =                   &gObjectEventGraphicsInfo_AdaoraWalking,
     [OBJ_EVENT_GFX_VIGRIM] =                  &gObjectEventGraphicsInfo_VigrimWalking,
@@ -586,9 +586,9 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_MAGNUS] =                   &gObjectEventGraphicsInfo_MagnusWalking,
     [OBJ_EVENT_GFX_NERIENE] =                  &gObjectEventGraphicsInfo_NerieneWalking,
     [OBJ_EVENT_GFX_SHINZO] =                   &gObjectEventGraphicsInfo_ShinzoWalking,
-    [OBJ_EVENT_GFX_KAI_FAINTED] =              &gObjectEventGraphicsInfo_KaiFainted,
+    [OBJ_EVENT_GFX_BAIYA_FAINTED] =              &gObjectEventGraphicsInfo_BaiyaFainted,
     [OBJ_EVENT_GFX_ADAORA_FAINTED] =           &gObjectEventGraphicsInfo_AdaoraFainted,
-    [OBJ_EVENT_GFX_KAI_FIELD_MOVE] =           &gObjectEventGraphicsInfo_KaiFieldMove,
+    [OBJ_EVENT_GFX_BAIYA_FIELD_MOVE] =           &gObjectEventGraphicsInfo_BaiyaFieldMove,
     // End silicon
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,

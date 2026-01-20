@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const LUCREZIA = 1 //FLAG_TEMP_1
 const CHARLOTTE = 2 //FLAG_TEMP_2
-const KAI = 3 //FLAG_TEMP_3
+const BAIYA = 3 //FLAG_TEMP_3
 const OLIVER = 4 //FLAG_TEMP_4
 const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
@@ -14,12 +14,12 @@ script HeresHowThisIsGoingToGo_ObjectSetUp_Script{
     return
 }
 
-script HeresHowThisIsGoingToGo_ShowKaiandCharlotte{
+script HeresHowThisIsGoingToGo_ShowBaiyaandCharlotte{
     setflag(FLAG_HIDE_RAMESH)
     setflag(FLAG_HIDE_LUCREZIA)
     setflag(FLAG_HIDE_OLIVER)
-    setobjectxy(KAI,4,5)
-    setobjectxyperm(KAI,4,5)
+    setobjectxy(BAIYA,4,5)
+    setobjectxyperm(BAIYA,4,5)
     return
 }
 
@@ -100,7 +100,7 @@ script HeresHowThisIsGoingToGo_ExplainLeagueDialogue {
     startcutscene(JUMPPLAYER_HERESHOWTHISISGOINGTOGO)
     applymovement(PLAYER,Common_Movement_FaceUp)
     applymovement(CHARLOTTE,Common_Movement_FaceUp)
-    applymovement(KAI,Common_Movement_FaceUp)
+    applymovement(BAIYA,Common_Movement_FaceUp)
     waitmovement(0)
 
 msgbox(format("Congratulations on all of your hard work! Welcome to the first stage of the Resido League Championship!"),,SPEAKER_LUCREZIA)
@@ -129,8 +129,8 @@ removeobject(LUCREZIA)
 removeobject(OLIVER)
 call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
 fadescreen(FADE_FROM_BLACK)
-applymovement(KAI, moves(walk_down, walk_left * 7, walk_up * 2, step_end))
-waitmovement(KAI)
+applymovement(BAIYA, moves(walk_down, walk_left * 7, walk_up * 2, step_end))
+waitmovement(BAIYA)
     call(TryAutoSave)
 endcutscene
 releaseall

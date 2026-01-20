@@ -10,9 +10,9 @@ mapscripts Arantraz_MapScripts {
     ]
 
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_STORYLINE_STATE, STORY_EPILOGUE: Epilogue_Script_TalaApproachesKai
+        VAR_STORYLINE_STATE, STORY_EPILOGUE: Epilogue_Script_TalaApproachesBaiya
             FLAG_VISITED_ARANTRAZ, FALSE: Generic_Mappreview
-        VAR_ARANTRAZ_STATE, KAI_SUMMONED_ARANTRAZ: YouRealizeTheyreEvilRight_PlayerLandedDialogue
+        VAR_ARANTRAZ_STATE, BAIYA_SUMMONED_ARANTRAZ: YouRealizeTheyreEvilRight_PlayerLandedDialogue
     ]
 }
 

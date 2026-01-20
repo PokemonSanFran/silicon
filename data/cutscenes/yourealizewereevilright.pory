@@ -50,14 +50,14 @@ waitstate
 script YouRealizeWereEvilRight_Open_Dialogue {
     lockall
         setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_YOU_REALIZE_WERE_EVIL_RIGHT)
-        setflag(FLAG_KAI_CALL_ARANTRAZ)
+        setflag(FLAG_BAIYA_CALL_ARANTRAZ)
         setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
 
         applymovement(PLAYER,Common_Movement_FaceRight)
 
-        //Oliver and the player walk to the conference table. Ramesh is already at the table. The screens behind Ramesh light up as they all sit, showing Kai, the player, and the “Leader” of whatever Gym was restored first. PSF TODO
+        //Oliver and the player walk to the conference table. Ramesh is already at the table. The screens behind Ramesh light up as they all sit, showing Baiya, the player, and the “Leader” of whatever Gym was restored first. PSF TODO
 
-        setflag(FLAG_KAI_CALL_ARANTRAZ)
+        setflag(FLAG_BAIYA_CALL_ARANTRAZ)
         setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
 
         msgbox(format("We're enamored with the work you're doing and that you've become a mainstay with the professional battling community. "),,SPEAKER_OLIVER)
@@ -95,7 +95,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         msgbox(format("I think your kindness is being manipulated, {PLAYER}. Our data suggests that the very Gyms that you're turning into “community centers” are actually being used as recruitment and training hubs for The Tide."),,SPEAKER_KEIYING)
 
-        msgbox(format("Kai promised me The Tide was just there to help. Are you saying he lied to me?!"),SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Baiya promised me The Tide was just there to help. Are you saying he lied to me?!"),SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
         msgbox(format("They can't be trusted, {PLAYER}. The Tide used to be a small problem, but you've witnessed them growing increasingly violent and dangerous. You were there during the violent protests near Chasilla, and also saw how they nearly destroyed Sharp Rise Arena. For the good of the region, and our plans, we need to shut them down for good. "),,SPEAKER_KEIYING)
 

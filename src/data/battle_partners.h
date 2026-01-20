@@ -108,19 +108,19 @@
         },
     },
 #line 48
-    [DIFFICULTY_NORMAL][PARTNER_KAI] =
+    [DIFFICULTY_NORMAL][PARTNER_BAIYA] =
     {
 #line 49
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 50
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 51
-        .trainerPic = TRAINER_PIC_KAI,
+        .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
 #line 53
             TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_BAIYA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {

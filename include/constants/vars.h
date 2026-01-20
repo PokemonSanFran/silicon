@@ -320,7 +320,7 @@
 #define VAR_WALLY_CALL_STEP_COUNTER                      0x40F2
 #define VAR_ANEWSTRIKE_STEP_COUNTER                      0x40F2 // PSF Var
 #define VAR_SCOTT_FORTREE_CALL_STEP_COUNTER              0x40F3
-#define VAR_KAI_CALL_ARANTRAZ_STEP_COUNTER                 0x40F3 // PSF Var
+#define VAR_BAIYA_CALL_ARANTRAZ_STEP_COUNTER                 0x40F3 // PSF Var
 #define VAR_ROXANNE_CALL_STEP_COUNTER                    0x40F4
 #define VAR_BUZZR_STEP_COUNTER                         0x40F4 // PSF Var
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER                   0x40F5

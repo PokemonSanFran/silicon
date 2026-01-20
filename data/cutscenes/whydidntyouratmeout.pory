@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const LUCREZIA = 1 //FLAG_TEMP_1
 const CHARLOTTE = 2 //FLAG_TEMP_2
-const KAI = 3 //FLAG_TEMP_3
+const BAIYA = 3 //FLAG_TEMP_3
 const OLIVER = 4 //FLAG_TEMP_4
 
 script WhyDidntYouRatMeOut_HideObject_Script {
@@ -18,10 +18,10 @@ script WhyDidntYouRatMeOut_StopPlayerLeaving {
         startcutscene(JUMPPLAYER_WHYDIDNTYOURATMEOUT)
         setflag(FLAG_TEMP_1)
         setflag(FLAG_TEMP_2)
-        applymovement(KAI,Common_Movement_FaceDown)
+        applymovement(BAIYA,Common_Movement_FaceDown)
         waitmovement(0)
 
-        msgbox(format("Hey, {PLAYER}, wait."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Hey, {PLAYER}, wait."),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -30,13 +30,13 @@ script WhyDidntYouRatMeOut_StopPlayerLeaving {
 
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
         if (var(VAR_TEMP_0) == 9){
-            applymovement(KAI, moves(walk_down, walk_right * 5, walk_down, step_end))
+            applymovement(BAIYA, moves(walk_down, walk_right * 5, walk_down, step_end))
         }else {
-            applymovement(KAI, moves(walk_down, walk_right * 6, walk_down, step_end))
+            applymovement(BAIYA, moves(walk_down, walk_right * 6, walk_down, step_end))
         }
     waitmovement(0)
 
-        msgbox(format("Can we talk for a second?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Can we talk for a second?"),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -51,23 +51,23 @@ script WhyDidntYouRatMeOut_ConversationInStands {
 
         msgbox(format("What do you want?"),,SPEAKER_ALICIA)
 
-        msgbox(format("I didn't think we'd see each other here today."),,SPEAKER_KAI_TIDE)
+        msgbox(format("I didn't think we'd see each other here today."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Is something wrong with your brain where you have to insult me every chance you get? I'm a better Trainer than you, of course I'm here."),,SPEAKER_ALICIA)
 
-        msgbox(format("That's not what I meant! ...I don't know what I meant. "),,SPEAKER_KAI_TIDE)
+        msgbox(format("That's not what I meant! ...I don't know what I meant. "),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Uh huh."),,SPEAKER_ALICIA)
 
-        msgbox(format("When you walked in, I was actually just going to bail. Totally thought you were going to report me the first shot you got."),,SPEAKER_KAI_TIDE)
+        msgbox(format("When you walked in, I was actually just going to bail. Totally thought you were going to report me the first shot you got."),,SPEAKER_BAIYA_TIDE)
 
         waitmovement(0)
 
-        msgbox(format("Why didn't you?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Why didn't you?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("I still haven't decided that I'm not."),,SPEAKER_ALICIA)
 
-        msgbox(format("Wait shit -"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Wait shit -"),,SPEAKER_BAIYA_TIDE)
         closemessage
 
         applymovement(1, moves(lock_facing_direction, walk_right, unlock_facing_direction, step_end))
@@ -80,21 +80,21 @@ script WhyDidntYouRatMeOut_ConversationInStands {
         applymovement(1,Common_Movement_WalkLeft)
         waitmovement(0)
 
-        msgbox(format("Look {PLAYER} -"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Look {PLAYER} -"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("No, you look. I think you feel like you need to fight here. I'm just here for me. And... I don't think it's my place to take that from you. Not like that."),,SPEAKER_ALICIA)
 
-        msgbox(format("(Adaora and Kai... even Vigrim was nice to me. What am I missing?)"),,SPEAKER_ALICIA)
+        msgbox(format("(Adaora and Baiya... even Vigrim was nice to me. What am I missing?)"),,SPEAKER_ALICIA)
 
-        msgbox(format("...Thank you. And I'm sorry I've been such an ass to you. You don't deserve that."),,SPEAKER_KAI_TIDE)
+        msgbox(format("...Thank you. And I'm sorry I've been such an ass to you. You don't deserve that."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Uh huh. Let's see how long this lasts."),,SPEAKER_ALICIA)
 
-        msgbox(format("No seriously, it means a lot... but I still have to crush you in the Championship. "),,SPEAKER_KAI_TIDE)
+        msgbox(format("No seriously, it means a lot... but I still have to crush you in the Championship. "),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Like every other time you've beaten me, right. Besides, we're not going to meet until the Finals. You're not even going to make it through Charlotte!"),,SPEAKER_ALICIA)
 
-        msgbox(format("You know them?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("You know them?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Yeah, they're in the program with me. Insanely talented, and super smart. Good luck."),,SPEAKER_ALICIA)
 
@@ -103,7 +103,7 @@ script WhyDidntYouRatMeOut_ConversationInStands {
         playse(SE_POKENAV_CALL)
         waitse
 
-        msgbox(format("My group is starting soon. Later, cheater."),,SPEAKER_KAI_TIDE)
+        msgbox(format("My group is starting soon. Later, cheater."),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 

@@ -1,24 +1,24 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
-const FLAG_HIDE_KAI = FLAG_TEMP_1
+const BAIYA = 1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 
 script LetsFixThis_HideObjectHouse_Script
 {
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
 }
 
 script LetsFixThis_EliteVideo_Dialogue
 {
     startcutscene(JUMPPLAYER_LETSFIXTHIS)
     lock
-        clearflag(FLAG_HIDE_KAI)
-        addobject(KAI)
+        clearflag(FLAG_HIDE_BAIYA)
+        addobject(BAIYA)
 
         //PSF TODO should this be a video or just a series of tweets?
 
         msgbox(format("People of Resido, your Elite Four has returned! We could not continue to stand by and watch these corporations destroy our home for profits."),,SPEAKER_FRANK)
 
-        msgbox(format("We will be giving our full support and efforts to assisting TheTide in their mission to help the people of this region, alongside Champion {PLAYER} and our hometown hero, Kai."),,SPEAKER_ELEANOR)
+        msgbox(format("We will be giving our full support and efforts to assisting TheTide in their mission to help the people of this region, alongside Champion {PLAYER} and our hometown hero, Baiya."),,SPEAKER_ELEANOR)
 
         msgbox(format("We pray the government of Resido will open their eyes to the damage these companies have done… "),,SPEAKER_MAGNUS)
 
@@ -31,7 +31,7 @@ script LetsFixThis_EliteVideo_Dialogue
 
 script LetsFixThis_GetMessage_Dialogue
 {
-    applymovement(KAI,Common_Movement_FaceLeft)
+    applymovement(BAIYA,Common_Movement_FaceLeft)
         applymovement(PLAYER,Common_Movement_WalkRight)
         waitmovement(PLAYER)
 
@@ -39,19 +39,19 @@ script LetsFixThis_GetMessage_Dialogue
         waitse
         showtweet(TWEET_STORY_WAREHOUSE_RAVE)
 
-        msgbox(format("Oh, looks like we both got the same message… It's from The Tide Events account."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Oh, looks like we both got the same message… It's from The Tide Events account."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Sounds like it could be fun. You going to go?"),,SPEAKER_ALICIA)
 
-        msgbox(format("I might go a little later. I don’t love warehouse raves, but this is a special occasion, you know? Actually I wanna tell you about Adaora's new initiatives."),,SPEAKER_KAI_TIDE)
+        msgbox(format("I might go a little later. I don’t love warehouse raves, but this is a special occasion, you know? Actually I wanna tell you about Adaora's new initiatives."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("What’re they up to?"),,SPEAKER_ALICIA)
 
-        msgbox(format("They want all hands on deck at Arantraz. We’re converting it into a new base, and there’s gonna be a big meeting to talk about next steps."),,SPEAKER_KAI_TIDE)
+        msgbox(format("They want all hands on deck at Arantraz. We’re converting it into a new base, and there’s gonna be a big meeting to talk about next steps."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Guess I should go to that, right?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Actually, given how much work there is to get done, I don’t think it matters what you do first. I already said I’d head to Arantraz. Either way, I’ll see you later?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Actually, given how much work there is to get done, I don’t think it matters what you do first. I already said I’d head to Arantraz. Either way, I’ll see you later?"),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -60,11 +60,11 @@ script LetsFixThis_GetMessage_Dialogue
         setvar(VAR_WAREHOUSE_RAVE_STATE,GOT_RAVE_MESSAGE)
         setflag(FLAG_LOCKEDOUT_PLAYED)
 
-        applymovement(KAI, moves(walk_right, walk_up * 3, step_end))
-        waitmovement(KAI)
+        applymovement(BAIYA, moves(walk_right, walk_up * 3, step_end))
+        waitmovement(BAIYA)
         playse(SE_EXIT)
         waitse
-        removeobject(KAI)
+        removeobject(BAIYA)
     call(TryAutoSave)
         endcutscene
         release

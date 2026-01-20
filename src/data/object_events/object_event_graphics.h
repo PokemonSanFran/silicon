@@ -427,12 +427,12 @@ const u32 gObjectEventPic_siliconPlayerN3Decorating[] = INCBIN_U32("graphics/obj
 const u32 gObjectEventPic_siliconPlayerN3Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/underwater.4bpp");
 
 
-const u32 gObjectEventPic_KaiNormal[] = INCBIN_U32("graphics/object_events/pics/people/kai/walking.4bpp", "graphics/object_events/pics/people/kai/running.4bpp");
-const u16 gObjectEventPal_KaiNormal[] = INCBIN_U16("graphics/object_events/palettes/kai.gbapal");
+const u32 gObjectEventPic_BaiyaNormal[] = INCBIN_U32("graphics/object_events/pics/people/baiya/walking.4bpp", "graphics/object_events/pics/people/baiya/running.4bpp");
+const u16 gObjectEventPal_BaiyaNormal[] = INCBIN_U16("graphics/object_events/palettes/baiya.gbapal");
 
-const u32 gObjectEventPic_KaiFainted[] = INCBIN_U32("graphics/object_events/pics/people/kai/fainted.4bpp");
+const u32 gObjectEventPic_BaiyaFainted[] = INCBIN_U32("graphics/object_events/pics/people/baiya/fainted.4bpp");
 
-const u32 gObjectEventPic_KaiFieldMove[] = INCBIN_U32("graphics/object_events/pics/people/kai/fieldMove.4bpp");
+const u32 gObjectEventPic_BaiyaFieldMove[] = INCBIN_U32("graphics/object_events/pics/people/baiya/fieldMove.4bpp");
 
 const u32 gObjectEventPic_AdaoraFainted[] = INCBIN_U32("graphics/object_events/pics/people/adaora/fainted.4bpp");
 

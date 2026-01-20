@@ -2,7 +2,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const ADAORA = 2
 const VIGRIM = 3
-const KAI = 4
+const BAIYA = 4
 const PKMNA = 5
 const PKMNB = 6
 

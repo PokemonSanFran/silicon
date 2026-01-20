@@ -80,7 +80,7 @@ script AlwaysWatchingWazowski_ProgramCutscene_Script{
 
         msgbox(format("Historically, our in-region sentiment has been primarily negative, but even here, people want to see their hometown hero do well."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
 
-        if (var(VAR_ROUTE10_STATE) > HAS_NOT_MET_KAI){
+        if (var(VAR_ROUTE10_STATE) > HAS_NOT_MET_BAIYA){
                 msgbox(format("(Wait, he's doing the League challenge? After all that shit talk? What a hypocrite!)"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         }
     closemessage

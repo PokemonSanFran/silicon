@@ -1,8 +1,8 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const KEIYING = 1
-const KAI = 23
+const BAIYA = 23
 const FLAG_HIDE_KEIYING = FLAG_TEMP_1
-const FLAG_HIDE_KAI = FLAG_TEMP_C
+const FLAG_HIDE_BAIYA = FLAG_TEMP_C
 
 script WarehouseRave_SetUpRave_Script
 {
@@ -15,7 +15,7 @@ script WarehouseRave_HideObject_Script
 {
     if (var(VAR_WAREHOUSE_RAVE_STATE) != DEFEATED_KEIYING_WAREHOUSE)
     {
-        setflag(FLAG_HIDE_KAI)
+        setflag(FLAG_HIDE_BAIYA)
     }
     setflag(FLAG_HIDE_KEIYING)
 }
@@ -32,7 +32,7 @@ script WarehouseRave_ControlExits_Script
     {
         case SAVE_KEIYING_WAREHOUSE: call(WarehouseRave_PostSaveUnlock)
         case DEFEATED_KEIYING_WAREHOUSE: call(WarehouseRave_MakeExplosionHole_Script)
-        case TOLD_KAI_ABOUT_KEIYING: call(WarehouseRave_MakeExplosionHole_Script)
+        case TOLD_BAIYA_ABOUT_KEIYING: call(WarehouseRave_MakeExplosionHole_Script)
     }
 }
 
@@ -151,17 +151,17 @@ script WarehouseRave_OutsideWarehouse_Dialogue
         waitmovement(0)
         playse(SE_PIN)
         waitse
-        applymovement(KAI,Common_Movement_ExclamationMark)
+        applymovement(BAIYA,Common_Movement_ExclamationMark)
         waitmovement(0)
-        applymovement(KAI, moves(player_run_up * 6, walk_left, step_end))
+        applymovement(BAIYA, moves(player_run_up * 6, walk_left, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceRight)
 
-        msgbox(format("When I got here the front door was locked, and then the side blew open! What the hell happened?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("When I got here the front door was locked, and then the side blew open! What the hell happened?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("It was a trap. Keiying tried to take me out! But… "),,SPEAKER_ALICIA)
 
-        msgbox(format("That was fast! SharpRise Capital attacking you directly, already?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("That was fast! SharpRise Capital attacking you directly, already?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("The battle felt like they were trying to lose."),,SPEAKER_ALICIA)
 
@@ -172,7 +172,7 @@ script WarehouseRave_OutsideWarehouse_Dialogue
 
         msgbox(format("And then he told me to get out of here. He didn't call for backup or anything."),,SPEAKER_ALICIA)
 
-        msgbox(format("That doesn't make any sense. You think that creep regrets selling us out?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("That doesn't make any sense. You think that creep regrets selling us out?"),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -181,11 +181,11 @@ script WarehouseRave_OutsideWarehouse_Dialogue
 
         msgbox(format("What do you mean?"),,SPEAKER_ALICIA)
 
-        msgbox(format("He's like BD - once SharpRise Capital came to town, he jumped ship. He was playing both sides for a while, both working on SharpRise Capital's board and running the Gym in HodouCity."),,SPEAKER_KAI_TIDE)
+        msgbox(format("He's like BD - once SharpRise Capital came to town, he jumped ship. He was playing both sides for a while, both working on SharpRise Capital's board and running the Gym in HodouCity."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Maybe it is guilt. So weird."),,SPEAKER_ALICIA)
 
-        msgbox(format("Whatever. I'm glad you're okay, even if the reasoning is weird."),,SPEAKER_KAI_TIDE)
+        msgbox(format("Whatever. I'm glad you're okay, even if the reasoning is weird."),,SPEAKER_BAIYA_TIDE)
 
         if (var(VAR_STORYLINE_STATE) != STORY_RECIVED_RAVE_INVITE)
         {
@@ -194,20 +194,20 @@ script WarehouseRave_OutsideWarehouse_Dialogue
         }
         else
         {
-            msgbox(format("Glad you didn't need me though! Damn, fighting the top brass now, you're still getting stronger. I'll see you at Arantraz."),,SPEAKER_KAI_TIDE)
+            msgbox(format("Glad you didn't need me though! Damn, fighting the top brass now, you're still getting stronger. I'll see you at Arantraz."),,SPEAKER_BAIYA_TIDE)
         }
     closemessage
 
-        applymovement(KAI, moves(walk_up * 6, step_end))
+        applymovement(BAIYA, moves(walk_up * 6, step_end))
         waitmovement(0)
-        removeobject(KAI)
+        removeobject(BAIYA)
 
         addvar(VAR_STORYLINE_STATE,1)
-        setvar(VAR_WAREHOUSE_RAVE_STATE,TOLD_KAI_ABOUT_KEIYING)
+        setvar(VAR_WAREHOUSE_RAVE_STATE,TOLD_BAIYA_ABOUT_KEIYING)
     call(TryAutoSave)
         endcutscene
         end
 }
 
-// Kai walks off screen. The player regains control.
+// Baiya walks off screen. The player regains control.
 

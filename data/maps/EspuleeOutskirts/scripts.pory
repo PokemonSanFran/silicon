@@ -110,7 +110,7 @@ script EspuleeOutskirts_Imelda_Interact_Script{
 }
 
 script EspuleeOutskirts_Imelda_PreQuest_Dialogue{
-    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
         goto(Quest_Restoreespuleeoutskirts_StartQuest_Dialogue)
     }
     else{

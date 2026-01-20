@@ -267,16 +267,16 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Bite
 - Rock Blast 
 
-=== TRAINER_KAI_NEWASSHOLEAPPEARS ===
-Name: Kai
-Pic: Kai
+=== TRAINER_BAIYA_NEWASSHOLEAPPEARS ===
+Name: Baiya
+Pic: Baiya
 Class: Pkmn Trainer 1
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
-Reveal: Kai
+Reveal: Baiya
 Native: Yes
 Type: Boss
-Overworld Sprite: Kai
+Overworld Sprite: Baiya
 Map Section: Route10
 
 Parasect (M)
@@ -393,9 +393,9 @@ IVs: 0 Atk
 - Air Cutter
 - Quiver Dance
 
-=== TRAINER_KAI_ASSHOLEHOME ===
-Name: Kai
-Pic: Kai
+=== TRAINER_BAIYA_ASSHOLEHOME ===
+Name: Baiya
+Pic: Baiya
 Class: Pkmn Trainer 1
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
@@ -929,9 +929,9 @@ IVs: 0 Atk / 0 Spe
 - Dark Pulse  
 - Calm Mind  
 
-=== TRAINER_KAI_BATTLE8 ===
-Name: Kai
-Pic: Kai
+=== TRAINER_BAIYA_BATTLE8 ===
+Name: Baiya
+Pic: Baiya
 Class: Pkmn Trainer 1
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
@@ -1174,9 +1174,9 @@ Adamant Nature
 - High Horsepower  
 - Ice Punch  
 
-=== TRAINER_KAI_WHYAREYOUHELPINGTHEM ===
-Name: Kai
-Pic: Kai
+=== TRAINER_BAIYA_WHYAREYOUHELPINGTHEM ===
+Name: Baiya
+Pic: Baiya
 Class: Comrade
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
@@ -1435,9 +1435,9 @@ Adamant Nature
 - Earthquake  
 - Ice Fang  
 
-=== TRAINER_KAI_FINALS ===
-Name: Kai
-Pic: Kai
+=== TRAINER_BAIYA_FINALS ===
+Name: Baiya
+Pic: Baiya
 Class: Pkmn Trainer 1
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
@@ -1520,9 +1520,9 @@ EVs: 60 HP / 248 Atk / 200 Spe
 - Aerial Ace  
 - Iron Head  
 
-=== TRAINER_KAI_LETSGRABLUNCH ===
-Name: Kai
-Pic: Kai
+=== TRAINER_BAIYA_LETSGRABLUNCH ===
+Name: Baiya
+Pic: Baiya
 Class: Comrade
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
@@ -1859,9 +1859,9 @@ Careful Nature
 - High Horsepower  
 - Body Press
 
-=== TRAINER_KAI_LETSBURNTHISMOTHERDOWN ===
-Name: Kai
-Pic: Kai
+=== TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN ===
+Name: Baiya
+Pic: Baiya
 Class: Comrade
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double

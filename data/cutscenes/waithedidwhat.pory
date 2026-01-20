@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const LUCREZIA = 1 //FLAG_TEMP_1
 const CHARLOTTE = 2 //FLAG_TEMP_2
-const KAI = 3 //FLAG_TEMP_3
+const BAIYA = 3 //FLAG_TEMP_3
 const OLIVER = 4 //FLAG_TEMP_4
 
 script WaitHeDidWhat_HideObject_Script {
@@ -12,8 +12,8 @@ script WaitHeDidWhat_ObjectSetUp_Script {
     call(Finals_HideObject_Script)
         setflag(FLAG_TEMP_2)
         setflag(FLAG_TEMP_6)
-        setobjectxy(KAI,10,5)
-        setobjectxyperm(KAI,10,5)
+        setobjectxy(BAIYA,10,5)
+        setobjectxyperm(BAIYA,10,5)
 }
 
 script WaitHeDidWhat_ObjectMidSetUp_Script {
@@ -55,12 +55,12 @@ script WaitHeDidWhat_RivalsGoToMatch_Script {
         startcutscene(JUMPPLAYER_WAITHEDIDWHAT)
         applymovement(5, moves(lock_facing_direction, walk_right, delay_16, delay_16, delay_16, delay_16, delay_16, walk_left, step_end))
         applymovement(PLAYER,WaitHeDidWhat_GetOutOfWay)
-        applymovement(KAI, moves(walk_up * 4, delay_16, step_end))
+        applymovement(BAIYA, moves(walk_up * 4, delay_16, step_end))
         opendoor(10,1)
         waitdooranim
         waitmovement(0)
         playse(SE_EXIT)
-        removeobject(KAI)
+        removeobject(BAIYA)
         closedoor(10,1)
         waitdooranim
         goto(WaitHeDidWhat_CalledToSkybox_Script)
@@ -86,7 +86,7 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
         setvar(VAR_STORYLINE_STATE,STORY_READY_FINALS)
         lock
 
-        msgbox(format("Good shit down there! Time to crush this Kai kid. See you in the Finals!"),,SPEAKER_CHARLOTTE)
+        msgbox(format("Good shit down there! Time to crush this Baiya kid. See you in the Finals!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
@@ -105,7 +105,7 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
         TeleportCamera(9,6)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(format("In a stunning upset, the hometown hero, Kai defeats Charlotte and moves onto the Finals! What a wild match!"))
+        msgbox(format("In a stunning upset, the hometown hero, Baiya defeats Charlotte and moves onto the Finals! What a wild match!"))
         closemessage
 
         playse(SE_PIN)
@@ -117,7 +117,7 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
 
         msgbox(format("(...holy shit!)"),,SPEAKER_ALICIA)
 
-        msgbox(format("We'll take a quick break, and when we come back... your Championship match! Kai VS {PLAYER}, for all the marbles!"))
+        msgbox(format("We'll take a quick break, and when we come back... your Championship match! Baiya VS {PLAYER}, for all the marbles!"))
         closemessage
 
         applymovement(5, moves(walk_down, walk_right * 2, step_end))
@@ -172,10 +172,10 @@ script WaitHeDidWhat_WalkIntoChampionshipPosition {
     lock
         applymovement(PLAYER,WaitHeDidWhat_WalkToBattlefieldPosition)
         waitmovement(0)
-        msgbox(format("{PLAYER}, I don't think you can beat me when I have home court advantage!"),,SPEAKER_KAI)
-        msgbox(format("You and Charlotte and SharpRise might be able to outspend me, but you can't outwork me and my Pokémon!"),,SPEAKER_KAI)
-        msgbox(format("I'm going to be the Resido Champion!"),,SPEAKER_KAI)
-        msgbox(format("Kai, I'm super proud of you. I'm even happy you've gotten this far!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
+        msgbox(format("{PLAYER}, I don't think you can beat me when I have home court advantage!"),,SPEAKER_BAIYA)
+        msgbox(format("You and Charlotte and SharpRise might be able to outspend me, but you can't outwork me and my Pokémon!"),,SPEAKER_BAIYA)
+        msgbox(format("I'm going to be the Resido Champion!"),,SPEAKER_BAIYA)
+        msgbox(format("Baiya, I'm super proud of you. I'm even happy you've gotten this far!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
         msgbox(format("But I've got an undefeated winning streak against you, and that isn't changing now."),,SPEAKER_ALICIA)
 
         setvar(VAR_STORYLINE_STATE,STORY_SAVE_FINALS)
@@ -189,8 +189,8 @@ script WaitHeDidWhat_StartBattle_Script{
         applymovement(PLAYER,Common_Movement_WalkRight)
         applymovement(1,Common_Movement_WalkLeft)
         waitmovement(0)
-        msgbox(format("I'll beat you... for Resido!"),,SPEAKER_KAI,TAIL_SHOUT)
-        trainerbattle_no_intro(TRAINER_KAI_FINALS,format("…so close."))
+        msgbox(format("I'll beat you... for Resido!"),,SPEAKER_BAIYA,TAIL_SHOUT)
+        trainerbattle_no_intro(TRAINER_BAIYA_FINALS,format("…so close."))
         closemessage
 
         goto(WelcomeToTheHallOfFame_PostBattle_Dialogue)

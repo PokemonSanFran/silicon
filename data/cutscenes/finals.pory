@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const LUCREZIA = 1 //FLAG_TEMP_1
 const CHARLOTTE = 2 //FLAG_TEMP_2
-const KAI = 3 //FLAG_TEMP_3
+const BAIYA = 3 //FLAG_TEMP_3
 const OLIVER = 4 //FLAG_TEMP_4
 
 script Finals_HideObject_Script {

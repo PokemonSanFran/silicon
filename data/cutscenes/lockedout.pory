@@ -51,13 +51,13 @@ script LockedOut_PhoneCall_Dialogue
         pokenavcall("This phone is ringing.")
         waitmessage
 
-        msgbox(format("Hey {PLAYER}, I was thinking…"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Hey {PLAYER}, I was thinking…"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("I’m locked out!"),,SPEAKER_ALICIA)
 
-        msgbox(format("That’s actually why I called. I know you had a lot to lose with this, and I was right: SharpRise Capital is straight up going to disown you. If you need someplace to go, you can absolutely crash with me in HalaiIsland."),,SPEAKER_KAI_TIDE)
+        msgbox(format("That’s actually why I called. I know you had a lot to lose with this, and I was right: SharpRise Capital is straight up going to disown you. If you need someplace to go, you can absolutely crash with me in HalaiIsland."),,SPEAKER_BAIYA_TIDE)
 
-        msgbox(format("I actually hadn’t thought that far ahead… but thank you, a lot, Kai."),,SPEAKER_ALICIA)
+        msgbox(format("I actually hadn’t thought that far ahead… but thank you, a lot, Baiya."),,SPEAKER_ALICIA)
         closemessage
 
         playse(SE_POKENAV_HANG_UP)
@@ -69,7 +69,7 @@ script LockedOut_PhoneCall_Dialogue
 script LockedOut_WarpPlayer_Script
 {
 
-    msgbox(format("Do you want to go to Kai’s home?"),MSGBOX_YESNO)
+    msgbox(format("Do you want to go to Baiya’s home?"),MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == YES){
             fadeblackandsetremovewarpfadeflag

@@ -17,8 +17,8 @@
 
 `questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM)` \== `TRUE`
 
-### Has Talked Kai
-`VAR_STORYLINE_STATE` \<= `STORY_POST_BATTLE_KAI_ZENZUISLAND`
+### Has Talked Baiya
+`VAR_STORYLINE_STATE` \<= `STORY_POST_BATTLE_BAIYA_ZENZUISLAND`
 
 ## Functions
 ### `GenerateRoleMenu`
@@ -39,7 +39,7 @@ For each subquest that is not completed, show the following items in a list:
 
 * Doyle is facing south.
 * Doyle is not visible when Quest Complete or In False Timeline.
-* Doyle is standing in front of the Espulee Gym, facing South, after Has Talked Kai. 
+* Doyle is standing in front of the Espulee Gym, facing South, after Has Talked Baiya. 
 * Doyle is otherwise standing at the north side of the island, facing the water.
 
 # Scenes
@@ -62,18 +62,18 @@ For each subquest that is not completed, show the following items in a list:
 
 ### Quest Complete
 
-* Kai encourages Trainers to check out Zenzu's Battle Studio as a great place to level up
+* Baiya encourages Trainers to check out Zenzu's Battle Studio as a great place to level up
 * Doyle says he's going to start building up a new independent film and battle studio on Zenzu, wants the community to get involved
 
 ## `MAP_ZENZU_ISLAND`
 
-### Interact with Doyle And Has Not Talked Kai
+### Interact with Doyle And Has Not Talked Baiya
 Doyle does not face the Player.
 * Doyle mutters about how Resido is doomed
 * Doyle needs to take their talent elsewhere
 
-### Interact with Doyle And Has Talked Kai
-* Doyle addresses the Player as Champion and says that Kai said they'd be coming
+### Interact with Doyle And Has Talked Baiya
+* Doyle addresses the Player as Champion and says that Baiya said they'd be coming
 * Doyle wants to test if Player has really earned the Champion title
 Player battles against Doyle.
 
@@ -90,16 +90,16 @@ Player battles against Doyle.
 ### After Battle
 * Doyle formally introduces themselves - they work on movie sets on Zenzu Island and used to moonlight as the Zeznu Gym Leader before that production got cancelled
 * Player explains that Zenzu Gym is exactly why they're there
-* Doyle interupts and says they were pretty upfront of Kai
+* Doyle interupts and says they were pretty upfront of Baiya
 * Doyle has zero interest in spinning up a show that not only doesn't truly take the fight to Sharp Rise, but arguably helps them
 * Doyle states Resido is a lost cause - 
 * Doyle says that they're the monster expert of Resido, and the Sharp Rise executives are scarier than anything he's ever captured
-* Doyle says their work needs to go to the next level, and thinks Kai's plan can do that, just not in Resido, but would be succesful in somewhere like Unova's Pokestar Studios
+* Doyle says their work needs to go to the next level, and thinks Baiya's plan can do that, just not in Resido, but would be succesful in somewhere like Unova's Pokestar Studios
 * Doyle believes that their hand in creating change is best served as somebody creating revolutionary films and art, but needs to work somewhere where their work will have more support AND have more impact and therefore create change
 * Doyle remarks that Zenzu Island's film and battle industry is too small in comparison - they should 
 * Player argues that Resido will never get to that point unless people invest in it - Player also doesn't agree with The Tide, but acknowledges that their movement is made up of people who need to grow and nuture something
 * Doyle aruges that Resido doesn't even have the people to start with
-* Doyle says that if the Player and Kai think Resido is worth saving, then prove it
+* Doyle says that if the Player and Baiya think Resido is worth saving, then prove it
 Quest starts.
 * Doyle says for their dream to have any legs in Resido, they need to find people that think about Pokémon battling in new, visionary ways, who also have the skills to help advance Doyle's vision of a studio
 * Doyle comments that he's heard some whispers of people who can hack it, but everybody was generally a waste of time
@@ -296,7 +296,7 @@ Screen fades from black.
 
 # Summary & Notes
 
-Player battles Doyle. Once the Player wins, they properly introduce themselves and explain that they believe in Kai's vision, but doesn't think its possible in Resido. Doyle says Sharp Rise and its League is already too far gone, and their talents are best when trying to create real revolutionary art and film. 
+Player battles Doyle. Once the Player wins, they properly introduce themselves and explain that they believe in Baiya's vision, but doesn't think its possible in Resido. Doyle says Sharp Rise and its League is already too far gone, and their talents are best when trying to create real revolutionary art and film. 
 
 Doyle wants to take the same idea to Unova's PokéStar Studios where they think they'll be able to have a bigger impact. Alicia argues that Resido is worth investing in and fighting for, and Doyle challenges Player to prove it. Doyle will consider keeping the idea if the Player can find people in Resido with the skillset of what he needs and who think of battles in a forward, revolutionary way.
 

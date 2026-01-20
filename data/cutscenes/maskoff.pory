@@ -168,7 +168,7 @@ script MaskOff_PostBattle_Dialogue
     msgbox(format("I formed TheTide as a response to SharpRise Capital’s growing influence over the region a few years ago. "),,SPEAKER_ELEANOR)
     msgbox(format("But why go into hiding as Vigrim?"),,SPEAKER_ALICIA)
     msgbox(format("I hid my identity because I was worried about my influence diluting the message. If people could unite under a symbol like Vigrim, then in theory, anybody could lead TheTide if something happened to me. And if the Elite Four wasn’t directly connected to TheTide, then they couldn’t retaliate against the others."),,SPEAKER_ELEANOR)
-    msgbox(format("Things are… a little different now. I met with Kai…"),,SPEAKER_ALICIA)
+    msgbox(format("Things are… a little different now. I met with Baiya…"),,SPEAKER_ALICIA)
 
     closemessage
 

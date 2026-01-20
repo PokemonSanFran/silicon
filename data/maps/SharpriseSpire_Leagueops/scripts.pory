@@ -42,7 +42,7 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_WELCOME_TO_THE_WAR_ROOM: SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_YOU_REALIZE_WERE_EVIL_RIGHT: SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, POST_WOW_YOURE_STRONG: TheGangsAllHere_OliverAppearStairs_Script
-        VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_KAI_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
+        VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_BAIYA_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
         VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY: HowDisappointing_MissionComplete_Dialogue
         VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM: Manhunt_MissionComplete_Dialogue
         VAR_STORYLINE_STATE,STORY_3RD_THETIDE_TAKEDOWN: ExhibitionBattle_CheckMissionProgress_Script

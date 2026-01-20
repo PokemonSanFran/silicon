@@ -13,7 +13,7 @@
 // Start siliconMerge
 void SetPostCreditsSceneWarpLocation(void)
 {
-    u32 healLocation = (FlagGet(FLAG_TIMELINE_TRUE)) ? HEAL_LOCATION_HALAI_ISLAND_KAI : HEAL_LOCATION_PETAROSA_BOROUGH_COMPOUND_1F;
+    u32 healLocation = (FlagGet(FLAG_TIMELINE_TRUE)) ? HEAL_LOCATION_HALAI_ISLAND_BAIYA : HEAL_LOCATION_PETAROSA_BOROUGH_COMPOUND_1F;
 
     SetContinueGameWarpToHealLocation(healLocation);
 }

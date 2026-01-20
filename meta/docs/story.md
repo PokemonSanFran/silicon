@@ -69,10 +69,10 @@ Access to this cutscene is blocked until after "Enter Adaora".
 * Alicia defeats the Gym Leader of ToraTown, Shinzo.
 
 ## New Asshole Appears
-* Alicia meets Kai, another Trainer in Resido, on Route10.
-* Kai insults Trainers from other regions, calling them part of the problem that is gentrifying the region and insulting their skill as Trainers.
-* Alicia easily defeats Kai.
-* Kai leaves.
+* Alicia meets Baiya, another Trainer in Resido, on Route10.
+* Baiya insults Trainers from other regions, calling them part of the problem that is gentrifying the region and insulting their skill as Trainers.
+* Alicia easily defeats Baiya.
+* Baiya leaves.
 
 ## Old Asshole Appears
 * Alicia climbs to the top of AnbehBend, and finds Charlotte there.
@@ -116,7 +116,7 @@ This cutscene is optional.
 * Ramesh explains the League Challenge's goal of using the League's battle footage to create an all encompassing "amateur battling" web content machine.
     * If successful, it will turn the Trainers into micro-celebrities 
     * The Kickstart grant is an to help funnel new talent into the system.
-* Alicia also learns that Kai is taking part in the League Challenge.
+* Alicia also learns that Baiya is taking part in the League Challenge.
 
 ## How Do We Get Home
 * Alicia walks into a park in CurenoPort.
@@ -138,9 +138,9 @@ All the cutscenes in Act 1.3 occur in the order listed here.
 
 ## Asshole's Home
 * Alicia gets off the ferry from the mainland, and walks through the abandoned NavalBase to get to the other side of HalaiIsland.
-* Alicia runs into Kai again, who reveals that HalaiIsland is their hometown.
-* Alicia easily defeats Kai.
-* Kai compliments Alicia's skill, and leaves.
+* Alicia runs into Baiya again, who reveals that HalaiIsland is their hometown.
+* Alicia easily defeats Baiya.
+* Baiya compliments Alicia's skill, and leaves.
 
 ## Housing Protest
 * There is a housing protest occurring outside of an apartment building on the route between Oroland and Chasilla.
@@ -267,12 +267,12 @@ This cutscene plays after the player has defeated 5 Gym Leaders AND has walked 1
     * "Their demands at this time are unclear, but this puts the upcoming dates of the SharpriseCapital League Championship in danger. Anonymous sources claim that TheTide is responsible for instigating this protest."
 
 ## Battle #8
-* Alicia walks past the PintillonHouse_Exterior and Kai steps out.
-* Kai is excited about their new rank, and then notices Alicia.
-* Kai explains that the PintillonHouse_Exterior challenge - a single battle challenge native to the region.
+* Alicia walks past the PintillonHouse_Exterior and Baiya steps out.
+* Baiya is excited about their new rank, and then notices Alicia.
+* Baiya explains that the PintillonHouse_Exterior challenge - a single battle challenge native to the region.
 * The challenge used to be unique in the region, since everything was double battles, this was the only single battle challenge.
-* Kai challenges Alicia to a battle, but loses.
-* Kai leaves.
+* Baiya challenges Alicia to a battle, but loses.
+* Baiya leaves.
 
 ## Enter AmiArgento
 * Alicia defeats the Gym Leader of IrisinaTown, AmiArgento.
@@ -356,9 +356,9 @@ All the cutscenes in Act 3.3 occur in the order listed here.
 ## Why Are You Helping Them?
 * Alicia catches up the Vigrim, but Vigrim easily defeats Alicia in battle.
 * Adaora catches up to them, having defeated Charlotte. Vigrim heals Alicia's Pokémon.
-* Kai blows through another wall, urging Adaora and Vigrim to escape as the police close in.
-* Kai reveals he has always worked with The Tide and battles Alicia to stall while Vigrim and Kai escape.
-* Alicia defeats Kai, but is distracted as Charlotte finally catches up to them. Kai escapes in the confusion, undetected.
+* Baiya blows through another wall, urging Adaora and Vigrim to escape as the police close in.
+* Baiya reveals he has always worked with The Tide and battles Alicia to stall while Vigrim and Baiya escape.
+* Alicia defeats Baiya, but is distracted as Charlotte finally catches up to them. Baiya escapes in the confusion, undetected.
 * Lots of TheTide members are arrested, but Vigrim and Adaora escape.
 * At the SharpriseCapital Compound, Oliver informs Alicia and Charlotte that the League Championship would be starting tomorrow.
 * The game progresses after the player goes to sleep.
@@ -368,18 +368,18 @@ All the cutscenes in Act 3.4 occur in the order listed here.
 
 ## Here's How This Is Going To Go....
 * The 16 trainers in the Championship are in the locker room at SharpriseStadium. 
-    * Among the Trainers include Kai, Charlotte, and Alicia. 
+    * Among the Trainers include Baiya, Charlotte, and Alicia. 
 * Lucrezia and Oliver are explaining how the Championship works to the Trainers.
 * Lucrezia finishes the explanation (Round Robin -> Single Elimination) and tells the Trainers they'll start in a few minutes.
 
 ## Why Didn't You Rat Me Out?
-* Alicia goes to leave the room to get some fresh air, but Kai stops them and asks to talk.
-* Kai is grateful but confused that Alicia didn't report their TheTide affiliation to the authorities.
-* Alicia explains that they know how hard Kai worked to get here, and they know how much Kai loves Resido. 
-* They don't feel its their place to turn them in, and knows that if Kai is working with TheTide, he must believe they are trying to do good, and doesn't want to punish them for that.
-* Kai thanks Alicia and heads to the Arena for their matches.
+* Alicia goes to leave the room to get some fresh air, but Baiya stops them and asks to talk.
+* Baiya is grateful but confused that Alicia didn't report their TheTide affiliation to the authorities.
+* Alicia explains that they know how hard Baiya worked to get here, and they know how much Baiya loves Resido. 
+* They don't feel its their place to turn them in, and knows that if Baiya is working with TheTide, he must believe they are trying to do good, and doesn't want to punish them for that.
+* Baiya thanks Alicia and heads to the Arena for their matches.
 * Oliver finds Alicia and invites them to the sky box to watch the other Group Stages.
-* Alicia watches Kai win in their group and Charlotte to win their group.
+* Alicia watches Baiya win in their group and Charlotte to win their group.
 
 ## Group Stages
 * Alicia leaves the sky box to prepare for their matches.
@@ -387,13 +387,13 @@ All the cutscenes in Act 3.4 occur in the order listed here.
 * Alicia wins their Semifinals match.
 
 ## Wait He Did What?
-* Alicia goes back to the sky box to watch the other Semifinal match, Kai vs Charlotte.
-* Kai wins, stunning absolutely everybody, as Charlotte was the clear favorite to win.
+* Alicia goes back to the sky box to watch the other Semifinal match, Baiya vs Charlotte.
+* Baiya wins, stunning absolutely everybody, as Charlotte was the clear favorite to win.
 
 ## Finals
-* Alicia goes to the arena to battle Kai in the Finals.
+* Alicia goes to the arena to battle Baiya in the Finals.
 * Alicia witnesses Charlotte having an absolute meltdown in the locker room.
-* Alicia battles Kai and wins.
+* Alicia battles Baiya and wins.
 
 ## Welcome to the Hall of Fame.
 * Lucrezia comes onto the stage and welcomes Alicia to the Hall of Fame.
@@ -409,13 +409,13 @@ All the cutscenes in Act 4.1 occur in the order listed here.
 * Oliver encourages Alicia to visit ZenzuIsland and relax.
 
 ## Let's Grab Lunch.
-* Alicia runs into Kai on ZenzuIsland.
-* Kai is not upset about losing to Alicia and has been given plenty of opportunities as the runner-up.
-* Kai battles Alicia with a new team, but still loses.
-* Kai invites Alicia to lunch.
-* Kai explains their plan to take the Gyms that were previously shut down by the SharpriseCapital and turn them into training facilities for Residotrainers to help build up the skill in the region outside of SharpriseCapital's structures.
+* Alicia runs into Baiya on ZenzuIsland.
+* Baiya is not upset about losing to Alicia and has been given plenty of opportunities as the runner-up.
+* Baiya battles Alicia with a new team, but still loses.
+* Baiya invites Alicia to lunch.
+* Baiya explains their plan to take the Gyms that were previously shut down by the SharpriseCapital and turn them into training facilities for Residotrainers to help build up the skill in the region outside of SharpriseCapital's structures.
 * Alicia is surprisingly interested and agrees to help.
-* Kai explains that HodouCity, EspuleeOutskirts and ZenzuIsland all have Gyms that can be started on, while Kai themselves is going to try to get Vigrim and Adaora on board.
+* Baiya explains that HodouCity, EspuleeOutskirts and ZenzuIsland all have Gyms that can be started on, while Baiya themselves is going to try to get Vigrim and Adaora on board.
 
 # ACT 4.2
 The player can choose one of these quests to complete. After completing one of them, the game progresses to Act 4.3. The player can choose to come back and complete more quests.
@@ -424,7 +424,7 @@ The player can choose one of these quests to complete. After completing one of t
 * Alicia sees two people walking into the abandoned HodouCity Gym, and follows them instead.
 * The people are startled by Alicia and attack. Alicia defeats them both.
 * The people explain that they are former Trainers of the Gym, they occasionally train there together to keep their skills honed.
-* Alicia explains Kai's initiative, and the two Trainers are interested.
+* Alicia explains Baiya's initiative, and the two Trainers are interested.
 * The two 
 * They ask Alicia to find their old crew member James.
 * Alicia finds James and brings them to the brainstorming session. 
@@ -440,7 +440,7 @@ The player can choose one of these quests to complete. After completing one of t
 * Alicia reminds Imelda to focus on the present and the good they are doing now.
 
 ## Restore Treasure Island
-* Alicia meets Juan, who is initially unpleasant but eventually agrees to work with Kai to develop a program for Treasure Island Gym. 
+* Alicia meets Juan, who is initially unpleasant but eventually agrees to work with Baiya to develop a program for Treasure Island Gym. 
 * Juan's vision for the facility involves a giant roulette that randomly assigns events to trainers challenging the facility, wanting to make sure Trainers are already ready for the unknown.
 * He asks Alicia to bring some Pokémon and items to help. 
 * After completion, Alicia convinces Juan to focus on the present and the good they're doing now, rather than attempting to destroy the present without a solid vision. 
@@ -458,19 +458,19 @@ All the cutscenes in Act 4.3 occur in the order listed here.
 * Keiying advises the Alicia to take some time to think about the situation before making any decisions.
  
 ## You Realize They're Evil, Right?
-* Alicia leaves the SharpriseSpire and gets a call from Kai, thanking them for their help with the Restoration project.
-* Alicia explains the conversation they just have, and Kai responds by asking Alicia to go to Arantraz, but surf around the side of the island instead.
-* On Arantraz, Kai shows Alicia a secret entrance and tells them to meet them down a lower floor.
+* Alicia leaves the SharpriseSpire and gets a call from Baiya, thanking them for their help with the Restoration project.
+* Alicia explains the conversation they just have, and Baiya responds by asking Alicia to go to Arantraz, but surf around the side of the island instead.
+* On Arantraz, Baiya shows Alicia a secret entrance and tells them to meet them down a lower floor.
 * The secret entrance leads directly inside the prison on Arantraz, where ghosts are seen.
 * The ghosts tell the real story of Arantraz.
     * Arantraz prison was used to lock away criminals, particularly from marginalized communities. 
     * The prison riot started when a guard killed an indigenous inmate for a minor violation, leading to the occupation of the island by protestors.
     * The protestors demanded better conditions for prisoners, dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land to its original owners.
     * The protests gained national attention with the help of Magnus's support, and pressure mounted on the government to comply. An earthquake destroyed the prison, killing inmates and guards, and ending the occupation.
-* On the lowest level of the prison, Alicia meets Kai with Tala and Magnus, another member of the Elite Four.
-* Kai explains to the other three that the SharpriseCapital has been framing TheTide, planting agitators and warping the public narrative against them.
-* Kai uses a Garbodor from the construction strike, proving that only SharpriseCapital would have the resources to train and breed an exploding Garbodor.
-* Kai asks Magnus, Tala and Alicia to help work with TheTide to expose SharpriseCapital and start healing the region.
+* On the lowest level of the prison, Alicia meets Baiya with Tala and Magnus, another member of the Elite Four.
+* Baiya explains to the other three that the SharpriseCapital has been framing TheTide, planting agitators and warping the public narrative against them.
+* Baiya uses a Garbodor from the construction strike, proving that only SharpriseCapital would have the resources to train and breed an exploding Garbodor.
+* Baiya asks Magnus, Tala and Alicia to help work with TheTide to expose SharpriseCapital and start healing the region.
 * Alicia needs time to think, and leaves. Alicia goes to sleep but wakes up having not made a decision.
 
 # TIMELINE SPLIT
@@ -501,12 +501,12 @@ Access to this cutscene is blocked until after "Congrats, You're an Asshole".
 * Alicia talks to Oliver.
 * Oliver believes that TheTide is using a new base for their operations.
 * Asks Alicia to hunt that base down.
-* Alicia goes to Arantraz to try to convince Kai to stop working with TheTide before they get arrested.
-* Kai corners Alicia in Arantraz, furious that Alicia chose the wrong side.
-* Alicia defeats Kai in battle.
-* Kai begins to rant, but Charlotte attacks them behind, surprising Alicia.
-* Charlotte reveals they were following Alicia and realizes how close Kai and Alicia were.
-* Arantraz is shut down and Kai is arrested.
+* Alicia goes to Arantraz to try to convince Baiya to stop working with TheTide before they get arrested.
+* Baiya corners Alicia in Arantraz, furious that Alicia chose the wrong side.
+* Alicia defeats Baiya in battle.
+* Baiya begins to rant, but Charlotte attacks them behind, surprising Alicia.
+* Charlotte reveals they were following Alicia and realizes how close Baiya and Alicia were.
+* Arantraz is shut down and Baiya is arrested.
 
 ## Manhunt.
 Access to this cutscene is blocked until after "Congrats, You're an Asshole".
@@ -544,15 +544,15 @@ Access to this cutscene is blocked until after "Maybe I Fucked Up."
 # ACT 5 TRUE TIMELINE
 All the cutscenes in Act 5 True occur in the order listed here, unless otherwise stated".
 ## Let's Get the Band Back Together.
-* Alicia goes to Arantraz and tells Kai they want to help expose SharpriseCapital.
-* Kai wants to start by finding the missing member of the Elite Four, Eleanor, and unite with them to create a public show of force.
-* Kai splits up with Alicia but gives Alicia a lead to start on to find Vigrim.
+* Alicia goes to Arantraz and tells Baiya they want to help expose SharpriseCapital.
+* Baiya wants to start by finding the missing member of the Elite Four, Eleanor, and unite with them to create a public show of force.
+* Baiya splits up with Alicia but gives Alicia a lead to start on to find Vigrim.
 
 ## Mask Off!
 *  Alicia travels around the region, talking to citizens and following clues until they end up at WishaastLake.
 * They run into Vigrim at WishaastLake, who has heard that Alicia is sympathetic to their cause.
 * Vigrim challenges Alicia to a friendly battle, which Alicia wins.
-* Alicia explains they were actually looking for Eleanor, and explains Kai's plan.
+* Alicia explains they were actually looking for Eleanor, and explains Baiya's plan.
 * Vigrim says they might be able to help, and unmasks, revealing themselves to be Eleanor, the last Elite Four member.
 * Eleanor explains that they started TheTide to push back after they saw a losing battle - they knew that change had to come from the outside, not within the League structure.
 * Eleanor leaves to talk to the other Elite Four members and make amends, but warns Alicia that things will never be the same.
@@ -560,15 +560,15 @@ All the cutscenes in Act 5 True occur in the order listed here, unless otherwise
 ## Locked Out
 This cutscene plays when the player attempts to go home after "Let's Get The Band Back Together".
 * Alicia goes to walk inside their home, but the door is locked. Their key fob no longer works.
-* Kai calls Alicia, but Alicia interjects, claiming they're locked out.
-* Kai says they're not surprised, and this is why they called - they figured the SharpriseCapital perks would suddenly dry up, so Kai offers to allow Alicia to stay with them.
+* Baiya calls Alicia, but Alicia interjects, claiming they're locked out.
+* Baiya says they're not surprised, and this is why they called - they figured the SharpriseCapital perks would suddenly dry up, so Baiya offers to allow Alicia to stay with them.
 
 ## Let's Fix This!
-The game resumes after the player goes to sleep at Kai's home.
+The game resumes after the player goes to sleep at Baiya's home.
 * Alicia wakes up a video circulating social media, with the Elite Four announcing their return and their public pledge to heal Residoand take down SharpriseCapital.
-* Kai is excited that the wheels are finally in motion.
-* Kai and Alicia both get an email from the TheTide Event Bot, for a rally in Oroland in a warehouse to celebrate the return of the Elite Four.
-* Kai has some errands to run but tells Alicia that there is also a TheTide meeting at Arantraz that night.
+* Baiya is excited that the wheels are finally in motion.
+* Baiya and Alicia both get an email from the TheTide Event Bot, for a rally in Oroland in a warehouse to celebrate the return of the Elite Four.
+* Baiya has some errands to run but tells Alicia that there is also a TheTide meeting at Arantraz that night.
 
 ## Warehouse Rave!
 * Alicia goes to the warehouse in Oroland. It is easy to find due to the lights and fog and music.
@@ -578,9 +578,9 @@ The game resumes after the player goes to sleep at Kai's home.
 * Keiying and Alicia battle, but Keiying orders their Pokémon to all Self-Destruct or Explode, meaning Alicia wins.
 * Alicia is confused, but Keiying remarks that it looks like a real battle went down, which should give Alicia enough time to flee.
 * Alicia is still confused but Keiying yells for them to run, and Alicia escapes out of a hole that was blown in the side of the warehouse.
-* Kai meets up with Alicia outside, having heard the explosion en route to the rave.
-* Alicia explains the situation to Kai, who is also in shock. Kai suggests that perhaps Keiying feels some regret, and reveals that Keiying used to be the Gym Leader of HodouCity but also sold out like BD. 
-* Kai encourages Alicia to head over to Arantraz for the rally.
+* Baiya meets up with Alicia outside, having heard the explosion en route to the rave.
+* Alicia explains the situation to Baiya, who is also in shock. Baiya suggests that perhaps Keiying feels some regret, and reveals that Keiying used to be the Gym Leader of HodouCity but also sold out like BD. 
+* Baiya encourages Alicia to head over to Arantraz for the rally.
 
 ## Speech! Speech! Speech!
 This cutscene can be played before Warehouse Rave.
@@ -601,14 +601,14 @@ This cutscene does not play until after "Warehouse Rave" and "Speech Speech Spee
 * The game progresses after the player goes to sleep.
 
 ## Earthquake!
-* Alicia and Kai are woken up by another Earthquake, but this time, they can hear people calling for help.
-* Kai goes outside and HalaiIsland is absolutely destroyed by the quake.
-* Alicia, Kai and Adaora go around the island trying to help people, and regroup in the center of town.
-* Adaora gets a cryptic email from the Rocket Event Bot, and Kai explains its probably another trap.
+* Alicia and Baiya are woken up by another Earthquake, but this time, they can hear people calling for help.
+* Baiya goes outside and HalaiIsland is absolutely destroyed by the quake.
+* Alicia, Baiya and Adaora go around the island trying to help people, and regroup in the center of town.
+* Adaora gets a cryptic email from the Rocket Event Bot, and Baiya explains its probably another trap.
 * Alicia explains the Warehouse Rave incident, to everybody's shock.
 * Adaora hesitates and says that Keiying was different, and if this text is actually from him, then she trusts it.
 * Eleanor recognizes that the coordinates in the message lead to a spot on Route4.
-* Kai, Adaora, Magnus and Alicia all go to Route4.
+* Baiya, Adaora, Magnus and Alicia all go to Route4.
 
 ## This Isn't Random...
 This cutscene plays after the player solves the riddle in the cryptic message, which tells them to use "Dig" in a certain spot on the route.
@@ -621,18 +621,18 @@ This cutscene plays after the player solves the riddle in the cryptic message, w
 * The team discover that the lab is for amplifying the energy of Pokémon to be used externally.
 * The Pokémon all chained up are all Ground type Pokémon.
 * Magnus and Alicia realize that the machine here are the source of the Earthquakes, and further, the Earthquakes that destroyed Arantraz 50 years ago were from the same source - the government,and now SharpriseCapital, is using this weapon to attack citizens.
-* There is a final Dynamax Pokémon in the lab. Kai and Alicia team up to defeat it.
+* There is a final Dynamax Pokémon in the lab. Baiya and Alicia team up to defeat it.
 
 ## Let's Finish This.
 * The Elite Four and TheTide leadership all meet up in HalaiIsland, and explain the Lab situation.
 * The crowd realizes that SharpriseCapital is literally playing to kill, and they need to escalate in kind.
-* Kai jokes that they should all storm the SharpriseSpire and force a confession out of the SharpriseCapital leadership, but the group begins to take them seriously.
+* Baiya jokes that they should all storm the SharpriseSpire and force a confession out of the SharpriseCapital leadership, but the group begins to take them seriously.
 * Alicia remembers that all C-Suite members have a warp panel in their homes that leads directly to their offices.
 * Frank suggests breaking into Ramesh's place instead of Keiying, since Keiying's disappearance has likely triggered a police presence.
 * The group agrees to meet outside Ramesh's home in QiuVillage.
 
 ## I'm In.
-* Frank, Magnus, Eleanor, Kai, Adaora and Alicia all meet outside Ramesh's house. 
+* Frank, Magnus, Eleanor, Baiya, Adaora and Alicia all meet outside Ramesh's house. 
 * Tala is outside the SharpriseSpire, ready to start a protest to distract security.
 * The team breaks into Ramesh's house, figures out the code to the door, and are able to use the warp panel to go directly into SharpriseCapital's offices.
 * The group splits up and begins ascending the tower.

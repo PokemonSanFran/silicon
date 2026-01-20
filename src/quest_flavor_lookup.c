@@ -72,7 +72,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
         case STORY_RAVE_AND_SPEECH_COMPLETE:
             return gText_PlayersAdventure_Flavor36;
         case STORY_RAVE_OR_SPEECH_COMPLETE:
-            if (VarGet(VAR_WAREHOUSE_RAVE_STATE) >= TOLD_KAI_ABOUT_KEIYING)
+            if (VarGet(VAR_WAREHOUSE_RAVE_STATE) >= TOLD_BAIYA_ABOUT_KEIYING)
                 return gText_PlayersAdventure_Flavor35B;
             else if (VarGet(VAR_ARANTRAZ_STATE) >= POST_SPEECHSPEECH)
                 return gText_PlayersAdventure_Flavor35A;
@@ -110,15 +110,15 @@ const u8 *GetQuestDesc_PlayersAdventure()
         case STORY_POST_YOU_REALIZE_WERE_EVIL:
             if (VarGet(VAR_ARANTRAZ_STATE) >= POST_YOU_REALIZE_THEYRE_EVIL_RIGHT)
                 return gText_PlayersAdventure_Flavor26;
-            else if (VarGet(VAR_ARANTRAZ_STATE) < KAI_SUMMONED_ARANTRAZ)
+            else if (VarGet(VAR_ARANTRAZ_STATE) < BAIYA_SUMMONED_ARANTRAZ)
                 return gText_PlayersAdventure_Flavor26;
             else
                 return gText_PlayersAdventure_Flavor25;
-        case STORY_KAI_EXPLAIN_RESTORATION:
+        case STORY_BAIYA_EXPLAIN_RESTORATION:
             return gText_PlayersAdventure_Flavor23;
-        case STORY_POST_BATTLE_KAI_ZENZU_ISLAND:
+        case STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND:
             return gText_PlayersAdventure_Flavor22;
-        case STORY_SAVE_KAI_ZENZU_ISLAND:
+        case STORY_SAVE_BAIYA_ZENZU_ISLAND:
             return gText_PlayersAdventure_Flavor21;
         case STORY_EXPLORE_ZENZU_ISLAND:
             return gText_PlayersAdventure_Flavor20;

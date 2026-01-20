@@ -4,7 +4,7 @@
 
 #define PARTNER_NONE 0
 #define PARTNER_STEVEN 1
-#define PARTNER_KAI 2
+#define PARTNER_BAIYA 2
 #define PARTNER_ADAORA 3
 #define PARTNER_BD 4
 #define PARTNER_BELEN 5

@@ -18,7 +18,7 @@ script Quest_Restoreespuleeoutskirts_Debug_Script{
 }
 
 script Quest_Restoreespuleeoutskirts_MoveImelda_Script{
-    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
         setobjectxy(IMELDA_ESPULEE_OUTSKIRTS,12,18)
         setobjectxyperm(IMELDA_ESPULEE_OUTSKIRTS,12,18)
         setobjectmovementtype(IMELDA_ESPULEE_OUTSKIRTS,MOVEMENT_TYPE_FACE_DOWN)
@@ -46,18 +46,18 @@ script Quest_Restoreespuleeoutskirts_BufferStrings_Part2_Script{
 }
 
 script Quest_Restoreespuleeoutskirts_StartQuest_Dialogue{
-        msgbox(format("You're {PLAYER} - Kai mentioned you'd be coming."),,SPEAKER_IMELDA)
+        msgbox(format("You're {PLAYER} - Baiya mentioned you'd be coming."),,SPEAKER_IMELDA)
         reveal(REVEAL_IMELDA)
 
         msgbox(format("Yeah, I'm helping them get their project off the ground."),,SPEAKER_ALICIA)
 
-        msgbox(format("I meant what I said to Kai. I'll help get this off the ground, but we still need to figure out the next steps to taking down the whole League."),,SPEAKER_IMELDA)
+        msgbox(format("I meant what I said to Baiya. I'll help get this off the ground, but we still need to figure out the next steps to taking down the whole League."),,SPEAKER_IMELDA)
 
-        msgbox(format("Kai and I want to focus on doing the most good for Trainers in the region now."),,SPEAKER_ALICIA)
+        msgbox(format("Baiya and I want to focus on doing the most good for Trainers in the region now."),,SPEAKER_ALICIA)
 
         msgbox(format("I'm not interested in bandaid fixes. This new League is hurting people now, right?"),,SPEAKER_IMELDA)
 
-        msgbox(format("If you really believe that there's harm being done, then wouldn't you want start the healing as soon as possible? Kai has a plan right now, that we think that's going to help Trainers in the region today. We're going to make it happen, but it would mean so much to get you onboard."),,SPEAKER_ALICIA)
+        msgbox(format("If you really believe that there's harm being done, then wouldn't you want start the healing as soon as possible? Baiya has a plan right now, that we think that's going to help Trainers in the region today. We're going to make it happen, but it would mean so much to get you onboard."),,SPEAKER_ALICIA)
 
         msgbox(format("Hmm. That kid does seem driven. Let's see what I can do."),,SPEAKER_IMELDA)
         msgbox(format("I want to help Trainers learn to adapt. When everything that Trainers trust are stripped away, how can they make the best of the hand they've been dealt?"),,SPEAKER_IMELDA)
@@ -245,7 +245,7 @@ script Quest_Restoreespuleeoutskirts_PostBattle_Dialogue{
 
         msgbox(format("Yeah! Things were so much better before."),,SPEAKER_IMELDA)
 
-        msgbox(format("Imelda, you can't go back to the past. You've gotta stick to the reality we've got right now. I think what you're going to do here is going to make a real difference for Trainers, and that's awesome. But if you want the Trainers of the region to be the best they can be, I think we need to figure out a path forward... in the present. That's what Kai and I want to do."),,SPEAKER_ALICIA)
+        msgbox(format("Imelda, you can't go back to the past. You've gotta stick to the reality we've got right now. I think what you're going to do here is going to make a real difference for Trainers, and that's awesome. But if you want the Trainers of the region to be the best they can be, I think we need to figure out a path forward... in the present. That's what Baiya and I want to do."),,SPEAKER_ALICIA)
 
         msgbox(format("You don't get it, {PLAYER}, you weren't here for before."),,SPEAKER_IMELDA)
 
@@ -272,23 +272,23 @@ script Quest_Restoreespuleeoutskirts_PostBattle_Dialogue{
 }
 
 text gText_Restoreespuleeoutskirts_YourePlayer{
-    format("You're {PLAYER} - Kai mentioned you'd be coming.")
+    format("You're {PLAYER} - Baiya mentioned you'd be coming.")
 }
 
 text gText_Restoreespuleeoutskirts_YeahImHelping{
     format("Yeah, I'm helping them get their project off the ground.")
 }
 text gText_Restoreespuleeoutskirts_AreYouHelping{
-    format("I meant what I said to Kai. I'll help get this off the ground, but we still need to figure out the next steps to taking down the whole League.")
+    format("I meant what I said to Baiya. I'll help get this off the ground, but we still need to figure out the next steps to taking down the whole League.")
 }
 text gText_Restoreespuleeoutskirts_IHearThat{
-    format("Kai and I want to focus on doing the most good for Trainers in the region now.")
+    format("Baiya and I want to focus on doing the most good for Trainers in the region now.")
 }
 text gText_Restoreespuleeoutskirts_TheBestWay{
     format("I'm not interested in bandaid fixes. This new League is hurting people now, right?")
 }
 text gText_Restoreespuleeoutskirts_RightBut{
-    format("If you really believe that there's harm being done, then wouldn't you want start the healing as soon as possible? Kai has a plan right now, that we think that's going to help Trainers in the region today. We're going to make it happen, but it would mean so much to get you onboard.")
+    format("If you really believe that there's harm being done, then wouldn't you want start the healing as soon as possible? Baiya has a plan right now, that we think that's going to help Trainers in the region today. We're going to make it happen, but it would mean so much to get you onboard.")
 }
 text gText_Restoreespuleeoutskirts_HmmI{
     format("Hmm. That kid does seem driven. Let's see what I can do.")
@@ -372,7 +372,7 @@ text gText_Quest_Restoreespuleeoutskirts_YeahThingsWere{
 }
 
 text gText_Quest_Restoreespuleeoutskirts_YouCantGoBack{
-    format("Imelda, you can't go back to the past. You've gotta stick to the reality we've got right now. I think what you're going to do here is going to make a real difference for Trainers, and that's awesome. But if you want the Trainers of the region to be the best they can be, I think we need to figure out a path forward... in the present. That's what Kai and I want to do.")
+    format("Imelda, you can't go back to the past. You've gotta stick to the reality we've got right now. I think what you're going to do here is going to make a real difference for Trainers, and that's awesome. But if you want the Trainers of the region to be the best they can be, I think we need to figure out a path forward... in the present. That's what Baiya and I want to do.")
 }
 
 text gText_Quest_Restoreespuleeoutskirts_YouDontGet{

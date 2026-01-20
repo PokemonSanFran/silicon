@@ -1,6 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CAMERA = OBJ_EVENT_ID_CAMERA
-const KAI = 1
+const BAIYA = 1
 const TALA = 3
 const MAGNUS = 2
 const FRANK = 6
@@ -12,7 +12,7 @@ const GRUNTB = 10
 const GRUNTC = 11
 const GRUNTD = 12
 
-const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 const FLAG_HIDE_ELITES = FLAG_TEMP_2
 const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
 const FLAG_HIDE_FRANK = FLAG_TEMP_5
@@ -25,9 +25,9 @@ script SpeechSpeechSpeech_MoveObject_Script {
     setflag(FLAG_HIDE_GARBODOR)
     setflag(FLAG_HIDE_ELEANOR)
 
-    setobjectxy(KAI,10,8)
-    setobjectxyperm(KAI,10,8)
-    setobjectmovementtype(KAI,MOVEMENT_TYPE_FACE_UP)
+    setobjectxy(BAIYA,10,8)
+    setobjectxyperm(BAIYA,10,8)
+    setobjectmovementtype(BAIYA,MOVEMENT_TYPE_FACE_UP)
 
     setobjectxy(TALA,7,3)
     setobjectxyperm(TALA,7,3)
@@ -75,7 +75,7 @@ script SpeechSpeechSpeech_ResetFacing_Script {
 script SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script {
 
     setflag(FLAG_HIDE_GARBODOR)
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
     setflag(FLAG_HIDE_VIGRIM)
 
     setobjectxy(TALA,11,17)
@@ -225,7 +225,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         call(Earthquake_WaitOutShake)
 
-        msgbox(format("Is anybody hurt? …no? Wonderful. Let’s continue. Kai’s restoration project has been going excellently, and we’re going to use that momentum for our next stage. It’s time to take the fight to SharpRise Capital!"),,SPEAKER_ADAORA)
+        msgbox(format("Is anybody hurt? …no? Wonderful. Let’s continue. Baiya’s restoration project has been going excellently, and we’re going to use that momentum for our next stage. It’s time to take the fight to SharpRise Capital!"),,SPEAKER_ADAORA)
 
         closemessage
 
@@ -298,32 +298,32 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         callnative(DestroyVirtualObjects)
         call(SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script)
 
-        applymovement(KAI, moves(walk_left, face_down, step_end))
+        applymovement(BAIYA, moves(walk_left, face_down, step_end))
         fadescreen(FADE_FROM_BLACK)
-        waitmovement(KAI)
+        waitmovement(BAIYA)
 
-        //Screen fades to black. Screen fades back in. Elite Four members are spaced around the room, surrounded by groups of TheTide members. Kai walks up to the player.
-        msgbox(format("Damn, this shit is so crazy! The air is electric!"),,SPEAKER_KAI_TIDE)
+        //Screen fades to black. Screen fades back in. Elite Four members are spaced around the room, surrounded by groups of TheTide members. Baiya walks up to the player.
+        msgbox(format("Damn, this shit is so crazy! The air is electric!"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("It feels really awesome to start making a difference around here."),,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Yeah!"),,SPEAKER_BAIYA_TIDE)
 
         if (var(VAR_STORYLINE_STATE) != STORY_RAVE_AND_SPEECH_COMPLETE)
         {
-            msgbox(format("Also, are you heading to that party in CurenoPort now? I'll catch up with you in a second, I just gotta talk to Adaora first."),,SPEAKER_KAI_TIDE)
+            msgbox(format("Also, are you heading to that party in CurenoPort now? I'll catch up with you in a second, I just gotta talk to Adaora first."),,SPEAKER_BAIYA_TIDE)
         }
         else
         {
-            msgbox(format("By the way, you and I are free to work with whoever we want. Just talk to the Elite Four member you want to team up with. I gotta go, I told Adaora I’d help set up something."),,SPEAKER_KAI_TIDE)
+            msgbox(format("By the way, you and I are free to work with whoever we want. Just talk to the Elite Four member you want to team up with. I gotta go, I told Adaora I’d help set up something."),,SPEAKER_BAIYA_TIDE)
         }
-        msgbox(format("Peace!"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Peace!"),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
-        applymovement(KAI, moves(walk_left * 7, step_end))
-        waitmovement(KAI)
-        removeobject(KAI)
+        applymovement(BAIYA, moves(walk_left * 7, step_end))
+        waitmovement(BAIYA)
+        removeobject(BAIYA)
     call(TryAutoSave)
         endcutscene
         release

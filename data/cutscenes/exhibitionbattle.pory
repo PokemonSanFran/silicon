@@ -1,11 +1,11 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const DIANTHA = 1
-const FLAG_HIDE_KAI = FLAG_TEMP_3
+const FLAG_HIDE_BAIYA = FLAG_TEMP_3
 const LUCREZIA = 5
 const VAR_TALKED_CHARLOTTE = VAR_TEMP_F
 
 script ExhibitionBattle_HideObject_Script {
-    setflag(FLAG_HIDE_KAI)
+    setflag(FLAG_HIDE_BAIYA)
 }
 
 script ExhibitionBattle_CheckMissionProgress_Script{

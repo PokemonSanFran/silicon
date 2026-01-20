@@ -1,7 +1,7 @@
 {
-  "id": "MAP_HALAI_ISLAND_KAI",
-  "name": "HalaiIsland_Kai",
-  "layout": "LAYOUT_HALAI_ISLAND_KAI",
+  "id": "MAP_HALAI_ISLAND_BAIYA",
+  "name": "HalaiIsland_Baiya",
+  "layout": "LAYOUT_HALAI_ISLAND_BAIYA",
   "music": "MUS_BIRCH_LAB",
   "region_map_section": "MAPSEC_HALAI_ISLAND",
   "requires_flash": false,
@@ -15,7 +15,7 @@
   "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_KAI",
+      "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 6,
       "y": 4,
       "elevation": 3,

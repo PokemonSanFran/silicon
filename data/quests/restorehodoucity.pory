@@ -83,7 +83,7 @@ script Quest_Restorehodoucity_LockGymDoor_Script{
         addvar(VAR_TEMP_0,1)
     }
 
-    //if (var(VAR_STORYLINE_STATE) < STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+    //if (var(VAR_STORYLINE_STATE) < STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
         //subvar(VAR_TEMP_0,1)
     //}
 
@@ -110,7 +110,7 @@ script Quest_Restorehodoucity_CheckQuestCanStart_Script{
         addvar(VAR_TEMP_0,1)
     }
 
-    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
         addvar(VAR_TEMP_0,1)
     }
     return

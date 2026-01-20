@@ -291,8 +291,8 @@ const u32 gTrainerFrontPic_SiliconPlayerF1[] = INCBIN_U32("graphics/trainers/fro
 const u32 gTrainerFrontPic_SiliconPlayerF2[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF2.4bpp.smol");
 const u32 gTrainerFrontPic_SiliconPlayerF3[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF3.4bpp.smol");
 
-const u32 gTrainerFrontPic_Kai[] = INCBIN_U32("graphics/trainers/front_pics/kai.4bpp.smol");
-const u16 gTrainerFrontPalette_Kai[] = INCBIN_U16("graphics/trainers/front_pics/kai.gbapal");
+const u32 gTrainerFrontPic_Baiya[] = INCBIN_U32("graphics/trainers/front_pics/baiya.4bpp.smol");
+const u16 gTrainerFrontPalette_Baiya[] = INCBIN_U16("graphics/trainers/front_pics/baiya.gbapal");
 
 const u32 gTrainerFrontPic_Adaora[] = INCBIN_U32("graphics/trainers/front_pics/adaora.4bpp.smol");
 const u16 gTrainerFrontPalette_Adaora[] = INCBIN_U16("graphics/trainers/front_pics/adaora.gbapal");
@@ -354,7 +354,7 @@ const u8 gTrainerBackPic_SiliconPlayerF1[] = INCBIN_U8("graphics/trainers/back_p
 const u8 gTrainerBackPic_SiliconPlayerF2[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF2.4bpp");
 const u8 gTrainerBackPic_SiliconPlayerF3[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF3.4bpp");
 
-const u8 gTrainerBackPic_Kai[] = INCBIN_U8("graphics/trainers/back_pics/kai.4bpp");
+const u8 gTrainerBackPic_Baiya[] = INCBIN_U8("graphics/trainers/back_pics/baiya.4bpp");
 const u8 gTrainerBackPic_Adaora[] = INCBIN_U8("graphics/trainers/back_pics/adaora.4bpp");
 const u8 gTrainerBackPic_Bd[] = INCBIN_U8("graphics/trainers/back_pics/bd.4bpp");
 const u8 gTrainerBackPic_Belen[] = INCBIN_U8("graphics/trainers/back_pics/belen.4bpp");
@@ -369,7 +369,7 @@ const u8 gTrainerBackPic_Neriene[] = INCBIN_U8("graphics/trainers/back_pics/neri
 const u8 gTrainerBackPic_Shinzo[] = INCBIN_U8("graphics/trainers/back_pics/shinzo.4bpp");
 
 const u16 gTrainerBackPicPalette_SiliconPlayerM1[] = INCBIN_U16("graphics/trainers/palettes/siliconPlayer.gbapal");
-const u16 gTrainerBackPicPalette_Kai[] = INCBIN_U16("graphics/trainers/palettes/kai.gbapal");
+const u16 gTrainerBackPicPalette_Baiya[] = INCBIN_U16("graphics/trainers/palettes/baiya.gbapal");
 const u16 gTrainerBackPicPalette_Adaora[] = INCBIN_U16("graphics/trainers/palettes/adaora.gbapal");
 const u16 gTrainerBackPicPalette_Bd[] = INCBIN_U16("graphics/trainers/palettes/bd.gbapal");
 const u16 gTrainerBackPicPalette_Belen[] = INCBIN_U16("graphics/trainers/palettes/belen.gbapal");
@@ -496,7 +496,7 @@ const struct TrainerSprite gTrainerSprites[] =
     TRAINER_SPRITE(TRAINER_PIC_RS_BRENDAN, gTrainerFrontPic_RubySapphireBrendan, gTrainerPalette_RubySapphireBrendan),
     TRAINER_SPRITE(TRAINER_PIC_RS_MAY, gTrainerFrontPic_RubySapphireMay, gTrainerPalette_RubySapphireMay),
     // Start silicon
-    TRAINER_SPRITE(TRAINER_PIC_KAI,gTrainerFrontPic_Kai, gTrainerFrontPalette_Kai),
+    TRAINER_SPRITE(TRAINER_PIC_BAIYA,gTrainerFrontPic_Baiya, gTrainerFrontPalette_Baiya),
     TRAINER_SPRITE(TRAINER_PIC_ADAORA,gTrainerFrontPic_Adaora, gTrainerFrontPalette_Adaora),
     TRAINER_SPRITE(TRAINER_PIC_VIGRIM,gTrainerFrontPic_Vigrim, gTrainerFrontPalette_Vigrim),
     TRAINER_SPRITE(TRAINER_PIC_BD,gTrainerFrontPic_Bd, gTrainerFrontPalette_Bd),
@@ -596,7 +596,7 @@ const struct TrainerBacksprite gTrainerBacksprites[] =
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_WALLY, 4, gTrainerBackPic_Wally, gTrainerPalette_Wally, sBackAnims_Hoenn),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_STEVEN, 4, gTrainerBackPic_Steven, gTrainerPalette_Steven, sBackAnims_Hoenn),
     // Start silicon
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_KAI, 5, gTrainerBackPic_Kai, gTrainerBackPicPalette_Kai, sBackAnims_Kanto),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_BAIYA, 5, gTrainerBackPic_Baiya, gTrainerBackPicPalette_Baiya, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_ADAORA, 5, gTrainerBackPic_Adaora, gTrainerBackPicPalette_Adaora, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_BD, 5, gTrainerBackPic_Bd, gTrainerBackPicPalette_Bd, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_BELEN, 5, gTrainerBackPic_Belen, gTrainerBackPicPalette_Belen, sBackAnims_Kanto),

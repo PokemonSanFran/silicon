@@ -23,7 +23,7 @@ script HalaiIsland_ObjectVisibility_Script {
 
     switch (var(VAR_HALAI_ISLAND_STATE)){
         case 0: goto(SurvivalChance333_HideObject_HalaiIsland_Script)
-        case SAVE_KAI_HALAI_ISLAND: call(SurvivalChance333_HideObject_HalaiIsland_Script)
+        case SAVE_BAIYA_HALAI_ISLAND: call(SurvivalChance333_HideObject_HalaiIsland_Script)
         case START_SURVIVAL_CHANCE: call(AssholesHome_HideObject_Script)
         case WHY_ARE_YOU_HELPING_THEM: call(WhyAreYouHelpingThem_ObjectDebriefSetUp_Script)
         case POST_EARTHQUAKE: call(Earthquake_HideObject_Script)

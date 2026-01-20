@@ -6458,14 +6458,14 @@
       "border_width": 2
     },
     {
-      "id": "LAYOUT_HALAI_ISLAND_KAI",
-      "name": "HalaiIsland_Kai_Layout",
+      "id": "LAYOUT_HALAI_ISLAND_BAIYA",
+      "name": "HalaiIsland_Baiya_Layout",
       "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BrendansMaysHouse",
-      "border_filepath": "data/layouts/HalaiIsland_Kai/border.bin",
-      "blockdata_filepath": "data/layouts/HalaiIsland_Kai/map.bin",
+      "border_filepath": "data/layouts/HalaiIsland_Baiya/border.bin",
+      "blockdata_filepath": "data/layouts/HalaiIsland_Baiya/map.bin",
       "border_height": 2,
       "border_width": 2
     },
