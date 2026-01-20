@@ -85,7 +85,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
         case STORY_START_TRUE_TIMELINE:
             return gText_PlayersAdventure_Flavor34;
         case STORY_POST_DIANTHA:
-        case STORY_CONGRATULATED_BY_ADELAIDE:
+        case STORY_CONGRATULATED_BY_LUCREZIA:
             return gText_PlayersAdventure_Flavor32;
         case STORY_SAVE_DIANTHA:
             return gText_PlayersAdventure_Flavor31;

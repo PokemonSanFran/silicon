@@ -1,13 +1,13 @@
 //PSF TODO whenever the announce talks, its an ad read, brought to you by one of the big companies
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ADELAIDE = 1 //FLAG_TEMP_1
+const LUCREZIA = 1 //FLAG_TEMP_1
 const ENTRANT = 1
 const CHARLOTTE = 2 //FLAG_TEMP_2
 const CHARLOTTE_SKYBOX = 8
 const KAI = 3 //FLAG_TEMP_3
 const OLIVER = 4 //FLAG_TEMP_4
 const GUARD = 5
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
 const FLAG_HIDE_ARCEHR = FLAG_TEMP_3
 const FLAG_HIDE_OLIVER = FLAG_TEMP_4
@@ -16,14 +16,14 @@ const FLAG_HIDE_RAMESH = FLAG_TEMP_6
 script GroupStages_Lockers_ObjectSetUp_Script {
     setobjectxyperm(CHARLOTTE,10,3)
         setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_RAMESH)
 }
 
 script GroupStages_Lockers_ObjectCleanUp_Script {
     setflag(FLAG_HIDE_CHARLOTTE)
         setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_RAMESH)
 }
 

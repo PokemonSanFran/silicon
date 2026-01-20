@@ -975,7 +975,7 @@ const struct Users gBuzzrUsers[] =
         .username = _("Zymurgy"),
         .isVerified = TRUE,
     },
-    [BUZZR_USER_ADELAIDE] =
+    [BUZZR_USER_LUCREZIA] =
     {
         .username = _("PathToThePeak"),
         .isVerified = FALSE,

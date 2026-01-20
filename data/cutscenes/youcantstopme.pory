@@ -2,11 +2,11 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const OLIVER = 1
 const POLICE_A = 2
 const POLICE_B = 3
-const ADELAIDE = 4
+const LUCREZIA = 4
 
 const FLAG_HIDE_OLIVER= FLAG_TEMP_1
 const FLAG_HIDE_POLICE = FLAG_TEMP_2
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_3
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_3
 
 script YouCantStopMe_HideObject_Script {
     setflag(FLAG_HIDE_OLIVER)
@@ -16,14 +16,14 @@ script YouCantStopMe_HideObject_Script {
 
 script YouCantStopMe_MoveObject_Script {
     call(YouCantStopMe_HideObject_Script)
-        setobjectxy(ADELAIDE,15,5)
-        setobjectxyperm(ADELAIDE,15,5)
-        setobjectnewmovementtype(ADELAIDE,MOVEMENT_TYPE_FACE_DOWN)
+        setobjectxy(LUCREZIA,15,5)
+        setobjectxyperm(LUCREZIA,15,5)
+        setobjectnewmovementtype(LUCREZIA,MOVEMENT_TYPE_FACE_DOWN)
 }
 
 script YouCantStopMe_ObjectCleanUp_Script {
     call(YouCantStopMe_HideObject_Script)
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
     return
 }
 
@@ -97,46 +97,46 @@ script YouCantStopMe_Confront_Dialogue {
         lock
         playbgm(MUS_RG_ENCOUNTER_DEOXYS,TRUE)
 
-        msgbox(format("What do you want? I'm working on an important email."),MSGBOX_NPC,SPEAKER_ADELAIDE)
+        msgbox(format("What do you want? I'm working on an important email."),MSGBOX_NPC,SPEAKER_LUCREZIA)
 
         msgbox(format("One mass casualty event wasn’t enough?! Ruining a region!? Becoming a multi-billionaire? What else do you want?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Hah! I think mass casualty is a little dramatic, don’t you think? A few people died. They shouldn’t have aligned themselves with terrorists. They were getting in the way of shareholder profits, which is why I have work to do, actually…"),,SPEAKER_ADELAIDE)
+        msgbox(format("Hah! I think mass casualty is a little dramatic, don’t you think? A few people died. They shouldn’t have aligned themselves with terrorists. They were getting in the way of shareholder profits, which is why I have work to do, actually…"),,SPEAKER_LUCREZIA)
 
         closemessage
 
-        applymovement(ADELAIDE,Common_Movement_FaceUp)
+        applymovement(LUCREZIA,Common_Movement_FaceUp)
 
         msgbox(format("Did you ever care about any of this?"),,SPEAKER_ALICIA)
 
-        msgbox(format("I’m not justifying myself to some kid, and I don’t need to either."),,SPEAKER_ADELAIDE)
+        msgbox(format("I’m not justifying myself to some kid, and I don’t need to either."),,SPEAKER_LUCREZIA)
 
         msgbox(format("You really don’t give a shit."),,SPEAKER_ALICIA)
 
-        msgbox(format("Nope! I do wish you had just played your role though. Charlotte isn’t as… charming as you, so we’ve gotta keep them behind the scenes, you know? Gotta find a new kid, I guess."),,SPEAKER_ADELAIDE)
+        msgbox(format("Nope! I do wish you had just played your role though. Charlotte isn’t as… charming as you, so we’ve gotta keep them behind the scenes, you know? Gotta find a new kid, I guess."),,SPEAKER_LUCREZIA)
 
         msgbox(format("I was just a glorified PR puppet for you?!"),,SPEAKER_ALICIA)
 
         closemessage
 
-        setvar(VAR_TOWER_RAID_STATE,SAVE_ADELAIDE_SHARPRISESPIRE)
+        setvar(VAR_TOWER_RAID_STATE,SAVE_LUCREZIA_SHARPRISESPIRE)
 
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) != 15 || (var(VAR_TEMP_1) != 5)){
             fadescreen(FADE_TO_BLACK)
                 delay(30)
-                applymovement(ADELAIDE,Common_Movement_FaceDown)
+                applymovement(LUCREZIA,Common_Movement_FaceDown)
                 applymovement(PLAYER,Common_Movement_FaceUp)
-                setobjectxy(ADELAIDE,15,4)
+                setobjectxy(LUCREZIA,15,4)
                 setobjectxy(PLAYER,15,5)
                 TeleportCamera(15,5)
                 fadescreen(FADE_FROM_BLACK)
         }
 
-        applymovement(ADELAIDE,Common_Movement_WalkDown)
+        applymovement(LUCREZIA,Common_Movement_WalkDown)
         applymovement(PLAYER, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
-        waitmovement(ADELAIDE)
+        waitmovement(LUCREZIA)
         waitmovement(PLAYER)
 
         startmenu_savescreen
@@ -144,11 +144,11 @@ script YouCantStopMe_Confront_Dialogue {
 }
 
 script YouCantStopMe_StartBossBattle_Script {
-        msgbox(format("You were. Now you’re annoying. Soon to be dead."),MSGBOX_NPC,SPEAKER_ADELAIDE)
+        msgbox(format("You were. Now you’re annoying. Soon to be dead."),MSGBOX_NPC,SPEAKER_LUCREZIA)
         closemessage
 
-        trainerbattle_no_intro(TRAINER_ADELAIDE_A,format("Wow! Guess we should have taken you out sooner, huh?"))
-        setvar(VAR_TOWER_RAID_STATE,DEFEATED_FIRST_ADELAIDE)
+        trainerbattle_no_intro(TRAINER_LUCREZIA_A,format("Wow! Guess we should have taken you out sooner, huh?"))
+        setvar(VAR_TOWER_RAID_STATE,DEFEATED_FIRST_LUCREZIA)
         startcutscene(JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE)
 }
 

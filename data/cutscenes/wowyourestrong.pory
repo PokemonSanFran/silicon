@@ -1,7 +1,7 @@
-const ADELAIDE = VAR_LAST_TALKED
+const LUCREZIA = VAR_LAST_TALKED
 const KAI = VAR_0x8006
 const CAMERA = OBJ_EVENT_ID_CAMERA
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1E
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1E
 const FLAG_HIDE_KAI = FLAG_TEMP_1F
 
 script WowYourStrong_AssignObjectId_Script
@@ -10,13 +10,13 @@ script WowYourStrong_AssignObjectId_Script
     switch (var(VAR_RESULT))
     {
         case MAP_TORA_TOWN:
-            setvar(ADELAIDE,6)
+            setvar(LUCREZIA,6)
             setvar(KAI,7)
         case MAP_PERLACIA_CITY:
-            setvar(ADELAIDE,1)
+            setvar(LUCREZIA,1)
             setvar(KAI,9)
         case MAP_MERMEREZA_CITY:
-            setvar(ADELAIDE,10)
+            setvar(LUCREZIA,10)
             setvar(KAI,11)
     }
     return
@@ -27,7 +27,7 @@ script WowYoureStrong_HideObject_Script
     special(GetNumberOfBadges)
     if(var(VAR_RESULT)!= 3 || (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > DEFEATED_THIRD_LEADER))
     {
-        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_KAI)
     }
 
@@ -56,25 +56,25 @@ script WowYoureStrong_WalkToPlayer_Script
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_WOW_YOURE_STRONG)
     playse(SE_PIN)
     playbgm(MUS_RG_ENCOUNTER_DEOXYS,TRUE)
-    applymovement(ADELAIDE,Common_Movement_ExclamationMark)
-    waitmovement(ADELAIDE)
-    applymovement(ADELAIDE, moves(walk_up, walk_right * 5, face_up, step_end))
-    waitmovement(ADELAIDE)
-    setobjectxyperm(ADELAIDE,28,25)
+    applymovement(LUCREZIA,Common_Movement_ExclamationMark)
+    waitmovement(LUCREZIA)
+    applymovement(LUCREZIA, moves(walk_up, walk_right * 5, face_up, step_end))
+    waitmovement(LUCREZIA)
+    setobjectxyperm(LUCREZIA,28,25)
     goto(WowYoureStrong_Intro_Dialogue)
 }
 
 script WowYoureStrong_Intro_Dialogue
 {
-    msgbox(format("{PLAYER}! What a show! That was marvelous! Flying you in from Orre was absolutely worth it, for that battle alone."),,SPEAKER_ADELAIDE)
+    msgbox(format("{PLAYER}! What a show! That was marvelous! Flying you in from Orre was absolutely worth it, for that battle alone."),,SPEAKER_LUCREZIA)
 
     msgbox(format("Oh uh, thanks a lot, that's very nice. I'm guessing you work at SharpRise Capital…?"),,SPEAKER_ALICIA)
 
-    msgbox(format("Hah! Oh my, I'm sorry. Where are my manners? My name is Adelaide, and I'm the SharpRise Capital League Commissioner, appointed by our corporate sponsors, Buzzr, Presto, and Arriba."),,SPEAKER_ADELAIDE)
+    msgbox(format("Hah! Oh my, I'm sorry. Where are my manners? My name is Lucrezia, and I'm the SharpRise Capital League Commissioner, appointed by our corporate sponsors, Buzzr, Presto, and Arriba."),,SPEAKER_LUCREZIA)
 
     msgbox(format("Oh! I guess I should have known that. Well um, thanks so much for the opportunity! I'm excited to be the region's next Champion."),,SPEAKER_ALICIA)
 
-    msgbox(format("Dream big {PLAYER}! That's the attitude we wanna see. We're big dreamers over at SharpRise Capital too. That's why we built the SharpRise  Spire! I wrote a stunning email introduction after it was completed... I'll have to forward it to you, it's really some of my best writing."),,SPEAKER_ADELAIDE)
+    msgbox(format("Dream big {PLAYER}! That's the attitude we wanna see. We're big dreamers over at SharpRise Capital too. That's why we built the SharpRise  Spire! I wrote a stunning email introduction after it was completed... I'll have to forward it to you, it's really some of my best writing."),,SPEAKER_LUCREZIA)
 
     goto(WowYoureStrong_ShowTower_Script)
 }
@@ -89,7 +89,7 @@ script WowYoureStrong_ShowTower_Script
         bufferstring(STR_VAR_2,"this city")
     }
 
-    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the SharpRise Spire in {STR_VAR_2}."),,SPEAKER_ADELAIDE)
+    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the SharpRise Spire in {STR_VAR_2}."),,SPEAKER_LUCREZIA)
     closemessage
 
     if (var(VAR_RESULT) == MAP_PERLACIA_CITY)
@@ -121,10 +121,10 @@ script WowYoureStrong_TakeCameraFromTower_Script
 
 script WowYoureStrong_End_Dialouge
 {
-    msgbox(format("I have to run to a meeting. Again, excellent job in your Gym battle. I hope to see what else you can do!"),,SPEAKER_ADELAIDE)
+    msgbox(format("I have to run to a meeting. Again, excellent job in your Gym battle. I hope to see what else you can do!"),,SPEAKER_LUCREZIA)
 
     closemessage
-    applymovement(ADELAIDE,WowYoureStrong_WalkToMeeting_Movement)
+    applymovement(LUCREZIA,WowYoureStrong_WalkToMeeting_Movement)
     if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_KAI_ROUTE10)
     {
         delay(30)
@@ -136,13 +136,13 @@ script WowYoureStrong_End_Dialouge
     {
         goto(WowYourStrong_KaiConfrontation_Dialogue)
     }
-    goto(WowYourStrong_RemoveAdelaide_Script)
+    goto(WowYourStrong_RemoveLucrezia_Script)
 }
 
-script WowYourStrong_RemoveAdelaide_Script
+script WowYourStrong_RemoveLucrezia_Script
 {
-    waitmovement(ADELAIDE)
-    removeobject(ADELAIDE)
+    waitmovement(LUCREZIA)
+    removeobject(LUCREZIA)
     release
     end
 }
@@ -178,7 +178,7 @@ script WowYourStrong_KaiConfrontation_Dialogue
 
     endcutscene
     call(TryAutoSave)
-    goto(WowYourStrong_RemoveAdelaide_Script)
+    goto(WowYourStrong_RemoveLucrezia_Script)
 }
 
 movement WowYoureStrong_WalkToMeeting_Movement {

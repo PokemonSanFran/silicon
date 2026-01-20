@@ -1,5 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ADELAIDE = 1
+const LUCREZIA = 1
 const VICTIM = 2
 const MUGGERA = 3
 const MUGGERB = 4

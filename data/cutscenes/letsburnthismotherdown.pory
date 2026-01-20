@@ -3,7 +3,7 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 const KEIYING = 8
@@ -11,7 +11,7 @@ const KEIYING = 8
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -283,11 +283,11 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     end
 }
 
-script LetsBurnThisMotherDown_ShowAdelaide_Script
+script LetsBurnThisMotherDown_ShowLucrezia_Script
 {
-    setobjectxy(ADELAIDE,33,5)
-    setobjectxyperm(ADELAIDE,33,5)
-    setobjectmovementtype(ADELAIDE,MOVEMENT_TYPE_FACE_RIGHT)
+    setobjectxy(LUCREZIA,33,5)
+    setobjectxyperm(LUCREZIA,33,5)
+    setobjectmovementtype(LUCREZIA,MOVEMENT_TYPE_FACE_RIGHT)
 }
 
 script LetsBurnThisMotherDown_MissionComplete_Dialogue
@@ -300,35 +300,35 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     {
        case FALSE_TIMELINE_NONE_COMPLETE:
         msgbox(format("I'm sorry. I really thought I could change his mind."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("You're young, and it ended well."),,SPEAKER_ADELAIDE)
-        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("You're young, and it ended well."),,SPEAKER_LUCREZIA)
+        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
 
        case FALSE_TIMELINE_MAN_COMPLETE:
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
-        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
-        msgbox(format("You've taken out their new base of operations and we've arrested their leader!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
+        msgbox(format("You've taken out their new base of operations and we've arrested their leader!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
         msgbox(format("I feel like all we've done so far is attack and harass people."),,SPEAKER_ALICIA,,EMOTE_SAD)
-        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_ADELAIDE)
-        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
+        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_LUCREZIA)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_LUCREZIA)
 
        case FALSE_TIMELINE_HOW_COMPLETE:
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
-        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
-        msgbox(format("You've taken out their new base of operations and we've taken away their ability to recruit!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
+        msgbox(format("You've taken out their new base of operations and we've taken away their ability to recruit!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
         msgbox(format("People were actively relying on the The Tide, I saw that with my own eyes. How do we help those people now?"),,SPEAKER_ALICIA)
-        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_LUCREZIA)
 
        case FALSE_TIMELINE_MAN_HOW_COMPLETE:
-        msgbox(format("Another job well done, {PLAYER}."),,SPEAKER_ADELAIDE)
-        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("Another job well done, {PLAYER}."),,SPEAKER_LUCREZIA)
+        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
-        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
-        msgbox(format("You and Charlotte have finally dismantled The Tide!"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
+        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
+        msgbox(format("You and Charlotte have finally dismantled The Tide!"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
         msgbox(format("People were actively relying on the The Tide, I saw that with my own eyes. How do we help those people now?"),,SPEAKER_ALICIA)
         msgbox(format("I feel like all we've done so far is attack and harass people."),,SPEAKER_ALICIA,,EMOTE_SAD)
-        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_ADELAIDE)
-        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
-        msgbox(format("Is the greater good just a region without opposition to Adelaide?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_LUCREZIA)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_LUCREZIA)
+        msgbox(format("Is the greater good just a region without opposition to Lucrezia?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
         msgbox(format("..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage
         delay(30)
@@ -338,22 +338,22 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceUp)
-    applymovement(ADELAIDE,Common_Movement_FaceUp)
+    applymovement(LUCREZIA,Common_Movement_FaceUp)
 
-    msgbox(format("Police Chief Bill sent me an email with their current plan - they're going to treat the entire island as a crime scene and see if they can find anything else regarding The Tide."),,SPEAKER_ADELAIDE)
+    msgbox(format("Police Chief Bill sent me an email with their current plan - they're going to treat the entire island as a crime scene and see if they can find anything else regarding The Tide."),,SPEAKER_LUCREZIA)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     if(var(VAR_RESULT) == FALSE_TIMELINE_HOW_COMPLETE)
     {
         msgbox(format("Did Chief Bill mention the arrests at all? Did they have to use force to get The Tide to comply?"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
 
-        msgbox(format("I don't remember... but does it matter? Those scum should be rounded up by whatever means neccesary, even if that Kai boy showed promise."),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
+        msgbox(format("I don't remember... but does it matter? Those scum should be rounded up by whatever means neccesary, even if that Kai boy showed promise."),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
     }
 
     closemessage
     addvar(VAR_STORYLINE_STATE,1)
-    applymovement(ADELAIDE, moves(walk_down * 6))
-    waitmovement(ADELAIDE)
+    applymovement(LUCREZIA, moves(walk_down * 6))
+    waitmovement(LUCREZIA)
     call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
     completequest(QUEST_LETSBURNTHISMOTHERDOWN)
     setvar(VAR_LETSBURNTHISMOTHERSTATE,BURN_MOTHER_COMPLETE)

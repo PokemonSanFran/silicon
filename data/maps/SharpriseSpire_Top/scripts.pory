@@ -7,8 +7,8 @@ mapscripts SharpriseSpire_Top_MapScripts
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
-        VAR_TOWER_RAID_STATE,DEFEATED_FIRST_ADELAIDE: WeCanStopYouActually_PostBattle_Dialogue
-        VAR_TOWER_RAID_STATE, DEFEATED_SECOND_ADELAIDE: WeCanStopYouActually_Arrest_Dialogue
+        VAR_TOWER_RAID_STATE,DEFEATED_FIRST_LUCREZIA: WeCanStopYouActually_PostBattle_Dialogue
+        VAR_TOWER_RAID_STATE, DEFEATED_SECOND_LUCREZIA: WeCanStopYouActually_Arrest_Dialogue
     ]
 }
 
@@ -16,14 +16,14 @@ script SharpriseSpire_Top_ObjectVisibility_Script{
 
      switch (var(VAR_TOWER_RAID_STATE)){
          case DEFEATED_CHARLOTTE_SHARPRISESPIRE: call(YouCantStopMe_HideObject_Script)
-         case SAVE_ADELAIDE_SHARPRISESPIRE: call(YouCantStopMe_HideObject_Script)
-         case DEFEATED_ADELAIDE_SHARPRISESPIRE: call(YouCantStopMe_MoveObject_Script)
+         case SAVE_LUCREZIA_SHARPRISESPIRE: call(YouCantStopMe_HideObject_Script)
+         case DEFEATED_LUCREZIA_SHARPRISESPIRE: call(YouCantStopMe_MoveObject_Script)
         default: call(YouCantStopMe_ObjectCleanUp_Script)
     }
      return
 }
 
-script SharpriseSpire_Top_Adelaide_Event_Script {
+script SharpriseSpire_Top_Lucrezia_Event_Script {
     lock
 
     if (var(VAR_TOWER_RAID_STATE) == STOPPED_BY_OLIVER){

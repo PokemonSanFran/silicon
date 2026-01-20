@@ -29,7 +29,7 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
     msgbox(format("Never mind that... okay. We'd like your help again."),,SPEAKER_OLIVER)
     msgbox(format("Shit, what did TheTide do now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-    msgbox(format("You're starting to sound like a native… they've completely infiltrated our social media platforms. Adelaide was impressed with your work at SharpRise Stadium, and thinks you two might be able to help."),,SPEAKER_OLIVER)
+    msgbox(format("You're starting to sound like a native… they've completely infiltrated our social media platforms. Lucrezia was impressed with your work at SharpRise Stadium, and thinks you two might be able to help."),,SPEAKER_OLIVER)
 
     msgbox(format("How are we going to help? Sounds a little above us."),,SPEAKER_CHARLOTTE)
 

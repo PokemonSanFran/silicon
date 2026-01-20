@@ -396,9 +396,9 @@ script Manhunt_StartAlcmeneBattle_Script
     closemessage
     playse(SE_POKENAV_CALL)
     waitse
-    msgbox(format("Adelaide, I've defeated Alcemene. We'll be at the entrance to Lake Wishaast."),,SPEAKER_CHARLOTTE_SHARPRISE,,,PHONE_ON)
+    msgbox(format("Lucrezia, I've defeated Alcemene. We'll be at the entrance to Lake Wishaast."),,SPEAKER_CHARLOTTE_SHARPRISE,,,PHONE_ON)
 
-        msgbox(format("What!? Wait uh - okay um, excellent work! I was expecting an email, but this will do! I'll send the police right over. This is amazing!"),,SPEAKER_ADELAIDE,,EMOTE_SHOCK,PHONE_ON)
+        msgbox(format("What!? Wait uh - okay um, excellent work! I was expecting an email, but this will do! I'll send the police right over. This is amazing!"),,SPEAKER_LUCREZIA,,EMOTE_SHOCK,PHONE_ON)
 
         closemessage
 

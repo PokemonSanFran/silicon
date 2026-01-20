@@ -67,7 +67,7 @@ script YouLookTired_Intro_Dialogue {
 
         msgbox(format("Ramesh... they work for SharpRise Capital, right? So I guess you do too?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Yes sorry, I'm the SharpRise Capital Chief Operating Officer, and Adelaide's right hand. It's a pleasure to meet you, we're all very impressed with you."),,SPEAKER_KEIYING)
+        msgbox(format("Yes sorry, I'm the SharpRise Capital Chief Operating Officer, and Lucrezia's right hand. It's a pleasure to meet you, we're all very impressed with you."),,SPEAKER_KEIYING)
 
         msgbox(format("Yeah, I keep hearing that! It's a little overwhelming."),,SPEAKER_ALICIA)
 

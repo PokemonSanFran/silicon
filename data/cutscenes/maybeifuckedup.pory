@@ -4,7 +4,7 @@ const FLAG_HIDE_ORI = FLAG_TEMP_6
 
 script MaybeIFuckedUp_ShowOri_Script
 {
-    if (var(VAR_STORYLINE_STATE) != STORY_CONGRATULATED_BY_ADELAIDE)
+    if (var(VAR_STORYLINE_STATE) != STORY_CONGRATULATED_BY_LUCREZIA)
     {
         setflag(FLAG_HIDE_ORI)
     }

@@ -2640,14 +2640,14 @@ IVs: 0 Atk
 - Thunderbolt  
 - Rest  
 
-=== TRAINER_ADELAIDE_A ===
-Name: Adelaide
-Pic: Adelaide
+=== TRAINER_LUCREZIA_A ===
+Name: Lucrezia
+Pic: Lucrezia
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-Reveal: Adelaide
+Reveal: Lucrezia
 Class: Magma Leader
 Type: Boss
-Overworld Sprite: Adelaide
+Overworld Sprite: Lucrezia
 Map Section: SharpriseSpire
 
 Salazzle @ Focus Sash  
@@ -2733,8 +2733,8 @@ IVs: 0 Atk
 - Energy Ball  
 - Agility  
 
-=== TRAINER_ADELAIDE_B ===
-Name: Adelaide
+=== TRAINER_LUCREZIA_B ===
+Name: Lucrezia
 Pic: Cooltrainer F
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Map Section: SharpriseSpire

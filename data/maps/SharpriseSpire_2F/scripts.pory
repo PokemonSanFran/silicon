@@ -38,7 +38,7 @@ script SharpriseSpire_2F_MapScripts_OnTransition {
 
         switch (var(VAR_HOWDISAPPOINTING_STATE)){
             case MISSION_NOT_ASSIGNED: return
-            //case DEFEATED_ADAORA_HODOU_CITY: call(HowDisappointing_PostMissionObjectSetUp_Script) //Adelaide is in Keiying's office, thanking everybody for their work
+            //case DEFEATED_ADAORA_HODOU_CITY: call(HowDisappointing_PostMissionObjectSetUp_Script) //Lucrezia is in Keiying's office, thanking everybody for their work
             default: call(YouHaveYourOrders_ObjectSetUp_Script) //Keiying is in his office, already gave you mission
         }
 

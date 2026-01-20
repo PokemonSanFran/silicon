@@ -15,7 +15,7 @@ mapscripts Route2_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_CONSTRUCTION_STRIKE_STATE, STRIKE_HAS_BEGUN: TheStrikeStrikesBack_Intro_Dialogue
             VAR_CONSTRUCTION_STRIKE_STATE, DEFEATED_GARBODOR: VSGarbodor_Arrest_Script
-            VAR_STORYLINE_STATE, STORY_CONGRATULATED_BY_ADELAIDE: MaybeIFuckedUp_Dialogue
+            VAR_STORYLINE_STATE, STORY_CONGRATULATED_BY_LUCREZIA: MaybeIFuckedUp_Dialogue
     ]
 }
 

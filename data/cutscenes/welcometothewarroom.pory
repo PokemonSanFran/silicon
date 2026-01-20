@@ -3,7 +3,7 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 const KEIYING = 8
@@ -11,7 +11,7 @@ const KEIYING = 8
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -25,12 +25,12 @@ script WelcomeToTheWarRoom_Object_Hide_Script{
     setflag(FLAG_HIDE_RAMESH)
     setflag(FLAG_HIDE_NERDS_COPS)
     setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
     setobjectxy(OLIVER,34,2)
     setobjectmovementtype(OLIVER,MOVEMENT_TYPE_FACE_DOWN)
 }
 
-script WelcomeToTheWarRoom_FaceSpeakerAdelaide {
+script WelcomeToTheWarRoom_FaceSpeakerLucrezia {
     applymovement(TECHIE,Common_Movement_FaceUp)
     applymovement(ARNAV,Common_Movement_FaceUp)
     applymovement(CHIEF,Common_Movement_FaceUp)
@@ -102,11 +102,11 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_WELCOME_TO_THE_WAR_ROOM)
     setvar(VAR_FERRYBUILDING_STATE,CHIEF_LEFT_WAR_ROOM)
 
-    call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
-        applymovement(ADELAIDE, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
+    call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
+        applymovement(LUCREZIA, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
         waitmovement(0)
 
-        msgbox(format("I read the summary email, but I want to hear the whole story."),,SPEAKER_ADELAIDE)
+        msgbox(format("I read the summary email, but I want to hear the whole story."),,SPEAKER_LUCREZIA)
         closemessage
 
         call(WelcomeToTheWarRoom_FaceSpeakerArnav)
@@ -119,8 +119,8 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
         msgbox(format("We've long theorized that NavalBase is TheTide's primary base of operations so we've got reason to believe that they're the ones behind this cyber-attack. We have authorization to raid their headquarters and are looking -"),,SPEAKER_CHIEF)
 
-        call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
-        msgbox(format("Charlotte, {PLAYER} you really impressed me back at SharpRise Stadium, and we'd like you to assist as well. You'll work under Chief Bill, and help us shut down these terrorists once and for all."),,SPEAKER_ADELAIDE)
+        call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
+        msgbox(format("Charlotte, {PLAYER} you really impressed me back at SharpRise Stadium, and we'd like you to assist as well. You'll work under Chief Bill, and help us shut down these terrorists once and for all."),,SPEAKER_LUCREZIA)
 
         call(WelcomeToTheWarRoom_FaceSpeakerCharlotte)
         msgbox(format("Hell yeah, we'd love to."),,SPEAKER_CHARLOTTE)
@@ -128,8 +128,8 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         call(WelcomeToTheWarRoom_FaceSpeakerPlayer)
         msgbox(format("I'm happy to help."),,SPEAKER_ALICIA)
 
-        call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
-        msgbox(format("Everybody understand what they're doing?"),,SPEAKER_ADELAIDE)
+        call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
+        msgbox(format("Everybody understand what they're doing?"),,SPEAKER_LUCREZIA)
         closemessage
 
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
@@ -156,17 +156,17 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         removeobject(CHIEF)
         fadescreen(FADE_FROM_BLACK)
 
-        call(WelcomeToTheWarRoom_FaceSpeakerAdelaide)
-        msgbox(format("Charlotte, {PLAYER}, don't let the chief's attitude get in the way. You've all got orders, so let's get to it."),,SPEAKER_ADELAIDE)
+        call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
+        msgbox(format("Charlotte, {PLAYER}, don't let the chief's attitude get in the way. You've all got orders, so let's get to it."),,SPEAKER_LUCREZIA)
         closemessage
 
         applymovement(ARNAV, moves(walk_right, walk_down * 5, step_end))
         applymovement(TECHIE, moves(walk_left, walk_down * 5, step_end))
-        applymovement(ADELAIDE, moves(walk_right * 3, walk_down * 5, step_end))
+        applymovement(LUCREZIA, moves(walk_right * 3, walk_down * 5, step_end))
 
         delay(30)
         fadescreen(FADE_TO_BLACK)
-        removeobject(ADELAIDE)
+        removeobject(LUCREZIA)
         removeobject(ARNAV)
         removeobject(TECHIE)
         fadescreen(FADE_FROM_BLACK)

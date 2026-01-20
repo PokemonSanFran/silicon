@@ -3,16 +3,16 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 
-//PSF TODO Add awards on Adelaide's wall about the different awards he's won for sending great emails, having inbox zero, most organized email
+//PSF TODO Add awards on Lucrezia's wall about the different awards he's won for sending great emails, having inbox zero, most organized email
 
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -30,7 +30,7 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
             case START_FALSE_TIMELINE:
                 call(CongratsYoureanAsshole_ObjectCleanUp_Script)
                 call(YouHaveYourOrders_ObjectSetUp_Script)
-                call(LetsBurnThisMotherDown_ShowAdelaide_Script)
+                call(LetsBurnThisMotherDown_ShowLucrezia_Script)
                 call(Manhunt_ShowRamesh_Script)
             case TRUE_RAID_START:
                   call(SharpriseSpire_Leagueops_TrueTimeline_Objects_Script)
@@ -49,7 +49,7 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
         VAR_STORYLINE_STATE,STORY_THETIDE_FINISHED: ExhibitionBattle_TimeSkip_Script
     ]
     MAP_SCRIPT_ON_LOAD {
-        call(ImIn_RevealAdelaideWarp_Script)
+        call(ImIn_RevealLucreziaWarp_Script)
     }
 }
 
@@ -66,7 +66,7 @@ script SharpriseSpire_Leagueops_EmptyConferenceRoomOffices{
         setflag(FLAG_HIDE_NERDS_COPS)
         setflag(FLAG_HIDE_OLIVER)
         setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_RAMESH)
         setflag(FLAG_HIDE_KEIYING)
         return
@@ -166,17 +166,17 @@ script SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script{
     removeobject(TECHIE)
     removeobject(CHARLOTTE)
     removeobject(CHIEF)
-    removeobject(ADELAIDE)
+    removeobject(LUCREZIA)
     setflag(FLAG_HIDE_NERDS_COPS)
     setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
     return
 }
 
-script LeagueOps_AdelaideComputer_Script
+script LeagueOps_LucreziaComputer_Script
 {
     lock
-    msgbox(format("There is an open email draft on Adelaide's screen."))
+    msgbox(format("There is an open email draft on Lucrezia's screen."))
     if (var(VAR_STORYLINE_STATE) >= STORY_WARP_TILE_ACCESSIBLE)
     {
         msgbox(format("I am disappointed in the Champion's recent behavior, as I know you are as well. Though, before {PLAYER} turned we extracted enough value from {SUBJECT} to cover our investment many times over so I consider this loss acceptable. PARC is now fully operational, The Tide is eliminated, and there is nothing that can sta"))

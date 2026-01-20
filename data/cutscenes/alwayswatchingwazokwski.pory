@@ -43,7 +43,7 @@ script AlwaysWatchingWazowski_Intro_Dialogue{
         if(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > START_THE_GANGS_ALL_HERE){
             msgbox(format("I wish Oliver had picked a different time to tell you to come see me. I have at least 493 more minutes of work, and don't have the 12 minutes required to appropriately entertain you..."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
         }   else {
-            msgbox(format("I wish you had visited Adelaide first. I have at least 493 more minutes of work and don't have the 12 minutes required to appropriately entertain you..."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
+            msgbox(format("I wish you had visited Lucrezia first. I have at least 493 more minutes of work and don't have the 12 minutes required to appropriately entertain you..."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
         }
     goto(AlwaysWatchingWazowski_HowDidYouKnow_Dialogue)
 }

@@ -1009,9 +1009,9 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
-    [SPEAKER_ADELAIDE] =
+    [SPEAKER_LUCREZIA] =
     {
-        .name = _("Adelaide"),
+        .name = _("Lucrezia"),
         .title = _("SharpRise CEO"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Proton,

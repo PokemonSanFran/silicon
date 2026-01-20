@@ -127,7 +127,7 @@
 #define TRAINER_PIC_CHARLOTTE             TRAINER_PIC_MAY
 #define TRAINER_PIC_OLIVER                TRAINER_PIC_EXPERT
 #define TRAINER_PIC_RAMESH                TRAINER_PIC_MAGMA_ADMIN
-#define TRAINER_PIC_ADELAIDE              TRAINER_PIC_MAGMA_LEADER_MAXIE
+#define TRAINER_PIC_LUCREZIA              TRAINER_PIC_MAGMA_LEADER_MAXIE
 #define TRAINER_PIC_TALA                  TRAINER_PIC_ELITE_FOUR_SIDNEY
 #define TRAINER_PIC_AMI                   TRAINER_PIC_LEADER_JUAN
 #define TRAINER_PIC_ARMANDO               TRAINER_PIC_ELITE_FOUR_GLACIA
@@ -170,7 +170,7 @@
 #define TRAINER_BACK_PIC_CHARLOTTE             21
 #define TRAINER_BACK_PIC_OLIVER                22
 #define TRAINER_BACK_PIC_RAMESH                23
-#define TRAINER_BACK_PIC_ADELAIDE              24
+#define TRAINER_BACK_PIC_LUCREZIA              24
 #define TRAINER_BACK_PIC_TALA                  25
 #define TRAINER_BACK_PIC_AMI                   26
 #define TRAINER_BACK_PIC_ARMANDO               27

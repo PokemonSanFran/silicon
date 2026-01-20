@@ -6127,28 +6127,28 @@
         },
     },
 #line 2643
-    [DIFFICULTY_NORMAL][TRAINER_ADELAIDE_A] =
+    [DIFFICULTY_NORMAL][TRAINER_LUCREZIA_A] =
     {
 #line 2644
-        .trainerName = _("Adelaide"),
+        .trainerName = _("Lucrezia"),
 #line 2648
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
 #line 2645
-        .trainerPic = TRAINER_PIC_ADELAIDE,
+        .trainerPic = TRAINER_PIC_LUCREZIA,
         .encounterMusic_gender =
 0,
 #line 2646
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 2647
-        .characterRevealId = REVEAL_ADELAIDE,
+        .characterRevealId = REVEAL_LUCREZIA,
 #line 2649
         .trainerType = GLASS_TRAINER_TYPE_BOSS,
 #line 2650
-        .objectEventGraphicsId = OBJ_EVENT_GFX_ADELAIDE,
+        .objectEventGraphicsId = OBJ_EVENT_GFX_LUCREZIA,
 #line 2651
         .mapSec = MAPSEC_SHARPRISESPIRE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ADELAIDE,
+        .trainerBackPic = TRAINER_PIC_LUCREZIA,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -6339,10 +6339,10 @@
         },
     },
 #line 2736
-    [DIFFICULTY_NORMAL][TRAINER_ADELAIDE_B] =
+    [DIFFICULTY_NORMAL][TRAINER_LUCREZIA_B] =
     {
 #line 2737
-        .trainerName = _("Adelaide"),
+        .trainerName = _("Lucrezia"),
 #line 2738
         .trainerPic = TRAINER_PIC_COOLTRAINER_F,
         .encounterMusic_gender =

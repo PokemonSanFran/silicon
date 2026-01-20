@@ -1198,8 +1198,8 @@ const u8 gText_PlayersAdventure_Flavor38[] =_("Is the message a clue? Meet the t
 const u8 gText_PlayersAdventure_Flavor38A[] =_("Discover the secrets of the Pokemon Amplification\nResearch Center!");
 const u8 gText_PlayersAdventure_Flavor39[] =_("Head back to Arantraz to regroup.");
 const u8 gText_PlayersAdventure_Flavor40[] =_("Head into the belly of the beast. Meet\nat Ramesh's house in QiuVillage.");
-const u8 gText_PlayersAdventure_Flavor41[] =_("Ramesh's home in the qiuvillage has a warp\ntile directly into the SharpRise Spire. It's\ntime to confront Adelaide on the top floor!");
-const u8 gText_PlayersAdventure_Flavor41A[] =_("Confront Adelaide in their office!");
+const u8 gText_PlayersAdventure_Flavor41[] =_("Ramesh's home in the qiuvillage has a warp\ntile directly into the SharpRise Spire. It's\ntime to confront Lucrezia on the top floor!");
+const u8 gText_PlayersAdventure_Flavor41A[] =_("Confront Lucrezia in their office!");
 const u8 gText_PlayersAdventure_Flavor42[] =_("You became Champion, made some\nmistakes, but the region is just a\nlittle better because of your efforts.");
 const u8 gText_PlayersAdventure_Flavor43[] =_("You became Champion, stamped out\nSharpRise Capital, and the region is a just a\nlittle better because of your efforts.");
 

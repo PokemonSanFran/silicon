@@ -57,7 +57,7 @@ script IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue {
     msgbox(format("There you are! Took you long enough."),,SPEAKER_CHARLOTTE)
     msgbox(format("Oliver was telling me that we-"),,SPEAKER_ALICIA)
     msgbox(format("I guess it doesn’t matter. I’ve been taking a look at the puzzle Armando set up and I figured out how this works. "),,SPEAKER_CHARLOTTE)
-    msgbox(format("Once the quest info is decided and completed, come back in and fill in dialogue. Charlotte will explain how she figured out the puzzle and how."),,SPEAKER_ADELAIDE)
+    msgbox(format("Once the quest info is decided and completed, come back in and fill in dialogue. Charlotte will explain how she figured out the puzzle and how."),,SPEAKER_LUCREZIA)
     msgbox(format("So, unfortunately, I’ll need your help to get through this."),,SPEAKER_CHARLOTTE)
     msgbox(format("Unfortunately? That’s a little rude…."),,SPEAKER_ALICIA)
     msgbox(format("Working with people is tedious and the results are mixed so I prefer to do things myself so then I know they’ll be done right, but if I don’t have a choice, you’re not a horrible option."),,SPEAKER_CHARLOTTE)
@@ -125,7 +125,7 @@ script IGuessWeShouldBeNiceNow_SolvedPuzzleB {
         applymovement(PLAYER, moves(walk_right * 4, step_end))
         waitmovement(0)
 
-        msgbox(format("The girls complete the puzzle. Will likely need to update dialogue during puzzle later"),,SPEAKER_ADELAIDE)
+        msgbox(format("The girls complete the puzzle. Will likely need to update dialogue during puzzle later"),,SPEAKER_LUCREZIA)
     msgbox(format("That was amazing, Charlotte!"),,SPEAKER_ALICIA)
     msgbox(format("Of course. I’m happy you didn’t suck at finishing the puzzle"),,SPEAKER_CHARLOTTE)
     msgbox(format("…anyway. There’s the book. Let’s grab it and get out of here."),,SPEAKER_ALICIA)
@@ -149,7 +149,7 @@ script IGuessWeShouldBeNiceNow_BossProtectBook_Script {
         addobject(BOSSPKMNB)
         addobject(BOSSPKMNC)
 
-       msgbox(format("Guard Pokemon appear in front of the book"),,SPEAKER_ADELAIDE)
+       msgbox(format("Guard Pokemon appear in front of the book"),,SPEAKER_LUCREZIA)
     msgbox(format("Bingo! Alright, let’s see what I can do here"),,SPEAKER_CHARLOTTE)
     msgbox(format("Uh Charlotte? I’m right here!"),,SPEAKER_ALICIA)
     msgbox(format("Fine, you can help. But don’t slow me down. "),,SPEAKER_CHARLOTTE)

@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const DIANTHA = 1
 const FLAG_HIDE_KAI = FLAG_TEMP_3
-const ADELAIDE = 5
+const LUCREZIA = 5
 const VAR_TALKED_CHARLOTTE = VAR_TEMP_F
 
 script ExhibitionBattle_HideObject_Script {
@@ -31,7 +31,7 @@ script ExhibitionBattle_TimeSkip_Script {
 script ExhibitionBattle_PrepPlayer_Script {
     lock
         setvar(VAR_STORYLINE_STATE,STORY_SAVE_DIANTHA)
-        applymovement(ADELAIDE, moves(walk_right * 5, walk_up, step_end))
+        applymovement(LUCREZIA, moves(walk_right * 5, walk_up, step_end))
         waitmovement(0)
         msgbox(format("Okay, time for your exhibition battle. Winning or losing doesn't matter… just give us a good show! Are you ready?"),MSGBOX_YESNO,SPEAKER_OLIVER)
 
@@ -81,7 +81,7 @@ script ExhibitionBattle_BattleDiantha_Script {
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,9,5)
 
         //PSF TODO Add crowd booing
-        //The crowd goes wild with booes and jeering. The screen cuts to black the player is warped back to the locker room. Adelaide, Keiying, and Charlotte are in the locker room. Adelaide approaches the player as they walk in.
+        //The crowd goes wild with booes and jeering. The screen cuts to black the player is warped back to the locker room. Lucrezia, Keiying, and Charlotte are in the locker room. Lucrezia approaches the player as they walk in.
 }
 
 script ExhibitionBattle_PostBattle_Dialogue
@@ -89,15 +89,15 @@ script ExhibitionBattle_PostBattle_Dialogue
     lock
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(0)
-    setvar(VAR_STORYLINE_STATE,STORY_CONGRATULATED_BY_ADELAIDE)
+    setvar(VAR_STORYLINE_STATE,STORY_CONGRATULATED_BY_LUCREZIA)
 
-    msgbox(format("That was positively electric! Your best battle yet! Incredible! I couldn't have asked for a better kickoff."),,SPEAKER_ADELAIDE)
+    msgbox(format("That was positively electric! Your best battle yet! Incredible! I couldn't have asked for a better kickoff."),,SPEAKER_LUCREZIA)
     if(!defeated(TRAINER_DIANTHA))
     {
         msgbox(format("I've never seen anybody so excited to see me lose!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     }
 
-    msgbox(format("I'm convinced. This is going to be the best League season ever. The sponsors are excited, viewership is at an all-time high, and we're going to make it big! I'm getting emotional... perhaps I should capture this moment in an email!"),,SPEAKER_ADELAIDE)
+    msgbox(format("I'm convinced. This is going to be the best League season ever. The sponsors are excited, viewership is at an all-time high, and we're going to make it big! I'm getting emotional... perhaps I should capture this moment in an email!"),,SPEAKER_LUCREZIA)
     closemessage
     goto(ExhibitionBattle_Monologue)
 }

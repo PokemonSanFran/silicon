@@ -1,5 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ADELAIDE = 1 //FLAG_TEMP_1
+const LUCREZIA = 1 //FLAG_TEMP_1
 const CHARLOTTE = 2 //FLAG_TEMP_2
 const KAI = 3 //FLAG_TEMP_3
 const OLIVER = 4 //FLAG_TEMP_4
@@ -126,7 +126,7 @@ script WaitHeDidWhat_WatchOtherSemifinal_Dialogue {
 
         applymovement(PLAYER, Common_Movement_FaceLeft)
         waitmovement(0)
-        msgbox(format("I sent you a motivational email to get you ready for this match! Did you get it?"),,SPEAKER_ADELAIDE)
+        msgbox(format("I sent you a motivational email to get you ready for this match! Did you get it?"),,SPEAKER_LUCREZIA)
         msgbox(format("I don't know what email he's talking about... I don't even use my email."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
         closemessage
 

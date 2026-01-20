@@ -1,20 +1,20 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const POLICE_A = 2
 const POLICE_B = 3
-const ADELAIDE = 4
+const LUCREZIA = 4
 
 const FLAG_HIDE_OLIVER= FLAG_TEMP_1
 const FLAG_HIDE_POLICE = FLAG_TEMP_2
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_3
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_3
 
 script WeCanStopYouActually_FixPlayerPosition_Script {
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) != 15 || (var(VAR_TEMP_1) != 6)){
             fadescreen(FADE_TO_BLACK)
-                applymovement(ADELAIDE,Common_Movement_FaceDown)
-                waitmovement(ADELAIDE)
-                setobjectxy(ADELAIDE,15,5)
+                applymovement(LUCREZIA,Common_Movement_FaceDown)
+                waitmovement(LUCREZIA)
+                setobjectxy(LUCREZIA,15,5)
                 applymovement(PLAYER,Common_Movement_FaceUp)
                 setobjectxy(PLAYER,15,6)
                 TeleportCamera(15,6)
@@ -27,18 +27,18 @@ script WeCanStopYouActually_PostBattle_Dialogue {
         call(WeCanStopYouActually_FixPlayerPosition_Script)
         endcutscene
 
-        msgbox(format("So, what’s your plan, beat me up and try to expose me? Nobody is going to believe the terrorists that stormed our office building. There's not even a paper trail - do you know how hard it was, not sending a SINGLE email about this? You’re all going to get arrested, the money will keep flowing in, and life is going to keep moving on."),,SPEAKER_ADELAIDE)
+        msgbox(format("So, what’s your plan, beat me up and try to expose me? Nobody is going to believe the terrorists that stormed our office building. There's not even a paper trail - do you know how hard it was, not sending a SINGLE email about this? You’re all going to get arrested, the money will keep flowing in, and life is going to keep moving on."),,SPEAKER_LUCREZIA)
 
-        msgbox(format("Adelaide's phone is ringing."))
+        msgbox(format("Lucrezia's phone is ringing."))
 
-        msgbox(format("That’s the authorities, probably here to pick you up."),,SPEAKER_ADELAIDE)
+        msgbox(format("That’s the authorities, probably here to pick you up."),,SPEAKER_LUCREZIA)
 
-        msgbox(format("…oh no."),,SPEAKER_ADELAIDE)
+        msgbox(format("…oh no."),,SPEAKER_LUCREZIA)
 
         closemessage
 
-        applymovement(ADELAIDE, moves(walk_up, step_end))
-        waitmovement(ADELAIDE)
+        applymovement(LUCREZIA, moves(walk_up, step_end))
+        waitmovement(LUCREZIA)
         playse(SE_PC_LOGIN)
         special(TurnOnTVScreen)
         delay(30)
@@ -50,70 +50,70 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(format("WHAT THE HELL ARE THEY DOING?"),,SPEAKER_ADELAIDE)
+        msgbox(format("WHAT THE HELL ARE THEY DOING?"),,SPEAKER_LUCREZIA)
 
         playse(SE_POKENAV_CALL)
         waitse
-        msgbox(format("Adelaide's phone is ringing."))
+        msgbox(format("Lucrezia's phone is ringing."))
 
-        msgbox(format("FIND THEM! SHUT THAT DOWN!"),,SPEAKER_ADELAIDE)
+        msgbox(format("FIND THEM! SHUT THAT DOWN!"),,SPEAKER_LUCREZIA)
 
-        msgbox(format("I don’t care WHERE THEY ARE JUST END THIS SHIT! I thought they were MISSING! HOW DID THIS HAPPEN?"),,SPEAKER_ADELAIDE)
+        msgbox(format("I don’t care WHERE THEY ARE JUST END THIS SHIT! I thought they were MISSING! HOW DID THIS HAPPEN?"),,SPEAKER_LUCREZIA)
 
         closemessage
 
-        applymovement(ADELAIDE, moves(walk_faster_left, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right, face_down, step_end))
-        waitmovement(ADELAIDE)
+        applymovement(LUCREZIA, moves(walk_faster_left, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right, face_down, step_end))
+        waitmovement(LUCREZIA)
 
-        msgbox(format("YOU! They told you! That’s how you found out! And now if they confess… they don’t have to take it from you."),,SPEAKER_ADELAIDE)
+        msgbox(format("YOU! They told you! That’s how you found out! And now if they confess… they don’t have to take it from you."),,SPEAKER_LUCREZIA)
 
         msgbox(format(" I - "),,SPEAKER_ALICIA)
 
         closemessage
 
-        applymovement(ADELAIDE,Common_Movement_FaceLeft)
+        applymovement(LUCREZIA,Common_Movement_FaceLeft)
 
-        msgbox(format("CHARLOTTE! RAMESH! SECURITY!"),,SPEAKER_ADELAIDE)
+        msgbox(format("CHARLOTTE! RAMESH! SECURITY!"),,SPEAKER_LUCREZIA)
 
         msgbox(format("We already beat them. You’re alone."),,SPEAKER_ALICIA)
 
         closemessage
 
-        applymovement(ADELAIDE,Common_Movement_FaceDown)
-        waitmovement(ADELAIDE)
+        applymovement(LUCREZIA,Common_Movement_FaceDown)
+        waitmovement(LUCREZIA)
 
-        msgbox(format("…I’m not going to prison. I’m NOT GOING TO JAIL…"),,SPEAKER_ADELAIDE)
+        msgbox(format("…I’m not going to prison. I’m NOT GOING TO JAIL…"),,SPEAKER_LUCREZIA)
 
         closemessage
 
-        applymovement(ADELAIDE,Common_Movement_WalkDown)
-        waitmovement(ADELAIDE)
+        applymovement(LUCREZIA,Common_Movement_WalkDown)
+        waitmovement(LUCREZIA)
 
         goto(WeCanStopYouActually_StartBossBattle_Script)
 }
 
 script WeCanStopYouActually_StartBossBattle_Script {
-        setvar(VAR_TOWER_RAID_STATE,SAVE_ADELAIDE_SHARPRISESPIRE)
-        msgbox(format("And I’ll FRIGGIN’ KILL YOU!"),,SPEAKER_ADELAIDE)
+        setvar(VAR_TOWER_RAID_STATE,SAVE_LUCREZIA_SHARPRISESPIRE)
+        msgbox(format("And I’ll FRIGGIN’ KILL YOU!"),,SPEAKER_LUCREZIA)
 
         closemessage
 
-        trainerbattle_no_intro(TRAINER_ADELAIDE_B,format("Nonononononono…"))
-        setvar(VAR_TOWER_RAID_STATE,DEFEATED_SECOND_ADELAIDE)
+        trainerbattle_no_intro(TRAINER_LUCREZIA_B,format("Nonononononono…"))
+        setvar(VAR_TOWER_RAID_STATE,DEFEATED_SECOND_LUCREZIA)
 }
 
 script WeCanStopYouActually_Arrest_Dialogue {
     lock
         startcutscene(JUMPPLAYER_WECANSTOPYOUACTUALLY)
 
-        setvar(VAR_TOWER_RAID_STATE,DEFEATED_ADELAIDE_SHARPRISESPIRE)
+        setvar(VAR_TOWER_RAID_STATE,DEFEATED_LUCREZIA_SHARPRISESPIRE)
         setvar(VAR_STORYLINE_STATE,STORY_EPILOGUE)
 
         clearflag(FLAG_HIDE_POLICE)
         addobject(POLICE_A)
         addobject(POLICE_B)
 
-        msgbox(format("Adelaide, you’re under arrest!"))
+        msgbox(format("Lucrezia, you’re under arrest!"))
         closemessage
 
         applymovement(POLICE_A, moves(walk_right * 7, walk_up * 2, face_right, step_end))
@@ -122,7 +122,7 @@ script WeCanStopYouActually_Arrest_Dialogue {
 
         waitmovement(POLICE_B)
 
-        msgbox(format("For what? Using the tools YOUR BOSSES gave me? We’re all going down together! You’re all toast!"),,SPEAKER_ADELAIDE)
+        msgbox(format("For what? Using the tools YOUR BOSSES gave me? We’re all going down together! You’re all toast!"),,SPEAKER_LUCREZIA)
 
         closemessage
         endcutscene
@@ -150,7 +150,7 @@ const GRUNTB = 2
 const GRUNTC = 3
 const POLICEC = 4
 const OLIVER = 5
-const ADELAIDE_B = 6
+const LUCREZIA_B = 6
 const CHARLOTTE = 7
 const RAMESH = 8
 const POLICED = 9
@@ -182,8 +182,8 @@ script WeCanStopYouActaully_ArrestCutscene {
         applymovement(OLIVER,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
-        addobject(ADELAIDE_B)
-        applymovement(ADELAIDE_B,WeCanStopYouActually_WalkOutOfBuilding)
+        addobject(LUCREZIA_B)
+        applymovement(LUCREZIA_B,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
         addobject(CHARLOTTE)
@@ -202,7 +202,7 @@ script WeCanStopYouActaully_ArrestCutscene {
 
         removeobject(POLICEC)
         removeobject(OLIVER)
-        removeobject(ADELAIDE_B)
+        removeobject(LUCREZIA_B)
         removeobject(CHARLOTTE)
         removeobject(RAMESH)
         removeobject(POLICED)

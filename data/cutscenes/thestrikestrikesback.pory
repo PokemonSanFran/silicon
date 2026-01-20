@@ -9,10 +9,10 @@ const CROWD_B = 7
 const CROWD_C = 8
 const POLICE_A = 9
 const POLICE_B = 10
-const ADELAIDE = 11
+const LUCREZIA = 11
 const ORI = 12
 
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
 const FLAG_HIDE_ROCKET_POLICE = FLAG_TEMP_2
 const FLAG_HIDE_OLIVER = FLAG_TEMP_3
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_4
@@ -20,7 +20,7 @@ const FLAG_HIDE_CROWD = FLAG_TEMP_5
 const FLAG_HIDE_ORI = FLAG_TEMP_6
 
 script TheStrikeStrikesBack_HideObject_Script {
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_ROCKET_POLICE)
         setflag(FLAG_HIDE_OLIVER)
         setflag(FLAG_HIDE_CHARLOTTE)
@@ -29,7 +29,7 @@ script TheStrikeStrikesBack_HideObject_Script {
 }
 
 script TheStrikeStrikesBack_ShowCrowd_Script{
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_ROCKET_POLICE)
         setflag(FLAG_HIDE_OLIVER)
         setflag(FLAG_HIDE_CHARLOTTE)
@@ -44,7 +44,7 @@ script TheStrikeStrikesBack_UnblockConstruction_Script {
 }
 
 script TheStrikeStrikesBack_ObjectSetup_Script {
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_ROCKET_POLICE)
 }
 
@@ -89,22 +89,22 @@ script TheStrikeStrikesBack_PhoneCall_Dialogue{
         playse(SE_POKENAV_CALL)
         waitse
         playse(SE_POKENAV_CALL)
-        msgbox(format("Hello {PLAYER}! I was going to send an email, but Oliver insisted that a call would be more appropriate..."),MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_ON)
-        msgbox(format("Adelaide! Aren't you busy...?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        msgbox(format("Hello {PLAYER}! I was going to send an email, but Oliver insisted that a call would be more appropriate..."),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_ON)
+        msgbox(format("Lucrezia! Aren't you busy...?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
 
         specialvar(VAR_0x8004,GetCurrentMap)
         switch(var(VAR_0x8004)){
             case 31:
             case 37:
             case 38:
-            case 42: msgbox(format("Nonsense, I'm never too busy to congratulate you on all eight badges!"),MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
-            default: msgbox(format("So busy in fact, that I'm late in congratulating you. I hear you've got all eight badges!"),MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+            case 42: msgbox(format("Nonsense, I'm never too busy to congratulate you on all eight badges!"),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+            default: msgbox(format("So busy in fact, that I'm late in congratulating you. I hear you've got all eight badges!"),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
         }
 
     msgbox(format("Heh, thanks! Means a lot."),,SPEAKER_ALICIA)
-        msgbox(format("You're right though, we're both about to be very busy. I'll cut to the chase. Could you head down to Route2? Oliver will meet you there and explain everything."),MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        msgbox(format("You're right though, we're both about to be very busy. I'll cut to the chase. Could you head down to Route2? Oliver will meet you there and explain everything."),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
         msgbox(format("Sure. Right now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
-        msgbox(format("As soon as you can."),MSGBOX_DEFAULT,SPEAKER_ADELAIDE,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        msgbox(format("As soon as you can."),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
 
         closemessage
         playse(SE_POKENAV_HANG_UP)
@@ -176,11 +176,11 @@ script TheStrikeStrikesBack_Intro_Dialogue {
 
                 msgbox(format("Wait, what? That's insane!"),,SPEAKER_ALICIA)
 
-                msgbox(format("Agreed, and that's why we need you two while Adelaide and I work on a peaceful solution."),,SPEAKER_OLIVER)
+                msgbox(format("Agreed, and that's why we need you two while Lucrezia and I work on a peaceful solution."),,SPEAKER_OLIVER)
 
                 msgbox(format("The police are working to make sure the protests remain civil but we don't want a repeat of the riots in CapheCity."),,SPEAKER_OLIVER)
 
-                msgbox(format("We think TheTide agitated wild Garbodor, and we need you to capture or knock them out while Adelaide and I negotiate with Alcmene. Time is of the essence!"),,SPEAKER_OLIVER)
+                msgbox(format("We think TheTide agitated wild Garbodor, and we need you to capture or knock them out while Lucrezia and I negotiate with Alcmene. Time is of the essence!"),,SPEAKER_OLIVER)
 
                 closemessage
 

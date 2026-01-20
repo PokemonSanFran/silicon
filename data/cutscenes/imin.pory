@@ -18,7 +18,7 @@ const CHARLOTTE = 4
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -33,7 +33,7 @@ script ImIn_HideObject_OutsideHouse_Script {
 script ImIn_PreCharlotte_Object_Script{
         setflag(FLAG_HIDE_NERDS_COPS)
         setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_RAMESH)
         setflag(FLAG_HIDE_KEIYING)
 
@@ -45,7 +45,7 @@ script ImIn_PreCharlotte_Object_Script{
 script ImIn_SaveCharlotte_Object_Script{
     setflag(FLAG_HIDE_NERDS_COPS)
     setflag(FLAG_HIDE_OLIVER)
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
     setflag(FLAG_HIDE_RAMESH)
     setflag(FLAG_HIDE_KEIYING)
 
@@ -54,7 +54,7 @@ script ImIn_SaveCharlotte_Object_Script{
     setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_LEFT)
 }
 
-script ImIn_RevealAdelaideWarp_Script{
+script ImIn_RevealLucreziaWarp_Script{
     if (var(VAR_TOWER_RAID_STATE) > SAVE_CHARLOTTE_SHARPRISESPIRE){
         setmetatile(10,55,0x2DF,FALSE)
         special(DrawWholeMapView)
@@ -289,7 +289,7 @@ script ImIn_EnterCorrectCode_Script
 
         msgbox(format("Adaora, we're in. Everybody remember the plan?"),,SPEAKER_ARMANDO)
 
-        msgbox(format("Once you're all through the panel, I'll lead the diversion protest at the front doors of the tower. Security will be focused on us, letting you to the executive levels and hopefully find Adelaide."),,SPEAKER_ADAORA,,,PHONE_ON)
+        msgbox(format("Once you're all through the panel, I'll lead the diversion protest at the front doors of the tower. Security will be focused on us, letting you to the executive levels and hopefully find Lucrezia."),,SPEAKER_ADAORA,,,PHONE_ON)
 
         msgbox(format("I'm too old for scaling mountains. Armando and I can get into the production studio and get ready to broadcast that confession."),,SPEAKER_MAGNUS)
 
@@ -358,7 +358,7 @@ script ImIn_PostWarpSplit_Dialogue
 
         msgbox(format("This place is probably crawling with Trainers. Let's spread out."),,SPEAKER_KAREN)
 
-        msgbox(format("Adelaide has an office on the 38th floor, I've been there myself."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Lucrezia has an office on the 38th floor, I've been there myself."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("38th floor then, let's move!"),,SPEAKER_TALA)
         closemessage
@@ -391,7 +391,7 @@ script ImIn_PreventPlayerProgress_Script {
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(PLAYER)
 
-        msgbox(format("Adelaide's office is on Floor 10."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Lucrezia's office is on Floor 10."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
 
         applymovement(PLAYER, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
@@ -458,14 +458,14 @@ script ImIn_CharlotteDefeated_Dialogue {
     startcutscene(JUMPPLAYER_IMIN_POSTRIVAL)
         setvar(VAR_TOWER_RAID_STATE,DEFEATED_CHARLOTTE_SHARPRISESPIRE)
 
-        msgbox(format("Where's Adelaide?!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Where's Lucrezia?!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("What's the secret? What am I missing? Why do I keep LOSING?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Everything about SharpRise Capital is bullshit. You're not any stronger. The region isn't any better. But as long as they have stans like you, they're going to continue to get richer and more toxic. Tell me where Adelaide is."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Everything about SharpRise Capital is bullshit. You're not any stronger. The region isn't any better. But as long as they have stans like you, they're going to continue to get richer and more toxic. Tell me where Lucrezia is."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("That warp panel goes to the skydeck. His real office is there."),,SPEAKER_CHARLOTTE_SHARPRISE)
-                call(ImIn_RevealAdelaideWarp_Script)
+                call(ImIn_RevealLucreziaWarp_Script)
         closemessage
         call(TryAutoSave)
         endcutscene

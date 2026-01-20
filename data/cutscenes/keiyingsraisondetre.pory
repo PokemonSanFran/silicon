@@ -115,13 +115,13 @@ script KeiyingRaisonDetre_Wine_Dialogue {
     applymovement(PLAYER, Common_Movement_FaceLeft)
         waitmovement(0)
 
-        msgbox(format("How much do you know about Adelaide?"),,SPEAKER_KEIYING)
+        msgbox(format("How much do you know about Lucrezia?"),,SPEAKER_KEIYING)
 
         msgbox(format("They don't have deep roots here, but they're a brilliant business person. I don't always see eye to eye with them, but they've never let down a shareholder."),,SPEAKER_KEIYING)
 
         msgbox(format("What shareholders?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("The corporate sponsors who helped us acquire the Pokémon League. Adelaide saw its potential and knew we could make it even bigger. Presto, Arriba and Buzzr all quickly got on board."),,SPEAKER_KEIYING)
+        msgbox(format("The corporate sponsors who helped us acquire the Pokémon League. Lucrezia saw its potential and knew we could make it even bigger. Presto, Arriba and Buzzr all quickly got on board."),,SPEAKER_KEIYING)
 
         msgbox(format("What do you mean?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
@@ -133,7 +133,7 @@ script KeiyingRaisonDetre_Wine_Dialogue {
 
         msgbox(format("Woah wait, bigger than Alolan tourism?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("People love Pokémon battles. Adelaide knew if we used our resources to create a compelling product, we wouldn't need Dynamax or League HQs built into cathedrals. We've got what the people want to see."),,SPEAKER_KEIYING)
+        msgbox(format("People love Pokémon battles. Lucrezia knew if we used our resources to create a compelling product, we wouldn't need Dynamax or League HQs built into cathedrals. We've got what the people want to see."),,SPEAKER_KEIYING)
 
         msgbox(format("The broadcasts?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 

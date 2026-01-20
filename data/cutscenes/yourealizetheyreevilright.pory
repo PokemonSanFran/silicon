@@ -251,13 +251,13 @@ script YouRealizeTheyreEvilRight_GemDiscovery_Dialogue
 
         msgbox(format("A Normal Gem to be specific. You've heard of them?"),,SPEAKER_KAI_TIDE)
 
-        msgbox(format("Adelaide gave me one of those after we stopped the SharpRise Stadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!"),,SPEAKER_ALICIA)
+        msgbox(format("Lucrezia gave me one of those after we stopped the SharpRise Stadium bombing, but that one has to be fake. Charlotte said they’re super rare. Her Dad couldn’t even get one!"),,SPEAKER_ALICIA)
 
         msgbox(format("I’ve had the opportunity to see Gems a few times in my career and I can attest that this one is very real."),,SPEAKER_MAGNUS)
 
         msgbox(format("While I was keeping an eye on things during the SharpRise Stadium incident, I noticed one of the Garbador got loose from the Center and grabbed it. I still can’t believe SharpRise  left one of these Gems on it. They’re the only ones who have access to something like this in the region."),,SPEAKER_KAI_TIDE)
 
-        msgbox(format("Adelaide confirmed that when she gave me my Gem. So the only way this Garbador could have one…"),,SPEAKER_ALICIA)
+        msgbox(format("Lucrezia confirmed that when she gave me my Gem. So the only way this Garbador could have one…"),,SPEAKER_ALICIA)
 
     msgbox(format("Is if SharpRise Capital equipped it directly."),,SPEAKER_TALA)
     goto(YouRealizeTheyreEvilRight_Framing_Dialogue)

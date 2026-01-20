@@ -3,7 +3,7 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 const KEIYING = 8
@@ -11,7 +11,7 @@ const KEIYING = 8
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -26,8 +26,8 @@ script TheGangsAllHere_MidMission_Object_Script{
     setflag(FLAG_HIDE_RAMESH)
     setflag(FLAG_HIDE_KEIYING)
     setobjectxy(OLIVER,6,46)
-    setobjectxy(ADELAIDE,5,56)
-    setobjectxyperm(ADELAIDE,5,56)
+    setobjectxy(LUCREZIA,5,56)
+    setobjectxyperm(LUCREZIA,5,56)
     return
 }
 
@@ -36,8 +36,8 @@ script TheGangsAllHere_ObjectSetup_Script{
     setflag(FLAG_HIDE_CHARLOTTE)
     setflag(FLAG_HIDE_RAMESH)
     setflag(FLAG_HIDE_KEIYING)
-    setobjectxy(ADELAIDE,5,56)
-    setobjectxyperm(ADELAIDE,5,56)
+    setobjectxy(LUCREZIA,5,56)
+    setobjectxyperm(LUCREZIA,5,56)
     return
 }
 
@@ -78,7 +78,7 @@ script TheGangsAllHere_WhatBringsYou_Dialogue{
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,START_THE_GANGS_ALL_HERE)
     playbgm(MUS_RG_FOLLOW_ME,FALSE)
     msgbox(format("{PLAYER}! What brings you to League HQ?"),,SPEAKER_OLIVER)
-    msgbox(format("Commissioner Adelaide told me to visit after I got my third badge!"),,SPEAKER_ALICIA)
+    msgbox(format("Commissioner Lucrezia told me to visit after I got my third badge!"),,SPEAKER_ALICIA)
     msgbox(format("Is this where you work?"),,SPEAKER_ALICIA)
     msgbox(format("My office is on this floor, yeah! This is League Ops, and everybody here is solely dedicated to making sure the SharpRise Capital Pokemon League is a success."),,SPEAKER_OLIVER)
     msgbox(format("I've an important delivery for the C.E.O., but the workers here in League Ops can be a little... rowdy. Do you mind if I tag along on your tour? I'll keep you in tip-top shape!"),,SPEAKER_OLIVER)
@@ -123,7 +123,7 @@ script TheGangsAllHere_WalkHallway_Script{
 script TheGangsAllHere_ThisIsOffice_Script{
     lock
     faceplayer
-    msgbox(format("This is Adelaide's office. After you."),,SPEAKER_OLIVER)
+    msgbox(format("This is Lucrezia's office. After you."),,SPEAKER_OLIVER)
     closemessage
 
     call(TheGangsAllHere_WalkHallway_Script)
@@ -135,11 +135,11 @@ script TheGangsAllHere_ComeOnIn_Dialogue{
     playbgm(MUS_RG_ENCOUNTER_DEOXYS,FALSE)
     playse(SE_PIN)
 
-    applymovement(ADELAIDE,Common_Movement_ExclamationMark)
-    waitmovement(ADELAIDE)
-    applymovement(ADELAIDE, moves(walk_right * 2, walk_up * 3, walk_left, face_up, step_end))
+    applymovement(LUCREZIA,Common_Movement_ExclamationMark)
+    waitmovement(LUCREZIA)
+    applymovement(LUCREZIA, moves(walk_right * 2, walk_up * 3, walk_left, face_up, step_end))
 
-    msgbox(format("{PLAYER}! Oliver! Come on in, I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_ADELAIDE)
+    msgbox(format("{PLAYER}! Oliver! Come on in, I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_LUCREZIA)
     closemessage
 
     msgbox(format("As you asked, I have your package from Emrys."),,SPEAKER_OLIVER)
@@ -151,15 +151,15 @@ script TheGangsAllHere_ComeOnIn_Dialogue{
 
     msgbox(format("I thought you said you had a delivery for the C.E.O.?"),,SPEAKER_ALICIA)
 
-    msgbox(format("I did. I see Adelaide neglected to reveal her full title...?"),,SPEAKER_OLIVER)
+    msgbox(format("I did. I see Lucrezia neglected to reveal her full title...?"),,SPEAKER_OLIVER)
 
     goto(TheGangsAllHere_NotIntentionally_Dialogue)
     end
 }
 
 script TheGangsAllHere_NotIntentionally_Dialogue{
-    msgbox(format("Not intentionally! I was just so swept up in your battle!"),,SPEAKER_ADELAIDE)
-    reveal(REVEAL_ADELAIDE)
+    msgbox(format("Not intentionally! I was just so swept up in your battle!"),,SPEAKER_LUCREZIA)
+    reveal(REVEAL_LUCREZIA)
 
     if(var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI){
         msgbox(format("Oliver, please tell me you'll go back and watch Ramesh's highlight reel later, it was fantastic."))
@@ -167,13 +167,13 @@ script TheGangsAllHere_NotIntentionally_Dialogue{
     msgbox(format("I heard wonderful things on the way over here, but I'll be certain to observe later."),,SPEAKER_OLIVER)
     }
 
-    msgbox(format("In any case, your package, Adelaide."))
+    msgbox(format("In any case, your package, Lucrezia."))
 
     applymovement(OLIVER,Common_Movement_WalkInPlaceDown)
     waitmovement(OLIVER)
 
     bufferitemname(STR_VAR_1,ITEM_DRAGONIUM_Z)
-    msgbox(format("Ah, my {STR_VAR_1}, wonderful.\nI've also got something for you, {PLAYER}! Let me see your phone..."),,SPEAKER_ADELAIDE)
+    msgbox(format("Ah, my {STR_VAR_1}, wonderful.\nI've also got something for you, {PLAYER}! Let me see your phone..."),,SPEAKER_LUCREZIA)
     closemessage
 
     goto(TheGangsAllHere_GivePrestoApp_Script)
@@ -182,15 +182,15 @@ script TheGangsAllHere_NotIntentionally_Dialogue{
 
 script TheGangsAllHere_GivePrestoApp_Script{
     applymovement(PLAYER,Common_Movement_FaceDown)
-    applymovement(ADELAIDE, moves(walk_left, face_up, walk_in_place_up, step_end))
-    waitmovement(ADELAIDE)
+    applymovement(LUCREZIA, moves(walk_left, face_up, walk_in_place_up, step_end))
+    waitmovement(LUCREZIA)
     call(EventScript_InstallPrestoApp)
     goto(TheGangsAllHere_GivePrestoApp_Dialogue)
     end
 }
 
 script TheGangsAllHere_GivePrestoApp_Dialogue{
-    msgbox(format("As a member of the SharpRise family, I've just granted you special access to Presto's drone delivery service. If you select that app while you're outdoors, you can have items delievered to you instantly! I'm excited to see how you use our tools."),,SPEAKER_ADELAIDE)
+    msgbox(format("As a member of the SharpRise family, I've just granted you special access to Presto's drone delivery service. If you select that app while you're outdoors, you can have items delievered to you instantly! I'm excited to see how you use our tools."),,SPEAKER_LUCREZIA)
 
     applymovement(OLIVER,Common_Movement_FacePlayer)
     waitmovement(OLIVER)
@@ -202,7 +202,7 @@ script TheGangsAllHere_GivePrestoApp_Dialogue{
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceDown)
-    msgbox(format("We always make sure our Trainers have an edge on the competition!"),,SPEAKER_ADELAIDE)
+    msgbox(format("We always make sure our Trainers have an edge on the competition!"),,SPEAKER_LUCREZIA)
 
     goto(TheGangsAllHere_EndScene_Dialogue)
 }
@@ -227,11 +227,11 @@ script TheGangsAllHere_EndScene_Dialogue{
     closemessage
 
     applymovement(PLAYER, moves(delay_16 * 2, face_up, step_end))
-    applymovement(ADELAIDE, moves(walk_right, walk_up * 8, step_end))
+    applymovement(LUCREZIA, moves(walk_right, walk_up * 8, step_end))
     applymovement(OLIVER, moves(walk_up * 8, step_end))
     waitmovement(OLIVER)
     fadedefaultbgm
-    removeobject(ADELAIDE)
+    removeobject(LUCREZIA)
     removeobject(OLIVER)
     addvar(VAR_STORYLINE_STATE,1)
     setvar(VAR_TEMP_0,0)

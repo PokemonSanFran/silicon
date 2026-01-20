@@ -328,10 +328,10 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .bio = COMPOUND_STRING("- Ramesh looks bored when talking to me.\n - He's holding multiple phones."),
         .accentColor = RGB(27,30,4),
     },
-    [REVEAL_ADELAIDE] =
+    [REVEAL_LUCREZIA] =
     {
-        .trainerId = TRAINER_ADELAIDE_A,
-        .buzzrId = BUZZR_USER_ADELAIDE,
+        .trainerId = TRAINER_LUCREZIA_A,
+        .buzzrId = BUZZR_USER_LUCREZIA,
         .quote = COMPOUND_STRING("The SharpRise Capital League will be the world's most prestigious!"),
         .bio = COMPOUND_STRING("- She talks about email so much!\n- Her earrings are the SharpRise logo."),
         .accentColor = RGB(20,9,20),

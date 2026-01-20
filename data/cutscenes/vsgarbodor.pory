@@ -9,7 +9,7 @@ const CROWD_B = 7
 const CROWD_C = 8
 const POLICE_A = 9
 const POLICE_B = 10
-const ADELAIDE = 11
+const LUCREZIA = 11
 const ORI = 12
 
 const FLAG_HIDE_CHARLOTTE_COMPOUND = FLAG_TEMP_1
@@ -240,7 +240,7 @@ script VSGarbodor_Arrest_Script {
     setvar(VAR_CONSTRUCTION_STRIKE_STATE,THETIDE_ARRESTED)
         setvar(VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR)
 
-        applymovement(ADELAIDE,Common_Movement_FaceUp)
+        applymovement(LUCREZIA,Common_Movement_FaceUp)
         applymovement(CHARLOTTE,Common_Movement_FaceUp)
         applymovement(OLIVER,Common_Movement_FaceUp)
         applymovement(PLAYER,Common_Movement_FaceUp)
@@ -253,7 +253,7 @@ script VSGarbodor_Arrest_Script {
         waitmovement(0)
 
         call(VSGarbodor_CleanUpPerpWalk)
-        applymovement(ADELAIDE, Common_Movement_FaceDown)
+        applymovement(LUCREZIA, Common_Movement_FaceDown)
         applymovement(CHARLOTTE, Common_Movement_FaceDown)
         waitmovement(0)
         goto(VSGarbodor_Negotiating_Dialogue)
@@ -269,12 +269,12 @@ script VSGarbodor_CleanUpPerpWalk {
 
 script VSGarbodor_Negotiating_Dialogue
 {
-    msgbox(format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?"),,SPEAKER_ADELAIDE)
+    msgbox(format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?"),,SPEAKER_LUCREZIA)
 
         msgbox(format("Done. Like you guys said, TheTide up to their shit as usual."),,SPEAKER_ALICIA)
 
-        msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_ADELAIDE)
-        msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_ADELAIDE)
+        msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_LUCREZIA)
+        msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_LUCREZIA)
         closemessage
         special(VSGarbodor_ChooseGemBasedOnStarter)
         giveitem(VAR_0x8003,1)
@@ -282,8 +282,8 @@ script VSGarbodor_Negotiating_Dialogue
         msgbox(format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
         msgbox(format("...Did I miss someting?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
         msgbox(format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
-        msgbox(format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!"),,SPEAKER_ADELAIDE)
-        msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_ADELAIDE)
+        msgbox(format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!"),,SPEAKER_LUCREZIA)
+        msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_LUCREZIA)
         msgbox(format("Yeah, I'm beat. Do you want a ride back to the Compound?"), MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
 
         if (var (VAR_RESULT) == NO) {

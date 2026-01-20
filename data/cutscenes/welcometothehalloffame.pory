@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const KAI = 1
-const ADELAIDE = 2
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+const LUCREZIA = 2
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
 
 script WelcomeToTheHallOfFame_PostBattle_Dialogue {
     startcutscene(JUMPPLAYER_WELCOMETOTHEHALLOFFAME)
@@ -12,13 +12,13 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
         delay(60)
 
-        clearflag(FLAG_HIDE_ADELAIDE)
-        addobject(ADELAIDE)
-        applymovement(ADELAIDE, moves(walk_left * 4, walk_up * 3, walk_left * 6, step_end))
+        clearflag(FLAG_HIDE_LUCREZIA)
+        addobject(LUCREZIA)
+        applymovement(LUCREZIA, moves(walk_left * 4, walk_up * 3, walk_left * 6, step_end))
         applymovement(KAI, moves(walk_right, walk_up, face_down, step_end))
-        waitmovement(ADELAIDE)
+        waitmovement(LUCREZIA)
 
-        msgbox(format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. "),,SPEAKER_ADELAIDE)
+        msgbox(format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. "),,SPEAKER_LUCREZIA)
 
         closemessage
 
@@ -27,14 +27,14 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         fadescreen(FADE_TO_BLACK)
         setobjectxy(PLAYER,9,6)
         setobjectxy(KAI,8,7)
-        setobjectxy(ADELAIDE,7,7)
+        setobjectxy(LUCREZIA,7,7)
         turnobject(KAI,DIR_SOUTH)
-        turnobject(ADELAIDE,DIR_SOUTH)
+        turnobject(LUCREZIA,DIR_SOUTH)
         turnobject(PLAYER,DIR_SOUTH)
         TeleportCamera(9,6)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(format("And now, let's create history together. I am proud to present the first inductee to the SharpRise Capital Hall of Fame. Resido's Champion: {PLAYER}."),,SPEAKER_ADELAIDE)
+        msgbox(format("And now, let's create history together. I am proud to present the first inductee to the SharpRise Capital Hall of Fame. Resido's Champion: {PLAYER}."),,SPEAKER_LUCREZIA)
 
         closemessage
 

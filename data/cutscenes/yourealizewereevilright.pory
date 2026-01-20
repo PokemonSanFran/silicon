@@ -3,7 +3,7 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 const KEIYING = 8
@@ -11,20 +11,20 @@ const KEIYING = 8
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
 script YouRealizeWereEvilRight_Object_Setup_Script {
 setflag(FLAG_HIDE_CHARLOTTE)
-setflag(FLAG_HIDE_ADELAIDE)
+setflag(FLAG_HIDE_LUCREZIA)
 setflag(FLAG_HIDE_NERDS_COPS)
 return
 }
 
 script YouRealizeWereEvilRight_Object_Cleanup_Script {
 setflag(FLAG_HIDE_CHARLOTTE)
-setflag(FLAG_HIDE_ADELAIDE)
+setflag(FLAG_HIDE_LUCREZIA)
 setflag(FLAG_HIDE_NERDS_COPS)
 
 setobjectxy(KEIYING,21,29)

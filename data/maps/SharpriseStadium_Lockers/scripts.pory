@@ -29,7 +29,7 @@ script SharpriseStadium_Lockers_MapScripts_OnTransition {
         case STORY_READY_FINALS: call(WaitHeDidWhat_MeltdownSetUp_Script)
         case STORY_SAVE_FINALS: call(WaitHeDidWhat_MeltdownPostSaveSetUp_Script)
         case STORY_POST_DIANTHA: call(ExhibitionBattle_HideObject_Script)
-        case STORY_CONGRATULATED_BY_ADELAIDE: call(ExhibitionBattle_HideObject_Script)
+        case STORY_CONGRATULATED_BY_LUCREZIA: call(ExhibitionBattle_HideObject_Script)
         default: call(WaitHeDidWhat_ObjectMidSetUp_Script)
     }
 }
@@ -39,7 +39,7 @@ script SharpriseStadium_Lockers_Charlotte_Event_Script {
         faceplayer
         switch (var(VAR_STORYLINE_STATE)){
             case STORY_READY_FINALS: call(WaitHeDidWhat_CharlotteMeltdown_Dialogue)
-            case STORY_CONGRATULATED_BY_ADELAIDE: call(ExhibitionBattle_Charlotte_Dialogue)
+            case STORY_CONGRATULATED_BY_LUCREZIA: call(ExhibitionBattle_Charlotte_Dialogue)
         }
     closemessage
 
@@ -77,7 +77,7 @@ script SharpriseStadium_Lockers_Information_Script{
 script SharpriseStadium_Lockers_TournamentRules_Dialgoue{
 
     fadescreen(FADE_TO_BLACK)
-        // PSF TODO The screen shows images of the League breakdown as Adelaide explains the structure.
+        // PSF TODO The screen shows images of the League breakdown as Lucrezia explains the structure.
 
         if (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE) < PRE_BATTLE_4){
             msgbox(format("For the Group Stage, you'll be randomly split into four groups of four trainers. You'll battle all of the other Trainers in your group, and each match will be on a different terrain battlefield. You will bring six Pokémon with you, and choose three before the start of each match in the Group Stage. You will be healed after every match, but you may not use items from your bag during battle. "))
