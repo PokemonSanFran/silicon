@@ -69,7 +69,7 @@ enum RevealIds
     REVEAL_DOYLE,
     REVEAL_IMELDA,
     REVEAL_MAGNUS,
-    REVEAL_ELLEN,
+    REVEAL_ELEANOR,
     REVEAL_COUNT,
 };
 

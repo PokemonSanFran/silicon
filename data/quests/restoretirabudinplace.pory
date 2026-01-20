@@ -18,14 +18,14 @@ script Quest_Restoretirabudinplace_Dialogue{
     applymovement(BD,Common_Movement_FacePlayer)
     msgbox(format("I've actually been working on a similar system. I've been putting aside enough money from my SharpRise Capital paychecks that this place is ready to become a full fledged Battle Facility, effective immediately."),,SPEAKER_BD)
     completequest(QUEST_RESTORETIRABUDINGYM)
-    msgbox(format("I'm done for now. But I'm not leaving the region like Ellen. I'll see you around."),MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("I'm done for now. But I'm not leaving the region like Eleanor. I'll see you around."),MSGBOX_NPC,SPEAKER_BD)
     closemessage
     release
     end
 }
 
 script Quest_Restoretirabudinplace_CompletedQuest_Dialogue{
-    msgbox(format("I'm done for now. But I'm not leaving the region like Ellen. I'll see you around."),MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("I'm done for now. But I'm not leaving the region like Eleanor. I'll see you around."),MSGBOX_NPC,SPEAKER_BD)
     end
 }
 
@@ -42,5 +42,5 @@ text gText_Restoretirabudinplace_IveActually{
 }
 
 text gText_Restoretirabudinplace_SoIThink{
-    format("I'm done for now. But I'm not leaving the region like Ellen. I'll see you around.")
+    format("I'm done for now. But I'm not leaving the region like Eleanor. I'll see you around.")
 }

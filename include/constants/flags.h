@@ -178,7 +178,7 @@
 #define FLAG_DOCK_REJECTED_DEVON_GOODS       0x94
 #define FLAG_DELIVERED_DEVON_GOODS           0x95
 #define FLAG_RECEIVED_CONTEST_PASS           0x96 // Unused, leftover from R/S
-#define FLAG_TALKED_TO_ELLEN_POSTGAME        0x96 // Silicon Flag
+#define FLAG_TALKED_TO_ELEANOR_POSTGAME        0x96 // Silicon Flag
 #define FLAG_RECEIVED_CASTFORM               0x97
 #define FLAG_RECEIVED_SUPER_ROD              0x98
 #define FLAG_RUSTBORO_NPC_TRADE_COMPLETED    0x99
@@ -740,10 +740,10 @@
 #define FLAG_FACILITY_UNLOCK_SHINZO  0x29F // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_KEI_YING  0x2A0 // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_BELEN  0x2A1 // Silicon Flag
-#define FLAG_FACILITY_UNLOCK_ELLEN  0x2A2 // Silicon Flag
+#define FLAG_FACILITY_UNLOCK_ELEANOR  0x2A2 // Silicon Flag
 #define FLAG_FOUGHT_FIRST_FACILITY_BOSS  0x2A3 // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_FLAGS_START                     FLAG_FACILITY_UNLOCK_LIKO
-#define FLAG_FACILITY_UNLOCK_FLAGS_END                       FLAG_FACILITY_UNLOCK_ELLEN
+#define FLAG_FACILITY_UNLOCK_FLAGS_END                       FLAG_FACILITY_UNLOCK_ELEANOR
 #define FACILITY_UNLOCK_FLAGS_COUNT                          (FLAG_FACILITY_UNLOCK_FLAGS_END - FLAG_FACILITY_UNLOCK_FLAGS_START + 1)
 #define FLAG_DEFEATED_CONSTRUCTION_ROCKET_A 0x2A4 // Silicon Flag
 #define FLAG_DEFEATED_CONSTRUCTION_ROCKET_B 0x2A5 // Silicon Flag
@@ -1645,7 +1645,7 @@
 #define FLAG_DAILY_KITCHEN_VOLUNTEER                (DAILY_FLAGS_START + 0x0)
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
 #define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
-#define FLAG_DAILY_ELLEN_REMATCH                    (DAILY_FLAGS_START + 0x3)  // Unused Flag
+#define FLAG_DAILY_ELEANOR_REMATCH                    (DAILY_FLAGS_START + 0x3)  // Unused Flag
 #define FLAG_UNUSED_0x924                           (DAILY_FLAGS_START + 0x4)  // Unused Flag
 #define FLAG_UNUSED_0x925                           (DAILY_FLAGS_START + 0x5)  // Unused Flag
 #define FLAG_UNUSED_0x926                           (DAILY_FLAGS_START + 0x6)  // Unused Flag

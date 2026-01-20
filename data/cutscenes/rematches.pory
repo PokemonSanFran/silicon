@@ -1,73 +1,73 @@
-script Rematches_Script_Ellen
+script Rematches_Script_Eleanor
 {
     lock
-    if (!flag(FLAG_TALKED_TO_ELLEN_POSTGAME))
+    if (!flag(FLAG_TALKED_TO_ELEANOR_POSTGAME))
     {
-        goto(Rematches_Dialogue_FirstEllenTalk)
+        goto(Rematches_Dialogue_FirstEleanorTalk)
     }
-    elif (defeated(TRAINER_ELLEN))
+    elif (defeated(TRAINER_ELEANOR))
     {
-        goto(Rematches_Script_AskEllenRematch)
+        goto(Rematches_Script_AskEleanorRematch)
     }
-    goto(Rematches_Script_AskEllenBattle)
+    goto(Rematches_Script_AskEleanorBattle)
     release
     end
 }
 
-script Rematches_Dialogue_FirstEllenTalk
+script Rematches_Dialogue_FirstEleanorTalk
 {
-    setflag(FLAG_TALKED_TO_ELLEN_POSTGAME)
+    setflag(FLAG_TALKED_TO_ELEANOR_POSTGAME)
 	lock
 	faceplayer
-	msgbox(format("{PLAYER}."),,SPEAKER_ELLEN)
-	msgbox(format("This is the calmest I've been since we've met.\pI don't think I've formally thanked you for all your help.\pYour sacrifice.\pYour commitment.\pI was truly honored to fight by your side."),,SPEAKER_ELLEN)
-	msgbox(format("Now that I think about it... we've never battled before."),,SPEAKER_ELLEN)
+	msgbox(format("{PLAYER}."),,SPEAKER_ELEANOR)
+	msgbox(format("This is the calmest I've been since we've met.\pI don't think I've formally thanked you for all your help.\pYour sacrifice.\pYour commitment.\pI was truly honored to fight by your side."),,SPEAKER_ELEANOR)
+	msgbox(format("Now that I think about it... we've never battled before."),,SPEAKER_ELEANOR)
 	msgbox(format("Huh? Didn't we battle twice?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 	msgbox(format("Actually, three times!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-	msgbox(format("You battled against Vigrim, yes.\pBut I would like to battle you as Ellen, a member of the Elite Four."),,SPEAKER_ELLEN)
-	goto(Rematches_Script_AskEllenBattle)
+	msgbox(format("You battled against Vigrim, yes.\pBut I would like to battle you as Eleanor, a member of the Elite Four."),,SPEAKER_ELEANOR)
+	goto(Rematches_Script_AskEleanorBattle)
 }
 
-script Rematches_Script_AskEllenBattle
+script Rematches_Script_AskEleanorBattle
 {
 	lock
 	faceplayer
-	msgbox(format("Are you ready to battle now?"),MSGBOX_YESNO,SPEAKER_ELLEN)
+	msgbox(format("Are you ready to battle now?"),MSGBOX_YESNO,SPEAKER_ELEANOR)
 	closemessage
 
 	if (var(VAR_RESULT) == NO)
 	{
-		msgbox(format("Come back when you're ready."),,SPEAKER_ELLEN)
+		msgbox(format("Come back when you're ready."),,SPEAKER_ELEANOR)
 		closemessage
 		release
 		end
 	}
 
-	msgbox(format("Let's see if I remember this...\pI'm Ellen of the Resido Elite Four.\pTell me challenger, when the world is fighting against you, what do you do?\pGive up? Dig your heels in?\pAdapt?\pLet's test your resolve!"),,SPEAKER_ELLEN)
+	msgbox(format("Let's see if I remember this...\pI'm Eleanor of the Resido Elite Four.\pTell me challenger, when the world is fighting against you, what do you do?\pGive up? Dig your heels in?\pAdapt?\pLet's test your resolve!"),,SPEAKER_ELEANOR)
 	closemessage
-	trainerbattle_no_intro(TRAINER_ELLEN,format("{PLAYER}, your strength knows no bounds!"))
+	trainerbattle_no_intro(TRAINER_ELEANOR,format("{PLAYER}, your strength knows no bounds!"))
 	// PSF TODO create a cursed chain of if else statement to handle rematches
-	setflag(FLAG_DAILY_ELLEN_REMATCH)
-    goto(Rematches_Dialogue_EllenComeBack)
+	setflag(FLAG_DAILY_ELEANOR_REMATCH)
+    goto(Rematches_Dialogue_EleanorComeBack)
 }
 
-script Rematches_Dialogue_EllenComeBack
+script Rematches_Dialogue_EleanorComeBack
 {
 	lock
-	msgbox(format("52 years of age really starts to impact you! I can really only do one intense battle a day.\pI'd love to battle again tomorrow!"),MSGBOX_NPC,SPEAKER_ELLEN,,EMOTE_SWEAT)
+	msgbox(format("52 years of age really starts to impact you! I can really only do one intense battle a day.\pI'd love to battle again tomorrow!"),MSGBOX_NPC,SPEAKER_ELEANOR,,EMOTE_SWEAT)
 	closemessage
 	release
 	end
 }
 
-script Rematches_Script_AskEllenRematch
+script Rematches_Script_AskEleanorRematch
 {
-	if (flag(FLAG_DAILY_ELLEN_REMATCH))
+	if (flag(FLAG_DAILY_ELEANOR_REMATCH))
 	{
-		goto(Rematches_Dialogue_EllenComeBack)
+		goto(Rematches_Dialogue_EleanorComeBack)
 	}
 	lock
 	faceplayer
-	msgbox(format("Good to see you again {PLAYER}. Resido is so lucky to have you."),,SPEAKER_ELLEN)
-	goto(Rematches_Script_AskEllenBattle)
+	msgbox(format("Good to see you again {PLAYER}. Resido is so lucky to have you."),,SPEAKER_ELEANOR)
+	goto(Rematches_Script_AskEleanorBattle)
 }

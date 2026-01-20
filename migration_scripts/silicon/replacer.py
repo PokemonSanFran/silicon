@@ -112,7 +112,7 @@ def main():
     args = parser.parse_args()
 
     EXCLUDE_DIRS = {'.git', 'build'}
-    EXCLUDE_FILES = {'silicon.map', '.inc', 'tags'}
+    EXCLUDE_FILES = {'silicon.map', 'tags'} # Removed .inc from here
 
     print(f"Replacing '{args.old_word}' with '{args.new_word}'")
     print("Press [Enter] to accept 'Always replace' for a pattern.")
@@ -120,8 +120,12 @@ def main():
     for root, dirs, files in os.walk(args.path):
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
         for file in files:
-            if file == os.path.basename(__file__) or file in EXCLUDE_FILES:
+            # Skip script, excluded names, or .inc extensions
+            if (file == os.path.basename(__file__) or 
+                file in EXCLUDE_FILES or 
+                file.endswith('.inc')):
                 continue
+            
             process_file(os.path.join(root, file), args.old_word, args.new_word)
 
     print("\nProcessing complete.")

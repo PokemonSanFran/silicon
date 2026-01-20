@@ -174,7 +174,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
             {
                 return gText_PlayersAdventure_Flavor0;
             }
-            else if (VarGet(VAR_PROLOGUE_STATE) == ELLEN_ANNOUNCE)
+            else if (VarGet(VAR_PROLOGUE_STATE) == ELEANOR_ANNOUNCE)
             {
                 return gText_ChampionsAdventure_Flavor3;
             }

@@ -6759,12 +6759,12 @@
         },
     },
 #line 2912
-    [DIFFICULTY_NORMAL][TRAINER_ELLEN] =
+    [DIFFICULTY_NORMAL][TRAINER_ELEANOR] =
     {
 #line 2913
-        .trainerName = _("Ellen"),
+        .trainerName = _("Eleanor"),
 #line 2914
-        .trainerPic = TRAINER_PIC_ELLEN,
+        .trainerPic = TRAINER_PIC_ELEANOR,
         .encounterMusic_gender =
 0,
 #line 2916
@@ -6774,15 +6774,15 @@
 #line 2921
         .startingStatus = STARTING_STATUS_SWAMP_PLAYER,
 #line 2917
-        .characterRevealId = REVEAL_ELLEN,
+        .characterRevealId = REVEAL_ELEANOR,
 #line 2918
         .trainerType = GLASS_TRAINER_TYPE_BOSS,
 #line 2919
-        .objectEventGraphicsId = OBJ_EVENT_GFX_ELLEN,
+        .objectEventGraphicsId = OBJ_EVENT_GFX_ELEANOR,
 #line 2920
         .mapSec = MAPSEC_NAVAL_BASE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ELLEN,
+        .trainerBackPic = TRAINER_PIC_ELEANOR,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {

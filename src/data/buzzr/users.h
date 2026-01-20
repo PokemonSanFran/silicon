@@ -150,9 +150,9 @@ const struct Users gBuzzrUsers[] =
         .username = _("Imelda"),
         .isVerified = FALSE,
     },
-    [BUZZR_USER_ELLEN] =
+    [BUZZR_USER_ELEANOR] =
     {
-        .username = _("EllenEliteFour"),
+        .username = _("EleanorEliteFour"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KEI_YING] =

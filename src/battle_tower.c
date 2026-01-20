@@ -3606,7 +3606,7 @@ void PSF_UnlockCharlotteInBattleFacility(u32 money)
        FLAG_FACILITY_UNLOCK_AMI_ARGENTO //after his 2nd quest
                                         //
        FLAG_FACILITY_UNLOCK_FRANK //after post game E4 battle
-       FLAG_FACILITY_UNLOCK_ELLEN //after post game E4 battle
+       FLAG_FACILITY_UNLOCK_ELEANOR //after post game E4 battle
        FLAG_FACILITY_UNLOCK_MAGNUS //after post game E4 battle
        FLAG_FACILITY_UNLOCK_TALA //after post game E4 battle
                                  //
@@ -3639,7 +3639,7 @@ const BossSlot gFacilityBosses[NUM_BOSS_SLOTS] = {
     {FRONTIER_TRAINER_PAIGE, FLAG_FACILITY_UNLOCK_SHINZO},
     {FRONTIER_TRAINER_ANYA, FLAG_FACILITY_UNLOCK_KEI_YING},
     {FRONTIER_TRAINER_DAWN, FLAG_FACILITY_UNLOCK_BELEN},
-    {FRONTIER_TRAINER_ABBY, FLAG_FACILITY_UNLOCK_ELLEN},
+    {FRONTIER_TRAINER_ABBY, FLAG_FACILITY_UNLOCK_ELEANOR},
     {TRAINER_FRONTIER_BRAIN, FLAG_HIDE_FACILITY_OPPONENT},
 };
 

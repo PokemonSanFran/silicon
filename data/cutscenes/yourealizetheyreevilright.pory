@@ -11,7 +11,7 @@ const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
 const FLAG_HIDE_FRANK = FLAG_TEMP_5
 const FLAG_HIDE_VIGRIM = FLAG_TEMP_6
 const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
-const FLAG_HIDE_ELLEN = FLAG_TEMP_8
+const FLAG_HIDE_ELEANOR = FLAG_TEMP_8
 const FLAG_HIDE_ARIANNA = FLAG_TEMP_9
 
 //YouRealizeTheyreEvilRight_
@@ -35,7 +35,7 @@ script YouRealizeTheyreEvilRight_HideBasement_Script {
     setflag(FLAG_HIDE_FRANK)
     setflag(FLAG_HIDE_VIGRIM)
     setflag(FLAG_HIDE_GRUNTS)
-    setflag(FLAG_HIDE_ELLEN)
+    setflag(FLAG_HIDE_ELEANOR)
     setflag(FLAG_HIDE_ARIANNA)
     return
 }
@@ -45,7 +45,7 @@ script YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script {
     setflag(FLAG_HIDE_FRANK)
     setflag(FLAG_HIDE_VIGRIM)
     setflag(FLAG_HIDE_GRUNTS)
-    setflag(FLAG_HIDE_ELLEN)
+    setflag(FLAG_HIDE_ELEANOR)
     setflag(FLAG_HIDE_ARIANNA)
     return
 }

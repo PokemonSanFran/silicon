@@ -154,7 +154,7 @@ const LUCREZIA_B = 6
 const CHARLOTTE = 7
 const RAMESH = 8
 const POLICED = 9
-const ELLEN = 10
+const ELEANOR = 10
 const TALA = 11
 const MAGNUS = 12
 const FRANK = 13
@@ -207,15 +207,15 @@ script WeCanStopYouActaully_ArrestCutscene {
         removeobject(RAMESH)
         removeobject(POLICED)
 
-        addobject(ELLEN)
+        addobject(ELEANOR)
         random(4)
         if (var(VAR_RESULT) == 1){
-            applymovement(ELLEN,WeCanStopYouActually_SalutePlayerHeart)
+            applymovement(ELEANOR,WeCanStopYouActually_SalutePlayerHeart)
         }else {
-            applymovement(ELLEN,WeCanStopYouActually_SalutePlayer)
+            applymovement(ELEANOR,WeCanStopYouActually_SalutePlayer)
         }
     delay(32)
-        waitmovement(ELLEN)
+        waitmovement(ELEANOR)
 
         addobject(TALA)
         random(4)
@@ -251,7 +251,7 @@ script WeCanStopYouActaully_ArrestCutscene {
         removeobject(TALA)
         removeobject(MAGNUS)
         removeobject(FRANK)
-        removeobject(ELLEN)
+        removeobject(ELEANOR)
 
         applymovement(PLAYER,Common_Movement_FaceDown)
         waitmovement(0)

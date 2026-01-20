@@ -5,7 +5,7 @@ const ADAORA = 13
 const TALA = 15
 const MAGNUS = 16
 const FRANK = 17
-const ELLEN = 18
+const ELEANOR = 18
 
 const FLAG_HIDE_POLICE = FLAG_TEMP_2
 const FLAG_HIDE_ELITE = FLAG_TEMP_4
@@ -54,7 +54,7 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("But innocent people? Attacking an entire island just to wipe out TheTide? This is insane!"),,SPEAKER_TALA)
 
-        msgbox(format("Perfectly sane. It worked on Arantraz didn’t it? There’s no peaceful path forward. Do you all get it now? They’re poised to kill!"),,SPEAKER_ELLEN)
+        msgbox(format("Perfectly sane. It worked on Arantraz didn’t it? There’s no peaceful path forward. Do you all get it now? They’re poised to kill!"),,SPEAKER_ELEANOR)
 
         msgbox(format("But they weren’t always, were they?"),,SPEAKER_KAI_TIDE)
 
@@ -72,7 +72,7 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("Even if we pull it off, will exposing them even matter? Or work?"),,SPEAKER_ADAORA)
 
-        msgbox(format("They came for the Kings and missed. This may be our only chance to fight back."),,SPEAKER_ELLEN)
+        msgbox(format("They came for the Kings and missed. This may be our only chance to fight back."),,SPEAKER_ELEANOR)
 
         msgbox(format("So, break into SharpRise Spire, force a confession from Lucrezia, broadcast it using their equipment and public sentiment will come crashing down. Right?"),,SPEAKER_KAI_TIDE)
 
@@ -80,7 +80,7 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("I was being sarcastic!"),,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_SHOCK)
 
-        msgbox(format("The hardest part of that plan is actually just getting to Lucrezia. The rest of that is fairly plausible, given we survive."),,SPEAKER_ELLEN)
+        msgbox(format("The hardest part of that plan is actually just getting to Lucrezia. The rest of that is fairly plausible, given we survive."),,SPEAKER_ELEANOR)
 
         msgbox(format("Two old coots, some has-beens, and a bunch of kids running into the belly of the beast? Count me the hell in."),,SPEAKER_TALA)
 
@@ -106,14 +106,14 @@ script LetsFinishThis_StartPlanning_Dialogue {
         closemessage
 
         applymovement(PLAYER, Common_Movement_FaceDown)
-        applymovement(ELLEN, moves(walk_right, face_up, step_end))
-        waitmovement(ELLEN)
+        applymovement(ELEANOR, moves(walk_right, face_up, step_end))
+        waitmovement(ELEANOR)
 
-        msgbox(format("We’re onto something. You should go prepare! Once we start, I don’t think there’s any turning back. Meet us outside Ramesh’s house in QiuVillage."),,SPEAKER_ELLEN)
+        msgbox(format("We’re onto something. You should go prepare! Once we start, I don’t think there’s any turning back. Meet us outside Ramesh’s house in QiuVillage."),,SPEAKER_ELEANOR)
         closemessage
 
-        applymovement(ELLEN, moves(walk_left, face_up, step_end))
-        waitmovement(ELLEN)
+        applymovement(ELEANOR, moves(walk_left, face_up, step_end))
+        waitmovement(ELEANOR)
 
         setvar(VAR_STORYLINE_STATE,STORY_BEFORE_RAMESH_BREAKIN)
         setvar(VAR_HALAI_ISLAND_STATE,POST_WAIT_EVEN_THEN)

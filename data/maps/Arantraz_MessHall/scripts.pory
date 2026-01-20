@@ -76,11 +76,11 @@ script Arantraz_MessHall_Frank_Event_Script {
     end
 }
 
-script Arantraz_MessHall_Ellen_Event_Script {
+script Arantraz_MessHall_Eleanor_Event_Script {
     lock
 
     switch (var(VAR_STORYLINE_STATE)){
-        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_ELLEN)
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_ELEANOR)
         case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Bodegaburnout_EliteFour_Dialogue)
     }
 

@@ -4,7 +4,7 @@ const KAI = 1
 const TALA = 3
 const MAGNUS = 2
 const FRANK = 6
-const ELLEN = 5
+const ELEANOR = 5
 const VIGRIM = 7
 const ADAORA = 8
 const GRUNTA = 9
@@ -18,12 +18,12 @@ const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
 const FLAG_HIDE_FRANK = FLAG_TEMP_5
 const FLAG_HIDE_VIGRIM = FLAG_TEMP_6
 const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
-const FLAG_HIDE_ELLEN = FLAG_TEMP_8
+const FLAG_HIDE_ELEANOR = FLAG_TEMP_8
 const FLAG_HIDE_ADAORA = FLAG_TEMP_9
 
 script SpeechSpeechSpeech_MoveObject_Script {
     setflag(FLAG_HIDE_GARBODOR)
-    setflag(FLAG_HIDE_ELLEN)
+    setflag(FLAG_HIDE_ELEANOR)
 
     setobjectxy(KAI,10,8)
     setobjectxyperm(KAI,10,8)
@@ -94,9 +94,9 @@ script SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script {
     setobjectxyperm(FRANK,19,6)
     setobjectmovementtype(FRANK,MOVEMENT_TYPE_FACE_DOWN)
 
-    setobjectxy(ELLEN,4,6)
-    setobjectxyperm(ELLEN,4,6)
-    setobjectmovementtype(ELLEN,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectxy(ELEANOR,4,6)
+    setobjectxyperm(ELEANOR,4,6)
+    setobjectmovementtype(ELEANOR,MOVEMENT_TYPE_FACE_DOWN)
 
     setobjectmovementtype(GRUNTA,MOVEMENT_TYPE_LOOK_AROUND)
     setobjectnewmovementtype(GRUNTA,MOVEMENT_TYPE_LOOK_AROUND)
@@ -184,17 +184,17 @@ script SpeechSpeechSpeech_StartTransformation_Script {
         delay(32)
         applymovement(VIGRIM, moves(face_left, face_down, face_right, face_up, face_left, face_down, face_right, face_up, step_end))
         waitmovement(VIGRIM)
-        applymovement(ELLEN, moves(face_left, face_down, face_right, face_up, step_end))
+        applymovement(ELEANOR, moves(face_left, face_down, face_right, face_up, step_end))
         waitmovement(VIGRIM)
         removeobject(VIGRIM)
-        clearflag(FLAG_HIDE_ELLEN)
-        addobject(ELLEN)
+        clearflag(FLAG_HIDE_ELEANOR)
+        addobject(ELEANOR)
         delay(32)
 
         applymovement(TALA,SpeechSpeechSpeech_WalkOutElite)
         applymovement(MAGNUS,SpeechSpeechSpeech_WalkOutElite)
         applymovement(FRANK,SpeechSpeechSpeech_WalkOutElite)
-        applymovement(ELLEN,SpeechSpeechSpeech_WalkOutElite)
+        applymovement(ELEANOR,SpeechSpeechSpeech_WalkOutElite)
         applymovement(ADAORA, moves(lock_facing_direction, walk_right * 2, unlock_facing_direction, step_end))
         applymovement(CAMERA, moves(walk_down * 3, step_end))
         waitmovement(CAMERA)
@@ -256,18 +256,18 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         closemessage
 
-        applymovement(ELLEN,Common_Movement_WalkDown)
-        waitmovement(ELLEN)
-        //Ellen steps forward.
+        applymovement(ELEANOR,Common_Movement_WalkDown)
+        waitmovement(ELEANOR)
+        //Eleanor steps forward.
 
-        msgbox(format("Ellen will lead the charge against Presto."),,SPEAKER_MAGNUS)
+        msgbox(format("Eleanor will lead the charge against Presto."),,SPEAKER_MAGNUS)
 
         closemessage
 
-        applymovement(ELLEN,SpeechSpeechSpeech_WalkBackwards)
+        applymovement(ELEANOR,SpeechSpeechSpeech_WalkBackwards)
         applymovement(FRANK,Common_Movement_WalkDown)
         waitmovement(FRANK)
-        //Ellen steps back. Frank steps forward.
+        //Eleanor steps back. Frank steps forward.
 
         msgbox(format("Frank will lead the charge against Arriba."),,SPEAKER_MAGNUS)
 
@@ -276,7 +276,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         applymovement(FRANK,SpeechSpeechSpeech_WalkBackwards)
         applymovement(TALA,Common_Movement_WalkDown)
         waitmovement(TALA)
-        //Ellen steps back. Tala steps forward.
+        //Eleanor steps back. Tala steps forward.
 
         msgbox(format("Tala will lead the charge against Buzzr."),,SPEAKER_MAGNUS)
 

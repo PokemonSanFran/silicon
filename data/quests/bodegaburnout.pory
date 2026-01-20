@@ -21,7 +21,7 @@ return
 }
 
 script Quest_Bodegaburnout_EliteFour_Dialogue{
-    msgbox(format("go talk to a bunch of different pokemart workers around the region."),MSGBOX_NPC,SPEAKER_ELLEN)
+    msgbox(format("go talk to a bunch of different pokemart workers around the region."),MSGBOX_NPC,SPEAKER_ELEANOR)
 
     returnqueststate(QUEST_BODEGABURNOUT)
     if(var(VAR_RESULT) == QUEST_MENU_UNLOCK_QUEST){

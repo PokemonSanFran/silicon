@@ -6,8 +6,8 @@ Players generally have full control of the character between cutscenes.
 * Player begins playing as Adam, a Trainer challenging the Pokémon League. They have already defeated the first three members of the Elite Four, and are going to battle the last one.
 * Adam defeats Magnus and becomes the ResidoPokémon League Champion.
 * A few days later, Adam is brought by Magnus to a party to celebrate Magnus's crowning achievement.
-* At the party, Ellen, another member of the Elite Four, announces their immediate retirement, citing their unhappiness with the direction of the League and the upcoming changes.
-* Ellen leaves and the guests of the reception (the other members of the Elite Four and the 3 of the 4 Gym Leaders of Resido) are left in shock.
+* At the party, Eleanor, another member of the Elite Four, announces their immediate retirement, citing their unhappiness with the direction of the League and the upcoming changes.
+* Eleanor leaves and the guests of the reception (the other members of the Elite Four and the 3 of the 4 Gym Leaders of Resido) are left in shock.
 * Adam leaves the reception.
 
 ## Character Customization
@@ -545,17 +545,17 @@ Access to this cutscene is blocked until after "Maybe I Fucked Up."
 All the cutscenes in Act 5 True occur in the order listed here, unless otherwise stated".
 ## Let's Get the Band Back Together.
 * Alicia goes to Arantraz and tells Kai they want to help expose SharpriseCapital.
-* Kai wants to start by finding the missing member of the Elite Four, Ellen, and unite with them to create a public show of force.
+* Kai wants to start by finding the missing member of the Elite Four, Eleanor, and unite with them to create a public show of force.
 * Kai splits up with Alicia but gives Alicia a lead to start on to find Vigrim.
 
 ## Mask Off!
 *  Alicia travels around the region, talking to citizens and following clues until they end up at WishaastLake.
 * They run into Vigrim at WishaastLake, who has heard that Alicia is sympathetic to their cause.
 * Vigrim challenges Alicia to a friendly battle, which Alicia wins.
-* Alicia explains they were actually looking for Ellen, and explains Kai's plan.
-* Vigrim says they might be able to help, and unmasks, revealing themselves to be Ellen, the last Elite Four member.
-* Ellen explains that they started TheTide to push back after they saw a losing battle - they knew that change had to come from the outside, not within the League structure.
-* Ellen leaves to talk to the other Elite Four members and make amends, but warns Alicia that things will never be the same.
+* Alicia explains they were actually looking for Eleanor, and explains Kai's plan.
+* Vigrim says they might be able to help, and unmasks, revealing themselves to be Eleanor, the last Elite Four member.
+* Eleanor explains that they started TheTide to push back after they saw a losing battle - they knew that change had to come from the outside, not within the League structure.
+* Eleanor leaves to talk to the other Elite Four members and make amends, but warns Alicia that things will never be the same.
 
 ## Locked Out
 This cutscene plays when the player attempts to go home after "Let's Get The Band Back Together".
@@ -607,7 +607,7 @@ This cutscene does not play until after "Warehouse Rave" and "Speech Speech Spee
 * Adaora gets a cryptic email from the Rocket Event Bot, and Kai explains its probably another trap.
 * Alicia explains the Warehouse Rave incident, to everybody's shock.
 * Adaora hesitates and says that Keiying was different, and if this text is actually from him, then she trusts it.
-* Ellen recognizes that the coordinates in the message lead to a spot on Route4.
+* Eleanor recognizes that the coordinates in the message lead to a spot on Route4.
 * Kai, Adaora, Magnus and Alicia all go to Route4.
 
 ## This Isn't Random...
@@ -632,7 +632,7 @@ This cutscene plays after the player solves the riddle in the cryptic message, w
 * The group agrees to meet outside Ramesh's home in QiuVillage.
 
 ## I'm In.
-* Frank, Magnus, Ellen, Kai, Adaora and Alicia all meet outside Ramesh's house. 
+* Frank, Magnus, Eleanor, Kai, Adaora and Alicia all meet outside Ramesh's house. 
 * Tala is outside the SharpriseSpire, ready to start a protest to distract security.
 * The team breaks into Ramesh's house, figures out the code to the door, and are able to use the warp panel to go directly into SharpriseCapital's offices.
 * The group splits up and begins ascending the tower.

@@ -600,7 +600,7 @@ void JumpPlayerTo_Prologue_Champion(bool32 jumpType)
 
 void FlagsVarWarp_Prologue_Announcement(void)
 {
-    VarSet(VAR_PROLOGUE_STATE,ELLEN_ANNOUNCE);
+    VarSet(VAR_PROLOGUE_STATE,ELEANOR_ANNOUNCE);
     SetWarpDestination(MAP_GROUP(MAP_OROLAND_COLISEUM_HALL), MAP_NUM(MAP_OROLAND_COLISEUM_HALL), NO_WARP_ID, 9, 7);
 }
 

@@ -552,7 +552,7 @@ enum PlayerHomeState
 #define LOST_TO_MAGNUS  3
 #define DEFEATED_MAGNUS 4
 #define WALK_INTO_HALL 5
-#define ELLEN_ANNOUNCE   6
+#define ELEANOR_ANNOUNCE   6
 #define START_ADVENTURE 7
 
 //VAR_DANCEBATTLE_STATE

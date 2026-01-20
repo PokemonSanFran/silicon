@@ -4,13 +4,13 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const MAGNUS = 1
 const TALA = 2
 const FRANK = 3
-const ELLEN = 4
+const ELEANOR = 4
 const KEIYING = 5
 const IMELDA = 6
 const DOYLE = 7
 const GUARD = 8
 
-const FLAG_HIDE_ELLEN = FLAG_TEMP_1
+const FLAG_HIDE_ELEANOR = FLAG_TEMP_1
 
 script Prologue_FlagsVars_Script
 {
@@ -110,7 +110,7 @@ script Prologue_PostWarp_Hall_Dialgoue{
         msgbox(format("Its not the usual celebration, but of course, with the recent news, the budget has been slashed. But we've figured a small gathering with the Elite Four and Gym Leaders would be nice."),,SPEAKER_MAGNUS)
         closemessage
         applymovement(MAGNUS,Common_Movement_FaceDown)
-        msgbox(format("Ellen was waiting for us to arrive - they've got a speech prepared."),,SPEAKER_MAGNUS)
+        msgbox(format("Eleanor was waiting for us to arrive - they've got a speech prepared."),,SPEAKER_MAGNUS)
         closemessage
         applymovement(MAGNUS, moves(walk_up, walk_left, walk_up, step_end))
         waitmovement(MAGNUS)
@@ -120,32 +120,32 @@ script Prologue_PostWarp_Hall_Dialgoue{
         end
 }
 
-script Prologue_Ellen_Speech_Dialogue{
+script Prologue_Eleanor_Speech_Dialogue{
     lock
         startcutscene(JUMPPLAYER_PROLOGUE_ANNOUNCEMENT)
-        setvar(VAR_PROLOGUE_STATE,ELLEN_ANNOUNCE)
+        setvar(VAR_PROLOGUE_STATE,ELEANOR_ANNOUNCE)
         call(Prologue_SetUpSeechCrowd_Script)
-        msgbox(format("Thank you all for being here!"),,SPEAKER_ELLEN)
-        msgbox(format("First of course, congratulations to the newest Champion, {PLAYER}! Despite not being from here, you've excelled in our region's competitive climate, and we're honored to cement you into our Hall of Fame."),,SPEAKER_ELLEN)
-        msgbox(format("Of course, I regret to inform you all that effective immediately, I'll be stepping down as a member of the Elite Four."),,SPEAKER_ELLEN)
+        msgbox(format("Thank you all for being here!"),,SPEAKER_ELEANOR)
+        msgbox(format("First of course, congratulations to the newest Champion, {PLAYER}! Despite not being from here, you've excelled in our region's competitive climate, and we're honored to cement you into our Hall of Fame."),,SPEAKER_ELEANOR)
+        msgbox(format("Of course, I regret to inform you all that effective immediately, I'll be stepping down as a member of the Elite Four."),,SPEAKER_ELEANOR)
         closemessage
         call(Prologue_ExclaimCrowd_Script)
-        msgbox(format("I will be retiring my career as a Trainer, and soon after, I'll be leaving the region."),,SPEAKER_ELLEN)
+        msgbox(format("I will be retiring my career as a Trainer, and soon after, I'll be leaving the region."),,SPEAKER_ELEANOR)
         closemessage
-        applymovement(ELLEN,Common_Movement_FaceRight)
-        msgbox(format("There's no easy way to put this - I don't have any hope in the new League changes. I think this is beginning of a very dark road ahead of us - we have customs and traditions and culture built here, and they've let the money get in the way of that. For those of you that haven't given up, and are fighting the good fight, you have my deepest respect..."),,SPEAKER_ELLEN)
+        applymovement(ELEANOR,Common_Movement_FaceRight)
+        msgbox(format("There's no easy way to put this - I don't have any hope in the new League changes. I think this is beginning of a very dark road ahead of us - we have customs and traditions and culture built here, and they've let the money get in the way of that. For those of you that haven't given up, and are fighting the good fight, you have my deepest respect..."),,SPEAKER_ELEANOR)
         closemessage
-        applymovement(ELLEN,Common_Movement_FaceLeft)
-        msgbox(format("but also my deepest sympathies. I fear this is a battle we've already lost, and it's only a matter of time before we've been stripped of everything... and I can't bear the thought of that."),,SPEAKER_ELLEN)
+        applymovement(ELEANOR,Common_Movement_FaceLeft)
+        msgbox(format("but also my deepest sympathies. I fear this is a battle we've already lost, and it's only a matter of time before we've been stripped of everything... and I can't bear the thought of that."),,SPEAKER_ELEANOR)
         closemessage
-        applymovement(ELLEN,Common_Movement_FaceDown)
-        msgbox(format("Good luck to all of you."),,SPEAKER_ELLEN)
+        applymovement(ELEANOR,Common_Movement_FaceDown)
+        msgbox(format("Good luck to all of you."),,SPEAKER_ELEANOR)
         closemessage
-        applymovement(ELLEN, moves(walk_right, walk_down * 5, step_end))
+        applymovement(ELEANOR, moves(walk_right, walk_down * 5, step_end))
         delay(30)
         endcutscene
         fadescreen(FADE_TO_BLACK)
-        removeobject(ELLEN)
+        removeobject(ELEANOR)
         call(Prologue_Announcement_PostObjectSetup_Script)
         fadescreen(FADE_FROM_BLACK)
         call(TryAutoSave)
@@ -170,14 +170,14 @@ script Prologue_PostWarp_PositionObjects_Script
 
 script Prologue_Announcement_PostObjectSetup_Script
 {
-    if(var(VAR_PROLOGUE_STATE) < ELLEN_ANNOUNCE)
+    if(var(VAR_PROLOGUE_STATE) < ELEANOR_ANNOUNCE)
     {
         return
     }
         setobjectxy(MAGNUS,3,6)
         setobjectxyperm(MAGNUS,3,6)
 
-        setflag(FLAG_HIDE_ELLEN)
+        setflag(FLAG_HIDE_ELEANOR)
 
         turnobject(KEIYING,DIR_NORTH)
         turnobject(IMELDA,DIR_SOUTH)
@@ -225,7 +225,7 @@ script Prologue_ExclaimCrowd_Script{
         applymovement(MAGNUS,Common_Movement_ExclamationMark)
         applymovement(TALA,Common_Movement_ExclamationMark)
         applymovement(FRANK,Common_Movement_ExclamationMark)
-        applymovement(ELLEN,Common_Movement_ExclamationMark)
+        applymovement(ELEANOR,Common_Movement_ExclamationMark)
         applymovement(KEIYING,Common_Movement_ExclamationMark)
         applymovement(IMELDA,Common_Movement_ExclamationMark)
         applymovement(DOYLE,Common_Movement_ExclamationMark)
@@ -329,7 +329,7 @@ script Prologue_Magnus_Dialogue{
 }
 
 script Prologue_Keiying_Dialogue{
-    msgbox(format("First BD sells out, now Ellen is leaving... perhaps I'm on the wrong side of history here."),MSGBOX_AUTOCLOSE,SPEAKER_KEIYING)
+    msgbox(format("First BD sells out, now Eleanor is leaving... perhaps I'm on the wrong side of history here."),MSGBOX_AUTOCLOSE,SPEAKER_KEIYING)
     end
 }
 

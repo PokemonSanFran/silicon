@@ -277,7 +277,7 @@
 #define OBJ_EVENT_GFX_LUCREZIA                     OBJ_EVENT_GFX_MAXIE
 #define OBJ_EVENT_GFX_FRANK                      OBJ_EVENT_GFX_GLACIA
 #define OBJ_EVENT_GFX_CHARLOTTE                    OBJ_EVENT_GFX_MAY_NORMAL
-#define OBJ_EVENT_GFX_ELLEN                        OBJ_EVENT_GFX_DRAKE
+#define OBJ_EVENT_GFX_ELEANOR                        OBJ_EVENT_GFX_DRAKE
 #define OBJ_EVENT_GFX_OLIVER                       OBJ_EVENT_GFX_PROF_BIRCH
 #define OBJ_EVENT_GFX_RAMESH                       OBJ_EVENT_GFX_MAGMA_MEMBER_M
 #define OBJ_EVENT_GFX_AMIARGENTO                   OBJ_EVENT_GFX_JUAN

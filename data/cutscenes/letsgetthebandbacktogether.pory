@@ -54,13 +54,13 @@ script LetsGettheBandBackTogether_MeetInBasement_Script
 
     msgbox(format("Wait, the entire Elite Four?"),,SPEAKER_ALICIA)
 
-    msgbox(format("Okay, kinda. That’s actually the next step. Tala and Magnus convinced Frank to work with us too, but we’ve gotta find Ellen if we really want to present a united front."),,SPEAKER_KAI)
+    msgbox(format("Okay, kinda. That’s actually the next step. Tala and Magnus convinced Frank to work with us too, but we’ve gotta find Eleanor if we really want to present a united front."),,SPEAKER_KAI)
 
     msgbox(format("What am I missing? Can’t we just call them or something?"),,SPEAKER_ALICIA)
 
-    msgbox(format("Ellen hasn’t been heard from ever since SharpRise Capital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore."),,SPEAKER_KAI)
+    msgbox(format("Eleanor hasn’t been heard from ever since SharpRise Capital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore."),,SPEAKER_KAI)
 
-    msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Ellen might be?"),,SPEAKER_KAI)
+    msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_KAI)
     msgbox(format("We should start rallying the people behind our cause. You’re the champ, after all, let’s put that clout to work."),,SPEAKER_KAI)
 
     msgbox(format("Oh, yeah, of course. What were you thinking?"),,SPEAKER_ALICIA)
@@ -105,11 +105,11 @@ script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
         closemessage
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Ellen might be?"),,SPEAKER_KAI)
+        msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_KAI)
 
         msgbox(format("Where do I even start?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Try the newspaper in Perlacia City, they did an interview with Ellen right before she disappeared.  I’m gonna make some moves too."),,SPEAKER_KAI)
+        msgbox(format("Try the newspaper in Perlacia City, they did an interview with Eleanor right before she disappeared.  I’m gonna make some moves too."),,SPEAKER_KAI)
 
         closemessage
         applymovement(KAI, moves(walk_left * 2, walk_down * 2, step_end))

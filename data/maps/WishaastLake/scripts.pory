@@ -14,7 +14,7 @@ script WishaastLake_ObjectVisibility_Script {
 
 	if (flag(FLAG_SYS_GAME_CLEAR))
 	{
-		setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ELLEN)
+		setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ELEANOR)
 		return
 	}
 
@@ -28,11 +28,11 @@ script WishaastLake_ObjectVisibility_Script {
 
 }
 
-script WishaastLake_InteractEllen_Event_Script {
+script WishaastLake_InteractEleanor_Event_Script {
     lock
         //PSF TODO figure out better pre / post battle speech
 		if (flag(FLAG_SYS_GAME_CLEAR)){
-			goto(Rematches_Script_Ellen)
+			goto(Rematches_Script_Eleanor)
 		} elif (flag(FLAG_TIMELINE_TRUE) && var(VAR_MASK_OFF_STATE) > GOT_MASK_OFF_CLUE_3){
             goto(MaskOff_Encounter_Vigrim_Dialogue)
         } elif (flag(FLAG_TIMELINE_FALSE) && var(VAR_MANHUNT_STATE) > GOT_MANHUNT_CLUE_3){

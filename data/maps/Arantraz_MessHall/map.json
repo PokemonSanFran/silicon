@@ -67,7 +67,7 @@
       "flag": "FLAG_TEMP_4"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ELLEN",
+      "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 9,
       "y": 3,
       "elevation": 3,
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Arantraz_MessHall_Ellen_Event_Script",
+      "script": "Arantraz_MessHall_Eleanor_Event_Script",
       "flag": "FLAG_TEMP_8"
     },
     {

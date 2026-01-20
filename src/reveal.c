@@ -440,12 +440,12 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .bio = COMPOUND_STRING("- ImeldaXXX\n- XXX"),
         .accentColor = RGB(28,25,30),
     },
-    [REVEAL_ELLEN] =
+    [REVEAL_ELEANOR] =
     {
-        .trainerId = TRAINER_ELLEN,
-        .buzzrId = BUZZR_USER_ELLEN,
+        .trainerId = TRAINER_ELEANOR,
+        .buzzrId = BUZZR_USER_ELEANOR,
         .quote = COMPOUND_STRING("Those with power have an obligation to do good."),
-        .bio = COMPOUND_STRING("- Somehow, Ellen is shorter than Vigrim.\n- Where did the Vigrim outfit go?"),
+        .bio = COMPOUND_STRING("- Somehow, Eleanor is shorter than Vigrim.\n- Where did the Vigrim outfit go?"),
         .accentColor = RGB(28,25,30),
     },
 };

@@ -3,7 +3,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const TALA = 1
 const MAGNUS = 2
 const FRANK = 3
-const ELLEN = 4
+const ELEANOR = 4
 const KAI = 5
 const PKMNA = 6
 const FLAG_HIDE_RAID = FLAG_TEMP_1
@@ -76,7 +76,7 @@ script ImIn_CutsceneSetup_OutsideHouse_Script {
         addobject(TALA)
         addobject(MAGNUS)
         addobject(FRANK)
-        addobject(ELLEN)
+        addobject(ELEANOR)
         addobject(KAI)
 }
 
@@ -93,7 +93,7 @@ script ImIn_ObjectSetUp_InsideHouse_Script {
     setobjectxyperm(TALA,15,4)
         setobjectxyperm(MAGNUS,16,3)
         setobjectxyperm(FRANK,17,4)
-        setobjectxyperm(ELLEN,18,5)
+        setobjectxyperm(ELEANOR,18,5)
         setobjectxyperm(KAI,19,3)
 }
 
@@ -101,12 +101,12 @@ script ImIn_MoveObject_BeforeWarp_Script {
     addobject(TALA)
         addobject(MAGNUS)
         addobject(FRANK)
-        addobject(ELLEN)
+        addobject(ELEANOR)
         addobject(KAI)
 
         setobjectxy(TALA,10,3)
         setobjectxy(FRANK,10,4)
-        setobjectxy(ELLEN,12,3)
+        setobjectxy(ELEANOR,12,3)
         setobjectxy(KAI,12,4)
         setobjectxy(MAGNUS,11,2)
 
@@ -115,7 +115,7 @@ script ImIn_MoveObject_BeforeWarp_Script {
 
         applymovement(TALA,Common_Movement_FaceRight)
         applymovement(FRANK,Common_Movement_FaceRight)
-        applymovement(ELLEN,Common_Movement_FaceLeft)
+        applymovement(ELEANOR,Common_Movement_FaceLeft)
         applymovement(MAGNUS,Common_Movement_FaceDown)
         applymovement(KAI,Common_Movement_FaceLeft)
         waitmovement(MAGNUS)
@@ -159,7 +159,7 @@ script ImIn_StartHouseBreak_Script
         applymovement(TALA,Common_Movement_FaceRight)
         applymovement(MAGNUS,Common_Movement_FaceRight)
         applymovement(FRANK,Common_Movement_FaceRight)
-        applymovement(ELLEN,Common_Movement_FaceRight)
+        applymovement(ELEANOR,Common_Movement_FaceRight)
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
 
@@ -186,7 +186,7 @@ script ImIn_StartHouseBreak_Script
         applymovement(TALA, moves(walk_right * 5, walk_up * 4, walk_left, step_end))
         applymovement(MAGNUS, moves(walk_right, walk_up * 4, walk_left, step_end))
         applymovement(FRANK, moves(walk_right * 4, walk_up * 3, walk_left, step_end))
-        applymovement(ELLEN, moves(walk_up * 4, walk_left, step_end))
+        applymovement(ELEANOR, moves(walk_up * 4, walk_left, step_end))
         applymovement(KAI, moves(walk_down, walk_left, step_end))
 
         playse(SE_EXIT)
@@ -202,7 +202,7 @@ script ImIn_StartHouseBreak_Script
         removeobject(TALA)
         removeobject(MAGNUS)
         removeobject(FRANK)
-        removeobject(ELLEN)
+        removeobject(ELEANOR)
         removeobject(KAI)
         call(TryAutoSave)
         endcutscene
@@ -226,20 +226,20 @@ script Imin_BeginHouseSearch_Script
         applymovement(TALA,ImIn_SpreadOutHouse)
         applymovement(MAGNUS,ImIn_SpreadOutHouse)
         applymovement(FRANK,ImIn_SpreadOutHouse)
-        applymovement(ELLEN,ImIn_SpreadOutHouse)
+        applymovement(ELEANOR,ImIn_SpreadOutHouse)
         applymovement(KAI,ImIn_SpreadOutHouse)
         waitmovement(KAI)
 
         setobjectxy(TALA,2,7)
         setobjectxy(MAGNUS,18,9)
         setobjectxy(FRANK,10,11)
-        setobjectxy(ELLEN,15,17)
+        setobjectxy(ELEANOR,15,17)
         setobjectxy(KAI,3,13)
 
         setobjectxyperm(TALA,2,7)
         setobjectxyperm(MAGNUS,18,9)
         setobjectxyperm(FRANK,10,11)
-        setobjectxyperm(ELLEN,15,17)
+        setobjectxyperm(ELEANOR,15,17)
         setobjectxyperm(KAI,3,13)
 
         release
@@ -304,9 +304,9 @@ script ImIn_EnterCorrectCode_Script
         waitmovement(FRANK)
         removeobject(FRANK)
         playse(SE_WARP_OUT)
-        applymovement(ELLEN,Common_Movement_WalkLeft)
-        waitmovement(ELLEN)
-        removeobject(ELLEN)
+        applymovement(ELEANOR,Common_Movement_WalkLeft)
+        waitmovement(ELEANOR)
+        removeobject(ELEANOR)
         playse(SE_WARP_OUT)
         applymovement(MAGNUS,Common_Movement_WalkDown)
         waitmovement(MAGNUS)
@@ -327,7 +327,7 @@ script ImIn_EnterCorrectCode_Script
 const TALA_B = 3
 const MAGNUS_B = 4
 const FRANK_B = 5
-const ELLEN_B = 6
+const ELEANOR_B = 6
 const KAI_B = 7
 
 script ImIn_MakeRaidPartyVisible_Script
@@ -364,7 +364,7 @@ script ImIn_PostWarpSplit_Dialogue
         closemessage
 
         applymovement(TALA_B,ImIn_WalkAwayFromWarpC)
-        applymovement(ELLEN_B,ImIn_WalkAwayFromWarpC)
+        applymovement(ELEANOR_B,ImIn_WalkAwayFromWarpC)
         applymovement(KAI_B,ImIn_WalkAwayFromWarpC)
         delay(30)
 
@@ -372,7 +372,7 @@ script ImIn_PostWarpSplit_Dialogue
         removeobject(TALA_B)
         removeobject(MAGNUS_B)
         removeobject(FRANK_B)
-        removeobject(ELLEN_B)
+        removeobject(ELEANOR_B)
         removeobject(KAI_B)
         fadescreen(FADE_FROM_BLACK)
         call(TryAutoSave)

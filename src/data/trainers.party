@@ -2909,14 +2909,14 @@ Adamant Nature
 - Stone Edge  
 - Aerial Ace  
 
-=== TRAINER_ELLEN ===
-Name: Ellen
-Pic: Ellen
+=== TRAINER_ELEANOR ===
+Name: Eleanor
+Pic: Eleanor
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
-Reveal: Ellen
+Reveal: Eleanor
 Type: Boss
-Overworld Sprite: Ellen 
+Overworld Sprite: Eleanor 
 Map Section: Naval Base
 Starting Status: Swamp Player
 
