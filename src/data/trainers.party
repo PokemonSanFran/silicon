@@ -1085,15 +1085,15 @@ Serious Nature
 - Night Slash  
 - Trick Room  
 
-=== TRAINER_ALCMENE ===
-Name: Alcmene
-Pic: Alcmene
+=== TRAINER_VIGRIM ===
+Name: Vigrim
+Pic: Vigrim
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Battle Type: Double
-Reveal: Alcmene
+Reveal: Vigrim
 Class: The Tide Leader
 Type: Boss
-Overworld Sprite: Alcmene
+Overworld Sprite: Vigrim
 Map Section: Naval Base
 
 Poliwrath @ Focus Sash  

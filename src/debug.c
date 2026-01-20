@@ -771,7 +771,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act5[] =
     {COMPOUND_STRING("YouHaveYourOrders"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUHAVEYOURORDERS},
     {COMPOUND_STRING("HowDisappointing"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HOWDISAPPOINTING_ARREST},
     {COMPOUND_STRING("LetsBurnThisMotherDown"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSBURNTHISMOTHERDOWN},
-    {COMPOUND_STRING("Manhunt"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MANHUNT_ALCMENE},
+    {COMPOUND_STRING("Manhunt"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MANHUNT_VIGRIM},
     {COMPOUND_STRING("ExhibitionBattle"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_EXHIBITIONBATTLE},
     {COMPOUND_STRING("MaybeIFuckedUp"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MAYBEIFUCKEDUP},
     {COMPOUND_STRING("OkayLetsFixit"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_OKAYLETSFIXIT},
@@ -780,7 +780,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act5[] =
 static const struct DebugMenuOption sDebugMenu_Actions_Act6[] =
 {
     {COMPOUND_STRING("LetsGettheBandBackTogether"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_AFTER},
-    {COMPOUND_STRING("MaskOff"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MASKOFF_ALCMENE},
+    {COMPOUND_STRING("MaskOff"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MASKOFF_VIGRIM},
     {COMPOUND_STRING("LetsFixThis"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSFIXTHIS},
     {COMPOUND_STRING("LockedOut"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LOCKEDOUT},
     {COMPOUND_STRING("WarehouseRave"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAREHOUSERAVE},

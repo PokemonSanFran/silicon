@@ -5,7 +5,7 @@ const TALA = 3
 const MAGNUS = 2
 const ARMANDO = 6
 const ELLEN = 5
-const ALCMENE = 7
+const VIGRIM = 7
 const ADAORA = 8
 const GRUNTA = 9
 const GRUNTB = 10
@@ -16,7 +16,7 @@ const FLAG_HIDE_KAI = FLAG_TEMP_1
 const FLAG_HIDE_ELITES = FLAG_TEMP_2
 const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
 const FLAG_HIDE_ARMANDO = FLAG_TEMP_5
-const FLAG_HIDE_ALCMENE = FLAG_TEMP_6
+const FLAG_HIDE_VIGRIM = FLAG_TEMP_6
 const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
 const FLAG_HIDE_ELLEN = FLAG_TEMP_8
 const FLAG_HIDE_ADAORA = FLAG_TEMP_9
@@ -76,7 +76,7 @@ script SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script {
 
     setflag(FLAG_HIDE_GARBODOR)
     setflag(FLAG_HIDE_KAI)
-    setflag(FLAG_HIDE_ALCMENE)
+    setflag(FLAG_HIDE_VIGRIM)
 
     setobjectxy(TALA,11,17)
     setobjectxyperm(TALA,11,17)
@@ -135,24 +135,24 @@ script SpeechSpeechSpeech_PositionPlayer_Script {
 
 script SpeechSpeechSpeech_Intro_Dialogue {
 
-        msgbox(format("Thank you all for coming. For all your hard work. All your support. I have a few announcements for you all."),,SPEAKER_ALCMENE)
-        msgbox(format("First of all, I will be taking a leave of absence."),,SPEAKER_ALCMENE)
+        msgbox(format("Thank you all for coming. For all your hard work. All your support. I have a few announcements for you all."),,SPEAKER_VIGRIM)
+        msgbox(format("First of all, I will be taking a leave of absence."),,SPEAKER_VIGRIM)
 	closemessage
 
 	call(SpeechSpeechSpeech_CrowdLookAround_Script)
         msgbox(format("Wait what?"),,SPEAKER_ROCKET_MEMBER_A,,EMOTE_SHOCK)
 	closemessage
 
-	msgbox(format("As our duly elected second in command, Adaora will succeed me as the Leader of The Tide for the remainder of this term."),,SPEAKER_ALCMENE)
-        msgbox(format("Given her track record of service to the cause, she has my full trust and support, and I know you all feel the same."),,SPEAKER_ALCMENE,,EMOTE_HAPPY)
-        msgbox(format("If there any objection, speak now!"),,SPEAKER_ALCMENE)
+	msgbox(format("As our duly elected second in command, Adaora will succeed me as the Leader of The Tide for the remainder of this term."),,SPEAKER_VIGRIM)
+        msgbox(format("Given her track record of service to the cause, she has my full trust and support, and I know you all feel the same."),,SPEAKER_VIGRIM,,EMOTE_HAPPY)
+        msgbox(format("If there any objection, speak now!"),,SPEAKER_VIGRIM)
 	closemessage 
 	call(SpeechSpeechSpeech_CrowdLookAround_Script)
-        msgbox(format("Then it is so."),,SPEAKER_ALCMENE)
+        msgbox(format("Then it is so."),,SPEAKER_VIGRIM)
 	closemessage 
         call(SpeechSpeechSpeech_ResetFacing_Script)
 
-        msgbox(format("Thank you for all you’ve done for us, Alcmene, I hope to live up to your example."),,SPEAKER_ADAORA)
+        msgbox(format("Thank you for all you’ve done for us, Vigrim, I hope to live up to your example."),,SPEAKER_ADAORA)
 
         closemessage
 
@@ -168,7 +168,7 @@ script SpeechSpeechSpeech_Intro_Dialogue {
         msgbox(format("How will The Tide feel with a public leader...?"),SPEAKER_ROCKET_MEMBER_B,TAIL_WHISPER,EMOTE_CONFUSE)
         closemessage
 
-        msgbox(format("Yes, Adaora has my full confidence, as well as the backing of…"),,SPEAKER_ALCMENE)
+        msgbox(format("Yes, Adaora has my full confidence, as well as the backing of…"),,SPEAKER_VIGRIM)
 
         closemessage
         goto(SpeechSpeechSpeech_StartTransformation_Script)
@@ -179,14 +179,14 @@ script SpeechSpeechSpeech_StartTransformation_Script {
         clearflag(FLAG_HIDE_ARMANDO)
         special(SpawnCameraObject)
         applymovement(CAMERA, moves(walk_up * 4, step_end))
-        applymovement(ALCMENE, moves(walk_up * 3, step_end))
+        applymovement(VIGRIM, moves(walk_up * 3, step_end))
         waitmovement(CAMERA)
         delay(32)
-        applymovement(ALCMENE, moves(face_left, face_down, face_right, face_up, face_left, face_down, face_right, face_up, step_end))
-        waitmovement(ALCMENE)
+        applymovement(VIGRIM, moves(face_left, face_down, face_right, face_up, face_left, face_down, face_right, face_up, step_end))
+        waitmovement(VIGRIM)
         applymovement(ELLEN, moves(face_left, face_down, face_right, face_up, step_end))
-        waitmovement(ALCMENE)
-        removeobject(ALCMENE)
+        waitmovement(VIGRIM)
+        removeobject(VIGRIM)
         clearflag(FLAG_HIDE_ELLEN)
         addobject(ELLEN)
         delay(32)
@@ -231,7 +231,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         msgbox(format("Yeah!"),,SPEAKER_ROCKET_MEMBER_A)
 
-        msgbox(format("Hell yes! Woo! Wait, where did Alcmene go?"),,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
+        msgbox(format("Hell yes! Woo! Wait, where did Vigrim go?"),,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
         closemessage
         applymovement(GRUNTD,SpeechSpeechSpeech_LookAround)
         waitmovement(GRUNTD)
@@ -244,7 +244,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         closemessage
 
         applymovement(GRUNTD,SpeechSpeechSpeech_LookAround)
-        msgbox(format("This is insane yo. But seriously, did Alcmene just disappear?"),,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
+        msgbox(format("This is insane yo. But seriously, did Vigrim just disappear?"),,SPEAKER_ROCKET_MEMBER_B,,EMOTE_CONFUSE)
         closemessage
         waitmovement(GRUNTD)
 

@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const RAMESH = 2
 const CHARLOTTE = 2
-const FLAG_HIDE_ALCMENE = FLAG_TEMP_1
+const FLAG_HIDE_VIGRIM = FLAG_TEMP_1
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
 const MATTHEW = 1
 
@@ -23,8 +23,8 @@ script Manhunt_ShowRamesh_Script{
     }
 }
 
-script Manhunt_HideAlcmene_Script {
-    setflag(FLAG_HIDE_ALCMENE)
+script Manhunt_HideVigrim_Script {
+    setflag(FLAG_HIDE_VIGRIM)
     return
 }
 
@@ -45,7 +45,7 @@ script Manhunt_Interact_Ramesh_Script{
 }
 
 script Manhunt_ActiveQuest_Dialogue{
-    msgbox(format("Every second that I'm up here, I'm losing time on the upcoming promo… I hope you're able to track Alcmene down soon."),MSGBOX_NPC,SPEAKER_RAMESH)
+    msgbox(format("Every second that I'm up here, I'm losing time on the upcoming promo… I hope you're able to track Vigrim down soon."),MSGBOX_NPC,SPEAKER_RAMESH)
     end
 }
 
@@ -57,9 +57,9 @@ script Manhunt_CompleteQuest_Dialogue{
 script Manhunt_Assignment_Dialogue {
     lock
 
-        setvar(VAR_MANHUNT_STATE,ASSIGNED_FIND_ALCMENE)
+        setvar(VAR_MANHUNT_STATE,ASSIGNED_FIND_VIGRIM)
 
-        msgbox(format("Go find Alcmene. Charlotte will help. The newspaper in Perlacia City is a good place to start, they ran a story on TheTide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
+        msgbox(format("Go find Vigrim. Charlotte will help. The newspaper in Perlacia City is a good place to start, they ran a story on TheTide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
 
         call(TryAutoSave)
         startquest(QUEST_MANHUNT)
@@ -84,9 +84,9 @@ script Manhunt_Cherie_Battle_Script {
         addobject(CHARLOTTE)
         applymovement(CHARLOTTE, moves(walk_down * 3, walk_left * 3, walk_down * 2, step_end))
 
-        msgbox(format("Hey, we're trying to find Alcmene, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("Hey, we're trying to find Vigrim, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah, I wrote the TheTide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Alcmene… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
+        msgbox(format("Yeah, I wrote the TheTide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Vigrim… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
 
         msgbox(format("Blessed? TheTide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
@@ -109,9 +109,9 @@ script Manhunt_StartBattle1_Script
         multi_2_vs_1(TRAINER_CHERIE,format("…Please don't hurt us any further. What do you want?"),PARTNER_STEVEN)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1)
         startcutscene(JUMPPLAYER_MANHUNT_NEWS)
-        msgbox(format("Start talking. Who's Alcmene behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("Start talking. Who's Vigrim behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Alcmene? I swear, I don't know who she is. Nobody does. I'm a reporter… I wouldn't keep that a secret."),,SPEAKER_CHERIE)
+        msgbox(format("Vigrim? I swear, I don't know who she is. Nobody does. I'm a reporter… I wouldn't keep that a secret."),,SPEAKER_CHERIE)
 
         msgbox(format("I KNOW you know some shit."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
@@ -284,7 +284,7 @@ script Manhunt_Matthew_Battle_Script {
         waitmovement(MATTHEW)
         msgbox(format("Oh damn, looks like they were right."),,SPEAKER_MATTHEW)
         msgbox(format("Who's they?"),,SPEAKER_ALICIA)
-        msgbox(format("Yeah, Alcmene told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
+        msgbox(format("Yeah, Vigrim told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
         msgbox(format("Look, we don't have to fight, but you need to tell us -"),,SPEAKER_ALICIA)
         msgbox(format("Ignore {POSSESSIVE} good cop routine."),,SPEAKER_CHARLOTTE_SHARPRISE)
         msgbox(format("This isn't a bit - I'm serious!"),,SPEAKER_ALICIA,TAIL_SHOUT)
@@ -301,7 +301,7 @@ script Manhunt_StartBattle4_Script
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
         startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
 
-        msgbox(format("You're no joke. Alcmene wants you to meet them at Wishaast Lake, after sunset. Just the two of you - no police or SharpRise Capital cronies, or the trail goes cold again. Up to you. They're tired of you hurting people just to track them down, and I agree, you're…"),MSGBOX_AUTOCLOSE,SPEAKER_MATTHEW)
+        msgbox(format("You're no joke. Vigrim wants you to meet them at Wishaast Lake, after sunset. Just the two of you - no police or SharpRise Capital cronies, or the trail goes cold again. Up to you. They're tired of you hurting people just to track them down, and I agree, you're…"),MSGBOX_AUTOCLOSE,SPEAKER_MATTHEW)
         closemessage
         applymovement(MATTHEW,Common_Movement_FaceRight)
         waitmovement(MATTHEW)
@@ -333,19 +333,19 @@ script Manhunt_ReactAdaoraKaiArrest_Dialogue
 
 script Manhunt_React_Dialogue
 {
-    msgbox(format("Your reign of terror against The Tide ends here, {PLAYER}."),MSGBOX_NPC,SPEAKER_ALCMENE)
-    msgbox(format("I can't stand by and watch more innocent people get hurt while your superiors are hellbent on destroying us."),MSGBOX_NPC,SPEAKER_ALCMENE)
-    msgbox(format("And then what you did to {STR_VAR_1}?"),MSGBOX_NPC,SPEAKER_ALCMENE)
-    msgbox(format("No.\N{PAUSE 60}Your war ends with me."),MSGBOX_NPC,SPEAKER_ALCMENE)
+    msgbox(format("Your reign of terror against The Tide ends here, {PLAYER}."),MSGBOX_NPC,SPEAKER_VIGRIM)
+    msgbox(format("I can't stand by and watch more innocent people get hurt while your superiors are hellbent on destroying us."),MSGBOX_NPC,SPEAKER_VIGRIM)
+    msgbox(format("And then what you did to {STR_VAR_1}?"),MSGBOX_NPC,SPEAKER_VIGRIM)
+    msgbox(format("No.\N{PAUSE 60}Your war ends with me."),MSGBOX_NPC,SPEAKER_VIGRIM)
     return
 }
 
-script Manhunt_Encounter_Alcmene_Dialogue {
+script Manhunt_Encounter_Vigrim_Dialogue {
     lock
     faceplayer
 
-        if(var(VAR_MANHUNT_STATE) != SAVED_BEFORE_ALCMENE){
-            setvar(VAR_MANHUNT_STATE,SAVED_BEFORE_ALCMENE)
+        if(var(VAR_MANHUNT_STATE) != SAVED_BEFORE_VIGRIM){
+            setvar(VAR_MANHUNT_STATE,SAVED_BEFORE_VIGRIM)
             startmenu_savescreen
         }
 
@@ -360,7 +360,7 @@ script Manhunt_Encounter_Alcmene_Dialogue {
     {
         case FALSE_TIMELINE_BURN_COMPLETE:
         case FALSE_TIMELINE_NONE_COMPLETE:
-            msgbox(format("Stop hurting people. I'm here."),MSGBOX_NPC,SPEAKER_ALCMENE)
+            msgbox(format("Stop hurting people. I'm here."),MSGBOX_NPC,SPEAKER_VIGRIM)
 
         case FALSE_TIMELINE_HOW_BURN_COMPLETE:
             call(Manhunt_ReactAdaoraKaiArrest_Dialogue)
@@ -369,27 +369,27 @@ script Manhunt_Encounter_Alcmene_Dialogue {
             call(Manhunt_ReactAdaoraArrest_Dialogue)
     }
         closemessage
-        goto(Manhunt_StartAlcmeneBattle_Script)
+        goto(Manhunt_StartVigrimBattle_Script)
 }
 
-script Manhunt_StartAlcmeneBattle_Script
+script Manhunt_StartVigrimBattle_Script
 {
         choose_mons
-        goto_if_eq(VAR_RESULT,0,Manhunt_StartAlcmeneBattle_Script)
-        multi_2_vs_1(TRAINER_ALCMENE,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Resido after all."),PARTNER_STEVEN)
+        goto_if_eq(VAR_RESULT,0,Manhunt_StartVigrimBattle_Script)
+        multi_2_vs_1(TRAINER_VIGRIM,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Resido after all."),PARTNER_STEVEN)
         lock
         faceplayer
-        setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE)
+        setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM)
         addvar(VAR_STORYLINE_STATE,1)
-        startcutscene(JUMPPLAYER_MANHUNT_ALCMENE)
+        startcutscene(JUMPPLAYER_MANHUNT_VIGRIM)
 
-        msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_ALCMENE,TAIL_WHISPER,EMOTE_SAD) //PSF TODO EMOTE sniff
+        msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_VIGRIM,TAIL_WHISPER,EMOTE_SAD) //PSF TODO EMOTE sniff
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
     {
         case FALSE_TIMELINE_HOW_BURN_COMPLETE:
-            msgbox(format("TheTide is finished. The region is yours now."),,SPEAKER_ALCMENE)
+            msgbox(format("TheTide is finished. The region is yours now."),,SPEAKER_VIGRIM)
     }
 
     msgbox(format("I'll call this in."),,SPEAKER_CHARLOTTE_SHARPRISE)

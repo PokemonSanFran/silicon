@@ -297,8 +297,8 @@ const u16 gTrainerFrontPalette_Kai[] = INCBIN_U16("graphics/trainers/front_pics/
 const u32 gTrainerFrontPic_Adaora[] = INCBIN_U32("graphics/trainers/front_pics/adaora.4bpp.smol");
 const u16 gTrainerFrontPalette_Adaora[] = INCBIN_U16("graphics/trainers/front_pics/adaora.gbapal");
 
-const u32 gTrainerFrontPic_Alcmene[] = INCBIN_U32("graphics/trainers/front_pics/alcmene.4bpp.smol");
-const u16 gTrainerFrontPalette_Alcmene[] = INCBIN_U16("graphics/trainers/front_pics/alcmene.gbapal");
+const u32 gTrainerFrontPic_Vigrim[] = INCBIN_U32("graphics/trainers/front_pics/vigrim.4bpp.smol");
+const u16 gTrainerFrontPalette_Vigrim[] = INCBIN_U16("graphics/trainers/front_pics/vigrim.gbapal");
 
 const u32 gTrainerFrontPic_Bd[] = INCBIN_U32("graphics/trainers/front_pics/bd.4bpp.smol");
 const u16 gTrainerFrontPalette_Bd[] = INCBIN_U16("graphics/trainers/front_pics/bd.gbapal");
@@ -498,7 +498,7 @@ const struct TrainerSprite gTrainerSprites[] =
     // Start silicon
     TRAINER_SPRITE(TRAINER_PIC_KAI,gTrainerFrontPic_Kai, gTrainerFrontPalette_Kai),
     TRAINER_SPRITE(TRAINER_PIC_ADAORA,gTrainerFrontPic_Adaora, gTrainerFrontPalette_Adaora),
-    TRAINER_SPRITE(TRAINER_PIC_ALCMENE,gTrainerFrontPic_Alcmene, gTrainerFrontPalette_Alcmene),
+    TRAINER_SPRITE(TRAINER_PIC_VIGRIM,gTrainerFrontPic_Vigrim, gTrainerFrontPalette_Vigrim),
     TRAINER_SPRITE(TRAINER_PIC_BD,gTrainerFrontPic_Bd, gTrainerFrontPalette_Bd),
     TRAINER_SPRITE(TRAINER_PIC_BELEN,gTrainerFrontPic_Belen, gTrainerFrontPalette_Belen),
     TRAINER_SPRITE(TRAINER_PIC_DIMU,gTrainerFrontPic_Dimu, gTrainerFrontPalette_Dimu),

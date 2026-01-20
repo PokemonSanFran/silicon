@@ -44,7 +44,7 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, POST_WOW_YOURE_STRONG: TheGangsAllHere_OliverAppearStairs_Script
         VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_KAI_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
         VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY: HowDisappointing_MissionComplete_Dialogue
-        VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE: Manhunt_MissionComplete_Dialogue
+        VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM: Manhunt_MissionComplete_Dialogue
         VAR_STORYLINE_STATE,STORY_3RD_THETIDE_TAKEDOWN: ExhibitionBattle_CheckMissionProgress_Script
         VAR_STORYLINE_STATE,STORY_THETIDE_FINISHED: ExhibitionBattle_TimeSkip_Script
     ]

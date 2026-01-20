@@ -141,7 +141,7 @@ static void JumpPlayerTo_Manhunt_News(bool32);
 static void JumpPlayerTo_Manhunt_Business(bool32);
 static void JumpPlayerTo_Manhunt_Ball(bool32);
 static void JumpPlayerTo_Manhunt_Route(bool32);
-static void JumpPlayerTo_Manhunt_Alcmene(bool32);
+static void JumpPlayerTo_Manhunt_Vigrim(bool32);
 static void JumpPlayerTo_ExhibitionBattle(bool32);
 static void JumpPlayerTo_MaybeIFuckedUp(bool32);
 static void JumpPlayerTo_OkayLetsFixit(bool32);
@@ -152,7 +152,7 @@ static void JumpPlayerTo_MaskOff_F(bool32);
 static void JumpPlayerTo_MaskOff_I(bool32);
 static void JumpPlayerTo_MaskOff_D(bool32);
 static void JumpPlayerTo_MaskOff_G(bool32);
-static void JumpPlayerTo_MaskOff_Alcmene(bool32);
+static void JumpPlayerTo_MaskOff_Vigrim(bool32);
 static void JumpPlayerTo_LetsFixThis(bool32);
 static void JumpPlayerTo_LockedOut(bool32);
 static void JumpPlayerTo_WarehouseRave(bool32);
@@ -412,8 +412,8 @@ void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
         case JUMPPLAYER_MANHUNT_ROUTE:
             JumpPlayerTo_Manhunt_Route(jumpType);
             break;
-        case JUMPPLAYER_MANHUNT_ALCMENE:
-            JumpPlayerTo_Manhunt_Alcmene(jumpType);
+        case JUMPPLAYER_MANHUNT_VIGRIM:
+            JumpPlayerTo_Manhunt_Vigrim(jumpType);
             break;
         case JUMPPLAYER_EXHIBITIONBATTLE:
             JumpPlayerTo_ExhibitionBattle(jumpType);
@@ -445,8 +445,8 @@ void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
         case JUMPPLAYER_MASKOFF_G:
             JumpPlayerTo_MaskOff_G(jumpType);
             break;
-        case JUMPPLAYER_MASKOFF_ALCMENE:
-            JumpPlayerTo_MaskOff_Alcmene(jumpType);
+        case JUMPPLAYER_MASKOFF_VIGRIM:
+            JumpPlayerTo_MaskOff_Vigrim(jumpType);
             break;
         case JUMPPLAYER_LETSFIXTHIS:
             JumpPlayerTo_LetsFixThis(jumpType);
@@ -2079,24 +2079,24 @@ void JumpPlayerTo_Manhunt_Route(bool32 jumpType)
     FlagsVarWarp_Manhunt_Route();
 }
 
-void FlagsVarWarp_Manhunt_Alcmene()
+void FlagsVarWarp_Manhunt_Vigrim()
 {
     FlagSet(FLAG_VISITED_WISHAAST_LAKE);
     QuestMenu_GetSetQuestState(QUEST_MANHUNT, FLAG_REMOVE_ACTIVE);
     QuestMenu_GetSetQuestState(QUEST_MANHUNT, FLAG_SET_COMPLETED);
     VarSet(VAR_MANHUNT_STATE, MANHUNT_COMPLETE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_ALCMENE);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_VIGRIM);
     IncrementStorylineVariable();
     SetWarpDestination(MAP_GROUP(MAP_SHARPRISE_SPIRE_LEAGUEOPS), MAP_NUM(MAP_SHARPRISE_SPIRE_LEAGUEOPS), NO_WARP_ID, 5,5);
 }
 
-void JumpPlayerTo_Manhunt_Alcmene(bool32 jumpType)
+void JumpPlayerTo_Manhunt_Vigrim(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
         if (VarGet(VAR_STORYLINE_STATE) <= STORY_START_FALSE_TIMELINE)
             JumpPlayerTo_Manhunt_Route(jumpType);
 
-    FlagsVarWarp_Manhunt_Alcmene();
+    FlagsVarWarp_Manhunt_Vigrim();
 }
 
 void FlagsVarWarp_ExhibitionBattle()
@@ -2107,7 +2107,7 @@ void FlagsVarWarp_ExhibitionBattle()
 
 void JumpPlayerTo_CompleteAllTideTakedown(bool32 jumpType)
 {
-    JumpPlayerTo_Manhunt_Alcmene(jumpType);
+    JumpPlayerTo_Manhunt_Vigrim(jumpType);
     JumpPlayerTo_LetsBurnThisMotherDown(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_YouHaveYourOrders(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_HowDisappointing_Arrest(JUMP_CUTSCENE_SKIP);
@@ -2277,19 +2277,19 @@ void JumpPlayerTo_MaskOff_G(bool32 jumpType)
     FlagsVarWarp_MaskOff_G();
 }
 
-void FlagsVarWarp_MaskOff_Alcmene()
+void FlagsVarWarp_MaskOff_Vigrim()
 {
-    VarSet(VAR_MASK_OFF_STATE, DEFEATED_MASK_OFF_ALCMENE);
-    VarSet(VAR_STORYLINE_STATE, STORY_DEFEATED_ALCMENE);
+    VarSet(VAR_MASK_OFF_STATE, DEFEATED_MASK_OFF_VIGRIM);
+    VarSet(VAR_STORYLINE_STATE, STORY_DEFEATED_VIGRIM);
     SetWarpDestination(MAP_GROUP(MAP_WISHAAST_LAKE),MAP_NUM(MAP_WISHAAST_LAKE),NO_WARP_ID,22,26);
 }
 
-void JumpPlayerTo_MaskOff_Alcmene(bool32 jumpType)
+void JumpPlayerTo_MaskOff_Vigrim(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
         JumpPlayerTo_MaskOff_G(jumpType);
 
-    FlagsVarWarp_MaskOff_Alcmene();
+    FlagsVarWarp_MaskOff_Vigrim();
 }
 
 void FlagsVarWarp_LockedOut()
@@ -2302,7 +2302,7 @@ void FlagsVarWarp_LockedOut()
 void JumpPlayerTo_LockedOut(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_MaskOff_Alcmene(jumpType);
+        JumpPlayerTo_MaskOff_Vigrim(jumpType);
 
     FlagsVarWarp_LockedOut();
 }

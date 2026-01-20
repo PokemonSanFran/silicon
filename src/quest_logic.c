@@ -1571,31 +1571,31 @@ void VSGarbodor_ChooseGemBasedOnStarter(void)
 // Cutscene: MaskOff  / Manhunt
 // ***********************************************************************
 
-bool32 MaskOff_ShouldShowAlcmene(void)
+bool32 MaskOff_ShouldShowVigrim(void)
 {
     if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_4)
         return FALSE;
-    if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_ALCMENE)
+    if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_VIGRIM)
         return FALSE;
     return (HasPlayerJoinedTheTide());
 }
 
-bool32 Manhunt_ShouldShowAlcmene(void)
+bool32 Manhunt_ShouldShowVigrim(void)
 {
     if (VarGet(VAR_MANHUNT_STATE) < GOT_MANHUNT_CLUE_4)
         return FALSE;
-    if (VarGet(VAR_MANHUNT_STATE) >= DEFEATED_MANHUNT_ALCMENE)
+    if (VarGet(VAR_MANHUNT_STATE) >= DEFEATED_MANHUNT_VIGRIM)
         return FALSE;
     return (!HasPlayerJoinedTheTide());
 }
 
-bool32 ShouldShowAlcmene(void)
+bool32 ShouldShowVigrim(void)
 {
-    //if on the last stage of "MaskOff", OR the last stage of "Manhunt", OR before the raid on the Naval Base, then show Alcmene. otherwise, hide
-    if (MaskOff_ShouldShowAlcmene())
+    //if on the last stage of "MaskOff", OR the last stage of "Manhunt", OR before the raid on the Naval Base, then show Vigrim. otherwise, hide
+    if (MaskOff_ShouldShowVigrim())
         return TRUE;
 
-    if (Manhunt_ShouldShowAlcmene())
+    if (Manhunt_ShouldShowVigrim())
         return TRUE;
 
     if (VarGet(VAR_STORYLINE_STATE) < STORY_EAST_RESIDO_COMPLETE)

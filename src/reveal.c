@@ -400,10 +400,10 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .bio = COMPOUND_STRING("- Her aura feels like time slows down around her... \n- Does her outfit sparkle? Or is that the lights?"),
         .accentColor = RGB(22,22,9),
     },
-    [REVEAL_ALCMENE] =
+    [REVEAL_VIGRIM] =
     {
-        .trainerId = TRAINER_ALCMENE,
-        .buzzrId = BUZZR_USER_ALCMENE,
+        .trainerId = TRAINER_VIGRIM,
+        .buzzrId = BUZZR_USER_VIGRIM,
         .quote = COMPOUND_STRING("The Tide will defend Resido against all who threaten its citizens."),
         .bio = COMPOUND_STRING("- It's impossible to discern their gender from their voice. \n- They look like they're floating!"),
         .accentColor = RGB(16,2,16),
@@ -445,7 +445,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_ELLEN,
         .buzzrId = BUZZR_USER_ELLEN,
         .quote = COMPOUND_STRING("Those with power have an obligation to do good."),
-        .bio = COMPOUND_STRING("- Somehow, Ellen is shorter than Alcmene.\n- Where did the Alcmene outfit go?"),
+        .bio = COMPOUND_STRING("- Somehow, Ellen is shorter than Vigrim.\n- Where did the Vigrim outfit go?"),
         .accentColor = RGB(28,25,30),
     },
 };

@@ -70,7 +70,7 @@ script YouHaveYourOrders_Assignment_Dialogue
         case FALSE_TIMELINE_BURN_COMPLETE:
           msgbox(format("Not sure, actually. But I'm pretty sure I can handle it."),,SPEAKER_ALICIA)
         case FALSE_TIMELINE_MAN_COMPLETE:
-            msgbox(format("Without Alcmene, whatever this is should be easy, right?"),,SPEAKER_ALICIA)
+            msgbox(format("Without Vigrim, whatever this is should be easy, right?"),,SPEAKER_ALICIA)
         case FALSE_TIMELINE_MAN_BURN_COMPLETE:
             msgbox(format("The work I did with Ramesh and Oliver was... tough. But I know I can handle this. Let's hear it."),,SPEAKER_ALICIA)
       }

@@ -384,7 +384,7 @@ const u8 gText_Quest_LetsBurnThisMotherDown_DoneDesc[] = _("DoneDescription");
 const u8 gText_Quest_LetsBurnThisMotherDown_Map[] = _("Arantraz");
 
 const u8 gText_Quest_Manhunt_Name[] = _("Manhunt.");
-const u8 gText_Quest_Manhunt_Desc[] = _("Start with the newspaper in Perlacia City\n and track down Alcmene!");
+const u8 gText_Quest_Manhunt_Desc[] = _("Start with the newspaper in Perlacia City\n and track down Vigrim!");
 const u8 gText_Quest_Manhunt_DoneDesc[] = _("DoneDescription");
 const u8 gText_Quest_Manhunt_Map[] = _("???");
 

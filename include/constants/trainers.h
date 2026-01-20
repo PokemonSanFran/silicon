@@ -111,7 +111,7 @@
 // Start silicon
 #define TRAINER_PIC_KAI                   93
 #define TRAINER_PIC_ADAORA                94
-#define TRAINER_PIC_ALCMENE               95
+#define TRAINER_PIC_VIGRIM               95
 #define TRAINER_PIC_BD                    96
 #define TRAINER_PIC_BELEN                 97
 #define TRAINER_PIC_DIMU                  98

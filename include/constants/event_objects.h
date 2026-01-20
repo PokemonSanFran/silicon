@@ -250,7 +250,7 @@
 #define OBJ_EVENT_GFX_KAI                          242
 #define OBJ_EVENT_GFX_UNKNOWN                      243
 #define OBJ_EVENT_GFX_ADAORA                       244
-#define OBJ_EVENT_GFX_ALCMENE                      245
+#define OBJ_EVENT_GFX_VIGRIM                      245
 #define OBJ_EVENT_GFX_BD                           246
 #define OBJ_EVENT_GFX_BELEN                        247
 #define OBJ_EVENT_GFX_DIMU                         248
@@ -445,7 +445,7 @@
 #define OBJ_EVENT_PAL_TAG_KAI 0x1125
 #define OBJ_EVENT_PAL_TAG_UNKNOWN 0x1126
 #define OBJ_EVENT_PAL_TAG_ADAORA 0x1127
-#define OBJ_EVENT_PAL_TAG_ALCMENE 0x1128
+#define OBJ_EVENT_PAL_TAG_VIGRIM 0x1128
 #define OBJ_EVENT_PAL_TAG_BD 0x1129
 #define OBJ_EVENT_PAL_TAG_BELEN 0x1130
 #define OBJ_EVENT_PAL_TAG_DIMU 0x1131

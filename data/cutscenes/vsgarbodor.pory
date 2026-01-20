@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const OLIVER = 2
-const ALCMENE = 3
+const VIGRIM = 3
 const ROCKET_A = 4
 const ROCKET_B = 5
 const CROWD_A = 6
@@ -264,7 +264,7 @@ script VSGarbodor_CleanUpPerpWalk {
         removeobject(ROCKET_B)
         removeobject(POLICE_A)
         removeobject(POLICE_B)
-        removeobject(ALCMENE)
+        removeobject(VIGRIM)
 }
 
 script VSGarbodor_Negotiating_Dialogue

@@ -1,7 +1,7 @@
-// Player needs to learn hints B, C, and D to trigger Alcmene appearing at Lake Merrit.
+// Player needs to learn hints B, C, and D to trigger Vigrim appearing at Lake Merrit.
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ALCMENE = 1
+const VIGRIM = 1
 const FLAG_HIDE_ARMANDO = FLAG_TEMP_1
 
 script MaskOff_HideObject_Script
@@ -14,9 +14,9 @@ script MaskOff_HideObject_Script
 
 script MaskOff_TransformObject_Script
 {
-    removeobject(ALCMENE)
+    removeobject(VIGRIM)
     setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_DRAKE)
-    addobject(ALCMENE)
+    addobject(VIGRIM)
 }
 
 script MaskOff_AskAndIncrement_Script
@@ -128,28 +128,28 @@ script MaskOff_QuestE_Dialogue
     closemessage
 }
 
-script MaskOff_Encounter_Alcmene_Dialogue
+script MaskOff_Encounter_Vigrim_Dialogue
 {
     lock
-    setvar(VAR_MASK_OFF_STATE,SAVE_ALCMENE_WISHAAST_LAKE_TRUE)
+    setvar(VAR_MASK_OFF_STATE,SAVE_VIGRIM_WISHAAST_LAKE_TRUE)
     startmenu_savescreen
-    msgbox(format("A surprise, seeing you here, {PLAYER}. I hear you've turned over a new leaf. Let's see if your new found convinction gives you power!"),MSGBOX_NPC,SPEAKER_ALCMENE)
+    msgbox(format("A surprise, seeing you here, {PLAYER}. I hear you've turned over a new leaf. Let's see if your new found convinction gives you power!"),MSGBOX_NPC,SPEAKER_VIGRIM)
     lock
-    trainerbattle_no_intro(TRAINER_ALCMENE,format(""))
+    trainerbattle_no_intro(TRAINER_VIGRIM,format(""))
 
-    setvar(VAR_MASK_OFF_STATE,DEFEATED_MASK_OFF_ALCMENE)
-    setvar(VAR_STORYLINE_STATE,STORY_DEFEATED_ALCMENE)
+    setvar(VAR_MASK_OFF_STATE,DEFEATED_MASK_OFF_VIGRIM)
+    setvar(VAR_STORYLINE_STATE,STORY_DEFEATED_VIGRIM)
     goto(MaskOff_PostBattle_Dialogue)
 }
 
 script MaskOff_PostBattle_Dialogue
 {
-    startcutscene(JUMPPLAYER_MASKOFF_ALCMENE)
-    msgbox(format("You’ve made incredible progress since we last battled. But of course, you’re the Champion, {PLAYER}. TheTide is lucky to have another powerful ally."),,SPEAKER_ALCMENE,TAIL_TALK)
+    startcutscene(JUMPPLAYER_MASKOFF_VIGRIM)
+    msgbox(format("You’ve made incredible progress since we last battled. But of course, you’re the Champion, {PLAYER}. TheTide is lucky to have another powerful ally."),,SPEAKER_VIGRIM,TAIL_TALK)
     msgbox(format("Thank you! It’s nice to not get crushed as easily anymore… wait! I was following a lead looking for Ellen. I think they train around here, and I want to try to convince them to work with us."),,SPEAKER_ALICIA)
-    msgbox(format("You won’t need to do much convincing, actually."),,SPEAKER_ALCMENE)
+    msgbox(format("You won’t need to do much convincing, actually."),,SPEAKER_VIGRIM)
     msgbox(format("What do you mean?"),,SPEAKER_ALICIA)
-    msgbox(format("Allow me to re-introduce myself. I am the leader of TheTide, member of the Elite Four,"),,SPEAKER_ALCMENE)
+    msgbox(format("Allow me to re-introduce myself. I am the leader of TheTide, member of the Elite Four,"),,SPEAKER_VIGRIM)
     closemessage
 
     fadescreen(FADE_TO_BLACK)
@@ -166,8 +166,8 @@ script MaskOff_PostBattle_Dialogue
     waitmovement(PLAYER)
 
     msgbox(format("I formed TheTide as a response to SharpRise Capital’s growing influence over the region a few years ago. "),,SPEAKER_ELLEN)
-    msgbox(format("But why go into hiding as Alcmene?"),,SPEAKER_ALICIA)
-    msgbox(format("I hid my identity because I was worried about my influence diluting the message. If people could unite under a symbol like Alcmene, then in theory, anybody could lead TheTide if something happened to me. And if the Elite Four wasn’t directly connected to TheTide, then they couldn’t retaliate against the others."),,SPEAKER_ELLEN)
+    msgbox(format("But why go into hiding as Vigrim?"),,SPEAKER_ALICIA)
+    msgbox(format("I hid my identity because I was worried about my influence diluting the message. If people could unite under a symbol like Vigrim, then in theory, anybody could lead TheTide if something happened to me. And if the Elite Four wasn’t directly connected to TheTide, then they couldn’t retaliate against the others."),,SPEAKER_ELLEN)
     msgbox(format("Things are… a little different now. I met with Kai…"),,SPEAKER_ALICIA)
 
     closemessage
@@ -188,9 +188,9 @@ script MaskOff_PostBattle_Dialogue
 
 script MaskOff_End_Dialogue
 {
-    applymovement(ALCMENE, moves(walk_up * 7, step_end))
-    waitmovement(ALCMENE)
-    removeobject(ALCMENE)
+    applymovement(VIGRIM, moves(walk_up * 7, step_end))
+    waitmovement(VIGRIM)
+    removeobject(VIGRIM)
     call(TryAutoSave)
     endcutscene
     release

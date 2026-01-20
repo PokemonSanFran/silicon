@@ -532,7 +532,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_KaiNormal,             OBJ_EVENT_PAL_TAG_KAI},
     {gObjectEventPal_UnknownNormal,         OBJ_EVENT_PAL_TAG_UNKNOWN},
     {gObjectEventPal_AdaoraWalking,         OBJ_EVENT_PAL_TAG_ADAORA},
-    {gObjectEventPal_AlcmeneWalking,        OBJ_EVENT_PAL_TAG_ALCMENE},
+    {gObjectEventPal_VigrimWalking,        OBJ_EVENT_PAL_TAG_VIGRIM},
     {gObjectEventPal_BdWalking,             OBJ_EVENT_PAL_TAG_BD},
     {gObjectEventPal_BelenWalking,          OBJ_EVENT_PAL_TAG_BELEN},
     {gObjectEventPal_DimuWalking,           OBJ_EVENT_PAL_TAG_DIMU},

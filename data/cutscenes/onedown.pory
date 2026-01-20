@@ -5,7 +5,7 @@ const TALA = 3
 const MAGNUS = 2
 const ARMANDO = 6
 const ELLEN = 5
-const ALCMENE = 7
+const VIGRIM = 7
 const ADAORA = 8
 const GRUNTA = 9
 const GRUNTB = 10
@@ -29,12 +29,12 @@ script OneDown_SetUpObject_Script {
 
 script OneDown_StartCutscene_Script {
         startcutscene(JUMPPLAYER_ONEDOWN)
-    //PSF TODO Adaora should now begin using Alcmene's theme as her character theme instead of the generic The Tide one
+    //PSF TODO Adaora should now begin using Vigrim's theme as her character theme instead of the generic The Tide one
         msgbox(format("I just got filled in… that was absolutely incredible!"),,SPEAKER_ADAORA)
 
         msgbox(format("Thanks. And you've been an awesome leader too. These people love you."),,SPEAKER_ALICIA)
 
-        msgbox(format("I didn't think I had it in me, to be honest. Ell- Alcmene knew better, I guess."),,SPEAKER_ADAORA)
+        msgbox(format("I didn't think I had it in me, to be honest. Ell- Vigrim knew better, I guess."),,SPEAKER_ADAORA)
 
         closemessage
 

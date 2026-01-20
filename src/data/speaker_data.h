@@ -38,8 +38,8 @@ static const u16 sSpeakerPal_Belen[]  = INCBIN_U16("graphics/ui_menus/msgbox/cha
 static const u32 gSpeakerIcon_Fisherman[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/fisherman.4bpp");
 static const u16 sSpeakerPal_Fisherman[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/fisherman.gbapal");
 
-static const u32 gSpeakerIcon_Alcmene[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/alcmene.4bpp");
-static const u16 sSpeakerPal_Alcmene[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/alcmene.gbapal");
+static const u32 gSpeakerIcon_Vigrim[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/vigrim.4bpp");
+static const u16 sSpeakerPal_Vigrim[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/vigrim.gbapal");
 
 static const u32 gSpeakerIcon_Girl[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/girl.4bpp");
 static const u16 sSpeakerPal_Girl[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/girl.gbapal");
@@ -329,21 +329,21 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
-    [SPEAKER_ALCMENE] =
+    [SPEAKER_VIGRIM] =
     {
-        .name = _("Alcmene"),
+        .name = _("Vigrim"),
         .title = _("Tide Leader"),
         .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Alcmene,
-        .speakerPal = sSpeakerPal_Alcmene,
+        .speakerIcon = gSpeakerIcon_Vigrim,
+        .speakerPal = sSpeakerPal_Vigrim,
     },
-    [SPEAKER_ALCMENE_UNKNOWN] =
+    [SPEAKER_VIGRIM_UNKNOWN] =
     {
         .name = _("???"),
         .title = _("???"),
         .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Alcmene,
-        .speakerPal = sSpeakerPal_Alcmene,
+        .speakerIcon = gSpeakerIcon_Vigrim,
+        .speakerPal = sSpeakerPal_Vigrim,
     },
     [SPEAKER_GIRL] =
     {

@@ -1,12 +1,12 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const ADAORA = 2
-const ALCMENE = 3
+const VIGRIM = 3
 const KAI = 4
 const PKMNA = 5
 const PKMNB = 6
 const FLAG_HIDE_POLICE = FLAG_TEMP_1
-const FLAG_HIDE_ALCMENE_ADAORA = FLAG_TEMP_2
+const FLAG_HIDE_VIGRIM_ADAORA = FLAG_TEMP_2
 const FLAG_HIDE_KAI = FLAG_TEMP_3
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_4
 
@@ -17,7 +17,7 @@ script WhyAreYouHelpingThem_HideObject_Script {
 script WhyAreYouHelpingThem_ObjectCleanUp_Script {
     setflag(FLAG_HIDE_CHARLOTTE)
     setflag(FLAG_HIDE_KAI)
-    setflag(FLAG_HIDE_ALCMENE_ADAORA)
+    setflag(FLAG_HIDE_VIGRIM_ADAORA)
     setflag(FLAG_HIDE_POLICE)
 }
 
@@ -31,12 +31,12 @@ script WhyAreYouHelpingThem_MoveObject_Script {
 script WhyAreYouHelpingThem_MoveObjectBoss_Script {
     setobjectxy(CHARLOTTE,2,16)
     setobjectxyperm(CHARLOTTE,2,16)
-    setobjectxy(ALCMENE,7,3)
-    setobjectxyperm(ALCMENE,7,3)
+    setobjectxy(VIGRIM,7,3)
+    setobjectxyperm(VIGRIM,7,3)
 }
 
 script WhyAreYouHelpingThem_MoveObjectAdaora_Script {
-    setflag(FLAG_HIDE_ALCMENE_ADAORA)
+    setflag(FLAG_HIDE_VIGRIM_ADAORA)
     setobjectxy(ADAORA,1,9)
     setobjectxyperm(ADAORA,1,9)
     setobjectxy(CHARLOTTE,2,16)
@@ -51,7 +51,7 @@ script WhyAreYouHelpingThem_BlowHoleWall {
 
 script WhyAreYouHelpingThem_ObjectSetUpPostSave_Script {
     setflag(FLAG_HIDE_POLICE)
-    setflag(FLAG_HIDE_ALCMENE_ADAORA)
+    setflag(FLAG_HIDE_VIGRIM_ADAORA)
     setobjectxy(KAI,6,3)
     setobjectxyperm(KAI,6,3)
     turnobject(KAI,DIR_WEST)
@@ -74,7 +74,7 @@ script WhyAreYouHelpingThem_ObjectDebriefSetUp_Script {
 
 script WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script {
     clearflag(FLAG_HIDE_POLICE)
-    clearflag(FLAG_HIDE_ALCMENE_ADAORA)
+    clearflag(FLAG_HIDE_VIGRIM_ADAORA)
     setflag(FLAG_HIDE_KAI)
 
     setobjectxy(1,6,6)
@@ -127,13 +127,13 @@ script WhyAreYouHelpingThem_StartRaid {
 }
 
 script WhyAreYouHelpingThem_WitnessBattle {
-    setvar(VAR_NAVAL_BASE_STATE,CHASE_ALCMENE)
+    setvar(VAR_NAVAL_BASE_STATE,CHASE_VIGRIM)
         lock
-        applymovement(ALCMENE, moves(walk_up * 4, step_end))
+        applymovement(VIGRIM, moves(walk_up * 4, step_end))
         waitmovement(0)
         call(WhyAreYouHelpingThem_MoveObjectBoss_Script)
 
-        msgbox(format("Go after Alcmene! I'll hold this one off."),,SPEAKER_CHARLOTTE)
+        msgbox(format("Go after Vigrim! I'll hold this one off."),,SPEAKER_CHARLOTTE)
 
         closemessage
         release
@@ -142,21 +142,21 @@ script WhyAreYouHelpingThem_WitnessBattle {
 
 script WhyAreYouHelpingThem_PreBattleBoss_Script {
     lock
-        applymovement(ALCMENE,Common_Movement_FaceLeft)
+        applymovement(VIGRIM,Common_Movement_FaceLeft)
         applymovement(PLAYER, moves(walk_up * 2, walk_right * 4, step_end))
         waitmovement(0)
-        msgbox(format("It's a shame that the cops have totally infiltrated our youth. "),,SPEAKER_ALCMENE)
+        msgbox(format("It's a shame that the cops have totally infiltrated our youth. "),,SPEAKER_VIGRIM)
 
         closemessage
 
-        applymovement(ALCMENE,Common_Movement_WalkLeft)
+        applymovement(VIGRIM,Common_Movement_WalkLeft)
         waitmovement(0)
 
-        msgbox(format("But beating you is going to be the best route out of here."),,SPEAKER_ALCMENE)
+        msgbox(format("But beating you is going to be the best route out of here."),,SPEAKER_VIGRIM)
 
         closemessage
 
-        trainerbattle_continue_after_lose(TRAINER_ALCMENE,format("Wait a minute…"))
+        trainerbattle_continue_after_lose(TRAINER_VIGRIM,format("Wait a minute…"))
         goto(WhyAreYouHelpingThem_PostBattleBoss_Dialogue)
 }
 
@@ -165,12 +165,12 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
         addobject(ADAORA)
         call(WhyAreYouHelpingThem_MoveObjectAdaora_Script)
 
-        if (defeated(TRAINER_ALCMENE)){
+        if (defeated(TRAINER_VIGRIM)){
 
-                msgbox(format("You're incredible. Or a cheater. Can't quite tell. Either way, you can have this."),,SPEAKER_ALCMENE)
+                msgbox(format("You're incredible. Or a cheater. Can't quite tell. Either way, you can have this."),,SPEAKER_VIGRIM)
                 closemessage
 
-                applymovement(ALCMENE,Common_Movement_WalkInPlaceLeft)
+                applymovement(VIGRIM,Common_Movement_WalkInPlaceLeft)
                 waitmovement(0)
                 giveitem(ITEM_MASTER_BALL,1)
 
@@ -179,12 +179,12 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
                 msgbox(format("…I didn't even touch them…"),,SPEAKER_ALICIA)
         }
 
-        msgbox(format("I'm sorry you have to experience this. I hope you eventually understand what's at stake here, {PLAYER}. Let me help you."),,SPEAKER_ALCMENE)
+        msgbox(format("I'm sorry you have to experience this. I hope you eventually understand what's at stake here, {PLAYER}. Let me help you."),,SPEAKER_VIGRIM)
 
         closemessage
 
         applymovement(ADAORA, moves(walk_up * 4, walk_right * 5, walk_up, step_end))
-        applymovement(ALCMENE, moves(walk_in_place_slow_left, delay_16, delay_16, face_down, step_end))
+        applymovement(VIGRIM, moves(walk_in_place_slow_left, delay_16, delay_16, face_down, step_end))
         waitmovement(0)
         call(Common_EventScript_OutOfCenterPartyBypassHeal)
 
@@ -201,11 +201,11 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 
         msgbox(format("What was all that shit you tried to tell me before?! What the hell is TheTide doing?"),,SPEAKER_ALICIA)
 
-        msgbox(format("We've got to help more comrades escape. Another time."),,SPEAKER_ALCMENE)
+        msgbox(format("We've got to help more comrades escape. Another time."),,SPEAKER_VIGRIM)
 
         closemessage
 
-        applymovement(ALCMENE,WhyAreYouHelpingThem_BeginEscape)
+        applymovement(VIGRIM,WhyAreYouHelpingThem_BeginEscape)
         applymovement(ADAORA,WhyAreYouHelpingThem_BeginEscape)
         waitmovement(0)
         goto(WhyAreYouHelpingThem_ExplodeWall_Script)
@@ -231,20 +231,20 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
 
         msgbox(format("This place is swarming with cops. You two need to get the hell out, right now. This goes straight out."),,SPEAKER_KAI_TIDE)
 
-        msgbox(format("We can't leave people behind. "),,SPEAKER_ALCMENE)
+        msgbox(format("We can't leave people behind. "),,SPEAKER_VIGRIM)
 
         msgbox(format("We don't have time for this! If you get arrested, this all falls apart! You. Need. To. Go."),,SPEAKER_KAI_TIDE)
 
         msgbox(format("I think they're right."),,SPEAKER_ADAORA)
 
         closemessage
-        applymovement(ALCMENE, moves(walk_right * 3, walk_up * 2, step_end))
+        applymovement(VIGRIM, moves(walk_right * 3, walk_up * 2, step_end))
         applymovement(ADAORA, moves(walk_right * 3, walk_up * 3, step_end))
         waitmovement(0)
         playse(SE_EXIT)
         waitse
         removeobject(ADAORA)
-        removeobject(ALCMENE)
+        removeobject(VIGRIM)
         applymovement(KAI, moves(walk_down, walk_left * 3, step_end))
         waitmovement(0)
 
@@ -290,7 +290,7 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue {
         applymovement(CHARLOTTE, moves(walk_up * 5, walk_right * 3, step_end))
         waitmovement(0)
 
-        msgbox(format("I got knocked out. Did you stop Alcmene?"),,SPEAKER_CHARLOTTE)
+        msgbox(format("I got knocked out. Did you stop Vigrim?"),,SPEAKER_CHARLOTTE)
 
         msgbox(format("No, I lost too."),,SPEAKER_ALICIA)
 
@@ -313,7 +313,7 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
         applymovement(6,Common_Movement_WalkUp)
         waitmovement(0)
 
-        msgbox(format("We spotted Alcmene and their lieutenant escaping on Pokemon by using the move Fly. We were unable to track them given our resources."))
+        msgbox(format("We spotted Vigrim and their lieutenant escaping on Pokemon by using the move Fly. We were unable to track them given our resources."))
         closemessage
 
         applymovement(6, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))

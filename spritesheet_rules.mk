@@ -5043,10 +5043,10 @@ $(OBJEVENTGFXDIR)/people/adaora/running.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/adaora/walking.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/alcmene/running.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/vigrim/running.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/alcmene/walking.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/vigrim/walking.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/bd.4bpp: %.4bpp: %.png

@@ -84,7 +84,7 @@ script WhyDidntYouRatMeOut_ConversationInStands {
 
         msgbox(format("No, you look. I think you feel like you need to fight here. I'm just here for me. And... I don't think it's my place to take that from you. Not like that."),,SPEAKER_ALICIA)
 
-        msgbox(format("(Adaora and Kai... even Alcmene was nice to me. What am I missing?)"),,SPEAKER_ALICIA)
+        msgbox(format("(Adaora and Kai... even Vigrim was nice to me. What am I missing?)"),,SPEAKER_ALICIA)
 
         msgbox(format("...Thank you. And I'm sorry I've been such an ass to you. You don't deserve that."),,SPEAKER_KAI_TIDE)
 

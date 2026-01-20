@@ -1596,9 +1596,9 @@ const struct SpriteFrameImage gObjectEventPicTable_AdaoraWalking[] =
     overworld_ascending_frames(gObjectEventPic_AdaoraWalking,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_AlcmeneWalking[] =
+const struct SpriteFrameImage gObjectEventPicTable_VigrimWalking[] =
 {
-    overworld_ascending_frames(gObjectEventPic_AlcmeneWalking,4,4),
+    overworld_ascending_frames(gObjectEventPic_VigrimWalking,4,4),
 };
 
 const struct SpriteFrameImage gObjectEventPicTable_BdWalking[] =

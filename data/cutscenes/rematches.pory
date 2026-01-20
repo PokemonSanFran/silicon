@@ -24,7 +24,7 @@ script Rematches_Dialogue_FirstEllenTalk
 	msgbox(format("Now that I think about it... we've never battled before."),,SPEAKER_ELLEN)
 	msgbox(format("Huh? Didn't we battle twice?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 	msgbox(format("Actually, three times!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-	msgbox(format("You battled against Alcmene, yes.\pBut I would like to battle you as Ellen, a member of the Elite Four."),,SPEAKER_ELLEN)
+	msgbox(format("You battled against Vigrim, yes.\pBut I would like to battle you as Ellen, a member of the Elite Four."),,SPEAKER_ELLEN)
 	goto(Rematches_Script_AskEllenBattle)
 }
 

@@ -138,9 +138,9 @@ script LetsBurnThisMotherDown_ConfrontPlayer
 
         case FALSE_TIMELINE_MAN_COMPLETE:
 
-            msgbox(format("The Tide isn't going to survive without Alcmene. This is a sinking ship, Kai."),,SPEAKER_ALICIA)
+            msgbox(format("The Tide isn't going to survive without Vigrim. This is a sinking ship, Kai."),,SPEAKER_ALICIA)
 
-            msgbox(format("What a stupid thing to say, {PLAYER}. Saving Resido from you goes beyond Alcmene. Even if you take her down there's hundreds of us to take up the cause."),,SPEAKER_ALICIA)
+            msgbox(format("What a stupid thing to say, {PLAYER}. Saving Resido from you goes beyond Vigrim. Even if you take her down there's hundreds of us to take up the cause."),,SPEAKER_ALICIA)
 
             msgbox(format("From ME?!?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
     }

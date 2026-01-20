@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const ADAORA = 2
-const ALCMENE = 3
+const VIGRIM = 3
 const KAI = 4
 const PKMNA = 5
 const PKMNB = 6
@@ -11,7 +11,7 @@ mapscripts NavalBase_MapScripts {
         call(Navalbase_Object_Setup_Script)
     }
     MAP_SCRIPT_ON_LOAD {
-        if (var(VAR_NAVAL_BASE_STATE) > CHASE_ALCMENE){
+        if (var(VAR_NAVAL_BASE_STATE) > CHASE_VIGRIM){
             call(WhyAreYouHelpingThem_BlowHoleWall)
         }
     }

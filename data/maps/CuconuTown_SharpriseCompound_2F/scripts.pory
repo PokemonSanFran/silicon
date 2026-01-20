@@ -66,7 +66,7 @@ script BedScript_AdvanceStory_Script{
         case STORY_COMPLETED_NAVAL_BASE: call(WhyAreYouHelpingThem_StartChampionship_Dialogue)
         case STORY_POST_YOU_REALIZE_WERE_EVIL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)
         case STORY_MORNING_AFTER_TIMETRAVEL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)
-        case STORY_DEFEATED_ALCMENE: goto(LetsFixThis_EliteVideo_Dialogue)
+        case STORY_DEFEATED_VIGRIM: goto(LetsFixThis_EliteVideo_Dialogue)
         case STORY_PRE_EARTHQUAKE: goto(Earthquake_ThatNight_Dialogue)
         default:
     }

@@ -80,7 +80,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
                 return gText_PlayersAdventure_Flavor35;
         case STORY_RECIVED_RAVE_INVITE:
             return gText_PlayersAdventure_Flavor35;
-        case STORY_DEFEATED_ALCMENE:
+        case STORY_DEFEATED_VIGRIM:
             return gText_PlayersAdventure_Flavor34A;
         case STORY_START_TRUE_TIMELINE:
             return gText_PlayersAdventure_Flavor34;

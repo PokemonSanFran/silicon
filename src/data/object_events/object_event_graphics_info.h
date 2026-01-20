@@ -5319,9 +5319,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlcmeneWalking = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigrimWalking = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_ALCMENE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_VIGRIM,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -5334,7 +5334,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlcmeneWalking = {
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_BrendanMayNormal,
-    .images = gObjectEventPicTable_AlcmeneWalking,
+    .images = gObjectEventPicTable_VigrimWalking,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

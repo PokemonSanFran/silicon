@@ -2401,14 +2401,14 @@
         },
     },
 #line 1088
-    [DIFFICULTY_NORMAL][TRAINER_ALCMENE] =
+    [DIFFICULTY_NORMAL][TRAINER_VIGRIM] =
     {
 #line 1089
-        .trainerName = _("Alcmene"),
+        .trainerName = _("Vigrim"),
 #line 1094
         .trainerClass = TRAINER_CLASS_THE_TIDE_LEADER,
 #line 1090
-        .trainerPic = TRAINER_PIC_ALCMENE,
+        .trainerPic = TRAINER_PIC_VIGRIM,
         .encounterMusic_gender =
 0,
 #line 1092
@@ -2416,15 +2416,15 @@
 #line 1091
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 1093
-        .characterRevealId = REVEAL_ALCMENE,
+        .characterRevealId = REVEAL_VIGRIM,
 #line 1095
         .trainerType = GLASS_TRAINER_TYPE_BOSS,
 #line 1096
-        .objectEventGraphicsId = OBJ_EVENT_GFX_ALCMENE,
+        .objectEventGraphicsId = OBJ_EVENT_GFX_VIGRIM,
 #line 1097
         .mapSec = MAPSEC_NAVAL_BASE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ALCMENE,
+        .trainerBackPic = TRAINER_PIC_VIGRIM,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {

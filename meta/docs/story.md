@@ -285,9 +285,9 @@ All the cutscenes in Act 2.2 occur in the order listed here.
 * Lucrezia asks the player to come to Route2, where the SharpriseStadium Construction site is.
 * As Alicia arrives, Oliver and Charlotte are there, waiting for Alicia.
 * Oliver begins to explain the situation, when a masked and hooded figure appears before the crowd, flanked by TheTide member.
-* They introduce themselves as Alcmene, and are the leader of TheTide.
+* They introduce themselves as Vigrim, and are the leader of TheTide.
 * They make it clear that they are indeed working with the construction workers and are responsible for the strike, but are hoping to reach an agreement with the government.
-* Alcmene leaves.
+* Vigrim leaves.
 
 ## VS Garbodor
 * Oliver explains that the strike is a cover for TheTide's real plan - they've planted exploding Pokémon at the base of the structure, and are looking to blow it up. 
@@ -351,15 +351,15 @@ All the cutscenes in Act 3.3 occur in the order listed here.
 * The police blow open the side of a building and rush in, storming the headquarters.
 * Alicia and Charlotte split up and begin battling TheTide members in an attempt to shut the hack down.
 * The hackers are discovered and disabled, but the police go further, hoping to arrest leadership.
-* Alicia discovers Charlotte battling with Adaora, but Charlotte tells them that Alcmene is up ahead.
+* Alicia discovers Charlotte battling with Adaora, but Charlotte tells them that Vigrim is up ahead.
 
 ## Why Are You Helping Them?
-* Alicia catches up the Alcmene, but Alcmene easily defeats Alicia in battle.
-* Adaora catches up to them, having defeated Charlotte. Alcmene heals Alicia's Pokémon.
-* Kai blows through another wall, urging Adaora and Alcmene to escape as the police close in.
-* Kai reveals he has always worked with The Tide and battles Alicia to stall while Alcmene and Kai escape.
+* Alicia catches up the Vigrim, but Vigrim easily defeats Alicia in battle.
+* Adaora catches up to them, having defeated Charlotte. Vigrim heals Alicia's Pokémon.
+* Kai blows through another wall, urging Adaora and Vigrim to escape as the police close in.
+* Kai reveals he has always worked with The Tide and battles Alicia to stall while Vigrim and Kai escape.
 * Alicia defeats Kai, but is distracted as Charlotte finally catches up to them. Kai escapes in the confusion, undetected.
-* Lots of TheTide members are arrested, but Alcmene and Adaora escape.
+* Lots of TheTide members are arrested, but Vigrim and Adaora escape.
 * At the SharpriseCapital Compound, Oliver informs Alicia and Charlotte that the League Championship would be starting tomorrow.
 * The game progresses after the player goes to sleep.
 
@@ -415,7 +415,7 @@ All the cutscenes in Act 4.1 occur in the order listed here.
 * Kai invites Alicia to lunch.
 * Kai explains their plan to take the Gyms that were previously shut down by the SharpriseCapital and turn them into training facilities for Residotrainers to help build up the skill in the region outside of SharpriseCapital's structures.
 * Alicia is surprisingly interested and agrees to help.
-* Kai explains that HodouCity, EspuleeOutskirts and ZenzuIsland all have Gyms that can be started on, while Kai themselves is going to try to get Alcmene and Adaora on board.
+* Kai explains that HodouCity, EspuleeOutskirts and ZenzuIsland all have Gyms that can be started on, while Kai themselves is going to try to get Vigrim and Adaora on board.
 
 # ACT 4.2
 The player can choose one of these quests to complete. After completing one of them, the game progresses to Act 4.3. The player can choose to come back and complete more quests.
@@ -511,12 +511,12 @@ Access to this cutscene is blocked until after "Congrats, You're an Asshole".
 ## Manhunt.
 Access to this cutscene is blocked until after "Congrats, You're an Asshole".
 * Alicia talks to Ramesh. 
-* Ramesh wants to track down Alcmene and have them arrested.
+* Ramesh wants to track down Vigrim and have them arrested.
 * Ramesh gives Alicia a lead at the local newspaper.
-* Alicia and Charlotte travel around the region, attacking people who refuse to give up more information on Alcmene.
-* Alcmene gets word and sends Alicia and Charlotte a message to meet them at WishaastLake, and to stop hurting innocent people.
-* Alcmene battles the pair and loses.
-* Alcmene surrenders, and realizes that The Tide is finished.
+* Alicia and Charlotte travel around the region, attacking people who refuse to give up more information on Vigrim.
+* Vigrim gets word and sends Alicia and Charlotte a message to meet them at WishaastLake, and to stop hurting innocent people.
+* Vigrim battles the pair and loses.
+* Vigrim surrenders, and realizes that The Tide is finished.
 
 ## Exhibition Battle!
 Access to this cutscene is blocked until after "How Disappointing", "Let's Burn This Mother Down", and "Manhunt". This cutscene immediately plays after those three are completed.
@@ -546,14 +546,14 @@ All the cutscenes in Act 5 True occur in the order listed here, unless otherwise
 ## Let's Get the Band Back Together.
 * Alicia goes to Arantraz and tells Kai they want to help expose SharpriseCapital.
 * Kai wants to start by finding the missing member of the Elite Four, Ellen, and unite with them to create a public show of force.
-* Kai splits up with Alicia but gives Alicia a lead to start on to find Alcmene.
+* Kai splits up with Alicia but gives Alicia a lead to start on to find Vigrim.
 
 ## Mask Off!
 *  Alicia travels around the region, talking to citizens and following clues until they end up at WishaastLake.
-* They run into Alcmene at WishaastLake, who has heard that Alicia is sympathetic to their cause.
-* Alcmene challenges Alicia to a friendly battle, which Alicia wins.
+* They run into Vigrim at WishaastLake, who has heard that Alicia is sympathetic to their cause.
+* Vigrim challenges Alicia to a friendly battle, which Alicia wins.
 * Alicia explains they were actually looking for Ellen, and explains Kai's plan.
-* Alcmene says they might be able to help, and unmasks, revealing themselves to be Ellen, the last Elite Four member.
+* Vigrim says they might be able to help, and unmasks, revealing themselves to be Ellen, the last Elite Four member.
 * Ellen explains that they started TheTide to push back after they saw a losing battle - they knew that change had to come from the outside, not within the League structure.
 * Ellen leaves to talk to the other Elite Four members and make amends, but warns Alicia that things will never be the same.
 
@@ -585,9 +585,9 @@ The game resumes after the player goes to sleep at Kai's home.
 ## Speech! Speech! Speech!
 This cutscene can be played before Warehouse Rave.
 * The bottom floor of Arantraz has all the remaining TheTide members.
-* Alcmene addresses the crowd, announcing that they will be stepping down from TheTide, effectively immediately.
-* Alcmene says that Adaora will be taking over as head of TheTide, and Alcmene is taking a leave of absence.
-* Alcmene walks behind a curtain and the Elite Four walk out from the behind a curtain, explaining that they are joining forces with TheTide to finally hit SharpriseCapital where it hurts. The crowd goes wild.
+* Vigrim addresses the crowd, announcing that they will be stepping down from TheTide, effectively immediately.
+* Vigrim says that Adaora will be taking over as head of TheTide, and Vigrim is taking a leave of absence.
+* Vigrim walks behind a curtain and the Elite Four walk out from the behind a curtain, explaining that they are joining forces with TheTide to finally hit SharpriseCapital where it hurts. The crowd goes wild.
 * An earthquake breaks out, but nobody is harmed.
 * Adaora resumes their speech, explaining that TheTide will be running interference campaigns against Buzzr, Arriba and Facebook.
     * By disrupting the companies operations (and therefore bottom line) they can begin to weaken SharpriseCapital where it actually matters.

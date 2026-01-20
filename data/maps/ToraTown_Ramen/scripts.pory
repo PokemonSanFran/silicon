@@ -9,7 +9,7 @@ script ToraTown_Ramen_InteractFanny_Event_Script {
             case NOT_ASSIGNED:
             case ASSIGNED_MASK_OFF:
             case GOT_MASK_OFF_CLUE_1:
-            case DEFEATED_MASK_OFF_ALCMENE: return
+            case DEFEATED_MASK_OFF_VIGRIM: return
             default: call(MaskOff_QuestI_Dialogue)
         }
     release

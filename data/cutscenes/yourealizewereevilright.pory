@@ -104,7 +104,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
         applymovement(OLIVER, moves(walk_left, walk_up, walk_down * 2, walk_up, face_right))
         waitmovement(OLIVER)
 
-        msgbox(format("Why do you think Alcmene hides behind a mask? It's because they know their operation is completely illegal!"),,SPEAKER_OLIVER)
+        msgbox(format("Why do you think Vigrim hides behind a mask? It's because they know their operation is completely illegal!"),,SPEAKER_OLIVER)
 
         msgbox(format("Precisely. If The Tide was acting in good faith, they'd work with us, no masks, no subterfuge."),,SPEAKER_OLIVER)
 

@@ -268,7 +268,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlcmeneWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigrimWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BdWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BelenWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DimuWalking;
@@ -573,7 +573,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_KAI] =                      &gObjectEventGraphicsInfo_KaiNormal,
     [OBJ_EVENT_GFX_UNKNOWN] =                  &gObjectEventGraphicsInfo_UnknownNormal,
     [OBJ_EVENT_GFX_ADAORA] =                   &gObjectEventGraphicsInfo_AdaoraWalking,
-    [OBJ_EVENT_GFX_ALCMENE] =                  &gObjectEventGraphicsInfo_AlcmeneWalking,
+    [OBJ_EVENT_GFX_VIGRIM] =                  &gObjectEventGraphicsInfo_VigrimWalking,
     [OBJ_EVENT_GFX_BD] =                       &gObjectEventGraphicsInfo_BdWalking,
     [OBJ_EVENT_GFX_BELEN] =                    &gObjectEventGraphicsInfo_BelenWalking,
     [OBJ_EVENT_GFX_DIMU] =                     &gObjectEventGraphicsInfo_DimuWalking,

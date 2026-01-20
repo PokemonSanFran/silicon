@@ -439,8 +439,8 @@ const u32 gObjectEventPic_AdaoraFainted[] = INCBIN_U32("graphics/object_events/p
 const u32 gObjectEventPic_AdaoraWalking[] = INCBIN_U32("graphics/object_events/pics/people/adaora/walking.4bpp", "graphics/object_events/pics/people/adaora/running.4bpp");
 const u16 gObjectEventPal_AdaoraWalking[] = INCBIN_U16("graphics/object_events/palettes/adaora.gbapal");
 
-const u32 gObjectEventPic_AlcmeneWalking[] = INCBIN_U32("graphics/object_events/pics/people/alcmene/walking.4bpp", "graphics/object_events/pics/people/alcmene/running.4bpp");
-const u16 gObjectEventPal_AlcmeneWalking[] = INCBIN_U16("graphics/object_events/palettes/alcmene.gbapal");
+const u32 gObjectEventPic_VigrimWalking[] = INCBIN_U32("graphics/object_events/pics/people/vigrim/walking.4bpp", "graphics/object_events/pics/people/vigrim/running.4bpp");
+const u16 gObjectEventPal_VigrimWalking[] = INCBIN_U16("graphics/object_events/palettes/vigrim.gbapal");
 
 const u32 gObjectEventPic_BdWalking[] = INCBIN_U32("graphics/object_events/pics/people/bd.4bpp");
 const u16 gObjectEventPal_BdWalking[] = INCBIN_U16("graphics/object_events/palettes/bd.gbapal");
