@@ -1,7 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const KAUNA = 6
 const FLAG_HIDE_KAUNA = FLAG_TEMP_6
-//gText_Hang20_
 //Quest_Hang20_
 
 script Quest_Hang20_ResetCount_Script
@@ -140,85 +139,3 @@ movement Quest_Hang20_SurfAway_Movement
     step_end
 }
 
-text gText_Hang20_HeyYouNewHere
-{
-    format("Yoooo {PLAYER}, right? You're not Resido born, right?")
-}
-text gText_Hang20_YeahOrre
-{
-    format("Yeah, I'm from Orre.")
-}
-text gText_Hang20_OhDamnThatsLandLocked
-{
-    format("Oh damn, that's land locked, right?")
-}
-text gText_Hang20_WereTouchingTheSea
-{
-    format("We're touching the sea, but not anything you can surf in, unfortunately.")
-}
-text gText_Hang20_NoWaves
-{
-    format("No waves? Damn that sucks!")
-}
-text gText_Hang20_DoYouWannaLearn
-{
-    format("You tryna learn how to ride the waves?")
-}
-text gText_Hang20_OhIveNever
-{
-    format("Oh, I've never really given it a shot. Is it hard?")
-}
-text gText_Hang20_ItsToughSoWeGotta
-{
-    format("It's tough, so we gotta make sure you're ready.")
-}
-text gText_Hang20_WaitBeating
-{
-    format("Wait, beating you doesn't make me tough enough?")
-
-    //SPARROW_NOTE: Remove LN 177?
-}
-text gText_Hang20_WellTeachYouToSurfIf
-{
-    format("I'll teach you to Surf if you can defeat 30 Pokémon here in a row. No healing items, no accessing the PC, no leaving CresaltaVista.")
-}
-text gText_Hang20_AlmostThere
-{
-    format("Keep that energy!")
-}
-text gText_Hang20_MaybeYoureTough
-{
-    format("Maybe you're tough after all!")
-}
-text gText_Hang20_SawYouKickingAss
-{
-    format("I saw you kicking ass out there!")
-}
-text gText_Hang20_DamnYouAreTough
-{
-    format("Okay, beating me was no fluke, you're the real deal. Take this!")
-}
-text gText_Hang20_OkaySoHeresHow
-{
-    format("If you have a Pokémon in your party that can learn Surf, you can just walk onto the waves and handle it, no problem. Watch!")
-}
-text gText_Hang20_OhShitYoure
-{
-    format("Hey, you're {PLAYER}, right? Killer waves, right? Not as good as back home, but still sick.")
-}
-text gText_Hang20_YoureSuperTough
-{
-    format("Here to catch some waves?")
-}
-text gText_Hang20_ImFromOrre
-{
-    format("I'm from Orre! We're landlocked, so I never learned to Surf.")
-}
-text gText_Hang20_WordItsMad
-{
-    format("Word? It's mad easy to learn though, hold on...")
-}
-text gText_Hang20_JustWalkUp
-{
-    format("If you've got a Pokémon that can learn Surf, you can just walk onto the waves now, no problem! Check it!")
-}

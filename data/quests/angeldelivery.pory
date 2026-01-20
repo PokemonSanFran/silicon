@@ -7,7 +7,6 @@ const FLAG_HIDE_BIKER_A = FLAG_TEMP_5
 const FLAG_HIDE_BIKER_B = FLAG_TEMP_6
 
 //Quest_AngelDelivery
-//AngelDelivery_Text
 
 script AngelDelivery_Script_HideBikers
 {
@@ -174,7 +173,7 @@ script AngelDelivery_Dialogue_FirstTime
 script AngelDelivery_Script_StartBattle
 {
     closemessage
-    trainerbattle_two_trainers(TRAINER_ANGELDELIVERY_BIKERC, AngelDelivery_Text_OneOfUs,TRAINER_ANGELDELIVERY_BIKERD, AngelDelivery_Text_YoureTheReal)
+    trainerbattle_two_trainers(TRAINER_ANGELDELIVERY_BIKERC,format("One of us, one of us!"),TRAINER_ANGELDELIVERY_BIKERD,format("You're the real deal, {PLAYER}."))
     goto(AngelDelivery_Script_PostBattle)
 }
 
@@ -215,160 +214,10 @@ script AngelDelivery_Script_PostBattle
     call(AngelDelivery_Script_CircleBikers)
     msgbox(format("All done. Your bike should be way faster at top speed now!"),,SPEAKER_ANGELDELIVERYBIKERC)
     msgbox(format("Pedal power!"),,SPEAKER_ANGELDELIVERYBIKERD)
-    msgbox(format("You’re officially one of the Gear Grind Gang. You’re welcome to come to this clubhouse whenever you like."),,SPEAKER_ANGELDELIVERYBIKERD)
+    msgbox(format("You're officially one of the Gear Grind Gang. You’re welcome to come to this clubhouse whenever you like."),,SPEAKER_ANGELDELIVERYBIKERD)
     completequest(QUEST_ANGELDELIVERY)
     release
     end
-}
-
-text AngelDelivery_Text_HeyCouldYouHelpMeOut {
-    format("Hey, could you help me out?")
-}
-
-text AngelDelivery_Text_ImDoingMyInitiation {
-    format("I’m doing my initiation into the Gear Grind Gang and I have to deliver something to somebody on Route 98.")
-}
-
-text AngelDelivery_Text_IBrokeMyLeg {
-    format("When I was starting off, I ran over a Pokémon, fell off my bike, and broke my leg.")
-}
-
-text AngelDelivery_Text_IfIDontGetThisPackageInTime {
-    format("And if I don’t get this package there in time, I’m not allowed to join!")
-}
-
-text AngelDelivery_Text_CanYouMakeTheDeliveryForMe {
-    format("Can you make the delivery for me instead? You can even use my top of the line Bike!")
-}
-
-text AngelDelivery_Text_IShouldGoToAHospital {
-    format("I should probably go to a hospital…")
-}
-
-text AngelDelivery_Text_YourBagIsTooFull {
-    format("Hey, could you help me- Oh. Your bag is too full to help me. Maybe I can hop on my one good leg to the nearest town and find somebody else…")
-}
-
-text AngelDelivery_Text_AreYouAngeldeliverybikerB {
-    format("Are you AngeldeliverybikerB?")
-}
-
-text AngelDelivery_Text_WhoWantsToKnow {
-    format("Who wants to know?")
-}
-
-text AngelDelivery_Text_IsntThatAngeldeliverybikerAs {
-    format("Isn’t that AngeldeliverybikerA’s?")
-}
-
-text AngelDelivery_Text_TheyBrokeTheirFoot {
-    format("They broke their foot trying to get here. They wanted to prove that they were serious, so they even gave me their bike to come bring this to you.")
-}
-
-text AngelDelivery_Text_WoahThatsHardcore {
-    format("Woah, that’s hardcore! Are they okay?")
-}
-
-text AngelDelivery_Text_TheyWereGoingToTheHospital {
-    format("They said they were going to the hospital.")
-}
-
-text AngelDelivery_Text_Wow {
-    format("Wow.")
-}
-
-text AngelDelivery_Text_WellYouHaveABike {
-    format("Well, you have a bike… And you’ve completed the initiation by finishing the challenge and giving me the Blue Card…")
-}
-
-text AngelDelivery_Text_YouEarnedASpotOnGearGrindGang {
-    format("Sounds like you’ve earned a spot on Gear Grind Gang!")
-}
-
-text AngelDelivery_Text_ImReallyJustATrainer {
-    format("I’m really just a Trainer…")
-}
-
-text AngelDelivery_Text_LetUsUpgradeYourBike {
-    format("At least let us upgrade your bike! If you head to the HQ in {STR_VAR_1}, we can get that tuned up for you.")
-}
-
-text AngelDelivery_Text_TheBlueCardIsActually {
-    format("The {STR_VAR_1} is actually from the Johto region. Our leader is a big weeb, and it reminds him of one of his favorite animé.")
-}
-
-text AngelDelivery_Text_HesNotGonnaPass {
-    format("Man, he’s not gonna pass at this rate…")
-}
-
-text AngelDelivery_Text_AhAreYouPlayer {
-    format("Ah, are you PLAYER? AngeldeliverybikerB told us you were coming.")
-}
-
-text AngelDelivery_Text_CongratsInCompletingYourInitiation {
-    format("Congrats on completing your initiation! Insane that you were able to just fill in for AngeldeliverybikerA with no training.")
-}
-
-text AngelDelivery_Text_ForTheFinalStageOfYourOnboarding {
-    format("And now for the final stage of your onboarding…")
-}
-
-text AngelDelivery_Text_ProveThatYoureTough {
-    format("Prove that you’re tough enough to hang!")
-}
-
-text AngelDelivery_Text_YouOnlyHave1Pokemon {
-    format("You only have 1 Pokémon?")
-}
-
-text AngelDelivery_Text_NotReadyToJoinUs {
-    format("You're clearly not ready to join us.")
-}
-
-text AngelDelivery_Text_YouPassedTheLastTest {
-    format("You passed the last test!")
-}
-
-text AngelDelivery_Text_CantBeRidingAroundAtNormieSpeed {
-    format("But of course, you can’t be riding around at normie speed!")
-}
-
-text AngelDelivery_Text_GearRatio {
-    format("Gotta get to that 48:16 gear ratio…")
-}
-
-text AngelDelivery_Text_SaddleHeight {
-    format("This saddle height is too low, they’re not aero enough…")
-}
-
-text AngelDelivery_Text_Chain {
-    format("Has this chain ever been lubed?")
-}
-
-text AngelDelivery_Text_Nitro {
-    format("And gotta hook up the nitro…")
-}
-
-text AngelDelivery_Text_AllDone {
-    format("All done. Your bike should be way faster at top speed now!")
-}
-
-text AngelDelivery_Text_PedalPower {
-    format("Pedal power!")
-}
-
-text AngelDelivery_Text_YoureOfficiallyOneOfTheGearGrindGang {
-    format("You’re officially one of the Gear Grind Gang. You’re welcome to come to this clubhouse whenever you like.")
-}
-
-text AngelDelivery_Text_OneOfUs
-{
-    format("One of us, one of us!")
-}
-
-text AngelDelivery_Text_YoureTheReal
-{
-    format("You're the real deal, {PLAYER}.")
 }
 
 movement Quest_AngelDelivery_Movement_BikerAWalksAway_North_1 {

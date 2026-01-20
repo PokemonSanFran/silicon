@@ -6,7 +6,6 @@ const BACKUP =  12
 const FLAG_HIDE_BACKUP = FLAG_TEMP_3
 const FLAG_HIDE_SHINZO = FLAG_TEMP_2
 
-//gText_CulturalPurity_
 //Quest_CulturalPurity_
 
 //PSF TODO The text that appears when the quest is active should change for every mahjong tile that the player recieves
@@ -362,51 +361,6 @@ movement Quest_CulturalPurity_LeaveClubhouse_Movement{
     step_end
 }
 
-text gText_CulturalPurity_Player{
-    format("{PLAYER} Hello!")
-}
-text gText_CulturalPurity_IReadOnline{
-    format("i read online about a group of people in hodoucity who have stayed tru")
-}
-text gText_CulturalPurity_TheSaidToStart{
-    format("they said start at the center... what does that mean?")
-}
-text gText_CulturalPurity_GoAway{
-    format("go away.")
-}
-text gText_CulturalPurity_WaitIKnowThePassword{
-    format("wait i know the password")
-}
-text gText_CulturalPurity_OhHereYouGo{
-    format("oh here you go")
-}
-text gText_CulturalPurity_IFiguredItOut{
-    format("i figured it out!")
-}
-text gText_CulturalPurity_IHaveTheCodeButWeNeed{
-    format("i have the code word, but need all the tiles")
-}
-text gText_CulturalPurity_YepGotEm{
-    format("yep got em here")
-}
-text gText_CulturalPurity_LetMeSee{
-    format("let me see your tiles.")
-}
-text gText_CulturalPurity_HeyCleetus{
-    format("hey cleetus!")
-}
-text gText_CulturalPurity_WellThenItsTimeForYourInitation{
-    format("Well then, its time for your initation!")
-}
 text gText_CulturalPurity_OneOfUs{
     format("one of us one of us")
-}
-text gText_CulturalPurity_WowWelcomeInside{
-    format("wow welcome inside")
-}
-text gText_CulturalPurity_NeverMind{
-    format("never mind. they're just nationalists.")
-}
-text gText_CulturalPurity_IHaveSomeThiking{
-    format("i have some thinking to do.")
 }

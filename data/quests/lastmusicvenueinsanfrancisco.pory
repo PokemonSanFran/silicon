@@ -3,7 +3,6 @@ const DRUMMER_B = 24
 const DRUMMER_C = 25
 const DRUMMER_D = 26
 //Quest_LastMusicVenue_
-//gText_Quest_LastMusicVenue_
 
 script Quest_LastMusicVenue_Debug_Script{
     questmenu(QUEST_MENU_SET_REWARD,QUEST_LASTMUSICVENUEINRESIDO)
@@ -116,51 +115,3 @@ script Quest_LastMusicVenue_GiveReward_Script{
     return
 }
 
-text gText_Quest_LastMusicVenue_IHopeYoureNot{
-	format("I hope you're not here to see any music... ain't nothing playing today. Or tomorrow. Or any day after that.")
-}
-text gText_Quest_LastMusicVenue_WhyIsThat{
-	format("Why is that?")
-}
-text gText_Quest_LastMusicVenue_ItsAViciousCycle{
-	format("Its a vicious cycle. The League keeps buying up concert venues to turn into arenas for their crazy new League. The local musicians don't have venues to perform in, so they stop. The remaining venues can't book new musicians because they've all quit. So when the League wants to buy another property... we jump at the chance.") //PSF TODO EMOTE sigh
-}
-text gText_Quest_LastMusicVenue_YoureYoungDoYouKnow{
-	format("You're young, do you know any music artists looking for a venue? Even just one or two would be huge.")
-}
-text gText_Quest_LastMusicVenue_ActuallyIMetSome{
-	format("Actually, I met some! Let me see if they're interested.")
-}
-text gText_Quest_LastMusicVenue_TheDrumCircle{
-	format("(The drum circle in TirabudinPlace would be perfect for this!)")
-}
-text gText_Quest_LastMusicVenue_IllKeepMyEyesPeeled{
-	format("I'll keep my eyes peeled as I travel!")
-}
-text gText_Quest_LastMusicVenue_AnyLuck{
-	format("Any luck finding some artists?")
-}
-text gText_Quest_LastMusicVenue_IHavent{
-	format("I haven't had a chance to talk to them yet!")
-}
-text gText_Quest_LastMusicVenue_ImStillLooking{
-	format("I'm still looking for somebody! But you're right, it's hard...")
-}
-text gText_Quest_LastMusicVenue_TheseDrummers{
-	format("These dummers are amazing! They're so happy to be here, and we were able to work something out!")
-}
-text gText_Quest_LastMusicVenue_TurnsOutTheyKnow{
-	format("Turns out they know other artists too!")
-}
-text gText_LastMusicVenue_HaveYouGuysSeen{
-    format("Have you guys seen the Masonic venue?")
-}
-text gText_LastMusicVenue_Nah{
-    format("Nah, what's that?")
-}
-text gText_LastMusicVenue_YouNeed{
-    format("You need to get down there! They're really looking for musicians and I think you'd be a good fit.")
-}
-text gText_LastMusicVenue_ThisCouldBe{
-    format("This could be our shot yo!")
-}

@@ -72,18 +72,18 @@ script RPS_Script_QuestInactive
 
 script RPS_Dialogue_StartQuest
 {
-    msgbox (RPS_Text_InteractWithMonty,MSGBOX_DEFAULT,SPEAKER_MONTYOPP)
-    msgbox (RPS_Text_Huehue,MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
+    msgbox(format("You beat me again Monty! I can't keep losing money like this. My wife will have my head!"),MSGBOX_DEFAULT,SPEAKER_MONTYOPP)
+    msgbox(format("Hueh heuh heuh, don't worry, you'll taste victory soon enough MontyOpp. Just come back when your pockets are a little heavier."),MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
     call (RPS_Script_MontyOppLeaveScreen)
     waitmovement(MONTY_CAPHE)
     applymovement (MONTY_CAPHE, RPS_Movement_MontyFacePlayer)
-    msgbox (RPS_Text_Heyo,MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox (RPS_Text_Who,MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
-    msgbox (RPS_Text_YeahYou,MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox (RPS_Text_YouEverHear,MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox (RPS_Text_No,MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
-    msgbox (RPS_Text_wellimMonty,MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox (RPS_Text_ORlearned,MSGBOX_AUTOCLOSE,SPEAKER_MONTY,TAIL_WHISPER)
+    msgbox(format("Heyo! You there! New around these parts?"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
+    msgbox(format("Who, me?"),MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
+    msgbox(format("Hueh heuh heuh, yeah you!"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
+    msgbox(format("You ever hear of Monty's Mach-Focus-Hand?"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
+    msgbox(format("No, can't say that I have!"),MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
+    msgbox(format("Hueh heuh heuh, well I'm Monty, and I made it up. of course you haven't."),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
+    msgbox(format("Or learned it in Kanto..."),MSGBOX_AUTOCLOSE,SPEAKER_MONTY,TAIL_WHISPER)
     closemessage
     startquest(QUEST_RPS)
 }
@@ -120,13 +120,13 @@ script RPS_Script_InteractMontyQuestActive
     bufferspeciesname(STR_VAR_1,SPECIES_HITMONCHAN)
     msgbox(format("Easy, yeah? Let's see how lucky you are. You can even use my lucky {STR_VAR_1}!"),MSGBOX_DEFAULT,SPEAKER_MONTY)
     closemessage
-    trainerbattle_continue_after_lose(TRAINER_MONTY, RPS_Text_MakeYoureOwnLuck)
+    trainerbattle_continue_after_lose(TRAINER_MONTY,format("Hueh hueh hueh, sometimes you just have to make your own luck."))
     call(RPS_Script_JudgeBattleOutcome)
 }
 
 script RPS_Dialogue_NotEnoughMoney
 {
-    msgbox (RPS_Text_AhItso, , SPEAKER_MONTY)
+    msgbox(format("Ah, it's no fun without a little wager. Come back with ¥{STR_VAR_2}"), , SPEAKER_MONTY)
     closemessage
     hidemoneybox
     releaseall
@@ -225,7 +225,7 @@ script RPS_Dialogue_AskFirstStreak
 {
     showmoneybox (0,0)
     buffernumberstring(STR_VAR_1,QUEST_RPS_WAGER)
-    msgbox (RPS_Text_AnotherGo, MSGBOX_YESNO, SPEAKER_MONTY)
+    msgbox(format("How about another go? We can make interesting with ¥{STR_VAR_1}."), MSGBOX_YESNO, SPEAKER_MONTY)
         if (var(VAR_RESULT) == YES)
         {
             hidemoneybox
@@ -260,7 +260,7 @@ script RPS_Script_StartWagerBattle
     call (RPS_Script_GiveFairMon)
     msgbox(format("Hueh hueh hueh, all right! Mach! Focus! Hand!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
     closemessage
-    trainerbattle_continue_after_lose(TRAINER_MONTY, RPS_Text_WellWhat)
+    trainerbattle_continue_after_lose(TRAINER_MONTY,format("Well what do you know? Luck has finally turned against me."))
     call(RPS_Script_JudgeWagerBattleOutcome)
 }
 
@@ -274,7 +274,7 @@ script RPS_Dialogue_LostWagerBattle
 {
     call(RPS_Script_GetWager)
     call (RPS_Script_StreakReset)
-    msgbox (RPS_Text_VictoryIsMine, , SPEAKER_MONTY)
+    msgbox(format("Hueh hueh hueh, victory is mine this time!"), , SPEAKER_MONTY)
     showmoneybox(0,0)
     removemoney(QUEST_RPS_WAGER)
     waitbuttonpress
@@ -290,7 +290,7 @@ script RPS_Dialogue_LostWagerBattle
 
 script RPS_Dialogue_DenyFirstWagerBattle
 {
-    msgbox (RPS_Text_IPromise, MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
+    msgbox(format("I promise I'm playing it straight this time!"), MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
     hidemoneybox
     closemessage
     releaseall
@@ -310,7 +310,7 @@ script RPS_Dialogue_ContinueStreak
     showmoneybox(0,0)
     call(RPS_Script_GetWager)
     buffernumberstring(STR_VAR_2 ,VAR_0x8004)
-    msgbox (RPS_Text_FeelingBrave, MSGBOX_YESNO, SPEAKER_MONTY)
+    msgbox(format("You feeling brave? Hueh hueh hueh, let's go for double or nothing! ¥{STR_VAR_2} against Old Man Monty!"), MSGBOX_YESNO, SPEAKER_MONTY)
     if(var(VAR_RESULT)==YES)
     {
         hidemoneybox
@@ -323,13 +323,13 @@ script RPS_Dialogue_ContinueStreak
 script RPS_Script_DenyWagerBattle
 {
     call(RPS_Script_DecrementStreak)
-    msgbox (RPS_Text_NoFun, , SPEAKER_MONTY)
+    msgbox(format("You're no fun!"), , SPEAKER_MONTY)
     showmoneybox(0,0)
     callnative(Quest_RPS_PayWager)
     waitbuttonpress
     playse(SE_SHOP)
     updatemoneybox
-    msgbox (RPS_Text_ComeBack, , SPEAKER_MONTY)
+    msgbox(format("Come back if you change your mind."), , SPEAKER_MONTY)
     hidemoneybox
     closemessage
     call(RPS_Script_StreakReset)
@@ -342,7 +342,7 @@ script RPS_Dialogue_CheckRewardSpace
     checkitemspace(ITEM_LOADED_DICE, 1)
         if (!var(VAR_RESULT))
         {
-            msgbox (RPS_Text_GotALil, MSGBOX_DEFAULT, SPEAKER_PLAYER)
+            msgbox(format("Got a lil' sumthin' for ya. Make sure  you've got space in your bag."), MSGBOX_DEFAULT, SPEAKER_PLAYER)
                 closemessage
                 releaseall
                 end
@@ -354,9 +354,9 @@ script RPS_Dialogue_GiveItem
 {
     giveitem(ITEM_LOADED_DICE)
         call (RPS_Script_IncrementStreak)
-        msgbox (RPS_Text_NotExactlyLucky, MSGBOX_DEFAULT, SPEAKER_MONTY)
-        msgbox (RPS_Text_ImCalling, MSGBOX_DEFAULT, SPEAKER_MONTY)
-        msgbox (RPS_Text_IDidNot, MSGBOX_DEFAULT, SPEAKER_PLAYER)
+        msgbox(format("They're not exactly lucky, but they're a gift from me."), MSGBOX_DEFAULT, SPEAKER_MONTY)
+        msgbox(format("I'm calling it quits on Mach-Focus-Hand. Gotta turn over a new leaf. Thanks for showing me the way, {PLAYER}."), MSGBOX_DEFAULT, SPEAKER_MONTY)
+        msgbox(format("I didn't do anything!"), MSGBOX_DEFAULT, SPEAKER_PLAYER)
         closemessage
         release
         end
@@ -417,276 +417,4 @@ movement RPS_Movement_MontyFacePlayer
 {
    face_player
    step_end
-}
-
-text RPS_Text_MontyOpp
-{
-    format("I lost to Monty again today…  I need to stop going but I can't resist the gamble!")
-}
-text RPS_Text_InteractWithMonty
-{
-    format("You beat me again Monty! I can't keep losing money like this. My wife will have my head!")
-}
-text RPS_Text_Huehue
-{
-    format("Hueh heuh heuh, don't worry, you'll taste victory soon enough MontyOpp. Just come back when your pockets are a little heavier.")
-}
-text RPS_Text_Heyo
-{
-    format("Heyo! You there! New around these parts?")
-}
-text RPS_Text_Who
-{
-    format("Who, me?")
-}
-text RPS_Text_YeahYou
-{
-    format("Hueh heuh heuh, yeah you!")
-}
-text RPS_Text_YouEverHear
-{
-    format("You ever hear of Monty's Mach-Focus-Hand?")
-}
-text RPS_Text_No
-{
-    format("No, can't say that I have!")
-}
-text RPS_Text_wellimMonty
-{
-    format("Hueh heuh heuh, well I'm Monty, and I made it up. of course you haven't.")
-}
-text RPS_Text_ORlearned
-{
-    format("Or learned it in Kanto...")
-}
-
-text RPS_Text_Readyto
-{
-    format("Ready to give it a shot?")
-}
-
-text RPS_Text_AhItso
-{
-    format("Ah, it's no fun without a little wager. Come back with ¥{STR_VAR_2}")
-}
-//Quest Active and Player Money >199
-text RPS_Text_Letsput
-{
-    format("Let's put some stakes on it. ¥{STR_VAR_2}, winner takes the pot.")
-}
-text RPS_Text_hotshot
-{
-    format("Hueh hueh hueh, I know a hotshot Trainer like you has ¥{STR_VAR_2} laying around, right?")
-}
-text RPS_Text_lowdown
-{
-    format("Here's the lowdown:")
-}
-text RPS_Text_UpperHand
-{
-    format("{STR_VAR_1} trumps {STR_VAR_2}.")
-}
-text RPS_Text_Machbeats
-{
-    format("{STR_VAR_1} beats {STR_VAR_2}.")
-}
-text RPS_Text_FocusPunchWin
-{
-    format("{STR_VAR_1} wins out over {STR_VAR_2}.")
-}
-text RPS_Text_ifpokemonfaints
-{
-    format("If your Pokémon faints, you lose.")
-}
-text RPS_Text_EasyYeah
-{
-    format("Easy, yeah? Let's see how lucky you are. You can even use my lucky {STR_VAR_1}!")
-}
-// PLayer Wins
-text RPS_Text_WellWhat
-{
-    format("Well what do you know? Luck has finally turned against me.")
-}
-// Player Loses
-text RPS_Text_MakeYoureOwnLuck
-{
-    format("Hueh hueh hueh, sometimes you just have to make your own luck.")
-}
-//Post Battle Player Loss
-text RPS_Text_ToughBreak
-{
-    format("Tough break kid.")
-}
-
-text RPS_Text_NextTime
-{
-    format("Better luck next time!")
-}
-//Post Battle Win
-text RPS_Text_Luckranout
-{
-    format("My luck ran out. I'm shocked.")
-}
-text RPS_Text_YouWerent
-{
-    format("You weren't ever lucky to begin with!")
-}
-text RPS_Text_implying
-{
-    format("He? watch your mouth, what are you implying...")
-}
-text RPS_Text_MyGoogleGlass
-{
-    format("My {STR_VAR_2} can see everything about your Pokémon. I can see that your Pokémon was stronger than mine and holding {STR_VAR_1}.")
-}
-text RPS_Text_Suspensive
-{
-    format("...")
-}
-text RPS_Text_YouGotMe
-{
-    format("You got me! Hueh hueh hueh, kids these days are too high tech to fool. Maybe I need to target a... less savvy demographic.")
-}
-text RPS_Text_WaitYou
-{
-    format("Wait,you tageted me specifically?")
-}
-text RPS_Text_OfCurse
-{
-    format("Hueh hueh hueh, of course! I don't want to con region natives, but I have no problem ripping off techie transplants. You're so gullible!")
-}
-text RPS_Text_WhenIStarted
-{
-    format("You know, when I started hustling, I was just trying to get my house back. But now? I'm just good at getting people to hand over their cash!")
-}
-text RPS_Text_ButForNow
-{
-    format("But for now, I'm not goin anywhere. {PLAYER}, anytime you want a rematch, I'll be here.")
-}
-text RPS_Text_Next
-{
-     format("Next time, I'll play fair, hueh hueh hueh.")
-}
-// Interact Monty with 0 streak
-text RPS_Text_HeyU
-{
-    format("Hey {PLAYER}!")
-}
-
-text RPS_Text_ThisProduction
-{
-    format("This production is somethin' else! So many moving parts. But ol' Monty is putting his own spin on this here fundraising.")
-}
-
-text RPS_Text_FeelingLucky
-{
-    format("How lucky are you feeling today?")
-}
-// Interact Monty  with 0 streak but Player has <$100
-text RPS_Text_LookMoreBroke
-{
-    format("Hueh hueh hueh, you look more broke than me! Come back when your luck has changed.")
-}
-// Interact Monty whit 0 strak but player has >$99
-text RPS_Text_AnotherGo
-{
-    format("Hoy about another go? We can make interesting with ¥{STR_VAR_1}.")
-}
-// Yes/No menu appears
-// No
-text RPS_Text_IPromise
-{
-    format("I promise I'm playing it straight this time!")
-}
-//yes (RPGGiveGairMon runs)
-text RPS_Text_AllRight
-{
-    format("Hueh hueh hueh, all right! Mach! Focus! Hand!")
-}
-//Post Battle Player Loss
-text RPS_Text_VictoryIsMine
-{
-    format("Hueh hueh hueh, victory is mine this time!")
-}
-// Money box appears /Player loses x money/ Money sounds plays Money box disappears.
-text RPS_Text_Pleasure
-{
-    format("Pleasure doing business with ya. Holler if you're up for another round.")
-}
-//Post Battle Player Win/ ResetRPStreak runs/IncrementRPSStreak runs/CalcRPSWager runs
-//Player Does Not Have Enough to Wager
-text RPS_Text_LoveToDouble
-{
-    format("Hueh hueh hueh, I'd love to double down but it looks like that's all you've got. Come back when you're ready to take another shot at ol' Monty.")
-}
-//Money box appears/ Player gainsx/ Money sound Plays/ MoneyBox disappears
-//Player Has Enough to wager
-text RPS_Text_FeelingBrave
-{
-    format("You feeling brave? Hueh hueh hueh, let's go for double or nothing! ¥{STR_VAR_2} against Old Man Monty!")
-}
-// Yes / No menu appears
-//Yes
-text RPS_Text_Right
-{
-    format("All right! Mach! Focus! Hand!")
-}
-//No / ResetRPStreak runs / Money Box appears / Player gains XX / Money sounds plays / Money Box disappears.
-text RPS_Text_NoFun
-{
-    format("You're no fun!")
-}
-
-text RPS_Text_ComeBack
-{
-    format("Come back if you change your mind.")
-}
-// Post Battle Player Win Streak is 10
-text RPS_Text_Imtapped
-{
-    format("Okay okay, I'm tapped out, you got me.")
-}
-//Money box appears/ gains $XX /Money Sounds plays/ Money box disappears.
-text RPS_Text_IHungUp
-{
-    format("Maybe it's time I hung up my hustler's hat.")
-}
-// RPSStreakIncrement runs.
-//No Room for 1 Loaded Dice
-text RPS_Text_GotALil
-{
-    format("Got a lil' sumthin' for ya. Make sure  you've got space in your bag.")
-}
-// Player Has Room For 1 Loadded Dice /Interact Monty When  RPSStreak is 11 /RPSStreakIncrement runs/ Player recives Loaded Dice
-text RPS_Text_NotExactlyLucky
-{
-    format("They're not exactly lucky, but they're a gift from me.")
-}
-text RPS_Text_ImCalling
-{
-    format("I'm calling it quits on Mach-Focus-Hand. Gotta turn over a new leaf. Thanks for showing me the way, {PLAYER}.")
-}
-text RPS_Text_IDidNot
-{
-    format("I didn't do anything!")
-}
-// Interact Monty When RPSStreak is 12
-text RPS_Text_MightBeDone
-{
-    format("Might be done with Mach-Focus-Hand... I think I need to find a bigger hustle, something more fufilling.")
-}
-
-text RPS_Text_YouKnowIThink
-{
-    format("Hueh hueh, I think this studio gig really suits me!")
-}
-
-text RPS_Text_TakingMoneyFrom
-{
-    format("I'm still taking money from folks with heavy pockets... but now we're fueling this here production! I'm havin' a great time usin' my hustlin' powers for good.")
-}
-
-text RPS_Text_ThanksFor
-{
-    format("Thanks for setting me up!")
 }

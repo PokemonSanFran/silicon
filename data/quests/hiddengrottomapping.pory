@@ -86,38 +86,6 @@ movement Quest_Hiddengrottomapping_LeaveGrotto_Movement{
     step_end
 }
 
-text gText_Hiddengrottomapping_WhyHello{
-    format("Why hello there! Wasn't expecting to see another Trainer in here.")
-}
-
-text gText_Hiddengrottomapping_WildPokemonBuild{
-    format("We're in a Hidden Grotto. Wild Pokemon create these spaces! Sometimes there are exceptionally rare Pokemon inside, or items they've left behind.")
-}
-
-text gText_Hiddengrottomapping_ButNobodyKnows{
-    format("But nobody knows why they make them! That's what I research.")
-}
-
-text gText_Hiddengrottomapping_DoMeAFavor{
-    format("I see you've got a phone, and if you're a Trainer, you're tracking battle data, right? Keep traveling the region. I think there are five different types of Hidden Grotto biomes in Resido... once you've been to them all, come to my house in HalerbaCity! I'll extract the data from your phone.")
-}
-
-text gText_Hiddengrottomapping_SighHeToldYou{
-    format("He told you to come here? Did he think he'd be here, or was he hoping I'd get the data for you...")
-}
-text gText_Hiddengrottomapping_IHaventHeard{
-    format("Truth be told, I haven't heard from him a while. I know he gets so caught up in his work though.")
-}
-text gText_Hiddengrottomapping_HeTaughtMe{
-    format("He taught me how to withdraw data from Trainer's phones, so if you let me see that for a second...")
-}
-text gText_Hiddengrottomapping_CouldYouKeep{
-    format("Thanks. I'll upload it to his computer. Hey, could you keep an eye out for anything that might indicate his whereabouts? Its been a while since I've seen him, and I'm starting to get worried.")
-}
-text gText_Hiddengrottomapping_OhYouVeMet{
-    format("Ah, so you met my husband, Pannen! Oh, and you're helping with his research. That's excellent! Maybe he'll come home more often.")
-}
-
 script Quest_Hiddengrottomapping_Event_Script{
     goto_if_quest_active(QUEST_HIDDENGROTTOMAPPING,Quest_Hiddengrottomapping_Active_Dialogue)
     goto_if_quest_reward(QUEST_HIDDENGROTTOMAPPING,Quest_Hiddengrottomapping_Reward_Dialogue)
@@ -233,24 +201,3 @@ movement Quest_Hiddengrottomapping_WalkToTable{
     step_end
 }
 
-text gText_Hiddengrottomapping_INeed{
-    format("I think I need a moment to be alone.")
-}
-text gText_Hiddengrottomapping_IveBeenThiking{
-    format("I've been thinking... he's okay out there. I don't know where he is, but I get the sense he's enjoying what he's doing.")
-}
-text gText_Hiddengrottomapping_HeSpentALot{
-    format("He spent a lot of time researching those Hidden Grottos... like the one you found him in! I just hope he's safe.")
-}
-text gText_Hiddengrottomapping_IHaveAFeeling{
-    format("I have a feeling you're not going to find anymore pages.")
-}
-text gText_Hiddengrottomapping_IDidFind{
-    format("I found the rest of the book laying around here, and with that page, I've got all of his notes, but no clues. Just a lot of rambling about Ultra Space.")
-}
-text gText_Hiddengrottomapping_OhYouHave{
-    format("Oh! You have a page from his journal!")
-}
-text gText_Hiddengrottomapping_IveTranslated{
-    format("I've translated the page for you, you can read it on the wall. Let me know if you make more progress!")
-}

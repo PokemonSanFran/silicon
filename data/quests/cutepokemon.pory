@@ -170,7 +170,7 @@ script CutePokemon_Script_PerlaciaCheck
 
 script CutePokemon_Script_PerlaciaAsk
 {
-	askplayermon(CutePokemon_Text_ThatsItThankYou,CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
+	askplayermon(format("That’s it! Thank you for finding that Pokémon! You saved me hella time. Are you sure I can have your {STR_VAR_1}?"),CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_1)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_EISCUE_HINT_2)
 	msgbox(format("Hell yeah! I knew you’d be a real one!"),,SPEAKER_MELISSA)
@@ -346,7 +346,7 @@ script CutePokemon_Script_QiuCheck
 script CutePokemon_Script_QiuAsk
 {
     bufferspeciesname(STR_VAR_2,SPECIES_CORSOLA)
-	askplayermon(CutePokemon_Text_MyPartnerWillBeExcited,CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
+	askplayermon(format("That’s it! My partner will be excited for {STR_VAR_2}, and you saved me hella time, thanks! Are you sure I can have {STR_VAR_1}?"),CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_2)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_CORSOLA_HINT_2)
 	msgbox(format("Hell yeah! I knew you’d be a real one!"),,SPEAKER_MELISSA)
@@ -494,7 +494,7 @@ script CutePokemon_Script_CresaltaCheck
 
 script CutePokemon_Script_CresaltaAsk
 {
-	askplayermon(CutePokemon_Text_ThanksForFinding,CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
+	askplayermon(format("That’s it! Thank you for finding that Pokémon! You saved me hella time. Isn’t it cute AF? Are you sure I can have {STR_VAR_1}?"),CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_3)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_GREETING_HALAI)
 	msgbox(format("Hell yeah! Thanks for being a homie."),,SPEAKER_MELISSA)
@@ -598,7 +598,7 @@ script CutePokemon_Script_HalaiCheck
 script CutePokemon_Script_HalaiAsk
 {
 	special(BufferMonNickname)
-	askplayermon(CutePokemon_Text_ThatsItThankYouForFinding,CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
+	askplayermon(format("That’s it! Thank you for finding that Pokémon! You saved me hella time. Are you sure I can have {STR_VAR_1}?"),CutePokemon_Text_CanYouBringOne,CutePokemon_Text_AwwThatsSweet,SPEAKER_MELISSA)
 
 	subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_CUTEPOKEMON,SUB_QUEST_4)
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_CORRECT)
@@ -628,231 +628,41 @@ script CutePokemon_Dialogue_Rematch
 	release
 	end
 }
-text CutePokemon_Text_WelcomeShortStaffed
-{
-	format("Welcome to The Boba Shop! Sorry, we’re short staffed today!")
-}
-text CutePokemon_Text_AreYouFree
-{
-	format("Hey, are you free? I’m about to run to my next shift across Resido. Do you have time to help me find a cute Pokémon? I keep picking up shifts, because everybody’s burnt out.")
-}
-text CutePokemon_Text_IveBeenLookingIce
-{
-	format("I’ve been looking for this cute Pokémon. It’s an Ice-type. Can you catch one for me? But only if you have time. You can say no!")
-}
-text CutePokemon_Text_BringIceShort
-{
-	format("Bring the cute Ice-type Pokémon that’s shorter than {STR_VAR_1}. I’ve gotta go back to work!")
-}
-text CutePokemon_Text_BringIceShortTrapped
-{
-	format("Bring the cute Ice-type Pokémon that’s shorter than {STR_VAR_1} and is trapped in its own head. I’ve gotta go back to work!")
-}
-text CutePokemon_Text_ThatWasFast
-{
-	format("That was fast! Show me!")
-}
-text CutePokemon_Text_NoMonBobaInstead
-{
-	format("Oh, you don’t have a Pokémon? Do you want to order a boba drink instead?")
-}
-text CutePokemon_Text_ThisIsFine
-{
-	format("This is fine… but it's not an Ice-type like I asked for.")
-}
-text CutePokemon_Text_ShorterThanHeight
-{
-	format("Oh! This is a cute Pokémon! But the one I have in mind is shorter than {STR_VAR_1}.")
-}
-text CutePokemon_Text_ShorterAndHeight
-{
-	format("Oh! This is a cute Pokémon! But the one I have in mind feels trapped in its own head.")
-}
-text CutePokemon_Text_ThatsItThankYou
-{
-	format("That’s it! Thank you for finding that Pokémon! You saved me hella time. Are you sure I can have your {STR_VAR_1}?")
-}
+
 text CutePokemon_Text_CanYouBringOne
 {
-	format("Aww… Well, can you bring me one I can keep?")
+    format("Aww… Well, can you bring me one I can keep?")
 }
 text CutePokemon_Text_AwwThatsSweet
 {
-	format("Aww, that’s sweet of you, but you don’t have any other Pokémon!")
-}
-text CutePokemon_Text_IKnewYoudBe
-{
-	format("Hell yeah! I knew you’d be a real one!")
-}
-text CutePokemon_Text_IHaveToGetBack
-{
-	format("I have to get back to work, do you want some boba?")
-}
-text CutePokemon_Text_ThisTimeIHave
-{
-	format("This time, I have something for you in exchange for the right Pokémon. Come back when you've made room!")
-}
-text CutePokemon_Text_WelcomeToShop
-{
-	format("Welcome to The Boba Shop!")
-}
-text CutePokemon_Text_DidntYouHelpEiscue
-{
-	format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with him a bit since you gave him to me. I’m about to go on my break. Let’s battle outside!")
-}
-text CutePokemon_Text_DoYouMind
-{
-	format("Do you mind if I smoke?")
+    format("Aww, that’s sweet of you, but you don’t have any other Pokémon!")
 }
 text CutePokemon_Text_INeedToTrain
 {
-	format("gg. I need to train these guys more!")
-}
-text CutePokemon_Text_DoYouHaveTime
-{
-	format("Good work {PLAYER}. Do you, by chance, have time to help me find another cute Pokémon?")
-}
-text CutePokemon_Text_MyPartnerAskedPink
-{
-	format("My partner asked me to find this pink Pokémon for him, but I have too many shifts to find the time to catch one.")
-}
-text CutePokemon_Text_PinkAndWeighs
-{
-	format("Hey, did you ever get the chance to get that pink Pokémon that weighs less than {STR_VAR_1}?")
-}
-text CutePokemon_Text_PinkWeighsPacks
-{
-	format("Hey, did you ever get the chance to get that pink Pokémon that weighs less than {STR_VAR_1} and travels in packs?")
-}
-text CutePokemon_Text_DontHaveOrderInside
-{
-	format("Oh, you don’t have a Pokémon? Do you want to order a boba drink inside instead?")
-}
-text CutePokemon_Text_ThisIsntPink
-{
-	format("This Pokémon isn’t pink.")
-}
-text CutePokemon_Text_PinkWrongWeight
-{
-	format("While this Pokémon is cute and pink, the one I had in mind weighs less than {STR_VAR_1}.")
-}
-text CutePokemon_Text_PinkWeightPacks
-{
-	format("Oh! This is a cute Pokémon! But the one I have in mind is for the girls, and travels in packs.")
-}
-text CutePokemon_Text_MyPartnerWillBeExcited
-{
-	format("That’s it! My partner will be excited for {STR_VAR_2}, and you saved me hella time, thanks! Are you sure I can have {STR_VAR_1}?")
-}
-text CutePokemon_Text_ThanksForAllHelp
-{
-	format("Thanks for all your help so far. You’re really saving me as I waste away at these jobs. Here's something for your help!")
-}
-text CutePokemon_Text_DidntYouHelpCorsola
-{
-	format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with her a bit since you gave her to me. I’m about to go on my break. Let’s battle outside!")
-}
-text CutePokemon_Text_ThisMonLevitate
-{
-    format("I'm looking for a cute Pokémon with the Ability {STR_VAR_1}.")
-}
-text CutePokemon_Text_MonLevitateAndEvolve
-{
-	format("Did you ever find that cute Pokémon with the Ability {STR_VAR_1} and can evolve?")
-}
-text CutePokemon_Text_LevitateEvolveCloak
-{
-	format("Did you ever find that cute Pokémon with the Ability {STR_VAR_1}, can evolve and wears a cloak?")
-}
-text CutePokemon_Text_ThisCantLevitate
-{
-	format("Dude, this Pokémon doesn't have {STR_VAR_1}.")
-}
-text CutePokemon_Text_CuteLevitateNeedsEvolve
-{
-	format("While this Pokémon is cute and has {STR_VAR_1}, the one I had in mind can evolve.")
-}
-text CutePokemon_Text_CuteLeviitteEvolveNeedsCloak
-{
-	format("Oh, I forgot that this Pokémon has {STR_VAR_1} and evolve, but the one I had in mind is like, wearing a cloak.")
-}
-text CutePokemon_Text_ThanksForFinding
-{
-	format("That’s it! Thank you for finding that Pokémon! You saved me hella time. Isn’t it cute AF? Are you sure I can have {STR_VAR_1}?")
-}
-text CutePokemon_Text_ThanksForBeingAHomie
-{
-	format("Hell yeah! Thanks for being a homie.")
-}
-text CutePokemon_Text_WeHaveToBattle
-{
-	format("Hey {PLAYER}. We have to battle because the game designer said so.")
-}
-text CutePokemon_Text_GoodWorkPlayer
-{
-	format("Good work {PLAYER}. Do you, by chance, have time to help me find one last cute Pokémon?")
-}
-text CutePokemon_Text_CanBeBredDragon
-{
-	format("I'm looking for a cute Pokémon that can be bred with dragons.")
-}
-text CutePokemon_Text_CanBeBredDragonAcidSpray
-{
-	format("Hey, {PLAYER}, did you come across a cute Pokémon that can breed with dragons and learn the move {STR_VAR_1}?")
-}
-text CutePokemon_Text_CanBeBredDragonAcidSprayHasMohawk
-{
-	format("Hey, {PLAYER}, did you come across a cute Pokémon that can breed with dragons and learn the move {STR_VAR_1} that basically has a mohawk?")
-}
-text CutePokemon_Text_DidYouEvenRead
-{
-	format("Dude, did you even read the Pokédex entry?")
-}
-text CutePokemon_Text_CuteDragonsNeedsAcid
-{
-	format("While this Pokémon is cute and can breed with dragons, the Pokémon I had in mind can learn the move {STR_VAR_1}.")
-}
-text CutePokemon_Text_CuteDragonAcidSprayNeedsMOhawk
-{
-	format("Oh, I forgot about this one. The cute Pokémon I had in mind has a mohawk. Or looks like it has a mohawk…? I don’t know.")
-}
-text CutePokemon_Text_ThatsItThankYouForFinding
-{
-	format("That’s it! Thank you for finding that Pokémon! You saved me hella time. Are you sure I can have {STR_VAR_1}?")
-}
-text CutePokemon_Text_ThanksForBeingAealOneIMadeThis
-{
-	format("Hell yeah! Thanks for being a real one and helping me find all these Pokémon. Take this, I made this myself on break!")
-}
-text CutePokemon_Text_DoYouHaveTimeToBattle
-{
-	format("Hey {PLAYER}. Thanks again for helping me catch those cute Pokémon. Do you have time to battle?")
-}
-text CutePokemon_Text_PostBattleBoba
-{
-	format("Wanna grab some post battle boba?")
+    format("gg. I need to train these guys more!")
 }
 text CutePokemon_Text_OkayBye
 {
-	format("Okay, bye.")
+    format("Okay, bye.")
 }
 
 text CutePokemon_Text_YeahSure
 {
-	format("Yeah, sure!")
+    format("Yeah, sure!")
 }
 
 text CutePokemon_Text_YeahIGuess
 {
-	format("Yeah, I guess!")
+    format("Yeah, I guess!")
 }
 
 text CutePokemon_Text_IHaveYourPokemon
 {
-	format("I have your Pokémon.")
+    format("I have your Pokémon.")
 }
 
 text CutePokemon_Text_YeahIGuessElipsis
 {
-	format("Yeah, I guess…")
+    format("Yeah, I guess…")
 }
+

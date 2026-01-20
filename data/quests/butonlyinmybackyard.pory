@@ -1,6 +1,5 @@
 const FLAG_HIDE_GUNDA = FLAG_TEMP_6
 const FLAG_HIDE_NIMBY = FLAG_TEMP_1
-//gText_ButOnlyIn_
 //Quest_ButOnlyIn_
 
 script Quest_ButOnlyIn_Debug_Script{
@@ -85,42 +84,3 @@ script Quest_ButOnlyIn_Bar_Dialogue{
     end
 }
 
-text gText_ButOnlyIn_TheresBuildingAApartment{
-    format("They're building an apartment complex here for low incoming housing! Its going to be a great development and help for people in the city.")
-}
-text gText_ButOnlyIn_ButTheWildPokemonAroundHere{
-    format("But the wild Pokemon around here... they can be aggressive. The environment committee is doing a final inspection and I'm afraid we wont pass if there's too many aggressive wild Pokemon.")
-}
-text gText_ButOnlyIn_CanYouHelpMeProve{
-    format("Can you help us out? We, the Committee for Reasonable Housing, want to make sure this inspection passes in a way that's best for everybody. I've heard the birds can be the most territorial. Can you knockout 27 or so Flying-type Pokemon on Route18 and Route20? That should help bring the levels down.")
-}
-text gText_ButOnlyIn_IJustWantTheKids{
-    format("I just want the kids to be safe!")
-}
-text gText_ButOnlyIn_TheHousingCrew{
-    format("The inspection just wrapped up but... it failed. Your work still wasn't enough. It's a bummer but we're going to work with the city to make sure this gets done right. Thank you for your help though! Take this.")
-}
-text gText_ButOnlyIn_YouKnowTheGolf{
-    format("You know the golf course over by WajabiLake? You can't get in there without an invitiation from a member. I'll add you to my guest list, so you should be able to get in now. There's tons of rare Pokemon on the course, so maybe it'll be worth it for you.")
-}
-text gText_ButOnlyIn_WhatAShame{
-    format("What a shame...")
-}
-text gText_ButOnlyIn_AndAToastToTheGeniusGunda{
-    format("And a toast to the genius Gunda!")
-}
-text gText_ButOnlyIn_HereHere{
-    format("here here!")
-}
-text gText_ButOnlyIn_HowDidYouPull{
-    format("how did you pull it off")
-}
-text gText_ButOnlyIn_IMeanIfTheBirdsAreGone{
-    format("i mean if the birds are gone, there's going to be more bugs and fish... and if the place is overrun with those, the enviromental freaks won't let anything develop.")
-}
-text gText_ButOnlyIn_ItWasEasyToConvince{
-    format("it was easy to convince some trainers to get rid of a sbitload of birds and bam! the hippies showed up and shut it all down. i didn't have to do anything")
-}
-text gText_ButOnlyThe_AndQiuVillageRemains{
-    format("and the QiuVillage remains hobo free! we're doing God's work, keeping our schools and familiies safe")
-}

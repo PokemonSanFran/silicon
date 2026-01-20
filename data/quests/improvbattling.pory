@@ -4,7 +4,6 @@ const IMPROV_2 = 2
 const IMPROV_3 = 3
 
 //Quest_Improvbattling_
-//gText_Improvbattling_
 
 //PSF TODO implement mini factory
 
@@ -199,60 +198,6 @@ script Quest_Improvbattling_ExitChallenge_Script{
     end
 }
 
-text gText_Improvbattling_WelcomeTo{
-	format("Welcome to PetarosaBorough Improv!")
-}
-text gText_Improvbattling_WereAllAbout{
-	format("We're all about thinking on our feet and putting on a good show.")
-}
-text gText_Improvbattling_YoureATrainer{
-	format("You're a Trainer right? Come do a performance with us! We have one coming up.")
-}
-text gText_Improvbattling_ItllMakeYou{
-	format("It'll make you a better Trainer, I'm certain.")
-}
-text gText_Improvbattling_WhatDo{
-	format("What do you say? Want to do an improv show with us?")
-}
-text gText_Improvbattling_BeforeWeStartLetsSave{
-	format("Before we start, let's save your game.")
-}
-text gText_Improvbattling_OkayYouveGot{
-	format("Okay! Let's take your Pokémon for a second... you're going to use three of ours instead.Okay, let's do it!")
-}
-text gText_Improvbattling_LetsHeal{
-	format("Let's heal those Pokémon.")
-}
-text gText_Improvbattling_BeforeYourNext{
-	format("Before your next battle, do you want to trade one of the Pokémon you just battled with wit one of the Pokémon I used? Totally up to you.")
-}
-text gText_Improvbattling_OneDayThisWill{
-	format("One day, this will actually load the swap Pokémon screen.")
-}
-text gText_Improvbattling_OkayLetsKeep{
-	format("Okay! Let's keep it going with the next battle.")
-}
-text gText_Improvbattling_LetsPerform{
-	format("Let's perform a great show!")
-}
-text gText_Improvbattling_ThankYouAll{
-	format("Thank you all for coming out tonight!")
-}
-text gText_Improvbattling_YoureANatural{
-	format("You're a natural. Come practice with us anytime. Take this!")
-}
-text gText_Improvbattling_NoProblem{
-	format("No problem, let me know if you change your mind!")
-}
 text gText_Improvbattling_AndScene{
     format("Anddd scene!")
-}
-text gText_Improvbattling_ThanksForPerforming{
-    format("Thanks for performing with us! Come back sometime.")
-}
-text gText_Improvbattling_WelcomeBackReady{
-    format("Welcome back! Ready to perform?")
-}
-text gText_Improvbattling_OurFavoriteImprov{
-    format("Our favorite improv performer! Let's put on a show.")
 }

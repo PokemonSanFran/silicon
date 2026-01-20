@@ -1,5 +1,4 @@
 //Quest_GetTheBand_
-//gText_GetTheBand_
 
 const BIKER_A = 4
 const FLAG_HIDE_BIKER_A = FLAG_TEMP_2
@@ -205,47 +204,4 @@ script Quest_GetTheBand_Reward_Dialogue{
 script Quest_GetTheBand_Completed_Dialogue{
     msgbox(format(""),MSGBOX_NPC)
     end
-}
-
-text gText_GetTheBand_TheBikersSentYou{
-    format("the bikers sent you to find me? oh snap, i'll go to the curenoport now")
-}
-text gText_GetTheBand_WeBuiltOutTheHQ{
-	format("")
-}
-text gText_GetTheBand_KeepingInTouchIsHard{
-	format("")
-}
-text gText_GetTheBand_CanYouTellBikersYouMeet{
-	format("")
-}
-text gText_GetTheBand_YoullNeedBike{
-	format("")
-}
-text gText_GetTheBand_AnyLuckOnYourBike{
-	format("")
-}
-text gText_GetTheBand_OnePersonCameIn{
-	format("")
-}
-text gText_GetTheBand_TheyReallyStarting{
-	format("")
-}
-text gText_GetTheBand_WowItsSoGreat{
-	format("")
-}
-text gText_GetTheBand_AllTheRooms{
-	format("")
-}
-text gText_GetTheBand_ItFeelsAwesomeToHelp{
-	format("")
-}
-text gText_GetTheBand_TakeThisUpgrade{
-	format("")
-}
-text gText_GetTheBand_YourBikeGoesFaster{
-	format("")
-}
-text gText_GetTheBand_HowsTheUpgrade{
-	format("")
 }

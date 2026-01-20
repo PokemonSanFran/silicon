@@ -1,7 +1,6 @@
 const MARIA_A = 4
 const FLAG_HIDE_MARIA = FLAG_TEMP_2
 //Quest_GardenCleanUp_
-//gText_GardenCleanUp_
 
 script Quest_GardenCleanUp_Debug_Script
 {
@@ -101,37 +100,4 @@ script Quest_GardenCleanUp_Complete_Dialogue{
 movement Quest_GardenCleanUp_RunToGarden_Movement{
     walk_faster_down * 6
         step_end
-}
-text gText_GardenCleanUp_ILearned{
-    format("I learned about community gardens from my older brother")
-}
-text gText_GardenCleanUp_ITriedTo{
-    format("i tried to start one, but there's too many strong and scary pokemon on Route1")
-}
-text gText_GardenCleanUp_CouldYouHelp{
-    format("could you help me clear the garden?")
-}
-text gText_GardenCleanUp_SoClose{
-    format("its looking a lot less scary, we're so close")
-}
-text gText_GardenCleanUp_ItsReallyStarting{
-    format("its really starting to look great")
-}
-text gText_GardenCleanUp_WowYouBeatALot{
-    format("wow, you beat a lot of them")
-}
-text gText_GardenCleanUp_ITriedToGoEarlier{
-    format("i tried to go earlier, and I almost got attacked!")
-}
-text gText_GardenCleanUp_DidYouGoOver{
-    format("did you head over there yet")
-}
-text gText_GardenCleanUp_ThankYouForYourHelp{
-    format("thanks for your help")
-}
-text gText_GardenCleanUp_OhMyGodYoureDone{
-    format("oh my god youre done?")
-}
-text gText_GardenCleanUp_ImSoExcitedToStartPlanting{
-    format("im so excited to start planting!")
 }

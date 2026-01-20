@@ -126,27 +126,3 @@ movement Quest_SmoothieCrafting_SlideBack_Movement{
     step_end
 }
 
-text gText_Quest_SmoothieCrafting_WelcomeToMarble{
-    format("Welcome to the Marble Slab!")
-}
-text gText_Quest_SmoothieCrafting_IfYouWant{
-    format("We're actually not serving customers yet, today is just our soft open! If you want to try our signature Sherbet Surprise, bring in 3 Pecha Berries, 2 Nanab Berries, and 1 Rabuta Berry!")
-}
-text gText_Quest_SmoothieCrafting_SickYouBrought{
-    format("Sick, you brought the berries! Okay, I'll make this.... and here you go!")
-}
-text gText_Quest_SmoothieCrafting_WhatTheHell{
-    format("What the hell are you serving us? What is going on?")
-}
-text gText_Quest_SmoothieCrafting_WhatDoYouMean{
-    format("What do you mean? Did your Pokémon not like their treat?")
-}
-text gText_Quest_SmoothieCrafting_MyPokemonGotWeaker{
-    format("My Pokémon got weaker after eating it! What gives?")
-}
-text gText_Quest_SmoothieCrafting_YeahWeCleanOut{
-    format("Yeah! We clean out your Pokémon bodies so you can toughen them up the way they should be! That's what our ad said, right?")
-}
-text gText_Quest_SmoothieCrafting_ICantBelieveThis{
-    format("...I can't believe this shit! I wanted to toughen my team up! Ugh!")
-}

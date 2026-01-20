@@ -1,5 +1,4 @@
 //Quest_BetweenAStoneAndAHardPlace
-//gText_Quest_BetweenAStoneAndAHardPlace
 //
 //PSF TODO Look into StorytellerGetRecordedTrainerStat to figure out how to cnvert GAME_STAT into stringvar or something that be used or read
 //PSF TODO replace all uses of VAR_NUM_TROLLEY_RIDES with GAME_STAT_TROLLEY_RIDES so we're not using two variables for the same thing
@@ -70,35 +69,4 @@ script Quest_BetweenAStoneAndAHardPlace_Complete_Dialogue{
     }
     msgbox(format("We should pivot to a more honest advertising model. I don't think I can handle more angry messages on Buzzr!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
     end
-}
-
-text gText_Quest_BetweenAStoneAndAHardPlace_DidYouHear {
-    format("Did you hear about the promotion we're doing? Ride the trolleys in Resido 10 times, and get a mega powerful stone for pushing the limits of your Pokemons power!")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_YouShouldTry {
-    format("You should try out the trolleys around the region. They're a great way to get around!")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_AreYouNew {
-    format("Are you new to the region? You should really give the trolleys a try!")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_YoureARegular {
-    format("You're a regular, {PLAYER}! Thanks for supporting the trolley system. Come back when you've done 10 rides!")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_OhWowOnly {
-    format("Oh wow! {STR_VAR_1} rides! Excited to get your prize?")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_GladToSeeYoureEnjoying {
-    format("Glad to see you're enjoying the trolley system, {PLAYER}!")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_ForYourContinuedRidership {
-    format("For your continued ridership, we'd like to present you with a special evolutionary stones!")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_AhhPleaseDont {
-    format("Aaah, I can tell you're disappointed. Please don't be mad... we had some Mega Stones, but then we ran out. We had to reword the ad to keep people coming in, but all of the Trainers have been so mad!")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_Yeah {
-    format("...yeah. Not what I was expecting. But thanks, I guess.")
-}
-text gText_Quest_BetweenAStoneAndAHardPlace_WeShouldPivot{
-    format("We should pivot to a more honest advertising model. I don't think I can handle more angry messages on Buzzr!")
 }

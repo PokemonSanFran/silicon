@@ -10,7 +10,6 @@ const FLAG_HIDE_PERSON_C = FLAG_TEMP_9
 const FLAG_HIDE_PERSON_D = FLAG_TEMP_A
 const FLAG_HIDE_COP = FLAG_TEMP_B
 
-//gText_NeighborhoodCleanUp2_
 //Quest_NeighborhoodCleanUp2_
 
 script Quest_NeighborhoodCleanUp2_ObjectVisibility_Script{
@@ -110,29 +109,30 @@ script Quest_NeighborhoodCleanUp2_Complete_Dialogue{
 }
 
 script Quest_NeighborhoodCleanUp2_Interact_PersonA_Script{
-    trainerbattle_single(TRAINER_VAGRANT_1_CURENO_PORT,gText_NeighborhoodCleanUp2_WhoAreYouDo,gText_NeighborhoodCleanUp2_IGuessImNot)
+    trainerbattle_single(TRAINER_VAGRANT_1_CURENO_PORT,format("Who are you? Do you have a problem with me being here?"),format("I guess I'm not as strong as I thought. Fine, I'll leave the park like you want me to."))
     msgbox(format("I'm just trying to get by. It's tough out here on the streets, you know?"),MSGBOX_NPC,SPEAKER_RUSTY)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantA_Script)
     end
 }
 script Quest_NeighborhoodCleanUp2_Interact_PersonB_Script{
-    trainerbattle_single(TRAINER_VAGRANT_2_CURENO_PORT,gText_NeighborhoodCleanUp2_YouThinkYoureTough,gText_NeighborhoodCleanUp2_ImJustHangingOut)
+    trainerbattle_single(TRAINER_VAGRANT_2_CURENO_PORT,format("You think you're tough stuff? Let's see what you've got!"),format("I'm just hanging out here, man. What's the big deal?"))
     msgbox(format("I can't believe I lost. I guess I'll leave the park now."),MSGBOX_NPC,SPEAKER_WILLOW)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantB_Script)
     end
 }
 script Quest_NeighborhoodCleanUp2_Interact_PersonC_Script{
-    trainerbattle_single(TRAINER_VAGRANT_3_CURENO_PORT,gText_NeighborhoodCleanUp2_IllBattleYouIf,gText_NeighborhoodCleanUp2_YouWantMeToLeave)
+    trainerbattle_single(TRAINER_VAGRANT_3_CURENO_PORT,format("I'll battle you if you want, but don't expect an easy win."),format("You want me to leave? Why don't you mind your own business?"))
     msgbox(format("I'm just trying to catch some Z's. Is that too much to ask?"),MSGBOX_NPC,SPEAKER_GRIFF)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantC_Script)
     end
 }
 script Quest_NeighborhoodCleanUp2_Interact_PersonD_Script{
-    trainerbattle_single(TRAINER_VAGRANT_4_CURENO_PORT,gText_NeighborhoodCleanUp2_WhatDoYouWant,gText_NeighborhoodCleanUp2_YoureStrongerThanYou)
+    trainerbattle_single(TRAINER_VAGRANT_4_CURENO_PORT,format("What do you want? Can't you see I'm busy?"),format("You're stronger than you look. But that doesn't mean I'm leaving."))
     msgbox(format("I'm just here to relax. Can't a guy catch a break?"),MSGBOX_NPC,SPEAKER_LUNA)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP2,Quest_NeighborhoodCleanUp2_RemoveVagrantD_Script)
     end
 }
+
 script Quest_NeighborhoodCleanUp2_RemoveVagrantA_Script{
     lock
     msgbox(format("I'm sorry, but you can't stay here. It's for the best."),,SPEAKER_ALICIA)

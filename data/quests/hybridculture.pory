@@ -2,7 +2,6 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const SHINZO = 1
 const FLAG_HIDE_SHINZO = FLAG_TEMP_1
 //script Quest_HybridCulture
-//text gText_HybridCulture
 
 script Quest_HybridCulture_HideLeader_Script{
 
@@ -122,37 +121,6 @@ script Quest_HybridCulture_Complete_Dialogue{
     waitse
     closedoor(17,6)
     end
-}
-
-text gText_HybridCulture_HeyThanksFor{
-    format("Hey, thanks again for your help in HodouCity. That was a rough situation, but was a wake up call. That's not anything like what I want to be.")
-}
-text gText_HybridCulture_IThinkINeedToLearn{
-    format("I think I need to learn more about the culture of Resido.")
-}
-text gText_HybridCulture_HaveYouStarted{
-    format("Have you started with just ToraTown? Maybe find the best parts of your culture and see how they're represented here.")
-}
-text gText_HybridCulture_IHaventYet{
-    format("I haven't yet. But perhaps that's a good idea.")
-}
-text gText_HybridCulture_CanYouHelp{
-    format("Can you help with that? You're a traveling Trainer, so you'll see more of ToraTown than I will. What are the great parts of ToraTown culture?")
-}
-text gText_HybridCulture_HaveYouHad{
-    format("Have you had any luck learning about ToraTown culture?")
-}
-text gText_HybridCulture_OhWhatDidYouLearn{
-    format("Oh! What did you learn?")
-}
-text gText_HybridCulture_PlayerExplained{
-    format("{PLAYER} explained what they learned about ToraTown's food, traditions, and fashion.")
-}
-text gText_HybridCulture_ThankYou{
-    format("Thank you. In a way, it is beautiful to see my country appreciated in this new way. I'm glad the people here love my culture as much I do. Please, take this!") //PSF TODO EMOTE sniff
-}
-text gText_HybridCulture_IHaveSoMuch{
-    format("I think for now, I'll go back to my Gym. Now that you're stronger, I'd love to battle you again!")
 }
 
 movement Quest_HybridCulture_WalkBackIntoGym_Movement{

@@ -161,7 +161,7 @@ script Quest_Alohafromalola_StartBattle_Dialogue{
         waitmovement(EMRYS)
         //PSF TODO make sure they use a Z-Move here
         setvar(VAR_EMRYS_STATE,EXHIBITION_COMPLETE)
-        trainerbattle_continue_after_lose(TRAINER_ALOHAFROMALOLA_EMRYS,gText_Alohafromalola_AndZMoves)
+		trainerbattle_continue_after_lose(TRAINER_ALOHAFROMALOLA_EMRYS,format("Not even Z-Moves can stop you!"))
         delay(60)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_PERLACIA_CITY_GYM_ENTRANCE,255,9,13)
@@ -205,54 +205,3 @@ movement Quest_Alohafromalola_WalkToExhibit_Movement{
         step_end
 }
 
-text gText_Alohafromalola_WeArePreparing{
-    format("We are preparing for a private exhibition opening. Please come back another time.")
-}
-text gText_Alohafromalola_TheresAPrivate{
-    format("There is a private exhibition opening tonight. Please come back another time.")
-}
-text gText_Alohafromalola_WaitICanPerform{
-    format("Wait, I can perform at the opening but I can't be there?")
-}
-text gText_Alohafromalola_OhManIAm{
-    format("Oh, this is an absolute mess. Worse than the blunder of Tohjo Falls, I'll say.")
-}
-text gText_Alohafromalola_OhPlayer{
-    format("Oh, {PLAYER}!")
-}
-text gText_Alohafromalola_HeyThere{
-    format("Hey Emrys, you seem... stressed?")
-}
-text gText_Alohafromalola_ImSupposedTo{
-    format("I'm supposed to have an exhibition battle against one of the Alola Island Kahunas tonight for the opening of our 'Aloha from Alola' exhibit. I just recived a call telling me they're cancelling! People were coming for a real battle demonstration, and I don't have a suitable substiute...")
-}
-text gText_Alohafromalola_OhYouCan{
-    format("Oh! You! You're skilled!")
-}
-text gText_Alohafromalola_ComeBackTonight{
-    format("Come back tonight, with 3 Pokémon that can be found in Alola. You'll have to do on such short notice!")
-}
-text gText_Alohafromalola_YourParty{
-    format("Your party needs to be 3 Pokémon, and only those that can be found in Alola. You can look at the exhibit posters around the lobby if you're unsure of what Pokémon are found there.")
-}
-text gText_Alohafromalola_PerfectDidYou{
-    format("Your party looks perfect, and your timing is excellent. Let's get in there!")
-}
-text gText_Alohafromalola_ThankYouAll{
-    format("Thank you all for attending our exhibition! For our finale, {PLAYER} has graceiously offered to battle against the Alolan might of Z-Moves!")
-}
-text gText_Alohafromalola_AndZMoves{
-    format("Not even Z-Moves can stop you!")
-}
-text gText_Alohafromalola_YouWereGreat{
-    format("You were astounding! Thank you so much.")
-}
-text gText_Alohafromalola_IRealizeNowYouDont{
-    format("You won even though we weren't on an even playing field... but you can take this! I can get another one.")
-}
-text gText_Alohafromalola_EmrysGaveYou{
-    format("{PLAYER} obtained a Z-Power Ring and a Z-Crystal!")
-}
-text gText_Alohafromalola_GoingToTheBar{
-    format("And now for some Alolan libations!")
-}

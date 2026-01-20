@@ -1,4 +1,3 @@
-//gText_Bodegaburnout_
 //Quest_Bodegaburnout_
 
 const DELIVER = 0
@@ -185,44 +184,6 @@ script Quest_Bodegaburnout_Warehousewarfare_Dialogue{
     return
 }
 
-text gText_Bodegaburnout_OhIHeard{
-    format("Oh, I heard you'd be coming. You're {PLAYER}, right?")
-}
-text gText_Bodegaburnout_ComeBackWhen{
-    format("Come back when you do! Or when you need anything, of course.")
-}
-text gText_Bodegaburnout_AskForMon{
-    format("Are you sure you're okay giving us this mon?")
-}
-text gText_Bodegaburnout_WordHasBeenGetting{
-    format("Word has getting around about you helping out. Thanks so much! You should meet with the leader of the union in CresaltaVista.")
-}
-text gText_Bodegaburnout_YouKnowIDont{
-    format("You know, I don't think that mon will work.")
-}
-text gText_Bodegaburnout_ThatsYourLast{
-    format("I can't take that! Its your last Mon!")
-}
-text gText_Bodegaburnout_HeyWeAllNoticed{
-    format("Hey, we all noticed you helping out, so we got you this.")
-}
-text gText_Bodegaburnout_YoureARealOne{
-    format("You're a real one!")
-}
-text gText_Bodegaburnout_DoYouHave{
-    format("We need a {STR_VAR_1} {STR_VAR_3} to help us {STR_VAR_2}.\NDo you have one?")
-}
-text gText_Bodegaburnout_CanYouDeliever{
-    format("Can you deliever this to {STR_VAR_1}? They're on {STR_VAR_2}.")
-}
-text gText_Bodegaburnout_WentMissing{
-    format("Can you help us find {STR_VAR_1}?\NWe sent them over to {STR_VAR_2} but they haven't returned...")
-}
-
-text gText_Bodegaburnout_OhRightIGave{
-    format("Huh? Oh right, I gave you the package already!")
-}
-
 // ***********************************************************************
 // Related NPCs
 // ***********************************************************************
@@ -230,9 +191,9 @@ text gText_Bodegaburnout_OhRightIGave{
 script Quest_Bodegaburnout_DeliveryA_Dialogue{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_1)
     if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
     }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
         special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
         call(Quest_Bodegaburnout_CheckReward_Script)
     }
@@ -242,9 +203,9 @@ script Quest_Bodegaburnout_DeliveryA_Dialogue{
 script Quest_Bodegaburnout_DeliveryB_Dialogue{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_2)
     if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
     }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
         special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
         call(Quest_Bodegaburnout_CheckReward_Script)
     }
@@ -254,9 +215,9 @@ script Quest_Bodegaburnout_DeliveryB_Dialogue{
 script Quest_Bodegaburnout_DeliveryC_Dialogue{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_3)
     if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
     }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
         special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
         call(Quest_Bodegaburnout_CheckReward_Script)
     }
@@ -266,9 +227,9 @@ script Quest_Bodegaburnout_DeliveryC_Dialogue{
 script Quest_Bodegaburnout_DeliveryD_Dialogue{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_4)
     if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
     }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
         special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
         call(Quest_Bodegaburnout_CheckReward_Script)
     }
@@ -278,9 +239,9 @@ script Quest_Bodegaburnout_DeliveryD_Dialogue{
 script Quest_Bodegaburnout_DeliveryE_Dialogue{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_5)
     if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
     }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
         special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
         call(Quest_Bodegaburnout_CheckReward_Script)
     }
@@ -290,9 +251,9 @@ script Quest_Bodegaburnout_DeliveryE_Dialogue{
 script Quest_Bodegaburnout_DeliveryF_Dialogue{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_6)
     if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
     }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
         special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
         call(Quest_Bodegaburnout_CheckReward_Script)
     }
@@ -309,37 +270,37 @@ script Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script{
 }
 
 script Quest_Bodegaburnout_RescueA_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
     call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
     release
     end
 }
 script Quest_Bodegaburnout_RescueB_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
     call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
     release
     end
 }
 script Quest_Bodegaburnout_RescueC_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
     call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
     release
     end
 }
 script Quest_Bodegaburnout_RescueD_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
     call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
     release
     end
 }
 script Quest_Bodegaburnout_RescueE_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
     call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
     release
     end
 }
 script Quest_Bodegaburnout_RescueF_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
     call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
     release
     end

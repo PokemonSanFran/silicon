@@ -3,7 +3,6 @@ const EMRYS = 7
 const FLAG_HIDE_EMRYS = FLAG_TEMP_5
 
 //Quest_BuildingAnExhibit_
-//gText_BuildingAnExhibit_
 
 script Quest_BuildingAnExhibit_Debug_Script{
     setvar(VAR_TEMP_0,1)
@@ -260,82 +259,4 @@ script Quest_BuildingAnExhibit_Reward_Dialogue{
 movement Quest_BuildingAnExhibit_WalkAway_Movement{
     walk_right * 6
     step_end
-}
-text gText_BuildingAnExhibit_HeyPlayer{
-    format("Hey {PLAYER}")
-}
-text gText_BuildingAnExhibit_WereBuilding{
-    format("were building an exhibit for the oroland colisseum. real sad to see it being torn down, you know")
-}
-text gText_BuildingAnExhibit_ThereAreSomeReallyHard{
-    format("there are some really hard items that we can't seem too get a hold off. can you help us? we need... a ticket stub to the last battle in the stadium, a signed champion's cape, the toxic spikes from the field of the first battle,  a limited edition set of Magnus bobbleheads.")
-}
-text gText_BuildingAnExhibit_ItsLikeHuntingANeedle{
-    format("its like hunting a needle in a haystack!")
-}
-text gText_BuildingAnExhibit_MyHomeWasInvaded{
-    format("my home was invdaded, they took so much stuff including the ticket stubs. i can't shake the feeling its related to that exhibit you were talkinga bout...")
-}
-text gText_BuildingAnExhibit_MyTicketsFromThe2015ChampionshipGame{
-    format("my tickets from the 2015 championship match are among my prized possessions")
-}
-text gText_BuildingAnExhibit_ThatMatchWasElectric{
-    format("that match was absolutely electric! i'll never forget that.")
-}
-text gText_BuildingAnExhibit_ThatExhibitSoundsCool{
-    format("that exhibit sounds cool, but I could never give up my tickets.")
-}
-text gText_BuildingAnExhibit_TheChampionsCapeIsGone{
-    format("The signed cape is gone! I was attacked by a hooded figure with an aerodactyl. they made me hand it off.")
-}
-text gText_BuildingAnExhibit_TheyWereTrulyOneOfMy{
-    format("the old champion was one of my students. one of my favorites too. after they became champion, he came by and gave me a signed cape to thank me")
-}
-text gText_BuildingAnExhibit_ItWasSoGreatToSee{
-    format("it was so great to see them do well, and even greater to see them acknowledge me!")
-}
-text gText_BuildingAnExhibit_AsATeacherIWant{
-    format("as a teacher, i know this exhibit is important for teaching, but I couldn't possibly donate it")
-}
-text gText_BuildingAnExhibit_IWasMugged{
-    format("i have a bit of a gambling problem... and i had to gamble away the spikes. i lost everything. my wife is gonna kill me...")
-}
-text gText_BuildingAnExhibit_IWasAJanitor{
-    format("i was a janitor at the old Oroland colisseum. this ninja from another region had come to challenge the Elite Four and he was so cool and used these to help him win.")
-}
-text gText_BuildingAnExhibit_TheseSpikesWereSpecial{
-    format("she didn't become champion but i thought they were cool so I took them home and they're part of my collection")
-}
-text gText_BuildingAnExhibit_IDontHoldOnto{
-    format("Janine is one of my favorite trainers. an idol even! this is as close as I'm going to get from him. i can't give 'em up")
-}
-text gText_BuildingAnExhibit_MyBobbleheads{
-    format("my bobbleheads were taken! i was going to the hardware store for shelves, I set them down on the counter and forgot them... and when i went back, they were gone!")
-}
-text gText_BuildingAnExhibit_OhMyBobbleheadCollection{
-    format("oh my bobblehead collection is amazing. they're one of a kind, because all the heads are Magnus instead of each of the Elite Four members.")
-}
-text gText_BuildingAnExhibit_ItsTheLastThing{
-    format("my son worked at the factory that created these and these were created by mistake... but he knew that Magnus was my favorite, so he brought them home for me! i'll never forget.")
-}
-text gText_BuildingAnExhibit_ImSorryICouldNeverPart{
-    format("Oh? You're looking to buy them from me? Sorry, I could never part with them.")
-}
-text gText_BuildingAnExhibit_TrackedThemAllDown{
-    format("You tracked them all down? Well, let's hear the details!")
-}
-text gText_BuildingAnExhibit_PlayerExplainedTheir{
-    format("{PLAYER} explained their encounters with the owners of the items.")
-}
-text gText_BuildingAnExhibit_WowAllOfThem{
-    format("wow, all of them are unwilling to sell. increidible.")
-}
-text gText_BuildingAnExhibit_NoMatterThisWasEducational{
-    format("no matter. this was educational, at least. a shame though.")
-}
-text gText_BuildingAnExhibit_IAppreciateYourEfforts{
-    format("i appreciate your efforts. Please take this.")
-}
-text gText_BuildingAnExhibit_IllSeeYouAround{
-    format("I'll see you around")
 }

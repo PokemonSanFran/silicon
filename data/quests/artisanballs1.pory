@@ -1,9 +1,6 @@
 //Quest_ArtisanBalls1_
 //Quest_ArtisanBalls2_
 //Quest_ArtisanBalls3_
-//gText_Quest_ArtisanBalls1_
-//gText_Quest_ArtisanBalls2_
-//gText_Quest_ArtisanBalls3_
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const TRAINER_A = 1
 const TRAINER_B = 1
@@ -400,7 +397,7 @@ script Quest_ArtisanBalls2_Active_Dialogue {
 }
 
 script Quest_ArtisanBalls2_TrainerA_Event_Script{
-	trainerbattle_single(TRAINER_ARTISANBALLS2_A, gText_Quest_ArtisanBalls2_YoudThink, gText_Quest_ArtisanBalls2_NotEvenClose, Quest_ArtisanBalls2_TrainerA_PostBattle_Script)
+	trainerbattle_single(TRAINER_ARTISANBALLS2_A,format("You'd think office management and Pokémon management would be similar..."),format("Not even close!"), Quest_ArtisanBalls2_TrainerA_PostBattle_Script)
 }
 
 script Quest_ArtisanBalls2_TrainerA_PostBattle_Script{
@@ -425,8 +422,9 @@ script Quest_ArtisanBalls2_TrainerA_PostBattle_Script{
 	release
 	end
 }
+
 script Quest_ArtisanBalls2_TrainerB_Event_Script{
-	trainerbattle_single(TRAINER_ARTISANBALLS2_B, gText_Quest_ArtisanBalls2_MyPersonalBrand, gText_Quest_ArtisanBalls2_IHopeGettingDefeated, Quest_ArtisanBalls2_TrainerB_PostBattle_Script)
+	trainerbattle_single(TRAINER_ARTISANBALLS2_B, format("My personal brand is the most important thing!"), format("I hope gettind defeated doesn't hurt my brand..."), Quest_ArtisanBalls2_TrainerB_PostBattle_Script)
 }
 
 script Quest_ArtisanBalls2_TrainerB_PostBattle_Script{
@@ -452,7 +450,7 @@ script Quest_ArtisanBalls2_TrainerB_PostBattle_Script{
 }
 
 script Quest_ArtisanBalls2_TrainerC_Event_Script{
-	trainerbattle_single(TRAINER_ARTISANBALLS2_C, gText_Quest_ArtisanBalls2_IMissHelpingPeople, gText_Quest_ArtisanBalls2_DidIHelpYou, Quest_ArtisanBalls2_TrainerC_PostBattle_Script)
+	trainerbattle_single(TRAINER_ARTISANBALLS2_C, format("I miss helping people. Serving is my passion!"), format("Did I help you today?"), Quest_ArtisanBalls2_TrainerC_PostBattle_Script)
 }
 
 script Quest_ArtisanBalls2_TrainerC_PostBattle_Script{
@@ -692,168 +690,6 @@ text Quest_ArtisanBalls1_CraftBallList{
     "$"
 }
 
-text gText_Quest_ArtisanBalls1_WhichPokeBall{
-    format("Which craft Poké Ball would you like to read about?")
-}
-
-text gText_Quest_ArtisanBalls1_ExplainFast{
-    format("Pokémon that are naturally very fast will be more easily captured with the Fast Ball.")
-}
-text gText_Quest_ArtisanBalls1_ExplainLevel{
-    format("The Level Ball is most successful when the user's Pokémon is a higher level than the wild Pokémon being captured.")
-}
-text gText_Quest_ArtisanBalls1_ExplainLure{
-    format("The Lure Ball works best in a battle that was initated by fishing.")
-}
-text gText_Quest_ArtisanBalls1_ExplainHeavy{
-    format("The Heavy Ball is less successful on light Pokémon and more successful on Heavy Pokémon!")
-}
-text gText_Quest_ArtisanBalls1_ExplainLove{
-    format("The Love Ball works best when the user's Pokémon is the opposite gender of the wild Pokémon being captured.")
-}
-text gText_Quest_ArtisanBalls1_ExplainFriend{
-    format("Pokémon captured with the Friend Ball will initally be more friendly to the Trainer that captured it.")
-}
-text gText_Quest_ArtisanBalls1_ExplainMoon{
-    format("If the Pokémon being captured is part of an evolutionary family that uses a Moon Stone to evolve, the Moon Ball will be more effective.")
-}
-
-text gText_Quest_ArtisanBalls1_IGotFired {
-	format("I make craft PokéBalls. I'm tired of working for somebody else, and want to open a shop selling my Balls! Would you be willing to test my PokeBalls?")
-}
-text gText_Quest_ArtisanBalls1_SergeyGaveYou {
-	format("{PLAYER} obtained a set of craft PokéBalls!")
-}
-text gText_Quest_ArtisanBalls1_ComeBack{
-    format("That set has one of each: Fast, Level, Lure, Love, Friend and a Moon Ball. The books explain how to best use them. Come back if you need more PokeBalls.")
-}
-text gText_Quest_ArtisanBalls1_HowIsProgress {
-	format("How is progress going?")
-}
-text gText_Quest_ArtisanBalls1__ThoseBallsCanBe {
-	format("Those balls can be tricky to use! You gotta make sure you're picking the right targets.")
-}
-text gText_Quest_ArtisanBalls1_DidYouRunOut {
-	format("Did you run out? Here, I'll help you...")
-}
-text gText_Quest_ArtisanBalls1_JustMadeThatToday {
-	format("Just made those today. Let me know how they do!")
-}
-text gText_Quest_ArtisanBalls1_SoTheyAllWork {
-	format("So they all work well? Fantastic. Thank you so much for your help! Time to start reaching out and really selling them. Take this as a thanks!")
-}
-text gText_Quest_ArtisanBalls2_LookingToBuyOr{
-	format("Hey {PLAYER}! Are you here to buy, or do you wanna hear the latest news with the business?")
-}
-text gText_Quest_ArtisanBalls2_LookingToBuyActive{
-	format("Hey {PLAYER}! Are you here to buy, or do you have an update?")
-}
-text gText_Quest_ArtisanBalls2_IMadeA {
-	format("I made a small batch this morning. Want {STR_VAR_3} for ¥1300?")
-}
-text gText_Quest_ArtisanBalls2_NoWorries {
-	format("I'll be here if you change your mind.")
-}
-text gText_Quest_ArtisanBalls2_ImReadyToExpand {
-	format("Things are going well, and I think I'm ready to expand.")
-}
-text gText_Quest_ArtisanBalls2_ThatsAmazing {
-	format("That's amazing! Congrats Sergey!")
-}
-text gText_Quest_ArtisanBalls2_INeedHelp {
-	format("I need help though. There's a lot of work to do, so I'm going to need to hire people... I think I need an office manager, customer service rep, and a marketing manger. Could you help me find some people? I want to hire people that really use and understand my products. There's gotta be Trainers out there that are using my Balls, right?")
-}
-text gText_Quest_ArtisanBalls2_WowPeopleAre{
-    format("Wow! People are slowly trickling in... I think we can actually pull this off!")
-}
-text gText_Quest_ArtisanBalls2_FindingHelp {
-	format("Finding help is tough, isn't it?")
-}
-text gText_Quest_ArtisanBalls2_YoudThink {
-	format("You'd think office management and Pokémon management would be similar...")
-}
-text gText_Quest_ArtisanBalls2_NotEvenClose {
-	format("Not even close!")
-}
-text gText_Quest_ArtisanBalls2_WhereDidYouGet {
-	format("Where did you get those PokéBalls?")
-}
-text gText_Quest_ArtisanBalls2_MyGirlfriend {
-	format("My girlfriend got them for me as a present! I guess there's some craft seller making them.")
-}
-text gText_Quest_ArtisanBalls2_OfficeManagerRight {
-	format("You mentioned Office Management, right? The guy who made those balls is actually looking to hire somebody for that. You should talk to him, he's in ToraTown.")
-}
-text gText_Quest_ArtisanBalls2_WaitReally {
-	format("Wait, really? I absolutely need a new gig, and that sounds amazing! Thank you so much.")
-}
-text gText_Quest_ArtisanBalls2_MyPersonalBrand {
-	format("My personal brand is the most important thing!")
-}
-text gText_Quest_ArtisanBalls2_IHopeGettingDefeated {
-	format("I hope gettind defeated doesn't hurt my brand...")
-}
-text gText_Quest_ArtisanBalls2_ISawThe {
-	format("I saw the collection on Buzzr and wanted to try them out. Why?")
-}
-text gText_Quest_ArtisanBalls2_YouSaidYouWereInto {
-	format("You said you were into branding, right? The guy who made those balls is actually looking to hire somebody for that. You should talk to him, he's in ToraTown.")
-}
-text gText_Quest_ArtisanBalls2_OhManWhat {
-	format("Oh man, what? I gotta get over there right now!")
-}
-text gText_Quest_ArtisanBalls2_IMissHelpingPeople {
-	format("I miss helping people. Serving is my passion!")
-}
-text gText_Quest_ArtisanBalls2_DidIHelpYou {
-	format("Did I help you today?")
-}
-text gText_Quest_ArtisanBalls2_IfYouLikeHelping {
-	format("If you like helping people, the guy who made those Balls is looking for a customer service rep. You should go to ToraTown and talk to him!")
-}
-text gText_Quest_ArtisanBalls2_IMetTheVendor {
-	format("I met the vendor a local business trade show!")
-}
-text gText_Quest_ArtisanBalls2_ThatWouldBe {
-	format("That would be amazing! I'll head over there now.")
-}
-text gText_Quest_ArtisanBalls2_IThinkIHaveTheStaff{
-	format("I think I have the staff to finally expand out. It's all thanks to you. I was able to do a limited run of a new ball, and I want you to have some!")
-}
-text gText_Quest_ArtisanBalls3_WhatBallsDoYou{
-	format("What PokéBalls do you need today?")
-}
-text gText_Quest_ArtisanBalls3_ThanksAgain{
-	format("Thanks again!")
-}
-text gText_Quest_ArtisanBalls3_BusinessHasBeen{
-	format("Business has been crazy! The new staff really has been amazing, we've got a good product, and I'm doing what I love.")
-}
-text gText_Quest_ArtisanBalls3_IveBeenTalkingTo{
-	format("I've been talking to some Silph Co. executives too. They want to acquire us! I want to see if we can do a big marketing push soon so I can keep showing them growth. Could you do me one last favor? Go defeat one of the Gym Leaders in Resido using a Pokémon in one of those Balls.")
-}
-text gText_Quest_ArtisanBalls3_CantWaitToSee{
-	format("I can't wait to see your battle!")
-}
-text gText_Quest_ArtisanBalls3_DidYouHearThat{
-	format("Did you hear that?!?!?")
-}
-text gText_Quest_ArtisanBalls3_NoButItSounds {
-	format("No, but it sounds like something good!")
-}
-text gText_Quest_ArtisanBalls3_TheyWantToAcquire {
-	format("They want to acquire us! We're getting a huge buyout, and we get to keep working at Silph as part of their new craft division! This was all thanks to you, {PLAYER}. I couldn't have asked for more. They gave us this to celebrate the acquisition, but I want you to have it.")
-}
-text gText_Quest_ArtisanBalls3_ImSoExcitedForWhat{
-	format("I'm so excited for what will come next!")
-}
-//PSF TODO support @ symbols in charset
-text gText_Quest_ArtisanBalls1_TheDoorIsLockedBut{
-	format("The door is locked, but there is a sign on the door: This location has been closed. Please direct all questions to support at silph.co. Thank you for choosing Silph Co.!\pThere is another note below it. Do you want to read it?")
-}
-text gText_Quest_ArtisanBalls1_ToMyCustomers{
-	format("To my loyal customers,\NSilph laid us all off. They bought my company, took the patents, and laid us all off. I feel so... used. Thank you for your support as we grew and thank you for enjoying our products. Special thanks to {PLAYER}, who always believed in us.\p- Sergey")
-}
 movement Quest_ArtisanBalls3_LeaveRoom_Movement{
     walk_down
     walk_right

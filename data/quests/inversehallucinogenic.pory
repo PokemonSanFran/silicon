@@ -1,5 +1,4 @@
 //Quest_Inversehallucinogenic_
-//gText_Inversehallucinogenic_
 const FLAG_HIDE_GYM_TRAINERS = FLAG_TEMP_1
 const FLAG_HIDE_DRUG_TRAINERS = FLAG_TEMP_2
 const FLAG_HIDE_BD_OUTSIDE = FLAG_TEMP_7
@@ -65,7 +64,7 @@ script Quest_Inversehallucinogenic_StartQuest_Script{
 
 script Quest_Inversehallucinogenic_EventScript_Merril{
     setflag(FLAG_INVERSE_BATTLE)
-    trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_A,gText_Inversehallucinogenic_IKnewSharpriseCapital,gText_Inversehallucinogenic_TheyreNot,Quest_Inversehallucinogenic_PostBattleStory1_Script)
+	trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_A,format("I knew SharpRise Capital's purchase of the Hall of Fame was just the beginning."),format("They're not satisfied with small victories."),Quest_Inversehallucinogenic_PostBattleStory1_Script)
     msgbox(format("They want it all, so, I stepped up and did it."),MSGBOX_NPC,SPEAKER_BD)
     closemessage
     end
@@ -73,21 +72,22 @@ script Quest_Inversehallucinogenic_EventScript_Merril{
 
 script Quest_Inversehallucinogenic_EventScript_Kinsey{
     setflag(FLAG_INVERSE_BATTLE)
-    trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_B,gText_Inversehallucinogenic_IAuthorizedThe,gText_Inversehallucinogenic_TheBoardWasn,Quest_Inversehallucinogenic_PostBattleStory2_Script)
+	trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_B,format("I authorized the full buyout on the board because I knew they needed someone to do it."),format("The board wasn't a unified front, and that gave SharpRise Capital exactly what they needed."),Quest_Inversehallucinogenic_PostBattleStory2_Script)
+
     msgbox(format("Lying to Imelda hurt, but I knew she wouldn't understand. Nobody did."),MSGBOX_NPC,SPEAKER_BD)
     end
 }
 
 script Quest_Inversehallucinogenic_EventScript_Kaley{
     setflag(FLAG_INVERSE_BATTLE)
-    trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_C,gText_Inversehallucinogenic_IBelievedThat,gText_Inversehallucinogenic_IKnewIf,Quest_Inversehallucinogenic_PostBattleStory3_Script)
+	trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_C,format("I believed that the ends justified the means."),format("I knew if SharpRise Capital didn't use me, they would find another way."),Quest_Inversehallucinogenic_PostBattleStory3_Script)
     msgbox(format("I wanted to work with them, not against them."),MSGBOX_NPC,SPEAKER_BD)
     end
 }
 
 script Quest_Inversehallucinogenic_EventScript_Torey{
     setflag(FLAG_INVERSE_BATTLE)
-    trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_D,gText_Inversehallucinogenic_IThoughtWe,gText_Inversehallucinogenic_IDidnt,Quest_Inversehallucinogenic_PostBattleStory4_Script)
+	trainerbattle_single(TRAINER_INVERSEHALLUCINOGENIC_TRAINER_D,format("I thought we could forge a new future together."),format("I didn't lie when I told them I was with them. I tried to save them."),Quest_Inversehallucinogenic_PostBattleStory4_Script)
     msgbox(format("After the first iteration of the new League failed, they laid off the original Gym Leaders and eliminated the Elite Four positions. They all got layoff emails except me."),MSGBOX_NPC,SPEAKER_BD)
     end
 }
@@ -138,7 +138,7 @@ script Quest_Inversehallucinogenic_BD_PreBattle_Dialogue{
 
 script Quest_Inversehallucinogenic_BD_Battle_Script{
     setflag(FLAG_INVERSE_BATTLE)
-    trainerbattle_no_intro(TRAINER_INVERSEHALLUCINOGENIC_BD,gText_Inversehallucinogenic_PeopleCalledMe)
+    trainerbattle_no_intro(TRAINER_INVERSEHALLUCINOGENIC_BD,format("People called me a sellout before, but after the layoffs, it became unbearable."))
     goto(Quest_Inversehallucinogenic_PostBattle_Script)
 }
 
@@ -159,59 +159,4 @@ script Quest_Inversehallucinogenic_PostBattle_Script{
     clearflag(FLAG_INVERSE_BATTLE)
     release
     end
-}
-text gText_Inversehallucinogenic_Player{
-    format("{PLAYER} good timing! I'm testing new aerosol drug, and I need somebody who I know can actually battle well. Can you come inside and rechallenge our Gym? We'll all be under the effects of the new variant. It's totally safe, but I think it changes how you battle. I think. Anyways, see you in there!")
-}
-text gText_Inversehallucinogenic_IKnewSharpriseCapital{
-	format("I knew SharpRise Capital's purchase of the Hall of Fame was just the beginning.")
-}
-text gText_Inversehallucinogenic_TheyreNot{
-	format("They're not satisfied with small victories.")
-}
-text gText_Inversehallucinogenic_TheyWantIt{
-	format("They want it all, so, I stepped up and did it.")
-}
-text gText_Inversehallucinogenic_IAuthorizedThe{
-	format("I authorized the full buyout on the board because I knew they needed someone to do it.")
-}
-text gText_Inversehallucinogenic_TheBoardWasn{
-	format("The board wasn't a unified front, and that gave SharpRise Capital exactly what they needed.")
-}
-text gText_Inversehallucinogenic_LyingToImelda{
-	format("Lying to Imelda hurt, but I knew she wouldn't understand. Nobody did.")
-}
-text gText_Inversehallucinogenic_IBelievedThat{
-	format("I believed that the ends justified the means.")
-}
-text gText_Inversehallucinogenic_IKnewIf{
-	format("I knew if SharpRise Capital didn't use me, they would find another way.")
-}
-text gText_Inversehallucinogenic_IWantedTo{
-	format("I wanted to work with them, not against them.")
-}
-text gText_Inversehallucinogenic_IThoughtWe{
-	format("I thought we could forge a new future together.")
-}
-text gText_Inversehallucinogenic_IDidnt{
-	format("I didn't lie when I told them I was with them. I tried to save them.")
-}
-text gText_Inversehallucinogenic_AfterTheFirst{
-	format("After the first iteration of the new League failed, they laid off the original Gym Leaders and eliminated the Elite Four positions. They all got layoff emails except me.")
-}
-text gText_Inversehallucinogenic_IGotTo{
-	format("I got to keep my job as a reward for my cooperation and obedience.")
-}
-text gText_Inversehallucinogenic_PeopleCalledMe{
-	format("People called me a sellout before, but after the layoffs, it became unbearable.")
-}
-text gText_Inversehallucinogenic_ItsBeen{
-	format("It's been three years, and I'm starting to see that maybe there was another way.")
-}
-text gText_Inversehallucinogenic_UghWhatATrip{
-    format("Ugh man, I don't feel so good. What a wild trip! Thanks for your help testing, I'll review the footage later. Here, take this!")
-}
-
-text gText_Inversehallucinogenic_ComeBack{
-    format("Hopefully I wasn't too chatty... I have a lot of work before I test that variant again. Come back another day, though, maybe we can rematch again.")
 }

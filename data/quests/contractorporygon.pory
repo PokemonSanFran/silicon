@@ -1,5 +1,4 @@
 //Quest_ContractorPorygon_
-//gText_ContractorPorygon_
 
 script Quest_ContractorPorygon_Debug_Script{
     addvar(VAR_TEMP_0,1)
@@ -245,64 +244,4 @@ script Quest_ContractorPorygon_Interact_Nathan_Script{
 	        case QUEST_MENU_SET_ACTIVE: goto(Quest_ContractorPorygon_Subquest2_Script)
 	        default: goto(Quest_ContractorPorygon_Focused_Dialogue)
 	}
-}
-text gText_ContractorPorygon_HeyWereAStartup{
-	format("hey we're a startup. the league asked us to replicate the work of Cinnabar Pokemon Lab and create Porygon... and its evolutions... in one work")
-}
-text gText_ContractorPorygon_WeHaventEatenOrSlept{
-	format("its a tough task. we haven't eaten or slept in about 90 hours")
-}
-text gText_ContractorPorygon_WhenWeDoGetHungry{
-	format("when we do get hungry, we're not gonna have time to get food. could you swing by later and grab food for us? we'll tell you what we want.")
-}
-text gText_ContractorPorygon_WantToGetOutThisUpgrade{
-	format("want to get out this up-grade.... and i'm so close! after this block of code, I'll eat...")
-}
-text gText_ContractorPorygon_TheyWantMeToReplicate{
-	format("they want me to replicate the dubious disc? that's why its DUBIOUS!")
-}
-text gText_ContractorPorygon_NotReallyHungryYet{
-	format("not really hungry right now... maybe later though. you're probably wondering why we couldn't just order delievery, right? well, we're testing the Porygon on our phones! can't use them for anything else while the tests are running, haha.")
-}
-text gText_ContractorPorygon_OkayGoodStoppingPoint{
-	format("okay, good stopping point!")
-}
-text gText_ContractorPorygon_CouldIGetDumplings{
-	format("could i get some dumplings? dumpling king in the qiuvillage is the best spot for them.")
-}
-text gText_ContractorPorygon_IThinkTheDisc{
-	format("i think the disc is done....")
-}
-text gText_ContractorPorygon_AreYouStillGetting{
-	format("i hear you were getting us food, is that still a thing? Yeah? can I get a salad from Sweetgreeen? It's in Chasilla.")
-}
-text gText_ContractorPorygon_TheProgressTheyreMaking{
-	format("the progress they're making is fucking insane! are the prototypes working well?")
-}
-text gText_ContractorPorygon_IDidntRealize{
-	format("i didn't realize how hungry i was gonna be")
-}
-text gText_ContractorPorygon_ScoreSalad{
-	format("score! salad. thank you so much! i just finished this, give is a try.")
-}
-text gText_ContractorPorygon_YesssDumpling{
-	format("yesssss dumplings this is gonna be so good. here, take this Pokemon.")
-}
-text gText_ContractorPorygon_HellYesCurry{
-	format("hellllll yes curry! UGH this shit is gonna slap.")
-}
-text gText_ContractorPorygon_ThisShouldPay{
-    format("This cash should cover the cost of lunch, right??")
-}
-text gText_ContractorPorygon_AndForHelpingUs{
-    format("And for helping us, you can have this too. You're a beta tester!")
-}
-text gText_ContractorPorygon_IThinkWereGonnaMake{
-	format("I think we're gonna make the deadline!")
-}
-text gText_ContractorPorygon_Focused{
-	format("Hmm.....")
-}
-text gText_ContractorPorygon_YouRecievedA{
-    format("You recieved a {STR_VAR_2}!")
 }

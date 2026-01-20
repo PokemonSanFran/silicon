@@ -1,4 +1,3 @@
-//gText_NeighborhoodCleanUp_
 //Quest_NeighborhoodCleanUp_
 
 const PERSON_A = 13
@@ -122,31 +121,31 @@ script Quest_NeighborhoodCleanUp_Complete_Dialogue{
 }
 
 script Quest_NeighborhoodCleanUp_Interact_PersonA_Script{
-    trainerbattle_single(TRAINER_VAGRANT_1_ROUTE2,gText_NeighborhoodCleanUp_HeyWhatDo,gText_NeighborhoodCleanUp_OwI)
+	    trainerbattle_single(TRAINER_VAGRANT_1_ROUTE2,format("Hey, what do you want? Can't you see I'm trying to take a nap here?"),format("Ow! I didn't think you were actually gonna battle me!"))
     msgbox(format("I'm just hanging out here because it's a good spot to panhandle. There are a lot of tourists around here and they're usually pretty generous."),MSGBOX_NPC,SPEAKER_RUSTY)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP,Quest_NeighborhoodCleanUp_RemoveVagrantA_Script)
     end
 }
 script Quest_NeighborhoodCleanUp_Interact_PersonB_Script{
-    trainerbattle_single(TRAINER_VAGRANT_2_ROUTE2,gText_NeighborhoodCleanUp_WhatDoYouWant,gText_NeighborhoodCleanUp_OofYou)
+    trainerbattle_single(TRAINER_VAGRANT_2_ROUTE2,format("What do you want with me? I'm just minding my own business."),format("Oof! You're tougher than you look."))
     msgbox(format("I'm just hanging out here because it's nice to people watch. People leave me alone and I leave them alone."),MSGBOX_NPC,SPEAKER_WILLOW)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP,Quest_NeighborhoodCleanUp_RemoveVagrantB_Script)
     end
 }
 script Quest_NeighborhoodCleanUp_Interact_PersonC_Script{
-    trainerbattle_single(TRAINER_VAGRANT_3_ROUTE2,gText_NeighborhoodCleanUp_WhoAreYou,gText_NeighborhoodCleanUp_ArghWhy)
+    trainerbattle_single(TRAINER_VAGRANT_3_ROUTE2,format("Who are you? Why are you bothering me?"),format("Argh! Why did I think I could take on a trainer like you?"))
     msgbox(format("I'm just passing through!"),MSGBOX_NPC,SPEAKER_GRIFF)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP,Quest_NeighborhoodCleanUp_RemoveVagrantC_Script)
     end
 }
 script Quest_NeighborhoodCleanUp_Interact_PersonD_Script{
-    trainerbattle_single(TRAINER_VAGRANT_4_ROUTE2,gText_NeighborhoodCleanUp_HeyLeaveMe,gText_NeighborhoodCleanUp_OwWhy)
+    trainerbattle_single(TRAINER_VAGRANT_4_ROUTE2,format("Hey, leave me alone! I'm not doing anything wrong!"),format("Ow! Why did you have to go and battle me?"))
     msgbox(format("I ain't bothering nobody."),MSGBOX_NPC,SPEAKER_LUNA)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP,Quest_NeighborhoodCleanUp_RemoveVagrantD_Script)
     end
 }
 script Quest_NeighborhoodCleanUp_Interact_PersonE_Script{
-    trainerbattle_single(TRAINER_VAGRANT_5_ROUTE2,gText_NeighborhoodCleanUp_WhoAreYouW,gText_NeighborhoodCleanUp_GahYou)
+    trainerbattle_single(TRAINER_VAGRANT_5_ROUTE2,format("Who are you? What do you want with me?"),format("Gah! You're too strong for me!"))
     msgbox(format("You know, this stadium has plenty of empty seats and it's a good place to sleep..."),MSGBOX_NPC,SPEAKER_MAX)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP,Quest_NeighborhoodCleanUp_RemoveVagrantE_Script)
     end
@@ -209,117 +208,3 @@ script Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script{
     return
 }
 
-text gText_NeighborhoodCleanUp_ExcuseMeYoung{
-	format("Excuse me, young trainer. I need your help. I am too busy with stadium security, and there are vagrants hanging around the area, scaring off tourists. Can you help me get rid of them?")
-}
-
-text gText_NeighborhoodCleanUp_HelloAgainTrainer{
-	format("Hello again, trainer. Have you had any luck clearing out those vagrants?")
-}
-
-text gText_NeighborhoodCleanUp_GreatJobTrainer{
-	format("Great job, trainer! The area is much safer now, and tourism has picked up. As a token of our gratitude, please take this reward.")
-}
-
-text gText_NeighborhoodCleanUp_ThankYouForYour{
-	format("Thank you for your help. It seems I might be assigned to a different location soon, but I'm sure the local authorities will continue to keep the area safe.")
-}
-
-text gText_NeighborhoodCleanUp_HeyWhatDo{
-	format("Hey, what do you want? Can't you see I'm trying to take a nap here?")
-}
-
-text gText_NeighborhoodCleanUp_OwI{
-	format("Ow! I didn't think you were actually gonna battle me!")
-}
-
-text gText_NeighborhoodCleanUp_SorryButYou{
-	format("Sorry, but you have to leave this area. The police are cracking down on vagrancy.")
-}
-
-text gText_NeighborhoodCleanUp_UghFine{
-	format("Ugh, fine. I'll leave. But you're not doing anyone any favors, you know that?")
-}
-
-text gText_NeighborhoodCleanUp_WhatDoYouWant{
-	format("What do you want with me? I'm just minding my own business.")
-}
-
-text gText_NeighborhoodCleanUp_OofYou{
-	format("Oof! You're tougher than you look.")
-}
-
-text gText_NeighborhoodCleanUp_ImSorry{
-	format("I'm sorry, but you can't stay here. The police are trying to clean up the area.")
-}
-
-text gText_NeighborhoodCleanUp_IHearYa{
-	format("I hear ya. I'll get going. But where am I supposed to go now?")
-}
-
-text gText_NeighborhoodCleanUp_WhoAreYou{
-	format("Who are you? Why are you bothering me?")
-}
-
-text gText_NeighborhoodCleanUp_ArghWhy{
-	format("Argh! Why did I think I could take on a trainer like you?")
-}
-
-text gText_NeighborhoodCleanUp_SorryButYouCantHang{
-	format("Sorry, but you can't hang around here anymore. The police want to make sure the area is safe for everyone.")
-}
-
-text gText_NeighborhoodCleanUp_IGetIt{
-	format("I get it. I'll leave. But I hope you realize you're not doing anyone any favors by chasing us out of here.")
-}
-
-text gText_NeighborhoodCleanUp_HeyLeaveMe{
-	format("Hey, leave me alone! I'm not doing anything wrong!")
-}
-
-text gText_NeighborhoodCleanUp_OwWhy{
-	format("Ow! Why did you have to go and battle me?")
-}
-
-text gText_NeighborhoodCleanUp_ImSorryBut{
-	format("I'm sorry, but the police want you to leave this area. It's for the safety of everyone.")
-}
-
-text gText_NeighborhoodCleanUp_FineI{
-	format("Fine, I'll leave. But I don't see why everyone's making such a big deal out of this.")
-}
-
-text gText_NeighborhoodCleanUp_WhoAreYouW{
-	format("Who are you? What do you want with me?")
-}
-
-text gText_NeighborhoodCleanUp_GahYou{
-	format("Gah! You're too strong for me!")
-}
-
-text gText_NeighborhoodCleanUp_YouHaveToLeave{
-	format("You have to leave this area. It's not safe for you to be here.")
-}
-
-text gText_NeighborhoodCleanUp_OkayOkay{
-	format("Okay, okay, I'll leave. But where am I supposed to go now?")
-}
-text gText_NeighborhoodCleanUp_ImJustHanging{
-    format("I'm just hanging out here because it's a good spot to panhandle. There are a lot of tourists around here and they're usually pretty generous.")
-}
-
-text gText_NeighborhoodCleanUp_NiceToPeople{
-    format("I'm just hanging out here because it's nice to people watch. People leave me alone and I leave them alone.")
-}
-
-text gText_NeighborhoodCleanUp_JustPassingThrough{
-    format("I'm just passing through!")
-}
-
-text gText_NeighborhoodCleanUp_IAintBothering{
-    format("I ain't bothering nobody.")
-}
-
-text gText_NeighborhoodCleanUp_ThisStadiumHasPlenty{
-    format("You know, this stadium has plenty of empty seats and it's a good place to sleep...")
-}

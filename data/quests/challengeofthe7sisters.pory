@@ -1,4 +1,3 @@
-//gText_Challengeof7Sisters_
 //Quest_Challengeof7Sisters_
 
 const TINA = 1
@@ -552,77 +551,6 @@ movement Quest_Challengeof7Sisters_RachelFromBattlefield_Movement{
     step_end
 }
 
-
 text gText_Challengeof7Sisters_IDidMyBest{
     format("I did my best. I have no regrets!")
-}
-text gText_Challengeof7Sisters_WelcomeToTheSeven{
-    format("Welcome to the Seven Sisters Challenge!")
-}
-text gText_Challengeof7Sisters_AreYouReadyFor{
-    format("Are you ready for the toughest challenge in Resido?")
-}
-text gText_Challengeof7Sisters_YoullBattleTheSeven{
-    format("You'll battle the seven of us amazing sisters, back to back.")
-}
-text gText_Challengeof7Sisters_YouCanOnlyBring{
-    format("You can only bring one Pokémon with you, and there's no breaks in between.")
-}
-text gText_Challengeof7Sisters_TheGoalIsToWin{
-    format("The goal is to win in as few turns as possible.")
-}
-text gText_Challengeof7Sisters_IfYouWin{
-    format("If you can beat all of us, you get a rank depending on how many turns it took over all 7 battles. The first time you achieve a rank, you get a prize!")
-}
-text gText_Challengeof7Sisters_YourLastRecord{
-    format("Your last record was {STR_VAR_1} turns, for an {STR_VAR_2} Rank.")
-}
-text gText_Challengeof7Sisters_YourBestRecord{
-    format("Your best record is {STR_VAR_1} turns, for an {STR_VAR_2} Rank.")
-}
-
-text gText_Challengeof7Sisters_IThinkYouKnowHow{
-    format("I think you know how this works. Shall we get started?")
-}
-text gText_Challengeof7Sisters_WouldYouLikeToPlay{
-    format("Would you like to play?")
-}
-text gText_Challengeof7Sisters_HopeToHear{
-    format("Hope to hear from you soon!")
-}
-text gText_Challengeof7Sisters_LetsGetStarted{
-    format("Let's get started then!")
-}
-text gText_Challengeof7Sisters_OhYourParty{
-    format("Oh wait a second... you have more than one Pokémon with you. Deposit the rest in the PC, and talk to me when you're ready!")
-}
-text gText_Challengeof7Sisters_ImFirst{
-    format("I'm first up!")
-}
-text gText_Challengeof7Sisters_ImSecond{
-    format("I'm second!")
-}
-text gText_Challengeof7Sisters_ImThird{
-    format("I'm third.")
-}
-text gText_Challengeof7Sisters_ImFourth{
-    format("Fourth is me!")
-}
-text gText_Challengeof7Sisters_ImFifth{
-    format("Ready for fifth?")
-}
-text gText_Challengeof7Sisters_ImSixth{
-    format("Tired? This is sixth.")
-}
-text gText_Challengeof7Sisters_ImSeventh{
-    format("Last one!")
-}
-text gText_Challengeof7Sisters_ImSorryButYouFainted{
-	format("I'm sorry, but you fainted before you could beat all of us. Try again next time!")
-}
-text gText_Challengeof7Sisters_CongratulationsYourStreak{
-	format("Congratulations! Your streak of {STR_VAR_1} got you the {STR_VAR_2} Rank!")
-}
-text gText_Challengeof7Sisters_ItWasFun{
-	format("It was fun to battle you! Maybe we'll battle again someday.")
 }

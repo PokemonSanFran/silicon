@@ -1,5 +1,4 @@
 //Quest_InstallNatureProbes_
-//gText_InstallNatureProbes_
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const LIIDIA = 2
@@ -209,76 +208,6 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     end
 }
 
-text gText_InstallNatureProbes_GeezIGottaWorkTonight{
-	format("Geez, I gotta work late tonight if I'm going to finish these reports and the install...\pActually, you're a Trainer! Trainers are exploring places and shit, right?")
-}
-text gText_InstallNatureProbes_CanYouHelp{
-	format("Can you help me with something? I don't think it'll put you too far out of your way. I need to install three probes in LeaverraForest for tracking Pokémon movement. One in the deepest part of the forest, one up on the tallest hill, and one over by the lakeshore. Installing is really easy, you just clip them to the sign posts that we've already got set up there.")
-}
-text gText_InstallNatureProbes_YouHaveAPokedex{
-    format("You've got a PokéDex? Great. I can upgrade it with the Resido Habitat Mode if you help me out.")
-}
-text gText_InstallNatureProbes_WhatProbes{
-	format("What probes did you already install in LeaverraForest?")
-}
-text gText_InstallNatureProbes_TheProbeInTheForest{
-	format("One probe goes in the deepest part of the forest.")
-}
-text gText_InstallNatureProbes_TheProbeOnTheHill{
-	format("One probe goes on the tallest hill.")
-}
-text gText_InstallNatureProbes_TheProbeByTheShore{
-	format("One probe goes by the lake shore.")
-}
-text gText_InstallNatureProbes_WowYouGotAll{
-	format("Wow! You got all of them in? Let's test that...")
-}
-text gText_InstallNatureProbes_TheTrackingIsWorking{
-	format("The tracking is working! You did great, thank you so much. Could I see your Pokédex please? Oh, this isn't the Residomodel... Orre? Fascinating. It should work the same...")
-}
-text gText_InstallNatureProbes_ThatsMyBoss{
-	format("That's my boss, let me just answer that.")
-}
-text gText_InstallNatureProbes_GoForLiidia{
-	format("Go for Liidia!")
-}
-text gText_InstallNatureProbes_IUnderstand{
-	format("...I understand.")
-}
-text gText_InstallNatureProbes_HeThankedMe{
-	format("He thanked me... and then told me that my job was redundant. He told I'm fired, and have to leave the premises immediately.")
-}
-text gText_InstallNatureProbes_IRealizeNow{
-	format("I realize now, I think you put me out of a job. How could I be so... naive?")
-}
-text gText_InstallNatureProbes_YeahThisSeemsToMatch{
-    format("Yeah, this seems to match the description... deepest part of the forest.")
-}
-text gText_InstallNatureProbes_PlayerInstalledForest{
-    format("{PLAYER} installed the probe in the forest.")
-}
-text gText_InstallNatureProbes_ThisIsAsGoodOfAHill{
-    format("This is as good as a hill as I'm going to find, right?")
-}
-text gText_InstallNatureProbes_PlayerInstalledHill{
-    format("{PLAYER} installed the probe on the hill.")
-}
-text gText_InstallNatureProbes_JustGottaMakeSure{
-    format("Just gotta make sure its attached correctly...")
-}
-text gText_InstallNatureProbes_PlayerInstalledShore{
-    format("{PLAYER} installed the probe by the shore.")
-}
-text gText_InstallNatureProbes_ThereIsAProbe{
-    format("There is a probe attached to the sign post.")
-}
-
-text gText_InstallNatureProbes_OkayDone{
-    format("Okay, done!")
-}
-text gText_InstallNatureProbes_PokedexUpgradedWith{
-    format("{PLAYER}'s Pokédex was upgraded with Habitat Mode!")
-}
 movement Quest_InstallNatureProbes_LeaveStation_Movement{
     walk_right
     walk_down * 7

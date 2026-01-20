@@ -109,7 +109,7 @@ script Quest_DrugHelmetTest_Script_FirstTest
     setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_FIRSTPHASE)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)
-    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_1,DrugHelmetTest_Text_SmoothSailingThrough)
+    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_1,format("Smooth sailing through the first test!"))
     goto(Quest_DrugHelmetTest_Script_PostFirstTestBattle)
 }
 
@@ -150,7 +150,7 @@ script Quest_DrugHelmetTest_Script_SecondTest
     fadescreen(FADE_TO_BLACK)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)
-    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_2,DrugHelmetTest_Text_WeAreNailing)
+    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_2,format("We are nailing it!"))
     goto(Quest_DrugHelmetTest_Script_PostSecondTestBattle)
 }
 
@@ -189,7 +189,7 @@ script Quest_DrugHelmetTest_Script_ThirdTest
     fadescreen(FADE_TO_BLACK)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)
-    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_3,DrugHelmetTest_Text_NailedIt)
+    trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_3,format("Nailed it!"))
     goto(Quest_DrugHelmetTest_Script_PostThirdTestBattle)
 }
 
@@ -215,117 +215,3 @@ script Quest_DrugHelmetTest_Script_PostThirdTestBattle
     end
 }
 
-text DrugHelmetTest_Text_GymLeaderBD
-{
-    format("Gym Leader BD and I have been cooking up something wild - a virtual reality helmet! It’ll really make your head spin, if you catch my drift.")
-}
-
-text DrugHelmetTest_Text_DoYouWanna
-{
-    format("Do you wanna take it for a test run? We need more training data before it’s ready for the next phase.")
-}
-
-text DrugHelmetTest_Text_NoWorriesIf
-{
-    format("No worries. If you want to dive in later, I’ll be here.")
-}
-
-text DrugHelmetTest_Text_YoureBackI
-{
-    format("You’re back! I hope you’re ready to tackle these head on.")
-}
-
-text DrugHelmetTest_Text_IllManageI
-{
-    format("I’ll manage, I was just a little disoriented.")
-}
-
-text DrugHelmetTest_Text_YoureStrappedIn
-{
-    format("You’re strapped in with the helmet. You won’t be able to see a thing until I flip the switch.")
-}
-
-text DrugHelmetTest_Text_OkayLetsStart
-{
-    format("Okay, let’s start with the first test on a low dosage. Your Pokémon might feel a bit off, but that’s just part of the ride.")
-}
-
-text DrugHelmetTest_Text_SmoothSailingThrough
-{
-    format("Smooth sailing through the first test!")
-}
-
-text DrugHelmetTest_Text_DidWeJuice
-{
-    format("Did we juice it up too much?")
-}
-
-text DrugHelmetTest_Text_OkayNowIm
-{
-    format("Okay, now I’m going to turn up the intensity for round two.")
-}
-
-text DrugHelmetTest_Text_WeAreNailing
-{
-    format("We are nailing it!")
-}
-
-text DrugHelmetTest_Text_ShouldWeHave
-{
-    format("Should we have taken it a little lower?")
-}
-
-text DrugHelmetTest_Text_BraceYourselfIm
-{
-    format("Brace yourself! I’m going to max out the dosage for the final test.")
-}
-
-text DrugHelmetTest_Text_NailedIt
-{
-    format("Nailed it!")
-}
-
-text DrugHelmetTest_Text_DidIOverload
-{
-    format("Did I overload your circuit or the helmet’s?")
-}
-
-text DrugHelmetTest_Text_ThatWasPerfect
-{
-    format("That was perfect! You did great. How do you feel?")
-}
-
-text DrugHelmetTest_Text_IveBeenBetter
-{
-    format("I’ve been better. I’ll be fine.")
-}
-
-text DrugHelmetTest_Text_ThanksForBeing
-{
-    format("Thanks for being our guinea pig! Here’s something for your trouble.")
-}
-
-text DrugHelmetTest_Text_SwingByOnce
-{
-    format("Swing by once you’ve got some space. I have a reward with your name on it?")
-}
-
-text DrugHelmetTest_Text_YourDataRocked
-{
-    format("Your data rocked! Now, we’re going to pitch it to investors.")
-}
-
-text DrugHelmetTest_Text_IWorkOnAV
-{
-    format("I work on audio visual effects for music festivals. It's all about using music and lights and videos to transport somebody's mind somewhere else.")
-}
-
-text DrugHelmetTest_Text_BDCame
-{
-    format("BD came to a show that I worked on and was really impressed with my work, and now I work with her. I also helped remodel their Gym!")
-}
-
-text DrugHelmetTest_Text_ILoveWorking
-{
-    format("I love working with BD, but I am interested to see where else I can apply my talents on an even bigger scale!")
-}

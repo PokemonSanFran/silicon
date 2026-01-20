@@ -3,7 +3,6 @@ const LOCKED_DOOR = 8
 const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
 const LIIDIA = 1
 
-//gText_Manofmanyhats_
 //Quest_Manofmanyhats_
 
 script Quest_Manofmanyhats_Liidia_Waiter_Visibility_Script{
@@ -143,68 +142,4 @@ movement Quest_Manofmanyhats_LiidiaExclaimandTurn_Movement{
     delay_16
     face_player
     step_end
-}
-text gText_Manofmanyhats_ShitTheyDidntTeachMe{
-    format("They didn't teach me how to work the boba machine...")
-}
-text gText_Manofmanyhats_TheyDidWhatOnTheTrackway{
-    format("They did WHAT on the trackway? I don't know if I can do this...")
-}
-text gText_Manofmanyhats_NotASingleBiteThis{
-    format("Not a single bite... this is not going to pay the rent!")
-}
-text gText_Manofmanyhats_OhYourePlayer{
-    format("Oh... you're {PLAYER}. Thanks again for your... help.")
-}
-text gText_Manofmanyhats_ThingsHavent{
-    format("Things haven't really gotten better since I last saw you.")
-}
-text gText_Manofmanyhats_IHaveToGet{
-    format("I had to get a bunch of jobs to make up for that one. I've got bills to pay!")
-}
-text gText_Manofmanyhats_YeahIveSeen{
-    format("Yeah, I saw you working near the trolleys, and at that restaurant too.")
-}
-text gText_Manofmanyhats_YeahTheyreNot{
-    format("Yeah, they're not going well. And neither is this!")
-}
-text gText_Manofmanyhats_AndTheWorstPart{
-    format("And the worst part is, I left my headphones at the Ranger station in EspuleeOutskirts! I'm working so many jobs I don't have time to go back and get them...")
-}
-text gText_Manofmanyhats_CouldYouGet{
-    format("Sorry to ask another favor... could you get them for me?")
-}
-text gText_Manofmanyhats_MyRangerStation{
-    format("The Ranger station is in EspuleeOutskirts. The code for the door... it was something like 3444, I think.")
-}
-text gText_Manofmanyhats_OhYouGot{
-    format("Oh! You got my headphones, thank you so much!")
-}
-text gText_Manofmanyhats_OhAndIfYouSee{
-    format("Oh, and if you saw anything else in there, go ahead and grab it. ")
-}
-text gText_Manofmanyhats_ThatStuff{
-    format("That stuff was there before me, and probably will be there forever.")
-}
-text gText_Manofmanyhats_ThereWasOther{
-    format("There was other stuff there, do you want it?")
-}
-text gText_Manofmanyhats_NahALotOfIt{
-    format("Nah.")
-}
-//PSF TODO Add ~ character to the charmap
-text gText_Manofmanyhats_LyricsA{
-    format("At the car wash, woah\pTalking about the car wash, yeah\pCome on y'all and sing it for me...")
-}
-text gText_Manofmanyhats_LyricsB{
-    format("You are my fire...\pThe one desire...")
-}
-text gText_Manofmanyhats_LyricsC{
-    format("Can't fight the moonlight\pDeep in the dark, you'll surrender your heart...")
-}
-text gText_Manofmanyhats_ThoseHeadphonesMustBe{
-    format("Those headphones must be noise cancelling...")
-}
-text gText_Manofmanyhats_OkayTheCombo{
-    format("Okay, Liidia said the combination was 3444...")
 }

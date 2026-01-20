@@ -1,5 +1,4 @@
 //Quest_DexCompletion_
-//gText_DexCompletion_
 script Quest_DexCompletion_Interact_Script{
     lock
         faceplayer
@@ -129,46 +128,3 @@ script Quest_DexCompletion_Completed_Dialogue{
     end
 }
 
-text gText_DexCompletion_WeAreTheResearch{
-    format("we are the research people")
-}
-
-text gText_DexCompletion_WeNormallyStudy{
-    format("we normally study pokemon and their interactions in the region but")
-}
-
-text gText_DexCompletion_ButTheLastFewYears{
-    format("the last few years havbe been rough. the league")
-}
-
-text gText_DexCompletion_YoureATrainer{
-    format("you're a trainer right can you help us? come back after you've completed at least 50% of the pokedex")
-}
-
-text gText_DexCompletion_HowIsYourPokeDex{
-    format("how is your pokedex coming? 50% isn't too much, right")
-}
-
-text gText_DexCompletion_OhWow50{
-    format("oh wow 50% you're awesome")
-}
-
-text gText_DexCompletion_ThankYouSoMuch{
-    format("tysm take this")
-}
-
-text gText_DexCompletion_HowIsYourPokeDex100{
-    format("how is your pokedex coming? are you done?")
-}
-
-text gText_DexCompletion_OhWow100{
-    format("oh wow 100% you fuckin did it")
-}
-
-text gText_DexCompletion_ThisIsAmazing{
-    format("this is amazing, here take this")
-}
-
-text gText_DexCompletion_HeyPlayer{
-    format("hey {PLAYER} welcome back")
-}

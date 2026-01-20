@@ -1,5 +1,4 @@
 //Quest_Battlearcademiniquest_
-//gText_Miniarcade_
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHRIS = 1
@@ -98,7 +97,7 @@ script Quest_Battlearcademiniquest_LoadText{
 }
 
 script Quest_Battlearcademiniquest_Battle1_Script{
-    trainerbattle_continue_after_lose(TRAINER_MINI_ARCADE_CHRIS,gText_Miniarcade_ThatWasCrazy)
+    trainerbattle_continue_after_lose(TRAINER_MINI_ARCADE_CHRIS,format("That was crazy! Man, this is game is so awesome."))
 
     call(Quest_Battlearcademiniquest_RestoreParty_Script)
     if(var(VAR_RESULT) == B_OUTCOME_WON){
@@ -140,51 +139,3 @@ script Quest_Battlearcademiniquest_ExitChallenge_Script{
     end
 }
 
-text gText_Miniarcade_WhatGameIs{
-	format("What game is this guy playing...?")
-}
-text gText_Miniarcade_OhManYouWannaTry{
-	format("Oh man, you wanna try Arcade Sim +R Accent Core?")
-}
-text gText_Miniarcade_ItsCalledArcade{
-	format("...It's called Arcade Sim?")
-}
-text gText_Miniarcade_YourePlayingArcade{
-	format("You're playing Arcade Sim in an Arcade?")
-}
-text gText_Miniarcade_YeahButItsLegit{
-	format("Yeah, but its legit AF! You ready to play?.")
-}
-text gText_Miniarcade_NotReadyYet{
-	format("Not ready yet? No problem, let me know when you are.")
-}
-text gText_Miniarcade_ThisGameIsPrettyWild{
-	format("This game is pretty wild, so we gotta save your progress first, okay?")
-}
-text gText_Miniarcade_ItchingForMore{
-	format("Itching for more? I'm always down to play.")
-}
-text gText_Miniarcade_OkaySoPressA{
-	format("So, when the game board shows up press {A_BUTTON} to stop the cursor on the effect. That effect gets applied, and then we battle with that effect.")
-}
-text gText_Miniarcade_ThatMeansEffect{
-	format("Oh snap! That means {STR_VAR_1} party is all impacted by {STR_VAR_2}!")
-}
-text gText_Miniarcade_ThatWasCrazy{
-	format("That was crazy! Man, this is game is so awesome.")
-}
-text gText_Miniarcade_ThatsNeverNot{
-	format("That's NEVER not fun.")
-}
-text gText_Miniarcade_YoureSuperGood{
-	format("You're super good, gg for real.")
-}
-text gText_Miniarcade_YoureLegitTake{
-	format("Thanks for playing with me. Take this!")
-}
-text gText_Miniarcade_ImAlwaysDown{
-	format("I'm always down for a runback if you are, let me know!")
-}
-text gText_Miniarcade_AhhhHereForThe{
-    format("Aaah, here for that salty runback?")
-}

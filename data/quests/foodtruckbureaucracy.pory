@@ -1,4 +1,3 @@
-//gText_Foodtruckbureaucracy_
 //Quest_Foodtruckbureaucracy_
 //WAITE Food Truck QiuVillage
 //DEBRA Sanitation PerlaciaCity
@@ -173,72 +172,3 @@ script Quest_Foodtruckbureaucracy_Completed_Dialogue{
     msgbox(format("{PLAYER}! You're always welcome here. Hungry?"),MSGBOX_NPC,SPEAKER_WAITE)
 }
 
-text gText_Foodtruckbureaucracy_ImHavingTroubleGetting{
-    format("Can you believe this?!?\NThe Sanitation Department told me its going be nine months until they can update my code. But they're going to shut me down in 3 months if I'm not up to date!\NI know the big fancy restaurants aren't waiting nine months... wish I could get down there and grease the wheels, you know? Hey, if you're over there, let me know if you hear something. I'll make it worth your while.")
-}
-text gText_Foodtruckbureaucracy_AnyProgressOnGettingMy{
-    format("You hear anything from that Sanitation Department?")
-}
-text gText_Foodtruckbureaucracy_ItsALongStoryBut{
-    format("It's a long story, but...")
-}
-text gText_Foodtruckbureaucracy_AlrightIllAgree{
-    format("Hmm. Food to the Department of Transportation every Tuesday, and that means I get my code updated? It's a little pricey, but its less expensive than having to close up shop... okay, you've got a deal.")
-}
-text gText_Foodtruckbureaucracy_OkayINeedTo{
-    format("Okay, I need to go back and finalize things. I'll be back!")
-}
-text gText_Foodtruckbureaucracy_SoHaveYouMade{
-    format("I agreed to the catering deal, when's my code getting updated?")
-}
-text gText_Foodtruckbureaucracy_ThankYouSoMuchFor{
-    format("You just missed them! Some inspector came through, looked around once, and just give me an A+! This is even better than I was hoping for, thanks a ton! Take this.")
-}
-text gText_Foodtruckbureaucracy_HeyIsIt{
-    format("Hey, is it really a nine month wait for a restaurant to get its code updated?")
-}
-text gText_Foodtruckbureaucracy_Yep{
-    format("Yep!")
-}
-text gText_Foodtruckbureaucracy_WeCantSpeedUp{
-    format("Of course, if we had a faster wireless router, maybe we could get through the queue at a quicker pace. I wonder if Information Technology in IrisinaTown could help...")
- }
-text gText_Foodtruckbureaucracy_WereWorkingOnIt{
-    format("Any luck on getting that new router from IT in IrisinaTown?")
-}
-text gText_Foodtruckbureaucracy_AlrightWellSpeed{
-    format("IT just came and installed the new router! You work quick. I'll send over somebody to do that restaurant inspection, ASAP.")
-}
-text gText_Foodtruckbureaucracy_GladWeCouldHelpYou{
-    format("Glad we could help you out. Let us know if you need anything else.")
-}
-text gText_Foodtruckbureaucracy_WellUpgradeYourRouter{
-    format("Man, Sanitation has been chirping about that new router for years now. I told them, they gotta get the budget approved... but man, life would be so much easier is there was a trolley stop in front of this office. The Department of Transportation is in CapheCity, right?")
-}
-text gText_Foodtruckbureaucracy_WereWorkingOnThe{
-    format("Man, I'd love to get started on that new router, but I haven't heard anything from the Department of Transportation about that trolley stop. They're in the IrisinaTown, right?")
-}
-text gText_Foodtruckbureaucracy_SureWellUpgrade{
-    format("We got a phone call asking about the dimensions of the sidewalk out front! Looks like you worked your magic. We'll have that router installed for your buddy over in PerlaciaCity's Sanitation Department.")
-}
-text gText_Foodtruckbureaucracy_WereWaitingOnThe{
-    format("We're waiting on the transportation department to create a trolley stop, but we'll keep you updated.")
-}
-text gText_Foodtruckbureaucracy_GreatWereHappy{
-    format("Great, we're happy we could help. Let us know if you need anything else.")
-}
-text gText_Foodtruckbureaucracy_WellCreateATrolley{
-    format("Hold on, IT wants a trolley stop in front of their door? That's going to take forever to get approved. You know, if we didn't have to leave to get food, maybe we'd have more time to work on that. You think you can figure out how to get us catering? Every Tuesday.")
-}
-text gText_Foodtruckbureaucracy_WereStillWaiting{
-    format("Any luck on that catering? I wish we could partner with some restaurant...")
-}
-text gText_Foodtruckbureaucracy_OkayWellCreate{
-    format("Wait, you're serious? Every Tuesday? Oh man, I love that place! Okay, tell you what, I'll start drawing up the plans for that new trolley stop right away. Wow, you're the real deal!")
-}
-text gText_Foodtruckbureaucracy_HappyToHelpEnjoy{
-    format("Happy to help! Enjoy the new trolley stop.")
-}
-text gText_Foodtruckbureaucracy_PlayerYoureBack{
-    format("{PLAYER}! You're always welcome here. Hungry?")
-}

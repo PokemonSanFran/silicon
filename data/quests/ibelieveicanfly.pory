@@ -1,4 +1,3 @@
-//gText_IBelieveICanFly
 //Quest_IBelieveICanFly
 
 const FLAG_HIDE_GERTRUDE = FLAG_TEMP_3
@@ -37,7 +36,7 @@ script Quest_IBelieveICanFly_Active_Dialogue{
 script Quest_IBelieveICanFly_StartBattle_Script{
     msgbox(format("Let's begin! Prepare yourself for a true Sky Battle!"),,SPEAKER_GERTRUDE)
         closemessage
-        trainerbattle_no_intro(TRAINER_GERTRUDE,gText_IBelieveICanFly_WellFoughtYouAre)
+        trainerbattle_no_intro(TRAINER_GERTRUDE,format("Well fought! You are a worthy opponent."))
         if (defeated(TRAINER_GERTRUDE)){
             goto(Quest_IBelieveICanFly_Reward_Dialogue)
         }
@@ -89,38 +88,3 @@ movement Quest_IBelieveICanFly_WalkInside_Movement{
     step_end
 }
 
-text gText_IBelieveICanFly_OhHelloThere{
-    format("Oh, hello there! I remember you as a friend of Adaora.")
-}
-
-text gText_IBelieveICanFly_ItsDishearteningToSee{
-    format("It's disheartening to see so many Trainers relying on Arriba instead of using their Pokémon. That's why I want to teach more Trainers how to use Fly.")
-}
-
-text gText_IBelieveICanFly_ToEarnMyTeachingsOn{
-    format("To earn my teachings on Fly, you must first win a Sky Battle. Only Flying-type Pokémon or those with the Levitate ability can participate. Are you ready?")
-}
-
-text gText_IBelieveICanFly_LetsBeginPrepare{
-    format("Let's begin! Prepare yourself for a true Sky Battle!")
-}
-
-text gText_IBelieveICanFly_WellFoughtYouAre{
-    format("Well fought! You are a worthy opponent.")
-}
-
-text gText_IBelieveICanFly_YouPutUpAGood{
-    format("You put up a good fight. Let me heal your Pokémon for you. It's always important to take care of them.")
-}
-
-text gText_IBelieveICanFly_OhISeeYou{
-    format("Oh, I see you're not up for a battle. That's a shame. I'll be waiting here for someone who is.")
-}
-
-text gText_IBelieveICanFly_ItLooksLikeYouDon{
-    format("It looks like you don't have any eligible Pokémon for a Sky Battle. Come back when you have some!")
-}
-
-text gText_IBelieveICanFly_CongratulationsOnYourVictory{
-    format("Congratulations on your victory! You are an impressive Trainer. Please come inside, and I'll teach you everything you need to know about using the move Fly.")
-}
