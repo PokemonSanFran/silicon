@@ -30,12 +30,12 @@ script SorryAboutMyFriends_Intro_Dialogue {
 
         msgbox(format("Good thanks! It's been - wait."),,SPEAKER_ALICIA)
 
-        msgbox(format("You're part of TheTide, right?"),,SPEAKER_ALICIA)
+        msgbox(format("You're part of The Tide, right?"),,SPEAKER_ALICIA)
 
         msgbox(format("Yeah, did I not mention that when we met in CapheCity?"),,SPEAKER_ADAORA)
         reveal(REVEAL_ADAORA)
 
-        msgbox(format("Wait, that was TheTide? Everytime I run into them, they're attacking innocent people! "),,SPEAKER_ALICIA)
+        msgbox(format("Wait, that was The Tide? Everytime I run into them, they're attacking innocent people! "),,SPEAKER_ALICIA)
 
         msgbox(format("Actually, that... unfortunate worldview is why I'm here. "),,SPEAKER_ADAORA)
 
@@ -50,7 +50,7 @@ script SorryAboutMyFriends_Intro_Dialogue {
         msgbox(format("Uh huh."),,SPEAKER_ALICIA)
 
         msgbox(format("I hope our CapheCity work shows that our hearts are in the right place. I'm actually here to fix this mess too."),,SPEAKER_ADAORA)
-        msgbox(format("I've been trying to track down the TheTide members that you battled, but they're gone! Their names aren't familiar, so they must be new. Alcemene is adamant that we can't have people like that violating our stance of non-violence."),,SPEAKER_ADAORA)
+        msgbox(format("I've been trying to track down the The Tide members that you battled, but they're gone! Their names aren't familiar, so they must be new. Alcemene is adamant that we can't have people like that violating our stance of non-violence."),,SPEAKER_ADAORA)
         msgbox(format("A shame, of course. The execution was certainly sloppy, but if it were me, we'd be doing some more... well.. anwyays."),,SPEAKER_ADAORA,TAIL_WHISPER)
         msgbox(format("Thanks for taking care of them, {PLAYER}."),,SPEAKER_ADAORA)
 

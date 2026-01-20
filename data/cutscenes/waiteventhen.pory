@@ -171,7 +171,7 @@ script WaitEvenThen_PostBossDialogue {
 
         msgbox(format("Between SharpRise Capital and the government, I guess nothing is off limits."),,SPEAKER_MAGNUS)
 
-        msgbox(format("I’ll have some other TheTide members clear out the rest of the trapped Pokémon… Let’s go back to HalaiIsland."),,SPEAKER_ADAORA)
+        msgbox(format("I’ll have some other The Tide members clear out the rest of the trapped Pokémon… Let’s go back to HalaiIsland."),,SPEAKER_ADAORA)
 
         closemessage
 

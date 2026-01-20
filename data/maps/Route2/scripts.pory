@@ -25,7 +25,7 @@ script Route2_ConstructionVisibility_Script {
         case STRIKE_HAS_BEGUN: call(TheStrikeStrikesBack_ObjectSetup_Script)
         case START_VS_GARBODOR: call(TheStrikeStrikesBack_ShowCrowd_Script)
         case DEFEATED_GARBODOR: call(VSGarbodor_Arrest_ObjectSetup_Script)
-        case THETIDE_ARRESTED: call(TheStrikeStrikesBack_HideObject_Script)
+        case THE_TIDE_ARRESTED: call(TheStrikeStrikesBack_HideObject_Script)
     }
 
     return

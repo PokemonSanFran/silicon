@@ -843,7 +843,7 @@ enum PriceTypes
 
 u32 getDroneFee()
 {
-    s32 discount = (HasPlayerJoinedTheTide()) ? 0 : PRESTO_FEE_SHARP_RISE_DISCOUNT;
+    s32 discount = (HasPlayerJoinedThe_Tide()) ? 0 : PRESTO_FEE_SHARP_RISE_DISCOUNT;
     u32 reccomended = (GetCurrentRow() == ROW_RECOMMENDED) ? PRESTO_FEE_RECCOMENDED_BOOST : 0;
 
     return (PRESTO_FEE_BASE_DRONE - discount) + reccomended;

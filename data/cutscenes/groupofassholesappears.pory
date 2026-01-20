@@ -73,7 +73,7 @@ script GroupOfAssholesAppears_PlayerIntervene_Dialogue {
         applymovement(PLAYER,GroupOfAssholesAppears_LookAround_Movement)
         waitmovement(0)
         msgbox(format("He might be asking, but I'm not. Leave."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                setvar(VAR_GROUP_OF_ASSHOLES_STATE,SAVE_THETIDE_POPIDORA_PIER)
+                setvar(VAR_GROUP_OF_ASSHOLES_STATE,SAVE_THE_TIDE_POPIDORA_PIER)
         closemessage
         startmenu_savescreen
         goto(GroupOfAssholes_StartBattle_Script)
@@ -110,7 +110,7 @@ script GroupOfAssholes_StartBattle_Script {
 script GroupOfAssholesAppears_GroupLeaves_Dialogue {
         lockall
         startcutscene(JUMPPLAYER_GROUPOFASSHOLESAPPEARS)
-        setvar(VAR_GROUP_OF_ASSHOLES_STATE,PLAYER_HAS_DEFEATED_THETIDE)
+        setvar(VAR_GROUP_OF_ASSHOLES_STATE,PLAYER_HAS_DEFEATED_THE_TIDE)
         msgbox(format("Pfft, looks like the League sent by some enforcers to clear us out. Lame as hell."),SPEAKER_ROCKET_MEMBER_B)
         msgbox(format("You both make me sick. Leave our people alone! *spits*"),SPEAKER_ISHAN)
         closemessage
@@ -166,7 +166,7 @@ script GroupOfAssholesAppears_LookForXanax_Dialogue {
         lockall
         applymovement(DAVID,GroupOfAssholesAppears_LookAround_Movement)
 
-        if (var(VAR_GROUP_OF_ASSHOLES_STATE) == SAVE_THETIDE_POPIDORA_PIER)   {
+        if (var(VAR_GROUP_OF_ASSHOLES_STATE) == SAVE_THE_TIDE_POPIDORA_PIER)   {
             msgbox(format("Somebody help me..."),,SPEAKER_DAVID,,EMOTE_SAD)
         }else{
             msgbox(format("Now, where did I put those pills...?"),,SPEAKER_DAVID,TAIL_WHISPER)

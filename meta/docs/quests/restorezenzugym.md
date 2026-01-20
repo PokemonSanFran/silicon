@@ -91,9 +91,9 @@ Player battles against Doyle.
 * Doyle formally introduces themselves - they work on movie sets on Zenzu Island and used to moonlight as the Zeznu Gym Leader before that production got cancelled
 * Player explains that Zenzu Gym is exactly why they're there
 * Doyle interupts and says they were pretty upfront of Baiya
-* Doyle has zero interest in spinning up a show that not only doesn't truly take the fight to Sharp Rise, but arguably helps them
+* Doyle has zero interest in spinning up a show that not only doesn't truly take the fight to Sharprise, but arguably helps them
 * Doyle states Resido is a lost cause - 
-* Doyle says that they're the monster expert of Resido, and the Sharp Rise executives are scarier than anything he's ever captured
+* Doyle says that they're the monster expert of Resido, and the Sharprise executives are scarier than anything he's ever captured
 * Doyle says their work needs to go to the next level, and thinks Baiya's plan can do that, just not in Resido, but would be succesful in somewhere like Unova's Pokestar Studios
 * Doyle believes that their hand in creating change is best served as somebody creating revolutionary films and art, but needs to work somewhere where their work will have more support AND have more impact and therefore create change
 * Doyle remarks that Zenzu Island's film and battle industry is too small in comparison - they should 
@@ -296,7 +296,7 @@ Screen fades from black.
 
 # Summary & Notes
 
-Player battles Doyle. Once the Player wins, they properly introduce themselves and explain that they believe in Baiya's vision, but doesn't think its possible in Resido. Doyle says Sharp Rise and its League is already too far gone, and their talents are best when trying to create real revolutionary art and film. 
+Player battles Doyle. Once the Player wins, they properly introduce themselves and explain that they believe in Baiya's vision, but doesn't think its possible in Resido. Doyle says Sharprise and its League is already too far gone, and their talents are best when trying to create real revolutionary art and film. 
 
 Doyle wants to take the same idea to Unova's PokéStar Studios where they think they'll be able to have a bigger impact. Alicia argues that Resido is worth investing in and fighting for, and Doyle challenges Player to prove it. Doyle will consider keeping the idea if the Player can find people in Resido with the skillset of what he needs and who think of battles in a forward, revolutionary way.
 

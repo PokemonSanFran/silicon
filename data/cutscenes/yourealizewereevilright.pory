@@ -97,7 +97,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         msgbox(format("Baiya promised me The Tide was just there to help. Are you saying he lied to me?!"),SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(format("They can't be trusted, {PLAYER}. The Tide used to be a small problem, but you've witnessed them growing increasingly violent and dangerous. You were there during the violent protests near Chasilla, and also saw how they nearly destroyed Sharp Rise Arena. For the good of the region, and our plans, we need to shut them down for good. "),,SPEAKER_KEIYING)
+        msgbox(format("They can't be trusted, {PLAYER}. The Tide used to be a small problem, but you've witnessed them growing increasingly violent and dangerous. You were there during the violent protests near Chasilla, and also saw how they nearly destroyed Sharprise Arena. For the good of the region, and our plans, we need to shut them down for good. "),,SPEAKER_KEIYING)
 
         closemessage
 

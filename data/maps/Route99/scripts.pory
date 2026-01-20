@@ -18,8 +18,8 @@ script Route99_MapScripts_OnResume {
 script Route99_MapScripts_OnTransition {
     switch (var (VAR_ROUTE99_STATE)) {
         case PROTEST_NOTSTARTED: goto(HousingProtest_ObjectSetUp_Script)
-        case SAVE_THETIDE_ROUTE99: goto(HousingProtest_PostSave_ObjectSetUp_Script)
-        case DEFEATED_THETIDE_ROUTE99: goto(HousingProtest_CleanUp_Landlord_Script)
+        case SAVE_THE_TIDE_ROUTE99: goto(HousingProtest_PostSave_ObjectSetUp_Script)
+        case DEFEATED_THE_TIDE_ROUTE99: goto(HousingProtest_CleanUp_Landlord_Script)
                                              return
     }
 }

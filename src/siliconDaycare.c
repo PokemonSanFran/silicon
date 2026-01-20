@@ -294,7 +294,7 @@ static const u32 perkEffortValueSpreads[NUM_STATS][NUM_STATS] =
 
 void MarkMonForEffortValuePerk(struct Pokemon *egg)
 {
-    bool32 getsPerk = (HasPlayerJoinedTheTide()) ? FALSE : TRUE;
+    bool32 getsPerk = (HasPlayerJoinedThe_Tide()) ? FALSE : TRUE;
 
     SetMonData(egg,MON_DATA_GETS_SILICON_BREEDING_PERKS,&getsPerk);
 }
@@ -339,7 +339,7 @@ void ApplyEffortValuePerk(struct Pokemon *temp, struct Pokemon *egg)
 
 void UpdateSiliconDaycareStepCounter(void)
 {
-    if (HasPlayerJoinedTheTide())
+    if (HasPlayerJoinedThe_Tide())
         return;
 
     u32 species, steps;
@@ -399,13 +399,13 @@ static void ApplySiliconSteps(struct DayCare *daycare, u32 eggIndex)
 
 static u32 CalculateEggCost(void)
 {
-    u32 multiplier = HasPlayerJoinedTheTide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
+    u32 multiplier = HasPlayerJoinedThe_Tide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
     return SILICON_DAYCARE_PER_EGG_COST * multiplier;
 }
 
 static u32 CalculateStatCost(void)
 {
-    u32 multiplier = HasPlayerJoinedTheTide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
+    u32 multiplier = HasPlayerJoinedThe_Tide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
     return SILICON_DAYCARE_PER_IV_COST * multiplier;
 }
 
@@ -444,7 +444,7 @@ void Script_CountChangedIndividualValues(void)
 
 void Script_GetDaycareCostCode(void)
 {
-    bool32 isTide = HasPlayerJoinedTheTide();
+    bool32 isTide = HasPlayerJoinedThe_Tide();
     bool32 editedStats = (CountChangedIndividualValues() != 0);
 
     if (isTide && editedStats)
@@ -459,7 +459,7 @@ void Script_GetDaycareCostCode(void)
 
 void Script_GetGeneEditingCostCode(void)
 {
-    bool32 isTide = HasPlayerJoinedTheTide();
+    bool32 isTide = HasPlayerJoinedThe_Tide();
 
     if (isTide)
         gSpecialVar_Result = SILICON_DAYCARE_NO_DISCOUNT_YES_STATS;

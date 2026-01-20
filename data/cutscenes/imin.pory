@@ -417,7 +417,7 @@ script ImIn_OfficeReveal_Dialogue{
 
         msgbox(format("Wait, trash? Did you hear what these people did to HalaiIsland?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("TheTide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpRise Capital did for you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("The Tide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpRise Capital did for you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
         msgbox(format("So you just don't care that you work for murderers?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 

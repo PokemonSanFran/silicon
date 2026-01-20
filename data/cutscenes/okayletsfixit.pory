@@ -83,7 +83,7 @@ script OkayLetsFixit_StartFlashback_Script
         applymovement(PLAYER, Common_Movement_FaceRight)
         waitmovement(PLAYER)
 
-        msgbox(format("I heard Baiya and TheTide...but what I wanted was more important."),,SPEAKER_ALICIA,TAIL_WHISPER)
+        msgbox(format("I heard Baiya and The Tide...but what I wanted was more important."),,SPEAKER_ALICIA,TAIL_WHISPER)
         msgbox(format("You saw what they were saying with your own eyes, no?"),,SPEAKER_HIKO)
         msgbox(format("I'm the Champion! And I wanted to be a Champion so bad... and I knew that going against SharpRise Capital meant that it was over. I didn't want to sacrifice anything to help them, and I knew I would have to."),,SPEAKER_ALICIA,,EMOTE_SHOCK)
         msgbox(format("And now?"),,SPEAKER_HIKO)

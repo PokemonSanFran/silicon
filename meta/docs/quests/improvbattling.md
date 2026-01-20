@@ -84,7 +84,7 @@ ImprovaudienceE: Placeholder text.
 
 ### Interact with ImprovaudienceF
 
-ImprovaudienceF: I’m the founder of this place. Before Sharp Rise took over the League, alternative battling styles were way more popular. It’s getting harder and harder to keep the lights on as fewer people come out to these.
+ImprovaudienceF: I’m the founder of this place. Before Sharprise took over the League, alternative battling styles were way more popular. It’s getting harder and harder to keep the lights on as fewer people come out to these.
 
 ### Interact with ImprovaudienceG
 

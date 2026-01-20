@@ -150,7 +150,7 @@ script Earthquake_StartRescue_Dialogue {
 
         msgbox(format("Sounds like we're on our own."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("I'm going to make another lap around HalaiIsland and see who else I can help, and I've asked other TheTide members to do the same. Could you two -"),MSGBOX_DEFAULT,SPEAKER_ADAORA)
+        msgbox(format("I'm going to make another lap around HalaiIsland and see who else I can help, and I've asked other The Tide members to do the same. Could you two -"),MSGBOX_DEFAULT,SPEAKER_ADAORA)
 
         msgbox(format("Of course. Let's meet back in the town center in a bit."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
         closemessage
@@ -187,7 +187,7 @@ script Earthquake_PostRescue_Dialogue {
         applymovement(ADAORA, moves(walk_right, walk_up * 2, walk_down * 2, walk_up * 2, walk_down * 2, step_end))
         waitmovement(ADAORA)
 
-        msgbox(format("I really don't know how TheTide is going to hold up under this stress."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
+        msgbox(format("I really don't know how The Tide is going to hold up under this stress."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
 
         playse(SE_POKENAV_CALL)
         waitse

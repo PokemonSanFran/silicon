@@ -995,7 +995,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_ROCKET_MEMBER_A] =
     {
-        .name = _("TheTide Member"),
+        .name = _("The Tide Member"),
         .title = _("???"),
         .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
@@ -1003,7 +1003,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_ROCKET_MEMBER_B] =
     {
-        .name = _("TheTide Member"),
+        .name = _("The Tide Member"),
         .title = _("???"),
         .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,

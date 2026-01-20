@@ -271,8 +271,8 @@ script KeiyingRaisonDetre_NewsStory_Script {
         special(TurnOnTVScreen)
         delay(60)
         msgbox(format("And now we go to Da Lin, for more details about last night's riots. "),,SPEAKER_NEWS)
-        msgbox(format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of TheTide, culminating in violent attacks on the CapheCity Police Force. Both sides sustained significant injury, and dozens of members of TheTide were taken into custody last night. Back to you, Ken."),,SPEAKER_NEWS_B)
-        msgbox(format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing TheTide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour."),,SPEAKER_NEWS)
+        msgbox(format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of The Tide, culminating in violent attacks on the CapheCity Police Force. Both sides sustained significant injury, and dozens of members of The Tide were taken into custody last night. Back to you, Ken."),,SPEAKER_NEWS_B)
+        msgbox(format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing The Tide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour."),,SPEAKER_NEWS)
         closemessage
         special(TurnOffTVScreen)
         applymovement(4, moves(walk_right, face_down, step_end))
@@ -284,7 +284,7 @@ script KeiyingRaisonDetre_NewsStory_Script {
 
         msgbox(format("Are you okay? What's wrong?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("I'm sorry. My… son is in the ICU after the riots last night. TheTide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_MAID)
+        msgbox(format("I'm sorry. My… son is in the ICU after the riots last night. The Tide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_MAID)
         closemessage
         applymovement(CRYING_MAID, moves(walk_up * 2, walk_faster_left * 8))
         waitmovement(0)

@@ -194,7 +194,7 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
 
         msgbox(format("Nice to meet you! …Baiya, where are we?"),,SPEAKER_ALICIA)
 
-        msgbox(format("TheTide has been using Arantraz's abandoned prison as a training ground."),,SPEAKER_BAIYA_TIDE)
+        msgbox(format("The Tide has been using Arantraz's abandoned prison as a training ground."),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
@@ -210,7 +210,7 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
 
         msgbox(format("Yes! Wait, no… No, Yes!"),,SPEAKER_BAIYA_TIDE)
 
-        msgbox(format("TheTide doesn't do anything for this region. You're attacking innocent people, trying to destroy buildings - fuck, I absolutely should have turned you in!"),,SPEAKER_ALICIA)
+        msgbox(format("The Tide doesn't do anything for this region. You're attacking innocent people, trying to destroy buildings - fuck, I absolutely should have turned you in!"),,SPEAKER_ALICIA)
 
         msgbox(format("{PLAYER}, listen! I can prove that none of that is true."),,SPEAKER_BAIYA_TIDE)
 
@@ -224,7 +224,7 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         applymovement(MAGNUS,Common_Movement_FaceLeft)
         applymovement(TALA,Common_Movement_FaceUp)
 
-        msgbox(format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that TheTide planted these to blow up the construction site, right?"),,SPEAKER_BAIYA_TIDE)
+        msgbox(format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that The Tide planted these to blow up the construction site, right?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Yeah. Charlotte and I had to go down there and defeat them and your goons."),,SPEAKER_ALICIA)
 
@@ -269,7 +269,7 @@ script YouRealizeTheyreEvilRight_Framing_Dialogue {
 
         msgbox(format("That doesn't make sense for SharpRise - they've been so good to me!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        msgbox(format("{PLAYER}, you also met up with TheTide in Oroland too, right?"),,SPEAKER_BAIYA_TIDE)
+        msgbox(format("{PLAYER}, you also met up with The Tide in Oroland too, right?"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("…yeah. But Adaora said that situation was super weird and was trying to track them down."),,SPEAKER_ALICIA)
 
@@ -335,7 +335,7 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
     closemessage
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(PLAYER)
-    msgbox(format("I'm not giving up what I have because you guys think SharpRise Capital is some big bad. TheTide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it."),,SPEAKER_ALICIA)
+    msgbox(format("I'm not giving up what I have because you guys think SharpRise Capital is some big bad. The Tide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it."),,SPEAKER_ALICIA)
     closemessage
     applymovement(PLAYER,Common_Movement_WalkDown)
         fadeblackandsetremovewarpfadeflag
@@ -387,7 +387,7 @@ script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
             msgbox(format("I remember I yelled at Baiya. I told him he couldn't hack it. I called them thugs. And I left. I was disguisting. Is he still there now?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }else{
 
-        msgbox(format("I can't believe I almost fell for that stunt. Me? Siding with TheTide? After everything I've been through? And all that stuff, just because the battling is a little different?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("I can't believe I almost fell for that stunt. Me? Siding with The Tide? After everything I've been through? And all that stuff, just because the battling is a little different?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
             msgbox(format("And they claim they want to do better for region? SharpRise Capital is making jobs! And bringing people like me! And stopping terrorists."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
             msgbox(format("I'm going to be on the right side of history."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     }

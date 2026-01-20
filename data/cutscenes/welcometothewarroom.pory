@@ -117,7 +117,7 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         msgbox(format("The new owners of our accounts have been pushing a narrative about SharpRise Capital's “crimes against the region”. They're calling for everybody to boycott the League and the upcoming Championship. We've found evidence that the perpetrators are at NavalBase. "),,SPEAKER_TECH)
 
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
-        msgbox(format("We've long theorized that NavalBase is TheTide's primary base of operations so we've got reason to believe that they're the ones behind this cyber-attack. We have authorization to raid their headquarters and are looking -"),,SPEAKER_CHIEF)
+        msgbox(format("We've long theorized that NavalBase is The Tide's primary base of operations so we've got reason to believe that they're the ones behind this cyber-attack. We have authorization to raid their headquarters and are looking -"),,SPEAKER_CHIEF)
 
         call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
         msgbox(format("Charlotte, {PLAYER} you really impressed me back at SharpRise Stadium, and we'd like you to assist as well. You'll work under Chief Bill, and help us shut down these terrorists once and for all."),,SPEAKER_LUCREZIA)

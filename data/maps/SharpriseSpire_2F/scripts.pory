@@ -70,8 +70,8 @@ script SharpriseSpire_2F_Oliver_Event_Script {
         switch (var(VAR_STORYLINE_STATE)){
             //case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
             //case STORY_START_FALSE_TIMELINE: call(LetsBurnThisMotherDown_Assignment_Dialogue)
-            //case STORY_1ST_THETIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Assignment_Dialogue)
-            case STORY_2ND_THETIDE_TAKEDOWN: return//call(LetsBurnThisMotherDown_Assignment_Dialogue)
+            //case STORY_1ST_THE_TIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Assignment_Dialogue)
+            case STORY_2ND_THE_TIDE_TAKEDOWN: return//call(LetsBurnThisMotherDown_Assignment_Dialogue)
         }
     release
         end
@@ -81,8 +81,8 @@ script SharpriseSpire_2F_Keiying_Event_Script {
     lock
         switch (var(VAR_STORYLINE_STATE)){
             case STORY_START_FALSE_TIMELINE: call(YouHaveYourOrders_Assignment_Dialogue)
-            case STORY_1ST_THETIDE_TAKEDOWN: call(YouHaveYourOrders_Assignment_Dialogue)
-            case STORY_2ND_THETIDE_TAKEDOWN: call(YouHaveYourOrders_Assignment_Dialogue)
+            case STORY_1ST_THE_TIDE_TAKEDOWN: call(YouHaveYourOrders_Assignment_Dialogue)
+            case STORY_2ND_THE_TIDE_TAKEDOWN: call(YouHaveYourOrders_Assignment_Dialogue)
         }
     release
         end
@@ -92,8 +92,8 @@ script SharpriseSpire_2F_Ramesh_Event_Script {
     lock
         switch (var(VAR_STORYLINE_STATE)){
             case STORY_START_FALSE_TIMELINE: call(Manhunt_Assignment_Dialogue)
-            case STORY_1ST_THETIDE_TAKEDOWN: call(Manhunt_Assignment_Dialogue)
-            case STORY_2ND_THETIDE_TAKEDOWN: call(Manhunt_Assignment_Dialogue)
+            case STORY_1ST_THE_TIDE_TAKEDOWN: call(Manhunt_Assignment_Dialogue)
+            case STORY_2ND_THE_TIDE_TAKEDOWN: call(Manhunt_Assignment_Dialogue)
             default: call(AlwaysWatchingWazowski_IgnoringPlayer_Dialogue)
         }
     release

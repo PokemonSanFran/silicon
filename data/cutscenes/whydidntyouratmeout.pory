@@ -73,7 +73,7 @@ script WhyDidntYouRatMeOut_ConversationInStands {
         applymovement(1, moves(lock_facing_direction, walk_right, unlock_facing_direction, step_end))
         waitmovement(0)
 
-        msgbox(format("No, calm down. It's just... this is your home. And you obviously care about it. And I think that's what gives me pause with TheTide. I see people trying to do good things, and trying to help people... and then I see TheTide with all their bullshit, and it makes me wonder “How can they possibly support that?”"),,SPEAKER_ALICIA)
+        msgbox(format("No, calm down. It's just... this is your home. And you obviously care about it. And I think that's what gives me pause with The Tide. I see people trying to do good things, and trying to help people... and then I see The Tide with all their bullshit, and it makes me wonder “How can they possibly support that?”"),,SPEAKER_ALICIA)
 
         closemessage
 

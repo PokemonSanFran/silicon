@@ -145,11 +145,11 @@ script MaskOff_Encounter_Vigrim_Dialogue
 script MaskOff_PostBattle_Dialogue
 {
     startcutscene(JUMPPLAYER_MASKOFF_VIGRIM)
-    msgbox(format("You’ve made incredible progress since we last battled. But of course, you’re the Champion, {PLAYER}. TheTide is lucky to have another powerful ally."),,SPEAKER_VIGRIM,TAIL_TALK)
+    msgbox(format("You’ve made incredible progress since we last battled. But of course, you’re the Champion, {PLAYER}. The Tide is lucky to have another powerful ally."),,SPEAKER_VIGRIM,TAIL_TALK)
     msgbox(format("Thank you! It’s nice to not get crushed as easily anymore… wait! I was following a lead looking for Eleanor. I think they train around here, and I want to try to convince them to work with us."),,SPEAKER_ALICIA)
     msgbox(format("You won’t need to do much convincing, actually."),,SPEAKER_VIGRIM)
     msgbox(format("What do you mean?"),,SPEAKER_ALICIA)
-    msgbox(format("Allow me to re-introduce myself. I am the leader of TheTide, member of the Elite Four,"),,SPEAKER_VIGRIM)
+    msgbox(format("Allow me to re-introduce myself. I am the leader of The Tide, member of the Elite Four,"),,SPEAKER_VIGRIM)
     closemessage
 
     fadescreen(FADE_TO_BLACK)
@@ -165,9 +165,9 @@ script MaskOff_PostBattle_Dialogue
     applymovement(PLAYER,Common_Movement_ExclamationMark)
     waitmovement(PLAYER)
 
-    msgbox(format("I formed TheTide as a response to SharpRise Capital’s growing influence over the region a few years ago. "),,SPEAKER_ELEANOR)
+    msgbox(format("I formed The Tide as a response to SharpRise Capital’s growing influence over the region a few years ago. "),,SPEAKER_ELEANOR)
     msgbox(format("But why go into hiding as Vigrim?"),,SPEAKER_ALICIA)
-    msgbox(format("I hid my identity because I was worried about my influence diluting the message. If people could unite under a symbol like Vigrim, then in theory, anybody could lead TheTide if something happened to me. And if the Elite Four wasn’t directly connected to TheTide, then they couldn’t retaliate against the others."),,SPEAKER_ELEANOR)
+    msgbox(format("I hid my identity because I was worried about my influence diluting the message. If people could unite under a symbol like Vigrim, then in theory, anybody could lead The Tide if something happened to me. And if the Elite Four wasn’t directly connected to The Tide, then they couldn’t retaliate against the others."),,SPEAKER_ELEANOR)
     msgbox(format("Things are… a little different now. I met with Baiya…"),,SPEAKER_ALICIA)
 
     closemessage

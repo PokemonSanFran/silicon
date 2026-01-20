@@ -45,8 +45,8 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
         VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_BAIYA_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
         VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY: HowDisappointing_MissionComplete_Dialogue
         VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM: Manhunt_MissionComplete_Dialogue
-        VAR_STORYLINE_STATE,STORY_3RD_THETIDE_TAKEDOWN: ExhibitionBattle_CheckMissionProgress_Script
-        VAR_STORYLINE_STATE,STORY_THETIDE_FINISHED: ExhibitionBattle_TimeSkip_Script
+        VAR_STORYLINE_STATE,STORY_3RD_THE_TIDE_TAKEDOWN: ExhibitionBattle_CheckMissionProgress_Script
+        VAR_STORYLINE_STATE,STORY_THE_TIDE_FINISHED: ExhibitionBattle_TimeSkip_Script
     ]
     MAP_SCRIPT_ON_LOAD {
         call(ImIn_RevealLucreziaWarp_Script)
@@ -94,8 +94,8 @@ script SharpriseSpire_Leagueops_Oliver_Event_Script{
     switch (var(VAR_STORYLINE_STATE)){
         case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
         case STORY_START_FALSE_TIMELINE:
-        case STORY_1ST_THETIDE_TAKEDOWN:
-        case STORY_2ND_THETIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Interact_Oliver_Script)
+        case STORY_1ST_THE_TIDE_TAKEDOWN:
+        case STORY_2ND_THE_TIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Interact_Oliver_Script)
     }
     release
     end
@@ -107,8 +107,8 @@ script SharpriseSpire_Leagueops_Keiying_Event_Script{
     switch(var(VAR_STORYLINE_STATE)){
         case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
         case STORY_START_FALSE_TIMELINE:
-        case STORY_1ST_THETIDE_TAKEDOWN:
-        case STORY_2ND_THETIDE_TAKEDOWN: call(YouHaveYourOrders_Interact_Keiying_Script)
+        case STORY_1ST_THE_TIDE_TAKEDOWN:
+        case STORY_2ND_THE_TIDE_TAKEDOWN: call(YouHaveYourOrders_Interact_Keiying_Script)
 }
 release
 end
@@ -120,8 +120,8 @@ script SharpriseSpire_Leagueops_Ramesh_Event_Script{
     switch(var(VAR_STORYLINE_STATE)){
         case STORY_MORNING_OF_TIMELINE_SPLIT: return
         case STORY_START_FALSE_TIMELINE:
-        case STORY_1ST_THETIDE_TAKEDOWN:
-        case STORY_2ND_THETIDE_TAKEDOWN: goto(Manhunt_Interact_Ramesh_Script)
+        case STORY_1ST_THE_TIDE_TAKEDOWN:
+        case STORY_2ND_THE_TIDE_TAKEDOWN: goto(Manhunt_Interact_Ramesh_Script)
 }
 release
 end

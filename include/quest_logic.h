@@ -1,7 +1,7 @@
 #ifndef GUARD_QUESTLOGIC_H
 #define GUARD_QUESTLOGIC_H
 
-bool32 HasPlayerJoinedTheTide(void);
+bool32 HasPlayerJoinedThe_Tide(void);
 u16 Quest_Generic_CountRemainingSubquests(u16);
 bool32 KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(int);
 void Quest_Kitchenvolunteering_CreatePantryMaze(void);

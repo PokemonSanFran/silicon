@@ -117,7 +117,7 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_VIGRIM] =
     {
-        .username = _("TheTide"),
+        .username = _("The Tide"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_AMI] =

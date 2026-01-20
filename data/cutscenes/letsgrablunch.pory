@@ -100,7 +100,7 @@ script LetsGrabLunch_DinerBooth_Dialogue {
 
         msgbox(format("You know, they're not as bad as you think. I still don't understand your problem with them."),,SPEAKER_ALICIA)
 
-        msgbox(format("I know you don't. It's hard to sit down and explain, but I'm working on it. But maybe it doesn't matter.  Is that what TheTide got wrong? Rather than try to defeat a negative force, maybe we need to focus on being a stronger positive force."),,SPEAKER_BAIYA)
+        msgbox(format("I know you don't. It's hard to sit down and explain, but I'm working on it. But maybe it doesn't matter.  Is that what The Tide got wrong? Rather than try to defeat a negative force, maybe we need to focus on being a stronger positive force."),,SPEAKER_BAIYA)
 
         msgbox(format("Hmm. Never thought about it like that."),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
@@ -114,11 +114,11 @@ script LetsGrabLunch_DinerBooth_Dialogue {
 
         msgbox(format("What are you going to do?"),,SPEAKER_ALICIA)
 
-        msgbox(format("I'm going to bring the idea to TheTide too. I think it's something everybody can rally behind, right?"),,SPEAKER_BAIYA)
+        msgbox(format("I'm going to bring the idea to The Tide too. I think it's something everybody can rally behind, right?"),,SPEAKER_BAIYA)
 
-        msgbox(format("Baiya, I don't think I can help you if you're working with TheTide."),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Baiya, I don't think I can help you if you're working with The Tide."),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(format("{PLAYER}, ignore what you think about TheTide for a second - you've seen the good that they've doing in the region, and their ability to work WITH the local communinities is what we need to make this successful. This isn't about companies or teams right now - I just want to help Trainers with the influence that I have."),,SPEAKER_BAIYA)
+        msgbox(format("{PLAYER}, ignore what you think about The Tide for a second - you've seen the good that they've doing in the region, and their ability to work WITH the local communinities is what we need to make this successful. This isn't about companies or teams right now - I just want to help Trainers with the influence that I have."),,SPEAKER_BAIYA)
 
         msgbox(format("This isn't going to be a repeat of SharpRise Stadium, right?"),,SPEAKER_ALICIA)
         msgbox(format("You have my absolute word."),,SPEAKER_BAIYA)
@@ -130,7 +130,7 @@ script LetsGrabLunch_DinerBooth_Dialogue {
 
 script LetsGrabLunch_InteractBaiyaDiner_Dialogue {
        setflag(FLAG_FACILITY_UNLOCK_BAIYA)
-    msgbox(format("I'm just planning out my pitch to TheTide."),,SPEAKER_BAIYA)
+    msgbox(format("I'm just planning out my pitch to The Tide."),,SPEAKER_BAIYA)
     goto(LetsGrabLunch_ShowGymList_Dialogue)
 }
 

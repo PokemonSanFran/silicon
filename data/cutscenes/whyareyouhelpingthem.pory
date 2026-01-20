@@ -199,7 +199,7 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 
         msgbox(format("Damn, you too, {PLAYER}?"),,SPEAKER_ADAORA)
 
-        msgbox(format("What was all that shit you tried to tell me before?! What the hell is TheTide doing?"),,SPEAKER_ALICIA)
+        msgbox(format("What was all that shit you tried to tell me before?! What the hell is The Tide doing?"),,SPEAKER_ALICIA)
 
         msgbox(format("We've got to help more comrades escape. Another time."),,SPEAKER_VIGRIM)
 
@@ -248,7 +248,7 @@ script WhyAreYouHelpingThem_ExplodeWall_Script {
         applymovement(BAIYA, moves(walk_down, walk_left * 3, step_end))
         waitmovement(0)
 
-        msgbox(format("You're working with TheTide too?!?"),,SPEAKER_ALICIA)
+        msgbox(format("You're working with The Tide too?!?"),,SPEAKER_ALICIA)
         closemessage
         startmenu_savescreen
         goto(WhyAreYouHelpingThem_StartBattle_Script)
@@ -307,7 +307,7 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
         lock
         applymovement(PLAYER,Common_Movement_FaceUp)
 
-        msgbox(format("Great work in there, team. Andre, what's the sitrep regarding TheTide leadership?"))
+        msgbox(format("Great work in there, team. Andre, what's the sitrep regarding The Tide leadership?"))
         closemessage
 
         applymovement(6,Common_Movement_WalkUp)

@@ -58,7 +58,7 @@ script ThisIsntRandom_UnlockDoor_Dialogue
     lock
         startcutscene(JUMPPLAYER_THISISNTRANDOM_DISCOVER)
         call(ThisIsntRandom_ObjectSetUp_Script)
-        setvar(VAR_PARC_STATE,THETIDE_DISCOVERED_LAB)
+        setvar(VAR_PARC_STATE,THE_TIDE_DISCOVERED_LAB)
 
         playse(SE_PIN)
         waitse

@@ -27,7 +27,7 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
     msgbox(format("Oliver? How did you get so deep in here? You can't battle worth shit!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
 
     msgbox(format("Never mind that... okay. We'd like your help again."),,SPEAKER_OLIVER)
-    msgbox(format("Shit, what did TheTide do now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Shit, what did The Tide do now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
     msgbox(format("You're starting to sound like a native… they've completely infiltrated our social media platforms. Lucrezia was impressed with your work at SharpRise Stadium, and thinks you two might be able to help."),,SPEAKER_OLIVER)
 

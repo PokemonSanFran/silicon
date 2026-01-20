@@ -89,11 +89,11 @@ const u8 *GetQuestDesc_PlayersAdventure()
             return gText_PlayersAdventure_Flavor32;
         case STORY_SAVE_DIANTHA:
             return gText_PlayersAdventure_Flavor31;
-        case STORY_THETIDE_FINISHED:
+        case STORY_THE_TIDE_FINISHED:
             return gText_PlayersAdventure_Flavor30;
         case STORY_START_FALSE_TIMELINE:
-        case STORY_1ST_THETIDE_TAKEDOWN:
-        case STORY_2ND_THETIDE_TAKEDOWN:
+        case STORY_1ST_THE_TIDE_TAKEDOWN:
+        case STORY_2ND_THE_TIDE_TAKEDOWN:
             if (QuestMenu_GetSetQuestState(QUEST_MANHUNT,FLAG_GET_ACTIVE))
                 return gText_Quest_Manhunt_Desc;
             if (QuestMenu_GetSetQuestState(QUEST_HOWDISAPPOINTING,FLAG_GET_ACTIVE))

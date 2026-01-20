@@ -54,10 +54,10 @@ This cutscene occurs after the player defeats their first Gym Leader.
 
 ## Enter Adaora
 * There is a line blocking the western exit of CapheCity, which leads to ToraTown. ToraTown is the location of one of the Gyms.
-* Alicia goes to the front of the line and sees TheTide members handing out food and supplies.
-* Alicia tries to ask them to reroute the line, but is berated by the TheTide members.
-* Another TheTide member intervenes, gets both sides of the story, and walks with Alicia to fix the problem.
-* The TheTide member introduces themselves as Adaora. 
+* Alicia goes to the front of the line and sees The Tide members handing out food and supplies.
+* Alicia tries to ask them to reroute the line, but is berated by the The Tide members.
+* Another The Tide member intervenes, gets both sides of the story, and walks with Alicia to fix the problem.
+* The The Tide member introduces themselves as Adaora. 
 * Adaora explains they regularly set up shop around the region to perform mutual aid.
 * Adaora helps unblock the path, and realizes Alicia is participating in the League Challenge. 
 * Adaora gives Alicia a Key Stone, which will allow Alicia's Pokémon to Mega Evolve. Adaora says the Key Stone fell off the back of a truck.
@@ -85,11 +85,11 @@ This cutscene only plays if the players to cross into western Residowithout gogg
 * The homeless person comments that most natives have goggles for the fog, but they're currently sold out and hard to get a pair of. 
 
 ## Group of Assholes Appear
-* Alicia comes across a group of TheTide members harassing a store owner at Fisherman's Wharf.
-* TheTide members accuse the store owner of stealing somebody's business.
-* Alicia intervenes and fails at getting TheTide to back down.
-* Alicia defeats two TheTide members at the same time.
-* The TheTide members leave.
+* Alicia comes across a group of The Tide members harassing a store owner at Fisherman's Wharf.
+* The Tide members accuse the store owner of stealing somebody's business.
+* Alicia intervenes and fails at getting The Tide to back down.
+* Alicia defeats two The Tide members at the same time.
+* The The Tide members leave.
 
 ## Enter Emrys 
 * Alicia defeats the Gym Leader of PerlaciaCity, Emrys.
@@ -124,7 +124,7 @@ This cutscene is optional.
 * Alicia sees two people talking at the entrance, but they separate as Alicia approaches. 
 * The crowd is a mix of HalaiIsland and CurenoPort residents. The ferry to get back to HalaiIsland is broken, so lots of the residents are stranded in CurenoPort. CurenoPort residents are upset with all these people "taking over" their city.
 * The argument begins to escalate when Adaora, one of the people talking at the entrance, steps in. Adaora attempts to defuse the situation, but the other person continues to escalate.
-* The crowd realizes who Adaora is, the second in command of TheTide and a powerful Trainer in their own right.
+* The crowd realizes who Adaora is, the second in command of The Tide and a powerful Trainer in their own right.
 * Hearing the crowd, the agitator backs down and leaves. Adaora leaves the scene soon after.
 
 # ACT 1.2
@@ -144,8 +144,8 @@ All the cutscenes in Act 1.3 occur in the order listed here.
 
 ## Housing Protest
 * There is a housing protest occurring outside of an apartment building on the route between Oroland and Chasilla.
-* The property developer comes outside to attempt to reason with the protestors, but two TheTide emerge from the crowd.
-* The TheTide members rile up the crowd and threaten to burn the building down.
+* The property developer comes outside to attempt to reason with the protestors, but two The Tide emerge from the crowd.
+* The The Tide members rile up the crowd and threaten to burn the building down.
 * Alicia intervenes, battles, and defeats the pair.
 * The crowd disperses and the developer thanks Alicia.
 
@@ -161,7 +161,7 @@ All the cutscenes in Act 1.3 occur in the order listed here.
 ## Sorry About My Friends
 * When Alicia leaves the Chasilla Gym, they are approached by Adaora.
 * Adaora congratulates them on defeating Pua.
-* Alicia begins to question Adaora's involvement with TheTide, citing the Housing Protest.
+* Alicia begins to question Adaora's involvement with The Tide, citing the Housing Protest.
 * Adaora apologizes and explains that protest is why they're here - they're looking for the two members responsible for the threats.
 * Alicia mentions the pair left to the South.
 * Adaora thanks Alicia and upgrades their Ferry Pass so they can go to Arantraz. 
@@ -195,8 +195,8 @@ Each of the cutscenes in Act 2.1 can be done in any order, unless otherwise spec
 This cutscene is optional.
 * Alicia sees Oliver standing at the edge of Fisherman's Wharf. 
 * Oliver congratulates Alicia on their fourth badge.
-* Alicia mentions they just came back from Arantraz, after getting a pass from a TheTide member.
-* Oliver expresses his distaste for TheTide and explains their stance as anarchists.
+* Alicia mentions they just came back from Arantraz, after getting a pass from a The Tide member.
+* Oliver expresses his distaste for The Tide and explains their stance as anarchists.
 * Alicia asks about the now defunct Elite Four, and Oliver reveals that it was recently disbanded along with the entirely new League format moves from Double to Single battles.
 * Oliver has business to attend to and leaves Alicia.
 
@@ -228,9 +228,9 @@ Access to this cutscene is blocked until after "You Look Tired".
 * One of Keiying's children explains that Keiying has a warp panel that goes directly to their office, and that all SharpriseCapital C-Suite members have these.
 * This child leaves the table, upset that their parent is always putting work ahead of the family.
 * Alicia stays the night at Keiying's mansion.
-* In the morning, Alicia watches the news as a violent riot broke out in CapheCity last night. TheTide is said to be the instigators.
+* In the morning, Alicia watches the news as a violent riot broke out in CapheCity last night. The Tide is said to be the instigators.
 * One of the waitstaff begins crying, as their son was badly injured in the riots.
-* The waitstaff curses TheTide, as their son was working with them.
+* The waitstaff curses The Tide, as their son was working with them.
 
 ## Beach Battle
 * Charlotte sees Alicia walking along the beach in Pacfica.
@@ -264,7 +264,7 @@ Access to this cutscene is blocked until after "And We March On".
 ## A New Strike
 This cutscene plays after the player has defeated 5 Gym Leaders AND has walked 100 steps outside.
 * Alicia gets an alert on Buzzr, claiming that SharpriseStadium construction crew, upcoming site of the Pokémon League Championship  has declared a strike
-    * "Their demands at this time are unclear, but this puts the upcoming dates of the SharpriseCapital League Championship in danger. Anonymous sources claim that TheTide is responsible for instigating this protest."
+    * "Their demands at this time are unclear, but this puts the upcoming dates of the SharpriseCapital League Championship in danger. Anonymous sources claim that The Tide is responsible for instigating this protest."
 
 ## Battle #8
 * Alicia walks past the PintillonHouse_Exterior and Baiya steps out.
@@ -284,15 +284,15 @@ All the cutscenes in Act 2.2 occur in the order listed here.
 * Alicia gets a call from Lucrezia who congratulates them on getting all defeating all eight Gym Leaders.
 * Lucrezia asks the player to come to Route2, where the SharpriseStadium Construction site is.
 * As Alicia arrives, Oliver and Charlotte are there, waiting for Alicia.
-* Oliver begins to explain the situation, when a masked and hooded figure appears before the crowd, flanked by TheTide member.
-* They introduce themselves as Vigrim, and are the leader of TheTide.
+* Oliver begins to explain the situation, when a masked and hooded figure appears before the crowd, flanked by The Tide member.
+* They introduce themselves as Vigrim, and are the leader of The Tide.
 * They make it clear that they are indeed working with the construction workers and are responsible for the strike, but are hoping to reach an agreement with the government.
 * Vigrim leaves.
 
 ## VS Garbodor
-* Oliver explains that the strike is a cover for TheTide's real plan - they've planted exploding Pokémon at the base of the structure, and are looking to blow it up. 
+* Oliver explains that the strike is a cover for The Tide's real plan - they've planted exploding Pokémon at the base of the structure, and are looking to blow it up. 
 * Oliver is asking Charlotte and Alicia for help as the police are keeping protestors at bay, and Oliver doesn't want to impact the stock price with the news of a terrorist attack.
-* Charlotte and Alicia agree to help, and go into the construction site, where TheTide and their Pokémon are found around the structure.
+* Charlotte and Alicia agree to help, and go into the construction site, where The Tide and their Pokémon are found around the structure.
 * Charlotte and Alicia split up and defeat the Trainers and knockout the Pokémon, and then report back to Oliver.
 * Oliver thanks both Trainers, and suggest they all return to the Compound in CuconuTown.
 
@@ -332,13 +332,13 @@ All the cutscenes in Act 3.3 occur in the order listed here.
 
 ## Have You Seen The News?
 * Near the end of the duo's training, Oliver arrives to see Charlotte and Alicia.
-* There is no service in LeaverraForest, so none of them were aware that TheTide has taken over the social media accounts of SharpriseCapital and are blasting the Internet with anti-League propaganda.
+* There is no service in LeaverraForest, so none of them were aware that The Tide has taken over the social media accounts of SharpriseCapital and are blasting the Internet with anti-League propaganda.
 * Lucrezia has sent Oliver to retrieve Charlotte and Alicia and ask for their help in stopping the hack.
 * Alicia, Charlotte and Oliver go to the SharpriseSpire.
 
 ## Welcome to the War Room.
 * In a conference room in the SharpriseSpire, two SharpriseCapital engineers explain the situation to Oliver, Lucrezia, Charlotte, Alicia, and the Police Chief.
-* The Police Chief claims they knows where TheTide is operating out of. Their goal is to storm their HQ and shut things down that way.
+* The Police Chief claims they knows where The Tide is operating out of. Their goal is to storm their HQ and shut things down that way.
 * Lucrezia heard about Charlotte and Alicia's work on the Garbodor, and want the Trainers to help with the raid.
 * The Police Chief, annoyed with the idea of children helping with a police raid, walks out, telling the pair to meet him at the ferry.
 
@@ -349,7 +349,7 @@ All the cutscenes in Act 3.3 occur in the order listed here.
 * The trio goes to the NavalBase in HalaiIsland.
 * The Chief explains the raid plan to the police squad, and gives Alicia and Charlotte the TM for Self-Destruct, as they were taken out of circulation years ago for public safety reasons.
 * The police blow open the side of a building and rush in, storming the headquarters.
-* Alicia and Charlotte split up and begin battling TheTide members in an attempt to shut the hack down.
+* Alicia and Charlotte split up and begin battling The Tide members in an attempt to shut the hack down.
 * The hackers are discovered and disabled, but the police go further, hoping to arrest leadership.
 * Alicia discovers Charlotte battling with Adaora, but Charlotte tells them that Vigrim is up ahead.
 
@@ -359,7 +359,7 @@ All the cutscenes in Act 3.3 occur in the order listed here.
 * Baiya blows through another wall, urging Adaora and Vigrim to escape as the police close in.
 * Baiya reveals he has always worked with The Tide and battles Alicia to stall while Vigrim and Baiya escape.
 * Alicia defeats Baiya, but is distracted as Charlotte finally catches up to them. Baiya escapes in the confusion, undetected.
-* Lots of TheTide members are arrested, but Vigrim and Adaora escape.
+* Lots of The Tide members are arrested, but Vigrim and Adaora escape.
 * At the SharpriseCapital Compound, Oliver informs Alicia and Charlotte that the League Championship would be starting tomorrow.
 * The game progresses after the player goes to sleep.
 
@@ -374,9 +374,9 @@ All the cutscenes in Act 3.4 occur in the order listed here.
 
 ## Why Didn't You Rat Me Out?
 * Alicia goes to leave the room to get some fresh air, but Baiya stops them and asks to talk.
-* Baiya is grateful but confused that Alicia didn't report their TheTide affiliation to the authorities.
+* Baiya is grateful but confused that Alicia didn't report their The Tide affiliation to the authorities.
 * Alicia explains that they know how hard Baiya worked to get here, and they know how much Baiya loves Resido. 
-* They don't feel its their place to turn them in, and knows that if Baiya is working with TheTide, he must believe they are trying to do good, and doesn't want to punish them for that.
+* They don't feel its their place to turn them in, and knows that if Baiya is working with The Tide, he must believe they are trying to do good, and doesn't want to punish them for that.
 * Baiya thanks Alicia and heads to the Arena for their matches.
 * Oliver finds Alicia and invites them to the sky box to watch the other Group Stages.
 * Alicia watches Baiya win in their group and Charlotte to win their group.
@@ -453,8 +453,8 @@ All the cutscenes in Act 4.3 occur in the order listed here.
 * After completing one of the Restoration Quests, SharpriseCapital asks Alicia to report to the conference room in the SharpriseSpire.
 * Oliver expresses concern about the Alicia's involvement in the professional battling community and their affiliation with SharpriseCapital, indicating that it may negatively impact their sponsorship. 
 * Oliver suggests the Alicia find other extracurricular activities instead. 
-* Keiying walks in and reveals that their data suggests the gyms the Alicia is turning into community centers are being used as recruitment and training hubs for TheTide, who are getting more violent and dangerous. 
-* The local police have agreed to work with SharpriseCapital to eliminate TheTide, and they request the Alicia and Charlotte's help in finishing them. 
+* Keiying walks in and reveals that their data suggests the gyms the Alicia is turning into community centers are being used as recruitment and training hubs for The Tide, who are getting more violent and dangerous. 
+* The local police have agreed to work with SharpriseCapital to eliminate The Tide, and they request the Alicia and Charlotte's help in finishing them. 
 * Keiying advises the Alicia to take some time to think about the situation before making any decisions.
  
 ## You Realize They're Evil, Right?
@@ -468,20 +468,20 @@ All the cutscenes in Act 4.3 occur in the order listed here.
     * The protestors demanded better conditions for prisoners, dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land to its original owners.
     * The protests gained national attention with the help of Magnus's support, and pressure mounted on the government to comply. An earthquake destroyed the prison, killing inmates and guards, and ending the occupation.
 * On the lowest level of the prison, Alicia meets Baiya with Tala and Magnus, another member of the Elite Four.
-* Baiya explains to the other three that the SharpriseCapital has been framing TheTide, planting agitators and warping the public narrative against them.
+* Baiya explains to the other three that the SharpriseCapital has been framing The Tide, planting agitators and warping the public narrative against them.
 * Baiya uses a Garbodor from the construction strike, proving that only SharpriseCapital would have the resources to train and breed an exploding Garbodor.
-* Baiya asks Magnus, Tala and Alicia to help work with TheTide to expose SharpriseCapital and start healing the region.
+* Baiya asks Magnus, Tala and Alicia to help work with The Tide to expose SharpriseCapital and start healing the region.
 * Alicia needs time to think, and leaves. Alicia goes to sleep but wakes up having not made a decision.
 
 # TIMELINE SPLIT
-* The player must now choose between SharpriseCapital and TheTide. Choosing one side locks the player out of choosing the other side.
+* The player must now choose between SharpriseCapital and The Tide. Choosing one side locks the player out of choosing the other side.
 
 # ACT 5 FALSE TIMELINE
 These cutscenes occur in the order they are listed here, unless otherwise specified.
 
 ## Congrats, You're an Asshole.
-* Alicia reports back to the SharpriseSpire and says they'll help eliminate TheTide.
-* SharpriseCapital and Alicia put out a joint social media statement, declaring their commitment to get rid of TheTide once and for all.
+* Alicia reports back to the SharpriseSpire and says they'll help eliminate The Tide.
+* SharpriseCapital and Alicia put out a joint social media statement, declaring their commitment to get rid of The Tide once and for all.
 * Oliver, Ramesh, and Keiying each have a different assigned mission for Alicia.
 * Keiying reveals that SharpriseCapital has hired Charlotte to help with this effort.
 
@@ -499,9 +499,9 @@ Access to this cutscene is blocked until after "You Have Your Orders".
 ## Let's Burn This Mother Down.
 Access to this cutscene is blocked until after "Congrats, You're an Asshole".
 * Alicia talks to Oliver.
-* Oliver believes that TheTide is using a new base for their operations.
+* Oliver believes that The Tide is using a new base for their operations.
 * Asks Alicia to hunt that base down.
-* Alicia goes to Arantraz to try to convince Baiya to stop working with TheTide before they get arrested.
+* Alicia goes to Arantraz to try to convince Baiya to stop working with The Tide before they get arrested.
 * Baiya corners Alicia in Arantraz, furious that Alicia chose the wrong side.
 * Alicia defeats Baiya in battle.
 * Baiya begins to rant, but Charlotte attacks them behind, surprising Alicia.
@@ -554,7 +554,7 @@ All the cutscenes in Act 5 True occur in the order listed here, unless otherwise
 * Vigrim challenges Alicia to a friendly battle, which Alicia wins.
 * Alicia explains they were actually looking for Eleanor, and explains Baiya's plan.
 * Vigrim says they might be able to help, and unmasks, revealing themselves to be Eleanor, the last Elite Four member.
-* Eleanor explains that they started TheTide to push back after they saw a losing battle - they knew that change had to come from the outside, not within the League structure.
+* Eleanor explains that they started The Tide to push back after they saw a losing battle - they knew that change had to come from the outside, not within the League structure.
 * Eleanor leaves to talk to the other Elite Four members and make amends, but warns Alicia that things will never be the same.
 
 ## Locked Out
@@ -567,8 +567,8 @@ This cutscene plays when the player attempts to go home after "Let's Get The Ban
 The game resumes after the player goes to sleep at Baiya's home.
 * Alicia wakes up a video circulating social media, with the Elite Four announcing their return and their public pledge to heal Residoand take down SharpriseCapital.
 * Baiya is excited that the wheels are finally in motion.
-* Baiya and Alicia both get an email from the TheTide Event Bot, for a rally in Oroland in a warehouse to celebrate the return of the Elite Four.
-* Baiya has some errands to run but tells Alicia that there is also a TheTide meeting at Arantraz that night.
+* Baiya and Alicia both get an email from the The Tide Event Bot, for a rally in Oroland in a warehouse to celebrate the return of the Elite Four.
+* Baiya has some errands to run but tells Alicia that there is also a The Tide meeting at Arantraz that night.
 
 ## Warehouse Rave!
 * Alicia goes to the warehouse in Oroland. It is easy to find due to the lights and fog and music.
@@ -584,12 +584,12 @@ The game resumes after the player goes to sleep at Baiya's home.
 
 ## Speech! Speech! Speech!
 This cutscene can be played before Warehouse Rave.
-* The bottom floor of Arantraz has all the remaining TheTide members.
-* Vigrim addresses the crowd, announcing that they will be stepping down from TheTide, effectively immediately.
-* Vigrim says that Adaora will be taking over as head of TheTide, and Vigrim is taking a leave of absence.
-* Vigrim walks behind a curtain and the Elite Four walk out from the behind a curtain, explaining that they are joining forces with TheTide to finally hit SharpriseCapital where it hurts. The crowd goes wild.
+* The bottom floor of Arantraz has all the remaining The Tide members.
+* Vigrim addresses the crowd, announcing that they will be stepping down from The Tide, effectively immediately.
+* Vigrim says that Adaora will be taking over as head of The Tide, and Vigrim is taking a leave of absence.
+* Vigrim walks behind a curtain and the Elite Four walk out from the behind a curtain, explaining that they are joining forces with The Tide to finally hit SharpriseCapital where it hurts. The crowd goes wild.
 * An earthquake breaks out, but nobody is harmed.
-* Adaora resumes their speech, explaining that TheTide will be running interference campaigns against Buzzr, Arriba and Facebook.
+* Adaora resumes their speech, explaining that The Tide will be running interference campaigns against Buzzr, Arriba and Facebook.
     * By disrupting the companies operations (and therefore bottom line) they can begin to weaken SharpriseCapital where it actually matters.
 * Each Elite Four members is tasked with taking on a company, except Magnus, who will be opening a dialogue with the government in a show of good faith.
 
@@ -624,7 +624,7 @@ This cutscene plays after the player solves the riddle in the cryptic message, w
 * There is a final Dynamax Pokémon in the lab. Baiya and Alicia team up to defeat it.
 
 ## Let's Finish This.
-* The Elite Four and TheTide leadership all meet up in HalaiIsland, and explain the Lab situation.
+* The Elite Four and The Tide leadership all meet up in HalaiIsland, and explain the Lab situation.
 * The crowd realizes that SharpriseCapital is literally playing to kill, and they need to escalate in kind.
 * Baiya jokes that they should all storm the SharpriseSpire and force a confession out of the SharpriseCapital leadership, but the group begins to take them seriously.
 * Alicia remembers that all C-Suite members have a warp panel in their homes that leads directly to their offices.

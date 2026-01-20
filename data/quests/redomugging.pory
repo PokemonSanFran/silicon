@@ -63,7 +63,7 @@ script Quest_Redomugging_StartQuest_Dialogue{
 
         msgbox(format("Oh hell, not again."))
 
-        msgbox(format("Wait, did I pick the wrong side? There's no way TheTide is intentionally working with muggers."))
+        msgbox(format("Wait, did I pick the wrong side? There's no way The Tide is intentionally working with muggers."))
 
         msgbox(format("Nah, we're still the good guys, you just got it twisted."))
 
@@ -132,7 +132,7 @@ script Quest_Redomugging_StealPhone_Dialogue{
     msgbox(format("Uh, I wanted to check on you! Make sure you were okay after that mugging. I know people get shaken up."))
 
     msgbox(format("Wow! You really are the best. I was a little rattled, but I got my phone back and got away while you battled them. All is well!"))
-    msgbox(format("While you're here, how about an interview? I see you're publicly supporting TheTide, and I'd love to pick your brain!"))
+    msgbox(format("While you're here, how about an interview? I see you're publicly supporting The Tide, and I'd love to pick your brain!"))
     closemessage
 
     fadescreen(FADE_TO_BLACK)
@@ -220,7 +220,7 @@ script Quest_Redomugging_Reward_Dialogue{
     msgbox(format("We'll take that off your hands..."))
     closemessage
 
-    msgbox(format("{PLAYER} gave the reporter's phone to TheTide."),MSGBOX_AUTOCLOSE)
+    msgbox(format("{PLAYER} gave the reporter's phone to The Tide."),MSGBOX_AUTOCLOSE)
     removeitem(ITEM_FAME_CHECKER)
 
     msgbox(format("Awesome, we'll give this to our guys and see if they stop this story from getting out."))
@@ -244,7 +244,7 @@ text gText_Redomugging_OhHellNot{
     format("Oh hell, not again.")
 }
 text gText_Redomugging_WaitDidIPick{
-    format("Wait, did I pick the wrong side? There's no way TheTide is intentionally working with muggers.")
+    format("Wait, did I pick the wrong side? There's no way The Tide is intentionally working with muggers.")
 }
 text gText_Redomugging_NahWereStill{
     format("Nah, we're still the good guys, you just got it twisted.")
@@ -301,7 +301,7 @@ text gText_Redomugging_WowYouReallyAre{
     format("Wow! You really are the best. I was a little rattled, but I got my phone back and got away while you battled them. All is well!")
 }
 text gText_Redomugging_WhileYoureHere{
-    format("While you're here, how about an interview? I see you're publicly supporting TheTide, and I'd love to pick your brain!")
+    format("While you're here, how about an interview? I see you're publicly supporting The Tide, and I'd love to pick your brain!")
 }
 text gText_Redomugging_OhManThisIsGreat{
     format("Oh man, this is so juicy! Okay, I gotta run to the restroom, but don't go anywhere,okay?")
@@ -331,7 +331,7 @@ text gText_Redomugging_WellTakeThat{
     format("We'll take that off your hands...")
 }
 text gText_Redomugging_PlayerGave{
-    format("{PLAYER} gave the reporter's phone to TheTide.")
+    format("{PLAYER} gave the reporter's phone to The Tide.")
 }
 text gText_Redomugging_AwesomeWellGive{
     format("Awesome, we'll give this to our guys and see if they stop this story from getting out.")

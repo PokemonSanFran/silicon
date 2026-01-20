@@ -59,7 +59,7 @@ script Manhunt_Assignment_Dialogue {
 
         setvar(VAR_MANHUNT_STATE,ASSIGNED_FIND_VIGRIM)
 
-        msgbox(format("Go find Vigrim. Charlotte will help. The newspaper in Perlacia City is a good place to start, they ran a story on TheTide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
+        msgbox(format("Go find Vigrim. Charlotte will help. The newspaper in Perlacia City is a good place to start, they ran a story on The Tide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
 
         call(TryAutoSave)
         startquest(QUEST_MANHUNT)
@@ -86,9 +86,9 @@ script Manhunt_Cherie_Battle_Script {
 
         msgbox(format("Hey, we're trying to find Vigrim, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah, I wrote the TheTide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Vigrim… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
+        msgbox(format("Yeah, I wrote the The Tide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Vigrim… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
 
-        msgbox(format("Blessed? TheTide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("Blessed? The Tide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
         msgbox(format("…wait. You're that {PLAYER} kid, aren't you? "),,SPEAKER_CHERIE)
 
@@ -115,7 +115,7 @@ script Manhunt_StartBattle1_Script
 
         msgbox(format("I KNOW you know some shit."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("The only lead I have is a consulting firm in MermerezaCity… there's money flowing between there and TheTide, or, at least there was. I never figured out what was going on though."),,SPEAKER_CHERIE)
+        msgbox(format("The only lead I have is a consulting firm in MermerezaCity… there's money flowing between there and The Tide, or, at least there was. I never figured out what was going on though."),,SPEAKER_CHERIE)
 
         msgbox(format("That's a start…"),,SPEAKER_ALICIA)
 
@@ -141,11 +141,11 @@ script Manhunt_Teodoro_Battle_Script {
         applymovement(CHARLOTTE, moves(walk_up * 2, jump_2_up, face_right, step_end))
         msgbox(format("What are some kids doing here?"),MSGBOX_NPC,SPEAKER_TEODORO)
 
-        msgbox(format("You gonna make this easy? Or are you gonna keep protecting TheTide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("You gonna make this easy? Or are you gonna keep protecting The Tide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("TheTide? What the hell are you talking about? "),,SPEAKER_TEODORO)
+        msgbox(format("The Tide? What the hell are you talking about? "),,SPEAKER_TEODORO)
 
-        msgbox(format("We know you're working with TheTide, and we need to find their leader."),,SPEAKER_ALICIA)
+        msgbox(format("We know you're working with The Tide, and we need to find their leader."),,SPEAKER_ALICIA)
 
         msgbox(format("Yeah, I did some work for them a while back. What about it? Gonna rat us out to your bosses?"),,SPEAKER_TEODORO)
         closemessage
@@ -161,9 +161,9 @@ script Manhunt_StartBattle2_Script
 
         msgbox(format("Wow! They weren't really that strong… did Charlotte really need to go that hard?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
 
-        msgbox(format("What do you know about TheTide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        msgbox(format("What do you know about The Tide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Look, I don't know what you're digging for. TheTide is all above ground, nothing to hide, just trying to do some damn good in the world."),,SPEAKER_TEODORO)
+        msgbox(format("Look, I don't know what you're digging for. The Tide is all above ground, nothing to hide, just trying to do some damn good in the world."),,SPEAKER_TEODORO)
 
         msgbox(format("If you don't start talking this is going to get very messy."),,SPEAKER_CHARLOTTE_SHARPRISE,EMOTE_ANGRY)
 
@@ -389,7 +389,7 @@ script Manhunt_StartVigrimBattle_Script
     switch(var(VAR_RESULT))
     {
         case FALSE_TIMELINE_HOW_BURN_COMPLETE:
-            msgbox(format("TheTide is finished. The region is yours now."),,SPEAKER_VIGRIM)
+            msgbox(format("The Tide is finished. The region is yours now."),,SPEAKER_VIGRIM)
     }
 
     msgbox(format("I'll call this in."),,SPEAKER_CHARLOTTE_SHARPRISE)
@@ -419,7 +419,7 @@ script Manhunt_MissionComplete_Dialogue {
 
         msgbox(format("Really? I feel like proud isn't quite the right emotion - things were pretty rough out there."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 
-        msgbox(format("Look at this way - we can already see them scrambling on Buzzr. Without their leader it's going to be even more difficult for TheTide to mobilize any further initatives. You're making things better and that's what's important."),,SPEAKER_RAMESH,,EMOTE_HAPPY)
+        msgbox(format("Look at this way - we can already see them scrambling on Buzzr. Without their leader it's going to be even more difficult for The Tide to mobilize any further initatives. You're making things better and that's what's important."),,SPEAKER_RAMESH,,EMOTE_HAPPY)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))

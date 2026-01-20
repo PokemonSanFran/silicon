@@ -103,7 +103,7 @@ script EnterTheMaster_InteractFollower_Script
 
         switch(var(VAR_RESULT)){
             case 0: msgbox(format("How do you think my new Pokémon is faring? I'm curious to see how it integrates with the rest of my team."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
-            case 1: msgbox(format("You know, I'm really sick of TheTide's shit. Its their fault we're stuck in this stupid forest."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 1: msgbox(format("You know, I'm really sick of The Tide's shit. Its their fault we're stuck in this stupid forest."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
             case 2: msgbox(format("I thought Resido's Gym Leaders would be tougher. I wonder how their old Elite Four stacks up to Unova's?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
             case 3: msgbox(format("Do you think they're going to be worth all this hassle?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
         }

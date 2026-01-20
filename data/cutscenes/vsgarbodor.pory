@@ -103,28 +103,28 @@ script VSGarbodor_ChooseRight_Script {
         end
 }
 
-script VSGarbodor_TheTideGrunt1_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_A, format("Heh, we're TheTide! Screw this stadium and screw SharpRise Capital!"), format("Damn, they were right, you're strong…"), VSGarbodor_TheTideGrunt1_Battle_Script)
+script VSGarbodor_The_TideGrunt1_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_A, format("Heh, we're The Tide! Screw this stadium and screw SharpRise Capital!"), format("Damn, they were right, you're strong…"), VSGarbodor_The_TideGrunt1_Battle_Script)
         msgbox(format("Welp, I did what I could! Good luck with that stinky shit."), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 
-script VSGarbodor_TheTideGrunt2_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_B, format("Right on cue, here come the heroes…"), format("Hmm, I guess I get to be the bad guy today!"), VSGarbodor_TheTideGrunt2_Battle_Script)
+script VSGarbodor_The_TideGrunt2_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_B, format("Right on cue, here come the heroes…"), format("Hmm, I guess I get to be the bad guy today!"), VSGarbodor_The_TideGrunt2_Battle_Script)
         msgbox(format("Being bad was fun for a day!"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
-script VSGarbodor_TheTideGrunt3_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_A, format("The Tide is the name, and shutting this shit down is our game!"), format("They didn't prepare us for this!"), VSGarbodor_TheTideGrunt3_Battle_Script)
+script VSGarbodor_The_TideGrunt3_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_A, format("The Tide is the name, and shutting this shit down is our game!"), format("They didn't prepare us for this!"), VSGarbodor_The_TideGrunt3_Battle_Script)
         msgbox(format("Oh thank Giratina, I can go back to the office now…"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
 
-script VSGarbodor_TheTideGrunt4_Battle_Script {
-    trainerbattle_single(TRAINER_FAKEROCKET_B, format("Look at you, thinking you're making any difference!"), format("That's right, dance puppets!"), VSGarbodor_TheTideGrunt4_Battle_Script)
+script VSGarbodor_The_TideGrunt4_Battle_Script {
+    trainerbattle_single(TRAINER_FAKEROCKET_B, format("Look at you, thinking you're making any difference!"), format("That's right, dance puppets!"), VSGarbodor_The_TideGrunt4_Battle_Script)
         msgbox(format("Have fun cleaning up after us, kid."), MSGBOX_AUTOCLOSE)
         goto(VSGarbodor_RemoveGrunt)
         end
@@ -237,7 +237,7 @@ script VSGarbodor_DefeatedAll_Dialogue {
 }
 
 script VSGarbodor_Arrest_Script {
-    setvar(VAR_CONSTRUCTION_STRIKE_STATE,THETIDE_ARRESTED)
+    setvar(VAR_CONSTRUCTION_STRIKE_STATE,THE_TIDE_ARRESTED)
         setvar(VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR)
 
         applymovement(LUCREZIA,Common_Movement_FaceUp)
@@ -271,7 +271,7 @@ script VSGarbodor_Negotiating_Dialogue
 {
     msgbox(format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?"),,SPEAKER_LUCREZIA)
 
-        msgbox(format("Done. Like you guys said, TheTide up to their shit as usual."),,SPEAKER_ALICIA)
+        msgbox(format("Done. Like you guys said, The Tide up to their shit as usual."),,SPEAKER_ALICIA)
 
         msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_LUCREZIA)
         msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_LUCREZIA)

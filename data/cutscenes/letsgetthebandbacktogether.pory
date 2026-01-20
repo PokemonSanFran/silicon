@@ -29,7 +29,7 @@ script LetsGettheBandBackTogether_PreventPlayerEnterTower_Script
     end
 }
 
-//This cutscene plays after the player has decided to side with TheTide.
+//This cutscene plays after the player has decided to side with The Tide.
 script LetsGettheBandBackTogether_MeetInBasement_Script
 {
 

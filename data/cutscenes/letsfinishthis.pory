@@ -52,7 +52,7 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("That part doesn’t surprise me. Old age getting to you? We all know, money is their only constituent."),,SPEAKER_FRANK)
 
-        msgbox(format("But innocent people? Attacking an entire island just to wipe out TheTide? This is insane!"),,SPEAKER_TALA)
+        msgbox(format("But innocent people? Attacking an entire island just to wipe out The Tide? This is insane!"),,SPEAKER_TALA)
 
         msgbox(format("Perfectly sane. It worked on Arantraz didn’t it? There’s no peaceful path forward. Do you all get it now? They’re poised to kill!"),,SPEAKER_ELEANOR)
 

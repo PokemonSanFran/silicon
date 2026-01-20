@@ -302,7 +302,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         fadescreen(FADE_FROM_BLACK)
         waitmovement(BAIYA)
 
-        //Screen fades to black. Screen fades back in. Elite Four members are spaced around the room, surrounded by groups of TheTide members. Baiya walks up to the player.
+        //Screen fades to black. Screen fades back in. Elite Four members are spaced around the room, surrounded by groups of The Tide members. Baiya walks up to the player.
         msgbox(format("Damn, this shit is so crazy! The air is electric!"),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("It feels really awesome to start making a difference around here."),,SPEAKER_ALICIA)

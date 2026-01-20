@@ -45,7 +45,7 @@
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 
-bool32 HasPlayerJoinedTheTide(void)
+bool32 HasPlayerJoinedThe_Tide(void)
 {
     return (FlagGet(FLAG_TIMELINE_TRUE));
 }
@@ -1577,7 +1577,7 @@ bool32 MaskOff_ShouldShowVigrim(void)
         return FALSE;
     if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_VIGRIM)
         return FALSE;
-    return (HasPlayerJoinedTheTide());
+    return (HasPlayerJoinedThe_Tide());
 }
 
 bool32 Manhunt_ShouldShowVigrim(void)
@@ -1586,7 +1586,7 @@ bool32 Manhunt_ShouldShowVigrim(void)
         return FALSE;
     if (VarGet(VAR_MANHUNT_STATE) >= DEFEATED_MANHUNT_VIGRIM)
         return FALSE;
-    return (!HasPlayerJoinedTheTide());
+    return (!HasPlayerJoinedThe_Tide());
 }
 
 bool32 ShouldShowVigrim(void)

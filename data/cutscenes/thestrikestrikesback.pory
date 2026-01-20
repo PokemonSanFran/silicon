@@ -150,7 +150,7 @@ script TheStrikeStrikesBack_Intro_Dialogue {
 
                 call(TheStrikeStrikesBack_CrowdFacesNorth_Script)
 
-                msgbox(format("My name is Vigrim, and I am the leader of TheTide. "),,SPEAKER_VIGRIM)
+                msgbox(format("My name is Vigrim, and I am the leader of The Tide. "),,SPEAKER_VIGRIM)
 
                 closemessage
                 reveal(REVEAL_VIGRIM)
@@ -172,7 +172,7 @@ script TheStrikeStrikesBack_Intro_Dialogue {
 
                 waitmovement(0)
 
-                msgbox(format("Sigh, of course. Well, they're the reason we brought you here. We've received intel that TheTide is planning on using exploding Pokemon to bring down the construction site. The strike is just a distraction. "),,SPEAKER_OLIVER)
+                msgbox(format("Sigh, of course. Well, they're the reason we brought you here. We've received intel that The Tide is planning on using exploding Pokemon to bring down the construction site. The strike is just a distraction. "),,SPEAKER_OLIVER)
 
                 msgbox(format("Wait, what? That's insane!"),,SPEAKER_ALICIA)
 
@@ -180,7 +180,7 @@ script TheStrikeStrikesBack_Intro_Dialogue {
 
                 msgbox(format("The police are working to make sure the protests remain civil but we don't want a repeat of the riots in CapheCity."),,SPEAKER_OLIVER)
 
-                msgbox(format("We think TheTide agitated wild Garbodor, and we need you to capture or knock them out while Lucrezia and I negotiate with Vigrim. Time is of the essence!"),,SPEAKER_OLIVER)
+                msgbox(format("We think The Tide agitated wild Garbodor, and we need you to capture or knock them out while Lucrezia and I negotiate with Vigrim. Time is of the essence!"),,SPEAKER_OLIVER)
 
                 closemessage
 

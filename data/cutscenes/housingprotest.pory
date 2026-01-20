@@ -65,7 +65,7 @@ script HousingProtest_MovePlayerIntoPosition
     {
         goto(HousingProtest_MovePlayerToProtest)
     }
-    elif (var(VAR_ROUTE99_STATE) == SAVE_THETIDE_ROUTE99)
+    elif (var(VAR_ROUTE99_STATE) == SAVE_THE_TIDE_ROUTE99)
     {
        goto(HousingProtest_MovePlayerToBattle)
     }
@@ -184,7 +184,7 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     msgbox(format("This ain't your business. You should un-involve yourself."),,SPEAKER_VITOMIR)
     msgbox(format("I can take both of you. Leave him alone, or you're going through me."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
-    setvar(VAR_ROUTE99_STATE,SAVE_THETIDE_ROUTE99)
+    setvar(VAR_ROUTE99_STATE,SAVE_THE_TIDE_ROUTE99)
     copyobjectxytoperm(LANDLORD)
     copyobjectxytoperm(RABIA)
     copyobjectxytoperm(VITOMIR)
@@ -221,7 +221,7 @@ script HousingProtest_PostBattle_Dialogue {
     playse(SE_BALL_OPEN)
     waitse
     removeobject(ARCANINE)
-    setvar(VAR_ROUTE99_STATE,DEFEATED_THETIDE_ROUTE99)
+    setvar(VAR_ROUTE99_STATE,DEFEATED_THE_TIDE_ROUTE99)
     msgbox(format("You proud now? C'mon Vitomir."),,SPEAKER_RABIA)
     msgbox(format("Keep on licking those boots, fam. Dumbass..."),,SPEAKER_VITOMIR)
     closemessage
@@ -259,7 +259,7 @@ script HousingProtest_MoveGruntsAroundPlayer_Script {
 script HousingProtest_InteractLandlord_Script {
     lock
 
-    if (var (VAR_ROUTE99_STATE) < DEFEATED_THETIDE_ROUTE99){
+    if (var (VAR_ROUTE99_STATE) < DEFEATED_THE_TIDE_ROUTE99){
         msgbox(format("Oh god... they're going to kill me!"), MSGBOX_NPC,SPEAKER_LANDLORD)
     } elif (!flag (FLAG_TALKED_LANDLORD)){
         call(HousingProtest_InteractLandlord_Dialogue)
@@ -275,7 +275,7 @@ script HousingProtest_InteractLandlord_Script {
 script HousingProtest_InteractLandlord_Dialogue {
     setflag(FLAG_TALKED_LANDLORD)
 
-    msgbox(format("Thank you very much. You're right, TheTide has a tendency to pick on the defenseless like me."), MSGBOX_NPC,SPEAKER_LANDLORD)
+    msgbox(format("Thank you very much. You're right, The Tide has a tendency to pick on the defenseless like me."), MSGBOX_NPC,SPEAKER_LANDLORD)
     msgbox(format("Why were people protesting?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("Some of the citizens of Oroland feel that they are... entitled to live anywhere within their city limits."),,SPEAKER_LANDLORD)
     msgbox(format("I don't get why they don't think they're subject to the same rent rules and regulations as the rest of us."),,SPEAKER_LANDLORD,,EMOTE_ANGRY)

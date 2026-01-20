@@ -1682,7 +1682,7 @@ static void LoadCompletionIconSprite(void)
         MAINMENU_GFXTAG_COMPLETION,
     };
 
-    if (HasPlayerJoinedTheTide())
+    if (HasPlayerJoinedThe_Tide())
         LoadCompressedSpriteSheet(&sSpriteSheet_CompletionTide);
     else
         LoadCompressedSpriteSheet(&sSpriteSheet_CompletionSharpRise);
@@ -1696,7 +1696,7 @@ static void PrintCompletionIcon(void)
     u32 y = 67;
     u16 TileTag = MAINMENU_GFXTAG_COMPLETION;
 
-    if ((!HasPlayerJoinedTheTide()) && (!FlagGet(FLAG_TIMELINE_FALSE)))
+    if ((!HasPlayerJoinedThe_Tide()) && (!FlagGet(FLAG_TIMELINE_FALSE)))
         return;
 
     LoadCompletionIconSprite();

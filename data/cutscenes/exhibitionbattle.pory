@@ -9,16 +9,16 @@ script ExhibitionBattle_HideObject_Script {
 }
 
 script ExhibitionBattle_CheckMissionProgress_Script{
-    if (var(VAR_STORYLINE_STATE) == STORY_3RD_THETIDE_TAKEDOWN)
+    if (var(VAR_STORYLINE_STATE) == STORY_3RD_THE_TIDE_TAKEDOWN)
     {
-        setvar(VAR_STORYLINE_STATE,STORY_THETIDE_FINISHED)
+        setvar(VAR_STORYLINE_STATE,STORY_THE_TIDE_FINISHED)
     }
     return
 }
 
 script ExhibitionBattle_TimeSkip_Script {
     call(ExhibitionBattle_CheckMissionProgress_Script)
-    if (var(VAR_STORYLINE_STATE) == STORY_THETIDE_FINISHED)
+    if (var(VAR_STORYLINE_STATE) == STORY_THE_TIDE_FINISHED)
     {
         special(HealPlayerParty)
         fadeblackandsetremovewarpfadeflag
@@ -151,8 +151,8 @@ script ExhibitionBattle_Ramesh_Dialogue {
 
         msgbox(format("…uhh, thanks?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("And how fortunate that those... skills allowed you and Charlotte to bring down TheTide."),,SPEAKER_RAMESH)
-        msgbox(format("With their entire leadership core in custody, we now control the narrative. We're planning a social media campaign to show the people of the region the true dangers of collective organizations like TheTide and the Elite Four."),,SPEAKER_RAMESH)
+        msgbox(format("And how fortunate that those... skills allowed you and Charlotte to bring down The Tide."),,SPEAKER_RAMESH)
+        msgbox(format("With their entire leadership core in custody, we now control the narrative. We're planning a social media campaign to show the people of the region the true dangers of collective organizations like The Tide and the Elite Four."),,SPEAKER_RAMESH)
 
         msgbox(format("Wait, the Elite Four has a whole organization?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
