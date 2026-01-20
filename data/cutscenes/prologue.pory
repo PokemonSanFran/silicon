@@ -3,7 +3,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const MAGNUS = 1
 const TALA = 2
-const ARMANDO = 3
+const FRANK = 3
 const ELLEN = 4
 const KEIYING = 5
 const IMELDA = 6
@@ -182,14 +182,14 @@ script Prologue_Announcement_PostObjectSetup_Script
         turnobject(KEIYING,DIR_NORTH)
         turnobject(IMELDA,DIR_SOUTH)
         turnobject(TALA,DIR_SOUTH)
-        turnobject(ARMANDO,DIR_NORTH)
+        turnobject(FRANK,DIR_NORTH)
         turnobject(DOYLE,DIR_WEST)
         turnobject(MAGNUS,DIR_WEST)
 
         setobjectmovementtype(KEIYING,MOVEMENT_TYPE_FACE_UP)
         setobjectmovementtype(IMELDA,MOVEMENT_TYPE_FACE_DOWN)
         setobjectmovementtype(TALA,MOVEMENT_TYPE_FACE_DOWN)
-        setobjectmovementtype(ARMANDO,MOVEMENT_TYPE_FACE_UP)
+        setobjectmovementtype(FRANK,MOVEMENT_TYPE_FACE_UP)
         setobjectmovementtype(DOYLE,MOVEMENT_TYPE_FACE_LEFT)
         setobjectmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_LEFT)
         return
@@ -213,7 +213,7 @@ script Prologue_SetUpSeechCrowd_Script{
                 fadescreen(FADE_FROM_BLACK)
         }
     applymovement(TALA,Common_Movement_FaceRight)
-        applymovement(ARMANDO,Common_Movement_FaceRight)
+        applymovement(FRANK,Common_Movement_FaceRight)
         applymovement(KEIYING,Common_Movement_FaceLeft)
         applymovement(IMELDA,Common_Movement_FaceLeft)
         applymovement(DOYLE,Common_Movement_FaceLeft)
@@ -224,7 +224,7 @@ script Prologue_ExclaimCrowd_Script{
     playse(SE_PIN)
         applymovement(MAGNUS,Common_Movement_ExclamationMark)
         applymovement(TALA,Common_Movement_ExclamationMark)
-        applymovement(ARMANDO,Common_Movement_ExclamationMark)
+        applymovement(FRANK,Common_Movement_ExclamationMark)
         applymovement(ELLEN,Common_Movement_ExclamationMark)
         applymovement(KEIYING,Common_Movement_ExclamationMark)
         applymovement(IMELDA,Common_Movement_ExclamationMark)
@@ -318,8 +318,8 @@ script Prologue_Tala_Dialogue{
     end
 }
 
-script Prologue_Armando_Dialogue{
-    msgbox(format("...I don't get it. She wanted to fight. Why is she running?"),MSGBOX_AUTOCLOSE,SPEAKER_ARMANDO,,EMOTE_SAD)
+script Prologue_Frank_Dialogue{
+    msgbox(format("...I don't get it. She wanted to fight. Why is she running?"),MSGBOX_AUTOCLOSE,SPEAKER_FRANK,,EMOTE_SAD)
     end
 }
 

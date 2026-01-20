@@ -945,9 +945,9 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
-    [SPEAKER_ARMANDO] =
+    [SPEAKER_FRANK] =
     {
-        .name =_("Armando"),
+        .name =_("Frank"),
         .title = _("Ex-Elite Four"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bruno,
@@ -2127,9 +2127,9 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
       .speakerIcon = gSpeakerIcon_Karen,
       .speakerPal = sSpeakerPal_Karen,
     },
-    [SPEAKER_ARMANDO_PAST] =
+    [SPEAKER_FRANK_PAST] =
     {
-      .name =_("Armando"),
+      .name =_("Frank"),
       .title = _("Elite Four"),
       .gender = MALE,
       .speakerIcon = gSpeakerIcon_Bruno,

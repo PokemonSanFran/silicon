@@ -56,7 +56,7 @@ script IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue {
     msgbox(format("Charl-"),,SPEAKER_ALICIA)
     msgbox(format("There you are! Took you long enough."),,SPEAKER_CHARLOTTE)
     msgbox(format("Oliver was telling me that we-"),,SPEAKER_ALICIA)
-    msgbox(format("I guess it doesn’t matter. I’ve been taking a look at the puzzle Armando set up and I figured out how this works. "),,SPEAKER_CHARLOTTE)
+    msgbox(format("I guess it doesn’t matter. I’ve been taking a look at the puzzle Frank set up and I figured out how this works. "),,SPEAKER_CHARLOTTE)
     msgbox(format("Once the quest info is decided and completed, come back in and fill in dialogue. Charlotte will explain how she figured out the puzzle and how."),,SPEAKER_LUCREZIA)
     msgbox(format("So, unfortunately, I’ll need your help to get through this."),,SPEAKER_CHARLOTTE)
     msgbox(format("Unfortunately? That’s a little rude…."),,SPEAKER_ALICIA)
@@ -166,7 +166,7 @@ script IGuessWeShouldBeNiceNow_CoreEncounter_Script {
         waitmoncry
         setflag(FLAG_SYS_CTRL_OBJ_DELETE)
         multi_fixed_wild(PARTNER_STEVEN)
-        //PSF TODO make sure you can't catch Armando's ace
+        //PSF TODO make sure you can't catch Frank's ace
         clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
         specialvar(VAR_RESULT, GetBattleOutcome)
         switch (var (VAR_RESULT)) {
@@ -186,7 +186,7 @@ script IGuessWeShouldBeNiceNow_ReadyPlayer_Dialogue {
 }
 
 script IGuessWeShouldBeNiceNow_ClearBossPokemon_Script {
-        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,ARMANDO_BOSS_DEFEATED)
+        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,FRANK_BOSS_DEFEATED)
     lock
         closemessage
         fadescreenswapbuffers(FADE_TO_BLACK)

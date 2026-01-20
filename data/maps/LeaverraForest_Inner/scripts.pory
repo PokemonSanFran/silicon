@@ -5,15 +5,15 @@ mapscripts LeaverraForest_Inner_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_LEAVERRA_FOREST_STATE, LEAVERRA_FOREST_MAZE_COMPLETE: EnterTheMaster_ClearingIntro_Dialogue
-        VAR_LEAVERRA_FOREST_STATE, FINISHED_ARMANDO_PUZZLES: HaveYouSeenTheNews_AskHelp_Dialogue
+        VAR_LEAVERRA_FOREST_STATE, FINISHED_FRANK_PUZZLES: HaveYouSeenTheNews_AskHelp_Dialogue
     ]
 }
 
-script LeaverraForest_Armando_Interact_Script {
+script LeaverraForest_Frank_Interact_Script {
     lock
     faceplayer
     switch (var(VAR_LEAVERRA_FOREST_STATE)){
-        case POST_HAVE_YOU_SEEN_THE_NEWS: msgbox(format("Sounds like you've been deputized, kid. Just make sure you don't end up a pawn, yeah? You've got real potential."),,SPEAKER_ARMANDO)
+        case POST_HAVE_YOU_SEEN_THE_NEWS: msgbox(format("Sounds like you've been deputized, kid. Just make sure you don't end up a pawn, yeah? You've got real potential."),,SPEAKER_FRANK)
         default: call(EnterTheMaster_ExplainRobots_Dialogue)
             }
         closemessage

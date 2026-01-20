@@ -347,7 +347,7 @@ script VSGarbodor_ReturnToTheCompound_Dialogue {
                 playse(SE_EXIT)
                 waitse
                 removeobject(CHARLOTTE)
-                setvar(VAR_STORYLINE_STATE,STORY_NEED_SLEEP_BEFORE_ARMANDO)
+                setvar(VAR_STORYLINE_STATE,STORY_NEED_SLEEP_BEFORE_FRANK)
 
         call(TryAutoSave)
                 endcutscene

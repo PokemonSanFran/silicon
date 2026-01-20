@@ -3,7 +3,7 @@ const CAMERA = OBJ_EVENT_ID_CAMERA
 const KAI = 1
 const TALA = 3
 const MAGNUS = 2
-const ARMANDO = 6
+const FRANK = 6
 const ELLEN = 5
 const VIGRIM = 7
 const ADAORA = 8
@@ -15,7 +15,7 @@ const GRUNTD = 12
 const FLAG_HIDE_KAI = FLAG_TEMP_1
 const FLAG_HIDE_ELITES = FLAG_TEMP_2
 const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
-const FLAG_HIDE_ARMANDO = FLAG_TEMP_5
+const FLAG_HIDE_FRANK = FLAG_TEMP_5
 const FLAG_HIDE_VIGRIM = FLAG_TEMP_6
 const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
 const FLAG_HIDE_ELLEN = FLAG_TEMP_8
@@ -90,9 +90,9 @@ script SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script {
     setobjectxyperm(ADAORA,16,15)
     setobjectmovementtype(ADAORA,MOVEMENT_TYPE_FACE_RIGHT)
 
-    setobjectxy(ARMANDO,19,6)
-    setobjectxyperm(ARMANDO,19,6)
-    setobjectmovementtype(ARMANDO,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectxy(FRANK,19,6)
+    setobjectxyperm(FRANK,19,6)
+    setobjectmovementtype(FRANK,MOVEMENT_TYPE_FACE_DOWN)
 
     setobjectxy(ELLEN,4,6)
     setobjectxyperm(ELLEN,4,6)
@@ -176,7 +176,7 @@ script SpeechSpeechSpeech_Intro_Dialogue {
 
 script SpeechSpeechSpeech_StartTransformation_Script {
 
-        clearflag(FLAG_HIDE_ARMANDO)
+        clearflag(FLAG_HIDE_FRANK)
         special(SpawnCameraObject)
         applymovement(CAMERA, moves(walk_up * 4, step_end))
         applymovement(VIGRIM, moves(walk_up * 3, step_end))
@@ -193,7 +193,7 @@ script SpeechSpeechSpeech_StartTransformation_Script {
 
         applymovement(TALA,SpeechSpeechSpeech_WalkOutElite)
         applymovement(MAGNUS,SpeechSpeechSpeech_WalkOutElite)
-        applymovement(ARMANDO,SpeechSpeechSpeech_WalkOutElite)
+        applymovement(FRANK,SpeechSpeechSpeech_WalkOutElite)
         applymovement(ELLEN,SpeechSpeechSpeech_WalkOutElite)
         applymovement(ADAORA, moves(lock_facing_direction, walk_right * 2, unlock_facing_direction, step_end))
         applymovement(CAMERA, moves(walk_down * 3, step_end))
@@ -265,15 +265,15 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         closemessage
 
         applymovement(ELLEN,SpeechSpeechSpeech_WalkBackwards)
-        applymovement(ARMANDO,Common_Movement_WalkDown)
-        waitmovement(ARMANDO)
-        //Ellen steps back. Armando steps forward.
+        applymovement(FRANK,Common_Movement_WalkDown)
+        waitmovement(FRANK)
+        //Ellen steps back. Frank steps forward.
 
-        msgbox(format("Armando will lead the charge against Arriba."),,SPEAKER_MAGNUS)
+        msgbox(format("Frank will lead the charge against Arriba."),,SPEAKER_MAGNUS)
 
         closemessage
 
-        applymovement(ARMANDO,SpeechSpeechSpeech_WalkBackwards)
+        applymovement(FRANK,SpeechSpeechSpeech_WalkBackwards)
         applymovement(TALA,Common_Movement_WalkDown)
         waitmovement(TALA)
         //Ellen steps back. Tala steps forward.

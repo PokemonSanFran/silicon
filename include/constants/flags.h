@@ -736,7 +736,7 @@
 #define FLAG_FACILITY_UNLOCK_BD  0x29B // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_KAI  0x29C // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_NERIENE  0x29D // Silicon Flag
-#define FLAG_FACILITY_UNLOCK_ARMANDO  0x29E // Silicon Flag
+#define FLAG_FACILITY_UNLOCK_FRANK  0x29E // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_SHINZO  0x29F // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_KEI_YING  0x2A0 // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_BELEN  0x2A1 // Silicon Flag

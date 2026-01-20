@@ -112,7 +112,7 @@ def main():
     args = parser.parse_args()
 
     EXCLUDE_DIRS = {'.git', 'build'}
-    EXCLUDE_FILES = {'silicon.map', '*.inc', 'tags'}
+    EXCLUDE_FILES = {'silicon.map', '.inc', 'tags'}
 
     print(f"Replacing '{args.old_word}' with '{args.new_word}'")
     print("Press [Enter] to accept 'Always replace' for a pattern.")

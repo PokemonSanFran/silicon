@@ -136,7 +136,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
             return gText_PlayersAdventure_Flavor13;
         case STORY_COMPLETED_NAVAL_BASE:
             return gText_PlayersAdventure_Flavor12;
-        case STORY_ASSIGNED_ARMANDO_QUESTS:
+        case STORY_ASSIGNED_FRANK_QUESTS:
             if (VarGet(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > PRE_WELCOME_TO_THE_WAR_ROOM)
                 return gText_PlayersAdventure_Flavor11;
             else if (VarGet(VAR_LEAVERRA_FOREST_STATE) == POST_HAVE_YOU_SEEN_THE_NEWS)
@@ -149,7 +149,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
                 return gText_PlayersAdventure_Flavor9_A;
             else
                 return gText_PlayersAdventure_Flavor9;
-        case STORY_NEED_SLEEP_BEFORE_ARMANDO:
+        case STORY_NEED_SLEEP_BEFORE_FRANK:
             return gText_PlayersAdventure_Flavor9;
         case STORY_CALLED_TO_CONSTRUCTION:
             if (VarGet(VAR_CONSTRUCTION_STRIKE_STATE) == START_VS_GARBODOR)

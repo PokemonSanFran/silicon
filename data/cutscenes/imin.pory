@@ -2,7 +2,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const TALA = 1
 const MAGNUS = 2
-const ARMANDO = 3
+const FRANK = 3
 const ELLEN = 4
 const KAI = 5
 const PKMNA = 6
@@ -75,7 +75,7 @@ script ImIn_CutsceneSetup_OutsideHouse_Script {
 
         addobject(TALA)
         addobject(MAGNUS)
-        addobject(ARMANDO)
+        addobject(FRANK)
         addobject(ELLEN)
         addobject(KAI)
 }
@@ -92,7 +92,7 @@ script ImIn_ReleaseFromBall_Script {
 script ImIn_ObjectSetUp_InsideHouse_Script {
     setobjectxyperm(TALA,15,4)
         setobjectxyperm(MAGNUS,16,3)
-        setobjectxyperm(ARMANDO,17,4)
+        setobjectxyperm(FRANK,17,4)
         setobjectxyperm(ELLEN,18,5)
         setobjectxyperm(KAI,19,3)
 }
@@ -100,12 +100,12 @@ script ImIn_ObjectSetUp_InsideHouse_Script {
 script ImIn_MoveObject_BeforeWarp_Script {
     addobject(TALA)
         addobject(MAGNUS)
-        addobject(ARMANDO)
+        addobject(FRANK)
         addobject(ELLEN)
         addobject(KAI)
 
         setobjectxy(TALA,10,3)
-        setobjectxy(ARMANDO,10,4)
+        setobjectxy(FRANK,10,4)
         setobjectxy(ELLEN,12,3)
         setobjectxy(KAI,12,4)
         setobjectxy(MAGNUS,11,2)
@@ -114,7 +114,7 @@ script ImIn_MoveObject_BeforeWarp_Script {
         TeleportCamera(11,4)
 
         applymovement(TALA,Common_Movement_FaceRight)
-        applymovement(ARMANDO,Common_Movement_FaceRight)
+        applymovement(FRANK,Common_Movement_FaceRight)
         applymovement(ELLEN,Common_Movement_FaceLeft)
         applymovement(MAGNUS,Common_Movement_FaceDown)
         applymovement(KAI,Common_Movement_FaceLeft)
@@ -144,9 +144,9 @@ script ImIn_StartHouseBreak_Script
         applymovement(PLAYER, moves(walk_up, step_end))
         waitmovement(PLAYER)
 
-        applymovement(ARMANDO,Common_Movement_FaceDown)
+        applymovement(FRANK,Common_Movement_FaceDown)
 
-        msgbox(format("We're certain nobody is home?"),,SPEAKER_ARMANDO)
+        msgbox(format("We're certain nobody is home?"),,SPEAKER_FRANK)
 
         msgbox(format("Ramesh hasn't left work early a day in their life. SharpRise Capital is led by monsters, but at least they're hard-working monsters."),,SPEAKER_MAGNUS)
 
@@ -158,7 +158,7 @@ script ImIn_StartHouseBreak_Script
 
         applymovement(TALA,Common_Movement_FaceRight)
         applymovement(MAGNUS,Common_Movement_FaceRight)
-        applymovement(ARMANDO,Common_Movement_FaceRight)
+        applymovement(FRANK,Common_Movement_FaceRight)
         applymovement(ELLEN,Common_Movement_FaceRight)
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
@@ -185,7 +185,7 @@ script ImIn_StartHouseBreak_Script
         applymovement(PKMNA, moves(walk_left, step_end))
         applymovement(TALA, moves(walk_right * 5, walk_up * 4, walk_left, step_end))
         applymovement(MAGNUS, moves(walk_right, walk_up * 4, walk_left, step_end))
-        applymovement(ARMANDO, moves(walk_right * 4, walk_up * 3, walk_left, step_end))
+        applymovement(FRANK, moves(walk_right * 4, walk_up * 3, walk_left, step_end))
         applymovement(ELLEN, moves(walk_up * 4, walk_left, step_end))
         applymovement(KAI, moves(walk_down, walk_left, step_end))
 
@@ -201,7 +201,7 @@ script ImIn_StartHouseBreak_Script
         removeobject(PKMNA)
         removeobject(TALA)
         removeobject(MAGNUS)
-        removeobject(ARMANDO)
+        removeobject(FRANK)
         removeobject(ELLEN)
         removeobject(KAI)
         call(TryAutoSave)
@@ -225,20 +225,20 @@ script Imin_BeginHouseSearch_Script
 
         applymovement(TALA,ImIn_SpreadOutHouse)
         applymovement(MAGNUS,ImIn_SpreadOutHouse)
-        applymovement(ARMANDO,ImIn_SpreadOutHouse)
+        applymovement(FRANK,ImIn_SpreadOutHouse)
         applymovement(ELLEN,ImIn_SpreadOutHouse)
         applymovement(KAI,ImIn_SpreadOutHouse)
         waitmovement(KAI)
 
         setobjectxy(TALA,2,7)
         setobjectxy(MAGNUS,18,9)
-        setobjectxy(ARMANDO,10,11)
+        setobjectxy(FRANK,10,11)
         setobjectxy(ELLEN,15,17)
         setobjectxy(KAI,3,13)
 
         setobjectxyperm(TALA,2,7)
         setobjectxyperm(MAGNUS,18,9)
-        setobjectxyperm(ARMANDO,10,11)
+        setobjectxyperm(FRANK,10,11)
         setobjectxyperm(ELLEN,15,17)
         setobjectxyperm(KAI,3,13)
 
@@ -287,11 +287,11 @@ script ImIn_EnterCorrectCode_Script
         call(ImIn_MoveObject_BeforeWarp_Script)
         fadescreen(FADE_FROM_BLACK)
 
-        msgbox(format("Adaora, we're in. Everybody remember the plan?"),,SPEAKER_ARMANDO)
+        msgbox(format("Adaora, we're in. Everybody remember the plan?"),,SPEAKER_FRANK)
 
         msgbox(format("Once you're all through the panel, I'll lead the diversion protest at the front doors of the tower. Security will be focused on us, letting you to the executive levels and hopefully find Lucrezia."),,SPEAKER_ADAORA,,,PHONE_ON)
 
-        msgbox(format("I'm too old for scaling mountains. Armando and I can get into the production studio and get ready to broadcast that confession."),,SPEAKER_MAGNUS)
+        msgbox(format("I'm too old for scaling mountains. Frank and I can get into the production studio and get ready to broadcast that confession."),,SPEAKER_MAGNUS)
 
         msgbox(format("These people are fighting to kill. Stay safe."),,SPEAKER_KAREN)
                 closemessage
@@ -300,9 +300,9 @@ script ImIn_EnterCorrectCode_Script
         waitmovement(TALA)
         removeobject(TALA)
         playse(SE_WARP_OUT)
-        applymovement(ARMANDO, moves(walk_up, walk_right, step_end))
-        waitmovement(ARMANDO)
-        removeobject(ARMANDO)
+        applymovement(FRANK, moves(walk_up, walk_right, step_end))
+        waitmovement(FRANK)
+        removeobject(FRANK)
         playse(SE_WARP_OUT)
         applymovement(ELLEN,Common_Movement_WalkLeft)
         waitmovement(ELLEN)
@@ -326,7 +326,7 @@ script ImIn_EnterCorrectCode_Script
 
 const TALA_B = 3
 const MAGNUS_B = 4
-const ARMANDO_B = 5
+const FRANK_B = 5
 const ELLEN_B = 6
 const KAI_B = 7
 
@@ -346,14 +346,14 @@ script ImIn_PostWarpSplit_Dialogue
 
         applymovement(PLAYER,Common_Movement_WalkUp2)
 
-        msgbox(format("We're all in."),,SPEAKER_ARMANDO)
+        msgbox(format("We're all in."),,SPEAKER_FRANK)
 
         msgbox(format("Let the march begin… good luck!"),,SPEAKER_ADAORA,,,PHONE_ON)
 
-        msgbox(format("Magnus, let's go secure the studio."),,SPEAKER_ARMANDO)
+        msgbox(format("Magnus, let's go secure the studio."),,SPEAKER_FRANK)
         closemessage
 
-        applymovement(ARMANDO_B,ImIn_WalkAwayFromWarpA)
+        applymovement(FRANK_B,ImIn_WalkAwayFromWarpA)
         applymovement(MAGNUS_B,ImIn_WalkAwayFromWarpA)
 
         msgbox(format("This place is probably crawling with Trainers. Let's spread out."),,SPEAKER_KAREN)
@@ -371,7 +371,7 @@ script ImIn_PostWarpSplit_Dialogue
         fadescreen(FADE_TO_BLACK)
         removeobject(TALA_B)
         removeobject(MAGNUS_B)
-        removeobject(ARMANDO_B)
+        removeobject(FRANK_B)
         removeobject(ELLEN_B)
         removeobject(KAI_B)
         fadescreen(FADE_FROM_BLACK)

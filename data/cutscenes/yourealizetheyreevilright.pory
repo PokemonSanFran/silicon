@@ -8,7 +8,7 @@ const KAI_OUTSIDE = 10
 const FLAG_HIDE_KAI = FLAG_TEMP_1
 const FLAG_HIDE_ELITES_1 = FLAG_TEMP_2
 const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
-const FLAG_HIDE_ARMANDO = FLAG_TEMP_5
+const FLAG_HIDE_FRANK = FLAG_TEMP_5
 const FLAG_HIDE_VIGRIM = FLAG_TEMP_6
 const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
 const FLAG_HIDE_ELLEN = FLAG_TEMP_8
@@ -32,7 +32,7 @@ script YouRealizeTheyreEvilRight_HideBasement_Script {
     setflag(FLAG_HIDE_KAI)
     setflag(FLAG_HIDE_ELITES_1)
     setflag(FLAG_HIDE_GARBODOR)
-    setflag(FLAG_HIDE_ARMANDO)
+    setflag(FLAG_HIDE_FRANK)
     setflag(FLAG_HIDE_VIGRIM)
     setflag(FLAG_HIDE_GRUNTS)
     setflag(FLAG_HIDE_ELLEN)
@@ -42,7 +42,7 @@ script YouRealizeTheyreEvilRight_HideBasement_Script {
 
 script YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script {
     setflag(FLAG_HIDE_GARBODOR)
-    setflag(FLAG_HIDE_ARMANDO)
+    setflag(FLAG_HIDE_FRANK)
     setflag(FLAG_HIDE_VIGRIM)
     setflag(FLAG_HIDE_GRUNTS)
     setflag(FLAG_HIDE_ELLEN)
@@ -327,7 +327,7 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
     applymovement(TALA,Common_Movement_FacePlayer)
     waitmovement(TALA)
     msgbox(format("Wait what? {PLAYER}, you're making a mistake!"),,SPEAKER_KAI_TIDE,,EMOTE_SHOCK)
-    msgbox(format("Wow... Armando was wrong about you after all."),,SPEAKER_TALA,TAIL_WHISPER,EMOTE_SAD)
+    msgbox(format("Wow... Frank was wrong about you after all."),,SPEAKER_TALA,TAIL_WHISPER,EMOTE_SAD)
     msgbox(format("Don't you understand? You're being used, and they're not going to stop."),,SPEAKER_KAI_TIDE,,EMOTE_ANGRY)
     msgbox(format("Just because you couldn't hack it doesn't mean the world is against you, Kai!"),,SPEAKER_ALICIA,,EMOTE_ANGRY)
     msgbox(format("Couldn't hack it? I got second to you, and you had a HUGE head start!"),,SPEAKER_KAI_TIDE,TAIL_SHOUT,EMOTE_ANGRY)

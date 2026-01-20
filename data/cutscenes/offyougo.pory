@@ -29,7 +29,7 @@ script OffYouGo_WakeUp_Dialogue {
     //PSF TODO alter clock so that the screen stays black
         startcutscene(JUMPPLAYER_OFFYOUGO_PHONE)
         setvar(VAR_GOLDENGATEBRIDGE_STATE,CALLED_BY_CHARLOTTE)
-        setvar(VAR_STORYLINE_STATE,STORY_ASSIGNED_ARMANDO_QUESTS)
+        setvar(VAR_STORYLINE_STATE,STORY_ASSIGNED_FRANK_QUESTS)
         playse(SE_POKENAV_CALL)
         waitse
         playse(SE_POKENAV_CALL)
@@ -79,7 +79,7 @@ script OffYouGo_WelcomeParty_Dialogue {
 
         msgbox(format("…neither was I."),,SPEAKER_ALICIA)
 
-        msgbox(format("Well, you're both here now. As you may have guessed, the construction strike is going to delay the Championship by a few weeks. Rather than kill your momentum now, Armando has agreed to train you both, and SharpRise Capital will be footing his... substantial consultation fee."),,SPEAKER_OLIVER)
+        msgbox(format("Well, you're both here now. As you may have guessed, the construction strike is going to delay the Championship by a few weeks. Rather than kill your momentum now, Frank has agreed to train you both, and SharpRise Capital will be footing his... substantial consultation fee."),,SPEAKER_OLIVER)
 
         closemessage
 
@@ -93,11 +93,11 @@ script OffYouGo_WelcomeParty_Dialogue {
         applymovement(OLIVER,Common_Movement_FaceLeft)
         waitmovement(OLIVER)
 
-        msgbox(format("Ah yes, you're not from here. Armando is one of the members of the disbanded Resido Elite Four. A powerful trainer indeed, and we think this is an excellent opportunity for you both."),,SPEAKER_OLIVER)
+        msgbox(format("Ah yes, you're not from here. Frank is one of the members of the disbanded Resido Elite Four. A powerful trainer indeed, and we think this is an excellent opportunity for you both."),,SPEAKER_OLIVER)
 
         msgbox(format("So, where is this dude?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("Ah yes, well, they have… unconventional training methods. In the middle of LanjingTunnel, you'll find a pathway leading underground where Armando has hidden their notebook. Once you get it, you'll get your next instructions."),,SPEAKER_OLIVER)
+        msgbox(format("Ah yes, well, they have… unconventional training methods. In the middle of LanjingTunnel, you'll find a pathway leading underground where Frank has hidden their notebook. Once you get it, you'll get your next instructions."),,SPEAKER_OLIVER)
 
         msgbox(format("Weird. Okay. Sounds easy enough, though. Let's make a race of it!"),,SPEAKER_CHARLOTTE)
 

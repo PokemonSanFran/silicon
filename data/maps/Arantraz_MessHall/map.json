@@ -80,7 +80,7 @@
       "flag": "FLAG_TEMP_8"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ARMANDO",
+      "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 10,
       "y": 3,
       "elevation": 3,
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Arantraz_MessHall_Armando_Event_Script",
+      "script": "Arantraz_MessHall_Frank_Event_Script",
       "flag": "FLAG_TEMP_5"
     },
     {

@@ -37,7 +37,7 @@ script WishaastLake_InteractEllen_Event_Script {
             goto(MaskOff_Encounter_Vigrim_Dialogue)
         } elif (flag(FLAG_TIMELINE_FALSE) && var(VAR_MANHUNT_STATE) > GOT_MANHUNT_CLUE_3){
             goto(Manhunt_Encounter_Vigrim_Dialogue)
-        } elif (var(VAR_STORYLINE_STATE) < STORY_ASSIGNED_ARMANDO_QUESTS){
+        } elif (var(VAR_STORYLINE_STATE) < STORY_ASSIGNED_FRANK_QUESTS){
             msgbox("random flavor text about training here",MSGBOX_AUTOCLOSE)
 			closemessage
 		}

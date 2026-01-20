@@ -61,8 +61,8 @@ script BedScript_AdvanceStory_Script{
     {
         case STORY_NOT_STARTED: call(TwoHoursAgo_GiveFashionCase_Script)
         case STORY_WEST_RESIDO_COMPLETE: call(AaandWereBack_FerryRepaired_Dialogue)
-        case STORY_NEED_SLEEP_BEFORE_ARMANDO: call(OffYouGo_WakeUp_Dialogue)
-        case STORY_ASSIGNED_ARMANDO_QUESTS: call(IGuessWeShouldBeNiceNow_AdvanceTime_Script)
+        case STORY_NEED_SLEEP_BEFORE_FRANK: call(OffYouGo_WakeUp_Dialogue)
+        case STORY_ASSIGNED_FRANK_QUESTS: call(IGuessWeShouldBeNiceNow_AdvanceTime_Script)
         case STORY_COMPLETED_NAVAL_BASE: call(WhyAreYouHelpingThem_StartChampionship_Dialogue)
         case STORY_POST_YOU_REALIZE_WERE_EVIL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)
         case STORY_MORNING_AFTER_TIMETRAVEL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)

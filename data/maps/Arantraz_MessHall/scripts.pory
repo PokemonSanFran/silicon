@@ -62,11 +62,11 @@ script Arantraz_MessHall_Magnus_Event_Script {
     end
 }
 
-script Arantraz_MessHall_Armando_Event_Script {
+script Arantraz_MessHall_Frank_Event_Script {
     lock
 
     switch (var(VAR_STORYLINE_STATE)){
-        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_ARMANDO)
+        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_FRANK)
         case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Taxicabturnaround_EliteFour_Dialogue)
     }
 

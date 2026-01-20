@@ -1,14 +1,14 @@
-const FLAG_HIDE_ARMANDO = FLAG_TEMP_1
+const FLAG_HIDE_FRANK = FLAG_TEMP_1
 
 mapscripts EspuleeOutskirts_EliteHome_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
-        call(EspuleeOutskirts_EliteHome_Armando_Visibility_Script)
+        call(EspuleeOutskirts_EliteHome_Frank_Visibility_Script)
     }
 }
 
-script EspuleeOutskirts_EliteHome_Armando_Visibility_Script{
+script EspuleeOutskirts_EliteHome_Frank_Visibility_Script{
     if (var(VAR_STORYLINE_STATE) < STORY_START_CHAMPIONSHIP || var(VAR_STORYLINE_STATE) > STORY_POST_YOU_REALIZE_WERE_EVIL){
-        setflag(FLAG_HIDE_ARMANDO)
+        setflag(FLAG_HIDE_FRANK)
     }
     return
 }
@@ -19,7 +19,7 @@ script EspuleeOutskirts_EliteHome_PictureFrame_Dialogue {
         if (var(VAR_MASK_OFF_STATE)> GOT_MASK_OFF_CLUE_1){
             call(MaskOff_QuestK_Dialogue)
         } elif (var(VAR_LEAVERRA_FOREST_STATE) > LEAVERRA_FOREST_MAZE_COMPLETE){
-            msgbox(format("A digital photo frame. The picture being displayed shows Armando with somebody at a ramen restaurant."),MSGBOX_AUTOCLOSE)
+            msgbox(format("A digital photo frame. The picture being displayed shows Frank with somebody at a ramen restaurant."),MSGBOX_AUTOCLOSE)
         } else {
             msgbox(format("A digital photo frame. The picture being displayed shows two people together at a ramen restaurant."),MSGBOX_AUTOCLOSE)
         }
@@ -33,6 +33,6 @@ text gText_EspuleeOutskirts_EliteHome_ADigitalPhoto_Unknown {
 }
 
 text gText_EspuleeOutskirts_EliteHome_ADigitalPhoto {
-    format("A digital photo frame. The picture being displayed shows Armando with somebody at a ramen restaurant.")
+    format("A digital photo frame. The picture being displayed shows Frank with somebody at a ramen restaurant.")
 }
 

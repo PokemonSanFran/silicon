@@ -311,8 +311,8 @@ All the cutscenes in Act 3.1 occur in the order listed here.
 * Alicia checks Buzzr to see a message from Oliver, requesting they all meet at the PiocaBridge.
 * Alicia wakes up, didn't see the message and says they'll be right there.
 * Alicia arrives at PiocaBridge, and Oliver explains that the League will be delayed as they need to resolve the strike and finish construction.
-* SharpriseCapital has hired Armando, a member of the disbanded Elite Four, to train the players and help prepare them for the Championship.
-* Oliver relays their first training lesson - Charlotte and Alicia must work together to go through LanjingTunnel, get Armando's journal, and bring it to Armando in the depths of LeaverraForest.
+* SharpriseCapital has hired Frank, a member of the disbanded Elite Four, to train the players and help prepare them for the Championship.
+* Oliver relays their first training lesson - Charlotte and Alicia must work together to go through LanjingTunnel, get Frank's journal, and bring it to Frank in the depths of LeaverraForest.
 * Charlotte runs off into the cave before Oliver can finished explaining that the cave has puzzles that will require the pair to work together into the cave before Oliver can finished explaining that the cave has puzzles that will require the pair to work together.
 
 ## I Guess We Should Be Nice Now
@@ -323,9 +323,9 @@ All the cutscenes in Act 3.1 occur in the order listed here.
 * Alicia and Charlotte defeat the wild Pokémon, grab the notebook, and leave the tunnel.
 
 ## Enter the Master
-* Alicia and Charlotte make their way into the depths of LeaverraForest, and find Armando there.
-* Charlotte returns Armando's notebook.
-* Armando begins the pair's training.
+* Alicia and Charlotte make their way into the depths of LeaverraForest, and find Frank there.
+* Charlotte returns Frank's notebook.
+* Frank begins the pair's training.
 
 # ACT 3.3
 All the cutscenes in Act 3.3 occur in the order listed here.
@@ -628,11 +628,11 @@ This cutscene plays after the player solves the riddle in the cryptic message, w
 * The crowd realizes that SharpriseCapital is literally playing to kill, and they need to escalate in kind.
 * Kai jokes that they should all storm the SharpriseSpire and force a confession out of the SharpriseCapital leadership, but the group begins to take them seriously.
 * Alicia remembers that all C-Suite members have a warp panel in their homes that leads directly to their offices.
-* Armando suggests breaking into Ramesh's place instead of Keiying, since Keiying's disappearance has likely triggered a police presence.
+* Frank suggests breaking into Ramesh's place instead of Keiying, since Keiying's disappearance has likely triggered a police presence.
 * The group agrees to meet outside Ramesh's home in QiuVillage.
 
 ## I'm In.
-* Armando, Magnus, Ellen, Kai, Adaora and Alicia all meet outside Ramesh's house. 
+* Frank, Magnus, Ellen, Kai, Adaora and Alicia all meet outside Ramesh's house. 
 * Tala is outside the SharpriseSpire, ready to start a protest to distract security.
 * The team breaks into Ramesh's house, figures out the code to the door, and are able to use the warp panel to go directly into SharpriseCapital's offices.
 * The group splits up and begins ascending the tower.

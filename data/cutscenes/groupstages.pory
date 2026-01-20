@@ -117,7 +117,7 @@ script GroupStages_RoundRobinMatch_Script {
         msgbox(format("this is placeholder text."),,SPEAKER_ACE_TRAINER_M)
         closemessage
 
-//PSF TODO these trainers as well as the one before the kai fight should be a specifically themed team that Armando teaches you how to twart during the Enter The Master cutscene
+//PSF TODO these trainers as well as the one before the kai fight should be a specifically themed team that Frank teaches you how to twart during the Enter The Master cutscene
 
         switch (var(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE)){
             case PRE_BATTLE_1: trainerbattle_no_intro(TRAINER_SHARPRISESTADIUM_A,format(""))

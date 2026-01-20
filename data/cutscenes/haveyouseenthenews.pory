@@ -1,6 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
-const ARMANDO = 2
+const FRANK = 2
 const OLIVER = 3
 
 script HaveYouSeenTheNews_AskHelp_Dialogue {

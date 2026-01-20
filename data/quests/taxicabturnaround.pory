@@ -13,7 +13,7 @@ script Quest_Taxicabturnaround_Debug_Script{
 }
 
 script Quest_Taxicabturnaround_EliteFour_Dialogue{
-    msgbox(format("go talk to a bunch of different taxis / the trucks around the region."),MSGBOX_NPC,SPEAKER_ARMANDO)
+    msgbox(format("go talk to a bunch of different taxis / the trucks around the region."),MSGBOX_NPC,SPEAKER_FRANK)
 
     returnqueststate(QUEST_TAXICABTURNAROUND)
     if(var(VAR_RESULT) == QUEST_MENU_UNLOCK_QUEST){

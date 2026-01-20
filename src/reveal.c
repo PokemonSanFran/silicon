@@ -408,10 +408,10 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .bio = COMPOUND_STRING("- It's impossible to discern their gender from their voice. \n- They look like they're floating!"),
         .accentColor = RGB(16,2,16),
     },
-    [REVEAL_ARMANDO] =
+    [REVEAL_FRANK] =
     {
-        .trainerId = TRAINER_ARMANDO,
-        .buzzrId = BUZZR_USER_ARMANDO,
+        .trainerId = TRAINER_FRANK,
+        .buzzrId = BUZZR_USER_FRANK,
         .quote = COMPOUND_STRING("I can make a Trainer out of anybody."),
         .bio = COMPOUND_STRING("- He's so intense, the air around him is hot!\n- He seems incredibly comfortable."),
         .accentColor = RGB(27,9,7),

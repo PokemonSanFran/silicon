@@ -160,7 +160,7 @@ script Quest_ContractorPorygon_Subquest3_Script{
 
     setvar(VAR_TEMP_2,0)
 
-    if (var(VAR_STORYLINE_STATE) > STORY_ASSIGNED_ARMANDO_QUESTS){
+    if (var(VAR_STORYLINE_STATE) > STORY_ASSIGNED_FRANK_QUESTS){
         addvar(VAR_TEMP_2,1)
     }
 

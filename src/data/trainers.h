@@ -6975,12 +6975,12 @@
         },
     },
 #line 3003
-    [DIFFICULTY_NORMAL][TRAINER_ARMANDO] =
+    [DIFFICULTY_NORMAL][TRAINER_FRANK] =
     {
 #line 3004
-        .trainerName = _("Armando"),
+        .trainerName = _("Frank"),
 #line 3005
-        .trainerPic = TRAINER_PIC_ARMANDO,
+        .trainerPic = TRAINER_PIC_FRANK,
         .encounterMusic_gender =
 0,
 #line 3007
@@ -6988,15 +6988,15 @@
 #line 3006
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 3008
-        .characterRevealId = REVEAL_ARMANDO,
+        .characterRevealId = REVEAL_FRANK,
 #line 3009
         .trainerType = GLASS_TRAINER_TYPE_BOSS,
 #line 3010
-        .objectEventGraphicsId = OBJ_EVENT_GFX_ARMANDO,
+        .objectEventGraphicsId = OBJ_EVENT_GFX_FRANK,
 #line 3011
         .mapSec = MAPSEC_LEAVERRA_FOREST,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ARMANDO,
+        .trainerBackPic = TRAINER_PIC_FRANK,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {

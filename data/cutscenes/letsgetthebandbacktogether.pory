@@ -54,7 +54,7 @@ script LetsGettheBandBackTogether_MeetInBasement_Script
 
     msgbox(format("Wait, the entire Elite Four?"),,SPEAKER_ALICIA)
 
-    msgbox(format("Okay, kinda. That’s actually the next step. Tala and Magnus convinced Armando to work with us too, but we’ve gotta find Ellen if we really want to present a united front."),,SPEAKER_KAI)
+    msgbox(format("Okay, kinda. That’s actually the next step. Tala and Magnus convinced Frank to work with us too, but we’ve gotta find Ellen if we really want to present a united front."),,SPEAKER_KAI)
 
     msgbox(format("What am I missing? Can’t we just call them or something?"),,SPEAKER_ALICIA)
 

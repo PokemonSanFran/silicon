@@ -1635,9 +1635,9 @@ const struct BattleFrontierTrainer gBattleFrontierTrainers[FRONTIER_TRAINERS_COU
         .speechLose = {EC_WORD_YOU_RE, EC_WORD_TOTALLY, EC_WORD_LACKING, EC_WORD_IN, EC_WORD_FASHION, EC_WORD_SENSE},
         .monSet = (const u16[]){FRONTIER_MONS_YOUNGSTER_LASS_3}
     },
-    [FRONTIER_TRAINER_ARMANDO] = {
+    [FRONTIER_TRAINER_FRANK] = {
         .facilityClass = FACILITY_CLASS_CAMPER,
-        .trainerName = _("ARMANDO"),
+        .trainerName = _("FRANK"),
         .speechBefore = {EC_WORD_I, EC_WORD_NEED, EC_WORD_MORE, EC_WORD_GRASS, EC_WORD_TYPE, EC_WORD_POKEMON},
         .speechWin = {EC_WORD_TRADE, EC_WORD_ME, EC_WORD_A, EC_WORD_GRASS, EC_WORD_POKEMON, EC_WORD_PLEASE},
         .speechLose = {EC_WORD_THERE, EC_WORD_AREN_T, EC_WORD_ENOUGH, EC_WORD_GRASS, EC_WORD_TYPE, EC_WORD_POKEMON},

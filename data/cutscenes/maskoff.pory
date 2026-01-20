@@ -2,13 +2,13 @@
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const VIGRIM = 1
-const FLAG_HIDE_ARMANDO = FLAG_TEMP_1
+const FLAG_HIDE_FRANK = FLAG_TEMP_1
 
 script MaskOff_HideObject_Script
 {
     if (var(VAR_STORYLINE_STATE) < STORY_START_TRUE_TIMELINE)
     {
-        setflag(FLAG_HIDE_ARMANDO)
+        setflag(FLAG_HIDE_FRANK)
     }
 }
 
@@ -64,9 +64,9 @@ script MaskOff_QuestI_Dialogue
         startcutscene(JUMPPLAYER_MASKOFF_I)
         call(MaskOff_AskAndIncrement_Script)
     }
-    msgbox(format("Armando and Ellen used to come in together a lot."),,SPEAKER_FANNY)
+    msgbox(format("Frank and Ellen used to come in together a lot."),,SPEAKER_FANNY)
     msgbox(format("They would just talk about books the whole time.. I think Ellen really loved history."),,SPEAKER_FANNY)
-    msgbox(format("Ellen lived close by... in QiuVillage, I think, so she was here, with or without Armando."),,SPEAKER_FANNY)
+    msgbox(format("Ellen lived close by... in QiuVillage, I think, so she was here, with or without Frank."),,SPEAKER_FANNY)
     endcutscene
     closemessage
 }
@@ -86,7 +86,7 @@ script MaskOff_QuestD_Dialogue
     closemessage
 }
 script MaskOff_QuestK_Dialogue {
-    msgbox(format("A digital photo frame. The picture being displayed shows Ellen and Armando together at the ramen restaurantin ToraTown."),MSGBOX_AUTOCLOSE)
+    msgbox(format("A digital photo frame. The picture being displayed shows Ellen and Frank together at the ramen restaurantin ToraTown."),MSGBOX_AUTOCLOSE)
     closemessage
 }
 script MaskOff_QuestG_Dialogue {
@@ -177,7 +177,7 @@ script MaskOff_PostBattle_Dialogue
     fadescreen(FADE_FROM_BLACK)
 
     msgbox(format("I see. If the Elite Four is going to present as a united front, I’ll need to give up leadership to Adaora. This will come as a shock to her, and she has some reservations about becoming the face of The Tide… but I know they can handle it."),,SPEAKER_ELLEN)
-    msgbox(format("... I'll have to face Armando again."),,SPEAKER_ELLEN,TAIL_WHISPER)
+    msgbox(format("... I'll have to face Frank again."),,SPEAKER_ELLEN,TAIL_WHISPER)
     msgbox(format("I have to apologize to him for disappearing. But that's my problem, not yours."),,SPEAKER_ELLEN)
     closemessage
     delay(16)

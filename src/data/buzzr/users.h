@@ -20,9 +20,9 @@ const struct Users gBuzzrUsers[] =
         .username = _("Rank14Life"),
         .isVerified = FALSE,
     },
-    [BUZZR_USER_ARMANDO] =
+    [BUZZR_USER_FRANK] =
     {
-        .username = _("ArmandoEliteFour"),
+        .username = _("FrankEliteFour"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_OLIVER] =
