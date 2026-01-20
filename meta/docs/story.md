@@ -155,12 +155,12 @@ All the cutscenes in Act 1.3 occur in the order listed here.
 * Oliver brings them to Chasilla's top of the line breeding facility, that Alicia gets special access to because they're part of SharpriseCapital.
 * Oliver leaves after mentioning that they're working on giving access to it to more Trainers.
 
-## Enter Kauna
-* Alicia defeats the Gym Leader of Chasilla, Kauna.
+## Enter Pua
+* Alicia defeats the Gym Leader of Chasilla, Pua.
 
 ## Sorry About My Friends
 * When Alicia leaves the Chasilla Gym, they are approached by Adaora.
-* Adaora congratulates them on defeating Kauna.
+* Adaora congratulates them on defeating Pua.
 * Alicia begins to question Adaora's involvement with TheTide, citing the Housing Protest.
 * Adaora apologizes and explains that protest is why they're here - they're looking for the two members responsible for the threats.
 * Alicia mentions the pair left to the South.

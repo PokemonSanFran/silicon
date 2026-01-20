@@ -203,7 +203,7 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_Dimu[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Doyle[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Emrys[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Imelda[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Kauna[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Pua[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Keiying[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Magnus[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Neriene[];

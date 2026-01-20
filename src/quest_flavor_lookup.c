@@ -156,7 +156,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
                 return gText_PlayersAdventure_Flavor8;
             else
                 return gText_PlayersAdventure_Flavor7;
-        case STORY_DEFEAT_KAUNA:
+        case STORY_DEFEAT_PUA:
             if (VarGet(VAR_FERRY_STATE) == FERRY_ARANTRAZ_AVAILABLE)
                 return gText_PlayersAdventure_Flavor5;
             else

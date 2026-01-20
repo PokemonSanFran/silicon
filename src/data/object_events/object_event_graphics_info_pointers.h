@@ -275,8 +275,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DimuWalking
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DoyleWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EmrysWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ImeldaWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaSurfing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KeiyingWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagnusWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NerieneWalking;
@@ -580,8 +580,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_DOYLE] =                    &gObjectEventGraphicsInfo_DoyleWalking,
     [OBJ_EVENT_GFX_EMRYS] =                    &gObjectEventGraphicsInfo_EmrysWalking,
     [OBJ_EVENT_GFX_IMELDA] =                   &gObjectEventGraphicsInfo_ImeldaWalking,
-    [OBJ_EVENT_GFX_KAUNA] =                    &gObjectEventGraphicsInfo_KaunaWalking,
-    [OBJ_EVENT_GFX_KAUNA_SURFING] =            &gObjectEventGraphicsInfo_KaunaSurfing,
+    [OBJ_EVENT_GFX_PUA] =                    &gObjectEventGraphicsInfo_PuaWalking,
+    [OBJ_EVENT_GFX_PUA_SURFING] =            &gObjectEventGraphicsInfo_PuaSurfing,
     [OBJ_EVENT_GFX_KEIYING] =                  &gObjectEventGraphicsInfo_KeiyingWalking,
     [OBJ_EVENT_GFX_MAGNUS] =                   &gObjectEventGraphicsInfo_MagnusWalking,
     [OBJ_EVENT_GFX_NERIENE] =                  &gObjectEventGraphicsInfo_NerieneWalking,

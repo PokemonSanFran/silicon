@@ -5073,10 +5073,10 @@ $(OBJEVENTGFXDIR)/people/baiya/running.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/baiya/fieldMove.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/kauna/surfing.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/pua/surfing.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/kauna/walking.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/pua/walking.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/keiying.4bpp: %.4bpp: %.png

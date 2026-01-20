@@ -1,6 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAUNA = 6
-const FLAG_HIDE_KAUNA = FLAG_TEMP_6
+const PUA = 6
+const FLAG_HIDE_PUA = FLAG_TEMP_6
 //Quest_Hang20_
 
 script Quest_Hang20_ResetCount_Script
@@ -11,9 +11,9 @@ script Quest_Hang20_ResetCount_Script
 
 script Quest_Hang20_HideLeader_Script
 {
-	if (var(VAR_KAUNA_STATE) != BATTLE_1_COMPLETE)
+	if (var(VAR_PUA_STATE) != BATTLE_1_COMPLETE)
 	{
-		setflag(FLAG_HIDE_KAUNA)
+		setflag(FLAG_HIDE_PUA)
 	}
 }
 
@@ -106,10 +106,10 @@ script Quest_Hang20_Reward_Dialogue
 
     msgbox(format("If you have a Pokémon in your party that can learn Surf, you can just walk onto the waves and handle it, no problem. Watch!"))
     closemessage
-    applymovement(KAUNA,Quest_Hang20_SurfAway_Movement)
+    applymovement(PUA,Quest_Hang20_SurfAway_Movement)
     completequest(QUEST_HANG20)
-    waitmovement(KAUNA)
-    removeobject(KAUNA)
+    waitmovement(PUA)
+    removeobject(PUA)
     release
     end
 }
@@ -123,9 +123,9 @@ script Quest_Hang20_Secret_Dialogue
     giveitem(ITEM_HM03,1)
     msgbox(format("If you've got a Pokémon that can learn Surf, you can just walk onto the waves now, no problem! Check it!"))
     closemessage
-    applymovement(KAUNA,Quest_Hang20_SurfAway_Movement)
-    waitmovement(KAUNA)
-    removeobject(KAUNA)
+    applymovement(PUA,Quest_Hang20_SurfAway_Movement)
+    waitmovement(PUA)
+    removeobject(PUA)
     questmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_HANG20)
     release
     end

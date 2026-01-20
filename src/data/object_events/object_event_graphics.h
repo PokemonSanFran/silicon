@@ -460,10 +460,10 @@ const u16 gObjectEventPal_EmrysWalking[] = INCBIN_U16("graphics/object_events/pa
 const u32 gObjectEventPic_ImeldaWalking[] = INCBIN_U32("graphics/object_events/pics/people/imelda.4bpp");
 const u16 gObjectEventPal_ImeldaWalking[] = INCBIN_U16("graphics/object_events/palettes/imelda.gbapal");
 
-const u32 gObjectEventPic_KaunaSurfing[] = INCBIN_U32("graphics/object_events/pics/people/kauna/surfing.4bpp");
+const u32 gObjectEventPic_PuaSurfing[] = INCBIN_U32("graphics/object_events/pics/people/pua/surfing.4bpp");
 
-const u32 gObjectEventPic_KaunaWalking[] = INCBIN_U32("graphics/object_events/pics/people/kauna/walking.4bpp");
-const u16 gObjectEventPal_KaunaWalking[] = INCBIN_U16("graphics/object_events/palettes/kauna.gbapal");
+const u32 gObjectEventPic_PuaWalking[] = INCBIN_U32("graphics/object_events/pics/people/pua/walking.4bpp");
+const u16 gObjectEventPal_PuaWalking[] = INCBIN_U16("graphics/object_events/palettes/pua.gbapal");
 
 const u32 gObjectEventPic_KeiyingWalking[] = INCBIN_U32("graphics/object_events/pics/people/keiying.4bpp");
 const u16 gObjectEventPal_KeiyingWalking[] = INCBIN_U16("graphics/object_events/palettes/keiying.gbapal");

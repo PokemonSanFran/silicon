@@ -40,11 +40,11 @@ script swagbag2_Intro_Dialogue {
 
 script swagbag2_DiscussCosts_Dialogue {
 
-    msgbox(format("I assume you've already taken advantage of the Breeding Center in preparation for your battle with Kauna?"),,SPEAKER_OLIVER)
+    msgbox(format("I assume you've already taken advantage of the Breeding Center in preparation for your battle with Pua?"),,SPEAKER_OLIVER)
 
     msgbox(format("Yes! They were very helpful in helping me prepare."),,SPEAKER_ALICIA)
 
-    msgbox(format("The Breeding Center staff mentioned some pretty high fees for using their services. How do ordinary Trainers afford it so they can take on Kauna too?"),,SPEAKER_ALICIA)
+    msgbox(format("The Breeding Center staff mentioned some pretty high fees for using their services. How do ordinary Trainers afford it so they can take on Pua too?"),,SPEAKER_ALICIA)
 
     bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
     bufferspeciesname(STR_VAR_3,SPECIES_MAGIKARP)
@@ -71,7 +71,7 @@ script swagbag2_BringToCenter_Dialogue {
     applymovement(PLAYER, moves(walk_left * 5, walk_down * 4, walk_left * 2, face_up, step_end))
     waitmovement(0)
 
-    msgbox(format("Don't let their demeanor fool you - Kauna is actually one of the leading experts in Pokémon Breeding and Battling. His entire team is bred using this facility's Gold tier experience. Access to those same services is a perk of being under the SharpRise Capital umbrella."),,SPEAKER_OLIVER)
+    msgbox(format("Don't let their demeanor fool you - Pua is actually one of the leading experts in Pokémon Breeding and Battling. His entire team is bred using this facility's Gold tier experience. Access to those same services is a perk of being under the SharpRise Capital umbrella."),,SPEAKER_OLIVER)
 
     msgbox(format("Wow, that's awesome!"),,SPEAKER_ALICIA)
 

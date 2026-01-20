@@ -3,7 +3,7 @@ const ADAORA = 5
 const FLAG_HIDE_ADAORA = FLAG_TEMP_5
 
 script SorryAboutMyFriends_Adaora_Visible_Script{
-    if (var(VAR_CHASILLA_STATE) != DEFEATED_KAUNA){
+    if (var(VAR_CHASILLA_STATE) != DEFEATED_PUA){
         setflag(FLAG_HIDE_ADAORA)
     }
     return

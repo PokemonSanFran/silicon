@@ -713,7 +713,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act1[] =
     {COMPOUND_STRING("AssholesHome"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ASSHOLESHOME},
     {COMPOUND_STRING("HousingProtest"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HOUSINGPROTEST},
     {COMPOUND_STRING("swagbag2"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SWAGBAG2},
-    {COMPOUND_STRING("EnterKauna"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERKAUNA},
+    {COMPOUND_STRING("EnterPua"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERPUA},
     {COMPOUND_STRING("SorryAboutMyFriends"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SORRYABOUTMYFRIENDS},
     {COMPOUND_STRING("TheStorySoFar"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THESTORYSOFAR_ALL},
     {COMPOUND_STRING("YoungPadawan"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUNGPADAWAN},

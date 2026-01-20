@@ -318,8 +318,8 @@ const u16 gTrainerFrontPalette_Emrys[] = INCBIN_U16("graphics/trainers/front_pic
 const u32 gTrainerFrontPic_Imelda[] = INCBIN_U32("graphics/trainers/front_pics/imelda.4bpp.smol");
 const u16 gTrainerFrontPalette_Imelda[] = INCBIN_U16("graphics/trainers/front_pics/imelda.gbapal");
 
-const u32 gTrainerFrontPic_Kauna[] = INCBIN_U32("graphics/trainers/front_pics/kauna.4bpp.smol");
-const u16 gTrainerFrontPalette_Kauna[] = INCBIN_U16("graphics/trainers/front_pics/kauna.gbapal");
+const u32 gTrainerFrontPic_Pua[] = INCBIN_U32("graphics/trainers/front_pics/pua.4bpp.smol");
+const u16 gTrainerFrontPalette_Pua[] = INCBIN_U16("graphics/trainers/front_pics/pua.gbapal");
 
 const u32 gTrainerFrontPic_Keiying[] = INCBIN_U32("graphics/trainers/front_pics/keiying.4bpp.smol");
 const u16 gTrainerFrontPalette_Keiying[] = INCBIN_U16("graphics/trainers/front_pics/keiying.gbapal");
@@ -362,7 +362,7 @@ const u8 gTrainerBackPic_Dimu[] = INCBIN_U8("graphics/trainers/back_pics/dimu.4b
 const u8 gTrainerBackPic_Doyle[] = INCBIN_U8("graphics/trainers/back_pics/doyle.4bpp");
 const u8 gTrainerBackPic_Emrys[] = INCBIN_U8("graphics/trainers/back_pics/emrys.4bpp");
 const u8 gTrainerBackPic_Imelda[] = INCBIN_U8("graphics/trainers/back_pics/imelda.4bpp");
-const u8 gTrainerBackPic_Kauna[] = INCBIN_U8("graphics/trainers/back_pics/kauna.4bpp");
+const u8 gTrainerBackPic_Pua[] = INCBIN_U8("graphics/trainers/back_pics/pua.4bpp");
 const u8 gTrainerBackPic_Keiying[] = INCBIN_U8("graphics/trainers/back_pics/keiying.4bpp");
 const u8 gTrainerBackPic_Magnus[] = INCBIN_U8("graphics/trainers/back_pics/magnus.4bpp");
 const u8 gTrainerBackPic_Neriene[] = INCBIN_U8("graphics/trainers/back_pics/neriene.4bpp");
@@ -377,7 +377,7 @@ const u16 gTrainerBackPicPalette_Dimu[] = INCBIN_U16("graphics/trainers/palettes
 const u16 gTrainerBackPicPalette_Doyle[] = INCBIN_U16("graphics/trainers/palettes/doyle.gbapal");
 const u16 gTrainerBackPicPalette_Emrys[] = INCBIN_U16("graphics/trainers/palettes/emrys.gbapal");
 const u16 gTrainerBackPicPalette_Imelda[] = INCBIN_U16("graphics/trainers/palettes/imelda.gbapal");
-const u16 gTrainerBackPicPalette_Kauna[] = INCBIN_U16("graphics/trainers/palettes/kauna.gbapal");
+const u16 gTrainerBackPicPalette_Pua[] = INCBIN_U16("graphics/trainers/palettes/pua.gbapal");
 const u16 gTrainerBackPicPalette_Keiying[] = INCBIN_U16("graphics/trainers/palettes/keiying.gbapal");
 const u16 gTrainerBackPicPalette_Magnus[] = INCBIN_U16("graphics/trainers/palettes/magnus.gbapal");
 const u16 gTrainerBackPicPalette_Neriene[] = INCBIN_U16("graphics/trainers/palettes/neriene.gbapal");
@@ -505,7 +505,7 @@ const struct TrainerSprite gTrainerSprites[] =
     TRAINER_SPRITE(TRAINER_PIC_DOYLE,gTrainerFrontPic_Doyle, gTrainerFrontPalette_Doyle),
     TRAINER_SPRITE(TRAINER_PIC_EMRYS,gTrainerFrontPic_Emrys, gTrainerFrontPalette_Emrys),
     TRAINER_SPRITE(TRAINER_PIC_IMELDA,gTrainerFrontPic_Imelda, gTrainerFrontPalette_Imelda),
-    TRAINER_SPRITE(TRAINER_PIC_KAUNA,gTrainerFrontPic_Kauna, gTrainerFrontPalette_Kauna),
+    TRAINER_SPRITE(TRAINER_PIC_PUA,gTrainerFrontPic_Pua, gTrainerFrontPalette_Pua),
     TRAINER_SPRITE(TRAINER_PIC_KEI_YING,gTrainerFrontPic_Keiying, gTrainerFrontPalette_Keiying),
     TRAINER_SPRITE(TRAINER_PIC_MAGNUS,gTrainerFrontPic_Magnus, gTrainerFrontPalette_Magnus),
     TRAINER_SPRITE(TRAINER_PIC_NERIENE,gTrainerFrontPic_Neriene, gTrainerFrontPalette_Neriene),
@@ -604,7 +604,7 @@ const struct TrainerBacksprite gTrainerBacksprites[] =
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_DOYLE, 5, gTrainerBackPic_Doyle, gTrainerBackPicPalette_Doyle, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_EMRYS, 5, gTrainerBackPic_Emrys, gTrainerBackPicPalette_Emrys, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_IMELDA, 5, gTrainerBackPic_Imelda, gTrainerBackPicPalette_Imelda, sBackAnims_Kanto),
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_KAUNA, 5, gTrainerBackPic_Kauna, gTrainerBackPicPalette_Kauna, sBackAnims_Kanto),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_PUA, 5, gTrainerBackPic_Pua, gTrainerBackPicPalette_Pua, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_KEI_YING, 5, gTrainerBackPic_Keiying, gTrainerBackPicPalette_Keiying, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_MAGNUS, 5, gTrainerBackPic_Magnus, gTrainerBackPicPalette_Magnus, sBackAnims_Kanto),
     TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_NERIENE, 5, gTrainerBackPic_Neriene, gTrainerBackPicPalette_Neriene, sBackAnims_Kanto),

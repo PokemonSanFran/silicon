@@ -123,15 +123,15 @@ extern const u8 gText_Quest_BuildingAnExhibit_Desc[];
 extern const u8 gText_Quest_BuildingAnExhibit_DoneDesc[];
 extern const u8 gText_Quest_BuildingAnExhibit_Map[];
 
-extern const u8 gText_Quest_UnknownKaunaQuestA_Name[];
-extern const u8 gText_Quest_UnknownKaunaQuestA_Desc[];
-extern const u8 gText_Quest_UnknownKaunaQuestA_DoneDesc[];
-extern const u8 gText_Quest_UnknownKaunaQuestA_Map[];
+extern const u8 gText_Quest_UnknownPuaQuestA_Name[];
+extern const u8 gText_Quest_UnknownPuaQuestA_Desc[];
+extern const u8 gText_Quest_UnknownPuaQuestA_DoneDesc[];
+extern const u8 gText_Quest_UnknownPuaQuestA_Map[];
 
-extern const u8 gText_Quest_UnknownKaunaQuestB_Name[];
-extern const u8 gText_Quest_UnknownKaunaQuestB_Desc[];
-extern const u8 gText_Quest_UnknownKaunaQuestB_DoneDesc[];
-extern const u8 gText_Quest_UnknownKaunaQuestB_Map[];
+extern const u8 gText_Quest_UnknownPuaQuestB_Name[];
+extern const u8 gText_Quest_UnknownPuaQuestB_Desc[];
+extern const u8 gText_Quest_UnknownPuaQuestB_DoneDesc[];
+extern const u8 gText_Quest_UnknownPuaQuestB_Map[];
 
 extern const u8 gText_Quest_UnknownNerieneQuestA_Name[];
 extern const u8 gText_Quest_UnknownNerieneQuestA_Desc[];

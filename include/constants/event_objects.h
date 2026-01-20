@@ -257,7 +257,7 @@
 #define OBJ_EVENT_GFX_DOYLE                        249
 #define OBJ_EVENT_GFX_EMRYS                        250
 #define OBJ_EVENT_GFX_IMELDA                       251
-#define OBJ_EVENT_GFX_KAUNA                        252
+#define OBJ_EVENT_GFX_PUA                        252
 #define OBJ_EVENT_GFX_KEIYING                      253
 #define OBJ_EVENT_GFX_MAGNUS                       254
 #define OBJ_EVENT_GFX_NERIENE                      255
@@ -265,7 +265,7 @@
 #define OBJ_EVENT_GFX_BAIYA_FAINTED                  257
 #define OBJ_EVENT_GFX_ADAORA_FAINTED               258
 #define OBJ_EVENT_GFX_BAIYA_FIELD_MOVE               259
-#define OBJ_EVENT_GFX_KAUNA_SURFING                260
+#define OBJ_EVENT_GFX_PUA_SURFING                260
 #define OBJ_EVENT_GFX_SILICON_PLAYER_F1_NORMAL     261
 #define OBJ_EVENT_GFX_SILICON_PLAYER_F1_MACH_BIKE  262
 #define OBJ_EVENT_GFX_SILICON_PLAYER_F1_ACRO_BIKE  263
@@ -452,7 +452,7 @@
 #define OBJ_EVENT_PAL_TAG_DOYLE 0x1132
 #define OBJ_EVENT_PAL_TAG_EMRYS 0x1133
 #define OBJ_EVENT_PAL_TAG_IMELDA 0x1134
-#define OBJ_EVENT_PAL_TAG_KAUNA 0x1135
+#define OBJ_EVENT_PAL_TAG_PUA 0x1135
 #define OBJ_EVENT_PAL_TAG_KEIYING 0x1136
 #define OBJ_EVENT_PAL_TAG_MAGNUS 0x1137
 #define OBJ_EVENT_PAL_TAG_NERIENE 0x1138

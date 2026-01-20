@@ -118,7 +118,7 @@
 #define TRAINER_PIC_DOYLE                 99
 #define TRAINER_PIC_EMRYS                 100
 #define TRAINER_PIC_IMELDA                101
-#define TRAINER_PIC_KAUNA                 102
+#define TRAINER_PIC_PUA                 102
 #define TRAINER_PIC_KEI_YING              103
 #define TRAINER_PIC_MAGNUS                104
 #define TRAINER_PIC_NERIENE               105
@@ -162,7 +162,7 @@
 #define TRAINER_BACK_PIC_DOYLE                 13
 #define TRAINER_BACK_PIC_EMRYS                 14
 #define TRAINER_BACK_PIC_IMELDA                15
-#define TRAINER_BACK_PIC_KAUNA                 16
+#define TRAINER_BACK_PIC_PUA                 16
 #define TRAINER_BACK_PIC_KEI_YING              17
 #define TRAINER_BACK_PIC_MAGNUS                18
 #define TRAINER_BACK_PIC_NERIENE               19

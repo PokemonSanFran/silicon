@@ -1631,14 +1631,14 @@ const struct SpriteFrameImage gObjectEventPicTable_ImeldaWalking[] =
     overworld_ascending_frames(gObjectEventPic_ImeldaWalking,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaunaSurfing[] =
+const struct SpriteFrameImage gObjectEventPicTable_PuaSurfing[] =
 {
-    overworld_ascending_frames(gObjectEventPic_KaunaSurfing,4,4),
+    overworld_ascending_frames(gObjectEventPic_PuaSurfing,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaunaWalking[] =
+const struct SpriteFrameImage gObjectEventPicTable_PuaWalking[] =
 {
-    overworld_ascending_frames(gObjectEventPic_KaunaWalking,4,4),
+    overworld_ascending_frames(gObjectEventPic_PuaWalking,4,4),
 };
 
 const struct SpriteFrameImage gObjectEventPicTable_KeiyingWalking[] =

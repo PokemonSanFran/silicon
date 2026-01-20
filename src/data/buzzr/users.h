@@ -85,7 +85,7 @@ const struct Users gBuzzrUsers[] =
         .username = _("PerlaciaCollector"),
         .isVerified = TRUE,
     },
-    [BUZZR_USER_KAUNA] =
+    [BUZZR_USER_PUA] =
     {
         .username = _("PapaPua"),
         .isVerified = TRUE,

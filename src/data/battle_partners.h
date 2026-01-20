@@ -348,19 +348,19 @@
         },
     },
 #line 128
-    [DIFFICULTY_NORMAL][PARTNER_KAUNA] =
+    [DIFFICULTY_NORMAL][PARTNER_PUA] =
     {
 #line 129
-        .trainerName = _("Kauna"),
+        .trainerName = _("Pua"),
 #line 130
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 131
-        .trainerPic = TRAINER_PIC_KAUNA,
+        .trainerPic = TRAINER_PIC_PUA,
         .encounterMusic_gender =
 #line 133
             TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAUNA,
+        .trainerBackPic = TRAINER_PIC_PUA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {

@@ -7,7 +7,7 @@ mapscripts Chasilla_MapScripts{
         call(Quest_StealTheAxe_UnlockDoor_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_CHASILLA_STATE, DEFEATED_KAUNA: SorryAboutMyFriends_CheckCutscene_Script
+        VAR_CHASILLA_STATE, DEFEATED_PUA: SorryAboutMyFriends_CheckCutscene_Script
         FLAG_VISITED_CHASILLA, FALSE: Generic_Mappreview
     ]
 

@@ -897,28 +897,28 @@
         },
     },
 #line 455
-    [DIFFICULTY_NORMAL][TRAINER_KAUNA] =
+    [DIFFICULTY_NORMAL][TRAINER_PUA] =
     {
 #line 456
-        .trainerName = _("Kauna"),
+        .trainerName = _("Pua"),
 #line 460
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 457
-        .trainerPic = TRAINER_PIC_KAUNA,
+        .trainerPic = TRAINER_PIC_PUA,
         .encounterMusic_gender =
 0,
 #line 458
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 459
-        .characterRevealId = REVEAL_KAUNA,
+        .characterRevealId = REVEAL_PUA,
 #line 461
         .trainerType = GLASS_TRAINER_TYPE_BOSS,
 #line 462
-        .objectEventGraphicsId = OBJ_EVENT_GFX_KAUNA,
+        .objectEventGraphicsId = OBJ_EVENT_GFX_PUA,
 #line 463
         .mapSec = MAPSEC_CHASILLA,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAUNA,
+        .trainerBackPic = TRAINER_PIC_PUA,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {

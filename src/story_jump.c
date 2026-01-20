@@ -91,7 +91,7 @@ static void JumpPlayerTo_AaandWereBack(bool32);
 static void JumpPlayerTo_AssholesHome(bool32);
 static void JumpPlayerTo_HousingProtest(bool32);
 static void JumpPlayerTo_swagbag2(bool32);
-static void JumpPlayerTo_EnterKauna(bool32);
+static void JumpPlayerTo_EnterPua(bool32);
 static void JumpPlayerTo_SorryAboutMyFriends(bool32);
 static void JumpPlayerTo_TheStorySoFar(bool32, u32);
 static void JumpPlayerTo_YoungPadawan(bool32);
@@ -255,8 +255,8 @@ void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
         case JUMPPLAYER_SWAGBAG2:
             JumpPlayerTo_swagbag2(jumpType);
             break;
-        case JUMPPLAYER_ENTERKAUNA:
-            JumpPlayerTo_EnterKauna(jumpType);
+        case JUMPPLAYER_ENTERPUA:
+            JumpPlayerTo_EnterPua(jumpType);
             break;
         case JUMPPLAYER_SORRYABOUTMYFRIENDS:
             JumpPlayerTo_SorryAboutMyFriends(jumpType);
@@ -1095,31 +1095,31 @@ void JumpPlayerTo_swagbag2(bool32 jumpType)
     FlagsVarWarp_swagbag2();
 }
 
-void FlagsVarWarp_EnterKauna()
+void FlagsVarWarp_EnterPua()
 {
     FlagSet(FLAG_CONSTRUCTION_BREAKING_NEWS);
     FlagSet(FLAG_BADGE04_GET);
     Buzzr_MarkTweetAsRead(TWEET_GYM_CHASILLA_BADGE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAUNA);
-    VarSet(VAR_KAUNA_STATE, BATTLE_1_COMPLETE);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_PUA);
+    VarSet(VAR_PUA_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_4_STATE, GYM_DEFEATED_LEADER);
-    VarSet(VAR_CHASILLA_STATE, DEFEATED_KAUNA);
-    VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_KAUNA);
+    VarSet(VAR_CHASILLA_STATE, DEFEATED_PUA);
+    VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_PUA);
     SetWarpDestination(MAP_GROUP(MAP_CHASILLA_GYM),MAP_NUM(MAP_CHASILLA_GYM),0,USE_WARP_ID,USE_WARP_ID);
 }
 
-void GiveItems_EnterKauna(bool32 jumpType)
+void GiveItems_EnterPua(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE04_GET))
         AddBagItem(ITEM_TM04, 1);
 }
 
-void JumpPlayerTo_EnterKauna(bool32 jumpType)
+void JumpPlayerTo_EnterPua(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
         JumpPlayerTo_swagbag2(jumpType);
 
-    FlagsVarWarp_EnterKauna();
+    FlagsVarWarp_EnterPua();
 }
 
 void FlagsVarWarp_SorryAboutMyFriends()
@@ -1132,7 +1132,7 @@ void FlagsVarWarp_SorryAboutMyFriends()
 void JumpPlayerTo_SorryAboutMyFriends(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_EnterKauna(jumpType);
+        JumpPlayerTo_EnterPua(jumpType);
 
     FlagsVarWarp_SorryAboutMyFriends();
 }

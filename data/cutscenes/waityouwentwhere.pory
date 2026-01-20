@@ -47,7 +47,7 @@ script WaitYouWentWhere_PlayerSetUp_Script {
 script WaitYouWentWhere_FirstInteract_Dialogue {
     lock
         startcutscene(JUMPPLAYER_WAITYOUWENTWHERE)
-        msgbox(format("Ah {PLAYER}, welcome back from Chasilla! I hear you defeated Kauna, as expected from you."),MSGBOX_NPC,SPEAKER_OLIVER)
+        msgbox(format("Ah {PLAYER}, welcome back from Chasilla! I hear you defeated Pua, as expected from you."),MSGBOX_NPC,SPEAKER_OLIVER)
         lock //MSGBOX_NPC turns off the earlier lock
         msgbox(format("Yeah, thanks for your help. Where are you going?"),,SPEAKER_ALICIA)
 

@@ -123,15 +123,15 @@ const u8 gText_Quest_BuildingAnExhibit_Desc[] =_("Description");
 const u8 gText_Quest_BuildingAnExhibit_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_BuildingAnExhibit_Map[] =_("PerlaciaCity");
 
-const u8 gText_Quest_UnknownKaunaQuestA_Name[] = _("Unknown Kauna Quest A");
-const u8 gText_Quest_UnknownKaunaQuestA_Desc[] =_("Description");
-const u8 gText_Quest_UnknownKaunaQuestA_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_UnknownKaunaQuestA_Map[] =_("N/A");
+const u8 gText_Quest_UnknownPuaQuestA_Name[] = _("Unknown Pua Quest A");
+const u8 gText_Quest_UnknownPuaQuestA_Desc[] =_("Description");
+const u8 gText_Quest_UnknownPuaQuestA_DoneDesc[] =_("DoneDescription");
+const u8 gText_Quest_UnknownPuaQuestA_Map[] =_("N/A");
 
-const u8 gText_Quest_UnknownKaunaQuestB_Name[] = _("Unknown Kauna Quest B");
-const u8 gText_Quest_UnknownKaunaQuestB_Desc[] =_("Description");
-const u8 gText_Quest_UnknownKaunaQuestB_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_UnknownKaunaQuestB_Map[] =_("N/A");
+const u8 gText_Quest_UnknownPuaQuestB_Name[] = _("Unknown Pua Quest B");
+const u8 gText_Quest_UnknownPuaQuestB_Desc[] =_("Description");
+const u8 gText_Quest_UnknownPuaQuestB_DoneDesc[] =_("DoneDescription");
+const u8 gText_Quest_UnknownPuaQuestB_Map[] =_("N/A");
 
 const u8 gText_Quest_UnknownNerieneQuestA_Name[] = _("Unknown Neriene Quest A");
 const u8 gText_Quest_UnknownNerieneQuestA_Desc[] =_("Description");

@@ -77,8 +77,8 @@ static const u16 sSpeakerPal_Man[]  = INCBIN_U16("graphics/ui_menus/msgbox/chara
 static const u32 gSpeakerIcon_Misty[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/misty.4bpp");
 static const u16 sSpeakerPal_Misty[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/misty.gbapal");
 
-static const u32 gSpeakerIcon_Kauna[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kauna.4bpp");
-static const u16 sSpeakerPal_Kauna[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kauna.gbapal");
+static const u32 gSpeakerIcon_Pua[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/pua.4bpp");
+static const u16 sSpeakerPal_Pua[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/pua.gbapal");
 
 static const u32 gSpeakerIcon_Old_Man[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/old_man.4bpp");
 static const u16 sSpeakerPal_Old_Man[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/old_man.gbapal");
@@ -441,13 +441,13 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
     },
-    [SPEAKER_KAUNA] =
+    [SPEAKER_PUA] =
     {
-        .name = _("Kauna"),
+        .name = _("Pua"),
         .title = _("Gym Leader"),
         .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Kauna,
-        .speakerPal = sSpeakerPal_Kauna,
+        .speakerIcon = gSpeakerIcon_Pua,
+        .speakerPal = sSpeakerPal_Pua,
     },
     [SPEAKER_OLD_MAN] =
     {

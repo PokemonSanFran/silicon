@@ -190,7 +190,7 @@ Set `FLAG_DEX_SHOWN_FORBIDDEN_MONS`.
 ### Caught Amount Is 40% <= x < 50%
 * Dexresearcher suggests that the Player learn to fish at Lake Wajabi
 ### Caught Amount Is 50% <= x < 60%
-* Dexresearcher says there are some Pokémon that can only be found on the ocean - sometimes Kauna will teach Trainers at Cresalta Vista how to cross the ocean
+* Dexresearcher says there are some Pokémon that can only be found on the ocean - sometimes Pua will teach Trainers at Cresalta Vista how to cross the ocean
 ### Caught Amount Is 60% <= x < 70%
 * Dexresearcher notes there are a surprising number of Pokemon that can be lured by planted berries
 ### Caught Amount Is 70% <= x < 80%

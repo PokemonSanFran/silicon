@@ -5452,9 +5452,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ImeldaWalking = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaSurfing = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaSurfing = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_KAUNA,
+    .paletteTag = OBJ_EVENT_PAL_TAG_PUA,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -5467,13 +5467,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaSurfing = {
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = gObjectEventPicTable_KaunaSurfing,
+    .images = gObjectEventPicTable_PuaSurfing,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaWalking = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaWalking = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_KAUNA,
+    .paletteTag = OBJ_EVENT_PAL_TAG_PUA,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -5486,7 +5486,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaWalking = {
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = gObjectEventPicTable_KaunaWalking,
+    .images = gObjectEventPicTable_PuaWalking,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

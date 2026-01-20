@@ -1261,7 +1261,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/cutscenes/assholeshome.inc"
 .include "data/cutscenes/housingprotest.inc"
 .include "data/cutscenes/swagbag2.inc"
-.include "data/cutscenes/enterkauna.inc"
+.include "data/cutscenes/enterpua.inc"
 .include "data/cutscenes/sorryaboutmyfriends.inc"
 .include "data/cutscenes/thestorysofar.inc"
 .include "data/cutscenes/youngpadawan.inc"

@@ -180,7 +180,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_GYM_CHASILLA_BADGE] =
     {
-        .userId = BUZZR_USER_KAUNA,
+        .userId = BUZZR_USER_PUA,
         .content = COMPOUND_STRING(
             "{PLAYER} beat Liko!\n"
             "This is placeholder text."
