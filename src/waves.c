@@ -70,6 +70,8 @@ static void Waves_FreeBackgrounds(void);
 static void SaveCallbackToWaves(MainCallback callback);
 static void Waves_InitializeAndSaveCallback(MainCallback callback);
 void Waves_SetupCallback(void);
+static enum GoalEnum GetGoalToBeLoaded(enum WavesMovement goalMovement);
+static void Waves_DisplayPageContent(enum WavesMovement goalMovement);
 static void Waves_InitWindows(void);
 static void Task_HandleInput(u8 taskId);
 static void DetailPage_HandleInput(u8 taskId);
@@ -77,10 +79,10 @@ static void Donate_HandleInput(u8 taskId);
 static void NotEnough_HandleInput(u8 taskId);
 static void Waves_OpenGoal(u8 taskId);
 static void Task_WaitForFadeAndSwitch(u8 taskId);
-static void Waves_GoToPage(enum WavesMode mode);
-static void Waves_SetUpPageContent(void);
-static void Waves_ChangeColumn(s32 direction);
-static void Waves_ChangeRow(s32 direction);
+static void Waves_GoToPage(enum WavesMode mode, enum WavesMovement goalMovement);
+static void Waves_SetUpPageContent(enum WavesMovement goalMovement);
+static void Waves_ChangeColumn(enum WavesMovement direction);
+static void Waves_ChangeRow(enum WavesMovement direction);
 static void FreeSpritePalettesResetSpriteData(void);
 static bool32 AllocateStructs(void);
 static void Waves_ReturnFromAdventureGuide(void);
@@ -97,6 +99,7 @@ static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId);
 static void Waves_PrintCard(enum GoalEnum goalId);
 static void Waves_PrintCardHeader(enum GoalEnum goalId);
 static enum GoalEnum GetGoalFromCurrentPosition(void);
+static enum WavesCursorPosition GetPositionFromGoal(enum GoalEnum goalId);
 static void Waves_PrintCardText(enum GoalEnum goalId);
 static void Waves_PrintAllCardThumbnails(void);
 static void Waves_PrintCardThumbnail(enum GoalEnum goalId);
@@ -831,7 +834,7 @@ void Waves_SetupCallback(void)
         case 4:
             Waves_SetMode(WAVES_MODE_LANDING_PAGE);
             Waves_PrintAllCardThumbnails();
-            Waves_SetUpPageContent();
+            Waves_SetUpPageContent(WAVES_NO_CHANGE);
             gMain.state++;
             break;
         case 5:
@@ -845,15 +848,30 @@ void Waves_SetupCallback(void)
     }
 }
 
-static void Waves_DisplayPageContent(void)
+static void Waves_DisplayPageContent(enum WavesMovement goalMovement)
 {
     bool32 isLandingPage = (Waves_GetMode() == WAVES_MODE_LANDING_PAGE);
     if (isLandingPage == TRUE)
         Waves_PrintLandingPage();
     else
-        Waves_DisplayGoalPage(GetGoalFromCurrentPosition());
+        Waves_DisplayGoalPage(GetGoalToBeLoaded(goalMovement));
 
     Waves_DrawGoalImage();
+}
+
+static enum GoalEnum GetGoalToBeLoaded(enum WavesMovement goalMovement)
+{
+    enum GoalEnum goal;
+
+    if (goalMovement == WAVES_DECREMENT)
+        goal = Waves_DecrementGoal();
+    else if (goalMovement == WAVES_INCREMENT)
+        goal = Waves_IncrementGoal();
+    else
+        goal = GetGoalFromCurrentPosition();
+
+    SetCursorPosition(GetPositionFromGoal(goal));
+    return goal;
 }
 
 static void Waves_InitWindows(void)
@@ -891,25 +909,25 @@ static void LandingPage_HandleInput(u8 taskId)
 
     if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN) )
     {
-        Waves_ChangeRow(1);
+        Waves_ChangeRow(WAVES_INCREMENT);
         return;
     }
 
     if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP) )
     {
-        Waves_ChangeRow(-1);
+        Waves_ChangeRow(WAVES_DECREMENT);
         return;
     }
 
     if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT) )
     {
-        Waves_ChangeColumn(-1);
+        Waves_ChangeColumn(WAVES_DECREMENT);
         return;
     }
 
     if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT) )
     {
-        Waves_ChangeColumn(1);
+        Waves_ChangeColumn(WAVES_INCREMENT);
         return;
     }
 }
@@ -926,6 +944,7 @@ static void Waves_OpenGoal(u8 taskId)
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
     gTasks[taskId].data[0] = Waves_GetMode();
+    gTasks[taskId].data[1] = 0;
     gTasks[taskId].func = Task_WaitForFadeAndSwitch;
 }
 
@@ -935,52 +954,56 @@ static void Task_WaitForFadeAndSwitch(u8 taskId)
         return;
 
     enum WavesMode currentMode = gTasks[taskId].data[0];
+    enum WavesMovement goalMovement = gTasks[taskId].data[1];
     enum WavesMode targetMode = (currentMode == WAVES_MODE_GOAL_DETAIL) ? WAVES_MODE_LANDING_PAGE : WAVES_MODE_GOAL_DETAIL;
 
-    Waves_GoToPage(targetMode);
+    if (goalMovement != WAVES_NO_CHANGE)
+        targetMode = WAVES_MODE_GOAL_DETAIL;
+
+    Waves_GoToPage(targetMode, goalMovement);
+    gTasks[taskId].data[1] = WAVES_NO_CHANGE;
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
     gTasks[taskId].func = Task_HandleInput;
 }
 
-static void Waves_GoToPage(enum WavesMode mode)
+static void Waves_GoToPage(enum WavesMode mode, enum WavesMovement goalMovement)
 {
-    Waves_CalculateMoneyAmounts();
     Waves_MakeGoalSpritesInvisible();
     Waves_SetMode(mode);
     FreeAllWindowBuffers();
-    Waves_SetUpPageContent();
+    Waves_SetUpPageContent(goalMovement);
 }
 
-static void Waves_SetUpPageContent(void)
+static void Waves_SetUpPageContent(enum WavesMovement goalMovement)
 {
     Waves_ChooseBackgroundBasedOnMode();
     Waves_InitWindows();
     ClearAllWindows();
     UnsetBgTilemapBuffer(BG0_WAVES_TEXT);
-    Waves_DisplayPageContent();
+    Waves_DisplayPageContent(goalMovement);
 }
 
-static void Waves_ChangeColumn(s32 direction)
+static void Waves_ChangeColumn(enum WavesMovement direction)
 {
     enum WavesCursorPosition originalCurrent = GetCursorPosition();
     u32 newPosition = originalCurrent + direction;
 
-    if ((originalCurrent == WAVES_CURSOR_0) && (direction == -1))
+    if ((originalCurrent == WAVES_CURSOR_0) && (direction == WAVES_DECREMENT))
         newPosition = WAVES_CURSOR_2;
 
-    if ((originalCurrent == WAVES_CURSOR_3) && (direction == -1))
+    if ((originalCurrent == WAVES_CURSOR_3) && (direction == WAVES_DECREMENT))
         newPosition = WAVES_CURSOR_5;
 
-    if ((originalCurrent == WAVES_CURSOR_2) && (direction == 1))
+    if ((originalCurrent == WAVES_CURSOR_2) && (direction == WAVES_INCREMENT))
         newPosition = WAVES_CURSOR_0;
 
-    if ((originalCurrent == WAVES_CURSOR_5) && (direction == 1))
+    if ((originalCurrent == WAVES_CURSOR_5) && (direction == WAVES_INCREMENT))
         newPosition = WAVES_CURSOR_3;
 
     SetCursorPosition(newPosition);
 }
 
-static void Waves_ChangeRow(s32 direction)
+static void Waves_ChangeRow(enum WavesMovement direction)
 {
     direction *= (WAVES_CURSOR_COUNT / 2);
     enum WavesCursorPosition originalCurrent = GetCursorPosition();
@@ -1312,6 +1335,11 @@ static enum GoalEnum GetGoalFromCurrentPosition(void)
     return (-1 * position) + 5;
 }
 
+static enum WavesCursorPosition GetPositionFromGoal(enum GoalEnum goalId)
+{
+    return (5 - goalId);
+}
+
 static void Waves_PrintCardHeader(enum GoalEnum goalId)
 {
     Waves_PrintCardText(goalId);
@@ -1390,7 +1418,7 @@ static void Waves_SetMode(enum WavesMode mode)
 
 static enum GoalEnum Waves_IncrementGoal(void)
 {
-    u32 original = Waves_GetMode();
+    enum GoalEnum original = GetGoalFromCurrentPosition();
     u32 new = original + 1;
 
     return (original == GOAL_LEGAL_DEFENSE) ? GOAL_FOOD_SECURITY : new;
@@ -1398,7 +1426,7 @@ static enum GoalEnum Waves_IncrementGoal(void)
 
 static enum GoalEnum Waves_DecrementGoal(void)
 {
-    u32 original = Waves_GetMode();
+    enum GoalEnum original = GetGoalFromCurrentPosition();
     u32 new = original - 1;
 
     return (original == GOAL_FOOD_SECURITY) ? GOAL_LEGAL_DEFENSE: new;
@@ -1434,6 +1462,7 @@ static void DetailPage_HandleInput(u8 taskId)
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
         gTasks[taskId].data[0] = Waves_GetMode();
+        gTasks[taskId].data[1] = 0;
         gTasks[taskId].func = Task_WaitForFadeAndSwitch;
         return;
     }
@@ -1442,7 +1471,7 @@ static void DetailPage_HandleInput(u8 taskId)
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
         gTasks[taskId].data[0] = Waves_GetMode();
-        gTasks[taskId].data[1] = Waves_DecrementGoal();
+        gTasks[taskId].data[1] = WAVES_INCREMENT;
         gTasks[taskId].func = Task_WaitForFadeAndSwitch;
         return;
     }
@@ -1451,7 +1480,7 @@ static void DetailPage_HandleInput(u8 taskId)
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
         gTasks[taskId].data[0] = Waves_GetMode();
-        gTasks[taskId].data[1] = Waves_IncrementGoal();
+        gTasks[taskId].data[1] = WAVES_DECREMENT;
         gTasks[taskId].func = Task_WaitForFadeAndSwitch;
         return;
     }
@@ -1467,6 +1496,7 @@ static void NotEnough_HandleInput(u8 taskId)
 
 static void Waves_DisplayGoalPage(enum GoalEnum goalId)
 {
+    Waves_CalculateMoneyAmounts();
     Waves_PrintMenuHeader(WIN_WAVES_GOAL_HEADER, goalId);
     Waves_DisplayGoalDesc(WIN_WAVES_GOAL_DESC,goalId);
     Waves_DisplayGoalProgress(WIN_WAVES_GOAL_RAISED,goalId);

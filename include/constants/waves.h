@@ -1,6 +1,13 @@
 #ifndef GUARD_CONSTANTS_WAVES_H
 #define GUARD_CONSTANTS_WAVES_H
 
+enum WavesMovement
+{
+    WAVES_DECREMENT = -1,
+    WAVES_NO_CHANGE,
+    WAVES_INCREMENT,
+};
+
 enum WavesMode
 {
     WAVES_MODE_LANDING_PAGE,
