@@ -108,7 +108,7 @@ static void SpriteCB_MoveGoalCursor(struct Sprite *sprite);
 static void SpriteCB_HideThumbnails(struct Sprite *sprite);
 static void Waves_PrintCursor(void);
 static void Waves_PrintCardMeter(enum GoalEnum goalId);
-static void Waves_PutMeterTiles(u32 amount, u32 offset, u32 windowId);
+static void Waves_PutMeterTiles(u32 playerAmount, u32 passiveAmount, u32 offset, u32 windowId);
 static void SetCursorPosition(enum WavesCursorPosition position);
 static enum WavesCursorPosition GetCursorPosition(void);
 static void ResetCursorPosition(void);
@@ -1221,7 +1221,7 @@ static void Waves_PrintCardThumbnail(enum GoalEnum goalId)
     TempSpriteTemplate.paletteTag = palTag;
     TempSpriteTemplate.callback = SpriteCB_HideThumbnails,
 
-    LoadSpriteSheet(&sSpriteSheet_Thumbnail);
+        LoadSpriteSheet(&sSpriteSheet_Thumbnail);
     LoadSpritePalette(&sWavesSpritePalette);
     u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
     gSprites[spriteId].oam.priority = 1;
@@ -1282,20 +1282,24 @@ static void Waves_PrintCardMeter(enum GoalEnum goalId)
         return;
 
     enum WavesWindowsGrid windowId = ConvertGoalIdToWindowId(goalId);
-    u32 amount = Waves_CalculatePercentRaised(goalId) * 10000;
+    u32 playerAmount = Waves_GetPlayerPercent(goalId);
+    u32 passiveAmount = Waves_GetPassivePercent(goalId);
 
     u32 offset = WAVES_METER_TILE_OFFSET;
 
     if (goalId < GOAL_SOCIAL_HOUSING)
         offset += TILE_WIDTH;
 
-    Waves_PutMeterTiles(amount,offset,windowId);
+    Waves_PutMeterTiles(playerAmount, passiveAmount ,offset,windowId);
 }
 
-static void Waves_PutMeterTiles(u32 amount, u32 offset, u32 windowId)
+static void Waves_PutMeterTiles(u32 playerAmount, u32 passiveAmount, u32 offset, u32 windowId)
 {
     u32 factor = 0;
     u32 size = 0;
+    playerAmount *= 10000;
+    passiveAmount *= 10000;
+    u32 amount = playerAmount + passiveAmount;
 
     while (factor < (ARRAY_COUNT(meterPlayerLeftLUT)-1) && amount >= WAVES_METER_FACTOR)
     {
@@ -1556,11 +1560,11 @@ static void Waves_PrintGoalDescText(enum WavesWindowsGoal windowId, enum GoalEnu
 static void Waves_CalculateMoneyAmounts(void)
 {
     enum GoalEnum goal = GetGoalFromCurrentPosition();
-    sWavesState->moneyStruct.playerPercent =  Waves_GetPlayerPercent(goal);
-    sWavesState->moneyStruct.passivePercent =  Waves_GetPassivePercent(goal);
-    sWavesState->moneyStruct.goal = Waves_GetGoal(goal);
-    sWavesState->moneyStruct.playerCash =  sWavesState->moneyStruct.playerPercent * sWavesState->moneyStruct.goal / 100;
-    sWavesState->moneyStruct.passiveCash =  sWavesState->moneyStruct.passivePercent * sWavesState->moneyStruct.goal / 100;
+    sWavesState->moneyStruct.playerPercent  = Waves_GetPlayerPercent(goal);
+    sWavesState->moneyStruct.passivePercent = Waves_GetPassivePercent(goal);
+    sWavesState->moneyStruct.goal           = Waves_GetGoal(goal);
+    sWavesState->moneyStruct.playerCash     = sWavesState->moneyStruct.playerPercent * sWavesState->moneyStruct.goal / 100;
+    sWavesState->moneyStruct.passiveCash    = sWavesState->moneyStruct.passivePercent * sWavesState->moneyStruct.goal / 100;
 }
 
 static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId)
@@ -1621,8 +1625,9 @@ static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId)
 static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId)
 {
     u32 windowWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
-    u32 money = (sWavesState->moneyStruct.passivePercent + sWavesState->moneyStruct.playerPercent) * 10000;
-    Waves_PutMeterTiles(money,(windowWidth+4),windowId);
+    u32 playerAmount = sWavesState->moneyStruct.playerPercent;
+    u32 passiveAmount = sWavesState->moneyStruct.passivePercent;
+    Waves_PutMeterTiles(playerAmount, passiveAmount, (windowWidth+4),windowId);
 }
 
 static void Waves_MakeGoalSpritesInvisible(void)
