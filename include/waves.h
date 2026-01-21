@@ -4,6 +4,15 @@
 #include "constants/quests.h"
 #include "constants/waves.h"
 
+struct MoneyStruct
+{
+    u32 playerCash;
+    u32 passiveCash;
+    u8 playerPercent;
+    u8 passivePercent;
+    u32 goal;
+};
+
 struct WavesData
 {
     const u8* const title;
@@ -25,15 +34,7 @@ struct WavesState
     u8 donatePosition;
     u8 spriteId[WAVES_MODE_MAIN_COUNT][GOAL_COUNT];
     u8 cursorSpriteId;
-};
-
-struct MoneyStruct
-{
-    u32 playerCash;
-    u32 passiveCash;
-    u8 playerPercent;
-    u8 passivePercent;
-    u32 goal;
+    struct MoneyStruct moneyStruct;
 };
 
 void CB2_WavesFromStartMenu(void);

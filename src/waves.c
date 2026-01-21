@@ -37,6 +37,8 @@ static const u8 *const Waves_GetTitle(enum GoalEnum goal);
 static const u8 *const Waves_GetDesc(enum GoalEnum goal);
 static const u32* Waves_GetThumbnail(enum GoalEnum goal);
 static const u32* Waves_GetImage(enum GoalEnum goal);
+static enum QuestIdList Waves_GetMainQuest(enum GoalEnum goal);
+static enum SubQuestDefines Waves_GetSubQuest(enum GoalEnum goal);
 const u16* Waves_GetPalette(enum GoalEnum goalId);
 const u16* Waves_GetFullPalette(enum GoalEnum goalId);
 const u32 Waves_GetGoal(enum GoalEnum goalId);
@@ -112,15 +114,17 @@ static u32 GetDonatePosition(void);
 static void ResetDonatePosition(void);
 static enum WavesMode Waves_GetMode(void);
 static void Waves_SetMode(enum WavesMode mode);
+static enum GoalEnum Waves_IncrementGoal(void);
+static enum GoalEnum Waves_DecrementGoal(void);
 static void Waves_DisplayGoalDesc(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_DisplayGoalPage(enum GoalEnum goalId);
-static void Waves_CalculateMoneyAmounts(struct MoneyStruct *moneyStruct);
+static void Waves_CalculateMoneyAmounts(void);
 static void Waves_DisplayGoalProgress(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
 static void Waves_PrintGoalDescText(enum WavesWindowsGoal windowId, enum GoalEnum goalId);
-static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
-static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
-static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
-static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct);
+static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId);
+static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId);
+static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId);
+static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId);
 static void Waves_MakeGoalSpritesInvisible(void);
 static void Waves_SaveSpriteId(enum WavesMode mode, enum GoalEnum goal, u32 id);
 static u32 Waves_GetSpriteId(enum WavesMode mode, enum GoalEnum goal);
@@ -426,7 +430,10 @@ static const struct WindowTemplate sWavesGoalWindows[] =
 
 static const u8 *const Waves_GetTitle(enum GoalEnum goal)
 {
-    return sWavesInformation[goal].title;
+    if (QuestMenu_GetSetSubquestState(QUEST_MUTUALAIDOUTREACH, FLAG_SET_COMPLETED, Waves_GetSubQuest(goal)) == FALSE)
+        return sWavesInformation[GOAL_NONE].desc;
+    else
+        return sWavesInformation[goal].title;
 }
 
 static const u8 *const Waves_GetDesc(enum GoalEnum goal)
@@ -437,6 +444,16 @@ static const u8 *const Waves_GetDesc(enum GoalEnum goal)
 static const u32* Waves_GetThumbnail(enum GoalEnum goal)
 {
     return sWavesInformation[goal].thumbnail;
+}
+
+static enum QuestIdList Waves_GetMainQuest(enum GoalEnum goal)
+{
+    return sWavesInformation[goal].relatedQuest;
+}
+
+static enum SubQuestDefines Waves_GetSubQuest(enum GoalEnum goal)
+{
+    return sWavesInformation[goal].relatedSubQuest;
 }
 
 static const u32* Waves_GetImage(enum GoalEnum goal)
@@ -540,9 +557,10 @@ static void Waves_PassiveIncrease(enum GoalEnum goalId)
         Waves_GetPlayerPercent(goalId),
         Waves_GetPassivePercent(goalId)
     };
-    u32 amount = (Random() % maxPassive) + percent[GOAL_PASSIVE_PERCENT];
+    u32 amount = (Random() % maxPassive);
+    u32 total = amount + percent[GOAL_PASSIVE_PERCENT];
 
-    if (amount > percent[GOAL_PLAYER_PERCENT])
+    if (total > percent[GOAL_PLAYER_PERCENT])
         return;
 
     Waves_IncreasePassivePercent(goalId,amount);
@@ -926,6 +944,7 @@ static void Task_WaitForFadeAndSwitch(u8 taskId)
 
 static void Waves_GoToPage(enum WavesMode mode)
 {
+    Waves_CalculateMoneyAmounts();
     Waves_MakeGoalSpritesInvisible();
     Waves_SetMode(mode);
     FreeAllWindowBuffers();
@@ -1060,12 +1079,20 @@ static void Waves_PrintMenuHeader(u32 windowId, enum GoalEnum goalId)
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
+static void Waves_BufferDetailHeaderText(u8* dest)
+{
+    enum GoalEnum goalId = GetGoalFromCurrentPosition();
+    StringCopy(gStringVar3,Waves_GetTitle(goalId));
+    u32 goal = Waves_GetGoal(goalId);
+    u32 cash = sWavesState->moneyStruct.playerCash + sWavesState->moneyStruct.passiveCash;
+    u32 remaining = (goal - cash);
+    ConvertIntToDecimalStringN(gStringVar1,remaining,STR_CONV_MODE_LEFT_ALIGN,CountDigits(remaining));
+    ConvertIntToDecimalStringN(gStringVar2,goal,STR_CONV_MODE_LEFT_ALIGN,CountDigits(goal));
+    StringExpandPlaceholders(dest,COMPOUND_STRING("{STR_VAR_3} - ¥{STR_VAR_1} to ¥{STR_VAR_2} goal"));
+}
+
 static void Waves_PrintHeaderText(u32 windowId, enum GoalEnum goalId)
 {
-    u32 fontId = FONT_WAVES_TITLE;
-    u32 x = 4;
-    u32 y = 0;
-
     switch (Waves_GetMode())
     {
         default:
@@ -1075,9 +1102,14 @@ static void Waves_PrintHeaderText(u32 windowId, enum GoalEnum goalId)
         case WAVES_MODE_GOAL_DETAIL:
         case WAVES_MODE_GOAL_DONATE_AMOUNT:
         case WAVES_MODE_GOAL_NOT_ENOUGH:
-            StringCopy(gStringVar4,Waves_GetTitle(goalId));
+            Waves_BufferDetailHeaderText(gStringVar4);
             break;
     }
+
+    u32 x = 4, y = 0;
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
+    u32 fontId = GetFontIdToFit(gStringVar3, FONT_WAVES_TITLE, 0, windowWidth);
+
     AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sWavesWindowFontColors[WAVES_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
@@ -1356,6 +1388,22 @@ static void Waves_SetMode(enum WavesMode mode)
     sWavesState->mode = mode;
 }
 
+static enum GoalEnum Waves_IncrementGoal(void)
+{
+    u32 original = Waves_GetMode();
+    u32 new = original + 1;
+
+    return (original == GOAL_LEGAL_DEFENSE) ? GOAL_FOOD_SECURITY : new;
+}
+
+static enum GoalEnum Waves_DecrementGoal(void)
+{
+    u32 original = Waves_GetMode();
+    u32 new = original - 1;
+
+    return (original == GOAL_FOOD_SECURITY) ? GOAL_LEGAL_DEFENSE: new;
+}
+
 static void Task_HandleInput(u8 taskId)
 {
     if (gPaletteFade.active)
@@ -1389,6 +1437,24 @@ static void DetailPage_HandleInput(u8 taskId)
         gTasks[taskId].func = Task_WaitForFadeAndSwitch;
         return;
     }
+
+    if (JOY_NEW(L_BUTTON))
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+        gTasks[taskId].data[0] = Waves_GetMode();
+        gTasks[taskId].data[1] = Waves_DecrementGoal();
+        gTasks[taskId].func = Task_WaitForFadeAndSwitch;
+        return;
+    }
+
+    if (JOY_NEW(R_BUTTON))
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+        gTasks[taskId].data[0] = Waves_GetMode();
+        gTasks[taskId].data[1] = Waves_IncrementGoal();
+        gTasks[taskId].func = Task_WaitForFadeAndSwitch;
+        return;
+    }
 }
 static void Donate_HandleInput(u8 taskId)
 {
@@ -1409,26 +1475,25 @@ static void Waves_DisplayGoalPage(enum GoalEnum goalId)
 
 static void Waves_DisplayGoalProgress(enum WavesWindowsGoal windowId, enum GoalEnum goalId)
 {
-    struct MoneyStruct moneyStruct = {0};
-    Waves_CalculateMoneyAmounts(&moneyStruct);
+    Waves_CalculateMoneyAmounts();
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalRaisedText(windowId,&moneyStruct);
+    Waves_PrintGoalRaisedText(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalPlayerText(windowId,&moneyStruct);
+    Waves_PrintGoalPlayerText(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalPassiveText(windowId,&moneyStruct);
+    Waves_PrintGoalPassiveText(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Waves_PrintGoalTotalText(windowId,&moneyStruct);
+    Waves_PrintGoalTotalText(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     windowId++;
 }
@@ -1458,86 +1523,76 @@ static void Waves_PrintGoalDescText(enum WavesWindowsGoal windowId, enum GoalEnu
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static void Waves_CalculateMoneyAmounts(struct MoneyStruct *moneyStruct)
+static void Waves_CalculateMoneyAmounts(void)
 {
     enum GoalEnum goal = GetGoalFromCurrentPosition();
-    moneyStruct->playerPercent =  Waves_GetPlayerPercent(goal);
-    moneyStruct->passivePercent =  Waves_GetPassivePercent(goal);
-    moneyStruct->goal = Waves_GetGoal(goal);
-    moneyStruct->playerCash =  moneyStruct->playerPercent * moneyStruct->goal / 100;
-    moneyStruct->passiveCash =  moneyStruct->passivePercent * moneyStruct->goal / 100;
+    sWavesState->moneyStruct.playerPercent =  Waves_GetPlayerPercent(goal);
+    sWavesState->moneyStruct.passivePercent =  Waves_GetPassivePercent(goal);
+    sWavesState->moneyStruct.goal = Waves_GetGoal(goal);
+    sWavesState->moneyStruct.playerCash =  sWavesState->moneyStruct.playerPercent * sWavesState->moneyStruct.goal / 100;
+    sWavesState->moneyStruct.passiveCash =  sWavesState->moneyStruct.passivePercent * sWavesState->moneyStruct.goal / 100;
 }
 
-static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
+static void Waves_PrintGoalRaisedText(enum WavesWindowsGoal windowId)
 {
     u32 fontId = FONT_OUTLINED;
-    u32 x = 8;
-    u32 y = 2;
+    u32 y = (TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_HEIGHT)) / 3) - 4;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    u32 cash = moneyStruct->playerCash + moneyStruct->passiveCash;
+    u32 cash = sWavesState->moneyStruct.playerCash + sWavesState->moneyStruct.passiveCash;
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
 
     ConvertIntToDecimalStringN(gStringVar1,cash,STR_CONV_MODE_LEFT_ALIGN,CountDigits(cash));
     StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("¥{STR_VAR_1} raised"));
+    u32 x = GetStringCenterAlignXOffset(fontId, gStringVar4, windowWidth) + TILE_WIDTH;
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
+static void Waves_PrintGoalPlayerText(enum WavesWindowsGoal windowId)
 {
-    u32 money = moneyStruct->playerPercent * 10000;
-    Waves_PutMeterTiles(money,0,windowId);
-    return;
+    u32 x = TILE_WIDTH;
+    u32 y = 0;
 
-    u32 fontId = FONT_NARROW;
-    u32 x = 8;
-    u32 y = 2;
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
+    windowWidth -= (2 * TILE_WIDTH);
+
+    u32 oldFontId = FONT_NARROW;
+    u32 fontId = GetFontIdToFit(gStringVar3, oldFontId, GetFontAttribute(oldFontId, FONTATTR_LETTER_SPACING), windowWidth);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    u32 cash = moneyStruct->playerCash;
+    u32 cash = sWavesState->moneyStruct.playerCash;
 
     ConvertIntToDecimalStringN(gStringVar1,cash,STR_CONV_MODE_LEFT_ALIGN,CountDigits(cash));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{PLAYER} raised ¥{STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{PLAYER}: ¥{STR_VAR_1}"));
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId)
+{
+    u32 x = TILE_WIDTH;
+    u32 y = 0;
+
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
+    windowWidth -= (2 * TILE_WIDTH);
+
+    u32 oldFontId = FONT_NARROW;
+    u32 fontId = GetFontIdToFit(gStringVar3, oldFontId, GetFontAttribute(oldFontId, FONTATTR_LETTER_SPACING), windowWidth);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 cash = sWavesState->moneyStruct.passiveCash;
+
+    ConvertIntToDecimalStringN(gStringVar1,cash,STR_CONV_MODE_LEFT_ALIGN,CountDigits(cash));
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Community: ¥{STR_VAR_1}"));
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static void Waves_PrintGoalPassiveText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
+static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId)
 {
-    u32 money = moneyStruct->passivePercent * 10000;
-    Waves_PutMeterTiles(money,0,windowId);
-    return;
-
-    u32 fontId = FONT_NARROW;
-    u32 x = 8;
-    u32 y = 2;
-    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    u32 cash = moneyStruct->passiveCash;
-
-    ConvertIntToDecimalStringN(gStringVar1,cash,STR_CONV_MODE_LEFT_ALIGN,CountDigits(cash));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Others raised ¥{STR_VAR_1}"));
-
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
-}
-
-static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId, struct MoneyStruct *moneyStruct)
-{
-    u32 money = (moneyStruct->passivePercent + moneyStruct->playerPercent) * 10000;
-    Waves_PutMeterTiles(money,0,windowId);
-    return;
-
-    u32 fontId = FONT_NARROW;
-    u32 x = 8;
-    u32 y = 2;
-    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    u32 cash = moneyStruct->playerCash + moneyStruct->passiveCash;
-
-    ConvertIntToDecimalStringN(gStringVar1,cash,STR_CONV_MODE_LEFT_ALIGN,CountDigits(cash));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Total raised ¥{STR_VAR_1}"));
-
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
+    u32 windowWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
+    u32 money = (sWavesState->moneyStruct.passivePercent + sWavesState->moneyStruct.playerPercent) * 10000;
+    Waves_PutMeterTiles(money,(windowWidth+4),windowId);
 }
 
 static void Waves_MakeGoalSpritesInvisible(void)
