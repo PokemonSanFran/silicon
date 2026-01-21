@@ -108,7 +108,7 @@ static void SpriteCB_MoveGoalCursor(struct Sprite *sprite);
 static void SpriteCB_HideThumbnails(struct Sprite *sprite);
 static void Waves_PrintCursor(void);
 static void Waves_PrintCardMeter(enum GoalEnum goalId);
-static void Waves_PutMeterTiles(u32 playerAmount, u32 passiveAmount, u32 offset, u32 windowId);
+static void Waves_PutMeterTiles(enum GoalEnum goalId, u32 playerAmount, u32 passiveAmount, u32 offset, u32 windowId);
 static void SetCursorPosition(enum WavesCursorPosition position);
 static enum WavesCursorPosition GetCursorPosition(void);
 static void ResetCursorPosition(void);
@@ -136,46 +136,10 @@ static void Waves_DrawGoalImage(void);
 static void Waves_PrintGoalImage(u32 windowId);
 static void Waves_LoadFullImagePalette(enum GoalEnum goalId);
 
-static const u32* const meterPassiveLeftLUT[] =
-{
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/leftGoalBar7.4bpp.smol"),
-};
+static const u8 wavesSinglePixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/bar.4bpp");
+static const u8 wavesEmptyPixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/emptyBar.4bpp");
 
-static const u32* const meterPassiveCenterLUT[] =
-{
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar7.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/centerGoalBar8.4bpp.smol"),
-};
-
-static const u32* const meterPassiveRightLUT[] =
-{
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/passive/rightGoalBar7.4bpp.smol"),
-};
-
-static const u32* const meterPlayerLeftLUT[] =
+static const u32* const meterLeftLUT[] =
 {
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.4bpp.smol"),
@@ -188,7 +152,7 @@ static const u32* const meterPlayerLeftLUT[] =
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar7.4bpp.smol"),
 };
 
-static const u32* const meterPlayerCenterLUT[] =
+static const u32* const meterCenterLUT[] =
 {
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar0.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar1.4bpp.smol"),
@@ -201,7 +165,7 @@ static const u32* const meterPlayerCenterLUT[] =
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar8.4bpp.smol"),
 };
 
-static const u32* const meterPlayerRightLUT[] =
+static const u32* const meterRightLUT[] =
 {
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.4bpp.smol"),
     (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.4bpp.smol"),
@@ -1290,42 +1254,55 @@ static void Waves_PrintCardMeter(enum GoalEnum goalId)
     if (goalId < GOAL_SOCIAL_HOUSING)
         offset += TILE_WIDTH;
 
-    Waves_PutMeterTiles(playerAmount, passiveAmount ,offset,windowId);
+    Waves_PutMeterTiles(goalId, playerAmount, passiveAmount ,offset,windowId);
 }
 
-static void Waves_PutMeterTiles(u32 playerAmount, u32 passiveAmount, u32 offset, u32 windowId)
+static void Waves_PutMeterTiles(enum GoalEnum goalId, u32 playerAmount, u32 passiveAmount, u32 offset, u32 windowId)
 {
-    u32 factor = 0;
-    u32 size = 0;
-    playerAmount *= 10000;
     passiveAmount *= 10000;
-    u32 amount = playerAmount + passiveAmount;
+    u32 factor = 0, size = 0;
+    bool32 isLandingPage = (Waves_GetMode() == WAVES_MODE_LANDING_PAGE);
+    u32 x = isLandingPage ? 0 : TILE_HEIGHT * 4;
 
-    while (factor < (ARRAY_COUNT(meterPlayerLeftLUT)-1) && amount >= WAVES_METER_FACTOR)
+    while (factor < (ARRAY_COUNT(meterLeftLUT)-1) && passiveAmount >= WAVES_METER_FACTOR)
     {
         factor++;
-        amount -= WAVES_METER_FACTOR;
+        passiveAmount -= WAVES_METER_FACTOR;
     }
-    CopyToWindowPixelBuffer(windowId,(const void*)meterPlayerLeftLUT[factor], size, offset++);
+    CopyToWindowPixelBuffer(windowId,(const void*)meterLeftLUT[factor], size, offset++);
+    x += factor;
 
     for (u32 iteration = 0; iteration < WAVES_METER_CENTER_SECTIONS; iteration++)
     {
         factor = 0;
-        while (factor < (ARRAY_COUNT(meterPlayerCenterLUT)-1) && amount >= WAVES_METER_FACTOR)
+        while (factor < (ARRAY_COUNT(meterCenterLUT)-1) && passiveAmount >= WAVES_METER_FACTOR)
         {
             factor++;
-            amount -= WAVES_METER_FACTOR;
+            passiveAmount -= WAVES_METER_FACTOR;
         }
-        CopyToWindowPixelBuffer(windowId,(const void*)meterPlayerCenterLUT[factor], size, (offset + iteration));
+        CopyToWindowPixelBuffer(windowId,(const void*)meterCenterLUT[factor], size, (offset + iteration));
+        x += factor;
     }
 
     factor = 0;
-    while (factor < (ARRAY_COUNT(meterPlayerRightLUT)-1) && amount >= WAVES_METER_FACTOR)
+    while (factor < (ARRAY_COUNT(meterRightLUT)-1) && passiveAmount >= WAVES_METER_FACTOR)
     {
         factor++;
-        amount -= WAVES_METER_FACTOR;
+        passiveAmount -= WAVES_METER_FACTOR;
     }
-    CopyToWindowPixelBuffer(windowId, meterPlayerRightLUT[factor], size, offset + WAVES_METER_CENTER_SECTIONS);
+    CopyToWindowPixelBuffer(windowId, meterRightLUT[factor], size, offset + WAVES_METER_CENTER_SECTIONS);
+    x += factor;
+
+    u32 heightFactor = (goalId < GOAL_SOCIAL_HOUSING) ? 6 : 5;
+    u32 y = isLandingPage ? (TILE_HEIGHT * heightFactor) : TILE_HEIGHT;
+    s32 playerPercent = playerAmount * 10000;
+
+    while (playerPercent > 0)
+    {
+        BlitBitmapToWindow(windowId, wavesSinglePixel, x, y, TILE_WIDTH, TILE_HEIGHT);
+        x++;
+        playerPercent -= WAVES_METER_FACTOR;
+    }
 }
 
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
@@ -1627,7 +1604,7 @@ static void Waves_PrintGoalTotalText(enum WavesWindowsGoal windowId)
     u32 windowWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
     u32 playerAmount = sWavesState->moneyStruct.playerPercent;
     u32 passiveAmount = sWavesState->moneyStruct.passivePercent;
-    Waves_PutMeterTiles(playerAmount, passiveAmount, (windowWidth+4),windowId);
+    Waves_PutMeterTiles(GOAL_NONE, playerAmount, passiveAmount, (windowWidth+4),windowId);
 }
 
 static void Waves_MakeGoalSpritesInvisible(void)
