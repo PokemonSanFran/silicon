@@ -2407,20 +2407,44 @@ u8 GetLeftSideStairsDirection(u8 direction)
 
 bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u8 direction)
 {
-    #if SLOW_MOVEMENT_ON_STAIRS == TRUE
+    // Start pathfinder
+    u8 nextBehavior = 0;
+    //#if SLOW_MOVEMENT_ON_STAIRS == TRUE
+    if (SLOW_MOVEMENT_ON_STAIRS && direction == DIR_SOUTH)
+    {
+    // End pathfinder
         s16 x = objectEvent->currentCoords.x;
         s16 y = objectEvent->currentCoords.y;
+        MoveCoords(DIR_SOUTH, &x, &y);
+        nextBehavior = MapGridGetMetatileBehaviorAt(x,y);
+    }
+    return ObjectMovingOnRockStairsWithBehaviors(objectEvent, direction, objectEvent->currentMetatileBehavior, nextBehavior);
+}
+
+// Start pathfinder
+bool8 ObjectMovingOnRockStairsWithBehaviors(struct ObjectEvent *objectEvent, u8 direction,  u8 currentBehavior, u8 nextBehavior)
+{
+    #if SLOW_MOVEMENT_ON_STAIRS == TRUE
+// End pathfinder
 
         if (IsFollowerVisible() && GetFollowerObject() != NULL && (objectEvent->isPlayer || objectEvent->localId == OBJ_EVENT_ID_FOLLOWER))
             return FALSE;
 
         switch (direction)
         {
+        // Start pathfinder
+        /*
         case DIR_NORTH:
             return MetatileBehavior_IsRockStairs(MapGridGetMetatileBehaviorAt(x,y));
         case DIR_SOUTH:
             MoveCoords(DIR_SOUTH, &x, &y);
             return MetatileBehavior_IsRockStairs(MapGridGetMetatileBehaviorAt(x,y));
+        */
+        case DIR_NORTH:
+            return MetatileBehavior_IsRockStairs(currentBehavior);
+        case DIR_SOUTH:
+            return MetatileBehavior_IsRockStairs(nextBehavior);
+        // End pathfinder
         case DIR_WEST:
         case DIR_EAST:
         case DIR_NORTHEAST:

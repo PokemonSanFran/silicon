@@ -185,7 +185,10 @@ u8 GetWalkInPlaceFastMovementAction(u32);
 u8 GetWalkInPlaceNormalMovementAction(u32);
 u8 GetWalkInPlaceSlowMovementAction(u32);
 u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir);
-u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, bool32 addCoords);
+// Start pathfinder
+//u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, bool32 addCoords);
+u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, bool32 addCoords);
+// End pathfinder
 void MoveCoords(u8 direction, s16 *x, s16 *y);
 bool8 ObjectEventIsHeldMovementActive(struct ObjectEvent *objectEvent);
 u8 ObjectEventClearHeldMovementIfFinished(struct ObjectEvent *objectEvent);
@@ -519,5 +522,10 @@ bool8 PlayerIsUnderWaterfall(struct ObjectEvent *objectEvent);
 
 const struct SpritePalette *GetObjectEventSpritePaletteByTag(u16 tag); // startMenu
 u8 GetObjectEventApricornTreeId(u8 objectEventId);
+
+// Start pathfinder
+u8 GetCollisionWithBehaviorsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, u32 dir, u8 currentBehavior, u8 nextBehavior);
+u8 GetLedgeJumpDirectionWithBehavior(u8 direction, u8 nextBehavior);
+// End pathfinder
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H
