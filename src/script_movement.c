@@ -2,6 +2,7 @@
 #include "script_movement.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
+#include "malloc.h" // pathfinder
 #include "task.h"
 #include "util.h"
 #include "constants/event_objects.h"
@@ -222,7 +223,10 @@ static void ScriptMovement_TakeStep(u8 taskId, u8 moveScrId, u8 objEventId, cons
         // put that follower into a pokeball
         // (sTimer helps limit this expensive check to once per step)
         if (OW_FOLLOWERS_SCRIPT_MOVEMENT && gSprites[obj->spriteId].sTimer == 1
-         && (objEventId = GetObjectObjectCollidesWith(obj, 0, 0, TRUE)) < OBJECT_EVENTS_COUNT
+            // Start pathfinder
+         //&& (objEventId = GetObjectObjectCollidesWith(obj, 0, 0, TRUE)) < OBJECT_EVENTS_COUNT
+           && (objEventId = GetObjectObjectCollidesWith(obj, 0, 0, obj->currentElevation, TRUE)) < OBJECT_EVENTS_COUNT
+            // End pathfinder
             // switch `obj` to follower
          && ((obj = &gObjectEvents[objEventId])->movementType == MOVEMENT_TYPE_FOLLOW_PLAYER)
          && gSprites[obj->spriteId].sTypeFuncId != 0)
@@ -239,6 +243,21 @@ static void ScriptMovement_TakeStep(u8 taskId, u8 moveScrId, u8 objEventId, cons
         SetMovementScriptFinished(taskId, moveScrId);
         FreezeObjectEvent(&gObjectEvents[objEventId]);
     }
+    // Start pathfinder
+    else if (nextMoveActionId == MOVEMENT_ACTION_GENERATED_END)
+    {
+        SetMovementScriptFinished(taskId, moveScrId);
+        FreezeObjectEvent(&gObjectEvents[objEventId]);
+
+        u8 *startPtr = (u8*)movementScript;
+        while (*startPtr != MOVEMENT_ACTION_GENERATED_BEGIN)
+            startPtr--;
+
+        Free(startPtr);
+        static const u8 dummyMovement = MOVEMENT_ACTION_STEP_END;
+        SetMovementScript(moveScrId, &dummyMovement);
+    }
+    // End pathfinder
     else
     {
         if (!ObjectEventSetHeldMovement(&gObjectEvents[objEventId], nextMoveActionId))

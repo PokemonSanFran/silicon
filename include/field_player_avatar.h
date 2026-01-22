@@ -79,4 +79,5 @@ bool32 CanTriggerSpinEvolution();
 
 void SpawnParkRanger(void); // fishingUpdate
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender); // playerCustom
+bool8 ObjectMovingOnRockStairsWithBehaviors(struct ObjectEvent *objectEvent, u8 direction, u8 currentBehavior, u8 nextBehavior); // pathfinder
 #endif // GUARD_FIELD_PLAYER_AVATAR_H
