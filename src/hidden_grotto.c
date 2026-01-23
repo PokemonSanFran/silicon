@@ -79,28 +79,30 @@ const u32 routeGrottoArray[NUM_GROTTO_ROUTES][2]=
     {MAP_ROUTE14,MAP_ROUTE14_GROTTO},
 };
 
-void HiddenGrotto_LoadDiscoveredGrottoText(void){
-    u16 randomDialogIndex = Random() % (ARRAY_COUNT(discoveredGrottoTextArray));
-
+void HiddenGrotto_LoadDiscoveredGrottoText(void)
+{
+    u32 randomDialogIndex = Random() % (ARRAY_COUNT(discoveredGrottoTextArray));
     StringCopy(gStringVar1,discoveredGrottoTextArray[randomDialogIndex]);
 }
 
-void HiddenGrotto_LoadGrottoAndWarpPlayer(void){
-    u8 i;
+void HiddenGrotto_LoadGrottoAndWarpPlayer(void)
+{
     u32 grottoMapGroup = gSaveBlock1Ptr->location.mapGroup;
     u32 grottoMapNum = gSaveBlock1Ptr->location.mapNum;
 
-    for (i = 0; i < ARRAY_COUNT(routeGrottoArray); i++){
-        if (routeGrottoArray[i][0] == (grottoMapNum | (grottoMapGroup << 8))){
-            grottoMapGroup = ((routeGrottoArray[i][1]) >> 8);
-            grottoMapNum = ((routeGrottoArray[i][1]) & 0xFF);
-            break;
-        }
+    for (u32 i = 0; i < ARRAY_COUNT(routeGrottoArray); i++)
+    {
+        if (routeGrottoArray[i][0] != (grottoMapNum | (grottoMapGroup << 8)))
+            continue;
+
+        grottoMapGroup = ((routeGrottoArray[i][1]) >> 8);
+        grottoMapNum = ((routeGrottoArray[i][1]) & 0xFF);
     }
     HiddenGrotto_WarpPlayerToGrotto(grottoMapGroup,grottoMapNum);
 }
 
-void HiddenGrotto_WarpPlayerToGrotto(u32 grottoMapGroup, u32 grottoMapNum){
+void HiddenGrotto_WarpPlayerToGrotto(u32 grottoMapGroup, u32 grottoMapNum)
+{
     SetWarpDestinationToMapWarp(grottoMapGroup,grottoMapNum,0);
 	DoWarp();
 	ResetInitialPlayerAvatarState();
