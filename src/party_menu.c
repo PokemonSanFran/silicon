@@ -2038,6 +2038,30 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
     }
 }
 
+static void Task_ReturnToChooseMon(u8 taskId)
+{
+    //BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_HandleChooseMonInput;
+
+    /*if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        ClearStdWindowAndFrameToTransparent(WIN_MSG, FALSE);
+        ClearWindowTilemap(WIN_MSG);
+        if (MenuHelpers_IsLinkActive() == TRUE)
+        {
+            gTasks[taskId].func = Task_WaitForLinkAndReturnToChooseMon;
+        }
+        else
+        {
+            if (gPartyMenu.action == PARTY_ACTION_SEND_MON_TO_BOX)
+                DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON_FOR_BOX);
+            else
+                DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+            gTasks[taskId].func = Task_HandleChooseMonInput;
+        }
+    }*/
+}
+
 static void DisplayGaveHeldItemMessage(struct Pokemon *mon, u16 item, bool8 keepOpen, u8 unused)
 {
     GetMonNickname(mon, gStringVar1);
@@ -4933,6 +4957,8 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         cannotUse = ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
     }
 
+    DebugPrintf("ItemUseCB_Medicine %d Test", item);
+
     if (cannotUse != FALSE)
     {
         gPartyMenuUseExitCallback = FALSE;
@@ -5063,7 +5089,10 @@ void Task_AbilityCapsule(u8 taskId)
     case 5:
         SetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_ClosePartyMenu;
+        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = Task_ClosePartyMenu;
         break;
     }
 }
@@ -5150,7 +5179,10 @@ void Task_AbilityPatch(u8 taskId)
     case 5:
         SetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_ClosePartyMenu;
+        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = Task_ClosePartyMenu;
         break;
     }
 }
@@ -5251,7 +5283,11 @@ void Task_Mint(u8 taskId)
         SetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE, &tNewNature);
         CalculateMonStats(&gPlayerParty[tMonId]);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_ClosePartyMenu;
+        
+        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = Task_ClosePartyMenu;
         break;
     }
 }
@@ -5341,7 +5377,10 @@ void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task)
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = task;
+        if (CheckBagHasItem(item, 1))
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = task;
     }
     else
     {
@@ -5363,7 +5402,10 @@ void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task)
         }
         DisplayPartyMenuMessage(gStringVar4, TRUE);
         ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = task;
+        if (CheckBagHasItem(item, 1))
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = task;
     }
 }
 
@@ -5523,7 +5565,7 @@ static void TryUseItemOnMove(u8 taskId)
             PlaySE(SE_SELECT);
             DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
             ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         }
         else
         {
@@ -5535,7 +5577,10 @@ static void TryUseItemOnMove(u8 taskId)
             GetMedicineItemEffectMessage(item, 0);
             DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            else
+                gTasks[taskId].func = Task_ClosePartyMenuAfterText;
         }
     }
 }
@@ -5587,7 +5632,7 @@ static void DisplayLearnMoveMessage(const u8 *str)
 static void DisplayLearnMoveMessageAndClose(u8 taskId, const u8 *str)
 {
     DisplayLearnMoveMessage(str);
-    gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
 }
 
 // move[1] doesn't use constants cause I don't know if it's actually a move ID storage
@@ -5653,6 +5698,7 @@ static void Task_DoLearnedMoveFanfareAfterText(u8 taskId)
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
         PlayFanfare(MUS_LEVEL_UP);
+        DisplayPartyPokemonDescriptionData(gPartyMenu.slotId, PARTYBOX_DESC_LEARNED);
         gTasks[taskId].func = Task_LearnNextMoveOrClosePartyMenu;
     }
 }
@@ -5669,7 +5715,7 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
         {
             if (gPartyMenu.learnMoveState == 2) // never occurs
                 gSpecialVar_Result = TRUE;
-            Task_ClosePartyMenu(taskId);
+            Task_ReturnToChooseMonAfterText(taskId);
         }
     }
 }

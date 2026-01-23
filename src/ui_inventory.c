@@ -1354,13 +1354,9 @@ static u32 GetHPEggCyclePercent(u32 partyIndex)
     struct Pokemon *mon = &gPlayerParty[partyIndex];
 
     if (!GetMonData(mon, MON_DATA_IS_EGG))
-    {
         return ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon,MON_DATA_MAX_HP)));
-    }
     else
-    {
         return ((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon,MON_DATA_SPECIES)].eggCycles));
-    }
 }
 
 static void UpdateEggIconFrame(u8 SpriteID){
@@ -3401,6 +3397,7 @@ static void Task_ItemUseOnField(u8 taskId)
         }
         else
         {
+            //DebugPrintf("Task_ItemUseOnField %d Test", itemId);
             ScheduleBgCopyTilemapToVram(0);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_UseItem;

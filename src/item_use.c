@@ -1549,10 +1549,14 @@ static void ItemUseOnFieldCB_Honey(u8 taskId)
 
 void ItemUseOutOfBattle_Honey(u8 taskId)
 {
-    sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
+    //ItemUseOutOfBattle_SweetScentTool
+    sItemUseOnFieldCB = ItemUseOnFieldCB_SweetScentTool;
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    SetUpItemUseOnFieldCallback(taskId);
+    /*sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
     gFieldCallback = FieldCB_UseItemOnField;
     gBagMenu->newScreenCallback = CB2_ReturnToField;
-    Task_FadeAndCloseBagMenu(taskId);
+    Task_FadeAndCloseBagMenu(taskId);*/
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)
@@ -1845,8 +1849,8 @@ void ItemUseOnFieldCB_TeleportTool(u8 taskId)
 }
 void ItemUseOutOfBattle_SweetScentTool(u8 taskId)
 {
-        sItemUseOnFieldCB = ItemUseOnFieldCB_SweetScentTool;
-        SetUpItemUseOnFieldCallback(taskId);
+    sItemUseOnFieldCB = ItemUseOnFieldCB_SweetScentTool;
+    SetUpItemUseOnFieldCallback(taskId);
 }
 static void ItemUseOnFieldCB_SweetScentTool(u8 taskId)
 {
