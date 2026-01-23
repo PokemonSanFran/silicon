@@ -3453,7 +3453,7 @@ void ItemUseInBattle_NewBagMenu(u8 taskId)
 {
     if (CannotUseItemsInBattle(gSpecialVar_ItemId, NULL))
     {
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
     }
     else
     {
@@ -3489,6 +3489,12 @@ void ItemUseInBattle_UseTMHM(u8 taskId)
     SetMainCallback2(CB2_ShowPartyMenuForItemUse);
 }
 
+void ItemUseInBattle_PartyMenuChooseMove_New(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_BattleChooseMove;
+    ItemUseInBattle_ShowPartyMenu(taskId);
+}
+
 static void Task_ItemUseOnBattle(u8 taskId)
 {
     // Safety check
@@ -3503,12 +3509,12 @@ static void Task_ItemUseOnBattle(u8 taskId)
         sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
     }
     else{
-        if (type == ITEM_USE_BAG_MENU) //Working
+        if (type == ITEM_USE_BAG_MENU)
             ItemUseInBattle_NewBagMenu(taskId);
         else if (type == ITEM_USE_PARTY_MENU)
             ItemUseInBattle_PartyMenu_New(taskId);
         else if (type == ITEM_USE_PARTY_MENU_MOVES)
-            ItemUseInBattle_PartyMenuChooseMove(taskId);
+            ItemUseInBattle_PartyMenuChooseMove_New(taskId);
 
         sMenuDataPtr->itemIdxPickMode = 0;
     }
