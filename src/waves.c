@@ -15,6 +15,7 @@
 #include "field_weather.h"
 #include "options_visual.h"
 #include "malloc.h"
+#include "money.h"
 #include "random.h"
 #include "waves.h"
 #include "palette.h"
@@ -115,6 +116,7 @@ static void ResetCursorPosition(void);
 static void SetDonatePosition(u32 position);
 static u32 GetDonatePosition(void);
 static void ResetDonatePosition(void);
+static void ChangeDonatePosition(enum WavesMovement movement);
 static enum WavesMode Waves_GetMode(void);
 static void Waves_SetMode(enum WavesMode mode);
 static enum GoalEnum Waves_IncrementGoal(void);
@@ -135,9 +137,11 @@ static void Waves_ResetAllSpriteIds(void);
 static void Waves_DrawGoalImage(void);
 static void Waves_PrintGoalImage(u32 windowId);
 static void Waves_LoadFullImagePalette(enum GoalEnum goalId);
+static void Task_FlashDonation(u8 taskId);
 
 static const u8 wavesSinglePixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/bar.4bpp");
 static const u8 wavesEmptyPixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/emptyBar.4bpp");
+static const u8 wavesDonatePixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/donateBar.4bpp");
 
 static const u32* const meterLeftLUT[] =
 {
@@ -1303,6 +1307,8 @@ static void Waves_PutMeterTiles(enum GoalEnum goalId, u32 playerAmount, u32 pass
         x++;
         playerPercent -= WAVES_METER_FACTOR;
     }
+
+    sWavesState->x = x;
 }
 
 static u32 ConvertGoalIdToWindowId(enum GoalEnum goalId)
@@ -1347,6 +1353,7 @@ static void Waves_PrintCardText(enum GoalEnum goalId)
 
 static void Debug_LoadUpGoals(void)
 {
+    SetMoney(&gSaveBlock1Ptr->money, MAX_MONEY);
     for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
     {
         u32 player[GOAL_COUNT] = {42,22,32,49,2,12};
@@ -1385,6 +1392,31 @@ static u32 GetDonatePosition(void)
 static void ResetDonatePosition(void)
 {
     SetDonatePosition(0);
+}
+
+static void ChangeDonatePosition(enum WavesMovement movement)
+{
+    u32 current = GetDonatePosition();
+    s32 newCurrent = current + movement;
+    u32 goal = Waves_GetGoal(GetGoalFromCurrentPosition());
+    u32 raised = sWavesState->moneyStruct.playerCash + sWavesState->moneyStruct.passiveCash;
+    u32 remaining = (goal - raised);
+    u32 proposedDonate = (newCurrent + 1) * (goal / 100);
+
+    if (newCurrent < 0)
+        return;
+
+    if (!IsEnoughMoney(&gSaveBlock1Ptr->money,proposedDonate))
+        return;
+
+    if (proposedDonate > remaining)
+        return;
+
+    SetDonatePosition(newCurrent);
+}
+
+static void DecreaseDonatePosition(void)
+{
 }
 
 static enum WavesMode Waves_GetMode(void)
@@ -1465,11 +1497,44 @@ static void DetailPage_HandleInput(u8 taskId)
         gTasks[taskId].func = Task_WaitForFadeAndSwitch;
         return;
     }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        CreateTask(Task_FlashDonation,0);
+        Waves_SetMode(WAVES_MODE_GOAL_DONATE_AMOUNT);
+        return;
+    }
 }
+
 static void Donate_HandleInput(u8 taskId)
 {
-    return;
+    if (JOY_NEW(B_BUTTON))
+    {
+        DestroyTask(FindTaskIdByFunc(Task_FlashDonation));
+        Waves_SetMode(WAVES_MODE_GOAL_DETAIL);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_DOWN) || JOY_HELD(DPAD_LEFT) || JOY_HELD(DPAD_DOWN))
+    {
+        ChangeDonatePosition(WAVES_DECREMENT);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_RIGHT) || JOY_NEW(DPAD_UP) || JOY_HELD(DPAD_RIGHT) || JOY_HELD(DPAD_UP))
+    {
+        ChangeDonatePosition(WAVES_INCREMENT);
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        DestroyTask(FindTaskIdByFunc(Task_FlashDonation));
+        Waves_SetMode(WAVES_MODE_GOAL_NOT_ENOUGH);
+        return;
+    }
 }
+
 static void NotEnough_HandleInput(u8 taskId)
 {
     return;
@@ -1661,3 +1726,32 @@ static void Waves_LoadFullImagePalette(enum GoalEnum goalId)
     LoadPalette(palette, WAVES_PALETTE_FULL_SLOT, PLTT_SIZE_4BPP);
 }
 
+static void Task_FlashDonation(u8 taskId)
+{
+    u32 donatePosition = GetDonatePosition() + 1;
+    if (donatePosition == gTasks[taskId].data[2])
+        return;
+
+    gTasks[taskId].data[2] = donatePosition;
+
+    enum WavesWindowsGoal windowId = WIN_WAVES_GOAL_TOTAL;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Waves_PrintGoalTotalText(windowId);
+
+    u32 totalGoal = Waves_GetGoal(GetGoalFromCurrentPosition());
+    u32 x = sWavesState->x;
+    u32 y = TILE_HEIGHT;
+
+    u32 goalAmount = GetDonatePosition() + 1;
+    s32 meterAmount = goalAmount * 10000;
+
+    while (meterAmount >= WAVES_METER_FACTOR)
+    {
+        BlitBitmapToWindow(windowId,wavesDonatePixel,x,y,1,TILE_HEIGHT);
+        meterAmount -= WAVES_METER_FACTOR;
+        x++;
+    }
+
+    sWavesState->x = x;
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}

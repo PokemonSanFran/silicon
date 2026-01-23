@@ -35,6 +35,7 @@ struct WavesState
     u8 spriteId[WAVES_MODE_MAIN_COUNT][GOAL_COUNT];
     u8 cursorSpriteId;
     struct MoneyStruct moneyStruct;
+    u8 x;
 };
 
 void CB2_WavesFromStartMenu(void);
