@@ -49,6 +49,9 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect experience
 {
     u32 item;
 
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Level
+
     PARAMETRIZE { item = ITEM_LUCKY_EGG; }
     PARAMETRIZE { item = ITEM_NONE; }
 
