@@ -134,6 +134,7 @@ void ItemUseInBattle_UseTMHM(u8 taskId);
 void ItemUseOutOfBattle_Repel_New(u8 taskId);
 bool8 shouldShowRegisteredItems(void);
 void ForceReloadInventory(void);
+static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message);
 
 //bag sort
 static void SortItemsInInventory(u8 pocket, u8 type);
@@ -2718,6 +2719,15 @@ static void Inventory_RemoveMenu(u8 taskId)
     gTasks[taskId].func = Task_MenuMain;
 }
 
+static void Inventory_RemoveMenu_AndShowMessage(u8 taskId)
+{
+    u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
+    RemoveWindow(windowId);
+    sInventoryListMenu->inventoryMenuWindowId = WINDOW_NONE;
+    Inventory_PrintToAllWindows();
+    gTasks[taskId].func = Task_MenuMain;
+}
+
 static u32 Inventory_CalculateBaseblock(void)
 {
     u32 lastWindow, baseBlock;
@@ -2882,10 +2892,7 @@ static void Inventory_HandleAButtonPress(u8 taskId)
             break;
         case INVENTORY_MODE_TOSS_CONFIRMATION:
             if (Inventory_GetMenuPosition() == 1)
-            {
                 RemoveInventoryItem(gSaveBlock3Ptr->InventoryData.pocketNum, gSaveBlock3Ptr->InventoryData.itemIdx, sMenuDataPtr->numItemsToToss);
-                ForceReloadInventory();
-            }
             Inventory_RemoveMenu(taskId);
             Inventory_PrintToAllWindows();
             sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
@@ -3309,13 +3316,12 @@ void Task_UseItem(u8 taskId){
 
 static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message){
     sMenuDataPtr->currentSelectMode = message;
-    sMenuDataPtr->itemIdxPickMode = 0;
-    Inventory_PrintToAllWindows();
-    gTasks[taskId].func = Task_MenuMain;
+    Inventory_RemoveMenu_AndShowMessage(taskId);
 }
 
 void ItemUseOutOfBattle_Repel_New(u8 taskId)
 {
+    u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
     u16 ItemId = gSpecialVar_ItemId;
     u16 LastRepelUsed = VarGet(VAR_LAST_REPEL_LURE_USED);
     u16 remainingSteps = VarGet(VAR_REPEL_STEP_COUNT);
@@ -3348,14 +3354,10 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId)
         PlaySE(SE_REPEL);
         VarSet(VAR_LAST_REPEL_LURE_USED, ItemId);
         VarSet(VAR_REPEL_STEP_COUNT, remainingSteps);
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_USED_ITEM;
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_USED_ITEM);
     }
     else
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
-
-    sMenuDataPtr->itemIdxPickMode = 0;
-    Inventory_PrintToAllWindows();
-    gTasks[taskId].func = Task_MenuMain;
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
 }
 
 static bool8 CanUseSpecificItem(u16 item){
@@ -3446,7 +3448,7 @@ void ItemUseInBattle_NewBagMenu(u8 taskId)
 {
     if (CannotUseItemsInBattle(gSpecialVar_ItemId, NULL))
     {
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_TOSS_ITEM;
+        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
     }
     else
     {
@@ -3493,7 +3495,7 @@ static void Task_ItemUseOnBattle(u8 taskId)
 
     if (!CanUseBagItems(itemId) || !IsPlayerAllowedToUseHealingItems(itemId, FALSE, TRUE, FALSE))
     {
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_TOSS_ITEM;
+        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
     }
     else{
         if (type == ITEM_USE_BAG_MENU) //Working
@@ -3795,7 +3797,12 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MESSAGE_CANT_USE_ITEM:
                 case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
                 case INVENTORY_MESSAGE_SORTED_ITEMS_BY:
+                    sMenuDataPtr->itemIdxPickMode = 0;
+                    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+                    shouldOpenMenu = FALSE;
+                    break;
                 case INVENTORY_MESSAGE_USED_ITEM:
+                    RemoveInventoryItem(gSaveBlock3Ptr->InventoryData.pocketNum, gSaveBlock3Ptr->InventoryData.itemIdx, 1);
                     sMenuDataPtr->itemIdxPickMode = 0;
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                     shouldOpenMenu = FALSE;
