@@ -66,8 +66,10 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect experience
         MESSAGE("Wobbuffet can't use items anymore!");
         MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("The wild Caterpie fainted!");
+        results[i].exp = 0; // siliconExpTest fix
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
+        DebugPrintf("item %d | exp 0 %d | exp 1 %d",item,results[0],results[1]);
         EXPECT_MUL_EQ(results[1].exp, Q_4_12(1.5), results[0].exp);
     }
 }
