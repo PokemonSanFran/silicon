@@ -182,6 +182,8 @@ static void Inventory_CancelFavorite(u8 taskId);
 static bool8 Inventory_LastItemInMenu(void);
 static void Inventory_TurnOff(u8 taskId);
 
+void WaitSound(void);
+
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[INVENTORY_BG_COUNT] =
 {
@@ -3319,6 +3321,10 @@ static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message){
     Inventory_RemoveMenu_AndShowMessage(taskId);
 }
 
+void WaitSound(void){
+    while (IsSEPlaying());
+}
+
 void ItemUseOutOfBattle_Repel_New(u8 taskId)
 {
     u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
@@ -3347,6 +3353,7 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId)
 
     if(remainingSteps != 0 && isLure != lastItemWasLure)
         isUsable = FALSE;
+    WaitSound();
 
     if (isUsable){
         u16 steps = GetItemHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK;
@@ -3354,6 +3361,7 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId)
         PlaySE(SE_REPEL);
         VarSet(VAR_LAST_REPEL_LURE_USED, ItemId);
         VarSet(VAR_REPEL_STEP_COUNT, remainingSteps);
+        WaitSound();
         Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_USED_ITEM);
     }
     else
