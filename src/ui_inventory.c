@@ -3317,6 +3317,14 @@ void Task_UseItem(u8 taskId){
     if (!gPaletteFade.active)
     {
         u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
+        u16 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
+
+        if(pocketId == POCKET_FAVORITE_ITEMS)
+        {
+            //Inventory_GetItemIdCurrentlySelected();
+            pocketId   = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET];
+            itemIdx    = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_POCKET_INDEX];
+        }
 
         switch(pocketId){
             case POCKET_BERRIES:
