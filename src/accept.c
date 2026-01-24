@@ -829,7 +829,7 @@ static const u8* const sTextDevMessage[] =
     COMPOUND_STRING(""),
     COMPOUND_STRING("▶ To automatically LOSE a battle,"),
     COMPOUND_STRING("press {DPAD_DOWN} and {B_BUTTON} and choose a Move."),
-    COMPOUND_STRING("{COLOR RED}Please lose against Tala and Alcemene."),
+    COMPOUND_STRING("{COLOR RED}Please lose against Tala and Vigrim."),
     COMPOUND_STRING(""),
     COMPOUND_STRING("▶ To jump to a Story Point"),
     COMPOUND_STRING("press {R_BUTTON} and {START_BUTTON} in the overworld"),
