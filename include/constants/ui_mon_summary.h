@@ -67,7 +67,6 @@ enum __attribute__((packed)) MonSummaryMainWindows
 #define SUMMARY_TEXT_BOX_PALETTE    (1)
 
 #define TOTAL_SUMMARY_DYNAMIC_SPRITES 12
-#define SUMMARY_DYNAMIC_SPRITE_DUMMY { .id = SPRITE_NONE }
 
 enum MonSummaryMainSprites
 {
