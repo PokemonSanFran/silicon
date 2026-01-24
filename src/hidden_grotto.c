@@ -32,6 +32,11 @@ static void HiddenGrotto_SetGrottoChoice(enum HiddenGrottoId grottoIndex, enum H
 static void HiddenGrotto_ClearFlagSetSecret(enum HiddenGrottoId grottoIndex, u16 flag);
 static void GenerateGrottoBattle(enum HiddenGrottoId grottoId);
 static enum HiddenGrottoSecretsId HiddenGrotto_GetGrottoChoice(enum HiddenGrottoId grottoIndex);
+static bool8 HiddenGrotto_LoadSavedMon(void);
+static void HiddenGrotto_SaveGrottoMon(void);
+static struct Pokemon* HiddenGrotto_GetSavedGrottoMon(void);
+static void HiddenGrotto_SetLastGrottoId(enum HiddenGrottoId grotto);
+static enum HiddenGrottoId HiddenGrotto_GetLastGrottoId(void);
 
 static const u8* const discoveredGrottoTextArray[] =
     {
@@ -82,6 +87,24 @@ static u16 HiddenGrotto_GetSpecies(enum HiddenGrottoId grottoId)
     secret -= GROTTO_ITEM_COUNT;
     return hiddenGrottoData[grottoId].species[secret];
 }
+
+static u16 HiddenGrotto_GetItem(enum HiddenGrottoId grottoId)
+{
+    enum HiddenGrottoSecretsId secret = HiddenGrotto_GetGrottoChoice(grottoId);
+    DebugPrintf("grottoid %d",grottoId);
+
+    if (secret == GROTTO_RARE_ITEM_14)
+    {
+        DebugPrintf("GetItem: secret %d item got was %S",secret,GetItemName(hiddenGrottoData[grottoId].wildCardItem));
+        return hiddenGrottoData[grottoId].wildCardItem;
+    }
+    else
+{
+        DebugPrintf("secret %d item got was %S",secret,GetItemName(grottoItemArray[secret]));
+        return grottoItemArray[secret];
+    }
+}
+
 static u16 HiddenGrotto_GetMaxLevel(enum HiddenGrottoId grottoId)
 {
     return hiddenGrottoData[grottoId].level[1];
@@ -155,8 +178,8 @@ void TrySetHiddenGrottoSecrets(void)
     u16 *ptr = GetVarPointer(VAR_HIDDEN_GROTTO_STEP_COUNT);
     (*ptr)++;
 
-    //if ((*ptr % HIDDEN_GROTTO_STEPS) != 0)
-        //return;
+    if ((*ptr % HIDDEN_GROTTO_STEPS) != 0)
+        return;
 
     for (enum HiddenGrottoId grottoIndex = 0; grottoIndex < NUM_HIDDEN_GROTTO; grottoIndex++)
     {
@@ -164,9 +187,9 @@ void TrySetHiddenGrottoSecrets(void)
         if (FlagGet(flag) == FALSE)
             continue;
 
-        //u32 chance = Random() % 100;
-        //if (chance >= HIDDEN_GROTTO_SECRET_CHANCE)
-            //continue;
+        u32 chance = Random() % 100;
+        if (chance >= HIDDEN_GROTTO_SECRET_CHANCE)
+            continue;
 
         HiddenGrotto_ClearFlagSetSecret(grottoIndex, flag);
     }
@@ -174,7 +197,7 @@ void TrySetHiddenGrottoSecrets(void)
 
 static enum HiddenGrottoSecretsId HiddenGrotto_GenerateSecret(void)
 {
-    u32 chance = Random() % 10000;
+    u32 chance = Random() % 8025;
 
     if (chance < GROTTO_NORMAL_ITEM_1_CHANCE)
         return GROTTO_NORMAL_ITEM_1;
@@ -305,5 +328,101 @@ static void GenerateGrottoBattle(enum HiddenGrottoId grottoId)
     u32 range = max - min + 1;
     u32 level = (Random() % range) + min;
 
+    DebugPrintf("GenerateGrottoBattle");
+
+    if (HiddenGrotto_LoadSavedMon())
+        return;
+
+    DebugPrintf("LoadSavedMon failed");
+
     CreateWildMon(species, level);
+    HiddenGrotto_SaveGrottoMon();
+    HiddenGrotto_SetLastGrottoId(grottoId);
+}
+
+static void HiddenGrotto_SetLastGrottoId(enum HiddenGrottoId grotto)
+{
+    gSaveBlock3Ptr->lastGrottoId = grotto;
+}
+
+static enum HiddenGrottoId HiddenGrotto_GetLastGrottoId(void)
+{
+    return gSaveBlock3Ptr->lastGrottoId;
+}
+
+static struct Pokemon* HiddenGrotto_GetSavedGrottoMon(void)
+{   
+    return &gSaveBlock1Ptr->savedGrottoMon;
+};
+
+static void HiddenGrotto_SaveGrottoMon(void)
+{
+    enum HiddenGrottoId grottoId = HiddenGrotto_GetGrottoIdFromCurrentMap();
+    HiddenGrotto_SetLastGrottoId(grottoId);
+    struct Pokemon *mon = HiddenGrotto_GetSavedGrottoMon();
+    CopyMon(mon,&gEnemyParty[0],sizeof(struct Pokemon));
+    DebugPrintf("savedGrottoMon %S",GetSpeciesName(GetMonData(HiddenGrotto_GetSavedGrottoMon(),MON_DATA_SPECIES)));
+}
+
+static bool8 HiddenGrotto_LoadSavedMon(void)
+{
+    struct Pokemon *mon = HiddenGrotto_GetSavedGrottoMon();
+    bool32 isGrottoMonEmpty = (GetMonData(mon,MON_DATA_SPECIES) == SPECIES_NONE);
+    enum HiddenGrottoId grottoId = HiddenGrotto_GetGrottoIdFromCurrentMap();
+    bool32 isNewGrotto = (HiddenGrotto_GetLastGrottoId() != grottoId);
+
+    if (isNewGrotto == TRUE) 
+        return FALSE;
+
+    if (isGrottoMonEmpty == TRUE)
+        return FALSE;
+
+    DebugPrintf("Loading saved mon");
+    CopyMon(&gEnemyParty[0],mon,sizeof(struct Pokemon));
+    return TRUE;
+}
+
+void ResetSavedGrottoMon(void)
+{
+    struct Pokemon *mon = &gSaveBlock1Ptr->savedGrottoMon;
+    ZeroMonData(mon);
+    HiddenGrotto_SetLastGrottoId(GROTTO_NONE);
+}
+
+void DebugHiddenGrotto_SpawnMon(void)
+{
+    enum HiddenGrottoSecretsId secret = HiddenGrotto_GenerateSecret();
+    while (secret < GROTTO_POKEMON_1)
+        secret = HiddenGrotto_GenerateSecret();
+
+    HiddenGrotto_SetGrottoChoice(HiddenGrotto_GetGrottoIdFromCurrentMap(),secret);
+}
+
+void DebugHiddenGrotto_SpawnItem(void)
+{
+    enum HiddenGrottoSecretsId secret = HiddenGrotto_GenerateSecret();
+    while (secret > (GROTTO_ITEM_COUNT - 1))
+        secret = HiddenGrotto_GenerateSecret();
+
+    DebugPrintf("spawn item secret %d",secret);
+    HiddenGrotto_SetGrottoChoice(HiddenGrotto_GetGrottoIdFromCurrentMap(),secret);
+}
+
+void DebugHiddenGrotto_SpawnItemRare(void)
+{
+    HiddenGrotto_SetGrottoChoice(HiddenGrotto_GetGrottoIdFromCurrentMap(),GROTTO_RARE_ITEM_14);
+}
+
+void HiddenGrotto_PlaySpeciesCry(void)
+{
+    enum HiddenGrottoId grottoId = HiddenGrotto_GetGrottoIdFromCurrentMap();
+    u32 species = HiddenGrotto_GetSpecies(grottoId);
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void HiddenGrotto_LoadItemBallScript(void)
+{
+    enum HiddenGrottoId grottoId = HiddenGrotto_GetGrottoIdFromCurrentMap();
+    gSpecialVar_Result = HiddenGrotto_GetItem(grottoId);
+    gSpecialVar_0x8009 = 1;
 }

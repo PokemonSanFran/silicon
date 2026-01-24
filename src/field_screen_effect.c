@@ -303,6 +303,7 @@ static void SetUpWarpExitTask(void)
 
 void FieldCB_DefaultWarpExit(void)
 {
+    ResetSavedGrottoMon(); // hidden_grotto
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
     SetUpWarpExitTask();

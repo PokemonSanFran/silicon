@@ -10,7 +10,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_MUDSDALE, 
       .species[2] = SPECIES_MUDSDALE, 
       .species[3] = SPECIES_MUDSDALE, 
-      .level = {50, 100},
+      .level = {22, 24},
     },
     [GROTTO_ROUTE2] =
     {
@@ -22,7 +22,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_BLISSEY, 
       .species[2] = SPECIES_BLISSEY, 
       .species[3] = SPECIES_BLISSEY, 
-      .level = {50, 100},
+      .level = {35, 36},
     },
     [GROTTO_ROUTE3] =
     {
@@ -34,7 +34,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_HYDREIGON, 
       .species[2] = SPECIES_HYDREIGON, 
       .species[3] = SPECIES_HYDREIGON, 
-      .level = {50, 100},
+      .level = {77, 81},
     },
     [GROTTO_ROUTE4] =
     {
@@ -46,7 +46,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_RELICANTH, 
       .species[2] = SPECIES_RELICANTH, 
       .species[3] = SPECIES_RELICANTH, 
-      .level = {50, 100},
+      .level = {36, 36},
     },
     [GROTTO_ROUTE5] =
     {
@@ -58,7 +58,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_TYRANITAR, 
       .species[2] = SPECIES_TYRANITAR, 
       .species[3] = SPECIES_TYRANITAR, 
-      .level = {50, 100},
+      .level = {46, 49},
     },
     [GROTTO_ROUTE6] =
     {
@@ -70,7 +70,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_FLORGES_RED, 
       .species[2] = SPECIES_FLORGES_RED, 
       .species[3] = SPECIES_FLORGES_RED, 
-      .level = {50, 100},
+      .level = {20, 24},
     },
     [GROTTO_ROUTE7] =
     {
@@ -82,7 +82,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_HATTERENE, 
       .species[2] = SPECIES_HATTERENE, 
       .species[3] = SPECIES_HATTERENE, 
-      .level = {50, 100},
+      .level = {57, 60},
     },
     [GROTTO_ROUTE8] =
     {
@@ -94,7 +94,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_NIDOKING, 
       .species[2] = SPECIES_NIDOKING, 
       .species[3] = SPECIES_NIDOKING, 
-      .level = {50, 100},
+      .level = {20, 24},
     },
     [GROTTO_ROUTE9] =
     {
@@ -106,7 +106,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_SCRAFTY, 
       .species[2] = SPECIES_SCRAFTY, 
       .species[3] = SPECIES_SCRAFTY, 
-      .level = {50, 100},
+      .level = {24, 28},
     },
     [GROTTO_ROUTE10] =
     {
@@ -118,7 +118,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_FLYGON, 
       .species[2] = SPECIES_FLYGON, 
       .species[3] = SPECIES_FLYGON, 
-      .level = {50, 100},
+      .level = {26, 28},
     },
     [GROTTO_ROUTE11] =
     {
@@ -130,7 +130,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_VOLCARONA, 
       .species[2] = SPECIES_VOLCARONA, 
       .species[3] = SPECIES_VOLCARONA, 
-      .level = {50, 100},
+      .level = {45, 48},
     },
     [GROTTO_ROUTE12] =
     {
@@ -142,7 +142,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_ARMAROUGE, 
       .species[2] = SPECIES_ARMAROUGE, 
       .species[3] = SPECIES_ARMAROUGE, 
-      .level = {50, 100},
+      .level = {28, 32},
     },
     [GROTTO_ROUTE13] =
     {
@@ -154,7 +154,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_FLORGES_ORANGE, 
       .species[2] = SPECIES_FLORGES_ORANGE, 
       .species[3] = SPECIES_FLORGES_ORANGE, 
-      .level = {50, 100},
+      .level = {51, 51},
     },
     [GROTTO_ROUTE14] =
     {
@@ -166,7 +166,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_KLINKLANG, 
       .species[2] = SPECIES_KLINKLANG, 
       .species[3] = SPECIES_KLINKLANG, 
-      .level = {50, 100},
+      .level = {51, 51},
     },
     [GROTTO_ROUTE16] =
     {
@@ -178,7 +178,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_NIDOQUEEN, 
       .species[2] = SPECIES_NIDOQUEEN, 
       .species[3] = SPECIES_NIDOQUEEN, 
-      .level = {50, 100},
+      .level = {48, 48},
     },
     [GROTTO_ROUTE18] =
     {
@@ -190,7 +190,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_FLORGES_WHITE, 
       .species[2] = SPECIES_FLORGES_WHITE, 
       .species[3] = SPECIES_FLORGES_WHITE, 
-      .level = {50, 100},
+      .level = {75, 76},
     },
     [GROTTO_ROUTE20] =
     {
@@ -202,7 +202,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_FLORGES_YELLOW, 
       .species[2] = SPECIES_FLORGES_YELLOW, 
       .species[3] = SPECIES_FLORGES_YELLOW, 
-      .level = {50, 100},
+      .level = {84, 85},
     },
     [GROTTO_ROUTE22] =
     {
@@ -214,7 +214,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_SERPERIOR, 
       .species[2] = SPECIES_SERPERIOR, 
       .species[3] = SPECIES_SERPERIOR, 
-      .level = {50, 100},
+      .level = {51, 55},
     },
     [GROTTO_ROUTE98] =
     {
@@ -226,7 +226,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_SEISMITOAD, 
       .species[2] = SPECIES_SEISMITOAD, 
       .species[3] = SPECIES_SEISMITOAD, 
-      .level = {50, 100},
+      .level = {40, 43},
     },
     [GROTTO_ROUTE99] =
     {
@@ -238,11 +238,11 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_FLORGES_BLUE, 
       .species[2] = SPECIES_FLORGES_BLUE, 
       .species[3] = SPECIES_FLORGES_BLUE, 
-      .level = {50, 100},
+      .level = {74, 76},
     },
     [GROTTO_ROUTE100] =
     {
-      .routeMap = MAP_ROUTE100, 
+      .routeMap = MAP_ROUTE100,
       .grottoMap = MAP_ROUTE100_GROTTO,
       .flag = FLAG_GROTTO_ROUTE100,
       .wildCardItem = ITEM_SALAC_BERRY,
@@ -250,7 +250,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_MAMOSWINE, 
       .species[2] = SPECIES_MAMOSWINE, 
       .species[3] = SPECIES_MAMOSWINE, 
-      .level = {50, 100},
+      .level = {66, 70},
     },
     [GROTTO_ROUTE_A] =
     {
@@ -262,7 +262,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_DRACOZOLT, 
       .species[2] = SPECIES_DRACOZOLT, 
       .species[3] = SPECIES_DRACOZOLT, 
-      .level = {50, 100},
+      .level = {80, 80},
     },
     [GROTTO_ROUTE_B] =
     {
@@ -274,7 +274,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_AGGRON, 
       .species[2] = SPECIES_AGGRON, 
       .species[3] = SPECIES_AGGRON, 
-      .level = {50, 100},
+      .level = {36, 40},
     },
     [GROTTO_ROUTE_C] =
     {
@@ -286,7 +286,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_DRACOVISH, 
       .species[2] = SPECIES_DRACOVISH, 
       .species[3] = SPECIES_DRACOVISH, 
-      .level = {50, 100},
+      .level = {80, 80},
     },
     [GROTTO_ROUTE_D] =
     {
@@ -298,7 +298,7 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_ARCTOZOLT, 
       .species[2] = SPECIES_ARCTOZOLT, 
       .species[3] = SPECIES_ARCTOZOLT, 
-      .level = {50, 100},
+      .level = {82, 83},
     },
     [GROTTO_ROUTE_E] =
     {
@@ -310,10 +310,9 @@ const struct HiddenGrottoData hiddenGrottoData[NUM_HIDDEN_GROTTO] =
       .species[1] = SPECIES_ARCTOVISH, 
       .species[2] = SPECIES_ARCTOVISH, 
       .species[3] = SPECIES_ARCTOVISH, 
-      .level = {50, 100},
+      .level = {80, 80},
     },
   };
-
 
 // PSF TODO update this list to meet the needs of the game
 static const u16 grottoItemArray[GROTTO_ITEM_COUNT] =
