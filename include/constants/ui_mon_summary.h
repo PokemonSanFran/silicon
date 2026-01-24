@@ -494,7 +494,8 @@ struct MonSummaryResources
             u32 subMode:8;    // backup for reorder
             u32 forgetState:3;
             u32 yesNoIdx:1;
-            u32 forgottenMove:13;
+            u32 reorderFail:1;
+            u32 forgottenMove:12;
         } moves;
     } arg;
 };

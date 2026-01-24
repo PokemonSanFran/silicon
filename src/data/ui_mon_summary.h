@@ -559,7 +559,21 @@ static const struct {
     },
 };
 
-static const u8 sMovesPageMisc_ReorderOption_SwitchWhichMove[] = _("Swap with which move?");
+static const struct {
+    const u8 *desc, *help;
+} sMovesPageMisc_ReorderTexts[] =
+{
+    [0] =
+    {
+        .desc = COMPOUND_STRING("Swap with which move?"),
+        .help = COMPOUND_STRING("{A_BUTTON} Swap {B_BUTTON} Cancel"),
+    },
+    [1] =
+    {
+        .desc = COMPOUND_STRING("{STR_VAR_2} is the only move that {STR_VAR_1} knows."),
+        .help = COMPOUND_STRING("Press any button to continue."),
+    },
+};
 
 static const struct {
     const u8 *desc, *help;

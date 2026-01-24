@@ -71,6 +71,8 @@ static void Task_SummaryInput_StatsInput(u8);
 static void Task_SummaryInput_MovesInput(u8);
 static void Task_SummaryInput_MovesOptionInput(u8);
 static void Task_SummaryInput_MovesForgetInput(u8, s32);
+static void SummaryInput_TryReorderMoves(void);
+static void SummaryInput_TryStartReorderMode(void);
 
 static void SummaryMon_SetStruct(void);
 static struct MonSummary *SummaryMon_GetStruct(void);
@@ -855,15 +857,9 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             break;
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
             Task_SummaryInput_MovesOptionInput(taskId);
-            break;
+            return;
         case SUMMARY_MOVES_SUB_MODE_REORDER:
-            MovesPageMisc_SwapMoves();
-            MovesPageMisc_SetSlotIndex(MovesPageMisc_GetNewSlotIndex());
-            MovesPageMisc_SetNewSlotIndex(0);
-            SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
-            sMonSummaryDataPtr->arg.moves.subMode = 0;
-            SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
-            PlaySE(SE_SUCCESS);
+            SummaryInput_TryReorderMoves();
             return;
         case SUMMARY_MOVES_SUB_MODE_FORGET:
             Task_SummaryInput_MovesForgetInput(taskId, 1);
@@ -905,19 +901,10 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
 
     if (JOY_NEW(SELECT_BUTTON))
     {
-        switch (subMode)
-        {
-        default:
-            return;
-        case SUMMARY_MOVES_SUB_MODE_DETAILS:
-            sMonSummaryDataPtr->arg.moves.subMode = SUMMARY_MOVES_SUB_MODE_DETAILS;
-            MovesPageMisc_SetNewSlotIndex(MovesPageMisc_GetSlotIndex());
-            SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
-            break;
-        }
+        if (subMode != SUMMARY_MOVES_SUB_MODE_DETAILS) return;
 
+        SummaryInput_TryStartReorderMode();
         SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
-        PlaySE(SE_SELECT);
         return;
     }
 }
@@ -935,21 +922,27 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
         // add move_reminder feature here
         break;
     case SUMMARY_MOVES_OPTION_REORDER:
-        MovesPageMisc_SetNewSlotIndex(MovesPageMisc_GetSlotIndex());
-        sMonSummaryDataPtr->arg.moves.subMode = SUMMARY_MOVES_SUB_MODE_OPTIONS;
-        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
+        SummaryInput_TryStartReorderMode();
         break;
     case SUMMARY_MOVES_OPTION_FORGET:
         sMonSummaryDataPtr->arg.moves.forgottenMove = SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()];
         if (SummaryMon_GetStruct()->totalMoves > 1)
+        {
             sMonSummaryDataPtr->arg.moves.forgetState = SUMMARY_MOVES_FORGET_STATE_CONFIRM;
+            PlaySE(SE_SELECT);
+        }
         else
+        {
             sMonSummaryDataPtr->arg.moves.forgetState = SUMMARY_MOVES_FORGET_STATE_FAILURE;
+            PlaySE(SE_BOO);
+        }
 
         MovesPageMisc_SetForgetConfirmationIndex(SUMMARY_MOVES_FORGET_CONFIRM_NO);
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_FORGET);
         break;
     }
+
+    SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
 }
 
 static void Task_SummaryInput_MovesForgetInput(u8 taskId, s32 delta)
@@ -985,6 +978,47 @@ static void Task_SummaryInput_MovesForgetInput(u8 taskId, s32 delta)
     }
 
     SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+}
+
+static void SummaryInput_TryStartReorderMode(void)
+{
+    sMonSummaryDataPtr->arg.moves.reorderFail = FALSE;
+    MovesPageMisc_SetNewSlotIndex(MovesPageMisc_GetSlotIndex());
+
+    if (SummaryMon_GetStruct()->totalMoves > 1)
+    {
+        PlaySE(SE_SELECT);
+    }
+    else
+    {
+        sMonSummaryDataPtr->arg.moves.reorderFail = TRUE;
+        PlaySE(SE_BOO);
+    }
+
+    sMonSummaryDataPtr->arg.moves.subMode = SummaryInput_IsWithinSubMode();
+    SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
+}
+
+static void SummaryInput_TryReorderMoves(void)
+{
+    if (!sMonSummaryDataPtr->arg.moves.reorderFail)
+    {
+        MovesPageMisc_SwapMoves();
+
+        u32 bak = MovesPageMisc_GetSlotIndex();
+        MovesPageMisc_SetSlotIndex(MovesPageMisc_GetNewSlotIndex());
+        MovesPageMisc_SetNewSlotIndex(bak);
+
+        PlaySE(SE_SUCCESS);
+    }
+    else
+    {
+        PlaySE(SE_SELECT);
+    }
+
+    SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
+    sMonSummaryDataPtr->arg.moves.subMode = 0;
+    SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
 }
 
 static void SummaryMon_SetStruct(void)
@@ -1727,11 +1761,22 @@ static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
 
 static void SummaryPrint_HelpBar(void)
 {
-    const u8 *str = SummaryPage_GetHelpBarText(SummaryPage_GetValue());
+    enum MonSummaryPages page = SummaryPage_GetValue();
+    const u8 *str = SummaryPage_GetHelpBarText(page);
 
-    if (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_FORGET)
+    if (page == SUMMARY_PAGE_MOVES)
     {
-        str = sMovesPageMisc_ForgetStateTexts[sMonSummaryDataPtr->arg.moves.forgetState].help;
+        switch (SummaryInput_IsWithinSubMode())
+        {
+        default:
+            break;
+        case SUMMARY_MOVES_SUB_MODE_REORDER:
+            str = sMovesPageMisc_ReorderTexts[sMonSummaryDataPtr->arg.moves.reorderFail].help;
+            break;
+        case SUMMARY_MOVES_SUB_MODE_FORGET:
+            str = sMovesPageMisc_ForgetStateTexts[sMonSummaryDataPtr->arg.moves.forgetState].help;
+            break;
+        }
     }
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_HELP_BAR, FONT_SMALL, 10, 1, SUMMARY_FNTCLR_HELP_BAR, str);
@@ -2572,6 +2617,9 @@ static void MovesPageMisc_PrintDescription(void)
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT, fontId = FONT_NORMAL;
     const u8 *str = gText_EmptyString2;
 
+    StringCopy_Nickname(gStringVar1, SummaryMon_GetStruct()->nickname);
+    StringCopy(gStringVar2, GetMoveName(sMonSummaryDataPtr->arg.moves.forgottenMove));
+
     switch (SummaryInput_IsWithinSubMode())
     {
     default:
@@ -2583,17 +2631,14 @@ static void MovesPageMisc_PrintDescription(void)
         str = sMovesPageMisc_OptionInfo[MovesPageMisc_GetOptionIndex()].desc;
         break;
     case SUMMARY_MOVES_SUB_MODE_REORDER:
-        str = sMovesPageMisc_ReorderOption_SwitchWhichMove;
+        str = sMovesPageMisc_ReorderTexts[sMonSummaryDataPtr->arg.moves.reorderFail].desc;
         break;
     case SUMMARY_MOVES_SUB_MODE_FORGET:
-        StringCopy_Nickname(gStringVar1, SummaryMon_GetStruct()->nickname);
-        StringCopy(gStringVar2, GetMoveName(sMonSummaryDataPtr->arg.moves.forgottenMove));
-        StringExpandPlaceholders(gStringVar4, sMovesPageMisc_ForgetStateTexts[sMonSummaryDataPtr->arg.moves.forgetState].desc);
-        str = gStringVar4;
+        str = sMovesPageMisc_ForgetStateTexts[sMonSummaryDataPtr->arg.moves.forgetState].desc;
         break;
     }
 
-    StringCopy(gStringVar4, str);
+    StringExpandPlaceholders(gStringVar4, str);
     StripLineBreaks(gStringVar4);
     BreakStringAutomatic(gStringVar4, TILE_TO_PIXELS(28), 3, fontId, HIDE_SCROLL_PROMPT);
     SummaryPrint_AddText(windowId, fontId,
@@ -2836,7 +2881,7 @@ static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *sprite)
 
     sprite->invisible = !subMode
         || (subMode == SUMMARY_MOVES_SUB_MODE_FORGET && sMonSummaryDataPtr->arg.moves.forgetState != SUMMARY_MOVES_FORGET_STATE_CONFIRM)
-        || (subMode == SUMMARY_MOVES_SUB_MODE_DETAILS && SummaryMon_GetStruct()->totalMoves <= 1);
+        || ((subMode == SUMMARY_MOVES_SUB_MODE_DETAILS || subMode == SUMMARY_MOVES_SUB_MODE_REORDER) && SummaryMon_GetStruct()->totalMoves <= 1);
 
     if (sprite->invisible) return;
 
@@ -2847,6 +2892,7 @@ static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *sprite)
     default:
         break;
     case SUMMARY_MOVES_SUB_MODE_DETAILS:
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
         sprite->x2 = 0;
         break;
     case SUMMARY_MOVES_SUB_MODE_FORGET:
