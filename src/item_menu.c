@@ -2444,6 +2444,7 @@ bool8 UseRegisteredKeyItemOnField(void)
     {
         if (CheckBagHasItem(firstRegisteredItems, 1) == TRUE)
         {
+            FlagSet(FLAG_SYS_USED_FROM_REGISTER_MENU);
             gSpecialVar_ItemId = firstRegisteredItems;
             itemFunc = GetItemFieldFunc(firstRegisteredItems);
         }

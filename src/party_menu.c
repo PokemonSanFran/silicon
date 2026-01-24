@@ -4957,8 +4957,6 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         cannotUse = ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
     }
 
-    DebugPrintf("ItemUseCB_Medicine %d Test", item);
-
     if (cannotUse != FALSE)
     {
         gPartyMenuUseExitCallback = FALSE;
@@ -5004,6 +5002,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             GetMedicineItemEffectMessage(item, oldStatus);
             DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);
+
             if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(item, 1))
                 gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
             else

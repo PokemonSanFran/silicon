@@ -171,8 +171,9 @@ static void SetUpItemUseCallback(u8 taskId)
         type = gTasks[taskId].tEnigmaBerryType - 1;
     else
         type = GetItemType(gSpecialVar_ItemId) - 1;
+        
     // Start inventory
-    SetMainCallback2(sItemUseCallbacks[type]);
+    SetMainCallback2(sItemUseCallbacks[type]); //asdf
     /*
 
     if (gTasks[taskId].tUsingRegisteredKeyItem && type == (ITEM_USE_PARTY_MENU - 1))
@@ -902,7 +903,8 @@ static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_Medicine;
+    gItemUseCB = ItemUseCB_Medicine; //asdf
+    
     SetUpItemUseCallback(taskId);
 }
 
