@@ -135,6 +135,7 @@ void ItemUseOutOfBattle_Repel_New(u8 taskId);
 bool8 shouldShowRegisteredItems(void);
 void ForceReloadInventory(void);
 static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message);
+static void RecalculateCalculateCursorInventoryData(void);
 
 //bag sort
 static void SortItemsInInventory(u8 pocket, u8 type);
@@ -309,6 +310,7 @@ void InitializeInventoryData(void)
         sMenuDataPtr->spriteIDs[i] = 0xFF;
 
     ForceReloadInventory();
+    RecalculateCalculateCursorInventoryData();
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere
@@ -3244,6 +3246,29 @@ static void PressedDownButton_Inventory(){
             gSaveBlock3Ptr->InventoryData.itemIdx++;
             gSaveBlock3Ptr->InventoryData.yFirstItem++;
         }
+    }
+}
+
+static void RecalculateCalculateCursorInventoryData(){
+    u8 pocket    = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u16 numitems = sMenuDataPtr->numItems[pocket];
+    u8 itemIdx   = gSaveBlock3Ptr->InventoryData.itemIdx;
+
+    DebugPrintf("InitializeInventoryData itemIdx %d yFirstItem %d numitems %d pocket %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, pocket);
+
+    if(itemIdx > numitems){
+        gSaveBlock3Ptr->InventoryData.itemIdx = 0;
+        gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+    }
+    else if(gSaveBlock3Ptr->InventoryData.itemIdx > 0){
+        gSaveBlock3Ptr->InventoryData.itemIdx = 0;
+        gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+
+        do{
+            PressedDownButton_Inventory();
+            itemIdx--;
+        }
+        while(itemIdx != 0);
     }
 }
 
