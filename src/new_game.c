@@ -258,6 +258,7 @@ void NewGameInitData(void)
     ClearSiliconDaycareData(); // siliconDaycare
     ClearFollowerNPCData();
     HiddenGrotto_SetAllSecretFlags(); // hiddenGrotto
+    ResetSavedGrottoMon();
 }
 
 static void ResetMiniGamesRecords(void)

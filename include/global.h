@@ -325,6 +325,7 @@ struct SaveBlock3
 #endif
     u8 dexNavChain;
     u8 hiddenGrottoSpawn[NUM_HIDDEN_GROTTO];
+    u8 lastGrottoId;
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
@@ -1267,6 +1268,7 @@ struct SaveBlock1
     /*0x3???*/ struct Pokemon stolenTrade; // siliconMerge
     // sizeof: 0x3???
     /*0x??*/   struct Pokemon playerPartyBattleFrontier[PARTY_SIZE]; // siliconMerge
+    struct Pokemon savedGrottoMon;
 };
 
 extern struct SaveBlock1 *gSaveBlock1Ptr;

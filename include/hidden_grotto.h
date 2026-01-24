@@ -26,6 +26,7 @@ extern const u8 gText_HiddenGrottoMaterializes[];
 
 void HiddenGrotto_SetAllSecretFlags(void);
 void TrySetHiddenGrottoSecrets(void);
+void ResetSavedGrottoMon(void);
 
 struct HiddenGrottoData
 {

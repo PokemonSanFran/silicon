@@ -15,7 +15,6 @@ script HiddenGrotto_Script_HideSecret
 	callnative(ShouldGrottoLoadSecret)
 	if (var(VAR_RESULT) == TRUE)
 	{
-		setflag(FLAG_FORCE_SHINY)
 		callnative(HiddenGrotto_SetSecretObjectGfx)
 		callnative(HiddenGrotto_TryGenerateBattle)
 		callnative(IsOverworldMonShiny)
@@ -43,11 +42,16 @@ script HiddenGrotto_Script_StartSecret
 
 script HiddenGrotto_Script_GetItem
 {
-	giveitem(ITEM_POKE_BALL,1)
+	callnative(HiddenGrotto_LoadItemBallScript)
+    finditem(VAR_RESULT,VAR_0x8009)
+    call(Common_EventScript_StoryItem)
 }
 
 script HiddenGrotto_Script_StartBattle
 {
+	call(TryAutoSave)
+	callnative(HiddenGrotto_PlaySpeciesCry)
+	waitmoncry
 	dowildbattle
 	specialvar(VAR_RESULT, GetBattleOutcome)
 	switch (var(VAR_RESULT))
@@ -65,6 +69,7 @@ script HiddenGrotto_Script_StartBattle
 			msgbox(format("The {STR_VAR_1} ran away!"),MSGBOX_AUTOCLOSE)
 			closemessage
 	}
+	callnative(ResetSavedGrottoMon)
 }
 
 text gText_Hiddengrottomapping_Blank{

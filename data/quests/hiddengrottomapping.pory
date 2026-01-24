@@ -8,7 +8,8 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 //script Quest_Hiddengrottomapping_
 //text Hiddengrottomapping_
 
-script Quest_Hiddengrottomapping_MarkSubquestBiome_Script{
+script Quest_Hiddengrottomapping_MarkSubquestBiome_Script
+{
     addvar(VAR_TEMP_0,1)
 
     if (var(VAR_RESULT)){
