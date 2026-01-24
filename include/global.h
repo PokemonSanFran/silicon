@@ -23,11 +23,13 @@
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
 // End siliconMerge
+#include "hidden_grotto.h" // hiddenGrotto 
 #include "constants/items.h"
 #include "config/save.h"
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
+#include "constants/hidden_grotto.h" // hiddenGrotto 
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -322,6 +324,7 @@ struct SaveBlock3
     u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     u8 dexNavChain;
+    u8 hiddenGrottoSpawn[NUM_HIDDEN_GROTTO];
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

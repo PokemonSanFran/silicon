@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_setup.h"
 #include "bike.h"
+#include "hidden_grotto.h" //hiddenGrotto
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "debug.h"
@@ -786,6 +787,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         return FALSE;
     }
 
+    TrySetHiddenGrottoSecrets(); // hiddenGrotto
     IncrementRematchStepCounter();
     Buzzr_IncrementSteps(); // siliconMerge
     UpdateFriendshipStepCounter();

@@ -10,6 +10,63 @@ script Hiddengrotto_EnterGrotto_Dialogue{
     end
 }
 
+script HiddenGrotto_Script_HideSecret
+{
+	callnative(ShouldGrottoLoadSecret)
+	if (var(VAR_RESULT) == TRUE)
+	{
+		setflag(FLAG_FORCE_SHINY)
+		callnative(HiddenGrotto_SetSecretObjectGfx)
+		callnative(HiddenGrotto_TryGenerateBattle)
+		callnative(IsOverworldMonShiny)
+
+		if (var(VAR_RESULT) == TRUE)
+		{
+			playse(SE_SHINY)
+		}
+	}
+}
+
+script HiddenGrotto_Script_StartSecret
+{
+	callnative(Overworld_HiddenGrotto_Interact_IsSecretMon)
+	if (var(VAR_RESULT) == TRUE)
+	{
+		goto(HiddenGrotto_Script_StartBattle)
+	}
+	else
+	{
+		goto(HiddenGrotto_Script_GetItem)
+	}
+
+}
+
+script HiddenGrotto_Script_GetItem
+{
+	giveitem(ITEM_POKE_BALL,1)
+}
+
+script HiddenGrotto_Script_StartBattle
+{
+	dowildbattle
+	specialvar(VAR_RESULT, GetBattleOutcome)
+	switch (var(VAR_RESULT))
+	{
+		case B_OUTCOME_CAUGHT:
+		case B_OUTCOME_WON:
+			fadescreenswapbuffers(FADE_TO_BLACK)
+			removeobject(VAR_LAST_TALKED)
+			fadescreenswapbuffers(FADE_FROM_BLACK)
+		default:
+			fadescreenswapbuffers(FADE_TO_BLACK)
+			removeobject(VAR_LAST_TALKED)
+			fadescreenswapbuffers(FADE_FROM_BLACK)
+			callnative(HiddenGrotto_BufferHiddenGrottoName)
+			msgbox(format("The {STR_VAR_1} ran away!"),MSGBOX_AUTOCLOSE)
+			closemessage
+	}
+}
+
 text gText_Hiddengrottomapping_Blank{
     "{STR_VAR_1}"    
 }
