@@ -260,6 +260,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MOVES_SUB_MODE_DETAILS]    = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Cancel"),
             [SUMMARY_MOVES_SUB_MODE_OPTIONS]    = COMPOUND_STRING("{DPAD_UPDOWN} Move {A_BUTTON} Select {B_BUTTON} Cancel"),
             [SUMMARY_MOVES_SUB_MODE_REORDER]    = COMPOUND_STRING("{A_BUTTON} Swap Moves {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_FORGET]     = COMPOUND_STRING(""),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),
         .mainSpriteCoords =
@@ -560,13 +561,37 @@ static const struct {
 
 static const u8 sMovesPageMisc_ReorderOption_SwitchWhichMove[] = _("Swap with which move?");
 
+static const struct {
+    const u8 *desc, *help;
+} sMovesPageMisc_ForgetStateTexts[] =
+{
+    [SUMMARY_MOVES_FORGET_STATE_CONFIRM] =
+    {
+        .desc = COMPOUND_STRING("{STR_VAR_1} will forget the move {STR_VAR_2}. Are you sure?"),
+        .help = COMPOUND_STRING("{A_BUTTON} Confirm {B_BUTTON} Cancel")
+    },
+    [SUMMARY_MOVES_FORGET_STATE_SUCCESS] =
+    {
+        .desc = COMPOUND_STRING("{STR_VAR_1} forgot {STR_VAR_2}!"),
+        .help = COMPOUND_STRING("Press any button to continue.")
+    },
+    [SUMMARY_MOVES_FORGET_STATE_FAILURE] =
+    {
+        .desc = COMPOUND_STRING("{STR_VAR_2} is the only move that {STR_VAR_1} knows. It can't be forgotten."),
+        .help = COMPOUND_STRING("Press any button to continue.")
+    }
+};
+
 static const u16 *const sMovesPageMisc_MenuTilemaps[] =
 {
     [SUMMARY_MOVES_SUB_MODE_NONE]    = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_blank.bin"),
     [SUMMARY_MOVES_SUB_MODE_DETAILS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
     [SUMMARY_MOVES_SUB_MODE_OPTIONS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin"),
-    [SUMMARY_MOVES_SUB_MODE_REORDER] = NULL
+    [SUMMARY_MOVES_SUB_MODE_REORDER] = NULL,
+    [SUMMARY_MOVES_SUB_MODE_FORGET]  = NULL
 };
+
+static const u8 sMovesPageMisc_ForgetConfirmationBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/moves/confirmation_box.4bpp");
 
 static const struct SpriteTemplate sMovesPageMisc_ArrowsSpriteTemplate =
 {

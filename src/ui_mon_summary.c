@@ -70,6 +70,7 @@ static void Task_SummaryInput_InfosInput(u8);
 static void Task_SummaryInput_StatsInput(u8);
 static void Task_SummaryInput_MovesInput(u8);
 static void Task_SummaryInput_MovesOptionInput(u8);
+static void Task_SummaryInput_MovesForgetInput(u8, s32);
 
 static void SummaryMon_SetStruct(void);
 static struct MonSummary *SummaryMon_GetStruct(void);
@@ -180,20 +181,24 @@ static void MovesPage_HandleHeader(void);
 static void MovesPage_HandleGeneral(void);
 static void MovesPage_HandleMisc(void);
 static void MovesPageMisc_PrintDetails(u32);
-static void MovsPageMisc_PrintOptions(void);
+static void MovesPageMisc_PrintOptions(void);
+static void MovesPageMisc_PrintForgetConfirmation(void);
 static void MovesPageMisc_PrintDescription(void);
 static void MovesPageMisc_TrySpawnCursors(void);
 static void MovesPageMisc_UpdateIndex(s32);
 static void MovesPageMisc_SetIndex(u32);
 static u32 MovesPageMisc_GetIndex(void);
+static u32 MovesPageMisc_GetMaxIndex(void);
 static void MovesPageMisc_SetSlotIndex(u32);
 static u32 MovesPageMisc_GetSlotIndex(void);
 static void MovesPageMisc_SetOptionIndex(u32);
 static u32 MovesPageMisc_GetOptionIndex(void);
 static void MovesPageMisc_SetNewSlotIndex(u32);
 static u32 MovesPageMisc_GetNewSlotIndex(void);
-static u32 MovesPageMisc_GetMaxIndex(void);
+static void MovesPageMisc_SetForgetConfirmationIndex(u32);
+static u32 MovesPageMisc_GetForgetConfirmationIndex(void);
 static void MovesPageMisc_SwapMoves(void);
+static void MovesPageMisc_ForgetMove(void);
 static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *);
 static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *);
 static void SpriteCB_MovesPageMisc_NewSlotCursor(struct Sprite *);
@@ -814,6 +819,7 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         case SUMMARY_MOVES_SUB_MODE_REORDER:
+        case SUMMARY_MOVES_SUB_MODE_FORGET:
             MovesPageMisc_UpdateIndex(1);
             break;
         }
@@ -830,6 +836,7 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         case SUMMARY_MOVES_SUB_MODE_REORDER:
+        case SUMMARY_MOVES_SUB_MODE_FORGET:
             MovesPageMisc_UpdateIndex(-1);
             break;
         }
@@ -858,6 +865,9 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
             PlaySE(SE_SUCCESS);
             return;
+        case SUMMARY_MOVES_SUB_MODE_FORGET:
+            Task_SummaryInput_MovesForgetInput(taskId, 1);
+            return;
         }
 
         SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
@@ -883,6 +893,9 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         case SUMMARY_MOVES_SUB_MODE_REORDER:
             SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
             break;
+        case SUMMARY_MOVES_SUB_MODE_FORGET:
+            Task_SummaryInput_MovesForgetInput(taskId, -1);
+            return;
         }
 
         SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
@@ -927,8 +940,51 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
         break;
     case SUMMARY_MOVES_OPTION_FORGET:
+        sMonSummaryDataPtr->arg.moves.forgottenMove = SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()];
+        if (SummaryMon_GetStruct()->totalMoves > 1)
+            sMonSummaryDataPtr->arg.moves.forgetState = SUMMARY_MOVES_FORGET_STATE_CONFIRM;
+        else
+            sMonSummaryDataPtr->arg.moves.forgetState = SUMMARY_MOVES_FORGET_STATE_FAILURE;
+
+        MovesPageMisc_SetForgetConfirmationIndex(SUMMARY_MOVES_FORGET_CONFIRM_NO);
+        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_FORGET);
         break;
     }
+}
+
+static void Task_SummaryInput_MovesForgetInput(u8 taskId, s32 delta)
+{
+    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
+
+    switch (sMonSummaryDataPtr->arg.moves.forgetState)
+    {
+    default:
+        break;
+
+    case SUMMARY_MOVES_FORGET_STATE_CONFIRM:
+        if (additiveDelta && MovesPageMisc_GetForgetConfirmationIndex() == SUMMARY_MOVES_FORGET_CONFIRM_YES)
+        {
+            MovesPageMisc_ForgetMove();
+            sMonSummaryDataPtr->arg.moves.forgetState = SUMMARY_MOVES_FORGET_STATE_SUCCESS;
+            SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+            PlaySE(SE_SUCCESS);
+            return;
+        }
+
+        sMonSummaryDataPtr->arg.moves.forgetState = 0;
+        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
+        PlaySE(SE_SELECT);
+        break;
+
+    case SUMMARY_MOVES_FORGET_STATE_SUCCESS:
+    case SUMMARY_MOVES_FORGET_STATE_FAILURE:
+        sMonSummaryDataPtr->arg.moves.forgetState = 0;
+        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
+        PlaySE(SE_SELECT);
+        break;
+    }
+
+    SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
 }
 
 static void SummaryMon_SetStruct(void)
@@ -1671,10 +1727,14 @@ static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
 
 static void SummaryPrint_HelpBar(void)
 {
-    SummaryPrint_AddText(SUMMARY_MAIN_WIN_HELP_BAR, FONT_SMALL,
-        10, 1,
-        SUMMARY_FNTCLR_HELP_BAR, SummaryPage_GetHelpBarText(SummaryPage_GetValue()));
+    const u8 *str = SummaryPage_GetHelpBarText(SummaryPage_GetValue());
 
+    if (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_FORGET)
+    {
+        str = sMovesPageMisc_ForgetStateTexts[sMonSummaryDataPtr->arg.moves.forgetState].help;
+    }
+
+    SummaryPrint_AddText(SUMMARY_MAIN_WIN_HELP_BAR, FONT_SMALL, 10, 1, SUMMARY_FNTCLR_HELP_BAR, str);
     CopyWindowToVram(SUMMARY_MAIN_WIN_HELP_BAR, COPYWIN_GFX);
 }
 
@@ -2425,7 +2485,10 @@ static void MovesPage_HandleMisc(void)
         MovesPageMisc_PrintDetails(SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()]);
         break;
     case SUMMARY_MOVES_SUB_MODE_OPTIONS:
-        MovsPageMisc_PrintOptions();
+        MovesPageMisc_PrintOptions();
+        break;
+    case SUMMARY_MOVES_SUB_MODE_FORGET:
+        MovesPageMisc_PrintForgetConfirmation();
         break;
     }
 
@@ -2470,7 +2533,7 @@ static void MovesPageMisc_PrintDetails(u32 move)
     SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_CATEGORY_X, SUMMARY_MOVES_MISC_CATEGORY_Y, SUMMARY_FNTCLR_INTERFACE, GetMoveCategoryName(move));
 }
 
-static void MovsPageMisc_PrintOptions(void)
+static void MovesPageMisc_PrintOptions(void)
 {
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT, fontId = FONT_OUTLINED;
 
@@ -2480,6 +2543,28 @@ static void MovsPageMisc_PrintOptions(void)
             SUMMARY_MOVES_MISC_OPTION_X, SUMMARY_MOVES_MISC_OPTION_Y + (SUMMARY_MOVES_GENERAL_ADDITIVE_Y * i),
             SUMMARY_FNTCLR_INTERFACE, sMovesPageMisc_OptionInfo[i].name);
     }
+}
+
+static void MovesPageMisc_PrintForgetConfirmation(void)
+{
+    if (sMonSummaryDataPtr->arg.moves.forgetState != SUMMARY_MOVES_FORGET_STATE_CONFIRM) return;
+
+    u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT, fontId = FONT_OUTLINED;
+    u32 idx = MovesPageMisc_GetForgetConfirmationIndex();
+
+    for (u32 i = 0; i < NUM_SUMMARY_MOVES_FORGET_CONFIRMS; i++)
+    {
+        u32 highlight = idx == i ? 16 : 0;
+        BlitBitmapRectToWindow(windowId, sMovesPageMisc_ForgetConfirmationBlit,
+            0, highlight,
+            88, 32,
+            SUMMARY_MOVES_MISC_FORGET_CONFIRM_X, SUMMARY_MOVES_MISC_FORGET_CONFIRM_Y + (SUMMARY_MOVES_GENERAL_ADDITIVE_Y * i),
+            88, 16);
+    }
+
+    SummaryPrint_AddText(windowId, fontId,
+        SUMMARY_MOVES_MISC_CONFIRM_TEXT_X, SUMMARY_MOVES_MISC_FORGET_CONFIRM_Y,
+        SUMMARY_FNTCLR_INTERFACE, gText_YesNo);
 }
 
 static void MovesPageMisc_PrintDescription(void)
@@ -2499,6 +2584,12 @@ static void MovesPageMisc_PrintDescription(void)
         break;
     case SUMMARY_MOVES_SUB_MODE_REORDER:
         str = sMovesPageMisc_ReorderOption_SwitchWhichMove;
+        break;
+    case SUMMARY_MOVES_SUB_MODE_FORGET:
+        StringCopy_Nickname(gStringVar1, SummaryMon_GetStruct()->nickname);
+        StringCopy(gStringVar2, GetMoveName(sMonSummaryDataPtr->arg.moves.forgottenMove));
+        StringExpandPlaceholders(gStringVar4, sMovesPageMisc_ForgetStateTexts[sMonSummaryDataPtr->arg.moves.forgetState].desc);
+        str = gStringVar4;
         break;
     }
 
@@ -2590,6 +2681,9 @@ static void MovesPageMisc_SetIndex(u32 idx)
     case SUMMARY_MOVES_SUB_MODE_REORDER:
         MovesPageMisc_SetNewSlotIndex(idx);
         break;
+    case SUMMARY_MOVES_SUB_MODE_FORGET:
+        MovesPageMisc_SetForgetConfirmationIndex(idx);
+        break;
     }
 }
 
@@ -2608,9 +2702,35 @@ static u32 MovesPageMisc_GetIndex(void)
     case SUMMARY_MOVES_SUB_MODE_REORDER:
         return MovesPageMisc_GetNewSlotIndex();
         break;
+    case SUMMARY_MOVES_SUB_MODE_FORGET:
+        return MovesPageMisc_GetForgetConfirmationIndex();
+        break;
     }
 
     return 0;
+}
+
+static u32 MovesPageMisc_GetMaxIndex(void)
+{
+    u32 val = 1;
+
+    switch (SummaryInput_IsWithinSubMode())
+    {
+    default:
+        break;
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        val = MAX_MON_MOVES;
+        break;
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
+    case SUMMARY_MOVES_SUB_MODE_DETAILS:
+        val = SummaryMon_GetStruct()->totalMoves;
+        break;
+    case SUMMARY_MOVES_SUB_MODE_FORGET:
+        val = NUM_SUMMARY_MOVES_FORGET_CONFIRMS; // Yes/No
+        break;
+    }
+
+    return val - 1;
 }
 
 static void MovesPageMisc_SetSlotIndex(u32 idx)
@@ -2643,9 +2763,16 @@ static u32 MovesPageMisc_GetNewSlotIndex(void)
     return sMonSummaryDataPtr->arg.moves.newSlotIdx;
 }
 
-static u32 MovesPageMisc_GetMaxIndex(void)
+static void MovesPageMisc_SetForgetConfirmationIndex(u32 idx)
 {
-    return (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_OPTIONS ? MAX_MON_MOVES : SummaryMon_GetStruct()->totalMoves) - 1;
+    if (sMonSummaryDataPtr->arg.moves.forgetState != SUMMARY_MOVES_FORGET_STATE_CONFIRM) return;
+
+    sMonSummaryDataPtr->arg.moves.yesNoIdx = idx;
+}
+
+static u32 MovesPageMisc_GetForgetConfirmationIndex(void)
+{
+    return sMonSummaryDataPtr->arg.moves.yesNoIdx;
 }
 
 // TODO do a bag menu-like swapping instead
@@ -2681,17 +2808,55 @@ static void MovesPageMisc_SwapMoves(void)
     SummaryMon_SetStruct();
 }
 
+static void MovesPageMisc_ForgetMove(void)
+{
+    u32 firstSlotIdx = MovesPageMisc_GetSlotIndex();
+    struct Pokemon *mon = &sMonSummaryDataPtr->mon;
+
+    SetMonMoveSlot(mon, MOVE_NONE, firstSlotIdx);
+    RemoveMonPPBonus(mon, firstSlotIdx);
+
+    for (u32 i = firstSlotIdx; i < MAX_MON_MOVES - 1; i++)
+        ShiftMoveSlot(mon, i, i + 1);
+
+    CopyMon(&sMonSummaryDataPtr->list.mons[sMonSummaryDataPtr->currIdx], &sMonSummaryDataPtr->mon, sizeof(struct Pokemon));
+    SummaryMon_SetStruct();
+
+    // fixup slot to not point towards any MOVE_NONE
+    struct MonSummary *summary = SummaryMon_GetStruct();
+    while (summary->moves[firstSlotIdx] == MOVE_NONE && firstSlotIdx > 0)
+        firstSlotIdx--;
+
+    MovesPageMisc_SetSlotIndex(firstSlotIdx);
+}
+
 static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *sprite)
 {
     enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
 
-    sprite->invisible = !subMode;
+    sprite->invisible = !subMode
+        || (subMode == SUMMARY_MOVES_SUB_MODE_FORGET && sMonSummaryDataPtr->arg.moves.forgetState != SUMMARY_MOVES_FORGET_STATE_CONFIRM)
+        || (subMode == SUMMARY_MOVES_SUB_MODE_DETAILS && SummaryMon_GetStruct()->totalMoves <= 1);
+
     if (sprite->invisible) return;
 
-    bool32 isOptionMode = subMode == SUMMARY_MOVES_SUB_MODE_OPTIONS;
+    sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetIndex();
 
-    sprite->x2 = -127 * isOptionMode;
-    sprite->y2 = (SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetIndex()) - (2 * isOptionMode);
+    switch (subMode)
+    {
+    default:
+        break;
+    case SUMMARY_MOVES_SUB_MODE_DETAILS:
+        sprite->x2 = 0;
+        break;
+    case SUMMARY_MOVES_SUB_MODE_FORGET:
+        sprite->y2 += SUMMARY_MOVES_GENERAL_ADDITIVE_Y * NUM_SUMMARY_MOVES_FORGET_CONFIRMS;
+        // fallthrough
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        sprite->x2 = -127;
+        sprite->y2 -= 2;
+        break;
+    }
 }
 
 static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *sprite)

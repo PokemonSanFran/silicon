@@ -284,6 +284,7 @@ enum MonSummaryMovesSubModes
 
     SUMMARY_MOVES_SUB_MODE_OPTIONS,
     SUMMARY_MOVES_SUB_MODE_REORDER,
+    SUMMARY_MOVES_SUB_MODE_FORGET,
 
     NUM_SUMMARY_MOVES_SUB_MODES
 };
@@ -296,6 +297,23 @@ enum MonSummaryMovesOptions
     SUMMARY_MOVES_OPTION_FORGET,
 
     NUM_SUMMARY_MOVES_OPTIONS
+};
+
+enum MonSummaryMovesForgetStates
+{
+    // has at least 2 moves
+    SUMMARY_MOVES_FORGET_STATE_CONFIRM,
+    SUMMARY_MOVES_FORGET_STATE_SUCCESS,
+
+    SUMMARY_MOVES_FORGET_STATE_FAILURE, // has only 1 move
+};
+
+enum MonSummaryMovesForgetConfirmation
+{
+    SUMMARY_MOVES_FORGET_CONFIRM_YES,
+    SUMMARY_MOVES_FORGET_CONFIRM_NO,
+
+    NUM_SUMMARY_MOVES_FORGET_CONFIRMS
 };
 
 // identical to Stats page
@@ -331,6 +349,8 @@ enum MonSummaryMovesOptions
 #define SUMMARY_MOVES_MISC_VALUE_TEXT_WIDTH (TILE_TO_PIXELS(3) + 2)
 #define SUMMARY_MOVES_MISC_OPTION_X         (TILE_TO_PIXELS(2) - 2)
 #define SUMMARY_MOVES_MISC_OPTION_CURSOR_X  (TILE_TO_PIXELS(1) + 2)
+#define SUMMARY_MOVES_MISC_FORGET_CONFIRM_X (TILE_TO_PIXELS(1) + 2)
+#define SUMMARY_MOVES_MISC_CONFIRM_TEXT_X   (SUMMARY_MOVES_MISC_OPTION_X)
 
 #define SUMMARY_MOVES_MISC_POWER_Y          (TILE_TO_PIXELS(4) + 2)
 #define SUMMARY_MOVES_MISC_ACCURACY_Y       (TILE_TO_PIXELS(6) + 2)
@@ -338,6 +358,7 @@ enum MonSummaryMovesOptions
 #define SUMMARY_MOVES_MISC_CATEGORY_Y       (TILE_TO_PIXELS(10))
 #define SUMMARY_MOVES_MISC_DESCRIPTION_Y    (TILE_TO_PIXELS(13))
 #define SUMMARY_MOVES_MISC_OPTION_Y         (TILE_TO_PIXELS(4))
+#define SUMMARY_MOVES_MISC_FORGET_CONFIRM_Y (SUMMARY_MOVES_MISC_OPTION_Y + (SUMMARY_MOVES_GENERAL_ADDITIVE_Y * NUM_SUMMARY_MOVES_FORGET_CONFIRMS))
 
 STATIC_ASSERT(NUM_SUMMARY_INFOS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, InfoPageDynamicSpriteExceedsMaxNumber);
 STATIC_ASSERT(NUM_SUMMARY_STATS_SPRITES < TOTAL_SUMMARY_DYNAMIC_SPRITES, StatPageDynamicSpriteExceedsMaxNumber);
@@ -471,7 +492,9 @@ struct MonSummaryResources
             u32 optionIdx:2;
             u32 newSlotIdx:2; // reorder
             u32 subMode:8;    // backup for reorder
-            u32 pad:18;
+            u32 forgetState:3;
+            u32 yesNoIdx:1;
+            u32 forgottenMove:13;
         } moves;
     } arg;
 };
