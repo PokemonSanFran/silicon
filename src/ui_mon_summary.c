@@ -888,6 +888,7 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
             break;
         case SUMMARY_MOVES_SUB_MODE_REORDER:
+            sMonSummaryDataPtr->arg.moves.reorderFail = FALSE;
             SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
             break;
         case SUMMARY_MOVES_SUB_MODE_FORGET:
@@ -1018,6 +1019,7 @@ static void SummaryInput_TryReorderMoves(void)
     }
 
     SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
+    sMonSummaryDataPtr->arg.moves.reorderFail = FALSE;
     sMonSummaryDataPtr->arg.moves.subMode = 0;
     SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
 }
@@ -2547,12 +2549,20 @@ static void MovesPage_HandleMisc(void)
 
     if (!SummaryInput_IsWithinSubMode()) return;
 
+    u32 slotIdx = MovesPageMisc_GetSlotIndex();
+
+    if (subMode == SUMMARY_MOVES_SUB_MODE_REORDER && !sMonSummaryDataPtr->arg.moves.reorderFail)
+    {
+        subMode = sMonSummaryDataPtr->arg.moves.subMode;
+        slotIdx = MovesPageMisc_GetNewSlotIndex();
+    }
+
     switch (subMode)
     {
     default:
         break;
     case SUMMARY_MOVES_SUB_MODE_DETAILS:
-        MovesPageMisc_PrintDetails(SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()]);
+        MovesPageMisc_PrintDetails(SummaryMon_GetStruct()->moves[slotIdx]);
         break;
     case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         MovesPageMisc_PrintOptions();
@@ -2642,16 +2652,21 @@ static void MovesPageMisc_PrintDescription(void)
 {
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT, fontId = FONT_NORMAL;
     const u8 *str = gText_EmptyString2;
+    struct MonSummary *mon = SummaryMon_GetStruct();
 
-    StringCopy_Nickname(gStringVar1, SummaryMon_GetStruct()->nickname);
-    StringCopy(gStringVar2, GetMoveName(sMonSummaryDataPtr->arg.moves.forgottenMove));
+    StringCopy_Nickname(gStringVar1, mon->nickname);
+
+    if (sMonSummaryDataPtr->arg.moves.forgottenMove)
+        StringCopy(gStringVar2, GetMoveName(sMonSummaryDataPtr->arg.moves.forgottenMove));
+    else
+        StringCopy(gStringVar2, GetMoveName(mon->moves[MovesPageMisc_GetSlotIndex()]));
 
     switch (SummaryInput_IsWithinSubMode())
     {
     default:
         break;
     case SUMMARY_MOVES_SUB_MODE_DETAILS:
-        str = GetMoveDescription(SummaryMon_GetStruct()->moves[MovesPageMisc_GetSlotIndex()]);
+        str = GetMoveDescription(mon->moves[MovesPageMisc_GetSlotIndex()]);
         break;
     case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         str = sMovesPageMisc_OptionInfo[MovesPageMisc_GetOptionIndex()].desc;
@@ -2955,7 +2970,7 @@ static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *sprite)
 {
     enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
 
-    sprite->invisible = subMode != SUMMARY_MOVES_SUB_MODE_OPTIONS;
+    sprite->invisible = subMode < SUMMARY_MOVES_SUB_MODE_OPTIONS || subMode > SUMMARY_MOVES_SUB_MODE_REORDER || sMonSummaryDataPtr->arg.moves.reorderFail;
     if (sprite->invisible) return;
 
     sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetOptionIndex();
