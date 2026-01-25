@@ -58,6 +58,10 @@ static void Task_SummarySetup_WaitFade(u8);
 
 static void SummaryInput_UpdatePage(s32);
 static void SummaryInput_UpdateMon(s32);
+static s32 SummaryInput_UpdateMonDefault(s32, u32, s32);
+static s32 SummaryInput_UpdateMonMultiBattle(s32, u32, s32);
+static bool32 SummaryInput_IsMonValidToView(struct Pokemon *, s32);
+static s32 SummaryInput_UpdateMonBox(s32, u32, s32);
 static void SummaryInput_SetIndex(u32);
 static u32 SummaryInput_GetIndex(void);
 static void SummaryInput_SetTotalIndex(u32);
@@ -79,6 +83,7 @@ static void SummaryMon_SetStruct(void);
 static struct MonSummary *SummaryMon_GetStruct(void);
 static void SummaryMon_CopyCurrentRawMon(void);
 static void SummaryMon_GetNatureFlavors(u8 *);
+static void SummaryMon_CopyChanges(void);
 
 static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
@@ -515,25 +520,87 @@ static void SummaryInput_UpdatePage(s32 delta)
 
 static void SummaryInput_UpdateMon(s32 delta)
 {
-    u32 idx = SummaryInput_GetIndex();
+    s32 idx = SummaryInput_GetIndex();
     u32 count = SummaryInput_GetTotalIndex();
     bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
 
-    if (!idx && !additiveDelta)
-    {
-        SummaryInput_SetIndex(count);
-    }
-    else if (idx == count && additiveDelta)
-    {
-        SummaryInput_SetIndex(0);
-    }
+    if ((idx == 0 && !additiveDelta) || (idx == count && additiveDelta)) return;
+
+    if (sMonSummaryDataPtr->useBoxMon)
+        idx = SummaryInput_UpdateMonBox(idx, count, delta);
+    else if (IsMultiBattle())
+        idx = SummaryInput_UpdateMonMultiBattle(idx, count, delta);
     else
-    {
-        SummaryInput_SetIndex(idx + delta);
-    }
+        idx = SummaryInput_UpdateMonDefault(idx, count, delta);
+
+    if (idx == -1) return;
 
     PlaySE(SE_CLICK);
+    SummaryInput_SetIndex(idx);
     SummaryPage_Reload(SUMMARY_RELOAD_MON);
+}
+
+static s32 SummaryInput_UpdateMonDefault(s32 idx, u32 totalIdx, s32 delta)
+{
+    do {
+        idx += delta;
+        if (idx < 0 || idx > totalIdx)
+            return -1;
+    } while (GetMonData(&sMonSummaryDataPtr->list.mons[idx], MON_DATA_IS_EGG));
+
+    return idx;
+}
+
+static const s8 multiorder[] = {0, 2, 3, 1, 4, 5};
+static s32 SummaryInput_UpdateMonMultiBattle(s32 idx, u32 totalIdx, s32 delta)
+{
+    s32 arrId = 0;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        if (multiorder[i] == idx)
+        {
+            arrId = i;
+            break;
+        }
+    }
+
+    while (TRUE)
+    {
+        const s8 *order = multiorder;
+
+        arrId += delta;
+        if (arrId < 0 || arrId >= PARTY_SIZE)
+            return -1;
+
+        idx = order[arrId];
+        if (SummaryInput_IsMonValidToView(&sMonSummaryDataPtr->list.mons[idx], idx))
+            return idx;
+    }
+}
+
+static bool32 SummaryInput_IsMonValidToView(struct Pokemon *mon, s32 idx)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+        return FALSE;
+    else if (idx != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
+        return TRUE;
+
+    return FALSE;
+}
+
+static s32 SummaryInput_UpdateMonBox(s32 idx, u32 totalIdx, s32 delta)
+{
+    struct BoxPokemon *boxMons = sMonSummaryDataPtr->list.boxMons;
+
+    do {
+        idx += delta;
+        if (idx < 0 || idx > totalIdx)
+            return -1;
+    } while (GetBoxMonData(&boxMons[idx], MON_DATA_SPECIES) == SPECIES_NONE
+          || GetBoxMonData(&boxMons[idx], MON_DATA_IS_EGG));
+
+    return idx;
 }
 
 static void SummaryInput_SetIndex(u32 index)
@@ -796,9 +863,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
                 return;
             }
 
-            // update referenced mon struct and update
-            // we'll assume that EV/IV editing is NOT done within the PC/battle
-            CopyMon(&sMonSummaryDataPtr->list.mons[sMonSummaryDataPtr->currIdx], &sMonSummaryDataPtr->mon, sizeof(struct Pokemon));
+            SummaryMon_CopyChanges();
             SummaryMon_SetStruct();
             SummaryInput_SetSubMode(FALSE);
             sMonSummaryDataPtr->arg.value = 0;
@@ -1086,15 +1151,16 @@ static struct MonSummary *SummaryMon_GetStruct(void)
 static void SummaryMon_CopyCurrentRawMon(void)
 {
     struct MonSummaryResources *res = sMonSummaryDataPtr;
+    u32 idx = SummaryInput_GetIndex();
 
     if (sMonSummaryDataPtr->useBoxMon)
     {
-        struct BoxPokemon *boxMon = &res->list.boxMons[res->currIdx];
+        struct BoxPokemon *boxMon = &res->list.boxMons[idx];
         BoxMonToMon(boxMon, &res->mon);
     }
     else
     {
-        res->mon = res->list.mons[res->currIdx];
+        res->mon = res->list.mons[idx];
     }
 }
 
@@ -1112,6 +1178,22 @@ static void SummaryMon_GetNatureFlavors(u8 *flavors)
         {
             flavors[SUMMARY_MON_LIKED_FLAVOR + (flavor == -1)] = i;
         }
+    }
+}
+
+static void SummaryMon_CopyChanges(void)
+{
+    u32 idx = SummaryInput_GetIndex();
+    struct BoxPokemon *changes = &sMonSummaryDataPtr->mon.box;
+
+    if (sMonSummaryDataPtr->useBoxMon)
+    {
+        CopyMon(&sMonSummaryDataPtr->list.boxMons[idx], changes, sizeof(struct BoxPokemon));
+    }
+    else
+    {
+        CopyMon(&sMonSummaryDataPtr->list.mons[idx].box, changes, sizeof(struct BoxPokemon));
+        CalculateMonStats(&sMonSummaryDataPtr->list.mons[idx]);
     }
 }
 
@@ -2875,7 +2957,7 @@ static void MovesPageMisc_SwapMoves(void)
     SetMonData(mon, MON_DATA_PP1 + secondSlotIdx, &firstPp);
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 
-    CopyMon(&sMonSummaryDataPtr->list.mons[sMonSummaryDataPtr->currIdx], &sMonSummaryDataPtr->mon, sizeof(struct Pokemon));
+    SummaryMon_CopyChanges();
     SummaryMon_SetStruct();
 }
 
@@ -2890,7 +2972,7 @@ static void MovesPageMisc_ForgetMove(void)
     for (u32 i = firstSlotIdx; i < MAX_MON_MOVES - 1; i++)
         ShiftMoveSlot(mon, i, i + 1);
 
-    CopyMon(&sMonSummaryDataPtr->list.mons[sMonSummaryDataPtr->currIdx], &sMonSummaryDataPtr->mon, sizeof(struct Pokemon));
+    SummaryMon_CopyChanges();
     SummaryMon_SetStruct();
 
     // fixup slot to not point towards any MOVE_NONE
@@ -2954,8 +3036,12 @@ static void SpriteCB_MovesPageMisc_NewSlotCursor(struct Sprite *sprite)
 static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *sprite)
 {
     enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
+    enum MonSummaryMovesSubModes prevSubMode = sMonSummaryDataPtr->arg.moves.subMode;
 
-    sprite->invisible = subMode < SUMMARY_MOVES_SUB_MODE_OPTIONS || subMode > SUMMARY_MOVES_SUB_MODE_REORDER || sMonSummaryDataPtr->arg.moves.reorderFail;
+    sprite->invisible = subMode != SUMMARY_MOVES_SUB_MODE_OPTIONS
+                     || (subMode == SUMMARY_MOVES_SUB_MODE_REORDER && prevSubMode != SUMMARY_MOVES_SUB_MODE_OPTIONS)
+                     || sMonSummaryDataPtr->arg.moves.reorderFail;
+
     if (sprite->invisible) return;
 
     sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetOptionIndex();
