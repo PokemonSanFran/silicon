@@ -602,7 +602,7 @@ static const u16 *const sMovesPageMisc_MenuTilemaps[] =
     [SUMMARY_MOVES_SUB_MODE_DETAILS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
     [SUMMARY_MOVES_SUB_MODE_OPTIONS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin"),
     [SUMMARY_MOVES_SUB_MODE_REORDER] = NULL,
-    [SUMMARY_MOVES_SUB_MODE_FORGET]  = NULL
+    [SUMMARY_MOVES_SUB_MODE_FORGET]  = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_confirm.bin"),
 };
 
 static const u8 sMovesPageMisc_ForgetConfirmationBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/moves/confirmation_box.4bpp");

@@ -182,6 +182,7 @@ static void MovesPage_HandleUpdateText(void);
 static void MovesPage_HandleHeader(void);
 static void MovesPage_HandleGeneral(void);
 static void MovesPage_HandleMisc(void);
+static void MovesPageMisc_PutMenuTilemap(enum MonSummaryMovesSubModes);
 static void MovesPageMisc_PrintDetails(u32);
 static void MovesPageMisc_PrintOptions(void);
 static void MovesPageMisc_PrintForgetConfirmation(void);
@@ -2515,10 +2516,34 @@ static void MovesPage_HandleMisc(void)
 
     MovesPageMisc_TrySpawnCursors();
 
-    if (sMovesPageMisc_MenuTilemaps[subMode] != NULL)
-        CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[subMode], 1, 4, 16, 8);
-    else
-        CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[0], 1, 4, 16, 8);
+    switch (subMode)
+    {
+    default:
+        if (sMovesPageMisc_MenuTilemaps[subMode] != NULL)
+            MovesPageMisc_PutMenuTilemap(subMode);
+        else
+            MovesPageMisc_PutMenuTilemap(0);
+        break;
+
+    case SUMMARY_MOVES_SUB_MODE_FORGET:
+        switch (sMonSummaryDataPtr->arg.moves.forgetState)
+        {
+        default:
+            MovesPageMisc_PutMenuTilemap(0);
+            break;
+        case SUMMARY_MOVES_FORGET_STATE_CONFIRM:
+            MovesPageMisc_PutMenuTilemap(subMode);
+            break;
+        }
+        break;
+
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
+        if (sMonSummaryDataPtr->arg.moves.reorderFail)
+            MovesPageMisc_PutMenuTilemap(0);
+        else
+            MovesPageMisc_PutMenuTilemap(sMonSummaryDataPtr->arg.moves.subMode);
+        break;
+    }
 
     if (!SummaryInput_IsWithinSubMode()) return;
 
@@ -2538,6 +2563,11 @@ static void MovesPage_HandleMisc(void)
     }
 
     MovesPageMisc_PrintDescription();
+}
+
+static void MovesPageMisc_PutMenuTilemap(enum MonSummaryMovesSubModes subMode)
+{
+    CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[subMode], 1, 4, 16, 8);
 }
 
 static void MovesPageMisc_PrintDetails(u32 move)
@@ -2597,15 +2627,11 @@ static void MovesPageMisc_PrintForgetConfirmation(void)
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT, fontId = FONT_OUTLINED;
     u32 idx = MovesPageMisc_GetForgetConfirmationIndex();
 
-    for (u32 i = 0; i < NUM_SUMMARY_MOVES_FORGET_CONFIRMS; i++)
-    {
-        u32 highlight = idx == i ? 16 : 0;
-        BlitBitmapRectToWindow(windowId, sMovesPageMisc_ForgetConfirmationBlit,
-            0, highlight,
-            88, 32,
-            SUMMARY_MOVES_MISC_FORGET_CONFIRM_X, SUMMARY_MOVES_MISC_FORGET_CONFIRM_Y + (SUMMARY_MOVES_GENERAL_ADDITIVE_Y * i),
-            88, 16);
-    }
+    BlitBitmapRectToWindow(windowId, sMovesPageMisc_ForgetConfirmationBlit,
+        0, 0,
+        88, 32,
+        SUMMARY_MOVES_MISC_FORGET_CONFIRM_X, SUMMARY_MOVES_MISC_FORGET_CONFIRM_Y + (SUMMARY_MOVES_GENERAL_ADDITIVE_Y * idx),
+        88, 16);
 
     SummaryPrint_AddText(windowId, fontId,
         SUMMARY_MOVES_MISC_CONFIRM_TEXT_X, SUMMARY_MOVES_MISC_FORGET_CONFIRM_Y,
