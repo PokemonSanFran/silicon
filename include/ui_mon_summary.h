@@ -4,12 +4,12 @@
 // needs to be put here for future uses
 enum __attribute__((packed)) MonSummaryModes
 {
-    SUMMARY_MODE_DEFAULT,
-    SUMMARY_MODE_BOX,
-    SUMMARY_MODE_BATTLE,
-    SUMMARY_MODE_IV_TRAIN,
+    UI_SUMMARY_MODE_DEFAULT,
+    UI_SUMMARY_MODE_BOX,
+    UI_SUMMARY_MODE_BATTLE,
+    UI_SUMMARY_MODE_IV_TRAIN,
 
-    NUM_SUMMARY_MODES
+    NUM_UI_SUMMARY_MODES
 };
 
 void MonSummary_Init(enum MonSummaryModes, void *, u8, u8, MainCallback);

@@ -205,9 +205,9 @@ static const union AnimCmd *const sSummarySprite_FrameImageAnimTemplate[] =
     },
 };
 
-static const TaskFunc sSummaryMode_InputFuncs[NUM_SUMMARY_MODES] =
+static const TaskFunc sSummaryMode_InputFuncs[NUM_UI_SUMMARY_MODES] =
 {
-    [SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
+    [UI_SUMMARY_MODE_DEFAULT] = Task_SummaryMode_DefaultInput,
 };
 
 static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
