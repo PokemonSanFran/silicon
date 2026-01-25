@@ -12,19 +12,7 @@ enum __attribute__((packed)) MonSummaryModes
     NUM_SUMMARY_MODES
 };
 
-struct MonSummaryConfigs
-{
-    enum MonSummaryModes mode;
-    void *mons;
-    u8 currIdx, totalIdx;
-    // useful for specific modes requiring value
-    union {
-        u32 moveId; // move reminder
-        u32 value;
-    } arg;
-};
-
-void MonSummary_Init(const struct MonSummaryConfigs *, MainCallback);
+void MonSummary_Init(enum MonSummaryModes, void *, u8, u8, MainCallback);
 void MonSummary_OpenDefault(void);
 
 #endif // GUARD_UI_MON_SUMMARY_H

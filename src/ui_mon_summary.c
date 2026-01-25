@@ -213,26 +213,18 @@ static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *);
 // code
 void MonSummary_OpenDefault(void)
 {
-    MonSummary_Init(
-        &(const struct MonSummaryConfigs){
-            .mode = SUMMARY_MODE_DEFAULT,
-            .mons = gPlayerParty,
-            .currIdx = 0, .totalIdx = gPlayerPartyCount - 1,
-            .arg.value = 0
-        },
-        CB2_ReturnToFieldContinueScript);
+    MonSummary_Init(UI_SUMMARY_MODE_DEFAULT, gPlayerParty, 0, gPlayerPartyCount - 1, CB2_ReturnToFieldContinueScript);
 }
 
-void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callback)
+void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 totalIdx, MainCallback callback)
 {
     sMonSummaryDataPtr = AllocZeroed(sizeof(struct MonSummaryResources));
 
     struct MonSpritesGfxManager *gfxMan = CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
 
     if (!sMonSummaryDataPtr
-     || !config
      || !gfxMan
-     || config->mode >= NUM_SUMMARY_MODES)
+     || mode >= NUM_UI_SUMMARY_MODES)
     {
         DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
         TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
@@ -244,22 +236,23 @@ void MonSummary_Init(const struct MonSummaryConfigs *config, MainCallback callba
 
     enum MonSummaryPages page = SUMMARY_PAGE_INFOS;
 
-    switch (config->mode)
+    switch (mode)
     {
     default:
         break;
-    case SUMMARY_MODE_BOX:
+    case UI_SUMMARY_MODE_BOX:
         sMonSummaryDataPtr->useBoxMon = TRUE;
+        mode = UI_SUMMARY_MODE_DEFAULT;
         break;
     }
 
     sMonSummaryDataPtr->savedCallback = callback;
-    sMonSummaryDataPtr->list.mons = config->mons;
+    sMonSummaryDataPtr->list.mons = mons;
 
-    SummaryInput_SetIndex(config->currIdx);
-    SummaryInput_SetTotalIndex(config->totalIdx);
+    SummaryInput_SetIndex(currIdx);
+    SummaryInput_SetTotalIndex(totalIdx);
     SummaryPage_SetValue(page);
-    SummaryMode_SetValue(config->mode);
+    SummaryMode_SetValue(mode);
     memset(sMonSummaryDataPtr->spriteIds, SPRITE_NONE, ARRAY_COUNT(sMonSummaryDataPtr->spriteIds));
 
     SetMainCallback2(CB2_SummarySetup);
