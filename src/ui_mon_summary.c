@@ -120,7 +120,11 @@ static void SummarySprite_MonTypes(u32, s32, s32);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
 static void SummarySprite_PrepareMonMovesGfx(void);
 static void SummarySprite_MonMove(u32, s32, s32);
-static struct MonSpritesGfxManager *SummarySprite_GetGfxManager(void);
+static u8 *SummarySprite_GetSpritePtr(u8 position);
+static struct SpriteFrameImage *SummarySprite_GetFrameImagePtr(u8);
+static void SummarySprite_SetFrameImagePtr(u8, const struct SpriteFrameImage *);
+static struct SpriteTemplate *SummarySprite_GetTemplatePtr(u8);
+static void SummarySprite_SetTemplatePtr(u8, const struct SpriteTemplate *);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
@@ -220,11 +224,15 @@ void MonSummary_OpenDefault(void)
 void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 totalIdx, MainCallback callback)
 {
     sMonSummaryDataPtr = AllocZeroed(sizeof(struct MonSummaryResources));
+    void *gfx = NULL;
 
-    struct MonSpritesGfxManager *gfxMan = CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
+    if (gMonSpritesGfxPtr == NULL)
+        gfx = CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
+    else
+        gfx = gMonSpritesGfxPtr;
 
     if (!sMonSummaryDataPtr
-     || !gfxMan
+     || !gfx
      || mode >= NUM_UI_SUMMARY_MODES)
     {
         DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
@@ -233,7 +241,7 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
         return;
     }
 
-    sMonSummaryDataPtr->gfxMan = gfxMan;
+    sMonSummaryDataPtr->gfx.val = gfx;
 
     enum MonSummaryPages page = SUMMARY_PAGE_INFOS;
 
@@ -1465,7 +1473,7 @@ static void SummarySprite_InjectPokemon(void)
 {
     u32 position = SUMMARY_GFX_MAN_MON; // B_POSITION_OPPONENT_LEFT
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u8 *gfx = MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, position);
+    u8 *gfx = SummarySprite_GetSpritePtr(position);
 
     u32 index = SummarySprite_GetPokemonPaletteSlot();
     CpuFill32(0, gfx, 512);
@@ -1619,14 +1627,15 @@ static void SummarySprite_PrepareMonMovesGfx(void)
         CpuCopy32(sMovesPageGeneral_MoveBarGfx + TILE_OFFSET_4BPP(tileNum), (void *)sMonSummaryDataPtr->moveBarGfx[i], TILE_OFFSET_4BPP(32));
     }
 
-    struct MonSpritesGfxManager *gfxMan = SummarySprite_GetGfxManager();
     enum MonSummaryGfxManagerIdx idx = SUMMARY_GFX_MAN_MOVE_BAR;
 
-    gfxMan->frameImages[idx] = *sMovesPageGeneral_MoveBarSpriteTemplate.images;
-    gfxMan->frameImages[idx].data = sMonSummaryDataPtr->moveBarGfx;
+    SummarySprite_SetFrameImagePtr(idx, sMovesPageGeneral_MoveBarSpriteTemplate.images);
+    struct SpriteFrameImage *frameImage = SummarySprite_GetFrameImagePtr(idx);
+    frameImage->data = sMonSummaryDataPtr->moveBarGfx;
 
-    gfxMan->templates[idx] = sMovesPageGeneral_MoveBarSpriteTemplate;
-    gfxMan->templates[idx].images = (const struct SpriteFrameImage *)gfxMan->frameImages;
+    SummarySprite_SetTemplatePtr(idx, &sMovesPageGeneral_MoveBarSpriteTemplate);
+    struct SpriteTemplate *template = SummarySprite_GetTemplatePtr(idx);
+    template->images = frameImage;
 }
 
 static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
@@ -1640,7 +1649,8 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     if (move == MOVE_NONE || move >= MOVES_COUNT
      || SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx) != SPRITE_NONE) return;
 
-    u32 spriteId = CreateSprite(&SummarySprite_GetGfxManager()->templates[SUMMARY_GFX_MAN_MOVE_BAR], x, y, 2);
+    struct SpriteTemplate *template = SummarySprite_GetTemplatePtr(SUMMARY_GFX_MAN_MOVE_BAR);
+    u32 spriteId = CreateSprite(template, x, y, 2);
 
     gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(type));
     SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
@@ -1649,9 +1659,44 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);
 }
 
-static struct MonSpritesGfxManager *SummarySprite_GetGfxManager(void)
+static u8 *SummarySprite_GetSpritePtr(u8 position)
 {
-    return sMonSummaryDataPtr->gfxMan;
+    if (gMonSpritesGfxPtr == NULL)
+        return MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, position);
+    else
+        return gMonSpritesGfxPtr->spritesGfx[position];
+}
+
+static struct SpriteFrameImage *SummarySprite_GetFrameImagePtr(u8 position)
+{
+    if (gMonSpritesGfxPtr == NULL)
+        return &sMonSummaryDataPtr->gfx.man->frameImages[position];
+    else
+        return gMonSpritesGfxPtr->frameImages[position];
+}
+
+static void SummarySprite_SetFrameImagePtr(u8 position, const struct SpriteFrameImage *frameImages)
+{
+    if (gMonSpritesGfxPtr == NULL)
+        sMonSummaryDataPtr->gfx.man->frameImages[position] = *frameImages;
+    else
+        sMonSummaryDataPtr->gfx.ptr->frameImages[position][0] = *frameImages;
+}
+
+static struct SpriteTemplate *SummarySprite_GetTemplatePtr(u8 position)
+{
+    if (gMonSpritesGfxPtr == NULL)
+        return &sMonSummaryDataPtr->gfx.man->templates[position];
+    else
+        return &sMonSummaryDataPtr->gfx.ptr->templates[position];
+}
+
+static void SummarySprite_SetTemplatePtr(u8 position, const struct SpriteTemplate *template)
+{
+    if (gMonSpritesGfxPtr == NULL)
+        sMonSummaryDataPtr->gfx.man->templates[position] = *template;
+    else
+        sMonSummaryDataPtr->gfx.ptr->templates[position] = *template;
 }
 
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)

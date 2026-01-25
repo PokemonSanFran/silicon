@@ -448,6 +448,11 @@ struct MonSummary
 
 struct MonSummaryResources
 {
+    union {
+        void *val;
+        struct MonSpritesGfxManager *man;   // default
+        struct MonSpritesGfx *ptr;          // battle-only
+    } gfx;
     struct MonSpritesGfxManager *gfxMan;
     u8 moveBarGfx[MAX_MON_MOVES][0x400];
     MainCallback savedCallback;
