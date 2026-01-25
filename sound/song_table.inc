@@ -600,7 +600,7 @@ gSongTable::
     song mus_route_ocean_silicon, MUSIC_PLAYER_BGM, 0
     song mus_route_ocean_silicon_night, MUSIC_PLAYER_BGM, 0
     song mus_espulee_outskirts_gym, MUSIC_PLAYER_BGM, 0
-    song mus_fort_point_gym, MUSIC_PLAYER_BGM, 0
+    song mus_fort_yobu_gym, MUSIC_PLAYER_BGM, 0
     song mus_halai_island_earthquake, MUSIC_PLAYER_BGM, 0
     song mus_halerba_city, MUSIC_PLAYER_BGM, 0
     song mus_halerba_wilds, MUSIC_PLAYER_BGM, 0
