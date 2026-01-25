@@ -33,6 +33,7 @@
 #include "item_icon.h"
 #include "pokeball.h"
 #include "line_break.h"
+#include "pokemon_summary_screen.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -292,6 +293,7 @@ static void Task_MonSummary_WaitFadeAndExit(u8 taskId)
         MainCallback cb = sMonSummaryDataPtr->savedCallback;
 
         SetMainCallback2(cb);
+        gLastViewedMonIndex = SummaryInput_GetIndex();
         MonSummary_FreeResources();
         DestroyTask(taskId);
     }
