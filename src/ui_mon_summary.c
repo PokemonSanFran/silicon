@@ -965,15 +965,11 @@ static void Task_SummaryInput_MovesForgetInput(u8 taskId, s32 delta)
             PlaySE(SE_SUCCESS);
             return;
         }
-
-        sMonSummaryDataPtr->arg.moves.forgetState = 0;
-        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
-        PlaySE(SE_SELECT);
-        break;
-
+        // fallthrough
     case SUMMARY_MOVES_FORGET_STATE_SUCCESS:
     case SUMMARY_MOVES_FORGET_STATE_FAILURE:
         sMonSummaryDataPtr->arg.moves.forgetState = 0;
+        sMonSummaryDataPtr->arg.moves.forgottenMove = 0;
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
         PlaySE(SE_SELECT);
         break;
