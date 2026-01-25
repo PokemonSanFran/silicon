@@ -615,6 +615,12 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
+        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT
+         && SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
+        {
+            return;
+        }
+
         PlaySE(SE_SELECT);
         SummaryInput_SetSubMode(TRUE);
         SummaryPage_Reload(SUMMARY_RELOAD_PAGE);

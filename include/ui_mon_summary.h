@@ -6,7 +6,7 @@ enum __attribute__((packed)) MonSummaryModes
 {
     UI_SUMMARY_MODE_DEFAULT,
     UI_SUMMARY_MODE_BOX,
-    UI_SUMMARY_MODE_BATTLE,
+    UI_SUMMARY_MODE_LOCK_EDIT, // player cannot edit EVs nor moves
     UI_SUMMARY_MODE_IV_TRAIN,
 
     NUM_UI_SUMMARY_MODES
