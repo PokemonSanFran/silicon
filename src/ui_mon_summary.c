@@ -121,8 +121,6 @@ static u32 SummarySprite_GetTypePaletteTag(enum Type);
 static void SummarySprite_PrepareMonMovesGfx(void);
 static void SummarySprite_MonMove(u32, s32, s32);
 static u8 *SummarySprite_GetSpritePtr(u8 position);
-static struct SpriteFrameImage *SummarySprite_GetFrameImagePtr(u8);
-static void SummarySprite_SetFrameImagePtr(u8, const struct SpriteFrameImage *);
 static struct SpriteTemplate *SummarySprite_GetTemplatePtr(u8);
 static void SummarySprite_SetTemplatePtr(u8, const struct SpriteTemplate *);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
@@ -269,9 +267,10 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
 
 static void MonSummary_FreeResources(void)
 {
+    FreeTempTileDataBuffersIfPossible();
+    ResetTempTileDataBuffers();
     DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
-    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]);
-    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2]);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBuf);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
     FreeItemIconTemporaryBuffers();
     FreeAllWindowBuffers();
@@ -309,13 +308,9 @@ static void Task_MonSummary_WaitFadeAndExit(u8 taskId)
 
 static void SummarySetup_Backgrounds(void)
 {
-    u32 tilemapSize = BG_SCREEN_SIZE * 2;
+    sMonSummaryDataPtr->tilemapBuf = AllocZeroed(BG_SCREEN_SIZE);
 
-    sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1] = AllocZeroed(tilemapSize);
-    sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2] = AllocZeroed(tilemapSize);
-
-    if (!sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]
-     || !sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2])
+    if (!sMonSummaryDataPtr->tilemapBuf)
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         CreateTask(Task_MonSummary_WaitFadeAndExit, 0);
@@ -328,8 +323,7 @@ static void SummarySetup_Backgrounds(void)
     InitBgsFromTemplates(0, sSummarySetup_BgTemplates, NELEMS(sSummarySetup_BgTemplates));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
 
-    SetBgTilemapBuffer(SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_1]);
-    SetBgTilemapBuffer(SUMMARY_BG_PAGE_2, sMonSummaryDataPtr->tilemapBufs[SUMMARY_PAGE_SLOT_2]);
+    SetBgTilemapBuffer(SUMMARY_BG_PAGE_1, sMonSummaryDataPtr->tilemapBuf);
 
     for (enum MonSummaryBackgrounds bg = 0; bg < NUM_SUMMARY_BACKGROUNDS; bg++)
     {
@@ -1036,24 +1030,12 @@ static void SummaryMon_SetStruct(void)
     struct MonSummaryResources *res = sMonSummaryDataPtr;
     struct Pokemon *mon = &res->mon;
 
-    res->summary.species = GetMonData(mon, MON_DATA_SPECIES);
-    res->summary.species2 = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    res->summary.species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     res->summary.exp = GetMonData(mon, MON_DATA_EXP);
     res->summary.level = GetMonData(mon, MON_DATA_LEVEL);
     res->summary.abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
     res->summary.item = GetMonData(mon, MON_DATA_HELD_ITEM);
     res->summary.personality = GetMonData(mon, MON_DATA_PERSONALITY);
-    res->summary.sanity = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
-
-    if (res->summary.sanity)
-    {
-        res->summary.isEgg = TRUE;
-    }
-    else
-    {
-        res->summary.isEgg = GetMonData(mon, MON_DATA_IS_EGG);
-    }
-
     res->summary.totalMoves = 0;
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
@@ -1069,20 +1051,15 @@ static void SummaryMon_SetStruct(void)
 
     res->summary.ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     res->summary.nature = GetNature(mon);
-    res->summary.mintNature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
     res->summary.currHp = GetMonData(mon, MON_DATA_HP);
 
     GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
     ConvertInternationalString(res->summary.trainerName, GetMonData(mon, MON_DATA_LANGUAGE));
     res->summary.ailment = GetMonAilment(mon);
-    res->summary.trainerGender = GetMonData(mon, MON_DATA_OT_GENDER);
     res->summary.trainerId = GetMonData(mon, MON_DATA_OT_ID);
     res->summary.metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
     res->summary.metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
-    res->summary.metGame = GetMonData(mon, MON_DATA_MET_GAME);
     res->summary.friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-
-    res->summary.ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
     res->summary.isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
     res->summary.totalValues[SUMMARY_TOTAL_IVS] = 0;
@@ -1468,7 +1445,7 @@ static void SummarySprite_CreateMonSprite(void)
     FreeSpriteOamMatrix(sprite);
     sprite->oam.priority = 0;
     sprite->callback = SpriteCallbackDummy;
-    sprite->hFlip = IsMonSpriteNotFlipped(SummaryMon_GetStruct()->species2);
+    sprite->hFlip = IsMonSpriteNotFlipped(SummaryMon_GetStruct()->species);
     sprite->oam.paletteNum = SummarySprite_GetPokemonPaletteSlot();
 
     sprite->invisible = FALSE;
@@ -1486,7 +1463,7 @@ static void SummarySprite_InjectPokemon(void)
 
     if (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
     {
-        HandleLoadSpecialPokePic(TRUE, gfx, mon->species2, mon->personality);
+        HandleLoadSpecialPokePic(TRUE, gfx, mon->species, mon->personality);
 
         LoadPalette(
             GetMonSpritePalFromSpeciesAndPersonality(mon->species, mon->isShiny, mon->personality),
@@ -1497,8 +1474,8 @@ static void SummarySprite_InjectPokemon(void)
     }
     else
     {
-        CpuCopy32(GetMonIconTiles(mon->species2, mon->personality), gfx, 512);
-        LoadPalette(GetValidMonIconPalettePtr(mon->species2), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        CpuCopy32(GetMonIconTiles(mon->species, mon->personality), gfx, 512);
+        LoadPalette(GetValidMonIconPalettePtr(mon->species), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
     }
 
     SetMultiuseSpriteTemplateToPokemon(TAG_NONE, position);
@@ -1518,12 +1495,10 @@ static void SummarySprite_PlayPokemonCry(void)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
 
-    if (mon->isEgg) return;
-
     u32 cryMode =
         ShouldPlayNormalMonCry(&sMonSummaryDataPtr->mon) ? CRY_MODE_NORMAL : CRY_MODE_WEAK;
 
-    PlayCry_ByMode(mon->species2, 0, cryMode);
+    PlayCry_ByMode(mon->species, 0, cryMode);
 }
 
 static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
@@ -1625,23 +1600,7 @@ static u32 SummarySprite_GetTypePaletteTag(enum Type type)
 
 static void SummarySprite_PrepareMonMovesGfx(void)
 {
-    u16 *moves = SummaryMon_GetStruct()->moves;
-
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        u32 tileNum = GetMoveType(moves[i]) * 32;
-        CpuCopy32(sMovesPageGeneral_MoveBarGfx + TILE_OFFSET_4BPP(tileNum), (void *)sMonSummaryDataPtr->moveBarGfx[i], TILE_OFFSET_4BPP(32));
-    }
-
-    enum MonSummaryGfxManagerIdx idx = SUMMARY_GFX_MAN_MOVE_BAR;
-
-    SummarySprite_SetFrameImagePtr(idx, sMovesPageGeneral_MoveBarSpriteTemplate.images);
-    struct SpriteFrameImage *frameImage = SummarySprite_GetFrameImagePtr(idx);
-    frameImage->data = sMonSummaryDataPtr->moveBarGfx;
-
-    SummarySprite_SetTemplatePtr(idx, &sMovesPageGeneral_MoveBarSpriteTemplate);
-    struct SpriteTemplate *template = SummarySprite_GetTemplatePtr(idx);
-    template->images = frameImage;
+    SummarySprite_SetTemplatePtr(SUMMARY_GFX_MAN_MOVE_BAR, &sMovesPageGeneral_MoveBarSpriteTemplate);
 }
 
 static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
@@ -1660,7 +1619,7 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
 
     gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(type));
     SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
-    StartSpriteAnim(&gSprites[spriteId], idx);
+    StartSpriteAnim(&gSprites[spriteId], GetMoveType(mon->moves[idx]));
 
     SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);
 }
@@ -1671,22 +1630,6 @@ static u8 *SummarySprite_GetSpritePtr(u8 position)
         return MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, position);
     else
         return gMonSpritesGfxPtr->spritesGfx[position];
-}
-
-static struct SpriteFrameImage *SummarySprite_GetFrameImagePtr(u8 position)
-{
-    if (gMonSpritesGfxPtr == NULL)
-        return &sMonSummaryDataPtr->gfx.man->frameImages[position];
-    else
-        return gMonSpritesGfxPtr->frameImages[position];
-}
-
-static void SummarySprite_SetFrameImagePtr(u8 position, const struct SpriteFrameImage *frameImages)
-{
-    if (gMonSpritesGfxPtr == NULL)
-        sMonSummaryDataPtr->gfx.man->frameImages[position] = *frameImages;
-    else
-        sMonSummaryDataPtr->gfx.ptr->frameImages[position][0] = *frameImages;
 }
 
 static struct SpriteTemplate *SummarySprite_GetTemplatePtr(u8 position)
@@ -1838,7 +1781,7 @@ static void SummaryPrint_TextBox(const u8 *str)
 static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    const u8 *str = SummaryInput_GetUpdateText() ? GetSpeciesName(mon->species2) : mon->nickname;
+    const u8 *str = SummaryInput_GetUpdateText() ? GetSpeciesName(mon->species) : mon->nickname;
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
 
@@ -1851,7 +1794,7 @@ static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)
 static void SummaryPrint_MonGender(u32 x, u32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 species = mon->species2, gender = mon->gender;
+    u32 species = mon->species, gender = mon->gender;
 
     if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
      || gender == MON_GENDERLESS)
@@ -1902,7 +1845,7 @@ static void SummaryPrint_MonAbilityName(u32 x, u32 y, u32 maxWidth)
 static void SummaryPrint_MonAbilityDesc(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    enum Ability ability = GetSpeciesAbility(mon->species2, mon->abilityNum);
+    enum Ability ability = GetSpeciesAbility(mon->species, mon->abilityNum);
     const u8 *str = GetAbilityDesc(ability);
     u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, maxWidth);
 

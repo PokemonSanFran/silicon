@@ -35,11 +35,7 @@ enum MonSummaryBackgrounds
 {
     SUMMARY_BG_TEXT,        // universal
     SUMMARY_BG_PAGE_TEXT,   // page-only
-
-    // switch between pages on each horizontal dpad presses.
-    // there is no animation atm but it is meant to futureproof.
     SUMMARY_BG_PAGE_1,
-    SUMMARY_BG_PAGE_2,
 
     NUM_SUMMARY_BACKGROUNDS
 };
@@ -400,8 +396,8 @@ enum __attribute__((packed)) MonSummaryReloadModes
 
 enum MonSummaryGfxManagerIdx
 {
-    SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_PLAYER_LEFT,
     SUMMARY_GFX_MAN_MON = B_POSITION_OPPONENT_LEFT,
+    SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_OPPONENT_RIGHT,
 };
 
 // structs
@@ -411,32 +407,25 @@ enum MonSummaryGfxManagerIdx
 struct MonSummary
 {
     u16 species;
-    u16 species2;
-    u8 isEgg:1;
     u8 isShiny:1;
     u8 abilityNum:1;
     u8 markings:4;
-    u8 padding:1;
+    u8 padding:2;
     u8 level;
-    u8 ribbonCount;
     u8 ailment;
     metloc_u8_t metLocation;
     u8 metLevel;
-    u8 metGame;
     u32 personality;
     u32 exp;
     u16 moves[MAX_MON_MOVES];
     u8 pp[MAX_MON_MOVES];
     u16 currHp;
     u16 item;
-    u16 friendship;
-    u8 trainerGender;
+    u8 friendship;
     u8 nature;
     u8 ppBonuses;
-    u8 sanity;
     u8 trainerName[17];
     u32 trainerId;
-    u8 mintNature;
 
     u8 totalMoves;
     u16 totalValues[NUM_SUMMARY_TOTAL_VALUES];
@@ -453,10 +442,8 @@ struct MonSummaryResources
         struct MonSpritesGfxManager *man;   // default
         struct MonSpritesGfx *ptr;          // battle-only
     } gfx;
-    struct MonSpritesGfxManager *gfxMan;
-    u8 moveBarGfx[MAX_MON_MOVES][0x400];
     MainCallback savedCallback;
-    u8 *tilemapBufs[NUM_SUMMARY_PAGE_SLOTS];
+    u8 *tilemapBuf;
     u8 spriteIds[NUM_SUMMARY_MAIN_SPRITES + TOTAL_SUMMARY_DYNAMIC_SPRITES];
 
     bool32 pageSlot:1; // only referred for tilemapBufs shenanigans

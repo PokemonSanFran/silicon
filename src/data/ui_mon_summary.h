@@ -16,14 +16,7 @@ static const struct BgTemplate sSummarySetup_BgTemplates[NUM_SUMMARY_BACKGROUNDS
         .bg = SUMMARY_BG_PAGE_1,
         .charBaseIndex = 2,
         .mapBaseIndex = 28,
-        .screenSize = 1,
-        .priority = 2
-    },
-    {
-        .bg = SUMMARY_BG_PAGE_2,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 26,
-        .screenSize = 1,
+        .screenSize = 0,
         .priority = 2
     },
 };
@@ -524,10 +517,29 @@ static const struct SpriteTemplate sMovesPageGeneral_MoveBarSpriteTemplate =
         .priority = 2,
     },
     .anims = (const union AnimCmd *const[]){
-        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END },
-        (const union AnimCmd[]){ ANIMCMD_FRAME(1, 1), ANIMCMD_END },
-        (const union AnimCmd[]){ ANIMCMD_FRAME(2, 1), ANIMCMD_END },
-        (const union AnimCmd[]){ ANIMCMD_FRAME(3, 1), ANIMCMD_END },
+        #define TYPE_ANIM(type) [TYPE_ ##type] = (const union AnimCmd[]){ ANIMCMD_FRAME(TYPE_ ##type, 1), ANIMCMD_END }
+        TYPE_ANIM(NONE),
+        TYPE_ANIM(NORMAL),
+        TYPE_ANIM(FIGHTING),
+        TYPE_ANIM(FLYING),
+        TYPE_ANIM(POISON),
+        TYPE_ANIM(GROUND),
+        TYPE_ANIM(ROCK),
+        TYPE_ANIM(BUG),
+        TYPE_ANIM(GHOST),
+        TYPE_ANIM(STEEL),
+        TYPE_ANIM(MYSTERY),
+        TYPE_ANIM(FIRE),
+        TYPE_ANIM(WATER),
+        TYPE_ANIM(GRASS),
+        TYPE_ANIM(ELECTRIC),
+        TYPE_ANIM(PSYCHIC),
+        TYPE_ANIM(ICE),
+        TYPE_ANIM(DRAGON),
+        TYPE_ANIM(DARK),
+        TYPE_ANIM(FAIRY),
+        TYPE_ANIM(STELLAR),
+        #undef TYPE_ANIM
     },
     .images = &(const struct SpriteFrameImage){
         .data = sMovesPageGeneral_MoveBarGfx,
