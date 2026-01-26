@@ -198,6 +198,8 @@ static const union AnimCmd *const sSummarySprite_FrameImageAnimTemplate[] =
     },
 };
 
+static const s8 sSummaryInput_MultiPartyOrder[] = {0, 2, 3, 1, 4, 5};
+
 static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
 {
     [UI_SUMMARY_MODE_DEFAULT] =

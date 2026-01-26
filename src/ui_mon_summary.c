@@ -60,7 +60,7 @@ static void SummaryInput_UpdatePage(s32);
 static void SummaryInput_UpdateMon(s32);
 static s32 SummaryInput_UpdateMonDefault(s32, u32, s32);
 static s32 SummaryInput_UpdateMonMultiBattle(s32, u32, s32);
-static bool32 SummaryInput_IsMonValidToView(struct Pokemon *, s32);
+static bool32 SummaryInput_IsMonValidToView(struct Pokemon *);
 static s32 SummaryInput_UpdateMonBox(s32, u32, s32);
 static void SummaryInput_SetIndex(u32);
 static u32 SummaryInput_GetIndex(void);
@@ -554,14 +554,15 @@ static s32 SummaryInput_UpdateMonDefault(s32 idx, u32 totalIdx, s32 delta)
     return idx;
 }
 
-static const s8 multiorder[] = {0, 2, 3, 1, 4, 5};
+// KNOWN ISSUE sometimes this increments to the partner's index
+//             e.g. can happen on w/ 2 player mons but not 1
 static s32 SummaryInput_UpdateMonMultiBattle(s32 idx, u32 totalIdx, s32 delta)
 {
     s32 arrId = 0;
 
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        if (multiorder[i] == idx)
+        if (sSummaryInput_MultiPartyOrder[i] == idx)
         {
             arrId = i;
             break;
@@ -570,26 +571,27 @@ static s32 SummaryInput_UpdateMonMultiBattle(s32 idx, u32 totalIdx, s32 delta)
 
     while (TRUE)
     {
-        const s8 *order = multiorder;
+        const s8 *order = sSummaryInput_MultiPartyOrder;
 
         arrId += delta;
         if (arrId < 0 || arrId >= PARTY_SIZE)
             return -1;
 
         idx = order[arrId];
-        if (SummaryInput_IsMonValidToView(&sMonSummaryDataPtr->list.mons[idx], idx))
+        if (SummaryInput_IsMonValidToView(&sMonSummaryDataPtr->list.mons[idx]))
             return idx;
     }
 }
 
-static bool32 SummaryInput_IsMonValidToView(struct Pokemon *mon, s32 idx)
+static bool32 SummaryInput_IsMonValidToView(struct Pokemon *mon)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE
+     || GetMonData(mon, MON_DATA_IS_EGG))
+    {
         return FALSE;
-    else if (idx != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
-        return TRUE;
+    }
 
-    return FALSE;
+    return TRUE;
 }
 
 static s32 SummaryInput_UpdateMonBox(s32 idx, u32 totalIdx, s32 delta)
