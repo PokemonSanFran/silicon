@@ -182,9 +182,9 @@ static void StatsPageMisc_TrySpawnCursors(void);
 static void StatsPageMisc_SetRow(u32);
 static u32 StatsPageMisc_GetRow(void);
 static void StatsPageMisc_UpdateRow(s32);
-static void StatsPageMisc_UpdateCurrentRowEVs(s32);
-static u32 StatsPageMisc_CalculateAvailableEVs(void);
-static u32 StatsPageMisc_UpdateTotalEVs(void);
+static void StatsPageMisc_UpdateCurrentRowValues(s32);
+static u32 StatsPageMisc_CalculateAvailableValues(void);
+static u32 StatsPageMisc_UpdateTotalValues(void);
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *);
 static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *);
 static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *);
@@ -723,7 +723,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             StatsPageMisc_UpdateRow(-1);
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(1);
+            StatsPageMisc_UpdateCurrentRowValues(1);
             break;
         }
 
@@ -740,7 +740,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             StatsPageMisc_UpdateRow(1);
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(-1);
+            StatsPageMisc_UpdateCurrentRowValues(-1);
             break;
         }
 
@@ -754,7 +754,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(SUMMARY_STATS_MIN_EVS);
+            StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MIN_VALUES);
             break;
         }
 
@@ -768,7 +768,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(SUMMARY_STATS_MAX_EVS);
+            StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MAX_VALUES);
             break;
         }
 
@@ -782,7 +782,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(-10);
+            StatsPageMisc_UpdateCurrentRowValues(-10);
             break;
         }
 
@@ -796,7 +796,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(10);
+            StatsPageMisc_UpdateCurrentRowValues(10);
             break;
         }
 
@@ -837,7 +837,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
-            if (StatsPageMisc_CalculateAvailableEVs())
+            if (StatsPageMisc_CalculateAvailableValues())
             {
                 PlaySE(SE_BOO);
                 sMonSummaryDataPtr->arg.stats.subMode = subMode;
@@ -900,7 +900,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             StatsPageMisc_UpdateRow(-1);
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(1);
+            StatsPageMisc_UpdateCurrentRowValues(1);
             break;
         }
 
@@ -917,7 +917,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             StatsPageMisc_UpdateRow(1);
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(-1);
+            StatsPageMisc_UpdateCurrentRowValues(-1);
             break;
         }
 
@@ -931,7 +931,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(SUMMARY_STATS_MIN_EVS);
+            StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MIN_VALUES);
             break;
         }
 
@@ -945,7 +945,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(SUMMARY_STATS_MAX_EVS);
+            StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MAX_VALUES);
             break;
         }
 
@@ -959,7 +959,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(-10);
+            StatsPageMisc_UpdateCurrentRowValues(-10);
             break;
         }
 
@@ -973,7 +973,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowEVs(10);
+            StatsPageMisc_UpdateCurrentRowValues(10);
             break;
         }
 
@@ -1014,7 +1014,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
-            if (StatsPageMisc_CalculateAvailableEVs())
+            if (StatsPageMisc_CalculateAvailableValues())
             {
                 PlaySE(SE_BOO);
                 sMonSummaryDataPtr->arg.stats.subMode = subMode;
@@ -2547,7 +2547,7 @@ static void StatsPage_HandleMisc(void)
 
     if (SummaryInput_IsWithinSubMode() == SUMMARY_STATS_SUB_MODE_ERROR)
     {
-        ConvertUIntToDecimalStringN(gStringVar1, StatsPageMisc_CalculateAvailableEVs(), STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertUIntToDecimalStringN(gStringVar1, StatsPageMisc_CalculateAvailableValues(), STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You still have {STR_VAR_1} Effort Values!\nAssign them to a stat."));
         SummaryPrint_TextBox(gStringVar4);
     }
@@ -2643,26 +2643,26 @@ static void StatsPageMisc_UpdateRow(s32 delta)
     }
 }
 
-static void StatsPageMisc_UpdateCurrentRowEVs(s32 delta)
+static void StatsPageMisc_UpdateCurrentRowValues(s32 delta)
 {
     u32 trueRow = sStatsPageMisc_MonDataValuesOrders[SUMMARY_TOTAL_EVS][StatsPageMisc_GetRow()];
-    u32 availableEvs = StatsPageMisc_CalculateAvailableEVs();
-    u32 evs = GetMonData(&sMonSummaryDataPtr->mon, trueRow);
+    u32 availableValues = StatsPageMisc_CalculateAvailableValues();
+    u32 values = GetMonData(&sMonSummaryDataPtr->mon, trueRow);
     bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
-    s32 res = evs + delta;
+    s32 res = values + delta;
 
-    if (delta == SUMMARY_STATS_MAX_EVS)
+    if (delta == SUMMARY_STATS_MAX_VALUES)
     {
         res = MAX_PER_STAT_EVS;
     }
-    else if (delta == SUMMARY_STATS_MIN_EVS)
+    else if (delta == SUMMARY_STATS_MIN_VALUES)
     {
         res = 0;
     }
 
     if (additiveDelta)
     {
-        while (res > (s32)(evs + availableEvs) || res > MAX_PER_STAT_EVS)
+        while (res > (s32)(values + availableValues) || res > MAX_PER_STAT_EVS)
         {
             res--;
         }
@@ -2675,12 +2675,12 @@ static void StatsPageMisc_UpdateCurrentRowEVs(s32 delta)
         }
     }
 
-    evs = res;
-    SetMonData(&sMonSummaryDataPtr->mon, trueRow, &evs);
+    values = res;
+    SetMonData(&sMonSummaryDataPtr->mon, trueRow, &values);
     CalculateMonStats(&sMonSummaryDataPtr->mon);
     SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
 
-    if (availableEvs != StatsPageMisc_CalculateAvailableEVs())
+    if (availableValues != StatsPageMisc_CalculateAvailableValues())
     {
         PlaySE(SE_SELECT);
     }
@@ -2688,11 +2688,11 @@ static void StatsPageMisc_UpdateCurrentRowEVs(s32 delta)
 
 // only "useable" when within the evs changing mode
 // since we're comparing the OG evs _and_ the edited evs that are stored by the UI
-static u32 StatsPageMisc_CalculateAvailableEVs(void)
+static u32 StatsPageMisc_CalculateAvailableValues(void)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 ogTotalValues = mon->totalValues[SUMMARY_TOTAL_EVS];
-    u32 totalValues = StatsPageMisc_UpdateTotalEVs();
+    u32 totalValues = StatsPageMisc_UpdateTotalValues();
 
     if (totalValues == ogTotalValues) return 0;
 
@@ -2700,16 +2700,16 @@ static u32 StatsPageMisc_CalculateAvailableEVs(void)
 }
 
 // fills using the evs array
-static u32 StatsPageMisc_UpdateTotalEVs(void)
+static u32 StatsPageMisc_UpdateTotalValues(void)
 {
-     sMonSummaryDataPtr->arg.stats.totalEvs = 0;
+     sMonSummaryDataPtr->arg.stats.totalValues = 0;
 
     for (u32 idx = 0; idx < NUM_STATS; idx++)
     {
-        sMonSummaryDataPtr->arg.stats.totalEvs += GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_EV + idx);
+        sMonSummaryDataPtr->arg.stats.totalValues += GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_EV + idx);
     }
 
-    return sMonSummaryDataPtr->arg.stats.totalEvs;
+    return sMonSummaryDataPtr->arg.stats.totalValues;
 }
 
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
@@ -2736,7 +2736,7 @@ static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
     sprite->invisible = notAdjustValue;
     if (notAdjustValue) return;
 
-    sprite->invisible = !StatsPageMisc_CalculateAvailableEVs();
+    sprite->invisible = !StatsPageMisc_CalculateAvailableValues();
     sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }

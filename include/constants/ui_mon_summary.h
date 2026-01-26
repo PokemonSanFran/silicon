@@ -209,8 +209,8 @@ enum MonSummaryTotalValues
     NUM_SUMMARY_TOTAL_VALUES
 };
 
-#define SUMMARY_STATS_MIN_EVS   (0xFFFE)
-#define SUMMARY_STATS_MAX_EVS   (0xFFFF)
+#define SUMMARY_STATS_MIN_VALUES   (0xFFFE)
+#define SUMMARY_STATS_MAX_VALUES   (0xFFFF)
 
 #define SUMMARY_STATS_HEADER_NAME_X             (TILE_TO_PIXELS(4))
 #define SUMMARY_STATS_HEADER_GENDER_X           (TILE_TO_PIXELS(4) + (TILE_TO_PIXELS(8) + 2))
@@ -476,7 +476,7 @@ struct MonSummaryResources
         u32 infosDescState;
         struct PACKED {
             u32 row:3;
-            u32 totalEvs:10;
+            u32 totalValues:10;
             u32 subMode:2;
             u32 pad:17;
         } stats;
