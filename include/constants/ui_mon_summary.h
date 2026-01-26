@@ -400,6 +400,8 @@ enum MonSummaryGfxManagerIdx
     SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_OPPONENT_RIGHT,
 };
 
+typedef const u8 *(*HelpBarTextFunc)(u32);  // we can't directly attach the enum sadly
+
 // structs
 
 // contains MonData of the current pokemon (list.mons/boxMons[currId])
@@ -509,6 +511,12 @@ struct MonSummarySprite
     const struct OamData *oam;
     const union AnimCmd *const *anims;
     SpriteCallback callback;
+};
+
+struct MonSummaryModeInfo
+{
+    HelpBarTextFunc helpTxtFunc;
+    TaskFunc inputFunc;
 };
 
 // not to be confused with infos page!

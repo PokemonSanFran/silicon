@@ -87,10 +87,10 @@ static void SummaryMon_CopyChanges(void);
 
 static void SummaryMode_SetValue(enum MonSummaryModes);
 static enum MonSummaryModes SummaryMode_GetValue(void);
+static const struct MonSummaryModeInfo *SummaryMode_GetInfo(enum MonSummaryModes);
+static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
-static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
-static void *SummaryPage_GetHandleUpdateTextFunc(enum MonSummaryPages);
-static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages);
+static const u8 *SummaryMode_GetLockEditHelpText(u32);
 static void Task_SummaryMode_DefaultInput(u8);
 
 static void SummaryPage_SetValue(enum MonSummaryPages);
@@ -102,6 +102,9 @@ static const u8 *SummaryPage_GetName(enum MonSummaryPages);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
 static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
+static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
+static void *SummaryPage_GetHandleUpdateTextFunc(enum MonSummaryPages);
+static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages);
 static void SummaryPage_UnloadDynamicSprites(void);
 static void SummaryPage_LoadTilemap(void);
 static void SummaryPage_Reload(enum MonSummaryReloadModes);
@@ -677,7 +680,7 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT
-         && SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
+         && SummaryPage_GetValue() == SUMMARY_PAGE_STATS)
         {
             return;
         }
@@ -922,7 +925,8 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         default:
             return;
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
-            SummaryInput_SetSubMode(subMode + 1);
+            if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT) return;
+            SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
             break;
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
             Task_SummaryInput_MovesOptionInput(taskId);
@@ -1207,12 +1211,47 @@ static enum MonSummaryModes SummaryMode_GetValue(void)
     return sMonSummaryDataPtr->mode;
 }
 
+static const struct MonSummaryModeInfo *SummaryMode_GetInfo(enum MonSummaryModes mode)
+{
+    if (mode >= NUM_UI_SUMMARY_MODES) return NULL;
+
+    return &sSummaryMode_Info[mode];
+}
+
+static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes mode)
+{
+    const struct MonSummaryModeInfo *info = SummaryMode_GetInfo(mode);
+    HelpBarTextFunc func = info->helpTxtFunc;
+
+    if (!info || !func) return NULL;
+
+    return info->helpTxtFunc;
+}
+
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes mode)
 {
-    TaskFunc func = sSummaryMode_InputFuncs[mode];
-    if (!func) return TaskDummy;
+    const struct MonSummaryModeInfo *info = SummaryMode_GetInfo(mode);
+    TaskFunc func = info->inputFunc;
+
+    if (!info || !func) return TaskDummy;
 
     return func;
+}
+
+static const u8 *SummaryMode_GetLockEditHelpText(u32 page)
+{
+    u32 subMode = SummaryInput_IsWithinSubMode();
+
+    switch (page)
+    {
+    case SUMMARY_PAGE_STATS:
+        return sSummaryMode_StatsExitOnly;
+    case SUMMARY_PAGE_MOVES:
+        if (subMode == SUMMARY_MOVES_SUB_MODE_DETAILS) return sSummaryMode_MoveDetailsCancelOnly;
+        break;
+    }
+
+    return SummaryPage_GetInfo(page)->helpBar[subMode];
 }
 
 static void SummaryPage_SetValue(enum MonSummaryPages page)
@@ -1298,11 +1337,10 @@ static void *SummaryPage_GetHandleUpdateTextFunc(enum MonSummaryPages page)
 static const u8 *SummaryPage_GetHelpBarText(enum MonSummaryPages page)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
+    HelpBarTextFunc func = SummaryMode_GetHelpBarTextFunc(SummaryMode_GetValue());
 
-    if (!info || !info->helpBar[SummaryInput_IsWithinSubMode()])
-    {
-        return gText_EmptyString2;
-    }
+    if (func != NULL) return func(page);
+    if (!info || !info->helpBar[SummaryInput_IsWithinSubMode()]) return gText_EmptyString2;
 
     return info->helpBar[SummaryInput_IsWithinSubMode()];
 }

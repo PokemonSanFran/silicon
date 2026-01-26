@@ -198,11 +198,25 @@ static const union AnimCmd *const sSummarySprite_FrameImageAnimTemplate[] =
     },
 };
 
-static const TaskFunc sSummaryMode_InputFuncs[NUM_UI_SUMMARY_MODES] =
+static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
 {
-    // lock edit is identical to default, except it can only access infos page submodes
-    [UI_SUMMARY_MODE_DEFAULT ... UI_SUMMARY_MODE_LOCK_EDIT] = Task_SummaryMode_DefaultInput,
+    [UI_SUMMARY_MODE_DEFAULT] =
+    {
+        .inputFunc = Task_SummaryMode_DefaultInput,
+    },
+    [UI_SUMMARY_MODE_LOCK_EDIT] =
+    {
+        .helpTxtFunc = SummaryMode_GetLockEditHelpText,
+        .inputFunc = Task_SummaryMode_DefaultInput,
+    },
+    [UI_SUMMARY_MODE_IV_TRAIN] =
+    {
+        .inputFunc = Task_SummaryMode_DefaultInput,
+    },
 };
+
+static const u8 sSummaryMode_StatsExitOnly[] = _("{B_BUTTON} Exit");
+static const u8 sSummaryMode_MoveDetailsCancelOnly[] = _("{B_BUTTON} Cancel");
 
 static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
 {
