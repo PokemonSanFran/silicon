@@ -70,7 +70,6 @@
 #include "trade.h"
 #include "union_room.h"
 #include "window.h"
-#include "ui_mon_summary.h" // monSummary
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
 #include "constants/field_effects.h"
@@ -3141,8 +3140,6 @@ static void CursorCb_Summary(u8 taskId)
 
 static void CB2_ShowPokemonSummaryScreen(void)
 {
-    // monSummary Start
-    /*
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
     {
         UpdatePartyToBattleOrder();
@@ -3156,24 +3153,6 @@ static void CB2_ShowPokemonSummaryScreen(void)
     {
         ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
     }
-    */
-
-    enum MonSummaryModes mode = UI_SUMMARY_MODE_DEFAULT;
-
-    switch (gPartyMenu.menuType)
-    {
-    default:
-        break;
-    case PARTY_MENU_TYPE_IN_BATTLE:
-        UpdatePartyToBattleOrder();
-        // fallthrough
-    case PARTY_MENU_TYPE_CHOOSE_HALF:
-        mode = UI_SUMMARY_MODE_LOCK_EDIT;
-        break;
-    }
-
-    MonSummary_Init(mode, gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
-    // monSummary End
 }
 
 void CB2_ReturnToPartyMenuFromSummaryScreen(void)

@@ -43,6 +43,7 @@
 #include "text.h"
 #include "tv.h"
 #include "window.h"
+#include "ui_mon_summary.h" // monSummary
 #include "constants/battle_move_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -1176,6 +1177,29 @@ u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
 {
+    // Start monSummary
+    enum MonSummaryModes newMode = UI_SUMMARY_MODE_DEFAULT;
+
+    switch (mode)
+    {
+    default:
+        DebugPrintf("WARNING mode %d used but not handled on the new MonSummary");
+        // fallthrough
+    case SUMMARY_MODE_NORMAL:
+        break;
+    case SUMMARY_MODE_LOCK_MOVES:
+        newMode = UI_SUMMARY_MODE_LOCK_EDIT;
+        break;
+    case SUMMARY_MODE_BOX:
+    case SUMMARY_MODE_BOX_CURSOR: // mon is being moved in PC
+        newMode = UI_SUMMARY_MODE_BOX;
+        break;
+    }
+
+    MonSummary_Init(newMode, mons, monIndex, maxMonIndex, callback);
+    return;
+    // End monSummary
+
     sMonSummaryScreen = AllocZeroed(sizeof(*sMonSummaryScreen));
     sMonSummaryScreen->mode = mode;
     sMonSummaryScreen->monList.mons = mons;

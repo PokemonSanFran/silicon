@@ -37,7 +37,6 @@
 #include "trig.h"
 #include "walda_phrase.h"
 #include "window.h"
-#include "ui_mon_summary.h" // monSummary
 #include "constants/form_change_types.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -3797,7 +3796,7 @@ static void Task_ChangeScreen(u8 taskId)
         else
             ShowPokemonSummaryScreen(mode, boxMons, monIndex, maxMonIndex, CB2_ReturnToPokeStorage);
         */
-        MonSummary_Init(UI_SUMMARY_MODE_BOX, boxMons, monIndex, maxMonIndex, CB2_ReturnToPokeStorage);
+        ShowPokemonSummaryScreen(mode, boxMons, monIndex, maxMonIndex, CB2_ReturnToPokeStorage);
         // monSummary End
         break;
     case SCREEN_CHANGE_NAME_BOX:
