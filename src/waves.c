@@ -53,6 +53,8 @@ u8 Waves_CalculateAmountRaised(enum GoalEnum goalId);
 u8 Waves_CalculateAmountRemaining(enum GoalEnum goalId, enum GoalAttributes attributes);
 static void Waves_AllPassiveIncrease(void);
 static void Waves_PassiveIncrease(enum GoalEnum goalId);
+static u8 Waves_CalculatePercentRaised(enum GoalEnum goalId);
+static void Waves_CompleteSubQuestIfGoalComplete(enum GoalEnum goalId);
 static void Waves_VBlankCB(void);
 static void Waves_MainCB(void);
 static bool32 Waves_InitializeBackgrounds(void);
@@ -417,7 +419,7 @@ static const struct WindowTemplate sWavesGoalWindows[] =
 
 static const u8 *const Waves_GetTitle(enum GoalEnum goal)
 {
-    if (QuestMenu_GetSetSubquestState(QUEST_MUTUALAIDOUTREACH, FLAG_SET_COMPLETED, Waves_GetSubQuest(goal)) == FALSE)
+    if (QuestMenu_GetSetSubquestState(QUEST_MUTUALAIDOUTREACH, FLAG_GET_COMPLETED, Waves_GetSubQuest(goal)) == FALSE)
         return sWavesInformation[GOAL_NONE].desc;
     else
         return sWavesInformation[goal].title;
@@ -481,6 +483,7 @@ u8 Waves_GetPercentRaised(enum GoalEnum goalId, enum GoalAttributes attribute)
 static void Waves_SetPercentRaised(enum GoalEnum goalId, enum GoalAttributes attribute, u32 amount)
 {
     gSaveBlock3Ptr->wavesFunds[attribute][goalId] = amount;
+    Waves_CompleteSubQuestIfGoalComplete(goalId);
 }
 
 void Waves_SetPlayerPercent(enum GoalEnum goalId, u32 amount)
@@ -532,7 +535,7 @@ void Waves_DoDailyPassiveIncrease(u32 daysSince)
 
 static void Waves_AllPassiveIncrease(void)
 {
-    for (enum GoalEnum goalId = 0; goalId < GOAL_COUNT; goalId++)
+    for (enum GoalEnum goalId = GOAL_FOOD_SECURITY; goalId < GOAL_COUNT; goalId++)
         Waves_PassiveIncrease(goalId);
 }
 
@@ -553,7 +556,20 @@ static void Waves_PassiveIncrease(enum GoalEnum goalId)
     Waves_IncreasePassivePercent(goalId,amount);
 }
 
-u8 Waves_CalculatePercentRaised(enum GoalEnum goalId)
+bool8 Waves_IsGoalComplete(enum GoalEnum goalId)
+{
+    return (Waves_CalculatePercentRaised(goalId) >= 100);
+}
+
+static void Waves_CompleteSubQuestIfGoalComplete(enum GoalEnum goalId)
+{
+    if (!Waves_IsGoalComplete(goalId))
+        return;
+
+    QuestMenu_GetSetSubquestState(QUEST_MUTUALAIDFUND, FLAG_SET_COMPLETED, Waves_GetSubQuest(goalId));
+}
+
+static u8 Waves_CalculatePercentRaised(enum GoalEnum goalId)
 {
     return (Waves_GetPlayerPercent(goalId) + Waves_GetPassivePercent(goalId));
 }
