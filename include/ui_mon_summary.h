@@ -13,6 +13,5 @@ enum __attribute__((packed)) MonSummaryModes
 };
 
 void MonSummary_Init(enum MonSummaryModes, void *, u8, u8, MainCallback);
-void MonSummary_OpenDefault(void);
 
 #endif // GUARD_UI_MON_SUMMARY_H

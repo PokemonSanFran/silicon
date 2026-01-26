@@ -3495,6 +3495,13 @@
 	.endm
     @ End adventureGuide
 
+	@ monSummary Start
+	.macro editmonivs slot=VAR_0x8004
+	callnative MonSummary_EditMonIVs
+	.2byte \slot
+	.endm
+	@ monSummary End
+
 	@ Manually buffer a string as the speaker's name for namebox.
 	@ The next shown message/msgbox will include a namebox, if the provided string is not NULL.
 	@ An SP_NAME_* constant can also be used, it'll take the name from gSpeakerNamesTable instead.

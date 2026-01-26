@@ -34,6 +34,8 @@
 #include "pokeball.h"
 #include "line_break.h"
 #include "pokemon_summary_screen.h"
+#include "event_data.h"
+#include "field_weather.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -225,9 +227,20 @@ static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *);
 #include "data/ui_mon_summary.h"
 
 // code
-void MonSummary_OpenDefault(void)
+void Task_MonSummary_WaitFadeAndInit(u8 taskId)
 {
-    MonSummary_Init(UI_SUMMARY_MODE_EDIT_IVS, gPlayerParty, 0, 0, CB2_ReturnToFieldContinueScript);
+    if (!gPaletteFade.active)
+    {
+        MonSummary_Init(UI_SUMMARY_MODE_EDIT_IVS, gPlayerParty, gTasks[taskId].data[0], 0, CB2_ReturnToFieldContinueScript);
+        DestroyTask(taskId);
+    }
+}
+
+void MonSummary_EditMonIVs(struct ScriptContext *ctx)
+{
+    FadeScreenHardware(FADE_TO_BLACK, 0);
+    u32 taskId = CreateTask(Task_MonSummary_WaitFadeAndInit, 0);
+    gTasks[taskId].data[0] = VarGet(ScriptReadHalfword(ctx));
 }
 
 void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 totalIdx, MainCallback callback)
@@ -825,7 +838,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(B_BUTTON))
+    if (JOY_NEW(B_BUTTON) && IsCryFinished())
     {
         switch (subMode)
         {
