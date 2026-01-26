@@ -1033,7 +1033,7 @@ static bool32 (* const sFilterFunctions[])(u32 species) =
     [POKEDEX_FILTER_TYPES] = SpeciesFilter_CheckSpeciesTypesAgainstFilters,
     [POKEDEX_FILTER_ABILITY] = SpeciesFilter_DoesSpeciesHaveAbility,
     [POKEDEX_FILTER_MOVES] = SpeciesFilter_DoesSpeciesLearnMoves,
-    [POKEDEX_FILTER_ALOLA] = IsSpeciesFromAlola,
+    [POKEDEX_FILTER_ALOLA] = SpeciesFilter_IsSpeciesFromAlola,
     [POKEDEX_FILTER_COUNT] = NULL,
 };
 

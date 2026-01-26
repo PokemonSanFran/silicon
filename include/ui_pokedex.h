@@ -177,6 +177,7 @@ bool32 SpeciesFilter_IsSpeciesInEggGroups(u32);
 bool32 SpeciesFilter_CheckSpeciesTypesAgainstFilters(u32);
 bool32 SpeciesFilter_DoesSpeciesHaveAbility(u32);
 bool32 SpeciesFilter_DoesSpeciesLearnMoves(u32);
+bool32 SpeciesFilter_IsSpeciesFromAlola(u32);
 void FreeBackgrounds(void);
 void Pokedex_SetupCallback(void);
 void SpeciesFilter_SwitchToFromGrid(u8);

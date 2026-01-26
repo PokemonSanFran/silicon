@@ -472,7 +472,9 @@ bool32 SpeciesFilter_IsSpeciesFromAlola(u32 species)
         if (sFilterSet->filterAlola[filterIndex] == nullOptionLUT[FILTER_LIST_COLOR])
             return FALSE;
 
-        if (IsSpeciesFromAlola(species) == sFilterSet->filterAlola[filterIndex])
+    enum AlolaModeList alola = (IsSpeciesFromAlola(species)) ? ALOLA_YES : ALOLA_NO;
+
+        if (alola == sFilterSet->filterAlola[filterIndex])
             return TRUE;
     }
     return FALSE;
