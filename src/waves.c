@@ -1382,7 +1382,7 @@ static void Waves_PrintCardText(enum GoalEnum goalId)
 
 static void Debug_LoadUpGoals(void)
 {
-    SetMoney(&gSaveBlock1Ptr->money, MAX_MONEY);
+    return;
     for (enum GoalEnum goalId = GOAL_LEGAL_DEFENSE; goalId < -1; goalId--)
     {
         u32 player[GOAL_COUNT] = {42,22,32,49,2,12};
@@ -1391,6 +1391,7 @@ static void Debug_LoadUpGoals(void)
         Waves_SetPlayerPercent(goalId, player[goalId]);
         Waves_SetPassivePercent(goalId, passive[goalId]);
     }
+    SetMoney(&gSaveBlock1Ptr->money, MAX_MONEY);
 }
 
 static void SetCursorPosition(enum WavesCursorPosition position)
@@ -1794,13 +1795,17 @@ static void Task_FlashDonation(u8 taskId)
     u32 y = TILE_HEIGHT;
 
     u32 goalAmount = GetDonatePosition() + 1;
-    s32 meterAmount = goalAmount * 10000;
+    u32 bufferFactor = (goalAmount % 2 == 0) ? 0 : WAVES_METER_FACTOR;
+    s32 meterAmount = (goalAmount * 10000) + bufferFactor;
 
     while (meterAmount >= WAVES_METER_FACTOR)
     {
         BlitBitmapToWindow(windowId,wavesDonatePixel,x,y,1,TILE_HEIGHT);
         meterAmount -= WAVES_METER_FACTOR;
         x++;
+
+        if (x >= 95)
+            break;
     }
 
     sWavesState->x = x;
@@ -1925,11 +1930,9 @@ static void Waves_DisplayPercentToGo(enum WavesWindowsGoal windowId, bool32 succ
 
 static void Waves_PrintDonateMessage(enum WavesWindowsGoal windowId, bool32 success)
 {
-    u32 x = TILE_WIDTH;
-    u32 y = 0;
+    u32 y = 4;
 
     u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
-    windowWidth -= (2 * TILE_WIDTH);
 
     u32 oldFontId = FONT_NARROW;
     u32 fontId = GetFontIdToFit(gStringVar3, oldFontId, GetFontAttribute(oldFontId, FONTATTR_LETTER_SPACING), windowWidth);
@@ -1940,20 +1943,19 @@ static void Waves_PrintDonateMessage(enum WavesWindowsGoal windowId, bool32 succ
     ConvertIntToDecimalStringN(gStringVar1,proposedDonate,STR_CONV_MODE_LEFT_ALIGN,CountDigits(proposedDonate));
 
     if (success)
-        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Congrats!"));
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Thanks!"));
     else
         StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Not Enough Money!"));
 
+    u32 x = GetStringCenterAlignXOffset(fontId, gStringVar4, windowWidth);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static void Waves_PrintDonateEmoji(enum WavesWindowsGoal windowId, bool32 success)
 {
-    u32 x = TILE_WIDTH;
-    u32 y = 0;
+    u32 y = 3;
 
     u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
-    windowWidth -= (2 * TILE_WIDTH);
 
     u32 oldFontId = FONT_NARROW;
     u32 fontId = GetFontIdToFit(gStringVar3, oldFontId, GetFontAttribute(oldFontId, FONTATTR_LETTER_SPACING), windowWidth);
@@ -1963,21 +1965,18 @@ static void Waves_PrintDonateEmoji(enum WavesWindowsGoal windowId, bool32 succes
     if (success)
         StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{EMOJI_HAPPY}"));
     else
-        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{EMOJI_SHOCKED}"));
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{EMOJI_SURPRISED}"));
 
+    u32 x = GetStringCenterAlignXOffset(fontId, gStringVar4, windowWidth);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static void Waves_PrintPercentToGo(enum WavesWindowsGoal windowId, bool32 success)
 {
-    u32 x = TILE_WIDTH;
     u32 y = 0;
 
     u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
-    windowWidth -= (2 * TILE_WIDTH);
-    u32 oldFontId = FONT_NARROW;
 
-    u32 goal = Waves_GetGoal(GetGoalFromCurrentPosition());
     u32 percent = sWavesState->moneyStruct.playerPercent + sWavesState->moneyStruct.passivePercent;
     u32 total = (100 - percent);
 
@@ -1989,12 +1988,16 @@ static void Waves_PrintPercentToGo(enum WavesWindowsGoal windowId, bool32 succes
     else
     {
         ConvertIntToDecimalStringN(gStringVar1,total,STR_CONV_MODE_LEFT_ALIGN,CountDigits(total));
-        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_1}% to go"));
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_1}% remaining!"));
     }
 
+    u32 oldFontId = FONT_NARROW;
     u32 fontId = GetFontIdToFit(gStringVar4, oldFontId, GetFontAttribute(oldFontId, FONTATTR_LETTER_SPACING), windowWidth);
+
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 x = GetStringCenterAlignXOffset(fontId, gStringVar4, windowWidth);
+
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sWavesWindowFontColors[WAVES_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
 }
 
