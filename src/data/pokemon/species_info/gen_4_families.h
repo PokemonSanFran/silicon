@@ -1743,6 +1743,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sShieldonTeachableLearnset,
         .eggMoveLearnset = sShieldonEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BASTIODON}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_BASTIODON] =
@@ -1811,6 +1812,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         )
         .levelUpLearnset = sBastiodonLevelUpLearnset,
         .teachableLearnset = sBastiodonTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_SHIELDON
 
@@ -3392,6 +3394,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sBunearyTeachableLearnset,
         .eggMoveLearnset = sBunearyEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_LOPUNNY, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD})}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_LOPUNNY] =
@@ -3462,6 +3465,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLopunnyTeachableLearnset,
         .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,
         .formChangeTable = sLopunnyFormChangeTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 
 #if P_MEGA_EVOLUTIONS
@@ -3532,6 +3536,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .teachableLearnset = sLopunnyTeachableLearnset,
         .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,
         .formChangeTable = sLopunnyFormChangeTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_BUNEARY

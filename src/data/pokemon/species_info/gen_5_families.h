@@ -4419,6 +4419,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .eggMoveLearnset = sPetililEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_LILLIGANT, CONDITIONS({IF_NOT_REGION, REGION_HISUI})},
                                 {EVO_ITEM, ITEM_SUN_STONE, SPECIES_LILLIGANT_HISUI, CONDITIONS({IF_REGION, REGION_HISUI})}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_LILLIGANT] =
@@ -4490,6 +4491,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sLilligantLevelUpLearnset,
         .teachableLearnset = sLilligantTeachableLearnset,
         .formSpeciesIdTable = sLilligantFormSpeciesIdTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 
 #if P_HISUIAN_FORMS
@@ -5801,6 +5803,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sScraggyTeachableLearnset,
         .eggMoveLearnset = sScraggyEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_SCRAFTY}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_SCRAFTY] =
@@ -5873,6 +5876,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sScraftyTeachableLearnset,
         .formSpeciesIdTable = sScraftyFormSpeciesIdTable,
         .formChangeTable = sScraftyFormChangeTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 
 #if P_GEN_9_MEGA_EVOLUTIONS
@@ -6379,6 +6383,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sTirtougaTeachableLearnset,
         .eggMoveLearnset = sTirtougaEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_CARRACOSTA}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_CARRACOSTA] =
@@ -6454,6 +6459,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sCarracostaLevelUpLearnset,
         .teachableLearnset = sCarracostaTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_TIRTOUGA
 
@@ -6671,6 +6677,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sTrubbishTeachableLearnset,
         .eggMoveLearnset = sTrubbishEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GARBODOR}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_GARBODOR] =
@@ -6744,6 +6751,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sGarbodorTeachableLearnset,
         .formSpeciesIdTable = sGarbodorFormSpeciesIdTable,
         .formChangeTable = sGarbodorFormChangeTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 
 #if P_GIGANTAMAX_FORMS
@@ -6866,6 +6874,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sGarbodorTeachableLearnset,
         .formSpeciesIdTable = sGarbodorFormSpeciesIdTable,
         .formChangeTable = sGarbodorFormChangeTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_MEGA_EVOLUTIONS
 // End siliconMerge
@@ -6943,6 +6952,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .eggMoveLearnset = sZoruaEggMoveLearnset,
         .formSpeciesIdTable = sZoruaFormSpeciesIdTable,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ZOROARK}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_ZOROARK] =
@@ -7014,6 +7024,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sZoroarkLevelUpLearnset,
         .teachableLearnset = sZoroarkTeachableLearnset,
         .formSpeciesIdTable = sZoroarkFormSpeciesIdTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 
 #if P_HISUIAN_FORMS
@@ -7944,6 +7955,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sVanilliteTeachableLearnset,
         .eggMoveLearnset = sVanilliteEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_VANILLISH}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_VANILLISH] =
@@ -8018,6 +8030,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sVanillishLevelUpLearnset,
         .teachableLearnset = sVanillishTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 47, SPECIES_VANILLUXE}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_VANILLUXE] =
@@ -8091,6 +8104,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sVanilluxeLevelUpLearnset,
         .teachableLearnset = sVanilluxeTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_VANILLITE
 
@@ -11264,6 +11278,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sMienfooTeachableLearnset,
         .eggMoveLearnset = sMienfooEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_MIENSHAO}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_MIENSHAO] =
@@ -11336,6 +11351,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sMienshaoLevelUpLearnset,
         .teachableLearnset = sMienshaoTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_MIENFOO
 
@@ -11484,6 +11500,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sGolettLevelUpLearnset,
         .teachableLearnset = sGolettTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 43, SPECIES_GOLURK}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_GOLURK] =
@@ -11553,6 +11570,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sGolurkLevelUpLearnset,
         .teachableLearnset = sGolurkTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_GOLETT
 
@@ -12629,6 +12647,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sLarvestaTeachableLearnset,
         .eggMoveLearnset = sLarvestaEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 59, SPECIES_VOLCARONA}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_VOLCARONA] =
@@ -12701,6 +12720,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sVolcaronaLevelUpLearnset,
         .teachableLearnset = sVolcaronaTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_LARVESTA
 
