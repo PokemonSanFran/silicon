@@ -1,4 +1,4 @@
-mapscripts RouteA_Grotto_MapScripts{
+mapscripts Route16_Grotto_MapScripts{
     MAP_SCRIPT_ON_FRAME_TABLE[
         VAR_TEMP_0,0: Quest_Hiddengrottomapping_StartQuest_Dialogue
     ]

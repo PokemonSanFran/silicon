@@ -37,6 +37,7 @@
 #include "malloc.h"
 #include "m4a.h"
 #include "nameplate.h" // siliconMerge
+#include "hidden_grotto.h" // hidden_grotto
 #include "map_name_popup.h"
 #include "match_call.h"
 #include "menu.h"
@@ -405,6 +406,7 @@ void Overworld_ResetStateAfterFly(void)
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
     ClearFieldMoveFlags(); // qol_field_moves
+    ResetSavedGrottoMon(); // hidden_grotto
 }
 
 void Overworld_ResetStateAfterTeleport(void)
@@ -417,6 +419,7 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
     ClearFieldMoveFlags(); // qol_field_moves
+    ResetSavedGrottoMon(); // hidden_grotto
     RunScriptImmediately(EventScript_ResetMrBriney);
 }
 
@@ -430,6 +433,7 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
     ClearFieldMoveFlags(); // qol_field_moves
+    ResetSavedGrottoMon(); // hidden_grotto
 }
 
 #if B_RESET_FLAGS_VARS_AFTER_WHITEOUT  == TRUE
@@ -472,6 +476,7 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
     ClearFieldMoveFlags(); // qol_field_moves
+    ResetSavedGrottoMon(); // hidden_grotto
     if (B_RESET_FLAGS_VARS_AFTER_WHITEOUT == TRUE)
         Overworld_ResetBattleFlagsAndVars();
     // If you were defeated by Kyogre/Groudon and the step counter has
