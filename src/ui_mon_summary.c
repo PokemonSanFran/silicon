@@ -185,6 +185,8 @@ static void StatsPageMisc_UpdateRow(s32);
 static void StatsPageMisc_UpdateCurrentRowValues(s32);
 static u32 StatsPageMisc_CalculateAvailableValues(void);
 static u32 StatsPageMisc_UpdateTotalValues(void);
+static u32 StatsPageMisc_GetTotalValuesType(void);
+static u32 StatsPageMisc_GetMaxValuesPerStat(void);
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *);
 static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *);
 static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *);
@@ -2548,7 +2550,12 @@ static void StatsPage_HandleMisc(void)
     if (SummaryInput_IsWithinSubMode() == SUMMARY_STATS_SUB_MODE_ERROR)
     {
         ConvertUIntToDecimalStringN(gStringVar1, StatsPageMisc_CalculateAvailableValues(), STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You still have {STR_VAR_1} Effort Values!\nAssign them to a stat."));
+        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS)
+            StringCopy(gStringVar2, COMPOUND_STRING("Individual"));
+        else
+            StringCopy(gStringVar2, COMPOUND_STRING("Effort"));
+
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You still have {STR_VAR_1} {STR_VAR_2} Value(s)!\nAssign them to a stat."));
         SummaryPrint_TextBox(gStringVar4);
     }
 
@@ -2607,8 +2614,6 @@ static void StatsPageMisc_TrySpawnCursors(void)
     }
 }
 
-// TODO refactor to work for IVs as well
-
 static void StatsPageMisc_SetRow(u32 val)
 {
     sMonSummaryDataPtr->arg.stats.row = val;
@@ -2645,15 +2650,16 @@ static void StatsPageMisc_UpdateRow(s32 delta)
 
 static void StatsPageMisc_UpdateCurrentRowValues(s32 delta)
 {
-    u32 trueRow = sStatsPageMisc_MonDataValuesOrders[SUMMARY_TOTAL_EVS][StatsPageMisc_GetRow()];
+    u32 trueRow = sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()];
     u32 availableValues = StatsPageMisc_CalculateAvailableValues();
     u32 values = GetMonData(&sMonSummaryDataPtr->mon, trueRow);
+    u32 maxPerStat = StatsPageMisc_GetMaxValuesPerStat();
     bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
     s32 res = values + delta;
 
     if (delta == SUMMARY_STATS_MAX_VALUES)
     {
-        res = MAX_PER_STAT_EVS;
+        res = maxPerStat;
     }
     else if (delta == SUMMARY_STATS_MIN_VALUES)
     {
@@ -2662,7 +2668,7 @@ static void StatsPageMisc_UpdateCurrentRowValues(s32 delta)
 
     if (additiveDelta)
     {
-        while (res > (s32)(values + availableValues) || res > MAX_PER_STAT_EVS)
+        while (res > (s32)(values + availableValues) || res > maxPerStat)
         {
             res--;
         }
@@ -2691,7 +2697,7 @@ static void StatsPageMisc_UpdateCurrentRowValues(s32 delta)
 static u32 StatsPageMisc_CalculateAvailableValues(void)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 ogTotalValues = mon->totalValues[SUMMARY_TOTAL_EVS];
+    u32 ogTotalValues = mon->totalValues[StatsPageMisc_GetTotalValuesType()];
     u32 totalValues = StatsPageMisc_UpdateTotalValues();
 
     if (totalValues == ogTotalValues) return 0;
@@ -2706,10 +2712,26 @@ static u32 StatsPageMisc_UpdateTotalValues(void)
 
     for (u32 idx = 0; idx < NUM_STATS; idx++)
     {
-        sMonSummaryDataPtr->arg.stats.totalValues += GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_EV + idx);
+        u32 field = sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][idx];
+        sMonSummaryDataPtr->arg.stats.totalValues += GetMonData(&sMonSummaryDataPtr->mon, field);
     }
 
     return sMonSummaryDataPtr->arg.stats.totalValues;
+}
+
+static u32 StatsPageMisc_GetTotalValuesType(void)
+{
+    if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS)
+        return SUMMARY_TOTAL_IVS;
+
+    return SUMMARY_TOTAL_EVS;
+}
+
+static u32 StatsPageMisc_GetMaxValuesPerStat(void)
+{
+    if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) return MAX_PER_STAT_IVS;
+
+    return MAX_PER_STAT_EVS;
 }
 
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
@@ -2747,7 +2769,7 @@ static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
     sprite->invisible = notAdjustValue;
     if (notAdjustValue) return;
 
-    sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[SUMMARY_TOTAL_EVS][StatsPageMisc_GetRow()]);
+    sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
     sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
