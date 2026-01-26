@@ -38,6 +38,7 @@
 static void SpeciesFilter_ResetEntireOption(enum PokedexFilterList);
 static void SpeciesFilter_ResetFilterSingleOption(enum PokedexFilterList, u32);
 static void DebugPrintActiveFilters(void);
+bool32 SpeciesFilter_IsSpeciesFromAlola(u32);
 static bool32 SpeciesFilter_DoesSpeciesLearnFilteredMove(u32, u32);
 static bool32 SpeciesFilter_IsSpeciesStatWithinTier_Stat(u32, u32);
 static bool32 SpeciesFilter_CheckHPTier(u32,u32);
@@ -454,6 +455,24 @@ bool32 SpeciesFilter_DoesSpeciesMatchColor(u32 species)
             return FALSE;
 
         if (gSpeciesInfo[species].bodyColor == sFilterSet->filterColor[filterIndex])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 SpeciesFilter_IsSpeciesFromAlola(u32 species)
+{
+    u32 filterIndex;
+
+    if (sFilterSet->filterAlola[0] == nullOptionLUT[FILTER_LIST_ALOLA])
+        return TRUE;
+
+    for (filterIndex = 0; filterIndex < ALOLA_COUNT; filterIndex++)
+    {
+        if (sFilterSet->filterAlola[filterIndex] == nullOptionLUT[FILTER_LIST_COLOR])
+            return FALSE;
+
+        if (IsSpeciesFromAlola(species) == sFilterSet->filterAlola[filterIndex])
             return TRUE;
     }
     return FALSE;
