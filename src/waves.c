@@ -113,7 +113,6 @@ static void Waves_PrintCardMeter(enum GoalEnum goalId);
 static void Waves_PutMeterTiles(enum GoalEnum goalId, u32 playerAmount, u32 passiveAmount, u32 offset, u32 windowId);
 static void SetCursorPosition(enum WavesCursorPosition position);
 static enum WavesCursorPosition GetCursorPosition(void);
-static void ResetCursorPosition(void);
 static void SetDonatePosition(u32 position);
 static u32 GetDonatePosition(void);
 static void ResetDonatePosition(void);
@@ -434,7 +433,7 @@ static const u32* Waves_GetThumbnail(enum GoalEnum goal)
     return sWavesInformation[goal].thumbnail;
 }
 
-static enum QuestIdList Waves_GetMainQuest(enum GoalEnum goal)
+static enum QuestIdList UNUSED Waves_GetMainQuest(enum GoalEnum goal)
 {
     return sWavesInformation[goal].relatedQuest;
 }
@@ -1404,11 +1403,6 @@ static enum WavesCursorPosition GetCursorPosition(void)
     return sWavesState->position;
 }
 
-static void ResetCursorPosition(void)
-{
-    SetCursorPosition(0);
-}
-
 static void SetDonatePosition(u32 position)
 {
     sWavesState->donatePosition = position;
@@ -1446,10 +1440,6 @@ static void ChangeDonatePosition(enum WavesMovement movement)
 
     SetDonatePosition(newCurrent);
     Waves_DisplayDonationAmount(WIN_WAVES_GOAL_BOX_METER);
-}
-
-static void DecreaseDonatePosition(void)
-{
 }
 
 static enum WavesMode Waves_GetMode(void)

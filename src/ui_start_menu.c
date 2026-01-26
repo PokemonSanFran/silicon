@@ -907,7 +907,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     {
         COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu, START_SIGNAL_OKAY
     },
-    [START_APP_WAVES_OF_CHANGE] = // PSF TODO ui
+    [START_APP_WAVES_OF_CHANGE] =
     {
         COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, CB2_WavesFromStartMenu, START_SIGNAL_STRONG
     },
@@ -1587,7 +1587,7 @@ static void StartPrint_HelpTopText(void)
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
 
-    // TIME OF DAY, 
+    // TIME OF DAY,
     enum TimeOfDay time = GetTimeOfDay();
     StringAppend(strbuf[0], sStartMenuStrings_TimeOfDay[time]);
     StringAppend(strbuf[0], COMPOUND_STRING(", "));
