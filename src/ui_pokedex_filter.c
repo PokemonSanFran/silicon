@@ -65,6 +65,7 @@ static void SpeciesFilter_PrintCursor(enum FilterPageWindows windowId, enum Poke
 static void SpeciesFilter_BufferPropertiesToString(u32, enum PokedexFilterList);
 static void SpeciesFilter_TrimPropertiesString(u32);
 static void SpeciesFilter_SwitchToEditPage(u8 taskId);
+static bool8 SpeciesFilter_AllowAlolaMode(enum PokedexFilterList);
 
 static void Task_SpeciesFilter_GoToEditPage(u8);
 static void SpeciesFilter_SetUp(u8);
@@ -1026,7 +1027,13 @@ void SpeciesFilter_PrintFilterHeaders(void)
 
         SpeciesFilter_PrintCursor(windowId, filterId);
 
-        AddTextPrinterParameterized4(windowId, fontId, 4, 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, sFilterListTexts[filterId++]);
+        if (SpeciesFilter_AllowAlolaMode(filterId))
+            StringCopy(gStringVar2,COMPOUND_STRING("???"));
+        else
+            StringCopy(gStringVar2,sFilterListTexts[filterId]);
+
+        AddTextPrinterParameterized4(windowId, fontId, 4, 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar2);
+        filterId++;
 
         CopyWindowToVram(windowId, COPYWIN_GFX);
         windowId++;
@@ -1124,12 +1131,23 @@ static void SpeciesFilter_TrimPropertiesString(u32 fontId)
     StringAppend(gStringVar2,COMPOUND_STRING("..."));
 }
 
+static bool8 SpeciesFilter_AllowAlolaMode(enum PokedexFilterList currentFilter)
+{
+    return ((currentFilter == FILTER_LIST_ALOLA) && (!QuestMenu_GetSetQuestState(QUEST_ALOHAFROMALOLA, FLAG_GET_ACTIVE)));
+}
+
 static void SpeciesFilter_SwitchToEditPage(u8 taskId)
 {
     enum PokedexFilterList currentFilter = SpeciesFilter_GetCurrentPositionInFilterList();
     if (currentFilter == FILTER_LIST_COUNT)
     {
         SpeciesGrid_SwitchTo(taskId);
+        return;
+    }
+
+    if (SpeciesFilter_AllowAlolaMode(currentFilter))
+    {
+        PlaySE(SE_BOO);
         return;
     }
 
