@@ -696,3 +696,6 @@ gSpecials::
     def_special PreparePartyForLittleCupBattle
 // End littlecup
 	def_special SetHiddenNature
+	def_special SetAbility
+	def_special ObjectEventInteractionGetApricornTreeData
+	def_special ObjectEventInteractionPickApricornTree

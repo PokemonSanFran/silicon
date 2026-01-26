@@ -9,7 +9,6 @@
 #include "malloc.h"
 #include "event_data.h"
 #include "string_util.h"
-#include "random.h"
 #include "constants/nameplate.h"
 #include "map_name_popup.h"
 #include "data/speaker_data.h"
@@ -35,7 +34,7 @@ static void DrawTopMessageBoxTiles(u32, u32, u32, u32);
 static void DrawSecondRowNameplateTiles(u32, u32, u32, u32);
 static void DrawThirdRowNameplateTiles(u32, u32, u32, u32);
 static void DrawTopNameplateTiles(u32, u32, u32, u32);
-static u32 GetSpeakerNameWidth(u32 speaker);
+static u32 GetSpeakerNameWidth(u32 speaker, u32 phone);
 static u32 GetSpeakerTitleWidth(u32 speaker);
 static void PlaceNameplateOnTilemap(u32 windowId);
 static void PrintSpeakerName(u32 windowId, enum NameplateSpeaker speaker);
@@ -51,22 +50,10 @@ static const u16 gMessageBox_Pal[] = INCBIN_U16("graphics/ui_menus/msgbox/messag
 static const u16 gNameplateMale[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateMale.gbapal");
 static const u16 gNameplateFemale[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateFemale.gbapal");
 static const u16 gNameplateNonbinary[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateNonbinary.gbapal");
+static const u16 gNameplateSign[] = INCBIN_U16("graphics/ui_menus/msgbox/nameplateSign.gbapal");
 static const u8 sMsgbox_Phone_On[] = INCBIN_U8("graphics/ui_menus/msgbox/phone/phone_on.4bpp");
-
-static const u8 sMsgbox_Emote_Angry[]   = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_angry.4bpp");
-static const u8 sMsgbox_Emote_Confuse[] = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_confuse.4bpp");
-static const u8 sMsgbox_Emote_Default[] = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_default.4bpp");
-static const u8 sMsgbox_Emote_Happy[]   = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_happy.4bpp");
-static const u8 sMsgbox_Emote_Laugh[]   = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_laugh.4bpp");
-static const u8 sMsgbox_Emote_Love[]    = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_love.4bpp");
-static const u8 sMsgbox_Emote_Sad[]     = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_sad.4bpp");
-static const u8 sMsgbox_Emote_Shock[]   = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_shock.4bpp");
-static const u8 sMsgbox_Emote_Sweat[]   = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote_sweat.4bpp");
-
-static const u8 sMsgbox_Tail_Shout[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/tail_shout.4bpp");
-static const u8 sMsgbox_Tail_Talk[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/tail_talk.4bpp");
-static const u8 sMsgbox_Tail_Thought[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/tail_thought.4bpp");
-static const u8 sMsgbox_Tail_Whisper[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/tail_whisper.4bpp");
+static const u8 emoteGfx[] = INCBIN_U8("graphics/ui_menus/msgbox/emotes/emote.4bpp");
+static const u8 tailGfx[] = INCBIN_U8("graphics/ui_menus/msgbox/tails/tail.4bpp");
 
 static const u32 sMessageBoxLeftTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxLeftTop.4bpp.smol");
 static const u32 sMessageBoxCenterTop[] = INCBIN_U32("graphics/ui_menus/msgbox/nameplate/messageBoxCenterTop.4bpp.smol");
@@ -132,6 +119,7 @@ static const u16* const genderNameplatePaletteLUT[] =
     gNameplateFemale,
     gMessageBox_Pal,
     gNameplateNonbinary,
+    gNameplateSign,
     gMessageBox_Pal,
 };
 
@@ -237,26 +225,6 @@ static const u32* const nameplateRightTopLUT[] =
     sNameplateRightTop8,
 };
 
-static const u8* const emotesGfxLUT[] =
-{
-    [EMOTE_DEFAULT] = sMsgbox_Emote_Default,
-    [EMOTE_ANGRY] = sMsgbox_Emote_Angry,
-    [EMOTE_SAD] = sMsgbox_Emote_Sad,
-    [EMOTE_HAPPY] = sMsgbox_Emote_Happy,
-    [EMOTE_LAUGH] = sMsgbox_Emote_Laugh,
-    [EMOTE_SWEAT] = sMsgbox_Emote_Sweat,
-    [EMOTE_SHOCK] = sMsgbox_Emote_Shock,
-    [EMOTE_CONFUSE] = sMsgbox_Emote_Confuse,
-    [EMOTE_LOVE] = sMsgbox_Emote_Love,
-};
-
-static const u8* const tailGfxLUT[] =
-{
-    [TAIL_WHISPER] = sMsgbox_Tail_Whisper,
-    [TAIL_SHOUT] = sMsgbox_Tail_Shout,
-    [TAIL_THOUGHT] = sMsgbox_Tail_Thought,
-    [TAIL_TALK] = sMsgbox_Tail_Talk,
-};
 
 static const u8 sMenuWindowFontColors[][3] =
 {
@@ -299,6 +267,8 @@ static void FreeNameplateStrings(void)
 
 void DrawNameplate(void)
 {
+    //RandomizeNameplate();
+
     enum NameplateSpeaker speaker = LoadDynamicSpeaker();
     enum NameplateEmotes emote = VarGet(VAR_MSGBOX_EMOTE);
     enum NameplateTail tail = VarGet(VAR_MSGBOX_TAIL);
@@ -310,12 +280,11 @@ void DrawNameplate(void)
     DestroyExistingWindow();
     u32 windowId = CreateNameplateWindow();
 
-    u32 nameWidth = GetSpeakerNameWidth(speaker);
+    u32 nameWidth = GetSpeakerNameWidth(speaker,onPhone);
     u32 titleWidth = GetSpeakerTitleWidth(speaker);
     u32 nameplateWidth = CalculateNameplateWidth(nameWidth, titleWidth);
     u32 offset = CalculateNameplateOffset(nameplateWidth);
     u32 nameplateTileWidth = CalculateNameplateTileWidth(nameplateWidth);
-
 
     if (speaker != SPEAKER_DEFAULT)
     {
@@ -324,9 +293,9 @@ void DrawNameplate(void)
         DrawSecondRowNameplateTiles(windowId, nameplateWidth, offset, nameplateTileWidth);
         DrawThirdRowNameplateTiles(windowId, nameplateWidth, offset, nameplateTileWidth);
 
-        CreateSpeakerIconSprite(nameplateWidth, speaker);
         AddNameplateTail(windowId, nameplateWidth, tail);
         AddNameplatePhone(windowId, nameplateWidth, onPhone);
+        CreateSpeakerIconSprite(nameplateWidth, speaker);
         AddNameplateEmote(windowId, nameplateWidth, emote);
 
         PrintSpeakerTitle(windowId, speaker);
@@ -342,17 +311,23 @@ void DrawNameplate(void)
     ClearNameplateVariables();
 }
 
+/*
+#include "random.h"
 void RandomizeNameplate(void)
 {
-    VarSet(VAR_MSGBOX_EMOTE,EMOTE_CONFUSE);
-    VarSet(VAR_MSGBOX_TAIL,TAIL_TALK);
-    VarSet(VAR_MSGBOX_PHONE,PHONE_ON);
-    VarSet(VAR_MSGBOX_SPEAKER,0);
+    VarSet(VAR_MSGBOX_EMOTE,EMOTE_ANGRY);
     VarSet(VAR_MSGBOX_EMOTE,Random() % EMOTE_COUNT);
+
+    VarSet(VAR_MSGBOX_TAIL,TAIL_TALK);
     VarSet(VAR_MSGBOX_TAIL,Random() % TAIL_COUNT);
+
+    VarSet(VAR_MSGBOX_PHONE,PHONE_ON);
     VarSet(VAR_MSGBOX_PHONE,Random() % PHONE_COUNT);
+
+    VarSet(VAR_MSGBOX_SPEAKER,0);
     VarSet(VAR_MSGBOX_SPEAKER,Random() % NUM_SPEAKERS);
 }
+*/
 
 static void DestroyExistingWindow(void)
 {
@@ -370,13 +345,12 @@ static void DestroyExistingWindow(void)
 
 u32 CreateNameplateWindow(void)
 {
-    u32 windowId;
     enum PlayerGender gender = GetSpeakerGender();
     struct WindowTemplate nameplateTemplate;
 
     SetWindowTemplateFields(&nameplateTemplate, 0, WINDOW_TILELEFT, WINDOW_TILETOP,DISPLAY_TILE_WIDTH, MSGBOX_TILE_HEIGHT, MUGSHOT_PALETTE_NUM, NAMEPLATE_WINDOW_TEMPLATE);
     sMugshotWindow = AddWindow(&nameplateTemplate);
-    windowId = sMugshotWindow;
+    u32 windowId = sMugshotWindow;
     LoadPalette(genderNameplatePaletteLUT[gender],BG_PLTT_ID(MUGSHOT_PALETTE_NUM),PLTT_SIZE_4BPP);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -393,25 +367,26 @@ static void BufferSpeakerName(u32 speaker)
     StringExpandPlaceholders(nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME],sSpeakerData[speaker].name);
 }
 
-u32 GetSpeakerNameWidth(u32 speaker)
+u32 GetSpeakerNameWidth(u32 speaker, u32 phone)
 {
+    u32 phoneMargin = (phone) ? PHONE_MARGIN : 0;
     u32 letterSpacing = GetFontAttribute(FONT_SPEAKER_NAME, FONTATTR_LETTER_SPACING);
     u32 defaultLength = (GetStringWidth(FONT_SPEAKER_NAME, COMPOUND_STRING("???"), letterSpacing));
+
     BufferSpeakerName(speaker);
 
     if (speaker == SPEAKER_DEFAULT || speaker >= NUM_SPEAKERS)
-        return defaultLength;
+        return (defaultLength + phoneMargin);
 
     if (sSpeakerData[speaker].name[0] == '\0')
-        return defaultLength;
+        return (defaultLength + phoneMargin);
 
-    return GetStringWidth(FONT_SPEAKER_NAME, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME], letterSpacing);
+    return (phoneMargin + GetStringWidth(FONT_SPEAKER_NAME, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME], letterSpacing));
 }
 
 static enum PlayerGender GetSpeakerGender(void)
 {
-    enum NameplateSpeaker speaker = VarGet(VAR_MSGBOX_SPEAKER);
-    return sSpeakerData[speaker].gender;
+    return sSpeakerData[VarGet(VAR_MSGBOX_SPEAKER)].gender;
 }
 
 u32 GetSpeakerTitleWidth(u32 speaker)
@@ -437,20 +412,14 @@ static u32 CalculateNameplateTileWidth(u32 nameplateWidth)
 
 static u32 CalculateNameplateWidth(u32 nameWidth, u32 titleWidth)
 {
-    u32 shorter = (nameWidth < titleWidth) ? nameWidth : titleWidth;
-    u32 longer = (nameWidth > titleWidth) ? nameWidth : titleWidth;
-    u32 defaultLength = (GetStringWidth(FONT_SPEAKER_NAME, COMPOUND_STRING("???"), GetFontAttribute(FONT_SPEAKER_NAME, FONTATTR_LETTER_SPACING)));
+    u32 width = 0;
 
-    if (shorter == defaultLength)
-        shorter = longer;
-
-    u32 shortMax = shorter + SPEAKER_ICON_SHORTER_LEFT_PADDING;
-    u32 longMax = longer + SPEAKER_ICON_LONGER_LEFT_PADDING;
-
-    if (longMax > shortMax)
-        return longMax;
+    if (titleWidth > nameWidth)
+        width = (30 + titleWidth);
     else
-        return shortMax;
+        width = (35 + nameWidth);
+
+    return max(width,MAX_TITLE_LENGTH);
 }
 
 static void DrawTopMessageBoxTiles(u32 windowId, u32 stringWidth, u32 offset, u32 nameplateTileWidth)
@@ -597,7 +566,8 @@ static void AddNameplateTail(u32 windowId, u32 nameplateWidth, enum NameplateTai
         return;
 
     u32 tailX = (tail == TAIL_TALK) ? (nameplateWidth - TAILS_TALK_RIGHT_PADDING) : (nameplateWidth - TAILS_RIGHT_PADDING);
-    BlitBitmapToWindow(windowId, tailGfxLUT[tail], tailX, TAILS_Y, TAILS_WIDTH, TAILS_HEIGHT);
+
+    BlitBitmapToWindow(windowId, (tailGfx + (TAILS_SIZE * tail)), tailX, TAILS_Y, TAILS_WIDTH, TAILS_HEIGHT);
 }
 
 static void AddNameplatePhone(u32 windowId, u32 nameplateWidth, enum NameplatePhone onPhone)
@@ -617,7 +587,7 @@ static void AddNameplateEmote(u32 windowId, u32 nameplateWidth, enum NameplateEm
 
     u32 emoteX = nameplateWidth - EMOTES_LEFT_MARGIN;
 
-    BlitBitmapToWindow(windowId, emotesGfxLUT[emote], emoteX, EMOTES_Y, EMOTES_WIDTH, EMOTES_HEIGHT);
+    BlitBitmapToWindow(windowId, (emoteGfx + (EMOTES_SIZE * emote)), emoteX, EMOTES_Y, EMOTES_WIDTH, EMOTES_HEIGHT);
 }
 
 
