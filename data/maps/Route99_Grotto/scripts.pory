@@ -1,16 +1,14 @@
 mapscripts Route99_Grotto_MapScripts{
     MAP_SCRIPT_ON_FRAME_TABLE[
-        VAR_TEMP_0,1: Quest_Hiddengrottomapping_MarkSubquestBiome_Script
         VAR_TEMP_0,0: Quest_Hiddengrottomapping_StartQuest_Dialogue
     ]
     MAP_SCRIPT_ON_TRANSITION
-	{
-		call(Quest_Hiddengrottomapping_PannenVisibility_Script)
-		call(Quest_Hiddengrottomapping_RemoveJournalPage3_Script)
-		call(HiddenGrotto_Script_HideSecret)
-	}
-	MAP_SCRIPT_ON_RESUME
-	{
-		callnative(HiddenGrotto_TryGenerateBattle)
-	}
+    {
+        call(Quest_Hiddengrottomapping_PannenVisibility_Script)
+        call(HiddenGrotto_Script_HideSecret)
+    }
+    MAP_SCRIPT_ON_RESUME
+    {
+        callnative(HiddenGrotto_TryGenerateBattle)
+    }
 }
