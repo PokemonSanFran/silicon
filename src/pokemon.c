@@ -7627,3 +7627,10 @@ bool32 IsSpeciesOfType(u32 species, enum Type type)
         return TRUE;
     return FALSE;
 }
+
+// Start pokedex
+bool32 IsSpeciesFromAlola(u32 species)
+{
+    return (gSpeciesInfo[species].isAlolaDex || IsSpeciesRegionalFormFromRegion(species, REGION_ALOLA));
+}
+// End pokedex

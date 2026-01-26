@@ -1014,6 +1014,9 @@ static bool32 SpeciesFilter_GetActiveFilters(bool32 activeFilters[])
         if (sFilterSet->filterTypes[subFilterIndex].types[0] != nullOptionLUT[FILTER_LIST_TYPE1])
             activeFilters[POKEDEX_FILTER_TYPES] = TRUE;
 
+    if (sFilterSet->filterAlola[0] != nullOptionLUT[FILTER_LIST_ALOLA])
+            activeFilters[POKEDEX_FILTER_ALOLA] = TRUE;
+
     for (filterIndex = 0; filterIndex < POKEDEX_FILTER_COUNT; filterIndex++)
         if (activeFilters[filterIndex])
             return TRUE;
@@ -1030,6 +1033,7 @@ static bool32 (* const sFilterFunctions[])(u32 species) =
     [POKEDEX_FILTER_TYPES] = SpeciesFilter_CheckSpeciesTypesAgainstFilters,
     [POKEDEX_FILTER_ABILITY] = SpeciesFilter_DoesSpeciesHaveAbility,
     [POKEDEX_FILTER_MOVES] = SpeciesFilter_DoesSpeciesLearnMoves,
+    [POKEDEX_FILTER_ALOLA] = IsSpeciesFromAlola,
     [POKEDEX_FILTER_COUNT] = NULL,
 };
 
@@ -2502,7 +2506,6 @@ static void SpeciesGrid_PrintCaptureIndicator(enum SpeciesListRows rowIndex, enu
 {
     u32 spriteId = SpeciesGrid_GetCaptureIndicatorSpriteId(rowIndex, columnIndex);
     bool32 hasCaught = (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT));
-    //u16 TileTag = hasCaught ? POKEDEX_GFXTAG_SPECIES_GRID_CAPTURE_INDICATOR : POKEDEX_GFXTAG_SPECIES_GRID_UNCAUGHT_INDICATOR;
 
     bool32 isAlola = (species == SPECIES_PIDGEY);
 

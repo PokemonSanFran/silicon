@@ -352,6 +352,7 @@ enum PokedexFilters {
     POKEDEX_FILTER_TYPES,
     POKEDEX_FILTER_ABILITY,
     POKEDEX_FILTER_MOVES,
+    POKEDEX_FILTER_ALOLA,
     POKEDEX_FILTER_COUNT,
 };
 
@@ -374,6 +375,7 @@ enum PokedexFilterList
     FILTER_LIST_MOVE4,
     FILTER_LIST_ABILITY,
     FILTER_LIST_EVOLUTION,
+    FILTER_LIST_ALOLA,
     FILTER_LIST_COUNT,
 };
 
@@ -516,6 +518,14 @@ enum StatTierList
     STAT_TIER_A,
     STAT_TIER_S,
     STAT_TIER_COUNT,
+};
+
+enum AlolaModeList
+{
+    ALOLA_NONE,
+    ALOLA_NO,
+    ALOLA_YES,
+    ALOLA_COUNT,
 };
 
 #define POKEDEX_FILTER_HP_D_CEIL 41

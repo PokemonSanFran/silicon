@@ -37,6 +37,7 @@ struct FiltersSet
     struct Types filterTypes[TYPES_PER_MON];
     u16 filterAbility[MAX_MON_MOVES];
     struct Moves filterMoves[MAX_MON_MOVES];
+    u8 filterAlola[ALOLA_COUNT];
 };
 
 struct SpeciesMenu
