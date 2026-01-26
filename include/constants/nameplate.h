@@ -290,28 +290,32 @@ enum NameplatePhone
 
 #define PHONE_WIDTH                                    16
 #define PHONE_HEIGHT                                   16
+#define PHONE_MARGIN                                   2
 
-#define PHONE_LEFT_MARGIN                              32
-#define PHONE_Y                                        14
+#define PHONE_LEFT_MARGIN                              34
+#define PHONE_Y                                        12
 
-#define EMOTES_WIDTH                                   40
+#define EMOTES_WIDTH                                   48
 #define EMOTES_HEIGHT                                  32
-#define EMOTES_Y                                       3
-#define EMOTES_LEFT_MARGIN                             28
+#define EMOTES_Y                                       0
+#define EMOTES_LEFT_MARGIN                             35
+#define EMOTES_SIZE                                    TILE_OFFSET_4BPP((EMOTES_WIDTH * EMOTES_HEIGHT)/(TILE_WIDTH * TILE_HEIGHT))
 
 #define FONT_SPEAKER_NAME                              FONT_NARROW
 #define FONT_SPEAKER_TITLE                             FONT_SMALL_NARROW
 
 #define TAILS_WIDTH                                    48
-#define TAILS_HEIGHT                                   24
-#define TAILS_Y                                        7
+#define TAILS_HEIGHT                                   48
+#define TAILS_Y                                        0
 #define TAILS_TALK_RIGHT_PADDING                       36
 #define TAILS_RIGHT_PADDING                            3
+#define TAILS_SIZE                                     TILE_OFFSET_4BPP((TAILS_WIDTH * TAILS_HEIGHT)/(TILE_WIDTH * TILE_HEIGHT))
 
-#define SPEAKER_NAME_LENGTH                            20
+#define SPEAKER_NAME_LENGTH                            30
 #define SPEAKER_NAME_X                                 4
 #define SPEAKER_NAME_Y                                 12
 #define SPEAKER_TITLE_Y                                1
+#define MAX_TITLE_LENGTH                               68 // PSF TODO write automated test to catch the correct length
 
 #define GFXTAG_SPEAKER_ICON                            10019
 #define SPEAKER_ICON_PAL_NUM                           5

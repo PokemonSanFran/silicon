@@ -52,9 +52,6 @@ enum EncounterSlots
 
 #define NUM_ALTERING_CAVE_TABLES 9
 
-#define FISHING_CHAIN_LENGTH_MAX 200
-#define FISHING_CHAIN_SHINY_STREAK_MAX 20
-
 // Start fogBattle
 enum WildPokemonArea {
     WILD_AREA_LAND,
