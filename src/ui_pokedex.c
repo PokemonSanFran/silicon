@@ -2258,7 +2258,7 @@ void SpeciesData_PrintCaptureIndicator(u32 species)
 {
     u32 spriteId;
     bool32 hasCaught = (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT));
-    bool32 isAlola = (species == SPECIES_PIDGEY);
+    bool32 isAlola = (IsSpeciesFromAlola(species) && QuestMenu_GetSetQuestState(QUEST_ALOHAFROMALOLA, FLAG_GET_ACTIVE));
 
     u16 TileTag = 0;
 
@@ -2507,7 +2507,7 @@ static void SpeciesGrid_PrintCaptureIndicator(enum SpeciesListRows rowIndex, enu
     u32 spriteId = SpeciesGrid_GetCaptureIndicatorSpriteId(rowIndex, columnIndex);
     bool32 hasCaught = (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT));
 
-    bool32 isAlola = (species == SPECIES_PIDGEY);
+    bool32 isAlola = (IsSpeciesFromAlola(species) && QuestMenu_GetSetQuestState(QUEST_ALOHAFROMALOLA, FLAG_GET_ACTIVE));
 
     u16 TileTag = 0;
 
