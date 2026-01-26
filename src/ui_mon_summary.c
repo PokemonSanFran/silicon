@@ -92,6 +92,7 @@ static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
 static const u8 *SummaryMode_GetLockEditHelpText(u32);
 static void Task_SummaryMode_DefaultInput(u8);
+static void Task_SummaryMode_IVsTrainInput(u8);
 
 static void SummaryPage_SetValue(enum MonSummaryPages);
 static enum MonSummaryPages SummaryPage_GetValue(void);
@@ -258,6 +259,10 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
     case UI_SUMMARY_MODE_BOX:
         sMonSummaryDataPtr->useBoxMon = TRUE;
         mode = UI_SUMMARY_MODE_DEFAULT;
+        break;
+    case UI_SUMMARY_MODE_IV_TRAIN:
+        page = SUMMARY_PAGE_STATS;
+        SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_SELECT_ROW);
         break;
     }
 
@@ -703,7 +708,157 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     }
 }
 
-// TODO proper functionalities to sub menu functions
+// basically a copy of the edit EV sub mode
+static void Task_SummaryMode_IVsTrainInput(u8 taskId)
+{
+    enum MonSummaryStatsSubModes subMode = SummaryInput_IsWithinSubMode();
+
+    if (JOY_NEW(DPAD_UP))
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
+            StatsPageMisc_UpdateRow(-1);
+            break;
+        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+            StatsPageMisc_UpdateCurrentRowEVs(1);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_NEW(DPAD_DOWN))
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
+            StatsPageMisc_UpdateRow(1);
+            break;
+        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+            StatsPageMisc_UpdateCurrentRowEVs(-1);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_NEW(L_BUTTON) || GetLRKeysPressed() == MENU_L_PRESSED)
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+            StatsPageMisc_UpdateCurrentRowEVs(SUMMARY_STATS_MIN_EVS);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_NEW(R_BUTTON) || GetLRKeysPressed() == MENU_R_PRESSED)
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+            StatsPageMisc_UpdateCurrentRowEVs(SUMMARY_STATS_MAX_EVS);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+            StatsPageMisc_UpdateCurrentRowEVs(-10);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+            StatsPageMisc_UpdateCurrentRowEVs(10);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        switch (subMode)
+        {
+        default:
+            sMonSummaryDataPtr->arg.stats.subMode = subMode;
+            SummaryInput_SetSubMode(subMode + 1);
+            break;
+        case SUMMARY_STATS_SUB_MODE_ERROR:
+            SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.stats.subMode);
+            break;
+        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+            return; // don't play the sound effect below
+        }
+
+        SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+        PlaySE(SE_SELECT);
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        switch (subMode)
+        {
+        default:
+            sMonSummaryDataPtr->arg.stats.subMode = subMode;
+            SummaryInput_SetSubMode(subMode - 1);
+            SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+            break;
+        case SUMMARY_STATS_SUB_MODE_ERROR:
+            SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.stats.subMode);
+            SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+            break;
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
+            if (StatsPageMisc_CalculateAvailableEVs())
+            {
+                PlaySE(SE_BOO);
+                sMonSummaryDataPtr->arg.stats.subMode = subMode;
+                SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_ERROR);
+                SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+                return;
+            }
+
+            PlaySE(SE_PC_OFF);
+            SummaryMon_CopyChanges();
+            SummaryMon_SetStruct();
+            SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+            return;
+        }
+
+        PlaySE(SE_SELECT);
+        return;
+    }
+}
 
 static void Task_SummaryInput_InfosInput(u8 taskId)
 {
@@ -2563,8 +2718,16 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
     sprite->invisible = subMode < SUMMARY_STATS_SUB_MODE_SELECT_ROW;
     if (sprite->invisible) return;
 
+    u32 animId = 0;
+
+    if (subMode == SUMMARY_STATS_SUB_MODE_ADJUST_VALUE)
+    {
+        animId++;
+        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_IV_TRAIN) animId++;
+    }
+
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
-    StartSpriteAnimIfDifferent(sprite, subMode == SUMMARY_STATS_SUB_MODE_ADJUST_VALUE);
+    StartSpriteAnimIfDifferent(sprite, animId);
 }
 
 static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
@@ -2574,6 +2737,7 @@ static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
     if (notAdjustValue) return;
 
     sprite->invisible = !StatsPageMisc_CalculateAvailableEVs();
+    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_IV_TRAIN) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
@@ -2584,6 +2748,7 @@ static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
     if (notAdjustValue) return;
 
     sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[SUMMARY_TOTAL_EVS][StatsPageMisc_GetRow()]);
+    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_IV_TRAIN) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 

@@ -213,7 +213,7 @@ static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
     },
     [UI_SUMMARY_MODE_IV_TRAIN] =
     {
-        .inputFunc = Task_SummaryMode_DefaultInput,
+        .inputFunc = Task_SummaryMode_IVsTrainInput,
     },
 };
 
