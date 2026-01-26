@@ -211,9 +211,9 @@ static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
         .helpTxtFunc = SummaryMode_GetLockEditHelpText,
         .inputFunc = Task_SummaryMode_DefaultInput,
     },
-    [UI_SUMMARY_MODE_IV_TRAIN] =
+    [UI_SUMMARY_MODE_EDIT_IVS] =
     {
-        .inputFunc = Task_SummaryMode_IVsTrainInput,
+        .inputFunc = Task_SummaryMode_EditIVsInput,
     },
 };
 

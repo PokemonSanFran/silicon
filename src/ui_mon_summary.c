@@ -92,7 +92,7 @@ static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
 static const u8 *SummaryMode_GetLockEditHelpText(u32);
 static void Task_SummaryMode_DefaultInput(u8);
-static void Task_SummaryMode_IVsTrainInput(u8);
+static void Task_SummaryMode_EditIVsInput(u8);
 
 static void SummaryPage_SetValue(enum MonSummaryPages);
 static enum MonSummaryPages SummaryPage_GetValue(void);
@@ -225,7 +225,7 @@ static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *);
 // code
 void MonSummary_OpenDefault(void)
 {
-    MonSummary_Init(UI_SUMMARY_MODE_DEFAULT, gPlayerParty, 0, gPlayerPartyCount - 1, CB2_ReturnToFieldContinueScript);
+    MonSummary_Init(UI_SUMMARY_MODE_EDIT_IVS, gPlayerParty, 0, 0, CB2_ReturnToFieldContinueScript);
 }
 
 void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 totalIdx, MainCallback callback)
@@ -260,7 +260,7 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
         sMonSummaryDataPtr->useBoxMon = TRUE;
         mode = UI_SUMMARY_MODE_DEFAULT;
         break;
-    case UI_SUMMARY_MODE_IV_TRAIN:
+    case UI_SUMMARY_MODE_EDIT_IVS:
         page = SUMMARY_PAGE_STATS;
         SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_SELECT_ROW);
         break;
@@ -709,7 +709,7 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
 }
 
 // basically a copy of the edit EV sub mode
-static void Task_SummaryMode_IVsTrainInput(u8 taskId)
+static void Task_SummaryMode_EditIVsInput(u8 taskId)
 {
     enum MonSummaryStatsSubModes subMode = SummaryInput_IsWithinSubMode();
 
@@ -2723,7 +2723,7 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
     if (subMode == SUMMARY_STATS_SUB_MODE_ADJUST_VALUE)
     {
         animId++;
-        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_IV_TRAIN) animId++;
+        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) animId++;
     }
 
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
@@ -2737,7 +2737,7 @@ static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
     if (notAdjustValue) return;
 
     sprite->invisible = !StatsPageMisc_CalculateAvailableEVs();
-    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_IV_TRAIN) * 26;
+    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
@@ -2748,7 +2748,7 @@ static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
     if (notAdjustValue) return;
 
     sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[SUMMARY_TOTAL_EVS][StatsPageMisc_GetRow()]);
-    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_IV_TRAIN) * 26;
+    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
