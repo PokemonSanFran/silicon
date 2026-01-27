@@ -36,6 +36,7 @@
 #include "pokemon_summary_screen.h"
 #include "event_data.h"
 #include "field_weather.h"
+#include "util.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -1798,18 +1799,22 @@ static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 itemId = mon->item, spriteId = SummarySprite_GetDynamicSpriteId(spriteArrId);
 
-    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
-
     if (spriteId == SPRITE_NONE)
     {
-        DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
-        CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+        if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT)
+        {
+            sMonSummaryDataPtr->heldItemImage.data = gMiscBlank_Gfx;
+        }
+        else
+        {
+            DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+            CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+            sMonSummaryDataPtr->heldItemImage.data = gItemIcon4x4Buffer;
+        }
 
         u32 tag = SummarySprite_GetHeldItemTag();
-
         LoadPalette(GetItemIconPalette(itemId), OBJ_PLTT_ID(IndexOfSpritePaletteTag(tag)), PLTT_SIZE_4BPP);
 
-        sMonSummaryDataPtr->heldItemImage.data = gItemIcon4x4Buffer;
         sMonSummaryDataPtr->heldItemImage.relativeFrames = TRUE;
         sMonSummaryDataPtr->heldItemImage.size = TILE_OFFSET_4BPP(16);
 
