@@ -1164,6 +1164,7 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
         return;
     case SUMMARY_MOVES_OPTION_INSPECT:
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_DETAILS);
+        PlaySE(SE_SELECT);
         break;
     case SUMMARY_MOVES_OPTION_LEARN:
         // add move_reminder feature here
