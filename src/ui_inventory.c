@@ -3965,7 +3965,7 @@ static void Task_MenuMain(u8 taskId)
         Inventory_PrintToAllWindows();
     }
 
-    if ((JOY_NEW(L_BUTTON)))
+    if ((JOY_NEW(L_BUTTON)) || (JOY_REPEAT(L_BUTTON)))
     {
         if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
             return;
@@ -3984,8 +3984,9 @@ static void Task_MenuMain(u8 taskId)
         Inventory_PrintToAllWindows();
     }
 
-    if ((JOY_NEW(R_BUTTON)))
+    if ((JOY_NEW(R_BUTTON)) || (JOY_REPEAT(R_BUTTON)))
     {
+        u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] - 1;
         if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
             return;
 
@@ -3993,13 +3994,12 @@ static void Task_MenuMain(u8 taskId)
         PlaySE(SE_SELECT);
         do
         {
-            if(gSaveBlock3Ptr->InventoryData.itemIdx == 0)
-                break;
-
-            PressedDownButton_Inventory();
+            if(gSaveBlock3Ptr->InventoryData.itemIdx < numitems)
+                PressedDownButton_Inventory();
             numPress--;
         }
         while(numPress != 0);
+        DebugPrintf("R_BUTTON itemIdx %d yFirstItem %d numitems %d numPress %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, numPress);
         Inventory_PrintToAllWindows();
     }
 
