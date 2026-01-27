@@ -1085,7 +1085,7 @@ bool32 IsLastUsedBallOptionAfterAndLastBallIsNone(void)
 static u32 GetBestBallForBattle(void)
 {
     u32 i;
-    struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS - 1];
+    struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS];
     u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE;
     u8 leftAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_LEFT);
     u8 rightAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_RIGHT);
