@@ -546,9 +546,6 @@ static void SummaryInput_UpdateMon(s32 delta)
 {
     s32 idx = SummaryInput_GetIndex();
     u32 count = SummaryInput_GetTotalIndex();
-    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
-
-    if ((idx == 0 && !additiveDelta) || (idx == count && additiveDelta)) return;
 
     if (sMonSummaryDataPtr->useBoxMon)
         idx = SummaryInput_UpdateMonBox(idx, count, delta);
@@ -575,8 +572,6 @@ static s32 SummaryInput_UpdateMonDefault(s32 idx, u32 totalIdx, s32 delta)
     return idx;
 }
 
-// KNOWN ISSUE sometimes this increments to the partner's index
-//             e.g. can happen on w/ 2 player mons but not 1
 static s32 SummaryInput_UpdateMonMultiBattle(s32 idx, u32 totalIdx, s32 delta)
 {
     s32 arrId = 0;
