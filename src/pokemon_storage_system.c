@@ -3800,7 +3800,9 @@ static void Task_ChangeScreen(u8 taskId)
         break;
     case SCREEN_CHANGE_ITEM_FROM_BAG:
         FreePokeStorageData();
-        GoToBagMenu(ITEMMENULOCATION_PCBOX, 0, CB2_ReturnToPokeStorage);
+        //GoToBagMenu(ITEMMENULOCATION_PCBOX, 0, CB2_ReturnToPokeStorage); //asdf
+        Inventory_Init(CB2_ReturnToPokeStorage, INVENTORY_MODE_GIVE_ITEM);
+
         break;
     }
 

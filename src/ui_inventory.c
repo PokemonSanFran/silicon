@@ -2593,7 +2593,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
 
 static void Inventory_PrintItemList(void)
 {
-    //PSF TODO the TM pocket has a blit background with dynamically changning palette colors
+    // PSF TODO the TM pocket has a blit background with dynamically changning palette colors
     // This needs to be updated to just print a sprite on the far right of the row with the type icon, which sits on top of the blit cursor
     // This also needs to be done for TMs in the favorites pocket
     enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
@@ -3868,6 +3868,9 @@ static void Task_MenuMain(u8 taskId)
         }
         else if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM)
         {
+            //gTasks[taskId].func = Task_ReturnToPartyMenuToGiveItem;
+            //return;
+            //DebugPrintf("Task_ReturnToPartyMenuToGiveItem1 gSpecialVar_ItemId %d INVENTORY_MODE_GIVE_ITEM", gSpecialVar_ItemId);
             if(canItemBeHold(Inventory_GetItemIdCurrentlySelected()))
             {
                 PlaySE(SE_SELECT);
@@ -3878,6 +3881,7 @@ static void Task_MenuMain(u8 taskId)
             {
                 PlaySE(SE_PC_OFF);
             }
+            return;
         }
 
         Inventory_PrintToAllWindows();
