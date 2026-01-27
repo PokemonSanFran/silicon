@@ -2420,9 +2420,15 @@ static void InfosPageMisc_PrintTextBox(void)
             u32 itemId = mon->item;
             u32 fontId = FONT_NORMAL;
 
-            if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
-
-            StringCopy(gStringVar4, GetItemDescription(itemId));
+            if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT)
+            {
+                StringCopy_Nickname(gStringVar1, mon->nickname);
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} is not holding anything."));
+            }
+            else
+            {
+                StringCopy(gStringVar4, GetItemDescription(itemId));
+            }
 
             StripLineBreaks(gStringVar4);
             BreakStringAutomatic(gStringVar4, maxWidth, 3, fontId, HIDE_SCROLL_PROMPT);
