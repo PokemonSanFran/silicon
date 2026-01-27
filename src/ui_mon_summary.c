@@ -79,7 +79,6 @@ static void Task_SummaryInput_StatsInput(u8);
 static void Task_SummaryInput_MovesInput(u8);
 static void Task_SummaryInput_MovesOptionInput(u8);
 static void Task_SummaryInput_MovesForgetInput(u8, s32);
-static void SummaryInput_TryReorderMoves(void);
 static void SummaryInput_TryStartReorderMode(void);
 
 static void SummaryMon_SetStruct(void);
@@ -213,15 +212,13 @@ static void MovesPageMisc_SetSlotIndex(u32);
 static u32 MovesPageMisc_GetSlotIndex(void);
 static void MovesPageMisc_SetOptionIndex(u32);
 static u32 MovesPageMisc_GetOptionIndex(void);
-static void MovesPageMisc_SetNewSlotIndex(u32);
-static u32 MovesPageMisc_GetNewSlotIndex(void);
 static void MovesPageMisc_SetForgetConfirmationIndex(u32);
 static u32 MovesPageMisc_GetForgetConfirmationIndex(void);
-static void MovesPageMisc_SwapMoves(void);
+static void MovesPageMisc_UpdateSlot(s32);
+static void MovesPageMisc_RestoreFromReordering(void);
 static void MovesPageMisc_ForgetMove(void);
 static void SpriteCB_MovesPageMisc_Arrows(struct Sprite *);
 static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *);
-static void SpriteCB_MovesPageMisc_NewSlotCursor(struct Sprite *);
 static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *);
 
 // const data
@@ -1058,9 +1055,11 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         {
         default:
             break;
+        case SUMMARY_MOVES_SUB_MODE_REORDER:
+            MovesPageMisc_UpdateSlot(1);
+            break;
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
-        case SUMMARY_MOVES_SUB_MODE_REORDER:
         case SUMMARY_MOVES_SUB_MODE_FORGET:
             MovesPageMisc_UpdateIndex(1);
             break;
@@ -1075,9 +1074,11 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         {
         default:
             break;
+        case SUMMARY_MOVES_SUB_MODE_REORDER:
+            MovesPageMisc_UpdateSlot(-1);
+            break;
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
-        case SUMMARY_MOVES_SUB_MODE_REORDER:
         case SUMMARY_MOVES_SUB_MODE_FORGET:
             MovesPageMisc_UpdateIndex(-1);
             break;
@@ -1100,8 +1101,8 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             Task_SummaryInput_MovesOptionInput(taskId);
             return;
         case SUMMARY_MOVES_SUB_MODE_REORDER:
-            SummaryInput_TryReorderMoves();
-            return;
+            MovesPageMisc_RestoreFromReordering();
+            break;
         case SUMMARY_MOVES_SUB_MODE_FORGET:
             Task_SummaryInput_MovesForgetInput(taskId, 1);
             return;
@@ -1128,8 +1129,7 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
             gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
             break;
         case SUMMARY_MOVES_SUB_MODE_REORDER:
-            sMonSummaryDataPtr->arg.moves.reorderFail = FALSE;
-            SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
+            MovesPageMisc_RestoreFromReordering();
             break;
         case SUMMARY_MOVES_SUB_MODE_FORGET:
             Task_SummaryInput_MovesForgetInput(taskId, -1);
@@ -1222,7 +1222,6 @@ static void Task_SummaryInput_MovesForgetInput(u8 taskId, s32 delta)
 static void SummaryInput_TryStartReorderMode(void)
 {
     sMonSummaryDataPtr->arg.moves.reorderFail = FALSE;
-    MovesPageMisc_SetNewSlotIndex(MovesPageMisc_GetSlotIndex());
 
     if (SummaryMon_GetStruct()->totalMoves > 1)
     {
@@ -1236,29 +1235,6 @@ static void SummaryInput_TryStartReorderMode(void)
 
     sMonSummaryDataPtr->arg.moves.subMode = SummaryInput_IsWithinSubMode();
     SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_REORDER);
-}
-
-static void SummaryInput_TryReorderMoves(void)
-{
-    if (!sMonSummaryDataPtr->arg.moves.reorderFail)
-    {
-        MovesPageMisc_SwapMoves();
-
-        u32 bak = MovesPageMisc_GetSlotIndex();
-        MovesPageMisc_SetSlotIndex(MovesPageMisc_GetNewSlotIndex());
-        MovesPageMisc_SetNewSlotIndex(bak);
-
-        PlaySE(SE_SUCCESS);
-    }
-    else
-    {
-        PlaySE(SE_SELECT);
-    }
-
-    SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
-    sMonSummaryDataPtr->arg.moves.reorderFail = FALSE;
-    sMonSummaryDataPtr->arg.moves.subMode = 0;
-    SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
 }
 
 static void SummaryMon_SetStruct(void)
@@ -2860,10 +2836,7 @@ static void MovesPage_HandleMisc(void)
     u32 slotIdx = MovesPageMisc_GetSlotIndex();
 
     if (subMode == SUMMARY_MOVES_SUB_MODE_REORDER && !sMonSummaryDataPtr->arg.moves.reorderFail)
-    {
         subMode = sMonSummaryDataPtr->arg.moves.subMode;
-        slotIdx = MovesPageMisc_GetNewSlotIndex();
-    }
 
     switch (subMode)
     {
@@ -3008,16 +2981,6 @@ static void MovesPageMisc_TrySpawnCursors(void)
         SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_SLOT_CURSOR, spriteId);
     }
 
-    spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_NEW_SLOT_CURSOR);
-    if (spriteId == SPRITE_NONE)
-    {
-        spriteId = CreateSprite(&sMovesPageMisc_SlotCursorSpriteTemplate, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, SUMMARY_MOVES_GENERAL_Y, 0);
-
-        gSprites[spriteId].callback = SpriteCB_MovesPageMisc_NewSlotCursor;
-        SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
-        SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_NEW_SLOT_CURSOR, spriteId);
-    }
-
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_OPTION_CURSOR);
     if (spriteId == SPRITE_NONE)
     {
@@ -3072,9 +3035,6 @@ static void MovesPageMisc_SetIndex(u32 idx)
     case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         MovesPageMisc_SetOptionIndex(idx);
         break;
-    case SUMMARY_MOVES_SUB_MODE_REORDER:
-        MovesPageMisc_SetNewSlotIndex(idx);
-        break;
     case SUMMARY_MOVES_SUB_MODE_FORGET:
         MovesPageMisc_SetForgetConfirmationIndex(idx);
         break;
@@ -3087,14 +3047,12 @@ static u32 MovesPageMisc_GetIndex(void)
     {
     default:
         break;
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
     case SUMMARY_MOVES_SUB_MODE_DETAILS:
         return MovesPageMisc_GetSlotIndex();
         break;
     case SUMMARY_MOVES_SUB_MODE_OPTIONS:
         return MovesPageMisc_GetOptionIndex();
-        break;
-    case SUMMARY_MOVES_SUB_MODE_REORDER:
-        return MovesPageMisc_GetNewSlotIndex();
         break;
     case SUMMARY_MOVES_SUB_MODE_FORGET:
         return MovesPageMisc_GetForgetConfirmationIndex();
@@ -3147,16 +3105,6 @@ static u32 MovesPageMisc_GetOptionIndex(void)
     return sMonSummaryDataPtr->arg.moves.optionIdx;
 }
 
-static void MovesPageMisc_SetNewSlotIndex(u32 idx)
-{
-    sMonSummaryDataPtr->arg.moves.newSlotIdx = idx;
-}
-
-static u32 MovesPageMisc_GetNewSlotIndex(void)
-{
-    return sMonSummaryDataPtr->arg.moves.newSlotIdx;
-}
-
 static void MovesPageMisc_SetForgetConfirmationIndex(u32 idx)
 {
     if (sMonSummaryDataPtr->arg.moves.forgetState != SUMMARY_MOVES_FORGET_STATE_CONFIRM) return;
@@ -3169,37 +3117,32 @@ static u32 MovesPageMisc_GetForgetConfirmationIndex(void)
     return sMonSummaryDataPtr->arg.moves.yesNoIdx;
 }
 
-// TODO do a bag menu-like swapping instead
-static void MovesPageMisc_SwapMoves(void)
+static void MovesPageMisc_UpdateSlot(s32 delta)
 {
-    u32 firstSlotIdx = MovesPageMisc_GetSlotIndex();
-    u32 secondSlotIdx = MovesPageMisc_GetNewSlotIndex();
+    bool32 additiveDelta = SummaryInput_IsInputAdditive(delta);
+    u32 idx = MovesPageMisc_GetSlotIndex();
+    u32 count = SummaryMon_GetStruct()->totalMoves - 1;
 
-    struct Pokemon *mon = &sMonSummaryDataPtr->mon;
-    struct MonSummary *summary = SummaryMon_GetStruct();
+    if (additiveDelta && idx == count)
+        idx = 0;
+    else if (!additiveDelta && idx == 0)
+        idx = count;
+    else
+        idx += delta;
 
-    u32 firstMove = summary->moves[firstSlotIdx];
-    u32 secondMove = summary->moves[secondSlotIdx];
-    u32 firstPp = summary->pp[firstSlotIdx];
-    u32 secondPp = summary->pp[secondSlotIdx];
-    u32 ppBonuses = summary->ppBonuses;
-
-    u8 firstPpUpMask = gPPUpGetMask[firstSlotIdx];
-    u8 firstPpBonus = (ppBonuses & firstPpUpMask) >> (firstSlotIdx * 2);
-    u8 secondPpUpMask = gPPUpGetMask[secondSlotIdx];
-    u8 secondPpBonus = (ppBonuses & secondPpUpMask) >> (secondSlotIdx * 2);
-    ppBonuses &= ~firstPpUpMask;
-    ppBonuses &= ~secondPpUpMask;
-    ppBonuses |= (firstPpBonus << (secondSlotIdx * 2)) + (secondPpBonus << (firstSlotIdx * 2));
-
-    SetMonData(mon, MON_DATA_MOVE1 + firstSlotIdx, &secondMove);
-    SetMonData(mon, MON_DATA_MOVE1 + secondSlotIdx, &firstMove);
-    SetMonData(mon, MON_DATA_PP1 + firstSlotIdx, &secondPp);
-    SetMonData(mon, MON_DATA_PP1 + secondSlotIdx, &firstPp);
-    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-
+    PlaySE(SE_SELECT);
+    ShiftMoveSlot(&sMonSummaryDataPtr->mon, MovesPageMisc_GetSlotIndex(), idx);
+    MovesPageMisc_SetSlotIndex(idx);
     SummaryMon_CopyChanges();
     SummaryMon_SetStruct();
+    SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+}
+
+static void MovesPageMisc_RestoreFromReordering(void)
+{
+    sMonSummaryDataPtr->arg.moves.reorderFail = FALSE;
+    SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.moves.subMode);
+    sMonSummaryDataPtr->arg.moves.subMode = SUMMARY_MOVES_SUB_MODE_NONE;
 }
 
 static void MovesPageMisc_ForgetMove(void)
@@ -3264,26 +3207,25 @@ static void SpriteCB_MovesPageMisc_SlotCursor(struct Sprite *sprite)
     sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetSlotIndex();
 }
 
-static void SpriteCB_MovesPageMisc_NewSlotCursor(struct Sprite *sprite)
-{
-    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
-
-    sprite->invisible = subMode != SUMMARY_MOVES_SUB_MODE_REORDER;
-    if (sprite->invisible) return;
-
-    sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetNewSlotIndex();
-}
-
 static void SpriteCB_MovesPageMisc_OptionCursor(struct Sprite *sprite)
 {
     enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
     enum MonSummaryMovesSubModes prevSubMode = sMonSummaryDataPtr->arg.moves.subMode;
 
-    sprite->invisible = subMode != SUMMARY_MOVES_SUB_MODE_OPTIONS
-                     || (subMode == SUMMARY_MOVES_SUB_MODE_REORDER && prevSubMode != SUMMARY_MOVES_SUB_MODE_OPTIONS)
-                     || sMonSummaryDataPtr->arg.moves.reorderFail;
+    sprite->invisible = TRUE;
 
-    if (sprite->invisible) return;
+    if (sMonSummaryDataPtr->arg.moves.reorderFail) return;
 
+    switch (subMode)
+    {
+    default:
+        return;
+    case SUMMARY_MOVES_SUB_MODE_REORDER:
+        if (prevSubMode != SUMMARY_MOVES_SUB_MODE_OPTIONS) return;
+    case SUMMARY_MOVES_SUB_MODE_OPTIONS:
+        break;
+    }
+
+    sprite->invisible = FALSE;
     sprite->y2 = SUMMARY_MOVES_GENERAL_ADDITIVE_Y * MovesPageMisc_GetOptionIndex();
 }

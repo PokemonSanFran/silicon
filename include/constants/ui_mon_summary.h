@@ -265,7 +265,6 @@ enum MonSummaryMovesSprites
     SUMMARY_MOVES_SPRITE_MOVE_4,
 
     SUMMARY_MOVES_SPRITE_SLOT_CURSOR,
-    SUMMARY_MOVES_SPRITE_NEW_SLOT_CURSOR,
     SUMMARY_MOVES_SPRITE_OPTION_CURSOR,
     SUMMARY_MOVES_SPRITE_ARROWS,
 
@@ -483,12 +482,11 @@ struct MonSummaryResources
         struct PACKED {
             u32 slotIdx:2;
             u32 optionIdx:2;
-            u32 newSlotIdx:2; // reorder
             u32 subMode:8;    // backup for reorder
             u32 forgetState:3;
             u32 yesNoIdx:1;
             u32 reorderFail:1;
-            u32 forgottenMove:12;
+            u32 forgottenMove:14;
         } moves;
     } arg;
 };
