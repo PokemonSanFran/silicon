@@ -2340,12 +2340,15 @@ static inline u32 MonStatus_ConvertPercentageIntoHpBarFrame(u32 healthPercentage
 {
     // - 1 is required, otherwise we'll get NUM_START_HP_BAR_PERCENTAGES at full hp
     enum StartMenuHpBarPercentage barHealthPercentage = (healthPercentage / 10) - 1;
-    u32 realFrame = barHealthPercentage * 8;
+    s32 realFrame = barHealthPercentage * 8;
 
     if (!healthPercentage)
         realFrame = START_HP_BAR_PERCENTAGE_0 * 8;
 
     if (!barHealthPercentage)
+        realFrame = START_HP_BAR_PERCENTAGE_1 * 8;
+
+    if(realFrame < 0 && healthPercentage != 0)
         realFrame = START_HP_BAR_PERCENTAGE_1 * 8;
 
     return realFrame;

@@ -1355,8 +1355,10 @@ static u32 GetHPEggCyclePercent(u32 partyIndex)
 {
     struct Pokemon *mon = &gPlayerParty[partyIndex];
 
-    if (!GetMonData(mon, MON_DATA_IS_EGG))
+    if (!GetMonData(mon, MON_DATA_IS_EGG)){
+        u32 percent = ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon,MON_DATA_MAX_HP)));
         return ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon,MON_DATA_MAX_HP)));
+    }
     else
         return ((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon,MON_DATA_SPECIES)].eggCycles));
 }
