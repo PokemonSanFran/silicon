@@ -195,7 +195,8 @@ static const u16 mainMenuPalettesScarlet[] = INCBIN_U16("graphics/ui_menus/glass
 static const u16 mainMenuPalettesViolet[] = INCBIN_U16("graphics/ui_menus/glass/palettes/violet.gbapal");
 static const u16 mainMenuPalettesWhite[] = INCBIN_U16("graphics/ui_menus/glass/palettes/white.gbapal");
 static const u16 mainMenuPalettesYellow[] = INCBIN_U16("graphics/ui_menus/glass/palettes/yellow.gbapal");
-static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
+//static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
+static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal");
 
 static const u32 statsBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.4bpp.smol");
 static const u32 statsBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.bin.smolTM");
@@ -226,7 +227,7 @@ static const u8 sMainMenuWindowFontColors[][3] =
     [MAINMENU_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
     [MAINMENU_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
     [MAINMENU_FONT_COLOR_WHITE_MENU]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_DARK_GRAY},
-    [MAINMENU_FONT_COLOR_WHITE_HEADER]  = {TEXT_COLOR_TRANSPARENT,  7,  TEXT_COLOR_TRANSPARENT},
+    [MAINMENU_FONT_COLOR_WHITE_HEADER]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
 };
 
 static const struct SpritePalette sMainMenuInterfaceSpritePalette =
@@ -277,7 +278,7 @@ static const struct WindowTemplate sMainMenuWindowContinueTemplates[] =
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   15,
         .baseBlock = 1,
     },
     [MAINMENU_WINDOW_INFO_BAR]
@@ -751,7 +752,6 @@ static void SetBackgroundTransparency(void)
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT1_BG2);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
-    //PSF TODO once Crim font is done, fix these values
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 }
 
@@ -1059,7 +1059,7 @@ static void PrintPlaytime(enum MainMenuWindows windowId)
 
 static void PrintTimeOfDaySprite(void)
 {
-    BlitBitmapToWindow(MAINMENU_WINDOW_HEADER, sMainMenuTimeLUT[GetTimeOfDay()], 224, 2, 16, 16);
+    BlitSymbol_Help(BlitSymbol_ConvertLocalTimeToHelp(), MAINMENU_WINDOW_HEADER, 224, 0);
 }
 
 static void ResetSpriteIds(void)

@@ -225,27 +225,6 @@ enum StartMenuCursorModes
     NUM_START_CURSORS
 };
 
-enum StartMenuHelpSymbols
-{
-    // Time Of Day
-    START_HELP_SYMBOL_TOD_M = 0, // Morning
-    START_HELP_SYMBOL_TOD_D,     // Day
-    START_HELP_SYMBOL_TOD_E,     // Evening
-    START_HELP_SYMBOL_TOD_N,     // Night
-
-    START_HELP_SYMBOL_MAP,
-
-    // Cellular Signal
-    START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
-    START_HELP_SYMBOL_SIG_0A,
-    START_HELP_SYMBOL_SIG_1,
-    START_HELP_SYMBOL_SIG_2,
-
-    START_HELP_SYMBOL_SWAP,
-
-    NUM_START_HELP_SYMBOLS
-};
-
 enum StartMenuEggInfoSymbols
 {
     START_EGG_INFO_SYMBOL_x = 0,
@@ -483,10 +462,8 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *);
 static void AppGrid_HandleCursorVisibility(enum StartMenuModes mode);
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOfDay);
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
 static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void);
 
@@ -2208,7 +2185,7 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *s)
 }
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
+void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(window, sStartMenuSymbols_Help, sym * 16, 0, 160, 16, x, y, 16, 16);
 }
@@ -2234,7 +2211,7 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOf
     }
 }
 
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
+enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
 {
     return BlitSymbol_ConvertTimeToHelp(GetTimeOfDay());
 }
