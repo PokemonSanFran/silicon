@@ -607,6 +607,7 @@ gSongTable::
     song mus_restored_tirabudin_place_gym, MUSIC_PLAYER_BGM, 0
     song mus_tirabudin_place_gym, MUSIC_PLAYER_BGM, 0
     song mus_zenzu_island_gym, MUSIC_PLAYER_BGM, 0
+    song mus_bug_catcher, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2
