@@ -2573,7 +2573,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
             x = TILE_WIDTH + GetStringRightAlignXOffset(fontId,gStringVar4,inventoryPadding);
             for (u32 direction = INVENTORY_REGISTER_DIRECTION_UP; direction < INVENTORY_REGISTER_NUM_DIRECTIONS; direction++)
                 if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[direction])
-                    BlitBitmapToWindow(windowId, sRegisteredIndicator[direction], x,y, 16, 16);
+                    BlitBitmapToWindow(windowId, sRegisteredIndicator[direction], x - 8, y, 16, 16);
         }
         else
         {
