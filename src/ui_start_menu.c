@@ -903,7 +903,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     // second row
     [START_APP_TRAINER_CARD] =
     {
-        COMPOUND_STRING("Trainer Card"), 0, NULL
+        COMPOUND_STRING("Trainer Card"), FLAG_SYS_APP_QUEST_GET, CB2_InitUiMainMenuFromStartMenu
     },
     [START_APP_PRESTO] =
     {
@@ -1589,7 +1589,7 @@ static void StartPrint_HelpTopText(void)
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
 
-    // TIME OF DAY, 
+    // TIME OF DAY,
     enum TimeOfDay time = GetTimeOfDay();
     StringAppend(strbuf[0], sStartMenuStrings_TimeOfDay[time]);
     StringAppend(strbuf[0], COMPOUND_STRING(", "));
@@ -1895,9 +1895,6 @@ static void AppData_InsertNewApps(void)
 {
     for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
     {
-        if (app == START_APP_TRAINER_CARD) //  PSF TODO Trainer Card disabled
-            continue;
-
         if (AppData_GetUnlockFlag(app) && AppData_GetIndexFromApp(app) == NUM_START_APPS)
         {
             u32 freeSlot = AppData_GetFirstEmptyIndex();
@@ -1948,9 +1945,7 @@ static bool32 AppData_GetUnlockFlag(enum StartMenuApps app)
 
 static enum StartMenuApps AppData_GetAppFromIndex(u8 idx)
 {
-    u32 app = gSaveBlock3Ptr->startMenuAppIndex[idx];
-
-    return (app == START_APP_TRAINER_CARD) ? START_APP_NONE : app; //  PSF TODO Trainer Card disabled
+    return gSaveBlock3Ptr->startMenuAppIndex[idx];
 }
 
 static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps app)
