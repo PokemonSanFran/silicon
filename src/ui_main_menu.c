@@ -934,6 +934,9 @@ static bool8 ShouldSkipBP(enum MainMenuModes mode, u32 optionIndex, bool32 isBg)
     if (mode != MAINMENU_MODE_TRAINER_CARD)
         return FALSE;
 
+    if (mode == MAINMENU_MODE_TRAINER_CARD && (isBg == TRUE) && optionIndex > 1)
+        return TRUE;
+
     if (VarGet(VAR_STORYLINE_STATE) >= STORY_RESTORATION_1_COMPLETE)
         return FALSE;
 
