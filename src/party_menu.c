@@ -85,6 +85,7 @@
 #include "options_battle.h" // siliconMerge
 #include "qol_field_moves.h" // pokedex
 #include "field_puzzles.h" // siliconMerge
+#include "surprise_trade.h" // surpriseTrade
 
 enum {
     MENU_SUMMARY,
@@ -545,6 +546,7 @@ static void DisplayHexorbMessageAndScheduleTask(u8, const u8*, TaskFunc, bool32)
 // End hexorb Branch
 static void Task_HideFollowerNPCForTeleport(u8);
 static void FieldCallback_RockClimb(void);
+static void BufferMonSelectionSurpriseTrade(void); //surpriseTrade
 
 // static const data
 #include "data/party_menu.h"
@@ -8686,3 +8688,21 @@ static void FieldCallback_RockClimb(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     FieldEffectStart(FLDEFF_USE_ROCK_CLIMB);
 }
+
+// Start surpriseTrade
+void CB2_TrashTrade(void)
+{
+// PSF TODO replace with ChooseBoxMon
+        InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, BufferMonSelectionSurpriseTrade);
+}
+
+static void BufferMonSelectionSurpriseTrade(void)
+{
+    gSpecialVar_0x8004 = GetCursorSelectionMonId();
+    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+    gFieldCallback2 = CB2_FadeFromPartyMenu;
+    SetMainCallback2(CB2_ContinueSurpriseTrade);
+}
+// End surpriseTrade
+
