@@ -953,6 +953,7 @@ static void FreeCustomizationBackgrounds(void)
 
 static void Menu_FreeResources(void)
 {
+    FreeAndDestroyTrainerPicSprite(sMenuDataPtr->spriteIDs[SPRITE_TRAINER_FRONT_SPRITE]);
     FreeAllSpritePalettes();
     if (sMenuDataPtr != NULL)
         Free(sMenuDataPtr);
