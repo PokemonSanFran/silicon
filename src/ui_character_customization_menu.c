@@ -462,7 +462,7 @@ void Character_Customization_Menu_Init(MainCallback callback)
     sMenuDataPtr->DrawnDialogue = DRAWN_DIALOGUE_HELP_BAR;
 
     for(i = 0; i < NUM_SPRITES; i++){
-        sMenuDataPtr->spriteIDs[i] = 0xFF;
+        sMenuDataPtr->spriteIDs[i] = SPRITE_NONE;
     }
 
 	for(i = 0; i < NUM_CUSTOMIZATION_PARTS; i++){
@@ -787,10 +787,10 @@ static void CreateTrainerFrontSprite()
     u8 trainerFrontPic = TRAINER_PIC_SILICON_PLAYER_M1 + bodyType;
     u8 spriteID = SPRITE_TRAINER_FRONT_SPRITE;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF)
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE)
     {
         FreeAndDestroyTrainerPicSprite(sMenuDataPtr->spriteIDs[spriteID]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
     u32 paletteNum = AllocSpritePalette(OBJ_EVENT_PAL_TAG_SILICON);
@@ -804,15 +804,15 @@ static void CreateTrainerFrontSprite()
 static void CreateTrainerBackSprite(){
     u8 spriteID = SPRITE_TRAINER_BACK_SPRITE;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
     u32 trainerBackPic = PlayerGetTrainerBackPicId();
     DecompressTrainerBackPic(trainerBackPic, 0);
     SetMultiuseSpriteTemplateToTrainerBack(trainerBackPic, 0);
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] = CreateSprite(&gMultiuseSpriteTemplate, TRAINER_BACK_SPRITE_X, TRAINER_BACK_SPRITE_Y, 0);
 
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].oam.paletteNum = gSprites[sMenuDataPtr->spriteIDs[SPRITE_TRAINER_FRONT_SPRITE]].oam.paletteNum;
@@ -826,12 +826,12 @@ static void CreateTrainerOverworldSprite(){
     u16 graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL,bodyType);
     u8 spriteID = SPRITE_TRAINER_OVERWORLD;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] =  CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, TRAINER_OVERWORLD_PIC_X, TRAINER_OVERWORLD_PIC_Y, 0);
         StartSpriteAnim(&gSprites[sMenuDataPtr->spriteIDs[spriteID]], getPlayerAnimation());
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].callback = SpriteCallback_TrainerOverworldSprite;
@@ -846,12 +846,12 @@ static void CreateTrainerOverworldBikeSprite(){
     u16 graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_MACH_BIKE,bodyType);
     u8 spriteID = SPRITE_TRAINER_OVERWORLD_BIKE;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] =  CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, TRAINER_OVERWORLD_PIC_X, TRAINER_OVERWORLD_PIC_Y, 0);
         StartSpriteAnim(&gSprites[sMenuDataPtr->spriteIDs[spriteID]], getBikeAnimation());
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].callback = SpriteCallback_TrainerBikeOverworldSprite;
@@ -866,12 +866,12 @@ static void CreateTrainerOverworldPokemonCall(){
     u16 graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_FIELD_MOVE,bodyType);
     u8 spriteID = SPRITE_TRAINER_OVERWORLD_POKEMON_CALL;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] =  CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, TRAINER_OVERWORLD_PIC_X, TRAINER_OVERWORLD_PIC_Y, 0);
         StartSpriteAnim(&gSprites[spriteID], ANIM_STD_FACE_SOUTH);
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].callback = SpriteCallback_TrainerPokemonCallOverworldSprite;
@@ -920,7 +920,7 @@ static bool8 Menu_DoGfxSetup(void)
         break;
     case 5:
         CreateTask(Task_MenuWaitFadeIn, 0);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         gMain.state++;
         break;
     case 6:
@@ -933,7 +933,7 @@ static bool8 Menu_DoGfxSetup(void)
     case 7:
         PrintToWindow(FONT_CUSTOM_WHITE);
         CreateTrainerSprites();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     default:
@@ -953,6 +953,7 @@ static void FreeCustomizationBackgrounds(void)
 
 static void Menu_FreeResources(void)
 {
+    FreeAndDestroyTrainerPicSprite(sMenuDataPtr->spriteIDs[SPRITE_TRAINER_FRONT_SPRITE]);
     FreeAllSpritePalettes();
     if (sMenuDataPtr != NULL)
         Free(sMenuDataPtr);
@@ -973,7 +974,7 @@ static void Task_MenuWaitFadeAndBail(u8 taskId)
 
 static void Menu_FadeAndBail(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_MenuWaitFadeAndBail, 0);
     SetVBlankCallback(Menu_VBlankCB);
     SetMainCallback2(Menu_MainCB);
@@ -1441,7 +1442,7 @@ static void PrintToWindow(u8 colorIdx)
             end = StringCopy(gStringVar4,Customization_Options[sMenuDataPtr->currentFirstOption + i].title);
             PrependFontIdToFit(gStringVar4,end,0,windowWidth);
 
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, gStringVar4);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, gStringVar4);
         }
 
         //Options Configuration
@@ -1494,7 +1495,7 @@ static void PrintToWindow(u8 colorIdx)
             y = 6;
             windowId = CUSTOM_WINDOW_VALUES;
 
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, gStringVar4);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, gStringVar4);
         }
 
         // Help Bar --------------------------------------------------------------------------------------------------------------------
@@ -1504,10 +1505,10 @@ static void PrintToWindow(u8 colorIdx)
 
         switch(sMenuDataPtr->DrawnDialogue){
             case DRAWN_DIALOGUE_HELP_BAR:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Help_Bar);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Help_Bar);
             break;
             case DRAWN_DIALOGUE_LEAVE_DIALOG:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Leave_Dialog);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Leave_Dialog);
             break;
         }
     }
@@ -1523,11 +1524,11 @@ static void PrintToWindow(u8 colorIdx)
         x = 8;
         y = 6;
         for(i = 0; i < NUM_COLOR_OPTIONS; i++){
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, Custom_Color_Options[i].title);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, Custom_Color_Options[i].title);
         }
 
         //Cancel Text
-        AddTextPrinterParameterized4(windowId, 8, x, y + (NUM_COLOR_OPTIONS * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Cancel);
+        AddTextPrinterParameterized4(windowId, 8, x, y + (NUM_COLOR_OPTIONS * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Cancel);
 
         //Options Configuration
         x = 14;
@@ -1537,7 +1538,7 @@ static void PrintToWindow(u8 colorIdx)
         for(i = 0; i < NUM_COLOR_OPTIONS; i++){
             end = StringCopy(gStringVar1,Custom_Color_Options[i].options[gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][i]]);
             PrependFontIdToFit(gStringVar1,end,0,windowWidth);
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, gStringVar1);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, gStringVar1);
         }
 
 
@@ -1548,10 +1549,10 @@ static void PrintToWindow(u8 colorIdx)
 
         switch(sMenuDataPtr->DrawnDialogue){
             case DRAWN_DIALOGUE_HELP_BAR:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Help_Bar);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Help_Bar);
             break;
             case DRAWN_DIALOGUE_LEAVE_DIALOG:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Leave_Dialog);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Leave_Dialog);
             break;
         }
     }
@@ -1559,7 +1560,7 @@ static void PrintToWindow(u8 colorIdx)
         x = 0;
         y = 0;
         windowId = CUSTOM_WINDOW_HEADER;
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Title_Text);
+        AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Title_Text);
 
     for (enum CustomizeWindows windowId = 0; windowId < CUSTOM_WINDOW_COUNT; windowId++)
     {
@@ -1679,7 +1680,7 @@ static void Task_MenuMain(u8 taskId)
             if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG)
             {
                 PlaySE(SE_PC_OFF);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
@@ -1699,7 +1700,7 @@ static void Task_MenuMain(u8 taskId)
                      sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN))
             {
                 PlaySE(SE_SELECT);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
             }
         }
@@ -1721,7 +1722,7 @@ static void Task_MenuMain(u8 taskId)
             else
             {
                 PlaySE(SE_PC_OFF);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
@@ -1740,7 +1741,7 @@ static void Task_MenuMain(u8 taskId)
         if(!sMenuDataPtr->isCustomPaletteScren)
         {
             PlaySE(SE_PC_OFF);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_MenuTurnOff;
         }
         PrintToWindow(FONT_CUSTOM_BLACK);
