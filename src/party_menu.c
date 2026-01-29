@@ -85,6 +85,7 @@
 #include "options_battle.h" // siliconMerge
 #include "qol_field_moves.h" // pokedex
 #include "field_puzzles.h" // siliconMerge
+#include "surprise_trade.h" // surpriseTrade
 
 enum {
     MENU_SUMMARY,
@@ -485,6 +486,7 @@ static void Task_MultiPartnerPartySlideIn(u8);
 static void SlideMultiPartyMenuBoxSpritesOneStep(u8);
 static void Task_WaitAfterMultiPartnerPartySlideIn(u8);
 static void BufferMonSelection(void);
+static void BufferMonSelectionSurpriseTrade(void); //surpriseTrade
 static void Task_PartyMenuWaitForFade(u8 taskId);
 static void Task_ChooseContestMon(u8 taskId);
 static void CB2_ChooseContestMon(void);
@@ -8687,8 +8689,20 @@ static void FieldCallback_RockClimb(void)
     FieldEffectStart(FLDEFF_USE_ROCK_CLIMB);
 }
 
+// Start surpriseTrade
 void CB2_TrashTrade(void)
 {
 // PSF TODO replace with ChooseBoxMon
-        InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, BufferMonSelection);
+        InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, BufferMonSelectionSurpriseTrade);
 }
+
+static void BufferMonSelectionSurpriseTrade(void)
+{
+    gSpecialVar_0x8004 = GetCursorSelectionMonId();
+    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+    gFieldCallback2 = CB2_FadeFromPartyMenu;
+    SetMainCallback2(CB2_ContinueSurpriseTrade);
+}
+// End surpriseTrade
+

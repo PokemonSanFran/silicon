@@ -2,8 +2,13 @@
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "strings.h"
+#include "menu_helpers.h"
+#include "scanline_effect.h"
+#include "constants/rgb.h"
 #include "daycare.h"
 #include "random.h"
+#include "menu.h"
+#include "palette.h"
 #include "overworld.h"
 #include "text.h"
 #include "event_data.h"
@@ -18,7 +23,9 @@
 #include "constants/hold_effects.h"
 #include "mail.h"
 #include "constants/pokemon.h"
+#include "constants/party_menu.h"
 #include "party_menu.h"
+#include "trade.h"
 #include "siliconStarter.h"
 #include "field_weather.h"
 #include "constants/weather.h"
@@ -28,6 +35,8 @@
 #include "party_menu.h"
 #include "surprise_trade.h"
 #include "data/surprise_trade_ot.h"
+
+extern const u16 gResidoPokedexOrder_Numerical[];
 
 static u32 GenerateSurpriseTradeSpecies(void);
 static u32 CalculateSurpriseTradeExperience(u32 level, u32 species);
@@ -43,7 +52,9 @@ static u32 GenerateSurpriseTradeAbility(u32 species);
 static bool32 IsItemBlocked(u32 item);
 static u32 GenerateSurpriseTradeItem(void);
 static u32 GenerateSurpriseTradeBall(void);
-static void SurpriseTrade_Init(MainCallback callback);
+static void SurpriseTrade_MainCB(void);
+static void SurpriseTrade_VBlankCB(void);
+static void SurpriseTrade_SetupCB(void);
 
 void CreateWonderTradePokemon(void)
 {
@@ -87,39 +98,26 @@ void CreateWonderTradePokemon(void)
 
 static u32 GenerateSurpriseTradeSpecies(void)
 {
-    u32 species = Random() % RESIDO_DEX_COUNT;
-    u32 residoDexList[RESIDO_DEX_COUNT];
+    u32 listCount = RESIDO_DEX_COUNT;
+    u32 startIndex = (Random() % (listCount - 1)) + 1;
 
-    for (u32 speciesIndex = 0; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
-        residoDexList[speciesIndex] = speciesIndex;
-
-    Shuffle(residoDexList,RESIDO_DEX_COUNT,sizeof(residoDexList[0]));
-
-    for (u32 speciesIndex = 0; speciesIndex < NUM_SPECIES; speciesIndex++)
+    for (u32 i = 0; i < listCount; i++)
     {
-        u32 newSpecies = residoDexList[speciesIndex];
-        //PSF TODO replace natDexNum with residoDexNum
-        if (gSpeciesInfo[newSpecies].natDexNum != species)
+        u32 index = ((startIndex + i) % (listCount - 1)) + 1;
+        u16 species = gResidoPokedexOrder_Numerical[index];
+
+        if (species == SPECIES_NONE || species >= NUM_SPECIES)
             continue;
 
-        if (gSpeciesInfo[newSpecies].isMegaEvolution)
+        const struct SpeciesInfo *info = &gSpeciesInfo[species];
+
+        if (info->isMegaEvolution || info->isLegendary || info->isMythical ||
+                info->isUltraBeast || info->isParadox)
             continue;
 
-        if (gSpeciesInfo[newSpecies].isLegendary)
-            continue;
-
-        if (gSpeciesInfo[newSpecies].isMythical)
-            continue;
-
-        if (gSpeciesInfo[newSpecies].isUltraBeast)
-            continue;
-
-        if (gSpeciesInfo[newSpecies].isParadox)
-            continue;
-
-        break;
+        return GetEggSpecies(species);
     }
-    return GetEggSpecies(species);
+    return SPECIES_PIDGEY;
 }
 
 static u32 CalculateSurpriseTradeExperience(u32 level, u32 species)
@@ -395,15 +393,68 @@ static u32 GenerateSurpriseTradeBall(void)
 
 void ShowTradedMonReturnToStartMenu(void)
 {
+    SetSurpriseTrade(FALSE);
     ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
 }
 
-void CB2_SurpriseTradeFromStartMenu(void)
+void CB2_ContinueSurpriseTrade(void)
 {
-    SurpriseTrade_Init(CB2_StartMenu_ReturnToUI);
+    SurpriseTrade_Continue(CB2_StartMenu_ReturnToUI);
 }
 
-static void SurpriseTrade_Init(MainCallback callback)
+void SurpriseTrade_Continue(MainCallback callback)
 {
-    CB2_TrashTrade();
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+
+    gSpecialVar_0x8005 = gSpecialVar_0x8004;
+    CreateWonderTradePokemon();
+    SetMainCallback2(SurpriseTrade_SetupCB);
+}
+
+static void SurpriseTrade_SetupCB(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+            SetVBlankHBlankCallbacksToNull();
+            ClearScheduledBgCopiesToVram();
+            gMain.state++;
+            break;
+        case 1:
+            ScanlineEffect_Stop();
+            FreeAllSpritePalettes();
+            ResetPaletteFade();
+            ResetSpriteData();
+            ResetTasks();
+            gMain.state++;
+            break;
+        case 2:
+            CreateTask(Task_SurpriseTrade, 0);
+            gMain.state++;
+            break;
+        case 3:
+            SetVBlankCallback(SurpriseTrade_VBlankCB);
+            SetMainCallback2(SurpriseTrade_MainCB);
+            break;
+    }
+}
+
+static void SurpriseTrade_VBlankCB(void)
+{
+    LoadOam();
+    TransferPlttBuffer();
+}
+
+static void SurpriseTrade_MainCB(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    DoScheduledBgTilemapCopiesToVram();
+    UpdatePaletteFade();
 }

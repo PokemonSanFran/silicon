@@ -320,7 +320,7 @@ static void Task_AnimateWirelessSignal(u8);
 static void Task_OpenCenterWhiteColumn(u8);
 static void Task_CloseCenterWhiteColumn(u8);
 static void CB2_SaveAndEndWirelessTrade(void);
-static void Task_SurpriseTrade(u8 taskId); // surpriseTrade
+bool8 sIsSurpriseTrade;
 
 #include "data/trade.h"
 
@@ -4387,7 +4387,13 @@ static bool8 DoTradeAnim_Wireless(void)
                 FreeMonSpritesGfx();
                 FREE_AND_SET_NULL(sTradeAnim);
             }
-            SetMainCallback2(CB2_ReturnToField);
+            // Start surpriseTrade
+            //SetMainCallback2(CB2_ReturnToField);
+            if (GetSurpriseTrade())
+                SetMainCallback2(ShowTradedMonReturnToStartMenu);
+            else
+                SetMainCallback2(ShowTradedMonReturnToField);
+            // End surpriseTrade
             BufferInGameTradeMonName();
         }
         break;
@@ -4864,11 +4870,22 @@ static void Task_InGameTrade(u8 taskId)
     }
 }
 
-// Start surprise_trade
-static void Task_SurpriseTrade(u8 taskId)
+// Start surpriseTrade
+void SetSurpriseTrade(bool32 status)
+{
+    sIsSurpriseTrade = status;
+}
+
+bool8 GetSurpriseTrade(void)
+{
+    return sIsSurpriseTrade;
+}
+
+void Task_SurpriseTrade(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        SetSurpriseTrade(TRUE);
         SetMainCallback2(CB2_InitInGameTrade);
         gFieldCallback = ShowTradedMonReturnToStartMenu;
         DestroyTask(taskId);

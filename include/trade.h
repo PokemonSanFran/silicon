@@ -20,5 +20,9 @@ void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);
 void LoadTradeAnimGfx(void);
 void DrawTextOnTradeWindow(u8 windowId, const u8 *str, u8 speed);
+// Start surpriseTrade
+void SetSurpriseTrade(bool32);
+bool8 GetSurpriseTrade(void);
+// End surpriseTrade
 
 #endif //GUARD_TRADE_H
