@@ -924,7 +924,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_SURPRISE_TRADE] = // PSF TODO ui
     {
-        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, CB2_TrashTrade, START_SIGNAL_STRONG
+        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, CB2_StartSurpriseTrade, START_SIGNAL_STRONG
     },
     [START_APP_GOOGLE_GLASS] =
     {

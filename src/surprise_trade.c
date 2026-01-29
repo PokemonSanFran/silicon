@@ -2,6 +2,8 @@
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "strings.h"
+#include "constants/ui_adventure_guide.h"
+#include "ui_adventure_guide.h"
 #include "menu_helpers.h"
 #include "scanline_effect.h"
 #include "constants/rgb.h"
@@ -101,18 +103,17 @@ static u32 GenerateSurpriseTradeSpecies(void)
     u32 listCount = RESIDO_DEX_COUNT;
     u32 startIndex = (Random() % (listCount - 1)) + 1;
 
-    for (u32 i = 0; i < listCount; i++)
+    for (u32 speciesIndex = 0; speciesIndex < listCount; speciesIndex++)
     {
-        u32 index = ((startIndex + i) % (listCount - 1)) + 1;
-        u16 species = gResidoPokedexOrder_Numerical[index];
+        u32 listIndex = ((startIndex + speciesIndex) % (listCount - 1)) + 1;
+        u32 species = gResidoPokedexOrder_Numerical[listIndex];
 
         if (species == SPECIES_NONE || species >= NUM_SPECIES)
             continue;
 
         const struct SpeciesInfo *info = &gSpeciesInfo[species];
 
-        if (info->isMegaEvolution || info->isLegendary || info->isMythical ||
-                info->isUltraBeast || info->isParadox)
+        if (info->isMegaEvolution || info->isLegendary || info->isMythical || info->isUltraBeast || info->isParadox)
             continue;
 
         return GetEggSpecies(species);
@@ -397,6 +398,19 @@ void ShowTradedMonReturnToStartMenu(void)
     ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
 }
 
+void CB2_StartSurpriseTrade(void)
+{
+    enum AdventureGuideList targetGuide = GUIDE_SURPRISE_TRADE;
+
+    if (!shouldSkipGuide(targetGuide))
+    {
+        VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN,targetGuide);
+        Adventure_Guide_Init(CB2_StartSurpriseTrade);
+        return;
+    }
+    SetMainCallback2(CB2_TrashTrade);
+}
+
 void CB2_ContinueSurpriseTrade(void)
 {
     SurpriseTrade_Continue(CB2_StartMenu_ReturnToUI);
@@ -442,6 +456,10 @@ static void SurpriseTrade_SetupCB(void)
             SetMainCallback2(SurpriseTrade_MainCB);
             break;
     }
+}
+
+static void SurpriseTrade_RunAdventureGuide(void)
+{
 }
 
 static void SurpriseTrade_VBlankCB(void)
