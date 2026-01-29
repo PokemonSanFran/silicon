@@ -1,41 +1,41 @@
 #include "global.h"
+#include "battle.h"
+#include "daycare.h"
+#include "daycare.h"
+#include "event_data.h"
+#include "field_weather.h"
+#include "item.h"
+#include "mail.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "overworld.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
-#include "strings.h"
-#include "constants/ui_adventure_guide.h"
-#include "ui_adventure_guide.h"
-#include "menu_helpers.h"
-#include "scanline_effect.h"
-#include "constants/rgb.h"
-#include "daycare.h"
 #include "random.h"
-#include "menu.h"
-#include "palette.h"
-#include "overworld.h"
-#include "text.h"
-#include "event_data.h"
 #include "region_map.h"
-#include "malloc.h"
-#include "constants/species.h"
-#include "constants/items.h"
-#include "constants/abilities.h"
-#include "constants/region_map_sections.h"
-#include "item.h"
-#include "constants/item.h"
-#include "constants/hold_effects.h"
-#include "mail.h"
-#include "constants/pokemon.h"
-#include "constants/party_menu.h"
-#include "party_menu.h"
-#include "trade.h"
+#include "scanline_effect.h"
 #include "siliconStarter.h"
-#include "field_weather.h"
-#include "constants/weather.h"
-#include "battle.h"
 #include "string_util.h"
-#include "daycare.h"
-#include "party_menu.h"
+#include "strings.h"
 #include "surprise_trade.h"
+#include "text.h"
+#include "trade.h"
+#include "ui_adventure_guide.h"
+#include "constants/abilities.h"
+#include "constants/hold_effects.h"
+#include "constants/item.h"
+#include "constants/items.h"
+#include "constants/party_menu.h"
+#include "constants/pokemon.h"
+#include "constants/region_map_sections.h"
+#include "constants/rgb.h"
+#include "constants/species.h"
+#include "constants/ui_adventure_guide.h"
+#include "constants/weather.h"
 #include "data/surprise_trade_ot.h"
 
 extern const u16 gResidoPokedexOrder_Numerical[];
@@ -102,11 +102,12 @@ static u32 GenerateSurpriseTradeSpecies(void)
 {
     u32 listCount = RESIDO_DEX_COUNT;
     u32 startIndex = (Random() % (listCount - 1)) + 1;
+    u32 species = 0;
 
     for (u32 speciesIndex = 0; speciesIndex < listCount; speciesIndex++)
     {
         u32 listIndex = ((startIndex + speciesIndex) % (listCount - 1)) + 1;
-        u32 species = gResidoPokedexOrder_Numerical[listIndex];
+        species = gResidoPokedexOrder_Numerical[listIndex];
 
         if (species == SPECIES_NONE || species >= NUM_SPECIES)
             continue;
@@ -116,9 +117,9 @@ static u32 GenerateSurpriseTradeSpecies(void)
         if (info->isMegaEvolution || info->isLegendary || info->isMythical || info->isUltraBeast || info->isParadox)
             continue;
 
-        return GetEggSpecies(species);
+        break;
     }
-    return SPECIES_PIDGEY;
+    return GetEggSpecies(species);
 }
 
 static u32 CalculateSurpriseTradeExperience(u32 level, u32 species)
@@ -394,7 +395,7 @@ static u32 GenerateSurpriseTradeBall(void)
 
 void ShowTradedMonReturnToStartMenu(void)
 {
-    SetSurpriseTrade(FALSE);
+    SetSurpriseTradeFlag(FALSE);
     ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
 }
 
@@ -456,10 +457,6 @@ static void SurpriseTrade_SetupCB(void)
             SetMainCallback2(SurpriseTrade_MainCB);
             break;
     }
-}
-
-static void SurpriseTrade_RunAdventureGuide(void)
-{
 }
 
 static void SurpriseTrade_VBlankCB(void)

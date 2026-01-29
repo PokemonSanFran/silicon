@@ -486,7 +486,6 @@ static void Task_MultiPartnerPartySlideIn(u8);
 static void SlideMultiPartyMenuBoxSpritesOneStep(u8);
 static void Task_WaitAfterMultiPartnerPartySlideIn(u8);
 static void BufferMonSelection(void);
-static void BufferMonSelectionSurpriseTrade(void); //surpriseTrade
 static void Task_PartyMenuWaitForFade(u8 taskId);
 static void Task_ChooseContestMon(u8 taskId);
 static void CB2_ChooseContestMon(void);
@@ -547,6 +546,7 @@ static void DisplayHexorbMessageAndScheduleTask(u8, const u8*, TaskFunc, bool32)
 // End hexorb Branch
 static void Task_HideFollowerNPCForTeleport(u8);
 static void FieldCallback_RockClimb(void);
+static void BufferMonSelectionSurpriseTrade(void); //surpriseTrade
 
 // static const data
 #include "data/party_menu.h"

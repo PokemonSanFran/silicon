@@ -5,7 +5,7 @@ void CreateWonderTradePokemon(void);
 void ShowTradedMonReturnToStartMenu(void);
 void ShowTradedMonReturnToField(void);
 void CB2_SurpriseTradeFromStartMenu(void);
-void Task_SurpriseTrade(u8 taskId); // surpriseTrade
+void Task_SurpriseTrade(u8 taskId);
 void CB2_ContinueSurpriseTrade(void);
 void SurpriseTrade_Continue(MainCallback callback);
 void CB2_StartSurpriseTrade(void);
