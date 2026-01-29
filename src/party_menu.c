@@ -8686,3 +8686,9 @@ static void FieldCallback_RockClimb(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     FieldEffectStart(FLDEFF_USE_ROCK_CLIMB);
 }
+
+void CB2_TrashTrade(void)
+{
+// PSF TODO replace with ChooseBoxMon
+        InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, BufferMonSelection);
+}
