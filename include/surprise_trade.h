@@ -4,6 +4,7 @@
 void CreateWonderTradePokemon(void);
 void ShowTradedMonReturnToStartMenu(void);
 void ShowTradedMonReturnToField(void);
+void CB2_SurpriseTradeFromStartMenu(void);
 
 struct SurpriseTradeTrainer
 {

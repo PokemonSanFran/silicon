@@ -34,6 +34,7 @@
 #include "fake_rtc.h"
 #include "region_map.h"
 #include "sprite.h"
+#include "surprise_trade.h"
 #include "pokemon_icon.h"
 #include "util.h"
 #include "quests.h"
@@ -923,7 +924,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_SURPRISE_TRADE] = // PSF TODO ui
     {
-        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, NULL, START_SIGNAL_STRONG
+        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, CB2_SurpriseTradeFromStartMenu, START_SIGNAL_STRONG
     },
     [START_APP_GOOGLE_GLASS] =
     {
@@ -1589,7 +1590,7 @@ static void StartPrint_HelpTopText(void)
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
 
-    // TIME OF DAY, 
+    // TIME OF DAY,
     enum TimeOfDay time = GetTimeOfDay();
     StringAppend(strbuf[0], sStartMenuStrings_TimeOfDay[time]);
     StringAppend(strbuf[0], COMPOUND_STRING(", "));

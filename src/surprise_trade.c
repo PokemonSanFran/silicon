@@ -25,6 +25,7 @@
 #include "battle.h"
 #include "string_util.h"
 #include "daycare.h"
+#include "party_menu.h"
 #include "surprise_trade.h"
 #include "data/surprise_trade_ot.h"
 
@@ -42,6 +43,7 @@ static u32 GenerateSurpriseTradeAbility(u32 species);
 static bool32 IsItemBlocked(u32 item);
 static u32 GenerateSurpriseTradeItem(void);
 static u32 GenerateSurpriseTradeBall(void);
+static void SurpriseTrade_Init(MainCallback callback);
 
 void CreateWonderTradePokemon(void)
 {
@@ -394,4 +396,14 @@ static u32 GenerateSurpriseTradeBall(void)
 void ShowTradedMonReturnToStartMenu(void)
 {
     ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
+}
+
+void CB2_SurpriseTradeFromStartMenu(void)
+{
+    SurpriseTrade_Init(CB2_StartMenu_ReturnToUI);
+}
+
+static void SurpriseTrade_Init(MainCallback callback)
+{
+    CB2_TrashTrade();
 }
