@@ -4041,6 +4041,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_TIRABUDIN_PLACE_GYM) \
     X(MUS_ZENZU_ISLAND_GYM) \
     X(MUS_BUG_CATCHER) \
+    X(MUS_CAMERAPERSON_REPORTER) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
