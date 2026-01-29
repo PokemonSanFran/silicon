@@ -786,11 +786,11 @@ static void FreeResources(void)
 
 static void FreeStructs(void)
 {
-    if (sPokedexState != NULL)
-        Free(sPokedexState);
-
-    if (sPokedexLists != NULL)
-        Free(sPokedexLists);
+    TRY_FREE_AND_SET_NULL(sPokedexState);
+    TRY_FREE_AND_SET_NULL(sPokedexLists);
+    TRY_FREE_AND_SET_NULL(sPokedexGridResources);
+    TRY_FREE_AND_SET_NULL(sSpeciesListMenu);
+    TRY_FREE_AND_SET_NULL(sFilterSet);
 }
 
 void FreeBackgrounds(void)
@@ -810,6 +810,7 @@ static void SpeciesGrid_ChangeSortAndReload(void)
     SpeciesGrid_SortList();
     SpeciesGrid_Reload();
     DebugSpeciesGrid_ApplyFiltersAndReload();
+    TRY_FREE_AND_SET_NULL(sFilterSetTemp);
 }
 
 static u32 SpeciesGrid_IncrementSort(void)
