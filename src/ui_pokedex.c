@@ -786,11 +786,11 @@ static void FreeResources(void)
 
 static void FreeStructs(void)
 {
-    if (sPokedexState != NULL)
-        Free(sPokedexState);
-
-    if (sPokedexLists != NULL)
-        Free(sPokedexLists);
+    TRY_FREE_AND_SET_NULL(sPokedexState);
+    TRY_FREE_AND_SET_NULL(sPokedexLists);
+    TRY_FREE_AND_SET_NULL(sPokedexGridResources);
+    TRY_FREE_AND_SET_NULL(sSpeciesListMenu);
+    TRY_FREE_AND_SET_NULL(sFilterSet);
 }
 
 void FreeBackgrounds(void)
@@ -810,6 +810,7 @@ static void SpeciesGrid_ChangeSortAndReload(void)
     SpeciesGrid_SortList();
     SpeciesGrid_Reload();
     DebugSpeciesGrid_ApplyFiltersAndReload();
+    TRY_FREE_AND_SET_NULL(sFilterSetTemp);
 }
 
 static u32 SpeciesGrid_IncrementSort(void)
@@ -1815,7 +1816,7 @@ static void SpeciesGrid_ResetInterfaceSpriteIds(void)
     u32 spriteIndex;
 
     for (spriteIndex = 0; spriteIndex < POKEDEX_SPRITE_COUNT; spriteIndex++)
-        SpeciesGrid_SaveInterfaceSpriteId(spriteIndex, MAX_SPRITES);
+        SpeciesGrid_SaveInterfaceSpriteId(spriteIndex, SPRITE_NONE);
 }
 
 static void SpeciesGrid_SaveInterfaceSpriteId(u32 spriteIndex, u32 spriteId)
@@ -1876,7 +1877,7 @@ static void SpeciesData_PrintManageHeaderSprite(u32 species)
 
     u32 spriteId = SpeciesData_GetHeaderSpriteId();
 
-    if (spriteId != MAX_SPRITES)
+    if (spriteId != SPRITE_NONE)
     {
         SpeciesData_SetHeaderSpriteVisibility(FALSE);
         return;
@@ -2157,16 +2158,18 @@ void SpeciesData_RemoveMonSprite(void)
     u32 spriteId = SpeciesData_GetMonSpriteId();
     u32 shinySpriteId = SpeciesData_GetShinyMonSpriteId();
 
-    if (spriteId != MAX_SPRITES)
+    if (spriteId != SPRITE_NONE)
     {
+        FreeSpriteOamMatrix(&gSprites[spriteId]);
         FreeAndDestroyMonPicSprite(spriteId);
-        SpeciesData_SaveMonSpriteId(MAX_SPRITES);
+        SpeciesData_SaveMonSpriteId(SPRITE_NONE);
     }
 
-    if (shinySpriteId != MAX_SPRITES)
+    if (shinySpriteId != SPRITE_NONE)
     {
+        FreeSpriteOamMatrix(&gSprites[spriteId]);
         FreeAndDestroyMonPicSprite(shinySpriteId);
-        SpeciesData_SaveShinyMonSpriteId(MAX_SPRITES);
+        SpeciesData_SaveShinyMonSpriteId(SPRITE_NONE);
     }
 }
 
@@ -2179,7 +2182,7 @@ static void SpeciesData_CreateTypeSprite(void)
     {
         oldSpriteId = SpeciesData_GetMonTypeSpriteId(typeIndex);
 
-        if (oldSpriteId != MAX_SPRITES)
+        if (oldSpriteId != SPRITE_NONE)
             return;
 
         SpeciesData_SaveTypeSpriteId(typeIndex, CreateSprite(&sSpriteTemplate_Type13x11, 0, 0, 2));
@@ -2252,7 +2255,7 @@ void SpeciesData_ResetTypeSpriteId(void)
     u32 typeIndex;
 
     for (typeIndex = 0; typeIndex < 2; typeIndex++)
-        SpeciesData_SaveTypeSpriteId(typeIndex, MAX_SPRITES);
+        SpeciesData_SaveTypeSpriteId(typeIndex, SPRITE_NONE);
 }
 
 static bool8 SpeciesData_UseAlolaIcon(u32 species)
@@ -2296,11 +2299,11 @@ void SpeciesData_RemoveCaptureIndicator(void)
 {
     u32 spriteId = SpeciesData_GetCaptureIndicatorSpriteId();
 
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesData_SaveCaptureIndicatorSpriteId(MAX_SPRITES);
+    SpeciesData_SaveCaptureIndicatorSpriteId(SPRITE_NONE);
 }
 
 void SpeciesData_LoadCaptureIndicatorSprite(void)
@@ -2417,7 +2420,7 @@ void SpeciesGrid_PrintMonIcon(u32 rowIndex,u32 columnIndex, u32 species)
     u32 x = baseX + (paddingX * columnIndex);
     u32 y = baseY + (paddingY * rowIndex);
 
-    u32 spriteId = MAX_SPRITES;
+    u32 spriteId = SPRITE_NONE;
 
     species = SpeciesData_CheckLastSeenForm(species);
 
@@ -2492,10 +2495,10 @@ static void SpeciesGrid_RemoveMonIcon(enum ParentsDisplayRows rowIndex, enum Spe
 {
     u32 oldSpriteId = SpeciesGrid_GetMonIconSpriteId(rowIndex, columnIndex);
 
-    if (oldSpriteId == MAX_SPRITES)
+    if (oldSpriteId == SPRITE_NONE)
         return;
 
-    SpeciesGrid_SaveMonIconSpriteId(rowIndex,columnIndex,MAX_SPRITES);
+    SpeciesGrid_SaveMonIconSpriteId(rowIndex,columnIndex,SPRITE_NONE);
     FreeAndDestroyMonIconSprite(&gSprites[oldSpriteId]);
 }
 
@@ -2586,11 +2589,11 @@ static void SpeciesGrid_RemoveCaptureIndicator(enum ParentsDisplayRows rowIndex,
 {
     u32 oldSpriteId = SpeciesGrid_GetCaptureIndicatorSpriteId(rowIndex, columnIndex);
 
-    if (oldSpriteId == MAX_SPRITES)
+    if (oldSpriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[oldSpriteId]);
-    SpeciesGrid_SaveCaptureIndicatorSpriteId(rowIndex,columnIndex,MAX_SPRITES);
+    SpeciesGrid_SaveCaptureIndicatorSpriteId(rowIndex,columnIndex,SPRITE_NONE);
 }
 
 void SpeciesGrid_RemoveCaptureIndicators(void)
@@ -3027,11 +3030,11 @@ void SpeciesGrid_RemoveScrollbarSpriteId(void)
 {
     u32 spriteId = SpeciesGrid_GetScrollbarSpriteId();
 
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesGrid_SaveScrollbarSpriteId(MAX_SPRITES);
+    SpeciesGrid_SaveScrollbarSpriteId(SPRITE_NONE);
 }
 
 void SpeciesData_RemoveTypeSprites(void)
@@ -3042,7 +3045,7 @@ void SpeciesData_RemoveTypeSprites(void)
     {
         spriteId = SpeciesData_GetMonTypeSpriteId(typeIndex);
 
-        if (spriteId == MAX_SPRITES)
+        if (spriteId == SPRITE_NONE)
             return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
@@ -3054,11 +3057,11 @@ void SpeciesData_RemoveHeaderSprite(void)
 {
     u32 spriteId = SpeciesData_GetHeaderSpriteId();
 
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesData_SaveHeaderSpriteId(MAX_SPRITES);
+    SpeciesData_SaveHeaderSpriteId(SPRITE_NONE);
 }
 
 
@@ -3066,11 +3069,11 @@ void SpeciesData_RemoveHeaderSprite(void)
 void SpeciesGrid_RemoveMonCursorSprite(void)
 {
     u32 spriteId = SpeciesGrid_GetMonCursorSpriteId();
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesGrid_SaveMonCursorSpriteId(MAX_SPRITES);
+    SpeciesGrid_SaveMonCursorSpriteId(SPRITE_NONE);
 }
 
 void SpeciesGrid_SetFirstPageLoad(bool32 value)
