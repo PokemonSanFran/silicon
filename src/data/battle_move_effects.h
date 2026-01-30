@@ -2208,6 +2208,25 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+// Start trainerExpTests
+    [EFFECT_EXP_TEST] =
+    {
+        .battleScript = BattleScript_EffectExpTest,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_EXP_TEST_SETUP] =
+    {
+        .battleScript = BattleScript_EffectExpTestSetup,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_EXP_TEST_FINISH] =
+    {
+        .battleScript = BattleScript_EffectExpTestFinish,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+// End trainerExpTests
     [EFFECT_LIFE_DEW] =
     {
         .battleScript = BattleScript_EffectLifeDew,

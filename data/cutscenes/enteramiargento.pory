@@ -52,7 +52,7 @@ script EnterAmiArgento_StartGymBattle_Script {
 script EnterAmiArgento_AmiArgentoDeafeated_Script {
     lock
     startcutscene(JUMPPLAYER_ENTERAMIARGENTO)
-    setflag(FLAG_BADGE08_GET)
+    cleargymtrainersandgetbadge(GYM_BD)
     setvar(VAR_GYM_8_STATE,GYM_DEFEATED_LEADER)
     addvar(VAR_STORYLINE_STATE,1)
     tweetfanfare(TWEET_GYM_IRISINA_TOWN_BADGE,MUS_OBTAIN_BADGE)

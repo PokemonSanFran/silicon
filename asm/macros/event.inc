@@ -3501,6 +3501,13 @@
 	.endm
     @ End adventureGuide
 
+    @ Start trainerBattles
+	.macro cleargymtrainersandgetbadge gym:req
+    setvar VAR_CURRENT_GYM, \gym
+    callnative ClearGymTrainer_Script
+    .endm
+    @ end trainerBattles
+
 	@ Manually buffer a string as the speaker's name for namebox.
 	@ The next shown message/msgbox will include a namebox, if the provided string is not NULL.
 	@ An SP_NAME_* constant can also be used, it'll take the name from gSpeakerNamesTable instead.

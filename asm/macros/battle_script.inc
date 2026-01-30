@@ -2488,12 +2488,29 @@
     .endm
     @ End Battle Settings: Nickname
 
-    @ Start pointsMessage
-    .macro jumpifpointsmessageoff jumpInstr:req
-    callnative BS_JumpIfPointsMessagesOff
-    .4byte \jumpInstr
-    .endm
-    @ End pointsMessage
+@ Start trainerExpTests
+	@ Exp Test move handling
+	.macro exptesthandler
+	callnative BS_HandleExpTest
+	.endm
+
+	@ Exp Test setup handling
+	.macro exptestsetup
+	callnative BS_HandleExpTestSetup
+	.endm
+
+	@ Exp Test finish handling
+	.macro exptestfinish
+	callnative BS_HandleExpTestFinish
+	.endm
+@ End trainerExpTests
+
+@ Start pointsMessage
+.macro jumpifpointsmessageoff jumpInstr:req
+callnative BS_JumpIfPointsMessagesOff
+.4byte \jumpInstr
+.endm
+@ End pointsMessage
 
 @ END OF PSF BATTLE SCRIPT MACROS
 	.macro flushtextbox

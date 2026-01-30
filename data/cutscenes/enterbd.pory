@@ -142,7 +142,7 @@ script EnterBD_StartBattle_Script {
 script EnterBD_PostBattle_Script {
     lock
     startcutscene(JUMPPLAYER_ENTERBD)
-    setflag(FLAG_BADGE07_GET)
+    cleargymtrainersandgetbadge(GYM_BD)
     setvar(VAR_GYM_7_STATE,GYM_DEFEATED_LEADER)
     setvar(VAR_BD_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)

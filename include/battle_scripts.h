@@ -851,4 +851,10 @@ extern const u8 BattleScript_SleepTalkAttackstring[];
 extern const u8 BattleScript_NaturePowerAttackstring[];
 extern const u8 BattleScript_PokemonCantUseTheMove[];
 
+// Start trainerExpTests
+extern const u8 BattleScript_EffectExpTest[];
+extern const u8 BattleScript_EffectExpTestSetup[];
+extern const u8 BattleScript_EffectExpTestFinish[];
+// End trainerExpTests
+
 #endif // GUARD_BATTLE_SCRIPTS_H

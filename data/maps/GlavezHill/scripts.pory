@@ -14,13 +14,51 @@ script GlavezHill_Mapreview
     mappreview
 }
 
-script GlavezHill_EventScript_Julia_Script{
+script GlavezHeights_EventScript_Julia_Script
+{
     trainerbattle_single(TRAINER_CHEF,gText_Julia_PreBattle,gText_Julia_PostBattle, Quest_Restaurantexpansion2_TrainerB_PostBattle_Script)
        call(Quest_Restaurantexpansion2_TrainerB_PostBattle_Script)
 }
+
 text gText_Julia_PreBattle{
 	format("")
 }
 text gText_Julia_PostBattle{
 	format("")
 }
+
+script GlavezHeights_EventScript_006E7EFD
+{
+    trainerbattle_single(TRAINER_006E7EFD,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+script GlavezHeights_EventScript_0272920D
+{
+    trainerbattle_single(TRAINER_0272920D,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+
+script GlavezHeights_EventScript_012ED80D
+{
+    trainerbattle_single(TRAINER_012ED80D,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+
+script GlavezHeights_EventScript_00C593A8
+{
+    trainerbattle_single(TRAINER_00C593A8,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+
+script GlavezHeights_EventScript_01C7AF3F
+{
+    trainerbattle_single(TRAINER_01C7AF3F,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+
+script GlavezHeights_EventScript_00317DFA
+{
+    trainerbattle_single(TRAINER_00317DFA,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+

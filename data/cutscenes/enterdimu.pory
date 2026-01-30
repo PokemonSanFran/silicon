@@ -37,7 +37,7 @@ script EnterDimu_StartGymBattle_Script {
 script EnterDimu_PostGymBattle_Script {
     lock
         startcutscene(JUMPPLAYER_ENTERDIMU)
-        setflag(FLAG_BADGE06_GET)
+        cleargymtrainersandgetbadge(GYM_DIMU)
         setvar(VAR_GYM_6_STATE,GYM_DEFEATED_LEADER)
         setvar(VAR_DIMU_STATE,BATTLE_1_COMPLETE)
         addvar(VAR_STORYLINE_STATE,1)

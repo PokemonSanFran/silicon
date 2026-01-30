@@ -22,6 +22,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         .item = ITEM_NONE,
         .abilityNum = 1, // ABILITY_TECHNICIAN
         .level = 18,
+        // levels were determined by looking at their BST - you got more levels (up to 22) if you were further away from 500 BST (Scyther)
         .evs =
         {
             [STAT_HP] =     23,
@@ -83,7 +84,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         .gender = MON_FEMALE,
         .item = ITEM_NONE,
         .abilityNum = 0, //ABILITY_CHLOROPHYLL
-        .level = 22,
+        .level = 21,
         .evs =
         {
             [STAT_HP] =     34,
@@ -114,7 +115,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         .gender = MON_MALE,
         .item = ITEM_NONE,
         .abilityNum = 0, // ABILITY_STATIC
-        .level = 22,
+        .level = 19,
         .evs =
         {
             [STAT_HP] =     56,
@@ -145,7 +146,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         .gender = MON_FEMALE,
         .item = ITEM_NONE,
         .abilityNum = 0, // ABILITY_MERCILESS
-        .level = 22,
+        .level = 21,
         .evs =
         {
             [STAT_HP] =     61,
@@ -176,7 +177,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         .gender = MON_FEMALE,
         .item = ITEM_NONE,
         .abilityNum = 0, //ABILITY_ROCK_HEAD
-        .level = 21,
+        .level = 20,
         .evs =
         {
             [STAT_HP] =     7,
@@ -239,7 +240,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         .gender = MON_FEMALE,
         .item = ITEM_NONE,
         .abilityNum = 0, //ABILITY_HEALER
-        .level = 21,
+        .level = 19,
         .evs =
         {
             [STAT_HP] =     48,
@@ -270,7 +271,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         .gender = MON_FEMALE,
         .item = ITEM_NONE,
         .abilityNum = 1, //ABILITY_MOLD_BREAKER
-        .level = 21,
+        .level = 20,
         .evs =
         {
             [STAT_HP] =     86,
@@ -456,4 +457,13 @@ void MoveStarterToParty(void)
     GetSetPokedexFlag(species,FLAG_SET_CAUGHT);
     GiveDebugStarter();
     CompactPartySlots();
+}
+
+u8 GetLowestLevelStarter(void)
+{
+    u32 level = MAX_LEVEL;
+    for (u32 starterIndex = 0; starterIndex < SILICON_STARTER_COUNT; starterIndex++)
+        level = min(level,sStarterMonTable[starterIndex].level);
+
+    return level;
 }

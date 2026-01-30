@@ -619,6 +619,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_POUND; j < MOVES_COUNT_GEN1; j++)
     {
+        // Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -702,6 +706,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_SKETCH; j < MOVES_COUNT_GEN2; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -785,6 +793,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_FAKE_OUT; j < MOVES_COUNT_GEN3; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -868,6 +880,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_ROOST; j < MOVES_COUNT_GEN4; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -951,6 +967,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_HONE_CLAWS; j < MOVES_COUNT_GEN5; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -1034,6 +1054,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_FLYING_PRESS; j < MOVES_COUNT_GEN6; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -1117,6 +1141,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_SHORE_UP; j < MOVES_COUNT_GEN7; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -1200,6 +1228,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_DYNAMAX_CANNON; j < MOVES_COUNT_GEN8; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }
@@ -1284,6 +1316,10 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     u32 move = 0;
     for (u32 j = MOVE_TERA_BLAST; j < MOVES_COUNT; j++)
     {
+// Start trainerExpTests
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+            continue;
+// End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
             PARAMETRIZE { move = j; }
     }

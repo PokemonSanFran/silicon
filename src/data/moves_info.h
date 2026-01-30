@@ -21177,6 +21177,59 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_MalignantChain,
     },
 
+// Start trainerExpTests
+    [MOVE_EXP_TEST] =
+    {
+        .name = COMPOUND_STRING("Exp Test Move"),
+        .description = COMPOUND_STRING("Test move."),
+        .effect = EFFECT_EXP_TEST,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .battleAnimScript = gBattleAnimMove_TestMoves,
+        .validApprenticeMove = FALSE,
+        .metronomeBanned = TRUE,
+    },
+
+    [MOVE_EXP_TEST_SETUP] =
+    {
+        .name = COMPOUND_STRING("Exp Test Setup"),
+        .description = COMPOUND_STRING("Test setup."),
+        .effect = EFFECT_EXP_TEST_SETUP,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .battleAnimScript = gBattleAnimMove_TestMoves,
+        .validApprenticeMove = FALSE,
+        .metronomeBanned = TRUE,
+    },
+
+    [MOVE_EXP_TEST_FINISH] =
+    {
+        .name = COMPOUND_STRING("Exp Test FINISH"),
+        .description = COMPOUND_STRING("Test finish."),
+        .effect = EFFECT_EXP_TEST_FINISH,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .battleAnimScript = gBattleAnimMove_TestMoves,
+        .validApprenticeMove = FALSE,
+        .metronomeBanned = TRUE,
+    },
+// End trainerExpTests
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

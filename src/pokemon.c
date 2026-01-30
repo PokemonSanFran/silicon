@@ -718,6 +718,13 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 #include "data/pokemon/level_up_learnsets/gen_1.h" // Yellow
 #endif
 
+// Start trainerExpTests
+static const struct LevelUpMove sTestingSpeciesLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_CELEBRATE),
+    LEVEL_UP_END
+};
+// End trainerExpTests
+
 #include "data/pokemon/teachable_learnsets.h"
 #include "data/pokemon/egg_moves.h"
 #include "data/pokemon/form_species_tables.h"

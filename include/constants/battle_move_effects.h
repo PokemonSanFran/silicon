@@ -347,6 +347,11 @@ enum __attribute__((packed)) BattleMoveEffects
     EFFECT_SPECTRAL_THIEF,
     EFFECT_RECOIL,
     EFFECT_SMACK_DOWN,
+    // Start trainerExpTests
+    EFFECT_EXP_TEST,
+    EFFECT_EXP_TEST_SETUP,
+    EFFECT_EXP_TEST_FINISH,
+    // End trainerExpTests
     EFFECT_LIFE_DEW,
     EFFECT_ICE_SPINNER, // Removes terrain unless attacker is removed from field either by fainting or ejected out
     EFFECT_STEEL_ROLLER, // Will fail if there is no terrain up but removes it regardless if attacker is removed from field or not

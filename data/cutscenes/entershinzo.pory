@@ -33,7 +33,7 @@ script EnterShinzo_StartGymBattle_Script
 
 script EnterShinzo_ShinzoDefeated_Script {
     lockall
-    setflag(FLAG_BADGE02_GET)
+    cleargymtrainersandgetbadge(GYM_SHINZO)
     setvar(VAR_SHINZO_STATE,BATTLE_1_COMPLETE)
     setvar(VAR_GYM_2_STATE,GYM_DEFEATED_LEADER)
     msgbox(format("Thank you, {PLAYER}. You exploited my mistakes amazingly. I hope you're proud!"),,SPEAKER_SHINZO)

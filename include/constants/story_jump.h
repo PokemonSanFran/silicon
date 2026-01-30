@@ -127,6 +127,20 @@ enum StoryJumpPoints
     JUMPPLAYER_EPILOGUE,
 };
 
+enum GymLeaderIndex
+{
+    GYM_BELEN,
+    GYM_SHINZO,
+    GYM_EMRYS,
+    GYM_PUA,
+    GYM_NERIENE,
+    GYM_DIMU,
+    GYM_BD,
+    GYM_AMI,
+    GYM_COUNT,
+};
 
+#define VAR_CURRENT_GYM VAR_TEMP_0
+#define MAX_GYM_TRAINER_COUNT 12
 
 #endif  //GUARD_CONSTANTS_STORYJUMP_H

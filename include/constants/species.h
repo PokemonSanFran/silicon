@@ -1695,8 +1695,15 @@
 #define SPECIES_BLACEPHALON_SHARPRISE 1573
 #define SPECIES_FOG_UNKNOWN 1574
 //#define SPECIES_EGG                                     (SPECIES_MIMIKYU_BUSTED_TOTEM + 1)
-#define SPECIES_EGG (SPECIES_FOG_UNKNOWN + 1)
 // End siliconMerge
+
+// Start trainerExpTests
+#define SPECIES_TESTING_ERRATIC         1575
+#define SPECIES_TESTING_MEDIUM_SLOW     1576
+#define SPECIES_TESTING_SLOW            1577
+#define SPECIES_TESTING_FLUCTUATING     1578
+#define SPECIES_EGG (SPECIES_TESTING_FLUCTUATING + 1)
+// End trainerExpTests
 
 #define NUM_SPECIES SPECIES_EGG
 

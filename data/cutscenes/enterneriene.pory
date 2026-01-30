@@ -46,7 +46,7 @@ script EnterNeriene_StartBattle_Script {
 script EnterNeriene_NerieneDefeated_Script {
     lock
     startcutscene(JUMPPLAYER_ENTERNERIENE)
-    setflag(FLAG_BADGE05_GET)
+    cleargymtrainersandgetbadge(GYM_NERIENE)
     setvar(VAR_GYM_5_STATE,GYM_DEFEATED_LEADER)
     setvar(VAR_NERIENE_STATE,BATTLE_1_COMPLETE)
     setvar(VAR_FORT_YOBU_STATE,DEFEATED_NERIENE)
