@@ -1386,6 +1386,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/quests/miniarcade.inc"
 .include "data/quests/mutualaidfund.inc"
 .include "data/quests/rps.inc"
+.include "data/quests/compulsivehealingpeersupportgroup.inc"
 ## SILICON MAPS
 .include "data/maps/AnbehBend/scripts.inc"
 .include "data/maps/Arantraz/scripts.inc"

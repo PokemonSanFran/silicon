@@ -118,7 +118,7 @@ const struct Tweet gTweets[] =
         .userId = BUZZR_USER_HARRIBAT,
         .content = COMPOUND_STRING("???"),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_21,
+        .criteria = NULL,
         .quest = 0,
         .dislikeCount = 21,
         .likeCount = 14,
@@ -310,32 +310,22 @@ const struct Tweet gTweets[] =
         .dislikeCount = 3,
         .likeCount = 43,
     },
-    [22] =
+    [TWEET_QUEST_NOPODMOD_1] =
     {
         .userId = BUZZR_USER_MICHELL,
-        .content = COMPOUND_STRING(
-            "This Pokémon has a terrifically strong\n"
-            "constricting power. It can even flatten\n"
-            "steel oil drums. Once it wraps its body\n"
-            "around its foe, escaping is impossible."
-            ),
+        .content = COMPOUND_STRING("Went on a date tonight. Super hot, great texter… but he was one of those NoPo weirdos! Why can’t you just be normal?!?!?! &RedFlags"),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_22,
+        .criteria = TweetCriteria_AlwaysTrue,
         .quest = 0,
         .dislikeCount = 6,
         .likeCount = 47,
     },
-    [23] =
+    [TWEET_QUEST_NOPODMOD_2] =
     {
         .userId = BUZZR_USER_DONALD,
-        .content = COMPOUND_STRING(
-            "It stores electricity in the electric sacs\n"
-            "on its cheeks. When it releases pent-up\n"
-            "energy in a burst, the electric power is\n"
-            "equal to a lightning bolt."
-            ),
+        .content = COMPOUND_STRING("I’m feeling so isolated lately. It’s hard to find other people in the NoPo movement. Where do those people hang out?"),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_23,
+        .criteria = TweetCriteria_IsCompulsiveHealingReward,
         .quest = 0,
         .dislikeCount = 17,
         .likeCount = 14,

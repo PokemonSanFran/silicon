@@ -2,6 +2,7 @@
 #define GUARD_BUZZR_CRITERIA_H
 
 void Buzzr_IncrementSteps(void);
+void TweetCriteria_AlwaysTrue(void);
 void TweetCriteria_Quest_NPC_Rabies(void);
 void TweetCriteria_Quest_NPC_Robbery(void);
 void TweetCriteria_Quest_NPC_Ice(void);
@@ -23,8 +24,7 @@ void TweetCriteria_Story_Strike_Begin1(void);
 void TweetCriteria_Story_Strike_Begin2(void);
 void TweetCriteria_Story_Warehouse_Rave(void);
 void TweetCriteria_StoryClear(void);
-void TweetCriteria_21(void);
-void TweetCriteria_22(void);
+void TweetCriteria_IsCompulsiveHealingReward(void);
 void TweetCriteria_23(void);
 void TweetCriteria_24(void);
 void TweetCriteria_25(void);

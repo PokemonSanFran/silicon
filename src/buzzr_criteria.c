@@ -33,6 +33,7 @@
 #include "random.h"
 #include "event_data.h"
 #include "buzzr.h"
+#include "quests.h"
 
 void Buzzr_IncrementSteps(void)
 {
@@ -58,6 +59,11 @@ static bool32 TweetCriteria_CheckSteps(u32 cost)
 
     VarSet(VAR_BUZZR_STEP_COUNTER,(steps -= cost));
     return TRUE;
+}
+
+void TweetCriteria_AlwaysTrue(void)
+{
+    gSpecialVar_Result = TRUE;
 }
 
 void TweetCriteria_Quest_NPC_Rabies(void)
@@ -178,14 +184,9 @@ void TweetCriteria_StoryClear(void)
     gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) >= STORY_CLEAR);
 }
 
-void TweetCriteria_21(void)
+void TweetCriteria_IsCompulsiveHealingReward(void)
 {
-	gSpecialVar_Result = FALSE;
-}
-
-void TweetCriteria_22(void)
-{
-	gSpecialVar_Result = FALSE;
+    gSpecialVar_Result = ((IsQuestRewardState(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)) || (IsQuestCompletedState(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)));
 }
 
 void TweetCriteria_23(void)

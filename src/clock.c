@@ -65,7 +65,10 @@ static void UpdatePerDay(struct Time *localTime)
         SetShoalItemFlag(daysSince);
         SetRandomLotteryNumber(daysSince);
         UpdateDaysPassedSinceFormChange(daysSince);
-        Quest_CutePokemon_DailyEvent(daysSince); // siliconMerge
+        // Start siliconMerge
+        Quest_CutePokemon_DailyEvent(daysSince);
+        Quest_TryCompulsiveHealingPeerSupport_UpdateType(daysSince);
+        // End siliconMerge
         DailyResetApricornTrees();
         *days = localTime->days;
     }

@@ -46,7 +46,7 @@
 #define FLAG_SYS_NO_COLLISION 0x20 // Silicon Flag
 #define FLAG_SYS_NO_ENCOUNTER 0x21 // Silicon Flag
 #define FLAG_SYS_NO_TRAINER_SEE 0x22 // Silicon Flag
-#define FLAG_SYS_NO_BAG_USE 0x23 // Silicon Flag
+#define FLAG_UNUSED_0x23        0x23
 #define FLAG_SYS_NO_CATCHING 0x24 // Silicon Flag
 #define FLAG_SAVED_DAVID 0x25 // Silicon Flag
 #define FLAG_LOCKEDOUT_PLAYED 0x26 // Silicon Flag
@@ -1646,7 +1646,7 @@
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
 #define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
 #define FLAG_DAILY_ELEANOR_REMATCH                    (DAILY_FLAGS_START + 0x3)  // Unused Flag
-#define FLAG_UNUSED_0x924                           (DAILY_FLAGS_START + 0x4)  // Unused Flag
+#define FLAG_DAILY_NOPOMOD_BATTLE                   (DAILY_FLAGS_START + 0x4)
 #define FLAG_UNUSED_0x925                           (DAILY_FLAGS_START + 0x5)  // Unused Flag
 #define FLAG_UNUSED_0x926                           (DAILY_FLAGS_START + 0x6)  // Unused Flag
 #define FLAG_UNUSED_0x927                           (DAILY_FLAGS_START + 0x7)  // Unused Flag

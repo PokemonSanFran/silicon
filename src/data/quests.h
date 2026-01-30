@@ -2799,7 +2799,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP] =
     {
-        .name = COMPOUND_STRING("???"),
+        .name = COMPOUND_STRING("Compulsive Healing Peer Support Group"),
         .desc = COMPOUND_STRING("???"),
         .donedesc = COMPOUND_STRING("???"),
         .map = COMPOUND_STRING("???"),

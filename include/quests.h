@@ -261,5 +261,9 @@ enum QuestCases ReturnQuestState(enum QuestIdList questId);
 const u8 *GetQuestName(s32 questId);
 bool8 IsQuestInactiveState(s32 questId);
 u32 CountInactiveQuests(void);
+bool8 IsQuestRewardState(s32 questId);
+bool8 IsQuestInactiveState(s32 questId);
+bool8 IsQuestActiveState(s32 questId);
+bool8 IsQuestCompletedState(s32 questId);
 
 #endif // GUARD_QUESTS_H

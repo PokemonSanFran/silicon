@@ -167,8 +167,6 @@ static void GenerateAndPrintDesc(s32 questId);
 static void GenerateQuestDescription(s32 questId);
 
 static bool8 IsQuestUnlocked(s32 questId);
-static bool8 IsQuestActiveState(s32 questId);
-static bool8 IsQuestRewardState(s32 questId);
 static bool8 IsSubquestCompletedState(s32 questId);
 
 static void GenerateStateAndPrint(u8 windowId, u32 itemId, u8 y);

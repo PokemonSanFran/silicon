@@ -256,6 +256,7 @@ enum NameplateSpeaker
     SPEAKER_ADAM,
     SPEAKER_ELEANOR_PAST,
     SPEAKER_FRANK_PAST,
+    SPEAKER_NOPOMOD,
     NUM_SPEAKERS,
 };
 

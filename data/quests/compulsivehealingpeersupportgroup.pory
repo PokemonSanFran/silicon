@@ -1,0 +1,265 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const NOPOMOD = LOCALID_NOPOMOD
+
+script CompulsiveHealingPeerSupportGroup_Script_CheckQuestState
+{
+    lock
+    returnqueststate(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)
+    switch(var(VAR_RESULT))
+    {
+        default: goto(CompulsiveHealingPeerSupportGroup_Script_InteractQuestInactive)
+        case QUEST_MENU_SET_ACTIVE: goto(CompulsiveHealingPeerSupportGroup_Script_InteractQuestActive)
+        case QUEST_MENU_COMPLETE_QUEST: goto(CompulsiveHealingPeerSupportGroup_TryDailyBattle)
+    }
+    releaseall
+    end
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_InteractQuestInactive
+{
+
+    if (var(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE) == TYPE_NONE)
+    {
+        callnative(Quest_CompulsiveHealingPeerSupport_UpdateType)
+    }
+
+    msgbox(format("I can feel my raw power coursing through my veins..."),,SPEAKER_NOPOMOD,TAIL_WHISPER,EMOTE_SHOCK)
+    closemessage
+    faceplayer
+    msgbox(format("You’re a Trainer! My newly formed mind’s eye showed me."),,SPEAKER_NOPOMOD)
+    msgbox(format("Yeah, I’m a - wait."),,SPEAKER_ALICIA)
+    msgbox(format("Did you say newly formed mind’s eye?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    msgbox(format("Absolutely! Month 97 of NoPo, where clarity ascends to new heights."),,SPEAKER_NOPOMOD)
+    msgbox(format("What’s -"),,SPEAKER_ALICIA)
+    msgbox(format("NoPo is more than abstaining; it’s a revelation! "),,SPEAKER_NOPOMOD)
+    msgbox(format("Pokemon have a natural vitality to them. Using Potions, Heal Powder, or even Lava Cookies drains their essence."),,SPEAKER_NOPOMOD)
+    msgbox(format("But they heal the Pok-"),,SPEAKER_ALICIA)
+    msgbox(format("A temporary fix for long-term damage."),,SPEAKER_NOPOMOD)
+    msgbox(format("Is anybody in this region not completely insane?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(format("Where did you even learn this stuff?"),,SPEAKER_ALICIA)
+    msgbox(format("I was conducting my own research into Pokemon wellness. I was on the deep web learning about what the Pokecenters don’t want you to know about when I discovered this community…"),,SPEAKER_NOPOMOD)
+    msgbox(format("And now I’m one of the leaders of the movement - I’m a moderator in the official online NoPo forums! "),,SPEAKER_NOPOMOD)
+    msgbox(format("And I’ve decided to mentor you."),,SPEAKER_NOPOMOD)
+    msgbox(format("…thanks?"),,SPEAKER_ALICIA)
+    msgbox(format("You’ll be unstoppable after this. Trust me."),,SPEAKER_NOPOMOD)
+    closemessage
+    startquest(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)
+    goto(CompulsiveHealingPeerSupportGroup_Script_InteractQuestActive)
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_InteractQuestActive
+{
+    callnative(Quest_CompulsiveHealingPeerSupport_BufferTypeName)
+
+    msgbox(format("How exactly does this training method work?"),,SPEAKER_ALICIA)
+    msgbox(format("As a NoPo adherent, I eschew Pokémon healing."),,SPEAKER_NOPOMOD)
+    msgbox(format("As a NoPo LEADER, I exclusively train Pokémon of one type."),,SPEAKER_NOPOMOD)
+    msgbox(format("Today we’re focusing on {STR_VAR_1}-type Pokémon."),,SPEAKER_NOPOMOD)
+
+    callnative(Script_Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        goto(CompulsiveHealingPeerSupportGroup_Script_PartyDoesNotQualify)
+    }
+    else
+    {
+        goto(CompulsiveHealingPeerSupportGroup_Dialogue_StartBattle)
+    }
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_PartyDoesNotQualify
+{
+    msgbox(format("Come back when your party only has {STR_VAR_1}-type Pokémon."),,SPEAKER_NOPOMOD)
+    closemessage
+    releaseall
+    end
+}
+
+script CompulsiveHealingPeerSupportGroup_Dialogue_StartBattle
+{
+    msgbox(format("Let's get started. No items at all!"),,SPEAKER_NOPOMOD)
+    closemessage
+    goto(CompulsiveHealingPeerSupportGroup_Script_StartBattle)
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_StartBattle
+{
+    setvar(VAR_NO_BAG_USE,NO_BAG_IN_BATTLE)
+// PSF TODO Player loss text: It’ll be a while before you can match my newfound power…
+    switch (var(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE))
+    {
+        default:
+        case TYPE_NORMAL:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_NORMAL_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_FIGHTING:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FIGHTING_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_FLYING:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FLYING_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_POISON:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_POISON_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_GROUND:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_GROUND_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_ROCK:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_ROCK_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_BUG:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_BUG_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_GHOST:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_GHOST_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_STEEL:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_STEEL_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_FIRE:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FIRE_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_WATER:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_WATER_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_GRASS:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_GRASS_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_ELECTRIC:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_ELECTRIC_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_PSYCHIC:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_PSYCHIC_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_ICE:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_ICE_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_DRAGON:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_DRAGON_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_DARK:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_DARK_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+        case TYPE_FAIRY:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FAIRY_1,CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp)
+    }
+    goto(CompulsiveHealingPeerSupportGroup_Dialogue_StartSecondBattle)
+}
+
+text CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp
+{
+    format("I'm just warming up.")
+}
+
+script CompulsiveHealingPeerSupportGroup_Dialogue_StartSecondBattle
+{
+    setvar(VAR_NO_BAG_USE,NO_BAG_IN_BATTLE)
+// PSF TODO Player loss text: It’ll be a while before you can match my newfound power…
+    msgbox(format("This is where real strength comes from. Do you feel the pressure that’s built up? The lack of release?"),,SPEAKER_NOPOMOD)
+    msgbox(format("Use that! Focus on that. Another round!"),,SPEAKER_NOPOMOD)
+    call(CompulsiveHealingPeerSupportGroup_Script_StartSecondBattle)
+    goto(CompulsiveHealingPeerSupportGroup_Script_CompleteQuest)
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_StartSecondBattle
+{
+    closemessage
+    switch (var(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE))
+    {
+        default:
+        case TYPE_NORMAL:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_NORMAL_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_FIGHTING:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FIGHTING_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_FLYING:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FLYING_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_POISON:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_POISON_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_GROUND:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_GROUND_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_ROCK:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_ROCK_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_BUG:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_BUG_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_GHOST:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_GHOST_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_STEEL:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_STEEL_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_FIRE:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FIRE_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_WATER:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_WATER_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_GRASS:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_GRASS_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_ELECTRIC:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_ELECTRIC_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_PSYCHIC:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_PSYCHIC_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_ICE:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_ICE_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_DRAGON:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_DRAGON_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_DARK:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_DARK_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+        case TYPE_FAIRY:
+            trainerbattle_no_intro(TRAINER_NOPOMOD_FAIRY_2,CompulsiveHealingPeerSupportGroup_Text_HowDidYou)
+    }
+    setvar(VAR_NO_BAG_USE,NO_BAG_RESTRICTION)
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_CompleteQuest
+{
+    msgbox(format("Beating me, a leader, twice in a row? Remarkable."),,SPEAKER_NOPOMOD)
+    msgbox(format("Are you sure that this training actually works? If I was able to beat you - "),,SPEAKER_ALICIA)
+    msgbox(format("Yes! Our path is unwavering and absolute. My Pokémon and I have fought through countless battles together.. Our strength has just never been tested like this before!"),,SPEAKER_NOPOMOD)
+    msgbox(format("Return another day. I must meditate on this."),,SPEAKER_NOPOMOD)
+    closemessage
+    completequest(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)
+    setflag(FLAG_DAILY_NOPOMOD_BATTLE)
+    releaseall
+    end
+}
+
+text CompulsiveHealingPeerSupportGroup_Text_HowDidYou
+{
+    format("How did you...")
+}
+
+script CompulsiveHealingPeerSupportGroup_TryDailyBattle
+{
+    faceplayer
+    if (flag(FLAG_DAILY_NOPOMOD_BATTLE))
+    {
+        msgbox(format("{PLAYER}, the gap between us grows…"),,SPEAKER_NOPOMOD)
+        msgbox(format("Let’s keep training together... tomorrow."),,SPEAKER_NOPOMOD)
+        closemessage
+        release
+        end
+    }
+    else
+    {
+        goto(CompulsiveHealingPeerSupportGroup_DoDailyBattle)
+    }
+}
+
+script CompulsiveHealingPeerSupportGroup_DoDailyBattle
+{
+    callnative(Quest_CompulsiveHealingPeerSupport_BufferTypeName)
+    msgbox(format("{PLAYER}! I want to continue to train with you."),,SPEAKER_NOPOMOD)
+    msgbox(format("Today, bring your {STR_VAR_1}-type Pokémon. Ready?"),MSGBOX_YESNO,SPEAKER_NOPOMOD)
+
+    if (var(VAR_RESULT) == NO)
+    {
+        call(CompulsiveHealingPeerSupportGroup_Script_PostQuestPartyDoesNotQualify)
+    }
+
+    callnative(Script_Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        goto(CompulsiveHealingPeerSupportGroup_Script_PostQuestPartyDoesNotQualify)
+    }
+    else
+    {
+        goto(CompulsiveHealingPeerSupportGroup_Script_PostQuestStartBattle)
+    }
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_PostQuestPartyDoesNotQualify
+{
+    msgbox(format("Your party isn't prepared? Come back when you’re ready."),,SPEAKER_NOPOMOD)
+    closemessage
+    release
+    end
+}
+
+script CompulsiveHealingPeerSupportGroup_Script_PostQuestStartBattle
+{
+    msgbox(format("Today I'll show you the power of NoPo!"),,SPEAKER_NOPOMOD)
+    setflag(FLAG_DAILY_NOPOMOD_BATTLE)
+    call(CompulsiveHealingPeerSupportGroup_Script_StartBattle)
+    call(CompulsiveHealingPeerSupportGroup_Script_StartSecondBattle)
+    goto(CompulsiveHealingPeerSupportGroup_TryDailyBattle)
+}

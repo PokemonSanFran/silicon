@@ -1305,50 +1305,57 @@ void Quest_Mutualaidfund_TakeDonation(void){
 }
 
 // ***********************************************************************
-// Quest: Bruce Lee
+// Quest: Compulsive Healing Peer Support
 // ***********************************************************************
-void Quest_Brucelee_UpdateType(u16 days)
+
+bool8 Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void);
+
+void Quest_CompulsiveHealingPeerSupport_UpdateType(void)
 {
-    u16 randomType = Random() % NUMBER_OF_MON_TYPES;
+    u32 randomType = Random() % NUMBER_OF_MON_TYPES;
+    while(randomType == TYPE_MYSTERY || randomType == TYPE_NONE || randomType == TYPE_STELLAR)
+        randomType = Random () % NUMBER_OF_MON_TYPES;
 
-    if (days != 0){
-
-        while(randomType == TYPE_MYSTERY)
-            randomType = Random () % NUMBER_OF_MON_TYPES;
-
-        VarSet(VAR_QUEST_BRUCE_LEE_DAILY_TYPE,randomType);
-    }
+    VarSet(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE,randomType);
 }
 
-void Quest_Brucelee_BufferTypeName(void)
+void Quest_TryCompulsiveHealingPeerSupport_UpdateType(u16 days)
 {
-    u16 dailyType = VarGet(VAR_QUEST_BRUCE_LEE_DAILY_TYPE);
+    if (days == 0)
+        return;
+
+    Quest_CompulsiveHealingPeerSupport_UpdateType();
+}
+
+void Quest_CompulsiveHealingPeerSupport_BufferTypeName(void)
+{
+    u32 dailyType = VarGet(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE);
     StringCopy(gStringVar1,gTypesInfo[dailyType].name);
 }
 
-bool8 Quest_Brucelee_CheckIfPartyTypes(void)
+void Script_Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void)
 {
-    u8 i;
-    u16 species;
-    u16 dailyType = VarGet(VAR_QUEST_BRUCE_LEE_DAILY_TYPE);
+    gSpecialVar_Result = Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes();
+}
 
-    bool8 partyMatchesType = TRUE;
-
+bool8 Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void)
+{
+    u32 dailyType = VarGet(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE);
     struct Pokemon *pokemon;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         pokemon = &gPlayerParty[i];
         if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
         {
-            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            u32 species = GetMonData(pokemon, MON_DATA_SPECIES);
             if (gSpeciesInfo[species].types[0] != dailyType && gSpeciesInfo[species].types[1] != dailyType)
             {
-                partyMatchesType = FALSE;
+                return FALSE;
             }
         }
     }
-    return partyMatchesType;
+    return TRUE;
 }
 // ***********************************************************************
 // Quest: Restore Treasure Island

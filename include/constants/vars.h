@@ -98,6 +98,7 @@
 #define VAR_BIRCH_STATE                                  0x4049
 #define VAR_CRUISE_STEP_COUNT                            0x404A
 #define VAR_POKELOT_RND1                                 0x404B
+#define VAR_NO_BAG_USE                                   0x404B // PSF Var
 #define VAR_POKELOT_RND2                                 0x404C
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
 #define VAR_FLY_TOOL_SOURCE                              0x404E // PSF Var
@@ -113,7 +114,7 @@
 #define VAR_ALWAYS_ZERO                        0x4055 // PSF Var
 #define VAR_MSGBOX_SPEAKER                        0x4056 // PSF Var
 #define VAR_PETALBURG_CITY_STATE                         0x4057
-#define VAR_QUEST_BRUCE_LEE_DAILY_TYPE                   0x4057 // PSF Var
+#define VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE                   0x4057 // PSF Var
 #define VAR_SLATEPORT_CITY_STATE                         0x4058
 #define VAR_KEIYING_MANSION_STATE                           0x4058 // PSF Var
 #define VAR_MSGBOX_TAIL                          0x4059 // PSF Var
