@@ -1308,7 +1308,7 @@ static void PrintGymLeaders(void)
         TRAINER_BELEN,
         TRAINER_SHINZO,
         TRAINER_EMRYS,
-        TRAINER_KAUNA,
+        TRAINER_PUA,
         TRAINER_NERIENE,
         TRAINER_DIMU,
         TRAINER_BD,
