@@ -226,27 +226,6 @@ enum StartMenuCursorModes
     NUM_START_CURSORS
 };
 
-enum StartMenuHelpSymbols
-{
-    // Time Of Day
-    START_HELP_SYMBOL_TOD_M = 0, // Morning
-    START_HELP_SYMBOL_TOD_D,     // Day
-    START_HELP_SYMBOL_TOD_E,     // Evening
-    START_HELP_SYMBOL_TOD_N,     // Night
-
-    START_HELP_SYMBOL_MAP,
-
-    // Cellular Signal
-    START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
-    START_HELP_SYMBOL_SIG_0A,
-    START_HELP_SYMBOL_SIG_1,
-    START_HELP_SYMBOL_SIG_2,
-
-    START_HELP_SYMBOL_SWAP,
-
-    NUM_START_HELP_SYMBOLS
-};
-
 enum StartMenuEggInfoSymbols
 {
     START_EGG_INFO_SYMBOL_x = 0,
@@ -484,10 +463,8 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *);
 static void AppGrid_HandleCursorVisibility(enum StartMenuModes mode);
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOfDay);
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
 static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void);
 
@@ -904,7 +881,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     // second row
     [START_APP_TRAINER_CARD] =
     {
-        COMPOUND_STRING("Trainer Card"), 0, NULL
+        COMPOUND_STRING("Trainer Card"), FLAG_SYS_APP_QUEST_GET, CB2_InitUiMainMenuFromStartMenu
     },
     [START_APP_PRESTO] =
     {
@@ -1896,9 +1873,6 @@ static void AppData_InsertNewApps(void)
 {
     for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
     {
-        if (app == START_APP_TRAINER_CARD) //  PSF TODO Trainer Card disabled
-            continue;
-
         if (AppData_GetUnlockFlag(app) && AppData_GetIndexFromApp(app) == NUM_START_APPS)
         {
             u32 freeSlot = AppData_GetFirstEmptyIndex();
@@ -1949,9 +1923,7 @@ static bool32 AppData_GetUnlockFlag(enum StartMenuApps app)
 
 static enum StartMenuApps AppData_GetAppFromIndex(u8 idx)
 {
-    u32 app = gSaveBlock3Ptr->startMenuAppIndex[idx];
-
-    return (app == START_APP_TRAINER_CARD) ? START_APP_NONE : app; //  PSF TODO Trainer Card disabled
+    return gSaveBlock3Ptr->startMenuAppIndex[idx];
 }
 
 static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps app)
@@ -2214,7 +2186,7 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *s)
 }
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
+void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(window, sStartMenuSymbols_Help, sym * 16, 0, 160, 16, x, y, 16, 16);
 }
@@ -2240,7 +2212,7 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOf
     }
 }
 
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
+enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
 {
     return BlitSymbol_ConvertTimeToHelp(GetTimeOfDay());
 }
