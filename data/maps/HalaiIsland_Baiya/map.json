@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
@@ -48,7 +48,5 @@
       "script": "CuconuTown_Compound_2F_Bed_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

@@ -38,6 +38,11 @@ struct WildEncounterTypes
     const struct WildPokemonInfo *rockSmashMonsInfo;
     const struct WildPokemonInfo *fishingMonsInfo;
     const struct WildPokemonInfo *hiddenMonsInfo;
+    // Start wildEncounters
+    const struct WildPokemonInfo *phenomenonMonsInfo;
+    const struct WildPokemonInfo *berryMonsInfo;
+    const struct WildPokemonInfo *flyMonsInfo;
+    // End wildEncounters
 };
 
 struct WildPokemonHeader
@@ -75,5 +80,6 @@ bool32 MapHasNoEncounterData(void);
 bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPokemonArea area, u8 flags); // fogBattle
 void UpdateChainFishingStreak(void); // fishingUpdate
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
+u16 GenerateBerryMon(void); // wildEncounters
 
 #endif // GUARD_WILD_ENCOUNTER_H

@@ -968,7 +968,7 @@
     },
     {
       "id": "MAPSEC_NAVAL_BASE",
-      "name": "NavalBase",
+      "name": "Naval Base",
       "x": 24,
       "y": 10,
       "width": 1,
@@ -1451,6 +1451,15 @@
       "width": 1,
       "height": 1,
       "visitedFlag": "FLAG_VISITED_PARC"
+    },
+    {
+      "id": "MAPSEC_CHAPEL_OF_CHIMES",
+      "name": "Chapel of Chimes",
+      "x": 23,
+      "y": 4,
+      "width": 1,
+      "height": 1,
+      "visitedFlag": "FLAG_VISITED_CHAPEL_CHIMES"
     },
     {
       "id": "MAPSEC_ORRE",

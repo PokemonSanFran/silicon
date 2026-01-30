@@ -36,6 +36,7 @@
 #include "battle.h"
 #include "constants/battle.h"
 // End fishingUpdate
+#include "constants/phenomenon.h" // phenomenon
 
 extern const u8 EventScript_SprayWoreOff[];
 
@@ -198,9 +199,30 @@ static void FeebasSeedRng(u16 seed)
     sFeebasRngValue = seed;
 }
 
+// Start wildEncounters
+u8 ChooseWildMonIndex_Silicon(void)
+{
+    u32 rand = Random() % (ENCOUNTER_SLOT_CHANCE * ENCOUNTER_SLOT_MAX);
+    bool32 swap = (LURE_STEP_COUNT != 0 && (Random() % 10 < 2));
+    enum EncounterSlots wildMonIndex = 0;
+
+    for (enum EncounterSlots monIndex = ENCOUNTER_SLOT_1; monIndex < ENCOUNTER_SLOT_COUNT; monIndex++)
+    {
+        if ((rand >= (monIndex * ENCOUNTER_SLOT_CHANCE)) && (rand < (monIndex + 1) * ENCOUNTER_SLOT_CHANCE))
+        {
+            wildMonIndex = monIndex;
+            break;
+        }
+    }
+
+    return (swap) ? ENCOUNTER_SLOT_MAX - wildMonIndex : wildMonIndex;
+}
+// End wildEncounters
+
 // LAND_WILD_COUNT
 u32 ChooseWildMonIndex_Land(void)
 {
+    return ChooseWildMonIndex_Silicon(); // wildEncounters
     u8 wildMonIndex = 0;
     bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
@@ -242,6 +264,7 @@ u32 ChooseWildMonIndex_Land(void)
 // WATER_WILD_COUNT
 u32 ChooseWildMonIndex_Water(void)
 {
+    return ChooseWildMonIndex_Silicon(); // wildEncounters
     u32 wildMonIndex = 0;
     bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
@@ -296,6 +319,7 @@ u32 ChooseWildMonIndex_Rocks(void)
 // FISH_WILD_COUNT
 static u32 ChooseWildMonIndex_Fishing(u8 rod)
 {
+    return ChooseWildMonIndex_Silicon(); // wildEncounters
     u8 wildMonIndex = 0;
     bool8 swap = FALSE;
     u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
@@ -437,22 +461,35 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
 
     switch (area)
     {
-    default:
-    case WILD_AREA_LAND:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
-        break;
-    case WILD_AREA_WATER:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
-        break;
-    case WILD_AREA_ROCKS:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
-        break;
-    case WILD_AREA_FISHING:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
-        break;
-    case WILD_AREA_HIDDEN:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
-        break;
+        default:
+        case WILD_AREA_LAND:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+            break;
+        case WILD_AREA_WATER:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
+            break;
+        case WILD_AREA_ROCKS:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
+            break;
+        case WILD_AREA_FISHING:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
+            break;
+        case WILD_AREA_HIDDEN:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
+            break;
+            // Start phenomenon
+        case WILD_AREA_PHENOMENON:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].phenomenonMonsInfo;
+            break;
+            // End phenomenon
+            // Start wildEncounters
+        case WILD_AREA_BERRY_TREES:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].berryMonsInfo;
+            break;
+        case WILD_AREA_FLY_MONS:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
+            break;
+            // End wildEncounters
     }
 
     if (wildMonInfo == NULL && !OW_TIME_OF_DAY_DISABLE_FALLBACK)
@@ -1286,4 +1323,12 @@ u32 ChooseHiddenMonIndex(void)
 bool32 MapHasNoEncounterData(void)
 {
     return (GetCurrentMapWildMonHeaderId() == HEADER_NONE);
+}
+
+u16 TryGenerateFlyMon(void)
+{
+    u32 header = GetCurrentMapWildMonHeaderId();
+    u32 wildMonIndex = ChooseWildMonIndex_Silicon();
+    const struct WildPokemonInfo *wildMonInfo = gWildMonHeaders[header].encounterTypes[GetTimeOfDayForEncounters(header, WILD_AREA_FLY_MONS)].flyMonsInfo;
+    return wildMonInfo->wildPokemon[wildMonIndex].species;
 }

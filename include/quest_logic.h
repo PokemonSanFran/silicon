@@ -42,4 +42,7 @@ void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
 
 void DebugQuest_CompulsiveHealingPeerSupport(u8 state);
+void CountDefeatedRabiesMon(void);
+void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
+
 #endif //GUARD_QUESTLOGIC_H

@@ -27,11 +27,6 @@
       "map": "MAP_NONGYU_BRIDGE",
       "offset": 25,
       "direction": "left"
-    },
-    {
-      "map": "MAP_ROUTE_B",
-      "offset": 7,
-      "direction": "down"
     }
   ],
   "object_events": [
@@ -190,6 +185,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Taxi_Interact_Dialogue",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 23,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_OROLAND_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 24,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_OROLAND_2",
+      "script": "BerryTreeScript",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -198,6 +219,20 @@
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_OROLAND_POKEMON_CENTER_1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 11,
+      "y": 30,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE_B",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 1,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
       "dest_warp_id": "0"
     }
   ],

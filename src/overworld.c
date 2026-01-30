@@ -47,6 +47,7 @@
 #include "oras_dowse.h"
 #include "palette.h"
 #include "play_time.h"
+#include "phenomenon.h" // phenomenon
 #include "random.h"
 #include "roamer.h"
 #include "rotating_gate.h"
@@ -1010,6 +1011,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     WaterBerriesIfRaining(); // autoWater
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
+    ClearAllPhenomenonData(); // phenomenon
 
     if (OW_HIDE_REPEAT_MAP_POPUP)
     {
@@ -1897,6 +1899,7 @@ static void OverworldBasic(void)
            ApplyWeatherColorMapIfIdle(gWeatherPtr->colorMapIndex);
         }
     }
+    RestartPhenomenon(); // phenomenon
 }
 
 // This CB2 is used when starting

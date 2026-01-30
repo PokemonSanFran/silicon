@@ -1237,6 +1237,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/fishing.inc"
 .include "data/scripts/surprise_trade.inc" @ surpriseTrade
 .include "data/scripts/save.inc" @ autoSave
+.include "data/scripts/phenomenon.inc" @ autoSave
 
 ## SILICON CUTSCENES
 .include "data/cutscenes/prologue.inc"
@@ -1647,3 +1648,21 @@ EventScript_VsSeekerChargingDone::
 @ End siliconMerge
 	.include "data/scripts/battle_frontier.inc"
 	.include "data/scripts/apricorn_tree.inc"
+
+	.include "data/maps/CapheCommunityGarden/scripts.inc"
+
+	.include "data/maps/Arantraz_Prison/scripts.inc"
+
+	.include "data/maps/GlavezHeights/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymC/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymB/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymA/scripts.inc"
+
+	.include "data/maps/NavalBaseExterior/scripts.inc"
+
+	.include "data/maps/ChapelOfChimes_Interior/scripts.inc"
+
+	.include "data/maps/ChapelOfChimes_End/scripts.inc"
