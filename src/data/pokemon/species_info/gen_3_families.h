@@ -2584,6 +2584,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sWingullTeachableLearnset,
         .eggMoveLearnset = sWingullEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_PELIPPER}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_PELIPPER] =
@@ -2670,6 +2671,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sPelipperLevelUpLearnset,
         .teachableLearnset = sPelipperTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_WINGULL
 
@@ -6450,6 +6452,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sCarvanhaTeachableLearnset,
         .eggMoveLearnset = sCarvanhaEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SHARPEDO}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_SHARPEDO] =
@@ -6527,6 +6530,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sSharpedoTeachableLearnset,
         .formSpeciesIdTable = sSharpedoFormSpeciesIdTable,
         .formChangeTable = sSharpedoFormChangeTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 
 #if P_MEGA_EVOLUTIONS
@@ -6599,6 +6603,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sSharpedoTeachableLearnset,
         .formSpeciesIdTable = sSharpedoFormSpeciesIdTable,
         .formChangeTable = sSharpedoFormChangeTable,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_CARVANHA
@@ -7076,6 +7081,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sTorkoalLevelUpLearnset,
         .teachableLearnset = sTorkoalTeachableLearnset,
         .eggMoveLearnset = sTorkoalEggMoveLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_TORKOAL
 
@@ -7305,6 +7311,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sSpindaLevelUpLearnset,
         .teachableLearnset = sSpindaTeachableLearnset,
         .eggMoveLearnset = sSpindaEggMoveLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_SPINDA
 
@@ -7384,6 +7391,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sTrapinchTeachableLearnset,
         .eggMoveLearnset = sTrapinchEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_VIBRAVA}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_VIBRAVA] =
@@ -7462,6 +7470,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sVibravaLevelUpLearnset,
         .teachableLearnset = sVibravaTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_FLYGON}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_FLYGON] =
@@ -7546,6 +7555,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sFlygonLevelUpLearnset,
         .teachableLearnset = sFlygonTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_TRAPINCH
 
@@ -8781,6 +8791,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sLileepTeachableLearnset,
         .eggMoveLearnset = sLileepEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CRADILY}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_CRADILY] =
@@ -8860,6 +8871,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sCradilyLevelUpLearnset,
         .teachableLearnset = sCradilyTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_LILEEP
 
@@ -8942,6 +8954,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .teachableLearnset = sAnorithTeachableLearnset,
         .eggMoveLearnset = sAnorithEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ARMALDO}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_ARMALDO] =
@@ -9018,6 +9031,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sArmaldoLevelUpLearnset,
         .teachableLearnset = sArmaldoTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_ANORITH
 
@@ -11134,6 +11148,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
                                 {EVO_TRADE, 0, SPECIES_GOREBYSS, CONDITIONS({IF_HOLD_ITEM, ITEM_DEEP_SEA_SCALE})},
                                 {EVO_ITEM, ITEM_DEEP_SEA_TOOTH, SPECIES_HUNTAIL},
                                 {EVO_ITEM, ITEM_DEEP_SEA_SCALE, SPECIES_GOREBYSS}),
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_HUNTAIL] =
@@ -11206,6 +11221,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sHuntailLevelUpLearnset,
         .teachableLearnset = sHuntailTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 
     [SPECIES_GOREBYSS] =
@@ -11277,6 +11293,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sGorebyssLevelUpLearnset,
         .teachableLearnset = sGorebyssTeachableLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_CLAMPERL
 
@@ -11365,6 +11382,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sRelicanthLevelUpLearnset,
         .teachableLearnset = sRelicanthTeachableLearnset,
         .eggMoveLearnset = sRelicanthEggMoveLearnset,
+        .isAlolaDex = TRUE, // pokedex
     },
 #endif //P_FAMILY_RELICANTH
 

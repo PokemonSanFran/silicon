@@ -154,6 +154,7 @@ static void SpeciesData_SetTypeSpritePositionAndPalette(u32, u32, u32, u32);
 static void SpeciesData_SetTypeSpriteAttributes(u32);
 static void SpeciesData_SaveTypeSpriteId(u32, u32);
 
+static bool8 SpeciesData_UseAlolaIcon(u32 species);
 static void SpeciesData_SaveCaptureIndicatorSpriteId(u32);
 static u32 SpeciesData_GetCaptureIndicatorSpriteId(void);
 
@@ -333,6 +334,8 @@ static const u32 speciesListScrollbar[] = INCBIN_U32("graphics/pokedex/ui/specie
 static const u32 pageScrollbar[] = INCBIN_U32("graphics/pokedex/ui/page/scrollbar.4bpp.smol");
 static const u32 speciesListCaptureIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/folder.4bpp.smol");
 static const u32 speciesListUncaughtIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/emptyfolder.4bpp.smol");
+static const u32 speciesListCaptureIndicator_Alola[] = INCBIN_U32("graphics/pokedex/ui/species_list/folder_alola.4bpp.smol");
+static const u32 speciesListUncaughtIndicator_Alola[] = INCBIN_U32("graphics/pokedex/ui/species_list/emptyfolder_alola.4bpp.smol");
 static const u32 speciesListFileIcon[] = INCBIN_U32("graphics/pokedex/ui/species_list/file.4bpp.smol");
 static const u8 speciesListMenuCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/menu_cursor_bmp.4bpp");
 static const u32 sTypes_Gfx[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.smol");
@@ -783,11 +786,11 @@ static void FreeResources(void)
 
 static void FreeStructs(void)
 {
-    if (sPokedexState != NULL)
-        Free(sPokedexState);
-
-    if (sPokedexLists != NULL)
-        Free(sPokedexLists);
+    TRY_FREE_AND_SET_NULL(sPokedexState);
+    TRY_FREE_AND_SET_NULL(sPokedexLists);
+    TRY_FREE_AND_SET_NULL(sPokedexGridResources);
+    TRY_FREE_AND_SET_NULL(sSpeciesListMenu);
+    TRY_FREE_AND_SET_NULL(sFilterSet);
 }
 
 void FreeBackgrounds(void)
@@ -807,6 +810,7 @@ static void SpeciesGrid_ChangeSortAndReload(void)
     SpeciesGrid_SortList();
     SpeciesGrid_Reload();
     DebugSpeciesGrid_ApplyFiltersAndReload();
+    TRY_FREE_AND_SET_NULL(sFilterSetTemp);
 }
 
 static u32 SpeciesGrid_IncrementSort(void)
@@ -1012,6 +1016,9 @@ static bool32 SpeciesFilter_GetActiveFilters(bool32 activeFilters[])
         if (sFilterSet->filterTypes[subFilterIndex].types[0] != nullOptionLUT[FILTER_LIST_TYPE1])
             activeFilters[POKEDEX_FILTER_TYPES] = TRUE;
 
+    if (sFilterSet->filterAlola[0] != nullOptionLUT[FILTER_LIST_ALOLA])
+            activeFilters[POKEDEX_FILTER_ALOLA] = TRUE;
+
     for (filterIndex = 0; filterIndex < POKEDEX_FILTER_COUNT; filterIndex++)
         if (activeFilters[filterIndex])
             return TRUE;
@@ -1028,6 +1035,7 @@ static bool32 (* const sFilterFunctions[])(u32 species) =
     [POKEDEX_FILTER_TYPES] = SpeciesFilter_CheckSpeciesTypesAgainstFilters,
     [POKEDEX_FILTER_ABILITY] = SpeciesFilter_DoesSpeciesHaveAbility,
     [POKEDEX_FILTER_MOVES] = SpeciesFilter_DoesSpeciesLearnMoves,
+    [POKEDEX_FILTER_ALOLA] = SpeciesFilter_IsSpeciesFromAlola,
     [POKEDEX_FILTER_COUNT] = NULL,
 };
 
@@ -1808,7 +1816,7 @@ static void SpeciesGrid_ResetInterfaceSpriteIds(void)
     u32 spriteIndex;
 
     for (spriteIndex = 0; spriteIndex < POKEDEX_SPRITE_COUNT; spriteIndex++)
-        SpeciesGrid_SaveInterfaceSpriteId(spriteIndex, MAX_SPRITES);
+        SpeciesGrid_SaveInterfaceSpriteId(spriteIndex, SPRITE_NONE);
 }
 
 static void SpeciesGrid_SaveInterfaceSpriteId(u32 spriteIndex, u32 spriteId)
@@ -1869,7 +1877,7 @@ static void SpeciesData_PrintManageHeaderSprite(u32 species)
 
     u32 spriteId = SpeciesData_GetHeaderSpriteId();
 
-    if (spriteId != MAX_SPRITES)
+    if (spriteId != SPRITE_NONE)
     {
         SpeciesData_SetHeaderSpriteVisibility(FALSE);
         return;
@@ -2150,16 +2158,18 @@ void SpeciesData_RemoveMonSprite(void)
     u32 spriteId = SpeciesData_GetMonSpriteId();
     u32 shinySpriteId = SpeciesData_GetShinyMonSpriteId();
 
-    if (spriteId != MAX_SPRITES)
+    if (spriteId != SPRITE_NONE)
     {
+        FreeSpriteOamMatrix(&gSprites[spriteId]);
         FreeAndDestroyMonPicSprite(spriteId);
-        SpeciesData_SaveMonSpriteId(MAX_SPRITES);
+        SpeciesData_SaveMonSpriteId(SPRITE_NONE);
     }
 
-    if (shinySpriteId != MAX_SPRITES)
+    if (shinySpriteId != SPRITE_NONE)
     {
+        FreeSpriteOamMatrix(&gSprites[spriteId]);
         FreeAndDestroyMonPicSprite(shinySpriteId);
-        SpeciesData_SaveShinyMonSpriteId(MAX_SPRITES);
+        SpeciesData_SaveShinyMonSpriteId(SPRITE_NONE);
     }
 }
 
@@ -2172,7 +2182,7 @@ static void SpeciesData_CreateTypeSprite(void)
     {
         oldSpriteId = SpeciesData_GetMonTypeSpriteId(typeIndex);
 
-        if (oldSpriteId != MAX_SPRITES)
+        if (oldSpriteId != SPRITE_NONE)
             return;
 
         SpeciesData_SaveTypeSpriteId(typeIndex, CreateSprite(&sSpriteTemplate_Type13x11, 0, 0, 2));
@@ -2245,14 +2255,31 @@ void SpeciesData_ResetTypeSpriteId(void)
     u32 typeIndex;
 
     for (typeIndex = 0; typeIndex < 2; typeIndex++)
-        SpeciesData_SaveTypeSpriteId(typeIndex, MAX_SPRITES);
+        SpeciesData_SaveTypeSpriteId(typeIndex, SPRITE_NONE);
+}
+
+static bool8 SpeciesData_UseAlolaIcon(u32 species)
+{
+    return (IsSpeciesFromAlola(species) && QuestMenu_GetSetQuestState(QUEST_ALOHAFROMALOLA, FLAG_GET_ACTIVE));
 }
 
 void SpeciesData_PrintCaptureIndicator(u32 species)
 {
     u32 spriteId;
     bool32 hasCaught = (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT));
-    u16 TileTag = hasCaught ? POKEDEX_GFXTAG_SPECIES_LIST_CAPTURE_INDICATOR : POKEDEX_GFXTAG_SPECIES_LIST_UNCAUGHT_INDICATOR;
+    bool32 isAlola = SpeciesData_UseAlolaIcon(species);
+
+    u16 TileTag = 0;
+
+    if (hasCaught && isAlola)
+        TileTag = POKEDEX_GFXTAG_ALOLA_SPECIES_LIST_CAPTURE_INDICATOR;
+    else if (hasCaught && !isAlola)
+        TileTag = POKEDEX_GFXTAG_SPECIES_LIST_CAPTURE_INDICATOR;
+    else if (!hasCaught && isAlola)
+        TileTag = POKEDEX_GFXTAG_ALOLA_SPECIES_LIST_UNCAUGHT_INDICATOR;
+    else if (!hasCaught && !isAlola)
+        TileTag = POKEDEX_GFXTAG_SPECIES_LIST_UNCAUGHT_INDICATOR;
+
     u32 x = POKEDEX_CAPTURE_INDICATOR_X;
     u32 y = (GetCurrentPage() == POKEDEX_PAGE_SPECIES_LIST) ? POKEDEX_CAPTURE_INDICATOR_Y_SPECIES_DATA : POKEDEX_CAPTURE_INDICATOR_Y;
 
@@ -2272,11 +2299,11 @@ void SpeciesData_RemoveCaptureIndicator(void)
 {
     u32 spriteId = SpeciesData_GetCaptureIndicatorSpriteId();
 
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesData_SaveCaptureIndicatorSpriteId(MAX_SPRITES);
+    SpeciesData_SaveCaptureIndicatorSpriteId(SPRITE_NONE);
 }
 
 void SpeciesData_LoadCaptureIndicatorSprite(void)
@@ -2295,8 +2322,25 @@ void SpeciesData_LoadCaptureIndicatorSprite(void)
         POKEDEX_GFXTAG_SPECIES_LIST_UNCAUGHT_INDICATOR,
     };
 
+    struct CompressedSpriteSheet sSpriteSheet_PokedexSpeciesListCaptureIndicator_Alola =
+    {
+        speciesListCaptureIndicator_Alola,
+        (16*16),
+        POKEDEX_GFXTAG_ALOLA_SPECIES_LIST_CAPTURE_INDICATOR,
+    };
+
+    struct CompressedSpriteSheet sSpriteSheet_PokedexSpeciesListUncaughtIndicator_Alola =
+    {
+        speciesListUncaughtIndicator_Alola,
+        (16*16),
+        POKEDEX_GFXTAG_ALOLA_SPECIES_LIST_UNCAUGHT_INDICATOR,
+    };
+
+
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListUncaughtIndicator);
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListCaptureIndicator);
+    LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListUncaughtIndicator_Alola);
+    LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListCaptureIndicator_Alola);
     LoadSpritePalette(&sPokedexInterfaceSpritePalette);
 }
 
@@ -2376,7 +2420,7 @@ void SpeciesGrid_PrintMonIcon(u32 rowIndex,u32 columnIndex, u32 species)
     u32 x = baseX + (paddingX * columnIndex);
     u32 y = baseY + (paddingY * rowIndex);
 
-    u32 spriteId = MAX_SPRITES;
+    u32 spriteId = SPRITE_NONE;
 
     species = SpeciesData_CheckLastSeenForm(species);
 
@@ -2451,10 +2495,10 @@ static void SpeciesGrid_RemoveMonIcon(enum ParentsDisplayRows rowIndex, enum Spe
 {
     u32 oldSpriteId = SpeciesGrid_GetMonIconSpriteId(rowIndex, columnIndex);
 
-    if (oldSpriteId == MAX_SPRITES)
+    if (oldSpriteId == SPRITE_NONE)
         return;
 
-    SpeciesGrid_SaveMonIconSpriteId(rowIndex,columnIndex,MAX_SPRITES);
+    SpeciesGrid_SaveMonIconSpriteId(rowIndex,columnIndex,SPRITE_NONE);
     FreeAndDestroyMonIconSprite(&gSprites[oldSpriteId]);
 }
 
@@ -2471,7 +2515,18 @@ static void SpeciesGrid_PrintCaptureIndicator(enum SpeciesListRows rowIndex, enu
 {
     u32 spriteId = SpeciesGrid_GetCaptureIndicatorSpriteId(rowIndex, columnIndex);
     bool32 hasCaught = (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT));
-    u16 TileTag = hasCaught ? POKEDEX_GFXTAG_SPECIES_GRID_CAPTURE_INDICATOR : POKEDEX_GFXTAG_SPECIES_GRID_UNCAUGHT_INDICATOR;
+    bool32 isAlola = SpeciesData_UseAlolaIcon(species);
+
+    u16 TileTag = 0;
+
+    if (hasCaught && isAlola)
+        TileTag = POKEDEX_GFXTAG_ALOLA_SPECIES_GRID_CAPTURE_INDICATOR;
+    else if (hasCaught && !isAlola)
+        TileTag = POKEDEX_GFXTAG_SPECIES_GRID_CAPTURE_INDICATOR;
+    else if (!hasCaught && isAlola)
+        TileTag = POKEDEX_GFXTAG_ALOLA_SPECIES_GRID_UNCAUGHT_INDICATOR;
+    else if (!hasCaught && !isAlola)
+        TileTag = POKEDEX_GFXTAG_SPECIES_GRID_UNCAUGHT_INDICATOR;
     u32 x = 111 + (37 * columnIndex);
     u32 y = 39 + (43 * rowIndex);
 
@@ -2499,6 +2554,22 @@ static void SpeciesGrid_LoadCaptureIndicatorSprite(void)
         POKEDEX_GFXTAG_SPECIES_GRID_UNCAUGHT_INDICATOR,
     };
 
+    struct CompressedSpriteSheet sSpriteSheet_PokedexSpeciesListCaptureIndicator_Alola =
+    {
+        speciesListCaptureIndicator_Alola,
+        (16*16),
+        POKEDEX_GFXTAG_ALOLA_SPECIES_GRID_CAPTURE_INDICATOR,
+    };
+
+    struct CompressedSpriteSheet sSpriteSheet_PokedexSpeciesListUncaughtIndicator_Alola =
+    {
+        speciesListUncaughtIndicator_Alola,
+        (16*16),
+        POKEDEX_GFXTAG_ALOLA_SPECIES_GRID_UNCAUGHT_INDICATOR,
+    };
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListUncaughtIndicator_Alola);
+    LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListCaptureIndicator_Alola);
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListUncaughtIndicator);
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListCaptureIndicator);
     LoadSpritePalette(&sPokedexInterfaceSpritePalette);
@@ -2518,11 +2589,11 @@ static void SpeciesGrid_RemoveCaptureIndicator(enum ParentsDisplayRows rowIndex,
 {
     u32 oldSpriteId = SpeciesGrid_GetCaptureIndicatorSpriteId(rowIndex, columnIndex);
 
-    if (oldSpriteId == MAX_SPRITES)
+    if (oldSpriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[oldSpriteId]);
-    SpeciesGrid_SaveCaptureIndicatorSpriteId(rowIndex,columnIndex,MAX_SPRITES);
+    SpeciesGrid_SaveCaptureIndicatorSpriteId(rowIndex,columnIndex,SPRITE_NONE);
 }
 
 void SpeciesGrid_RemoveCaptureIndicators(void)
@@ -2959,11 +3030,11 @@ void SpeciesGrid_RemoveScrollbarSpriteId(void)
 {
     u32 spriteId = SpeciesGrid_GetScrollbarSpriteId();
 
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesGrid_SaveScrollbarSpriteId(MAX_SPRITES);
+    SpeciesGrid_SaveScrollbarSpriteId(SPRITE_NONE);
 }
 
 void SpeciesData_RemoveTypeSprites(void)
@@ -2974,7 +3045,7 @@ void SpeciesData_RemoveTypeSprites(void)
     {
         spriteId = SpeciesData_GetMonTypeSpriteId(typeIndex);
 
-        if (spriteId == MAX_SPRITES)
+        if (spriteId == SPRITE_NONE)
             return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
@@ -2986,11 +3057,11 @@ void SpeciesData_RemoveHeaderSprite(void)
 {
     u32 spriteId = SpeciesData_GetHeaderSpriteId();
 
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesData_SaveHeaderSpriteId(MAX_SPRITES);
+    SpeciesData_SaveHeaderSpriteId(SPRITE_NONE);
 }
 
 
@@ -2998,11 +3069,11 @@ void SpeciesData_RemoveHeaderSprite(void)
 void SpeciesGrid_RemoveMonCursorSprite(void)
 {
     u32 spriteId = SpeciesGrid_GetMonCursorSpriteId();
-    if (spriteId == MAX_SPRITES)
+    if (spriteId == SPRITE_NONE)
         return;
 
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
-    SpeciesGrid_SaveMonCursorSpriteId(MAX_SPRITES);
+    SpeciesGrid_SaveMonCursorSpriteId(SPRITE_NONE);
 }
 
 void SpeciesGrid_SetFirstPageLoad(bool32 value)
