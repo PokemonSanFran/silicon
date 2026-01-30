@@ -1,9 +1,21 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const NOPOMOD = LOCALID_NOPOMOD
 
+// https://docs.google.com/document/d/1uVziqzQlJ6QZpIMzi0eN6WyZpJauiLfeQ6hnddfAvCc/edit?usp=sharing
+
+script CompulsiveHealingPeerSupportGroup_Script_LoadType
+{
+    if (var(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE) == TYPE_NONE)
+    {
+        callnative(Quest_CompulsiveHealingPeerSupport_UpdateType)
+    }
+
+}
+
 script CompulsiveHealingPeerSupportGroup_Script_CheckQuestState
 {
     lock
+    call(CompulsiveHealingPeerSupportGroup_Script_LoadType)
     returnqueststate(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)
     switch(var(VAR_RESULT))
     {
@@ -17,12 +29,6 @@ script CompulsiveHealingPeerSupportGroup_Script_CheckQuestState
 
 script CompulsiveHealingPeerSupportGroup_Script_InteractQuestInactive
 {
-
-    if (var(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE) == TYPE_NONE)
-    {
-        callnative(Quest_CompulsiveHealingPeerSupport_UpdateType)
-    }
-
     msgbox(format("I can feel my raw power coursing through my veins..."),,SPEAKER_NOPOMOD,TAIL_WHISPER,EMOTE_SHOCK)
     closemessage
     faceplayer
@@ -51,6 +57,7 @@ script CompulsiveHealingPeerSupportGroup_Script_InteractQuestActive
 {
     callnative(Quest_CompulsiveHealingPeerSupport_BufferTypeName)
 
+    faceplayer
     msgbox(format("How exactly does this training method work?"),,SPEAKER_ALICIA)
     msgbox(format("As a NoPo adherent, I eschew Pokémon healing."),,SPEAKER_NOPOMOD)
     msgbox(format("As a NoPo LEADER, I exclusively train Pokémon of one type."),,SPEAKER_NOPOMOD)

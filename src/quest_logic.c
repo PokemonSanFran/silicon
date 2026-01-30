@@ -1310,6 +1310,23 @@ void Quest_Mutualaidfund_TakeDonation(void){
 
 bool8 Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void);
 
+void DebugQuest_CompulsiveHealingPeerSupport(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_NOT_STARTED:
+            break;
+        case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP);
+            break;
+        case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_COMPLETE_QUEST:
+            FlagSet(FLAG_DAILY_NOPOMOD_BATTLE);
+            QuestMenu_ScriptSetComplete(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP);
+            break;
+    }
+}
+
 void Quest_CompulsiveHealingPeerSupport_UpdateType(void)
 {
     u32 randomType = Random() % NUMBER_OF_MON_TYPES;

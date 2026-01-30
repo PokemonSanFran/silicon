@@ -342,4 +342,15 @@ enum
     TOTEM_POKEMON_10,
 };
 
+// ***********************************************************************
+// Quest: Compulsive Healing Peer Support Group
+// ***********************************************************************
+
+enum
+{
+    STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_NOT_STARTED,
+    STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_STARTED_QUEST,
+    STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_COMPLETE_QUEST
+};
+
 #endif // GUARD_CONSTANTS_QUESTS_H

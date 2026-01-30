@@ -2800,13 +2800,43 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     [QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP] =
     {
         .name = COMPOUND_STRING("Compulsive Healing Peer Support Group"),
-        .desc = COMPOUND_STRING("???"),
-        .donedesc = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
+        .desc = COMPOUND_STRING("See if you can power up by battling NoPoMod without using Potions."),
+        .donedesc = COMPOUND_STRING("You were able to beat NoPoMod, and now he’s questioning the entire practice…"),
+        .map = COMPOUND_STRING("Leaverra Forest"),
         .sprite = OBJ_EVENT_GFX_UNKNOWN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
         .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_CompulsiveHealingPeerSupport,
+                side_quest_map(MAP_LEAVERRA_FOREST),
+                .warpId = -1,
+                .x = 22,
+                .y = 43,
+            },
+            [STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_CompulsiveHealingPeerSupport,
+                side_quest_map(MAP_LEAVERRA_FOREST),
+                .warpId = -1,
+                .x = 22,
+                .y = 43,
+            },
+            [STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_COMPLETE_QUEST] =
+            {
+                .name = COMPOUND_STRING("Completed Quest"),
+                .setupFunc = DebugQuest_CompulsiveHealingPeerSupport,
+                side_quest_map(MAP_LEAVERRA_FOREST),
+                .warpId = -1,
+                .x = 22,
+                .y = 43,
+            },
+        }
     },
     [QUEST_STRESSCUP] =
     {
