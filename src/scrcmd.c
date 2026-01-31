@@ -3791,6 +3791,15 @@ bool8 ScrCmd_variablecheckmoney(struct ScriptContext *ctx)
     return FALSE;
 }
 // End siliconMerge
+// Start phenomenon
+bool8 ScrCmd_setphenomenondata(struct ScriptContext *ctx)
+{
+    gSpecialVar_0x8000 = GetCurrentPhenomenonArgument();
+    gSpecialVar_0x8001 = 1;
+
+    return FALSE;
+}
+// End phenomenon
 
 bool8 ScrCmd_setmoverelearnerstate(struct ScriptContext *ctx)
 {
@@ -3826,12 +3835,4 @@ bool8 ScrCmd_istmrelearneractive(struct ScriptContext *ctx)
 
     return FALSE;
 }
-// Start phenomenon
-bool8 ScrCmd_setphenomenondata(struct ScriptContext *ctx)
-{
-    gSpecialVar_0x8000 = GetCurrentPhenomenonArgument();
-    gSpecialVar_0x8001 = 1;
 
-    return FALSE;
-}
-// End phenomenon

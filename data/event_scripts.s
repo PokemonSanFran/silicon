@@ -1666,3 +1666,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/ChapelOfChimes_Interior/scripts.inc"
 
 	.include "data/maps/ChapelOfChimes_End/scripts.inc"
+
+	.include "data/maps/Route16_Grotto/scripts.inc"

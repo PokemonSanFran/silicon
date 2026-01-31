@@ -1,15 +1,15 @@
 {
-  "id": "MAP_ROUTE22_GROTTO",
-  "name": "Route22_Grotto",
-  "layout": "LAYOUT_ROUTE22_GROTTO",
-  "music": "MUS_MT_PYRE_EXTERIOR",
-  "region_map_section": "MAPSEC_ROUTE22",
+  "id": "MAP_ROUTE16_GROTTO",
+  "name": "Route16_Grotto",
+  "layout": "LAYOUT_ROUTE16_GROTTO",
+  "music": "MUS_GSC_ROUTE38",
+  "region_map_section": "MAPSEC_ROUTE16",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
-  "allow_cycling": false,
+  "allow_cycling": true,
   "allow_escaping": false,
-  "allow_running": false,
+  "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
@@ -38,23 +38,16 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "HiddenGrotto_Script_StartSecret",
-      "flag": "FLAG_GROTTO_ROUTE22"
+      "flag": "FLAG_GROTTO_ROUTE16"
     }
   ],
   "warp_events": [
     {
       "x": 7,
-      "y": 24,
+      "y": 23,
       "elevation": 3,
-      "dest_map": "MAP_ROUTE22",
-      "dest_warp_id": "1"
-    },
-    {
-      "x": 8,
-      "y": 24,
-      "elevation": 3,
-      "dest_map": "MAP_ROUTE22",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_ROUTE16",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

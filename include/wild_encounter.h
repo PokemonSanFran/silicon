@@ -81,5 +81,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
 void UpdateChainFishingStreak(void); // fishingUpdate
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
 u16 GenerateBerryMon(void); // wildEncounters
+bool8 IsOverworldMonShiny(void); // hidden_grotto
+bool8 IsOverworldMonFemale(void); //hidden_grotto
 
 #endif // GUARD_WILD_ENCOUNTER_H

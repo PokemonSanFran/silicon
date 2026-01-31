@@ -57,8 +57,8 @@
 #include "wild_encounter.h"
 #include "quest_logic.h" // fogBattle
 #include "little_cup.h" // littlecup
-#include "fishing.h"
 #include "phenomenon.h" // phenomenon
+#include "fishing.h"
 
 enum TransitionType
 {

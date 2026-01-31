@@ -477,19 +477,19 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
         case WILD_AREA_HIDDEN:
             wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
             break;
-            // Start phenomenon
+        // Start phenomenon
         case WILD_AREA_PHENOMENON:
             wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].phenomenonMonsInfo;
             break;
-            // End phenomenon
-            // Start wildEncounters
+        // End phenomenon
+        // Start wildEncounters
         case WILD_AREA_BERRY_TREES:
             wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].berryMonsInfo;
             break;
         case WILD_AREA_FLY_MONS:
             wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
             break;
-            // End wildEncounters
+        // End wildEncounters
     }
 
     if (wildMonInfo == NULL && !OW_TIME_OF_DAY_DISABLE_FALLBACK)
@@ -1332,3 +1332,17 @@ u16 TryGenerateFlyMon(void)
     const struct WildPokemonInfo *wildMonInfo = gWildMonHeaders[header].encounterTypes[GetTimeOfDayForEncounters(header, WILD_AREA_FLY_MONS)].flyMonsInfo;
     return wildMonInfo->wildPokemon[wildMonIndex].species;
 }
+
+// Start hiddenGrotto
+bool8 IsOverworldMonShiny(void)
+{
+    gSpecialVar_Result = (GetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY));
+    return gSpecialVar_Result;
+}
+
+bool8 IsOverworldMonFemale(void)
+{
+    u32 gender = GetMonGender(&gEnemyParty[0]);
+    return (gender = MON_FEMALE);
+}
+// End hiddenGrotto
