@@ -2459,3 +2459,12 @@ void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
     gSpecialVar_Result = DoesPlayerHaveOneOrTwoUsableMon();
 }
 
+// ***********************************************************************
+// Quest: Stress Cup
+// ***********************************************************************
+
+void StressCup_GivePlayerParty(void)
+{
+    ZeroPlayerPartyMons();
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], TRUE, BATTLE_TYPE_TRAINER);
+}

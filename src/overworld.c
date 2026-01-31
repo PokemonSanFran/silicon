@@ -471,7 +471,6 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_USE_FLASH);
     FlagClear(FLAG_UNHOUSED_REQUEST); // siliconMerge
     ClearFieldMoveFlags(); // qol_field_moves
-    FlagClear(FLAG_USING_WORMHOLE); // storyActionItems
     if (B_RESET_FLAGS_VARS_AFTER_WHITEOUT == TRUE)
         Overworld_ResetBattleFlagsAndVars();
     // If you were defeated by Kyogre/Groudon and the step counter has

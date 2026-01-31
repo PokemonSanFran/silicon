@@ -4601,16 +4601,46 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Raichu
-Level: 1
+Politoed
+Level: 50
+
+Barraskewda
+Level: 50
+
+Swampert
+Level: 50
+
+Tentacruel
+Level: 50
+
+Ampharos
+Level: 50
+
+Pelipper
+Level: 50
 
 === TRAINER_ETHAN_1 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Raichu
-Level: 1
+Torkoal
+Level: 50
+
+Lilligant
+Level: 50
+
+Volcarona
+Level: 50
+
+Ninetales
+Level: 50
+
+Armarouge
+Level: 50
+
+Shiftry
+Level: 50
 
 === TRAINER_AUTUMN ===
 Name: Blank

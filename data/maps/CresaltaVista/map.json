@@ -141,6 +141,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Restorehodoucity_FirstJames_Interact_Script",
       "flag": "FLAG_TEMP_5"
+    },
+    {
+      "local_id": "LOCALID_STRESSCUPORGNANIZER",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
+      "x": 35,
+      "y": 34,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StressCup_Script_CheckQuestState",
+      "flag": "FLAG_TEMP_7"
     }
   ],
   "warp_events": [
@@ -202,14 +216,5 @@
       "script": "Quest_Hang20_Debug_Script"
     }
   ],
-  "bg_events": [
-    {
-      "type": "hidden_item",
-      "x": 12,
-      "y": 7,
-      "elevation": 0,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_TEMP_1"
-    }
-  ]
+  "bg_events": []
 }

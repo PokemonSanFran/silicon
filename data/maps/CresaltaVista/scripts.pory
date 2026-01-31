@@ -8,6 +8,7 @@ mapscripts CresaltaVista_MapScripts {
         call(Quest_GetTheBand_HideBikerB_Script)
         call(Quest_Restorehodoucity_HideJames_CresaltaVista_Script)
         call(Quest_Hang20_HideLeader_Script)
+        call(StressCup_Script_HideStresscuporganizer)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
