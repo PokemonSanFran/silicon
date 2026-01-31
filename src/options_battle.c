@@ -937,6 +937,9 @@ static u32 GetPartySizeDifference(u32 numPlayerMon, u32 numEnemyMon)
 
 static u32 CalcRawScaledLevel(u32 enemyMonLevel, u32 numEnemyMon)
 {
+    if (FlagGet(FLAG_DISABLE_SCALING))
+        return enemyMonLevel;
+
     u32 numPlayerMon = 0, difference = 0;
     u32 playerMaxLevel = GetHighestLevelInPlayerParty();
     u32 average = AveragePlayerMaxEnemyMonLevels(enemyMonLevel,playerMaxLevel);

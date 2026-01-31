@@ -94,7 +94,7 @@
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
-#define FLAG_USING_WORMHOLE                      0x50 // Silicon Flag
+#define FLAG_DISABLE_SCALING                     0x50 // Silicon Flag
 #define FLAG_SET_WALL_CLOCK                      0x51
 #define FLAG_RESCUED_BIRCH                       0x52
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
