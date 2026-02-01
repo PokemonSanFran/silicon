@@ -353,4 +353,15 @@ enum
     STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_COMPLETE_QUEST
 };
 
+// ***********************************************************************
+// Quest: Stress Cup
+// ***********************************************************************
+
+enum
+{
+    STATE_QUEST_STRESSCUP_NOT_STARTED,
+    STATE_QUEST_STRESSCUP_STARTED_QUEST,
+    STATE_QUEST_STRESSCUP_COMPLETE_QUEST,
+};
+
 #endif // GUARD_CONSTANTS_QUESTS_H

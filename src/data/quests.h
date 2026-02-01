@@ -2840,14 +2840,44 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_STRESSCUP] =
     {
-        .name = COMPOUND_STRING("???"),
-        .desc = COMPOUND_STRING("???"),
-        .donedesc = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
+        .name = COMPOUND_STRING("Stress Cup"),
+        .desc = COMPOUND_STRING("Help Stresscuporganizer relive the glory days and give them some battles to remember!"),
+        .donedesc = COMPOUND_STRING("Stresscuporganizer has finally calmed down, but still wants some excitement in his life..."),
+        .map = COMPOUND_STRING("Cresalta Vista"),
         .sprite = OBJ_EVENT_GFX_UNKNOWN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
         .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_STRESSCUP_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_StressCup,
+                side_quest_map(MAP_CRESALTA_VISTA),
+                .warpId = -1,
+                .x = 36,
+                .y = 35,
+            },
+            [STATE_QUEST_STRESSCUP_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_StressCup,
+                side_quest_map(MAP_CRESALTA_VISTA),
+                .warpId = -1,
+                .x = 36,
+                .y = 35,
+            },
+            [STATE_QUEST_STRESSCUP_COMPLETE_QUEST] =
+            {
+                .name = COMPOUND_STRING("Completed Quest"),
+                .setupFunc = DebugQuest_StressCup,
+                side_quest_map(MAP_CRESALTA_VISTA),
+                .warpId = -1,
+                .x = 36,
+                .y = 35,
+            },
+        }
     },
     [QUEST_PSYOP] =
     {

@@ -42,4 +42,5 @@ void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
 
 void DebugQuest_CompulsiveHealingPeerSupport(u8 state);
+void DebugQuest_StressCup(u8 state);
 #endif //GUARD_QUESTLOGIC_H

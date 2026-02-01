@@ -2468,3 +2468,19 @@ void StressCup_GivePlayerParty(void)
     ZeroPlayerPartyMons();
     CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], TRUE, BATTLE_TYPE_TRAINER);
 }
+
+void DebugQuest_StressCup(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_STRESSCUP_NOT_STARTED:
+            break;
+        case STATE_QUEST_STRESSCUP_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_STRESSCUP);
+            break;
+        case STATE_QUEST_STRESSCUP_COMPLETE_QUEST:
+            QuestMenu_ScriptSetComplete(QUEST_STRESSCUP);
+            break;
+    }
+}
