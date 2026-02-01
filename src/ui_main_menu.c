@@ -226,7 +226,7 @@ static const u8 sMainMenuWindowFontColors[][3] =
 {
     [MAINMENU_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
     [MAINMENU_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
-    [MAINMENU_FONT_COLOR_WHITE_MENU]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_DARK_GRAY},
+    [MAINMENU_FONT_COLOR_WHITE_MENU]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_WHITE},
     [MAINMENU_FONT_COLOR_WHITE_HEADER]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
 };
 
@@ -328,7 +328,7 @@ static const struct WindowTemplate sMainMenuWindowContinueTemplates[] =
         .tilemapTop =   7   ,
         .width =    16  ,
         .height =   11  ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   0,
         .baseBlock =    51,
     },
     DUMMY_WIN_TEMPLATE
@@ -343,7 +343,7 @@ static const struct WindowTemplate sMainMenuWindowEraseTemplates[] =
         .tilemapTop =   0   ,
         .width =    30  ,
         .height =   2   ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   15,
         .baseBlock =    1   ,
     },
     [MAINMENU_WINDOW_INFO_BAR]
@@ -393,7 +393,7 @@ static const struct WindowTemplate sMainMenuWindowEraseTemplates[] =
         .tilemapTop =   7   ,
         .width =    16  ,
         .height =   11  ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   0,
         .baseBlock =    61,
     },
     [MAINMENU_WINDOW_ERASE_BACKGROUND]
@@ -403,7 +403,7 @@ static const struct WindowTemplate sMainMenuWindowEraseTemplates[] =
         .tilemapTop =   7   ,
         .width =    30  ,
         .height =   4   ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   0,
         .baseBlock =    237 ,
     },
     DUMMY_WIN_TEMPLATE
@@ -1687,21 +1687,19 @@ static void PrintMainMenuEraseMessage(void)
     u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
     const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE_MENU];
     u32 y = 0;
-    u32 stringWidth, spacing, index;
 
     PrintMainMenuEraseBackground();
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    for (index = 0; index < 2; index++)
+    for (u32 index = 0; index < 2; index++)
     {
         if (!index)
             StringCopy(gStringVar4,COMPOUND_STRING("ARE YOU SURE THAT YOU WANT TO DELETE"));
         else
             StringCopy(gStringVar4,COMPOUND_STRING("ALL OF YOUR SAVE DATA?"));
 
-        stringWidth = GetStringWidth(fontId,gStringVar4,letterSpacing);
-        spacing = ((DISPLAY_WIDTH - stringWidth) / 2);
-        AddTextPrinterParameterized4(windowId, fontId, spacing, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
+        u32 x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId,gStringVar4,DISPLAY_WIDTH,1);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
         y += letterHeight;
     }
 
@@ -1714,7 +1712,7 @@ static void PrintProgressErasingMessage(void)
     u32 fontId = FONT_MAINMENU_MESSAGE;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE];
+    const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE_MENU];
     u32 x = 16;
     u32 y = 0;
 
