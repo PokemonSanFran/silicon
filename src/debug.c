@@ -4044,6 +4044,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_CAMERAPERSON_REPORTER) \
     X(MUS_VS_LUCREZIA) \
     X(MUS_CURENO_PORT_NIGHT) \
+    X(MUS_IRISINA_TOWN) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
