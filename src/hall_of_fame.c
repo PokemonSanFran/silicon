@@ -1449,7 +1449,10 @@ void DoDomeConfetti(void)
     }
 }
 
-static void StopDomeConfetti(void)
+// Start wavesOfChange
+//static void StopDomeConfetti(void)
+void StopDomeConfetti(void)
+// End wavesOfChange
 {
     u8 taskId;
 

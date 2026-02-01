@@ -24,12 +24,14 @@
 #include "constants/buzzr.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
+#include "waves.h" // wavesOfChange
 // End siliconMerge
 #include "constants/items.h"
 #include "config/save.h"
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
+#include "constants/waves.h" // wavesOfChange
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -312,6 +314,7 @@ struct SaveBlock3
     u16 mazeItemsSeed;
     u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
     struct Waypoint waypoint; // Waypoint/MapSystem Branch
+    u8 wavesFunds[GOAL_PERCENT_COUNT][GOAL_COUNT];
 // End siliconMerge
 #if OW_USE_FAKE_RTC
     struct SiiRtcInfo fakeRTC;

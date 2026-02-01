@@ -31,4 +31,13 @@ const struct AdventureGuideData AdventureGuideInfo[] =
             COMPOUND_STRING("Trading Pokémon with other Trainers can also help you fill up your Pokédex! With Surprise Trades, you can trade with players from all over Resido!"),
         },
     },
+    [GUIDE_WAVES_OF_CHANGE] =
+    {
+        .title = COMPOUND_STRING("Waves of Change"),
+        .isAdvancedGuide = ADVENTURE_GUIDE_ADVANCED,
+        .description =
+        {
+            COMPOUND_STRING("Help contribute to the Mutual Aid Fund! You can donate to any of the five different causes. Citizens from all over Resido will also contribute to the fund!"),
+        },
+    },
 };

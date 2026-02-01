@@ -41,6 +41,7 @@
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
 #include "dexnav.h"
+#include "waves.h"
 #include "siliconDaycare.h"
 #include "event_object_movement.h"
 #include "field_control_avatar.h"
@@ -141,9 +142,6 @@
 #define START_APP_FRAME(name) (START_APP_ ## name * 4)
 
 #define STRBUF_SIZE         64
-
-#define TILE_TO_PIXELS(t)   (t ? t * 8 : 1)
-#define PIXELS_TO_TILES(p)  (p ? p / 8 : 1)
 
 #define X_CENTER_ALIGN      (-1)
 #define Y_CENTER_ALIGN      1
@@ -910,9 +908,9 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     {
         COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu, START_SIGNAL_OKAY
     },
-    [START_APP_WAVES_OF_CHANGE] = // PSF TODO ui
+    [START_APP_WAVES_OF_CHANGE] =
     {
-        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL, START_SIGNAL_STRONG
+        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, CB2_WavesFromStartMenu, START_SIGNAL_STRONG
     },
     [START_APP_CUSTOMIZE] =
     {

@@ -69,6 +69,7 @@ static void UpdatePerDay(struct Time *localTime)
         Quest_CutePokemon_DailyEvent(daysSince);
         Quest_TryCompulsiveHealingPeerSupport_UpdateType(daysSince);
         // End siliconMerge
+        Waves_DoDailyPassiveIncrease(daysSince); // wavesOfChange
         DailyResetApricornTrees();
         *days = localTime->days;
     }
