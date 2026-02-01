@@ -8,6 +8,7 @@ script Quest_Mutualaidfund_Event_Script{
 
 script Quest_Mutualaidfund_StartQuest_Script{
     msgbox(format("We're starting a mutual aid fund which we're putting towards projects around the community."),MSGBOX_NPC)
+    setflag(FLAG_SYS_APP_WAVES_OF_CHANGE_GET)
     startquest(QUEST_MUTUALAIDFUND)
     end
 }
@@ -15,15 +16,9 @@ script Quest_Mutualaidfund_StartQuest_Script{
 script Quest_Mutualaidfund_Active_Dialogue{
     call(Quest_Mutualaidfund_LoadGoalDescription_Script)
 
-    special(Quest_Mutaidaidfund_CalculateMoneyAndText)
-    msgbox(format("We think it'll cost us {STR_VAR_1} to get going."))
-
-    specialvar(VAR_RESULT,Quest_Mutualaidfund_CheckMoney)
-    if(var(VAR_RESULT)){
-        call(Quest_Mutualaidfund_AskForDonation_Dialogue)
-    }
-
-    goto(Quest_Mutualaidfund_NoDonation_Dialogue)
+    msgbox(format("Please donate on the app!"),MSGBOX_NPC)
+    release
+    end
 }
 
 script Quest_Mutualaidfund_LoadGoalDescription_Script{
@@ -44,35 +39,6 @@ script Quest_Mutualaidfund_LoadGoalDescription_Script{
         case 13: msgbox(format("Goal Number 14 is to do a thing."),MSGBOX_NPC)
     }
 return
-}
-
-script Quest_Mutualaidfund_AskForDonation_Dialogue{
-    showmoneybox(0,0)
-    msgbox(format("Would you like to make a donation to the cause?"),MSGBOX_YESNO)
-
-    if(var(VAR_RESULT) == YES){
-        goto(Quest_Mutualaidfund_MakeDonationScript)
-    }
-
-    hidemoneybox
-    msgbox(format("No big deal. Let me know if you're able to!"))
-    goto(Quest_Mutualaidfund_NoDonation_Dialogue)
-}
-
-script Quest_Mutualaidfund_MakeDonationScript{
-    special(Quest_Mutualaidfund_TakeDonation)
-    special(RandomlyBoostPartyMemberFriendship)
-    updatemoneybox(0)
-
-    msgbox(format("Thanks!"))
-    addvar(VAR_QUEST_MUTUALAIDFUND_AMOUNT,1)
-    hidemoneybox
-
-    if(var(VAR_QUEST_MUTUALAIDFUND_AMOUNT) == 14){
-        goto(Quest_Mutualaidfund_Reward_Dialogue)
-    }
-    release
-    end
 }
 
 script Quest_Mutualaidfund_NoDonation_Dialogue{

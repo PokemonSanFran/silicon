@@ -622,9 +622,6 @@ gSpecials::
     def_special Quest_Persuasivepassenger_TakeNeededItems
     def_special Quest_Skilllibrary_StoreAndCompare
     def_special Quest_Skilllibrary_Debug
-    def_special Quest_Mutaidaidfund_CalculateMoneyAndText
-    def_special Quest_Mutualaidfund_CheckMoney
-    def_special Quest_Mutualaidfund_TakeDonation
     def_special Quest_Restorezenzugym_CheckRemainingSubquests
     def_special Quest_Restoreespuleeoutskirts_CheckRemainingSubquests
     def_special Quest_Taxicabturnaround_LookUpQuestType

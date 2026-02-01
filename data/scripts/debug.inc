@@ -232,7 +232,7 @@ Debug_EventScript_CheckIVs_End::
 
 Debug_EventScript_Script_1::
 # 145 "data/scripts/debug.pory"
-	setflag FLAG_SYS_APP_WAVES_OF_CHANGE_GET
+	call Quest_Mutualaidfund_StartQuest_Script
 	end
 
 
