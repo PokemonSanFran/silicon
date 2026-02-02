@@ -2,12 +2,14 @@
 #include "trainer_pokemon_sprites.h"
 #include "bg.h"
 #include "constants/rgb.h"
+#include "constants/battle_frontier.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "field_effect.h"
+#include "field_specials.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -15,6 +17,7 @@
 #include "main.h"
 #include "main_menu.h"
 #include "menu.h"
+#include "money.h"
 #include "list_menu.h"
 #include "mystery_event_menu.h"
 #include "naming_screen.h"
@@ -35,6 +38,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "tv.h"
 #include "text_window.h"
 #include "title_screen.h"
 #include "window.h"
@@ -55,17 +59,17 @@
 #include "clear_save_data_menu.h"
 #include "accept.h"
 #include "quest_logic.h"
+#include "ui_pokedex.h"
 
 extern const u8 gText_ClearingData[];
 extern const u8 gText_Pokedex[];
 
 void Task_OpenMainMenuFromTitleScreen(u8);
 static void CB2_InitUiEraseMainMenuFromTitleScreen(void);
-static void MainMenu_InitializeAndSaveCallback(MainCallback, bool32);
+static void MainMenu_InitializeAndSaveCallback(MainCallback callback, enum MainMenuModes mode);
 static bool32 AllocateStructs(void);
 static void MainMenu_SetupCallback(void);
-static void FreeSpritePalettesResetSpriteData(void);
-static void InitializeBackgroundsAndLoadBackgroundGraphics(void);
+static void MainMenu_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static void MainMenu_InitWindows(bool32);
 static void MainMenu_VBlankCB(void);
 static void MainMenu_MainCB(void);
@@ -76,17 +80,16 @@ static void SetBackgroundTransparency(void);
 static void SetScheduleBgs(enum MainMenuBackgrounds);
 static void LoadGraphics(void);
 static void LoadMainMenuPalettes(void);
-static void ClearWindowCopyToVram(enum MainMenuWindows);
 static void Task_WaitFadeAndExitGracefully(u8);
 static void FadescreenAndExitGracefully(void);
 static void FreeResources(void);
 static void FreeStructs(void);
-static void FreeBackgrounds(void);
 static void ToggleStatsBackground(void);
 static void MainMenu_SetUp(u8);
 static void PrintBodyContent(void);
-static void BufferOptionsText(u8*, bool32, enum MainMenuContinueMenuOptions);
+static void BufferOptionsText(u8* dest, enum MainMenuModes mode, enum MainMenuContinueMenuOptions optionIndex);
 static void PrintMainMenuOptions(void);
+static bool8 ShouldSkipBP(enum MainMenuModes mode, u32 optionIndex, bool32 isBg);
 static void PrintMainMenuTextHeader(void);
 static void PrintMainMenuImageHeader();
 static void PrintPlayerName(enum MainMenuWindows);
@@ -114,8 +117,10 @@ static u32 CalculateGymCompletion(void);
 static u32 CalculateOverallCompletion(void);
 static void PrintMainMenuContinueStats();
 static void PrintMainMenuContinueOptionsBackground(void);
+static void PrintMainMenuTrainerCardsBackground(void);
 static void PrintMainMenuContinueHelpBar();
 static void PrintPlayerIcon(void);
+static void PrintGymLeaders(void);
 static u32 GetPlayerIconSpriteId(void);
 static void SetPlayerIconSpriteId(u32);
 static void PrintPlayerParty(void);
@@ -126,11 +131,13 @@ static void UpdatePlayerAnimation(void);
 static void IncrementPosition(void);
 static void DecrementPosition(void);
 static void SetCursorPosition(u32);
+static void MainMenu_SetMode(enum MainMenuModes mode);
+static enum MainMenuModes MainMenu_GetMode(void);
 static enum MainMenuContinueMenuOptions GetCursorPosition(void);
-static void SetEraseMode(bool32);
-static bool32 IsMainMenuInEraseMode(void);
+static void SetEraseMode(void);
+static bool8 IsMainMenuInEraseMode(void);
 static void ReturnToPrevious(u8);
-static void Task_ReturnToTitleScreen(u8);
+static void Task_ReturnToPreviousScreen(u8);
 static void SelectMenuItem(u8);
 static void SelectMenuItem_EraseMenu(u8);
 static void ToggleCursorVisibility(void);
@@ -162,7 +169,7 @@ static void LoadCompletionIconSprite(void);
 struct MainMenuState
 {
     MainCallback savedCallback;
-    bool8 eraseMode;
+    enum MainMenuModes mode;
     u8 gameCompletionStats[MAINMENU_COMPLETION_STAT_COUNT];
 };
 
@@ -188,7 +195,8 @@ static const u16 mainMenuPalettesScarlet[] = INCBIN_U16("graphics/ui_menus/glass
 static const u16 mainMenuPalettesViolet[] = INCBIN_U16("graphics/ui_menus/glass/palettes/violet.gbapal");
 static const u16 mainMenuPalettesWhite[] = INCBIN_U16("graphics/ui_menus/glass/palettes/white.gbapal");
 static const u16 mainMenuPalettesYellow[] = INCBIN_U16("graphics/ui_menus/glass/palettes/yellow.gbapal");
-static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
+//static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
+static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal");
 
 static const u32 statsBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.4bpp.smol");
 static const u32 statsBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.bin.smolTM");
@@ -203,12 +211,12 @@ static const u8 mainMenuContinueOptionBg[] = INCBIN_U8("graphics/ui_menus/main_m
 static const u8 mainMenuContinueSelectedBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/selector.4bpp");
 static const u8 mainMenuEraseOptionBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/eraseNon-selector.4bpp");
 static const u8 mainMenuEraseSelectedBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/eraseSelector.4bpp");
+static const u8 mainMenuTrainerCardBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/trainercardBg.4bpp");
 static const u8 eraseBgBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/eraseBg.4bpp");
 static const u8 morningBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/sun.4bpp");
 static const u8 dayBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/sun.4bpp");
 static const u8 eveningBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/night.4bpp");
 static const u8 nightBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/night.4bpp");
-//PSF TODO replace with icons when Crim makes a set of four, right now we have two
 static const u32 mainMenuContinueCursor[] = INCBIN_U32("graphics/ui_menus/main_menu/cursor.4bpp.smol");
 
 static const u32 sharpriseSprite[] = INCBIN_U32("graphics/ui_menus/main_menu/sharprise.4bpp.smol");
@@ -218,8 +226,8 @@ static const u8 sMainMenuWindowFontColors[][3] =
 {
     [MAINMENU_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
     [MAINMENU_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
-    [MAINMENU_FONT_COLOR_WHITE_MENU]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_DARK_GRAY},
-    [MAINMENU_FONT_COLOR_WHITE_HEADER]  = {TEXT_COLOR_TRANSPARENT,  7,  TEXT_COLOR_TRANSPARENT},
+    [MAINMENU_FONT_COLOR_WHITE_MENU]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_WHITE},
+    [MAINMENU_FONT_COLOR_WHITE_HEADER]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
 };
 
 static const struct SpritePalette sMainMenuInterfaceSpritePalette =
@@ -270,7 +278,7 @@ static const struct WindowTemplate sMainMenuWindowContinueTemplates[] =
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   15,
         .baseBlock = 1,
     },
     [MAINMENU_WINDOW_INFO_BAR]
@@ -320,7 +328,7 @@ static const struct WindowTemplate sMainMenuWindowContinueTemplates[] =
         .tilemapTop =   7   ,
         .width =    16  ,
         .height =   11  ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   0,
         .baseBlock =    51,
     },
     DUMMY_WIN_TEMPLATE
@@ -335,7 +343,7 @@ static const struct WindowTemplate sMainMenuWindowEraseTemplates[] =
         .tilemapTop =   0   ,
         .width =    30  ,
         .height =   2   ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   15,
         .baseBlock =    1   ,
     },
     [MAINMENU_WINDOW_INFO_BAR]
@@ -385,7 +393,7 @@ static const struct WindowTemplate sMainMenuWindowEraseTemplates[] =
         .tilemapTop =   7   ,
         .width =    16  ,
         .height =   11  ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   0,
         .baseBlock =    61,
     },
     [MAINMENU_WINDOW_ERASE_BACKGROUND]
@@ -395,7 +403,7 @@ static const struct WindowTemplate sMainMenuWindowEraseTemplates[] =
         .tilemapTop =   7   ,
         .width =    30  ,
         .height =   4   ,
-        .paletteNum =   PAL_SLOT_MAINMENU_UI  ,
+        .paletteNum =   0,
         .baseBlock =    237 ,
     },
     DUMMY_WIN_TEMPLATE
@@ -439,6 +447,16 @@ static const u8* const sMainMenuOptionNameLUT[] =
     [MAINMENU_ERASE] = COMPOUND_STRING("Erase All Data"),
     [MAINMENU_OPTIONS] = COMPOUND_STRING("Options"),
     [MAINMENU_MENU_COUNT] = gText_Blank,
+};
+
+static const u8* const sTrainerCardsLUT[] =
+{
+    //[TRAINERCARD_MONEY] = COMPOUND_STRING("Money:   ¥{STR_VAR_1}"),
+    //[TRAINERCARD_BP]    = COMPOUND_STRING("Battle Points:   {STR_VAR_2}"),
+    [TRAINERCARD_MONEY_TITLE] = COMPOUND_STRING("Money:"),
+    [TRAINERCARD_BP_TITLE]    = COMPOUND_STRING("Battle Points:"),
+    [TRAINERCARD_MONEY_VALUE] = COMPOUND_STRING("¥{STR_VAR_1}"),
+    [TRAINERCARD_BP_VALUE]    = COMPOUND_STRING("{STR_VAR_2}"),
 };
 
 static const u8* const sMainMenuTimeLUT[] =
@@ -496,6 +514,14 @@ static void (* const eraseFuncsLUT[])(u8 taskId) =
     [MAINMENU_ERASE_COUNT] = NULL,
 };
 
+static const u8 sMainMenuOptionWidth[] =
+{
+    [MAINMENU_MODE_ERASE] = MAINMENU_OPTIONS_ERASE_BACKGROUND_LEFT_MARGIN,
+    [MAINMENU_MODE_CONTINUE] = MAINMENU_OPTIONS_BACKGROUND_LEFT_MARGIN,
+    [MAINMENU_MODE_TRAINER_CARD] = MAINMENU_OPTIONS_TRAINER_CARD_LEFT_MARGIN,
+};
+
+
 void CB2_GoToEraseMainMenu(void)
 {
     if (!UpdatePaletteFade())
@@ -511,12 +537,17 @@ void CB2_GoToUIMainMenu(void)
 
 static void CB2_InitUiEraseMainMenuFromTitleScreen(void)
 {
-    MainMenu_InitializeAndSaveCallback(CB2_InitTitleScreen,TRUE);
+    MainMenu_InitializeAndSaveCallback(CB2_InitTitleScreen,MAINMENU_MODE_ERASE);
 }
 
 void CB2_InitUiMainMenuFromTitleScreen(void)
 {
-    MainMenu_InitializeAndSaveCallback(CB2_InitTitleScreen,FALSE);
+    MainMenu_InitializeAndSaveCallback(CB2_InitTitleScreen,MAINMENU_MODE_CONTINUE);
+}
+
+void CB2_InitUiMainMenuFromStartMenu(void)
+{
+    MainMenu_InitializeAndSaveCallback(CB2_StartMenu_ReturnToUI,MAINMENU_MODE_TRAINER_CARD);
 }
 
 void SaveCallbackToMainMenu(MainCallback callback)
@@ -533,15 +564,16 @@ void Task_OpenMainMenuFromTitleScreen(u8 taskId)
     DestroyTask(taskId);
 }
 
-static void MainMenu_InitializeAndSaveCallback(MainCallback callback, bool32 isEraseMode)
+static void MainMenu_InitializeAndSaveCallback(MainCallback callback, enum MainMenuModes mode)
 {
     if (AllocateStructs())
     {
         SetMainCallback2(callback);
         return;
     }
-    SetEraseMode(isEraseMode);
-    SaveCallbackToMainMenu(CB2_InitTitleScreen);
+
+    MainMenu_SetMode(mode);
+    SaveCallbackToMainMenu(callback);
     SetMainCallback2(MainMenu_SetupCallback);
 }
 
@@ -575,7 +607,7 @@ static void MainMenu_SetupCallback(void)
             gMain.state++;
             break;
         case 2:
-            InitializeBackgroundsAndLoadBackgroundGraphics();
+            MainMenu_InitializeBackgroundsAndLoadBackgroundGraphics();
             gMain.state++;
             break;
         case 3:
@@ -587,13 +619,15 @@ static void MainMenu_SetupCallback(void)
             gMain.state++;
             break;
         case 5:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
+            u32 color = (MainMenu_GetMode() == MAINMENU_MODE_TRAINER_CARD) ? RGB_BLACK : RGB_WHITEALPHA;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, color);
             gMain.state++;
             break;
         case 6:
             CalculateAllStatPercent();
             MainMenu_SetUp(0);
             PrintMainMenuImageHeader();
+            PrintGymLeaders();
             gMain.state++;
             break;
         case 7:
@@ -605,15 +639,7 @@ static void MainMenu_SetupCallback(void)
     }
 }
 
-static void FreeSpritePalettesResetSpriteData(void)
-{
-    ResetSpriteData();
-    FreeSpriteTileRanges();
-    FreeAllSpritePalettes();
-    ClearDma3Requests();
-}
-
-static void InitializeBackgroundsAndLoadBackgroundGraphics(void)
+static void MainMenu_InitializeBackgroundsAndLoadBackgroundGraphics(void)
 {
     if (MainMenu_InitializeBackgrounds(TRUE))
         LoadGraphics();
@@ -726,7 +752,6 @@ static void SetBackgroundTransparency(void)
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT1_BG2);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
-    //PSF TODO once Crim font is done, fix these values
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 }
 
@@ -759,13 +784,6 @@ static void LoadMainMenuPalettes(void)
 {
     LoadPalette(sMainMenuPalettesLUT[GetVisualColor()], PAL_SLOT_MAINMENU_UI, PLTT_SIZE_4BPP);
     LoadPalette(mainMenuPalettesText, PAL_SLOT_MAINMENU_TEXT, PLTT_SIZE_4BPP);
-}
-
-static void ClearWindowCopyToVram(enum MainMenuWindows windowId)
-{
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void Task_WaitFadeAndExitGracefully(u8 taskId)
@@ -807,19 +825,14 @@ static void FreeStructs(void)
         Free(sMainMenuSprites);
 }
 
-static void FreeBackgrounds(void)
-{
-    enum MainMenuBackgrounds backgroundId;
-
-    for (backgroundId = BG0_MAINMENU_TEXT; backgroundId < BG_MAINMENU_COUNT; backgroundId++)
-        if (sBgTilemapBuffer[backgroundId] != NULL)
-            Free(sBgTilemapBuffer[backgroundId]);
-}
-
 static void SwitchMode(u8 taskId)
 {
-    bool32 eraseMode = IsMainMenuInEraseMode();
-    SetEraseMode(!eraseMode);
+    bool32 isErase = IsMainMenuInEraseMode();
+
+    if (isErase)
+        MainMenu_SetMode(MAINMENU_MODE_CONTINUE);
+    else
+        SetEraseMode();
 
     if (IsMainMenuInEraseMode())
         SetCursorPosition(MAINMENU_ERASE_NO);
@@ -871,9 +884,70 @@ static void PrintBodyContent(void)
         PrintMainMenuContinueStats();
 }
 
+static const u8 sOptionCount[] =
+{
+    [MAINMENU_MODE_CONTINUE] = MAINMENU_MENU_COUNT,
+    [MAINMENU_MODE_ERASE] =  MAINMENU_ERASE_COUNT,
+    [MAINMENU_MODE_TRAINER_CARD] = TRAINERCARD_TOTAL_COUNT,
+};
+
+static const u8 sTextHorizontalPosition[] =
+{
+    [MAINMENU_MODE_CONTINUE] = 10,
+    [MAINMENU_MODE_ERASE] =  5,
+    [MAINMENU_MODE_TRAINER_CARD] = 40,
+};
+
+static u8 MainMenu_SetTextHorizontalPosition(enum MainMenuModes mode, enum MainMenuWindows windowId, u32 fontId, u32 optionIndex)
+{
+    if (mode != MAINMENU_MODE_TRAINER_CARD)
+        return sTextHorizontalPosition[mode];
+
+    if ((optionIndex % 2) == 0)
+        return sTextHorizontalPosition[mode];
+
+    u32 value = (optionIndex == TRAINERCARD_MONEY_VALUE) ? GetMoney(&gSaveBlock1Ptr->money) : GetFrontierBattlePoints();
+    u32 numDigits = CountDigits(value);
+
+    u8 bufferBPDigits[] = {0,76,72,68,64};
+    u8 bufferMoneyDigits[] = {0,73,68,63,58,53,48,43,38};
+
+    if (optionIndex == TRAINERCARD_MONEY_VALUE)
+        return sTextHorizontalPosition[mode] + bufferMoneyDigits[numDigits];
+    else
+        return sTextHorizontalPosition[mode] + bufferBPDigits[numDigits];
+}
+
+static u8 MainMenu_SetTextVerticalPosition(u32 y, enum MainMenuModes mode, u32 optionIndex, u32 letterHeight)
+{
+    if (mode != MAINMENU_MODE_TRAINER_CARD)
+        return (y += MAINMENU_OPTION_BOTTOM_PADDING + letterHeight);
+
+    if ((optionIndex % 2) == 0)
+        return y;
+
+    return (y += MAINMENU_OPTION_BOTTOM_PADDING + letterHeight);
+}
+
+static bool8 ShouldSkipBP(enum MainMenuModes mode, u32 optionIndex, bool32 isBg)
+{
+    if (mode != MAINMENU_MODE_TRAINER_CARD)
+        return FALSE;
+
+    if (mode == MAINMENU_MODE_TRAINER_CARD && (isBg == TRUE) && optionIndex > 1)
+        return TRUE;
+
+    if (VarGet(VAR_STORYLINE_STATE) >= STORY_RESTORATION_1_COMPLETE)
+        return FALSE;
+
+    if (isBg == TRUE)
+        return (optionIndex > 0);
+
+    return (optionIndex > TRAINERCARD_MONEY_VALUE);
+}
+
 static void PrintMainMenuOptions(void)
 {
-    bool32 isEraseMode = IsMainMenuInEraseMode();
     enum MainMenuWindows windowId = MAINMENU_WINDOW_OPTIONS;
     u32 fontId = FONT_MAINMENU_OPTIONS;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
@@ -881,31 +955,47 @@ static void PrintMainMenuOptions(void)
     u32 letterHeight = GetFontAttribute(fontId,FONTATTR_MAX_LETTER_HEIGHT);
     const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE_MENU];
     u32 y = 8;
-    u32 x = (isEraseMode) ? 5 : 10;
-    u32 optionCount = (isEraseMode) ? MAINMENU_ERASE_COUNT : MAINMENU_MENU_COUNT;
+    enum MainMenuModes mode = MainMenu_GetMode();
+    //u32 x = sTextHorizontalPosition[mode];
+    u32 optionCount = sOptionCount[mode];
 
+    SetMoney(&gSaveBlock1Ptr->money,10);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     for (enum MainMenuContinueMenuOptions optionIndex = MAINMENU_CONTINUE; optionIndex < optionCount; optionIndex++)
     {
-        BufferOptionsText(gStringVar4, isEraseMode, optionIndex);
+        if (ShouldSkipBP(mode,optionIndex,FALSE))
+            break;
+
+        BufferOptionsText(gStringVar4, mode, optionIndex);
+        u32 x = MainMenu_SetTextHorizontalPosition(mode,windowId,fontId, optionIndex);
         AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
-        y += MAINMENU_OPTION_BOTTOM_PADDING + letterHeight;
+
+        y = MainMenu_SetTextVerticalPosition(y, mode, optionIndex, letterHeight);
     }
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void BufferOptionsText(u8* dest, bool32 isEraseMode, enum MainMenuContinueMenuOptions optionIndex)
+static void BufferOptionsText(u8* dest, enum MainMenuModes mode, enum MainMenuContinueMenuOptions optionIndex)
 {
-    if (!isEraseMode)
+    switch (mode)
     {
-        StringCopy(dest,sMainMenuOptionNameLUT[optionIndex]);
-    }
-    else
-    {
-        const u8* text = (optionIndex == 0) ? gText_No : gText_Yes;
-        StringCopy(dest,text);
+        default:
+        case MAINMENU_MODE_CONTINUE:
+            StringCopy(dest,sMainMenuOptionNameLUT[optionIndex]);
+            break;
+        case MAINMENU_MODE_ERASE:
+            const u8* text = (optionIndex == 0) ? gText_No : gText_Yes;
+            StringCopy(dest,text);
+            break;
+        case MAINMENU_MODE_TRAINER_CARD:
+            u32 money = GetMoney(&gSaveBlock1Ptr->money);
+            u32 points = GetFrontierBattlePoints();
+            ConvertIntToDecimalStringN(gStringVar1,money,STR_CONV_MODE_LEFT_ALIGN,CountDigits(money));
+            ConvertIntToDecimalStringN(gStringVar2,points,STR_CONV_MODE_LEFT_ALIGN,CountDigits(points));
+            StringExpandPlaceholders(dest, sTrainerCardsLUT[optionIndex]);
+            break;
     }
 }
 
@@ -937,8 +1027,14 @@ static void PrintPlayerName(enum MainMenuWindows windowId)
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE_HEADER];
+    u32 tid = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+    u32 sid = (gSaveBlock2Ptr->playerTrainerId[3] << 8) | gSaveBlock2Ptr->playerTrainerId[2];
 
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
+    ConvertIntToDecimalStringN(gStringVar2,tid,STR_CONV_MODE_LEADING_ZEROS,TRAINER_ID_LENGTH + 1);
+    ConvertIntToDecimalStringN(gStringVar3,sid,STR_CONV_MODE_LEADING_ZEROS,TRAINER_ID_LENGTH + 1);
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{PLAYER} ({STR_VAR_2}{STR_VAR_3})"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static const u8 sText_Playtime[] =_("Playtime:  ");
@@ -966,7 +1062,7 @@ static void PrintPlaytime(enum MainMenuWindows windowId)
 
 static void PrintTimeOfDaySprite(void)
 {
-    BlitBitmapToWindow(MAINMENU_WINDOW_HEADER, sMainMenuTimeLUT[GetTimeOfDay()], 224, 2, 16, 16);
+    BlitSymbol_Help(BlitSymbol_ConvertLocalTimeToHelp(), MAINMENU_WINDOW_HEADER, 224, 0);
 }
 
 static void ResetSpriteIds(void)
@@ -1144,8 +1240,7 @@ static u32 CalculateTrainerCompletion(void)
 
 static u32 CalculatePokedexCompletion(void)
 {
-    //PSF TODO replace with calc from pokedex
-    return (Random() % 100) + 1;
+    return GetPokedexPercentage();
 }
 
 static u32 CalculateQuestsCompletion(void)
@@ -1183,7 +1278,12 @@ static void PrintMainMenuContinueHelpBar(void)
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, COMPOUND_STRING("{A_BUTTON} Select Option {B_BUTTON} Return"));
+    if (MainMenu_GetMode() != MAINMENU_MODE_TRAINER_CARD)
+        StringCopy(gStringVar1,COMPOUND_STRING("{A_BUTTON} Select Option {B_BUTTON} Return"));
+    else
+        StringCopy(gStringVar1,COMPOUND_STRING("{B_BUTTON} Return"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar1);
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1196,6 +1296,63 @@ static void PrintPlayerIcon(void)
     gSprites[spriteId].oam.priority = 1;
     SetPlayerIconSpriteId(spriteId);
     UpdatePlayerAnimation();
+}
+
+static void PrintGymLeaders(void)
+{
+    if (MainMenu_GetMode() != MAINMENU_MODE_TRAINER_CARD)
+        return;
+
+    const u32 gymLeaders[] =
+    {
+        TRAINER_BELEN,
+        TRAINER_SHINZO,
+        TRAINER_EMRYS,
+        TRAINER_PUA,
+        TRAINER_NERIENE,
+        TRAINER_DIMU,
+        TRAINER_BD,
+        TRAINER_AMIARGENTO,
+        /*
+        TRAINER_RAMESH_IMIN,
+        TRAINER_DOYLE_ZENZU_ISLAND,
+        TRAINER_KAI_NEWASSHOLEAPPEARS,
+        TRAINER_IMELDA,
+        */
+    };
+
+    const u16 badgeList[] =
+    {
+        FLAG_BADGE01_GET,
+        FLAG_BADGE02_GET,
+        FLAG_BADGE03_GET,
+        FLAG_BADGE04_GET,
+        FLAG_BADGE05_GET,
+        FLAG_BADGE06_GET,
+        FLAG_BADGE07_GET,
+        FLAG_BADGE08_GET,
+        /*
+        TRAINER_RAMESH_IMIN,
+        FLAG_SYS_RESTORED_TOWER_GOLD,
+        FLAG_SYS_RESTORED_ARCADE_GOLD,
+        FLAG_SYS_RESTORED_DOJO_GOLD,
+        FLAG_SYS_RESTORED_FACTORY_GOLD,
+        */
+    };
+
+    u32 x = 104;
+    u32 y = 120;
+
+    for (u32 gymIndex = 0; gymIndex < ARRAY_COUNT(gymLeaders); gymIndex++)
+    {
+        if (!FlagGet(badgeList[gymIndex]))
+            continue;
+
+        u32 vert = ((gymIndex % 2) == 0) ? 4 : 0;
+        u32 spriteId = CreateObjectGraphicsSprite(GetOverworldSpriteFromTrainerId(gymLeaders[gymIndex]), SpriteCallbackDummy, x, (y+vert), 0);
+        x += 18;
+        gSprites[spriteId].oam.priority = 1;
+    }
 }
 
 static void SetPlayerIconSpriteId(u32 spriteId)
@@ -1369,6 +1526,9 @@ static void UpdatePlayerAnimation(void)
 
 static void IncrementPosition(void)
 {
+    if (MainMenu_GetMode() == MAINMENU_MODE_TRAINER_CARD)
+        return;
+
     u32 currentPosition = GetCursorPosition();
 
     if (IsMainMenuInEraseMode())
@@ -1382,6 +1542,9 @@ static void IncrementPosition(void)
 
 static void DecrementPosition(void)
 {
+    if (MainMenu_GetMode() == MAINMENU_MODE_TRAINER_CARD)
+        return;
+
     u32 currentPosition = GetCursorPosition();
 
     if (IsMainMenuInEraseMode())
@@ -1403,37 +1566,57 @@ static enum MainMenuContinueMenuOptions GetCursorPosition(void)
     return sMainMenuLists->cursorPosition;
 }
 
-static void SetEraseMode(bool32 direction)
+static void MainMenu_SetMode(enum MainMenuModes mode)
 {
-    sMainMenuState->eraseMode = direction;
+    sMainMenuState->mode = mode;
 }
 
-static bool32 IsMainMenuInEraseMode(void)
+static void SetEraseMode(void)
 {
-    return (sMainMenuState->eraseMode);
+    MainMenu_SetMode(MAINMENU_MODE_ERASE);
+}
+
+static enum MainMenuModes MainMenu_GetMode(void)
+{
+    return sMainMenuState->mode;
+}
+
+static bool8 IsMainMenuInEraseMode(void)
+{
+    return (MainMenu_GetMode() == MAINMENU_MODE_ERASE);
+}
+
+static void MainMenu_ReturnToPrevious(u8 taskId)
+{
+    u32 color = (MainMenu_GetMode() == MAINMENU_MODE_TRAINER_CARD) ? RGB_BLACK : RGB_WHITEALPHA;
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, color);
+    gTasks[taskId].func = Task_ReturnToPreviousScreen;
 }
 
 static void ReturnToPrevious(u8 taskId)
 {
     PlaySE(SE_SELECT);
 
-    if (IsMainMenuInEraseMode())
+    switch (MainMenu_GetMode())
     {
-        SwitchMode(taskId);
-        return;
+        default:
+        case MAINMENU_MODE_TRAINER_CARD:
+        case MAINMENU_MODE_CONTINUE:
+            MainMenu_ReturnToPrevious(taskId);
+            return;
+        case MAINMENU_MODE_ERASE:
+            SwitchMode(taskId);
+            return;
     }
-
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
-    gTasks[taskId].func = Task_ReturnToTitleScreen;
 }
 
-static void Task_ReturnToTitleScreen(u8 taskId)
+static void Task_ReturnToPreviousScreen(u8 taskId)
 {
     if (gPaletteFade.active)
         return;
 
     FreeAllWindowBuffers();
-    SetMainCallback2(CB2_InitTitleScreen);
+    SetMainCallback2(sMainMenuState->savedCallback);
     DestroyTask(taskId);
 }
 
@@ -1443,10 +1626,19 @@ static void SelectMenuItem(u8 taskId)
 
     u32 cursor = GetCursorPosition();
 
-    if (IsMainMenuInEraseMode())
-        eraseFuncsLUT[cursor](taskId);
-    else
-        continueFuncsLUT[cursor](taskId);
+    switch (MainMenu_GetMode())
+    {
+        default:
+        case MAINMENU_MODE_TRAINER_CARD:
+            MainMenu_ReturnToPrevious(taskId);
+            return;
+        case MAINMENU_MODE_ERASE:
+            eraseFuncsLUT[cursor](taskId);
+            return;
+        case MAINMENU_MODE_CONTINUE:
+            continueFuncsLUT[cursor](taskId);
+            return;
+    }
 }
 
 static void UNUSED ToggleCursorVisibility(void)
@@ -1495,21 +1687,19 @@ static void PrintMainMenuEraseMessage(void)
     u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
     const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE_MENU];
     u32 y = 0;
-    u32 stringWidth, spacing, index;
 
     PrintMainMenuEraseBackground();
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    for (index = 0; index < 2; index++)
+    for (u32 index = 0; index < 2; index++)
     {
         if (!index)
             StringCopy(gStringVar4,COMPOUND_STRING("ARE YOU SURE THAT YOU WANT TO DELETE"));
         else
             StringCopy(gStringVar4,COMPOUND_STRING("ALL OF YOUR SAVE DATA?"));
 
-        stringWidth = GetStringWidth(fontId,gStringVar4,letterSpacing);
-        spacing = ((DISPLAY_WIDTH - stringWidth) / 2);
-        AddTextPrinterParameterized4(windowId, fontId, spacing, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
+        u32 x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId,gStringVar4,DISPLAY_WIDTH,1);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
         y += letterHeight;
     }
 
@@ -1522,7 +1712,7 @@ static void PrintProgressErasingMessage(void)
     u32 fontId = FONT_MAINMENU_MESSAGE;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE];
+    const u8 *color = sMainMenuWindowFontColors[MAINMENU_FONT_COLOR_WHITE_MENU];
     u32 x = 16;
     u32 y = 0;
 
@@ -1539,14 +1729,19 @@ static void PrintMainMenuOptionsBackgroundParameterized(u32 optionCount,u32 ySta
     u32 currentOption = GetCursorPosition();
     u32 y;
     const u8* pixels;
-    u32 width = (IsMainMenuInEraseMode()) ? MAINMENU_OPTIONS_BACKGROUND_LEFT_MARGIN : MAINMENU_OPTIONS_ERASE_BACKGROUND_LEFT_MARGIN;
+    enum MainMenuModes mode = MainMenu_GetMode();
+    u32 width = sMainMenuOptionWidth[mode];
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     for (u32 optionIndex = 0; optionIndex < optionCount; optionIndex++)
     {
+        if (ShouldSkipBP(mode, optionIndex,TRUE))
+            break;
+
         y = yStart + (yOffset * optionIndex);
         pixels = (optionIndex == currentOption) ? *selectedBg : *optionBg;
+
         BlitBitmapToWindow(windowId, pixels, xOffset, y, width, 24);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1554,24 +1749,52 @@ static void PrintMainMenuOptionsBackgroundParameterized(u32 optionCount,u32 ySta
 
 static void PrintMainMenuOptionsBackground(void)
 {
-    if (IsMainMenuInEraseMode())
-        PrintMainMenuEraseOptionsBackground();
-    else
-        PrintMainMenuContinueOptionsBackground();
+    switch (MainMenu_GetMode())
+    {
+        default:
+        case MAINMENU_MODE_TRAINER_CARD:
+            PrintMainMenuTrainerCardsBackground();
+            break;
+        case MAINMENU_MODE_ERASE:
+            PrintMainMenuEraseOptionsBackground();
+            break;
+        case MAINMENU_MODE_CONTINUE:
+            PrintMainMenuContinueOptionsBackground();
+            break;
+    }
 }
 
 static void PrintMainMenuContinueOptionsBackground(void)
 {
     const u8* selectedBg = mainMenuContinueSelectedBg;
     const u8* optionBg = mainMenuContinueOptionBg;
-    PrintMainMenuOptionsBackgroundParameterized(MAINMENU_MENU_COUNT, 4, 20, 0, &selectedBg, &optionBg);
+    u32 optionCount = MAINMENU_MENU_COUNT;
+    u32 yStart = 4;
+    u32 yOffset = 20;
+    u32 xOffset = 0;
+    PrintMainMenuOptionsBackgroundParameterized(optionCount,yStart, yOffset, xOffset, &selectedBg, &optionBg);
 }
 
 static void PrintMainMenuEraseOptionsBackground(void)
 {
     const u8* selectedBg = mainMenuEraseSelectedBg;
     const u8* optionBg = mainMenuEraseOptionBg;
-    PrintMainMenuOptionsBackgroundParameterized(MAINMENU_ERASE_COUNT, 44, 20, 72, &selectedBg, &optionBg);
+    u32 optionCount = MAINMENU_ERASE_COUNT;
+    u32 yStart = 44;
+    u32 yOffset = 22;
+    u32 xOffset = 72;
+    PrintMainMenuOptionsBackgroundParameterized(optionCount,yStart, yOffset, xOffset, &selectedBg, &optionBg);
+}
+
+static void PrintMainMenuTrainerCardsBackground(void)
+{
+    const u8* selectedBg = mainMenuTrainerCardBg;
+    const u8* optionBg = mainMenuTrainerCardBg;
+    u32 optionCount = MAINMENU_MENU_COUNT;
+    u32 yStart = 4;
+    u32 yOffset = 20;
+    u32 xOffset = 32;
+    PrintMainMenuOptionsBackgroundParameterized(optionCount,yStart, yOffset, xOffset, &selectedBg, &optionBg);
 }
 
 static void OpenOptionsFromMainMenu(u8 taskId)
@@ -1603,6 +1826,9 @@ static u32 CreateMenuSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct S
 
 static void PrintMenuCursor(void)
 {
+    if (MainMenu_GetMode() == MAINMENU_MODE_TRAINER_CARD)
+        return;
+
     // PSF TODO when the player does the Erase Save Data, the cursor appears on the screen for a frame and I don't know why
     u32 spriteId;
     u32 x = 57;

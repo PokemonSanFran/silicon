@@ -1,21 +1,11 @@
 const PANNEN = 1
 const FLAG_HIDE_PANNEN = FLAG_TEMP_2
-const FLAG_HIDE_JOURNAL = FLAG_TEMP_3
 
 const WIFE = 1
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
 //script Quest_Hiddengrottomapping_
 //text Hiddengrottomapping_
-
-script Quest_Hiddengrottomapping_MarkSubquestBiome_Script{
-    addvar(VAR_TEMP_0,1)
-
-    if (var(VAR_RESULT)){
-        questmenu(QUEST_MENU_SET_REWARD,QUEST_HIDDENGROTTOMAPPING)
-    }
-    return
-}
 
 script Quest_Hiddengrottomapping_PannenVisibility_Script{
     questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HIDDENGROTTOMAPPING)
@@ -30,7 +20,8 @@ script Quest_Hiddengrottomapping_StartQuest_Dialogue{
     addvar(VAR_TEMP_0,1)
     questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HIDDENGROTTOMAPPING)
 
-    if (!var(VAR_RESULT)){
+    if (!var(VAR_RESULT))
+	{
         end
     }
 
@@ -152,27 +143,38 @@ script Quest_Hiddengrottomapping_TakeJournalPage_Script{
     end
 }
 
-script Quest_Hiddengrottomapping_RemoveJournalPage1_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING,SUB_QUEST_1)
-        if (var(VAR_RESULT)){
-            setflag(FLAG_HIDE_JOURNAL)
-        }
-    return
+movement Quest_Hiddengrottomapping_WalkToWall{
+    walk_right * 2
+    walk_up * 2
+    face_down
+    step_end
 }
 
-script Quest_Hiddengrottomapping_RemoveJournalPage2_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING,SUB_QUEST_2)
-        if (var(VAR_RESULT)){
-            setflag(FLAG_HIDE_JOURNAL)
-        }
-    return
+movement Quest_Hiddengrottomapping_WalkToTable{
+    walk_down * 2
+    walk_left * 2
+    face_down
+    step_end
 }
 
-script Quest_Hiddengrottomapping_RemoveJournalPage3_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HIDDENGROTTOMAPPING,SUB_QUEST_3)
-        if (var(VAR_RESULT)){
-            setflag(FLAG_HIDE_JOURNAL)
-        }
-    return
+text gText_Hiddengrottomapping_INeed{
+    format("I think I need a moment to be alone.")
 }
-
+text gText_Hiddengrottomapping_IveBeenThiking{
+    format("I've been thinking... he's okay out there. I don't know where he is, but I get the sense he's enjoying what he's doing.")
+}
+text gText_Hiddengrottomapping_HeSpentALot{
+    format("He spent a lot of time researching those Hidden Grottos... like the one you found him in! I just hope he's safe.")
+}
+text gText_Hiddengrottomapping_IHaveAFeeling{
+    format("I have a feeling you're not going to find anymore pages.")
+}
+text gText_Hiddengrottomapping_IDidFind{
+    format("I found the rest of the book laying around here, and with that page, I've got all of his notes, but no clues. Just a lot of rambling about Ultra Space.")
+}
+text gText_Hiddengrottomapping_OhYouHave{
+    format("Oh! You have a page from his journal!")
+}
+text gText_Hiddengrottomapping_IveTranslated{
+    format("I've translated the page for you, you can read it on the wall. Let me know if you make more progress!")
+}

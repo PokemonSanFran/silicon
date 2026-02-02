@@ -275,6 +275,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_VARIABLEADDMONEY                   ScrCmd_variableaddmoney,                     requests_effects=1   @ 0xf9
 	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                ScrCmd_variableremovemoney,                  requests_effects=1   @ 0xfa
 	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                 ScrCmd_variablecheckmoney,                   requests_effects=1   @ 0xfb
+    script_cmd_table_entry SCR_OP_PHENOMENON_DATA                    ScrCmd_setphenomenondata,                    requests_effects=1   @ 0xfc // phenomenon
 	@ End siliconMerge
 	script_cmd_table_entry SCR_OP_HIDEFOLLOWER                  ScrCmd_hidefollower,                requests_effects=1  @ 0xfc
 

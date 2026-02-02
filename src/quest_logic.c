@@ -2416,3 +2416,58 @@ void DebugQuest_StressCup(u8 state)
             break;
     }
 }
+// ***********************************************************************
+// Quest: Rabies Outbreak
+// ***********************************************************************
+
+void CountDefeatedRabiesMon(void)
+{
+    /*
+       Iterate every spot in the enemy's party
+       If one is Glameow AND you're in GlavezHill AND its not a Trainer battle, then increment the defeated Glameow count by one
+       If the Glameow count is > 9, AND the Rabies Outbreak quest is active  change the Rabies Outbreak quest to Reward state
+   */
+    if (GetCurrentMap() != QUEST_RABIES_OUTBREAK_MAP)
+        return;
+
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return;
+
+    u32 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT);
+
+    for (u32 enemyPartyIndex = 0; enemyPartyIndex < PARTY_SIZE; enemyPartyIndex++)
+    {
+        if (GetMonData(&gEnemyParty[enemyPartyIndex],MON_DATA_SPECIES) != QUEST_RABIES_OUTBREAK_SPECIES)
+            continue;
+
+        defeatedGlameowCount++;
+    }
+
+    VarSet(VAR_DEFEATED_GLAMEOW_COUNT,defeatedGlameowCount);
+
+    if (!QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_GET_ACTIVE))
+        return;
+
+    if (defeatedGlameowCount < QUEST_RABIES_OUTBREAK_COUNT)
+        return;
+
+    QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_SET_REWARD);
+    QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_REMOVE_ACTIVE);
+}
+
+void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
+{
+    bool32 rabiesPokerus = GetBoxMonData(boxMon, MON_DATA_POKERUS);
+
+    if (rabiesPokerus == TRUE)
+        return;
+
+    if (GetCurrentMap() != QUEST_RABIES_OUTBREAK_MAP)
+        return;
+
+    if (species != QUEST_RABIES_OUTBREAK_SPECIES)
+        return;
+
+    rabiesPokerus = Random() % 2;
+    SetBoxMonData(boxMon, MON_DATA_POKERUS, &rabiesPokerus);
+}

@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "mystery_gift.h"
 #include "random.h"
+#include "phenomenon.h" // phenomenon
 #include "trainer_see.h"
 #include "util.h"
 #include "constants/event_objects.h"
@@ -262,6 +263,7 @@ void ScriptContext_SetupScript(const u8 *ptr)
     LockPlayerFieldControls();
     if (OW_FOLLOWERS_SCRIPT_MOVEMENT)
         FlagSet(FLAG_SAFE_FOLLOWER_MOVEMENT);
+    TryToCleanPhenomenonDataFromScript(); // phenomenon
     sGlobalScriptContextStatus = CONTEXT_RUNNING;
 }
 

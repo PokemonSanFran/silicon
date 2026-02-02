@@ -26,12 +26,14 @@
 #include "ui_options_menu.h"
 #include "waves.h" // wavesOfChange
 // End siliconMerge
+#include "hidden_grotto.h" // hiddenGrotto
 #include "constants/items.h"
 #include "config/save.h"
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
 #include "constants/waves.h" // wavesOfChange
+#include "constants/hidden_grotto.h" // hiddenGrotto
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -329,6 +331,8 @@ struct SaveBlock3
     u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     u8 dexNavChain;
+    u8 hiddenGrottoSpawn[NUM_HIDDEN_GROTTO];
+    u8 lastGrottoId;
 #if APRICORN_TREE_COUNT > 0
     u8 apricornTrees[NUM_APRICORN_TREE_BYTES];
 #endif
@@ -1274,6 +1278,7 @@ struct SaveBlock1
     /*0x3???*/ struct Pokemon stolenTrade; // siliconMerge
     // sizeof: 0x3???
     /*0x??*/   struct Pokemon playerPartyBattleFrontier[PARTY_SIZE]; // siliconMerge
+    struct Pokemon savedGrottoMon;
 };
 
 extern struct SaveBlock1 *gSaveBlock1Ptr;

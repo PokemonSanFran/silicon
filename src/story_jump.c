@@ -176,6 +176,8 @@ static void JumpPlayerTo_YouCantStopMe_Postbattle(bool32);
 static void JumpPlayerTo_WeCanStopYouActually(bool32);
 static void JumpPlayerTo_Epilogue(bool32);
 
+// PSF TODO When story jumping from Prolouge to main game, the player's RNG is not properly seeded. This is because StartTimer1 doesn't have anywhere to be initalized before seeding the Rng, because that is reliant on player input and there is none when using a debug menu.
+
 void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
 {
     switch (chosenStoryPoint)

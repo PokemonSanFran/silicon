@@ -1244,6 +1244,32 @@
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0x491
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 
+#define FLAG_GROTTO_ROUTE1                                           0x493 // Silicon Flag
+#define FLAG_GROTTO_ROUTE2                                           0x494 // Silicon Flag
+#define FLAG_GROTTO_ROUTE3                                           0x495 // Silicon Flag
+#define FLAG_GROTTO_ROUTE4                                           0x496 // Silicon Flag
+#define FLAG_GROTTO_ROUTE5                                           0x497 // Silicon Flag
+#define FLAG_GROTTO_ROUTE6                                           0x498 // Silicon Flag
+#define FLAG_GROTTO_ROUTE7                                           0x499 // Silicon Flag
+#define FLAG_GROTTO_ROUTE8                                           0x49A // Silicon Flag
+#define FLAG_GROTTO_ROUTE9                                           0x49B // Silicon Flag
+#define FLAG_GROTTO_ROUTE10                                           0x49C // Silicon Flag
+#define FLAG_GROTTO_ROUTE11                                           0x49D // Silicon Flag
+#define FLAG_GROTTO_ROUTE12                                           0x49E // Silicon Flag
+#define FLAG_GROTTO_ROUTE13                                           0x49F // Silicon Flag
+#define FLAG_GROTTO_ROUTE14                                           0x4A0 // Silicon Flag
+#define FLAG_GROTTO_ROUTE16                                           0x4A1 // Silicon Flag
+#define FLAG_GROTTO_ROUTE18                                           0x4A2 // Silicon Flag
+#define FLAG_GROTTO_ROUTE20                                           0x4A3 // Silicon Flag
+#define FLAG_GROTTO_ROUTE22                                           0x4A4 // Silicon Flag
+#define FLAG_GROTTO_ROUTE98                                           0x4A5 // Silicon Flag
+#define FLAG_GROTTO_ROUTE99                                           0x4A6 // Silicon Flag
+#define FLAG_GROTTO_ROUTE100                                           0x4A7 // Silicon Flag
+#define FLAG_GROTTO_ROUTE_A                                           0x4A8 // Silicon Flag
+#define FLAG_GROTTO_ROUTE_B                                           0x4A9 // Silicon Flag
+#define FLAG_GROTTO_ROUTE_C                                           0x4AA // Silicon Flag
+#define FLAG_GROTTO_ROUTE_D                                           0x4AB // Silicon Flag
+#define FLAG_GROTTO_ROUTE_E                                           0x4AC // Silicon Flag
 #define FLAG_UNUSED_0x493                                           0x493 // Unused Flag
 #define FLAG_UNUSED_0x494                                           0x494 // Unused Flag
 #define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
@@ -1630,7 +1656,7 @@
 #define FLAG_VISITED_HALERBAWILDS_SOUTH                          (SYSTEM_FLAGS + 0xB6) // Silicon Flag
 #define FLAG_SYS_APP_WAVES_OF_CHANGE_GET            (SYSTEM_FLAGS + 0xB7) // Silicon Flag
 #define FLAG_SYS_APP_GOOGLE_GLASS_GET               (SYSTEM_FLAGS + 0xB8) // Silicon Flag
-#define FLAG_UNUSED_0x919                           (SYSTEM_FLAGS + 0xB9) // Unused Flag
+#define FLAG_VISITED_CHAPEL_CHIMES                  (SYSTEM_FLAGS + 0xB9) // Silicon Flag
 #define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag
 #define FLAG_UNUSED_0x91B                           (SYSTEM_FLAGS + 0xBB) // Unused Flag
 #define FLAG_UNUSED_0x91C                           (SYSTEM_FLAGS + 0xBC) // Unused Flag
