@@ -44,6 +44,7 @@
 #include "dma3.h"
 #include "options_visual.h"
 #include "trig.h"
+#include "line_break.h"
 
 struct QuestSpriteInfo
 {
@@ -1817,9 +1818,14 @@ void PrintQuestDescription(s32 questId)
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 x = 4;
     u32 y = 0;
+    u32 maxWidth = (GetWindowAttribute(windowId, WINDOW_WIDTH) * TILE_WIDTH) - 2;
+    u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
+    u32 height = (GetWindowAttribute(windowId, WINDOW_HEIGHT) * TILE_WIDTH) / (letterHeight + lineSpacing);
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
+    StripLineBreaks(gStringVar3);
+    BreakStringNaive(gStringVar3, maxWidth, height, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sQuestMenuWindowFontColors[QUEST_FONT_COLOR_DESC], TEXT_SKIP_DRAW, gStringVar3);
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
