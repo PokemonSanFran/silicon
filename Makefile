@@ -53,6 +53,11 @@ ifeq (compare,$(MAKECMDGOALS))
 endif
 ifeq (check,$(MAKECMDGOALS))
   TEST := 1
+  # Start firstMusicUpdate
+  $(shell grep -q "#define P_CRIES_ENABLED.*TRUE" include/config/pokemon.h && sed -i 's/#define P_CRIES_ENABLED.*TRUE/#define P_CRIES_ENABLED                  FALSE/g' include/config/pokemon.h)
+else
+  $(shell grep -q "#define P_CRIES_ENABLED.*FALSE" include/config/pokemon.h && sed -i 's/#define P_CRIES_ENABLED.*FALSE/#define P_CRIES_ENABLED                  TRUE/g' include/config/pokemon.h)
+  # End firstMusicUpdate
 endif
 ifeq (debug,$(MAKECMDGOALS))
   DEBUG := 1
