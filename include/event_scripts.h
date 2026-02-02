@@ -684,6 +684,7 @@ extern const u8 WarpToBlackMap[];
 extern const u8 TheStorySoFar_CheckNumberDefeated_Script[];
 extern const u8 Route4_UncoverSecretLab_Script[];
 extern const u8 Earthquake_Natural_EventScript[];
+extern const u8 Phenomenon_StartEncounter[]; // phenomenon
 // End siliconMerge
 extern const u8 Common_Movement_FollowerSafeStart[];
 extern const u8 Common_Movement_FollowerSafeEnd[];

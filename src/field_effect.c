@@ -42,6 +42,7 @@
 #include "qol_field_moves.h" // qol_field_moves
 #include "constants/map_types.h"
 #include "options_music.h" // siliconMerge
+#include "phenomenon.h" // phenomenon
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 

@@ -42,6 +42,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Battle8_InteractKai",
       "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 17,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_PINTILLON_HOUSE_EXTERIOR_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 21,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_PINTILLON_HOUSE_EXTERIOR_2",
+      "script": "BerryTreeScript",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -73,7 +99,5 @@
       "script": "Battle8_FaceGoToPlayer"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

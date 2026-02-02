@@ -20,6 +20,7 @@
 #include "constants/weather.h"
 #include "field_weather.h"
 // End autoWater
+#include "wild_encounter.h" // wildEncounters
 
 static u16 BerryTypeToItemId(u16 berry);
 static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree);
@@ -34,10 +35,14 @@ static u8 GetWeedingBonusByBerryType(u8);
 static u8 GetPestsBonusByBerryType(u8);
 static void SetTreeMutations(u8 id, u8 berry);
 static u8 GetTreeMutationValue(u8 id);
-static u16 GetBerryPestSpecies(u8 berryId);
+// Start wildEncounters
+//static u16 GetBerryPestSpecies(u8 berryId);
+static u16 UNUSED GetBerryPestSpecies(u8 berryId);
+// End wildEncounters
 static void TryForWeeds(struct BerryTree *tree);
 static void TryForPests(struct BerryTree *tree);
 static void AddTreeBonus(struct BerryTree *tree, u8 bonus);
+static bool32 TryGenerateWildBerryBattle(void); // wildEncounters
 
 // Check include/config/overworld.h configs and throw an error if illegal
 #if OW_BERRY_GROWTH_RATE < GEN_3 || (OW_BERRY_GROWTH_RATE > GEN_7 && OW_BERRY_GROWTH_RATE != GEN_6_ORAS)
@@ -2271,13 +2276,23 @@ bool8 ObjectEventInteractionBerryHasWeed(void)
 
 bool8 ObjectEventInteractionBerryHasPests(void)
 {
+    // Start wildEncounters
+    /*
     u16 species;
     if (!OW_BERRY_PESTS || !gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests)
         return FALSE;
     species = GetBerryPestSpecies(gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].berry);
     if (species == SPECIES_NONE)
         return FALSE;
-    CreateScriptedWildMon(species, 14 + Random() % 3, ITEM_NONE);
+    //CreateScriptedWildMon(species, 14 + Random() % 3, ITEM_NONE);
+    */
+    if (!OW_BERRY_PESTS || !gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests)
+        return FALSE;
+
+    if (!TryGenerateWildBerryBattle())
+        return FALSE;
+    // End wildEncounters
+
     gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests = FALSE;
     return TRUE;
 }
@@ -2444,9 +2459,14 @@ static void SetTreeMutations(u8 id, u8 berry)
 #endif
 }
 
-static u16 GetBerryPestSpecies(u8 berryId)
+// Start wildEncounters
+static u16 UNUSED GetBerryPestSpecies(u8 berryId)
+//static u16 GetBerryPestSpecies(u8 berryId)
+// End wildEncounters
 {
 #if OW_BERRY_PESTS == TRUE
+    // Start wildEncounters
+    // End wildEncounters
     const struct Berry *berry = GetBerryInfo(berryId);
     switch(berry->color)
     {
@@ -2570,3 +2590,16 @@ void WaterBerriesIfRaining(void)
     gSelectedObjectEvent = originalObject;
 }
 // End autoWater
+// Start wildEncounters
+static bool32 TryGenerateWildBerryBattle(void)
+{
+    u32 headerId = GetCurrentMapWildMonHeaderId();
+    enum WildPokemonArea area = WILD_AREA_BERRY_TREES;
+    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, area);
+
+    if (!TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].berryMonsInfo, area, 0))
+        return FALSE;
+
+    return TRUE;
+}
+// End wildEncounters
