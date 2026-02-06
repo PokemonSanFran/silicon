@@ -2,6 +2,7 @@
 #include "random.h"
 #include "bg.h"
 #include "text_window.h"
+#include "line_break.h"
 #include "window.h"
 #include "palette.h"
 #include "task.h"
@@ -519,6 +520,7 @@ static void CreateTimeline(void)
     ClearTimeline();
     FilterTimeline();
     SortTimeline();
+
 }
 
 static void ResetLoadStateToZero(void)
@@ -567,7 +569,6 @@ static void Buzzr_SetupCB(void)
             gMain.state++;
             break;
         case 2:
-            //DecompressTweetBgs();
             gMain.state++;
             break;
         case 3:
@@ -1172,13 +1173,27 @@ static bool32 CheckIfPrintWillOverflow(u32 verticalOffset)
 
 static const u32 GetNumContentLines(u16 tweetId)
 {
-    u32 count = 1;
     const u8 *str = GetContent(tweetId);
 
-    while (*str != EOS) {
-        if (*str == CHAR_NEWLINE) {
+    u32 count = 1;
+    while (*str != EOS)
+    {
+        if (*str == CHAR_NEWLINE)
             count++;
-        }
+
+        str++;
+    }
+
+    StripLineBreaks(gStringVar1);
+    u32 windowWidth = TWEET_WINDOW_WIDTH;
+    BreakStringNaive(gStringVar1, windowWidth, count, FONT_BUZZR_TWEET, HIDE_SCROLL_PROMPT);
+
+    count = 0;
+    while (*str != EOS)
+    {
+        if (*str == CHAR_NEWLINE)
+            count++;
+
         str++;
     }
 
@@ -1248,7 +1263,7 @@ static void PrintTweet(u16 selectedTweet, u32 verticalOffset, u32 typeTweet)
     HandleTweetIcons(selectedTweet,verticalOffset, typeTweet);
 }
 
-static void UNUSED HandleTweetBackground(u16 selectedTweet, u32 verticalOffset)
+static void HandleTweetBackground(u16 selectedTweet, u32 verticalOffset)
 {
     /*
     u32 x = 6;
@@ -1392,9 +1407,16 @@ static void PrintTweet_OverworldContent(u16 tweetId)
 
 static void PrintTweetContent(u32 windowId, u16 tweetId, const u8 *fontColor, u32 y)
 {
+    u32 x = 12;
+    u32 height = CalculateTweetContentHeight(tweetId);
+    u32 windowWidth = TWEET_WINDOW_WIDTH;
     u32 fontId = FONT_BUZZR_TWEET;
 
-    AddTextPrinterParameterized4(windowId, FONT_BUZZR_TWEET,12, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,GetContent(tweetId));
+    GetContent(tweetId);
+    StripLineBreaks(gStringVar1);
+    BreakStringNaive(gStringVar1, windowWidth, height, fontId, HIDE_SCROLL_PROMPT);
+
+    AddTextPrinterParameterized4(windowId, FONT_BUZZR_TWEET, x, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,gStringVar1);
 }
 
 static void HandleTweetIcons(u16 tweetId, u32 verticalOffset, u32 typeTweet)
@@ -1743,6 +1765,7 @@ static void AddNewTweetsToTimeline(void)
 
         if (HasQuestAndQuestNotActive(tweetIndex))
             StoreQuestTweets(numQuestTweets++,tweetIndex);
+
         if (!CheckIfTweetCanBeAdded(tweetIndex))
             continue;
 
@@ -1755,12 +1778,10 @@ static void AddNewTweetsToTimeline(void)
 
 static bool32 CheckIfTweetCanBeAdded(u32 tweetIndex)
 {
-    return (!IsTweetInTimeline(tweetIndex) &&
-            (
-             IsTweetCriteriaMet(tweetIndex)
-             || Buzzr_IsTweetRead(tweetIndex)
-            )
-           );
+    if (IsTweetInTimeline(tweetIndex))
+        return FALSE;
+
+    return (IsTweetCriteriaMet(tweetIndex) || Buzzr_IsTweetRead(tweetIndex));
 }
 
 static void AddTweetToBitmap(u32 tweetId)
@@ -1779,8 +1800,13 @@ static bool32 IsTweetInTimeline(u32 tweetId)
 
 static bool32 IsTweetCriteriaMet(u16 tweetId)
 {
-    void (*tweetFunction)() = gTweets[tweetId].criteria;
-    tweetFunction();
+    void (*tweetFunction)(void) = gTweets[tweetId].criteria;
+
+    if (tweetFunction == NULL)
+        return FALSE;
+    else
+        tweetFunction();
+
     return gSpecialVar_Result;
 }
 

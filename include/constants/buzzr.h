@@ -663,5 +663,6 @@ enum BuzzrZapMode
 };
 
 #define TWEET_SOCIAL_MEDIA_STEPS 20
+#define TWEET_WINDOW_WIDTH 230
 
 #endif // GUARD_CONSTANTS_BUZZR_H
