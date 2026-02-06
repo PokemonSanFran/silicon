@@ -614,6 +614,7 @@ gSongTable::
     song mus_irisina_town, MUSIC_PLAYER_BGM, 0
     song mus_irisina_town_night, MUSIC_PLAYER_BGM, 0
     song mus_qiu_village_night, MUSIC_PLAYER_BGM, 0
+    song mus_zenzu_route_11_13_100_night, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2
