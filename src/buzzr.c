@@ -270,6 +270,7 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .baseBlock = 1
 };
 
+static const u32 sZapBackgrounds[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.4bpp");
 static const u32 sLogomarkAllTilemap[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.bin.smolTM");
 
 static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.4bpp.smol");
@@ -1174,21 +1175,11 @@ static bool32 CheckIfPrintWillOverflow(u32 verticalOffset)
 static const u32 GetNumContentLines(u16 tweetId)
 {
     const u8 *str = GetContent(tweetId);
-
-    u32 count = 1;
-    while (*str != EOS)
-    {
-        if (*str == CHAR_NEWLINE)
-            count++;
-
-        str++;
-    }
-
     StripLineBreaks(gStringVar1);
     u32 windowWidth = TWEET_WINDOW_WIDTH;
-    BreakStringNaive(gStringVar1, windowWidth, count, FONT_BUZZR_TWEET, HIDE_SCROLL_PROMPT);
+    BreakStringNaive(gStringVar1, windowWidth, TWEET_MAX_NUM_LINES, FONT_BUZZR_TWEET, HIDE_SCROLL_PROMPT);
 
-    count = 0;
+    u32 count = 0;
     while (*str != EOS)
     {
         if (*str == CHAR_NEWLINE)
@@ -1408,13 +1399,12 @@ static void PrintTweet_OverworldContent(u16 tweetId)
 static void PrintTweetContent(u32 windowId, u16 tweetId, const u8 *fontColor, u32 y)
 {
     u32 x = 12;
-    u32 height = CalculateTweetContentHeight(tweetId);
     u32 windowWidth = TWEET_WINDOW_WIDTH;
     u32 fontId = FONT_BUZZR_TWEET;
 
     GetContent(tweetId);
     StripLineBreaks(gStringVar1);
-    BreakStringNaive(gStringVar1, windowWidth, height, fontId, HIDE_SCROLL_PROMPT);
+    BreakStringNaive(gStringVar1, windowWidth, TWEET_MAX_NUM_LINES, fontId, HIDE_SCROLL_PROMPT);
 
     AddTextPrinterParameterized4(windowId, FONT_BUZZR_TWEET, x, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,gStringVar1);
 }
