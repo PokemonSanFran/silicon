@@ -1157,6 +1157,8 @@ static void HandleTimeline(void)
         SetVerticalOffset(CalculateVerticalOffset(numTweet,previousTweet));
         verticalOffset = GetVerticalOffset();
 
+        DebugPrintf("numTweet %d has verticalOffset of %d",numTweet,verticalOffset);
+
         if (CheckIfPrintWillOverflow(verticalOffset))
             break;
 
@@ -1193,7 +1195,9 @@ static const u32 GetNumContentLines(u16 tweetId)
 
 static u32 CalculateTweetContentHeight(u16 tweetId)
 {
-    return (GetNumContentLines(tweetId) * (GetFontAttribute(FONT_BUZZR_TWEET,FONTATTR_MAX_LETTER_HEIGHT)));
+    u32 lines = GetNumContentLines(tweetId);
+    u32 height = (lines * 2) * TILE_SIZE_1BPP;
+    return height;
 }
 
 static u32 CalculateTweetHeaderHeight(void)
@@ -1203,7 +1207,7 @@ static u32 CalculateTweetHeaderHeight(void)
 
 static u32 CalculateTweetTotalHeight(u16 tweetId)
 {
-    return (CalculateTweetContentHeight(tweetId) + CalculateTweetHeaderHeight());
+    return (CalculateTweetContentHeight(tweetId) + TILE_SIZE_1BPP);
 }
 
 static void ResetVerticalOffset(void)
