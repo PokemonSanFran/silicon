@@ -1,5 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
+#include "silicon_test_exp.h"
 
 ASSUMPTIONS
 {
