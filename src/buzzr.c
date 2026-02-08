@@ -112,8 +112,8 @@ static void SetVerticalOffset(u32 offset);
 static u32 GetVerticalOffset(void);
 static u32 CalculateVerticalOffset(u32 numTweet, u32 previousTweet);
 static void PrintSortModeHeader(u8 windowId);
-static void PrintTweet(u16 selectedTweet, u32 verticalOffset, u32 typeTweet);
-static void HandleTweetBackground(u16 selectedTweet, u32 verticalOffset);
+static void PrintTweet(u32 numTweet, u16 selectedTweet, u32 verticalOffset, u32 typeTweet);
+static void HandleTweetBackground(u32 numTweet, u16 selectedTweet, u32 verticalOffset);
 static void HandleTweetHeader(u16 tweetId, u32 verticalOffset, u32 typeTweet);
 static u32 UpdateHorizontalHeaderPosition(u8 *tweetUsername, u32 fontId);
 static void PrintTweet_OverworldHeader(u16 tweetId);
@@ -1162,7 +1162,7 @@ static void HandleTimeline(void)
 
         tweetIndex = GetTweetIdFromPosition(currentPosition + numTweet);
 
-        PrintTweet(tweetIndex,verticalOffset,MODE_TIMELINE);
+        PrintTweet(numTweet, tweetIndex,verticalOffset,MODE_TIMELINE);
         positionIndex++;
     }
 }
@@ -1243,35 +1243,51 @@ static void PrintSortModeHeader(u8 windowId)
     AddTextPrinterParameterized4(windowId, fontId,SORT_MODE_TEXT_X_POSITION, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW,sText_OldestFirst);
 }
 
-static void PrintTweet(u16 selectedTweet, u32 verticalOffset, u32 typeTweet)
+static void PrintTweet(u32 numTweet, u16 selectedTweet, u32 verticalOffset, u32 typeTweet)
 {
     if (selectedTweet == TWEET_NONE)
         return;
 
-    HandleTweetBackground(selectedTweet,verticalOffset);
+    HandleTweetBackground(numTweet, selectedTweet,verticalOffset);
     HandleTweetHeader(selectedTweet,verticalOffset, typeTweet);
     HandleTweetContent(selectedTweet,verticalOffset,typeTweet);
     HandleTweetIcons(selectedTweet,verticalOffset, typeTweet);
 }
 
-static void HandleTweetBackground(u16 selectedTweet, u32 verticalOffset)
+static void HandleTweetBackground(u32 numTweet, u16 selectedTweet, u32 verticalOffset)
 {
-    /*
-    u32 x = 6;
-    u32 y = 19 + verticalOffset;
-    u32 tweetHeight = CalculateTweetContentHeight(selectedTweet);
-    u32 tweetWidth = 232;
+    u32 currentTileIndex = DISPLAY_TILE_WIDTH * (PIXELS_TO_TILES(verticalOffset));
+    u32 isTopTweet = (numTweet == 0);
 
-    const u32 *bgTiles = sTweetBgTiles;
-    const u32 *bgTilemap = sTweetBgTilemap3;
-    const u16 *bgPalette = sTweetBgPalette;
+    if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
+        return;
 
-    DecompressDataWithHeaderWram(sTweetBgTilemap3, sBg1TilemapBuffer);
-    CopyToBgTilemapBufferRect(BG1_BACKGROUND_TWEETS, sBg1TilemapBuffer, 18, 6, 10, 10);
-    CopyBgTilemapBufferToVram(1);
-    ScheduleBgCopyTilemapToVram(BG1_BACKGROUND_TWEETS);
-    ShowBg(BG1_BACKGROUND_TWEETS);
-    */
+    const u8 *baseGfx = (const u8 *)sZapBackgrounds;
+    const u8 *topTweetGfx = (isTopTweet) ? baseGfx : (baseGfx + (3 * TWEET_BYTES_PER_ROW));
+    const u8 *middleTweetGfx = baseGfx + (1 * TWEET_BYTES_PER_ROW);
+    const u8 *bottomTweetGfx = (isTopTweet) ? (baseGfx + (2 * TWEET_BYTES_PER_ROW)) : (baseGfx + (4 * TWEET_BYTES_PER_ROW));
+
+    CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, topTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
+    currentTileIndex += DISPLAY_TILE_WIDTH;
+
+    u32 midLines = PIXELS_TO_TILES(CalculateTweetTotalHeight(selectedTweet)) + 1;
+
+    for (u32 i = 0; i < midLines; i++)
+    {
+        if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
+            return;
+
+
+        CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, middleTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
+        currentTileIndex += DISPLAY_TILE_WIDTH;
+    }
+
+    if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
+        return;
+
+
+    CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, bottomTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
+
 }
 
 static void HandleTweetHeader(u16 tweetId, u32 verticalOffset, u32 typeTweet)
@@ -1860,7 +1876,7 @@ void Buzzr_ShowTweetOverworld(u16 tweetId)
     // this works, but stuff in the background breaks
     // PSF TODO revisit this after dynamic overworld palettes
 
-    PrintTweet(tweetId, 0, MODE_OVERWORLD);
+    PrintTweet(0, tweetId, 0, MODE_OVERWORLD);
 
     PutWindowTilemap(gTweetOverworldWindowId);
     CopyWindowToVram(gTweetOverworldWindowId, COPYWIN_FULL);
