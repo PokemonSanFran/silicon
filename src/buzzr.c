@@ -1147,11 +1147,11 @@ static void HandleTimeline(void)
 {
     u32 currentPosition = GetCurrentPosition();
     s32 positionIndex = currentPosition - 1;
-    u32 numTweet, previousTweet, tweetIndex, verticalOffset;
+    u32 previousTweet, tweetIndex, verticalOffset;
 
     ResetVerticalOffset();
 
-    for (numTweet = 0; numTweet < MAX_NUM_TWEETS_SHOWN;numTweet++)
+    for (u32 numTweet = 0; numTweet < MAX_NUM_TWEETS_SHOWN;numTweet++)
     {
         previousTweet = GetTweetIdFromPosition(positionIndex);
         SetVerticalOffset(CalculateVerticalOffset(numTweet,previousTweet));
@@ -1232,8 +1232,6 @@ static u32 CalculateVerticalOffset(u32 numTweet, u32 previousTweet)
         return offset + TWEET_HEADER_TOP_PADDING;
     else
         return offset + (TWEET_MARGIN_BOTTOM + (CalculateTweetTotalHeight(previousTweet)));
-
-    //return offset;
 }
 
 static void PrintSortModeHeader(u8 windowId)
