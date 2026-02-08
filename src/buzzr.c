@@ -1179,7 +1179,7 @@ static const u32 GetNumContentLines(u16 tweetId)
     u32 windowWidth = TWEET_WINDOW_WIDTH;
     BreakStringNaive(gStringVar1, windowWidth, TWEET_MAX_NUM_LINES, FONT_BUZZR_TWEET, HIDE_SCROLL_PROMPT);
 
-    u32 count = 0;
+    u32 count = 1;
     while (*str != EOS)
     {
         if (*str == CHAR_NEWLINE)
@@ -1257,26 +1257,25 @@ static void PrintTweet(u32 numTweet, u16 selectedTweet, u32 verticalOffset, u32 
 static void HandleTweetBackground(u32 numTweet, u16 selectedTweet, u32 verticalOffset)
 {
     u32 currentTileIndex = DISPLAY_TILE_WIDTH * (PIXELS_TO_TILES(verticalOffset));
-    u32 isTopTweet = (numTweet == 0);
 
     if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
         return;
 
     const u8 *baseGfx = (const u8 *)sZapBackgrounds;
+
+    u32 isTopTweet = (numTweet == 0);
     const u8 *topTweetGfx = (isTopTweet) ? baseGfx : (baseGfx + (3 * TWEET_BYTES_PER_ROW));
-    const u8 *middleTweetGfx = baseGfx + (1 * TWEET_BYTES_PER_ROW);
-    const u8 *bottomTweetGfx = (isTopTweet) ? (baseGfx + (2 * TWEET_BYTES_PER_ROW)) : (baseGfx + (4 * TWEET_BYTES_PER_ROW));
 
     CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, topTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
     currentTileIndex += DISPLAY_TILE_WIDTH;
 
-    u32 midLines = PIXELS_TO_TILES(CalculateTweetTotalHeight(selectedTweet)) + 1;
+    const u8 *middleTweetGfx = baseGfx + (1 * TWEET_BYTES_PER_ROW);
+    u32 midLines = GetNumContentLines(selectedTweet) * 2;
 
     for (u32 i = 0; i < midLines; i++)
     {
         if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
             return;
-
 
         CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, middleTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
         currentTileIndex += DISPLAY_TILE_WIDTH;
@@ -1285,7 +1284,7 @@ static void HandleTweetBackground(u32 numTweet, u16 selectedTweet, u32 verticalO
     if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
         return;
 
-
+    const u8 *bottomTweetGfx = (currentTileIndex < (TWEET_LAST_TILE_OFFSET - DISPLAY_TILE_WIDTH)) ? (baseGfx + (2 * TWEET_BYTES_PER_ROW)) : (baseGfx + (4 * TWEET_BYTES_PER_ROW));
     CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, bottomTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
 
 }
