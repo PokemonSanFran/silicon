@@ -68,7 +68,7 @@ static u32 GetNumTimelineTweets(void);
 static u32 CalculateLastPosition(void);
 static bool32 IsCurrentPositionBottom(void);
 static void UpdatePosition(bool32 moveDown);
-static bool32 GetTweetIdFromPosition(u32 position);
+static u32 GetTweetIdFromPosition(u32 position);
 static void DebugPrintTimeline(u32 time);
 static void Task_BuzzrWaitFadeIn(u8 taskId);
 static void Task_MainInput(u8 taskId);
@@ -750,7 +750,7 @@ static void UpdatePosition(bool32 moveDown)
     }
 }
 
-static bool32 GetTweetIdFromPosition(u32 position)
+static u32 GetTweetIdFromPosition(u32 position)
 {
     return sBuzzrLists->Timeline[position];
 }
