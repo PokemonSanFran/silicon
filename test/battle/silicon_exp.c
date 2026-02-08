@@ -190,15 +190,23 @@ static const struct SiliconExpTestData sTalaTrainers =
         TRAINER_0F03CF8D
     },
 };
-/*static const struct SiliconExpTestData sNeriene_GymTrainers =
+static const struct SiliconExpTestData sNeriene_GymTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_7,
     .targetLevel = LEVEL_CAP_VALUE_8,
     .trainerIds =
     {
-        TRAINER_NONE
+        TRAINER_0F3D8011,
+        TRAINER_0F3DB5D8,
+        TRAINER_0F5F82C3,
+        TRAINER_0FFBCCB9,
+        TRAINER_1075163A,
+        TRAINER_10751EAA,
+        TRAINER_10E3552B,
+        TRAINER_1114BC23,
     },
 };
+/*
 static const struct SiliconExpTestData sCharlotte_BeachbattleTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_8,
@@ -489,12 +497,13 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Tala")
 
     SiliconExpTest(&sTalaTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-/*AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Neriene Gym")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Neriene Gym")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
     SiliconExpTest(&sNeriene_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
+/*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Beachbattle")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;

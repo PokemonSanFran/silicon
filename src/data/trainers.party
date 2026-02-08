@@ -632,69 +632,49 @@ Map Section: Fort Yobu
 
 Gliscor @ Toxic Orb
 Ability: Poison Heal
-Level: 49 
-Ball: ITEM_MASTER_BALL
-Shiny: No
-Happiness: 1
-EVs: 200 HP / 200 Spe
+Level: 49
 Jolly Nature
 - Toxic Spikes
 - Protect
+- Earthquake
 - Dual Wingbeat
-- Earthquake 
+
+Blissey @ Chople Berry
+Ability: Serene Grace
+Level: 51
+Bold Nature
+IVs: 0 Atk
+- Wish
+- Teleport
+- Toxic
+- Flamethrower
+
+Farigiraf @ Sitrus Berry
+Ability: Cud Chew
+Level: 50
+Modest Nature
+IVs: 0 Atk
+- Psychic
+- Hyper Voice
+- Signal Beam
+- Future Sight
 
 Toxapex @ Black Sludge
 Ability: Merciless
 Level: 50
-Ball: ITEM_MASTER_BALL
-Shiny: No
-Happiness: 1
-EVs: 250 HP / 150 Atk
 Adamant Nature
 - Poison Jab
 - Liquidation
 - Baneful Bunker
 - Recover
 
-Farigiraf @ Sitrus Berry
-Ability: Cud Chew
-Level: 50 
-Ball: ITEM_MASTER_BALL
-Shiny: No
-Happiness: 1
-EVs: 200 HP / 200 SpA
-Modest Nature
-IVs: 0 Atk
-- Psychic
-- Hyper Voice
-- Nasty Plot
-- Future Sight
-
-Blissey @ Leftovers
-Ability: Natural Cure
-Level: 51
-Ball: ITEM_MASTER_BALL
-Shiny: No
-Happiness: 1
-EVs: 250 Def / 150 SpD
-Bold Nature
-IVs: 0 Atk
-- Wish
-- Teleport
-- Seismic Toss
-- Protect
-
 Aegislash @ Steelium Z
 Ability: Stance Change
-Level: 52 
-Ball: ITEM_MASTER_BALL
-Shiny: No
-Happiness: 1
-EVs: 200 HP / 200 Atk
+Level: 52
 Adamant Nature
 - Iron Head
-- Shadow Sneak
-- Swords Dance
+- Hex
+- Autotomize
 - Kings Shield
 
 === TRAINER_DIMU ===
@@ -5324,64 +5304,318 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Clefairy @ Eviolite
+Ability: Friend Guard
+Level: 54
+Bold Nature
+IVs: 0 Atk
+- Follow Me
+- Reflect
+- Light Screen
+- Night Shade
+
+Greedent @ Sitrus Berry
+Ability: Cheek Pouch
+Level: 51
+Adamant Nature
+- Body Press
+- Body Slam
+- Counter
+- Crunch
+
+Arboliva @ Sitrus Berry
+Ability: Harvest
+Level: 49
+Bold Nature
+IVs: 0 Atk
+- Giga Drain
+- Earth Power
+- Leech Seed
+- Synthesis
+
+Pachirisu @ Sitrus Berry
+Ability: Pickup
+Level: 52
+Jolly Nature
+- Wild Charge
+- Play Rough
+- Seed Bomb
+- Follow Me
+
+Polteageist @ Starf Berry
+Ability: Weak Armor
+Level: 49
+Modest Nature
+IVs: 0 Atk
+- Teatime
+- Giga Drain
+- Shadow Ball
+- Psychic
 
 === TRAINER_0F3DB5D8 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Tentacruel @ Black Sludge
+Ability: Clear Body
+Level: 50
+Timid Nature
+IVs: 0 Atk
+- Toxic Spikes
+- Venoshock
+- Hex
+- Scald
+
+Mismagius @ Spell Tag
+Ability: Levitate
+Level: 51
+Timid Nature
+IVs: 0 Atk
+- Hex
+- Dazzling Gleam
+- Mean Look
+- Will-O-Wisp
+
+Ariados @ Focus Sash
+Ability: Sniper
+Level: 52
+Adamant Nature
+- Venoshock
+- Toxic Thread
+- Fell Stinger
+- Sucker Punch
+
 
 === TRAINER_0F5F82C3 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Toxicroak @ Payapa Berry
+Ability: Poison Touch
+Level: 51
+Jolly Nature
+- Fake Out
+- Sucker Punch
+- Poison Jab
+- Earthquake
 
 === TRAINER_0FFBCCB9 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Dusknoir @ Weakness Policy
+Ability: Pressure
+Level: 50
+- Future Sight
+- Shadow Sneak
+- Leech Life
+- Pain Split
+
+Gallade @ Expert Belt
+Ability: Justified
+Level: 50
+Adamant Nature
+- Future Sight
+- Drain Punch
+- Psycho Cut
+- X-Scissor
+
+Gardevoir @ Fairy Feather
+Ability: Trace
+Level: 50
+Timid Nature
+IVs: 0 Atk
+- Future Sight
+- Draining Kiss
+- Psychic
+- Mystical Fire
+
+Yanmega @ Leftovers
+Ability: Speed Boost
+Level: 51
+Hasty Nature
+- Future Sight
+- Leech Life
+- Detect
+- Air Slash
 
 === TRAINER_1075163A ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Hydreigon @ Roseli Berry
+Ability: Levitate
+Level: 43
+Naive Nature
+- Belch
+- Acrobatics
+- Dragon Breath
+- Tailwind
+
+Relicanth @ Salac Berry
+Ability: Sturdy
+Level: 46
+Adamant Nature
+- Flail
+- Rock Tomb
+- Waterfall
+- Scale Shot
+
+Linoone @ Iapapa Berry
+Ability: Gluttony
+Level: 46
+Adamant Nature
+- Belly Drum
+- Extreme Speed
+- Throat Chop
+- Counter
+
 
 === TRAINER_10751EAA ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Weezing @ Payapa Berry
+Ability: Levitate
+Level: 46
+Calm Nature
+IVs: 0 Atk
+- Toxic Spikes
+- Sludge Bomb
+- Heat Wave
+- Will-O-Wisp
+
+Pangoro @ Sitrus Berry
+Ability: Scrappy
+Level: 43
+Adamant Nature
+- Substitute
+- Circle Throw
+- Knock Off
+- Gunk Shot
+
+Magmortar @ Assault Vest
+Ability: Flame Body
+Level: 45
+Modest Nature
+IVs: 0 Atk
+- Lava Plume
+- Scorching Sands
+- Thunderbolt
+- Fire Spin
+
+Cramorant @ Focus Sash
+Ability: Gulp Missile
+Level: 46
+Modest Nature
+IVs: 0 Atk
+- Agility
+- Surf
+- Endeavor
+- Whirlwind
+
+Skuntank @ Air Balloon
+Ability: Aftermath
+Level: 44
+Hasty Nature
+IVs: 0 Atk
+- Hex
+- Venoshock
+- Nasty Plot
+- Toxic
+
 
 === TRAINER_10E3552B ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Mienshao @ Focus Sash
+Ability: Regenerator
+Level: 45
+Jolly Nature
+- Fake Out
+- Drain Punch
+- Knock Off
+- U-turn
+
+Slowbro @ Leftovers
+Ability: Regenerator
+Level: 45
+Calm Nature
+IVs: 0 Atk
+- Teleport
+- Scald
+- Reflect
+- Light Screen
+
+Togetic @ Eviolite
+Ability: Serene Grace
+Level: 48
+Bold Nature
+IVs: 0 Atk
+- Draining Kiss
+- Ancient Power
+- Wish
+- Baton Pass
+
+Liepard @ Muscle Band
+Ability: Prankster
+Level: 46
+Jolly Nature
+- Parting Shot
+- Fake Out
+- Sucker Punch
+- Play Rough
+
 
 === TRAINER_1114BC23 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Breloom @ Toxic Orb
+Ability: Poison Heal
+Level: 45
+Jolly Nature
+- Substitute
+- Drain Punch
+- Giga Drain
+- Focus Punch
+
+Parasect @ Big Root
+Ability: Dry Skin
+Level: 47
+Adamant Nature
+- Leech Seed
+- Leech Life
+- Horn Leech
+- Spore
+
+Ceruledge @ Leftovers
+Ability: Flash Fire
+Level: 45
+Adamant Nature
+- Bitter Blade
+- Phantom Force
+- Will-O-Wisp
+- Bulk Up
+
+Florges @ Babiri Berry
+Ability: Flower Veil
+Level: 46
+Bold Nature
+IVs: 0 Atk
+- Moonblast
+- Stored Power
+- Calm Mind
+- Synthesis
+
 
 === TRAINER_114EB3AD ===
 Name: Blank
