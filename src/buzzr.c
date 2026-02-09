@@ -67,7 +67,7 @@ static bool32 IsCurrentPositionTop(void);
 static u32 GetNumTimelineTweets(void);
 static u32 CalculateLastPosition(void);
 static bool32 IsCurrentPositionBottom(void);
-static void UpdatePosition(bool32 moveDown);
+static bool8 UpdatePosition(bool32 moveDown);
 static u32 GetTweetIdFromPosition(u32 position);
 static void DebugPrintTimeline(u32 time);
 static void Task_BuzzrWaitFadeIn(u8 taskId);
@@ -727,7 +727,7 @@ static bool32 IsCurrentPositionBottom(void)
     return (sBuzzrState->position == lastPosition);
 }
 
-static void UpdatePosition(bool32 moveDown)
+static bool8 UpdatePosition(bool32 moveDown)
 {
     u32 currentPosition = GetCurrentPosition();
     u32 lastPosition = CalculateLastPosition();
@@ -735,19 +735,22 @@ static void UpdatePosition(bool32 moveDown)
     if (moveDown)
     {
         if (currentPosition == lastPosition)
+        {
             PlaySE(SE_BOO);
-        else
-            SetCurrentPosition(++currentPosition);
-
-        return;
+            return FALSE;
+        }
+        SetCurrentPosition(++currentPosition);
     }
     else
     {
         if (currentPosition == BUZZR_TIMELINE_TOP)
+        {
             PlaySE(SE_BOO);
-        else
-            SetCurrentPosition(--currentPosition);
+            return FALSE;
+        }
+        SetCurrentPosition(--currentPosition);
     }
+    return TRUE;
 }
 
 static u32 GetTweetIdFromPosition(u32 position)
@@ -811,16 +814,16 @@ static void HandleInput(u8 taskId, u32 currentTweetId)
     if (JOY_NEW(DPAD_RIGHT | R_BUTTON))
         ChangeFilterAndReloadTimeline(FILTER_RIGHT);
 
-    if (JOY_NEW(DPAD_UP) || JOY_HELD(DPAD_UP))
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
     {
-        UpdatePosition(FALSE);
-        PrintMenuHeaderAndTimeline();
+        if (UpdatePosition(FALSE))
+            PrintMenuHeaderAndTimeline();
     }
 
-    if (JOY_NEW(DPAD_DOWN) || JOY_HELD(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
     {
-        UpdatePosition(TRUE);
-        PrintMenuHeaderAndTimeline();
+        if (UpdatePosition(TRUE))
+            PrintMenuHeaderAndTimeline();
     }
 
     if (JOY_NEW(B_BUTTON))
