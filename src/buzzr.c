@@ -205,8 +205,6 @@ static const u32 TILEMAP_BUFFER_SIZE = (1024 * 2);
 EWRAM_DATA u8 gTweetOverworldWindowId = 0;
 EWRAM_DATA u16 overworldTweet = TWEET_NONE;
 
-static const u8 sText_HelpBarReturn[] =_("{B_BUTTON} Return");
-static const u8 sText_HelpBarDefault[] =_("{DPAD_LEFTRIGHT} Filter {A_BUTTON} Expand {B_BUTTON} Close {START_BUTTON} Sort");
 static const u8 sText_OldestFirst[] =_("Oldest First");
 static const u8 sText_UsernamePrefix[] =_("+");
 
@@ -1491,6 +1489,7 @@ static void PrintMenuHeaderAndTimeline(void)
 
     HandleMenuHeader();
     HandleTimeline();
+    PrintHelpBar();
 
     CopyWindowToVram(BUZZR_WINDOW_HEADER, COPYWIN_GFX);
 }
@@ -1506,7 +1505,25 @@ static void PrintMenuHeader(void)
 
 static const u8 *GetHelpBarText(void)
 {
-    return (IsTimelinePictureMode()) ? sText_HelpBarReturn : sText_HelpBarDefault;
+    u32 currentTweetId = GetTweetIdFromPosition(GetCurrentPosition());
+    bool32 hasPic = (GetPictureTiles(currentTweetId) != NULL);
+    bool32 isPictureMode = IsTimelinePictureMode();
+    bool32 numTweets = (GetNumTimelineTweets() > 1);
+
+    StringCopy(gStringVar4,COMPOUND_STRING(""));
+
+    if (!isPictureMode)
+        StringAppend(gStringVar4,COMPOUND_STRING("{DPAD_LEFTRIGHT} Filter "));
+
+    if (!isPictureMode && hasPic)
+        StringAppend(gStringVar4,COMPOUND_STRING("{A_BUTTON} Expand "));
+
+    StringAppend(gStringVar4,COMPOUND_STRING("{B_BUTTON} Return "));
+
+    if (!isPictureMode && numTweets)
+        StringAppend(gStringVar4,COMPOUND_STRING("{START_BUTTON} Sort "));
+
+    return gStringVar4;
 }
 
 static void PrintHelpBar(void)
