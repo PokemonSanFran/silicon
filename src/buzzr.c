@@ -1198,8 +1198,11 @@ static u8 CalculateTweetContentTiles(u32 tweetId)
 {
     u32 lines = GetNumContentLines(tweetId) * 2;
 
-    if (lines == 10)
-        lines --;
+    if (lines == 10 || lines == 12)
+        lines--;
+
+    if (lines == 4)
+        lines++;
 
     return lines;
 }
