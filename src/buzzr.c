@@ -962,14 +962,14 @@ static void ActivateQuest(u32 quest)
 
 static void Task_WaitFadeAndExitGracefully(u8 taskId)
 {
-    if (!gPaletteFade.active)
-    {
-        SetMainCallback2(sBuzzrState->savedCallback);
-        Buzzr_FreeResources();
-        ClearTweetFromOverworld();
-        ResetPictureMode();
-        DestroyTask(taskId);
-    }
+    if (gPaletteFade.active)
+        return;
+
+    SetMainCallback2(sBuzzrState->savedCallback);
+    ClearTweetFromOverworld();
+    ResetPictureMode();
+    Buzzr_FreeResources();
+    DestroyTask(taskId);
 }
 
 static void PlaySoundStartFadeQuitApp(u8 taskId)
@@ -982,27 +982,11 @@ static void PlaySoundStartFadeQuitApp(u8 taskId)
 
 static void Buzzr_FreeResources(void)
 {
-    if (sBuzzrState != NULL)
-    {
-        Free(sBuzzrState);
-    }
-    if (sBuzzrLists != NULL)
-    {
-        Free(sBuzzrLists);
-    }
-    if (sBg2TilemapBuffer != NULL)
-    {
-        Free(sBg2TilemapBuffer);
-    }
-    if (sBg1TilemapBuffer != NULL)
-    {
-        Free(sBg1TilemapBuffer);
-    }
-    if (sBg0TilemapBuffer != NULL)
-    {
-        Free(sBg0TilemapBuffer);
-    }
-
+    TRY_FREE_AND_SET_NULL(sBuzzrState);
+    TRY_FREE_AND_SET_NULL(sBuzzrLists);
+    TRY_FREE_AND_SET_NULL(sBg2TilemapBuffer);
+    TRY_FREE_AND_SET_NULL(sBg1TilemapBuffer);
+    TRY_FREE_AND_SET_NULL(sBg0TilemapBuffer);
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
@@ -1805,7 +1789,6 @@ static void AddNewTweetsToTimeline(void)
 
 static bool32 CheckIfTweetCanBeAdded(u32 tweetIndex)
 {
-    return TRUE;
     if (IsTweetInTimeline(tweetIndex))
         return FALSE;
 
