@@ -1347,7 +1347,11 @@ static void PrintPrivateTweetRecipient(u32 windowId,u32 x,u32 y,u32 fontId)
 static void PrintTweetHeader(u16 tweetId, u32 windowId, u32 verticalOffset)
 {
     u32 x = TWEET_HEADER_LEFT_PADDING;
-    u32 y = (verticalOffset / 8) * 8 + 2;
+    u32 y = (verticalOffset / 8) * 8;
+
+    if (verticalOffset > 16)
+        y += 2;
+
     u32 fontId = FONT_BUZZR_USER;
 
     u8 *tweetUsername = Alloc(USER_MAX_LENGTH*2);
@@ -1357,6 +1361,7 @@ static void PrintTweetHeader(u16 tweetId, u32 windowId, u32 verticalOffset)
     PrintUsername(windowId,x,y,tweetUsername,fontId);
     x += UpdateHorizontalHeaderPosition(tweetUsername,fontId);
     Free(tweetUsername);
+
 
     if (IsVerified(userId))
     {
@@ -1462,7 +1467,9 @@ static void PrintTweet_TimelineIcons(u16 tweetId, u32 verticalOffset)
 
 static u32 CalculateIndicatorIconHeight(u16 tweetId, u32 verticalOffset)
 {
-    return (verticalOffset + CalculateTweetTotalHeight(tweetId) - GetFontAttribute(FONT_BUZZR_TWEET,FONTATTR_MAX_LETTER_HEIGHT) + TWEET_INDICATOR_TOP_PADDING);
+    verticalOffset = (verticalOffset / 8) * 8;
+    u32 height = CalculateTweetContentHeight(tweetId);
+    return (verticalOffset + height - 2);
 }
 
 static bool32 CheckTweetPrintUnreadIcon(u32 windowId, u32 tweetId, u32 x, u32 y, u32 typeTweet)
@@ -1798,6 +1805,7 @@ static void AddNewTweetsToTimeline(void)
 
 static bool32 CheckIfTweetCanBeAdded(u32 tweetIndex)
 {
+    return TRUE;
     if (IsTweetInTimeline(tweetIndex))
         return FALSE;
 
