@@ -1160,8 +1160,6 @@ static void HandleTimeline(void)
         SetVerticalOffset(CalculateVerticalOffset(numTweet,previousTweet));
         verticalOffset = GetVerticalOffset();
 
-        DebugPrintf("numTweet %d has verticalOffset of %d",numTweet,verticalOffset);
-
         if (CheckIfPrintWillOverflow(verticalOffset))
             break;
 
@@ -1196,11 +1194,20 @@ static const u32 GetNumContentLines(u16 tweetId)
     return (count > TWEET_MIN_NUM_LINES) ? count : TWEET_MIN_NUM_LINES;
 }
 
+static u8 CalculateTweetContentTiles(u32 tweetId)
+{
+    u32 lines = GetNumContentLines(tweetId) * 2;
+
+    if (lines == 10)
+        lines --;
+
+    return lines;
+}
+
 static u32 CalculateTweetContentHeight(u16 tweetId)
 {
-    u32 lines = GetNumContentLines(tweetId);
-    u32 height = (lines * 2) * TILE_SIZE_1BPP;
-    return height;
+    u32 lines = CalculateTweetContentTiles(tweetId);
+    return (TILE_TO_PIXELS(lines));
 }
 
 static u32 CalculateTweetHeaderHeight(void)
@@ -1275,7 +1282,7 @@ static void HandleTweetBackground(u32 numTweet, u16 selectedTweet, u32 verticalO
     currentTileIndex += DISPLAY_TILE_WIDTH;
 
     const u8 *middleTweetGfx = baseGfx + (1 * TWEET_BYTES_PER_ROW);
-    u32 midLines = GetNumContentLines(selectedTweet) * 2;
+    u32 midLines = CalculateTweetContentTiles(selectedTweet);
 
     for (u32 i = 0; i < midLines; i++)
     {
@@ -1337,7 +1344,7 @@ static void PrintPrivateTweetRecipient(u32 windowId,u32 x,u32 y,u32 fontId)
 static void PrintTweetHeader(u16 tweetId, u32 windowId, u32 verticalOffset)
 {
     u32 x = TWEET_HEADER_LEFT_PADDING;
-    u32 y = verticalOffset;
+    u32 y = (verticalOffset / 8) * 8 + 2;
     u32 fontId = FONT_BUZZR_USER;
 
     u8 *tweetUsername = Alloc(USER_MAX_LENGTH*2);
