@@ -44,9 +44,7 @@
       "flag": "FLAG_TEMP_1"
     }
   ],
-  "warp_events": [
-
-  ],
+  "warp_events": [],
   "coord_events": [
     {
       "type": "trigger",
@@ -67,7 +65,5 @@
       "script": "OldAssholeAppear_TriggerCharlotte_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

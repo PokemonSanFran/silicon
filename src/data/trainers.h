@@ -11268,7 +11268,7 @@
 #line 4692
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 4694
-        .mapSec = MAPSEC_PERLACIA_CITY,
+        .mapSec = MAPSEC_ROUTE2,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
         .partySize = 3,
@@ -11356,7 +11356,7 @@
 #line 4723
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 4725
-        .mapSec = MAPSEC_PERLACIA_CITY,
+        .mapSec = MAPSEC_ROUTE4,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
         .partySize = 4,
@@ -11478,7 +11478,7 @@
 #line 4774
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 4776
-        .mapSec = MAPSEC_PERLACIA_CITY,
+        .mapSec = MAPSEC_ROUTE4,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
         .partySize = 3,
@@ -11862,7 +11862,7 @@
 #line 4930
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 4932
-        .mapSec = MAPSEC_PERLACIA_CITY,
+        .mapSec = MAPSEC_ROUTE2,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
         .partySize = 4,

@@ -7,3 +7,32 @@ mapscripts PerlaciaCity_Gym_MapScripts {
         VAR_EMRYS_STATE,EXHIBITION_READY: Quest_Alohafromalola_StartBattle_Dialogue
     ]
 }
+
+script PerlaciaCity_Gym_EventScript_0AF40D0B
+{
+    trainerbattle_single(TRAINER_0AF40D0B,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PerlaciaCity_Gym_EventScript_0B48C7D0
+{
+    trainerbattle_single(TRAINER_0B48C7D0,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PerlaciaCity_Gym_EventScript_0C95C833
+{
+    trainerbattle_single(TRAINER_0C95C833,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PerlaciaCity_Gym_EventScript_0C0A9B2F
+{
+    trainerbattle_single(TRAINER_0C0A9B2F,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+

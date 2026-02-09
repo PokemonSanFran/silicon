@@ -93,7 +93,7 @@ script TheStorySoFar_Congratulate_Dialogue {
 }
 
 script TheStorySoFar_StartBattle1_Script {
-    trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_A,gText_TheStorySoFar_IHopeYouDont,gText_TheStorySoFar_SlowDown, TheStorySoFar_ReadSign1_Dialogue, NO_MUSIC)
+    trainerbattle_single(TRAINER_0D416B2C,gText_TheStorySoFar_IHopeYouDont,gText_TheStorySoFar_SlowDown, TheStorySoFar_ReadSign1_Dialogue, NO_MUSIC)
         msgbox(gText_TheStorySoFar_DontForgetToStop,MSGBOX_AUTOCLOSE,SPEAKER_MACK)
 }
 
@@ -108,7 +108,7 @@ script TheStorySoFar_ReadSign1_Dialogue {
 
 
 script TheStorySoFar_StartBattle2_Script {
-    trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_B,gText_TheStorySoFar_IThinkDefense,gText_TheStorySoFar_NotStrongEnough,TheStorySoFar_ReadSign2_Dialogue, NO_MUSIC)
+    trainerbattle_single(TRAINER_0D4BA0F1,gText_TheStorySoFar_IThinkDefense,gText_TheStorySoFar_NotStrongEnough,TheStorySoFar_ReadSign2_Dialogue, NO_MUSIC)
         msgbox(gText_TheStorySoFar_TheBestOffense,MSGBOX_AUTOCLOSE,SPEAKER_TYZONN)
 }
 
@@ -122,7 +122,7 @@ script TheStorySoFar_ReadSign2_Dialogue {
 }
 
 script TheStorySoFar_StartBattle3_Script {
-    trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_C,gText_TheStorySoFar_TheresSomethingSpecial,gText_TheStorySoFar_ImNotSpecial,TheStorySoFar_ReadSign3_Dialogue, NO_MUSIC)
+    trainerbattle_single(TRAINER_0DA021EF,gText_TheStorySoFar_TheresSomethingSpecial,gText_TheStorySoFar_ImNotSpecial,TheStorySoFar_ReadSign3_Dialogue, NO_MUSIC)
         msgbox(gText_TheStorySoFar_ItsHardToDoAnything,MSGBOX_AUTOCLOSE,SPEAKER_WILL2)
 }
 
@@ -136,7 +136,7 @@ script TheStorySoFar_ReadSign3_Dialogue {
 }
 
 script TheStorySoFar_StartBattle4_Script {
-    trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_D,gText_TheStorySoFar_PhysicallyDefensiveMasterpiece,gText_TheStorySoFar_ButLikeTheShip,TheStorySoFar_ReadSign4_Dialogue,NO_MUSIC)
+    trainerbattle_single(TRAINER_0E19F1A8,gText_TheStorySoFar_PhysicallyDefensiveMasterpiece,gText_TheStorySoFar_ButLikeTheShip,TheStorySoFar_ReadSign4_Dialogue,NO_MUSIC)
         msgbox(gText_TheStorySoFar_HumansWillAlwaysFind,MSGBOX_AUTOCLOSE,,SPEAKER_RONNY)
 }
 
@@ -150,7 +150,7 @@ script TheStorySoFar_ReadSign4_Dialogue {
 }
 
 script TheStorySoFar_StartBattle5_Script {
-    trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_E,gText_TheStorySoFar_BrokenBonesHealEasily,gText_TheStorySoFar_SomePeopleNeverRecover,TheStorySoFar_ReadSign5_Dialogue,NO_MUSIC)
+    trainerbattle_single(TRAINER_0F03CF8D,gText_TheStorySoFar_BrokenBonesHealEasily,gText_TheStorySoFar_SomePeopleNeverRecover,TheStorySoFar_ReadSign5_Dialogue,NO_MUSIC)
         msgbox(gText_TheStorySoFar_MakingSureToTakeCare,MSGBOX_AUTOCLOSE,,SPEAKER_DAX)
 }
 
@@ -164,7 +164,7 @@ script TheStorySoFar_ReadSign5_Dialogue {
 }
 
 script TheStorySoFar_StartBattle6_Script {
-    trainerbattle_single(TRAINER_ARANTRAZ_EXHIBIT_F,gText_TheStorySoFar_HowToughAreYou,gText_TheStorySoFar_TurnsOutPrettyTough,TheStorySoFar_ReadSign6_Dialogue,NO_MUSIC)
+    trainerbattle_single(TRAINER_0E42221A,gText_TheStorySoFar_HowToughAreYou,gText_TheStorySoFar_TurnsOutPrettyTough,TheStorySoFar_ReadSign6_Dialogue,NO_MUSIC)
         msgbox(gText_TheStorySoFar_IHearVoicesStanding,MSGBOX_AUTOCLOSE,,SPEAKER_BRENNAN)
 }
 

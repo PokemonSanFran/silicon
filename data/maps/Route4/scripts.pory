@@ -28,3 +28,17 @@ script Route4_EventScript_BlackbeltB{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
     end
 }
+
+script Route4_EventScript_0A8FC005
+{
+    trainerbattle_single(TRAINER_0A8FC005,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route4_EventScript_0AAB38A6
+{
+    trainerbattle_single(TRAINER_0AAB38A6,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

@@ -4462,7 +4462,7 @@ u8 CheckNumArantrazExhibitDefeated(void)
     u32 trainerFlag, count = 0;
 
     for(trainerFlag = 0; trainerFlag < NUM_ARANTRAZ_TRAINERS; trainerFlag++)
-        if (FlagGet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_A + trainerFlag))
+        if (FlagGet(TRAINER_FLAGS_START + TRAINER_0D416B2C + trainerFlag))
             count++;
 
     if (count == NUM_ARANTRAZ_TRAINERS)
