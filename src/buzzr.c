@@ -752,6 +752,9 @@ static void UpdatePosition(bool32 moveDown)
 
 static u32 GetTweetIdFromPosition(u32 position)
 {
+    if (position < 0)
+        position = 0;
+
     return sBuzzrLists->Timeline[position];
 }
 
