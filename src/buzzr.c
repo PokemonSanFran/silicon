@@ -932,10 +932,10 @@ static u32 GetQuestTweetId(u32 tweetId)
 
 static void HandleQuestActivation(void)
 {
-    u32 tweetId, i;
-    for (i = 0; i < TWEET_COUNT; i++)
+    enum BuzzrZapIds tweetId;
+    for (u32 tweetIndex = 0; tweetIndex < TWEET_COUNT; tweetIndex++)
     {
-        tweetId = GetQuestTweetId(i);
+        tweetId = GetQuestTweetId(tweetIndex);
 
         if (tweetId == TWEET_NONE)
             break;

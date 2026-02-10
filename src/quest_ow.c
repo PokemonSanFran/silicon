@@ -41,7 +41,6 @@ static void PrintQuestName(u32, u32);
 static void BufferCTA(enum QuestMenuScriptCommandParameters state, u32, bool32);
 static void PrintCTA(u32, u32);
 static void PrintQuestSprite(enum QuestMenuScriptCommandParameters state, u32 taskId, bool32 eggMode);
-static void Task_DoQuestOverworldSlide(u8 taskId);
 
 static const u16 questOverworldPalette[] = INCBIN_U16("graphics/quest_menu/palettes/questOverworld.gbapal");
 
@@ -409,7 +408,7 @@ static void PrintQuestSprite(enum QuestMenuScriptCommandParameters state, u32 ta
     gTasks[taskId].data[2] = spriteId;
 }
 
-static void Task_DoQuestOverworldSlide(u8 taskId)
+void Task_DoQuestOverworldSlide(u8 taskId)
 {
     u32 windowId[QUEST_OVERWORLD_WINDOW_COUNT];
 
