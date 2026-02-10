@@ -2012,3 +2012,13 @@ static void Buzzr_PrintHeaderIcons(void)
         StartSpriteAnim(sprite, spriteIndex);
     }
 }
+
+/*
+PSF TODO
+
+fix "view images" functionality on buzzr menu
+
+make sure overworld tweets look correct and view picture functionlaity works
+
+add the task to start a quest - stop player input, show the same ow slide in, force button press to make it go away, update helpbar to say "Continue {A}" when the task is active
+*/
