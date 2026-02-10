@@ -635,8 +635,6 @@ enum BuzzrZapIds
 #define TWEET_MIN_NUM_LINES 2
 #define TWEET_MAX_NUM_LINES 7
 #define TIMELINE_PRINT_HEIGHT 146
-#define PAL_UI_SPRITES 0
-#define SCREEN_HEIGHT
 #define MILLISECOND_400 48
 #define BUZZR_TIMELINE_TOP 0
 #define SORT_MODE_TEXT_X_POSITION 80
@@ -648,6 +646,8 @@ enum BuzzrZapIds
 
 #define TWEET_BITS 32
 #define NUM_TWEET_BITS (TWEET_COUNT / TWEET_BITS)
+
+#define BUZZR_HEADER_FRAME(name) (BUZZR_SPRITE_FILTER_ ## name * 4)
 
 enum BuzzrZapActions
 {

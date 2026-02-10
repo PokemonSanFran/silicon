@@ -45,7 +45,7 @@ static void HandleArrowVisibility(struct Sprite *sprite, u32 arrowPos);
 static void SpriteCallback_Arrow(struct Sprite *sprite);
 static u8 GetArrowSpriteShape(u32 spriteConst);
 static u8 GetArrowSpriteSize(u32 spriteConst);
-static void CreateArrowSprite(u8 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *));
+static void CreateArrowSprite(u32 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *));
 static u32 CalculateCursorHeight(void);
 static void CreateCursorSprite(void);
 static void CreateUpArrowSprite(void);
@@ -174,6 +174,10 @@ static void SetTweetFromOverworld(u16 tweetId);
 static void ClearTweetFromOverworld(void);
 static u32 GetTweetFromOverworld(void);
 static bool32 Buzzr_IsCalledFromOverworld(void);
+static void Buzzr_ResetSpriteIds(enum BuzzrSpriteIDs spriteType);
+static void Buzzr_SetSpriteId(enum BuzzrSpriteIDs spriteType, u32 spriteId);
+static u32 Buzzr_GetSpriteId(enum BuzzrSpriteIDs spriteType);
+static void Buzzr_PrintHeaderIcons(void);
 
 struct BuzzrState
 {
@@ -184,6 +188,7 @@ struct BuzzrState
     bool32 viewPic;
     u16 position;
     u8 verticalOffset;
+    u8 spriteIds[NUM_BUZZR_SPRITES];
 };
 
 struct BuzzrLists
@@ -268,17 +273,13 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .baseBlock = 1
 };
 
+
 static const u32 sZapBackgrounds[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.4bpp");
-static const u32 sLogomarkAllTilemap[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.bin.smolTM");
 
-static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.4bpp.smol");
-static const u32 sLogomarkPlayerTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPlayer.4bpp.smol");
-static const u32 sLogomarkPrivateTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPrivate.4bpp.smol");
-static const u32 sLogomarkQuestTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkQuest.4bpp.smol");
-static const u32 sLogomarkUnreadTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkUnread.4bpp.smol");
-static const u32 sLogomarkVerifiedTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkVerified.4bpp.smol");
+static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/buzzr_background.4bpp.smol");
+static const u32 sLogomarkAllTilemap[] = INCBIN_U32("graphics/ui_menus/buzzr/buzzr_background.bin.smolTM");
 
-static const u16 sLogomarkAllPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/logomarkAll.gbapal");
+static const u16 sLogomarkAllPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr.gbapal");
 
 static const u8 sVerified_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/verified.4bpp");
 static const u8 sPrivate_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/private.4bpp");
@@ -301,6 +302,19 @@ static const u32 BuzzrUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/buzzr
 static const u32 BuzzrDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/down_arrow.4bpp.smol");
 static const u32 BuzzrCursor_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/cursor.4bpp.smol");
 
+static const struct {
+    const struct SpriteSheet sheets[NUM_BUZZR_SPRITE_TAGS];
+    const struct SpritePalette palette;
+} sBuzzr_SpriteGraphics =
+{
+    {
+        {
+            (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/icons.4bpp"),
+            TILE_OFFSET_4BPP(32), BUZZR_SPRITE_HEADER_TAG,
+        },
+    },
+    { sLogomarkAllPalette, PAL_UI_SPRITES}
+};
 enum FontColors
 {
     FONT_BLACK,
@@ -466,7 +480,7 @@ static u8 GetArrowSpriteSize(u32 spriteConst)
 }
 
 
-static void CreateArrowSprite(u8 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *))
+static void CreateArrowSprite(u32 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *))
 {
     u32 spriteId;
     const struct SpritePalette sBuzzrInterfaceSpritePalette[] =
@@ -617,6 +631,7 @@ static void Buzzr_SetupCB(void)
             gMain.state++;
             break;
         case 10:
+            Buzzr_PrintHeaderIcons();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             gMain.state++;
             break;
@@ -883,7 +898,6 @@ static void ChangeFilterAndReloadTimeline(u8 direction)
     ChangeFilter(direction);
     ResetPositionToZero();
     ReloadTimeline();
-    ChangeBackground();
 }
 
 static void ToggleSortAndReloadTimeline(void)
@@ -1025,11 +1039,14 @@ static bool8 LoadGraphics(void)
             break;
         case 2:
             LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadSpriteSheets(sBuzzr_SpriteGraphics.sheets);
+            LoadSpritePalette(&sBuzzr_SpriteGraphics.palette);
             sBuzzrState->loadState++;
         default:
             ResetLoadStateToZero();
             return TRUE;
     }
+
     return FALSE;
 }
 
@@ -1547,30 +1564,7 @@ static const u32 *GetRelevantTiles(void)
     if(IsTimelinePictureMode())
         return GetPictureTiles(tweetId);
     else
-    {
-        switch (GetFilter())
-        {
-            case TIMELINE_FILTER_ALL:
-                return sLogomarkAllTiles;
-                break;
-            case TIMELINE_FILTER_PLAYER:
-                return sLogomarkPlayerTiles;
-                break;
-            case TIMELINE_FILTER_UNREAD:
-                return sLogomarkUnreadTiles;
-                break;
-            case TIMELINE_FILTER_QUEST:
-                return sLogomarkQuestTiles;
-                break;
-            case TIMELINE_FILTER_VERIFIED:
-                return sLogomarkVerifiedTiles;
-                break;
-            default:
-            case TIMELINE_FILTER_PRIVATE:
-                return sLogomarkPrivateTiles;
-                break;
-        }
-    }
+        return sLogomarkAllTiles;
 }
 
 static const u32 *GetRelevantTilemap(void)
@@ -1945,4 +1939,76 @@ void Task_OpenBuzzrFromScript(u8 taskId)
 static bool32 Buzzr_IsCalledFromOverworld(void)
 {
     return (overworldTweet != TWEET_NONE);
+}
+
+static void Buzzr_ResetSpriteIds(enum BuzzrSpriteIDs spriteType)
+{
+    Buzzr_SetSpriteId(spriteType,SPRITE_NONE);
+}
+
+static void Buzzr_SetSpriteId(enum BuzzrSpriteIDs spriteType, u32 spriteId)
+{
+    sBuzzrState->spriteIds[spriteType] = spriteId;
+}
+
+static u32 Buzzr_GetSpriteId(enum BuzzrSpriteIDs spriteType)
+{
+    return sBuzzrState->spriteIds[spriteType];
+}
+
+static const struct OamData sBuzzrHeader_OamData =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+};
+
+static const struct SpriteTemplate sBuzzrHeaderSpriteTemplate =
+{
+    .tileTag = BUZZR_SPRITE_HEADER_TAG,
+    .paletteTag = PAL_UI_SPRITES,
+    .oam = &sBuzzrHeader_OamData,
+    .anims = (const union AnimCmd *const[])
+    {
+        [BUZZR_SPRITE_FILTER_ALL] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(ALL), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_UNREAD] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(UNREAD), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_QUEST] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(QUEST), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_PLAYER] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(PLAYER), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_VERIFIED] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(VERIFIED), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_PRIVATE] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(PRIVATE), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_CURSOR] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(CURSOR), 1), ANIMCMD_END },
+    },
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static u32 Buzzr_CalculateHeaderIconXPosition(u32 index)
+{
+    return (155 + (index * 15));
+}
+
+static void SpriteCallback_FilterCursor(struct Sprite *sprite)
+{
+    u32 filter = GetFilter();
+    sprite->x = Buzzr_CalculateHeaderIconXPosition(filter);
+}
+
+static void Buzzr_PrintHeaderIcons(void)
+{
+    const struct SpriteTemplate *template = &sBuzzrHeaderSpriteTemplate;
+    u32 x = Buzzr_CalculateHeaderIconXPosition(GetFilter());
+    u32 y = 7;
+    u32 spriteId = CreateSprite(template, x, y, 1);
+    struct Sprite *sprite = &gSprites[spriteId];
+    StartSpriteAnim(sprite, BUZZR_SPRITE_FILTER_CURSOR);
+    Buzzr_SetSpriteId(BUZZR_SPRITE_FILTER_CURSOR,spriteId);
+    gSprites[spriteId].callback = SpriteCallback_FilterCursor;
+
+    for (u32 spriteIndex = 0; spriteIndex < BUZZR_SPRITE_FILTER_CURSOR ; spriteIndex++)
+    {
+        spriteId = CreateSprite(template, Buzzr_CalculateHeaderIconXPosition(spriteIndex), y, 1);
+        Buzzr_SetSpriteId(spriteIndex,spriteId);
+        sprite = &gSprites[spriteId];
+        StartSpriteAnim(sprite, spriteIndex);
+    }
 }
