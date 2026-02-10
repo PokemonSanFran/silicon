@@ -30,7 +30,6 @@
 #include "event_data.h"
 #include "trig.h"
 #include "quests.h"
-#include "constants/quests.h"
 #include "script_menu.h"
 #include "field_weather.h"
 
@@ -81,10 +80,7 @@ static void ChangeFilterAndReloadTimeline(u8 direction);
 static void ToggleSortAndReloadTimeline(void);
 static void ReloadTimeline(void);
 static void FadeAndBail(void);
-static u32 GetQuestTweetId(u32 tweetId);
-static void HandleQuestActivation(void);
 static void PlayQuestFanfare(void);
-static void ActivateQuest(u32 quest);
 static void Task_WaitFadeAndExitGracefully(u8 taskId);
 static void PlaySoundStartFadeQuitApp(u8 taskId);
 static void Buzzr_FreeResources(void);
@@ -157,8 +153,6 @@ static void LoadTimelineOrderFromSaveBlock(void);
 static void FilterTimeline(void);
 static void ReverseTimelineOrder(u32 numTimelineTweets, u32 index);
 static void SortTimeline(void);
-static bool32 HasQuestAndQuestNotActive(u32 tweetId);
-static void StoreQuestTweets(u32 index, u32 tweetId);
 static void AddTweetToTimeline(u32 index, u32 tweetId);
 static void AddNewTweetsToTimeline(void);
 static bool32 CheckIfTweetCanBeAdded(u32 tweetIndex);
@@ -178,6 +172,9 @@ static void Buzzr_ResetSpriteIds(enum BuzzrSpriteIDs spriteType);
 static void Buzzr_SetSpriteId(enum BuzzrSpriteIDs spriteType, u32 spriteId);
 static u32 Buzzr_GetSpriteId(enum BuzzrSpriteIDs spriteType);
 static void Buzzr_PrintHeaderIcons(void);
+static void Task_Buzzr_StartQuestAnimation(u8 taskId);
+static enum QuestIdList Buzzr_ReturnUnstartedQuestFromTweet(u32 tweetId);
+static void Buzzr_TryStartQuestFromTweet(u32 tweetId, u8 taskId);
 
 struct BuzzrState
 {
@@ -195,7 +192,6 @@ struct BuzzrLists
 {
     u32 Timeline[TWEET_COUNT];
     u32 numTimelineTweets;
-    u32 QuestTweets[TWEET_COUNT];
     u32 TweetBitmap[NUM_TWEET_BITS];
 };
 
@@ -806,10 +802,15 @@ static void Task_BuzzrWaitFadeIn(u8 taskId)
 
 static void Task_MainInput(u8 taskId)
 {
+    ResetQuestFanfareFlag();
+
     u32 currentTweetId = GetTweetIdFromPosition(GetCurrentPosition());
 
     if (!Buzzr_IsTweetRead(currentTweetId))
+    {
         Buzzr_MarkTweetAsRead(currentTweetId);
+        Buzzr_TryStartQuestFromTweet(currentTweetId,taskId);
+    }
 
     if(!IsTimelinePictureMode())
         HandleInput(taskId, currentTweetId);
@@ -925,54 +926,11 @@ static void FadeAndBail(void)
     SetMainCallback2(Buzzr_MainCB);
 }
 
-static u32 GetQuestTweetId(u32 tweetId)
-{
-    return sBuzzrLists->QuestTweets[tweetId];
-}
-
-static void HandleQuestActivation(void)
-{
-    enum BuzzrZapIds tweetId;
-    for (u32 tweetIndex = 0; tweetIndex < TWEET_COUNT; tweetIndex++)
-    {
-        tweetId = GetQuestTweetId(tweetIndex);
-
-        if (tweetId == TWEET_NONE)
-            break;
-
-        if (!Buzzr_IsTweetRead(tweetId))
-            continue;
-
-        ActivateQuest(GetQuest(tweetId));
-    }
-}
-
 static void PlayQuestFanfare(void)
 {
     PlayFanfare(MUS_LEVEL_UP);
     FadeInBGM(4);
     FlagSet(FLAG_QUEST_FANFARE);
-}
-
-static void ActivateQuest(u32 quest)
-{
-    QuestMenu_GetSetQuestState(quest,FLAG_SET_UNLOCKED);
-    QuestMenu_GetSetQuestState(quest,FLAG_SET_ACTIVE);
-    QuestMenu_CopyQuestName(gStringVar1, quest);
-    //StringCopy(gStringVar2,gText_QuestActive);
-
-    if (!FlagGet(FLAG_QUEST_FANFARE))
-        PlayQuestFanfare();
-
-    //PSF TODO When the sliding quest overworld message gets implemented, implement it to play here as well. If only one quest is activated, it should be "QUESTNAME is now active", but if there are multiple, it needs to print "3 quests are now active"
-    /*
-       questmenu QUEST_MENU_SET_ACTIVE, \quest
-       questmenu QUEST_MENU_BUFFER_QUEST_NAME \quest
-       bufferstring 1 gText_QuestActive
-       playfanfare MUS_LEVEL_UP
-       msgbox gText_QuestAnnounce, MSGBOX_SIGN
-       waitfanfare
-       */
 }
 
 static void Task_WaitFadeAndExitGracefully(u8 taskId)
@@ -990,7 +948,6 @@ static void Task_WaitFadeAndExitGracefully(u8 taskId)
 static void PlaySoundStartFadeQuitApp(u8 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    HandleQuestActivation();
     PlaySE(SE_PC_OFF);
     gTasks[taskId].func = Task_WaitFadeAndExitGracefully;
 }
@@ -1754,24 +1711,6 @@ static void SortTimeline(void)
         ReverseTimelineOrder(numTimelineTweets,i);
 }
 
-static bool32 HasQuestAndQuestNotActive(u32 tweetId)
-{
-    u32 questId = GetQuest(tweetId);
-
-    if (questId == QUEST_PLAYERSADVENTURE)
-        return FALSE;
-
-    if (!QuestMenu_GetSetQuestState(questId,FLAG_GET_INACTIVE))
-        return FALSE;
-
-    return TRUE;
-}
-
-static void StoreQuestTweets(u32 index, u32 tweetId)
-{
-    sBuzzrLists->QuestTweets[index] = tweetId;
-}
-
 static void AddTweetToTimeline(u32 index, u32 tweetId)
 {
     AddTweetToBitmap(tweetId);
@@ -1780,16 +1719,13 @@ static void AddTweetToTimeline(u32 index, u32 tweetId)
 
 static void AddNewTweetsToTimeline(void)
 {
-    u32 tweetIndex = 0, numNewTweets = 0, numQuestTweets = 0;
+    u32 tweetIndex = 0, numNewTweets = 0;
     u32 newTweetsArray[TWEET_COUNT];
 
     for (tweetIndex = 1; tweetIndex < TWEET_COUNT; tweetIndex++)
     {
         if (gTweets[tweetIndex].content == NULL)
             continue;
-
-        if (HasQuestAndQuestNotActive(tweetIndex))
-            StoreQuestTweets(numQuestTweets++,tweetIndex);
 
         if (!CheckIfTweetCanBeAdded(tweetIndex))
             continue;
@@ -2020,6 +1956,49 @@ static void Buzzr_PrintHeaderIcons(void)
     }
 }
 
+static void Buzzr_TryStartQuestFromTweet(u32 tweetId, u8 taskId)
+{
+    enum QuestIdList quest = Buzzr_ReturnUnstartedQuestFromTweet(tweetId);
+
+    if (quest == QUEST_NONE)
+        return;
+
+    QuestMenu_GetSetQuestState(quest,FLAG_SET_UNLOCKED);
+    QuestMenu_GetSetQuestState(quest,FLAG_SET_ACTIVE);
+
+    gTasks[taskId].func = Task_Buzzr_StartQuestAnimation;
+}
+
+static enum QuestIdList Buzzr_ReturnUnstartedQuestFromTweet(u32 tweetId)
+{
+    enum QuestIdList questId = GetQuest(tweetId);
+
+    if (questId == QUEST_NONE)
+        return QUEST_NONE;
+
+    if (IsQuestRewardState(questId))
+        return QUEST_NONE;
+
+    if (IsQuestCompletedState(questId))
+        return QUEST_NONE;
+
+    if (IsQuestActiveState(questId))
+        return QUEST_NONE;
+
+    return questId;
+}
+
+static void Task_Buzzr_StartQuestAnimation(u8 taskId)
+{
+    if (!JOY_NEW(JOY_EXCL_DPAD))
+        return;
+
+    if (!FlagGet(FLAG_QUEST_FANFARE))
+        PlayQuestFanfare();
+
+    gTasks[taskId].func = Task_MainInput;
+}
+
 /*
 PSF TODO
 
@@ -2029,3 +2008,12 @@ make sure overworld tweets look correct and view picture functionlaity works
 
 add the task to start a quest - stop player input, show the same ow slide in, force button press to make it go away, update helpbar to say "Continue {A}" when the task is active
 */
+    //PSF TODO When the sliding quest overworld message gets implemented, implement it to play here as well. If only one quest is activated, it should be "QUESTNAME is now active", but if there are multiple, it needs to print "3 quests are now active"
+    /*
+       questmenu QUEST_MENU_SET_ACTIVE, \quest
+       questmenu QUEST_MENU_BUFFER_QUEST_NAME \quest
+       bufferstring 1 gText_QuestActive
+       playfanfare MUS_LEVEL_UP
+       msgbox gText_QuestAnnounce, MSGBOX_SIGN
+       waitfanfare
+       */
