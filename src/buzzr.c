@@ -1991,6 +1991,12 @@ static void SpriteCallback_FilterCursor(struct Sprite *sprite)
 {
     u32 filter = GetFilter();
     sprite->x = Buzzr_CalculateHeaderIconXPosition(filter);
+    sprite->invisible = IsTimelinePictureMode();
+}
+
+static void SpriteCallback_HeaderIconCallback(struct Sprite *sprite)
+{
+    sprite->invisible = IsTimelinePictureMode();
 }
 
 static void Buzzr_PrintHeaderIcons(void)
@@ -2010,6 +2016,7 @@ static void Buzzr_PrintHeaderIcons(void)
         Buzzr_SetSpriteId(spriteIndex,spriteId);
         sprite = &gSprites[spriteId];
         StartSpriteAnim(sprite, spriteIndex);
+        gSprites[spriteId].callback = SpriteCallback_HeaderIconCallback;
     }
 }
 
