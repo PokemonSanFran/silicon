@@ -169,7 +169,6 @@ static void SetTweetFromOverworld(u16 tweetId);
 static void ClearTweetFromOverworld(void);
 static u32 GetTweetFromOverworld(void);
 static bool32 Buzzr_IsCalledFromOverworld(void);
-static void Buzzr_ResetSpriteIds(enum BuzzrSpriteIDs spriteType);
 static void Buzzr_SetSpriteId(enum BuzzrSpriteIDs spriteType, u32 spriteId);
 static u32 Buzzr_GetSpriteId(enum BuzzrSpriteIDs spriteType);
 static void Buzzr_PrintHeaderIcons(void);
@@ -1879,11 +1878,6 @@ void Task_OpenBuzzrFromScript(u8 taskId)
 static bool32 Buzzr_IsCalledFromOverworld(void)
 {
     return (overworldTweet != TWEET_NONE);
-}
-
-static void Buzzr_ResetSpriteIds(enum BuzzrSpriteIDs spriteType)
-{
-    Buzzr_SetSpriteId(spriteType,SPRITE_NONE);
 }
 
 static void Buzzr_SetSpriteId(enum BuzzrSpriteIDs spriteType, u32 spriteId)
