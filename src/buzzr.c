@@ -13,6 +13,7 @@
 #include "malloc.h"
 #include "scanline_effect.h"
 #include "constants/rgb.h"
+#include "constants/quest_ow.h"
 #include "decompress.h"
 #include "constants/songs.h"
 #include "sound.h"
@@ -267,7 +268,7 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .tilemapTop = 1,
     .width = 30,
     .height = 18,
-    .paletteNum = 0,
+    .paletteNum = QUEST_OVERWORLD_PALETTE_INTERFACE_ID,
     .baseBlock = 1
 };
 
@@ -1282,7 +1283,8 @@ static u32 UpdateHorizontalHeaderPosition(u8 *tweetUsername, u32 fontId)
 static void PrintTweet_OverworldHeader(u16 tweetId)
 {
     u32 windowId = gTweetOverworldWindowId;
-    PrintTweetHeader(tweetId, windowId, 0);
+    u32 verticalOffset = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_TILEMAP_TOP));
+    PrintTweetHeader(tweetId, windowId, verticalOffset);
 }
 
 static void PrintTweet_TimelineHeader(u16 tweetId, u32 verticalOffset)
@@ -1387,7 +1389,8 @@ static void PrintTweet_TimelineContent(u16 tweetId, u32 verticalOffset)
 static void PrintTweet_OverworldContent(u16 tweetId)
 {
     u32 windowId = gTweetOverworldWindowId;
-    u32 y = CalculateTweetHeaderHeight();
+    u32 verticalOffset = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_TILEMAP_TOP));
+    u32 y = CalculateTweetHeaderHeight() + verticalOffset;
     const u8 *fontColor = BuzzrWindowFontColors[FONT_BLACK];
 
     PrintTweetContent(windowId, tweetId, fontColor, y);
@@ -1827,12 +1830,10 @@ void Buzzr_ShowTweetOverworld(u16 tweetId)
     if (tweetId == TWEET_NONE)
         return;
 
+    SetTweetFromOverworld(tweetId);
     gTweetOverworldWindowId = AddWindow(&sBuzzr_OverworldWindowTemplate);
-    FillWindowPixelBuffer(gTweetOverworldWindowId, PIXEL_FILL(1));
 
-    LoadPalette(sLogomarkAllPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    // this works, but stuff in the background breaks
-    // PSF TODO revisit this after dynamic overworld palettes
+    LoadPalette(sLogomarkAllPalette, QUEST_OVERWORLD_PALETTE_INTERFACE_SLOT, PLTT_SIZE_4BPP);
 
     PrintTweet(0, tweetId, 0, MODE_OVERWORLD);
 
@@ -2075,5 +2076,4 @@ static void SpriteCallback_QuestImage(struct Sprite *sprite)
 PSF TODO
 
 fix "view images" functionality on buzzr menu
-make sure overworld tweets look correct and view picture functionlaity works
 */
