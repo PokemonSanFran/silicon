@@ -40,11 +40,35 @@ enum StartMenuApps
     TOTAL_START_APPS = (NUM_START_APPS - 1) // true size
 };
 
+enum StartMenuHelpSymbols
+{
+    // Time Of Day
+    START_HELP_SYMBOL_TOD_M = 0, // Morning
+    START_HELP_SYMBOL_TOD_D,     // Day
+    START_HELP_SYMBOL_TOD_E,     // Evening
+    START_HELP_SYMBOL_TOD_N,     // Night
+
+    START_HELP_SYMBOL_MAP,
+
+    // Cellular Signal
+    START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
+    START_HELP_SYMBOL_SIG_0A,
+    START_HELP_SYMBOL_SIG_1,
+    START_HELP_SYMBOL_SIG_2,
+
+    START_HELP_SYMBOL_SWAP,
+
+    NUM_START_HELP_SYMBOLS
+};
+
+
 void StartMenu_Init(enum StartMenuModes);
 void Task_StartMenu_Init(u8);
 bool32 StartMenu_OpenNormalMode(void);
 void CB2_StartMenu_ReturnToUI(void);
 void StartMenu_HoldPreviousSave(void);
 void StartMenu_ResetAppData(void);
+enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
+void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
 
 #endif // GUARD_UI_START_MENU_H

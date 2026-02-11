@@ -21,4 +21,14 @@ const struct AdventureGuideData AdventureGuideInfo[] =
             COMPOUND_STRING("When looking for a specific Pokémon to add to your party, the Pokédex's filter functionality allows for advanced searching and filtering to find the right Pokémon to solve any problem."),
         },
     },
+    [GUIDE_SURPRISE_TRADE] =
+    {
+        .title = COMPOUND_STRING("Surprise Trade"),
+        .isAdvancedGuide = ADVENTURE_GUIDE_BASIC,
+        .description =
+        {
+            COMPOUND_STRING("With a Surprise Trade, you don’t choose who you’ll trade with or what you’ll get. Just choose a Pokémon you’re willing to part with from your Boxes or Party and your trade will be carried out automatically."),
+            COMPOUND_STRING("Trading Pokémon with other Trainers can also help you fill up your Pokédex! With Surprise Trades, you can trade with players from all over Resido!"),
+        },
+    },
 };

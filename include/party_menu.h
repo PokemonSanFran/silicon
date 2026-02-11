@@ -114,6 +114,7 @@ void InitPartyMenuForPokevialFromField(u8 taskId); //Pokevial Branch
 // Start qol_field_moves
 // These are all moved from src/party_menu.c
 u8 CanMonLearnTMTutor(struct Pokemon *, u16, u8);
+void CB2_TrashTrade(void); //PSF TODO replace with ChooseBoxMon
 
 enum {
     CAN_LEARN_MOVE,

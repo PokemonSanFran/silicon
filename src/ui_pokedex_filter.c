@@ -38,6 +38,7 @@
 static void SpeciesFilter_ResetEntireOption(enum PokedexFilterList);
 static void SpeciesFilter_ResetFilterSingleOption(enum PokedexFilterList, u32);
 static void DebugPrintActiveFilters(void);
+bool32 SpeciesFilter_IsSpeciesFromAlola(u32);
 static bool32 SpeciesFilter_DoesSpeciesLearnFilteredMove(u32, u32);
 static bool32 SpeciesFilter_IsSpeciesStatWithinTier_Stat(u32, u32);
 static bool32 SpeciesFilter_CheckHPTier(u32,u32);
@@ -64,6 +65,7 @@ static void SpeciesFilter_PrintCursor(enum FilterPageWindows windowId, enum Poke
 static void SpeciesFilter_BufferPropertiesToString(u32, enum PokedexFilterList);
 static void SpeciesFilter_TrimPropertiesString(u32);
 static void SpeciesFilter_SwitchToEditPage(u8 taskId);
+static bool8 SpeciesFilter_AllowAlolaMode(enum PokedexFilterList);
 
 static void Task_SpeciesFilter_GoToEditPage(u8);
 static void SpeciesFilter_SetUp(u8);
@@ -90,6 +92,7 @@ static void SpeciesFilter_EditPage_SetMode(enum FilterEditPageModes modeId);
 static void Task_SpeciesFilter_HandleAlphabetInput(u8);
 static void SpeciesFilter_SetUpAbilityFilterPage(enum PokedexFilterList);
 static void SpeciesFilter_SetUpEvolutionFilterPage(enum PokedexFilterList);
+static void SpeciesFilter_SetUpAlolaFilterPage(enum PokedexFilterList);
 static void Task_SpeciesFilter_HandleTypeInput(u8);
 static void Task_SpeciesFilter_HandleMoveInput(u8);
 
@@ -453,6 +456,26 @@ bool32 SpeciesFilter_DoesSpeciesMatchColor(u32 species)
             return FALSE;
 
         if (gSpeciesInfo[species].bodyColor == sFilterSet->filterColor[filterIndex])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 SpeciesFilter_IsSpeciesFromAlola(u32 species)
+{
+    u32 filterIndex;
+
+    if (sFilterSet->filterAlola[0] == nullOptionLUT[FILTER_LIST_ALOLA])
+        return TRUE;
+
+    for (filterIndex = 0; filterIndex < ALOLA_COUNT; filterIndex++)
+    {
+        if (sFilterSet->filterAlola[filterIndex] == nullOptionLUT[FILTER_LIST_COLOR])
+            return FALSE;
+
+    enum AlolaModeList alola = (IsSpeciesFromAlola(species)) ? ALOLA_YES : ALOLA_NO;
+
+        if (alola == sFilterSet->filterAlola[filterIndex])
             return TRUE;
     }
     return FALSE;
@@ -950,7 +973,7 @@ static void SpeciesFilter_ChangeCursorPosition(void)
     u32 filterList = SpeciesFilter_GetCurrentPositionInFilterList();
     u32 cursor;
 
-    if (filterList > FILTER_LIST_EVOLUTION)
+    if (filterList > (FILTER_LIST_COUNT - 1))
         cursor = FILTER_LIST_ROW_3;
     else if (filterList < FILTER_LIST_SCREEN_BUFFER)
         cursor = filterList;
@@ -987,6 +1010,7 @@ const u8 *const sFilterListTexts[] =
     [FILTER_LIST_MOVE4] = COMPOUND_STRING("Move 4"),
     [FILTER_LIST_ABILITY] = COMPOUND_STRING("Ability"),
     [FILTER_LIST_EVOLUTION] = COMPOUND_STRING("Evolution"),
+    [FILTER_LIST_ALOLA] = COMPOUND_STRING("Is From Alola"),
     [FILTER_LIST_COUNT] = COMPOUND_STRING("Return"),
 };
 
@@ -1003,7 +1027,13 @@ void SpeciesFilter_PrintFilterHeaders(void)
 
         SpeciesFilter_PrintCursor(windowId, filterId);
 
-        AddTextPrinterParameterized4(windowId, fontId, 4, 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, sFilterListTexts[filterId++]);
+        if (SpeciesFilter_AllowAlolaMode(filterId))
+            StringCopy(gStringVar2,COMPOUND_STRING("???"));
+        else
+            StringCopy(gStringVar2,sFilterListTexts[filterId]);
+
+        AddTextPrinterParameterized4(windowId, fontId, 4, 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar2);
+        filterId++;
 
         CopyWindowToVram(windowId, COPYWIN_GFX);
         windowId++;
@@ -1101,12 +1131,23 @@ static void SpeciesFilter_TrimPropertiesString(u32 fontId)
     StringAppend(gStringVar2,COMPOUND_STRING("..."));
 }
 
+static bool8 SpeciesFilter_AllowAlolaMode(enum PokedexFilterList currentFilter)
+{
+    return ((currentFilter == FILTER_LIST_ALOLA) && (!QuestMenu_GetSetQuestState(QUEST_ALOHAFROMALOLA, FLAG_GET_ACTIVE)));
+}
+
 static void SpeciesFilter_SwitchToEditPage(u8 taskId)
 {
     enum PokedexFilterList currentFilter = SpeciesFilter_GetCurrentPositionInFilterList();
     if (currentFilter == FILTER_LIST_COUNT)
     {
         SpeciesGrid_SwitchTo(taskId);
+        return;
+    }
+
+    if (SpeciesFilter_AllowAlolaMode(currentFilter))
+    {
+        PlaySE(SE_BOO);
         return;
     }
 
@@ -1138,6 +1179,7 @@ static void (* const searchFilterPageSetupFunctions[])(enum PokedexFilterList cu
     [FILTER_LIST_MOVE4] = SpeciesFilter_SetUpMoveFilterPage,
     [FILTER_LIST_ABILITY] = SpeciesFilter_SetUpAbilityFilterPage,
     [FILTER_LIST_EVOLUTION] = SpeciesFilter_SetUpEvolutionFilterPage,
+    [FILTER_LIST_ALOLA] = SpeciesFilter_SetUpAlolaFilterPage,
 };
 
 static void (* const searchFilterPageTasks[])(u8 taskid) =
@@ -1159,6 +1201,7 @@ static void (* const searchFilterPageTasks[])(u8 taskid) =
     [FILTER_LIST_MOVE4] = Task_SpeciesFilter_HandleAlphabetInput,
     [FILTER_LIST_ABILITY] = Task_SpeciesFilter_HandleAlphabetInput,
     [FILTER_LIST_EVOLUTION] = Task_SpeciesFilter_HandleTypeInput,
+    [FILTER_LIST_ALOLA] = Task_SpeciesFilter_HandleTypeInput,
 };
 
 static const u8 editPageGridMax[FILTER_LIST_COUNT][2] =
@@ -1180,6 +1223,7 @@ static const u8 editPageGridMax[FILTER_LIST_COUNT][2] =
     [FILTER_LIST_SPEED] = {POKEDEX_EDIT_STAT_MAX_COLUMN, POKEDEX_EDIT_STAT_MAX_ROW},
     [FILTER_LIST_COLOR] = {POKEDEX_EDIT_COLOR_MAX_COLUMN, POKEDEX_EDIT_COLOR_MAX_ROW},
     [FILTER_LIST_EVOLUTION] = {POKEDEX_EDIT_EVOLUTION_MAX_COLUMN, POKEDEX_EDIT_EVOLUTION_MAX_ROW},
+    [FILTER_LIST_ALOLA] = {POKEDEX_EDIT_EVOLUTION_MAX_COLUMN, POKEDEX_EDIT_EVOLUTION_MAX_ROW},
 };
 
 
@@ -1354,6 +1398,18 @@ static const u8 editPageSpacingValues[FILTER_LIST_COUNT][EDIT_PAGE_SPACING_COUNT
         [EDIT_PAGE_SPACING_CURSOR_WIDTH] = 40,
     },
     [FILTER_LIST_EVOLUTION] =
+    {
+        [EDIT_PAGE_SPACING_HORIZONTAL_PADDING] = 3,
+        [EDIT_PAGE_SPACING_HORIZONTAL_MARGIN] = 0,
+        [EDIT_PAGE_SPACING_VERTICAL_PADDING] = 0,
+        [EDIT_PAGE_SPACING_VERTICAL_MARGIN] = 25,
+        [EDIT_PAGE_SPACING_CHECK_PADDING] = 6,
+        [EDIT_PAGE_SPACING_CURSOR_PADDING] = 3,
+        [EDIT_PAGE_SPACING_CHECK_MARGIN] = 160,
+        [EDIT_PAGE_SPACING_MAX_COLUMN_WIDTH] = 218,
+        [EDIT_PAGE_SPACING_CURSOR_WIDTH] = 218,
+    },
+    [FILTER_LIST_ALOLA] =
     {
         [EDIT_PAGE_SPACING_HORIZONTAL_PADDING] = 3,
         [EDIT_PAGE_SPACING_HORIZONTAL_MARGIN] = 0,
@@ -1668,6 +1724,8 @@ static u32 SpeciesFilter_EditPage_GetNumberEntities(void)
             return numEntity;
         case FILTER_LIST_EVOLUTION:
             return EVOLUTION_STAGE_COUNT - 1;
+        case FILTER_LIST_ALOLA:
+            return ALOLA_COUNT;
     }
 }
 
@@ -1879,6 +1937,7 @@ static void SpeciesFilter_EditPage_PrintInformation(void)
         case FILTER_LIST_EGG2:
         case FILTER_LIST_COLOR:
         case FILTER_LIST_EVOLUTION:
+        case FILTER_LIST_ALOLA:
             SpeciesFilter_ClearWindowPrintTextAndSprites(currentFilter,FALSE);
             break;
         default:
@@ -1947,6 +2006,13 @@ static const u8 *const sEvolutionStageTexts[] =
     [NO_EVOLUTION] = COMPOUND_STRING("hasn't Evolved and can't Evolve"),
 };
 
+static const u8 *const sAlolaTexts[] =
+{
+    [ALOLA_NONE] = COMPOUND_STRING("Alola null"),
+    [ALOLA_NO] = COMPOUND_STRING("is not from Alola"),
+    [ALOLA_YES] = COMPOUND_STRING("is from Alola"),
+};
+
 static const u8 *const sDexColorTexts[] =
 {
     [BODY_COLOR_NONE] = COMPOUND_STRING("no color"),
@@ -1988,6 +2054,8 @@ static const u8 *const SpeciesFilter_EditPage_GetStringForEntity(enum PokedexFil
             return GetAbilityName(optionIndex);
         case FILTER_LIST_EVOLUTION:
             return sEvolutionStageTexts[optionIndex];
+        case FILTER_LIST_ALOLA:
+            return sAlolaTexts[optionIndex];
         case FILTER_LIST_MOVE1:
         case FILTER_LIST_MOVE2:
         case FILTER_LIST_MOVE3:
@@ -2181,6 +2249,13 @@ static void SpeciesFilter_EditPage_CompressOptions(void)
                                 temp
                             );
                         break;
+                    case FILTER_LIST_ALOLA:
+                        SWAP(
+                                sFilterSet->filterAlola[optionIndex - 1],
+                                sFilterSet->filterAlola[optionIndex],
+                                temp
+                            );
+                        break;
                 }
             }
         }
@@ -2212,6 +2287,7 @@ static u32 SpeciesFilter_EditPage_GetEntityFromCurrentPosition(u32 currentListPo
         case FILTER_LIST_SPEED:
         case FILTER_LIST_COLOR:
         case FILTER_LIST_EVOLUTION:
+        case FILTER_LIST_ALOLA:
         case FILTER_LIST_EGG1:
         case FILTER_LIST_EGG2:
             return currentListPosition + 1;
@@ -2264,6 +2340,8 @@ static u32 SpeciesFilter_EditPage_GetCurrentFilterValue(enum PokedexFilterList c
             return sFilterSet->filterAbility[typeIndex];
         case FILTER_LIST_EVOLUTION:
             return sFilterSet->filterEvolution[typeIndex];
+        case FILTER_LIST_ALOLA:
+            return sFilterSet->filterAlola[typeIndex];
         case FILTER_LIST_HP:
         case FILTER_LIST_ATK:
         case FILTER_LIST_DEF:
@@ -2317,6 +2395,8 @@ static void SpeciesFilter_EditPage_SetFilterOptionValue(enum PokedexFilterList c
             return;
         case FILTER_LIST_EVOLUTION:
             sFilterSet->filterEvolution[currentPosition] = currentValue;
+        case FILTER_LIST_ALOLA:
+            sFilterSet->filterAlola[currentPosition] = currentValue;
             return;
     }
 }
@@ -2512,6 +2592,17 @@ static void SpeciesFilter_SetUpAbilityFilterPage(enum PokedexFilterList currentF
 
 
 static void SpeciesFilter_SetUpEvolutionFilterPage(enum PokedexFilterList currentFilter)
+{
+    SpeciesFilter_InitTypeWindows();
+    u32 numRows = SpeciesFilter_EditPage_CalculateNumberRows();
+    SpeciesFilter_EditPage_SetNumberRows(numRows);
+    SpeciesFilter_ClearWindowPrintTextAndSprites(currentFilter,TRUE);
+    PrintMenuHeader();
+    SpeciesFilter_EditPage_SetListPositionFromCoordinates();
+    PrintHelpBar(FILTER_PAGE_LIST_WINDOW_HELP_BAR);
+}
+
+static void SpeciesFilter_SetUpAlolaFilterPage(enum PokedexFilterList currentFilter)
 {
     SpeciesFilter_InitTypeWindows();
     u32 numRows = SpeciesFilter_EditPage_CalculateNumberRows();

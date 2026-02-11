@@ -1,4 +1,7 @@
-#define NUM_GROTTO_ROUTES 26
+#ifndef GUARD_HIDDENGROTTO_H
+#define GUARD_HIDDENGROTTO_H
+
+#include "constants/hidden_grotto.h"
 
 extern const u8 gText_LookIveFound[];
 extern const u8 gText_WowHiddenPath[];
@@ -20,3 +23,19 @@ extern const u8 gText_ConcealedEntranceDiscovered[];
 extern const u8 gText_WhatsThisCovertPathway[];
 extern const u8 gText_IntriguingHiddenTrail[];
 extern const u8 gText_HiddenGrottoMaterializes[];
+
+void HiddenGrotto_SetAllSecretFlags(void);
+void TrySetHiddenGrottoSecrets(void);
+void ResetSavedGrottoMon(void);
+
+struct HiddenGrottoData
+{
+  u16 routeMap; 
+  u16 grottoMap;
+  u16 flag;
+  u16 wildCardItem;
+  u16 species[GROTTO_POKEMON_COUNT];
+  u8 level[2];
+};
+
+#endif // GUARD_HIDDENGROTTO_H

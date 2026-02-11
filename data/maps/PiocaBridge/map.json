@@ -17,6 +17,11 @@
       "map": "MAP_PETAROSA_BOROUGH",
       "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_FORT_YOBU",
+      "offset": 29,
+      "direction": "right"
     }
   ],
   "object_events": [

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_setup.h"
 #include "bike.h"
+#include "hidden_grotto.h" //hiddenGrotto
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "debug.h"
@@ -27,6 +28,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h" // siliconMerge
+#include "phenomenon.h" // phenomenon
 #include "pokemon.h"
 #include "safari_zone.h"
 #include "script.h"
@@ -785,6 +787,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         return FALSE;
     }
 
+    TrySetHiddenGrottoSecrets(); // hiddenGrotto
     IncrementRematchStepCounter();
     Buzzr_IncrementSteps(); // siliconMerge
     UpdateFriendshipStepCounter();
@@ -861,6 +864,13 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext_SetupScript(EventScript_VsSeekerChargingDone);
             return TRUE;
         }
+        // Start phenomenon
+        if(CheckForPhenomenon() == TRUE)
+        {
+            ScriptContext_SetupScript(Phenomenon_StartEncounter);
+            return TRUE;
+        }
+        // End phenomenon
     }
 
     if (SafariZoneTakeStep() == TRUE)
