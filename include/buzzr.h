@@ -31,9 +31,9 @@ struct Tweet
 {
     u16 userId;  // src/data/buzzr/users
     const u8 *content; // src/data/buzzr/content
-    const void *tilesptr; // src/data/buzzr/picture
-    const void *tilemapptr;
-    const void *palptr;
+    const u32 *tiles; // src/data/buzzr/picture
+    const u16 *tilemap;
+    const u16 *pal;
     void *criteria; // src/buzzr_criteria
     u16 quest; // include/constants/quests
     bool32 isPrivate;
@@ -83,6 +83,7 @@ enum BuzzrBackgroundTemplates
     BG0_TEXT_CONTENT,
     BG1_BACKGROUND_TWEETS,
     BG2_BACKGROUND_UI,
+    BG_BUZZR_COUNT,
 };
 
 enum TweetBackgroundConstants

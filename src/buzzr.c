@@ -137,7 +137,7 @@ static void PrintMenuHeader(void);
 static const u8 *GetHelpBarText(void);
 static void PrintHelpBar(void);
 static const u32 *GetRelevantTiles(void);
-static const u32 *GetRelevantTilemap(void);
+static const u16 *GetRelevantTilemap(void);
 static const u16 *GetRelevantPalette(void);
 static void AllocTilemapBuffers(void);
 static void LoadBackground(void);
@@ -197,13 +197,9 @@ struct BuzzrLists
     u32 TweetBitmap[NUM_TWEET_BITS];
 };
 
-static EWRAM_DATA struct BuzzrState *sBuzzrState = NULL;
-static EWRAM_DATA struct BuzzrLists *sBuzzrLists = NULL;
-
-static EWRAM_DATA u8 *sBg0TilemapBuffer = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
-static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
-static const u32 TILEMAP_BUFFER_SIZE = (1024 * 2);
+static struct BuzzrState *sBuzzrState = NULL;
+static struct BuzzrLists *sBuzzrLists = NULL;
+static u8 *sBgTilemapBuffer[BG_BUZZR_COUNT] = {NULL};
 
 EWRAM_DATA u8 gTweetOverworldWindowId = 0;
 EWRAM_DATA u16 overworldTweet = TWEET_NONE;
@@ -275,7 +271,7 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
 static const u32 sZapBackgrounds[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.4bpp");
 
 static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/buzzr_background.4bpp.smol");
-static const u32 sLogomarkAllTilemap[] = INCBIN_U32("graphics/ui_menus/buzzr/buzzr_background.bin.smolTM");
+static const u16 sLogomarkAllTilemap[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr_background.bin.smolTM");
 
 static const u16 sLogomarkAllPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr.gbapal");
 
@@ -643,19 +639,22 @@ static void Buzzr_SetupCB(void)
 
 static bool32 AllocZeroTilemapBuffers(void)
 {
-    sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg2TilemapBuffer == NULL)
-        return FALSE;
+    for (u32 backgroundId = 0; backgroundId < BG_BUZZR_COUNT; backgroundId++)
+    {
+        sBgTilemapBuffer[backgroundId] = AllocZeroed(BG_SCREEN_SIZE);
 
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg1TilemapBuffer == NULL)
-        return FALSE;
+        if (sBgTilemapBuffer[backgroundId] == NULL)
+            return FALSE;
 
-    sBg0TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg0TilemapBuffer == NULL)
-        return FALSE;
-
+        memset(sBgTilemapBuffer[backgroundId],0,BG_SCREEN_SIZE);
+    }
     return TRUE;
+}
+
+static void SetScheduleBgs(u32 backgroundId)
+{
+    SetBgTilemapBuffer(backgroundId, sBgTilemapBuffer[backgroundId]);
+    ScheduleBgCopyTilemapToVram(backgroundId);
 }
 
 static void HandleAndShowBgs(void)
@@ -663,18 +662,14 @@ static void HandleAndShowBgs(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBuzzrBgTemplates, NELEMS(sBuzzrBgTemplates));
 
-    SetBgTilemapBuffer(BG0_TEXT_CONTENT,sBg0TilemapBuffer);
-    ScheduleBgCopyTilemapToVram(BG0_TEXT_CONTENT);
+    for (u32 backgroundId = 0; backgroundId < BG_BUZZR_COUNT; backgroundId++)
+    {
+        SetScheduleBgs(backgroundId);
+        ShowBg(backgroundId);
+    }
 
-    SetBgTilemapBuffer(BG1_BACKGROUND_TWEETS, sBg1TilemapBuffer);
-
-    SetBgTilemapBuffer(BG2_BACKGROUND_UI, sBg2TilemapBuffer);
-    ScheduleBgCopyTilemapToVram(BG2_BACKGROUND_UI);
-
-    ShowBg(BG0_TEXT_CONTENT);
     if(IsTimelinePictureMode())
         HideBg(BG1_BACKGROUND_TWEETS);
-    ShowBg(BG2_BACKGROUND_UI);
 }
 
 static bool8 Buzzr_InitBgs(void)
@@ -959,9 +954,10 @@ static void Buzzr_FreeResources(void)
 {
     TRY_FREE_AND_SET_NULL(sBuzzrState);
     TRY_FREE_AND_SET_NULL(sBuzzrLists);
-    TRY_FREE_AND_SET_NULL(sBg2TilemapBuffer);
-    TRY_FREE_AND_SET_NULL(sBg1TilemapBuffer);
-    TRY_FREE_AND_SET_NULL(sBg0TilemapBuffer);
+
+    for (u32 backgroundId = 0; backgroundId < BG_BUZZR_COUNT; backgroundId++)
+        TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
+
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
@@ -980,22 +976,20 @@ static void BufferToVram_Windows(void)
 static bool8 LoadGraphics(void)
 {
     const u32 *sTiles = GetRelevantTiles();
-    const u32 *sTilemap = GetRelevantTilemap();
+    const u16 *sTilemap = GetRelevantTilemap();
     const u16 *sPalette = GetRelevantPalette();
 
     switch (sBuzzrState->loadState)
     {
         case 0:
+            FreeTempTileDataBuffersIfPossible();
             ResetTempTileDataBuffers();
-            DecompressAndCopyTileDataToVram(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
             sBuzzrState->loadState++;
             break;
         case 1:
-            if (FreeTempTileDataBuffersIfPossible() != TRUE)
-            {
-                DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
-                sBuzzrState->loadState++;
-            }
+            CopyToBgTilemapBuffer(BG2_BACKGROUND_UI,sTilemap,0,0);
+            sBuzzrState->loadState++;
             break;
         case 2:
             LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
@@ -1033,7 +1027,7 @@ const u32* GetPictureTiles(u16 tweetId)
     if (tweetId >= sizeof(gTweets) / sizeof(gTweets[0]))
         return NULL;
 
-    return gTweets[tweetId].tilesptr;
+    return gTweets[tweetId].tiles;
 }
 
 static void UNUSED *GetCriteria(u16 tweetId)
@@ -1529,14 +1523,14 @@ static const u32 *GetRelevantTiles(void)
         return sLogomarkAllTiles;
 }
 
-static const u32 *GetRelevantTilemap(void)
+static const u16 *GetRelevantTilemap(void)
 {
     u32 tweetId = GetTweetIdFromPosition(GetCurrentPosition());
     if (Buzzr_IsCalledFromOverworld())
         tweetId = overworldTweet;
 
     if(IsTimelinePictureMode())
-        return gTweets[tweetId].tilemapptr;
+        return gTweets[tweetId].tilemap;
     else
         return sLogomarkAllTilemap;
 }
@@ -1548,29 +1542,19 @@ static const u16 *GetRelevantPalette(void)
         tweetId = overworldTweet;
 
     if(IsTimelinePictureMode())
-        return gTweets[tweetId].palptr;
+        return gTweets[tweetId].pal;
     else
         return sLogomarkAllPalette;
-}
-
-static void AllocTilemapBuffers(void)
-{
-    Free(sBg2TilemapBuffer);
-    Free(sBg1TilemapBuffer);
-    Free(sBg0TilemapBuffer);
-    sBg2TilemapBuffer = Alloc(TILEMAP_BUFFER_SIZE);
-    sBg1TilemapBuffer = Alloc(TILEMAP_BUFFER_SIZE);
-    sBg0TilemapBuffer = Alloc(TILEMAP_BUFFER_SIZE);
 }
 
 static void LoadBackground(void)
 {
     const u32 *sTiles = GetRelevantTiles();
-    const u32 *sTilemap = GetRelevantTilemap();
+    const u16 *sTilemap = GetRelevantTilemap();
     const u16 *sPalette = GetRelevantPalette();
 
-    DecompressAndLoadBgGfxUsingHeap(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
-    DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
+    //DecompressAndLoadBgGfxUsingHeap(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
+    //DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
     LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     ShowBg(BG2_BACKGROUND_UI);
 }
@@ -1578,7 +1562,7 @@ static void LoadBackground(void)
 static void ChangeBackground(void)
 {
     ResetAllBgsCoordinates();
-    AllocTilemapBuffers();
+    AllocZeroTilemapBuffers();
     HandleAndShowBgs();
     LoadBackground();
 }

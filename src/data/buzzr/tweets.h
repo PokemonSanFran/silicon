@@ -75,9 +75,10 @@ const struct Tweet gTweets[] =
         .quest = QUEST_VSDEOXYS,
         .dislikeCount = 24,
         .likeCount = 46,
-        .tilesptr = sSampleTiles,
-        .tilemapptr = sSampleTilemap,
-        .palptr = sSamplePalette,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
     },
     [TWEET_QUEST_NPC_TUNNELS] =
     {
@@ -489,9 +490,10 @@ const struct Tweet gTweets[] =
             "A long-lived Ninetales will have fur that\n"
             "shines like gold."
             ),
-        .tilesptr = sSampleTiles,
-        .tilemapptr = sSampleTilemap,
-        .palptr = sSamplePalette,
+        .tiles= (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = FALSE,
         .criteria = TweetCriteria_36,
         .quest = 0,
@@ -657,9 +659,10 @@ const struct Tweet gTweets[] =
             "insects that gather around streetlights,\n"
             "attracted by the light in the darkness."
             ),
-        .tilesptr = sRockTunnelMapPreviewTiles,
-        .tilemapptr = sRockTunnelMapPreviewTilemap,
-        .palptr = sRockTunnelMapPreviewPalette,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = FALSE,
         .criteria = TweetCriteria_47,
         .quest = 0,
@@ -930,9 +933,10 @@ const struct Tweet gTweets[] =
             "Because it is so dangerous, no one has\n"
             "ever removed the belt."
             ),
-        .tilesptr = sRocketHideoutMapPreviewTiles,
-        .tilemapptr = sRocketHideoutMapPreviewTilemap,
-        .palptr = sRocketHideoutMapPreviewPalette,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = FALSE,
         .criteria = TweetCriteria_65,
         .quest = 0,
@@ -1068,9 +1072,10 @@ const struct Tweet gTweets[] =
             "its hide and grows larger. The shed hide\n"
             "crumbles and returns to the soil."
             ),
-        .tilesptr = sPowerPlantMapPreviewTiles,
-        .tilemapptr = sPowerPlantMapPreviewTilemap,
-        .palptr = sPowerPlantMapPreviewPalette,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = TRUE,
         .criteria = TweetCriteria_74,
         .quest = 0,
@@ -1626,9 +1631,10 @@ const struct Tweet gTweets[] =
             "are eagerly devoured by even those people\n"
             "who have lost their appetite."
             ),
-        .tilesptr = sPokemonMansionMapPreviewTiles,
-        .tilemapptr = sPokemonMansionMapPreviewTilemap,
-        .palptr = sPokemonMansionMapPreviewPalette,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = FALSE,
         .criteria = TweetCriteria_111,
         .quest = 0,
@@ -1854,9 +1860,10 @@ const struct Tweet gTweets[] =
             "Tauros to battle, it will charge at thick\n"
             "trees and knock them down to calm itself."
             ),
-        .tilesptr = sPokemonTowerMapPreviewTiles,
-        .tilemapptr = sPokemonTowerMapPreviewTilemap,
-        .palptr = sPokemonTowerMapPreviewPalette,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = TRUE,
         .criteria = TweetCriteria_126,
         .quest = 0,
@@ -3071,9 +3078,10 @@ const struct Tweet gTweets[] =
             "in terror. The Snubbull does seem a\n"
             "little sad at making its foes flee."
             ),
-        .tilesptr = sSilphCoMapPreviewTiles,
-        .tilemapptr = sSilphCoMapPreviewTilemap,
-        .palptr = sPokemonTowerMapPreviewTilemap,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = FALSE,
         .criteria = TweetCriteria_207,
         .quest = 0,
@@ -3269,9 +3277,10 @@ const struct Tweet gTweets[] =
             "coral stalks become discolored and crumble\n"
             "away in tatters."
             ),
-        .tilesptr = sMtMoonMapPreviewTiles,
-        .tilemapptr = sMtMoonMapPreviewTilemap,
-        .palptr = sSilphCoMapPreviewTilemap,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = TRUE,
         .criteria = TweetCriteria_220,
         .quest = 0,
@@ -3737,9 +3746,10 @@ const struct Tweet gTweets[] =
             "give it astounding agility and jumping\n"
             "performance."
             ),
-        .tilesptr = sSeafoamIslandsMapPreviewTiles,
-        .tilemapptr = sSeafoamIslandsMapPreviewTilemap,
-        .palptr = sSeafoamIslandsMapPreviewPalette,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .isPrivate = FALSE,
         .criteria = TweetCriteria_251,
         .quest = 0,
@@ -3770,11 +3780,10 @@ const struct Tweet gTweets[] =
             "A Torchic dislikes darkness because it\n"
             "can't see its surroundings."
             ),
-        .tilesptr = sRocketWarehouseMapPreviewTiles,
-        .tilemapptr = sRocketWarehouseMapPreviewTilemap,
-        .palptr = sRocketWarehouseMapPreviewPalette,
-        .isPrivate = FALSE,
-        .criteria = TweetCriteria_253,
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tilemap.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/map_preview/rocket_warehouse/tiles.gbapal"),
+
         .quest = 0,
         .dislikeCount = 41,
         .likeCount = 26,
