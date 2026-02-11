@@ -5307,8 +5307,9 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Clefairy @ Eviolite
 Ability: Friend Guard
 Level: 54
+EVs: 252 HP/48 Def
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Bold Nature
-IVs: 0 Atk
 - Follow Me
 - Reflect
 - Light Screen
@@ -5317,6 +5318,8 @@ IVs: 0 Atk
 Greedent @ Sitrus Berry
 Ability: Cheek Pouch
 Level: 51
+EVs: 252 HP/48 Atk
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Adamant Nature
 - Body Press
 - Body Slam
@@ -5326,8 +5329,9 @@ Adamant Nature
 Arboliva @ Sitrus Berry
 Ability: Harvest
 Level: 49
+EVs: 48 HP/252 SpA
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Bold Nature
-IVs: 0 Atk
 - Giga Drain
 - Earth Power
 - Leech Seed
@@ -5336,6 +5340,8 @@ IVs: 0 Atk
 Pachirisu @ Sitrus Berry
 Ability: Pickup
 Level: 52
+EVs: 252 HP/48 Spe
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Jolly Nature
 - Wild Charge
 - Play Rough
@@ -5345,8 +5351,9 @@ Jolly Nature
 Polteageist @ Starf Berry
 Ability: Weak Armor
 Level: 49
+EVs: 152 SpA/148 Spe
 Modest Nature
-IVs: 0 Atk
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Teatime
 - Giga Drain
 - Shadow Ball
@@ -5360,18 +5367,20 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Tentacruel @ Black Sludge
 Ability: Clear Body
 Level: 50
+EVs: 48 HP/252 Spe
 Timid Nature
-IVs: 0 Atk
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Toxic Spikes
 - Venoshock
 - Hex
-- Scald
+- Ice Beam
 
 Mismagius @ Spell Tag
 Ability: Levitate
 Level: 51
+EVs: 48 SpA/252 Spe
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Timid Nature
-IVs: 0 Atk
 - Hex
 - Dazzling Gleam
 - Mean Look
@@ -5380,12 +5389,13 @@ IVs: 0 Atk
 Ariados @ Focus Sash
 Ability: Sniper
 Level: 52
+EVs: 48 HP/252 Atk
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Adamant Nature
 - Venoshock
 - Toxic Thread
 - Fell Stinger
 - Sucker Punch
-
 
 === TRAINER_0F5F82C3 ===
 Name: Blank
@@ -5395,6 +5405,8 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Toxicroak @ Payapa Berry
 Ability: Poison Touch
 Level: 51
+EVs: 252 Atk/48 Spe
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Jolly Nature
 - Fake Out
 - Sucker Punch
@@ -5409,6 +5421,9 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Dusknoir @ Weakness Policy
 Ability: Pressure
 Level: 50
+EVs: 252 HP/48 Def
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+Brave Nature
 - Future Sight
 - Shadow Sneak
 - Leech Life
@@ -5417,6 +5432,8 @@ Level: 50
 Gallade @ Expert Belt
 Ability: Justified
 Level: 50
+EVs: 48 Atk/252 Spe
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Adamant Nature
 - Future Sight
 - Drain Punch
@@ -5426,21 +5443,24 @@ Adamant Nature
 Gardevoir @ Fairy Feather
 Ability: Trace
 Level: 50
+EVs: 48 SpA/252 Spe
 Timid Nature
-IVs: 0 Atk
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Future Sight
 - Draining Kiss
 - Psychic
 - Mystical Fire
 
-Yanmega @ Leftovers
-Ability: Speed Boost
+Orbeetle @ Leftovers
+Ability: Swarm
 Level: 51
-Hasty Nature
+EVs: 252 SpA/48 Spe
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Future Sight
-- Leech Life
-- Detect
-- Air Slash
+- Bug Buzz
+- Infestation
+- Substitute
 
 === TRAINER_1075163A ===
 Name: Blank
@@ -5450,6 +5470,8 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Hydreigon @ Roseli Berry
 Ability: Levitate
 Level: 43
+EVs: 48 SpA/252 Spe
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Naive Nature
 - Belch
 - Acrobatics
@@ -5459,6 +5481,8 @@ Naive Nature
 Relicanth @ Salac Berry
 Ability: Sturdy
 Level: 46
+EVs: 252 Atk/48 Spe
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Adamant Nature
 - Flail
 - Rock Tomb
@@ -5468,12 +5492,13 @@ Adamant Nature
 Linoone @ Iapapa Berry
 Ability: Gluttony
 Level: 46
+EVs: 52 HP/248 Atk
 Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Belly Drum
 - Extreme Speed
 - Throat Chop
-- Counter
-
+- Thunder Wave
 
 === TRAINER_10751EAA ===
 Name: Blank
@@ -5483,8 +5508,9 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Weezing @ Payapa Berry
 Ability: Levitate
 Level: 46
+EVs: 252 HP/48 SpD
 Calm Nature
-IVs: 0 Atk
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Toxic Spikes
 - Sludge Bomb
 - Heat Wave
@@ -5493,17 +5519,20 @@ IVs: 0 Atk
 Pangoro @ Sitrus Berry
 Ability: Scrappy
 Level: 43
+EVs: 48 HP/252 Atk
 Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Substitute
 - Circle Throw
-- Knock Off
+- Darkest Lariat
 - Gunk Shot
 
 Magmortar @ Assault Vest
 Ability: Flame Body
 Level: 45
+EVs: 252 SpA/48 Spe
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Modest Nature
-IVs: 0 Atk
 - Lava Plume
 - Scorching Sands
 - Thunderbolt
@@ -5512,23 +5541,24 @@ IVs: 0 Atk
 Cramorant @ Focus Sash
 Ability: Gulp Missile
 Level: 46
+EVs: 48 HP/252 SpA
 Modest Nature
-IVs: 0 Atk
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Agility
 - Surf
 - Endeavor
-- Whirlwind
+- Whirlpool
 
 Skuntank @ Air Balloon
 Ability: Aftermath
 Level: 44
+EVs: 252 SpA/48 Spe
 Hasty Nature
-IVs: 0 Atk
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Hex
 - Venoshock
 - Nasty Plot
 - Toxic
-
 
 === TRAINER_10E3552B ===
 Name: Blank
@@ -5538,6 +5568,8 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Mienshao @ Focus Sash
 Ability: Regenerator
 Level: 45
+EVs: 48 Atk/252 Spe
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Jolly Nature
 - Fake Out
 - Drain Punch
@@ -5547,32 +5579,35 @@ Jolly Nature
 Slowbro @ Leftovers
 Ability: Regenerator
 Level: 45
+EVs: 252 HP/48 SpD
 Calm Nature
-IVs: 0 Atk
-- Teleport
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Scald
-- Reflect
+- Thunder Wave
 - Light Screen
+- Slack Off
 
 Togetic @ Eviolite
 Ability: Serene Grace
 Level: 48
+EVs: 252 HP/48 Def
 Bold Nature
-IVs: 0 Atk
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Draining Kiss
 - Ancient Power
 - Wish
 - Baton Pass
 
-Liepard @ Muscle Band
-Ability: Prankster
+Liepard @ Normal Gem
+Ability: Unburden
 Level: 46
+EVs: 48 Atk/252 Spe
 Jolly Nature
-- Parting Shot
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- U-turn
 - Fake Out
-- Sucker Punch
+- Dark Pulse
 - Play Rough
-
 
 === TRAINER_1114BC23 ===
 Name: Blank
@@ -5582,7 +5617,9 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Breloom @ Toxic Orb
 Ability: Poison Heal
 Level: 45
+EVs: 252 Atk/48 Spe
 Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Substitute
 - Drain Punch
 - Giga Drain
@@ -5591,16 +5628,20 @@ Jolly Nature
 Parasect @ Big Root
 Ability: Dry Skin
 Level: 47
-Adamant Nature
+EVs: 252 HP/24 Def/24 SpD
+Serious Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Leech Seed
 - Leech Life
-- Horn Leech
+- Giga Drain
 - Spore
 
 Ceruledge @ Leftovers
 Ability: Flash Fire
-Level: 45
+Level: 48
+EVs: 48 Atk/252 Spe
 Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Bitter Blade
 - Phantom Force
 - Will-O-Wisp
@@ -5609,13 +5650,13 @@ Adamant Nature
 Florges @ Babiri Berry
 Ability: Flower Veil
 Level: 46
+EVs: 252 HP/48 Def
 Bold Nature
-IVs: 0 Atk
+IVs: 14 HP / 0 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Moonblast
 - Stored Power
 - Calm Mind
 - Synthesis
-
 
 === TRAINER_114EB3AD ===
 Name: Blank
