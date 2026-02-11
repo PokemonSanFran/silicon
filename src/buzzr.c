@@ -175,6 +175,8 @@ static void Buzzr_PrintHeaderIcons(void);
 static void Task_Buzzr_StartQuestAnimation(u8 taskId);
 static enum QuestIdList Buzzr_ReturnUnstartedQuestFromTweet(u32 tweetId);
 static void Buzzr_TryStartQuestFromTweet(u32 tweetId, u8 taskId);
+static void CreateQuestSprite(void);
+static void SpriteCallback_QuestImage(struct Sprite *sprite);
 
 struct BuzzrState
 {
@@ -619,6 +621,7 @@ static void Buzzr_SetupCB(void)
             CreateUpArrowSprite();
             CreateCursorSprite();
             CreateDownArrowSprite();
+            CreateQuestSprite();
             gMain.state++;
             break;
         case 9:
@@ -1990,30 +1993,87 @@ static enum QuestIdList Buzzr_ReturnUnstartedQuestFromTweet(u32 tweetId)
 
 static void Task_Buzzr_StartQuestAnimation(u8 taskId)
 {
-    if (!JOY_NEW(JOY_EXCL_DPAD))
+    s16 *data = gTasks[taskId].data;
+
+    u32 spriteId = Buzzr_GetSpriteId(BUZZR_SPRITE_QUEST);
+    struct Sprite *sprite = &gSprites[spriteId];
+
+    if (JOY_NEW(JOY_EXCL_DPAD))
+    {
+        sprite->x = BUZZR_QUEST_SPRITE_INITAL_POSITION;
+        sprite->invisible = TRUE;
+        gTasks[taskId].func = Task_MainInput;
         return;
+    }
 
-    if (!FlagGet(FLAG_QUEST_FANFARE))
-        PlayQuestFanfare();
+    switch (data[0])
+    {
+        case BUZZR_QUEST_SPRITE_STATE_SLIDE_IN:
+            if (!FlagGet(FLAG_QUEST_FANFARE))
+                PlayQuestFanfare();
+            sprite->invisible = FALSE;
+            sprite->x += BUZZR_QUEST_SPRITE_MOVEMENT_SPEED;
 
-    gTasks[taskId].func = Task_MainInput;
+            if (sprite->x < 0)
+                return;
+
+            sprite->x = 0;
+            data[0] = BUZZR_QUEST_SPRITE_STATE_WAIT;
+            data[1] = 0;
+            break;
+        case BUZZR_QUEST_SPRITE_STATE_WAIT:
+            if (++data[1] < BUZZR_QUESTS_SPRITE_TIMER)
+                return;
+
+            data[0] = BUZZR_QUEST_SPRITE_STATE_SLIDE_OUT;
+            break;
+        case BUZZR_QUEST_SPRITE_STATE_SLIDE_OUT:
+            sprite->x -= BUZZR_QUEST_SPRITE_MOVEMENT_SPEED;
+
+            if (sprite->x > BUZZR_QUEST_SPRITE_INITAL_POSITION)
+                return;
+
+            sprite->x = BUZZR_QUEST_SPRITE_INITAL_POSITION;
+            sprite->invisible = TRUE;
+            gTasks[taskId].func = Task_MainInput;
+            break;
+    }
+}
+
+static void CreateQuestSprite(void)
+{
+    // PSF TODO once text sprite printing is working, print the words "New Task" onto this sprite
+    u32 SpriteTag = BUZZR_SPRITE_QUEST_TAG;
+    s32 x = BUZZR_QUEST_SPRITE_INITAL_POSITION, y = CalculateCursorHeight();
+
+    struct SpriteSheet sSpriteSheet_Quest =
+    {
+        (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/quest.4bpp"),
+        TILE_OFFSET_4BPP(32), SpriteTag,
+    };
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = SpriteTag;
+    TempSpriteTemplate.callback = SpriteCallback_QuestImage;
+
+    LoadSpriteSheet(&sSpriteSheet_Quest);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate,x,y, 0);
+    Buzzr_SetSpriteId(BUZZR_SPRITE_QUEST,spriteId);
+
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(64x32);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(64x32);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].invisible = TRUE;
+}
+
+static void SpriteCallback_QuestImage(struct Sprite *sprite)
+{
+    sprite->y = CalculateCursorHeight();
 }
 
 /*
 PSF TODO
 
 fix "view images" functionality on buzzr menu
-
 make sure overworld tweets look correct and view picture functionlaity works
-
-add the task to start a quest - stop player input, show the same ow slide in, force button press to make it go away, update helpbar to say "Continue {A}" when the task is active
 */
-    //PSF TODO When the sliding quest overworld message gets implemented, implement it to play here as well. If only one quest is activated, it should be "QUESTNAME is now active", but if there are multiple, it needs to print "3 quests are now active"
-    /*
-       questmenu QUEST_MENU_SET_ACTIVE, \quest
-       questmenu QUEST_MENU_BUFFER_QUEST_NAME \quest
-       bufferstring 1 gText_QuestActive
-       playfanfare MUS_LEVEL_UP
-       msgbox gText_QuestAnnounce, MSGBOX_SIGN
-       waitfanfare
-       */
