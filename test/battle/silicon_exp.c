@@ -187,7 +187,8 @@ static const struct SiliconExpTestData sTalaTrainers =
         TRAINER_0E19F1A8,
         TRAINER_0E42221A,
         TRAINER_0ED24EF1,
-        TRAINER_0F03CF8D
+        TRAINER_0F03CF8D,
+        TRAINER_NONE
     },
 };
 static const struct SiliconExpTestData sNeriene_GymTrainers =
@@ -204,6 +205,7 @@ static const struct SiliconExpTestData sNeriene_GymTrainers =
         TRAINER_10751EAA,
         TRAINER_10E3552B,
         TRAINER_1114BC23,
+        TRAINER_NONE
     },
 };
 /*
