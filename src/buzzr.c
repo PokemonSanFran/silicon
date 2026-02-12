@@ -24,7 +24,6 @@
 #include "buzzr.h"
 #include "buzzr_criteria.h"
 #include "data/buzzr/users.h"
-#include "data/buzzr/picture.h"
 #include "data/buzzr/tweets.h"
 #include "international_string_util.h"
 #include "gba/isagbprint.h"
@@ -267,7 +266,6 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .baseBlock = 1
 };
 
-
 static const u32 sZapBackgrounds[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.4bpp");
 
 static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/buzzr_background.4bpp.smol");
@@ -280,17 +278,6 @@ static const u8 sPrivate_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/private.4bpp
 static const u8 sMetrics_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/metrics_long.4bpp");
 static const u8 sUnread_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/unread.4bpp");
 static const u8 sPicture_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/picture.4bpp");
-
-const u32 sTweetBgTilemap3[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.bin.smolTM");
-const u32 sTweetBgTilemap4[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/1.bin.smolTM");
-const u32 sTweetBgTilemap5[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/2.bin.smolTM");
-const u32 sTweetBgTilemap6[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/3.bin.smolTM");
-const u32 sTweetBgTilemap7[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/4.bin.smolTM");
-const u32 sTweetBgTilemap8[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/5.bin.smolTM");
-
-const u16 sTweetBgPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/backgrounds/0.gbapal");
-
-const u32 sTweetBgTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.4bpp.smol");
 
 static const u32 BuzzrUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/buzzr/up_arrow.4bpp.smol");
 static const u32 BuzzrDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/down_arrow.4bpp.smol");
@@ -319,34 +306,6 @@ static const u8 BuzzrWindowFontColors[][3] =
 {
     [FONT_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
     [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
-};
-
-const struct TweetBackground sTweetBgs[TWEET_BG_COUNT] =
-{
-    [TWEET_BG_3_LINE] =
-    {
-        .tilemap = sTweetBgTilemap3,
-    },
-    [TWEET_BG_4_LINE] =
-    {
-        .tilemap = sTweetBgTilemap4,
-    },
-    [TWEET_BG_5_LINE] =
-    {
-        .tilemap = sTweetBgTilemap5,
-    },
-    [TWEET_BG_6_LINE] =
-    {
-        .tilemap = sTweetBgTilemap6,
-    },
-    [TWEET_BG_7_LINE] =
-    {
-        .tilemap = sTweetBgTilemap7,
-    },
-    [TWEET_BG_8_LINE] =
-    {
-        .tilemap = sTweetBgTilemap8,
-    },
 };
 
 void CB2_BuzzrFromStartMenu(void)
