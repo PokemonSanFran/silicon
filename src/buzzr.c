@@ -2001,9 +2001,3 @@ static void SpriteCallback_QuestImage(struct Sprite *sprite)
 {
     sprite->y = CalculateCursorHeight();
 }
-
-/*
-PSF TODO
-
-fix "view images" functionality on buzzr menu
-*/
