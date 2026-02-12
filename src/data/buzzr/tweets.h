@@ -75,10 +75,9 @@ const struct Tweet gTweets[] =
         .quest = QUEST_VSDEOXYS,
         .dislikeCount = 24,
         .likeCount = 46,
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/3.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.gbapal"),
     },
     [TWEET_QUEST_NPC_TUNNELS] =
     {
@@ -490,10 +489,9 @@ const struct Tweet gTweets[] =
             "A long-lived Ninetales will have fur that\n"
             "shines like gold."
             ),
-        .tiles= (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/4.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/4.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/4.gbapal"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_36,
         .quest = 0,
@@ -662,7 +660,6 @@ const struct Tweet gTweets[] =
         .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
         .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
         .isPrivate = FALSE,
         .criteria = TweetCriteria_47,
         .quest = 0,
@@ -936,7 +933,6 @@ const struct Tweet gTweets[] =
         .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
         .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
         .isPrivate = FALSE,
         .criteria = TweetCriteria_65,
         .quest = 0,
@@ -1072,10 +1068,9 @@ const struct Tweet gTweets[] =
             "its hide and grows larger. The shed hide\n"
             "crumbles and returns to the soil."
             ),
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/2.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/2.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/2.gbapal"),
         .isPrivate = TRUE,
         .criteria = TweetCriteria_74,
         .quest = 0,
@@ -1631,10 +1626,9 @@ const struct Tweet gTweets[] =
             "are eagerly devoured by even those people\n"
             "who have lost their appetite."
             ),
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/3.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.gbapal"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_111,
         .quest = 0,
@@ -1860,10 +1854,9 @@ const struct Tweet gTweets[] =
             "Tauros to battle, it will charge at thick\n"
             "trees and knock them down to calm itself."
             ),
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/4.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/4.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/4.gbapal"),
         .isPrivate = TRUE,
         .criteria = TweetCriteria_126,
         .quest = 0,
@@ -3078,10 +3071,9 @@ const struct Tweet gTweets[] =
             "in terror. The Snubbull does seem a\n"
             "little sad at making its foes flee."
             ),
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/5.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/5.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/5.gbapal"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_207,
         .quest = 0,
@@ -3277,10 +3269,9 @@ const struct Tweet gTweets[] =
             "coral stalks become discolored and crumble\n"
             "away in tatters."
             ),
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/6.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/6.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/6.gbapal"),
         .isPrivate = TRUE,
         .criteria = TweetCriteria_220,
         .quest = 0,
@@ -3749,7 +3740,6 @@ const struct Tweet gTweets[] =
         .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
         .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
         .isPrivate = FALSE,
         .criteria = TweetCriteria_251,
         .quest = 0,
@@ -3780,10 +3770,9 @@ const struct Tweet gTweets[] =
             "A Torchic dislikes darkness because it\n"
             "can't see its surroundings."
             ),
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/1.4bpp.smol"),
-        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/1.gbapal"),
-
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/2.4bpp.smol"),
+        .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/2.bin.smolTM"),
+        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/2.gbapal"),
         .quest = 0,
         .dislikeCount = 41,
         .likeCount = 26,

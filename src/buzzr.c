@@ -138,7 +138,6 @@ static void PrintHelpBar(void);
 static const u32 *GetRelevantTiles(void);
 static const u16 *GetRelevantTilemap(void);
 static const u16 *GetRelevantPalette(void);
-static void AllocTilemapBuffers(void);
 static void LoadBackground(void);
 static void ChangeBackground(void);
 static void ToggleSort(void);
@@ -216,8 +215,6 @@ static const struct BgTemplate sBuzzrBgTemplates[] =
     },
     {
         .bg = BG1_BACKGROUND_TWEETS,
-        //.charBaseIndex = 0,
-        //.mapBaseIndex = 29,
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .priority = 1,
@@ -626,9 +623,6 @@ static void HandleAndShowBgs(void)
         SetScheduleBgs(backgroundId);
         ShowBg(backgroundId);
     }
-
-    if(IsTimelinePictureMode())
-        HideBg(BG1_BACKGROUND_TWEETS);
 }
 
 static bool8 Buzzr_InitBgs(void)
@@ -1512,16 +1506,15 @@ static void LoadBackground(void)
     const u16 *sTilemap = GetRelevantTilemap();
     const u16 *sPalette = GetRelevantPalette();
 
-    //DecompressAndLoadBgGfxUsingHeap(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
-    //DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
-    LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    ShowBg(BG2_BACKGROUND_UI);
+    DecompressAndLoadBgGfxUsingHeap(BG1_BACKGROUND_TWEETS, sTiles, 0, 0, 0);
+    DecompressDataWithHeaderWram((void*)sTilemap,sBgTilemapBuffer[BG1_BACKGROUND_TWEETS]);
+    LoadPalette(sPalette, BG_PLTT_ID(QUEST_OVERWORLD_PALETTE_INTERFACE_ID), PLTT_SIZE_4BPP);
 }
 
 static void ChangeBackground(void)
 {
     ResetAllBgsCoordinates();
-    AllocZeroTilemapBuffers();
+    //AllocZeroTilemapBuffers();
     HandleAndShowBgs();
     LoadBackground();
 }
