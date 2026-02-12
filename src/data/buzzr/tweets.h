@@ -14,15 +14,8 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_RABIES] =
     {
-        // PSF TODO Replace Glameow and Glavez Hill with string variables
         .userId = BUZZR_USER_FERNANDA,
-        .content = COMPOUND_STRING(
-            "My cousin told me there's a mass rabies\n"
-            "spread of the disease. He heard the ASPCA's\n"
-            "gonna hook up people who can subdue or\n"
-            "capture Glameow to reduce their impact on\n"
-            "the local community. I'll be doing my part!"
-            ),
+        .content = COMPOUND_STRING("My cousin caught rabies in {STR_VAR_2}! Feral {STR_VAR_1} are attacking pets and people like crazy. Apparently the RSPCP's finally gonna do something about it and hook up people who can subdue or capture {STR_VAR_1} to chill things out over there. I'll be doing my part! &formycuz"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Rabies,
         .quest = QUEST_RABIESOUTBREAK,
@@ -45,14 +38,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_SMOOTHIE] =
     {
         .userId = BUZZR_USER_HARRIBAT,
-        .content = COMPOUND_STRING(
-            "Calling all Trainers! We're a new ice cream\n"
-            "shop in Chasilla, and we've got the perfect\n"
-            "smoothie to clean out your Pokémon and\n"
-            "make them easier to train. Bring 3 Pecha\n"
-            "Berry, 2 Nanab Berry, and a Rabuta Berry,\n"
-            "and we'll make the first one for free!"
-            ),
+        .content = COMPOUND_STRING("Calling all Trainers! We're a new ice cream shop in {STR_VAR_1}, and we've got the perfect smoothie to clean out your Pokémon and make them easier to train. Bring {STR_VAR_2} and we'll make the first one for free!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Ice,
         .quest = QUEST_SMOOTHIECRAFTING,
@@ -329,17 +315,12 @@ const struct Tweet gTweets[] =
         .dislikeCount = 17,
         .likeCount = 14,
     },
-    [24] =
+    [TWEET_QUEST_NPC_RABIES_COMPLETE] =
     {
-        .userId = BUZZR_USER_CANDYCE,
-        .content = COMPOUND_STRING(
-            "If it stores too much electricity, its\n"
-            "behavior turns aggressive. To avoid this,\n"
-            "it occasionally discharges excess energy\n"
-            "and calms itself down."
-            ),
+        .userId = BUZZR_USER_RSPCP,
+        .content = COMPOUND_STRING("There is no rabies outbreak within the Resido region at this time. There is an increase of Pokémon infected with Pokérus at {STR_VAR_2}, but since humans are not impacted by Pokérus, this is not a public health concern at this time."),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_24,
+        .criteria = TweetCriteria_IsRabiesComplete,
         .quest = 0,
         .dislikeCount = 10,
         .likeCount = 18,
@@ -2689,7 +2670,7 @@ const struct Tweet gTweets[] =
     },
     [182] =
     {
-        .userId = BUZZR_USER_CANDYCE,
+        .userId = BUZZR_USER_YING,
         .content = COMPOUND_STRING(
             "It lives in water virtually all day long.\n"
             "Its body color and pattern act as\n"

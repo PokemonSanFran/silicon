@@ -34,7 +34,7 @@
 #include "region_map.h"
 #include "battle_main.h"
 #include "quest_strings.h"
-#include "constants/quest_logic.h"
+#include "quest_logic.h"
 #include "battle_util.h"
 #include "pokemon.h"
 #include "field_specials.h"
@@ -1403,7 +1403,8 @@ void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void)
 // ***********************************************************************
 // Quest: Ice Cream Crafting
 // ***********************************************************************
-bool8 Quest_SmoothieCrafting_CheckNeededItems(void){
+bool8 Quest_SmoothieCrafting_CheckNeededItems(void)
+{
     bool8 hasPecha = CheckBagHasItem(ITEM_PECHA_BERRY,3);
     bool8 hasNanab = CheckBagHasItem(ITEM_NANAB_BERRY,2);
     bool8 hasRabuta = CheckBagHasItem(ITEM_RABUTA_BERRY,1);

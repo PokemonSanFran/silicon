@@ -23,7 +23,7 @@ void PrintHeaderIcons(u8 windowId, const u8 *iconId, u16 x, u16 y);
 
 struct Users // src/data/buzzr/users
 {
-    u8 username[USER_MAX_LENGTH];
+    const u8 *username;
     bool32 isVerified;
 };
 

@@ -2,1662 +2,1662 @@ const struct Users gBuzzrUsers[] =
 {
     [BUZZR_USER_PLAYER] =
     {
-        .username = _("{PLAYER}"),
+        .username = COMPOUND_STRING("{PLAYER}"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BAIYA] =
     {
-        .username = _("ResidoReal"),
+        .username = COMPOUND_STRING("ResidoReal"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ADAORA] =
     {
-        .username = _("TideAdaora"),
+        .username = COMPOUND_STRING("TideAdaora"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CHARLOTTE] =
     {
-        .username = _("Rank14Life"),
+        .username = COMPOUND_STRING("Rank14Life"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_FRANK] =
     {
-        .username = _("FrankEliteFour"),
+        .username = COMPOUND_STRING("FrankEliteFour"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_OLIVER] =
     {
-        .username =_("Oliver72w12h"),
+        .username = COMPOUND_STRING("Oliver72w12h"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JEANIE] =
     {
-        .username = _("Slangwhanger"),
+        .username = COMPOUND_STRING("Slangwhanger"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_HARRIBAT] =
     {
-        .username = _("Flummery"),
+        .username = COMPOUND_STRING("Flummery"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_WAYNE] =
     {
-        .username = _("Interrobang"),
+        .username = COMPOUND_STRING("Interrobang"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LINN] =
     {
-        .username = _("Halfwit"),
+        .username = COMPOUND_STRING("Halfwit"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_VAUGHN] =
     {
-        .username = _("Haberdashery"),
+        .username = COMPOUND_STRING("Haberdashery"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_FIDEL] =
     {
-        .username = _("Rendezvous"),
+        .username = COMPOUND_STRING("Rendezvous"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LAUREEN] =
     {
-        .username = _("Corybantic"),
+        .username = COMPOUND_STRING("Corybantic"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BELEN] =
     {
-        .username = _("SheAte"),
+        .username = COMPOUND_STRING("SheAte"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SHINZO] =
     {
-        .username = _("SinnohShinzo"),
+        .username = COMPOUND_STRING("SinnohShinzo"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_RAMESH] =
     {
-        .username = _("Ramesh"),
+        .username = COMPOUND_STRING("Ramesh"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_EMRYS] =
     {
-        .username = _("PerlaciaCollector"),
+        .username = COMPOUND_STRING("PerlaciaCollector"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_PUA] =
     {
-        .username = _("PapaPua"),
+        .username = COMPOUND_STRING("PapaPua"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NERIENE] =
     {
-        .username = _("NoRetreatNeriene"),
+        .username = COMPOUND_STRING("NoRetreatNeriene"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TALA] =
     {
-        .username =_("WindRiderTala"),
+        .username = COMPOUND_STRING("WindRiderTala"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MAGNUS] =
     {
-        .username =_("DJMagnus"),
+        .username = COMPOUND_STRING("DJMagnus"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DIMU] =
     {
-        .username = _("SolarpunkSoldier"),
+        .username = COMPOUND_STRING("SolarpunkSoldier"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BD] =
     {
-        .username = _("BodydropDecibel"),
+        .username = COMPOUND_STRING("BodydropDecibel"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VIGRIM] =
     {
-        .username = _("The Tide"),
+        .username = COMPOUND_STRING("The Tide"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_AMI] =
     {
-        .username = _("ami_argento"),
+        .username = COMPOUND_STRING("ami_argento"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GRUNT] =
     {
-        .username = _("G.R.U.N.T."),
+        .username = COMPOUND_STRING("G.R.U.N.T."),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TIDE_EVENT_BOT] =
     {
-        .username = _("The Tide Events"),
+        .username = COMPOUND_STRING("The Tide Events"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SHARPRISECAPTIAL] =
     {
-        .username = _("SharpRise Capital"),
+        .username = COMPOUND_STRING("SharpRise Capital"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DOYLE] =
     {
-        .username = _("Doyle"),
+        .username = COMPOUND_STRING("Doyle"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_IMELDA] =
     {
-        .username = _("Imelda"),
+        .username = COMPOUND_STRING("Imelda"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ELEANOR] =
     {
-        .username = _("EleanorEliteFour"),
+        .username = COMPOUND_STRING("EleanorEliteFour"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KEI_YING] =
     {
-        .username = _("BlameItOnFather"),
+        .username = COMPOUND_STRING("BlameItOnFather"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_FERNANDA] =
     {
-        .username = _("TirinPrimp"),
+        .username = COMPOUND_STRING("TirinPrimp"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DONALD] =
     {
-        .username = _("Sinuate"),
+        .username = COMPOUND_STRING("Sinuate"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BORIS] =
     {
-        .username = _("Idiography"),
+        .username = COMPOUND_STRING("Idiography"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_GIGI] =
     {
-        .username = _("Podunk"),
+        .username = COMPOUND_STRING("Podunk"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JUNKO] =
     {
-        .username = _("Squeegee"),
+        .username = COMPOUND_STRING("Squeegee"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_HARRIETT] =
     {
-        .username = _("Blabbermouth"),
+        .username = COMPOUND_STRING("Blabbermouth"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BELINDA] =
     {
-        .username = _("Calliope"),
+        .username = COMPOUND_STRING("Calliope"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LAKIA] =
     {
-        .username = _("Machinations"),
+        .username = COMPOUND_STRING("Machinations"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LONNA] =
     {
-        .username = _("Highfalutin"),
+        .username = COMPOUND_STRING("Highfalutin"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LESLEE] =
     {
-        .username = _("Pugnacious"),
+        .username = COMPOUND_STRING("Pugnacious"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CHRISTIE] =
     {
-        .username = _("Bumpkin"),
+        .username = COMPOUND_STRING("Bumpkin"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JACELYN] =
     {
-        .username = _("Victuals"),
+        .username = COMPOUND_STRING("Victuals"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_HANH] =
     {
-        .username = _("Thespian"),
+        .username = COMPOUND_STRING("Thespian"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GARRY] =
     {
-        .username = _("ChesterJanky"),
+        .username = COMPOUND_STRING("ChesterJanky"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_GERDA] =
     {
-        .username = _("Flummery"),
+        .username = COMPOUND_STRING("Flummery"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_AUSTIN] =
     {
-        .username = _("J0ltmau5Aloof"),
+        .username = COMPOUND_STRING("J0ltmau5Aloof"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_WILFRED] =
     {
-        .username = _("Umbracious"),
+        .username = COMPOUND_STRING("Umbracious"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LAYLA] =
     {
-        .username = _("IndianQuean"),
+        .username = COMPOUND_STRING("IndianQuean"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BEN] =
     {
-        .username = _("Waddle"),
+        .username = COMPOUND_STRING("Waddle"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KARL] =
     {
-        .username = _("Abracadabra"),
+        .username = COMPOUND_STRING("Abracadabra"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ARDELL] =
     {
-        .username = _("Pogonip"),
+        .username = COMPOUND_STRING("Pogonip"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_OLIVA] =
     {
-        .username = _("Velutinous"),
+        .username = COMPOUND_STRING("Velutinous"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ROOSEVELT] =
     {
-        .username = _("Paradiddle"),
+        .username = COMPOUND_STRING("Paradiddle"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SHANEKA] =
     {
-        .username = _("Snicket"),
+        .username = COMPOUND_STRING("Snicket"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LYNDIA] =
     {
-        .username = _("Champu"),
+        .username = COMPOUND_STRING("Champu"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JOVAN] =
     {
-        .username = _("Metaplasm"),
+        .username = COMPOUND_STRING("Metaplasm"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LUCINDA] =
     {
-        .username = _("Narcissist"),
+        .username = COMPOUND_STRING("Narcissist"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_YING] =
     {
-        .username = _("Webinar"),
+        .username = COMPOUND_STRING("Webinar"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CASSEY] =
     {
-        .username = _("Ascertain"),
+        .username = COMPOUND_STRING("Ascertain"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LOUETTA] =
     {
-        .username = _("Swizzlestick"),
+        .username = COMPOUND_STRING("Swizzlestick"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_IDELLA] =
     {
-        .username = _("Glitch"),
+        .username = COMPOUND_STRING("Glitch"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LAURETTE] =
     {
-        .username = _("Spicate"),
+        .username = COMPOUND_STRING("Spicate"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LEONARD] =
     {
-        .username = _("Brontomancy"),
+        .username = COMPOUND_STRING("Brontomancy"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ROSIA] =
     {
-        .username = _("Charpie"),
+        .username = COMPOUND_STRING("Charpie"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ALDA] =
     {
-        .username = _("Mastoid"),
+        .username = COMPOUND_STRING("Mastoid"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_EDGARDO] =
     {
-        .username = _("Gonzo"),
+        .username = COMPOUND_STRING("Gonzo"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SHELA] =
     {
-        .username = _("Xiphoid"),
+        .username = COMPOUND_STRING("Xiphoid"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ABE] =
     {
-        .username = _("Suidian"),
+        .username = COMPOUND_STRING("Suidian"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BRENDA] =
     {
-        .username = _("Hangdog"),
+        .username = COMPOUND_STRING("Hangdog"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JERRY] =
     {
-        .username = _("Diphyletic"),
+        .username = COMPOUND_STRING("Diphyletic"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DOLLIE] =
     {
-        .username = _("Flummox"),
+        .username = COMPOUND_STRING("Flummox"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_THI] =
     {
-        .username = _("Stiletto"),
+        .username = COMPOUND_STRING("Stiletto"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ELLAN] =
     {
-        .username = _("Scotograph"),
+        .username = COMPOUND_STRING("Scotograph"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_TONITA] =
     {
-        .username = _("Archipelago"),
+        .username = COMPOUND_STRING("Archipelago"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_EVAN] =
     {
-        .username = _("Acaricide"),
+        .username = COMPOUND_STRING("Acaricide"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_AARON] =
     {
-        .username = _("HackfilChimp"),
+        .username = COMPOUND_STRING("HackfilChimp"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ALAN] =
     {
-        .username = _("IndianSnool"),
+        .username = COMPOUND_STRING("IndianSnool"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_RODNEY] =
     {
-        .username = _("TorterAmok"),
+        .username = COMPOUND_STRING("TorterAmok"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_FREEDA] =
     {
-        .username = _("Sinophile"),
+        .username = COMPOUND_STRING("Sinophile"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MAPLE] =
     {
-        .username = _("Ullagesix3"),
+        .username = COMPOUND_STRING("Ullagesix3"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ROLF] =
     {
-        .username = _("Nerienewalla"),
+        .username = COMPOUND_STRING("Nerienewalla"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ROZELLA] =
     {
-        .username = _("Lollygag"),
+        .username = COMPOUND_STRING("Lollygag"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ORLANDO] =
     {
-        .username = _("Fasciawolf8000"),
+        .username = COMPOUND_STRING("Fasciawolf8000"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_RODERICK] =
     {
-        .username = _("Bugaboo"),
+        .username = COMPOUND_STRING("Bugaboo"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_HILDRED] =
     {
-        .username = _("Skylord_cruzAuk"),
+        .username = COMPOUND_STRING("Skylord_cruzAuk"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ALISE] =
     {
-        .username = _("Chockablock"),
+        .username = COMPOUND_STRING("Chockablock"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_RAYLENE] =
     {
-        .username = _("Theodidact"),
+        .username = COMPOUND_STRING("Theodidact"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ELOISA] =
     {
-        .username = _("Kibosh"),
+        .username = COMPOUND_STRING("Kibosh"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_SHANE] =
     {
-        .username = _("Hunkydory"),
+        .username = COMPOUND_STRING("Hunkydory"),
         .isVerified = TRUE,
     },
-    [BUZZR_USER_CANDYCE] =
+    [BUZZR_USER_RSPCP] =
     {
-        .username = _("Curiology"),
-        .isVerified = FALSE,
+        .username = COMPOUND_STRING("RSPCP"),
+        .isVerified = TRUE,
     },
     [BUZZR_USER_CLASSIE] =
     {
-        .username = _("Quaeritur"),
+        .username = COMPOUND_STRING("Quaeritur"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MALIKA] =
     {
-        .username = _("Zygosis"),
+        .username = COMPOUND_STRING("Zygosis"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_IVORY] =
     {
-        .username = _("Cantative"),
+        .username = COMPOUND_STRING("Cantative"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GAVIN] =
     {
-        .username = _("Ulotrichous"),
+        .username = COMPOUND_STRING("Ulotrichous"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GEORGIANNA] =
     {
-        .username = _("Intergrade"),
+        .username = COMPOUND_STRING("Intergrade"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SHENA] =
     {
-        .username = _("Appaloosa"),
+        .username = COMPOUND_STRING("Appaloosa"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CLEMENT] =
     {
-        .username = _("Optophobia"),
+        .username = COMPOUND_STRING("Optophobia"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JENIFER] =
     {
-        .username = _("Halecret"),
+        .username = COMPOUND_STRING("Halecret"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_AHMAD] =
     {
-        .username = _("Doublette"),
+        .username = COMPOUND_STRING("Doublette"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LEDA] =
     {
-        .username = _("Quartern"),
+        .username = COMPOUND_STRING("Quartern"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ROB] =
     {
-        .username = _("Filatory"),
+        .username = COMPOUND_STRING("Filatory"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MARILYNN] =
     {
-        .username = _("BizdudRuckus"),
+        .username = COMPOUND_STRING("BizdudRuckus"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_TABETHA] =
     {
-        .username = _("Hippodamist"),
+        .username = COMPOUND_STRING("Hippodamist"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_AILENE] =
     {
-        .username = _("Goombah"),
+        .username = COMPOUND_STRING("Goombah"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ELYSE] =
     {
-        .username = _("Sudorous"),
+        .username = COMPOUND_STRING("Sudorous"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MAMMIE] =
     {
-        .username = _("Bungalow"),
+        .username = COMPOUND_STRING("Bungalow"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GERTRUDIS] =
     {
-        .username = _("Viniculture"),
+        .username = COMPOUND_STRING("Viniculture"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LOWELL] =
     {
-        .username = _("DerpybudLoofah"),
+        .username = COMPOUND_STRING("DerpybudLoofah"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TAKAKO] =
     {
-        .username = _("Uxorious"),
+        .username = COMPOUND_STRING("Uxorious"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LILY] =
     {
-        .username = _("Perspicacity"),
+        .username = COMPOUND_STRING("Perspicacity"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VIRGIL] =
     {
-        .username = _("Muffuletta"),
+        .username = COMPOUND_STRING("Muffuletta"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DEIDRA] =
     {
-        .username = _("Bromopnea"),
+        .username = COMPOUND_STRING("Bromopnea"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_KATHERN] =
     {
-        .username = _("Boogle"),
+        .username = COMPOUND_STRING("Boogle"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DORETHA] =
     {
-        .username = _("Skullet"),
+        .username = COMPOUND_STRING("Skullet"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ELSIE] =
     {
-        .username = _("Rindfleis"),
+        .username = COMPOUND_STRING("Rindfleis"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_FLORENTINO] =
     {
-        .username = _("Falanouc"),
+        .username = COMPOUND_STRING("Falanouc"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KIMBERLY] =
     {
-        .username = _("Hebdomadally"),
+        .username = COMPOUND_STRING("Hebdomadally"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_OTTO] =
     {
-        .username = _("Guttersnipe"),
+        .username = COMPOUND_STRING("Guttersnipe"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LASHAUN] =
     {
-        .username = _("Sashay"),
+        .username = COMPOUND_STRING("Sashay"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JUSTIN] =
     {
-        .username = _("Formication"),
+        .username = COMPOUND_STRING("Formication"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CEDRICK] =
     {
-        .username = _("Bagging"),
+        .username = COMPOUND_STRING("Bagging"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JEROMY] =
     {
-        .username = _("Lithodomous"),
+        .username = COMPOUND_STRING("Lithodomous"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ISABELLE] =
     {
-        .username = _("Usurp"),
+        .username = COMPOUND_STRING("Usurp"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NICOLASA] =
     {
-        .username = _("Sussultatory"),
+        .username = COMPOUND_STRING("Sussultatory"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MARY] =
     {
-        .username = _("Varvelraub"),
+        .username = COMPOUND_STRING("Varvelraub"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JEANNA] =
     {
-        .username = _("Polyacoustic"),
+        .username = COMPOUND_STRING("Polyacoustic"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NELLE] =
     {
-        .username = _("Arguria"),
+        .username = COMPOUND_STRING("Arguria"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KRISTAN] =
     {
-        .username = _("Bombastic"),
+        .username = COMPOUND_STRING("Bombastic"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_FREDDY] =
     {
-        .username = _("Xystarch"),
+        .username = COMPOUND_STRING("Xystarch"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GARY] =
     {
-        .username = _("Pyrrhonism"),
+        .username = COMPOUND_STRING("Pyrrhonism"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NERY] =
     {
-        .username = _("RadiojSnarky"),
+        .username = COMPOUND_STRING("RadiojSnarky"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MATT] =
     {
-        .username = _("Phytography"),
+        .username = COMPOUND_STRING("Phytography"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_REGENIA] =
     {
-        .username = _("Paysage"),
+        .username = COMPOUND_STRING("Paysage"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MARIO] =
     {
-        .username = _("Burdetprinklz6"),
+        .username = COMPOUND_STRING("Burdetprinklz6"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SHONNA] =
     {
-        .username = _("Iatrophobia"),
+        .username = COMPOUND_STRING("Iatrophobia"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_REGINE] =
     {
-        .username = _("Cavaquinho"),
+        .username = COMPOUND_STRING("Cavaquinho"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MARINE] =
     {
-        .username = _("Catamaran"),
+        .username = COMPOUND_STRING("Catamaran"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ANTONE] =
     {
-        .username = _("K20xcloudBedlam"),
+        .username = COMPOUND_STRING("K20xcloudBedlam"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LAURINDA] =
     {
-        .username = _("MrweirdYaffle"),
+        .username = COMPOUND_STRING("MrweirdYaffle"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VAN] =
     {
-        .username = _("Calciform"),
+        .username = COMPOUND_STRING("Calciform"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GEORGEANNA] =
     {
-        .username = _("Cowabunga"),
+        .username = COMPOUND_STRING("Cowabunga"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DEVONA] =
     {
-        .username = _("Humbug"),
+        .username = COMPOUND_STRING("Humbug"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ROBBIE] =
     {
-        .username = _("Bumblebee"),
+        .username = COMPOUND_STRING("Bumblebee"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JACQUILINE] =
     {
-        .username = _("Anocathartic"),
+        .username = COMPOUND_STRING("Anocathartic"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_WILLARD] =
     {
-        .username = _("Tommyrot"),
+        .username = COMPOUND_STRING("Tommyrot"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_PAM] =
     {
-        .username = _("Synergism"),
+        .username = COMPOUND_STRING("Synergism"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_TOD] =
     {
-        .username = _("Jumbofangxx"),
+        .username = COMPOUND_STRING("Jumbofangxx"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JON] =
     {
-        .username = _("Compaternity"),
+        .username = COMPOUND_STRING("Compaternity"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_COLLENE] =
     {
-        .username = _("Cribration"),
+        .username = COMPOUND_STRING("Cribration"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LITA] =
     {
-        .username = _("Flyaway"),
+        .username = COMPOUND_STRING("Flyaway"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CHARMAIN] =
     {
-        .username = _("Glockenspiel"),
+        .username = COMPOUND_STRING("Glockenspiel"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_FREDERICKA] =
     {
-        .username = _("Ambience"),
+        .username = COMPOUND_STRING("Ambience"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NOELLA] =
     {
-        .username = _("Isochor"),
+        .username = COMPOUND_STRING("Isochor"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_HILDEGARDE] =
     {
-        .username = _("Embrasure"),
+        .username = COMPOUND_STRING("Embrasure"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ELLSWORTH] =
     {
-        .username = _("Passivate"),
+        .username = COMPOUND_STRING("Passivate"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LAUREL] =
     {
-        .username = _("Optophobia"),
+        .username = COMPOUND_STRING("Optophobia"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CONNIE] =
     {
-        .username = _("Sousaphone"),
+        .username = COMPOUND_STRING("Sousaphone"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ALONZO] =
     {
-        .username = _("Sycomancy"),
+        .username = COMPOUND_STRING("Sycomancy"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_FRANCENE] =
     {
-        .username = _("HelwigSard"),
+        .username = COMPOUND_STRING("HelwigSard"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TYISHA] =
     {
-        .username = _("Undecennial"),
+        .username = COMPOUND_STRING("Undecennial"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MARYBETH] =
     {
-        .username = _("Britches"),
+        .username = COMPOUND_STRING("Britches"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SHARDA] =
     {
-        .username = _("Thrombus"),
+        .username = COMPOUND_STRING("Thrombus"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_TERENCE] =
     {
-        .username = _("Cheliform"),
+        .username = COMPOUND_STRING("Cheliform"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JAROD] =
     {
-        .username = _("Rhipidate"),
+        .username = COMPOUND_STRING("Rhipidate"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KRISTEL] =
     {
-        .username = _("Cockatoo"),
+        .username = COMPOUND_STRING("Cockatoo"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GENOVEVA] =
     {
-        .username = _("Phalacrosis"),
+        .username = COMPOUND_STRING("Phalacrosis"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_FRANCIS] =
     {
-        .username = _("Squooshy"),
+        .username = COMPOUND_STRING("Squooshy"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LALA] =
     {
-        .username = _("Fandango"),
+        .username = COMPOUND_STRING("Fandango"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_WENONA] =
     {
-        .username = _("Bumblebee"),
+        .username = COMPOUND_STRING("Bumblebee"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CHAE] =
     {
-        .username = _("Escadrille"),
+        .username = COMPOUND_STRING("Escadrille"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DANICA] =
     {
-        .username = _("Semantology"),
+        .username = COMPOUND_STRING("Semantology"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_YULANDA] =
     {
-        .username = _("JpgreenCrinal"),
+        .username = COMPOUND_STRING("JpgreenCrinal"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MERILYN] =
     {
-        .username = _("Clavate"),
+        .username = COMPOUND_STRING("Clavate"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_VIOLETTE] =
     {
-        .username = _("Crackerjack"),
+        .username = COMPOUND_STRING("Crackerjack"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_OUIDA] =
     {
-        .username = _("Ichnogram"),
+        .username = COMPOUND_STRING("Ichnogram"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BERRY] =
     {
-        .username = _("Avuncular"),
+        .username = COMPOUND_STRING("Avuncular"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_KAYLEEN] =
     {
-        .username = _("Onymancy"),
+        .username = COMPOUND_STRING("Onymancy"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SETH] =
     {
-        .username = _("Poltroon"),
+        .username = COMPOUND_STRING("Poltroon"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VENITA] =
     {
-        .username = _("Lorimer"),
+        .username = COMPOUND_STRING("Lorimer"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_AYANA] =
     {
-        .username = _("Decrescendo"),
+        .username = COMPOUND_STRING("Decrescendo"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NICOL] =
     {
-        .username = _("Berceau"),
+        .username = COMPOUND_STRING("Berceau"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KARLEEN] =
     {
-        .username = _("Pneumatic"),
+        .username = COMPOUND_STRING("Pneumatic"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ENOLA] =
     {
-        .username = _("Fard"),
+        .username = COMPOUND_STRING("Fard"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MYRTIS] =
     {
-        .username = _("Iracundulous"),
+        .username = COMPOUND_STRING("Iracundulous"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TIARA] =
     {
-        .username = _("Effetefrogz5"),
+        .username = COMPOUND_STRING("Effetefrogz5"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MATHEW] =
     {
-        .username = _("Pantheism"),
+        .username = COMPOUND_STRING("Pantheism"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ARIEL] =
     {
-        .username = _("Staccato"),
+        .username = COMPOUND_STRING("Staccato"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MICHELL] =
     {
-        .username = _("Perseverate"),
+        .username = COMPOUND_STRING("Perseverate"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LARA] =
     {
-        .username = _("Confabulate"),
+        .username = COMPOUND_STRING("Confabulate"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_XIAO] =
     {
-        .username = _("Palliasse"),
+        .username = COMPOUND_STRING("Palliasse"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BRENT] =
     {
-        .username = _("Crapkin"),
+        .username = COMPOUND_STRING("Crapkin"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NEWS] =
     {
-        .username = _("News"),
+        .username = COMPOUND_STRING("News"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_EDA] =
     {
-        .username = _("Zymurgy"),
+        .username = COMPOUND_STRING("Zymurgy"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LUCREZIA] =
     {
-        .username = _("PathToThePeak"),
+        .username = COMPOUND_STRING("PathToThePeak"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CELESTA] =
     {
-        .username = _("Cynology"),
+        .username = COMPOUND_STRING("Cynology"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MANUELA] =
     {
-        .username = _("Bitched"),
+        .username = COMPOUND_STRING("Bitched"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ELMER] =
     {
-        .username = _("Tephromancy"),
+        .username = COMPOUND_STRING("Tephromancy"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NADENE] =
     {
-        .username = _("Bonkers"),
+        .username = COMPOUND_STRING("Bonkers"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NELIA] =
     {
-        .username = _("NonfailChimp"),
+        .username = COMPOUND_STRING("NonfailChimp"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ULA] =
     {
-        .username = _("Curlicue"),
+        .username = COMPOUND_STRING("Curlicue"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_YUETTE] =
     {
-        .username = _("Futz"),
+        .username = COMPOUND_STRING("Futz"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_RAYFORD] =
     {
-        .username = _("Prim"),
+        .username = COMPOUND_STRING("Prim"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CANDIS] =
     {
-        .username = _("Hunkydory"),
+        .username = COMPOUND_STRING("Hunkydory"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CASSI] =
     {
-        .username = _("Holderbat"),
+        .username = COMPOUND_STRING("Holderbat"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NESTOR] =
     {
-        .username = _("Factualism"),
+        .username = COMPOUND_STRING("Factualism"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CATHIE] =
     {
-        .username = _("Scirocco"),
+        .username = COMPOUND_STRING("Scirocco"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ORVAL] =
     {
-        .username = _("SniffbotGlyph"),
+        .username = COMPOUND_STRING("SniffbotGlyph"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LELAH] =
     {
-        .username = _("LeokTuber"),
+        .username = COMPOUND_STRING("LeokTuber"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TARA] =
     {
-        .username = _("ShearsPurdah"),
+        .username = COMPOUND_STRING("ShearsPurdah"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_QUEENIE] =
     {
-        .username = _("Simulacrum"),
+        .username = COMPOUND_STRING("Simulacrum"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KERMIT] =
     {
-        .username = _("Caschrom"),
+        .username = COMPOUND_STRING("Caschrom"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BERNIE] =
     {
-        .username = _("Obtestvid6610"),
+        .username = COMPOUND_STRING("Obtestvid6610"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MELIDA] =
     {
-        .username = _("Humdrum"),
+        .username = COMPOUND_STRING("Humdrum"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DOUGLAS] =
     {
-        .username = _("Karyotype"),
+        .username = COMPOUND_STRING("Karyotype"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_GEORGE] =
     {
-        .username = _("Privatism"),
+        .username = COMPOUND_STRING("Privatism"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_EVELINA] =
     {
-        .username = _("DjgreendSext"),
+        .username = COMPOUND_STRING("DjgreendSext"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MARSHALL] =
     {
-        .username = _("Majordomo"),
+        .username = COMPOUND_STRING("Majordomo"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KIMBERLIE] =
     {
-        .username = _("Slapdash"),
+        .username = COMPOUND_STRING("Slapdash"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ROCIO] =
     {
-        .username = _("HoiPolloi"),
+        .username = COMPOUND_STRING("HoiPolloi"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JEAN] =
     {
-        .username = _("Wishywashy"),
+        .username = COMPOUND_STRING("Wishywashy"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BERTHA] =
     {
-        .username = _("Anemone"),
+        .username = COMPOUND_STRING("Anemone"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NICHOLLE] =
     {
-        .username = _("Misnomer"),
+        .username = COMPOUND_STRING("Misnomer"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MAILE] =
     {
-        .username = _("Flophouse"),
+        .username = COMPOUND_STRING("Flophouse"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LYNNA] =
     {
-        .username = _("TiarGunky"),
+        .username = COMPOUND_STRING("TiarGunky"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_SHERISE] =
     {
-        .username = _("Isopycnic"),
+        .username = COMPOUND_STRING("Isopycnic"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_SEAN] =
     {
-        .username = _("Quitclaim"),
+        .username = COMPOUND_STRING("Quitclaim"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DELORSE] =
     {
-        .username = _("Pontoon"),
+        .username = COMPOUND_STRING("Pontoon"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SANTINA] =
     {
-        .username = _("MyutsamFloozy"),
+        .username = COMPOUND_STRING("MyutsamFloozy"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LOISE] =
     {
-        .username = _("Ptarmic"),
+        .username = COMPOUND_STRING("Ptarmic"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BELL] =
     {
-        .username = _("Jocund"),
+        .username = COMPOUND_STRING("Jocund"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ANGLEA] =
     {
-        .username = _("Leukoplakia"),
+        .username = COMPOUND_STRING("Leukoplakia"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SIOBHAN] =
     {
-        .username = _("Fizgig"),
+        .username = COMPOUND_STRING("Fizgig"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CATHERINA] =
     {
-        .username = _("Serendipity"),
+        .username = COMPOUND_STRING("Serendipity"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_EDWARDO] =
     {
-        .username = _("Vicunanman123"),
+        .username = COMPOUND_STRING("Vicunanman123"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_IRWIN] =
     {
-        .username = _("Cinemuck"),
+        .username = COMPOUND_STRING("Cinemuck"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NICOLLE] =
     {
-        .username = _("Hylopathism"),
+        .username = COMPOUND_STRING("Hylopathism"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VIOLET] =
     {
-        .username = _("Vendace"),
+        .username = COMPOUND_STRING("Vendace"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CANDY] =
     {
-        .username = _("Planetolatry"),
+        .username = COMPOUND_STRING("Planetolatry"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KATLYN] =
     {
-        .username = _("Circumjacent"),
+        .username = COMPOUND_STRING("Circumjacent"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BRIGIDA] =
     {
-        .username = _("Peeve"),
+        .username = COMPOUND_STRING("Peeve"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_KLARA] =
     {
-        .username = _("SztachafRemora"),
+        .username = COMPOUND_STRING("SztachafRemora"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DEJA] =
     {
-        .username = _("TorterOrnery"),
+        .username = COMPOUND_STRING("TorterOrnery"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MAIDA] =
     {
-        .username = _("Jubilee"),
+        .username = COMPOUND_STRING("Jubilee"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LORAINE] =
     {
-        .username = _("Fracas"),
+        .username = COMPOUND_STRING("Fracas"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JOSUE] =
     {
-        .username = _("Heartsome"),
+        .username = COMPOUND_STRING("Heartsome"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NICHOLE] =
     {
-        .username = _("Bumblebee"),
+        .username = COMPOUND_STRING("Bumblebee"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TIFFANIE] =
     {
-        .username = _("Manscape"),
+        .username = COMPOUND_STRING("Manscape"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_AGUSTIN] =
     {
-        .username = _("Demitasse"),
+        .username = COMPOUND_STRING("Demitasse"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_HAILEY] =
     {
-        .username = _("Kerfuffle"),
+        .username = COMPOUND_STRING("Kerfuffle"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LAJUANA] =
     {
-        .username = _("Silicicolous"),
+        .username = COMPOUND_STRING("Silicicolous"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_RICO] =
     {
-        .username = _("Hyacinth"),
+        .username = COMPOUND_STRING("Hyacinth"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MYRTICE] =
     {
-        .username = _("DichroicTrover"),
+        .username = COMPOUND_STRING("DichroicTrover"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CRISTEN] =
     {
-        .username = _("Zoodynamics"),
+        .username = COMPOUND_STRING("Zoodynamics"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JINA] =
     {
-        .username = _("Scirocco"),
+        .username = COMPOUND_STRING("Scirocco"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_SANORA] =
     {
-        .username = _("Foxy"),
+        .username = COMPOUND_STRING("Foxy"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MYRON] =
     {
-        .username = _("Monandry"),
+        .username = COMPOUND_STRING("Monandry"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JAMAL] =
     {
-        .username = _("Connate"),
+        .username = COMPOUND_STRING("Connate"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_FRANCESCO] =
     {
-        .username = _("Blabbermouth"),
+        .username = COMPOUND_STRING("Blabbermouth"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_HATTIE] =
     {
-        .username = _("Schistous"),
+        .username = COMPOUND_STRING("Schistous"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_GWYNETH] =
     {
-        .username = _("Juggernaut"),
+        .username = COMPOUND_STRING("Juggernaut"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_SHERRY] =
     {
-        .username = _("Biloquist"),
+        .username = COMPOUND_STRING("Biloquist"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_SU] =
     {
-        .username = _("Ophiology"),
+        .username = COMPOUND_STRING("Ophiology"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ELNA] =
     {
-        .username = _("Onychoid"),
+        .username = COMPOUND_STRING("Onychoid"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_PENELOPE] =
     {
-        .username = _("Egghead"),
+        .username = COMPOUND_STRING("Egghead"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_JERALDINE] =
     {
-        .username = _("Swashbuckler"),
+        .username = COMPOUND_STRING("Swashbuckler"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BILLIE] =
     {
-        .username = _("Perambulator"),
+        .username = COMPOUND_STRING("Perambulator"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_MONTE] =
     {
-        .username = _("Mythography"),
+        .username = COMPOUND_STRING("Mythography"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LISA] =
     {
-        .username = _("TresaSuave"),
+        .username = COMPOUND_STRING("TresaSuave"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_BRYON] =
     {
-        .username = _("Telekinesis"),
+        .username = COMPOUND_STRING("Telekinesis"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NICKI] =
     {
-        .username = _("Friderday"),
+        .username = COMPOUND_STRING("Friderday"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_STACIA] =
     {
-        .username = _("Quadrumanous"),
+        .username = COMPOUND_STRING("Quadrumanous"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CHARLESETTA] =
     {
-        .username = _("Strapontin"),
+        .username = COMPOUND_STRING("Strapontin"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SILVIA] =
     {
-        .username = _("Badmash"),
+        .username = COMPOUND_STRING("Badmash"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LATASHA] =
     {
-        .username = _("ChrismcminVex"),
+        .username = COMPOUND_STRING("ChrismcminVex"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ARLA] =
     {
-        .username = _("WecanfKerf"),
+        .username = COMPOUND_STRING("WecanfKerf"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_GRAHAM] =
     {
-        .username = _("Zinnober"),
+        .username = COMPOUND_STRING("Zinnober"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_TASHA] =
     {
-        .username = _("Lickspittle"),
+        .username = COMPOUND_STRING("Lickspittle"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NICKOLE] =
     {
-        .username = _("Femerall"),
+        .username = COMPOUND_STRING("Femerall"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_PING] =
     {
-        .username = _("Glom"),
+        .username = COMPOUND_STRING("Glom"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DAMIEN] =
     {
-        .username = _("Somnolescent"),
+        .username = COMPOUND_STRING("Somnolescent"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MARYLYNN] =
     {
-        .username = _("Lexigraphy"),
+        .username = COMPOUND_STRING("Lexigraphy"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_MABEL] =
     {
-        .username = _("Abecedarian"),
+        .username = COMPOUND_STRING("Abecedarian"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_KALA] =
     {
-        .username = _("Piffle"),
+        .username = COMPOUND_STRING("Piffle"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CHERLYN] =
     {
-        .username = _("Orchidaceous"),
+        .username = COMPOUND_STRING("Orchidaceous"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_TOMMY] =
     {
-        .username = _("Periwinkle"),
+        .username = COMPOUND_STRING("Periwinkle"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_KRISHNA] =
     {
-        .username = _("Vigorish"),
+        .username = COMPOUND_STRING("Vigorish"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CHRISTOPHER] =
     {
-        .username = _("Affreux"),
+        .username = COMPOUND_STRING("Affreux"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CHRISTEL] =
     {
-        .username = _("JeffersIgloo"),
+        .username = COMPOUND_STRING("JeffersIgloo"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_JOLEEN] =
     {
-        .username = _("RetrocBurgoo"),
+        .username = COMPOUND_STRING("RetrocBurgoo"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CHRISTINA] =
     {
-        .username = _("Lummox"),
+        .username = COMPOUND_STRING("Lummox"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VIKKI] =
     {
-        .username = _("Paracoitus"),
+        .username = COMPOUND_STRING("Paracoitus"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ANGLE] =
     {
-        .username = _("Chimerical"),
+        .username = COMPOUND_STRING("Chimerical"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LEIA] =
     {
-        .username = _("Remora"),
+        .username = COMPOUND_STRING("Remora"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LERA] =
     {
-        .username = _("Heartstrings"),
+        .username = COMPOUND_STRING("Heartstrings"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ARLINE] =
     {
-        .username = _("Hospitium"),
+        .username = COMPOUND_STRING("Hospitium"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_YANIRA] =
     {
-        .username = _("Bumbledom"),
+        .username = COMPOUND_STRING("Bumbledom"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LILLI] =
     {
-        .username = _("Caddywampus"),
+        .username = COMPOUND_STRING("Caddywampus"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_CARMELINA] =
     {
-        .username = _("Humbugmuck"),
+        .username = COMPOUND_STRING("Humbugmuck"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_NIESHA] =
     {
-        .username = _("Jrabbid1Corymb"),
+        .username = COMPOUND_STRING("Jrabbid1Corymb"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ZENOBIA] =
     {
-        .username = _("Moonstruck"),
+        .username = COMPOUND_STRING("Moonstruck"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DEANA] =
     {
-        .username = _("Logjam"),
+        .username = COMPOUND_STRING("Logjam"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_GEORGINE] =
     {
-        .username = _("Bladvass"),
+        .username = COMPOUND_STRING("Bladvass"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VANNESSA] =
     {
-        .username = _("ClobeQuokka"),
+        .username = COMPOUND_STRING("ClobeQuokka"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DEVIN] =
     {
-        .username = _("Killtor1Noodle"),
+        .username = COMPOUND_STRING("Killtor1Noodle"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ROLLAND] =
     {
-        .username = _("Blogosphere"),
+        .username = COMPOUND_STRING("Blogosphere"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_SAVANNAH] =
     {
-        .username = _("Vacuole"),
+        .username = COMPOUND_STRING("Vacuole"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ASSUNTA] =
     {
-        .username = _("Manscape"),
+        .username = COMPOUND_STRING("Manscape"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_TIMIKA] =
     {
-        .username = _("Nambypamby"),
+        .username = COMPOUND_STRING("Nambypamby"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_AUGUSTINE] =
     {
-        .username = _("Temerarious"),
+        .username = COMPOUND_STRING("Temerarious"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CARLETTA] =
     {
-        .username = _("Hospitium"),
+        .username = COMPOUND_STRING("Hospitium"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_DACIA] =
     {
-        .username = _("Japanypowmc"),
+        .username = COMPOUND_STRING("Japanypowmc"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_TAMIE] =
     {
-        .username = _("ChbreasTuchis"),
+        .username = COMPOUND_STRING("ChbreasTuchis"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CANDELARIA] =
     {
-        .username = _("Frigolabile"),
+        .username = COMPOUND_STRING("Frigolabile"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LISABETH] =
     {
-        .username = _("Noodge"),
+        .username = COMPOUND_STRING("Noodge"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ALEJANDRA] =
     {
-        .username = _("Rhumb"),
+        .username = COMPOUND_STRING("Rhumb"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LORIANN] =
     {
-        .username = _("Persnickety"),
+        .username = COMPOUND_STRING("Persnickety"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_BOBBIE] =
     {
-        .username = _("Sialoquent"),
+        .username = COMPOUND_STRING("Sialoquent"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_VERNA] =
     {
-        .username = _("Lambasted"),
+        .username = COMPOUND_STRING("Lambasted"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_PEARLY] =
     {
-        .username = _("Taxaceous"),
+        .username = COMPOUND_STRING("Taxaceous"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_CLARITA] =
     {
-        .username = _("Ballottement"),
+        .username = COMPOUND_STRING("Ballottement"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_LOREAN] =
     {
-        .username = _("NonfailBotchy"),
+        .username = COMPOUND_STRING("NonfailBotchy"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_DYAN] =
     {
-        .username = _("Metaphysis"),
+        .username = COMPOUND_STRING("Metaphysis"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_IDALIA] =
     {
-        .username = _("Aspersed"),
+        .username = COMPOUND_STRING("Aspersed"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_USHA] =
     {
-        .username = _("Malarkey"),
+        .username = COMPOUND_STRING("Malarkey"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_LEISHA] =
     {
-        .username = _("Hippocampus"),
+        .username = COMPOUND_STRING("Hippocampus"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_ILDA] =
     {
-        .username = _("Pogonotrophy"),
+        .username = COMPOUND_STRING("Pogonotrophy"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_HILDE] =
     {
-        .username = _("Scapiform"),
+        .username = COMPOUND_STRING("Scapiform"),
         .isVerified = FALSE,
     },
     [BUZZR_USER_ELIDIA] =
     {
-        .username = _("Rariora"),
+        .username = COMPOUND_STRING("Rariora"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_NEVADA] =
     {
-        .username = _("Bonnie_Pomace"),
+        .username = COMPOUND_STRING("Bonnie_Pomace"),
         .isVerified = TRUE,
     },
     [BUZZR_USER_EDELMIRA] =
     {
-        .username = _("Finagle"),
+        .username = COMPOUND_STRING("Finagle"),
         .isVerified = FALSE,
     },
 };

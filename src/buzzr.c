@@ -1,6 +1,8 @@
 #include "global.h"
 #include "random.h"
+#include "tv.h"
 #include "bg.h"
+#include "item.h"
 #include "text_window.h"
 #include "line_break.h"
 #include "window.h"
@@ -32,6 +34,8 @@
 #include "quests.h"
 #include "script_menu.h"
 #include "field_weather.h"
+#include "quest_logic.h"
+#include "region_map.h"
 
 static void ResetQuestFanfareFlag(void);
 static void ResetPictureMode(void);
@@ -89,6 +93,7 @@ static bool8 LoadGraphics(void);
 static void Buzzr_InitWindows(void);
 static u16 GetUserId(u16 tweetId);
 static const u8 *GetContent(u16 tweetId);
+static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId);
 static void *GetCriteria(u16 tweetId);
 static u16 GetQuest(u16 tweetId);
 static bool32 IsPrivate(u16 tweetId);
@@ -971,8 +976,9 @@ static u16 GetUserId(u16 tweetId)
 
 static const u8 *GetContent(u16 tweetId)
 {
-    StringExpandPlaceholders(gStringVar1,gTweets[tweetId].content);
-    return gStringVar1;
+    Buzzr_ExpandStrings(tweetId);
+    StringExpandPlaceholders(gStringVar4,gTweets[tweetId].content);
+    return gStringVar4;
 }
 
 const u32* GetPictureTiles(u16 tweetId)
@@ -1087,9 +1093,9 @@ static bool32 CheckIfPrintWillOverflow(u32 verticalOffset)
 static const u32 GetNumContentLines(u16 tweetId)
 {
     const u8 *str = GetContent(tweetId);
-    StripLineBreaks(gStringVar1);
+    StripLineBreaks(gStringVar4);
     u32 windowWidth = TWEET_WINDOW_WIDTH;
-    BreakStringNaive(gStringVar1, windowWidth, TWEET_MAX_NUM_LINES, FONT_BUZZR_TWEET, HIDE_SCROLL_PROMPT);
+    BreakStringNaive(gStringVar4, windowWidth, TWEET_MAX_NUM_LINES, FONT_BUZZR_TWEET, HIDE_SCROLL_PROMPT);
 
     u32 count = 1;
     while (*str != EOS)
@@ -1349,10 +1355,10 @@ static void PrintTweetContent(u32 windowId, u16 tweetId, const u8 *fontColor, u3
     u32 fontId = FONT_BUZZR_TWEET;
 
     GetContent(tweetId);
-    StripLineBreaks(gStringVar1);
-    BreakStringNaive(gStringVar1, windowWidth, TWEET_MAX_NUM_LINES, fontId, HIDE_SCROLL_PROMPT);
+    StripLineBreaks(gStringVar4);
+    BreakStringNaive(gStringVar4, windowWidth, TWEET_MAX_NUM_LINES, fontId, HIDE_SCROLL_PROMPT);
 
-    AddTextPrinterParameterized4(windowId, FONT_BUZZR_TWEET, x, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,gStringVar1);
+    AddTextPrinterParameterized4(windowId, FONT_BUZZR_TWEET, x, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,gStringVar4);
 }
 
 static void HandleTweetIcons(u16 tweetId, u32 verticalOffset, u32 typeTweet)
@@ -2000,4 +2006,42 @@ static void CreateQuestSprite(void)
 static void SpriteCallback_QuestImage(struct Sprite *sprite)
 {
     sprite->y = CalculateCursorHeight();
+}
+
+static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
+{
+    switch (tweetId)
+    {
+        default:
+            return;
+        case TWEET_QUEST_NPC_SMOOTHIE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA),MAP_NUM(MAP_CHASILLA))->regionMapSectionId,0);
+            StringCopy(gStringVar2,COMPOUND_STRING(""));
+
+            ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_1));
+            StringAppend(gStringVar2,gStringVar4);
+            StringAppend(gStringVar2,COMPOUND_STRING(" "));
+            CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_1,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
+            StringAppend(gStringVar2,gStringVar4);
+            StringAppend(gStringVar2,COMPOUND_STRING(", "));
+
+            ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_2));
+            StringAppend(gStringVar2,gStringVar4);
+            StringAppend(gStringVar2,COMPOUND_STRING(" "));
+            CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_2,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
+            StringAppend(gStringVar2,gStringVar4);
+            StringAppend(gStringVar2,COMPOUND_STRING(", & "));
+
+            ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_3));
+            StringAppend(gStringVar2,gStringVar4);
+            StringAppend(gStringVar2,COMPOUND_STRING(" "));
+            CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_3,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
+            StringAppend(gStringVar2,gStringVar4);
+            StringAppend(gStringVar2,COMPOUND_STRING(""));
+            break;
+        case TWEET_QUEST_NPC_RABIES:
+            StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
+            break;
+    }
 }

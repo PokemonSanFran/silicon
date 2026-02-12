@@ -42,7 +42,10 @@ script Quest_Breaktheinternet_SocialMediaReporter_Dialogue{
 }
 
 script Quest_Breaktheinternet_Rabies_Dialogue{
-    msgbox(format("Totally! I hunted a bunch of Glameow in GlavezHill only for the whole story to be totally bogus."),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
+    bufferspeciesname(STR_VAR_1,QUEST_RABIES_OUTBREAK_SPECIES)
+    buffermapname(STR_VAR_2,QUEST_RABIES_OUTBREAK_MAP)
+
+    msgbox(format("Totally! I hunted a bunch of {STR_VAR_1} in {STR_VAR_2} only for the whole story to be totally bogus."),MSGBOX_DEFAULT,,SPEAKER_ALICIA)
     msgbox(format("Oh right, the rabies outbreak! So ridiculous."),MSGBOX_DEFAULT,SPEAKER_ISMAIL)
     return
 }

@@ -68,7 +68,7 @@ void TweetCriteria_AlwaysTrue(void)
 
 void TweetCriteria_Quest_NPC_Rabies(void)
 {
-    gSpecialVar_Result = TRUE;
+    TweetCriteria_AlwaysTrue();
 }
 
 static bool32 TweetCriteria_HasTalkedReporter(void)
@@ -189,14 +189,9 @@ void TweetCriteria_IsCompulsiveHealingReward(void)
     gSpecialVar_Result = ((IsQuestRewardState(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)) || (IsQuestCompletedState(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)));
 }
 
-void TweetCriteria_23(void)
+void TweetCriteria_IsRabiesComplete(void)
 {
-	gSpecialVar_Result = FALSE;
-}
-
-void TweetCriteria_24(void)
-{
-	gSpecialVar_Result = FALSE;
+    gSpecialVar_Result = (IsQuestCompletedState(QUEST_RABIESOUTBREAK));
 }
 
 void TweetCriteria_25(void)
