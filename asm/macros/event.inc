@@ -2646,6 +2646,7 @@
     @ shows that tweet on the screeen.
     @ after a button press, hides the tweet
     .macro showtweet tweetId:req
+    closemessage
     buzzr MARK_READ \tweetId
     setflag FLAG_SYS_APP_BUZZR_GET
 	buzzr SHOW_TWEET \tweetId
