@@ -18,6 +18,7 @@
 #include "constants/characters.h"
 #include "constants/trainers.h"
 #include "constants/abilities.h"
+#include "silicon_test_exp.h"
 
 #if defined(__INTELLISENSE__)
 #undef TestRunner_Battle_RecordAbilityPopUp
@@ -351,6 +352,7 @@ static void BattleTest_Run(void *data)
 
     memset(&DATA, 0, sizeof(DATA));
 
+    gSiliconExpTestState.isExpTest = FALSE;
     DATA.recordedBattle.rngSeed = defaultSeed;
     DATA.recordedBattle.textSpeed = OPTIONS_TEXT_SPEED_FAST;
     // Set battle flags and opponent ids.
