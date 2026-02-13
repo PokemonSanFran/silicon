@@ -1295,6 +1295,7 @@ const u8 gText_HodouCity[] = _("HodouCity");
 const u8 gText_ToraTown[] = _("ToraTown");
 const u8 gText_PerlaciaCity[] = _("PerlaciaCity");
 const u8 gText_GlavezHill[] = _("GlavezHill");
+const u8 gText_GlavezHeights[] = _("Glavez Heights");
 const u8 gText_HalaiIsland[] = _("HalaiIsland");
 const u8 gText_TirabudinPlace[] = _("TirabudinPlace");
 const u8 gText_TorgeotClimb[] = _("TorgeotClimb");

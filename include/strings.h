@@ -2394,6 +2394,7 @@ extern const u8 gText_HodouCity[];
 extern const u8 gText_ToraTown[];
 extern const u8 gText_PerlaciaCity[];
 extern const u8 gText_GlavezHill[];
+extern const u8 gText_GlavezHeights[];
 extern const u8 gText_HalaiIsland[];
 extern const u8 gText_TirabudinPlace[];
 extern const u8 gText_TorgeotClimb[];
