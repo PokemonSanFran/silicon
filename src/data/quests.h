@@ -1673,14 +1673,109 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_RABIESOUTBREAK] =
     {
-        .name = gText_Quest_RabiesOutbreak_Name,
-        .desc = gText_Quest_RabiesOutbreak_Desc,
-        .donedesc = gText_Quest_RabiesOutbreak_DoneDesc,
-        .map = gText_Quest_RabiesOutbreak_Map,
-        .sprite = SPECIES_GLAMEOW,
+        .name = COMPOUND_STRING("Rabies Outbreak"),
+        .desc = COMPOUND_STRING("Feral Purrloin are endagering wildlife in Glavez Heights."),
+        .rewardDesc = COMPOUND_STRING("Find the RSPCP staff member!"),
+        .donedesc = COMPOUND_STRING("There's no rabies outbreak, but the Purrloin found in Glavez Heights are more likely to have Pokérus."),
+        .map = COMPOUND_STRING("Glavez Heights"),
+        .sprite = QUEST_RABIES_OUTBREAK_SPECIES,
         .spritetype = QUEST_SPRITE_TYPE_PKMN,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_RABIES_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not_Started"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_1] =
+            {
+                .name = COMPOUND_STRING("Defeated 1"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_2] =
+            {
+                .name = COMPOUND_STRING("Defeated 2"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_3] =
+            {
+                .name = COMPOUND_STRING("Defeated 3"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_4] =
+            {
+                .name = COMPOUND_STRING("Defeated 4"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_5] =
+            {
+                .name = COMPOUND_STRING("Defeated 5"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_6] =
+            {
+                .name = COMPOUND_STRING("Defeated 6"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_7] =
+            {
+                .name = COMPOUND_STRING("Defeated 7"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_8] =
+            {
+                .name = COMPOUND_STRING("Defeated 8"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_DEFEATED_9] =
+            {
+                .name = COMPOUND_STRING("Defeated 9"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_REWARD] =
+            {
+                .name = COMPOUND_STRING("Defeated 10"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RABIES_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_RabiesOutbreak,
+                side_quest_map(MAP_GLAVEZ_HEIGHTS),
+                .warpId = 0,
+            },
+        }
     },
     [QUEST_SMOOTHIECRAFTING] =
     {
@@ -2642,9 +2737,9 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     [QUEST_RPS] =
     {
         .name = COMPOUND_STRING("RPS"),
-        .desc = gText_Quest_DrugHelmetTest_Desc,
-        .donedesc = gText_Quest_DrugHelmetTest_DoneDesc,
-        .map = gText_CapheCity,
+        .desc = COMPOUND_STRING("Beat Monty in a friendly wager over Mach-Focus-Hand."),
+        .donedesc = COMPOUND_STRING("Monty admitted to cheating, but you beat him anyways. He still wants to go double or nothing - how much money does Monty have?"),
+        .map = gText_GlavezHeights,
         .sprite = SPECIES_HITMONCHAN,
         .spritetype = QUEST_SPRITE_TYPE_PKMN,
         .subquests = NULL,

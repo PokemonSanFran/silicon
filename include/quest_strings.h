@@ -18,11 +18,6 @@ extern const u8 gText_Quest_StolenTrade_Desc[];
 extern const u8 gText_Quest_StolenTrade_DoneDesc[];
 extern const u8 gText_Quest_StolenTrade_Map[];
 
-extern const u8 gText_Quest_RabiesOutbreak_Name[];
-extern const u8 gText_Quest_RabiesOutbreak_Desc[];
-extern const u8 gText_Quest_RabiesOutbreak_DoneDesc[];
-extern const u8 gText_Quest_RabiesOutbreak_Map[];
-
 extern const u8 gText_Quest_BlueRobbery_Name[];
 extern const u8 gText_Quest_BlueRobbery_Desc[];
 extern const u8 gText_Quest_BlueRobbery_DoneDesc[];
@@ -1230,8 +1225,6 @@ extern const u8 gText_PlayersAdventure_Flavor41[];
 extern const u8 gText_PlayersAdventure_Flavor41A[];
 extern const u8 gText_PlayersAdventure_Flavor42[];
 extern const u8 gText_PlayersAdventure_Flavor43[];
-
-extern const u8 gText_RabiesOutbreak_Flavor1[];
 
 extern const u8 gText_BetweenAStoneAndAHardPlace_Flavor1[];
 

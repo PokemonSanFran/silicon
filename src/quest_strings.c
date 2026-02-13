@@ -18,11 +18,6 @@ const u8 gText_Quest_StolenTrade_Desc[] = _("She wanted to trade with you to evo
 const u8 gText_Quest_StolenTrade_DoneDesc[] = _("You hunted down the Trainer\nand got back your Conkeldurr.");
 const u8 gText_Quest_StolenTrade_Map[] = _("QiuVillage");
 
-const u8 gText_Quest_RabiesOutbreak_Name[] = _("Rabies Outbreak");
-const u8 gText_Quest_RabiesOutbreak_Desc[] =_("Feral Glameow are endangering wildlife\nin GlavezHill.");
-const u8 gText_Quest_RabiesOutbreak_DoneDesc[] =_("You defeated the Glameow... but the\noutbreak was Pokérus, not rabies.");
-const u8 gText_Quest_RabiesOutbreak_Map[] =_("GlavezHill");
-
 const u8 gText_Quest_BlueRobbery_Name[] = _("Blue Robbery");
 const u8 gText_Quest_BlueRobbery_Desc[] =_("Find the brunette and her Wobbuffet\nthat were breaking and entering in the\nCapheCity!");
 const u8 gText_Quest_BlueRobbery_DoneDesc[] =_("You found the Trainer, but she refused\nto even hint at being guilty...");
@@ -1202,7 +1197,5 @@ const u8 gText_PlayersAdventure_Flavor41[] =_("Ramesh's home in the qiuvillage h
 const u8 gText_PlayersAdventure_Flavor41A[] =_("Confront Lucrezia in their office!");
 const u8 gText_PlayersAdventure_Flavor42[] =_("You became Champion, made some\nmistakes, but the region is just a\nlittle better because of your efforts.");
 const u8 gText_PlayersAdventure_Flavor43[] =_("You became Champion, stamped out\nSharpRise Capital, and the region is a just a\nlittle better because of your efforts.");
-
-const u8 gText_RabiesOutbreak_Flavor1[] =_("Feral Glameow are endangering wildlife\nin GlavezHill. Defeat {STR_VAR_3} of them\nand report back to he ASPCA Officer.");
 
 const u8 gText_BetweenAStoneAndAHardPlace_Flavor1[] =_("Take {STR_VAR_3} more trolley ride(s), and get a\nstone 'capable of pushing a Pokemon\nfurther beyond'!");

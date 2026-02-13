@@ -1,7 +1,9 @@
 #include "global.h"
 #include "strings.h"
 #include "bg.h"
+#include "quest_logic.h"
 #include "data.h"
+#include "region_map.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -23,6 +25,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text_window.h"
+#include "tv.h"
 #include "quests.h"
 #include "overworld.h"
 #include "event_data.h"
@@ -207,11 +210,11 @@ const u8 *GetQuestDoneDesc_PlayersAdventure()
 const u8 *GetQuestDesc_RabiesOutbreak()
 {
 	u8 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT);
-
-	ConvertIntToDecimalStringN(gStringVar3, 10 - defeatedGlameowCount,
-	                           STR_CONV_MODE_LEFT_ALIGN, 6);
-	StringExpandPlaceholders(gStringVar2, gText_RabiesOutbreak_Flavor1);
-	return gStringVar2;
+    StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
+    GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
+	ConvertIntToDecimalStringN(gStringVar3, (QUEST_RABIES_OUTBREAK_COUNT - defeatedGlameowCount), STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_RABIES_OUTBREAK_COUNT));
+	StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Feral {STR_VAR_1} are attacking pets and people in {STR_VAR_1}. Subdue 10 of them to help reduce the outbreak. There are {STR_VAR_3} remaining."));
+	return gStringVar4;
 }
 
 const u8  *GetQuestDesc_BetweenAStoneAndAHardPlace()

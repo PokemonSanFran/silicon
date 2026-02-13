@@ -1,9 +1,9 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CAMERA = OBJ_EVENT_ID_CAMERA
 
-//PSF TODO Create script so that Glameow captured here have a much higher chance of PokéRus
-
-script RabiesOutbreak_Officer_Event_Script{
+script RabiesOutbreak_Officer_Event_Script
+{
+    lock
     questmenu(QUEST_MENU_CHECK_REWARD,QUEST_RABIESOUTBREAK)
     if (var(VAR_RESULT))
     {
@@ -17,44 +17,61 @@ script RabiesOutbreak_Officer_Event_Script{
 
     }
 
-    msgbox(format("This outbreak is like nothing I've seen before!"), MSGBOX_NPC,SPEAKER_DEFAULT)
+    bufferspeciesname(STR_VAR_1,SPECIES_SPINDA)
+    msgbox(format("This outbreak is crazier than a {STR_VAR_1} walking straight!"),MSGBOX_NPC,SPEAKER_ASPCAOFFICER)
     end
 }
 
-script RabiesOutbreak_Reward_Dialogue{
-    msgbox(format("I noticed you were engaging a lot of Glameow. What are you up to?"),MSGBOX_NPC,SPEAKER_DEFAULT)
-
-    msgbox(format("I'm helping with the rabies outbreak! I saw online you were rewarding Trainers that can help bring the numbers down."),MSGBOX_NPC,SPEAKER_ALICIA)
-
-    msgbox(format("Rabies? I don't know where you saw that, but there's no rabies outbreak. Oddly enough, the Glameow here all seem to be spreading Pokérus at alarmingly high rates. But you came all the way out here to help... I might have something for you. Hold on."),MSGBOX_NPC,SPEAKER_DEFAULT)
+script RabiesOutbreak_Reward_Dialogue
+{
+    lock
+    faceplayer
+    bufferspeciesname(STR_VAR_1,QUEST_RABIES_OUTBREAK_SPECIES)
+    msgbox(format("Noticed you were battling quite a few {STR_VAR_1}. Hunting for some loot? Or maybe one of them variant colors?"),,SPEAKER_ASPCAOFFICER,,EMOTE_CONFUSE)
+    msgbox(format("Oh, I wasn’t looking for anything, I was trying to help with the rabies outbreak."),,SPEAKER_ALICIA)
+    msgbox(format("Rabies? Hold up, what in the world?"),,SPEAKER_ASPCAOFFICER,,EMOTE_SHOCK)
+    msgbox(format("I read it online - let me show you."),,SPEAKER_ALICIA)
+    showtweet(TWEET_QUEST_NPC_RABIES)
+    msgbox(format("Whoa, that’s way off the mark. No way that’s true."),,SPEAKER_ASPCAOFFICER,,EMOTE_LAUGH)
+    msgbox(format("My crew found that {STR_VAR_1} here are prone to carrying Pokérus - it acts like a viral infection, but it speeds up growth. I’m here to dig into that situation."),,SPEAKER_ASPCAOFFICER)
+    msgbox(format("But Pokérus ain’t nothing like rabies - it doesn't harm people or Pokemon so no cause for alarm."),,SPEAKER_ASPCAOFFICER)
+    msgbox(format("Can Pokémon even get rabies?"),,SPEAKER_ASPCAOFFICER,TAIL_WHISPER,EMOTE_CONFUSE)
+    bufferspeciesname(STR_VAR_2,SPECIES_SWANNA)
+    msgbox(format("Unfortunate that Buzzr sent you on this wild {STR_VAR_2} chase."),,SPEAKER_ASPCAOFFICER)
     closemessage
+    goto(RabiesOutbreak_GiveReward_Script)
+}
 
-    call(RabiesOutbreak_GiveReward_Script)
+script RabiesOutbreak_GiveReward_Script
+{
+    checkitemspace(ITEM_QUEST_RABIES_OUTBREAK_REWARD,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Swing by when you’ve got space in your bag."),,SPEAKER_ASPCAOFFICER)
+        closemessage
+        release
+        end
+    }
+
+    msgbox(format("Take this - it’s not much, but it’s something."),,SPEAKER_ASPCAOFFICER)
+    closemessage
+    cueobjectplayer(LOCALID_ASPCAOFFICER)
+    giveitem(ITEM_QUEST_RABIES_OUTBREAK_REWARD,1)
+    msgbox(format("We’ll track down the source of the misinformation."),,SPEAKER_ASPCAOFFICER)
+    closemessage
     completequest(QUEST_RABIESOUTBREAK)
+    release
     end
 }
 
-script RabiesOutbreak_GiveReward_Script{
-    giveitem(ITEM_LUXURY_BALL,10)
-}
-
-script RabiesOutbreak_CompleteQuest_Dialogue{
-    msgbox(format("Crazy what you can read online... rabies? Can Pokémon even get rabies?"),MSGBOX_NPC,SPEAKER_DEFAULT)
+script RabiesOutbreak_CompleteQuest_Dialogue
+{
+    lock
+    msgbox(format("When your Pokémon catches Pokérus, they rack up Effort Values twice as fast during battles. Makes stat training a breeze."),,SPEAKER_ASPCAOFFICER)
+    msgbox(format("Infected Pokémon can pass it along to others in your party."),,SPEAKER_ASPCAOFFICER)
+    msgbox(format("Even after the infection wears off, they’ll keep reaping double Effort Values forever."),,SPEAKER_ASPCAOFFICER)
+    msgbox(format("It’s a game changer!"),,SPEAKER_ASPCAOFFICER)
+    closemessage
+    release
     end
-}
-
-text gText_RabiesOutbreak_ThisOutbreak{
-	format("This outbreak is like nothing I've seen before!")
-}
-text gText_RabiesOutbreak_INoticed{
-	format("I noticed you were engaging a lot of Glameow. What are you up to?")
-}
-text gText_RabiesOutbreak_ImHelping{
-	format("I'm helping with the rabies outbreak! I saw online you were rewarding Trainers that can help bring the numbers down.")
-}
-text gText_RabiesOutbreak_Rabies{
-	format("Rabies? I don't know where you saw that, but there's no rabies outbreak. Oddly enough, the Glameow here all seem to be spreading Pokérus at alarmingly high rates. But you came all the way out here to help... I might have something for you. Hold on.")
-}
-text gText_RabiesOutbreak_CrazyWhatYou{
-	format("Crazy what you can read online... rabies? Can Pokémon even get rabies?")
 }

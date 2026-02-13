@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "constants/trainers.h"
 #include "battle_anim.h"
+#include "buzzr.h"
 #include "battle_setup.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
@@ -2421,6 +2422,74 @@ void DebugQuest_StressCup(u8 state)
 // Quest: Rabies Outbreak
 // ***********************************************************************
 
+void DebugQuest_RabiesOutbreak(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_RABIES_NOT_STARTED:
+            break;
+        case STATE_QUEST_RABIES_STARTED:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_1:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,1);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_2:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,2);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_3:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,3);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_4:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,4);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_5:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,5);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_6:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,6);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_7:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,7);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_8:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,8);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_9:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,9);
+            break;
+        case STATE_QUEST_RABIES_REWARD:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetReward(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,QUEST_RABIES_OUTBREAK_COUNT);
+            break;
+        case STATE_QUEST_RABIES_COMPLETE:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            AddBagItem(ITEM_QUEST_RABIES_OUTBREAK_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,QUEST_RABIES_OUTBREAK_COUNT);
+            break;
+    }
+}
 void CountDefeatedRabiesMon(void)
 {
     /*
