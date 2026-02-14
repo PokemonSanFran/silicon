@@ -1022,7 +1022,7 @@ static const u16 sMapHealLocations[MAPSEC_NONE] =
     [MAPSEC_SHARPRISESTADIUM]=HEAL_LOCATION_ROUTE2,
     [MAPSEC_FERRYBUILDING]=HEAL_LOCATION_FERRYBUILDING,
     [MAPSEC_NAVAL_BASE]=HEAL_LOCATION_NAVAL_BASE,
-    [MAPSEC_SHARPRISESPIRE]=HEAL_LOCATION_SHARPRISESPIRE_TOWER,
+    [MAPSEC_SHARPRISESPIRE]=HEAL_LOCATION_SHARPRISESPIRE,
 };
 
 
@@ -1053,16 +1053,16 @@ static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] =
     [MAPSEC_GLAVEZ_HILL] =
     {
         {
-            .name = COMPOUND_STRING("Glavez Heights"),
-            .healLocation = HEAL_LOCATION_GLAVEZ_HILL,
-        },
-        {
             .name = COMPOUND_STRING("Pokemon Center"),
             .healLocation = HEAL_LOCATION_GLAVEZ_HILL,
         },
         {
+            .name = COMPOUND_STRING("Glavez Hill"),
+            .healLocation = HEAL_LOCATION_GLAVEZ_HEIGHTS,
+        },
+        {
             .name = COMPOUND_STRING("Taxi Union"),
-            .healLocation = HEAL_LOCATION_GLAVEZ_HILL,
+            .healLocation = HEAL_LOCATION_GLAVEZ_HILL_TAXI_UNION,
         },
     },
 
@@ -1074,31 +1074,31 @@ static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] =
         },
         {
             .name = COMPOUND_STRING("Stadium"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY,
+            .healLocation = HEAL_LOCATION_PERLACIA_CITY_STADIUM,
         },
         {
             .name = COMPOUND_STRING("Startup"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY,
+            .healLocation = HEAL_LOCATION_PERLACIA_CITY_STARTUP,
         },
         {
             .name = COMPOUND_STRING("Perlacia Museum"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY,
+            .healLocation = HEAL_LOCATION_PERLACIA_CITY_MUSEUM,
         },
         {
             .name = COMPOUND_STRING("Boomers"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY,
+            .healLocation = HEAL_LOCATION_PERLACIA_CITY_BOOMERS,
         },
         {
             .name = COMPOUND_STRING("Newspaper"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY,
+            .healLocation = HEAL_LOCATION_PERLACIA_CITY_NEWSPAPER,
         },
         {
             .name = COMPOUND_STRING("Sanitation"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY,
+            .healLocation = HEAL_LOCATION_PERLACIA_CITY_SANITATION,
         },
         {
             .name = COMPOUND_STRING("Sharprise Spire"),
-            .healLocation = HEAL_LOCATION_SHARPRISESPIRE_TOWER,
+            .healLocation = HEAL_LOCATION_SHARPRISESPIRE,
         },
     },
 };
