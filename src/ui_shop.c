@@ -1186,7 +1186,7 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
     ShopInventory_InitCategoryLists();
 
     // only adjust category index once!
-    if (!bak)
+    if (bak != gSaveBlock3Ptr->shopBuyAgainItems[0])
     {
         ShopGrid_VerticalInput(DOWN_PRESS);
     }
