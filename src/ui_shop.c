@@ -1127,6 +1127,11 @@ bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories category)
             || category == SHOP_CATEGORY_Z_CRYSTALS);
 }
 
+bool32 ShopPurchase_IsItemOneTimePurchase(u32 itemId)
+{
+     return ShopPurchase_IsCategoryOneTimePurchase(GetItemShopCategory(itemId));
+}
+
 static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 {
     u16 price = ShopConfig_Get()->handleTotalPrice(itemId, quantity);
@@ -1144,7 +1149,7 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 
     ShopGrid_SwitchMode(SHOP_MODE_SUCCESS);
 
-    if (!ShopPurchase_IsCategoryOneTimePurchase(GetItemShopCategory(itemId)))
+    if (!ShopPurchase_IsItemOneTimePurchase(itemId))
     {
         // Has the player purchased this item before?
         for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
@@ -1161,7 +1166,8 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
         {
             for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS - 1; i++)
             {
-                gSaveBlock3Ptr->shopBuyAgainItems[(MAX_PRESTO_BUY_AGAIN_ITEMS - i) - 1] = gSaveBlock3Ptr->shopBuyAgainItems[(MAX_PRESTO_BUY_AGAIN_ITEMS - i) - 2];
+                u32 idx = MAX_PRESTO_BUY_AGAIN_ITEMS - 1;
+                gSaveBlock3Ptr->shopBuyAgainItems[idx - 1] = gSaveBlock3Ptr->shopBuyAgainItems[idx - 2];
             }
         }
         else
@@ -1276,7 +1282,7 @@ static void ShopGrid_VerticalInput(s32 delta)
         // reverses input
         delta = additiveDelta ? -1 : 1;
 
-        if (!ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()) && gShopMenuDataPtr->maxItemQuantity)
+        if (!ShopPurchase_IsItemOneTimePurchase(ShopInventory_GetChosenItemId()) && gShopMenuDataPtr->maxItemQuantity)
         {
             if (!gShopMenuDataPtr->itemQuantity && additiveDelta)
             {
@@ -1350,7 +1356,7 @@ static void ShopGrid_HorizontalInput(s32 delta)
     }
     else
     {
-        if (!ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()) && gShopMenuDataPtr->maxItemQuantity)
+        if (!ShopPurchase_IsItemOneTimePurchase(ShopInventory_GetChosenItemId()) && gShopMenuDataPtr->maxItemQuantity)
         {
             if (gShopMenuDataPtr->itemQuantity >= (gShopMenuDataPtr->maxItemQuantity - 1)
              && additiveDelta)

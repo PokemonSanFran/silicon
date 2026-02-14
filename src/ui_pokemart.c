@@ -980,6 +980,7 @@ static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
     sprite->sArrow_SineValue += 8;
 
     sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
+     || ShopPurchase_IsItemOneTimePurchase(ShopInventory_GetChosenItemId())
      || gShopMenuDataPtr->itemQuantity == (gShopMenuDataPtr->maxItemQuantity - 1)
      || (gShopMenuDataPtr->itemQuantity == 0 && gShopMenuDataPtr->maxItemQuantity == 0));
 }
@@ -991,6 +992,7 @@ static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
     sprite->sArrow_SineValue += 8;
 
     sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
+     || ShopPurchase_IsItemOneTimePurchase(ShopInventory_GetChosenItemId())
      || gShopMenuDataPtr->itemQuantity == 0);
 }
 

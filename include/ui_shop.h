@@ -47,6 +47,7 @@ u32 ShopInventory_GetChosenItemId(void);
 void ShopInventory_SetCategoryNumItems(u32, u32);
 u32 ShopInventory_GetCategoryNumItems(u32);
 bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories);
+bool32 ShopPurchase_IsItemOneTimePurchase(u32);
 u32 ShopSprite_GetSpriteId(enum ShopMenuSprites);
 u32 ShopSprite_GetItemSpriteId(u32);
 enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void);
