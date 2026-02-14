@@ -93,7 +93,7 @@ static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
 static void PrestoHelper_UpdateFrontEnd(void);
 static enum PrestoShopTypes PrestoHelper_GetShopType(void);
 static u32 PrestoHelper_InitItemsList(void);
-static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 itemId);
+static bool8 PrestoHelper_ShouldRecommend(enum ShopMenuCategories category, u32 itemId);
 static bool8 PrestoHelper_HandleHeal(u32 itemId, enum ShopMenuCategories category);
 static bool8 PrestoHelper_HandleTournament(u32 itemId, enum ShopMenuCategories category);
 static bool8 PrestoHelper_HandleForest(u32 itemId, enum ShopMenuCategories category);
@@ -475,7 +475,7 @@ static enum PrestoShopTypes PrestoHelper_GetShopType(void)
     return PRESTO_TYPE_APP;
 }
 
-static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16 *recommendedCandidates, u8 *categoryCounts)
+static void PrestoHelper_ProcessRecommendedItems(u32 numCandidates, u16 *recommendedCandidates, u8 *categoryCounts)
 {
     u32 numRecSelected = 0;
 
@@ -490,7 +490,7 @@ static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16 *recomme
         ShopInventory_SetItemIdToGrid(selectedItem, risingCategory, numRecSelected);
         numRecSelected++;
 
-        // DebugPrintf("%S is getting reccomended in position %d",GetItemName(selectedItem),numRecSelected);
+        // DebugPrintf("%S is getting Recommended in position %d",GetItemName(selectedItem),numRecSelected);
 
         recommendedCandidates[randIdx] = recommendedCandidates[numCandidates - 1];
         numCandidates--;
@@ -498,9 +498,9 @@ static void PrestoHelper_ProcessReccomendedItems(u32 numCandidates, u16 *recomme
     }
 }
 
-static void PrestoHelper_ReccomendItem(enum ShopMenuCategories itemCat, u32 itemId, u16* recommendedCandidates, u32* numCandidates)
+static void PrestoHelper_RecommendItem(enum ShopMenuCategories itemCat, u32 itemId, u16* recommendedCandidates, u32* numCandidates)
 {
-    if (PrestoHelper_ShouldReccomend(itemCat, itemId) == FALSE)
+    if (PrestoHelper_ShouldRecommend(itemCat, itemId) == FALSE)
         return;
 
     recommendedCandidates[(*numCandidates)++] = itemId;
@@ -530,11 +530,11 @@ static u32 PrestoHelper_InitItemsList(void)
         if (itemCat == NUM_SHOP_CATEGORIES)
             continue;
 
-        PrestoHelper_ReccomendItem(itemCat, itemId, recommendedCandidates, &numCandidates);
+        PrestoHelper_RecommendItem(itemCat, itemId, recommendedCandidates, &numCandidates);
         ShopInventory_TryAddItemToList(itemId, itemCat, categoryCounts);
     }
 
-    PrestoHelper_ProcessReccomendedItems(numCandidates, recommendedCandidates, categoryCounts);
+    PrestoHelper_ProcessRecommendedItems(numCandidates, recommendedCandidates, categoryCounts);
     return ShopInventory_ProcessCategoryCounts(categoryCounts);
 
     /*
@@ -543,7 +543,7 @@ static u32 PrestoHelper_InitItemsList(void)
     */
 }
 
-static bool8 PrestoHelper_ShouldReccomend(enum ShopMenuCategories category, u32 itemId)
+static bool8 PrestoHelper_ShouldRecommend(enum ShopMenuCategories category, u32 itemId)
 {
     if (PokeMart_IsActive())
         return FALSE;
