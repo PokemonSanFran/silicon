@@ -15,11 +15,14 @@ variables:
 
 push_to_github:
   stage: push 
-  image: alpine/git:latest
+  image: 
+    name: alpine/git:latest
+    entrypoint: [""]
   variables:
     GIT_DEPTH: 0
     GITHUB_REPO_URL: "https://github.com/PokemonSanFran/silicon.git"
   before_script:
+    - apk add --no-cache bash
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
   script:
