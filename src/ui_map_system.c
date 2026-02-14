@@ -3716,15 +3716,13 @@ static u8 HandleWarpFailedNoCash(void)
     switch(sRegionMap->warpCounter)
     {
         case WARP_FAILED_PAUSE_START:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_BOO);
             StringCopy(sRegionMap->mapSecName, sText_NotEnoughMoney);
             PrintHeaderTitleToWindow();
-            //sRegionMap->cursorSpriteLOC->invisible = TRUE;
             SwapFailedCursorGraphics();
             sRegionMap->warpCounter--;
             break;
         case WARP_FAILED_PAUSE_END:
-            //sRegionMap->cursorSpriteLOC->invisible = FALSE;
             SwapBackCursorGraphics();
             if(GetMenuL2State())
                 sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
