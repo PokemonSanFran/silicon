@@ -14,6 +14,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_RABIES] =
     {
+        // PSF TODO Replace Glameow and Glavez Hill with string variables
         .userId = BUZZR_USER_KAI,
         .content = COMPOUND_STRING(
             "My cousin told me there's a mass rabies\n"

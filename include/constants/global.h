@@ -174,6 +174,7 @@ enum PlayerGender
     FEMALE,
     GENDER_COUNT,
     NON_BINARY,
+    NON_HUMAN,
     GENDER_EXPANDED_COUNT,
 };
 // End Silicon changes

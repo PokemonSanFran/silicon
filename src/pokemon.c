@@ -1227,13 +1227,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
 
-// Start siliconMerge
-    if (GetCurrentMap() == MAP_GLAVEZ_HILL && species == SPECIES_GLAMEOW)
-    {
-        value = Random() % 2;
-        SetMonData(&gEnemyParty[0], MON_DATA_POKERUS, &value);
-    }
-// End siliconMerge
+    TryRabiesPokerus(boxMon,species); // siliconMerge
     GiveBoxMonInitialMoveset(boxMon);
 }
 
@@ -7627,3 +7621,10 @@ bool32 IsSpeciesOfType(u32 species, enum Type type)
         return TRUE;
     return FALSE;
 }
+
+// Start pokedex
+bool32 IsSpeciesFromAlola(u32 species)
+{
+    return (gSpeciesInfo[species].isAlolaDex || IsSpeciesRegionalFormFromRegion(species, REGION_ALOLA));
+}
+// End pokedex

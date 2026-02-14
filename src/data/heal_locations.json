@@ -208,7 +208,7 @@
     {
       "id": "HEAL_LOCATION_CHASILLA",
       "map": "MAP_CHASILLA",
-      "x": 1,
+      "x": 6,
       "y": 4
     },
     {
@@ -244,7 +244,7 @@
     {
       "id": "HEAL_LOCATION_FORT_YOBU",
       "map": "MAP_FORT_YOBU",
-      "x": 10,
+      "x": 23,
       "y": 6
     },
     {
@@ -616,7 +616,7 @@
     {
       "id": "HEAL_LOCATION_FERRY_PORT_CHASILLA",
       "map": "MAP_CHASILLA",
-      "x": 0,
+      "x": 5,
       "y": 10
     },
     {

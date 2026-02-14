@@ -39,4 +39,7 @@ void DebugQuest_RPS(u8);
 void DebugQuest_DrugHelmetTest(u8);
 void DebugQuest_RestoreTirabudinGym(u8);
 u32 exponent(u32 y, u32 x);
+void CountDefeatedRabiesMon(void);
+void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
+
 #endif //GUARD_QUESTLOGIC_H

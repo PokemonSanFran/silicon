@@ -56,6 +56,7 @@
 #include "siliconDaycare.h" // siliconDaycare
 #include "ui_character_customization_menu.h" // playerCustom
 #include "follower_npc.h"
+#include "hidden_grotto.h" // hiddenGrotto
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -256,6 +257,8 @@ void NewGameInitData(void)
     ResetDexNav();
     ClearSiliconDaycareData(); // siliconDaycare
     ClearFollowerNPCData();
+    HiddenGrotto_SetAllSecretFlags(); // hiddenGrotto
+    ResetSavedGrottoMon();
 }
 
 static void ResetMiniGamesRecords(void)

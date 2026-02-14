@@ -3490,6 +3490,12 @@
 	.2byte \battlePartner
 	.endm
 
+    @ Start phenomenon
+    .macro setphenomenondata
+    .byte SCR_OP_PHENOMENON_DATA
+    .endm
+    @ End phenomenon
+
     @ Start adventureGuide
 	.macro openadventureguide guide:req
     setvar VAR_ADVENTURE_GUIDE_TO_OPEN, \guide
