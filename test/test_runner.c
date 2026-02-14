@@ -12,6 +12,7 @@
 #include "test_runner.h"
 #include "test/test.h"
 #include "test/battle.h"
+#include "silicon_test_exp.h" // trainerBattles
 
 #define TIMEOUT_SECONDS 60
 
@@ -312,6 +313,7 @@ top:
         break;
 
     case STATE_RUN_TEST:
+        gSiliconExpTestState.isExpTest = FALSE; // trainerBattles
         gTestRunnerState.state = STATE_REPORT_RESULT;
         gPersistentTestRunnerState.state = CURRENT_TEST_STATE_RUN;
         gPersistentTestRunnerState.expectCrash = FALSE;
