@@ -2,52 +2,67 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
-      - upcoming
   pull_request:
 
-jobs:
-  build:
-    if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
-    env:
-      GAME_VERSION: EMERALD
-      GAME_REVISION: 0
-      GAME_LANGUAGE: ENGLISH
-      COMPARE: 0
-      UNUSED_ERROR: 1
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+env:
+  GAME_VERSION: "EMERALD"
+  GAME_REVISION: "0"
+  GAME_LANGUAGE: "ENGLISH"
+  COMPARE: "0"
+  UNUSED_ERROR: "1"
+  NPROC: "16"
 
-      - name: Install binutils
+jobs:
+  build_rom:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
-        # build-essential and git are already installed
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go make git
 
-      - name: ROM
-        env:
-          COMPARE: 0
-        run: make -j${nproc} -O all
-        
-      - name: LTO
-        run: |
-          make tidy
-          make -j${nproc} LTO=1
-        # make tidy to purge previous build
+      - name: Build ROM
+        run: make -j$(nproc) -O all
 
-      - name: Test
-        env:
-          TEST: 1
-        run: |
-          make -j${nproc} check
-  allcontributors:
-    if: github.actor == 'allcontributors[bot]'
-    runs-on: ubuntu-latest
-    needs: []
+      - name: Upload ROM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: silicon-gba
+          path: silicon.gba
+          retention-days: 1
+
+  test_rom:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    needs: build_rom
     steps:
-      - name: Automatically pass for allcontributors
-        run: echo "CI automatically passes for allcontributors" && exit 0
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
+      - name: Download ROM artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: silicon-gba
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3 golang-go make git cmake libelf-dev
+
+      - name: Build and test
+        run: |
+          make -j$(nproc) > /dev/null
+          make -j$(nproc) check
+
+      - name: Upload ROM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: silicon-gba-tested
+          path: silicon.gba
+          retention-days: 1
