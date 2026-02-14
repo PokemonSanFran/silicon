@@ -1144,7 +1144,7 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 
     ShopGrid_SwitchMode(SHOP_MODE_SUCCESS);
 
-    if (!ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
+    if (!ShopPurchase_IsCategoryOneTimePurchase(GetItemShopCategory(itemId)))
     {
         // Has the player purchased this item before?
         for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
