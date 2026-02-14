@@ -3286,12 +3286,14 @@ static void Task_MapSystem_TrolleyMode_Main(u8 taskId)
     {
         PlaySE(SE_SELECT);
         u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec);
-        if(hasVisited == LOCATION_VISITED)
-        {
-            sRegionMap->warpCounter = 0;
-            sRegionMap->mapSecId = SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec;
-            gTasks[taskId].func = Task_MapSystem_TrolleyMode_Warp;
-        }
+        if(hasVisited != LOCATION_VISITED)
+            return;
+
+        sRegionMap->warpCounter = 0;
+        sRegionMap->mapSecId = SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec;
+        RemoveMoney(&gSaveBlock1Ptr->money, GetWarpPriceAtMapSecByMapType(sRegionMap->mapSecId));
+        gTasks[taskId].func = Task_MapSystem_TrolleyMode_Warp;
+
         return;
     }
     if(JOY_NEW(B_BUTTON))
@@ -3599,7 +3601,7 @@ static u8 HandleWarpTaxiCutscene(void)
     {
         case 0:
             VarSet(VAR_TAXI_DESTINATION,sRegionMap->mapSecId);
-            DebugPrintf("var is %d",VarGet(VAR_TAXI_DESTINATION));
+            //DebugPrintf("var is %d",VarGet(VAR_TAXI_DESTINATION));
             sRegionMap->warpCounter = 1;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             break;
