@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     env:
       GAME_VERSION: EMERALD
       GAME_REVISION: 0
