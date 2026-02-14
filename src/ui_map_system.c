@@ -2651,7 +2651,7 @@ static void PrintHeaderTitleToWindow()
                 }
                 else if(CheckIfHoverLocationUnlocked())
                 {
-                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, CountDigits(MAX_MONEY));
                     StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
 
@@ -2673,7 +2673,7 @@ static void PrintHeaderTitleToWindow()
                 }
                 else if(CheckIfHoverLocationUnlocked())
                 {
-                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN,CountDigits(MAX_MONEY));
                     StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
 
@@ -2691,14 +2691,11 @@ static void PrintHeaderTitleToWindow()
             {
                 if(CheckIfHoverLocationIsMapSecNone())
                 {
-                    //ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
-                    //StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                    //AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiBlankStateHeader);
                 }
                 else if(CheckIfHoverLocationUnlocked())
                 {
-                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, CountDigits(MAX_MONEY));
                     StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
 
@@ -2778,7 +2775,7 @@ static void PrintHeaderWarpConfirmToWindow(void)
     FillWindowPixelBuffer(WINDOW_FOOTER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     // Header Printing
-    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN,CountDigits(MAX_MONEY));
     StringExpandPlaceholders(gStringVar4, sText_Money_BarSmall);
     StringCopy(gStringVar1, sText_WarpConfirm);
 
@@ -3221,7 +3218,8 @@ static void PrintWarpPriceOnTooltip(u32 bgColor, u32 startTile) // 0xbc0 for one
     u32 windowId;
 
     void *objVram = (void *)(OBJ_VRAM0);
-    ConvertIntToDecimalStringN(gStringVar1, GetWarpPriceAtMapSecByMapType(sRegionMap->mapSecId), STR_CONV_MODE_LEFT_ALIGN, 4);
+    u32 price = GetWarpPriceAtMapSecByMapType(sRegionMap->mapSecId);
+    ConvertIntToDecimalStringN(gStringVar1, price, STR_CONV_MODE_LEFT_ALIGN, CountDigits(price));
     StringExpandPlaceholders(gStringVar4, sText_Money_BarSmall2);
 
     windowTileData = AddTextPrinterAndCreateWindowOnTooltip(gStringVar4, 2, 5, bgColor, &windowId);
