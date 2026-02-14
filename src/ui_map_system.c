@@ -2644,68 +2644,92 @@ static void PrintHeaderTitleToWindow()
     switch (sCurrentMapMode)
     {
         case MAP_MODE_DEFAULT:
-        case MAP_MODE_TROLLEY:
-        {
-            // Header Printing
-            if(!GetMenuL2State())
             {
-                ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
-                StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sRegionMap->mapSecName);
-            }
-            else // L2 State
-            {
-                ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
-                StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sRegionMap->mapSecName);
-            }
-            break;
-        }
-        case MAP_MODE_TAXI:
-        {
-            if(CheckIfHoverLocationIsMapSecNone())
-            {
-                //ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
-                //StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                //AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiBlankStateHeader);
-            }
-            else if(CheckIfHoverLocationUnlocked())
-            {
-                ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
-                StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("Select an Arriba destination."));
+                }
+                else if(CheckIfHoverLocationUnlocked())
+                {
+                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+                    StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
 
-                StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
-                StringExpandPlaceholders(gStringVar4, sText_TaxiHasLocationStateHeader);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
-            }
-            else
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Take Arriba to {STR_VAR_1}?"));
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                }
+                else
             {
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiLockedStateHeader);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take Arriba here yet."));
+                }
+                break;
             }
-            break;
-        }
+        case MAP_MODE_TROLLEY:
+            {
+                if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("Select an G.R.U.N.T. destination."));
+                }
+                else if(CheckIfHoverLocationUnlocked())
+                {
+                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+                    StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Take G.R.U.N.T. to {STR_VAR_1}?"));
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                }
+                else
+            {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take G.R.U.N.T. here yet."));
+                }
+                break;
+            }
+        case MAP_MODE_TAXI:
+            {
+                if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    //ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+                    //StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
+                    //AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiBlankStateHeader);
+                }
+                else if(CheckIfHoverLocationUnlocked())
+                {
+                    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
+                    StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, (20*8)+4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4, sText_TaxiHasLocationStateHeader);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                }
+                else
+            {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiLockedStateHeader);
+                }
+                break;
+            }
         case MAP_MODE_FLY:
-        {
-            if(CheckIfHoverLocationIsMapSecNone())
             {
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyBlankStateHeader);
-            }
-            else if(CheckIfHoverLocationUnlocked())
+                if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyBlankStateHeader);
+                }
+                else if(CheckIfHoverLocationUnlocked())
+                {
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4, sText_FlyHasLocationStateHeader);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                }
+                else
             {
-                StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
-                StringExpandPlaceholders(gStringVar4, sText_FlyHasLocationStateHeader);
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyLockedStateHeader);
+                }
+                break;
             }
-            else
-            {
-                AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyLockedStateHeader);
-            }
-            break;
-        }
     }
 
     // Footer Printing
