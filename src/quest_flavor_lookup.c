@@ -46,7 +46,7 @@
 
 //PSF TODO for eastern and western SF portions, we should show an objective that you haven't completed... maybe randomly choose every time you open?
 
-const u8 *GetQuestDesc_PlayersAdventure()
+const u8 *GetQuestDesc_PlayersAdventure(void)
 {
     u8 storyline = VarGet(VAR_STORYLINE_STATE);
 
@@ -195,7 +195,7 @@ const u8 *GetQuestDesc_PlayersAdventure()
     }
 }
 
-const u8 *GetQuestDoneDesc_PlayersAdventure()
+const u8 *GetQuestDoneDesc_PlayersAdventure(void)
 {
 	if (!FlagGet(FLAG_TIMELINE_TIMETRAVEL))
 	{
@@ -207,17 +207,17 @@ const u8 *GetQuestDoneDesc_PlayersAdventure()
 	}
 }
 
-const u8 *GetQuestDesc_RabiesOutbreak()
+const u8 *GetQuestDesc_RabiesOutbreak(void)
 {
 	u8 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT);
     StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
     GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
 	ConvertIntToDecimalStringN(gStringVar3, (QUEST_RABIES_OUTBREAK_COUNT - defeatedGlameowCount), STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_RABIES_OUTBREAK_COUNT));
-	StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Feral {STR_VAR_1} are attacking pets and people in {STR_VAR_1}. Subdue 10 of them to help reduce the outbreak. There are {STR_VAR_3} remaining."));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RABIESOUTBREAK].desc);
 	return gStringVar4;
 }
 
-const u8  *GetQuestDesc_BetweenAStoneAndAHardPlace()
+const u8  *GetQuestDesc_BetweenAStoneAndAHardPlace(void)
 {
     u8 goalNumTrolleyRides = 10;
     u8 numTrolleyRides = GetGameStat(GAME_STAT_TROLLEY_RIDES);
@@ -229,4 +229,12 @@ const u8  *GetQuestDesc_BetweenAStoneAndAHardPlace()
     StringExpandPlaceholders(gStringVar2,
             gText_BetweenAStoneAndAHardPlace_Flavor1);
     return gStringVar2;
+}
+
+const u8 *GetQuestDesc_FreshwaterEvolution(void)
+{
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
+    StringCopy(gStringVar2,GetSpeciesName(QUEST_FRESHWATER_EVOLUTION_SPECIES));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_FRESHWATEREVOLUTION].desc);
+    return gStringVar4;
 }

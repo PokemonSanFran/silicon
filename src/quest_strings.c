@@ -38,11 +38,6 @@ const u8 gText_Quest_HodouCityTunnels_Desc[] =_("Find somebody who might know th
 const u8 gText_Quest_HodouCityTunnels_DoneDesc[] =_("The eldest member of HodouCity tricked you into helping him recover a treasure - his childhood photos...");
 const u8 gText_Quest_HodouCityTunnels_Map[] =_("HodouCity");
 
-const u8 gText_Quest_FreshwaterEvolution_Name[] = _("Freshwater Evolution");
-const u8 gText_Quest_FreshwaterEvolution_Desc[] =_("Finding the secret spring inside\nHalerbaWilds and putting in an\nOctillery will turn it shiny!");
-const u8 gText_Quest_FreshwaterEvolution_DoneDesc[] =_("There's a spring, but Octillery don't\nlike freshwater. There is something\nunusual about this place though....");
-const u8 gText_Quest_FreshwaterEvolution_Map[] =_("HalerbaWilds");
-
 const u8 gText_Quest_BetweenAStoneAndAHardPlace_Name[] = _("Between a Stone and a Hard Place");
 const u8 gText_Quest_BetweenAStoneAndAHardPlace_Desc[] =_("Ride the cable ar enough times to get a rare stone to power up Pokemon.");
 const u8 gText_Quest_BetweenAStoneAndAHardPlace_DoneDesc[] =_("You got a stone for riding the cable car\n3 times, but it was a Evolutionary\nStone, not a Mega Stone...");

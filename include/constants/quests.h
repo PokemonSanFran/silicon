@@ -401,5 +401,11 @@ enum
 #define QUEST_SMOOTHIE_CRAFTING_QUANTITY_2 2
 #define QUEST_SMOOTHIE_CRAFTING_QUANTITY_3 1
 
+// ***********************************************************************
+// Quest: Freshwater Evolution
+// ***********************************************************************
+
+#define QUEST_FRESHWATER_EVOLUTION_SPECIES SPECIES_OCTILLERY
+#define QUEST_FRESHWATER_EVOLUTION_MAP     MAP_HALERBA_WILDS_SPRING
 
 #endif // GUARD_CONSTANTS_QUESTS_H

@@ -1674,7 +1674,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     [QUEST_RABIESOUTBREAK] =
     {
         .name = COMPOUND_STRING("Rabies Outbreak"),
-        .desc = COMPOUND_STRING("Feral Purrloin are endagering wildlife in Glavez Heights."),
+        .desc = COMPOUND_STRING("Feral {STR_VAR_1} are attacking pets and people in {STR_VAR_1}. Subdue 10 of them to help reduce the outbreak. There are {STR_VAR_3} remaining."),
         .rewardDesc = COMPOUND_STRING("Find the RSPCP staff member!"),
         .donedesc = COMPOUND_STRING("There's no rabies outbreak, but the Purrloin found in Glavez Heights are more likely to have Pokérus."),
         .map = COMPOUND_STRING("Glavez Heights"),
@@ -1856,11 +1856,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_FRESHWATEREVOLUTION] =
     {
-        .name = gText_Quest_FreshwaterEvolution_Name,
-        .desc = gText_Quest_FreshwaterEvolution_Desc,
-        .donedesc = gText_Quest_FreshwaterEvolution_DoneDesc,
-        .map = gText_Quest_FreshwaterEvolution_Map,
-        .sprite = SPECIES_OCTILLERY,
+        .name = COMPOUND_STRING("Freshwater Evolution"),
+        .desc = COMPOUND_STRING("Bring an octopus-like Pokémon to the secret spring in {STR_VAR_1}. Will it transform into a shiny?"),
+        .donedesc = COMPOUND_STRING("{STR_VAR_2} changes color when exposed to freshwater, but they don’t turn shiny."),
+        .map = gText_HalerbaWilds,
+        .sprite = QUEST_FRESHWATER_EVOLUTION_SPECIES,
         .spritetype = QUEST_SPRITE_TYPE_PKMN,
         .subquests = NULL,
         .numSubquests = 0
@@ -2739,7 +2739,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .name = COMPOUND_STRING("RPS"),
         .desc = COMPOUND_STRING("Beat Monty in a friendly wager over Mach-Focus-Hand."),
         .donedesc = COMPOUND_STRING("Monty admitted to cheating, but you beat him anyways. He still wants to go double or nothing - how much money does Monty have?"),
-        .map = gText_GlavezHeights,
+        .map = gText_CapheCity,
         .sprite = SPECIES_HITMONCHAN,
         .spritetype = QUEST_SPRITE_TYPE_PKMN,
         .subquests = NULL,

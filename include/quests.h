@@ -259,6 +259,7 @@ u32 GetMaxQuestState(u16 questId);
 u32 CountCompletedQuests(void);
 enum QuestCases ReturnQuestState(enum QuestIdList questId);
 const u8 *GetQuestName(s32 questId);
+const u8 *GetQuestDesc(s32 questId);
 bool8 IsQuestInactiveState(s32 questId);
 u32 CountInactiveQuests(void);
 bool8 IsQuestRewardState(s32 questId);

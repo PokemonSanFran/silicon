@@ -160,7 +160,6 @@ void CopyCursorTiles(u32 windowId, const void* tile1, const void* tile2, const v
 static void UpdateQuestDoneDesc(s32 questId);
 static void QuestMenu_UpdateQuestRewardDesc(s32 questId);
 const u8 *GetSubquestName(s32 questId);
-static const u8 *GetQuestDesc(s32 questId);
 static const u8 *GetQuestRewardDesc(s32 questId);
 static const u8 *GetQuestDoneDesc(s32 questId);
 static void PrintQuestDescription(s32 questId);
@@ -1785,7 +1784,8 @@ const u8 *GetQuestRewardDesc(s32 questId)
 
 const u8 *GetQuestDesc(s32 questId)
 {
-    switch (questId) {
+    switch (questId)
+    {
         case QUEST_PLAYERSADVENTURE:
             return GetQuestDesc_PlayersAdventure();
             break;
@@ -1794,6 +1794,9 @@ const u8 *GetQuestDesc(s32 questId)
             break;
         case QUEST_BETWEENASTONEANDAHARDPLACE:
             return GetQuestDesc_BetweenAStoneAndAHardPlace();
+            break;
+        case QUEST_FRESHWATEREVOLUTION:
+            return GetQuestDesc_FreshwaterEvolution();
             break;
         default:
             return sSideQuests[questId].desc;

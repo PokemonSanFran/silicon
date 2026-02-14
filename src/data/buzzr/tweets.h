@@ -83,15 +83,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_FRESHWATER] =
     {
         .userId = BUZZR_USER_VAUGHN,
-        .content = COMPOUND_STRING(
-            "Check out my favorite spot in HalerbaWilds!\n"
-            "There's a clearing with no tall grass,\n"
-            "beautiful trees, and a fresh water spring!\n"
-            "The water tastes better than anywhere else\n"
-            "in the region, and its got magicial\n"
-            "properties: If you bring a octopus Pokémon,\n"
-            "it'll turn shiny!"
-            ),
+        .content = COMPOUND_STRING("Check out my favorite spot in {STR_VAR_1}! There's a clearing with no tall grass, beautiful trees, and a fresh water spring! The water tastes better than anywhere else in the region, and it’s got magical properties: If you bring an octopus Pokémon, it'll turn shiny!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Freshwater,
         .quest = QUEST_FRESHWATEREVOLUTION,
