@@ -750,10 +750,11 @@ void LoadPictureFromOverworld(void)
 
 static void Task_BuzzrWaitFadeIn(u8 taskId)
 {
-    if (!gPaletteFade.active)
-    {
-        gTasks[taskId].func = Task_MainInput;
-    }
+    if (gPaletteFade.active)
+        return;
+
+    enum BuzzrZapIds currentTweetId = GetTweetIdFromPosition(GetCurrentPosition());
+    Buzzr_TryStartQuestFromTweet(currentTweetId,taskId);
 }
 
 static void Task_MainInput(u8 taskId)
@@ -1785,6 +1786,8 @@ void Buzzr_ShowTweetOverworld(u16 tweetId)
 void Buzzr_HideTweetOverworld(void)
 {
     ClearToTransparentAndRemoveWindow(gTweetOverworldWindowId);
+    ClearTweetFromOverworld();
+    gTweetOverworldWindowId = WINDOW_NONE;
 }
 
 static void SetTweetFromOverworld(u16 tweetId)
@@ -1901,7 +1904,10 @@ static void Buzzr_TryStartQuestFromTweet(u32 tweetId, u8 taskId)
     enum QuestIdList quest = Buzzr_ReturnUnstartedQuestFromTweet(tweetId);
 
     if (quest == QUEST_NONE)
+    {
+        gTasks[taskId].func = Task_MainInput;
         return;
+    }
 
     QuestMenu_GetSetQuestState(quest,FLAG_SET_UNLOCKED);
     QuestMenu_GetSetQuestState(quest,FLAG_SET_ACTIVE);
@@ -1913,7 +1919,7 @@ static enum QuestIdList Buzzr_ReturnUnstartedQuestFromTweet(u32 tweetId)
 {
     enum QuestIdList questId = GetQuest(tweetId);
 
-    if (questId == QUEST_NONE)
+    if (questId == 0)
         return QUEST_NONE;
 
     if (IsQuestRewardState(questId))
@@ -2014,6 +2020,9 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
     {
         default:
             return;
+        case TWEET_QUEST_NPC_FRESHWATER:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
+            break;
         case TWEET_QUEST_NPC_SMOOTHIE:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA),MAP_NUM(MAP_CHASILLA))->regionMapSectionId,0);
             StringCopy(gStringVar2,COMPOUND_STRING(""));
