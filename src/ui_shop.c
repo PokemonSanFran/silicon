@@ -671,26 +671,31 @@ static void Task_Shop_Idle(u8 taskId)
         categoryIdx = ShopGrid_GetCurrentCategoryIndex(),
         itemQuantity = gShopMenuDataPtr->itemQuantity;
 
-    if (JOY_NEW(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
     {
         ShopGrid_VerticalInput(UP_PRESS);
+        goto UPDATE;
     }
 
-    if (JOY_NEW(DPAD_DOWN))
+    if (JOY_REPEAT(DPAD_DOWN))
     {
         ShopGrid_VerticalInput(DOWN_PRESS);
+        goto UPDATE;
     }
 
-    if (JOY_NEW(DPAD_RIGHT))
+    if (JOY_REPEAT(DPAD_RIGHT))
     {
         ShopGrid_HorizontalInput(RIGHT_PRESS);
+        goto UPDATE;
     }
 
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_REPEAT(DPAD_LEFT))
     {
         ShopGrid_HorizontalInput(LEFT_PRESS);
+        goto UPDATE;
     }
 
+    UPDATE:
     if (categoryIdx != ShopGrid_GetCurrentCategoryIndex()
      || itemIdx != ShopGrid_GetCurrentItemIndex()
      || itemQuantity != gShopMenuDataPtr->itemQuantity)

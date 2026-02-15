@@ -294,8 +294,14 @@ static inline void PrestoPrint_Categories(void)
 
         if (!i)
         {
-            StringCopy(gStringVar1, gShopCategoryNames[ShopGrid_CategoryInRow(row)]);
-            StringCopy(gStringVar2, GetItemName(ShopInventory_GetItemIdFromGrid(row, ShopGrid_GetCurrentItemIndex())));
+            u8 *end;
+
+            end = StringCopy(gStringVar1, gShopCategoryNames[ShopGrid_CategoryInRow(row)]);
+            PrependFontIdToFit(gStringVar1, end, FONT_SMALL_NARROW, TILE_TO_PIXELS(7));
+
+            end = StringCopy(gStringVar2, GetItemName(ShopInventory_GetItemIdFromGrid(row, ShopGrid_GetCurrentItemIndex())));
+            PrependFontIdToFit(gStringVar2, end, FONT_SMALL_NARROW, TILE_TO_PIXELS(8));
+
             StringExpandPlaceholders(gStringVar4, sText_FirstRowName);
         }
         else
