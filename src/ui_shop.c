@@ -641,7 +641,7 @@ static void Task_Shop_Idle(u8 taskId)
         {
         default:
             break;
-                /*
+        /*
         case SHOP_MODE_DEFAULT:
             {
                 PlaySE(SE_SELECT);
@@ -652,7 +652,7 @@ static void Task_Shop_Idle(u8 taskId)
                 ShopHelper_UpdateFrontEnd();
                 break;
             }
-            */
+        */
         case SHOP_MODE_SUCCESS:
             PlaySE(SE_PC_OFF);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
