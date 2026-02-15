@@ -1,27 +1,17 @@
 mapscripts HalerbaWilds_Spring_MapScripts{
 	MAP_SCRIPT_ON_TRANSITION {
-		call(Quest_FreshwaterEvolution_HideObject_Script)
 	}
 }
 
-//PSF TODO write evo method so that the spring bypasses most other evo methods
-// https://docs.google.com/spreadsheets/d/1TLIOdydz6I1bkhSNhv9f0xoqBBbGmTYaUuTgLqXkwJQ/edit#gid=0
-
-script HalerbaWilds_Spring_Bystander_Event_Script
+script HalerbaWilds_Spring_Springtrainer_Event_Script
 {
-	returnqueststate(QUEST_FRESHWATEREVOLUTION)
-
-	switch (var(VAR_RESULT))
-	{
-        case 4:
-			msgbox(format("I wonder what other Pokemon will evolve here?"), MSGBOX_NPC)
-		default:
-			msgbox(format("Man, this place is absolutely beautiful!"), MSGBOX_NPC)
-	end
-}
-}
-
-text gText_HalerbaWilds_Spring_ThisPlace
-{
-	format("Man, this place is absolutely beautiful!")
+    lock
+    faceplayer
+    goto_if_quest_reward(QUEST_FRESHWATEREVOLUTION,Quest_FreshwaterEvolution_Reward_Script)
+    goto_if_quest_complete(QUEST_FRESHWATEREVOLUTION,Quest_FreshwaterEvolution_Complete_Dialogue)
+    msgbox(format("Unova’s Moor of Icirrus is a lot like this place…"),,SPEAKER_SPRINGTRAINER)
+    msgbox(format("But it doesn’t freeze over in the winter!"),,SPEAKER_SPRINGTRAINER)
+    closemessage
+    releaseall
+    end
 }

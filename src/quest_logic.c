@@ -1426,27 +1426,47 @@ bool8 Quest_SmoothieCrafting_CheckNeededItems(void)
 // The function stores the nickname of the last Octillery scanned inside of gStringVar1/STR_VAR_1.
 bool8 IsPartyFullOfShinyOctillery(void)
 {
-    u8 count = 0, partyCount = CalculatePlayerPartyCount();
-    u16 species = 0;
+    u32 partyCount = CalculatePlayerPartyCount();
 
     for (gSpecialVar_0x8004 = 0; gSpecialVar_0x8004 <= partyCount; gSpecialVar_0x8004++)
     {
-        species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES);
-        if (species == SPECIES_OCTILLERY)
-        {
-            if (IsMonShiny(&gPlayerParty[gSpecialVar_0x8004]))
-            {
-                count++;
-            }
-            else
-            {
-                GetMonNickname(&gPlayerParty[gSpecialVar_0x8004], gStringVar1);
-                break;
-            }
-        }
+        if(GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES) != QUEST_FRESHWATER_EVOLUTION_SPECIES)
+            continue;
+
+        if (IsMonShiny(&gPlayerParty[gSpecialVar_0x8004]))
+            continue;
+
+        GetMonNickname(&gPlayerParty[gSpecialVar_0x8004], gStringVar1);
+        return FALSE;
     }
 
-    return (count == partyCount) ? TRUE : FALSE;
+    return TRUE;
+}
+
+void DebugQuest_FreshwaterEvolution(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_FRESHWATER_NOT_STARTED:
+            break;
+        case STATE_QUEST_FRESHWATER_STARTED:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
+            QuestMenu_ScriptSetActive(QUEST_FRESHWATEREVOLUTION);
+            break;
+        case STATE_QUEST_FRESHWATER_REWARD:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
+            QuestMenu_ScriptSetReward(QUEST_FRESHWATEREVOLUTION);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_CAUGHT);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_SEEN);
+            break;
+        case STATE_QUEST_FRESHWATER_COMPLETE:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
+            QuestMenu_ScriptSetComplete(QUEST_FRESHWATEREVOLUTION);
+            AddBagItem(QUEST_FRESHWATER_EVOLUTION_ITEM,1);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_CAUGHT);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_SEEN);
+            break;
+    }
 }
 
 // ***********************************************************************

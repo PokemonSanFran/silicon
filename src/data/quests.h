@@ -1863,7 +1863,38 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = QUEST_FRESHWATER_EVOLUTION_SPECIES,
         .spritetype = QUEST_SPRITE_TYPE_PKMN,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_FRESHWATER_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not_Started"),
+                .setupFunc = DebugQuest_FreshwaterEvolution,
+                side_quest_map(MAP_HALERBA_WILDS_SPRING),
+                .warpId = 0,
+            },
+            [STATE_QUEST_FRESHWATER_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_FreshwaterEvolution,
+                side_quest_map(MAP_HALERBA_WILDS_SPRING),
+                .warpId = 0,
+            },
+            [STATE_QUEST_FRESHWATER_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_FreshwaterEvolution,
+                side_quest_map(MAP_HALERBA_WILDS_SPRING),
+                .warpId = 0,
+            },
+            [STATE_QUEST_FRESHWATER_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_FreshwaterEvolution,
+                side_quest_map(MAP_HALERBA_WILDS_SPRING),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_BETWEENASTONEANDAHARDPLACE] =
     {

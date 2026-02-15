@@ -1,16 +1,14 @@
-const BYSTANDER = 1
+const SPRINGTRAINER = LOCALID_SPRINGTRAINER
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const OCTILLERY = 2
-
-script Quest_FreshwaterEvolution_HideObject_Script{
-    setflag(FLAG_TEMP_1)
-}
+const OCTILLERY = (LOCALID_CAMERA + 1)
 
 script Quest_FreshwaterEvolution_CheckPartyAndQuest_Script{
+#if RELEASE == FALSE
     call_if_quest_active(QUEST_FRESHWATEREVOLUTION,Quest_FreshwaterEvolution_Debug_Script)
-    //PSF TODO remove this when ready
+#endif
+//PSF TODO remove this when ready or get preproc working
 
-    setvar(VAR_0x8005,SPECIES_OCTILLERY)
+    setvar(VAR_0x8005,QUEST_FRESHWATER_EVOLUTION_SPECIES)
     special(CheckSpecies)
 
     if(var(VAR_RESULT)){
@@ -22,7 +20,7 @@ script Quest_FreshwaterEvolution_CheckPartyAndQuest_Script{
 }
 
 script Quest_FreshwaterEvolution_AlreadyShiny_Dialogue{
-        msgbox(format("Oh wait, you're already shiny..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Oh that's right, you're already shiny..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_SWEAT)
 
         closemessage
         call(Quest_FreshwaterEvolution_Recall_Script)
@@ -33,9 +31,27 @@ script Quest_FreshwaterEvolution_AlreadyShiny_Dialogue{
 }
 
 script Quest_FreshwaterEvolution_Debug_Script{
-    givemon(SPECIES_OCTILLERY,1)
+    givemon(QUEST_FRESHWATER_EVOLUTION_SPECIES,1)
     msgbox(format("you now have an octillery. might be in your boxes."))
     return
+}
+
+script Quest_FreshwaterEvolution_GoOctillery_Script
+{
+    playse(SE_BALL_OPEN)
+    waitse
+    spawnobject(graphicsId=(OBJ_EVENT_MON + QUEST_FRESHWATER_EVOLUTION_SPECIES),localId=OCTILLERY,x=4,y=7,movementType=MOVEMENT_TYPE_FACE_RIGHT, elevation=3)
+    playmoncry(QUEST_FRESHWATER_EVOLUTION_SPECIES, CRY_MODE_ENCOUNTER)
+    waitmoncry
+}
+
+script Quest_FreshwaterEvolution_GoShinyOctillery_Script
+{
+    playse(SE_BALL_OPEN)
+    waitse
+    spawnobject(graphicsId=(OBJ_EVENT_MON + OBJ_EVENT_MON_SHINY + QUEST_FRESHWATER_EVOLUTION_SPECIES),localId=OCTILLERY,x=4,y=7,movementType=MOVEMENT_TYPE_FACE_RIGHT, elevation=3)
+    playmoncry(QUEST_FRESHWATER_EVOLUTION_SPECIES, CRY_MODE_ENCOUNTER)
+    waitmoncry
 }
 
 script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
@@ -44,19 +60,15 @@ script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
     waitmovement(PLAYER)
     delay(30)
 
-    playse(SE_BALL_OPEN)
-    waitse
-    clearflag(FLAG_TEMP_1)
-    addobject(OCTILLERY)
-    playmoncry(SPECIES_OCTILLERY, CRY_MODE_ENCOUNTER)
-    waitmoncry
-
     specialvar(VAR_0x8000, IsPartyFullOfShinyOctillery)
-    if (var(VAR_0x8000) == TRUE){
+    if (var(VAR_0x8000) == TRUE)
+    {
+        call(Quest_FreshwaterEvolution_GoShinyOctillery_Script)
         goto(Quest_FreshwaterEvolution_AlreadyShiny_Dialogue)
     }
 
-    msgbox(format("Okay let's see... come on {STR_VAR_1}, hop in the water!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    call(Quest_FreshwaterEvolution_GoOctillery_Script)
+    msgbox(format("Okay {STR_VAR_1}, into the spring!"),,SPEAKER_ALICIA)
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceDown)
@@ -73,42 +85,75 @@ script Quest_FreshwaterEvolution_StartCutscene_Dialogue{
     showobjectat(OCTILLERY, MAP_HALERBA_WILDS_SPRING)
     applymovement(OCTILLERY, moves(jump_in_place_up, jump_2_up, face_right, jump_in_place_right * 2, step_end))
     applymovement(PLAYER,Common_Movement_FaceLeft)
-    playmoncry(SPECIES_OCTILLERY, CRY_MODE_HIGH_PITCH)
+    playmoncry(QUEST_FRESHWATER_EVOLUTION_SPECIES, CRY_MODE_HIGH_PITCH)
     waitmoncry
     waitmovement(OCTILLERY)
     msgbox(format("{STR_VAR_1} looks very distressed!"),MSGBOX_DEFAULT)
-    closemessage
-
-    call(Quest_FreshwaterEvolution_Recall_Script)
-
-    msgbox(format("The color changed, but I don't think its a shiny now..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    goto(Quest_FreshwaterEvolution_BystanderScene_Script)
+    msgbox(format("The color changed, but I don't think its a shiny now..."),,SPEAKER_ALICIA)
+    msgbox(format("Did it work?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    goto(Quest_FreshwaterEvolution_SpringtrainerScene_Script)
 }
 
-script Quest_FreshwaterEvolution_BystanderScene_Script{
-    applymovement(BYSTANDER, moves(walk_right * 2, face_down, step_end))
-    waitmovement(BYSTANDER)
+script Quest_FreshwaterEvolution_SpringtrainerScene_Script{
+    applymovement(SPRINGTRAINER, moves(walk_right * 2, face_down, step_end))
+    waitmovement(SPRINGTRAINER)
     applymovement(PLAYER,Common_Movement_FaceUp)
 
-    msgbox(format("Hahaha are you trying that Shiny Octillery trick from Buzzr?"),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
-
-    msgbox(format("Yeah, you know about that?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
-    msgbox(format("Been seeing it a lot lately! Octopuses naturally change color when under stress, and they're seawater animals. Any ol' octopus would react that way. Poor thing, it'll probably be fine after chilling in your Pokeball for a bit."),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
-    msgbox(format("There is something weird about this spring though. I was training a Graveler here, and it suddenly evolved on its own! No Linking Cord or anything!"),MSGBOX_DEFAULT,SPEAKER_DEFAULT)
-
-    msgbox(format("Good to know..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
+    msgbox(format("Are you seriously attempting that shiny Octillery trick from Buzzr?"),,SPEAKER_SPRINGTRAINER)
+msgbox(format("Yeah, why didn’t it work?"),,SPEAKER_ALICIA)
+msgbox(format("Octopi are creatures of the sea, and change color when they’re stressed. You just dumped it into a freshwater spring!"),,SPEAKER_SPRINGTRAINER)
+msgbox(format("What kind of Trainer just blindly follows Internet trends? What kind of Trainer are you anyway?"),,SPEAKER_SPRINGTRAINER,TAIL_SHOUT,EMOTE_ANGRY)
+msgbox(format("Maybe the King was right about Trainers…"),,SPEAKER_SPRINGTRAINER,TAIL_WHISPER,EMOTE_ANGRY)
     closemessage
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    waitmovement(PLAYER)
+msgbox(format("I’m sorry {STR_VAR_1}."),,SPEAKER_ALICIA,,EMOTE_SWEAT)
+    closemessage
+
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(PLAYER)
+msgbox(format("Thanks. You’re right, I need to be more cautious."),,SPEAKER_ALICIA,,EMOTE_SAD)
+msgbox(format("…at least you apologized to your Pokémon. Maybe there’s hope for you yet."),,SPEAKER_SPRINGTRAINER)
+msgbox(format("It will take a while to rebuild trust with {STR_VAR_1}, but it will be fine."),,SPEAKER_SPRINGTRAINER)
+    closemessage
+    call(Quest_FreshwaterEvolution_Recall_Script)
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_FRESHWATEREVOLUTION)
+    goto(Quest_FreshwaterEvolution_Reward_Script)
+}
+
+script Quest_FreshwaterEvolution_Reward_Script
+{
+    checkitemspace(QUEST_FRESHWATER_EVOLUTION_ITEM,1)
+    if (!var(VAR_RESULT))
+    {
+        msgbox(format("Your bag looks full. Come back when you have some room."),,SPEAKER_SPRINGTRAINER)
+        closemessage
+        releaseall
+        end
+    }
+    msgbox(format("An old sage once gave this to me, but I think you need it more than me."),,SPEAKER_SPRINGTRAINER)
+    closemessage
+    cueobjectplayer(SPRINGTRAINER)
+    giveitem(QUEST_FRESHWATER_EVOLUTION_ITEM,1)
     completequest(QUEST_FRESHWATEREVOLUTION)
     call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
     release
     end
 }
 
-script Quest_FreshwaterEvolution_Recall_Script{
+script Quest_FreshwaterEvolution_Recall_Script
+{
     playse(SE_BALL_OPEN)
     waitse
     removeobject(OCTILLERY)
-    }
+}
+
+script Quest_FreshwaterEvolution_Complete_Dialogue
+{
+    msgbox(format("I moved here seven years ago, from Unova."),,SPEAKER_SPRINGTRAINER)
+    msgbox(format("I used to think that Trainers were inherently abusive to Pokémon… but as I’ve grown older, I’ve had a change of heart."),,SPEAKER_SPRINGTRAINER)
+    closemessage
+    releaseall
+        end
+}
 

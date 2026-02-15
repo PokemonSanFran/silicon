@@ -40,6 +40,7 @@ void DebugQuest_RPS(u8);
 void DebugQuest_DrugHelmetTest(u8);
 void DebugQuest_RestoreTirabudinGym(u8);
 void DebugQuest_RabiesOutbreak(u8);
+void DebugQuest_FreshwaterEvolution(u8);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
