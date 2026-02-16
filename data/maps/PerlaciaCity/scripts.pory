@@ -6,6 +6,7 @@ const MUGGERB = 4
 mapscripts PerlaciaCity_MapScripts {
     MAP_SCRIPT_ON_RESUME {
         call(Quest_StopMugging_HideObject_Script)
+		callnative(WarpTaxiAfterCutscene)
     }
 
     MAP_SCRIPT_ON_TRANSITION {

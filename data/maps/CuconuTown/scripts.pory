@@ -2,6 +2,10 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 
 mapscripts CuconuTown_MapScripts
 {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION
     {
         call(AngelDelivery_Script_HideBikers)

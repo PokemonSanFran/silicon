@@ -1,4 +1,8 @@
 mapscripts HalaiIsland_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(HalaiIsland_LayoutSwap_Script)
         call(Quest_StealTheAxe_HideLeader_Script)

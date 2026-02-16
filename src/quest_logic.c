@@ -41,6 +41,7 @@
 #include "battle_scripts.h"
 #include "quests.h"
 #include "constants/trainer_types.h"
+#include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 
 bool32 HasPlayerJoinedTheTide(void)
@@ -58,19 +59,14 @@ u32 GetCurrentMap(void)
 
 u16 Quest_Generic_CountRemainingSubquests(u16 relevantQuest)
 {
-    u16 numRemainingQuests = sSideQuests[relevantQuest].numSubquests;
-    u16 totalNumSubquests = numRemainingQuests;
-    u8 currentSubQuest;
+    u32 totalSubquests = sSideQuests[relevantQuest].numSubquests;
+    u32 completed = 0;
 
-    for (currentSubQuest = 0; currentSubQuest < totalNumSubquests; currentSubQuest++)
-    {
+    for (u32 currentSubQuest = 0; currentSubQuest < totalSubquests; currentSubQuest++)
         if (QuestMenu_GetSetSubquestState(relevantQuest, FLAG_GET_COMPLETED, currentSubQuest))
-        {
-            numRemainingQuests--;
-        }
-    }
+            completed++;
 
-    return numRemainingQuests;
+    return (totalSubquests - completed);
 }
 
 u32 Quest_Generic_CountAndBufferRemainingSubquests(u16 relevantQuest)
@@ -1144,22 +1140,19 @@ bool8 Quest_Persuasivepassenger_ShouldPlayThirdDriver(void)
 }
 
 u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void){
-    bool8 questActive = QuestMenu_GetSetQuestState(QUEST_PERSUASIVEPASSENGER,FLAG_GET_ACTIVE);
-    u16 questResult = 99;
+    if(!QuestMenu_GetSetQuestState(QUEST_PERSUASIVEPASSENGER,FLAG_GET_ACTIVE))
+        return NO_EXCEPTION;
 
-    if (questActive == TRUE){
+    if (Quest_Persuasivepassenger_ShouldPlayFirstDriver())
+        return EXCEPTION_3;
 
-        if (Quest_Persuasivepassenger_ShouldPlayFirstDriver())
-            questResult = 3;
+    if (Quest_Persuasivepassenger_ShouldPlaySecondDriver())
+        return EXCEPTION_2;
 
-        if (Quest_Persuasivepassenger_ShouldPlaySecondDriver())
-            questResult = 2;
+    if (Quest_Persuasivepassenger_ShouldPlayThirdDriver())
+        return EXCEPTION_1;
 
-        if (Quest_Persuasivepassenger_ShouldPlayThirdDriver())
-            questResult = 1;
-
-    }
-    return questResult;
+    return NO_EXCEPTION;
 }
 
 bool8 Quest_Persuasivepassenger_CheckNeededItems(void){

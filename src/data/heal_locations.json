@@ -590,12 +590,6 @@
       "y": 12
     },
     {
-      "id": "HEAL_LOCATION_SHARPRISESPIRE_TOWER",
-      "map": "MAP_PERLACIA_CITY",
-      "x": 5,
-      "y": 12
-    },
-    {
       "id": "HEAL_LOCATION_FERRY_PORT_HALAI_ISLAND",
       "map": "MAP_HALAI_ISLAND",
       "x": 3,
@@ -624,6 +618,60 @@
       "map": "MAP_ESPULEE_OUTSKIRTS",
       "x": 5,
       "y": 33
+    },
+    {
+      "id": "HEAL_LOCATION_GLAVEZ_HEIGHTS",
+      "map": "MAP_GLAVEZ_HILL",
+      "x": 10,
+      "y": 7
+    },
+    {
+      "id": "HEAL_LOCATION_GLAVEZ_HILL_TAXI_UNION",
+      "map": "MAP_GLAVEZ_HILL",
+      "x": 6,
+      "y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_PERLACIA_CITY_BOOMERS",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 11,
+      "y": 20
+    },
+    {
+      "id": "HEAL_LOCATION_PERLACIA_CITY_MUSEUM",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 28,
+      "y": 24
+    },
+    {
+      "id": "HEAL_LOCATION_PERLACIA_CITY_NEWSPAPER",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 6,
+      "y": 20
+    },
+    {
+      "id": "HEAL_LOCATION_PERLACIA_CITY_SANITATION",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 1,
+      "y": 20
+    },
+    {
+      "id": "HEAL_LOCATION_PERLACIA_CITY_STADIUM",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 31,
+      "y": 39
+    },
+    {
+      "id": "HEAL_LOCATION_PERLACIA_CITY_STARTUP",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 4,
+      "y": 37
+    },
+    {
+      "id": "HEAL_LOCATION_SHARPRISESPIRE",
+      "map": "MAP_PERLACIA_CITY",
+      "x": 5,
+      "y": 12
     }
   ]
 }
