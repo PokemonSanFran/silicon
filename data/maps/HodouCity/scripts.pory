@@ -1,4 +1,8 @@
 mapscripts HodouCity_MapScripts{
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(HowDisappointing_ManageObject_Script)
         call(Quest_CulturalPurity_HideLeader_Script)

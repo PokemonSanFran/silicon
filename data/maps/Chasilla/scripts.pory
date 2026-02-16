@@ -1,4 +1,8 @@
 mapscripts Chasilla_MapScripts{
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(BreedingCenter_Script_SignifyEggReady)
         call(swagbag2_SetUp_Object_Script)
