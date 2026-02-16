@@ -83,11 +83,6 @@ script Taxi_StartBattle_Dialogue{
     showmoneybox(0,0)
     callnative(Taxi_BufferDestinationMapName)
     msgbox(gText_Taxi_HereWeAre)
-    variableremovemoney(VAR_0x8005)
-    updatemoneybox
-    playse(SE_SHOP)
-    waitse
-    hidemoneybox
     msgbox(gText_Taxi_WhatDoYouMean)
     closemessage
     hidemoneybox
