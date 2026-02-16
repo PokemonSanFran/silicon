@@ -16,6 +16,7 @@ enum LocationType {
 
 enum MapModes {
     MAP_MODE_DEFAULT,
+    MAP_MODE_ARRIBA = MAP_MODE_DEFAULT,
     MAP_MODE_TAXI,
     MAP_MODE_FLY,
     MAP_MODE_TROLLEY,
@@ -90,8 +91,6 @@ enum GrayPOILocations { // Locations which have a gray POI sprite for them
 
 #define FARE_BASE_FLY 0
 #define FARE_DISTANCE_FLY FARE_BASE_FLY
-
-#define MAP_MODE_ARRIBA MAP_MODE_DEFAULT
 
 #define FONT_MAP_HELP_BAR FONT_NARROW
 

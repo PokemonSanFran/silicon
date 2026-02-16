@@ -2989,6 +2989,7 @@ static void ShowL2WindowBG(void)
         ShowL2Selector(LEFT);
     }
     ShowBg(1);
+    PrintWarpPriceOnTooltip_AllFrames();
 }
 
 static void ReprintL2WindowText(void)
@@ -3178,7 +3179,7 @@ static u8 ProcessRegionMapInput_L2_State(void) // In L2 State Just Pass Along A/
         {
             sRegionMap->l2_selection -= 1;
         }
-
+        PrintWarpPriceOnTooltip_AllFrames();
         ReprintL2WindowText();
         return input;
     }
@@ -3199,6 +3200,7 @@ static u8 ProcessRegionMapInput_L2_State(void) // In L2 State Just Pass Along A/
             sRegionMap->l2_selection += 1;
         }
 
+        PrintWarpPriceOnTooltip_AllFrames();
         ReprintL2WindowText();
         return input;
     }
@@ -3270,19 +3272,33 @@ static u32 CalculateDistance(u32 nextLocation)
 u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
 {
     u32 distance = CalculateDistance(mapSecId);
-    enum FareVariables type = sCurrentMapMode;
+    enum MapModes type = sCurrentMapMode;
+    u32 index = GetCurrentL2ListPosition();
 
     if (!distance)
-        return 0;
+    {
+        if (!GetMenuL2State())
+            return 0;
+
+        if (index == 0)
+            return 0;
+
+        if (IsCurrentIndexLastInL2List(index))
+            return 0;
+    }
 
     u32 fare = (fareTable[type][FARE_BASE] + (distance * (fareTable[type][FARE_DISTANCE])));
+
+    if (type != MAP_MODE_ARRIBA)
+        return fare;
+
     bool32 hasArribaDiscount = (VarGet(VAR_ANBEH_BEND_STATE) >= DEFEATED_CHARLOTTE_LOMBARD);
     bool32 hasPlayerJoined = HasPlayerJoinedTheTide();
 
-    if (!hasPlayerJoined && hasArribaDiscount)
-        return (fare * FARE_DISCOUNT_ARRIBA_NUMERATOR / FARE_DISCOUNT_ARRIBA_DENOMINATOR);
+    if (hasPlayerJoined || !hasArribaDiscount)
+        return fare;
 
-    return fare;
+    return (fare * FARE_DISCOUNT_ARRIBA_NUMERATOR / FARE_DISCOUNT_ARRIBA_DENOMINATOR);
 }
 
 //
@@ -3389,7 +3405,6 @@ static void Task_MapSystem_DefaultMode_Main(u8 taskId)
                 ShowL2WindowBG();
                 sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
                 sRegionMap->inL2State = TRUE;
-
             }
             else if(GetMenuL2State())
             {
@@ -3398,6 +3413,7 @@ static void Task_MapSystem_DefaultMode_Main(u8 taskId)
                 sRegionMap->inputCallback = ProcessRegionMapInput_Full;
                 sRegionMap->inL2State = FALSE;
             }
+            PrintWarpPriceOnTooltip_AllFrames();
             PrintHeaderTitleToWindow();
             break;
         case MAP_INPUT_A_BUTTON: // Try to Warp if the A Input is Passed Along
@@ -3625,7 +3641,6 @@ static u8 HandleWarpTaxiCutscene(void)
     {
         case 0:
             VarSet(VAR_TAXI_DESTINATION,sRegionMap->mapSecId);
-            //DebugPrintf("var is %d",VarGet(VAR_TAXI_DESTINATION));
             sRegionMap->warpCounter = 1;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             break;
