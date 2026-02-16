@@ -86,11 +86,8 @@ script Taxi_StartBattle_Dialogue{
     msgbox(gText_Taxi_WhatDoYouMean)
     closemessage
     hidemoneybox
+	setflag(FLAG_TEMP_1)
     trainerbattle_no_intro(TRAINER_CABBIE_HALE,gText_Taxi_AintYouStrong)
-    msgbox(gText_Taxi_NowIWont)
-    closemessage
-    callnative(WarpTaxiAfterCutscene)
-    closemessage
     return
 }
 
@@ -110,8 +107,5 @@ text gText_Taxi_WhatDoYouMean{
     format("Hey, just a minute there friend! You don't even have enough for the fare?! I come out to earn a living, don't I? So why you gotta tax me like this?")
 }
 text gText_Taxi_AintYouStrong{
-    format("Well aren't you a strong one? Too strong for me!")
-}
-text gText_Taxi_NowIWont{
-    format("Now I won't make enough money to send back home to my family in Hoenn...")
+    format("Well aren't you a strong one? Too strong for me!\pNow I won't make enough money to send back home to my family in Hoenn...")
 }

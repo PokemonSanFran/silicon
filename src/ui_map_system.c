@@ -3280,7 +3280,7 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
         if (!GetMenuL2State())
             return 0;
 
-        if (index == 0)
+        if (!index)
             return 0;
 
         if (IsCurrentIndexLastInL2List(index))
@@ -3658,7 +3658,17 @@ static u8 HandleWarpTaxiCutscene(void)
 
 void WarpTaxiAfterCutscene(void)
 {
-    SetWarpDestinationToHealLocation(sMapHealLocations[VarGet(VAR_TAXI_DESTINATION)]);
+    u32 healLocation = VarGet(VAR_TAXI_DESTINATION);
+
+    if (healLocation == HEAL_LOCATION_NONE)
+        return;
+
+    if (!FlagGet(FLAG_TEMP_1))
+        return;
+
+    SetWarpDestinationToHealLocation(sMapHealLocations[healLocation]);
+
+    VarSet(VAR_TAXI_DESTINATION,HEAL_LOCATION_NONE);
     WarpIntoMap();
     SetMainCallback2(CB2_LoadMap);
 }
