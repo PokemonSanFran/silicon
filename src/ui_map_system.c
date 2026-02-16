@@ -198,6 +198,7 @@ static void SpriteCB_HandleL2Selector(struct Sprite *sprite);
 static const u8 *GetCurrentL2Name();
 static u16 GetCurrentL2HealLocation();
 static u8 CheckIfL2ExistsAtIndex(u8 index);
+static u32 GetCurrentL2ListPosition(void);
 static void ScrollL2Down(void);
 static void CreateL2WaypointSprite(void);
 static void DestroyJustL2WaypointSprite(void);
@@ -224,6 +225,7 @@ void ShowOWWaypointArrow(void);
 void HideOWWaypointArrow(void);
 void SetWaypointData(u16 waypointType, u16 healLocation);
 static void L2WaypointSpriteCallback(struct Sprite *sprite);
+static bool8 IsCurrentIndexLastInL2List(u32 index);
 
 static void PrintWarpPriceOnTooltip(u32 bgColor, u32 startTile);
 
@@ -2627,6 +2629,7 @@ static const u8 sText_Money_BarSmall2[]         = _("¥{CLEAR 1}{STR_VAR_1}");
 static const u8 sText_NotEnoughMoney[]         = _("Not Enough ¥");
 static const u8 sText_WarpConfirm[]         = _("Do you want to go to ");
 static const u8 sText_QuestionMark[]         = _("?");
+static const u8* sText_Return = COMPOUND_STRING("Return");
 static const u8 sText_MoneySign[]         = _("¥");
 static const u8 sText_TaxiLockedStateHeader[]         = _("You cannot take the taxi here yet.");
 static const u8 sText_TaxiBlankStateHeader[]         = _("Select a taxi destination.");
@@ -2864,24 +2867,28 @@ static void PrintL2WindowText(u8 windowId)
 
     // POIs List (Just Temp Strings, Should Be Proper List Menu)
 
-    u8 shownCount = 0;
+    u32 shownCount = 0;
 
     for (int i = sRegionMap->l2_scroll_amount; i < MAX_L2_COUNT; i++)
     {
         if (shownCount >= MAX_L2_SHOWN)
             continue;
 
-        if (L2_Info[sRegionMap->mapSecId][i].healLocation == 0)
+        if ((L2_Info[sRegionMap->mapSecId][i].healLocation == 0) && (i < (MAX_L2_COUNT - 1)))
             continue;
 
         y += L2_Y_DIFFERENCE;
-        str = L2_Info[sRegionMap->mapSecId][i].name;
+
+        if (i < (MAX_L2_COUNT - 1))
+            str = L2_Info[sRegionMap->mapSecId][i].name;
+        else
+            str = sText_Return;
 
         AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 1, 0, colorText2, 0xFF, str);
         shownCount++;
     }
 
-    sRegionMap->l2_selectionPlusScroll = sRegionMap->l2_selection + sRegionMap->l2_scroll_amount;
+    sRegionMap->l2_selectionPlusScroll = GetCurrentL2ListPosition();
 
     // Load Windows
     PutWindowTilemap(windowId);
@@ -2901,7 +2908,7 @@ static void ClearL2WindowText(void)
 
 static void ScrollL2Down(void)
 {
-    if (sRegionMap->l2_scroll_amount + sRegionMap->l2_selection >= MAX_L2_COUNT - 1)
+    if (GetCurrentL2ListPosition() >= MAX_L2_COUNT - 1)
     {
         sRegionMap->l2_scroll_amount = 0;
         sRegionMap->l2_selection = 0;
@@ -2917,29 +2924,44 @@ static u8 CalculateL2CountForCurrentLocation(void)
     for (int i = 0; i < MAX_L2_COUNT; i++)
     {
         if (L2_Info[sRegionMap->mapSecId][i].healLocation == 0)
-            return i;
+            return i + 1;
     }
     return MAX_L2_COUNT;
 }
 
+static bool8 IsCurrentIndexLastInL2List(u32 index)
+{
+    u32 count = CalculateL2CountForCurrentLocation() - 1;
+    return (index == count);
+}
+
+static u32 GetCurrentL2ListPosition(void)
+{
+    return sRegionMap->l2_scroll_amount + sRegionMap->l2_selection;
+}
+
 static u8 CheckIfL2ExistsAtIndex(u8 index)
 {
-    if (L2_Info[sRegionMap->mapSecId][index].healLocation == 0)
-        return FALSE;
-    return TRUE;
+    if (IsCurrentIndexLastInL2List(index))
+        return TRUE;
+
+    return (L2_Info[sRegionMap->mapSecId][index].healLocation != 0);
 }
 
 static u16 GetCurrentL2HealLocation()
 {
-    return L2_Info[sRegionMap->mapSecId][sRegionMap->l2_scroll_amount + sRegionMap->l2_selection].healLocation;
-}
+    u32 index = GetCurrentL2ListPosition();
 
+    if (IsCurrentIndexLastInL2List(index))
+        return HEAL_LOCATION_NONE;
+
+    return L2_Info[sRegionMap->mapSecId][index].healLocation;
+}
 
 static const u8 *GetCurrentL2Name()
 {
-    return L2_Info[sRegionMap->mapSecId][sRegionMap->l2_scroll_amount + sRegionMap->l2_selection].name;
+    return L2_Info[sRegionMap->mapSecId][GetCurrentL2ListPosition()].name;
 }
-
 
 static void HideL2WindowBg(void)
 {
@@ -2971,7 +2993,7 @@ static void ShowL2WindowBG(void)
 
 static void ReprintL2WindowText(void)
 {
-    sRegionMap->l2_selectionPlusScroll = sRegionMap->l2_selection + sRegionMap->l2_scroll_amount;
+    sRegionMap->l2_selectionPlusScroll = GetCurrentL2ListPosition();
     if((sRegionMap->cursorPosX * 8 + 4) < 120)
     {
         PrintL2WindowText(WINDOW_L2_RIGHT_SIDE_TEXT);
@@ -3120,8 +3142,8 @@ static u8 ProcessRegionMapInput_L2_State(void) // In L2 State Just Pass Along A/
 
     if(JOY_NEW(A_BUTTON))
     {
-        input = MAP_INPUT_A_BUTTON;
-        return input;
+        u32 index = GetCurrentL2ListPosition();
+        return (IsCurrentIndexLastInL2List(index)) ? MAP_INPUT_START_BUTTON : MAP_INPUT_A_BUTTON;
     }
 
     if (JOY_NEW(B_BUTTON))
@@ -3163,7 +3185,7 @@ static u8 ProcessRegionMapInput_L2_State(void) // In L2 State Just Pass Along A/
 
     if (JOY_NEW(DPAD_DOWN))
     {
-        if(!CheckIfL2ExistsAtIndex(sRegionMap->l2_selection + sRegionMap->l2_scroll_amount + 1))
+        if(!CheckIfL2ExistsAtIndex(GetCurrentL2ListPosition() + 1))
         {
             sRegionMap->l2_scroll_amount = 0;
             sRegionMap->l2_selection = 0;
