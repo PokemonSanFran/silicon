@@ -3518,11 +3518,6 @@ static u8 MoveRegionMapCursor_Full(void) // When a cursor movement is began this
 }
 
 
-#define NO_EXCEPTION 99
-#define EXCEPTION_1 1
-#define EXCEPTION_2 2
-#define EXCEPTION_3 3
-
 #define PASSES_QUEST_EXCEPTION (questException == NO_EXCEPTION)
 #define QUEST_EXCEPTION_NO_PAY (questException == EXCEPTION_1)
 

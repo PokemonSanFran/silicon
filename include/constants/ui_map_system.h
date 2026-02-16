@@ -95,4 +95,9 @@ enum GrayPOILocations { // Locations which have a gray POI sprite for them
 
 #define FONT_MAP_HELP_BAR FONT_NARROW
 
+#define NO_EXCEPTION 99
+#define EXCEPTION_1 1
+#define EXCEPTION_2 2
+#define EXCEPTION_3 3
+
 #endif // GUARD_MAP_SYSTEM_CONSTANTS_MENU_H

@@ -14,10 +14,7 @@ script Quest_Persuasivepassenger_CEO_Visbility_Script{
 script Quest_Persuasivepassenger_InteractLeader_Script{
     lock
     faceplayer
-    specialvar(VAR_RESULT,Quest_Taxicabturnaround_CheckReadyForNext)
-    if (var(VAR_RESULT)){
-        goto(Quest_Persuasivepassenger_Event_Script)
-    }
+	goto(Quest_Persuasivepassenger_Event_Script)
 
     msgbox(gText_Persuasivepassenger_WelcomeTo,MSGBOX_NPC)
     end
@@ -27,7 +24,12 @@ script Quest_Persuasivepassenger_Event_Script{
     goto_if_quest_complete(QUEST_PERSUASIVEPASSENGER,Quest_Persuasivepassenger_Complete_Dialogue)
     goto_if_quest_reward(QUEST_PERSUASIVEPASSENGER,Quest_Persuasivepassenger_Reward_Dialogue)
     goto_if_quest_active(QUEST_PERSUASIVEPASSENGER,Quest_Persuasivepassenger_Active_Dialogue)
+
+    specialvar(VAR_RESULT,Quest_Taxicabturnaround_CheckReadyForNext)
+    if (var(VAR_RESULT)){
     goto(Quest_Persuasivepassenger_StartQuest_Script)
+	}
+	return
 }
 
 script Quest_Persuasivepassenger_StartQuest_Script{

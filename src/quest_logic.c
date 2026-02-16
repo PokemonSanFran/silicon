@@ -41,6 +41,7 @@
 #include "battle_scripts.h"
 #include "quests.h"
 #include "constants/trainer_types.h"
+#include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 
 bool32 HasPlayerJoinedTheTide(void)
@@ -1139,22 +1140,19 @@ bool8 Quest_Persuasivepassenger_ShouldPlayThirdDriver(void)
 }
 
 u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void){
-    bool8 questActive = QuestMenu_GetSetQuestState(QUEST_PERSUASIVEPASSENGER,FLAG_GET_ACTIVE);
-    u16 questResult = 99;
+    if(!QuestMenu_GetSetQuestState(QUEST_PERSUASIVEPASSENGER,FLAG_GET_ACTIVE))
+        return NO_EXCEPTION;
 
-    if (questActive == TRUE){
+    if (Quest_Persuasivepassenger_ShouldPlayFirstDriver())
+        return EXCEPTION_3;
 
-        if (Quest_Persuasivepassenger_ShouldPlayFirstDriver())
-            questResult = 3;
+    if (Quest_Persuasivepassenger_ShouldPlaySecondDriver())
+        return EXCEPTION_2;
 
-        if (Quest_Persuasivepassenger_ShouldPlaySecondDriver())
-            questResult = 2;
+    if (Quest_Persuasivepassenger_ShouldPlayThirdDriver())
+        return EXCEPTION_1;
 
-        if (Quest_Persuasivepassenger_ShouldPlayThirdDriver())
-            questResult = 1;
-
-    }
-    return questResult;
+    return NO_EXCEPTION;
 }
 
 bool8 Quest_Persuasivepassenger_CheckNeededItems(void){
