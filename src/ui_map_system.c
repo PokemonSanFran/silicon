@@ -2619,6 +2619,7 @@ static void DestroyTrolleyPOISprites(void)
 //  Begin Header / Footer Text Printing Functions
 //
 static const u8 sText_HelpBar_NotL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker {START_BUTTON} Landmarks");
+static const u8 sText_HelpBar_NotL2IsTaxi[] =_("{A_BUTTON} Go {B_BUTTON} Return {START_BUTTON} Landmarks");
 static const u8 sText_HelpBar_NotL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return");
 static const u8 sText_HelpBar_IsL2IsDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return {SELECT_BUTTON} Marker");
 static const u8 sText_HelpBar_IsL2NotDefault[] =_("{A_BUTTON} Go {B_BUTTON} Return");
@@ -2755,16 +2756,21 @@ static void PrintMapFooter(bool32 confirmMode)
 static const u8 *GetHelpBarText(bool32 confirmMode)
 {
     bool32 l2State = GetMenuL2State();
-    bool32 defaultMapMode = (sCurrentMapMode == MAP_MODE_DEFAULT);
+    bool32 defaultMapMode = (sCurrentMapMode == MAP_MODE_ARRIBA);
+    bool32 taxiMapMode = (sCurrentMapMode == MAP_MODE_TAXI);
 
     if (confirmMode)
         return sText_HelpBar_NotL2NotDefault;
 
     if (!l2State && defaultMapMode)
         return sText_HelpBar_NotL2IsDefault;
+    if (!l2State && taxiMapMode)
+        return sText_HelpBar_NotL2IsTaxi;
     else if (!l2State && !defaultMapMode)
         return sText_HelpBar_NotL2NotDefault;
     else if (l2State && !defaultMapMode)
+        return sText_HelpBar_IsL2NotDefault;
+    else if (l2State && taxiMapMode)
         return sText_HelpBar_IsL2NotDefault;
     else
         return sText_HelpBar_IsL2IsDefault;
@@ -3135,7 +3141,7 @@ static u8 ProcessRegionMapInput_L2_State(void) // In L2 State Just Pass Along A/
         return input;
     }
 
-    if (JOY_NEW(SELECT_BUTTON))
+    if (JOY_NEW(SELECT_BUTTON) && (sCurrentMapMode == MAP_MODE_ARRIBA))
     {
         input = MAP_INPUT_SELECT_BUTTON;
         return input;
@@ -3277,15 +3283,12 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
 
     if (!distance)
     {
-        if (!GetMenuL2State())
-            return 0;
-
-        if (!index)
-            return 0;
-
-        if (IsCurrentIndexLastInL2List(index))
+        if (!GetMenuL2State() || (!index))
             return 0;
     }
+
+    if (IsCurrentIndexLastInL2List(index) && GetMenuL2State())
+        return 0;
 
     u32 fare = (fareTable[type][FARE_BASE] + (distance * (fareTable[type][FARE_DISTANCE])));
 
@@ -3467,20 +3470,14 @@ static u8 ProcessRegionMapInput_Full(void) // Handles starting a movement for th
         return input;
     }
 
-    switch (sCurrentMapMode)
+    if ((sCurrentMapMode == MAP_MODE_ARRIBA) && (JOY_NEW(SELECT_BUTTON)))
     {
-        case MAP_MODE_DEFAULT:
-            if (JOY_NEW(START_BUTTON))
-            {
-                input = MAP_INPUT_START_BUTTON;
-                return input;
-            }
-            if(JOY_NEW(SELECT_BUTTON))
-            {
-                input = MAP_INPUT_SELECT_BUTTON;
-                return input;
-            }
-            break;
+        return MAP_INPUT_SELECT_BUTTON;
+    }
+
+    if (((sCurrentMapMode == MAP_MODE_TAXI) || (sCurrentMapMode == MAP_MODE_ARRIBA)) && (JOY_NEW(START_BUTTON)))
+    {
+        return MAP_INPUT_START_BUTTON;
     }
 
     if (JOY_NEW(A_BUTTON))
