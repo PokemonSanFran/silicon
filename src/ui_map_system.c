@@ -3253,7 +3253,14 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
     if (!distance)
         return 0;
 
-    return (fareTable[type][FARE_BASE] + (distance * (fareTable[type][FARE_DISTANCE])));
+    u32 fare = (fareTable[type][FARE_BASE] + (distance * (fareTable[type][FARE_DISTANCE])));
+    bool32 hasArribaDiscount = (VarGet(VAR_ANBEH_BEND_STATE) >= DEFEATED_CHARLOTTE_LOMBARD);
+    bool32 hasPlayerJoined = HasPlayerJoinedTheTide();
+
+    if (!hasPlayerJoined && hasArribaDiscount)
+        return (fare * FARE_DISCOUNT_ARRIBA_NUMERATOR / FARE_DISCOUNT_ARRIBA_DENOMINATOR);
+
+    return fare;
 }
 
 //
