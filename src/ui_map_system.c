@@ -2359,7 +2359,7 @@ u8 CalculateWaypointDirection(void) // Simple Calculation Based on x / y positio
         {
             direction = DIR_SOUTH;
         }
-        if((gSaveBlock3Ptr->waypoint.yTile - playerYTile) < 0)
+        else
         {
             direction = DIR_NORTH;
         }
