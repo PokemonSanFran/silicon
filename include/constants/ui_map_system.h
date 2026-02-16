@@ -76,6 +76,9 @@ enum GrayPOILocations { // Locations which have a gray POI sprite for them
     GRAY_POI_COUNT,
 };
 
+#define FARE_DISCOUNT_ARRIBA_NUMERATOR   10
+#define FARE_DISCOUNT_ARRIBA_DENOMINATOR 100
+
 #define FARE_BASE_TAXI 150
 #define FARE_DISTANCE_TAXI 100
 
