@@ -3637,7 +3637,8 @@ static u8 HandleWarpTaxiCutscene(void)
     switch(sRegionMap->warpCounter)
     {
         case 0:
-            VarSet(VAR_TAXI_DESTINATION,sRegionMap->mapSecId);
+            u32 healLocation = (GetMenuL2State()) ? GetCurrentL2HealLocation() : sMapHealLocations[sRegionMap->mapSecId];
+            VarSet(VAR_TAXI_DESTINATION,healLocation);
             sRegionMap->warpCounter = 1;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             break;
@@ -3663,7 +3664,7 @@ void WarpTaxiAfterCutscene(void)
     if (!FlagGet(FLAG_TEMP_1))
         return;
 
-    SetWarpDestinationToHealLocation(sMapHealLocations[healLocation]);
+    SetWarpDestinationToHealLocation(healLocation);
 
     VarSet(VAR_TAXI_DESTINATION,HEAL_LOCATION_NONE);
     WarpIntoMap();
@@ -4104,7 +4105,12 @@ void CalculatePlayerPositionInRegionMap(s16 *x_tile, s16 *y_tile, u16 *isIndoorO
 
 void Taxi_BufferDestinationMapName(void)
 {
-    GetMapNameGeneric(gStringVar1, VarGet(VAR_TAXI_DESTINATION));
+    u32 healLocationId =  VarGet(VAR_TAXI_DESTINATION);
+    const struct HealLocation *healLocation = GetHealLocation(healLocationId);
+    const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(healLocation->mapGroup, healLocation->mapNum);
+    u32 mapSecId = mapHeader->regionMapSectionId;
+
+    GetMapNameGeneric(gStringVar1, mapSecId);
 }
 
 void BufferTaxiBaseFare(void)

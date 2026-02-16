@@ -78,6 +78,7 @@ script Taxi_ChooseLocation_Dialogue
 }
 
 script Taxi_StartBattle_Dialogue{
+    callnative(Taxi_BufferDestinationMapName)
     msgbox(format("{STR_VAR_1}, here we go!"))
     fadescreen(FADE_TO_BLACK)
     showmoneybox(0,0)
