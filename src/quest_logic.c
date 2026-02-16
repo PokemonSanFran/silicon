@@ -58,19 +58,14 @@ u32 GetCurrentMap(void)
 
 u16 Quest_Generic_CountRemainingSubquests(u16 relevantQuest)
 {
-    u16 numRemainingQuests = sSideQuests[relevantQuest].numSubquests;
-    u16 totalNumSubquests = numRemainingQuests;
-    u8 currentSubQuest;
+    u32 totalSubquests = sSideQuests[relevantQuest].numSubquests;
+    u32 completed = 0;
 
-    for (currentSubQuest = 0; currentSubQuest < totalNumSubquests; currentSubQuest++)
-    {
+    for (u32 currentSubQuest = 0; currentSubQuest < totalSubquests; currentSubQuest++)
         if (QuestMenu_GetSetSubquestState(relevantQuest, FLAG_GET_COMPLETED, currentSubQuest))
-        {
-            numRemainingQuests--;
-        }
-    }
+            completed++;
 
-    return numRemainingQuests;
+    return (totalSubquests - completed);
 }
 
 u32 Quest_Generic_CountAndBufferRemainingSubquests(u16 relevantQuest)
