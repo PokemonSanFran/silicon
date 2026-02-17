@@ -1142,8 +1142,6 @@ bool32 ShopPurchase_IsItemOneTimePurchase(u32 itemId)
 static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 {
     u16 price = ShopConfig_Get()->handleTotalPrice(itemId, quantity);
-    bool32 newItem = TRUE;
-    u32 oldItem = 0;
     u32 bak = gSaveBlock3Ptr->shopBuyAgainItems[0];
 
     quantity++;
@@ -1158,23 +1156,21 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 
     if (!ShopPurchase_IsItemOneTimePurchase(itemId))
     {
+        u32 oldItem = ITEM_NONE;
+
         // Has the player purchased this item before?
         for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
-        {
             if (itemId == gSaveBlock3Ptr->shopBuyAgainItems[i])
-            {
-                newItem = FALSE;
                 oldItem = i;
-            }
-        }
 
         // Move other items to the back and put the new item at the very top.
-        if (newItem)
+        if (!oldItem)
         {
             for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS - 1; i++)
             {
-                u32 idx = MAX_PRESTO_BUY_AGAIN_ITEMS - 1;
-                gSaveBlock3Ptr->shopBuyAgainItems[idx - 1] = gSaveBlock3Ptr->shopBuyAgainItems[idx - 2];
+                #define TOTAL_BUY_AGAIN_ITEMS (MAX_PRESTO_BUY_AGAIN_ITEMS - i)
+                gSaveBlock3Ptr->shopBuyAgainItems[TOTAL_BUY_AGAIN_ITEMS - 1] = gSaveBlock3Ptr->shopBuyAgainItems[TOTAL_BUY_AGAIN_ITEMS - 2];
+                #undef TOTAL_BUY_AGAIN_ITEMS
             }
         }
         else
@@ -1182,9 +1178,7 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
             gSaveBlock3Ptr->shopBuyAgainItems[oldItem] = ITEM_NONE;
 
             for (u32 i = 0; i < oldItem; i++)
-            {
                 gSaveBlock3Ptr->shopBuyAgainItems[oldItem - i] = gSaveBlock3Ptr->shopBuyAgainItems[oldItem - i - 1];
-            }
         }
 
         gSaveBlock3Ptr->shopBuyAgainItems[0] = itemId;
