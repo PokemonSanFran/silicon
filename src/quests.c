@@ -1788,16 +1788,14 @@ const u8 *GetQuestDesc(s32 questId)
     {
         case QUEST_PLAYERSADVENTURE:
             return GetQuestDesc_PlayersAdventure();
-            break;
         case QUEST_RABIESOUTBREAK:
             return GetQuestDesc_RabiesOutbreak();
-            break;
         case QUEST_BETWEENASTONEANDAHARDPLACE:
             return GetQuestDesc_BetweenAStoneAndAHardPlace();
-            break;
         case QUEST_FRESHWATEREVOLUTION:
             return GetQuestDesc_FreshwaterEvolution();
-            break;
+        case QUEST_SMOOTHIECRAFTING:
+            return GetQuestDesc_SmoothieCrafting();
         default:
             return sSideQuests[questId].desc;
     }

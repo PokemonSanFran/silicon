@@ -26,7 +26,7 @@ void TweetCriteria_Story_Warehouse_Rave(void);
 void TweetCriteria_StoryClear(void);
 void TweetCriteria_IsCompulsiveHealingReward(void);
 void TweetCriteria_IsRabiesComplete(void);
-void TweetCriteria_25(void);
+void TweetCriteria_IsSmoothieCraftingComplete(void);
 void TweetCriteria_26(void);
 void TweetCriteria_27(void);
 void TweetCriteria_28(void);

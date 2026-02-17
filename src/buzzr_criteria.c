@@ -194,9 +194,9 @@ void TweetCriteria_IsRabiesComplete(void)
     gSpecialVar_Result = (IsQuestCompletedState(QUEST_RABIESOUTBREAK));
 }
 
-void TweetCriteria_25(void)
+void TweetCriteria_IsSmoothieCraftingComplete(void)
 {
-	gSpecialVar_Result = FALSE;
+    gSpecialVar_Result = (IsQuestCompletedState(QUEST_SMOOTHIECRAFTING));
 }
 
 void TweetCriteria_26(void)

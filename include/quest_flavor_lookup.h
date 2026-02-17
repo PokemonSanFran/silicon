@@ -7,5 +7,6 @@ const u8 *GetQuestDesc_BringFruit(void);
 const u8 *GetQuestDesc_RabiesOutbreak(void);
 const u8 *GetQuestDesc_BetweenAStoneAndAHardPlace(void);
 const u8 *GetQuestDesc_FreshwaterEvolution(void);
+const u8 *GetQuestDesc_SmoothieCrafting(void);
 
 #endif // GUARD_QUEST_FLAVOR_LOOKUP

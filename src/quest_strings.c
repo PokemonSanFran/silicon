@@ -23,11 +23,6 @@ const u8 gText_Quest_BlueRobbery_Desc[] =_("Find the brunette and her Wobbuffet\
 const u8 gText_Quest_BlueRobbery_DoneDesc[] =_("You found the Trainer, but she refused\nto even hint at being guilty...");
 const u8 gText_Quest_BlueRobbery_Map[] =_("IrisinaTown");
 
-const u8 gText_Quest_SmoothieCrafting_Name[] = _("Ice Cream Crafting");
-const u8 gText_Quest_SmoothieCrafting_Desc[] =_("Bring 3 Pecha, 2 Nanab, and 1 Rabuta\nBerry to the new ice cream shop to make\na Pokémon training smoothie!");
-const u8 gText_Quest_SmoothieCrafting_DoneDesc[] =_("The Sherbert Surprise zeroes out your\nPokémon's EVs. It could be useful...");
-const u8 gText_Quest_SmoothieCrafting_Map[] =_("Chasilla");
-
 const u8 gText_Quest_VSDeoxys_Name[] = _("VS Deoxys");
 const u8 gText_Quest_VSDeoxys_Desc[] =_("Subdue the rare, orange,\nforme-changing Pokémon from space!");
 const u8 gText_Quest_VSDeoxys_DoneDesc[] =_("You found the Minior...");

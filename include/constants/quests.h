@@ -400,6 +400,8 @@ enum
 #define QUEST_SMOOTHIE_CRAFTING_QUANTITY_1 3
 #define QUEST_SMOOTHIE_CRAFTING_QUANTITY_2 2
 #define QUEST_SMOOTHIE_CRAFTING_QUANTITY_3 1
+#define QUEST_SMOOTHIE_CRAFTING_PRODUCT ITEM_SHERBET_SURPRISE
+#define QUEST_SMOOTHIE_CRAFTING_MAP MAP_CHASILLA_ICE_CREAM_SHOP
 
 // ***********************************************************************
 // Quest: Freshwater Evolution

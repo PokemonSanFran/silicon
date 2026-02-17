@@ -1779,11 +1779,12 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_SMOOTHIECRAFTING] =
     {
-        .name = gText_Quest_SmoothieCrafting_Name,
-        .desc = gText_Quest_SmoothieCrafting_Desc,
-        .donedesc = gText_Quest_SmoothieCrafting_DoneDesc,
-        .map = gText_Quest_SmoothieCrafting_Map,
-        .sprite = ITEM_NANAB_BERRY,
+        .name = COMPOUND_STRING("Smoothie Crafting"),
+        //.desc = COMPOUND_STRING("Bring {STR_VAR_2} to {STR_VAR_1}'s Marble Slab to make a drink to help train Pokémon!"),
+        .desc = COMPOUND_STRING("Bring {STR_VAR_2} to {STR_VAR_1}'s Marble Slab to make a drink to help train Pokémon!"),
+        .donedesc = COMPOUND_STRING("The {STR_VAR_3} wasn’t all it was hyped up to be, but the Mochi Shop nearby sounds promising."),
+        .map = gText_Chasilla,
+        .sprite = QUEST_SMOOTHIE_CRAFTING_PRODUCT,
         .spritetype = QUEST_SPRITE_TYPE_ITEM,
         .subquests = NULL,
         .numSubquests = 0

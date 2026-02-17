@@ -2023,8 +2023,12 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_NPC_FRESHWATER:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
             break;
+        case TWEET_QUEST_NPC_SMOOTHIE_COMPLETE:
+            StringCopy(gStringVar3,GetItemName(ITEM_FRESH_START_MOCHI));
+            break;
         case TWEET_QUEST_NPC_SMOOTHIE:
-            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA),MAP_NUM(MAP_CHASILLA))->regionMapSectionId,0);
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA_ICE_CREAM_SHOP),MAP_NUM(MAP_CHASILLA_ICE_CREAM_SHOP))->regionMapSectionId,0);
+            StringCopy(gStringVar3,GetItemName(QUEST_SMOOTHIE_CRAFTING_PRODUCT));
             StringCopy(gStringVar2,COMPOUND_STRING(""));
 
             ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_1));

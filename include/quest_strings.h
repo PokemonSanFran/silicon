@@ -23,11 +23,6 @@ extern const u8 gText_Quest_BlueRobbery_Desc[];
 extern const u8 gText_Quest_BlueRobbery_DoneDesc[];
 extern const u8 gText_Quest_BlueRobbery_Map[];
 
-extern const u8 gText_Quest_SmoothieCrafting_Name[];
-extern const u8 gText_Quest_SmoothieCrafting_Desc[];
-extern const u8 gText_Quest_SmoothieCrafting_DoneDesc[];
-extern const u8 gText_Quest_SmoothieCrafting_Map[];
-
 extern const u8 gText_Quest_VSDeoxys_Name[];
 extern const u8 gText_Quest_VSDeoxys_Desc[];
 extern const u8 gText_Quest_VSDeoxys_DoneDesc[];

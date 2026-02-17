@@ -38,7 +38,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_SMOOTHIE] =
     {
         .userId = BUZZR_USER_HARRIBAT,
-        .content = COMPOUND_STRING("Calling all Trainers! We're a new ice cream shop in {STR_VAR_1}, and we've got the perfect smoothie to clean out your Pokémon and make them easier to train. Bring {STR_VAR_2} and we'll make the first one for free!"),
+        .content = COMPOUND_STRING("I always go to the Marble Slab in {STR_VAR_1} before I start training with a new Pokémon. Their {STR_VAR_3} clears out a Pokémon’s toxins which makes them easier to train. It’s all natural too! Bring {STR_VAR_2} and they’ll make your first one free!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Ice,
         .quest = QUEST_SMOOTHIECRAFTING,
@@ -317,17 +317,12 @@ const struct Tweet gTweets[] =
         .dislikeCount = 10,
         .likeCount = 18,
     },
-    [25] =
+    [TWEET_QUEST_NPC_SMOOTHIE_COMPLETE] =
     {
         .userId = BUZZR_USER_HILDE,
-        .content = COMPOUND_STRING(
-            "When it curls up in a ball, it can make any\n"
-            "attack bounce off harmlessly. Its hide has\n"
-            "turned tough and solid as a result of\n"
-            "living in the desert."
-            ),
+        .content = COMPOUND_STRING("I got scammed by the Marble Slab! My Pokémon got weaker, and it’s so expensive. 0 stars. If you want to reset Effort Values, just use an item like {STR_VAR_1}."),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_25,
+        .criteria = TweetCriteria_IsSmoothieCraftingComplete,
         .quest = 0,
         .dislikeCount = 36,
         .likeCount = 8,
