@@ -39,6 +39,7 @@
 #include "quests.h"
 #include "quest_logic.h"
 #include "event_data.h"
+#include "move.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
 #include "constants/songs.h"
@@ -1015,6 +1016,17 @@ u32 ShopInventory_GetItemIdFromGrid(u32 category, u32 item)
 u32 ShopInventory_GetChosenItemId(void)
 {
     return ShopInventory_GetItemIdFromGrid(ShopGrid_GetCurrentCategoryIndex(), ShopGrid_GetCurrentItemIndex());
+}
+
+u8 *ShopInventory_CopyItemName(u32 itemId, u8 *buf)
+{
+    u8 *end = StringCopy(buf, GetItemName(itemId));
+
+    if (GetItemShopCategory(itemId) != SHOP_CATEGORY_TMS)
+        return end;
+
+    end = StringCopy(end, COMPOUND_STRING(" "));
+    return StringCopy(end, GetMoveName(GetItemTMHMMoveId(itemId)));
 }
 
 void ShopInventory_SetCategoryNumItems(u32 num, u32 idx)

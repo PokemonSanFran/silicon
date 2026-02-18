@@ -44,6 +44,7 @@ u32 ShopGrid_GetYHalfScreen(void);
 void ShopInventory_SetItemIdToGrid(u32, u32, u32);
 u32 ShopInventory_GetItemIdFromGrid(u32, u32);
 u32 ShopInventory_GetChosenItemId(void);
+u8 *ShopInventory_CopyItemName(u32, u8 *);
 void ShopInventory_SetCategoryNumItems(u32, u32);
 u32 ShopInventory_GetCategoryNumItems(u32);
 bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories);
