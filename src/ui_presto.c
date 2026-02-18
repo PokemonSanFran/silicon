@@ -546,7 +546,7 @@ static u32 PrestoHelper_InitItemsList(void)
 
 static bool8 PrestoHelper_ShouldRecommend(enum ShopMenuCategories category, u32 itemId)
 {
-    if (PokeMart_IsActive())
+    if (PokeMart_IsActive() || ShopPurchase_IsCategoryOneTimePurchase(category))
         return FALSE;
 
     static bool8 (*const carouselHandlers[])(u32, enum ShopMenuCategories) =
