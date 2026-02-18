@@ -1052,6 +1052,9 @@ static void ShopPurchase_CalculateMaxQuantity(void)
 
 enum ShopMenuCategories ShopInventory_CanItemBeListed(u32 itemId, enum Pocket pocket)
 {
+    if (!GetItemPrice(itemId))
+        return NUM_SHOP_CATEGORIES;
+
     if (pocket == POCKET_KEY_ITEMS)
         return NUM_SHOP_CATEGORIES;
 

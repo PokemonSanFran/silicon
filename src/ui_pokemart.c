@@ -625,9 +625,6 @@ static u32 MartHelper_InitItemsList(void)
 
     while ((itemId = sPokeMartData.products[i++]) != ITEM_NONE)
     {
-        if (!GetItemPrice(itemId))
-            continue;
-
         enum Pocket pocket = GetItemPocket(itemId);
         enum ShopMenuCategories category = ShopInventory_CanItemBeListed(itemId, pocket);
 

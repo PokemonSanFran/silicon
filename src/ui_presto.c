@@ -527,9 +527,6 @@ static u32 PrestoHelper_InitItemsList(void)
 
     for (u32 itemId = (ITEM_NONE + 1); itemId < ITEMS_COUNT; itemId++)
     {
-        if (!GetItemPrice(itemId))
-            continue;
-
         enum Pocket pocket = GetItemPocket(itemId);
         enum ShopMenuCategories itemCat = ShopInventory_CanItemBeListed(itemId, pocket);
 
