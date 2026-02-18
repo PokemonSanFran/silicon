@@ -28,11 +28,6 @@ extern const u8 gText_Quest_VSDeoxys_Desc[];
 extern const u8 gText_Quest_VSDeoxys_DoneDesc[];
 extern const u8 gText_Quest_VSDeoxys_Map[];
 
-extern const u8 gText_Quest_HodouCityTunnels_Name[];
-extern const u8 gText_Quest_HodouCityTunnels_Desc[];
-extern const u8 gText_Quest_HodouCityTunnels_DoneDesc[];
-extern const u8 gText_Quest_HodouCityTunnels_Map[];
-
 extern const u8 gText_Quest_BetweenAStoneAndAHardPlace_Name[];
 extern const u8 gText_Quest_BetweenAStoneAndAHardPlace_Desc[];
 extern const u8 gText_Quest_BetweenAStoneAndAHardPlace_DoneDesc[];

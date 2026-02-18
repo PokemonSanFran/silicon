@@ -28,11 +28,6 @@ const u8 gText_Quest_VSDeoxys_Desc[] =_("Subdue the rare, orange,\nforme-changin
 const u8 gText_Quest_VSDeoxys_DoneDesc[] =_("You found the Minior...");
 const u8 gText_Quest_VSDeoxys_Map[] =_("Route9");
 
-const u8 gText_Quest_HodouCityTunnels_Name[] = _("HodouCity Tunnels");
-const u8 gText_Quest_HodouCityTunnels_Desc[] =_("Find somebody who might know the oldest\nsecrets of the treasures hidden\nunder HodouCity.");
-const u8 gText_Quest_HodouCityTunnels_DoneDesc[] =_("The eldest member of HodouCity tricked you into helping him recover a treasure - his childhood photos...");
-const u8 gText_Quest_HodouCityTunnels_Map[] =_("HodouCity");
-
 const u8 gText_Quest_BetweenAStoneAndAHardPlace_Name[] = _("Between a Stone and a Hard Place");
 const u8 gText_Quest_BetweenAStoneAndAHardPlace_Desc[] =_("Ride the cable ar enough times to get a rare stone to power up Pokemon.");
 const u8 gText_Quest_BetweenAStoneAndAHardPlace_DoneDesc[] =_("You got a stone for riding the cable car\n3 times, but it was a Evolutionary\nStone, not a Mega Stone...");

@@ -1796,6 +1796,8 @@ const u8 *GetQuestDesc(s32 questId)
             return GetQuestDesc_FreshwaterEvolution();
         case QUEST_SMOOTHIECRAFTING:
             return GetQuestDesc_SmoothieCrafting();
+        case QUEST_HODOUTUNNELS:
+            return GetQuestDesc_Hodoutunnels();
         default:
             return sSideQuests[questId].desc;
     }

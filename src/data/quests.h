@@ -1883,10 +1883,10 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_HODOUTUNNELS] =
     {
-        .name = gText_Quest_HodouCityTunnels_Name,
-        .desc = gText_Quest_HodouCityTunnels_Desc,
-        .donedesc = gText_Quest_HodouCityTunnels_DoneDesc,
-        .map = gText_Quest_HodouCityTunnels_Map,
+        .name = COMPOUND_STRING("Hodou City Tunnels"),
+        .desc = COMPOUND_STRING("Find somebody who might know the oldest secrets of the treasures hidden under {STR_VAR_1}."),
+        .donedesc = COMPOUND_STRING("The eldest member of {STR_VAR_1} tricked you into helping him recover a treasure - his childhood photos..."),
+        .map = gText_HodouCity,
         .sprite = OBJ_EVENT_GFX_OLD_MAN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,

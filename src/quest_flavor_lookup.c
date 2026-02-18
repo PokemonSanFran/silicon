@@ -247,3 +247,10 @@ const u8 *GetQuestDesc_SmoothieCrafting(void)
     StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_SMOOTHIECRAFTING].desc);
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Hodoutunnels(void)
+{
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HODOUTUNNELS),MAP_NUM(MAP_QUEST_HODOUTUNNELS))->regionMapSectionId,0);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HODOUTUNNELS].desc);
+    return gStringVar4;
+}

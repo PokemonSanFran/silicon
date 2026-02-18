@@ -428,4 +428,19 @@ enum
     STATE_QUEST_FRESHWATER_COMPLETE,
 };
 
+// ***********************************************************************
+// Quest: Hodou Tunnels
+// ***********************************************************************
+
+#define MAP_QUEST_HODOUTUNNELS         MAP_HODOU_CITY_TUNNEL
+#define ITEM_QUEST_HODOUTUNNELS_REWARD ITEM_REPEL
+
+enum
+{
+    STATE_QUEST_HODOUTUNNELS_NOT_STARTED,
+    STATE_QUEST_HODOUTUNNELS_STARTED,
+    STATE_QUEST_HODOUTUNNELS_REWARD,
+    STATE_QUEST_HODOUTUNNELS_COMPLETE,
+};
+
 #endif // GUARD_CONSTANTS_QUESTS_H

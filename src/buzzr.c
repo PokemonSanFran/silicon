@@ -2035,5 +2035,7 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
             StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
             GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
             break;
+        case TWEET_QUEST_NPC_TUNNELS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HODOUTUNNELS),MAP_NUM(MAP_QUEST_HODOUTUNNELS))->regionMapSectionId,0);
     }
 }

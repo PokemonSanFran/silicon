@@ -68,12 +68,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_TUNNELS] =
     {
         .userId = BUZZR_USER_LINN,
-        .content = COMPOUND_STRING(
-            "There's a rumor that there is a lost\n"
-            "treasure hidden under HodouCity. Is\n"
-            "anybody who knows the secrets\n"
-            "still alive?"
-            ),
+        .content = COMPOUND_STRING("There’s a rumor that the {STR_VAR_1} elders know of a treasure hidden in the city’s underground and it’s guarded by a powerful Pokemon! Can anybody find the treasure before they take the secret to their grave?"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Tunnels,
         .quest = QUEST_HODOUTUNNELS,
