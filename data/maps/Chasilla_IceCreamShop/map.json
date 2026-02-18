@@ -2,7 +2,7 @@
   "id": "MAP_CHASILLA_ICE_CREAM_SHOP",
   "name": "Chasilla_IceCreamShop",
   "layout": "LAYOUT_CHASILLA_ICE_CREAM_SHOP",
-  "music": "MUS_ABANDONED_SHIP",
+  "music": "MUS_POKE_MART",
   "region_map_section": "MAPSEC_CHASILLA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

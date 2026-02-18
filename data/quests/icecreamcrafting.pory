@@ -1,10 +1,9 @@
 //PSF TODO Implement actual item effect for ITEM_SHERBET_SURPRISE which is reduce all EVs and 0 out happiness
+const FLAG_HIDE_SMOOTHIECUSTOMER FLAG_TEMP_1
+
 script Quest_SmoothieCrafting_Script_HideSmoothiecustomer
 {
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SMOOTHIECRAFTING)
-        if (var(VAR_RESULT)){
-            setflag(FLAG_TEMP_1)
-        }
+    setflag(FLAG_HIDE_SMOOTHIECUSTOMER)
 }
 
 script Quest_SmoothieCrafting_Script_Debug

@@ -1,9 +1,7 @@
-//PSF TODO Give player ability to buy more Sherbet Surprise
-mapscripts Chasilla_IceCreamShop_MapScripts{
-    MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_SmoothieCrafting_HideSmoothiecustomer_Script)
+mapscripts Chasilla_IceCreamShop_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_quest_complete(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_Script_HideSmoothiecustomer)
     }
-}
-script Chasilla_IceCreamShop_Cashier_Event_Script{
-    return
 }
