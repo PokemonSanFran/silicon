@@ -1,0 +1,70 @@
+// if GetFlyEncounterType is NONE, then return
+// attack, pull from table
+// quest approach, buffer the mon and then leave
+// quest attack, generate sky battle against murkrow
+// quest boss ,generate sky battle against honchkrow
+// if loss but has healthy mons, print a loss message and send back
+
+//PSF TODO handle when player loses midflight
+
+script FlyEncounter_Script_GetEncounterType
+{
+    additem(ITEM_SUPER_ROD,1)
+    callnative(FlyEncounter_Script_GetEncounterType)
+        call(FlightPatterns_Script_Approach)
+
+    switch (var(VAR_RESULT))
+    {
+        default:
+        case FLY_ENCOUNTER_NONE: return
+        case FLY_ENCOUNTER_ATTACK: call(FlyEncounter_Script_Attack)
+        case FLY_ENCOUNTER_QUEST_APPROACH: call(FlightPatterns_Script_Approach)
+        case FLY_ENCOUNTER_QUEST_ATTACK: call(FlightPatterns_Script_Attack)
+        case FLY_ENCOUNTER_QUEST_BOSS: call(FlightPatterns_Script_Boss)
+    }
+return
+}
+
+script FlyEncounter_Script_Attack
+{
+    lock
+    msgbox(format("After taking flight, a wild Pokémon attacked!"),,)
+    callnative(FlyWildEncounter)
+    closemessage
+    release
+    end
+}
+
+script FlightPatterns_Script_Approach
+{
+    lock
+    bufferspeciesname(STR_VAR_1, SPECIES_MURKROW)
+    msgbox(format("After taking flight, a wild {STR_VAR_1} narrowly missed crashing into you!"),,)
+    closemessage
+    release
+    end
+}
+
+script FlightPatterns_Script_Attack
+{
+    lock
+    bufferspeciesname(STR_VAR_1, SPECIES_MURKROW)
+    msgbox(format("After taking flight, a wild {STR_VAR_1} turned around and stared at you...{PAUSE_UNTIL_PRESS} and then it attacked!"),,)
+    callnative(FlyWildEncounter)
+    closemessage
+    release
+    end
+    return
+}
+
+script FlightPatterns_Script_Boss
+{
+    lock
+    msgbox(format("After taking flight, a huge shadow quickly flew above you...{PAUSE_UNTIL_PRESS} It doubled back and attacked!"),,)
+    callnative(FlyWildEncounter)
+    closemessage
+    release
+    end
+    return
+}
+

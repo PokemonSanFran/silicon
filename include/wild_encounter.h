@@ -83,5 +83,6 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
 u16 GenerateBerryMon(void); // wildEncounters
 bool8 IsOverworldMonShiny(void); // hidden_grotto
 bool8 IsOverworldMonFemale(void); //hidden_grotto
+bool8 WildEncounterCheck(u32, bool8); // flyEncounters
 
 #endif // GUARD_WILD_ENCOUNTER_H

@@ -38,6 +38,7 @@
 #include "battle_util.h"
 #include "pokemon.h"
 #include "field_specials.h"
+#include "fly_encounter.h"
 #include "battle_scripts.h"
 #include "quests.h"
 #include "constants/trainer_types.h"
@@ -2385,4 +2386,147 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
 
     rabiesPokerus = Random() % 2;
     SetBoxMonData(boxMon, MON_DATA_POKERUS, &rabiesPokerus);
+}
+
+// ***********************************************************************
+// Quest: Flight Patterns
+// ***********************************************************************
+
+/*
+ * PSF TODO change to real locations
+#define FLY_LOCATION_1      MAPSEC_ARANTRAZ
+#define FLY_LOCATION_2      MAPSEC_POPIDORA_PIER
+#define FLY_LOCATION_3      MAPSEC_ROUTE_B
+#define FLY_LOCATION_4      MAPSEC_ROUTE6
+#define FLY_LOCATION_5      MAPSEC_ROUTE18
+#define FLY_LOCATION_6      MAPSEC_ROUTE13
+#define FLY_LOCATION_7      MAPSEC_ROUTE100
+*/
+#define FLY_LOCATION_1 MAPSEC_GLAVEZ_HILL
+#define FLY_LOCATION_2 MAPSEC_ROUTE8
+#define FLY_LOCATION_3 MAPSEC_MERMEREZA_CITY
+#define FLY_LOCATION_4 MAPSEC_ROUTE10
+#define FLY_LOCATION_5 MAPSEC_CAPHE_CITY
+#define FLY_LOCATION_6 MAPSEC_ROUTE12
+#define FLY_LOCATION_7 MAPSEC_ANBEH_BEND
+
+#define FLY_LOCATION_NONE   MAPSEC_NONE
+
+static const u32 flyLookUpTable[QUEST_FLIGHTPATTERNS_SUB_COUNT][3]=
+{
+    [SUB_QUEST_1] =
+    {
+        FLY_LOCATION_1,
+        FLY_LOCATION_2,
+        FLY_LOCATION_NONE,
+    },
+    [SUB_QUEST_2] =
+    {
+        FLY_LOCATION_2,
+        FLY_LOCATION_3,
+        FLY_LOCATION_1,
+    },
+    [SUB_QUEST_3] =
+    {
+        FLY_LOCATION_3,
+        FLY_LOCATION_4,
+        FLY_LOCATION_2,
+    },
+    [SUB_QUEST_4] =
+    {
+        FLY_LOCATION_4,
+        FLY_LOCATION_5,
+        FLY_LOCATION_3,
+    },
+    [SUB_QUEST_5] =
+    {
+        FLY_LOCATION_5,
+        FLY_LOCATION_6,
+        FLY_LOCATION_4,
+    },
+    [SUB_QUEST_6] =
+    {
+        FLY_LOCATION_6,
+        FLY_LOCATION_7,
+        FLY_LOCATION_5,
+    },
+    [SUB_QUEST_7] =
+    {
+        FLY_LOCATION_7,
+        FLY_LOCATION_1,
+        FLY_LOCATION_6,
+    },
+};
+
+u32 Quest_FlightPatterns_IsOnFlightPath(void)
+{
+    return (VarGet(VAR_FLIGHT_PATH));
+    //return (FlagGet(FLAG_FLIGHT_PATH));
+}
+
+void Quest_FlightPatterns_SetFlightPathFlag(void)
+{
+    u32 oldVar = VarGet(VAR_FLIGHT_PATH);
+    VarSet(VAR_FLIGHT_PATH,oldVar+1);
+    //u16 *flightPath = GetVarPointer(VAR_FLIGHT_PATH);
+    //(*flightPath)++;
+    //FlagSet(FLAG_FLIGHT_PATH);
+}
+
+void Quest_FlightPatterns_ClearFlightPathFlag(void)
+{
+    VarSet(VAR_FLIGHT_PATH,0);
+    //FlagClear(FLAG_FLIGHT_PATH);
+}
+
+void Quest_FlightPatterns_SetFlightPath(u32 mapSecId)
+{
+    u32 currentLocation = gMapHeader.regionMapSectionId;
+    u32 nextLocation = mapSecId;
+    u32 locationIndex;
+
+    //DebugPrintf("\ncurrentLocation %d\n lastLocation%d\n",currentLocation,nextLocation,lastLocation);
+
+    for (locationIndex = 0; locationIndex < QUEST_FLIGHTPATTERNS_SUB_COUNT; locationIndex++)
+    {
+        if (currentLocation != flyLookUpTable[locationIndex][0])
+            continue;
+        if (nextLocation != flyLookUpTable[locationIndex][1])
+            continue;
+        if (flyLookUpTable[locationIndex][2] == FLY_LOCATION_NONE)
+            continue;
+        //DebugPrintf("locationIndex %d",locationIndex);
+        //DebugPrintf("flight apth%d",Quest_FlightPatterns_IsOnFlightPath());
+        if (locationIndex != Quest_FlightPatterns_IsOnFlightPath()+1)
+            continue;
+        //if (lastLocation != flyLookUpTable[locationIndex][2])
+            //continue;
+
+        Quest_FlightPatterns_SetFlightPathFlag();
+        return;
+    }
+    Quest_FlightPatterns_ClearFlightPathFlag();
+}
+
+bool32 Quest_FlightPatterns_OnLastLeg(void)
+{
+    return (Quest_FlightPatterns_IsOnFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT);
+}
+
+u32 Quest_FlightPatterns_GetEncounterType(void)
+{
+    u32 repelLureVar = VarGet(VAR_REPEL_STEP_COUNT);
+    u16 steps = REPEL_LURE_STEPS(repelLureVar);
+    bool32 isLure = IS_LAST_USED_LURE(repelLureVar);
+    if (!isLure && steps)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    TrySkyBattle();
+    if (!gSpecialVar_Result)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    if (Quest_FlightPatterns_OnLastLeg())
+        return FLY_ENCOUNTER_QUEST_BOSS;
+
+    return FLY_ENCOUNTER_QUEST_ATTACK;
 }

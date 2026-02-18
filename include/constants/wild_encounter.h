@@ -64,4 +64,10 @@ enum WildPokemonArea {
     WILD_AREA_PHENOMENON, // phenomenon
 };
 // End fogBattle
+
+// Start flyEncounters
+#define WILD_CHECK_REPEL    (1 << 0)
+#define WILD_CHECK_KEEN_EYE (1 << 1)
+// End flyEncounters
+
 #endif // GUARD_CONSTANTS_WILD_ENCOUNTER_H

@@ -61,8 +61,12 @@ enum {
 };
 */
 // End fogBattle
+// Start flyEncounters
+/*
 #define WILD_CHECK_REPEL    (1 << 0)
 #define WILD_CHECK_KEEN_EYE (1 << 1)
+*/
+// End flyEncounters
 
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
@@ -369,6 +373,37 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
+// FLY
+
+static u32 ChooseWildMonIndex_Fly(void)
+{
+    u32 wildMonIndex = 0;
+    bool32 swap = FALSE;
+    u32 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
+
+    if (rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_0)
+        wildMonIndex = 0;
+    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_1)
+        wildMonIndex = 1;
+    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_2)
+        wildMonIndex = 2;
+    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_3)
+        wildMonIndex = 3;
+    else
+        wildMonIndex = 4;
+
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
+        swap = TRUE;
+
+    if (swap)
+        wildMonIndex = 4 - wildMonIndex;
+
+    if (Quest_FlightPatterns_IsOnFlightPath())
+        wildMonIndex = 5;
+
+    return wildMonIndex;
+}
+
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area)
 {
     u8 min;
@@ -618,6 +653,9 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     case WILD_AREA_ROCKS:
         wildMonIndex = ChooseWildMonIndex_Rocks();
         break;
+    case WILD_AREA_FLY_MONS:
+        wildMonIndex = ChooseWildMonIndex_Fly();
+        break;
     default:
     case WILD_AREA_FISHING:
     case WILD_AREA_HIDDEN:
@@ -680,7 +718,10 @@ static bool8 EncounterOddsCheck(u16 encounterRate)
 }
 
 // Returns true if it will try to create a wild encounter.
-static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
+// Start flyEncounters
+//static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
+bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
+// End flyEncounters
 {
     encounterRate *= 16;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
