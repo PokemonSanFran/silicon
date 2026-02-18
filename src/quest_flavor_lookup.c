@@ -213,7 +213,7 @@ const u8 *GetQuestDesc_RabiesOutbreak(void)
     StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
     GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
 	ConvertIntToDecimalStringN(gStringVar3, (QUEST_RABIES_OUTBREAK_COUNT - defeatedGlameowCount), STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_RABIES_OUTBREAK_COUNT));
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RABIESOUTBREAK].desc);
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RABIESOUTBREAK].desc[FLAG_GET_ACTIVE]);
 	return gStringVar4;
 }
 
@@ -235,7 +235,7 @@ const u8 *GetQuestDesc_FreshwaterEvolution(void)
 {
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
     StringCopy(gStringVar2,GetSpeciesName(QUEST_FRESHWATER_EVOLUTION_SPECIES));
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_FRESHWATEREVOLUTION].desc);
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_FRESHWATEREVOLUTION].desc[FLAG_GET_ACTIVE]);
     return gStringVar4;
 }
 
@@ -244,13 +244,15 @@ const u8 *GetQuestDesc_SmoothieCrafting(void)
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_SMOOTHIE_CRAFTING_MAP),MAP_NUM(QUEST_SMOOTHIE_CRAFTING_MAP))->regionMapSectionId,0);
     CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_PRODUCT,gStringVar3,1);
     Quest_SmoothieCrafting_BufferRecipe();
-    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_SMOOTHIECRAFTING].desc);
+
+    u32 flag = ReturnQuestState(QUEST_SMOOTHIECRAFTING);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_SMOOTHIECRAFTING].desc[flag]);
     return gStringVar4;
 }
 
 const u8 *GetQuestDesc_Hodoutunnels(void)
 {
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HODOUTUNNELS),MAP_NUM(MAP_QUEST_HODOUTUNNELS))->regionMapSectionId,0);
-    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HODOUTUNNELS].desc);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HODOUTUNNELS].desc[FLAG_GET_ACTIVE]);
     return gStringVar4;
 }

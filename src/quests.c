@@ -1776,10 +1776,10 @@ const u8 *GetQuestMap(s32 questId)
 
 const u8 *GetQuestRewardDesc(s32 questId)
 {
-    if (sSideQuests[questId].rewardDesc == NULL)
+    if (sSideQuests[questId].desc[FLAG_GET_REWARD] == NULL)
         return gText_Blank;
 
-    return sSideQuests[questId].rewardDesc;
+    return sSideQuests[questId].desc[FLAG_GET_REWARD];
 }
 
 const u8 *GetQuestDesc(s32 questId)
@@ -1799,7 +1799,7 @@ const u8 *GetQuestDesc(s32 questId)
         case QUEST_HODOUTUNNELS:
             return GetQuestDesc_Hodoutunnels();
         default:
-            return sSideQuests[questId].desc;
+            return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
     }
 }
 
@@ -1808,8 +1808,10 @@ const u8 *GetQuestDoneDesc(s32 questId)
     switch (questId) {
         case QUEST_PLAYERSADVENTURE:
             return GetQuestDoneDesc_PlayersAdventure();
+        case QUEST_SMOOTHIECRAFTING:
+            return GetQuestDesc_SmoothieCrafting();
         default:
-            return sSideQuests[questId].donedesc;
+            return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
     }
 }
 
