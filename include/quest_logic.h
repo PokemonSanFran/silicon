@@ -42,6 +42,7 @@ void DebugQuest_RestoreTirabudinGym(u8);
 void DebugQuest_RabiesOutbreak(u8);
 void DebugQuest_FreshwaterEvolution(u8);
 
+
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
 
@@ -49,5 +50,6 @@ void DebugQuest_CompulsiveHealingPeerSupport(u8 state);
 void DebugQuest_StressCup(u8 state);
 void CountDefeatedRabiesMon(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
+void Quest_SmoothieCrafting_BufferRecipe(void);
 
 #endif //GUARD_QUESTLOGIC_H

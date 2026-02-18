@@ -2159,4 +2159,20 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
       .speakerIcon = gSpeakerIcon_Bill,
       .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_SMOOTHIESHOPKEEPER] =
+    {
+      .name = COMPOUND_STRING("Marble Slab Barista"),
+      .title = COMPOUND_STRING("Smoothieshopkeeper"),
+      .gender = MALE,
+      .speakerIcon = gSpeakerIcon_Bill,
+      .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SMOOTHIECUSTOMER] =
+    {
+      .name = COMPOUND_STRING("Customer"),
+      .title = COMPOUND_STRING("Smoothiecustomer"),
+      .gender = MALE,
+      .speakerIcon = gSpeakerIcon_Bill,
+      .speakerPal = sSpeakerPal_Bill,
+    },
   };

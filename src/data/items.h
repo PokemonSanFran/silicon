@@ -14815,8 +14815,8 @@ const struct Item gItemsInfo[] =
     },
     [ITEM_SHERBET_SURPRISE] =
     {
-        .name = ITEM_NAME("ShrbtSrprise"),
-        .description = COMPOUND_STRING("Makes a Pokémon\n""friendly but resets\n""EVs to zero."),
+        .name = ITEM_NAME("Sherbet Surprise"),
+        .description = COMPOUND_STRING("A extremely unpleasant\ndrink that resets\nall base points of\na Pokémon."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,

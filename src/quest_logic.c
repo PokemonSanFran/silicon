@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "constants/trainers.h"
 #include "battle_anim.h"
+#include "tv.h"
 #include "buzzr.h"
 #include "battle_setup.h"
 #include "constants/moves.h"
@@ -1404,18 +1405,34 @@ void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void)
 // ***********************************************************************
 // Quest: Ice Cream Crafting
 // ***********************************************************************
-bool8 Quest_SmoothieCrafting_CheckNeededItems(void)
+
+void Quest_SmoothieCrafting_BufferRecipe(void)
 {
-    bool8 hasPecha = CheckBagHasItem(ITEM_PECHA_BERRY,3);
-    bool8 hasNanab = CheckBagHasItem(ITEM_NANAB_BERRY,2);
-    bool8 hasRabuta = CheckBagHasItem(ITEM_RABUTA_BERRY,1);
+    StringCopy(gStringVar2,COMPOUND_STRING(""));
+    ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_1));
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(" "));
+    CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_1,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(", "));
 
-    bool8 hasNeededItems = FALSE;
+    ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_2));
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(" "));
+    CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_2,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(", & "));
 
-    if (hasPecha && hasNanab && hasRabuta){
-        hasNeededItems = TRUE;
-    }
-    return hasNeededItems;
+    ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_3));
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(" "));
+    CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_3,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(""));
+}
+
+void Quest_SmoothieCrafting_ConstrctRemaining(void)
+{
 }
 
 // ***********************************************************************

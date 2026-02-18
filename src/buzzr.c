@@ -2029,28 +2029,7 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_NPC_SMOOTHIE:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA_ICE_CREAM_SHOP),MAP_NUM(MAP_CHASILLA_ICE_CREAM_SHOP))->regionMapSectionId,0);
             StringCopy(gStringVar3,GetItemName(QUEST_SMOOTHIE_CRAFTING_PRODUCT));
-            StringCopy(gStringVar2,COMPOUND_STRING(""));
-
-            ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_1));
-            StringAppend(gStringVar2,gStringVar4);
-            StringAppend(gStringVar2,COMPOUND_STRING(" "));
-            CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_1,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
-            StringAppend(gStringVar2,gStringVar4);
-            StringAppend(gStringVar2,COMPOUND_STRING(", "));
-
-            ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_2));
-            StringAppend(gStringVar2,gStringVar4);
-            StringAppend(gStringVar2,COMPOUND_STRING(" "));
-            CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_2,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
-            StringAppend(gStringVar2,gStringVar4);
-            StringAppend(gStringVar2,COMPOUND_STRING(", & "));
-
-            ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_3));
-            StringAppend(gStringVar2,gStringVar4);
-            StringAppend(gStringVar2,COMPOUND_STRING(" "));
-            CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_3,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
-            StringAppend(gStringVar2,gStringVar4);
-            StringAppend(gStringVar2,COMPOUND_STRING(""));
+            Quest_SmoothieCrafting_BufferRecipe();
             break;
         case TWEET_QUEST_NPC_RABIES:
             StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));

@@ -625,7 +625,6 @@ gSpecials::
     def_special Quest_Restorezenzugym_CheckRemainingSubquests
     def_special Quest_Restoreespuleeoutskirts_CheckRemainingSubquests
     def_special Quest_Taxicabturnaround_LookUpQuestType
-    def_special Quest_SmoothieCrafting_CheckNeededItems
     def_special YouRealizeTheyreEvilRight_GetMapForCompletedRestoration
     def_special VSGarbodor_ChooseGemBasedOnStarter
     def_special ShouldShowVigrim

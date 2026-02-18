@@ -1,99 +1,224 @@
-//PSF TODO Implement actual item effect for ITEM_SHERBET_SURPRISE
-//PSF TODO Modify additem script to check for berries and mark this quest as complete if player has the berries
-
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const CASHIER = 1
-const PATRON = 2
-const POKEMON = 3
-
-script Quest_SmoothieCrafting_HidePatron_Script{
+//PSF TODO Implement actual item effect for ITEM_SHERBET_SURPRISE which is reduce all EVs and 0 out happiness
+script Quest_SmoothieCrafting_Script_HideSmoothiecustomer
+{
     questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SMOOTHIECRAFTING)
         if (var(VAR_RESULT)){
             setflag(FLAG_TEMP_1)
         }
 }
 
-script Quest_SmoothieCrafting_Event_Script{
-    msgbox(format("Welcome to the Marble Slab!"),MSGBOX_NPC)
-
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SMOOTHIECRAFTING)
-    if (var(VAR_RESULT)){
-        goto(Chasilla_IceCreamShop_Cashier_Event_Script)
+script Quest_SmoothieCrafting_Script_Debug
+{
+    //PSF TODO remove when ready
+    checkitem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("you have item 1"))
+        closemessage
+        additem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1)
     }
 
-    call(Quest_SmoothieCrafting_CheckBerries_Script)
-    goto_if_quest_reward(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_TakeBerries_Dialogue)
-    goto_if_quest_active(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_GiveRecipe_Dialogue)
-}
-
-script Quest_SmoothieCrafting_Debug_Script{
-    additem(ITEM_PECHA_BERRY,3)
-    additem(ITEM_NANAB_BERRY,2)
-    additem(ITEM_RABUTA_BERRY,1)
-    msgbox(format("now you have all the items you need."))
-//PSF TODO remove when ready
-    return
-}
-
-script Quest_SmoothieCrafting_GiveRecipe_Dialogue{
-        call(Quest_SmoothieCrafting_Debug_Script)
-        msgbox(format("We're actually not serving customers yet, today is just our soft open! If you want to try our signature Sherbet Surprise, bring in 3 Pecha Berries, 2 Nanab Berries, and 1 Rabuta Berry!"),MSGBOX_NPC)
-        end
-}
-
-script Quest_SmoothieCrafting_TakeBerries_Dialogue{
-        lock
-        msgbox(format("Sick, you brought the berries! Okay, I'll make this.... and here you go!"),MSGBOX_NPC)
+    checkitem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("you have item 2"))
         closemessage
+        additem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2)
+    }
 
-        call(Quest_SmoothieCrafting_TakeBerries_Script)
-        giveitem(ITEM_SHERBET_SURPRISE,6)
-
-        applymovement(PATRON, moves(walk_faster_up, walk_fast_left * 4, face_up, step_end))
-        waitmovement(PATRON)
-        applymovement(CASHIER, moves(lock_facing_direction, walk_right, step_end))
-        waitmovement(CASHIER)
-
-        msgbox(format("What the hell are you serving us? What is going on?"))
-        msgbox(format("What do you mean? Did your Pokémon not like their treat?"))
-        msgbox(format("My Pokémon got weaker after eating it! What gives?"))
-        msgbox(format("Yeah! We clean out your Pokémon bodies so you can toughen them up the way they should be! That's what our ad said, right?"))
-        msgbox(format("...I can't believe this shit! I wanted to toughen my team up! Ugh!"))
+    checkitem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("you have item 3"))
         closemessage
-
-        applymovement(PATRON, moves(walk_right * 4, walk_down, step_end))
-        waitmovement(PATRON)
-        call(Quest_SmoothieCrafting_RemovePokemon_Script)
-        applymovement(PATRON, moves(walk_down * 3, walk_left * 4, face_down, step_end))
-        waitmovement(PATRON)
-        playse(SE_EXIT)
-        removeobject(PATRON)
-        applymovement(CASHIER, moves(lock_facing_direction, walk_left, step_end))
-        waitmovement(CASHIER)
-        release
-        completequest(QUEST_SMOOTHIECRAFTING)
-        call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
-        end
+        additem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3)
+    }
 }
 
-script Quest_SmoothieCrafting_RemovePokemon_Script{
-    playse(SE_BALL_OPEN)
-        waitse
-        setflag(FLAG_TEMP_1)
-        removeobject(POKEMON)
+script Quest_SmoothieCrafting_Script_Interact
+{
+    lock
+    faceplayer
+
+    goto_if_quest_complete(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_Script_Buy)
+    goto_if_quest_reward(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_Dialogue_TakeBerries)
+    goto_if_quest_active(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_Dialogue_GiveRecipe)
+
+    msgbox(format("Hi! We’re still getting everything in order, but keep your eyes on Buzzr."),,SPEAKER_SMOOTHIESHOPKEEPER)
+    msgbox(format("You’ll see it online as soon as we’re ready to go!"),,SPEAKER_SHOPKEEPER)
+    closemessage
+    release
+    end
 }
 
-script Quest_SmoothieCrafting_TakeBerries_Script{
-    removeitem(ITEM_PECHA_BERRY,3)
-    removeitem(ITEM_NANAB_BERRY,2)
-    removeitem(ITEM_RABUTA_BERRY,1)
+script Quest_SmoothieCrafting_Dialogue_GiveRecipe
+{
+#if TESTING
+    call(Quest_SmoothieCrafting_Script_Debug)
+#endif
+    msgbox(format("Welcome to the Marble Slab’s soft opening!"),,SPEAKER_SMOOTHIESHOPKEEPER)
+    callnative(Quest_SmoothieCrafting_BufferRecipe)
+    bufferitemname(STR_VAR_1,QUEST_SMOOTHIE_CRAFTING_PRODUCT)
+    msgbox(format("We’re running a promotion where you can try our signature {STR_VAR_1} for free."),,SPEAKER_SMOOTHIESHOPKEEPER)
+    msgbox(format("Just bring"),,SPEAKER_SMOOTHIESHOPKEEPER)
+
+    buffernumberstring(STR_VAR_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1)
+    bufferitemnameplural(STR_VAR_2,QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1)
+    msgbox(format("{STR_VAR_1} {STR_VAR_2},"),,SPEAKER_SMOOTHIESHOPKEEPER)
+
+    buffernumberstring(STR_VAR_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2)
+    bufferitemnameplural(STR_VAR_2,QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2)
+    msgbox(format("{STR_VAR_1} {STR_VAR_2},"),,SPEAKER_SMOOTHIESHOPKEEPER)
+
+    buffernumberstring(STR_VAR_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3)
+    bufferitemnameplural(STR_VAR_2,QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3)
+    msgbox(format("& {STR_VAR_1} {STR_VAR_2},"),,SPEAKER_SMOOTHIESHOPKEEPER)
+
+    msgbox(format("and we’ll blend it all up for you!"),,SPEAKER_SMOOTHIESHOPKEEPER)
+    call(Quest_Smoothiecrafting_Dialogue_ListRemaningBerries)
 }
 
-script Quest_SmoothieCrafting_CheckBerries_Script{
-    specialvar(VAR_RESULT,Quest_SmoothieCrafting_CheckNeededItems)
-        if (var(VAR_RESULT)){
-            questmenu(QUEST_MENU_SET_REWARD,QUEST_SMOOTHIECRAFTING)
+script Quest_Smoothiecrafting_Dialogue_ListRemaningBerries
+{
+    callnative(Quest_SmoothieCrafting_ConstrctRemaining)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        msgbox(format("Do you want us to take those Berries and make a smoothie?"),MSGBOX_YESNO,SPEAKER_SMOOTHIESHOPKEEPER)
+        if (var(VAR_RESULT) == YES)
+        {
+            goto(Quest_SmoothieCrafting_Dialogue_TakeBerries)
         }
-    return
+    goto(Quest_SmoothieCrafting_Dialogue_CancelSmoothie)
+    }
+    else
+    {
+        msgbox(format("You need {STR_VAR_2}."),,SPEAKER_SMOOTHIESHOPKEEPER)
+        goto(Quest_SmoothieCrafting_Dialogue_CancelSmoothie)
+    }
 }
 
+script Quest_SmoothieCrafting_Dialogue_CancelSmoothie
+{
+    msgbox(format("If you want a smoothie on the house come back with those Berries and let us know!"),,SPEAKER_SMOOTHIESHOPKEEPER)
+    closemessage
+    release
+    end
+}
+
+script Quest_SmoothieCrafting_Dialogue_TakeBerries
+{
+    lock
+    call(Quest_SmoothieCrafting_Script_TakeBerries)
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_SMOOTHIECRAFTING)
+    bufferitemname(STR_VAR_1,QUEST_SMOOTHIE_CRAFTING_PRODUCT)
+    msgbox(format("Okay, one {STR_VAR_1}, coming right up!"),,SPEAKER_SMOOTHIESHOPKEEPER)
+    closemessage
+    call(Quest_SmoothieCrafting_Script_TakeBerries)
+    call(Quest_SmoothieScripting_Script_MakeSmoothie)
+
+    goto(Quest_SmoothieCrafting_Dialogue_Reward)
+}
+
+script Quest_SmoothieCrafting_Dialogue_Reward
+{
+    checkitemspace(QUEST_SMOOTHIE_CRAFTING_PRODUCT,6)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Looks like you don’t have anywhere to put this smoothie. Make some room in your bag."),,SPEAKER_SMOOTHIESHOPKEEPER)
+        closemessage
+        release
+        end
+    }
+
+    cueobjectplayer(LOCALID_SMOOTHIESHOPKEEPER)
+    giveitem(ITEM_SHERBET_SURPRISE,6)
+
+    playmoncry(SPECIES_MAGIKARP,CRY_MODE_WEAK)
+    waitmoncry
+    applymovement(LOCALID_SMOOTHIECUSTOMER, moves(face_up))
+    waitmovement(LOCALID_SMOOTHIECUSTOMER)
+    msgbox(format("What are you serving us? What’s going on?"),,SPEAKER_SMOOTHIESHOPKEEPER)
+    closemessage
+
+    applymovement(LOCALID_SMOOTHIECUSTOMER, moves(walk_faster_up, walk_fast_left * 4, face_up, step_end))
+    waitmovement(LOCALID_SMOOTHIECUSTOMER)
+    applymovement(LOCALID_SMOOTHIESHOPKEEPER, moves(lock_facing_direction, walk_right, step_end))
+    waitmovement(LOCALID_SMOOTHIESHOPKEEPER)
+
+    msgbox(format("What do you mean? Did your Pokémon not like their treat?"),,SPEAKER_SMOOTHIESHOPKEEPER)
+    msgbox(format("My Pokémon got weaker, and it tastes horrible! What gives?"),,SPEAKER_SMOOTHIECUSTOMER)
+    msgbox(format("That smoothie cleansed your Pokémon’s body so you can build up their strength the right way from scratch."),,SPEAKER_SMOOTHIESHOPKEEPER)
+    msgbox(format("…I can’t believe this! I wanted to toughen up my team!"),,SPEAKER_SMOOTHIECUSTOMER)
+    closemessage
+
+    applymovement(LOCALID_SMOOTHIECUSTOMER, moves(walk_faster_down * 4, step_end))
+    waitmovement(LOCALID_SMOOTHIECUSTOMER)
+    playse(SE_EXIT)
+    removeobject(LOCALID_SMOOTHIECUSTOMER)
+
+    playse(SE_PIN)
+    waitse
+    applymovement(LOCALID_SMOOTHIECUSTOMERMON, moves(emote_exclamation_mark, delay_16, delay_16, face_left, face_right, walk_down * 2, walk_left * 5, face_down, delay_16, step_end))
+    waitmovement(LOCALID_SMOOTHIECUSTOMERMON)
+
+    applymovement(LOCALID_SMOOTHIESHOPKEEPER, moves(lock_facing_direction, walk_left, step_end))
+
+    playmoncry(SPECIES_MAGIKARP,CRY_MODE_NORMAL)
+    waitmoncry
+    playse(SE_EXIT)
+    removeobject(LOCALID_SMOOTHIECUSTOMERMON)
+
+    waitmovement(LOCALID_SMOOTHIESHOPKEEPER)
+    completequest(QUEST_SMOOTHIECRAFTING)
+    call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
+    release
+    end
+}
+
+script Quest_SmoothieScripting_Script_MakeSmoothie
+{
+    applymovement(LOCALID_SMOOTHIESHOPKEEPER,moves(walk_right, face_up, walk_in_place_up * 4, delay_16, walk_left, face_down))
+    waitmovement(LOCALID_SMOOTHIESHOPKEEPER)
+}
+
+script Quest_SmoothieCrafting_Script_TakeBerries
+{
+    removeitem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1)
+    removeitem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2)
+    removeitem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3)
+}
+
+script Quest_SmoothieCrafting_Script_Buy
+{
+    msgbox(format("Welcome to the Marble Slab!"),,SPEAKER_SMOOTHIESHOPKEEPER)
+    closemessage
+    // PSF TODO reimplement once presto is merged
+    // openpokemart(MarbleSlabShop)
+    // waitstate
+    release
+    end
+}
+
+script Quest_SmoothieCrafting_Dialogue_InteractSmoothiecustomer
+{
+    msgbox(format("Are you here for the promotion too? I got mine, but it doesn’t smell… great. But hey, can’t be the Champion without making some sacrifices."),MSGBOX_NPC,SPEAKER_SMOOTHIESHOPKEEPER)
+}
+
+script Quest_SmoothieCrafting_Dialogue_InteractSmoothiecustomermon
+{
+    playmoncry(SPECIES_MAGIKARP,CRY_MODE_WEAK)
+    waitmoncry
+    bufferspeciesname(STR_VAR_1,SPECIES_MAGIKARP)
+    bufferitemname(STR_VAR_2,QUEST_SMOOTHIE_CRAFTING_PRODUCT)
+    msgbox(format("The {STR_VAR_1} doesn't seem to love the smell of the {STR_VAR_2}."),MSGBOX_NPC)
+}
+
+mart MarbleSlabShop
+{
+    QUEST_SMOOTHIE_CRAFTING_PRODUCT
+    ITEM_FRESH_WATER
+    ITEM_MOOMOO_MILK
+    ITEM_SODA_POP
+    ITEM_BERRY_JUICE
+    ITEM_LEMONADE
+}
