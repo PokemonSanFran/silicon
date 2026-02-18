@@ -483,17 +483,15 @@ static enum PrestoShopTypes PrestoHelper_GetShopType(void)
 
 static void PrestoHelper_ProcessRecommendedItems(u32 numCandidates, u16 *recommendedCandidates, u8 *categoryCounts)
 {
-    u32 numRecSelected = 0;
-
-    for (u32 i = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS && numCandidates > 0; i++)
+    for (u32 i = 0, numRecSelected = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS && numCandidates > 0; i++)
     {
         u32 randIdx = Random() % numCandidates;
-        u16 selectedItem = recommendedCandidates[randIdx];
-
-        gShopMenuDataPtr->recommendedItems[i] = selectedItem;
-
         u32 risingCategory = ShopInventory_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
-        ShopInventory_SetItemIdToGrid(selectedItem, risingCategory, numRecSelected);
+
+        if (!gShopMenuDataPtr->recGenerated)
+            gShopMenuDataPtr->recommendedItems[i] = recommendedCandidates[randIdx];
+
+        ShopInventory_SetItemIdToGrid(gShopMenuDataPtr->recommendedItems[i], risingCategory, numRecSelected);
         numRecSelected++;
 
         // DebugPrintf("%S is getting Recommended in position %d",GetItemName(selectedItem),numRecSelected);
@@ -564,9 +562,10 @@ static bool8 PrestoHelper_ShouldRecommend(enum ShopMenuCategories category, u32 
     };
 
     enum ShopMenuCarousels carousel = PrestoHelper_GetCarouselType();
+
     if (carouselHandlers[carousel] != NULL)
         return carouselHandlers[carousel](itemId, category);
-    
+
     return FALSE;
 }
 

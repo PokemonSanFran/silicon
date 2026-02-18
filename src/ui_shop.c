@@ -865,6 +865,7 @@ static void ShopInventory_InitCategoryLists(void)
 {
     ShopInventory_Reset();
     gShopMenuDataPtr->numCategories = ShopConfig_Get()->handleInitList();
+    gShopMenuDataPtr->recGenerated = TRUE;
 }
 
 enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void)
@@ -996,8 +997,11 @@ static void ShopInventory_Reset(void)
     for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++)
         gShopMenuDataPtr->categoryList[categoryIndex] = NUM_SHOP_CATEGORIES;
 
-    for (u32 itemIndex = 0; itemIndex < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS; itemIndex++)
-        gShopMenuDataPtr->recommendedItems[itemIndex] = ITEM_NONE;
+    if (!gShopMenuDataPtr->recGenerated)
+    {
+        for (u32 itemIndex = 0; itemIndex < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS; itemIndex++)
+            gShopMenuDataPtr->recommendedItems[itemIndex] = ITEM_NONE;
+    }
 
     memset(gShopMenuDataPtr->categoryNumItems, 0, NUM_SHOP_CATEGORIES * sizeof(u8));
     memset(gShopMenuDataPtr->categoryItems, ITEM_NONE, (NUM_SHOP_CATEGORIES * NUM_SHOP_ITEMS_PER_CATEGORIES) * sizeof(u16));

@@ -176,7 +176,8 @@ struct ShopMenuData
 
     u16 itemQuantity;
     u16 maxItemQuantity;
-    u16 selectedItemId;
+    u16 selectedItemId:15;
+    u16 recGenerated:1;     // don't regenerate recommend category again in Presto
 
     enum ShopMenuCarousels carouselType;
     u16 recommendedItems[NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS];
