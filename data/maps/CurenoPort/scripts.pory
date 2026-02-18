@@ -1,4 +1,8 @@
 mapscripts CurenoPort_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_StolenTrade_HideObjectB_Script)
         call(HowDoWeGetHome_PostSceneObjectCleanUp_Script)

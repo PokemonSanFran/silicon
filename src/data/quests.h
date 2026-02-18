@@ -2212,7 +2212,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_YOUNGSTER,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 4 //PSF TODO should this be one quest or a bunch of subquests
+        .numSubquests = QUEST_FOODTRUCKBUREACRACY_SUB_COUNT, //PSF TODO should this be one quest or a bunch of subquests
     },
     [QUEST_CHALLENGEOFTHE7SISTERS] =
     {
@@ -2234,7 +2234,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_WOMAN_5,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sCutePokemon_Sub,
-        .numSubquests = ARRAY_COUNT(sCutePokemon_Sub),
+        .numSubquests = QUEST_CUTEPOKEMON_SUB_COUNT,
         .states =
         {
             [STATE_QUEST_CUTEPOKEMON_QUEST_NOT_STARTED]=

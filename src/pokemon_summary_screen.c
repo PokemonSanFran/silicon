@@ -4808,6 +4808,30 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
 
 static inline bool32 ShouldShowMoveRelearner(void)
 {
+    if (!P_SUMMARY_SCREEN_MOVE_RELEARNER)
+        return FALSE;
+
+    if ((sMonSummaryScreen->lockMovesFlag) || (sMonSummaryScreen->isBoxMon))
+        return FALSE;
+
+    if ((sMonSummaryScreen->mode == SUMMARY_MODE_BOX) || (sMonSummaryScreen->mode == SUMMARY_MODE_BOX_CURSOR))
+        return FALSE;
+
+    if (sMonSummaryScreen->relearnableMovesNum <= 0)
+        return FALSE;
+
+    if (InBattleFactory())
+        return FALSE;
+
+    if (InSlateportBattleTent())
+        return FALSE;
+
+    if (NoMovesAvailableToRelearn())
+        return FALSE;
+
+    return TRUE;
+    //PSF TODO ideally my version was merged into expansion
+    /*
     return (P_SUMMARY_SCREEN_MOVE_RELEARNER
          && !sMonSummaryScreen->lockMovesFlag
          && !sMonSummaryScreen->isBoxMon
@@ -4817,6 +4841,7 @@ static inline bool32 ShouldShowMoveRelearner(void)
          && !InBattleFactory()
          && !InSlateportBattleTent()
          && !NoMovesAvailableToRelearn());
+    */
 }
 
 static inline bool32 ShouldShowRename(void)
@@ -4922,6 +4947,7 @@ void ShowRelearnPrompt(void)
         return;
     }
 
+    // PSF TODO this check runs through all 400 TMs causing the summary screen to lag really bad. if the new summary screen doesn't ship, we need to fix this
     if (GetCurrentRelearnMovesCount() == 0)
         return;
 

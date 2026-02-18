@@ -1,4 +1,8 @@
 mapscripts MermerezaCity_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Recruitlocalartists_Ramesh_Visibility_Script)
         call(Quest_Recruitlocalartists_Smeargle_Visibility_Script)

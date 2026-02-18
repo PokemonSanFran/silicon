@@ -5,6 +5,7 @@ mapscripts Oroland_MapScripts {
             call(Quest_Restaurantexpansion_HideObjects_Script)
     }
     MAP_SCRIPT_ON_RESUME{
+		callnative(WarpTaxiAfterCutscene)
         //call_if_quest_active(QUEST_DANCEBATTLE,Quest_Dancebattle_CreateCrowd_Script) //PSF TODO Change to a crowd for LastManInSanFrancisco
     }
     MAP_SCRIPT_ON_FRAME_TABLE [

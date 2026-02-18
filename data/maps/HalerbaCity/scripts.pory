@@ -1,5 +1,9 @@
 mapscripts HalerbaCity_MapScripts {
 
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION{
         call(Vsdeoxys_Script_HideVsdeoguy_Gldngtepark)
     }

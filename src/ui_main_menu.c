@@ -959,7 +959,6 @@ static void PrintMainMenuOptions(void)
     //u32 x = sTextHorizontalPosition[mode];
     u32 optionCount = sOptionCount[mode];
 
-    SetMoney(&gSaveBlock1Ptr->money,10);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     for (enum MainMenuContinueMenuOptions optionIndex = MAINMENU_CONTINUE; optionIndex < optionCount; optionIndex++)

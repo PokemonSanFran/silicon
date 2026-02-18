@@ -84,6 +84,7 @@
 #include "constants/siliconStarter.h" @ siliconStarter
 #include "constants/rtc.h" @ siliconDNS
 #include "constants/ui_adventure_guide.h" @ adventureGuide
+#include "constants/ui_map_system.h"
 @ End siliconMerge
 #include "constants/speaker_names.h"
 	.include "asm/macros.inc"
@@ -1224,6 +1225,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/infinite_spray.inc"
 .include "data/scripts/hiddengrotto.inc"
 .include "data/scripts/taxi.inc"
+.include "data/scripts/trolley.inc"
 .include "data/scripts/run_behavior.inc"
 .include "data/scripts/ferry.inc"
 .include "data/scripts/mutual_aid.inc"

@@ -269,7 +269,17 @@ struct Waypoint
     s16 yTile;
     u8 currentDirection;
     u8 currentState;
+    u16 healLocation;
+    u16 mapSecId;
+    u16 l2_id;
 };
+
+enum WaypointState {
+    WAYPOINT_NONE,
+    WAYPOINT_L1,
+    WAYPOINT_L2,
+};
+
 //End Waypoint/MapSystem Branch
 
 //Start buzzr Branch

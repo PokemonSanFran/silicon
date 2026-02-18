@@ -3,6 +3,10 @@ const DOYLE = 2
 const FLAG_HIDE_DOYLE = FLAG_TEMP_1
 
 mapscripts ZenzuIsland_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(LetsGrabLunch_HideBaiya_Outside_Script)
         call(Restorezenzugym_HideDoyle_Outside_Script)

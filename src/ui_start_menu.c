@@ -853,7 +853,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_ARRIBA] =
     {
-        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu, START_SIGNAL_OKAY
+        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu, START_SIGNAL_NONE
     },
     [START_APP_TODOS] =
     {

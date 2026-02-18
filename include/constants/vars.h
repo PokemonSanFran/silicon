@@ -337,6 +337,7 @@
 #define VAR_KEIYING_RAISON_DETRE_STATE                                0x40FD // PSF Var
 #define VAR_LAST_RESTORATION_TAKEDOWN_QUEST                                0x40FE // PSF Var
 #define VAR_LETSBURNTHISMOTHERSTATE                                0x40FF // PSF Var
+#define VAR_UBER_QUEST_EXCEPTION_DESTINATION						VAR_TAXI_DESTINATION
 
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)

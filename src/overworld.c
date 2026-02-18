@@ -87,6 +87,7 @@
 #include "rematch.h" // siliconMerge
 #include "options_music.h" // siliconMerge
 #include "map_preview_screen.h" // mapPreviews
+#include "ui_map_system.h"
 
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 
@@ -2606,6 +2607,7 @@ static void ResumeMap(bool32 a1)
     ResumePausedWeather();
     if (!a1)
         SetUpFieldTasks();
+    CreateOverworldWaypointArrow();
     WaterBerriesIfRaining(); // autoWater
     RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();

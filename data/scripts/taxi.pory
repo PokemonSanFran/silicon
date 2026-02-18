@@ -24,16 +24,15 @@
 // Now I won't even have a copper to send back to my family in Hoenn...
 // Thanks a lot, pal.
 
-script Taxi_Interact_Dialogue{
+script Taxi_Interact_Dialogue
+{
     lock
 
     call_if_quest_reward(QUEST_TAXICABTURNAROUND,Quest_Taxicabturnaround_Reward_Dialogue)
     call(Quest_Taxicabturnaround_CheckNextStage_Script)
 
-    bufferstring(STR_VAR_1,"2000")
+    callnative(BufferTaxiBaseFare)
     msgbox(format("Thanks for choosing Taxicab! The base fare is ¥{STR_VAR_1}, do you want a ride?"))
-    //PSF TODO replace 2000 with base fare constant
-    closemessage
     call(Taxi_ConstructMenu_Script)
     dynmultistack(0,0,TRUE,3,TRUE,1,NULL)
 
@@ -44,85 +43,52 @@ script Taxi_Interact_Dialogue{
     }
 }
 
-script Taxi_ConstructMenu_Script{
+script Taxi_ConstructMenu_Script
+{
     dynmultipush("No.",NO)
     dynmultipush("Yes!",YES)
 
     specialvar(VAR_0x8008,Quest_Taxicabturnaround_IsSubquestComplete)
     returnqueststate(QUEST_TAXICABTURNAROUND)
 
-    if ((var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST) && (!var(VAR_0x8008))) {
+    if ((var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST) && (!var(VAR_0x8008)))
+    {
         dynmultipush("Something else.",2)
     }
     return
 }
 
-script Taxi_Refuse_Dialogue{
+script Taxi_Refuse_Dialogue
+{
     msgbox(format("Changed your mind? That's fine. We'll be here!"))
     closemessage
     release
     end
 }
 
-script Taxi_ChooseLocation_Dialogue{
-    fadescreen(FADE_TO_BLACK)
-    //special(OpenTaxiMenu)
-    //waitstate
-    call(Taxi_ConstructLocations_List)
-    dynmultistack(0,0,TRUE,3,TRUE,0,NULL)
-
-    if (var(VAR_RESULT) == MULTI_B_PRESSED){
-        fadescreen(FADE_FROM_BLACK)
-        goto(Taxi_Refuse_Dialogue)
-    }
-
-    specialvar(VAR_RESULT,Taxi_CalculateFeeAndCharge)
-        if (!var(VAR_RESULT)){
-            call(Taxi_StartBattle_Dialogue)
-        }
-
-    call(Taxi_WarpToLocation_Script)
-
+script Taxi_ChooseLocation_Dialogue
+{
+    setflag(FLAG_TEMP_1)
+    callnative(Script_OpenTaxi)
+    waitstate
+    goto_if_unset(FLAG_TEMP_1,Taxi_StartBattle_Dialogue)
+    goto(Taxi_Refuse_Dialogue)
     release
     end
 }
 
-script Taxi_WarpToLocation_Script{
-        fadeblackandsetremovewarpfadeflag
-    switch(var(VAR_TAXI_DESTINATION)){
-        case 0: warpsilent(MAP_CAPHE_CITY,0)
-        case 1: warpsilent(MAP_CHASILLA,0)
-        case 2: warpsilent(MAP_CRESALTA_VISTA,0)
-    }
-}
-
-script Taxi_ConstructLocations_List{
-    if (!flag(FLAG_VISITED_LITTLEROOT_TOWN)){
-        dynmultipush("Caphe City",0)
-    }
-    if (!flag(FLAG_VISITED_OLDALE_TOWN)){
-        dynmultipush("Chasilla",1)
-    }
-    if (!flag(FLAG_VISITED_DEWFORD_TOWN)){
-        dynmultipush("Cresalta Vista",2)
-    }
-
-    dynmultipush("Never mind.",MULTI_B_PRESSED)
-    return
-}
-
 script Taxi_StartBattle_Dialogue{
+    callnative(Taxi_BufferDestinationMapName)
+    msgbox(format("{STR_VAR_1}, here we go!"))
+    fadescreen(FADE_TO_BLACK)
     showmoneybox(0,0)
-    special(Taxi_BufferDestinationMapName)
+    callnative(Taxi_BufferDestinationMapName)
     msgbox(format("Okay kid, here's your stop, {STR_VAR_1}."))
-    msgbox(format("That'll be ¥{STR_VAR_2}."))
     msgbox(format("Hey, just a minute there friend! You don't even have enough for the fare?! I come out to earn a living, don't I? So why you gotta tax me like this?"))
     closemessage
     hidemoneybox
+	setflag(FLAG_TEMP_1)
     trainerbattle_no_intro(TRAINER_CABBIE_HALE,gText_Taxi_AintYouStrong)
-    fadescreen(FADE_TO_BLACK)
-    msgbox(format("Now I won't make enough money to send back home to my family in Hoenn..."))
-    closemessage
     return
 }
 
@@ -142,8 +108,5 @@ text gText_Taxi_WhatDoYouMean{
     format("Hey, just a minute there friend! You don't even have enough for the fare?! I come out to earn a living, don't I? So why you gotta tax me like this?")
 }
 text gText_Taxi_AintYouStrong{
-    format("Well aren't you a strong one? Too strong for me!")
-}
-text gText_Taxi_NowIWont{
-    format("Now I won't make enough money to send back home to my family in Hoenn...")
+    format("Well aren't you a strong one? Too strong for me!\pNow I won't make enough money to send back home to my family in Hoenn...")
 }

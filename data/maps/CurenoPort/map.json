@@ -468,6 +468,15 @@
       "var": "VAR_CURENO_PORT_STATE",
       "var_value": "0",
       "script": "HowDoWeGetHome_YellingDistance_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 52,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "StartTrolleySequence"
     }
   ],
   "bg_events": []
