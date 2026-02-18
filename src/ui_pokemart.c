@@ -619,14 +619,12 @@ static void MartHelper_UpdateFrontEnd(void)
 static u32 MartHelper_InitItemsList(void)
 {
     u8 numItems[NUM_SHOP_CATEGORIES] = {0};
-    u32 i = 0;
+    u32 i = 0, itemId = ITEM_NONE;
 
     ShopInventory_ProcessBuyAgainItems(numItems);
 
-    while (sPokeMartData.products[i++] != ITEM_NONE)
+    while ((itemId = sPokeMartData.products[i++]) != ITEM_NONE)
     {
-        u32 itemId = sPokeMartData.products[i];
-
         if (!GetItemPrice(itemId))
             continue;
 
