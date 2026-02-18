@@ -1406,6 +1406,37 @@ void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void)
 // Quest: Ice Cream Crafting
 // ***********************************************************************
 
+void DebugQuest_Smoothiecrafting(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_SMOOTHIECRAFTING_NOT_STARTED:
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_STARTED:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
+            QuestMenu_ScriptSetActive(QUEST_SMOOTHIECRAFTING);
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_HAS_ITEMS:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
+            QuestMenu_ScriptSetActive(QUEST_SMOOTHIECRAFTING);
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_REWARD:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
+            QuestMenu_ScriptSetReward(QUEST_SMOOTHIECRAFTING);
+            RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
+            RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
+            RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_COMPLETE:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
+            QuestMenu_ScriptSetComplete(QUEST_SMOOTHIECRAFTING);
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_PRODUCT,6);
+            break;
+    }
+}
 void Quest_SmoothieCrafting_BufferRecipe(void)
 {
     StringCopy(gStringVar2,COMPOUND_STRING(""));

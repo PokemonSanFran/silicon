@@ -403,6 +403,15 @@ enum
 #define QUEST_SMOOTHIE_CRAFTING_PRODUCT ITEM_SHERBET_SURPRISE
 #define QUEST_SMOOTHIE_CRAFTING_MAP MAP_CHASILLA_ICE_CREAM_SHOP
 
+enum
+{
+    STATE_QUEST_SMOOTHIECRAFTING_NOT_STARTED,
+    STATE_QUEST_SMOOTHIECRAFTING_STARTED,
+    STATE_QUEST_SMOOTHIECRAFTING_HAS_ITEMS,
+    STATE_QUEST_SMOOTHIECRAFTING_REWARD,
+    STATE_QUEST_SMOOTHIECRAFTING_COMPLETE,
+};
+
 // ***********************************************************************
 // Quest: Freshwater Evolution
 // ***********************************************************************

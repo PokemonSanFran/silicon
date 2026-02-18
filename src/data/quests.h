@@ -1780,14 +1780,51 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     [QUEST_SMOOTHIECRAFTING] =
     {
         .name = COMPOUND_STRING("Smoothie Crafting"),
-        //.desc = COMPOUND_STRING("Bring {STR_VAR_2} to {STR_VAR_1}'s Marble Slab to make a drink to help train Pokémon!"),
         .desc = COMPOUND_STRING("Bring {STR_VAR_2} to {STR_VAR_1}'s Marble Slab to make a drink to help train Pokémon!"),
         .donedesc = COMPOUND_STRING("The {STR_VAR_3} wasn’t all it was hyped up to be, but the Mochi Shop nearby sounds promising."),
         .map = gText_Chasilla,
         .sprite = QUEST_SMOOTHIE_CRAFTING_PRODUCT,
         .spritetype = QUEST_SPRITE_TYPE_ITEM,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_SMOOTHIECRAFTING_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Smoothiecrafting,
+                side_quest_map(QUEST_SMOOTHIE_CRAFTING_MAP),
+                .warpId = 0,
+            },
+            [STATE_QUEST_SMOOTHIECRAFTING_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_Smoothiecrafting,
+                side_quest_map(QUEST_SMOOTHIE_CRAFTING_MAP),
+                .warpId = 0,
+            },
+            [STATE_QUEST_SMOOTHIECRAFTING_HAS_ITEMS] =
+            {
+                .name = COMPOUND_STRING("Has Items"),
+                .setupFunc = DebugQuest_Smoothiecrafting,
+                side_quest_map(QUEST_SMOOTHIE_CRAFTING_MAP),
+                .warpId = 0,
+            },
+            [STATE_QUEST_SMOOTHIECRAFTING_REWARD] =
+            {
+                .name = COMPOUND_STRING("Has Reward"),
+                .setupFunc = DebugQuest_Smoothiecrafting,
+                side_quest_map(QUEST_SMOOTHIE_CRAFTING_MAP),
+                .warpId = 0,
+            },
+            [STATE_QUEST_SMOOTHIECRAFTING_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Smoothiecrafting,
+                side_quest_map(QUEST_SMOOTHIE_CRAFTING_MAP),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_VSDEOXYS] =
     {
