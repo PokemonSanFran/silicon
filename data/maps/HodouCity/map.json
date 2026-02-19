@@ -112,6 +112,7 @@
       "flag": "FLAG_TEMP_7"
     },
     {
+      "local_id": "LOCALID_TUNNELSPERSON",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
       "x": 36,
       "y": 10,

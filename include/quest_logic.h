@@ -25,6 +25,9 @@ void SetFogVariableAfterLoss(void);
 bool32 ShouldWildBattleBeFog(void); // fogBattle
 u8* PrintUnknownLevel(u32 lvl, u32 battler, u8* text);
 u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void);
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels(void);
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll(void);
+bool8 Quest_Hodoutunnels_GetVariable_TalkedToElder(void);
 
 bool32 ShouldAskUnhoused(void);
 const u8* ReturnBattleScriptCantUseItem(void);
@@ -45,6 +48,7 @@ void DebugQuest_StressCup(u8);
 void DebugQuest_RabiesOutbreak(u8);
 void DebugQuest_FreshwaterEvolution(u8);
 void DebugQuest_Smoothiecrafting(u8);
+void DebugQuest_Hodoutunnels(u8);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

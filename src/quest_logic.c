@@ -106,6 +106,24 @@ void Quest_Generic_MakeQuestRewardIfSubquestsComplete(u32 relevantQuest)
     QuestMenu_ScriptSetReward(relevantQuest);
 }
 
+void SetVariableBit(u32 varConst, u32 bit, bool32 bitValue)
+{
+    u32 var = VarGet(varConst);
+
+    if (bitValue)
+        var |= (1 << bit);
+    else
+        var &= ~(1 << bit);
+
+    VarSet(varConst,var);
+}
+
+bool8 GetVariableBit(u32 varConst, u32 bit)
+{
+    u32 var = VarGet(varConst);
+    return (var >> bit) & 1;
+}
+
 // ***********************************************************************
 // Quest: Kitchen Volunteering
 // ***********************************************************************
@@ -1410,21 +1428,16 @@ void DebugQuest_Smoothiecrafting(u8 state)
             QuestMenu_ScriptSetActive(QUEST_SMOOTHIECRAFTING);
             break;
         case STATE_QUEST_SMOOTHIECRAFTING_HAS_ITEMS:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
-            QuestMenu_ScriptSetActive(QUEST_SMOOTHIECRAFTING);
             AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
             AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
             AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
             break;
         case STATE_QUEST_SMOOTHIECRAFTING_REWARD:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
-            QuestMenu_ScriptSetReward(QUEST_SMOOTHIECRAFTING);
             RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
             RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
             RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
             break;
         case STATE_QUEST_SMOOTHIECRAFTING_COMPLETE:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
             QuestMenu_ScriptSetComplete(QUEST_SMOOTHIECRAFTING);
             AddBagItem(QUEST_SMOOTHIE_CRAFTING_PRODUCT,6);
             break;
@@ -1495,17 +1508,13 @@ void DebugQuest_FreshwaterEvolution(u8 state)
             QuestMenu_ScriptSetActive(QUEST_FRESHWATEREVOLUTION);
             break;
         case STATE_QUEST_FRESHWATER_REWARD:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
             QuestMenu_ScriptSetReward(QUEST_FRESHWATEREVOLUTION);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_CAUGHT);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_SEEN);
             break;
         case STATE_QUEST_FRESHWATER_COMPLETE:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
             QuestMenu_ScriptSetComplete(QUEST_FRESHWATEREVOLUTION);
             AddBagItem(QUEST_FRESHWATER_EVOLUTION_ITEM,1);
-            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_CAUGHT);
-            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_SEEN);
             break;
     }
 }
@@ -2494,57 +2503,37 @@ void DebugQuest_RabiesOutbreak(u8 state)
             QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             break;
         case STATE_QUEST_RABIES_DEFEATED_1:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,1);
             break;
         case STATE_QUEST_RABIES_DEFEATED_2:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,2);
             break;
         case STATE_QUEST_RABIES_DEFEATED_3:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,3);
             break;
         case STATE_QUEST_RABIES_DEFEATED_4:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,4);
             break;
         case STATE_QUEST_RABIES_DEFEATED_5:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,5);
             break;
         case STATE_QUEST_RABIES_DEFEATED_6:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,6);
             break;
         case STATE_QUEST_RABIES_DEFEATED_7:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,7);
             break;
         case STATE_QUEST_RABIES_DEFEATED_8:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,8);
             break;
         case STATE_QUEST_RABIES_DEFEATED_9:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,9);
             break;
         case STATE_QUEST_RABIES_REWARD:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
             QuestMenu_ScriptSetReward(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,QUEST_RABIES_OUTBREAK_COUNT);
             break;
         case STATE_QUEST_RABIES_COMPLETE:
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
             AddBagItem(ITEM_QUEST_RABIES_OUTBREAK_REWARD,1);
             QuestMenu_ScriptSetComplete(QUEST_RABIESOUTBREAK);
             VarSet(VAR_DEFEATED_GLAMEOW_COUNT,QUEST_RABIES_OUTBREAK_COUNT);
@@ -2601,4 +2590,84 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
 
     rabiesPokerus = Random() % 2;
     SetBoxMonData(boxMon, MON_DATA_POKERUS, &rabiesPokerus);
+}
+
+// ***********************************************************************
+// Quest: Hodou Tunnels
+// ***********************************************************************
+
+void Quest_Hodoutunnels_SetVariable_TalkedToElder(void)
+{
+    SetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_ELDER,TRUE);
+}
+
+void Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll(void)
+{
+    SetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_SCROLL,TRUE);
+}
+
+void Quest_Hodoutunnels_SetVariable_HasDiscoveredTunnels(void)
+{
+    SetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_TUNNELS,TRUE);
+}
+
+bool8 Quest_Hodoutunnels_GetVariable_TalkedToElder(void)
+{
+    return GetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_ELDER);
+}
+
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll(void)
+{
+    return GetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_SCROLL);
+}
+
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels(void)
+{
+    return GetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_TUNNELS);
+}
+
+void Quest_Hodoutunnels_GetVariable_TalkedToElder_Script(void)
+{
+    gSpecialVar_Result = Quest_Hodoutunnels_GetVariable_TalkedToElder();
+}
+
+void Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll_Script(void)
+{
+    gSpecialVar_Result = Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll();
+}
+
+void Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels_Script(void)
+{
+    gSpecialVar_Result = Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels();
+}
+
+void DebugQuest_Hodoutunnels(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_HODOUTUNNELS_NOT_STARTED:
+            break;
+        case STATE_QUEST_HODOUTUNNELS_STARTED:
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_TUNNELS);
+            QuestMenu_ScriptSetActive(QUEST_HODOUTUNNELS);
+            break;
+        case STATE_QUEST_HODOUTUNNELS_TALKED_TO_ELDER:
+            Quest_Hodoutunnels_SetVariable_TalkedToElder();
+            break;
+        case STATE_QUEST_HODOUTUNNELS_DISCOVERED_SCROLL:
+            QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
+            Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll();
+            break;
+        case STATE_QUEST_HODOUTUNNELS_HAS_TREASURE:
+            AddBagItem(ITEM_QUEST_HODOUTUNNELS_TREASURE,1);
+            break;
+        case STATE_QUEST_HODOUTUNNELS_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_HODOUTUNNELS);
+            RemoveBagItem(ITEM_QUEST_HODOUTUNNELS_TREASURE,1);
+            break;
+        case STATE_QUEST_HODOUTUNNELS_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_HODOUTUNNELS);
+            AddBagItem(ITEM_QUEST_HODOUTUNNELS_REWARD,1);
+            break;
+    }
 }

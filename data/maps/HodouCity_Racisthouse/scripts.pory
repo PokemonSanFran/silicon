@@ -1,3 +1,5 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
 mapscripts HodouCity_Racisthouse_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_CulturalPurity_HideShinzoInside_Script)
@@ -8,32 +10,47 @@ mapscripts HodouCity_Racisthouse_MapScripts{
     ]
 }
 
-script HodouCity_Racisthouse_Scroll_Script{
+script HodouCity_Racisthouse_Scroll_Script
+{
     lock
 
-    switch (var(VAR_QUEST_HODOUTUNNELS)){
-        case 2: goto(Quest_HodouCityTunnels_FirstScrollWarp_Script)
-        case 3: goto(HodouCity_Racisthouse_ScrollWarp_Script)
-        case 4: goto(HodouCity_Racisthouse_ScrollWarp_Script)
-        default: call(HodouCity_Racisthouse_ScrollNoWarp_Dialogue)
+    callnative(Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll_Script)
+    if (var(VAR_RESULT))
+    {
+        goto(HodouCity_Racisthouse_ScrollWarp_Script)
     }
-    release
-    end
+
+    call(HodouCity_Racisthouse_ScrollNoWarp_Dialogue)
+
+    callnative(Quest_Hodoutunnels_GetVariable_TalkedToElder_Script)
+    if (var(VAR_RESULT))
+    {
+        msgbox(format("Wait, is this the red scroll that the elder was talking about...?"),,SPEAKER_ALICIA)
+    }
+
+    callnative(Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll)
+    applymovement(PLAYER, moves(walk_in_place_up, emote_exclamation_mark, step_end))
+    delay(4)
+    playse(SE_PIN)
+    waitmovement(PLAYER)
+
+    msgbox(format("There's no wall behind the scroll!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+
+    goto(HodouCity_Racisthouse_ScrollWarp_Script)
 }
 
-script HodouCity_Racisthouse_ScrollWarp_Script{
+script HodouCity_Racisthouse_ScrollWarp_Script
+{
     lock
     playse(SE_EXIT)
-        fadeblackandsetremovewarpfadeflag
+    fadeblackandsetremovewarpfadeflag
     warpsilent(MAP_HODOU_CITY_TUNNEL,1)
     release
     end
 }
 
-script HodouCity_Racisthouse_ScrollNoWarp_Dialogue{
-    msgbox(format("There is a beautiful red scroll hanging on the wall."),MSGBOX_SIGN)
-}
-
-text gText_HodouCity_Racisthouse_ScrollDesc{
-    format("There is a beautiful red scroll hanging on the wall.")
+script HodouCity_Racisthouse_ScrollNoWarp_Dialogue
+{
+    msgbox(format("There is a giant red scroll on the wall. There are characters written on it, as if it were telling a story. They’re not in a language you understand."),MSGBOX_SIGN)
 }

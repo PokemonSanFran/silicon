@@ -2175,4 +2175,12 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
       .speakerIcon = gSpeakerIcon_Bill,
       .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_TUNNELSPERSON] =
+    {
+      .name = COMPOUND_STRING("Customer"),
+      .title = COMPOUND_STRING("Smoothiecustomer"),
+      .gender = MALE,
+      .speakerIcon = gSpeakerIcon_Bill,
+      .speakerPal = sSpeakerPal_Bill,
+    },
   };

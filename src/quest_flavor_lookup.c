@@ -254,14 +254,15 @@ const u8 *GetQuestDesc_Hodoutunnels(void)
 {
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HODOUTUNNELS),MAP_NUM(MAP_QUEST_HODOUTUNNELS))->regionMapSectionId,0);
 
-    switch(VarGet(VAR_QUEST_HODOUTUNNELS))
-    {
-        case NEVER_SPOKEN_ELDER:
-            StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HODOUTUNNELS].desc[FLAG_GET_ACTIVE]);
-        case SPOKEN_ELDER_FIRST_TIME:
-            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("There’s a red scroll in {STR_VAR_1} that guards the elder’s treasure. Find it!"));
-        case HODOU_TREASURE_FOUND:
-            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Bring the treasure back to the elder in {STR_VAR_1}."));
-    }
+    bool32 talkedToElder = Quest_Hodoutunnels_GetVariable_TalkedToElder();
+    u32 flag = ReturnQuestState(QUEST_HODOUTUNNELS);
+
+    if (CheckBagHasItem(ITEM_QUEST_HODOUTUNNELS_TREASURE,1))
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Bring the treasure back to the elder in {STR_VAR_1}."));
+    else if (talkedToElder == TRUE && (flag != FLAG_GET_COMPLETED))
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("There’s a red scroll in {STR_VAR_1} that guards the elder’s treasure. Find it!"));
+    else
+        StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HODOUTUNNELS].desc[flag]);
+
     return gStringVar4;
 }

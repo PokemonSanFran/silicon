@@ -1810,6 +1810,8 @@ const u8 *GetQuestDoneDesc(s32 questId)
             return GetQuestDoneDesc_PlayersAdventure();
         case QUEST_SMOOTHIECRAFTING:
             return GetQuestDesc_SmoothieCrafting();
+        case QUEST_HODOUTUNNELS:
+            return GetQuestDesc_Hodoutunnels();
         default:
             return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
     }

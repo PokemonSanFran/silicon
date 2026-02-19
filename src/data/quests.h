@@ -1890,7 +1890,71 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_OLD_MAN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_HODOUTUNNELS_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Hodoutunnels,
+                side_quest_map(MAP_QUEST_HODOUTUNNELS_PARENT),
+                .warpId = -1,
+                .x = 35,
+                .y = 10,
+            },
+            [STATE_QUEST_HODOUTUNNELS_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_Hodoutunnels,
+                side_quest_map(MAP_QUEST_HODOUTUNNELS_PARENT),
+                .warpId = -1,
+                .x = 35,
+                .y = 10,
+            },
+            [STATE_QUEST_HODOUTUNNELS_TALKED_TO_ELDER] =
+            {
+                .name = COMPOUND_STRING("Talked To Elder"),
+                .setupFunc = DebugQuest_Hodoutunnels,
+                side_quest_map(MAP_QUEST_HODOUTUNNELS_PARENT),
+                .warpId = -1,
+                .x = 35,
+                .y = 10,
+            },
+            [STATE_QUEST_HODOUTUNNELS_DISCOVERED_SCROLL] =
+            {
+                .name = COMPOUND_STRING("Discovered Scroll"),
+                .setupFunc = DebugQuest_Hodoutunnels,
+                side_quest_map(MAP_QUEST_HODOUTUNNELS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_HODOUTUNNELS_HAS_TREASURE] =
+            {
+                .name = COMPOUND_STRING("Has Treasure"),
+                .setupFunc = DebugQuest_Hodoutunnels,
+                side_quest_map(MAP_QUEST_HODOUTUNNELS_PARENT),
+                .warpId = -1,
+                .x = 35,
+                .y = 10,
+            },
+            [STATE_QUEST_HODOUTUNNELS_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Hodoutunnels,
+                side_quest_map(MAP_QUEST_HODOUTUNNELS_PARENT),
+                .warpId = -1,
+                .x = 35,
+                .y = 10,
+            },
+            [STATE_QUEST_HODOUTUNNELS_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Hodoutunnels,
+                side_quest_map(MAP_QUEST_HODOUTUNNELS_PARENT),
+                .warpId = -1,
+                .x = 35,
+                .y = 10,
+            },
+        },
     },
     [QUEST_FRESHWATEREVOLUTION] =
     {
