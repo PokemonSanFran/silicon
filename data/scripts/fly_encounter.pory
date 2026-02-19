@@ -9,9 +9,8 @@
 
 script FlyEncounter_Script_GetEncounterType
 {
-    additem(ITEM_SUPER_ROD,1)
     callnative(FlyEncounter_Script_GetEncounterType)
-        call(FlightPatterns_Script_Approach)
+	call(FlightPatterns_Script_Approach)
 
     switch (var(VAR_RESULT))
     {

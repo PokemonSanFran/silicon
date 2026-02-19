@@ -10,7 +10,7 @@ enum
     FLY_ZONE_COUNT,
 };
 
-enum 
+enum FlyEncounterTypes
 {
     FLY_ENCOUNTER_NONE,
     FLY_ENCOUNTER_ATTACK,
@@ -19,6 +19,8 @@ enum
     FLY_ENCOUNTER_QUEST_BOSS,
     FLY_ENCOUNTER_COUNT,
 };
+
+#define FLY_ENCOUNTER_RATE 16
 
 #endif // GUARD_FLYENCOUNTER_H
 

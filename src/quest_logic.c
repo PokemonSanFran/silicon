@@ -2485,7 +2485,7 @@ void Quest_FlightPatterns_SetFlightPath(u32 mapSecId)
     u32 nextLocation = mapSecId;
     u32 locationIndex;
 
-    //DebugPrintf("\ncurrentLocation %d\n lastLocation%d\n",currentLocation,nextLocation,lastLocation);
+    //DebugPrintf("currentLocation %d\n lastLocation %d\n",currentLocation,nextLocation);
 
     for (locationIndex = 0; locationIndex < QUEST_FLIGHTPATTERNS_SUB_COUNT; locationIndex++)
     {
@@ -2513,7 +2513,7 @@ bool32 Quest_FlightPatterns_OnLastLeg(void)
     return (Quest_FlightPatterns_IsOnFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT);
 }
 
-u32 Quest_FlightPatterns_GetEncounterType(void)
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(void)
 {
     u32 repelLureVar = VarGet(VAR_REPEL_STEP_COUNT);
     u16 steps = REPEL_LURE_STEPS(repelLureVar);

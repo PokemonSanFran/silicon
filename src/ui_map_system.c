@@ -49,6 +49,7 @@
 #include "quest_logic.h"
 #include "heal_location.h"
 #include "map_preview_screen.h"
+#include "qol_field_moves.h"
 
 /*
 
@@ -1356,8 +1357,6 @@ void CB2_OpenFlyMapSystemReturnToPartyMenu(void)
 {
     CB2_OpenFlyMapSystem(CB2_ReturnToPartyMenuFromFlyMap);
 }
-
-#include "qol_field_moves.h"
 
 void CB2_OpenFlyMapSystemReturnToBag(void)
 {
@@ -3556,7 +3555,14 @@ static u8 HandleAttemptWarpInput(void)
 
         //DebugPrintf("Quest Exception: %d", questException);
 
-        if ((warpPrice == 0) && PASSES_QUEST_EXCEPTION)
+        if(sCurrentMapMode == MAP_MODE_FLY)
+        {
+            sRegionMap->warpCounter = 0;
+            Quest_FlightPatterns_SetFlightPath(sRegionMap->mapSecId);
+            PlaySE(SE_SELECT);
+            sRegionMap->inputCallback = HandleWarpCloseMenu;
+        }
+        else if ((warpPrice == 0) && PASSES_QUEST_EXCEPTION)
         {
             PlaySE(SE_SELECT);
             sRegionMap->warpCounter = 0;
