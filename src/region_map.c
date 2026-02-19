@@ -2004,22 +2004,11 @@ static void CB_ExitFlyMap(void)
                 struct RegionMap* tempRegionMap = &sFlyMap->regionMap;
 
                 SetFlyDestination(tempRegionMap);
-                // Start qol_field_moves
-                    if (IsFlyToolUsed())
-                        ReturnToFieldFromFlyToolMapSelect();
-                    else
-                        ReturnToFieldFromFlyMapSelect();
-                }
-                else if (IsFlyToolUsed())
-                {
-                    ReturnToFieldOrBagFromFlyTool();
-                }
-                // End qol_field_moves
+            }
             else
             {
                 SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
             }
-                ResetFlyTool(); // qol_field_moves
             TRY_FREE_AND_SET_NULL(sFlyMap);
             FreeAllWindowBuffers();
         }
