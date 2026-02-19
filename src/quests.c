@@ -1798,6 +1798,8 @@ const u8 *GetQuestDesc(s32 questId)
             return GetQuestDesc_SmoothieCrafting();
         case QUEST_HODOUTUNNELS:
             return GetQuestDesc_Hodoutunnels();
+        case QUEST_PSYOP:
+            return GetQuestDesc_Psyop();
         default:
             return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
     }
@@ -1812,6 +1814,8 @@ const u8 *GetQuestDoneDesc(s32 questId)
             return GetQuestDesc_SmoothieCrafting();
         case QUEST_HODOUTUNNELS:
             return GetQuestDesc_Hodoutunnels();
+        case QUEST_PSYOP:
+            return GetQuestDesc_Psyop();
         default:
             return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
     }

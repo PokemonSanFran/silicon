@@ -450,4 +450,19 @@ enum
     STATE_QUEST_HODOUTUNNELS_COMPLETE,
 };
 
+// ***********************************************************************
+// Quest: Hashtag Psyop
+// ***********************************************************************
+
+#define MAP_QUEST_PSYOP MAP_ROUTE_A
+#define SPECIES_QUEST_PSYOP_TARGET SPECIES_SINISTEA_PHONY
+#define SPECIES_QUEST_PSYOP_REWARD SPECIES_SINISTEA_ANTIQUE
+#define ITEM_QUEST_PSYOP_TARGET_BALL ITEM_HEAL_BALL
+
+enum
+{
+    STATE_QUEST_PSYOP_NOT_STARTED,
+    STATE_QUEST_PSYOP_STARTED,
+    STATE_QUEST_PSYOP_COMPLETE,
+};
 #endif // GUARD_CONSTANTS_QUESTS_H

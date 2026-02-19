@@ -266,3 +266,14 @@ const u8 *GetQuestDesc_Hodoutunnels(void)
 
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Psyop(void)
+{
+    StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+    GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_PSYOP),MAP_NUM(MAP_QUEST_PSYOP))->regionMapSectionId,0);
+    StringCopy(gStringVar3,GetItemName(ITEM_QUEST_PSYOP_TARGET_BALL));
+
+    u32 flag = ReturnQuestState(QUEST_PSYOP);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_PSYOP].desc[flag]);
+    return gStringVar4;
+}
