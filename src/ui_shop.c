@@ -563,15 +563,6 @@ static void Task_Shop_Idle(u8 taskId)
         case SHOP_MODE_FAILURE:
             {
                 PlaySE(SE_SELECT);
-
-                if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
-                 || ShopPurchase_IsItemOneTimePurchase(gShopMenuDataPtr->selectedItemId)
-                 || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
-                {
-                    ShopInventory_InitCategoryLists();
-                    ShopGrid_ResetIndexes(SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_ITEM);
-                }
-
                 gShopMenuDataPtr->itemQuantity = 0;
                 gShopMenuDataPtr->selectedItemId = ITEM_NONE;
                 ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
