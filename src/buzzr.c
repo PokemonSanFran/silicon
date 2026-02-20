@@ -2037,5 +2037,26 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
             break;
         case TWEET_QUEST_NPC_TUNNELS:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HODOUTUNNELS),MAP_NUM(MAP_QUEST_HODOUTUNNELS))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_NPC_PSYOP:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_PSYOP),MAP_NUM(MAP_QUEST_PSYOP))->regionMapSectionId,0);
+            StringCopy(gStringVar3,GetItemName(ITEM_QUEST_PSYOP_TARGET_BALL));
+            break;
+        case TWEET_QUEST_NPC_PSYOP_ACTIVE_A:
+        case TWEET_QUEST_NPC_PSYOP_ACTIVE_B:
+            StringCopy(gStringVar2,GetAbilityName(ABILITY_HUSTLE));
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            break;
+        case TWEET_QUEST_NPC_PSYOP_ACTIVE_C:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_DEINO));
+            StringCopy(gStringVar2,GetAbilityName(ABILITY_HUSTLE));
+            break;
+        case TWEET_QUEST_NPC_PSYOP_COMPLETE:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            CopyItemNameHandlePlural(ITEM_IRON,gStringVar2,2);
+            CopyItemNameHandlePlural(ITEM_ZINC,gStringVar3,3);
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            break;
     }
 }
