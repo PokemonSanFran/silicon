@@ -49,6 +49,7 @@ void DebugQuest_RabiesOutbreak(u8);
 void DebugQuest_FreshwaterEvolution(u8);
 void DebugQuest_Smoothiecrafting(u8);
 void DebugQuest_Hodoutunnels(u8);
+void DebugQuest_Psyop(u8);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

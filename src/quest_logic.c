@@ -2736,3 +2736,32 @@ void Quest_Psyop_TransformTarget(void)
     SetMonData(mon,MON_DATA_SPECIES,&species);
     CalculateMonStats(mon);
 }
+
+void DebugQuest_Psyop_GiveMon(u32 state)
+{
+    u32 species[STATE_QUEST_PSYOP_COMPLETE+1] = {SPECIES_PANCHAM, SPECIES_QUEST_PSYOP_TARGET, SPECIES_QUEST_PSYOP_REWARD};
+    u16 moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
+    u8 evs[NUM_STATS] = {85,85,85,85,85,85};
+    u8 ivs[NUM_STATS] = {0,0,0,0,0,0};
+    u32 ball = ITEM_HEAL_BALL;
+
+    ScriptGiveMonParameterized(0,PARTY_SIZE,species[state],50,ITEM_NONE,ball,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+}
+
+void DebugQuest_Psyop(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_PSYOP_NOT_STARTED:
+            break;
+        case STATE_QUEST_PSYOP_STARTED:
+            DebugQuest_Psyop_GiveMon(state);
+            QuestMenu_ScriptSetActive(QUEST_PSYOP);
+            break;
+        case STATE_QUEST_PSYOP_COMPLETE:
+            DebugQuest_Psyop_GiveMon(state);
+            QuestMenu_ScriptSetComplete(QUEST_PSYOP);
+            break;
+    }
+}

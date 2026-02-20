@@ -3117,6 +3117,36 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .spritetype = QUEST_SPRITE_TYPE_PKMN,
         .subquests = NULL,
         .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_PSYOP_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Psyop,
+                side_quest_map(MAP_QUEST_PSYOP),
+                .warpId = -1,
+                .x = 61,
+                .y = 11,
+            },
+            [STATE_QUEST_PSYOP_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_Psyop,
+                side_quest_map(MAP_QUEST_PSYOP),
+                .warpId = -1,
+                .x = 61,
+                .y = 11,
+            },
+            [STATE_QUEST_PSYOP_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Completed Quest"),
+                .setupFunc = DebugQuest_Psyop,
+                side_quest_map(MAP_QUEST_PSYOP),
+                .warpId = -1,
+                .x = 61,
+                .y = 11,
+            },
+        },
     },
     [QUEST_TEACHATRAINERTOFISH] =
     {
