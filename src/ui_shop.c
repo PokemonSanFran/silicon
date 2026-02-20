@@ -1072,13 +1072,16 @@ enum ShopMenuCategories ShopInventory_CanItemBeListed(u32 itemId, enum Pocket po
 
 void ShopInventory_ProcessBuyAgainItems(u8 *categoryCounts)
 {
+    if (gSaveBlock3Ptr->shopBuyAgainItems[0] == ITEM_NONE)
+        return;
+
     for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
     {
         u32 item = gSaveBlock3Ptr->shopBuyAgainItems[i];
-        if (!item)
-            break;
+        if (!item) return;
 
         u32 risingCategory = ShopInventory_GetCategoryMap(SHOP_CATEGORY_BUY_AGAIN);
+
         ShopInventory_SetItemIdToGrid(item, risingCategory, categoryCounts[SHOP_CATEGORY_BUY_AGAIN]);
         categoryCounts[SHOP_CATEGORY_BUY_AGAIN]++;
     }
@@ -1204,9 +1207,35 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
     ShopInventory_InitCategoryLists();
 
     // only adjust category index once!
-    if (!bak && bak != gSaveBlock3Ptr->shopBuyAgainItems[0])
+    if (bak == ITEM_NONE && bak != gSaveBlock3Ptr->shopBuyAgainItems[0])
     {
-        ShopGrid_VerticalInput(DOWN_PRESS);
+        u32 delta = DOWN_PRESS;
+        u32 trueIdx = ShopGrid_GetCurrentCategoryIndex();
+        u32 numCategories = gShopMenuDataPtr->numCategories;
+        u32 halfScreen = ShopGrid_GetYHalfScreen();
+        u32 finalHalfScreen = (numCategories - 1) - halfScreen;
+
+        ShopGrid_SetCurrentCategoryIndex(trueIdx + delta);
+
+        if (trueIdx >= halfScreen && gShopMenuDataPtr->numCategories > ShopConfig_GetTotalShownCategories())
+        {
+            ShopGrid_SetFirstCategoryIndex(ShopGrid_GetFirstCategoryIndex() + delta);
+            if (trueIdx > finalHalfScreen)
+                ShopGrid_SetGridYCursor(ShopGrid_GetGridYCursor() + delta);
+        }
+        else if (trueIdx < halfScreen)
+        {
+            ShopGrid_SetGridYCursor(ShopGrid_GetGridYCursor() + delta);
+        }
+    }
+
+    // reset if invalid
+    if (ShopGrid_GetCurrentCategoryIndex() >= gShopMenuDataPtr->numCategories
+     || !ShopInventory_GetItemIdFromGrid(ShopGrid_GetCurrentCategoryIndex(), 0))
+    {
+        ShopGrid_SetFirstCategoryIndex(0);
+        ShopGrid_SetCurrentCategoryIndex(0);
+        ShopGrid_SetGridYCursor(0);
     }
 }
 
