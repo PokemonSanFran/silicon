@@ -267,7 +267,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     [REVEAL_ALICIA] =
     {
         .trainerId = TRAINER_RED,
-        .buzzrId = BUZZR_USER_ALICIA,
+        .buzzrId = BUZZR_USER_PLAYER,
         .quote = COMPOUND_STRING("“this is a quote that is \nsaid by Alicia\nto add flavor”"),
         .bio = COMPOUND_STRING("- AliciaXXX\n- XXX"),
         .accentColor = RGB(16,8,30),

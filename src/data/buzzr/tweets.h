@@ -14,7 +14,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_RABIES] =
     {
-        .userId = BUZZR_USER_FERNANDA,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("My cousin caught rabies in {STR_VAR_2}! Feral {STR_VAR_1} are attacking pets and people like crazy. Apparently the RSPCP's finally gonna do something about it and hook up people who can subdue or capture {STR_VAR_1} to chill things out over there. I'll be doing my part! &formycuz"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Rabies,
@@ -37,7 +37,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_SMOOTHIE] =
     {
-        .userId = BUZZR_USER_HARRIBAT,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("I always go to the Marble Slab in {STR_VAR_1} before I start training with a new Pokémon. Their {STR_VAR_3} clears out a Pokémon’s toxins which makes them easier to train. It’s all natural too! Bring {STR_VAR_2} and they’ll make your first one free!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Ice,
@@ -47,7 +47,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_DEOXYS] =
     {
-        .userId = BUZZR_USER_WAYNE,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING(
                 "I was attacked by a wild Pokémon! It\n"
                 "suddenly fell from the sky, changed its\n"
@@ -67,7 +67,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_TUNNELS] =
     {
-        .userId = BUZZR_USER_LINN,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("There’s a rumor that the {STR_VAR_1} elders know of a treasure hidden in the city’s underground and it’s guarded by a powerful Pokemon! Can anybody find the treasure before they take the secret to their grave?"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Tunnels,
@@ -87,7 +87,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_STONE] =
     {
-        .userId = BUZZR_USER_LAUREEN,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING(
                 "Riding the trolley is the best way to get\n"
                 "around! If you ride the trolley more than\n"
@@ -274,7 +274,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NOPODMOD_1] =
     {
-        .userId = BUZZR_USER_MICHELL,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Went on a date tonight. Super hot, great texter… but he was one of those NoPo weirdos! Why can’t you just be normal?!?!?! &RedFlags"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_AlwaysTrue,
@@ -284,7 +284,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NOPODMOD_2] =
     {
-        .userId = BUZZR_USER_DONALD,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("I’m feeling so isolated lately. It’s hard to find other people in the NoPo movement. Where do those people hang out?"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsCompulsiveHealingReward,
@@ -304,7 +304,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_SMOOTHIE_COMPLETE] =
     {
-        .userId = BUZZR_USER_HILDE,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("I got scammed by the Marble Slab! My Pokémon got weaker, and it’s so expensive. 0 stars. If you want to reset Effort Values, just use an item like {STR_VAR_1}."),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsSmoothieCraftingComplete,
@@ -314,7 +314,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_PSYOP] =
     {
-        .userId = BUZZR_USER_HARRIBAT,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Get ready for the &AuthenticHustle Challenge! You’ve gotta grind if you want your Phony {STR_VAR_1} to be peak. Catch one in a {STR_VAR_3}, max out its Effort Values, and come to {STR_VAR_2} to do the challenge right!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Psyop,
@@ -324,7 +324,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_PSYOP_ACTIVE_A] =
     {
-        .userId = BUZZR_USER_CANDIS,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Always on that {STR_VAR_2} mindset! I got my Antique {STR_VAR_1} through true grit and determination. Put in the work, and you can achieve greatness too!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopActive,
@@ -334,7 +334,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_PSYOP_ACTIVE_B] =
     {
-        .userId = BUZZR_USER_HARRIBAT,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("I did the &AuthenticHustle Challenge, and now my {STR_VAR_1} is super legit! Buckle down, unlock that {STR_VAR_2} mindset, and you can achieve the same. Keep pushing!"), // PSF TODO replace & with #
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopActive,
@@ -344,7 +344,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_PSYOP_ACTIVE_C] =
     {
-        .userId = BUZZR_USER_COLLENE,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("I got one ability: {STR_VAR_2}. I’m on my {STR_VAR_1} mindset, all day, every day!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopActive,
@@ -354,7 +354,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_PSYOP_COMPLETE] =
     {
-        .userId = BUZZR_USER_VIKKI,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Working three jobs just to save up for {STR_VAR_2} and {STR_VAR_3} - that’s the grind! My {STR_VAR_1} is going to be maxed out, and nothing will stop me. Haters don’t + me."), // PSF TODO replace + with @
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopComplete,
