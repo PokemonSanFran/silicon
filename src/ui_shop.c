@@ -1168,15 +1168,20 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 
     if (!ShopPurchase_IsItemOneTimePurchase(itemId))
     {
-        u32 oldItem = ITEM_NONE;
+        u32 oldItem = ITEM_NONE, newItem = TRUE;
 
         // Has the player purchased this item before?
         for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++)
+        {
             if (itemId == gSaveBlock3Ptr->shopBuyAgainItems[i])
+            {
                 oldItem = i;
+                newItem = FALSE;
+            }
+        }
 
         // Move other items to the back and put the new item at the very top.
-        if (!oldItem)
+        if (newItem)
         {
             for (u32 i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS - 1; i++)
             {
