@@ -299,7 +299,7 @@ static inline void PrestoPrint_Categories(void)
             end = StringCopy(gStringVar1, gShopCategoryNames[ShopGrid_CategoryInRow(row)]);
             PrependFontIdToFit(gStringVar1, end, FONT_SMALL_NARROW, TILE_TO_PIXELS(7));
 
-            end = ShopInventory_CopyItemName(ShopInventory_GetChosenItemId(), gStringVar2);
+            end = ShopInventory_CopyItemName(ShopInventory_GetChosenItemId(), 1, gStringVar2);
             PrependFontIdToFit(gStringVar2, end, FONT_SMALL_NARROW, TILE_TO_PIXELS(8));
 
             StringExpandPlaceholders(gStringVar4, sText_FirstRowName);
@@ -376,7 +376,7 @@ static void PrestoHelper_UpdateFrontEnd(void)
 
             x = 1, y = 2;
             u32 quantity = CountTotalItemQuantityInBag(itemId);
-            ShopInventory_CopyItemName(itemId, gStringVar1);
+            ShopInventory_CopyItemName(itemId, 1, gStringVar1);
             ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 4);
             StringExpandPlaceholders(gStringVar4, sText_ItemNameOwned);
             ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
@@ -443,7 +443,7 @@ static void PrestoHelper_UpdateFrontEnd(void)
                 ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_YouGot);
 
                 y += 2;
-                ShopInventory_CopyItemName(itemId, gStringVar1);
+                ShopInventory_CopyItemName(itemId, quantity, gStringVar1);
                 ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 2);
                 StringExpandPlaceholders(gStringVar4, sText_ItemNumber);
                 x2 = GetStringCenterAlignXOffset(FONT_NARROW, gStringVar4, TILE_TO_PIXELS(16));

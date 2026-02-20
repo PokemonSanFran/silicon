@@ -1022,10 +1022,11 @@ u32 ShopInventory_GetChosenItemId(void)
     return ShopInventory_GetItemIdFromGrid(ShopGrid_GetCurrentCategoryIndex(), ShopGrid_GetCurrentItemIndex());
 }
 
-u8 *ShopInventory_CopyItemName(u32 itemId, u8 *buf)
+u8 *ShopInventory_CopyItemName(u32 itemId, u32 qty, u8 *buf)
 {
-    u8 *end = StringCopy(buf, GetItemName(itemId));
+    u8 *end = CopyItemNameHandlePlural(itemId, buf, qty);
 
+    // TMs would never be in plural
     if (GetItemShopCategory(itemId) != SHOP_CATEGORY_TMS)
         return end;
 

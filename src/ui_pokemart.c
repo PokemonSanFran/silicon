@@ -678,7 +678,7 @@ static void MartPrint_ItemInfo(void)
     const u8 *str = NULL;
     u32 fontId, x, y, speed = (gMain.state || MART_KEEPER_ICON == FALSE) ? 0 : GetPlayerTextSpeedDelay();
 
-    ShopInventory_CopyItemName(itemId, gStringVar2);
+    ShopInventory_CopyItemName(itemId, 1, gStringVar2);
     str = gStringVar2;
     fontId = GetFontIdToFit(str, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(8));
     x = TILE_TO_PIXELS(1) + GetStringCenterAlignXOffset(fontId, str, TILE_TO_PIXELS(8));
@@ -754,7 +754,7 @@ static void MartPrint_KeeperDialogue(void)
         default:
             break;
         case MART_KEEPER_DIALOGUE_PURCHASE:
-            ShopInventory_CopyItemName(itemId, gStringVar1);
+            ShopInventory_CopyItemName(itemId, itemQuantity, gStringVar1);
             ConvertIntToDecimalStringN(gStringVar2, ownedItems, STR_CONV_MODE_LEFT_ALIGN, 4);
             break;
         case MART_KEEPER_DIALOGUE_SUCCESS:
@@ -763,8 +763,10 @@ static void MartPrint_KeeperDialogue(void)
 
                 if (GetItemShopCategory(itemId) == SHOP_CATEGORY_POKE_BALLS && itemQuantity >= 10)
                 {
-                    ConvertIntToDecimalStringN(gStringVar2, itemQuantity / 10, STR_CONV_MODE_LEFT_ALIGN, 4);
-                    ShopInventory_CopyItemName(itemId, gStringVar3);
+                    u32 premierBallQuantity = itemQuantity / 10;
+
+                    ConvertIntToDecimalStringN(gStringVar2, premierBallQuantity, STR_CONV_MODE_LEFT_ALIGN, 4);
+                    ShopInventory_CopyItemName(ITEM_PREMIER_BALL, premierBallQuantity, gStringVar3);
                     StringExpandPlaceholders(gStringVar1, sPokeMart_KeeperPremierBallDialogue);
                 }
 
@@ -772,7 +774,7 @@ static void MartPrint_KeeperDialogue(void)
             }
         case MART_KEEPER_DIALOGUE_FAILURE:
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_LEFT_ALIGN, 4);
-            ShopInventory_CopyItemName(itemId, gStringVar2);
+            ShopInventory_CopyItemName(itemId, itemQuantity, gStringVar2);
             break;
         }
 
