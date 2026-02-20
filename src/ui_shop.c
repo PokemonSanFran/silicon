@@ -1298,10 +1298,10 @@ static void ShopGrid_VerticalInput(s32 delta)
         {
             ShopGrid_SetCurrentCategoryIndex(numItems);
             if (scroll)
-                ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownItemRows() - 1));
+                ShopGrid_SetFirstCategoryIndex(numItems - (ShopConfig_GetTotalShownCategories() - 1));
 
-            if (numItems >= (ShopConfig_GetTotalShownItemRows() - 1))
-                ShopGrid_SetGridYCursor(ShopConfig_GetTotalShownItemRows() - 1);
+            if (numItems >= (ShopConfig_GetTotalShownCategories() - 1))
+                ShopGrid_SetGridYCursor(ShopConfig_GetTotalShownCategories() - 1);
             else
                 ShopGrid_SetGridYCursor(numItems);
         }
@@ -1594,9 +1594,7 @@ static inline void ShopBlit_Categories(void)
         u32 category = ShopGrid_CategoryInRow(ShopGrid_GetFirstCategoryIndex() + idx);
 
         if (ShopGrid_CurrentCategoryRow() == category)
-        {
             ShopBlit_Category(NUM_SHOP_CATEGORIES, x, y);
-        }
 
         ShopBlit_Category(category, x, y);
 
