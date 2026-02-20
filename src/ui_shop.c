@@ -603,8 +603,7 @@ static void Task_Shop_Idle(u8 taskId)
                 PlaySE(SE_SELECT);
                 gShopMenuDataPtr->itemQuantity = 0;
 
-                if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN
-                 || ShopPurchase_IsItemOneTimePurchase(gShopMenuDataPtr->selectedItemId)
+                if (ShopPurchase_IsItemOneTimePurchase(gShopMenuDataPtr->selectedItemId)
                  || ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
                 {
                     ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
@@ -612,6 +611,9 @@ static void Task_Shop_Idle(u8 taskId)
                 }
                 else
                 {
+                    if (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_BUY_AGAIN)
+                        ShopGrid_ResetIndexes(SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_ITEM);
+
                     ShopGrid_SwitchMode(SHOP_MODE_PURCHASE);
                 }
 
