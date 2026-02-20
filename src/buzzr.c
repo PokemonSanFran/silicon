@@ -914,7 +914,7 @@ static void Buzzr_FreeResources(void)
     TRY_FREE_AND_SET_NULL(sBuzzrState);
     TRY_FREE_AND_SET_NULL(sBuzzrLists);
 
-    for (u32 backgroundId = 0; backgroundId < BG_BUZZR_COUNT; backgroundId++)
+    for (u32 backgroundId = BG1_BACKGROUND_TWEETS; backgroundId < BG_BUZZR_COUNT; backgroundId++)
         TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
 
     FreeAllWindowBuffers();
