@@ -2671,3 +2671,68 @@ void DebugQuest_Hodoutunnels(u8 state)
             break;
     }
 }
+//
+// ***********************************************************************
+// Quest: Psyop
+// ***********************************************************************
+
+static bool8 Quest_Psyop_CheckPartyForTarget(void)
+{
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        u32 species = GetMonData(&gPlayerParty[partyIndex],MON_DATA_SPECIES,NULL);
+
+        if ((species == SPECIES_QUEST_PSYOP_TARGET) || (species == SPECIES_QUEST_PSYOP_REWARD))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static enum QuestPsyopErrors Quest_Psyop_CheckTargetAttributes(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    u32 species = GetMonData(mon,MON_DATA_SPECIES,NULL);
+
+    if ((species != SPECIES_QUEST_PSYOP_TARGET) && (species != SPECIES_QUEST_PSYOP_REWARD))
+        return QUEST_PSYOP_NOT_SPECIES;
+
+    if (species == SPECIES_QUEST_PSYOP_REWARD)
+        return QUEST_PSYOP_IS_REWARD_SPECIES;
+
+    u32 totalEv = 0;
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        totalEv += GetMonData(mon,(MON_DATA_HP_EV + stat));
+
+        bool32 hasMaxedEvs = (totalEv >= ADJUSTED_MAX_TOTAL_EVS);
+        bool32 isCorrectBall = (GetMonData(mon,MON_DATA_POKEBALL,NULL) == (ItemIdToBallId(ITEM_QUEST_PSYOP_TARGET_BALL)));
+
+    if (!hasMaxedEvs && !isCorrectBall)
+        return QUEST_PSYOP_NO_EFFORT_AND_BALL;
+
+    if (!hasMaxedEvs)
+        return QUEST_PSYOP_NO_EFFORT;
+
+    if (!isCorrectBall)
+        return QUEST_PSYOP_NO_BALL;
+
+    return QUEST_PSYOP_READY_TO_TRANSFORM;
+}
+
+void Script_Quest_Psyop_CheckTargetAttributes(void)
+{
+    gSpecialVar_Result = Quest_Psyop_CheckTargetAttributes();
+}
+
+void Script_Quest_Psyop_CheckPartyForTarget(void)
+{
+    gSpecialVar_Result = Quest_Psyop_CheckPartyForTarget();
+}
+
+void Quest_Psyop_TransformTarget(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    u32 species = SPECIES_QUEST_PSYOP_REWARD;
+
+    SetMonData(mon,MON_DATA_SPECIES,&species);
+    CalculateMonStats(mon);
+}

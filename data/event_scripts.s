@@ -1335,6 +1335,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/quests/hodoucitytunnels.inc"
 .include "data/quests/freshwaterevolution.inc"
 .include "data/quests/betweenastoneandahardplace.inc"
+.include "data/quests/psyop.inc"
 .include "data/quests/breaktheinternet.inc"
 .include "data/quests/shutdownmedicineman.inc"
 .include "data/quests/buildingscope.inc"

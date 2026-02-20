@@ -31,7 +31,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_ARTIST",
       "x": 47,
       "y": 12,
       "elevation": 0,
@@ -67,6 +67,61 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_A_2",
       "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PSYOPWORKERA",
+      "graphics_id": "OBJ_EVENT_GFX_ARTIST",
+      "x": 61,
+      "y": 10,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Psyop_Script_Interact_PsyopworkerA",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PSYOPWORKERB",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
+      "x": 59,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Psyop_Script_Interact_Psyopworker",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PSYOPWORKERC",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+      "x": 60,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Psyop_Script_Interact_Psyopworker",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "x": 64,
+      "y": 12,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Psyop_Script_Interact_PsyoptargetA",
       "flag": "0"
     }
   ],
