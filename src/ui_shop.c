@@ -1167,8 +1167,8 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
     quantity++;
     RemoveMoney(&gSaveBlock1Ptr->money, price);
     AddBagItem(itemId, quantity);
-    if (PokeMart_IsActive() && GetItemShopCategory(itemId) == SHOP_CATEGORY_POKE_BALLS && quantity >= 10)
-    {
+
+    if (GetItemShopCategory(itemId) == SHOP_CATEGORY_POKE_BALLS && quantity >= 10)
         AddBagItem(ITEM_PREMIER_BALL, quantity / 10);
     }
 
