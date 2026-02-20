@@ -1163,7 +1163,6 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 
     if (GetItemShopCategory(itemId) == SHOP_CATEGORY_POKE_BALLS && quantity >= 10)
         AddBagItem(ITEM_PREMIER_BALL, quantity / 10);
-    }
 
     ShopGrid_SwitchMode(SHOP_MODE_SUCCESS);
 
