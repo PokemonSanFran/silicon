@@ -28,6 +28,7 @@ u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void);
 bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels(void);
 bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll(void);
 bool8 Quest_Hodoutunnels_GetVariable_TalkedToElder(void);
+u32 Quest_BetweenAStoneAndAHardPlace_CountRides(void);
 
 bool32 ShouldAskUnhoused(void);
 const u8* ReturnBattleScriptCantUseItem(void);

@@ -213,3 +213,45 @@ void TweetCriteria_IsPsyopActive(void)
 {
     gSpecialVar_Result = (IsQuestActiveState(QUEST_PSYOP));
 }
+
+void TweetCriteria_Quest_NPC_BetweenAStoneAndAHardPlace(void)
+{
+    gSpecialVar_Result = TweetCriteria_SocialMedia();
+}
+
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times(void)
+{
+    gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=1);
+}
+
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times(void)
+{
+    gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=3);
+}
+
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times(void)
+{
+    gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=5);
+}
+
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times(void)
+{
+    gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=9);
+}
+
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (IsQuestCompletedState(QUEST_BETWEENASTONEANDAHARDPLACE))
+    {
+        gSpecialVar_Result = TRUE;
+        return;
+    }
+
+    if (IsQuestRewardState(QUEST_BETWEENASTONEANDAHARDPLACE))
+    {
+        gSpecialVar_Result = TRUE;
+        return;
+    }
+}

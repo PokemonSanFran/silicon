@@ -88,13 +88,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_STONE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING(
-                "Riding the trolley is the best way to get\n"
-                "around! If you ride the trolley more than\n"
-                "ten times, come to the GRUNTHQ for a stone\n"
-                "that can help Pokémon unlock their Mega\n"
-                "potential!"
-                ),
+        .content = COMPOUND_STRING("Take the &MegaTrolleyChallenge and experience the best way to travel in Resido! Complete {STR_VAR_1} Mega rides, and visit the Mega G.R.U.N.T. HQ for a way to unlock your Pokémon’s Mega potential!"), // PSF TODO change & to #
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Stone,
         .quest = QUEST_BETWEENASTONEANDAHARDPLACE,
@@ -374,6 +368,56 @@ const struct Tweet gTweets[] =
                 ),
         .isPrivate = FALSE,
         .criteria = NULL,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_1] =
+    {
+        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .content = COMPOUND_STRING("Arriba is nice and all, but G.R.U.N.T. is so much cheaper! &BallerOnABudget"), // PSF TODO replace & with #
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_2] =
+    {
+        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .content = COMPOUND_STRING("TIL how accessible G.R.U.N.T. is! I lost my leg in a {STR_VAR_1} accident, and I can still easily navigate in my wheelchair!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_3] =
+    {
+        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .content = COMPOUND_STRING("Yo I’m DYING in this traffic with all these tech workers! I’m taking G.R.U.N.T. from now on, that’s wayyyy smarter!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_4] =
+    {
+        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .content = COMPOUND_STRING("It’s fascinating how much {STR_VAR_1} resisted having a G.R.U.N.T. station. Access boosts property values, doesn’t it?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_5] =
+    {
+        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .content = COMPOUND_STRING("Did anybody else do this &MegaTrolleyChallenge? Absolute scam. I’m walking to work just to spite them!"), // PSF TODO replace & with #
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,

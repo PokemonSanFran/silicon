@@ -4,6 +4,7 @@
 #include "bg.h"
 #include "item.h"
 #include "text_window.h"
+#include "string_util.h"
 #include "line_break.h"
 #include "window.h"
 #include "palette.h"
@@ -2057,6 +2058,13 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
             CopyItemNameHandlePlural(ITEM_IRON,gStringVar2,2);
             CopyItemNameHandlePlural(ITEM_ZINC,gStringVar3,3);
             StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            break;
+        case TWEET_QUEST_NPC_STONE:
+            ConvertIntToDecimalStringN(gStringVar1,NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES,STR_CONV_MODE_LEFT_ALIGN,2);
+        case TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_2:
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_REVAVROOM));
+        case TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_4:
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),MAP_NUM(MAP_QUEST_BETWEENASTONEANDAHARDPLACE))->regionMapSectionId,0);
             break;
     }
 }

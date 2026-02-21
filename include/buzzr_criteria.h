@@ -27,8 +27,13 @@ void TweetCriteria_StoryClear(void);
 void TweetCriteria_IsCompulsiveHealingReward(void);
 void TweetCriteria_IsRabiesComplete(void);
 void TweetCriteria_IsSmoothieCraftingComplete(void);
-
 void TweetCriteria_Quest_NPC_Psyop(void);
 void TweetCriteria_IsPsyopComplete(void);
 void TweetCriteria_IsPsyopActive(void);
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times(void);
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times(void);
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times(void);
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times(void);
+void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete(void);
+
 #endif // GUARD_BUZZR_CRITERIA_H

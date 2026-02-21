@@ -2765,3 +2765,13 @@ void DebugQuest_Psyop(u8 state)
             break;
     }
 }
+
+// ***********************************************************************
+// Quest: Between A Stone And A Hard Place
+// ***********************************************************************
+
+u32 Quest_BetweenAStoneAndAHardPlace_CountRides(void)
+{
+    return GetGameStat(GAME_STAT_TROLLEY_RIDES);
+}
+
