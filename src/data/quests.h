@@ -737,91 +737,46 @@ static const struct SubQuest sNeighborhoodCleanUp3_Sub[QUEST_NEIGHBORHOODCLEANUP
 static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] = {
 	sub_quest(
 	        116,
-	        gText_Quest_RockCollector_Sub1_Name,
-	        gText_Quest_RockCollector_Sub1_Desc,
-	        gText_Quest_RockCollector_Sub1_Map,
+	        COMPOUND_STRING("Fire Stone"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Underground"),
 	        ITEM_FIRE_STONE,
 	        QUEST_SPRITE_TYPE_ITEM,
 	        COMPOUND_STRING("Delievered")
 	),
 	sub_quest(
 	        117,
-	        gText_Quest_RockCollector_Sub2_Name,
-	        gText_Quest_RockCollector_Sub2_Desc,
-	        gText_Quest_RockCollector_Sub2_Map,
+            COMPOUND_STRING("Water Stone"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Underground"),
 	        ITEM_WATER_STONE,
 	        QUEST_SPRITE_TYPE_ITEM,
 	        COMPOUND_STRING("Delievered")
 	),
 	sub_quest(
-	        118,
-	        gText_Quest_RockCollector_Sub3_Name,
-	        gText_Quest_RockCollector_Sub3_Desc,
-	        gText_Quest_RockCollector_Sub3_Map,
+            118,
+            COMPOUND_STRING("Thunder Stone"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Underground"),
 	        ITEM_THUNDER_STONE,
 	        QUEST_SPRITE_TYPE_ITEM,
 	        COMPOUND_STRING("Delievered")
 	),
 	sub_quest(
 	        119,
-	        gText_Quest_RockCollector_Sub4_Name,
-	        gText_Quest_RockCollector_Sub4_Desc,
-	        gText_Quest_RockCollector_Sub4_Map,
+            COMPOUND_STRING("Leaf Stone"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Underground"),
 	        ITEM_LEAF_STONE,
 	        QUEST_SPRITE_TYPE_ITEM,
 	        COMPOUND_STRING("Delievered")
 	),
 	sub_quest(
 	        120,
-	        gText_Quest_RockCollector_Sub5_Name,
-	        gText_Quest_RockCollector_Sub5_Desc,
-	        gText_Quest_RockCollector_Sub5_Map,
-	        ITEM_ICE_STONE,
-	        QUEST_SPRITE_TYPE_ITEM,
-	        COMPOUND_STRING("Delievered")
-	),
-	sub_quest(
-	        121,
-	        gText_Quest_RockCollector_Sub6_Name,
-	        gText_Quest_RockCollector_Sub6_Desc,
-	        gText_Quest_RockCollector_Sub6_Map,
-	        ITEM_SUN_STONE,
-	        QUEST_SPRITE_TYPE_ITEM,
-	        COMPOUND_STRING("Delievered")
-	),
-	sub_quest(
-	        122,
-	        gText_Quest_RockCollector_Sub7_Name,
-	        gText_Quest_RockCollector_Sub7_Desc,
-	        gText_Quest_RockCollector_Sub7_Map,
+            COMPOUND_STRING("Moon Stone"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Underground"),
 	        ITEM_MOON_STONE,
-	        QUEST_SPRITE_TYPE_ITEM,
-	        COMPOUND_STRING("Delievered")
-	),
-	sub_quest(
-	        123,
-	        gText_Quest_RockCollector_Sub8_Name,
-	        gText_Quest_RockCollector_Sub8_Desc,
-	        gText_Quest_RockCollector_Sub8_Map,
-	        ITEM_SHINY_STONE,
-	        QUEST_SPRITE_TYPE_ITEM,
-	        COMPOUND_STRING("Delievered")
-	),
-	sub_quest(
-	        124,
-	        gText_Quest_RockCollector_Sub9_Name,
-	        gText_Quest_RockCollector_Sub9_Desc,
-	        gText_Quest_RockCollector_Sub9_Map,
-	        ITEM_DUSK_STONE,
-	        QUEST_SPRITE_TYPE_ITEM,
-	        COMPOUND_STRING("Delievered")
-	),
-	sub_quest(
-	        125,
-	        gText_Quest_RockCollector_Sub10_Name,
-	        gText_Quest_RockCollector_Sub10_Desc,
-	        gText_Quest_RockCollector_Sub10_Map,
-	        ITEM_DAWN_STONE,
 	        QUEST_SPRITE_TYPE_ITEM,
 	        COMPOUND_STRING("Delievered")
 	),
@@ -2627,12 +2582,12 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_ROCKCOLLECTOR] =
     {
-        .name = gText_Quest_RockCollector_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_RockCollector_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_RockCollector_DoneDesc,
-        .map = gText_Quest_RockCollector_Map,
-        .sprite = OBJ_EVENT_GFX_COOK,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
+        .name = COMPOUND_STRING("Rock Collector"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Use the {STR_VAR_1} to bring Trolleyworker some evolution items to help keep his promotion going."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Trolleyworker lets you keep the {STR_VAR_1}. How many different items can be dug up?"),
+        .map = gText_CapheCity,
+        .sprite = ITEM_QUEST_ROCKCOLLECTOR_KIT,
+        .spritetype = QUEST_SPRITE_TYPE_ITEM,
         .subquests = sRockCollector_Sub,
         .numSubquests = QUEST_ROCKCOLLECTOR_SUB_COUNT
     },

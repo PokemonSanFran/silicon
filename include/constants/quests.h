@@ -167,7 +167,7 @@ enum SubQuestDefines
 #define QUEST_NEIGHBORHOODCLEANUP_SUB_COUNT       5
 #define QUEST_NEIGHBORHOODCLEANUP2_SUB_COUNT      4
 #define QUEST_NEIGHBORHOODCLEANUP3_SUB_COUNT      3
-#define QUEST_ROCKCOLLECTOR_SUB_COUNT             10
+#define QUEST_ROCKCOLLECTOR_SUB_COUNT             5
 #define QUEST_HIDDENGROTTOMAPPING_SUB_COUNT       3
 #define QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT     10
 #define QUEST_WILDFIRERISK_SUB_COUNT              3
@@ -500,4 +500,11 @@ enum
     STATE_QUEST_BETWEENASTONEANDAHARDPLACE_REWARD,
     STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE,
 };
+
+// ***********************************************************************
+// Quest: Rock Collector
+// ***********************************************************************
+
+#define ITEM_QUEST_ROCKCOLLECTOR_KIT ITEM_SCANNER
+
 #endif // GUARD_CONSTANTS_QUESTS_H

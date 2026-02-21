@@ -274,3 +274,11 @@ const u8 *GetQuestDesc_Psyop(void)
     StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_PSYOP].desc[flag]);
     return gStringVar4;
 }
+
+const u8  *GetQuestDesc_RockCollector(void)
+{
+    CopyItemName(ITEM_QUEST_ROCKCOLLECTOR_KIT,gStringVar1);
+    u32 flag = ReturnQuestState(QUEST_BETWEENASTONEANDAHARDPLACE);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_ROCKCOLLECTOR].desc[flag]);
+    return gStringVar4;
+}

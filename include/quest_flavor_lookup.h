@@ -10,5 +10,6 @@ const u8 *GetQuestDesc_FreshwaterEvolution(void);
 const u8 *GetQuestDesc_SmoothieCrafting(void);
 const u8 *GetQuestDesc_Hodoutunnels(void);
 const u8 *GetQuestDesc_Psyop(void);
+const u8  *GetQuestDesc_RockCollector(void);
 
 #endif // GUARD_QUEST_FLAVOR_LOOKUP
