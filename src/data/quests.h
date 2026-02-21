@@ -2087,6 +2087,20 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
                 .warpId = 0,
             },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
         },
     },
     [QUEST_BREAKTHEINTERNET] =

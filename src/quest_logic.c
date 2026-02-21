@@ -2826,6 +2826,7 @@ void DebugQuest_BetweenAStoneAndAHardPlace(u8 state)
         case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE:
             u32 stones[COUNT_EVOLUTION_STONES+1] = {ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_STONE, ITEM_LEAF_STONE, ITEM_ICE_STONE, ITEM_SUN_STONE, ITEM_MOON_STONE, ITEM_SHINY_STONE, ITEM_DUSK_STONE, ITEM_DAWN_STONE};
             Shuffle(stones,COUNT_EVOLUTION_STONES+1,sizeof(stones[0]));
+            AddBagItem(stones[0],1);
             QuestMenu_ScriptSetComplete(QUEST_BETWEENASTONEANDAHARDPLACE);
             break;
     }
