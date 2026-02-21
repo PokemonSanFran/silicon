@@ -2013,8 +2013,78 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_NOT_STARTED] =
             {
                 .name = COMPOUND_STRING("Not Started"),
-                .setupFunc = DebugQuest_FreshwaterEvolution,
-                side_quest_map(MAP_HALERBA_WILDS_SPRING),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_1] =
+            {
+                .name = COMPOUND_STRING("1 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_2] =
+            {
+                .name = COMPOUND_STRING("2 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_3] =
+            {
+                .name = COMPOUND_STRING("3 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_4] =
+            {
+                .name = COMPOUND_STRING("4 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_5] =
+            {
+                .name = COMPOUND_STRING("5 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_6] =
+            {
+                .name = COMPOUND_STRING("6 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_7] =
+            {
+                .name = COMPOUND_STRING("7 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_8] =
+            {
+                .name = COMPOUND_STRING("8 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_9] =
+            {
+                .name = COMPOUND_STRING("9 GRUNT Rides"),
+                .setupFunc = DebugQuest_BetweenAStoneAndAHardPlace,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
                 .warpId = 0,
             },
         },
