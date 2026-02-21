@@ -5,7 +5,6 @@ script Quest_Rockcollector_Event_Script{
     goto_if_quest_complete(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Complete_Dialogue)
     goto_if_quest_reward(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Reward_Dialogue)
     goto_if_quest_active(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Active_Dialogue)
-    goto(CapheCity_TrolleyHQ_CounterWorker_Dialogue)
 }
 
 script Quest_Rockcollector_StartQuest_Dialogue{
@@ -74,7 +73,7 @@ script Quest_Rockcollector_Progress_Dialogue{
 }
 
 script Quest_Rockcollector_GoToReward_Script{
-    special(Quest_Rockcollector_CountRemainingSubquests)  
+    special(Quest_Rockcollector_CountRemainingSubquests)
 
     if (var(VAR_RESULT) == 0){
         msgbox(format("Okay, I've got one of each stone."))
@@ -103,7 +102,7 @@ script Quest_Rockcollector_Complete_Dialogue{
 
     switch (var(VAR_RESULT)){
         case 0: msgbox(format("Keep on riding those trolleys, {PLAYER}!"))
-        case 1: 
+        case 1:
                 setflag(FLAG_TEMP_1)
                 msgbox(format("You know, if you go back down there tomorrow, you might find more stones..."))
     }

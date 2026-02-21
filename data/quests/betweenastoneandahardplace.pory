@@ -1,47 +1,65 @@
 //Quest_BetweenAStoneAndAHardPlace
-//
-//PSF TODO Look into StorytellerGetRecordedTrainerStat to figure out how to cnvert GAME_STAT into stringvar or something that be used or read
-//PSF TODO replace all uses of VAR_NUM_TROLLEY_RIDES with GAME_STAT_TROLLEY_RIDES so we're not using two variables for the same thing
 
-script Quest_BetweenAStoneAndAHardPlace_Event_Script{
-    goto_if_quest_complete(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Complete_Dialogue)
-    goto_if_quest_reward(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Reward_Dialogue)
-    goto_if_quest_active(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Active_Dialogue)
-    goto(CapheCity_TrolleyHQ_CounterWorker_Dialogue)
-}
-
-script Quest_BetweenAStoneAndAHardPlace_Active_Dialogue{
-    msgbox(format("Did you hear about the promotion we're doing? Ride the trolleys in Resido 10 times, and get a mega powerful stone for pushing the limits of your Pokemons power!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+script Quest_BetweenAStoneAndAHardPlace_Dialogue_Active
+{
     getgamestat(GAME_STAT_TROLLEY_RIDES, STR_VAR_1)
+    goto_if_ge(VAR_RESULT,NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES,Quest_BetweenAStoneAndAHardPlace_Dialogue_Reward)
 
-    switch(var(VAR_RESULT)){
-        case 0:
-            msgbox(format("You should try out the trolleys around the region. They're a great way to get around!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
-        case 1:
-        case 2:
-        case 3:
-            msgbox(format("Are you new to the region? You should really give the trolleys a try!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
-        case 4:
-        case 5:
-        case 6:
-            msgbox(format("You're a regular, {PLAYER}! Thanks for supporting the trolley system. Come back when you've done 10 rides!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
-        case 7:
-        case 8:
-        case 9:
-            msgbox(format("Oh wow! {STR_VAR_1} rides! Excited to get your prize?"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+    msgbox(format(" Have you heard about our promotion? Ride the G.R.U.N.T. trolleys 10 times, and you’ll get a Mega powerful stone to make your Pokémon even stronger!"),,SPEAKER_TROLLEYWORKER)
+
+    if (var(VAR_RESULT) >= 7)
+    {
+        msgbox(format("Have you heard about our promotion? Ride the G.R.U.N.T. trolleys 10 times, and you’ll get a Mega powerful stone to make your Pokémon even stronger!"),,SPEAKER_TROLLEYWORKER)
+        msgbox(format("Oh hi {PLAYER}! Great to see you."),,SPEAKER_TROLLEYWORKER)
+        msgbox(format("Wow, {STR_VAR_1} rides! Are you getting excited for your Mega special prize??"),,SPEAKER_TROLLEYWORKER)
+        closemessage
+        release
+        end
     }
 
-    incrementgamestat(GAME_STAT_TROLLEY_RIDES)
+    if (var(VAR_RESULT) >= 4)
+    {
+        buffernumberstring(STR_VAR_2,NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES)
+        msgbox(format("Oh hi {PLAYER}! Great to see you."),,SPEAKER_TROLLEYWORKER)
+        msgbox(format("You're becoming a regular! Thanks for supporting G.R.U.N.T. Keep going and come back when you've done {STR_VAR_2} rides to get your Mega reward!"),,SPEAKER_TROLLEYWORKER)
+        closemessage
+        release
+        end
+    }
+
+    if (var(VAR_RESULT) >= 1)
+    {
+        msgbox(format("New around here? Give the trolleys a try - they’re so much fun!"),,SPEAKER_TROLLEYWORKER)
+        closemessage
+        release
+        end
+    }
+
+    msgbox(format("The best way to explore Resido is via the trolley system."),,SPEAKER_TROLLEYWORKER)
+    closemessage
+    release
     end
 }
 
-script Quest_BetweenAStoneAndAHardPlace_Reward_Dialogue{
-    setflag(FLAG_TEMP_1)
-    msgbox(format("Glad to see you're enjoying the trolley system, {PLAYER}!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
-    msgbox(format("For your continued ridership, we'd like to present you with a special evolutionary stones!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+script Quest_BetweenAStoneAndAHardPlace_Dialogue_Reward
+{
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_BETWEENASTONEANDAHARDPLACE)
+    msgbox(format("It’s wonderful to see you're enjoying the trolley system, {PLAYER}!"),,SPEAKER_TROLLEYWORKER)
 
+    checkitemspace(ITEM_FIRE_STONE,1)
+    if (!var(VAR_RESULT))
+    {
+        msgbox(format("Please come back when you have some space in your bag to get your ridership reward."),,SPEAKER_TROLLEYWORKER)
+        closemessage
+        release
+        end
+    }
+
+    setflag(FLAG_DELAY_ROCK_COLLECTOR)
+    cueobjectplayer(LOCALID_TROLLEYWORKER)
     random(10)
-    switch(var(VAR_RESULT)){
+    switch(var(VAR_RESULT))
+    {
         case 0: giveitem(ITEM_ICE_STONE)
         case 1: giveitem(ITEM_FIRE_STONE)
         case 2: giveitem(ITEM_WATER_STONE)
@@ -54,19 +72,19 @@ script Quest_BetweenAStoneAndAHardPlace_Reward_Dialogue{
         case 9: giveitem(ITEM_DAWN_STONE)
     }
 
-    msgbox(format("Aaah, I can tell you're disappointed. Please don't be mad... we had some Mega Stones, but then we ran out. We had to reword the ad to keep people coming in, but all of the Trainers have been so mad!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
-    msgbox(format("...yeah. Not what I was expecting. But thanks, I guess."),MSGBOX_NPC,SPEAKER_ALICIA)
+    msgbox(format("Oh no, I can see your disappointment. Please don't be upset... We did have some Mega Stones, but they ran out so quickly and we couldn’t change the ad mid-campaign. But golly, people are so mad now!"),,SPEAKER_TROLLEYWORKER,,EMOTE_SWEAT)
+    msgbox(format("yeah...Not what I was expecting."),,SPEAKER_ALICIA)
+    closemessage
     completequest(QUEST_BETWEENASTONEANDAHARDPLACE)
     call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
     release
     end
 }
 
-script Quest_BetweenAStoneAndAHardPlace_Complete_Dialogue{
-    special(GetNumberOfBadges)
-    if (!flag(FLAG_TEMP_1) || (var(VAR_RESULT) > 4)){
-        goto(Quest_Rockcollector_StartQuest_Dialogue)
-    }
-    msgbox(format("We should pivot to a more honest advertising model. I don't think I can handle more angry messages on Buzzr!"),MSGBOX_NPC,SPEAKER_TROLLEY_GUY)
+script Quest_BetweenAStoneAndAHardPlace_Dialogue_Complete
+{
+    msgbox(format("We really need to be more honest in our advertising. I can’t take any more angry messages on Buzzr!"),,SPEAKER_TROLLEYWORKER)
+    closemessage
+    release
     end
 }

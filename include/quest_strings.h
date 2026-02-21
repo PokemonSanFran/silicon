@@ -28,11 +28,6 @@ extern const u8 gText_Quest_VSDeoxys_Desc[];
 extern const u8 gText_Quest_VSDeoxys_DoneDesc[];
 extern const u8 gText_Quest_VSDeoxys_Map[];
 
-extern const u8 gText_Quest_BetweenAStoneAndAHardPlace_Name[];
-extern const u8 gText_Quest_BetweenAStoneAndAHardPlace_Desc[];
-extern const u8 gText_Quest_BetweenAStoneAndAHardPlace_DoneDesc[];
-extern const u8 gText_Quest_BetweenAStoneAndAHardPlace_Map[];
-
 extern const u8 gText_Quest_EnterTheDragon_Name[];
 extern const u8 gText_Quest_EnterTheDragon_Desc[];
 extern const u8 gText_Quest_EnterTheDragon_DoneDesc[];
@@ -1210,7 +1205,5 @@ extern const u8 gText_PlayersAdventure_Flavor41[];
 extern const u8 gText_PlayersAdventure_Flavor41A[];
 extern const u8 gText_PlayersAdventure_Flavor42[];
 extern const u8 gText_PlayersAdventure_Flavor43[];
-
-extern const u8 gText_BetweenAStoneAndAHardPlace_Flavor1[];
 
 #endif // GUARD_QUEST_STRINGS_H

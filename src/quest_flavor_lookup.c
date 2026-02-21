@@ -219,16 +219,13 @@ const u8 *GetQuestDesc_RabiesOutbreak(void)
 
 const u8  *GetQuestDesc_BetweenAStoneAndAHardPlace(void)
 {
-    u8 goalNumTrolleyRides = 10;
-    u8 numTrolleyRides = GetGameStat(GAME_STAT_TROLLEY_RIDES);
-    u8 numRemainingTrolleyRides = (goalNumTrolleyRides - numTrolleyRides);
+    u32 numRemainingTrolleyRides = (NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES- GetGameStat(GAME_STAT_TROLLEY_RIDES));
 
-    ConvertIntToDecimalStringN(gStringVar3,
-            numRemainingTrolleyRides,
-            STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar2,
-            gText_BetweenAStoneAndAHardPlace_Flavor1);
-    return gStringVar2;
+    ConvertIntToDecimalStringN(gStringVar1, numRemainingTrolleyRides, STR_CONV_MODE_LEFT_ALIGN, CountDigits(numRemainingTrolleyRides));
+
+    u32 flag = ReturnQuestState(QUEST_BETWEENASTONEANDAHARDPLACE);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_PSYOP].desc[flag]);
+    return gStringVar4;
 }
 
 const u8 *GetQuestDesc_FreshwaterEvolution(void)

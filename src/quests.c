@@ -1260,6 +1260,7 @@ u8 QuestMenu_GetSetQuestState(u8 quest, u8 caseId)
             return gSaveBlock3Ptr->questData[index] & mask;
         case FLAG_SET_ACTIVE:
             gSaveBlock3Ptr->questData[index] |= mask;
+            Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState();
             return 1;
         case FLAG_REMOVE_ACTIVE:
             gSaveBlock3Ptr->questData[index] &= ~mask;

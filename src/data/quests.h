@@ -2000,14 +2000,24 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_BETWEENASTONEANDAHARDPLACE] =
     {
-        .name = gText_Quest_BetweenAStoneAndAHardPlace_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_BetweenAStoneAndAHardPlace_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_BetweenAStoneAndAHardPlace_DoneDesc,
-        .map = gText_Quest_BetweenAStoneAndAHardPlace_Map,
+        .name = COMPOUND_STRING("Betweena Stone and a Hard Place"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Ride the G.R.U.N.T. Trolley {STR_VAR_1} time(s)."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You got the prize, but it was nothing Mega…"),
+        .map = gText_CapheCity,
         .sprite = ITEM_FIRE_STONE,
         .spritetype = QUEST_SPRITE_TYPE_ITEM,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_BETWEENASTONEANDAHARDPLACE_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_FreshwaterEvolution,
+                side_quest_map(MAP_HALERBA_WILDS_SPRING),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_BREAKTHEINTERNET] =
     {

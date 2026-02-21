@@ -1,25 +1,27 @@
+
 mapscripts CapheCity_GRUNTOffice_MapScripts{}
 
-script CapheCity_TrolleyHQ_Manager_Quest_Script{
+script CapheCity_TrolleyHQ_Manager_Quest_Script
+{
     lock
     faceplayer
-    goto_if_quest_inactive(QUEST_ROCKCOLLECTOR,Quest_BetweenAStoneAndAHardPlace_Event_Script)
-    goto(Quest_Rockcollector_Event_Script)
-}
+    goto_if_quest_complete(QUEST_ROCKCOLLECTOR,NULL)
+    goto_if_quest_reward(QUEST_ROCKCOLLECTOR,NULL)
+    goto_if_quest_active(QUEST_ROCKCOLLECTOR,NULL)
 
-script CapheCity_TrolleyHQ_CounterWorker_Dialogue{
-    msgbox(format("Do you have any idea what it takes to make sure all the trolleys run on time? Especially when ridership is down..."),MSGBOX_NPC)
-    end
-}
-
-script CapheCity_TrolleyHQ_Machine_Script{
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_BETWEENASTONEANDAHARDPLACE)
-    if (var(VAR_RESULT)){
-    //PSF TODO There should be a script every frame that checks if you've ridden the Trolley more than 10 times, AND if the quest is active, marks it as complete
-        questmenu(QUEST_MENU_SET_REWARD,QUEST_BETWEENASTONEANDAHARDPLACE)
+    callnative(Script_Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector)
+    if (var(VAR_RESULT))
+    {
+        goto(NULL)
     }
 
-    msgbox("if that quest is acitve,\pyou rode the GRUNTten times.\pTalk to the guy now",MSGBOX_SIGN)
+    goto_if_quest_complete(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Dialogue_Complete)
+    goto_if_quest_reward(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Dialogue_Reward)
+    goto_if_quest_active(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Dialogue_Active)
+
+    msgbox(format("Isn’t it amazing how all the trolleys run on time? It’s a tough challenge, but I love it! I just wish more got to see it…"),MSGBOX_NPC,SPEAKER_TROLLEYWORKER)
+    closemessage
+    release
     end
 }
 

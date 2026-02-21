@@ -365,16 +365,16 @@ static const u32 TOTEM_POKEMON_LIST[NUM_TOTEM_MON][9]=
     {MAP_ROUTE9, TOTEM_POKEMON_8, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
     {MAP_ROUTE9, TOTEM_POKEMON_9, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
 };
-    //PSF TODO need to make new totem formes
-    //totem formes have larger heights and weights but don't follow any specific rule
-    //shiny locked off
-    //when bred, produces a normal species of that pokemon
-    //always have one specific ability
-    //spawn with three perfect IVs
-    //Compared to their non-Totem counterparts, every Totem Pokémon's weight is increased less than appropriately to its height. If a Pokémon's density were to remain the same between its Totem and non-Totem variants, a Totem Pokémon twice the height should be eight times the weight.
-    //Not a unique form in the pokedex
-    //fixed natures and move sets and level
-    //wild map, totem species, held item, totem atk, totem def, totem speed, totem spatk, totem spdef, totem flag
+//PSF TODO need to make new totem formes
+//totem formes have larger heights and weights but don't follow any specific rule
+//shiny locked off
+//when bred, produces a normal species of that pokemon
+//always have one specific ability
+//spawn with three perfect IVs
+//Compared to their non-Totem counterparts, every Totem Pokémon's weight is increased less than appropriately to its height. If a Pokémon's density were to remain the same between its Totem and non-Totem variants, a Totem Pokémon twice the height should be eight times the weight.
+//Not a unique form in the pokedex
+//fixed natures and move sets and level
+//wild map, totem species, held item, totem atk, totem def, totem speed, totem spatk, totem spdef, totem flag
 
 static const u32 ULTRA_BEAST_LIST[QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT][9]=
 {
@@ -844,9 +844,9 @@ bool8 Quest_Bodegaburnout_CheckReadyForNext(void){
                     completedCatch++;
                     break;
                 case DELIVER: completedDeliver++;
-                  break;
+                              break;
                 case RESCUE: completedRescue++;
-                 break;
+                             break;
                 default: break;
             }
         }
@@ -902,9 +902,9 @@ bool8 Quest_Bodegaburnout_CheckStrongPokemon(void){
             ||
             (height < requiredHeight)
        )
-            {
-                doesPokemonMatch = FALSE;
-            }
+    {
+        doesPokemonMatch = FALSE;
+    }
     return doesPokemonMatch;
 }
 
@@ -917,13 +917,13 @@ bool8 Quest_Bodegaburnout_CheckColdPokemon(void){
     type[0] = gSpeciesInfo[species].types[0];
     type[1] = gSpeciesInfo[species].types[1];
 
-        if (
-             (type[0] != TYPE_ICE) &&
-             (type[1] != TYPE_ICE)
-           )
-            {
-                doesPokemonMatch = FALSE;
-            }
+    if (
+            (type[0] != TYPE_ICE) &&
+            (type[1] != TYPE_ICE)
+       )
+    {
+        doesPokemonMatch = FALSE;
+    }
     return doesPokemonMatch;
 }
 
@@ -932,10 +932,10 @@ bool8 Quest_Bodegaburnout_CheckSmartPokemon(void){
     u32 nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
 
     if (
-        (nature != NATURE_GENTLE) &&
-        (nature != NATURE_SASSY) &&
-        (nature != NATURE_CALM) &&
-        (nature != NATURE_CAREFUL)
+            (nature != NATURE_GENTLE) &&
+            (nature != NATURE_SASSY) &&
+            (nature != NATURE_CALM) &&
+            (nature != NATURE_CAREFUL)
        )
     {
         return FALSE;
@@ -956,16 +956,16 @@ bool8 Quest_Bodegaburnout_CheckFairyPokemon(void){
     type[0] = gSpeciesInfo[species].types[0];
     type[1] = gSpeciesInfo[species].types[1];
 
-        if (
-             (eggGroup[0] != EGG_GROUP_FAIRY) &&
-             (eggGroup[1] != EGG_GROUP_FAIRY)
-             &&
-             (type[0] != TYPE_FAIRY) &&
-             (type[1] != TYPE_FAIRY)
-           )
-            {
-                doesPokemonMatch = FALSE;
-            }
+    if (
+            (eggGroup[0] != EGG_GROUP_FAIRY) &&
+            (eggGroup[1] != EGG_GROUP_FAIRY)
+            &&
+            (type[0] != TYPE_FAIRY) &&
+            (type[1] != TYPE_FAIRY)
+       )
+    {
+        doesPokemonMatch = FALSE;
+    }
     return doesPokemonMatch;
 }
 
@@ -1261,6 +1261,7 @@ void DebugQuest_CompulsiveHealingPeerSupport(u8 state)
     {
         default:
         case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_STARTED_QUEST:
             QuestMenu_ScriptSetActive(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP);
@@ -1422,8 +1423,10 @@ void DebugQuest_Smoothiecrafting(u8 state)
     switch (state)
     {
         case STATE_QUEST_SMOOTHIECRAFTING_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_SMOOTHIECRAFTING_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
             Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
             QuestMenu_ScriptSetActive(QUEST_SMOOTHIECRAFTING);
             break;
@@ -1502,8 +1505,10 @@ void DebugQuest_FreshwaterEvolution(u8 state)
     switch (state)
     {
         case STATE_QUEST_FRESHWATER_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_FRESHWATER_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
             Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
             QuestMenu_ScriptSetActive(QUEST_FRESHWATEREVOLUTION);
             break;
@@ -1756,12 +1761,12 @@ bool32 CanMonMegaEvolve(u32 species)
 
 void WowYoureStrong_GetBadgesAndSetTowerState(void)
 {
-	GetNumberOfBadges();
+    GetNumberOfBadges();
 
-	if (gSpecialVar_Result != 3)
-		return;
+    if (gSpecialVar_Result != 3)
+        return;
 
-	VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER);
+    VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER);
 }
 
 // ***********************************************************************
@@ -1783,27 +1788,27 @@ void Quest_DrugHelmetTest_ForgetMoveByPhase(void)
         if(GetMonData(&gPlayerParty[i], MON_DATA_MOVE2, 0) != MOVE_NONE){
             switch (phaseNum)
             {
-            case 1:
-                for(k = 1; k < MAX_MON_MOVES - 1; k++){
-                    move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k + 1, 0);
+                case 1:
+                    for(k = 1; k < MAX_MON_MOVES - 1; k++){
+                        move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k + 1, 0);
+                        SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
+                    }
+                    move = MOVE_NONE;
                     SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
-                }
-                move = MOVE_NONE;
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
-                break;
-            case 2:
-                move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, 0);
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 1, &move);
-                move = MOVE_NONE;
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, &move);
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 3, &move);
-                break;
-            case 3:
-                move = MOVE_NONE;
-                for(l = 1; l < MAX_MON_MOVES; l++){
-                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + l, &move);
-                }
-                break;
+                    break;
+                case 2:
+                    move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, 0);
+                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 1, &move);
+                    move = MOVE_NONE;
+                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, &move);
+                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 3, &move);
+                    break;
+                case 3:
+                    move = MOVE_NONE;
+                    for(l = 1; l < MAX_MON_MOVES; l++){
+                        SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + l, &move);
+                    }
+                    break;
             }
         }
     }
@@ -1862,6 +1867,7 @@ void DebugQuest_RPS(u8 state)
     switch (state)
     {
         case STATE_QUEST_RPS_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_RPS_STARTED:
             QuestMenu_ScriptSetActive(QUEST_RPS);
@@ -1946,14 +1952,14 @@ u32 GetHintFromMon(void)
     u32 remainingQuests = Quest_Generic_CountRemainingSubquests(QUEST_CUTEPOKEMON);
     u32 speciesId = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
 
-        switch(remainingQuests)
-        {
-            case 4: return GetEiscueHint(speciesId);
-            case 3: return GetCorsolaHint(speciesId);
-            case 2: return GetDuskullHint(speciesId);
-            default:
-            case 1: return GetScraftyHint(speciesId);
-        }
+    switch(remainingQuests)
+    {
+        case 4: return GetEiscueHint(speciesId);
+        case 3: return GetCorsolaHint(speciesId);
+        case 2: return GetDuskullHint(speciesId);
+        default:
+        case 1: return GetScraftyHint(speciesId);
+    }
 }
 
 u32 GetEiscueHint(u32 speciesId)
@@ -2186,6 +2192,7 @@ void DebugQuest_VSDeoxys(u8 state)
         default:
         case STATE_QUEST_VSDEOXYS_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
             QuestMenu_ScriptSetActive(QUEST_VSDEOXYS);
             break;
         case STATE_QUEST_VSDEOXYS_RECIVED_ROCK_SMASH_TM:
@@ -2237,13 +2244,13 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
 {
     switch (state)
     {
-    default:
-    case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
-        FlagSet(FLAG_SYS_STARTER_APPS_GET);
-        break;
-    case STATE_QUEST_RESTORETIRABUDINGYM_COMPLETED:
-        QuestMenu_ScriptSetComplete(QUEST_RESTORETIRABUDINGYM);
-        break;
+        default:
+        case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_RESTORETIRABUDINGYM_COMPLETED:
+            QuestMenu_ScriptSetComplete(QUEST_RESTORETIRABUDINGYM);
+            break;
     }
 }
 
@@ -2427,7 +2434,7 @@ static bool8 DoesBoxMonHaveChampionRibbon(void)
 
 static bool8 DoesAnyMonHaveChampionRibbon(void)
 {
-     return (DoesPartyMonHaveChampionRibbon() || DoesBoxMonHaveChampionRibbon());
+    return (DoesPartyMonHaveChampionRibbon() || DoesBoxMonHaveChampionRibbon());
 }
 
 void Script_CheckIfAnyMonHasChampionRibbon(void)
@@ -2450,8 +2457,8 @@ static u8 DoesPlayerHaveOneOrTwoUsableMon(void)
     for (u32 i = 0; i < gPlayerPartyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
-         && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
+                && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
+                && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
             aliveCount++;
     }
 
@@ -2479,6 +2486,7 @@ void DebugQuest_StressCup(u8 state)
     {
         default:
         case STATE_QUEST_STRESSCUP_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_STRESSCUP_STARTED_QUEST:
             QuestMenu_ScriptSetActive(QUEST_STRESSCUP);
@@ -2497,8 +2505,10 @@ void DebugQuest_RabiesOutbreak(u8 state)
     switch (state)
     {
         case STATE_QUEST_RABIES_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_RABIES_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
             Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
             QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             break;
@@ -2540,13 +2550,14 @@ void DebugQuest_RabiesOutbreak(u8 state)
             break;
     }
 }
+
 void CountDefeatedRabiesMon(void)
 {
     /*
        Iterate every spot in the enemy's party
        If one is Glameow AND you're in GlavezHill AND its not a Trainer battle, then increment the defeated Glameow count by one
        If the Glameow count is > 9, AND the Rabies Outbreak quest is active  change the Rabies Outbreak quest to Reward state
-   */
+       */
     if (GetCurrentMap() != QUEST_RABIES_OUTBREAK_MAP)
         return;
 
@@ -2646,8 +2657,10 @@ void DebugQuest_Hodoutunnels(u8 state)
     switch (state)
     {
         case STATE_QUEST_HODOUTUNNELS_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_HODOUTUNNELS_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
             Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_TUNNELS);
             QuestMenu_ScriptSetActive(QUEST_HODOUTUNNELS);
             break;
@@ -2703,8 +2716,8 @@ static enum QuestPsyopErrors Quest_Psyop_CheckTargetAttributes(void)
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         totalEv += GetMonData(mon,(MON_DATA_HP_EV + stat));
 
-        bool32 hasMaxedEvs = (totalEv >= ADJUSTED_MAX_TOTAL_EVS);
-        bool32 isCorrectBall = (GetMonData(mon,MON_DATA_POKEBALL,NULL) == (ItemIdToBallId(ITEM_QUEST_PSYOP_TARGET_BALL)));
+    bool32 hasMaxedEvs = (totalEv >= ADJUSTED_MAX_TOTAL_EVS);
+    bool32 isCorrectBall = (GetMonData(mon,MON_DATA_POKEBALL,NULL) == (ItemIdToBallId(ITEM_QUEST_PSYOP_TARGET_BALL)));
 
     if (!hasMaxedEvs && !isCorrectBall)
         return QUEST_PSYOP_NO_EFFORT_AND_BALL;
@@ -2754,8 +2767,10 @@ void DebugQuest_Psyop(u8 state)
     {
         default:
         case STATE_QUEST_PSYOP_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_PSYOP_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
             DebugQuest_Psyop_GiveMon(state);
             QuestMenu_ScriptSetActive(QUEST_PSYOP);
             break;
@@ -2770,8 +2785,74 @@ void DebugQuest_Psyop(u8 state)
 // Quest: Between A Stone And A Hard Place
 // ***********************************************************************
 
+void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void)
+{
+    if(!IsQuestActiveState(QUEST_BETWEENASTONEANDAHARDPLACE))
+        return;
+
+    if(GetGameStat(GAME_STAT_TROLLEY_RIDES) < NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES)
+        return;
+
+    QuestMenu_ScriptSetReward(QUEST_BETWEENASTONEANDAHARDPLACE);
+}
+
+void DebugQuest_BetweenAStoneAndAHardPlace(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_STONE);
+            QuestMenu_ScriptSetActive(QUEST_BETWEENASTONEANDAHARDPLACE);
+            break;
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_1:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_2:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_3:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_4:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_5:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_6:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_7:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_8:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_9:
+            IncrementGameStat(GAME_STAT_TROLLEY_RIDES);
+            break;
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_BETWEENASTONEANDAHARDPLACE);
+            break;
+        default:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE:
+            u32 stones[COUNT_EVOLUTION_STONES+1] = {ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_STONE, ITEM_LEAF_STONE, ITEM_ICE_STONE, ITEM_SUN_STONE, ITEM_MOON_STONE, ITEM_SHINY_STONE, ITEM_DUSK_STONE, ITEM_DAWN_STONE};
+            Shuffle(stones,COUNT_EVOLUTION_STONES+1,sizeof(stones[0]));
+            QuestMenu_ScriptSetComplete(QUEST_BETWEENASTONEANDAHARDPLACE);
+            break;
+    }
+}
+static bool8 Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector(void)
+{
+    if (!IsQuestCompletedState(QUEST_BETWEENASTONEANDAHARDPLACE))
+        return FALSE;
+
+    if (FlagGet(FLAG_DELAY_ROCK_COLLECTOR))
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector(void)
+{
+    gSpecialVar_Result = Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector();
+}
+
 u32 Quest_BetweenAStoneAndAHardPlace_CountRides(void)
 {
     return GetGameStat(GAME_STAT_TROLLEY_RIDES);
+}
+
+void Script_Quest_BetweenAStoneAndAHardPlaceHasRode7(void)
+{
+    gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >= 7);
 }
 

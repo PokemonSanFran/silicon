@@ -51,6 +51,7 @@ void DebugQuest_FreshwaterEvolution(u8);
 void DebugQuest_Smoothiecrafting(u8);
 void DebugQuest_Hodoutunnels(u8);
 void DebugQuest_Psyop(u8);
+void DebugQuest_BetweenAStoneAndAHardPlace(u8);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
@@ -59,5 +60,6 @@ u32 exponent(u32 y, u32 x);
 void CountDefeatedRabiesMon(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
 void Quest_SmoothieCrafting_BufferRecipe(void);
+void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void);
 
 #endif //GUARD_QUESTLOGIC_H

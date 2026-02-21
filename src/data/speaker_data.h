@@ -827,7 +827,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_GRUNT] =
     {
-        .name = COMPOUND_STRING("G.R.U.N.T."),
+        .name = COMPOUND_STRING("GRUNT"),
         .title = COMPOUND_STRING("???"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
@@ -1401,11 +1401,11 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
-    [SPEAKER_TROLLEY_GUY] =
+    [SPEAKER_TROLLEYWORKER] =
     {
-        .name = COMPOUND_STRING("Trolley Guy"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
+        .name = COMPOUND_STRING("Trolleyworker"),
+        .title = COMPOUND_STRING("GRUNT Employee"),
+        .gender = MALE,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },

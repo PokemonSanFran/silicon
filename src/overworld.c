@@ -60,6 +60,7 @@
 #include "script_pokemon_util.h"
 #include "secret_base.h"
 #include "sound.h"
+#include "quest_logic.h" // silicon
 #include "start_menu.h"
 #include "string_util.h"
 #include "task.h"
@@ -533,6 +534,8 @@ void SetGameStat(u8 index, u32 value)
 {
     if (index < NUM_USED_GAME_STATS)
         gSaveBlock1Ptr->gameStats[index] = value ^ gSaveBlock2Ptr->encryptionKey;
+
+    Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(); // silicon
 }
 
 void ApplyNewEncryptionKeyToGameStats(u32 newKey)

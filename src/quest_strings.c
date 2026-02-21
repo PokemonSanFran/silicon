@@ -28,11 +28,6 @@ const u8 gText_Quest_VSDeoxys_Desc[] =_("Subdue the rare, orange,\nforme-changin
 const u8 gText_Quest_VSDeoxys_DoneDesc[] =_("You found the Minior...");
 const u8 gText_Quest_VSDeoxys_Map[] =_("Route9");
 
-const u8 gText_Quest_BetweenAStoneAndAHardPlace_Name[] = _("Between a Stone and a Hard Place");
-const u8 gText_Quest_BetweenAStoneAndAHardPlace_Desc[] =_("Ride the cable ar enough times to get a rare stone to power up Pokemon.");
-const u8 gText_Quest_BetweenAStoneAndAHardPlace_DoneDesc[] =_("You got a stone for riding the cable car\n3 times, but it was a Evolutionary\nStone, not a Mega Stone...");
-const u8 gText_Quest_BetweenAStoneAndAHardPlace_Map[] =_("CapheCity");
-
 const u8 gText_Quest_EnterTheDragon_Name[] = _("Enter the Dragon");
 const u8 gText_Quest_EnterTheDragon_Desc[] =_("Description");
 const u8 gText_Quest_EnterTheDragon_DoneDesc[] =_("DoneDescription");
@@ -1182,5 +1177,3 @@ const u8 gText_PlayersAdventure_Flavor41[] =_("Ramesh's home in the qiuvillage h
 const u8 gText_PlayersAdventure_Flavor41A[] =_("Confront Lucrezia in their office!");
 const u8 gText_PlayersAdventure_Flavor42[] =_("You became Champion, made some\nmistakes, but the region is just a\nlittle better because of your efforts.");
 const u8 gText_PlayersAdventure_Flavor43[] =_("You became Champion, stamped out\nSharpRise Capital, and the region is a just a\nlittle better because of your efforts.");
-
-const u8 gText_BetweenAStoneAndAHardPlace_Flavor1[] =_("Take {STR_VAR_3} more trolley ride(s), and get a\nstone 'capable of pushing a Pokemon\nfurther beyond'!");
