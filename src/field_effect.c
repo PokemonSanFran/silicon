@@ -43,6 +43,7 @@
 #include "constants/map_types.h"
 #include "options_music.h" // siliconMerge
 #include "phenomenon.h" // phenomenon
+#include "fly_encounter.h" // flyEncounters 
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 

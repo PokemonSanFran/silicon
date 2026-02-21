@@ -60,4 +60,3 @@ void FlyWildEncounter(void)
         gSpecialVar_Result = FALSE;
     }
 }
-

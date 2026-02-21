@@ -9,8 +9,8 @@
 
 script FlyEncounter_Script_GetEncounterType
 {
-    callnative(FlyEncounter_Script_GetEncounterType)
-	call(FlightPatterns_Script_Approach)
+    callnative(GetFlyEncounterType)
+	//call(FlightPatterns_Script_Approach)
 
     switch (var(VAR_RESULT))
     {
