@@ -8,7 +8,6 @@ u16 Quest_Generic_CountRemainingSubquests(u16);
 bool32 KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(int);
 void Quest_Kitchenvolunteering_CreatePantryMaze(void);
 u8 Quest_Kitchenvolunteering_CountRemainingItems(void);
-void Quest_Rockcollector_RespawnStones(void);
 u32 GetCurrentMap(void);
 void Quest_TryCompulsiveHealingPeerSupport_UpdateType(u16 days);
 void TryToUpdateArtisanBalls1SubQuestsState(u16);
@@ -29,6 +28,7 @@ bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels(void);
 bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll(void);
 bool8 Quest_Hodoutunnels_GetVariable_TalkedToElder(void);
 u32 Quest_BetweenAStoneAndAHardPlace_CountRides(void);
+void Quest_RockCollector_ComposeList(void);
 
 bool32 ShouldAskUnhoused(void);
 const u8* ReturnBattleScriptCantUseItem(void);
@@ -52,6 +52,7 @@ void DebugQuest_Smoothiecrafting(u8);
 void DebugQuest_Hodoutunnels(u8);
 void DebugQuest_Psyop(u8);
 void DebugQuest_BetweenAStoneAndAHardPlace(u8);
+void DebugQuest_RockCollector(u8);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

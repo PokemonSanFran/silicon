@@ -1,166 +1,228 @@
-//gText_Quest_Rockcollector_
 //Quest_Rockcollector_
 
-script Quest_Rockcollector_Event_Script{
-    goto_if_quest_complete(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Complete_Dialogue)
-    goto_if_quest_reward(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Reward_Dialogue)
-    goto_if_quest_active(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Active_Dialogue)
-}
-
-script Quest_Rockcollector_StartQuest_Dialogue{
-    msgbox(format("You're back! How's the trolley treating you?"))
-    msgbox(format("I have a tiny issue though... that promotion from before, where I gave you the stone? It's actually doing surprisingly well! But I'm running low on stones now. There's a secret spot where I usually get them from, but I sprained my ankle, so I can't go myself."))
-    msgbox(format("Can I trust you? Head down there and grab one of each stone, and bring them back to me. That should hold me over until my ankle heals..."))
-    special(Quest_Rockcollector_CheckTakenStoneFlags)
-    if (var(VAR_RESULT)){
-        goto(Quest_Rockcollector_Secret_Dialogue)
-    }else{
-        goto(Quest_Rockcollector_Reveal_Dialogue)
-    }
-}
-
-script Quest_Rockcollector_Reveal_Dialogue{
-    startquest(QUEST_ROCKCOLLECTOR)
-    msgbox(format("If you go behind the terminal in CurenoPort, you can get underground and there are stones down there already."))
-    closemessage
-    release
-    end
-}
-
-script Quest_Rockcollector_Secret_Dialogue{
-    msgbox(format("You've already been down there? Well, that's embarassing... I should hide the entrance better. Do you still have the stones? Can I have them instead?"),MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO){
-        startquest(QUEST_ROCKCOLLECTOR)
-        goto(Quest_Rockcollector_Refuse_Dialogue)
-    }
-
-    special(Quest_Rockcollector_TakeAllStonesFromBag)
-    goto(Quest_Rockcollector_Reward_Dialogue)
-}
-
-script Quest_Rockcollector_Active_Dialogue{
-    msgbox(format("Did you bring me some Evolution Stones? Are you sure I can take them??"),MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO){
-        goto(Quest_Rockcollector_Refuse_Dialogue)
-    }
-
-    setvar(VAR_TEMP_1,0)
-    setvar(VAR_TEMP_2,0)
-
-    special(Quest_Rockcollector_CheckSubquestTakeStone)
-    call(Quest_Rockcollector_Progress_Dialogue)
-    call(Quest_Rockcollector_GoToReward_Script)
-}
-
-script Quest_Rockcollector_Refuse_Dialogue{
-    msgbox(format("Oh okay, well let me know when you've got stones for me!"))
-    closemessage
-    release
-    end
-}
-
-script Quest_Rockcollector_Progress_Dialogue{
-    switch (var(VAR_TEMP_1)){
-        case 0: msgbox(format("Looks like you haven't managed to get down there and grab some stones!"))
-        case 1: msgbox(format("All right, great job finding this {STR_VAR_1}."))
-        case 2: msgbox(format("Wow, these stones are great!"))
-    }
-
-    if (var(VAR_TEMP_2) > 0){
-        msgbox(format("Huh, there's no dust on this stone. Did it really come from underground?"))
-    }
-    return
-}
-
-script Quest_Rockcollector_GoToReward_Script{
-    special(Quest_Rockcollector_CountRemainingSubquests)
-
-    if (var(VAR_RESULT) == 0){
-        msgbox(format("Okay, I've got one of each stone."))
-        goto(Quest_Rockcollector_Reward_Dialogue)
-    }elif(var(VAR_RESULT) < 10){
-        msgbox(format("I think you've got... {STR_VAR_1} to go!"))
-    }
+script Quest_Rockcollector_Dialogue_Start
+{
+    checkitemspace(ITEM_QUEST_ROCKCOLLECTOR_KIT,1)
+    if(var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Hey {PLAYER}! I might have something else for you - make some room in your bag!"),,SPEAKER_TROLLEYWORKER)
         closemessage
         release
         end
+    }
+
+    msgbox(format("{PLAYER}! Perfect timing."),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("I need to gather more evolution items for our promotional campaign. I guess honesty really does pay off - the campaign’s doing great even without Mega Stones."),,SPEAKER_TROLLEYWORKER)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_KIT)
+    msgbox(format("I have an {STR_VAR_1} that lets me dig up items underground. That’s how I got the backup stones in the first place."),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("But now the bad news: I broke my leg the last time I went down there and came up empty-handed, so I had to pause the promotion."),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("I’m worried that I’ll lose my job if ridership drops. And buddy, I really need this job. I have to get more stones so I can keep the promotion running smoothly!"),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("Could you do me a solid and search the region and dig up more evolution items for me?"),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("You can keep anything else you find while mining."),,SPEAKER_TROLLEYWORKER)
+    closemessage
+    cueobjectplayer(LOCALID_TROLLEYWORKER)
+    giveitem(ITEM_QUEST_ROCKCOLLECTOR_KIT,1)
+    startquest(QUEST_ROCKCOLLECTOR)
+    msgbox(format("If you spot a bump in a cave wall, press the A BUTTON while facing it to use the {STR_VAR_1}."),,SPEAKER_TROLLEYWORKER)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_NEED_1)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_ROCKCOLLECTOR_NEED_2)
+    bufferitemname(STR_VAR_3,ITEM_QUEST_ROCKCOLLECTOR_NEED_3)
+    msgbox(format("I need a {STR_VAR_1}, {STR_VAR_2}, {STR_VAR_3},"),,SPEAKER_TROLLEYWORKER)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_NEED_4)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_ROCKCOLLECTOR_NEED_5)
+    msgbox(format("{STR_VAR_1}, & {STR_VAR_2}."),,SPEAKER_TROLLEYWORKER)
+    closemessage
+    release
+    end
 }
 
-script Quest_Rockcollector_Reward_Dialogue{
-    msgbox(format("Thank you so much for your help! I'm not a Trainer, but somebody left this on the trolley recently. I guess you can use it!"))
-    giveitem(ITEM_TM64)
+script Quest_Rockcollector_Dialogue_Active
+{
+    callnative(Script_Quest_Rockcollector_CountNumberOfStonesToAsk)
+
+    if (var(VAR_RESULT) > 1)
+    {
+        goto(Quest_Rockcollector_Dialogue_PresentStoneList)
+    }
+    if (var(VAR_RESULT) == 1)
+    {
+        goto(Quest_Rockcollector_Dialogue_AskStone)
+    }
+    goto(Quest_Rockcollector_Dialogue_PlayerHasNoStones)
+}
+
+script Quest_Rockcollector_Dialogue_AskStone
+{
+    checkitemspace(ITEM_QUEST_ROCKCOLLECTOR_NEED_1,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        setvar(VAR_0x8003,SUB_QUEST_1)
+        bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_NEED_1)
+    }
+
+    checkitemspace(ITEM_QUEST_ROCKCOLLECTOR_NEED_2,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        setvar(VAR_0x8003,SUB_QUEST_2)
+        bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_NEED_2)
+    }
+
+    checkitemspace(ITEM_QUEST_ROCKCOLLECTOR_NEED_3,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        setvar(VAR_0x8003,SUB_QUEST_3)
+        bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_NEED_3)
+    }
+
+    checkitemspace(ITEM_QUEST_ROCKCOLLECTOR_NEED_4,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        setvar(VAR_0x8003,SUB_QUEST_4)
+        bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_NEED_4)
+    }
+
+    checkitemspace(ITEM_QUEST_ROCKCOLLECTOR_NEED_5,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        setvar(VAR_0x8003,SUB_QUEST_5)
+        bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_NEED_5)
+    }
+    msgbox(format("Oh! That {STR_VAR_1} you have, can I use that for the promotion?"),MSGBOX_YESNO,SPEAKER_TROLLEYWORKER)
+
+    if (var(VAR_RESULT) == NO)
+    {
+        goto(Quest_Rockcollector_Dialogue_Cancel)
+    }
+
+    copyvar(VAR_RESULT,VAR_0x8003)
+    goto(Quest_Rockcollector_Script_HandleInput)
+}
+
+script Quest_Rockcollector_Dialogue_PlayerHasNoStones
+{
+    random(2)
+    if (var(VAR_RESULT) == 1)
+    {
+        bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_KIT)
+        msgbox(format("If you spot a bump in a cave wall, press the {A_BUTTON} while facing it to use the {STR_VAR_1}."),,SPEAKER_TROLLEYWORKER) // PSF TODO when this line is first said, A BUTTON does not transform into the button and sprites stop working
+    }
+    else
+    {
+        buffermapname(STR_VAR_1,MAP_CURENO_PORT_UNDERGROUND)
+        msgbox(format("The entrance to the {STR_VAR_1} mining spot…"),,SPEAKER_TROLLEYWORKER)
+        msgbox(format("It’s behind the GRUNT station building! It’s tricky to spot from the front, but it's definitely there. But keep this between you and me, yeah?"),,SPEAKER_TROLLEYWORKER)
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Rockcollector_Dialogue_PresentStoneList
+{
+    msgbox(format("Oh! You’ve got some of the stones that I need."),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("Can I use one of those for the promotion?"),,SPEAKER_TROLLEYWORKER)
+    callnative(Quest_Rockcollector_GenerateList)
+    dynmultipush(format("Never mind."),MULTI_B_PRESSED)
+    dynmultistack(0,0,FALSE,3,TRUE,0,NULL)
+    goto(Quest_Rockcollector_Script_HandleInput)
+}
+
+script Quest_Rockcollector_Script_HandleInput
+{
+    if (var(VAR_RESULT) == MULTI_B_PRESSED)
+    {
+        goto(Quest_Rockcollector_Dialogue_Cancel)
+    }
+    elif (var(VAR_RESULT) == SUB_QUEST_1)
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ROCKCOLLECTOR,SUB_QUEST_1)
+            removeitem(ITEM_QUEST_ROCKCOLLECTOR_NEED_1)
+    }
+    elif (var(VAR_RESULT) == SUB_QUEST_2)
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ROCKCOLLECTOR,SUB_QUEST_2)
+            removeitem(ITEM_QUEST_ROCKCOLLECTOR_NEED_2)
+    }
+    elif (var(VAR_RESULT) == SUB_QUEST_3)
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ROCKCOLLECTOR,SUB_QUEST_3)
+            removeitem(ITEM_QUEST_ROCKCOLLECTOR_NEED_3)
+    }
+    elif (var(VAR_RESULT) == SUB_QUEST_4)
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ROCKCOLLECTOR,SUB_QUEST_4)
+            removeitem(ITEM_QUEST_ROCKCOLLECTOR_NEED_4)
+    }
+    elif (var(VAR_RESULT) == SUB_QUEST_5)
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_ROCKCOLLECTOR,SUB_QUEST_5)
+            removeitem(ITEM_QUEST_ROCKCOLLECTOR_NEED_5)
+    }
+    cueobjecttalking(LOCALID_PLAYER)
+    goto(Quest_Rockcollector_Script_TryProgressReward)
+}
+
+script Quest_Rockcollector_Dialogue_Cancel
+{
+    msgbox(format("Holding onto it for something? No worries at all. Just let me know when you have one I can use! Gotta get this campaign up and running soon!"),,SPEAKER_TROLLEYWORKER)
+    closemessage
+    release
+    end
+}
+
+script Quest_Rockcollector_Script_TryProgressReward
+{
+    callnative(Script_Quest_Rockcollector_CountRemainingSubquests)
+    if (var(VAR_RESULT) == 0)
+    {
+        goto(Quest_Rockcollector_Dialogue_Reward)
+    }
+
+    msgbox(format("Thank you so much {PLAYER}! Almost there..."),,SPEAKER_TROLLEYWORKER)
+    closemessage
+    release
+    end
+}
+
+script Quest_Rockcollector_Dialogue_Reward
+{
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_ROCKCOLLECTOR)
+    checkitemspace(ITEM_QUEST_ROCKCOLLECTOR_REWARD,1)
+    msgbox(format("This is exactly what I needed, {PLAYER}. This should keep the promotion going strong until I’m healthy enough to go back down myself."),,SPEAKER_TROLLEYWORKER)
+
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Come back when you’ve got some room in your bag."),,SPEAKER_TROLLEYWORKER)
+        closemessage
+        release
+        end
+    }
+    msgbox(format("I hope they hire a new marketing person soon…"),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("Aren’t you the marketing person?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    msgbox(format("Oh no, I’m the Operations Manager. I make sure all the trolleys are in the right place at the right time."),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("Our marketing director got laid off a few months ago so I took over her job - that stuff still needs to get done!"),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("She was also handling the front desk duties after HE got laid off, but luckily Bureaucracytransitworker took those on…"),,SPEAKER_TROLLEYWORKER,TAIL_WHISPER)
+    msgbox(format("It’s a lot, but we love GRUNT and how it empowers people! Hopefully, as ridership increases we can hire more people and I can get back to my actual job."),,SPEAKER_TROLLEYWORKER,,EMOTE_SWEAT)
+    msgbox(format("Thanks for listening, and for all your help. Take this."),,SPEAKER_TROLLEYWORKER)
+    closemessage
+    cueobjectplayer(LOCALID_TROLLEYWORKER)
+    giveitem(ITEM_QUEST_ROCKCOLLECTOR_REWARD,1)
     completequest(QUEST_ROCKCOLLECTOR)
     release
     end
 }
 
-script Quest_Rockcollector_Complete_Dialogue{
-    random(2)
-    if (flag(FLAG_TEMP_1)){
-        setvar(VAR_RESULT,0)
-    }
-
-    switch (var(VAR_RESULT)){
-        case 0: msgbox(format("Keep on riding those trolleys, {PLAYER}!"))
-        case 1:
-                setflag(FLAG_TEMP_1)
-                msgbox(format("You know, if you go back down there tomorrow, you might find more stones..."))
-    }
+script Quest_Rockcollector_Dialogue_Complete
+{
+    bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_KIT)
+    msgbox(format("There’s so many places in the region to use that {STR_VAR_1}."),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("If you’re looking for a specific item I have some notes on my desk that should point you in the right direction."),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("When do you want me to return the {STR_VAR_1}? Won’t you need to get more items for the promotion soon?"),,SPEAKER_ALICIA)
+    msgbox(format("My arms have gotten so strong since I broke my leg, I don’t even need the {STR_VAR_1} anymore! I’m pretty sure if I punch a wall the stones will fall right out!"),,SPEAKER_TROLLEYWORKER)
+    msgbox(format("Are you going to break your hand doing that?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("You saved my job! Keep it."),,SPEAKER_TROLLEYWORKER)
     closemessage
     release
     end
 }
 
-// PSF TODO cave with evolution stones should be a tiny maze with the mining mini game on the walls available all the time, and a randomly spawning evolution stone on the ground, once a day. once a stone is picked up off the ground, it doesn't respawn until quest is completed
-//
-// trolley dude should give you the mining kit and let you keep it if you finish
-
-text gText_Quest_Rockcollector_YoureBack{
-    format("You're back! How's the trolley treating you?")
-}
-text gText_Quest_Rockcollector_IHaveATiny{
-    format("I have a tiny issue though... that promotion from before, where I gave you the stone? It's actually doing surprisingly well! But I'm running low on stones now. There's a secret spot where I usually get them from, but I sprained my ankle, so I can't go myself.")
-}
-text gText_Quest_Rockcollector_CanITrustYou{
-    format("Can I trust you? Head down there and grab one of each stone, and bring them back to me. That should hold me over until my ankle heals...")
-}
-text gText_Quest_Rockcollector_IfYouGoBehind{
-    format("If you go behind the terminal in CurenoPort, you can get underground and there are stones down there already.")
-}
-text gText_Quest_Rockcollector_Awesome{
-    format("All right, great job finding this {STR_VAR_1}.")
-}
-text gText_Quest_Rockcollector_WowTheseStones{
-    format("Wow, these stones are great!")
-}
-text gText_Quest_Rockcollector_OnlyXMore{
-    format("I think you've got... {STR_VAR_1} to go!")
-}
-text gText_Quest_Rockcollector_HowGoes{
-    format("Looks like you haven't managed to get down there and grab some stones!")
-}
-text gText_Quest_Rockcollector_Huh{
-    format("Huh, there's no dust on this stone. Did it really come from underground?")
-}
-text gText_Quest_Rockcollector_YouKnowIf{
-    format("You know, if you go back down there tomorrow, you might find more stones...")
-}
-text gText_Quest_Rockcollector_AreYouSure{
-    format("Did you bring me some Evolution Stones? Are you sure I can take them??")
-}
-
-text gText_Quest_Rockcollector_OhOkayWell{
-    format("Oh okay, well let me know when you've got stones for me!")
-}
-text gText_Quest_Rockcollector_YouveAlready{
-    format("You've already been down there? Well, that's embarassing... I should hide the entrance better. Do you still have the stones? Can I have them instead?")
-}
-text gText_Quest_Rockcollector_OkayIveGot{
-    format("Okay, I've got one of each stone.")
-}
-text gText_Quest_Rockcollector_ThankYouSoMuch{
-    format("Thank you so much for your help! I'm not a Trainer, but somebody left this on the trolley recently. I guess you can use it!")
-}
-text gText_Quest_Rockcollector_KeepOnRiding{
-    format("Keep on riding those trolleys, {PLAYER}!")
-}

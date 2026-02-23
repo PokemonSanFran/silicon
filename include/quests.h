@@ -266,5 +266,6 @@ bool8 IsQuestRewardState(s32 questId);
 bool8 IsQuestInactiveState(s32 questId);
 bool8 IsQuestActiveState(s32 questId);
 bool8 IsQuestCompletedState(s32 questId);
+u32 Quest_GetSubquestSpriteEntityId(enum QuestIdList parentQuest, enum SubQuestDefines questId);
 
 #endif // GUARD_QUESTS_H

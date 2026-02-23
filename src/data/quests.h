@@ -2583,13 +2583,44 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     [QUEST_ROCKCOLLECTOR] =
     {
         .name = COMPOUND_STRING("Rock Collector"),
-        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Use the {STR_VAR_1} to bring Trolleyworker some evolution items to help keep his promotion going."),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Use the {STR_VAR_1} to find a {STR_VAR_2}. Give them to Trolleyworker help keep the promotion going!"),
         .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Trolleyworker lets you keep the {STR_VAR_1}. How many different items can be dug up?"),
         .map = gText_CapheCity,
         .sprite = ITEM_QUEST_ROCKCOLLECTOR_KIT,
         .spritetype = QUEST_SPRITE_TYPE_ITEM,
         .subquests = sRockCollector_Sub,
-        .numSubquests = QUEST_ROCKCOLLECTOR_SUB_COUNT
+        .numSubquests = QUEST_ROCKCOLLECTOR_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_ROCKCOLLECTOR_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_RockCollector,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_ROCKCOLLECTOR_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_RockCollector,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_ROCKCOLLECTOR_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_RockCollector,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_ROCKCOLLECTOR_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_RockCollector,
+                side_quest_map(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_HANG20] =
     {

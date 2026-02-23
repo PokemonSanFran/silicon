@@ -5,14 +5,14 @@ script CapheCity_TrolleyHQ_Manager_Quest_Script
 {
     lock
     faceplayer
-    goto_if_quest_complete(QUEST_ROCKCOLLECTOR,NULL)
-    goto_if_quest_reward(QUEST_ROCKCOLLECTOR,NULL)
-    goto_if_quest_active(QUEST_ROCKCOLLECTOR,NULL)
+    goto_if_quest_complete(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Dialogue_Complete)
+    goto_if_quest_reward(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Dialogue_Reward)
+    goto_if_quest_active(QUEST_ROCKCOLLECTOR,Quest_Rockcollector_Dialogue_Active)
 
     callnative(Script_Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector)
     if (var(VAR_RESULT))
     {
-        goto(NULL)
+        goto(Quest_Rockcollector_Dialogue_Start)
     }
 
     goto_if_quest_complete(QUEST_BETWEENASTONEANDAHARDPLACE,Quest_BetweenAStoneAndAHardPlace_Dialogue_Complete)
