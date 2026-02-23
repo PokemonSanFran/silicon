@@ -2071,6 +2071,8 @@ static void CropQuestIcons(u32 spriteId)
 
 static u32 GetQuestSpriteType(s32 questId)
 {
+    u32 parentQuest = sStateDataPtr->parentQuest;
+
     switch (questId)
     {
         case LIST_CANCEL:
@@ -2080,7 +2082,10 @@ static u32 GetQuestSpriteType(s32 questId)
             return QUEST_SPRITE_TYPE_EMPTY;
             break;
         default:
-            return sSideQuests[questId].spritetype;
+            if (GetCurrentQuestSubquestState())
+                return sSideQuests[parentQuest].subquests[questId].spritetype;
+            else
+                return sSideQuests[questId].spritetype;
             break;
     }
 }
@@ -2104,6 +2109,11 @@ static u32 GetQuestSpriteEntityId(s32 questId)
                 return sSideQuests[questId].sprite;
             break;
     }
+}
+
+u32 Quest_GetSubquestSpriteEntityId(enum QuestIdList parentQuest, enum SubQuestDefines questId)
+{
+    return sSideQuests[parentQuest].subquests[questId].sprite;
 }
 
 static const u8* const progressIndicatorLUT[] =
