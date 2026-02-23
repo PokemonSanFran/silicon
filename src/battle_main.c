@@ -1780,7 +1780,7 @@ static void CB2_HandleStartMultiBattle(void)
 // start merrp battle debug
 void Debug_EndBattleInstantly(void)
 {
-#if NDEBUG
+#ifdef NDEBUG
         return;
 #endif
 
@@ -5567,7 +5567,7 @@ static void HandleEndTurn_BattleWon(void)
 
 static void FaintPartyDuringDebug(void)
 {
-#if NDEBUG
+#ifdef NDEBUG
         return;
 #endif
 
