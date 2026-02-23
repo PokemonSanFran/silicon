@@ -84,6 +84,7 @@
 #include "constants/siliconStarter.h" @ siliconStarter
 #include "constants/rtc.h" @ siliconDNS
 #include "constants/ui_adventure_guide.h" @ adventureGuide
+#include "constants/ui_map_system.h"
 @ End siliconMerge
 #include "constants/speaker_names.h"
 	.include "asm/macros.inc"
@@ -1224,6 +1225,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/infinite_spray.inc"
 .include "data/scripts/hiddengrotto.inc"
 .include "data/scripts/taxi.inc"
+.include "data/scripts/trolley.inc"
 .include "data/scripts/run_behavior.inc"
 .include "data/scripts/ferry.inc"
 .include "data/scripts/mutual_aid.inc"
@@ -1237,6 +1239,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/fishing.inc"
 .include "data/scripts/surprise_trade.inc" @ surpriseTrade
 .include "data/scripts/save.inc" @ autoSave
+.include "data/scripts/phenomenon.inc" @ autoSave
 
 ## SILICON CUTSCENES
 .include "data/cutscenes/prologue.inc"
@@ -1644,5 +1647,25 @@ EventScript_VsSeekerChargingDone::
 .include "data/maps/ZenzuIsland_Restaurant/scripts.inc"
 .include "data/maps/ZenzuIsland_SkillLibrary/scripts.inc"
 @ End siliconMerge
+
+	.include "data/maps/CapheCommunityGarden/scripts.inc"
+
+	.include "data/maps/Arantraz_Prison/scripts.inc"
+
+	.include "data/maps/GlavezHeights/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymC/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymB/scripts.inc"
+
+	.include "data/maps/HalerbaCity_GymA/scripts.inc"
+
+	.include "data/maps/NavalBaseExterior/scripts.inc"
+
+	.include "data/maps/ChapelOfChimes_Interior/scripts.inc"
+
+	.include "data/maps/ChapelOfChimes_End/scripts.inc"
+
+	.include "data/maps/Route16_Grotto/scripts.inc"
 	.include "data/scripts/battle_frontier.inc"
 	.include "data/scripts/apricorn_tree.inc"

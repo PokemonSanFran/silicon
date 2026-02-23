@@ -26,6 +26,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
+#include "phenomenon.h" // phenomenon
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokeball.h"
@@ -544,6 +545,15 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_MagnusWalking,         OBJ_EVENT_PAL_TAG_MAGNUS},
     {gObjectEventPal_NerieneWalking,        OBJ_EVENT_PAL_TAG_NERIENE},
     {gObjectEventPal_ShinzoWalking,         OBJ_EVENT_PAL_TAG_SHINZO},
+    {gObjectEventPal_Comrade_1,            OBJ_EVENT_PAL_TAG_COMRADE_1},
+    {gObjectEventPal_Comrade_2,            OBJ_EVENT_PAL_TAG_COMRADE_2},
+    {gObjectEventPal_Comrade_3,            OBJ_EVENT_PAL_TAG_COMRADE_3},
+    {gObjectEventPal_Comrade_4,            OBJ_EVENT_PAL_TAG_COMRADE_4},
+    {gObjectEventPal_Comrade_5,            OBJ_EVENT_PAL_TAG_COMRADE_5},
+    {gObjectEventPal_Comrade_6,            OBJ_EVENT_PAL_TAG_COMRADE_6},
+    {gObjectEventPal_Comrade_7,            OBJ_EVENT_PAL_TAG_COMRADE_7},
+    {gObjectEventPal_Comrade_8,            OBJ_EVENT_PAL_TAG_COMRADE_8},
+    {gObjectEventPal_Comrade_9,            OBJ_EVENT_PAL_TAG_COMRADE_9},
     // End silicon
 #if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
@@ -6732,6 +6742,8 @@ static u8 TryUpdateMovementActionOnStairs(struct ObjectEvent *objectEvent, u8 mo
 {
     if (objectEvent->isPlayer || objectEvent->localId == OBJ_EVENT_ID_FOLLOWER || objectEvent->localId == OBJ_EVENT_ID_NPC_FOLLOWER)
         return movementActionId;    // handled separately
+
+    CheckForNPCPhenomenonFromObjectEvent(objectEvent); // phenomenon
 
     if (!ObjectMovingOnRockStairs(objectEvent, objectEvent->movementDirection))
         return movementActionId;

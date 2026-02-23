@@ -699,6 +699,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
     // Start bootSequence
     else if (JOY_HELD(DEBUG_START) == DEBUG_START)
     {
+        StartTimer1();
         SetMainCallback2(CB2_GoToDebugStartScreen);
     }
     // End bootSequence
@@ -798,6 +799,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
         // Start bootSequence
         SetCallbackFromSaveStatus();
+        StartTimer1();
         //SetMainCallback2(CB2_GoToMainMenu);
         // End bootSequence
     }
@@ -811,6 +813,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
     else if (JOY_HELD(DEBUG_START) == DEBUG_START)
     {
         SetMainCallback2(CB2_GoToDebugStartScreen);
+        StartTimer1();
     }
 #endif
         // End bootSequence

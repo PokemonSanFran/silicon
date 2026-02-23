@@ -135,13 +135,7 @@
       "flag": "FLAG_QUEST_BODEGA_RESCUE6"
     }
   ],
-  "warp_events": [
-
-  ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
 }

@@ -79,7 +79,9 @@
     "UltraJohto",
     "UltraGalar",
     "UltraKanto",
-    "Presto_Barge_1"
+    "Presto_Barge_1",
+    "Arantraz_Prison",
+    "GlavezHeights"
   ],
   "gMapGroup_PsfTownsAndRoutes": [
     "CuconuTown",
@@ -173,7 +175,9 @@
     "Presto_Barge_3",
     "Arriba_CarInterior",
     "PopidoraPier_Arcade",
-    "GlavezHill_Taxiunion"
+    "GlavezHill_Taxiunion",
+    "CapheCommunityGarden",
+    "NavalBaseExterior"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -292,7 +296,10 @@
     "HalerbaCity_PokemonCenter_1F",
     "HalerbaCity_Pannen_House",
     "HalerbaCity_Gym",
-    "Gldntepark_Helebra_Research"
+    "Gldntepark_Helebra_Research",
+    "HalerbaCity_GymA",
+    "HalerbaCity_GymB",
+    "HalerbaCity_GymC"
   ],
   "gMapGroup_IndoorQiuVillage": [
     "QiuVillage_Restaurant",
@@ -406,7 +413,8 @@
     "Route12_Grotto",
     "Route9_Grotto",
     "Route5_Grotto",
-    "Route3_Grotto"
+    "Route3_Grotto",
+    "Route16_Grotto"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -756,7 +764,9 @@
     "MeteorFalls_StevensCave",
     "SharpriseStadium_Construction",
     "HalerbaWilds",
-    "HalerbaWilds_Spring"
+    "HalerbaWilds_Spring",
+    "ChapelOfChimes_Interior",
+    "ChapelOfChimes_End"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

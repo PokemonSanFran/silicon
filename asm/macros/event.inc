@@ -2697,6 +2697,7 @@
 	@ Start siliconMerge
     @ Marks the beginning of a cutscene and skips cutscne if GAME_OPTION_CUTSCENE_SKIP is enabled
     .macro startcutscene ID:req
+    hidewaypoint
     setvar VAR_CUTSCENE_SKIP, \ID
     specialvar VAR_RESULT,ShouldSkipCutscene
     compare VAR_RESULT, 0
@@ -2705,6 +2706,7 @@
 
     @ Resets VAR_CUTSCENE_SKIP to its default value
     .macro endcutscene
+    showwaypoint
     special ResetCutsceneStatus
     .endm
 
@@ -3488,12 +3490,33 @@
 	.2byte \battlePartner
 	.endm
 
+    @ Start phenomenon
+    .macro setphenomenondata
+    .byte SCR_OP_PHENOMENON_DATA
+    .endm
+    @ End phenomenon
+
     @ Start adventureGuide
 	.macro openadventureguide guide:req
     setvar VAR_ADVENTURE_GUIDE_TO_OPEN, \guide
     call RunAdventureGuideScript
 	.endm
     @ End adventureGuide
+
+	@ Overworld Waypoint Macro - Hide Waypoint Sprite
+	.macro hidewaypoint
+	callnative HideOWWaypointArrow
+	.endm
+
+	@ Overworld Waypoint Macro - Show Waypoint Sprite
+	.macro showwaypoint
+	callnative ShowOWWaypointArrow
+	.endm
+
+	@ Overworld Waypoint Macro - Toggle Waypoint Sprite
+	.macro togglewaypoint
+	callnative ToggleOWWaypointArrow
+	.endm
 
 	@ Manually buffer a string as the speaker's name for namebox.
 	@ The next shown message/msgbox will include a namebox, if the provided string is not NULL.

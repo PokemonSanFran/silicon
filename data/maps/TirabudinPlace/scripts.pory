@@ -1,4 +1,8 @@
 mapscripts TirabudinPlace_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(AndWeMarchOn_ObjectVisibility_Script)
         call(Quest_LastMusicVenue_HidePublicDrummers)

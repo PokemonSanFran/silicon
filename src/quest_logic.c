@@ -41,6 +41,7 @@
 #include "battle_scripts.h"
 #include "quests.h"
 #include "constants/trainer_types.h"
+#include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 
 bool32 HasPlayerJoinedTheTide(void)
@@ -58,19 +59,14 @@ u32 GetCurrentMap(void)
 
 u16 Quest_Generic_CountRemainingSubquests(u16 relevantQuest)
 {
-    u16 numRemainingQuests = sSideQuests[relevantQuest].numSubquests;
-    u16 totalNumSubquests = numRemainingQuests;
-    u8 currentSubQuest;
+    u32 totalSubquests = sSideQuests[relevantQuest].numSubquests;
+    u32 completed = 0;
 
-    for (currentSubQuest = 0; currentSubQuest < totalNumSubquests; currentSubQuest++)
-    {
+    for (u32 currentSubQuest = 0; currentSubQuest < totalSubquests; currentSubQuest++)
         if (QuestMenu_GetSetSubquestState(relevantQuest, FLAG_GET_COMPLETED, currentSubQuest))
-        {
-            numRemainingQuests--;
-        }
-    }
+            completed++;
 
-    return numRemainingQuests;
+    return (totalSubquests - completed);
 }
 
 u32 Quest_Generic_CountAndBufferRemainingSubquests(u16 relevantQuest)
@@ -1144,22 +1140,19 @@ bool8 Quest_Persuasivepassenger_ShouldPlayThirdDriver(void)
 }
 
 u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void){
-    bool8 questActive = QuestMenu_GetSetQuestState(QUEST_PERSUASIVEPASSENGER,FLAG_GET_ACTIVE);
-    u16 questResult = 99;
+    if(!QuestMenu_GetSetQuestState(QUEST_PERSUASIVEPASSENGER,FLAG_GET_ACTIVE))
+        return NO_EXCEPTION;
 
-    if (questActive == TRUE){
+    if (Quest_Persuasivepassenger_ShouldPlayFirstDriver())
+        return EXCEPTION_3;
 
-        if (Quest_Persuasivepassenger_ShouldPlayFirstDriver())
-            questResult = 3;
+    if (Quest_Persuasivepassenger_ShouldPlaySecondDriver())
+        return EXCEPTION_2;
 
-        if (Quest_Persuasivepassenger_ShouldPlaySecondDriver())
-            questResult = 2;
+    if (Quest_Persuasivepassenger_ShouldPlayThirdDriver())
+        return EXCEPTION_1;
 
-        if (Quest_Persuasivepassenger_ShouldPlayThirdDriver())
-            questResult = 1;
-
-    }
-    return questResult;
+    return NO_EXCEPTION;
 }
 
 bool8 Quest_Persuasivepassenger_CheckNeededItems(void){
@@ -2337,4 +2330,59 @@ void ShowGarbodor(void)
     SetMonData(mon,MON_DATA_HELD_ITEM,&item);
 
     ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+// ***********************************************************************
+// Quest: Rabies Outbreak
+// ***********************************************************************
+
+void CountDefeatedRabiesMon(void)
+{
+    /*
+       Iterate every spot in the enemy's party
+       If one is Glameow AND you're in GlavezHill AND its not a Trainer battle, then increment the defeated Glameow count by one
+       If the Glameow count is > 9, AND the Rabies Outbreak quest is active  change the Rabies Outbreak quest to Reward state
+   */
+    if (GetCurrentMap() != QUEST_RABIES_OUTBREAK_MAP)
+        return;
+
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return;
+
+    u32 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT);
+
+    for (u32 enemyPartyIndex = 0; enemyPartyIndex < PARTY_SIZE; enemyPartyIndex++)
+    {
+        if (GetMonData(&gEnemyParty[enemyPartyIndex],MON_DATA_SPECIES) != QUEST_RABIES_OUTBREAK_SPECIES)
+            continue;
+
+        defeatedGlameowCount++;
+    }
+
+    VarSet(VAR_DEFEATED_GLAMEOW_COUNT,defeatedGlameowCount);
+
+    if (!QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_GET_ACTIVE))
+        return;
+
+    if (defeatedGlameowCount < QUEST_RABIES_OUTBREAK_COUNT)
+        return;
+
+    QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_SET_REWARD);
+    QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_REMOVE_ACTIVE);
+}
+
+void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
+{
+    bool32 rabiesPokerus = GetBoxMonData(boxMon, MON_DATA_POKERUS);
+
+    if (rabiesPokerus == TRUE)
+        return;
+
+    if (GetCurrentMap() != QUEST_RABIES_OUTBREAK_MAP)
+        return;
+
+    if (species != QUEST_RABIES_OUTBREAK_SPECIES)
+        return;
+
+    rabiesPokerus = Random() % 2;
+    SetBoxMonData(boxMon, MON_DATA_POKERUS, &rabiesPokerus);
 }

@@ -22,6 +22,7 @@ void IncrementFogVariable(void);
 void SetFogVariableAfterLoss(void);
 bool32 ShouldWildBattleBeFog(void); // fogBattle
 u8* PrintUnknownLevel(u32 lvl, u32 battler, u8* text);
+u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void);
 
 bool32 ShouldAskUnhoused(void);
 const u8* ReturnBattleScriptCantUseItem(void);
@@ -37,4 +38,8 @@ void DebugQuest_VSDeoxys(u8);
 void DebugQuest_RPS(u8);
 void DebugQuest_DrugHelmetTest(u8);
 void DebugQuest_RestoreTirabudinGym(u8);
+u32 exponent(u32 y, u32 x);
+void CountDefeatedRabiesMon(void);
+void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
+
 #endif //GUARD_QUESTLOGIC_H

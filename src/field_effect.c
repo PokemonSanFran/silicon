@@ -42,6 +42,7 @@
 #include "qol_field_moves.h" // qol_field_moves
 #include "constants/map_types.h"
 #include "options_music.h" // siliconMerge
+#include "phenomenon.h" // phenomenon
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
@@ -4229,6 +4230,11 @@ static void Task_MoveDeoxysRock(u8 taskId)
 static void FieldCallback_UseArriba(void);
 static void Task_UseArriba(void);
 static void FieldCallback_ArribaIntoMap(void);
+
+void ReturnToFieldFromRegionMapCheapTaxi(void)
+{
+    SetMainCallback2(CB2_ReturnToFieldContinueScript);
+}
 
 void ReturnToFieldFromRegionMapWarpSelect(void)
 {

@@ -27,7 +27,7 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_OLIVER",
-      "x": 10,
+      "x": 15,
       "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -40,7 +40,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
-      "x": 5,
+      "x": 10,
       "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -53,7 +53,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
-      "x": 10,
+      "x": 15,
       "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -66,7 +66,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY_1",
-      "x": 14,
+      "x": 19,
       "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -79,7 +79,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ADAORA",
-      "x": 13,
+      "x": 18,
       "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -92,7 +92,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BALL_CUSHION",
-      "x": 16,
+      "x": 21,
       "y": 0,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
@@ -105,7 +105,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
-      "x": 1,
+      "x": 6,
       "y": 17,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -118,7 +118,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 3,
+      "x": 8,
       "y": 0,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -131,7 +131,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
-      "x": 9,
+      "x": 14,
       "y": 0,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -144,7 +144,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
-      "x": 8,
+      "x": 13,
       "y": 0,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -157,7 +157,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
-      "x": 9,
+      "x": 14,
       "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -167,60 +167,86 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "BreedingCenter_Script_StartEggManagement",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 5,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_CHASILLA_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 5,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_CHASILLA_2",
+      "script": "BerryTreeScript",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 10,
+      "x": 15,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_GYM",
       "dest_warp_id": "0"
     },
     {
-      "x": 7,
+      "x": 12,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_BREEDING_CENTER",
       "dest_warp_id": "0"
     },
     {
-      "x": 17,
+      "x": 22,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_ICE_CREAM_SHOP",
       "dest_warp_id": "0"
     },
     {
-      "x": 18,
+      "x": 23,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_RESEARCH",
       "dest_warp_id": "0"
     },
     {
-      "x": 17,
+      "x": 22,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_UNIVERSITY",
       "dest_warp_id": "0"
     },
     {
-      "x": 16,
+      "x": 21,
       "y": 0,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_UNIVERSITY",
       "dest_warp_id": "2"
     },
     {
-      "x": 1,
+      "x": 6,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_POKEMON_CENTER_1F",
       "dest_warp_id": "0"
     },
     {
-      "x": 9,
+      "x": 14,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
@@ -230,7 +256,7 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 10,
+      "x": 15,
       "y": 9,
       "elevation": 0,
       "var": "VAR_CHASILLA_STATE",
@@ -238,7 +264,5 @@
       "script": "swagbag2_OliverWalkOutGym_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
