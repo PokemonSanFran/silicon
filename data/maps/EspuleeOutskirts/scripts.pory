@@ -7,6 +7,10 @@ const FLAG_HIDE_LIIDIA = FLAG_TEMP_4
 const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
 
 mapscripts EspuleeOutskirts_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_Restoreespuleeoutskirts_HideImelda_Script)
         call(Quest_Restoreespuleeoutskirts_MoveImelda_Script)

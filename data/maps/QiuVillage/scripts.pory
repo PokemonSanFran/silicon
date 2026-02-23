@@ -1,4 +1,8 @@
 mapscripts QiuVillage_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(ImIn_HideObject_OutsideHouse_Script)
         call(Quest_ReturnDoll_HideObject_Script)

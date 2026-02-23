@@ -4231,6 +4231,11 @@ static void FieldCallback_UseArriba(void);
 static void Task_UseArriba(void);
 static void FieldCallback_ArribaIntoMap(void);
 
+void ReturnToFieldFromRegionMapCheapTaxi(void)
+{
+    SetMainCallback2(CB2_ReturnToFieldContinueScript);
+}
+
 void ReturnToFieldFromRegionMapWarpSelect(void)
 {
     SetMainCallback2(CB2_ReturnToField);

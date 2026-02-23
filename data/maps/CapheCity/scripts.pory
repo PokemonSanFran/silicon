@@ -1,4 +1,8 @@
 mapscripts CapheCity_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(EnterAdaora_ObjectCleanUp_Script)
         call(Quest_Manofmanyhats_Liidia_Attendant_Visibility_Script)

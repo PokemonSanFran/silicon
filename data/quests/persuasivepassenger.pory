@@ -14,10 +14,7 @@ script Quest_Persuasivepassenger_CEO_Visbility_Script{
 script Quest_Persuasivepassenger_InteractLeader_Script{
     lock
     faceplayer
-    specialvar(VAR_RESULT,Quest_Taxicabturnaround_CheckReadyForNext)
-    if (var(VAR_RESULT)){
-        goto(Quest_Persuasivepassenger_Event_Script)
-    }
+	goto(Quest_Persuasivepassenger_Event_Script)
 
     msgbox(gText_Persuasivepassenger_WelcomeTo,MSGBOX_NPC)
     end
@@ -27,7 +24,12 @@ script Quest_Persuasivepassenger_Event_Script{
     goto_if_quest_complete(QUEST_PERSUASIVEPASSENGER,Quest_Persuasivepassenger_Complete_Dialogue)
     goto_if_quest_reward(QUEST_PERSUASIVEPASSENGER,Quest_Persuasivepassenger_Reward_Dialogue)
     goto_if_quest_active(QUEST_PERSUASIVEPASSENGER,Quest_Persuasivepassenger_Active_Dialogue)
+
+    specialvar(VAR_RESULT,Quest_Taxicabturnaround_CheckReadyForNext)
+    if (var(VAR_RESULT)){
     goto(Quest_Persuasivepassenger_StartQuest_Script)
+	}
+	return
 }
 
 script Quest_Persuasivepassenger_StartQuest_Script{
@@ -47,19 +49,10 @@ script Quest_Persuasivepassenger_Active_Dialogue{
     switch(var(VAR_TEMP_1)){
         case 3:
             msgbox(gText_Persuasivepassenger_TheFirstDriver)
-            msgbox(gText_Debug_WarpArriba)
-        fadeblackandsetremovewarpfadeflag
-            warp(MAP_ARRIBA_CAR_INTERIOR,1,3)
         case 2:
             msgbox(gText_Persuasivepassenger_TheNextDriver)
-            msgbox(gText_Debug_WarpArriba)
-        fadeblackandsetremovewarpfadeflag
-            warp(MAP_ARRIBA_CAR_INTERIOR,10,3)
         default:
             msgbox(gText_Persuasivepassenger_TheresAnother)
-            msgbox(gText_Debug_WarpArriba)
-        fadeblackandsetremovewarpfadeflag
-            warp(MAP_ARRIBA_CAR_INTERIOR,20,15)
     }
     //PSF TODO remove debug
     closemessage
@@ -104,9 +97,11 @@ script Quest_Persuasivepassenger_Driver1_Event_Script{
     }
     msgbox(gText_Persuasivepassenger_WereHere,,SPEAKER_ARRIBA_DRIVER1)
     closemessage
-    //special(CompleteArribaDrive)
-        fadeblackandsetremovewarpfadeflag
-    warp(MAP_GLAVEZ_HILL,0)
+	fadeblackandsetremovewarpfadeflag
+	callnative(WarpUberAfterQuestException)
+	waitstate
+	release
+	end
 }
 
 script Quest_Persuasivepassenger_DebugDriver1{
@@ -164,9 +159,12 @@ script Quest_Persuasivepassenger_Driver2_Event_Script{
 
 script Quest_Persuasivepassenger_Driver2_End_Dialogue{
     msgbox(gText_Persuasivepassenger_WereAtTheSpot,,SPEAKER_ARRIBA_DRIVER2)
-        //special(CompleteArribaDrive)
-        fadeblackandsetremovewarpfadeflag
-        warp(MAP_HALAI_ISLAND,0)
+	closemessage
+	fadeblackandsetremovewarpfadeflag
+	callnative(WarpUberAfterQuestException)
+	waitstate
+	release
+	end
 }
 
 script Quest_Persuasivepassenger_Driver2_DefeatedLandlord_Dialogue{
@@ -242,8 +240,11 @@ script Quest_Persuasivepassenger_Driver3_Event_Script{
         msgbox(gText_Persuasivepassenger_WaitASecondHowDid,,SPEAKER_ARRIBA_DRIVER3)
     }
     closemessage
-        fadeblackandsetremovewarpfadeflag
+	fadeblackandsetremovewarpfadeflag
     warpsilent(MAP_ARRIBA_B1F,5,5)
+	waitstate
+	release
+	end
 }
 
 script Quest_Persuasivepassenger_WokeUp_Dialogue{
@@ -597,9 +598,6 @@ text gText_Persuasivepassenger_ThanksAgain{
 }
 text gText_Persuasivepassenger_WatchYourBack{
     format("Watch your back...")
-}
-text gText_Debug_WarpArriba{
-    format("but we haven't built the arriba menu yet, so we'll warp you now.")
 }
 text gText_Debug_GiveItems{
     format("your bag now has what he needs.")

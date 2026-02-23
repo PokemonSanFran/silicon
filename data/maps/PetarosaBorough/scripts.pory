@@ -1,4 +1,8 @@
 mapscripts PetarosaBorough_MapScripts {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_STORYLINE_STATE, STORY_EAST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
                 FLAG_VISITED_PETAROSA_BOROUGH, FALSE: Generic_Mappreview

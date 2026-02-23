@@ -1,5 +1,8 @@
 mapscripts CresaltaVista_MapScripts {
-
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(BeachBattle_ObjectVisibility_Script)
         call(CutePokemon_Script_ControlMelissaCresaltaOutsideVisibility)
