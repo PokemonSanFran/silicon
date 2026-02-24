@@ -62,5 +62,6 @@ void CountDefeatedRabiesMon(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
 void Quest_SmoothieCrafting_BufferRecipe(void);
 void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void);
+u32 Quest_BodegaBurnout_CountRemainingSubquests(void);
 
 #endif //GUARD_QUESTLOGIC_H

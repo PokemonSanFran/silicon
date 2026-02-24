@@ -1,0 +1,307 @@
+//Quest_Bodegaburnout_
+
+const DELIVER = 0
+const RESCUE = 1
+const CATCH =2
+const CATCH_STRONG = 3
+const CATCH_COLD  = 4
+const CATCH_SMART = 5
+const CATCH_FAIRY = 6
+
+script Quest_Bodegaburnout_Debug_Script{
+    msgbox(format("here are some pokemon to clear the quests with. there might be some in your boxes too."))
+        givemon(SPECIES_ARTICUNO,100,100)
+        givemon(SPECIES_BEARTIC,100,100)
+        givemon(SPECIES_METAGROSS,100,100,,NATURE_CALM)
+        givemon(SPECIES_ALAKAZAM,100,100,,NATURE_CALM)
+        givemon(SPECIES_MACHAMP,100,100)
+        givemon(SPECIES_MACHAMP,100,100)
+        givemon(SPECIES_CLEFAIRY,100,100)
+return
+}
+
+script Quest_Bodegaburnout_EliteFour_Dialogue{
+    msgbox(format("go talk to a bunch of different pokemart workers around the region."),MSGBOX_NPC,SPEAKER_ELEANOR)
+
+    returnqueststate(QUEST_BODEGABURNOUT)
+    if(var(VAR_RESULT) == QUEST_MENU_UNLOCK_QUEST){
+        call(Quest_Bodegaburnout_Debug_Script)
+        startquest(QUEST_BODEGABURNOUT)
+    }
+}
+
+script Quest_Bodegaburnout_Clerk_Discussion_Script{
+    msgbox(format("Oh, I heard you'd be coming. You're {PLAYER}, right?"))
+    call(Quest_Bodegaburnout_LoadRequest_Script)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_CheckSubquestState_Script{
+    specialvar(VAR_0x8008,Quest_Bodegaburnout_IsSubquestComplete)
+    returnqueststate(QUEST_BODEGABURNOUT)
+
+    if ((var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST) && (!var(VAR_0x8008))) {
+        goto(Quest_Bodegaburnout_Clerk_Discussion_Script)
+    }
+    return
+}
+
+script Quest_Bodegaburnout_LoadRequest_Script{
+    special(Quest_Bodegaburnout_LoadRequestText)
+    specialvar(VAR_RESULT,Quest_Bodegaburnout_GetQuestType)
+
+        switch(var(VAR_RESULT)){
+            case DELIVER:
+                goto(Quest_Bodegaburnout_Deliver_Dialogue)
+            case RESCUE:
+                goto(Quest_Bodegaburnout_Rescue_Dialogue)
+            default:
+                goto(Quest_Bodegaburnout_Catch_Dialogue)
+        }
+}
+
+script Quest_Bodegaburnout_Deliver_Dialogue{
+   msgbox(format("Can you deliever this to {STR_VAR_1}? They're on {STR_VAR_2}."))
+
+    specialvar(VAR_RESULT,Quest_Bodegaburnout_CheckLocationAndMatchItem)
+    if (!var(VAR_RESULT)){
+        callstd(STD_OBTAIN_ITEM)
+    }
+    else{
+        msgbox(format("Huh? Oh right, I gave you the package already!"))
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Rescue_Dialogue{
+    msgbox(format("Can you help us find {STR_VAR_1}?\NWe sent them over to {STR_VAR_2} but they haven't returned..."))
+    special(Quest_Bodegaburnout_ClearRescueFlag)
+    closemessage
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Catch_Dialogue{
+    msgbox(format("We need a {STR_VAR_1} {STR_VAR_3} to help us {STR_VAR_2}.\NDo you have one?"),MSGBOX_YESNO)
+
+    if (var(VAR_RESULT) == NO){
+        goto(Quest_Bodegaburnout_NoRefusePokemon_Dialogue)
+    }else{
+        goto(Quest_Bodegaburnout_EvaluatePokemon_Script)
+    }
+}
+
+script Quest_Bodegaburnout_NoRefusePokemon_Dialogue{
+    msgbox(format("Come back when you do! Or when you need anything, of course."))
+    release
+    end
+}
+
+script Quest_Bodegaburnout_EvaluatePokemon_Script{
+    special(ChoosePartyMon)
+    waitstate
+
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
+        goto(Quest_Bodegaburnout_NoRefusePokemon_Dialogue)
+    }
+
+    specialvar(VAR_RESULT,Quest_Bodegaburnout_CheckRequiredPokemon)
+    if (!var(VAR_RESULT)){
+        goto(Quest_Bodegaburnout_WrongPokemon_Dialogue)
+    }
+
+    msgbox(format("Are you sure you're okay giving us this mon?"),MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO){
+        goto(Quest_Bodegaburnout_NoRefusePokemon_Dialogue)
+    }
+
+    special(HasEnoughMonsForDoubleBattle)
+    if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS){
+        goto(Quest_Bodegaburnout_NotEnough_Dialogue)
+    }
+
+    goto(Quest_Bodegaburnout_TakeMonMarkSubquest_Script)
+}
+
+script Quest_Bodegaburnout_WrongPokemon_Dialogue{
+    msgbox(format("You know, I don't think that mon will work."))
+    closemessage
+    release
+    end
+}
+
+script Quest_Bodegaburnout_NotEnough_Dialogue{
+    msgbox(format("I can't take that! Its your last Mon!"))
+    closemessage
+    release
+    end
+}
+
+script Quest_Bodegaburnout_TakeMonMarkSubquest_Script{
+    special(DeleteChosenPartyMon)
+    special(Quest_Bodegaburnout_Catch_MarkSubquestComplete)
+    call(Quest_Bodegaburnout_CheckNextStage_Script)
+    call(Quest_Bodegaburnout_CheckReward_Script)
+    closemessage
+    release
+    end
+}
+
+script Quest_Bodegaburnout_CheckNextStage_Script{
+    specialvar(VAR_RESULT,Quest_Bodegaburnout_CheckReadyForNext)
+    if (var(VAR_RESULT)){
+        returnqueststate(QUEST_WAREHOUSEWARFARE)
+        if (var(VAR_RESULT) < QUEST_MENU_SET_ACTIVE){
+            goto(Quest_Warehousewarfare_CallPlayer_Dialogue)
+        }
+    }
+    return
+}
+
+script Quest_Bodegaburnout_CheckReward_Script{
+    specialvar(VAR_RESULT,Quest_Bodegaburnout_CountRemainingSubquests)
+
+    if (var(VAR_RESULT) == 0){
+        questmenu(QUEST_MENU_SET_REWARD,QUEST_BODEGABURNOUT)
+    }
+    return
+}
+
+script Quest_Bodegaburnout_Reward_Dialogue{
+    msgbox(format("Hey, we all noticed you helping out, so we got you this."))
+    closemessage
+    giveitem(ITEM_OVAL_CHARM,1)
+    msgbox(format("You're a real one!"))
+    completequest(QUEST_BODEGABURNOUT)
+    return
+}
+
+script Quest_Bodegaburnout_Warehousewarfare_Dialogue{
+    msgbox(format("Word has getting around about you helping out. Thanks so much! You should meet with the leader of the union in CresaltaVista."))
+    return
+}
+
+// ***********************************************************************
+// Related NPCs
+// ***********************************************************************
+
+script Quest_Bodegaburnout_DeliveryA_Dialogue{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_1)
+    if (var(VAR_RESULT)){
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+    }else{
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
+        call(Quest_Bodegaburnout_CheckReward_Script)
+    }
+    end
+}
+
+script Quest_Bodegaburnout_DeliveryB_Dialogue{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_2)
+    if (var(VAR_RESULT)){
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+    }else{
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
+        call(Quest_Bodegaburnout_CheckReward_Script)
+    }
+    end
+}
+
+script Quest_Bodegaburnout_DeliveryC_Dialogue{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_3)
+    if (var(VAR_RESULT)){
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+    }else{
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
+        call(Quest_Bodegaburnout_CheckReward_Script)
+    }
+    end
+}
+
+script Quest_Bodegaburnout_DeliveryD_Dialogue{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_4)
+    if (var(VAR_RESULT)){
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+    }else{
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
+        call(Quest_Bodegaburnout_CheckReward_Script)
+    }
+    end
+}
+
+script Quest_Bodegaburnout_DeliveryE_Dialogue{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_5)
+    if (var(VAR_RESULT)){
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+    }else{
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
+        call(Quest_Bodegaburnout_CheckReward_Script)
+    }
+    end
+}
+
+script Quest_Bodegaburnout_DeliveryF_Dialogue{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_6)
+    if (var(VAR_RESULT)){
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+    }else{
+        msgbox(format(""),MSGBOX_AUTOCLOSE)
+        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
+        call(Quest_Bodegaburnout_CheckReward_Script)
+    }
+    end
+}
+
+script Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script{
+    fadescreen(FADE_TO_BLACK)
+    removeobject(VAR_LAST_TALKED)
+    fadescreen(FADE_FROM_BLACK)
+    special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
+    call(Quest_Bodegaburnout_CheckReward_Script)
+    return
+}
+
+script Quest_Bodegaburnout_RescueA_Dialogue{
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
+    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+    release
+    end
+}
+script Quest_Bodegaburnout_RescueB_Dialogue{
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
+    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+    release
+    end
+}
+script Quest_Bodegaburnout_RescueC_Dialogue{
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
+    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+    release
+    end
+}
+script Quest_Bodegaburnout_RescueD_Dialogue{
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
+    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+    release
+    end
+}
+script Quest_Bodegaburnout_RescueE_Dialogue{
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
+    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+    release
+    end
+}
+script Quest_Bodegaburnout_RescueF_Dialogue{
+    msgbox(format(""),MSGBOX_AUTOCLOSE)
+    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+    release
+    end
+}

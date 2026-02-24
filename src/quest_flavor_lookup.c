@@ -283,3 +283,18 @@ const u8  *GetQuestDesc_RockCollector(void)
     StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_ROCKCOLLECTOR].desc[flag]);
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_BodegaBurnout(void)
+{
+    u32 flag = ReturnQuestState(QUEST_BODEGABURNOUT);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_BODEGABURNOUT].desc[flag]);
+
+    if (QuestMenu_GetSetQuestState(QUEST_WAREHOUSEWARFARE,FLAG_GET_COMPLETED) == FALSE)
+        return gStringVar4;
+
+    if (flag != FLAG_GET_COMPLETED)
+        return gStringVar4;
+
+    StringAppend(gStringVar4,COMPOUND_STRING(" With Presto’s operations paused, the PokéMart delivery service can now finally start to take off."));
+    return gStringVar4;
+}

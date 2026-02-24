@@ -1803,6 +1803,8 @@ const u8 *GetQuestDesc(s32 questId)
             return GetQuestDesc_Psyop();
         case QUEST_ROCKCOLLECTOR:
             return GetQuestDesc_RockCollector();
+        case QUEST_BODEGABURNOUT:
+            return GetQuestDesc_BodegaBurnout();
         default:
             return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
     }
@@ -1821,6 +1823,8 @@ const u8 *GetQuestDoneDesc(s32 questId)
             return GetQuestDesc_Psyop();
         case QUEST_ROCKCOLLECTOR:
             return GetQuestDesc_RockCollector();
+        case QUEST_BODEGABURNOUT:
+            return GetQuestDesc_BodegaBurnout();
         default:
             return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
     }

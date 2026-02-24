@@ -763,350 +763,232 @@ bool8 Quest_Taxicabturnaround_CheckReadyForNext(void){
 // Quest: Bodega Burnout
 // ***********************************************************************
 
-#define DELIVER 0
-#define RESCUE 1
-#define CATCH_STRONG 2
-#define CATCH_COLD  3
-#define CATCH_SMART 4
-#define CATCH_FAIRY 5
-
-static const u32 POKE_MART_MAP[QUEST_BODEGABURNOUT_SUB_COUNT][4]=
+struct BodegaBurnoutInfo
 {
-    {MAP_PERLACIA_CITY_POKEMON_CENTER_1F,SUB_QUEST_1,DELIVER,MAP_ROUTE6},
-    {MAP_QIU_VILLAGE_POKEMON_CENTER_1F,SUB_QUEST_2,DELIVER,MAP_TORGEOT_CLIMB},
-    {MAP_HALERBA_CITY_POKEMON_CENTER_1F,SUB_QUEST_3,DELIVER,MAP_ROUTE3},
-    {MAP_CAPHE_CITY_POKEMON_CENTER_1F,SUB_QUEST_4,DELIVER,MAP_ARANTRAZ},
-    {MAP_CRESALTA_VISTA_POKEMON_CENTER_1F,SUB_QUEST_5,DELIVER,MAP_CAPHE_CITY},
-    {MAP_GLAVEZ_HILL_POKEMON_CENTER_1F,SUB_QUEST_6,DELIVER,MAP_PERLACIA_CITY},
-
-    {MAP_CURENO_PORT_POKEMON_CENTER_1F,SUB_QUEST_7,RESCUE,MAP_ROUTE14},
-    {MAP_MERMEREZA_CITY_POKEMON_CENTER_1F,SUB_QUEST_8,RESCUE,MAP_ROUTE4},
-    {MAP_HODOU_CITY_POKEMON_CENTER_1F,SUB_QUEST_9,RESCUE,MAP_HODOU_CITY},
-    {MAP_TORA_TOWN_POKEMON_CENTER_1F,SUB_QUEST_10,RESCUE,MAP_ROUTE10},
-    {MAP_IRISINA_TOWN_POKEMON_CENTER_1F,SUB_QUEST_11,RESCUE,MAP_ROUTE11},
-    {MAP_PETAROSA_BOROUGH_POKEMON_CENTER_1F,SUB_QUEST_12,RESCUE,MAP_NONGYU_BRIDGE},
-
-    {MAP_OROLAND_POKEMON_CENTER_1F,SUB_QUEST_13,CATCH_STRONG,},
-    {MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F,SUB_QUEST_14,CATCH_STRONG,},
-    {MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F,SUB_QUEST_15,CATCH_COLD,},
-    {MAP_ZENZU_ISLAND_POKEMON_CENTER_1F,SUB_QUEST_16,CATCH_COLD,},
-    {MAP_CUCONU_TOWN_POKEMON_CENTER_1F,SUB_QUEST_17,CATCH_SMART,},
-    {MAP_HALAI_ISLAND_POKEMON_CENTER_1F,SUB_QUEST_18,CATCH_SMART,},
-    {MAP_CHASILLA_POKEMON_CENTER_1F,SUB_QUEST_19,CATCH_FAIRY,},
+    u8 assigningLocalId;
+    u16 assignedMap;
+    u8 targetLocalId;
+    u16 deliveryItem;
+    u16 targetMap;
 };
 
-static const u8* const bodegaParametersTextArray[19][2]=
+static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_COUNT] =
 {
-    {gText_Bodegaburnout_PersonA,gText_Route6},
-    {gText_Bodegaburnout_PersonB,gText_TorgeotClimb},
-    {gText_Bodegaburnout_PersonC,gText_Route3},
-    {gText_Bodegaburnout_PersonD,gText_Arantraz},
-    {gText_Bodegaburnout_PersonE,gText_CapheCity},
-    {gText_Bodegaburnout_PersonF,gText_PerlaciaCity},
-    {gText_Bodegaburnout_PersonG,gText_Route14},
-    {gText_Bodegaburnout_PersonH,gText_Route4},
-    {gText_Bodegaburnout_PersonI,gText_HodouCity},
-    {gText_Bodegaburnout_PersonJ,gText_Route10},
-    {gText_Bodegaburnout_PersonK,gText_Route11},
-    {gText_Bodegaburnout_PersonL,gText_NongyuBridge},
-    {gText_Bodegaburnout_StrongMon,gText_Bodegaburnout_AssistWithStocking},
-    {gText_Bodegaburnout_StrongMon,gText_Bodegaburnout_AssistWithStocking},
-    {gText_Bodegaburnout_ColdMon,gText_Bodegaburnout_HelpKeepFood},
-    {gText_Bodegaburnout_ColdMon,gText_Bodegaburnout_HelpKeepFood},
-    {gText_Bodegaburnout_SmartMon,gText_Bodegaburnout_BalanceOurBooks},
-    {gText_Bodegaburnout_SmartMon,gText_Bodegaburnout_BalanceOurBooks},
-    {gText_Bodegaburnout_FairyMon,gText_Bodegaburnout_RaiseTheMood},
+    [SUB_QUEST_1] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_CAPHE,
+        .assignedMap = MAP_CAPHE_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_H,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE,
+    },
+    [SUB_QUEST_2] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_QIU,
+        .assignedMap = MAP_QIU_VILLAGE_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_A,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU,
+    },
+    [SUB_QUEST_3] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_HALAI,
+        .assignedMap = MAP_HALAI_ISLAND_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_B,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI,
+    },
+    [SUB_QUEST_4] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_OROLAND,
+        .assignedMap = MAP_OROLAND_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_C,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_OROLAND,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND,
+    },
+    [SUB_QUEST_5] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_TORA,
+        .assignedMap = MAP_TORA_TOWN_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_I,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA,
+    },
+    [SUB_QUEST_6] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_HALERBA,
+        .assignedMap = MAP_HALERBA_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_ROCK_SMASH_F,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA,
+    },
+    [SUB_QUEST_7] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_CRESALTA,
+        .assignedMap = MAP_CRESALTA_VISTA_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_WHIRLPOOL_J,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA,
+    },
+    [SUB_QUEST_8] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_IRISINA,
+        .assignedMap = MAP_IRISINA_TOWN_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_ROCK_SMASH_G,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA,
+    },
+    [SUB_QUEST_9] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_HODOU,
+        .assignedMap = MAP_HODOU_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_D,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU,
+    },
+    [SUB_QUEST_10] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_ZENZU,
+        .assignedMap = MAP_ZENZU_ISLAND_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_E,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_ZENZU,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU,
+    },
+    [SUB_QUEST_11] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_CUCONU,
+        .assignedMap = MAP_CUCONU_TOWN_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CUCONU,
+    },
+    [SUB_QUEST_12] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_GLAVEZ,
+        .assignedMap = MAP_GLAVEZ_HILL_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_CUT_M,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_GLAVEZ,
+    },
+    [SUB_QUEST_13] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_PERLACIA,
+        .assignedMap = MAP_PERLACIA_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_PERLACIA,
+    },
+    [SUB_QUEST_14] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_PETAROSA,
+        .assignedMap = MAP_PETAROSA_BOROUGH_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_DIVE_N,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_PETAROSA,
+    },
+    [SUB_QUEST_15] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_ESPULEE,
+        .assignedMap = MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_K,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ESPULEE,
+    },
+    [SUB_QUEST_16] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_TIRABUDIN,
+        .assignedMap = MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TIRABUDIN,
+    },
+    [SUB_QUEST_17] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_CHASILLA,
+        .assignedMap = MAP_CHASILLA_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_L,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CHASILLA,
+    },
+    [SUB_QUEST_18] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_MERMEREZA,
+        .assignedMap = MAP_MERMEREZA_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_MERMEREZA,
+    },
+    [SUB_QUEST_19] =
+    {
+        .assigningLocalId = LOCALID_MARTHUMAN_CURENO,
+        .assignedMap = MAP_CURENO_PORT_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CURENO,
+    },
 };
 
-u8 Quest_Bodegaburnout_LookUpCorrespondingSubquest(void){
-    u8 i;
+void Quest_Bodegaburnout_Complete(void)
+{
+    for (u32 subQuestIndex = 0; subQuestIndex < QUEST_BODEGABURNOUT_SUB_COUNT; subQuestIndex++)
+        (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED, subQuestIndex));
 
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            return i;
-        }
-    }
-    return 99;
+    QuestMenu_ScriptSetComplete(QUEST_BODEGABURNOUT);
 }
 
-bool8 Quest_Bodegaburnout_IsSubquestComplete(void){
-    u8 index = Quest_Bodegaburnout_LookUpCorrespondingSubquest();
-    u8 subquest = POKE_MART_MAP[index][1];
+static bool8 Quest_Bodegaburnout_IsSubquestDeliveryType(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].deliveryItem != ITEM_NONE);
+}
 
-    if (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subquest)){
-        return TRUE;
-    }else{
+static bool8 Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
+{
+    u32 count[QUEST_BODEGABURNOUT_TYPE_COUNT] = {0};
+
+    for (u32 subQuestIndex = 0; subQuestIndex < QUEST_BODEGABURNOUT_SUB_COUNT; subQuestIndex++)
+    {
+        u32 typeIndex;
+        if (!QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subQuestIndex))
+            continue;
+
+        typeIndex = (Quest_Bodegaburnout_IsSubquestDeliveryType(subQuestIndex)) ? QUEST_BODEGABURNOUT_TYPE_DELIVERY : QUEST_BODEGABURNOUT_TYPE_RESCUE;
+
+        count[typeIndex]++;
+    }
+
+    if (count[QUEST_BODEGABURNOUT_TYPE_DELIVERY] < NUM_QUEST_BODEGABURNOUT_REQUIRED_SUBQUESTS)
         return FALSE;
-    }
+
+    return (count[QUEST_BODEGABURNOUT_TYPE_RESCUE] < NUM_QUEST_BODEGABURNOUT_REQUIRED_SUBQUESTS);
 }
 
-void Quest_Bodegaburnout_Catch_MarkSubquestComplete(void){
-    u32 subquest = 0;
-    bool8 foundTaxi = FALSE;
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            subquest = POKE_MART_MAP[i][1];
-            foundTaxi = TRUE;
-            break;
-        }
-    }
-
-    if (foundTaxi) {
-        if (!QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subquest)) {
-            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED, subquest);
-        }
-    }
+void Script_Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
+{
+    gSpecialVar_Result = Quest_Bodegaburnout_IsReadyForTakedownQuest();
 }
 
-u16 Quest_Bodegaburnout_CountRemainingSubquests(void){
+void Quest_Bodegaburnout_BufferDeliveryItemName(void)
+{
+    enum SubQuestDefines subquestId = gSpecialVar_0x8004;
+    u32 item = bodegaBurnoutInfo[subquestId].deliveryItem;
+    StringCopy(gStringVar1,GetItemName(item));
+}
+
+void Quest_Bodegaburnout_BufferTargetLocationName(void)
+{
+    enum SubQuestDefines subquestId = gSpecialVar_0x8004;
+    u32 map = bodegaBurnoutInfo[subquestId].targetMap;
+    GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map),MAP_NUM(map))->regionMapSectionId,0);
+}
+
+u32 Quest_BodegaBurnout_CountRemainingSubquests(void)
+{
     return Quest_Generic_CountAndBufferRemainingSubquests(QUEST_BODEGABURNOUT);
 }
 
-bool8 Quest_Bodegaburnout_CheckReadyForNext(void){
-    u8 currentSubQuest;
-    u8 questType;
-    u8 completedDeliver = 0, completedRescue = 0, completedCatch = 0;
-    u8 requiredComplete = 1;
-
-    for (currentSubQuest = 0; currentSubQuest < QUEST_BODEGABURNOUT_SUB_COUNT; currentSubQuest++)
-    {
-        if (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, currentSubQuest))
-        {
-            questType = POKE_MART_MAP[currentSubQuest][2];
-
-            switch(questType){
-                case CATCH_STRONG:
-                case CATCH_COLD:
-                case CATCH_SMART:
-                case CATCH_FAIRY:
-                    completedCatch++;
-                    break;
-                case DELIVER: completedDeliver++;
-                              break;
-                case RESCUE: completedRescue++;
-                             break;
-                default: break;
-            }
-        }
-    }
-
-    return (
-            (completedDeliver > requiredComplete) &&
-            (completedRescue > requiredComplete) &&
-            (completedCatch > requiredComplete)
-           );
-}
-
-u32 Quest_Bodegaburnout_GetQuestType(void){
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            return POKE_MART_MAP[i][2];
-        }
-    }
-    return 99;
-}
-
-void Quest_Bodegaburnout_LoadRequestText(void){
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            StringCopy(gStringVar1,bodegaParametersTextArray[i][0]);
-            StringCopy(gStringVar2,bodegaParametersTextArray[i][1]);
-            StringCopy(gStringVar3,gText_Pokemon);
-        }
-    }
-}
-
-bool8 Quest_Bodegaburnout_CheckStrongPokemon(void){
-    //Human-like egg group AND 12 decimeters
-    u32 species = 0, height = 0;
-    u32 eggGroup[2] = {0,0};
-    u32 requiredHeight = 12;
-    bool8 doesPokemonMatch = TRUE;
-
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
-    eggGroup[0] = gSpeciesInfo[species].eggGroups[0];
-    eggGroup[1] = gSpeciesInfo[species].eggGroups[1];
-    height = gSpeciesInfo[species].height;
-
-    if (
-            (
-             (eggGroup[0] != EGG_GROUP_HUMAN_LIKE) &&
-             (eggGroup[1] != EGG_GROUP_HUMAN_LIKE)
-            )
-            ||
-            (height < requiredHeight)
-       )
-    {
-        doesPokemonMatch = FALSE;
-    }
-    return doesPokemonMatch;
-}
-
-bool8 Quest_Bodegaburnout_CheckColdPokemon(void){
-    u32 species = 0;
-    u32 type[2] = {0,0};
-    bool8 doesPokemonMatch = TRUE;
-
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
-    type[0] = gSpeciesInfo[species].types[0];
-    type[1] = gSpeciesInfo[species].types[1];
-
-    if (
-            (type[0] != TYPE_ICE) &&
-            (type[1] != TYPE_ICE)
-       )
-    {
-        doesPokemonMatch = FALSE;
-    }
-    return doesPokemonMatch;
-}
-
-bool8 Quest_Bodegaburnout_CheckSmartPokemon(void){
-    //Pokemon that like Bitter food have an easier time becoming Smart in Contest Data, so only pokemon that like bitter flavors
-    u32 nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
-
-    if (
-            (nature != NATURE_GENTLE) &&
-            (nature != NATURE_SASSY) &&
-            (nature != NATURE_CALM) &&
-            (nature != NATURE_CAREFUL)
-       )
-    {
-        return FALSE;
-    }
-
-    return TRUE;
-}
-
-bool8 Quest_Bodegaburnout_CheckFairyPokemon(void){
-    u32 species = 0;
-    u32 eggGroup[2] = {0,0};
-    u32 type[2] = {0,0};
-    bool8 doesPokemonMatch = TRUE;
-
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
-    eggGroup[0] = gSpeciesInfo[species].eggGroups[0];
-    eggGroup[1] = gSpeciesInfo[species].eggGroups[1];
-    type[0] = gSpeciesInfo[species].types[0];
-    type[1] = gSpeciesInfo[species].types[1];
-
-    if (
-            (eggGroup[0] != EGG_GROUP_FAIRY) &&
-            (eggGroup[1] != EGG_GROUP_FAIRY)
-            &&
-            (type[0] != TYPE_FAIRY) &&
-            (type[1] != TYPE_FAIRY)
-       )
-    {
-        doesPokemonMatch = FALSE;
-    }
-    return doesPokemonMatch;
-}
-
-bool8 Quest_Bodegaburnout_CheckRequiredPokemon(void){
-    u8 index = Quest_Bodegaburnout_LookUpCorrespondingSubquest();
-    u8 neededType = POKE_MART_MAP[index][2];
-
-    switch(neededType){
-        case CATCH_STRONG:
-            return Quest_Bodegaburnout_CheckStrongPokemon();
-        case CATCH_COLD:
-            return Quest_Bodegaburnout_CheckColdPokemon();
-        case CATCH_SMART:
-            return Quest_Bodegaburnout_CheckSmartPokemon();
-        case CATCH_FAIRY:
-            return Quest_Bodegaburnout_CheckFairyPokemon();
-        default:
-            return FALSE;
-    }
-}
-
-bool8 Quest_Bodegaburnout_CheckLocationAndMatchItem(void){
-    u8 i;
-    u16 bodegaPackage = ITEM_BODEGA_DELIVERY_FIRST;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            bodegaPackage += i;
-            gSpecialVar_0x8000 = bodegaPackage;
-            gSpecialVar_0x8001 = 1;
-            break;
-        }
-    }
-    return CheckBagHasItem(bodegaPackage,1);
-}
-
-
-u8 Quest_Bodegaburnout_GetIndexFirstRescue(void){
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][2] == RESCUE){
-            break;
-        }
-    }
-    return i;
-}
-
-void Quest_Bodegaburnout_CheckAndSetRescueFlag(void){
-    u8 j, k = 0;
-    u16 rescueFlag = FLAG_QUEST_BODEGA_RESCUE_FLAGS_START;
-    bool8 flagStatus;
-    bool8 questStatus = QuestMenu_GetSetQuestState(QUEST_BODEGABURNOUT, FLAG_GET_ACTIVE);
-
-    for (j = Quest_Bodegaburnout_GetIndexFirstRescue(); j < QUEST_BODEGABURNOUT_SUB_COUNT; j++) {
-        if (POKE_MART_MAP[k][3] == GetCurrentMap()) {
-            rescueFlag += k;
-
-            flagStatus = FlagGet(rescueFlag);
-            if (!flagStatus && !questStatus){
-                FlagSet(rescueFlag);
-                FlagSet(FLAG_QUEST_BODEGA_RESCUE1); //PSF TODO Is this a debug line?
-            }
-            break;
-        }
-        k++;
-    }
-}
-
-void Quest_Bodegaburnout_ClearRescueFlag(void){
-    u8 j, k = 0;
-    u16 rescueFlag = FLAG_QUEST_BODEGA_RESCUE_FLAGS_START;
-
-    for (j = Quest_Bodegaburnout_GetIndexFirstRescue(); j < QUEST_BODEGABURNOUT_SUB_COUNT; j++) {
-        if (POKE_MART_MAP[j][0] == GetCurrentMap()) {
-            rescueFlag += k;
-
-            if (FlagGet(rescueFlag)){
-                FlagClear(rescueFlag);
-            }
-            break;
-        }
-        k++;
-    }
-}
-
-void Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem(void){
-    u8 i;
-    u16 bodegaPackage = ITEM_BODEGA_DELIVERY_FIRST;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][3] == GetCurrentMap()) {
-            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,POKE_MART_MAP[i][1]);
-
-            if (POKE_MART_MAP[i][2] == DELIVER) {
-                bodegaPackage += i;
-                RemoveBagItem(bodegaPackage,1);
-            }
-            break;
-        }
-    }
+static void Script_Quest_BodegaBurnout_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_Generic_CountAndBufferRemainingSubquests(QUEST_BODEGABURNOUT);
 }
 
 // ***********************************************************************
