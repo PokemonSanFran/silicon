@@ -4,7 +4,6 @@ const DAGMAR = 1
 mapscripts Route11_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
     call(Quest_Restorehodoucity_HideBlackbelt_Route11_Script)
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_FAINTED_FOG_STATE, ENCOUNTERED_FOG_MON: WarpPlayerAfterFogEncounter

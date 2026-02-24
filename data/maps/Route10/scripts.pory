@@ -1,6 +1,5 @@
 mapscripts Route10_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
             call(NewAssholeAppears_HideBaiya_Script)
     }
 }

@@ -1,7 +1,6 @@
 mapscripts NongyuBridge_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
     }
     MAP_SCRIPT_ON_RESUME{
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)

@@ -1,5 +1,5 @@
 mapscripts CapheCity_MapScripts {
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
@@ -16,14 +16,4 @@ mapscripts CapheCity_MapScripts {
     [
         FLAG_VISITED_CAPHE_CITY, FALSE: Generic_Mappreview
     ]
-}
-
-script CapheCity_EventScript_DeliveryE{
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        goto(Quest_Bodegaburnout_DeliveryE_Dialogue)
-    }
-
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
 }

@@ -45,16 +45,6 @@ script Arantraz_ChooseFerryDestination_Script {
     call(Ferry_Interact_Dialogue)
 }
 
-script Arantraz_EventScript_DeliveryD{
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        goto(Quest_Bodegaburnout_DeliveryD_Dialogue)
-    }
-
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
-}
-
 text gText_Arantraz_IveHealedYourParty {
     format("I've healed your party! You can battle these Trainers as often as you like.")
 }

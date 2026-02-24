@@ -2,7 +2,6 @@ mapscripts Route4_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
         call(ThisIsntRandom_HideObject_AboveGround_Script)
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
     }
     MAP_SCRIPT_ON_LOAD
     {

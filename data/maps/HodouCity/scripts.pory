@@ -1,5 +1,5 @@
 mapscripts HodouCity_MapScripts{
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
@@ -10,7 +10,6 @@ mapscripts HodouCity_MapScripts{
         call(Quest_CulturalPurity_MoveGuard_Script)
         call(Quest_Restorehodoucity_HidePewfatOutside_Script)
         call(LetsGrabLunch_CheckRestorationProgress_Script)
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [

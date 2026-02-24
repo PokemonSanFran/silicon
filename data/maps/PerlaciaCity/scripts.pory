@@ -47,12 +47,3 @@ script PerlaciaCity_Stan_PostBattle_Script{
         end
 }
 
-script PerlaciaCity_EventScript_DeliveryF{
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        goto(Quest_Bodegaburnout_DeliveryF_Dialogue)
-    }
-
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
-}

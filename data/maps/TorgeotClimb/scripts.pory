@@ -13,15 +13,3 @@ mapscripts TorgeotClimb_MapScripts {
         VAR_TIME_TRAVEL_STATE, TIME_TRAVEL_FIRST_RETURN: OkayLetsFixit_ReturnToPeak_Script
     ]
 }
-
-script TorgeotClimb_EventScript_DeliveryB{
-    trainerbattle_single(TRAINER_BODEGA_3,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
-
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        goto(Quest_Bodegaburnout_DeliveryC_Dialogue)
-    }
-
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
-}
