@@ -14854,16 +14854,6 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_PANNEN_MACGUFFIN] =
-    {
-        .name = ITEM_NAME("PannenMcGuffn"),
-        .description = COMPOUND_STRING("?????"),
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_QuestionMark,
-        .iconPalette = gItemIconPalette_QuestionMark,
-    },
     [ITEM_BODEGA_DELIVERY_1] =
     {
         .name = ITEM_NAME("BodegaDelvry1"),
@@ -14924,9 +14914,39 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_BEACH_GLASS] =
+    [ITEM_BODEGA_DELIVERY_7] =
     {
-        .name = ITEM_NAME("BeachGlass"),
+        .name = ITEM_NAME("BodegaDelvry7"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BODEGA_DELIVERY_8] =
+    {
+        .name = ITEM_NAME("BodegaDelvry8"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BODEGA_DELIVERY_9] =
+    {
+        .name = ITEM_NAME("BodegaDelvry9"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BODEGA_DELIVERY_10] =
+    {
+        .name = ITEM_NAME("BodegaDelvry10"),
         .description = COMPOUND_STRING("?????"),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -20684,30 +20704,6 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
     [1025] =
-    {
-        .name = gQuestionMarksItemName,
-        .price = 0,
-        .description = sQuestionMarksDesc,
-        .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_UNCATEGORIZED,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_QuestionMark,
-        .iconPalette = gItemIconPalette_QuestionMark,
-    },
-    [1153] =
-    {
-        .name = gQuestionMarksItemName,
-        .price = 0,
-        .description = sQuestionMarksDesc,
-        .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_UNCATEGORIZED,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_QuestionMark,
-        .iconPalette = gItemIconPalette_QuestionMark,
-    },
-    [1154] =
     {
         .name = gQuestionMarksItemName,
         .price = 0,

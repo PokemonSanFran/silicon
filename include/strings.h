@@ -2488,29 +2488,6 @@ extern const u8 gText_PokemonPsychoShift[];
 extern const u8 gText_PokemonEffectSpore[];
 // End Quest_Restorezenzugym
 
-// Start Quest_Bodegaburnout
-extern const u8 gText_Bodegaburnout_PersonA[];
-extern const u8 gText_Bodegaburnout_PersonB[];
-extern const u8 gText_Bodegaburnout_PersonC[];
-extern const u8 gText_Bodegaburnout_PersonD[];
-extern const u8 gText_Bodegaburnout_PersonE[];
-extern const u8 gText_Bodegaburnout_PersonF[];
-extern const u8 gText_Bodegaburnout_PersonG[];
-extern const u8 gText_Bodegaburnout_PersonH[];
-extern const u8 gText_Bodegaburnout_PersonI[];
-extern const u8 gText_Bodegaburnout_PersonJ[];
-extern const u8 gText_Bodegaburnout_PersonK[];
-extern const u8 gText_Bodegaburnout_PersonL[];
-extern const u8 gText_Bodegaburnout_StrongMon[];
-extern const u8 gText_Bodegaburnout_ColdMon[];
-extern const u8 gText_Bodegaburnout_SmartMon[];
-extern const u8 gText_Bodegaburnout_FairyMon[];
-extern const u8 gText_Bodegaburnout_AssistWithStocking[];
-extern const u8 gText_Bodegaburnout_HelpKeepFood[];
-extern const u8 gText_Bodegaburnout_BalanceOurBooks[];
-extern const u8 gText_Bodegaburnout_RaiseTheMood[];
-// End Quest_Bodegaburnout
-
 // Start Debug Start
 extern const u8 gText_SelectPoint[];
 extern const u8 gText_ProlougeIntro[];

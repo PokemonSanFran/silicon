@@ -118,7 +118,6 @@ script Quest_Hiddengrottomapping_Reward_Script{
     call(Quest_Hiddengrottomapping_SetUpCutscene_Script)
     msgbox(format("I have a feeling you're not going to find anymore pages."),,SPEAKER_NANCY)
     msgbox(format("I found the rest of the book laying around here, and with that page, I've got all of his notes, but no clues. Just a lot of rambling about Ultra Space."),,SPEAKER_NANCY)
-    giveitem(ITEM_PANNEN_MACGUFFIN,1)
     applymovement(WIFE,Common_Movement_FaceUp)
     waitmovement(WIFE)
     setflag(FLAG_TEMP_B)
