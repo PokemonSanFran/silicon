@@ -1,17 +1,140 @@
 //Quest_Bodegaburnout_
 
-script Quest_Bodegaburnout_CheckSubquestState_Script
+script Quest_Bodegaburnout_Dialouge_EleanorStart
 {
+    if (var(VAR_STORYLINE_STATE) >= STORY_1ST_TAKEDOWN)
+    {
+        msgbox(format("Your exploits so far have made us proud {PLAYER}! Let's hope our adventures are just as succesful!"),,SPEAKER_ELEANOR)
+    }
+    else
+    {
+        msgbox(format("I'm honored to see you finally working alongside us, {PLAYER}."),,SPEAKER_ELEANOR)
+    }
+
+    msgbox(format("The PokéMarts in Resido used to be run entirely by people. When Presto showed up, the app delivery and its so-called convenience really took the region by storm."),,SPEAKER_ELEANOR)
+    msgbox(format("The Poke Mart Staff union are going to try to make it harder for Presto to completely take over by also offering a delivery service, but they’re running into some hurdles and could use some help getting started."),,SPEAKER_ELEANOR)
+    buffermapname(STR_VAR_1,MAP_CRESALTA_VISTA)
+    msgbox(format("The Union HQ is in {STR_VAR_1}. Can you meet up with their leader? I told them you’d be coming."),,SPEAKER_ELEANOR)
+    msgbox(format("Of course, if you’re feeling impatient, you can go right to the source! I’m sure the Poke Mart Staff around the region would be excited for some help."),,SPEAKER_ELEANOR)
+    closemessage
+    startquest(QUEST_BODEGABURNOUT)
+    msgbox(format("It's easier to stay competitive if your competition is weaker, eh?"),,SPEAKER_ELEANOR)
+    closemessage
+    applymovement(LOCALID_ARANTRAZ_ELEANOR,moves(walk_up * 6))
+    waitmovement(LOCALID_ARANTRAZ_ELEANOR)
+    removeobject(LOCALID_ARANTRAZ_ELEANOR)
+    release
+    end
 }
 
-script Quest_Bodegaburnout_CheckNextStage_Script
+script Quest_Bodegaburnout_Dialogue_Active
 {
+    msgbox(format("I’ve got somebody in every Pokémon Center in the region. Could you help three of them find their delivery people, and do deliveries for three others?"),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("That should buy me enough time to help Eleanor with what we’re working on."),,SPEAKER_SHOPUNIONREP)
+    closemessage
+    release
+    end
 }
 
-script Quest_Bodegaburnout_Reward_Dialogue
+script Quest_Bodegaburnout_Dialouge_FirstActive
 {
+    goto_if_ge(VAR_QUEST_WAREHOUSEWARFARE_STATE,DEBRIEFED_BY_SHOP_UNION_REP,Quest_Bodegaburnout_Dialogue_Active)
+
+    setvar(VAR_QUEST_WAREHOUSEWARFARE_STATE,DEBRIEFED_BY_SHOP_UNION_REP)
+    msgbox(format("Are you {PLAYER}? Eleanor said you’d come."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("We recently rolled out Mart Delivery, where Trainers can order items and get them delivered in the field."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("It’s very similar to Presto’s offering, but minus the drones and plus sustainable local labor."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("Our pilot program is going… okay."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("Some of the delivery people got lost, and so we’re backed up on deliveries."),,SPEAKER_SHOPUNIONREP)
+    callnative(Script_Quest_BodegaBurnout_CountRemainingSubquests)
+    if (var(VAR_RESULT) != QUEST_BODEGABURNOUT_SUB_COUNT)
+{
+    msgbox(format("Oh! Looks like you’ve already been helping some of our people. Eleanor was right about you!"),,SPEAKER_SHOPUNIONREP)
+}
+    goto(Quest_Bodegaburnout_Dialogue_Active)
 }
 
-script Quest_Bodegaburnout_EliteFour_Dialogue
+script Quest_Bodegaburnout_Script_HandleQuestDirection
 {
+    goto_if_quest_reward(QUEST_BODEGABURNOUT,Quest_Bodegaburnout_Dialouge_Reward)
+
+    callnative(Script_Quest_Bodegaburnout_ShouldShopkeeperExplainQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Script_ChooseExplainDialogue)
+
+    callnative(Script_Quest_Bodegaburnout_IsReadyForTakedownQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext)
 }
+
+script Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext
+{
+    msgbox(format("Shopunionrep is working on something big with Presto. You should go meet up with them back at the Union HQ."),,SPEAKER_SHOPKEEPER)
+    closemessage
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_ChooseExplainDialogue
+{
+    callnative(Script_Quest_Bodegaburnout_GetShopkeeperActiveCode)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_BODEGABURNOUT_TYPE_DELIVERY_NO_ITEM: goto(Quest_Bodegaburnout_Dialogue_GiveDeliveryItem)
+        case QUEST_BODEGABURNOUT_TYPE_DELIVERY: goto(Quest_Bodegaburnout_Dialogue_ExplainDelivery)
+        case QUEST_BODEGABURNOUT_TYPE_RESCUE: goto(Quest_Bodegaburnout_Dialogue_ExplainRescue)
+    }
+}
+
+script Quest_Bodegaburnout_Dialogue_GiveDeliveryItem
+{
+    msgbox(format("I hear you’re helping with our delivery program rollout. We need to get this delivery out, but we’re super short staffed right now."),,SPEAKER_SHOPKEEPER)
+    closemessage
+    cueobjectplayer(VAR_LAST_TALKED)
+    callnative(Script_Quest_Bodegaburnout_LoadDeliveryItem)
+    callstd(STD_OBTAIN_ITEM)
+    goto(Quest_Bodegaburnout_Dialogue_ExplainDelivery)
+}
+
+script Quest_Bodegaburnout_Dialogue_ExplainDelivery
+{
+    callnative(Script_Quest_Bodegaburnout_BufferDeliveryItemName)
+    callnative(Script_Quest_Bodegaburnout_BufferTargetLocationName)
+    msgbox(format("This {STR_VAR_1} needs to be delivered to somebody in {STR_VAR_2}. Can you take it there?"),,SPEAKER_SHOPKEEPER)
+    closemessage
+    callnative(Script_Quest_Bodegaburnout_IsReadyForTakedownQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Dialogue_ExplainRescue
+{
+    callnative(Script_Quest_Bodegaburnout_BufferTargetLocationName)
+    msgbox(format("One of our delivery people is missing in action. Their signal went dead around {STR_VAR_2}. Can you hunt them down?"),,SPEAKER_SHOPKEEPER)
+    closemessage
+
+    callnative(Script_Quest_Bodegaburnout_IsReadyForTakedownQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Dialouge_Reward
+{
+    msgbox(format("Hey, everybody in the union has been talking about how much you’ve been helping the cause."),,SPEAKER_SHOPKEEPER)
+    checkitemspace(ITEM_QUEST_BODEGABURNOUT_REWARD,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Make room in your bag and come talk to me later."),,SPEAKER_SHOPKEEPER)
+        closemessage
+        release
+        end
+    }
+        msgbox(format("You can’t buy this anywhere, but we thought you should have it."),,SPEAKER_SHOPKEEPER)
+        closemessage
+        cueobjectplayer(VAR_LAST_TALKED)
+        giveitem(ITEM_QUEST_BODEGABURNOUT_REWARD,1)
+        completequest(QUEST_BODEGABURNOUT)
+        release
+        end
+}
+

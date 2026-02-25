@@ -44,7 +44,7 @@ script Quest_SmoothieCrafting_Script_Interact
     goto_if_quest_active(QUEST_SMOOTHIECRAFTING,Quest_SmoothieCrafting_Dialogue_GiveRecipe)
 
     msgbox(format("Hi! We’re still getting everything in order, but keep your eyes on Buzzr."),,SPEAKER_SMOOTHIESHOPKEEPER)
-    msgbox(format("You’ll see it online as soon as we’re ready to go!"),,SPEAKER_SHOPKEEPER)
+    msgbox(format("You’ll see it online as soon as we’re ready to go!"),,SPEAKER_SMOOTHIESHOPKEEPER)
     closemessage
     release
     end
