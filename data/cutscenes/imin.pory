@@ -9,6 +9,8 @@ const PKMNA = 6
 const FLAG_HIDE_RAID = FLAG_TEMP_1
 const FLAG_HIDE_PKMN = FLAG_TEMP_2
 
+// PSF TODO if the player has not completed the elite four's takedown quest, they don't appear in the raid party and are otherwise still at arantraz
+
 //Inside Spire
 const FLAG_HIDE_TOWER_RAID_PARTY = FLAG_TEMP_2
 

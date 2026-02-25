@@ -1,3 +1,5 @@
+const FLAG_HIDE_ELEANOR = FLAG_TEMP_8
+
 mapscripts Arantraz_MessHall_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(YouRealizeTheyreEvilRight_HideGarbodor_Script)
@@ -22,6 +24,22 @@ script Arantraz_MessHall_ObjectVisibility_Script{
         case START_TRUE_TIMELINE: call(YouRealizeTheyreEvilRight_HideBasement_Script)
         case PRE_SPEECHSPEECH: call(SpeechSpeechSpeech_MoveObject_Script)
         case POST_SPEECHSPEECH: call(SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script)
+    }
+    call(Arantraz_MessHall_Script_EleanorVisibility)
+}
+
+script Arantraz_MessHall_Script_EleanorVisibility
+{
+    if (var(VAR_ARANTRAZ_STATE) < PRE_SPEECHSPEECH)
+    {
+        setflag(FLAG_HIDE_ELEANOR)
+        return
+    }
+
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_BODEGABURNOUT)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        setflag(FLAG_HIDE_ELEANOR)
         return
     }
 }
@@ -76,16 +94,19 @@ script Arantraz_MessHall_Frank_Event_Script {
     end
 }
 
-script Arantraz_MessHall_Eleanor_Event_Script {
+script Arantraz_MessHall_Eleanor_Event_Script
+{
     lock
-
-    switch (var(VAR_STORYLINE_STATE)){
-        case STORY_RAVE_OR_SPEECH_COMPLETE: msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),MSGBOX_NPC,SPEAKER_ELEANOR)
-        case STORY_RAVE_AND_SPEECH_COMPLETE: goto(Quest_Bodegaburnout_EliteFour_Dialogue)
+    faceplayer
+    if (var(VAR_STORYLINE_STATE) == STORY_RAVE_OR_SPEECH_COMPLETE)
+    {
+        msgbox(format("Are you going to the Warehouse Rave? Sounds fun! Wish I had time to go."),,SPEAKER_ELEANOR)
+        closemessage
+        release
+        end
     }
-
-    closemessage
-
-    release
-    end
+    else
+    {
+        goto(Quest_Bodegaburnout_Dialouge_EleanorStart)
+    }
 }

@@ -1508,7 +1508,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_SHOPKEEPER] =
     {
         .name = COMPOUND_STRING("Shopkeeper"),
-        .title = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Pokemon Center Staff"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
@@ -2219,6 +2219,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = COMPOUND_STRING("{PKMN} Trainer"),
         .title = COMPOUND_STRING("PsyoptargetC"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SHOPUNIONREP] =
+    {
+        .name = COMPOUND_STRING("Shopunionrep"),
+        .title = COMPOUND_STRING("Shop Union Leader"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,

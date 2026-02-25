@@ -766,7 +766,7 @@ bool8 Quest_Taxicabturnaround_CheckReadyForNext(void){
 struct BodegaBurnoutInfo
 {
     u8 assigningLocalId;
-    u16 assignedMap;
+    u32 assignedMap;
     u8 targetLocalId;
     u16 deliveryItem;
     u16 targetMap;
@@ -776,7 +776,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
 {
     [SUB_QUEST_1] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_CAPHE,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CAPHE,
         .assignedMap = MAP_CAPHE_CITY_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_H,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,
@@ -784,7 +784,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_2] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_QIU,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_QIU,
         .assignedMap = MAP_QIU_VILLAGE_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_A,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,
@@ -792,7 +792,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_3] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_HALAI,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_HALAI,
         .assignedMap = MAP_HALAI_ISLAND_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_B,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,
@@ -800,7 +800,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_4] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_OROLAND,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_OROLAND,
         .assignedMap = MAP_OROLAND_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_C,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_OROLAND,
@@ -808,7 +808,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_5] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_TORA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_TORA,
         .assignedMap = MAP_TORA_TOWN_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_I,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,
@@ -816,7 +816,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_6] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_HALERBA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_HALERBA,
         .assignedMap = MAP_HALERBA_CITY_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_ROCK_SMASH_F,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,
@@ -824,7 +824,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_7] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_CRESALTA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CRESALTA,
         .assignedMap = MAP_CRESALTA_VISTA_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_WHIRLPOOL_J,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,
@@ -832,7 +832,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_8] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_IRISINA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_IRISINA,
         .assignedMap = MAP_IRISINA_TOWN_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_ROCK_SMASH_G,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,
@@ -840,7 +840,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_9] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_HODOU,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_HODOU,
         .assignedMap = MAP_HODOU_CITY_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_D,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,
@@ -848,7 +848,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_10] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_ZENZU,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_ZENZU,
         .assignedMap = MAP_ZENZU_ISLAND_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_E,
         .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_ZENZU,
@@ -856,7 +856,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_11] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_CUCONU,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CUCONU,
         .assignedMap = MAP_CUCONU_TOWN_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O,
         .deliveryItem = ITEM_NONE,
@@ -864,7 +864,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_12] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_GLAVEZ,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_GLAVEZ,
         .assignedMap = MAP_GLAVEZ_HILL_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_CUT_M,
         .deliveryItem = ITEM_NONE,
@@ -872,7 +872,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_13] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_PERLACIA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_PERLACIA,
         .assignedMap = MAP_PERLACIA_CITY_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q,
         .deliveryItem = ITEM_NONE,
@@ -880,7 +880,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_14] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_PETAROSA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_PETAROSA,
         .assignedMap = MAP_PETAROSA_BOROUGH_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_DIVE_N,
         .deliveryItem = ITEM_NONE,
@@ -888,7 +888,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_15] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_ESPULEE,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_ESPULEE,
         .assignedMap = MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_K,
         .deliveryItem = ITEM_NONE,
@@ -896,7 +896,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_16] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_TIRABUDIN,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_TIRABUDIN,
         .assignedMap = MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P,
         .deliveryItem = ITEM_NONE,
@@ -904,7 +904,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_17] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_CHASILLA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CHASILLA,
         .assignedMap = MAP_CHASILLA_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_L,
         .deliveryItem = ITEM_NONE,
@@ -912,7 +912,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_18] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_MERMEREZA,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_MERMEREZA,
         .assignedMap = MAP_MERMEREZA_CITY_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S,
         .deliveryItem = ITEM_NONE,
@@ -920,7 +920,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
     [SUB_QUEST_19] =
     {
-        .assigningLocalId = LOCALID_MARTHUMAN_CURENO,
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CURENO,
         .assignedMap = MAP_CURENO_PORT_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R,
         .deliveryItem = ITEM_NONE,
@@ -928,21 +928,48 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
 };
 
+static u8 Quest_Bodegaburnout_GetAssigningLocalId(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].assigningLocalId);
+}
+static u32 Quest_Bodegaburnout_GetAssignedMap(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].assignedMap);
+}
+static u8 Quest_Bodegaburnout_GetTargetLocalId(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].targetLocalId);
+}
+static u16 Quest_Bodegaburnout_GetDeliveryItem(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].deliveryItem);
+}
+static u32 Quest_Bodegaburnout_GetTargetMap(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].targetMap);
+}
+
 void Quest_Bodegaburnout_Complete(void)
 {
-    for (u32 subQuestIndex = 0; subQuestIndex < QUEST_BODEGABURNOUT_SUB_COUNT; subQuestIndex++)
+    for (u32 subQuestIndex = 0; subQuestIndex < 1; subQuestIndex++)
         (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED, subQuestIndex));
-
-    QuestMenu_ScriptSetComplete(QUEST_BODEGABURNOUT);
 }
 
 static bool8 Quest_Bodegaburnout_IsSubquestDeliveryType(enum SubQuestDefines subQuestId)
 {
-    return (bodegaBurnoutInfo[subQuestId].deliveryItem != ITEM_NONE);
+    return (Quest_Bodegaburnout_GetDeliveryItem(subQuestId) != ITEM_NONE);
+}
+
+
+void Script_Quest_Bodegaburnout_IsSubquestDeliveryType(void)
+{
 }
 
 static bool8 Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
 {
+    if (QuestMenu_GetSetQuestState(QUEST_WAREHOUSEWARFARE,FLAG_GET_ACTIVE))
+        return FALSE;
+
     u32 count[QUEST_BODEGABURNOUT_TYPE_COUNT] = {0};
 
     for (u32 subQuestIndex = 0; subQuestIndex < QUEST_BODEGABURNOUT_SUB_COUNT; subQuestIndex++)
@@ -959,7 +986,7 @@ static bool8 Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
     if (count[QUEST_BODEGABURNOUT_TYPE_DELIVERY] < NUM_QUEST_BODEGABURNOUT_REQUIRED_SUBQUESTS)
         return FALSE;
 
-    return (count[QUEST_BODEGABURNOUT_TYPE_RESCUE] < NUM_QUEST_BODEGABURNOUT_REQUIRED_SUBQUESTS);
+    return (count[QUEST_BODEGABURNOUT_TYPE_RESCUE] >= NUM_QUEST_BODEGABURNOUT_REQUIRED_SUBQUESTS);
 }
 
 void Script_Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
@@ -967,18 +994,50 @@ void Script_Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
     gSpecialVar_Result = Quest_Bodegaburnout_IsReadyForTakedownQuest();
 }
 
-void Quest_Bodegaburnout_BufferDeliveryItemName(void)
+static enum SubQuestDefines Quest_Bodegaburnout_ConvertCurrentLocationToSubquest(void)
 {
-    enum SubQuestDefines subquestId = gSpecialVar_0x8004;
-    u32 item = bodegaBurnoutInfo[subquestId].deliveryItem;
+    u32 mapId = GetCurrentMap();
+
+    for (u32 subQuestIndex = 0; subQuestIndex < QUEST_BODEGABURNOUT_SUB_COUNT; subQuestIndex++)
+    {
+        DebugPrintf("mapId %d | assigned %d",mapId,Quest_Bodegaburnout_GetAssignedMap(subQuestIndex));
+        if (Quest_Bodegaburnout_GetAssignedMap(subQuestIndex) != mapId)
+            continue;
+
+        return subQuestIndex;
+    }
+    return SUB_QUEST_1;
+}
+
+static void Quest_Bodegaburnout_BufferDeliveryItemName(enum SubQuestDefines subquestId)
+{
+    u32 item = Quest_Bodegaburnout_GetDeliveryItem(subquestId);
     StringCopy(gStringVar1,GetItemName(item));
 }
 
-void Quest_Bodegaburnout_BufferTargetLocationName(void)
+void Script_Quest_Bodegaburnout_BufferDeliveryItemName(void)
 {
-    enum SubQuestDefines subquestId = gSpecialVar_0x8004;
-    u32 map = bodegaBurnoutInfo[subquestId].targetMap;
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    Quest_Bodegaburnout_BufferDeliveryItemName(subQuestId);
+}
+
+void Script_Quest_Bodegaburnout_LoadDeliveryItem(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    gSpecialVar_0x8000 = Quest_Bodegaburnout_GetDeliveryItem(subQuestId);
+    gSpecialVar_0x8001 = 1;
+}
+
+static void Quest_Bodegaburnout_BufferTargetLocationName(enum SubQuestDefines subquestId)
+{
+    u32 map = Quest_Bodegaburnout_GetTargetMap(subquestId);
     GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map),MAP_NUM(map))->regionMapSectionId,0);
+}
+
+void Script_Quest_Bodegaburnout_BufferTargetLocationName(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    Quest_Bodegaburnout_BufferTargetLocationName(subQuestId);
 }
 
 u32 Quest_BodegaBurnout_CountRemainingSubquests(void)
@@ -986,9 +1045,38 @@ u32 Quest_BodegaBurnout_CountRemainingSubquests(void)
     return Quest_Generic_CountAndBufferRemainingSubquests(QUEST_BODEGABURNOUT);
 }
 
-static void Script_Quest_BodegaBurnout_CountRemainingSubquests(void)
+void Script_Quest_BodegaBurnout_CountRemainingSubquests(void)
 {
     gSpecialVar_Result = Quest_Generic_CountAndBufferRemainingSubquests(QUEST_BODEGABURNOUT);
+}
+
+static bool8 Quest_Bodegaburnout_ShouldShopkeeperExplainQuest(enum SubQuestDefines subQuestId)
+{
+    if (QuestMenu_GetSetQuestState(QUEST_BODEGABURNOUT,FLAG_GET_ACTIVE) == FALSE)
+        return FALSE;
+
+        return (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subQuestId) == FALSE);
+}
+
+void Script_Quest_Bodegaburnout_ShouldShopkeeperExplainQuest(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    gSpecialVar_Result = Quest_Bodegaburnout_ShouldShopkeeperExplainQuest(subQuestId);
+}
+
+static enum BodegaBurnoutTypes Quest_Bodegaburnout_GetShopkeeperActiveCode(enum SubQuestDefines subQuestId)
+{
+    if (Quest_Bodegaburnout_IsSubquestDeliveryType(subQuestId) == FALSE)
+        return QUEST_BODEGABURNOUT_TYPE_RESCUE;
+
+    u32 item = Quest_Bodegaburnout_GetDeliveryItem(subQuestId);
+    return (CheckBagHasItem(item,1)) ? QUEST_BODEGABURNOUT_TYPE_DELIVERY: QUEST_BODEGABURNOUT_TYPE_DELIVERY_NO_ITEM;
+}
+
+void Script_Quest_Bodegaburnout_GetShopkeeperActiveCode(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    gSpecialVar_Result = Quest_Bodegaburnout_GetShopkeeperActiveCode(subQuestId);
 }
 
 // ***********************************************************************
