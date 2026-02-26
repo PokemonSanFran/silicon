@@ -16,7 +16,7 @@ script EnterNeriene_Event_Script {
 
 script EnterNeriene_Intro_Dialogue {
     lock
-    msgbox(format("Ain't it beautiful? All of it! The bridge, the ocean, this base. "), MSGBOX_NPC,SPEAKER_NERIENE)I find that raw power so inspiring I've long worked to demonstrate it through battling, throughout my entire career.
+    msgbox(format("Ain't it beautiful? All of it! The bridge, the ocean, this base. That battle was off the hook! You've got mad skills, {PLAYER}. Take this, you earned it!"), MSGBOX_NPC,SPEAKER_NERIENE)
     reveal(REVEAL_NERIENE)
     msgbox(format("Do you know why I built the Gym into the base, {PLAYER}?"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
 
