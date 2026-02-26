@@ -83,6 +83,13 @@ u32 Quest_Generic_CountAndBufferRemainingSubquests(u16 relevantQuest)
     return numRemainingQuests;
 }
 
+static void Quest_Generic_CountRemainingSubquestsTryProgressReward(enum QuestIdList questId)
+{
+    if (Quest_Generic_CountAndBufferRemainingSubquests(questId) != 0)
+        return;
+
+    QuestMenu_ScriptSetActive(questId);
+}
 
 void Quest_Generic_CompleteSubquests(u16 relevantQuest)
 {
@@ -928,17 +935,9 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
     },
 };
 
-static u8 Quest_Bodegaburnout_GetAssigningLocalId(enum SubQuestDefines subQuestId)
-{
-    return (bodegaBurnoutInfo[subQuestId].assigningLocalId);
-}
 static u32 Quest_Bodegaburnout_GetAssignedMap(enum SubQuestDefines subQuestId)
 {
     return (bodegaBurnoutInfo[subQuestId].assignedMap);
-}
-static u8 Quest_Bodegaburnout_GetTargetLocalId(enum SubQuestDefines subQuestId)
-{
-    return (bodegaBurnoutInfo[subQuestId].targetLocalId);
 }
 static u16 Quest_Bodegaburnout_GetDeliveryItem(enum SubQuestDefines subQuestId)
 {
@@ -1045,9 +1044,14 @@ u32 Quest_BodegaBurnout_CountRemainingSubquests(void)
     return Quest_Generic_CountAndBufferRemainingSubquests(QUEST_BODEGABURNOUT);
 }
 
+void Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_BODEGABURNOUT);
+}
+
 void Script_Quest_BodegaBurnout_CountRemainingSubquests(void)
 {
-    gSpecialVar_Result = Quest_Generic_CountAndBufferRemainingSubquests(QUEST_BODEGABURNOUT);
+    gSpecialVar_Result = Quest_BodegaBurnout_CountRemainingSubquests();
 }
 
 static bool8 Quest_Bodegaburnout_ShouldShopkeeperExplainQuest(enum SubQuestDefines subQuestId)
