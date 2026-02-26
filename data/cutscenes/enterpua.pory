@@ -56,7 +56,7 @@ script EnterPua_PuaDefeated_Script {
     setvar(VAR_CHASILLA_STATE,DEFEATED_PUA)
     setflag(FLAG_CONSTRUCTION_BREAKING_NEWS) //set up for A New Strike
     setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_PUA)
-    msgbox(format("That battle was HYPE! I fuck with that skill, mad heavy. You earned this."),,SPEAKER_PUA)
+    msgbox(format("That battle was off the hook! You've got mad skills, {PLAYER}. Take this, you earned it!"),,SPEAKER_PUA)
     closemessage
     tweetfanfare(TWEET_GYM_CHASILLA_BADGE,MUS_OBTAIN_BADGE)
     giveitem(ITEM_TM17)
