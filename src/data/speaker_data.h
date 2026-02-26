@@ -2231,4 +2231,175 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverystrengthh"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYA] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverya"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYB] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryb"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTC] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycutc"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHI] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverystrengthi"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHF] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryrocksmashf"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYWHIRLPOOLJ] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverywhirlpoolj"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryrocksmashg"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTD] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycutd"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTE] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycute"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuerocksmasho"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUECUTM] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuecutm"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuestrengthq"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEDIVEN] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuediven"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEK] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuek"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuerocksmashp"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEL] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuel"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEWHIRLPOOLS] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuewhirlpools"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUESTRENGTHR] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuestrengthr"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
 };
