@@ -35,7 +35,7 @@ script LetsGrabLunch_StartConversation_Dialogue {
 
         msgbox(format("Yeah, being SharpRise Capital's official lapdog must be exhausting! Bummer."),,SPEAKER_BAIYA)
 
-        msgbox(format("This again? And besides, I know you've been busy too. Resido loves their “hometown hero robbed of championship” narrative."),,SPEAKER_ALICIA)
+        msgbox(format("Surely even you're too busy for more of this again? Resido loves their hometown hero. I've seen some saying they feel like you were robbed."),,SPEAKER_ALICIA)
 
         msgbox(format("Hey, you beat me fair and square… but the extra popularity can't hurt."),,SPEAKER_BAIYA)
 

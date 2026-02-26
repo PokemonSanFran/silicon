@@ -46,7 +46,7 @@ script LetsGettheBandBackTogether_MeetInBasement_Script
     waitmovement(BAIYA)
     msgbox(format("I didn’t think you were coming back."),MSGBOX_NPC,SPEAKER_BAIYA,,EMOTE_SHOCK)
 
-    msgbox(format("I had an insane dream last night, which really helped. I'm sorry about what I said yesterday. I was wrong. You can hack it. And SharpRise Capital... they're actually monsters."),,SPEAKER_ALICIA)
+    msgbox(format("I had an insane dream last night, which really helped. I'm sorry about what I said yesterday. I was wrong. You can hack it. And as far as Sharprise is concerned…They're monsters, and they need to go down. I realise that now."),,SPEAKER_ALICIA)
     msgbox(format("Damn, you did more thinking than I thought."),,SPEAKER_BAIYA)
     msgbox(format("You have no idea how insane that dream was... but I'm serious. I'm here to help."),,SPEAKER_ALICIA,,EMOTE_SWEAT)
 

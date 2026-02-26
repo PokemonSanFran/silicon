@@ -92,7 +92,7 @@ script WhyDidntYouRatMeOut_ConversationInStands {
 
         msgbox(format("No seriously, it means a lot... but I still have to crush you in the Championship. "),,SPEAKER_BAIYA_TIDE)
 
-        msgbox(format("Like every other time you've beaten me, right. Besides, we're not going to meet until the Finals. You're not even going to make it through Charlotte!"),,SPEAKER_ALICIA)
+        msgbox(format("Like every other time you've beaten me, right. Besides, we wouldn't even meet until the Finals…And you'd have to go through Charlotte on the way."),,SPEAKER_ALICIA)
 
         msgbox(format("You know them?"),,SPEAKER_BAIYA_TIDE)
 

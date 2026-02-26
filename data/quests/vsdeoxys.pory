@@ -306,7 +306,7 @@ msgbox(format("…what happened?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,
 msgbox(format("Wait what?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
     msgbox(format("Yeah, you should have seen it! I said that we had defense protocols to handle you, but we could only hold you off for so long."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER,TAIL_DEFAULT,EMOTE_LAUGH,PHONE_OFF)
     msgbox(format("I told them they were absolutely onto something, you had the real deal, but they needed to delete Buzzr from their phone and told them they needed the first ticket to Fiore, where nobody could track them down."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    msgbox(format("Wait, he’s just abandoning everything and leaving?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
+    msgbox(format("So... he’s just abandoning everything and leaving?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
     msgbox(format("They’ve got nothing to leave behind, I promise. They’ve got no life outside of hunting this thing. Man, I’m so glad that’s over!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     applymovement(VSDEORESEARCHER, moves(face_left, walk_left * 7, walk_down * 2, walk_left * 2, step_end))
     waitmovement(VSDEORESEARCHER)

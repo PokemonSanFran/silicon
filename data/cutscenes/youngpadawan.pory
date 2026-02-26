@@ -44,7 +44,7 @@ script YoungPadawan_Intro_Dialogue
 
     msgbox(format("Makes you wonder how committed to accuracy the winners are. Old geezers like me, who were around for the history in the making, have a responsibility to set the record straight. Gotta make sure the truth doesn't get lost, you know?"),,SPEAKER_TALA)
 
-    msgbox(format("Makes sense, yeah. But the government doesn't have any reason to lie, which is a relief."),,SPEAKER_ALICIA)
+    msgbox(format("Makes sense! I hope that responsibility never feels like a burden, though. Gotta enjoy retirement at some point!"),,SPEAKER_ALICIA)
 
     goto(YoungPadawan_StartBattle_Script)
 }

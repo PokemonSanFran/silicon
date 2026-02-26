@@ -421,11 +421,11 @@ script ImIn_OfficeReveal_Dialogue{
 
         msgbox(format("The Tide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpRise Capital did for you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("So you just don't care that you work for murderers?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("So you just don't care that you work for murderers? What is wrong with you?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("All this helping people shit is nice and all, but I came here to the best. I don't care to get bogged down in all your allegations and melodrama. If I've done something wrong, I'll wrestle with it AFTER I reach the top. I'll donate to a homeless shelter or something."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Daddy won't be able to buy your way out of this one."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("You're the worst…Daddy won't be able to buy you your way out of this one."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
         applymovement(CHARLOTTE, moves(walk_right, walk_up * 3, face_left, step_end))
@@ -464,7 +464,7 @@ script ImIn_CharlotteDefeated_Dialogue {
 
         msgbox(format("What's the secret? What am I missing? Why do I keep LOSING?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Everything about SharpRise Capital is bullshit. You're not any stronger. The region isn't any better. But as long as they have stans like you, they're going to continue to get richer and more toxic. Tell me where Lucrezia is."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Everything about SharpRise is a lie. You're not any stronger. The region isn't any better. But as long as they have corporate stooges like you they're gonna get richer and people will suffer for it. Tell me where Lucrezia is."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("…That warp panel goes to the skydeck… Her real office is there."),,SPEAKER_CHARLOTTE_SHARPRISE)
                 call(ImIn_RevealLucreziaWarp_Script)

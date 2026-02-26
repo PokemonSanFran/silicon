@@ -283,7 +283,7 @@ script YouRealizeTheyreEvilRight_Framing_Dialogue {
 
         msgbox(format("Can't argue with that."),,SPEAKER_TALA)
 
-        msgbox(format("Kei-Ying said that SharpRise's goal is to uplift the entire region. They've already managed to change my life with access to all these apps and services - why WOULD they stop with just us? They want to help everybody!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Kei-Ying said that SharpRise's goal is to uplift the entire region. I've had a great time here thanks to them - why would they stop with just us? I've spoken to the people there a lot. They want to help everybody!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
         msgbox(format("I joined the League Challenge to try to change things from the inside. But now I'm certain that we need external pressure in order to improve things for all of us."),,SPEAKER_BAIYA_TIDE)
 
@@ -305,7 +305,7 @@ script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
     closemessage
 
     fadescreen(FADE_TO_BLACK)
-    msgbox(format("Fighting against SharpRise Capital and the government and the government doesn't make any sense! There's no way this is the right path."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(format("Fighting against Sharprise and…The literal government?..This is going off the rails. I'm no criminal. This isn't the right path."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
     msgbox(format("They're just asking for trouble. The protests, the hacking, the riots... is that really what I want? Adaora says The Tide doesn't condone violence, but can I even believe her?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("They might think they're right. They do want to protect Resido and make a difference, but this isn't it."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("I've worked so hard to get this far. To become the Champion. I can make a difference as I am! Throwing it all away now doesn't make any sense."),,SPEAKER_ALICIA,TAIL_THOUGHT)

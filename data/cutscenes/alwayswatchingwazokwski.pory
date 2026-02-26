@@ -49,7 +49,7 @@ script AlwaysWatchingWazowski_Intro_Dialogue{
 }
 
 script AlwaysWatchingWazowski_HowDidYouKnow_Dialogue{
-        msgbox(format("Wait, how did you know that stuff?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_CONFUSE)
+        msgbox(format("Uh, how did you know all this?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_TALK,EMOTE_CONFUSE)
 
         msgbox(format("Look around. Do you think there's anything in the region that I don't see?"),MSGBOX_DEFAULT,SPEAKER_RAMESH)
         msgbox(format("SharpRise Capital security used to also perform surveillance, but my team was more than efficient enough to perform that on top of their existing duties."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
