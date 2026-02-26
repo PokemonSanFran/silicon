@@ -145,7 +145,7 @@ script WhyAreYouHelpingThem_PreBattleBoss_Script {
         applymovement(VIGRIM,Common_Movement_FaceLeft)
         applymovement(PLAYER, moves(walk_up * 2, walk_right * 4, step_end))
         waitmovement(0)
-        msgbox(format("It's a shame that the cops have totally infiltrated our youth. "),,SPEAKER_VIGRIM)
+        msgbox(format("It's a shame that the police have totally infiltrated our youth. "),,SPEAKER_VIGRIM)
 
         closemessage
 

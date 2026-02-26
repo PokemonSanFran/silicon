@@ -37,7 +37,7 @@ script SorryAboutMyFriends_Intro_Dialogue {
 
         msgbox(format("Wait, that was The Tide? Everytime I run into them, they're attacking innocent people! "),,SPEAKER_ALICIA)
 
-        msgbox(format("Actually, that... unfortunate worldview is why I'm here. "),,SPEAKER_ADAORA)
+        msgbox(format("Actually, that's why I'm here. It sounds like you have an…Unfortunate perception of us."),,SPEAKER_ADAORA)
 
         msgbox(format("What do you mean? Are you guys helping or hurting people? What's your deal?"),,SPEAKER_ALICIA)
 

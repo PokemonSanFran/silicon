@@ -146,10 +146,10 @@ script SpeechSpeechSpeech_Intro_Dialogue {
 	msgbox(format("As our duly elected second in command, Adaora will succeed me as the Leader of The Tide for the remainder of this term."),,SPEAKER_VIGRIM)
         msgbox(format("Given her track record of service to the cause, she has my full trust and support, and I know you all feel the same."),,SPEAKER_VIGRIM,,EMOTE_HAPPY)
         msgbox(format("If there any objection, speak now!"),,SPEAKER_VIGRIM)
-	closemessage 
+	closemessage
 	call(SpeechSpeechSpeech_CrowdLookAround_Script)
         msgbox(format("Then it is so."),,SPEAKER_VIGRIM)
-	closemessage 
+	closemessage
         call(SpeechSpeechSpeech_ResetFacing_Script)
 
         msgbox(format("Thank you for all you’ve done for us, Vigrim, I hope to live up to your example."),,SPEAKER_ADAORA)
@@ -236,7 +236,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         applymovement(GRUNTD,SpeechSpeechSpeech_LookAround)
         waitmovement(GRUNTD)
 
-        msgbox(format("You all know how companies like Presto and Buzzr have ruined our lives and families. But with the combined popularity of the Champion, Elite Four and our manpower, I think we can hurt these people where it counts: their wallets. We can’t drive these parasitic companies out of the region… but all that money has to go somewhere. Let’s use that money to strengthen the region and create a brighter future for us all."),,SPEAKER_ADAORA)
+        msgbox(format("You've all seen the damage that companies like Presto and Buzzr have done to the fabric of Resido's society. But with the combined popularity of the Champion, Elite Four and our manpower, I think we can hurt these people where it counts: their wallets. We can’t drive these parasitic companies out of the region… but all that money has to go somewhere. Let’s use that money to strengthen the region and create a brighter future for us all."),,SPEAKER_ADAORA)
 
         closemessage
 

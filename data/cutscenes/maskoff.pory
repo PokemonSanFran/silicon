@@ -176,12 +176,12 @@ script MaskOff_PostBattle_Dialogue
     delay(32)
     fadescreen(FADE_FROM_BLACK)
 
-    msgbox(format("I see. If the Elite Four is going to present as a united front, I’ll need to give up leadership to Adaora. This will come as a shock to her, and she has some reservations about becoming the face of The Tide… but I know they can handle it."),,SPEAKER_ELEANOR)
+    msgbox(format("I see. If the Elite Four is going to present as a united front, I’ll need to give up leadership to Adaora. This will come as a shock to her, and she has some reservations about becoming the face of The Tide… but I know she can handle it."),,SPEAKER_ELEANOR)
     msgbox(format("... I'll have to face Frank again."),,SPEAKER_ELEANOR,TAIL_WHISPER)
     msgbox(format("I have to apologize to him for disappearing. But that's my problem, not yours."),,SPEAKER_ELEANOR)
     closemessage
     delay(16)
-    msgbox(format("You should get some rest. Our war begins first thing in the morning."),,SPEAKER_ELEANOR,TAIL_SHOUT)
+    msgbox(format("You should get some rest. Our battle continues first thing in the morning."),,SPEAKER_ELEANOR,TAIL_SHOUT)
     closemessage
     goto(MaskOff_End_Dialogue)
 }
