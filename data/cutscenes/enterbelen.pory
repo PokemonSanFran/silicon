@@ -19,7 +19,7 @@ script EnterBelen_PutMeatInOven_Dialogue {
   applymovement(BELEN, Common_Movement_WalkInPlaceUp)
   waitmovement(0)
   closemessage
-  msgbox(format("Cool, cake's in the oven. "), MSGBOX_NPC,SPEAKER_BELEN)
+  msgbox(format("Cake's in the oven, excellente!"), MSGBOX_NPC,SPEAKER_BELEN)
     closemessage
   call(EnterBelen_DetermineMovementToBattlefield_Script)
   goto(EnterBelen_Intro_Dialogue)
@@ -45,9 +45,9 @@ script EnterBelen_DetermineMovementToBattlefield_Script {
 script EnterBelen_Intro_Dialogue
 {
   lock
-  msgbox(format("Ticket said you're {PLAYER}, right? I'm Belen, head baker of Poc-Chuc and the Gym Leader here. After you lose, I'll treat you to my latest creation: crepe cake with a Pinap glaze. It's my first time making it, but from that amazing smell, it's gonna be great."),,SPEAKER_BELEN)
+  msgbox(format("Ticket said you're {PLAYER}, right? I'm Belen, head chef of Needles and the Gym Leader here."),,SPEAKER_BELEN)
   reveal(REVEAL_BELEN)
-  msgbox(format("Did you know that a lot of your sense of taste actually is because of your sense of smell? All of your senses work together to create your culinary experiences. I'll show how I do that in battle too! Let's see if I can overwhelm your palette before my cake burns!"),,SPEAKER_BELEN,,EMOTE_HAPPY)
+  msgbox(format("From seafood to pastries, I do it all, on top of battling! That's why I never married. Too busy striving be to the best. Let me show you the fruits of my labor! And maybe of my comiseration Razz Tart after you lose!"),,SPEAKER_BELEN,,EMOTE_HAPPY)
   startmenu_savescreen
   goto(EnterBelen_StartGymBattle_Script)
 }
@@ -98,7 +98,6 @@ script EnterBelen_ExplainBuzzr_Dialogue{
     msgbox(format("You haven't tasted the wonders of Buzzr?"),,SPEAKER_BELEN)
     msgbox(format("Everybody in the region uses the app! You can send messages and post updates about your world. In the SharpRise Capital League, when you defeat a Gym Leader, we celebrate with a post on Buzzr! When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_BELEN)
     call(EnterBelen_DownloadBuzzr_Dialogue)
-    msgbox(format("Now let's try this dish!"),,SPEAKER_BELEN)
     closemessage
     return
 }
@@ -137,7 +136,7 @@ script EnterBelen_PostDefeat1_Dialogue {
 
 script EnterBelen_PostDefeat2_Dialogue {
   lockall
-  msgbox(format("Let's bake together again soon! Now if you'll excuse me..."),,SPEAKER_BELEN)
+  msgbox(format("Let's cook together again soon! Now if you'll excuse me..."),,SPEAKER_BELEN)
     closemessage
   releaseall
   end

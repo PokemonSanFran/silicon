@@ -30,7 +30,7 @@ script EnterBD_MumbleToSelf_Dialogue {
         applymovement(BD, moves(walk_right * 3, face_up, step_end))
     waitmovement(0)
 
-    msgbox(format("They just don't understand… SharpRise was going to own this place, one way or another. We were never going to win. I made sure that Tirabudin Gym kept its Gym! And what, I'm a traitor because I kept my job? Got paid?"),,SPEAKER_BD,TAIL_WHISPER)
+    msgbox(format("They wouldn't get it…Sharprise were gonna own this place one way or another…It wouldn't even be a Gym anymore if not for me…"),,SPEAKER_BD,TAIL_WHISPER)
     closemessage
 
     applymovement(BD, moves(walk_left * 3, face_up, step_end))

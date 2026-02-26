@@ -22,11 +22,11 @@ msgbox(format("Ever been to the Battle Resort?"),,SPEAKER_PUA)
 
 msgbox(format("... no?"),,SPEAKER_ALICIA)
 
-msgbox(format("Bruh, you've gotta go some day. Sickest place to breed Pokémon in the WORLD. And I've been to them all. The breeze in your hair, the sand in your tires, the faint smell of ocean... man that shit just hits, you know? Gets me all fired up!"),,SPEAKER_PUA)
+msgbox(format("Bruh, you've gotta go some day. Sickest place to breed Pokémon in the WORLD. And I've been to 'em all. The breeze in your hair, the sand in your tires, the faint smell of the ocean… man that just hits, you know? Gets me all fired up!"),,SPEAKER_PUA)
 
 msgbox(format("Oh uh, sounds cool I guess..."),,SPEAKER_ALICIA)
 
-msgbox(format("For real, I swear, the Eggs like... prefer the quiet environment or something. Like yeah, these Chasilla perks is hella crisp, but there's something about being out there, riding back and forth, that really does it for me. It's like... meditation or some shit, fasho. I be straight GIGGIN'."),,SPEAKER_PUA)
+msgbox(format("For real, I swear the Eggs like…Prefer the quiet out there or something. Like yeah, these Chasilla perks are pretty dope, but there's something about being out there, riding back and forth that just really does it for me. It's like…Meditation, y'know?"),,SPEAKER_PUA)
 
 msgbox(format("Sounds exciting. Or relaxing? I can't really tell."),,SPEAKER_ALICIA)
 

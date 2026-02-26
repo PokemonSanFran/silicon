@@ -25,7 +25,7 @@ script EnterShinzo_StartGymBattle_Script
 {
     lock
     faceplayer
-    msgbox(format("Trainers from Sinnoh can overcome anything, even running a team infested with mongrels!"),,SPEAKER_SHINZO,TAIL_SHOUT)
+    msgbox(format("Trainers from Sinnoh can overcome anything, even running a team infested with mongrels."),,SPEAKER_SHINZO,TAIL_SHOUT)
     closemessage
     trainerbattle_no_intro(TRAINER_SHINZO, format("It's an honor to lose to you."))
     goto(EnterShinzo_ShinzoDefeated_Script)
@@ -60,10 +60,10 @@ script EnterShinzo_ExplainBuzzr_Dialogue{
         return
     }
 
-    msgbox(format("You've earned a tweet from me!"),,SPEAKER_SHINZO)
+    msgbox(format("You've earned a tweet from me."),,SPEAKER_SHINZO)
     msgbox(format("What's a tweet?"),,SPEAKER_ALICIA)
-    msgbox(format("You've never experienced Buzzr? Maybe you're lucky..."),,SPEAKER_SHINZO)
-    msgbox(format("Buzzr lets you send messages and post updates... its good for keeping up with what regular people think. In this region's Pokémon League, you don't get Badges like back home... instead we post about it on Buzzr. When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_SHINZO)
+    msgbox(format("You've never experienced Buzzr? Maybe you're lucky."),,SPEAKER_SHINZO)
+    msgbox(format("Buzzr lets you send messages and post updates. its good for keeping up with what regular people think. In this region's Pokémon League, you don't get Badges like back home. instead we post about it on Buzzr. When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_SHINZO)
     call(EnterBelen_DownloadBuzzr_Dialogue)
     msgbox(format("Okay, is this your account...?"),,SPEAKER_SHINZO)
     closemessage
@@ -73,7 +73,7 @@ script EnterShinzo_ExplainBuzzr_Dialogue{
 script EnterShinzo_PostDefeat1_Dialogue {
     setvar(VAR_GYM_2_STATE,GYM_EXPLAINED_BADGE_AND_TM)
         lockall
-        msgbox(format("Traded Pokémon up to Level Psfgymlevel2 will recognize your ShinzoBadge Badge and the skill it represents. That TM teaches Psfgymattacknum2, which does exactly what it sounds like!"),MSGBOX_NPC,SPEAKER_SHINZO)
+        msgbox(format("Traded Pokémon up to Level Psfgymlevel2 will recognize your ShinzoBadge Badge and the skill it represents. That TM teaches Psfgymattacknum2, which does exactly what it sounds like."),MSGBOX_NPC,SPEAKER_SHINZO)
         closemessage
         releaseall
         end
@@ -81,7 +81,7 @@ script EnterShinzo_PostDefeat1_Dialogue {
 
 script EnterShinzo_PostDefeat2_Dialogue {
         lockall
-        msgbox(format("Next time we battle, I'll be better. I won't let you, or the Sinnoh people, down!"),MSGBOX_NPC,SPEAKER_SHINZO)
+        msgbox(format("Next time we battle, I'll be better. I shan't let the people of Sinnoh down."),MSGBOX_NPC,SPEAKER_SHINZO)
                 closemessage
         releaseall
         end

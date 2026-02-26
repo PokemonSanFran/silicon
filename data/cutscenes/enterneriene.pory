@@ -16,7 +16,7 @@ script EnterNeriene_Event_Script {
 
 script EnterNeriene_Intro_Dialogue {
     lock
-    msgbox(format("Ain't it beautiful? All of it! The bridge, the ocean, this base. "), MSGBOX_NPC,SPEAKER_NERIENE)
+    msgbox(format("Ain't it beautiful? All of it! The bridge, the ocean, this base. "), MSGBOX_NPC,SPEAKER_NERIENE)I find that raw power so inspiring I've long worked to demonstrate it through battling, throughout my entire career.
     reveal(REVEAL_NERIENE)
     msgbox(format("Do you know why I built the Gym into the base, {PLAYER}?"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
 
@@ -28,9 +28,9 @@ script EnterNeriene_Intro_Dialogue {
 
     msgbox(format("We would -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-    msgbox(format("WE WOULD BLOW THEM TO SMITHEEREENS! Oh baby, just gets me excited thinking about how we can blow those idiots right back to the Stone Age."),MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT,EMOTE_HAPPY)
+    msgbox(format("WE'D BLOW 'EM TO SMITHEREENS! Oh baby, what a thrill…To be able to send your enemies straight back to the stone age."),MSGBOX_DEFAULT,SPEAKER_NERIENE,TAIL_SHOUT,EMOTE_HAPPY)
 
-    msgbox(format("That raw power is so inspiring, once I got the chance, I knew I wanted my career to have the energy of that legacy. That's why we're up here."),MSGBOX_DEFAULT,SPEAKER_NERIENE)
+    msgbox(format("I find that raw power so inspiring I've long worked to demonstrate it through battling, throughout my entire career."),MSGBOX_DEFAULT,SPEAKER_NERIENE)
         setvar(VAR_GYM_5_STATE, GYM_SAVE_BEFORE_LEADER)
     closemessage
     startmenu_savescreen
