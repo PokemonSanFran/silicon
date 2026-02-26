@@ -107,7 +107,7 @@ script Prologue_PostWarp_Hall_Dialgoue{
         lock
         applymovement(GUARD, moves(lock_facing_direction, walk_right, unlock_facing_direction, step_end))
         applymovement(MAGNUS,Common_Movement_FaceLeft)
-        msgbox(format("Its not the usual celebration, but of course, with the recent news, the budget has been slashed. But we've figured a small gathering with the Elite Four and Gym Leaders would be nice."),,SPEAKER_MAGNUS)
+        msgbox(format("Of course it's not the usual celebration, but as you can imagine per the recent news - the budget has been slashed. We surmised that a small gathering with the Elite Four and Gym Leaders would suffice. I hope we were right! Hohoho!"),,SPEAKER_MAGNUS)
         closemessage
         applymovement(MAGNUS,Common_Movement_FaceDown)
         msgbox(format("Eleanor was waiting for us to arrive - they've got a speech prepared."),,SPEAKER_MAGNUS)
@@ -319,7 +319,7 @@ script Prologue_Tala_Dialogue{
 }
 
 script Prologue_Frank_Dialogue{
-    msgbox(format("...I don't get it. She wanted to fight. Why is she running?"),MSGBOX_AUTOCLOSE,SPEAKER_FRANK,,EMOTE_SAD)
+    msgbox(format("...I don't get it. She wanted to fight. Why's she running?"),MSGBOX_AUTOCLOSE,SPEAKER_FRANK,,EMOTE_SAD)
     end
 }
 

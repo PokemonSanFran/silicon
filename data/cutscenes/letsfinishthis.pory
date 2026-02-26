@@ -48,9 +48,9 @@ script LetsFinishThis_Debrief_Dialogue
 {
     lock
         startcutscene(JUMPPLAYER_LETSFINISHTHIS)
-        msgbox(format("I don’t think I’m surprised by SharpRise Capital, but the government too? All those talks, those negotiations… aren’t they supposed to protect their citizens?"),,SPEAKER_MAGNUS)
+        msgbox(format("I don’t think I’m surprised by SharpRise Capital, but the government too? All those talks, those negotiations… they're supposed to protect their citizens!"),,SPEAKER_MAGNUS)
 
-        msgbox(format("That part doesn’t surprise me. Old age getting to you? We all know, money is their only constituent."),,SPEAKER_FRANK)
+        msgbox(format("That part doesn’t surprise me. Old age getting to ya? We all know, money is their only constituent."),,SPEAKER_FRANK)
 
         msgbox(format("But innocent people? Attacking an entire island just to wipe out The Tide? This is insane!"),,SPEAKER_TALA)
 
@@ -62,7 +62,7 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("That’s what I mean. We spun up this awesome program, we attacked the operations of their corporate partners, our message is really getting out there! I think they’re nervous."),,SPEAKER_BAIYA_TIDE)
 
-        msgbox(format("Perhaps desperate."),,SPEAKER_FRANK)
+        msgbox(format("Or desperate."),,SPEAKER_FRANK)
 
         msgbox(format("Maybe now it's the time to really bring the fight to them!"),,SPEAKER_BAIYA_TIDE)
 
@@ -102,7 +102,7 @@ script LetsFinishThis_StartPlanning_Dialogue {
 
         msgbox(format("Nobody has seen Keiying since their stunt in the warehouse. Cops have been crawling all over that neighborhood and house looking for him."),,SPEAKER_ADAORA)
 
-        msgbox(format("What about Ramesh? That workaholic absolutely has a panel in their place too. And no police looking for them."),,SPEAKER_FRANK)
+        msgbox(format("How about Ramesh? That workaholic absolutely has a panel in their place. And no police looking for them."),,SPEAKER_FRANK)
         closemessage
 
         applymovement(PLAYER, Common_Movement_FaceDown)

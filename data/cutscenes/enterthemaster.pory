@@ -154,12 +154,12 @@ script EnterTheMaster_ClearingIntro_Dialogue
         applymovement(PLAYER, moves(walk_up * 1, step_end))
         waitmovement(0)
 
-	msgbox(format("Charlotte and {PLAYER}! Welcome to the deepest part of Leaverra Forest."),,SPEAKER_FRANK)
-	msgbox(format("Geez, I forgot... they're still just a kid."),,SPEAKER_FRANK,TAIL_WHISPER,EMOTE_CONFUSE)
+    buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
+	msgbox(format("Charlotte and {PLAYER}! Welcome to the deepest part of {STR_VAR_1}."),,SPEAKER_FRANK)
         msgbox(format("Are you Frank?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 
         reveal(REVEAL_FRANK)
-        msgbox(format("Yeah! And my notebook?"),,SPEAKER_FRANK)
+        msgbox(format("Yeah! My notebook?"),,SPEAKER_FRANK)
         closemessage
 
         applymovement(FRANK,Common_Movement_FaceLeft)
@@ -168,11 +168,12 @@ script EnterTheMaster_ClearingIntro_Dialogue
 
 		bufferspeciesname(STR_VAR_1,SPECIES_HYDREIGON)
 		bufferspeciesname(STR_VAR_2,SPECIES_MAGMORTAR)
-        msgbox(format("I hope {STR_VAR_1} and {STR_VAR_2} in LanjingTunnel weren't too much trouble. Getting them to battle without my direct commands was certainly a challenge."),,SPEAKER_FRANK)
+        buffermapname(STR_VAR_3,MAP_LANJING_TUNNEL)
+        msgbox(format("I hope {STR_VAR_1} and {STR_VAR_2} in {STR_VAR_3} weren't too much trouble. Getting 'em to battle without my direct commands was a challenge!"),,SPEAKER_FRANK)
 
         msgbox(format("Is that what you're teaching us? Battling with our eyes closed? Sounds useful."),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("Every client always sends me a smartass… Let's get -"),,SPEAKER_FRANK)
+        msgbox(format("Every client always sends me one of these… Let's get -"),,SPEAKER_FRANK)
         closemessage
 
         call(EnterTheMaster_StartEarthquake_Script)
@@ -183,11 +184,11 @@ script EnterTheMaster_ClearingIntro_Dialogue
         applymovement(FRANK, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
         waitmovement(0)
 
-        msgbox(format("Are either of you familiar with the Scott's Trainer Theory?"),,SPEAKER_FRANK)
+        msgbox(format("Either of you familiar with Scott's Trainer Theory?"),,SPEAKER_FRANK)
 
         msgbox(format("Yeah, that's the Battle Frontier guy, right?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("Hmm, the smartass actually knows something!"),,SPEAKER_FRANK)
+        msgbox(format("Hmm, the smart alec actually knows something!"),,SPEAKER_FRANK)
 
         msgbox(format("Oh… does each part of this training map to each of those principles?"),,SPEAKER_CHARLOTTE)
 
@@ -209,20 +210,21 @@ script EnterTheMaster_ClearingIntro_Dialogue
 
         msgbox(format("…and so concludes my theory on how your silly little tests correspond with each of Scott's 7 principles."),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("…sorta, kinda, not really. If you think life is going to map one to one like that for you, you've got a rude awakening ahead."),,SPEAKER_FRANK)
+        msgbox(format("…sorta, kinda, not really. If you think life is gonna to map one to one like that, you've gotta rude awakening ahead."),,SPEAKER_FRANK)
         msgbox(format("…Oh."),,SPEAKER_CHARLOTTE)
 
         msgbox(format("So what's next?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
-        msgbox(format("{PLAYER}, you may have noticed other Trainers using Mega Evolution. SharpRise wants to make sure their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise has also provided {PLAYER} with a {STR_VAR_1}. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here..."),,SPEAKER_FRANK)
+        msgbox(format("{PLAYER}, you've probably seen other Trainers using Mega Evolution. SharpRise wants their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise has provided {PLAYER} with a {STR_VAR_1}. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here..."),,SPEAKER_FRANK)
         closemessage
+        cueobjectplayer(FRANK)
         giveitem(ITEM_MEGA_RING)
         msgbox(format("Charlotte, do you wanna - "),,SPEAKER_FRANK)
         msgbox(format("When your Pokémon is holding its Mega Stone and you have a Key Stone, you can press {START_BUTTON} in battle to trigger a transformation! At the beginning of your turn, your Pokémon will Mega Evolve, which will juice their stats and sometimes give them a new type or ability."),,SPEAKER_CHARLOTTE)
         msgbox(format("Your {STR_VAR_1} will only work once per battle, and your Pokémon will revert back to normal after it faints or when the battle ends."),,SPEAKER_CHARLOTTE)
         call(EnterTheMaster_MegaEvolution_Dialogue)
         msgbox(format("Pretty much got all the basics."),,SPEAKER_FRANK)
-        msgbox(format("If you go further back into the clearing, there are battle simulation robots there. The one on the right are for {PLAYER} - they're calibrated specifically based on the battle data that SharpRise Capital gave me for each of you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
+        msgbox(format("If you go further back into the clearing, there's battle simulation bots there. The right side one is for {PLAYER} - they're calibrated specifically based on the battle data that SharpRise Capital gave me for both of you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
         goto(EnterTheMaster_ExplainRobots_Dialogue)
 }
 
@@ -263,8 +265,8 @@ script EnterTheMaster_MegaEvolution_Dialogue
 }
 
 script EnterTheMaster_ExplainRobots_Dialogue{
-    msgbox(format("If you talk to them, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that are assigned to you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
-        msgbox(format("The first stage needed you to work together, but for this one, don't help each other."),,SPEAKER_FRANK)
+    msgbox(format("If you talk to 'em, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that is assigned to you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
+        msgbox(format("The first stage needed you to work together, but this time, you're on your own."),,SPEAKER_FRANK)
         closemessage
         call(TryAutoSave)
         endcutscene
@@ -448,7 +450,7 @@ script EnterTheMaster_CompleteQuest_Script{
     setvar(VAR_LEAVERRA_FOREST_STATE,FINISHED_FRANK_PUZZLES)
     applymovement(FRANK,Common_Movement_FaceDown)
     waitmovement(FRANK)
-    msgbox(format("Well, it's been quite a week. Impressed you were both able to clear those puzzles so quickly."),,SPEAKER_FRANK)
+    msgbox(format("It's been quite a week. Impressed you were both able to clear those puzzles so quickly."),,SPEAKER_FRANK)
     msgbox(format("A week?!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
     msgbox(format("It feels like maybe a day at most!"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
     msgbox(format("Yeah, the forest has that effect on people..."),,SPEAKER_FRANK)

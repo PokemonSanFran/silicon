@@ -188,8 +188,8 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND)
         applymovement(PLAYER, moves(walk_right * 2, walk_up, step_end))
         waitmovement(0)
-
-        msgbox(format("The Champion has arrived! Great to meet you, I'm Magnus, and I'm the leader of the Resido Elite Four. Or, I was. Now I'm not really sure what I do."),,SPEAKER_MAGNUS)
+        bufferspeciesname(STR_VAR_1,SPECIES_DIALGA)
+        msgbox(format("The Champion has arrived! A pleasure to meet at last. I'm Magnus, Leader of the Resido Elite Four. Or, at least I was. Now? {STR_VAR_1} knows what I even do…"),,SPEAKER_MAGNUS)
         reveal(REVEAL_MAGNUS)
 
         msgbox(format("Nice to meet you! …Baiya, where are we?"),,SPEAKER_ALICIA)
@@ -202,7 +202,7 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         applymovement(TALA,Common_Movement_ExclamationMark)
         applymovement(MAGNUS,Common_Movement_ExclamationMark)
 
-        msgbox(format("Wow! Super resourceful. Genius, even."),,SPEAKER_MAGNUS)
+        msgbox(format("Well! How resourceful! Genius, even!"),,SPEAKER_MAGNUS)
 
         msgbox(format("I can finally prove that SharpRise Capital is worse than we originally thought. Once I do that, I want all of us to find a way to work together to protect Resido from their bullshit."),,SPEAKER_BAIYA_TIDE)
 

@@ -16,7 +16,7 @@ script LetsFixThis_EliteVideo_Dialogue
 
         //PSF TODO should this be a video or just a series of tweets?
 
-        msgbox(format("People of Resido, your Elite Four has returned! We could not continue to stand by and watch these corporations destroy our home for profits."),,SPEAKER_FRANK)
+        msgbox(format("Resido, your Elite Four is back! We couldn't stand by and watch these corporations destroy our home for profits."),,SPEAKER_FRANK)
 
         msgbox(format("We will be giving our full support and efforts to assisting The Tide in their mission to help the people of this region, alongside Champion {PLAYER} and our hometown hero, Baiya."),,SPEAKER_ELEANOR)
 
