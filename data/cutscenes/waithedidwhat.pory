@@ -144,10 +144,10 @@ script WaitHeDidWhat_CharlotteMeltdown_Dialogue {
     random(5)
 
         switch (var(VAR_RESULT)) {
-            case 0:msgbox(format("I lost to that absolute garbage Trainer? What happened? He must have cheated... right!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD)
+            case 0:msgbox(format("I lost to that absolute garbage Trainer!? What happened? He must have cheated... right!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD)
             case 1:msgbox(format("Get the fuck away from me!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY)
             case 2:msgbox(format("How could this happen? Now I have to win another match just to get THIRD?!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD)
-            case 3:msgbox(format("Absolute bullshit. Argh I cannot believe this shit…"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY)
+            case 3:msgbox(format("Absolute NONSENSE! Gah!! I can NOT believe this!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY)
             case 4:msgbox(format("...I executed our plan perfectly! It's not my fault Daddy - he must have tricked me! Fix this now, Daddy!\p...\pWhat do you mean you're working on it? What are you going to do!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SAD,PHONE_ON)
         }
 

@@ -132,8 +132,7 @@ script ExhibitionBattle_Charlotte_Dialogue
         }
 
         setvar(VAR_TALKED_CHARLOTTE,1)
-        msgbox(format("Sick battle out there. I'm hoping my facilities are as hype as that."),,SPEAKER_CHARLOTTE_SHARPRISE)
-
+        msgbox(format("Great battle out there. I hope my facilities will be as exciting as that."),,SPEAKER_CHARLOTTE_SHARPRISE)
         msgbox(format("Yeah, I heard a little bit of that; what are you working on now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("I'm heading up their community outreach program. We're going to set up a bunch of Battle Facilities all around the region."),,SPEAKER_CHARLOTTE_SHARPRISE)

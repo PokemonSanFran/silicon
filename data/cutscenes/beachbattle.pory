@@ -91,7 +91,7 @@ script BeachBattle_SaveProgress
 script BeachBattle_StartBattle_Script
 {
     lock
-        msgbox(format("My brain is scrambled from running around all day. Let's see if I can beat you without breaking a sweat!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("My brain's scrambled from running around all day. Bet I can still beat you, though! See if you can even make me sweat!"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
         closemessage
         trainerbattle_no_intro(TRAINER_CHARLOTTE_BEACHBATTLE,format("I'm legit shook. You're even stronger than I thought!"))
         closemessage

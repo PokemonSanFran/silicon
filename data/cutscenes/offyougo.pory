@@ -95,7 +95,7 @@ script OffYouGo_WelcomeParty_Dialogue {
 
         msgbox(format("Ah yes, you're not from here. Frank is one of the members of the disbanded Resido Elite Four. A powerful trainer indeed, and we think this is an excellent opportunity for you both."),,SPEAKER_OLIVER)
 
-        msgbox(format("So, where is this dude?"),,SPEAKER_CHARLOTTE)
+        msgbox(format("So, where is this guy?"),,SPEAKER_CHARLOTTE)
 
         msgbox(format("Ah yes, well, they have… unconventional training methods. In the middle of LanjingTunnel, you'll find a pathway leading underground where Frank has hidden their notebook. Once you get it, you'll get your next instructions."),,SPEAKER_OLIVER)
 

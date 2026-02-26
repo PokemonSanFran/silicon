@@ -59,10 +59,10 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
 script ImProbablyBetterThanYou_KindaShabby_Dialogue {
         applymovement(CHARLOTTE, moves(face_left, delay_16, delay_16, face_right, delay_16, delay_16, face_down, delay_16, delay_16, step_end))
         waitmovement(0)
-        msgbox(format("This place is kinda shabby, huh? I thought SharpRise Capital was pulling out all the stops for us, but there's not a butler in sight! And no private tennis courts! Not that I ever play, but it's the principle of the thing..."),,SPEAKER_CHARLOTTE)
+        msgbox(format("This place is kinda shabby, huh? I thought Sharprise were pulling out all the stops for us, but no pools or tennis courts or anything of the like…I mean I hardly play since I got into battling but still! Presentation, people…"),,SPEAKER_CHARLOTTE)
         closemessage
         msgbox(format("Oh yeah uh, it's too bad..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("This house is friggin' huge! Bigger than anywhere I've ever stayed, that's for sure..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+        msgbox(format("This house is huge though! Bigger than anywhere I've ever stayed."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
         msgbox(format("My flight was earlier today, so I've just been waiting around."),,SPEAKER_CHARLOTTE)
         goto(ImProbablyBetterThanYou_FoodAndWhereYouFrom_Dialogue)
         end
@@ -108,7 +108,7 @@ script ImProbablyBetterThanYou_Annoyed_Dialogue {
             msgbox(format("Oh man, are you trying to do some bonding or something? Lemme finish this truffle burger first..."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
             addvar(VAR_TALKED_CHARLOTTE,1)
         case 2:
-            msgbox(format("Nom nom nom..."),,SPEAKER_CHARLOTTE)
+            msgbox(format("The bites she takes are tiny, and her eyes dart around the place all the while. It's like she's watching everything even while she eats!"),,SPEAKER_CHARLOTTE)
         default:
             msgbox(format("Go check out your room!"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
             setvar(VAR_TALKED_CHARLOTTE,1)

@@ -226,7 +226,8 @@ script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
         applymovement(CHARLOTTE, moves(face_left, delay_16, delay_16, delay_16, face_right, delay_16, delay_16, delay_16, face_down, step_end))
         waitmovement(0)
 
-        msgbox(format("Whew, that was exhausting. How about we crash at my place nearby in EspuleeOutskirts and then tackle LeaverraForest tomorrow?"),MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+        msgbox(format("Whew, that was exhausting. How about we crash at my place nearby in {STR_VAR_1} and then tackle the forest tomorrow?"),MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
         setvar(VAR_ESPULEE_OUTSKIRTS_STATE,ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED)
 
         if (var(VAR_RESULT) == YES) {

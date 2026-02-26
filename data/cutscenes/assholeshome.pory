@@ -66,7 +66,7 @@ script AssholesHome_PostBattle_Dialogue {
 
         if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI){
                 msgbox(format("Wait! I saw that you're participating in the League Challenge like the rest of us. After all the insults and endless complaints about it, what am I missing?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(format("You're right, it's hypocritical. But I'm tired of fighting a system from the outside. I'm going to try and change it from the inside out. I'm excited to be able to beat you along the way."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
+                msgbox(format("You're right, it's hypocritical. But I'm tired of fighting a system from the outside. I'm going to try and change it from the inside out.And at some point before then, I'm gonna beat you!"),MSGBOX_DEFAULT,SPEAKER_BAIYA)
                 msgbox(format("(What a weird kid...)"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         }
         closemessage
