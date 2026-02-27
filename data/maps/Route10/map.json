@@ -80,7 +80,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "FLAG_TEMP_1F"
+      "flag": "FLAG_TEMP_2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -93,7 +93,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "FLAG_TEMP_1E"
+      "flag": "FLAG_TEMP_3"
     },
     {
       "local_id": "LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_H",
@@ -107,7 +107,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route10_Script_Interact_BodegaburnoutDeliveryStrengthH",
-      "flag": "0"
+      "flag": "FLAG_TEMP_4"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -119,8 +119,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
+      "script": "EventScript_StrengthBoulder",
+      "flag": "FLAG_TEMP_5"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -132,8 +132,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
+      "script": "EventScript_StrengthBoulder",
+      "flag": "FLAG_TEMP_6"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -145,8 +145,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
+      "script": "EventScript_StrengthBoulder",
+      "flag": "FLAG_TEMP_7"
     }
   ],
   "warp_events": [

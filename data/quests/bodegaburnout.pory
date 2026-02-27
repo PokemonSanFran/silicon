@@ -519,3 +519,8 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueStrengthR
     release
     end
 }
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutDeliveryStrengthH
+{
+    setflag(FLAG_TEMP_4)
+}
