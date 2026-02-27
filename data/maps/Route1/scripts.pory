@@ -12,3 +12,15 @@ mapscripts Route1_MapScripts {
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
+
+script Route1_Script_Interact_BodegaburnoutDeliveryB
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYB,format("Argh! Until my stuff gets here, I’m taking it out on you!"),format("How embarrassing…"),Route1_Script_Interact_BodegaburnoutDeliveryB)
+// PSF TODO BodegaburnoutDeliveryB: Ha! Rage does make me stronger!
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_3,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryB)
+    bufferitemname(STR_VAR_1,ITEM_POTION)
+    msgbox(format("Honestly, in the time I spent waiting here, I could have gone and bought a {STR_VAR_1} myself."),,SPEAKER_BODEGABURNOUTDELIVERYB)
+    closemessage
+    release
+    end
+}

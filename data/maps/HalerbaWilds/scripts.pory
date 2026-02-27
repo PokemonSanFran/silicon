@@ -42,3 +42,14 @@ text gText_HalerbaWilds_NotReadyForBattle{
 text gText_HalerbaWilds_ImSupposedToBeGetting{
     format("I'm supposed to be getting married today. But I don't think I can do it...")
 }
+
+script HalerbaWilds_Script_Interact_BodegaburnoutDeliveryRockSmashF
+{
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_6,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryRockSmashF)
+    bufferitemname(STR_VAR_1,ITEM_DRAGON_FANG)
+    msgbox(format("I can’t believe I was waiting this long for just a {STR_VAR_1}! You’d think it’d be easy to get here!"),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHF)
+    msgbox(format("You have got to be kidding me."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
+    closemessage
+    release
+    end
+}

@@ -3,4 +3,12 @@ mapscripts Route10_MapScripts {
             call(NewAssholeAppears_HideBaiya_Script)
     }
 }
-
+script Route10_Script_Interact_BodegaburnoutDeliveryStrengthH
+{
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_1,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryStrengthH)
+    bufferitemname(STR_VAR_1,ITEM_CLEAR_AMULET)
+    msgbox(format("Now with this {STR_VAR_1}, it won’t matter if she switches her Gyarados in…"),,SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH)
+    closemessage
+    release
+    end
+}

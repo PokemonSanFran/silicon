@@ -31,3 +31,8 @@ script Route2_ConstructionVisibility_Script {
     return
 }
 
+script Route2_Script_Interact_BodegaburnoutRescueK
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEK,format("If I beat you, will you tell me how to get back to Espulee Outskirts?"),format("Could you help me anyways?"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueK)
+    // PSF TODO BodegaburnoutRescueK:  I’m trying to get back to Espulee Outskirts!
+}

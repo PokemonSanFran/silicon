@@ -45,6 +45,8 @@ script Arantraz_ChooseFerryDestination_Script {
     call(Ferry_Interact_Dialogue)
 }
 
-text gText_Arantraz_IveHealedYourParty {
-    format("I've healed your party! You can battle these Trainers as often as you like.")
+script Arantraz_Script_Interact_BodegaburnoutRescueDiveN
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN,format("Oh! I haven’t seen another human in so long. Keep me company?"),format("If my Pokémon are knocked out, will I be even more lonely?"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueDiveN)
+    // PSF TODO BodegaburnoutRescueDiveN: Thanks for not leaving!
 }

@@ -8,3 +8,16 @@ mapscripts PiocaBridge_MapScripts {
     ]
 
 }
+
+script PiocaBridge_Script_Interact_BodegaburnoutDeliveryA
+{
+    // PSF TODO BodegaburnoutDeliveryA: I feel a little better…
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYA,format("Man, I’m so bummed. Maybe a battle will cheer me up!"),format("Now I feel worse!"),PiocaBridge_Script_Interact_BodegaburnoutDeliveryA)
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_2,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryA)
+    bufferitemname(STR_VAR_1,ITEM_SODA_POP)
+    msgbox(format("I just ordered some {STR_VAR_1} that I could drink while sitting on the bridge."),,SPEAKER_BODEGABURNOUTDELIVERYA)
+    msgbox(format("What? I’m a simple guy."),,SPEAKER_BODEGABURNOUTDELIVERYA)
+    closemessage
+    release
+    end
+}

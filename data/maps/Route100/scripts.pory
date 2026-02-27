@@ -12,3 +12,15 @@ mapscripts Route100_MapScripts
 	}
 }
 
+script Route100_Script_Interact_BodegaburnoutDeliveryCutD
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTD,format("Man, I really tried to support local, and I’ve been waiting for hours… hopefully this battle won’t be a total disappointment."),format("First the package, now this battle…"),Route100_Script_Interact_BodegaburnoutDeliveryCutD)
+// PSF TODO BodegaburnoutDeliveryCutD: Well, that wasn’t so bad.
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_9,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryCutD)
+    bufferitemnameplural(STR_VAR_1,ITEM_SUPER_REPEL,2)
+    msgbox(format("I’m glad I finally got those {STR_VAR_1}!"),,SPEAKER_BODEGABURNOUTDELIVERYCUTD)
+    closemessage
+    release
+    end
+}
+

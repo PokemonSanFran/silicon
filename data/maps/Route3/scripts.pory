@@ -2,3 +2,15 @@ mapscripts Route3_MapScripts {
 MAP_SCRIPT_ON_TRANSITION{
 }
 }
+
+script Route3_Script_Interact_BodegaburnoutDeliveryCutE
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTE,format("How long should I wait around for this package? Want to keep me company?"),format("How long was that battle…?"),Route3_Script_Interact_BodegaburnoutDeliveryCutE)
+// PSF TODO BodegaburnoutDeliveryCutE: Thanks for keeping me company!
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_10,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryCutE)
+    bufferitemname(STR_VAR_1,ITEM_METRONOME)
+    msgbox(format("The {STR_VAR_1} that I ordered is going to work out great!"),,SPEAKER_BODEGABURNOUTDELIVERYCUTE)
+    closemessage
+    release
+    end
+}

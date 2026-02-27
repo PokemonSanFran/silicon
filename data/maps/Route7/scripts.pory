@@ -13,3 +13,9 @@ script Route7_EventScript_BlackbeltC{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         end
 }
+
+script Route7_Script_Interact_BodegaburnoutRescueL
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEK,format("I have a bunch of deliveries to do, but I’m so out of it. Maybe a battle will wake me up!"),format("Woo! I’m raring to go now!"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueL)
+    // PSF TODO BodegaburnoutRescueL: I’m still sleepy…
+}

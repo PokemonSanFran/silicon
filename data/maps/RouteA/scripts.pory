@@ -4,3 +4,8 @@ mapscripts RouteA_MapScripts{
     }
 }
 
+script RouteA_Script_Interact_BodegaburnoutRescueWhirlpoolS
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEWHIRLPOOLS,format("I’ve been out here battling all day. I love battles on the rough waters!"),format("You were rougher than the ocean!"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueWhirlpoolS)
+    // PSF TODO BodegaburnoutRescueWhirlpoolS: Too rough for you?
+}
