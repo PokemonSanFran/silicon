@@ -82,9 +82,6 @@
 #include "constants/story_jump.h"  // siliconMerge
 #include "ui_character_customization_menu.h" // playerCustom
 
-static const u8 sDebugText_QuestState[] =               _("Quest state: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}"); // siliconMerge
-static const u8 sDebugText_QuestID[] =                  _("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}"); // siliconMerge
-
 enum FollowerNPCCreateDebugMenu
 {
     DEBUG_FNPC_BRENDAN,
@@ -2257,7 +2254,7 @@ static void Debug_Display_ItemInfo(u32 itemId, u32 digit, u8 windowId)
     else if (CheckIfItemIsTMHMOrEvolutionStone(itemId) == 1)
     {
         end = StringCopy(end, COMPOUND_STRING(" None"));
-    } 
+    }
 
     WrapFontIdToFit(gStringVar1, end, DEBUG_MENU_FONT, WindowWidthPx(windowId));
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
@@ -3657,7 +3654,7 @@ static void DebugAction_Quest(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
     QuestMenu_CopyQuestName(gStringVar1, 0);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Quest_SelectQuest;
@@ -3699,7 +3696,7 @@ static void DebugAction_Quest_SelectQuest(u8 taskId)
         QuestMenu_CopyQuestName(gStringVar1, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
-        StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -3714,7 +3711,7 @@ static void DebugAction_Quest_SelectQuest(u8 taskId)
         QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
-        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest state: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Quest_SelectState;
@@ -3762,7 +3759,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
         QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
-        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest state: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
     }
 
