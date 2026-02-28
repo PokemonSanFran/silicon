@@ -11719,3 +11719,10 @@ u8 GetObjectEventApricornTreeId(u8 objectEventId)
 {
     return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
+
+// Start setObjectFlag
+void SetObjectFlagFromLocalId(u32 localId)
+{
+    FlagSet(GetObjectEventFlagIdByObjectEventId(localId));
+}
+// End setObjectFlag

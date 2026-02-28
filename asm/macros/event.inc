@@ -3549,3 +3549,10 @@
 	callnative ScrCmd_istmrelearneractive, requests_effects=1
 	.4byte \destination
 	.endm
+
+@ Start setObjectFlag
+    .macro setobjectflagfromlocalid localId:req
+	.byte SCR_OP_SETOBJECTFLAGFROMLOCALID
+	.2byte \localId
+	.endm
+@ End setObjectFlag
