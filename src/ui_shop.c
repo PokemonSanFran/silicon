@@ -576,29 +576,13 @@ static void Task_Shop_Idle(u8 taskId)
             gTasks[taskId].func = Task_Shop_WaitFadeAndExit;
             return;
         case SHOP_MODE_PURCHASE:
-            {
-                PlaySE(SE_SELECT);
-                gShopMenuDataPtr->itemQuantity = 0;
-                ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
-                /*
-                 * PSF TODO figure out why this was here in the first place
-                if (ShopPurchase_IsCategoryOneTimePurchase(ShopGrid_CurrentCategoryRow()))
-                {
-                    ShopInventory_InitCategoryLists();
-                }
-                */
-
-                break;
-            }
         case SHOP_MODE_SUCCESS:
         case SHOP_MODE_FAILURE:
-            {
-                PlaySE(SE_SELECT);
-                gShopMenuDataPtr->itemQuantity = 0;
-                gShopMenuDataPtr->selectedItemId = ITEM_NONE;
-                ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
-                break;
-            }
+            PlaySE(SE_SELECT);
+            gShopMenuDataPtr->itemQuantity = 0;
+            gShopMenuDataPtr->selectedItemId = ITEM_NONE;
+            ShopGrid_SwitchMode(SHOP_MODE_DEFAULT);
+            break;
         }
 
         ShopHelper_UpdateFrontEnd();
