@@ -674,9 +674,7 @@ static void Task_Shop_Idle(u8 taskId)
 
     // return early for menu that does not need the dpad.
     if (ShopHelper_IsPurchaseDone())
-    {
         return;
-    }
 
     u32 itemIdx = ShopGrid_GetCurrentItemIndex(),
         categoryIdx = ShopGrid_GetCurrentCategoryIndex(),
@@ -706,7 +704,7 @@ static void Task_Shop_Idle(u8 taskId)
         goto UPDATE;
     }
 
-    UPDATE:
+UPDATE:
     if (categoryIdx != ShopGrid_GetCurrentCategoryIndex()
      || itemIdx != ShopGrid_GetCurrentItemIndex()
      || itemQuantity != gShopMenuDataPtr->itemQuantity)
@@ -723,9 +721,7 @@ static void ShopSprite_CreateGenericSprites(void)
         bool32 usePlayerPal = PokeMart_IsActive() && i == SHOP_SPRITE_BUY_ICON;
 
         if (usePlayerPal)
-        {
             palTag = OBJ_EVENT_PAL_TAG_SILICON;
-        }
 
         const struct ShopSprite *template = &sShopSprites[i];
         const struct ShopSpriteConfigs *configs = &ShopConfig_Get()->sprites[i];
