@@ -216,6 +216,14 @@ static const u8 sText_ThanksForBuying[]   = _("Thank you for your purchase!");
 static const u8 sText_YouGot[]            = _("You got");
 static const u8 sText_ItemNumber[]        = _("{STR_VAR_1} x{STR_VAR_2}");
 
+static const u8 *const sText_PurchaseCodeErrors[] =
+{
+    [SHOP_CODE_SUCCESS]          = gText_EmptyString2,
+    [SHOP_CODE_NOT_ENOUGH_MONEY] = COMPOUND_STRING("Your account has been declined for insufficient funds!"),
+    // PSF TODO create better error text
+    [SHOP_CODE_NOT_ENOUGH_SPACE] = COMPOUND_STRING("Your account has been declined for insufficient item space!"),
+};
+
 void CB2_PrestoFromStartMenu(void)
 {
     ShopMenu_Init(&sPrestoShopConfigs, CB2_StartMenu_ReturnToUI);
@@ -452,10 +460,8 @@ static void PrestoHelper_UpdateFrontEnd(void)
             }
             else if (mode == SHOP_MODE_FAILURE)
             {
-                ShopPrint_AddTextPrinter(FONT_SMALL_NARROWER,
-                                        TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18),
-                                        SHOP_FNTCLR_SECONDARY,
-                                        COMPOUND_STRING("Your account has been declined for insufficient funds!"));
+                const u8 *str = sText_PurchaseCodeErrors[gShopMenuDataPtr->code];
+                ShopPrint_AddTextPrinter(FONT_SMALL_NARROWER, TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18), SHOP_FNTCLR_SECONDARY, str);
             }
 
             break;

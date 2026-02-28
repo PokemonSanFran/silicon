@@ -115,6 +115,13 @@ enum ShopMenuResetIdxTypes
     SHOP_IDX_RESET_ALL = (SHOP_IDX_RESET_CATEGORY | SHOP_IDX_RESET_ITEM | SHOP_IDX_RESET_X_GRID | SHOP_IDX_RESET_Y_GRID)
 };
 
+enum ShopMenuPurchaseCodes
+{
+    SHOP_CODE_SUCCESS = 0,
+    SHOP_CODE_NOT_ENOUGH_MONEY = (1 << 0),
+    SHOP_CODE_NOT_ENOUGH_SPACE = (1 << 1),
+};
+
 enum ShopMenuModes
 {
     SHOP_MODE_DEFAULT = 0,
@@ -164,21 +171,22 @@ struct ShopMenuData
     MainCallback savedCallback;
     enum ShopMenuModes mode;
 
-    u8 sortCategories:1;
-    u8 categoryIdx:4;
-    u8 firstCategory;
     u8 itemIdx, firstItem;
+    u8 sortCategories:1;
+    u8 recGenerated:1;     // don't regenerate recommend category again in Presto
+    enum ShopMenuPurchaseCodes code:6;
+    u8 categoryIdx:4;
+    u8 firstCategory:4;
+
+    u32 itemQuantity:10;
+    u32 maxItemQuantity:10;
+    u32 selectedItemId:12;
 
     // onscreen grid, does not include top-left paging
     struct {
         u8 row:4;
         u8 col:4;
     } gridIdx;
-
-    u16 itemQuantity;
-    u16 maxItemQuantity;
-    u16 selectedItemId:15;
-    u16 recGenerated:1;     // don't regenerate recommend category again in Presto
 
     enum ShopMenuCarousels carouselType;
     u16 recommendedItems[NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS];

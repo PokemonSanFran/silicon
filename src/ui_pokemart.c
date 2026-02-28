@@ -127,7 +127,10 @@ enum PokeMartKeeperDialogues
 
     MART_KEEPER_DIALOGUE_PURCHASE,
     MART_KEEPER_DIALOGUE_SUCCESS,
-    MART_KEEPER_DIALOGUE_FAILURE,
+
+    // previously MART_KEEPER_DIALOGUE_FAILURE
+    MART_KEEPER_DIALOGUE_NOT_ENOUGH_MONEY,
+    MART_KEEPER_DIALOGUE_NOT_ENOUGH_SPACE,
 
     NUM_MART_KEEPER_DIALOGUES
 };
@@ -412,8 +415,12 @@ static const u8 *const sPokeMart_KeeperDialogues[] =
         "Here you go! Thank you very much.\n"
         "{STR_VAR_1}"),
 
-    [MART_KEEPER_DIALOGUE_FAILURE] = COMPOUND_STRING(
+    [MART_KEEPER_DIALOGUE_NOT_ENOUGH_MONEY] = COMPOUND_STRING(
         "You don't have enough money to buy\n"
+        "{STR_VAR_1} {STR_VAR_2}!"),
+
+    [MART_KEEPER_DIALOGUE_NOT_ENOUGH_SPACE] = COMPOUND_STRING(
+        "You don't have enough bag space for\n"
         "{STR_VAR_1} {STR_VAR_2}!"),
 };
 
@@ -604,7 +611,8 @@ static void MartHelper_UpdateFrontEnd(void)
         MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_NEUTRAL);
         break;
     case MART_KEEPER_DIALOGUE_PURCHASE:
-    case MART_KEEPER_DIALOGUE_FAILURE:
+    case MART_KEEPER_DIALOGUE_NOT_ENOUGH_MONEY:
+    case MART_KEEPER_DIALOGUE_NOT_ENOUGH_SPACE:
         MartSprite_SetKeeperEmote(MART_KEEPER_EMOTE_WAIT);
         break;
     case MART_KEEPER_DIALOGUE_SUCCESS:
@@ -721,7 +729,17 @@ static enum PokeMartKeeperDialogues MartPrint_ConvertModeToDialogue(void)
     case SHOP_MODE_SUCCESS:
         return MART_KEEPER_DIALOGUE_SUCCESS;
     case SHOP_MODE_FAILURE:
-        return MART_KEEPER_DIALOGUE_FAILURE;
+        {
+            switch (gShopMenuDataPtr->code)
+            {
+            default:
+                return MART_KEEPER_DIALOGUE_NONE;
+            case SHOP_CODE_NOT_ENOUGH_MONEY:
+                return MART_KEEPER_DIALOGUE_NOT_ENOUGH_MONEY;
+            case SHOP_CODE_NOT_ENOUGH_SPACE:
+                return MART_KEEPER_DIALOGUE_NOT_ENOUGH_SPACE;
+            }
+        }
     }
 }
 
@@ -772,7 +790,8 @@ static void MartPrint_KeeperDialogue(void)
 
                 break;
             }
-        case MART_KEEPER_DIALOGUE_FAILURE:
+        case MART_KEEPER_DIALOGUE_NOT_ENOUGH_MONEY:
+        case MART_KEEPER_DIALOGUE_NOT_ENOUGH_SPACE:
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_LEFT_ALIGN, 4);
             ShopInventory_CopyItemName(itemId, itemQuantity, gStringVar2);
             break;

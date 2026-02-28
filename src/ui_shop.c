@@ -279,7 +279,7 @@ static const struct SpriteTemplate sShopSpriteTemplate =
 static const u8 sText_Help_Bar[]          = _("{DPAD_UPDOWN} Rows {DPAD_LEFTRIGHT} Items {A_BUTTON} Buy {B_BUTTON} Exit");
 static const u8 sText_Help_Bar_Buy[]      = _("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Buy Now {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Complete[] = _("{A_BUTTON} Buy More {B_BUTTON} Return {START_BUTTON} Exit");
-static const u8 sText_HelpBar_Failure[]   = _("{A_BUTTON}{B_BUTTON} Return to purchase");
+static const u8 sText_Help_Bar_Failure[]  = _("{A_BUTTON}{B_BUTTON} Return to purchase");
 
 const u8 *const gShopCategoryNames[NUM_SHOP_CATEGORIES] =
 {
@@ -600,19 +600,8 @@ static void Task_Shop_Idle(u8 taskId)
             ShopGrid_SwitchMode(SHOP_MODE_PURCHASE);
             break;
         case SHOP_MODE_PURCHASE:
-            {
-                if (GetMoney(&gSaveBlock1Ptr->money) >= ShopConfig_Get()->handleTotalPrice(gShopMenuDataPtr->selectedItemId, gShopMenuDataPtr->itemQuantity))
-                {
-                    PlaySE(SE_SHOP);
-                    ShopPurchase_AddItem(gShopMenuDataPtr->selectedItemId, gShopMenuDataPtr->itemQuantity);
-                }
-                else
-                {
-                    PlaySE(SE_FAILURE);
-                    ShopGrid_SwitchMode(SHOP_MODE_FAILURE);
-                }
-                break;
-            }
+            ShopPurchase_AddItem(gShopMenuDataPtr->selectedItemId, gShopMenuDataPtr->itemQuantity);
+            break;
         case SHOP_MODE_SUCCESS:
             {
                 PlaySE(SE_SELECT);
@@ -1201,15 +1190,33 @@ static void ShopPurchase_AddItem(u16 itemId, u16 quantity)
 {
     u16 price = ShopConfig_Get()->handleTotalPrice(itemId, quantity);
     u32 bak = gSaveBlock3Ptr->shopBuyAgainItems[0];
+    enum ShopMenuPurchaseCodes code = SHOP_CODE_SUCCESS;
+
+    if (GetMoney(&gSaveBlock1Ptr->money) < ShopConfig_Get()->handleTotalPrice(itemId, quantity))
+        code = SHOP_CODE_NOT_ENOUGH_MONEY;
+
+FAILURE:
+    gShopMenuDataPtr->code = code;
+    if (code)
+    {
+        PlaySE(SE_FAILURE);
+        ShopGrid_SwitchMode(SHOP_MODE_FAILURE);
+        return;
+    }
 
     quantity++;
-    RemoveMoney(&gSaveBlock1Ptr->money, price);
-    AddBagItem(itemId, quantity);
+    if (!AddBagItem(itemId, quantity))
+    {
+        code = SHOP_CODE_NOT_ENOUGH_SPACE;
+        goto FAILURE;
+    }
 
     if (GetItemShopCategory(itemId) == SHOP_CATEGORY_POKE_BALLS && quantity >= 10)
         AddBagItem(ITEM_PREMIER_BALL, quantity / 10);
 
+    RemoveMoney(&gSaveBlock1Ptr->money, price);
     ShopGrid_SwitchMode(SHOP_MODE_SUCCESS);
+    PlaySE(SE_SHOP);
 
     if (!ShopPurchase_IsItemOneTimePurchase(itemId))
     {
@@ -1657,18 +1664,9 @@ void ShopPrint_HelpBar(void)
     {
     default:
     case SHOP_MODE_FAILURE:
-        {
-            if (PokeMart_IsActive())
-            {
-                str = sText_HelpBar_Failure;
-            }
-            else
-            {
-                return;
-            }
-
-            break;
-        }
+        if (PokeMart_IsActive())
+            str = sText_Help_Bar_Failure;
+        break;
     case SHOP_MODE_DEFAULT:
         str = sText_Help_Bar;
         break;
@@ -1679,6 +1677,8 @@ void ShopPrint_HelpBar(void)
         str = sText_Help_Bar_Complete;
         break;
     }
+
+    if (!str) return;
 
     u32 y = TILE_TO_PIXELS(18) + (SHOP_BG0_OFFSET * PokeMart_IsActive());
     ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(0) + 4, y, SHOP_FNTCLR_SECONDARY, str);
