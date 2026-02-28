@@ -8484,6 +8484,42 @@
       "blockdata_filepath": "data/layouts/Route16_Grotto/map.bin",
       "border_height": 2,
       "border_width": 2
+    },
+    {
+      "id": "LAYOUT_PUZZLE_GYM1_1",
+      "name": "PuzzleGym1_1_Layout",
+      "width": 14,
+      "height": 11,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/PuzzleGym1_1/border.bin",
+      "blockdata_filepath": "data/layouts/PuzzleGym1_1/map.bin",
+      "border_height": 2,
+      "border_width": 2
+    },
+    {
+      "id": "LAYOUT_PUZZLE_GYM1_3",
+      "name": "PuzzleGym1_3_Layout",
+      "width": 18,
+      "height": 14,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/PuzzleGym1_3/border.bin",
+      "blockdata_filepath": "data/layouts/PuzzleGym1_3/map.bin",
+      "border_height": 2,
+      "border_width": 2
+    },
+    {
+      "id": "LAYOUT_PUZZLE_GYM1_2",
+      "name": "PuzzleGym1_2_Layout",
+      "width": 13,
+      "height": 14,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/PuzzleGym1_2/border.bin",
+      "blockdata_filepath": "data/layouts/PuzzleGym1_2/map.bin",
+      "border_height": 2,
+      "border_width": 2
     }
   ]
 }
