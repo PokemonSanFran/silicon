@@ -143,7 +143,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 1,
       "y": 24,
       "elevation": 3,
@@ -156,7 +156,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 2,
       "y": 24,
       "elevation": 3,

@@ -42,12 +42,12 @@ script SpeechSpeechSpeech_MovePlayer_Script {
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(PLAYER)
 
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,13,8,8)
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,14,11,8)
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,15,7,9)
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,16,9,10)
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,17,10,9)
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,18,7,10)
+        createvobject(OBJ_EVENT_GFX_COMRADE_7,13,8,8)
+        createvobject(OBJ_EVENT_GFX_COMRADE_9,14,11,8)
+        createvobject(OBJ_EVENT_GFX_COMRADE_3,15,7,9)
+        createvobject(OBJ_EVENT_GFX_COMRADE_1,16,9,10)
+        createvobject(OBJ_EVENT_GFX_COMRADE_5,17,10,9)
+        createvobject(OBJ_EVENT_GFX_COMRADE_2,18,7,10)
 
         call(SpeechSpeechSpeech_ResetFacing_Script)
 }
