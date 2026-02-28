@@ -279,6 +279,7 @@ gScriptCmdTable::
 	@ End siliconMerge
 	script_cmd_table_entry SCR_OP_HIDEFOLLOWER                  ScrCmd_hidefollower,                requests_effects=1  @ 0xfc
 	script_cmd_table_entry SCR_OP_SETOBJECTFLAGFROMLOCALID                 ScrCmd_setobjectflagfromlocalid,                requests_effects=1  @ 0xfd // setObjectFlag
+	script_cmd_table_entry SCR_OP_CLEAROBJECTFLAGFROMLOCALID                 ScrCmd_clearobjectflagfromlocalid,                requests_effects=1  @ 0xfe // setObjectFlag
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::

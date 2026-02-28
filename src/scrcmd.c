@@ -3846,4 +3846,14 @@ bool8 ScrCmd_setobjectflagfromlocalid(struct ScriptContext *ctx)
     SetObjectFlagFromLocalId(localId);
     return FALSE;
 }
+
+bool8 ScrCmd_clearobjectflagfromlocalid(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+
+    ClearObjectFlagFromLocalId(localId);
+    return FALSE;
+}
 // End setObjectFlag

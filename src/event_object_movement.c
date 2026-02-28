@@ -227,6 +227,7 @@ static u16 GetUnownSpecies(struct Pokemon *mon);
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
 static void StartSlowRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction);
+static void HandleObjectFlagFromLocalId(u32 localId, u8 (*func)(u16));
 
 const u8 gReflectionEffectPaletteMap[16] = {
         [PALSLOT_PLAYER]                 = PALSLOT_PLAYER_REFLECTION,
@@ -11723,6 +11724,35 @@ u8 GetObjectEventApricornTreeId(u8 objectEventId)
 // Start setObjectFlag
 void SetObjectFlagFromLocalId(u32 localId)
 {
-    FlagSet(GetObjectEventFlagIdByObjectEventId(localId));
+    HandleObjectFlagFromLocalId(localId, FlagSet);
+}
+
+void ClearObjectFlagFromLocalId(u32 localId)
+{
+    HandleObjectFlagFromLocalId(localId, FlagClear);
+}
+
+static void HandleObjectFlagFromLocalId(u32 localId, u8 (*func)(u16))
+{
+    const struct MapHeader *mapHeader = &gMapHeader;
+    const struct MapEvents *events = mapHeader->events;
+
+    if (events == NULL || events->objectEventCount == 0)
+        return;
+
+    const struct ObjectEventTemplate *templates = events->objectEvents;
+    u32 count = events->objectEventCount;
+
+    for (u32 eventIndex = 0; eventIndex < count; eventIndex++)
+    {
+        if (templates[eventIndex].localId != localId)
+            continue;
+
+        u32 flagId = templates[eventIndex].flagId;
+        if (flagId != 0 && func != NULL)
+            func(flagId);
+
+        return;
+    }
 }
 // End setObjectFlag
