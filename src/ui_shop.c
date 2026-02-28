@@ -1644,6 +1644,8 @@ static inline void ShopBlit_Categories(void)
 
         if (ShopGrid_CurrentCategoryRow() == category)
             ShopBlit_Category(NUM_SHOP_CATEGORIES, x, y);
+        else
+            ShopBlit_Category(NUM_SHOP_CATEGORIES + 1, x, y);
 
         ShopBlit_Category(category, x, y);
 
